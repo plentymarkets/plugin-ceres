@@ -1,5 +1,6 @@
 import ValidationService from "services/ValidationService";
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "services/UrlService";
 
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
@@ -98,10 +99,10 @@ Vue.component("reset-password-form", {
 
                     this.isDisabled = false;
 
-                    window.location.assign(window.location.origin);
+                    navigateTo(window.location.origin);
 
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.accChangePasswordSuccessful")
+                        TranslationService.translate("Ceres::Template.resetPwChangePasswordSuccessful")
                     ).closeAfter(3000);
 
                 })
@@ -110,7 +111,7 @@ Vue.component("reset-password-form", {
                     this.isDisabled = false;
 
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.accChangePasswordFailed")
+                        TranslationService.translate("Ceres::Template.resetPwChangePasswordFailed")
                     ).closeAfter(5000);
                 });
         },

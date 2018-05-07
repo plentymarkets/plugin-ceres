@@ -2,6 +2,10 @@ body .wrapper-main{
     overflow-x: hidden;
 }
 
+.hidden {
+    display: none;
+}
+
 .page-content{
     @extend .p-t-1;
     background-color: $gray-lightest;
@@ -129,4 +133,12 @@ a:active {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.d-table {
+    display: table;
+}
+
+.border-radius-0 {
+    border-radius: 0;
 }

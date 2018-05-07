@@ -27,7 +27,7 @@
                 {% if orderList.lastPageNumber > 1 %}
                 <div class="clearfix history-pagination">
                     <div class="pull-xs-left counter">
-                        {{ trans("Ceres::Template.orderShow", {"countStart": orderList.firstOnPage, "countEnd": orderList.lastOnPage, "orderMaxCount": orderList.totalsCount }) }}
+                        {{ trans("Ceres::Template.orderHistoryShow", {"countStart": orderList.firstOnPage, "countEnd": orderList.lastOnPage, "orderMaxCount": orderList.totalsCount }) }}
                     </div>
                     {% include "Ceres::Category.Item.Partials.Pagination" %}
                 </div>
@@ -40,32 +40,32 @@
                         <article class="cmp cmp-order-item">
                             <div class="item-details small">
                                 <div class="item-name">
-                                    <h5>{{ trans("Ceres::Template.orderId") }} {{ entry.order.id }}</h5>
+                                    <h5>{{ trans("Ceres::Template.orderHistoryOrderId") }} {{ entry.order.id }}</h5>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-xs-12 col-md-8">
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.dateTimeFormat") ) }} {{ trans("Ceres::Template.time") }}</span>
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryDate") }}</strong>
+                                            <span class="col-xs-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.devDateTimeFormat") ) }} {{ trans("Ceres::Template.orderHistoryTime") }}</span>
                                         </div>
                                         <div class="row my-account-no-line">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryStatus") }}</strong>
                                             <span class="col-xs-6 col-sm-7">{{ entry.order.statusName }}</span>
                                         </div>
                                         {% if entry.paymentMethodName | trim is not empty %}
                                             <div class="row">
-                                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>
+                                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</strong>
                                                 <span class="col-xs-6 col-sm-7" id="payment_name_{{ entry.order.id }}">{{ entry.paymentMethodName }}</span>
                                             </div>
                                         {% endif %}
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</strong>
                                             <span class="col-xs-6 col-sm-7" id="payment_state_{{ entry.order.id }}">
                                                 {% for propertyKey in entry.order.properties %}
                                                     {% if entry.order.properties[loop.index0].typeId == 4 %}
                                                         {% set paymentStatus = entry.order.properties[loop.index0].value %}
-                                                        {{ trans("Ceres::Template.paymentStatus_" ~ entry.order.properties[loop.index0].value) }}
+                                                        {{ trans("Ceres::Template.orderHistoryPaymentStatus_" ~ entry.order.properties[loop.index0].value) }}
                                                     {% endif %}
                                                     {% if entry.order.properties[loop.index0].typeId == 3 %}
                                                         {% set paymentMethodId = entry.order.properties[loop.index0].value %}
@@ -81,13 +81,13 @@
                                         <div class="payment-change-box">
                                             <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
-                                                {{ trans("Ceres::Template.orderDetails") }}
+                                                {{ trans("Ceres::Template.orderHistoryOrderDetails") }}
                                             </button>
 
                                             {% if entry.isReturnable %}
                                                 <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="/returns/{{ entry.order.id }}">
                                                     <i class="fa fa-undo" aria-hidden="true"></i>
-                                                    {{ trans("Ceres::Template.myAccountReturnSendBack") }}
+                                                    {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                                                 </a>
                                             {% endif %}
 
@@ -116,7 +116,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h3 class="modal-title">{{ trans("Ceres::Template.orderDetails") }}</h3>
+                            <h3 class="modal-title">{{ trans("Ceres::Template.orderHistoryOrderDetails") }}</h3>
                         </div>
                         <div class="modal-body" :class="{'loading': isLoading}" style="min-height:350px">
                             {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
@@ -131,6 +131,6 @@
         </div>
     </div>
     {% else %}
-    <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.noOrders") }}</p>
+    <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
     {% endif %}
 </script>

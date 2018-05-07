@@ -5,7 +5,7 @@
 {% block PartialHead %}
     <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_cancel_form") }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_cancel_form") }}">
-    <title class="no-print">{{ trans("Ceres::Template.generalCancellationFormNoShy") }} | {{ config("Ceres.header.company_name") }}</title>
+    <title class="no-print">{{ trans("Ceres::Template.cancellationForm", {"hyphen": ""}) }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
 {% block PageBody %}
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-xs-12 m-b-3">
                 {% autoescape false %}
-                    <h1 class="print-header">{{ trans("Ceres::Template.generalCancellationForm") }}</h1>
+                    <h1 class="print-header">{{ trans("Ceres::Template.cancellationForm", {"hyphen": "&shy;"}) }}</h1>
                 {% endautoescape %}
 
                 <hr class="m-y-3">
@@ -34,7 +34,7 @@
 				<div class="col-xs-12 col-md-12 no-padding no-print">
 					<button type="submit" class="btn btn-primary btn-medium float-right" onclick="window.print()">
 						<i class="fa fa-print" aria-hidden="true"></i> 
-						{{ trans("Ceres::Template.generalPrint") }}
+						{{ trans("Ceres::Template.cancellationFormPrint") }}
 					</button>
 				</div>
             </div>

@@ -1,5 +1,6 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "services/UrlService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -144,12 +145,12 @@ Vue.component("add-to-basket", {
                 errorMsgContent += name + "<br>";
             }
 
-            NotificationService.error(Translations.Template.itemMissingOrderPropertiesError.replace("<properties>", errorMsgContent));
+            NotificationService.error(Translations.Template.singleItemMissingOrderPropertiesError.replace("<properties>", errorMsgContent));
         },
 
         directToItem()
         {
-            window.location.assign(this.itemUrl);
+            navigateTo(this.itemUrl);
         },
 
         handleButtonState(value)

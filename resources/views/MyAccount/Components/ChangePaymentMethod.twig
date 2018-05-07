@@ -4,14 +4,14 @@
         <div class="button-spacer" v-if="currentTemplate == 'tpl.my-account'">
 
             <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
-                {{ trans("Ceres::Template.myAccountChangePayment") }}
+                {{ trans("Ceres::Template.orderHistoryChangePayment") }}
             </button>
 
             <div class="payment-change-box-item" v-if="paymentStatus != 'fullyPaid'">
                 <div v-if="!changePossible" class="payment-align-center">
                     <div class="alert alert-info cannot-change-payment">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        <span class="info-badge">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</span>
+                        <span class="info-badge">{{ trans("Ceres::Template.orderHistoryChangePaymentNotAllowed") }}</span>
                     </div>
                 </div>
             </div>
@@ -22,14 +22,14 @@
         <!-- CONFIRMATION  -->
         <div class="row top-spacer" v-if="currentTemplate == 'tpl.confirmation'">
 
-            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.myAccountChangePayment") }}</strong>
+            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryChangePayment") }}</strong>
             <a v-if="changePossible" class="payment-link-style" @click="openPaymentChangeModal()">
                 <i class="fa fa-retweet" aria-hidden="true"></i>
-                <span>{{ trans("Ceres::Template.confirmationChangePaymentLink") }}</span>
+                <span>{{ trans("Ceres::Template.orderHistoryChangePaymentLink") }}</span>
             </a>
 
             <div v-if="paymentStatus != 'fullyPaid'" class="col-xs-6 col-sm-7">
-                <span v-if="!changePossible" class="payment-align-center">{{ trans("Ceres::Template.confirmationChangePaymentNotPossible") }}</span>
+                <span v-if="!changePossible" class="payment-align-center">{{ trans("Ceres::Template.orderHistoryChangePaymentNotPossible") }}</span>
             </div>
 
         </div>
@@ -44,7 +44,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChooseNewPayment") }}</h4>
+                            <h4 class="modal-title">{{ trans("Ceres::Template.orderHistoryChooseNewPayment") }}</h4>
                         </div>
                         <div class="modal-body form-horizontal">
 
@@ -52,14 +52,14 @@
                                 <div class="warning-triangle">
                                     <i class="fa fa-exclamation-triangle font-size"  aria-hidden="true"></i>
                                 </div>
-                                <p class="warning-text">{{ trans("Ceres::Template.myAccountChangePaymentNotSwitchableWarning") }}</p>
+                                <p class="warning-text">{{ trans("Ceres::Template.orderHistoryChangePaymentNotSwitchableWarning") }}</p>
                             </div>
 
                             <div class="cmp cmp-method-list list m-b-3">
                             <ul class="method-list">
                                 <div class="method-list-item current-payment-text">
                                     <div class="content alert-info current-payment-width">
-                                        {{ trans("Ceres::Template.myAccountCurrentPaymentText") }}
+                                        {{ trans("Ceres::Template.orderHistoryCurrentPaymentText") }}
                                         <span :id="'current_payment_method_name_' + currentOrder.id"> ${ currentPaymentMethodName} </span>
                                     </div>
                                 </div>
@@ -100,10 +100,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.generalCancel") }}
+                                <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.orderHistoryCancel") }}
                             </button>
                             <button type="button" :disabled="isPending || paymentMethod === 0" :class="{'disabled': isPending || paymentMethod === 0}" class="btn btn-primary" @click="changePaymentMethod()">
-                                <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.generalChange") }}
+                                <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.orderHistoryChange") }}
                             </button>
                         </div>
                     </div>

@@ -16,7 +16,9 @@
         {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
     {% endif %}
 
-    <div class="categoriegrid page-content container-max">Ö
+    {% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
+
+    <div class="categoriegrid page-content container-max">
         {% if not ceresConfig.item.showCategoryImage %}
             <div class="row m-t-1">
                 <div class="col-xs-12">
@@ -27,6 +29,7 @@
                 </div>
             </div>
         {% endif %}
+
         <div class="list-controls m-b-3">
             <div class="list-controls-inner">
                 <div class="row">
@@ -67,7 +70,7 @@
             {% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}
                 <div class="col-xs-3 hidden-md-down">
                     <div class="sidebar-categories">
-                        <div class="category-title">{{ trans("Ceres::Template.generalCategories") }}</div>
+                        <div class="category-title">{{ trans("Ceres::Template.itemCategories") }}</div>
                         {{ include('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}
                     </div>
 
@@ -87,7 +90,7 @@
                     <ul class="product-list row grid" v-is-loading-watcher="$store.state.itemList.isLoading">
                         {% for item in itemList %}
                             <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}4{% else %}3{% endif %}">
-                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, 'shippingCat': shippingCat } %}
                             </li>
                         {% endfor %}
                     </ul>
@@ -117,14 +120,14 @@
     <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
 
     {% if currentPage-1 > 0 %}
-        <link rel=“prev“ href=“{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage-1 }) | url_encode }}“ />
+        <link rel="prev" href="{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage-1 }) | url_encode }}" />
     {% endif %}
 
     {% if currentPage+1 <= pageMax %}
-        <link rel=“next“ href=“{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage+1 }) | url_encode }}“ />
+        <link rel="next" href="{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage+1 }) | url_encode }}" />
     {% endif %}
 
-    <title>{{ category.details[0].name }} | {{ ceresConfig.header.companyName }}</title>
+    <title>{% if category.details[0].metaTitle %}{{ category.details[0].metaTitle }}{% else %}{{ category.details[0].name }}{% endif %} | {{ ceresConfig.header.companyName }}</title>
 
     <meta name="description" content="{{ category.details[0].metaDescription }}">
     <meta name="keywords" content="{{ category.details[0].metaKeywords }}">

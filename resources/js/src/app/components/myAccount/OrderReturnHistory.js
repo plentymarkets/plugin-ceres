@@ -51,7 +51,7 @@ Vue.component("order-return-history", {
                     this.waiting = false;
                     this.returnsList.page = lastPage;
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.notFoundOops")
+                        TranslationService.translate("Ceres::Template.returnHistoryOops")
                     );
                 });
             }

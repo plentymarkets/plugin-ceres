@@ -1,5 +1,6 @@
 import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "../../services/UrlService";
 const NotificationService = require("services/NotificationService");
 
 const state =
@@ -112,7 +113,7 @@ const actions =
                         if (error.data)
                         {
                             NotificationService.error(
-                                TranslationService.translate("Ceres::Template.notFoundOops")
+                                TranslationService.translate("Ceres::Template.basketOops")
                             ).closeAfter(10000);
                         }
                     });
@@ -199,7 +200,7 @@ const actions =
 
                         if (window.location.pathname === "/checkout" && !basketItems.length)
                         {
-                            window.location.pathname = "/basket";
+                            navigateTo("/basket");
                         }
                     })
                     .fail(error =>

@@ -2,6 +2,7 @@ var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "services/UrlService";
 
 Vue.component("place-order", {
 
@@ -70,7 +71,7 @@ Vue.component("place-order", {
             else
             {
                 NotificationService.error(
-                    TranslationService.translate("Ceres::Template.generalCheckEntries")
+                    TranslationService.translate("Ceres::Template.checkoutCheckEntries")
                 );
                 this.waiting = false;
             }
@@ -107,8 +108,8 @@ Vue.component("place-order", {
                 var target = this.targetContinue;
 
                 if (target)
-                    {
-                    window.location.assign(target);
+                {
+                    navigateTo(target);
                 }
                 break;
             case "redirectUrl":

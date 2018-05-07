@@ -56,7 +56,7 @@ Vue.component("contact-form", {
                         this.privacyPolicyShowError = true;
 
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.generalCheckEntries")
+                            TranslationService.translate("Ceres::Template.contactCheckEntries")
                         );
                     }
                 })
@@ -70,7 +70,7 @@ Vue.component("contact-form", {
                     }
 
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.generalCheckEntries")
+                        TranslationService.translate("Ceres::Template.contactCheckEntries")
                     );
                 });
         },

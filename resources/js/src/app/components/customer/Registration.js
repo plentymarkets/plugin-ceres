@@ -6,6 +6,7 @@ const ModalService        = require("services/ModalService");
 
 import ValidationService from "services/ValidationService";
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "services/UrlService";
 
 Vue.component("registration", {
 
@@ -77,7 +78,7 @@ Vue.component("registration", {
                     if (!response.code)
                     {
                         NotificationService.success(
-                            TranslationService.translate("Ceres::Template.accRegistrationSuccessful")
+                            TranslationService.translate("Ceres::Template.regSuccessful")
                         ).closeAfter(3000);
 
                         if (document.getElementById(this.modalElement) !== null)
@@ -87,7 +88,7 @@ Vue.component("registration", {
 
                         if (this.backlink !== null && this.backlink)
                         {
-                            window.location.assign(this.backlink);
+                            navigateTo(this.backlink);
                         }
                         else
                         {
@@ -97,7 +98,7 @@ Vue.component("registration", {
                     else
                     {
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.accRegistrationError")
+                            TranslationService.translate("Ceres::Template.regError")
                         ).closeAfter(3000);
                     }
 

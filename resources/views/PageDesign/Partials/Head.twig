@@ -6,7 +6,6 @@
 {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
 <link rel="icon" type="img/ico" href="{{ favicon }}">
 
-{% set requestUrl = webstoreConfig.domainSsl ~ request.getRequestUri() %}
 {% set canonicalUrl = services.url.getCanonicalURL() %}
 {% set languageUrls = services.url.getLanguageURLs() %}
 
@@ -14,7 +13,7 @@
     <link rel="canonical" href="{{ canonicalUrl }}">
 {% endif %}
 
-{% if canonicalUrl == requestUrl %}
+{% if services.url.isCanonical() %}
     {% for language, url in languageUrls %}
         <link rel="alternate" hreflang="{{language}}" href="{{url}}"/>
     {% endfor %}
@@ -34,13 +33,18 @@
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
     {% if config('plugin.setId', null) is not empty %}
-        <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.{{ config('plugin.setId') }}.css">
+        <link data-sass-original="{{ plugin_path('Ceres') }}/css/ceres.scss" rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.{{ config('plugin.setId') }}.css">
     {% else %}
-        <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+        <link data-sass-original="{{ plugin_path('Ceres') }}/css/ceres.scss" rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
     {% endif %}
 {% endif %}
+
+<!-- {{ config('plugin.setId', 'foo') }} -->
+
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
 
 <!-- Extend the existing style with a template -->
 {{ LayoutContainer.show("Ceres::Template.Style") }}
+
+{{ get_shop_builder_styles() }}

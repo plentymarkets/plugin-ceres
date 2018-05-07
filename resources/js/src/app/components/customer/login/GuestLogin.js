@@ -1,6 +1,7 @@
-var ApiService = require("services/ApiService");
-
 import ValidationService from "services/ValidationService";
+import {navigateTo}from "services/UrlService";
+
+var ApiService = require("services/ApiService");
 
 Vue.component("guest-login", {
 
@@ -47,7 +48,7 @@ Vue.component("guest-login", {
                 {
                     if (this.backlink !== null && this.backlink)
                     {
-                        window.location.assign(this.backlink);
+                        navigateTo(this.backlink);
                     }
                     else
                     {

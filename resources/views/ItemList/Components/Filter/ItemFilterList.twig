@@ -1,9 +1,10 @@
 <script type="x/template" id="vue-item-filter-list">
     <div class="filter-wrapper" v-show="facets && facets.length > 0">
         {{ component( "Ceres::ItemList.Components.Filter.ItemFilter") }}
+        {{ component( "Ceres::ItemList.Components.Filter.ItemFilterPrice") }}
 
         <a class="btn btn-link filter-toggle" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse" @click="toggleOpeningState()">
-            <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ trans("Ceres::Template.generalFilter") }}
+            <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ trans("Ceres::Template.itemFilter") }}
         </a>
 
         <div class="collapse" :class="{in: isActive}" id="filterCollapse">
@@ -15,7 +16,7 @@
                 <div class="row">
                     <div class="col-xs-12 text-xs-right">
                         <button type="button" class="btn btn-primary btn-medium" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse" @click="toggleOpeningState()">
-                            <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.generalClose") }}
+                            <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.itemClose") }}
                         </button>
                     </div>
                 </div>

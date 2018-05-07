@@ -25,7 +25,7 @@
                             </div>
 
                             <p v-if="!isAddressListEmpty && !selectedAddress"
-                            class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.pleaseSelect") }}
+                            class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressPleaseSelect") }}
                                 -</p>
                             <p v-if="isAddressListEmpty"
                             class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressNoAddress") }}
@@ -69,12 +69,12 @@
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
                                     <span class="item-edit">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.generalEdit") }}" class="btn btn-primary btn-medium" @click.prevent="showEditModal(address)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressEdit") }}" class="btn btn-primary btn-medium" @click.prevent="showEditModal(address)">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.generalDelete") }}" class="btn btn-medium btn-remove-address" @click.prevent="showDeleteModal(address)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressDelete") }}" class="btn btn-medium btn-remove-address" @click.prevent="showDeleteModal(address)">
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </span>
@@ -148,11 +148,11 @@
                                 <div class="col-sm-8 offset-sm-2 item-confirm-special-case-close">
                                     <button type="button" class="btn btn-primary btn-medium btn-m-r btn-outline-primary" @click="closeDeleteModal">
                                         <i class="fa fa-times" aria-hidden="true"></i>
-                                        {{ trans("Ceres::Template.generalCancel") }}
+                                        {{ trans("Ceres::Template.addressCancel") }}
                                     </button>
                                     <button type="button" class="btn btn-primary btn-medium" :disabled="deleteModalWaiting" @click="deleteAddress">
                                         <i v-waiting-animation="deleteModalWaiting" class="fa fa-trash" aria-hidden="true"></i>
-                                        {{ trans("Ceres::Template.generalDelete") }}
+                                        {{ trans("Ceres::Template.addressDelete") }}
                                     </button>
                                 </div>
                             </div>

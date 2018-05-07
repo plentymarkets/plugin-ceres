@@ -3,24 +3,24 @@
         <input class="form-check-input" type="checkbox" value="" id="gtc-accept" v-model="isChecked">
         {% autoescape false %}
             {% set gtcContent %}<!--
-                --><a href="/gtc" target="_blank">
-                    <span>{{ trans("Ceres::Template.generalGtc") }}</span>
+                --><a href="{{ urls.gtc }}" target="_blank">
+                    <span>{{ trans("Ceres::Template.checkoutGtc") }}</span>
                 </a><!--
             -->{% endset %}
 
             {% set cancellationContent %}<!--
-                --><a href="/cancellation-rights" target="_blank">
-                    <strong>{{ trans("Ceres::Template.generalCancellationRight") }}</strong>
+                --><a href="{{ urls.canellationRights }}" target="_blank">
+                    <strong>{{ trans("Ceres::Template.checkoutCancellationRight", {"hyphen": "&shy;"}) }}</strong>
                 </a><!--
             -->{% endset %}
 
             {% set policyContent %}<!--
-                --><a href="/privacy-policy" target="_blank">
-                    <span>{{ trans("Ceres::Template.generalPrivacyPolicy") }}</span>
+                --><a href="{{ urls.privacyPolicy }}" target="_blank">
+                    <span>{{ trans("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
                 </a><!--
             -->{% endset %}
 
-            {{ trans("Ceres::Template.generalChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}
+            {{ trans("Ceres::Template.checkoutChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}
         {% endautoescape %}
     </label>
 </script>

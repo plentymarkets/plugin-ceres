@@ -1,0 +1,129 @@
+{
+  "sections":
+  [
+    {
+      "name": "Config.address",
+      "prefix": "address"
+    },
+    {
+      "name": "Config.basket",
+      "prefix": "basket"
+    },
+    {
+      "name": "Config.cancellationForm",
+      "prefix": "cancellationForm"
+    },
+    {
+      "name": "Config.cancellationRights",
+      "prefix": "cancellationRights"
+    },
+    {
+      "name": "Config.checkout",
+      "prefix": "checkout"
+    },
+    {
+      "name": "Config.contact",
+      "prefix": "contact"
+    },
+    {
+      "name": "Config.coupon",
+      "prefix": "coupon"
+    },
+    {
+      "name": "Config.dev",
+      "prefix": "dev"
+    },
+    {
+      "name": "Config.footer",
+      "prefix": "footer"
+    },
+    {
+      "name": "Config.header",
+      "prefix": "header"
+    },
+    {
+      "name": "Config.homepage",
+      "prefix": "homepage"
+    },
+    {
+      "name": "Config.itemSearch",
+      "prefix": "itemSearch"
+    },
+    {
+      "name": "Config.item",
+      "prefix": "item"
+    },
+    {
+      "name": "Config.legalDisclosure",
+      "prefix": "legalDisclosure"
+    },
+    {
+      "name": "Config.login",
+      "prefix": "login"
+    },
+    {
+      "name": "Config.myAccount",
+      "prefix": "myAccount"
+    },
+    {
+      "name": "Config.pageNotFound",
+      "prefix": "pageNotFound"
+    },
+    {
+      "name": "Config.notifications",
+      "prefix": "notifications"
+    },
+    {
+      "name": "Config.orderConfirmation",
+      "prefix": "orderConfirmation"
+    },
+    {
+      "name": "Config.orderHistory",
+      "prefix": "orderHistory"
+    },
+    {
+      "name": "Config.privacyPolicy",
+      "prefix": "privacyPolicy"
+    },
+    {
+      "name": "Config.reg",
+      "prefix": "reg"
+    },
+    {
+      "name": "Config.resetPw",
+      "prefix": "resetPw"
+    },
+    {
+      "name": "Config.returnConfirmation",
+      "prefix": "returnConfirmation"
+    },
+    {
+      "name": "Config.returnHistory",
+      "prefix": "returnHistory"
+    },
+    {
+      "name": "Config.return",
+      "prefix": "return"
+    },
+    {
+      "name": "Config.shippingInfo",
+      "prefix": "shippingInfo"
+    },
+    {
+      "name": "Config.singleItem",
+      "prefix": "singleItem"
+    },
+    {
+      "name": "Config.termsAndConditions",
+      "prefix": "termsAndConditions"
+    },
+    {
+      "name": "Config.wishList",
+      "prefix": "wishList"
+    }
+  ],
+  "ignoredTranslationFiles":
+  [
+    "Config.properties"
+  ]
+}

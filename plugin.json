@@ -19,7 +19,8 @@
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
     "runOnBuild"        : [
-      "Ceres\\Migrations\\WebshopSettingsMigration_0_0_1"
+      "Ceres\\Migrations\\WebshopSettingsMigration_0_0_1",
+      "Ceres\\Migrations\\HomepageShopBuilderMigration_0_0_1"
     ],
     "dataProviders"     :
     [
@@ -162,9 +163,19 @@
             "description"   : "Add a \"Certified by\" logo to the container on the homepage."
         },
         {
+            "key"           : "Header",
+            "name"          : "Header: Override header",
+            "description"   : "Override the complete header of all pages."
+        },
+        {
             "key"           : "Header.LeftSide",
             "name"          : "Header: Left header container",
             "description"   : "Add content to the container on the left in the header."
+        },
+        {
+            "key"           : "Footer",
+            "name"          : "Footer: Override footer",
+            "description"   : "Override the complete footer of all pages."
         },
         {
             "key"           : "Footer.RowOne",
