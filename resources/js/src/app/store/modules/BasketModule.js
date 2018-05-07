@@ -250,6 +250,23 @@ const actions =
                         reject(error);
                     });
             });
+        },
+
+        updateBasket({commit})
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService.get("/rest/io/basket/")
+                        .done(basket =>
+                        {
+                            commit("setBasket", basket);
+                            resolve(basket);
+                        })
+                        .fail(error =>
+                        {
+                            reject(error);
+                        });
+            });
         }
     };
 
