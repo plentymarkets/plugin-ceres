@@ -43,7 +43,7 @@
                     <hr>
 
                     {{ LayoutContainer.show("Ceres::Basket.BeforeCheckoutButton") }}
-                    <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="/checkout">
+                    <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="{{ urls.checkout }}">
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                         {{ trans("Ceres::Template.basketCheckout") }}
                     </a>

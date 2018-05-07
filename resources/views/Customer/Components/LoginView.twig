@@ -19,7 +19,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-{% if 'my-account' not in backlink %}6{% else %}12{% endif %}">
-                        <a class="btn btn-primary btn-block m-b-1" href="/register{% if backlink | trim is not empty %}?backlink={{ backlink | url_encode}}{% endif %}">
+                        <a class="btn btn-primary btn-block m-b-1" href="{{ urls.registration }}{% if backlink | trim is not empty %}?backlink={{ backlink | url_encode}}{% endif %}">
                             <i class="fa fa-user-plus" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.loginRegister") }}
                         </a>

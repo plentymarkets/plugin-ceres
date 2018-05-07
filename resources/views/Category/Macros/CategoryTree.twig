@@ -1,6 +1,10 @@
 {% macro get_children(category, currentScopeUrl, level) %}
     {% set megaMenuLevels = not config('Ceres.header.megamenu_levels') ? 1 : config('Ceres.header.megamenu_levels') %}
     {% set maxitems = { "1": config('Ceres.header.megamenu_items_stage_1'), "2": config('Ceres.header.megamenu_items_stage_2') ,"3": config('Ceres.header.megamenu_items_stage_3')} %}
+    {% set trailingSlash = "" %}
+    {% if config('plenty.system.info.urlTrailingSlash') == 1 %}
+        {% set trailingSlash = "/" %}
+    {% endif %}
     {% import _self as childlist %}
     {% set counter = 0 %}
     {% if level < megaMenuLevels %}
@@ -8,7 +12,7 @@
             {% if (child.details | length > 0) %}
                 <li class="level{{ level }}">
                     {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
-                    <a href="{{ newScope }}" v-render-category="{ id: {{ child.id }}, type: '{{ child.type }}' }">{{ child.details[0].name }}</a>
+                    <a href="{{ newScope }}{{ trailingSlash }}" v-render-category="{ id: {{ child.id }}, type: '{{ child.type }}' }">{{ child.details[0].name }}</a>
                     {% if child.children %}
                         {% if level == 1 %}<ul>{% endif %}
                             {{ childlist.get_children(child, newScope, level + 1) }}
@@ -28,6 +32,10 @@
     {% import _self as navbar %}
     {% set counter = 0 %}
     {% set megaMenuLevels = not config('Ceres.header.megamenu_levels') ? 1 : config('Ceres.header.megamenu_levels') %}
+    {% set trailingSlash = "" %}
+    {% if config('plenty.system.info.urlTrailingSlash') == 1 %}
+        {% set trailingSlash = "/" %}
+    {% endif %}
 
     {% for category in categories %}
 
@@ -43,7 +51,7 @@
             {% if category.children and translatedChildren > 0 %}
 
                 <li class="ddown" v-hover-mega-menu>
-                    <a href="{{ currentScopeUrl }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}' }">{{ category.details[0].name }}</a>
+                    <a href="{{ currentScopeUrl }}{{ trailingSlash }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}' }">{{ category.details[0].name }}</a>
 
                     <span class="hidden-lg-up nav-direction" data-toggle="collapse" href="#navDropdown{{ counter }}" aria-expanded="false">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -55,7 +63,7 @@
                             {% for child in category.children %}
                                 {% if child.details | length > 0 %}
                                     <li>
-                                        <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}" v-render-category="{ id: {{ child.id }}, type: '{{ child.type }}' }">{{ child.details[0].name }}</a>
+                                        <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ trailingSlash }}" v-render-category="{ id: {{ child.id }}, type: '{{ child.type }}' }">{{ child.details[0].name }}</a>
                                     </li>
                                 {% endif %}
                             {% endfor %}
@@ -68,7 +76,7 @@
             {% else %}
 
                 <li>
-                    <a href="{{ currentScopeUrl }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}', alwaysOpen: true }">{{ category.details[0].name }}</a>
+                    <a href="{{ currentScopeUrl }}{{ trailingSlash }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}', alwaysOpen: true }">{{ category.details[0].name }}</a>
                 </li>
 
             {% endif %}
@@ -82,6 +90,10 @@
     {% import _self as sidemenu %}
 
     {% set urlNow = currentScopeUrl %}
+    {% set trailingSlash = "" %}
+    {% if config('plenty.system.info.urlTrailingSlash') == 1 %}
+        {% set trailingSlash = "/" %}
+    {% endif %}
 
     {% for category in categories %}
 
@@ -90,7 +102,7 @@
         {% if category.details[0] %}
             <ul>
                 <li class="nav-item{% for breadcrumb in breadcrumbs %}{% if category.id == breadcrumb.id %} active{% endif %}{% endfor %}" v-update-sidenav-selection="$store.getters.breadcrumbs" data-category-id="{{ category.id }}">
-                    <a href="{{ urlNow }}" class="nav-link" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}', alwaysOpen: true }">{{ category.details[0].name }}</a>
+                    <a href="{{ urlNow }}{{ trailingSlash }}" class="nav-link" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}', alwaysOpen: true }">{{ category.details[0].name }}</a>
                     {% if category.children is not empty %}
                         {{ sidemenu.get_sidemenu(breadcrumbs, category.children, urlNow) }}
                     {% endif %}

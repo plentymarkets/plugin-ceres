@@ -26,10 +26,17 @@ Vue.filter("itemURL", function(item)
         suffix = "_" + item.item.id + "_" + item.variation.id;
     }
 
-    if (link.substr(link.length - suffix.length, suffix.length) === suffix)
+    let trailingSlash = "";
+
+    if (App.urlTrailingSlash)
     {
-        return link;
+        trailingSlash = "/";
     }
 
-    return link + suffix;
+    if (link.substr(link.length - suffix.length, suffix.length) === suffix)
+    {
+        return link + trailingSlash;
+    }
+
+    return link + suffix + trailingSlash;
 });
