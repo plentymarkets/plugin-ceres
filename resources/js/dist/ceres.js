@@ -15193,6 +15193,26 @@ Vue.component("checkout", {
             ApiService.listen("CheckoutChanged", function (checkout) {
                 _this.handleCheckoutChangedEvent(checkout.checkout);
             });
+
+            document.addEventListener("afterPaymentMethodChanged", function (event) {
+                var newMethodOfPaymentId = event.detail;
+
+                if (newMethodOfPaymentId !== _this.checkout.payment.methodOfPaymentId) {
+                    _this.updateCheckoutAndBasket();
+                }
+            });
+        },
+        updateCheckoutAndBasket: function updateCheckoutAndBasket() {
+            var _this2 = this;
+
+            this.$store.commit("setIsBasketLoading", true);
+
+            var reloadBasketPromise = this.$store.dispatch("refreshBasket");
+            var reloadCheckoutPromise = this.$store.dispatch("refreshCheckout");
+
+            Promise.all([reloadBasketPromise, reloadCheckoutPromise]).then(function (data) {
+                _this2.$store.commit("setIsBasketLoading", false);
+            });
         },
         handleCheckoutChangedEvent: function handleCheckoutChangedEvent(checkout) {
             if (!this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
@@ -23993,6 +24013,18 @@ var actions = {
                 reject(error);
             });
         });
+    },
+    refreshBasket: function refreshBasket(_ref12) {
+        var commit = _ref12.commit;
+
+        return new Promise(function (resolve, reject) {
+            _ApiService2.default.get("/rest/io/basket/").done(function (basket) {
+                commit("setBasket", basket);
+                resolve(basket);
+            }).fail(function (error) {
+                reject(error);
+            });
+        });
     }
 };
 
@@ -24123,7 +24155,6 @@ var actions = {
                 commit("setMethodOfPayment", oldMethodOfPayment);
                 reject(error);
             });
-            resolve();
         });
     },
     selectShippingProfile: function selectShippingProfile(_ref3, shippingProfile) {
@@ -24144,7 +24175,19 @@ var actions = {
                 commit("setShippingProfile", oldShippingProfile);
                 reject(error);
             });
-            resolve();
+        });
+    },
+    refreshCheckout: function refreshCheckout(_ref4) {
+        var commit = _ref4.commit,
+            dispatch = _ref4.dispatch;
+
+        return new Promise(function (resolve, reject) {
+            _ApiService2.default.get("/rest/io/checkout/").done(function (checkout) {
+                dispatch("setCheckout", checkout);
+                resolve(checkout);
+            }).fail(function (error) {
+                reject(error);
+            });
         });
     }
 };
