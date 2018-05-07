@@ -40,7 +40,7 @@
 
                 {% if loggedIn %}
                     <div class="col-xs-6 col-md-4">
-                        <a v-waiting-animation-infinite href="/my-account" type="" class="btn btn-primary btn-block bg-primary">
+                        <a v-waiting-animation-infinite href="{{ urls.myAccount }}" type="" class="btn btn-primary btn-block bg-primary">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.orderConfirmationMyAccount") }}
                         </a>

@@ -32,7 +32,7 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 m-b-1">
-                    <a v-waiting-animation-infinite href="/basket" class="btn btn-outline-primary btn-block basketBtn" :class="{ 'disabled': basketItems.length <= 0 }" title="{{ trans("Ceres::Template.basket") }}">
+                    <a v-waiting-animation-infinite href="{{ urls.basket }}" class="btn btn-outline-primary btn-block basketBtn" :class="{ 'disabled': basketItems.length <= 0 }" title="{{ trans("Ceres::Template.basket") }}">
                         <i class="fa fa-shopping-cart"></i>
                         {{ trans("Ceres::Template.basket") }} 
                     </a>
@@ -42,7 +42,7 @@
                     {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
 
                     <div>
-                        <a v-waiting-animation-infinite href="/checkout" :class="{ 'disabled': basketItems.length <= 0 }" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("Ceres::Template.basketCheckout") }}">
+                        <a v-waiting-animation-infinite href="{{ urls.checkout }}" :class="{ 'disabled': basketItems.length <= 0 }" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("Ceres::Template.basketCheckout") }}">
                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.basketCheckout") }}
                         </a>
