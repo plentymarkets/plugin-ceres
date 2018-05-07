@@ -21562,6 +21562,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _number = require("./number");
 
+var _utils = require("./utils");
+
 var MonetaryFormatter = function () {
     var T_DIGIT = 0;
     var T_DECIMAL = 1;
@@ -21636,6 +21638,10 @@ var MonetaryFormatter = function () {
         var patternIndex = 0;
         var prefix = "";
 
+        if ((0, _utils.isNullOrUndefined)(value) || Number.isNaN(parseFloat(value))) {
+            value = 0;
+        }
+
         if (value < 0) {
             if (this.pattern.length > 1) {
                 patternIndex = 1;
@@ -21700,7 +21706,7 @@ var MonetaryFormatter = function () {
 
 exports.default = MonetaryFormatter;
 
-},{"./number":115}],113:[function(require,module,exports){
+},{"./number":115,"./utils":118}],113:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
