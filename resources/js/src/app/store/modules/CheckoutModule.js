@@ -143,7 +143,6 @@ const actions =
                         commit("setMethodOfPayment", oldMethodOfPayment);
                         reject(error);
                     });
-                resolve();
             });
         },
 
@@ -168,7 +167,6 @@ const actions =
                         commit("setShippingProfile", oldShippingProfile);
                         reject(error);
                     });
-                resolve();
             });
         }
     };
