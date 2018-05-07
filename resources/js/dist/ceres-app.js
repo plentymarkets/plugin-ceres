@@ -22738,7 +22738,7 @@ function switchUrl(url, title) {
     if ((0, _utils.isNullOrUndefined)(title)) {
         title = document.getElementsByTagName("title")[0].innerHTML;
     }
-    url = _normalizeUrl(url);
+    url = (0, _url.normalizeUrl)(url);
     window.history.pushState({}, title, url);
 }
 
