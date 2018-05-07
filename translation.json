@@ -125,6 +125,7 @@
   "ignoredTranslationFiles":
   [
     "Config.properties",
-    "Widget.properties"
+    "Widget.properties",
+    "Page.properties"
   ]
 }
