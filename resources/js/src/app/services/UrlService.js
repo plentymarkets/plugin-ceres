@@ -72,7 +72,7 @@ export function switchUrl(url, title)
     {
         title = document.getElementsByTagName("title")[0].innerHTML;
     }
-    url = _normalizeUrl(url);
+    url = normalizeUrl(url);
     window.history.pushState({}, title, url);
 }
 
