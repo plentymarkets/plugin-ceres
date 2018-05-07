@@ -1,0 +1,193 @@
+.widget-image-box
+{
+    > img
+    {
+        position: absolute;
+        max-width: 100%;
+        max-height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        &.img-cover
+        {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    > .widget-inner
+    {
+        padding: 1.5rem;
+        display: flex;
+
+        .widget-caption
+        {
+            transition: 300ms all ease;
+
+            h2, .h2
+            {
+                margin: 0;
+                font-size: 1.75rem;
+            }
+        }
+    }
+
+    &.widget-image-box-fullwidth
+    {
+        > .widget-inner
+        {
+            .widget-caption
+            {
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                h2, .h2
+                {
+                    text-align: center;
+                    width: 100%;
+                    text-transform: uppercase;
+
+                    @include media-breakpoint-up(md)
+                    {
+                        font-size: 4rem;
+                    }
+                }
+            }
+        }
+    }
+
+    &.widget-image-box-inline-caption
+    {
+        > .widget-inner
+        {
+            align-items: flex-end;
+
+            .widget-caption
+            {
+                padding: 1.5rem;
+            }
+        }
+    }
+
+    &.widget-image-box-block-caption
+    {
+        > .widget-inner
+        {
+            .widget-caption
+            {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 1rem;
+            }
+        }
+    }
+
+    &.widget-image-box-no-caption
+    {
+        > .widget-inner
+        {
+            .widget-caption
+            {
+                display: none;
+            }
+        }
+    }
+
+
+    &.widget-primary
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-primary, .8) );
+        }
+
+        a[href].widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-primary, .9) );
+        }
+    }
+
+    &.widget-secondary
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-secondary, .8) );
+        }
+
+        a[href].widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-secondary, .9) );
+        }
+    }
+
+    &.widget-success
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-success, .8) );
+        }
+
+        a[href].widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-success, .9) );
+        }
+    }
+
+    &.widget-info
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-info, .8) );
+        }
+
+        a[href].widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-info, .9) );
+        }
+    }
+
+    &.widget-warning
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-warning, .8) );
+        }
+
+        a[href].widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-warning, .9) );
+        }
+    }
+
+    &.widget-danger
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-danger, .8) );
+        }
+
+        a[href].widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-danger, .9) );
+        }
+    }
+
+    &.widget-inverse
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-inverse, .8) );
+        }
+
+        a[href].widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-inverse, .9) );
+        }
+    }
+
+}

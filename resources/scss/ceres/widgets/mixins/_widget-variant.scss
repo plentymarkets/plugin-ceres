@@ -1,0 +1,5 @@
+@mixin widget-bg-variant($color, $text-color: #fff)
+{
+    color: $text-color;
+    background-color: $color;
+}

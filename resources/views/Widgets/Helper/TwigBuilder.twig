@@ -1,0 +1,131 @@
+{% macro print( output ) %}
+    {%- spaceless %}
+        {% verbatim %}{{ {% endverbatim %}{{ output | raw }}{% verbatim %} }}{% endverbatim %}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro do( statement ) %}
+    {%- spaceless %}
+        {% verbatim %}{% {% endverbatim %}{{ statement | raw }}{% verbatim %} %}{% endverbatim %}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro encode( input ) %}
+    {%- spaceless %}
+        {% if input | first == "$" %}
+            {{ input[1:] }}
+        {% else %}
+            {{ input | json_encode | raw }}
+        {% endif %}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro var( varname ) %}
+    {%- spaceless %}
+        {% if varname | first != "$" %}
+            {{ "$" ~ varname }}
+        {% else %}
+            {{ varname }}
+        {% endif %}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro call( method, arguments ) %}
+    {%- spaceless %}
+        {% autoescape false %}
+            {% import _self as Twig %}
+            {% set arguments = arguments | default([]) %}
+            {% set argumentList = "" %}
+            {% for argument in arguments %}
+                {% set argument = Twig.encode(argument) %}
+                {% set argumentList = argumentList ~ argument %}
+                {% if not loop.last %}
+                    {% set argumentList = argumentList ~ ", " %}
+                {% endif %}
+            {% endfor %}
+            {{ method ~ "(" ~ argumentList ~ ")" | raw }}
+        {% endautoescape %}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro trans( key ) %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.print( "trans(\"" ~ key ~ "\")" ) }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro set( variable, value ) %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.do( "set " ~ variable ~ " = " ~ value ) }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro end( blockname ) %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.do( "end" ~ blockname ) }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro if( condition ) %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.do("if " ~ condition ) }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro elseif( condition ) %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.do("elseif " ~ condition ) }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro else() %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.do("else") }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro endif() %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.end("if") }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro for( entryName, list ) %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.do("for " ~ entryName ~ " in " ~ list) }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro endfor() %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.end("for") }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro include(template, params) %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {% if params %}
+            {% set paramString = "{ " %}
+            {% for key, value in params %}
+                {% set paramString = paramString ~ "'" ~ key ~ "': " ~ value %}
+                {% if not loop.last %}
+                    {% set paramString = paramString ~ ", " %}
+                {% endif %}
+            {% endfor %}
+            {% set paramString = paramString ~ " }" %}
+            {{ Twig.do("include \"" ~ template ~ "\" with " ~ paramString ) }}
+        {% else %}
+            {{ Twig.do("include \"" ~ template ~ "\"" ) }}
+        {% endif %}
+    {% endspaceless -%}
+{% endmacro %}

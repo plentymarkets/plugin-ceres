@@ -1,0 +1,157 @@
+@mixin widget-carousel-variant($parent, $color)
+{
+    .widget-image-carousel#{$parent}
+    {
+        .widget-caption h2,
+        .widget-caption .h2
+        {
+            @include widget-bg-variant( rgba($color, .8) );
+        }
+
+        &:hover .widget-caption h2,
+        &:hover .widget-caption .h2
+        {
+            @include widget-bg-variant( rgba($color, .9) );
+        }
+
+        .carousel-indicators li
+        {
+            border-color: $color;
+
+            &.active
+            {
+                background-color: $color;
+            }
+        }
+
+        .carousel-control .fa
+        {
+            color: $color;
+        }
+    }
+}
+
+.widget-image-carousel
+{
+    .widget-inner
+    {
+        padding-left: 0;
+        padding-right: 0;
+
+        .widget-caption
+        {
+            position: absolute;
+            text-align: center;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+
+            h2, .h2
+            {
+                padding: .5rem 1rem;
+                font-size: 1.75rem;
+                margin: 0;
+                display: inline-block;
+                transition: 300ms all ease;
+
+                @include media-breakpoint-up(md)
+                {
+                    font-size: 3rem;
+                }
+            }
+        }
+
+        .carousel-inner
+        {
+            display: flex;
+            height: 100%;
+        }
+        .carousel-item
+        {
+            width: 100%;
+            height: 100%;
+
+            img
+            {
+                position: absolute;
+                max-width: 100%;
+                max-height: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                &.img-cover
+                {
+                    min-width: 100%;
+                    min-height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .carousel-indicators
+        {
+            bottom: 0;
+            padding: .5rem 1rem;
+
+            li
+            {
+                width: 10px;
+                height: 10px;
+                margin: 1px;
+            }
+        }
+
+        .carousel-control
+        {
+            background-image: none;
+            transition: 300ms all ease;
+
+            .fa
+            {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 3rem;
+            }
+        }
+    }
+}
+@include media-breakpoint-up(md)
+{
+    .widget-inner-stacked .widget-image-carousel
+    {
+        .widget-caption
+        {
+            h2, .h2
+            {
+                padding: .5rem 1rem;
+                font-size: 1.75rem;
+                margin: 0;
+
+                @include media-breakpoint-up(md)
+                {
+                    font-size: 3rem;
+                }
+            }
+        }
+
+        .carousel-control
+        {
+            .fa
+            {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+
+@include widget-carousel-variant('.widget-primary', $brand-primary);
+@include widget-carousel-variant('.widget-secondary', $brand-secondary);
+@include widget-carousel-variant('.widget-success', $brand-success);
+@include widget-carousel-variant('.widget-info', $brand-info);
+@include widget-carousel-variant('.widget-warning', $brand-warning);
+@include widget-carousel-variant('.widget-danger', $brand-danger);
+@include widget-carousel-variant('.widget-inverse', $brand-inverse);
