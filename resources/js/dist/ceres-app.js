@@ -14260,6 +14260,7 @@ Vue.component("add-to-basket", {
                 };
 
                 this.$store.dispatch("addBasketItem", basketObject).then(function (response) {
+                    document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
                     _this.waiting = false;
                     _this.openAddToBasketOverlay(basketObject.quantity);
                 }, function (error) {
