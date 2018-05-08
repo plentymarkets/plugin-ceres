@@ -1,5 +1,40 @@
 # Release Notes für Ceres
 
+## v2.8.0 (2018-05-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.7.0...2.8.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Wenn die Artikelsortierung nach Preis aktiv ist, muss sie in der Ceres Konfiguration unter "Paginating and Sorting » Enable item sorting by" neu ausgewählt und erneut gespeichert werden.
+
+### Hinzugefügt
+
+- Die Elemente der Startseite wurden in editierbare Elemente für den Shop Builder ausgelagert.
+- Es wurde ein Container hinzugefügt, um die Suchfilter zu überschreiben.
+- Es wurden Facetten vom Typ: Preis hinzugefügt.
+- Bei der Generierung von URLs wird nun die Einstellung zum Anhängen von Trailing-Slashes berücksichtigt.
+
+### Geändert
+
+- Die Konfiguration der Startseite wurde in den Shop Builder überführt.
+- Externe URLs werden nun über das Attribut rel="noopener" aufgerufen.
+- Ceres reagiert nun auf das Event "afterPaymentMethodChanged" und lädt bei Änderung der Zahlungsart die Daten vom Warenkorb erneut.
+- In einer Kategorie wird nun der Meta-Titel als Titel verwendet. Sollte dieser nicht vorhanden sein, wird der Name der Kategorie verwendet.
+- Die sprachabhängigen Texte in Ceres wurden neu sortiert und umbenannt, um sie auf die Veröffentlichung der Mehrsprachigkeitsfunktionen vorzubereiten.
+- Die Sortierung nach Preis nutzt nun den durchschnittlichen Preis einer Variante anstatt des minimalen und maximalen Werts.
+
+### Behoben
+
+- Es wurden Fehler behoben, die in Firefox bei schnellen Wechseln zwischen Kategorien zu Problemen geführt hatten.
+- Durch einen Fehler wurde das Event "afterPaymentMethodChanged" direkt nach dem Klick zum Wechsel der Zahlungsart ausgelöst. Nun wird das Event erst nach erfolgreicher Antwort vom Server ausgelöst.
+- Durch einen Fehler wurde das Event "afterShippingProfileChanged" direkt nach dem Klick zum Wechsel des Versandprofils ausgelöst. Nun wird das Event erst nach erfolgreicher Antwort vom Server ausgelöst.
+- Durch einen Fehler wurden Merkmale, welche nicht als Bestellmerkmale angelegt wurden, als solche in der Artikelansicht ausgegeben. Dies wurde behoben.
+- Daten aus dem GlobalContext von Ceres wurden nicht geladen, wenn man über eine Route aus einem anderen Plugin kam. Dies wurde behoben.
+- Bei der Benutzung von Ceres und IO auf einem weiteren Mandanten konnte es dazu kommen, dass Kategoriedetails vom Hauptmandanten geladen wurden. Dies wurde behoben.
+- Es wurde ein Fehler behoben wodurch Seitennavigation und Breadcrumbs auf Touch-Geräten nicht bedienbar waren.
+- Durch einen Fehler wurde die verlinkte Versandkostenkategorie nicht in der Artikelübersicht angezeigt. Dies wurde behoben.
+- Es wurden verschiedene CSS-Fehler im Bilderkarrussell behoben.
+- Wenn man zwischen Kategorien navigiert, ist der Browserverlauf nun normal bedienbar.
+
 ## v2.7.0 (2018-04-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.6.0...2.7.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
