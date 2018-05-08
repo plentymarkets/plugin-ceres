@@ -162,7 +162,7 @@
                 isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
                 language: "{{ lang }}",
                 decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
-                urlTrailingSlash: {{ (config("plenty.system.info.urlTrailingSlash") == 1) | json_encode }}
+                urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }}
             };
         </script>
 
