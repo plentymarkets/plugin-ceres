@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v2.8.0 (2018-05-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.7.0...2.8.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v2.8.0 (2018-05-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.7.0...2.8.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### ToDo
 
@@ -8,12 +8,14 @@
 
 ### Added
 
+- The elements of the homepage have been outsourced as editable elements for the Shop Builder.
 - A container for overwriting search filters has been added.
 - The facet type **price** has been added.
 - The option to include trailing slashes is now considered when generating URLs.
 
 ### Changed
 
+- The configuration of the homepage has been outsourced to the Shop Builder.
 - External URLs are now accessed via the rel="noopener" attribute.
 - Ceres now reacts to the event "afterPaymentMethodChange" and reloads the shopping cart data after changing the payment method.
 - The meta title is now used as the title of a category. If no meta title has been saved, the name of the category is used instead.
