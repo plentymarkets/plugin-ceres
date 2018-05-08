@@ -48,9 +48,7 @@
     {% endif %}
 
     {% if pushCurrentSlide %}
-        {{ Twig.if("slide.name is not empty") }}
         {{ Twig.set("slides", "slides | merge([slide])") }}
-        {{ Twig.endif() }}
     {% endif %}
 
 {% endfor %}
