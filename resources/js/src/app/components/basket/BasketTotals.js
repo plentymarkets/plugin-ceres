@@ -2,15 +2,35 @@ Vue.component("basket-totals", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "config",
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String
+        },
+        config:
+        {
+            type: Array
+        },
+        showNetPrices:
+        {
+            type: Boolean,
+            default: true
+        }
+    },
 
-    computed: Vuex.mapState({
-        basket: state => state.basket.data,
-        isBasketLoading: state => state.basket.isBasketLoading
-    }),
+    computed:
+    {
+        showGrossPrices()
+        {
+            return true;//return !!this.basket.totalVats.length;
+        },
+
+        ...Vuex.mapState({
+            basket: state => state.basket.data,
+            isBasketLoading: state => state.basket.isBasketLoading
+        })
+    },
 
     created()
     {

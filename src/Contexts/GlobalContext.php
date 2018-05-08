@@ -3,6 +3,7 @@
 namespace Ceres\Contexts;
 
 use IO\Helper\ContextInterface;
+use IO\Services\CustomerService;
 use IO\Services\ItemLastSeenService;
 use IO\Services\NotificationService;
 use IO\Services\WebstoreConfigurationService;
@@ -35,6 +36,7 @@ class GlobalContext implements ContextInterface
     public $basket;
     public $webstoreConfig;
     public $currencyData;
+    public $showNetPrices;
 
     public function init($params)
     {
@@ -64,6 +66,9 @@ class GlobalContext implements ContextInterface
         /** @var CheckoutService $checkoutService */
         $checkoutService = pluginApp(CheckoutService::class);
 
+        /** @var CustomerService $customerService */
+        $customerService = pluginApp(CustomerService::class);
+
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
         
@@ -89,6 +94,8 @@ class GlobalContext implements ContextInterface
         $this->basket = $basketService->getBasketForTemplate();
         
         $this->currencyData = $checkoutService->getCurrencyData();
+
+        $this->showNetPrices = $customerService->showNetPrices();
     }
     
     protected function getParam($key, $defaultValue = null)
