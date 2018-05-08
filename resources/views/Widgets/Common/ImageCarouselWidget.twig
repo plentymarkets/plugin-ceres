@@ -8,11 +8,12 @@
 
     {{ Twig.set("slide", "{ }") }}
 
+    {% set mobileParam = param.mobile %}
     {% set pushCurrentSlide = false %}
 
-    {% if param.categoryId | trim is not empty %}
+    {% if mobileParam.categoryId | trim is not empty %}
 
-        {{ Twig.set("category", Twig.call("services.category.get", [param.categoryId])) }}
+        {{ Twig.set("category", Twig.call("services.category.get", [mobileParam.categoryId])) }}
         {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"]) ) }}
 
         {{ Twig.set("slide", "slide | merge({ name: category.details[0].name })") }}
@@ -21,9 +22,9 @@
 
         {% set pushCurrentSlide = true %}
 
-    {% elseif param.variationId | trim is not empty %}
+    {% elseif mobileParam.variationId | trim is not empty %}
 
-        {{ Twig.set("itemData", Twig.call("services.itemLoader.loadForTemplate", ["Ceres::Homepage.Homepage", itemLoaderPresets.items, { variationIds: [param.variationId] }])) }}
+        {{ Twig.set("itemData", Twig.call("services.itemLoader.loadForTemplate", ["Ceres::Homepage.Homepage", itemLoaderPresets.items, { variationIds: [mobileParam.variationId] }])) }}
         {{ Twig.set("itemData", "itemData.documents[0].data") }}
         {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
 
@@ -39,9 +40,9 @@
 
     {% endif %}
 
-    {% if param.customImagePath | trim is not empty %}
+    {% if mobileParam.customImagePath | trim is not empty %}
 
-        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ param.customImagePath | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ mobileParam.customImagePath | json_encode } })") }}
 
         {% set pushCurrentSlide = true %}
 
