@@ -49,6 +49,8 @@ class HomepageShopBuilderMigration_0_0_1
     private function migrate($pluginSetId, $config)
     {
         $this->widgets = [];
+    
+        $config = $this->checkConfig($config);
         
         $titleBar = $this->createTitleBarWidget($config['header.company_name']);
         $this->addWidget($titleBar);
@@ -391,6 +393,39 @@ class HomepageShopBuilderMigration_0_0_1
     private function checkValue($value)
     {
         return !is_null($value) && strlen((string)$value) && (int)$value > 0;
+    }
+    
+    private function checkConfig($config)
+    {
+        $map = [
+            'header.company_name',
+            'sliderItemId1',
+            'sliderImageUrl1',
+            'sliderItemId2',
+            'sliderImageUrl2',
+            'sliderItemId3',
+            'sliderImageUrl3',
+            'heroExtraItemId1',
+            'heroExtraImageUrl1',
+            'heroExtraItemId2',
+            'heroExtraImageUrl2',
+            'homepageCategory1',
+            'homepageCategory2',
+            'homepageCategory3',
+            'homepageCategory4',
+            'homepageCategory5',
+            'homepageCategory6',
+        ];
+        
+        foreach($map as $key)
+        {
+            if(!array_key_exists($key, $config))
+            {
+                $config[$key] = null;
+            }
+        }
+        
+        return $config;
     }
     
     private function saveWidgets($pluginSetId)
