@@ -18,7 +18,7 @@
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
     {{ Twig.if("imageUrl | trim is not empty") }}
-    {{ Twig.set("imageUrl", "\"documents/\" ~ imageUrl") }}
+        {{ Twig.set("imageUrl", "\"documents/\" ~ imageUrl") }}
     {{ Twig.endif() }}
 
 {% elseif variationId | trim is not empty %}
