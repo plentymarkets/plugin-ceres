@@ -2,56 +2,82 @@
 
 namespace Ceres\Migrations;
 
-use Ceres\Config\CeresConfig;
-use Ceres\Config\CeresHomepageConfig;
 use Plenty\Modules\ContentBuilder\Contracts\ContentRepositoryContract;
 use Plenty\Modules\ContentBuilder\Contracts\ContentStorageRepositoryContract;
 use Plenty\Modules\ContentBuilder\Contracts\ContentLinkRepositoryContract;
 use Plenty\Modules\ContentBuilder\Models\Content;
-use Plenty\Plugin\ConfigRepository;
+
+use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
+use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
 
 class HomepageShopBuilderMigration_0_0_1
 {
     const DATA_PROVIDER_NAME = 'Ceres::Homepage';
-    
-    /** @var CeresHomepageConfig */
-    private $hpConfig = null;
     private $widgets = [];
     
     public function run()
     {
-        /** @var CeresConfig $ceresConfig */
-        $ceresConfig = pluginApp(CeresConfig::class);
-        $this->hpConfig = $ceresConfig->homepage;
+        /** @var PluginSetRepositoryContract $pluginSetRepo */
+        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
+        $pluginSets = $pluginSetRepo->list();
         
-        $titleBar = $this->createTitleBarWidget();
-        $this->addWidget($titleBar);
-        
-        $this->createFirstRow();
-        $this->createSecondRow();
-        $this->createThirdRow();
-        $this->createFourthRow();
-        $this->createFifthRow();
-        
-        $this->saveWidgets();
+        /** @var PluginSet $pluginSet */
+        foreach($pluginSets as $pluginSet)
+        {
+            foreach($pluginSet->pluginSetEntries as $pluginSetEntry)
+            {
+                if($pluginSetEntry->plugin->name === 'Ceres')
+                {
+                    $pluginSetId = $pluginSetEntry->pluginSetId;
+                    $config = $pluginSetEntry->configurations()->getResults();
+                    
+                    $cfg = [];
+                    foreach($config as $configEntry)
+                    {
+                        if(strpos($configEntry->key, 'homepage.') === 0 || $configEntry->key == 'header.company_name')
+                        {
+                            $cfg[str_replace('homepage.', '', $configEntry->key)] =  $configEntry->value;
+                        }
+                    }
+                    
+                    $this->migrate($pluginSetId, $cfg);
+                }
+            }
+        }
     }
     
-    private function createFirstRow()
+    private function migrate($pluginSetId, $config)
+    {
+        $this->widgets = [];
+        
+        $titleBar = $this->createTitleBarWidget($config['header.company_name']);
+        $this->addWidget($titleBar);
+    
+        $this->createFirstRow($config);
+        $this->createSecondRow($config);
+        $this->createThirdRow($config);
+        $this->createFourthRow($config);
+        $this->createFifthRow($config);
+    
+        $this->saveWidgets($pluginSetId);
+    }
+    
+    private function createFirstRow($config)
     {
         $firstRow = [];
         
         $slides = [
             [
-                'variationId' => $this->hpConfig->sliderItemId1,
-                'customImagePath' => $this->hpConfig->sliderImageUrl1
+                'variationId'     => $config['sliderItemId1'],
+                'customImagePath' => $config['sliderImageUrl1']
             ],
             [
-                'variationId' => $this->hpConfig->sliderItemId2,
-                'customImagePath' => $this->hpConfig->sliderImageUrl2
+                'variationId'     => $config['sliderItemId2'],
+                'customImagePath' => $config['sliderImageUrl2']
             ],
             [
-                'variationId' => $this->hpConfig->sliderItemId3,
-                'customImagePath' => $this->hpConfig->sliderImageUrl3
+                'variationId'     => $config['sliderItemId3'],
+                'customImagePath' => $config['sliderImageUrl3']
             ]
         ];
     
@@ -59,8 +85,8 @@ class HomepageShopBuilderMigration_0_0_1
     
         if($slidesExist && $this->checkValues(
             [
-                [$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraImageUrl1],
-                [$this->hpConfig->heroExtraItemId2, $this->hpConfig->heroExtraImageUrl2]
+                [$config['heroExtraItemId1'], $config['heroExtraImageUrl1']],
+                [$config['heroExtraItemId2'], $config['heroExtraImageUrl2']]
             ])
         )
         {
@@ -69,52 +95,52 @@ class HomepageShopBuilderMigration_0_0_1
                 [
                     [$this->createSliderWidget($slides)],
                     [$this->createImageBoxWidget(
-                        $this->hpConfig->heroExtraItemId1,
+                        $config['heroExtraItemId1'],
                         '',
-                        $this->hpConfig->heroExtraImageUrl1,
-                        $this->checkValue($this->hpConfig->heroExtraItemId1) ? 'block-caption' : 'no-caption'
+                        $config['heroExtraImageUrl1'],
+                        $this->checkValue($config['heroExtraItemId1']) ? 'block-caption' : 'no-caption'
                     )],
                     [$this->createImageBoxWidget
-                    ($this->hpConfig->heroExtraItemId2,
+                    ($config['heroExtraItemId2'],
                         '',
-                        $this->hpConfig->heroExtraImageUrl2,
-                        $this->checkValue($this->hpConfig->heroExtraItemId2) ? 'block-caption' : 'no-caption'
+                        $config['heroExtraImageUrl2'],
+                        $this->checkValue($config['heroExtraItemId2']) ? 'block-caption' : 'no-caption'
                     )]
                 ]
             );
         }
-        elseif($slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraImageUrl1], false))
+        elseif($slidesExist && $this->checkValues([$config['heroExtraItemId1'], $config['heroExtraImageUrl1']], false))
         {
             $firstRow = $this->createTwoColumnWidget(
                 'oneToOne',
                 [
                     [$this->createSliderWidget($slides)],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'block-caption')]
+                    [$this->createImageBoxWidget($config['heroExtraItemId1'], '', $config['heroExtraImageUrl1'], 'block-caption')]
                 ]
             );
         }
-        elseif($slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId2, $this->hpConfig->heroExtraImageUrl2], false))
+        elseif($slidesExist && $this->checkValues([$config['heroExtraItemId2'], $config['heroExtraImageUrl2']], false))
         {
             $firstRow = $this->createTwoColumnWidget(
                 'oneToOne',
                 [
                     [$this->createSliderWidget($slides)],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'block-caption')]
+                    [$this->createImageBoxWidget($config['heroExtraItemId2'], '', $config['heroExtraImageUrl2'], 'block-caption')]
                 ]
             );
         }
         elseif(!$slidesExist && $this->checkValues(
                 [
-                    [$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraImageUrl1],
-                    [$this->hpConfig->heroExtraItemId2, $this->hpConfig->heroExtraImageUrl2]
+                    [$config['heroExtraItemId1'], $config['heroExtraImageUrl1']],
+                    [$config['heroExtraItemId2'], $config['heroExtraImageUrl2']]
                 ])
         )
         {
             $firstRow = $this->createTwoColumnWidget(
                 'oneToOne',
                 [
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'block-caption')],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'block-caption')]
+                    [$this->createImageBoxWidget($config['heroExtraItemId1'], '', $config['heroExtraImageUrl1'], 'block-caption')],
+                    [$this->createImageBoxWidget($config['heroExtraItemId2'], '', $config['heroExtraImageUrl2'], 'block-caption')]
                 ]
             );
         }
@@ -122,91 +148,91 @@ class HomepageShopBuilderMigration_0_0_1
         {
             $firstRow = $this->createSliderWidget($slides);
         }
-        elseif(!$slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraImageUrl1], false))
+        elseif(!$slidesExist && $this->checkValues([$config['heroExtraItemId1'], $config['heroExtraImageUrl1']], false))
         {
-            $firstRow = $this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'block-caption');
+            $firstRow = $this->createImageBoxWidget($config['heroExtraItemId1'], '', $config['heroExtraImageUrl1'], 'block-caption');
         }
-        elseif(!$slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId2, $this->hpConfig->heroExtraImageUrl2], false))
+        elseif(!$slidesExist && $this->checkValues([$config['heroExtraItemId2'], $config['heroExtraImageUrl2']], false))
         {
-            $firstRow = $this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'block-caption');
+            $firstRow = $this->createImageBoxWidget($config['heroExtraItemId2'], '', $config['heroExtraImageUrl2'], 'block-caption');
         }
         
         $this->addWidget($firstRow);
     }
     
-    private function createSecondRow()
+    private function createSecondRow($config)
     {
         $secondRow = [];
         
-        if($this->checkValues([$this->hpConfig->homepageCategory1, $this->hpConfig->homepageCategory2]))
+        if($this->checkValues([$config['homepageCategory1'], $config['homepageCategory2']]))
         {
             $secondRow = $this->createTwoColumnWidget(
                 'oneToOne',
                 [
-                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory1, '', 'fullwidth', 'secondary')],
-                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory2, '', 'fullwidth', 'secondary')]
+                    [$this->createImageBoxWidget('', $config['homepageCategory1'], '', 'fullwidth', 'secondary')],
+                    [$this->createImageBoxWidget('', $config['homepageCategory2'], '', 'fullwidth', 'secondary')]
                 ]
             );
         }
-        elseif($this->checkValues([$this->hpConfig->homepageCategory1]))
+        elseif($this->checkValues([$config['homepageCategory1']]))
         {
-            $secondRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory1, '', 'fullwidth', 'secondary');
+            $secondRow = $this->createImageBoxWidget('', $config['homepageCategory1'], '', 'fullwidth', 'secondary');
         }
-        elseif($this->checkValues([$this->hpConfig->homepageCategory2]))
+        elseif($this->checkValues([$config['homepageCategory2']]))
         {
-            $secondRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory2, '', 'fullwidth', 'secondary');
+            $secondRow = $this->createImageBoxWidget('', $config['homepageCategory2'], '', 'fullwidth', 'secondary');
         }
         
         $this->addWidget($secondRow);
     }
     
-    private function createThirdRow()
+    private function createThirdRow($config)
     {
         //first category item list (Category to display in the first list of items)
-        $firstCategoryItemList = $this->createCategoryItemListWidget($this->hpConfig->homepageCategory3);
+        $firstCategoryItemList = $this->createCategoryItemListWidget($config['homepageCategory3']);
         $this->addWidget($firstCategoryItemList);
     }
     
-    private function createFourthRow()
+    private function createFourthRow($config)
     {
         $fourthRow = [];
     
-        if($this->checkValues([$this->hpConfig->homepageCategory4, $this->hpConfig->homepageCategory5]))
+        if($this->checkValues([$config['homepageCategory4'], $config['homepageCategory5']]))
         {
             $fourthRow = $this->createTwoColumnWidget(
                 'twoToOne',
                 [
-                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory4, '', 'inline-caption')],
-                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory5, '', 'inline-caption')]
+                    [$this->createImageBoxWidget('', $config['homepageCategory4'], '', 'inline-caption')],
+                    [$this->createImageBoxWidget('', $config['homepageCategory5'], '', 'inline-caption')]
                 ]
             );
         }
-        elseif($this->checkValues([$this->hpConfig->homepageCategory4]))
+        elseif($this->checkValues([$config['homepageCategory4']]))
         {
-            $fourthRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory4, '', 'inline-caption');
+            $fourthRow = $this->createImageBoxWidget('', $config['homepageCategory4'], '', 'inline-caption');
         }
-        elseif($this->checkValues([$this->hpConfig->homepageCategory5]))
+        elseif($this->checkValues([$config['homepageCategory5']]))
         {
-            $fourthRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory5, '', 'inline-caption');
+            $fourthRow = $this->createImageBoxWidget('', $config['homepageCategory5'], '', 'inline-caption');
         }
     
         $this->addWidget($fourthRow);
     }
     
-    private function createFifthRow()
+    private function createFifthRow($config)
     {
         //second category item list (Category to display in the second list of items)
-        $secondCategoryItemList = $this->createCategoryItemListWidget($this->hpConfig->homepageCategory6);
+        $secondCategoryItemList = $this->createCategoryItemListWidget($config['homepageCategory6']);
         $this->addWidget($secondCategoryItemList);
     }
     
-    private function createTitleBarWidget()
+    private function createTitleBarWidget($companyName)
     {
         return [
             'identifier' => 'Ceres::TitleBarWidget',
             'children' => [],
             'widgetSettings' => [
-                'text' => $this->createWidgetSettingsEntry('')
+                'text' => $this->createWidgetSettingsEntry($companyName)
             ]
         ];
     }
@@ -367,7 +393,7 @@ class HomepageShopBuilderMigration_0_0_1
         return !is_null($value) && strlen((string)$value) && (int)$value > 0;
     }
     
-    private function saveWidgets()
+    private function saveWidgets($pluginSetId)
     {
         /** @var ContentRepositoryContract $contentRepo */
         $contentRepo = pluginApp(ContentRepositoryContract::class);
@@ -377,8 +403,6 @@ class HomepageShopBuilderMigration_0_0_1
             'dataProviderName' => self::DATA_PROVIDER_NAME,
             'type' => 'content'
         ], $content->id);
-        
-        $pluginSetId = pluginSetId();
         
         /** @var ContentLinkRepositoryContract $contentLinkRepo */
         $contentLinkRepo = pluginApp(ContentLinkRepositoryContract::class);
@@ -393,5 +417,4 @@ class HomepageShopBuilderMigration_0_0_1
         $contentStorageRepo = pluginApp(ContentStorageRepositoryContract::class);
         $contentStorageRepo->createContentData($content->id, $this->widgets);
     }
-  
 }
