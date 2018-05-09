@@ -1,12 +1,16 @@
 <script type="x/template" id="vue-shipping-country-select">
-    <ul>
-        <div v-for="shippingCountry in localization.shippingCountries">
-            <li :class="{'active': localization.shippingCountryId == shippingCountry.id}">
-                <a data-toggle="collapse" href="#countrySettings" @click="setShippingCountry(shippingCountry.id)" :class="{'is-disabled': selectable}" :disabled="selectable">
-                    <i :class="'flag-icon flag-icon-' + shippingCountry.isoCode2.toLowerCase()"></i>
-                    ${shippingCountry.currLangName}
-                </a>
-            </li>
-        </div>
-    </ul>
+    <div v-if="isCountrySelectionEnabled">
+        <ul>
+            <div v-for="shippingCountry in localization.shippingCountries">
+                <li :class="{'active': localization.shippingCountryId == shippingCountry.id}">
+                    <a data-toggle="collapse" href="#countrySettings" @click="setShippingCountry(shippingCountry.id)" :class="{'is-disabled': selectable}" :disabled="selectable">
+                        <i :class="'flag-icon flag-icon-' + shippingCountry.isoCode2.toLowerCase()"></i>
+                        ${shippingCountry.currLangName}
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+
+    <div v-else>AUSWAHL NICHT MÖGLICH</div>
 </script>

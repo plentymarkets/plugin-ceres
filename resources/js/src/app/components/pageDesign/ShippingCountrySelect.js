@@ -12,9 +12,18 @@ Vue.component("shipping-country-select", {
         this.$options.template = this.template;
     },
 
-    computed: Vuex.mapState({
-        localization: state => state.localization
-    }),
+    computed:
+    {
+        isCountrySelectionEnabled()
+        {
+            return !this.basket.customerInvoiceAddressId && !this.basket.customerShippingAddressId;
+        },
+
+        ...Vuex.mapState({
+            localization: state => state.localization,
+            basket: state => state.basket.data
+        })
+    },
 
     methods:
     {
@@ -27,4 +36,3 @@ Vue.component("shipping-country-select", {
         }
     }
 });
-
