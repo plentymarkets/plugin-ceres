@@ -19,18 +19,10 @@ Vue.component("basket-totals", {
         }
     },
 
-    computed:
-    {
-        showGrossPrices()
-        {
-            return true;//return !!this.basket.totalVats.length;
-        },
-
-        ...Vuex.mapState({
-            basket: state => state.basket.data,
-            isBasketLoading: state => state.basket.isBasketLoading
-        })
-    },
+    computed: Vuex.mapState({
+        basket: state => state.basket.data,
+        isBasketLoading: state => state.basket.isBasketLoading
+    }),
 
     created()
     {
