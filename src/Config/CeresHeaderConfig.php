@@ -7,6 +7,7 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresHeaderConfig extends PluginConfig
 {
+    public $companyName;
     public $companyLogo;
     public $showNavBars;
     public $fixedNavBar;
@@ -20,6 +21,7 @@ class CeresHeaderConfig extends PluginConfig
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
+        $this->companyName          = $this->getTextValue("header.company_name", "Ceres Webshop" );
         $this->companyLogo          = $this->getTextValue( "header.company_logo", "images/ceres-logo.svg" );
         $this->showNavBars          = $this->getTextValue( "header.show_navbars", "top" );
         $this->fixedNavBar          = $this->getBooleanValue( "header.fixed_navbar", true );

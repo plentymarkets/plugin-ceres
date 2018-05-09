@@ -20,7 +20,8 @@
     "javaScriptFiles"   : [],
     "runOnBuild"        : [
       "Ceres\\Migrations\\WebshopSettingsMigration_0_0_1",
-      "Ceres\\Migrations\\HomepageShopBuilderMigration_0_0_1"
+      "Ceres\\Migrations\\HomepageShopBuilderMigration_0_0_1",
+      "Ceres\\Migrations\\ConfigPropertiesMigration_0_0_1"
     ],
     "dataProviders"     :
     [
