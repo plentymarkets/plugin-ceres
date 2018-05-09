@@ -171,7 +171,7 @@
                                     <strong>{{ trans("Ceres::Template.headerSelectShippingCountry") }}</strong>
                                     <hr>
                                 </div>
-                                <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
+                                <shipping-country-select :disable-input="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
                             </div>
                         </div>
                     </div>

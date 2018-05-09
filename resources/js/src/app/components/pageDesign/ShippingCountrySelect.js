@@ -1,30 +1,45 @@
 Vue.component("shipping-country-select", {
 
-    delimiters: ["${", "}"],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-shipping-country-select"
+        },
 
-    props: [
-        "template",
-        "selectable"
-    ],
+        disableInput:
+        {
+            type: Boolean
+        }
+    },
 
     created()
     {
         this.$options.template = this.template;
     },
 
-    computed: Vuex.mapState({
-        localization: state => state.localization
-    }),
+    computed:
+    {
+        isDisabled()
+        {
+            return !!this.basket.customerInvoiceAddressId || !!this.basket.customerShippingAddressId || this.disableInput;
+        },
+
+        ...Vuex.mapState({
+            localization: state => state.localization,
+            basket: state => state.basket.data
+        })
+    },
 
     methods:
     {
         setShippingCountry(id)
         {
-            if (!this.selectable)
+            if (!this.isDisabled)
             {
                 this.$store.dispatch("selectShippingCountry", id);
             }
         }
     }
 });
-

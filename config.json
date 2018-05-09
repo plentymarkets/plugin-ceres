@@ -737,7 +737,8 @@
             "basket.order_total_gross"      : "Total (Gross)",
             "basket.order_total_net"        : "Total (Net)"
         },
-        "default"                           : "basket.value_of_items_gross, basket.value_of_items_net, basket.shipping_costs_gross, basket.shipping_costs_net, basket.vat, basket.order_total_gross, basket.order_total_net"
+        "default"                           : "basket.value_of_items_gross, basket.value_of_items_net, basket.shipping_costs_gross, basket.shipping_costs_net, basket.vat, basket.order_total_gross, basket.order_total_net",
+        "deprecated"                        : true
     },
     {
         "tab"                               : "Shopping cart",
@@ -754,7 +755,8 @@
             "basket.order_total_gross"      : "Total (Gross)",
             "basket.order_total_net"        : "Total (Net)"
         },
-        "default"                           : "basket.value_of_items_gross, basket.shipping_costs_gross, basket.order_total_gross"
+        "default"                           : "basket.value_of_items_gross, basket.shipping_costs_gross, basket.order_total_gross",
+        "deprecated"                        : true
     },
     {
         "tab"       : "Shopping cart",
