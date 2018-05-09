@@ -8,10 +8,6 @@ Vue.component("basket-totals", {
         {
             type: String
         },
-        config:
-        {
-            type: Array
-        },
         showNetPrices:
         {
             type: Boolean,
@@ -27,17 +23,5 @@ Vue.component("basket-totals", {
     created()
     {
         this.$options.template = this.template;
-    },
-
-    methods: {
-        /**
-         * TODO
-         * @param name
-         * @returns {boolean}
-         */
-        showProperty(name)
-        {
-            return !this.config || this.config.indexOf(name) >= 0 || this.config.indexOf("all") >= 0;
-        }
     }
 });

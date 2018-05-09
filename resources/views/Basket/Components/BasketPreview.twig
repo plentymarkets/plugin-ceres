@@ -28,7 +28,7 @@
         <!-- BASKET PREVIEW BOTTOM -->
         <div class="p-a-1 bg-faded totals">
 
-            <basket-totals template="#vue-basket-totals" :config="{{ config("Ceres.basket.preview_data")|split(', ')|json_encode() }}" :show-net-prices="{{ showNetPrices | json_encode }}"></basket-totals>
+            <basket-totals template="#vue-basket-totals" :show-net-prices="{{ showNetPrices | json_encode }}"></basket-totals>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 m-b-1">
