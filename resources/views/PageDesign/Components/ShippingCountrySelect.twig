@@ -2,7 +2,7 @@
     <ul>
         <div v-for="shippingCountry in localization.shippingCountries">
             <li :class="{'active': localization.shippingCountryId == shippingCountry.id}">
-                <a data-toggle="collapse" href="#countrySettings" @click="setShippingCountry(shippingCountry.id)" :class="{'is-disabled': !isCountrySelectionEnabled}" :disabled="!isCountrySelectionEnabled" v-tooltip="!isCountrySelectionEnabled" data-placement="top" title="{{ trans("Ceres::Template.headerChangeDeliveryCountry") }}">
+                <a data-toggle="collapse" href="#countrySettings" @click="setShippingCountry(shippingCountry.id)" :class="{'is-disabled': isDisabled}" :disabled="isDisabled" v-tooltip="isDisabled" data-placement="top" title="{{ trans("Ceres::Template.headerChangeDeliveryCountry") }}">
                     <i :class="'flag-icon flag-icon-' + shippingCountry.isoCode2.toLowerCase()"></i>
                     ${shippingCountry.currLangName}
                 </a>

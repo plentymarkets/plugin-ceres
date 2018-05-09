@@ -1,7 +1,5 @@
 Vue.component("shipping-country-select", {
 
-    delimiters: ["${", "}"],
-
     props:
     {
         template:
@@ -23,9 +21,9 @@ Vue.component("shipping-country-select", {
 
     computed:
     {
-        isCountrySelectionEnabled()
+        isDisabled()
         {
-            return !this.basket.customerInvoiceAddressId && !this.basket.customerShippingAddressId && !this.disableInput;
+            return !!this.basket.customerInvoiceAddressId || !!this.basket.customerShippingAddressId || this.disableInput;
         },
 
         ...Vuex.mapState({
@@ -38,7 +36,7 @@ Vue.component("shipping-country-select", {
     {
         setShippingCountry(id)
         {
-            if (this.isCountrySelectionEnabled)
+            if (!this.isDisabled)
             {
                 this.$store.dispatch("selectShippingCountry", id);
             }
