@@ -5,7 +5,7 @@
         "label"     : "Name of your store",
         "type"      : "text",
         "default"   : "Ceres Webshop",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "Global",
@@ -47,7 +47,7 @@
         "label"                       : "Opening hours (DE)",
         "type"                        : "text",
         "default"                     : "Montag - Freitag, 00:00 - 24:00",
-        "deprecated"                  : "true"
+        "deprecated"                  : true
     },
     {
         "tab"                         : "Global",
@@ -55,7 +55,7 @@
         "label"                       : "Opening hours (EN)",
         "type"                        : "text",
         "default"                     : "Monday - Friday, 00:00 - 24:00",
-        "deprecated"                  : "true"
+        "deprecated"                  : true
     },
     {
         "tab"                         : "Global",
@@ -340,7 +340,7 @@
         "label"     : "Text of first store feature",
         "type"      : "text",
         "default"   : "Delivery period approx. 1 to 3 business days",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "Footer",
@@ -348,7 +348,7 @@
         "label"     : "Text of second store feature",
         "type"      : "text",
         "default"   : "Free shipping & return",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "Footer",
@@ -356,7 +356,7 @@
         "label"     : "Text of third store feature",
         "type"      : "text",
         "default"   : "100-day return policy",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"           : "Footer",
@@ -377,7 +377,7 @@
         "label"     : "Title of first column",
         "type"      : "text",
         "default"   : "Shop",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "Footer",
@@ -392,7 +392,7 @@
         "label"     : "Title of second column",
         "type"      : "text",
         "default"   : "My account",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "Footer",
@@ -407,7 +407,7 @@
         "label"     : "Title of third column",
         "type"      : "text",
         "default"   : "Service",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "Footer",
@@ -618,7 +618,7 @@
         "label"             : "Name of the first item list (DE)",
         "type"              : "text",
         "default"           : "DE name",
-        "deprecated"        : "true"
+        "deprecated"        : true
     },
     {
         "tab"               : "Item lists",
@@ -626,7 +626,7 @@
         "label"             : "Name of the first item list (EN)",
         "type"              : "text",
         "default"           : "EN name",
-        "deprecated"        : "true"
+        "deprecated"        : true
     },
     {
         "tab"               : "Item lists",
@@ -654,7 +654,7 @@
         "label"             : "Name of the second item list (DE)",
         "type"              : "text",
         "default"           : "DE name",
-        "deprecated"        : "true"
+        "deprecated"        : true
     },
     {
         "tab"               : "Item lists",
@@ -662,7 +662,7 @@
         "label"             : "Name of the second item list (EN)",
         "type"              : "text",
         "default"           : "EN name",
-        "deprecated"        : "true"
+        "deprecated"        : true
     },
     {
         "tab"               : "Item lists",
@@ -690,7 +690,7 @@
         "label"             : "Name of the third item list (DE)",
         "type"              : "text",
         "default"           : "DE name",
-        "deprecated"        : "true"
+        "deprecated"        : true
     },
     {
         "tab"               : "Item lists",
@@ -698,7 +698,7 @@
         "label"             : "Name of the third item list (EN)",
         "type"              : "text",
         "default"           : "EN name",
-        "deprecated"        : "true"
+        "deprecated"        : true
     },
     {
         "tab"               : "Item lists",
@@ -1469,7 +1469,7 @@
         "label"     : "Meta description for homepage (DE)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "SEO",
@@ -1477,7 +1477,7 @@
         "label"     : "Meta description for homepage (EN)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"                         : "SEO",
@@ -1500,7 +1500,7 @@
         "label"     : "Meta description for contact page (DE)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "SEO",
@@ -1508,7 +1508,7 @@
         "label"     : "Meta description for contact page (EN)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"                         : "SEO",
@@ -1531,7 +1531,7 @@
         "label"     : "Meta description for cancellation rights (DE)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "SEO",
@@ -1539,7 +1539,7 @@
         "label"     : "Meta description for cancellation rights (EN)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"                         : "SEO",
@@ -1562,7 +1562,7 @@
         "label"     : "Meta description for cancellation form (DE)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "SEO",
@@ -1570,7 +1570,7 @@
         "label"     : "Meta description for cancellation form (EN)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"                         : "SEO",
@@ -1593,7 +1593,7 @@
         "label"     : "Meta description for legal disclosure (DE)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "SEO",
@@ -1601,7 +1601,7 @@
         "label"     : "Meta description for legal disclosure (EN)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"                         : "SEO",
@@ -1624,7 +1624,7 @@
         "label"     : "Meta description for privacy policy (DE)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "SEO",
@@ -1632,7 +1632,7 @@
         "label"     : "Meta description for privacy policy (EN)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"                         : "SEO",
@@ -1655,7 +1655,7 @@
         "label"     : "Meta description for terms and conditions (DE)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"       : "SEO",
@@ -1663,7 +1663,7 @@
         "label"     : "Meta description for terms and conditions (EN)",
         "type"      : "textarea",
         "default"   : "",
-        "deprecated": "true"
+        "deprecated": true
     },
     {
         "tab"               : "Design",
