@@ -14400,7 +14400,15 @@ Vue.component("basket-totals", {
 
     delimiters: ["${", "}"],
 
-    props: ["config", "template"],
+    props: {
+        template: {
+            type: String
+        },
+        showNetPrices: {
+            type: Boolean,
+            default: true
+        }
+    },
 
     computed: Vuex.mapState({
         basket: function basket(state) {
@@ -14413,18 +14421,6 @@ Vue.component("basket-totals", {
 
     created: function created() {
         this.$options.template = this.template;
-    },
-
-
-    methods: {
-        /**
-         * TODO
-         * @param name
-         * @returns {boolean}
-         */
-        showProperty: function showProperty(name) {
-            return !this.config || this.config.indexOf(name) >= 0 || this.config.indexOf("all") >= 0;
-        }
     }
 });
 
@@ -20229,26 +20225,42 @@ Vue.component("popper", {
 },{"../../helper/dom":114,"../../helper/utils":118,"popper.js":4,"services/ModalService":125}],76:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 Vue.component("shipping-country-select", {
 
-    delimiters: ["${", "}"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-shipping-country-select"
+        },
 
-    props: ["template", "selectable"],
+        disableInput: {
+            type: Boolean
+        }
+    },
 
     created: function created() {
         this.$options.template = this.template;
     },
 
 
-    computed: Vuex.mapState({
+    computed: _extends({
+        isDisabled: function isDisabled() {
+            return !!this.basket.customerInvoiceAddressId || !!this.basket.customerShippingAddressId || this.disableInput;
+        }
+    }, Vuex.mapState({
         localization: function localization(state) {
             return state.localization;
+        },
+        basket: function basket(state) {
+            return state.basket.data;
         }
-    }),
+    })),
 
     methods: {
         setShippingCountry: function setShippingCountry(id) {
-            if (!this.selectable) {
+            if (!this.isDisabled) {
                 this.$store.dispatch("selectShippingCountry", id);
             }
         }
