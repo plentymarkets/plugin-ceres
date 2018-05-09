@@ -27,7 +27,7 @@
                         </div>
                     </div>
 
-                    <basket-totals template="#vue-basket-totals" :config="{{ config("Ceres.basket.preview_data")|split(', ')|json_encode() }}"></basket-totals>
+                    <basket-totals template="#vue-basket-totals" :config="{{ config("Ceres.basket.preview_data")|split(', ')|json_encode() }}" :show-net-prices="{{ showNetPrices | json_encode }}"></basket-totals>
 
                     <div class="row">
                             <div class="col-xs-6">
