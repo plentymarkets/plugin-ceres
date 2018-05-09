@@ -1,5 +1,6 @@
 import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "../../services/UrlService";
 const NotificationService = require("services/NotificationService");
 
 const state =
@@ -109,9 +110,12 @@ const actions =
                     })
                     .fail(error =>
                     {
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.basketOops")
-                        ).closeAfter(10000);
+                        if (error.data)
+                        {
+                            NotificationService.error(
+                                TranslationService.translate("Ceres::Template.basketOops")
+                            ).closeAfter(10000);
+                        }
                     });
             }
             else
@@ -120,7 +124,7 @@ const actions =
             }
 
             ApiService.listen("AfterBasketChanged", data =>
-{
+            {
                 commit("setBasket", data.basket);
                 commit("setBasketItems", data.basketItems);
             });
@@ -196,7 +200,7 @@ const actions =
 
                         if (window.location.pathname === "/checkout" && !basketItems.length)
                         {
-                            window.location.pathname = "/basket";
+                            navigateTo("/basket");
                         }
                     })
                     .fail(error =>
@@ -246,6 +250,23 @@ const actions =
                         commit("setIsBasketLoading", false);
                         reject(error);
                     });
+            });
+        },
+
+        refreshBasket({commit})
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService.get("/rest/io/basket/")
+                        .done(basket =>
+                        {
+                            commit("setBasket", basket);
+                            resolve(basket);
+                        })
+                        .fail(error =>
+                        {
+                            reject(error);
+                        });
             });
         }
     };

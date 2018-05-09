@@ -1,4 +1,6 @@
 import $ from "jquery";
+import {isNullOrUndefined}from "../helper/utils";
+import {normalizeUrl}from "../helper/url";
 
 export function getUrlParams(urlParams)
 {
@@ -58,4 +60,20 @@ export function setUrlParam(key, value)
     setUrlParams(urlParams);
 }
 
-export default {setUrlParam, setUrlParams, getUrlParams};
+export function navigateTo(url)
+{
+    url = normalizeUrl(url);
+    window.location.assign(url);
+}
+
+export function switchUrl(url, title)
+{
+    if (isNullOrUndefined(title))
+    {
+        title = document.getElementsByTagName("title")[0].innerHTML;
+    }
+    url = normalizeUrl(url);
+    window.history.pushState({}, title, url);
+}
+
+export default {setUrlParam, setUrlParams, getUrlParams, navigateTo, switchUrl};

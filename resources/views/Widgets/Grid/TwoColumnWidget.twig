@@ -1,0 +1,6 @@
+{% set layout = widget.settings.layout.mobile %}
+
+<div class="widget widget-grid widget-grid-{% if layout == "oneToOne" %}1-1{% elseif layout == "twoToOne" %}2-1{% else %}1-2{% endif %}">
+    <div class="widget-inner" data-builder-child-container="first">{{ children.first | raw }}</div>
+    <div class="widget-inner" data-builder-child-container="second">{{ children.second | raw }}</div>
+</div>

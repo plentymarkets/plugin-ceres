@@ -84,6 +84,10 @@ class TemplateServiceProvider extends ServiceProvider
         
         $eventDispatcher->listen('IO.ctx.*', function (TemplateContainer $templateContainer, $templateData = []) {
             $templateContextClass = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][1];
+            if(!strlen($templateContextClass))
+            {
+                $templateContextClass = GlobalContext::class;
+            }
             $templateContainer->setContext( $templateContextClass );
         }, self::EVENT_LISTENER_PRIORITY);
 

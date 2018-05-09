@@ -6,6 +6,19 @@
 		display: block;
 		color: $gray-dark;
 
+		.hero-image {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+
+			&.contain {
+				background-size: contain;
+			}
+		}
+
 		.hero-category-inner{
 			position: absolute;
 			width: 100%;
@@ -170,7 +183,6 @@
 		.hero-xtras{
 			flex-flow: column nowrap;	
 			flex: 1 0 24%;
-			padding-left: 1rem;
 		}
 
 		.hero-category{

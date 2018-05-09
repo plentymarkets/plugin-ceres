@@ -1,5 +1,7 @@
 {% extends getPartial('page-design') %}
 
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% set showDefaultHomepage = config("Ceres.default.homepage") %}
 {% set companyLogo  = config("Ceres.header.company_logo") %}
 {% set companyName  = config("Ceres.header.company_name") %}
@@ -23,17 +25,30 @@
 
 {% block PageBody %}
 
-    {% if showDefaultHomepage == "true" %}
+    {% if ceresConfig.homepage.showShopBuilderContent or request.get('isContentBuilder') == 1 %}
 
-        {% include 'Ceres::Homepage.MarketingHomepage.twig' %}
+        <div class="home container-max">
+            <div class="row">
+                <div class="col">
+                    {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
+                        {{ content.result|raw }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
 
     {% else %}
-        {% block ThemeHomepage %}
-
-            {% include 'Ceres::Homepage.DefaultHomepage.twig' %}
-
-        {% endblock %}
+        
+        {% if showDefaultHomepage == "true" %}
+            {% include 'Ceres::Homepage.MarketingHomepage.twig' %}
+        {% else %}
+            {% block ThemeHomepage %}
+                {% include 'Ceres::Homepage.DefaultHomepage.twig' %}
+            {% endblock %}
+        {% endif %}
 
     {% endif %}
+
+    
 
 {% endblock %}

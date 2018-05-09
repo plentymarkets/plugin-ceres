@@ -143,7 +143,6 @@ const actions =
                         commit("setMethodOfPayment", oldMethodOfPayment);
                         reject(error);
                     });
-                resolve();
             });
         },
 
@@ -168,7 +167,23 @@ const actions =
                         commit("setShippingProfile", oldShippingProfile);
                         reject(error);
                     });
-                resolve();
+            });
+        },
+
+        refreshCheckout({commit, dispatch})
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService.get("/rest/io/checkout/")
+                        .done(checkout =>
+                        {
+                            dispatch("setCheckout", checkout);
+                            resolve(checkout);
+                        })
+                        .fail(error =>
+                        {
+                            reject(error);
+                        });
             });
         }
     };

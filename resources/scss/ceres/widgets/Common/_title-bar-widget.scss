@@ -1,0 +1,51 @@
+.widget-title-bar
+{
+    .widget-inner
+    {
+        padding: 1rem 1.5rem;
+        text-align: center;
+    }
+
+    .h1, h1
+    {
+        margin: 0.5rem auto;
+        font-size: 2.5rem;
+        letter-spacing: 1.25px;
+        display: block;
+    }
+
+    &.widget-primary
+    {
+        @include widget-bg-variant($brand-primary);
+    }
+
+    &.widget-secondary
+    {
+        @include widget-bg-variant($brand-secondary);
+    }
+
+    &.widget-success
+    {
+        @include widget-bg-variant($brand-success);
+    }
+
+    &.widget-info
+    {
+        @include widget-bg-variant($brand-info);
+    }
+
+    &.widget-warning
+    {
+        @include widget-bg-variant($brand-warning);
+    }
+
+    &.widget-danger
+    {
+        @include widget-bg-variant($brand-danger);
+    }
+
+    &.widget-inverse
+    {
+        @include widget-bg-variant($brand-inverse);
+    }
+}

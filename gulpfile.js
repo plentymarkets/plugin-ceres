@@ -171,7 +171,7 @@ gulp.task("copy:sass-vendor", function()
             'node_modules/bootstrap/scss/**/*.scss',
             'node_modules/font-awesome/scss/**/*.scss',
             'node_modules/flag-icon-css/sass/**/*.scss',
-            'node_modules/shariff/build/shariff.complete.css'
+            'node_modules/shariff/build/shariff.min.css'
         ])
         .pipe(copy(SCSS_SRC, {prefix: 1}))
 });

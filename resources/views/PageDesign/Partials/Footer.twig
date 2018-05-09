@@ -98,11 +98,7 @@
                     
                     {{ rowTwo }}
 
-                    {% if rowTwo|trim is not empty %}
-                    <div class="col-xs-12 col-sm-6 col-lg-12">
-                    {% else %}
-                    <div class="col-xs-12">
-                    {% endif %}
+                    <div class="col-xs-12{% if rowTwo|trim is not empty %} col-sm-6 col-lg-12{% endif %}">
                         {{ LayoutContainer.show("Ceres::Footer.RowThree") }}
                     </div>
                 </div>
@@ -113,17 +109,17 @@
         <div class="copyright text-xs-center m-y-1">
             <div class="static-link-list">
                 {% autoescape false %}
-                    <a href="/cancellation-rights">{{ trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
+                    <a href="{{ urls.cancellationRights }}">{{ trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
                     {% if config("Ceres.footer.cancellation_use_pdf") == "true" %}
                         <a href="{{ config('Ceres.footer.cancellation_pdf_path') }}" target="_blank">{{ trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
                     {% else %}
-                        <a href="/cancellation-form">{{ trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
+                        <a href="{{ urls.cancellationForm }}">{{ trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
                     {% endif %}
-                    <a href="/legal-disclosure">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
-                    <a href="/privacy-policy">{{ trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
-                    <a href="/gtc">{{ trans("Ceres::Template.footerGtc") }}</a>
+                    <a href="{{ urls.legalDisclosure }}">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
+                    <a href="{{ urls.privacyPolicy }}">{{ trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
+                    <a href="{{ urls.gtc }}">{{ trans("Ceres::Template.footerGtc") }}</a>
                     {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
-                        <a href="/contact">{{ trans("Ceres::Template.footerContact") }}</a>
+                        <a href="{{ urls.contact }}">{{ trans("Ceres::Template.footerContact") }}</a>
                     {% endif %}
                 {% endautoescape %}
             </div>

@@ -1,3 +1,5 @@
+import {navigateTo}from "services/UrlService";
+
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 const ModalService        = require("services/ModalService");
@@ -161,7 +163,7 @@ Vue.component("login", {
                     }
                     else
                     {
-                        window.location.assign(window.location.origin);
+                        navigateTo(window.location.origin);
                     }
 
                     NotificationService.success(

@@ -1,0 +1,39 @@
+{% set layout = widget.settings.layout.mobile %}
+
+{% set gridClass = "widget-grid-1-1-1" %}
+{% if layout == "twoToOneToOne" %}
+    {% set gridClass = "widget-grid-2-1-1" %}
+{% elseif layout == "oneToTwoToOne"%}
+    {% set gridClass = "widget-grid-1-2-1" %}
+{% elseif layout == "oneToOneToTwo" %}
+    {% set gridClass = "widget-grid-1-1-2" %}
+{% elseif layout == "twoToOneStacked" or layout == "oneStackedToTwo"%}
+    {% set gridClass = "widget-grid-stacked" %}
+{% endif %}
+
+
+<div class="widget widget-grid {{ gridClass }}">
+    {% if layout == "oneStackedToTwo" %}
+
+        <div class="widget-inner widget-inner-stacked">
+            <div class="widget-inner" data-builder-child-container="first">{{ children.first | raw }}</div>
+            <div class="widget-inner" data-builder-child-container="second">{{ children.second | raw }}</div>
+        </div>
+        <div class="widget-inner" data-builder-child-container="third">{{ children.third | raw }}</div>
+
+    {% elseif layout == "twoToOneStacked" %}
+
+        <div class="widget-inner" data-builder-child-container="first">{{ children.first | raw }}</div>
+        <div class="widget-inner widget-inner-stacked">
+            <div class="widget-inner" data-builder-child-container="second">{{ children.second | raw }}</div>
+            <div class="widget-inner" data-builder-child-container="third">{{ children.third | raw }}</div>
+        </div>
+
+    {% else %}
+
+        <div class="widget-inner" data-builder-child-container="first">{{ children.first | raw }}</div>
+        <div class="widget-inner" data-builder-child-container="second">{{ children.second | raw }}</div>
+        <div class="widget-inner" data-builder-child-container="third">{{ children.third | raw }}</div>
+
+    {% endif %}
+</div>

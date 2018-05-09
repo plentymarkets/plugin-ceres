@@ -1,3 +1,5 @@
+import {navigateTo}from "services/UrlService";
+
 var ApiService = require("services/ApiService");
 
 Vue.directive("logout",
@@ -16,7 +18,7 @@ Vue.directive("logout",
                         .done(
                             function()
                             {
-                                window.location.assign(window.location.origin);
+                                navigateTo(window.location.origin);
                             })
                         .fail(
                             function()

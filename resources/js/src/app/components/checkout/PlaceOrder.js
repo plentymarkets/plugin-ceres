@@ -2,6 +2,7 @@ var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "services/UrlService";
 
 Vue.component("place-order", {
 
@@ -39,7 +40,7 @@ Vue.component("place-order", {
 
             if (this.contactWish && this.contactWish.length > 0)
             {
-                ApiService.post("/rest/io/order/contactWish", {checkoutContactWish: this.contactWish}, {supressNotifications: true})
+                ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish}, {supressNotifications: true})
                     .always(() =>
                     {
                         this.preparePayment();
@@ -107,8 +108,8 @@ Vue.component("place-order", {
                 var target = this.targetContinue;
 
                 if (target)
-                    {
-                    window.location.assign(target);
+                {
+                    navigateTo(target);
                 }
                 break;
             case "redirectUrl":

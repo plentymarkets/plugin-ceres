@@ -7,6 +7,7 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresHomepageConfig extends PluginConfig
 {
+    public $showShopBuilderContent;
     public $showDefaultHomepage;
 
     public $sliderItemId1;
@@ -32,13 +33,14 @@ class CeresHomepageConfig extends PluginConfig
     {
         parent::__construct($configRepository, "Ceres");
 
+        $this->showShopBuilderContent = $this->getBooleanValue( "homepage.showShopBuilderContent", false );
         $this->showDefaultHomepage  = $this->getBooleanValue( "default.homepage", true );
         $this->sliderItemId1        = $this->getIntegerValue( "homepage.sliderItemId1" );
         $this->sliderImageUrl1      = $this->getTextValue( "homepage.sliderImageUrl1" );
         $this->sliderItemId2        = $this->getIntegerValue( "homepage.sliderItemId2" );
-        $this->sliderImageUrl1      = $this->getTextValue( "homepage.sliderImageUrl2" );
+        $this->sliderImageUrl2      = $this->getTextValue( "homepage.sliderImageUrl2" );
         $this->sliderItemId3        = $this->getIntegerValue( "homepage.sliderItemId3" );
-        $this->sliderImageUrl1      = $this->getTextValue( "homepage.sliderImageUrl3" );
+        $this->sliderImageUrl3      = $this->getTextValue( "homepage.sliderImageUrl3" );
         $this->heroExtraItemId1     = $this->getIntegerValue( "homepage.heroExtraItemId1" );
         $this->heroExtraImageUrl1   = $this->getTextValue( "homepage.heroExtraImageUrl1" );
         $this->heroExtraItemId2     = $this->getIntegerValue( "homepage.heroExtraItemId2" );

@@ -21,8 +21,7 @@
         <a class="right carousel-control" href="#carousel-example" data-slide="next"><i
                     class="icon-next fa fa-angle-right"></i></a>
     </div>
-</div>
-<div class="container-max mkt-homepage">
+
     <div class="row">
         <div class="col-lg-6">
             <h1 id="welcome-text">{% autoescape false %}{{ homepageData.texts.welcome }}{% endautoescape %}</h1>
@@ -47,7 +46,7 @@
             <ul class="flex-container" id="recommended-plugins">
                 {% for plugin in homepageData.recommended | shuffle %}
                     <li class="flex-item">
-                        <a target="_blank" href="{{ plugin.pluginLink }}">
+                        <a rel="noopener noreferrer" target="_blank" href="{{ plugin.pluginLink }}">
                             <img class="flex-image" src="{{ plugin.pluginIcon }}" />
                             <div class="flex-align-bottom">
                                 <h1 class="flex-title">{% autoescape false %}{{ plugin.pluginTitle }}{% endautoescape %}</h1>

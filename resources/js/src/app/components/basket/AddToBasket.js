@@ -1,5 +1,6 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "services/UrlService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -114,17 +115,22 @@ Vue.component("add-to-basket", {
                 this.$store.dispatch("addBasketItem", basketObject).then(
                     response =>
                     {
+                        document.dispatchEvent(new CustomEvent("afterBasketItemAdded", {detail: basketObject}));
                         this.waiting = false;
                         this.openAddToBasketOverlay(basketObject.quantity);
                     },
                     error =>
                     {
                         this.waiting = false;
-                        NotificationService.error(
-                            TranslationService.translate(
-                                "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
-                            )
-                        ).closeAfter(5000);
+
+                        if (error.data)
+                        {
+                            NotificationService.error(
+                                TranslationService.translate(
+                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                )
+                            ).closeAfter(5000);
+                        }
                     });
             }
         },
@@ -145,7 +151,7 @@ Vue.component("add-to-basket", {
 
         directToItem()
         {
-            window.location.assign(this.itemUrl);
+            navigateTo(this.itemUrl);
         },
 
         handleButtonState(value)
