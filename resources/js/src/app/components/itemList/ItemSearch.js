@@ -1,6 +1,6 @@
 import UrlService from "services/UrlService";
 import TranslationService from "services/TranslationService";
-import {isDefined}from "../../helper/utils";
+import {isNullOrUndefined}from "../../helper/utils";
 
 Vue.component("item-search", {
 
@@ -13,7 +13,8 @@ Vue.component("item-search", {
     data()
     {
         return {
-            currentSearchString: ""
+            currentSearchString: "",
+            preventSearch: false
         };
     },
 
@@ -43,9 +44,10 @@ Vue.component("item-search", {
     {
         search()
         {
-            if (this.currentSearchString.length && isDefined(document.querySelector(".autocomplete-selected")))
+            if (this.currentSearchString.length &&
+                isNullOrUndefined(document.querySelector(".autocomplete-selected")) &&
+                !this.preventSearch)
             {
-                console.log("SEARCH");
                 if (document.location.pathname === "/search")
                 {
                     this.updateTitle(this.currentSearchString);
@@ -60,8 +62,8 @@ Vue.component("item-search", {
 
         openItem(suggestion)
         {
-            console.log("Open");
-            window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
+            this.preventSearch = true;
+            windw.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
         },
 
         updateTitle(searchString)
