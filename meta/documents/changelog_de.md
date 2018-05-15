@@ -11,7 +11,7 @@
 
 ### ToDo
 
-- Plugins und Themes, die auf Übersetzungstexte aus Ceres .properties Dateien zugreifen, müssen gegebenenfalls überarbeitet werden. Weitere Informationen unter: https://forum.plentymarkets.com/t/ankuendigung-anpassung-der-properties-dateien-in-ceres/340077
+- Plugins und Themes, die auf Übersetzungstexte in Ceres .properties Dateien zugreifen, müssen gegebenenfalls überarbeitet werden. Weitere Informationen unter: https://forum.plentymarkets.com/t/ankuendigung-anpassung-der-properties-dateien-in-ceres/340077
 - Wenn die Artikelsortierung nach Preis aktiv ist, muss sie in der Ceres Konfiguration unter "Paginating and Sorting » Enable item sorting by" neu ausgewählt und erneut gespeichert werden.
 
 ### Hinzugefügt
