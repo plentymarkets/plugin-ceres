@@ -1,9 +1,17 @@
 # Release Notes für Ceres
 
+## v2.8.1 (2018-05-15) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.8.0...2.8.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurden die Einstellungen des Bilderkarussell-Widgets des Shop Builders nicht korrekt ausgegeben. Dies wurde behoben.
+- Durch einen Fehler konnte im Checkout nicht auf die Verlinkung zur Widerrufsbelehrung geklickt werden. Dies wurde behoben.
+
 ## v2.8.0 (2018-05-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.7.0...2.8.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### ToDo
 
+- Plugins und Themes, die auf Übersetzungstexte aus Ceres .properties Dateien zugreifen, müssen gegebenenfalls überarbeitet werden. Weitere Informationen unter: https://forum.plentymarkets.com/t/ankuendigung-anpassung-der-properties-dateien-in-ceres/340077
 - Wenn die Artikelsortierung nach Preis aktiv ist, muss sie in der Ceres Konfiguration unter "Paginating and Sorting » Enable item sorting by" neu ausgewählt und erneut gespeichert werden.
 
 ### Hinzugefügt
