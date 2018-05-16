@@ -11,6 +11,7 @@ const state =
             methodOfPaymentList: []
         },
         contactWish: null,
+        shippingPrivacyHintAccepted: false,
         validation: {
             gtc: {
                 showError: false,
@@ -68,6 +69,11 @@ const mutations =
         setContactWish(state, contactWish)
         {
             state.contactWish = contactWish;
+        },
+
+        setShippingPrivacyHintAccepted(state, value)
+        {
+            state.shippingPrivacyHintAccepted = value;
         },
 
         setPaymentProviderValidator(state, paymentProviderValidator)
