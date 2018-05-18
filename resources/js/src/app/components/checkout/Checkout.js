@@ -122,6 +122,10 @@ Vue.component("checkout", {
                     );
                     return true;
                 }
+                else if (oldList[index].shippingPrivacyInformation !== newList[index].shippingPrivacyInformation)
+                {
+                    return true;
+                }
             }
 
             return false;
