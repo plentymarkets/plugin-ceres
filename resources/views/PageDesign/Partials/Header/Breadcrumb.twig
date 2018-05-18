@@ -13,7 +13,7 @@
             {% for category in categoryBreadcrumbs[:categoryBreadcrumbs | length - 1] if not break %}
                 {% if category.details[0] %}
                     <li class="breadcrumb-item">
-                        <a href="{{ services.category.getURL( category ) }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}', alwaysOpen: true }">{{ category.details[0].name }}</a>
+                        <a href="{{ services.category.getURLById( category.id ) }}{{ urls.trailingSlashSuffix }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}', alwaysOpen: true }">{{ category.details[0].name }}</a>
                     </li>
                 {% else %}
                     {% set break = true %}
