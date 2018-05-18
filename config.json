@@ -3221,6 +3221,7 @@
             "label": "Config.DesignTab",
             "formFields": {
                 "brand-primary": {
+                    "type": "colorPicker",
                     "required": false,
                     "label": "Config.brandPrimaryLabel",
                     "options": {
@@ -3228,6 +3229,7 @@
                     }
                 },
                 "brand-secondary": {
+                    "type": "colorPicker",
                     "required": false,
                     "label": "Config.brandSecondaryLabel",
                     "options": {
@@ -3235,6 +3237,7 @@
                     }
                 },
                 "brand-success": {
+                    "type": "colorPicker",
                     "required": false,
                     "label": "Config.brandSuccessLabel",
                     "options": {
@@ -3242,6 +3245,7 @@
                     }
                 },
                 "brand-info": {
+                    "type": "colorPicker",
                     "required": false,
                     "label": "Config.brandInfoLabel",
                     "options": {
@@ -3249,6 +3253,7 @@
                     }
                 },
                 "brand-warning": {
+                    "type": "colorPicker",
                     "required": false,
                     "label": "Config.brandWarningLabel",
                     "options": {
@@ -3256,6 +3261,7 @@
                     }
                 },
                 "brand-danger": {
+                    "type": "colorPicker",
                     "required": false,
                     "label": "Config.brandDangerLabel",
                     "options": {
