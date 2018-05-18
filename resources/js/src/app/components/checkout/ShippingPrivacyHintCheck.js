@@ -19,9 +19,18 @@ Vue.component("shipping-privacy-hint-check", {
             return this.shippingProfileList.find(profile => profile.parcelServicePresetId === this.shippingProfileId);
         },
 
-        showHint()
+        currentHintedAddresses()
         {
-            return this.currentShippingProfile.showDataPrivacyAgreementHint;
+            const filteredList = this.currentShippingProfile.shippingPrivacyInformation.filter(entry => !!entry.showDataPrivacyAgreementHint);
+
+            const addresses = [];
+
+            for (const info of filteredList)
+            {
+                addresses.push({ name: info.parcelServiceName, address: info.parcelServiceAddress });
+            }
+
+            return addresses;
         },
 
         currentShippingProviderAddress()
