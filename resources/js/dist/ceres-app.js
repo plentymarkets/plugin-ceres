@@ -14882,6 +14882,8 @@ Vue.component("checkout", {
                 } else if (oldList[index].shippingAmount !== newList[index].shippingAmount) {
                     NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfilePriceChanged"));
                     return true;
+                } else if (oldList[index].shippingPrivacyInformation !== newList[index].shippingPrivacyInformation) {
+                    return true;
                 }
             }
 
@@ -15205,8 +15207,39 @@ Vue.component("shipping-privacy-hint-check", {
                 return profile.parcelServicePresetId === _this.shippingProfileId;
             });
         },
-        showHint: function showHint() {
-            return this.currentShippingProfile.showDataPrivacyAgreementHint;
+        currentHintedAddresses: function currentHintedAddresses() {
+            var filteredList = this.currentShippingProfile.shippingPrivacyInformation.filter(function (entry) {
+                return !!entry.showDataPrivacyAgreementHint;
+            });
+
+            var addresses = [];
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = filteredList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var info = _step.value;
+
+                    addresses.push({ name: info.parcelServiceName, address: info.parcelServiceAddress });
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return addresses;
         },
         currentShippingProviderAddress: function currentShippingProviderAddress() {
             return this.currentShippingProfile.shippingServiceProviderAddress;
