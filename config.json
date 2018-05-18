@@ -2223,43 +2223,43 @@
                         "checkBoxValues": [
                             {
                                 "value": "billing_address.name1",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.name1"
+                                "caption": "Config.addressFieldName1"
                             },
                             {
                                 "value": "billing_address.vatNumber",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.vatNumber"
+                                "caption": "Config.addressFieldVatNumber"
                             },
                             {
                                 "value": "billing_address.salutation",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.salutation"
+                                "caption": "Config.addressFieldSalutation"
                             },
                             {
                                 "value": "billing_address.title",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.title"
+                                "caption": "Config.addressFieldTitle"
                             },
                             {
                                 "value": "billing_address.birthday",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.birthday"
+                                "caption": "Config.addressFieldBirthday"
                             },
                             {
                                 "value": "billing_address.name4",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.name4"
+                                "caption": "Config.addressFieldName4"
                             },
                             {
                                 "value": "billing_address.address3",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.address3"
+                                "caption": "Config.addressFieldAddress3"
                             },
                             {
                                 "value": "billing_address.address4",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.address4"
+                                "caption": "Config.addressFieldAddress4"
                             },
                             {
                                 "value": "billing_address.stateId",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.stateId"
+                                "caption": "Config.addressFieldStateId"
                             },
                             {
                                 "value": "billing_address.phoneNumber",
-                                "caption": "Config.billingAddressShowPossibleValue-billing_address.phoneNumber"
+                                "caption": "Config.addressFieldPhoneNumber"
                             }
                         ]
                     }
@@ -2273,43 +2273,43 @@
                         "checkBoxValues": [
                             {
                                 "value": "billing_address.name1",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.name1"
+                                "caption": "Config.addressFieldName1"
                             },
                             {
                                 "value": "billing_address.vatNumber",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.vatNumber"
+                                "caption": "Config.addressFieldVatNumber"
                             },
                             {
                                 "value": "billing_address.salutation",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.salutation"
+                                "caption": "Config.addressFieldSalutation"
                             },
                             {
                                 "value": "billing_address.title",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.title"
+                                "caption": "Config.addressFieldTitle"
                             },
                             {
                                 "value": "billing_address.birthday",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.birthday"
+                                "caption": "Config.addressFieldBirthday"
                             },
                             {
                                 "value": "billing_address.name4",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.name4"
+                                "caption": "Config.addressFieldName4"
                             },
                             {
                                 "value": "billing_address.address3",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.address3"
+                                "caption": "Config.addressFieldAddress3"
                             },
                             {
                                 "value": "billing_address.address4",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.address4"
+                                "caption": "Config.addressFieldAddress4"
                             },
                             {
                                 "value": "billing_address.stateId",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.stateId"
+                                "caption": "Config.addressFieldStateId"
                             },
                             {
                                 "value": "billing_address.phoneNumber",
-                                "caption": "Config.billingAddressRequirePossibleValue-billing_address.phoneNumber"
+                                "caption": "Config.addressFieldPhoneNumber"
                             }
                         ]
                     }
@@ -2323,35 +2323,35 @@
                         "checkBoxValues": [
                             {
                                 "value": "delivery_address.name1",
-                                "caption": "Config.deliveryAddressShowPossibleValue-delivery_address.name1"
+                                "caption": "Config.addressFieldName1"
                             },
                             {
                                 "value": "delivery_address.salutation",
-                                "caption": "Config.deliveryAddressShowPossibleValue-delivery_address.salutation"
+                                "caption": "Config.addressFieldSalutation"
                             },
                             {
                                 "value": "delivery_address.title",
-                                "caption": "Config.deliveryAddressShowPossibleValue-delivery_address.title"
+                                "caption": "Config.addressFieldTitle"
                             },
                             {
                                 "value": "delivery_address.name4",
-                                "caption": "Config.deliveryAddressShowPossibleValue-delivery_address.name4"
+                                "caption": "Config.addressFieldName4"
                             },
                             {
                                 "value": "delivery_address.address3",
-                                "caption": "Config.deliveryAddressShowPossibleValue-delivery_address.address3"
+                                "caption": "Config.addressFieldAddress3"
                             },
                             {
                                 "value": "delivery_address.address4",
-                                "caption": "Config.deliveryAddressShowPossibleValue-delivery_address.address4"
+                                "caption": "Config.addressFieldAddress4"
                             },
                             {
                                 "value": "delivery_address.stateId",
-                                "caption": "Config.deliveryAddressShowPossibleValue-delivery_address.stateId"
+                                "caption": "Config.addressFieldStateId"
                             },
                             {
                                 "value": "delivery_address.phoneNumber",
-                                "caption": "Config.deliveryAddressShowPossibleValue-delivery_address.phoneNumber"
+                                "caption": "Config.addressFieldPhoneNumber"
                             }
                         ]
                     }
@@ -2365,35 +2365,35 @@
                         "checkBoxValues": [
                             {
                                 "value": "delivery_address.name1",
-                                "caption": "Config.deliveryAddressRequirePossibleValue-delivery_address.name1"
+                                "caption": "Config.addressFieldName1"
                             },
                             {
                                 "value": "delivery_address.salutation",
-                                "caption": "Config.deliveryAddressRequirePossibleValue-delivery_address.salutation"
+                                "caption": "Config.addressFieldSalutation"
                             },
                             {
                                 "value": "delivery_address.title",
-                                "caption": "Config.deliveryAddressRequirePossibleValue-delivery_address.title"
+                                "caption": "Config.addressFieldTitle"
                             },
                             {
                                 "value": "delivery_address.name4",
-                                "caption": "Config.deliveryAddressRequirePossibleValue-delivery_address.name4"
+                                "caption": "Config.addressFieldName4"
                             },
                             {
                                 "value": "delivery_address.address3",
-                                "caption": "Config.deliveryAddressRequirePossibleValue-delivery_address.address3"
+                                "caption": "Config.addressFieldAddress3"
                             },
                             {
                                 "value": "delivery_address.address4",
-                                "caption": "Config.deliveryAddressRequirePossibleValue-delivery_address.address4"
+                                "caption": "Config.addressFieldAddress4"
                             },
                             {
                                 "value": "delivery_address.stateId",
-                                "caption": "Config.deliveryAddressRequirePossibleValue-delivery_address.stateId"
+                                "caption": "Config.addressFieldStateId"
                             },
                             {
                                 "value": "delivery_address.phoneNumber",
-                                "caption": "Config.deliveryAddressRequirePossibleValue-delivery_address.phoneNumber"
+                                "caption": "Config.addressFieldPhoneNumber"
                             }
                         ]
                     }
@@ -2407,43 +2407,43 @@
                         "checkBoxValues": [
                             {
                                 "value": "billing_address.name1",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.name1"
+                                "caption": "Config.addressFieldEnName1"
                             },
                             {
                                 "value": "billing_address.vatNumber",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.vatNumber"
+                                "caption": "Config.addressFieldEnVatNumber"
                             },
                             {
                                 "value": "billing_address.salutation",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.salutation"
+                                "caption": "Config.addressFieldEnSalutation"
                             },
                             {
                                 "value": "billing_address.title",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.title"
+                                "caption": "Config.addressFieldEnTitle"
                             },
                             {
                                 "value": "billing_address.birthday",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.birthday"
+                                "caption": "Config.addressFieldEnBirthday"
                             },
                             {
                                 "value": "billing_address.name4",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.name4"
+                                "caption": "Config.addressFieldEnName4"
                             },
                             {
                                 "value": "billing_address.address2",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.address2"
+                                "caption": "Config.addressFieldEnAddress2"
                             },
                             {
                                 "value": "billing_address.address3",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.address3"
+                                "caption": "Config.addressFieldEnAddress3"
                             },
                             {
                                 "value": "billing_address.address4",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.address4"
+                                "caption": "Config.addressFieldEnAddress4"
                             },
                             {
                                 "value": "billing_address.phoneNumber",
-                                "caption": "Config.billingAddressEnShowPossibleValue-billing_address.phoneNumber"
+                                "caption": "Config.addressFieldEnPhoneNumber"
                             }
                         ]
                     }
@@ -2457,43 +2457,43 @@
                         "checkBoxValues": [
                             {
                                 "value": "billing_address.name1",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.name1"
+                                "caption": "Config.addressFieldEnName1"
                             },
                             {
                                 "value": "billing_address.vatNumber",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.vatNumber"
+                                "caption": "Config.addressFieldEnVatNumber"
                             },
                             {
                                 "value": "billing_address.salutation",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.salutation"
+                                "caption": "Config.addressFieldEnSalutation"
                             },
                             {
                                 "value": "billing_address.title",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.title"
+                                "caption": "Config.addressFieldEnTitle"
                             },
                             {
                                 "value": "billing_address.birthday",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.birthday"
+                                "caption": "Config.addressFieldEnBirthday"
                             },
                             {
                                 "value": "billing_address.name4",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.name4"
+                                "caption": "Config.addressFieldEnName4"
                             },
                             {
                                 "value": "billing_address.address2",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.address2"
+                                "caption": "Config.addressFieldEnAddress2"
                             },
                             {
                                 "value": "billing_address.address3",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.address3"
+                                "caption": "Config.addressFieldEnAddress3"
                             },
                             {
                                 "value": "billing_address.address4",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.address4"
+                                "caption": "Config.addressFieldEnAddress4"
                             },
                             {
                                 "value": "billing_address.phoneNumber",
-                                "caption": "Config.billingAddressEnRequirePossibleValue-billing_address.phoneNumber"
+                                "caption": "Config.addressFieldEnPhoneNumber"
                             }
                         ]
                     }
@@ -2507,35 +2507,35 @@
                         "checkBoxValues": [
                             {
                                 "value": "delivery_address.name1",
-                                "caption": "Config.deliveryAddressEnShowPossibleValue-delivery_address.name1"
+                                "caption": "Config.addressFieldEnName1"
                             },
                             {
                                 "value": "delivery_address.salutation",
-                                "caption": "Config.deliveryAddressEnShowPossibleValue-delivery_address.salutation"
+                                "caption": "Config.addressFieldEnSalutation"
                             },
                             {
                                 "value": "delivery_address.title",
-                                "caption": "Config.deliveryAddressEnShowPossibleValue-delivery_address.title"
+                                "caption": "Config.addressFieldEnTitle"
                             },
                             {
                                 "value": "delivery_address.name4",
-                                "caption": "Config.deliveryAddressEnShowPossibleValue-delivery_address.name4"
+                                "caption": "Config.addressFieldEnName4"
                             },
                             {
                                 "value": "delivery_address.address2",
-                                "caption": "Config.deliveryAddressEnShowPossibleValue-delivery_address.address2"
+                                "caption": "Config.addressFieldEnAddress2"
                             },
                             {
                                 "value": "delivery_address.address3",
-                                "caption": "Config.deliveryAddressEnShowPossibleValue-delivery_address.address3"
+                                "caption": "Config.addressFieldEnAddress3"
                             },
                             {
                                 "value": "delivery_address.address4",
-                                "caption": "Config.deliveryAddressEnShowPossibleValue-delivery_address.address4"
+                                "caption": "Config.addressFieldEnAddress4"
                             },
                             {
                                 "value": "delivery_address.phoneNumber",
-                                "caption": "Config.deliveryAddressEnShowPossibleValue-delivery_address.phoneNumber"
+                                "caption": "Config.addressFieldEnPhoneNumber"
                             }
                         ]
                     }
@@ -2549,35 +2549,35 @@
                         "checkBoxValues": [
                             {
                                 "value": "delivery_address.name1",
-                                "caption": "Config.deliveryAddressEnRequirePossibleValue-delivery_address.name1"
+                                "caption": "Config.addressFieldEnName1"
                             },
                             {
                                 "value": "delivery_address.salutation",
-                                "caption": "Config.deliveryAddressEnRequirePossibleValue-delivery_address.salutation"
+                                "caption": "Config.addressFieldEnSalutation"
                             },
                             {
                                 "value": "delivery_address.title",
-                                "caption": "Config.deliveryAddressEnRequirePossibleValue-delivery_address.title"
+                                "caption": "Config.addressFieldEnTitle"
                             },
                             {
                                 "value": "delivery_address.name4",
-                                "caption": "Config.deliveryAddressEnRequirePossibleValue-delivery_address.name4"
+                                "caption": "Config.addressFieldEnName4"
                             },
                             {
                                 "value": "delivery_address.address2",
-                                "caption": "Config.deliveryAddressEnRequirePossibleValue-delivery_address.address2"
+                                "caption": "Config.addressFieldEnAddress2"
                             },
                             {
                                 "value": "delivery_address.address3",
-                                "caption": "Config.deliveryAddressEnRequirePossibleValue-delivery_address.address3"
+                                "caption": "Config.addressFieldEnAddress3"
                             },
                             {
                                 "value": "delivery_address.address4",
-                                "caption": "Config.deliveryAddressEnRequirePossibleValue-delivery_address.address4"
+                                "caption": "Config.addressFieldEnAddress4"
                             },
                             {
                                 "value": "delivery_address.phoneNumber",
-                                "caption": "Config.deliveryAddressEnRequirePossibleValue-delivery_address.phoneNumber"
+                                "caption": "Config.addressFieldEnPhoneNumber"
                             }
                         ]
                     }
@@ -2596,79 +2596,79 @@
                         "checkBoxValues": [
                             {
                                 "value": "de",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-de"
+                                "caption": "Config.languageActiveLanguagesDe"
                             },
                             {
                                 "value": "en",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-en"
+                                "caption": "Config.languageActiveLanguagesEn"
                             },
                             {
                                 "value": "bg",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-bg"
+                                "caption": "Config.languageActiveLanguagesBg"
                             },
                             {
                                 "value": "fr",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-fr"
+                                "caption": "Config.languageActiveLanguagesFr"
                             },
                             {
                                 "value": "it",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-it"
+                                "caption": "Config.languageActiveLanguagesIt"
                             },
                             {
                                 "value": "es",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-es"
+                                "caption": "Config.languageActiveLanguagesEs"
                             },
                             {
                                 "value": "tr",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-tr"
+                                "caption": "Config.languageActiveLanguagesTr"
                             },
                             {
                                 "value": "nl",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-nl"
+                                "caption": "Config.languageActiveLanguagesNl"
                             },
                             {
                                 "value": "pl",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-pl"
+                                "caption": "Config.languageActiveLanguagesPl"
                             },
                             {
                                 "value": "pt",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-pt"
+                                "caption": "Config.languageActiveLanguagesPt"
                             },
                             {
                                 "value": "nn",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-nn"
+                                "caption": "Config.languageActiveLanguagesNn"
                             },
                             {
                                 "value": "ro",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-ro"
+                                "caption": "Config.languageActiveLanguagesRo"
                             },
                             {
                                 "value": "da",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-da"
+                                "caption": "Config.languageActiveLanguagesDa"
                             },
                             {
                                 "value": "se",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-se"
+                                "caption": "Config.languageActiveLanguagesSe"
                             },
                             {
                                 "value": "cz",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-cz"
+                                "caption": "Config.languageActiveLanguagesCz"
                             },
                             {
                                 "value": "ru",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-ru"
+                                "caption": "Config.languageActiveLanguagesRu"
                             },
                             {
                                 "value": "sk",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-sk"
+                                "caption": "Config.languageActiveLanguagesSk"
                             },
                             {
                                 "value": "cn",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-cn"
+                                "caption": "Config.languageActiveLanguagesCn"
                             },
                             {
                                 "value": "vn",
-                                "caption": "Config.languageActiveLanguagesPossibleValue-vn"
+                                "caption": "Config.languageActiveLanguagesVn"
                             }
                         ]
                     }
