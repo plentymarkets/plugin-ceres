@@ -2687,11 +2687,11 @@
                         "selectBoxValues": [
                             {
                                 "value": "name",
-                                "caption": "Config.currencyFormatPossibleValue-name"
+                                "caption": "Config.currencyFormatName"
                             },
                             {
                                 "value": "symbol",
-                                "caption": "Config.currencyFormatPossibleValue-symbol"
+                                "caption": "Config.currencyFormatSymbol"
                             }
                         ]
                     }
@@ -2713,15 +2713,15 @@
                         "selectBoxValues": [
                             {
                                 "value": "name",
-                                "caption": "Config.currencyFormatSelectionPossibleValue-name"
+                                "caption": "Config.currencyFormatName"
                             },
                             {
                                 "value": "symbol",
-                                "caption": "Config.currencyFormatSelectionPossibleValue-symbol"
+                                "caption": "Config.currencyFormatSymbol"
                             },
                             {
                                 "value": "all",
-                                "caption": "Config.currencyFormatSelectionPossibleValue-all"
+                                "caption": "Config.currencyFormatAll"
                             }
                         ]
                     }
@@ -2735,155 +2735,155 @@
                         "checkBoxValues": [
                             {
                                 "value": "AED",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-AED"
+                                "caption": "Config.currencyAvailableCurrenciesAED"
                             },
                             {
                                 "value": "ARS",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-ARS"
+                                "caption": "Config.currencyAvailableCurrenciesARS"
                             },
                             {
                                 "value": "AUD",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-AUD"
+                                "caption": "Config.currencyAvailableCurrenciesAUD"
                             },
                             {
                                 "value": "BGN",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-BGN"
+                                "caption": "Config.currencyAvailableCurrenciesBGN"
                             },
                             {
                                 "value": "BHD",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-BHD"
+                                "caption": "Config.currencyAvailableCurrenciesBHD"
                             },
                             {
                                 "value": "BRL",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-BRL"
+                                "caption": "Config.currencyAvailableCurrenciesBRL"
                             },
                             {
                                 "value": "CAD",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-CAD"
+                                "caption": "Config.currencyAvailableCurrenciesCAD"
                             },
                             {
                                 "value": "CHF",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-CHF"
+                                "caption": "Config.currencyAvailableCurrenciesCHF"
                             },
                             {
                                 "value": "CNY",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-CNY"
+                                "caption": "Config.currencyAvailableCurrenciesCNY"
                             },
                             {
                                 "value": "CZK",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-CZK"
+                                "caption": "Config.currencyAvailableCurrenciesCZK"
                             },
                             {
                                 "value": "DKK",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-DKK"
+                                "caption": "Config.currencyAvailableCurrenciesDKK"
                             },
                             {
                                 "value": "EUR",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-EUR"
+                                "caption": "Config.currencyAvailableCurrenciesEUR"
                             },
                             {
                                 "value": "GBP",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-GBP"
+                                "caption": "Config.currencyAvailableCurrenciesGBP"
                             },
                             {
                                 "value": "HKD",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-HKD"
+                                "caption": "Config.currencyAvailableCurrenciesHKD"
                             },
                             {
                                 "value": "HRK",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-HRK"
+                                "caption": "Config.currencyAvailableCurrenciesHRK"
                             },
                             {
                                 "value": "HUF",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-HUF"
+                                "caption": "Config.currencyAvailableCurrenciesHUF"
                             },
                             {
                                 "value": "IDR",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-IDR"
+                                "caption": "Config.currencyAvailableCurrenciesIDR"
                             },
                             {
                                 "value": "INR",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-INR"
+                                "caption": "Config.currencyAvailableCurrenciesINR"
                             },
                             {
                                 "value": "JPY",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-JPY"
+                                "caption": "Config.currencyAvailableCurrenciesJPY"
                             },
                             {
                                 "value": "MXN",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-MXN"
+                                "caption": "Config.currencyAvailableCurrenciesMXN"
                             },
                             {
                                 "value": "MYR",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-MYR"
+                                "caption": "Config.currencyAvailableCurrenciesMYR"
                             },
                             {
                                 "value": "NOK",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-NOK"
+                                "caption": "Config.currencyAvailableCurrenciesNOK"
                             },
                             {
                                 "value": "NZD",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-NZD"
+                                "caption": "Config.currencyAvailableCurrenciesNZD"
                             },
                             {
                                 "value": "PHP",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-PHP"
+                                "caption": "Config.currencyAvailableCurrenciesPHP"
                             },
                             {
                                 "value": "PLN",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-PLN"
+                                "caption": "Config.currencyAvailableCurrenciesPLN"
                             },
                             {
                                 "value": "QAR",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-QAR"
+                                "caption": "Config.currencyAvailableCurrenciesQAR"
                             },
                             {
                                 "value": "RON",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-RON"
+                                "caption": "Config.currencyAvailableCurrenciesRON"
                             },
                             {
                                 "value": "RUB",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-RUB"
+                                "caption": "Config.currencyAvailableCurrenciesRUB"
                             },
                             {
                                 "value": "SEK",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-SEK"
+                                "caption": "Config.currencyAvailableCurrenciesSEK"
                             },
                             {
                                 "value": "SGD",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-SGD"
+                                "caption": "Config.currencyAvailableCurrenciesSGD"
                             },
                             {
                                 "value": "THB",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-THB"
+                                "caption": "Config.currencyAvailableCurrenciesTHB"
                             },
                             {
                                 "value": "TRY",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-TRY"
+                                "caption": "Config.currencyAvailableCurrenciesTRY"
                             },
                             {
                                 "value": "TWD",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-TWD"
+                                "caption": "Config.currencyAvailableCurrenciesTWD"
                             },
                             {
                                 "value": "UAH",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-UAH"
+                                "caption": "Config.currencyAvailableCurrenciesUAH"
                             },
                             {
                                 "value": "USD",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-USD"
+                                "caption": "Config.currencyAvailableCurrenciesUSD"
                             },
                             {
                                 "value": "VND",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-VND"
+                                "caption": "Config.currencyAvailableCurrenciesVND"
                             },
                             {
                                 "value": "XCD",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-XCD"
+                                "caption": "Config.currencyAvailableCurrenciesXCD"
                             },
                             {
                                 "value": "ZAR",
-                                "caption": "Config.currencyAvailableCurrenciesPossibleValue-ZAR"
+                                "caption": "Config.currencyAvailableCurrenciesZAR"
                             }
                         ]
                     }
@@ -2902,23 +2902,23 @@
                         "selectBoxValues": [
                             {
                                 "value": "all",
-                                "caption": "Config.metaRobotsHomePossibleValue-all"
+                                "caption": "Config.metaRobotsAll"
                             },
                             {
                                 "value": "index",
-                                "caption": "Config.metaRobotsHomePossibleValue-index"
+                                "caption": "Config.metaRobotsIndex"
                             },
                             {
                                 "value": "nofollow",
-                                "caption": "Config.metaRobotsHomePossibleValue-nofollow"
+                                "caption": "Config.metaRobotsNofollow"
                             },
                             {
                                 "value": "noindex",
-                                "caption": "Config.metaRobotsHomePossibleValue-noindex"
+                                "caption": "Config.metaRobotsNoindex"
                             },
                             {
                                 "value": "noindex, nofollow",
-                                "caption": "Config.metaRobotsHomePossibleValue-noindex, nofollow"
+                                "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
                     }
@@ -2948,23 +2948,23 @@
                         "selectBoxValues": [
                             {
                                 "value": "all",
-                                "caption": "Config.metaRobotsContactPossibleValue-all"
+                                "caption": "Config.metaRobotsAll"
                             },
                             {
                                 "value": "index",
-                                "caption": "Config.metaRobotsContactPossibleValue-index"
+                                "caption": "Config.metaRobotsIndex"
                             },
                             {
                                 "value": "nofollow",
-                                "caption": "Config.metaRobotsContactPossibleValue-nofollow"
+                                "caption": "Config.metaRobotsNofollow"
                             },
                             {
                                 "value": "noindex",
-                                "caption": "Config.metaRobotsContactPossibleValue-noindex"
+                                "caption": "Config.metaRobotsNoindex"
                             },
                             {
                                 "value": "noindex, nofollow",
-                                "caption": "Config.metaRobotsContactPossibleValue-noindex, nofollow"
+                                "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
                     }
@@ -2994,23 +2994,23 @@
                         "selectBoxValues": [
                             {
                                 "value": "all",
-                                "caption": "Config.metaRobotsCancelRightsPossibleValue-all"
+                                "caption": "Config.metaRobotsAll"
                             },
                             {
                                 "value": "index",
-                                "caption": "Config.metaRobotsCancelRightsPossibleValue-index"
+                                "caption": "Config.metaRobotsIndex"
                             },
                             {
                                 "value": "nofollow",
-                                "caption": "Config.metaRobotsCancelRightsPossibleValue-nofollow"
+                                "caption": "Config.metaRobotsNofollow"
                             },
                             {
                                 "value": "noindex",
-                                "caption": "Config.metaRobotsCancelRightsPossibleValue-noindex"
+                                "caption": "Config.metaRobotsNoindex"
                             },
                             {
                                 "value": "noindex, nofollow",
-                                "caption": "Config.metaRobotsCancelRightsPossibleValue-noindex, nofollow"
+                                "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
                     }
@@ -3040,23 +3040,23 @@
                         "selectBoxValues": [
                             {
                                 "value": "all",
-                                "caption": "Config.metaRobotsCancelFormPossibleValue-all"
+                                "caption": "Config.metaRobotsAll"
                             },
                             {
                                 "value": "index",
-                                "caption": "Config.metaRobotsCancelFormPossibleValue-index"
+                                "caption": "Config.metaRobotsIndex"
                             },
                             {
                                 "value": "nofollow",
-                                "caption": "Config.metaRobotsCancelFormPossibleValue-nofollow"
+                                "caption": "Config.metaRobotsNofollow"
                             },
                             {
                                 "value": "noindex",
-                                "caption": "Config.metaRobotsCancelFormPossibleValue-noindex"
+                                "caption": "Config.metaRobotsNoindex"
                             },
                             {
                                 "value": "noindex, nofollow",
-                                "caption": "Config.metaRobotsCancelFormPossibleValue-noindex, nofollow"
+                                "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
                     }
@@ -3086,23 +3086,23 @@
                         "selectBoxValues": [
                             {
                                 "value": "all",
-                                "caption": "Config.metaRobotsLegalDisclosurePossibleValue-all"
+                                "caption": "Config.metaRobotsAll"
                             },
                             {
                                 "value": "index",
-                                "caption": "Config.metaRobotsLegalDisclosurePossibleValue-index"
+                                "caption": "Config.metaRobotsIndex"
                             },
                             {
                                 "value": "nofollow",
-                                "caption": "Config.metaRobotsLegalDisclosurePossibleValue-nofollow"
+                                "caption": "Config.metaRobotsNofollow"
                             },
                             {
                                 "value": "noindex",
-                                "caption": "Config.metaRobotsLegalDisclosurePossibleValue-noindex"
+                                "caption": "Config.metaRobotsNoindex"
                             },
                             {
                                 "value": "noindex, nofollow",
-                                "caption": "Config.metaRobotsLegalDisclosurePossibleValue-noindex, nofollow"
+                                "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
                     }
@@ -3132,23 +3132,23 @@
                         "selectBoxValues": [
                             {
                                 "value": "all",
-                                "caption": "Config.metaRobotsPrivacyPolicyPossibleValue-all"
+                                "caption": "Config.metaRobotsAll"
                             },
                             {
                                 "value": "index",
-                                "caption": "Config.metaRobotsPrivacyPolicyPossibleValue-index"
+                                "caption": "Config.metaRobotsIndex"
                             },
                             {
                                 "value": "nofollow",
-                                "caption": "Config.metaRobotsPrivacyPolicyPossibleValue-nofollow"
+                                "caption": "Config.metaRobotsNofollow"
                             },
                             {
                                 "value": "noindex",
-                                "caption": "Config.metaRobotsPrivacyPolicyPossibleValue-noindex"
+                                "caption": "Config.metaRobotsNoindex"
                             },
                             {
                                 "value": "noindex, nofollow",
-                                "caption": "Config.metaRobotsPrivacyPolicyPossibleValue-noindex, nofollow"
+                                "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
                     }
@@ -3178,23 +3178,23 @@
                         "selectBoxValues": [
                             {
                                 "value": "all",
-                                "caption": "Config.metaRobotsTermsAndConditionsPossibleValue-all"
+                                "caption": "Config.metaRobotsAll"
                             },
                             {
                                 "value": "index",
-                                "caption": "Config.metaRobotsTermsAndConditionsPossibleValue-index"
+                                "caption": "Config.metaRobotsIndex"
                             },
                             {
                                 "value": "nofollow",
-                                "caption": "Config.metaRobotsTermsAndConditionsPossibleValue-nofollow"
+                                "caption": "Config.metaRobotsNofollow"
                             },
                             {
                                 "value": "noindex",
-                                "caption": "Config.metaRobotsTermsAndConditionsPossibleValue-noindex"
+                                "caption": "Config.metaRobotsNoindex"
                             },
                             {
                                 "value": "noindex, nofollow",
-                                "caption": "Config.metaRobotsTermsAndConditionsPossibleValue-noindex, nofollow"
+                                "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
                     }
@@ -3276,31 +3276,31 @@
                         "checkBoxValues": [
                             {
                                 "value": "print_errors",
-                                "caption": "Config.logDataPossibleValue-print_errors"
+                                "caption": "Config.logDataPrintErrors"
                             },
                             {
                                 "value": "print_success",
-                                "caption": "Config.logDataPossibleValue-print_success"
+                                "caption": "Config.logDataPrintSuccess"
                             },
                             {
                                 "value": "print_warnings",
-                                "caption": "Config.logDataPossibleValue-print_warnings"
+                                "caption": "Config.logDataPrintWarnings"
                             },
                             {
                                 "value": "print_infos",
-                                "caption": "Config.logDataPossibleValue-print_infos"
+                                "caption": "Config.logDataPrintInfos"
                             },
                             {
                                 "value": "print_stack_trace",
-                                "caption": "Config.logDataPossibleValue-print_stack_trace"
+                                "caption": "Config.logDataPrintStackTrace"
                             },
                             {
                                 "value": "log_messages",
-                                "caption": "Config.logDataPossibleValue-log_messages"
+                                "caption": "Config.logDataLogMessages"
                             },
                             {
                                 "value": "show_error_code",
-                                "caption": "Config.logDataPossibleValue-show_error_code"
+                                "caption": "Config.logDataShowErrorCode"
                             }
                         ]
                     }
@@ -3314,11 +3314,11 @@
                         "selectBoxValues": [
                             {
                                 "value": "development",
-                                "caption": "Config.logPerformanceLevelPossibleValue-development"
+                                "caption": "Config.logPerformanceLevelDevelopment"
                             },
                             {
                                 "value": "live",
-                                "caption": "Config.logPerformanceLevelPossibleValue-live"
+                                "caption": "Config.logPerformanceLevelLive"
                             }
                         ]
                     }
