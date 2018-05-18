@@ -15250,6 +15250,8 @@ Vue.component("checkout", {
                 } else if (oldList[index].shippingAmount !== newList[index].shippingAmount) {
                     NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfilePriceChanged"));
                     return true;
+                } else if (oldList[index].shippingPrivacyInformation !== newList[index].shippingPrivacyInformation) {
+                    return true;
                 }
             }
 
@@ -15573,17 +15575,49 @@ Vue.component("shipping-privacy-hint-check", {
                 return profile.parcelServicePresetId === _this.shippingProfileId;
             });
         },
-        showHint: function showHint() {
-            return this.currentShippingProfile.showDataPrivacyAgreementHint;
+        currentPrivacyHints: function currentPrivacyHints() {
+            if (this.currentShippingProfile.shippingPrivacyInformation) {
+                return this.currentShippingProfile.shippingPrivacyInformation.filter(function (entry) {
+                    return !!entry.showDataPrivacyAgreementHint;
+                });
+            }
+
+            return [];
         },
-        currentShippingProviderAddress: function currentShippingProviderAddress() {
-            return this.currentShippingProfile.shippingServiceProviderAddress;
-        },
-        privacyHint: function privacyHint() {
-            return _TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyHint", {
-                parcelServiceName: this.currentShippingProfile.parcelServiceName,
-                parcelServiceAddress: this.currentShippingProviderAddress
-            });
+        privacyHintContent: function privacyHintContent() {
+            var andTranslation = _TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyHintAnd");
+            var parcelServiceInformation = "";
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.currentPrivacyHints[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var hint = _step.value;
+
+                    if (parcelServiceInformation !== "") {
+                        parcelServiceInformation += " " + andTranslation + " ";
+                    }
+
+                    parcelServiceInformation += "<strong>" + hint.parcelServiceName + ", " + hint.parcelServiceAddress + "</strong>";
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return _TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyHint", { parcelServiceInformation: parcelServiceInformation });
         }
     }, Vuex.mapState({
         shippingProfileList: function shippingProfileList(state) {
@@ -15610,14 +15644,14 @@ Vue.component("shipping-privacy-hint-check", {
 
     watch: {
         currentShippingProfile: function currentShippingProfile(value, oldValue) {
-            if (value.parcelServiceId !== oldValue.parcelServiceId || !value.showDataPrivacyAgreementHint) {
-                if (this.shippingPrivacyHintAccepted) {
-                    this.setValue(false);
+            if (this.shippingPrivacyHintAccepted && value.parcelServiceId !== oldValue.parcelServiceId) {
+                this.setValue(false);
 
-                    $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+                $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
 
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
-                }
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
+            } else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint) {
+                this.setValue(false);
             }
         }
     }
