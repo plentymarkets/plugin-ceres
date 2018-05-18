@@ -31,7 +31,7 @@
                 </h1>
 
                 <div class="row">
-                    <registration template="#vue-registration" backlink="{{ request.get("backlink") }}"></registration>
+                    <registration template="#vue-registration" backlink="{{ request.get("backlink") | url_encode }}"></registration>
                 </div>
             </div>
         </div>
