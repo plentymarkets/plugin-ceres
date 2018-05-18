@@ -19,32 +19,32 @@ Vue.component("shipping-privacy-hint-check", {
             return this.shippingProfileList.find(profile => profile.parcelServicePresetId === this.shippingProfileId);
         },
 
-        currentHintedAddresses()
+        currentPrivacyHints()
         {
-            const filteredList = this.currentShippingProfile.shippingPrivacyInformation.filter(entry => !!entry.showDataPrivacyAgreementHint);
-
-            const addresses = [];
-
-            for (const info of filteredList)
+            if (this.currentShippingProfile.shippingPrivacyInformation)
             {
-                addresses.push({ name: info.parcelServiceName, address: info.parcelServiceAddress });
+                return this.currentShippingProfile.shippingPrivacyInformation.filter(entry => !!entry.showDataPrivacyAgreementHint);
             }
 
-            return addresses;
+            return [];
         },
 
-        currentShippingProviderAddress()
+        privacyHintContent()
         {
-            return this.currentShippingProfile.shippingServiceProviderAddress;
-        },
+            const andTranslation = TranslationService.translate("Ceres::Template.checkoutShippingPrivacyHintAnd");
+            let parcelServiceInformation = "";
 
-        privacyHint()
-        {
-            return TranslationService.translate("Ceres::Template.checkoutShippingPrivacyHint",
+            for (const hint of this.currentPrivacyHints)
+            {
+                if (parcelServiceInformation !== "")
                 {
-                    parcelServiceName: this.currentShippingProfile.parcelServiceName,
-                    parcelServiceAddress: this.currentShippingProviderAddress
-                });
+                    parcelServiceInformation += ` ${andTranslation} `;
+                }
+
+                parcelServiceInformation += `<strong>${hint.parcelServiceName}, ${hint.parcelServiceAddress}</strong>`;
+            }
+
+            return TranslationService.translate("Ceres::Template.checkoutShippingPrivacyHint", {parcelServiceInformation});
         },
 
         ...Vuex.mapState({
@@ -71,16 +71,17 @@ Vue.component("shipping-privacy-hint-check", {
     {
         currentShippingProfile(value, oldValue)
         {
-            if (value.parcelServiceId !== oldValue.parcelServiceId || !value.showDataPrivacyAgreementHint)
+            if (this.shippingPrivacyHintAccepted && value.parcelServiceId !== oldValue.parcelServiceId)
             {
-                if (this.shippingPrivacyHintAccepted)
-                {
-                    this.setValue(false);
+                this.setValue(false);
 
-                    $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+                $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
 
-                    NotificationService.error(TranslationService.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
-                }
+                NotificationService.error(TranslationService.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
+            }
+            else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint)
+            {
+                this.setValue(false);
             }
         }
     }
