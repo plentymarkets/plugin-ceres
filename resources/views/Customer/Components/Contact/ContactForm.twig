@@ -41,11 +41,10 @@
 					<form id="contact-form">
 
 						<div class="col-xs-12 col-md-6 m-b-1">
-							<div class="input-unit input-name-field" data-validate="text" data-model="name">
+							<div class="input-unit input-name-field">
 								<input type="name" name="name" v-model="name" id="txt_name">
-								<label for="txt_name">{{ trans("Ceres::Template.contactName") }}*</label>
+								<label for="txt_name">{{ trans("Ceres::Template.contactName") }} ({{ trans("Ceres::Template.contactOptional") }})</label>
 							</div>
-							<div class="error-feedback">{{ trans("Ceres::Template.contactEditName") }}</div>
 						</div>
 						<div class="col-xs-12 col-md-6 m-b-1">
 							<div class="input-unit input-mail-field" data-validate="regex" data-model="userMail">
