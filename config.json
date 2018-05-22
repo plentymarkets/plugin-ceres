@@ -13,7 +13,7 @@
                     }
                 },
                 "header.company_logo": {
-                    "type": "inputText",
+                    "type": "inputFile",
                     "required": false,
                     "label": "Config.headerCompanyLogoLabel",
                     "options": {
@@ -570,11 +570,11 @@
                     }
                 },
                 "footer.cancellation_pdf_path": {
-                    "type": "inputText",
+                    "type": "inputFile",
                     "required": false,
                     "label": "Config.footerCancellationPdfPathLabel",
                     "options": {
-                        "defaultValue": "Insert path"
+                        "defaultValue": ""
                     }
                 }
             }
