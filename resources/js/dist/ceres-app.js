@@ -18694,7 +18694,8 @@ Vue.component("item-search", {
 
     data: function data() {
         return {
-            currentSearchString: ""
+            currentSearchString: "",
+            preventSearch: false
         };
     },
 
@@ -18724,16 +18725,19 @@ Vue.component("item-search", {
 
     methods: {
         search: function search() {
-            if (this.currentSearchString.length) {
+            if (this.currentSearchString.length && !this.preventSearch) {
                 if (document.location.pathname === "/search") {
                     this.updateTitle(this.currentSearchString);
                     this.$store.dispatch("searchItems", this.currentSearchString);
                 } else {
                     window.open("/search?query=" + this.currentSearchString, "_self", false);
                 }
+            } else {
+                this.preventSearch = false;
             }
         },
         openItem: function openItem(suggestion) {
+            this.preventSearch = true;
             window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
         },
         updateTitle: function updateTitle(searchString) {
