@@ -16982,7 +16982,7 @@ Vue.component("registration", {
                     }
 
                     if (_this2.backlink !== null && _this2.backlink) {
-                        (0, _UrlService.navigateTo)(_this2.backlink);
+                        (0, _UrlService.navigateTo)(decodeURIComponent(_this2.backlink));
                     } else {
                         location.reload();
                     }
@@ -17297,7 +17297,7 @@ Vue.component("guest-login", {
 
             ApiService.post("/rest/io/guest", { email: this.email }).done(function () {
                 if (this.backlink !== null && this.backlink) {
-                    (0, _UrlService.navigateTo)(this.backlink);
+                    (0, _UrlService.navigateTo)(decodeURIComponent(this.backlink));
                 } else {
                     this.isDisabled = false;
                 }
@@ -17406,7 +17406,7 @@ Vue.component("login", {
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.loginSuccessful")).closeAfter(10000);
 
                 if (_this4.backlink !== null && _this4.backlink) {
-                    location.assign(_this4.backlink);
+                    location.assign(decodeURIComponent(_this4.backlink));
                 } else if (_this4.hasToForward) {
                     location.assign(location.origin);
                 } else {

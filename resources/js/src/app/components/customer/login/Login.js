@@ -114,7 +114,7 @@ Vue.component("login", {
 
                     if (this.backlink !== null && this.backlink)
                     {
-                        location.assign(this.backlink);
+                        location.assign(decodeURIComponent(this.backlink));
                     }
                     else if (this.hasToForward)
                     {
