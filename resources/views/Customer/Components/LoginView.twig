@@ -8,12 +8,12 @@
 
                 <div v-if="!isGuestMode">
                     <h1 class="login-view-title m-b-3">{{ trans("Ceres::Template.login") }}</h1>
-                    <login template="#vue-login" backlink="{{ backlink }}" has-to-forward="true"></login>
+                    <login template="#vue-login" backlink="{{ backlink | url_encode }}" has-to-forward="true"></login>
                 </div>
 
                 <div v-else>
                     <h1 class="m-b-3">{{ trans("Ceres::Template.loginOrderAsGuest") }}</h1>
-                    <guest-login template="#vue-guest-login" backlink="{{ backlink }}"></guest-login>
+                    <guest-login template="#vue-guest-login" backlink="{{ backlink | url_encode }}"></guest-login>
                 </div>
 
                 <hr>
