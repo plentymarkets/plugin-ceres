@@ -105,7 +105,10 @@
 		"label": "Widget.titleBarLabel",
 		"previewImageURL": "/images/widgets/title-bar.png",
 		"type": "default",
-		"allowedNestingTypes": [],
+		"allowedNestingTypes": [
+			"default",
+			"structure"
+		],
 		"widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
 		"settings": {
 			"appearance": {
@@ -165,7 +168,10 @@
 		"label": "Widget.imageCarouselLabel",
 		"previewImageURL": "/images/widgets/image-carousel.png",
 		"type": "default",
-		"allowedNestingTypes": [],
+		"allowedNestingTypes": [
+			"default",
+			"structure"
+		],
 		"widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
 		"settings": {
 			"appearance": {
@@ -324,7 +330,10 @@
 		"label": "Widget.imageBoxLabel",
 		"previewImageURL": "/images/widgets/image-box.png",
 		"type": "default",
-		"allowedNestingTypes": [],
+		"allowedNestingTypes": [
+			"default",
+			"structure"
+		],
 		"widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
 		"settings": {
 			"appearance": {
@@ -454,7 +463,10 @@
 		"label": "Widget.itemListLabel",
 		"previewImageURL": "/images/widgets/item-list.png",
 		"type": "default",
-		"allowedNestingTypes": [],
+		"allowedNestingTypes": [
+			"default",
+			"structure"
+		],
 		"widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
 		"settings": {
 			"appearance": {
