@@ -25,7 +25,8 @@ Vue.component("place-order", {
         contactWish: state => state.checkout.contactWish,
         isBasketLoading: state => state.basket.isBasketLoading,
         basketItemQuantity: state => state.basket.data.itemQuantity,
-        isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded
+        isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
+        shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted
     }),
 
     created()
@@ -38,18 +39,15 @@ Vue.component("place-order", {
         {
             this.waiting = true;
 
-            if (this.contactWish && this.contactWish.length > 0)
-            {
-                ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish}, {supressNotifications: true})
-                    .always(() =>
-                    {
-                        this.preparePayment();
-                    });
-            }
-            else
-            {
-                this.preparePayment();
-            }
+            const url = "/rest/io/order/additional_information";
+            const params = {orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted};
+            const options = {supressNotifications: true};
+
+            ApiService.post(url, params, options)
+                .always(() =>
+                {
+                    this.preparePayment();
+                });
         },
 
         preparePayment()
