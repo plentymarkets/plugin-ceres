@@ -1,5 +1,26 @@
 # Release Notes for Ceres
 
+## v2.9.0 (2018-05-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.8.1...2.9.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- The event "afterBasketItemAdded" has been added, which is triggered whenever a new item has been added to the shopping cart.
+- A checkbox has been added, via which users can consent that their data is transmitted to shipping service providers.
+
+### Changed
+
+- Language-dependent configuration values have been removed from the Ceres configuration. They are now stored as .properties files and can be edited via the multilingualism interface.
+- The display of gross and net prices now ensures that the price is displayed in bold font.
+- The selection of the country of delivery is now deactivated if the online store user has already saved an address. In this case, a tooltip suggests the user to change their address.
+
+### Fixed
+
+- Adjustments have been made in order to prevent cross-site scripting.
+- Due to an error, trailing slashes were not working properly for the breadcrumb navigation and the language selection. This has been fixed.
+- Due to an error, the title of the item list was not displayed in the single item view. This has been fixed.
+- Due to an error, the buttons for deleting and editing bank details were not properly displayed. This has been fixed.
+- Due to an error, pressing "enter" to select a suggested item did not open the single item view. This has been fixed.
+
 ## v2.8.1 (2018-05-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.8.0...2.8.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
