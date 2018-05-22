@@ -58,6 +58,10 @@ Vue.component("item-search", {
                     window.open("/search?query=" + this.currentSearchString, "_self", false);
                 }
             }
+            else
+            {
+                this.preventSearch = false;
+            }
         },
 
         openItem(suggestion)
