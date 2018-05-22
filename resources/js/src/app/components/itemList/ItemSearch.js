@@ -67,7 +67,7 @@ Vue.component("item-search", {
         openItem(suggestion)
         {
             this.preventSearch = true;
-            windw.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
+            window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
         },
 
         updateTitle(searchString)
