@@ -48,7 +48,7 @@ Vue.component("guest-login", {
                 {
                     if (this.backlink !== null && this.backlink)
                     {
-                        navigateTo(this.backlink);
+                        navigateTo(decodeURIComponent(this.backlink));
                     }
                     else
                     {
