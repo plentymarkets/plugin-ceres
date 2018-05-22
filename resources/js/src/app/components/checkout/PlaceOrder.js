@@ -39,22 +39,15 @@ Vue.component("place-order", {
         {
             this.waiting = true;
 
-            if ((this.contactWish && this.contactWish.length > 0) || this.shippingPrivacyHintAccepted)
-            {
-                const url = "/rest/io/order/additional_information";
-                const params = {orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted};
-                const options = {supressNotifications: true};
+            const url = "/rest/io/order/additional_information";
+            const params = {orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted};
+            const options = {supressNotifications: true};
 
-                ApiService.post(url, params, options)
-                    .always(() =>
-                    {
-                        this.preparePayment();
-                    });
-            }
-            else
-            {
-                this.preparePayment();
-            }
+            ApiService.post(url, params, options)
+                .always(() =>
+                {
+                    this.preparePayment();
+                });
         },
 
         preparePayment()
