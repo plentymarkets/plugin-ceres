@@ -15090,17 +15090,13 @@ Vue.component("place-order", {
 
             this.waiting = true;
 
-            if (this.contactWish && this.contactWish.length > 0 || this.shippingPrivacyHintAccepted) {
-                var url = "/rest/io/order/additional_information";
-                var params = { orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted };
-                var options = { supressNotifications: true };
+            var url = "/rest/io/order/additional_information";
+            var params = { orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted };
+            var options = { supressNotifications: true };
 
-                ApiService.post(url, params, options).always(function () {
-                    _this.preparePayment();
-                });
-            } else {
-                this.preparePayment();
-            }
+            ApiService.post(url, params, options).always(function () {
+                _this.preparePayment();
+            });
         },
         preparePayment: function preparePayment() {
             var _this2 = this;
