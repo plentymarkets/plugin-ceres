@@ -1,6 +1,5 @@
 import UrlService from "services/UrlService";
 import TranslationService from "services/TranslationService";
-import {isNullOrUndefined}from "../../helper/utils";
 
 Vue.component("item-search", {
 
