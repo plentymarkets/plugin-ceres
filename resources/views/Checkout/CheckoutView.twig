@@ -11,6 +11,7 @@
     {{ component( "Ceres::Customer.Components.AddressSelect.AddressSelect" ) }}
     {{ component( "Ceres::Checkout.Components.AcceptGtcCheck" ) }}
     {{ component( "Ceres::Checkout.Components.PaymentProviderSelect" ) }}
+    {{ component( "Ceres::Checkout.Components.ShippingPrivacyHintCheck" ) }}
     {{ component( "Ceres::Checkout.Components.ShippingProfileSelect" ) }}
     {{ component( "Ceres::Checkout.Components.PlaceOrder" ) }}
     {{ component( "Ceres::Checkout.Components.ContactWishInput" ) }}
@@ -111,6 +112,8 @@
                                 </header>
 
                                 <contact-wish-input class="p-b-1" template="#vue-contact-wish-input"></contact-wish-input>
+
+                                <shipping-privacy-hint-check></shipping-privacy-hint-check>
 
                                 <div class="form-check">
                                     <accept-gtc-check template="#vue-accept-gtc-check"></accept-gtc-check>
