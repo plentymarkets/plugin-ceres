@@ -45,7 +45,6 @@ Vue.component("item-search", {
         search()
         {
             if (this.currentSearchString.length &&
-                isNullOrUndefined(document.querySelector(".autocomplete-selected")) &&
                 !this.preventSearch)
             {
                 if (document.location.pathname === "/search")
