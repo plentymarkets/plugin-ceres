@@ -3270,6 +3270,7 @@
                 "brand-primary": {
                     "type": "colorPicker",
                     "required": false,
+                    "scss": true,
                     "label": "Config.brandPrimaryLabel",
                     "options": {
                         "defaultValue": "#008ebd"
@@ -3278,6 +3279,7 @@
                 "brand-secondary": {
                     "type": "colorPicker",
                     "required": false,
+                    "scss": true,
                     "label": "Config.brandSecondaryLabel",
                     "options": {
                         "defaultValue": "#d4021d"
@@ -3286,6 +3288,7 @@
                 "brand-success": {
                     "type": "colorPicker",
                     "required": false,
+                    "scss": true,
                     "label": "Config.brandSuccessLabel",
                     "options": {
                         "defaultValue": "#7ED321"
@@ -3294,6 +3297,7 @@
                 "brand-info": {
                     "type": "colorPicker",
                     "required": false,
+                    "scss": true,
                     "label": "Config.brandInfoLabel",
                     "options": {
                         "defaultValue": "#5bc0de"
@@ -3302,6 +3306,7 @@
                 "brand-warning": {
                     "type": "colorPicker",
                     "required": false,
+                    "scss": true,
                     "label": "Config.brandWarningLabel",
                     "options": {
                         "defaultValue": "#f0ad4e"
@@ -3310,6 +3315,7 @@
                 "brand-danger": {
                     "type": "colorPicker",
                     "required": false,
+                    "scss": true,
                     "label": "Config.brandDangerLabel",
                     "options": {
                         "defaultValue": "#d9534f"
