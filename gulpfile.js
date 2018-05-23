@@ -193,15 +193,24 @@ function buildSass(outputFile, outputStyle)
         }
     };
 
-    var pluginConfig = require('./config');
-    var scssConfig = pluginConfig
-        .filter(function(configEntry) {
-            return configEntry.scss === true;
-        })
-        .map(function(configEntry) {
-            return "$" + configEntry.key.split(".").join("") + ": " + configEntry.default + ";";
-        })
-        .join('');
+    var pluginConfig = require("./config");
+
+    var scssConfig = "";
+
+    for (var tabKey in pluginConfig.menu)
+    {
+        var tab = pluginConfig.menu[tabKey];
+
+        for (var entryKey in tab.formFields)
+        {
+            var entry = tab.formFields[entryKey];
+
+            if (entry.scss)
+            {
+                scssConfig += "$" + entryKey.split(".").join("") + ": " + entry.options.defaultValue + ";";
+            }
+        }
+    }
 
     return gulp
         .src(SCSS_SRC + "Ceres.scss")
