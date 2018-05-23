@@ -7,6 +7,7 @@
                 "header.company_name": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.headerCompanyNameLabel",
                     "options": {
                         "defaultValue": "Ceres Webshop"
@@ -53,6 +54,7 @@
                 "contact.opening_times": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactOpeningTimesLabel",
                     "options": {
                         "defaultValue": "Montag - Freitag, 00:00 - 24:00"
@@ -61,6 +63,7 @@
                 "contact.en.opening_times": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactEnOpeningTimesLabel",
                     "options": {
                         "defaultValue": "Monday - Friday, 00:00 - 24:00"
@@ -470,6 +473,7 @@
                 "footer.store_feature_1": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerStoreFeature1Label",
                     "options": {
                         "defaultValue": "Delivery period approx. 1 to 3 business days"
@@ -478,6 +482,7 @@
                 "footer.store_feature_2": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerStoreFeature2Label",
                     "options": {
                         "defaultValue": "Free shipping & return"
@@ -486,6 +491,7 @@
                 "footer.store_feature_3": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerStoreFeature3Label",
                     "options": {
                         "defaultValue": "100-day return policy"
@@ -516,6 +522,7 @@
                 "footer.col_1_title": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerCol1TitleLabel",
                     "options": {
                         "defaultValue": "Shop"
@@ -532,6 +539,7 @@
                 "footer.col_2_title": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerCol2TitleLabel",
                     "options": {
                         "defaultValue": "My account"
@@ -548,6 +556,7 @@
                 "footer.col_3_title": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerCol3TitleLabel",
                     "options": {
                         "defaultValue": "Service"
@@ -908,6 +917,7 @@
                 "item.lists.1.de.list_name": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists1DeListNameLabel",
                     "options": {
                         "defaultValue": "DE name"
@@ -916,6 +926,7 @@
                 "item.lists.1.en.list_name": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists1EnListNameLabel",
                     "options": {
                         "defaultValue": "EN name"
@@ -954,6 +965,7 @@
                 "item.lists.2.de.list_name": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists2DeListNameLabel",
                     "options": {
                         "defaultValue": "DE name"
@@ -962,6 +974,7 @@
                 "item.lists.2.en.list_name": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists2EnListNameLabel",
                     "options": {
                         "defaultValue": "EN name"
@@ -1000,6 +1013,7 @@
                 "item.lists.3.de.list_name": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists3DeListNameLabel",
                     "options": {
                         "defaultValue": "DE name"
@@ -1008,6 +1022,7 @@
                 "item.lists.3.en.list_name": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists3EnListNameLabel",
                     "options": {
                         "defaultValue": "EN name"
@@ -1059,6 +1074,7 @@
                 "basket.data": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.basketDataLabel",
                     "options": {
                         "defaultValue": "basket.value_of_items_gross, basket.value_of_items_net, basket.shipping_costs_gross, basket.shipping_costs_net, basket.vat, basket.order_total_gross, basket.order_total_net",
@@ -1097,6 +1113,7 @@
                 "basket.preview_data": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.basketPreviewDataLabel",
                     "options": {
                         "defaultValue": "basket.value_of_items_gross, basket.shipping_costs_gross, basket.order_total_gross",
@@ -2926,6 +2943,7 @@
                 "meta.de.description_home": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaDeDescriptionHomeLabel",
                     "options": {
                         "defaultValue": ""
@@ -2934,6 +2952,7 @@
                 "meta.en.description_home": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaEnDescriptionHomeLabel",
                     "options": {
                         "defaultValue": ""
@@ -2972,6 +2991,7 @@
                 "meta.de.description_contact": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaDeDescriptionContactLabel",
                     "options": {
                         "defaultValue": ""
@@ -2980,6 +3000,7 @@
                 "meta.en.description_contact": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaEnDescriptionContactLabel",
                     "options": {
                         "defaultValue": ""
@@ -3018,6 +3039,7 @@
                 "meta.de.description_cancel_rights": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaDeDescriptionCancelRightsLabel",
                     "options": {
                         "defaultValue": ""
@@ -3026,6 +3048,7 @@
                 "meta.en.description_cancel_rights": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaEnDescriptionCancelRightsLabel",
                     "options": {
                         "defaultValue": ""
@@ -3064,6 +3087,7 @@
                 "meta.de.description_cancel_form": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaDeDescriptionCancelFormLabel",
                     "options": {
                         "defaultValue": ""
@@ -3072,6 +3096,7 @@
                 "meta.en.description_cancel_form": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaEnDescriptionCancelFormLabel",
                     "options": {
                         "defaultValue": ""
@@ -3110,6 +3135,7 @@
                 "meta.de.description_legal_disclosure": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaDeDescriptionLegalDisclosureLabel",
                     "options": {
                         "defaultValue": ""
@@ -3118,6 +3144,7 @@
                 "meta.en.description_legal_disclosure": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaEnDescriptionLegalDisclosureLabel",
                     "options": {
                         "defaultValue": ""
@@ -3156,6 +3183,7 @@
                 "meta.de.description_privacy_policy": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaDeDescriptionPrivacyPolicyLabel",
                     "options": {
                         "defaultValue": ""
@@ -3164,6 +3192,7 @@
                 "meta.en.description_privacy_policy": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaEnDescriptionPrivacyPolicyLabel",
                     "options": {
                         "defaultValue": ""
@@ -3202,6 +3231,7 @@
                 "meta.de.description_terms_and_conditions": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaDeDescriptionTermsAndConditionsLabel",
                     "options": {
                         "defaultValue": ""
@@ -3210,6 +3240,7 @@
                 "meta.en.description_terms_and_conditions": {
                     "type": "inputTextArea",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.metaEnDescriptionTermsAndConditionsLabel",
                     "options": {
                         "defaultValue": ""
