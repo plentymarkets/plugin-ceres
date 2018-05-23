@@ -1,5 +1,6 @@
-<b>{{ trans("Ceres::Template.contactName") }}:</b> {{ name }} <br>
-
+{% if name | length > 0 %}
+    <b>{{ trans("Ceres::Template.contactName") }}:</b> {{ name }} <br>
+{% endif %}
 <b>{{ trans("Ceres::Template.contactSenderMail") }}:</b> {{ userMail }}<br>
 
 {% if orderId | length > 0 %}
