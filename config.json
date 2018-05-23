@@ -195,42 +195,49 @@
                 "homepage.sliderItemId1": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageSliderItemId1Label",
                     "options": {}
                 },
                 "homepage.sliderImageUrl1": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageSliderImageUrl1Label",
                     "options": {}
                 },
                 "homepage.sliderItemId2": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageSliderItemId2Label",
                     "options": {}
                 },
                 "homepage.sliderImageUrl2": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageSliderImageUrl2Label",
                     "options": {}
                 },
                 "homepage.sliderItemId3": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageSliderItemId3Label",
                     "options": {}
                 },
                 "homepage.sliderImageUrl3": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageSliderImageUrl3Label",
                     "options": {}
                 },
                 "homepage.heroExtraItemId1": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHeroExtraItemId1Label",
                     "options": {
                         "defaultValue": ""
@@ -239,12 +246,14 @@
                 "homepage.heroExtraImageUrl1": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHeroExtraImageUrl1Label",
                     "options": {}
                 },
                 "homepage.heroExtraItemId2": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHeroExtraItemId2Label",
                     "options": {
                         "defaultValue": ""
@@ -253,42 +262,49 @@
                 "homepage.heroExtraImageUrl2": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHeroExtraImageUrl2Label",
                     "options": {}
                 },
                 "homepage.homepageCategory1": {
                     "type": "categoryPicker",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHomepageCategory1Label",
                     "options": {}
                 },
                 "homepage.homepageCategory2": {
                     "type": "categoryPicker",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHomepageCategory2Label",
                     "options": {}
                 },
                 "homepage.homepageCategory3": {
                     "type": "categoryPicker",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHomepageCategory3Label",
                     "options": {}
                 },
                 "homepage.homepageCategory4": {
                     "type": "categoryPicker",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHomepageCategory4Label",
                     "options": {}
                 },
                 "homepage.homepageCategory5": {
                     "type": "categoryPicker",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHomepageCategory5Label",
                     "options": {}
                 },
                 "homepage.homepageCategory6": {
                     "type": "categoryPicker",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageHomepageCategory6Label",
                     "options": {}
                 }
