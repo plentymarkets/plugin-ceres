@@ -12,6 +12,7 @@
 - Language-dependent configuration values have been removed from the Ceres configuration. They are now stored as .properties files and can be edited via the multilingualism interface.
 - The display of gross and net prices now ensures that the price is displayed in bold font.
 - The selection of the country of delivery is now deactivated if the online store user has already saved an address. In this case, a tooltip suggests the user to change their address.
+- **Name** is no longer a mandatory field for the contact form.
 
 ### Fixed
 

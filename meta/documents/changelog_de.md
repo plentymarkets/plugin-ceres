@@ -12,6 +12,7 @@
 - Sprachabhängige Konfigurationseinträge wurden aus der Ceres Konfiguration entfernt und in .properties Dateien ausgelagert, um über das Mehrsprachigkeits-Interface bearbeitet werden zu können.
 - Die Anzeige für Brutto- und Netto-Preise sorgt nun dafür, dass der entsprechende Preis als fett dargestellt wird.
 - Die Auswahl des Lieferlandes ist nun deaktiviert wenn der Shop-Besucher bereits eine Adresse gespeichert hat. In diesem Fall wird der Nutzer per Tooltip auf eine Änderung der Adresse hingewiesen.
+- Der Name auf dem Kontaktformular ist nun kein Pflichtfeld mehr.
 
 ### Behoben
 
