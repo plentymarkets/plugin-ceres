@@ -193,23 +193,35 @@ function buildSass(outputFile, outputStyle)
         }
     };
 
-    var pluginConfig = require("./config");
-
-    var scssConfig = "";
-
-    for (var tabKey in pluginConfig.menu)
+    const pluginConfig = require("./config");
+    const getScssConfig = formFields =>
     {
-        var tab = pluginConfig.menu[tabKey];
+        let scssConfig = "";
 
-        for (var entryKey in tab.formFields)
+        for (const entryKey in formFields)
         {
-            var entry = tab.formFields[entryKey];
+            const entry = formFields[entryKey];
 
             if (entry.scss)
             {
-                scssConfig += "$" + entryKey.split(".").join("") + ": " + entry.options.defaultValue + ";";
+                scssConfig += `$${entryKey.split(".").join("")}: ${entry.options.defaultValue};`;
+            }
+
+            if (entry.options && entry.options.containerEntries)
+            {
+                scssConfig += getScssConfig(entry.options.containerEntries, true);
             }
         }
+
+        return scssConfig;
+    };
+
+    let scssConfig = "";
+    const tabs = Object.values(pluginConfig.menu);
+
+    for (const tab of tabs)
+    {
+        scssConfig += getScssConfig(tab.formFields);
     }
 
     return gulp
