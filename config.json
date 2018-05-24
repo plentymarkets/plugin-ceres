@@ -2,7 +2,7 @@
     "formatVersion": 1,
     "menu": {
         "Config.GlobalTab": {
-            "label": "Config.GlobalTab",
+            "label": "Config.globalTab",
             "formFields": {
                 "header.company_name": {
                     "type": "inputText",
@@ -174,7 +174,7 @@
             }
         },
         "Config.HomepageTab": {
-            "label": "Config.HomepageTab",
+            "label": "Config.homepageTab",
             "formFields": {
                 "homepage.showShopBuilderContent": {
                     "type": "checkBox",
@@ -311,7 +311,7 @@
             }
         },
         "Config.HeaderTab": {
-            "label": "Config.HeaderTab",
+            "label": "Config.headerTab",
             "formFields": {
                 "header.show_navbars": {
                     "type": "selectBox",
@@ -440,7 +440,7 @@
             }
         },
         "Config.FooterTab": {
-            "label": "Config.FooterTab",
+            "label": "Config.footerTab",
             "formFields": {
                 "footer.to_top_button": {
                     "type": "selectBox",
@@ -605,7 +605,7 @@
             }
         },
         "Config.ItemViewTab": {
-            "label": "Config.ItemViewTab",
+            "label": "Config.itemViewTab",
             "formFields": {
                 "item.displayName": {
                     "type": "selectBox",
@@ -858,7 +858,7 @@
             }
         },
         "Config.ItemListsTab": {
-            "label": "Config.ItemListsTab",
+            "label": "Config.itemListsTab",
             "formFields": {
                 "item.lists.last_seen_number": {
                     "type": "selectBox",
@@ -1055,7 +1055,7 @@
             }
         },
         "Config.ShoppingCartTab": {
-            "label": "Config.ShoppingCartTab",
+            "label": "Config.shoppingCartTab",
             "formFields": {
                 "basket.item_data": {
                     "type": "multiCheckBox",
@@ -1216,7 +1216,7 @@
             }
         },
         "Config.PaginationAndSortingTab": {
-            "label": "Config.PaginationAndSortingTab",
+            "label": "Config.paginationAndSortingTab",
             "formFields": {
                 "pagination.position": {
                     "type": "selectBox",
@@ -2197,7 +2197,7 @@
             }
         },
         "Config.CheckoutAndMyAccountTab": {
-            "label": "Config.CheckoutAndMyAccountTab",
+            "label": "Config.checkoutAndMyAccountTab",
             "formFields": {
                 "my_account.orders_per_page": {
                     "type": "inputText",
@@ -2618,7 +2618,7 @@
             }
         },
         "Config.LanguagesTab": {
-            "label": "Config.LanguagesTab",
+            "label": "Config.languagesTab",
             "formFields": {
                 "language.active_languages": {
                     "type": "multiCheckBox",
@@ -2709,7 +2709,7 @@
             }
         },
         "Config.CurrenciesTab": {
-            "label": "Config.CurrenciesTab",
+            "label": "Config.currenciesTab",
             "formFields": {
                 "currency.format": {
                     "type": "selectBox",
@@ -2924,7 +2924,7 @@
             }
         },
         "Config.SEOTab": {
-            "label": "Config.SEOTab",
+            "label": "Config.seoTab",
             "formFields": {
                 "meta.robots_home": {
                     "type": "selectBox",
@@ -3265,7 +3265,7 @@
             }
         },
         "Config.DesignTab": {
-            "label": "Config.DesignTab",
+            "label": "Config.designTab",
             "formFields": {
                 "brand-primary": {
                     "type": "colorPicker",
@@ -3324,7 +3324,7 @@
             }
         },
         "Config.LoggingAndPerformanceTab": {
-            "label": "Config.LoggingAndPerformanceTab",
+            "label": "Config.loggingAndPerformanceTab",
             "formFields": {
                 "log.data": {
                     "type": "multiCheckBox",
