@@ -2,129 +2,129 @@
   "sections":
   [
     {
-      "name": "Config.address",
+      "name": "MultilingualismConfig.address",
       "prefix": "address"
     },
     {
-      "name": "Config.basket",
+      "name": "MultilingualismConfig.basket",
       "prefix": "basket"
     },
     {
-      "name": "Config.cancellationForm",
+      "name": "MultilingualismConfig.cancellationForm",
       "prefix": "cancellationForm"
     },
     {
-      "name": "Config.cancellationRights",
+      "name": "MultilingualismConfig.cancellationRights",
       "prefix": "cancellationRights"
     },
     {
-      "name": "Config.checkout",
+      "name": "MultilingualismConfig.checkout",
       "prefix": "checkout"
     },
     {
-      "name": "Config.contact",
+      "name": "MultilingualismConfig.contact",
       "prefix": "contact"
     },
     {
-      "name": "Config.coupon",
+      "name": "MultilingualismConfig.coupon",
       "prefix": "coupon"
     },
     {
-      "name": "Config.dev",
+      "name": "MultilingualismConfig.dev",
       "prefix": "dev"
     },
     {
-      "name": "Config.footer",
+      "name": "MultilingualismConfig.footer",
       "prefix": "footer"
     },
     {
-      "name": "Config.header",
+      "name": "MultilingualismConfig.header",
       "prefix": "header"
     },
     {
-      "name": "Config.homepage",
+      "name": "MultilingualismConfig.homepage",
       "prefix": "homepage"
     },
     {
-      "name": "Config.itemSearch",
+      "name": "MultilingualismConfig.itemSearch",
       "prefix": "itemSearch"
     },
     {
-      "name": "Config.item",
+      "name": "MultilingualismConfig.item",
       "prefix": "item"
     },
     {
-      "name": "Config.legalDisclosure",
+      "name": "MultilingualismConfig.legalDisclosure",
       "prefix": "legalDisclosure"
     },
     {
-      "name": "Config.login",
+      "name": "MultilingualismConfig.login",
       "prefix": "login"
     },
     {
-      "name": "Config.myAccount",
+      "name": "MultilingualismConfig.myAccount",
       "prefix": "myAccount"
     },
     {
-      "name": "Config.pageNotFound",
+      "name": "MultilingualismConfig.pageNotFound",
       "prefix": "pageNotFound"
     },
     {
-      "name": "Config.notifications",
+      "name": "MultilingualismConfig.notifications",
       "prefix": "notifications"
     },
     {
-      "name": "Config.orderConfirmation",
+      "name": "MultilingualismConfig.orderConfirmation",
       "prefix": "orderConfirmation"
     },
     {
-      "name": "Config.orderHistory",
+      "name": "MultilingualismConfig.orderHistory",
       "prefix": "orderHistory"
     },
     {
-      "name": "Config.privacyPolicy",
+      "name": "MultilingualismConfig.privacyPolicy",
       "prefix": "privacyPolicy"
     },
     {
-      "name": "Config.reg",
+      "name": "MultilingualismConfig.reg",
       "prefix": "reg"
     },
     {
-      "name": "Config.resetPw",
+      "name": "MultilingualismConfig.resetPw",
       "prefix": "resetPw"
     },
     {
-      "name": "Config.returnConfirmation",
+      "name": "MultilingualismConfig.returnConfirmation",
       "prefix": "returnConfirmation"
     },
     {
-      "name": "Config.returnHistory",
+      "name": "MultilingualismConfig.returnHistory",
       "prefix": "returnHistory"
     },
     {
-      "name": "Config.return",
+      "name": "MultilingualismConfig.return",
       "prefix": "return"
     },
     {
-      "name": "Config.shippingInfo",
+      "name": "MultilingualismConfig.shippingInfo",
       "prefix": "shippingInfo"
     },
     {
-      "name": "Config.singleItem",
+      "name": "MultilingualismConfig.singleItem",
       "prefix": "singleItem"
     },
     {
-      "name": "Config.termsAndConditions",
+      "name": "MultilingualismConfig.termsAndConditions",
       "prefix": "termsAndConditions"
     },
     {
-      "name": "Config.wishList",
+      "name": "MultilingualismConfig.wishList",
       "prefix": "wishList"
     }
   ],
   "ignoredTranslationFiles":
   [
-    "Config.properties",
+    "MultilingualismConfig.properties",
     "Widget.properties",
     "Page.properties"
   ]
