@@ -102,7 +102,7 @@
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationShippingProfile") }}</strong>
                             <span class="col-xs-6 col-sm-7">{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</span>
                         </div>
-                        
+
                         {% set shippingDate = "" %}
                         {% for date in orderData.order.dates %}
                             {% if date.typeId == 8 %}
@@ -186,36 +186,36 @@
                     <div>
                         <dl>
                             {% if "basket.value_of_items_net" in totalsConfigData %}
-                            <dt>
-                                {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutNet") }})
-                            </dt><!--
+                                <dt>
+                                    {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutNet") }})
+                                </dt><!--
                      --><dd>
                                 {{ totals.itemSumNet | formatMonetary( basketTotalsCurrency ) }}
                             </dd>
                             {% endif %}
 
                             {% if "basket.value_of_items_gross" in totalsConfigData %}
-                            <dt>
-                                <strong>{{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutGross") }})</strong>
-                            </dt><!--
+                                <dt>
+                                    <strong>{{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutGross") }})</strong>
+                                </dt><!--
                      --><dd>
                                 <strong>{{ totals.itemSumGross | formatMonetary( basketTotalsCurrency ) }}</strong>
                             </dd>
                             {% endif %}
 
                             {% if "basket.shipping_costs_net" in totalsConfigData %}
-                            <dt>
-                                {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutNet") }})
-                            </dt><!--
+                                <dt>
+                                    {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutNet") }})
+                                </dt><!--
                      --><dd>
                                 {{ totals.shippingNet | formatMonetary( basketTotalsCurrency ) }}
                             </dd>
                             {% endif %}
 
                             {% if "basket.shipping_costs_gross" in totalsConfigData %}
-                            <dt>
-                                <strong>{{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutGross") }})</strong>
-                            </dt><!--
+                                <dt>
+                                    <strong>{{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutGross") }})</strong>
+                                </dt><!--
                      --><dd>
                                 <strong>{{ totals.shippingGross | formatMonetary( basketTotalsCurrency ) }}</strong>
                             </dd>
@@ -232,17 +232,17 @@
                                         {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutNet") }})
                                     </dt><!--
                                  --><dd>
-                                        {{ totals.totalNet | formatMonetary( basketTotalsCurrency ) }}
-                                    </dd>
+                                    {{ totals.totalNet | formatMonetary( basketTotalsCurrency ) }}
+                                </dd>
                                 {% endif %}
 
-                                {% if totals.couponValue | trimNewlines != 0 %}
+                                {% if totals.couponType == 'promotional' and (totals.couponValue | trimNewlines) != 0 %}
                                     <dt>
                                         <strong>{{ trans("Ceres::Template.checkoutCoupon") }}</strong>
                                     </dt><!--
                                   --><dd>
-                                        <strong>{{ totals.couponValue | formatMonetary( basketTotalsCurrency ) }}</strong>
-                                    </dd>
+                                    <strong>{{ totals.couponValue | formatMonetary( basketTotalsCurrency ) }}</strong>
+                                </dd>
                                 {% endif %}
 
                                 {% if "basket.vat" in totalsConfigData and not orderData.order.amounts[0].isNet %}
@@ -252,8 +252,8 @@
                                                 {{ trans("Ceres::Template.orderConfirmationVAT") }} {{ vat.rate }}%
                                             </dt><!--
                                          --><dd>
-                                                {{ vat.value | formatMonetary( basketTotalsCurrency ) }}
-                                            </dd>
+                                            {{ vat.value | formatMonetary( basketTotalsCurrency ) }}
+                                        </dd>
                                         {% endfor %}
                                     </div>
                                 {% endif %}
@@ -270,6 +270,20 @@
                                     </div>
                                 {% endif %}
                             {% endif %} <!-- GrossNetReplace|else -->
+                            {% if totals.couponType == 'sales' and (totals.couponValue | trimNewlines) != 0 %}
+                                <dt>
+                                    {{ trans("Ceres::Template.checkoutCoupon") }}
+                                </dt><!--
+                                  --><dd>
+                                {{ totals.couponValue | formatMonetary( basketTotalsCurrency ) }}
+                                </dd>
+                                    <dt>
+                                        <strong>{{ trans("Ceres::Template.checkoutOpenAmount") }}</strong>
+                                    </dt><!--
+                                    --><dd>
+                                    <strong>{{ totals.openAmount | formatMonetary( basketTotalsCurrency ) }}</strong>
+                                </dd>
+                            {% endif %}
 
                             {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", orderData.order) }}
                         </dl>
