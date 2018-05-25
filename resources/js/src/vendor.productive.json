@@ -9,7 +9,6 @@
   "node_modules/tether/dist/js/tether.min.js",
   "node_modules/popper/dist/esm/popper.min.js",
 
-  "node_modules/shariff/build/shariff.min.js",
   "node_modules/sticky-kit/dist/sticky-kit.min.js",
   "node_modules/lightbox2/dist/js/lightbox.min.js",
   "node_modules/owl.carousel/dist/owl.carousel.min.js",

@@ -140,20 +140,6 @@
     padding: .75rem .45rem .25rem 0;
 }
 
-.single-rightside {
-    .shariff {
-        .orientation-horizontal {
-            li {
-                .fa {
-                    line-height: 30px;
-                    text-align: center;
-                    margin-left: 0.5rem;
-                }
-            }
-        }
-    }
-}
-
 @include media-breakpoint-only(md) {
     .single {
         .price {
