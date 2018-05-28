@@ -31,9 +31,12 @@ var init = (function($, window, document)
             }
         });
 
-        window.onpopstate = function()
+        window.onpopstate = function(event)
         {
-            window.location.reload();
+            if (event.state && event.state.requireReload)
+            {
+                window.location.reload();
+            }
         };
 
         // init bootstrap tooltips
