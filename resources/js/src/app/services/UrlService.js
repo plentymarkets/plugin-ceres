@@ -26,11 +26,12 @@ export function getUrlParams(urlParams)
 
 export function setUrlParams(urlParams)
 {
+    console.warn("set params");
     var pathName = window.location.pathname;
     var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.replaceState({}, titleElement ? titleElement.innerHTML : "", pathName + params);
+    window.history.replaceState({requireReload: true}, titleElement ? titleElement.innerHTML : "", pathName + params);
 
     $("a[href][data-update-url]").each((i, element) =>
     {
@@ -73,7 +74,7 @@ export function switchUrl(url, title)
         title = document.getElementsByTagName("title")[0].innerHTML;
     }
     url = normalizeUrl(url);
-    window.history.pushState({}, title, url);
+    window.history.pushState({requireReload: true}, title, url);
 }
 
 export default {setUrlParam, setUrlParams, getUrlParams, navigateTo, switchUrl};
