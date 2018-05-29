@@ -33,6 +33,7 @@
                             <div>{{ orderData.order.billingAddress.name4 }}</div>
                             <div>{{ orderData.order.billingAddress.address1 }} {{ orderData.order.billingAddress.address2 }}</div>
                             <div>{{ orderData.order.billingAddress.postalCode }} {{ orderData.order.billingAddress.town }}</div>
+                            <div>{{ services.country.getCountryName(orderData.order.billingAddress.countryId) }}</div>
                         </span>
                     </div>
 
@@ -50,6 +51,7 @@
                                     <div>{{ orderData.order.deliveryAddress.name4 }}</div>
                                     <div>{{ orderData.order.deliveryAddress.address1 }} {{ orderData.order.deliveryAddress.address2 }}</div>
                                     <div>{{ orderData.order.deliveryAddress.postalCode }} {{ orderData.order.deliveryAddress.town }}</div>
+                                    <div>{{ services.country.getCountryName(orderData.order.deliveryAddress.countryId) }}</div>
                                 </span>
                             {% endif %}
                         </span>
