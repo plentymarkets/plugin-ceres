@@ -21818,8 +21818,10 @@ var init = function ($, window, document) {
             }
         });
 
-        window.onpopstate = function () {
-            window.location.reload();
+        window.onpopstate = function (event) {
+            if (event.state && event.state.requireReload) {
+                window.location.reload();
+            }
         };
 
         // init bootstrap tooltips
@@ -22841,11 +22843,12 @@ function getUrlParams(urlParams) {
 }
 
 function setUrlParams(urlParams) {
+    console.warn("set params");
     var pathName = window.location.pathname;
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.replaceState({}, titleElement ? titleElement.innerHTML : "", pathName + params);
+    window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
 
     (0, _jquery2.default)("a[href][data-update-url]").each(function (i, element) {
         var $element = (0, _jquery2.default)(element);
@@ -22879,7 +22882,7 @@ function switchUrl(url, title) {
         title = document.getElementsByTagName("title")[0].innerHTML;
     }
     url = (0, _url.normalizeUrl)(url);
-    window.history.pushState({}, title, url);
+    window.history.pushState({ requireReload: true }, title, url);
 }
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, switchUrl: switchUrl };
