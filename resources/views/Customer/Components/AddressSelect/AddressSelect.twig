@@ -35,9 +35,9 @@
                 </div>
 
                 <div class="add-item">
-                    <button href="#" class="btn btn-primary btn-medium" v-if="isAddAddressEnabled" @click.prevent="showAddModal" :disabled="isBasketLoading">
+                    <button href="#" class="btn btn-primary btn-medium only-button-mobile" v-if="isAddAddressEnabled" @click.prevent="showAddModal" :disabled="isBasketLoading">
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
-                        {{ trans("Ceres::Template.addressAddAddress") }}
+                        <span>{{ trans("Ceres::Template.addressAddAddress") }}</span>
                     </button>
                 </div>
 

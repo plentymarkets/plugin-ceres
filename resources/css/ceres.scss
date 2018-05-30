@@ -10680,6 +10680,18 @@ a:active {
     border-radius: 0;
 }
 
+@include media-breakpoint-down(xs){
+    .only-button-mobile {
+        width: 2.2rem !important;
+        padding-right: 8px;
+        height: 2.2rem;
+
+        & span {
+            font-size: 0;
+        }
+    }
+}
+
 body {
 
 	background-color: $gray-lightest;
