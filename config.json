@@ -21,6 +21,14 @@
                         "defaultValue": "images/ceres-logo.svg"
                     }
                 },
+                "global.company_icon": {
+                    "type": "inputFile",
+                    "required": false,
+                    "label": "Config.globalCompanyIconLabel",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
                 "global.shippingCostsCategoryId": {
                     "type": "categoryPicker",
                     "required": false,
