@@ -79,7 +79,8 @@
                             {% if config("Ceres.basket.preview_type") != "right" %}
                                 <basket-preview
                                         template="#vue-basket-preview-hover"
-                                        :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}">
+                                        :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
+                                        :show-net-prices={{ showNetPrices | json_encode }}>
                                 </basket-preview>
                             {% endif %}
                         </li>

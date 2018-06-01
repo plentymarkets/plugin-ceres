@@ -7,6 +7,7 @@ const state =
     {
         data: {},
         items: [],
+        showNetPrices: false,
         latestEntry: {
             item: {},
             quantity: null
@@ -88,6 +89,11 @@ const mutations =
         setIsBasketInitiallyLoaded(state)
         {
             state.isBasketInitiallyLoaded = true;
+        },
+
+        setShowNetPrices(state, showNetPrices)
+        {
+            state.showNetPrices = showNetPrices;
         }
     };
 
@@ -126,6 +132,7 @@ const actions =
             ApiService.listen("AfterBasketChanged", data =>
             {
                 commit("setBasket", data.basket);
+                commit("setShowNetPrices", data.showNetPrices);
                 commit("setBasketItems", data.basketItems);
             });
         },

@@ -69,7 +69,8 @@
                 <div class="wrapper wrapper-right">
                     <basket-preview
                         template="#vue-basket-preview"
-                        :basket-data="{{ basket | json_encode() }}">
+                        :basket-data="{{ basket | json_encode }}"
+                        :show-net-prices={{ showNetPrices | json_encode }}>
                     </basket-preview>
                 </div>
             {% endif %}
