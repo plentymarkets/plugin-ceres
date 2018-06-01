@@ -80,6 +80,8 @@ const MonetaryFormatter = (function()
                 value += extend;
             }
         }
+
+        return value;
     }
 
     MonetaryFormatter.prototype.setPattern = function(pattern)
