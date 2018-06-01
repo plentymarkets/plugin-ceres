@@ -10680,18 +10680,6 @@ a:active {
     border-radius: 0;
 }
 
-@include media-breakpoint-down(xs){
-    .only-button-mobile {
-        width: 2.2rem !important;
-        padding-right: 8px;
-        height: 2.2rem;
-
-        & span {
-            font-size: 0;
-        }
-    }
-}
-
 body {
 
 	background-color: $gray-lightest;
@@ -11083,6 +11071,32 @@ button:focus {
 	}
 }
 
+// Responsive button text and icon visibility
+
+@each $bp in map-keys($grid-breakpoints) {
+	.btn-only-icon-#{$bp}-up {
+	  @include media-breakpoint-up($bp) {
+		width: 2.2rem !important;
+        padding-right: 8px;
+        height: 2.2rem;
+
+        & span {
+            display: none !important;
+        }
+	  }
+	}
+	.btn-only-icon-#{$bp}-down {
+	  @include media-breakpoint-down($bp) {
+		width: 2.2rem !important;
+        padding-right: 8px;
+        height: 2.2rem;
+
+        & span {
+            display: none !important;
+        }
+	  }
+	}
+  }
 
 // TODO create component based on card to show these modifications
 .card{
