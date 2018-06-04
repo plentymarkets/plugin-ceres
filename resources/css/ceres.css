@@ -12776,6 +12776,114 @@ button:focus {
   width: 12px;
 }
 
+.btn-only-icon-xs-up {
+  width: 2.2rem !important;
+  padding-right: 8px;
+  height: 2.2rem;
+}
+
+.btn-only-icon-xs-up span {
+  display: none !important;
+}
+
+@media (max-width: 543px) {
+  .btn-only-icon-xs-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-xs-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 544px) {
+  .btn-only-icon-sm-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-sm-up span {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .btn-only-icon-sm-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-sm-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn-only-icon-md-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-md-up span {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .btn-only-icon-md-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-md-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .btn-only-icon-lg-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-lg-up span {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  .btn-only-icon-lg-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-lg-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .btn-only-icon-xl-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-xl-up span {
+    display: none !important;
+  }
+}
+
+.btn-only-icon-xl-down {
+  width: 2.2rem !important;
+  padding-right: 8px;
+  height: 2.2rem;
+}
+
+.btn-only-icon-xl-down span {
+  display: none !important;
+}
+
 .card .item-edit, .cmp-address-list .items > div:first-child .item-edit {
   position: absolute;
   top: 1.25rem;
