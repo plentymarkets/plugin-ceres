@@ -13893,6 +13893,12 @@ Custom classes
   transform: rotate3d(0, 0, 1, 90deg);
 }
 
+.notification-wrapper {
+  position: absolute;
+  right: .5rem;
+  top: 10rem;
+}
+
 .popper {
   max-width: 276px;
   padding: 1px;

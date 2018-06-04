@@ -12180,6 +12180,12 @@ Custom classes
         }
     }
 }
+.notification-wrapper
+{
+    position: absolute;
+    right: .5rem;
+    top: 10rem;
+}
 .popper {
 	max-width: $popover-max-width;
     padding: $popover-inner-padding;
