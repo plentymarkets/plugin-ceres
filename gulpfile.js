@@ -170,8 +170,7 @@ gulp.task("copy:sass-vendor", function()
         .src([
             'node_modules/bootstrap/scss/**/*.scss',
             'node_modules/font-awesome/scss/**/*.scss',
-            'node_modules/flag-icon-css/sass/**/*.scss',
-            'node_modules/shariff/build/shariff.min.css'
+            'node_modules/flag-icon-css/sass/**/*.scss'
         ])
         .pipe(copy(SCSS_SRC, {prefix: 1}))
 });
