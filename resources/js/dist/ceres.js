@@ -21686,8 +21686,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _number = require("./number");
-
 var _utils = require("./utils");
 
 var MonetaryFormatter = function () {
@@ -21738,6 +21736,22 @@ var MonetaryFormatter = function () {
         }
 
         return parsed;
+    }
+
+    function _getDecimalValue(value) {
+        var extend = 0;
+
+        value += "";
+
+        if (value.length === 1) {
+            value = extend + value;
+        } else {
+            while (value.length < 2) {
+                value += extend;
+            }
+        }
+
+        return value;
     }
 
     MonetaryFormatter.prototype.setPattern = function (pattern) {
@@ -21804,7 +21818,7 @@ var MonetaryFormatter = function () {
                     }
                 case T_DECIMAL:
                     {
-                        return _this2.separatorDecimals + (0, _number.toLength)((value * 100).toFixed(0).substr(-2, 2), 2);
+                        return _this2.separatorDecimals + _getDecimalValue((value * 100).toFixed(0).substr(-2, 2));
                     }
                 case T_CURRENCY:
                     {
@@ -21832,7 +21846,7 @@ var MonetaryFormatter = function () {
 
 exports.default = MonetaryFormatter;
 
-},{"./number":116,"./utils":119}],114:[function(require,module,exports){
+},{"./utils":119}],114:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21926,7 +21940,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.floatLength = floatLength;
 exports.limit = limit;
 exports.formatFloat = formatFloat;
-exports.toLength = toLength;
 
 var _utils = require("./utils");
 
@@ -21993,19 +22006,6 @@ function formatFloat(value, decimals, round) {
         return 1 / 0;
     }
     return parseFloat(value.toFixed(decimals));
-}
-
-function toLength(value, length, suffix) {
-    value += "";
-    if ((0, _utils.isNullOrUndefined)(suffix)) {
-        suffix = "0";
-    }
-
-    while (value.length < length) {
-        value += suffix;
-    }
-
-    return value;
 }
 
 },{"./utils":119}],117:[function(require,module,exports){
