@@ -62,7 +62,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "warning");
 
-        if (App.config.log.data.indexOf("log_warnings") >= 0)
+        if (App.config.log.data.indexOf("print_warnings") >= 0)
         {
             _printNotification(notification);
         }

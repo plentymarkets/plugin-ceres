@@ -73,19 +73,3 @@ export function formatFloat(value, decimals, round)
     }
     return parseFloat(value.toFixed(decimals));
 }
-
-export function toLength(value, length, suffix)
-{
-    value += "";
-    if (isNullOrUndefined(suffix))
-    {
-        suffix = "0";
-    }
-
-    while (value.length < length)
-    {
-        value += suffix;
-    }
-
-    return value;
-}
