@@ -21,7 +21,7 @@
                         "defaultValue": "images/ceres-logo.svg"
                     }
                 },
-                "global.company_icon": {
+                "header.company_icon": {
                     "type": "inputFile",
                     "required": false,
                     "label": "Config.globalCompanyIconLabel",

@@ -9,6 +9,7 @@ class CeresHeaderConfig extends PluginConfig
 {
     public $companyName;
     public $companyLogo;
+    public $companyIcon;
     public $showNavBars;
     public $fixedNavBar;
     public $showCategoryTypes;
@@ -23,6 +24,7 @@ class CeresHeaderConfig extends PluginConfig
         parent::__construct($configRepository, "Ceres");
         $this->companyName          = $this->getTextValue("header.company_name", "Ceres Webshop" );
         $this->companyLogo          = $this->getTextValue( "header.company_logo", "images/ceres-logo.svg" );
+        $this->companyIcon          = $this->getTextValue( "header.company_icon", "" );
         $this->showNavBars          = $this->getTextValue( "header.show_navbars", "top" );
         $this->fixedNavBar          = $this->getBooleanValue( "header.fixed_navbar", true );
         $this->showCategoryTypes    = $this->getTextValue( "header.show_category_types", "all" );
