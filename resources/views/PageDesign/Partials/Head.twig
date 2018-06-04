@@ -4,10 +4,10 @@
 
 {% set lang = services.sessionStorage.getLang() %}
 
-{% if config("Ceres.header.company_icon") is empty %}
+{% if ceresConfig.header.companyIcon is empty %}
     {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
 {% else %}
-    {% set favicon = config("Ceres.header.company_icon") %}
+    {% set favicon = ceresConfig.header.companyIcon %}
 {% endif %}
 
 <link rel="icon" type="img/ico" href="{{ favicon }}">
