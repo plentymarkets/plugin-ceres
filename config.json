@@ -21,10 +21,10 @@
                         "defaultValue": "images/ceres-logo.svg"
                     }
                 },
-                "header.company_icon": {
+                "global.favicon": {
                     "type": "inputFile",
                     "required": false,
-                    "label": "Config.globalCompanyIconLabel",
+                    "label": "Config.globalFaviconLabel",
                     "options": {
                         "defaultValue": ""
                     }
