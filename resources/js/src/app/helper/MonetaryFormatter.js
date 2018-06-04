@@ -1,4 +1,3 @@
-import {toLength}from "./number";
 import {isNullOrUndefined}from "./utils";
 
 const MonetaryFormatter = (function()
@@ -62,6 +61,27 @@ const MonetaryFormatter = (function()
         }
 
         return parsed;
+    }
+
+    function _getDecimalValue(value)
+    {
+        const extend = 0;
+
+        value += "";
+
+        if (value.length === 1)
+        {
+            value = extend + value;
+        }
+        else
+        {
+            while (value.length < 2)
+            {
+                value += extend;
+            }
+        }
+
+        return value;
     }
 
     MonetaryFormatter.prototype.setPattern = function(pattern)
@@ -138,7 +158,7 @@ const MonetaryFormatter = (function()
                 return digits;
             }
             case T_DECIMAL: {
-                return this.separatorDecimals + toLength((value * 100).toFixed(0).substr(-2, 2), 2);
+                return this.separatorDecimals + _getDecimalValue((value * 100).toFixed(0).substr(-2, 2));
             }
             case T_CURRENCY: {
                 return currency;
