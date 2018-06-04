@@ -22843,7 +22843,6 @@ function getUrlParams(urlParams) {
 }
 
 function setUrlParams(urlParams) {
-    console.warn("set params");
     var pathName = window.location.pathname;
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
