@@ -22942,7 +22942,7 @@ module.exports = function ($) {
     function _warn(message) {
         var notification = new Notification(message, "warning");
 
-        if (App.config.log.data.indexOf("log_warnings") >= 0) {
+        if (App.config.log.data.indexOf("print_warnings") >= 0) {
             _printNotification(notification);
         }
 
@@ -23211,7 +23211,6 @@ function getUrlParams(urlParams) {
 }
 
 function setUrlParams(urlParams) {
-    console.warn("set params");
     var pathName = window.location.pathname;
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
