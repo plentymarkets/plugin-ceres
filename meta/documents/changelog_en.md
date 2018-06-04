@@ -1,5 +1,6 @@
 # Release Notes for Ceres
 
+<<<<<<< HEAD
 ## v2.9.1 (2018-06-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.0...2.9.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
@@ -8,6 +9,9 @@
 - Due to an error, single-digit decimal places of prices were returned as double-digit decimal places. This has been fixed.
 
 ## v2.9.0 (2018-05-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.8.1...2.9.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+=======
+## v2.9.0 (2018-05-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.8.1...2.9.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+>>>>>>> stable
 
 ### Added
 
