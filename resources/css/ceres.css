@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v4.0.0 | MIT License | github.com/necolas/normalize.css */
-@import url(shariff/build/shariff.min.css);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -12515,49 +12514,6 @@ body > #vue-error.open-hover .basket-preview-hover-wrapper {
   }
 }
 
-.shariff .theme-minimal .shariff-button {
-  width: auto !important;
-  height: auto !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  border: none;
-  margin-right: .5rem;
-  margin-bottom: 0;
-  -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-}
-
-.shariff .theme-minimal .shariff-button a {
-  color: #dcdbd8;
-  height: auto !important;
-  background-color: transparent !important;
-}
-
-.shariff .theme-minimal .shariff-button .share_text {
-  display: none;
-}
-
-.shariff .theme-minimal .shariff-button .share_count {
-  background-color: transparent;
-  color: #333;
-}
-
-.shariff .theme-minimal .twitter a:hover {
-  color: #55acee;
-}
-
-.shariff .theme-minimal .facebook a:hover {
-  color: #3b5998;
-}
-
-.shariff .theme-minimal .googleplus a:hover {
-  color: #d34836;
-}
-
-.shariff .theme-minimal .pinterest a:hover {
-  color: #bd081c;
-}
-
 .input-group.vert .input-group-btn {
   display: block;
   width: 100%;
@@ -19263,12 +19219,6 @@ body.menu-is-visible {
   border: none;
   border-radius: none;
   padding: .75rem .45rem .25rem 0;
-}
-
-.single-rightside .shariff .orientation-horizontal li .fa {
-  line-height: 30px;
-  text-align: center;
-  margin-left: 0.5rem;
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
