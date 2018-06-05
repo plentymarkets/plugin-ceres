@@ -20169,6 +20169,12 @@ var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
+var _ExceptionMap3 = require("../../exceptions/ExceptionMap");
+
+var _ExceptionMap4 = _interopRequireDefault(_ExceptionMap3);
+
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NotificationService = require("services/NotificationService");
@@ -20214,31 +20220,30 @@ Vue.component("notifications", {
          * show initial notifications from server
          */
         showInitialNotifications: function showInitialNotifications() {
-            for (var key in this.initialNotifications) {
-                // set default type top 'log'
-                var type = this.initialNotifications[key].type || "log";
-                var message = this.initialNotifications[key].message;
-                var messageCode = this.initialNotifications[key].code;
+            for (var type in this.initialNotifications) {
+                var notification = this.initialNotifications[type];
 
-                if (messageCode > 0) {
-                    message = _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(messageCode.toString()));
+                if ((0, _utils.isNullOrUndefined)(notification)) {
+                    continue;
+                }
+
+                if (notification.code > 0 && _ExceptionMap4.default.has(notification.code)) {
+                    notification.message = _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(notification.code.toString()));
                 }
 
                 // type cannot be undefined
-                if (message) {
-                    if (NotificationService[type] && typeof NotificationService[type] === "function") {
-                        NotificationService[type](message);
-                    } else {
-                        // unkown type
-                        NotificationService.log(message);
-                    }
+                if (!(0, _utils.isNullOrUndefined)(NotificationService[type]) && typeof NotificationService[type] === "function") {
+                    NotificationService[type](notification);
+                } else {
+                    // unkown type
+                    NotificationService.log(notification);
                 }
             }
         }
     }
 });
 
-},{"exceptions/ExceptionMap":96,"services/NotificationService":127,"services/TranslationService":128}],76:[function(require,module,exports){
+},{"../../exceptions/ExceptionMap":96,"../../helper/utils":119,"exceptions/ExceptionMap":96,"services/NotificationService":127,"services/TranslationService":128}],76:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
