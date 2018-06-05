@@ -1,6 +1,3 @@
-import ExceptionMap from "exceptions/ExceptionMap";
-import TranslationService from "services/TranslationService";
-import exceptionMap from "../../exceptions/ExceptionMap";
 import {isNullOrUndefined}from "../../helper/utils";
 
 var NotificationService = require("services/NotificationService");
@@ -62,13 +59,6 @@ Vue.component("notifications", {
                 if (isNullOrUndefined(notification))
                 {
                     continue;
-                }
-
-                if (notification.code > 0 && exceptionMap.has(notification.code))
-                {
-                    notification.message = TranslationService.translate(
-                        "Ceres::Template." + ExceptionMap.get(notification.code.toString())
-                    );
                 }
 
                 // type cannot be undefined
