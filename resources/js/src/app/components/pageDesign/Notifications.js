@@ -1,7 +1,7 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
 import exceptionMap from "../../exceptions/ExceptionMap";
-import {isNullOrUndefined} from "../../helper/utils";
+import {isNullOrUndefined}from "../../helper/utils";
 
 var NotificationService = require("services/NotificationService");
 
