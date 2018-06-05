@@ -20529,21 +20529,7 @@ Vue.component("mobile-navigation", {
 },{}],75:[function(require,module,exports){
 "use strict";
 
-var _ExceptionMap = require("exceptions/ExceptionMap");
-
-var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _ExceptionMap3 = require("../../exceptions/ExceptionMap");
-
-var _ExceptionMap4 = _interopRequireDefault(_ExceptionMap3);
-
 var _utils = require("../../helper/utils");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NotificationService = require("services/NotificationService");
 
@@ -20595,10 +20581,6 @@ Vue.component("notifications", {
                     continue;
                 }
 
-                if (notification.code > 0 && _ExceptionMap4.default.has(notification.code)) {
-                    notification.message = _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(notification.code.toString()));
-                }
-
                 // type cannot be undefined
                 if (!(0, _utils.isNullOrUndefined)(NotificationService[type]) && typeof NotificationService[type] === "function") {
                     NotificationService[type](notification);
@@ -20611,7 +20593,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"../../exceptions/ExceptionMap":96,"../../helper/utils":119,"exceptions/ExceptionMap":96,"services/NotificationService":127,"services/TranslationService":128}],76:[function(require,module,exports){
+},{"../../helper/utils":119,"services/NotificationService":127}],76:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -21264,7 +21246,7 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["401", "notificationsCalculateShippingFailed"]]);
+var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
 
 exports.default = exceptionMap;
 
@@ -22891,6 +22873,14 @@ module.exports = function ($) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _ExceptionMap = require("exceptions/ExceptionMap");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 module.exports = function ($) {
 
     var notificationCount = 0;
@@ -22977,6 +22967,9 @@ module.exports = function ($) {
     }
 
     function _printNotification(notification) {
+        if (notification.code > 0 && _ExceptionMap.exceptionMap.has(notification.code.toString())) {
+            notification.message = _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap.exceptionMap.get(notification.code.toString()));
+        }
         notifications.add(notification);
         _log(notification);
 
@@ -23053,7 +23046,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],128:[function(require,module,exports){
+},{"exceptions/ExceptionMap":96,"services/TranslationService":128}],128:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
