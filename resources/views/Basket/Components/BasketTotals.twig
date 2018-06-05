@@ -52,12 +52,15 @@
                 --><dd :class="{ 'font-weight-bold': showNetPrices }">
                     ${ basket.basketAmountNet | currency }
                 </dd>
-                <dt v-if="basket.couponCode && basket.couponCampaignType === 'promotion'">
-                    {{ trans("Ceres::Template.basketCoupon") }}
-                </dt><!--
-                --><dd v-if="basket.couponCode && basket.couponCampaignType === 'promotion'">
-                    ${ basket.couponDiscount | currency }
-                </dd>
+                <template v-if="basket.couponCode && basket.couponCampaignType === 'promotion'">
+                    <dt>
+                        {{ trans("Ceres::Template.basketCoupon") }}
+                    </dt><!--
+                --><dd>
+                        ${ basket.couponDiscount | currency }
+                    </dd>
+                </template>
+
 
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
                 <div class="vatTotals" v-for="totalVat in basket.totalVats">
@@ -78,18 +81,23 @@
                     --><dd :class="{ 'font-weight-bold': !showNetPrices }">
                         ${ basket.basketAmount | currency }
                     </dd>
-                    <dt v-if="basket.couponCode && basket.couponCampaignType === 'sales'">
-                        {{ trans("Ceres::Template.basketCoupon") }}</strong>
-                    </dt><!--
-                     --><dd v-if="basket.couponCode && basket.couponCampaignType === 'sales'">
-                        ${ basket.couponDiscount | currency }
-                    </dd>
-                    <dt v-if="basket.openAmount > 0" :class="{ 'font-weight-bold': basket.openAmount > 0 }">
-                        {{ trans("Ceres::Template.basketOpenAmount") }}
-                    </dt><!--
-                    --><dd v-if="basket.openAmount > 0" :class="{ 'font-weight-bold': basket.openAmount > 0 }">
-                        ${ basket.openAmount | currency }
-                    </dd>
+                    <template v-if="basket.couponCode && basket.couponCampaignType === 'sales'">
+                        <dt>
+                            {{ trans("Ceres::Template.basketCoupon") }}</strong>
+                        </dt><!--
+                     --><dd>
+                            ${ basket.couponDiscount | currency }
+                        </dd>
+                    </template>
+                    <template v-if="basket.openAmount > 0">
+                        <dt :class="{ 'font-weight-bold': basket.openAmount > 0 }">
+                            {{ trans("Ceres::Template.basketOpenAmount") }}
+                        </dt><!--
+                    --><dd :class="{ 'font-weight-bold': basket.openAmount > 0 }">
+                            ${ basket.openAmount | currency }
+                        </dd>
+                    </template>
+
                     <dt class="rebate-hint" v-if="basket.basketRebate">
                         ${ basket.basketRebate }% {{ trans("Ceres::Template.basketRebate") }}
                     </dt><!--
