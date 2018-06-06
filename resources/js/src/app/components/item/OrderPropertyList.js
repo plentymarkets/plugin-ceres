@@ -42,7 +42,6 @@ Vue.component("order-property-list", {
         },
 
         ...Vuex.mapState({
-            orderPropertyList: state => state.item.variation.documents[0].data.properties,
             variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
         }),
 
