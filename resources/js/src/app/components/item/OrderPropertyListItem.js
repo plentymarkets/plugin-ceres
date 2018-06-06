@@ -63,6 +63,11 @@ Vue.component("order-property-list-item", {
             return this.variationMarkInvalidProperties && !this.property.value;
         },
 
+        surcharge()
+        {
+            return this.property.itemSurcharge || this.property.surcharge;
+        },
+
         ...Vuex.mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
@@ -187,15 +192,15 @@ Vue.component("order-property-list-item", {
         {
             if (error.hasOwnProperty("validation_errors"))
             {
-                var validationErrors = Object.values(error.validation_errors);
-                var errors = "<ul>";
+                let errorMessage = "<ul class=\"m-b-0\">";
 
-                validationErrors.forEach(function(err, index)
+                for (const error of Object.values(error.validation_errors))
                 {
-                    errors = errors + "<li>" + err + "</li>";
-                });
-                errors += "</ul>";
-                NotificationService.error(errors);
+                    errorMessage = errorMessage + "<li>" + error + "</li>";
+                }
+
+                errorMessage += "</ul>";
+                NotificationService.error(errorMessage);
             }
         }
     }

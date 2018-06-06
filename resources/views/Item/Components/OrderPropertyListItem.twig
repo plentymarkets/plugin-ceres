@@ -4,7 +4,7 @@
         <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.value, 'error': hasError }" data-validate="text">
             <input type="text" @change="onInputValueChanged($event.target.value)" v-model="inputValue" v-tooltip data-toggle="tooltip" :title="property.names.description">
             <label>${property.names.name}
-                <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency})</strong>
+                <strong v-if="surcharge > 0">(+ ${ surcharge | currency})</strong>
             *</label>
         </div>
 
@@ -15,7 +15,7 @@
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">
                     ${ property.names.name }
-                    <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency}) *</strong>
+                    <strong v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
                 </span>
             </label>
         </div> -->
@@ -24,7 +24,7 @@
             <label class="form-check-label" :class="{ 'text-success': property.value, 'text-danger': hasError }">
                 <input :name="group ? group.id : 'check' + _uid" :value="property.id" @change="onInputValueChanged(inputType === 'checkbox' ? $event.target.checked : $event.target.value)" class="form-check-input" :type="inputType">
                 ${ property.names.name }
-                <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency}) *</strong>
+                <strong v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
             </label>
         </div>
 
@@ -44,7 +44,7 @@
                 <span class="input-unit-preview" :class="{ 'disabled': waiting }">${selectedFileName}</span>
                 <span class="input-unit-label">
                     ${property.names.name}
-                    <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency}) *</strong>
+                    <strong v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
                     <i class="fa fa-ellipsis-h"></i>
