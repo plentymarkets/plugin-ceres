@@ -3322,7 +3322,7 @@
                     }
                 },
                 "custom-font": {
-                    "type": "text",
+                    "type": "inputText",
                     "required": false,
                     "scss": true,
                     "dashes": false,
