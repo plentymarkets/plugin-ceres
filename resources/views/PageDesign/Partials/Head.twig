@@ -19,6 +19,13 @@
     {% endfor %}
 {% endif %}
 
+<style>
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ config('Ceres.custom-font') }}")
+    }
+</style>
+
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set logData = config("Ceres.log.data")|split(', ') %}

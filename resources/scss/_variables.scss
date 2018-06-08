@@ -140,11 +140,6 @@ $link-hover-color:      darken($link-color, 15%) !default;
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
-@font-face {
-  font-family: "Custom-Font";
-  src: url($custom-font)
-}
-
 $font-family-sans-serif:Custom-Font, sans-serif !default;
 $font-family-helvetica: $font-family-sans-serif !default;
 $font-family-serif:     Georgia, "Times New Roman", Times, serif !default;
