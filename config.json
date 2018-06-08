@@ -3336,7 +3336,7 @@
                     "required": false,
                     "scss": true,
                     "dashes": true,
-                    "label": "Custom Schriftart",
+                    "label": "upload",
                     "options": {
                         "defaultValue": ""
                     }
