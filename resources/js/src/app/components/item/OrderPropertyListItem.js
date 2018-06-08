@@ -192,15 +192,10 @@ Vue.component("order-property-list-item", {
         {
             if (error.hasOwnProperty("validation_errors"))
             {
-                let errorMessage = "<ul class=\"m-b-0\">";
-
-                for (const error of Object.values(error.validation_errors))
+                for (const err of Object.values(error.validation_errors))
                 {
-                    errorMessage = errorMessage + "<li>" + error + "</li>";
+                    NotificationService.error(err[0]);
                 }
-
-                errorMessage += "</ul>";
-                NotificationService.error(errorMessage);
             }
         }
     }
