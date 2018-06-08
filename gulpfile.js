@@ -206,7 +206,7 @@ function buildSass(outputFile, outputStyle)
             {
                 if (entry.dashes)
                 {
-                    scssConfig += `$${entryKey.split(".").join("")}: '${entry.options.defaultValue}';`;
+                    scssConfig += `$${entryKey.split(".").join("")}: "${entry.options.defaultValue}";`;
                 }
                 else
                 {

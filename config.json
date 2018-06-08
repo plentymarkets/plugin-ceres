@@ -3322,6 +3322,16 @@
                     }
                 },
                 "custom-font": {
+                    "type": "text",
+                    "required": false,
+                    "scss": true,
+                    "dashes": false,
+                    "label": "Custom Schriftart",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
+                "test": {
                     "type": "inputFile",
                     "required": false,
                     "scss": true,
