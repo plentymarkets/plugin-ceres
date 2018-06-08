@@ -20080,7 +20080,14 @@ Vue.component("order-history", {
     delimiters: ["${", "}"],
 
     props: {
-        template: String
+        template: {
+            type: String,
+            default: "#vue-order-history"
+        },
+        orderDetailsTemplate: {
+            type: String,
+            default: "Ceres::Checkout.OrderDetails"
+        }
     },
 
     data: function data() {
@@ -20106,7 +20113,7 @@ Vue.component("order-history", {
                 $(_this.$refs.orderDetails).modal("show");
             });
 
-            ApiService.get("/rest/io/order/template?template=Ceres::Checkout.OrderDetails&orderId=" + order.order.id).done(function (response) {
+            ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + order.order.id).done(function (response) {
                 _this.isLoading = false;
                 $("#dynamic-twig-content").html(response);
             });
