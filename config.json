@@ -3320,6 +3320,16 @@
                     "options": {
                         "defaultValue": "#d9534f"
                     }
+                },
+                "custom-font": {
+                    "type": "inputFile",
+                    "required": false,
+                    "scss": true,
+                    "dashes": true,
+                    "label": "Custom Schriftart",
+                    "options": {
+                        "defaultValue": ""
+                    }
                 }
             }
         },
