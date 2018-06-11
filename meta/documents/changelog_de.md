@@ -1,4 +1,33 @@
 # Release Notes für Ceres
+
+## v2.10.0 (2018-06-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.1...2.10.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Ceres-Konfiguration wurde ins Deutsche übersetzt.
+- Das Favicon kann nun direkt in der Ceres-Konfiguration über eine Dateiauswahl gewählt werden. Sollte hier kein Favicon gesetzt sein, greift das Favicon aus den alten Einstellungen im Menü **System » Mandant » gewünschter Mandant » Webshop » Einstellungen**.
+
+### Geändert
+
+- Die Konfiguration für das Shop- und Firmenlogo erfolgt nun über eine Dateiauswahl und nicht mehr über ein Textfeld.
+- Die Konfiguration für das PDF des Widerrufsformulars erfolgt nun über eine Dateiauswahl und nicht mehr über ein Textfeld.
+- Es ist nun möglich die Bestelldetails in der Auftragshistorie mit einem Theme zu überschreiben, da die Auftragshistorie-Komponente nun einen zweiten Parameter annimmt, welcher das Template für die Bestelldetails beinhaltet.
+- Der Link zum Forum auf der "Vue.js konnte nicht initialisiert werden"-Fehlerseite besitzt nun ein nofollow-Tag.
+- In der Kaufabwicklung wurden die Buttons zum Anlegen einer neuen Adresse für die mobile Ansicht optimiert und verdecken nun keine Elemente mehr.
+- Wenn ein Kundenkonto gesperrt ist, erhält der Kunde jetzt eine entsprechende Nachricht.
+- Auf der Bestellbestätigungsseite werden nun Netto- oder Bruttosummen hervorgehoben, abhängig von dem am Auftrag mitgegebenen Flag.
+- Auf der Bestellbestätigungsseite wird nun das Lieferland an den Adressen ausgegeben.
+
+### Behoben
+
+- Durch einen Fehler wurden Warnhinweise nicht dargestellt. Dies wurde behoben.
+- Durch einen Fehler wurde die gegenwärtige Seite beim Klick auf einen Link neu geladen. Dies wurde behoben.
+- Durch einen Fehler wurde ein falsches Bild im Warenkorb-Overlay angezeigt. Dies wurde behoben.
+- Wenn es für einen Artikel einen gesonderten Aufpreis für ein Bestellmerkmal gibt, wird dieser nun korrekt in der Artikelansicht angezeigt.
+- Es gab einen Fehler im Zusammenhang von Bestellmerkmalen und normalen Merkmalen. Dieser wurde behoben.
+- Durch einen Fehler wechselten die Summen in der Kaufabwicklung und im Warenkorb bei Änderungen nicht unmittelbar zwischen Netto- und Bruttosummen. Dies wurde behoben.
+- Durch einen Fehler wechselte die Summenanzeige im Header nach Änderungen nicht direkt zwischen Brutto- und Nettosummen. Dies wurde behoben.
+
 ## v2.9.1 (2018-06-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.0...2.9.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
