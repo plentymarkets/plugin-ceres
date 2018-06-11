@@ -313,7 +313,7 @@ html {
 html {
   font-size: 14px;
   -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -5602,7 +5602,7 @@ button.close {
   margin: 1px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   border: 1px solid #fff;
   border-radius: 10px;
 }
@@ -12755,7 +12755,7 @@ button:focus {
 }
 
 .btn-labeled.btn-link .btn-label {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   padding: 0.25rem 0;
 }
 
@@ -12774,6 +12774,114 @@ button:focus {
 
 .btn-icon.btn-sm .fa, .btn-group-sm > .btn-icon.btn .fa {
   width: 12px;
+}
+
+.btn-only-icon-xs-up {
+  width: 2.2rem !important;
+  padding-right: 8px;
+  height: 2.2rem;
+}
+
+.btn-only-icon-xs-up span {
+  display: none !important;
+}
+
+@media (max-width: 543px) {
+  .btn-only-icon-xs-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-xs-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 544px) {
+  .btn-only-icon-sm-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-sm-up span {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .btn-only-icon-sm-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-sm-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn-only-icon-md-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-md-up span {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .btn-only-icon-md-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-md-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .btn-only-icon-lg-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-lg-up span {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  .btn-only-icon-lg-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-lg-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .btn-only-icon-xl-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-xl-up span {
+    display: none !important;
+  }
+}
+
+.btn-only-icon-xl-down {
+  width: 2.2rem !important;
+  padding-right: 8px;
+  height: 2.2rem;
+}
+
+.btn-only-icon-xl-down span {
+  display: none !important;
 }
 
 .card .item-edit, .cmp-address-list .items > div:first-child .item-edit {
@@ -13935,6 +14043,12 @@ Custom classes
   right: 0;
   border: 0;
   transform: rotate3d(0, 0, 1, 90deg);
+}
+
+.notification-wrapper {
+  position: absolute;
+  right: .5rem;
+  top: 10rem;
 }
 
 .popper {
@@ -16842,7 +16956,7 @@ body.menu-is-visible {
   bottom: -2px;
   left: -1px;
   background-color: #fff;
-  box-shadow: 0 0 0 0 transparent;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   border: 1px solid transparent;
   transform-origin: top right;
   transform: scaleX(1) scaleY(1);
@@ -19634,7 +19748,7 @@ body.menu-is-visible {
 .gradient-hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, transparent, #DCDBD7, transparent);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #DCDBD7, rgba(0, 0, 0, 0));
 }
 
 .show-more-returns {

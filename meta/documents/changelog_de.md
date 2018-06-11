@@ -1,4 +1,14 @@
 # Release Notes für Ceres
+## v2.9.1 (2018-06-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.0...2.9.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Es wird nun zwischen Verkaufs- und Aktionsgutscheinen unterschieden. Die Anordnung der Gutscheine wurde entsprechend angepasst.
+
+### Behoben
+
+- Durch einen Fehler konnten Plugins mit eigener Kaufabwicklung keine Aufträge mehr anlegen. Dies wurde behoben.
+- Durch einen Fehler wurden einstellige Nachkommastellen bei Preisen als zweistellige Nachkommastelle ausgegeben. Dies wurde behoben.
 
 ## v2.9.0 (2018-05-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.8.1...2.9.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

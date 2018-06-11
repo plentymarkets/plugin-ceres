@@ -26,7 +26,6 @@ export function getUrlParams(urlParams)
 
 export function setUrlParams(urlParams)
 {
-    console.warn("set params");
     var pathName = window.location.pathname;
     var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];

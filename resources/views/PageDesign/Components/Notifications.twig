@@ -1,8 +1,8 @@
 {% set logData = config("Ceres.log.data")|split(', ') %}
 
 <script type="x/template" id="vue-notifications">
-    <div>
-        <div v-for="notification in notifications" :class="'alert alert-dynamic alert-dismissible fade in alert-' + notification.context" role="alert">
+    <div class="notification-wrapper">
+        <div v-for="notification in notifications" :class="'alert alert-dismissible fade in alert-' + notification.context" role="alert">
             <button type="button" class="close" aria-label="Close" @click="notification.close()">
                 <span aria-hidden="true">&times;</span>
             </button>

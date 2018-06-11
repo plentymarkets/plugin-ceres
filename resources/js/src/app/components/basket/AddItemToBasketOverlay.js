@@ -40,9 +40,10 @@ Vue.component("add-item-to-basket-overlay", {
         {
             if (this.isLastBasketEntrySet)
             {
-                const img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
+                const images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
+                const img = this.$options.filters.itemImage(images);
 
-                return img ? img.url : "";
+                return img;
             }
 
             return "";

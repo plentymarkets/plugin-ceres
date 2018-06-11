@@ -1,3 +1,6 @@
+import {exceptionMap}from "exceptions/ExceptionMap";
+import TranslationService from "services/TranslationService";
+
 module.exports = (function($)
 {
 
@@ -62,7 +65,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "warning");
 
-        if (App.config.log.data.indexOf("log_warnings") >= 0)
+        if (App.config.log.data.indexOf("print_warnings") >= 0)
         {
             _printNotification(notification);
         }
@@ -101,6 +104,12 @@ module.exports = (function($)
 
     function _printNotification(notification)
     {
+        if (notification.code > 0 && exceptionMap.has(notification.code.toString()))
+        {
+            notification.message = TranslationService.translate(
+                "Ceres::Template." + exceptionMap.get(notification.code.toString())
+            );
+        }
         notifications.add(notification);
         _log(notification);
 
