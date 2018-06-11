@@ -14720,7 +14720,14 @@ Vue.component("basket-preview", {
 
     delimiters: ["${", "}"],
 
-    props: ["template", "basketData"],
+    props: {
+        template: String,
+        basketData: Object,
+        showNetPrices: {
+            type: Boolean,
+            default: false
+        }
+    },
 
     computed: Vuex.mapState({
         basket: function basket(state) {
@@ -14737,6 +14744,7 @@ Vue.component("basket-preview", {
     created: function created() {
         this.$options.template = this.template;
         this.$store.commit("setBasket", this.basketData);
+        this.$store.commit("setShowNetPrices", this.showNetPrices);
         this.$store.dispatch("loadBasketData");
     },
 
@@ -14750,6 +14758,7 @@ Vue.component("basket-preview", {
         this.$nextTick(function () {
             _ApiService2.default.listen("AfterBasketChanged", function (data) {
                 _this.$store.commit("setBasket", data.basket);
+                _this.$store.commit("setShowNetPrices", data.showNetPrices);
             });
         });
     }
@@ -14765,10 +14774,6 @@ Vue.component("basket-totals", {
     props: {
         template: {
             type: String
-        },
-        showNetPrices: {
-            type: Boolean,
-            default: true
         }
     },
 
@@ -14778,6 +14783,9 @@ Vue.component("basket-totals", {
         },
         isBasketLoading: function isBasketLoading(state) {
             return state.basket.isBasketLoading;
+        },
+        showNetPrices: function showNetPrices(state) {
+            return state.basket.showNetPrices;
         }
     }),
 
@@ -23977,6 +23985,7 @@ var NotificationService = require("services/NotificationService");
 var state = {
     data: {},
     items: [],
+    showNetPrices: false,
     latestEntry: {
         item: {},
         quantity: null
@@ -24044,6 +24053,9 @@ var mutations = {
     },
     setIsBasketInitiallyLoaded: function setIsBasketInitiallyLoaded(state) {
         state.isBasketInitiallyLoaded = true;
+    },
+    setShowNetPrices: function setShowNetPrices(state, showNetPrices) {
+        state.showNetPrices = showNetPrices;
     }
 };
 
@@ -24071,6 +24083,7 @@ var actions = {
 
         _ApiService2.default.listen("AfterBasketChanged", function (data) {
             commit("setBasket", data.basket);
+            commit("setShowNetPrices", data.showNetPrices);
             commit("setBasketItems", data.basketItems);
         });
     },
