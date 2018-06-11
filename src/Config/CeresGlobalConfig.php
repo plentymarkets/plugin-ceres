@@ -7,6 +7,7 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresGlobalConfig extends PluginConfig
 {
+    public $favicon;
     public $shippingCostsCategoryId;
     public $defaultContactClassB2B;
     public $enableOldUrlPattern;
@@ -16,6 +17,7 @@ class CeresGlobalConfig extends PluginConfig
     {
         parent::__construct($configRepository, "Ceres");
 
+        $this->favicon                  = $this->getTextValue( "global.favicon", "" );
         $this->shippingCostsCategoryId  = $this->getIntegerValue( "global.shippingCostsCategoryId", 0 );
         $this->defaultContactClassB2B   = $this->getIntegerValue( "global.default_contact_class_b2b", null );
         $this->enableOldUrlPattern      = $this->getBooleanValue( "global.enableOldUrlPattern", false );
