@@ -71,14 +71,7 @@ const getters =
 
                 for (const property of addedProperties)
                 {
-                    if (property.surcharge > 0)
-                    {
-                        sum += property.surcharge;
-                    }
-                    else if (property.property.surcharge > 0)
-                    {
-                        sum += property.property.surcharge;
-                    }
+                    sum += (property.surcharge || property.property.surcharge);
                 }
             }
 
@@ -142,9 +135,12 @@ const getters =
                     });
 
                     groups.push({
+                        touched: false,
                         group: groupProperties[0].group,
-                        properties: groupProperties.map(property => property.property),
-                        touched: false
+                        properties: groupProperties.map(property =>
+                        {
+                            return {...property.property, itemSurcharge: property.surcharge};
+                        })
                     });
                 }
 
