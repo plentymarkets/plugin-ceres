@@ -3,7 +3,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {% set lang = services.sessionStorage.getLang() %}
-{% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
+
+{% if ceresConfig.global.favicon is empty %}
+    {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
+{% else %}
+    {% set favicon = ceresConfig.global.favicon %}
+{% endif %}
+
 <link rel="icon" type="img/ico" href="{{ favicon }}">
 
 {% set canonicalUrl = services.url.getCanonicalURL() %}
