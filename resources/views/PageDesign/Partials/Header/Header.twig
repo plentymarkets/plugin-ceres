@@ -68,18 +68,16 @@
 
                                 <i v-waiting-animation="this.$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 {% if config("Ceres.header.basket_values") != "quantity" %}
-                                    {% if services.customer.showNetPrices() %}
-                                        <span class="badge" v-basket-item-sum="this.$store.state.basket.data.itemSumNet">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
-                                    {% else %}
-                                        <span class="badge" v-basket-item-sum="this.$store.state.basket.data.itemSum">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
-                                    {% endif %}
+                                    <span class="badge" v-if="!$store.state.basket.showNetPrices" v-basket-item-sum="this.$store.state.basket.data.itemSum">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
+                                    <span class="badge" v-else v-cloak v-basket-item-sum="this.$store.state.basket.data.itemSumNet">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
                                 {% endif %}
                             </a>
 
                             {% if config("Ceres.basket.preview_type") != "right" %}
                                 <basket-preview
                                         template="#vue-basket-preview-hover"
-                                        :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}">
+                                        :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
+                                        :show-net-prices={{ showNetPrices | json_encode }}>
                                 </basket-preview>
                             {% endif %}
                         </li>
