@@ -5,13 +5,13 @@
 ### Hinzugefügt
 
 - Die Ceres-Konfiguration wurde ins Deutsche übersetzt.
-- Das Favicon kann nun direkt in der Ceres-Konfiguration über eine Dateiauswahl gewählt werden. Sollte hier kein Favicon gesetzt sein, greift das Favicon aus den alten Einstellungen im Menü **System » Mandant » gewünschter Mandant » Webshop » Einstellungen**.
+- Das Favicon kann nun direkt in der Ceres-Konfiguration über eine Dateiauswahl gewählt werden. Sollte hier kein Favicon gesetzt sein, greift das Favicon aus den alten Einstellungen im Menü **System » Mandant » Mandant wählen » Webshop » Einstellungen**.
 
 ### Geändert
 
 - Die Konfiguration für das Shop- und Firmenlogo erfolgt nun über eine Dateiauswahl und nicht mehr über ein Textfeld.
 - Die Konfiguration für das PDF des Widerrufsformulars erfolgt nun über eine Dateiauswahl und nicht mehr über ein Textfeld.
-- Es ist nun möglich die Bestelldetails in der Auftragshistorie mit einem Theme zu überschreiben, da die Auftragshistorie-Komponente nun einen zweiten Parameter annimmt, welcher das Template für die Bestelldetails beinhaltet.
+- Es ist nun möglich die Bestelldetails in der Auftragshistorie mit einem Theme zu überschreiben, da die Auftragshistorie-Komponente jetzt einen zweiten Parameter annimmt, welcher das Template für die Bestelldetails beinhaltet.
 - Der Link zum Forum auf der "Vue.js konnte nicht initialisiert werden"-Fehlerseite besitzt nun ein nofollow-Tag.
 - In der Kaufabwicklung wurden die Buttons zum Anlegen einer neuen Adresse für die mobile Ansicht optimiert und verdecken nun keine Elemente mehr.
 - Wenn ein Kundenkonto gesperrt ist, erhält der Kunde jetzt eine entsprechende Nachricht.
