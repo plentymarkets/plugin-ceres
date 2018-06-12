@@ -1,5 +1,33 @@
 # Release Notes for Ceres
 
+## v2.10.0 (2018-06-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.1...2.10.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- The Ceres configuration has been translated into German.
+- A favicon can now be selected via a file picker in the Ceres configuration. If no favicon is selected there, the favicon stored in the **System » Client » Select client » Online store » Settings** menu is used instead.
+
+### Changed
+
+- The configuration of the company and store logo is now done through a file picker instead of a text field.
+- The configuration for the PDF version of the cancellation form is now done through a file picker instead of a text field.
+- It is now possible to overwrite the order details in the order history with a theme, because the order history component now receives a second parameter which contains the template for the order details.
+- The link to the forum on the "Vue.js could not be initialised" error page is now equipped with a nofollow tag.
+- The buttons for adding an address in the checkout have been optimised for mobile view and no longer conceal other elements.
+- If a customer account has been blocked, the customer now receives a corresponding notification.
+- Net or gross sums are now highlighted on the order confirmation page, depending on the flag of the order.
+- Addresses on the order confirmation page now include the country of delivery.
+
+### Fixed
+
+- Due to an error, warning notifications were not displayed. This has been fixed.
+- Due to an error, clicking on a link refreshed the current page. This has been fixed.
+- Due to an error, the shopping cart overlay displayed a wrong image. This has been fixed.
+- If the order property of an item requires a discrete surcharge, the surcharge is now displayed correctly in the single item view.
+- Interactions between order properties and regular properties led to an error. This has been fixed.
+- Due to an error, the sums in the checkout and the shopping cart did not immediately switch between gross and net sums upon changes. This has been fixed.
+- Due to an error, the display of sums in the header did not immediately switch between gross and net sums upon changes. This has been fixed.
+
 ## v2.9.1 (2018-06-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.0...2.9.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
