@@ -21,7 +21,10 @@
                     </div>
 
                     <h1 class="h2 title">
-                        <span>
+                        <span v-if="currentVariation.bundleComponents">
+                            ${ currentVariationBundleName }
+                        </span>
+                        <span v-else>
                             ${ currentVariation | itemName }
                         </span>
                     </h1>

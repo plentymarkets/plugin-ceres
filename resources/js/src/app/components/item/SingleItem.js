@@ -1,3 +1,5 @@
+import TranslationService from "services/TranslationService";
+
 Vue.component("single-item", {
 
     props: [
@@ -24,6 +26,13 @@ Vue.component("single-item", {
         isTechnicalDataTabActive()
         {
             return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
+        },
+
+        currentVariationBundleName()
+        {
+            const itemName = this.$options.filters.itemName(this.currentVariation);
+
+            return TranslationService.translate("Ceres::Template.singleItemBundleName", {itemName});
         },
 
         ...Vuex.mapState({
