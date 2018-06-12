@@ -136,7 +136,7 @@ Vue.component("login", {
 
                         var translationKey = "Ceres::Template.loginFailed";
 
-                        if (response.error.message.length > 0)
+                        if (response.error.message.length > 0 && response.error.message === "user is blocked")
                             {
                             translationKey = "Ceres::Template.loginBlocked";
                         }
