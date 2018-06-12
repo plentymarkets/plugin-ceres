@@ -28,13 +28,6 @@ Vue.component("single-item", {
             return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
         },
 
-        currentVariationBundleName()
-        {
-            const itemName = this.$options.filters.itemName(this.currentVariation);
-
-            return TranslationService.translate("Ceres::Template.singleItemBundleName", {itemName});
-        },
-
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
             variations: state => state.item.variationList,
