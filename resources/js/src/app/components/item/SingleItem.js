@@ -1,5 +1,3 @@
-import TranslationService from "services/TranslationService";
-
 Vue.component("single-item", {
 
     props: [
