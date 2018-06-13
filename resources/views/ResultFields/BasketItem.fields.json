@@ -14,6 +14,7 @@
     "variation.id",
     "variation.data.orderProperties.*",
     "variation.mayShowUnitPrice",
+    "variation.bundleType",
     "item.id",
     "images.all.url*",
     "images.all.position",
