@@ -14443,10 +14443,9 @@ Vue.component("add-item-to-basket-overlay", {
         },
         imageUrl: function imageUrl() {
             if (this.isLastBasketEntrySet) {
-                var images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
-                var img = this.$options.filters.itemImage(images);
+                var img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
 
-                return img;
+                return img ? img.url : "";
             }
 
             return "";
