@@ -1,6 +1,6 @@
 import TranslationService from "services/TranslationService";
 
-Vue.filter("itemName", ({texts:{name1, name2, name3}, variation:{name}, bundleComponents}, selectedName = App.config.item.itemName, itemDisplayName = App.config.item.displayName) =>
+Vue.filter("itemName", ({texts:{name1, name2, name3}, variation:{name, bundleType}}, selectedName = App.config.item.itemName, itemDisplayName = App.config.item.displayName) =>
 {
     let itemName = "";
 
@@ -27,7 +27,7 @@ Vue.filter("itemName", ({texts:{name1, name2, name3}, variation:{name}, bundleCo
         itemName = name;
     }
 
-    if(bundleComponents)
+    if(bundleType)
     {
         itemName = TranslationService.translate("Ceres::Template.singleItemBundleName", {itemName});
     }
