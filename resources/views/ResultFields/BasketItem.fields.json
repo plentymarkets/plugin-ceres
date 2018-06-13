@@ -29,6 +29,7 @@
     "filter.isSalable",
     "attributes.attribute.names.*",
     "attributes.value.names.*",
+    "bundleComponents.*",
     "unit.content",
     "unit.names.name",
     "unit.names.lang",

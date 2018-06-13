@@ -31,8 +31,11 @@
     "variation.availability.id",
     "variation.releasedAt",
     "variation.mayShowUnitPrice",
+    "variation.bundleType",
 
     "texts.*",
+
+    "bundleComponents.*",
 
     "salesPrices.*",
 

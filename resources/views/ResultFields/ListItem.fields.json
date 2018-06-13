@@ -35,6 +35,7 @@
     "variation.itemId",
     "variation.mayShowUnitPrice",
     "variation.releasedAt",
+    "variation.bundleType",
     "filter.hasChildren",
     "filter.isSalable",
     "unit.content",
