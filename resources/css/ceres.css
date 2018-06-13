@@ -317,7 +317,7 @@ html {
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   color: #4D4F4D;
@@ -5201,7 +5201,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5301,7 +5301,7 @@ button.close {
   display: block;
   max-width: 276px;
   padding: 1px;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -13773,7 +13773,7 @@ Custom classes
   overflow: hidden;
   color: #fff;
   text-align: center;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   position: relative;
   overflow: hidden;
 }
@@ -13858,7 +13858,7 @@ Custom classes
   height: 100%;
   overflow: hidden;
   color: #fff;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   position: relative;
   overflow: hidden;
 }
@@ -14713,7 +14713,7 @@ Custom classes
 }
 
 .wrapper-main .navbar {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   background: #f7f7f9;
   border-bottom: 1px solid #efefef;
 }
@@ -18729,7 +18729,7 @@ body.menu-is-visible {
 
 .sidebar-categories {
   background: #fff;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   height: 100%;
 }
 
@@ -18818,7 +18818,7 @@ body.menu-is-visible {
 }
 
 .cmp-hero .hero-main .carousel .carousel-inner .carousel-item .carousel-caption h3, .cmp-hero .hero-main .carousel .carousel-inner .carousel-item .carousel-caption h2, .cmp-hero .hero-main .carousel .carousel-inner .carousel-item .carousel-caption h1 {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   text-shadow: none;
   color: #fff;
   background: rgba(0, 142, 189, 0.8);
@@ -18880,7 +18880,7 @@ body.menu-is-visible {
 }
 
 .cmp-hero .hero-xtras .hero-category .hero-category-inner .hero-category-headline {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   padding: 1rem;
   box-shadow: none;
   -ms-flex-item-align: start;
@@ -18934,7 +18934,7 @@ body.menu-is-visible {
   border-bottom: 0;
   background: #008ebd;
   position: relative;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
 }
 
 .section-header h1, .section-header h2, .section-header h3, .section-header h4, .section-header h5, .section-header h6 {

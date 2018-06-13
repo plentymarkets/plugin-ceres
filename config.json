@@ -3322,7 +3322,7 @@
                     }
                 },
                 "custom-font": {
-                    "type": "inputFile",
+                    "type": "text",
                     "required": false,
                     "scss": false,
                     "label": "Custom Schriftart",
