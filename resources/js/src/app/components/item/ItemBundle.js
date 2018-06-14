@@ -20,7 +20,7 @@ Vue.component("item-bundle", {
     {
         showItemBundleItems()
 		{
-			// TODO check if bundle type ist set and config value from the split settings is set on NO SPLIT
+			// TODO check if bundle type ist set and config value from the split settings is set on ergänzen
             return true;
         },
 
