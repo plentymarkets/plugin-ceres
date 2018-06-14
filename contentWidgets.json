@@ -654,7 +654,7 @@
 	{
 		"identifier": "Ceres::TextWidget",
 		"label": "Widget.textLabel",
-		"previewImageURL": "/images/widgets/item-list.png",
+		"previewImageURL": "/images/widgets/text.png",
 		"type": "default",
 		"allowedNestingTypes": [
 			"default",
