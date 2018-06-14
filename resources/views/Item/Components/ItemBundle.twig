@@ -1,10 +1,10 @@
 <script type="x/template" id="vue-item-bundle">
-    <div>
+    <div class="m-b-1">
 		<template v-if="showItemBundleItems()">
 			<strong>{{ trans("Ceres::Template.itemBundleContent") }}</strong>
 			<div v-for="item in bundleComponents">
 				<span class="text-muted">${ item.quantity } x</span>
-				<span> ${ getNoBundleText(item.data) | itemName } </span>
+				<span> ${ getBundleInnerText(item.data) | itemName } </span>
 			</div>
 		</template>
     </div>

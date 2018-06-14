@@ -24,7 +24,7 @@ Vue.component("item-bundle", {
             return true;
         },
 
-        getNoBundleText(item)
+        getBundleInnerText(item)
 		{
             item.variation.bundleType = null;
 
