@@ -704,8 +704,9 @@
 				}
 			},
 			"text": {
-				"type": "nodeEditor",
-				"label": "Widget.widgetNodeEditorLabel"
+				"type": "noteEditor",
+				"label": "Widget.widgetNodeEditorLabel",
+				"options": {}
 			}
 		}
 	}
