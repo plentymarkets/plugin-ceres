@@ -20322,7 +20322,7 @@ body.menu-is-visible {
 
 .widget-title-bar.widget-primary {
   color: #fff;
-  background-color: #green;
+  background-color: green;
 }
 
 .widget-title-bar.widget-secondary {
