@@ -20,10 +20,37 @@
 {% endif %}
 
 <style>
-    @font-face {
-        font-family: "Custom-Font";
-        src: url("{{ config('Ceres.custom-font') }}")
-    }
+    {% set customFont = {
+        regular: config('Ceres.custom-font-regular'),
+        bold: config('Ceres.custom-font-bold'),
+        italic: config('Ceres.custom-font-italic'),
+        boldItalic: config('Ceres.custom-font-bold-italic')
+    } %}
+    
+    {% if customFont.regular %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ config('Ceres.custom-font-regular') }}")
+        }
+    {% endif %}
+    {% if customFont.bold %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ config('Ceres.custom-font-bold') }}")
+        }
+    {% endif %}
+    {% if customFont.italic %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ config('Ceres.custom-font-italic') }}")
+        }
+    {% endif %}
+    {% if customFont.boldItalic %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ config('Ceres.custom-font-bold-italic') }}")
+        }
+    {% endif %}
 </style>
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}

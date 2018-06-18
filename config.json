@@ -3321,7 +3321,34 @@
                         "defaultValue": "#d9534f"
                     }
                 },
-                "custom-font": {
+                "custom-font-regular": {
+                    "type": "text",
+                    "required": false,
+                    "scss": false,
+                    "label": "Custom Schriftart",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
+                "custom-font-bold": {
+                    "type": "text",
+                    "required": false,
+                    "scss": false,
+                    "label": "Custom Schriftart",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
+                "custom-font-italic": {
+                    "type": "text",
+                    "required": false,
+                    "scss": false,
+                    "label": "Custom Schriftart",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
+                "custom-font-bold-italic": {
                     "type": "text",
                     "required": false,
                     "scss": false,
