@@ -30,25 +30,29 @@
     {% if customFont.regular %}
         @font-face {
             font-family: "Custom-Font";
-            src: url("{{ config('Ceres.custom-font-regular') }}")
+            src: url("{{ config('Ceres.custom-font-regular') }}");
         }
     {% endif %}
     {% if customFont.bold %}
         @font-face {
             font-family: "Custom-Font";
-            src: url("{{ config('Ceres.custom-font-bold') }}")
+            src: url("{{ config('Ceres.custom-font-bold') }}");
+            font-weight: bold;
         }
     {% endif %}
     {% if customFont.italic %}
         @font-face {
             font-family: "Custom-Font";
-            src: url("{{ config('Ceres.custom-font-italic') }}")
+            src: url("{{ config('Ceres.custom-font-italic') }}");
+            font-style: italic;
         }
     {% endif %}
     {% if customFont.boldItalic %}
         @font-face {
             font-family: "Custom-Font";
-            src: url("{{ config('Ceres.custom-font-bold-italic') }}")
+            src: url("{{ config('Ceres.custom-font-bold-italic') }}");
+            font-weight: bold;
+            font-style: italic;
         }
     {% endif %}
 </style>
