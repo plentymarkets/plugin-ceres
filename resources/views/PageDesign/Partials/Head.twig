@@ -20,12 +20,14 @@
 {% endif %}
 
 <style>
-    {% set customFont = {
-        regular: config('Ceres.custom-font-regular'),
-        bold: config('Ceres.custom-font-bold'),
-        italic: config('Ceres.custom-font-italic'),
-        boldItalic: config('Ceres.custom-font-bold-italic')
-    } %}
+    {% set customFont =
+        {
+            regular: config('Ceres.custom-font-regular'),
+            bold: config('Ceres.custom-font-bold'),
+            italic: config('Ceres.custom-font-italic'),
+            boldItalic: config('Ceres.custom-font-bold-italic')
+        }
+    %}
     
     {% if customFont.regular %}
         @font-face {
