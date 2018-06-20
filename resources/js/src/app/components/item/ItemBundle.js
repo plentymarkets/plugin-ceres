@@ -33,16 +33,19 @@ Vue.component("item-bundle", {
 
     methods:
     {
-        showItemBundleItems()
-		{
-            return this.bundleSetting === "2" && this.bundleType === "bundle";
-        },
-
         getBundleInnerText(item)
 		{
             item.variation.bundleType = null;
 
             return item;
+        }
+    },
+
+    computed:
+    {
+        showItemBundleItems()
+		{
+            return this.bundleSetting === "2" && this.bundleType === "bundle";
         }
     }
 });
