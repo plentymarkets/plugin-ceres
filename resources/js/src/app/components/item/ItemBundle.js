@@ -11,17 +11,36 @@ Vue.component("item-bundle", {
         bundleComponents: Array
     },
 
+    data()
+    {
+        return {
+            bundleSetting: null
+        };
+    },
+
     created()
     {
         this.$options.template = this.template;
+    },
+
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            this.bundleSetting = this.$refs.bundleSetting.innerText;
+        });
     },
 
     methods:
     {
         showItemBundleItems()
 		{
-			// TODO check if bundle type ist set and config value from the split settings is set on ergänzen
-            return true;
+            if (this.bundleSetting === "2" && this.bundleType)
+            {
+                return true;
+            }
+
+            return false;
         },
 
         getBundleInnerText(item)
