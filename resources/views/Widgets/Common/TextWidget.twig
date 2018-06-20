@@ -5,7 +5,16 @@
         {% if text | trim is not empty %}
             {{ text | raw }}
         {% else %}
-            <h1>Hier könnte ihr Text stehen...</h1>
+
+            {% if widget.settings.appearance.mobile == "without" %}
+                <div class="placeholder placeholder-text">
+                    Hier könnte ihr Text stehen...
+                </div>
+            {% else %}
+                <div class="placeholder">
+                </div>
+            {% endif %}
+            
         {% endif %}
     </div>
 </div>
