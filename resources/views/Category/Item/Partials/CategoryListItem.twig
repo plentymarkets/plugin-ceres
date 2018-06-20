@@ -72,7 +72,7 @@
 
                 {% endif %}
 
-                {% if item.data.variation.bundleType %}
+                {% if item.data.variation.bundleType == "bundle" %}
 
                     <span class="tag bg-info">
                         {{ trans("Ceres::Template.itemBundle") }}

@@ -9,7 +9,7 @@ Vue.component("item-store-special", {
         "recommendedRetailPrice",
         "variationRetailPrice",
         "decimalCount",
-        "bundle"
+        "bundleType"
     ],
 
     data()
