@@ -32,27 +32,27 @@
     {% if customFont.regular %}
         @font-face {
             font-family: "Custom-Font";
-            src: url("{{ config('Ceres.custom-font-regular') }}");
+            src: url("{{ customFont.regular }}");
         }
     {% endif %}
     {% if customFont.bold %}
         @font-face {
             font-family: "Custom-Font";
-            src: url("{{ config('Ceres.custom-font-bold') }}");
+            src: url("{{ customFont.bold }}");
             font-weight: bold;
         }
     {% endif %}
     {% if customFont.italic %}
         @font-face {
             font-family: "Custom-Font";
-            src: url("{{ config('Ceres.custom-font-italic') }}");
+            src: url("{{ customFont.italic }}");
             font-style: italic;
         }
     {% endif %}
     {% if customFont.boldItalic %}
         @font-face {
             font-family: "Custom-Font";
-            src: url("{{ config('Ceres.custom-font-bold-italic') }}");
+            src: url("{{ customFont.boldItalic }}");
             font-weight: bold;
             font-style: italic;
         }
