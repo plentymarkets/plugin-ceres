@@ -35,7 +35,8 @@ Vue.component("item-bundle", {
     {
         showItemBundleItems()
 		{
-            if (this.bundleSetting === "2" && this.bundleType)
+            if (this.bundleSetting === "2" &&
+                this.bundleType === "bundle")
             {
                 return true;
             }
