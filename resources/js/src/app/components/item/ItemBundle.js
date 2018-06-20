@@ -35,13 +35,7 @@ Vue.component("item-bundle", {
     {
         showItemBundleItems()
 		{
-            if (this.bundleSetting === "2" &&
-                this.bundleType === "bundle")
-            {
-                return true;
-            }
-
-            return false;
+            return this.bundleSetting === "2" && this.bundleType === "bundle";
         },
 
         getBundleInnerText(item)
