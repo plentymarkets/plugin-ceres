@@ -2,6 +2,10 @@
 
 <div class="widget widget-text widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <div class="widget-inner">
-        {{ text | raw }}
+        {% if text | trim is not empty %}
+            {{ text | raw }}
+        {% else %}
+            <h1>Hier könnte ihr Text stehen...</h1>
+        {% endif %}
     </div>
 </div>

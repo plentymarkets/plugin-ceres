@@ -20419,4 +20419,47 @@ body.menu-is-visible {
   background-color: #4D4F4D;
 }
 
+.widget-text {
+  color: red;
+}
+
+.widget-text .widget-inner {
+  padding: 1rem 1.5rem;
+}
+
+.widget-text.widget-primary {
+  color: #fff;
+  background-color: #008ebd;
+}
+
+.widget-text.widget-secondary {
+  color: #fff;
+  background-color: #d4021d;
+}
+
+.widget-text.widget-success {
+  color: #fff;
+  background-color: #7ED321;
+}
+
+.widget-text.widget-info {
+  color: #fff;
+  background-color: #5bc0de;
+}
+
+.widget-text.widget-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+}
+
+.widget-text.widget-danger {
+  color: #fff;
+  background-color: #d9534f;
+}
+
+.widget-text.widget-inverse {
+  color: #fff;
+  background-color: #4D4F4D;
+}
+
 /*# sourceMappingURL=ceres.css.map */
