@@ -668,7 +668,7 @@
 				"label": "Widget.widgetAppearanceLabel",
 				"options": {
 					"tooltip": "Widget.widgetAppearanceTooltip",
-					"defaultValue": "primary",
+					"defaultValue": "without",
 					"selectBoxValues": [
 						{
 							"value": "without",
