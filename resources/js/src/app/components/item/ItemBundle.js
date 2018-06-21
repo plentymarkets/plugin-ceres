@@ -18,6 +18,14 @@ Vue.component("item-bundle", {
         };
     },
 
+    computed:
+    {
+        showItemBundleItems()
+		{
+            return this.bundleSetting !== "1" && this.bundleType === "bundle";
+        }
+    },
+
     created()
     {
         this.$options.template = this.template;
@@ -38,14 +46,6 @@ Vue.component("item-bundle", {
             item.variation.bundleType = null;
 
             return item;
-        }
-    },
-
-    computed:
-    {
-        showItemBundleItems()
-		{
-            return this.bundleSetting !== "1" && this.bundleType === "bundle";
         }
     }
 });
