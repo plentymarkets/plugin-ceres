@@ -1,6 +1,6 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ component( "Ceres::Item.Components.ItemBundle" ) }}
+{# {{ component( "Ceres::Item.Components.ItemBundle" ) }} #}
 
 <script type="x/template" id="vue-add-item-to-basket-overlay">
 
@@ -37,9 +37,9 @@
                                     </strong>
                                 </p>
 
-                                <p>
+                                {# <p>
                                     <item-bundle v-if="isLastBasketEntrySet" :bundle-type="latestBasketEntry.item.variation.bundleType" :bundle-components="latestBasketEntry.item.bundleComponents"></item-bundle>
-                                </p>
+                                </p> #}
                                 
                                 <p class="small" v-for="attribute in latestBasketEntry.item.attributes">
                                     <strong>${ attribute.attribute.names.name }</strong>:
