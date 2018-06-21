@@ -45,7 +45,7 @@ Vue.component("item-bundle", {
     {
         showItemBundleItems()
 		{
-            return this.bundleSetting === "2" && this.bundleType === "bundle";
+            return this.bundleSetting !== "1" && this.bundleType === "bundle";
         }
     }
 });
