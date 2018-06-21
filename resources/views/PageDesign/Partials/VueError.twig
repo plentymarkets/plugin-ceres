@@ -1,7 +1,7 @@
 {% set companyLogo  = config("Ceres.header.company_logo") %}
 {% set lang         = services.sessionStorage.getLang() %}
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
-{% set companyName  = config("Ceres.header.company_name") %}
+{% set companyName  = trans("Ceres::Template.headerCompanyName") %}
 
 <div class="wrapper wrapper-main {% if ceresConfig.header.fixNavBarPos %}isSticky{% endif %}">
 
