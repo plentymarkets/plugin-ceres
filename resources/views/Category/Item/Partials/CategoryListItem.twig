@@ -43,7 +43,7 @@
 
         <!-- STORE SPECIALS -->
 
-        {% if item.data.item.storeSpecial.id > 0 or item.data.variation.bundleType %}
+        {% if item.data.item.storeSpecial.id > 0 or item.data.variation.bundleType == "bundle" %}
 
             {% set storeSpecial = item.data.item.storeSpecial.names.name %}
 
