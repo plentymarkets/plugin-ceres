@@ -17159,6 +17159,8 @@ Vue.component("login-view", {
 },{}],41:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../../helper/utils");
+
 var _ValidationService = require("services/ValidationService");
 
 var _ValidationService2 = _interopRequireDefault(_ValidationService);
@@ -17171,13 +17173,25 @@ Vue.component("user-login-handler", {
 
     delimiters: ["${", "}"],
 
-    props: ["userData", "template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-user-login-handler"
+        }
+    },
 
     computed: Vuex.mapGetters(["username", "isLoggedIn"]),
 
     created: function created() {
+        var _this = this;
+
         this.$options.template = this.template;
-        this.$store.commit("setUserData", this.userData);
+
+        ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true }).done(function (response) {
+            if ((0, _utils.isDefined)(response.data)) {
+                _this.$store.commit("setUserData", response.data);
+            }
+        });
     },
 
 
@@ -17185,10 +17199,10 @@ Vue.component("user-login-handler", {
      * Add the global event listener for login and logout
      */
     mounted: function mounted() {
-        var _this = this;
+        var _this2 = this;
 
         this.$nextTick(function () {
-            _this.addEventListeners();
+            _this2.addEventListeners();
         });
     },
 
@@ -17198,14 +17212,14 @@ Vue.component("user-login-handler", {
          * Adds login/logout event listeners
          */
         addEventListeners: function addEventListeners() {
-            var _this2 = this;
+            var _this3 = this;
 
             ApiService.listen("AfterAccountAuthentication", function (userData) {
-                _this2.$store.commit("setUserData", userData.accountContact);
+                _this3.$store.commit("setUserData", userData.accountContact);
             });
 
             ApiService.listen("AfterAccountContactLogout", function () {
-                _this2.$store.commit("setUserData", null);
+                _this3.$store.commit("setUserData", null);
             });
         },
         unmarkInputFields: function unmarkInputFields() {
@@ -17215,7 +17229,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":122,"services/ValidationService":130}],42:[function(require,module,exports){
+},{"../../../helper/utils":119,"services/ApiService":122,"services/ValidationService":130}],42:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -24913,6 +24927,9 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _utils = require("../../helper/utils");
+
 var state = {
     userData: null
 };
@@ -24927,7 +24944,7 @@ var getters = {
     username: function username(state) {
         var username = "";
 
-        if (state.userData) {
+        if ((0, _utils.isDefined)(state.userData)) {
             if (state.userData.firstName.length > 0 && state.userData.lastName.length > 0) {
                 username = state.userData.firstName + " " + state.userData.lastName;
             } else {
@@ -24950,7 +24967,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],142:[function(require,module,exports){
+},{"../../helper/utils":119}],142:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
