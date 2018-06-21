@@ -20553,9 +20553,18 @@ Vue.component("wish-list", {
 },{"services/NotificationService":127,"services/TranslationService":128}],81:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
+var ApiService = require("services/ApiService");
+
 Vue.component("wish-list-count", {
 
-    props: ["template", "initIds"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-wish-list-count"
+        }
+    },
 
     computed: {
         wishListCount: function wishListCount() {
@@ -20564,12 +20573,19 @@ Vue.component("wish-list-count", {
     },
 
     created: function created() {
-        this.$options.template = this.template || "#vue-wish-list-count";
-        this.$store.commit("setWishListIds", this.initIds);
+        var _this = this;
+
+        this.$options.template = this.template;
+
+        ApiService.get("/rest/io/itemWishList", {}, { keepOriginalResponse: true }).done(function (response) {
+            if ((0, _utils.isDefined)(response.data)) {
+                _this.$store.commit("setWishListIds", response.data);
+            }
+        });
     }
 });
 
-},{}],82:[function(require,module,exports){
+},{"../../helper/utils":119,"services/ApiService":122}],82:[function(require,module,exports){
 "use strict";
 
 var _number = require("../../helper/number");

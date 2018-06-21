@@ -66,7 +66,12 @@
                     </li>
                     {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
                         <li class="list-inline-item control-wish-list">
-                            <wish-list-count :init-ids="{{ services.wishList.getItemWishList() | json_encode }}"></wish-list-count>
+                            <wish-list-count>
+                                <a>
+                                    <span class="badge-right">0</span>
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                </a>
+                            </wish-list-count>
                         </li>
                     {% endif %}
                     <li class="list-inline-item control-basket">
