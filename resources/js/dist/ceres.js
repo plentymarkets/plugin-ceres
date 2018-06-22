@@ -360,11041 +360,6 @@ ACTIVE:".active",ACTIVE_CHILD:"> .nav-item > .active, > .active",DATA_TOGGLE:'[d
 
 
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var ModalService = require("services/ModalService");
-
-Vue.component("add-item-to-basket-overlay", {
-
-    delimiters: ["${", "}"],
-
-    props: ["basketAddInformation", "template"],
-
-    data: function data() {
-        return {
-            currency: "",
-            price: 0,
-            timeToClose: 0,
-            timerVar: null
-        };
-    },
-
-
-    computed: _extends({
-        isLastBasketEntrySet: function isLastBasketEntrySet() {
-            return Object.keys(this.latestBasketEntry.item).length !== 0;
-        },
-        itemName: function itemName() {
-            if (this.isLastBasketEntrySet) {
-                return this.$options.filters.itemName(this.latestBasketEntry.item);
-            }
-
-            return "";
-        },
-        imageUrl: function imageUrl() {
-            if (this.isLastBasketEntrySet) {
-                var images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
-                var img = this.$options.filters.itemImage(images);
-
-                return img;
-            }
-
-            return "";
-        }
-    }, Vuex.mapState({
-        latestBasketEntry: function latestBasketEntry(state) {
-            return state.basket.latestEntry;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    watch: {
-        latestBasketEntry: function latestBasketEntry() {
-            if (this.basketAddInformation === "overlay") {
-                this.setPriceFromData();
-
-                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-
-                this.startCounter();
-            } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
-                setTimeout(function () {
-                    var vueApp = document.querySelector("#vue-app");
-                    var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-
-                    if (vueApp) {
-                        vueApp.classList.add(basketOpenClass);
-                    }
-                }, 1);
-            }
-        }
-    },
-
-    methods: {
-        setPriceFromData: function setPriceFromData() {
-            if (this.latestBasketEntry.item.prices) {
-                this.currency = this.latestBasketEntry.item.prices.default.currency;
-                var graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
-                var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
-
-                this.price = graduatedPrice + propertySurcharge;
-            }
-        },
-        closeOverlay: function closeOverlay() {
-            if (this.timerVar) {
-                clearInterval(this.timerVar);
-            }
-        },
-        startCounter: function startCounter() {
-            var _this = this;
-
-            if (this.timerVar) {
-                clearInterval(this.timerVar);
-            }
-
-            this.timeToClose = 10;
-
-            this.timerVar = setInterval(function () {
-                _this.timeToClose -= 1;
-
-                if (_this.timeToClose === 0) {
-                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
-
-                    clearInterval(_this.timerVar);
-                }
-            }, 1000);
-        }
-    }
-});
-
-},{"services/ModalService":117}],2:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _ExceptionMap = require("exceptions/ExceptionMap");
-
-var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _UrlService = require("services/UrlService");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("add-to-basket", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-add-to-basket"
-        },
-        item: Object,
-        itemUrl: String,
-        showQuantity: {
-            type: Boolean,
-            default: false
-        },
-        useLargeScale: {
-            type: Boolean,
-            default: false
-        },
-        missingOrderProperties: {
-            type: Array,
-            default: function _default() {
-                return [];
-            }
-        },
-        isVariationSelected: {
-            type: Boolean,
-            default: true
-        }
-    },
-    computed: _extends({
-        hasChildren: function hasChildren() {
-            return this.item.filter && this.item.filter.hasChildren;
-        },
-        canBeAddedToBasket: function canBeAddedToBasket() {
-            var isSalable = this.item.filter && this.item.filter.isSalable;
-            var hasChildren = this.item.filter && this.item.filter.hasChildren;
-            var intervalQuantity = this.item.variation.intervalOrderQuantity || 1;
-            var minimumOrderQuantity = this.item.variation.minimumOrderQuantity || intervalQuantity;
-            var requiresProperties = !this.requiresProperties;
-
-            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity && requiresProperties;
-        },
-        variationId: function variationId() {
-            return this.item.variation.id;
-        },
-        requiresProperties: function requiresProperties() {
-            if (App.config.item.requireOrderProperties && this.item.properties) {
-                var availableProperties = this.item.properties.filter(function (property) {
-                    return property.property.isShownOnItemPage;
-                });
-
-                return !!availableProperties.length;
-            }
-
-            return false;
-        }
-    }, Vuex.mapState({
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        }
-    })),
-    data: function data() {
-        return {
-            quantity: 1,
-            buttonLockState: false,
-            waiting: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    methods: {
-        /**
-         * add an item to basket-resource
-         */
-        addToBasket: function addToBasket() {
-            var _this = this;
-
-            if (this.missingOrderProperties.length) {
-                this.showMissingPropertiesError();
-            } else if (this.item.filter.isSalable) {
-                this.waiting = true;
-
-                var basketObject = {
-                    variationId: this.variationId,
-                    quantity: this.quantity,
-                    basketItemOrderParams: this.item.properties
-                };
-
-                this.$store.dispatch("addBasketItem", basketObject).then(function (response) {
-                    document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
-                    _this.waiting = false;
-                    _this.openAddToBasketOverlay(basketObject.quantity);
-                }, function (error) {
-                    _this.waiting = false;
-
-                    if (error.data) {
-                        NotificationService.error(_TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(error.data.exceptionCode.toString()))).closeAfter(5000);
-                    }
-                });
-            }
-        },
-        showMissingPropertiesError: function showMissingPropertiesError() {
-            this.$store.commit("setVariationMarkInvalidProps", true);
-
-            var propertyNames = this.missingOrderProperties.map(function (property) {
-                return property.property.names.name;
-            });
-            var errorMsgContent = "";
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = propertyNames[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var name = _step.value;
-
-                    errorMsgContent += name + "<br>";
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            NotificationService.error(_TranslationService2.default.translate("Ceres::Template.singleItemMissingOrderPropertiesError").replace("<properties>", errorMsgContent));
-        },
-        directToItem: function directToItem() {
-            (0, _UrlService.navigateTo)(this.itemUrl);
-        },
-        handleButtonState: function handleButtonState(value) {
-            this.buttonLockState = value;
-        },
-
-
-        /**
-         * open the AddItemToBasketOverlay
-         */
-        openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity) {
-            var latestBasketEntry = {
-                item: this.item,
-                quantity: stashedQuantity
-            };
-
-            this.$store.commit("setLatestBasketEntry", latestBasketEntry);
-        },
-
-
-        /**
-         * update the property quantity of the current instance
-         * @param value
-         */
-        updateQuantity: function updateQuantity(value) {
-            this.quantity = value;
-        }
-    },
-    watch: {
-        quantity: function quantity(newValue, oldValue) {
-            this.$store.commit("setVariationOrderQuantity", newValue);
-        }
-    }
-});
-
-},{"exceptions/ExceptionMap":87,"services/NotificationService":118,"services/TranslationService":119,"services/UrlService":120}],3:[function(require,module,exports){
-"use strict";
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("basket-preview", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        template: String,
-        basketData: Object,
-        showNetPrices: {
-            type: Boolean,
-            default: false
-        }
-    },
-
-    computed: Vuex.mapState({
-        basket: function basket(state) {
-            return state.basket.data;
-        },
-        basketItems: function basketItems(state) {
-            return state.basket.items;
-        },
-        basketNotifications: function basketNotifications(state) {
-            return state.basket.basketNotifications;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-        this.$store.commit("setBasket", this.basketData);
-        this.$store.commit("setShowNetPrices", this.showNetPrices);
-        this.$store.dispatch("loadBasketData");
-    },
-
-
-    /**
-     * Bind to basket and bind the basket items
-     */
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _ApiService2.default.listen("AfterBasketChanged", function (data) {
-                _this.$store.commit("setBasket", data.basket);
-                _this.$store.commit("setShowNetPrices", data.showNetPrices);
-            });
-        });
-    }
-});
-
-},{"services/ApiService":113}],4:[function(require,module,exports){
-"use strict";
-
-Vue.component("basket-totals", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        template: {
-            type: String
-        }
-    },
-
-    computed: Vuex.mapState({
-        basket: function basket(state) {
-            return state.basket.data;
-        },
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        },
-        showNetPrices: function showNetPrices(state) {
-            return state.basket.showNetPrices;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],5:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("coupon", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            waiting: false,
-            couponCode: ""
-        };
-    },
-
-
-    computed: _extends({
-        disabled: function disabled() {
-            if (this.redeemedCouponCode) {
-                return true;
-            }
-
-            return false;
-        }
-    }, Vuex.mapState({
-        redeemedCouponCode: function redeemedCouponCode(state) {
-            return state.basket.data.couponCode;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (_this.redeemedCouponCode) {
-                _this.couponCode = _this.redeemedCouponCode;
-            }
-        });
-    },
-
-
-    methods: {
-        redeemCode: function redeemCode() {
-            var _this2 = this;
-
-            // remove whitespaces
-            this.couponCode = this.couponCode.replace(/\s/g, "");
-
-            if (this.couponCode.length > 0) {
-                this.waiting = true;
-
-                this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
-                    _this2.waiting = false;
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.couponRedeemSuccess")).closeAfter(10000);
-                }, function (error) {
-                    _this2.waiting = false;
-                    NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
-                });
-            } else {
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.couponIsEmpty")).closeAfter(10000);
-            }
-        },
-        removeCode: function removeCode() {
-            var _this3 = this;
-
-            this.waiting = true;
-
-            this.$store.dispatch("removeCouponCode", this.couponCode).then(function (response) {
-                _this3.waiting = false;
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.couponRemoveSuccess")).closeAfter(10000);
-            }, function (error) {
-                _this3.waiting = false;
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.couponRemoveFailure")).closeAfter(10000);
-            });
-        },
-        getCouponRedemtionErrorMessage: function getCouponRedemtionErrorMessage(error) {
-            var errorMessageKeys = {
-                18: "couponMinOrderValueNotReached",
-                51: "couponnotUsableForSpecialOffer",
-                70: "couponAlreadyUsedOrInvalidCouponCode",
-                78: "couponCampaignExpired",
-                126: "couponNoMatchingItemInBasket",
-                329: "couponOnlySubscription",
-                330: "couponOnlySingleUsage",
-                331: "couponNoOpenAmount",
-                332: "couponExpired",
-                334: "couponOnlyForNewCustomers",
-                335: "couponOnlyForExistingCustomers",
-                336: "couponWrongCustomerGroup",
-                337: "couponWrongCustomerType",
-                338: "couponNoCustomerTypeProvided",
-                339: "couponNoCustomerTypeActivated",
-                340: "couponNoCustomerGroupActivated",
-                341: "couponCampaignNoWebstoreActivated",
-                342: "couponCampaignWrongWebstoreId",
-                343: "couponCampaignNoWebstoreIdGiven"
-            };
-
-            if (error && error.error && error.error.code && errorMessageKeys[error.error.code]) {
-                return _TranslationService2.default.translate("Ceres::Template." + errorMessageKeys[error.error.code]);
-            }
-
-            return _TranslationService2.default.translate("Ceres::Template.couponRedeemFailure");
-        }
-    }
-});
-
-},{"services/NotificationService":118,"services/TranslationService":119}],6:[function(require,module,exports){
-"use strict";
-
-Vue.component("basket-list", {
-
-    delimiters: ["${", "}"],
-
-    props: ["size", "template"],
-
-    computed: Vuex.mapState({
-        basketItems: function basketItems(state) {
-            return state.basket.items;
-        },
-        isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
-            return state.basket.isBasketInitiallyLoaded;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],7:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _ExceptionMap = require("exceptions/ExceptionMap");
-
-var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("basket-list-item", {
-
-    delimiters: ["${", "}"],
-
-    props: ["basketItem", "size", "language", "template"],
-
-    data: function data() {
-        return {
-            waiting: false,
-            waitingForDelete: false,
-            itemCondition: "",
-            showMoreInformation: false
-        };
-    },
-
-
-    computed: _extends({
-        image: function image() {
-            var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
-
-            return this.$options.filters.itemImage(itemImages);
-        },
-        altText: function altText() {
-            var altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data);
-
-            return altText;
-        },
-        isInputLocked: function isInputLocked() {
-            return this.waiting || this.isBasketLoading;
-        },
-        propertySurchargeSum: function propertySurchargeSum() {
-            var sum = 0;
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = this.basketItem.basketItemOrderParams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var property = _step.value;
-
-                    sum += this.$options.filters.propertySurcharge(this.basketItem.variation.data.properties, property.propertyId);
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return sum;
-        },
-        itemTotalPrice: function itemTotalPrice() {
-            return this.basketItem.quantity * (this.basketItem.variation.data.prices.default.unitPrice.value + this.propertySurchargeSum);
-        }
-    }, Vuex.mapState({
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-
-        /**
-         * Delete item from basket
-         */
-        deleteItem: function deleteItem() {
-            var _this = this;
-
-            if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading) {
-                this.waitingForDelete = true;
-
-                this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
-                    document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: _this.basketItem }));
-                    _this.waitingForDelete = false;
-                }, function (error) {
-                    _this.waitingForDelete = false;
-                });
-            }
-        },
-
-
-        /**
-         * Update item quantity in basket
-         * @param quantity
-         */
-        updateQuantity: function updateQuantity(quantity) {
-            var _this2 = this;
-
-            if (this.basketItem.quantity !== quantity) {
-                this.waiting = true;
-
-                var origQty = this.basketItem.quantity;
-
-                this.$store.dispatch("updateBasketItemQuantity", { basketItem: this.basketItem, quantity: quantity }).then(function (response) {
-                    document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: _this2.basketItem }));
-                    _this2.waiting = false;
-                }, function (error) {
-                    _this2.basketItem.quantity = origQty;
-
-                    if (_this2.size === "small") {
-                        _this2.$store.dispatch("addBasketNotification", {
-                            type: "error",
-                            message: _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(error.data.exceptionCode.toString()))
-                        });
-                    } else {
-                        NotificationService.error(_TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(error.data.exceptionCode.toString()))).closeAfter(5000);
-                    }
-
-                    _this2.waiting = false;
-                });
-            }
-        },
-        isPropertyVisible: function isPropertyVisible(propertyId) {
-            var property = this.basketItem.variation.data.properties.find(function (property) {
-                return property.property.id === parseInt(propertyId);
-            });
-
-            if (property) {
-                return property.property.isShownAtCheckout;
-            }
-
-            return false;
-        }
-    }
-});
-
-},{"exceptions/ExceptionMap":87,"services/NotificationService":118,"services/TranslationService":119}],8:[function(require,module,exports){
-"use strict";
-
-Vue.component("category-breadcrumbs", {
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    computed: Vuex.mapGetters(["breadcrumbs"]),
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],9:[function(require,module,exports){
-"use strict";
-
-Vue.component("accept-gtc-check", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            isChecked: false
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        showError: function showError(state) {
-            return state.checkout.validation.gtc.showError;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-        this.$store.commit("setGtcValidator", this.validate);
-    },
-
-
-    methods: {
-        validate: function validate() {
-            this.$store.commit("setGtcShowError", !this.isChecked);
-        }
-    },
-
-    watch: {
-        isChecked: function isChecked() {
-            if (this.showError) {
-                this.validate();
-            }
-        }
-    }
-});
-
-},{}],10:[function(require,module,exports){
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("checkout", {
-
-    props: ["template", "initialCheckout"],
-
-    computed: Vuex.mapState({
-        checkout: function checkout(state) {
-            return state.checkout;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-        this.$store.dispatch("setCheckout", this.initialCheckout);
-        this.addEventHandler();
-    },
-
-
-    methods: {
-        addEventHandler: function addEventHandler() {
-            var _this = this;
-
-            ApiService.listen("CheckoutChanged", function (checkout) {
-                _this.handleCheckoutChangedEvent(checkout.checkout);
-            });
-
-            document.addEventListener("afterPaymentMethodChanged", function (event) {
-                var newMethodOfPaymentId = event.detail;
-
-                if (newMethodOfPaymentId !== _this.checkout.payment.methodOfPaymentId) {
-                    _this.updateCheckoutAndBasket();
-                }
-            });
-        },
-        updateCheckoutAndBasket: function updateCheckoutAndBasket() {
-            var _this2 = this;
-
-            this.$store.commit("setIsBasketLoading", true);
-
-            var reloadBasketPromise = this.$store.dispatch("refreshBasket");
-            var reloadCheckoutPromise = this.$store.dispatch("refreshCheckout");
-
-            Promise.all([reloadBasketPromise, reloadCheckoutPromise]).then(function (data) {
-                _this2.$store.commit("setIsBasketLoading", false);
-            });
-        },
-        handleCheckoutChangedEvent: function handleCheckoutChangedEvent(checkout) {
-            if (!this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
-                NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutMethodOfPaymentListChanged"));
-                this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
-            }
-
-            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList)) {
-                this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
-            }
-
-            if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId) {
-                NotificationService.warn(_TranslationService2.default.translate("Ceres::Template.checkoutMethodOfPaymentChanged"));
-                this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
-            }
-
-            if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId) {
-                NotificationService.warn(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfileChanged"));
-                this.$store.commit("setShippingProfile", checkout.shippingProfileId);
-            }
-
-            if (this.checkout.shipping.shippingCountryId !== checkout.shippingCountryId) {
-                this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
-            }
-        },
-        hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
-            if (oldList.length !== newList.length) {
-                NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfileListChanged"));
-                return true;
-            }
-
-            this.sortList(oldList, "parcelServicePresetId");
-            this.sortList(newList, "parcelServicePresetId");
-
-            for (var index in oldList) {
-                if (oldList[index].parcelServicePresetId !== newList[index].parcelServicePresetId) {
-                    NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfileListChanged"));
-                    return true;
-                } else if (oldList[index].shippingAmount !== newList[index].shippingAmount) {
-                    NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfilePriceChanged"));
-                    return true;
-                } else if (oldList[index].shippingPrivacyInformation !== newList[index].shippingPrivacyInformation) {
-                    return true;
-                }
-            }
-
-            return false;
-        },
-        isEquals: function isEquals(oldList, newList, fieldToCompare) {
-            if (oldList.length !== newList.length) {
-                return false;
-            }
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                var _loop = function _loop() {
-                    var oldListItem = _step.value;
-
-                    if (newList.findIndex(function (newListItem) {
-                        return newListItem[fieldToCompare] === oldListItem[fieldToCompare];
-                    }) === -1) {
-                        return {
-                            v: false
-                        };
-                    }
-                };
-
-                for (var _iterator = oldList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var _ret = _loop();
-
-                    if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return true;
-        },
-        sortList: function sortList(list, field) {
-            list.sort(function (valueA, valueB) {
-                if (valueA[field] > valueB[field]) {
-                    return 1;
-                }
-
-                if (valueA[field] < valueB[field]) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        showModal: function showModal(content) {
-            $(this.$refs.checkoutModalContent).html(content);
-            $(this.$refs.checkoutModal).modal("show");
-        }
-    }
-});
-
-},{"services/ApiService":113,"services/NotificationService":118,"services/TranslationService":119}],11:[function(require,module,exports){
-"use strict";
-
-Vue.component("contact-wish-input", {
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        contactWish: function contactWish(state) {
-            return state.checkout.contactWish;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    methods: {
-        updateContactWish: function updateContactWish(event) {
-            this.$store.commit("setContactWish", event.srcElement.value);
-        }
-    }
-});
-
-},{}],12:[function(require,module,exports){
-"use strict";
-
-Vue.component("payment-provider-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        methodOfPaymentList: function methodOfPaymentList(state) {
-            return state.checkout.payment.methodOfPaymentList;
-        },
-        methodOfPaymentId: function methodOfPaymentId(state) {
-            return state.checkout.payment.methodOfPaymentId;
-        },
-        showError: function showError(state) {
-            return state.checkout.validation.paymentProvider.showError;
-        },
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        }
-    }),
-
-    /**
-     * Initialise the event listener
-     */
-    created: function created() {
-        this.$options.template = this.template;
-        this.$store.commit("setPaymentProviderValidator", this.validate);
-    },
-
-
-    methods: {
-        /**
-         * Event when changing the payment provider
-         */
-        onPaymentProviderChange: function onPaymentProviderChange(newMethodOfPayment) {
-            var _this = this;
-
-            this.$store.dispatch("selectMethodOfPayment", newMethodOfPayment.id).then(function (data) {
-                document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", { detail: _this.methodOfPaymentId }));
-            }, function (error) {
-                console.log("error");
-            });
-
-            this.validate();
-        },
-        validate: function validate() {
-            this.$store.commit("setPaymentProviderShowError", !(this.methodOfPaymentId > 0));
-        }
-    }
-});
-
-},{}],13:[function(require,module,exports){
-"use strict";
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _UrlService = require("services/UrlService");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("place-order", {
-
-    delimiters: ["${", "}"],
-
-    props: ["targetContinue", "template"],
-
-    data: function data() {
-        return {
-            waiting: false
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        checkoutValidation: function checkoutValidation(state) {
-            return state.checkout.validation;
-        },
-        contactWish: function contactWish(state) {
-            return state.checkout.contactWish;
-        },
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        },
-        basketItemQuantity: function basketItemQuantity(state) {
-            return state.basket.data.itemQuantity;
-        },
-        isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
-            return state.basket.isBasketInitiallyLoaded;
-        },
-        shippingPrivacyHintAccepted: function shippingPrivacyHintAccepted(state) {
-            return state.checkout.shippingPrivacyHintAccepted;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        placeOrder: function placeOrder() {
-            var _this = this;
-
-            this.waiting = true;
-
-            var url = "/rest/io/order/additional_information";
-            var params = { orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted };
-            var options = { supressNotifications: true };
-
-            ApiService.post(url, params, options).always(function () {
-                _this.preparePayment();
-            });
-        },
-        preparePayment: function preparePayment() {
-            var _this2 = this;
-
-            this.waiting = true;
-
-            if (this.validateCheckout() && this.basketItemQuantity > 0) {
-                ApiService.post("/rest/io/checkout/payment").done(function (response) {
-                    _this2.afterPreparePayment(response);
-                }).fail(function (error) {
-                    _this2.waiting = false;
-                });
-            } else {
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckEntries"));
-                this.waiting = false;
-            }
-        },
-        validateCheckout: function validateCheckout() {
-            var isValid = true;
-
-            for (var index in this.checkoutValidation) {
-                if (this.checkoutValidation[index].validate) {
-                    this.checkoutValidation[index].validate();
-
-                    if (this.checkoutValidation[index].showError) {
-                        isValid = !this.checkoutValidation[index].showError;
-                    }
-                }
-            }
-
-            return isValid;
-        },
-        afterPreparePayment: function afterPreparePayment(response) {
-            var paymentType = response.type || "errorCode";
-            var paymentValue = response.value || "";
-
-            switch (paymentType) {
-                case "continue":
-                    var target = this.targetContinue;
-
-                    if (target) {
-                        (0, _UrlService.navigateTo)(target);
-                    }
-                    break;
-                case "redirectUrl":
-                    // redirect to given payment provider
-                    window.location.assign(paymentValue);
-                    break;
-                case "externalContentUrl":
-                    // show external content in iframe
-                    this.showModal(paymentValue, true);
-                    break;
-                case "htmlContent":
-                    this.showModal(paymentValue, false);
-                    break;
-
-                case "errorCode":
-                    NotificationService.error(paymentValue);
-                    this.waiting = false;
-                    break;
-                default:
-                    NotificationService.error("Unknown response from payment provider: " + paymentType);
-                    this.waiting = false;
-                    break;
-            }
-        },
-        showModal: function showModal(content, isExternalContent) {
-            if (isExternalContent) {
-                this.$emit("payment-response", "<iframe src=\"" + content + "\">");
-            } else {
-                this.$emit("payment-response", content);
-            }
-        }
-    }
-});
-
-},{"services/ApiService":113,"services/NotificationService":118,"services/TranslationService":119,"services/UrlService":120}],14:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("shipping-privacy-hint-check", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-shipping-privacy-hint-check"
-        }
-    },
-
-    computed: _extends({
-        currentShippingProfile: function currentShippingProfile() {
-            var _this = this;
-
-            return this.shippingProfileList.find(function (profile) {
-                return profile.parcelServicePresetId === _this.shippingProfileId;
-            });
-        },
-        currentPrivacyHints: function currentPrivacyHints() {
-            if (this.currentShippingProfile.shippingPrivacyInformation) {
-                return this.currentShippingProfile.shippingPrivacyInformation.filter(function (entry) {
-                    return !!entry.showDataPrivacyAgreementHint;
-                });
-            }
-
-            return [];
-        },
-        privacyHintContent: function privacyHintContent() {
-            var andTranslation = _TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyHintAnd");
-            var parcelServiceInformation = "";
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = this.currentPrivacyHints[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var hint = _step.value;
-
-                    if (parcelServiceInformation !== "") {
-                        parcelServiceInformation += " " + andTranslation + " ";
-                    }
-
-                    parcelServiceInformation += "<strong>" + hint.parcelServiceName + ", " + hint.parcelServiceAddress + "</strong>";
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return _TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyHint", { parcelServiceInformation: parcelServiceInformation });
-        }
-    }, Vuex.mapState({
-        shippingProfileList: function shippingProfileList(state) {
-            return state.checkout.shipping.shippingProfileList;
-        },
-        shippingProfileId: function shippingProfileId(state) {
-            return state.checkout.shipping.shippingProfileId;
-        },
-        shippingPrivacyHintAccepted: function shippingPrivacyHintAccepted(state) {
-            return state.checkout.shippingPrivacyHintAccepted;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        setValue: function setValue(value) {
-            this.$store.commit("setShippingPrivacyHintAccepted", value);
-        }
-    },
-
-    watch: {
-        currentShippingProfile: function currentShippingProfile(value, oldValue) {
-            if (this.shippingPrivacyHintAccepted && value.parcelServiceId !== oldValue.parcelServiceId) {
-                this.setValue(false);
-
-                $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
-
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
-            } else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint) {
-                this.setValue(false);
-            }
-        }
-    }
-});
-
-},{"services/NotificationService":118,"services/TranslationService":119}],15:[function(require,module,exports){
-"use strict";
-
-Vue.component("shipping-profile-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        shippingProfileList: function shippingProfileList(state) {
-            return state.checkout.shipping.shippingProfileList;
-        },
-        shippingProfileId: function shippingProfileId(state) {
-            return state.checkout.shipping.shippingProfileId;
-        },
-        showError: function showError(state) {
-            return state.checkout.validation.shippingProfile.showError;
-        },
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        }
-    }),
-
-    /**
-     * Add a shipping provider
-     * Initialise the event listener
-     */
-    created: function created() {
-        this.$options.template = this.template;
-        this.$store.commit("setShippingProfileValidator", this.validate);
-    },
-
-
-    methods: {
-        /**
-         * Method on shipping profile changed
-         */
-        onShippingProfileChange: function onShippingProfileChange(shippingProfileId) {
-            var _this = this;
-
-            this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(function (shippingProfile) {
-                return shippingProfile.parcelServicePresetId === shippingProfileId;
-            })).then(function (data) {
-                document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: _this.shippingProfileId }));
-            }, function (error) {
-                console.log("error");
-            });
-
-            this.validate();
-        },
-        validate: function validate() {
-            this.$store.commit("setShippingProfileShowError", !(this.shippingProfileId > 0));
-        }
-    }
-});
-
-},{}],16:[function(require,module,exports){
-"use strict";
-
-Vue.component("container-item-list", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-container-item-list"
-        },
-        items: {
-            type: Array,
-            default: []
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (_this.items.length > 4) {
-                _this.initializeCarousel();
-            }
-        });
-    },
-
-
-    methods: {
-        initializeCarousel: function initializeCarousel() {
-            var _this2 = this;
-
-            $(this.$refs.carouselContainer).owlCarousel({
-                autoHeight: true,
-                dots: true,
-                items: 4,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    544: {
-                        items: 2
-                    },
-                    768: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 4
-                    }
-                },
-                lazyLoad: false,
-                loop: false,
-                margin: 30,
-                mouseDrag: true,
-                nav: true,
-                navClass: ["owl-single-item-nav left carousel-control list-control-special", "owl-single-item-nav right carousel-control list-control-special"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350,
-                onChanged: function onChanged(property) {
-                    var begin = property.item.index;
-                    var end = begin + property.page.size;
-
-                    for (var i = begin; i < end; i++) {
-                        var categoryItem = _this2.$refs["categoryItem_" + i];
-
-                        if (categoryItem) {
-                            categoryItem[0].loadFirstImage();
-                        }
-                    }
-                }
-            });
-        }
-    }
-});
-
-},{}],17:[function(require,module,exports){
-"use strict";
-
-Vue.component("accept-privacy-policy-check", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-accept-privacy-policy-check"
-        },
-
-        value: {
-            type: Boolean
-        },
-
-        showError: {
-            type: Boolean
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        onValueChanged: function onValueChanged(value) {
-            this.$emit("input", value);
-        }
-    }
-});
-
-},{}],18:[function(require,module,exports){
-"use strict";
-
-Vue.component("address-input-group", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        defaultCountry: {
-            type: String,
-            default: "DE"
-        },
-        addressType: String,
-        modalType: String,
-        template: String,
-        value: {
-            type: Object,
-            default: function _default() {
-                return {};
-            }
-        }
-    },
-
-    data: function data() {
-        return {
-            stateList: [],
-            countryLocaleList: ["DE", "GB"],
-            localeToShow: this.defaultCountry
-        };
-    },
-
-
-    /**
-     * Check whether the address data exists. Else, create an empty one
-     */
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        /**
-         * Update the address input group to show.
-         * @param shippingCountry
-         */
-        onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
-            if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
-                this.localeToShow = shippingCountry.isoCode2;
-            } else {
-                this.localeToShow = this.defaultCountry;
-            }
-
-            this.emitInputEvent("countryId", shippingCountry.id);
-        },
-
-
-        /**
-         * @param {string} field
-         * @param {number} value
-         */
-        emitInputEvent: function emitInputEvent(field, value) {
-            this.$emit("input", { field: field, value: value });
-        }
-    }
-});
-
-},{}],19:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _utils = require("../../../helper/utils");
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var ModalService = require("services/ModalService");
-var AddressFieldService = require("services/AddressFieldService");
-
-Vue.component("address-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "addressType", "showError"],
-
-    data: function data() {
-        return {
-            addressModal: {},
-            modalType: "",
-            headline: "",
-            addressToEdit: {
-                addressSalutation: 0,
-                gender: "male",
-                countryId: this.shippingCountryId
-            },
-            addressToDelete: {},
-            deleteModal: "",
-            deleteModalWaiting: false,
-            addressOptionTypeFieldMap: {
-                1: "vatNumber",
-                4: "telephone",
-                9: "birthday",
-                11: "title"
-            }
-        };
-    },
-
-
-    computed: _extends({
-        selectedAddress: function selectedAddress() {
-            return this.$store.getters.getSelectedAddress(this.addressType);
-        },
-        addressList: function addressList() {
-            return this.$store.getters.getAddressList(this.addressType);
-        },
-        shippingCountryId: function shippingCountryId() {
-            return this.$store.state.localization.shippingCountryId;
-        },
-        isAddAddressEnabled: function isAddAddressEnabled() {
-            if (this.addressType === "1") {
-                return this.$store.getters.isLoggedIn || this.addressList.length < 1;
-            }
-
-            return this.$store.getters.isLoggedIn || this.addressList.length < 2;
-        },
-        isAddressListEmpty: function isAddressListEmpty() {
-            return !(this.addressList && this.addressList.length > 0);
-        }
-    }, Vuex.mapState({
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        },
-        countryList: function countryList(state) {
-            return state.localization.shippingCountries;
-        }
-    })),
-
-    /**
-     *  Check whether the address list is not empty and select the address with the matching ID
-     */
-    created: function created() {
-        this.$options.template = this.template;
-        this.addEventListener();
-    },
-
-
-    /**
-     * Select the address modal
-     */
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.addressModal = ModalService.findModal(_this.$refs.addressModal);
-            _this.deleteModal = ModalService.findModal(_this.$refs.deleteModal);
-        });
-    },
-
-
-    methods: {
-        /**
-         * Add the event listener
-         */
-        addEventListener: function addEventListener() {
-            var _this2 = this;
-
-            ApiService.listen("AfterAccountContactLogout", function () {
-                _this2.$store.commit("resetAddress", _this2.addressType);
-            });
-        },
-
-
-        /**
-         * Update the selected address
-         * @param index
-         */
-        onAddressChanged: function onAddressChanged(address) {
-            this.$emit("address-changed", address);
-        },
-
-
-        /**
-         * Check whether a company name exists and show it in bold
-         * @returns {boolean}
-         */
-        showNameStrong: function showNameStrong() {
-            return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
-        },
-
-
-        /**
-         * Show the add modal initially, if no address is selected in checkout
-         */
-        showInitialAddModal: function showInitialAddModal() {
-            this.modalType = "initial";
-
-            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
-                this.addressToEdit = {
-                    addressSalutation: 0,
-                    gender: "male",
-                    countryId: this.shippingCountryId
-                };
-            } else {
-                this.addressToEdit = { countryId: this.shippingCountryId };
-            }
-
-            this.updateHeadline();
-            this.addressModal.show();
-        },
-
-
-        /**
-         * Show the add modal
-         */
-        showAddModal: function showAddModal() {
-            this.modalType = "create";
-
-            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
-                this.addressToEdit = {
-                    addressSalutation: 0,
-                    gender: "male",
-                    countryId: this.shippingCountryId
-                };
-            } else {
-                this.addressToEdit = { countryId: this.shippingCountryId };
-            }
-
-            this.updateHeadline();
-            _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
-            this.addressModal.show();
-        },
-
-
-        /**
-         * Show the edit modal
-         * @param address
-         */
-        showEditModal: function showEditModal(address) {
-            this.modalType = "update";
-            this.addressToEdit = this.getAddressToEdit(address);
-
-            if (this.addressToEdit.gender === "female") {
-                this.addressToEdit.addressSalutation = 1;
-            } else if ((0, _utils.isNull)(this.addressToEdit.gender) && this.addressToEdit.name1) {
-                this.addressToEdit.addressSalutation = 2;
-            } else {
-                this.addressToEdit.addressSalutation = 0;
-                this.addressToEdit.gender = "male";
-            }
-
-            this.updateHeadline();
-            _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
-            this.addressModal.show();
-        },
-        getAddressToEdit: function getAddressToEdit(address) {
-            // Creates a tmp address to prevent unwanted two-way binding
-            var addressToEdit = JSON.parse(JSON.stringify(address));
-
-            if (addressToEdit.options) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = addressToEdit.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var option = _step.value;
-
-                        var optionName = this.addressOptionTypeFieldMap[option.typeId];
-
-                        addressToEdit[optionName] = option.value || null;
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-            }
-
-            return addressToEdit;
-        },
-
-
-        /**
-         * Show the delete modal
-         * @param address
-         */
-        showDeleteModal: function showDeleteModal(address) {
-            this.modalType = "delete";
-            this.addressToDelete = address;
-            this.updateHeadline();
-            this.deleteModal.show();
-        },
-
-
-        /**
-         * Delete the address selected before
-         */
-        deleteAddress: function deleteAddress() {
-            var _this3 = this;
-
-            this.deleteModalWaiting = true;
-
-            this.$store.dispatch("deleteAddress", { address: this.addressToDelete, addressType: this.addressType }).then(function (response) {
-                _this3.closeDeleteModal();
-                _this3.deleteModalWaiting = false;
-            }, function (error) {
-                _this3.deleteModalWaiting = false;
-            });
-        },
-
-
-        /**
-         * Close the current create/update address modal
-         */
-        closeAddressModal: function closeAddressModal() {
-            this.addressModal.hide();
-        },
-
-
-        /**
-         * Close the current delete address modal
-         */
-        closeDeleteModal: function closeDeleteModal() {
-            this.deleteModal.hide();
-        },
-
-
-        /**
-         * Dynamically create the header line in the modal
-         */
-        updateHeadline: function updateHeadline() {
-            var headline = void 0;
-
-            if (this.modalType === "initial") {
-                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressInitial");
-            } else if (this.addressType === "2") {
-                if (this.modalType === "update") {
-                    headline = _TranslationService2.default.translate("Ceres::Template.addressShippingAddressEdit");
-                } else if (this.modalType === "create") {
-                    headline = _TranslationService2.default.translate("Ceres::Template.addressShippingAddressCreate");
-                } else {
-                    headline = _TranslationService2.default.translate("Ceres::Template.addressShippingAddressDelete");
-                }
-            } else if (this.modalType === "update") {
-                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressEdit");
-            } else if (this.modalType === "create") {
-                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressCreate");
-            } else {
-                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressDelete");
-            }
-
-            this.headline = headline;
-        },
-
-
-        /**
-         * @param countryId
-         * @returns string
-         */
-        getCountryName: function getCountryName(countryId) {
-            if (countryId > 0) {
-                var country = this.countryList.find(function (country) {
-                    return country.id === countryId;
-                });
-
-                if (!(0, _utils.isNullOrUndefined)(country)) {
-                    return country.currLangName;
-                }
-            }
-
-            return "";
-        },
-        setAddressToEditField: function setAddressToEditField(_ref) {
-            var field = _ref.field,
-                value = _ref.value;
-
-            this.addressToEdit[field] = value;
-            this.addressToEdit = Object.assign({}, this.addressToEdit);
-        }
-    },
-
-    filters: {
-        optionType: function optionType(selectedAddress, typeId) {
-            if (selectedAddress && selectedAddress.name2) {
-                var _iteratorNormalCompletion2 = true;
-                var _didIteratorError2 = false;
-                var _iteratorError2 = undefined;
-
-                try {
-                    for (var _iterator2 = selectedAddress.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                        var optionType = _step2.value;
-
-                        if (optionType.typeId === typeId) {
-                            return optionType.value;
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError2 = true;
-                    _iteratorError2 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                            _iterator2.return();
-                        }
-                    } finally {
-                        if (_didIteratorError2) {
-                            throw _iteratorError2;
-                        }
-                    }
-                }
-            }
-
-            return "";
-        }
-    }
-});
-
-},{"../../../helper/utils":110,"services/AddressFieldService":112,"services/ApiService":113,"services/ModalService":117,"services/TranslationService":119,"services/ValidationService":121}],20:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("create-update-address", {
-
-    delimiters: ["${", "}"],
-
-    props: ["addressData", "addressModal", "modalType", "addressType", "template"],
-
-    data: function data() {
-        return {
-            waiting: false,
-            addressFormNames: {
-                1: "#billing_address_form",
-                2: "#delivery_address_form"
-            }
-        };
-    },
-
-
-    computed: {
-        addressList: function addressList() {
-            this.$store.getters.getAddressList(this.addressType);
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        /**
-         * Validate the address fields
-         */
-        validate: function validate() {
-            var _this = this;
-
-            _ValidationService2.default.validate($(this.addressFormNames[this.addressType])).done(function () {
-                _this.saveAddress();
-            }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-
-
-        /**
-         * Save the new address or update an existing one
-         */
-        saveAddress: function saveAddress() {
-            if (this.modalType === "initial" || this.modalType === "create") {
-                this.createAddress();
-            } else if (this.modalType === "update") {
-                this.updateAddress();
-            }
-        },
-
-
-        /**
-         * Update an address
-         */
-        updateAddress: function updateAddress() {
-            var _this2 = this;
-
-            this.waiting = true;
-            this._syncOptionTypesAddressData();
-
-            this.$store.dispatch("updateAddress", { address: this.addressData, addressType: this.addressType }).then(function (resolve) {
-                _this2.addressModal.hide();
-                _this2.waiting = false;
-            }, function (error) {
-                _this2.waiting = false;
-
-                if (error.validation_errors) {
-                    _this2._handleValidationErrors(error.validation_errors);
-                }
-            });
-        },
-
-
-        /**
-         * Create a new address
-         */
-        createAddress: function createAddress() {
-            var _this3 = this;
-
-            this.waiting = true;
-            this._syncOptionTypesAddressData();
-
-            this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType }).then(function (response) {
-                _this3.addressModal.hide();
-                _this3.waiting = false;
-            }, function (error) {
-                _this3.waiting = false;
-
-                if (error.validation_errors) {
-                    _this3._handleValidationErrors(error.validation_errors);
-                }
-            });
-        },
-        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-            _ValidationService2.default.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
-
-            var errorMessage = "";
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var value = _step.value;
-
-                    errorMessage += value + "<br>";
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            NotificationService.error(errorMessage);
-        },
-        _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
-
-            if (typeof this.addressData.options !== "undefined") {
-                var _iteratorNormalCompletion2 = true;
-                var _didIteratorError2 = false;
-                var _iteratorError2 = undefined;
-
-                try {
-                    for (var _iterator2 = this.addressData.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                        var optionType = _step2.value;
-
-                        switch (optionType.typeId) {
-                            case 1:
-                                {
-                                    if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value) {
-                                        optionType.value = this.addressData.vatNumber;
-                                    }
-
-                                    break;
-                                }
-
-                            case 9:
-                                {
-                                    if (this.addressData.birthday && this.addressData.birthday !== optionType.value) {
-                                        optionType.value = this.addressData.birthday;
-                                    }
-                                    break;
-                                }
-
-                            case 11:
-                                {
-                                    if (this.addressData.title && this.addressData.title !== optionType.value) {
-                                        optionType.value = this.addressData.title;
-                                    }
-                                    break;
-                                }
-
-                            case 4:
-                                {
-                                    if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
-                                        optionType.value = this.addressData.telephone;
-                                    }
-                                    break;
-                                }
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError2 = true;
-                    _iteratorError2 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                            _iterator2.return();
-                        }
-                    } finally {
-                        if (_didIteratorError2) {
-                            throw _iteratorError2;
-                        }
-                    }
-                }
-            }
-        },
-        emitInputEvent: function emitInputEvent(event) {
-            this.$emit("input", event);
-        }
-    }
-});
-
-},{"services/NotificationService":118,"services/ValidationService":121}],21:[function(require,module,exports){
-"use strict";
-
-Vue.component("invoice-address-select", {
-
-    delimiters: ["${", "}"],
-
-    template: "\n        <address-select \n            ref=\"invoice\"\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'>\n        </address-select>\n    ",
-
-    props: ["selectedAddressId", "addressList", "hasToValidate"],
-
-    computed: Vuex.mapState({
-        billingAddressId: function billingAddressId(state) {
-            return state.address.billingAddressId;
-        },
-        showError: function showError(state) {
-            return state.checkout.validation.invoiceAddress.showError;
-        }
-    }),
-
-    /**
-     * Initialise the event listener
-     */
-    created: function created() {
-        this.$store.dispatch("initBillingAddress", { id: this.selectedAddressId, addressList: this.addressList });
-
-        if (this.hasToValidate) {
-            this.$store.commit("setInvoiceAddressValidator", this.validate);
-        }
-    },
-
-
-    /**
-     * If no address is related to the user, a popup will open to add an address
-     */
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
-                _this.$refs.invoice.showInitialAddModal();
-            }
-        });
-    },
-
-
-    methods: {
-        /**
-         * Update the invoice address
-         * @param selectedAddress
-         */
-        addressChanged: function addressChanged(selectedAddress) {
-            var _this2 = this;
-
-            this.$store.dispatch("selectAddress", { selectedAddress: selectedAddress, addressType: "1" }).then(function (response) {
-                document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: _this2.billingAddressId }));
-            }, function (error) {});
-
-            if (this.hasToValidate) {
-                this.validate();
-            }
-        },
-        validate: function validate() {
-            this.$store.commit("setInvoiceAddressShowError", this.billingAddressId <= 0);
-        }
-    },
-
-    watch: {
-        billingAddressId: function billingAddressId() {
-            if (this.hasToValidate && this.showError) {
-                this.validate();
-            }
-        }
-    }
-});
-
-},{}],22:[function(require,module,exports){
-"use strict";
-
-Vue.component("shipping-address-select", {
-
-    delimiters: ["${", "}"],
-
-    template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"2\">\n        </address-select>\n    ",
-
-    props: ["selectedAddressId", "addressList"],
-
-    computed: Vuex.mapState({
-        deliveryAddressId: function deliveryAddressId(state) {
-            return state.address.deliveryAddressId;
-        }
-    }),
-
-    created: function created() {
-        if (!this.addressList) {
-            this.addressList = [];
-        }
-        // Adds the dummy entry for "delivery address same as invoice address"
-        this.addressList.unshift({ id: -99 });
-        this.$store.dispatch("initDeliveryAddress", { id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList });
-    },
-
-
-    methods: {
-        /**
-         * Update the delivery address
-         * @param selectedAddress
-         */
-        addressChanged: function addressChanged(selectedAddress) {
-            var _this = this;
-
-            this.$store.dispatch("selectAddress", { selectedAddress: selectedAddress, addressType: "2" }).then(function (response) {
-                document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: _this.deliveryAddressId }));
-            }, function (error) {});
-        }
-    }
-});
-
-},{}],23:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("contact-form", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            name: "",
-            userMail: "",
-            subject: "",
-            message: "",
-            orderId: "",
-            cc: false,
-            waiting: false,
-            privacyPolicyAccepted: false,
-            privacyPolicyShowError: false,
-            enableConfirmingPrivacyPolicy: App.config.contact.enableConfirmingPrivacyPolicy
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-
-        window.sendMail = this.sendMail;
-    },
-
-
-    methods: {
-        validate: function validate(useCapture) {
-            var _this = this;
-
-            _ValidationService2.default.validate($("#contact-form")).done(function () {
-                if (!_this.enableConfirmingPrivacyPolicy || _this.privacyPolicyAccepted) {
-                    if (useCapture) {
-                        grecaptcha.execute();
-                    } else {
-                        _this.sendMail();
-                    }
-                } else {
-                    _this.privacyPolicyShowError = true;
-
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactCheckEntries"));
-                }
-            }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-
-                if (_this.enableConfirmingPrivacyPolicy && !_this.privacyPolicyAccepted) {
-                    _this.privacyPolicyShowError = true;
-                }
-
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactCheckEntries"));
-            });
-        },
-        sendMail: function sendMail() {
-            var _this2 = this;
-
-            this.waiting = true;
-
-            var mailObj = {
-                subject: this.subject,
-                name: this.name,
-                message: this.message,
-                orderId: this.orderId,
-                userMail: this.userMail,
-                cc: this.cc
-            };
-
-            ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail" }, { supressNotifications: true }).done(function (response) {
-                _this2.waiting = false;
-                _this2.clearFields();
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.contactSendSuccess"));
-            }).fail(function (response) {
-                _this2.waiting = false;
-
-                if (response.validation_errors) {
-                    _this2._handleValidationErrors(response.validation_errors);
-                } else {
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactSendFail"));
-                }
-            });
-        },
-        clearFields: function clearFields() {
-            this.name = "";
-            this.userMail = "";
-            this.subject = "";
-            this.message = "";
-            this.orderId = "";
-            this.cc = false;
-            this.privacyPolicyAccepted = false;
-        },
-        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-            _ValidationService2.default.markFailedValidationFields($("#contact-form"), validationErrors);
-
-            var errorMessage = "";
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var value = _step.value;
-
-                    errorMessage += value + "<br>";
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            NotificationService.error(errorMessage);
-        },
-        privacyPolicyValueChanged: function privacyPolicyValueChanged(value) {
-            this.privacyPolicyAccepted = value;
-
-            if (value) {
-                this.privacyPolicyShowError = false;
-            }
-        }
-    }
-});
-
-},{"services/ApiService":113,"services/NotificationService":118,"services/TranslationService":119,"services/ValidationService":121}],24:[function(require,module,exports){
-"use strict";
-
-Vue.component("contact-map", {
-
-    props: ["mapZoom", "zip", "street", "googleApiKey", "template"],
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (!document.getElementById("maps-api")) {
-                _this.addScript("https://maps.googleapis.com/maps/api/js?key=" + _this.googleApiKey);
-            }
-        });
-    },
-
-
-    methods: {
-        initMap: function initMap() {
-            var coordinates = { lat: -34.397, lng: 150.644 };
-
-            var gMap = new google.maps.Map(document.getElementById("contact-map"), {
-                center: coordinates,
-                zoom: parseInt(this.mapZoom)
-            });
-
-            this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
-        },
-        getLatLngByAddress: function getLatLngByAddress(geocoder, resultsMap) {
-            var addressData = this.zip + " " + this.street;
-
-            geocoder.geocode({ address: addressData }, function (results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                    resultsMap.setCenter(results[0].geometry.location);
-
-                    // eslint-disable-next-line
-                    var marker = new google.maps.Marker({
-                        map: resultsMap,
-                        position: results[0].geometry.location
-                    });
-                } else {
-                    console.log("Not possible to get Ltd and Lng for the given address. State: " + status);
-                }
-            });
-        },
-        addScript: function addScript(path) {
-            var _this2 = this;
-
-            var head = document.getElementsByTagName("head")[0];
-            var script = document.createElement("script");
-
-            script.type = "text/javascript";
-            script.src = path;
-            script.id = "contact-map-api";
-
-            if (script.readyState) {
-                script.onreadystatechange = function () {
-                    if (script.readyState === "loaded" || script.readyState === "complete") {
-                        script.onreadystatechange = null;
-                        _this2.initMap();
-                    }
-                };
-            } else {
-                script.onload = function () {
-                    _this2.initMap();
-                };
-            }
-
-            head.appendChild(script);
-        }
-    }
-});
-
-},{}],25:[function(require,module,exports){
-"use strict";
-
-var CountryService = require("services/CountryService");
-
-Vue.component("country-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["countryList", "selectedCountryId", "selectedStateId", "template", "addressType"],
-
-    data: function data() {
-        return {
-            stateList: [],
-            selectedCountry: {}
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        shippingCountryId: function shippingCountryId(state) {
-            return state.localization.shippingCountryId;
-        }
-    }),
-
-    /**
-     * Get the shipping countries
-     */
-    created: function created() {
-        this.$options.template = this.template;
-
-        CountryService.sortCountries(this.countryList);
-        this.updateSelectedCountry();
-    },
-
-
-    methods: {
-        /**
-         * Method to fire when the country has changed
-         */
-        countryChanged: function countryChanged(value) {
-            this.$emit("country-changed", this.getCountryById(parseInt(value)));
-            this.$emit("state-changed", null);
-        },
-
-
-        /**
-         * @param {*} value
-         */
-        stateChanged: function stateChanged(value) {
-            this.$emit("state-changed", parseInt(value));
-        },
-
-
-        /**
-         * @param countryId
-         * @returns {*}
-         */
-        getCountryById: function getCountryById(countryId) {
-            return this.countryList.find(function (country) {
-                if (country.id === countryId) {
-                    return country;
-                }
-
-                return null;
-            });
-        },
-        updateSelectedCountry: function updateSelectedCountry() {
-            var countryId = this.selectedCountryId || this.shippingCountryId;
-
-            this.selectedCountry = this.getCountryById(countryId);
-
-            if (this.selectedCountry) {
-                this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
-            }
-
-            this.countryChanged(countryId);
-        }
-    },
-
-    watch: {
-        selectedCountryId: function selectedCountryId() {
-            this.updateSelectedCountry();
-        }
-    }
-});
-
-},{"services/CountryService":115}],26:[function(require,module,exports){
-"use strict";
-
-var _utils = require("../../helper/utils");
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _UrlService = require("services/UrlService");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-var ModalService = require("services/ModalService");
-
-Vue.component("registration", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        modalElement: String,
-        guestMode: { type: Boolean, default: false },
-        isSimpleRegistration: { type: Boolean, default: false },
-        template: String,
-        backlink: String
-    },
-
-    data: function data() {
-        return {
-            password: "",
-            passwordRepeat: "",
-            username: "",
-            billingAddress: {
-                countryId: null,
-                stateId: null,
-                addressSalutation: 0
-            },
-            isDisabled: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        /**
-         * Validate the registration form
-         */
-        validateRegistration: function validateRegistration() {
-            var _this = this;
-
-            _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
-                _this.sendRegistration();
-            }).fail(function (invalidFields) {
-                if (!(0, _utils.isNullOrUndefined)(_this.$refs.passwordHint) && invalidFields.indexOf(_this.$refs.passwordInput) >= 0) {
-                    _this.$refs.passwordHint.showPopper();
-                }
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-
-
-        /**
-         * Send the registration
-         */
-        sendRegistration: function sendRegistration() {
-            var _this2 = this;
-
-            var userObject = this.getUserObject();
-
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/customer", userObject).done(function (response) {
-                ApiService.setToken(response);
-
-                if (!response.code) {
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.regSuccessful")).closeAfter(3000);
-
-                    if (document.getElementById(_this2.modalElement) !== null) {
-                        ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
-                    }
-
-                    if (_this2.backlink !== null && _this2.backlink) {
-                        (0, _UrlService.navigateTo)(decodeURIComponent(_this2.backlink));
-                    } else {
-                        location.reload();
-                    }
-                } else {
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.regError")).closeAfter(3000);
-                }
-
-                _this2.isDisabled = false;
-            }).fail(function () {
-                _this2.isDisabled = false;
-            });
-        },
-        setAddressDataField: function setAddressDataField(_ref) {
-            var field = _ref.field,
-                value = _ref.value;
-
-            this.billingAddress[field] = value;
-            this.billingAddress = Object.assign({}, this.billingAddress);
-        },
-
-
-        /**
-         * Handle the user object which is send to the server
-         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
-         */
-        getUserObject: function getUserObject() {
-            var userObject = {
-                contact: {
-                    referrerId: 1,
-                    typeId: 1,
-                    options: {
-                        typeId: {
-                            typeId: 2,
-                            subTypeId: 4,
-                            value: this.username,
-                            priority: 0
-                        }
-                    }
-                }
-            };
-
-            if (!this.guestMode) {
-                userObject.contact.password = this.password;
-            }
-
-            if (!this.isSimpleRegistration) {
-                userObject.billingAddress = this.billingAddress;
-            }
-
-            return userObject;
-        }
-    }
-});
-
-},{"../../helper/utils":110,"services/ApiService":113,"services/ModalService":117,"services/NotificationService":118,"services/TranslationService":119,"services/UrlService":120,"services/ValidationService":121}],27:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _UrlService = require("services/UrlService");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("reset-password-form", {
-
-    props: ["contactId", "hash", "template"],
-
-    data: function data() {
-        return {
-            passwordFirst: "",
-            passwordSecond: "",
-            pwdFields: [],
-            isDisabled: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.pwdFields = $("#reset-password-form-" + _this._uid).find(".input-unit");
-        });
-    },
-
-
-    watch: {
-        passwordFirst: function passwordFirst(val, oldVal) {
-            this.resetError();
-        },
-        passwordSecond: function passwordSecond(val, oldVal) {
-            this.resetError();
-        }
-    },
-
-    methods: {
-        validatePassword: function validatePassword() {
-            var _this2 = this;
-
-            _ValidationService2.default.validate($("#reset-password-form-" + this._uid)).done(function () {
-                if (_this2.checkPasswordEquals()) {
-                    _this2.saveNewPassword();
-                }
-            }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-        resetError: function resetError() {
-            _ValidationService2.default.unmarkAllFields($("#reset-password-form-" + this._uid));
-            this.pwdFields.removeClass("check-pwds-error");
-            $(".error-save-pwd-msg").hide();
-        },
-        checkPasswordEquals: function checkPasswordEquals() {
-            if (this.passwordFirst !== this.passwordSecond) {
-                this.pwdFields.addClass("check-pwds-error");
-                $(".error-save-pwd-msg").show();
-
-                return false;
-            }
-
-            return true;
-        },
-        saveNewPassword: function saveNewPassword() {
-            var _this3 = this;
-
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/customer/password", { password: this.passwordFirst, password2: this.passwordSecond, contactId: this.contactId, hash: this.hash }).done(function () {
-                _this3.resetFields();
-
-                _this3.isDisabled = false;
-
-                (0, _UrlService.navigateTo)(window.location.origin);
-
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.resetPwChangePasswordSuccessful")).closeAfter(3000);
-            }).fail(function () {
-                _this3.isDisabled = false;
-
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.resetPwChangePasswordFailed")).closeAfter(5000);
-            });
-        },
-        resetFields: function resetFields() {
-            this.passwordFirst = "";
-            this.passwordSecond = "";
-            this.contactId = 0;
-            this.hash = "";
-        }
-    }
-
-});
-
-},{"services/ApiService":113,"services/NotificationService":118,"services/TranslationService":119,"services/UrlService":120,"services/ValidationService":121}],28:[function(require,module,exports){
-"use strict";
-
-var _AddressFieldService = require("services/AddressFieldService");
-
-var _AddressFieldService2 = _interopRequireDefault(_AddressFieldService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("salutation-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "addressData", "addressType"],
-
-    data: function data() {
-        return {
-            salutations: {
-                complete: {
-                    de: [{
-                        value: "Herr",
-                        id: 0
-                    }, {
-                        value: "Frau",
-                        id: 1
-                    }, {
-                        value: "Firma",
-                        id: 2
-                    }],
-                    en: [{
-                        value: "Mr.",
-                        id: 0
-                    }, {
-                        value: "Ms.",
-                        id: 1
-                    }, {
-                        value: "Company",
-                        id: 2
-                    }]
-                },
-                withoutCompany: {
-                    de: [{
-                        value: "Herr",
-                        id: 0
-                    }, {
-                        value: "Frau",
-                        id: 1
-                    }],
-                    en: [{
-                        value: "Mr.",
-                        id: 0
-                    }, {
-                        value: "Ms.",
-                        id: 1
-                    }]
-                }
-            },
-            currentSalutation: {}
-        };
-    },
-
-
-    /**
-     * Get the shipping countries
-     */
-    created: function created() {
-        this.$options.template = this.template;
-
-        if (App.language === "de") {
-            if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
-                this.currentSalutation = this.salutations.complete.de;
-            } else {
-                this.currentSalutation = this.salutations.withoutCompany.de;
-            }
-        } else if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
-            this.currentSalutation = this.salutations.complete.en;
-        } else {
-            this.currentSalutation = this.salutations.withoutCompany.en;
-        }
-    },
-
-
-    methods: {
-        emitInputEvent: function emitInputEvent(value) {
-            var gender = this.mapSalutationIdToGender(value);
-
-            this.$emit("input", { field: "gender", value: gender });
-            this.$emit("input", { field: "addressSalutation", value: value });
-            this.$emit("input", { field: "name1", value: "" });
-        },
-        mapSalutationIdToGender: function mapSalutationIdToGender(id) {
-            if (id === 0) {
-                return "male";
-            } else if (id === 1) {
-                return "female";
-            }
-            return null;
-        },
-        checkGenderCompany: function checkGenderCompany(id) {
-            if (id === 2) {
-                var gender = this.mapSalutationIdToGender(id);
-
-                return gender === null && this.addressData.name1 !== null || gender === null && this.addressData.name1 !== "";
-            }
-            return true;
-        }
-    }
-});
-
-},{"services/AddressFieldService":112}],29:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-var _UrlService = require("services/UrlService");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-
-Vue.component("guest-login", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "backlink"],
-
-    data: function data() {
-        return {
-            email: "",
-            isDisabled: false
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    methods: {
-        validate: function validate() {
-            _ValidationService2.default.validate($("#guest-login-form-" + this._uid)).done(function () {
-                this.sendEMail();
-            }.bind(this)).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-
-        sendEMail: function sendEMail() {
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/guest", { email: this.email }).done(function () {
-                if (this.backlink !== null && this.backlink) {
-                    (0, _UrlService.navigateTo)(decodeURIComponent(this.backlink));
-                } else {
-                    this.isDisabled = false;
-                }
-            }.bind(this));
-        }
-    }
-});
-
-},{"services/ApiService":113,"services/UrlService":120,"services/ValidationService":121}],30:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-var ModalService = require("services/ModalService");
-
-Vue.component("login", {
-
-    delimiters: ["${", "}"],
-
-    props: ["modalElement", "backlink", "hasToForward", "template"],
-
-    data: function data() {
-        return {
-            password: "",
-            username: "",
-            loginFields: [],
-            isDisabled: false,
-            isPwdReset: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.loginFields = $(".login-container").find(".input-unit");
-        });
-    },
-
-
-    watch: {
-        password: function password(val, oldVal) {
-            this.resetError();
-        },
-        username: function username(val, oldVal) {
-            this.resetError();
-        }
-    },
-
-    methods: {
-        /**
-         * Open the login modal
-         */
-        showLogin: function showLogin() {
-            ModalService.findModal(document.getElementById(this.modalElement)).show();
-        },
-        validateLogin: function validateLogin() {
-            var _this2 = this;
-
-            if (!this.isPwdReset) {
-                _ValidationService2.default.validate($("#login-form-" + this._uid)).done(function () {
-                    _this2.sendLogin();
-                }).fail(function (invalidFields) {
-                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
-                });
-            }
-        },
-        validateResetPwd: function validateResetPwd() {
-            var _this3 = this;
-
-            if (this.isPwdReset) {
-                _ValidationService2.default.validate($("#reset-pwd-form-" + this._uid)).done(function () {
-                    _this3.sendResetPwd();
-                }).fail(function (invalidFields) {
-                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
-                });
-            }
-        },
-
-
-        /**
-         * Send the login data
-         */
-        sendLogin: function sendLogin() {
-            var _this4 = this;
-
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/customer/login", { email: this.username, password: this.password }, { supressNotifications: true }).done(function (response) {
-                ApiService.setToken(response);
-
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.loginSuccessful")).closeAfter(10000);
-
-                if (_this4.backlink !== null && _this4.backlink) {
-                    location.assign(decodeURIComponent(_this4.backlink));
-                } else if (_this4.hasToForward) {
-                    location.assign(location.origin);
-                } else {
-                    location.reload();
-                }
-            }).fail(function (response) {
-                _this4.isDisabled = false;
-
-                switch (response.error.code) {
-                    case 401:
-                        _this4.loginFields.addClass("has-login-error");
-
-                        var translationKey = "Ceres::Template.loginFailed";
-
-                        if (response.error.message.length > 0 && response.error.message === "user is blocked") {
-                            translationKey = "Ceres::Template.loginBlocked";
-                        }
-                        NotificationService.error(_TranslationService2.default.translate(translationKey)).closeAfter(10000);
-                        break;
-                    default:
-                        return;
-                }
-            });
-        },
-
-
-        /**
-         *  Reset password
-         */
-        sendResetPwd: function sendResetPwd() {
-            var _this5 = this;
-
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPwMailSubject" }).done(function () {
-                if (document.getElementById(_this5.modalElement) !== null) {
-                    ModalService.findModal(document.getElementById(_this5.modalElement)).hide();
-
-                    _this5.isDisabled = false;
-
-                    _this5.cancelResetPwd();
-                } else {
-                    (0, _UrlService.navigateTo)(window.location.origin);
-                }
-
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.loginSendEmailOk")).closeAfter(5000);
-            }).fail(function () {
-                _this5.isDisabled = false;
-
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.loginResetPwDErrorOnSendEmail")).closeAfter(5000);
-            });
-        },
-        showResetPwdView: function showResetPwdView() {
-            this.resetError();
-            this.isPwdReset = true;
-
-            if (document.getElementById(this.modalElement) !== null) {
-                $(".login-modal .modal-title").html(_TranslationService2.default.translate("Ceres::Template.loginForgotPassword"));
-            } else {
-                $(".login-view-title").html(_TranslationService2.default.translate("Ceres::Template.loginForgotPassword"));
-            }
-
-            $(".login-container").slideUp("fast", function () {
-                $(".reset-pwd-container").slideDown("fast");
-            });
-        },
-        cancelResetPwd: function cancelResetPwd() {
-            this.resetError();
-            this.isPwdReset = false;
-
-            if (document.getElementById(this.modalElement) !== null) {
-                $(".login-modal .modal-title").text(_TranslationService2.default.translate("Ceres::Template.login"));
-            } else {
-                $(".login-view-title").text(_TranslationService2.default.translate("Ceres::Template.login"));
-            }
-
-            $(".reset-pwd-container").slideUp("fast", function () {
-                $(".login-container").slideDown("fast");
-            });
-        },
-        resetError: function resetError() {
-            this.loginFields.removeClass("has-login-error");
-            _ValidationService2.default.unmarkAllFields($("#login-form-" + this._uid));
-            _ValidationService2.default.unmarkAllFields($("#reset-pwd-form-" + this._uid));
-        }
-    }
-});
-
-},{"services/ApiService":113,"services/ModalService":117,"services/NotificationService":118,"services/TranslationService":119,"services/UrlService":120,"services/ValidationService":121}],31:[function(require,module,exports){
-"use strict";
-
-Vue.component("login-view", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            isGuestMode: false
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],32:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-
-Vue.component("user-login-handler", {
-
-    delimiters: ["${", "}"],
-
-    props: ["userData", "template"],
-
-    computed: Vuex.mapGetters(["username", "isLoggedIn"]),
-
-    created: function created() {
-        this.$options.template = this.template;
-        this.$store.commit("setUserData", this.userData);
-    },
-
-
-    /**
-     * Add the global event listener for login and logout
-     */
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.addEventListeners();
-        });
-    },
-
-
-    methods: {
-        /**
-         * Adds login/logout event listeners
-         */
-        addEventListeners: function addEventListeners() {
-            var _this2 = this;
-
-            ApiService.listen("AfterAccountAuthentication", function (userData) {
-                _this2.$store.commit("setUserData", userData.accountContact);
-            });
-
-            ApiService.listen("AfterAccountContactLogout", function () {
-                _this2.$store.commit("setUserData", null);
-            });
-        },
-        unmarkInputFields: function unmarkInputFields() {
-            _ValidationService2.default.unmarkAllFields($("#login"));
-            _ValidationService2.default.unmarkAllFields($("#registration"));
-        }
-    }
-});
-
-},{"services/ApiService":113,"services/ValidationService":121}],33:[function(require,module,exports){
-"use strict";
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("add-to-wish-list", {
-
-    props: ["isActive", "variationId", "template"],
-
-    data: function data() {
-        return {
-            wishListCount: 0,
-            _isActive: this.isActive,
-            isLoading: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.changeTooltipText();
-        });
-    },
-
-
-    methods: {
-        switchState: function switchState() {
-            if (this.$data._isActive) {
-                this.removeFromWishList();
-            } else {
-                this.addToWishList();
-            }
-        },
-        addToWishList: function addToWishList() {
-            var _this2 = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$data._isActive = true;
-                this.changeTooltipText();
-
-                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
-                    _this2.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
-                }, function (error) {
-                    _this2.isLoading = false;
-                    _this2.$data._isActive = false;
-                    _this2.changeTooltipText();
-                });
-            }
-        },
-        removeFromWishList: function removeFromWishList() {
-            var _this3 = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$data._isActive = false;
-                this.changeTooltipText();
-
-                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
-                    _this3.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
-                }, function (error) {
-                    _this3.isLoading = false;
-                    _this3.$data._isActive = true;
-                    _this3.changeTooltipText();
-                });
-            }
-        },
-        changeTooltipText: function changeTooltipText() {
-            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.$data._isActive ? "singleItemWishListRemove" : "singleItemWishListAdd"));
-
-            $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
-        }
-    }
-});
-
-},{"services/NotificationService":118,"services/TranslationService":119}],34:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-Vue.component("graduated-prices", {
-    props: ["template"],
-
-    computed: _extends({
-        graduatedPrices: function graduatedPrices() {
-            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
-            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
-
-            prices = prices.filter(function (price) {
-                return price.minimumOrderQuantity > minQuantity;
-            });
-
-            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
-                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
-            });
-        },
-        activeGraduationIndex: function activeGraduationIndex() {
-            var _this = this;
-
-            var prices = this.graduatedPrices.filter(function (price) {
-                return _this.variationOrderQuantity >= price.minimumOrderQuantity;
-            });
-
-            if (!prices.length) {
-                return -1;
-            }
-
-            var price = prices.reduce(function (prev, current) {
-                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
-            });
-
-            return this.graduatedPrices.indexOf(price);
-        }
-    }, Vuex.mapState({
-        variationOrderQuantity: function variationOrderQuantity(state) {
-            return state.item.variationOrderQuantity;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],35:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _utils = require("../../helper/utils");
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-image-carousel", {
-
-    delimiters: ["${", "}"],
-
-    props: ["imageUrlAccessor", "template"],
-
-    data: function data() {
-        return {
-            currentItem: 0
-        };
-    },
-
-
-    computed: _extends({
-        carouselImages: function carouselImages() {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
-        },
-        singleImages: function singleImages() {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
-        }
-    }, Vuex.mapState({
-        currentVariation: function currentVariation(state) {
-            return state.item.variation;
-        }
-    })),
-
-    watch: {
-        currentVariation: {
-            handler: function handler(val, oldVal) {
-                var _this = this;
-
-                if (val !== oldVal) {
-                    setTimeout(function () {
-                        _this.reInitialize();
-                    }, 1);
-                }
-            },
-
-            deep: true
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this2 = this;
-
-        this.$nextTick(function () {
-            _this2.initCarousel();
-            _this2.initThumbCarousel();
-        });
-    },
-
-
-    methods: {
-        getImageCount: function getImageCount() {
-            return this.carouselImages.length;
-        },
-        reInitialize: function reInitialize() {
-            var $owl = $(this.$refs.single);
-
-            $owl.trigger("destroy.owl.carousel");
-            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-            $owl.find(".owl-item").remove();
-
-            var $thumbs = $(this.$refs.thumbs);
-
-            $thumbs.trigger("destroy.owl.carousel");
-            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-            $thumbs.find(".owl-item").remove();
-
-            this.initCarousel();
-            this.initThumbCarousel();
-        },
-        initCarousel: function initCarousel() {
-            var _this3 = this;
-
-            var imageCount = this.getImageCount();
-
-            $(this.$refs.single).owlCarousel({
-                autoHeight: true,
-                dots: true,
-                items: 1,
-                lazyLoad: true,
-                loop: true,
-                margin: 10,
-                mouseDrag: imageCount > 1,
-                nav: imageCount > 1,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350,
-                onChanged: function onChanged(event) {
-                    var $thumb = $(_this3.$refs.thumbs);
-
-                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
-                }
-            });
-
-            if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
-                window.lightbox.option({
-                    wrapAround: true
-                });
-                window.lightbox.imageCountLabel = function (current, total) {
-                    if (imageCount <= 1) {
-                        return "";
-                    }
-                    // owl prepends 2 clones to allow endless scrolling
-                    current = current % imageCount + 1;
-                    return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
-                };
-
-                var originalFn = window.lightbox.changeImage;
-
-                window.lightbox.changeImage = function (imageNumber) {
-                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
-                        imageNumber--;
-                    } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
-                        imageNumber++;
-                    }
-                    return originalFn.call(window.lightbox, imageNumber);
-                };
-            }
-
-            $(this.$refs.single).on("changed.owl.carousel", function (event) {
-                _this3.currentItem = event.page.index;
-            });
-        },
-        initThumbCarousel: function initThumbCarousel() {
-            $(this.$refs.thumbs).owlCarousel({
-                autoHeight: true,
-                dots: false,
-                items: 5,
-                lazyLoad: true,
-                loop: false,
-                margin: 10,
-                mouseDrag: false,
-                center: false,
-                nav: true,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350
-            });
-        },
-        goTo: function goTo(index) {
-            var $owl = $(this.$refs.single);
-
-            $owl.trigger("to.owl.carousel", [index, 350]);
-        },
-        orderByPosition: function orderByPosition(list) {
-            return list.sort(function (entryA, entryB) {
-                if (entryA.position > entryB.position) {
-                    return 1;
-                }
-                if (entryA.position < entryB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        getAltText: function getAltText(image) {
-            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
-
-            return altText;
-        }
-    }
-});
-
-},{"../../helper/utils":110,"services/TranslationService":119}],36:[function(require,module,exports){
-"use strict";
-
-Vue.component("order-properties", {
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        properties: function properties(state) {
-            return state.item.variation.documents[0].data.properties;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: Vuex.mapMutations(["setVariationOrderProperty"])
-});
-
-},{}],37:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-Vue.component("order-property-list", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-property-list"
-        }
-    },
-
-    data: function data() {
-        return {
-            activeSlide: 0,
-            touchedSlides: { 0: true }
-        };
-    },
-
-    computed: _extends({
-        sortedGroupedProperties: function sortedGroupedProperties() {
-            var groupedProperties = JSON.parse(JSON.stringify(this.variationGroupedProperties));
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = groupedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var group = _step.value;
-
-                    this.sortGroupProperties(group);
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return this.getSortedGroups(groupedProperties);
-        },
-        missingPropertyGroupIds: function missingPropertyGroupIds() {
-            if (this.variationMarkInvalidProperties) {
-                return [].concat(_toConsumableArray(new Set(this.variationMissingProperties.map(function (property) {
-                    return property.group && property.group.id;
-                }))));
-            }
-
-            return [];
-        }
-    }, Vuex.mapState({
-        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
-            return state.item.variationMarkInvalidProperties;
-        }
-    }), Vuex.mapGetters(["variationGroupedProperties", "variationMissingProperties"])),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        sortGroupProperties: function sortGroupProperties(group) {
-            return group.properties.sort(function (prev, current) {
-                if (prev.position > current.position) {
-                    return 1;
-                }
-                if (prev.position < current.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        getSortedGroups: function getSortedGroups(groups) {
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
-
-            try {
-                for (var _iterator2 = groups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var group = _step2.value;
-
-                    var lowestPosition = group.properties.reduce(function (prev, current) {
-                        return prev.position < current.position ? prev : current;
-                    });
-
-                    group.lowestPosition = lowestPosition.position;
-
-                    var groupId = group.group ? group.group.id : null;
-
-                    if (this.variationMarkInvalidProperties && this.missingPropertyGroupIds.includes(groupId)) {
-                        group.hasError = true;
-                    }
-                }
-            } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                        _iterator2.return();
-                    }
-                } finally {
-                    if (_didIteratorError2) {
-                        throw _iteratorError2;
-                    }
-                }
-            }
-
-            return groups.sort(function (prev, current) {
-                if (prev.lowestPosition > current.lowestPosition) {
-                    return 1;
-                }
-                if (prev.lowestPosition < current.lowestPosition) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        slideTo: function slideTo(position) {
-            if (position >= 0 && position < this.sortedGroupedProperties.length) {
-                this.activeSlide = position;
-                this.touchedSlides[this.activeSlide] = true;
-            }
-        }
-    }
-});
-
-},{}],38:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("order-property-list-group", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-property-list-group"
-        },
-        propertyGroup: Object
-    },
-
-    computed: {
-        isShownOnItemPageCount: function isShownOnItemPageCount() {
-            var properties = this.propertyGroup.properties.filter(function (property) {
-                return property.isShownOnItemPage;
-            });
-
-            return properties.length;
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: _extends({
-        unsetDeselectedRadios: function unsetDeselectedRadios(propertyId) {
-            var _this = this;
-
-            var propertiesToUnselect = this.propertyGroup.properties.filter(function (property) {
-                return property.id !== propertyId && _this.isPropertyTypeRadio(property);
-            });
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = propertiesToUnselect[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var property = _step.value;
-
-                    this.setVariationOrderProperty({ propertyId: property.id, value: null });
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-        },
-        isPropertyTypeRadio: function isPropertyTypeRadio(property) {
-            var orderPropertyGroupingType = this.propertyGroup.group ? this.propertyGroup.group.orderPropertyGroupingType : null;
-            var valueType = property.valueType;
-
-            if (valueType === "empty" && orderPropertyGroupingType === "single") {
-                return true;
-            }
-
-            return false;
-        }
-    }, Vuex.mapMutations(["setVariationOrderProperty"]))
-});
-
-},{}],39:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("order-property-list-item", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-property-list-item"
-        },
-        group: Object,
-        property: Object
-    },
-
-    data: function data() {
-        return {
-            inputValue: "",
-            selectedFile: null,
-            waiting: false
-        };
-    },
-
-
-    computed: _extends({
-        inputType: function inputType() {
-            var orderPropertyGroupingType = this.group ? this.group.orderPropertyGroupingType : null;
-            var valueType = this.property.valueType;
-
-            if (valueType === "empty") {
-                if (!orderPropertyGroupingType || orderPropertyGroupingType === "none" || orderPropertyGroupingType === "multi") {
-                    return "checkbox";
-                }
-
-                return "radio";
-            }
-
-            return valueType;
-        },
-        selectedFileName: function selectedFileName() {
-            if (this.selectedFile) {
-                return this.selectedFile.name;
-            }
-
-            return "";
-        },
-        hasError: function hasError() {
-            var _this = this;
-
-            if (this.variationMarkInvalidProperties && this.inputType === "radio") {
-                return this.variationMissingProperties.find(function (property) {
-                    return property.property.id === _this.property.id;
-                });
-            }
-
-            return this.variationMarkInvalidProperties && !this.property.value;
-        },
-        surcharge: function surcharge() {
-            return this.property.itemSurcharge || this.property.surcharge;
-        }
-    }, Vuex.mapState({
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        },
-        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
-            return state.item.variationMarkInvalidProperties;
-        }
-    }), Vuex.mapGetters(["variationMissingProperties"])),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: _extends({
-        onInputValueChanged: function onInputValueChanged(value) {
-            if (this.inputType === "int") {
-                value = this.validateInt(value);
-            } else if (this.inputType === "float") {
-                value = this.validateFloat(value);
-            } else if (this.inputType === "checkbox") {
-                if (!value) {
-                    value = null;
-                }
-            } else if (this.inputType === "radio") {
-                this.$emit("radio-change", this.property.id);
-            }
-
-            this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
-        },
-        validateInt: function validateInt(value) {
-            value = parseInt(value);
-
-            if (isNaN(value)) {
-                value = null;
-            }
-
-            this.inputValue = value;
-
-            return value;
-        },
-        validateFloat: function validateFloat(value) {
-            value = parseFloat(value.replace(App.decimalSeparator, "."));
-
-            if (isNaN(value)) {
-                value = null;
-            } else {
-                value = value.toString().replace(".", App.decimalSeparator);
-            }
-
-            this.inputValue = value;
-
-            return value;
-        }
-    }, Vuex.mapMutations(["setVariationOrderProperty", "setIsBasketLoading"]), {
-        setPropertyFile: function setPropertyFile(event) {
-            if (event.target && event.target.files && event.target.files.length > 0) {
-                this.selectedFile = event.target.files[0];
-                this.uploadPropertyFile(this.selectedFile);
-            }
-        },
-        uploadPropertyFile: function uploadPropertyFile(file) {
-            var _this2 = this;
-
-            this.setIsBasketLoading(true);
-            this.waiting = true;
-
-            var fileData = new FormData();
-
-            fileData.append("fileData", file);
-
-            ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
-                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
-            }).fail(function (error) {
-                _this2.clearSelectedFile();
-                _this2._handleValidationErrors(error);
-            }).always(function (response) {
-                _this2.setIsBasketLoading(false);
-                _this2.waiting = false;
-            });
-        },
-        clearSelectedFile: function clearSelectedFile() {
-            this.selectedFile = null;
-            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
-        },
-        _handleValidationErrors: function _handleValidationErrors(error) {
-            if (error.hasOwnProperty("validation_errors")) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = Object.values(error.validation_errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var err = _step.value;
-
-                        NotificationService.error(err[0]);
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-            }
-        }
-    })
-});
-
-},{"services/ApiService":113,"services/NotificationService":118}],40:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _number = require("../../helper/number");
-
-var _utils = require("../../helper/utils");
-
-var _TranslationService = require("../../services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _debounce = require("../../helper/debounce");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("quantity-input", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        value: {
-            type: Number,
-            required: true
-        },
-        timeout: {
-            type: Number,
-            required: false,
-            default: 500
-        },
-        min: {
-            type: Number,
-            required: false,
-            default: 0
-        },
-        max: {
-            type: Number,
-            required: false
-        },
-        interval: {
-            type: Number,
-            required: false,
-            default: 1
-        },
-        template: {
-            type: String,
-            required: true
-        },
-        waiting: {
-            type: Boolean,
-            required: false
-        },
-        variationId: {
-            type: Number,
-            required: false
-        }
-    },
-
-    data: function data() {
-        return {
-            compValue: this.value,
-            compMin: this.min,
-            compMax: this.max,
-            compInterval: this.interval,
-            compDecimals: 0,
-            onValueChanged: null
-        };
-    },
-    created: function created() {
-        var _this = this;
-
-        this.$options.template = this.template;
-
-        this.compInterval = (0, _utils.defaultValue)(this.compInterval, 1);
-        this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
-
-        this.compDecimals = (0, _number.floatLength)(this.compInterval);
-
-        this.onValueChanged = (0, _debounce.debounce)(function () {
-            _this.$emit("quantity-change", _this.compValue);
-        }, (0, _utils.defaultValue)(this.timeout, 500));
-
-        if (!(0, _utils.isNullOrUndefined)(this.variationId)) {
-            this.fetchQuantityFromBasket();
-        }
-    },
-
-
-    computed: _extends({
-        variationBasketQuantity: function variationBasketQuantity() {
-            var _this2 = this;
-
-            if ((0, _utils.isNullOrUndefined)(this.variationId)) {
-                return 0;
-            }
-            var basketObject = this.$store.state.basket.items.find(function (variations) {
-                return variations.variationId === _this2.variationId;
-            });
-
-            return basketObject ? basketObject.quantity : 0;
-        },
-        isMinimum: function isMinimum() {
-            return (0, _utils.isDefined)(this.compMin) && this.compValue - this.compInterval < this.compMin;
-        },
-        isMaximum: function isMaximum() {
-            return (0, _utils.isDefined)(this.compMax) && this.compValue + this.compInterval > this.compMax;
-        },
-        minimumHint: function minimumHint() {
-            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMin", {
-                min: this.min
-            });
-        },
-        maximumHint: function maximumHint() {
-            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMax", {
-                max: this.max
-            });
-        },
-        displayValue: function displayValue() {
-            return this.$options.filters.numberFormat(this.compValue);
-        }
-    }, Vuex.mapState({
-        basketItems: function basketItems(state) {
-            return state.basket.items;
-        }
-    })),
-
-    watch: {
-        basketItems: {
-            handler: function handler(newValue, oldValue) {
-                if ((0, _utils.isDefined)(this.variationId) && (0, _utils.isDefined)(oldValue) && JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
-                    this.fetchQuantityFromBasket();
-                }
-            },
-
-            deep: true
-        },
-
-        value: function value(newValue, oldValue) {
-            if (newValue !== oldValue) {
-                this.setValue(newValue);
-            }
-        }
-    },
-
-    methods: {
-        increaseValue: function increaseValue() {
-            var newValue = (0, _number.formatFloat)(this.compValue + this.compInterval, this.compDecimals);
-
-            if (((0, _utils.isNullOrUndefined)(this.compMax) || newValue <= this.compMax) && !this.waiting) {
-                this.setValue(newValue);
-            }
-        },
-        decreaseValue: function decreaseValue() {
-            var newValue = (0, _number.formatFloat)(this.compValue - this.compInterval, this.compDecimals);
-
-            if (((0, _utils.isNullOrUndefined)(this.compMin) || newValue >= this.compMin) && !this.waiting) {
-                this.setValue(newValue);
-            }
-        },
-        setValue: function setValue(value) {
-            value = parseFloat(value);
-            if (isNaN(value)) {
-                value = (0, _utils.defaultValue)(this.compMin, 1);
-            }
-
-            // limit new value to min/ max value
-            value = (0, _number.limit)(value, this.compMin, this.compMax);
-
-            // make sure, new value is an even multiple of interval
-            var diff = (0, _number.formatFloat)(value % this.compInterval, this.compDecimals, true);
-
-            if (diff > 0 && diff !== this.compInterval) {
-                if (diff < this.compInterval / 2) {
-                    value -= diff;
-                } else {
-                    value += this.compInterval - diff;
-                }
-                value = (0, _number.limit)(value, this.compMin, this.compMax);
-            }
-
-            // cut fraction
-            value = (0, _number.formatFloat)(value, this.compDecimals);
-
-            if (value !== this.compValue) {
-                this.compValue = value;
-                this.onValueChanged();
-            }
-        },
-        fetchQuantityFromBasket: function fetchQuantityFromBasket() {
-            if (!(0, _utils.isNullOrUndefined)(this.min) && this.variationBasketQuantity >= this.min) {
-                // minimum quantity already in basket
-                this.compMin = this.compInterval;
-            }
-
-            if (!(0, _utils.isNullOrUndefined)(this.max)) {
-                // decrease maximum quantity by quantity of variations already in basket
-                this.compMax = this.max - this.variationBasketQuantity;
-
-                if (this.variationBasketQuantity + this.compInterval > this.max) {
-                    this.compMin = 0;
-                    this.compMax = 0;
-                    this.$emit("out-of-stock", true);
-                } else {
-                    this.$emit("out-of-stock", false);
-                }
-            }
-
-            this.setValue(this.compMin);
-        }
-    }
-});
-
-},{"../../helper/debounce":105,"../../helper/number":107,"../../helper/utils":110,"../../services/TranslationService":119}],41:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("single-item", {
-
-    props: ["template", "itemData", "variationListData", "attributeNameMap"],
-
-    data: function data() {
-        return {
-            isVariationSelected: true
-        };
-    },
-
-
-    computed: _extends({
-        isDescriptionTabActive: function isDescriptionTabActive() {
-            return App.config.item.itemData.includes("item.description") && !!this.currentVariation.texts.description.length;
-        },
-        isTechnicalDataTabActive: function isTechnicalDataTabActive() {
-            return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
-        }
-    }, Vuex.mapState({
-        currentVariation: function currentVariation(state) {
-            return state.item.variation.documents[0].data;
-        },
-        variations: function variations(state) {
-            return state.item.variationList;
-        },
-        isInWishList: function isInWishList(state) {
-            return state.item.variation.documents[0].isInWishListVariation;
-        }
-    }), Vuex.mapGetters(["variationTotalPrice", "variationMissingProperties", "variationGroupedProperties", "variationGraduatedPrice"])),
-
-    created: function created() {
-        var _this = this;
-
-        this.$options.template = this.template;
-        this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setVariationList", this.variationListData);
-
-        this.$store.watch(function () {
-            return _this.$store.getters.variationTotalPrice;
-        }, function () {
-            $(_this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
-        });
-    }
-});
-
-},{}],42:[function(require,module,exports){
-"use strict";
-
-var _util = require("util");
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var ApiService = require("services/ApiService");
-
-// cache loaded variation data for reuse
-var VariationData = {};
-
-Vue.component("variation-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["attributes", "variations", "preselect", "template"],
-
-    data: function data() {
-        return {
-            // Collection of currently selected variation attributes.
-            selectedAttributes: {}
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        currentVariation: function currentVariation(state) {
-            return state.item.variation;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            // initialize selected attributes to be tracked by change detection
-            var attributes = {};
-
-            for (var attributeId in _this.attributes) {
-                attributes[attributeId] = null;
-            }
-            _this.selectedAttributes = attributes;
-
-            // set attributes of preselected variation if exists
-            if (_this.preselect) {
-                // find variation by id
-                var preselectedVariation = _this.variations.filter(function (variation) {
-                    // eslint-disable-next-line eqeqeq
-                    return variation.variationId == _this.preselect;
-                });
-
-                if (!!preselectedVariation && preselectedVariation.length === 1) {
-                    // set attributes of preselected variation
-                    _this.setAttributes(preselectedVariation[0]);
-                }
-            }
-        });
-    },
-
-
-    methods: {
-
-        /**
-         * Finds all variations matching a given set of attributes.
-         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
-         * @returns {array}                    A list of matching variations.
-         */
-        filterVariations: function filterVariations(attributes) {
-            attributes = attributes || this.selectedAttributes;
-            return this.variations.filter(function (variation) {
-                for (var i = 0; i < variation.attributes.length; i++) {
-                    var id = variation.attributes[i].attributeId;
-                    var val = variation.attributes[i].attributeValueId;
-
-                    if (!!attributes[id] && attributes[id] != val) {
-                        return false;
-                    }
-                }
-
-                return variation.attributes.length > 0;
-            });
-        },
-
-
-        /**
-         * Tests if a given attribute value is not available depending on the current selection.
-         * @param {int}     attributeId         The id of the attribute
-         * @param {int}     attributeValueId    The valueId of the attribute
-         * @returns {boolean}                   True if the value can be combined with the current selection.
-         */
-        isEnabled: function isEnabled(attributeId, attributeValueId) {
-            // clone selectedAttributes to avoid touching objects bound to UI
-            var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
-
-            attributes[attributeId] = attributeValueId;
-            return this.filterVariations(attributes).length > 0;
-        },
-
-
-        /**
-         * Set selected attributes by a given variation.
-         * @param {*}           variation   The variation to set as selected
-         * @returns {boolean}               true if at least one attribute has been changed
-         */
-        setAttributes: function setAttributes(variation) {
-            var hasChanges = false;
-
-            for (var i = 0; i < variation.attributes.length; i++) {
-                var id = variation.attributes[i].attributeId;
-                var val = variation.attributes[i].attributeValueId;
-
-                if (this.selectedAttributes[id] !== val) {
-                    this.selectedAttributes[id] = val;
-                    hasChanges = true;
-                }
-            }
-
-            return hasChanges;
-        },
-        onSelectionChange: function onSelectionChange(event) {
-            this.$emit("is-valid-change", false);
-
-            if ((0, _util.isNull)(event)) {
-                var values = Object.values(this.selectedAttributes);
-                var uniqueValues = [].concat(_toConsumableArray(new Set(values)));
-
-                if (uniqueValues.length === 1 && (0, _util.isNull)(uniqueValues[0])) {
-                    var mainVariation = this.variations.find(function (variation) {
-                        return !variation.attributes.length;
-                    });
-
-                    if (mainVariation) {
-                        this.setVariation(mainVariation.variationId);
-                    }
-                }
-            } else {
-                // search variations matching current selection
-                var possibleVariations = this.filterVariations();
-
-                if (possibleVariations.length === 1) {
-                    // only 1 matching variation remaining:
-                    // set remaining attributes if not set already. Will trigger this method again.
-                    if (!this.setAttributes(possibleVariations[0])) {
-                        // all attributes are set => load variation data
-                        this.setVariation(possibleVariations[0].variationId);
-                    } else {
-                        this.onSelectionChange();
-                    }
-                }
-            }
-        },
-        setVariation: function setVariation(variationId) {
-            var _this2 = this;
-
-            if (VariationData[variationId]) {
-                // reuse cached variation data
-                this.$store.commit("setVariation", VariationData[variationId]);
-
-                document.dispatchEvent(new CustomEvent("onVariationChanged", {
-                    detail: {
-                        attributes: VariationData[variationId].attributes,
-                        documents: VariationData[variationId].documents
-                    }
-                }));
-
-                this.$emit("is-valid-change", true);
-            } else {
-                // get variation data from remote
-                ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
-                    // store received variation data for later reuse
-                    VariationData[variationId] = response;
-
-                    _this2.$store.commit("setVariation", response);
-
-                    document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
-
-                    _this2.$emit("is-valid-change", true);
-                });
-            }
-        }
-    },
-
-    watch: {
-        currentVariation: {
-            handler: function handler(newVariation, oldVariation) {
-                if (oldVariation) {
-                    var url = this.$options.filters.itemURL(newVariation.documents[0].data);
-                    var title = document.getElementsByTagName("title")[0].innerHTML;
-
-                    window.history.replaceState({}, title, url);
-                }
-            },
-
-            deep: true
-        }
-    }
-});
-
-},{"services/ApiService":113,"util":141}],43:[function(require,module,exports){
-"use strict";
-
-Vue.component("category-image-carousel", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        imageUrlsData: { type: Array },
-        itemUrl: { type: String },
-        altText: { type: String },
-        showDots: { type: Boolean },
-        showNav: { type: Boolean },
-        disableLazyLoad: {
-            type: Boolean,
-            default: false
-        },
-        enableCarousel: { type: Boolean },
-        template: { type: String }
-    },
-
-    data: function data() {
-        return {
-            $_enableCarousel: false
-        };
-    },
-
-
-    computed: {
-        imageUrls: function imageUrls() {
-            return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
-                if (imageUrlA.position > imageUrlB.position) {
-                    return 1;
-                }
-                if (imageUrlA.position < imageUrlB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (_this.$_enableCarousel) {
-                _this.initializeCarousel();
-            }
-        });
-    },
-
-
-    methods: {
-        initializeCarousel: function initializeCarousel() {
-            var _this2 = this;
-
-            $("#owl-carousel-" + this._uid).owlCarousel({
-                dots: !!this.showDots,
-                items: 1,
-                mouseDrag: false,
-                loop: this.imageUrls.length > 1,
-                lazyLoad: !this.disableLazyLoad,
-                margin: 10,
-                nav: !!this.showNav,
-                navText: ["<i id=\"owl-nav-text-left-" + this._uid + "\" class='fa fa-chevron-left' aria-hidden='true'></i>", "<i id=\"owl-nav-text-right-" + this._uid + "\" class='fa fa-chevron-right' aria-hidden='true'></i>"],
-                onTranslated: function onTranslated(event) {
-                    var target = $(event.currentTarget);
-                    var owlItem = $(target.find(".owl-item.active"));
-
-                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
-                },
-
-                onInitialized: function onInitialized(event) {
-                    if (_this2.showNav) {
-                        document.querySelector("#owl-nav-text-left-" + _this2._uid).parentElement.onclick = function (event) {
-                            return event.preventDefault();
-                        };
-                        document.querySelector("#owl-nav-text-right-" + _this2._uid).parentElement.onclick = function (event) {
-                            return event.preventDefault();
-                        };
-                    }
-                }
-            });
-        },
-        getAltText: function getAltText(image) {
-            var altText = image && image.alternate ? image.alternate : this.altText;
-
-            return altText;
-        },
-        loadFirstImage: function loadFirstImage() {
-            var itemLazyImage = this.$refs.itemLazyImage;
-
-            if (itemLazyImage) {
-                if (itemLazyImage.loadImage) {
-                    itemLazyImage.loadImage();
-                } else if (itemLazyImage[0] && itemLazyImage[0].loadImage) {
-                    itemLazyImage[0].loadImage();
-                }
-            }
-        }
-    }
-});
-
-},{}],44:[function(require,module,exports){
-"use strict";
-
-Vue.component("category-item", {
-
-    delimiters: ["${", "}"],
-
-    template: "#vue-category-item",
-
-    props: ["decimalCount", "itemData", "imageUrlAccessor"],
-
-    data: function data() {
-        return {
-            recommendedRetailPrice: 0,
-            variationRetailPrice: 0
-        };
-    },
-
-
-    computed: {
-        /**
-         * returns itemData.item.storeSpecial
-         */
-        storeSpecial: function storeSpecial() {
-            return this.itemData.item.storeSpecial;
-        },
-
-
-        /**
-         * returns itemData.texts[0]
-         */
-        texts: function texts() {
-            return this.itemData.texts;
-        }
-    },
-
-    created: function created() {
-        if (this.itemData.prices.rrp) {
-            this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
-        }
-        this.variationRetailPrice = this.itemData.prices.default.price.value;
-    },
-
-
-    methods: {
-        loadFirstImage: function loadFirstImage() {
-            var categoryImageCarousel = this.$refs.categoryImageCarousel;
-
-            if (categoryImageCarousel) {
-                categoryImageCarousel.loadFirstImage();
-            }
-        }
-    }
-
-});
-
-},{}],45:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-lazy-img", {
-
-    delimiters: ["${", "}"],
-
-    props: ["imageUrl", "template"],
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            setTimeout(function () {
-                $(_this.$refs.lazyImg).show().lazyload({ threshold: 100 });
-            }, 1);
-        });
-    },
-
-
-    methods: {
-        loadImage: function loadImage() {
-            $(this.$refs.lazyImg).trigger("appear");
-        }
-    }
-});
-
-},{}],46:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-list", {
-
-    delimiters: ["${", "}"],
-
-    props: ["categoryId", "template", "itemData", "totalItemsData"],
-
-    data: function data() {
-        return {
-            filterListState: false
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        },
-        items: function items(state) {
-            return state.itemList.items;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-        this.$store.commit("setItemListItems", this.itemData);
-        this.$store.commit("setItemListTotalItems", this.totalItemsData);
-    }
-});
-
-},{}],47:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-list-sorting", {
-
-    delimiters: ["${", "}"],
-
-    props: ["sortingList", "defaultSorting", "template"],
-
-    data: function data() {
-        return {
-            selectedSorting: {}
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-
-        this.setSelectedValue();
-    },
-
-
-    methods: {
-        /**
-         * Set the selected sorting in the vuex storage and trigger the item search.
-         */
-        updateSorting: function updateSorting() {
-            this.$store.dispatch("selectItemListSorting", this.selectedSorting);
-        },
-
-
-        /**
-         * Determine the initial value and set it in the vuex storage.
-         */
-        setSelectedValue: function setSelectedValue() {
-            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-            if (urlParams.sorting) {
-                this.selectedSorting = urlParams.sorting;
-            } else {
-                this.selectedSorting = this.defaultSorting;
-            }
-
-            this.$store.commit("setItemListSorting", this.selectedSorting);
-        }
-    }
-});
-
-},{"services/UrlService":120}],48:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-search", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            currentSearchString: "",
-            preventSearch: false
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        searchString: function searchString(state) {
-            return state.itemList.searchString;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.initAutocomplete();
-
-            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-            _this.$store.commit("setItemListSearchString", urlParams.query);
-            _this.currentSearchString = urlParams.query;
-        });
-    },
-
-
-    methods: {
-        search: function search() {
-            if (this.currentSearchString.length && !this.preventSearch) {
-                if (document.location.pathname === "/search") {
-                    this.updateTitle(this.currentSearchString);
-                    this.$store.dispatch("searchItems", this.currentSearchString);
-                } else {
-                    window.open("/search?query=" + this.currentSearchString, "_self", false);
-                }
-            } else {
-                this.preventSearch = false;
-            }
-        },
-        openItem: function openItem(suggestion) {
-            this.preventSearch = true;
-            window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
-        },
-        updateTitle: function updateTitle(searchString) {
-            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
-            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
-        },
-        initAutocomplete: function initAutocomplete() {
-            var _this2 = this;
-
-            $(".search-input").autocomplete({
-                serviceUrl: "/rest/io/item/search/autocomplete",
-                paramName: "query",
-                params: { template: "Ceres::ItemList.Components.ItemSearch" },
-                width: $(".search-box-shadow-frame").width(),
-                zIndex: 1070,
-                maxHeight: 310,
-                minChars: 2,
-                preventBadQueries: false,
-                onSelect: function onSelect(suggestion) {
-                    _this2.$store.commit("setItemListSearchString", suggestion.value);
-                    _this2.currentSearchString = suggestion.value;
-
-                    if (App.config.search.forwardToSingleItem) {
-                        _this2.openItem(suggestion);
-                    } else {
-                        _this2.search();
-                    }
-                },
-                beforeRender: function beforeRender() {
-                    $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-                },
-
-                transformResult: function transformResult(response) {
-                    return _this2.transformSuggestionResult(response);
-                }
-            });
-
-            $(window).resize(function () {
-                $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-            });
-        },
-        transformSuggestionResult: function transformSuggestionResult(result) {
-            var _this3 = this;
-
-            result = JSON.parse(result);
-            var suggestions = {
-                suggestions: $.map(result.data.documents, function (dataItem) {
-                    var value = _this3.$options.filters.itemName(dataItem.data);
-
-                    return {
-                        value: value,
-                        data: dataItem.data
-                    };
-                })
-            };
-
-            return suggestions;
-        }
-    }
-});
-
-},{"services/TranslationService":119,"services/UrlService":120}],49:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-store-special", {
-
-    delimiters: ["${", "}"],
-
-    template: "#vue-item-store-special",
-
-    props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount", "bundle"],
-
-    data: function data() {
-        return {
-            tagClass: "",
-            label: "",
-            tagClasses: {
-                1: "bg-danger",
-                2: "bg-primary",
-                default: "bg-success"
-            }
-        };
-    },
-    created: function created() {
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
-        this.label = this.getLabel();
-    },
-
-
-    methods: {
-        getLabel: function getLabel() {
-            if (this.storeSpecial.id === 1 && this.recommendedRetailPrice) {
-                var percent = this.getPercentageSale();
-
-                if (parseInt(percent) < 0) {
-                    return percent + "%";
-                }
-            }
-
-            return this.storeSpecial.names.name;
-        },
-        getPercentageSale: function getPercentageSale() {
-            // eslint-disable-next-line
-            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
-
-            return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator);
-        }
-    }
-});
-
-},{}],50:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("items-per-page", {
-
-    delimiters: ["${", "}"],
-
-    props: ["paginationValues", "template"],
-
-    data: function data() {
-        return {
-            selectedValue: null
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-
-        this.setSelectedValueByUrl();
-    },
-
-
-    methods: {
-        itemsPerPageChanged: function itemsPerPageChanged() {
-            this.$store.dispatch("selectItemsPerPage", this.selectedValue);
-        },
-        setSelectedValueByUrl: function setSelectedValueByUrl() {
-            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-            var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
-
-            if (urlParams.items) {
-                if (this.paginationValues.includes(parseInt(urlParams.items))) {
-                    this.selectedValue = urlParams.items;
-                } else {
-                    this.selectedValue = defaultItemsPerPage;
-                }
-            } else {
-                this.selectedValue = defaultItemsPerPage;
-            }
-
-            this.$store.commit("setItemsPerPage", parseInt(this.selectedValue));
-        }
-    }
-});
-
-},{"services/UrlService":120}],51:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("pagination", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            lastPageMax: 0
-        };
-    },
-
-
-    computed: _extends({
-        pageMax: function pageMax() {
-            if (this.isLoading) {
-                return this.lastPageMax;
-            }
-
-            var pageMax = this.totalItems / parseInt(this.itemsPerPage);
-
-            if (this.totalItems % parseInt(this.itemsPerPage) > 0) {
-                pageMax += 1;
-            }
-
-            this.lastPageMax = parseInt(pageMax) || 1;
-
-            return parseInt(pageMax) || 1;
-        }
-    }, Vuex.mapState({
-        page: function page(state) {
-            return state.itemList.page || 1;
-        },
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        },
-        itemsPerPage: function itemsPerPage(state) {
-            return state.itemList.itemsPerPage;
-        },
-        totalItems: function totalItems(state) {
-            return state.itemList.totalItems;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-        var page = urlParams.page || 1;
-
-        this.$store.commit("setItemListPage", parseInt(page));
-    },
-
-
-    methods: {
-        setPage: function setPage(page) {
-            this.$store.dispatch("selectItemListPage", page);
-
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
-    }
-});
-
-},{"services/UrlService":120}],52:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("item-filter", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "facet"],
-
-    computed: _extends({
-        facets: function facets() {
-            return this.facet.values.sort(function (facetA, facetB) {
-                if (facetA.position > facetB.position) {
-                    return 1;
-                }
-                if (facetA.position < facetB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        }
-    }, Vuex.mapState({
-        selectedFacets: function selectedFacets(state) {
-            return state.itemList.selectedFacets;
-        },
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter";
-    },
-
-
-    methods: {
-        updateFacet: function updateFacet(facetValue) {
-            this.$store.dispatch("selectFacet", facetValue);
-        },
-        isSelected: function isSelected(facetValueId) {
-            return this.selectedFacets.findIndex(function (selectedFacet) {
-                return selectedFacet.id === facetValueId;
-            }) > -1;
-        }
-    }
-});
-
-},{}],53:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-filter-list", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "facetData"],
-
-    data: function data() {
-        return {
-            isActive: false
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        facets: function facets(state) {
-            return state.itemList.facets.sort(function (facetA, facetB) {
-                if (facetA.position > facetB.position) {
-                    return 1;
-                }
-                if (facetA.position < facetB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        }
-    }),
-
-    created: function created() {
-        this.$store.commit("setFacets", this.facetData);
-
-        this.$options.template = this.template || "#vue-item-filter-list";
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-        var selectedFacets = [];
-
-        if (urlParams.facets) {
-            selectedFacets = urlParams.facets.split(",");
-        }
-
-        if (urlParams.priceMin || urlParams.priceMax) {
-            var priceMin = urlParams.priceMin || "";
-            var priceMax = urlParams.priceMax || "";
-
-            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
-
-            selectedFacets.push("price");
-        }
-
-        if (selectedFacets.length > 0) {
-            this.$store.commit("setSelectedFacetsByIds", selectedFacets);
-        }
-    },
-
-
-    methods: {
-        toggleOpeningState: function toggleOpeningState() {
-            var _this = this;
-
-            window.setTimeout(function () {
-                _this.isActive = !_this.isActive;
-            }, 300);
-        }
-    }
-});
-
-},{"services/UrlService":120}],54:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-filter-price", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-item-filter-price"
-        }
-    },
-
-    data: function data() {
-        return {
-            priceMin: "",
-            priceMax: "",
-            currency: App.activeCurrency
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter-price";
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-        this.priceMin = urlParams.priceMin || "";
-        this.priceMax = urlParams.priceMax || "";
-    },
-
-
-    computed: _extends({
-        isDisabled: function isDisabled() {
-            return this.priceMin === "" && this.priceMax === "" || parseInt(this.priceMin) >= parseInt(this.priceMax) || this.isLoading;
-        }
-    }, Vuex.mapState({
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        }
-    })),
-
-    methods: {
-        selectAll: function selectAll(event) {
-            event.target.select();
-        },
-        triggerFilter: function triggerFilter() {
-            if (!this.isDisabled) {
-                this.$store.dispatch("selectPriceFacet", { priceMin: this.priceMin, priceMax: this.priceMax });
-            }
-        }
-    }
-});
-
-},{"services/UrlService":120}],55:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-filter-tag-list", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        tagList: function tagList(state) {
-            return state.itemList.selectedFacets;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter-tag-list";
-    },
-
-
-    methods: {
-        removeTag: function removeTag(tag) {
-            this.$store.dispatch("selectFacet", tag);
-        }
-    }
-});
-
-},{}],56:[function(require,module,exports){
-"use strict";
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ModalService = require("services/ModalService");
-var APIService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("account-settings", {
-
-    delimiters: ["${", "}"],
-
-    props: ["userData", "template"],
-
-    data: function data() {
-        return {
-            newPassword: "",
-            confirmPassword: "",
-            accountSettingsClass: "",
-            accountSettingsModal: {}
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    /**
-     * Initialise the account settings modal
-     */
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.accountSettingsModal = ModalService.findModal(_this.$refs.accountSettingsModal);
-        });
-    },
-
-    computed: {
-        /**
-         * Check whether the passwords match
-         * @returns {boolean}
-         */
-        matchPassword: function matchPassword() {
-            if (this.confirmPassword !== "") {
-                return this.newPassword === this.confirmPassword;
-            }
-            return true;
-        }
-    },
-
-    methods: {
-
-        /**
-         * Open the account settings modal
-         */
-        showChangeAccountSettings: function showChangeAccountSettings() {
-            this.accountSettingsModal.show();
-        },
-
-        /**
-         * Save the new password
-         */
-        saveAccountSettings: function saveAccountSettings() {
-            var self = this;
-
-            if (this.newPassword !== "" && this.newPassword === this.confirmPassword) {
-                APIService.post("/rest/io/customer/password", { password: this.newPassword, password2: this.confirmPassword }).done(function (response) {
-                    self.clearFieldsAndClose();
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountChangePasswordSuccessful")).closeAfter(3000);
-                }).fail(function (response) {
-                    self.clearFieldsAndClose();
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountChangePasswordFailed")).closeAfter(5000);
-                });
-            }
-        },
-
-        /**
-         * Clear the password fields in the modal
-         */
-        clearFields: function clearFields() {
-            this.newPassword = "";
-            this.confirmPassword = "";
-        },
-
-        /**
-         * Clear the fields and close the modal
-         */
-        clearFieldsAndClose: function clearFieldsAndClose() {
-            this.accountSettingsModal.hide();
-            this.clearFields();
-        }
-    }
-
-});
-
-},{"services/ApiService":113,"services/ModalService":117,"services/NotificationService":118,"services/TranslationService":119}],57:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-var ModalService = require("services/ModalService");
-
-Vue.component("bank-data-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["userBankData", "contactId", "template"],
-
-    data: function data() {
-        return {
-            bankInfoModal: {},
-            bankDeleteModal: {},
-            updateBankData: {},
-            selectedBankData: null,
-            updateBankIndex: 0,
-            doUpdate: null,
-            headline: ""
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    /**
-     * Select the modals
-     */
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.bankInfoModal = ModalService.findModal(_this.$refs.bankInfoModal);
-            _this.bankDeleteModal = ModalService.findModal(_this.$refs.bankDeleteModal);
-        });
-    },
-
-
-    methods: {
-
-        /**
-         * Set the selected bank-data
-         */
-        changeSelecting: function changeSelecting(bankData) {
-            this.selectedBankData = bankData;
-        },
-
-
-        /**
-         * Open the modal to add new bank-data
-         */
-        openAddBank: function openAddBank() {
-            this.headline = _TranslationService2.default.translate("Ceres::Template.myAccountBankAddDataTitle");
-            this.openModal(false);
-        },
-
-
-        /**
-         * Set data to update and open the modal
-         * @param index
-         * @param bankdata
-         */
-        openUpdateBank: function openUpdateBank(index, bankData) {
-            this.headline = _TranslationService2.default.translate("Ceres::Template.myAccountBankUpdateDataTitle");
-
-            this.setUpdateData(index, bankData);
-            this.openModal(true);
-        },
-
-
-        /**
-         * Set data to remove and open the modal
-         * @param index
-         * @param bankdata
-         */
-        openDeleteBank: function openDeleteBank(index, bankData) {
-            this.setUpdateData(index, bankData);
-
-            this.doUpdate = false;
-            this.bankDeleteModal.show();
-        },
-
-
-        /**
-         * Open the modal
-         * @param doUpdate
-         */
-        openModal: function openModal(doUpdate) {
-            if (!doUpdate) {
-                this.resetData();
-            }
-
-            this.doUpdate = doUpdate;
-            _ValidationService2.default.unmarkAllFields($(this.$refs.bankInfoModal));
-            this.bankInfoModal.show();
-        },
-
-
-        /**
-         * Set data to change
-         * @param index
-         * @param bankdata
-         */
-        setUpdateData: function setUpdateData(index, bankData) {
-            this.updateBankData = JSON.parse(JSON.stringify(bankData));
-            this.updateBankIndex = index;
-        },
-
-
-        /**
-         * Validate the input-fields-data
-         */
-        validateInput: function validateInput() {
-            var _this2 = this;
-
-            _ValidationService2.default.validate($("#my-bankForm")).done(function () {
-                if (_this2.doUpdate) {
-                    _this2.updateBankInfo();
-                } else {
-                    _this2.addBankInfo();
-                }
-            }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-
-
-        /**
-         * Update bank-data
-         */
-        updateBankInfo: function updateBankInfo() {
-            var _this3 = this;
-
-            this.updateBankData.lastUpdateBy = "customer";
-
-            ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData).done(function (response) {
-                _this3.userBankData.splice(_this3.updateBankIndex, 1, response);
-                _this3.checkBankDataSelection();
-                _this3.closeModal();
-
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataUpdated")).closeAfter(3000);
-            }).fail(function () {
-                _this3.closeModal();
-
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotUpdated")).closeAfter(5000);
-            });
-        },
-
-
-        /**
-         * Add new bank-data
-         */
-        addBankInfo: function addBankInfo() {
-            var _this4 = this;
-
-            this.updateBankData.lastUpdateBy = "customer";
-            this.updateBankData.contactId = this.contactId;
-
-            ApiService.post("/rest/io/customer/bank_data", this.updateBankData).done(function (response) {
-                _this4.userBankData.push(response);
-                _this4.checkBankDataSelection(true);
-                _this4.closeModal();
-
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataAdded")).closeAfter(3000);
-            }).fail(function () {
-                _this4.closeModal();
-
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotAdded")).closeAfter(5000);
-            });
-        },
-
-
-        /**
-         * Delete bank-data
-         */
-        removeBankInfo: function removeBankInfo() {
-            var _this5 = this;
-
-            ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
-                _this5.checkBankDataSelection(false);
-                _this5.closeDeleteModal();
-                _this5.userBankData.splice(_this5.updateBankIndex, 1);
-
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataDeleted")).closeAfter(3000);
-            }).fail(function () {
-                _this5.closeDeleteModal();
-
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotDeleted")).closeAfter(5000);
-            });
-        },
-
-
-        /**
-         * Check selection on delete and on add bank-data
-         */
-        checkBankDataSelection: function checkBankDataSelection(addData) {
-            if (addData && !this.doUpdate && this.userBankData.length < 1) {
-                this.selectedBankData = this.userBankData[0];
-            }
-
-            if (!addData && this.selectedBankData && this.selectedBankData.id === this.updateBankData.id) {
-                if (!this.doUpdate) {
-                    this.selectedBankData = null;
-                } else {
-                    this.selectedBankData = this.userBankData[this.updateBankIndex];
-                }
-            }
-        },
-
-
-        /**
-         * Reset the updateBankData and updateBankIndex
-         */
-        resetData: function resetData() {
-            this.updateBankData = {};
-            this.updateBankIndex = 0;
-            this.doUpdate = false;
-        },
-
-
-        /**
-         * Close the current bank-modal
-         */
-        closeModal: function closeModal() {
-            this.bankInfoModal.hide();
-            this.resetData();
-        },
-
-
-        /**
-         * Close the current bank-delete-modal
-         */
-        closeDeleteModal: function closeDeleteModal() {
-            this.bankDeleteModal.hide();
-            this.resetData();
-        }
-    }
-});
-
-},{"services/ApiService":113,"services/ModalService":117,"services/NotificationService":118,"services/TranslationService":119,"services/ValidationService":121}],58:[function(require,module,exports){
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ModalService = require("services/ModalService");
-var ApiService = require("services/ApiService");
-
-Vue.component("change-payment-method", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentStatus", "currentTemplate", "currentPaymentMethodName"],
-
-    data: function data() {
-        return {
-            compAllowedPaymentMethods: this.allowedPaymentMethods,
-            changePaymentModal: {},
-            paymentMethod: 0,
-            isPending: false,
-            showErrorMessage: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    /**
-     * Initialize the change payment modal
-     */
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.changePaymentModal = ModalService.findModal(_this.$refs.changePaymentModal);
-        });
-    },
-
-
-    methods: {
-        checkChangeAllowed: function checkChangeAllowed() {
-            var _this2 = this;
-
-            ApiService.get("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod }).done(function (response) {
-                // TODO: research - if response should be false, it returns an object
-                _this2.changePossible = (typeof response === "undefined" ? "undefined" : _typeof(response)) === "object" ? response.data : response;
-            }).fail(function () {
-                _this2.changePossible = false;
-            });
-        },
-        openPaymentChangeModal: function openPaymentChangeModal() {
-            this.changePaymentModal.show();
-        },
-        getPaymentStateText: function getPaymentStateText(paymentStates) {
-            return _TranslationService2.default.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates.find(function (paymentState) {
-                return paymentState.typeId === 4;
-            }).value);
-        },
-        getPaymentId: function getPaymentId(paymentIds) {
-            var paymentId = paymentIds.find(function (paymentId) {
-                return paymentId.typeId === 3;
-            }).value;
-
-            if (paymentId) {
-                return paymentId;
-            }
-
-            return "";
-        },
-        closeModal: function closeModal() {
-            this.changePaymentModal.hide();
-            this.isPending = false;
-        },
-        updateOrderHistory: function updateOrderHistory(updatedOrder) {
-            document.getElementById("payment_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
-            document.getElementById("payment_state_" + this.currentOrder.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
-            document.getElementById("current_payment_method_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
-
-            this.checkChangeAllowed();
-            this.closeModal();
-        },
-        updateAllowedPaymentMethods: function updateAllowedPaymentMethods(paymentMethodId) {
-            var _this3 = this;
-
-            ApiService.get("/rest/io/order/paymentMethods", { orderId: this.currentOrder.id, paymentMethodId: paymentMethodId }).done(function (response) {
-                _this3.compAllowedPaymentMethods = response;
-            }).fail(function () {});
-        },
-        changePaymentMethod: function changePaymentMethod() {
-            var _this4 = this;
-
-            this.isPending = true;
-
-            ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod }).done(function (response) {
-                document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: _this4.currentOrder, newOrder: response } }));
-
-                _this4.updateOrderHistory(response);
-                _this4.updateAllowedPaymentMethods(_this4.getPaymentId(response.order.properties));
-            }).fail(function () {
-                // TODO add error msg
-            });
-        }
-    },
-
-    computed: {
-        showIsSwitchableWarning: function showIsSwitchableWarning() {
-            var _this5 = this;
-
-            var currentPaymentMethod = this.compAllowedPaymentMethods.find(function (paymentMethod) {
-                return paymentMethod.id === _this5.paymentMethod;
-            });
-
-            if (currentPaymentMethod) {
-                return !currentPaymentMethod.isSwitchableFrom;
-            }
-
-            return false;
-        }
-    }
-
-});
-
-},{"services/ApiService":113,"services/ModalService":117,"services/TranslationService":119}],59:[function(require,module,exports){
-"use strict";
-
-Vue.component("history", {
-
-    props: {
-        template: String,
-        ordersPerPage: Number,
-        isReturnActive: Boolean,
-        contactHasReturns: Boolean
-    },
-
-    data: function data() {
-        return {
-            returnsFirstOpened: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        returnsTabsOpened: function returnsTabsOpened() {
-            if (!this.returnsFirstOpened) {
-                this.returnsFirstOpened = true;
-
-                vueEventHub.$emit("returns-first-opening");
-            }
-        }
-    }
-});
-
-},{}],60:[function(require,module,exports){
-"use strict";
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-
-Vue.component("order-history", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-history"
-        },
-        orderDetailsTemplate: {
-            type: String,
-            default: "Ceres::Checkout.OrderDetails"
-        }
-    },
-
-    data: function data() {
-        return {
-            currentOrder: null,
-            isLoading: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        setCurrentOrder: function setCurrentOrder(order) {
-            var _this = this;
-
-            $("#dynamic-twig-content").html("");
-            this.isLoading = true;
-            this.currentOrder = order;
-
-            Vue.nextTick(function () {
-                $(_this.$refs.orderDetails).modal("show");
-            });
-
-            ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + order.order.id).done(function (response) {
-                _this.isLoading = false;
-                $("#dynamic-twig-content").html(response);
-            });
-        },
-        getPaymentStateText: function getPaymentStateText(paymentStates) {
-            for (var paymentState in paymentStates) {
-                if (paymentStates[paymentState].typeId == 4) {
-                    return _TranslationService2.default.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates[paymentState].value);
-                }
-            }
-
-            return "";
-        }
-    }
-});
-
-},{"services/ApiService":113,"services/TranslationService":119}],61:[function(require,module,exports){
-"use strict";
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("order-return-history", {
-
-    props: ["template", "itemsPerPage", "showFirstPage", "showLastPage"],
-
-    data: function data() {
-        return {
-            waiting: false,
-            returnsList: { page: 1 }
-        };
-    },
-    created: function created() {
-        var _this = this;
-
-        this.$options.template = this.template;
-        this.itemsPerPage = this.itemsPerPage || 10;
-
-        vueEventHub.$on("returns-first-opening", function () {
-            return _this.setPage(1);
-        });
-    },
-
-
-    methods: {
-        setPage: function setPage(page) {
-            var _this2 = this;
-
-            if (!this.waiting) {
-                this.waiting = true;
-
-                var lastPage = this.returnsList.page;
-
-                this.returnsList.page = page;
-
-                ApiService.get("/rest/io/customer/order/return", { page: page, items: this.itemsPerPage }).done(function (response) {
-                    _this2.waiting = false;
-                    _this2.returnsList = response;
-                }).fail(function (response) {
-                    _this2.waiting = false;
-                    _this2.returnsList.page = lastPage;
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.returnHistoryOops"));
-                });
-            }
-        }
-    }
-});
-
-},{"services/ApiService":113,"services/NotificationService":118,"services/TranslationService":119}],62:[function(require,module,exports){
-"use strict";
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("order-return-history-item", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-return-history-item"
-        },
-        returnOrder: {
-            type: Object,
-            default: function _default() {
-                return {};
-            }
-        }
-    },
-
-    data: function data() {
-        return {
-            itemsToRender: []
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-        this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
-    },
-
-
-    methods: {
-        toggleNaming: function toggleNaming(element) {
-            if (document.getElementById(element).innerText === _TranslationService2.default.translate("Ceres::Template.returnHistoryReturnShowMore")) {
-                this.itemsToRender = this.returnOrder.order.orderItems;
-                document.getElementById(element).innerText = _TranslationService2.default.translate("Ceres::Template.returnHistoryReturnShowLess");
-            } else {
-                this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
-                document.getElementById(element).innerText = _TranslationService2.default.translate("Ceres::Template.returnHistoryReturnShowMore");
-            }
-        },
-        getOriginOrderId: function getOriginOrderId(order) {
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = order.orderReferences[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var orderRef = _step.value;
-
-                    if (orderRef.referenceType === "parent") {
-                        return orderRef.referenceOrderId;
-                    }
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return "-";
-        }
-    }
-});
-
-},{"services/TranslationService":119}],63:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("order-return", {
-
-    props: ["initOrderData", "template"],
-
-    data: function data() {
-        return {
-            isLoading: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-
-        this.$store.commit("setOrderReturnData", this.initOrderData);
-    },
-
-
-    computed: Vuex.mapState({
-        orderData: function orderData(state) {
-            return state.orderReturn.orderData;
-        },
-        orderReturnItems: function orderReturnItems(state) {
-            return state.orderReturn.orderReturnItems;
-        },
-        isDisabled: function isDisabled(state) {
-            return state.orderReturn.orderReturnItems.length === 0;
-        }
-    }),
-
-    methods: _extends({
-        showConfirmationModal: function showConfirmationModal() {
-            $(this.$refs.orderReturnConfirmation).modal("show");
-        },
-        sendReturnItems: function sendReturnItems() {
-            var _this = this;
-
-            this.isLoading = true;
-
-            this.sendOrderReturn().then(function (response) {
-                window.open("/return-confirmation", "_self");
-                $(_this.$refs.orderReturnConfirmation).modal("hide");
-            }, function (error) {
-                _this.isLoading = false;
-                $(_this.$refs.orderReturnConfirmation).modal("hide");
-            });
-        },
-        selectAllItems: function selectAllItems() {
-            vueEventHub.$emit("select-all-items");
-        }
-    }, Vuex.mapMutations(["updateOrderReturnNote"]), Vuex.mapActions(["sendOrderReturn"]))
-});
-
-},{}],64:[function(require,module,exports){
-"use strict";
-
-Vue.component("order-return-item", {
-
-    props: ["orderItem", "template"],
-
-    data: function data() {
-        return {
-            isChecked: false,
-            returnCount: 0
-        };
-    },
-    created: function created() {
-        var _this = this;
-
-        this.$options.template = this.template;
-        vueEventHub.$on("select-all-items", function () {
-            return _this.selectItem();
-        });
-    },
-
-
-    computed: {
-        orderItemImage: function orderItemImage() {
-            return this.$store.getters.getOrderItemImage(this.orderItem.itemVariationId);
-        },
-        orderItemURL: function orderItemURL() {
-            return this.$store.getters.getOrderItemURL(this.orderItem.itemVariationId);
-        }
-    },
-
-    methods: {
-        validateValue: function validateValue() {
-            if (this.returnCount > this.orderItem.quantity) {
-                this.returnCount = this.orderItem.quantity;
-            } else if (this.returnCount <= 0) {
-                this.returnCount = 1;
-            }
-
-            this.$store.commit("updateOrderReturnItems", { quantity: parseInt(this.returnCount), orderItem: this.orderItem });
-        },
-        selectItem: function selectItem() {
-            this.isChecked = true;
-
-            this.updateValue();
-        },
-        updateValue: function updateValue() {
-            if (this.isChecked) {
-                this.returnCount = this.orderItem.quantity;
-            } else {
-                this.returnCount = 0;
-            }
-
-            this.$store.commit("updateOrderReturnItems", { quantity: parseInt(this.returnCount), orderItem: this.orderItem });
-        }
-    }
-});
-
-},{}],65:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("mobile-navigation", {
-
-    props: ["template", "initialCategory", "navigationTreeData"],
-
-    data: function data() {
-        return {
-            dataContainer1: [],
-            dataContainer2: [],
-            useFirstContainer: false,
-            breadcrumbs: []
-        };
-    },
-
-
-    computed: _extends({
-        parentCategories: function parentCategories() {
-            var dataContainer = this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
-
-            if (dataContainer[0] && dataContainer[0].parent) {
-                if (dataContainer[0].parent.parent) {
-                    // returns upper level
-                    return dataContainer[0].parent.parent.children;
-                }
-
-                // return highest level of navigation
-                return this.navigationTree;
-            }
-
-            return false;
-        }
-    }, Vuex.mapState({
-        navigationTree: function navigationTree(state) {
-            return state.navigation.tree;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.initNavigation();
-        });
-    },
-
-
-    methods: {
-        initNavigation: function initNavigation() {
-            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
-
-            if (this.initialCategory && this.initialCategory.id) {
-                if (this.initialCategory.linklist === "N") {
-                    this.$store.commit("setCurrentCategory", this.initialCategory);
-                } else {
-                    this.$store.dispatch("setCurrentCategoryById", { categoryId: parseInt(this.initialCategory.id) });
-                    this.initialSlide(this.$store.state.navigation.currentCategory);
-                }
-            }
-
-            this.dataContainer1 = this.navigationTree;
-        },
-        initialSlide: function initialSlide(currentCategory) {
-            if (currentCategory) {
-                if (currentCategory.children && currentCategory.showChildren) {
-                    this.slideTo(currentCategory.children);
-                } else if (currentCategory.parent) {
-                    this.slideTo(currentCategory.parent.children);
-                }
-            }
-        },
-        navigateTo: function navigateTo(category) {
-            this.closeNavigation();
-
-            if (App.isCategoryView && category.children && category.showChildren) {
-                this.slideTo(category.children);
-            }
-        },
-        slideTo: function slideTo(children, back) {
-            back = !!back;
-
-            if (this.useFirstContainer) {
-                this.dataContainer1 = children;
-
-                $("#menu-2").trigger("menu-deactivated", { back: back });
-                $("#menu-1").trigger("menu-activated", { back: back });
-            } else {
-                this.dataContainer2 = children;
-
-                $("#menu-1").trigger("menu-deactivated", { back: back });
-                $("#menu-2").trigger("menu-activated", { back: back });
-            }
-
-            this.useFirstContainer = !this.useFirstContainer;
-            this.buildBreadcrumbs();
-        },
-        buildBreadcrumbs: function buildBreadcrumbs() {
-            this.breadcrumbs = [];
-
-            var root = this.useFirstContainer ? this.dataContainer2[0] : this.dataContainer1[0];
-
-            while (root.parent) {
-                this.breadcrumbs.unshift({
-                    name: root.parent.details[0].name,
-                    layer: root.parent ? root.parent.children : this.navigationTree
-                });
-
-                root = root.parent;
-            }
-        },
-        closeNavigation: function closeNavigation() {
-            document.querySelector(".mobile-navigation").classList.remove("open");
-            document.querySelector("body").classList.remove("menu-is-visible");
-        }
-    },
-
-    directives: {
-        menu: {
-            bind: function bind(el) {
-                // add "activated" classes when menu is activated
-                $(el).on("menu-activated", function (event, params) {
-                    $(event.target).addClass("menu-active");
-                    $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
-                });
-                // add "deactivated" classes when menu is deactivated
-                $(el).on("menu-deactivated", function (event, params) {
-                    $(event.target).removeClass("menu-active");
-                    $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
-                });
-                // this removes the animation class automatically after the animation has completed
-                $(el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function () {
-                    $(".mainmenu").removeClass(function (index, className) {
-                        return (className.match(/(^|\s)animate-\S+/g) || []).join(" ");
-                    });
-                });
-            }
-        }
-    }
-});
-
-},{}],66:[function(require,module,exports){
-"use strict";
-
-var _utils = require("../../helper/utils");
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("notifications", {
-
-    delimiters: ["${", "}"],
-
-    props: ["initialNotifications", "template"],
-
-    data: function data() {
-        return {
-            notifications: []
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            NotificationService.listen(function (notifications) {
-                Vue.set(_this, "notifications", notifications);
-            });
-
-            _this.showInitialNotifications();
-        });
-    },
-
-    methods: {
-        /**
-         * Dissmiss the notification
-         * @param notification
-         */
-        dismiss: function dismiss(notification) {
-            NotificationService.getNotifications().remove(notification);
-        },
-
-        /**
-         * show initial notifications from server
-         */
-        showInitialNotifications: function showInitialNotifications() {
-            for (var type in this.initialNotifications) {
-                var notification = this.initialNotifications[type];
-
-                if ((0, _utils.isNullOrUndefined)(notification)) {
-                    continue;
-                }
-
-                // type cannot be undefined
-                if (!(0, _utils.isNullOrUndefined)(NotificationService[type]) && typeof NotificationService[type] === "function") {
-                    NotificationService[type](notification);
-                } else {
-                    // unkown type
-                    NotificationService.log(notification);
-                }
-            }
-        }
-    }
-});
-
-},{"../../helper/utils":110,"services/NotificationService":118}],67:[function(require,module,exports){
-"use strict";
-
-var _utils = require("../../helper/utils");
-
-var _dom = require("../../helper/dom");
-
-var Popper = require("popper.js");
-var ModalService = require("services/ModalService");
-
-Vue.component("popper", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-popper"
-        },
-        placement: {
-            type: String,
-            default: "auto"
-        },
-        trigger: {
-            type: String,
-            default: "click"
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (!(0, _utils.isNullOrUndefined)(_this.$refs.node) && !(0, _utils.isNullOrUndefined)(_this.$refs.handle)) {
-                var node = _this.$refs.node;
-
-                node.parentElement.removeChild(node);
-                document.body.appendChild(node);
-
-                _this.popper = new Popper(_this.$refs.handle, node, {
-                    placement: _this.placement,
-                    modifiers: {
-                        arrow: {
-                            element: _this.$refs.arrow
-                        }
-                    }
-                });
-
-                var handle = _this.$refs.handle.firstElementChild || _this.$refs.handle;
-
-                if (_this.trigger === "focus") {
-                    handle.addEventListener("focus", function () {
-                        _this.showPopper();
-                    });
-                    handle.addEventListener("blur", function () {
-                        _this.hidePopper();
-                    });
-                } else {
-                    handle.addEventListener(_this.trigger, function () {
-                        _this.togglePopper();
-                    });
-                }
-            }
-
-            var parentModal = (0, _dom.findParent)(_this.$el, ".modal");
-
-            if (!(0, _utils.isNullOrUndefined)(parentModal)) {
-                ModalService.findModal(parentModal).on("hide.bs.modal", function () {
-                    _this.hidePopper();
-                });
-            }
-        });
-    },
-    data: function data() {
-        return {
-            isVisible: false,
-            popper: null
-        };
-    },
-
-
-    methods: {
-        togglePopper: function togglePopper() {
-            this.isVisible = !this.isVisible;
-            this.update();
-        },
-        showPopper: function showPopper() {
-            this.isVisible = true;
-            this.update();
-        },
-        hidePopper: function hidePopper() {
-            this.isVisible = false;
-            this.update();
-        },
-        update: function update() {
-            if (!(0, _utils.isNullOrUndefined)(this.popper)) {
-                this.popper.scheduleUpdate();
-            }
-        }
-    }
-});
-
-},{"../../helper/dom":106,"../../helper/utils":110,"popper.js":137,"services/ModalService":117}],68:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("shipping-country-select", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-shipping-country-select"
-        },
-
-        disableInput: {
-            type: Boolean
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    computed: _extends({
-        isDisabled: function isDisabled() {
-            return !!this.basket.customerInvoiceAddressId || !!this.basket.customerShippingAddressId || this.disableInput;
-        }
-    }, Vuex.mapState({
-        localization: function localization(state) {
-            return state.localization;
-        },
-        basket: function basket(state) {
-            return state.basket.data;
-        }
-    })),
-
-    methods: {
-        setShippingCountry: function setShippingCountry(id) {
-            if (!this.isDisabled) {
-                this.$store.dispatch("selectShippingCountry", id);
-            }
-        }
-    }
-});
-
-},{}],69:[function(require,module,exports){
-"use strict";
-
-var ApiService = require("services/ApiService");
-
-Vue.component("shop-country-settings", {
-
-    template: "<div><slot></slot></div>",
-
-    props: ["localizationData"],
-
-    created: function created() {
-        var _this = this;
-
-        this.$store.dispatch("initLocalization", { localizationData: this.localizationData });
-
-        ApiService.listen("LocalizationChanged", function (localizationData) {
-            _this.$store.dispatch("initLocalization", { localizationData: _this.localizationData });
-        });
-    }
-});
-
-},{"services/ApiService":113}],70:[function(require,module,exports){
-"use strict";
-
-var WaitScreenService = require("services/WaitScreenService");
-
-/**
-*
-* CURRENTLY NOT IN USE
-* MAY BE USEFUL LATER
-*
-*/
-
-Vue.component("wait-screen", {
-
-    // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            overlay: WaitScreenService.getOverlay()
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    computed: {
-        /**
-         * Show an overlay over the page
-         * @returns {boolean}
-         */
-        visible: function visible() {
-            return this.overlay.count > 0;
-        }
-    }
-});
-
-},{"services/WaitScreenService":122}],71:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("wish-list", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "initIds"],
-
-    data: function data() {
-        return {
-            isLoading: false,
-            wishListCount: {}
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        wishListItems: function wishListItems(state) {
-            return state.wishList.wishListItems;
-        },
-        wishListIds: function wishListIds(state) {
-            return state.wishList.wishListIds;
-        }
-    }),
-
-    created: function created() {
-        var _this = this;
-
-        this.$store.commit("setWishListIds", this.initIds);
-        this.$options.template = this.template;
-
-        this.isLoading = true;
-        this.initWishListItems(this.wishListIds).then(function (response) {
-            _this.isLoading = false;
-        }, function (error) {
-            _this.isLoading = false;
-        });
-    },
-
-
-    methods: _extends({
-        removeItem: function removeItem(item) {
-            this.removeWishListItem(item).then(function () {
-                return NotificationService.success(_TranslationService2.default.translate("Ceres::Template.wishListRemoved"));
-            });
-        }
-    }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
-});
-
-},{"services/NotificationService":118,"services/TranslationService":119}],72:[function(require,module,exports){
-"use strict";
-
-Vue.component("wish-list-count", {
-
-    props: ["template", "initIds"],
-
-    computed: {
-        wishListCount: function wishListCount() {
-            return this.$store.getters.wishListCount;
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-wish-list-count";
-        this.$store.commit("setWishListIds", this.initIds);
-    }
-});
-
-},{}],73:[function(require,module,exports){
-"use strict";
-
-var _number = require("../../helper/number");
-
-var _utils = require("../../helper/utils");
-
-Vue.directive("basket-item-quantity", {
-    update: function update(el, binding) {
-        var value = (0, _utils.defaultValue)(binding.value, 0);
-        var decimals = (0, _number.floatLength)(value);
-
-        el.innerHTML = value.toFixed(decimals).replace(".", App.decimalSeparator);
-    }
-});
-
-},{"../../helper/number":107,"../../helper/utils":110}],74:[function(require,module,exports){
-"use strict";
-
-Vue.directive("basket-item-sum", {
-    update: function update(el, binding) {
-        el.innerHTML = Vue.filter("currency").apply(Object, [binding.value]);
-    }
-});
-
-},{}],75:[function(require,module,exports){
-"use strict";
-
-Vue.directive("toggle-basket-preview", {
-    bind: function bind(el) {
-        el.addEventListener("click", function (event) {
-            var vueApp = document.querySelector("#vue-app");
-
-            if (vueApp) {
-                var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-
-                vueApp.classList.toggle(basketOpenClass || "open-hover");
-                event.preventDefault();
-                event.stopPropagation();
-            }
-        });
-    }
-});
-
-},{}],76:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var ApiService = require("services/ApiService");
-
-Vue.directive("logout", {
-    bind: function bind(el) {
-        /**
-         * Logout the current user
-         */
-        $(el).click(function (event) {
-            $(el).addClass("disabled");
-
-            ApiService.post("/rest/io/customer/logout").done(function () {
-                (0, _UrlService.navigateTo)(window.location.origin);
-            }).fail(function () {
-                $(el).removeClass("disabled");
-            });
-
-            event.preventDefault();
-        });
-    }
-});
-
-},{"services/ApiService":113,"services/UrlService":120}],77:[function(require,module,exports){
-"use strict";
-
-Vue.directive("waiting-animation", {
-    bind: function bind(el) {
-        el.initialClass = el.className;
-        el.waitingClass = el.getAttribute("waiting-class") || "fa fa-circle-o-notch fa-spin";
-    },
-    update: function update(el, binding) {
-        if (binding.value) {
-            el.className = "";
-            el.className = el.waitingClass;
-
-            if (el.initialClass.includes("fa-lg")) {
-                el.className += " fa-lg";
-            }
-        } else {
-            el.className = el.initialClass;
-        }
-    }
-});
-
-},{}],78:[function(require,module,exports){
-"use strict";
-
-Vue.directive("waiting-animation-infinite", {
-    bind: function bind(el) {
-        $(el).click(function (event) {
-            event.currentTarget.classList.add("disabled");
-
-            event.currentTarget.children[0].className = "";
-            event.currentTarget.children[0].className = "fa fa-circle-o-notch fa-spin";
-        });
-    }
-});
-
-},{}],79:[function(require,module,exports){
-"use strict";
-
-Vue.directive("is-loading-watcher", {
-    update: function update(el, binding) {
-        if (binding.value) {
-            $("#twig-rendered-item-list").addClass("loading");
-            el.removeTwig = true;
-        } else if (el.removeTwig) {
-            $("#twig-rendered-item-list").remove();
-            document.getElementById("vue-rendered-item-list").style.removeProperty("display");
-        }
-    }
-});
-
-},{}],80:[function(require,module,exports){
-"use strict";
-
-Vue.directive("update-sidenav-selection", {
-    params: ["categoryId"],
-
-    bind: function bind(el) {},
-    update: function update(el, binding) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = binding.value[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var breadcrumb = _step.value;
-
-                if (breadcrumb.id === parseInt(el.dataset.categoryId)) {
-                    el.classList.add("active");
-                    break;
-                } else {
-                    el.classList.remove("active");
-                }
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
-    }
-});
-
-},{}],81:[function(require,module,exports){
-"use strict";
-
-Vue.directive("hover-mega-menu", {
-    bind: function bind(el) {
-        $(el).click(function (event) {
-            event.preventDefault();
-
-            if (document.body.classList.contains("touch")) {
-                // get hover state
-                var isHover = event.currentTarget.classList.contains("hover");
-
-                // clear all hover states
-                var ddownElements = [].slice.call(document.getElementsByClassName("ddown"));
-
-                ddownElements.find(function (element) {
-                    return element.classList.remove("hover");
-                });
-
-                // toggle old hover state (switch between top level categories makes this necessary)
-                if (isHover) {
-                    event.currentTarget.classList.remove("hover");
-                } else {
-                    event.currentTarget.classList.add("hover");
-                }
-            }
-        });
-    }
-});
-
-},{}],82:[function(require,module,exports){
-"use strict";
-
-Vue.directive("open-mobile-navigation", {
-    bind: function bind(el, binding) {
-        el.onclick = function (event) {
-            document.querySelector(".mobile-navigation").classList.add("open");
-            document.querySelector("body").classList.add("menu-is-visible");
-        };
-    }
-});
-
-},{}],83:[function(require,module,exports){
-"use strict";
-
-var _index = require("store/index.js");
-
-var _index2 = _interopRequireDefault(_index);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.directive("render-category", {
-    bind: function bind(el, binding) {
-        el.dataset.categoryId = binding.value.id;
-        el.dataset.categoryType = binding.value.type;
-
-        el.onclick = function (event) {
-            event.preventDefault();
-
-            var currentCategoryType = _index2.default.state.navigation.currentCategory ? _index2.default.state.navigation.currentCategory.type : null;
-
-            // get currently open category
-            var ddownElements = [].slice.call(document.getElementsByClassName("ddown"));
-            var openCategory = ddownElements.find(function (element) {
-                return element.classList.contains("hover");
-            });
-
-            if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType) {
-                _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
-
-                var url = _index2.default.state.navigation.currentCategory.url;
-
-                // check if touch device and change the ui handling
-                if (document.body.classList.contains("touch")) {
-                    if (openCategory && openCategory.contains(event.target) || binding.value.alwaysOpen) {
-                        window.open(url, "_self");
-                    }
-                } else {
-                    window.open(url, "_self");
-                }
-            }
-            // check if user click the opened category and change the ui handling
-            else if (openCategory && openCategory.contains(event.target)) {
-                    _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
-                } else if (document.body.classList.contains("no-touch") || binding.value.alwaysOpen) {
-                    _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
-                }
-        };
-    },
-    update: function update(el, binding) {
-        el.dataset.categoryId = binding.value.id;
-        el.dataset.categoryType = binding.value.type;
-    }
-});
-
-},{"store/index.js":123}],84:[function(require,module,exports){
-"use strict";
-
-Vue.directive("scroll-to-top", {
-    bind: function bind(el, binding) {
-        el.onclick = function (event) {
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-        };
-    }
-});
-
-},{}],85:[function(require,module,exports){
-"use strict";
-
-var checkElement = function checkElement(el, breakpoint) {
-    var isSticky = el.dataset.isSticky === "true";
-    var matchesBreakpoint = window.matchMedia("(min-width: " + breakpoint + "px)").matches;
-
-    if (matchesBreakpoint && !isSticky) {
-        var $element = $(el);
-        var headHeight = $(".top-bar").height();
-
-        el.dataset.isSticky = true;
-        $element.stick_in_parent({ offset_top: headHeight + 10 });
-
-        $element.on("sticky_kit:bottom", function () {
-            $element.parent().css("position", "static");
-        }).on("sticky_kit:unbottom", function () {
-            $element.parent().css("position", "relative");
-        });
-    } else if (!matchesBreakpoint && isSticky) {
-        el.dataset.isSticky = false;
-        $(el).trigger("sticky_kit:detach");
-    }
-};
-
-Vue.directive("stick-in-parent", {
-    bind: function bind(el, binding) {
-        var minSize = binding.value || 768;
-
-        window.addEventListener("resize", function () {
-            checkElement(el, minSize);
-        });
-
-        setTimeout(function () {
-            checkElement(el, minSize);
-        }, 0);
-    }
-});
-
-},{}],86:[function(require,module,exports){
-"use strict";
-
-var _utils = require("../../helper/utils");
-
-var initTooltip = function initTooltip(el) {
-    if (window.matchMedia("(min-width: 768px)").matches) {
-        setTimeout(function () {
-            $(el).tooltip({
-                trigger: "hover",
-                // eslint-disable-next-line
-                template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-            });
-        }, 1);
-    }
-};
-
-Vue.directive("tooltip", {
-    unbind: function unbind(el) {
-        $(el).tooltip("dispose");
-    },
-    update: function update(el, binding) {
-        if (typeof binding.value === "undefined" || binding.value) {
-            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title")) && !(0, _utils.isNullOrUndefined)(el.getAttribute("data-title"))) {
-                el.setAttribute("title", el.getAttribute("data-title"));
-                el.removeAttribute("data-title");
-            }
-            initTooltip(el);
-        } else {
-            setTimeout(function () {
-                $(el).tooltip("dispose");
-
-                if (!(0, _utils.isNullOrUndefined)(el.getAttribute("title"))) {
-                    el.setAttribute("data-title", el.getAttribute("title"));
-                    el.removeAttribute("title");
-                }
-            }, 1);
-        }
-    },
-    bind: function bind(el, binding) {
-        if (typeof binding.value === "undefined" || binding.value) {
-            initTooltip(el);
-        } else {
-            el.setAttribute("data-title", el.getAttribute("title"));
-            el.removeAttribute("title");
-        }
-    }
-});
-
-},{"../../helper/utils":110}],87:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
-
-exports.default = exceptionMap;
-
-},{}],88:[function(require,module,exports){
-"use strict";
-
-Vue.filter("arrayFirst", function (array) {
-    return array[0];
-});
-
-},{}],89:[function(require,module,exports){
-"use strict";
-
-Vue.filter("attachText", function (item, text) {
-    return text + item;
-});
-
-},{}],90:[function(require,module,exports){
-"use strict";
-
-var _MonetaryFormatter = require("../helper/MonetaryFormatter");
-
-var _MonetaryFormatter2 = _interopRequireDefault(_MonetaryFormatter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var formatter = new _MonetaryFormatter2.default();
-
-Vue.filter("currency", function (price) {
-    return formatter.format(price, App.activeCurrency);
-});
-
-},{"../helper/MonetaryFormatter":104}],91:[function(require,module,exports){
-"use strict";
-
-// for docs see https://github.com/brockpetrie/vue-moment
-
-var dateFilter = function dateFilter() {
-    var args = Array.prototype.slice.call(arguments);
-    var input = args.shift();
-    var date;
-
-    if (isNaN(new Date(input).getTime())) {
-        return input;
-    }
-
-    if (Array.isArray(input) && typeof input[0] === "string") {
-        // If input is array, assume we're being passed a format pattern to parse against.
-        // Format pattern will accept an array of potential formats to parse against.
-        // Date string should be at [0], format pattern(s) should be at [1]
-        date = moment(string = input[0], formats = input[1], true);
-    } else {
-        // Otherwise, throw the input at moment and see what happens...
-        date = moment(input);
-    }
-
-    if (!date.isValid()) {
-        // Log a warning if moment couldn't reconcile the input. Better than throwing an error?
-        console.warn("Could not build a valid `moment` object from input.");
-        return input;
-    }
-
-    function parse() {
-        var args = Array.prototype.slice.call(arguments);
-        var method = args.shift();
-
-        switch (method) {
-            case "add":
-
-                // Mutates the original moment by adding time.
-                // http://momentjs.com/docs/#/manipulating/add/
-
-                var addends = args.shift().split(",").map(Function.prototype.call, String.prototype.trim);
-
-                obj = {};
-                for (var aId = 0; aId < addends.length; aId++) {
-                    var addend = addends[aId].split(" ");
-
-                    obj[addend[1]] = addend[0];
-                }
-                date = date.add(obj);
-                break;
-
-            case "subtract":
-
-                // Mutates the original moment by subtracting time.
-                // http://momentjs.com/docs/#/manipulating/subtract/
-
-                var subtrahends = args.shift().split(",").map(Function.prototype.call, String.prototype.trim);
-
-                obj = {};
-                for (var sId = 0; sId < subtrahends.length; sId++) {
-                    var subtrahend = subtrahends[sId].split(" ");
-
-                    obj[subtrahend[1]] = subtrahend[0];
-                }
-                date = date.subtract(obj);
-                break;
-
-            case "from":
-
-                // Display a moment in relative time, either from now or from a specified date.
-                // http://momentjs.com/docs/#/displaying/fromnow/
-
-                var from = "now";
-
-                if (args[0] === "now") args.shift();
-
-                if (moment(args[0]).isValid()) {
-                    // If valid, assume it is a date we want the output computed against.
-                    from = moment(args.shift());
-                }
-
-                var removeSuffix = false;
-
-                if (args[0] === true) {
-                    args.shift();
-                    removeSuffix = true;
-                }
-
-                if (from != "now") {
-                    date = date.from(from, removeSuffix);
-                    break;
-                }
-
-                date = date.fromNow(removeSuffix);
-                break;
-
-            case "calendar":
-
-                // Formats a date with different strings depending on how close to a certain date (today by default) the date is.
-                // http://momentjs.com/docs/#/displaying/calendar-time/
-
-                var referenceTime = moment();
-
-                if (moment(args[0]).isValid()) {
-                    // If valid, assume it is a date we want the output computed against.
-                    referenceTime = moment(args.shift());
-                }
-
-                date = date.calendar(referenceTime);
-                break;
-
-            default:
-                // Format
-                // Formats a date by taking a string of tokens and replacing them with their corresponding values.
-                // http://momentjs.com/docs/#/displaying/format/
-
-                var format = method;
-
-                date = date.format(format);
-        }
-
-        if (args.length) parse.apply(parse, args);
-    }
-
-    parse.apply(parse, args);
-
-    return date;
-};
-
-Vue.filter("moment", dateFilter);
-Vue.filter("date", dateFilter);
-
-},{}],92:[function(require,module,exports){
-"use strict";
-
-Vue.filter("fileName", function (path) {
-    var splitPath = path.split("/");
-
-    return splitPath[splitPath.length - 1];
-});
-
-},{}],93:[function(require,module,exports){
-"use strict";
-
-Vue.filter("fileUploadPath", function (path) {
-    return "/order-property-file/" + path.replace("order_property_files/", "");
-});
-
-},{}],94:[function(require,module,exports){
-"use strict";
-
-Vue.filter("graduatedPrice", function (item, quantity) {
-    var graduatedPrices = item.prices.graduatedPrices;
-
-    var returnPrice = void 0;
-
-    if (graduatedPrices && graduatedPrices[0]) {
-        var prices = graduatedPrices.filter(function (price) {
-            return parseFloat(quantity) >= price.minimumOrderQuantity;
-        });
-
-        if (prices[0]) {
-            returnPrice = prices.reduce(function (prev, current) {
-                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
-            });
-            returnPrice = returnPrice.unitPrice.value;
-        }
-    }
-
-    return returnPrice || item.prices.default.unitPrice.value;
-});
-
-},{}],95:[function(require,module,exports){
-"use strict";
-
-Vue.filter("itemImage", function (itemImages, highestPosition) {
-    if (itemImages.length === 0) {
-        return "";
-    }
-
-    if (itemImages.length === 1) {
-        return itemImages[0].url;
-    }
-
-    if (highestPosition) {
-        return itemImages.reduce(function (prev, current) {
-            return prev.position > current.position ? prev : current;
-        }).url;
-    }
-
-    return itemImages.reduce(function (prev, current) {
-        return prev.position < current.position ? prev : current;
-    }).url;
-});
-
-},{}],96:[function(require,module,exports){
-"use strict";
-
-Vue.filter("itemImages", function (images, accessor) {
-    if (!images) {
-        return [];
-    }
-
-    var imageUrls = [];
-    var imagesAccessor = "all";
-
-    if (images.variation && images.variation.length) {
-        imagesAccessor = "variation";
-    }
-
-    for (var image in images[imagesAccessor]) {
-        var imageUrl = images[imagesAccessor][image][accessor];
-        var alternate = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.alternate : null;
-
-        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][image].position, alternate: alternate });
-    }
-
-    return imageUrls;
-});
-
-},{}],97:[function(require,module,exports){
-"use strict";
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.filter("itemName", function (_ref) {
-    var _ref$texts = _ref.texts,
-        name1 = _ref$texts.name1,
-        name2 = _ref$texts.name2,
-        name3 = _ref$texts.name3,
-        _ref$variation = _ref.variation,
-        name = _ref$variation.name,
-        bundleType = _ref$variation.bundleType;
-    var selectedName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : App.config.item.itemName;
-    var itemDisplayName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : App.config.item.displayName;
-
-    var itemName = "";
-
-    if (selectedName === 1 && name2 !== "") {
-        itemName = name2;
-    } else if (selectedName === 2 && name3 !== "") {
-        itemName = name3;
-    } else {
-        itemName = name1;
-    }
-
-    if (itemDisplayName === "itemNameVariationName" && name && name.length) {
-        itemName = itemName + " " + name;
-    }
-
-    if (itemDisplayName === "variationName" && name && name.length) {
-        itemName = name;
-    }
-
-    if (bundleType) {
-        itemName = _TranslationService2.default.translate("Ceres::Template.itemBundleName", { itemName: itemName });
-    }
-
-    return itemName;
-});
-
-},{"services/TranslationService":119}],98:[function(require,module,exports){
-"use strict";
-
-Vue.filter("itemURL", function (item) {
-    var enableOldUrlPattern = App.config.global.enableOldUrlPattern;
-    var urlPath = item.texts.urlPath || "";
-
-    var link = "";
-
-    if (urlPath.charAt(0) !== "/") {
-        link = "/";
-    }
-
-    if (urlPath && urlPath.length) {
-        link += urlPath;
-    }
-
-    var suffix = "";
-
-    if (enableOldUrlPattern) {
-        suffix = "/a-" + item.item.id;
-    } else {
-        suffix = "_" + item.item.id + "_" + item.variation.id;
-    }
-
-    var trailingSlash = "";
-
-    if (App.urlTrailingSlash) {
-        trailingSlash = "/";
-    }
-
-    if (link.substr(link.length - suffix.length, suffix.length) === suffix) {
-        return link + trailingSlash;
-    }
-
-    return link + suffix + trailingSlash;
-});
-
-},{}],99:[function(require,module,exports){
-"use strict";
-
-var _utils = require("../helper/utils");
-
-var _number = require("../helper/number");
-
-Vue.filter("numberFormat", function (number, decimals, separator) {
-    number = parseFloat(number);
-    if (isNaN(number)) {
-        return "";
-    }
-    if ((0, _utils.isNullOrUndefined)(decimals)) {
-        decimals = (0, _number.floatLength)(number);
-    }
-    if ((0, _utils.isNullOrUndefined)(separator)) {
-        separator = App.decimalSeparator;
-    }
-    return number.toFixed(decimals).replace(".", separator);
-});
-
-},{"../helper/number":107,"../helper/utils":110}],100:[function(require,module,exports){
-"use strict";
-
-Vue.filter("propertySurcharge", function (properties, propertyId) {
-    var property = properties.find(function (prop) {
-        return prop.property.id === parseInt(propertyId);
-    });
-
-    if (property) {
-        if (property.surcharge > 0) {
-            return property.surcharge;
-        } else if (property.property.surcharge > 0) {
-            return property.property.surcharge;
-        }
-    }
-
-    return 0;
-});
-
-},{}],101:[function(require,module,exports){
-"use strict";
-
-Vue.filter("propertySurchargeSum", function (item) {
-    var sum = 0;
-
-    if (item.properties) {
-        var addedProperties = item.properties.filter(function (property) {
-            return property.property.isOderProperty && property.property.value;
-        });
-
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = addedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var property = _step.value;
-
-                sum += property.property.surcharge;
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
-    }
-
-    return sum;
-});
-
-},{}],102:[function(require,module,exports){
-"use strict";
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.filter("translate", function (value, params) {
-    return _TranslationService2.default.translate(value, params);
-});
-
-},{"services/TranslationService":119}],103:[function(require,module,exports){
-"use strict";
-
-Vue.filter("truncate", function (string, value) {
-    if (string.length > value) {
-        return string.substring(0, value) + "...";
-    }
-    return string;
-});
-
-},{}],104:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _utils = require("./utils");
-
-var MonetaryFormatter = function () {
-    var T_DIGIT = 0;
-    var T_DECIMAL = 1;
-    var T_CURRENCY = 2;
-    var T_SIGN = 3;
-    var T_CHAR = 4;
-
-    function MonetaryFormatter() {
-        this.setPattern(App.currencyPattern.pattern);
-        this.separatorThousands = App.currencyPattern.separator_thousands;
-        this.separatorDecimals = App.currencyPattern.separator_decimal;
-        this.sign = "-";
-    }
-
-    function _parse(pattern) {
-        var parsed = [];
-
-        while (pattern.length > 0) {
-            if (pattern.indexOf("\xA4") === 0) {
-                parsed.push({
-                    type: T_CURRENCY
-                });
-                pattern = pattern.substr(1);
-            } else if (pattern.indexOf("#,##0") === 0) {
-                parsed.push({
-                    type: T_DIGIT
-                });
-                pattern = pattern.substr(5);
-            } else if (pattern.indexOf(".00") === 0) {
-                parsed.push({
-                    type: T_DECIMAL
-                });
-                pattern = pattern.substr(3);
-            } else if (pattern.indexOf("-") === 0) {
-                parsed.push({
-                    type: T_SIGN
-                });
-                pattern = pattern.substr(1);
-            } else {
-                parsed.push({
-                    type: T_CHAR,
-                    value: pattern.charAt(0)
-                });
-                pattern = pattern.substr(1);
-            }
-        }
-
-        return parsed;
-    }
-
-    function _getDecimalValue(value) {
-        var extend = 0;
-
-        value += "";
-
-        if (value.length === 1) {
-            value = extend + value;
-        } else {
-            while (value.length < 2) {
-                value += extend;
-            }
-        }
-
-        return value;
-    }
-
-    MonetaryFormatter.prototype.setPattern = function (pattern) {
-        var _this = this;
-
-        this.pattern = [];
-        pattern.split(";").forEach(function (subpattern) {
-            _this.pattern.push(_parse(subpattern));
-        });
-    };
-
-    MonetaryFormatter.prototype.setSeparators = function (separatorThousands, separatorDecimals) {
-        this.separatorThousands = separatorThousands;
-        this.separatorDecimals = separatorDecimals;
-    };
-
-    MonetaryFormatter.prototype.setSign = function (sign) {
-        this.sign = sign;
-    };
-
-    MonetaryFormatter.prototype.format = function (value, currency) {
-        var _this2 = this;
-
-        var patternIndex = 0;
-        var prefix = "";
-
-        if ((0, _utils.isNullOrUndefined)(value) || Number.isNaN(parseFloat(value))) {
-            value = 0;
-        }
-
-        if (value < 0) {
-            if (this.pattern.length > 1) {
-                patternIndex = 1;
-            } else {
-                prefix = this.sign;
-            }
-        }
-
-        return prefix + this.pattern[patternIndex].map(function (partial, index, pattern) {
-            switch (partial.type) {
-                case T_DIGIT:
-                    {
-                        if (value < 0) {
-                            value *= -1;
-                        }
-                        // check if pattern include decimals to decide if digits should be rounded or not
-                        var roundDigits = !pattern.some(function (subpattern) {
-                            return subpattern.type === T_DECIMAL;
-                        });
-
-                        // cut decimal places instead of rounding
-                        // revert the value to insert thousands separators next
-                        var digits = (roundDigits ? Math.round(value * 100) / 100 : parseInt(value)).toFixed(0).split("").reverse().join("");
-
-                        // insert thousands separator
-                        for (var i = 3; i < digits.length; i += 4) {
-                            digits = digits.substr(0, i) + _this2.separatorThousands + digits.substr(i);
-                        }
-
-                        // revert back again
-                        digits = digits.split("").reverse().join("");
-
-                        return digits;
-                    }
-                case T_DECIMAL:
-                    {
-                        return _this2.separatorDecimals + _getDecimalValue((value * 100).toFixed(0).substr(-2, 2));
-                    }
-                case T_CURRENCY:
-                    {
-                        return currency;
-                    }
-                case T_SIGN:
-                    {
-                        return _this2.sign;
-                    }
-                case T_CHAR:
-                    {
-                        return partial.value;
-                    }
-                default:
-                    {
-                        console.warn("Unkown pattern type: " + partial.type);
-                        return "";
-                    }
-            }
-        }).join("");
-    };
-
-    return MonetaryFormatter;
-}();
-
-exports.default = MonetaryFormatter;
-
-},{"./utils":110}],105:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.debounce = debounce;
-
-var _utils = require("./utils");
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-/**
- * Makes a function executed after defined timeout.
- *
- * @param {function}    callback  The function to be executed after timeout
- * @param {number}      timeout   The timeout
- *
- * @returns {function}
- */
-function debounce(callback, timeout) {
-    timeout = (0, _utils.defaultValue)(timeout, 0);
-    if (timeout > 0) {
-        return function () {
-            var args = arguments;
-
-            if (!(0, _utils.isNullOrUndefined)(callback.__timeout)) {
-                window.clearTimeout(callback.__timeout);
-            }
-            callback.__timeout = window.setTimeout(function () {
-                callback.apply(undefined, _toConsumableArray(args));
-            }, timeout);
-        };
-    }
-
-    return callback;
-}
-
-},{"./utils":110}],106:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.findParent = findParent;
-exports.is = is;
-/**
- * Get first parent element which matches a given selector
- *
- * @param {HTMLElement}     element           The element to get the parent for
- * @param {string}          parentSelector    Selector to match parent element
- *
- * @returns {HTMLElement}
- */
-function findParent(element, parentSelector) {
-    // eslint-disable-next-line brace-style
-    while ((element = element.parentElement) && !is(element, parentSelector)) {}
-    return element;
-}
-
-/**
- * Check if element matches a given selector
- *
- * @param {HTMLElement} element   The element to check
- * @param {string}      selector  The selector to match on given element
- *
- * @returns {boolean}
- */
-// eslint-disable-next-line complexity
-function is(element, selector) {
-    // polyfill from https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
-    if (!Element.prototype.matches) {
-        Element.prototype.matches = Element.prototype.matchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.webkitMatchesSelector || function (sel) {
-            var matches = (this.document || this.ownerDocument).querySelectorAll(sel);
-            var i = matches.length;
-
-            // eslint-disable-next-line brace-style
-            while (--i >= 0 && matches.item(i) !== this) {}
-            return i > -1;
-        };
-    }
-
-    return element.matches(selector);
-}
-
-},{}],107:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.floatLength = floatLength;
-exports.limit = limit;
-exports.formatFloat = formatFloat;
-
-var _utils = require("./utils");
-
-/**
- * Get the number of decimal places of a float value.
- *
- * @param value     The float value to count decimal places for
- * @returns {number}
- */
-function floatLength(value) {
-    var match = ("" + value).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
-
-    if (!match) {
-        return 0;
-    }
-
-    return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? match[2] : 0));
-}
-
-/**
- * Limit a numeric value on a defined interval.
- * If value is smaller than minimum, minimum value will be returned.
- * If value is greater than maximum, maximum value will be returned.
- * If value is between minimum and maximum, the value will be returned.
- *
- * @param {number}  value     The value to check against min and max
- * @param {number}  min       Minimum value
- * @param {number}  max       Maximum value
- *
- * @returns {number}
- */
-function limit(value, min, max) {
-    if (isNaN(value)) {
-        return value;
-    }
-    if (!(0, _utils.isNullOrUndefined)(min) && value < min) {
-        return min;
-    }
-    if (!(0, _utils.isNullOrUndefined)(max) && value > max) {
-        return max;
-    }
-    return value;
-}
-
-/**
- * Format float value by cutting decimal places.
- *
- * @param {number}  value       The value to be formatted
- * @param {number}  decimals    Number of decimal places to keep
- * @param {boolean} round       Flag indicating if original value should be rounded before cutting decimal values
- *
- * @returns {number}
- */
-function formatFloat(value, decimals, round) {
-    value = parseFloat(value);
-    if (round) {
-        var factor = Math.pow(10, decimals);
-        var scaledValue = Math.round((value + 1 / (factor * 10)) * factor);
-
-        value = scaledValue / factor;
-    }
-    if (isNaN(value)) {
-        // return NaN
-        return 1 / 0;
-    }
-    return parseFloat(value.toFixed(decimals));
-}
-
-},{"./utils":110}],108:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.replaceAll = replaceAll;
-exports.capitalize = capitalize;
-
-var _utils = require("./utils");
-
-/**
- * Replace all occurrences of a string
- *
- * @param {string}  input           The string to apply replacements on
- * @param {string}  search          Substring to be replaced
- * @param {string}  replacement     String to replace each match with
- *
- * @returns {string}
- */
-function replaceAll(input, search, replacement) {
-    if ((0, _utils.isNullOrUndefined)(input)) {
-        return input;
-    }
-    return (input + "").split(search).join(replacement);
-}
-
-/**
- * Capitalize first letter of a string
- *
- * @param {string}  input   The string to capitalize
- *
- * @returns {string}
- */
-function capitalize(input) {
-    if ((0, _utils.isNullOrUndefined)(input)) {
-        return input;
-    }
-    return ("" + input).charAt(0).toUpperCase() + ("" + input).substr(1);
-}
-
-},{"./utils":110}],109:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.normalizeUrl = normalizeUrl;
-
-var _utils = require("./utils");
-
-function normalizeUrl(url) {
-    var urlParts = url.split("?");
-    var urlParams = urlParts[1];
-    var urlPath = urlParts[0];
-
-    if (App.urlTrailingSlash && urlPath.substr(-1, 1) !== "/") {
-        urlPath += "/";
-    } else if (!App.urlTrailingSlash && urlPath.substr(-1, 1) === "/") {
-        urlPath = url.substr(0, url.length - 1);
-    }
-
-    var targetUrl = urlPath;
-
-    if (!(0, _utils.isNullOrUndefined)(urlParams) && urlParams.length > 0) {
-        targetUrl += "?" + urlParams;
-    }
-
-    return targetUrl;
-}
-
-},{"./utils":110}],110:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-exports.isNull = isNull;
-exports.isUndefined = isUndefined;
-exports.isNullOrUndefined = isNullOrUndefined;
-exports.isDefined = isDefined;
-exports.defaultValue = defaultValue;
-/**
- * Check if a given value equals to null
- *
- * @param {*}   object
- *
- * @returns {boolean}
- */
-function isNull(object) {
-    return object === null;
-}
-
-/**
- * Check if a given value is undefined
- *
- * @param {*} object
- *
- * @returns {boolean}
- */
-function isUndefined(object) {
-    //eslint-disable-next-line
-    return (typeof object === "undefined" ? "undefined" : _typeof(object)) === _typeof(void 0);
-}
-
-/**
- * Check if a given value is null or undefined
- *
- * @param {*}   object
- *
- * @returns {boolean}
- */
-function isNullOrUndefined(object) {
-    return isNull(object) || isUndefined(object);
-}
-
-/**
- * Check if a given value is defined. This is a shorthand function for `!isNullOrUndefined(value)`
- * @param {*}   object
- *
- * @returns {boolean}
- */
-function isDefined(object) {
-    return !isNullOrUndefined(object);
-}
-
-/**
- * Check if a given value is defined. Otherwise return a default value
- *
- * @param {*}   input
- * @param {*}   defaultValue
- *
- * @returns {*}
- */
-function defaultValue(input, defaultValue) {
-    if (isNullOrUndefined(input)) {
-        return defaultValue;
-    }
-
-    return input;
-}
-
-},{}],111:[function(require,module,exports){
-"use strict";
-
-var browserDetect = require("detect-browser");
-// Frontend end scripts
-// eslint-disable-next-line
-var init = function ($, window, document) {
-    function CeresMain() {
-        var browser = browserDetect.detect();
-
-        if (browser && browser.name) {
-            $("html").addClass(browser.name);
-        } else {
-            $("html").addClass("unkown-os");
-        }
-
-        $(window).scroll(function () {
-            if ($(".wrapper-main").hasClass("isSticky")) {
-                if ($(this).scrollTop() > 1) {
-                    $(".wrapper-main").addClass("sticky");
-                } else {
-                    $(".wrapper-main").removeClass("sticky");
-                }
-            }
-        });
-
-        window.onpopstate = function (event) {
-            if (event.state && event.state.requireReload) {
-                window.location.reload();
-            }
-        };
-
-        // init bootstrap tooltips
-        $("[data-toggle=\"tooltip\"]").tooltip();
-
-        // Replace all SVG images with inline SVG, class: svg
-        $("img[src$=\".svg\"]").each(function () {
-            var $img = jQuery(this);
-            var imgURL = $img.attr("src");
-            var attributes = $img.prop("attributes");
-
-            $.get(imgURL, function (data) {
-                // Get the SVG tag, ignore the rest
-                var $svg = jQuery(data).find("svg");
-
-                // Remove any invalid XML tags
-                $svg = $svg.removeAttr("xmlns:a");
-
-                // Loop through IMG attributes and apply on SVG
-                $.each(attributes, function () {
-                    $svg.attr(this.name, this.value);
-                });
-
-                // Replace IMG with SVG
-                $img.replaceWith($svg);
-            }, "xml");
-        });
-
-        var $toggleListView = $(".toggle-list-view");
-        var $mainNavbarCollapse = $("#mainNavbarCollapse");
-
-        $(document).on("click", function (evt) {
-            var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-
-            if ($("#vue-app").hasClass(basketOpenClass)) {
-                if (evt.target != $(".basket-preview") && evt.target != document.querySelector(".basket-preview-hover") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0) {
-                    evt.preventDefault();
-                    $("#vue-app").toggleClass(basketOpenClass || "open-hover");
-                }
-            }
-
-            if (evt.target.id != "countrySettings" && $(evt.target).parents("#countrySettings").length <= 0 && $("#countrySettings").attr("aria-expanded") == "true") {
-                $("#countrySettings").collapse("hide");
-            }
-
-            if (evt.target.id != "searchBox" && $(evt.target).parents("#searchBox").length <= 0 && $("#searchBox").attr("aria-expanded") == "true") {
-                $("#searchBox").collapse("hide");
-            }
-
-            if (evt.target.id != "currencySelect" && $(evt.target).parents("#currencySelect").length <= 0 && $("#currencySelect").attr("aria-expanded") == "true") {
-                $("#currencySelect").collapse("hide");
-            }
-        });
-
-        $toggleListView.on("click", function (evt) {
-            evt.preventDefault();
-
-            // toggle it's own state
-            $toggleListView.toggleClass("grid");
-
-            // toggle internal style of thumbs
-            $(".product-list, .cmp-product-thumb").toggleClass("grid");
-        });
-
-        $mainNavbarCollapse.collapse("hide");
-
-        // Add click listener outside the navigation to close it
-        $mainNavbarCollapse.on("show.bs.collapse", function () {
-            $(".main").one("click", closeNav);
-        });
-
-        $mainNavbarCollapse.on("hide.bs.collapse", function () {
-            $(".main").off("click", closeNav);
-        });
-
-        function closeNav() {
-            $("#mainNavbarCollapse").collapse("hide");
-        }
-
-        $(document).ready(function () {
-            var offset = 250;
-            var duration = 300;
-
-            var isDesktop = window.matchMedia("(min-width: 768px)").matches;
-
-            $(window).scroll(function () {
-                if (isDesktop) {
-                    if ($(this).scrollTop() > offset) {
-                        $(".back-to-top").fadeIn(duration);
-                        $(".back-to-top-center").fadeIn(duration);
-                    } else {
-                        $(".back-to-top").fadeOut(duration);
-                        $(".back-to-top-center").fadeOut(duration);
-                    }
-                }
-            });
-
-            window.addEventListener("resize", function () {
-                isDesktop = window.matchMedia("(min-width: 768px)").matches;
-            });
-
-            $(".back-to-top").click(function (event) {
-                event.preventDefault();
-
-                $("html, body").animate({ scrollTop: 0 }, duration);
-
-                return false;
-            });
-
-            $(".back-to-top-center").click(function (event) {
-                event.preventDefault();
-
-                $("html, body").animate({ scrollTop: 0 }, duration);
-
-                return false;
-            });
-
-            $("#accountMenuList").click(function () {
-                $("#countrySettings").collapse("hide");
-                $("#searchBox").collapse("hide");
-                $("#currencySelect").collapse("hide");
-            });
-        });
-    }
-
-    window.CeresMain = new CeresMain();
-}(jQuery, window, document);
-
-},{"detect-browser":134}],112:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.isAddressFieldEnabled = isAddressFieldEnabled;
-function isAddressFieldEnabled(countryId, addressType, field) {
-    var address = {};
-    var enabledFields = {};
-
-    if (typeof countryId === "undefined") {
-        countryId = 1;
-    }
-
-    if (addressType === "1") {
-        address = "billing_address";
-
-        if (countryId === 1) {
-            enabledFields = App.config.addresses.billingAddressShow;
-        } else {
-            enabledFields = App.config.addresses.billingAddressShow_en;
-        }
-    } else {
-        address = "delivery_address";
-
-        if (countryId === "1") {
-            enabledFields = App.config.addresses.deliveryAddressShow;
-        } else {
-            enabledFields = App.config.addresses.deliveryAddressShow_en;
-        }
-    }
-
-    var fullField = address + "." + field;
-
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = enabledFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var enabledField = _step.value;
-
-            if (enabledField === fullField) {
-                return true;
-            }
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
-
-    return false;
-}
-
-exports.default = { isAddressFieldEnabled: isAddressFieldEnabled };
-
-},{}],113:[function(require,module,exports){
-"use strict";
-
-var _url = require("../helper/url");
-
-var NotificationService = require("services/NotificationService");
-var WaitScreenService = require("services/WaitScreenService");
-
-module.exports = function ($) {
-    var _eventListeners = {};
-
-    $(document).ajaxComplete(function (ajaxEvent, xhr, options) {
-        var response;
-
-        try {
-            response = JSON.parse(xhr.responseText);
-        } catch (exception) {}
-
-        if (response) {
-            for (var event in response.events) {
-                _triggerEvent(event, response.events[event]);
-            }
-
-            if (!options.supressNotifications) {
-                _printMessages(response);
-            }
-        }
-    });
-
-    return {
-        get: _get,
-        put: _put,
-        post: _post,
-        delete: _delete,
-        send: _send,
-        setToken: _setToken,
-        getToken: _getToken,
-        listen: _listen
-    };
-
-    function _listen(event, handler) {
-        _eventListeners[event] = _eventListeners[event] || [];
-        _eventListeners[event].push(handler);
-    }
-
-    function _triggerEvent(event, payload) {
-        if (_eventListeners[event]) {
-            for (var i = 0; i < _eventListeners[event].length; i++) {
-                var listener = _eventListeners[event][i];
-
-                if (typeof listener !== "function") {
-                    continue;
-                }
-                listener.call(Object, payload);
-            }
-        }
-    }
-
-    function _get(url, data, config) {
-        config = config || {};
-        config.method = "GET";
-        return _send(url, data, config);
-    }
-
-    function _put(url, data, config) {
-        config = config || {};
-        config.method = "PUT";
-        return _send(url, data, config);
-    }
-
-    function _post(url, data, config) {
-        config = config || {};
-        config.method = "POST";
-        return _send(url, data, config);
-    }
-
-    function _delete(url, data, config) {
-        config = config || {};
-        config.method = "DELETE";
-        return _send(url, data, config);
-    }
-
-    function _send(url, data, config) {
-        var deferred = $.Deferred();
-
-        url = (0, _url.normalizeUrl)(url);
-        config = config || {};
-        config.data = data || null;
-        config.dataType = config.dataType || "json";
-        config.contentType = typeof config.contentType !== "undefined" ? config.contentType : "application/x-www-form-urlencoded; charset=UTF-8";
-        config.doInBackground = !!config.doInBackground;
-        config.supressNotifications = !!config.supressNotifications;
-        config.keepOriginalResponse = !!config.keepOriginalResponse;
-
-        if (!config.doInBackground) {
-            WaitScreenService.showWaitScreen();
-        }
-        $.ajax(url, config).done(function (response) {
-            if (config.keepOriginalResponse) {
-                deferred.resolve(response);
-            } else {
-                deferred.resolve(response.data || response);
-            }
-        }).fail(function (jqXHR) {
-            var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
-
-            deferred.reject(response);
-        }).always(function () {
-            if (!config.doInBackground) {
-                WaitScreenService.hideWaitScreen();
-            }
-        });
-
-        return deferred;
-    }
-
-    function _printMessages(response) {
-        var notification;
-
-        if (response.error && response.error.message.length > 0) {
-            notification = NotificationService.error(response.error);
-        }
-
-        if (response.success && response.success.message.length > 0) {
-            notification = NotificationService.success(response.success);
-        }
-
-        if (response.warning && response.warning.message.length > 0) {
-            notification = NotificationService.warning(response.warning);
-        }
-
-        if (response.info && response.info.message.length > 0) {
-            notification = NotificationService.info(response.info);
-        }
-
-        if (response.debug && response.debug.class.length > 0) {
-            notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
-            for (var i = 0; i < response.debug.trace.length; i++) {
-                notification.trace(response.debug.trace[i]);
-            }
-        }
-    }
-
-    function _setToken(token) {
-        this._token = token;
-    }
-
-    function _getToken() {
-        return this._token;
-    }
-}(jQuery);
-
-},{"../helper/url":109,"services/NotificationService":118,"services/WaitScreenService":122}],114:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-exports.updateCategoryHtml = updateCategoryHtml;
-
-var _index = require("store/index.js");
-
-var _index2 = _interopRequireDefault(_index);
-
-var _UrlService = require("services/UrlService");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var _categoryTree = {};
-var firstInitDone = false;
-
-/**
- * render items in relation to location
- * @param currentCategory
- */
-function updateCategoryHtml() {
-    var currentCategory = _index2.default.state.navigation.currentCategory;
-
-    document.querySelector("body").classList.remove("menu-is-visible");
-
-    if ($.isEmptyObject(_categoryTree)) {
-        _categoryTree = _index2.default.state.navigation.tree;
-    }
-
-    if (App.isCategoryView && currentCategory.details.length) {
-        if (!firstInitDone) {
-            firstInitDone = true;
-            _firstRendering();
-        }
-
-        _handleCurrentCategory();
-
-        document.dispatchEvent(new CustomEvent("afterCategoryChanged", { detail: {
-                currentCategory: currentCategory,
-                categoryTree: _categoryTree
-            } }));
-    }
-}
-
-/**
- * bundle functions
- * @param currentCategory
- */
-function _handleCurrentCategory() {
-    var currentCategory = _index2.default.state.navigation.currentCategory;
-
-    _removeTempDesc();
-    _updateHistory(currentCategory);
-}
-
-/**
- * update page informations
- * @param currentCategory
- */
-function _updateHistory(currentCategory) {
-    (0, _UrlService.switchUrl)(currentCategory.url + window.location.search);
-    _updateCategoryTexts(currentCategory);
-}
-
-function _removeTempDesc() {
-    var tempDesc = document.querySelector("#category-description-container");
-
-    if (tempDesc) {
-        tempDesc.innerHTML = "";
-    }
-}
-
-function _updateCategoryTexts(currentCategory) {
-    var categoryTitle = currentCategory.details[0].metaTitle ? currentCategory.details[0].metaTitle : currentCategory.details[0].name;
-
-    document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = categoryTitle + " | " + App.config.header.companyName;
-
-    _loadOptionalData(currentCategory);
-}
-
-function _loadOptionalData(currentCategory) {
-    var categoryImage = currentCategory.details[0].imagePath;
-    var parallaxImgContainer = document.querySelector(".parallax-img-container");
-
-    if (parallaxImgContainer) {
-        if (categoryImage) {
-            parallaxImgContainer.style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
-        } else {
-            parallaxImgContainer.style.removeProperty("background-image");
-        }
-    }
-
-    var categoryDescContainer = document.querySelector("#category-description-container");
-
-    if (categoryDescContainer) {
-        ApiService.get("/rest/io/category/description/" + currentCategory.id).done(function (response) {
-            if ((typeof response === "undefined" ? "undefined" : _typeof(response)) !== "object") {
-                categoryDescContainer.innerHTML = response;
-            }
-        });
-    }
-}
-
-function _firstRendering() {
-    var twigBreadcrumbs = document.querySelector("#twig-rendered-breadcrumbs");
-
-    if (twigBreadcrumbs) {
-        twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
-    }
-
-    var vueBreadcrumbs = document.querySelector("#vue-rendered-breadcrumbs");
-
-    if (vueBreadcrumbs) {
-        vueBreadcrumbs.style.removeProperty("display");
-    }
-}
-
-exports.default = {
-    updateCategoryHtml: updateCategoryHtml
-};
-
-},{"services/ApiService":113,"services/UrlService":120,"store/index.js":123}],115:[function(require,module,exports){
-"use strict";
-
-module.exports = function ($) {
-
-    return {
-        parseShippingCountries: parseShippingCountries,
-        parseShippingStates: parseShippingStates,
-        sortCountries: sortCountries
-    };
-
-    function parseShippingCountries(countryList, id) {
-        var deliveryCountries = [];
-
-        if (countryList === null) {
-            return deliveryCountries;
-        }
-
-        for (var key in countryList) {
-            var country = countryList[key];
-            var option = { id: country.id, name: country.name, locale: country.isoCode2, selected: false };
-
-            option.selected = id === country.id;
-            deliveryCountries.push(option);
-        }
-
-        return deliveryCountries;
-    }
-
-    function sortCountries(countries) {
-        countries.sort(function (first, second) {
-            if (first.name < second.name) {
-                return -1;
-            }
-            if (first.name > second.name) {
-                return 1;
-            }
-            return 0;
-        });
-    }
-
-    function parseShippingStates(countryList, countryID) {
-        var states = [];
-
-        for (var key in countryList) {
-            var country = countryList[key];
-
-            if (country.id === countryID) {
-                states = country.states;
-                break;
-            }
-        }
-
-        return states;
-    }
-}(jQuery);
-
-},{}],116:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.updateItemListUrlParams = updateItemListUrlParams;
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function updateItemListUrlParams(searchParams) {
-    var urlParams = {};
-    var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
-
-    urlParams.query = searchParams.query && searchParams.query.length > 0 ? searchParams.query : null;
-    urlParams.items = searchParams.items !== defaultItemsPerPage ? searchParams.items : null;
-    urlParams.page = searchParams.page > 1 ? searchParams.page : null;
-    urlParams.facets = searchParams.facets.length > 0 ? searchParams.facets : null;
-    urlParams.priceMin = searchParams.priceMin.length > 0 ? searchParams.priceMin : null;
-    urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
-
-    if (App.isSearch) {
-        urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch ? searchParams.sorting : null;
-    } else {
-        urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
-    }
-
-    for (var urlParamKey in urlParams) {
-        _UrlService2.default.setUrlParam(urlParamKey, urlParams[urlParamKey]);
-    }
-}
-
-exports.default = {
-    updateItemListUrlParams: updateItemListUrlParams
-};
-
-},{"services/UrlService":120}],117:[function(require,module,exports){
-"use strict";
-
-module.exports = function ($) {
-
-    var paused = false;
-    var timeout = -1;
-    var interval;
-    var timeRemaining;
-    var timeStart;
-
-    return {
-        findModal: findModal
-    };
-
-    function findModal(element) {
-        return new Modal(element);
-    }
-
-    function Modal(element) {
-        var self = this;
-        var $bsModal;
-
-        if ($(element).is(".modal")) {
-            $bsModal = $(element);
-        } else {
-            $bsModal = $(element).find(".modal").first();
-        }
-
-        return {
-            show: show,
-            hide: hide,
-            setTimeout: setTimeout,
-            startTimeout: startTimeout,
-            pauseTimeout: pauseTimeout,
-            continueTimeout: continueTimeout,
-            stopTimeout: stopTimeout,
-            getModalContainer: getModalContainer,
-            on: on
-        };
-
-        function show() {
-            $bsModal.modal("show");
-
-            if ($bsModal.timeout > 0) {
-                startTimeout();
-            }
-
-            return self;
-        }
-
-        function hide() {
-            $bsModal.modal("hide");
-            return self;
-        }
-
-        function getModalContainer() {
-            return $bsModal;
-        }
-
-        function setTimeout(timeout) {
-            $bsModal.timeout = timeout;
-
-            $bsModal.find(".modal-content").mouseover(function () {
-                pauseTimeout();
-            });
-
-            $bsModal.find(".modal-content").mouseout(function () {
-                continueTimeout();
-            });
-
-            return this;
-        }
-
-        function startTimeout() {
-            timeRemaining = $bsModal.timeout;
-            timeStart = new Date().getTime();
-
-            timeout = window.setTimeout(function () {
-                window.clearInterval(interval);
-                hide();
-            }, $bsModal.timeout);
-
-            $bsModal.find(".timer").text(timeRemaining / 1000);
-            interval = window.setInterval(function () {
-                if (!paused) {
-                    var secondsRemaining = timeRemaining - new Date().getTime() + timeStart;
-
-                    secondsRemaining = Math.round(secondsRemaining / 1000);
-                    $bsModal.find(".timer").text(secondsRemaining);
-                }
-            }, 1000);
-        }
-
-        function pauseTimeout() {
-            paused = true;
-            timeRemaining -= new Date().getTime() - timeStart;
-            window.clearTimeout(timeout);
-        }
-
-        function continueTimeout() {
-            paused = false;
-            timeStart = new Date().getTime();
-            timeout = window.setTimeout(function () {
-                hide();
-                window.clearInterval(interval);
-            }, timeRemaining);
-        }
-
-        function stopTimeout() {
-            window.clearTimeout(timeout);
-            window.clearInterval(interval);
-        }
-
-        function on(event, callback) {
-            $bsModal.on(event, callback);
-        }
-    }
-}(jQuery);
-
-},{}],118:[function(require,module,exports){
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _ExceptionMap = require("exceptions/ExceptionMap");
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = function ($) {
-
-    var notificationCount = 0;
-    var notifications = new NotificationList();
-
-    var handlerList = [];
-
-    return {
-        log: _log,
-        info: _info,
-        warn: _warn,
-        error: _error,
-        success: _success,
-        getNotifications: getNotifications,
-        listen: _listen
-    };
-
-    function _listen(handler) {
-        handlerList.push(handler);
-    }
-
-    function trigger() {
-        for (var i = 0; i < handlerList.length; i++) {
-            handlerList[i].call({}, notifications.all());
-        }
-    }
-
-    function _log(message, prefix) {
-        var notification = new Notification(message);
-
-        if (App.config.log.data.indexOf("log_messages") >= 0) {
-            console.log((prefix || "") + "[" + notification.code + "] " + notification.message);
-
-            for (var i = 0; i < notification.stackTrace.length; i++) {
-                _log(notification.stackTrace[i], " + ");
-            }
-        }
-
-        return notification;
-    }
-
-    function _info(message) {
-        var notification = new Notification(message, "info");
-
-        if (App.config.log.data.indexOf("print_infos") >= 0) {
-            _printNotification(notification);
-        }
-
-        return notification;
-    }
-
-    function _warn(message) {
-        var notification = new Notification(message, "warning");
-
-        if (App.config.log.data.indexOf("print_warnings") >= 0) {
-            _printNotification(notification);
-        }
-
-        return notification;
-    }
-
-    function _error(message) {
-        var notification = new Notification(message, "danger");
-
-        if (App.config.log.data.indexOf("print_errors") >= 0) {
-            _printNotification(notification);
-        }
-
-        return notification;
-    }
-
-    function _success(message) {
-        var notification = new Notification(message, "success");
-
-        if (App.config.log.data.indexOf("print_success") >= 0) {
-            _printNotification(notification);
-        }
-
-        return notification;
-    }
-
-    function getNotifications() {
-        return notifications;
-    }
-
-    function _printNotification(notification) {
-        if (notification.code > 0 && _ExceptionMap.exceptionMap.has(notification.code.toString())) {
-            notification.message = _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap.exceptionMap.get(notification.code.toString()));
-        }
-        notifications.add(notification);
-        _log(notification);
-
-        trigger();
-
-        return notification;
-    }
-
-    function Notification(data, context) {
-        if (App.config.log.data.indexOf("print_stack_trace") < 0 && (typeof data === "undefined" ? "undefined" : _typeof(data)) === "object") {
-            data.stackTrace = [];
-        }
-        var id = notificationCount++;
-        var self = {
-            id: id,
-            code: data.code || 0,
-            message: data.message || data || "",
-            context: context || "info",
-            stackTrace: data.stackTrace || [],
-            close: close,
-            closeAfter: closeAfter,
-            trace: trace
-        };
-
-        return self;
-
-        function close() {
-            notifications.remove(self);
-            trigger();
-        }
-
-        function closeAfter(timeout) {
-            setTimeout(function () {
-                notifications.remove(self);
-                trigger();
-            }, timeout);
-        }
-
-        function trace(message, code) {
-            if (App.config.log.data.indexOf("print_stack_trace") >= 0) {
-                self.stackTrace.push({
-                    code: code || 0,
-                    message: message
-                });
-            }
-        }
-    }
-
-    function NotificationList() {
-        var elements = [];
-
-        return {
-            all: all,
-            add: add,
-            remove: remove
-        };
-
-        function all() {
-            return elements;
-        }
-
-        function add(notification) {
-            elements.push(notification);
-        }
-
-        function remove(notification) {
-            for (var i = 0; i < elements.length; i++) {
-                if (elements[i].id === notification.id) {
-                    elements.splice(i, 1);
-                    break;
-                }
-            }
-        }
-    }
-}(jQuery);
-
-},{"exceptions/ExceptionMap":87,"services/TranslationService":119}],119:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _utils = require("../helper/utils");
-
-var _strings = require("../helper/strings");
-
-var TranslationService = function ($) {
-    var _translations = {};
-
-    // initialize translations
-    _readTranslations();
-
-    return {
-        translate: _translate
-    };
-
-    function _readTranslations() {
-        var identifierPattern = /^(\w+)::(\w+)$/;
-        var tags = document.querySelectorAll("script[data-translation]");
-
-        for (var i = 0; i < tags.length; i++) {
-            var identifier = tags[i].dataset.translation;
-
-            if (!identifier || !identifierPattern.test(identifier)) {
-                console.error("Cannot read translations from script tag. Identifier is not valid");
-            }
-
-            var match = identifierPattern.exec(identifier);
-            var namespace = match[1];
-            var group = match[2];
-
-            if (_translations.hasOwnProperty(namespace)) {
-                console.warn("Cannot override namespace \"" + namespace + "\"");
-                continue;
-            }
-
-            _translations[namespace] = {};
-
-            if (_translations[namespace].hasOwnProperty(group)) {
-                console.warn("Cannot override group \"" + namespace + "::" + group);
-                continue;
-            }
-
-            try {
-                _translations[namespace][group] = JSON.parse(tags[i].innerHTML);
-            } catch (err) {
-                console.error("Error while parsing translations (" + identifier + ")");
-            }
-        }
-    }
-
-    function _translate(key, params) {
-        var identifier = _parseKey(key);
-
-        if (identifier === null) {
-            return key;
-        }
-
-        var namespace = _translations[identifier.namespace];
-
-        if ((0, _utils.isNullOrUndefined)(namespace)) {
-            return key;
-        }
-
-        var group = namespace[identifier.group];
-
-        if ((0, _utils.isNullOrUndefined)(group)) {
-            return key;
-        }
-
-        var value = group[identifier.key];
-
-        if (!(0, _utils.isNullOrUndefined)(value)) {
-            return _replacePlaceholders(value, params);
-        }
-
-        return key;
-    }
-
-    function _replacePlaceholders(input, values) {
-        values = values || {};
-
-        Object.keys(values).sort(function (keyA, keyB) {
-            return keyB.length - keyA.length;
-        }).forEach(function (key) {
-            var value = "" + (0, _utils.defaultValue)(values[key], "");
-
-            input = (0, _strings.replaceAll)(input, ":" + key, value);
-            input = (0, _strings.replaceAll)(input, ":" + (0, _strings.capitalize)(key), (0, _strings.capitalize)(value));
-            input = (0, _strings.replaceAll)(input, ":" + key.toUpperCase(), value.toUpperCase());
-        });
-
-        return input;
-    }
-
-    function _parseKey(key) {
-        var keyPattern = /^(\w+)::(\w+)\.(\w+)$/;
-
-        if (keyPattern.test(key)) {
-            var match = keyPattern.exec(key);
-
-            return {
-                namespace: match[1],
-                group: match[2],
-                key: match[3]
-            };
-        }
-
-        return null;
-    }
-}(jQuery);
-
-exports.default = TranslationService;
-
-},{"../helper/strings":108,"../helper/utils":110}],120:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.getUrlParams = getUrlParams;
-exports.setUrlParams = setUrlParams;
-exports.setUrlParam = setUrlParam;
-exports.navigateTo = navigateTo;
-exports.switchUrl = switchUrl;
-
-var _jquery = require("jquery");
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _utils = require("../helper/utils");
-
-var _url = require("../helper/url");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function getUrlParams(urlParams) {
-    if (urlParams) {
-        var tokens;
-        var params = {};
-        var regex = /[?&]?([^=]+)=([^&]*)/g;
-
-        urlParams = urlParams.split("+").join(" ");
-
-        // eslint-disable-next-line
-        while (tokens = regex.exec(urlParams)) {
-            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-        }
-
-        return params;
-    }
-
-    return {};
-}
-
-function setUrlParams(urlParams) {
-    var pathName = window.location.pathname;
-    var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
-    var titleElement = document.getElementsByTagName("title")[0];
-
-    window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
-
-    (0, _jquery2.default)("a[href][data-update-url]").each(function (i, element) {
-        var $element = (0, _jquery2.default)(element);
-        var href = /^([^?]*)(\?.*)?$/.exec($element.attr("href"));
-
-        if (href && href[1]) {
-            $element.attr("href", href[1] + params);
-        }
-    });
-}
-
-function setUrlParam(key, value) {
-    var urlParams = getUrlParams(document.location.search);
-
-    if (value !== null) {
-        urlParams[key] = value;
-    } else {
-        delete urlParams[key];
-    }
-
-    setUrlParams(urlParams);
-}
-
-function navigateTo(url) {
-    url = (0, _url.normalizeUrl)(url);
-    window.location.assign(url);
-}
-
-function switchUrl(url, title) {
-    if ((0, _utils.isNullOrUndefined)(title)) {
-        title = document.getElementsByTagName("title")[0].innerHTML;
-    }
-    url = (0, _url.normalizeUrl)(url);
-    window.history.pushState({ requireReload: true }, title, url);
-}
-
-exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, switchUrl: switchUrl };
-
-},{"../helper/url":109,"../helper/utils":110,"jquery":135}],121:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.validate = validate;
-exports.getInvalidFields = getInvalidFields;
-exports.markInvalidFields = markInvalidFields;
-exports.markFailedValidationFields = markFailedValidationFields;
-exports.unmarkAllFields = unmarkAllFields;
-
-var _jquery = require("jquery");
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var $form = void 0;
-
-function validate(form) {
-    var deferred = _jquery2.default.Deferred();
-    var invalidFields = getInvalidFields(form);
-
-    if (invalidFields.length > 0) {
-        deferred.rejectWith(form, [invalidFields]);
-    } else {
-        deferred.resolveWith(form);
-    }
-
-    return deferred;
-}
-
-function getInvalidFields(form) {
-    $form = (0, _jquery2.default)(form);
-    var invalidFormControls = [];
-
-    $form.find("[data-validate]").each(function (i, elem) {
-
-        if (!_validateElement((0, _jquery2.default)(elem))) {
-            invalidFormControls.push(elem);
-        }
-    });
-
-    return invalidFormControls;
-}
-
-function markInvalidFields(fields, errorClass) {
-    errorClass = errorClass || "error";
-
-    (0, _jquery2.default)(fields).each(function (i, elem) {
-        var $elem = (0, _jquery2.default)(elem);
-
-        $elem.addClass(errorClass);
-        _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function () {
-            if (_validateElement($elem)) {
-                $elem.removeClass(errorClass);
-                if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]")) {
-                    var groupName = $elem.attr("name");
-
-                    (0, _jquery2.default)("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
-                }
-                _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
-            }
-        });
-    });
-}
-
-function markFailedValidationFields(form, validationErrors, errorClass) {
-    $form = (0, _jquery2.default)(form);
-
-    errorClass = errorClass || "error";
-
-    $form.find("[data-model]").each(function (i, elem) {
-        var $elem = (0, _jquery2.default)(elem);
-        var attribute = $elem.attr("data-model");
-
-        if (attribute in validationErrors) {
-            $elem.addClass(errorClass);
-
-            var fieldLabel = $elem.find("label")[0].innerHTML.replace("*", "");
-
-            if (fieldLabel) {
-                var attributeCamel = attribute.replace(/([A-Z])/g, " $1").toLowerCase();
-
-                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attributeCamel.replace("_", " "), fieldLabel);
-            }
-        }
-    });
-}
-
-function unmarkAllFields(form) {
-    $form = (0, _jquery2.default)(form);
-
-    $form.find("[data-validate]").each(function (i, elem) {
-        var $elem = (0, _jquery2.default)(elem);
-
-        $elem.removeClass("error");
-    });
-}
-
-function _validateElement(elem) {
-    var $elem = (0, _jquery2.default)(elem);
-    var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
-        return i.trim();
-    }) || ["text"];
-    var hasError = false;
-
-    _findFormControls($elem).each(function (i, formControl) {
-        var $formControl = (0, _jquery2.default)(formControl);
-        var validationKey = validationKeys[i] || validationKeys[0];
-
-        if (!_isActive($formControl)) {
-            // continue loop
-            return true;
-        }
-
-        if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]")) {
-
-            if (!_validateGroup($formControl, validationKey)) {
-                hasError = true;
-            }
-
-            return true;
-        }
-
-        if ($formControl.is("select")) {
-            if (!_validateSelect($formControl, validationKey)) {
-                hasError = true;
-            }
-
-            return true;
-        }
-
-        if (!_validateInput($formControl, validationKey)) {
-            hasError = true;
-        }
-
-        return false;
-    });
-
-    return !hasError;
-}
-
-function _validateGroup($formControl, validationKey) {
-    var groupName = $formControl.attr("name");
-    var $group = $form.find("[name=\"" + groupName + "\"]");
-    var range = _eval(validationKey) || { min: 1, max: 1 };
-    var checked = $group.filter(":checked").length;
-
-    return checked >= range.min && checked <= range.max;
-}
-
-function _validateSelect($formControl, validationKey) {
-    return _jquery2.default.trim($formControl.val()) !== validationKey;
-}
-
-function _validateInput($formControl, validationKey) {
-    switch (validationKey) {
-        case "text":
-            return _hasValue($formControl);
-        case "number":
-            return _hasValue($formControl) && _jquery2.default.isNumeric(_jquery2.default.trim($formControl.val()));
-        case "ref":
-            return _compareRef(_jquery2.default.trim($formControl.val()), _jquery2.default.trim($formControl.attr("data-validate-ref")));
-        case "mail":
-            return _isMail($formControl);
-        case "password":
-            return _isPassword($formControl);
-        case "regex":
-            {
-                var ref = $formControl.attr("data-validate-ref");
-                var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
-
-                return _hasValue($formControl) && regex.test(_jquery2.default.trim($formControl.val()));
-            }
-        default:
-            console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
-            return true;
-    }
-}
-
-function _hasValue($formControl) {
-    return _jquery2.default.trim($formControl.val()).length > 0;
-}
-
-/**
- * @param {any} value
- * @returns value is valid mail
- */
-function _isMail($formControl) {
-    var mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-
-    return mailRegEx.test($formControl.val());
-}
-
-/**
- * Minimum eight characters, at least one letter and one number
- *
- * @param {any} value
- * @returns value is valid password
- */
-function _isPassword($formControl) {
-    var passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)\S{8,}$/);
-
-    return passwordRegEx.test($formControl.val());
-}
-
-function _compareRef(value, ref) {
-    if ((0, _jquery2.default)(ref).length > 0) {
-        ref = _jquery2.default.trim((0, _jquery2.default)(ref).val());
-    }
-
-    return value === ref;
-}
-
-function _findFormControls($elem) {
-    if ($elem.is("input, select, textarea")) {
-        return $elem;
-    }
-
-    return $elem.find("input, select, textarea");
-}
-
-function _isActive($elem) {
-    return $elem.is(":visible") && $elem.is(":enabled");
-}
-
-function _eval(input) {
-    // eslint-disable-next-line
-    return new Function("return " + input)();
-}
-
-exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
-
-},{"jquery":135}],122:[function(require,module,exports){
-"use strict";
-
-module.exports = function ($) {
-
-    var overlay = {
-        count: 0,
-        isVisible: false
-    };
-
-    return {
-        getOverlay: getOverlay,
-        showWaitScreen: showWaitScreen,
-        hideWaitScreen: hideWaitScreen
-    };
-
-    function getOverlay() {
-        return overlay;
-    }
-
-    function showWaitScreen() {
-        overlay.count = overlay.count || 0;
-        overlay.count++;
-        overlay.isVisible = true;
-    }
-
-    function hideWaitScreen(force) {
-        overlay.count = overlay.count || 0;
-        if (overlay.count > 0) {
-            overlay.count--;
-        }
-
-        if (force) {
-            overlay.count = 0;
-        }
-
-        if (overlay.count <= 0) {
-            overlay.count = 0;
-            overlay.visible = false;
-        }
-    }
-}(jQuery);
-
-},{}],123:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _WishListModule = require("store/modules/WishListModule");
-
-var _WishListModule2 = _interopRequireDefault(_WishListModule);
-
-var _CheckoutModule = require("store/modules/CheckoutModule");
-
-var _CheckoutModule2 = _interopRequireDefault(_CheckoutModule);
-
-var _AddressModule = require("store/modules/AddressModule");
-
-var _AddressModule2 = _interopRequireDefault(_AddressModule);
-
-var _LocalizationModule = require("store/modules/LocalizationModule");
-
-var _LocalizationModule2 = _interopRequireDefault(_LocalizationModule);
-
-var _UserModule = require("store/modules/UserModule");
-
-var _UserModule2 = _interopRequireDefault(_UserModule);
-
-var _NavigationModule = require("store/modules/NavigationModule");
-
-var _NavigationModule2 = _interopRequireDefault(_NavigationModule);
-
-var _ItemListModule = require("store/modules/ItemListModule");
-
-var _ItemListModule2 = _interopRequireDefault(_ItemListModule);
-
-var _SingleItemModule = require("store/modules/SingleItemModule");
-
-var _SingleItemModule2 = _interopRequireDefault(_SingleItemModule);
-
-var _BasketModule = require("store/modules/BasketModule");
-
-var _BasketModule2 = _interopRequireDefault(_BasketModule);
-
-var _OrderReturnModule = require("store/modules/OrderReturnModule");
-
-var _OrderReturnModule2 = _interopRequireDefault(_OrderReturnModule);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.use(require("vue-script2"));
-
-// eslint-disable-next-line
-var store = new Vuex.Store({
-    modules: {
-        wishList: _WishListModule2.default,
-        checkout: _CheckoutModule2.default,
-        address: _AddressModule2.default,
-        localization: _LocalizationModule2.default,
-        user: _UserModule2.default,
-        navigation: _NavigationModule2.default,
-        itemList: _ItemListModule2.default,
-        item: _SingleItemModule2.default,
-        basket: _BasketModule2.default,
-        orderReturn: _OrderReturnModule2.default
-    }
-});
-
-window.ceresStore = store;
-
-exports.default = store;
-
-},{"store/modules/AddressModule":124,"store/modules/BasketModule":125,"store/modules/CheckoutModule":126,"store/modules/ItemListModule":127,"store/modules/LocalizationModule":128,"store/modules/NavigationModule":129,"store/modules/OrderReturnModule":130,"store/modules/SingleItemModule":131,"store/modules/UserModule":132,"store/modules/WishListModule":133,"vue-script2":142}],124:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var state = {
-    billingAddressId: null,
-    billingAddress: null,
-    billingAddressList: [],
-    deliveryAddressId: null,
-    deliveryAddress: null,
-    deliveryAddressList: []
-};
-
-var mutations = {
-    setBillingAddressList: function setBillingAddressList(state, billingAddressList) {
-        if (Array.isArray(billingAddressList)) {
-            state.billingAddressList = billingAddressList;
-        }
-    },
-    selectBillingAddress: function selectBillingAddress(state, billingAddress) {
-        if (billingAddress) {
-            state.billingAddressId = billingAddress.id;
-            state.billingAddress = billingAddress;
-        }
-    },
-    selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
-        if (billingAddressId) {
-            var billingAddress = state.billingAddressList.find(function (address) {
-                return address.id === billingAddressId;
-            });
-
-            if (billingAddress) {
-                state.billingAddressId = billingAddress.id;
-                state.billingAddress = billingAddress;
-            }
-        }
-    },
-    setDeliveryAddressList: function setDeliveryAddressList(state, deliveryAddressList) {
-        if (Array.isArray(deliveryAddressList)) {
-            state.deliveryAddressList = deliveryAddressList;
-        }
-    },
-    selectDeliveryAddress: function selectDeliveryAddress(state, deliveryAddress) {
-        if (deliveryAddress) {
-            state.deliveryAddressId = deliveryAddress.id;
-            state.deliveryAddress = deliveryAddress;
-        }
-    },
-    removeBillingAddress: function removeBillingAddress(state, billingAddress) {
-        var index = state.billingAddressList.indexOf(billingAddress);
-
-        if (index !== -1) {
-            state.billingAddressList.splice(index, 1);
-
-            if (state.billingAddress === billingAddress) {
-                state.billingAddress = null;
-                state.billingAddressId = null;
-            }
-        }
-    },
-    removeDeliveryAddress: function removeDeliveryAddress(state, deliveryAddress) {
-        var index = state.deliveryAddressList.indexOf(deliveryAddress);
-
-        if (index !== -1) {
-            state.deliveryAddressList.splice(index, 1);
-
-            if (state.deliveryAddress === deliveryAddress) {
-                state.deliveryAddress = state.deliveryAddressList.find(function (address) {
-                    return address.id === -99;
-                });
-                state.deliveryAddressId = -99;
-            }
-        }
-    },
-    addBillingAddress: function addBillingAddress(state, _ref) {
-        var billingAddress = _ref.billingAddress,
-            addressIndex = _ref.addressIndex;
-
-        if (billingAddress) {
-            if (addressIndex) {
-                state.billingAddressList.splice(addressIndex, 0, billingAddress);
-            } else {
-                state.billingAddressList.push(billingAddress);
-                state.billingAddressId = billingAddress.id;
-                state.billingAddress = billingAddress;
-            }
-        }
-    },
-    addDeliveryAddress: function addDeliveryAddress(state, _ref2) {
-        var deliveryAddress = _ref2.deliveryAddress,
-            addressIndex = _ref2.addressIndex;
-
-        if (deliveryAddress) {
-            if (addressIndex) {
-                state.deliveryAddressList.splice(addressIndex, 0, deliveryAddress);
-            } else {
-                state.deliveryAddressList.push(deliveryAddress);
-                state.deliveryAddressId = deliveryAddress.id;
-                state.deliveryAddress = deliveryAddress;
-            }
-        }
-    },
-    updateBillingAddress: function updateBillingAddress(state, billingAddress) {
-        if (billingAddress) {
-            var indexToUpdate = state.billingAddressList.findIndex(function (entry) {
-                return entry.id === billingAddress.id;
-            });
-
-            // using this "trick" to trigger the address list to render again
-            state.billingAddressList.splice(indexToUpdate, 1);
-            state.billingAddressList.splice(indexToUpdate, 0, billingAddress);
-
-            if (billingAddress.id === state.billingAddressId) {
-                state.billingAddress = billingAddress;
-            }
-        }
-    },
-    updateDeliveryAddress: function updateDeliveryAddress(state, deliveryAddress) {
-        if (deliveryAddress) {
-            var indexToUpdate = state.deliveryAddressList.findIndex(function (entry) {
-                return entry.id === deliveryAddress.id;
-            });
-
-            // using this "trick" to trigger the address list to render again
-            state.deliveryAddressList.splice(indexToUpdate, 1);
-            state.deliveryAddressList.splice(indexToUpdate, 0, deliveryAddress);
-
-            if (deliveryAddress.id === state.deliveryAddressId) {
-                state.deliveryAddress = deliveryAddress;
-            }
-        }
-    },
-    resetAddress: function resetAddress(state, addressType) {
-        if (addressType === "1") {
-            state.billingAddress = null;
-            state.billingAddressId = null;
-            state.billingAddressList = [];
-        } else if (addressType === "2") {
-            state.deliveryAddressList = [{ id: -99 }];
-            state.deliveryAddress = state.deliveryAddressList[0];
-            state.deliveryAddressId = state.deliveryAddressList[0].id;
-        }
-    }
-};
-
-var actions = {
-    initBillingAddress: function initBillingAddress(_ref3, _ref4) {
-        var commit = _ref3.commit;
-        var id = _ref4.id,
-            addressList = _ref4.addressList;
-
-        commit("setBillingAddressList", addressList);
-        commit("selectBillingAddress", addressList.find(function (address) {
-            return address.id === id;
-        }));
-    },
-    initDeliveryAddress: function initDeliveryAddress(_ref5, _ref6) {
-        var commit = _ref5.commit;
-        var id = _ref6.id,
-            addressList = _ref6.addressList;
-
-        commit("setDeliveryAddressList", addressList);
-        commit("selectDeliveryAddress", addressList.find(function (address) {
-            return address.id === id;
-        }));
-    },
-    selectAddress: function selectAddress(_ref7, _ref8) {
-        var commit = _ref7.commit,
-            state = _ref7.state;
-        var selectedAddress = _ref8.selectedAddress,
-            addressType = _ref8.addressType;
-
-        return new Promise(function (resolve, reject) {
-            var oldAddress = {};
-
-            if (addressType === "1") {
-                oldAddress = state.billingAddress;
-                commit("selectBillingAddress", selectedAddress);
-            } else if (addressType === "2") {
-                oldAddress = state.deliveryAddress;
-                commit("selectDeliveryAddress", selectedAddress);
-            }
-
-            commit("setIsBasketLoading", true);
-
-            _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
-                commit("setIsBasketLoading", false);
-
-                return resolve(response);
-            }).fail(function (error) {
-                if (addressType === "1") {
-                    commit("selectBillingAddress", oldAddress);
-                } else if (addressType === "2") {
-                    commit("selectDeliveryAddress", oldAddress);
-                }
-
-                commit("setIsBasketLoading", false);
-                reject(error);
-            });
-        });
-    },
-    deleteAddress: function deleteAddress(_ref9, _ref10) {
-        var dispatch = _ref9.dispatch,
-            state = _ref9.state,
-            commit = _ref9.commit;
-        var address = _ref10.address,
-            addressType = _ref10.addressType;
-
-        return new Promise(function (resolve, reject) {
-            var addressIndex = -1;
-
-            if (addressType === "1") {
-                addressIndex = state.billingAddressList.indexOf(address);
-                commit("removeBillingAddress", address);
-            } else if (addressType === "2") {
-                addressIndex = state.deliveryAddressList.indexOf(address);
-                commit("removeDeliveryAddress", address);
-            }
-
-            _ApiService2.default.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, { keepOriginalResponse: true }).done(function (response) {
-                if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
-                    var billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
-
-                    commit("selectBillingAddressById", billingAddressId);
-                }
-
-                resolve(response);
-            }).fail(function (error) {
-                if (addressType === "1") {
-                    commit("addBillingAddress", { billingAddress: address, addressIndex: addressIndex });
-                } else if (addressType === "2") {
-                    commit("addDeliveryAddress", { deliveryAddress: address, addressIndex: addressIndex });
-                }
-                reject(error);
-            });
-        });
-    },
-    createAddress: function createAddress(_ref11, _ref12) {
-        var commit = _ref11.commit;
-        var address = _ref12.address,
-            addressType = _ref12.addressType;
-
-        return new Promise(function (resolve, reject) {
-            _ApiService2.default.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
-                if (addressType === "1") {
-                    commit("addBillingAddress", { billingAddress: response });
-                } else if (addressType === "2") {
-                    commit("addDeliveryAddress", { deliveryAddress: response });
-                }
-
-                resolve(response);
-            }).fail(function (error) {
-                reject(error);
-            });
-        });
-    },
-    updateAddress: function updateAddress(_ref13, _ref14) {
-        var commit = _ref13.commit;
-        var address = _ref14.address,
-            addressType = _ref14.addressType;
-
-        return new Promise(function (resolve, reject) {
-            _ApiService2.default.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true, keepOriginalResponse: true }).done(function (response) {
-                if (addressType === "1") {
-                    commit("updateBillingAddress", address);
-
-                    if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
-                        var billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
-
-                        commit("selectBillingAddressById", billingAddressId);
-                    }
-                } else if (addressType === "2") {
-                    commit("updateDeliveryAddress", address);
-                }
-
-                resolve(response);
-            }).fail(function (error) {
-                reject(error);
-            });
-        });
-    }
-};
-
-var getters = {
-    getSelectedAddress: function getSelectedAddress(state) {
-        return function (addressType) {
-            var selectedAddress = void 0;
-
-            if (addressType === "1") {
-                selectedAddress = state.billingAddress;
-            } else if (addressType === "2") {
-                selectedAddress = state.deliveryAddress;
-            }
-
-            return selectedAddress;
-        };
-    },
-
-    getAddressList: function getAddressList(state) {
-        return function (addressType) {
-            var addressList = [];
-
-            if (addressType === "1") {
-                addressList = state.billingAddressList;
-            } else if (addressType === "2") {
-                addressList = state.deliveryAddressList;
-            }
-
-            return addressList;
-        };
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters
-};
-
-},{"services/ApiService":113}],125:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _UrlService = require("../../services/UrlService");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-var state = {
-    data: {},
-    items: [],
-    showNetPrices: false,
-    latestEntry: {
-        item: {},
-        quantity: null
-    },
-    isBasketLoading: false,
-    isBasketInitiallyLoaded: false,
-    basketNotifications: []
-};
-
-var mutations = {
-    setBasket: function setBasket(state, basket) {
-        if (state.data.id && JSON.stringify(basket) !== JSON.stringify(state.data)) {
-            document.dispatchEvent(new CustomEvent("afterBasketChanged", { detail: basket }));
-        }
-
-        state.data = basket;
-    },
-    setBasketItems: function setBasketItems(state, basketItems) {
-        state.items = basketItems;
-    },
-    addBasketItem: function addBasketItem(state, basketItem) {
-        var basketItemIndex = state.items.findIndex(function (item) {
-            return basketItem.id === item.id;
-        });
-
-        if (basketItemIndex !== -1) {
-            state.items.splice(basketItemIndex, 1);
-            state.items.splice(basketItemIndex, 0, basketItem);
-        } else {
-            state.items.push(basketItem);
-        }
-    },
-    addBasketNotification: function addBasketNotification(state, _ref) {
-        var type = _ref.type,
-            message = _ref.message;
-
-        state.basketNotifications.push({ type: type, message: message });
-    },
-    clearOldestNotification: function clearOldestNotification(state) {
-        state.basketNotifications.splice(0, 1);
-    },
-    updateBasketItemQuantity: function updateBasketItemQuantity(state, _ref2) {
-        var basketItem = _ref2.basketItem,
-            quantity = _ref2.quantity;
-
-        var item = state.items.find(function (item) {
-            return basketItem.id === item.id;
-        });
-
-        item.quantity = quantity;
-    },
-    removeBasketItem: function removeBasketItem(state, basketItemId) {
-        state.items = state.items.filter(function (item) {
-            return item.id !== basketItemId;
-        });
-    },
-    setLatestBasketEntry: function setLatestBasketEntry(state, latestBasketEntry) {
-        state.latestEntry = latestBasketEntry;
-    },
-    setCouponCode: function setCouponCode(state, couponCode) {
-        state.data.couponCode = couponCode;
-    },
-    setIsBasketLoading: function setIsBasketLoading(state, isBasketLoading) {
-        state.isBasketLoading = !!isBasketLoading;
-    },
-    setIsBasketInitiallyLoaded: function setIsBasketInitiallyLoaded(state) {
-        state.isBasketInitiallyLoaded = true;
-    },
-    setShowNetPrices: function setShowNetPrices(state, showNetPrices) {
-        state.showNetPrices = showNetPrices;
-    }
-};
-
-var actions = {
-    loadBasketData: function loadBasketData(_ref3) {
-        var commit = _ref3.commit,
-            state = _ref3.state;
-
-        if (state.data.itemQuantity) {
-            _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
-                commit("setBasketItems", basketItems);
-                commit("setIsBasketInitiallyLoaded");
-
-                setTimeout(function () {
-                    $(document.body).trigger("sticky_kit:recalc");
-                }, 0);
-            }).fail(function (error) {
-                if (error.data) {
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
-                }
-            });
-        } else {
-            commit("setIsBasketInitiallyLoaded");
-        }
-
-        _ApiService2.default.listen("AfterBasketChanged", function (data) {
-            commit("setBasket", data.basket);
-            commit("setShowNetPrices", data.showNetPrices);
-            commit("setBasketItems", data.basketItems);
-        });
-    },
-    addBasketNotification: function addBasketNotification(_ref4, _ref5) {
-        var commit = _ref4.commit;
-        var type = _ref5.type,
-            message = _ref5.message;
-
-        commit("addBasketNotification", { type: type, message: message });
-
-        setTimeout(function () {
-            commit("clearOldestNotification");
-        }, 5000);
-    },
-    addBasketItem: function addBasketItem(_ref6, basketItem) {
-        var commit = _ref6.commit;
-
-        return new Promise(function (resolve, reject) {
-            commit("setIsBasketLoading", true);
-
-            basketItem.template = "Ceres::Basket.Basket";
-            _ApiService2.default.post("/rest/io/basket/items/", basketItem).done(function (basketItems) {
-                commit("setBasketItems", basketItems);
-                commit("setIsBasketLoading", false);
-                resolve(basketItems);
-            }).fail(function (error) {
-                commit("setIsBasketLoading", false);
-                reject(error);
-            });
-        });
-    },
-    updateBasketItemQuantity: function updateBasketItemQuantity(_ref7, _ref8) {
-        var commit = _ref7.commit;
-        var basketItem = _ref8.basketItem,
-            quantity = _ref8.quantity;
-
-        return new Promise(function (resolve, reject) {
-            commit("updateBasketItemQuantity", { basketItem: basketItem, quantity: quantity });
-            commit("setIsBasketLoading", true);
-
-            basketItem.template = "Ceres::Basket.Basket";
-            _ApiService2.default.put("/rest/io/basket/items/" + basketItem.id, basketItem).done(function (data) {
-                commit("setBasketItems", data);
-                commit("setIsBasketLoading", false);
-                resolve(data);
-            }).fail(function (error) {
-                commit("setIsBasketLoading", false);
-                reject(error);
-            });
-        });
-    },
-    removeBasketItem: function removeBasketItem(_ref9, basketItemId) {
-        var commit = _ref9.commit;
-
-        return new Promise(function (resolve, reject) {
-            commit("setIsBasketLoading", true);
-
-            _ApiService2.default.delete("/rest/io/basket/items/" + basketItemId, { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
-                commit("setBasketItems", basketItems);
-                commit("setIsBasketLoading", false);
-                resolve(basketItems);
-
-                if (window.location.pathname === "/checkout" && !basketItems.length) {
-                    (0, _UrlService.navigateTo)("/basket");
-                }
-            }).fail(function (error) {
-                commit("setIsBasketLoading", false);
-                reject(error);
-            });
-        });
-    },
-    redeemCouponCode: function redeemCouponCode(_ref10, couponCode) {
-        var state = _ref10.state,
-            commit = _ref10.commit;
-
-        return new Promise(function (resolve, reject) {
-            commit("setIsBasketLoading", true);
-
-            _ApiService2.default.post("/rest/io/coupon", { couponCode: couponCode }, { supressNotifications: true }).done(function (data) {
-                commit("setCouponCode", couponCode);
-                commit("setIsBasketLoading", false);
-                resolve(data);
-            }).fail(function (error) {
-                commit("setIsBasketLoading", false);
-                reject(error);
-            });
-        });
-    },
-    removeCouponCode: function removeCouponCode(_ref11, couponCode) {
-        var state = _ref11.state,
-            commit = _ref11.commit;
-
-        return new Promise(function (resolve, reject) {
-            commit("setIsBasketLoading", true);
-
-            _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (data) {
-                commit("setCouponCode", null);
-                commit("setIsBasketLoading", false);
-                resolve(data);
-            }).fail(function (error) {
-                commit("setIsBasketLoading", false);
-                reject(error);
-            });
-        });
-    },
-    refreshBasket: function refreshBasket(_ref12) {
-        var commit = _ref12.commit;
-
-        return new Promise(function (resolve, reject) {
-            _ApiService2.default.get("/rest/io/basket/").done(function (basket) {
-                commit("setBasket", basket);
-                resolve(basket);
-            }).fail(function (error) {
-                reject(error);
-            });
-        });
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions
-};
-
-},{"../../services/UrlService":120,"services/ApiService":113,"services/NotificationService":118,"services/TranslationService":119}],126:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var state = {
-    shipping: {
-        shippingProfileId: null,
-        shippingProfileList: []
-    },
-    payment: {
-        methodOfPaymentId: null,
-        methodOfPaymentList: []
-    },
-    contactWish: null,
-    shippingPrivacyHintAccepted: false,
-    validation: {
-        gtc: {
-            showError: false,
-            validate: null
-        },
-        invoiceAddress: {
-            showError: false,
-            validate: null
-        },
-        paymentProvider: {
-            showError: false,
-            validate: null
-        },
-        shippingProfile: {
-            showError: false,
-            validate: null
-        }
-    }
-};
-
-var mutations = {
-    setShippingProfile: function setShippingProfile(state, shippingProfileId) {
-        if (shippingProfileId) {
-            state.shipping.shippingProfileId = shippingProfileId;
-        }
-    },
-    setShippingProfileList: function setShippingProfileList(state, shippingProfileList) {
-        if (Array.isArray(shippingProfileList)) {
-            state.shipping.shippingProfileList = shippingProfileList;
-        }
-    },
-    setMethodOfPayment: function setMethodOfPayment(state, methodOfPaymentId) {
-        if (methodOfPaymentId) {
-            state.payment.methodOfPaymentId = methodOfPaymentId;
-        }
-    },
-    setMethodOfPaymentList: function setMethodOfPaymentList(state, methodOfPaymentList) {
-        if (Array.isArray(methodOfPaymentList)) {
-            state.payment.methodOfPaymentList = methodOfPaymentList;
-        }
-    },
-    setContactWish: function setContactWish(state, contactWish) {
-        state.contactWish = contactWish;
-    },
-    setShippingPrivacyHintAccepted: function setShippingPrivacyHintAccepted(state, value) {
-        state.shippingPrivacyHintAccepted = value;
-    },
-    setPaymentProviderValidator: function setPaymentProviderValidator(state, paymentProviderValidator) {
-        state.validation.paymentProvider.validate = paymentProviderValidator;
-    },
-    setPaymentProviderShowError: function setPaymentProviderShowError(state, showError) {
-        state.validation.paymentProvider.showError = showError;
-    },
-    setShippingProfileValidator: function setShippingProfileValidator(state, shippingProfileValidator) {
-        state.validation.shippingProfile.validate = shippingProfileValidator;
-    },
-    setShippingProfileShowError: function setShippingProfileShowError(state, showError) {
-        state.validation.shippingProfile.showError = showError;
-    },
-    setGtcValidator: function setGtcValidator(state, gtcValidator) {
-        state.validation.gtc.validate = gtcValidator;
-    },
-    setGtcShowError: function setGtcShowError(state, showError) {
-        state.validation.gtc.showError = showError;
-    },
-    setInvoiceAddressValidator: function setInvoiceAddressValidator(state, invoiceAddressValidator) {
-        state.validation.invoiceAddress.validate = invoiceAddressValidator;
-    },
-    setInvoiceAddressShowError: function setInvoiceAddressShowError(state, showError) {
-        state.validation.invoiceAddress.showError = showError;
-    }
-};
-
-var actions = {
-    setCheckout: function setCheckout(_ref, checkout) {
-        var commit = _ref.commit;
-
-        commit("setShippingCountryId", checkout.shippingCountryId);
-        commit("setShippingProfile", checkout.shippingProfileId);
-        commit("setShippingProfileList", checkout.shippingProfileList);
-        commit("setMethodOfPaymentList", checkout.paymentDataList);
-        commit("setMethodOfPayment", checkout.methodOfPaymentId);
-    },
-    selectMethodOfPayment: function selectMethodOfPayment(_ref2, methodOfPaymentId) {
-        var commit = _ref2.commit,
-            dispatch = _ref2.dispatch;
-
-        return new Promise(function (resolve, reject) {
-            var oldMethodOfPayment = state.payment.methodOfPaymentId;
-
-            commit("setIsBasketLoading", true);
-            commit("setMethodOfPayment", methodOfPaymentId);
-
-            _ApiService2.default.post("/rest/io/checkout/paymentId/", { paymentId: methodOfPaymentId }).done(function (response) {
-                commit("setIsBasketLoading", false);
-                resolve(response);
-            }).fail(function (error) {
-                commit("setIsBasketLoading", false);
-                commit("setMethodOfPayment", oldMethodOfPayment);
-                reject(error);
-            });
-        });
-    },
-    selectShippingProfile: function selectShippingProfile(_ref3, shippingProfile) {
-        var commit = _ref3.commit,
-            dispatch = _ref3.dispatch;
-
-        return new Promise(function (resolve, reject) {
-            var oldShippingProfile = state.shipping.shippingProfileId;
-
-            commit("setIsBasketLoading", true);
-            commit("setShippingProfile", shippingProfile.parcelServicePresetId);
-
-            _ApiService2.default.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId }).done(function (response) {
-                commit("setIsBasketLoading", false);
-                resolve(response);
-            }).fail(function (error) {
-                commit("setIsBasketLoading", false);
-                commit("setShippingProfile", oldShippingProfile);
-                reject(error);
-            });
-        });
-    },
-    refreshCheckout: function refreshCheckout(_ref4) {
-        var commit = _ref4.commit,
-            dispatch = _ref4.dispatch;
-
-        return new Promise(function (resolve, reject) {
-            _ApiService2.default.get("/rest/io/checkout/").done(function (checkout) {
-                dispatch("setCheckout", checkout);
-                resolve(checkout);
-            }).fail(function (error) {
-                reject(error);
-            });
-        });
-    }
-};
-
-var getters = {};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters
-};
-
-},{"services/ApiService":113}],127:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-var _ItemListUrlService = require("services/ItemListUrlService");
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var state = {
-    facets: [],
-    selectedFacets: [],
-    page: null,
-    sorting: "texts.name1_asc",
-    isLoading: false,
-    itemsPerPage: null,
-    searchString: null,
-    items: [],
-    totalItems: null
-};
-
-var mutations = {
-    setFacets: function setFacets(state, facets) {
-        state.facets = facets || [];
-    },
-    setPriceFacet: function setPriceFacet(state, _ref) {
-        var priceMin = _ref.priceMin,
-            priceMax = _ref.priceMax;
-
-        var priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
-        var priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
-
-        var priceFacet = {
-            id: "price",
-            priceMin: priceMin,
-            priceMax: priceMax
-        };
-
-        if (!priceMax.length) {
-            priceFacet.name = _TranslationService2.default.translate("Ceres::Template.itemFrom") + priceMinFormatted;
-        } else if (!priceMin.length) {
-            priceFacet.name = _TranslationService2.default.translate("Ceres::Template.itemTo") + priceMaxFormatted;
-        } else {
-            priceFacet.name = priceMinFormatted + " - " + priceMaxFormatted;
-        }
-
-        state.facets.find(function (facet) {
-            return facet.type === "price";
-        }).values[0] = priceFacet;
-    },
-    setPriceFacetTag: function setPriceFacetTag(state) {
-        var priceFacet = state.facets.find(function (facet) {
-            return facet.type === "price";
-        }).values[0];
-        var selectedPriceFacet = state.selectedFacets.find(function (facet) {
-            return facet.id === "price";
-        });
-
-        if (selectedPriceFacet) {
-            Object.assign(selectedPriceFacet, priceFacet);
-        } else {
-            state.selectedFacets.push(priceFacet);
-        }
-    },
-    removePriceFacet: function removePriceFacet(state) {
-        state.selectedFacets = state.selectedFacets.filter(function (facet) {
-            return facet.id !== "price";
-        });
-    },
-    setSelectedFacetsByIds: function setSelectedFacetsByIds(state, selectedFacetIds) {
-        var selectedFacets = [];
-
-        if (selectedFacetIds.length > 0) {
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = state.facets[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var facet = _step.value;
-
-                    selectedFacets = selectedFacets.concat(facet.values.filter(function (facetValue) {
-                        return selectedFacetIds.some(function (facetId) {
-                            return facetId === facetValue.id + "";
-                        });
-                    }));
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-        }
-
-        state.selectedFacets = selectedFacets;
-    },
-    toggleSelectedFacet: function toggleSelectedFacet(state, facetValue) {
-        if (!state.selectedFacets.find(function (selectedFacet) {
-            return selectedFacet.id === facetValue.id;
-        })) {
-            state.selectedFacets.push(facetValue);
-        } else {
-            state.selectedFacets = state.selectedFacets.filter(function (selectedFacet) {
-                return selectedFacet.id !== facetValue.id;
-            });
-        }
-    },
-    setItemListPage: function setItemListPage(state, page) {
-        state.page = page;
-    },
-    setItemListSorting: function setItemListSorting(state, sorting) {
-        state.sorting = sorting;
-    },
-    setItemsPerPage: function setItemsPerPage(state, itemsPerPage) {
-        state.itemsPerPage = itemsPerPage;
-    },
-    setIsItemListLoading: function setIsItemListLoading(state, isLoading) {
-        state.isLoading = isLoading;
-    },
-    setItemListSearchString: function setItemListSearchString(state, searchString) {
-        state.searchString = searchString;
-    },
-    setItemListItems: function setItemListItems(state, items) {
-        state.items = items;
-    },
-    setItemListTotalItems: function setItemListTotalItems(state, totalItems) {
-        state.totalItems = totalItems;
-    }
-};
-
-var actions = {
-    selectFacet: function selectFacet(_ref2, facetValue) {
-        var dispatch = _ref2.dispatch,
-            commit = _ref2.commit;
-
-        if (facetValue.id === "price") {
-            commit("removePriceFacet");
-        } else {
-            commit("toggleSelectedFacet", facetValue);
-        }
-
-        commit("setItemListPage", 1);
-
-        dispatch("retrieveItemList");
-    },
-    selectPriceFacet: function selectPriceFacet(_ref3, _ref4) {
-        var dispatch = _ref3.dispatch,
-            commit = _ref3.commit;
-        var priceMin = _ref4.priceMin,
-            priceMax = _ref4.priceMax;
-
-        commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
-        commit("setPriceFacetTag");
-        commit("setItemListPage", 1);
-
-        dispatch("retrieveItemList");
-    },
-    selectItemListPage: function selectItemListPage(_ref5, page) {
-        var dispatch = _ref5.dispatch,
-            commit = _ref5.commit;
-
-        commit("setItemListPage", page);
-
-        dispatch("retrieveItemList");
-    },
-    selectItemListSorting: function selectItemListSorting(_ref6, sorting) {
-        var dispatch = _ref6.dispatch,
-            commit = _ref6.commit;
-
-        commit("setItemListSorting", sorting);
-        commit("setItemListPage", 1);
-
-        dispatch("retrieveItemList");
-    },
-    selectItemsPerPage: function selectItemsPerPage(_ref7, itemsPerPage) {
-        var dispatch = _ref7.dispatch,
-            commit = _ref7.commit;
-
-        commit("setItemsPerPage", itemsPerPage);
-        commit("setItemListPage", 1);
-
-        dispatch("retrieveItemList");
-    },
-    searchItems: function searchItems(_ref8, searchString) {
-        var dispatch = _ref8.dispatch,
-            commit = _ref8.commit;
-
-        commit("setItemListSearchString", searchString);
-        commit("setItemListPage", 1);
-        commit("setSelectedFacetsByIds", []);
-
-        dispatch("retrieveItemList");
-    },
-    retrieveItemList: function retrieveItemList(_ref9) {
-        var state = _ref9.state,
-            dispatch = _ref9.dispatch,
-            commit = _ref9.commit,
-            getters = _ref9.getters,
-            rootState = _ref9.rootState;
-
-        return new Promise(function (resolve, reject) {
-            var selectedPriceFacet = state.selectedFacets.find(function (facet) {
-                return facet.id === "price";
-            });
-
-            var searchParams = {
-                query: state.searchString,
-                items: state.itemsPerPage,
-                sorting: state.sorting,
-                page: state.page,
-                facets: getters.selectedFacetIdsForUrl.toString(),
-                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                template: "Ceres::ItemList.ItemListView"
-            };
-            var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
-
-            (0, _ItemListUrlService.updateItemListUrlParams)(searchParams);
-            commit("setIsItemListLoading", true);
-
-            _ApiService2.default.get(url, searchParams).done(function (data) {
-                commit("setItemListItems", data.itemList.documents);
-                commit("setItemListTotalItems", data.itemList.total);
-                commit("setFacets", data.facets);
-                commit("setIsItemListLoading", false);
-                resolve(data);
-            }).fail(function (error) {
-                commit("setIsItemListLoading", false);
-                reject(error);
-            });
-        });
-    }
-};
-
-var getters = {
-    selectedFacetIds: function selectedFacetIds(state) {
-        var selectedFacetIds = [];
-
-        state.selectedFacets.every(function (facet) {
-            return selectedFacetIds.push(facet.id);
-        });
-
-        return selectedFacetIds;
-    },
-    selectedFacetIdsForUrl: function selectedFacetIdsForUrl(state) {
-        var selectedFacetIds = [];
-
-        state.selectedFacets.every(function (facet) {
-            return selectedFacetIds.push(facet.id);
-        });
-
-        return selectedFacetIds.filter(function (facet) {
-            return facet !== "price";
-        });
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters
-};
-
-},{"services/ApiService":113,"services/ItemListUrlService":116,"services/TranslationService":119}],128:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var state = {
-    shippingCountries: [],
-    shippingCountryId: null
-};
-
-var mutations = {
-    setShippingCountries: function setShippingCountries(state, shippingCountries) {
-        state.shippingCountries = shippingCountries;
-    },
-    setShippingCountryId: function setShippingCountryId(state, shippingCountryId) {
-        if (shippingCountryId !== state.shippingCountryId) {
-            document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", { detail: shippingCountryId }));
-        }
-
-        state.shippingCountryId = shippingCountryId;
-    }
-};
-
-var actions = {
-    initLocalization: function initLocalization(_ref, _ref2) {
-        var commit = _ref.commit;
-        var localizationData = _ref2.localizationData;
-
-        commit("setShippingCountries", localizationData.activeShippingCountries);
-        commit("setShippingCountryId", localizationData.currentShippingCountryId);
-    },
-    selectShippingCountry: function selectShippingCountry(_ref3, shippingCountryId) {
-        var commit = _ref3.commit,
-            state = _ref3.state;
-
-        return new Promise(function (resolve, reject) {
-            var oldShippingCountryId = state.shippingCountryId;
-
-            commit("setShippingCountryId", shippingCountryId);
-            _ApiService2.default.post("/rest/io/shipping/country", { shippingCountryId: shippingCountryId }).done(function (data) {
-                resolve(data);
-            }).fail(function (error) {
-                commit("removeWishListId", oldShippingCountryId);
-                reject(error);
-            });
-        });
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions
-};
-
-},{"services/ApiService":113}],129:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _CategoryService = require("services/CategoryService");
-
-var state = {
-    tree: [],
-    currentCategory: null
-};
-
-var mutations = {
-    setNavigationTree: function setNavigationTree(state, navigationTree) {
-        state.tree = navigationTree;
-    },
-    setCurrentCategory: function setCurrentCategory(state, category) {
-        state.currentCategory = category;
-    }
-};
-
-var actions = {
-    initNavigationTree: function initNavigationTree(_ref, navigationTree) {
-        var dispatch = _ref.dispatch,
-            commit = _ref.commit;
-
-        if (navigationTree) {
-            dispatch("buildNavigationTreeItem", { navigationTree: navigationTree });
-        }
-
-        commit("setNavigationTree", navigationTree);
-    },
-    buildNavigationTreeItem: function buildNavigationTreeItem(_ref2, _ref3) {
-        var state = _ref2.state,
-            commit = _ref2.commit,
-            dispatch = _ref2.dispatch;
-        var navigationTree = _ref3.navigationTree,
-            parent = _ref3.parent;
-
-        var showChildren = false;
-
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = navigationTree[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var category = _step.value;
-
-                category.parent = parent;
-
-                // hide category if there is no translation
-                if (!category.details[0]) {
-                    category.hideCategory = true;
-                } else {
-                    var parentUrl = parent ? parent.url : "";
-
-                    category.url = parentUrl + "/" + category.details[0].nameUrl;
-                    showChildren = true;
-
-                    if (category.children) {
-                        dispatch("buildNavigationTreeItem", { navigationTree: category.children, parent: category });
-                    }
-                }
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
-
-        if (parent) {
-            parent.showChildren = showChildren;
-        }
-    },
-    selectCategory: function selectCategory(_ref4, _ref5) {
-        var state = _ref4.state,
-            commit = _ref4.commit,
-            dispatch = _ref4.dispatch;
-        var category = _ref5.category,
-            categoryId = _ref5.categoryId,
-            withReload = _ref5.withReload;
-
-        if (category) {
-            commit("setCurrentCategory", category);
-        } else if (categoryId) {
-            dispatch("setCurrentCategoryById", { categoryId: categoryId });
-        }
-
-        if (!withReload) {
-            (0, _CategoryService.updateCategoryHtml)();
-
-            commit("setItemListPage", 1);
-            commit("setSelectedFacetsByIds", []);
-
-            dispatch("retrieveItemList");
-        }
-    },
-    setCurrentCategoryById: function setCurrentCategoryById(_ref6, _ref7) {
-        var state = _ref6.state,
-            commit = _ref6.commit,
-            dispatch = _ref6.dispatch;
-        var categoryId = _ref7.categoryId,
-            categories = _ref7.categories;
-
-        categories = categories || state.tree;
-
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-            for (var _iterator2 = categories[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var category = _step2.value;
-
-                if (category.id === categoryId) {
-                    commit("setCurrentCategory", category);
-                    return;
-                } else if (category.children) {
-                    dispatch("setCurrentCategoryById", { categoryId: categoryId, categories: category.children });
-                }
-            }
-        } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
-                }
-            } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
-                }
-            }
-        }
-    }
-};
-
-var getters = {
-    breadcrumbs: function breadcrumbs(state) {
-        var breadcrumbs = [];
-
-        if (state.currentCategory) {
-            var currentIteration = state.currentCategory;
-
-            while (currentIteration) {
-                breadcrumbs.unshift(currentIteration);
-                currentIteration = currentIteration.parent;
-            }
-        }
-
-        return breadcrumbs;
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters
-};
-
-},{"services/CategoryService":114}],130:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var state = {
-    orderData: {},
-    orderReturnItems: [],
-    orderReturnNote: ""
-};
-
-var mutations = {
-    setOrderReturnData: function setOrderReturnData(state, orderData) {
-        orderData.order.orderItems = orderData.order.orderItems.filter(function (orderItem) {
-            return orderItem.quantity !== 0;
-        });
-
-        state.orderData = orderData;
-    },
-    updateOrderReturnItems: function updateOrderReturnItems(state, _ref) {
-        var quantity = _ref.quantity,
-            orderItem = _ref.orderItem;
-
-        if (quantity <= orderItem.quantity) {
-            var orderItemIndex = state.orderReturnItems.findIndex(function (entry) {
-                return entry.orderItem.itemVariationId === orderItem.itemVariationId;
-            });
-
-            if (quantity !== 0) {
-                if (orderItemIndex === -1) {
-                    state.orderReturnItems.push({ quantity: quantity, orderItem: orderItem });
-                } else {
-                    state.orderReturnItems.splice(orderItemIndex, 1);
-                    state.orderReturnItems.splice(orderItemIndex, 0, { quantity: quantity, orderItem: orderItem });
-                }
-            } else {
-                state.orderReturnItems.splice(orderItemIndex, 1);
-            }
-        }
-    },
-    updateOrderReturnNote: function updateOrderReturnNote(state, orderReturnNote) {
-        state.orderReturnNote = orderReturnNote;
-    }
-};
-
-var actions = {
-    sendOrderReturn: function sendOrderReturn(_ref2) {
-        var state = _ref2.state;
-
-        return new Promise(function (resolve, reject) {
-            if (state.orderReturnItems.length > 0) {
-                var variationIds = {};
-
-                for (var index in state.orderReturnItems) {
-                    variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
-                }
-
-                _ApiService2.default.post("/rest/io/order/return", { orderId: state.orderData.order.id, variationIds: variationIds, returnNote: state.orderReturnNote }).done(function (data) {
-                    resolve(data);
-                }).fail(function (error) {
-                    reject(error);
-                });
-            } else {
-                reject();
-            }
-        });
-    }
-};
-
-var getters = {
-    getOrderItemImage: function getOrderItemImage(state) {
-        return function (orderItemId) {
-            return state.orderData.itemImages[orderItemId];
-        };
-    },
-
-    getOrderItemURL: function getOrderItemURL(state) {
-        return function (orderItemId) {
-            return state.orderData.itemURLs[orderItemId];
-        };
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters
-};
-
-},{"services/ApiService":113}],131:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var state = {
-    variation: {},
-    variationList: [],
-    variationOrderQuantity: 1,
-    variationMarkInvalidProperties: false
-};
-
-var mutations = {
-    setVariation: function setVariation(state, variation) {
-        state.variation = variation;
-        if (variation.documents.length > 0 && variation.documents[0].data.variation) {
-            state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
-        }
-    },
-    setVariationList: function setVariationList(state, variationList) {
-        state.variationList = variationList;
-    },
-    setVariationOrderProperty: function setVariationOrderProperty(state, _ref) {
-        var propertyId = _ref.propertyId,
-            value = _ref.value;
-
-        var index = state.variation.documents[0].data.properties.findIndex(function (property) {
-            return property.property.id === propertyId;
-        });
-
-        if (index >= 0) {
-            Vue.set(state.variation.documents[0].data.properties[index], "property", _extends({}, state.variation.documents[0].data.properties[index].property, {
-                value: value
-            }));
-        }
-    },
-    setVariationOrderQuantity: function setVariationOrderQuantity(state, quantity) {
-        state.variationOrderQuantity = quantity;
-    },
-    setVariationMarkInvalidProps: function setVariationMarkInvalidProps(state, markFields) {
-        state.variationMarkInvalidProperties = !!markFields;
-    }
-};
-
-var actions = {};
-
-var getters = {
-    variationPropertySurcharge: function variationPropertySurcharge(state) {
-        if (!state || !state.variation.documents) {
-            return 0;
-        }
-
-        var sum = 0;
-
-        if (state.variation.documents[0].data.properties) {
-            var addedProperties = state.variation.documents[0].data.properties.filter(function (property) {
-                return !!property.property.value;
-            });
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = addedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var property = _step.value;
-
-                    sum += property.surcharge || property.property.surcharge;
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-        }
-
-        return sum;
-    },
-    variationGraduatedPrice: function variationGraduatedPrice(state) {
-        if (!state || !state.variation.documents) {
-            return null;
-        }
-
-        var calculatedPrices = state.variation.documents[0].data.prices;
-        var graduatedPrices = calculatedPrices.graduatedPrices;
-
-        var returnPrice = void 0;
-
-        if (graduatedPrices && graduatedPrices[0]) {
-            var prices = graduatedPrices.filter(function (price) {
-                return parseFloat(state.variationOrderQuantity) >= price.minimumOrderQuantity;
-            });
-
-            if (prices[0]) {
-                returnPrice = prices.reduce(function (prev, current) {
-                    return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
-                });
-                // returnPrice = returnPrice.unitPrice.value;
-            }
-        }
-
-        return returnPrice || calculatedPrices.default;
-    },
-    variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
-        var graduatedPrice = getters.variationGraduatedPrice;
-
-        return getters.variationPropertySurcharge + (graduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0);
-    },
-    variationGroupedProperties: function variationGroupedProperties(state) {
-        if (!state || !state.variation.documents) {
-            return [];
-        }
-
-        if (state.variation.documents[0].data.properties) {
-            var orderPropertyList = state.variation.documents[0].data.properties.filter(function (property) {
-                return property.property.isShownOnItemPage && property.property.isOderProperty;
-            });
-            var groupIds = [].concat(_toConsumableArray(new Set(orderPropertyList.map(function (property) {
-                return property.group && property.group.id;
-            }))));
-            var groups = [];
-
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
-
-            try {
-                var _loop = function _loop() {
-                    var id = _step2.value;
-
-                    var groupProperties = orderPropertyList.filter(function (property) {
-                        return property.group === id || property.group && property.group.id === id;
-                    });
-
-                    groups.push({
-                        touched: false,
-                        group: groupProperties[0].group,
-                        properties: groupProperties.map(function (property) {
-                            return _extends({}, property.property, { itemSurcharge: property.surcharge });
-                        })
-                    });
-                };
-
-                for (var _iterator2 = groupIds[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    _loop();
-                }
-            } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                        _iterator2.return();
-                    }
-                } finally {
-                    if (_didIteratorError2) {
-                        throw _iteratorError2;
-                    }
-                }
-            }
-
-            return groups;
-        }
-
-        return [];
-    },
-    variationMissingProperties: function variationMissingProperties(state, getters) {
-        if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.item.requireOrderProperties) {
-            var missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
-                // selection isn't supported yet
-                return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
-            });
-
-            if (missingProperties.length) {
-                var radioInformation = state.variation.documents[0].data.properties.map(function (property) {
-                    if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty") {
-                        return {
-                            groupId: property.group.id,
-                            propertyId: property.property.id,
-                            hasValue: !!property.property.value
-                        };
-                    }
-                    return null;
-                });
-
-                radioInformation = [].concat(_toConsumableArray(new Set(radioInformation.filter(function (id) {
-                    return id;
-                }))));
-
-                var radioIdsToRemove = [];
-
-                var _arr = [].concat(_toConsumableArray(new Set(radioInformation.map(function (radio) {
-                    return radio.groupId;
-                }))));
-
-                var _loop2 = function _loop2() {
-                    var radioGroupId = _arr[_i];
-                    var radioGroupToClean = radioInformation.find(function (radio) {
-                        return radio.groupId === radioGroupId && radio.hasValue;
-                    });
-
-                    if (radioGroupToClean) {
-                        var _iteratorNormalCompletion3 = true;
-                        var _didIteratorError3 = false;
-                        var _iteratorError3 = undefined;
-
-                        try {
-                            for (var _iterator3 = radioInformation.filter(function (radio) {
-                                return radio.groupId === radioGroupToClean.groupId && !radio.hasValue;
-                            })[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                                var radio = _step3.value;
-
-                                radioIdsToRemove.push(radio.propertyId);
-                            }
-                        } catch (err) {
-                            _didIteratorError3 = true;
-                            _iteratorError3 = err;
-                        } finally {
-                            try {
-                                if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                                    _iterator3.return();
-                                }
-                            } finally {
-                                if (_didIteratorError3) {
-                                    throw _iteratorError3;
-                                }
-                            }
-                        }
-                    }
-                };
-
-                for (var _i = 0; _i < _arr.length; _i++) {
-                    _loop2();
-                }
-
-                missingProperties = missingProperties.filter(function (property) {
-                    return !radioIdsToRemove.includes(property.property.id);
-                });
-            }
-
-            return missingProperties;
-        }
-
-        return [];
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters
-};
-
-},{}],132:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var state = {
-    userData: null
-};
-
-var mutations = {
-    setUserData: function setUserData(state, userData) {
-        state.userData = userData;
-    }
-};
-
-var getters = {
-    username: function username(state) {
-        var username = "";
-
-        if (state.userData) {
-            if (state.userData.firstName.length > 0 && state.userData.lastName.length > 0) {
-                username = state.userData.firstName + " " + state.userData.lastName;
-            } else {
-                username = state.userData.options[0].value;
-            }
-        }
-
-        return username;
-    },
-
-
-    isLoggedIn: function isLoggedIn(state) {
-        return state.userData && state.userData.id > 0;
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    getters: getters
-};
-
-},{}],133:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var state = {
-    wishListIds: [],
-    wishListItems: []
-};
-
-var mutations = {
-    setWishListItems: function setWishListItems(state, wishListItems) {
-        state.wishListItems = wishListItems;
-    },
-    setWishListIds: function setWishListIds(state, wishListIds) {
-        state.wishListIds = wishListIds.map(Number);
-    },
-    removeWishListItem: function removeWishListItem(state, wishListItem) {
-        state.wishListItems = state.wishListItems.filter(function (item) {
-            return item !== wishListItem;
-        });
-    },
-    removeWishListId: function removeWishListId(state, id) {
-        state.wishListIds = state.wishListIds.filter(function (wishListId) {
-            return wishListId !== id;
-        });
-    },
-    addWishListItemToIndex: function addWishListItemToIndex(state, wishListItem, index) {
-        state.wishListItems.splice(index, 0, wishListItem);
-    },
-    addWishListId: function addWishListId(state, id) {
-        state.wishListIds.push(id);
-    }
-};
-
-var actions = {
-    initWishListItems: function initWishListItems(_ref, ids) {
-        var commit = _ref.commit;
-
-        return new Promise(function (resolve, reject) {
-            if (ids && ids[0]) {
-                commit("setWishListIds", ids);
-
-                _ApiService2.default.get("/rest/io/variations/", { variationIds: ids, template: "Ceres::WishList.WishList" }).done(function (data) {
-                    commit("setWishListItems", data.documents);
-                    resolve(data);
-                }).fail(function (error) {
-                    reject(error);
-                });
-            } else {
-                resolve();
-            }
-        });
-    },
-    removeWishListItem: function removeWishListItem(_ref2, _ref3) {
-        var commit = _ref2.commit;
-        var id = _ref3.id,
-            wishListItem = _ref3.wishListItem,
-            index = _ref3.index;
-
-        return new Promise(function (resolve, reject) {
-            if (wishListItem) {
-                commit("removeWishListItem", wishListItem);
-            }
-
-            _ApiService2.default.delete("/rest/io/itemWishList/" + id).done(function (data) {
-                commit("removeWishListId", id);
-                resolve(data);
-            }).fail(function (error) {
-                if (index) {
-                    commit("addWishListItemToIndex", wishListItem, index);
-                }
-                reject(error);
-            });
-        });
-    },
-    addToWishList: function addToWishList(_ref4, id) {
-        var commit = _ref4.commit;
-
-        return new Promise(function (resolve, reject) {
-            commit("addWishListId", id);
-            _ApiService2.default.post("/rest/io/itemWishList", { variationId: id }).done(function (data) {
-                resolve(data);
-            }).fail(function (error) {
-                commit("removeWishListId", id);
-                reject(error);
-            });
-        });
-    }
-};
-
-var getters = {
-    wishListCount: function wishListCount(state) {
-        return state.wishListIds.length;
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters
-};
-
-},{"services/ApiService":113}],134:[function(require,module,exports){
 (function (process){
 function detect() {
   var nodeVersion = getNodeVersion();
@@ -11464,7 +429,6 @@ function getBrowserRules() {
     [ 'yandexbrowser', /YaBrowser\/([0-9\._]+)/ ],
     [ 'vivaldi', /Vivaldi\/([0-9\.]+)/ ],
     [ 'kakaotalk', /KAKAOTALK\s([0-9\.]+)/ ],
-    [ 'samsung', /SamsungBrowser\/([0-9\.]+)/ ],
     [ 'chrome', /(?!Chrom.*OPR)Chrom(?:e|ium)\/([0-9\.]+)(:?\s|$)/ ],
     [ 'phantomjs', /PhantomJS\/([0-9\.]+)(:?\s|$)/ ],
     [ 'crios', /CriOS\/([0-9\.]+)(:?\s|$)/ ],
@@ -11532,7 +496,7 @@ module.exports = {
 
 }).call(this,require('_process'))
 
-},{"_process":138,"os":136}],135:[function(require,module,exports){
+},{"_process":5,"os":3}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -21898,7 +10862,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],136:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -21949,7 +10913,7 @@ exports.homedir = function () {
 	return '/'
 };
 
-},{}],137:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -24482,7 +13446,7 @@ return Popper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],138:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -24668,7 +13632,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],139:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -24693,14 +13657,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],140:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],141:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -25291,7 +14255,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./support/isBuffer":140,"_process":138,"inherits":139}],142:[function(require,module,exports){
+},{"./support/isBuffer":7,"_process":5,"inherits":6}],9:[function(require,module,exports){
 /*!
   * vue-script2 v2.0.1
   * (c) 2016-2017 Greg Slepak
@@ -25436,7 +14400,11090 @@ function hasOwnProperty(obj, prop) {
   return Script2;
 
 }));
-},{}]},{},[111,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,29,30,31,32,26,27,28,33,34,35,36,37,38,39,40,41,42,43,44,52,53,54,55,45,46,47,48,50,49,51,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,105,106,104,107,108,109,110,123,124,125,126,127,128,129,130,131,132,133])
+},{}],10:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var ModalService = require("services/ModalService");
+
+Vue.component("add-item-to-basket-overlay", {
+
+    delimiters: ["${", "}"],
+
+    props: ["basketAddInformation", "template"],
+
+    data: function data() {
+        return {
+            currency: "",
+            price: 0,
+            timeToClose: 0,
+            timerVar: null
+        };
+    },
+
+
+    computed: _extends({
+        isLastBasketEntrySet: function isLastBasketEntrySet() {
+            return Object.keys(this.latestBasketEntry.item).length !== 0;
+        },
+        itemName: function itemName() {
+            if (this.isLastBasketEntrySet) {
+                return this.$options.filters.itemName(this.latestBasketEntry.item);
+            }
+
+            return "";
+        },
+        imageUrl: function imageUrl() {
+            if (this.isLastBasketEntrySet) {
+                var images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
+                var img = this.$options.filters.itemImage(images);
+
+                return img;
+            }
+
+            return "";
+        }
+    }, Vuex.mapState({
+        latestBasketEntry: function latestBasketEntry(state) {
+            return state.basket.latestEntry;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    watch: {
+        latestBasketEntry: function latestBasketEntry() {
+            if (this.basketAddInformation === "overlay") {
+                this.setPriceFromData();
+
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+
+                this.startCounter();
+            } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
+                setTimeout(function () {
+                    var vueApp = document.querySelector("#vue-app");
+                    var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
+
+                    if (vueApp) {
+                        vueApp.classList.add(basketOpenClass);
+                    }
+                }, 1);
+            }
+        }
+    },
+
+    methods: {
+        setPriceFromData: function setPriceFromData() {
+            if (this.latestBasketEntry.item.prices) {
+                this.currency = this.latestBasketEntry.item.prices.default.currency;
+                var graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
+                var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
+
+                this.price = graduatedPrice + propertySurcharge;
+            }
+        },
+        closeOverlay: function closeOverlay() {
+            if (this.timerVar) {
+                clearInterval(this.timerVar);
+            }
+        },
+        startCounter: function startCounter() {
+            var _this = this;
+
+            if (this.timerVar) {
+                clearInterval(this.timerVar);
+            }
+
+            this.timeToClose = 10;
+
+            this.timerVar = setInterval(function () {
+                _this.timeToClose -= 1;
+
+                if (_this.timeToClose === 0) {
+                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
+
+                    clearInterval(_this.timerVar);
+                }
+            }, 1000);
+        }
+    }
+});
+
+},{"services/ModalService":127}],11:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _ExceptionMap = require("exceptions/ExceptionMap");
+
+var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _UrlService = require("services/UrlService");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("add-to-basket", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-add-to-basket"
+        },
+        item: Object,
+        itemUrl: String,
+        showQuantity: {
+            type: Boolean,
+            default: false
+        },
+        useLargeScale: {
+            type: Boolean,
+            default: false
+        },
+        missingOrderProperties: {
+            type: Array,
+            default: function _default() {
+                return [];
+            }
+        },
+        isVariationSelected: {
+            type: Boolean,
+            default: true
+        }
+    },
+    computed: _extends({
+        hasChildren: function hasChildren() {
+            return this.item.filter && this.item.filter.hasChildren;
+        },
+        canBeAddedToBasket: function canBeAddedToBasket() {
+            var isSalable = this.item.filter && this.item.filter.isSalable;
+            var hasChildren = this.item.filter && this.item.filter.hasChildren;
+            var intervalQuantity = this.item.variation.intervalOrderQuantity || 1;
+            var minimumOrderQuantity = this.item.variation.minimumOrderQuantity || intervalQuantity;
+            var requiresProperties = !this.requiresProperties;
+
+            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity && requiresProperties;
+        },
+        variationId: function variationId() {
+            return this.item.variation.id;
+        },
+        requiresProperties: function requiresProperties() {
+            if (App.config.item.requireOrderProperties && this.item.properties) {
+                var availableProperties = this.item.properties.filter(function (property) {
+                    return property.property.isShownOnItemPage;
+                });
+
+                return !!availableProperties.length;
+            }
+
+            return false;
+        }
+    }, Vuex.mapState({
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        }
+    })),
+    data: function data() {
+        return {
+            quantity: 1,
+            buttonLockState: false,
+            waiting: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    methods: {
+        /**
+         * add an item to basket-resource
+         */
+        addToBasket: function addToBasket() {
+            var _this = this;
+
+            if (this.missingOrderProperties.length) {
+                this.showMissingPropertiesError();
+            } else if (this.item.filter.isSalable) {
+                this.waiting = true;
+
+                var basketObject = {
+                    variationId: this.variationId,
+                    quantity: this.quantity,
+                    basketItemOrderParams: this.item.properties
+                };
+
+                this.$store.dispatch("addBasketItem", basketObject).then(function (response) {
+                    document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
+                    _this.waiting = false;
+                    _this.openAddToBasketOverlay(basketObject.quantity);
+                }, function (error) {
+                    _this.waiting = false;
+
+                    if (error.data) {
+                        NotificationService.error(_TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(error.data.exceptionCode.toString()))).closeAfter(5000);
+                    }
+                });
+            }
+        },
+        showMissingPropertiesError: function showMissingPropertiesError() {
+            this.$store.commit("setVariationMarkInvalidProps", true);
+
+            var propertyNames = this.missingOrderProperties.map(function (property) {
+                return property.property.names.name;
+            });
+            var errorMsgContent = "";
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = propertyNames[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var name = _step.value;
+
+                    errorMsgContent += name + "<br>";
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            NotificationService.error(_TranslationService2.default.translate("Ceres::Template.singleItemMissingOrderPropertiesError").replace("<properties>", errorMsgContent));
+        },
+        directToItem: function directToItem() {
+            (0, _UrlService.navigateTo)(this.itemUrl);
+        },
+        handleButtonState: function handleButtonState(value) {
+            this.buttonLockState = value;
+        },
+
+
+        /**
+         * open the AddItemToBasketOverlay
+         */
+        openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity) {
+            var latestBasketEntry = {
+                item: this.item,
+                quantity: stashedQuantity
+            };
+
+            this.$store.commit("setLatestBasketEntry", latestBasketEntry);
+        },
+
+
+        /**
+         * update the property quantity of the current instance
+         * @param value
+         */
+        updateQuantity: function updateQuantity(value) {
+            this.quantity = value;
+        }
+    },
+    watch: {
+        quantity: function quantity(newValue, oldValue) {
+            this.$store.commit("setVariationOrderQuantity", newValue);
+        }
+    }
+});
+
+},{"exceptions/ExceptionMap":97,"services/NotificationService":128,"services/TranslationService":129,"services/UrlService":130}],12:[function(require,module,exports){
+"use strict";
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("basket-preview", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        template: String,
+        basketData: Object,
+        showNetPrices: {
+            type: Boolean,
+            default: false
+        }
+    },
+
+    computed: Vuex.mapState({
+        basket: function basket(state) {
+            return state.basket.data;
+        },
+        basketItems: function basketItems(state) {
+            return state.basket.items;
+        },
+        basketNotifications: function basketNotifications(state) {
+            return state.basket.basketNotifications;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+        this.$store.commit("setBasket", this.basketData);
+        this.$store.commit("setShowNetPrices", this.showNetPrices);
+        this.$store.dispatch("loadBasketData");
+    },
+
+
+    /**
+     * Bind to basket and bind the basket items
+     */
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _ApiService2.default.listen("AfterBasketChanged", function (data) {
+                _this.$store.commit("setBasket", data.basket);
+                _this.$store.commit("setShowNetPrices", data.showNetPrices);
+            });
+        });
+    }
+});
+
+},{"services/ApiService":123}],13:[function(require,module,exports){
+"use strict";
+
+Vue.component("basket-totals", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        template: {
+            type: String
+        }
+    },
+
+    computed: Vuex.mapState({
+        basket: function basket(state) {
+            return state.basket.data;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        },
+        showNetPrices: function showNetPrices(state) {
+            return state.basket.showNetPrices;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    }
+});
+
+},{}],14:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("coupon", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            waiting: false,
+            couponCode: ""
+        };
+    },
+
+
+    computed: _extends({
+        disabled: function disabled() {
+            if (this.redeemedCouponCode) {
+                return true;
+            }
+
+            return false;
+        }
+    }, Vuex.mapState({
+        redeemedCouponCode: function redeemedCouponCode(state) {
+            return state.basket.data.couponCode;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            if (_this.redeemedCouponCode) {
+                _this.couponCode = _this.redeemedCouponCode;
+            }
+        });
+    },
+
+
+    methods: {
+        redeemCode: function redeemCode() {
+            var _this2 = this;
+
+            // remove whitespaces
+            this.couponCode = this.couponCode.replace(/\s/g, "");
+
+            if (this.couponCode.length > 0) {
+                this.waiting = true;
+
+                this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
+                    _this2.waiting = false;
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.couponRedeemSuccess")).closeAfter(10000);
+                }, function (error) {
+                    _this2.waiting = false;
+                    NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
+                });
+            } else {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.couponIsEmpty")).closeAfter(10000);
+            }
+        },
+        removeCode: function removeCode() {
+            var _this3 = this;
+
+            this.waiting = true;
+
+            this.$store.dispatch("removeCouponCode", this.couponCode).then(function (response) {
+                _this3.waiting = false;
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.couponRemoveSuccess")).closeAfter(10000);
+            }, function (error) {
+                _this3.waiting = false;
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.couponRemoveFailure")).closeAfter(10000);
+            });
+        },
+        getCouponRedemtionErrorMessage: function getCouponRedemtionErrorMessage(error) {
+            var errorMessageKeys = {
+                18: "couponMinOrderValueNotReached",
+                51: "couponnotUsableForSpecialOffer",
+                70: "couponAlreadyUsedOrInvalidCouponCode",
+                78: "couponCampaignExpired",
+                126: "couponNoMatchingItemInBasket",
+                329: "couponOnlySubscription",
+                330: "couponOnlySingleUsage",
+                331: "couponNoOpenAmount",
+                332: "couponExpired",
+                334: "couponOnlyForNewCustomers",
+                335: "couponOnlyForExistingCustomers",
+                336: "couponWrongCustomerGroup",
+                337: "couponWrongCustomerType",
+                338: "couponNoCustomerTypeProvided",
+                339: "couponNoCustomerTypeActivated",
+                340: "couponNoCustomerGroupActivated",
+                341: "couponCampaignNoWebstoreActivated",
+                342: "couponCampaignWrongWebstoreId",
+                343: "couponCampaignNoWebstoreIdGiven"
+            };
+
+            if (error && error.error && error.error.code && errorMessageKeys[error.error.code]) {
+                return _TranslationService2.default.translate("Ceres::Template." + errorMessageKeys[error.error.code]);
+            }
+
+            return _TranslationService2.default.translate("Ceres::Template.couponRedeemFailure");
+        }
+    }
+});
+
+},{"services/NotificationService":128,"services/TranslationService":129}],15:[function(require,module,exports){
+"use strict";
+
+Vue.component("basket-list", {
+
+    delimiters: ["${", "}"],
+
+    props: ["size", "template"],
+
+    computed: Vuex.mapState({
+        basketItems: function basketItems(state) {
+            return state.basket.items;
+        },
+        isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
+            return state.basket.isBasketInitiallyLoaded;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    }
+});
+
+},{}],16:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _ExceptionMap = require("exceptions/ExceptionMap");
+
+var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("basket-list-item", {
+
+    delimiters: ["${", "}"],
+
+    props: ["basketItem", "size", "language", "template"],
+
+    data: function data() {
+        return {
+            waiting: false,
+            waitingForDelete: false,
+            itemCondition: "",
+            showMoreInformation: false
+        };
+    },
+
+
+    computed: _extends({
+        image: function image() {
+            var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+
+            return this.$options.filters.itemImage(itemImages);
+        },
+        altText: function altText() {
+            var altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data);
+
+            return altText;
+        },
+        isInputLocked: function isInputLocked() {
+            return this.waiting || this.isBasketLoading;
+        },
+        propertySurchargeSum: function propertySurchargeSum() {
+            var sum = 0;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.basketItem.basketItemOrderParams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var property = _step.value;
+
+                    sum += this.$options.filters.propertySurcharge(this.basketItem.variation.data.properties, property.propertyId);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return sum;
+        },
+        itemTotalPrice: function itemTotalPrice() {
+            return this.basketItem.quantity * (this.basketItem.variation.data.prices.default.unitPrice.value + this.propertySurchargeSum);
+        }
+    }, Vuex.mapState({
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+
+        /**
+         * Delete item from basket
+         */
+        deleteItem: function deleteItem() {
+            var _this = this;
+
+            if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading) {
+                this.waitingForDelete = true;
+
+                this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
+                    document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: _this.basketItem }));
+                    _this.waitingForDelete = false;
+                }, function (error) {
+                    _this.waitingForDelete = false;
+                });
+            }
+        },
+
+
+        /**
+         * Update item quantity in basket
+         * @param quantity
+         */
+        updateQuantity: function updateQuantity(quantity) {
+            var _this2 = this;
+
+            if (this.basketItem.quantity !== quantity) {
+                this.waiting = true;
+
+                var origQty = this.basketItem.quantity;
+
+                this.$store.dispatch("updateBasketItemQuantity", { basketItem: this.basketItem, quantity: quantity }).then(function (response) {
+                    document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: _this2.basketItem }));
+                    _this2.waiting = false;
+                }, function (error) {
+                    _this2.basketItem.quantity = origQty;
+
+                    if (_this2.size === "small") {
+                        _this2.$store.dispatch("addBasketNotification", {
+                            type: "error",
+                            message: _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(error.data.exceptionCode.toString()))
+                        });
+                    } else {
+                        NotificationService.error(_TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(error.data.exceptionCode.toString()))).closeAfter(5000);
+                    }
+
+                    _this2.waiting = false;
+                });
+            }
+        },
+        isPropertyVisible: function isPropertyVisible(propertyId) {
+            var property = this.basketItem.variation.data.properties.find(function (property) {
+                return property.property.id === parseInt(propertyId);
+            });
+
+            if (property) {
+                return property.property.isShownAtCheckout;
+            }
+
+            return false;
+        }
+    }
+});
+
+},{"exceptions/ExceptionMap":97,"services/NotificationService":128,"services/TranslationService":129}],17:[function(require,module,exports){
+"use strict";
+
+Vue.component("category-breadcrumbs", {
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    computed: Vuex.mapGetters(["breadcrumbs"]),
+
+    created: function created() {
+        this.$options.template = this.template;
+    }
+});
+
+},{}],18:[function(require,module,exports){
+"use strict";
+
+Vue.component("accept-gtc-check", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            isChecked: false
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        showError: function showError(state) {
+            return state.checkout.validation.gtc.showError;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+        this.$store.commit("setGtcValidator", this.validate);
+    },
+
+
+    methods: {
+        validate: function validate() {
+            this.$store.commit("setGtcShowError", !this.isChecked);
+        }
+    },
+
+    watch: {
+        isChecked: function isChecked() {
+            if (this.showError) {
+                this.validate();
+            }
+        }
+    }
+});
+
+},{}],19:[function(require,module,exports){
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("checkout", {
+
+    props: ["template", "initialCheckout"],
+
+    computed: Vuex.mapState({
+        checkout: function checkout(state) {
+            return state.checkout;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+        this.$store.dispatch("setCheckout", this.initialCheckout);
+        this.addEventHandler();
+    },
+
+
+    methods: {
+        addEventHandler: function addEventHandler() {
+            var _this = this;
+
+            ApiService.listen("CheckoutChanged", function (checkout) {
+                _this.handleCheckoutChangedEvent(checkout.checkout);
+            });
+
+            document.addEventListener("afterPaymentMethodChanged", function (event) {
+                var newMethodOfPaymentId = event.detail;
+
+                if (newMethodOfPaymentId !== _this.checkout.payment.methodOfPaymentId) {
+                    _this.updateCheckoutAndBasket();
+                }
+            });
+        },
+        updateCheckoutAndBasket: function updateCheckoutAndBasket() {
+            var _this2 = this;
+
+            this.$store.commit("setIsBasketLoading", true);
+
+            var reloadBasketPromise = this.$store.dispatch("refreshBasket");
+            var reloadCheckoutPromise = this.$store.dispatch("refreshCheckout");
+
+            Promise.all([reloadBasketPromise, reloadCheckoutPromise]).then(function (data) {
+                _this2.$store.commit("setIsBasketLoading", false);
+            });
+        },
+        handleCheckoutChangedEvent: function handleCheckoutChangedEvent(checkout) {
+            if (!this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
+                NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutMethodOfPaymentListChanged"));
+                this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
+            }
+
+            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList)) {
+                this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
+            }
+
+            if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId) {
+                NotificationService.warn(_TranslationService2.default.translate("Ceres::Template.checkoutMethodOfPaymentChanged"));
+                this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
+            }
+
+            if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId) {
+                NotificationService.warn(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfileChanged"));
+                this.$store.commit("setShippingProfile", checkout.shippingProfileId);
+            }
+
+            if (this.checkout.shipping.shippingCountryId !== checkout.shippingCountryId) {
+                this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
+            }
+        },
+        hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
+            if (oldList.length !== newList.length) {
+                NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfileListChanged"));
+                return true;
+            }
+
+            this.sortList(oldList, "parcelServicePresetId");
+            this.sortList(newList, "parcelServicePresetId");
+
+            for (var index in oldList) {
+                if (oldList[index].parcelServicePresetId !== newList[index].parcelServicePresetId) {
+                    NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfileListChanged"));
+                    return true;
+                } else if (oldList[index].shippingAmount !== newList[index].shippingAmount) {
+                    NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfilePriceChanged"));
+                    return true;
+                } else if (oldList[index].shippingPrivacyInformation !== newList[index].shippingPrivacyInformation) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+        isEquals: function isEquals(oldList, newList, fieldToCompare) {
+            if (oldList.length !== newList.length) {
+                return false;
+            }
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                var _loop = function _loop() {
+                    var oldListItem = _step.value;
+
+                    if (newList.findIndex(function (newListItem) {
+                        return newListItem[fieldToCompare] === oldListItem[fieldToCompare];
+                    }) === -1) {
+                        return {
+                            v: false
+                        };
+                    }
+                };
+
+                for (var _iterator = oldList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var _ret = _loop();
+
+                    if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return true;
+        },
+        sortList: function sortList(list, field) {
+            list.sort(function (valueA, valueB) {
+                if (valueA[field] > valueB[field]) {
+                    return 1;
+                }
+
+                if (valueA[field] < valueB[field]) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        showModal: function showModal(content) {
+            $(this.$refs.checkoutModalContent).html(content);
+            $(this.$refs.checkoutModal).modal("show");
+        }
+    }
+});
+
+},{"services/ApiService":123,"services/NotificationService":128,"services/TranslationService":129}],20:[function(require,module,exports){
+"use strict";
+
+Vue.component("contact-wish-input", {
+
+    props: ["template"],
+
+    computed: Vuex.mapState({
+        contactWish: function contactWish(state) {
+            return state.checkout.contactWish;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    methods: {
+        updateContactWish: function updateContactWish(event) {
+            this.$store.commit("setContactWish", event.srcElement.value);
+        }
+    }
+});
+
+},{}],21:[function(require,module,exports){
+"use strict";
+
+Vue.component("payment-provider-select", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    computed: Vuex.mapState({
+        methodOfPaymentList: function methodOfPaymentList(state) {
+            return state.checkout.payment.methodOfPaymentList;
+        },
+        methodOfPaymentId: function methodOfPaymentId(state) {
+            return state.checkout.payment.methodOfPaymentId;
+        },
+        showError: function showError(state) {
+            return state.checkout.validation.paymentProvider.showError;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        }
+    }),
+
+    /**
+     * Initialise the event listener
+     */
+    created: function created() {
+        this.$options.template = this.template;
+        this.$store.commit("setPaymentProviderValidator", this.validate);
+    },
+
+
+    methods: {
+        /**
+         * Event when changing the payment provider
+         */
+        onPaymentProviderChange: function onPaymentProviderChange(newMethodOfPayment) {
+            var _this = this;
+
+            this.$store.dispatch("selectMethodOfPayment", newMethodOfPayment.id).then(function (data) {
+                document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", { detail: _this.methodOfPaymentId }));
+            }, function (error) {
+                console.log("error");
+            });
+
+            this.validate();
+        },
+        validate: function validate() {
+            this.$store.commit("setPaymentProviderShowError", !(this.methodOfPaymentId > 0));
+        }
+    }
+});
+
+},{}],22:[function(require,module,exports){
+"use strict";
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _UrlService = require("services/UrlService");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("place-order", {
+
+    delimiters: ["${", "}"],
+
+    props: ["targetContinue", "template"],
+
+    data: function data() {
+        return {
+            waiting: false
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        checkoutValidation: function checkoutValidation(state) {
+            return state.checkout.validation;
+        },
+        contactWish: function contactWish(state) {
+            return state.checkout.contactWish;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        },
+        basketItemQuantity: function basketItemQuantity(state) {
+            return state.basket.data.itemQuantity;
+        },
+        isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
+            return state.basket.isBasketInitiallyLoaded;
+        },
+        shippingPrivacyHintAccepted: function shippingPrivacyHintAccepted(state) {
+            return state.checkout.shippingPrivacyHintAccepted;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        placeOrder: function placeOrder() {
+            var _this = this;
+
+            this.waiting = true;
+
+            var url = "/rest/io/order/additional_information";
+            var params = { orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted };
+            var options = { supressNotifications: true };
+
+            ApiService.post(url, params, options).always(function () {
+                _this.preparePayment();
+            });
+        },
+        preparePayment: function preparePayment() {
+            var _this2 = this;
+
+            this.waiting = true;
+
+            if (this.validateCheckout() && this.basketItemQuantity > 0) {
+                ApiService.post("/rest/io/checkout/payment").done(function (response) {
+                    _this2.afterPreparePayment(response);
+                }).fail(function (error) {
+                    _this2.waiting = false;
+                });
+            } else {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckEntries"));
+                this.waiting = false;
+            }
+        },
+        validateCheckout: function validateCheckout() {
+            var isValid = true;
+
+            for (var index in this.checkoutValidation) {
+                if (this.checkoutValidation[index].validate) {
+                    this.checkoutValidation[index].validate();
+
+                    if (this.checkoutValidation[index].showError) {
+                        isValid = !this.checkoutValidation[index].showError;
+                    }
+                }
+            }
+
+            return isValid;
+        },
+        afterPreparePayment: function afterPreparePayment(response) {
+            var paymentType = response.type || "errorCode";
+            var paymentValue = response.value || "";
+
+            switch (paymentType) {
+                case "continue":
+                    var target = this.targetContinue;
+
+                    if (target) {
+                        (0, _UrlService.navigateTo)(target);
+                    }
+                    break;
+                case "redirectUrl":
+                    // redirect to given payment provider
+                    window.location.assign(paymentValue);
+                    break;
+                case "externalContentUrl":
+                    // show external content in iframe
+                    this.showModal(paymentValue, true);
+                    break;
+                case "htmlContent":
+                    this.showModal(paymentValue, false);
+                    break;
+
+                case "errorCode":
+                    NotificationService.error(paymentValue);
+                    this.waiting = false;
+                    break;
+                default:
+                    NotificationService.error("Unknown response from payment provider: " + paymentType);
+                    this.waiting = false;
+                    break;
+            }
+        },
+        showModal: function showModal(content, isExternalContent) {
+            if (isExternalContent) {
+                this.$emit("payment-response", "<iframe src=\"" + content + "\">");
+            } else {
+                this.$emit("payment-response", content);
+            }
+        }
+    }
+});
+
+},{"services/ApiService":123,"services/NotificationService":128,"services/TranslationService":129,"services/UrlService":130}],23:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("shipping-privacy-hint-check", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-shipping-privacy-hint-check"
+        }
+    },
+
+    computed: _extends({
+        currentShippingProfile: function currentShippingProfile() {
+            var _this = this;
+
+            return this.shippingProfileList.find(function (profile) {
+                return profile.parcelServicePresetId === _this.shippingProfileId;
+            });
+        },
+        currentPrivacyHints: function currentPrivacyHints() {
+            if (this.currentShippingProfile.shippingPrivacyInformation) {
+                return this.currentShippingProfile.shippingPrivacyInformation.filter(function (entry) {
+                    return !!entry.showDataPrivacyAgreementHint;
+                });
+            }
+
+            return [];
+        },
+        privacyHintContent: function privacyHintContent() {
+            var andTranslation = _TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyHintAnd");
+            var parcelServiceInformation = "";
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.currentPrivacyHints[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var hint = _step.value;
+
+                    if (parcelServiceInformation !== "") {
+                        parcelServiceInformation += " " + andTranslation + " ";
+                    }
+
+                    parcelServiceInformation += "<strong>" + hint.parcelServiceName + ", " + hint.parcelServiceAddress + "</strong>";
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return _TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyHint", { parcelServiceInformation: parcelServiceInformation });
+        }
+    }, Vuex.mapState({
+        shippingProfileList: function shippingProfileList(state) {
+            return state.checkout.shipping.shippingProfileList;
+        },
+        shippingProfileId: function shippingProfileId(state) {
+            return state.checkout.shipping.shippingProfileId;
+        },
+        shippingPrivacyHintAccepted: function shippingPrivacyHintAccepted(state) {
+            return state.checkout.shippingPrivacyHintAccepted;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        setValue: function setValue(value) {
+            this.$store.commit("setShippingPrivacyHintAccepted", value);
+        }
+    },
+
+    watch: {
+        currentShippingProfile: function currentShippingProfile(value, oldValue) {
+            if (this.shippingPrivacyHintAccepted && value.parcelServiceId !== oldValue.parcelServiceId) {
+                this.setValue(false);
+
+                $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
+            } else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint) {
+                this.setValue(false);
+            }
+        }
+    }
+});
+
+},{"services/NotificationService":128,"services/TranslationService":129}],24:[function(require,module,exports){
+"use strict";
+
+Vue.component("shipping-profile-select", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    computed: Vuex.mapState({
+        shippingProfileList: function shippingProfileList(state) {
+            return state.checkout.shipping.shippingProfileList;
+        },
+        shippingProfileId: function shippingProfileId(state) {
+            return state.checkout.shipping.shippingProfileId;
+        },
+        showError: function showError(state) {
+            return state.checkout.validation.shippingProfile.showError;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        }
+    }),
+
+    /**
+     * Add a shipping provider
+     * Initialise the event listener
+     */
+    created: function created() {
+        this.$options.template = this.template;
+        this.$store.commit("setShippingProfileValidator", this.validate);
+    },
+
+
+    methods: {
+        /**
+         * Method on shipping profile changed
+         */
+        onShippingProfileChange: function onShippingProfileChange(shippingProfileId) {
+            var _this = this;
+
+            this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(function (shippingProfile) {
+                return shippingProfile.parcelServicePresetId === shippingProfileId;
+            })).then(function (data) {
+                document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: _this.shippingProfileId }));
+            }, function (error) {
+                console.log("error");
+            });
+
+            this.validate();
+        },
+        validate: function validate() {
+            this.$store.commit("setShippingProfileShowError", !(this.shippingProfileId > 0));
+        }
+    }
+});
+
+},{}],25:[function(require,module,exports){
+"use strict";
+
+Vue.component("container-item-list", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-container-item-list"
+        },
+        items: {
+            type: Array,
+            default: []
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            if (_this.items.length > 4) {
+                _this.initializeCarousel();
+            }
+        });
+    },
+
+
+    methods: {
+        initializeCarousel: function initializeCarousel() {
+            var _this2 = this;
+
+            $(this.$refs.carouselContainer).owlCarousel({
+                autoHeight: true,
+                dots: true,
+                items: 4,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    544: {
+                        items: 2
+                    },
+                    768: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                },
+                lazyLoad: false,
+                loop: false,
+                margin: 30,
+                mouseDrag: true,
+                nav: true,
+                navClass: ["owl-single-item-nav left carousel-control list-control-special", "owl-single-item-nav right carousel-control list-control-special"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350,
+                onChanged: function onChanged(property) {
+                    var begin = property.item.index;
+                    var end = begin + property.page.size;
+
+                    for (var i = begin; i < end; i++) {
+                        var categoryItem = _this2.$refs["categoryItem_" + i];
+
+                        if (categoryItem) {
+                            categoryItem[0].loadFirstImage();
+                        }
+                    }
+                }
+            });
+        }
+    }
+});
+
+},{}],26:[function(require,module,exports){
+"use strict";
+
+Vue.component("accept-privacy-policy-check", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-accept-privacy-policy-check"
+        },
+
+        value: {
+            type: Boolean
+        },
+
+        showError: {
+            type: Boolean
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        onValueChanged: function onValueChanged(value) {
+            this.$emit("input", value);
+        }
+    }
+});
+
+},{}],27:[function(require,module,exports){
+"use strict";
+
+Vue.component("address-input-group", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        defaultCountry: {
+            type: String,
+            default: "DE"
+        },
+        addressType: String,
+        modalType: String,
+        template: String,
+        value: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
+    },
+
+    data: function data() {
+        return {
+            stateList: [],
+            countryLocaleList: ["DE", "GB"],
+            localeToShow: this.defaultCountry
+        };
+    },
+
+
+    /**
+     * Check whether the address data exists. Else, create an empty one
+     */
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        /**
+         * Update the address input group to show.
+         * @param shippingCountry
+         */
+        onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
+            if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
+                this.localeToShow = shippingCountry.isoCode2;
+            } else {
+                this.localeToShow = this.defaultCountry;
+            }
+
+            this.emitInputEvent("countryId", shippingCountry.id);
+        },
+
+
+        /**
+         * @param {string} field
+         * @param {number} value
+         */
+        emitInputEvent: function emitInputEvent(field, value) {
+            this.$emit("input", { field: field, value: value });
+        }
+    }
+});
+
+},{}],28:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _utils = require("../../../helper/utils");
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var ModalService = require("services/ModalService");
+var AddressFieldService = require("services/AddressFieldService");
+
+Vue.component("address-select", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "addressType", "showError"],
+
+    data: function data() {
+        return {
+            addressModal: {},
+            modalType: "",
+            headline: "",
+            addressToEdit: {
+                addressSalutation: 0,
+                gender: "male",
+                countryId: this.shippingCountryId
+            },
+            addressToDelete: {},
+            deleteModal: "",
+            deleteModalWaiting: false,
+            addressOptionTypeFieldMap: {
+                1: "vatNumber",
+                4: "telephone",
+                9: "birthday",
+                11: "title"
+            }
+        };
+    },
+
+
+    computed: _extends({
+        selectedAddress: function selectedAddress() {
+            return this.$store.getters.getSelectedAddress(this.addressType);
+        },
+        addressList: function addressList() {
+            return this.$store.getters.getAddressList(this.addressType);
+        },
+        shippingCountryId: function shippingCountryId() {
+            return this.$store.state.localization.shippingCountryId;
+        },
+        isAddAddressEnabled: function isAddAddressEnabled() {
+            if (this.addressType === "1") {
+                return this.$store.getters.isLoggedIn || this.addressList.length < 1;
+            }
+
+            return this.$store.getters.isLoggedIn || this.addressList.length < 2;
+        },
+        isAddressListEmpty: function isAddressListEmpty() {
+            return !(this.addressList && this.addressList.length > 0);
+        }
+    }, Vuex.mapState({
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        },
+        countryList: function countryList(state) {
+            return state.localization.shippingCountries;
+        }
+    })),
+
+    /**
+     *  Check whether the address list is not empty and select the address with the matching ID
+     */
+    created: function created() {
+        this.$options.template = this.template;
+        this.addEventListener();
+    },
+
+
+    /**
+     * Select the address modal
+     */
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.addressModal = ModalService.findModal(_this.$refs.addressModal);
+            _this.deleteModal = ModalService.findModal(_this.$refs.deleteModal);
+        });
+    },
+
+
+    methods: {
+        /**
+         * Add the event listener
+         */
+        addEventListener: function addEventListener() {
+            var _this2 = this;
+
+            ApiService.listen("AfterAccountContactLogout", function () {
+                _this2.$store.commit("resetAddress", _this2.addressType);
+            });
+        },
+
+
+        /**
+         * Update the selected address
+         * @param index
+         */
+        onAddressChanged: function onAddressChanged(address) {
+            this.$emit("address-changed", address);
+        },
+
+
+        /**
+         * Check whether a company name exists and show it in bold
+         * @returns {boolean}
+         */
+        showNameStrong: function showNameStrong() {
+            return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
+        },
+
+
+        /**
+         * Show the add modal initially, if no address is selected in checkout
+         */
+        showInitialAddModal: function showInitialAddModal() {
+            this.modalType = "initial";
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    gender: "male",
+                    countryId: this.shippingCountryId
+                };
+            } else {
+                this.addressToEdit = { countryId: this.shippingCountryId };
+            }
+
+            this.updateHeadline();
+            this.addressModal.show();
+        },
+
+
+        /**
+         * Show the add modal
+         */
+        showAddModal: function showAddModal() {
+            this.modalType = "create";
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    gender: "male",
+                    countryId: this.shippingCountryId
+                };
+            } else {
+                this.addressToEdit = { countryId: this.shippingCountryId };
+            }
+
+            this.updateHeadline();
+            _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
+            this.addressModal.show();
+        },
+
+
+        /**
+         * Show the edit modal
+         * @param address
+         */
+        showEditModal: function showEditModal(address) {
+            this.modalType = "update";
+            this.addressToEdit = this.getAddressToEdit(address);
+
+            if (this.addressToEdit.gender === "female") {
+                this.addressToEdit.addressSalutation = 1;
+            } else if ((0, _utils.isNull)(this.addressToEdit.gender) && this.addressToEdit.name1) {
+                this.addressToEdit.addressSalutation = 2;
+            } else {
+                this.addressToEdit.addressSalutation = 0;
+                this.addressToEdit.gender = "male";
+            }
+
+            this.updateHeadline();
+            _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
+            this.addressModal.show();
+        },
+        getAddressToEdit: function getAddressToEdit(address) {
+            // Creates a tmp address to prevent unwanted two-way binding
+            var addressToEdit = JSON.parse(JSON.stringify(address));
+
+            if (addressToEdit.options) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = addressToEdit.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var option = _step.value;
+
+                        var optionName = this.addressOptionTypeFieldMap[option.typeId];
+
+                        addressToEdit[optionName] = option.value || null;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+
+            return addressToEdit;
+        },
+
+
+        /**
+         * Show the delete modal
+         * @param address
+         */
+        showDeleteModal: function showDeleteModal(address) {
+            this.modalType = "delete";
+            this.addressToDelete = address;
+            this.updateHeadline();
+            this.deleteModal.show();
+        },
+
+
+        /**
+         * Delete the address selected before
+         */
+        deleteAddress: function deleteAddress() {
+            var _this3 = this;
+
+            this.deleteModalWaiting = true;
+
+            this.$store.dispatch("deleteAddress", { address: this.addressToDelete, addressType: this.addressType }).then(function (response) {
+                _this3.closeDeleteModal();
+                _this3.deleteModalWaiting = false;
+            }, function (error) {
+                _this3.deleteModalWaiting = false;
+            });
+        },
+
+
+        /**
+         * Close the current create/update address modal
+         */
+        closeAddressModal: function closeAddressModal() {
+            this.addressModal.hide();
+        },
+
+
+        /**
+         * Close the current delete address modal
+         */
+        closeDeleteModal: function closeDeleteModal() {
+            this.deleteModal.hide();
+        },
+
+
+        /**
+         * Dynamically create the header line in the modal
+         */
+        updateHeadline: function updateHeadline() {
+            var headline = void 0;
+
+            if (this.modalType === "initial") {
+                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressInitial");
+            } else if (this.addressType === "2") {
+                if (this.modalType === "update") {
+                    headline = _TranslationService2.default.translate("Ceres::Template.addressShippingAddressEdit");
+                } else if (this.modalType === "create") {
+                    headline = _TranslationService2.default.translate("Ceres::Template.addressShippingAddressCreate");
+                } else {
+                    headline = _TranslationService2.default.translate("Ceres::Template.addressShippingAddressDelete");
+                }
+            } else if (this.modalType === "update") {
+                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressEdit");
+            } else if (this.modalType === "create") {
+                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressCreate");
+            } else {
+                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressDelete");
+            }
+
+            this.headline = headline;
+        },
+
+
+        /**
+         * @param countryId
+         * @returns string
+         */
+        getCountryName: function getCountryName(countryId) {
+            if (countryId > 0) {
+                var country = this.countryList.find(function (country) {
+                    return country.id === countryId;
+                });
+
+                if (!(0, _utils.isNullOrUndefined)(country)) {
+                    return country.currLangName;
+                }
+            }
+
+            return "";
+        },
+        setAddressToEditField: function setAddressToEditField(_ref) {
+            var field = _ref.field,
+                value = _ref.value;
+
+            this.addressToEdit[field] = value;
+            this.addressToEdit = Object.assign({}, this.addressToEdit);
+        }
+    },
+
+    filters: {
+        optionType: function optionType(selectedAddress, typeId) {
+            if (selectedAddress && selectedAddress.name2) {
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = selectedAddress.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var optionType = _step2.value;
+
+                        if (optionType.typeId === typeId) {
+                            return optionType.value;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+            }
+
+            return "";
+        }
+    }
+});
+
+},{"../../../helper/utils":120,"services/AddressFieldService":122,"services/ApiService":123,"services/ModalService":127,"services/TranslationService":129,"services/ValidationService":131}],29:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("create-update-address", {
+
+    delimiters: ["${", "}"],
+
+    props: ["addressData", "addressModal", "modalType", "addressType", "template"],
+
+    data: function data() {
+        return {
+            waiting: false,
+            addressFormNames: {
+                1: "#billing_address_form",
+                2: "#delivery_address_form"
+            }
+        };
+    },
+
+
+    computed: {
+        addressList: function addressList() {
+            this.$store.getters.getAddressList(this.addressType);
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        /**
+         * Validate the address fields
+         */
+        validate: function validate() {
+            var _this = this;
+
+            _ValidationService2.default.validate($(this.addressFormNames[this.addressType])).done(function () {
+                _this.saveAddress();
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+
+
+        /**
+         * Save the new address or update an existing one
+         */
+        saveAddress: function saveAddress() {
+            if (this.modalType === "initial" || this.modalType === "create") {
+                this.createAddress();
+            } else if (this.modalType === "update") {
+                this.updateAddress();
+            }
+        },
+
+
+        /**
+         * Update an address
+         */
+        updateAddress: function updateAddress() {
+            var _this2 = this;
+
+            this.waiting = true;
+            this._syncOptionTypesAddressData();
+
+            this.$store.dispatch("updateAddress", { address: this.addressData, addressType: this.addressType }).then(function (resolve) {
+                _this2.addressModal.hide();
+                _this2.waiting = false;
+            }, function (error) {
+                _this2.waiting = false;
+
+                if (error.validation_errors) {
+                    _this2._handleValidationErrors(error.validation_errors);
+                }
+            });
+        },
+
+
+        /**
+         * Create a new address
+         */
+        createAddress: function createAddress() {
+            var _this3 = this;
+
+            this.waiting = true;
+            this._syncOptionTypesAddressData();
+
+            this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType }).then(function (response) {
+                _this3.addressModal.hide();
+                _this3.waiting = false;
+            }, function (error) {
+                _this3.waiting = false;
+
+                if (error.validation_errors) {
+                    _this3._handleValidationErrors(error.validation_errors);
+                }
+            });
+        },
+        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
+            _ValidationService2.default.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
+
+            var errorMessage = "";
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var value = _step.value;
+
+                    errorMessage += value + "<br>";
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            NotificationService.error(errorMessage);
+        },
+        _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
+
+            if (typeof this.addressData.options !== "undefined") {
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = this.addressData.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var optionType = _step2.value;
+
+                        switch (optionType.typeId) {
+                            case 1:
+                                {
+                                    if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value) {
+                                        optionType.value = this.addressData.vatNumber;
+                                    }
+
+                                    break;
+                                }
+
+                            case 9:
+                                {
+                                    if (this.addressData.birthday && this.addressData.birthday !== optionType.value) {
+                                        optionType.value = this.addressData.birthday;
+                                    }
+                                    break;
+                                }
+
+                            case 11:
+                                {
+                                    if (this.addressData.title && this.addressData.title !== optionType.value) {
+                                        optionType.value = this.addressData.title;
+                                    }
+                                    break;
+                                }
+
+                            case 4:
+                                {
+                                    if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
+                                        optionType.value = this.addressData.telephone;
+                                    }
+                                    break;
+                                }
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+            }
+        },
+        emitInputEvent: function emitInputEvent(event) {
+            this.$emit("input", event);
+        }
+    }
+});
+
+},{"services/NotificationService":128,"services/ValidationService":131}],30:[function(require,module,exports){
+"use strict";
+
+Vue.component("invoice-address-select", {
+
+    delimiters: ["${", "}"],
+
+    template: "\n        <address-select \n            ref=\"invoice\"\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'>\n        </address-select>\n    ",
+
+    props: ["selectedAddressId", "addressList", "hasToValidate"],
+
+    computed: Vuex.mapState({
+        billingAddressId: function billingAddressId(state) {
+            return state.address.billingAddressId;
+        },
+        showError: function showError(state) {
+            return state.checkout.validation.invoiceAddress.showError;
+        }
+    }),
+
+    /**
+     * Initialise the event listener
+     */
+    created: function created() {
+        this.$store.dispatch("initBillingAddress", { id: this.selectedAddressId, addressList: this.addressList });
+
+        if (this.hasToValidate) {
+            this.$store.commit("setInvoiceAddressValidator", this.validate);
+        }
+    },
+
+
+    /**
+     * If no address is related to the user, a popup will open to add an address
+     */
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
+                _this.$refs.invoice.showInitialAddModal();
+            }
+        });
+    },
+
+
+    methods: {
+        /**
+         * Update the invoice address
+         * @param selectedAddress
+         */
+        addressChanged: function addressChanged(selectedAddress) {
+            var _this2 = this;
+
+            this.$store.dispatch("selectAddress", { selectedAddress: selectedAddress, addressType: "1" }).then(function (response) {
+                document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: _this2.billingAddressId }));
+            }, function (error) {});
+
+            if (this.hasToValidate) {
+                this.validate();
+            }
+        },
+        validate: function validate() {
+            this.$store.commit("setInvoiceAddressShowError", this.billingAddressId <= 0);
+        }
+    },
+
+    watch: {
+        billingAddressId: function billingAddressId() {
+            if (this.hasToValidate && this.showError) {
+                this.validate();
+            }
+        }
+    }
+});
+
+},{}],31:[function(require,module,exports){
+"use strict";
+
+Vue.component("shipping-address-select", {
+
+    delimiters: ["${", "}"],
+
+    template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"2\">\n        </address-select>\n    ",
+
+    props: ["selectedAddressId", "addressList"],
+
+    computed: Vuex.mapState({
+        deliveryAddressId: function deliveryAddressId(state) {
+            return state.address.deliveryAddressId;
+        }
+    }),
+
+    created: function created() {
+        if (!this.addressList) {
+            this.addressList = [];
+        }
+        // Adds the dummy entry for "delivery address same as invoice address"
+        this.addressList.unshift({ id: -99 });
+        this.$store.dispatch("initDeliveryAddress", { id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList });
+    },
+
+
+    methods: {
+        /**
+         * Update the delivery address
+         * @param selectedAddress
+         */
+        addressChanged: function addressChanged(selectedAddress) {
+            var _this = this;
+
+            this.$store.dispatch("selectAddress", { selectedAddress: selectedAddress, addressType: "2" }).then(function (response) {
+                document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: _this.deliveryAddressId }));
+            }, function (error) {});
+        }
+    }
+});
+
+},{}],32:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("contact-form", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            name: "",
+            userMail: "",
+            subject: "",
+            message: "",
+            orderId: "",
+            cc: false,
+            waiting: false,
+            privacyPolicyAccepted: false,
+            privacyPolicyShowError: false,
+            enableConfirmingPrivacyPolicy: App.config.contact.enableConfirmingPrivacyPolicy
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        window.sendMail = this.sendMail;
+    },
+
+
+    methods: {
+        validate: function validate(useCapture) {
+            var _this = this;
+
+            _ValidationService2.default.validate($("#contact-form")).done(function () {
+                if (!_this.enableConfirmingPrivacyPolicy || _this.privacyPolicyAccepted) {
+                    if (useCapture) {
+                        grecaptcha.execute();
+                    } else {
+                        _this.sendMail();
+                    }
+                } else {
+                    _this.privacyPolicyShowError = true;
+
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactCheckEntries"));
+                }
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+
+                if (_this.enableConfirmingPrivacyPolicy && !_this.privacyPolicyAccepted) {
+                    _this.privacyPolicyShowError = true;
+                }
+
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactCheckEntries"));
+            });
+        },
+        sendMail: function sendMail() {
+            var _this2 = this;
+
+            this.waiting = true;
+
+            var mailObj = {
+                subject: this.subject,
+                name: this.name,
+                message: this.message,
+                orderId: this.orderId,
+                userMail: this.userMail,
+                cc: this.cc
+            };
+
+            ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail" }, { supressNotifications: true }).done(function (response) {
+                _this2.waiting = false;
+                _this2.clearFields();
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.contactSendSuccess"));
+            }).fail(function (response) {
+                _this2.waiting = false;
+
+                if (response.validation_errors) {
+                    _this2._handleValidationErrors(response.validation_errors);
+                } else {
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactSendFail"));
+                }
+            });
+        },
+        clearFields: function clearFields() {
+            this.name = "";
+            this.userMail = "";
+            this.subject = "";
+            this.message = "";
+            this.orderId = "";
+            this.cc = false;
+            this.privacyPolicyAccepted = false;
+        },
+        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
+            _ValidationService2.default.markFailedValidationFields($("#contact-form"), validationErrors);
+
+            var errorMessage = "";
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var value = _step.value;
+
+                    errorMessage += value + "<br>";
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            NotificationService.error(errorMessage);
+        },
+        privacyPolicyValueChanged: function privacyPolicyValueChanged(value) {
+            this.privacyPolicyAccepted = value;
+
+            if (value) {
+                this.privacyPolicyShowError = false;
+            }
+        }
+    }
+});
+
+},{"services/ApiService":123,"services/NotificationService":128,"services/TranslationService":129,"services/ValidationService":131}],33:[function(require,module,exports){
+"use strict";
+
+Vue.component("contact-map", {
+
+    props: ["mapZoom", "zip", "street", "googleApiKey", "template"],
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            if (!document.getElementById("maps-api")) {
+                _this.addScript("https://maps.googleapis.com/maps/api/js?key=" + _this.googleApiKey);
+            }
+        });
+    },
+
+
+    methods: {
+        initMap: function initMap() {
+            var coordinates = { lat: -34.397, lng: 150.644 };
+
+            var gMap = new google.maps.Map(document.getElementById("contact-map"), {
+                center: coordinates,
+                zoom: parseInt(this.mapZoom)
+            });
+
+            this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
+        },
+        getLatLngByAddress: function getLatLngByAddress(geocoder, resultsMap) {
+            var addressData = this.zip + " " + this.street;
+
+            geocoder.geocode({ address: addressData }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    resultsMap.setCenter(results[0].geometry.location);
+
+                    // eslint-disable-next-line
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    console.log("Not possible to get Ltd and Lng for the given address. State: " + status);
+                }
+            });
+        },
+        addScript: function addScript(path) {
+            var _this2 = this;
+
+            var head = document.getElementsByTagName("head")[0];
+            var script = document.createElement("script");
+
+            script.type = "text/javascript";
+            script.src = path;
+            script.id = "contact-map-api";
+
+            if (script.readyState) {
+                script.onreadystatechange = function () {
+                    if (script.readyState === "loaded" || script.readyState === "complete") {
+                        script.onreadystatechange = null;
+                        _this2.initMap();
+                    }
+                };
+            } else {
+                script.onload = function () {
+                    _this2.initMap();
+                };
+            }
+
+            head.appendChild(script);
+        }
+    }
+});
+
+},{}],34:[function(require,module,exports){
+"use strict";
+
+var CountryService = require("services/CountryService");
+
+Vue.component("country-select", {
+
+    delimiters: ["${", "}"],
+
+    props: ["countryList", "selectedCountryId", "selectedStateId", "template", "addressType"],
+
+    data: function data() {
+        return {
+            stateList: [],
+            selectedCountry: {}
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        shippingCountryId: function shippingCountryId(state) {
+            return state.localization.shippingCountryId;
+        }
+    }),
+
+    /**
+     * Get the shipping countries
+     */
+    created: function created() {
+        this.$options.template = this.template;
+
+        CountryService.sortCountries(this.countryList);
+        this.updateSelectedCountry();
+    },
+
+
+    methods: {
+        /**
+         * Method to fire when the country has changed
+         */
+        countryChanged: function countryChanged(value) {
+            this.$emit("country-changed", this.getCountryById(parseInt(value)));
+            this.$emit("state-changed", null);
+        },
+
+
+        /**
+         * @param {*} value
+         */
+        stateChanged: function stateChanged(value) {
+            this.$emit("state-changed", parseInt(value));
+        },
+
+
+        /**
+         * @param countryId
+         * @returns {*}
+         */
+        getCountryById: function getCountryById(countryId) {
+            return this.countryList.find(function (country) {
+                if (country.id === countryId) {
+                    return country;
+                }
+
+                return null;
+            });
+        },
+        updateSelectedCountry: function updateSelectedCountry() {
+            var countryId = this.selectedCountryId || this.shippingCountryId;
+
+            this.selectedCountry = this.getCountryById(countryId);
+
+            if (this.selectedCountry) {
+                this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
+            }
+
+            this.countryChanged(countryId);
+        }
+    },
+
+    watch: {
+        selectedCountryId: function selectedCountryId() {
+            this.updateSelectedCountry();
+        }
+    }
+});
+
+},{"services/CountryService":125}],35:[function(require,module,exports){
+"use strict";
+
+var _utils = require("../../helper/utils");
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _UrlService = require("services/UrlService");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService = require("services/ModalService");
+
+Vue.component("registration", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        modalElement: String,
+        guestMode: { type: Boolean, default: false },
+        isSimpleRegistration: { type: Boolean, default: false },
+        template: String,
+        backlink: String
+    },
+
+    data: function data() {
+        return {
+            password: "",
+            passwordRepeat: "",
+            username: "",
+            billingAddress: {
+                countryId: null,
+                stateId: null,
+                addressSalutation: 0
+            },
+            isDisabled: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        /**
+         * Validate the registration form
+         */
+        validateRegistration: function validateRegistration() {
+            var _this = this;
+
+            _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
+                _this.sendRegistration();
+            }).fail(function (invalidFields) {
+                if (!(0, _utils.isNullOrUndefined)(_this.$refs.passwordHint) && invalidFields.indexOf(_this.$refs.passwordInput) >= 0) {
+                    _this.$refs.passwordHint.showPopper();
+                }
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+
+
+        /**
+         * Send the registration
+         */
+        sendRegistration: function sendRegistration() {
+            var _this2 = this;
+
+            var userObject = this.getUserObject();
+
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/customer", userObject).done(function (response) {
+                ApiService.setToken(response);
+
+                if (!response.code) {
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.regSuccessful")).closeAfter(3000);
+
+                    if (document.getElementById(_this2.modalElement) !== null) {
+                        ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
+                    }
+
+                    if (_this2.backlink !== null && _this2.backlink) {
+                        (0, _UrlService.navigateTo)(decodeURIComponent(_this2.backlink));
+                    } else {
+                        location.reload();
+                    }
+                } else {
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.regError")).closeAfter(3000);
+                }
+
+                _this2.isDisabled = false;
+            }).fail(function () {
+                _this2.isDisabled = false;
+            });
+        },
+        setAddressDataField: function setAddressDataField(_ref) {
+            var field = _ref.field,
+                value = _ref.value;
+
+            this.billingAddress[field] = value;
+            this.billingAddress = Object.assign({}, this.billingAddress);
+        },
+
+
+        /**
+         * Handle the user object which is send to the server
+         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
+         */
+        getUserObject: function getUserObject() {
+            var userObject = {
+                contact: {
+                    referrerId: 1,
+                    typeId: 1,
+                    options: {
+                        typeId: {
+                            typeId: 2,
+                            subTypeId: 4,
+                            value: this.username,
+                            priority: 0
+                        }
+                    }
+                }
+            };
+
+            if (!this.guestMode) {
+                userObject.contact.password = this.password;
+            }
+
+            if (!this.isSimpleRegistration) {
+                userObject.billingAddress = this.billingAddress;
+            }
+
+            return userObject;
+        }
+    }
+});
+
+},{"../../helper/utils":120,"services/ApiService":123,"services/ModalService":127,"services/NotificationService":128,"services/TranslationService":129,"services/UrlService":130,"services/ValidationService":131}],36:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _UrlService = require("services/UrlService");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("reset-password-form", {
+
+    props: ["contactId", "hash", "template"],
+
+    data: function data() {
+        return {
+            passwordFirst: "",
+            passwordSecond: "",
+            pwdFields: [],
+            isDisabled: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.pwdFields = $("#reset-password-form-" + _this._uid).find(".input-unit");
+        });
+    },
+
+
+    watch: {
+        passwordFirst: function passwordFirst(val, oldVal) {
+            this.resetError();
+        },
+        passwordSecond: function passwordSecond(val, oldVal) {
+            this.resetError();
+        }
+    },
+
+    methods: {
+        validatePassword: function validatePassword() {
+            var _this2 = this;
+
+            _ValidationService2.default.validate($("#reset-password-form-" + this._uid)).done(function () {
+                if (_this2.checkPasswordEquals()) {
+                    _this2.saveNewPassword();
+                }
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+        resetError: function resetError() {
+            _ValidationService2.default.unmarkAllFields($("#reset-password-form-" + this._uid));
+            this.pwdFields.removeClass("check-pwds-error");
+            $(".error-save-pwd-msg").hide();
+        },
+        checkPasswordEquals: function checkPasswordEquals() {
+            if (this.passwordFirst !== this.passwordSecond) {
+                this.pwdFields.addClass("check-pwds-error");
+                $(".error-save-pwd-msg").show();
+
+                return false;
+            }
+
+            return true;
+        },
+        saveNewPassword: function saveNewPassword() {
+            var _this3 = this;
+
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/customer/password", { password: this.passwordFirst, password2: this.passwordSecond, contactId: this.contactId, hash: this.hash }).done(function () {
+                _this3.resetFields();
+
+                _this3.isDisabled = false;
+
+                (0, _UrlService.navigateTo)(window.location.origin);
+
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.resetPwChangePasswordSuccessful")).closeAfter(3000);
+            }).fail(function () {
+                _this3.isDisabled = false;
+
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.resetPwChangePasswordFailed")).closeAfter(5000);
+            });
+        },
+        resetFields: function resetFields() {
+            this.passwordFirst = "";
+            this.passwordSecond = "";
+            this.contactId = 0;
+            this.hash = "";
+        }
+    }
+
+});
+
+},{"services/ApiService":123,"services/NotificationService":128,"services/TranslationService":129,"services/UrlService":130,"services/ValidationService":131}],37:[function(require,module,exports){
+"use strict";
+
+var _AddressFieldService = require("services/AddressFieldService");
+
+var _AddressFieldService2 = _interopRequireDefault(_AddressFieldService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("salutation-select", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "addressData", "addressType"],
+
+    data: function data() {
+        return {
+            salutations: {
+                complete: {
+                    de: [{
+                        value: "Herr",
+                        id: 0
+                    }, {
+                        value: "Frau",
+                        id: 1
+                    }, {
+                        value: "Firma",
+                        id: 2
+                    }],
+                    en: [{
+                        value: "Mr.",
+                        id: 0
+                    }, {
+                        value: "Ms.",
+                        id: 1
+                    }, {
+                        value: "Company",
+                        id: 2
+                    }]
+                },
+                withoutCompany: {
+                    de: [{
+                        value: "Herr",
+                        id: 0
+                    }, {
+                        value: "Frau",
+                        id: 1
+                    }],
+                    en: [{
+                        value: "Mr.",
+                        id: 0
+                    }, {
+                        value: "Ms.",
+                        id: 1
+                    }]
+                }
+            },
+            currentSalutation: {}
+        };
+    },
+
+
+    /**
+     * Get the shipping countries
+     */
+    created: function created() {
+        this.$options.template = this.template;
+
+        if (App.language === "de") {
+            if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
+                this.currentSalutation = this.salutations.complete.de;
+            } else {
+                this.currentSalutation = this.salutations.withoutCompany.de;
+            }
+        } else if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
+            this.currentSalutation = this.salutations.complete.en;
+        } else {
+            this.currentSalutation = this.salutations.withoutCompany.en;
+        }
+    },
+
+
+    methods: {
+        emitInputEvent: function emitInputEvent(value) {
+            var gender = this.mapSalutationIdToGender(value);
+
+            this.$emit("input", { field: "gender", value: gender });
+            this.$emit("input", { field: "addressSalutation", value: value });
+            this.$emit("input", { field: "name1", value: "" });
+        },
+        mapSalutationIdToGender: function mapSalutationIdToGender(id) {
+            if (id === 0) {
+                return "male";
+            } else if (id === 1) {
+                return "female";
+            }
+            return null;
+        },
+        checkGenderCompany: function checkGenderCompany(id) {
+            if (id === 2) {
+                var gender = this.mapSalutationIdToGender(id);
+
+                return gender === null && this.addressData.name1 !== null || gender === null && this.addressData.name1 !== "";
+            }
+            return true;
+        }
+    }
+});
+
+},{"services/AddressFieldService":122}],38:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+var _UrlService = require("services/UrlService");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+
+Vue.component("guest-login", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "backlink"],
+
+    data: function data() {
+        return {
+            email: "",
+            isDisabled: false
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    methods: {
+        validate: function validate() {
+            _ValidationService2.default.validate($("#guest-login-form-" + this._uid)).done(function () {
+                this.sendEMail();
+            }.bind(this)).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+
+        sendEMail: function sendEMail() {
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/guest", { email: this.email }).done(function () {
+                if (this.backlink !== null && this.backlink) {
+                    (0, _UrlService.navigateTo)(decodeURIComponent(this.backlink));
+                } else {
+                    this.isDisabled = false;
+                }
+            }.bind(this));
+        }
+    }
+});
+
+},{"services/ApiService":123,"services/UrlService":130,"services/ValidationService":131}],39:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService = require("services/ModalService");
+
+Vue.component("login", {
+
+    delimiters: ["${", "}"],
+
+    props: ["modalElement", "backlink", "hasToForward", "template"],
+
+    data: function data() {
+        return {
+            password: "",
+            username: "",
+            loginFields: [],
+            isDisabled: false,
+            isPwdReset: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.loginFields = $(".login-container").find(".input-unit");
+        });
+    },
+
+
+    watch: {
+        password: function password(val, oldVal) {
+            this.resetError();
+        },
+        username: function username(val, oldVal) {
+            this.resetError();
+        }
+    },
+
+    methods: {
+        /**
+         * Open the login modal
+         */
+        showLogin: function showLogin() {
+            ModalService.findModal(document.getElementById(this.modalElement)).show();
+        },
+        validateLogin: function validateLogin() {
+            var _this2 = this;
+
+            if (!this.isPwdReset) {
+                _ValidationService2.default.validate($("#login-form-" + this._uid)).done(function () {
+                    _this2.sendLogin();
+                }).fail(function (invalidFields) {
+                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
+                });
+            }
+        },
+        validateResetPwd: function validateResetPwd() {
+            var _this3 = this;
+
+            if (this.isPwdReset) {
+                _ValidationService2.default.validate($("#reset-pwd-form-" + this._uid)).done(function () {
+                    _this3.sendResetPwd();
+                }).fail(function (invalidFields) {
+                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
+                });
+            }
+        },
+
+
+        /**
+         * Send the login data
+         */
+        sendLogin: function sendLogin() {
+            var _this4 = this;
+
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/customer/login", { email: this.username, password: this.password }, { supressNotifications: true }).done(function (response) {
+                ApiService.setToken(response);
+
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.loginSuccessful")).closeAfter(10000);
+
+                if (_this4.backlink !== null && _this4.backlink) {
+                    location.assign(decodeURIComponent(_this4.backlink));
+                } else if (_this4.hasToForward) {
+                    location.assign(location.origin);
+                } else {
+                    location.reload();
+                }
+            }).fail(function (response) {
+                _this4.isDisabled = false;
+
+                switch (response.error.code) {
+                    case 401:
+                        _this4.loginFields.addClass("has-login-error");
+
+                        var translationKey = "Ceres::Template.loginFailed";
+
+                        if (response.error.message.length > 0 && response.error.message === "user is blocked") {
+                            translationKey = "Ceres::Template.loginBlocked";
+                        }
+                        NotificationService.error(_TranslationService2.default.translate(translationKey)).closeAfter(10000);
+                        break;
+                    default:
+                        return;
+                }
+            });
+        },
+
+
+        /**
+         *  Reset password
+         */
+        sendResetPwd: function sendResetPwd() {
+            var _this5 = this;
+
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPwMailSubject" }).done(function () {
+                if (document.getElementById(_this5.modalElement) !== null) {
+                    ModalService.findModal(document.getElementById(_this5.modalElement)).hide();
+
+                    _this5.isDisabled = false;
+
+                    _this5.cancelResetPwd();
+                } else {
+                    (0, _UrlService.navigateTo)(window.location.origin);
+                }
+
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.loginSendEmailOk")).closeAfter(5000);
+            }).fail(function () {
+                _this5.isDisabled = false;
+
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.loginResetPwDErrorOnSendEmail")).closeAfter(5000);
+            });
+        },
+        showResetPwdView: function showResetPwdView() {
+            this.resetError();
+            this.isPwdReset = true;
+
+            if (document.getElementById(this.modalElement) !== null) {
+                $(".login-modal .modal-title").html(_TranslationService2.default.translate("Ceres::Template.loginForgotPassword"));
+            } else {
+                $(".login-view-title").html(_TranslationService2.default.translate("Ceres::Template.loginForgotPassword"));
+            }
+
+            $(".login-container").slideUp("fast", function () {
+                $(".reset-pwd-container").slideDown("fast");
+            });
+        },
+        cancelResetPwd: function cancelResetPwd() {
+            this.resetError();
+            this.isPwdReset = false;
+
+            if (document.getElementById(this.modalElement) !== null) {
+                $(".login-modal .modal-title").text(_TranslationService2.default.translate("Ceres::Template.login"));
+            } else {
+                $(".login-view-title").text(_TranslationService2.default.translate("Ceres::Template.login"));
+            }
+
+            $(".reset-pwd-container").slideUp("fast", function () {
+                $(".login-container").slideDown("fast");
+            });
+        },
+        resetError: function resetError() {
+            this.loginFields.removeClass("has-login-error");
+            _ValidationService2.default.unmarkAllFields($("#login-form-" + this._uid));
+            _ValidationService2.default.unmarkAllFields($("#reset-pwd-form-" + this._uid));
+        }
+    }
+});
+
+},{"services/ApiService":123,"services/ModalService":127,"services/NotificationService":128,"services/TranslationService":129,"services/UrlService":130,"services/ValidationService":131}],40:[function(require,module,exports){
+"use strict";
+
+Vue.component("login-view", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            isGuestMode: false
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    }
+});
+
+},{}],41:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+
+Vue.component("user-login-handler", {
+
+    delimiters: ["${", "}"],
+
+    props: ["userData", "template"],
+
+    computed: Vuex.mapGetters(["username", "isLoggedIn"]),
+
+    created: function created() {
+        this.$options.template = this.template;
+        this.$store.commit("setUserData", this.userData);
+    },
+
+
+    /**
+     * Add the global event listener for login and logout
+     */
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.addEventListeners();
+        });
+    },
+
+
+    methods: {
+        /**
+         * Adds login/logout event listeners
+         */
+        addEventListeners: function addEventListeners() {
+            var _this2 = this;
+
+            ApiService.listen("AfterAccountAuthentication", function (userData) {
+                _this2.$store.commit("setUserData", userData.accountContact);
+            });
+
+            ApiService.listen("AfterAccountContactLogout", function () {
+                _this2.$store.commit("setUserData", null);
+            });
+        },
+        unmarkInputFields: function unmarkInputFields() {
+            _ValidationService2.default.unmarkAllFields($("#login"));
+            _ValidationService2.default.unmarkAllFields($("#registration"));
+        }
+    }
+});
+
+},{"services/ApiService":123,"services/ValidationService":131}],42:[function(require,module,exports){
+"use strict";
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("add-to-wish-list", {
+
+    props: ["isActive", "variationId", "template"],
+
+    data: function data() {
+        return {
+            wishListCount: 0,
+            _isActive: this.isActive,
+            isLoading: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.changeTooltipText();
+        });
+    },
+
+
+    methods: {
+        switchState: function switchState() {
+            if (this.$data._isActive) {
+                this.removeFromWishList();
+            } else {
+                this.addToWishList();
+            }
+        },
+        addToWishList: function addToWishList() {
+            var _this2 = this;
+
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.$data._isActive = true;
+                this.changeTooltipText();
+
+                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
+                    _this2.isLoading = false;
+
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
+                }, function (error) {
+                    _this2.isLoading = false;
+                    _this2.$data._isActive = false;
+                    _this2.changeTooltipText();
+                });
+            }
+        },
+        removeFromWishList: function removeFromWishList() {
+            var _this3 = this;
+
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.$data._isActive = false;
+                this.changeTooltipText();
+
+                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
+                    _this3.isLoading = false;
+
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
+                }, function (error) {
+                    _this3.isLoading = false;
+                    _this3.$data._isActive = true;
+                    _this3.changeTooltipText();
+                });
+            }
+        },
+        changeTooltipText: function changeTooltipText() {
+            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.$data._isActive ? "singleItemWishListRemove" : "singleItemWishListAdd"));
+
+            $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
+        }
+    }
+});
+
+},{"services/NotificationService":128,"services/TranslationService":129}],43:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+Vue.component("graduated-prices", {
+    props: ["template"],
+
+    computed: _extends({
+        graduatedPrices: function graduatedPrices() {
+            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
+            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
+
+            prices = prices.filter(function (price) {
+                return price.minimumOrderQuantity > minQuantity;
+            });
+
+            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
+                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
+            });
+        },
+        activeGraduationIndex: function activeGraduationIndex() {
+            var _this = this;
+
+            var prices = this.graduatedPrices.filter(function (price) {
+                return _this.variationOrderQuantity >= price.minimumOrderQuantity;
+            });
+
+            if (!prices.length) {
+                return -1;
+            }
+
+            var price = prices.reduce(function (prev, current) {
+                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
+            });
+
+            return this.graduatedPrices.indexOf(price);
+        }
+    }, Vuex.mapState({
+        variationOrderQuantity: function variationOrderQuantity(state) {
+            return state.item.variationOrderQuantity;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+    }
+});
+
+},{}],44:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-bundle", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-bundle"
+        },
+        bundleType: String,
+        bundleComponents: Array
+    },
+
+    data: function data() {
+        return {
+            bundleSetting: null
+        };
+    },
+
+
+    computed: {
+        showItemBundleItems: function showItemBundleItems() {
+            return this.bundleSetting !== "1" && this.bundleType === "bundle";
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.bundleSetting = _this.$refs.bundleSetting.innerText;
+        });
+    },
+
+
+    methods: {
+        getBundleInnerText: function getBundleInnerText(item) {
+            item.variation.bundleType = null;
+
+            return item;
+        }
+    }
+});
+
+},{}],45:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-image-carousel", {
+
+    delimiters: ["${", "}"],
+
+    props: ["imageUrlAccessor", "template"],
+
+    data: function data() {
+        return {
+            currentItem: 0
+        };
+    },
+
+
+    computed: _extends({
+        carouselImages: function carouselImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+        },
+        singleImages: function singleImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+        }
+    }, Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation;
+        }
+    })),
+
+    watch: {
+        currentVariation: {
+            handler: function handler(val, oldVal) {
+                var _this = this;
+
+                if (val !== oldVal) {
+                    setTimeout(function () {
+                        _this.reInitialize();
+                    }, 1);
+                }
+            },
+
+            deep: true
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this2 = this;
+
+        this.$nextTick(function () {
+            _this2.initCarousel();
+            _this2.initThumbCarousel();
+        });
+    },
+
+
+    methods: {
+        getImageCount: function getImageCount() {
+            return this.carouselImages.length;
+        },
+        reInitialize: function reInitialize() {
+            var $owl = $(this.$refs.single);
+
+            $owl.trigger("destroy.owl.carousel");
+            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $owl.find(".owl-item").remove();
+
+            var $thumbs = $(this.$refs.thumbs);
+
+            $thumbs.trigger("destroy.owl.carousel");
+            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $thumbs.find(".owl-item").remove();
+
+            this.initCarousel();
+            this.initThumbCarousel();
+        },
+        initCarousel: function initCarousel() {
+            var _this3 = this;
+
+            var imageCount = this.getImageCount();
+
+            $(this.$refs.single).owlCarousel({
+                autoHeight: true,
+                dots: true,
+                items: 1,
+                lazyLoad: true,
+                loop: true,
+                margin: 10,
+                mouseDrag: imageCount > 1,
+                nav: imageCount > 1,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350,
+                onChanged: function onChanged(event) {
+                    var $thumb = $(_this3.$refs.thumbs);
+
+                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
+                }
+            });
+
+            if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
+                window.lightbox.option({
+                    wrapAround: true
+                });
+                window.lightbox.imageCountLabel = function (current, total) {
+                    if (imageCount <= 1) {
+                        return "";
+                    }
+                    // owl prepends 2 clones to allow endless scrolling
+                    current = current % imageCount + 1;
+                    return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
+                };
+
+                var originalFn = window.lightbox.changeImage;
+
+                window.lightbox.changeImage = function (imageNumber) {
+                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
+                        imageNumber--;
+                    } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
+                        imageNumber++;
+                    }
+                    return originalFn.call(window.lightbox, imageNumber);
+                };
+            }
+
+            $(this.$refs.single).on("changed.owl.carousel", function (event) {
+                _this3.currentItem = event.page.index;
+            });
+        },
+        initThumbCarousel: function initThumbCarousel() {
+            $(this.$refs.thumbs).owlCarousel({
+                autoHeight: true,
+                dots: false,
+                items: 5,
+                lazyLoad: true,
+                loop: false,
+                margin: 10,
+                mouseDrag: false,
+                center: false,
+                nav: true,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350
+            });
+        },
+        goTo: function goTo(index) {
+            var $owl = $(this.$refs.single);
+
+            $owl.trigger("to.owl.carousel", [index, 350]);
+        },
+        orderByPosition: function orderByPosition(list) {
+            return list.sort(function (entryA, entryB) {
+                if (entryA.position > entryB.position) {
+                    return 1;
+                }
+                if (entryA.position < entryB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+
+            return altText;
+        }
+    }
+});
+
+},{"../../helper/utils":120,"services/TranslationService":129}],46:[function(require,module,exports){
+"use strict";
+
+Vue.component("order-properties", {
+
+    props: ["template"],
+
+    computed: Vuex.mapState({
+        properties: function properties(state) {
+            return state.item.variation.documents[0].data.properties;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: Vuex.mapMutations(["setVariationOrderProperty"])
+});
+
+},{}],47:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+Vue.component("order-property-list", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-property-list"
+        }
+    },
+
+    data: function data() {
+        return {
+            activeSlide: 0,
+            touchedSlides: { 0: true }
+        };
+    },
+
+    computed: _extends({
+        sortedGroupedProperties: function sortedGroupedProperties() {
+            var groupedProperties = JSON.parse(JSON.stringify(this.variationGroupedProperties));
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = groupedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var group = _step.value;
+
+                    this.sortGroupProperties(group);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return this.getSortedGroups(groupedProperties);
+        },
+        missingPropertyGroupIds: function missingPropertyGroupIds() {
+            if (this.variationMarkInvalidProperties) {
+                return [].concat(_toConsumableArray(new Set(this.variationMissingProperties.map(function (property) {
+                    return property.group && property.group.id;
+                }))));
+            }
+
+            return [];
+        }
+    }, Vuex.mapState({
+        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
+            return state.item.variationMarkInvalidProperties;
+        }
+    }), Vuex.mapGetters(["variationGroupedProperties", "variationMissingProperties"])),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        sortGroupProperties: function sortGroupProperties(group) {
+            return group.properties.sort(function (prev, current) {
+                if (prev.position > current.position) {
+                    return 1;
+                }
+                if (prev.position < current.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        getSortedGroups: function getSortedGroups(groups) {
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = groups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var group = _step2.value;
+
+                    var lowestPosition = group.properties.reduce(function (prev, current) {
+                        return prev.position < current.position ? prev : current;
+                    });
+
+                    group.lowestPosition = lowestPosition.position;
+
+                    var groupId = group.group ? group.group.id : null;
+
+                    if (this.variationMarkInvalidProperties && this.missingPropertyGroupIds.includes(groupId)) {
+                        group.hasError = true;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            return groups.sort(function (prev, current) {
+                if (prev.lowestPosition > current.lowestPosition) {
+                    return 1;
+                }
+                if (prev.lowestPosition < current.lowestPosition) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        slideTo: function slideTo(position) {
+            if (position >= 0 && position < this.sortedGroupedProperties.length) {
+                this.activeSlide = position;
+                this.touchedSlides[this.activeSlide] = true;
+            }
+        }
+    }
+});
+
+},{}],48:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("order-property-list-group", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-property-list-group"
+        },
+        propertyGroup: Object
+    },
+
+    computed: {
+        isShownOnItemPageCount: function isShownOnItemPageCount() {
+            var properties = this.propertyGroup.properties.filter(function (property) {
+                return property.isShownOnItemPage;
+            });
+
+            return properties.length;
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: _extends({
+        unsetDeselectedRadios: function unsetDeselectedRadios(propertyId) {
+            var _this = this;
+
+            var propertiesToUnselect = this.propertyGroup.properties.filter(function (property) {
+                return property.id !== propertyId && _this.isPropertyTypeRadio(property);
+            });
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = propertiesToUnselect[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var property = _step.value;
+
+                    this.setVariationOrderProperty({ propertyId: property.id, value: null });
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        },
+        isPropertyTypeRadio: function isPropertyTypeRadio(property) {
+            var orderPropertyGroupingType = this.propertyGroup.group ? this.propertyGroup.group.orderPropertyGroupingType : null;
+            var valueType = property.valueType;
+
+            if (valueType === "empty" && orderPropertyGroupingType === "single") {
+                return true;
+            }
+
+            return false;
+        }
+    }, Vuex.mapMutations(["setVariationOrderProperty"]))
+});
+
+},{}],49:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("order-property-list-item", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-property-list-item"
+        },
+        group: Object,
+        property: Object
+    },
+
+    data: function data() {
+        return {
+            inputValue: "",
+            selectedFile: null,
+            waiting: false
+        };
+    },
+
+
+    computed: _extends({
+        inputType: function inputType() {
+            var orderPropertyGroupingType = this.group ? this.group.orderPropertyGroupingType : null;
+            var valueType = this.property.valueType;
+
+            if (valueType === "empty") {
+                if (!orderPropertyGroupingType || orderPropertyGroupingType === "none" || orderPropertyGroupingType === "multi") {
+                    return "checkbox";
+                }
+
+                return "radio";
+            }
+
+            return valueType;
+        },
+        selectedFileName: function selectedFileName() {
+            if (this.selectedFile) {
+                return this.selectedFile.name;
+            }
+
+            return "";
+        },
+        hasError: function hasError() {
+            var _this = this;
+
+            if (this.variationMarkInvalidProperties && this.inputType === "radio") {
+                return this.variationMissingProperties.find(function (property) {
+                    return property.property.id === _this.property.id;
+                });
+            }
+
+            return this.variationMarkInvalidProperties && !this.property.value;
+        },
+        surcharge: function surcharge() {
+            return this.property.itemSurcharge || this.property.surcharge;
+        }
+    }, Vuex.mapState({
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        },
+        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
+            return state.item.variationMarkInvalidProperties;
+        }
+    }), Vuex.mapGetters(["variationMissingProperties"])),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: _extends({
+        onInputValueChanged: function onInputValueChanged(value) {
+            if (this.inputType === "int") {
+                value = this.validateInt(value);
+            } else if (this.inputType === "float") {
+                value = this.validateFloat(value);
+            } else if (this.inputType === "checkbox") {
+                if (!value) {
+                    value = null;
+                }
+            } else if (this.inputType === "radio") {
+                this.$emit("radio-change", this.property.id);
+            }
+
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
+        },
+        validateInt: function validateInt(value) {
+            value = parseInt(value);
+
+            if (isNaN(value)) {
+                value = null;
+            }
+
+            this.inputValue = value;
+
+            return value;
+        },
+        validateFloat: function validateFloat(value) {
+            value = parseFloat(value.replace(App.decimalSeparator, "."));
+
+            if (isNaN(value)) {
+                value = null;
+            } else {
+                value = value.toString().replace(".", App.decimalSeparator);
+            }
+
+            this.inputValue = value;
+
+            return value;
+        }
+    }, Vuex.mapMutations(["setVariationOrderProperty", "setIsBasketLoading"]), {
+        setPropertyFile: function setPropertyFile(event) {
+            if (event.target && event.target.files && event.target.files.length > 0) {
+                this.selectedFile = event.target.files[0];
+                this.uploadPropertyFile(this.selectedFile);
+            }
+        },
+        uploadPropertyFile: function uploadPropertyFile(file) {
+            var _this2 = this;
+
+            this.setIsBasketLoading(true);
+            this.waiting = true;
+
+            var fileData = new FormData();
+
+            fileData.append("fileData", file);
+
+            ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
+                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
+            }).fail(function (error) {
+                _this2.clearSelectedFile();
+                _this2._handleValidationErrors(error);
+            }).always(function (response) {
+                _this2.setIsBasketLoading(false);
+                _this2.waiting = false;
+            });
+        },
+        clearSelectedFile: function clearSelectedFile() {
+            this.selectedFile = null;
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
+        },
+        _handleValidationErrors: function _handleValidationErrors(error) {
+            if (error.hasOwnProperty("validation_errors")) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = Object.values(error.validation_errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var err = _step.value;
+
+                        NotificationService.error(err[0]);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        }
+    })
+});
+
+},{"services/ApiService":123,"services/NotificationService":128}],50:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _number = require("../../helper/number");
+
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("../../services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _debounce = require("../../helper/debounce");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("quantity-input", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        value: {
+            type: Number,
+            required: true
+        },
+        timeout: {
+            type: Number,
+            required: false,
+            default: 500
+        },
+        min: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        max: {
+            type: Number,
+            required: false
+        },
+        interval: {
+            type: Number,
+            required: false,
+            default: 1
+        },
+        template: {
+            type: String,
+            required: true
+        },
+        waiting: {
+            type: Boolean,
+            required: false
+        },
+        variationId: {
+            type: Number,
+            required: false
+        }
+    },
+
+    data: function data() {
+        return {
+            compValue: this.value,
+            compMin: this.min,
+            compMax: this.max,
+            compInterval: this.interval,
+            compDecimals: 0,
+            onValueChanged: null
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        this.$options.template = this.template;
+
+        this.compInterval = (0, _utils.defaultValue)(this.compInterval, 1);
+        this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
+
+        this.compDecimals = (0, _number.floatLength)(this.compInterval);
+
+        this.onValueChanged = (0, _debounce.debounce)(function () {
+            _this.$emit("quantity-change", _this.compValue);
+        }, (0, _utils.defaultValue)(this.timeout, 500));
+
+        if (!(0, _utils.isNullOrUndefined)(this.variationId)) {
+            this.fetchQuantityFromBasket();
+        }
+    },
+
+
+    computed: _extends({
+        variationBasketQuantity: function variationBasketQuantity() {
+            var _this2 = this;
+
+            if ((0, _utils.isNullOrUndefined)(this.variationId)) {
+                return 0;
+            }
+            var basketObject = this.$store.state.basket.items.find(function (variations) {
+                return variations.variationId === _this2.variationId;
+            });
+
+            return basketObject ? basketObject.quantity : 0;
+        },
+        isMinimum: function isMinimum() {
+            return (0, _utils.isDefined)(this.compMin) && this.compValue - this.compInterval < this.compMin;
+        },
+        isMaximum: function isMaximum() {
+            return (0, _utils.isDefined)(this.compMax) && this.compValue + this.compInterval > this.compMax;
+        },
+        minimumHint: function minimumHint() {
+            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMin", {
+                min: this.min
+            });
+        },
+        maximumHint: function maximumHint() {
+            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMax", {
+                max: this.max
+            });
+        },
+        displayValue: function displayValue() {
+            return this.$options.filters.numberFormat(this.compValue);
+        }
+    }, Vuex.mapState({
+        basketItems: function basketItems(state) {
+            return state.basket.items;
+        }
+    })),
+
+    watch: {
+        basketItems: {
+            handler: function handler(newValue, oldValue) {
+                if ((0, _utils.isDefined)(this.variationId) && (0, _utils.isDefined)(oldValue) && JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+                    this.fetchQuantityFromBasket();
+                }
+            },
+
+            deep: true
+        },
+
+        value: function value(newValue, oldValue) {
+            if (newValue !== oldValue) {
+                this.setValue(newValue);
+            }
+        }
+    },
+
+    methods: {
+        increaseValue: function increaseValue() {
+            var newValue = (0, _number.formatFloat)(this.compValue + this.compInterval, this.compDecimals);
+
+            if (((0, _utils.isNullOrUndefined)(this.compMax) || newValue <= this.compMax) && !this.waiting) {
+                this.setValue(newValue);
+            }
+        },
+        decreaseValue: function decreaseValue() {
+            var newValue = (0, _number.formatFloat)(this.compValue - this.compInterval, this.compDecimals);
+
+            if (((0, _utils.isNullOrUndefined)(this.compMin) || newValue >= this.compMin) && !this.waiting) {
+                this.setValue(newValue);
+            }
+        },
+        setValue: function setValue(value) {
+            value = parseFloat(value);
+            if (isNaN(value)) {
+                value = (0, _utils.defaultValue)(this.compMin, 1);
+            }
+
+            // limit new value to min/ max value
+            value = (0, _number.limit)(value, this.compMin, this.compMax);
+
+            // make sure, new value is an even multiple of interval
+            var diff = (0, _number.formatFloat)(value % this.compInterval, this.compDecimals, true);
+
+            if (diff > 0 && diff !== this.compInterval) {
+                if (diff < this.compInterval / 2) {
+                    value -= diff;
+                } else {
+                    value += this.compInterval - diff;
+                }
+                value = (0, _number.limit)(value, this.compMin, this.compMax);
+            }
+
+            // cut fraction
+            value = (0, _number.formatFloat)(value, this.compDecimals);
+
+            if (value !== this.compValue) {
+                this.compValue = value;
+                this.onValueChanged();
+            }
+        },
+        fetchQuantityFromBasket: function fetchQuantityFromBasket() {
+            if (!(0, _utils.isNullOrUndefined)(this.min) && this.variationBasketQuantity >= this.min) {
+                // minimum quantity already in basket
+                this.compMin = this.compInterval;
+            }
+
+            if (!(0, _utils.isNullOrUndefined)(this.max)) {
+                // decrease maximum quantity by quantity of variations already in basket
+                this.compMax = this.max - this.variationBasketQuantity;
+
+                if (this.variationBasketQuantity + this.compInterval > this.max) {
+                    this.compMin = 0;
+                    this.compMax = 0;
+                    this.$emit("out-of-stock", true);
+                } else {
+                    this.$emit("out-of-stock", false);
+                }
+            }
+
+            this.setValue(this.compMin);
+        }
+    }
+});
+
+},{"../../helper/debounce":115,"../../helper/number":117,"../../helper/utils":120,"../../services/TranslationService":129}],51:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("single-item", {
+
+    props: ["template", "itemData", "variationListData", "attributeNameMap"],
+
+    data: function data() {
+        return {
+            isVariationSelected: true
+        };
+    },
+
+
+    computed: _extends({
+        isDescriptionTabActive: function isDescriptionTabActive() {
+            return App.config.item.itemData.includes("item.description") && !!this.currentVariation.texts.description.length;
+        },
+        isTechnicalDataTabActive: function isTechnicalDataTabActive() {
+            return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
+        }
+    }, Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation.documents[0].data;
+        },
+        variations: function variations(state) {
+            return state.item.variationList;
+        },
+        isInWishList: function isInWishList(state) {
+            return state.item.variation.documents[0].isInWishListVariation;
+        }
+    }), Vuex.mapGetters(["variationTotalPrice", "variationMissingProperties", "variationGroupedProperties", "variationGraduatedPrice"])),
+
+    created: function created() {
+        var _this = this;
+
+        this.$options.template = this.template;
+        this.$store.commit("setVariation", this.itemData);
+        this.$store.commit("setVariationList", this.variationListData);
+
+        this.$store.watch(function () {
+            return _this.$store.getters.variationTotalPrice;
+        }, function () {
+            $(_this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+        });
+    }
+});
+
+},{}],52:[function(require,module,exports){
+"use strict";
+
+var _util = require("util");
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var ApiService = require("services/ApiService");
+
+// cache loaded variation data for reuse
+var VariationData = {};
+
+Vue.component("variation-select", {
+
+    delimiters: ["${", "}"],
+
+    props: ["attributes", "variations", "preselect", "template"],
+
+    data: function data() {
+        return {
+            // Collection of currently selected variation attributes.
+            selectedAttributes: {}
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            // initialize selected attributes to be tracked by change detection
+            var attributes = {};
+
+            for (var attributeId in _this.attributes) {
+                attributes[attributeId] = null;
+            }
+            _this.selectedAttributes = attributes;
+
+            // set attributes of preselected variation if exists
+            if (_this.preselect) {
+                // find variation by id
+                var preselectedVariation = _this.variations.filter(function (variation) {
+                    // eslint-disable-next-line eqeqeq
+                    return variation.variationId == _this.preselect;
+                });
+
+                if (!!preselectedVariation && preselectedVariation.length === 1) {
+                    // set attributes of preselected variation
+                    _this.setAttributes(preselectedVariation[0]);
+                }
+            }
+        });
+    },
+
+
+    methods: {
+
+        /**
+         * Finds all variations matching a given set of attributes.
+         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
+         * @returns {array}                    A list of matching variations.
+         */
+        filterVariations: function filterVariations(attributes) {
+            attributes = attributes || this.selectedAttributes;
+            return this.variations.filter(function (variation) {
+                for (var i = 0; i < variation.attributes.length; i++) {
+                    var id = variation.attributes[i].attributeId;
+                    var val = variation.attributes[i].attributeValueId;
+
+                    if (!!attributes[id] && attributes[id] != val) {
+                        return false;
+                    }
+                }
+
+                return variation.attributes.length > 0;
+            });
+        },
+
+
+        /**
+         * Tests if a given attribute value is not available depending on the current selection.
+         * @param {int}     attributeId         The id of the attribute
+         * @param {int}     attributeValueId    The valueId of the attribute
+         * @returns {boolean}                   True if the value can be combined with the current selection.
+         */
+        isEnabled: function isEnabled(attributeId, attributeValueId) {
+            // clone selectedAttributes to avoid touching objects bound to UI
+            var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+
+            attributes[attributeId] = attributeValueId;
+            return this.filterVariations(attributes).length > 0;
+        },
+
+
+        /**
+         * Set selected attributes by a given variation.
+         * @param {*}           variation   The variation to set as selected
+         * @returns {boolean}               true if at least one attribute has been changed
+         */
+        setAttributes: function setAttributes(variation) {
+            var hasChanges = false;
+
+            for (var i = 0; i < variation.attributes.length; i++) {
+                var id = variation.attributes[i].attributeId;
+                var val = variation.attributes[i].attributeValueId;
+
+                if (this.selectedAttributes[id] !== val) {
+                    this.selectedAttributes[id] = val;
+                    hasChanges = true;
+                }
+            }
+
+            return hasChanges;
+        },
+        onSelectionChange: function onSelectionChange(event) {
+            this.$emit("is-valid-change", false);
+
+            if ((0, _util.isNull)(event)) {
+                var values = Object.values(this.selectedAttributes);
+                var uniqueValues = [].concat(_toConsumableArray(new Set(values)));
+
+                if (uniqueValues.length === 1 && (0, _util.isNull)(uniqueValues[0])) {
+                    var mainVariation = this.variations.find(function (variation) {
+                        return !variation.attributes.length;
+                    });
+
+                    if (mainVariation) {
+                        this.setVariation(mainVariation.variationId);
+                    }
+                }
+            } else {
+                // search variations matching current selection
+                var possibleVariations = this.filterVariations();
+
+                if (possibleVariations.length === 1) {
+                    // only 1 matching variation remaining:
+                    // set remaining attributes if not set already. Will trigger this method again.
+                    if (!this.setAttributes(possibleVariations[0])) {
+                        // all attributes are set => load variation data
+                        this.setVariation(possibleVariations[0].variationId);
+                    } else {
+                        this.onSelectionChange();
+                    }
+                }
+            }
+        },
+        setVariation: function setVariation(variationId) {
+            var _this2 = this;
+
+            if (VariationData[variationId]) {
+                // reuse cached variation data
+                this.$store.commit("setVariation", VariationData[variationId]);
+
+                document.dispatchEvent(new CustomEvent("onVariationChanged", {
+                    detail: {
+                        attributes: VariationData[variationId].attributes,
+                        documents: VariationData[variationId].documents
+                    }
+                }));
+
+                this.$emit("is-valid-change", true);
+            } else {
+                // get variation data from remote
+                ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
+                    // store received variation data for later reuse
+                    VariationData[variationId] = response;
+
+                    _this2.$store.commit("setVariation", response);
+
+                    document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
+
+                    _this2.$emit("is-valid-change", true);
+                });
+            }
+        }
+    },
+
+    watch: {
+        currentVariation: {
+            handler: function handler(newVariation, oldVariation) {
+                if (oldVariation) {
+                    var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+                    var title = document.getElementsByTagName("title")[0].innerHTML;
+
+                    window.history.replaceState({}, title, url);
+                }
+            },
+
+            deep: true
+        }
+    }
+});
+
+},{"services/ApiService":123,"util":8}],53:[function(require,module,exports){
+"use strict";
+
+Vue.component("category-image-carousel", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        imageUrlsData: { type: Array },
+        itemUrl: { type: String },
+        altText: { type: String },
+        showDots: { type: Boolean },
+        showNav: { type: Boolean },
+        disableLazyLoad: {
+            type: Boolean,
+            default: false
+        },
+        enableCarousel: { type: Boolean },
+        template: { type: String }
+    },
+
+    data: function data() {
+        return {
+            $_enableCarousel: false
+        };
+    },
+
+
+    computed: {
+        imageUrls: function imageUrls() {
+            return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
+                if (imageUrlA.position > imageUrlB.position) {
+                    return 1;
+                }
+                if (imageUrlA.position < imageUrlB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            if (_this.$_enableCarousel) {
+                _this.initializeCarousel();
+            }
+        });
+    },
+
+
+    methods: {
+        initializeCarousel: function initializeCarousel() {
+            var _this2 = this;
+
+            $("#owl-carousel-" + this._uid).owlCarousel({
+                dots: !!this.showDots,
+                items: 1,
+                mouseDrag: false,
+                loop: this.imageUrls.length > 1,
+                lazyLoad: !this.disableLazyLoad,
+                margin: 10,
+                nav: !!this.showNav,
+                navText: ["<i id=\"owl-nav-text-left-" + this._uid + "\" class='fa fa-chevron-left' aria-hidden='true'></i>", "<i id=\"owl-nav-text-right-" + this._uid + "\" class='fa fa-chevron-right' aria-hidden='true'></i>"],
+                onTranslated: function onTranslated(event) {
+                    var target = $(event.currentTarget);
+                    var owlItem = $(target.find(".owl-item.active"));
+
+                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
+                },
+
+                onInitialized: function onInitialized(event) {
+                    if (_this2.showNav) {
+                        document.querySelector("#owl-nav-text-left-" + _this2._uid).parentElement.onclick = function (event) {
+                            return event.preventDefault();
+                        };
+                        document.querySelector("#owl-nav-text-right-" + _this2._uid).parentElement.onclick = function (event) {
+                            return event.preventDefault();
+                        };
+                    }
+                }
+            });
+        },
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.altText;
+
+            return altText;
+        },
+        loadFirstImage: function loadFirstImage() {
+            var itemLazyImage = this.$refs.itemLazyImage;
+
+            if (itemLazyImage) {
+                if (itemLazyImage.loadImage) {
+                    itemLazyImage.loadImage();
+                } else if (itemLazyImage[0] && itemLazyImage[0].loadImage) {
+                    itemLazyImage[0].loadImage();
+                }
+            }
+        }
+    }
+});
+
+},{}],54:[function(require,module,exports){
+"use strict";
+
+Vue.component("category-item", {
+
+    delimiters: ["${", "}"],
+
+    template: "#vue-category-item",
+
+    props: ["decimalCount", "itemData", "imageUrlAccessor"],
+
+    data: function data() {
+        return {
+            recommendedRetailPrice: 0,
+            variationRetailPrice: 0
+        };
+    },
+
+
+    computed: {
+        /**
+         * returns itemData.item.storeSpecial
+         */
+        storeSpecial: function storeSpecial() {
+            return this.itemData.item.storeSpecial;
+        },
+
+
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function texts() {
+            return this.itemData.texts;
+        }
+    },
+
+    created: function created() {
+        if (this.itemData.prices.rrp) {
+            this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
+        }
+        this.variationRetailPrice = this.itemData.prices.default.price.value;
+    },
+
+
+    methods: {
+        loadFirstImage: function loadFirstImage() {
+            var categoryImageCarousel = this.$refs.categoryImageCarousel;
+
+            if (categoryImageCarousel) {
+                categoryImageCarousel.loadFirstImage();
+            }
+        }
+    }
+
+});
+
+},{}],55:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-lazy-img", {
+
+    delimiters: ["${", "}"],
+
+    props: ["imageUrl", "template"],
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            setTimeout(function () {
+                $(_this.$refs.lazyImg).show().lazyload({ threshold: 100 });
+            }, 1);
+        });
+    },
+
+
+    methods: {
+        loadImage: function loadImage() {
+            $(this.$refs.lazyImg).trigger("appear");
+        }
+    }
+});
+
+},{}],56:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-list", {
+
+    delimiters: ["${", "}"],
+
+    props: ["categoryId", "template", "itemData", "totalItemsData"],
+
+    data: function data() {
+        return {
+            filterListState: false
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        },
+        items: function items(state) {
+            return state.itemList.items;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+        this.$store.commit("setItemListItems", this.itemData);
+        this.$store.commit("setItemListTotalItems", this.totalItemsData);
+    }
+});
+
+},{}],57:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-list-sorting", {
+
+    delimiters: ["${", "}"],
+
+    props: ["sortingList", "defaultSorting", "template"],
+
+    data: function data() {
+        return {
+            selectedSorting: {}
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.setSelectedValue();
+    },
+
+
+    methods: {
+        /**
+         * Set the selected sorting in the vuex storage and trigger the item search.
+         */
+        updateSorting: function updateSorting() {
+            this.$store.dispatch("selectItemListSorting", this.selectedSorting);
+        },
+
+
+        /**
+         * Determine the initial value and set it in the vuex storage.
+         */
+        setSelectedValue: function setSelectedValue() {
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+            if (urlParams.sorting) {
+                this.selectedSorting = urlParams.sorting;
+            } else {
+                this.selectedSorting = this.defaultSorting;
+            }
+
+            this.$store.commit("setItemListSorting", this.selectedSorting);
+        }
+    }
+});
+
+},{"services/UrlService":130}],58:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-search", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            currentSearchString: "",
+            preventSearch: false
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        searchString: function searchString(state) {
+            return state.itemList.searchString;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.initAutocomplete();
+
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+            _this.$store.commit("setItemListSearchString", urlParams.query);
+            _this.currentSearchString = urlParams.query;
+        });
+    },
+
+
+    methods: {
+        search: function search() {
+            if (this.currentSearchString.length && !this.preventSearch) {
+                if (document.location.pathname === "/search") {
+                    this.updateTitle(this.currentSearchString);
+                    this.$store.dispatch("searchItems", this.currentSearchString);
+                } else {
+                    window.open("/search?query=" + this.currentSearchString, "_self", false);
+                }
+            } else {
+                this.preventSearch = false;
+            }
+        },
+        openItem: function openItem(suggestion) {
+            this.preventSearch = true;
+            window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
+        },
+        updateTitle: function updateTitle(searchString) {
+            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
+            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+        },
+        initAutocomplete: function initAutocomplete() {
+            var _this2 = this;
+
+            $(".search-input").autocomplete({
+                serviceUrl: "/rest/io/item/search/autocomplete",
+                paramName: "query",
+                params: { template: "Ceres::ItemList.Components.ItemSearch" },
+                width: $(".search-box-shadow-frame").width(),
+                zIndex: 1070,
+                maxHeight: 310,
+                minChars: 2,
+                preventBadQueries: false,
+                onSelect: function onSelect(suggestion) {
+                    _this2.$store.commit("setItemListSearchString", suggestion.value);
+                    _this2.currentSearchString = suggestion.value;
+
+                    if (App.config.search.forwardToSingleItem) {
+                        _this2.openItem(suggestion);
+                    } else {
+                        _this2.search();
+                    }
+                },
+                beforeRender: function beforeRender() {
+                    $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
+                },
+
+                transformResult: function transformResult(response) {
+                    return _this2.transformSuggestionResult(response);
+                }
+            });
+
+            $(window).resize(function () {
+                $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
+            });
+        },
+        transformSuggestionResult: function transformSuggestionResult(result) {
+            var _this3 = this;
+
+            result = JSON.parse(result);
+            var suggestions = {
+                suggestions: $.map(result.data.documents, function (dataItem) {
+                    var value = _this3.$options.filters.itemName(dataItem.data);
+
+                    return {
+                        value: value,
+                        data: dataItem.data
+                    };
+                })
+            };
+
+            return suggestions;
+        }
+    }
+});
+
+},{"services/TranslationService":129,"services/UrlService":130}],59:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-store-special", {
+
+    delimiters: ["${", "}"],
+
+    template: "#vue-item-store-special",
+
+    props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount", "bundleType"],
+
+    data: function data() {
+        return {
+            tagClass: "",
+            label: "",
+            tagClasses: {
+                1: "bg-danger",
+                2: "bg-primary",
+                default: "bg-success"
+            }
+        };
+    },
+    created: function created() {
+        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+        this.label = this.getLabel();
+    },
+
+
+    methods: {
+        getLabel: function getLabel() {
+            if (this.storeSpecial.id === 1 && this.recommendedRetailPrice) {
+                var percent = this.getPercentageSale();
+
+                if (parseInt(percent) < 0) {
+                    return percent + "%";
+                }
+            }
+
+            return this.storeSpecial.names.name;
+        },
+        getPercentageSale: function getPercentageSale() {
+            // eslint-disable-next-line
+            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
+
+            return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator);
+        }
+    }
+});
+
+},{}],60:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("items-per-page", {
+
+    delimiters: ["${", "}"],
+
+    props: ["paginationValues", "template"],
+
+    data: function data() {
+        return {
+            selectedValue: null
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.setSelectedValueByUrl();
+    },
+
+
+    methods: {
+        itemsPerPageChanged: function itemsPerPageChanged() {
+            this.$store.dispatch("selectItemsPerPage", this.selectedValue);
+        },
+        setSelectedValueByUrl: function setSelectedValueByUrl() {
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+            var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
+
+            if (urlParams.items) {
+                if (this.paginationValues.includes(parseInt(urlParams.items))) {
+                    this.selectedValue = urlParams.items;
+                } else {
+                    this.selectedValue = defaultItemsPerPage;
+                }
+            } else {
+                this.selectedValue = defaultItemsPerPage;
+            }
+
+            this.$store.commit("setItemsPerPage", parseInt(this.selectedValue));
+        }
+    }
+});
+
+},{"services/UrlService":130}],61:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("pagination", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            lastPageMax: 0
+        };
+    },
+
+
+    computed: _extends({
+        pageMax: function pageMax() {
+            if (this.isLoading) {
+                return this.lastPageMax;
+            }
+
+            var pageMax = this.totalItems / parseInt(this.itemsPerPage);
+
+            if (this.totalItems % parseInt(this.itemsPerPage) > 0) {
+                pageMax += 1;
+            }
+
+            this.lastPageMax = parseInt(pageMax) || 1;
+
+            return parseInt(pageMax) || 1;
+        }
+    }, Vuex.mapState({
+        page: function page(state) {
+            return state.itemList.page || 1;
+        },
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        },
+        itemsPerPage: function itemsPerPage(state) {
+            return state.itemList.itemsPerPage;
+        },
+        totalItems: function totalItems(state) {
+            return state.itemList.totalItems;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+        var page = urlParams.page || 1;
+
+        this.$store.commit("setItemListPage", parseInt(page));
+    },
+
+
+    methods: {
+        setPage: function setPage(page) {
+            this.$store.dispatch("selectItemListPage", page);
+
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+    }
+});
+
+},{"services/UrlService":130}],62:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("item-filter", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "facet"],
+
+    computed: _extends({
+        facets: function facets() {
+            return this.facet.values.sort(function (facetA, facetB) {
+                if (facetA.position > facetB.position) {
+                    return 1;
+                }
+                if (facetA.position < facetB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
+    }, Vuex.mapState({
+        selectedFacets: function selectedFacets(state) {
+            return state.itemList.selectedFacets;
+        },
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter";
+    },
+
+
+    methods: {
+        updateFacet: function updateFacet(facetValue) {
+            this.$store.dispatch("selectFacet", facetValue);
+        },
+        isSelected: function isSelected(facetValueId) {
+            return this.selectedFacets.findIndex(function (selectedFacet) {
+                return selectedFacet.id === facetValueId;
+            }) > -1;
+        }
+    }
+});
+
+},{}],63:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-filter-list", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "facetData"],
+
+    data: function data() {
+        return {
+            isActive: false
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        facets: function facets(state) {
+            return state.itemList.facets.sort(function (facetA, facetB) {
+                if (facetA.position > facetB.position) {
+                    return 1;
+                }
+                if (facetA.position < facetB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
+    }),
+
+    created: function created() {
+        this.$store.commit("setFacets", this.facetData);
+
+        this.$options.template = this.template || "#vue-item-filter-list";
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+        var selectedFacets = [];
+
+        if (urlParams.facets) {
+            selectedFacets = urlParams.facets.split(",");
+        }
+
+        if (urlParams.priceMin || urlParams.priceMax) {
+            var priceMin = urlParams.priceMin || "";
+            var priceMax = urlParams.priceMax || "";
+
+            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+
+            selectedFacets.push("price");
+        }
+
+        if (selectedFacets.length > 0) {
+            this.$store.commit("setSelectedFacetsByIds", selectedFacets);
+        }
+    },
+
+
+    methods: {
+        toggleOpeningState: function toggleOpeningState() {
+            var _this = this;
+
+            window.setTimeout(function () {
+                _this.isActive = !_this.isActive;
+            }, 300);
+        }
+    }
+});
+
+},{"services/UrlService":130}],64:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-filter-price", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-filter-price"
+        }
+    },
+
+    data: function data() {
+        return {
+            priceMin: "",
+            priceMax: "",
+            currency: App.activeCurrency
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter-price";
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+        this.priceMin = urlParams.priceMin || "";
+        this.priceMax = urlParams.priceMax || "";
+    },
+
+
+    computed: _extends({
+        isDisabled: function isDisabled() {
+            return this.priceMin === "" && this.priceMax === "" || parseInt(this.priceMin) >= parseInt(this.priceMax) || this.isLoading;
+        }
+    }, Vuex.mapState({
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        }
+    })),
+
+    methods: {
+        selectAll: function selectAll(event) {
+            event.target.select();
+        },
+        triggerFilter: function triggerFilter() {
+            if (!this.isDisabled) {
+                this.$store.dispatch("selectPriceFacet", { priceMin: this.priceMin, priceMax: this.priceMax });
+            }
+        }
+    }
+});
+
+},{"services/UrlService":130}],65:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-filter-tag-list", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    computed: Vuex.mapState({
+        tagList: function tagList(state) {
+            return state.itemList.selectedFacets;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter-tag-list";
+    },
+
+
+    methods: {
+        removeTag: function removeTag(tag) {
+            this.$store.dispatch("selectFacet", tag);
+        }
+    }
+});
+
+},{}],66:[function(require,module,exports){
+"use strict";
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ModalService = require("services/ModalService");
+var APIService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("account-settings", {
+
+    delimiters: ["${", "}"],
+
+    props: ["userData", "template"],
+
+    data: function data() {
+        return {
+            newPassword: "",
+            confirmPassword: "",
+            accountSettingsClass: "",
+            accountSettingsModal: {}
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    /**
+     * Initialise the account settings modal
+     */
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.accountSettingsModal = ModalService.findModal(_this.$refs.accountSettingsModal);
+        });
+    },
+
+    computed: {
+        /**
+         * Check whether the passwords match
+         * @returns {boolean}
+         */
+        matchPassword: function matchPassword() {
+            if (this.confirmPassword !== "") {
+                return this.newPassword === this.confirmPassword;
+            }
+            return true;
+        }
+    },
+
+    methods: {
+
+        /**
+         * Open the account settings modal
+         */
+        showChangeAccountSettings: function showChangeAccountSettings() {
+            this.accountSettingsModal.show();
+        },
+
+        /**
+         * Save the new password
+         */
+        saveAccountSettings: function saveAccountSettings() {
+            var self = this;
+
+            if (this.newPassword !== "" && this.newPassword === this.confirmPassword) {
+                APIService.post("/rest/io/customer/password", { password: this.newPassword, password2: this.confirmPassword }).done(function (response) {
+                    self.clearFieldsAndClose();
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountChangePasswordSuccessful")).closeAfter(3000);
+                }).fail(function (response) {
+                    self.clearFieldsAndClose();
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountChangePasswordFailed")).closeAfter(5000);
+                });
+            }
+        },
+
+        /**
+         * Clear the password fields in the modal
+         */
+        clearFields: function clearFields() {
+            this.newPassword = "";
+            this.confirmPassword = "";
+        },
+
+        /**
+         * Clear the fields and close the modal
+         */
+        clearFieldsAndClose: function clearFieldsAndClose() {
+            this.accountSettingsModal.hide();
+            this.clearFields();
+        }
+    }
+
+});
+
+},{"services/ApiService":123,"services/ModalService":127,"services/NotificationService":128,"services/TranslationService":129}],67:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService = require("services/ModalService");
+
+Vue.component("bank-data-select", {
+
+    delimiters: ["${", "}"],
+
+    props: ["userBankData", "contactId", "template"],
+
+    data: function data() {
+        return {
+            bankInfoModal: {},
+            bankDeleteModal: {},
+            updateBankData: {},
+            selectedBankData: null,
+            updateBankIndex: 0,
+            doUpdate: null,
+            headline: ""
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    /**
+     * Select the modals
+     */
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.bankInfoModal = ModalService.findModal(_this.$refs.bankInfoModal);
+            _this.bankDeleteModal = ModalService.findModal(_this.$refs.bankDeleteModal);
+        });
+    },
+
+
+    methods: {
+
+        /**
+         * Set the selected bank-data
+         */
+        changeSelecting: function changeSelecting(bankData) {
+            this.selectedBankData = bankData;
+        },
+
+
+        /**
+         * Open the modal to add new bank-data
+         */
+        openAddBank: function openAddBank() {
+            this.headline = _TranslationService2.default.translate("Ceres::Template.myAccountBankAddDataTitle");
+            this.openModal(false);
+        },
+
+
+        /**
+         * Set data to update and open the modal
+         * @param index
+         * @param bankdata
+         */
+        openUpdateBank: function openUpdateBank(index, bankData) {
+            this.headline = _TranslationService2.default.translate("Ceres::Template.myAccountBankUpdateDataTitle");
+
+            this.setUpdateData(index, bankData);
+            this.openModal(true);
+        },
+
+
+        /**
+         * Set data to remove and open the modal
+         * @param index
+         * @param bankdata
+         */
+        openDeleteBank: function openDeleteBank(index, bankData) {
+            this.setUpdateData(index, bankData);
+
+            this.doUpdate = false;
+            this.bankDeleteModal.show();
+        },
+
+
+        /**
+         * Open the modal
+         * @param doUpdate
+         */
+        openModal: function openModal(doUpdate) {
+            if (!doUpdate) {
+                this.resetData();
+            }
+
+            this.doUpdate = doUpdate;
+            _ValidationService2.default.unmarkAllFields($(this.$refs.bankInfoModal));
+            this.bankInfoModal.show();
+        },
+
+
+        /**
+         * Set data to change
+         * @param index
+         * @param bankdata
+         */
+        setUpdateData: function setUpdateData(index, bankData) {
+            this.updateBankData = JSON.parse(JSON.stringify(bankData));
+            this.updateBankIndex = index;
+        },
+
+
+        /**
+         * Validate the input-fields-data
+         */
+        validateInput: function validateInput() {
+            var _this2 = this;
+
+            _ValidationService2.default.validate($("#my-bankForm")).done(function () {
+                if (_this2.doUpdate) {
+                    _this2.updateBankInfo();
+                } else {
+                    _this2.addBankInfo();
+                }
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+
+
+        /**
+         * Update bank-data
+         */
+        updateBankInfo: function updateBankInfo() {
+            var _this3 = this;
+
+            this.updateBankData.lastUpdateBy = "customer";
+
+            ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData).done(function (response) {
+                _this3.userBankData.splice(_this3.updateBankIndex, 1, response);
+                _this3.checkBankDataSelection();
+                _this3.closeModal();
+
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataUpdated")).closeAfter(3000);
+            }).fail(function () {
+                _this3.closeModal();
+
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotUpdated")).closeAfter(5000);
+            });
+        },
+
+
+        /**
+         * Add new bank-data
+         */
+        addBankInfo: function addBankInfo() {
+            var _this4 = this;
+
+            this.updateBankData.lastUpdateBy = "customer";
+            this.updateBankData.contactId = this.contactId;
+
+            ApiService.post("/rest/io/customer/bank_data", this.updateBankData).done(function (response) {
+                _this4.userBankData.push(response);
+                _this4.checkBankDataSelection(true);
+                _this4.closeModal();
+
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataAdded")).closeAfter(3000);
+            }).fail(function () {
+                _this4.closeModal();
+
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotAdded")).closeAfter(5000);
+            });
+        },
+
+
+        /**
+         * Delete bank-data
+         */
+        removeBankInfo: function removeBankInfo() {
+            var _this5 = this;
+
+            ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
+                _this5.checkBankDataSelection(false);
+                _this5.closeDeleteModal();
+                _this5.userBankData.splice(_this5.updateBankIndex, 1);
+
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataDeleted")).closeAfter(3000);
+            }).fail(function () {
+                _this5.closeDeleteModal();
+
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotDeleted")).closeAfter(5000);
+            });
+        },
+
+
+        /**
+         * Check selection on delete and on add bank-data
+         */
+        checkBankDataSelection: function checkBankDataSelection(addData) {
+            if (addData && !this.doUpdate && this.userBankData.length < 1) {
+                this.selectedBankData = this.userBankData[0];
+            }
+
+            if (!addData && this.selectedBankData && this.selectedBankData.id === this.updateBankData.id) {
+                if (!this.doUpdate) {
+                    this.selectedBankData = null;
+                } else {
+                    this.selectedBankData = this.userBankData[this.updateBankIndex];
+                }
+            }
+        },
+
+
+        /**
+         * Reset the updateBankData and updateBankIndex
+         */
+        resetData: function resetData() {
+            this.updateBankData = {};
+            this.updateBankIndex = 0;
+            this.doUpdate = false;
+        },
+
+
+        /**
+         * Close the current bank-modal
+         */
+        closeModal: function closeModal() {
+            this.bankInfoModal.hide();
+            this.resetData();
+        },
+
+
+        /**
+         * Close the current bank-delete-modal
+         */
+        closeDeleteModal: function closeDeleteModal() {
+            this.bankDeleteModal.hide();
+            this.resetData();
+        }
+    }
+});
+
+},{"services/ApiService":123,"services/ModalService":127,"services/NotificationService":128,"services/TranslationService":129,"services/ValidationService":131}],68:[function(require,module,exports){
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ModalService = require("services/ModalService");
+var ApiService = require("services/ApiService");
+
+Vue.component("change-payment-method", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentStatus", "currentTemplate", "currentPaymentMethodName"],
+
+    data: function data() {
+        return {
+            compAllowedPaymentMethods: this.allowedPaymentMethods,
+            changePaymentModal: {},
+            paymentMethod: 0,
+            isPending: false,
+            showErrorMessage: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    /**
+     * Initialize the change payment modal
+     */
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.changePaymentModal = ModalService.findModal(_this.$refs.changePaymentModal);
+        });
+    },
+
+
+    methods: {
+        checkChangeAllowed: function checkChangeAllowed() {
+            var _this2 = this;
+
+            ApiService.get("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod }).done(function (response) {
+                // TODO: research - if response should be false, it returns an object
+                _this2.changePossible = (typeof response === "undefined" ? "undefined" : _typeof(response)) === "object" ? response.data : response;
+            }).fail(function () {
+                _this2.changePossible = false;
+            });
+        },
+        openPaymentChangeModal: function openPaymentChangeModal() {
+            this.changePaymentModal.show();
+        },
+        getPaymentStateText: function getPaymentStateText(paymentStates) {
+            return _TranslationService2.default.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates.find(function (paymentState) {
+                return paymentState.typeId === 4;
+            }).value);
+        },
+        getPaymentId: function getPaymentId(paymentIds) {
+            var paymentId = paymentIds.find(function (paymentId) {
+                return paymentId.typeId === 3;
+            }).value;
+
+            if (paymentId) {
+                return paymentId;
+            }
+
+            return "";
+        },
+        closeModal: function closeModal() {
+            this.changePaymentModal.hide();
+            this.isPending = false;
+        },
+        updateOrderHistory: function updateOrderHistory(updatedOrder) {
+            document.getElementById("payment_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
+            document.getElementById("payment_state_" + this.currentOrder.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
+            document.getElementById("current_payment_method_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
+
+            this.checkChangeAllowed();
+            this.closeModal();
+        },
+        updateAllowedPaymentMethods: function updateAllowedPaymentMethods(paymentMethodId) {
+            var _this3 = this;
+
+            ApiService.get("/rest/io/order/paymentMethods", { orderId: this.currentOrder.id, paymentMethodId: paymentMethodId }).done(function (response) {
+                _this3.compAllowedPaymentMethods = response;
+            }).fail(function () {});
+        },
+        changePaymentMethod: function changePaymentMethod() {
+            var _this4 = this;
+
+            this.isPending = true;
+
+            ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod }).done(function (response) {
+                document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: _this4.currentOrder, newOrder: response } }));
+
+                _this4.updateOrderHistory(response);
+                _this4.updateAllowedPaymentMethods(_this4.getPaymentId(response.order.properties));
+            }).fail(function () {
+                // TODO add error msg
+            });
+        }
+    },
+
+    computed: {
+        showIsSwitchableWarning: function showIsSwitchableWarning() {
+            var _this5 = this;
+
+            var currentPaymentMethod = this.compAllowedPaymentMethods.find(function (paymentMethod) {
+                return paymentMethod.id === _this5.paymentMethod;
+            });
+
+            if (currentPaymentMethod) {
+                return !currentPaymentMethod.isSwitchableFrom;
+            }
+
+            return false;
+        }
+    }
+
+});
+
+},{"services/ApiService":123,"services/ModalService":127,"services/TranslationService":129}],69:[function(require,module,exports){
+"use strict";
+
+Vue.component("history", {
+
+    props: {
+        template: String,
+        ordersPerPage: Number,
+        isReturnActive: Boolean,
+        contactHasReturns: Boolean
+    },
+
+    data: function data() {
+        return {
+            returnsFirstOpened: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        returnsTabsOpened: function returnsTabsOpened() {
+            if (!this.returnsFirstOpened) {
+                this.returnsFirstOpened = true;
+
+                vueEventHub.$emit("returns-first-opening");
+            }
+        }
+    }
+});
+
+},{}],70:[function(require,module,exports){
+"use strict";
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+
+Vue.component("order-history", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-history"
+        },
+        orderDetailsTemplate: {
+            type: String,
+            default: "Ceres::Checkout.OrderDetails"
+        }
+    },
+
+    data: function data() {
+        return {
+            currentOrder: null,
+            isLoading: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        setCurrentOrder: function setCurrentOrder(order) {
+            var _this = this;
+
+            $("#dynamic-twig-content").html("");
+            this.isLoading = true;
+            this.currentOrder = order;
+
+            Vue.nextTick(function () {
+                $(_this.$refs.orderDetails).modal("show");
+            });
+
+            ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + order.order.id).done(function (response) {
+                _this.isLoading = false;
+                $("#dynamic-twig-content").html(response);
+            });
+        },
+        getPaymentStateText: function getPaymentStateText(paymentStates) {
+            for (var paymentState in paymentStates) {
+                if (paymentStates[paymentState].typeId == 4) {
+                    return _TranslationService2.default.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates[paymentState].value);
+                }
+            }
+
+            return "";
+        }
+    }
+});
+
+},{"services/ApiService":123,"services/TranslationService":129}],71:[function(require,module,exports){
+"use strict";
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("order-return-history", {
+
+    props: ["template", "itemsPerPage", "showFirstPage", "showLastPage"],
+
+    data: function data() {
+        return {
+            waiting: false,
+            returnsList: { page: 1 }
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        this.$options.template = this.template;
+        this.itemsPerPage = this.itemsPerPage || 10;
+
+        vueEventHub.$on("returns-first-opening", function () {
+            return _this.setPage(1);
+        });
+    },
+
+
+    methods: {
+        setPage: function setPage(page) {
+            var _this2 = this;
+
+            if (!this.waiting) {
+                this.waiting = true;
+
+                var lastPage = this.returnsList.page;
+
+                this.returnsList.page = page;
+
+                ApiService.get("/rest/io/customer/order/return", { page: page, items: this.itemsPerPage }).done(function (response) {
+                    _this2.waiting = false;
+                    _this2.returnsList = response;
+                }).fail(function (response) {
+                    _this2.waiting = false;
+                    _this2.returnsList.page = lastPage;
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.returnHistoryOops"));
+                });
+            }
+        }
+    }
+});
+
+},{"services/ApiService":123,"services/NotificationService":128,"services/TranslationService":129}],72:[function(require,module,exports){
+"use strict";
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("order-return-history-item", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-return-history-item"
+        },
+        returnOrder: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
+    },
+
+    data: function data() {
+        return {
+            itemsToRender: []
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+        this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
+    },
+
+
+    methods: {
+        toggleNaming: function toggleNaming(element) {
+            if (document.getElementById(element).innerText === _TranslationService2.default.translate("Ceres::Template.returnHistoryReturnShowMore")) {
+                this.itemsToRender = this.returnOrder.order.orderItems;
+                document.getElementById(element).innerText = _TranslationService2.default.translate("Ceres::Template.returnHistoryReturnShowLess");
+            } else {
+                this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
+                document.getElementById(element).innerText = _TranslationService2.default.translate("Ceres::Template.returnHistoryReturnShowMore");
+            }
+        },
+        getOriginOrderId: function getOriginOrderId(order) {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = order.orderReferences[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var orderRef = _step.value;
+
+                    if (orderRef.referenceType === "parent") {
+                        return orderRef.referenceOrderId;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return "-";
+        }
+    }
+});
+
+},{"services/TranslationService":129}],73:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("order-return", {
+
+    props: ["initOrderData", "template"],
+
+    data: function data() {
+        return {
+            isLoading: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.$store.commit("setOrderReturnData", this.initOrderData);
+    },
+
+
+    computed: Vuex.mapState({
+        orderData: function orderData(state) {
+            return state.orderReturn.orderData;
+        },
+        orderReturnItems: function orderReturnItems(state) {
+            return state.orderReturn.orderReturnItems;
+        },
+        isDisabled: function isDisabled(state) {
+            return state.orderReturn.orderReturnItems.length === 0;
+        }
+    }),
+
+    methods: _extends({
+        showConfirmationModal: function showConfirmationModal() {
+            $(this.$refs.orderReturnConfirmation).modal("show");
+        },
+        sendReturnItems: function sendReturnItems() {
+            var _this = this;
+
+            this.isLoading = true;
+
+            this.sendOrderReturn().then(function (response) {
+                window.open("/return-confirmation", "_self");
+                $(_this.$refs.orderReturnConfirmation).modal("hide");
+            }, function (error) {
+                _this.isLoading = false;
+                $(_this.$refs.orderReturnConfirmation).modal("hide");
+            });
+        },
+        selectAllItems: function selectAllItems() {
+            vueEventHub.$emit("select-all-items");
+        }
+    }, Vuex.mapMutations(["updateOrderReturnNote"]), Vuex.mapActions(["sendOrderReturn"]))
+});
+
+},{}],74:[function(require,module,exports){
+"use strict";
+
+Vue.component("order-return-item", {
+
+    props: ["orderItem", "template"],
+
+    data: function data() {
+        return {
+            isChecked: false,
+            returnCount: 0
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        this.$options.template = this.template;
+        vueEventHub.$on("select-all-items", function () {
+            return _this.selectItem();
+        });
+    },
+
+
+    computed: {
+        orderItemImage: function orderItemImage() {
+            return this.$store.getters.getOrderItemImage(this.orderItem.itemVariationId);
+        },
+        orderItemURL: function orderItemURL() {
+            return this.$store.getters.getOrderItemURL(this.orderItem.itemVariationId);
+        }
+    },
+
+    methods: {
+        validateValue: function validateValue() {
+            if (this.returnCount > this.orderItem.quantity) {
+                this.returnCount = this.orderItem.quantity;
+            } else if (this.returnCount <= 0) {
+                this.returnCount = 1;
+            }
+
+            this.$store.commit("updateOrderReturnItems", { quantity: parseInt(this.returnCount), orderItem: this.orderItem });
+        },
+        selectItem: function selectItem() {
+            this.isChecked = true;
+
+            this.updateValue();
+        },
+        updateValue: function updateValue() {
+            if (this.isChecked) {
+                this.returnCount = this.orderItem.quantity;
+            } else {
+                this.returnCount = 0;
+            }
+
+            this.$store.commit("updateOrderReturnItems", { quantity: parseInt(this.returnCount), orderItem: this.orderItem });
+        }
+    }
+});
+
+},{}],75:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("mobile-navigation", {
+
+    props: ["template", "initialCategory", "navigationTreeData"],
+
+    data: function data() {
+        return {
+            dataContainer1: [],
+            dataContainer2: [],
+            useFirstContainer: false,
+            breadcrumbs: []
+        };
+    },
+
+
+    computed: _extends({
+        parentCategories: function parentCategories() {
+            var dataContainer = this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
+
+            if (dataContainer[0] && dataContainer[0].parent) {
+                if (dataContainer[0].parent.parent) {
+                    // returns upper level
+                    return dataContainer[0].parent.parent.children;
+                }
+
+                // return highest level of navigation
+                return this.navigationTree;
+            }
+
+            return false;
+        }
+    }, Vuex.mapState({
+        navigationTree: function navigationTree(state) {
+            return state.navigation.tree;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            _this.initNavigation();
+        });
+    },
+
+
+    methods: {
+        initNavigation: function initNavigation() {
+            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
+
+            if (this.initialCategory && this.initialCategory.id) {
+                if (this.initialCategory.linklist === "N") {
+                    this.$store.commit("setCurrentCategory", this.initialCategory);
+                } else {
+                    this.$store.dispatch("setCurrentCategoryById", { categoryId: parseInt(this.initialCategory.id) });
+                    this.initialSlide(this.$store.state.navigation.currentCategory);
+                }
+            }
+
+            this.dataContainer1 = this.navigationTree;
+        },
+        initialSlide: function initialSlide(currentCategory) {
+            if (currentCategory) {
+                if (currentCategory.children && currentCategory.showChildren) {
+                    this.slideTo(currentCategory.children);
+                } else if (currentCategory.parent) {
+                    this.slideTo(currentCategory.parent.children);
+                }
+            }
+        },
+        navigateTo: function navigateTo(category) {
+            this.closeNavigation();
+
+            if (App.isCategoryView && category.children && category.showChildren) {
+                this.slideTo(category.children);
+            }
+        },
+        slideTo: function slideTo(children, back) {
+            back = !!back;
+
+            if (this.useFirstContainer) {
+                this.dataContainer1 = children;
+
+                $("#menu-2").trigger("menu-deactivated", { back: back });
+                $("#menu-1").trigger("menu-activated", { back: back });
+            } else {
+                this.dataContainer2 = children;
+
+                $("#menu-1").trigger("menu-deactivated", { back: back });
+                $("#menu-2").trigger("menu-activated", { back: back });
+            }
+
+            this.useFirstContainer = !this.useFirstContainer;
+            this.buildBreadcrumbs();
+        },
+        buildBreadcrumbs: function buildBreadcrumbs() {
+            this.breadcrumbs = [];
+
+            var root = this.useFirstContainer ? this.dataContainer2[0] : this.dataContainer1[0];
+
+            while (root.parent) {
+                this.breadcrumbs.unshift({
+                    name: root.parent.details[0].name,
+                    layer: root.parent ? root.parent.children : this.navigationTree
+                });
+
+                root = root.parent;
+            }
+        },
+        closeNavigation: function closeNavigation() {
+            document.querySelector(".mobile-navigation").classList.remove("open");
+            document.querySelector("body").classList.remove("menu-is-visible");
+        }
+    },
+
+    directives: {
+        menu: {
+            bind: function bind(el) {
+                // add "activated" classes when menu is activated
+                $(el).on("menu-activated", function (event, params) {
+                    $(event.target).addClass("menu-active");
+                    $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
+                });
+                // add "deactivated" classes when menu is deactivated
+                $(el).on("menu-deactivated", function (event, params) {
+                    $(event.target).removeClass("menu-active");
+                    $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
+                });
+                // this removes the animation class automatically after the animation has completed
+                $(el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function () {
+                    $(".mainmenu").removeClass(function (index, className) {
+                        return (className.match(/(^|\s)animate-\S+/g) || []).join(" ");
+                    });
+                });
+            }
+        }
+    }
+});
+
+},{}],76:[function(require,module,exports){
+"use strict";
+
+var _utils = require("../../helper/utils");
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("notifications", {
+
+    delimiters: ["${", "}"],
+
+    props: ["initialNotifications", "template"],
+
+    data: function data() {
+        return {
+            notifications: []
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            NotificationService.listen(function (notifications) {
+                Vue.set(_this, "notifications", notifications);
+            });
+
+            _this.showInitialNotifications();
+        });
+    },
+
+    methods: {
+        /**
+         * Dissmiss the notification
+         * @param notification
+         */
+        dismiss: function dismiss(notification) {
+            NotificationService.getNotifications().remove(notification);
+        },
+
+        /**
+         * show initial notifications from server
+         */
+        showInitialNotifications: function showInitialNotifications() {
+            for (var type in this.initialNotifications) {
+                var notification = this.initialNotifications[type];
+
+                if ((0, _utils.isNullOrUndefined)(notification)) {
+                    continue;
+                }
+
+                // type cannot be undefined
+                if (!(0, _utils.isNullOrUndefined)(NotificationService[type]) && typeof NotificationService[type] === "function") {
+                    NotificationService[type](notification);
+                } else {
+                    // unkown type
+                    NotificationService.log(notification);
+                }
+            }
+        }
+    }
+});
+
+},{"../../helper/utils":120,"services/NotificationService":128}],77:[function(require,module,exports){
+"use strict";
+
+var _utils = require("../../helper/utils");
+
+var _dom = require("../../helper/dom");
+
+var Popper = require("popper.js");
+var ModalService = require("services/ModalService");
+
+Vue.component("popper", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-popper"
+        },
+        placement: {
+            type: String,
+            default: "auto"
+        },
+        trigger: {
+            type: String,
+            default: "click"
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            if (!(0, _utils.isNullOrUndefined)(_this.$refs.node) && !(0, _utils.isNullOrUndefined)(_this.$refs.handle)) {
+                var node = _this.$refs.node;
+
+                node.parentElement.removeChild(node);
+                document.body.appendChild(node);
+
+                _this.popper = new Popper(_this.$refs.handle, node, {
+                    placement: _this.placement,
+                    modifiers: {
+                        arrow: {
+                            element: _this.$refs.arrow
+                        }
+                    }
+                });
+
+                var handle = _this.$refs.handle.firstElementChild || _this.$refs.handle;
+
+                if (_this.trigger === "focus") {
+                    handle.addEventListener("focus", function () {
+                        _this.showPopper();
+                    });
+                    handle.addEventListener("blur", function () {
+                        _this.hidePopper();
+                    });
+                } else {
+                    handle.addEventListener(_this.trigger, function () {
+                        _this.togglePopper();
+                    });
+                }
+            }
+
+            var parentModal = (0, _dom.findParent)(_this.$el, ".modal");
+
+            if (!(0, _utils.isNullOrUndefined)(parentModal)) {
+                ModalService.findModal(parentModal).on("hide.bs.modal", function () {
+                    _this.hidePopper();
+                });
+            }
+        });
+    },
+    data: function data() {
+        return {
+            isVisible: false,
+            popper: null
+        };
+    },
+
+
+    methods: {
+        togglePopper: function togglePopper() {
+            this.isVisible = !this.isVisible;
+            this.update();
+        },
+        showPopper: function showPopper() {
+            this.isVisible = true;
+            this.update();
+        },
+        hidePopper: function hidePopper() {
+            this.isVisible = false;
+            this.update();
+        },
+        update: function update() {
+            if (!(0, _utils.isNullOrUndefined)(this.popper)) {
+                this.popper.scheduleUpdate();
+            }
+        }
+    }
+});
+
+},{"../../helper/dom":116,"../../helper/utils":120,"popper.js":4,"services/ModalService":127}],78:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("shipping-country-select", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-shipping-country-select"
+        },
+
+        disableInput: {
+            type: Boolean
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    computed: _extends({
+        isDisabled: function isDisabled() {
+            return !!this.basket.customerInvoiceAddressId || !!this.basket.customerShippingAddressId || this.disableInput;
+        }
+    }, Vuex.mapState({
+        localization: function localization(state) {
+            return state.localization;
+        },
+        basket: function basket(state) {
+            return state.basket.data;
+        }
+    })),
+
+    methods: {
+        setShippingCountry: function setShippingCountry(id) {
+            if (!this.isDisabled) {
+                this.$store.dispatch("selectShippingCountry", id);
+            }
+        }
+    }
+});
+
+},{}],79:[function(require,module,exports){
+"use strict";
+
+var ApiService = require("services/ApiService");
+
+Vue.component("shop-country-settings", {
+
+    template: "<div><slot></slot></div>",
+
+    props: ["localizationData"],
+
+    created: function created() {
+        var _this = this;
+
+        this.$store.dispatch("initLocalization", { localizationData: this.localizationData });
+
+        ApiService.listen("LocalizationChanged", function (localizationData) {
+            _this.$store.dispatch("initLocalization", { localizationData: _this.localizationData });
+        });
+    }
+});
+
+},{"services/ApiService":123}],80:[function(require,module,exports){
+"use strict";
+
+var WaitScreenService = require("services/WaitScreenService");
+
+/**
+*
+* CURRENTLY NOT IN USE
+* MAY BE USEFUL LATER
+*
+*/
+
+Vue.component("wait-screen", {
+
+    // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            overlay: WaitScreenService.getOverlay()
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    computed: {
+        /**
+         * Show an overlay over the page
+         * @returns {boolean}
+         */
+        visible: function visible() {
+            return this.overlay.count > 0;
+        }
+    }
+});
+
+},{"services/WaitScreenService":132}],81:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("wish-list", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "initIds"],
+
+    data: function data() {
+        return {
+            isLoading: false,
+            wishListCount: {}
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        wishListItems: function wishListItems(state) {
+            return state.wishList.wishListItems;
+        },
+        wishListIds: function wishListIds(state) {
+            return state.wishList.wishListIds;
+        }
+    }),
+
+    created: function created() {
+        var _this = this;
+
+        this.$store.commit("setWishListIds", this.initIds);
+        this.$options.template = this.template;
+
+        this.isLoading = true;
+        this.initWishListItems(this.wishListIds).then(function (response) {
+            _this.isLoading = false;
+        }, function (error) {
+            _this.isLoading = false;
+        });
+    },
+
+
+    methods: _extends({
+        removeItem: function removeItem(item) {
+            this.removeWishListItem(item).then(function () {
+                return NotificationService.success(_TranslationService2.default.translate("Ceres::Template.wishListRemoved"));
+            });
+        }
+    }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
+});
+
+},{"services/NotificationService":128,"services/TranslationService":129}],82:[function(require,module,exports){
+"use strict";
+
+Vue.component("wish-list-count", {
+
+    props: ["template", "initIds"],
+
+    computed: {
+        wishListCount: function wishListCount() {
+            return this.$store.getters.wishListCount;
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-wish-list-count";
+        this.$store.commit("setWishListIds", this.initIds);
+    }
+});
+
+},{}],83:[function(require,module,exports){
+"use strict";
+
+var _number = require("../../helper/number");
+
+var _utils = require("../../helper/utils");
+
+Vue.directive("basket-item-quantity", {
+    update: function update(el, binding) {
+        var value = (0, _utils.defaultValue)(binding.value, 0);
+        var decimals = (0, _number.floatLength)(value);
+
+        el.innerHTML = value.toFixed(decimals).replace(".", App.decimalSeparator);
+    }
+});
+
+},{"../../helper/number":117,"../../helper/utils":120}],84:[function(require,module,exports){
+"use strict";
+
+Vue.directive("basket-item-sum", {
+    update: function update(el, binding) {
+        el.innerHTML = Vue.filter("currency").apply(Object, [binding.value]);
+    }
+});
+
+},{}],85:[function(require,module,exports){
+"use strict";
+
+Vue.directive("toggle-basket-preview", {
+    bind: function bind(el) {
+        el.addEventListener("click", function (event) {
+            var vueApp = document.querySelector("#vue-app");
+
+            if (vueApp) {
+                var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
+
+                vueApp.classList.toggle(basketOpenClass || "open-hover");
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+    }
+});
+
+},{}],86:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var ApiService = require("services/ApiService");
+
+Vue.directive("logout", {
+    bind: function bind(el) {
+        /**
+         * Logout the current user
+         */
+        $(el).click(function (event) {
+            $(el).addClass("disabled");
+
+            ApiService.post("/rest/io/customer/logout").done(function () {
+                (0, _UrlService.navigateTo)(window.location.origin);
+            }).fail(function () {
+                $(el).removeClass("disabled");
+            });
+
+            event.preventDefault();
+        });
+    }
+});
+
+},{"services/ApiService":123,"services/UrlService":130}],87:[function(require,module,exports){
+"use strict";
+
+Vue.directive("waiting-animation", {
+    bind: function bind(el) {
+        el.initialClass = el.className;
+        el.waitingClass = el.getAttribute("waiting-class") || "fa fa-circle-o-notch fa-spin";
+    },
+    update: function update(el, binding) {
+        if (binding.value) {
+            el.className = "";
+            el.className = el.waitingClass;
+
+            if (el.initialClass.includes("fa-lg")) {
+                el.className += " fa-lg";
+            }
+        } else {
+            el.className = el.initialClass;
+        }
+    }
+});
+
+},{}],88:[function(require,module,exports){
+"use strict";
+
+Vue.directive("waiting-animation-infinite", {
+    bind: function bind(el) {
+        $(el).click(function (event) {
+            event.currentTarget.classList.add("disabled");
+
+            event.currentTarget.children[0].className = "";
+            event.currentTarget.children[0].className = "fa fa-circle-o-notch fa-spin";
+        });
+    }
+});
+
+},{}],89:[function(require,module,exports){
+"use strict";
+
+Vue.directive("is-loading-watcher", {
+    update: function update(el, binding) {
+        if (binding.value) {
+            $("#twig-rendered-item-list").addClass("loading");
+            el.removeTwig = true;
+        } else if (el.removeTwig) {
+            $("#twig-rendered-item-list").remove();
+            document.getElementById("vue-rendered-item-list").style.removeProperty("display");
+        }
+    }
+});
+
+},{}],90:[function(require,module,exports){
+"use strict";
+
+Vue.directive("update-sidenav-selection", {
+    params: ["categoryId"],
+
+    bind: function bind(el) {},
+    update: function update(el, binding) {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = binding.value[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var breadcrumb = _step.value;
+
+                if (breadcrumb.id === parseInt(el.dataset.categoryId)) {
+                    el.classList.add("active");
+                    break;
+                } else {
+                    el.classList.remove("active");
+                }
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+    }
+});
+
+},{}],91:[function(require,module,exports){
+"use strict";
+
+Vue.directive("hover-mega-menu", {
+    bind: function bind(el) {
+        $(el).click(function (event) {
+            event.preventDefault();
+
+            if (document.body.classList.contains("touch")) {
+                // get hover state
+                var isHover = event.currentTarget.classList.contains("hover");
+
+                // clear all hover states
+                var ddownElements = [].slice.call(document.getElementsByClassName("ddown"));
+
+                ddownElements.find(function (element) {
+                    return element.classList.remove("hover");
+                });
+
+                // toggle old hover state (switch between top level categories makes this necessary)
+                if (isHover) {
+                    event.currentTarget.classList.remove("hover");
+                } else {
+                    event.currentTarget.classList.add("hover");
+                }
+            }
+        });
+    }
+});
+
+},{}],92:[function(require,module,exports){
+"use strict";
+
+Vue.directive("open-mobile-navigation", {
+    bind: function bind(el, binding) {
+        el.onclick = function (event) {
+            document.querySelector(".mobile-navigation").classList.add("open");
+            document.querySelector("body").classList.add("menu-is-visible");
+        };
+    }
+});
+
+},{}],93:[function(require,module,exports){
+"use strict";
+
+var _index = require("store/index.js");
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.directive("render-category", {
+    bind: function bind(el, binding) {
+        el.dataset.categoryId = binding.value.id;
+        el.dataset.categoryType = binding.value.type;
+
+        el.onclick = function (event) {
+            event.preventDefault();
+
+            var currentCategoryType = _index2.default.state.navigation.currentCategory ? _index2.default.state.navigation.currentCategory.type : null;
+
+            // get currently open category
+            var ddownElements = [].slice.call(document.getElementsByClassName("ddown"));
+            var openCategory = ddownElements.find(function (element) {
+                return element.classList.contains("hover");
+            });
+
+            if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType) {
+                _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
+
+                var url = _index2.default.state.navigation.currentCategory.url;
+
+                // check if touch device and change the ui handling
+                if (document.body.classList.contains("touch")) {
+                    if (openCategory && openCategory.contains(event.target) || binding.value.alwaysOpen) {
+                        window.open(url, "_self");
+                    }
+                } else {
+                    window.open(url, "_self");
+                }
+            }
+            // check if user click the opened category and change the ui handling
+            else if (openCategory && openCategory.contains(event.target)) {
+                    _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
+                } else if (document.body.classList.contains("no-touch") || binding.value.alwaysOpen) {
+                    _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
+                }
+        };
+    },
+    update: function update(el, binding) {
+        el.dataset.categoryId = binding.value.id;
+        el.dataset.categoryType = binding.value.type;
+    }
+});
+
+},{"store/index.js":133}],94:[function(require,module,exports){
+"use strict";
+
+Vue.directive("scroll-to-top", {
+    bind: function bind(el, binding) {
+        el.onclick = function (event) {
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        };
+    }
+});
+
+},{}],95:[function(require,module,exports){
+"use strict";
+
+var checkElement = function checkElement(el, breakpoint) {
+    var isSticky = el.dataset.isSticky === "true";
+    var matchesBreakpoint = window.matchMedia("(min-width: " + breakpoint + "px)").matches;
+
+    if (matchesBreakpoint && !isSticky) {
+        var $element = $(el);
+        var headHeight = $(".top-bar").height();
+
+        el.dataset.isSticky = true;
+        $element.stick_in_parent({ offset_top: headHeight + 10 });
+
+        $element.on("sticky_kit:bottom", function () {
+            $element.parent().css("position", "static");
+        }).on("sticky_kit:unbottom", function () {
+            $element.parent().css("position", "relative");
+        });
+    } else if (!matchesBreakpoint && isSticky) {
+        el.dataset.isSticky = false;
+        $(el).trigger("sticky_kit:detach");
+    }
+};
+
+Vue.directive("stick-in-parent", {
+    bind: function bind(el, binding) {
+        var minSize = binding.value || 768;
+
+        window.addEventListener("resize", function () {
+            checkElement(el, minSize);
+        });
+
+        setTimeout(function () {
+            checkElement(el, minSize);
+        }, 0);
+    }
+});
+
+},{}],96:[function(require,module,exports){
+"use strict";
+
+var _utils = require("../../helper/utils");
+
+var initTooltip = function initTooltip(el) {
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        setTimeout(function () {
+            $(el).tooltip({
+                trigger: "hover",
+                // eslint-disable-next-line
+                template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            });
+        }, 1);
+    }
+};
+
+Vue.directive("tooltip", {
+    unbind: function unbind(el) {
+        $(el).tooltip("dispose");
+    },
+    update: function update(el, binding) {
+        if (typeof binding.value === "undefined" || binding.value) {
+            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title")) && !(0, _utils.isNullOrUndefined)(el.getAttribute("data-title"))) {
+                el.setAttribute("title", el.getAttribute("data-title"));
+                el.removeAttribute("data-title");
+            }
+            initTooltip(el);
+        } else {
+            setTimeout(function () {
+                $(el).tooltip("dispose");
+
+                if (!(0, _utils.isNullOrUndefined)(el.getAttribute("title"))) {
+                    el.setAttribute("data-title", el.getAttribute("title"));
+                    el.removeAttribute("title");
+                }
+            }, 1);
+        }
+    },
+    bind: function bind(el, binding) {
+        if (typeof binding.value === "undefined" || binding.value) {
+            initTooltip(el);
+        } else {
+            el.setAttribute("data-title", el.getAttribute("title"));
+            el.removeAttribute("title");
+        }
+    }
+});
+
+},{"../../helper/utils":120}],97:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
+
+exports.default = exceptionMap;
+
+},{}],98:[function(require,module,exports){
+"use strict";
+
+Vue.filter("arrayFirst", function (array) {
+    return array[0];
+});
+
+},{}],99:[function(require,module,exports){
+"use strict";
+
+Vue.filter("attachText", function (item, text) {
+    return text + item;
+});
+
+},{}],100:[function(require,module,exports){
+"use strict";
+
+var _MonetaryFormatter = require("../helper/MonetaryFormatter");
+
+var _MonetaryFormatter2 = _interopRequireDefault(_MonetaryFormatter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var formatter = new _MonetaryFormatter2.default();
+
+Vue.filter("currency", function (price) {
+    return formatter.format(price, App.activeCurrency);
+});
+
+},{"../helper/MonetaryFormatter":114}],101:[function(require,module,exports){
+"use strict";
+
+// for docs see https://github.com/brockpetrie/vue-moment
+
+var dateFilter = function dateFilter() {
+    var args = Array.prototype.slice.call(arguments);
+    var input = args.shift();
+    var date;
+
+    if (isNaN(new Date(input).getTime())) {
+        return input;
+    }
+
+    if (Array.isArray(input) && typeof input[0] === "string") {
+        // If input is array, assume we're being passed a format pattern to parse against.
+        // Format pattern will accept an array of potential formats to parse against.
+        // Date string should be at [0], format pattern(s) should be at [1]
+        date = moment(string = input[0], formats = input[1], true);
+    } else {
+        // Otherwise, throw the input at moment and see what happens...
+        date = moment(input);
+    }
+
+    if (!date.isValid()) {
+        // Log a warning if moment couldn't reconcile the input. Better than throwing an error?
+        console.warn("Could not build a valid `moment` object from input.");
+        return input;
+    }
+
+    function parse() {
+        var args = Array.prototype.slice.call(arguments);
+        var method = args.shift();
+
+        switch (method) {
+            case "add":
+
+                // Mutates the original moment by adding time.
+                // http://momentjs.com/docs/#/manipulating/add/
+
+                var addends = args.shift().split(",").map(Function.prototype.call, String.prototype.trim);
+
+                obj = {};
+                for (var aId = 0; aId < addends.length; aId++) {
+                    var addend = addends[aId].split(" ");
+
+                    obj[addend[1]] = addend[0];
+                }
+                date = date.add(obj);
+                break;
+
+            case "subtract":
+
+                // Mutates the original moment by subtracting time.
+                // http://momentjs.com/docs/#/manipulating/subtract/
+
+                var subtrahends = args.shift().split(",").map(Function.prototype.call, String.prototype.trim);
+
+                obj = {};
+                for (var sId = 0; sId < subtrahends.length; sId++) {
+                    var subtrahend = subtrahends[sId].split(" ");
+
+                    obj[subtrahend[1]] = subtrahend[0];
+                }
+                date = date.subtract(obj);
+                break;
+
+            case "from":
+
+                // Display a moment in relative time, either from now or from a specified date.
+                // http://momentjs.com/docs/#/displaying/fromnow/
+
+                var from = "now";
+
+                if (args[0] === "now") args.shift();
+
+                if (moment(args[0]).isValid()) {
+                    // If valid, assume it is a date we want the output computed against.
+                    from = moment(args.shift());
+                }
+
+                var removeSuffix = false;
+
+                if (args[0] === true) {
+                    args.shift();
+                    removeSuffix = true;
+                }
+
+                if (from != "now") {
+                    date = date.from(from, removeSuffix);
+                    break;
+                }
+
+                date = date.fromNow(removeSuffix);
+                break;
+
+            case "calendar":
+
+                // Formats a date with different strings depending on how close to a certain date (today by default) the date is.
+                // http://momentjs.com/docs/#/displaying/calendar-time/
+
+                var referenceTime = moment();
+
+                if (moment(args[0]).isValid()) {
+                    // If valid, assume it is a date we want the output computed against.
+                    referenceTime = moment(args.shift());
+                }
+
+                date = date.calendar(referenceTime);
+                break;
+
+            default:
+                // Format
+                // Formats a date by taking a string of tokens and replacing them with their corresponding values.
+                // http://momentjs.com/docs/#/displaying/format/
+
+                var format = method;
+
+                date = date.format(format);
+        }
+
+        if (args.length) parse.apply(parse, args);
+    }
+
+    parse.apply(parse, args);
+
+    return date;
+};
+
+Vue.filter("moment", dateFilter);
+Vue.filter("date", dateFilter);
+
+},{}],102:[function(require,module,exports){
+"use strict";
+
+Vue.filter("fileName", function (path) {
+    var splitPath = path.split("/");
+
+    return splitPath[splitPath.length - 1];
+});
+
+},{}],103:[function(require,module,exports){
+"use strict";
+
+Vue.filter("fileUploadPath", function (path) {
+    return "/order-property-file/" + path.replace("order_property_files/", "");
+});
+
+},{}],104:[function(require,module,exports){
+"use strict";
+
+Vue.filter("graduatedPrice", function (item, quantity) {
+    var graduatedPrices = item.prices.graduatedPrices;
+
+    var returnPrice = void 0;
+
+    if (graduatedPrices && graduatedPrices[0]) {
+        var prices = graduatedPrices.filter(function (price) {
+            return parseFloat(quantity) >= price.minimumOrderQuantity;
+        });
+
+        if (prices[0]) {
+            returnPrice = prices.reduce(function (prev, current) {
+                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
+            });
+            returnPrice = returnPrice.unitPrice.value;
+        }
+    }
+
+    return returnPrice || item.prices.default.unitPrice.value;
+});
+
+},{}],105:[function(require,module,exports){
+"use strict";
+
+Vue.filter("itemImage", function (itemImages, highestPosition) {
+    if (itemImages.length === 0) {
+        return "";
+    }
+
+    if (itemImages.length === 1) {
+        return itemImages[0].url;
+    }
+
+    if (highestPosition) {
+        return itemImages.reduce(function (prev, current) {
+            return prev.position > current.position ? prev : current;
+        }).url;
+    }
+
+    return itemImages.reduce(function (prev, current) {
+        return prev.position < current.position ? prev : current;
+    }).url;
+});
+
+},{}],106:[function(require,module,exports){
+"use strict";
+
+Vue.filter("itemImages", function (images, accessor) {
+    if (!images) {
+        return [];
+    }
+
+    var imageUrls = [];
+    var imagesAccessor = "all";
+
+    if (images.variation && images.variation.length) {
+        imagesAccessor = "variation";
+    }
+
+    for (var image in images[imagesAccessor]) {
+        var imageUrl = images[imagesAccessor][image][accessor];
+        var alternate = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.alternate : null;
+
+        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][image].position, alternate: alternate });
+    }
+
+    return imageUrls;
+});
+
+},{}],107:[function(require,module,exports){
+"use strict";
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.filter("itemName", function (_ref) {
+    var _ref$texts = _ref.texts,
+        name1 = _ref$texts.name1,
+        name2 = _ref$texts.name2,
+        name3 = _ref$texts.name3,
+        _ref$variation = _ref.variation,
+        name = _ref$variation.name,
+        bundleType = _ref$variation.bundleType;
+    var selectedName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : App.config.item.itemName;
+    var itemDisplayName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : App.config.item.displayName;
+
+    var itemName = "";
+
+    if (selectedName === 1 && name2 !== "") {
+        itemName = name2;
+    } else if (selectedName === 2 && name3 !== "") {
+        itemName = name3;
+    } else {
+        itemName = name1;
+    }
+
+    if (itemDisplayName === "itemNameVariationName" && name && name.length) {
+        itemName = itemName + " " + name;
+    }
+
+    if (itemDisplayName === "variationName" && name && name.length) {
+        itemName = name;
+    }
+
+    if (bundleType === "bundle") {
+        itemName = _TranslationService2.default.translate("Ceres::Template.itemBundleName", { itemName: itemName });
+    }
+
+    return itemName;
+});
+
+},{"services/TranslationService":129}],108:[function(require,module,exports){
+"use strict";
+
+Vue.filter("itemURL", function (item) {
+    var enableOldUrlPattern = App.config.global.enableOldUrlPattern;
+    var urlPath = item.texts.urlPath || "";
+
+    var link = "";
+
+    if (urlPath.charAt(0) !== "/") {
+        link = "/";
+    }
+
+    if (urlPath && urlPath.length) {
+        link += urlPath;
+    }
+
+    var suffix = "";
+
+    if (enableOldUrlPattern) {
+        suffix = "/a-" + item.item.id;
+    } else {
+        suffix = "_" + item.item.id + "_" + item.variation.id;
+    }
+
+    var trailingSlash = "";
+
+    if (App.urlTrailingSlash) {
+        trailingSlash = "/";
+    }
+
+    if (link.substr(link.length - suffix.length, suffix.length) === suffix) {
+        return link + trailingSlash;
+    }
+
+    return link + suffix + trailingSlash;
+});
+
+},{}],109:[function(require,module,exports){
+"use strict";
+
+var _utils = require("../helper/utils");
+
+var _number = require("../helper/number");
+
+Vue.filter("numberFormat", function (number, decimals, separator) {
+    number = parseFloat(number);
+    if (isNaN(number)) {
+        return "";
+    }
+    if ((0, _utils.isNullOrUndefined)(decimals)) {
+        decimals = (0, _number.floatLength)(number);
+    }
+    if ((0, _utils.isNullOrUndefined)(separator)) {
+        separator = App.decimalSeparator;
+    }
+    return number.toFixed(decimals).replace(".", separator);
+});
+
+},{"../helper/number":117,"../helper/utils":120}],110:[function(require,module,exports){
+"use strict";
+
+Vue.filter("propertySurcharge", function (properties, propertyId) {
+    var property = properties.find(function (prop) {
+        return prop.property.id === parseInt(propertyId);
+    });
+
+    if (property) {
+        if (property.surcharge > 0) {
+            return property.surcharge;
+        } else if (property.property.surcharge > 0) {
+            return property.property.surcharge;
+        }
+    }
+
+    return 0;
+});
+
+},{}],111:[function(require,module,exports){
+"use strict";
+
+Vue.filter("propertySurchargeSum", function (item) {
+    var sum = 0;
+
+    if (item.properties) {
+        var addedProperties = item.properties.filter(function (property) {
+            return property.property.isOderProperty && property.property.value;
+        });
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = addedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var property = _step.value;
+
+                sum += property.property.surcharge;
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+    }
+
+    return sum;
+});
+
+},{}],112:[function(require,module,exports){
+"use strict";
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.filter("translate", function (value, params) {
+    return _TranslationService2.default.translate(value, params);
+});
+
+},{"services/TranslationService":129}],113:[function(require,module,exports){
+"use strict";
+
+Vue.filter("truncate", function (string, value) {
+    if (string.length > value) {
+        return string.substring(0, value) + "...";
+    }
+    return string;
+});
+
+},{}],114:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _utils = require("./utils");
+
+var MonetaryFormatter = function () {
+    var T_DIGIT = 0;
+    var T_DECIMAL = 1;
+    var T_CURRENCY = 2;
+    var T_SIGN = 3;
+    var T_CHAR = 4;
+
+    function MonetaryFormatter() {
+        this.setPattern(App.currencyPattern.pattern);
+        this.separatorThousands = App.currencyPattern.separator_thousands;
+        this.separatorDecimals = App.currencyPattern.separator_decimal;
+        this.sign = "-";
+    }
+
+    function _parse(pattern) {
+        var parsed = [];
+
+        while (pattern.length > 0) {
+            if (pattern.indexOf("\xA4") === 0) {
+                parsed.push({
+                    type: T_CURRENCY
+                });
+                pattern = pattern.substr(1);
+            } else if (pattern.indexOf("#,##0") === 0) {
+                parsed.push({
+                    type: T_DIGIT
+                });
+                pattern = pattern.substr(5);
+            } else if (pattern.indexOf(".00") === 0) {
+                parsed.push({
+                    type: T_DECIMAL
+                });
+                pattern = pattern.substr(3);
+            } else if (pattern.indexOf("-") === 0) {
+                parsed.push({
+                    type: T_SIGN
+                });
+                pattern = pattern.substr(1);
+            } else {
+                parsed.push({
+                    type: T_CHAR,
+                    value: pattern.charAt(0)
+                });
+                pattern = pattern.substr(1);
+            }
+        }
+
+        return parsed;
+    }
+
+    function _getDecimalValue(value) {
+        var extend = 0;
+
+        value += "";
+
+        if (value.length === 1) {
+            value = extend + value;
+        } else {
+            while (value.length < 2) {
+                value += extend;
+            }
+        }
+
+        return value;
+    }
+
+    MonetaryFormatter.prototype.setPattern = function (pattern) {
+        var _this = this;
+
+        this.pattern = [];
+        pattern.split(";").forEach(function (subpattern) {
+            _this.pattern.push(_parse(subpattern));
+        });
+    };
+
+    MonetaryFormatter.prototype.setSeparators = function (separatorThousands, separatorDecimals) {
+        this.separatorThousands = separatorThousands;
+        this.separatorDecimals = separatorDecimals;
+    };
+
+    MonetaryFormatter.prototype.setSign = function (sign) {
+        this.sign = sign;
+    };
+
+    MonetaryFormatter.prototype.format = function (value, currency) {
+        var _this2 = this;
+
+        var patternIndex = 0;
+        var prefix = "";
+
+        if ((0, _utils.isNullOrUndefined)(value) || Number.isNaN(parseFloat(value))) {
+            value = 0;
+        }
+
+        if (value < 0) {
+            if (this.pattern.length > 1) {
+                patternIndex = 1;
+            } else {
+                prefix = this.sign;
+            }
+        }
+
+        return prefix + this.pattern[patternIndex].map(function (partial, index, pattern) {
+            switch (partial.type) {
+                case T_DIGIT:
+                    {
+                        if (value < 0) {
+                            value *= -1;
+                        }
+                        // check if pattern include decimals to decide if digits should be rounded or not
+                        var roundDigits = !pattern.some(function (subpattern) {
+                            return subpattern.type === T_DECIMAL;
+                        });
+
+                        // cut decimal places instead of rounding
+                        // revert the value to insert thousands separators next
+                        var digits = (roundDigits ? Math.round(value * 100) / 100 : parseInt(value)).toFixed(0).split("").reverse().join("");
+
+                        // insert thousands separator
+                        for (var i = 3; i < digits.length; i += 4) {
+                            digits = digits.substr(0, i) + _this2.separatorThousands + digits.substr(i);
+                        }
+
+                        // revert back again
+                        digits = digits.split("").reverse().join("");
+
+                        return digits;
+                    }
+                case T_DECIMAL:
+                    {
+                        return _this2.separatorDecimals + _getDecimalValue((value * 100).toFixed(0).substr(-2, 2));
+                    }
+                case T_CURRENCY:
+                    {
+                        return currency;
+                    }
+                case T_SIGN:
+                    {
+                        return _this2.sign;
+                    }
+                case T_CHAR:
+                    {
+                        return partial.value;
+                    }
+                default:
+                    {
+                        console.warn("Unkown pattern type: " + partial.type);
+                        return "";
+                    }
+            }
+        }).join("");
+    };
+
+    return MonetaryFormatter;
+}();
+
+exports.default = MonetaryFormatter;
+
+},{"./utils":120}],115:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.debounce = debounce;
+
+var _utils = require("./utils");
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/**
+ * Makes a function executed after defined timeout.
+ *
+ * @param {function}    callback  The function to be executed after timeout
+ * @param {number}      timeout   The timeout
+ *
+ * @returns {function}
+ */
+function debounce(callback, timeout) {
+    timeout = (0, _utils.defaultValue)(timeout, 0);
+    if (timeout > 0) {
+        return function () {
+            var args = arguments;
+
+            if (!(0, _utils.isNullOrUndefined)(callback.__timeout)) {
+                window.clearTimeout(callback.__timeout);
+            }
+            callback.__timeout = window.setTimeout(function () {
+                callback.apply(undefined, _toConsumableArray(args));
+            }, timeout);
+        };
+    }
+
+    return callback;
+}
+
+},{"./utils":120}],116:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.findParent = findParent;
+exports.is = is;
+/**
+ * Get first parent element which matches a given selector
+ *
+ * @param {HTMLElement}     element           The element to get the parent for
+ * @param {string}          parentSelector    Selector to match parent element
+ *
+ * @returns {HTMLElement}
+ */
+function findParent(element, parentSelector) {
+    // eslint-disable-next-line brace-style
+    while ((element = element.parentElement) && !is(element, parentSelector)) {}
+    return element;
+}
+
+/**
+ * Check if element matches a given selector
+ *
+ * @param {HTMLElement} element   The element to check
+ * @param {string}      selector  The selector to match on given element
+ *
+ * @returns {boolean}
+ */
+// eslint-disable-next-line complexity
+function is(element, selector) {
+    // polyfill from https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = Element.prototype.matchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.webkitMatchesSelector || function (sel) {
+            var matches = (this.document || this.ownerDocument).querySelectorAll(sel);
+            var i = matches.length;
+
+            // eslint-disable-next-line brace-style
+            while (--i >= 0 && matches.item(i) !== this) {}
+            return i > -1;
+        };
+    }
+
+    return element.matches(selector);
+}
+
+},{}],117:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.floatLength = floatLength;
+exports.limit = limit;
+exports.formatFloat = formatFloat;
+
+var _utils = require("./utils");
+
+/**
+ * Get the number of decimal places of a float value.
+ *
+ * @param value     The float value to count decimal places for
+ * @returns {number}
+ */
+function floatLength(value) {
+    var match = ("" + value).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+
+    if (!match) {
+        return 0;
+    }
+
+    return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? match[2] : 0));
+}
+
+/**
+ * Limit a numeric value on a defined interval.
+ * If value is smaller than minimum, minimum value will be returned.
+ * If value is greater than maximum, maximum value will be returned.
+ * If value is between minimum and maximum, the value will be returned.
+ *
+ * @param {number}  value     The value to check against min and max
+ * @param {number}  min       Minimum value
+ * @param {number}  max       Maximum value
+ *
+ * @returns {number}
+ */
+function limit(value, min, max) {
+    if (isNaN(value)) {
+        return value;
+    }
+    if (!(0, _utils.isNullOrUndefined)(min) && value < min) {
+        return min;
+    }
+    if (!(0, _utils.isNullOrUndefined)(max) && value > max) {
+        return max;
+    }
+    return value;
+}
+
+/**
+ * Format float value by cutting decimal places.
+ *
+ * @param {number}  value       The value to be formatted
+ * @param {number}  decimals    Number of decimal places to keep
+ * @param {boolean} round       Flag indicating if original value should be rounded before cutting decimal values
+ *
+ * @returns {number}
+ */
+function formatFloat(value, decimals, round) {
+    value = parseFloat(value);
+    if (round) {
+        var factor = Math.pow(10, decimals);
+        var scaledValue = Math.round((value + 1 / (factor * 10)) * factor);
+
+        value = scaledValue / factor;
+    }
+    if (isNaN(value)) {
+        // return NaN
+        return 1 / 0;
+    }
+    return parseFloat(value.toFixed(decimals));
+}
+
+},{"./utils":120}],118:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.replaceAll = replaceAll;
+exports.capitalize = capitalize;
+
+var _utils = require("./utils");
+
+/**
+ * Replace all occurrences of a string
+ *
+ * @param {string}  input           The string to apply replacements on
+ * @param {string}  search          Substring to be replaced
+ * @param {string}  replacement     String to replace each match with
+ *
+ * @returns {string}
+ */
+function replaceAll(input, search, replacement) {
+    if ((0, _utils.isNullOrUndefined)(input)) {
+        return input;
+    }
+    return (input + "").split(search).join(replacement);
+}
+
+/**
+ * Capitalize first letter of a string
+ *
+ * @param {string}  input   The string to capitalize
+ *
+ * @returns {string}
+ */
+function capitalize(input) {
+    if ((0, _utils.isNullOrUndefined)(input)) {
+        return input;
+    }
+    return ("" + input).charAt(0).toUpperCase() + ("" + input).substr(1);
+}
+
+},{"./utils":120}],119:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.normalizeUrl = normalizeUrl;
+
+var _utils = require("./utils");
+
+function normalizeUrl(url) {
+    var urlParts = url.split("?");
+    var urlParams = urlParts[1];
+    var urlPath = urlParts[0];
+
+    if (App.urlTrailingSlash && urlPath.substr(-1, 1) !== "/") {
+        urlPath += "/";
+    } else if (!App.urlTrailingSlash && urlPath.substr(-1, 1) === "/") {
+        urlPath = url.substr(0, url.length - 1);
+    }
+
+    var targetUrl = urlPath;
+
+    if (!(0, _utils.isNullOrUndefined)(urlParams) && urlParams.length > 0) {
+        targetUrl += "?" + urlParams;
+    }
+
+    return targetUrl;
+}
+
+},{"./utils":120}],120:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.isNull = isNull;
+exports.isUndefined = isUndefined;
+exports.isNullOrUndefined = isNullOrUndefined;
+exports.isDefined = isDefined;
+exports.defaultValue = defaultValue;
+/**
+ * Check if a given value equals to null
+ *
+ * @param {*}   object
+ *
+ * @returns {boolean}
+ */
+function isNull(object) {
+    return object === null;
+}
+
+/**
+ * Check if a given value is undefined
+ *
+ * @param {*} object
+ *
+ * @returns {boolean}
+ */
+function isUndefined(object) {
+    //eslint-disable-next-line
+    return (typeof object === "undefined" ? "undefined" : _typeof(object)) === _typeof(void 0);
+}
+
+/**
+ * Check if a given value is null or undefined
+ *
+ * @param {*}   object
+ *
+ * @returns {boolean}
+ */
+function isNullOrUndefined(object) {
+    return isNull(object) || isUndefined(object);
+}
+
+/**
+ * Check if a given value is defined. This is a shorthand function for `!isNullOrUndefined(value)`
+ * @param {*}   object
+ *
+ * @returns {boolean}
+ */
+function isDefined(object) {
+    return !isNullOrUndefined(object);
+}
+
+/**
+ * Check if a given value is defined. Otherwise return a default value
+ *
+ * @param {*}   input
+ * @param {*}   defaultValue
+ *
+ * @returns {*}
+ */
+function defaultValue(input, defaultValue) {
+    if (isNullOrUndefined(input)) {
+        return defaultValue;
+    }
+
+    return input;
+}
+
+},{}],121:[function(require,module,exports){
+"use strict";
+
+var browserDetect = require("detect-browser");
+// Frontend end scripts
+// eslint-disable-next-line
+var init = function ($, window, document) {
+    function CeresMain() {
+        var browser = browserDetect.detect();
+
+        if (browser && browser.name) {
+            $("html").addClass(browser.name);
+        } else {
+            $("html").addClass("unkown-os");
+        }
+
+        $(window).scroll(function () {
+            if ($(".wrapper-main").hasClass("isSticky")) {
+                if ($(this).scrollTop() > 1) {
+                    $(".wrapper-main").addClass("sticky");
+                } else {
+                    $(".wrapper-main").removeClass("sticky");
+                }
+            }
+        });
+
+        window.onpopstate = function (event) {
+            if (event.state && event.state.requireReload) {
+                window.location.reload();
+            }
+        };
+
+        // init bootstrap tooltips
+        $("[data-toggle=\"tooltip\"]").tooltip();
+
+        // Replace all SVG images with inline SVG, class: svg
+        $("img[src$=\".svg\"]").each(function () {
+            var $img = jQuery(this);
+            var imgURL = $img.attr("src");
+            var attributes = $img.prop("attributes");
+
+            $.get(imgURL, function (data) {
+                // Get the SVG tag, ignore the rest
+                var $svg = jQuery(data).find("svg");
+
+                // Remove any invalid XML tags
+                $svg = $svg.removeAttr("xmlns:a");
+
+                // Loop through IMG attributes and apply on SVG
+                $.each(attributes, function () {
+                    $svg.attr(this.name, this.value);
+                });
+
+                // Replace IMG with SVG
+                $img.replaceWith($svg);
+            }, "xml");
+        });
+
+        var $toggleListView = $(".toggle-list-view");
+        var $mainNavbarCollapse = $("#mainNavbarCollapse");
+
+        $(document).on("click", function (evt) {
+            var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
+
+            if ($("#vue-app").hasClass(basketOpenClass)) {
+                if (evt.target != $(".basket-preview") && evt.target != document.querySelector(".basket-preview-hover") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0) {
+                    evt.preventDefault();
+                    $("#vue-app").toggleClass(basketOpenClass || "open-hover");
+                }
+            }
+
+            if (evt.target.id != "countrySettings" && $(evt.target).parents("#countrySettings").length <= 0 && $("#countrySettings").attr("aria-expanded") == "true") {
+                $("#countrySettings").collapse("hide");
+            }
+
+            if (evt.target.id != "searchBox" && $(evt.target).parents("#searchBox").length <= 0 && $("#searchBox").attr("aria-expanded") == "true") {
+                $("#searchBox").collapse("hide");
+            }
+
+            if (evt.target.id != "currencySelect" && $(evt.target).parents("#currencySelect").length <= 0 && $("#currencySelect").attr("aria-expanded") == "true") {
+                $("#currencySelect").collapse("hide");
+            }
+        });
+
+        $toggleListView.on("click", function (evt) {
+            evt.preventDefault();
+
+            // toggle it's own state
+            $toggleListView.toggleClass("grid");
+
+            // toggle internal style of thumbs
+            $(".product-list, .cmp-product-thumb").toggleClass("grid");
+        });
+
+        $mainNavbarCollapse.collapse("hide");
+
+        // Add click listener outside the navigation to close it
+        $mainNavbarCollapse.on("show.bs.collapse", function () {
+            $(".main").one("click", closeNav);
+        });
+
+        $mainNavbarCollapse.on("hide.bs.collapse", function () {
+            $(".main").off("click", closeNav);
+        });
+
+        function closeNav() {
+            $("#mainNavbarCollapse").collapse("hide");
+        }
+
+        $(document).ready(function () {
+            var offset = 250;
+            var duration = 300;
+
+            var isDesktop = window.matchMedia("(min-width: 768px)").matches;
+
+            $(window).scroll(function () {
+                if (isDesktop) {
+                    if ($(this).scrollTop() > offset) {
+                        $(".back-to-top").fadeIn(duration);
+                        $(".back-to-top-center").fadeIn(duration);
+                    } else {
+                        $(".back-to-top").fadeOut(duration);
+                        $(".back-to-top-center").fadeOut(duration);
+                    }
+                }
+            });
+
+            window.addEventListener("resize", function () {
+                isDesktop = window.matchMedia("(min-width: 768px)").matches;
+            });
+
+            $(".back-to-top").click(function (event) {
+                event.preventDefault();
+
+                $("html, body").animate({ scrollTop: 0 }, duration);
+
+                return false;
+            });
+
+            $(".back-to-top-center").click(function (event) {
+                event.preventDefault();
+
+                $("html, body").animate({ scrollTop: 0 }, duration);
+
+                return false;
+            });
+
+            $("#accountMenuList").click(function () {
+                $("#countrySettings").collapse("hide");
+                $("#searchBox").collapse("hide");
+                $("#currencySelect").collapse("hide");
+            });
+        });
+    }
+
+    window.CeresMain = new CeresMain();
+}(jQuery, window, document);
+
+},{"detect-browser":1}],122:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.isAddressFieldEnabled = isAddressFieldEnabled;
+function isAddressFieldEnabled(countryId, addressType, field) {
+    var address = {};
+    var enabledFields = {};
+
+    if (typeof countryId === "undefined") {
+        countryId = 1;
+    }
+
+    if (addressType === "1") {
+        address = "billing_address";
+
+        if (countryId === 1) {
+            enabledFields = App.config.addresses.billingAddressShow;
+        } else {
+            enabledFields = App.config.addresses.billingAddressShow_en;
+        }
+    } else {
+        address = "delivery_address";
+
+        if (countryId === "1") {
+            enabledFields = App.config.addresses.deliveryAddressShow;
+        } else {
+            enabledFields = App.config.addresses.deliveryAddressShow_en;
+        }
+    }
+
+    var fullField = address + "." + field;
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = enabledFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var enabledField = _step.value;
+
+            if (enabledField === fullField) {
+                return true;
+            }
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    return false;
+}
+
+exports.default = { isAddressFieldEnabled: isAddressFieldEnabled };
+
+},{}],123:[function(require,module,exports){
+"use strict";
+
+var _url = require("../helper/url");
+
+var NotificationService = require("services/NotificationService");
+var WaitScreenService = require("services/WaitScreenService");
+
+module.exports = function ($) {
+    var _eventListeners = {};
+
+    $(document).ajaxComplete(function (ajaxEvent, xhr, options) {
+        var response;
+
+        try {
+            response = JSON.parse(xhr.responseText);
+        } catch (exception) {}
+
+        if (response) {
+            for (var event in response.events) {
+                _triggerEvent(event, response.events[event]);
+            }
+
+            if (!options.supressNotifications) {
+                _printMessages(response);
+            }
+        }
+    });
+
+    return {
+        get: _get,
+        put: _put,
+        post: _post,
+        delete: _delete,
+        send: _send,
+        setToken: _setToken,
+        getToken: _getToken,
+        listen: _listen
+    };
+
+    function _listen(event, handler) {
+        _eventListeners[event] = _eventListeners[event] || [];
+        _eventListeners[event].push(handler);
+    }
+
+    function _triggerEvent(event, payload) {
+        if (_eventListeners[event]) {
+            for (var i = 0; i < _eventListeners[event].length; i++) {
+                var listener = _eventListeners[event][i];
+
+                if (typeof listener !== "function") {
+                    continue;
+                }
+                listener.call(Object, payload);
+            }
+        }
+    }
+
+    function _get(url, data, config) {
+        config = config || {};
+        config.method = "GET";
+        return _send(url, data, config);
+    }
+
+    function _put(url, data, config) {
+        config = config || {};
+        config.method = "PUT";
+        return _send(url, data, config);
+    }
+
+    function _post(url, data, config) {
+        config = config || {};
+        config.method = "POST";
+        return _send(url, data, config);
+    }
+
+    function _delete(url, data, config) {
+        config = config || {};
+        config.method = "DELETE";
+        return _send(url, data, config);
+    }
+
+    function _send(url, data, config) {
+        var deferred = $.Deferred();
+
+        url = (0, _url.normalizeUrl)(url);
+        config = config || {};
+        config.data = data || null;
+        config.dataType = config.dataType || "json";
+        config.contentType = typeof config.contentType !== "undefined" ? config.contentType : "application/x-www-form-urlencoded; charset=UTF-8";
+        config.doInBackground = !!config.doInBackground;
+        config.supressNotifications = !!config.supressNotifications;
+        config.keepOriginalResponse = !!config.keepOriginalResponse;
+
+        if (!config.doInBackground) {
+            WaitScreenService.showWaitScreen();
+        }
+        $.ajax(url, config).done(function (response) {
+            if (config.keepOriginalResponse) {
+                deferred.resolve(response);
+            } else {
+                deferred.resolve(response.data || response);
+            }
+        }).fail(function (jqXHR) {
+            var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
+
+            deferred.reject(response);
+        }).always(function () {
+            if (!config.doInBackground) {
+                WaitScreenService.hideWaitScreen();
+            }
+        });
+
+        return deferred;
+    }
+
+    function _printMessages(response) {
+        var notification;
+
+        if (response.error && response.error.message.length > 0) {
+            notification = NotificationService.error(response.error);
+        }
+
+        if (response.success && response.success.message.length > 0) {
+            notification = NotificationService.success(response.success);
+        }
+
+        if (response.warning && response.warning.message.length > 0) {
+            notification = NotificationService.warning(response.warning);
+        }
+
+        if (response.info && response.info.message.length > 0) {
+            notification = NotificationService.info(response.info);
+        }
+
+        if (response.debug && response.debug.class.length > 0) {
+            notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
+            for (var i = 0; i < response.debug.trace.length; i++) {
+                notification.trace(response.debug.trace[i]);
+            }
+        }
+    }
+
+    function _setToken(token) {
+        this._token = token;
+    }
+
+    function _getToken() {
+        return this._token;
+    }
+}(jQuery);
+
+},{"../helper/url":119,"services/NotificationService":128,"services/WaitScreenService":132}],124:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.updateCategoryHtml = updateCategoryHtml;
+
+var _index = require("store/index.js");
+
+var _index2 = _interopRequireDefault(_index);
+
+var _UrlService = require("services/UrlService");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var _categoryTree = {};
+var firstInitDone = false;
+
+/**
+ * render items in relation to location
+ * @param currentCategory
+ */
+function updateCategoryHtml() {
+    var currentCategory = _index2.default.state.navigation.currentCategory;
+
+    document.querySelector("body").classList.remove("menu-is-visible");
+
+    if ($.isEmptyObject(_categoryTree)) {
+        _categoryTree = _index2.default.state.navigation.tree;
+    }
+
+    if (App.isCategoryView && currentCategory.details.length) {
+        if (!firstInitDone) {
+            firstInitDone = true;
+            _firstRendering();
+        }
+
+        _handleCurrentCategory();
+
+        document.dispatchEvent(new CustomEvent("afterCategoryChanged", { detail: {
+                currentCategory: currentCategory,
+                categoryTree: _categoryTree
+            } }));
+    }
+}
+
+/**
+ * bundle functions
+ * @param currentCategory
+ */
+function _handleCurrentCategory() {
+    var currentCategory = _index2.default.state.navigation.currentCategory;
+
+    _removeTempDesc();
+    _updateHistory(currentCategory);
+}
+
+/**
+ * update page informations
+ * @param currentCategory
+ */
+function _updateHistory(currentCategory) {
+    (0, _UrlService.switchUrl)(currentCategory.url + window.location.search);
+    _updateCategoryTexts(currentCategory);
+}
+
+function _removeTempDesc() {
+    var tempDesc = document.querySelector("#category-description-container");
+
+    if (tempDesc) {
+        tempDesc.innerHTML = "";
+    }
+}
+
+function _updateCategoryTexts(currentCategory) {
+    var categoryTitle = currentCategory.details[0].metaTitle ? currentCategory.details[0].metaTitle : currentCategory.details[0].name;
+
+    document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
+    document.title = categoryTitle + " | " + App.config.header.companyName;
+
+    _loadOptionalData(currentCategory);
+}
+
+function _loadOptionalData(currentCategory) {
+    var categoryImage = currentCategory.details[0].imagePath;
+    var parallaxImgContainer = document.querySelector(".parallax-img-container");
+
+    if (parallaxImgContainer) {
+        if (categoryImage) {
+            parallaxImgContainer.style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
+        } else {
+            parallaxImgContainer.style.removeProperty("background-image");
+        }
+    }
+
+    var categoryDescContainer = document.querySelector("#category-description-container");
+
+    if (categoryDescContainer) {
+        ApiService.get("/rest/io/category/description/" + currentCategory.id).done(function (response) {
+            if ((typeof response === "undefined" ? "undefined" : _typeof(response)) !== "object") {
+                categoryDescContainer.innerHTML = response;
+            }
+        });
+    }
+}
+
+function _firstRendering() {
+    var twigBreadcrumbs = document.querySelector("#twig-rendered-breadcrumbs");
+
+    if (twigBreadcrumbs) {
+        twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+    }
+
+    var vueBreadcrumbs = document.querySelector("#vue-rendered-breadcrumbs");
+
+    if (vueBreadcrumbs) {
+        vueBreadcrumbs.style.removeProperty("display");
+    }
+}
+
+exports.default = {
+    updateCategoryHtml: updateCategoryHtml
+};
+
+},{"services/ApiService":123,"services/UrlService":130,"store/index.js":133}],125:[function(require,module,exports){
+"use strict";
+
+module.exports = function ($) {
+
+    return {
+        parseShippingCountries: parseShippingCountries,
+        parseShippingStates: parseShippingStates,
+        sortCountries: sortCountries
+    };
+
+    function parseShippingCountries(countryList, id) {
+        var deliveryCountries = [];
+
+        if (countryList === null) {
+            return deliveryCountries;
+        }
+
+        for (var key in countryList) {
+            var country = countryList[key];
+            var option = { id: country.id, name: country.name, locale: country.isoCode2, selected: false };
+
+            option.selected = id === country.id;
+            deliveryCountries.push(option);
+        }
+
+        return deliveryCountries;
+    }
+
+    function sortCountries(countries) {
+        countries.sort(function (first, second) {
+            if (first.name < second.name) {
+                return -1;
+            }
+            if (first.name > second.name) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    function parseShippingStates(countryList, countryID) {
+        var states = [];
+
+        for (var key in countryList) {
+            var country = countryList[key];
+
+            if (country.id === countryID) {
+                states = country.states;
+                break;
+            }
+        }
+
+        return states;
+    }
+}(jQuery);
+
+},{}],126:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.updateItemListUrlParams = updateItemListUrlParams;
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function updateItemListUrlParams(searchParams) {
+    var urlParams = {};
+    var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
+
+    urlParams.query = searchParams.query && searchParams.query.length > 0 ? searchParams.query : null;
+    urlParams.items = searchParams.items !== defaultItemsPerPage ? searchParams.items : null;
+    urlParams.page = searchParams.page > 1 ? searchParams.page : null;
+    urlParams.facets = searchParams.facets.length > 0 ? searchParams.facets : null;
+    urlParams.priceMin = searchParams.priceMin.length > 0 ? searchParams.priceMin : null;
+    urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
+
+    if (App.isSearch) {
+        urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch ? searchParams.sorting : null;
+    } else {
+        urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
+    }
+
+    for (var urlParamKey in urlParams) {
+        _UrlService2.default.setUrlParam(urlParamKey, urlParams[urlParamKey]);
+    }
+}
+
+exports.default = {
+    updateItemListUrlParams: updateItemListUrlParams
+};
+
+},{"services/UrlService":130}],127:[function(require,module,exports){
+"use strict";
+
+module.exports = function ($) {
+
+    var paused = false;
+    var timeout = -1;
+    var interval;
+    var timeRemaining;
+    var timeStart;
+
+    return {
+        findModal: findModal
+    };
+
+    function findModal(element) {
+        return new Modal(element);
+    }
+
+    function Modal(element) {
+        var self = this;
+        var $bsModal;
+
+        if ($(element).is(".modal")) {
+            $bsModal = $(element);
+        } else {
+            $bsModal = $(element).find(".modal").first();
+        }
+
+        return {
+            show: show,
+            hide: hide,
+            setTimeout: setTimeout,
+            startTimeout: startTimeout,
+            pauseTimeout: pauseTimeout,
+            continueTimeout: continueTimeout,
+            stopTimeout: stopTimeout,
+            getModalContainer: getModalContainer,
+            on: on
+        };
+
+        function show() {
+            $bsModal.modal("show");
+
+            if ($bsModal.timeout > 0) {
+                startTimeout();
+            }
+
+            return self;
+        }
+
+        function hide() {
+            $bsModal.modal("hide");
+            return self;
+        }
+
+        function getModalContainer() {
+            return $bsModal;
+        }
+
+        function setTimeout(timeout) {
+            $bsModal.timeout = timeout;
+
+            $bsModal.find(".modal-content").mouseover(function () {
+                pauseTimeout();
+            });
+
+            $bsModal.find(".modal-content").mouseout(function () {
+                continueTimeout();
+            });
+
+            return this;
+        }
+
+        function startTimeout() {
+            timeRemaining = $bsModal.timeout;
+            timeStart = new Date().getTime();
+
+            timeout = window.setTimeout(function () {
+                window.clearInterval(interval);
+                hide();
+            }, $bsModal.timeout);
+
+            $bsModal.find(".timer").text(timeRemaining / 1000);
+            interval = window.setInterval(function () {
+                if (!paused) {
+                    var secondsRemaining = timeRemaining - new Date().getTime() + timeStart;
+
+                    secondsRemaining = Math.round(secondsRemaining / 1000);
+                    $bsModal.find(".timer").text(secondsRemaining);
+                }
+            }, 1000);
+        }
+
+        function pauseTimeout() {
+            paused = true;
+            timeRemaining -= new Date().getTime() - timeStart;
+            window.clearTimeout(timeout);
+        }
+
+        function continueTimeout() {
+            paused = false;
+            timeStart = new Date().getTime();
+            timeout = window.setTimeout(function () {
+                hide();
+                window.clearInterval(interval);
+            }, timeRemaining);
+        }
+
+        function stopTimeout() {
+            window.clearTimeout(timeout);
+            window.clearInterval(interval);
+        }
+
+        function on(event, callback) {
+            $bsModal.on(event, callback);
+        }
+    }
+}(jQuery);
+
+},{}],128:[function(require,module,exports){
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _ExceptionMap = require("exceptions/ExceptionMap");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = function ($) {
+
+    var notificationCount = 0;
+    var notifications = new NotificationList();
+
+    var handlerList = [];
+
+    return {
+        log: _log,
+        info: _info,
+        warn: _warn,
+        error: _error,
+        success: _success,
+        getNotifications: getNotifications,
+        listen: _listen
+    };
+
+    function _listen(handler) {
+        handlerList.push(handler);
+    }
+
+    function trigger() {
+        for (var i = 0; i < handlerList.length; i++) {
+            handlerList[i].call({}, notifications.all());
+        }
+    }
+
+    function _log(message, prefix) {
+        var notification = new Notification(message);
+
+        if (App.config.log.data.indexOf("log_messages") >= 0) {
+            console.log((prefix || "") + "[" + notification.code + "] " + notification.message);
+
+            for (var i = 0; i < notification.stackTrace.length; i++) {
+                _log(notification.stackTrace[i], " + ");
+            }
+        }
+
+        return notification;
+    }
+
+    function _info(message) {
+        var notification = new Notification(message, "info");
+
+        if (App.config.log.data.indexOf("print_infos") >= 0) {
+            _printNotification(notification);
+        }
+
+        return notification;
+    }
+
+    function _warn(message) {
+        var notification = new Notification(message, "warning");
+
+        if (App.config.log.data.indexOf("print_warnings") >= 0) {
+            _printNotification(notification);
+        }
+
+        return notification;
+    }
+
+    function _error(message) {
+        var notification = new Notification(message, "danger");
+
+        if (App.config.log.data.indexOf("print_errors") >= 0) {
+            _printNotification(notification);
+        }
+
+        return notification;
+    }
+
+    function _success(message) {
+        var notification = new Notification(message, "success");
+
+        if (App.config.log.data.indexOf("print_success") >= 0) {
+            _printNotification(notification);
+        }
+
+        return notification;
+    }
+
+    function getNotifications() {
+        return notifications;
+    }
+
+    function _printNotification(notification) {
+        if (notification.code > 0 && _ExceptionMap.exceptionMap.has(notification.code.toString())) {
+            notification.message = _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap.exceptionMap.get(notification.code.toString()));
+        }
+        notifications.add(notification);
+        _log(notification);
+
+        trigger();
+
+        return notification;
+    }
+
+    function Notification(data, context) {
+        if (App.config.log.data.indexOf("print_stack_trace") < 0 && (typeof data === "undefined" ? "undefined" : _typeof(data)) === "object") {
+            data.stackTrace = [];
+        }
+        var id = notificationCount++;
+        var self = {
+            id: id,
+            code: data.code || 0,
+            message: data.message || data || "",
+            context: context || "info",
+            stackTrace: data.stackTrace || [],
+            close: close,
+            closeAfter: closeAfter,
+            trace: trace
+        };
+
+        return self;
+
+        function close() {
+            notifications.remove(self);
+            trigger();
+        }
+
+        function closeAfter(timeout) {
+            setTimeout(function () {
+                notifications.remove(self);
+                trigger();
+            }, timeout);
+        }
+
+        function trace(message, code) {
+            if (App.config.log.data.indexOf("print_stack_trace") >= 0) {
+                self.stackTrace.push({
+                    code: code || 0,
+                    message: message
+                });
+            }
+        }
+    }
+
+    function NotificationList() {
+        var elements = [];
+
+        return {
+            all: all,
+            add: add,
+            remove: remove
+        };
+
+        function all() {
+            return elements;
+        }
+
+        function add(notification) {
+            elements.push(notification);
+        }
+
+        function remove(notification) {
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i].id === notification.id) {
+                    elements.splice(i, 1);
+                    break;
+                }
+            }
+        }
+    }
+}(jQuery);
+
+},{"exceptions/ExceptionMap":97,"services/TranslationService":129}],129:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _utils = require("../helper/utils");
+
+var _strings = require("../helper/strings");
+
+var TranslationService = function ($) {
+    var _translations = {};
+
+    // initialize translations
+    _readTranslations();
+
+    return {
+        translate: _translate
+    };
+
+    function _readTranslations() {
+        var identifierPattern = /^(\w+)::(\w+)$/;
+        var tags = document.querySelectorAll("script[data-translation]");
+
+        for (var i = 0; i < tags.length; i++) {
+            var identifier = tags[i].dataset.translation;
+
+            if (!identifier || !identifierPattern.test(identifier)) {
+                console.error("Cannot read translations from script tag. Identifier is not valid");
+            }
+
+            var match = identifierPattern.exec(identifier);
+            var namespace = match[1];
+            var group = match[2];
+
+            if (_translations.hasOwnProperty(namespace)) {
+                console.warn("Cannot override namespace \"" + namespace + "\"");
+                continue;
+            }
+
+            _translations[namespace] = {};
+
+            if (_translations[namespace].hasOwnProperty(group)) {
+                console.warn("Cannot override group \"" + namespace + "::" + group);
+                continue;
+            }
+
+            try {
+                _translations[namespace][group] = JSON.parse(tags[i].innerHTML);
+            } catch (err) {
+                console.error("Error while parsing translations (" + identifier + ")");
+            }
+        }
+    }
+
+    function _translate(key, params) {
+        var identifier = _parseKey(key);
+
+        if (identifier === null) {
+            return key;
+        }
+
+        var namespace = _translations[identifier.namespace];
+
+        if ((0, _utils.isNullOrUndefined)(namespace)) {
+            return key;
+        }
+
+        var group = namespace[identifier.group];
+
+        if ((0, _utils.isNullOrUndefined)(group)) {
+            return key;
+        }
+
+        var value = group[identifier.key];
+
+        if (!(0, _utils.isNullOrUndefined)(value)) {
+            return _replacePlaceholders(value, params);
+        }
+
+        return key;
+    }
+
+    function _replacePlaceholders(input, values) {
+        values = values || {};
+
+        Object.keys(values).sort(function (keyA, keyB) {
+            return keyB.length - keyA.length;
+        }).forEach(function (key) {
+            var value = "" + (0, _utils.defaultValue)(values[key], "");
+
+            input = (0, _strings.replaceAll)(input, ":" + key, value);
+            input = (0, _strings.replaceAll)(input, ":" + (0, _strings.capitalize)(key), (0, _strings.capitalize)(value));
+            input = (0, _strings.replaceAll)(input, ":" + key.toUpperCase(), value.toUpperCase());
+        });
+
+        return input;
+    }
+
+    function _parseKey(key) {
+        var keyPattern = /^(\w+)::(\w+)\.(\w+)$/;
+
+        if (keyPattern.test(key)) {
+            var match = keyPattern.exec(key);
+
+            return {
+                namespace: match[1],
+                group: match[2],
+                key: match[3]
+            };
+        }
+
+        return null;
+    }
+}(jQuery);
+
+exports.default = TranslationService;
+
+},{"../helper/strings":118,"../helper/utils":120}],130:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getUrlParams = getUrlParams;
+exports.setUrlParams = setUrlParams;
+exports.setUrlParam = setUrlParam;
+exports.navigateTo = navigateTo;
+exports.switchUrl = switchUrl;
+
+var _jquery = require("jquery");
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _utils = require("../helper/utils");
+
+var _url = require("../helper/url");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getUrlParams(urlParams) {
+    if (urlParams) {
+        var tokens;
+        var params = {};
+        var regex = /[?&]?([^=]+)=([^&]*)/g;
+
+        urlParams = urlParams.split("+").join(" ");
+
+        // eslint-disable-next-line
+        while (tokens = regex.exec(urlParams)) {
+            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        }
+
+        return params;
+    }
+
+    return {};
+}
+
+function setUrlParams(urlParams) {
+    var pathName = window.location.pathname;
+    var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
+    var titleElement = document.getElementsByTagName("title")[0];
+
+    window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+
+    (0, _jquery2.default)("a[href][data-update-url]").each(function (i, element) {
+        var $element = (0, _jquery2.default)(element);
+        var href = /^([^?]*)(\?.*)?$/.exec($element.attr("href"));
+
+        if (href && href[1]) {
+            $element.attr("href", href[1] + params);
+        }
+    });
+}
+
+function setUrlParam(key, value) {
+    var urlParams = getUrlParams(document.location.search);
+
+    if (value !== null) {
+        urlParams[key] = value;
+    } else {
+        delete urlParams[key];
+    }
+
+    setUrlParams(urlParams);
+}
+
+function navigateTo(url) {
+    url = (0, _url.normalizeUrl)(url);
+    window.location.assign(url);
+}
+
+function switchUrl(url, title) {
+    if ((0, _utils.isNullOrUndefined)(title)) {
+        title = document.getElementsByTagName("title")[0].innerHTML;
+    }
+    url = (0, _url.normalizeUrl)(url);
+    window.history.pushState({ requireReload: true }, title, url);
+}
+
+exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, switchUrl: switchUrl };
+
+},{"../helper/url":119,"../helper/utils":120,"jquery":2}],131:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.validate = validate;
+exports.getInvalidFields = getInvalidFields;
+exports.markInvalidFields = markInvalidFields;
+exports.markFailedValidationFields = markFailedValidationFields;
+exports.unmarkAllFields = unmarkAllFields;
+
+var _jquery = require("jquery");
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var $form = void 0;
+
+function validate(form) {
+    var deferred = _jquery2.default.Deferred();
+    var invalidFields = getInvalidFields(form);
+
+    if (invalidFields.length > 0) {
+        deferred.rejectWith(form, [invalidFields]);
+    } else {
+        deferred.resolveWith(form);
+    }
+
+    return deferred;
+}
+
+function getInvalidFields(form) {
+    $form = (0, _jquery2.default)(form);
+    var invalidFormControls = [];
+
+    $form.find("[data-validate]").each(function (i, elem) {
+
+        if (!_validateElement((0, _jquery2.default)(elem))) {
+            invalidFormControls.push(elem);
+        }
+    });
+
+    return invalidFormControls;
+}
+
+function markInvalidFields(fields, errorClass) {
+    errorClass = errorClass || "error";
+
+    (0, _jquery2.default)(fields).each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+
+        $elem.addClass(errorClass);
+        _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function () {
+            if (_validateElement($elem)) {
+                $elem.removeClass(errorClass);
+                if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]")) {
+                    var groupName = $elem.attr("name");
+
+                    (0, _jquery2.default)("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
+                }
+                _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
+            }
+        });
+    });
+}
+
+function markFailedValidationFields(form, validationErrors, errorClass) {
+    $form = (0, _jquery2.default)(form);
+
+    errorClass = errorClass || "error";
+
+    $form.find("[data-model]").each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+        var attribute = $elem.attr("data-model");
+
+        if (attribute in validationErrors) {
+            $elem.addClass(errorClass);
+
+            var fieldLabel = $elem.find("label")[0].innerHTML.replace("*", "");
+
+            if (fieldLabel) {
+                var attributeCamel = attribute.replace(/([A-Z])/g, " $1").toLowerCase();
+
+                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attributeCamel.replace("_", " "), fieldLabel);
+            }
+        }
+    });
+}
+
+function unmarkAllFields(form) {
+    $form = (0, _jquery2.default)(form);
+
+    $form.find("[data-validate]").each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+
+        $elem.removeClass("error");
+    });
+}
+
+function _validateElement(elem) {
+    var $elem = (0, _jquery2.default)(elem);
+    var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
+        return i.trim();
+    }) || ["text"];
+    var hasError = false;
+
+    _findFormControls($elem).each(function (i, formControl) {
+        var $formControl = (0, _jquery2.default)(formControl);
+        var validationKey = validationKeys[i] || validationKeys[0];
+
+        if (!_isActive($formControl)) {
+            // continue loop
+            return true;
+        }
+
+        if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]")) {
+
+            if (!_validateGroup($formControl, validationKey)) {
+                hasError = true;
+            }
+
+            return true;
+        }
+
+        if ($formControl.is("select")) {
+            if (!_validateSelect($formControl, validationKey)) {
+                hasError = true;
+            }
+
+            return true;
+        }
+
+        if (!_validateInput($formControl, validationKey)) {
+            hasError = true;
+        }
+
+        return false;
+    });
+
+    return !hasError;
+}
+
+function _validateGroup($formControl, validationKey) {
+    var groupName = $formControl.attr("name");
+    var $group = $form.find("[name=\"" + groupName + "\"]");
+    var range = _eval(validationKey) || { min: 1, max: 1 };
+    var checked = $group.filter(":checked").length;
+
+    return checked >= range.min && checked <= range.max;
+}
+
+function _validateSelect($formControl, validationKey) {
+    return _jquery2.default.trim($formControl.val()) !== validationKey;
+}
+
+function _validateInput($formControl, validationKey) {
+    switch (validationKey) {
+        case "text":
+            return _hasValue($formControl);
+        case "number":
+            return _hasValue($formControl) && _jquery2.default.isNumeric(_jquery2.default.trim($formControl.val()));
+        case "ref":
+            return _compareRef(_jquery2.default.trim($formControl.val()), _jquery2.default.trim($formControl.attr("data-validate-ref")));
+        case "mail":
+            return _isMail($formControl);
+        case "password":
+            return _isPassword($formControl);
+        case "regex":
+            {
+                var ref = $formControl.attr("data-validate-ref");
+                var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+
+                return _hasValue($formControl) && regex.test(_jquery2.default.trim($formControl.val()));
+            }
+        default:
+            console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
+            return true;
+    }
+}
+
+function _hasValue($formControl) {
+    return _jquery2.default.trim($formControl.val()).length > 0;
+}
+
+/**
+ * @param {any} value
+ * @returns value is valid mail
+ */
+function _isMail($formControl) {
+    var mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+    return mailRegEx.test($formControl.val());
+}
+
+/**
+ * Minimum eight characters, at least one letter and one number
+ *
+ * @param {any} value
+ * @returns value is valid password
+ */
+function _isPassword($formControl) {
+    var passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)\S{8,}$/);
+
+    return passwordRegEx.test($formControl.val());
+}
+
+function _compareRef(value, ref) {
+    if ((0, _jquery2.default)(ref).length > 0) {
+        ref = _jquery2.default.trim((0, _jquery2.default)(ref).val());
+    }
+
+    return value === ref;
+}
+
+function _findFormControls($elem) {
+    if ($elem.is("input, select, textarea")) {
+        return $elem;
+    }
+
+    return $elem.find("input, select, textarea");
+}
+
+function _isActive($elem) {
+    return $elem.is(":visible") && $elem.is(":enabled");
+}
+
+function _eval(input) {
+    // eslint-disable-next-line
+    return new Function("return " + input)();
+}
+
+exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
+
+},{"jquery":2}],132:[function(require,module,exports){
+"use strict";
+
+module.exports = function ($) {
+
+    var overlay = {
+        count: 0,
+        isVisible: false
+    };
+
+    return {
+        getOverlay: getOverlay,
+        showWaitScreen: showWaitScreen,
+        hideWaitScreen: hideWaitScreen
+    };
+
+    function getOverlay() {
+        return overlay;
+    }
+
+    function showWaitScreen() {
+        overlay.count = overlay.count || 0;
+        overlay.count++;
+        overlay.isVisible = true;
+    }
+
+    function hideWaitScreen(force) {
+        overlay.count = overlay.count || 0;
+        if (overlay.count > 0) {
+            overlay.count--;
+        }
+
+        if (force) {
+            overlay.count = 0;
+        }
+
+        if (overlay.count <= 0) {
+            overlay.count = 0;
+            overlay.visible = false;
+        }
+    }
+}(jQuery);
+
+},{}],133:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _WishListModule = require("store/modules/WishListModule");
+
+var _WishListModule2 = _interopRequireDefault(_WishListModule);
+
+var _CheckoutModule = require("store/modules/CheckoutModule");
+
+var _CheckoutModule2 = _interopRequireDefault(_CheckoutModule);
+
+var _AddressModule = require("store/modules/AddressModule");
+
+var _AddressModule2 = _interopRequireDefault(_AddressModule);
+
+var _LocalizationModule = require("store/modules/LocalizationModule");
+
+var _LocalizationModule2 = _interopRequireDefault(_LocalizationModule);
+
+var _UserModule = require("store/modules/UserModule");
+
+var _UserModule2 = _interopRequireDefault(_UserModule);
+
+var _NavigationModule = require("store/modules/NavigationModule");
+
+var _NavigationModule2 = _interopRequireDefault(_NavigationModule);
+
+var _ItemListModule = require("store/modules/ItemListModule");
+
+var _ItemListModule2 = _interopRequireDefault(_ItemListModule);
+
+var _SingleItemModule = require("store/modules/SingleItemModule");
+
+var _SingleItemModule2 = _interopRequireDefault(_SingleItemModule);
+
+var _BasketModule = require("store/modules/BasketModule");
+
+var _BasketModule2 = _interopRequireDefault(_BasketModule);
+
+var _OrderReturnModule = require("store/modules/OrderReturnModule");
+
+var _OrderReturnModule2 = _interopRequireDefault(_OrderReturnModule);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.use(require("vue-script2"));
+
+// eslint-disable-next-line
+var store = new Vuex.Store({
+    modules: {
+        wishList: _WishListModule2.default,
+        checkout: _CheckoutModule2.default,
+        address: _AddressModule2.default,
+        localization: _LocalizationModule2.default,
+        user: _UserModule2.default,
+        navigation: _NavigationModule2.default,
+        itemList: _ItemListModule2.default,
+        item: _SingleItemModule2.default,
+        basket: _BasketModule2.default,
+        orderReturn: _OrderReturnModule2.default
+    }
+});
+
+window.ceresStore = store;
+
+exports.default = store;
+
+},{"store/modules/AddressModule":134,"store/modules/BasketModule":135,"store/modules/CheckoutModule":136,"store/modules/ItemListModule":137,"store/modules/LocalizationModule":138,"store/modules/NavigationModule":139,"store/modules/OrderReturnModule":140,"store/modules/SingleItemModule":141,"store/modules/UserModule":142,"store/modules/WishListModule":143,"vue-script2":9}],134:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
+    billingAddressId: null,
+    billingAddress: null,
+    billingAddressList: [],
+    deliveryAddressId: null,
+    deliveryAddress: null,
+    deliveryAddressList: []
+};
+
+var mutations = {
+    setBillingAddressList: function setBillingAddressList(state, billingAddressList) {
+        if (Array.isArray(billingAddressList)) {
+            state.billingAddressList = billingAddressList;
+        }
+    },
+    selectBillingAddress: function selectBillingAddress(state, billingAddress) {
+        if (billingAddress) {
+            state.billingAddressId = billingAddress.id;
+            state.billingAddress = billingAddress;
+        }
+    },
+    selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
+        if (billingAddressId) {
+            var billingAddress = state.billingAddressList.find(function (address) {
+                return address.id === billingAddressId;
+            });
+
+            if (billingAddress) {
+                state.billingAddressId = billingAddress.id;
+                state.billingAddress = billingAddress;
+            }
+        }
+    },
+    setDeliveryAddressList: function setDeliveryAddressList(state, deliveryAddressList) {
+        if (Array.isArray(deliveryAddressList)) {
+            state.deliveryAddressList = deliveryAddressList;
+        }
+    },
+    selectDeliveryAddress: function selectDeliveryAddress(state, deliveryAddress) {
+        if (deliveryAddress) {
+            state.deliveryAddressId = deliveryAddress.id;
+            state.deliveryAddress = deliveryAddress;
+        }
+    },
+    removeBillingAddress: function removeBillingAddress(state, billingAddress) {
+        var index = state.billingAddressList.indexOf(billingAddress);
+
+        if (index !== -1) {
+            state.billingAddressList.splice(index, 1);
+
+            if (state.billingAddress === billingAddress) {
+                state.billingAddress = null;
+                state.billingAddressId = null;
+            }
+        }
+    },
+    removeDeliveryAddress: function removeDeliveryAddress(state, deliveryAddress) {
+        var index = state.deliveryAddressList.indexOf(deliveryAddress);
+
+        if (index !== -1) {
+            state.deliveryAddressList.splice(index, 1);
+
+            if (state.deliveryAddress === deliveryAddress) {
+                state.deliveryAddress = state.deliveryAddressList.find(function (address) {
+                    return address.id === -99;
+                });
+                state.deliveryAddressId = -99;
+            }
+        }
+    },
+    addBillingAddress: function addBillingAddress(state, _ref) {
+        var billingAddress = _ref.billingAddress,
+            addressIndex = _ref.addressIndex;
+
+        if (billingAddress) {
+            if (addressIndex) {
+                state.billingAddressList.splice(addressIndex, 0, billingAddress);
+            } else {
+                state.billingAddressList.push(billingAddress);
+                state.billingAddressId = billingAddress.id;
+                state.billingAddress = billingAddress;
+            }
+        }
+    },
+    addDeliveryAddress: function addDeliveryAddress(state, _ref2) {
+        var deliveryAddress = _ref2.deliveryAddress,
+            addressIndex = _ref2.addressIndex;
+
+        if (deliveryAddress) {
+            if (addressIndex) {
+                state.deliveryAddressList.splice(addressIndex, 0, deliveryAddress);
+            } else {
+                state.deliveryAddressList.push(deliveryAddress);
+                state.deliveryAddressId = deliveryAddress.id;
+                state.deliveryAddress = deliveryAddress;
+            }
+        }
+    },
+    updateBillingAddress: function updateBillingAddress(state, billingAddress) {
+        if (billingAddress) {
+            var indexToUpdate = state.billingAddressList.findIndex(function (entry) {
+                return entry.id === billingAddress.id;
+            });
+
+            // using this "trick" to trigger the address list to render again
+            state.billingAddressList.splice(indexToUpdate, 1);
+            state.billingAddressList.splice(indexToUpdate, 0, billingAddress);
+
+            if (billingAddress.id === state.billingAddressId) {
+                state.billingAddress = billingAddress;
+            }
+        }
+    },
+    updateDeliveryAddress: function updateDeliveryAddress(state, deliveryAddress) {
+        if (deliveryAddress) {
+            var indexToUpdate = state.deliveryAddressList.findIndex(function (entry) {
+                return entry.id === deliveryAddress.id;
+            });
+
+            // using this "trick" to trigger the address list to render again
+            state.deliveryAddressList.splice(indexToUpdate, 1);
+            state.deliveryAddressList.splice(indexToUpdate, 0, deliveryAddress);
+
+            if (deliveryAddress.id === state.deliveryAddressId) {
+                state.deliveryAddress = deliveryAddress;
+            }
+        }
+    },
+    resetAddress: function resetAddress(state, addressType) {
+        if (addressType === "1") {
+            state.billingAddress = null;
+            state.billingAddressId = null;
+            state.billingAddressList = [];
+        } else if (addressType === "2") {
+            state.deliveryAddressList = [{ id: -99 }];
+            state.deliveryAddress = state.deliveryAddressList[0];
+            state.deliveryAddressId = state.deliveryAddressList[0].id;
+        }
+    }
+};
+
+var actions = {
+    initBillingAddress: function initBillingAddress(_ref3, _ref4) {
+        var commit = _ref3.commit;
+        var id = _ref4.id,
+            addressList = _ref4.addressList;
+
+        commit("setBillingAddressList", addressList);
+        commit("selectBillingAddress", addressList.find(function (address) {
+            return address.id === id;
+        }));
+    },
+    initDeliveryAddress: function initDeliveryAddress(_ref5, _ref6) {
+        var commit = _ref5.commit;
+        var id = _ref6.id,
+            addressList = _ref6.addressList;
+
+        commit("setDeliveryAddressList", addressList);
+        commit("selectDeliveryAddress", addressList.find(function (address) {
+            return address.id === id;
+        }));
+    },
+    selectAddress: function selectAddress(_ref7, _ref8) {
+        var commit = _ref7.commit,
+            state = _ref7.state;
+        var selectedAddress = _ref8.selectedAddress,
+            addressType = _ref8.addressType;
+
+        return new Promise(function (resolve, reject) {
+            var oldAddress = {};
+
+            if (addressType === "1") {
+                oldAddress = state.billingAddress;
+                commit("selectBillingAddress", selectedAddress);
+            } else if (addressType === "2") {
+                oldAddress = state.deliveryAddress;
+                commit("selectDeliveryAddress", selectedAddress);
+            }
+
+            commit("setIsBasketLoading", true);
+
+            _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
+                commit("setIsBasketLoading", false);
+
+                return resolve(response);
+            }).fail(function (error) {
+                if (addressType === "1") {
+                    commit("selectBillingAddress", oldAddress);
+                } else if (addressType === "2") {
+                    commit("selectDeliveryAddress", oldAddress);
+                }
+
+                commit("setIsBasketLoading", false);
+                reject(error);
+            });
+        });
+    },
+    deleteAddress: function deleteAddress(_ref9, _ref10) {
+        var dispatch = _ref9.dispatch,
+            state = _ref9.state,
+            commit = _ref9.commit;
+        var address = _ref10.address,
+            addressType = _ref10.addressType;
+
+        return new Promise(function (resolve, reject) {
+            var addressIndex = -1;
+
+            if (addressType === "1") {
+                addressIndex = state.billingAddressList.indexOf(address);
+                commit("removeBillingAddress", address);
+            } else if (addressType === "2") {
+                addressIndex = state.deliveryAddressList.indexOf(address);
+                commit("removeDeliveryAddress", address);
+            }
+
+            _ApiService2.default.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, { keepOriginalResponse: true }).done(function (response) {
+                if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+                    var billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
+
+                    commit("selectBillingAddressById", billingAddressId);
+                }
+
+                resolve(response);
+            }).fail(function (error) {
+                if (addressType === "1") {
+                    commit("addBillingAddress", { billingAddress: address, addressIndex: addressIndex });
+                } else if (addressType === "2") {
+                    commit("addDeliveryAddress", { deliveryAddress: address, addressIndex: addressIndex });
+                }
+                reject(error);
+            });
+        });
+    },
+    createAddress: function createAddress(_ref11, _ref12) {
+        var commit = _ref11.commit;
+        var address = _ref12.address,
+            addressType = _ref12.addressType;
+
+        return new Promise(function (resolve, reject) {
+            _ApiService2.default.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
+                if (addressType === "1") {
+                    commit("addBillingAddress", { billingAddress: response });
+                } else if (addressType === "2") {
+                    commit("addDeliveryAddress", { deliveryAddress: response });
+                }
+
+                resolve(response);
+            }).fail(function (error) {
+                reject(error);
+            });
+        });
+    },
+    updateAddress: function updateAddress(_ref13, _ref14) {
+        var commit = _ref13.commit;
+        var address = _ref14.address,
+            addressType = _ref14.addressType;
+
+        return new Promise(function (resolve, reject) {
+            _ApiService2.default.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true, keepOriginalResponse: true }).done(function (response) {
+                if (addressType === "1") {
+                    commit("updateBillingAddress", address);
+
+                    if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+                        var billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
+
+                        commit("selectBillingAddressById", billingAddressId);
+                    }
+                } else if (addressType === "2") {
+                    commit("updateDeliveryAddress", address);
+                }
+
+                resolve(response);
+            }).fail(function (error) {
+                reject(error);
+            });
+        });
+    }
+};
+
+var getters = {
+    getSelectedAddress: function getSelectedAddress(state) {
+        return function (addressType) {
+            var selectedAddress = void 0;
+
+            if (addressType === "1") {
+                selectedAddress = state.billingAddress;
+            } else if (addressType === "2") {
+                selectedAddress = state.deliveryAddress;
+            }
+
+            return selectedAddress;
+        };
+    },
+
+    getAddressList: function getAddressList(state) {
+        return function (addressType) {
+            var addressList = [];
+
+            if (addressType === "1") {
+                addressList = state.billingAddressList;
+            } else if (addressType === "2") {
+                addressList = state.deliveryAddressList;
+            }
+
+            return addressList;
+        };
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{"services/ApiService":123}],135:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _UrlService = require("../../services/UrlService");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+var state = {
+    data: {},
+    items: [],
+    showNetPrices: false,
+    latestEntry: {
+        item: {},
+        quantity: null
+    },
+    isBasketLoading: false,
+    isBasketInitiallyLoaded: false,
+    basketNotifications: []
+};
+
+var mutations = {
+    setBasket: function setBasket(state, basket) {
+        if (state.data.id && JSON.stringify(basket) !== JSON.stringify(state.data)) {
+            document.dispatchEvent(new CustomEvent("afterBasketChanged", { detail: basket }));
+        }
+
+        state.data = basket;
+    },
+    setBasketItems: function setBasketItems(state, basketItems) {
+        state.items = basketItems;
+    },
+    addBasketItem: function addBasketItem(state, basketItem) {
+        var basketItemIndex = state.items.findIndex(function (item) {
+            return basketItem.id === item.id;
+        });
+
+        if (basketItemIndex !== -1) {
+            state.items.splice(basketItemIndex, 1);
+            state.items.splice(basketItemIndex, 0, basketItem);
+        } else {
+            state.items.push(basketItem);
+        }
+    },
+    addBasketNotification: function addBasketNotification(state, _ref) {
+        var type = _ref.type,
+            message = _ref.message;
+
+        state.basketNotifications.push({ type: type, message: message });
+    },
+    clearOldestNotification: function clearOldestNotification(state) {
+        state.basketNotifications.splice(0, 1);
+    },
+    updateBasketItemQuantity: function updateBasketItemQuantity(state, _ref2) {
+        var basketItem = _ref2.basketItem,
+            quantity = _ref2.quantity;
+
+        var item = state.items.find(function (item) {
+            return basketItem.id === item.id;
+        });
+
+        item.quantity = quantity;
+    },
+    removeBasketItem: function removeBasketItem(state, basketItemId) {
+        state.items = state.items.filter(function (item) {
+            return item.id !== basketItemId;
+        });
+    },
+    setLatestBasketEntry: function setLatestBasketEntry(state, latestBasketEntry) {
+        state.latestEntry = latestBasketEntry;
+    },
+    setCouponCode: function setCouponCode(state, couponCode) {
+        state.data.couponCode = couponCode;
+    },
+    setIsBasketLoading: function setIsBasketLoading(state, isBasketLoading) {
+        state.isBasketLoading = !!isBasketLoading;
+    },
+    setIsBasketInitiallyLoaded: function setIsBasketInitiallyLoaded(state) {
+        state.isBasketInitiallyLoaded = true;
+    },
+    setShowNetPrices: function setShowNetPrices(state, showNetPrices) {
+        state.showNetPrices = showNetPrices;
+    }
+};
+
+var actions = {
+    loadBasketData: function loadBasketData(_ref3) {
+        var commit = _ref3.commit,
+            state = _ref3.state;
+
+        if (state.data.itemQuantity) {
+            _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
+                commit("setBasketItems", basketItems);
+                commit("setIsBasketInitiallyLoaded");
+
+                setTimeout(function () {
+                    $(document.body).trigger("sticky_kit:recalc");
+                }, 0);
+            }).fail(function (error) {
+                if (error.data) {
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
+                }
+            });
+        } else {
+            commit("setIsBasketInitiallyLoaded");
+        }
+
+        _ApiService2.default.listen("AfterBasketChanged", function (data) {
+            commit("setBasket", data.basket);
+            commit("setShowNetPrices", data.showNetPrices);
+            commit("setBasketItems", data.basketItems);
+        });
+    },
+    addBasketNotification: function addBasketNotification(_ref4, _ref5) {
+        var commit = _ref4.commit;
+        var type = _ref5.type,
+            message = _ref5.message;
+
+        commit("addBasketNotification", { type: type, message: message });
+
+        setTimeout(function () {
+            commit("clearOldestNotification");
+        }, 5000);
+    },
+    addBasketItem: function addBasketItem(_ref6, basketItem) {
+        var commit = _ref6.commit;
+
+        return new Promise(function (resolve, reject) {
+            commit("setIsBasketLoading", true);
+
+            basketItem.template = "Ceres::Basket.Basket";
+            _ApiService2.default.post("/rest/io/basket/items/", basketItem).done(function (basketItems) {
+                commit("setBasketItems", basketItems);
+                commit("setIsBasketLoading", false);
+                resolve(basketItems);
+            }).fail(function (error) {
+                commit("setIsBasketLoading", false);
+                reject(error);
+            });
+        });
+    },
+    updateBasketItemQuantity: function updateBasketItemQuantity(_ref7, _ref8) {
+        var commit = _ref7.commit;
+        var basketItem = _ref8.basketItem,
+            quantity = _ref8.quantity;
+
+        return new Promise(function (resolve, reject) {
+            commit("updateBasketItemQuantity", { basketItem: basketItem, quantity: quantity });
+            commit("setIsBasketLoading", true);
+
+            basketItem.template = "Ceres::Basket.Basket";
+            _ApiService2.default.put("/rest/io/basket/items/" + basketItem.id, basketItem).done(function (data) {
+                commit("setBasketItems", data);
+                commit("setIsBasketLoading", false);
+                resolve(data);
+            }).fail(function (error) {
+                commit("setIsBasketLoading", false);
+                reject(error);
+            });
+        });
+    },
+    removeBasketItem: function removeBasketItem(_ref9, basketItemId) {
+        var commit = _ref9.commit;
+
+        return new Promise(function (resolve, reject) {
+            commit("setIsBasketLoading", true);
+
+            _ApiService2.default.delete("/rest/io/basket/items/" + basketItemId, { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
+                commit("setBasketItems", basketItems);
+                commit("setIsBasketLoading", false);
+                resolve(basketItems);
+
+                if (window.location.pathname === "/checkout" && !basketItems.length) {
+                    (0, _UrlService.navigateTo)("/basket");
+                }
+            }).fail(function (error) {
+                commit("setIsBasketLoading", false);
+                reject(error);
+            });
+        });
+    },
+    redeemCouponCode: function redeemCouponCode(_ref10, couponCode) {
+        var state = _ref10.state,
+            commit = _ref10.commit;
+
+        return new Promise(function (resolve, reject) {
+            commit("setIsBasketLoading", true);
+
+            _ApiService2.default.post("/rest/io/coupon", { couponCode: couponCode }, { supressNotifications: true }).done(function (data) {
+                commit("setCouponCode", couponCode);
+                commit("setIsBasketLoading", false);
+                resolve(data);
+            }).fail(function (error) {
+                commit("setIsBasketLoading", false);
+                reject(error);
+            });
+        });
+    },
+    removeCouponCode: function removeCouponCode(_ref11, couponCode) {
+        var state = _ref11.state,
+            commit = _ref11.commit;
+
+        return new Promise(function (resolve, reject) {
+            commit("setIsBasketLoading", true);
+
+            _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (data) {
+                commit("setCouponCode", null);
+                commit("setIsBasketLoading", false);
+                resolve(data);
+            }).fail(function (error) {
+                commit("setIsBasketLoading", false);
+                reject(error);
+            });
+        });
+    },
+    refreshBasket: function refreshBasket(_ref12) {
+        var commit = _ref12.commit;
+
+        return new Promise(function (resolve, reject) {
+            _ApiService2.default.get("/rest/io/basket/").done(function (basket) {
+                commit("setBasket", basket);
+                resolve(basket);
+            }).fail(function (error) {
+                reject(error);
+            });
+        });
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions
+};
+
+},{"../../services/UrlService":130,"services/ApiService":123,"services/NotificationService":128,"services/TranslationService":129}],136:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
+    shipping: {
+        shippingProfileId: null,
+        shippingProfileList: []
+    },
+    payment: {
+        methodOfPaymentId: null,
+        methodOfPaymentList: []
+    },
+    contactWish: null,
+    shippingPrivacyHintAccepted: false,
+    validation: {
+        gtc: {
+            showError: false,
+            validate: null
+        },
+        invoiceAddress: {
+            showError: false,
+            validate: null
+        },
+        paymentProvider: {
+            showError: false,
+            validate: null
+        },
+        shippingProfile: {
+            showError: false,
+            validate: null
+        }
+    }
+};
+
+var mutations = {
+    setShippingProfile: function setShippingProfile(state, shippingProfileId) {
+        if (shippingProfileId) {
+            state.shipping.shippingProfileId = shippingProfileId;
+        }
+    },
+    setShippingProfileList: function setShippingProfileList(state, shippingProfileList) {
+        if (Array.isArray(shippingProfileList)) {
+            state.shipping.shippingProfileList = shippingProfileList;
+        }
+    },
+    setMethodOfPayment: function setMethodOfPayment(state, methodOfPaymentId) {
+        if (methodOfPaymentId) {
+            state.payment.methodOfPaymentId = methodOfPaymentId;
+        }
+    },
+    setMethodOfPaymentList: function setMethodOfPaymentList(state, methodOfPaymentList) {
+        if (Array.isArray(methodOfPaymentList)) {
+            state.payment.methodOfPaymentList = methodOfPaymentList;
+        }
+    },
+    setContactWish: function setContactWish(state, contactWish) {
+        state.contactWish = contactWish;
+    },
+    setShippingPrivacyHintAccepted: function setShippingPrivacyHintAccepted(state, value) {
+        state.shippingPrivacyHintAccepted = value;
+    },
+    setPaymentProviderValidator: function setPaymentProviderValidator(state, paymentProviderValidator) {
+        state.validation.paymentProvider.validate = paymentProviderValidator;
+    },
+    setPaymentProviderShowError: function setPaymentProviderShowError(state, showError) {
+        state.validation.paymentProvider.showError = showError;
+    },
+    setShippingProfileValidator: function setShippingProfileValidator(state, shippingProfileValidator) {
+        state.validation.shippingProfile.validate = shippingProfileValidator;
+    },
+    setShippingProfileShowError: function setShippingProfileShowError(state, showError) {
+        state.validation.shippingProfile.showError = showError;
+    },
+    setGtcValidator: function setGtcValidator(state, gtcValidator) {
+        state.validation.gtc.validate = gtcValidator;
+    },
+    setGtcShowError: function setGtcShowError(state, showError) {
+        state.validation.gtc.showError = showError;
+    },
+    setInvoiceAddressValidator: function setInvoiceAddressValidator(state, invoiceAddressValidator) {
+        state.validation.invoiceAddress.validate = invoiceAddressValidator;
+    },
+    setInvoiceAddressShowError: function setInvoiceAddressShowError(state, showError) {
+        state.validation.invoiceAddress.showError = showError;
+    }
+};
+
+var actions = {
+    setCheckout: function setCheckout(_ref, checkout) {
+        var commit = _ref.commit;
+
+        commit("setShippingCountryId", checkout.shippingCountryId);
+        commit("setShippingProfile", checkout.shippingProfileId);
+        commit("setShippingProfileList", checkout.shippingProfileList);
+        commit("setMethodOfPaymentList", checkout.paymentDataList);
+        commit("setMethodOfPayment", checkout.methodOfPaymentId);
+    },
+    selectMethodOfPayment: function selectMethodOfPayment(_ref2, methodOfPaymentId) {
+        var commit = _ref2.commit,
+            dispatch = _ref2.dispatch;
+
+        return new Promise(function (resolve, reject) {
+            var oldMethodOfPayment = state.payment.methodOfPaymentId;
+
+            commit("setIsBasketLoading", true);
+            commit("setMethodOfPayment", methodOfPaymentId);
+
+            _ApiService2.default.post("/rest/io/checkout/paymentId/", { paymentId: methodOfPaymentId }).done(function (response) {
+                commit("setIsBasketLoading", false);
+                resolve(response);
+            }).fail(function (error) {
+                commit("setIsBasketLoading", false);
+                commit("setMethodOfPayment", oldMethodOfPayment);
+                reject(error);
+            });
+        });
+    },
+    selectShippingProfile: function selectShippingProfile(_ref3, shippingProfile) {
+        var commit = _ref3.commit,
+            dispatch = _ref3.dispatch;
+
+        return new Promise(function (resolve, reject) {
+            var oldShippingProfile = state.shipping.shippingProfileId;
+
+            commit("setIsBasketLoading", true);
+            commit("setShippingProfile", shippingProfile.parcelServicePresetId);
+
+            _ApiService2.default.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId }).done(function (response) {
+                commit("setIsBasketLoading", false);
+                resolve(response);
+            }).fail(function (error) {
+                commit("setIsBasketLoading", false);
+                commit("setShippingProfile", oldShippingProfile);
+                reject(error);
+            });
+        });
+    },
+    refreshCheckout: function refreshCheckout(_ref4) {
+        var commit = _ref4.commit,
+            dispatch = _ref4.dispatch;
+
+        return new Promise(function (resolve, reject) {
+            _ApiService2.default.get("/rest/io/checkout/").done(function (checkout) {
+                dispatch("setCheckout", checkout);
+                resolve(checkout);
+            }).fail(function (error) {
+                reject(error);
+            });
+        });
+    }
+};
+
+var getters = {};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{"services/ApiService":123}],137:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+var _ItemListUrlService = require("services/ItemListUrlService");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
+    facets: [],
+    selectedFacets: [],
+    page: null,
+    sorting: "texts.name1_asc",
+    isLoading: false,
+    itemsPerPage: null,
+    searchString: null,
+    items: [],
+    totalItems: null
+};
+
+var mutations = {
+    setFacets: function setFacets(state, facets) {
+        state.facets = facets || [];
+    },
+    setPriceFacet: function setPriceFacet(state, _ref) {
+        var priceMin = _ref.priceMin,
+            priceMax = _ref.priceMax;
+
+        var priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
+        var priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
+
+        var priceFacet = {
+            id: "price",
+            priceMin: priceMin,
+            priceMax: priceMax
+        };
+
+        if (!priceMax.length) {
+            priceFacet.name = _TranslationService2.default.translate("Ceres::Template.itemFrom") + priceMinFormatted;
+        } else if (!priceMin.length) {
+            priceFacet.name = _TranslationService2.default.translate("Ceres::Template.itemTo") + priceMaxFormatted;
+        } else {
+            priceFacet.name = priceMinFormatted + " - " + priceMaxFormatted;
+        }
+
+        state.facets.find(function (facet) {
+            return facet.type === "price";
+        }).values[0] = priceFacet;
+    },
+    setPriceFacetTag: function setPriceFacetTag(state) {
+        var priceFacet = state.facets.find(function (facet) {
+            return facet.type === "price";
+        }).values[0];
+        var selectedPriceFacet = state.selectedFacets.find(function (facet) {
+            return facet.id === "price";
+        });
+
+        if (selectedPriceFacet) {
+            Object.assign(selectedPriceFacet, priceFacet);
+        } else {
+            state.selectedFacets.push(priceFacet);
+        }
+    },
+    removePriceFacet: function removePriceFacet(state) {
+        state.selectedFacets = state.selectedFacets.filter(function (facet) {
+            return facet.id !== "price";
+        });
+    },
+    setSelectedFacetsByIds: function setSelectedFacetsByIds(state, selectedFacetIds) {
+        var selectedFacets = [];
+
+        if (selectedFacetIds.length > 0) {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = state.facets[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var facet = _step.value;
+
+                    selectedFacets = selectedFacets.concat(facet.values.filter(function (facetValue) {
+                        return selectedFacetIds.some(function (facetId) {
+                            return facetId === facetValue.id + "";
+                        });
+                    }));
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        }
+
+        state.selectedFacets = selectedFacets;
+    },
+    toggleSelectedFacet: function toggleSelectedFacet(state, facetValue) {
+        if (!state.selectedFacets.find(function (selectedFacet) {
+            return selectedFacet.id === facetValue.id;
+        })) {
+            state.selectedFacets.push(facetValue);
+        } else {
+            state.selectedFacets = state.selectedFacets.filter(function (selectedFacet) {
+                return selectedFacet.id !== facetValue.id;
+            });
+        }
+    },
+    setItemListPage: function setItemListPage(state, page) {
+        state.page = page;
+    },
+    setItemListSorting: function setItemListSorting(state, sorting) {
+        state.sorting = sorting;
+    },
+    setItemsPerPage: function setItemsPerPage(state, itemsPerPage) {
+        state.itemsPerPage = itemsPerPage;
+    },
+    setIsItemListLoading: function setIsItemListLoading(state, isLoading) {
+        state.isLoading = isLoading;
+    },
+    setItemListSearchString: function setItemListSearchString(state, searchString) {
+        state.searchString = searchString;
+    },
+    setItemListItems: function setItemListItems(state, items) {
+        state.items = items;
+    },
+    setItemListTotalItems: function setItemListTotalItems(state, totalItems) {
+        state.totalItems = totalItems;
+    }
+};
+
+var actions = {
+    selectFacet: function selectFacet(_ref2, facetValue) {
+        var dispatch = _ref2.dispatch,
+            commit = _ref2.commit;
+
+        if (facetValue.id === "price") {
+            commit("removePriceFacet");
+        } else {
+            commit("toggleSelectedFacet", facetValue);
+        }
+
+        commit("setItemListPage", 1);
+
+        dispatch("retrieveItemList");
+    },
+    selectPriceFacet: function selectPriceFacet(_ref3, _ref4) {
+        var dispatch = _ref3.dispatch,
+            commit = _ref3.commit;
+        var priceMin = _ref4.priceMin,
+            priceMax = _ref4.priceMax;
+
+        commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+        commit("setPriceFacetTag");
+        commit("setItemListPage", 1);
+
+        dispatch("retrieveItemList");
+    },
+    selectItemListPage: function selectItemListPage(_ref5, page) {
+        var dispatch = _ref5.dispatch,
+            commit = _ref5.commit;
+
+        commit("setItemListPage", page);
+
+        dispatch("retrieveItemList");
+    },
+    selectItemListSorting: function selectItemListSorting(_ref6, sorting) {
+        var dispatch = _ref6.dispatch,
+            commit = _ref6.commit;
+
+        commit("setItemListSorting", sorting);
+        commit("setItemListPage", 1);
+
+        dispatch("retrieveItemList");
+    },
+    selectItemsPerPage: function selectItemsPerPage(_ref7, itemsPerPage) {
+        var dispatch = _ref7.dispatch,
+            commit = _ref7.commit;
+
+        commit("setItemsPerPage", itemsPerPage);
+        commit("setItemListPage", 1);
+
+        dispatch("retrieveItemList");
+    },
+    searchItems: function searchItems(_ref8, searchString) {
+        var dispatch = _ref8.dispatch,
+            commit = _ref8.commit;
+
+        commit("setItemListSearchString", searchString);
+        commit("setItemListPage", 1);
+        commit("setSelectedFacetsByIds", []);
+
+        dispatch("retrieveItemList");
+    },
+    retrieveItemList: function retrieveItemList(_ref9) {
+        var state = _ref9.state,
+            dispatch = _ref9.dispatch,
+            commit = _ref9.commit,
+            getters = _ref9.getters,
+            rootState = _ref9.rootState;
+
+        return new Promise(function (resolve, reject) {
+            var selectedPriceFacet = state.selectedFacets.find(function (facet) {
+                return facet.id === "price";
+            });
+
+            var searchParams = {
+                query: state.searchString,
+                items: state.itemsPerPage,
+                sorting: state.sorting,
+                page: state.page,
+                facets: getters.selectedFacetIdsForUrl.toString(),
+                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
+                template: "Ceres::ItemList.ItemListView"
+            };
+            var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
+
+            (0, _ItemListUrlService.updateItemListUrlParams)(searchParams);
+            commit("setIsItemListLoading", true);
+
+            _ApiService2.default.get(url, searchParams).done(function (data) {
+                commit("setItemListItems", data.itemList.documents);
+                commit("setItemListTotalItems", data.itemList.total);
+                commit("setFacets", data.facets);
+                commit("setIsItemListLoading", false);
+                resolve(data);
+            }).fail(function (error) {
+                commit("setIsItemListLoading", false);
+                reject(error);
+            });
+        });
+    }
+};
+
+var getters = {
+    selectedFacetIds: function selectedFacetIds(state) {
+        var selectedFacetIds = [];
+
+        state.selectedFacets.every(function (facet) {
+            return selectedFacetIds.push(facet.id);
+        });
+
+        return selectedFacetIds;
+    },
+    selectedFacetIdsForUrl: function selectedFacetIdsForUrl(state) {
+        var selectedFacetIds = [];
+
+        state.selectedFacets.every(function (facet) {
+            return selectedFacetIds.push(facet.id);
+        });
+
+        return selectedFacetIds.filter(function (facet) {
+            return facet !== "price";
+        });
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{"services/ApiService":123,"services/ItemListUrlService":126,"services/TranslationService":129}],138:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
+    shippingCountries: [],
+    shippingCountryId: null
+};
+
+var mutations = {
+    setShippingCountries: function setShippingCountries(state, shippingCountries) {
+        state.shippingCountries = shippingCountries;
+    },
+    setShippingCountryId: function setShippingCountryId(state, shippingCountryId) {
+        if (shippingCountryId !== state.shippingCountryId) {
+            document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", { detail: shippingCountryId }));
+        }
+
+        state.shippingCountryId = shippingCountryId;
+    }
+};
+
+var actions = {
+    initLocalization: function initLocalization(_ref, _ref2) {
+        var commit = _ref.commit;
+        var localizationData = _ref2.localizationData;
+
+        commit("setShippingCountries", localizationData.activeShippingCountries);
+        commit("setShippingCountryId", localizationData.currentShippingCountryId);
+    },
+    selectShippingCountry: function selectShippingCountry(_ref3, shippingCountryId) {
+        var commit = _ref3.commit,
+            state = _ref3.state;
+
+        return new Promise(function (resolve, reject) {
+            var oldShippingCountryId = state.shippingCountryId;
+
+            commit("setShippingCountryId", shippingCountryId);
+            _ApiService2.default.post("/rest/io/shipping/country", { shippingCountryId: shippingCountryId }).done(function (data) {
+                resolve(data);
+            }).fail(function (error) {
+                commit("removeWishListId", oldShippingCountryId);
+                reject(error);
+            });
+        });
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions
+};
+
+},{"services/ApiService":123}],139:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _CategoryService = require("services/CategoryService");
+
+var state = {
+    tree: [],
+    currentCategory: null
+};
+
+var mutations = {
+    setNavigationTree: function setNavigationTree(state, navigationTree) {
+        state.tree = navigationTree;
+    },
+    setCurrentCategory: function setCurrentCategory(state, category) {
+        state.currentCategory = category;
+    }
+};
+
+var actions = {
+    initNavigationTree: function initNavigationTree(_ref, navigationTree) {
+        var dispatch = _ref.dispatch,
+            commit = _ref.commit;
+
+        if (navigationTree) {
+            dispatch("buildNavigationTreeItem", { navigationTree: navigationTree });
+        }
+
+        commit("setNavigationTree", navigationTree);
+    },
+    buildNavigationTreeItem: function buildNavigationTreeItem(_ref2, _ref3) {
+        var state = _ref2.state,
+            commit = _ref2.commit,
+            dispatch = _ref2.dispatch;
+        var navigationTree = _ref3.navigationTree,
+            parent = _ref3.parent;
+
+        var showChildren = false;
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = navigationTree[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var category = _step.value;
+
+                category.parent = parent;
+
+                // hide category if there is no translation
+                if (!category.details[0]) {
+                    category.hideCategory = true;
+                } else {
+                    var parentUrl = parent ? parent.url : "";
+
+                    category.url = parentUrl + "/" + category.details[0].nameUrl;
+                    showChildren = true;
+
+                    if (category.children) {
+                        dispatch("buildNavigationTreeItem", { navigationTree: category.children, parent: category });
+                    }
+                }
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+
+        if (parent) {
+            parent.showChildren = showChildren;
+        }
+    },
+    selectCategory: function selectCategory(_ref4, _ref5) {
+        var state = _ref4.state,
+            commit = _ref4.commit,
+            dispatch = _ref4.dispatch;
+        var category = _ref5.category,
+            categoryId = _ref5.categoryId,
+            withReload = _ref5.withReload;
+
+        if (category) {
+            commit("setCurrentCategory", category);
+        } else if (categoryId) {
+            dispatch("setCurrentCategoryById", { categoryId: categoryId });
+        }
+
+        if (!withReload) {
+            (0, _CategoryService.updateCategoryHtml)();
+
+            commit("setItemListPage", 1);
+            commit("setSelectedFacetsByIds", []);
+
+            dispatch("retrieveItemList");
+        }
+    },
+    setCurrentCategoryById: function setCurrentCategoryById(_ref6, _ref7) {
+        var state = _ref6.state,
+            commit = _ref6.commit,
+            dispatch = _ref6.dispatch;
+        var categoryId = _ref7.categoryId,
+            categories = _ref7.categories;
+
+        categories = categories || state.tree;
+
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+            for (var _iterator2 = categories[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var category = _step2.value;
+
+                if (category.id === categoryId) {
+                    commit("setCurrentCategory", category);
+                    return;
+                } else if (category.children) {
+                    dispatch("setCurrentCategoryById", { categoryId: categoryId, categories: category.children });
+                }
+            }
+        } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                    _iterator2.return();
+                }
+            } finally {
+                if (_didIteratorError2) {
+                    throw _iteratorError2;
+                }
+            }
+        }
+    }
+};
+
+var getters = {
+    breadcrumbs: function breadcrumbs(state) {
+        var breadcrumbs = [];
+
+        if (state.currentCategory) {
+            var currentIteration = state.currentCategory;
+
+            while (currentIteration) {
+                breadcrumbs.unshift(currentIteration);
+                currentIteration = currentIteration.parent;
+            }
+        }
+
+        return breadcrumbs;
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{"services/CategoryService":124}],140:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
+    orderData: {},
+    orderReturnItems: [],
+    orderReturnNote: ""
+};
+
+var mutations = {
+    setOrderReturnData: function setOrderReturnData(state, orderData) {
+        orderData.order.orderItems = orderData.order.orderItems.filter(function (orderItem) {
+            return orderItem.quantity !== 0;
+        });
+
+        state.orderData = orderData;
+    },
+    updateOrderReturnItems: function updateOrderReturnItems(state, _ref) {
+        var quantity = _ref.quantity,
+            orderItem = _ref.orderItem;
+
+        if (quantity <= orderItem.quantity) {
+            var orderItemIndex = state.orderReturnItems.findIndex(function (entry) {
+                return entry.orderItem.itemVariationId === orderItem.itemVariationId;
+            });
+
+            if (quantity !== 0) {
+                if (orderItemIndex === -1) {
+                    state.orderReturnItems.push({ quantity: quantity, orderItem: orderItem });
+                } else {
+                    state.orderReturnItems.splice(orderItemIndex, 1);
+                    state.orderReturnItems.splice(orderItemIndex, 0, { quantity: quantity, orderItem: orderItem });
+                }
+            } else {
+                state.orderReturnItems.splice(orderItemIndex, 1);
+            }
+        }
+    },
+    updateOrderReturnNote: function updateOrderReturnNote(state, orderReturnNote) {
+        state.orderReturnNote = orderReturnNote;
+    }
+};
+
+var actions = {
+    sendOrderReturn: function sendOrderReturn(_ref2) {
+        var state = _ref2.state;
+
+        return new Promise(function (resolve, reject) {
+            if (state.orderReturnItems.length > 0) {
+                var variationIds = {};
+
+                for (var index in state.orderReturnItems) {
+                    variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
+                }
+
+                _ApiService2.default.post("/rest/io/order/return", { orderId: state.orderData.order.id, variationIds: variationIds, returnNote: state.orderReturnNote }).done(function (data) {
+                    resolve(data);
+                }).fail(function (error) {
+                    reject(error);
+                });
+            } else {
+                reject();
+            }
+        });
+    }
+};
+
+var getters = {
+    getOrderItemImage: function getOrderItemImage(state) {
+        return function (orderItemId) {
+            return state.orderData.itemImages[orderItemId];
+        };
+    },
+
+    getOrderItemURL: function getOrderItemURL(state) {
+        return function (orderItemId) {
+            return state.orderData.itemURLs[orderItemId];
+        };
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{"services/ApiService":123}],141:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var state = {
+    variation: {},
+    variationList: [],
+    variationOrderQuantity: 1,
+    variationMarkInvalidProperties: false
+};
+
+var mutations = {
+    setVariation: function setVariation(state, variation) {
+        state.variation = variation;
+        if (variation.documents.length > 0 && variation.documents[0].data.variation) {
+            state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
+        }
+    },
+    setVariationList: function setVariationList(state, variationList) {
+        state.variationList = variationList;
+    },
+    setVariationOrderProperty: function setVariationOrderProperty(state, _ref) {
+        var propertyId = _ref.propertyId,
+            value = _ref.value;
+
+        var index = state.variation.documents[0].data.properties.findIndex(function (property) {
+            return property.property.id === propertyId;
+        });
+
+        if (index >= 0) {
+            Vue.set(state.variation.documents[0].data.properties[index], "property", _extends({}, state.variation.documents[0].data.properties[index].property, {
+                value: value
+            }));
+        }
+    },
+    setVariationOrderQuantity: function setVariationOrderQuantity(state, quantity) {
+        state.variationOrderQuantity = quantity;
+    },
+    setVariationMarkInvalidProps: function setVariationMarkInvalidProps(state, markFields) {
+        state.variationMarkInvalidProperties = !!markFields;
+    }
+};
+
+var actions = {};
+
+var getters = {
+    variationPropertySurcharge: function variationPropertySurcharge(state) {
+        if (!state || !state.variation.documents) {
+            return 0;
+        }
+
+        var sum = 0;
+
+        if (state.variation.documents[0].data.properties) {
+            var addedProperties = state.variation.documents[0].data.properties.filter(function (property) {
+                return !!property.property.value;
+            });
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = addedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var property = _step.value;
+
+                    sum += property.surcharge || property.property.surcharge;
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        }
+
+        return sum;
+    },
+    variationGraduatedPrice: function variationGraduatedPrice(state) {
+        if (!state || !state.variation.documents) {
+            return null;
+        }
+
+        var calculatedPrices = state.variation.documents[0].data.prices;
+        var graduatedPrices = calculatedPrices.graduatedPrices;
+
+        var returnPrice = void 0;
+
+        if (graduatedPrices && graduatedPrices[0]) {
+            var prices = graduatedPrices.filter(function (price) {
+                return parseFloat(state.variationOrderQuantity) >= price.minimumOrderQuantity;
+            });
+
+            if (prices[0]) {
+                returnPrice = prices.reduce(function (prev, current) {
+                    return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
+                });
+                // returnPrice = returnPrice.unitPrice.value;
+            }
+        }
+
+        return returnPrice || calculatedPrices.default;
+    },
+    variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
+        var graduatedPrice = getters.variationGraduatedPrice;
+
+        return getters.variationPropertySurcharge + (graduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0);
+    },
+    variationGroupedProperties: function variationGroupedProperties(state) {
+        if (!state || !state.variation.documents) {
+            return [];
+        }
+
+        if (state.variation.documents[0].data.properties) {
+            var orderPropertyList = state.variation.documents[0].data.properties.filter(function (property) {
+                return property.property.isShownOnItemPage && property.property.isOderProperty;
+            });
+            var groupIds = [].concat(_toConsumableArray(new Set(orderPropertyList.map(function (property) {
+                return property.group && property.group.id;
+            }))));
+            var groups = [];
+
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                var _loop = function _loop() {
+                    var id = _step2.value;
+
+                    var groupProperties = orderPropertyList.filter(function (property) {
+                        return property.group === id || property.group && property.group.id === id;
+                    });
+
+                    groups.push({
+                        touched: false,
+                        group: groupProperties[0].group,
+                        properties: groupProperties.map(function (property) {
+                            return _extends({}, property.property, { itemSurcharge: property.surcharge });
+                        })
+                    });
+                };
+
+                for (var _iterator2 = groupIds[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    _loop();
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            return groups;
+        }
+
+        return [];
+    },
+    variationMissingProperties: function variationMissingProperties(state, getters) {
+        if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.item.requireOrderProperties) {
+            var missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
+                // selection isn't supported yet
+                return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
+            });
+
+            if (missingProperties.length) {
+                var radioInformation = state.variation.documents[0].data.properties.map(function (property) {
+                    if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty") {
+                        return {
+                            groupId: property.group.id,
+                            propertyId: property.property.id,
+                            hasValue: !!property.property.value
+                        };
+                    }
+                    return null;
+                });
+
+                radioInformation = [].concat(_toConsumableArray(new Set(radioInformation.filter(function (id) {
+                    return id;
+                }))));
+
+                var radioIdsToRemove = [];
+
+                var _arr = [].concat(_toConsumableArray(new Set(radioInformation.map(function (radio) {
+                    return radio.groupId;
+                }))));
+
+                var _loop2 = function _loop2() {
+                    var radioGroupId = _arr[_i];
+                    var radioGroupToClean = radioInformation.find(function (radio) {
+                        return radio.groupId === radioGroupId && radio.hasValue;
+                    });
+
+                    if (radioGroupToClean) {
+                        var _iteratorNormalCompletion3 = true;
+                        var _didIteratorError3 = false;
+                        var _iteratorError3 = undefined;
+
+                        try {
+                            for (var _iterator3 = radioInformation.filter(function (radio) {
+                                return radio.groupId === radioGroupToClean.groupId && !radio.hasValue;
+                            })[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                                var radio = _step3.value;
+
+                                radioIdsToRemove.push(radio.propertyId);
+                            }
+                        } catch (err) {
+                            _didIteratorError3 = true;
+                            _iteratorError3 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                    _iterator3.return();
+                                }
+                            } finally {
+                                if (_didIteratorError3) {
+                                    throw _iteratorError3;
+                                }
+                            }
+                        }
+                    }
+                };
+
+                for (var _i = 0; _i < _arr.length; _i++) {
+                    _loop2();
+                }
+
+                missingProperties = missingProperties.filter(function (property) {
+                    return !radioIdsToRemove.includes(property.property.id);
+                });
+            }
+
+            return missingProperties;
+        }
+
+        return [];
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{}],142:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var state = {
+    userData: null
+};
+
+var mutations = {
+    setUserData: function setUserData(state, userData) {
+        state.userData = userData;
+    }
+};
+
+var getters = {
+    username: function username(state) {
+        var username = "";
+
+        if (state.userData) {
+            if (state.userData.firstName.length > 0 && state.userData.lastName.length > 0) {
+                username = state.userData.firstName + " " + state.userData.lastName;
+            } else {
+                username = state.userData.options[0].value;
+            }
+        }
+
+        return username;
+    },
+
+
+    isLoggedIn: function isLoggedIn(state) {
+        return state.userData && state.userData.id > 0;
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    getters: getters
+};
+
+},{}],143:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
+    wishListIds: [],
+    wishListItems: []
+};
+
+var mutations = {
+    setWishListItems: function setWishListItems(state, wishListItems) {
+        state.wishListItems = wishListItems;
+    },
+    setWishListIds: function setWishListIds(state, wishListIds) {
+        state.wishListIds = wishListIds.map(Number);
+    },
+    removeWishListItem: function removeWishListItem(state, wishListItem) {
+        state.wishListItems = state.wishListItems.filter(function (item) {
+            return item !== wishListItem;
+        });
+    },
+    removeWishListId: function removeWishListId(state, id) {
+        state.wishListIds = state.wishListIds.filter(function (wishListId) {
+            return wishListId !== id;
+        });
+    },
+    addWishListItemToIndex: function addWishListItemToIndex(state, wishListItem, index) {
+        state.wishListItems.splice(index, 0, wishListItem);
+    },
+    addWishListId: function addWishListId(state, id) {
+        state.wishListIds.push(id);
+    }
+};
+
+var actions = {
+    initWishListItems: function initWishListItems(_ref, ids) {
+        var commit = _ref.commit;
+
+        return new Promise(function (resolve, reject) {
+            if (ids && ids[0]) {
+                commit("setWishListIds", ids);
+
+                _ApiService2.default.get("/rest/io/variations/", { variationIds: ids, template: "Ceres::WishList.WishList" }).done(function (data) {
+                    commit("setWishListItems", data.documents);
+                    resolve(data);
+                }).fail(function (error) {
+                    reject(error);
+                });
+            } else {
+                resolve();
+            }
+        });
+    },
+    removeWishListItem: function removeWishListItem(_ref2, _ref3) {
+        var commit = _ref2.commit;
+        var id = _ref3.id,
+            wishListItem = _ref3.wishListItem,
+            index = _ref3.index;
+
+        return new Promise(function (resolve, reject) {
+            if (wishListItem) {
+                commit("removeWishListItem", wishListItem);
+            }
+
+            _ApiService2.default.delete("/rest/io/itemWishList/" + id).done(function (data) {
+                commit("removeWishListId", id);
+                resolve(data);
+            }).fail(function (error) {
+                if (index) {
+                    commit("addWishListItemToIndex", wishListItem, index);
+                }
+                reject(error);
+            });
+        });
+    },
+    addToWishList: function addToWishList(_ref4, id) {
+        var commit = _ref4.commit;
+
+        return new Promise(function (resolve, reject) {
+            commit("addWishListId", id);
+            _ApiService2.default.post("/rest/io/itemWishList", { variationId: id }).done(function (data) {
+                resolve(data);
+            }).fail(function (error) {
+                commit("removeWishListId", id);
+                reject(error);
+            });
+        });
+    }
+};
+
+var getters = {
+    wishListCount: function wishListCount(state) {
+        return state.wishListIds.length;
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{"services/ApiService":123}]},{},[121,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,38,39,40,41,35,36,37,42,43,44,45,46,47,48,49,50,51,52,53,54,62,63,64,65,55,56,57,58,60,59,61,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,115,116,114,117,118,119,120,133,134,135,136,137,138,139,140,141,142,143])
 
 
 
