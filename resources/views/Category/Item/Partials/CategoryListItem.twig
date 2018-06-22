@@ -43,7 +43,7 @@
 
         <!-- STORE SPECIALS -->
 
-        {% if item.data.item.storeSpecial.id > 0 %}
+        {% if item.data.item.storeSpecial.id > 0 or item.data.variation.bundleType == "bundle" %}
 
             {% set storeSpecial = item.data.item.storeSpecial.names.name %}
 
@@ -72,9 +72,19 @@
 
                 {% endif %}
 
-                <span class="tag bg-{{ storeSpecialColor }}">
-                    {{ storeSpecial }}
-                </span>
+                {% if item.data.variation.bundleType == "bundle" %}
+
+                    <span class="tag bg-info">
+                        {{ trans("Ceres::Template.itemBundle") }}
+                    </span>
+
+                {% else %}
+
+                    <span class="tag bg-{{ storeSpecialColor }}">
+                        {{ storeSpecial }}
+                    </span>
+
+                {% endif %}
 
             </div>
         {% endif %}

@@ -45,6 +45,10 @@
                     </div>
                     <!-- /Variation -->
 
+                    <!-- Item Bundle -->
+                        <item-bundle :bundle-type="currentVariation.variation.bundleType" :bundle-components="currentVariation.bundleComponents"></item-bundle>
+                    <!-- /Item Bundle -->
+
                     <slot name="BeforePrice"></slot>
 
                     <div class="row" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">

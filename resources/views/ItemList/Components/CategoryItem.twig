@@ -37,10 +37,11 @@
             </div>
 
             <!-- STORE SPECIALS -->
-            <item-store-special v-if="storeSpecial" :store-special="storeSpecial"
+            <item-store-special v-if="storeSpecial || itemData.variation.bundleType == 'bundle'" :store-special="storeSpecial"
                                 :recommended-retail-price="itemData.prices.rrp"
                                 :variation-retail-price="itemData.prices.default"
-                                :decimal-count="decimalCount"></item-store-special>
+                                :decimal-count="decimalCount"
+                                :bundle-type="itemData.variation.bundleType"></item-store-special>
             <!-- ./STORE SPECIALS -->
 
             <!-- ITEM DETAILS -->
