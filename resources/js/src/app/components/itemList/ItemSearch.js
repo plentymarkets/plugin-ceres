@@ -53,16 +53,13 @@ Vue.component("item-search", {
                 }
                 else
                     {
-                    var searchBaseURL = "";
+                    var searchBaseURL = "/search?query=";
 
                     if (App.defaultLanguage != App.language)
-                        {
+                    {
                         searchBaseURL = "/" + App.language + "/search?query=";
                     }
-                    else
-                        {
-                        searchBaseURL = "/search?query=";
-                    }
+
                     window.open(searchBaseURL + this.currentSearchString, "_self", false);
                 }
             }

@@ -16,7 +16,8 @@ Vue.directive("logout",
 
                     ApiService.post("/rest/io/customer/logout")
                         .done(
-                            function() {
+                            function()
+                            {
                                 var url = window.location.origin;
 
                                 if (App.defaultLanguage != App.language)

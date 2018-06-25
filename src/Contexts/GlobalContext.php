@@ -77,7 +77,7 @@ class GlobalContext implements ContextInterface
         $this->request = pluginApp(Request::class);
 
         $this->lang = $sessionStorageService->getLang();
-        $this->homepageURL =pluginApp(UrlService::class)->getHomepageURL();
+        $this->homepageURL = pluginApp(UrlService::class)->getHomepageURL();
         $this->metaLang = 'de';
         if($this->lang == 'en')
         {
