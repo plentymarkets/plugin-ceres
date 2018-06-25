@@ -3324,6 +3324,7 @@
                 "custom-font-regular": {
                     "type": "inputText",
                     "required": false,
+                    "shopBuilder": true,
                     "scss": false,
                     "label": "Custom Schriftart",
                     "options": {
@@ -3333,6 +3334,7 @@
                 "custom-font-bold": {
                     "type": "inputText",
                     "required": false,
+                    "shopBuilder": true,
                     "scss": false,
                     "label": "Custom Schriftart",
                     "options": {
@@ -3342,6 +3344,7 @@
                 "custom-font-italic": {
                     "type": "inputText",
                     "required": false,
+                    "shopBuilder": true,
                     "scss": false,
                     "label": "Custom Schriftart",
                     "options": {
@@ -3351,6 +3354,7 @@
                 "custom-font-bold-italic": {
                     "type": "inputText",
                     "required": false,
+                    "shopBuilder": true,
                     "scss": false,
                     "label": "Custom Schriftart",
                     "options": {
