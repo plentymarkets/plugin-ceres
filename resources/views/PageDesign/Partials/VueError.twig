@@ -18,7 +18,7 @@
             <div class="container-max">
                 <div class="row">
                     <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
-                        <a class="navbar-brand pull-lg-left" href="/">
+                        <a class="navbar-brand pull-lg-left" href="{{ homepageURL }}">
                             {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
                                 <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid"/>
                             {% else %}
@@ -55,7 +55,7 @@
                     </span>
                     <p class="lead">
                         {% autoescape false %}
-                        {{ trans("Ceres::Template.devVueErrorMessage") }}
+                            {{ trans("Ceres::Template.devVueErrorMessage") }}
                         {% endautoescape %}
                     </p>
                     <a href="{{ trans("Ceres::Template.devVueErrorLinkURL") }}" rel="noopener noreferrer nofollow" target="_blank" class="btn btn-primary btn-lg">{{ trans("Ceres::Template.devVueErrorLink") }}</a>

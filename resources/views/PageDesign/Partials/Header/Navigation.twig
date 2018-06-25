@@ -5,21 +5,21 @@
 {% set useMegaMenu  = config("Ceres.header.megamenu_levels") > 1 %}
 
 <nav class="navbar{% if useMegaMenu %} megamenu{%endif%}">
-      <div class="container-max">
+    <div class="container-max">
         <div class="row">
-             <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
-                 <a class="navbar-brand pull-lg-left" href="/">
+            <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
+                <a class="navbar-brand pull-lg-left" href="{{ homepageURL }}">
                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid"/>
                     {% else %}
                         <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid"/>
                     {% endif %}
-                 </a>
+                </a>
 
-                 <button id="btnMainMenuToggler" v-open-mobile-navigation class="navbar-toggler hidden-lg-up" type="button">
-                     &#9776;
-                 </button>
-             </div>
+                <button id="btnMainMenuToggler" v-open-mobile-navigation class="navbar-toggler hidden-lg-up" type="button">
+                    &#9776;
+                </button>
+            </div>
 
             <div id="mainNavbarCollapsable">
                 <ul class="breadcrumb">
