@@ -18809,7 +18809,13 @@ Vue.component("item-search", {
                     this.updateTitle(this.currentSearchString);
                     this.$store.dispatch("searchItems", this.currentSearchString);
                 } else {
-                    window.open("/search?query=" + this.currentSearchString, "_self", false);
+                    var searchBaseURL = "/search?query=";
+
+                    if (App.defaultLanguage != App.language) {
+                        searchBaseURL = "/" + App.language + "/search?query=";
+                    }
+
+                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
                 }
             } else {
                 this.preventSearch = false;
@@ -20663,7 +20669,15 @@ Vue.directive("logout", {
             $(el).addClass("disabled");
 
             ApiService.post("/rest/io/customer/logout").done(function () {
-                (0, _UrlService.navigateTo)(window.location.origin);
+                var url = window.location.origin;
+
+                if (App.defaultLanguage != App.language) {
+                    url = url + "/" + App.language;
+                    if (App.urlTrailingSlash) {
+                        url += "/";
+                    }
+                }
+                (0, _UrlService.navigateTo)(url);
             }).fail(function () {
                 $(el).removeClass("disabled");
             });
@@ -21265,14 +21279,21 @@ Vue.filter("itemName", function (_ref) {
 },{"services/TranslationService":129}],108:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../helper/utils");
+
 Vue.filter("itemURL", function (item) {
     var enableOldUrlPattern = App.config.global.enableOldUrlPattern;
     var urlPath = item.texts.urlPath || "";
+    var includeLanguage = !(0, _utils.isNullOrUndefined)(item.texts.lang) && App.defaultLanguage != item.texts.lang;
 
     var link = "";
 
     if (urlPath.charAt(0) !== "/") {
         link = "/";
+    }
+
+    if (includeLanguage) {
+        link += item.texts.lang + "/";
     }
 
     if (urlPath && urlPath.length) {
@@ -21300,7 +21321,7 @@ Vue.filter("itemURL", function (item) {
     return link + suffix + trailingSlash;
 });
 
-},{}],109:[function(require,module,exports){
+},{"../helper/utils":120}],109:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -24483,7 +24504,13 @@ var actions = {
                 if (!category.details[0]) {
                     category.hideCategory = true;
                 } else {
-                    var parentUrl = parent ? parent.url : "";
+                    var parentUrl = "";
+
+                    if (parent) {
+                        parentUrl = parent.url;
+                    } else if (App.defaultLanguage != category.details[0].lang) {
+                        parentUrl = "/" + category.details[0].lang;
+                    }
 
                     category.url = parentUrl + "/" + category.details[0].nameUrl;
                     showChildren = true;
