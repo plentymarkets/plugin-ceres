@@ -709,7 +709,7 @@
 				}
 			},
 			"text": {
-				"type": "noteEditor",
+				"type": "codeEditor",
 				"label": "Widget.widgetNodeEditorLabel",
 				"options": {}
 			}
