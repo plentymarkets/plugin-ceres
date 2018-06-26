@@ -15204,7 +15204,7 @@ body.menu-is-visible {
     display: none !important;
   }
   #mainNavbarCollapsable ul.mainmenu {
-    color: green;
+    color: #008ebd;
     text-align: right;
   }
   #mainNavbarCollapsable ul.mainmenu .open > ul {
