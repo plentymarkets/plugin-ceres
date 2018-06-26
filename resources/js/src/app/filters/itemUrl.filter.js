@@ -1,13 +1,21 @@
+import {isNullOrUndefined}from "../helper/utils";
+
 Vue.filter("itemURL", function(item)
 {
     const enableOldUrlPattern = App.config.global.enableOldUrlPattern;
     const urlPath = item.texts.urlPath || "";
+    const includeLanguage = !isNullOrUndefined(item.texts.lang) && App.defaultLanguage != item.texts.lang;
 
     let link = "";
 
     if (urlPath.charAt(0) !== "/")
-    {
+{
         link = "/";
+    }
+
+    if (includeLanguage)
+    {
+        link += item.texts.lang + "/";
     }
 
     if (urlPath && urlPath.length)

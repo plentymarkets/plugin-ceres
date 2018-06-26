@@ -46,7 +46,16 @@ const actions =
                 }
                 else
                 {
-                    const parentUrl = parent ? parent.url : "";
+                    var parentUrl = "";
+
+                    if (parent)
+                    {
+                        parentUrl = parent.url;
+                    }
+                    else if (App.defaultLanguage != category.details[0].lang)
+                    {
+                        parentUrl = "/" + category.details[0].lang;
+                    }
 
                     category.url = parentUrl + "/" + category.details[0].nameUrl;
                     showChildren = true;
