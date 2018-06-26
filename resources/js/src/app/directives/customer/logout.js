@@ -18,7 +18,17 @@ Vue.directive("logout",
                         .done(
                             function()
                             {
-                                navigateTo(window.location.origin);
+                                var url = window.location.origin;
+
+                                if (App.defaultLanguage != App.language)
+                                {
+                                    url = url + "/" + App.language;
+                                    if (App.urlTrailingSlash)
+                                    {
+                                        url += "/";
+                                    }
+                                }
+                                navigateTo(url);
                             })
                         .fail(
                             function()
