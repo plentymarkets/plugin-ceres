@@ -1,5 +1,22 @@
 # Release Notes for Ceres
 
+## v2.11.0 (2018-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.10.0...2.11.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### ToDo
+
+- If other plugins used the social media library **Shariff** in Ceres, Shariff now needs to be integrated into the respective plugins themselves.
+
+### Changed
+
+- The social media library **Shariff** has been removed from Ceres for reasons of obsolescence.
+
+### Fixed
+
+- The name of the online store in the title bar widget of the Shop Builder is now correctly loaded from the translations in the multilingualism interface.
+- The alternative text for the company logo is now correctly loaded from the translations in the multilingualism interface.
+- The page title is now correctly loaded from the translations in the multilingualism interface.
+- The country code has been removed from the URLs of the standard language. The country code is part of the URL for all other languages.
+
 ## v2.10.0 (2018-06-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.1...2.10.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
