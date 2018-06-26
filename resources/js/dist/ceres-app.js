@@ -14360,8 +14360,10 @@ Vue.component("basket-preview", {
     delimiters: ["${", "}"],
 
     props: {
-        template: String,
-        basketData: Object,
+        template: {
+            type: String,
+            default: "#vue-basket-preview"
+        },
         showNetPrices: {
             type: Boolean,
             default: false
@@ -14381,10 +14383,16 @@ Vue.component("basket-preview", {
     }),
 
     created: function created() {
+        var _this = this;
+
         this.$options.template = this.template;
-        this.$store.commit("setBasket", this.basketData);
+
+        _ApiService2.default.get("/rest/io/basket/").done(function (basket) {
+            _this.$store.commit("setBasket", basket);
+            _this.$store.dispatch("loadBasketData");
+        });
+
         this.$store.commit("setShowNetPrices", this.showNetPrices);
-        this.$store.dispatch("loadBasketData");
     },
 
 
@@ -14392,12 +14400,12 @@ Vue.component("basket-preview", {
      * Bind to basket and bind the basket items
      */
     mounted: function mounted() {
-        var _this = this;
+        var _this2 = this;
 
         this.$nextTick(function () {
             _ApiService2.default.listen("AfterBasketChanged", function (data) {
-                _this.$store.commit("setBasket", data.basket);
-                _this.$store.commit("setShowNetPrices", data.showNetPrices);
+                _this2.$store.commit("setBasket", data.basket);
+                _this2.$store.commit("setShowNetPrices", data.showNetPrices);
             });
         });
     }
@@ -24970,10 +24978,8 @@ var getters = {
 
         return username;
     },
-
-
     isLoggedIn: function isLoggedIn(state) {
-        return state.userData && state.userData.id > 0;
+        return (0, _utils.isDefined)(state.userData) && state.userData.id > 0;
     }
 };
 

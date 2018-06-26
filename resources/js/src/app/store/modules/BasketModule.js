@@ -265,15 +265,15 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 ApiService.get("/rest/io/basket/")
-                        .done(basket =>
-                        {
-                            commit("setBasket", basket);
-                            resolve(basket);
-                        })
-                        .fail(error =>
-                        {
-                            reject(error);
-                        });
+                    .done(basket =>
+                    {
+                        commit("setBasket", basket);
+                        resolve(basket);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
             });
         }
     };

@@ -34,7 +34,10 @@ const getters =
             return username;
         },
 
-        isLoggedIn: state => (state.userData && state.userData.id > 0)
+        isLoggedIn(state)
+        {
+            return isDefined(state.userData) && state.userData.id > 0;
+        }
     };
 
 export default
