@@ -99,7 +99,7 @@
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
 
                 <div class="prices">
-                    {% if item.data.prices.rrp is defined and item.data.prices.rrp.price.value != 0 %}
+                    {% if item.data.prices.rrp is defined and item.data.prices.rrp.price.value != 0 and item.data.prices.rrp.price.value > item.data.prices.default.unitPrice.value %}
                         <div class="price-view-port">
                             <del class="crossprice">
                                 {{ item.data.prices.rrp.price.formatted }}
