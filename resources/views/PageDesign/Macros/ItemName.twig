@@ -1,0 +1,7 @@
+{% macro get( itemName, bundleType ) %}
+    {% if bundleType == "bundle" %}
+        {{ trans("Ceres::Template.itemBundleName", {"itemName": itemName}) }}
+    {% else %}
+        {{ itemName }}
+    {% endif %}
+{% endmacro %}
