@@ -20419,12 +20419,23 @@ body.menu-is-visible {
   background-color: #4D4F4D;
 }
 
-.widget-text {
-  color: red;
-}
-
 .widget-text .widget-inner {
   padding: 1rem 1.5rem;
+}
+
+.widget-text .widget-inner .placeholder {
+  height: 75px;
+}
+
+.widget-text .widget-inner .placeholder.placeholder-text {
+  border: 3px dashed #dadae3;
+  border-radius: 3px;
+  line-height: 75px;
+  vertical-align: middle;
+  text-align: center;
+  color: #dadae3;
+  font-size: 20px;
+  font-style: italic;
 }
 
 .widget-text.widget-primary {
