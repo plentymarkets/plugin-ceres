@@ -4,7 +4,7 @@
   "version": "2.11.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/plentymarkets/plugin-ceres.git"
+    "url": "https://github.com/feralhawk/plugin-ceres.git"
   },
   "scripts": {
     "build": "gulp",
