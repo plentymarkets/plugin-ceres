@@ -1,6 +1,7 @@
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
 {% set image = item.data.images | itemImages('urlMiddle') | orderByKey('position') | first %}
 
