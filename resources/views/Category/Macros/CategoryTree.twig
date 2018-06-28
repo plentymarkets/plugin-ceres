@@ -11,7 +11,7 @@
                     <a href="{{ newScope }}{{ urls.trailingSlashSuffix }}" v-render-category="{ id: {{ child.id }}, type: '{{ child.type }}' }">{{ child.details[0].name }}</a>
                     {% if child.children %}
                         {% if level == 1 %}<ul>{% endif %}
-                            {{ childlist.get_children(child, newScope, level + 1) }}
+                        {{ childlist.get_children(child, newScope, level + 1) }}
                         {% if level == 1 %}</ul>{% endif %}
                     {% endif %}
                 </li>
@@ -33,13 +33,16 @@
 
         {% if category.details | length > 0 %}
 
-            {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
-
+            {% if urls.includeLanguage %}
+                {% set currentScopeUrl = "/" ~ category.details[0].lang ~  "/" ~ category.details[0].nameUrl %}
+            {% else %}
+                {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
+            {% endif %}
             {% set translatedChildren = 0 %}
             {% for children in category.children if children.details[0] %}
                 {% set translatedChildren = translatedChildren + 1 %}
             {% endfor %}
-            
+
             {% if category.children and translatedChildren > 0 %}
 
                 <li class="ddown" v-hover-mega-menu>

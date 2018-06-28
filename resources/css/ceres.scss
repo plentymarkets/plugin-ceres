@@ -137,11 +137,10 @@ $link-hover-color:      darken($link-color, 15%) !default;
 //
 // Settings for the `<body>` element.
 
-
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
-$font-family-sans-serif:Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:Custom-Font, Helvetica, Arial, sans-serif !default;
 $font-family-helvetica: $font-family-sans-serif !default;
 $font-family-serif:     Georgia, "Times New Roman", Times, serif !default;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
@@ -12208,7 +12207,7 @@ Custom classes
 }
 .notification-wrapper
 {
-    position: absolute;
+    position: fixed;
     right: .5rem;
     top: 10rem;
 }
@@ -14931,6 +14930,12 @@ nav.navbar.megamenu {
 			border-bottom: 1px solid $gray-lighter;
 			padding-bottom: 10px;
 		}
+	}
+
+	& .item-bundle {
+		width: 300px;
+		font-weight: 700;
+		font-size: 80%;
 	}
 
 	&.basket-large {
