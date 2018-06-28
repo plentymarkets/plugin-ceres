@@ -710,7 +710,8 @@
 			},
 			"text": {
 				"type": "codeEditor",
-				"label": "Widget.textCodeEditorLabel"
+				"label": "Widget.textCodeEditorLabel",
+				"options": {}
 			}
 		}
 	}
