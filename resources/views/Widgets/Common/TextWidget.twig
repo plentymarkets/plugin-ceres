@@ -6,9 +6,9 @@
             {{ text | raw }}
         {% else %}
 
-            {% if widget.settings.appearance.mobile == "without" %}
+            {% if widget.settings.appearance.mobile == "none" %}
                 <div class="placeholder placeholder-text">
-                    Hier könnte ihr Text stehen...
+                    {{ trans("Ceres::Widget.textPlaceholder") }}
                 </div>
             {% else %}
                 <div class="placeholder">

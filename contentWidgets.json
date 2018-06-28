@@ -668,11 +668,11 @@
 				"label": "Widget.widgetAppearanceLabel",
 				"options": {
 					"tooltip": "Widget.widgetAppearanceTooltip",
-					"defaultValue": "without",
+					"defaultValue": "none",
 					"selectBoxValues": [
 						{
-							"value": "without",
-							"caption": "Widget.widgetAppearanceWithout",
+							"value": "none",
+							"caption": "Widget.widgetAppearanceNone",
 							"position": 0
 						},
 						{
@@ -710,8 +710,7 @@
 			},
 			"text": {
 				"type": "codeEditor",
-				"label": "Widget.widgetNodeEditorLabel",
-				"options": {}
+				"label": "Widget.textCodeEditorLabel"
 			}
 		}
 	}
