@@ -25,7 +25,7 @@
 
 {% elseif variationId | trim is not empty %}
     
-    {{ Twig.set("itemData", Twig.call("services.itemLoader.loadForTemplate", ["Ceres::Homepage.Homepage", itemLoaderPresets.items, { variationIds: [variationId] }])) }}
+    {{ Twig.set("itemData", Twig.call("services.item.getVariation", [variationId])) }}
     {{ Twig.set("itemData", "itemData.documents[0].data") }}
     {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
 
