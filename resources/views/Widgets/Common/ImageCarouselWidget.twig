@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
 {% set carouselId = uid() %}
@@ -24,15 +25,15 @@
 
     {% elseif param.variationId.mobile | trim is not empty %}
 
-        {{ Twig.set("itemData", Twig.call("services.itemLoader.loadForTemplate", ["Ceres::Homepage.Homepage", itemLoaderPresets.items, { variationIds: [param.variationId.mobile] }])) }}
+        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [param.variationId.mobile])) }}
         {{ Twig.set("itemData", "itemData.documents[0].data") }}
         {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
 
-        {{ Twig.set("name", Twig.call("ItemName.get", ["itemData | itemName", "itemData.variation.bundleType"])) }}
+        {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
         {{ Twig.set("url", "itemData | itemURL") }}
         {{ Twig.set("imageUrl", "itemImage.url") }}
 
-        {{ Twig.set("slide", "slide | merge({ name: " ~ Twig.call("ItemName.get", ["itemData | itemName", "itemData.variation.bundleType"]) ~ " })") }}
+        {{ Twig.set("slide", "slide | merge({ name: " ~ Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"]) ~ " })") }}
         {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
 
