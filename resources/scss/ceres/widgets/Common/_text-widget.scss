@@ -3,20 +3,27 @@
     .widget-inner
     {
         padding: 1rem 1.5rem;
+    }
 
-        .placeholder {
-            height: 75px;
+    .placeholder-text
+    {
+        border: 3px dashed #dadae3;
+        border-radius: 3px;
+        height: 75px;
+        line-height: 75px;
+        vertical-align: middle;
+        text-align: center;
+        color: #dadae3;
+        font-size: 20px;
+        font-style: italic;
+    }
 
-            &.placeholder-text {
-                border: 3px dashed #dadae3;
-                border-radius: 3px;
-                line-height: 75px;
-                vertical-align: middle;
-                text-align: center;
-                color: #dadae3;
-                font-size: 20px;
-                font-style: italic;
-            }
+    &.widget-primary, &.widget-secondary, &.widget-success, &.widget-info, &.widget-warning, &.widget-danger, &.widget-inverse
+    {
+        .placeholder-text
+        {
+            border-color: white;
+            color: white;
         }
     }
 

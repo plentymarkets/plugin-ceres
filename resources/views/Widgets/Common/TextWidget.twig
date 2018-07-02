@@ -5,16 +5,9 @@
         {% if text | trim is not empty %}
             {{ text | raw }}
         {% else %}
-
-            {% if widget.settings.appearance.mobile == "none" %}
-                <div class="placeholder placeholder-text">
-                    {{ trans("Ceres::Widget.textPlaceholder") }}
-                </div>
-            {% else %}
-                <div class="placeholder">
-                </div>
-            {% endif %}
-            
+            <div class="placeholder-text">
+                {{ trans("Ceres::Widget.textPlaceholder") }}
+            </div>
         {% endif %}
     </div>
 </div>
