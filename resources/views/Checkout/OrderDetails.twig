@@ -1,5 +1,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
+
 {{ component( "Ceres::Item.Components.ItemBundle" ) }}
 
 {% set basketTotalsCurrency = totals.currency %}
@@ -143,7 +145,7 @@
                         <div class="item-details small">
                             <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}" class="clearfix">
                                 <div class="item-name">
-                                    {{ item.orderItemName }}
+                                    {{ ItemName.get(item.orderItemName, item.bundleType) }}
                                 </div>
                             </a>
 
