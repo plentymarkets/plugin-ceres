@@ -46,11 +46,16 @@ const actions =
                 }
                 else
                 {
-                    var parentUrl = "";
+                    let parentUrl = "";
 
                     if (parent)
                     {
                         parentUrl = parent.url;
+
+                        if (App.urlTrailingSlash)
+                        {
+                            parentUrl = parentUrl.substring(0, parentUrl.length - 1);
+                        }
                     }
                     else if (App.defaultLanguage != category.details[0].lang)
                     {
@@ -58,6 +63,12 @@ const actions =
                     }
 
                     category.url = parentUrl + "/" + category.details[0].nameUrl;
+
+                    if (App.urlTrailingSlash)
+                    {
+                        category.url += "/";
+                    }
+
                     showChildren = true;
 
                     if (category.children)
