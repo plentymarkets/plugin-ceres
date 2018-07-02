@@ -132,6 +132,6 @@
 
 {% macro import(name, template) %}
     {%- spaceless %}
-        {{ Twig.do("import \"" ~ template ~ "\ as " ~ name ) }}
+        {{ Twig.do("import \"" ~ template ~ "\" as " ~ name ) }}
     {% endspaceless -%}
 {% endmacro %}
