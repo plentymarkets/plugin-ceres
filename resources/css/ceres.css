@@ -20425,4 +20425,60 @@ body.menu-is-visible {
   background-color: #4D4F4D;
 }
 
+.widget-text .widget-inner {
+  padding: 1rem 1.5rem;
+}
+
+.widget-text .placeholder-text {
+  border: 3px dashed #dadae3;
+  border-radius: 3px;
+  height: 75px;
+  line-height: 75px;
+  vertical-align: middle;
+  text-align: center;
+  color: #dadae3;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.widget-text.widget-primary .placeholder-text, .widget-text.widget-secondary .placeholder-text, .widget-text.widget-success .placeholder-text, .widget-text.widget-info .placeholder-text, .widget-text.widget-warning .placeholder-text, .widget-text.widget-danger .placeholder-text, .widget-text.widget-inverse .placeholder-text {
+  border-color: white;
+  color: white;
+}
+
+.widget-text.widget-primary {
+  color: #fff;
+  background-color: #008ebd;
+}
+
+.widget-text.widget-secondary {
+  color: #fff;
+  background-color: #d4021d;
+}
+
+.widget-text.widget-success {
+  color: #fff;
+  background-color: #7ED321;
+}
+
+.widget-text.widget-info {
+  color: #fff;
+  background-color: #5bc0de;
+}
+
+.widget-text.widget-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+}
+
+.widget-text.widget-danger {
+  color: #fff;
+  background-color: #d9534f;
+}
+
+.widget-text.widget-inverse {
+  color: #fff;
+  background-color: #4D4F4D;
+}
+
 /*# sourceMappingURL=ceres.css.map */
