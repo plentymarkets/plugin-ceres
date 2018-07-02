@@ -88,7 +88,7 @@
                         </a>
 
                         {% if config("Ceres.basket.preview_type") != "right" %}
-                            <basket-preview :show-net-prices={{ showNetPrices | json_encode }}></basket-preview>
+                            <basket-preview :show-net-prices="{{ showNetPrices | json_encode }}"></basket-preview>
                         {% endif %}
                     </li>
                 </ul>
