@@ -149,7 +149,16 @@
                                 </div>
                             </a>
 
-                            <item-bundle bundle-type="{{ item.bundleType }}" :bundle-components="{{ item.bundleComponents | json_encode }}"></item-bundle>
+                            {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
+                                <div class="m-b-1 item-bundle">
+                                    {% for bundleComponent in item.bundleComponents %}
+                                        <div>
+                                            <span class="text-muted">{{ bundleComponent.quantity }} x</span>
+                                            <a href="{{ bundleComponent.data | itemURL }}"> {{ bundleComponent.data | itemName }} </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
 
                             <div class="row">
                                 <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>

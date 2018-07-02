@@ -39,6 +39,7 @@ class GlobalContext implements ContextInterface
     public $currencyData;
     public $showNetPrices;
     public $homepageURL;
+    public $splitItemBundle;
 
     public function init($params)
     {
@@ -99,6 +100,8 @@ class GlobalContext implements ContextInterface
         $this->currencyData = $checkoutService->getCurrencyData();
 
         $this->showNetPrices = $customerService->showNetPrices();
+
+        $this->splitItemBundle = $webstoreConfigService->getWebstoreConfig()->dontSplitItemBundle;
     }
 
     protected function getParam($key, $defaultValue = null)
