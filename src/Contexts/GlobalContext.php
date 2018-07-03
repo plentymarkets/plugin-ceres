@@ -6,6 +6,7 @@ use IO\Helper\ContextInterface;
 use IO\Services\CustomerService;
 use IO\Services\ItemLastSeenService;
 use IO\Services\NotificationService;
+use IO\Services\UrlService;
 use IO\Services\WebstoreConfigurationService;
 use Plenty\Plugin\Http\Request;
 use Ceres\Config\CeresConfig;
@@ -19,13 +20,13 @@ use IO\Services\CheckoutService;
 class GlobalContext implements ContextInterface
 {
     protected $params = [];
-    
+
     /** @var CeresConfig $ceresConfig  */
     public $ceresConfig = null;
-    
+
     /** @var Request $request */
     protected $request;
-    
+
     public $lang;
     public $metaLang;
     public $template = [];
@@ -37,6 +38,7 @@ class GlobalContext implements ContextInterface
     public $webstoreConfig;
     public $currencyData;
     public $showNetPrices;
+    public $homepageURL;
 
     public function init($params)
     {
@@ -71,10 +73,11 @@ class GlobalContext implements ContextInterface
 
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
-        
+
         $this->request = pluginApp(Request::class);
 
         $this->lang = $sessionStorageService->getLang();
+        $this->homepageURL = pluginApp(UrlService::class)->getHomepageURL();
         $this->metaLang = 'de';
         if($this->lang == 'en')
         {
@@ -92,19 +95,19 @@ class GlobalContext implements ContextInterface
         $this->notifications = pluginApp(NotificationService::class)->getNotifications();
 
         $this->basket = $basketService->getBasketForTemplate();
-        
+
         $this->currencyData = $checkoutService->getCurrencyData();
 
         $this->showNetPrices = $customerService->showNetPrices();
     }
-    
+
     protected function getParam($key, $defaultValue = null)
     {
         if(is_null($this->params[$key]))
         {
             return $defaultValue;
         }
-        
+
         return $this->params[$key];
     }
 }
