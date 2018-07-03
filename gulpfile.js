@@ -170,8 +170,7 @@ gulp.task("copy:sass-vendor", function()
         .src([
             'node_modules/bootstrap/scss/**/*.scss',
             'node_modules/font-awesome/scss/**/*.scss',
-            'node_modules/flag-icon-css/sass/**/*.scss',
-            'node_modules/shariff/build/shariff.min.css'
+            'node_modules/flag-icon-css/sass/**/*.scss'
         ])
         .pipe(copy(SCSS_SRC, {prefix: 1}))
 });
@@ -193,15 +192,36 @@ function buildSass(outputFile, outputStyle)
         }
     };
 
-    var pluginConfig = require('./config');
-    var scssConfig = pluginConfig
-        .filter(function(configEntry) {
-            return configEntry.scss === true;
-        })
-        .map(function(configEntry) {
-            return "$" + configEntry.key.split(".").join("") + ": " + configEntry.default + ";";
-        })
-        .join('');
+    const pluginConfig = require("./config");
+    const getScssConfig = formFields =>
+    {
+        let scssConfig = "";
+
+        for (const entryKey in formFields)
+        {
+            const entry = formFields[entryKey];
+
+            if (entry.scss)
+            {
+                scssConfig += `$${entryKey.split(".").join("")}: ${entry.options.defaultValue};`;
+            }
+
+            if (entry.options && entry.options.containerEntries)
+            {
+                scssConfig += getScssConfig(entry.options.containerEntries, true);
+            }
+        }
+
+        return scssConfig;
+    };
+
+    let scssConfig = "";
+    const tabs = Object.values(pluginConfig.menu);
+
+    for (const tab of tabs)
+    {
+        scssConfig += getScssConfig(tab.formFields);
+    }
 
     return gulp
         .src(SCSS_SRC + "Ceres.scss")

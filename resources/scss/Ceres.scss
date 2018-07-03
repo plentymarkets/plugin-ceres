@@ -4,7 +4,6 @@
 // ==========================================================================
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome/scss/font-awesome";
-@import "shariff/build/shariff.min.css";
 @import "flag-icon-css/sass/flag-icon";
 
 // ==========================================================================
@@ -18,9 +17,6 @@
 @import "ceres/common/typography";
 @import "ceres/common/common";
 @import "ceres/common/structure";
-
-// custom shariff theme for the social icons in the header
-@import "ceres/common/shariff-theme-minimal";
 
 //TODO's
 @import "ceres/common/buttons";
@@ -37,6 +33,7 @@
 @import "ceres/components/featured-category";
 @import "ceres/components/featured-sale-new";
 @import "ceres/components/anicon";
+@import "ceres/components/notifications";
 @import "ceres/components/popper";
 
 // Forms

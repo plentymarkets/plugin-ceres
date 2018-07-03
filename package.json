@@ -1,7 +1,7 @@
 {
   "name": "Ceres",
   "license": "AGPL-3.0",
-  "version": "2.9.0",
+  "version": "2.11.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/feralhawk/plugin-ceres.git"
@@ -58,7 +58,6 @@
     "moment": "^2.22.1",
     "owl.carousel": "2.2.0",
     "popper.js": "^1.14.3",
-    "shariff": "^1.24.0",
     "sticky-kit": "^1.1.3",
     "tether": "^1.4.4",
     "vue": "^2.5.16",

@@ -7,17 +7,13 @@ Vue.component("basket-totals", {
         template:
         {
             type: String
-        },
-        showNetPrices:
-        {
-            type: Boolean,
-            default: true
         }
     },
 
     computed: Vuex.mapState({
         basket: state => state.basket.data,
-        isBasketLoading: state => state.basket.isBasketLoading
+        isBasketLoading: state => state.basket.isBasketLoading,
+        showNetPrices: state => state.basket.showNetPrices
     }),
 
     created()

@@ -3,7 +3,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {% set lang = services.sessionStorage.getLang() %}
-{% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
+
+{% if ceresConfig.global.favicon is empty %}
+    {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
+{% else %}
+    {% set favicon = ceresConfig.global.favicon %}
+{% endif %}
+
 <link rel="icon" type="img/ico" href="{{ favicon }}">
 
 {% set canonicalUrl = services.url.getCanonicalURL() %}
@@ -19,6 +25,46 @@
     {% endfor %}
 {% endif %}
 
+<style data-font="Custom-Font">
+    {% set customFont =
+        {
+            regular: config('Ceres.custom-font-regular'),
+            bold: config('Ceres.custom-font-bold'),
+            italic: config('Ceres.custom-font-italic'),
+            boldItalic: config('Ceres.custom-font-bold-italic')
+        }
+    %}
+    
+    {% if customFont.regular %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ customFont.regular }}");
+        }
+    {% endif %}
+    {% if customFont.bold %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ customFont.bold }}");
+            font-weight: bold;
+        }
+    {% endif %}
+    {% if customFont.italic %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ customFont.italic }}");
+            font-style: italic;
+        }
+    {% endif %}
+    {% if customFont.boldItalic %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ customFont.boldItalic }}");
+            font-weight: bold;
+            font-style: italic;
+        }
+    {% endif %}
+</style>
+
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set logData = config("Ceres.log.data")|split(', ') %}
@@ -32,7 +78,7 @@
 {% set itemName = config('Ceres.item.name') %}
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
-    <link data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ plugin_path('Ceres') }}/css/ceres.scss" rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+    <link data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ plugin_path('Ceres') }}/css/ceres.scss" rel="stylesheet" href="https://www.darkages.de/plentydev/krazy8/css/ceres.css">
 {% endif %}
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}

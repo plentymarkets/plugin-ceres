@@ -4,10 +4,15 @@ Vue.component("basket-preview", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template",
-        "basketData"
-    ],
+    props: {
+        template: String,
+        basketData: Object,
+        showNetPrices:
+        {
+            type: Boolean,
+            default: false
+        }
+    },
 
     computed: Vuex.mapState({
         basket: state => state.basket.data,
@@ -19,6 +24,7 @@ Vue.component("basket-preview", {
     {
         this.$options.template = this.template;
         this.$store.commit("setBasket", this.basketData);
+        this.$store.commit("setShowNetPrices", this.showNetPrices);
         this.$store.dispatch("loadBasketData");
     },
 
@@ -33,6 +39,7 @@ Vue.component("basket-preview", {
             data =>
             {
                 this.$store.commit("setBasket", data.basket);
+                this.$store.commit("setShowNetPrices", data.showNetPrices);
             });
         });
     }

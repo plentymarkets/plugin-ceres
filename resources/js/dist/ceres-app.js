@@ -14075,9 +14075,10 @@ Vue.component("add-item-to-basket-overlay", {
         },
         imageUrl: function imageUrl() {
             if (this.isLastBasketEntrySet) {
-                var img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
+                var images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
+                var img = this.$options.filters.itemImage(images);
 
-                return img ? img.url : "";
+                return img;
             }
 
             return "";
@@ -14307,7 +14308,7 @@ Vue.component("add-to-basket", {
                 }
             }
 
-            NotificationService.error(Translations.Template.singleItemMissingOrderPropertiesError.replace("<properties>", errorMsgContent));
+            NotificationService.error(_TranslationService2.default.translate("Ceres::Template.singleItemMissingOrderPropertiesError").replace("<properties>", errorMsgContent));
         },
         directToItem: function directToItem() {
             (0, _UrlService.navigateTo)(this.itemUrl);
@@ -14358,7 +14359,14 @@ Vue.component("basket-preview", {
 
     delimiters: ["${", "}"],
 
-    props: ["template", "basketData"],
+    props: {
+        template: String,
+        basketData: Object,
+        showNetPrices: {
+            type: Boolean,
+            default: false
+        }
+    },
 
     computed: Vuex.mapState({
         basket: function basket(state) {
@@ -14375,6 +14383,7 @@ Vue.component("basket-preview", {
     created: function created() {
         this.$options.template = this.template;
         this.$store.commit("setBasket", this.basketData);
+        this.$store.commit("setShowNetPrices", this.showNetPrices);
         this.$store.dispatch("loadBasketData");
     },
 
@@ -14388,6 +14397,7 @@ Vue.component("basket-preview", {
         this.$nextTick(function () {
             _ApiService2.default.listen("AfterBasketChanged", function (data) {
                 _this.$store.commit("setBasket", data.basket);
+                _this.$store.commit("setShowNetPrices", data.showNetPrices);
             });
         });
     }
@@ -14403,10 +14413,6 @@ Vue.component("basket-totals", {
     props: {
         template: {
             type: String
-        },
-        showNetPrices: {
-            type: Boolean,
-            default: true
         }
     },
 
@@ -14416,6 +14422,9 @@ Vue.component("basket-totals", {
         },
         isBasketLoading: function isBasketLoading(state) {
             return state.basket.isBasketLoading;
+        },
+        showNetPrices: function showNetPrices(state) {
+            return state.basket.showNetPrices;
         }
     }),
 
@@ -17050,7 +17059,13 @@ Vue.component("login", {
                 switch (response.error.code) {
                     case 401:
                         _this4.loginFields.addClass("has-login-error");
-                        NotificationService.error(_TranslationService2.default.translate("Ceres::Template.loginFailed")).closeAfter(10000);
+
+                        var translationKey = "Ceres::Template.loginFailed";
+
+                        if (response.error.message.length > 0 && response.error.message === "user is blocked") {
+                            translationKey = "Ceres::Template.loginBlocked";
+                        }
+                        NotificationService.error(_TranslationService2.default.translate(translationKey)).closeAfter(10000);
                         break;
                     default:
                         return;
@@ -17608,9 +17623,6 @@ Vue.component("order-property-list", {
             return [];
         }
     }, Vuex.mapState({
-        orderPropertyList: function orderPropertyList(state) {
-            return state.item.variation.documents[0].data.properties;
-        },
         variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
             return state.item.variationMarkInvalidProperties;
         }
@@ -17826,6 +17838,9 @@ Vue.component("order-property-list-item", {
             }
 
             return this.variationMarkInvalidProperties && !this.property.value;
+        },
+        surcharge: function surcharge() {
+            return this.property.itemSurcharge || this.property.surcharge;
         }
     }, Vuex.mapState({
         isBasketLoading: function isBasketLoading(state) {
@@ -17914,14 +17929,30 @@ Vue.component("order-property-list-item", {
         },
         _handleValidationErrors: function _handleValidationErrors(error) {
             if (error.hasOwnProperty("validation_errors")) {
-                var validationErrors = Object.values(error.validation_errors);
-                var errors = "<ul>";
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
 
-                validationErrors.forEach(function (err, index) {
-                    errors = errors + "<li>" + err + "</li>";
-                });
-                errors += "</ul>";
-                NotificationService.error(errors);
+                try {
+                    for (var _iterator = Object.values(error.validation_errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var err = _step.value;
+
+                        NotificationService.error(err[0]);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
             }
         }
     })
@@ -18730,7 +18761,13 @@ Vue.component("item-search", {
                     this.updateTitle(this.currentSearchString);
                     this.$store.dispatch("searchItems", this.currentSearchString);
                 } else {
-                    window.open("/search?query=" + this.currentSearchString, "_self", false);
+                    var searchBaseURL = "/search?query=";
+
+                    if (App.defaultLanguage != App.language) {
+                        searchBaseURL = "/" + App.language + "/search?query=";
+                    }
+
+                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
                 }
             } else {
                 this.preventSearch = false;
@@ -19718,7 +19755,14 @@ Vue.component("order-history", {
     delimiters: ["${", "}"],
 
     props: {
-        template: String
+        template: {
+            type: String,
+            default: "#vue-order-history"
+        },
+        orderDetailsTemplate: {
+            type: String,
+            default: "Ceres::Checkout.OrderDetails"
+        }
     },
 
     data: function data() {
@@ -19744,7 +19788,7 @@ Vue.component("order-history", {
                 $(_this.$refs.orderDetails).modal("show");
             });
 
-            ApiService.get("/rest/io/order/template?template=Ceres::Checkout.OrderDetails&orderId=" + order.order.id).done(function (response) {
+            ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + order.order.id).done(function (response) {
                 _this.isLoading = false;
                 $("#dynamic-twig-content").html(response);
             });
@@ -20161,15 +20205,7 @@ Vue.component("mobile-navigation", {
 },{}],75:[function(require,module,exports){
 "use strict";
 
-var _ExceptionMap = require("exceptions/ExceptionMap");
-
-var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _utils = require("../../helper/utils");
 
 var NotificationService = require("services/NotificationService");
 
@@ -20214,31 +20250,26 @@ Vue.component("notifications", {
          * show initial notifications from server
          */
         showInitialNotifications: function showInitialNotifications() {
-            for (var key in this.initialNotifications) {
-                // set default type top 'log'
-                var type = this.initialNotifications[key].type || "log";
-                var message = this.initialNotifications[key].message;
-                var messageCode = this.initialNotifications[key].code;
+            for (var type in this.initialNotifications) {
+                var notification = this.initialNotifications[type];
 
-                if (messageCode > 0) {
-                    message = _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(messageCode.toString()));
+                if ((0, _utils.isNullOrUndefined)(notification)) {
+                    continue;
                 }
 
                 // type cannot be undefined
-                if (message) {
-                    if (NotificationService[type] && typeof NotificationService[type] === "function") {
-                        NotificationService[type](message);
-                    } else {
-                        // unkown type
-                        NotificationService.log(message);
-                    }
+                if (!(0, _utils.isNullOrUndefined)(NotificationService[type]) && typeof NotificationService[type] === "function") {
+                    NotificationService[type](notification);
+                } else {
+                    // unkown type
+                    NotificationService.log(notification);
                 }
             }
         }
     }
 });
 
-},{"exceptions/ExceptionMap":96,"services/NotificationService":127,"services/TranslationService":128}],76:[function(require,module,exports){
+},{"../../helper/utils":119,"services/NotificationService":127}],76:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -20590,7 +20621,15 @@ Vue.directive("logout", {
             $(el).addClass("disabled");
 
             ApiService.post("/rest/io/customer/logout").done(function () {
-                (0, _UrlService.navigateTo)(window.location.origin);
+                var url = window.location.origin;
+
+                if (App.defaultLanguage != App.language) {
+                    url = url + "/" + App.language;
+                    if (App.urlTrailingSlash) {
+                        url += "/";
+                    }
+                }
+                (0, _UrlService.navigateTo)(url);
             }).fail(function () {
                 $(el).removeClass("disabled");
             });
@@ -20891,7 +20930,7 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["401", "notificationsCalculateShippingFailed"]]);
+var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
 
 exports.default = exceptionMap;
 
@@ -21180,14 +21219,21 @@ Vue.filter("itemName", function (_ref) {
 },{}],107:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../helper/utils");
+
 Vue.filter("itemURL", function (item) {
     var enableOldUrlPattern = App.config.global.enableOldUrlPattern;
     var urlPath = item.texts.urlPath || "";
+    var includeLanguage = !(0, _utils.isNullOrUndefined)(item.texts.lang) && App.defaultLanguage != item.texts.lang;
 
     var link = "";
 
     if (urlPath.charAt(0) !== "/") {
         link = "/";
+    }
+
+    if (includeLanguage) {
+        link += item.texts.lang + "/";
     }
 
     if (urlPath && urlPath.length) {
@@ -21215,7 +21261,7 @@ Vue.filter("itemURL", function (item) {
     return link + suffix + trailingSlash;
 });
 
-},{}],108:[function(require,module,exports){
+},{"../helper/utils":119}],108:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -21325,8 +21371,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _number = require("./number");
-
 var _utils = require("./utils");
 
 var MonetaryFormatter = function () {
@@ -21377,6 +21421,22 @@ var MonetaryFormatter = function () {
         }
 
         return parsed;
+    }
+
+    function _getDecimalValue(value) {
+        var extend = 0;
+
+        value += "";
+
+        if (value.length === 1) {
+            value = extend + value;
+        } else {
+            while (value.length < 2) {
+                value += extend;
+            }
+        }
+
+        return value;
     }
 
     MonetaryFormatter.prototype.setPattern = function (pattern) {
@@ -21443,7 +21503,7 @@ var MonetaryFormatter = function () {
                     }
                 case T_DECIMAL:
                     {
-                        return _this2.separatorDecimals + (0, _number.toLength)((value * 100).toFixed(0).substr(-2, 2), 2);
+                        return _this2.separatorDecimals + _getDecimalValue((value * 100).toFixed(0).substr(-2, 2));
                     }
                 case T_CURRENCY:
                     {
@@ -21471,7 +21531,7 @@ var MonetaryFormatter = function () {
 
 exports.default = MonetaryFormatter;
 
-},{"./number":116,"./utils":119}],114:[function(require,module,exports){
+},{"./utils":119}],114:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21565,7 +21625,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.floatLength = floatLength;
 exports.limit = limit;
 exports.formatFloat = formatFloat;
-exports.toLength = toLength;
 
 var _utils = require("./utils");
 
@@ -21632,19 +21691,6 @@ function formatFloat(value, decimals, round) {
         return 1 / 0;
     }
     return parseFloat(value.toFixed(decimals));
-}
-
-function toLength(value, length, suffix) {
-    value += "";
-    if ((0, _utils.isNullOrUndefined)(suffix)) {
-        suffix = "0";
-    }
-
-    while (value.length < length) {
-        value += suffix;
-    }
-
-    return value;
 }
 
 },{"./utils":119}],117:[function(require,module,exports){
@@ -21818,8 +21864,10 @@ var init = function ($, window, document) {
             }
         });
 
-        window.onpopstate = function () {
-            window.location.reload();
+        window.onpopstate = function (event) {
+            if (event.state && event.state.requireReload) {
+                window.location.reload();
+            }
         };
 
         // init bootstrap tooltips
@@ -22518,6 +22566,14 @@ module.exports = function ($) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _ExceptionMap = require("exceptions/ExceptionMap");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 module.exports = function ($) {
 
     var notificationCount = 0;
@@ -22572,7 +22628,7 @@ module.exports = function ($) {
     function _warn(message) {
         var notification = new Notification(message, "warning");
 
-        if (App.config.log.data.indexOf("log_warnings") >= 0) {
+        if (App.config.log.data.indexOf("print_warnings") >= 0) {
             _printNotification(notification);
         }
 
@@ -22604,6 +22660,9 @@ module.exports = function ($) {
     }
 
     function _printNotification(notification) {
+        if (notification.code > 0 && _ExceptionMap.exceptionMap.has(notification.code.toString())) {
+            notification.message = _TranslationService2.default.translate("Ceres::Template." + _ExceptionMap.exceptionMap.get(notification.code.toString()));
+        }
         notifications.add(notification);
         _log(notification);
 
@@ -22680,7 +22739,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],128:[function(require,module,exports){
+},{"exceptions/ExceptionMap":96,"services/TranslationService":128}],128:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22845,7 +22904,7 @@ function setUrlParams(urlParams) {
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.replaceState({}, titleElement ? titleElement.innerHTML : "", pathName + params);
+    window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
 
     (0, _jquery2.default)("a[href][data-update-url]").each(function (i, element) {
         var $element = (0, _jquery2.default)(element);
@@ -22879,7 +22938,7 @@ function switchUrl(url, title) {
         title = document.getElementsByTagName("title")[0].innerHTML;
     }
     url = (0, _url.normalizeUrl)(url);
-    window.history.pushState({}, title, url);
+    window.history.pushState({ requireReload: true }, title, url);
 }
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, switchUrl: switchUrl };
@@ -23586,6 +23645,7 @@ var NotificationService = require("services/NotificationService");
 var state = {
     data: {},
     items: [],
+    showNetPrices: false,
     latestEntry: {
         item: {},
         quantity: null
@@ -23653,6 +23713,9 @@ var mutations = {
     },
     setIsBasketInitiallyLoaded: function setIsBasketInitiallyLoaded(state) {
         state.isBasketInitiallyLoaded = true;
+    },
+    setShowNetPrices: function setShowNetPrices(state, showNetPrices) {
+        state.showNetPrices = showNetPrices;
     }
 };
 
@@ -23680,6 +23743,7 @@ var actions = {
 
         _ApiService2.default.listen("AfterBasketChanged", function (data) {
             commit("setBasket", data.basket);
+            commit("setShowNetPrices", data.showNetPrices);
             commit("setBasketItems", data.basketItems);
         });
     },
@@ -24380,7 +24444,13 @@ var actions = {
                 if (!category.details[0]) {
                     category.hideCategory = true;
                 } else {
-                    var parentUrl = parent ? parent.url : "";
+                    var parentUrl = "";
+
+                    if (parent) {
+                        parentUrl = parent.url;
+                    } else if (App.defaultLanguage != category.details[0].lang) {
+                        parentUrl = "/" + category.details[0].lang;
+                    }
 
                     category.url = parentUrl + "/" + category.details[0].nameUrl;
                     showChildren = true;
@@ -24668,11 +24738,7 @@ var getters = {
                 for (var _iterator = addedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var property = _step.value;
 
-                    if (property.surcharge > 0) {
-                        sum += property.surcharge;
-                    } else if (property.property.surcharge > 0) {
-                        sum += property.property.surcharge;
-                    }
+                    sum += property.surcharge || property.property.surcharge;
                 }
             } catch (err) {
                 _didIteratorError = true;
@@ -24749,11 +24815,11 @@ var getters = {
                     });
 
                     groups.push({
+                        touched: false,
                         group: groupProperties[0].group,
                         properties: groupProperties.map(function (property) {
-                            return property.property;
-                        }),
-                        touched: false
+                            return _extends({}, property.property, { itemSurcharge: property.surcharge });
+                        })
                     });
                 };
 
@@ -24784,7 +24850,7 @@ var getters = {
         if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.item.requireOrderProperties) {
             var missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
                 // selection isn't supported yet
-                return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file";
+                return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
             });
 
             if (missingProperties.length) {

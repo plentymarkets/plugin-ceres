@@ -133,9 +133,16 @@ Vue.component("login", {
                     {
                     case 401:
                         this.loginFields.addClass("has-login-error");
+
+                        var translationKey = "Ceres::Template.loginFailed";
+
+                        if (response.error.message.length > 0 && response.error.message === "user is blocked")
+                            {
+                            translationKey = "Ceres::Template.loginBlocked";
+                        }
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.loginFailed")
-                        ).closeAfter(10000);
+                                TranslationService.translate(translationKey)
+                            ).closeAfter(10000);
                         break;
                     default:
                         return;

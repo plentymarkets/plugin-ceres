@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v4.0.0 | MIT License | github.com/necolas/normalize.css */
-@import url(shariff/build/shariff.min.css);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -317,7 +316,7 @@ html {
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   color: #4D4F4D;
@@ -5201,7 +5200,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5301,7 +5300,7 @@ button.close {
   display: block;
   max-width: 276px;
   padding: 1px;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -12515,49 +12514,6 @@ body > #vue-error.open-hover .basket-preview-hover-wrapper {
   }
 }
 
-.shariff .theme-minimal .shariff-button {
-  width: auto !important;
-  height: auto !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  border: none;
-  margin-right: .5rem;
-  margin-bottom: 0;
-  -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-}
-
-.shariff .theme-minimal .shariff-button a {
-  color: #dcdbd8;
-  height: auto !important;
-  background-color: transparent !important;
-}
-
-.shariff .theme-minimal .shariff-button .share_text {
-  display: none;
-}
-
-.shariff .theme-minimal .shariff-button .share_count {
-  background-color: transparent;
-  color: #333;
-}
-
-.shariff .theme-minimal .twitter a:hover {
-  color: #55acee;
-}
-
-.shariff .theme-minimal .facebook a:hover {
-  color: #3b5998;
-}
-
-.shariff .theme-minimal .googleplus a:hover {
-  color: #d34836;
-}
-
-.shariff .theme-minimal .pinterest a:hover {
-  color: #bd081c;
-}
-
 .input-group.vert .input-group-btn {
   display: block;
   width: 100%;
@@ -12774,6 +12730,114 @@ button:focus {
 
 .btn-icon.btn-sm .fa, .btn-group-sm > .btn-icon.btn .fa {
   width: 12px;
+}
+
+.btn-only-icon-xs-up {
+  width: 2.2rem !important;
+  padding-right: 8px;
+  height: 2.2rem;
+}
+
+.btn-only-icon-xs-up span {
+  display: none !important;
+}
+
+@media (max-width: 543px) {
+  .btn-only-icon-xs-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-xs-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 544px) {
+  .btn-only-icon-sm-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-sm-up span {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .btn-only-icon-sm-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-sm-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn-only-icon-md-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-md-up span {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .btn-only-icon-md-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-md-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .btn-only-icon-lg-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-lg-up span {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  .btn-only-icon-lg-down {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-lg-down span {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .btn-only-icon-xl-up {
+    width: 2.2rem !important;
+    padding-right: 8px;
+    height: 2.2rem;
+  }
+  .btn-only-icon-xl-up span {
+    display: none !important;
+  }
+}
+
+.btn-only-icon-xl-down {
+  width: 2.2rem !important;
+  padding-right: 8px;
+  height: 2.2rem;
+}
+
+.btn-only-icon-xl-down span {
+  display: none !important;
 }
 
 .card .item-edit, .cmp-address-list .items > div:first-child .item-edit {
@@ -13665,7 +13729,7 @@ Custom classes
   overflow: hidden;
   color: #fff;
   text-align: center;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   position: relative;
   overflow: hidden;
 }
@@ -13750,7 +13814,7 @@ Custom classes
   height: 100%;
   overflow: hidden;
   color: #fff;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   position: relative;
   overflow: hidden;
 }
@@ -13935,6 +13999,12 @@ Custom classes
   right: 0;
   border: 0;
   transform: rotate3d(0, 0, 1, 90deg);
+}
+
+.notification-wrapper {
+  position: fixed;
+  right: .5rem;
+  top: 10rem;
 }
 
 .popper {
@@ -14599,7 +14669,7 @@ Custom classes
 }
 
 .wrapper-main .navbar {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   background: #f7f7f9;
   border-bottom: 1px solid #efefef;
 }
@@ -18615,7 +18685,7 @@ body.menu-is-visible {
 
 .sidebar-categories {
   background: #fff;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   height: 100%;
 }
 
@@ -18704,7 +18774,7 @@ body.menu-is-visible {
 }
 
 .cmp-hero .hero-main .carousel .carousel-inner .carousel-item .carousel-caption h3, .cmp-hero .hero-main .carousel .carousel-inner .carousel-item .carousel-caption h2, .cmp-hero .hero-main .carousel .carousel-inner .carousel-item .carousel-caption h1 {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   text-shadow: none;
   color: #fff;
   background: rgba(0, 142, 189, 0.8);
@@ -18766,7 +18836,7 @@ body.menu-is-visible {
 }
 
 .cmp-hero .hero-xtras .hero-category .hero-category-inner .hero-category-headline {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
   padding: 1rem;
   box-shadow: none;
   -ms-flex-item-align: start;
@@ -18820,7 +18890,7 @@ body.menu-is-visible {
   border-bottom: 0;
   background: #008ebd;
   position: relative;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Custom-Font, Helvetica, Arial, sans-serif;
 }
 
 .section-header h1, .section-header h2, .section-header h3, .section-header h4, .section-header h5, .section-header h6 {
@@ -19263,12 +19333,6 @@ body.menu-is-visible {
   border: none;
   border-radius: none;
   padding: .75rem .45rem .25rem 0;
-}
-
-.single-rightside .shariff .orientation-horizontal li .fa {
-  line-height: 30px;
-  text-align: center;
-  margin-left: 0.5rem;
 }
 
 @media (min-width: 768px) and (max-width: 991px) {

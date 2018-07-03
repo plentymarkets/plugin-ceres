@@ -1,5 +1,4 @@
-import ExceptionMap from "exceptions/ExceptionMap";
-import TranslationService from "services/TranslationService";
+import {isNullOrUndefined}from "../../helper/utils";
 
 var NotificationService = require("services/NotificationService");
 
@@ -53,32 +52,24 @@ Vue.component("notifications", {
          */
         showInitialNotifications: function()
         {
-            for (var key in this.initialNotifications)
+            for (const type in this.initialNotifications)
             {
-                // set default type top 'log'
-                var type = this.initialNotifications[key].type || "log";
-                var message = this.initialNotifications[key].message;
-                var messageCode = this.initialNotifications[key].code;
+                const notification = this.initialNotifications[type];
 
-                if (messageCode > 0)
+                if (isNullOrUndefined(notification))
                 {
-                    message = TranslationService.translate(
-                        "Ceres::Template." + ExceptionMap.get(messageCode.toString())
-                    );
+                    continue;
                 }
 
                 // type cannot be undefined
-                if (message)
+                if (!isNullOrUndefined(NotificationService[type]) && typeof NotificationService[type] === "function")
                 {
-                    if (NotificationService[type] && typeof NotificationService[type] === "function")
-                    {
-                        NotificationService[type](message);
-                    }
-                    else
-                    {
-                        // unkown type
-                        NotificationService.log(message);
-                    }
+                    NotificationService[type](notification);
+                }
+                else
+                {
+                    // unkown type
+                    NotificationService.log(notification);
                 }
             }
         }
