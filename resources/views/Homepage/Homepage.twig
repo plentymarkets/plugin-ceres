@@ -4,7 +4,7 @@
 
 {% set showDefaultHomepage = config("Ceres.default.homepage") %}
 {% set companyLogo  = config("Ceres.header.company_logo") %}
-{% set companyName  = config("Ceres.header.company_name") %}
+{% set companyName  = trans("Ceres::Template.headerCompanyName") %}
 
 {% block PartialHead %}
     <meta name="description" content="{{ trans('Ceres::Template.homepageMetaDescription') }}">
@@ -20,7 +20,7 @@
         {"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}
     </script>
 
-    <title>{{ trans("Ceres::Template.headerCompanyName") }}</title>
+    <title>{{ companyName }}</title>
 {% endblock %}
 
 {% block PageBody %}

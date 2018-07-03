@@ -3328,6 +3328,46 @@
                     "options": {
                         "defaultValue": "#d9534f"
                     }
+                },
+                "custom-font-regular": {
+                    "type": "inputText",
+                    "required": false,
+                    "shopBuilder": true,
+                    "scss": false,
+                    "label": "Custom Schriftart",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
+                "custom-font-bold": {
+                    "type": "inputText",
+                    "required": false,
+                    "shopBuilder": true,
+                    "scss": false,
+                    "label": "Custom Schriftart",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
+                "custom-font-italic": {
+                    "type": "inputText",
+                    "required": false,
+                    "shopBuilder": true,
+                    "scss": false,
+                    "label": "Custom Schriftart",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
+                "custom-font-bold-italic": {
+                    "type": "inputText",
+                    "required": false,
+                    "shopBuilder": true,
+                    "scss": false,
+                    "label": "Custom Schriftart",
+                    "options": {
+                        "defaultValue": ""
+                    }
                 }
             }
         },
