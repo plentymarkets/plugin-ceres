@@ -113,6 +113,8 @@ const actions =
                         {
                             $(document.body).trigger("sticky_kit:recalc");
                         }, 0);
+
+                        commit("setIsBasketLoading", false);
                     })
                     .fail(error =>
                     {

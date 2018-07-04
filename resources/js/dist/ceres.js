@@ -14710,6 +14710,8 @@ Vue.component("add-to-basket", {
 },{"exceptions/ExceptionMap":97,"services/NotificationService":128,"services/TranslationService":129,"services/UrlService":130}],12:[function(require,module,exports){
 "use strict";
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
@@ -14724,10 +14726,6 @@ Vue.component("basket-preview", {
         template: {
             type: String,
             default: "#vue-basket-preview"
-        },
-        showNetPrices: {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -14748,12 +14746,18 @@ Vue.component("basket-preview", {
 
         this.$options.template = this.template;
 
-        _ApiService2.default.get("/rest/io/basket/").done(function (basket) {
+        var basketPromise = _ApiService2.default.get("/rest/io/basket/");
+        var netPricesPromise = _ApiService2.default.get("/rest/io/customer/show_net_prices", {}, { supressNotifications: true, keepOriginalResponse: true });
+
+        Promise.all([basketPromise, netPricesPromise]).then(function (_ref) {
+            var _ref2 = _slicedToArray(_ref, 2),
+                basket = _ref2[0],
+                showNetPrices = _ref2[1];
+
             _this.$store.commit("setBasket", basket);
             _this.$store.dispatch("loadBasketData");
+            _this.$store.commit("setShowNetPrices", showNetPrices.data);
         });
-
-        this.$store.commit("setShowNetPrices", this.showNetPrices);
     },
 
 
@@ -24191,6 +24195,8 @@ var actions = {
                 setTimeout(function () {
                     $(document.body).trigger("sticky_kit:recalc");
                 }, 0);
+
+                commit("setIsBasketLoading", false);
             }).fail(function (error) {
                 if (error.data) {
                     NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
