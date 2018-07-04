@@ -1,3 +1,5 @@
+const ApiService = require("services/ApiService");
+
 Vue.component("single-item", {
 
     props: [
@@ -46,9 +48,19 @@ Vue.component("single-item", {
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
 
+        this.addToLastSeen();
+
         this.$store.watch(() => this.$store.getters.variationTotalPrice, () =>
         {
             $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
         });
+    },
+
+    methods:
+    {
+        addToLastSeen()
+        {
+            ApiService.put("/rest/io/item/last_seen", {variationId: this.currentVariation.variation.id});
+        }
     }
 });

@@ -1,13 +1,12 @@
 {{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
+{{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
 
 {% set listType = config("Ceres.item.lists.1.list_type") %}
 {% set tagIds = config("Ceres.item.lists.1.tag_ids") | split(",") %}
 {% set itemListId = 1 %}
 {% set isHome = services.template.isHome() %}
 
-{% if listType == "last_seen" %}
-    {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.lastSeenItemsList, {'items': itemsPerPage}).documents %}
-{% elseif listType == "cross_selling" %}
+{% if listType == "cross_selling" %}
     {% set itemList = item.CrossSellingItems.documents %}
 {% elseif listType == "tag_list" %}
 	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
@@ -20,8 +19,14 @@
 
     {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 1, listType: listType, isHome: isHome } %}
 
+    {% if listType == "last_seen" %}
+    <div class="row">
+        <last-seen-item-list></last-seen-item-list>
+    </div>
+    {% else %}
     <div class="row">
         <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
     </div>
-{% endif %}
+    {% endif %}
 
+{% endif %}
