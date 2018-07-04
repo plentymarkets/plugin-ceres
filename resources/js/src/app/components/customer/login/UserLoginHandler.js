@@ -1,3 +1,4 @@
+import {isDefined}from "../../../helper/utils";
 const ApiService = require("services/ApiService");
 
 import ValidationService from "services/ValidationService";
@@ -6,10 +7,12 @@ Vue.component("user-login-handler", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "userData",
-        "template"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-user-login-handler"
+        }
+    },
 
     computed: Vuex.mapGetters([
         "username",
@@ -19,7 +22,15 @@ Vue.component("user-login-handler", {
     created()
     {
         this.$options.template = this.template;
-        this.$store.commit("setUserData", this.userData);
+
+        ApiService.get("/rest/io/customer", {}, {keepOriginalResponse: true})
+            .done(response =>
+            {
+                if (isDefined(response.data))
+                {
+                    this.$store.commit("setUserData", response.data);
+                }
+            });
     },
 
     /**

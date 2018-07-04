@@ -1,3 +1,5 @@
+import {isDefined}from "../../helper/utils";
+
 const state =
     {
         userData: null
@@ -17,7 +19,7 @@ const getters =
         {
             let username = "";
 
-            if (state.userData)
+            if (isDefined(state.userData))
             {
                 if (state.userData.firstName.length > 0 && state.userData.lastName.length > 0)
                 {
@@ -32,7 +34,10 @@ const getters =
             return username;
         },
 
-        isLoggedIn: state => (state.userData && state.userData.id > 0)
+        isLoggedIn(state)
+        {
+            return isDefined(state.userData) && state.userData.id > 0;
+        }
     };
 
 export default

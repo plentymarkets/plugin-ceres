@@ -5,12 +5,9 @@ Vue.component("basket-preview", {
     delimiters: ["${", "}"],
 
     props: {
-        template: String,
-        basketData: Object,
-        showNetPrices:
-        {
-            type: Boolean,
-            default: false
+        template: {
+            type: String,
+            default: "#vue-basket-preview"
         }
     },
 
@@ -23,9 +20,16 @@ Vue.component("basket-preview", {
     created()
     {
         this.$options.template = this.template;
-        this.$store.commit("setBasket", this.basketData);
-        this.$store.commit("setShowNetPrices", this.showNetPrices);
-        this.$store.dispatch("loadBasketData");
+
+        const basketPromise = ApiService.get("/rest/io/basket/");
+        const netPricesPromise = ApiService.get("/rest/io/customer/show_net_prices", {}, {supressNotifications: true, keepOriginalResponse: true});
+
+        Promise.all([basketPromise, netPricesPromise]).then(([basket, showNetPrices]) =>
+        {
+            this.$store.commit("setBasket", basket);
+            this.$store.dispatch("loadBasketData");
+            this.$store.commit("setShowNetPrices", showNetPrices.data);
+        });
     },
 
     /**
