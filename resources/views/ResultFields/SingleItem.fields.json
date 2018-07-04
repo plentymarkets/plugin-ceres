@@ -27,8 +27,7 @@
     "variation.lengthMM",
     "variation.widthMM",
     "variation.heightMM",
-    "variation.availability.names.*",
-    "variation.availability.id",
+    "variation.availability.*",
     "variation.releasedAt",
     "variation.mayShowUnitPrice",
     "variation.bundleType",
@@ -63,6 +62,5 @@
 
     "defaultCategories",
 
-    "filter.isSalable",
-    "filter.hasManufacturer"
+    "filter.*"
 ]
