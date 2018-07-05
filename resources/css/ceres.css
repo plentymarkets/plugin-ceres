@@ -18749,7 +18749,7 @@ body.menu-is-visible {
 .homepage-title {
   padding: 1rem 1.5rem;
   border-bottom: 0;
-  background: #008ebd;
+  background: #000000;
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -18757,7 +18757,7 @@ body.menu-is-visible {
 
 .homepage-title > h1 {
   margin: .5rem auto;
-  color: #fff;
+  color: green;
   border-bottom: 2px solid #fff;
   padding: 0 0 .5rem;
   font-size: 2.5rem;
@@ -20386,7 +20386,7 @@ body.menu-is-visible {
 
 .widget-title-bar.widget-primary {
   color: #fff;
-  background-color: #008ebd;
+  background-color: green;
 }
 
 .widget-title-bar.widget-secondary {
