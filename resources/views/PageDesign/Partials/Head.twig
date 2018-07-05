@@ -34,7 +34,7 @@
             boldItalic: config('Ceres.custom-font-bold-italic')
         }
     %}
-    
+
     {% if customFont.regular %}
         @font-face {
             font-family: "Custom-Font";
@@ -78,7 +78,7 @@
 {% set itemName = config('Ceres.item.name') %}
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
-    <link data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ plugin_path('Ceres') }}/css/ceres.scss" rel="stylesheet" href="https://www.darkages.de/plentydev/krazy8/css/ceres.css">
+    <link rel="stylesheet" href="https://www.darkages.de/plentydev/krazy8/css/ceres.css">
 {% endif %}
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
