@@ -21,7 +21,7 @@ Vue.component("last-seen-item-list", {
     {
         this.$options.template = this.template;
 
-        const params = {templateName: "Ceres::ItemList.ItemListView", options: {items: 10}};
+        const params = {items: App.config.itemLists.lastSeenNumber};
 
         ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
             .done(response =>

@@ -60,7 +60,7 @@ Vue.component("single-item", {
     {
         addToLastSeen()
         {
-            ApiService.put("/rest/io/item/last_seen", {variationId: this.currentVariation.variation.id});
+            ApiService.post("/rest/io/item/last_seen", {variationId: this.currentVariation.variation.id});
         }
     }
 });
