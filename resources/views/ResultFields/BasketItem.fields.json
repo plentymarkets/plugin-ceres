@@ -11,6 +11,7 @@
     "variation.itemId",
     "variation.minimumOrderQuantity",
     "variation.maximumOrderQuantity",
+    "variation.intervalOrderQuantity",
     "variation.id",
     "variation.data.orderProperties.*",
     "variation.mayShowUnitPrice",
