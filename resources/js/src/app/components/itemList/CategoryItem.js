@@ -34,7 +34,11 @@ Vue.component("category-item", {
         texts()
         {
             return this.itemData.texts;
-        }
+        },
+
+        ...Vuex.mapState({
+            showNetPrices: state => state.basket.showNetPrices
+        })
     },
 
     created()
