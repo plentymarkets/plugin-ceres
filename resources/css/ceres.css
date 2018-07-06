@@ -19315,8 +19315,16 @@ body.menu-is-visible {
   background-color: #f0ad4e;
 }
 
-.availability_5 {
+.availability_5,
+.availability_6,
+.availability_7,
+.availability_8 {
   background-color: #d9534f;
+}
+
+.availability_9,
+.availability_10 {
+  background-color: #4D4F4D;
 }
 
 .rating .tag {

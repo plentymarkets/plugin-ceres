@@ -25385,14 +25385,24 @@ var getters = {
         var username = "";
 
         if (state.userData) {
-            if (state.userData.firstName.length > 0 && state.userData.lastName.length > 0) {
-                username = state.userData.firstName + " " + state.userData.lastName;
-            } else {
-                username = state.userData.options[0].value;
+            if (state.userData.firstName.length) {
+                username = state.userData.firstName + " ";
+            }
+            if (state.userData.lastName.length) {
+                username += state.userData.lastName;
+            }
+            if (!username.length) {
+                var emailOption = state.userData.options.find(function (option) {
+                    return option.typeId === 2 && option.subTypeId === 4;
+                });
+
+                if (emailOption) {
+                    username = emailOption.value;
+                }
             }
         }
 
-        return username;
+        return username.trim();
     },
 
 
