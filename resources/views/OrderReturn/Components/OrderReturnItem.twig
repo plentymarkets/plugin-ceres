@@ -1,3 +1,5 @@
+{{ component( "Ceres::Item.Components.ItemBundle" ) }}
+
 <script type="x/template" id="vue-order-return-item">
 	<article  class="order-return-item" :id="'article_' + _uid">
 		<div class="row">
@@ -30,17 +32,19 @@
 				</div>
 			</div>
 
-			<div class="col-xs-5 col-sm-7 order-return-texts">
+			<div class="col-xs-5 col-sm-4 order-return-texts">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-xs-12 col-lg-6">
+						<div class="col-xs-12 col-lg-12">
 							<a :href="orderItemURL">
-								<h2 class="h5 order-return-name">${ orderItem.orderItemName }</h2>
+								<h2 class="h5 order-return-name">${ orderItem | itemBundleName }</h2>
 							</a>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<item-bundle :bundle-type="orderItem.bundleType" :bundle-components="orderItem.bundleComponents" template="#vue-item-bundle"></item-bundle>
 		</div>
 	</article>
 </script>

@@ -1,5 +1,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
+
 {{ component( "Ceres::Item.Components.ItemBundle" ) }}
 
 {% set basketTotalsCurrency = totals.currency %}
@@ -133,7 +135,7 @@
         <div class="confirmation-order-list">
 
             {% for item in orderData.order.orderItems %}
-                {% if item.itemVariationId > 0 %}
+                {% if item.itemVariationId > 0 and item.bundleType != "bundle_item" and item.references is empty %}
                     {% set currentVariationId = item.itemVariationId | trimNewlines %}
                     {% set priceNet = orderData.order.amounts[0].isNet %}
                     <article class="cmp cmp-order-item">
@@ -143,11 +145,20 @@
                         <div class="item-details small">
                             <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}" class="clearfix">
                                 <div class="item-name">
-                                    {{ item.orderItemName }}
+                                    {{ ItemName.get(item.orderItemName, item.bundleType) }}
                                 </div>
                             </a>
 
-                            <item-bundle bundle-type="{{ item.bundleType }}" :bundle-components="{{ item.bundleComponents | json_encode }}"></item-bundle>
+                            {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
+                                <div class="m-b-1 item-bundle">
+                                    {% for bundleComponent in item.bundleComponents %}
+                                        <div>
+                                            <span class="text-muted">{{ bundleComponent.quantity }} x</span>
+                                            <a href="{{ bundleComponent.data | itemURL }}"> {{ bundleComponent.data | itemName }} </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
 
                             <div class="row">
                                 <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
