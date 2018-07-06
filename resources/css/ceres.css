@@ -15922,6 +15922,12 @@ body.menu-is-visible {
   padding-left: .5rem;
 }
 
+.cmp-order-item .item-bundle {
+  width: 300px;
+  font-weight: 700;
+  font-size: 80%;
+}
+
 .cmp-order-item .item-name {
   display: -webkit-box;
   text-overflow: ellipsis;
