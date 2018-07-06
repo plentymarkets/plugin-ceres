@@ -1,13 +1,13 @@
 {% macro get( itemName, bundleType ) %}
     {% if bundleType == "bundle" %}
         {% if "[BUNDLE]" in itemName %}
-            {% set itemName = itemName | replace({"[BUNDLE]": ""}) %}
+            {% set itemName = itemName | replace({"[BUNDLE]": ""}) | trim %}
         {% endif %}
         
         {{ trans("Ceres::Template.itemBundleName", {"itemName": itemName}) }}
     {% elseif bundleType == "bundle_item" %}
         {% if "[-]" in itemName %}
-            {% set itemName = itemName | replace({"[-]": ""}) %}
+            {% set itemName = itemName | replace({"[-]": ""}) | trim %}
         {% endif %}
 
         {{ itemName }}
