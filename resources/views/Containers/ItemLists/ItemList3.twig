@@ -11,7 +11,7 @@
 	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
 {% endif %}
 
-{% if not isHome or listType == "last_seen"  %}
+{% if not isHome and (itemList is not empty or listType == "last_seen") %}
     <hr>
 {% endif %}
 
