@@ -1,5 +1,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
+{{ component( "Ceres::Item.Components.ItemBundle" ) }}
+
 {% set basketTotalsCurrency = totals.currency %}
 
 <div class="row">
@@ -9,6 +11,7 @@
             <div class="card-header">
                 <h5>{{ trans("Ceres::Template.orderConfirmationOrderId") }} {{ orderData.order.id }}</h5>
             </div>
+
             <div class="card-block">
                 <div class="details">
                     <div class="row">
@@ -143,6 +146,9 @@
                                     {{ item.orderItemName }}
                                 </div>
                             </a>
+
+                            <item-bundle bundle-type="{{ item.bundleType }}" :bundle-components="{{ item.bundleComponents | json_encode }}"></item-bundle>
+
                             <div class="row">
                                 <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
                                 <span class="col-xs-6 col-sm-9">{{ (priceNet ? item.amounts[0].priceNet : item.amounts[0].priceGross) | formatMonetary( item.amounts[0].currency ) }}</span>

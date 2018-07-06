@@ -36,7 +36,7 @@
                         </user-login-handler>
                     </li>
                     <li class="list-inline-item dropdown control-languages">
-                        <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false"
+                        <a data-toggle="collapse" href="#countrySettings" aria-expanded="false"
                             aria-controls="countrySettings"
                             data-parent="#controlsList">
                             <i class="flag-icon flag-icon-{{ lang }}"></i>
@@ -56,11 +56,13 @@
                         </li>
                     {% endif %}
                     <li class="list-inline-item control-search">
-                        <a class="anicon anicon-search-xcross" aria-label="toggle search"
-                            data-toggle="collapse" href="#searchBox"
-                            aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
-                            aria-controls="searchBox"
-                            data-parent="#controlsList">
+                        <a class="anicon anicon-search-xcross"
+                           aria-label="toggle search"
+                           data-toggle="collapse"
+                           href="#searchBox"
+                           aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
+                           aria-controls="searchBox"
+                           data-parent="#controlsList">
                             <span class="anicon-search-item" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -88,11 +90,7 @@
                         </a>
 
                         {% if config("Ceres.basket.preview_type") != "right" %}
-                            <basket-preview
-                                    template="#vue-basket-preview-hover"
-                                    :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
-                                    :show-net-prices={{ showNetPrices | json_encode }}>
-                            </basket-preview>
+                            <basket-preview template="#vue-basket-preview-hover" :show-net-prices="{{ showNetPrices | json_encode }}"></basket-preview>
                         {% endif %}
                     </li>
                 </ul>
@@ -168,7 +166,7 @@
                                 <ul>
                                     {% for language in languageList %}
                                         <li{% if lang == language %} class="active"{% endif %}>
-                                            <a href="{% if languageUrls[language] is defined %}{{ languageUrls[language] ~ queryString() }}{% else %}/{{ language }}{{ urls.trailingSlashSuffix }}{% endif %}" data-update-url>
+                                            <a href="{% if languageUrls[language] is defined %}{{ languageUrls[language] ~ queryString() }}{% elseif language != defaultLanguage %}/{{ language }}{{ urls.trailingSlashSuffix }}{% else %}/{% endif %}" data-update-url>
                                                 <i class="flag-icon flag-icon-{{ language }}"></i>
                                                 {{ trans("Ceres::Template.header" ~ language | capitalize) }}
                                             </a>

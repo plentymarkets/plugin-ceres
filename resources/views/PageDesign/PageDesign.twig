@@ -10,226 +10,224 @@
 {{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
 
 {% set currencyFormat = config("Ceres.currency.format") %}
+{% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
 
 <!DOCTYPE html>
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
-    <head>
-        {% include getPartial('head') %}
+<head>
+    {% include getPartial('head') %}
 
-        {% block PartialHead %}
+    {% block PartialHead %}
+    {% endblock %}
+
+    {% for styleTemplate in get_additional_styles() %}
+        {% include styleTemplate.path ignore missing with styleTemplate.params %}
+    {% endfor %}
+</head>
+
+<body>
+<script>
+    if('ontouchstart' in document.documentElement)
+    {
+        document.body.classList.add("touch");
+    }
+    else
+    {
+        document.body.classList.add("no-touch");
+    }
+</script>
+<div id="vue-app">
+    <div class="wrapper wrapper-top">
+        <!-- messages -->
+        <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
+    </div>
+
+    <div class="wrapper wrapper-left">
+        <!-- filters -->
+    </div>
+
+    <div class="wrapper wrapper-main {% if ceresConfig.header.fixNavBarPos %}isSticky{% endif %}">
+        {% include getPartial('header') %}
+
+        <div id="page-body" class="main">
+            {% block PageBody %}
+                <!-- inject content of inherited templates here -->
+            {% endblock %}
+        </div>
+
+        {% include getPartial('footer') %}
+
+        {% block PartialFooter %}
         {% endblock %}
+    </div>
 
-        {% for styleTemplate in get_additional_styles() %}
-            {% include styleTemplate.path ignore missing with styleTemplate.params %}
-        {% endfor %}
-    </head>
+    {% if basket is not defined %}
+        {% set basket = services.basket.getBasketForTemplate() %}
+    {% endif %}
+    {% if ceresConfig.basket.previewType == "right" %}
+        <div class="wrapper wrapper-right">
+            <basket-preview :show-net-prices={{ showNetPrices | json_encode }}></basket-preview>
+        </div>
+    {% endif %}
 
-    <body>
-        <script>
-            if('ontouchstart' in document.documentElement)
-            {
-                document.body.classList.add("touch");
-            }
-            else
-            {
-                document.body.classList.add("no-touch");
-            }
-        </script>
-        <div id="vue-app">
-            <div class="wrapper wrapper-top">
-                <!-- messages -->
-                <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
-            </div>
-
-            <div class="wrapper wrapper-left">
-                <!-- filters -->
-            </div>
-
-            <div class="wrapper wrapper-main {% if ceresConfig.header.fixNavBarPos %}isSticky{% endif %}">
-                {% include getPartial('header') %}
-
-                <div id="page-body" class="main">
-                    {% block PageBody %}
-                        <!-- inject content of inherited templates here -->
-                    {% endblock %}
-                </div>
-
-                {% include getPartial('footer') %}
-
-                {% block PartialFooter %}
-                {% endblock %}
-            </div>
-
-            {% if basket is not defined %}
-                {% set basket = services.basket.getBasketForTemplate() %}
-            {% endif %}
-            {% if ceresConfig.basket.previewType == "right" %}
-                <div class="wrapper wrapper-right">
-                    <basket-preview
-                        template="#vue-basket-preview"
-                        :basket-data="{{ basket | json_encode }}"
-                        :show-net-prices={{ showNetPrices | json_encode }}>
-                    </basket-preview>
-                </div>
-            {% endif %}
-
-            <div class="wrapper wrapper-bottom">
-                <!-- LOGIN MODAL -->
-                <div id="login-modal-wrapper">
-                    <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
-                                </div>
-                                <login template="#vue-login" modal-element="login-modal-wrapper"></login>
-                            </div>
+    <div class="wrapper wrapper-bottom">
+        <!-- LOGIN MODAL -->
+        <div id="login-modal-wrapper">
+            <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
                         </div>
+                        <login template="#vue-login" modal-element="login-modal-wrapper"></login>
                     </div>
                 </div>
-                <!-- ./LOGIN MODAL -->
+            </div>
+        </div>
+        <!-- ./LOGIN MODAL -->
 
-                <!-- REGISTRATION MODAL -->
-                <div id="simple-registration-modal-wrapper">
-                    <div class="modal fade" id="registration" tabindex="-1" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <div class="modal-title h3">
-                                        {{ trans("Ceres::Template.regCreateAccount") }}
+        <!-- REGISTRATION MODAL -->
+        <div id="simple-registration-modal-wrapper">
+            <div class="modal fade" id="registration" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <div class="modal-title h3">
+                                {{ trans("Ceres::Template.regCreateAccount") }}
 
-                                       <popper v-cloak class="pull-right m-r-1">
-                                            <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
-                                                <i class="fa fa-info"></i>
-                                            </button>
-                                            <div slot="title">
-                                                {{ trans("Ceres::Template.regContactInformations") }}
-                                            </div>
-                                            <ul slot="content" class='p-l-1'>
-                                                <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                                                <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                                                <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                                                <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-                                            </ul>
-                                        </popper>
+                                <popper v-cloak class="pull-right m-r-1">
+                                    <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
+                                        <i class="fa fa-info"></i>
+                                    </button>
+                                    <div slot="title">
+                                        {{ trans("Ceres::Template.regContactInformations") }}
                                     </div>
-                                </div>
-                                <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
+                                    <ul slot="content" class='p-l-1'>
+                                        <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                        <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                        <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                    </ul>
+                                </popper>
                             </div>
                         </div>
+                        <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
                     </div>
                 </div>
-                <!-- ./REGISTRATION MODAL -->
-
-                <!-- BASKET MODAL -->
-                <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
-                <!-- ./BASKET MODAL -->
-
-                <!-- SHIPPINGCOSTS MODAL -->
-                <div id="shippingscosts-modal-wrapper">
-                    <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
-                                </div>
-                                <div class="modal-body">
-                                    {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./SHIPPINGCOSTS MODAL -->
             </div>
         </div>
+        <!-- ./REGISTRATION MODAL -->
 
-        <div id="vue-error" style="display:none">
-            {% include "Ceres::PageDesign.Partials.VueError" %}
+        <!-- BASKET MODAL -->
+        <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
+        <!-- ./BASKET MODAL -->
+
+        <!-- SHIPPINGCOSTS MODAL -->
+        <div id="shippingscosts-modal-wrapper">
+            <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
+                        </div>
+                        <div class="modal-body">
+                            {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- ./SHIPPINGCOSTS MODAL -->
+    </div>
+</div>
 
-        <script>
-            App = {
-                config: {{ ceresConfig | json_encode | raw }},
-                activeCurrency: "{{ currencyData[currencyFormat] }}",
-                currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
-                isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
-                isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
-                isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
-                language: "{{ lang }}",
-                decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
-                urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }}
-            };
-        </script>
+<div id="vue-error" style="display:none">
+    {% include "Ceres::PageDesign.Partials.VueError" %}
+</div>
 
-        {{ Loader.include_components() }}
+<script>
+    App = {
+        config: {{ ceresConfig | json_encode | raw }},
+        activeCurrency: "{{ currencyData[currencyFormat] }}",
+        currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
+        isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
+        isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
+        isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
+        language: "{{ lang }}",
+        defaultLanguage: "{{ defaultLanguage }}",
+        decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
+        urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }}
+    };
+</script>
 
-        {{ LayoutContainer.show("Ceres::Script.Loader") }}
+{{ Loader.include_components() }}
 
-        {{ Translations.add( "Ceres", "Template" ) }}
-        {% if ceresConfig.log.performanceLevel  == 'development' %}
-            <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
-            <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
-        {% else %}
-            <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
-        {% endif %}
+{{ LayoutContainer.show("Ceres::Script.Loader") }}
 
-        {% for scriptTemplate in get_additional_scripts() %}
-            {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
-        {% endfor %}
+{{ Translations.add( "Ceres", "Template" ) }}
+{% if ceresConfig.log.performanceLevel  == 'development' %}
+    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
+    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
+{% else %}
+    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
+{% endif %}
 
-        {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
+{% for scriptTemplate in get_additional_scripts() %}
+    {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
+{% endfor %}
 
-        {{ get_filtered_tags() }}
+{{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
-        <script>
-            var rootElement = document.getElementById("vue-app");
-            var errorElement = document.getElementById("vue-error");
+{{ get_filtered_tags() }}
 
-            Vue.options.delimiters = ['${', '}'];
+<script>
+    var rootElement = document.getElementById("vue-app");
+    var errorElement = document.getElementById("vue-error");
 
-            var vueEventHub = new Vue();
+    Vue.options.delimiters = ['${', '}'];
 
-            var vueApp = new Vue({
-                store: window.ceresStore
+    var vueEventHub = new Vue();
+
+    var vueApp = new Vue({
+        store: window.ceresStore
+    });
+    vueApp.$mount( rootElement.cloneNode(true) );
+
+    if ( vueApp.$el.id !== "vue-app")
+    {
+        rootElement.parentNode.removeChild(rootElement);
+        errorElement.style.display = "block";
+    }
+    else
+    {
+        document.body.replaceChild( vueApp.$el, rootElement );
+        errorElement.parentNode.removeChild(errorElement);
+    }
+
+    (function($) {
+        $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
+        {
+            var compiled = Vue.compile(widgetElement[0].outerHTML );
+            var component = new Vue({
+                store: window.ceresStore,
+                render: compiled.render,
+                staticRenderFns: compiled.staticRenderFns
             });
-            vueApp.$mount( rootElement.cloneNode(true) );
-
-            if ( vueApp.$el.id !== "vue-app")
-            {
-                rootElement.parentNode.removeChild(rootElement);
-                errorElement.style.display = "block";
-            }
-            else
-            {
-                document.body.replaceChild( vueApp.$el, rootElement );
-                errorElement.parentNode.removeChild(errorElement);
-            }
-
-            (function($) {
-                $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
-                {
-                    var compiled = Vue.compile(widgetElement[0].outerHTML );
-                    var component = new Vue({
-                        store: window.ceresStore,
-                        render: compiled.render,
-                        staticRenderFns: compiled.staticRenderFns
-                    });
-                    component.$mount( widgetElement[0] );
-                    $(component.$el).find('*').each(function(index, elem) {
-                        $(elem).click(function(event) {
-                            event.preventDefault();
-                        });
-                    });
+            component.$mount( widgetElement[0] );
+            $(component.$el).find('*').each(function(index, elem) {
+                $(elem).click(function(event) {
+                    event.preventDefault();
                 });
-            })(jQuery);
-        </script>
+            });
+        });
+    })(jQuery);
+</script>
 
-        {{ get_shop_builder_scripts() }}
-    </body>
+{{ get_shop_builder_scripts() }}
+</body>
 </html>

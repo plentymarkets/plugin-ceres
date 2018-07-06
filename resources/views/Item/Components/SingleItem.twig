@@ -45,6 +45,10 @@
                     </div>
                     <!-- /Variation -->
 
+                    <!-- Item Bundle -->
+                        <item-bundle :bundle-type="currentVariation.variation.bundleType" :bundle-components="currentVariation.bundleComponents"></item-bundle>
+                    <!-- /Item Bundle -->
+
                     <slot name="BeforePrice"></slot>
 
                     <div class="row" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
@@ -54,7 +58,7 @@
                     <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
                     {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
-                        <div class="crossprice" v-if="currentVariation.prices.rrp && currentVariation.prices.rrp.price.value > 0">
+                        <div class="crossprice" v-if="currentVariation.prices.rrp && currentVariation.prices.rrp.price.value > 0 && currentVariation.prices.rrp.price.value > currentVariation.prices.default.price.value">
                             <del class="text-muted small">
                                 ${ currentVariation.prices.rrp.price.formatted }
                             </del>
