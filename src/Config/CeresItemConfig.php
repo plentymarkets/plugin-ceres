@@ -26,7 +26,7 @@ class CeresItemConfig extends PluginConfig
         parent::__construct($configRepository, "Ceres");
 
         $this->displayName      = $this->getTextValue( "item.displayName", "itemName" );
-        $this->itemName         = $this->getIntegerValue( "item.item", 0 );
+        $this->itemName         = $this->getIntegerValue( "item.name", 0 );
         $this->itemData         = $this->getMultiSelectValue(
             "item.data",
             [

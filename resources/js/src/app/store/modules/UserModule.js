@@ -21,17 +21,26 @@ const getters =
 
             if (isDefined(state.userData))
             {
-                if (state.userData.firstName.length > 0 && state.userData.lastName.length > 0)
+                if (state.userData.firstName.length)
                 {
-                    username = state.userData.firstName + " " + state.userData.lastName;
+                    username = state.userData.firstName + " ";
                 }
-                else
+                if (state.userData.lastName.length)
                 {
-                    username = state.userData.options[0].value;
+                    username += state.userData.lastName;
+                }
+                if (!username.length)
+                {
+                    const emailOption = state.userData.options.find(option => option.typeId === 2 && option.subTypeId === 4);
+
+                    if (emailOption)
+                    {
+                        username = emailOption.value;
+                    }
                 }
             }
 
-            return username;
+            return username.trim();
         },
 
         isLoggedIn(state)
