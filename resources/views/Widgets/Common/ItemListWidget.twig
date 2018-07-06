@@ -36,8 +36,8 @@
         </div>
 
         <div class="row clearfix">
-            {{ Twig.if("itemList is not empty") }}
-                <container-item-list :items="{{ Twig.print("itemList[0].documents | json_encode") }}"></container-item-list>
+            {{ Twig.if("itemList.documents is not empty") }}
+                <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}"></container-item-list>
             {{ Twig.endif() }}
         </div>
     </div>
