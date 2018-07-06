@@ -14383,15 +14383,9 @@ Vue.component("basket-preview", {
     }),
 
     created: function created() {
-        var _this = this;
-
         this.$options.template = this.template;
 
-        _ApiService2.default.get("/rest/io/basket/").done(function (basket) {
-            _this.$store.commit("setBasket", basket);
-            _this.$store.dispatch("loadBasketData");
-        });
-
+        this.$store.dispatch("loadBasketData");
         this.$store.commit("setShowNetPrices", this.showNetPrices);
     },
 
@@ -14400,12 +14394,12 @@ Vue.component("basket-preview", {
      * Bind to basket and bind the basket items
      */
     mounted: function mounted() {
-        var _this2 = this;
+        var _this = this;
 
         this.$nextTick(function () {
             _ApiService2.default.listen("AfterBasketChanged", function (data) {
-                _this2.$store.commit("setBasket", data.basket);
-                _this2.$store.commit("setShowNetPrices", data.showNetPrices);
+                _this.$store.commit("setBasket", data.basket);
+                _this.$store.commit("setShowNetPrices", data.showNetPrices);
             });
         });
     }
@@ -23726,6 +23720,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
@@ -23822,22 +23818,38 @@ var actions = {
         var commit = _ref3.commit,
             state = _ref3.state;
 
-        if (state.data.itemQuantity) {
-            _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
-                commit("setBasketItems", basketItems);
-                commit("setIsBasketInitiallyLoaded");
+        var basketPromise = _ApiService2.default.get("/rest/io/basket/");
+        var basketItemsPromise = _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" });
 
-                setTimeout(function () {
-                    $(document.body).trigger("sticky_kit:recalc");
-                }, 0);
-            }).fail(function (error) {
-                if (error.data) {
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
-                }
-            });
-        } else {
+        Promise.all([basketPromise, basketItemsPromise]).then(function (_ref4) {
+            var _ref5 = _slicedToArray(_ref4, 2),
+                basket = _ref5[0],
+                basketItems = _ref5[1];
+
+            commit("setBasket", basket);
+            commit("setBasketItems", basketItems);
             commit("setIsBasketInitiallyLoaded");
-        }
+
+            setTimeout(function () {
+                $(document.body).trigger("sticky_kit:recalc");
+            }, 0);
+        }, function (_ref6) {
+            var _ref7 = _slicedToArray(_ref6, 2),
+                basketError = _ref7[0],
+                basketItemsError = _ref7[1];
+
+            NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
+        });
+
+        // .fail(error =>
+        // {
+        //     if (error.data)
+        //     {
+        //         NotificationService.error(
+        //             TranslationService.translate("Ceres::Template.basketOops")
+        //         ).closeAfter(10000);
+        //     }
+        // });
 
         _ApiService2.default.listen("AfterBasketChanged", function (data) {
             commit("setBasket", data.basket);
@@ -23845,10 +23857,10 @@ var actions = {
             commit("setBasketItems", data.basketItems);
         });
     },
-    addBasketNotification: function addBasketNotification(_ref4, _ref5) {
-        var commit = _ref4.commit;
-        var type = _ref5.type,
-            message = _ref5.message;
+    addBasketNotification: function addBasketNotification(_ref8, _ref9) {
+        var commit = _ref8.commit;
+        var type = _ref9.type,
+            message = _ref9.message;
 
         commit("addBasketNotification", { type: type, message: message });
 
@@ -23856,8 +23868,8 @@ var actions = {
             commit("clearOldestNotification");
         }, 5000);
     },
-    addBasketItem: function addBasketItem(_ref6, basketItem) {
-        var commit = _ref6.commit;
+    addBasketItem: function addBasketItem(_ref10, basketItem) {
+        var commit = _ref10.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -23873,10 +23885,10 @@ var actions = {
             });
         });
     },
-    updateBasketItemQuantity: function updateBasketItemQuantity(_ref7, _ref8) {
-        var commit = _ref7.commit;
-        var basketItem = _ref8.basketItem,
-            quantity = _ref8.quantity;
+    updateBasketItemQuantity: function updateBasketItemQuantity(_ref11, _ref12) {
+        var commit = _ref11.commit;
+        var basketItem = _ref12.basketItem,
+            quantity = _ref12.quantity;
 
         return new Promise(function (resolve, reject) {
             commit("updateBasketItemQuantity", { basketItem: basketItem, quantity: quantity });
@@ -23893,8 +23905,8 @@ var actions = {
             });
         });
     },
-    removeBasketItem: function removeBasketItem(_ref9, basketItemId) {
-        var commit = _ref9.commit;
+    removeBasketItem: function removeBasketItem(_ref13, basketItemId) {
+        var commit = _ref13.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -23913,9 +23925,9 @@ var actions = {
             });
         });
     },
-    redeemCouponCode: function redeemCouponCode(_ref10, couponCode) {
-        var state = _ref10.state,
-            commit = _ref10.commit;
+    redeemCouponCode: function redeemCouponCode(_ref14, couponCode) {
+        var state = _ref14.state,
+            commit = _ref14.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -23930,9 +23942,9 @@ var actions = {
             });
         });
     },
-    removeCouponCode: function removeCouponCode(_ref11, couponCode) {
-        var state = _ref11.state,
-            commit = _ref11.commit;
+    removeCouponCode: function removeCouponCode(_ref15, couponCode) {
+        var state = _ref15.state,
+            commit = _ref15.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -23947,8 +23959,8 @@ var actions = {
             });
         });
     },
-    refreshBasket: function refreshBasket(_ref12) {
-        var commit = _ref12.commit;
+    refreshBasket: function refreshBasket(_ref16) {
+        var commit = _ref16.commit;
 
         return new Promise(function (resolve, reject) {
             _ApiService2.default.get("/rest/io/basket/").done(function (basket) {

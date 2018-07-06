@@ -26,13 +26,7 @@ Vue.component("basket-preview", {
     {
         this.$options.template = this.template;
 
-        ApiService.get("/rest/io/basket/")
-            .done(basket =>
-            {
-                this.$store.commit("setBasket", basket);
-                this.$store.dispatch("loadBasketData");
-            });
-
+        this.$store.dispatch("loadBasketData");
         this.$store.commit("setShowNetPrices", this.showNetPrices);
     },
 
