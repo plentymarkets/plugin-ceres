@@ -20,16 +20,23 @@ Vue.component("last-seen-item-list", {
     created()
     {
         this.$options.template = this.template;
+        this.getLastSeenItems();
+    },
 
-        const params = {items: App.config.itemLists.lastSeenNumber};
+    methods:
+    {
+        getLastSeenItems()
+        {
+            const params = {items: App.config.itemLists.lastSeenNumber};
 
-        ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
-            .done(response =>
-            {
-                if (isDefined(response.data))
+            ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
+                .done(response =>
                 {
-                    this.items = response.data.documents;
-                }
-            });
+                    if (isDefined(response.data))
+                    {
+                        this.items = response.data.documents;
+                    }
+                });
+        }
     }
 });

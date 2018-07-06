@@ -15453,17 +15453,23 @@ Vue.component("last-seen-item-list", {
         };
     },
     created: function created() {
-        var _this = this;
-
         this.$options.template = this.template;
+        this.getLastSeenItems();
+    },
 
-        var params = { items: App.config.itemLists.lastSeenNumber };
 
-        ApiService.get("/rest/io/item/last_seen", params, { keepOriginalResponse: true }).done(function (response) {
-            if ((0, _utils.isDefined)(response.data)) {
-                _this.items = response.data.documents;
-            }
-        });
+    methods: {
+        getLastSeenItems: function getLastSeenItems() {
+            var _this = this;
+
+            var params = { items: App.config.itemLists.lastSeenNumber };
+
+            ApiService.get("/rest/io/item/last_seen", params, { keepOriginalResponse: true }).done(function (response) {
+                if ((0, _utils.isDefined)(response.data)) {
+                    _this.items = response.data.documents;
+                }
+            });
+        }
     }
 });
 

@@ -9,10 +9,10 @@
 {% if listType == "cross_selling" %}
     {% set itemList = item.CrossSellingItems.documents %}
 {% elseif listType == "tag_list" %}
-	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
+    {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
 {% endif %}
 
-{% if not isHome %}
+{% if not isHome or listType == "last_seen"  %}
     <hr>
 {% endif %}
 
@@ -22,9 +22,7 @@
     <div class="row">
         <last-seen-item-list></last-seen-item-list>
     </div>
-{% endif %}
-
-{% if itemList is not empty %}
+{% elseif itemList is not empty %}
     <div class="row">
         <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
     </div>
