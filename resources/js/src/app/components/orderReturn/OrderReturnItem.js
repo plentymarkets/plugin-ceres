@@ -1,5 +1,3 @@
-import TranslationService from "services/TranslationService";
-
 Vue.component("order-return-item", {
 
     props: [
@@ -48,13 +46,6 @@ Vue.component("order-return-item", {
             }
 
             this.$store.commit("updateOrderReturnItems", {quantity: parseInt(this.returnCount), orderItem: this.orderItem});
-        },
-
-        getBundlePrefix(itemName)
-        {
-            const prefixName = itemName.replace("[BUNDLE]", "");
-
-            return TranslationService.translate("Ceres::Template.itemBundleName", {itemName: prefixName});
         },
 
         selectItem()
