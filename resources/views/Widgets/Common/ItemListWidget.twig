@@ -36,7 +36,10 @@
         </div>
 
         <div class="row clearfix">
-            {{ Twig.if("itemList is not empty") }}
+            {{ Twig.if("listType == 'last_seen'") }}
+                {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
+                <last-seen-item-list></last-seen-item-list>
+            {{ Twig.elseif("itemList is not empty") }}
                 <container-item-list :items="{{ Twig.print("itemList[0].documents | json_encode") }}"></container-item-list>
             {{ Twig.endif() }}
         </div>
