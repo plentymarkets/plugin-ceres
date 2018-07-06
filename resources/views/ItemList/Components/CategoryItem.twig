@@ -51,7 +51,7 @@
                 </a>
                 <div class="thumb-meta">
                     <div class="prices">
-                        <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0" class="price-view-port">
+                        <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
                             <del class="crossprice">
                                 ${ itemData.prices.rrp.price.formatted }
                             </del>
