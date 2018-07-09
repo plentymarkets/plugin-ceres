@@ -14,9 +14,11 @@
 
 {% if listType == "last_seen" %}
     <div class="row">
-        {% if item and item.documents.length > 0 %}
-            {% set variationid = item.documents[0].data.variation.id %}
+        {% set variationId = 0 %}
+        {% if item and item.documents is not empty %}
+            {% set variationId = item.documents[0].data.variation.id %}
         {% endif %}
+        
         <last-seen-item-list :variation-id="{{ variationId }}">
             <div slot="heading">
                 {% if not isHome %}

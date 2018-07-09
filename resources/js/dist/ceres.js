@@ -15807,6 +15807,10 @@ Vue.component("last-seen-item-list", {
         template: {
             type: String,
             default: "#vue-last-seen-item-list"
+        },
+        variationId: {
+            type: Number,
+            default: null
         }
     },
 
@@ -15817,7 +15821,12 @@ Vue.component("last-seen-item-list", {
     },
     created: function created() {
         this.$options.template = this.template;
-        this.getLastSeenItems();
+
+        if (this.variationId) {
+            this.getLastSeenItems();
+        } else {
+            this.setLastSeenItem();
+        }
     },
 
 
@@ -15831,6 +15840,13 @@ Vue.component("last-seen-item-list", {
                 if ((0, _utils.isDefined)(response.data)) {
                     _this.items = response.data.documents;
                 }
+            });
+        },
+        setLastSeenItem: function setLastSeenItem() {
+            var _this2 = this;
+
+            ApiService.put("/rest/io/item/last_seen/" + this.variationId).done(function (response) {
+                _this2.items = response.data.documents;
             });
         }
     }
@@ -18643,8 +18659,6 @@ Vue.component("quantity-input", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var ApiService = require("services/ApiService");
-
 Vue.component("single-item", {
 
     props: ["template", "itemData", "variationListData", "attributeNameMap"],
@@ -18682,24 +18696,15 @@ Vue.component("single-item", {
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
 
-        this.addToLastSeen();
-
         this.$store.watch(function () {
             return _this.$store.getters.variationTotalPrice;
         }, function () {
             $(_this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
         });
-    },
-
-
-    methods: {
-        addToLastSeen: function addToLastSeen() {
-            ApiService.put("/rest/io/item/last_seen/" + this.currentVariation.variation.id);
-        }
     }
 });
 
-},{"services/ApiService":124}],53:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 "use strict";
 
 var _util = require("util");

@@ -1,5 +1,3 @@
-const ApiService = require("services/ApiService");
-
 Vue.component("single-item", {
 
     props: [

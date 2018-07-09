@@ -24,11 +24,11 @@ Vue.component("last-seen-item-list", {
 
         if (this.variationId)
         {
-            this.getLastSeenItems();
+            this.setLastSeenItem();
         }
         else
         {
-            this.setLastSeenItem();
+            this.getLastSeenItems();
         }
     },
 
@@ -53,7 +53,7 @@ Vue.component("last-seen-item-list", {
             ApiService.put("/rest/io/item/last_seen/" + this.variationId)
                 .done(response =>
                 {
-                    this.items = response.data.documents;
+                    this.items = response.documents;
                 });
         }
     }
