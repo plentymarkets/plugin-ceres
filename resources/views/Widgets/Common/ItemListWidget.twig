@@ -12,11 +12,15 @@
     {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"])) }}
 {% endif %}
 
-{{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [listType, itemListId, itemSort, maxItems]) ) }}
+{% set requestedListType = listType %}
+{% if listType == "last_seen" and isPreview %}
+    {% set requestedListType = "random" %}
+{% endif %}
+{{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems]) ) }}
 
 <div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <div class="widget-inner">
-        {% if listType == "last_seen" %}
+        {% if listType == "last_seen" and not isPreview %}
             <last-seen-item-list>
                 <div class="widget-caption m-b-1" slot="heading">
                     <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
@@ -33,6 +37,8 @@
                     {{ Twig.else() }}
                     <h2>{{ Twig.trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
                     {{ Twig.endif() }}
+                {% elseif listType == "last_seen" and isPreview %}
+                    <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
                 {% elseif listType == "tag_list" and itemListId is not empty %}
                     <h2>{{ Twig.print(Twig.call("services.tag.getTagName", [itemListId])) }}</h2>
                 {% else %}
@@ -41,7 +47,7 @@
             </div>
 
             <div class="row clearfix">
-                <container-item-list :items="{{ Twig.print("itemList[0].documents | json_encode") }}"></container-item-list>
+                <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}"></container-item-list>
             </div>
         {% endif %}
     </div>
