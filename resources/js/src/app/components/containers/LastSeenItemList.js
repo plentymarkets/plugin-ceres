@@ -22,7 +22,7 @@ Vue.component("last-seen-item-list", {
     {
         this.$options.template = this.template;
 
-        if (this.variationId)
+        if (this.variationId > 0)
         {
             this.setLastSeenItem();
         }
