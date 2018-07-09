@@ -7,7 +7,8 @@ Vue.component("last-seen-item-list", {
         template: {
             type: String,
             default: "#vue-last-seen-item-list"
-        }
+        },
+        variationId: Number
     },
 
     data()
@@ -20,7 +21,15 @@ Vue.component("last-seen-item-list", {
     created()
     {
         this.$options.template = this.template;
-        this.getLastSeenItems();
+
+        if (this.variationId)
+        {
+            this.getLastSeenItems();
+        }
+        else
+        {
+            this.setLastSeenItem();
+        }
     },
 
     methods:
@@ -36,6 +45,15 @@ Vue.component("last-seen-item-list", {
                     {
                         this.items = response.data.documents;
                     }
+                });
+        },
+
+        setLastSeenItem()
+        {
+            ApiService.put("/rest/io/item/last_seen/" + this.variationId)
+                .done(response =>
+                {
+                    this.items = response.data.documents;
                 });
         }
     }
