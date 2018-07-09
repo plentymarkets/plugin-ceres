@@ -12,17 +12,25 @@
     {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
 {% endif %}
 
-{% if not isHome and (itemList is not empty or listType == "last_seen") %}
-    <hr>
-{% endif %}
-
-{% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 1, listType: listType, isHome: isHome } %}
-
 {% if listType == "last_seen" %}
     <div class="row">
-        <last-seen-item-list></last-seen-item-list>
+        <last-seen-item-list>
+            <div slot="heading">
+                {% if not isHome %}
+                    <hr>
+                {% endif %}
+
+                {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 1, listType: listType, isHome: isHome } %} 
+            </div>
+        </last-seen-item-list>
     </div>
 {% elseif itemList is not empty %}
+    {% if not isHome %}
+        <hr>
+    {% endif %}
+
+    {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 1, listType: listType, isHome: isHome } %} 
+
     <div class="row">
         <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
     </div>

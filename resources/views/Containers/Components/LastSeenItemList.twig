@@ -1,3 +1,8 @@
 <script type="x/template" id="vue-last-seen-item-list">
-    <container-item-list v-if="items.length" :items="items"></container-item-list>
+    <div v-if="items.length">
+        <slot name="heading"></slot>
+        <div class="row">
+            <container-item-list :items="items"></container-item-list>
+        </div>
+    </div>
 </script>
