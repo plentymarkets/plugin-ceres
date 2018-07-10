@@ -1,6 +1,7 @@
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
 {% set image = item.data.images.all | first %}
 {% set itemUrl =  item.data | itemURL %}
@@ -25,7 +26,7 @@
                     <category-image-carousel
                         template="#vue-category-image-carousel"
                         :image-urls-data="{{ item.data.images | json_encode() }} | itemImages('urlMiddle')"
-                        alt-text="{{ item.data | itemName }}"
+                        alt-text="{{ ItemName.get(item.data | itemName, item.data.variation.bundleType) }}"
                         item-url="{{ itemUrl }}"
                         :show-dots="{{ ceresConfig.item.categoryShowDots | json_encode }}"
                         :show-nav="{{ ceresConfig.item.categoryShowNav | json_encode }}"
@@ -93,7 +94,7 @@
         <!-- ITEM DETAILS -->
         <div class="thumb-content">
             <a href="{{ itemUrl }}" class="thumb-title small">
-                {{ item.data | itemName }}
+                {{ ItemName.get(item.data | itemName, item.data.variation.bundleType) }}
             </a>
             <div class="thumb-meta">
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
