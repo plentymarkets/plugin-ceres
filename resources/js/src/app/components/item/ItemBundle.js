@@ -35,7 +35,10 @@ Vue.component("item-bundle", {
     {
         this.$nextTick(() =>
         {
-            this.bundleSetting = this.$refs.bundleSetting.innerText;
+            if (this.$refs.bundleSetting)
+            {
+                this.bundleSetting = this.$refs.bundleSetting.innerText;
+            }
         });
     },
 
