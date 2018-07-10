@@ -19,9 +19,10 @@
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
     "runOnBuild"        : [
-      "Ceres\\Migrations\\WebshopSettingsMigration_0_0_1",
-      "Ceres\\Migrations\\HomepageShopBuilderMigration_0_0_1",
-      "Ceres\\Migrations\\ConfigPropertiesMigration_0_0_1"
+        "Ceres\\Migrations\\WebshopSettingsMigration_0_0_1",
+        "Ceres\\Migrations\\HomepageShopBuilderMigration_0_0_1",
+        "Ceres\\Migrations\\ConfigPropertiesMigration_0_0_1",
+        "Ceres\\Migrations\\Migration_2018_07_06_001_RebuildShopBuilderHomepage"
     ],
     "dataProviders"     :
     [

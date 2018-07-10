@@ -5,20 +5,35 @@
 {% set itemListId = 3 %}
 {% set isHome = services.template.isHome() %}
 
-{% if listType == "last_seen" %}
-    {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.lastSeenItemsList, {'items': itemsPerPage}).documents %}
-{% elseif listType == "cross_selling" %}
+{% if listType == "cross_selling" %}
     {% set itemList = item.CrossSellingItems.documents %}
 {% elseif listType == "tag_list" %}
 	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
 {% endif %}
 
-{% if itemList is not empty %}
+{% if listType == "last_seen" %}
+    <div class="row">
+        {% set variationId = 0 %}
+        {% if item and item.documents is not empty %}
+            {% set variationId = item.documents[0].data.variation.id %}
+        {% endif %}
+        
+        <last-seen-item-list :variation-id="{{ variationId }}">
+            <div slot="heading">
+                {% if not isHome %}
+                    <hr>
+                {% endif %}
+
+                {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 2, listType: listType, isHome: isHome } %} 
+            </div>
+        </last-seen-item-list>
+    </div>
+{% elseif itemList is not empty %}
     {% if not isHome %}
         <hr>
     {% endif %}
 
-    {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 3, listType: listType, isHome: isHome } %}
+    {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 2, listType: listType, isHome: isHome } %} 
 
     <div class="row">
         <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
