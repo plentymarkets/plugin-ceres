@@ -1,5 +1,28 @@
 # Release Notes for Ceres
 
+## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- Item bundles can now be displayed in the online store.
+- A new widget, which displays free text and HTML, has been added to the Shop Builder.
+
+### Changed
+
+- User-specific data, such as the shopping cart, login information and wish list, is now loaded later.
+- The list of last seen items is now loaded later.
+
+### Fixed
+
+- Various faulty links have been fixed.
+- Due to an error, the item ID was not displayed in the shopping cart. This has been fixed.
+- Due to an error, the information below items displayed "incl. VAT" instead of "plus VAT". This has been fixed.
+- The name of the online store is now loaded correctly from the translations for the shopping cart, content categories, category pages, single item view and item search.
+- If a customer had not stored a first name, the header sometimes displayed a wrong message. This has been fixed.
+- Due to an error, items with a particular interval could not be edited properly in the shopping cart. This has been fixed.
+- The value for the item name is now loaded correctly from the Ceres plugin configuration file.
+- The missing colours for item availability values 6-10 have been added.
+
 ## v2.11.0 (2018-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.10.0...2.11.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### ToDo
