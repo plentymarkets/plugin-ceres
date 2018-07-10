@@ -55,7 +55,8 @@ trait ItemListContext
                 foreach( $resultVariationIds as $variationId )
                 {
                     $externalSearchFactories[$variationId] = VariationList::getSearchFactory([
-                        'variationIds' => [$variationId]
+                        'variationIds'      => [$variationId],
+                        'excludeFromCache'  => $scope === SearchOptions::SCOPE_SEARCH
                     ]);
                 }
 
