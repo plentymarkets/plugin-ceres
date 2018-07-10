@@ -17820,7 +17820,9 @@ Vue.component("item-bundle", {
         var _this = this;
 
         this.$nextTick(function () {
-            _this.bundleSetting = _this.$refs.bundleSetting.innerText;
+            if (_this.$refs.bundleSetting) {
+                _this.bundleSetting = _this.$refs.bundleSetting.innerText;
+            }
         });
     },
 
