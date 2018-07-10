@@ -8,6 +8,7 @@
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
 {{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
+{{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
 
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
@@ -68,11 +69,7 @@
     {% endif %}
     {% if ceresConfig.basket.previewType == "right" %}
         <div class="wrapper wrapper-right">
-            <basket-preview
-                    template="#vue-basket-preview"
-                    :basket-data="{{ basket | json_encode }}"
-                    :show-net-prices={{ showNetPrices | json_encode }}>
-            </basket-preview>
+            <basket-preview :show-net-prices={{ showNetPrices | json_encode }}></basket-preview>
         </div>
     {% endif %}
 
