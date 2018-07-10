@@ -24521,6 +24521,8 @@ var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
 
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var state = {
@@ -24558,9 +24560,12 @@ var actions = {
 
             commit("setShippingCountryId", shippingCountryId);
             _ApiService2.default.post("/rest/io/shipping/country", { shippingCountryId: shippingCountryId }).done(function (data) {
+                if ((0, _utils.isNullOrUndefined)(oldShippingCountryId) || oldShippingCountryId !== data) {
+                    window.location.reload();
+                }
                 resolve(data);
             }).fail(function (error) {
-                commit("removeWishListId", oldShippingCountryId);
+                commit("setShippingCountryId", oldShippingCountryId);
                 reject(error);
             });
         });
@@ -24573,7 +24578,7 @@ exports.default = {
     actions: actions
 };
 
-},{"services/ApiService":125}],141:[function(require,module,exports){
+},{"../../helper/utils":122,"services/ApiService":125}],141:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
