@@ -1,5 +1,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
+
 {{ component( "Ceres::Item.Components.ItemBundle" ) }}
 
 {% set basketTotalsCurrency = totals.currency %}
@@ -133,7 +135,7 @@
         <div class="confirmation-order-list">
 
             {% for item in orderData.order.orderItems %}
-                {% if item.itemVariationId > 0 %}
+                {% if item.itemVariationId > 0 and item.bundleType != "bundle_item" and item.references is empty %}
                     {% set currentVariationId = item.itemVariationId | trimNewlines %}
                     {% set priceNet = orderData.order.amounts[0].isNet %}
                     <article class="cmp cmp-order-item">
@@ -143,11 +145,20 @@
                         <div class="item-details small">
                             <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}" class="clearfix">
                                 <div class="item-name">
-                                    {{ item.orderItemName }}
+                                    {{ ItemName.get(item.orderItemName, item.bundleType) }}
                                 </div>
                             </a>
 
-                            <item-bundle bundle-type="{{ item.bundleType }}" :bundle-components="{{ item.bundleComponents | json_encode }}"></item-bundle>
+                            {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
+                                <div class="m-b-1 item-bundle">
+                                    {% for bundleComponent in item.bundleComponents %}
+                                        <div>
+                                            <span class="text-muted">{{ bundleComponent.quantity }} x</span>
+                                            <a href="{{ bundleComponent.data | itemURL }}"> {{ bundleComponent.data | itemName }} </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
 
                             <div class="row">
                                 <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
@@ -225,14 +236,14 @@
                         {% if grossNet|trim is not empty %}
                             {{ grossNet }}
                         {% else %}
-                                <dt{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                                    {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutNet") }})
-                                </dt><!--
-                                --><dd{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                                    {{ totals.totalNet | formatMonetary( basketTotalsCurrency ) }}
-                                </dd>
+                            <dt{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutNet") }})
+                            </dt><!--
+                            --><dd{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ totals.totalNet | formatMonetary( basketTotalsCurrency ) }}
+                            </dd>
 
-                            {% if totals.couponValue | trimNewlines != 0 %}
+                            {% if totals.couponType == 'promotional' and (totals.couponValue | trimNewlines) != 0 %}
                                 <dt{% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
                                     {{ trans("Ceres::Template.checkoutCoupon") }}
                                 </dt><!--
@@ -240,41 +251,7 @@
                                     {{ totals.couponValue | formatMonetary( basketTotalsCurrency ) }}
                                 </dd>
                             {% endif %}
-                            {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", orderData.order) %}
-                            {% if grossNet|trim is not empty %}
-                                {{ grossNet }}
-                            {% else %}
-                                {% if "basket.order_total_net" in totalsConfigData %}
-                                    <dt>
-                                        {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutNet") }})
-                                    </dt><!--
-                                 --><dd>
-                                    {{ totals.totalNet | formatMonetary( basketTotalsCurrency ) }}
-                                </dd>
-                                {% endif %}
-
-                                {% if totals.couponType == 'promotional' and (totals.couponValue | trimNewlines) != 0 %}
-                                    <dt>
-                                        <strong>{{ trans("Ceres::Template.checkoutCoupon") }}</strong>
-                                    </dt><!--
-                                  --><dd>
-                                    <strong>{{ totals.couponValue | formatMonetary( basketTotalsCurrency ) }}</strong>
-                                </dd>
-                                {% endif %}
-
-                                {% if "basket.vat" in totalsConfigData and not orderData.order.amounts[0].isNet %}
-                                    <div class="vatTotals">
-                                        {% for vat in totals.vats %}
-                                            <dt>
-                                                {{ trans("Ceres::Template.orderConfirmationVAT") }} {{ vat.rate }}%
-                                            </dt><!--
-                                         --><dd>
-                                            {{ vat.value | formatMonetary( basketTotalsCurrency ) }}
-                                        </dd>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            {% endif %}
+                            
                             {% if not orderData.order.amounts[0].isNet %}
                                 <div class="vatTotals">
                                     {% for vat in totals.vats %}

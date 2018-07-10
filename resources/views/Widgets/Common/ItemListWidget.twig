@@ -14,19 +14,26 @@
 
 {% set requestedListType = listType %}
 {% if listType == "last_seen" and isPreview %}
+    {# request random items when rendering preview of last seen items. #}
     {% set requestedListType = "random" %}
 {% endif %}
-{{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems]) ) }}
+
+{% if listType != "last_seen" or not isPreview %}
+    {# do not get item list for last seen items. Items will be loaded asynchronusly by vue component. #}
+    {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems]) ) }}
+{% endif %}
 
 <div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
+            {# render vue component for last seen items #}
             <last-seen-item-list>
                 <div class="widget-caption m-b-1" slot="heading">
                     <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
                 </div>
             </last-seen-item-list>
         {% else %}
+            {# render static item lists #}
             <div class="widget-caption m-b-1">
                 {% if listType == "category" %}
                     {{ Twig.if("category") }}
@@ -46,9 +53,11 @@
                 {% endif %}
             </div>
 
-            <div class="row clearfix">
+        <div class="row clearfix">
+            {{ Twig.if("itemList.documents is not empty") }}
                 <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}"></container-item-list>
-            </div>
+            {{ Twig.endif() }}
+        </div>
         {% endif %}
     </div>
 </div>
