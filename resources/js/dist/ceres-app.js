@@ -14152,7 +14152,7 @@ Vue.component("add-item-to-basket-overlay", {
     }
 });
 
-},{"services/ModalService":128}],11:[function(require,module,exports){
+},{"services/ModalService":129}],11:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -14346,7 +14346,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"exceptions/ExceptionMap":98,"services/NotificationService":129,"services/TranslationService":130,"services/UrlService":131}],12:[function(require,module,exports){
+},{"exceptions/ExceptionMap":98,"services/NotificationService":130,"services/TranslationService":131,"services/UrlService":132}],12:[function(require,module,exports){
 "use strict";
 
 var _ApiService = require("services/ApiService");
@@ -14405,7 +14405,7 @@ Vue.component("basket-preview", {
     }
 });
 
-},{"services/ApiService":124}],13:[function(require,module,exports){
+},{"services/ApiService":125}],13:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-totals", {
@@ -14556,7 +14556,7 @@ Vue.component("coupon", {
     }
 });
 
-},{"services/NotificationService":129,"services/TranslationService":130}],15:[function(require,module,exports){
+},{"services/NotificationService":130,"services/TranslationService":131}],15:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-list", {
@@ -14736,7 +14736,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"exceptions/ExceptionMap":98,"services/NotificationService":129,"services/TranslationService":130}],17:[function(require,module,exports){
+},{"exceptions/ExceptionMap":98,"services/NotificationService":130,"services/TranslationService":131}],17:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-breadcrumbs", {
@@ -14964,7 +14964,7 @@ Vue.component("checkout", {
     }
 });
 
-},{"services/ApiService":124,"services/NotificationService":129,"services/TranslationService":130}],20:[function(require,module,exports){
+},{"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131}],20:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-wish-input", {
@@ -15184,7 +15184,7 @@ Vue.component("place-order", {
     }
 });
 
-},{"services/ApiService":124,"services/NotificationService":129,"services/TranslationService":130,"services/UrlService":131}],23:[function(require,module,exports){
+},{"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131,"services/UrlService":132}],23:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -15296,7 +15296,7 @@ Vue.component("shipping-privacy-hint-check", {
     }
 });
 
-},{"services/NotificationService":129,"services/TranslationService":130}],24:[function(require,module,exports){
+},{"services/NotificationService":130,"services/TranslationService":131}],24:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-profile-select", {
@@ -15458,7 +15458,7 @@ Vue.component("last-seen-item-list", {
     created: function created() {
         this.$options.template = this.template;
 
-        if (this.variationId) {
+        if (this.variationId > 0) {
             this.setLastSeenItem();
         } else {
             this.getLastSeenItems();
@@ -15488,7 +15488,7 @@ Vue.component("last-seen-item-list", {
     }
 });
 
-},{"../../helper/utils":121,"services/ApiService":124}],27:[function(require,module,exports){
+},{"../../helper/utils":122,"services/ApiService":125}],27:[function(require,module,exports){
 "use strict";
 
 Vue.component("accept-privacy-policy-check", {
@@ -15954,7 +15954,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"../../../helper/utils":121,"services/AddressFieldService":123,"services/ApiService":124,"services/ModalService":128,"services/TranslationService":130,"services/ValidationService":132}],30:[function(require,module,exports){
+},{"../../../helper/utils":122,"services/AddressFieldService":124,"services/ApiService":125,"services/ModalService":129,"services/TranslationService":131,"services/ValidationService":133}],30:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -16162,7 +16162,7 @@ Vue.component("create-update-address", {
     }
 });
 
-},{"services/NotificationService":129,"services/ValidationService":132}],31:[function(require,module,exports){
+},{"services/NotificationService":130,"services/ValidationService":133}],31:[function(require,module,exports){
 "use strict";
 
 Vue.component("invoice-address-select", {
@@ -16426,7 +16426,7 @@ Vue.component("contact-form", {
     }
 });
 
-},{"services/ApiService":124,"services/NotificationService":129,"services/TranslationService":130,"services/ValidationService":132}],34:[function(require,module,exports){
+},{"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131,"services/ValidationService":133}],34:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-map", {
@@ -16590,7 +16590,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":126}],36:[function(require,module,exports){
+},{"services/CountryService":127}],36:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -16735,7 +16735,7 @@ Vue.component("registration", {
     }
 });
 
-},{"../../helper/utils":121,"services/ApiService":124,"services/ModalService":128,"services/NotificationService":129,"services/TranslationService":130,"services/UrlService":131,"services/ValidationService":132}],37:[function(require,module,exports){
+},{"../../helper/utils":122,"services/ApiService":125,"services/ModalService":129,"services/NotificationService":130,"services/TranslationService":131,"services/UrlService":132,"services/ValidationService":133}],37:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -16842,7 +16842,7 @@ Vue.component("reset-password-form", {
 
 });
 
-},{"services/ApiService":124,"services/NotificationService":129,"services/TranslationService":130,"services/UrlService":131,"services/ValidationService":132}],38:[function(require,module,exports){
+},{"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131,"services/UrlService":132,"services/ValidationService":133}],38:[function(require,module,exports){
 "use strict";
 
 var _AddressFieldService = require("services/AddressFieldService");
@@ -16951,7 +16951,7 @@ Vue.component("salutation-select", {
     }
 });
 
-},{"services/AddressFieldService":123}],39:[function(require,module,exports){
+},{"services/AddressFieldService":124}],39:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -17004,7 +17004,7 @@ Vue.component("guest-login", {
     }
 });
 
-},{"services/ApiService":124,"services/UrlService":131,"services/ValidationService":132}],40:[function(require,module,exports){
+},{"services/ApiService":125,"services/UrlService":132,"services/ValidationService":133}],40:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -17193,7 +17193,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":124,"services/ModalService":128,"services/NotificationService":129,"services/TranslationService":130,"services/UrlService":131,"services/ValidationService":132}],41:[function(require,module,exports){
+},{"services/ApiService":125,"services/ModalService":129,"services/NotificationService":130,"services/TranslationService":131,"services/UrlService":132,"services/ValidationService":133}],41:[function(require,module,exports){
 "use strict";
 
 Vue.component("login-view", {
@@ -17286,7 +17286,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"../../../helper/utils":121,"services/ApiService":124,"services/ValidationService":132}],43:[function(require,module,exports){
+},{"../../../helper/utils":122,"services/ApiService":125,"services/ValidationService":133}],43:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -17374,7 +17374,7 @@ Vue.component("add-to-wish-list", {
     }
 });
 
-},{"services/NotificationService":129,"services/TranslationService":130}],44:[function(require,module,exports){
+},{"services/NotificationService":130,"services/TranslationService":131}],44:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -17657,7 +17657,7 @@ Vue.component("item-image-carousel", {
     }
 });
 
-},{"../../helper/utils":121,"services/TranslationService":130}],47:[function(require,module,exports){
+},{"../../helper/utils":122,"services/TranslationService":131}],47:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-properties", {
@@ -18077,7 +18077,7 @@ Vue.component("order-property-list-item", {
     })
 });
 
-},{"services/ApiService":124,"services/NotificationService":129}],51:[function(require,module,exports){
+},{"services/ApiService":125,"services/NotificationService":130}],51:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18290,7 +18290,7 @@ Vue.component("quantity-input", {
     }
 });
 
-},{"../../helper/debounce":116,"../../helper/number":118,"../../helper/utils":121,"../../services/TranslationService":130}],52:[function(require,module,exports){
+},{"../../helper/debounce":117,"../../helper/number":119,"../../helper/utils":122,"../../services/TranslationService":131}],52:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18542,7 +18542,7 @@ Vue.component("variation-select", {
     }
 });
 
-},{"services/ApiService":124,"util":8}],54:[function(require,module,exports){
+},{"services/ApiService":125,"util":8}],54:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-image-carousel", {
@@ -18829,7 +18829,7 @@ Vue.component("item-list-sorting", {
     }
 });
 
-},{"services/UrlService":131}],59:[function(require,module,exports){
+},{"services/UrlService":132}],59:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -18961,7 +18961,7 @@ Vue.component("item-search", {
     }
 });
 
-},{"services/TranslationService":130,"services/UrlService":131}],60:[function(require,module,exports){
+},{"services/TranslationService":131,"services/UrlService":132}],60:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-store-special", {
@@ -19060,7 +19060,7 @@ Vue.component("items-per-page", {
     }
 });
 
-},{"services/UrlService":131}],62:[function(require,module,exports){
+},{"services/UrlService":132}],62:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -19134,7 +19134,7 @@ Vue.component("pagination", {
     }
 });
 
-},{"services/UrlService":131}],63:[function(require,module,exports){
+},{"services/UrlService":132}],63:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -19260,7 +19260,7 @@ Vue.component("item-filter-list", {
     }
 });
 
-},{"services/UrlService":131}],65:[function(require,module,exports){
+},{"services/UrlService":132}],65:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -19321,7 +19321,7 @@ Vue.component("item-filter-price", {
     }
 });
 
-},{"services/UrlService":131}],66:[function(require,module,exports){
+},{"services/UrlService":132}],66:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-filter-tag-list", {
@@ -19449,7 +19449,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/ApiService":124,"services/ModalService":128,"services/NotificationService":129,"services/TranslationService":130}],68:[function(require,module,exports){
+},{"services/ApiService":125,"services/ModalService":129,"services/NotificationService":130,"services/TranslationService":131}],68:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -19702,7 +19702,7 @@ Vue.component("bank-data-select", {
     }
 });
 
-},{"services/ApiService":124,"services/ModalService":128,"services/NotificationService":129,"services/TranslationService":130,"services/ValidationService":132}],69:[function(require,module,exports){
+},{"services/ApiService":125,"services/ModalService":129,"services/NotificationService":130,"services/TranslationService":131,"services/ValidationService":133}],69:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -19831,7 +19831,7 @@ Vue.component("change-payment-method", {
 
 });
 
-},{"services/ApiService":124,"services/ModalService":128,"services/TranslationService":130}],70:[function(require,module,exports){
+},{"services/ApiService":125,"services/ModalService":129,"services/TranslationService":131}],70:[function(require,module,exports){
 "use strict";
 
 Vue.component("history", {
@@ -19930,7 +19930,7 @@ Vue.component("order-history", {
     }
 });
 
-},{"services/ApiService":124,"services/TranslationService":130}],72:[function(require,module,exports){
+},{"services/ApiService":125,"services/TranslationService":131}],72:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -19988,7 +19988,7 @@ Vue.component("order-return-history", {
     }
 });
 
-},{"services/ApiService":124,"services/NotificationService":129,"services/TranslationService":130}],73:[function(require,module,exports){
+},{"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131}],73:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -20066,7 +20066,7 @@ Vue.component("order-return-history-item", {
     }
 });
 
-},{"services/TranslationService":130}],74:[function(require,module,exports){
+},{"services/TranslationService":131}],74:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -20394,7 +20394,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"../../helper/utils":121,"services/NotificationService":129}],78:[function(require,module,exports){
+},{"../../helper/utils":122,"services/NotificationService":130}],78:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -20499,7 +20499,7 @@ Vue.component("popper", {
     }
 });
 
-},{"../../helper/dom":117,"../../helper/utils":121,"popper.js":4,"services/ModalService":128}],79:[function(require,module,exports){
+},{"../../helper/dom":118,"../../helper/utils":122,"popper.js":4,"services/ModalService":129}],79:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -20566,7 +20566,7 @@ Vue.component("shop-country-settings", {
     }
 });
 
-},{"services/ApiService":124}],81:[function(require,module,exports){
+},{"services/ApiService":125}],81:[function(require,module,exports){
 "use strict";
 
 var WaitScreenService = require("services/WaitScreenService");
@@ -20607,7 +20607,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":133}],82:[function(require,module,exports){
+},{"services/WaitScreenService":134}],82:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -20667,7 +20667,7 @@ Vue.component("wish-list", {
     }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
 });
 
-},{"services/NotificationService":129,"services/TranslationService":130}],83:[function(require,module,exports){
+},{"services/NotificationService":130,"services/TranslationService":131}],83:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -20702,7 +20702,7 @@ Vue.component("wish-list-count", {
     }
 });
 
-},{"../../helper/utils":121,"services/ApiService":124}],84:[function(require,module,exports){
+},{"../../helper/utils":122,"services/ApiService":125}],84:[function(require,module,exports){
 "use strict";
 
 var _number = require("../../helper/number");
@@ -20718,7 +20718,7 @@ Vue.directive("basket-item-quantity", {
     }
 });
 
-},{"../../helper/number":118,"../../helper/utils":121}],85:[function(require,module,exports){
+},{"../../helper/number":119,"../../helper/utils":122}],85:[function(require,module,exports){
 "use strict";
 
 Vue.directive("basket-item-sum", {
@@ -20780,7 +20780,7 @@ Vue.directive("logout", {
     }
 });
 
-},{"services/ApiService":124,"services/UrlService":131}],88:[function(require,module,exports){
+},{"services/ApiService":125,"services/UrlService":132}],88:[function(require,module,exports){
 "use strict";
 
 Vue.directive("waiting-animation", {
@@ -20966,7 +20966,7 @@ Vue.directive("render-category", {
     }
 });
 
-},{"store/index.js":134}],95:[function(require,module,exports){
+},{"store/index.js":135}],95:[function(require,module,exports){
 "use strict";
 
 Vue.directive("scroll-to-top", {
@@ -21065,7 +21065,7 @@ Vue.directive("tooltip", {
     }
 });
 
-},{"../../helper/utils":121}],98:[function(require,module,exports){
+},{"../../helper/utils":122}],98:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21104,7 +21104,7 @@ Vue.filter("currency", function (price) {
     return formatter.format(price, App.activeCurrency);
 });
 
-},{"../helper/MonetaryFormatter":115}],102:[function(require,module,exports){
+},{"../helper/MonetaryFormatter":116}],102:[function(require,module,exports){
 "use strict";
 
 // for docs see https://github.com/brockpetrie/vue-moment
@@ -21279,6 +21279,31 @@ Vue.filter("graduatedPrice", function (item, quantity) {
 },{}],106:[function(require,module,exports){
 "use strict";
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.filter("itemBundleName", function (item) {
+    var prefixName = void 0;
+
+    if (item.bundleType === "bundle") {
+        prefixName = item.orderItemName.replace("[BUNDLE]", "").trim();
+
+        prefixName = _TranslationService2.default.translate("Ceres::Template.itemBundleName", { itemName: prefixName });
+    } else if (item.bundleType == "bundle_item") {
+        prefixName = item.orderItemName.replace("[-]", "").trim();
+    } else {
+        prefixName = item.orderItemName;
+    }
+
+    return prefixName;
+});
+
+},{"services/TranslationService":131}],107:[function(require,module,exports){
+"use strict";
+
 Vue.filter("itemImage", function (itemImages, highestPosition) {
     if (itemImages.length === 0) {
         return "";
@@ -21299,7 +21324,7 @@ Vue.filter("itemImage", function (itemImages, highestPosition) {
     }).url;
 });
 
-},{}],107:[function(require,module,exports){
+},{}],108:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemImages", function (images, accessor) {
@@ -21324,7 +21349,7 @@ Vue.filter("itemImages", function (images, accessor) {
     return imageUrls;
 });
 
-},{}],108:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -21369,7 +21394,7 @@ Vue.filter("itemName", function (_ref) {
     return itemName;
 });
 
-},{"services/TranslationService":130}],109:[function(require,module,exports){
+},{"services/TranslationService":131}],110:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -21414,7 +21439,7 @@ Vue.filter("itemURL", function (item) {
     return link + suffix + trailingSlash;
 });
 
-},{"../helper/utils":121}],110:[function(require,module,exports){
+},{"../helper/utils":122}],111:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -21435,7 +21460,7 @@ Vue.filter("numberFormat", function (number, decimals, separator) {
     return number.toFixed(decimals).replace(".", separator);
 });
 
-},{"../helper/number":118,"../helper/utils":121}],111:[function(require,module,exports){
+},{"../helper/number":119,"../helper/utils":122}],112:[function(require,module,exports){
 "use strict";
 
 Vue.filter("propertySurcharge", function (properties, propertyId) {
@@ -21454,7 +21479,7 @@ Vue.filter("propertySurcharge", function (properties, propertyId) {
     return 0;
 });
 
-},{}],112:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 "use strict";
 
 Vue.filter("propertySurchargeSum", function (item) {
@@ -21494,7 +21519,7 @@ Vue.filter("propertySurchargeSum", function (item) {
     return sum;
 });
 
-},{}],113:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -21507,7 +21532,7 @@ Vue.filter("translate", function (value, params) {
     return _TranslationService2.default.translate(value, params);
 });
 
-},{"services/TranslationService":130}],114:[function(require,module,exports){
+},{"services/TranslationService":131}],115:[function(require,module,exports){
 "use strict";
 
 Vue.filter("truncate", function (string, value) {
@@ -21517,7 +21542,7 @@ Vue.filter("truncate", function (string, value) {
     return string;
 });
 
-},{}],115:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21684,7 +21709,7 @@ var MonetaryFormatter = function () {
 
 exports.default = MonetaryFormatter;
 
-},{"./utils":121}],116:[function(require,module,exports){
+},{"./utils":122}],117:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21722,7 +21747,7 @@ function debounce(callback, timeout) {
     return callback;
 }
 
-},{"./utils":121}],117:[function(require,module,exports){
+},{"./utils":122}],118:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21769,7 +21794,7 @@ function is(element, selector) {
     return element.matches(selector);
 }
 
-},{}],118:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21846,7 +21871,7 @@ function formatFloat(value, decimals, round) {
     return parseFloat(value.toFixed(decimals));
 }
 
-},{"./utils":121}],119:[function(require,module,exports){
+},{"./utils":122}],120:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21887,7 +21912,7 @@ function capitalize(input) {
     return ("" + input).charAt(0).toUpperCase() + ("" + input).substr(1);
 }
 
-},{"./utils":121}],120:[function(require,module,exports){
+},{"./utils":122}],121:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21917,7 +21942,7 @@ function normalizeUrl(url) {
     return targetUrl;
 }
 
-},{"./utils":121}],121:[function(require,module,exports){
+},{"./utils":122}],122:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21991,7 +22016,7 @@ function defaultValue(input, defaultValue) {
     return input;
 }
 
-},{}],122:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 "use strict";
 
 var browserDetect = require("detect-browser");
@@ -22149,7 +22174,7 @@ var init = function ($, window, document) {
     window.CeresMain = new CeresMain();
 }(jQuery, window, document);
 
-},{"detect-browser":1}],123:[function(require,module,exports){
+},{"detect-browser":1}],124:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22216,7 +22241,7 @@ function isAddressFieldEnabled(countryId, addressType, field) {
 
 exports.default = { isAddressFieldEnabled: isAddressFieldEnabled };
 
-},{}],124:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 "use strict";
 
 var _url = require("../helper/url");
@@ -22368,7 +22393,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{"../helper/url":120,"services/NotificationService":129,"services/WaitScreenService":133}],125:[function(require,module,exports){
+},{"../helper/url":121,"services/NotificationService":130,"services/WaitScreenService":134}],126:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22497,7 +22522,7 @@ exports.default = {
     updateCategoryHtml: updateCategoryHtml
 };
 
-},{"services/ApiService":124,"services/UrlService":131,"store/index.js":134}],126:[function(require,module,exports){
+},{"services/ApiService":125,"services/UrlService":132,"store/index.js":135}],127:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -22554,7 +22579,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],127:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22594,7 +22619,7 @@ exports.default = {
     updateItemListUrlParams: updateItemListUrlParams
 };
 
-},{"services/UrlService":131}],128:[function(require,module,exports){
+},{"services/UrlService":132}],129:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -22714,7 +22739,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],129:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22892,7 +22917,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{"exceptions/ExceptionMap":98,"services/TranslationService":130}],130:[function(require,module,exports){
+},{"exceptions/ExceptionMap":98,"services/TranslationService":131}],131:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23011,7 +23036,7 @@ var TranslationService = function ($) {
 
 exports.default = TranslationService;
 
-},{"../helper/strings":119,"../helper/utils":121}],131:[function(require,module,exports){
+},{"../helper/strings":120,"../helper/utils":122}],132:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23096,7 +23121,7 @@ function switchUrl(url, title) {
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, switchUrl: switchUrl };
 
-},{"../helper/url":120,"../helper/utils":121,"jquery":2}],132:[function(require,module,exports){
+},{"../helper/url":121,"../helper/utils":122,"jquery":2}],133:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23331,7 +23356,7 @@ function _eval(input) {
 
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
-},{"jquery":2}],133:[function(require,module,exports){
+},{"jquery":2}],134:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -23374,7 +23399,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],134:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23445,7 +23470,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":135,"store/modules/BasketModule":136,"store/modules/CheckoutModule":137,"store/modules/ItemListModule":138,"store/modules/LocalizationModule":139,"store/modules/NavigationModule":140,"store/modules/OrderReturnModule":141,"store/modules/SingleItemModule":142,"store/modules/UserModule":143,"store/modules/WishListModule":144,"vue-script2":9}],135:[function(require,module,exports){
+},{"store/modules/AddressModule":136,"store/modules/BasketModule":137,"store/modules/CheckoutModule":138,"store/modules/ItemListModule":139,"store/modules/LocalizationModule":140,"store/modules/NavigationModule":141,"store/modules/OrderReturnModule":142,"store/modules/SingleItemModule":143,"store/modules/UserModule":144,"store/modules/WishListModule":145,"vue-script2":9}],136:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23774,7 +23799,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":124}],136:[function(require,module,exports){
+},{"services/ApiService":125}],137:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24030,7 +24055,7 @@ exports.default = {
     actions: actions
 };
 
-},{"../../services/UrlService":131,"services/ApiService":124,"services/NotificationService":129,"services/TranslationService":130}],137:[function(require,module,exports){
+},{"../../services/UrlService":132,"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131}],138:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24201,7 +24226,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":124}],138:[function(require,module,exports){
+},{"services/ApiService":125}],139:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24485,7 +24510,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":124,"services/ItemListUrlService":127,"services/TranslationService":130}],139:[function(require,module,exports){
+},{"services/ApiService":125,"services/ItemListUrlService":128,"services/TranslationService":131}],140:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24548,7 +24573,7 @@ exports.default = {
     actions: actions
 };
 
-},{"services/ApiService":124}],140:[function(require,module,exports){
+},{"services/ApiService":125}],141:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24737,7 +24762,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/CategoryService":125}],141:[function(require,module,exports){
+},{"services/CategoryService":126}],142:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24835,7 +24860,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":124}],142:[function(require,module,exports){
+},{"services/ApiService":125}],143:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25104,7 +25129,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],143:[function(require,module,exports){
+},{}],144:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25158,7 +25183,7 @@ exports.default = {
     getters: getters
 };
 
-},{"../../helper/utils":121}],144:[function(require,module,exports){
+},{"../../helper/utils":122}],145:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25270,7 +25295,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":124}]},{},[122,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,39,40,41,42,36,37,38,43,44,45,46,47,48,49,50,51,52,53,54,55,63,64,65,66,56,57,58,59,61,60,62,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,116,117,115,118,119,120,121,134,135,136,137,138,139,140,141,142,143,144])
+},{"services/ApiService":125}]},{},[123,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,39,40,41,42,36,37,38,43,44,45,46,47,48,49,50,51,52,53,54,55,63,64,65,66,56,57,58,59,61,60,62,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,117,118,116,119,120,121,122,135,136,137,138,139,140,141,142,143,144,145])
 
 
 //# sourceMappingURL=ceres-app.js.map
