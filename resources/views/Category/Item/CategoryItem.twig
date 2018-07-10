@@ -127,7 +127,7 @@
         <link rel="next" href="{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage+1 }) | url_encode }}" />
     {% endif %}
 
-    <title>{% if category.details[0].metaTitle %}{{ category.details[0].metaTitle }}{% else %}{{ category.details[0].name }}{% endif %} | {{ ceresConfig.header.companyName }}</title>
+    <title>{% if category.details[0].metaTitle %}{{ category.details[0].metaTitle }}{% else %}{{ category.details[0].name }}{% endif %} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
 
     <meta name="description" content="{{ category.details[0].metaDescription }}">
     <meta name="keywords" content="{{ category.details[0].metaKeywords }}">

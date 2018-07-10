@@ -46,9 +46,29 @@ const actions =
                 }
                 else
                 {
-                    const parentUrl = parent ? parent.url : "";
+                    let parentUrl = "";
+
+                    if (parent)
+                    {
+                        parentUrl = parent.url;
+
+                        if (App.urlTrailingSlash)
+                        {
+                            parentUrl = parentUrl.substring(0, parentUrl.length - 1);
+                        }
+                    }
+                    else if (App.defaultLanguage != category.details[0].lang)
+                    {
+                        parentUrl = "/" + category.details[0].lang;
+                    }
 
                     category.url = parentUrl + "/" + category.details[0].nameUrl;
+
+                    if (App.urlTrailingSlash)
+                    {
+                        category.url += "/";
+                    }
+
                     showChildren = true;
 
                     if (category.children)

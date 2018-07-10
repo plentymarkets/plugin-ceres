@@ -113,7 +113,12 @@
 .availability_2 {background-color: $availability_1;}
 .availability_3,
 .availability_4 {background-color: $availability_3;}
-.availability_5 {background-color: $availability_5;}
+.availability_5,
+.availability_6,
+.availability_7,
+.availability_8 {background-color: $availability_5;}
+.availability_9,
+.availability_10 {background-color: $availability_9}
 
 
 .rating{
@@ -138,20 +143,6 @@
     border:none;
     border-radius:none;
     padding: .75rem .45rem .25rem 0;
-}
-
-.single-rightside {
-    .shariff {
-        .orientation-horizontal {
-            li {
-                .fa {
-                    line-height: 30px;
-                    text-align: center;
-                    margin-left: 0.5rem;
-                }
-            }
-        }
-    }
 }
 
 @include media-breakpoint-only(md) {

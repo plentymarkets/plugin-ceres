@@ -1,4 +1,5 @@
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
+{{ component( "Ceres::Item.Components.ItemBundle" ) }}
 
 {% set itemsData = config("Ceres.basket.item_data")|split(', ') %}
 {% set showItemVariation = config("Ceres.basket.variations") %}
@@ -24,6 +25,9 @@
                             <div class="item-base-price">
                                 ${ basketItem.variation.data.prices.default.unitPrice.value | currency }
                             </div>
+
+                            <item-bundle :bundle-type="basketItem.variation.data.variation.bundleType" 
+                                         :bundle-components="basketItem.variation.data.bundleComponents"></item-bundle>
     
                             <div class="item-small-prices text-muted" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
                                 <div>${ basketItem.variation.data.prices.default.basePrice }</div>
@@ -105,7 +109,7 @@
                         {% if "basket.item.item_id" in basketDetailsData %}
                             <div class="m-t-1">
                                 <strong>{{ trans("Ceres::Template.basketItemId") }}:</strong>
-                                <span>${ basketItem.basketItemId }</span>
+                                <span>${ basketItem.itemId }</span>
                             </div>
                         {% endif %}
 

@@ -1,4 +1,5 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
 {% set overrideHomepageContainer = "" %}
 {% for content in container("Ceres::Homepage") if content.plugin != "Plenty" %}
@@ -95,12 +96,12 @@
                                             <a class="hero-category"
                                                {% if slider1.item.texts is not empty %}href="{{ slider1.item | itemURL }}"{% endif %}>
                                                 <img src="{{ slider1.url }}"
-                                                     alt="{{ slider1.item | itemName }}"
+                                                     alt="{{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}"
                                                      class="img-fluid">
                                                 {% if slider1.item.texts is not empty %}
                                                     <div class="carousel-caption">
                                                         <h2><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ slider1.item | itemName }}
+                                                               aria-hidden="true"></i> {{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}
                                                         </h2>
                                                     </div>
                                                 {% endif %}
@@ -113,12 +114,12 @@
                                             <a class="hero-category"
                                                {% if slider2.item.texts is not empty %}href="{{ slider2.item | itemURL }}"{% endif %}>
                                                 <img src="{{ slider2.url }}"
-                                                     alt="{{ slider2.item | itemName }}"
+                                                     alt="{{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}"
                                                      class="img-fluid">
                                                 {% if slider2.item.texts is not empty %}
                                                     <div class="carousel-caption">
                                                         <h2><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ slider2.item | itemName }}
+                                                               aria-hidden="true"></i> {{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}
                                                         </h2>
                                                     </div>
                                                 {% endif %}
@@ -131,12 +132,12 @@
                                             <a class="hero-category"
                                                {% if slider3.item.texts is not empty %}href="{{ slider3.item | itemURL }}"{% endif %}>
                                                 <img src="{{ slider3.url }}"
-                                                     alt="{{ slider3.item | itemName }}"
+                                                     alt="{{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}"
                                                      class="img-fluid">
                                                 {% if slider3.item.texts is not empty %}
                                                     <div class="carousel-caption">
                                                         <h2><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ slider3.item | itemName }}
+                                                               aria-hidden="true"></i> {{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}
                                                         </h2>
                                                     </div>
                                                 {% endif %}
@@ -183,12 +184,12 @@
                                 <a class="hero-category"
                                    {% if heroExtra1.item.texts is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
                                     <img src="{{ heroExtra1.url }}"
-                                         alt="{{ heroExtra1.item | itemName }}">
+                                         alt="{{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}">
                                     {% if heroExtra1.item.texts is not empty %}
                                         <div class="hero-category-inner">
                                             <h2 class="hero-category-headline">
                                                 <i class="fa fa-angle-double-right"
-                                                   aria-hidden="true"></i> {{ heroExtra1.item | itemName }}
+                                                   aria-hidden="true"></i> {{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}
                                             </h2>
                                         </div>
                                     {% endif %}
@@ -203,12 +204,12 @@
                                 <a class="hero-category"
                                    {% if heroExtra2.item.texts is not empty %}href="{{ heroExtra2.item | itemURL }}"{% endif %}>
                                     <img src="{{ heroExtra2.url }}"
-                                         alt="{{ heroExtra2.item | itemName }}">
+                                         alt="{{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}">
                                     {% if heroExtra2.item.texts is not empty %}
                                         <div class="hero-category-inner">
                                             <h2 class="hero-category-headline">
                                                 <i class="fa fa-angle-double-right"
-                                                   aria-hidden="true"></i> {{ heroExtra2.item | itemName }}
+                                                   aria-hidden="true"></i> {{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}
                                             </h2>
                                         </div>
                                     {% endif %}
