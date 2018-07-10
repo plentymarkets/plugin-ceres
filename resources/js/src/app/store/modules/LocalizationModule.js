@@ -1,4 +1,5 @@
 import ApiService from "services/ApiService";
+import {isNullOrUndefined}from "../../helper/utils";
 
 const state =
     {
@@ -42,11 +43,15 @@ const actions =
                 ApiService.post("/rest/io/shipping/country", {shippingCountryId})
                     .done(data =>
                     {
+                        if (isNullOrUndefined(oldShippingCountryId) || oldShippingCountryId !== data)
+                        {
+                            window.location.reload();
+                        }
                         resolve(data);
                     })
                     .fail(error =>
                     {
-                        commit("removeWishListId", oldShippingCountryId);
+                        commit("setShippingCountryId", oldShippingCountryId);
                         reject(error);
                     });
             });
