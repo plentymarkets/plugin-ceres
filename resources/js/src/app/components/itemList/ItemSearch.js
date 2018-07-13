@@ -1,13 +1,14 @@
 import UrlService from "services/UrlService";
 import TranslationService from "services/TranslationService";
+import {isDefined}from "../../helper/utils";
 
 Vue.component("item-search", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template"
-    ],
+    props: {
+        template: String
+    },
 
     data()
     {
@@ -34,8 +35,11 @@ Vue.component("item-search", {
 
             const urlParams = UrlService.getUrlParams(document.location.search);
 
-            this.$store.commit("setItemListSearchString", urlParams.query);
-            this.currentSearchString = urlParams.query;
+            if (isDefined(urlParams.query))
+            {
+                this.$store.commit("setItemListSearchString", urlParams.query);
+                this.currentSearchString = urlParams.query;
+            }
         });
     },
 
@@ -67,6 +71,13 @@ Vue.component("item-search", {
                 {
                 this.preventSearch = false;
             }
+        },
+
+        clearInput()
+        {
+            this.$refs.searchInput.value = "";
+            this.currentSearchString = "";
+            this.$refs.searchInput.focus();
         },
 
         openItem(suggestion)
