@@ -14,16 +14,9 @@ Vue.component("item-bundle", {
     data()
     {
         return {
-            bundleSetting: null
+            bundleSetting: null,
+            showItemBundleItems: false
         };
-    },
-
-    computed:
-    {
-        showItemBundleItems()
-		{
-            return this.bundleSetting !== "1" && this.bundleType === "bundle";
-        }
     },
 
     created()
@@ -36,6 +29,8 @@ Vue.component("item-bundle", {
         this.$nextTick(() =>
         {
             this.bundleSetting = this.$refs.bundleSetting.innerText;
+
+            this.showItemBundleItems = (this.bundleSetting !== "1" && this.bundleType === "bundle");
         });
     },
 
