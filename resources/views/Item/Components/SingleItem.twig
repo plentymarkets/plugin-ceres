@@ -73,7 +73,7 @@
                         <span :content="currentVariation.prices.default.currency"></span>
                     </span>
 
-                    <div class="base-price text-muted m-y-1" v-if="currentVariation.unit && !(currentVariation.unit.unitOfMeasurement === 'C62' && currentVariation.unit.content === 1)">
+                    <div class="base-price text-muted m-y-1" v-if="currentVariation.unit">
                         <div>
                             {{ trans("Ceres::Template.singleItemContent") }}
                             <span>${ currentVariation.unit.content | numberFormat }</span>
