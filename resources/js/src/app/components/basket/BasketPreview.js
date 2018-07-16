@@ -5,8 +5,10 @@ Vue.component("basket-preview", {
     delimiters: ["${", "}"],
 
     props: {
-        template: String,
-        basketData: Object,
+        template: {
+            type: String,
+            default: "#vue-basket-preview"
+        },
         showNetPrices:
         {
             type: Boolean,
@@ -23,9 +25,9 @@ Vue.component("basket-preview", {
     created()
     {
         this.$options.template = this.template;
-        this.$store.commit("setBasket", this.basketData);
-        this.$store.commit("setShowNetPrices", this.showNetPrices);
+
         this.$store.dispatch("loadBasketData");
+        this.$store.commit("setShowNetPrices", this.showNetPrices);
     },
 
     /**

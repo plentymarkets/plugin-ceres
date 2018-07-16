@@ -70,7 +70,9 @@
                 </div>
                 <add-to-basket :item="itemData" :item-url="itemData | itemURL"></add-to-basket>
                 <span class="vat small text-muted">
-                            * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                    * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
+                    <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
+                    {{ trans("Ceres::Template.itemExclusive") }}
                     <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                 </span>
             </div>

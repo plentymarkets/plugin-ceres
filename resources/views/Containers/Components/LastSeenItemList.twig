@@ -1,0 +1,8 @@
+<script type="x/template" id="vue-last-seen-item-list">
+    <div v-if="items.length">
+        <slot name="heading"></slot>
+        <div class="row clearfix">
+            <container-item-list :items="items"></container-item-list>
+        </div>
+    </div>
+</script>

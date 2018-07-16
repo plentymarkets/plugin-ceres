@@ -312,7 +312,7 @@ html {
 html {
   font-size: 14px;
   -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -5601,7 +5601,7 @@ button.close {
   margin: 1px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   border: 1px solid #fff;
   border-radius: 10px;
 }
@@ -12711,7 +12711,7 @@ button:focus {
 }
 
 .btn-labeled.btn-link .btn-label {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   padding: 0.25rem 0;
 }
 
@@ -16924,7 +16924,7 @@ body.menu-is-visible {
   bottom: -2px;
   left: -1px;
   background-color: #fff;
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 transparent;
   border: 1px solid transparent;
   transform-origin: top right;
   transform: scaleX(1) scaleY(1);
@@ -19718,7 +19718,7 @@ body.menu-is-visible {
 .gradient-hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #DCDBD7, rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to right, transparent, #DCDBD7, transparent);
 }
 
 .show-more-returns {

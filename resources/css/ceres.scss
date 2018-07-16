@@ -74,7 +74,6 @@ $grid-gutter-width: 30px !default;
 //
 //## Gray and brand colors for use across Bootstrap.
 
-
 $gray-darker:           #282d2f !default;
 $gray-dark:             #4D4F4D !default;
 $gray:                  #7a7f7f !default;
@@ -115,6 +114,11 @@ $availability_2:        $brand-success !default;
 $availability_3:        $brand-warning !default;
 $availability_4:        $brand-warning !default;
 $availability_5:        $brand-danger !default;
+$availability_6:        $brand-danger !default;
+$availability_7:        $brand-danger !default;
+$availability_8:        $brand-danger !default;
+$availability_9:        $gray-dark !default;
+$availability_10:       $gray-dark !default;
 
 
 //== Scaffolding
@@ -14303,6 +14307,12 @@ nav.navbar.megamenu {
 		padding-left: .5rem;
 	}
 
+	& .item-bundle {
+		width: 300px;
+		font-weight: 700;
+		font-size: 80%;
+	}
+
 	.item-name{
 	    display: -webkit-box;
         text-overflow: ellipsis;
@@ -18024,7 +18034,12 @@ nav.navbar.megamenu {
 .availability_2 {background-color: $availability_1;}
 .availability_3,
 .availability_4 {background-color: $availability_3;}
-.availability_5 {background-color: $availability_5;}
+.availability_5,
+.availability_6,
+.availability_7,
+.availability_8 {background-color: $availability_5;}
+.availability_9,
+.availability_10 {background-color: $availability_9}
 
 
 .rating{

@@ -28,9 +28,11 @@ Vue.component("item-bundle", {
     {
         this.$nextTick(() =>
         {
-            this.bundleSetting = this.$refs.bundleSetting.innerText;
-
-            this.showItemBundleItems = (this.bundleSetting !== "1" && this.bundleType === "bundle");
+            if (this.$refs.bundleSetting)
+            {
+                this.bundleSetting = this.$refs.bundleSetting.innerText;
+                this.showItemBundleItems = (this.bundleSetting !== "1" && this.bundleType === "bundle");
+            }
         });
     },
 
