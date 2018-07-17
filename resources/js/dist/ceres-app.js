@@ -15436,10 +15436,6 @@ Vue.component("container-item-list", {
 },{}],26:[function(require,module,exports){
 "use strict";
 
-var _utils = require("../../helper/utils");
-
-var ApiService = require("services/ApiService");
-
 Vue.component("last-seen-item-list", {
 
     props: {
@@ -15450,45 +15446,24 @@ Vue.component("last-seen-item-list", {
         variationId: Number
     },
 
-    data: function data() {
-        return {
-            items: []
-        };
-    },
+    computed: Vuex.mapState({
+        items: function items(state) {
+            return state.lastSeen.lastSeenItems;
+        }
+    }),
+
     created: function created() {
         this.$options.template = this.template;
 
         if (this.variationId > 0) {
-            this.setLastSeenItem();
+            this.$store.dispatch("addLastSeenItem", this.variationId);
         } else {
-            this.getLastSeenItems();
-        }
-    },
-
-
-    methods: {
-        getLastSeenItems: function getLastSeenItems() {
-            var _this = this;
-
-            var params = { items: App.config.itemLists.lastSeenNumber };
-
-            ApiService.get("/rest/io/item/last_seen", params, { keepOriginalResponse: true }).done(function (response) {
-                if ((0, _utils.isDefined)(response.data)) {
-                    _this.items = response.data.documents;
-                }
-            });
-        },
-        setLastSeenItem: function setLastSeenItem() {
-            var _this2 = this;
-
-            ApiService.put("/rest/io/item/last_seen/" + this.variationId).done(function (response) {
-                _this2.items = response.documents;
-            });
+            this.$store.dispatch("getLastSeenItems");
         }
     }
 });
 
-},{"../../helper/utils":122,"services/ApiService":125}],27:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 "use strict";
 
 Vue.component("accept-privacy-policy-check", {
@@ -18333,6 +18308,7 @@ Vue.component("single-item", {
         this.$options.template = this.template;
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
+        this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.watch(function () {
             return _this.$store.getters.variationTotalPrice;
@@ -23448,6 +23424,10 @@ var _OrderReturnModule = require("store/modules/OrderReturnModule");
 
 var _OrderReturnModule2 = _interopRequireDefault(_OrderReturnModule);
 
+var _LastSeenModule = require("store/modules/LastSeenModule");
+
+var _LastSeenModule2 = _interopRequireDefault(_LastSeenModule);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.use(require("vue-script2"));
@@ -23464,7 +23444,8 @@ var store = new Vuex.Store({
         itemList: _ItemListModule2.default,
         item: _SingleItemModule2.default,
         basket: _BasketModule2.default,
-        orderReturn: _OrderReturnModule2.default
+        orderReturn: _OrderReturnModule2.default,
+        lastSeen: _LastSeenModule2.default
     }
 });
 
@@ -23472,7 +23453,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":136,"store/modules/BasketModule":137,"store/modules/CheckoutModule":138,"store/modules/ItemListModule":139,"store/modules/LocalizationModule":140,"store/modules/NavigationModule":141,"store/modules/OrderReturnModule":142,"store/modules/SingleItemModule":143,"store/modules/UserModule":144,"store/modules/WishListModule":145,"vue-script2":9}],136:[function(require,module,exports){
+},{"store/modules/AddressModule":136,"store/modules/BasketModule":137,"store/modules/CheckoutModule":138,"store/modules/ItemListModule":139,"store/modules/LastSeenModule":140,"store/modules/LocalizationModule":141,"store/modules/NavigationModule":142,"store/modules/OrderReturnModule":143,"store/modules/SingleItemModule":144,"store/modules/UserModule":145,"store/modules/WishListModule":146,"vue-script2":9}],136:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24528,6 +24509,78 @@ var _utils = require("../../helper/utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var state = {
+    lastSeenItems: [],
+    lastSeenItemsLoading: false
+};
+
+var mutations = {
+    setLastSeenItems: function setLastSeenItems(state, lastSeenItems) {
+        state.lastSeenItems = lastSeenItems;
+    },
+    setLastSeenItemsLoading: function setLastSeenItemsLoading(state, isLoading) {
+        state.lastSeenItemsLoading = isLoading;
+    }
+};
+
+var actions = {
+    addLastSeenItem: function addLastSeenItem(_ref, variationId) {
+        var commit = _ref.commit;
+
+        return new Promise(function (resolve, reject) {
+            commit("setLastSeenItemsLoading", true);
+
+            _ApiService2.default.put("/rest/io/item/last_seen/" + variationId).done(function (response) {
+                commit("setLastSeenItems", response.documents);
+                commit("setLastSeenItemsLoading", false);
+                resolve(response.documents);
+            }).fail(function (error) {
+                reject(error);
+            });
+        });
+    },
+    getLastSeenItems: function getLastSeenItems(_ref2) {
+        var commit = _ref2.commit;
+
+        return new Promise(function (resolve, reject) {
+            var params = { items: App.config.itemLists.lastSeenNumber };
+
+            commit("setLastSeenItemsLoading", true);
+
+            _ApiService2.default.get("/rest/io/item/last_seen", params, { keepOriginalResponse: true }).done(function (response) {
+                if ((0, _utils.isDefined)(response.data)) {
+                    commit("setLastSeenItems", response.data.documents);
+                    commit("setLastSeenItemsLoading", false);
+                    resolve(response.data.documents);
+                }
+            }).fail(function (error) {
+                reject(error);
+            });
+        });
+    }
+};
+
+exports.default = {
+    state: state,
+    actions: actions,
+    mutations: mutations
+};
+
+},{"../../helper/utils":122,"services/ApiService":125}],141:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+var _utils = require("../../helper/utils");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
     shippingCountries: [],
     shippingCountryId: null
 };
@@ -24580,7 +24633,7 @@ exports.default = {
     actions: actions
 };
 
-},{"../../helper/utils":122,"services/ApiService":125}],141:[function(require,module,exports){
+},{"../../helper/utils":122,"services/ApiService":125}],142:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24769,7 +24822,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/CategoryService":126}],142:[function(require,module,exports){
+},{"services/CategoryService":126}],143:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24867,7 +24920,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":125}],143:[function(require,module,exports){
+},{"services/ApiService":125}],144:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25136,7 +25189,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],144:[function(require,module,exports){
+},{}],145:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25190,7 +25243,7 @@ exports.default = {
     getters: getters
 };
 
-},{"../../helper/utils":122}],145:[function(require,module,exports){
+},{"../../helper/utils":122}],146:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25302,7 +25355,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":125}]},{},[123,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,39,40,41,42,36,37,38,43,44,45,46,47,48,49,50,51,52,53,54,55,63,64,65,66,56,57,58,59,61,60,62,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,117,118,116,119,120,121,122,135,136,137,138,139,140,141,142,143,144,145])
+},{"services/ApiService":125}]},{},[123,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,39,40,41,42,36,37,38,43,44,45,46,47,48,49,50,51,52,53,54,55,63,64,65,66,56,57,58,59,61,60,62,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,117,118,116,119,120,121,122,135,136,137,138,139,140,141,142,143,144,145,146])
 
 
 //# sourceMappingURL=ceres-app.js.map
