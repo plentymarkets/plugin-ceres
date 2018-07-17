@@ -17,6 +17,48 @@
 		color: $top-bar-color;
 		outline: none;
 	}
+
+	@include media-breakpoint-up(md) {
+		.top-bar-items {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.search-input {
+			width: 270px;
+		}
+	}
+
+	@include media-breakpoint-down(sm) {
+		.top-bar-items {
+			display: flex;
+			flex-direction: column-reverse;
+		}
+
+		.search-input {
+			width: 90%;
+		}
+	}
+
+	.search {
+		margin: 5px 0;
+		background-color: $white;
+		
+		.search-input {
+			border: none;
+			outline: none;
+			padding: 5px;	
+			height: 30px;
+		}
+
+		.search-submit {
+			color: $brand-primary;
+			border: none;
+			height: 30px;
+		}
+	}
+
 	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;
