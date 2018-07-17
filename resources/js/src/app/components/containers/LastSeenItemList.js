@@ -15,7 +15,10 @@ Vue.component("last-seen-item-list", {
     created()
     {
         this.$options.template = this.template;
+    },
 
+    ready()
+    {
         if (this.variationId > 0)
         {
             this.$store.dispatch("addLastSeenItem", this.variationId);

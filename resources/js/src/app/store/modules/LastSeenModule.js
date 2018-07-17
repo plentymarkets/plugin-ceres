@@ -4,7 +4,7 @@ import {isDefined}from "../../helper/utils";
 const state =
     {
         lastSeenItems: [],
-        lastSeenItemsLoading: false
+        isLastSeenItemsLoading: false
     };
 
 const mutations =
@@ -14,57 +14,67 @@ const mutations =
             state.lastSeenItems = lastSeenItems;
         },
 
-        setLastSeenItemsLoading(state, isLoading)
+        setIsLastSeenItemsLoading(state, isLoading)
         {
-            state.lastSeenItemsLoading = isLoading;
+            state.isLastSeenItemsLoading = isLoading;
         }
     };
 
 const actions =
     {
-        addLastSeenItem({commit}, variationId)
+        addLastSeenItem({commit, state}, variationId)
         {
-            return new Promise((resolve, reject) =>
+            if (!state.isLastSeenItemsLoading)
             {
-                commit("setLastSeenItemsLoading", true);
+                return new Promise((resolve, reject) =>
+                {
+                    commit("setIsLastSeenItemsLoading", true);
 
-                ApiService.put("/rest/io/item/last_seen/" + variationId)
-                    .done(response =>
-                    {
-                        commit("setLastSeenItems", response.documents);
-                        commit("setLastSeenItemsLoading", false);
-                        resolve(response.documents);
-                    })
-                    .fail(error =>
-                    {
-                        reject(error);
-                    });
-            });
+                    ApiService.put("/rest/io/item/last_seen/" + variationId)
+                        .done(response =>
+                        {
+                            commit("setLastSeenItems", response.documents);
+                            commit("setIsLastSeenItemsLoading", false);
+                            resolve(response.documents);
+                        })
+                        .fail(error =>
+                        {
+                            reject(error);
+                        });
+                });
+            }
+
+            return null;
         },
 
         getLastSeenItems({commit})
         {
-            return new Promise((resolve, reject) =>
+            if (!state.isLastSeenItemsLoading)
             {
-                const params = {items: App.config.itemLists.lastSeenNumber};
+                return new Promise((resolve, reject) =>
+                {
+                    const params = {items: App.config.itemLists.lastSeenNumber};
 
-                commit("setLastSeenItemsLoading", true);
+                    commit("setIsLastSeenItemsLoading", true);
 
-                ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
-                    .done(response =>
-                    {
-                        if (isDefined(response.data))
+                    ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
+                        .done(response =>
                         {
-                            commit("setLastSeenItems", response.data.documents);
-                            commit("setLastSeenItemsLoading", false);
-                            resolve(response.data.documents);
-                        }
-                    })
-                    .fail(error =>
-                    {
-                        reject(error);
-                    });
-            });
+                            if (isDefined(response.data))
+                            {
+                                commit("setLastSeenItems", response.data.documents);
+                                commit("setIsLastSeenItemsLoading", false);
+                                resolve(response.data.documents);
+                            }
+                        })
+                        .fail(error =>
+                        {
+                            reject(error);
+                        });
+                });
+            }
+
+            return null;
         }
     };
 
