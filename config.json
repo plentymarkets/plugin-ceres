@@ -351,14 +351,6 @@
                         "defaultValue": "true"
                     }
                 },
-                "header.search_show_image": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Config.headerSearchShowImage",
-                    "options": {
-                        "defaultValue": "false"
-                    }
-                },
                 "header.show_category_types": {
                     "type": "selectBox",
                     "required": false,
@@ -2206,6 +2198,14 @@
                     "type": "checkBox",
                     "required": false,
                     "label": "Config.searchForwardToSingleItemLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+                "search.show_image": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.searchShowImage",
                     "options": {
                         "defaultValue": "false"
                     }
