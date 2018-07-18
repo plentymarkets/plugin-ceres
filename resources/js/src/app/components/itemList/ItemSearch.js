@@ -19,7 +19,8 @@ Vue.component("item-search", {
             promiseCount: 0,
             autocompleteResult: [],
             selectedAutocompleteIndex: -1,
-            isSearchFocused: false
+            isSearchFocused: false,
+            showItemImages: App.config.search.searchShowImage
         };
     },
 
