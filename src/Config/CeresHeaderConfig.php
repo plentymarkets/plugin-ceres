@@ -11,6 +11,7 @@ class CeresHeaderConfig extends PluginConfig
     public $companyLogo;
     public $showNavBars;
     public $fixedNavBar;
+    public $searchShowImage;
     public $showCategoryTypes;
     public $basketValues;
     public $megamenuLevels;
@@ -25,6 +26,7 @@ class CeresHeaderConfig extends PluginConfig
         $this->companyLogo          = $this->getTextValue( "header.company_logo", "images/ceres-logo.svg" );
         $this->showNavBars          = $this->getTextValue( "header.show_navbars", "top" );
         $this->fixedNavBar          = $this->getBooleanValue( "header.fixed_navbar", true );
+        $this->searchShowImage      = $this->getBooleanValue( "header.search_show_image", true );
         $this->showCategoryTypes    = $this->getTextValue( "header.show_category_types", "all" );
         $this->basketValues         = $this->getTextValue( "header.basket_values", "sum" );
         $this->megamenuLevels       = $this->getIntegerValue( "header.megamenu_levels", 1 );
