@@ -29,7 +29,7 @@ const actions =
                 return new Promise((resolve, reject) =>
                 {
                     commit("setIsLastSeenItemsLoading", true);
-
+                    
                     ApiService.put("/rest/io/item/last_seen/" + variationId)
                         .done(response =>
                         {

@@ -4,8 +4,7 @@ Vue.component("last-seen-item-list", {
         template: {
             type: String,
             default: "#vue-last-seen-item-list"
-        },
-        variationId: Number
+        }
     },
 
     computed: Vuex.mapState({
@@ -17,15 +16,8 @@ Vue.component("last-seen-item-list", {
         this.$options.template = this.template;
     },
 
-    ready()
+    beforeMount()
     {
-        if (this.variationId > 0)
-        {
-            this.$store.dispatch("addLastSeenItem", this.variationId);
-        }
-        else
-        {
-            this.$store.dispatch("getLastSeenItems");
-        }
+        this.$store.dispatch("getLastSeenItems");
     }
 });
