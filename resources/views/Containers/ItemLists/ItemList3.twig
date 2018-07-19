@@ -24,7 +24,7 @@
                     <hr>
                 {% endif %}
 
-                {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 2, listType: listType, isHome: isHome } %} 
+                {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 3, listType: listType, isHome: isHome } %}
             </div>
         </last-seen-item-list>
     </div>
@@ -33,7 +33,7 @@
         <hr>
     {% endif %}
 
-    {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 2, listType: listType, isHome: isHome } %} 
+    {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 3, listType: listType, isHome: isHome } %}
 
     <div class="row">
         <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
