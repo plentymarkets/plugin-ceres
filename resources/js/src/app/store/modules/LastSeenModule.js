@@ -39,6 +39,7 @@ const actions =
                         })
                         .fail(error =>
                         {
+                            commit("setIsLastSeenItemsLoading", false);
                             reject(error);
                         });
                 });
@@ -69,6 +70,7 @@ const actions =
                         })
                         .fail(error =>
                         {
+                            commit("setIsLastSeenItemsLoading", false);
                             reject(error);
                         });
                 });
