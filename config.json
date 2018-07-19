@@ -2207,7 +2207,7 @@
                     "required": false,
                     "label": "Config.searchShowImage",
                     "options": {
-                        "defaultValue": "true"
+                        "defaultValue": "false"
                     }
                 },
                 "search.alwaysShowSearchBar": {
