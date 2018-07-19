@@ -13222,7 +13222,8 @@ $border-width: 1px;
             -webkit-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
                     box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
             background: #ffffff;
-            overflow: auto;
+            overflow: scroll;
+            -webkit-overflow-scrolling: touch;
             z-index: 1070;
             max-height: 310px;
             width: 100%;
@@ -15110,6 +15111,10 @@ nav.navbar.megamenu {
 				overflow: hidden;
 				white-space: nowrap;
 				display: block;
+
+				& @at-root ul {
+					
+				}
 			}
 
 			@at-root .basket-small ul {
