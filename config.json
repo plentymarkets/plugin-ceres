@@ -2201,6 +2201,14 @@
                     "options": {
                         "defaultValue": "false"
                     }
+                },
+                "search.show_image": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.searchShowImage",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         },

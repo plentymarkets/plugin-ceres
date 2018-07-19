@@ -3,7 +3,6 @@
     "node_modules/custom-event-polyfill/custom-event-polyfill.js",
     "node_modules/jquery/dist/jquery.js",
     "node_modules/jquery-lazyload/jquery.lazyload.js",
-    "node_modules/devbridge-autocomplete/dist/jquery.autocomplete.min.js",
     "node_modules/vue/dist/vue.js",
     "node_modules/vuex/dist/vuex.js",
     "node_modules/tether/dist/js/tether.js",
