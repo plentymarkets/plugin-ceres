@@ -2209,6 +2209,14 @@
                     "options": {
                         "defaultValue": "true"
                     }
+                },
+                "search.alwaysShowSearchBar": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.searchAlwaysShowSearchBar",
+                    "options": {
+                        "defaultValue": "false"
+                    }
                 }
             }
         },

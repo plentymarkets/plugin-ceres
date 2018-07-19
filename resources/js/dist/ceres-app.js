@@ -18836,13 +18836,17 @@ var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component("item-search", {
 
     delimiters: ["${", "}"],
 
-    props: ["template"],
+    props: {
+        template: String
+    },
 
     data: function data() {
         return {
@@ -18869,8 +18873,10 @@ Vue.component("item-search", {
 
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
-            _this.$store.commit("setItemListSearchString", urlParams.query);
-            _this.currentSearchString = urlParams.query;
+            if ((0, _utils.isDefined)(urlParams.query)) {
+                _this.$store.commit("setItemListSearchString", urlParams.query);
+                _this.currentSearchString = urlParams.query;
+            }
         });
     },
 
@@ -18893,6 +18899,11 @@ Vue.component("item-search", {
             } else {
                 this.preventSearch = false;
             }
+        },
+        clearInput: function clearInput() {
+            this.$refs.searchInput.value = "";
+            this.currentSearchString = "";
+            this.$refs.searchInput.focus();
         },
         openItem: function openItem(suggestion) {
             this.preventSearch = true;
@@ -18957,7 +18968,7 @@ Vue.component("item-search", {
     }
 });
 
-},{"services/TranslationService":131,"services/UrlService":132}],60:[function(require,module,exports){
+},{"../../helper/utils":122,"services/TranslationService":131,"services/UrlService":132}],60:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-store-special", {
