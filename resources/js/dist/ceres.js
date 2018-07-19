@@ -17802,17 +17802,10 @@ Vue.component("item-bundle", {
 
     data: function data() {
         return {
-            bundleSetting: null
+            bundleSetting: null,
+            showItemBundleItems: false
         };
     },
-
-
-    computed: {
-        showItemBundleItems: function showItemBundleItems() {
-            return this.bundleSetting !== "1" && this.bundleType === "bundle";
-        }
-    },
-
     created: function created() {
         this.$options.template = this.template;
     },
@@ -17822,6 +17815,7 @@ Vue.component("item-bundle", {
         this.$nextTick(function () {
             if (_this.$refs.bundleSetting) {
                 _this.bundleSetting = _this.$refs.bundleSetting.innerText;
+                _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
             }
         });
     },
@@ -22044,7 +22038,7 @@ var MonetaryFormatter = function () {
                     }
                 case T_DECIMAL:
                     {
-                        return _this2.separatorDecimals + _getDecimalValue((value * 100).toFixed(0).substr(-2, 2));
+                        return _this2.separatorDecimals + _getDecimalValue(Math.floor(value * 100).toFixed(0).substr(-2, 2));
                     }
                 case T_CURRENCY:
                     {
