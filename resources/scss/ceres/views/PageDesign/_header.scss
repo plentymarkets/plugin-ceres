@@ -18,51 +18,56 @@
 		outline: none;
 	}
 
-	@include media-breakpoint-up(md) {
-		.top-bar-items {
-			display: flex;
+	.search-shown {
+		display: flex;
+		@include media-breakpoint-up(md) {
 			justify-content: space-between;
 			align-items: center;
 		}
-	}
-
-	@include media-breakpoint-down(sm) {
-		.top-bar-items {
-			display: flex;
+		@include media-breakpoint-down(sm) {
 			flex-direction: column-reverse;
 		}
-	}
 
-	.search {
-		margin: 5px 5px;
-		background-color: $white;
-		flex: 1;
-		
-		.search-box-shadow-frame {
-
-			display: flex;
-			flex: 100;
-
-			.search-input {
-				border: none;
-				outline: none;
-				padding: 0.4rem 1rem;
-				font-size: 1.3rem;
-				line-height: 1;
-				flex: 1 70%;
-			}
+		.always-visible-search {
+			margin: 5px 5px;
+			background-color: $white;
+			flex: 1;
+			
+			.search-box-shadow-frame {
+				display: flex;
+				flex: 100;
 	
-			.search-submit {
-				color: $brand-primary;
-				border: none;
-				font-size: 1.3rem;
-				line-height: 1;
-				padding: 0.4rem 1rem;
+				.search-input {
+					border: none;
+					outline: none;
+					padding: 0.4rem 1rem;
+					font-size: 1.3rem;
+					line-height: 1;
+					flex: 1 70%;
+				}
+		
+				.search-submit {
+					color: $brand-primary;
+					border: none;
+					font-size: 1.3rem;
+					line-height: 1;
+					padding: 0.4rem 1rem;
+				}
+			}
+		}
+
+		.controls-list {
+			&>li {
+				@include media-breakpoint-up(md) {
+					a:not(.btn) {
+						padding: 1rem .8rem;
+					}
+				}
 			}
 		}
 	}
 
-	.controls-list{
+	.controls-list {
 		margin-bottom: 0;
 		font-size: 0;
 		width: 100%;
@@ -76,7 +81,7 @@
 
 			// sets the height of the top-bar
 			@include media-breakpoint-down(md) {
-
+				
 				a:not(.btn) {
 					padding: 0.5rem .5rem;
 					display: inline-block;
@@ -96,7 +101,7 @@
 
 			@include media-breakpoint-up(md) {
 				a:not(.btn) {
-					padding: 1rem .8rem;
+					padding: .5rem .8rem;
 					display: inline-block;
 					color: $gray-lighter;
 

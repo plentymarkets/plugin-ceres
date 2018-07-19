@@ -13,14 +13,26 @@
 {% set enableCurrencySelect = config("Ceres.currency.enable_selection") == "true" and activeCurrencies | length > 0 %}
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set currencyFormatSelect = config("Ceres.currency.format_selection") %}
+{% set isSearchBarAlwaysVisible = config("Ceres.search.alwaysShowSearchBar") == "true" %}
 
 <header class="top-bar">
     <div class="container-max">
         <div class="row">
-            <div class="top-bar-items">
-                <div class="search">
-                    <item-search template="#vue-item-search"></item-search>
+            <div class="top-bar-items {% if isSearchBarAlwaysVisible %}search-shown{% endif %}">
+                {% if isSearchBarAlwaysVisible %}
+                <div class="always-visible-search">
+                    <item-search template="#vue-item-search">
+                        <div class="search-box-inner">
+                            <div class="search-box-shadow-frame">
+                                <input type="search" class="search-input"/>
+                                <button class="search-submit" type="submit">
+                                    <i class="fa fa-search sm-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </item-search>
                 </div>
+                {% endif %}
                 <div class="controls">
                     <ul id="controlsList" class="controls-list list-inline">
                         <li class="list-inline-item control-user">
@@ -53,6 +65,19 @@
                                     aria-controls="currencySelect"
                                     data-parent="#controlsList">
                                     <span>{{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if not isSearchBarAlwaysVisible %}
+                            <li class="list-inline-item control-search">
+                                <a class="anicon anicon-search-xcross"
+                                    aria-label="toggle search"
+                                    data-toggle="collapse"
+                                    href="#searchBox"
+                                    aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
+                                    aria-controls="searchBox"
+                                    data-parent="#controlsList">
+                                    <span class="anicon-search-item" aria-hidden="true"></span>
                                 </a>
                             </li>
                         {% endif %}
@@ -107,9 +132,11 @@
 
 <div class="container-max page-header">
     <div class="row">
+        {% if not isSearchBarAlwaysVisible %}
         <div id="searchBox" class="cmp cmp-search-box collapse {% if services.template.isSearch() %} in {% endif %}">
             <item-search template="#vue-item-search"></item-search>
         </div>
+        {% endif %}
 
         {% if enableCurrencySelect == "true" %}
         <div id="currencySelect" class="cmp cmp-currency-select collapse">
