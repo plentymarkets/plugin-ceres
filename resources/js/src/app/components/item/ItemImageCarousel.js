@@ -130,7 +130,7 @@ Vue.component("item-image-carousel", {
                 });
                 window.lightbox.imageCountLabel = (current, total) =>
                 {
-                    if (imageCount <= 1)
+                    if (isNullOrUndefined(imageCount) || imageCount <= 1)
                     {
                         return "";
                     }
