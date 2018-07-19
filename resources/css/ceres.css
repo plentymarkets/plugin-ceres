@@ -312,7 +312,7 @@ html {
 html {
   font-size: 14px;
   -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -5601,7 +5601,7 @@ button.close {
   margin: 1px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   border: 1px solid #fff;
   border-radius: 10px;
 }
@@ -12711,7 +12711,7 @@ button:focus {
 }
 
 .btn-labeled.btn-link .btn-label {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   padding: 0.25rem 0;
 }
 
@@ -14959,7 +14959,7 @@ Custom classes
   margin: 0 auto;
 }
 
-.cmp-search-box .search-box-shadow-frame {
+.search-box-shadow-frame {
   display: -ms-flexbox;
   display: flex;
   -ms-flex: 100;
@@ -14968,7 +14968,7 @@ Custom classes
   position: relative;
 }
 
-.cmp-search-box .search-box-shadow-frame .autocomplete-suggestions {
+.search-box-shadow-frame .autocomplete-suggestions {
   position: absolute;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
   background: #ffffff;
@@ -14980,7 +14980,7 @@ Custom classes
   top: 100%;
 }
 
-.cmp-search-box .search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion {
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion {
   padding: 5px 15px;
   white-space: nowrap;
   overflow: hidden;
@@ -14989,28 +14989,29 @@ Custom classes
   display: flex;
 }
 
-.cmp-search-box .search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion:hover {
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion:hover {
   background: #dcdbd8;
 }
 
-.cmp-search-box .search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion.autocomplete-selected {
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion.autocomplete-selected {
   background: #dcdbd8;
 }
 
-.cmp-search-box .search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-item-name {
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-item-name {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  color: #4D4F4D;
 }
 
-.cmp-search-box .search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-image-container {
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-image-container {
   width: 40px;
   height: 40px;
   position: relative;
   margin-right: 5px;
 }
 
-.cmp-search-box .search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-image-container > .autocomplete-image {
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-image-container > .autocomplete-image {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -17020,7 +17021,7 @@ body.menu-is-visible {
   bottom: -2px;
   left: -1px;
   background-color: #fff;
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 transparent;
   border: 1px solid transparent;
   transform-origin: top right;
   transform: scaleX(1) scaleY(1);
@@ -19814,7 +19815,7 @@ body.menu-is-visible {
 .gradient-hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #DCDBD7, rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to right, transparent, #DCDBD7, transparent);
 }
 
 .show-more-returns {
