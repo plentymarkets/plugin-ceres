@@ -130,12 +130,19 @@ Vue.component("item-image-carousel", {
                 });
                 window.lightbox.imageCountLabel = (current, total) =>
                 {
-                    if (imageCount <= 1)
+                    if (isNullOrUndefined(imageCount) || imageCount <= 1)
                     {
                         return "";
                     }
-                    // owl prepends 2 clones to allow endless scrolling
-                    current = (current % imageCount) + 1;
+                    current -= ((total - imageCount) / 2);
+                    while (current <= 0)
+                    {
+                        current += imageCount;
+                    }
+                    while (current > imageCount)
+                    {
+                        current -= imageCount;
+                    }
                     return TranslationService.translate("Ceres::Template.singleItemImagePreviewCaption", {current: current, total: imageCount});
                 };
 
