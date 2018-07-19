@@ -16992,7 +16992,8 @@ Vue.component("registration", {
             billingAddress: {
                 countryId: null,
                 stateId: null,
-                addressSalutation: 0
+                addressSalutation: 0,
+                gender: "male"
             },
             isDisabled: false
         };
