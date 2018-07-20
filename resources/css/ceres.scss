@@ -137,6 +137,9 @@ $link-color:            $brand-primary !default;
 $link-hover-color:      darken($link-color, 15%) !default;
 
 
+$box-shadow:            0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+
+
 // Body
 //
 // Settings for the `<body>` element.
@@ -13213,8 +13216,8 @@ $border-width: 1px;
         -webkit-box-flex: 100;
             -ms-flex: 100;
                 flex: 100;
-        -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+        -webkit-box-shadow: $box-shadow;
+                box-shadow: $box-shadow;
     }
     .search-input {
         -webkit-box-flex: 1;
@@ -14446,6 +14449,10 @@ nav.navbar.megamenu {
 		padding: 0;
 		margin: 0;
 		list-style: none;
+		-webkit-box-shadow: $box-shadow;
+		        box-shadow: $box-shadow;
+		max-height: 500px;
+		overflow: scroll;
 	}
 
 	.add-item{
@@ -15198,8 +15205,8 @@ nav.navbar.megamenu {
 	width: 100%;
 	max-height: 100%;
 	background: $white;
-	-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-	        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	-webkit-box-shadow: $box-shadow;
+	        box-shadow: $box-shadow;
 	padding: .75rem;
 	color: $gray-dark;
 	font-size: 1rem;
