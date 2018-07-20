@@ -17443,7 +17443,7 @@ Vue.component("item-bundle", {
     data: function data() {
         return {
             bundleSetting: null,
-            showItemBundleItems: false
+            showItemBundleItems: true
         };
     },
     created: function created() {
