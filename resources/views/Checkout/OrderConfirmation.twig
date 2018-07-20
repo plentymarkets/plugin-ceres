@@ -12,6 +12,7 @@
     {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
 
     {% set overrideConfirmation = LayoutContainer.show("Ceres::OrderConfirmation.Override") %}
+    {% set addContentAfterOrderDetailsRow = LayoutContainer.show("Ceres::OrderConfirmation.AddContentAfterOrderDetailsRow") %}
 
     {% if overrideConfirmation|trim is empty %}
         <div class="page-content myaccount container-max m-b-3 m-t-1 p-b-3">
@@ -28,6 +29,11 @@
             {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
 
             <hr>
+            {% if addContentAfterOrderDetailsRow %}
+            <div class="row">
+              {{ addContentAfterOrderDetailsRow }}
+            </div>
+            {% endif %}
             <div class="row">
                 {% set loggedIn = frontend.Account.getIsAccountLoggedIn %}
                 <div class="col-xs-6 col-md-4 {% if loggedIn %}offset-md-2{% else %}offset-xs-3 offset-md-4{% endif %}">
