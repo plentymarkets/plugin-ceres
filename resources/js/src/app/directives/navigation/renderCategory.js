@@ -41,7 +41,7 @@ Vue.directive("render-category",
                 else if ((openCategory && openCategory.contains(event.target)) || document.body.classList.contains("no-touch") || binding.value.alwaysOpen)
                 {
                     store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId)});
-                   
+
                     if (!isNullOrUndefined(binding.value.scrollToTop) && !isNaN(binding.value.scrollToTop))
                     {
                         $("html, body").animate({scrollTop: 0}, binding.value.scrollToTop);

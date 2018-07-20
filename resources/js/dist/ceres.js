@@ -21283,6 +21283,8 @@ var _index = require("store/index.js");
 
 var _index2 = _interopRequireDefault(_index);
 
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.directive("render-category", {
@@ -21316,10 +21318,12 @@ Vue.directive("render-category", {
                 }
             }
             // check if user click the opened category and change the ui handling
-            else if (openCategory && openCategory.contains(event.target)) {
+            else if (openCategory && openCategory.contains(event.target) || document.body.classList.contains("no-touch") || binding.value.alwaysOpen) {
                     _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
-                } else if (document.body.classList.contains("no-touch") || binding.value.alwaysOpen) {
-                    _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
+
+                    if (!(0, _utils.isNullOrUndefined)(binding.value.scrollToTop) && !isNaN(binding.value.scrollToTop)) {
+                        $("html, body").animate({ scrollTop: 0 }, binding.value.scrollToTop);
+                    }
                 }
         };
     },
@@ -21329,7 +21333,7 @@ Vue.directive("render-category", {
     }
 });
 
-},{"store/index.js":135}],95:[function(require,module,exports){
+},{"../../helper/utils":122,"store/index.js":135}],95:[function(require,module,exports){
 "use strict";
 
 Vue.directive("scroll-to-top", {
