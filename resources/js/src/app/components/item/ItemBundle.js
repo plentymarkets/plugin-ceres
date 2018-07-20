@@ -15,7 +15,7 @@ Vue.component("item-bundle", {
     {
         return {
             bundleSetting: null,
-            showItemBundleItems: false
+            showItemBundleItems: true
         };
     },
 
