@@ -29,7 +29,7 @@
             {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
 
             <hr>
-            {% if addContentAfterOrderDetailsRow %}
+            {% if addContentAfterOrderDetailsRow|trim is not empty %}
             <div class="row">
               {{ addContentAfterOrderDetailsRow }}
             </div>
