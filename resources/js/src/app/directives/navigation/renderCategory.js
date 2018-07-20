@@ -1,4 +1,5 @@
 import store from "store/index.js";
+import {isNullOrUndefined}from "../../helper/utils";
 
 Vue.directive("render-category",
     {
@@ -40,10 +41,10 @@ Vue.directive("render-category",
                 else if ((openCategory && openCategory.contains(event.target)) || document.body.classList.contains("no-touch") || binding.value.alwaysOpen)
                 {
                     store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId)});
-
-                    if (binding.value.scrollToTop)
+                   
+                    if (!isNullOrUndefined(binding.value.scrollToTop) && !isNaN(binding.value.scrollToTop))
                     {
-                        $("html, body").animate({scrollTop: 0}, "slow");
+                        $("html, body").animate({scrollTop: 0}, binding.value.scrollToTop);
                     }
                 }
             };
