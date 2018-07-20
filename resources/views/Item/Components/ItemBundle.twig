@@ -1,0 +1,12 @@
+<script type="x/template" id="vue-item-bundle">
+	<div>
+		<div class="m-b-1 item-bundle" v-if="showItemBundleItems">
+			<div ref="bundleSetting" class="hidden">{{ services.webstoreConfig.getWebstoreConfig().dontSplitItemBundle }}</div>
+			<strong>{{ trans("Ceres::Template.itemBundleContent") }}</strong>
+			<div v-for="item in bundleComponents">
+				<span class="text-muted">${ item.quantity } x</span>
+				<a :href="item.data | itemURL"> ${ getBundleInnerText(item.data) | itemName } </a>
+			</div>
+		</div>
+	</div>
+</script>

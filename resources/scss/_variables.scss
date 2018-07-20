@@ -74,7 +74,6 @@ $grid-gutter-width: 30px !default;
 //
 //## Gray and brand colors for use across Bootstrap.
 
-
 $gray-darker:           #282d2f !default;
 $gray-dark:             #4D4F4D !default;
 $gray:                  #7a7f7f !default;
@@ -115,6 +114,11 @@ $availability_2:        $brand-success !default;
 $availability_3:        $brand-warning !default;
 $availability_4:        $brand-warning !default;
 $availability_5:        $brand-danger !default;
+$availability_6:        $brand-danger !default;
+$availability_7:        $brand-danger !default;
+$availability_8:        $brand-danger !default;
+$availability_9:        $gray-dark !default;
+$availability_10:       $gray-dark !default;
 
 
 //== Scaffolding
@@ -133,15 +137,17 @@ $link-color:            $brand-primary !default;
 $link-hover-color:      darken($link-color, 15%) !default;
 
 
+$box-shadow:            0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+
+
 // Body
 //
 // Settings for the `<body>` element.
 
-
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
-$font-family-sans-serif:Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:Custom-Font, Helvetica, Arial, sans-serif !default;
 $font-family-helvetica: $font-family-sans-serif !default;
 $font-family-serif:     Georgia, "Times New Roman", Times, serif !default;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.

@@ -7,7 +7,7 @@
         {% if text | trim is not empty %}
             <h1>{{ text }}</h1>
         {% else %}
-            <h1>{{ Twig.print('config("Ceres.header.company_name")') }}</h1>
+            <h1>{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}</h1>
         {% endif %}
     </div>
 </div>

@@ -1,5 +1,45 @@
 # Release Notes für Ceres
 
+## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Artikelpakete können jetzt im Webshop dargestellt werden.
+- Es wurde ein neues Widget für den Shop Builder hinzugefügt, welches Freitext und HTML darstellt.
+
+### Geändert
+
+- Benutzerspezifische Daten wie Warenkorb, Anmeldeinformationen und Wunschliste werden jetzt nachträglich geladen.
+- Die Liste der zuletzt gesehenen Artikel wird jetzt nachträglich geladen.
+
+### Behoben
+
+- Diverse fehlerhafte Verlinkungen wurden behoben.
+- Durch einen Fehler wurde die Artikel-ID im Warenkorb nicht angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde unter Artikeln "inkl. Mwst." anstatt "zzgl. Mwst." angezeigt. Dies wurde behoben.
+- Der Name des Webshops wird nun für die Seiten Warenkorb, Content-Kategorien, Kategorieseiten, Artikelansicht und Artikelsuche korrekt aus den Übersetzungen geladen.
+- Wenn ein Kunde keinen Namen gespeichert hatte, wurde im Header manchmal eine falsche Begrüßung angezeigt. Dies wurde behoben.
+- Durch einen Fehler konnten Artikel mit einem bestimmten Intervall im Warenkorb nicht korrekt bearbeitet werden. Dies wurde behoben.
+- Der Wert für den Artikelnamen wird nun korrekt aus den Ceres-Dateien geladen.
+- Es wurden fehlende Farben für die Artikelverfügbarkeiten 6-10 hinzugefügt.
+
+## v2.11.0 (2018-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.10.0...2.11.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Wenn die Social Media Bibliothek **Shariff** in einem Plugin verwendet wurde, muss diese ab sofort in diesem Plugin selbst integriert werden.
+
+### Geändert
+
+- Die Social Media Bibliothek **Shariff** wurde aus Ceres entfernt, da sie nicht mehr benötigt wird, seitdem das Social Media Plugin nicht mehr nativ in Ceres integriert ist.
+
+### Behoben
+
+- Der Name des Webshops im Titellisten-Widget des Shop Builders wird nun korrekt aus den Übersetzungen der Mehrsprachigkeitsoberfläche geladen.
+- Der Alternativtext des Firmenlogos wird nun korrekt aus den Übersetzungen der Mehrsprachigkeitsoberfläche geladen.
+- Der Seitentitel wird nun korrekt aus den Übersetzungen der Mehrsprachigkeitsoberfläche geladen.
+- Für die Standardsprache wurde das Länderkürzel in der URL entfernt. Andere Sprachen werden mit Länderkürzeln in der URL erreicht.
+
 ## v2.10.0 (2018-06-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.1...2.10.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt

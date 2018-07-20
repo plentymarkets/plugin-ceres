@@ -37,10 +37,11 @@
             </div>
 
             <!-- STORE SPECIALS -->
-            <item-store-special v-if="storeSpecial" :store-special="storeSpecial"
+            <item-store-special v-if="storeSpecial || itemData.variation.bundleType == 'bundle'" :store-special="storeSpecial"
                                 :recommended-retail-price="itemData.prices.rrp"
                                 :variation-retail-price="itemData.prices.default"
-                                :decimal-count="decimalCount"></item-store-special>
+                                :decimal-count="decimalCount"
+                                :bundle-type="itemData.variation.bundleType"></item-store-special>
             <!-- ./STORE SPECIALS -->
 
             <!-- ITEM DETAILS -->
@@ -50,7 +51,7 @@
                 </a>
                 <div class="thumb-meta">
                     <div class="prices">
-                        <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0" class="price-view-port">
+                        <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
                             <del class="crossprice">
                                 ${ itemData.prices.rrp.price.formatted }
                             </del>
@@ -69,7 +70,9 @@
                 </div>
                 <add-to-basket :item="itemData" :item-url="itemData | itemURL"></add-to-basket>
                 <span class="vat small text-muted">
-                            * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                    * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
+                    <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
+                    {{ trans("Ceres::Template.itemExclusive") }}
                     <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                 </span>
             </div>

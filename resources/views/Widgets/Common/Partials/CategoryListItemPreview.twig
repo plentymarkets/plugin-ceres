@@ -1,6 +1,7 @@
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
 {% set image = item.data.images | itemImages('urlMiddle') | orderByKey('position') | first %}
 
@@ -65,7 +66,7 @@
         <div class="thumb-content">
             <a class="thumb-title small">
                 {% if item is defined %}
-                    {{ item.data | itemName }}
+                    {{ ItemName.get(item.data | itemName, item.data.variation.bundleType) }}
                 {% else %}
                     {{ trans("Ceres::Widget.itemListPlaceholderItemName") }}
                 {% endif %}
