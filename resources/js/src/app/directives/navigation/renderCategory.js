@@ -1,4 +1,5 @@
 import store from "store/index.js";
+import {isNullOrUndefined}from "../../helper/utils";
 
 Vue.directive("render-category",
     {
@@ -37,13 +38,14 @@ Vue.directive("render-category",
                     }
                 }
                 // check if user click the opened category and change the ui handling
-                else if (openCategory && openCategory.contains(event.target))
+                else if ((openCategory && openCategory.contains(event.target)) || document.body.classList.contains("no-touch") || binding.value.alwaysOpen)
                 {
                     store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId)});
-                }
-                else if (document.body.classList.contains("no-touch") || binding.value.alwaysOpen)
-                {
-                    store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId)});
+                   
+                    if (!isNullOrUndefined(binding.value.scrollToTop) && !isNaN(binding.value.scrollToTop))
+                    {
+                        $("html, body").animate({scrollTop: 0}, binding.value.scrollToTop);
+                    }
                 }
             };
         },
