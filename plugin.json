@@ -458,8 +458,8 @@
         },
         {
             "key"           : "OrderConfirmation.AddContentAfterOrderDetailsRow",
-            "name"          : "Order confirmation: Add content Before Back to Homepage Link",
-            "description"   : "Add content before the back to Homepage Link"
+            "name"          : "Order confirmation: Add content before 'Back to Homepage' link",
+            "description"   : "Add content before the 'Back to Homepage' link"
         },
         {
             "key"           : "MyAccount.OrderHistoryPaymentInformation",
