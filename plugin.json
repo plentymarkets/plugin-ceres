@@ -457,6 +457,11 @@
             "description"   : "Add content after totals on the order confirmation page."
         },
         {
+            "key"           : "OrderConfirmation.AddContentAfterOrderDetailsRow",
+            "name"          : "Order confirmation: Add content before 'Back to Homepage' link",
+            "description"   : "Add content before the 'Back to Homepage' link"
+        },
+        {
             "key"           : "MyAccount.OrderHistoryPaymentInformation",
             "name"          : "My account: Additional payment information",
             "description"   : "Add additional payment information after the order information on the My account page."
