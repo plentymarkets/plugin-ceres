@@ -16036,6 +16036,9 @@ body.menu-is-visible {
   padding: 0;
   margin: 0;
   list-style: none;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  max-height: 500px;
+  overflow: scroll;
 }
 
 .cmp-address-list .add-item {
@@ -16736,7 +16739,7 @@ body.menu-is-visible {
   width: 100%;
   max-height: 100%;
   background: #fff;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   padding: .75rem;
   color: #4D4F4D;
   font-size: 1rem;
