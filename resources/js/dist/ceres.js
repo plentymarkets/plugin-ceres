@@ -15220,7 +15220,7 @@ Vue.component("checkout", {
                 this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
             }
 
-            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList)) {
+            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList.slice())) {
                 this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
             }
 
