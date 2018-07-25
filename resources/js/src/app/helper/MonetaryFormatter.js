@@ -158,7 +158,7 @@ const MonetaryFormatter = (function()
                 return digits;
             }
             case T_DECIMAL: {
-                return this.separatorDecimals + _getDecimalValue((value * 100).toFixed(0).substr(-2, 2));
+                return this.separatorDecimals + _getDecimalValue(Math.floor(value * 100).toFixed(0).substr(-2, 2));
             }
             case T_CURRENCY: {
                 return currency;

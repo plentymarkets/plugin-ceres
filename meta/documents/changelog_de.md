@@ -1,5 +1,28 @@
 # Release Notes für Ceres
 
+## v2.13.0 (2018-07-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Es wurde ein neuer Layout-Container unterhalb der Bestelldetails auf der Bestellbestätigungsseite hinzugefügt.
+
+### Geändert
+
+- Der Grundpreis wurde für die Stückzahl 1 nicht ausgegeben. Dies wurde behoben. Die Anzeige des Grundpreises wird nun ausschließlich durch den an der Variante hinterlegten Wert bestimmt.
+- Bei einem Wechsel der Kategorie scrollt der Browser nun automatisch zurück nach oben.
+- Die Dropdown-Liste der Adressauswahl hat nun eine maximale Höhe. Hierdurch wird verhindert, dass bei einer großen Anzahl von Adressen eine Adressauswahl nicht mehr möglich ist.
+
+### Behoben
+
+- In der Navigation wurden alle Kategorien ausgegeben. Dieses Verhalten wurde behoben, sodass jetzt unterschiedliche Navigationen abhängig von Kundenklassen ausgegeben werden können.
+- Es wurde ein Fehler behoben, durch den Ceres-Shops auf Microsoft Edge Browsern nicht richtig funktionierten.
+- Durch einen Fehler kam es zu Rundungsfehlern in der Artikeldetailansicht. Dieser wurde behoben.
+- Es wurde ein Fehler behoben durch welchen Artikelpakete unter bestimmten Umständen zu Vue.js-Fehlern im Webshop führen konnten.
+- Der Fehler "No 'Access-Control-Allow-Origin' header is present on the requested resource" tritt nun nicht mehr auf.
+- Durch einen Fehler wurde die Umsatzsteuer-ID auf der Registrierungsseite auch bei Nutzern validiert, die keine Firmenkunden sind. Dies wurde behoben.
+- Wenn die "Passwort zurücksetzen"-E-Mail mit einem E-Mail-Client geöffnet wurde, wurde der Link nicht erkannt. Dieser Fehler wurde behoben.
+- In der .twig-Datei der dritten Artikelliste wurden teilweise falsche IDs genutzt. Dieser Fehler wurde behoben.
+
 ## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt

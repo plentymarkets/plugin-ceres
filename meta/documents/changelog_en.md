@@ -1,5 +1,28 @@
 # Release Notes for Ceres
 
+## v2.13.0 (2018-07-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- A new layout container has been added underneath the order details on the order confirmation page.
+
+### Changed
+
+- The unit price was not displayed if the number of units was 1. This has ben fixed. The display of the unit price is now exclusively dependent on the setting stored at the variation level.
+- The browser now scrolls back to the top of the page whenever the user changes the category.
+- The drop-down list for addresses is now limited to a maximum height. This prevents that a large number of addresses makes an address selection impossible.
+
+### Fixed
+
+- The navigation always displayed all categories. This behaviour has been adjusted, so that different navigations can be displayed, depending on different customer classes.
+- Due to an error, Ceres online stores were not working properly on Microsoft Edge browsers. This has been fixed.
+- An error led to roundoff mistakes in the single item view. This has been fixed.
+- Due to an error, item bundles would lead to vue.js issues in the online store under certain circumstances. This has been fixed.
+- The error "No 'Access-Control-Allow-Origin' header is present on the requested resource" will not occur anymore.
+- Due to an error, the VAT ID on the registration page was validated for non-business customers. This has been fixed.
+- If the "Reset password" email was opened via an e-mail client, the link was not recognised as such. This error has been fixed.
+- The .twig file of the third item list used several faulty IDs. This error has been fixed.
+
 ## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added

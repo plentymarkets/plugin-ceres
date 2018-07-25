@@ -15220,7 +15220,7 @@ Vue.component("checkout", {
                 this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
             }
 
-            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList)) {
+            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList.slice())) {
                 this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
             }
 
@@ -16992,7 +16992,8 @@ Vue.component("registration", {
             billingAddress: {
                 countryId: null,
                 stateId: null,
-                addressSalutation: 0
+                addressSalutation: 0,
+                gender: "male"
             },
             isDisabled: false
         };
@@ -17802,17 +17803,10 @@ Vue.component("item-bundle", {
 
     data: function data() {
         return {
-            bundleSetting: null
+            bundleSetting: null,
+            showItemBundleItems: true
         };
     },
-
-
-    computed: {
-        showItemBundleItems: function showItemBundleItems() {
-            return this.bundleSetting !== "1" && this.bundleType === "bundle";
-        }
-    },
-
     created: function created() {
         this.$options.template = this.template;
     },
@@ -17822,6 +17816,7 @@ Vue.component("item-bundle", {
         this.$nextTick(function () {
             if (_this.$refs.bundleSetting) {
                 _this.bundleSetting = _this.$refs.bundleSetting.innerText;
+                _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
             }
         });
     },
@@ -17954,11 +17949,16 @@ Vue.component("item-image-carousel", {
                     wrapAround: true
                 });
                 window.lightbox.imageCountLabel = function (current, total) {
-                    if (imageCount <= 1) {
+                    if ((0, _utils.isNullOrUndefined)(imageCount) || imageCount <= 1) {
                         return "";
                     }
-                    // owl prepends 2 clones to allow endless scrolling
-                    current = current % imageCount + 1;
+                    current -= (total - imageCount) / 2;
+                    while (current <= 0) {
+                        current += imageCount;
+                    }
+                    while (current > imageCount) {
+                        current -= imageCount;
+                    }
                     return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
                 };
 
@@ -21283,6 +21283,8 @@ var _index = require("store/index.js");
 
 var _index2 = _interopRequireDefault(_index);
 
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.directive("render-category", {
@@ -21316,10 +21318,12 @@ Vue.directive("render-category", {
                 }
             }
             // check if user click the opened category and change the ui handling
-            else if (openCategory && openCategory.contains(event.target)) {
+            else if (openCategory && openCategory.contains(event.target) || document.body.classList.contains("no-touch") || binding.value.alwaysOpen) {
                     _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
-                } else if (document.body.classList.contains("no-touch") || binding.value.alwaysOpen) {
-                    _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
+
+                    if (!(0, _utils.isNullOrUndefined)(binding.value.scrollToTop) && !isNaN(binding.value.scrollToTop)) {
+                        $("html, body").animate({ scrollTop: 0 }, binding.value.scrollToTop);
+                    }
                 }
         };
     },
@@ -21329,7 +21333,7 @@ Vue.directive("render-category", {
     }
 });
 
-},{"store/index.js":135}],95:[function(require,module,exports){
+},{"../../helper/utils":122,"store/index.js":135}],95:[function(require,module,exports){
 "use strict";
 
 Vue.directive("scroll-to-top", {
@@ -22044,7 +22048,7 @@ var MonetaryFormatter = function () {
                     }
                 case T_DECIMAL:
                     {
-                        return _this2.separatorDecimals + _getDecimalValue((value * 100).toFixed(0).substr(-2, 2));
+                        return _this2.separatorDecimals + _getDecimalValue(Math.floor(value * 100).toFixed(0).substr(-2, 2));
                     }
                 case T_CURRENCY:
                     {
