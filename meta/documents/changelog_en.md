@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v2.13.0 (2018-07-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v2.13.0 (2018-07-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
 
@@ -22,6 +22,7 @@
 - Due to an error, the VAT ID on the registration page was validated for non-business customers. This has been fixed.
 - If the "Reset password" email was opened via an e-mail client, the link was not recognised as such. This error has been fixed.
 - The .twig file of the third item list used several faulty IDs. This error has been fixed.
+- The CDN URLs for item images are now loaded client-dependently in the correct manner.
 
 ## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
