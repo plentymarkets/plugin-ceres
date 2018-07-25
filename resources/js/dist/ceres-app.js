@@ -24527,17 +24527,16 @@ var actions = {
         var commit = _ref.commit,
             state = _ref.state;
 
-        console.log("addLastSeenItem");
         if (!state.isLastSeenItemsLoading) {
             return new Promise(function (resolve, reject) {
                 commit("setIsLastSeenItemsLoading", true);
 
-                console.log("send addLastSeenItem");
                 _ApiService2.default.put("/rest/io/item/last_seen/" + variationId).done(function (response) {
                     commit("setLastSeenItems", response.documents);
                     commit("setIsLastSeenItemsLoading", false);
                     resolve(response.documents);
                 }).fail(function (error) {
+                    commit("setIsLastSeenItemsLoading", false);
                     reject(error);
                 });
             });
@@ -24548,15 +24547,12 @@ var actions = {
     getLastSeenItems: function getLastSeenItems(_ref2) {
         var commit = _ref2.commit;
 
-
-        console.log("getLastSeenItems");
         if (!state.isLastSeenItemsLoading) {
             return new Promise(function (resolve, reject) {
                 var params = { items: App.config.itemLists.lastSeenNumber };
 
                 commit("setIsLastSeenItemsLoading", true);
 
-                console.log("send getLastSeenItems");
                 _ApiService2.default.get("/rest/io/item/last_seen", params, { keepOriginalResponse: true }).done(function (response) {
                     if ((0, _utils.isDefined)(response.data)) {
                         commit("setLastSeenItems", response.data.documents);
@@ -24564,6 +24560,7 @@ var actions = {
                         resolve(response.data.documents);
                     }
                 }).fail(function (error) {
+                    commit("setIsLastSeenItemsLoading", false);
                     reject(error);
                 });
             });
