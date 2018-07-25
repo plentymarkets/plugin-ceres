@@ -8,6 +8,7 @@ import itemList from "store/modules/ItemListModule";
 import item from "store/modules/SingleItemModule";
 import basket from "store/modules/BasketModule";
 import orderReturn from "store/modules/OrderReturnModule";
+import lastSeen from "store/modules/LastSeenModule";
 
 Vue.use(require("vue-script2"));
 
@@ -25,7 +26,8 @@ const store = new Vuex.Store(
             itemList,
             item,
             basket,
-            orderReturn
+            orderReturn,
+            lastSeen
         }
     });
 
