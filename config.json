@@ -1316,6 +1316,14 @@
                         ]
                     }
                 },
+                "pagination.noindex": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.pagination_noindex",
+                    "options": {
+                        "defaultValue": "0"
+                    }
+                },
                 "sort.data": {
                     "type": "multiCheckBox",
                     "required": false,
