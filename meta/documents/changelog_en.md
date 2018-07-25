@@ -23,6 +23,7 @@
 - If the "Reset password" email was opened via an e-mail client, the link was not recognised as such. This error has been fixed.
 - The .twig file of the third item list used several faulty IDs. This error has been fixed.
 - The CDN URLs for item images are now loaded client-dependently in the correct manner.
+- Due to an error, no items were added to the **last seen** item list, if the list was not also linked to the single item view. This has been fixed.
 
 ## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
