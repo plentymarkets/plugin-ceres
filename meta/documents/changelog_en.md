@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v2.13.0 (2018-07-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
 
@@ -24,6 +24,7 @@
 - The .twig file of the third item list used several faulty IDs. This error has been fixed.
 - The CDN URLs for item images are now loaded client-dependently in the correct manner.
 - Due to an error, no items were added to the **last seen** item list, if the list was not also linked to the single item view. This has been fixed.
+- Due to an error, certain items were not displayed on the order confirmation page if they were part of an item bundle. This has been fixed.
 
 ## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
