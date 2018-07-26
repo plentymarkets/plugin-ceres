@@ -1,6 +1,6 @@
 # Release Notes für Ceres
 
-## v2.13.0 (2018-07-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
@@ -22,6 +22,9 @@
 - Durch einen Fehler wurde die Umsatzsteuer-ID auf der Registrierungsseite auch bei Nutzern validiert, die keine Firmenkunden sind. Dies wurde behoben.
 - Wenn die "Passwort zurücksetzen"-E-Mail mit einem E-Mail-Client geöffnet wurde, wurde der Link nicht erkannt. Dieser Fehler wurde behoben.
 - In der .twig-Datei der dritten Artikelliste wurden teilweise falsche IDs genutzt. Dieser Fehler wurde behoben.
+- Die CDN-URLs für Artikelbilder werden nun korrekt mandantenabhängig geladen.
+- Durch einen Fehler wurden keine Artikel zur **Zuletzt angesehen**-Liste hinzugefügt, wenn diese nicht auf der Artikelansicht verknüpft war. Dies wurde behoben.
+- Durch einen Fehler wurden bestimmte Artikel auf der Bestellbestätigungsseite nicht ausgegeben, wenn sie Teil eines Artikelpakets waren. Dies wurde behoben.
 
 ## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
