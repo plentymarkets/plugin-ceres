@@ -1316,10 +1316,10 @@
                         ]
                     }
                 },
-                "pagination.noindex": {
+                "pagination.noIndex": {
                     "type": "inputText",
                     "required": false,
-                    "label": "Config.pagination_noindex",
+                    "label": "Config.pagination_noIndex",
                     "options": {
                         "defaultValue": "0"
                     }
