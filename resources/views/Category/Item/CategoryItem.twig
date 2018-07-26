@@ -131,5 +131,5 @@
 
     <meta name="description" content="{{ category.details[0].metaDescription }}">
     <meta name="keywords" content="{{ category.details[0].metaKeywords }}">
-    <meta name="robots" content="{% if currentPage >= config("Ceres.pagination.noindex") %}noindex{% else %}{{ metaRobots }}{% endif %}">
+    <meta name="robots" content="{% if currentPage >= config("Ceres.pagination.noindex") and config("Ceres.pagination.noindex") != 0 %}noindex{% else %}{{ metaRobots }}{% endif %}">
 {% endblock %}
