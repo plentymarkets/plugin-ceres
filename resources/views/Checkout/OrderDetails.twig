@@ -135,7 +135,7 @@
         <div class="confirmation-order-list">
 
             {% for item in orderData.order.orderItems %}
-                {% if item.itemVariationId > 0 and item.bundleType != "bundle_item" and item.references is empty %}
+                {% if item.itemVariationId > 0 and not ('[-]' in item.orderItemName) %}
                     {% set currentVariationId = item.itemVariationId | trimNewlines %}
                     {% set priceNet = orderData.order.amounts[0].isNet %}
                     <article class="cmp cmp-order-item">
