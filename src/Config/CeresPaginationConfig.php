@@ -12,7 +12,7 @@ class CeresPaginationConfig extends PluginConfig
     public $showLastPage;
     public $columnsPerPage;
     public $rowsPerPage;
-    public $noindex;
+    public $noIndex;
     
     public function __construct(ConfigRepository $configRepository)
     {
@@ -37,6 +37,6 @@ class CeresPaginationConfig extends PluginConfig
                 "25"
             ]
         );
-        $this->noindex   = $this->getIntegerValue( "pagination.noindex", 0 );
+        $this->noIndex   = $this->getIntegerValue( "pagination.noindex", 0 );
     }
 }
