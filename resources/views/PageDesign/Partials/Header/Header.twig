@@ -74,7 +74,6 @@
                                     aria-label="toggle search"
                                     data-toggle="collapse"
                                     href="#searchBox"
-                                    aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
                                     aria-controls="searchBox"
                                     data-parent="#controlsList">
                                     <span class="anicon-search-item" aria-hidden="true"></span>
@@ -133,7 +132,7 @@
 <div class="container-max page-header">
     <div class="row">
         {% if not isSearchBarAlwaysVisible %}
-        <div id="searchBox" class="cmp cmp-search-box collapse {% if services.template.isSearch() %} in {% endif %}">
+        <div id="searchBox" class="cmp cmp-search-box collapse">
             <item-search></item-search>
         </div>
         {% endif %}
