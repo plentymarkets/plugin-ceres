@@ -89,11 +89,11 @@
                             ${ basket.couponDiscount | currency }
                         </dd>
                     </template>
-                    <template v-if="basket.openAmount > 0">
-                        <dt :class="{ 'font-weight-bold': basket.openAmount > 0 }">
+                    <template v-if="basket.couponCampaignType === 'sales'">
+                        <dt class="font-weight-bold">
                             {{ trans("Ceres::Template.basketOpenAmount") }}
                         </dt><!--
-                    --><dd :class="{ 'font-weight-bold': basket.openAmount > 0 }">
+                    --><dd class="font-weight-bold">
                             ${ basket.openAmount | currency }
                         </dd>
                     </template>
