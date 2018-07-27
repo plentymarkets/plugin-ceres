@@ -275,7 +275,20 @@
                                 </dd>
                             </div>
                         {% endif %} <!-- GrossNetReplace|else -->
-
+                        {% if totals.couponType == 'sales' and (totals.couponValue | trimNewlines) != 0 %}
+                            <dt>
+                                {{ trans("Ceres::Template.checkoutCoupon") }}
+                            </dt><!--
+                                  --><dd>
+                            {{ totals.couponValue | formatMonetary( basketTotalsCurrency ) }}
+                        </dd>
+                            <dt>
+                                <strong>{{ trans("Ceres::Template.checkoutOpenAmount") }}</strong>
+                            </dt><!--
+                                    --><dd>
+                            <strong>{{ totals.openAmount | formatMonetary( basketTotalsCurrency ) }}</strong>
+                        </dd>
+                        {% endif %}
                         {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", orderData.order) }}
                     </dl>
                 </div>
