@@ -11,6 +11,7 @@
 - Der Grundpreis wurde für die Stückzahl 1 nicht ausgegeben. Dies wurde behoben. Die Anzeige des Grundpreises wird nun ausschließlich durch den an der Variante hinterlegten Wert bestimmt.
 - Bei einem Wechsel der Kategorie scrollt der Browser nun automatisch zurück nach oben.
 - Die Dropdown-Liste der Adressauswahl hat nun eine maximale Höhe. Hierdurch wird verhindert, dass bei einer großen Anzahl von Adressen eine Adressauswahl nicht mehr möglich ist.
+- Es wird nun zwischen Verkaufs- und Aktionsgutscheinen unterschieden. Die Anordnung der Gutscheine wurde entsprechend angepasst.
 
 ### Behoben
 
@@ -95,10 +96,6 @@
 - Durch einen Fehler wechselte die Summenanzeige im Header nach Änderungen nicht direkt zwischen Brutto- und Nettosummen. Dies wurde behoben.
 
 ## v2.9.1 (2018-06-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.0...2.9.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
-
-### Geändert
-
-- Es wird nun zwischen Verkaufs- und Aktionsgutscheinen unterschieden. Die Anordnung der Gutscheine wurde entsprechend angepasst.
 
 ### Behoben
 
