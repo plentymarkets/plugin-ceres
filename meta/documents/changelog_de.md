@@ -2,6 +2,10 @@
 
 ## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### ToDo
+
+- Falls nach dem Update auf Version 2.13 Artikellisten nicht auf der mit dem Shop Builder erstellten Startseite angezeigt werden, muss die Shop Builder Startseite erneut gespeichert werden.
+
 ### Hinzugefügt
 
 - Es wurde ein neuer Layout-Container unterhalb der Bestelldetails auf der Bestellbestätigungsseite hinzugefügt.
