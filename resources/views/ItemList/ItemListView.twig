@@ -76,6 +76,7 @@
 {% block PartialHead %}
 <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ webstoreConfig.domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
     {% if isSearch %}
+        <meta name="robots" content="{{ config("Ceres.meta.robots_search_result") }}">
         <title>{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
     {% endif %}
 {% endblock %}
