@@ -1,4 +1,5 @@
 import {isNull}from "util";
+import {textWidth}from "../../helper/dom";
 
 const ApiService = require("services/ApiService");
 
@@ -129,6 +130,16 @@ Vue.component("variation-select", {
             }
 
             return hasChanges;
+        },
+
+        isTextCut(name)
+        {
+            if (this.$refs.labelBoxRef)
+            {
+                return textWidth(name, "Custom-Font, Helvetica, Arial, sans-serif") > this.$refs.labelBoxRef[0].clientWidth;
+            }
+
+            return false;
         },
 
         onSelectionChange(event)
