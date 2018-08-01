@@ -6,6 +6,8 @@ use Ceres\Helper\ExternalSearch;
 use Ceres\Helper\SearchOptions;
 use IO\Services\ItemSearch\SearchPresets\VariationList;
 use IO\Services\ItemSearch\Services\ItemSearchService;
+use IO\Services\SessionStorageService;
+use Plenty\Plugin\Translation\Translator;
 
 trait ItemListContext
 {
@@ -80,6 +82,24 @@ trait ItemListContext
         $this->itemCountPage    = count( $searchResults['itemList']['documents'] );
         $this->itemCountTotal   = $searchResults['itemList']['total'];
         $this->itemList         = $searchResults['itemList']['documents'];
+    
+        if(count($searchResults['facets']))
+        {
+            /** @var SessionStorageService $sessionStorage */
+            $sessionStorage = pluginApp(SessionStorageService::class);
+    
+            /** @var Translator $translator */
+            $translator = pluginApp(Translator::class);
+            
+            foreach($searchResults['facets'] as $key => $facet)
+            {
+                if($facet['id'] == 'category')
+                {
+                    $searchResults['facets'][$key]['name'] = $translator->trans('Ceres::Template.itemFilterCategory', [], $sessionStorage->getLang());
+                }
+            }
+        }
+        
         $this->facets           = $searchResults['facets'];
     }
 }

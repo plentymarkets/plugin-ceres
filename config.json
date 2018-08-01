@@ -862,6 +862,14 @@
                     "options": {
                         "defaultValue": "false"
                     }
+                },
+                "item.show_category_filter": {
+                  "type": "checkBox",
+                  "required": false,
+                  "label": "Config.itemShowCategoryFilterLabel",
+                  "options": {
+                    "defaultValue": "false"
+                  }
                 }
             }
         },
