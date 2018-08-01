@@ -1,10 +1,24 @@
 <script type="x/template" id="vue-item-search">
     <div class="search-box-inner">
         <div class="search-box-shadow-frame">
-            <input type="search" class="search-input" v-model="currentSearchString" @keyup.enter="search()"
-                   {% if not services.template.isSearch() %}autofocus{% endif %}>
-            <button class="search-submit" type="submit" @click="search()">
+            <input
+                type="search"
+                class="search-input"
+                ref="searchInput"
+                v-model="currentSearchString"
+                @keyup.enter="search()"
+                {% if not services.template.isSearch() %}autofocus{% endif %}
+            >
+            <button
+                v-if="currentSearchString.length <= 0"
+                class="search-submit"
+                type="submit"
+                @click="search()"
+            >
                 <i class="fa fa-search sm-up"></i>
+            </button>
+            <button v-else class="search-submit" @click="clearInput()">
+                <i  class="fa fa-times sm-up"></i>
             </button>
         </div>
     </div>
