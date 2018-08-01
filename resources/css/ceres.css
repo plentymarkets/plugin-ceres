@@ -14451,6 +14451,13 @@ Custom classes
   text-align-last: left;
 }
 
+.variation-select label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 140px;
+  white-space: nowrap;
+}
+
 .top-bar {
   position: absolute;
   width: 100%;
