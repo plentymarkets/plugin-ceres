@@ -77,6 +77,8 @@ Vue.component("item-search", {
             {
                 this.search();
             }
+
+            $("#searchBox").collapse("hide");
         },
 
         search()
