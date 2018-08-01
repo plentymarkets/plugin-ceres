@@ -1,0 +1,37 @@
+{% set companyLogo  = config("Ceres.header.company_logo") %}
+{% set lang         = services.sessionStorage.getLang() %}
+{% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
+{% set companyName  = trans("Ceres::Template.headerCompanyName") %}
+{% set useMegaMenu  = config("Ceres.header.megamenu_levels") > 1 %}
+
+<nav class="navbar{% if useMegaMenu %} megamenu{%endif%}">
+    <div class="container-max">
+        <div class="row">
+            <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
+                <a class="navbar-brand pull-lg-left" href="{{ homepageURL }}">
+                    {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
+                        <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
+                    {% else %}
+                        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
+                    {% endif %}
+                </a>
+
+                <button id="btnMainMenuToggler" v-open-mobile-navigation class="navbar-toggler hidden-lg-up" type="button">
+                    &#9776;
+                </button>
+            </div>
+
+            <div id="mainNavbarCollapsable">
+                <ul class="breadcrumb">
+                    <li class="btnClose"></li>
+                </ul>
+                {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
+                    {# includeCached('Ceres::PageDesign.Partials.Header.NavigationList.twig') #}
+                    {% include "Ceres::PageDesign.Partials.Header.NavigationList" %}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</nav>
+

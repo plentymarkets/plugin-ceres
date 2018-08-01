@@ -1,0 +1,11 @@
+{
+    "identifier": "Ceres::NavigationWidget",
+    "label": "Widget.navigationLabel",
+    "previewImageURL": "/images/widgets/title-bar.png",
+    "type": "header",
+    "position": 0,
+    "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
+    "settings": {
+
+    }
+}
