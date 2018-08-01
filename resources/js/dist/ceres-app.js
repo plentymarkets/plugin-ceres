@@ -18319,6 +18319,8 @@ Vue.component("single-item", {
 
 var _util = require("util");
 
+var _dom = require("../../helper/dom");
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var ApiService = require("services/ApiService");
@@ -18437,6 +18439,13 @@ Vue.component("variation-select", {
 
             return hasChanges;
         },
+        isTextCut: function isTextCut(name) {
+            if (this.$refs.labelBoxRef) {
+                return (0, _dom.textWidth)(name, "Custom-Font, Helvetica, Arial, sans-serif") > this.$refs.labelBoxRef[0].clientWidth;
+            }
+
+            return false;
+        },
         onSelectionChange: function onSelectionChange(event) {
             this.$emit("is-valid-change", false);
 
@@ -18516,7 +18525,7 @@ Vue.component("variation-select", {
     }
 });
 
-},{"services/ApiService":125,"util":8}],54:[function(require,module,exports){
+},{"../../helper/dom":118,"services/ApiService":125,"util":8}],54:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-image-carousel", {
@@ -21733,6 +21742,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.findParent = findParent;
 exports.is = is;
+exports.textWidth = textWidth;
 /**
  * Get first parent element which matches a given selector
  *
@@ -21770,6 +21780,32 @@ function is(element, selector) {
     }
 
     return element.matches(selector);
+}
+
+/**
+ * Get the width of a specified text depending on the font-family
+ *
+ * @param {string} text
+ * @param {string} fontFamily
+ *
+ * @returns {integer}
+ */
+function textWidth(text, fontFamily) {
+    var tag = document.createElement("div");
+
+    tag.style.position = "absolute";
+    tag.style.left = "-99in";
+    tag.style.whiteSpace = "nowrap";
+    tag.style.font = fontFamily;
+    tag.innerHTML = text;
+
+    document.body.appendChild(tag);
+
+    var result = tag.clientWidth;
+
+    document.body.removeChild(tag);
+
+    return result;
 }
 
 },{}],119:[function(require,module,exports){
