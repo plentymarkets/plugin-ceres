@@ -85,15 +85,16 @@ trait ItemListContext
     
         if(count($searchResults['facets']))
         {
+            /** @var SessionStorageService $sessionStorage */
+            $sessionStorage = pluginApp(SessionStorageService::class);
+    
+            /** @var Translator $translator */
+            $translator = pluginApp(Translator::class);
+            
             foreach($searchResults['facets'] as $key => $facet)
             {
                 if($facet['id'] == 'category')
                 {
-                    /** @var SessionStorageService $sessionStorage */
-                    $sessionStorage = pluginApp(SessionStorageService::class);
-                
-                    /** @var Translator $translator */
-                    $translator = pluginApp(Translator::class);
                     $searchResults['facets'][$key]['name'] = $translator->trans('Ceres::Template.itemFilterCategory', [], $sessionStorage->getLang());
                 }
             }
