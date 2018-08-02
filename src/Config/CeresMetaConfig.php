@@ -28,6 +28,7 @@ class CeresMetaConfig extends PluginConfig
     public $robotsTermsAndConditions;
     public $descriptionTermsAndConditions_de;
     public $descriptionTermsAndConditions_en;
+    public $robotsSearchResult;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -60,5 +61,7 @@ class CeresMetaConfig extends PluginConfig
         $this->robotsTermsAndConditions             = $this->getTextValue( "meta.robots_terms_and_conditions" , "all" );
         $this->descriptionTermsAndConditions_de     = $this->getTextValue( "meta.de.description_terms_and_conditions" );
         $this->descriptionTermsAndConditions_en     = $this->getTextValue( "meta.en.description_terms_and_conditions" );
+
+        $this->robotsSearchResult                   = $this->getTextValue( "meta.robots_search_result" , "all" );
     }
 }

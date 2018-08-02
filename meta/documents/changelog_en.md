@@ -2,6 +2,10 @@
 
 ## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### ToDo
+
+- If item lists are not displayed on the Shop Builder homepage after the upgrade to version 2.13, the Shop Builder homepage has to be saved again.
+
 ### Added
 
 - A new layout container has been added underneath the order details on the order confirmation page.
@@ -11,6 +15,7 @@
 - The unit price was not displayed if the number of units was 1. This has ben fixed. The display of the unit price is now exclusively dependent on the setting stored at the variation level.
 - The browser now scrolls back to the top of the page whenever the user changes the category.
 - The drop-down list for addresses is now limited to a maximum height. This prevents that a large number of addresses makes an address selection impossible.
+- Coupons are now distinguished into **gift cards** and **coupons for special offers**. The layout for coupons has been adjusted accordingly.
 
 ### Fixed
 
@@ -95,10 +100,6 @@
 - Due to an error, the display of sums in the header did not immediately switch between gross and net sums upon changes. This has been fixed.
 
 ## v2.9.1 (2018-06-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.0...2.9.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
-
-### Changed
-
-- Coupons are now distinguished into **gift cards** and **coupons for special offers**. The layout for coupons has been adjusted accordingly.
 
 ### Fixed
 

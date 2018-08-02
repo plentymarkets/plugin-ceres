@@ -12404,6 +12404,10 @@ a:active {
   border-radius: 0;
 }
 
+.position-fixed {
+  position: fixed !important;
+}
+
 body {
   background-color: #f7f7f9;
 }
@@ -14447,8 +14451,15 @@ Custom classes
   text-align-last: left;
 }
 
+.variation-select label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 140px;
+  white-space: nowrap;
+}
+
 .top-bar {
-  position: fixed;
+  position: absolute;
   width: 100%;
   z-index: 1060;
   color: #fff;
@@ -16564,6 +16575,8 @@ body.menu-is-visible {
 .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner .meta-container .item-name {
   font-weight: 700;
   font-size: 80%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner .meta-container .item-base-price {

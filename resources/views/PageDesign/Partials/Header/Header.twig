@@ -14,7 +14,7 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set currencyFormatSelect = config("Ceres.currency.format_selection") %}
 
-<header class="top-bar">
+<header class="top-bar {% if ceresConfig.header.fixedNavBar %}position-fixed{% endif %}">
     <div>
         <div class="container-max">
             <div class="row">
