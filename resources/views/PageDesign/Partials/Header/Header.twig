@@ -14,10 +14,10 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set currencyFormatSelect = config("Ceres.currency.format_selection") %}
 
+<header id="page-header" class="pos-f-t">
 {% set headerContainer = LayoutContainer.show("Ceres::Header") | trim %}
 {% if headerContainer is empty %}
-<header class="top-bar">
-    <div>
+    <div class="top-bar">
         <div class="container-max">
             <div class="row">
                 {{ LayoutContainer.show("Ceres::Header.LeftSide") }}
@@ -98,9 +98,8 @@
                 </ul>
             </div>
         </div>
-        {% include "Ceres::PageDesign.Partials.Header.Navigation" %}
     </div>
-</header>
+
 
 
 <!-- breadcrumb -->
@@ -192,6 +191,8 @@
         </shop-country-settings>
     </div>
 </div>
+{% include "Ceres::PageDesign.Partials.Header.Navigation" %}
 {% else %}
     {{ headerContainer | raw }}
 {% endif %}
+</header>

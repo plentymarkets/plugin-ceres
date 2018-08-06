@@ -166,6 +166,7 @@
     };
 </script>
 
+
 {{ Loader.include_components() }}
 
 {{ LayoutContainer.show("Ceres::Script.Loader") }}
@@ -211,6 +212,22 @@
     }
 
     (function($) {
+        function calculateBodyOffset()
+        {
+            var header = document.getElementById('page-header');
+            if ( header.classList.contains('pos-f-t') )
+            {
+                var bodyOffset = 0;
+                var children = header.children;
+                for( var i = 0; i < children.length; i++ )
+                {
+                    bodyOffset += children[i].getBoundingClientRect().height;
+                }
+                document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
+            }
+        }
+        calculateBodyOffset();
+
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
         {
             var compiled = Vue.compile(widgetElement[0].outerHTML );
@@ -224,6 +241,10 @@
                 $(elem).click(function(event) {
                     event.preventDefault();
                 });
+            });
+            window.setTimeout(function()
+            {
+                calculateBodyOffset();
             });
         });
     })(jQuery);

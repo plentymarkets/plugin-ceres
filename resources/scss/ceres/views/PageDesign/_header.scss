@@ -4,8 +4,6 @@
 	@media print {
 		display: none;
 	}
-
-	position: fixed;
 	width: 100%;
 	
 	z-index: $zIndex-6;
@@ -225,7 +223,7 @@
 //navigation scss
 .wrapper-main {
 	#page-body {
-		margin-top: 118px;
+		// margin-top: 118px;
 
 		@media print {
 			margin-top: 0;
