@@ -14447,8 +14447,14 @@ Custom classes
   text-align-last: left;
 }
 
+.variation-select label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 140px;
+  white-space: nowrap;
+}
+
 .top-bar {
-  position: fixed;
   width: 100%;
   z-index: 1060;
   color: #fff;
@@ -14466,6 +14472,65 @@ Custom classes
   text-decoration: none;
   color: #fff;
   outline: none;
+}
+
+.top-bar .search-shown {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .top-bar .search-shown {
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex-align: center;
+        align-items: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .top-bar .search-shown {
+    -ms-flex-direction: column-reverse;
+        flex-direction: column-reverse;
+  }
+}
+
+.top-bar .search-shown .always-visible-search {
+  margin: 5px 5px;
+  background-color: #fff;
+  -ms-flex: 1;
+      flex: 1;
+}
+
+.top-bar .search-shown .always-visible-search .search-box-shadow-frame {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex: 100;
+      flex: 100;
+}
+
+.top-bar .search-shown .always-visible-search .search-box-shadow-frame .search-input {
+  border: none;
+  outline: none;
+  padding: 0.4rem 1rem;
+  font-size: 1.3rem;
+  line-height: 1;
+  -ms-flex: 1 70%;
+      flex: 1 70%;
+}
+
+.top-bar .search-shown .always-visible-search .search-box-shadow-frame .search-submit {
+  color: #008ebd;
+  border: none;
+  font-size: 1.3rem;
+  line-height: 1;
+  padding: 0.4rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .top-bar .search-shown .controls-list > li a:not(.btn) {
+    padding: 1rem .8rem;
+  }
 }
 
 .top-bar .controls-list {
@@ -14499,7 +14564,7 @@ Custom classes
 
 @media (min-width: 768px) {
   .top-bar .controls-list > li a:not(.btn) {
-    padding: 0.5rem .8rem;
+    padding: .5rem .8rem;
     display: inline-block;
     color: #dcdbd8;
   }
@@ -14656,10 +14721,6 @@ Custom classes
 
 .top-bar .controls-list .control-basket .toggle-basket-preview:hover {
   background-color: #00688a;
-}
-
-.wrapper-main #page-body {
-  margin-top: 118px;
 }
 
 @media print {
@@ -14900,12 +14961,67 @@ Custom classes
   margin: 0 auto;
 }
 
-.cmp-search-box .search-box-shadow-frame {
+.search-box-shadow-frame {
   display: -ms-flexbox;
   display: flex;
   -ms-flex: 100;
       flex: 100;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.search-box-shadow-frame .autocomplete-suggestions {
+  position: absolute;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  z-index: 1070;
+  max-height: 310px;
+  width: 100%;
+  top: 100%;
+}
+
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion {
+  padding: 5px 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion:hover {
+  background: #dcdbd8;
+}
+
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion.autocomplete-selected {
+  background: #dcdbd8;
+}
+
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-item-name {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  color: #4D4F4D;
+}
+
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-image-container {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  margin-right: 5px;
+}
+
+.search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-image-container > .autocomplete-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  max-height: 40px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cmp-search-box .search-input {
@@ -14935,23 +15051,6 @@ Custom classes
 
 .cmp-search-box .search-submit:hover {
   color: #004157;
-}
-
-.autocomplete-suggestions {
-  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  background: #ffffff;
-  overflow: auto;
-}
-
-.autocomplete-suggestion {
-  padding: 5px 15px;
-  white-space: nowrap;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.autocomplete-selected {
-  background: #dcdbd8;
 }
 
 .cmp-country-settings,

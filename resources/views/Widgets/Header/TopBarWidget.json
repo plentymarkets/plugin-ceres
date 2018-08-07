@@ -6,6 +6,94 @@
     "position": 0,
     "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",
     "settings": {
-
+        "searchStyle": {
+            "type": "selectBox",
+            "required": true,
+            "label": "Widget.topBarSearchStyleLabel",
+            "options": {
+                "tooltip": "Widget.topBarSearchStyleTooltip",
+                "defaultValue": "onDemand",
+                "selectBoxValues": [
+                    {
+                        "value": "hidden",
+                        "caption": "Widget.topBarSearchStyleHidden",
+                        "position": 0
+                    },
+                    {
+                        "value": "onDemand",
+                        "caption": "Widget.topBarSearchStyleOnDemand",
+                        "position": 0
+                    },
+                    {
+                        "value": "permanent",
+                        "caption": "Widget.topBarSearchStylePermanent",
+                        "position": 0
+                    }
+                ]
+            }
+        },
+        "enableLogin": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableLoginLabel",
+            "options": {
+                "tooltip": "Widget.topBarEnableLoginTooltip",
+                "defaultValue": true
+            }
+        },
+        "enableRegistration": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableRegistrationLabel",
+            "options": {
+                "tooltip": "Widget.topBarEnableRegistrationTooltip",
+                "defaultValue": true
+            }
+        },
+        "enableLanguageSelect": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableLanguageSelectLabel",
+            "options": {
+                "tooltip": "Widget.topBarEnableLanguageSelectTooltip",
+                "defaultValue": true
+            }
+        },
+        "enableShippingCountrySelect": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableShippingCountrySelectLabel",
+            "options": {
+                "tooltip": "Widget.topBarEnableShippingCountrySelectTooltip",
+                "defaultValue": true
+            }
+        },
+        "enableCurrencySelect": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableCurrencySelectLabel",
+            "options": {
+                "tooltip": "Widget.topBarEnableCurrencySelectTooltip",
+                "defaultValue": true
+            }
+        },
+        "enableWishList": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableWishListLabel",
+            "options": {
+                "tooltip": "Widget.topBarEnableWishListTooltip",
+                "defaultValue": true
+            }
+        },
+        "enableBasketPreview": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableBasketPreviewLabel",
+            "options": {
+                "tooltip": "Widget.topBarEnableBasketPreviewTooltip",
+                "defaultValue": true
+            }
+        }
     }
 }

@@ -11,7 +11,8 @@ Vue.component("user-login-handler", {
         template: {
             type: String,
             default: "#vue-user-login-handler"
-        }
+        },
+        showRegistration: Boolean
     },
 
     computed: Vuex.mapGetters([
