@@ -1,3 +1,5 @@
+import TranslationService from "services/TranslationService";
+
 Vue.component("item-filter", {
 
     delimiters: ["${", "}"],
@@ -24,6 +26,16 @@ Vue.component("item-filter", {
 
                 return 0;
             });
+        },
+
+        facetName()
+        {
+            if (this.facet.translationKey && this.facet.translationKey.length > 0)
+            {
+                return TranslationService.translate("Ceres::" + this.facet.translationKey);
+            }
+
+            return this.facet.name;
         },
 
         ...Vuex.mapState({
