@@ -6,6 +6,8 @@
 {% set numberOfFeatures = config('Ceres.footer.number_of_features') %}
 {% set topButtonPosition = config('Ceres.footer.to_top_button') %}
 
+{% set footerContainer = LayoutContainer.show("Ceres::Footer") | trim %}
+{% if footerContainer is empty %}
 <div class="footer">
 
     <div class="{% if topButtonPosition == "right" %}back-to-top{% else %}back-to-top-center{% endif %} hidden-sm-down">
@@ -131,3 +133,6 @@
         </div>
     </div>
 </div>
+{% else %}
+    {{ footerContainer | raw }}
+{% endif %}
