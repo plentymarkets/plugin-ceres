@@ -32,7 +32,7 @@ Vue.component("item-filter", {
         {
             if (this.facet.translationKey && this.facet.translationKey.length > 0)
             {
-                return TranslationService.translate("Ceres::" + this.facet.translationKey);
+                return TranslationService.translate("Ceres::Template." + this.facet.translationKey);
             }
 
             return this.facet.name;
