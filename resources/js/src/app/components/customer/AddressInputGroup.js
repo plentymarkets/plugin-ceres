@@ -20,6 +20,19 @@ Vue.component("address-input-group", {
         }
     },
 
+    computed:
+    {
+        isPickupStation()
+        {
+            return this.value && this.value.address1 === "PACKSTATION";
+        },
+
+        isPostOffice()
+        {
+            return this.value && this.value.address1 === "POSTFILIALE";
+        }
+    },
+
     data()
     {
         return {

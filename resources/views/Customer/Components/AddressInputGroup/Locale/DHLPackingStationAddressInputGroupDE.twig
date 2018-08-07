@@ -89,8 +89,8 @@
         <div class="col-xs-12 col-sm-8">
             <div class="input-unit" data-validate="" data-model="address1">
                 <select  :value="value.address1" class="custom-select" @change="emitInputEvent('address1', $event.target.value)">
-                    <option value="PACKSTATION" :selected="value.address1 === 'PACKSTATION'">{{ trans("Ceres::Template.addressPackingStation") }}</option>
-                    <option value="POSTFILIALE" :selected="value.address1 === 'POSTFILIALE'">{{ trans("Ceres::Template.addressPostOffice") }}</option>
+                    <option value="PACKSTATION" :selected="isPickupStation">{{ trans("Ceres::Template.addressPackingStation") }}</option>
+                    <option value="POSTFILIALE" :selected="isPostOffice">{{ trans("Ceres::Template.addressPostOffice") }}</option>
                 </select>
                 <label>{{ trans("Ceres::Template.addressPickupLocation") }}</label>
             </div>
@@ -100,8 +100,8 @@
         <div class="col-xs-12 col-sm-4">
             <div class="input-unit" data-validate="text" data-model="address2">
                 <input type="text" name="housenumber" autocomplete="address-line2" :id="'txtNumber' + _uid" :value="value.address2" @input="emitInputEvent('address2', $event.target.value)">
-                <label v-if="value.address1 === 'PACKSTATION'" :for="'txtNumber' + _uid">{{ trans("Ceres::Template.addressPostOfficeNumber") }}*</label>
-                <label v-if="value.address1 === 'POSTFILIALE'" :for="'txtNumber' + _uid">{{ trans("Ceres::Template.addressPackingStationNumber") }}*</label>
+                <label v-if="isPickupStation" :for="'txtNumber' + _uid">{{ trans("Ceres::Template.addressPostOfficeNumber") }}*</label>
+                <label v-if="isPostOffice" :for="'txtNumber' + _uid">{{ trans("Ceres::Template.addressPackingStationNumber") }}*</label>
             </div>
         </div>
     </div>
