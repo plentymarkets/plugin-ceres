@@ -5,7 +5,7 @@
 <script type="x/template" id="vue-address-input-group">
 
     <div>
-        <div v-if="isPickupStation || isPostOffice">
+        <div v-if="value.isPickupStation && addressType === '2'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DHLPackingStationAddressInputGroupDE" %}
         </div>
         <div v-else-if="localeToShow == 'DE' && addressType === '1'">
@@ -20,7 +20,7 @@
         <div v-else-if="localeToShow == 'GB' && addressType === '2'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DeliveryAddressInputGroupGB" %}
         </div>
-
+        
         <div class="col-xs-12 col-sm-4">
             <country-select
                 template="#vue-country-select"
@@ -32,6 +32,8 @@
                 :address-type="addressType">
             </country-select>
         </div>
+
+        <button type="button" @click="swapPickup()">PACK SWITCH</button>
     </div>
 
 </script>

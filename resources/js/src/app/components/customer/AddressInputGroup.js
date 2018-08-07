@@ -70,6 +70,11 @@ Vue.component("address-input-group", {
             this.emitInputEvent("countryId", shippingCountry.id);
         },
 
+        swapPickup()
+        {
+            this.value.isPickupStation = !this.value.isPickupStation;
+        },
+
         /**
          * @param {string} field
          * @param {number} value
