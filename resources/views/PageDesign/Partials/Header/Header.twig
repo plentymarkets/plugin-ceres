@@ -13,93 +13,110 @@
 {% set enableCurrencySelect = config("Ceres.currency.enable_selection") == "true" and activeCurrencies | length > 0 %}
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set currencyFormatSelect = config("Ceres.currency.format_selection") %}
+{% set isSearchBarAlwaysVisible = config("Ceres.search.alwaysShowSearchBar") == "true" %}
 
 <header id="page-header" class="pos-f-t">
 {% set headerContainer = LayoutContainer.show("Ceres::Header") | trim %}
 {% if headerContainer is empty %}
-    <div class="top-bar">
-        <div class="container-max">
-            <div class="row">
-                {{ LayoutContainer.show("Ceres::Header.LeftSide") }}
-
-                <ul id="controlsList" class="controls-list list-inline">
-
-                    <li class="list-inline-item control-user">
-                        <user-login-handler>
-                            <a data-toggle="modal">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                                <span class="hidden-xs-down">{{ trans("Ceres::Template.login") }}</span>
-                            </a>
-                            <span class="pipe"></span>
-                            <a data-toggle="modal">
-                                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                                <span class="hidden-xs-down">{{ trans("Ceres::Template.loginRegister") }}</span>
-                            </a>
-                        </user-login-handler>
-                    </li>
-                    <li class="list-inline-item dropdown control-languages">
-                        <a data-toggle="collapse" href="#countrySettings" aria-expanded="false"
-                            aria-controls="countrySettings"
-                            data-parent="#controlsList">
-                            <i class="flag-icon flag-icon-{{ lang }}"></i>
-                        </a>
-                    </li>
-
-                    {% if enableCurrencySelect == "true" %}
-                        <li class="list-inline-item dropdown control-languages">
-                            <a class=""
-                                data-toggle="collapse"
-                                href="#currencySelect"
-                                aria-expanded="false"
-                                aria-controls="currencySelect"
-                                data-parent="#controlsList">
-                                <span>{{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    <li class="list-inline-item control-search">
-                        <a class="anicon anicon-search-xcross"
-                           aria-label="toggle search"
-                           data-toggle="collapse"
-                           href="#searchBox"
-                           aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
-                           aria-controls="searchBox"
-                           data-parent="#controlsList">
-                            <span class="anicon-search-item" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                    {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
-                        <li class="list-inline-item control-wish-list">
-                            <wish-list-count>
-                                <a>
-                                    <span class="badge-right">0</span>
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+<div class="top-bar">
+    <div class="container-max">
+        <div class="row">
+            <div class="top-bar-items {% if isSearchBarAlwaysVisible %}search-shown{% endif %}">
+                {% if isSearchBarAlwaysVisible %}
+                <div class="always-visible-search">
+                    <item-search template="#vue-item-search">
+                        <div class="search-box-inner">
+                            <div class="search-box-shadow-frame">
+                                <input type="search" class="search-input"/>
+                                <button class="search-submit" type="submit">
+                                    <i class="fa fa-search sm-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </item-search>
+                </div>
+                {% endif %}
+                <div class="controls">
+                    <ul id="controlsList" class="controls-list list-inline">
+                        <li class="list-inline-item control-user">
+                            <user-login-handler>
+                                <a data-toggle="modal">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span class="hidden-xs-down">{{ trans("Ceres::Template.login") }}</span>
                                 </a>
-                            </wish-list-count>
+                                <span class="pipe"></span>
+                                <a data-toggle="modal">
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <span class="hidden-xs-down">{{ trans("Ceres::Template.loginRegister") }}</span>
+                                </a>
+                            </user-login-handler>
                         </li>
-                    {% endif %}
-                    <li class="list-inline-item control-basket">
-                        <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
-                            {% if config("Ceres.header.basket_values") != "sum" %}
-                                <span class="badge-right" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
-                            {% endif %}
+                        <li class="list-inline-item dropdown control-languages">
+                            <a data-toggle="collapse" href="#countrySettings" aria-expanded="false"
+                                aria-controls="countrySettings"
+                                data-parent="#controlsList">
+                                <i class="flag-icon flag-icon-{{ lang }}"></i>
+                            </a>
+                        </li>
 
-                            <i v-waiting-animation="$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            {% if config("Ceres.header.basket_values") != "quantity" %}
-                                <span class="badge" v-if="!$store.state.basket.showNetPrices" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
-                                <span class="badge" v-else v-cloak v-basket-item-sum="$store.state.basket.data.itemSumNet">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
-                            {% endif %}
-                        </a>
-
-                        {% if config("Ceres.basket.preview_type") != "right" %}
-                            <basket-preview template="#vue-basket-preview-hover" :show-net-prices="{{ showNetPrices | json_encode }}"></basket-preview>
+                        {% if enableCurrencySelect == "true" %}
+                            <li class="list-inline-item dropdown control-languages">
+                                <a class=""
+                                    data-toggle="collapse"
+                                    href="#currencySelect"
+                                    aria-expanded="false"
+                                    aria-controls="currencySelect"
+                                    data-parent="#controlsList">
+                                    <span>{{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
+                                </a>
+                            </li>
                         {% endif %}
-                    </li>
-                </ul>
+                        {% if not isSearchBarAlwaysVisible %}
+                            <li class="list-inline-item control-search">
+                                <a class="anicon anicon-search-xcross"
+                                    aria-label="toggle search"
+                                    data-toggle="collapse"
+                                    href="#searchBox"
+                                    aria-controls="searchBox"
+                                    data-parent="#controlsList">
+                                    <span class="anicon-search-item" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+                            <li class="list-inline-item control-wish-list">
+                                <wish-list-count>
+                                    <a>
+                                        <span class="badge-right">0</span>
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </a>
+                                </wish-list-count>
+                            </li>
+                        {% endif %}
+                        <li class="list-inline-item control-basket">
+                            <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
+                                {% if config("Ceres.header.basket_values") != "sum" %}
+                                    <span class="badge-right" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
+                                {% endif %}
+
+                                <i v-waiting-animation="$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                {% if config("Ceres.header.basket_values") != "quantity" %}
+                                    <span class="badge" v-if="!$store.state.basket.showNetPrices" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
+                                    <span class="badge" v-else v-cloak v-basket-item-sum="$store.state.basket.data.itemSumNet">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
+                                {% endif %}
+                            </a>
+
+                            {% if config("Ceres.basket.preview_type") != "right" %}
+                                <basket-preview template="#vue-basket-preview-hover" :show-net-prices="{{ showNetPrices | json_encode }}"></basket-preview>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-
+</div>
+{% include "Ceres::PageDesign.Partials.Header.Navigation" %}
 
 
 <!-- breadcrumb -->
@@ -117,9 +134,11 @@
 
 <div class="container-max page-header">
     <div class="row">
-        <div id="searchBox" class="cmp cmp-search-box collapse {% if services.template.isSearch() %} in {% endif %}">
-            <item-search template="#vue-item-search"></item-search>
+        {% if not isSearchBarAlwaysVisible %}
+        <div id="searchBox" class="cmp cmp-search-box collapse">
+            <item-search></item-search>
         </div>
+        {% endif %}
 
         {% if enableCurrencySelect == "true" %}
         <div id="currencySelect" class="cmp cmp-currency-select collapse">
