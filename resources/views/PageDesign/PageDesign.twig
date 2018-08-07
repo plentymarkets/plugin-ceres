@@ -245,7 +245,12 @@
             window.setTimeout(function()
             {
                 calculateBodyOffset();
-            });
+            }, 500);
+        });
+        
+        $(document).on('shopbuilder.after.viewUpdate', function()
+        {
+
         });
     })(jQuery);
 </script>
