@@ -1,0 +1,55 @@
+{
+    "identifier": "Ceres::ListWidget",
+    "label": "Widget.titleBarLabel",
+    "previewImageURL": "https://www.seoclerk.com/pics/want31088-1zcV2Q1441993263.png",
+    "type": "default",
+    "position": 400,
+    "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
+    "settings": {
+        "text1": {
+            "type": "inputText",
+            "required": false,
+            "label": "Widget.titleBarTextLabel",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": "Hallo Welt!"
+            }
+        },
+        "text2": {
+            "type": "inputText",
+            "required": false,
+            "label": "Widget.titleBarTextLabel",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        },
+        "text3": {
+            "type": "inputText",
+            "required": false,
+            "label": "Widget.titleBarTextLabel",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        },
+        "text4": {
+            "type": "inputText",
+            "required": false,
+            "label": "Widget.titleBarTextLabel",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        },
+        "text5": {
+            "type": "inputText",
+            "required": false,
+            "label": "Widget.titleBarTextLabel",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        }
+    }
+}

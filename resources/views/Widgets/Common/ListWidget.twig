@@ -1,0 +1,21 @@
+{% set listEntries = [] %}
+
+{% for i in 1..5 %}
+    {% set entry = widget.settings["text" ~ i].mobile %}
+    {% if entry is not empty %}
+        {% set listEntries = listEntries | merge([entry]) %}
+    {% endif %}
+{% endfor %}
+
+<div class="widget-list">
+    <div class="widget-inner">
+        <div class="list-container">
+            {% for entry in listEntries %}
+                <div>
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    {{ entry }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
