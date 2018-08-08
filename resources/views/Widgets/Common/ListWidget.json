@@ -6,6 +6,67 @@
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
     "settings": {
+        "icon": {
+            "type": "selectBox",
+            "required": true,
+            "label": "Widget.widgetAppearanceLabel",
+            "options": {
+                "tooltip": "Widget.widgetAppearanceTooltip",
+                "defaultValue": "none",
+                "selectBoxValues": [
+                    {
+                        "value": "none",
+                        "caption": "Widget.widgetAppearanceNone",
+                        "position": 0
+                    },
+                    {
+                        "value": "fa-circle",
+                        "caption": "circle",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-circle-thin",
+                        "caption": "circle-thin",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-comment-o",
+                        "caption": "comment",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-credit-card",
+                        "caption": "credit card",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-envelope-o",
+                        "caption": "envelope",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-heart",
+                        "caption": "heart",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-thumbs-o-up",
+                        "caption": "thumbs up",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-euro",
+                        "caption": "fa-euro",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-dollar",
+                        "caption": "dollar",
+                        "position": 1
+                    }
+                ]
+            }
+        },
         "text1": {
             "type": "inputText",
             "required": false,

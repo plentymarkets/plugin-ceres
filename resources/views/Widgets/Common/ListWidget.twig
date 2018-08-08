@@ -12,7 +12,10 @@
         <div class="list-container">
             {% for entry in listEntries %}
                 <div>
-                    <i class="fa fa-check" aria-hidden="true"></i>
+                    {% if widget.settings.icon.mobile != "none" %}
+                        <i class="fa {{ widget.settings.icon.mobile }}" aria-hidden="true"></i>
+                    {% endif %}
+
                     {{ entry }}
                 </div>
             {% endfor %}
