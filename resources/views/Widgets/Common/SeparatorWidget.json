@@ -1,6 +1,6 @@
 {
     "identifier": "Ceres::SeparatorWidget",
-    "label": "Widget.titleBarLabel",
+    "label": "Widget.separatorLabel",
     "previewImageURL": "https://www.formget.com/wp-content/uploads/2014/12/style-five.png",
     "type": "default",
     "position": 400,

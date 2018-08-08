@@ -1,6 +1,6 @@
 {
     "identifier": "Ceres::LinkListWidget",
-    "label": "Widget.titleBarLabel",
+    "label": "Widget.linkListLabel",
     "previewImageURL": "https://apps.odoo.com/apps/modules/8.0/website_sitemap/Sitemap_footer_menu.png",
     "type": "default",
     "position": 400,
@@ -9,33 +9,33 @@
         "title": {
             "type": "inputText",
             "required": false,
-            "label": "Widget.titleBarTextLabel",
+            "label": "Widget.linkListTitleLabel",
             "options": {
-                "tooltip": "Widget.titleBarTextTooltip",
+                "tooltip": "Widget.linkListTitleTooltip",
                 "defaultValue": ""
             }
         },
         "entry1": {
             "type": "verticalContainer",
-            "label": "Widget.imageCarouselSlide1",
+            "label": "Widget.linkListEntryLabel",
             "required": false,
             "options": {
                 "containerEntries": {
                     "name": {
                         "type": "inputText",
                         "required": false,
-                        "label": "name",
+                        "label": "Widget.linkListEntryNameLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryNameTooltip",
                             "defaultValue": ""
                         }
                     },
                     "url": {
                         "type": "inputText",
                         "required": false,
-                        "label": "url",
+                        "label": "Widget.linkListEntryUrlLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryUrlTooltip",
                             "defaultValue": ""
                         }
                     }
@@ -44,25 +44,25 @@
         },
         "entry2": {
             "type": "verticalContainer",
-            "label": "Widget.imageCarouselSlide1",
+            "label": "Widget.linkListEntryLabel",
             "required": false,
             "options": {
                 "containerEntries": {
                     "name": {
                         "type": "inputText",
                         "required": false,
-                        "label": "name",
+                        "label": "Widget.linkListEntryNameLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryNameTooltip",
                             "defaultValue": ""
                         }
                     },
                     "url": {
                         "type": "inputText",
                         "required": false,
-                        "label": "url",
+                        "label": "Widget.linkListEntryUrlLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryUrlTooltip",
                             "defaultValue": ""
                         }
                     }
@@ -71,25 +71,25 @@
         },
         "entry3": {
             "type": "verticalContainer",
-            "label": "Widget.imageCarouselSlide1",
+            "label": "Widget.linkListEntryLabel",
             "required": false,
             "options": {
                 "containerEntries": {
                     "name": {
                         "type": "inputText",
                         "required": false,
-                        "label": "name",
+                        "label": "Widget.linkListEntryNameLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryNameTooltip",
                             "defaultValue": ""
                         }
                     },
                     "url": {
                         "type": "inputText",
                         "required": false,
-                        "label": "url",
+                        "label": "Widget.linkListEntryUrlLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryUrlTooltip",
                             "defaultValue": ""
                         }
                     }
@@ -98,25 +98,25 @@
         },
         "entry4": {
             "type": "verticalContainer",
-            "label": "Widget.imageCarouselSlide1",
+            "label": "Widget.linkListEntryLabel",
             "required": false,
             "options": {
                 "containerEntries": {
                     "name": {
                         "type": "inputText",
                         "required": false,
-                        "label": "name",
+                        "label": "Widget.linkListEntryNameLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryNameTooltip",
                             "defaultValue": ""
                         }
                     },
                     "url": {
                         "type": "inputText",
                         "required": false,
-                        "label": "url",
+                        "label": "Widget.linkListEntryUrlLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryUrlTooltip",
                             "defaultValue": ""
                         }
                     }
@@ -125,25 +125,25 @@
         },
         "entry5": {
             "type": "verticalContainer",
-            "label": "Widget.imageCarouselSlide1",
+            "label": "Widget.linkListEntryLabel",
             "required": false,
             "options": {
                 "containerEntries": {
                     "name": {
                         "type": "inputText",
                         "required": false,
-                        "label": "name",
+                        "label": "Widget.linkListEntryNameLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryNameTooltip",
                             "defaultValue": ""
                         }
                     },
                     "url": {
                         "type": "inputText",
                         "required": false,
-                        "label": "url",
+                        "label": "Widget.linkListEntryUrlLabel",
                         "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "tooltip": "Widget.linkListEntryUrlTooltip",
                             "defaultValue": ""
                         }
                     }
