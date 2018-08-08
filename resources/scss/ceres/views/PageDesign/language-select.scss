@@ -5,12 +5,15 @@
 	border-bottom: 0;
 
 	z-index: 1070;
-    position: fixed;
-    top: 30px;
+    position: absolute;
     right: 0;
     width: 100%;
     left: 50%;
 	transform: translateX(-50%);
+
+	&.collapsing {
+		overflow: hidden;
+	}
 	
 	&.no-margin {
 		margin: 0;

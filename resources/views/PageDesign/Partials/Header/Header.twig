@@ -213,5 +213,15 @@
 {% include "Ceres::PageDesign.Partials.Header.Navigation" %}
 {% else %}
     {{ headerContainer | raw }}
+
+    <div>
+        {% if category.linklist == "Y" %}
+            {% set initialCategory = { id: category.id } %}
+        {% else %}
+            {% set initialCategory = category %}
+        {% endif %}
+        <mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" :initial-category="{{ initialCategory | json_encode }}" template="#vue-mobile-navigation"></mobile-navigation>
+    </div>
+
 {% endif %}
 </header>

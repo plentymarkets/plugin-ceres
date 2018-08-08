@@ -14729,6 +14729,10 @@ Custom classes
   }
 }
 
+.wrapper-main #page-header.pos-f-t + #page-body {
+  padding-top: 2rem;
+}
+
 .wrapper-main .navbar {
   font-family: Custom-Font, Helvetica, Arial, sans-serif;
   background: #f7f7f9;
@@ -15059,12 +15063,16 @@ Custom classes
   color: #fff;
   border-bottom: 0;
   z-index: 1070;
-  position: fixed;
-  top: 30px;
+  position: absolute;
   right: 0;
   width: 100%;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.cmp-country-settings.collapsing,
+.cmp-currency-select.collapsing {
+  overflow: hidden;
 }
 
 .cmp-country-settings.no-margin,

@@ -1,0 +1,38 @@
+{
+    "identifier": "Ceres::BreadcrumbWidget",
+    "label": "Widget.breadcrumbLabel",
+    "previewImageURL": "/images/widgets/title-bar.png",
+    "type": "header",
+    "position": 0,
+    "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",
+    "settings": {
+        "showOnHomepage": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.breadcrumbShowOnHomepageLabel",
+            "visible": "showOnMyAccount.charAt(0) === 'a'",
+            "options": {
+                "tooltip": "Widget.breadcrumbShowOnHomepageTooltip",
+                "defaultValue": true
+            }
+        },
+        "showOnMyAccount": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.breadcrumbShowOnMyAccountLabel",
+            "options": {
+                "tooltip": "Widget.breadcrumbShowOnMyAccountTooltip",
+                "defaultValue": true
+            }
+        },
+        "showOnCheckout": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.breadcrumbShowOnCheckoutLabel",
+            "options": {
+                "tooltip": "Widget.breadcrumbShowOnCheckoutTooltip",
+                "defaultValue": true
+            }
+        }
+    }
+}

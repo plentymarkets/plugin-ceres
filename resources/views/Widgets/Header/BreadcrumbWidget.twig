@@ -1,0 +1,42 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.print(Twig.call("component", ["Ceres::Category.Components.CategoryBreadcrumbs"])) }}
+
+<nav id="twig-rendered-breadcrumbs" class="container-max small hidden-sm-down">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ Twig.print('urls.home') }}">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+        </li>
+
+    {{ Twig.if("categoryBreadcrumbs is not empty") }}
+        {{ Twig.set("break", "false") }}
+        {{ Twig.for("category", "categoryBreadcrumbs[:categoryBreadcrumbs | length - 1]", "not break") }}
+            {{ Twig.if("category.details[0]") }}
+                <li class="breadcrumb-item">
+                    <a href="{{ Twig.print(Twig.call("services.category.getURLById", [Twig.var("category.id")])) }}"
+                       v-render-category="{ id: {{ Twig.print("category.id") }}, type: '{{ Twig.print("category.type") }}', alwaysOpen: true }">
+
+                        {{ Twig.print("category.details[0].name") }}
+
+                    </a>
+                </li>
+            {{ Twig.else() }}
+                {{ Twig.set("break", "true") }}
+            {{ Twig.endif() }}
+        {{ Twig.endfor() }}
+
+        {{ Twig.set("lastCategory", "categoryBreadcrumbs | last") }}
+        {{ Twig.if("lastCategory.details is defined") }}
+            <li class="breadcrumb-item active"><span>{{ Twig.print("lastCategory.details[0].name") }}</span></li>
+        {{ Twig.else() }}
+            <li class="breadcrumb-item active" v-cloak v-if="$store.state.item.variation.documents">
+                <span>${ $store.state.item.variation.documents[0].data | itemName }</span>
+            </li>
+        {{ Twig.endif() }}
+    {{ Twig.endif() }}
+    </ul>
+</nav>
+
+<category-breadcrumbs template="#vue-category-breadcrumbs"></category-breadcrumbs>

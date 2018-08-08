@@ -273,12 +273,15 @@
 //navigation scss
 .wrapper-main {
 	#page-body {
-		// margin-top: 118px;
 
 		@media print {
 			margin-top: 0;
 		}
 	}
+	#page-header.pos-f-t + #page-body {
+		padding-top: 2rem;
+	}
+
 	.navbar{
 		font-family:$font-family-heading;
 		background:$navbar-background-color;

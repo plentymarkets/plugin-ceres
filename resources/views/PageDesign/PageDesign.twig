@@ -228,6 +228,11 @@
         }
         calculateBodyOffset();
 
+        $(document).on('shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate', function()
+        {
+            calculateBodyOffset();
+        });
+
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
         {
             var compiled = Vue.compile(widgetElement[0].outerHTML );
@@ -242,16 +247,9 @@
                     event.preventDefault();
                 });
             });
-            window.setTimeout(function()
-            {
-                calculateBodyOffset();
-            }, 500);
         });
-        
-        $(document).on('shopbuilder.after.viewUpdate', function()
-        {
 
-        });
+
     })(jQuery);
 </script>
 
