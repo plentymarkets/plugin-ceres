@@ -12691,8 +12691,6 @@ $border-width: 1px;
 	@media print {
 		display: none;
 	}
-
-	position: fixed;
 	width: 100%;
 	
 	z-index: $zIndex-6;
@@ -12705,7 +12703,74 @@ $border-width: 1px;
 		color: $top-bar-color;
 		outline: none;
 	}
-	.controls-list{
+
+	.search-shown {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		@include media-breakpoint-up(md) {
+			-webkit-box-pack: justify;
+			    -ms-flex-pack: justify;
+			        justify-content: space-between;
+			-webkit-box-align: center;
+			    -ms-flex-align: center;
+			        align-items: center;
+		}
+		@include media-breakpoint-down(sm) {
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: reverse;
+			    -ms-flex-direction: column-reverse;
+			        flex-direction: column-reverse;
+		}
+
+		.always-visible-search {
+			margin: 5px 5px;
+			background-color: $white;
+			-webkit-box-flex: 1;
+			    -ms-flex: 1;
+			        flex: 1;
+			
+			.search-box-shadow-frame {
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-flex: 100;
+				    -ms-flex: 100;
+				        flex: 100;
+	
+				.search-input {
+					border: none;
+					outline: none;
+					padding: 0.4rem 1rem;
+					font-size: 1.3rem;
+					line-height: 1;
+					-webkit-box-flex: 1;
+					    -ms-flex: 1 70%;
+					        flex: 1 70%;
+				}
+		
+				.search-submit {
+					color: $brand-primary;
+					border: none;
+					font-size: 1.3rem;
+					line-height: 1;
+					padding: 0.4rem 1rem;
+				}
+			}
+		}
+
+		.controls-list {
+			&>li {
+				@include media-breakpoint-up(md) {
+					a:not(.btn) {
+						padding: 1rem .8rem;
+					}
+				}
+			}
+		}
+	}
+
+	.controls-list {
 		margin-bottom: 0;
 		font-size: 0;
 		width: 100%;
@@ -12721,7 +12786,7 @@ $border-width: 1px;
 
 			// sets the height of the top-bar
 			@include media-breakpoint-down(md) {
-
+				
 				a:not(.btn) {
 					padding: 0.5rem .5rem;
 					display: inline-block;
@@ -12741,7 +12806,7 @@ $border-width: 1px;
 
 			@include media-breakpoint-up(md) {
 				a:not(.btn) {
-					padding: 0.5rem .8rem;
+					padding: .5rem .8rem;
 					display: inline-block;
 					color: $gray-lighter;
 
@@ -12919,12 +12984,15 @@ $border-width: 1px;
 //navigation scss
 .wrapper-main {
 	#page-body {
-		margin-top: 118px;
 
 		@media print {
 			margin-top: 0;
 		}
 	}
+	#page-header.pos-f-t + #page-body {
+		padding-top: 2rem;
+	}
+
 	.navbar{
 		font-family:$font-family-heading;
 		background:$navbar-background-color;
@@ -13219,15 +13287,72 @@ $border-width: 1px;
         max-width: 1200px;
         margin: 0 auto;
     }
-    .search-box-shadow-frame {
+     @at-root .search-box-shadow-frame {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-flex: 100;
             -ms-flex: 100;
                 flex: 100;
-        -webkit-box-shadow: $box-shadow;
-                box-shadow: $box-shadow;
+        -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+        position: relative;
+
+        .autocomplete-suggestions {
+            position: absolute;
+            -webkit-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+                    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            overflow: scroll;
+            -webkit-overflow-scrolling: touch;
+            z-index: 1070;
+            max-height: 310px;
+            width: 100%;
+            top: 100%;
+
+            & > .autocomplete-suggestion {
+                padding: 5px 15px;
+                white-space: nowrap;
+                overflow: hidden;
+                cursor: pointer;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+
+                &:hover {
+                    background: $gray-lighter;
+                }
+
+                &.autocomplete-selected {
+                    background: $gray-lighter;
+                }
+
+                & > .autocomplete-item-name {
+                    -ms-flex-item-align: center;
+                        align-self: center;
+                    color: $gray-dark;
+                }
+
+                & > .autocomplete-image-container {
+                    width: 40px;
+                    height: 40px;
+                    position: relative;
+                    margin-right: 5px;
+
+                    & > .autocomplete-image {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        -webkit-transform: translateY(-50%) translateX(-50%);
+                                transform: translateY(-50%) translateX(-50%);
+                        max-height: 40px;
+                        max-width: 100%;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                }
+            }
+        }
     }
     .search-input {
         -webkit-box-flex: 1;
@@ -13258,24 +13383,6 @@ $border-width: 1px;
         }
     }
 }
-
-.autocomplete-suggestions {
-    -webkit-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-            box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-    background: #ffffff;
-    overflow: auto;
-}
-
-.autocomplete-suggestion {
-    padding: 5px 15px;
-    white-space: nowrap;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.autocomplete-selected {
-    background: $gray-lighter;
-}
 .cmp-country-settings,
 .cmp-currency-select {
 	background-color: $gray-darker;
@@ -13283,13 +13390,16 @@ $border-width: 1px;
 	border-bottom: 0;
 
 	z-index: 1070;
-    position: fixed;
-    top: 30px;
+    position: absolute;
     right: 0;
     width: 100%;
     left: 50%;
 	-webkit-transform: translateX(-50%);
 	        transform: translateX(-50%);
+
+	&.collapsing {
+		overflow: hidden;
+	}
 	
 	&.no-margin {
 		margin: 0;
@@ -18605,6 +18715,30 @@ nav.navbar.megamenu {
             margin-bottom: 0;
         }
     }
+
+    &.widget-placeholder {
+        position: relative;
+        border: 3px dashed #dadae3;
+        border-radius: 3px;
+        height: 75px;
+        line-height: 75px;
+        vertical-align: middle;
+        text-align: center;
+        color: #dadae3;
+        font-size: 20px;
+        font-style: italic;
+
+        &:after {
+            content: 'Placeholder';
+            text-align: center;
+            display: block;
+            font-size: 20px;
+            top: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    }
 }
 
 @include media-breakpoint-down(sm)
@@ -18740,6 +18874,41 @@ nav.navbar.megamenu {
         -webkit-box-flex: 2;
             -ms-flex: 2;
                 flex: 2;
+    }
+
+    &.widget-primary
+    {
+        @include widget-bg-variant($brand-primary);
+    }
+
+    &.widget-secondary
+    {
+        @include widget-bg-variant($brand-secondary);
+    }
+
+    &.widget-success
+    {
+        @include widget-bg-variant($brand-success);
+    }
+
+    &.widget-info
+    {
+        @include widget-bg-variant($brand-info);
+    }
+
+    &.widget-warning
+    {
+        @include widget-bg-variant($brand-warning);
+    }
+
+    &.widget-danger
+    {
+        @include widget-bg-variant($brand-danger);
+    }
+
+    &.widget-inverse
+    {
+        @include widget-bg-variant($brand-inverse);
     }
 }
 .widget-image-box
@@ -19293,6 +19462,34 @@ nav.navbar.megamenu {
     &.widget-inverse
     {
         @include widget-bg-variant($brand-inverse);
+    }
+}
+.widget-list
+{
+    .widget-inner
+    {
+        padding: 1rem 15px;
+
+        .list-container {
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+.widget-link-list {
+    .widget-inner {
+        padding: 15px 15px 0 15px;
+
+        h2 {
+            font-weight: 700;
+        }
+
+        a {
+            color: $footer-color;
+        }
     }
 }
 
