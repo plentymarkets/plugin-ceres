@@ -73,7 +73,7 @@
             "label": "Widget.titleBarTextLabel",
             "options": {
                 "tooltip": "Widget.titleBarTextTooltip",
-                "defaultValue": "Hallo Welt!"
+                "defaultValue": ""
             }
         },
         "text2": {

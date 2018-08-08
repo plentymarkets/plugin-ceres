@@ -10,7 +10,9 @@
     {% endif %}
 {% endfor %}
 
-<div class="widget widget-link-list">
+{% set hasPlaceholder = title is empty and listEntries | length <= 0 %}
+
+<div class="widget widget-link-list{% if hasPlaceholder %} widget-placeholder{% endif %}">
     <div class="widget-inner">
         <nav>
             <h2 class="h5">{{ title }}</h2>

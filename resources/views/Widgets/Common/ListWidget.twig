@@ -7,7 +7,9 @@
     {% endif %}
 {% endfor %}
 
-<div class="widget-list">
+{% set hasPlaceholder = listEntries | length <= 0 %}
+
+<div class="widget widget-list {% if hasPlaceholder %} widget-placeholder{% endif %}">
     <div class="widget-inner">
         <div class="list-container">
             {% for entry in listEntries %}
