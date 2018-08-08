@@ -151,7 +151,7 @@ Vue.component("address-select", {
                     addressSalutation: 0,
                     gender: "male",
                     countryId        : this.shippingCountryId,
-                    isPickupStation : false
+                    showPickupStation : false
                 };
             }
             else
@@ -196,7 +196,7 @@ Vue.component("address-select", {
                 (this.addressToEdit.address1 === "PACKSTAION" ||
                 this.addressToEdit.address1 === "POSTFILIALE"))
             {
-                this.addressToEdit.isPickupStation = true;
+                this.addressToEdit.showPickupStation = true;
             }
 
             this.updateHeadline();

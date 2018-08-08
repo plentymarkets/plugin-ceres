@@ -81,6 +81,14 @@
 </div>
 <div class="col-xs-12">
     <div class="row">
+        <div class="col-xs-12">
+            <input type="checkbox" name="togglePickup" :checked="value.showPickupStation" @change="togglePickupStation($event.target.checked)" :id="'showPickup' + _uid">
+            <label :for="'showPickup' + _uid">{{ trans("Ceres::Template.addressToPickupStation") }}</label>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="row">
         <div class="col-xs-12 col-sm-8">
             <div class="input-unit" data-validate="text" data-model="address1">
                 <input type="text" name="street" autocomplete="address-line1" :id="'txtStreet' + _uid" :value="value.address1" @input="emitInputEvent('address1', $event.target.value)">

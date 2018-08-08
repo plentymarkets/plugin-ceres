@@ -3,9 +3,8 @@
 {{ component( "Ceres::Customer.Components.CountrySelect" ) }}
 
 <script type="x/template" id="vue-address-input-group">
-
     <div>
-        <div v-if="value.isPickupStation && addressType === '2'">
+        <div v-if="value.showPickupStation && selectedCountry.isoCode2 === 'DE' && addressType === '2'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DHLPackingStationAddressInputGroupDE" %}
         </div>
         <div v-else-if="localeToShow == 'DE' && addressType === '1'">
@@ -32,8 +31,5 @@
                 :address-type="addressType">
             </country-select>
         </div>
-
-        <button type="button" @click="swapPickup()">PACK SWITCH</button>
     </div>
-
 </script>

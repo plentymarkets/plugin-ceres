@@ -85,6 +85,14 @@
 </div>
 <div class="col-xs-12">
     <div class="row">
+        <div class="col-xs-12">
+            <input type="checkbox" name="togglePickup" :checked="value.showPickupStation" @change="togglePickupStation($event.target.checked)" :id="'showPickup' + _uid">
+            <label :for="'showPickup' + _uid">{{ trans("Ceres::Template.addressToPickupStation") }}</label>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="row">
         {# Packstation, Postfiliale #}
         <div class="col-xs-12 col-sm-8">
             <div class="input-unit" data-validate="" data-model="address1">
@@ -120,7 +128,7 @@
 
         {% if "delivery_address.address4" in addressFields %}
             <div class="col-xs-12 col-sm-6">
-                <div class="input-unit"
+                {# <div class="input-unit" #}
                      {% if "delivery_address.address4" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="address4">
                     <input type="text" name="decorateAddress" :id="'decorateAddress1' + _uid"
                            :value="value.address4" @input="emitInputEvent('address4', $event.target.value)">

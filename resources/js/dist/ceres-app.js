@@ -15514,11 +15514,21 @@ Vue.component("address-input-group", {
         }
     },
 
+    computed: {
+        isPickupStation: function isPickupStation() {
+            return this.value && this.value.address1 === "PACKSTATION";
+        },
+        isPostOffice: function isPostOffice() {
+            return this.value && this.value.address1 === "POSTFILIALE";
+        }
+    },
+
     data: function data() {
         return {
             stateList: [],
             countryLocaleList: ["DE", "GB"],
-            localeToShow: this.defaultCountry
+            localeToShow: this.defaultCountry,
+            selectedCountry: null
         };
     },
 
@@ -15537,6 +15547,8 @@ Vue.component("address-input-group", {
          * @param shippingCountry
          */
         onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
+            this.selectedCountry = shippingCountry;
+
             if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
                 this.localeToShow = shippingCountry.isoCode2;
             } else {
@@ -15544,6 +15556,13 @@ Vue.component("address-input-group", {
             }
 
             this.emitInputEvent("countryId", shippingCountry.id);
+        },
+        togglePickupStation: function togglePickupStation(showPickupStation) {
+            if (showPickupStation && (!this.isPickupStation || !this.isPostOffice)) {
+                this.emitInputEvent("address1", "PACKSTATION");
+            }
+
+            this.emitInputEvent("showPickupStation", showPickupStation);
         },
 
 
@@ -15693,41 +15712,33 @@ Vue.component("address-select", {
          * Show the add modal initially, if no address is selected in checkout
          */
         showInitialAddModal: function showInitialAddModal() {
-            this.modalType = "initial";
-
-            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
-                this.addressToEdit = {
-                    addressSalutation: 0,
-                    gender: "male",
-                    countryId: this.shippingCountryId
-                };
-            } else {
-                this.addressToEdit = { countryId: this.shippingCountryId };
-            }
-
-            this.updateHeadline();
-            this.addressModal.show();
+            this.showAddModal("initial");
         },
 
 
         /**
          * Show the add modal
          */
-        showAddModal: function showAddModal() {
-            this.modalType = "create";
+        showAddModal: function showAddModal(type) {
+            this.modalType = type || "create";
 
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
                 this.addressToEdit = {
                     addressSalutation: 0,
                     gender: "male",
-                    countryId: this.shippingCountryId
+                    countryId: this.shippingCountryId,
+                    showPickupStation: false
                 };
             } else {
                 this.addressToEdit = { countryId: this.shippingCountryId };
             }
 
             this.updateHeadline();
-            _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
+
+            if (this.modalType === "create") {
+                _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
+            }
+
             this.addressModal.show();
         },
 
@@ -15747,6 +15758,10 @@ Vue.component("address-select", {
             } else {
                 this.addressToEdit.addressSalutation = 0;
                 this.addressToEdit.gender = "male";
+            }
+
+            if ((0, _utils.isDefined)(this.addressToEdit.address1) && (this.addressToEdit.address1 === "PACKSTAION" || this.addressToEdit.address1 === "POSTFILIALE")) {
+                this.addressToEdit.showPickupStation = true;
             }
 
             this.updateHeadline();

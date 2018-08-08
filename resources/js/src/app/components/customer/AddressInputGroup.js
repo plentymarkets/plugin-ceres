@@ -38,7 +38,8 @@ Vue.component("address-input-group", {
         return {
             stateList  : [],
             countryLocaleList: ["DE", "GB"],
-            localeToShow: this.defaultCountry
+            localeToShow: this.defaultCountry,
+            selectedCountry: null
         };
     },
 
@@ -58,6 +59,8 @@ Vue.component("address-input-group", {
          */
         onSelectedCountryChanged(shippingCountry)
         {
+            this.selectedCountry = shippingCountry;
+            
             if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0)
             {
                 this.localeToShow = shippingCountry.isoCode2;
@@ -70,9 +73,16 @@ Vue.component("address-input-group", {
             this.emitInputEvent("countryId", shippingCountry.id);
         },
 
-        swapPickup()
+        togglePickupStation(showPickupStation)
         {
-            this.value.isPickupStation = !this.value.isPickupStation;
+            if (showPickupStation &&
+                (!this.isPickupStation ||
+                !this.isPostOffice))
+            {
+                this.emitInputEvent("address1", "PACKSTATION");
+            }
+
+            this.emitInputEvent("showPickupStation", showPickupStation);
         },
 
         /**
