@@ -15,58 +15,139 @@
                 "defaultValue": ""
             }
         },
-        "name1": {
-            "type": "inputText",
+        "entry1": {
+            "type": "verticalContainer",
+            "label": "Widget.imageCarouselSlide1",
             "required": false,
-            "label": "name1",
             "options": {
-                "tooltip": "Widget.titleBarTextTooltip",
-                "defaultValue": ""
+                "containerEntries": {
+                    "name": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "name",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    },
+                    "url": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "url",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    }
+                }
             }
         },
-        "url1": {
-            "type": "inputText",
+        "entry2": {
+            "type": "verticalContainer",
+            "label": "Widget.imageCarouselSlide1",
             "required": false,
-            "label": "url1",
             "options": {
-                "tooltip": "Widget.titleBarTextTooltip",
-                "defaultValue": ""
+                "containerEntries": {
+                    "name": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "name",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    },
+                    "url": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "url",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    }
+                }
             }
         },
-        "name2": {
-            "type": "inputText",
+        "entry3": {
+            "type": "verticalContainer",
+            "label": "Widget.imageCarouselSlide1",
             "required": false,
-            "label": "name2",
             "options": {
-                "tooltip": "Widget.titleBarTextTooltip",
-                "defaultValue": ""
+                "containerEntries": {
+                    "name": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "name",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    },
+                    "url": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "url",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    }
+                }
             }
         },
-        "url2": {
-            "type": "inputText",
+        "entry4": {
+            "type": "verticalContainer",
+            "label": "Widget.imageCarouselSlide1",
             "required": false,
-            "label": "url2",
             "options": {
-                "tooltip": "Widget.titleBarTextTooltip",
-                "defaultValue": ""
+                "containerEntries": {
+                    "name": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "name",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    },
+                    "url": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "url",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    }
+                }
             }
         },
-        "name3": {
-            "type": "inputText",
+        "entry5": {
+            "type": "verticalContainer",
+            "label": "Widget.imageCarouselSlide1",
             "required": false,
-            "label": "name3",
             "options": {
-                "tooltip": "Widget.titleBarTextTooltip",
-                "defaultValue": ""
-            }
-        },
-        "url3": {
-            "type": "inputText",
-            "required": false,
-            "label": "url3",
-            "options": {
-                "tooltip": "Widget.titleBarTextTooltip",
-                "defaultValue": ""
+                "containerEntries": {
+                    "name": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "name",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    },
+                    "url": {
+                        "type": "inputText",
+                        "required": false,
+                        "label": "url",
+                        "options": {
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
+                            "defaultValue": ""
+                        }
+                    }
+                }
             }
         }
     }
