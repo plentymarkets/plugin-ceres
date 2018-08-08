@@ -12,7 +12,7 @@
 {% endif %}
 
 
-<div class="widget widget-grid {{ gridClass }}">
+<div class="widget widget-grid {{ gridClass }} widget-{{ widget.settings.appearance.mobile | default('none') }}">
     {% if layout == "oneStackedToTwo" %}
 
         <div class="widget-inner widget-inner-stacked">
