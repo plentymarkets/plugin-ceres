@@ -1,0 +1,73 @@
+{
+    "identifier": "Ceres::LinkListWidget",
+    "label": "Widget.titleBarLabel",
+    "previewImageURL": "https://apps.odoo.com/apps/modules/8.0/website_sitemap/Sitemap_footer_menu.png",
+    "type": "default",
+    "position": 400,
+    "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
+    "settings": {
+        "title": {
+            "type": "inputText",
+            "required": false,
+            "label": "Widget.titleBarTextLabel",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        },
+        "name1": {
+            "type": "inputText",
+            "required": false,
+            "label": "name1",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        },
+        "url1": {
+            "type": "inputText",
+            "required": false,
+            "label": "url1",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        },
+        "name2": {
+            "type": "inputText",
+            "required": false,
+            "label": "name2",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        },
+        "url2": {
+            "type": "inputText",
+            "required": false,
+            "label": "url2",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        },
+        "name3": {
+            "type": "inputText",
+            "required": false,
+            "label": "name3",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        },
+        "url3": {
+            "type": "inputText",
+            "required": false,
+            "label": "url3",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        }
+    }
+}
