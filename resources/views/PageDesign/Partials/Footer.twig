@@ -134,5 +134,11 @@
     </div>
 </div>
 {% else %}
-    {{ footerContainer | raw }}
+    <div class="container-max">
+        <div class="row">
+            <div class="col">
+                {{ footerContainer | raw }}
+            </div>
+        </div>
+    </div>
 {% endif %}
