@@ -18701,6 +18701,21 @@ nav.navbar.megamenu {
     background-color: $color;
 }
 
+@mixin widget-bg-pseudo($color, $text-color: #fff)
+{
+    position: relative;
+    color: $text-color;
+
+    &:before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: calc(100% - 30px);
+        top: 0;
+        left: 15px;
+        background-color: $color;
+    }
+}
 
 .widget
 {
@@ -18878,37 +18893,37 @@ nav.navbar.megamenu {
 
     &.widget-primary
     {
-        @include widget-bg-variant($brand-primary);
+        @include widget-bg-pseudo($brand-primary)
     }
 
     &.widget-secondary
     {
-        @include widget-bg-variant($brand-secondary);
+        @include widget-bg-pseudo($brand-secondary)
     }
 
     &.widget-success
     {
-        @include widget-bg-variant($brand-success);
+        @include widget-bg-pseudo($brand-success);
     }
 
     &.widget-info
     {
-        @include widget-bg-variant($brand-info);
+        @include widget-bg-pseudo($brand-info);
     }
 
     &.widget-warning
     {
-        @include widget-bg-variant($brand-warning);
+        @include widget-bg-pseudo($brand-warning);
     }
 
     &.widget-danger
     {
-        @include widget-bg-variant($brand-danger);
+        @include widget-bg-pseudo($brand-danger);
     }
 
     &.widget-inverse
     {
-        @include widget-bg-variant($brand-inverse);
+        @include widget-bg-pseudo($brand-inverse);
     }
 }
 .widget-image-box
