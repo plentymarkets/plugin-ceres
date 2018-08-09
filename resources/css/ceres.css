@@ -20060,37 +20060,107 @@ body.menu-is-visible {
 }
 
 .widget-grid.widget-primary {
+  position: relative;
   color: #fff;
+}
+
+.widget-grid.widget-primary:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 30px);
+  top: 0;
+  left: 15px;
   background-color: #008ebd;
 }
 
 .widget-grid.widget-secondary {
+  position: relative;
   color: #fff;
+}
+
+.widget-grid.widget-secondary:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 30px);
+  top: 0;
+  left: 15px;
   background-color: #d4021d;
 }
 
 .widget-grid.widget-success {
+  position: relative;
   color: #fff;
+}
+
+.widget-grid.widget-success:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 30px);
+  top: 0;
+  left: 15px;
   background-color: #7ED321;
 }
 
 .widget-grid.widget-info {
+  position: relative;
   color: #fff;
+}
+
+.widget-grid.widget-info:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 30px);
+  top: 0;
+  left: 15px;
   background-color: #5bc0de;
 }
 
 .widget-grid.widget-warning {
+  position: relative;
   color: #fff;
+}
+
+.widget-grid.widget-warning:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 30px);
+  top: 0;
+  left: 15px;
   background-color: #f0ad4e;
 }
 
 .widget-grid.widget-danger {
+  position: relative;
   color: #fff;
+}
+
+.widget-grid.widget-danger:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 30px);
+  top: 0;
+  left: 15px;
   background-color: #d9534f;
 }
 
 .widget-grid.widget-inverse {
+  position: relative;
   color: #fff;
+}
+
+.widget-grid.widget-inverse:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 30px);
+  top: 0;
+  left: 15px;
   background-color: #4D4F4D;
 }
 
