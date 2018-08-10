@@ -51,7 +51,7 @@ Vue.component("basket-preview", {
                 this.$store.commit("setShowNetPrices", data.showNetPrices);
             });
 
-            window.addEventListener("resize", this.calcSplitBasketView());
+            window.addEventListener("orientationchange", this.calcSplitBasketView());
         });
     },
 
