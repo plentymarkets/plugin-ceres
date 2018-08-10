@@ -12404,6 +12404,10 @@ a:active {
   border-radius: 0;
 }
 
+.border-top-0 {
+  border-top: 0 !important;
+}
+
 body {
   background-color: #f7f7f9;
 }
@@ -12485,13 +12489,27 @@ body > #vue-error.open-bottom::after {
 body > #vue-app.open-right,
 body > #vue-error.open-right {
   overflow: hidden;
+  position: fixed;
 }
 
 body > #vue-app.open-right .wrapper-right,
 body > #vue-error.open-right .wrapper-right {
-  width: 100vw;
   transform: translateX(-100%);
   transition: width 0ms, transform 300ms 10ms ease-in-out;
+}
+
+@media (min-width: 768px) {
+  body > #vue-app.open-right .wrapper-right,
+  body > #vue-error.open-right .wrapper-right {
+    width: 100vw;
+  }
+}
+
+@media (max-width: 991px) {
+  body > #vue-app.open-right .wrapper-right,
+  body > #vue-error.open-right .wrapper-right {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 543px) {

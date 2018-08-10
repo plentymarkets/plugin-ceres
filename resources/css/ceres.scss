@@ -10679,6 +10679,10 @@ a:active {
     border-radius: 0;
 }
 
+.border-top-0 {
+    border-top: 0 !important;
+}
+
 body {
 
 	background-color: $gray-lightest;
@@ -10776,10 +10780,15 @@ body {
 
 		&.open-right{
 			overflow: hidden;
+			position: fixed;
 
 			.wrapper-right{
-				width: 100vw;
+				@include media-breakpoint-up(md) {
+					width: 100vw;
+				}
+				
 				-webkit-transform: translateX(-100%);
+				
 				        transform: translateX(-100%);
 
 				-webkit-transition: width 0ms,
@@ -10794,6 +10803,10 @@ body {
 				transition: width 0ms,
 							transform 300ms 10ms ease-in-out,
 							-webkit-transform 300ms 10ms ease-in-out;
+
+				@include media-breakpoint-down(md) {
+					width: 100% !important;
+				}
 			}
 		}
 
