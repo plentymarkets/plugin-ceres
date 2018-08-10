@@ -16,6 +16,13 @@ Vue.component("basket-preview", {
         }
     },
 
+    data()
+    {
+        return {
+            splitBasketView: false
+        };
+    },
+
     computed: Vuex.mapState({
         basket: state => state.basket.data,
         basketItems: state => state.basket.items,
@@ -43,6 +50,16 @@ Vue.component("basket-preview", {
                 this.$store.commit("setBasket", data.basket);
                 this.$store.commit("setShowNetPrices", data.showNetPrices);
             });
+
+            window.addEventListener("resize", this.calcSplitBasketView());
         });
+    },
+
+    methods:
+    {
+        calcSplitBasketView()
+        {
+            this.splitBasketView = (window.matchMedia("(max-width: 767px)").matches && (window.orientation == -90 || window.orientation == 90));
+        }
     }
 });

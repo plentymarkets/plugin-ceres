@@ -17,49 +17,51 @@
             </div>
         </div>
 
-        <!-- BASKET LIST -->
-        <div class="p-a-1 list">
-          <div class="cmp cmp-basket-preview-list">
-              <basket-list template="#vue-basket-list" size="small"></basket-list>
-          </div>
-        </div>
-        <!-- ./BASKET LIST -->
-
-        <!-- BASKET PREVIEW BOTTOM -->
-        <div class="p-a-1 bg-faded totals">
-
-            <basket-totals template="#vue-basket-totals"></basket-totals>
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 m-b-1">
-                    <a v-waiting-animation-infinite
-                       href="{{ urls.basket }}"
-                       class="btn btn-outline-primary btn-block basketBtn"
-                       :class="{ 'disabled': basketItems.length <= 0 }"
-                       title="{{ trans("Ceres::Template.basket") }}">
-                        <i class="fa fa-shopping-cart"></i>
-                        {{ trans("Ceres::Template.basket") }} 
-                    </a>
+        <div :class="{'row': splitBasketView}">
+            <!-- BASKET LIST -->
+            <div class="list" :class="{'p-a-1': !splitBasketView, 'col-xs-7': splitBasketView, 'p-t-1': splitBasketView}">
+                <div class="cmp cmp-basket-preview-list">
+                    <basket-list template="#vue-basket-list" size="small"></basket-list>
                 </div>
+            </div>
+            <!-- ./BASKET LIST -->
 
-                <div class="col-xs-12 col-sm-6">
-                    {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+            <!-- BASKET PREVIEW BOTTOM -->
+            <div class="bg-faded totals" :class="{'p-a-1': !splitBasketView, 'border-top-0': splitBasketView, 'col-xs-5': splitBasketView, 'p-t-1': splitBasketView, 'p-r-2': splitBasketView}">
 
-                    <div>
+                <basket-totals template="#vue-basket-totals"></basket-totals>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 m-b-1">
                         <a v-waiting-animation-infinite
-                           href="{{ urls.checkout }}"
-                           :class="{ 'disabled': basketItems.length <= 0 }"
-                           class="btn btn-primary btn-block checkOutBtn"
-                           title="{{ trans("Ceres::Template.basketCheckout") }}">
-                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                            {{ trans("Ceres::Template.basketCheckout") }}
+                        href="{{ urls.basket }}"
+                        class="btn btn-outline-primary btn-block basketBtn"
+                        :class="{ 'disabled': basketItems.length <= 0 }"
+                        title="{{ trans("Ceres::Template.basket") }}">
+                            <i v-if="!splitBasketView" class="fa fa-shopping-cart"></i>
+                            {{ trans("Ceres::Template.basket") }} 
                         </a>
                     </div>
 
-                    {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+                    <div class="col-xs-12 col-sm-6">
+                        {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+
+                        <div>
+                            <a v-waiting-animation-infinite
+                            href="{{ urls.checkout }}"
+                            :class="{ 'disabled': basketItems.length <= 0 }"
+                            class="btn btn-primary btn-block checkOutBtn"
+                            title="{{ trans("Ceres::Template.basketCheckout") }}">
+                                <i v-if="!splitBasketView" class="fa fa-arrow-right" aria-hidden="true"></i>
+                                {{ trans("Ceres::Template.basketCheckout") }}
+                            </a>
+                        </div>
+
+                        {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+                    </div>
                 </div>
             </div>
+            <!-- ./BASKET PREVIEW BOTTOM -->
         </div>
-        <!-- ./BASKET PREVIEW BOTTOM -->
     </div>
 </script>
