@@ -83,13 +83,21 @@ body {
 
 		&.open-right{
 			overflow: hidden;
+			position: fixed;
 
 			.wrapper-right{
-				width: 100vw;
+				@include media-breakpoint-up(md) {
+					width: 100vw;
+				}
+				
 				transform: translateX(-100%);
 
 				transition: width 0ms,
 							transform 300ms 10ms ease-in-out;
+
+				@include media-breakpoint-down(md) {
+					width: 100% !important;
+				}
 			}
 		}
 
