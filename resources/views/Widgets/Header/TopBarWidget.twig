@@ -1,5 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
+{% set isFixed                      = widget.settings.isFixed.mobile %}
 {% set enableLogin                  = widget.settings.enableLogin.mobile %}
 {% set enableRegistration           = widget.settings.enableRegistration.mobile %}
 {% set enableLanguageSelect         = widget.settings.enableLanguageSelect.mobile %}
@@ -18,7 +19,7 @@
 {{ Twig.set("activeCurrencies", Twig.call("config", ["Ceres.currency.available_currencies"]) ~ " | split(\", \")") }}
 {{ Twig.set("defaultLanguage", Twig.call("services.webstoreConfig.getDefaultLanguage")) }}
 
-<div class="top-bar">
+<div class="top-bar{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
         <div class="row">
             <div class="top-bar-items {% if searchStyle == "permanent" %}search-shown{% endif %}">

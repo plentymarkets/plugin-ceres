@@ -1,4 +1,10 @@
 //header scss
+.unfixed
+{
+	left: 0;
+	right: 0;
+}
+
 .top-bar{
 
 	@media print {
@@ -278,13 +284,13 @@
 			margin-top: 0;
 		}
 	}
-	#page-header.pos-f-t + #page-body {
-		padding-top: 2rem;
+
+	header {
+		background:$navbar-background-color;
 	}
 
 	.navbar{
 		font-family:$font-family-heading;
-		background:$navbar-background-color;
 		border-bottom:1px solid darken($gray-lighter2, 2%);
 		a {
 			color: $gray-dark;

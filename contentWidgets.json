@@ -1155,6 +1155,15 @@
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",
         "settings": {
+            "isFixed": {
+                "type": "checkBox",
+                "required": true,
+                "label": "Widget.topBarIsFixedLabel",
+                "options": {
+                    "tooltip": "Widget.topBarIsFixedTooltip",
+                    "defaultValue": true
+                }
+            },
             "showOnHomepage": {
                 "type": "checkBox",
                 "required": true,
@@ -1193,6 +1202,15 @@
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
         "settings": {
+            "isFixed": {
+                "type": "checkBox",
+                "required": true,
+                "label": "Widget.topBarIsFixedLabel",
+                "options": {
+                    "tooltip": "Widget.topBarIsFixedTooltip",
+                    "defaultValue": true
+                }
+            },
             "navigationStyle": {
                 "type": "selectBox",
                 "required": true,
@@ -1292,6 +1310,15 @@
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",
         "settings": {
+            "isFixed": {
+                "type": "checkBox",
+                "required": true,
+                "label": "Widget.topBarIsFixedLabel",
+                "options": {
+                    "tooltip": "Widget.topBarIsFixedTooltip",
+                    "defaultValue": true
+                }
+            },
             "searchStyle": {
                 "type": "selectBox",
                 "required": true,

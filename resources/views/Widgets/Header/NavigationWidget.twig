@@ -1,5 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
+{% set isFixed              = widget.settings.isFixed.mobile %}
 {% set navigationStyle      = widget.settings.navigationStyle.mobile %}
 {% set companyLogoUrl       = widget.settings.companyLogoUrl.mobile %}
 {% set megaMenuLevels       = widget.settings.megaMenuLevels.mobile %}
@@ -10,7 +11,7 @@
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
-<nav class="navbar{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}">
+<nav class="navbar{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
         <div class="row">
             <div class="brand-wrapper">
