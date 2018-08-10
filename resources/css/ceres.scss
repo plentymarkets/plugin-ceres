@@ -15169,6 +15169,11 @@ nav.navbar.megamenu {
 	}
 }
 
+.split-basket-height {
+	height: calc(100vh - 70px);
+	overflow: auto;
+}
+
 @include media-breakpoint-up(lg) {
 	.control-basket {
 		&:hover {
@@ -15325,6 +15330,7 @@ nav.navbar.megamenu {
 	        -ms-flex-flow: column nowrap;
 	            flex-flow: column nowrap;
         border-top: 1px solid $gray-lighter;
+        height: 100vh;
         @extend .small;
 
         dd, dt{

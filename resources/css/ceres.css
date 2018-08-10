@@ -16711,6 +16711,11 @@ body.menu-is-visible {
   content: attr(data-show-less);
 }
 
+.split-basket-height {
+  height: calc(100vh - 70px);
+  overflow: auto;
+}
+
 @media (min-width: 992px) {
   .control-basket:hover .basket-preview-hover-wrapper {
     display: block;
@@ -16845,6 +16850,7 @@ body.menu-is-visible {
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
   border-top: 1px solid #dcdbd8;
+  height: 100vh;
 }
 
 .basket-preview .totals dd, .basket-preview .totals dt {
