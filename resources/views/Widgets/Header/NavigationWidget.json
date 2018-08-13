@@ -9,9 +9,8 @@
         "isFixed": {
             "type": "checkBox",
             "required": true,
-            "label": "Widget.topBarIsFixedLabel",
+            "label": "Widget.navigationIsFixedLabel",
             "options": {
-                "tooltip": "Widget.topBarIsFixedTooltip",
                 "defaultValue": true
             }
         },

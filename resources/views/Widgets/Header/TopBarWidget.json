@@ -11,7 +11,6 @@
             "required": true,
             "label": "Widget.topBarIsFixedLabel",
             "options": {
-                "tooltip": "Widget.topBarIsFixedTooltip",
                 "defaultValue": true
             }
         },
@@ -46,7 +45,6 @@
             "required": true,
             "label": "Widget.topBarEnableLoginLabel",
             "options": {
-                "tooltip": "Widget.topBarEnableLoginTooltip",
                 "defaultValue": true
             }
         },
@@ -55,7 +53,6 @@
             "required": true,
             "label": "Widget.topBarEnableRegistrationLabel",
             "options": {
-                "tooltip": "Widget.topBarEnableRegistrationTooltip",
                 "defaultValue": true
             }
         },
@@ -64,7 +61,6 @@
             "required": true,
             "label": "Widget.topBarEnableLanguageSelectLabel",
             "options": {
-                "tooltip": "Widget.topBarEnableLanguageSelectTooltip",
                 "defaultValue": true
             }
         },
@@ -73,7 +69,6 @@
             "required": true,
             "label": "Widget.topBarEnableShippingCountrySelectLabel",
             "options": {
-                "tooltip": "Widget.topBarEnableShippingCountrySelectTooltip",
                 "defaultValue": true
             }
         },
@@ -82,7 +77,6 @@
             "required": true,
             "label": "Widget.topBarEnableCurrencySelectLabel",
             "options": {
-                "tooltip": "Widget.topBarEnableCurrencySelectTooltip",
                 "defaultValue": true
             }
         },
@@ -91,7 +85,6 @@
             "required": true,
             "label": "Widget.topBarEnableWishListLabel",
             "options": {
-                "tooltip": "Widget.topBarEnableWishListTooltip",
                 "defaultValue": true
             }
         },
@@ -100,7 +93,6 @@
             "required": true,
             "label": "Widget.topBarEnableBasketPreviewLabel",
             "options": {
-                "tooltip": "Widget.topBarEnableBasketPreviewTooltip",
                 "defaultValue": true
             }
         }
