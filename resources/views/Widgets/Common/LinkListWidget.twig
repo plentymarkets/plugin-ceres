@@ -21,6 +21,9 @@
                 <ul class="list-unstyled">
                     {% for entry in listEntries %}
                         <li>
+                            {% if widget.settings.icon.mobile != "none" %}
+                                <i class="fa {{ widget.settings.icon.mobile }}" aria-hidden="true"></i>
+                            {% endif %}
                             <a href="{{ entry.url }}">{{ entry.name }}</a>
                         </li>
                     {% endfor %}

@@ -12686,6 +12686,12 @@ $border-width: 1px;
 
 // Page Design / Global components
 //header scss
+.unfixed
+{
+	left: 0;
+	right: 0;
+}
+
 .top-bar{
 
 	@media print {
@@ -12989,13 +12995,13 @@ $border-width: 1px;
 			margin-top: 0;
 		}
 	}
-	#page-header.pos-f-t + #page-body {
-		padding-top: 2rem;
+
+	header {
+		background:$navbar-background-color;
 	}
 
 	.navbar{
 		font-family:$font-family-heading;
-		background:$navbar-background-color;
 		border-bottom:1px solid darken($gray-lighter2, 2%);
 		a {
 			color: $gray-dark;
@@ -14162,8 +14168,15 @@ nav.navbar.megamenu {
 		    background:$breadcrumb-bg;
 		    top:96px;
 		}
+		.breadcrumbs {
+			background: $breadcrumb-bg;
+		    z-index: 1000;
+
+			&.unfixed {
+				z-index: -1;
+			}
+		}
 		.breadcrumb{
-			margin-bottom: 0;
 			max-width: 1200px;
 		    margin: 0 auto;
 		    background: transparent;
