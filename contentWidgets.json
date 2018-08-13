@@ -1158,9 +1158,8 @@
             "isFixed": {
                 "type": "checkBox",
                 "required": true,
-                "label": "Widget.topBarIsFixedLabel",
+                "label": "Widget.breadcrumbIsFixedLabel",
                 "options": {
-                    "tooltip": "Widget.topBarIsFixedTooltip",
                     "defaultValue": true
                 }
             },
@@ -1170,7 +1169,6 @@
                 "label": "Widget.breadcrumbShowOnHomepageLabel",
                 "visible": "showOnMyAccount.charAt(0) === 'a'",
                 "options": {
-                    "tooltip": "Widget.breadcrumbShowOnHomepageTooltip",
                     "defaultValue": true
                 }
             },
@@ -1179,7 +1177,6 @@
                 "required": true,
                 "label": "Widget.breadcrumbShowOnMyAccountLabel",
                 "options": {
-                    "tooltip": "Widget.breadcrumbShowOnMyAccountTooltip",
                     "defaultValue": true
                 }
             },
@@ -1188,7 +1185,6 @@
                 "required": true,
                 "label": "Widget.breadcrumbShowOnCheckoutLabel",
                 "options": {
-                    "tooltip": "Widget.breadcrumbShowOnCheckoutTooltip",
                     "defaultValue": true
                 }
             }
@@ -1205,9 +1201,8 @@
             "isFixed": {
                 "type": "checkBox",
                 "required": true,
-                "label": "Widget.topBarIsFixedLabel",
+                "label": "Widget.navigationIsFixedLabel",
                 "options": {
-                    "tooltip": "Widget.topBarIsFixedTooltip",
                     "defaultValue": true
                 }
             },
@@ -1315,7 +1310,6 @@
                 "required": true,
                 "label": "Widget.topBarIsFixedLabel",
                 "options": {
-                    "tooltip": "Widget.topBarIsFixedTooltip",
                     "defaultValue": true
                 }
             },
@@ -1350,7 +1344,6 @@
                 "required": true,
                 "label": "Widget.topBarEnableLoginLabel",
                 "options": {
-                    "tooltip": "Widget.topBarEnableLoginTooltip",
                     "defaultValue": true
                 }
             },
@@ -1359,7 +1352,6 @@
                 "required": true,
                 "label": "Widget.topBarEnableRegistrationLabel",
                 "options": {
-                    "tooltip": "Widget.topBarEnableRegistrationTooltip",
                     "defaultValue": true
                 }
             },
@@ -1368,7 +1360,6 @@
                 "required": true,
                 "label": "Widget.topBarEnableLanguageSelectLabel",
                 "options": {
-                    "tooltip": "Widget.topBarEnableLanguageSelectTooltip",
                     "defaultValue": true
                 }
             },
@@ -1377,7 +1368,6 @@
                 "required": true,
                 "label": "Widget.topBarEnableShippingCountrySelectLabel",
                 "options": {
-                    "tooltip": "Widget.topBarEnableShippingCountrySelectTooltip",
                     "defaultValue": true
                 }
             },
@@ -1386,7 +1376,6 @@
                 "required": true,
                 "label": "Widget.topBarEnableCurrencySelectLabel",
                 "options": {
-                    "tooltip": "Widget.topBarEnableCurrencySelectTooltip",
                     "defaultValue": true
                 }
             },
@@ -1395,7 +1384,6 @@
                 "required": true,
                 "label": "Widget.topBarEnableWishListLabel",
                 "options": {
-                    "tooltip": "Widget.topBarEnableWishListTooltip",
                     "defaultValue": true
                 }
             },
@@ -1404,7 +1392,6 @@
                 "required": true,
                 "label": "Widget.topBarEnableBasketPreviewLabel",
                 "options": {
-                    "tooltip": "Widget.topBarEnableBasketPreviewTooltip",
                     "defaultValue": true
                 }
             }
