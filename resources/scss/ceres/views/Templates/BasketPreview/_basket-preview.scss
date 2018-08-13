@@ -12,7 +12,11 @@
 	    display: flex;
 	    flex-flow: column nowrap;
     	flex: 0 1 auto;
-	    overflow: auto;
+        overflow: auto;
+
+        @include media-breakpoint-down(xs) {
+            height: 40vh
+        }
     }
 
     .totals{
@@ -25,6 +29,10 @@
 
         dd, dt{
             margin-bottom: 0;
+        }
+
+        @include media-breakpoint-only(sm) {
+            border-top: 0 !important;
         }
         
     }

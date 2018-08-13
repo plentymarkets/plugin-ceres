@@ -44,4 +44,19 @@
 	.rebate-hint{
 		color: $gray;
 	}
+
+	hr {
+		@include media-breakpoint-down(xs) {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	.split-totals-height {
+		@include media-breakpoint-only(sm) {
+			height: calc(100vh - 135px);
+			overflow: auto;
+			overflow-x: hidden;
+		}
+	}
 }

@@ -6,6 +6,12 @@ body .wrapper-main{
     display: none;
 }
 
+.hidden-sm {
+    @include media-breakpoint-only(sm) {
+        display: none;
+    }
+}
+
 .page-content{
     @extend .p-t-1;
     background-color: $gray-lightest;

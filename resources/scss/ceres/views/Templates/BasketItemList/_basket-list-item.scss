@@ -231,6 +231,8 @@
 }
 
 .split-basket-height {
-	height: calc(100vh - 70px);
-	overflow: auto;
+	@include media-breakpoint-only(sm) {
+		height: calc(100vh - 70px);
+		overflow: auto;
+	}
 }

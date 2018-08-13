@@ -17,9 +17,9 @@
             </div>
         </div>
 
-        <div :class="{'row': splitBasketView}">
+        <div class="row p-l-1 p-r-1">
             <!-- BASKET LIST -->
-            <div class="list" :class="{'p-a-1': !splitBasketView, 'col-xs-7': splitBasketView, 'p-t-1': splitBasketView}">
+            <div class="list col-sm-7 p-t-1">
                 <div class="cmp cmp-basket-preview-list">
                     <basket-list template="#vue-basket-list" size="small"></basket-list>
                 </div>
@@ -27,23 +27,23 @@
             <!-- ./BASKET LIST -->
 
             <!-- BASKET PREVIEW BOTTOM -->
-            <div class="bg-faded totals" :class="{'p-a-1': !splitBasketView, 'border-top-0': splitBasketView, 'col-xs-5': splitBasketView, 'p-t-1': splitBasketView, 'p-r-2': splitBasketView}">
+            <div class="bg-faded totals col-sm-5 p-t-1">
 
                 <basket-totals template="#vue-basket-totals"></basket-totals>
 
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 m-b-1">
+                    <div class="col-xs-6 col-sm-6 m-b-1">
                         <a v-waiting-animation-infinite
                         href="{{ urls.basket }}"
                         class="btn btn-outline-primary btn-block basketBtn"
                         :class="{ 'disabled': basketItems.length <= 0 }"
                         title="{{ trans("Ceres::Template.basket") }}">
-                            <i v-if="!splitBasketView" class="fa fa-shopping-cart"></i>
+                            <i class="fa fa-shopping-cart hidden-sm"></i>
                             {{ trans("Ceres::Template.basket") }} 
                         </a>
                     </div>
 
-                    <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-6 col-sm-6">
                         {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
 
                         <div>
@@ -52,7 +52,7 @@
                             :class="{ 'disabled': basketItems.length <= 0 }"
                             class="btn btn-primary btn-block checkOutBtn"
                             title="{{ trans("Ceres::Template.basketCheckout") }}">
-                                <i v-if="!splitBasketView" class="fa fa-arrow-right" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-right hidden-sm" aria-hidden="true"></i>
                                 {{ trans("Ceres::Template.basketCheckout") }}
                             </a>
                         </div>
