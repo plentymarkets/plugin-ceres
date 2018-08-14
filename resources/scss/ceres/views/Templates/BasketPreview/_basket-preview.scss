@@ -15,7 +15,8 @@
         overflow: auto;
 
         @include media-breakpoint-down(xs) {
-            height: 40vh
+            height: calc(100vh - 290px);
+            margin-bottom: 5px;
         }
     }
 
