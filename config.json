@@ -349,7 +349,8 @@
                     "label": "Config.headerFixedNavbarLabel",
                     "options": {
                         "defaultValue": "true"
-                    }
+                    },
+                    "deprecated": true
                 },
                 "header.show_category_types": {
                     "type": "selectBox",
@@ -377,6 +378,7 @@
                     "type": "selectBox",
                     "required": false,
                     "label": "Config.headerBasketValuesLabel",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "sum",
                         "selectBoxValues": [
@@ -399,6 +401,7 @@
                     "type": "selectBox",
                     "required": false,
                     "label": "Config.headerMegamenuLevelsLabel",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "1",
                         "selectBoxValues": [
@@ -425,6 +428,7 @@
                     "type": "inputText",
                     "required": false,
                     "label": "Config.headerMegamenuItemsStage1Label",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "30"
                     }
@@ -433,6 +437,7 @@
                     "type": "inputText",
                     "required": false,
                     "label": "Config.headerMegamenuItemsStage2Label",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "3"
                     }
@@ -441,6 +446,7 @@
                     "type": "inputText",
                     "required": false,
                     "label": "Config.headerMegamenuItemsStage3Label",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "2"
                     }

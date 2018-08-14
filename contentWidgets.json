@@ -1460,6 +1460,32 @@
                 "options": {
                     "defaultValue": true
                 }
+            },
+            "basketValues": {
+                "type": "selectBox",
+                "required": true,
+                "label": "Widget.topBarBasketValuesLabel",
+                "options": {
+                    "tooltip": "Widget.topBarBasketValuesTooltip",
+                    "defaultValue": "sum",
+                    "selectBoxValues": [
+                        {
+                            "value": "sum",
+                            "caption": "Widget.topBarBasketValuesSum",
+                            "position": 0
+                        },
+                        {
+                            "value": "quantity",
+                            "caption": "Widget.topBarBasketValuesQuantity",
+                            "position": 0
+                        },
+                        {
+                            "value": "both",
+                            "caption": "Widget.topBarBasketValuesBoth",
+                            "position": 0
+                        }
+                    ]
+                }
             }
         }
     }

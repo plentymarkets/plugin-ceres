@@ -9,12 +9,12 @@
 {% set searchStyle                  = widget.settings.searchStyle.mobile %}
 {% set enableWishList               = widget.settings.enableWishList.mobile %}
 {% set enableBasketPreview          = widget.settings.enableBasketPreview.mobile %}
+{% set basketValues                 = widget.settings.basketValues.mobile %}
 
 {{ Twig.set("currencyFormat", Twig.call("config", ["Ceres.currency.format"])) }}
 {{ Twig.set("currencyFormatSelect", Twig.call("config", ["Ceres.currency.format_selection"])) }}
 {{ Twig.set("currencyData", Twig.call("services.checkout.getCurrencyData") ~ "[currencyFormat]") }}
 {{ Twig.set("enabledRoutes", Twig.call("config", ["IO.routing.enabled_routes"]) ~ " | split(\", \")") }}
-{{ Twig.set("basketValues", Twig.call("config", ["Ceres.header.basket_values"])) }}
 {{ Twig.set("basketPreviewType", Twig.call("config", ["Ceres.basket.preview_type"])) }}
 {{ Twig.set("activeCurrencies", Twig.call("config", ["Ceres.currency.available_currencies"]) ~ " | split(\", \")") }}
 {{ Twig.set("defaultLanguage", Twig.call("services.webstoreConfig.getDefaultLanguage")) }}
@@ -118,15 +118,15 @@
                         {% if enableBasketPreview %}
                             <li class="list-inline-item control-basket">
                                 <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
-                                    {{ Twig.if("basketValues != \"sum\"") }}
+                                    {% if basketValues != "sum" %}
                                         <span class="badge-right" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
-                                    {{ Twig.endif() }}
+                                    {% endif %}
 
                                     <i v-waiting-animation="$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                    {{ Twig.if("basketValues != \"quantity\"") }}
+                                    {% if basketValues != "quantity" %}
                                         <span class="badge" v-if="!$store.state.basket.showNetPrices" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 {{ Twig.print("currencyData") }}</span>
                                         <span class="badge" v-else v-cloak v-basket-item-sum="$store.state.basket.data.itemSumNet">0,00 {{ Twig.print("currencyData") }}</span>
-                                    {{ Twig.endif() }}
+                                    {% endif %}
                                 </a>
 
                                 {{ Twig.if("basketPreviewType != \"right\"") }}
