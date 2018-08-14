@@ -12687,6 +12687,16 @@ $border-width: 1px;
 	}
 }
 
+.variation-select {
+
+	& label {
+		text-overflow: ellipsis;
+		overflow: hidden;
+		width: 140px;
+		white-space: nowrap;
+	}
+}
+
 // Page Design / Global components
 //header scss
 .top-bar{

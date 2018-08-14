@@ -46,3 +46,30 @@ export function is(element, selector)
 
     return element.matches(selector);
 }
+
+/**
+ * Get the width of a specified text depending on the font-family
+ *
+ * @param {string} text
+ * @param {string} fontFamily
+ *
+ * @returns {integer}
+ */
+export function textWidth(text, fontFamily)
+{
+    const tag = document.createElement("div");
+
+    tag.style.position = "absolute";
+    tag.style.left = "-99in";
+    tag.style.whiteSpace = "nowrap";
+    tag.style.font = fontFamily;
+    tag.innerHTML = text;
+
+    document.body.appendChild(tag);
+
+    const result = tag.clientWidth;
+
+    document.body.removeChild(tag);
+
+    return result;
+}
