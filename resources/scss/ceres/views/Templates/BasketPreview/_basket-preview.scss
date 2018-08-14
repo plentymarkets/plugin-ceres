@@ -14,8 +14,13 @@
     	flex: 0 1 auto;
         overflow: auto;
 
+        @include media-breakpoint-up(md) {
+            max-height: calc(100vh - 345px);
+            margin-bottom: 5px;
+        }
+
         @include media-breakpoint-down(xs) {
-            height: calc(100vh - 290px);
+            max-height: calc(100vh - 305px);
             margin-bottom: 5px;
         }
     }
