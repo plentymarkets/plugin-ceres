@@ -32,6 +32,18 @@ Vue.component("container-item-list", {
         });
     },
 
+    computed:
+    {
+        columnWidths()
+        {
+            return [
+                "col-xs-12",
+                "col-sm-6",
+                "col-md-" + (12 / this.items.length)
+            ];
+        }
+    },
+
     methods:
     {
         initializeCarousel()
