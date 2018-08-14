@@ -1,0 +1,38 @@
+{
+    "containers": {
+        "header": {
+            "label":    "Widget.containerHeader",
+            "name":     "Ceres::Header"
+        },
+        "footer": {
+            "label":    "Widget.containerFooter",
+            "name":     "Ceres::Footer"
+        },
+        "content": [
+            {
+                "label": "Widget.containerHomepage",
+                "name":  "Ceres::Homepage"
+            }
+        ]
+    },
+    "presets": {
+        "header": [
+            {
+                "label": "Widget.presetHeaderDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultHeaderPreset"
+            }
+        ],
+        "footer": [
+            {
+                "label": "Widget.presetFooterDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultFooterPreset"
+            }
+        ],
+        "content": [
+            {
+                "label": "Widget.preset.HomepageDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
+            }
+        ]
+    }
+}
