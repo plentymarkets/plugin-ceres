@@ -1,0 +1,75 @@
+{
+    "identifier": "Ceres::LegalInformationWidget",
+    "label": "Widget.gridFourColumnLabel",
+    "previewImageURL": "https://www.google.de/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi05tDq8-7cAhXNzKQKHbGpCdgQjRx6BAgBEAU&url=https%3A%2F%2Fwww.schobertechnologies.com%2Fcompany%2Flegal-information%2F&psig=AOvVaw3KNF_MityDTogyxHWhVC1h&ust=1534417249256255",
+    "type": "footer",
+    "position": 300,
+    "widgetClass": "Ceres\\Widgets\\Footer\\LegalInformationWidget",
+    "settings": {
+        "showCancellationRights": {
+            "type": "checkBox",
+            "required": true,
+            "label": "show cancellation",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "showLegalDisclosure": {
+            "type": "checkBox",
+            "required": true,
+            "label": "show legal disclosure",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "showPrivacyPolicy": {
+            "type": "checkBox",
+            "required": true,
+            "label": "show privacy policy",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "showGtc": {
+            "type": "checkBox",
+            "required": true,
+            "label": "show gtc",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "cancellationFormContainer": {
+            "type": "verticalContainer",
+            "label": "cancellation form",
+            "required": false,
+            "options": {
+                "containerEntries": {
+                    "showCancellationForm": {
+                        "type": "checkBox",
+                        "required": true,
+                        "label": "show cancellation form",
+                        "options": {
+                            "defaultValue": true
+                        }
+                    },
+                    "useCancellationPdfUpload": {
+                        "type": "checkBox",
+                        "required": true,
+                        "label": "use pdf",
+                        "options": {
+                            "defaultValue": false
+                        }
+                    },
+                    "cancellationPdfPath": {
+                        "type": "inputFile",
+                        "required": false,
+                        "label": "pdf path",
+                        "options": {
+                            "defaultValue": ""
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
