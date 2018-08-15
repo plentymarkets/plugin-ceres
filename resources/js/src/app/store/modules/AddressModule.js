@@ -43,6 +43,20 @@ const mutations =
             }
         },
 
+        selectDeliveryAddressById(state, deliveryAddressId)
+        {
+            if (deliveryAddressId)
+            {
+                const deliveryAddress = state.deliveryAddressList.find(address => address.id === deliveryAddressId);
+
+                if (deliveryAddress)
+                {
+                    state.deliveryAddressId = deliveryAddress.id;
+                    state.deliveryAddress = deliveryAddress;
+                }
+            }
+        },
+
         setDeliveryAddressList(state, deliveryAddressList)
         {
             if (Array.isArray(deliveryAddressList))

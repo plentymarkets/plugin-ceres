@@ -152,7 +152,7 @@ const actions =
             });
         },
 
-        selectShippingProfile({commit, dispatch}, shippingProfile)
+        selectShippingProfile({commit, dispatch, getters}, shippingProfile)
         {
             return new Promise((resolve, reject) =>
             {
@@ -160,6 +160,18 @@ const actions =
 
                 commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
+
+                const isPostOffice = "1";
+                const isParcelBox = "0";
+
+                const ignoreCondition = (isPostOffice === "1" && isParcelBox === "1");
+
+                if (!ignoreCondition &&
+                    ((isPostOffice === "1" && getters.getSelectedAddress("2").address1 === "PACKSTATION") ||
+                    (isParcelBox === "1" && getters.getSelectedAddress("2").address1 === "POSTFILIALE")))
+                {
+                    commit("selectDeliveryAddressById", -99);
+                }
 
                 ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.parcelServicePresetId})
                     .done(response =>
