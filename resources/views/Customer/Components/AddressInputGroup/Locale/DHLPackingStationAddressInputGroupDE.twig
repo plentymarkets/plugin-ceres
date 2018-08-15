@@ -7,8 +7,7 @@
     <div class="row">
         {% if "delivery_address.salutation" in addressFields %}
             <div class="col-xs-12 col-sm-4">
-                <div class="input-unit"
-                {% if "delivery_address.salutation" in addressFieldsRequired %}data-validate{% endif %}>
+                <div class="input-unit"{% if "delivery_address.salutation" in addressFieldsRequired %}data-validate{% endif %}>
                     <salutation-select template="#vue-salutation-select" :address-type="addressType" :address-data="value" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                     <label :for="'txtSalutation' + _uid">{{ trans("Ceres::Template.addressSalutation") }}{% if "delivery_address.salutation" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
@@ -21,8 +20,7 @@
     <div class="row">
         {% if "delivery_address.name1" in addressFields %}
             <div class="col-xs-12 col-sm-6" {% if "delivery_address.salutation" in addressFields %}v-if="value.addressSalutation === 2"{% endif %}>
-                <div class="input-unit"
-                     {% if "delivery_address.name1" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="name1">
+                <div class="input-unit" {% if "delivery_address.name1" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="name1">
                     <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)">
                     <label :for="'txtCompany' + _uid">{{ trans("Ceres::Template.addressCompany") }}{% if "delivery_address.name1" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
@@ -36,8 +34,7 @@
 
         {% if "delivery_address.title" in addressFields %}
             <div class="col-xs-12 col-sm-4">
-                <div class="input-unit"
-                     {% if "delivery_address.title" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="title">
+                <div class="input-unit" {% if "delivery_address.title" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="title">
                     <input type="text" name="title" :id="'txtTitle' + _uid" :value="value.title" @input="emitInputEvent('title', $event.target.value)">
                     <label :for="'txtTitle' + _uid">{{ trans("Ceres::Template.addressTitle") }}{% if "delivery_address.title" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
@@ -63,8 +60,7 @@
         {# Additional name #}
         {% if "delivery_address.name4" in addressFields %}
             <div class="col-xs-12 col-sm-4">
-                <div class="input-unit"
-                     {% if "delivery_address.name4" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="name4">
+                <div class="input-unit" {% if "delivery_address.name4" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="name4">
                     <input type="text" name="decorateName" :id="'txtAdditionalName' + _uid" :value="value.name4" @input="emitInputEvent('name4', $event.target.value)">
                     <label :for="'txtAdditionalName' + _uid">{{ trans("Ceres::Template.addressAdditionalName") }}{% if "delivery_address.name4" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
@@ -74,8 +70,7 @@
         {# Phone number #}
         {% if "delivery_address.phoneNumber" in addressFields %}
             <div class="col-xs-12 col-sm-4">
-                <div class="input-unit"
-                     {% if "delivery_address.phoneNumber" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="telephone">
+                <div class="input-unit" {% if "delivery_address.phoneNumber" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="telephone">
                     <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
                     <label :for="'txtTelephone' + _uid">{{ trans("Ceres::Template.addressTelephone") }}{% if "delivery_address.phoneNumber" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
@@ -128,8 +123,7 @@
 
         {% if "delivery_address.address4" in addressFields %}
             <div class="col-xs-12 col-sm-6">
-                {# <div class="input-unit" #}
-                     {% if "delivery_address.address4" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="address4">
+                <div class="input-unit" {% if "delivery_address.address4" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="address4">
                     <input type="text" name="decorateAddress" :id="'decorateAddress1' + _uid"
                            :value="value.address4" @input="emitInputEvent('address4', $event.target.value)">
                     <label :for="'decorateAddress1' + _uid">{{ trans("Ceres::Template.addressAdditionalAddress2") }}{% if "delivery_address.address4" in addressFieldsRequired %}*{% endif %}</label>
