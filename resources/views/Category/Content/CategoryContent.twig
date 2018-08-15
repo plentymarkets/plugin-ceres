@@ -11,6 +11,17 @@
 
 {% block PageBody %}
 
-    {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
+    {% set shopBuilderTemplate = shop_builder_category_template(category.id) %}
+    {% if shopBuilderTemplate | trim is not empty %}
+        <div class="container-max">
+            <div class="row">
+                <div class="col">
+                    {% include shopBuilderTemplate %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
+    {% endif %}
 
 {% endblock %}
