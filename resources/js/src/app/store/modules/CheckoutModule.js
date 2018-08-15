@@ -161,14 +161,14 @@ const actions =
                 commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
-                const isPostOffice = "1";
-                const isParcelBox = "0";
+                const isPostOffice = shippingProfile.isPostOffice;
+                const isParcelBox = shippingProfile.isParcelBox;
 
-                const ignoreCondition = (isPostOffice === "1" && isParcelBox === "1");
+                const ignoreCondition = (isPostOffice && isParcelBox);
 
                 if (!ignoreCondition &&
-                    ((isPostOffice === "1" && getters.getSelectedAddress("2").address1 === "PACKSTATION") ||
-                    (isParcelBox === "1" && getters.getSelectedAddress("2").address1 === "POSTFILIALE")))
+                    ((isPostOffice && getters.getSelectedAddress("2").address1 === "PACKSTATION") ||
+                    (isParcelBox && getters.getSelectedAddress("2").address1 === "POSTFILIALE")))
                 {
                     commit("selectDeliveryAddressById", -99);
                 }
