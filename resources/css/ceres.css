@@ -12267,6 +12267,12 @@ body .wrapper-main {
   display: none;
 }
 
+@media (min-width: 544px) and (max-width: 767px) {
+  .hidden-sm {
+    display: none;
+  }
+}
+
 .page-content {
   background-color: #f7f7f9;
 }
@@ -16528,6 +16534,12 @@ body.menu-is-visible {
   font-size: 80%;
 }
 
+@media (max-width: 767px) {
+  .basket-item-container .item-bundle {
+    width: calc(100vw - 155px) !important;
+  }
+}
+
 .basket-item-container.basket-large {
   padding: 1.5rem 0;
 }
@@ -16605,8 +16617,20 @@ body.menu-is-visible {
   display: flex;
 }
 
+@media (max-width: 767px) {
+  .basket-item-container .basket-item .basket-item-container-right {
+    display: block !important;
+  }
+}
+
 .basket-item-container .basket-item .basket-item-container-right .qty-box-container {
   margin: 0 10px;
+}
+
+@media (max-width: 767px) {
+  .basket-item-container .basket-item .basket-item-container-right .qty-box-container {
+    margin: 0 0 5px 27px;
+  }
 }
 
 .basket-item-container .basket-item .basket-item-container-right .price-box {
@@ -16718,9 +16742,11 @@ body.menu-is-visible {
   content: attr(data-show-less);
 }
 
-.split-basket-height {
-  height: calc(100vh - 70px);
-  overflow: auto;
+@media (min-width: 544px) and (max-width: 767px) {
+  .split-basket-height {
+    height: calc(100vh - 70px);
+    overflow: auto;
+  }
 }
 
 @media (min-width: 992px) {
@@ -16849,6 +16875,20 @@ body.menu-is-visible {
   overflow: auto;
 }
 
+@media (min-width: 768px) {
+  .basket-preview .list {
+    max-height: calc(100vh - 345px);
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 543px) {
+  .basket-preview .list {
+    max-height: calc(100vh - 305px);
+    margin-bottom: 5px;
+  }
+}
+
 .basket-preview .totals {
   -ms-flex: 1 0 auto;
       flex: 1 0 auto;
@@ -16862,6 +16902,12 @@ body.menu-is-visible {
 
 .basket-preview .totals dd, .basket-preview .totals dt {
   margin-bottom: 0;
+}
+
+@media (min-width: 544px) and (max-width: 767px) {
+  .basket-preview .totals {
+    border-top: 0 !important;
+  }
 }
 
 .basket-loading-frame {
@@ -16885,6 +16931,21 @@ body.menu-is-visible {
 
 .cmp-totals .rebate-hint {
   color: #7a7f7f;
+}
+
+@media (max-width: 543px) {
+  .cmp-totals hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (min-width: 544px) and (max-width: 767px) {
+  .cmp-totals .split-totals-height {
+    height: calc(100vh - 135px);
+    overflow: auto;
+    overflow-x: hidden;
+  }
 }
 
 .cmp-product-thumb {

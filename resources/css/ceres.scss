@@ -10536,6 +10536,12 @@ body .wrapper-main{
     display: none;
 }
 
+.hidden-sm {
+    @include media-breakpoint-only(sm) {
+        display: none;
+    }
+}
+
 .page-content{
     @extend .p-t-1;
     background-color: $gray-lightest;
@@ -14976,6 +14982,10 @@ nav.navbar.megamenu {
 		width: 300px;
 		font-weight: 700;
 		font-size: 80%;
+
+		@include media-breakpoint-down(sm) {
+			width: calc(100vw - 155px) !important;
+		}
 	}
 
 	&.basket-large {
@@ -15055,8 +15065,16 @@ nav.navbar.megamenu {
 			display: -ms-flexbox;
 			display: flex;
 
+			@include media-breakpoint-down(sm) {
+				display: block !important;
+			}
+
 			.qty-box-container {
 				margin: 0 10px;
+
+				@include media-breakpoint-down(sm) {
+					margin: 0 0 5px 27px; 
+				}
 			}
 
 			.price-box {
@@ -15180,8 +15198,10 @@ nav.navbar.megamenu {
 }
 
 .split-basket-height {
-	height: calc(100vh - 70px);
-	overflow: auto;
+	@include media-breakpoint-only(sm) {
+		height: calc(100vh - 70px);
+		overflow: auto;
+	}
 }
 
 @include media-breakpoint-up(lg) {
@@ -15325,7 +15345,17 @@ nav.navbar.megamenu {
     	-webkit-box-flex: 0;
     	    -ms-flex: 0 1 auto;
     	        flex: 0 1 auto;
-	    overflow: auto;
+        overflow: auto;
+
+        @include media-breakpoint-up(md) {
+            max-height: calc(100vh - 345px);
+            margin-bottom: 5px;
+        }
+
+        @include media-breakpoint-down(xs) {
+            max-height: calc(100vh - 305px);
+            margin-bottom: 5px;
+        }
     }
 
     .totals{
@@ -15345,6 +15375,10 @@ nav.navbar.megamenu {
 
         dd, dt{
             margin-bottom: 0;
+        }
+
+        @include media-breakpoint-only(sm) {
+            border-top: 0 !important;
         }
         
     }
@@ -15399,6 +15433,21 @@ nav.navbar.megamenu {
 	
 	.rebate-hint{
 		color: $gray;
+	}
+
+	hr {
+		@include media-breakpoint-down(xs) {
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+	}
+
+	.split-totals-height {
+		@include media-breakpoint-only(sm) {
+			height: calc(100vh - 135px);
+			overflow: auto;
+			overflow-x: hidden;
+		}
 	}
 }
 
