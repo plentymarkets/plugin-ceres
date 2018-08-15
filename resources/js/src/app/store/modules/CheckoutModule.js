@@ -4,6 +4,7 @@ const state =
     {
         shipping: {
             shippingProfileId: null,
+            shippingProfileSelected: null,
             shippingProfileList: []
         },
         payment: {
@@ -40,6 +41,11 @@ const mutations =
             {
                 state.shipping.shippingProfileId = shippingProfileId;
             }
+        },
+
+        setSelectedShippingProfile(state, shippingProfile)
+        {
+            state.shipping.shippingProfileSelected = shippingProfile;
         },
 
         setShippingProfileList(state, shippingProfileList)
@@ -119,13 +125,26 @@ const mutations =
 
 const actions =
     {
-        setCheckout({commit}, checkout)
+        setCheckout({commit, dispatch}, checkout)
         {
             commit("setShippingCountryId", checkout.shippingCountryId);
             commit("setShippingProfile", checkout.shippingProfileId);
             commit("setShippingProfileList", checkout.shippingProfileList);
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
+
+            dispatch("setShippingProfileById", checkout.shippingProfileId);
+        },
+
+        setShippingProfileById({state, commit}, shippingProfileId)
+        {
+            for(let shippingProfile in state.shipping.shippingProfileList)
+            {
+                if(state.shipping.shippingProfileList[shippingProfile].parcelServicePresetId === shippingProfileId)
+                {
+                    commit("setSelectedShippingProfile", state.shipping.shippingProfileList[shippingProfile]);
+                }
+            }
         },
 
         selectMethodOfPayment({commit, dispatch}, methodOfPaymentId)
@@ -176,6 +195,7 @@ const actions =
                 ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.parcelServicePresetId})
                     .done(response =>
                     {
+                        commit("setSelectedShippingProfile", shippingProfile);
                         commit("setIsBasketLoading", false);
                         resolve(response);
                     })
@@ -208,6 +228,15 @@ const actions =
 
 const getters =
     {
+        getSelectedShippingProfile: state =>
+        {
+            return state.shipping.shippingProfileSelected;
+        },
+
+        getShippingProfileList: state =>
+        {
+            return state.shipping.shippingProfileList;
+        }
     };
 
 export default

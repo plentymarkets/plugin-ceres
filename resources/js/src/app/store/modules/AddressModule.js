@@ -206,7 +206,7 @@ const actions =
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
         },
 
-        selectAddress({commit, state}, {selectedAddress, addressType})
+        selectAddress({commit, state, getters, dispatch}, {selectedAddress, addressType})
         {
             return new Promise((resolve, reject) =>
             {
@@ -221,6 +221,29 @@ const actions =
                 {
                     oldAddress = state.deliveryAddress;
                     commit("selectDeliveryAddress", selectedAddress);
+
+                    const shippingProfile = getters.getSelectedShippingProfile;
+                    const shippingProfileList = getters.getShippingProfileList;
+
+                    const isPostOffice = shippingProfile.isPostOffice;
+                    const isParcelBox = shippingProfile.isParcelBox;
+
+                    const ignoreCondition = (isPostOffice && isParcelBox);
+
+                    if (!ignoreCondition &&
+                        (isParcelBox && selectedAddress.address1 === "POSTFILIALE"))
+                    {
+                        let profileToSelect = shippingProfileList.find( shipping => shipping.isPostOffice );
+
+                        dispatch("selectShippingProfile", profileToSelect);
+                    }
+                    else if(!ignoreCondition &&
+                            (isPostOffice && selectedAddress.address1 === "PACKSTATION"))
+                    {
+                        let profileToSelect = shippingProfileList.find( shipping => shipping.isParcelBox );
+
+                        dispatch("selectShippingProfile", profileToSelect);
+                    }
                 }
 
                 commit("setIsBasketLoading", true);
