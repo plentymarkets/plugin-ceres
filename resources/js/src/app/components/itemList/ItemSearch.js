@@ -42,18 +42,18 @@ Vue.component("item-search", {
     methods:
     {
         search()
-            {
+        {
             if (this.currentSearchString.length &&
                     !this.preventSearch)
-                {
+            {
                 if (document.location.pathname === "/search")
-                    {
+                {
                     this.updateTitle(this.currentSearchString);
                     this.$store.dispatch("searchItems", this.currentSearchString);
                 }
                 else
-                    {
-                    var searchBaseURL = "/search?query=";
+                {
+                    let searchBaseURL = "/search?query=";
 
                     if (App.defaultLanguage != App.language)
                     {
@@ -64,25 +64,25 @@ Vue.component("item-search", {
                 }
             }
             else
-                {
+            {
                 this.preventSearch = false;
             }
         },
 
         openItem(suggestion)
-            {
+        {
             this.preventSearch = true;
             window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
         },
 
         updateTitle(searchString)
-            {
+        {
             document.querySelector("#searchPageTitle").innerHTML = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString;
             document.title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
         },
 
         initAutocomplete()
-            {
+        {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "query",
@@ -93,42 +93,42 @@ Vue.component("item-search", {
                 minChars: 2,
                 preventBadQueries: false,
                 onSelect: suggestion =>
-                    {
+                {
                     this.$store.commit("setItemListSearchString", suggestion.value);
                     this.currentSearchString = suggestion.value;
 
                     if (App.config.search.forwardToSingleItem)
-                        {
+                    {
                         this.openItem(suggestion);
                     }
                     else
-                        {
+                    {
                         this.search();
                     }
                 },
                 beforeRender()
-                    {
+                {
                     $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
                 },
                 transformResult: response =>
-                    {
+                {
                     return this.transformSuggestionResult(response);
                 }
             });
 
             $(window).resize(() =>
-                {
+            {
                 $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
             });
         },
 
         transformSuggestionResult(result)
-            {
+        {
             result = JSON.parse(result);
             const suggestions =
                 {
                     suggestions: $.map(result.data.documents, dataItem =>
-                        {
+                    {
                         const value = this.$options.filters.itemName(dataItem.data);
 
                         return {

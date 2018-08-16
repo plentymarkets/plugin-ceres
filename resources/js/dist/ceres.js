@@ -19483,6 +19483,12 @@ Vue.component("pagination", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 Vue.component("item-filter", {
 
     delimiters: ["${", "}"],
@@ -19501,6 +19507,13 @@ Vue.component("item-filter", {
 
                 return 0;
             });
+        },
+        facetName: function facetName() {
+            if (this.facet.translationKey && this.facet.translationKey.length > 0) {
+                return _TranslationService2.default.translate("Ceres::Template." + this.facet.translationKey);
+            }
+
+            return this.facet.name;
         }
     }, Vuex.mapState({
         selectedFacets: function selectedFacets(state) {
@@ -19528,7 +19541,7 @@ Vue.component("item-filter", {
     }
 });
 
-},{}],64:[function(require,module,exports){
+},{"services/TranslationService":131}],64:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -21419,7 +21432,7 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
+var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
 
 exports.default = exceptionMap;
 
