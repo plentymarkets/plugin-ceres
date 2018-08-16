@@ -19,6 +19,8 @@ Vue.component("checkout", {
         this.$options.template = this.template;
         this.$store.dispatch("setCheckout", this.initialCheckout);
         this.addEventHandler();
+
+        this.$store.dispatch("initProfileAvailabilities");
     },
 
     methods:

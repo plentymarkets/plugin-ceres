@@ -24,13 +24,23 @@ Vue.component("address-input-group", {
     {
         isPickupStation()
         {
-            return this.value && this.value.address1 === "PACKSTATION";
+            return this.value && this.value.address1 === "PACKSTATION" && this.isParcelBoxAvailable;
         },
 
         isPostOffice()
         {
-            return this.value && this.value.address1 === "POSTFILIALE";
-        }
+            return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
+        },
+
+        isParcelOrOfficeAvailable()
+        {
+            return this.isParcelBoxAvailable || this.isPostOfficeAvailable;
+        },
+
+        ...Vuex.mapState({
+            isParcelBoxAvailable: state => state.checkout.shipping.isParcelBoxAvailable,
+            isPostOfficeAvailable: state => state.checkout.shipping.isPostOfficeAvailable
+        })
     },
 
     data()
@@ -60,7 +70,7 @@ Vue.component("address-input-group", {
         onSelectedCountryChanged(shippingCountry)
         {
             this.selectedCountry = shippingCountry;
-            
+
             if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0)
             {
                 this.localeToShow = shippingCountry.isoCode2;

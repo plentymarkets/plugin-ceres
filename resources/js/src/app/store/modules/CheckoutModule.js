@@ -1,11 +1,14 @@
 import ApiService from "services/ApiService";
+import {isNullOrUndefined}from "../../helper/utils";
 
 const state =
     {
         shipping: {
             shippingProfileId: null,
             shippingProfileSelected: null,
-            shippingProfileList: []
+            shippingProfileList: [],
+            isParcelBoxAvailable: false,
+            isPostOfficeAvailable: false
         },
         payment: {
             methodOfPaymentId: null,
@@ -120,6 +123,16 @@ const mutations =
         setInvoiceAddressShowError(state, showError)
         {
             state.validation.invoiceAddress.showError = showError;
+        },
+
+        setParcelBoxAvailability(state, availability)
+        {
+            state.shipping.isParcelBoxAvailable = availability;
+        },
+
+        setPostOfficeAvailability(state, availability)
+        {
+            state.shipping.isPostOfficeAvailable = availability;
         }
     };
 
@@ -223,7 +236,16 @@ const actions =
                             reject(error);
                         });
             });
-        }
+        },
+
+        initProfileAvailabilities({commit, state})
+        {
+            commit( "setParcelBoxAvailability", 
+                    !isNullOrUndefined(state.shipping.shippingProfileList.find( shipping => shipping.isParcelBox )));
+
+            commit( "setPostOfficeAvailability", 
+                    !isNullOrUndefined(state.shipping.shippingProfileList.find( shipping => shipping.isPostOffice )));
+        },
     };
 
 const getters =
