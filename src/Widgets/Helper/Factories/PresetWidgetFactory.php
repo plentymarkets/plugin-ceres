@@ -10,25 +10,29 @@ class PresetWidgetFactory
 
     public $children = [];
 
-    public function withSetting($key, $value)
+    /**
+     * @param string    $key
+     * @param mixed     $value
+     * @return PresetWidgetFactory
+     */
+    public function withSetting($key, $valueMobile, $valueTalet = null, $valueDesktop = null, $valueLargeDesktop = null )
     {
-        if ( $this->isBreakpointList($value) )
-        {
-            $this->mergeValue($this->settings, $key, $value );
-        }
-        else
-        {
-            $this->mergeValue($this->settings, $key, [
-                'mobile'        => $value,
-                'tablet'        => $value,
-                'desktop'       => $value,
-                'largeDesktop'  => $value
-            ]);
-        }
+        $this->mergeValue($this->settings, $key, [
+            'mobile'        => $valueMobile,
+            'tablet'        => $valueTalet ?? $valueMobile,
+            'desktop'       => $valueDesktop ?? $valueMobile,
+            'largeDesktop'  => $valueLargeDesktop ?? $valueMobile
+        ]);
 
         return $this;
     }
 
+
+    /**
+     * @param string    $dropzone
+     * @param mixed     $childWidget
+     * @return PresetWidgetFactory
+     */
     public function withChild($dropzone, $childWidget)
     {
         if ( !array_key_exists($dropzone, $this->children) )
@@ -40,14 +44,11 @@ class PresetWidgetFactory
         return $this;
     }
 
-    private function isBreakpointList($obj)
-    {
-        return array_key_exists('mobile', $obj)
-            && array_key_exists('tablet', $obj)
-            && array_key_exists('desktop', $obj)
-            && array_key_exists('largeDesktop', $obj);
-    }
-
+    /**
+     * @param mixed     $obj
+     * @param string    $key
+     * @param mixed     $value
+     */
     private function mergeValue(&$obj, $key, $value)
     {
         $keyList = explode(".", $key );
