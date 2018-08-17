@@ -93,14 +93,13 @@ class DefaultFooterPreset implements ContentPreset
 
         for ($i = 1; $i <= $numberOfFeatures && $i <= 3; $i++)
         {
-            $storeFeatureTranslationKey = "{{ trans('Ceres::Template.footerStoreFeature' . $i) }}";
+            $storeFeatureTranslationKey = "{{ trans('Ceres::Template.footerStoreFeature'" . $i . ") }}";
 
-            $listGridPreset->withChild($this->gridDropzoneNames[$i],
-                $this->preset->createWidget("Ceres::ListWidget")
+            $listGridPreset
+                ->createChild($this->gridDropzoneNames[$i], "Ceres::ListWidget")
                     ->withSetting("icon", "fa-check")
-                    ->withSetting("text1", "Test")->toArray()
-//                    ->withSetting("text1", $storeFeatureTranslationKey)->toArray()
-            );
+                    ->withSetting("text1", "Test")
+                    ->withSetting("text1", $storeFeatureTranslationKey);
 
         }
     }

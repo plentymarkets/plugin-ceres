@@ -30,18 +30,22 @@ class PresetWidgetFactory
 
     /**
      * @param string    $dropzone
-     * @param mixed     $childWidget
+     * @param string    $identifier
      * @return PresetWidgetFactory
      */
-    public function withChild($dropzone, $childWidget)
+    public function createChild($dropzone, $identifier)
     {
+        /** @var PresetWidgetFactory $childWidgetFactory */
+        $childWidgetFactory = pluginApp(PresetWidgetFactory::class);
+        $childWidgetFactory->identifier = $identifier;
+
         if ( !array_key_exists($dropzone, $this->children) )
         {
             $this->children[$dropzone] = [];
         }
-        $this->children[$dropzone][] = $childWidget;
+        $this->children[$dropzone][] = $childWidgetFactory;
 
-        return $this;
+        return $childWidgetFactory;
     }
 
     /**
@@ -68,10 +72,20 @@ class PresetWidgetFactory
 
     public function toArray()
     {
+        $children = [];
+        foreach( $this->children as $dropzone => $childList )
+        {
+            $children[$dropzone] = [];
+            /** @var PresetWidgetFactory $child */
+            foreach($childList as $child)
+            {
+                $children[$dropzone][] = $child->toArray();
+            }
+        }
         return [
             'identifier'     => $this->identifier,
             'widgetSettings' => $this->settings,
-            'children'       => $this->children
+            'children'       => $children
         ];
     }
 }
