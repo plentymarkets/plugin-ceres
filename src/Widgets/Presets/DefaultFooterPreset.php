@@ -89,7 +89,13 @@ class DefaultFooterPreset implements ContentPreset
 
         $listGridPreset = null;
 
-        if ($numberOfFeatures === 2)
+        if ($numberOfFeatures === 1)
+        {
+            $this->preset->createWidget("Ceres::ListWidget")
+                ->withSetting("icon", "fa-check")
+                ->withSetting("text1", "Test");
+        }
+        else if ($numberOfFeatures === 2)
         {
             $listGridPreset = $this->preset->createWidget("Ceres::TwoColumnWidget")
                 ->withSetting("layout", "oneToOne")
@@ -103,19 +109,19 @@ class DefaultFooterPreset implements ContentPreset
         }
 
 
-        for ($i = 1; $i <= $numberOfFeatures && $i <= 3; $i++)
+        if ($listGridPreset !== null)
         {
-            $storeFeatureTranslationKey = "{{ trans('Ceres::Template.footerStoreFeature'" . $i . ") }}";
-
-            $listGridPreset
-                ->createChild($this->gridDropzoneNames[$i], "Ceres::ListWidget")
-                    ->withSetting("icon", "fa-check")
-                    ->withSetting("text1", "Test")
-                    ->withSetting("text1", $storeFeatureTranslationKey);
-
-            if ($listGridPreset !== null)
+            for ($i = 1; $i <= $numberOfFeatures && $i <= 3; $i++)
             {
-                $listGridPreset->withChild($this->gridDropzoneNames[$i], $listWidget->toArray());
+                $storeFeatureTranslationKey = "{{ trans('Ceres::Template.footerStoreFeature'" . $i . ") }}";
+
+                $listGridPreset
+                    ->createChild($this->gridDropzoneNames[$i], "Ceres::ListWidget")
+                        ->withSetting("icon", "fa-check")
+                        ->withSetting("text1", "Test")
+                        ->withSetting("text1", $storeFeatureTranslationKey);
+
+
             }
         }
     }
