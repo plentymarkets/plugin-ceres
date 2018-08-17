@@ -15746,6 +15746,12 @@ Vue.component("container-item-list", {
     },
 
 
+    computed: {
+        columnWidths: function columnWidths() {
+            return ["col-xs-12", "col-sm-6", "col-md-" + 12 / this.items.length];
+        }
+    },
+
     methods: {
         initializeCarousel: function initializeCarousel() {
             var _this2 = this;
