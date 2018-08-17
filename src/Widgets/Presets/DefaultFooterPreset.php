@@ -4,8 +4,11 @@ namespace Ceres\Widgets\Presets;
 
 use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\PresetHelper;
+use IO\Extensions\Filters\PatternFilter;
+use IO\Services\CategoryService;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
-use Plenty\Plugin\Application;
+use Plenty\Modules\Category\Models\Category;
+use Plenty\Plugin\Translation\Translator;
 
 class DefaultFooterPreset implements ContentPreset
 {
@@ -14,6 +17,15 @@ class DefaultFooterPreset implements ContentPreset
 
     /** @var CeresConfig $config */
     private $config;
+
+    /** @var PatternFilter $patternFilter */
+    private $patternFilter;
+
+    /** @var CategoryService $categoryService */
+    private $categoryService;
+
+    /** @var Translator $translator */
+    private $translator;
 
     private $gridDropzoneNames = [
         1 => "first",
@@ -31,54 +43,15 @@ class DefaultFooterPreset implements ContentPreset
     {
         $this->config = pluginApp(CeresConfig::class);
         $this->preset = pluginApp(PresetHelper::class);
+        $this->patternFilter = pluginApp(PatternFilter::class);
+        $this->categoryService = pluginApp(CategoryService::class);
+        $this->translator = pluginApp(Translator::class);
 
         $this->createListWidget();
         $this->createSeparatorWidget();
+        $this->createLinkListWidget();
         $this->createLegalInformationWidget();
         $this->createTextWidget();
-
-
-        /**
-         * Link list
-         */
-//        $numberOfCols = $config->footer->numberOfCols;
-//        $linkListPresets = [];
-//
-//        for( $i = 1; $i <= $numberOfCols; $i++ )
-//        {
-//            $configuredCategories = $config->footer["col" . $i . "Categories"];
-//            $footerCategories = $patternFilter->findPattern($configuredCategories, "[0-9]+");
-//
-//            $linkListPreset = $preset->createWidget("Ceres::LinkListWidget")
-//                ->withSetting("title", "{{ trans('Ceres::Template.footerColumnTitle" . $i . "') }}")
-//                ->withSetting("icon", "none");
-//
-//            for ($o = 1; $o <= count($footerCategories) && $o <= 5; $o++)
-//            {
-//                $categoryId = $footerCategories[$o - 1];
-//                $category = $categoryService->get($categoryId);
-//                $categoryName = $category["details"][0]["name"];
-//                $categoryURL = $categoryService->getURL($category);
-//
-//                $linkListPreset->withSetting("entry" . $o . ".name", $categoryName);
-//                $linkListPreset->withSetting("entry" . $o . ".url", $categoryURL);
-//            }
-//
-//            $linkListPresets[] = $linkListPreset;
-//        }
-//
-//        $linkListGridPreset = $preset->createWidget("Ceres::ThreeColumnWidget")
-//            ->withSetting("layout", "oneToOneToOne")
-//            ->withSetting("appearance", "none");
-//
-//        // TODO: set the preset into the correct dropzone
-//        foreach ($linkListPresets as $linkListPreset)
-//        {
-//            $linkListGridPreset->withChild("first", $linkListPreset);
-//        }
-
-
-
 
         return $this->preset->toArray();
     }
@@ -113,32 +86,60 @@ class DefaultFooterPreset implements ContentPreset
         {
             for ($i = 1; $i <= $numberOfFeatures && $i <= 3; $i++)
             {
-                $storeFeatureTranslationKey = "{{ trans('Ceres::Template.footerStoreFeature'" . $i . ") }}";
-
+                $storeFeatureTranslation = $this->translator->trans("Ceres::Template.footerStoreFeature" . $i);
                 $listGridPreset
                     ->createChild($this->gridDropzoneNames[$i], "Ceres::ListWidget")
-                        ->withSetting("icon", "fa-check")
-                        ->withSetting("text1", "Test")
-                        ->withSetting("text1", $storeFeatureTranslationKey);
-
-
+                    ->withSetting("icon", "fa-check")
+                    ->withSetting("text1", $storeFeatureTranslation);
             }
         }
     }
 
     private function createSeparatorWidget()
     {
-        /**
-         * Separator
-         */
         $this->preset->createWidget("Ceres::SeparatorWidget");
+    }
+
+    private function createLinkListWidget()
+    {
+        $numberOfCols = $this->config->footer->numberOfCols;
+
+        $configuredCategories = [
+            1 => $this->config->footer->col1Categories,
+            2 => $this->config->footer->col2Categories,
+            3 => $this->config->footer->col3Categories
+        ];
+
+        $linkListGridPreset = $this->preset->createWidget("Ceres::FourColumnWidget")
+            ->withSetting("appearance", "none");
+
+        for ($i = 1; $i <= $numberOfCols && $i <= 3; $i++)
+        {
+            $columnTitleTranslation = $this->translator->trans("Ceres::Template.footerColumnTitle" . $i);
+            $linkListPreset = $linkListGridPreset->createChild($this->gridDropzoneNames[$i], "Ceres::LinkListWidget")
+                ->withSetting("title", $columnTitleTranslation)
+                ->withSetting("icon", "none");
+
+            $categoryIds = $this->patternFilter->findPattern($configuredCategories[$i], "[0-9]+");
+            foreach ($categoryIds as $key=>$categoryId)
+            {
+                $entryKey = "entry" . ($key + 1);
+                $category = $this->categoryService->get($categoryId);
+
+                if($category instanceof Category && $category->details[0] !== null)
+                {
+                    $categoryName = $category->details[0]->name;
+                    $categoryUrl = $this->categoryService->getURL($category);
+
+                    $linkListPreset->withSetting($entryKey . ".name", $categoryName)
+                        ->withSetting($entryKey . ".url", $categoryUrl);
+                }
+            }
+        }
     }
 
     private function createLegalInformationWidget()
     {
-        /**
-         * Legal information
-         */
         $this->preset->createWidget("Ceres::LegalInformationWidget")
             ->withSetting("showCancellationRights", true)
             ->withSetting("showLegalDisclosure", true)
@@ -151,19 +152,14 @@ class DefaultFooterPreset implements ContentPreset
 
     private function createTextWidget()
     {
-        /**
-         * Textwidget for plentylogo
-         */
-
-        $defaultText = <<<'EOD'
-            <div class="copyright text-xs-center m-y-1">
-                <a rel="nofollow" href="https://www.plentymarkets.eu">
-                    <img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg" rel="nofollow" crossorigin="anonymous">
-                </a>
-                <br>
-                <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>
-            </div>
-EOD;
+        $defaultText = "";
+        $defaultText .= "<div class=\"copyright text-xs-center m-y-1\">";
+        $defaultText .=     "<a rel=\"nofollow\" href=\"https://www.plentymarkets.eu\">";
+        $defaultText .=         "<img alt=\"Plentymarkets GmbH Logo\" class=\"svg plenty-brand\" src=\"{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg\" rel=\"nofollow\" crossorigin=\"anonymous\">";
+        $defaultText .=     "</a>";
+        $defaultText .=     "<br>";
+        $defaultText .=     "<small>&copy; Copyright {{ \"now\" | date(\"Y\") }} | {{ trans(\"Ceres::Template.footerAllRightsReserved\") }}</small>";
+        $defaultText .= "</div>";
 
         $this->preset->createWidget("Ceres::TextWidget")
             ->withSetting("appearance", "none")
