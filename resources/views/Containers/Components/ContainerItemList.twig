@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div v-else v-for="item in items" :key="item.data.variation.id" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div v-else v-for="item in items" :key="item.data.variation.id" :class="columnWidths">
             <category-item :item-data="item.data" decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
         </div>
     </div>
