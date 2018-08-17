@@ -1,4 +1,6 @@
 import ApiService from "services/ApiService";
+import NotificationService from "services/NotificationService";
+import TranslationService from "services/TranslationService";
 
 const state =
     {
@@ -236,6 +238,8 @@ const actions =
                         let profileToSelect = shippingProfileList.find( shipping => shipping.isPostOffice );
 
                         dispatch("selectShippingProfile", profileToSelect);
+
+                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
                     }
                     else if(!ignoreCondition &&
                             (isPostOffice && selectedAddress.address1 === "PACKSTATION"))
@@ -243,6 +247,8 @@ const actions =
                         let profileToSelect = shippingProfileList.find( shipping => shipping.isParcelBox );
 
                         dispatch("selectShippingProfile", profileToSelect);
+
+                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
                     }
                 }
 

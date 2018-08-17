@@ -1,4 +1,6 @@
 import ApiService from "services/ApiService";
+import NotificationService from "services/NotificationService";
+import TranslationService from "services/TranslationService";
 import {isNullOrUndefined}from "../../helper/utils";
 
 const state =
@@ -8,7 +10,7 @@ const state =
             shippingProfileSelected: null,
             shippingProfileList: [],
             isParcelBoxAvailable: false,
-            isPostOfficeAvailable: false
+            isPostOfficeAvailable: false,
         },
         payment: {
             methodOfPaymentId: null,
@@ -147,6 +149,7 @@ const actions =
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
 
             dispatch("setShippingProfileById", checkout.shippingProfileId);
+            dispatch("initProfileAvailabilities");
         },
 
         setShippingProfileById({state, commit}, shippingProfileId)
@@ -203,6 +206,8 @@ const actions =
                     (isParcelBox && getters.getSelectedAddress("2").address1 === "POSTFILIALE")))
                 {
                     commit("selectDeliveryAddressById", -99);
+
+                    NotificationService.warn(TranslationService.translate("Ceres::Template.addressChangedWarning"));
                 }
 
                 ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.parcelServicePresetId})
@@ -258,6 +263,11 @@ const getters =
         getShippingProfileList: state =>
         {
             return state.shipping.shippingProfileList;
+        },
+
+        isParcelOrOfficeAvailable: state =>
+        {
+            return state.shipping.isParcelBoxAvailable || state.shipping.isPostOfficeAvailable;
         }
     };
 
