@@ -64,21 +64,26 @@ class DefaultFooterPreset implements ContentPreset
 
         if ($numberOfFeatures === 1)
         {
-            $this->preset->createWidget("Ceres::ListWidget")
+            $storeFeatureTranslation = $this->translator->trans("Ceres::Template.footerStoreFeature1");
+
+            $listGridPreset = $this->preset->createWidget("Ceres::ThreeColumnWidget")
+                ->withSetting("layout", "oneToOneToOne")
+                ->withSetting("appearance", "none")
+                ->createChild("second", "Ceres::ListWidget")
                 ->withSetting("icon", "fa-check")
-                ->withSetting("text1", "Test");
+                ->withSetting("text1", $storeFeatureTranslation);
         }
         else if ($numberOfFeatures === 2)
         {
             $listGridPreset = $this->preset->createWidget("Ceres::TwoColumnWidget")
                 ->withSetting("layout", "oneToOne")
-                ->withSetting("appearance", "primary");
+                ->withSetting("appearance", "none");
         }
         else if ($numberOfFeatures === 3)
         {
             $listGridPreset = $this->preset->createWidget("Ceres::ThreeColumnWidget")
                 ->withSetting("layout", "oneToOneToOne")
-                ->withSetting("appearance", "primary");
+                ->withSetting("appearance", "none");
         }
 
 
