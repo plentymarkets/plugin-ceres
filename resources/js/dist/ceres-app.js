@@ -17207,7 +17207,10 @@ Vue.component("user-login-handler", {
             type: String,
             default: "#vue-user-login-handler"
         },
-        showRegistration: Boolean
+        showRegistration: {
+            type: Boolean,
+            default: true
+        }
     },
 
     computed: Vuex.mapGetters(["username", "isLoggedIn"]),

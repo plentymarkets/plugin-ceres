@@ -11,7 +11,7 @@
 		display: none;
 	}
 	width: 100%;
-	
+	position: fixed;
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
@@ -285,7 +285,7 @@
 		}
 	}
 
-	header {
+	#page-header {
 		background:$navbar-background-color;
 	}
 

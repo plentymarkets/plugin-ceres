@@ -5,8 +5,8 @@
 	border-bottom: 0;
 
 	z-index: 1070;
-    position: absolute;
-    right: 0;
+    position: fixed;
+    top: 30px;
     width: 100%;
     left: 50%;
 	transform: translateX(-50%);
@@ -142,3 +142,9 @@
 	background-image: url(../images/flags/4x3/no.svg);
 }
 
+.pos-f-t .cmp-country-settings,
+.pos-f-t .cmp-currency-select
+{
+	position: absolute;
+	top: auto;
+}

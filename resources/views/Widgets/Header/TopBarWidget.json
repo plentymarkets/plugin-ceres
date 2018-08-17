@@ -40,6 +40,22 @@
                 ]
             }
         },
+        "showItemImages": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarShowItemImagesLabel",
+            "options": {
+                "defaultValue": false
+            }
+        },
+        "forwardToSingleItem": {
+            "type": "checkBox",
+            "required": false,
+            "label": "Widget.topBarForwardToSingleItemLabel",
+            "options": {
+                "defaultValue": false
+            }
+        },
         "enableLogin": {
             "type": "checkBox",
             "required": true,

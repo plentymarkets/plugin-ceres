@@ -10,6 +10,8 @@
 {% set enableWishList               = widget.settings.enableWishList.mobile %}
 {% set enableBasketPreview          = widget.settings.enableBasketPreview.mobile %}
 {% set basketValues                 = widget.settings.basketValues.mobile %}
+{% set showItemImages               = widget.settings.showItemImages.mobile %}
+{% set forwardToSingleItem          = widget.settings.forwardToSingleItem.mobile %}
 
 {{ Twig.set("currencyFormat", Twig.call("config", ["Ceres.currency.format"])) }}
 {{ Twig.set("currencyFormatSelect", Twig.call("config", ["Ceres.currency.format_selection"])) }}
@@ -25,7 +27,9 @@
             <div class="top-bar-items {% if searchStyle == "permanent" %}search-shown{% endif %}">
                 {% if searchStyle == "permanent" %}
                     <div class="always-visible-search">
-                        <item-search template="#vue-item-search">
+                        <item-search template="#vue-item-search"
+                                     :show-item-images="{{ showItemImages | json_encode }}"
+                                     :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
                             <div class="search-box-inner">
                                 <div class="search-box-shadow-frame">
                                     <input type="search" class="search-input"/>
@@ -144,7 +148,9 @@
         <div class="row">
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse">
-                    <item-search></item-search>
+                    <item-search
+                        :show-item-images="{{ showItemImages | json_encode }}"
+                        :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
                 </div>
             {% endif %}
 

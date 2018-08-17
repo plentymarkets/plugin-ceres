@@ -2204,24 +2204,9 @@
                     "type": "checkBox",
                     "required": false,
                     "label": "Config.searchForwardToSingleItemLabel",
+                    "deprecated": true,
                     "options": {
-                        "defaultValue": "false"
-                    }
-                },
-                "search.show_image": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Config.searchShowImage",
-                    "options": {
-                        "defaultValue": "false"
-                    }
-                },
-                "search.alwaysShowSearchBar": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Config.searchAlwaysShowSearchBar",
-                    "options": {
-                        "defaultValue": "false"
+                        "defaultValue": false
                     }
                 }
             }
