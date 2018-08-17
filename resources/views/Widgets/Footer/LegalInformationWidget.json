@@ -1,6 +1,6 @@
 {
     "identifier": "Ceres::LegalInformationWidget",
-    "label": "Widget.gridFourColumnLabel",
+    "label": "Widget.legalInformationLabel",
     "previewImageURL": "https://www.google.de/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi05tDq8-7cAhXNzKQKHbGpCdgQjRx6BAgBEAU&url=https%3A%2F%2Fwww.schobertechnologies.com%2Fcompany%2Flegal-information%2F&psig=AOvVaw3KNF_MityDTogyxHWhVC1h&ust=1534417249256255",
     "type": "footer",
     "position": 300,
@@ -9,7 +9,7 @@
         "showCancellationRights": {
             "type": "checkBox",
             "required": true,
-            "label": "show cancellation",
+            "label": "Widget.legalInformationShowCancellationLabel",
             "options": {
                 "defaultValue": true
             }
@@ -17,7 +17,7 @@
         "showLegalDisclosure": {
             "type": "checkBox",
             "required": true,
-            "label": "show legal disclosure",
+            "label": "Widget.legalInformationShowLegalDisclosureLabel",
             "options": {
                 "defaultValue": true
             }
@@ -25,7 +25,7 @@
         "showPrivacyPolicy": {
             "type": "checkBox",
             "required": true,
-            "label": "show privacy policy",
+            "label": "Widget.legalInformationShowPrivacyPolicyLabel",
             "options": {
                 "defaultValue": true
             }
@@ -33,21 +33,21 @@
         "showGtc": {
             "type": "checkBox",
             "required": true,
-            "label": "show gtc",
+            "label": "Widget.legalInformationShowGtcLabel",
             "options": {
                 "defaultValue": true
             }
         },
         "cancellationFormContainer": {
             "type": "verticalContainer",
-            "label": "cancellation form",
+            "label": "Widget.legalInformationCancellationFormContainerLabel",
             "required": false,
             "options": {
                 "containerEntries": {
                     "showCancellationForm": {
                         "type": "checkBox",
                         "required": true,
-                        "label": "show cancellation form",
+                        "label": "Widget.legalInformationShowCancellationFormLabel",
                         "options": {
                             "defaultValue": true
                         }
@@ -55,7 +55,7 @@
                     "useCancellationPdfUpload": {
                         "type": "checkBox",
                         "required": true,
-                        "label": "use pdf",
+                        "label": "Widget.legalInformationCancellationPdfActiveLabel",
                         "options": {
                             "defaultValue": false
                         }
@@ -63,8 +63,9 @@
                     "cancellationPdfPath": {
                         "type": "inputFile",
                         "required": false,
-                        "label": "pdf path",
+                        "label": "Widget.legalInformationCancellationPdfUploadLabel",
                         "options": {
+                            "tooltip": "Widget.legalInformationCancellationPdfUploadTooltip",
                             "defaultValue": ""
                         }
                     }
