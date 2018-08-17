@@ -9,6 +9,16 @@ Vue.component("item-search", {
         {
             type: String,
             default: "#vue-item-search"
+        },
+        showItemImages:
+        {
+            type: Boolean,
+            default: false
+        },
+        forwardToSingleItem:
+        {
+            type: Boolean,
+            default: App.config.search.forwardToSingleItem
         }
     },
 
@@ -19,8 +29,7 @@ Vue.component("item-search", {
             promiseCount: 0,
             autocompleteResult: [],
             selectedAutocompleteIndex: -1,
-            isSearchFocused: false,
-            showItemImages: App.config.search.searchShowImage
+            isSearchFocused: false
         };
     },
 
@@ -61,7 +70,7 @@ Vue.component("item-search", {
         {
             if (this.selectedAutocompleteItem)
             {
-                if (App.config.search.forwardToSingleItem)
+                if (this.forwardToSingleItem)
                 {
                     window.open(this.selectedAutocompleteItem.url, "_self", false);
                 }
@@ -177,7 +186,7 @@ Vue.component("item-search", {
 
         selectAutocompleteItem(item)
         {
-            if (App.config.search.forwardToSingleItem)
+            if (this.forwardToSingleItem)
             {
                 window.open(item.url, "_self", false);
             }

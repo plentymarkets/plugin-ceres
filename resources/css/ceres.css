@@ -312,7 +312,7 @@ html {
 html {
   font-size: 14px;
   -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -5601,7 +5601,7 @@ button.close {
   margin: 1px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   border: 1px solid #fff;
   border-radius: 10px;
 }
@@ -12711,7 +12711,7 @@ button:focus {
 }
 
 .btn-labeled.btn-link .btn-label {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   padding: 0.25rem 0;
 }
 
@@ -14454,8 +14454,14 @@ Custom classes
   white-space: nowrap;
 }
 
+.unfixed {
+  left: 0;
+  right: 0;
+}
+
 .top-bar {
   width: 100%;
+  position: fixed;
   z-index: 1060;
   color: #fff;
   background-color: #4D4F4D;
@@ -14729,13 +14735,12 @@ Custom classes
   }
 }
 
-.wrapper-main #page-header.pos-f-t + #page-body {
-  padding-top: 2rem;
+.wrapper-main #page-header {
+  background: #f7f7f9;
 }
 
 .wrapper-main .navbar {
   font-family: Custom-Font, Helvetica, Arial, sans-serif;
-  background: #f7f7f9;
   border-bottom: 1px solid #efefef;
 }
 
@@ -15063,8 +15068,8 @@ Custom classes
   color: #fff;
   border-bottom: 0;
   z-index: 1070;
-  position: absolute;
-  right: 0;
+  position: fixed;
+  top: 30px;
   width: 100%;
   left: 50%;
   transform: translateX(-50%);
@@ -15220,6 +15225,12 @@ Custom classes
 
 .flag-icon-nn {
   background-image: url(../images/flags/4x3/no.svg);
+}
+
+.pos-f-t .cmp-country-settings,
+.pos-f-t .cmp-currency-select {
+  position: absolute;
+  top: auto;
 }
 
 nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
@@ -15749,8 +15760,14 @@ body.menu-is-visible {
     background: #efefef;
     top: 96px;
   }
+  .wrapper-main .breadcrumbs {
+    background: #efefef;
+    z-index: 1000;
+  }
+  .wrapper-main .breadcrumbs.unfixed {
+    z-index: -1;
+  }
   .wrapper-main .breadcrumb {
-    margin-bottom: 0;
     max-width: 1200px;
     margin: 0 auto;
     background: transparent;
@@ -17034,7 +17051,7 @@ body.menu-is-visible {
   bottom: -2px;
   left: -1px;
   background-color: #fff;
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 transparent;
   border: 1px solid transparent;
   transform-origin: top right;
   transform: scaleX(1) scaleY(1);
@@ -19828,7 +19845,7 @@ body.menu-is-visible {
 .gradient-hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #DCDBD7, rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to right, transparent, #DCDBD7, transparent);
 }
 
 .show-more-returns {
