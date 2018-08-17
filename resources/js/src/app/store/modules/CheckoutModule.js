@@ -203,7 +203,9 @@ const actions =
 
                 if (!ignoreCondition &&
                     ((isPostOffice && getters.getSelectedAddress("2").address1 === "PACKSTATION") ||
-                    (isParcelBox && getters.getSelectedAddress("2").address1 === "POSTFILIALE")))
+                    (isParcelBox && getters.getSelectedAddress("2").address1 === "POSTFILIALE")) ||
+                    ((!isParcelBox && !isPostOffice) && 
+                    (getters.getSelectedAddress("2").address1 === "PACKSTATION" || getters.getSelectedAddress("2").address1 === "POSTFILIALE")))
                 {
                     commit("selectDeliveryAddressById", -99);
 

@@ -210,6 +210,8 @@ const actions =
 
         selectAddress({commit, state, getters, dispatch}, {selectedAddress, addressType})
         {
+            let changeNotAllowed = false;
+
             return new Promise((resolve, reject) =>
             {
                 let oldAddress = {};
@@ -233,48 +235,73 @@ const actions =
                     const ignoreCondition = (isPostOffice && isParcelBox);
 
                     if (!ignoreCondition &&
-                        (isParcelBox && selectedAddress.address1 === "POSTFILIALE"))
+                        (isParcelBox && selectedAddress.address1 === "POSTFILIALE") ||
+                        ((!isParcelBox && !isPostOffice) && selectedAddress.address1 === "POSTFILIALE"))
                     {
                         let profileToSelect = shippingProfileList.find( shipping => shipping.isPostOffice );
 
-                        dispatch("selectShippingProfile", profileToSelect);
+                        if(!profileToSelect)
+                        {
+                            changeNotAllowed = true;
+                        }
+                        else
+                        {
+                            dispatch("selectShippingProfile", profileToSelect);
 
-                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
+                            NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
+                        }
                     }
                     else if(!ignoreCondition &&
-                            (isPostOffice && selectedAddress.address1 === "PACKSTATION"))
+                            (isPostOffice && selectedAddress.address1 === "PACKSTATION") ||
+                            ((!isParcelBox && !isPostOffice) && selectedAddress.address1 === "PACKSTATION"))
                     {
                         let profileToSelect = shippingProfileList.find( shipping => shipping.isParcelBox );
 
-                        dispatch("selectShippingProfile", profileToSelect);
+                        if(!profileToSelect)
+                        {
+                            changeNotAllowed = true;
+                        }
+                        else
+                        {
+                            dispatch("selectShippingProfile", profileToSelect);
 
-                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
+                            NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
+                        }
                     }
                 }
 
-                commit("setIsBasketLoading", true);
+                if(!changeNotAllowed)
+                {
+                    commit("setIsBasketLoading", true);
 
-                ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
-                    .done(response =>
-                    {
-                        commit("setIsBasketLoading", false);
-
-                        return resolve(response);
-                    })
-                    .fail(error =>
-                    {
-                        if (addressType === "1")
+                    ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
+                        .done(response =>
                         {
-                            commit("selectBillingAddress", oldAddress);
-                        }
-                        else if (addressType === "2")
+                            commit("setIsBasketLoading", false);
+    
+                            return resolve(response);
+                        })
+                        .fail(error =>
                         {
-                            commit("selectDeliveryAddress", oldAddress);
-                        }
+                            if (addressType === "1")
+                            {
+                                commit("selectBillingAddress", oldAddress);
+                            }
+                            else if (addressType === "2")
+                            {
+                                commit("selectDeliveryAddress", oldAddress);
+                            }
+    
+                            commit("setIsBasketLoading", false);
+                            reject(error);
+                        });
+                }
+                else
+                {
+                    commit("selectDeliveryAddress", oldAddress);
 
-                        commit("setIsBasketLoading", false);
-                        reject(error);
-                    });
+                    NotificationService.error(TranslationService.translate("Ceres::Template.addressSelectedNotAllowed"));
+                }
             });
         },
 
