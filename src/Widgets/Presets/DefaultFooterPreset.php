@@ -87,9 +87,21 @@ class DefaultFooterPreset implements ContentPreset
     {
         $numberOfFeatures = $this->config->footer->numberOfFeatures;
 
-        $listGridPreset = $this->preset->createWidget("Ceres::ThreeColumnWidget")
-            ->withSetting("layout", "oneToOne")
-            ->withSetting("appearance", "primary");
+        $listGridPreset = null;
+
+        if ($numberOfFeatures === 2)
+        {
+            $listGridPreset = $this->preset->createWidget("Ceres::TwoColumnWidget")
+                ->withSetting("layout", "oneToOne")
+                ->withSetting("appearance", "primary");
+        }
+        else if ($numberOfFeatures === 3)
+        {
+            $listGridPreset = $this->preset->createWidget("Ceres::ThreeColumnWidget")
+                ->withSetting("layout", "oneToOneToOne")
+                ->withSetting("appearance", "primary");
+        }
+
 
         for ($i = 1; $i <= $numberOfFeatures && $i <= 3; $i++)
         {
@@ -101,6 +113,10 @@ class DefaultFooterPreset implements ContentPreset
                     ->withSetting("text1", "Test")
                     ->withSetting("text1", $storeFeatureTranslationKey);
 
+            if ($listGridPreset !== null)
+            {
+                $listGridPreset->withChild($this->gridDropzoneNames[$i], $listWidget->toArray());
+            }
         }
     }
 
