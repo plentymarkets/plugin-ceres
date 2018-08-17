@@ -158,7 +158,7 @@ class DefaultFooterPreset implements ContentPreset
     private function createTextWidget()
     {
         $defaultText = "";
-        $defaultText .= "<div class=\"copyright text-xs-center m-y-1\">";
+        $defaultText .= "<div class=\"copyright text-xs-center\">";
         $defaultText .=     "<a rel=\"nofollow\" href=\"https://www.plentymarkets.eu\">";
         $defaultText .=         "<img alt=\"Plentymarkets GmbH Logo\" class=\"svg plenty-brand\" src=\"{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg\" rel=\"nofollow\" crossorigin=\"anonymous\">";
         $defaultText .=     "</a>";
