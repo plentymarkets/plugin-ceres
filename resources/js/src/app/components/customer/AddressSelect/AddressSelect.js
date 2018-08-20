@@ -192,9 +192,7 @@ Vue.component("address-select", {
                 this.addressToEdit.gender = "male";
             }
 
-            if (isDefined(this.addressToEdit.address1) &&
-                (this.addressToEdit.address1 === "PACKSTAION" ||
-                this.addressToEdit.address1 === "POSTFILIALE"))
+            if (isDefined(this.addressToEdit.address1) && (this.addressToEdit.address1 === "PACKSTATION" || this.addressToEdit.address1 === "POSTFILIALE") && this.$store.getters.isParcelOrOfficeAvailable)
             {
                 this.addressToEdit.showPickupStation = true;
             }
