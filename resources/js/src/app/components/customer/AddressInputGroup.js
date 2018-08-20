@@ -34,7 +34,7 @@ Vue.component("address-input-group", {
 
         isParcelOrOfficeAvailable()
         {
-            return this.isParcelBoxAvailable || this.isPostOfficeAvailable;
+            return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
         },
 
         ...Vuex.mapState({
@@ -81,6 +81,8 @@ Vue.component("address-input-group", {
             }
 
             this.emitInputEvent("countryId", shippingCountry.id);
+
+            this.togglePickupStation(false);
         },
 
         togglePickupStation(showPickupStation)
