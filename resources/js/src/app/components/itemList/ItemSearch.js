@@ -77,8 +77,8 @@ Vue.component("item-search", {
 
         updateTitle(searchString)
             {
-            document.querySelector("#searchPageTitle").innerHTML = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString;
-            document.title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+            document.querySelector("#searchPageTitle").innerHTML = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString);
+            document.title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString) + " | " + App.config.header.companyName;
         },
 
         initAutocomplete()
