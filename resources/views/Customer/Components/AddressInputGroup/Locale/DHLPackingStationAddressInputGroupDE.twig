@@ -104,8 +104,8 @@
         <div class="col-xs-12 col-sm-4">
             <div class="input-unit" data-validate="text" data-model="address2">
                 <input type="text" name="housenumber" autocomplete="address-line2" :id="'txtNumber' + _uid" :value="value.address2" @input="emitInputEvent('address2', $event.target.value)">
-                <label v-if="isPickupStation" :for="'txtNumber' + _uid">{{ trans("Ceres::Template.addressPostOfficeNumber") }}*</label>
-                <label v-if="isPostOffice" :for="'txtNumber' + _uid">{{ trans("Ceres::Template.addressPackingStationNumber") }}*</label>
+                <label v-if="isPickupStation" :for="'txtNumber' + _uid">{{ trans("Ceres::Template.addressPackingStationNumber") }}*</label>
+                <label v-if="isPostOffice" :for="'txtNumber' + _uid">{{ trans("Ceres::Template.addressPostOfficeNumber") }}*</label>
             </div>
         </div>
     </div>
