@@ -95,7 +95,7 @@ body {
 							transform 300ms 10ms ease-in-out;
 
 				@include media-breakpoint-down(md) {
-					width: 100% !important;
+					width: 100%;
 				}
 			}
 		}

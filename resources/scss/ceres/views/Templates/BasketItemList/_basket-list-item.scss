@@ -107,10 +107,9 @@
 
 		.basket-item-container-right {
 			margin-left: auto;
-			display: flex;
 
-			@include media-breakpoint-down(sm) {
-				display: block !important;
+			@include media-breakpoint-up(md) {
+				display: flex;
 			}
 
 			.qty-box-container {
