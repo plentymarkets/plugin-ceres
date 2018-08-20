@@ -33,12 +33,11 @@
 	}
 
 	& .item-bundle {
-		width: 300px;
 		font-weight: 700;
 		font-size: 80%;
 
-		@include media-breakpoint-down(sm) {
-			width: calc(100vw - 155px) !important;
+		@include media-breakpoint-up(md) {
+			width: 300px;
 		}
 	}
 
