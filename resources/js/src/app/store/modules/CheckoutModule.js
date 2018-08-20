@@ -1,7 +1,7 @@
 import ApiService from "services/ApiService";
 import NotificationService from "services/NotificationService";
 import TranslationService from "services/TranslationService";
-import {isNullOrUndefined}from "../../helper/utils";
+import {isNullOrUndefined, isNull}from "../../helper/utils";
 
 const state =
     {
@@ -10,7 +10,7 @@ const state =
             shippingProfileSelected: null,
             shippingProfileList: [],
             isParcelBoxAvailable: false,
-            isPostOfficeAvailable: false,
+            isPostOfficeAvailable: false
         },
         payment: {
             methodOfPaymentId: null,
@@ -154,12 +154,14 @@ const actions =
 
         setShippingProfileById({state, commit}, shippingProfileId)
         {
-            for(let shippingProfile in state.shipping.shippingProfileList)
+            const shippingProfile = state.shipping.shippingProfileList.find(profile =>
             {
-                if(state.shipping.shippingProfileList[shippingProfile].parcelServicePresetId === shippingProfileId)
-                {
-                    commit("setSelectedShippingProfile", state.shipping.shippingProfileList[shippingProfile]);
-                }
+                return profile.parcelServicePresetId === shippingProfileId;
+            });
+
+            if (!isNullOrUndefined(shippingProfile))
+            {
+                commit("setSelectedShippingProfile", shippingProfile);
             }
         },
 
@@ -204,7 +206,7 @@ const actions =
                 if (!ignoreCondition &&
                     ((isPostOffice && getters.getSelectedAddress("2").address1 === "PACKSTATION") ||
                     (isParcelBox && getters.getSelectedAddress("2").address1 === "POSTFILIALE")) ||
-                    ((!isParcelBox && !isPostOffice) && 
+                    ((!isParcelBox && !isPostOffice) &&
                     (getters.getSelectedAddress("2").address1 === "PACKSTATION" || getters.getSelectedAddress("2").address1 === "POSTFILIALE")))
                 {
                     commit("selectDeliveryAddressById", -99);
@@ -247,12 +249,10 @@ const actions =
 
         initProfileAvailabilities({commit, state})
         {
-            commit( "setParcelBoxAvailability", 
-                    !isNullOrUndefined(state.shipping.shippingProfileList.find( shipping => shipping.isParcelBox )));
+            commit("setParcelBoxAvailability", !isNullOrUndefined(state.shipping.shippingProfileList.find(shipping => shipping.isParcelBox)));
 
-            commit( "setPostOfficeAvailability", 
-                    !isNullOrUndefined(state.shipping.shippingProfileList.find( shipping => shipping.isPostOffice )));
-        },
+            commit("setPostOfficeAvailability", !isNullOrUndefined(state.shipping.shippingProfileList.find(shipping => shipping.isPostOffice)));
+        }
     };
 
 const getters =
