@@ -83,7 +83,6 @@ body {
 
 		&.open-right{
 			overflow: hidden;
-			position: fixed;
 
 			.wrapper-right{
 				@include media-breakpoint-up(md) {
