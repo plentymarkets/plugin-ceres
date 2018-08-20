@@ -208,7 +208,7 @@ const actions =
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
         },
 
-        selectAddress({commit, state, getters, dispatch}, {selectedAddress, addressType})
+        selectAddress({commit, state, rootState, dispatch}, {selectedAddress, addressType})
         {
             let changeNotAllowed = false;
 
@@ -226,8 +226,8 @@ const actions =
                     oldAddress = state.deliveryAddress;
                     commit("selectDeliveryAddress", selectedAddress);
 
-                    const shippingProfile = getters.getSelectedShippingProfile;
-                    const shippingProfileList = getters.getShippingProfileList;
+                    const shippingProfile = rootState.checkout.shipping.selectedShippingProfile;
+                    const shippingProfileList = rootState.checkout.shipping.shippingProfileList;
 
                     const isPostOffice = shippingProfile.isPostOffice;
                     const isParcelBox = shippingProfile.isParcelBox;

@@ -6,11 +6,11 @@ import {isNullOrUndefined}from "../../helper/utils";
 const state =
     {
         shipping: {
-            shippingProfileId: null,
-            shippingProfileSelected: null,
-            shippingProfileList: [],
             isParcelBoxAvailable: false,
-            isPostOfficeAvailable: false
+            isPostOfficeAvailable: false,
+            selectedShippingProfile: null,
+            shippingProfileId: null,
+            shippingProfileList: []
         },
         payment: {
             methodOfPaymentId: null,
@@ -50,7 +50,7 @@ const mutations =
 
         setSelectedShippingProfile(state, shippingProfile)
         {
-            state.shipping.shippingProfileSelected = shippingProfile;
+            state.shipping.selectedShippingProfile = shippingProfile;
         },
 
         setShippingProfileList(state, shippingProfileList)
@@ -257,16 +257,6 @@ const actions =
 
 const getters =
     {
-        getSelectedShippingProfile: state =>
-        {
-            return state.shipping.shippingProfileSelected;
-        },
-
-        getShippingProfileList: state =>
-        {
-            return state.shipping.shippingProfileList;
-        },
-
         isParcelOrOfficeAvailable: state =>
         {
             return state.shipping.isParcelBoxAvailable || state.shipping.isPostOfficeAvailable;
