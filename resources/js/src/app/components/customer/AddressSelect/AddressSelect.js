@@ -337,7 +337,7 @@ Vue.component("address-select", {
         }
     },
 
-    filters :
+    filters:
     {
         optionType(selectedAddress, typeId)
         {

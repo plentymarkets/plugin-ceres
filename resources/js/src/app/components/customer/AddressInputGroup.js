@@ -85,14 +85,23 @@ Vue.component("address-input-group", {
 
         togglePickupStation(showPickupStation)
         {
-            if (showPickupStation &&
-                (!this.isPickupStation ||
-                !this.isPostOffice))
+            const emitInputs =
+                {
+                    address1: "",
+                    address2: "",
+                    address3: "",
+                    showPickupStation: showPickupStation
+                };
+
+            if (showPickupStation)
             {
-                this.emitInputEvent("address1", "PACKSTATION");
+                emitInputs.address1 = this.isParcelBoxAvailable ? "PACKSTATION" : "POSTFILIALE";
             }
 
-            this.emitInputEvent("showPickupStation", showPickupStation);
+            for (const input in emitInputs)
+            {
+                this.emitInputEvent(input, emitInputs[input]);
+            }
         },
 
         /**

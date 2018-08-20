@@ -92,7 +92,7 @@
         {# Packstation, Postfiliale #}
         <div class="col-xs-12 col-sm-8">
             <div class="input-unit" data-validate="" data-model="address1">
-                <select  :value="value.address1" class="custom-select" @change="emitInputEvent('address1', $event.target.value)">
+                <select class="custom-select" :value="value.address1" @change="emitInputEvent('address1', $event.target.value)">
                     <option v-if="isParcelBoxAvailable" value="PACKSTATION" :selected="isPickupStation">{{ trans("Ceres::Template.addressPackingStation") }}</option>
                     <option v-if="isPostOfficeAvailable" value="POSTFILIALE" :selected="isPostOffice">{{ trans("Ceres::Template.addressPostOffice") }}</option>
                 </select>
