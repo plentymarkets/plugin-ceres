@@ -1,0 +1,17 @@
+[
+  "images.all.urlPreview",
+  "images.all.position",
+  "images.all.path",
+  "images.all.names.alternate",
+  "images.all.names.lang",
+  "images.variation.urlPreview",
+  "images.variation.position",
+  "images.variation.path",
+  "images.variation.names.alternate",
+  "images.variation.names.lang",
+  "item.id",
+  "variation.id",
+  "variation.name",
+  "variation.itemId",
+  "texts*"
+]

@@ -18917,8 +18917,8 @@ Vue.component("item-search", {
             window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
         },
         updateTitle: function updateTitle(searchString) {
-            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
-            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString);
+            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString) + " | " + App.config.header.companyName;
         },
         initAutocomplete: function initAutocomplete() {
             var _this2 = this;
