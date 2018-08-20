@@ -18237,6 +18237,11 @@ Vue.component("quantity-input", {
             }
         },
         setValue: function setValue(value) {
+            // consider the configured decimal seperator (if the input is typed in the input field)
+            if (typeof value === "string") {
+                value = value.replace(App.decimalSeparator || ",", ".");
+            }
+
             value = parseFloat(value);
             if (isNaN(value)) {
                 value = (0, _utils.defaultValue)(this.compMin, 1);
