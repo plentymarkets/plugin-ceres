@@ -1,7 +1,7 @@
 import ApiService from "services/ApiService";
 import NotificationService from "services/NotificationService";
 import TranslationService from "services/TranslationService";
-import {isNullOrUndefined, isNull}from "../../helper/utils";
+import {isNullOrUndefined}from "../../helper/utils";
 
 const state =
     {

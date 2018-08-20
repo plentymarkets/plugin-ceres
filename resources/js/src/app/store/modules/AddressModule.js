@@ -238,9 +238,9 @@ const actions =
                         (isParcelBox && selectedAddress.address1 === "POSTFILIALE") ||
                         ((!isParcelBox && !isPostOffice) && selectedAddress.address1 === "POSTFILIALE"))
                     {
-                        let profileToSelect = shippingProfileList.find( shipping => shipping.isPostOffice );
+                        const profileToSelect = shippingProfileList.find(shipping => shipping.isPostOffice);
 
-                        if(!profileToSelect)
+                        if (!profileToSelect)
                         {
                             changeNotAllowed = true;
                         }
@@ -251,13 +251,13 @@ const actions =
                             NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
                         }
                     }
-                    else if(!ignoreCondition &&
-                            (isPostOffice && selectedAddress.address1 === "PACKSTATION") ||
-                            ((!isParcelBox && !isPostOffice) && selectedAddress.address1 === "PACKSTATION"))
+                    else if (!ignoreCondition &&
+                        (isPostOffice && selectedAddress.address1 === "PACKSTATION") ||
+                        ((!isParcelBox && !isPostOffice) && selectedAddress.address1 === "PACKSTATION"))
                     {
-                        let profileToSelect = shippingProfileList.find( shipping => shipping.isParcelBox );
+                        const profileToSelect = shippingProfileList.find(shipping => shipping.isParcelBox);
 
-                        if(!profileToSelect)
+                        if (!profileToSelect)
                         {
                             changeNotAllowed = true;
                         }
@@ -270,7 +270,7 @@ const actions =
                     }
                 }
 
-                if(!changeNotAllowed)
+                if (!changeNotAllowed)
                 {
                     commit("setIsBasketLoading", true);
 
@@ -278,7 +278,7 @@ const actions =
                         .done(response =>
                         {
                             commit("setIsBasketLoading", false);
-    
+
                             return resolve(response);
                         })
                         .fail(error =>
@@ -291,7 +291,7 @@ const actions =
                             {
                                 commit("selectDeliveryAddress", oldAddress);
                             }
-    
+
                             commit("setIsBasketLoading", false);
                             reject(error);
                         });
