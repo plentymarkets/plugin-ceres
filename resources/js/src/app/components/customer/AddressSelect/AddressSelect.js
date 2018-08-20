@@ -131,14 +131,6 @@ Vue.component("address-select", {
         },
 
         /**
-         * Show the add modal initially, if no address is selected in checkout
-         */
-        showInitialAddModal()
-        {
-            this.showAddModal("initial");
-        },
-
-        /**
          * Show the add modal
          */
         showAddModal(type)
