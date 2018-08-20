@@ -79,7 +79,7 @@
         {% endif %}
     </div>
 </div>
-<div class="col-xs-12" v-if="selectedCountry && selectedCountry.isoCode2 === 'DE'">
+<div class="col-xs-12" v-if="isParcelOrOfficeAvailable">
     <div class="row">
         <div class="col-xs-12">
             <input type="checkbox" name="togglePickup" :checked="value.showPickupStation" @change="togglePickupStation($event.target.checked)" :id="'showPickup' + _uid">
