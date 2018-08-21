@@ -48,6 +48,17 @@ Vue.component("add-item-to-basket-overlay", {
 
             return "";
         },
+        imageAlternativeText()
+        {
+            if (this.isLastBasketEntrySet)
+            {
+                const images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
+
+                return this.$options.filters.itemImageAlternativeText(images);
+            }
+
+            return "";
+        },
 
         ...Vuex.mapState({
             latestBasketEntry: state => state.basket.latestEntry

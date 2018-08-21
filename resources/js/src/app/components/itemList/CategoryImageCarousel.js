@@ -6,6 +6,7 @@ Vue.component("category-image-carousel", {
         imageUrlsData  : {type: Array},
         itemUrl        : {type: String},
         altText        : {type: String},
+        titleText      : {type: String},
         showDots       : {type: Boolean},
         showNav        : {type: Boolean},
         disableLazyLoad: {
@@ -100,6 +101,11 @@ Vue.component("category-image-carousel", {
             const altText = image && image.alternate ? image.alternate : this.altText;
 
             return altText;
+        },
+
+        getItemName()
+        {
+            return this.titleText;
         },
 
         loadFirstImage()
