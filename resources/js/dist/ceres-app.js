@@ -18973,6 +18973,8 @@ Vue.component("item-search", {
 },{"services/TranslationService":131,"services/UrlService":132}],60:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
@@ -18993,7 +18995,13 @@ Vue.component("item-store-special", {
         };
     },
     created: function created() {
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+
+        if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+            this.tagClass = this.tagClasses[this.storeSpecial.id];
+        } else {
+            this.tagClass = this.tagClasses.default;
+        }
+
         this.label = this.getLabel();
     },
 
@@ -19019,7 +19027,7 @@ Vue.component("item-store-special", {
     }
 });
 
-},{}],61:[function(require,module,exports){
+},{"../../helper/utils":122}],61:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
