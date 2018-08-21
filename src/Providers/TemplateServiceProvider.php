@@ -15,12 +15,14 @@ use Ceres\Contexts\OrderReturnContext;
 use Ceres\Contexts\PasswordResetContext;
 use Ceres\Contexts\SingleItemContext;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
+use Ceres\Hooks\CeresAfterBuildPlugins;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\CategoryKey;
 use IO\Helper\CategoryMap;
 use IO\Helper\TemplateContainer;
 use IO\Services\ContentCaching\Services\Container;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
+use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\Events\Dispatcher;
@@ -120,5 +122,7 @@ class TemplateServiceProvider extends ServiceProvider
             $partial->set('page-design', 'Ceres::PageDesign.PageDesign');
 
         }, self::EVENT_LISTENER_PRIORITY);
+
+        $eventDispatcher->listen(AfterBuildPlugins::class, CeresAfterBuildPlugins::class);
     }
 }
