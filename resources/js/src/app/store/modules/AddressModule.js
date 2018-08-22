@@ -376,16 +376,14 @@ const actions =
         {
             const shippingProfileList = rootState.checkout.shipping.shippingProfileList;
             const selectedShippingProfile = rootState.checkout.shipping.selectedShippingProfile;
-            const isPostOfficeSupported = selectedShippingProfile.isPostOffice;
-            const isParcelBoxSupported = selectedShippingProfile.isParcelBox;
-            const isPostOfficeAndParcelBoxActive = isPostOfficeSupported && isParcelBoxSupported;
+            const isPostOfficeAndParcelBoxActive = selectedShippingProfile.isPostOffice && selectedShippingProfile.isParcelBox;
             const isAddressPostOffice = selectedAddress.address1 === "POSTFILIALE";
             const isAddressParcelBox = selectedAddress.address1 === "PACKSTATION";
 
             if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
             {
-                const isUnsupportedPostOffice = isAddressPostOffice && !isPostOfficeSupported;
-                const isUnsupportedParcelBox = isAddressParcelBox && !isParcelBoxSupported;
+                const isUnsupportedPostOffice = isAddressPostOffice && !selectedShippingProfile.isPostOffice;
+                const isUnsupportedParcelBox = isAddressParcelBox && !selectedShippingProfile.isParcelBox;
 
                 if (isUnsupportedPostOffice || isUnsupportedParcelBox)
                 {

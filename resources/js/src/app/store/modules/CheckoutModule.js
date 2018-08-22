@@ -193,25 +193,24 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                const oldShippingProfile = state.shipping.shippingProfileId;
-
                 commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
-                const isPostOffice = shippingProfile.isPostOffice;
-                const isParcelBox = shippingProfile.isParcelBox;
+                const oldShippingProfile = state.shipping.shippingProfileId;
+                const isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
+                const isAddressPostOffice = getters.getSelectedAddress("2").address1 === "POSTFILIALE";
+                const isAddressParcelBox = getters.getSelectedAddress("2").address1 === "PACKSTATION";
 
-                const ignoreCondition = (isPostOffice && isParcelBox);
-
-                if (!ignoreCondition &&
-                    ((isPostOffice && getters.getSelectedAddress("2").address1 === "PACKSTATION") ||
-                    (isParcelBox && getters.getSelectedAddress("2").address1 === "POSTFILIALE")) ||
-                    ((!isParcelBox && !isPostOffice) &&
-                    (getters.getSelectedAddress("2").address1 === "PACKSTATION" || getters.getSelectedAddress("2").address1 === "POSTFILIALE")))
+                if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
                 {
-                    commit("selectDeliveryAddressById", -99);
+                    const isUnsupportedPostOffice = isAddressPostOffice && !shippingProfile.isPostOffice;
+                    const isUnsupportedParcelBox = isAddressParcelBox && !shippingProfile.isParcelBox;
 
-                    NotificationService.warn(TranslationService.translate("Ceres::Template.addressChangedWarning"));
+                    if (isUnsupportedPostOffice || isUnsupportedParcelBox)
+                    {
+                        commit("selectDeliveryAddressById", -99);
+                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressChangedWarning"));
+                    }
                 }
 
                 ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.parcelServicePresetId})
