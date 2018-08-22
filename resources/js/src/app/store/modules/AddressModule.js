@@ -224,7 +224,7 @@ const actions =
                     oldAddress = state.deliveryAddress;
                     commit("selectDeliveryAddress", selectedAddress);
 
-                    dispatch("getIsAddressChangedAllowed", {selectedAddress, addressType}).then(isAddressChangedAllowed =>
+                    dispatch("checkAddressChangeValidity", {selectedAddress, addressType}).then(isAddressChangedAllowed =>
                     {
                         if (!isAddressChangedAllowed)
                         {
@@ -260,49 +260,6 @@ const actions =
                     });
                 }
             });
-        },
-
-        getIsAddressChangedAllowed({commit, state, rootState, dispatch}, {selectedAddress, addressType})
-        {
-            const shippingProfileList = rootState.checkout.shipping.shippingProfileList;
-            const selectedShippingProfile = rootState.checkout.shipping.selectedShippingProfile;
-            const isPostOfficeSupported = selectedShippingProfile.isPostOffice;
-            const isParcelBoxSupported = selectedShippingProfile.isParcelBox;
-            const isPostOfficeAndParcelBoxActive = isPostOfficeSupported && isParcelBoxSupported;
-            const isAddressPostOffice = selectedAddress.address1 === "POSTFILIALE";
-            const isAddressParcelBox = selectedAddress.address1 === "PACKSTATION";
-
-            if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
-            {
-                const isUnsupportedPostOffice = isAddressPostOffice && !isPostOfficeSupported;
-                const isUnsupportedParcelBox = isAddressParcelBox && !isParcelBoxSupported;
-
-                if (isUnsupportedPostOffice || isUnsupportedParcelBox)
-                {
-                    let profileToSelect;
-
-                    if (isUnsupportedPostOffice)
-                    {
-                        profileToSelect = shippingProfileList.find(shipping => shipping.isPostOffice);
-                    }
-                    else
-                    {
-                        profileToSelect = shippingProfileList.find(shipping => shipping.isParcelBox);
-                    }
-
-                    if (profileToSelect)
-                    {
-                        dispatch("selectShippingProfile", profileToSelect);
-                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
         },
 
         deleteAddress({dispatch, state, commit}, {address, addressType})
@@ -349,7 +306,7 @@ const actions =
             });
         },
 
-        createAddress({commit}, {address, addressType})
+        createAddress({commit, dispatch}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
             {
@@ -363,6 +320,13 @@ const actions =
                         else if (addressType === "2")
                         {
                             commit("addDeliveryAddress", {deliveryAddress: response});
+
+                            // setTimeout 0 is required to prevent unactual data in the store before checking the validity of the shipping profile
+                            setTimeout(() =>
+                            {
+                                dispatch("checkAddressChangeValidity", {selectedAddress: response, addressType});
+                            }, 0);
+
                         }
 
                         resolve(response);
@@ -396,7 +360,7 @@ const actions =
                         {
                             commit("updateDeliveryAddress", address);
 
-                            dispatch("getIsAddressChangedAllowed", {selectedAddress: response.data, addressType});
+                            dispatch("checkAddressChangeValidity", {selectedAddress: response.data, addressType});
                         }
 
                         resolve(response);
@@ -406,6 +370,49 @@ const actions =
                         reject(error);
                     });
             });
+        },
+
+        checkAddressChangeValidity({commit, state, rootState, dispatch}, {selectedAddress, addressType})
+        {
+            const shippingProfileList = rootState.checkout.shipping.shippingProfileList;
+            const selectedShippingProfile = rootState.checkout.shipping.selectedShippingProfile;
+            const isPostOfficeSupported = selectedShippingProfile.isPostOffice;
+            const isParcelBoxSupported = selectedShippingProfile.isParcelBox;
+            const isPostOfficeAndParcelBoxActive = isPostOfficeSupported && isParcelBoxSupported;
+            const isAddressPostOffice = selectedAddress.address1 === "POSTFILIALE";
+            const isAddressParcelBox = selectedAddress.address1 === "PACKSTATION";
+
+            if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
+            {
+                const isUnsupportedPostOffice = isAddressPostOffice && !isPostOfficeSupported;
+                const isUnsupportedParcelBox = isAddressParcelBox && !isParcelBoxSupported;
+
+                if (isUnsupportedPostOffice || isUnsupportedParcelBox)
+                {
+                    let profileToSelect;
+
+                    if (isUnsupportedPostOffice)
+                    {
+                        profileToSelect = shippingProfileList.find(shipping => shipping.isPostOffice);
+                    }
+                    else
+                    {
+                        profileToSelect = shippingProfileList.find(shipping => shipping.isParcelBox);
+                    }
+
+                    if (profileToSelect)
+                    {
+                        dispatch("selectShippingProfile", profileToSelect);
+                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     };
 
