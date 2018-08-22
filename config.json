@@ -924,6 +924,226 @@
                         ]
                     }
                 },
+              "item.lists.cross_selling_sorting": {
+                  "type": "selectBox",
+                  "required": false,
+                  "label": "Config.itemListsCrossSellingSortingLabel",
+                  "options": {
+                    "defaultValue": "texts.name_asc",
+                    "selectBoxValues": [
+                      {
+                        "value": "item.id_asc",
+                        "caption": "Config.sortingPriorityCategoryItemIdAsc"
+                      },
+                      {
+                        "value": "item.id_desc",
+                        "caption": "Config.sortingPriorityCategoryItemIdDesc"
+                      },
+                      {
+                        "value": "texts.name_asc",
+                        "caption": "Config.sortingPriorityCategoryNameAsc"
+                      },
+                      {
+                        "value": "texts.name_desc",
+                        "caption": "Config.sortingPriorityCategoryNameDesc"
+                      },
+                      {
+                        "value": "sorting.price.avg_asc",
+                        "caption": "Config.sortingPriorityCategoryPriceAsc"
+                      },
+                      {
+                        "value": "sorting.price.avg_desc",
+                        "caption": "Config.sortingPriorityCategoryPriceDesc"
+                      },
+                      {
+                        "value": "variation.createdAt_desc",
+                        "caption": "Config.sortingPriorityCategoryVariationCreatedAtDesc"
+                      },
+                      {
+                        "value": "variation.createdAt_asc",
+                        "caption": "Config.sortingPriorityCategoryVariationCreatedAtAsc"
+                      },
+                      {
+                        "value": "variation.id_asc",
+                        "caption": "Config.sortingPriorityCategoryVariationIdAsc"
+                      },
+                      {
+                        "value": "variation.id_desc",
+                        "caption": "Config.sortingPriorityCategoryVariationIdDesc"
+                      },
+                      {
+                        "value": "variation.number_asc",
+                        "caption": "Config.sortingPriorityCategoryVariationNumberAsc"
+                      },
+                      {
+                        "value": "variation.number_desc",
+                        "caption": "Config.sortingPriorityCategoryVariationNumberDesc"
+                      },
+                      {
+                        "value": "variation.availability.averageDays_asc",
+                        "caption": "Config.sortingPriorityCategoryAvailabilityAsc"
+                      },
+                      {
+                        "value": "variation.availability.averageDays_desc",
+                        "caption": "Config.sortingPriorityCategoryAvailabilityDesc"
+                      },
+                      {
+                        "value": "variation.updatedAt_asc",
+                        "caption": "Config.sortingPriorityCategoryVariationUpdatedAtAsc"
+                      },
+                      {
+                        "value": "variation.updatedAt_desc",
+                        "caption": "Config.sortingPriorityCategoryVariationUpdatedAtDesc"
+                      },
+                      {
+                        "value": "variation.position_asc",
+                        "caption": "Config.sortingPriorityCategoryVariationPositionAsc"
+                      },
+                      {
+                        "value": "variation.position_desc",
+                        "caption": "Config.sortingPriorityCategoryVariationPositionDesc"
+                      },
+                      {
+                        "value": "item.manufacturer.externalName_asc",
+                        "caption": "Config.sortingPriorityCategoryManufacturerAsc"
+                      },
+                      {
+                        "value": "item.manufacturer.externalName_desc",
+                        "caption": "Config.sortingPriorityCategoryManufacturerDesc"
+                      },
+                      {
+                        "value": "item.manufacturer.position_asc",
+                        "caption": "Config.sortingPriorityCategoryManufacturerPositionAsc"
+                      },
+                      {
+                        "value": "item.manufacturer.position_desc",
+                        "caption": "Config.sortingPriorityCategoryManufacturerPositionDesc"
+                      },
+                      {
+                        "value": "stock.net_asc",
+                        "caption": "Config.sortingPriorityCategoryStockAsc"
+                      },
+                      {
+                        "value": "stock.net_desc",
+                        "caption": "Config.sortingPriorityCategoryStockDesc"
+                      },
+                      {
+                        "value": "item.random",
+                        "caption": "Config.sortDataRandom"
+                      }
+                    ]
+                  }
+              },
+              "item.lists.tag_sorting": {
+                  "type": "selectBox",
+                  "required": false,
+                  "label": "Config.itemListsTagSortingLabel",
+                  "options": {
+                      "defaultValue": "texts.name_asc",
+                      "selectBoxValues": [
+                        {
+                          "value": "item.id_asc",
+                          "caption": "Config.sortingPriorityCategoryItemIdAsc"
+                        },
+                        {
+                          "value": "item.id_desc",
+                          "caption": "Config.sortingPriorityCategoryItemIdDesc"
+                        },
+                        {
+                          "value": "texts.name_asc",
+                          "caption": "Config.sortingPriorityCategoryNameAsc"
+                        },
+                        {
+                          "value": "texts.name_desc",
+                          "caption": "Config.sortingPriorityCategoryNameDesc"
+                        },
+                        {
+                          "value": "sorting.price.avg_asc",
+                          "caption": "Config.sortingPriorityCategoryPriceAsc"
+                        },
+                        {
+                          "value": "sorting.price.avg_desc",
+                          "caption": "Config.sortingPriorityCategoryPriceDesc"
+                        },
+                        {
+                          "value": "variation.createdAt_desc",
+                          "caption": "Config.sortingPriorityCategoryVariationCreatedAtDesc"
+                        },
+                        {
+                          "value": "variation.createdAt_asc",
+                          "caption": "Config.sortingPriorityCategoryVariationCreatedAtAsc"
+                        },
+                        {
+                          "value": "variation.id_asc",
+                          "caption": "Config.sortingPriorityCategoryVariationIdAsc"
+                        },
+                        {
+                          "value": "variation.id_desc",
+                          "caption": "Config.sortingPriorityCategoryVariationIdDesc"
+                        },
+                        {
+                          "value": "variation.number_asc",
+                          "caption": "Config.sortingPriorityCategoryVariationNumberAsc"
+                        },
+                        {
+                          "value": "variation.number_desc",
+                          "caption": "Config.sortingPriorityCategoryVariationNumberDesc"
+                        },
+                        {
+                          "value": "variation.availability.averageDays_asc",
+                          "caption": "Config.sortingPriorityCategoryAvailabilityAsc"
+                        },
+                        {
+                          "value": "variation.availability.averageDays_desc",
+                          "caption": "Config.sortingPriorityCategoryAvailabilityDesc"
+                        },
+                        {
+                          "value": "variation.updatedAt_asc",
+                          "caption": "Config.sortingPriorityCategoryVariationUpdatedAtAsc"
+                        },
+                        {
+                          "value": "variation.updatedAt_desc",
+                          "caption": "Config.sortingPriorityCategoryVariationUpdatedAtDesc"
+                        },
+                        {
+                          "value": "variation.position_asc",
+                          "caption": "Config.sortingPriorityCategoryVariationPositionAsc"
+                        },
+                        {
+                          "value": "variation.position_desc",
+                          "caption": "Config.sortingPriorityCategoryVariationPositionDesc"
+                        },
+                        {
+                          "value": "item.manufacturer.externalName_asc",
+                          "caption": "Config.sortingPriorityCategoryManufacturerAsc"
+                        },
+                        {
+                          "value": "item.manufacturer.externalName_desc",
+                          "caption": "Config.sortingPriorityCategoryManufacturerDesc"
+                        },
+                        {
+                          "value": "item.manufacturer.position_asc",
+                          "caption": "Config.sortingPriorityCategoryManufacturerPositionAsc"
+                        },
+                        {
+                          "value": "item.manufacturer.position_desc",
+                          "caption": "Config.sortingPriorityCategoryManufacturerPositionDesc"
+                        },
+                        {
+                          "value": "stock.net_asc",
+                          "caption": "Config.sortingPriorityCategoryStockAsc"
+                        },
+                        {
+                          "value": "stock.net_desc",
+                          "caption": "Config.sortingPriorityCategoryStockDesc"
+                        },
+                        {
+                          "value": "item.random",
+                          "caption": "Config.sortDataRandom"
+                        }
+                      ]
+                    }
+                },
                 "item.lists.1.list_type": {
                     "type": "selectBox",
                     "required": false,
@@ -1574,6 +1794,10 @@
                             {
                                 "value": "stock.net_desc",
                                 "caption": "Config.sortingPriorityCategoryStockDesc"
+                            },
+                            {
+                                "value": "item.random",
+                                "caption": "Config.sortDataRandom"
                             }
                         ]
                     }
@@ -1684,6 +1908,10 @@
                             {
                                 "value": "stock.net_desc",
                                 "caption": "Config.sortingPriorityCategoryStockDesc"
+                            },
+                            {
+                                "value": "item.random",
+                                "caption": "Config.sortDataRandom"
                             }
                         ]
                     }
@@ -1794,6 +2022,10 @@
                             {
                                 "value": "stock.net_desc",
                                 "caption": "Config.sortingPriorityCategoryStockDesc"
+                            },
+                            {
+                                "value": "item.random",
+                                "caption": "Config.sortDataRandom"
                             }
                         ]
                     }
@@ -1978,6 +2210,10 @@
                             {
                                 "value": "stock.net_desc",
                                 "caption": "Config.sortingPriorityCategoryStockDesc"
+                            },
+                            {
+                                "value": "item.random",
+                                "caption": "Config.sortDataRandom"
                             }
                         ]
                     }
@@ -2092,6 +2328,10 @@
                             {
                                 "value": "stock.net_desc",
                                 "caption": "Config.sortingPriorityCategoryStockDesc"
+                            },
+                            {
+                                "value": "item.random",
+                                "caption": "Config.sortDataRandom"
                             }
                         ]
                     }
@@ -2206,6 +2446,10 @@
                             {
                                 "value": "stock.net_desc",
                                 "caption": "Config.sortingPriorityCategoryStockDesc"
+                            },
+                            {
+                                "value": "item.random",
+                                "caption": "Config.sortDataRandom"
                             }
                         ]
                     }
