@@ -18247,6 +18247,11 @@ Vue.component("quantity-input", {
             }
         },
         setValue: function setValue(value) {
+            // consider the configured decimal seperator (if the input is typed in the input field)
+            if (typeof value === "string") {
+                value = value.replace(App.decimalSeparator || ",", ".");
+            }
+
             value = parseFloat(value);
             if (isNaN(value)) {
                 value = (0, _utils.defaultValue)(this.compMin, 1);
@@ -18922,8 +18927,8 @@ Vue.component("item-search", {
             window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
         },
         updateTitle: function updateTitle(searchString) {
-            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
-            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString);
+            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString) + " | " + App.config.header.companyName;
         },
         initAutocomplete: function initAutocomplete() {
             var _this2 = this;
@@ -18983,6 +18988,8 @@ Vue.component("item-search", {
 },{"services/TranslationService":131,"services/UrlService":132}],60:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
@@ -19003,7 +19010,13 @@ Vue.component("item-store-special", {
         };
     },
     created: function created() {
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+
+        if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+            this.tagClass = this.tagClasses[this.storeSpecial.id];
+        } else {
+            this.tagClass = this.tagClasses.default;
+        }
+
         this.label = this.getLabel();
     },
 
@@ -19029,7 +19042,7 @@ Vue.component("item-store-special", {
     }
 });
 
-},{}],61:[function(require,module,exports){
+},{"../../helper/utils":122}],61:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");

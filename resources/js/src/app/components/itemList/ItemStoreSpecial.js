@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
@@ -28,7 +30,16 @@ Vue.component("item-store-special", {
 
     created()
     {
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+
+        if (!isNullOrUndefined(this.storeSpecial))
+        {
+            this.tagClass = this.tagClasses[this.storeSpecial.id];
+        }
+        else
+        {
+            this.tagClass = this.tagClasses.default;
+        }
+
         this.label = this.getLabel();
     },
 
