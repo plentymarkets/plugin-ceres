@@ -374,7 +374,7 @@ const actions =
             });
         },
 
-        updateAddress({commit}, {address, addressType})
+        updateAddress({commit, dispatch}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
             {
@@ -395,6 +395,8 @@ const actions =
                         else if (addressType === "2")
                         {
                             commit("updateDeliveryAddress", address);
+
+                            dispatch("getIsAddressChangedAllowed", {selectedAddress: response.data, addressType});
                         }
 
                         resolve(response);
