@@ -34,52 +34,6 @@
                     }
                 ]
             }
-        },
-        "appearance": {
-            "type": "selectBox",
-            "required": true,
-            "label": "Widget.widgetAppearanceLabel",
-            "options": {
-                "tooltip": "Widget.widgetAppearanceTooltip",
-                "defaultValue": "none",
-                "selectBoxValues": [
-                    {
-                        "value": "none",
-                        "caption": "Widget.widgetAppearanceNone",
-                        "position": 0
-                    },
-                    {
-                        "value": "primary",
-                        "caption": "Widget.widgetAppearancePrimary",
-                        "position": 1
-                    },
-                    {
-                        "value": "secondary",
-                        "caption": "Widget.widgetAppearanceSecondary",
-                        "position": 2
-                    },
-                    {
-                        "value": "success",
-                        "caption": "Widget.widgetAppearanceSuccess",
-                        "position": 3
-                    },
-                    {
-                        "value": "info",
-                        "caption": "Widget.widgetAppearanceInfo",
-                        "position": 4
-                    },
-                    {
-                        "value": "warning",
-                        "caption": "Widget.widgetAppearanceWarning",
-                        "position": 5
-                    },
-                    {
-                        "value": "danger",
-                        "caption": "Widget.widgetAppearanceDanger",
-                        "position": 6
-                    }
-                ]
-            }
         }
     }
 }

@@ -68,7 +68,6 @@ class DefaultFooterPreset implements ContentPreset
 
             $listGridPreset = $this->preset->createWidget("Ceres::ThreeColumnWidget")
                 ->withSetting("layout", "oneToOneToOne")
-                ->withSetting("appearance", "none")
                 ->createChild("second", "Ceres::ListWidget")
                 ->withSetting("icon", "fa-check")
                 ->withSetting("text1", $storeFeatureTranslation);
@@ -76,14 +75,12 @@ class DefaultFooterPreset implements ContentPreset
         else if ($numberOfFeatures === 2)
         {
             $listGridPreset = $this->preset->createWidget("Ceres::TwoColumnWidget")
-                ->withSetting("layout", "oneToOne")
-                ->withSetting("appearance", "none");
+                ->withSetting("layout", "oneToOne");
         }
         else if ($numberOfFeatures === 3)
         {
             $listGridPreset = $this->preset->createWidget("Ceres::ThreeColumnWidget")
-                ->withSetting("layout", "oneToOneToOne")
-                ->withSetting("appearance", "none");
+                ->withSetting("layout", "oneToOneToOne");
         }
 
 
@@ -115,8 +112,7 @@ class DefaultFooterPreset implements ContentPreset
             3 => $this->config->footer->col3Categories
         ];
 
-        $linkListGridPreset = $this->preset->createWidget("Ceres::FourColumnWidget")
-            ->withSetting("appearance", "none");
+        $linkListGridPreset = $this->preset->createWidget("Ceres::FourColumnWidget");
 
         for ($i = 1; $i <= $numberOfCols && $i <= 3; $i++)
         {

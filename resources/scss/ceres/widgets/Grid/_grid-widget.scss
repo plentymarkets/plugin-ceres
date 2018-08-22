@@ -41,41 +41,6 @@
     {
         flex: 2;
     }
-
-    &.widget-primary
-    {
-        @include widget-bg-pseudo($brand-primary)
-    }
-
-    &.widget-secondary
-    {
-        @include widget-bg-pseudo($brand-secondary)
-    }
-
-    &.widget-success
-    {
-        @include widget-bg-pseudo($brand-success);
-    }
-
-    &.widget-info
-    {
-        @include widget-bg-pseudo($brand-info);
-    }
-
-    &.widget-warning
-    {
-        @include widget-bg-pseudo($brand-warning);
-    }
-
-    &.widget-danger
-    {
-        @include widget-bg-pseudo($brand-danger);
-    }
-
-    &.widget-inverse
-    {
-        @include widget-bg-pseudo($brand-inverse);
-    }
 }
 
 
