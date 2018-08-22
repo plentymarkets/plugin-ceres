@@ -349,7 +349,8 @@
                     "label": "Config.headerFixedNavbarLabel",
                     "options": {
                         "defaultValue": "true"
-                    }
+                    },
+                    "deprecated": true
                 },
                 "header.show_category_types": {
                     "type": "selectBox",
@@ -377,6 +378,7 @@
                     "type": "selectBox",
                     "required": false,
                     "label": "Config.headerBasketValuesLabel",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "sum",
                         "selectBoxValues": [
@@ -399,6 +401,7 @@
                     "type": "selectBox",
                     "required": false,
                     "label": "Config.headerMegamenuLevelsLabel",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "1",
                         "selectBoxValues": [
@@ -425,6 +428,7 @@
                     "type": "inputText",
                     "required": false,
                     "label": "Config.headerMegamenuItemsStage1Label",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "30"
                     }
@@ -433,6 +437,7 @@
                     "type": "inputText",
                     "required": false,
                     "label": "Config.headerMegamenuItemsStage2Label",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "3"
                     }
@@ -441,6 +446,7 @@
                     "type": "inputText",
                     "required": false,
                     "label": "Config.headerMegamenuItemsStage3Label",
+                    "deprecated": true,
                     "options": {
                         "defaultValue": "2"
                     }
@@ -471,6 +477,7 @@
                 "footer.number_of_features": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerNumberOfFeaturesLabel",
                     "options": {
                         "defaultValue": "3",
@@ -524,6 +531,7 @@
                 "footer.number_of_cols": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerNumberOfColsLabel",
                     "options": {
                         "defaultValue": "3",
@@ -555,6 +563,7 @@
                 "footer.col_1_categories": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerCol1CategoriesLabel",
                     "options": {
                         "defaultValue": ""
@@ -572,6 +581,7 @@
                 "footer.col_2_categories": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerCol2CategoriesLabel",
                     "options": {
                         "defaultValue": ""
@@ -589,6 +599,7 @@
                 "footer.col_3_categories": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerCol3CategoriesLabel",
                     "options": {
                         "defaultValue": ""
@@ -597,6 +608,7 @@
                 "footer.cancellation_use_pdf": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerCancellationUsePdfLabel",
                     "options": {
                         "defaultValue": false
@@ -605,6 +617,7 @@
                 "footer.cancellation_pdf_path": {
                     "type": "inputFile",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.footerCancellationPdfPathLabel",
                     "options": {
                         "defaultValue": ""
@@ -2198,8 +2211,9 @@
                     "type": "checkBox",
                     "required": false,
                     "label": "Config.searchForwardToSingleItemLabel",
+                    "deprecated": true,
                     "options": {
-                        "defaultValue": "false"
+                        "defaultValue": false
                     }
                 }
             }

@@ -1,0 +1,34 @@
+{% set title = widget.settings.title.mobile %}
+{% set listEntries = [] %}
+
+{% for i in 1..5 %}
+    {% set entry = widget.settings["entry" ~ i] %}
+    {% set name = entry.name.mobile %}
+    {% set url = entry.url.mobile %}
+
+    {% if name is not empty and url is not empty %}
+        {% set listEntries = listEntries | merge([{ name: name, url: url }]) %}
+    {% endif %}
+{% endfor %}
+
+{% set hasPlaceholder = title is empty and listEntries | length <= 0 %}
+
+<div class="widget widget-link-list{% if hasPlaceholder %} widget-placeholder{% endif %}">
+    <div class="widget-inner">
+        <nav>
+            <h2 class="h5">{{ title }}</h2>
+            {% if listEntries | length > 0 %}
+                <ul class="list-unstyled">
+                    {% for entry in listEntries %}
+                        <li>
+                            {% if widget.settings.icon.mobile != "none" %}
+                                <i class="fa {{ widget.settings.icon.mobile }}" aria-hidden="true"></i>
+                            {% endif %}
+                            <a href="{{ entry.url }}">{{ entry.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>    
+            {% endif %}
+        </nav>
+    </div>
+</div>

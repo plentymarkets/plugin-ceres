@@ -97,10 +97,14 @@
     {% endspaceless -%}
 {% endmacro %}
 
-{% macro for( entryName, list ) %}
+{% macro for( entryName, list, condition ) %}
     {%- spaceless %}
         {% import _self as Twig %}
-        {{ Twig.do("for " ~ entryName ~ " in " ~ list) }}
+        {% if condition is not empty %}
+            {{ Twig.do("for " ~ entryName ~ " in " ~ list ~ " if " ~ condition) }}
+        {% else %}
+            {{ Twig.do("for " ~ entryName ~ " in " ~ list) }}
+        {% endif %}
     {% endspaceless -%}
 {% endmacro %}
 
