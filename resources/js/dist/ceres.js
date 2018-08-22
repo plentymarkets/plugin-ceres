@@ -15758,6 +15758,12 @@ Vue.component("container-item-list", {
     },
 
 
+    computed: {
+        columnWidths: function columnWidths() {
+            return ["col-xs-12", "col-sm-6", "col-md-" + 12 / this.items.length];
+        }
+    },
+
     methods: {
         initializeCarousel: function initializeCarousel() {
             var _this2 = this;
@@ -19300,8 +19306,8 @@ Vue.component("item-search", {
             }
         },
         updateTitle: function updateTitle(searchString) {
-            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
-            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString);
+            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString) + " | " + App.config.header.companyName;
         },
         autocomplete: function autocomplete(searchString) {
             var _this2 = this;
@@ -19433,6 +19439,8 @@ Vue.component("item-search", {
 },{"services/ApiService":125,"services/TranslationService":131,"services/UrlService":132}],60:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
@@ -19453,7 +19461,13 @@ Vue.component("item-store-special", {
         };
     },
     created: function created() {
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+
+        if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+            this.tagClass = this.tagClasses[this.storeSpecial.id];
+        } else {
+            this.tagClass = this.tagClasses.default;
+        }
+
         this.label = this.getLabel();
     },
 
@@ -19479,7 +19493,7 @@ Vue.component("item-store-special", {
     }
 });
 
-},{}],61:[function(require,module,exports){
+},{"../../helper/utils":122}],61:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
