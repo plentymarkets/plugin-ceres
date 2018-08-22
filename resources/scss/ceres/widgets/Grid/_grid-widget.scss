@@ -41,39 +41,35 @@
     {
         flex: 2;
     }
+}
 
-    &.widget-primary
-    {
-        @include widget-bg-pseudo($brand-primary)
-    }
 
-    &.widget-secondary
-    {
-        @include widget-bg-pseudo($brand-secondary)
-    }
+// a list widget in the footer needs the grey background for store feature colors
+.footer {
+    .widget-grid {
+        .widget-inner {
+            .widget-list {
+                position: relative;
+                color: $footer-features-color;
+                background-color: $footer-features-bg;
+                margin-left: -15px;
+                margin-right: -15px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
 
-    &.widget-success
-    {
-        @include widget-bg-pseudo($brand-success);
-    }
-
-    &.widget-info
-    {
-        @include widget-bg-pseudo($brand-info);
-    }
-
-    &.widget-warning
-    {
-        @include widget-bg-pseudo($brand-warning);
-    }
-
-    &.widget-danger
-    {
-        @include widget-bg-pseudo($brand-danger);
-    }
-
-    &.widget-inverse
-    {
-        @include widget-bg-pseudo($brand-inverse);
+            &:first-child {
+                .widget-list {
+                    margin-left: 0;
+                    padding-left: 0;
+                }
+            }
+            &:last-child {
+                .widget-list {
+                    margin-right: 0;
+                    padding-right: 0;
+                }
+            }
+        }
     }
 }
