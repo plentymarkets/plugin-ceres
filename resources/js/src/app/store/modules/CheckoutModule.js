@@ -193,10 +193,11 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
+                const oldShippingProfile = state.shipping.shippingProfileId;
+
                 commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
-                const oldShippingProfile = state.shipping.shippingProfileId;
                 const isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
                 const isAddressPostOffice = getters.getSelectedAddress("2").address1 === "POSTFILIALE";
                 const isAddressParcelBox = getters.getSelectedAddress("2").address1 === "PACKSTATION";
