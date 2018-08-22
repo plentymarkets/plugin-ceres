@@ -4,7 +4,7 @@ namespace Ceres\Hooks;
 
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheInvalidationRepositoryContract;
-use Plenty\Plugin\Application;
+use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
 
 class CeresAfterBuildPlugins
 {
@@ -15,9 +15,16 @@ class CeresAfterBuildPlugins
 
         if ( $hasCodeChanges || $hasResourceChanges )
         {
-            /** @var ContentCacheInvalidationRepositoryContract $contentCacheInvalidationRepo */
-            $contentCacheInvalidationRepo = pluginApp(ContentCacheInvalidationRepositoryContract::class);
-            $contentCacheInvalidationRepo->invalidateAll(pluginApp(Application::class)->getPlentyId()); // TODO plentyId from event
+            $pluginSet = $afterBuildPlugins->getPluginSet();
+            if($pluginSet instanceof PluginSet)
+            {
+                foreach($pluginSet->webstores as $webstore)
+                {
+                    /** @var ContentCacheInvalidationRepositoryContract $contentCacheInvalidationRepo */
+                    $contentCacheInvalidationRepo = pluginApp(ContentCacheInvalidationRepositoryContract::class);
+                    $contentCacheInvalidationRepo->invalidateAll($webstore->storeIdentifier);
+                }
+            }
         }
     }
 }
