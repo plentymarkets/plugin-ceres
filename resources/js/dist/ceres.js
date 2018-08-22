@@ -295,13 +295,13 @@ try {
 })(jQuery, window, document);
 
 /**
-*  Ajax Autocomplete for jQuery, version 1.4.9
+*  Ajax Autocomplete for jQuery, version 1.4.8
 *  (c) 2017 Tomas Kirda
 *
 *  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
 *  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
 */
-!function(a){"use strict";"function"==typeof define&&define.amd?define(["jquery"],a):a("object"==typeof exports&&"function"==typeof require?require("jquery"):jQuery)}(function(a){"use strict";function b(c,d){var e=this;e.element=c,e.el=a(c),e.suggestions=[],e.badQueries=[],e.selectedIndex=-1,e.currentValue=e.element.value,e.timeoutId=null,e.cachedResponse={},e.onChangeTimeout=null,e.onChange=null,e.isLocal=!1,e.suggestionsContainer=null,e.noSuggestionsContainer=null,e.options=a.extend(!0,{},b.defaults,d),e.classes={selected:"autocomplete-selected",suggestion:"autocomplete-suggestion"},e.hint=null,e.hintValue="",e.selection=null,e.initialize(),e.setOptions(d)}function c(a,b,c){return a.value.toLowerCase().indexOf(c)!==-1}function d(b){return"string"==typeof b?a.parseJSON(b):b}function e(a,b){if(!b)return a.value;var c="("+g.escapeRegExChars(b)+")";return a.value.replace(new RegExp(c,"gi"),"<strong>$1</strong>").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/&lt;(\/?strong)&gt;/g,"<$1>")}function f(a,b){return'<div class="autocomplete-group">'+b+"</div>"}var g=function(){return{escapeRegExChars:function(a){return a.replace(/[|\\{}()[\]^$+*?.]/g,"\\$&")},createNode:function(a){var b=document.createElement("div");return b.className=a,b.style.position="absolute",b.style.display="none",b}}}(),h={ESC:27,TAB:9,RETURN:13,LEFT:37,UP:38,RIGHT:39,DOWN:40},i=a.noop;b.utils=g,a.Autocomplete=b,b.defaults={ajaxSettings:{},autoSelectFirst:!1,appendTo:"body",serviceUrl:null,lookup:null,onSelect:null,width:"auto",minChars:1,maxHeight:300,deferRequestBy:0,params:{},formatResult:e,formatGroup:f,delimiter:null,zIndex:9999,type:"GET",noCache:!1,onSearchStart:i,onSearchComplete:i,onSearchError:i,preserveInput:!1,containerClass:"autocomplete-suggestions",tabDisabled:!1,dataType:"text",currentRequest:null,triggerSelectOnValidInput:!0,preventBadQueries:!0,lookupFilter:c,paramName:"query",transformResult:d,showNoSuggestionNotice:!1,noSuggestionNotice:"No results",orientation:"bottom",forceFixPosition:!1},b.prototype={initialize:function(){var c,d=this,e="."+d.classes.suggestion,f=d.classes.selected,g=d.options;d.element.setAttribute("autocomplete","off"),d.noSuggestionsContainer=a('<div class="autocomplete-no-suggestion"></div>').html(this.options.noSuggestionNotice).get(0),d.suggestionsContainer=b.utils.createNode(g.containerClass),c=a(d.suggestionsContainer),c.appendTo(g.appendTo||"body"),"auto"!==g.width&&c.css("width",g.width),c.on("mouseover.autocomplete",e,function(){d.activate(a(this).data("index"))}),c.on("mouseout.autocomplete",function(){d.selectedIndex=-1,c.children("."+f).removeClass(f)}),c.on("click.autocomplete",e,function(){d.select(a(this).data("index"))}),c.on("click.autocomplete",function(){clearTimeout(d.blurTimeoutId)}),d.fixPositionCapture=function(){d.visible&&d.fixPosition()},a(window).on("resize.autocomplete",d.fixPositionCapture),d.el.on("keydown.autocomplete",function(a){d.onKeyPress(a)}),d.el.on("keyup.autocomplete",function(a){d.onKeyUp(a)}),d.el.on("blur.autocomplete",function(){d.onBlur()}),d.el.on("focus.autocomplete",function(){d.onFocus()}),d.el.on("change.autocomplete",function(a){d.onKeyUp(a)}),d.el.on("input.autocomplete",function(a){d.onKeyUp(a)})},onFocus:function(){var a=this;a.fixPosition(),a.el.val().length>=a.options.minChars&&a.onValueChange()},onBlur:function(){var a=this;a.blurTimeoutId=setTimeout(function(){a.hide()},200)},abortAjax:function(){var a=this;a.currentRequest&&(a.currentRequest.abort(),a.currentRequest=null)},setOptions:function(b){var c=this,d=a.extend({},c.options,b);c.isLocal=Array.isArray(d.lookup),c.isLocal&&(d.lookup=c.verifySuggestionsFormat(d.lookup)),d.orientation=c.validateOrientation(d.orientation,"bottom"),a(c.suggestionsContainer).css({"max-height":d.maxHeight+"px",width:d.width+"px","z-index":d.zIndex}),this.options=d},clearCache:function(){this.cachedResponse={},this.badQueries=[]},clear:function(){this.clearCache(),this.currentValue="",this.suggestions=[]},disable:function(){var a=this;a.disabled=!0,clearTimeout(a.onChangeTimeout),a.abortAjax()},enable:function(){this.disabled=!1},fixPosition:function(){var b=this,c=a(b.suggestionsContainer),d=c.parent().get(0);if(d===document.body||b.options.forceFixPosition){var e=b.options.orientation,f=c.outerHeight(),g=b.el.outerHeight(),h=b.el.offset(),i={top:h.top,left:h.left};if("auto"===e){var j=a(window).height(),k=a(window).scrollTop(),l=-k+h.top-f,m=k+j-(h.top+g+f);e=Math.max(l,m)===l?"top":"bottom"}if("top"===e?i.top+=-f:i.top+=g,d!==document.body){var n,o=c.css("opacity");b.visible||c.css("opacity",0).show(),n=c.offsetParent().offset(),i.top-=n.top,i.top+=d.scrollTop,i.left-=n.left,b.visible||c.css("opacity",o).hide()}"auto"===b.options.width&&(i.width=b.el.outerWidth()+"px"),c.css(i)}},isCursorAtEnd:function(){var a,b=this,c=b.el.val().length,d=b.element.selectionStart;return"number"==typeof d?d===c:!document.selection||(a=document.selection.createRange(),a.moveStart("character",-c),c===a.text.length)},onKeyPress:function(a){var b=this;if(!b.disabled&&!b.visible&&a.which===h.DOWN&&b.currentValue)return void b.suggest();if(!b.disabled&&b.visible){switch(a.which){case h.ESC:b.el.val(b.currentValue),b.hide();break;case h.RIGHT:if(b.hint&&b.options.onHint&&b.isCursorAtEnd()){b.selectHint();break}return;case h.TAB:if(b.hint&&b.options.onHint)return void b.selectHint();if(b.selectedIndex===-1)return void b.hide();if(b.select(b.selectedIndex),b.options.tabDisabled===!1)return;break;case h.RETURN:if(b.selectedIndex===-1)return void b.hide();b.select(b.selectedIndex);break;case h.UP:b.moveUp();break;case h.DOWN:b.moveDown();break;default:return}a.stopImmediatePropagation(),a.preventDefault()}},onKeyUp:function(a){var b=this;if(!b.disabled){switch(a.which){case h.UP:case h.DOWN:return}clearTimeout(b.onChangeTimeout),b.currentValue!==b.el.val()&&(b.findBestHint(),b.options.deferRequestBy>0?b.onChangeTimeout=setTimeout(function(){b.onValueChange()},b.options.deferRequestBy):b.onValueChange())}},onValueChange:function(){if(this.ignoreValueChange)return void(this.ignoreValueChange=!1);var b=this,c=b.options,d=b.el.val(),e=b.getQuery(d);return b.selection&&b.currentValue!==e&&(b.selection=null,(c.onInvalidateSelection||a.noop).call(b.element)),clearTimeout(b.onChangeTimeout),b.currentValue=d,b.selectedIndex=-1,c.triggerSelectOnValidInput&&b.isExactMatch(e)?void b.select(0):void(e.length<c.minChars?b.hide():b.getSuggestions(e))},isExactMatch:function(a){var b=this.suggestions;return 1===b.length&&b[0].value.toLowerCase()===a.toLowerCase()},getQuery:function(b){var c,d=this.options.delimiter;return d?(c=b.split(d),a.trim(c[c.length-1])):b},getSuggestionsLocal:function(b){var c,d=this,e=d.options,f=b.toLowerCase(),g=e.lookupFilter,h=parseInt(e.lookupLimit,10);return c={suggestions:a.grep(e.lookup,function(a){return g(a,b,f)})},h&&c.suggestions.length>h&&(c.suggestions=c.suggestions.slice(0,h)),c},getSuggestions:function(b){var c,d,e,f,g=this,h=g.options,i=h.serviceUrl;if(h.params[h.paramName]=b,h.onSearchStart.call(g.element,h.params)!==!1){if(d=h.ignoreParams?null:h.params,a.isFunction(h.lookup))return void h.lookup(b,function(a){g.suggestions=a.suggestions,g.suggest(),h.onSearchComplete.call(g.element,b,a.suggestions)});g.isLocal?c=g.getSuggestionsLocal(b):(a.isFunction(i)&&(i=i.call(g.element,b)),e=i+"?"+a.param(d||{}),c=g.cachedResponse[e]),c&&Array.isArray(c.suggestions)?(g.suggestions=c.suggestions,g.suggest(),h.onSearchComplete.call(g.element,b,c.suggestions)):g.isBadQuery(b)?h.onSearchComplete.call(g.element,b,[]):(g.abortAjax(),f={url:i,data:d,type:h.type,dataType:h.dataType},a.extend(f,h.ajaxSettings),g.currentRequest=a.ajax(f).done(function(a){var c;g.currentRequest=null,c=h.transformResult(a,b),g.processResponse(c,b,e),h.onSearchComplete.call(g.element,b,c.suggestions)}).fail(function(a,c,d){h.onSearchError.call(g.element,b,a,c,d)}))}},isBadQuery:function(a){if(!this.options.preventBadQueries)return!1;for(var b=this.badQueries,c=b.length;c--;)if(0===a.indexOf(b[c]))return!0;return!1},hide:function(){var b=this,c=a(b.suggestionsContainer);a.isFunction(b.options.onHide)&&b.visible&&b.options.onHide.call(b.element,c),b.visible=!1,b.selectedIndex=-1,clearTimeout(b.onChangeTimeout),a(b.suggestionsContainer).hide(),b.signalHint(null)},suggest:function(){if(!this.suggestions.length)return void(this.options.showNoSuggestionNotice?this.noSuggestions():this.hide());var b,c=this,d=c.options,e=d.groupBy,f=d.formatResult,g=c.getQuery(c.currentValue),h=c.classes.suggestion,i=c.classes.selected,j=a(c.suggestionsContainer),k=a(c.noSuggestionsContainer),l=d.beforeRender,m="",n=function(a,c){var f=a.data[e];return b===f?"":(b=f,d.formatGroup(a,b))};return d.triggerSelectOnValidInput&&c.isExactMatch(g)?void c.select(0):(a.each(c.suggestions,function(a,b){e&&(m+=n(b,g,a)),m+='<div class="'+h+'" data-index="'+a+'">'+f(b,g,a)+"</div>"}),this.adjustContainerWidth(),k.detach(),j.html(m),a.isFunction(l)&&l.call(c.element,j,c.suggestions),c.fixPosition(),j.show(),d.autoSelectFirst&&(c.selectedIndex=0,j.scrollTop(0),j.children("."+h).first().addClass(i)),c.visible=!0,void c.findBestHint())},noSuggestions:function(){var b=this,c=b.options.beforeRender,d=a(b.suggestionsContainer),e=a(b.noSuggestionsContainer);this.adjustContainerWidth(),e.detach(),d.empty(),d.append(e),a.isFunction(c)&&c.call(b.element,d,b.suggestions),b.fixPosition(),d.show(),b.visible=!0},adjustContainerWidth:function(){var b,c=this,d=c.options,e=a(c.suggestionsContainer);"auto"===d.width?(b=c.el.outerWidth(),e.css("width",b>0?b:300)):"flex"===d.width&&e.css("width","")},findBestHint:function(){var b=this,c=b.el.val().toLowerCase(),d=null;c&&(a.each(b.suggestions,function(a,b){var e=0===b.value.toLowerCase().indexOf(c);return e&&(d=b),!e}),b.signalHint(d))},signalHint:function(b){var c="",d=this;b&&(c=d.currentValue+b.value.substr(d.currentValue.length)),d.hintValue!==c&&(d.hintValue=c,d.hint=b,(this.options.onHint||a.noop)(c))},verifySuggestionsFormat:function(b){return b.length&&"string"==typeof b[0]?a.map(b,function(a){return{value:a,data:null}}):b},validateOrientation:function(b,c){return b=a.trim(b||"").toLowerCase(),a.inArray(b,["auto","bottom","top"])===-1&&(b=c),b},processResponse:function(a,b,c){var d=this,e=d.options;a.suggestions=d.verifySuggestionsFormat(a.suggestions),e.noCache||(d.cachedResponse[c]=a,e.preventBadQueries&&!a.suggestions.length&&d.badQueries.push(b)),b===d.getQuery(d.currentValue)&&(d.suggestions=a.suggestions,d.suggest())},activate:function(b){var c,d=this,e=d.classes.selected,f=a(d.suggestionsContainer),g=f.find("."+d.classes.suggestion);return f.find("."+e).removeClass(e),d.selectedIndex=b,d.selectedIndex!==-1&&g.length>d.selectedIndex?(c=g.get(d.selectedIndex),a(c).addClass(e),c):null},selectHint:function(){var b=this,c=a.inArray(b.hint,b.suggestions);b.select(c)},select:function(a){var b=this;b.hide(),b.onSelect(a)},moveUp:function(){var b=this;if(b.selectedIndex!==-1)return 0===b.selectedIndex?(a(b.suggestionsContainer).children("."+b.classes.suggestion).first().removeClass(b.classes.selected),b.selectedIndex=-1,b.ignoreValueChange=!1,b.el.val(b.currentValue),void b.findBestHint()):void b.adjustScroll(b.selectedIndex-1)},moveDown:function(){var a=this;a.selectedIndex!==a.suggestions.length-1&&a.adjustScroll(a.selectedIndex+1)},adjustScroll:function(b){var c=this,d=c.activate(b);if(d){var e,f,g,h=a(d).outerHeight();e=d.offsetTop,f=a(c.suggestionsContainer).scrollTop(),g=f+c.options.maxHeight-h,e<f?a(c.suggestionsContainer).scrollTop(e):e>g&&a(c.suggestionsContainer).scrollTop(e-c.options.maxHeight+h),c.options.preserveInput||(c.ignoreValueChange=!0,c.el.val(c.getValue(c.suggestions[b].value))),c.signalHint(null)}},onSelect:function(b){var c=this,d=c.options.onSelect,e=c.suggestions[b];c.currentValue=c.getValue(e.value),c.currentValue===c.el.val()||c.options.preserveInput||c.el.val(c.currentValue),c.signalHint(null),c.suggestions=[],c.selection=e,a.isFunction(d)&&d.call(c.element,e)},getValue:function(a){var b,c,d=this,e=d.options.delimiter;return e?(b=d.currentValue,c=b.split(e),1===c.length?a:b.substr(0,b.length-c[c.length-1].length)+a):a},dispose:function(){var b=this;b.el.off(".autocomplete").removeData("autocomplete"),a(window).off("resize.autocomplete",b.fixPositionCapture),a(b.suggestionsContainer).remove()}},a.fn.devbridgeAutocomplete=function(c,d){var e="autocomplete";return arguments.length?this.each(function(){var f=a(this),g=f.data(e);"string"==typeof c?g&&"function"==typeof g[c]&&g[c](d):(g&&g.dispose&&g.dispose(),g=new b(this,c),f.data(e,g))}):this.first().data(e)},a.fn.autocomplete||(a.fn.autocomplete=a.fn.devbridgeAutocomplete)});
+!function(a){"use strict";"function"==typeof define&&define.amd?define(["jquery"],a):a("object"==typeof exports&&"function"==typeof require?require("jquery"):jQuery)}(function(a){"use strict";function b(c,d){var e=this;e.element=c,e.el=a(c),e.suggestions=[],e.badQueries=[],e.selectedIndex=-1,e.currentValue=e.element.value,e.timeoutId=null,e.cachedResponse={},e.onChangeTimeout=null,e.onChange=null,e.isLocal=!1,e.suggestionsContainer=null,e.noSuggestionsContainer=null,e.options=a.extend(!0,{},b.defaults,d),e.classes={selected:"autocomplete-selected",suggestion:"autocomplete-suggestion"},e.hint=null,e.hintValue="",e.selection=null,e.initialize(),e.setOptions(d)}function c(a,b,c){return a.value.toLowerCase().indexOf(c)!==-1}function d(b){return"string"==typeof b?a.parseJSON(b):b}function e(a,b){if(!b)return a.value;var c="("+g.escapeRegExChars(b)+")";return a.value.replace(new RegExp(c,"gi"),"<strong>$1</strong>").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/&lt;(\/?strong)&gt;/g,"<$1>")}function f(a,b){return'<div class="autocomplete-group">'+b+"</div>"}var g=function(){return{escapeRegExChars:function(a){return a.replace(/[|\\{}()[\]^$+*?.]/g,"\\$&")},createNode:function(a){var b=document.createElement("div");return b.className=a,b.style.position="absolute",b.style.display="none",b}}}(),h={ESC:27,TAB:9,RETURN:13,LEFT:37,UP:38,RIGHT:39,DOWN:40},i=a.noop;b.utils=g,a.Autocomplete=b,b.defaults={ajaxSettings:{},autoSelectFirst:!1,appendTo:"body",serviceUrl:null,lookup:null,onSelect:null,width:"auto",minChars:1,maxHeight:300,deferRequestBy:0,params:{},formatResult:e,formatGroup:f,delimiter:null,zIndex:9999,type:"GET",noCache:!1,onSearchStart:i,onSearchComplete:i,onSearchError:i,preserveInput:!1,containerClass:"autocomplete-suggestions",tabDisabled:!1,dataType:"text",currentRequest:null,triggerSelectOnValidInput:!0,preventBadQueries:!0,lookupFilter:c,paramName:"query",transformResult:d,showNoSuggestionNotice:!1,noSuggestionNotice:"No results",orientation:"bottom",forceFixPosition:!1},b.prototype={initialize:function(){var c,d=this,e="."+d.classes.suggestion,f=d.classes.selected,g=d.options;d.element.setAttribute("autocomplete","nope"),d.noSuggestionsContainer=a('<div class="autocomplete-no-suggestion"></div>').html(this.options.noSuggestionNotice).get(0),d.suggestionsContainer=b.utils.createNode(g.containerClass),c=a(d.suggestionsContainer),c.appendTo(g.appendTo||"body"),"auto"!==g.width&&c.css("width",g.width),c.on("mouseover.autocomplete",e,function(){d.activate(a(this).data("index"))}),c.on("mouseout.autocomplete",function(){d.selectedIndex=-1,c.children("."+f).removeClass(f)}),c.on("click.autocomplete",e,function(){d.select(a(this).data("index"))}),c.on("click.autocomplete",function(){clearTimeout(d.blurTimeoutId)}),d.fixPositionCapture=function(){d.visible&&d.fixPosition()},a(window).on("resize.autocomplete",d.fixPositionCapture),d.el.on("keydown.autocomplete",function(a){d.onKeyPress(a)}),d.el.on("keyup.autocomplete",function(a){d.onKeyUp(a)}),d.el.on("blur.autocomplete",function(){d.onBlur()}),d.el.on("focus.autocomplete",function(){d.onFocus()}),d.el.on("change.autocomplete",function(a){d.onKeyUp(a)}),d.el.on("input.autocomplete",function(a){d.onKeyUp(a)})},onFocus:function(){var a=this;a.fixPosition(),a.el.val().length>=a.options.minChars&&a.onValueChange()},onBlur:function(){var a=this;a.blurTimeoutId=setTimeout(function(){a.hide()},200)},abortAjax:function(){var a=this;a.currentRequest&&(a.currentRequest.abort(),a.currentRequest=null)},setOptions:function(b){var c=this,d=a.extend({},c.options,b);c.isLocal=Array.isArray(d.lookup),c.isLocal&&(d.lookup=c.verifySuggestionsFormat(d.lookup)),d.orientation=c.validateOrientation(d.orientation,"bottom"),a(c.suggestionsContainer).css({"max-height":d.maxHeight+"px",width:d.width+"px","z-index":d.zIndex}),this.options=d},clearCache:function(){this.cachedResponse={},this.badQueries=[]},clear:function(){this.clearCache(),this.currentValue="",this.suggestions=[]},disable:function(){var a=this;a.disabled=!0,clearTimeout(a.onChangeTimeout),a.abortAjax()},enable:function(){this.disabled=!1},fixPosition:function(){var b=this,c=a(b.suggestionsContainer),d=c.parent().get(0);if(d===document.body||b.options.forceFixPosition){var e=b.options.orientation,f=c.outerHeight(),g=b.el.outerHeight(),h=b.el.offset(),i={top:h.top,left:h.left};if("auto"===e){var j=a(window).height(),k=a(window).scrollTop(),l=-k+h.top-f,m=k+j-(h.top+g+f);e=Math.max(l,m)===l?"top":"bottom"}if("top"===e?i.top+=-f:i.top+=g,d!==document.body){var n,o=c.css("opacity");b.visible||c.css("opacity",0).show(),n=c.offsetParent().offset(),i.top-=n.top,i.top+=d.scrollTop,i.left-=n.left,b.visible||c.css("opacity",o).hide()}"auto"===b.options.width&&(i.width=b.el.outerWidth()+"px"),c.css(i)}},isCursorAtEnd:function(){var a,b=this,c=b.el.val().length,d=b.element.selectionStart;return"number"==typeof d?d===c:!document.selection||(a=document.selection.createRange(),a.moveStart("character",-c),c===a.text.length)},onKeyPress:function(a){var b=this;if(!b.disabled&&!b.visible&&a.which===h.DOWN&&b.currentValue)return void b.suggest();if(!b.disabled&&b.visible){switch(a.which){case h.ESC:b.el.val(b.currentValue),b.hide();break;case h.RIGHT:if(b.hint&&b.options.onHint&&b.isCursorAtEnd()){b.selectHint();break}return;case h.TAB:if(b.hint&&b.options.onHint)return void b.selectHint();if(b.selectedIndex===-1)return void b.hide();if(b.select(b.selectedIndex),b.options.tabDisabled===!1)return;break;case h.RETURN:if(b.selectedIndex===-1)return void b.hide();b.select(b.selectedIndex);break;case h.UP:b.moveUp();break;case h.DOWN:b.moveDown();break;default:return}a.stopImmediatePropagation(),a.preventDefault()}},onKeyUp:function(a){var b=this;if(!b.disabled){switch(a.which){case h.UP:case h.DOWN:return}clearTimeout(b.onChangeTimeout),b.currentValue!==b.el.val()&&(b.findBestHint(),b.options.deferRequestBy>0?b.onChangeTimeout=setTimeout(function(){b.onValueChange()},b.options.deferRequestBy):b.onValueChange())}},onValueChange:function(){if(this.ignoreValueChange)return void(this.ignoreValueChange=!1);var b=this,c=b.options,d=b.el.val(),e=b.getQuery(d);return b.selection&&b.currentValue!==e&&(b.selection=null,(c.onInvalidateSelection||a.noop).call(b.element)),clearTimeout(b.onChangeTimeout),b.currentValue=d,b.selectedIndex=-1,c.triggerSelectOnValidInput&&b.isExactMatch(e)?void b.select(0):void(e.length<c.minChars?b.hide():b.getSuggestions(e))},isExactMatch:function(a){var b=this.suggestions;return 1===b.length&&b[0].value.toLowerCase()===a.toLowerCase()},getQuery:function(b){var c,d=this.options.delimiter;return d?(c=b.split(d),a.trim(c[c.length-1])):b},getSuggestionsLocal:function(b){var c,d=this,e=d.options,f=b.toLowerCase(),g=e.lookupFilter,h=parseInt(e.lookupLimit,10);return c={suggestions:a.grep(e.lookup,function(a){return g(a,b,f)})},h&&c.suggestions.length>h&&(c.suggestions=c.suggestions.slice(0,h)),c},getSuggestions:function(b){var c,d,e,f,g=this,h=g.options,i=h.serviceUrl;if(h.params[h.paramName]=b,h.onSearchStart.call(g.element,h.params)!==!1){if(d=h.ignoreParams?null:h.params,a.isFunction(h.lookup))return void h.lookup(b,function(a){g.suggestions=a.suggestions,g.suggest(),h.onSearchComplete.call(g.element,b,a.suggestions)});g.isLocal?c=g.getSuggestionsLocal(b):(a.isFunction(i)&&(i=i.call(g.element,b)),e=i+"?"+a.param(d||{}),c=g.cachedResponse[e]),c&&Array.isArray(c.suggestions)?(g.suggestions=c.suggestions,g.suggest(),h.onSearchComplete.call(g.element,b,c.suggestions)):g.isBadQuery(b)?h.onSearchComplete.call(g.element,b,[]):(g.abortAjax(),f={url:i,data:d,type:h.type,dataType:h.dataType},a.extend(f,h.ajaxSettings),g.currentRequest=a.ajax(f).done(function(a){var c;g.currentRequest=null,c=h.transformResult(a,b),g.processResponse(c,b,e),h.onSearchComplete.call(g.element,b,c.suggestions)}).fail(function(a,c,d){h.onSearchError.call(g.element,b,a,c,d)}))}},isBadQuery:function(a){if(!this.options.preventBadQueries)return!1;for(var b=this.badQueries,c=b.length;c--;)if(0===a.indexOf(b[c]))return!0;return!1},hide:function(){var b=this,c=a(b.suggestionsContainer);a.isFunction(b.options.onHide)&&b.visible&&b.options.onHide.call(b.element,c),b.visible=!1,b.selectedIndex=-1,clearTimeout(b.onChangeTimeout),a(b.suggestionsContainer).hide(),b.signalHint(null)},suggest:function(){if(!this.suggestions.length)return void(this.options.showNoSuggestionNotice?this.noSuggestions():this.hide());var b,c=this,d=c.options,e=d.groupBy,f=d.formatResult,g=c.getQuery(c.currentValue),h=c.classes.suggestion,i=c.classes.selected,j=a(c.suggestionsContainer),k=a(c.noSuggestionsContainer),l=d.beforeRender,m="",n=function(a,c){var f=a.data[e];return b===f?"":(b=f,d.formatGroup(a,b))};return d.triggerSelectOnValidInput&&c.isExactMatch(g)?void c.select(0):(a.each(c.suggestions,function(a,b){e&&(m+=n(b,g,a)),m+='<div class="'+h+'" data-index="'+a+'">'+f(b,g,a)+"</div>"}),this.adjustContainerWidth(),k.detach(),j.html(m),a.isFunction(l)&&l.call(c.element,j,c.suggestions),c.fixPosition(),j.show(),d.autoSelectFirst&&(c.selectedIndex=0,j.scrollTop(0),j.children("."+h).first().addClass(i)),c.visible=!0,void c.findBestHint())},noSuggestions:function(){var b=this,c=b.options.beforeRender,d=a(b.suggestionsContainer),e=a(b.noSuggestionsContainer);this.adjustContainerWidth(),e.detach(),d.empty(),d.append(e),a.isFunction(c)&&c.call(b.element,d,b.suggestions),b.fixPosition(),d.show(),b.visible=!0},adjustContainerWidth:function(){var b,c=this,d=c.options,e=a(c.suggestionsContainer);"auto"===d.width?(b=c.el.outerWidth(),e.css("width",b>0?b:300)):"flex"===d.width&&e.css("width","")},findBestHint:function(){var b=this,c=b.el.val().toLowerCase(),d=null;c&&(a.each(b.suggestions,function(a,b){var e=0===b.value.toLowerCase().indexOf(c);return e&&(d=b),!e}),b.signalHint(d))},signalHint:function(b){var c="",d=this;b&&(c=d.currentValue+b.value.substr(d.currentValue.length)),d.hintValue!==c&&(d.hintValue=c,d.hint=b,(this.options.onHint||a.noop)(c))},verifySuggestionsFormat:function(b){return b.length&&"string"==typeof b[0]?a.map(b,function(a){return{value:a,data:null}}):b},validateOrientation:function(b,c){return b=a.trim(b||"").toLowerCase(),a.inArray(b,["auto","bottom","top"])===-1&&(b=c),b},processResponse:function(a,b,c){var d=this,e=d.options;a.suggestions=d.verifySuggestionsFormat(a.suggestions),e.noCache||(d.cachedResponse[c]=a,e.preventBadQueries&&!a.suggestions.length&&d.badQueries.push(b)),b===d.getQuery(d.currentValue)&&(d.suggestions=a.suggestions,d.suggest())},activate:function(b){var c,d=this,e=d.classes.selected,f=a(d.suggestionsContainer),g=f.find("."+d.classes.suggestion);return f.find("."+e).removeClass(e),d.selectedIndex=b,d.selectedIndex!==-1&&g.length>d.selectedIndex?(c=g.get(d.selectedIndex),a(c).addClass(e),c):null},selectHint:function(){var b=this,c=a.inArray(b.hint,b.suggestions);b.select(c)},select:function(a){var b=this;b.hide(),b.onSelect(a)},moveUp:function(){var b=this;if(b.selectedIndex!==-1)return 0===b.selectedIndex?(a(b.suggestionsContainer).children("."+b.classes.suggestion).first().removeClass(b.classes.selected),b.selectedIndex=-1,b.ignoreValueChange=!1,b.el.val(b.currentValue),void b.findBestHint()):void b.adjustScroll(b.selectedIndex-1)},moveDown:function(){var a=this;a.selectedIndex!==a.suggestions.length-1&&a.adjustScroll(a.selectedIndex+1)},adjustScroll:function(b){var c=this,d=c.activate(b);if(d){var e,f,g,h=a(d).outerHeight();e=d.offsetTop,f=a(c.suggestionsContainer).scrollTop(),g=f+c.options.maxHeight-h,e<f?a(c.suggestionsContainer).scrollTop(e):e>g&&a(c.suggestionsContainer).scrollTop(e-c.options.maxHeight+h),c.options.preserveInput||(c.ignoreValueChange=!0,c.el.val(c.getValue(c.suggestions[b].value))),c.signalHint(null)}},onSelect:function(b){var c=this,d=c.options.onSelect,e=c.suggestions[b];c.currentValue=c.getValue(e.value),c.currentValue===c.el.val()||c.options.preserveInput||c.el.val(c.currentValue),c.signalHint(null),c.suggestions=[],c.selection=e,a.isFunction(d)&&d.call(c.element,e)},getValue:function(a){var b,c,d=this,e=d.options.delimiter;return e?(b=d.currentValue,c=b.split(e),1===c.length?a:b.substr(0,b.length-c[c.length-1].length)+a):a},dispose:function(){var b=this;b.el.off(".autocomplete").removeData("autocomplete"),a(window).off("resize.autocomplete",b.fixPositionCapture),a(b.suggestionsContainer).remove()}},a.fn.devbridgeAutocomplete=function(c,d){var e="autocomplete";return arguments.length?this.each(function(){var f=a(this),g=f.data(e);"string"==typeof c?g&&"function"==typeof g[c]&&g[c](d):(g&&g.dispose&&g.dispose(),g=new b(this,c),f.data(e,g))}):this.first().data(e)},a.fn.autocomplete||(a.fn.autocomplete=a.fn.devbridgeAutocomplete)});
 /*!
  * Vue.js v2.5.17
  * (c) 2014-2018 Evan You
@@ -15881,6 +15881,8 @@ Vue.component("accept-privacy-policy-check", {
 },{}],28:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 Vue.component("address-input-group", {
 
     delimiters: ["${", "}"],
@@ -15901,11 +15903,31 @@ Vue.component("address-input-group", {
         }
     },
 
+    computed: _extends({
+        isPickupStation: function isPickupStation() {
+            return this.value && this.value.address1 === "PACKSTATION" && this.isParcelBoxAvailable;
+        },
+        isPostOffice: function isPostOffice() {
+            return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
+        },
+        isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable() {
+            return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
+        }
+    }, Vuex.mapState({
+        isParcelBoxAvailable: function isParcelBoxAvailable(state) {
+            return state.checkout.shipping.isParcelBoxAvailable;
+        },
+        isPostOfficeAvailable: function isPostOfficeAvailable(state) {
+            return state.checkout.shipping.isPostOfficeAvailable;
+        }
+    })),
+
     data: function data() {
         return {
             stateList: [],
             countryLocaleList: ["DE", "GB"],
-            localeToShow: this.defaultCountry
+            localeToShow: this.defaultCountry,
+            selectedCountry: null
         };
     },
 
@@ -15924,6 +15946,8 @@ Vue.component("address-input-group", {
          * @param shippingCountry
          */
         onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
+            this.selectedCountry = shippingCountry;
+
             if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
                 this.localeToShow = shippingCountry.isoCode2;
             } else {
@@ -15931,6 +15955,24 @@ Vue.component("address-input-group", {
             }
 
             this.emitInputEvent("countryId", shippingCountry.id);
+
+            this.togglePickupStation(false);
+        },
+        togglePickupStation: function togglePickupStation(showPickupStation) {
+            var emitInputs = {
+                address1: "",
+                address2: "",
+                address3: "",
+                showPickupStation: showPickupStation
+            };
+
+            if (showPickupStation) {
+                emitInputs.address1 = this.isParcelBoxAvailable ? "PACKSTATION" : "POSTFILIALE";
+            }
+
+            for (var input in emitInputs) {
+                this.emitInputEvent(input, emitInputs[input]);
+            }
         },
 
 
@@ -16077,44 +16119,28 @@ Vue.component("address-select", {
 
 
         /**
-         * Show the add modal initially, if no address is selected in checkout
-         */
-        showInitialAddModal: function showInitialAddModal() {
-            this.modalType = "initial";
-
-            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
-                this.addressToEdit = {
-                    addressSalutation: 0,
-                    gender: "male",
-                    countryId: this.shippingCountryId
-                };
-            } else {
-                this.addressToEdit = { countryId: this.shippingCountryId };
-            }
-
-            this.updateHeadline();
-            this.addressModal.show();
-        },
-
-
-        /**
          * Show the add modal
          */
-        showAddModal: function showAddModal() {
-            this.modalType = "create";
+        showAddModal: function showAddModal(type) {
+            this.modalType = type || "create";
 
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
                 this.addressToEdit = {
                     addressSalutation: 0,
                     gender: "male",
-                    countryId: this.shippingCountryId
+                    countryId: this.shippingCountryId,
+                    showPickupStation: false
                 };
             } else {
                 this.addressToEdit = { countryId: this.shippingCountryId };
             }
 
             this.updateHeadline();
-            _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
+
+            if (this.modalType === "create") {
+                _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
+            }
+
             this.addressModal.show();
         },
 
@@ -16134,6 +16160,10 @@ Vue.component("address-select", {
             } else {
                 this.addressToEdit.addressSalutation = 0;
                 this.addressToEdit.gender = "male";
+            }
+
+            if ((0, _utils.isDefined)(this.addressToEdit.address1) && (this.addressToEdit.address1 === "PACKSTATION" || this.addressToEdit.address1 === "POSTFILIALE") && this.$store.getters.isParcelOrOfficeAvailable) {
+                this.addressToEdit.showPickupStation = true;
             }
 
             this.updateHeadline();
@@ -16560,7 +16590,7 @@ Vue.component("invoice-address-select", {
 
         this.$nextTick(function () {
             if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
-                _this.$refs.invoice.showInitialAddModal();
+                _this.$refs.invoice.showAddModal("initial");
             }
         });
     },
@@ -23913,6 +23943,14 @@ var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
 
+var _NotificationService = require("services/NotificationService");
+
+var _NotificationService2 = _interopRequireDefault(_NotificationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var state = {
@@ -23945,6 +23983,18 @@ var mutations = {
             if (billingAddress) {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
+            }
+        }
+    },
+    selectDeliveryAddressById: function selectDeliveryAddressById(state, deliveryAddressId) {
+        if (deliveryAddressId) {
+            var deliveryAddress = state.deliveryAddressList.find(function (address) {
+                return address.id === deliveryAddressId;
+            });
+
+            if (deliveryAddress) {
+                state.deliveryAddressId = deliveryAddress.id;
+                state.deliveryAddress = deliveryAddress;
             }
         }
     },
@@ -24079,7 +24129,9 @@ var actions = {
     },
     selectAddress: function selectAddress(_ref7, _ref8) {
         var commit = _ref7.commit,
-            state = _ref7.state;
+            state = _ref7.state,
+            rootState = _ref7.rootState,
+            dispatch = _ref7.dispatch;
         var selectedAddress = _ref8.selectedAddress,
             addressType = _ref8.addressType;
 
@@ -24092,24 +24144,31 @@ var actions = {
             } else if (addressType === "2") {
                 oldAddress = state.deliveryAddress;
                 commit("selectDeliveryAddress", selectedAddress);
+
+                dispatch("checkAddressChangeValidity", { selectedAddress: selectedAddress, addressType: addressType }).then(function (isAddressChangedAllowed) {
+                    if (!isAddressChangedAllowed) {
+                        commit("selectDeliveryAddress", oldAddress);
+                        _NotificationService2.default.error(_TranslationService2.default.translate("Ceres::Template.addressSelectedNotAllowed"));
+                    } else {
+                        commit("setIsBasketLoading", true);
+
+                        _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
+                            commit("setIsBasketLoading", false);
+
+                            return resolve(response);
+                        }).fail(function (error) {
+                            if (addressType === "1") {
+                                commit("selectBillingAddress", oldAddress);
+                            } else if (addressType === "2") {
+                                commit("selectDeliveryAddress", oldAddress);
+                            }
+
+                            commit("setIsBasketLoading", false);
+                            reject(error);
+                        });
+                    }
+                });
             }
-
-            commit("setIsBasketLoading", true);
-
-            _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
-                commit("setIsBasketLoading", false);
-
-                return resolve(response);
-            }).fail(function (error) {
-                if (addressType === "1") {
-                    commit("selectBillingAddress", oldAddress);
-                } else if (addressType === "2") {
-                    commit("selectDeliveryAddress", oldAddress);
-                }
-
-                commit("setIsBasketLoading", false);
-                reject(error);
-            });
         });
     },
     deleteAddress: function deleteAddress(_ref9, _ref10) {
@@ -24149,7 +24208,8 @@ var actions = {
         });
     },
     createAddress: function createAddress(_ref11, _ref12) {
-        var commit = _ref11.commit;
+        var commit = _ref11.commit,
+            dispatch = _ref11.dispatch;
         var address = _ref12.address,
             addressType = _ref12.addressType;
 
@@ -24159,6 +24219,11 @@ var actions = {
                     commit("addBillingAddress", { billingAddress: response });
                 } else if (addressType === "2") {
                     commit("addDeliveryAddress", { deliveryAddress: response });
+
+                    // setTimeout 0 is required to prevent unactual data in the store before checking the validity of the shipping profile
+                    setTimeout(function () {
+                        dispatch("checkAddressChangeValidity", { selectedAddress: response, addressType: addressType });
+                    }, 0);
                 }
 
                 resolve(response);
@@ -24168,7 +24233,8 @@ var actions = {
         });
     },
     updateAddress: function updateAddress(_ref13, _ref14) {
-        var commit = _ref13.commit;
+        var commit = _ref13.commit,
+            dispatch = _ref13.dispatch;
         var address = _ref14.address,
             addressType = _ref14.addressType;
 
@@ -24184,6 +24250,8 @@ var actions = {
                     }
                 } else if (addressType === "2") {
                     commit("updateDeliveryAddress", address);
+
+                    dispatch("checkAddressChangeValidity", { selectedAddress: response.data, addressType: addressType });
                 }
 
                 resolve(response);
@@ -24191,6 +24259,48 @@ var actions = {
                 reject(error);
             });
         });
+    },
+    checkAddressChangeValidity: function checkAddressChangeValidity(_ref15, _ref16) {
+        var commit = _ref15.commit,
+            state = _ref15.state,
+            rootState = _ref15.rootState,
+            dispatch = _ref15.dispatch;
+        var selectedAddress = _ref16.selectedAddress,
+            addressType = _ref16.addressType;
+
+        var shippingProfileList = rootState.checkout.shipping.shippingProfileList;
+        var selectedShippingProfile = rootState.checkout.shipping.selectedShippingProfile;
+        var isPostOfficeAndParcelBoxActive = selectedShippingProfile.isPostOffice && selectedShippingProfile.isParcelBox;
+        var isAddressPostOffice = selectedAddress.address1 === "POSTFILIALE";
+        var isAddressParcelBox = selectedAddress.address1 === "PACKSTATION";
+
+        if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox)) {
+            var isUnsupportedPostOffice = isAddressPostOffice && !selectedShippingProfile.isPostOffice;
+            var isUnsupportedParcelBox = isAddressParcelBox && !selectedShippingProfile.isParcelBox;
+
+            if (isUnsupportedPostOffice || isUnsupportedParcelBox) {
+                var profileToSelect = void 0;
+
+                if (isUnsupportedPostOffice) {
+                    profileToSelect = shippingProfileList.find(function (shipping) {
+                        return shipping.isPostOffice;
+                    });
+                } else {
+                    profileToSelect = shippingProfileList.find(function (shipping) {
+                        return shipping.isParcelBox;
+                    });
+                }
+
+                if (profileToSelect) {
+                    dispatch("selectShippingProfile", profileToSelect);
+                    _NotificationService2.default.warn(_TranslationService2.default.translate("Ceres::Template.addressShippingChangedWarning"));
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 };
 
@@ -24231,7 +24341,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":125}],137:[function(require,module,exports){
+},{"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131}],137:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24498,10 +24608,23 @@ var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
 
+var _NotificationService = require("services/NotificationService");
+
+var _NotificationService2 = _interopRequireDefault(_NotificationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var state = {
     shipping: {
+        isParcelBoxAvailable: false,
+        isPostOfficeAvailable: false,
+        selectedShippingProfile: null,
         shippingProfileId: null,
         shippingProfileList: []
     },
@@ -24536,6 +24659,9 @@ var mutations = {
         if (shippingProfileId) {
             state.shipping.shippingProfileId = shippingProfileId;
         }
+    },
+    setSelectedShippingProfile: function setSelectedShippingProfile(state, shippingProfile) {
+        state.shipping.selectedShippingProfile = shippingProfile;
     },
     setShippingProfileList: function setShippingProfileList(state, shippingProfileList) {
         if (Array.isArray(shippingProfileList)) {
@@ -24581,22 +24707,44 @@ var mutations = {
     },
     setInvoiceAddressShowError: function setInvoiceAddressShowError(state, showError) {
         state.validation.invoiceAddress.showError = showError;
+    },
+    setParcelBoxAvailability: function setParcelBoxAvailability(state, availability) {
+        state.shipping.isParcelBoxAvailable = availability;
+    },
+    setPostOfficeAvailability: function setPostOfficeAvailability(state, availability) {
+        state.shipping.isPostOfficeAvailable = availability;
     }
 };
 
 var actions = {
     setCheckout: function setCheckout(_ref, checkout) {
-        var commit = _ref.commit;
+        var commit = _ref.commit,
+            dispatch = _ref.dispatch;
 
         commit("setShippingCountryId", checkout.shippingCountryId);
         commit("setShippingProfile", checkout.shippingProfileId);
         commit("setShippingProfileList", checkout.shippingProfileList);
         commit("setMethodOfPaymentList", checkout.paymentDataList);
         commit("setMethodOfPayment", checkout.methodOfPaymentId);
+
+        dispatch("setShippingProfileById", checkout.shippingProfileId);
+        dispatch("initProfileAvailabilities");
     },
-    selectMethodOfPayment: function selectMethodOfPayment(_ref2, methodOfPaymentId) {
-        var commit = _ref2.commit,
-            dispatch = _ref2.dispatch;
+    setShippingProfileById: function setShippingProfileById(_ref2, shippingProfileId) {
+        var state = _ref2.state,
+            commit = _ref2.commit;
+
+        var shippingProfile = state.shipping.shippingProfileList.find(function (profile) {
+            return profile.parcelServicePresetId === shippingProfileId;
+        });
+
+        if (!(0, _utils.isNullOrUndefined)(shippingProfile)) {
+            commit("setSelectedShippingProfile", shippingProfile);
+        }
+    },
+    selectMethodOfPayment: function selectMethodOfPayment(_ref3, methodOfPaymentId) {
+        var commit = _ref3.commit,
+            dispatch = _ref3.dispatch;
 
         return new Promise(function (resolve, reject) {
             var oldMethodOfPayment = state.payment.methodOfPaymentId;
@@ -24614,9 +24762,10 @@ var actions = {
             });
         });
     },
-    selectShippingProfile: function selectShippingProfile(_ref3, shippingProfile) {
-        var commit = _ref3.commit,
-            dispatch = _ref3.dispatch;
+    selectShippingProfile: function selectShippingProfile(_ref4, shippingProfile) {
+        var commit = _ref4.commit,
+            dispatch = _ref4.dispatch,
+            getters = _ref4.getters;
 
         return new Promise(function (resolve, reject) {
             var oldShippingProfile = state.shipping.shippingProfileId;
@@ -24624,7 +24773,22 @@ var actions = {
             commit("setIsBasketLoading", true);
             commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
+            var isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
+            var isAddressPostOffice = getters.getSelectedAddress("2").address1 === "POSTFILIALE";
+            var isAddressParcelBox = getters.getSelectedAddress("2").address1 === "PACKSTATION";
+
+            if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox)) {
+                var isUnsupportedPostOffice = isAddressPostOffice && !shippingProfile.isPostOffice;
+                var isUnsupportedParcelBox = isAddressParcelBox && !shippingProfile.isParcelBox;
+
+                if (isUnsupportedPostOffice || isUnsupportedParcelBox) {
+                    commit("selectDeliveryAddressById", -99);
+                    _NotificationService2.default.warn(_TranslationService2.default.translate("Ceres::Template.addressChangedWarning"));
+                }
+            }
+
             _ApiService2.default.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId }).done(function (response) {
+                commit("setSelectedShippingProfile", shippingProfile);
                 commit("setIsBasketLoading", false);
                 resolve(response);
             }).fail(function (error) {
@@ -24634,9 +24798,9 @@ var actions = {
             });
         });
     },
-    refreshCheckout: function refreshCheckout(_ref4) {
-        var commit = _ref4.commit,
-            dispatch = _ref4.dispatch;
+    refreshCheckout: function refreshCheckout(_ref5) {
+        var commit = _ref5.commit,
+            dispatch = _ref5.dispatch;
 
         return new Promise(function (resolve, reject) {
             _ApiService2.default.get("/rest/io/checkout/").done(function (checkout) {
@@ -24646,10 +24810,26 @@ var actions = {
                 reject(error);
             });
         });
+    },
+    initProfileAvailabilities: function initProfileAvailabilities(_ref6) {
+        var commit = _ref6.commit,
+            state = _ref6.state;
+
+        commit("setParcelBoxAvailability", !(0, _utils.isNullOrUndefined)(state.shipping.shippingProfileList.find(function (shipping) {
+            return shipping.isParcelBox;
+        })));
+
+        commit("setPostOfficeAvailability", !(0, _utils.isNullOrUndefined)(state.shipping.shippingProfileList.find(function (shipping) {
+            return shipping.isPostOffice;
+        })));
     }
 };
 
-var getters = {};
+var getters = {
+    isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable(state) {
+        return state.shipping.isParcelBoxAvailable || state.shipping.isPostOfficeAvailable;
+    }
+};
 
 exports.default = {
     state: state,
@@ -24658,7 +24838,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":125}],139:[function(require,module,exports){
+},{"../../helper/utils":122,"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131}],139:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
