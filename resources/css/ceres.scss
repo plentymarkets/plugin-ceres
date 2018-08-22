@@ -12698,7 +12698,7 @@ $border-width: 1px;
 		display: none;
 	}
 	width: 100%;
-	
+	position: fixed;
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
@@ -12996,7 +12996,7 @@ $border-width: 1px;
 		}
 	}
 
-	header {
+	#page-header {
 		background:$navbar-background-color;
 	}
 
@@ -13396,8 +13396,8 @@ $border-width: 1px;
 	border-bottom: 0;
 
 	z-index: 1070;
-    position: absolute;
-    right: 0;
+    position: fixed;
+    top: 30px;
     width: 100%;
     left: 50%;
 	-webkit-transform: translateX(-50%);
@@ -13542,6 +13542,12 @@ $border-width: 1px;
 	background-image: url(../images/flags/4x3/no.svg);
 }
 
+.pos-f-t .cmp-country-settings,
+.pos-f-t .cmp-currency-select
+{
+	position: absolute;
+	top: auto;
+}
 
 nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
 	display: block;
@@ -18937,6 +18943,14 @@ nav.navbar.megamenu {
     &.widget-inverse
     {
         @include widget-bg-pseudo($brand-inverse);
+    }
+}
+
+@at-root .footer {
+    .widget-grid {
+        .widget-inner {
+            border: 10px solid red !important;
+        }
     }
 }
 .widget-image-box
