@@ -1,5 +1,33 @@
 # Release Notes for Ceres
 
+## v2.14.0 (2018-08-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- Two additional layout containers have been added so that the header and footer of the Shop Builder can be displayed.
+- Categories have been added as filter options for search results.
+- Item lists and search results can now be sorted randomly.
+- A new event hook has been added, which reacts to the building of plugins. This enables the invalidation of the content cache.
+- A new checkbox has been added to the address input fields, via which the delivery to a Packstation/post office in Germany can be activated. The input fields adapt to the type of delivery destination if the checkbox is activated.
+
+### Changed
+
+- The individual entries of item lists now span the entire width of the list.
+- The live search in the header and the search page have been synchronised so that they provide the same search results.
+
+### Fixed
+
+- Due to an error, users could not select variations of an item if the name of an attribute exceeded a certain length. This has been fixed.
+- Cross-site scripting is now suppressed in the search.
+- The quantity input of items in the shopping cart now considers the decimal separator configured in the IO settings.
+- The option "Fix the navigation bar at the top of the page" in the header tab is now functioning properly again.
+- Due to an error, the login button was shifted outside the displayable area of the screen on mobile devices. This has been fixed.
+- Due to an error, it was not possible to change the number of items for items whose name exceeded a certain length. This has been fixed.
+- Due to an error, the page did not automatically scroll back to the top after switching categories. This has been fixed.
+- An error has been fixed that prevented the display of a conclusive error notification when items for which no stock was available had been moved to the shopping cart.
+- Under certain circumstances item bundles led to JavaScript errors. This behaviour has been fixed.
+- Orders that included items with live shopping prices led to errors in Callisto stores with an installed Ceres checkout. This behaviour has been fixed.
+
 ## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### ToDo
