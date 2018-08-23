@@ -1,5 +1,6 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
+import {isNullOrUndefined}from "../../../helper/utils";
 
 const NotificationService = require("services/NotificationService");
 
@@ -59,7 +60,35 @@ Vue.component("basket-list-item", {
 
         itemTotalPrice()
         {
-            return this.basketItem.quantity * (this.basketItem.variation.data.prices.default.unitPrice.value + this.propertySurchargeSum);
+            let price = 0.00;
+
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            {
+                price = this.basketItem.price;
+            }
+            else
+            {
+                price = this.basketItem.variation.data.prices.default.unitPrice.value;
+            }
+            return this.basketItem.quantity * (price + this.propertySurchargeSum);
+        },
+        unitPrice()
+        {
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            {
+                return this.basketItem.price;
+            }
+
+            return this.basketItem.variation.data.prices.default.unitPrice.value;
+        },
+        basePrice()
+        {
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            {
+                return this.basketItem.variation.data.prices.specialOffer.basePrice;
+            }
+
+            return this.basketItem.variation.data.prices.default.basePrice;
         },
 
         ...Vuex.mapState({
