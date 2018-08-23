@@ -14675,7 +14675,7 @@ Vue.component("basket-list-item", {
         itemTotalPrice: function itemTotalPrice() {
             var price = 0.00;
 
-            if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price == this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
+            if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
                 price = this.basketItem.price;
             } else {
                 price = this.basketItem.variation.data.prices.default.unitPrice.value;
@@ -14683,14 +14683,14 @@ Vue.component("basket-list-item", {
             return this.basketItem.quantity * (price + this.propertySurchargeSum);
         },
         unitPrice: function unitPrice() {
-            if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price == this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
+            if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
                 return this.basketItem.price;
             }
 
             return this.basketItem.variation.data.prices.default.unitPrice.value;
         },
         basePrice: function basePrice() {
-            if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price == this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
+            if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
                 return this.basketItem.variation.data.prices.specialOffer.basePrice;
             }
 
