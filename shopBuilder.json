@@ -30,7 +30,7 @@
         ],
         "content": [
             {
-                "label": "Widget.preset.HomepageDefault",
+                "label": "Widget.presetHomepageDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
             }
         ]
