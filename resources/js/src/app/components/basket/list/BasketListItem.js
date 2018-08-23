@@ -62,7 +62,7 @@ Vue.component("basket-list-item", {
         {
             let price = 0.00;
 
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price == this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
             {
                 price = this.basketItem.price;
             }
@@ -74,7 +74,7 @@ Vue.component("basket-list-item", {
         },
         unitPrice()
         {
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price == this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
             {
                 return this.basketItem.price;
             }
@@ -83,7 +83,7 @@ Vue.component("basket-list-item", {
         },
         basePrice()
         {
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price == this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
             {
                 return this.basketItem.variation.data.prices.specialOffer.basePrice;
             }
