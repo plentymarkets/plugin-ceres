@@ -46,17 +46,22 @@ Vue.component("item-store-special", {
     methods: {
         getLabel()
         {
-            if (this.storeSpecial.id === 1 && this.recommendedRetailPrice)
+            if (!isNullOrUndefined(this.storeSpecial))
             {
-                const percent = this.getPercentageSale();
-
-                if (parseInt(percent) < 0)
+                if (this.storeSpecial.id === 1 && this.recommendedRetailPrice)
                 {
-                    return percent + "%";
+                    const percent = this.getPercentageSale();
+
+                    if (parseInt(percent) < 0)
+                    {
+                        return percent + "%";
+                    }
                 }
+
+                return this.storeSpecial.names.name;
             }
 
-            return this.storeSpecial.names.name;
+            return "";
         },
 
         getPercentageSale()
