@@ -14736,7 +14736,11 @@ Custom classes
 }
 
 .wrapper-main #page-header {
-  background: #f7f7f9;
+  background-color: #f7f7f9;
+}
+
+.wrapper-main #page-header.top-bar {
+  background-color: #4D4F4D;
 }
 
 .wrapper-main .navbar {

@@ -286,7 +286,11 @@
 	}
 
 	#page-header {
-		background:$navbar-background-color;
+		background-color:$navbar-background-color;
+
+		&.top-bar {
+			background-color: $top-bar-bg;
+		}
 	}
 
 	.navbar{
