@@ -19427,15 +19427,19 @@ Vue.component("item-store-special", {
 
     methods: {
         getLabel: function getLabel() {
-            if (this.storeSpecial.id === 1 && this.recommendedRetailPrice) {
-                var percent = this.getPercentageSale();
+            if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+                if (this.storeSpecial.id === 1 && this.recommendedRetailPrice) {
+                    var percent = this.getPercentageSale();
 
-                if (parseInt(percent) < 0) {
-                    return percent + "%";
+                    if (parseInt(percent) < 0) {
+                        return percent + "%";
+                    }
                 }
+
+                return this.storeSpecial.names.name;
             }
 
-            return this.storeSpecial.names.name;
+            return "";
         },
         getPercentageSale: function getPercentageSale() {
             // eslint-disable-next-line
