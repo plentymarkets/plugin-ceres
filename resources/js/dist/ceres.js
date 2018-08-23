@@ -14973,6 +14973,8 @@ var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
+var _utils = require("../../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NotificationService = require("services/NotificationService");
@@ -15038,7 +15040,28 @@ Vue.component("basket-list-item", {
             return sum;
         },
         itemTotalPrice: function itemTotalPrice() {
-            return this.basketItem.quantity * (this.basketItem.variation.data.prices.default.unitPrice.value + this.propertySurchargeSum);
+            var price = 0.00;
+
+            if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
+                price = this.basketItem.price;
+            } else {
+                price = this.basketItem.variation.data.prices.default.unitPrice.value;
+            }
+            return this.basketItem.quantity * (price + this.propertySurchargeSum);
+        },
+        unitPrice: function unitPrice() {
+            if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
+                return this.basketItem.price;
+            }
+
+            return this.basketItem.variation.data.prices.default.unitPrice.value;
+        },
+        basePrice: function basePrice() {
+            if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
+                return this.basketItem.variation.data.prices.specialOffer.basePrice;
+            }
+
+            return this.basketItem.variation.data.prices.default.basePrice;
         }
     }, Vuex.mapState({
         isBasketLoading: function isBasketLoading(state) {
@@ -15117,7 +15140,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"exceptions/ExceptionMap":98,"services/NotificationService":130,"services/TranslationService":131}],17:[function(require,module,exports){
+},{"../../../helper/utils":122,"exceptions/ExceptionMap":98,"services/NotificationService":130,"services/TranslationService":131}],17:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-breadcrumbs", {
