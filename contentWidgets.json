@@ -636,7 +636,12 @@
 							"value": "item.manufacturer.externalName_desc",
 							"caption": "Widget.itemProducerName_desc",
 							"position": 14
-						}
+						},
+                        {
+                            "value": "item.random",
+                            "caption": "Widget.itemRandom",
+                            "position": 15
+                        }
 					]
 				}
 			},

@@ -79,6 +79,16 @@
         {% endif %}
     </div>
 </div>
+
+<div class="col-xs-12" v-if="isParcelOrOfficeAvailable">
+    <div class="row">
+        <div class="col-xs-12">
+            <input type="checkbox" name="togglePickup" :checked="value.showPickupStation" @change="togglePickupStation($event.target.checked)" :id="'showPickup' + _uid">
+            <label :for="'showPickup' + _uid">{{ trans("Ceres::Template.addressToPickupStation") }}</label>
+        </div>
+    </div>
+</div>
+
 <div class="col-xs-12">
     <div class="row">
         <div class="col-xs-12 col-sm-8">

@@ -15537,6 +15537,8 @@ Vue.component("accept-privacy-policy-check", {
 },{}],28:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 Vue.component("address-input-group", {
 
     delimiters: ["${", "}"],
@@ -15557,11 +15559,31 @@ Vue.component("address-input-group", {
         }
     },
 
+    computed: _extends({
+        isPickupStation: function isPickupStation() {
+            return this.value && this.value.address1 === "PACKSTATION" && this.isParcelBoxAvailable;
+        },
+        isPostOffice: function isPostOffice() {
+            return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
+        },
+        isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable() {
+            return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
+        }
+    }, Vuex.mapState({
+        isParcelBoxAvailable: function isParcelBoxAvailable(state) {
+            return state.checkout.shipping.isParcelBoxAvailable;
+        },
+        isPostOfficeAvailable: function isPostOfficeAvailable(state) {
+            return state.checkout.shipping.isPostOfficeAvailable;
+        }
+    })),
+
     data: function data() {
         return {
             stateList: [],
             countryLocaleList: ["DE", "GB"],
-            localeToShow: this.defaultCountry
+            localeToShow: this.defaultCountry,
+            selectedCountry: null
         };
     },
 
@@ -15580,6 +15602,8 @@ Vue.component("address-input-group", {
          * @param shippingCountry
          */
         onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
+            this.selectedCountry = shippingCountry;
+
             if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
                 this.localeToShow = shippingCountry.isoCode2;
             } else {
@@ -15587,6 +15611,24 @@ Vue.component("address-input-group", {
             }
 
             this.emitInputEvent("countryId", shippingCountry.id);
+
+            this.togglePickupStation(false);
+        },
+        togglePickupStation: function togglePickupStation(showPickupStation) {
+            var emitInputs = {
+                address1: "",
+                address2: "",
+                address3: "",
+                showPickupStation: showPickupStation
+            };
+
+            if (showPickupStation) {
+                emitInputs.address1 = this.isParcelBoxAvailable ? "PACKSTATION" : "POSTFILIALE";
+            }
+
+            for (var input in emitInputs) {
+                this.emitInputEvent(input, emitInputs[input]);
+            }
         },
 
 
@@ -15733,44 +15775,28 @@ Vue.component("address-select", {
 
 
         /**
-         * Show the add modal initially, if no address is selected in checkout
-         */
-        showInitialAddModal: function showInitialAddModal() {
-            this.modalType = "initial";
-
-            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
-                this.addressToEdit = {
-                    addressSalutation: 0,
-                    gender: "male",
-                    countryId: this.shippingCountryId
-                };
-            } else {
-                this.addressToEdit = { countryId: this.shippingCountryId };
-            }
-
-            this.updateHeadline();
-            this.addressModal.show();
-        },
-
-
-        /**
          * Show the add modal
          */
-        showAddModal: function showAddModal() {
-            this.modalType = "create";
+        showAddModal: function showAddModal(type) {
+            this.modalType = type || "create";
 
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
                 this.addressToEdit = {
                     addressSalutation: 0,
                     gender: "male",
-                    countryId: this.shippingCountryId
+                    countryId: this.shippingCountryId,
+                    showPickupStation: false
                 };
             } else {
                 this.addressToEdit = { countryId: this.shippingCountryId };
             }
 
             this.updateHeadline();
-            _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
+
+            if (this.modalType === "create") {
+                _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
+            }
+
             this.addressModal.show();
         },
 
@@ -15790,6 +15816,10 @@ Vue.component("address-select", {
             } else {
                 this.addressToEdit.addressSalutation = 0;
                 this.addressToEdit.gender = "male";
+            }
+
+            if ((0, _utils.isDefined)(this.addressToEdit.address1) && (this.addressToEdit.address1 === "PACKSTATION" || this.addressToEdit.address1 === "POSTFILIALE") && this.$store.getters.isParcelOrOfficeAvailable) {
+                this.addressToEdit.showPickupStation = true;
             }
 
             this.updateHeadline();
@@ -16216,7 +16246,7 @@ Vue.component("invoice-address-select", {
 
         this.$nextTick(function () {
             if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
-                _this.$refs.invoice.showInitialAddModal();
+                _this.$refs.invoice.showAddModal("initial");
             }
         });
     },
@@ -18254,6 +18284,11 @@ Vue.component("quantity-input", {
             }
         },
         setValue: function setValue(value) {
+            // consider the configured decimal seperator (if the input is typed in the input field)
+            if (typeof value === "string") {
+                value = value.replace(App.decimalSeparator || ",", ".");
+            }
+
             value = parseFloat(value);
             if (isNaN(value)) {
                 value = (0, _utils.defaultValue)(this.compMin, 1);
@@ -19014,7 +19049,7 @@ Vue.component("item-store-special", {
     created: function created() {
 
         if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-            this.tagClass = this.tagClasses[this.storeSpecial.id];
+            this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
         } else {
             this.tagClass = this.tagClasses.default;
         }
@@ -19173,6 +19208,12 @@ Vue.component("pagination", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 Vue.component("item-filter", {
 
     delimiters: ["${", "}"],
@@ -19191,6 +19232,13 @@ Vue.component("item-filter", {
 
                 return 0;
             });
+        },
+        facetName: function facetName() {
+            if (this.facet.translationKey && this.facet.translationKey.length > 0) {
+                return _TranslationService2.default.translate("Ceres::Template." + this.facet.translationKey);
+            }
+
+            return this.facet.name;
         }
     }, Vuex.mapState({
         selectedFacets: function selectedFacets(state) {
@@ -19218,7 +19266,7 @@ Vue.component("item-filter", {
     }
 });
 
-},{}],64:[function(require,module,exports){
+},{"services/TranslationService":131}],64:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -21109,7 +21157,7 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
+var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
 
 exports.default = exceptionMap;
 
@@ -23551,6 +23599,14 @@ var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
 
+var _NotificationService = require("services/NotificationService");
+
+var _NotificationService2 = _interopRequireDefault(_NotificationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var state = {
@@ -23583,6 +23639,18 @@ var mutations = {
             if (billingAddress) {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
+            }
+        }
+    },
+    selectDeliveryAddressById: function selectDeliveryAddressById(state, deliveryAddressId) {
+        if (deliveryAddressId) {
+            var deliveryAddress = state.deliveryAddressList.find(function (address) {
+                return address.id === deliveryAddressId;
+            });
+
+            if (deliveryAddress) {
+                state.deliveryAddressId = deliveryAddress.id;
+                state.deliveryAddress = deliveryAddress;
             }
         }
     },
@@ -23717,7 +23785,9 @@ var actions = {
     },
     selectAddress: function selectAddress(_ref7, _ref8) {
         var commit = _ref7.commit,
-            state = _ref7.state;
+            state = _ref7.state,
+            rootState = _ref7.rootState,
+            dispatch = _ref7.dispatch;
         var selectedAddress = _ref8.selectedAddress,
             addressType = _ref8.addressType;
 
@@ -23730,24 +23800,31 @@ var actions = {
             } else if (addressType === "2") {
                 oldAddress = state.deliveryAddress;
                 commit("selectDeliveryAddress", selectedAddress);
+
+                dispatch("checkAddressChangeValidity", { selectedAddress: selectedAddress, addressType: addressType }).then(function (isAddressChangedAllowed) {
+                    if (!isAddressChangedAllowed) {
+                        commit("selectDeliveryAddress", oldAddress);
+                        _NotificationService2.default.error(_TranslationService2.default.translate("Ceres::Template.addressSelectedNotAllowed"));
+                    } else {
+                        commit("setIsBasketLoading", true);
+
+                        _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
+                            commit("setIsBasketLoading", false);
+
+                            return resolve(response);
+                        }).fail(function (error) {
+                            if (addressType === "1") {
+                                commit("selectBillingAddress", oldAddress);
+                            } else if (addressType === "2") {
+                                commit("selectDeliveryAddress", oldAddress);
+                            }
+
+                            commit("setIsBasketLoading", false);
+                            reject(error);
+                        });
+                    }
+                });
             }
-
-            commit("setIsBasketLoading", true);
-
-            _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
-                commit("setIsBasketLoading", false);
-
-                return resolve(response);
-            }).fail(function (error) {
-                if (addressType === "1") {
-                    commit("selectBillingAddress", oldAddress);
-                } else if (addressType === "2") {
-                    commit("selectDeliveryAddress", oldAddress);
-                }
-
-                commit("setIsBasketLoading", false);
-                reject(error);
-            });
         });
     },
     deleteAddress: function deleteAddress(_ref9, _ref10) {
@@ -23787,7 +23864,8 @@ var actions = {
         });
     },
     createAddress: function createAddress(_ref11, _ref12) {
-        var commit = _ref11.commit;
+        var commit = _ref11.commit,
+            dispatch = _ref11.dispatch;
         var address = _ref12.address,
             addressType = _ref12.addressType;
 
@@ -23797,6 +23875,11 @@ var actions = {
                     commit("addBillingAddress", { billingAddress: response });
                 } else if (addressType === "2") {
                     commit("addDeliveryAddress", { deliveryAddress: response });
+
+                    // setTimeout 0 is required to prevent unactual data in the store before checking the validity of the shipping profile
+                    setTimeout(function () {
+                        dispatch("checkAddressChangeValidity", { selectedAddress: response, addressType: addressType });
+                    }, 0);
                 }
 
                 resolve(response);
@@ -23806,7 +23889,8 @@ var actions = {
         });
     },
     updateAddress: function updateAddress(_ref13, _ref14) {
-        var commit = _ref13.commit;
+        var commit = _ref13.commit,
+            dispatch = _ref13.dispatch;
         var address = _ref14.address,
             addressType = _ref14.addressType;
 
@@ -23822,6 +23906,8 @@ var actions = {
                     }
                 } else if (addressType === "2") {
                     commit("updateDeliveryAddress", address);
+
+                    dispatch("checkAddressChangeValidity", { selectedAddress: response.data, addressType: addressType });
                 }
 
                 resolve(response);
@@ -23829,6 +23915,48 @@ var actions = {
                 reject(error);
             });
         });
+    },
+    checkAddressChangeValidity: function checkAddressChangeValidity(_ref15, _ref16) {
+        var commit = _ref15.commit,
+            state = _ref15.state,
+            rootState = _ref15.rootState,
+            dispatch = _ref15.dispatch;
+        var selectedAddress = _ref16.selectedAddress,
+            addressType = _ref16.addressType;
+
+        var shippingProfileList = rootState.checkout.shipping.shippingProfileList;
+        var selectedShippingProfile = rootState.checkout.shipping.selectedShippingProfile;
+        var isPostOfficeAndParcelBoxActive = selectedShippingProfile.isPostOffice && selectedShippingProfile.isParcelBox;
+        var isAddressPostOffice = selectedAddress.address1 === "POSTFILIALE";
+        var isAddressParcelBox = selectedAddress.address1 === "PACKSTATION";
+
+        if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox)) {
+            var isUnsupportedPostOffice = isAddressPostOffice && !selectedShippingProfile.isPostOffice;
+            var isUnsupportedParcelBox = isAddressParcelBox && !selectedShippingProfile.isParcelBox;
+
+            if (isUnsupportedPostOffice || isUnsupportedParcelBox) {
+                var profileToSelect = void 0;
+
+                if (isUnsupportedPostOffice) {
+                    profileToSelect = shippingProfileList.find(function (shipping) {
+                        return shipping.isPostOffice;
+                    });
+                } else {
+                    profileToSelect = shippingProfileList.find(function (shipping) {
+                        return shipping.isParcelBox;
+                    });
+                }
+
+                if (profileToSelect) {
+                    dispatch("selectShippingProfile", profileToSelect);
+                    _NotificationService2.default.warn(_TranslationService2.default.translate("Ceres::Template.addressShippingChangedWarning"));
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 };
 
@@ -23869,7 +23997,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":125}],137:[function(require,module,exports){
+},{"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131}],137:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24136,10 +24264,23 @@ var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
 
+var _NotificationService = require("services/NotificationService");
+
+var _NotificationService2 = _interopRequireDefault(_NotificationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var state = {
     shipping: {
+        isParcelBoxAvailable: false,
+        isPostOfficeAvailable: false,
+        selectedShippingProfile: null,
         shippingProfileId: null,
         shippingProfileList: []
     },
@@ -24174,6 +24315,9 @@ var mutations = {
         if (shippingProfileId) {
             state.shipping.shippingProfileId = shippingProfileId;
         }
+    },
+    setSelectedShippingProfile: function setSelectedShippingProfile(state, shippingProfile) {
+        state.shipping.selectedShippingProfile = shippingProfile;
     },
     setShippingProfileList: function setShippingProfileList(state, shippingProfileList) {
         if (Array.isArray(shippingProfileList)) {
@@ -24219,22 +24363,44 @@ var mutations = {
     },
     setInvoiceAddressShowError: function setInvoiceAddressShowError(state, showError) {
         state.validation.invoiceAddress.showError = showError;
+    },
+    setParcelBoxAvailability: function setParcelBoxAvailability(state, availability) {
+        state.shipping.isParcelBoxAvailable = availability;
+    },
+    setPostOfficeAvailability: function setPostOfficeAvailability(state, availability) {
+        state.shipping.isPostOfficeAvailable = availability;
     }
 };
 
 var actions = {
     setCheckout: function setCheckout(_ref, checkout) {
-        var commit = _ref.commit;
+        var commit = _ref.commit,
+            dispatch = _ref.dispatch;
 
         commit("setShippingCountryId", checkout.shippingCountryId);
         commit("setShippingProfile", checkout.shippingProfileId);
         commit("setShippingProfileList", checkout.shippingProfileList);
         commit("setMethodOfPaymentList", checkout.paymentDataList);
         commit("setMethodOfPayment", checkout.methodOfPaymentId);
+
+        dispatch("setShippingProfileById", checkout.shippingProfileId);
+        dispatch("initProfileAvailabilities");
     },
-    selectMethodOfPayment: function selectMethodOfPayment(_ref2, methodOfPaymentId) {
-        var commit = _ref2.commit,
-            dispatch = _ref2.dispatch;
+    setShippingProfileById: function setShippingProfileById(_ref2, shippingProfileId) {
+        var state = _ref2.state,
+            commit = _ref2.commit;
+
+        var shippingProfile = state.shipping.shippingProfileList.find(function (profile) {
+            return profile.parcelServicePresetId === shippingProfileId;
+        });
+
+        if (!(0, _utils.isNullOrUndefined)(shippingProfile)) {
+            commit("setSelectedShippingProfile", shippingProfile);
+        }
+    },
+    selectMethodOfPayment: function selectMethodOfPayment(_ref3, methodOfPaymentId) {
+        var commit = _ref3.commit,
+            dispatch = _ref3.dispatch;
 
         return new Promise(function (resolve, reject) {
             var oldMethodOfPayment = state.payment.methodOfPaymentId;
@@ -24252,9 +24418,10 @@ var actions = {
             });
         });
     },
-    selectShippingProfile: function selectShippingProfile(_ref3, shippingProfile) {
-        var commit = _ref3.commit,
-            dispatch = _ref3.dispatch;
+    selectShippingProfile: function selectShippingProfile(_ref4, shippingProfile) {
+        var commit = _ref4.commit,
+            dispatch = _ref4.dispatch,
+            getters = _ref4.getters;
 
         return new Promise(function (resolve, reject) {
             var oldShippingProfile = state.shipping.shippingProfileId;
@@ -24262,7 +24429,22 @@ var actions = {
             commit("setIsBasketLoading", true);
             commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
+            var isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
+            var isAddressPostOffice = getters.getSelectedAddress("2").address1 === "POSTFILIALE";
+            var isAddressParcelBox = getters.getSelectedAddress("2").address1 === "PACKSTATION";
+
+            if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox)) {
+                var isUnsupportedPostOffice = isAddressPostOffice && !shippingProfile.isPostOffice;
+                var isUnsupportedParcelBox = isAddressParcelBox && !shippingProfile.isParcelBox;
+
+                if (isUnsupportedPostOffice || isUnsupportedParcelBox) {
+                    commit("selectDeliveryAddressById", -99);
+                    _NotificationService2.default.warn(_TranslationService2.default.translate("Ceres::Template.addressChangedWarning"));
+                }
+            }
+
             _ApiService2.default.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId }).done(function (response) {
+                commit("setSelectedShippingProfile", shippingProfile);
                 commit("setIsBasketLoading", false);
                 resolve(response);
             }).fail(function (error) {
@@ -24272,9 +24454,9 @@ var actions = {
             });
         });
     },
-    refreshCheckout: function refreshCheckout(_ref4) {
-        var commit = _ref4.commit,
-            dispatch = _ref4.dispatch;
+    refreshCheckout: function refreshCheckout(_ref5) {
+        var commit = _ref5.commit,
+            dispatch = _ref5.dispatch;
 
         return new Promise(function (resolve, reject) {
             _ApiService2.default.get("/rest/io/checkout/").done(function (checkout) {
@@ -24284,10 +24466,26 @@ var actions = {
                 reject(error);
             });
         });
+    },
+    initProfileAvailabilities: function initProfileAvailabilities(_ref6) {
+        var commit = _ref6.commit,
+            state = _ref6.state;
+
+        commit("setParcelBoxAvailability", !(0, _utils.isNullOrUndefined)(state.shipping.shippingProfileList.find(function (shipping) {
+            return shipping.isParcelBox;
+        })));
+
+        commit("setPostOfficeAvailability", !(0, _utils.isNullOrUndefined)(state.shipping.shippingProfileList.find(function (shipping) {
+            return shipping.isPostOffice;
+        })));
     }
 };
 
-var getters = {};
+var getters = {
+    isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable(state) {
+        return state.shipping.isParcelBoxAvailable || state.shipping.isPostOfficeAvailable;
+    }
+};
 
 exports.default = {
     state: state,
@@ -24296,7 +24494,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":125}],139:[function(require,module,exports){
+},{"../../helper/utils":122,"services/ApiService":125,"services/NotificationService":130,"services/TranslationService":131}],139:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
