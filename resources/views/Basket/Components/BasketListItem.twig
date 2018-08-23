@@ -23,11 +23,8 @@
                             </a>
 
                             <div class="item-base-price">
-                                {% if basketItem.price == basketItem.variation.data.prices.specialOffer.unitPrice.value %}
-                                    ${ basketItem.price | currency }
-                                {% else %}
-                                    ${ basketItem.variation.data.prices.default.unitPrice.value | currency }
-                                {% endif %}
+                                ${ unitPrice | currency }
+
                             </div>
 
                             <item-bundle :bundle-type="basketItem.variation.data.variation.bundleType"
@@ -35,11 +32,7 @@
 
                             <div class="item-small-prices text-muted" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
                                 <div>
-                                    {% if basketItem.price == basketItem.variation.data.prices.specialOffer.unitPrice.value %}
-                                        ${ basketItem.variation.data.prices.specialOffer.basePrice }
-                                    {% else %}
-                                        ${ basketItem.variation.data.prices.default.basePrice }
-                                    {% endif %}
+                                    ${ basePrice }
                                 </div>
                                 <div>
                                     <strong>{{ trans("Ceres::Template.basketContent") }}: </strong>
