@@ -103,11 +103,6 @@ Vue.component("category-image-carousel", {
             return altText;
         },
 
-        getItemName()
-        {
-            return this.titleText;
-        },
-
         loadFirstImage()
         {
             const itemLazyImage = this.$refs.itemLazyImage;
