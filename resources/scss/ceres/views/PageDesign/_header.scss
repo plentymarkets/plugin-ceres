@@ -17,6 +17,11 @@
 		color: $top-bar-color;
 		outline: none;
 	}
+
+	&.pos-f-t {
+		position: fixed;
+	}
+
 	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;
