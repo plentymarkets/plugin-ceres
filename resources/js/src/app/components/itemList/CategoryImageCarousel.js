@@ -6,6 +6,7 @@ Vue.component("category-image-carousel", {
         imageUrlsData  : {type: Array},
         itemUrl        : {type: String},
         altText        : {type: String},
+        titleText      : {type: String},
         showDots       : {type: Boolean},
         showNav        : {type: Boolean},
         disableLazyLoad: {

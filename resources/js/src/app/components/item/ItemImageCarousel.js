@@ -226,6 +226,11 @@ Vue.component("item-image-carousel", {
             const altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
 
             return altText;
+        },
+
+        getItemName()
+        {
+            return this.$options.filters.itemName(this.currentVariation.documents[0].data);
         }
     }
 });
