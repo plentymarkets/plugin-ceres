@@ -14479,6 +14479,10 @@ Custom classes
   outline: none;
 }
 
+.top-bar.pos-f-t {
+  position: fixed;
+}
+
 .top-bar .controls-list {
   margin-bottom: 0;
   font-size: 0;
