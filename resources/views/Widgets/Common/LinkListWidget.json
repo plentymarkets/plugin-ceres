@@ -1,9 +1,9 @@
 {
     "identifier": "Ceres::LinkListWidget",
     "label": "Widget.linkListLabel",
-    "previewImageURL": "https://apps.odoo.com/apps/modules/8.0/website_sitemap/Sitemap_footer_menu.png",
+    "previewImageURL": "/images/widgets/link-list.svg",
     "type": "default",
-    "position": 400,
+    "position": 1000,
     "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
     "settings": {
         "title": {

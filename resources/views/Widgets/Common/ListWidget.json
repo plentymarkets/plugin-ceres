@@ -1,9 +1,9 @@
 {
     "identifier": "Ceres::ListWidget",
     "label": "Widget.listLabel",
-    "previewImageURL": "https://www.seoclerk.com/pics/want31088-1zcV2Q1441993263.png",
+    "previewImageURL": "/images/widgets/list.svg",
     "type": "default",
-    "position": 400,
+    "position": 900,
     "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
     "settings": {
         "icon": {

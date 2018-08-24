@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::TopBarWidget",
     "label": "Widget.topBarLabel",
-    "previewImageURL": "/images/widgets/title-bar.png",
+    "previewImageURL": "/images/widgets/top-bar.svg",
     "type": "header",
     "position": 0,
     "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",

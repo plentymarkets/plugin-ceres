@@ -428,9 +428,9 @@
     {
         "identifier": "Ceres::LinkListWidget",
         "label": "Widget.linkListLabel",
-        "previewImageURL": "https://apps.odoo.com/apps/modules/8.0/website_sitemap/Sitemap_footer_menu.png",
+        "previewImageURL": "/images/widgets/link-list.svg",
         "type": "default",
-        "position": 400,
+        "position": 1000,
         "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
         "settings": {
             "title": {
@@ -538,9 +538,9 @@
     {
         "identifier": "Ceres::ListWidget",
         "label": "Widget.listLabel",
-        "previewImageURL": "https://www.seoclerk.com/pics/want31088-1zcV2Q1441993263.png",
+        "previewImageURL": "/images/widgets/list.svg",
         "type": "default",
-        "position": 400,
+        "position": 900,
         "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
         "settings": {
             "icon": {
@@ -623,9 +623,9 @@
     {
         "identifier": "Ceres::SeparatorWidget",
         "label": "Widget.separatorLabel",
-        "previewImageURL": "https://www.formget.com/wp-content/uploads/2014/12/style-five.png",
+        "previewImageURL": "/images/widgets/separator.svg",
         "type": "default",
-        "position": 400,
+        "position": 1100,
         "widgetClass": "Ceres\\Widgets\\Common\\SeparatorWidget",
         "settings": {}
     },
@@ -761,9 +761,9 @@
     {
         "identifier": "Ceres::LegalInformationWidget",
         "label": "Widget.legalInformationLabel",
-        "previewImageURL": "https://www.google.de/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi05tDq8-7cAhXNzKQKHbGpCdgQjRx6BAgBEAU&url=https%3A%2F%2Fwww.schobertechnologies.com%2Fcompany%2Flegal-information%2F&psig=AOvVaw3KNF_MityDTogyxHWhVC1h&ust=1534417249256255",
+        "previewImageURL": "/images/widgets/legal-information.svg",
         "type": "footer",
-        "position": 300,
+        "position": 1200,
         "widgetClass": "Ceres\\Widgets\\Footer\\LegalInformationWidget",
         "settings": {
             "showCancellationRights": {
@@ -942,7 +942,7 @@
     {
         "identifier": "Ceres::BreadcrumbWidget",
         "label": "Widget.breadcrumbLabel",
-        "previewImageURL": "/images/widgets/title-bar.png",
+        "previewImageURL": "/images/widgets/breadcrumb.svg",
         "type": "header",
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",
@@ -985,7 +985,7 @@
     {
         "identifier": "Ceres::NavigationWidget",
         "label": "Widget.navigationLabel",
-        "previewImageURL": "/images/widgets/title-bar.png",
+        "previewImageURL": "/images/widgets/navigation.svg",
         "type": "header",
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
@@ -1092,7 +1092,7 @@
     {
         "identifier": "Ceres::TopBarWidget",
         "label": "Widget.topBarLabel",
-        "previewImageURL": "/images/widgets/title-bar.png",
+        "previewImageURL": "/images/widgets/top-bar.svg",
         "type": "header",
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",
