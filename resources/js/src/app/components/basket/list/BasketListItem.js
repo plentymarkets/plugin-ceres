@@ -36,7 +36,6 @@ Vue.component("basket-list-item", {
         altText()
         {
             const images = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
-
             const altText =  this.$options.filters.itemImageAlternativeText(images);
 
             if (altText)
@@ -44,7 +43,7 @@ Vue.component("basket-list-item", {
                 return altText;
             }
 
-            return this.$options.filters.itemName(this.basketItem.variation.data);
+            return this.itemName;
 
         },
 
