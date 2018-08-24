@@ -7,13 +7,13 @@
     "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
     "settings": {
         "icon": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.listIconLabel",
+            "defaultValue": "none",
             "options": {
+                "name": "Widget.listIconLabel",
                 "tooltip": "Widget.listIconTooltip",
-                "defaultValue": "none",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "none",
                         "caption": "Widget.widgetIconNone",
@@ -72,49 +72,13 @@
                 ]
             }
         },
-        "text1": {
-            "type": "inputText",
+        "texts": {
+            "type": "text",
             "required": false,
-            "label": "Widget.listTextLabel",
+            "isList": "[1,]",
             "options": {
-                "tooltip": "Widget.listTextTooltip",
-                "defaultValue": ""
-            }
-        },
-        "text2": {
-            "type": "inputText",
-            "required": false,
-            "label": "Widget.listTextLabel",
-            "options": {
-                "tooltip": "Widget.listTextTooltip",
-                "defaultValue": ""
-            }
-        },
-        "text3": {
-            "type": "inputText",
-            "required": false,
-            "label": "Widget.listTextLabel",
-            "options": {
-                "tooltip": "Widget.listTextTooltip",
-                "defaultValue": ""
-            }
-        },
-        "text4": {
-            "type": "inputText",
-            "required": false,
-            "label": "Widget.listTextLabel",
-            "options": {
-                "tooltip": "Widget.listTextTooltip",
-                "defaultValue": ""
-            }
-        },
-        "text5": {
-            "type": "inputText",
-            "required": false,
-            "label": "Widget.listTextLabel",
-            "options": {
-                "tooltip": "Widget.listTextTooltip",
-                "defaultValue": ""
+                "name": "Widget.listTextLabel",
+                "tooltip": "Widget.listTextTooltip"
             }
         }
     }

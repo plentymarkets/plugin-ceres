@@ -11,13 +11,13 @@
     "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
     "settings": {
         "appearance": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.widgetAppearanceLabel",
+            "defaultValue": "primary",
             "options": {
+                "name": "Widget.widgetAppearanceLabel",
                 "tooltip": "Widget.widgetAppearanceTooltip",
-                "defaultValue": "primary",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "primary",
                         "caption": "Widget.widgetAppearancePrimary",
@@ -51,110 +51,38 @@
                 ]
             }
         },
-        "slide1": {
-            "type": "verticalContainer",
-            "label": "Widget.imageCarouselSlide1",
-            "required": false,
+        "slides": {
+            "type": "vertical",
+            "isList": "[1,]",
             "options": {
-                "containerEntries": {
-                    "categoryId": {
-                        "type": "categoryPicker",
-                        "required": false,
-                        "label": "Widget.imageCarouselCategoryIdLabel",
-                        "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "variationId": {
-                        "type": "inputNumber",
-                        "required": false,
-                        "label": "Widget.imageCarouselVariationIdLabel",
-                        "options": {
-                            "tooltip": "Widget.imageCarouselVariationIdTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "customImagePath": {
-                        "type": "inputFile",
-                        "required": false,
-                        "label": "Widget.imageCarouselCustomImagePathLabel",
-                        "options": {
-                            "tooltip": "Widget.imageCarouselCustomImagePathTooltip",
-                            "defaultValue": ""
-                        }
+                "name": "Widget.imageCarouselSlide"
+            },
+            "children": {
+                "categoryId": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.imageCarouselCategoryIdLabel",
+                        "tooltip": "Widget.imageCarouselCategoryIdTooltip"
                     }
-                }
-            }
-        },
-        "slide2": {
-            "type": "verticalContainer",
-            "label": "Widget.imageCarouselSlide2",
-            "required": false,
-            "options": {
-                "containerEntries": {
-                    "categoryId": {
-                        "type": "categoryPicker",
-                        "required": false,
-                        "label": "Widget.imageCarouselCategoryIdLabel",
-                        "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "variationId": {
-                        "type": "inputNumber",
-                        "required": false,
-                        "label": "Widget.imageCarouselVariationIdLabel",
-                        "options": {
-                            "tooltip": "Widget.imageCarouselVariationIdTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "customImagePath": {
-                        "type": "inputFile",
-                        "required": false,
-                        "label": "Widget.imageCarouselCustomImagePathLabel",
-                        "options": {
-                            "tooltip": "Widget.imageCarouselCustomImagePathTooltip",
-                            "defaultValue": ""
-                        }
+                },
+                "variationId": {
+                    "type": "number",
+                    "required": false,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.imageCarouselVariationIdLabel",
+                        "tooltip": "Widget.imageCarouselVariationIdTooltip"
                     }
-                }
-            }
-        },
-        "slide3": {
-            "type": "verticalContainer",
-            "label": "Widget.imageCarouselSlide3",
-            "required": false,
-            "options": {
-                "containerEntries": {
-                    "categoryId": {
-                        "type": "categoryPicker",
-                        "required": false,
-                        "label": "Widget.imageCarouselCategoryIdLabel",
-                        "options": {
-                            "tooltip": "Widget.imageCarouselCategoryIdTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "variationId": {
-                        "type": "inputNumber",
-                        "required": false,
-                        "label": "Widget.imageCarouselVariationIdLabel",
-                        "options": {
-                            "tooltip": "Widget.imageCarouselVariationIdTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "customImagePath": {
-                        "type": "inputFile",
-                        "required": false,
-                        "label": "Widget.imageCarouselCustomImagePathLabel",
-                        "options": {
-                            "tooltip": "Widget.imageCarouselCustomImagePathTooltip",
-                            "defaultValue": ""
-                        }
+                },
+                "customImagePath": {
+                    "type": "file",
+                    "required": false,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.imageCarouselCustomImagePathLabel",
+                        "tooltip": "Widget.imageCarouselCustomImagePathTooltip"
                     }
                 }
             }

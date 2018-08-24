@@ -7,22 +7,22 @@
     "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
     "settings": {
         "title": {
-            "type": "inputText",
+            "type": "text",
             "required": false,
-            "label": "Widget.linkListTitleLabel",
+            "defaultValue": "",
             "options": {
-                "tooltip": "Widget.linkListTitleTooltip",
-                "defaultValue": ""
+                "name": "Widget.linkListTitleLabel",
+                "tooltip": "Widget.linkListTitleTooltip"
             }
         },
         "icon": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.linkListIconLabel",
+            "defaultValue": "none",
             "options": {
+                "name": "Widget.linkListIconLabel",
                 "tooltip": "Widget.linkListIconTooltip",
-                "defaultValue": "none",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "none",
                         "caption": "Widget.widgetIconNone",
@@ -81,137 +81,27 @@
                 ]
             }
         },
-        "entry1": {
-            "type": "verticalContainer",
-            "label": "Widget.linkListEntryLabel",
-            "required": false,
+        "entries": {
+            "type": "vertical",
+            "isList": "[1,]",
             "options": {
-                "containerEntries": {
-                    "name": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryNameLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryNameTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "url": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryUrlLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryUrlTooltip",
-                            "defaultValue": ""
-                        }
+                "name": "Widget.linkListEntryLabel"
+            },
+            "children": {
+                "text": {
+                    "type": "text",
+                    "required": false,
+                    "options": {
+                        "name": "Widget.linkListEntryNameLabel",
+                        "tooltip": "Widget.linkListEntryNameTooltip"
                     }
-                }
-            }
-        },
-        "entry2": {
-            "type": "verticalContainer",
-            "label": "Widget.linkListEntryLabel",
-            "required": false,
-            "options": {
-                "containerEntries": {
-                    "name": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryNameLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryNameTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "url": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryUrlLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryUrlTooltip",
-                            "defaultValue": ""
-                        }
-                    }
-                }
-            }
-        },
-        "entry3": {
-            "type": "verticalContainer",
-            "label": "Widget.linkListEntryLabel",
-            "required": false,
-            "options": {
-                "containerEntries": {
-                    "name": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryNameLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryNameTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "url": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryUrlLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryUrlTooltip",
-                            "defaultValue": ""
-                        }
-                    }
-                }
-            }
-        },
-        "entry4": {
-            "type": "verticalContainer",
-            "label": "Widget.linkListEntryLabel",
-            "required": false,
-            "options": {
-                "containerEntries": {
-                    "name": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryNameLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryNameTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "url": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryUrlLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryUrlTooltip",
-                            "defaultValue": ""
-                        }
-                    }
-                }
-            }
-        },
-        "entry5": {
-            "type": "verticalContainer",
-            "label": "Widget.linkListEntryLabel",
-            "required": false,
-            "options": {
-                "containerEntries": {
-                    "name": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryNameLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryNameTooltip",
-                            "defaultValue": ""
-                        }
-                    },
-                    "url": {
-                        "type": "inputText",
-                        "required": false,
-                        "label": "Widget.linkListEntryUrlLabel",
-                        "options": {
-                            "tooltip": "Widget.linkListEntryUrlTooltip",
-                            "defaultValue": ""
-                        }
+                },
+                "url": {
+                    "type": "text",
+                    "required": false,
+                    "options": {
+                        "name": "Widget.linkListEntryUrlLabel",
+                        "tooltip": "Widget.linkListEntryUrlTooltip"
                     }
                 }
             }
