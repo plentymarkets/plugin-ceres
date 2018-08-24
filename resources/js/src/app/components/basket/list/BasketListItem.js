@@ -36,9 +36,21 @@ Vue.component("basket-list-item", {
 
         altText()
         {
-            const altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data);
+            const images = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+            const altText =  this.$options.filters.itemImageAlternativeText(images);
 
-            return altText;
+            if (altText)
+            {
+                return altText;
+            }
+
+            return this.itemName;
+
+        },
+
+        itemName()
+        {
+            return this.$options.filters.itemName(this.basketItem.variation.data);
         },
 
         isInputLocked()

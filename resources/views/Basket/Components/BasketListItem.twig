@@ -11,7 +11,7 @@
         <div class="basket-item component-loading with-icon sending" :class="{ 'isLoading': waiting }">
 
             <div class="image-container">
-                <img class="img-basket-small" v-if="image" :src="image" :alt="altText">
+                <img class="img-basket-small" v-if="image" :src="image" :alt="altText" :title="itemName">
             </div>
 
             <div class="meta-container-wrapper">
