@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v2.14.0 (2018-08-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v2.14.0 (2018-08-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
 
@@ -27,6 +27,7 @@
 - An error has been fixed that prevented the display of a conclusive error notification when items for which no stock was available had been moved to the shopping cart.
 - Under certain circumstances item bundles led to JavaScript errors. This behaviour has been fixed.
 - Orders that included items with live shopping prices led to errors in Callisto stores with an installed Ceres checkout. This behaviour has been fixed.
+- The missing title and alt tags have been added in order to improve search engine optimisation.
 
 ## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
