@@ -1,5 +1,34 @@
 # Release Notes für Ceres
 
+## v2.14.0 (2018-08-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Es wurden zwei zusätzliche Layout-Container hinzugefügt, um Header und Footer des Shop Builders anzeigen zu können.
+- Kategorien wurden als Filteroptionen bei Suchergebnissen hinzugefügt.
+- Artikellisten und Suchergebnisse können jetzt zufällig sortiert werden.
+- Es wurde ein neuer Hook hinzugefügt, über welchen auf das Ereignis Plugin-Bau reagiert werden kann. Dadurch wird die Invalidierung des Content Caches für das gebaute Plugin-Set ermöglicht.
+- Es wurde eine Checkbox zur Adresseingabe hinzugefügt, über welche die Lieferung an eine Packstation/Postfiliale in Deutschland aktiviert werden kann. Bei der Aktivierung der Checkbox passen sich die Eingabefelder an den Typ des Lieferorts an.
+
+### Geändert
+
+- Die Einträge von Artikellisten füllen jetzt die gesamte Breite der Liste aus.
+- Die Livesuche im Header und die Suchseite wurden aneinander angepasst, sodass sie nun die gleichen Suchergebnisse liefern.
+
+### Behoben
+
+- Durch einen Fehler konnten am Artikel keine Varianten ausgewählt werden, wenn der Attributname zu lang war. Dies wurde behoben.
+- Cross-Site-Scripting wird jetzt in der Suche unterbunden.
+- Die Mengeneingabe im Warenkorb berücksichtigt jetzt das in IO konfigurierte Dezimaltrennzeichen.
+- Die Option "Navigationsleiste oben fixieren" im Tab Header funktioniert jetzt wieder wie gedacht.
+- Durch einen Fehler ist der Login-Button bei der Anzeige auf mobilen Geräten rechts aus dem Bildschirm gerückt. Dies wurde behoben.
+- Durch einen Fehler konnte man im Warenkorb die Menge der Artikel nicht ändern, wenn der Artikelname zu lang war. Dies wurde behoben.
+- Durch einen Fehler ist der Browser bei einem Wechsel zwischen Kategorien nicht automatisch zurück nach oben gescrollt. Dies wurde behoben.
+- Ein Fehler wurde behoben, durch den keine aussagekräftige Fehlermeldung ausgegeben wurde, wenn man versucht hat, einen Artikel ohne Warenbestand in den Warenkorb zu legen.
+- Im Zusammenhang mit Artikelpaketen kam es zu JavaScript-Fehlern. Dieses Verhalten wurden behoben.
+- In Callisto Shops mit eingebundenem Ceres Checkout kam es bei Auftragsanlagen, die Artikel mit Live-Shopping-Preisen beinhalteten, zu Fehlern. Dieses Verhalten wurde behoben.
+- Um die Suchmaschinenoptimierung zu verbessern, wurden fehlende Title- und Alt-Tags hinzugefügt.
+
 ## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### ToDo
