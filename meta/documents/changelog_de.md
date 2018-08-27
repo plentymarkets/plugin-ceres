@@ -1,6 +1,6 @@
 # Release Notes für Ceres
 
-## v2.14.0 (2018-08-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v2.14.0 (2018-08-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
@@ -28,6 +28,7 @@
 - Im Zusammenhang mit Artikelpaketen kam es zu JavaScript-Fehlern. Dieses Verhalten wurden behoben.
 - In Callisto Shops mit eingebundenem Ceres Checkout kam es bei Auftragsanlagen, die Artikel mit Live-Shopping-Preisen beinhalteten, zu Fehlern. Dieses Verhalten wurde behoben.
 - Um die Suchmaschinenoptimierung zu verbessern, wurden fehlende Title- und Alt-Tags hinzugefügt.
+- Durch einen Fehler kam es bei Preisen zu Rundungsfehlern. Dies wurde behoben.
 
 ## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
