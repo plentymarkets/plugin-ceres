@@ -2,7 +2,7 @@
     {
         "identifier": "Ceres::ImageBoxWidget",
         "label": "Widget.imageBoxLabel",
-        "previewImageURL": "/images/widgets/image-box.png",
+        "previewImageURL": "/images/widgets/image-box.svg",
         "type": "default",
         "position": 600,
         "allowedNestingTypes": [
@@ -136,7 +136,7 @@
     {
         "identifier": "Ceres::ImageCarouselWidget",
         "label": "Widget.imageCarouselLabel",
-        "previewImageURL": "/images/widgets/image-carousel.png",
+        "previewImageURL": "/images/widgets/image-carousel.svg",
         "type": "default",
         "position": 500,
         "allowedNestingTypes": [
@@ -227,7 +227,7 @@
     {
         "identifier": "Ceres::ItemListWidget",
         "label": "Widget.itemListLabel",
-        "previewImageURL": "/images/widgets/item-list.png",
+        "previewImageURL": "/images/widgets/item-list.svg",
         "type": "default",
         "position": 700,
         "allowedNestingTypes": [
@@ -632,7 +632,7 @@
     {
         "identifier": "Ceres::TextWidget",
         "label": "Widget.textLabel",
-        "previewImageURL": "/images/widgets/text.png",
+        "previewImageURL": "/images/widgets/text.svg",
         "type": "default",
         "position": 800,
         "allowedNestingTypes": [
@@ -697,7 +697,7 @@
     {
         "identifier": "Ceres::TitleBarWidget",
         "label": "Widget.titleBarLabel",
-        "previewImageURL": "/images/widgets/title-bar.png",
+        "previewImageURL": "/images/widgets/title-bar.svg",
         "type": "default",
         "position": 400,
         "allowedNestingTypes": [
@@ -837,7 +837,7 @@
     {
         "identifier": "Ceres::FourColumnWidget",
         "label": "Widget.gridFourColumnLabel",
-        "previewImageURL": "/images/widgets/grid-4-col.png",
+        "previewImageURL": "/images/widgets/grid-4-col.svg",
         "type": "structure",
         "position": 300,
         "allowedNestingTypes": [
@@ -849,7 +849,7 @@
     {
         "identifier": "Ceres::ThreeColumnWidget",
         "label": "Widget.gridThreeColumnLabel",
-        "previewImageURL": "/images/widgets/grid-3-col.png",
+        "previewImageURL": "/images/widgets/grid-3-col.svg",
         "type": "structure",
         "position": 200,
         "allowedNestingTypes": [
@@ -903,7 +903,7 @@
     {
         "identifier": "Ceres::TwoColumnWidget",
         "label": "Widget.gridTwoColumnLabel",
-        "previewImageURL": "/images/widgets/grid-2-col.png",
+        "previewImageURL": "/images/widgets/grid-2-col.svg",
         "type": "structure",
         "position": 100,
         "allowedNestingTypes": [
