@@ -3,6 +3,7 @@
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
 {% set style            = widget.settings.style.mobile %}
+{% set headline         = widget.settings.headline.mobile %}
 {% set imageSize        = widget.settings.imageSize.mobile %}
 {% set categoryId       = widget.settings.categoryId.mobile %}
 {% set variationId      = widget.settings.variationId.mobile %}
@@ -37,6 +38,10 @@
 
 {% if customImagePath | trim is not empty %}
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
+{% endif %}
+
+{% if style != "no-caption" and headline is not empty %}
+    {{ Twig.set("name", headline | json_encode) }}
 {% endif %}
 
 {{ Twig.if("name | trim is empty and imageUrl | trim is empty") }}
