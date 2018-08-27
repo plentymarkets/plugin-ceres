@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::TitleBarWidget",
     "label": "Widget.titleBarLabel",
-    "previewImageURL": "/images/widgets/title-bar.png",
+    "previewImageURL": "/images/widgets/title-bar.svg",
     "type": "default",
     "position": 400,
     "allowedNestingTypes": [

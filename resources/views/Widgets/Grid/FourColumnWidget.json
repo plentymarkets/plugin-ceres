@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::FourColumnWidget",
     "label": "Widget.gridFourColumnLabel",
-    "previewImageURL": "/images/widgets/grid-4-col.png",
+    "previewImageURL": "/images/widgets/grid-4-col.svg",
     "type": "structure",
     "position": 300,
     "allowedNestingTypes": [

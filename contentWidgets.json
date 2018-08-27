@@ -2,7 +2,7 @@
     {
         "identifier": "Ceres::ImageBoxWidget",
         "label": "Widget.imageBoxLabel",
-        "previewImageURL": "/images/widgets/image-box.png",
+        "previewImageURL": "/images/widgets/image-box.svg",
         "type": "default",
         "position": 600,
         "allowedNestingTypes": [
@@ -136,7 +136,7 @@
     {
         "identifier": "Ceres::ImageCarouselWidget",
         "label": "Widget.imageCarouselLabel",
-        "previewImageURL": "/images/widgets/image-carousel.png",
+        "previewImageURL": "/images/widgets/image-carousel.svg",
         "type": "default",
         "position": 500,
         "allowedNestingTypes": [
@@ -146,13 +146,13 @@
         "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
         "settings": {
             "appearance": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.widgetAppearanceLabel",
+                "defaultValue": "primary",
                 "options": {
+                    "name": "Widget.widgetAppearanceLabel",
                     "tooltip": "Widget.widgetAppearanceTooltip",
-                    "defaultValue": "primary",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "primary",
                             "caption": "Widget.widgetAppearancePrimary",
@@ -186,110 +186,38 @@
                     ]
                 }
             },
-            "slide1": {
-                "type": "verticalContainer",
-                "label": "Widget.imageCarouselSlide1",
-                "required": false,
+            "slides": {
+                "type": "vertical",
+                "isList": "[1,]",
                 "options": {
-                    "containerEntries": {
-                        "categoryId": {
-                            "type": "categoryPicker",
-                            "required": false,
-                            "label": "Widget.imageCarouselCategoryIdLabel",
-                            "options": {
-                                "tooltip": "Widget.imageCarouselCategoryIdTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "variationId": {
-                            "type": "inputNumber",
-                            "required": false,
-                            "label": "Widget.imageCarouselVariationIdLabel",
-                            "options": {
-                                "tooltip": "Widget.imageCarouselVariationIdTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "customImagePath": {
-                            "type": "inputFile",
-                            "required": false,
-                            "label": "Widget.imageCarouselCustomImagePathLabel",
-                            "options": {
-                                "tooltip": "Widget.imageCarouselCustomImagePathTooltip",
-                                "defaultValue": ""
-                            }
+                    "name": "Widget.imageCarouselSlide"
+                },
+                "children": {
+                    "categoryId": {
+                        "type": "category",
+                        "required": false,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.imageCarouselCategoryIdLabel",
+                            "tooltip": "Widget.imageCarouselCategoryIdTooltip"
                         }
-                    }
-                }
-            },
-            "slide2": {
-                "type": "verticalContainer",
-                "label": "Widget.imageCarouselSlide2",
-                "required": false,
-                "options": {
-                    "containerEntries": {
-                        "categoryId": {
-                            "type": "categoryPicker",
-                            "required": false,
-                            "label": "Widget.imageCarouselCategoryIdLabel",
-                            "options": {
-                                "tooltip": "Widget.imageCarouselCategoryIdTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "variationId": {
-                            "type": "inputNumber",
-                            "required": false,
-                            "label": "Widget.imageCarouselVariationIdLabel",
-                            "options": {
-                                "tooltip": "Widget.imageCarouselVariationIdTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "customImagePath": {
-                            "type": "inputFile",
-                            "required": false,
-                            "label": "Widget.imageCarouselCustomImagePathLabel",
-                            "options": {
-                                "tooltip": "Widget.imageCarouselCustomImagePathTooltip",
-                                "defaultValue": ""
-                            }
+                    },
+                    "variationId": {
+                        "type": "number",
+                        "required": false,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.imageCarouselVariationIdLabel",
+                            "tooltip": "Widget.imageCarouselVariationIdTooltip"
                         }
-                    }
-                }
-            },
-            "slide3": {
-                "type": "verticalContainer",
-                "label": "Widget.imageCarouselSlide3",
-                "required": false,
-                "options": {
-                    "containerEntries": {
-                        "categoryId": {
-                            "type": "categoryPicker",
-                            "required": false,
-                            "label": "Widget.imageCarouselCategoryIdLabel",
-                            "options": {
-                                "tooltip": "Widget.imageCarouselCategoryIdTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "variationId": {
-                            "type": "inputNumber",
-                            "required": false,
-                            "label": "Widget.imageCarouselVariationIdLabel",
-                            "options": {
-                                "tooltip": "Widget.imageCarouselVariationIdTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "customImagePath": {
-                            "type": "inputFile",
-                            "required": false,
-                            "label": "Widget.imageCarouselCustomImagePathLabel",
-                            "options": {
-                                "tooltip": "Widget.imageCarouselCustomImagePathTooltip",
-                                "defaultValue": ""
-                            }
+                    },
+                    "customImagePath": {
+                        "type": "file",
+                        "required": false,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.imageCarouselCustomImagePathLabel",
+                            "tooltip": "Widget.imageCarouselCustomImagePathTooltip"
                         }
                     }
                 }
@@ -299,7 +227,7 @@
     {
         "identifier": "Ceres::ItemListWidget",
         "label": "Widget.itemListLabel",
-        "previewImageURL": "/images/widgets/item-list.png",
+        "previewImageURL": "/images/widgets/item-list.svg",
         "type": "default",
         "position": 700,
         "allowedNestingTypes": [
@@ -309,13 +237,13 @@
         "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
         "settings": {
             "appearance": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.widgetAppearanceLabel",
+                "defaultValue": "primary",
                 "options": {
+                    "name": "Widget.widgetAppearanceLabel",
                     "tooltip": "Widget.widgetAppearanceTooltip",
-                    "defaultValue": "primary",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "primary",
                             "caption": "Widget.widgetAppearancePrimary",
@@ -350,13 +278,13 @@
                 }
             },
             "listType": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.itemListListTypeLabel",
+                "defaultValue": "category",
                 "options": {
+                    "name": "Widget.itemListListTypeLabel",
                     "tooltip": "Widget.itemListListTypeTooltip",
-                    "defaultValue": "category",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "category",
                             "caption": "Widget.itemListListTypeCategory",
@@ -376,31 +304,33 @@
                 }
             },
             "categoryId": {
-                "type": "categoryPicker",
+                "type": "category",
                 "required": false,
-                "label": "Widget.itemListCategoryIdLabel",
+                "isVisible": "listType === 'category'",
+                "defaultValue": "",
                 "options": {
-                    "tooltip": "Widget.itemListCategoryIdTooltip",
-                    "defaultValue": ""
+                    "name": "Widget.itemListCategoryIdLabel",
+                    "tooltip": "Widget.itemListCategoryIdTooltip"
                 }
             },
             "tagId": {
-                "type": "inputNumber",
+                "type": "number",
                 "required": false,
-                "label": "Widget.itemListTagIdLabel",
+                "isVisible": "listType === 'tag_list'",
+                "defaultValue": "",
                 "options": {
-                    "tooltip": "Widget.itemListTagIdTooltip",
-                    "defaultValue": ""
+                    "name": "Widget.itemListTagIdLabel",
+                    "tooltip": "Widget.itemListTagIdTooltip"
                 }
             },
             "itemSort": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.itemListItemSortLabel",
+                "defaultValue": "texts.name1_asc",
                 "options": {
+                    "name": "Widget.itemListItemSortLabel",
                     "tooltip": "Widget.itemListItemSortTooltip",
-                    "defaultValue": "texts.name1_asc",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "default.recommended_sorting",
                             "caption": "Widget.itemRecommendedSorting",
@@ -475,17 +405,22 @@
                             "value": "item.manufacturer.externalName_desc",
                             "caption": "Widget.itemProducerName_desc",
                             "position": 14
+                        },
+                        {
+                            "value": "item.random",
+                            "caption": "Widget.itemRandom",
+                            "position": 15
                         }
                     ]
                 }
             },
             "maxItems": {
-                "type": "inputNumber",
+                "type": "number",
                 "required": true,
-                "label": "Widget.itemListMaxItemsLabel",
+                "defaultValue": "4",
                 "options": {
-                    "tooltip": "Widget.itemListMaxItemsTooltip",
-                    "defaultValue": "4"
+                    "name": "Widget.itemListMaxItemsLabel",
+                    "tooltip": "Widget.itemListMaxItemsTooltip"
                 }
             }
         }
@@ -493,28 +428,28 @@
     {
         "identifier": "Ceres::LinkListWidget",
         "label": "Widget.linkListLabel",
-        "previewImageURL": "https://apps.odoo.com/apps/modules/8.0/website_sitemap/Sitemap_footer_menu.png",
+        "previewImageURL": "/images/widgets/link-list.svg",
         "type": "default",
-        "position": 400,
+        "position": 1000,
         "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
         "settings": {
             "title": {
-                "type": "inputText",
+                "type": "text",
                 "required": false,
-                "label": "Widget.linkListTitleLabel",
+                "defaultValue": "",
                 "options": {
-                    "tooltip": "Widget.linkListTitleTooltip",
-                    "defaultValue": ""
+                    "name": "Widget.linkListTitleLabel",
+                    "tooltip": "Widget.linkListTitleTooltip"
                 }
             },
             "icon": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.linkListIconLabel",
+                "defaultValue": "none",
                 "options": {
+                    "name": "Widget.linkListIconLabel",
                     "tooltip": "Widget.linkListIconTooltip",
-                    "defaultValue": "none",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "none",
                             "caption": "Widget.widgetIconNone",
@@ -573,137 +508,27 @@
                     ]
                 }
             },
-            "entry1": {
-                "type": "verticalContainer",
-                "label": "Widget.linkListEntryLabel",
-                "required": false,
+            "entries": {
+                "type": "vertical",
+                "isList": "[1,]",
                 "options": {
-                    "containerEntries": {
-                        "name": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryNameLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryNameTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "url": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryUrlLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryUrlTooltip",
-                                "defaultValue": ""
-                            }
+                    "name": "Widget.linkListEntryLabel"
+                },
+                "children": {
+                    "text": {
+                        "type": "text",
+                        "required": false,
+                        "options": {
+                            "name": "Widget.linkListEntryNameLabel",
+                            "tooltip": "Widget.linkListEntryNameTooltip"
                         }
-                    }
-                }
-            },
-            "entry2": {
-                "type": "verticalContainer",
-                "label": "Widget.linkListEntryLabel",
-                "required": false,
-                "options": {
-                    "containerEntries": {
-                        "name": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryNameLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryNameTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "url": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryUrlLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryUrlTooltip",
-                                "defaultValue": ""
-                            }
-                        }
-                    }
-                }
-            },
-            "entry3": {
-                "type": "verticalContainer",
-                "label": "Widget.linkListEntryLabel",
-                "required": false,
-                "options": {
-                    "containerEntries": {
-                        "name": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryNameLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryNameTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "url": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryUrlLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryUrlTooltip",
-                                "defaultValue": ""
-                            }
-                        }
-                    }
-                }
-            },
-            "entry4": {
-                "type": "verticalContainer",
-                "label": "Widget.linkListEntryLabel",
-                "required": false,
-                "options": {
-                    "containerEntries": {
-                        "name": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryNameLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryNameTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "url": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryUrlLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryUrlTooltip",
-                                "defaultValue": ""
-                            }
-                        }
-                    }
-                }
-            },
-            "entry5": {
-                "type": "verticalContainer",
-                "label": "Widget.linkListEntryLabel",
-                "required": false,
-                "options": {
-                    "containerEntries": {
-                        "name": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryNameLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryNameTooltip",
-                                "defaultValue": ""
-                            }
-                        },
-                        "url": {
-                            "type": "inputText",
-                            "required": false,
-                            "label": "Widget.linkListEntryUrlLabel",
-                            "options": {
-                                "tooltip": "Widget.linkListEntryUrlTooltip",
-                                "defaultValue": ""
-                            }
+                    },
+                    "url": {
+                        "type": "text",
+                        "required": false,
+                        "options": {
+                            "name": "Widget.linkListEntryUrlLabel",
+                            "tooltip": "Widget.linkListEntryUrlTooltip"
                         }
                     }
                 }
@@ -713,19 +538,19 @@
     {
         "identifier": "Ceres::ListWidget",
         "label": "Widget.listLabel",
-        "previewImageURL": "https://www.seoclerk.com/pics/want31088-1zcV2Q1441993263.png",
+        "previewImageURL": "/images/widgets/list.svg",
         "type": "default",
-        "position": 400,
+        "position": 900,
         "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
         "settings": {
             "icon": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.listIconLabel",
+                "defaultValue": "none",
                 "options": {
+                    "name": "Widget.listIconLabel",
                     "tooltip": "Widget.listIconTooltip",
-                    "defaultValue": "none",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "none",
                             "caption": "Widget.widgetIconNone",
@@ -784,49 +609,13 @@
                     ]
                 }
             },
-            "text1": {
-                "type": "inputText",
+            "texts": {
+                "type": "text",
                 "required": false,
-                "label": "Widget.listTextLabel",
+                "isList": "[1,]",
                 "options": {
-                    "tooltip": "Widget.listTextTooltip",
-                    "defaultValue": ""
-                }
-            },
-            "text2": {
-                "type": "inputText",
-                "required": false,
-                "label": "Widget.listTextLabel",
-                "options": {
-                    "tooltip": "Widget.listTextTooltip",
-                    "defaultValue": ""
-                }
-            },
-            "text3": {
-                "type": "inputText",
-                "required": false,
-                "label": "Widget.listTextLabel",
-                "options": {
-                    "tooltip": "Widget.listTextTooltip",
-                    "defaultValue": ""
-                }
-            },
-            "text4": {
-                "type": "inputText",
-                "required": false,
-                "label": "Widget.listTextLabel",
-                "options": {
-                    "tooltip": "Widget.listTextTooltip",
-                    "defaultValue": ""
-                }
-            },
-            "text5": {
-                "type": "inputText",
-                "required": false,
-                "label": "Widget.listTextLabel",
-                "options": {
-                    "tooltip": "Widget.listTextTooltip",
-                    "defaultValue": ""
+                    "name": "Widget.listTextLabel",
+                    "tooltip": "Widget.listTextTooltip"
                 }
             }
         }
@@ -834,16 +623,16 @@
     {
         "identifier": "Ceres::SeparatorWidget",
         "label": "Widget.separatorLabel",
-        "previewImageURL": "https://www.formget.com/wp-content/uploads/2014/12/style-five.png",
+        "previewImageURL": "/images/widgets/separator.svg",
         "type": "default",
-        "position": 400,
+        "position": 1100,
         "widgetClass": "Ceres\\Widgets\\Common\\SeparatorWidget",
         "settings": {}
     },
     {
         "identifier": "Ceres::TextWidget",
         "label": "Widget.textLabel",
-        "previewImageURL": "/images/widgets/text.png",
+        "previewImageURL": "/images/widgets/text.svg",
         "type": "default",
         "position": 800,
         "allowedNestingTypes": [
@@ -908,7 +697,7 @@
     {
         "identifier": "Ceres::TitleBarWidget",
         "label": "Widget.titleBarLabel",
-        "previewImageURL": "/images/widgets/title-bar.png",
+        "previewImageURL": "/images/widgets/title-bar.svg",
         "type": "default",
         "position": 400,
         "allowedNestingTypes": [
@@ -972,9 +761,9 @@
     {
         "identifier": "Ceres::LegalInformationWidget",
         "label": "Widget.legalInformationLabel",
-        "previewImageURL": "https://www.google.de/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi05tDq8-7cAhXNzKQKHbGpCdgQjRx6BAgBEAU&url=https%3A%2F%2Fwww.schobertechnologies.com%2Fcompany%2Flegal-information%2F&psig=AOvVaw3KNF_MityDTogyxHWhVC1h&ust=1534417249256255",
+        "previewImageURL": "/images/widgets/legal-information.svg",
         "type": "footer",
-        "position": 300,
+        "position": 1200,
         "widgetClass": "Ceres\\Widgets\\Footer\\LegalInformationWidget",
         "settings": {
             "showCancellationRights": {
@@ -1048,7 +837,7 @@
     {
         "identifier": "Ceres::FourColumnWidget",
         "label": "Widget.gridFourColumnLabel",
-        "previewImageURL": "/images/widgets/grid-4-col.png",
+        "previewImageURL": "/images/widgets/grid-4-col.svg",
         "type": "structure",
         "position": 300,
         "allowedNestingTypes": [
@@ -1060,7 +849,7 @@
     {
         "identifier": "Ceres::ThreeColumnWidget",
         "label": "Widget.gridThreeColumnLabel",
-        "previewImageURL": "/images/widgets/grid-3-col.png",
+        "previewImageURL": "/images/widgets/grid-3-col.svg",
         "type": "structure",
         "position": 200,
         "allowedNestingTypes": [
@@ -1114,7 +903,7 @@
     {
         "identifier": "Ceres::TwoColumnWidget",
         "label": "Widget.gridTwoColumnLabel",
-        "previewImageURL": "/images/widgets/grid-2-col.png",
+        "previewImageURL": "/images/widgets/grid-2-col.svg",
         "type": "structure",
         "position": 100,
         "allowedNestingTypes": [
@@ -1153,7 +942,7 @@
     {
         "identifier": "Ceres::BreadcrumbWidget",
         "label": "Widget.breadcrumbLabel",
-        "previewImageURL": "/images/widgets/title-bar.png",
+        "previewImageURL": "/images/widgets/breadcrumb.svg",
         "type": "header",
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",
@@ -1196,7 +985,7 @@
     {
         "identifier": "Ceres::NavigationWidget",
         "label": "Widget.navigationLabel",
-        "previewImageURL": "/images/widgets/title-bar.png",
+        "previewImageURL": "/images/widgets/navigation.svg",
         "type": "header",
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
@@ -1303,7 +1092,7 @@
     {
         "identifier": "Ceres::TopBarWidget",
         "label": "Widget.topBarLabel",
-        "previewImageURL": "/images/widgets/title-bar.png",
+        "previewImageURL": "/images/widgets/top-bar.svg",
         "type": "header",
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",

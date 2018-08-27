@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::BreadcrumbWidget",
     "label": "Widget.breadcrumbLabel",
-    "previewImageURL": "/images/widgets/title-bar.png",
+    "previewImageURL": "/images/widgets/breadcrumb.svg",
     "type": "header",
     "position": 0,
     "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",

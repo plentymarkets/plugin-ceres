@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::ItemListWidget",
     "label": "Widget.itemListLabel",
-    "previewImageURL": "/images/widgets/item-list.png",
+    "previewImageURL": "/images/widgets/item-list.svg",
     "type": "default",
     "position": 700,
     "allowedNestingTypes": [
@@ -11,13 +11,13 @@
     "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
     "settings": {
         "appearance": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.widgetAppearanceLabel",
+            "defaultValue": "primary",
             "options": {
+                "name": "Widget.widgetAppearanceLabel",
                 "tooltip": "Widget.widgetAppearanceTooltip",
-                "defaultValue": "primary",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "primary",
                         "caption": "Widget.widgetAppearancePrimary",
@@ -52,13 +52,13 @@
             }
         },
         "listType": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.itemListListTypeLabel",
+            "defaultValue": "category",
             "options": {
+                "name": "Widget.itemListListTypeLabel",
                 "tooltip": "Widget.itemListListTypeTooltip",
-                "defaultValue": "category",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "category",
                         "caption": "Widget.itemListListTypeCategory",
@@ -78,31 +78,33 @@
             }
         },
         "categoryId": {
-            "type": "categoryPicker",
+            "type": "category",
             "required": false,
-            "label": "Widget.itemListCategoryIdLabel",
+            "isVisible": "listType === 'category'",
+            "defaultValue": "",
             "options": {
-                "tooltip": "Widget.itemListCategoryIdTooltip",
-                "defaultValue": ""
+                "name": "Widget.itemListCategoryIdLabel",
+                "tooltip": "Widget.itemListCategoryIdTooltip"
             }
         },
         "tagId": {
-            "type": "inputNumber",
+            "type": "number",
             "required": false,
-            "label": "Widget.itemListTagIdLabel",
+            "isVisible": "listType === 'tag_list'",
+            "defaultValue": "",
             "options": {
-                "tooltip": "Widget.itemListTagIdTooltip",
-                "defaultValue": ""
+                "name": "Widget.itemListTagIdLabel",
+                "tooltip": "Widget.itemListTagIdTooltip"
             }
         },
         "itemSort": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.itemListItemSortLabel",
+            "defaultValue": "texts.name1_asc",
             "options": {
+                "name": "Widget.itemListItemSortLabel",
                 "tooltip": "Widget.itemListItemSortTooltip",
-                "defaultValue": "texts.name1_asc",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "default.recommended_sorting",
                         "caption": "Widget.itemRecommendedSorting",
@@ -177,17 +179,22 @@
                         "value": "item.manufacturer.externalName_desc",
                         "caption": "Widget.itemProducerName_desc",
                         "position": 14
+                    },
+                    {
+                        "value": "item.random",
+                        "caption": "Widget.itemRandom",
+                        "position": 15
                     }
                 ]
             }
         },
         "maxItems": {
-            "type": "inputNumber",
+            "type": "number",
             "required": true,
-            "label": "Widget.itemListMaxItemsLabel",
+            "defaultValue": "4",
             "options": {
-                "tooltip": "Widget.itemListMaxItemsTooltip",
-                "defaultValue": "4"
+                "name": "Widget.itemListMaxItemsLabel",
+                "tooltip": "Widget.itemListMaxItemsTooltip"
             }
         }
     }

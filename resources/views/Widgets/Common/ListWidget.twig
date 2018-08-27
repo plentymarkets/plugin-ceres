@@ -1,18 +1,10 @@
-{% set listEntries = [] %}
-
-{% for i in 1..5 %}
-    {% set entry = widget.settings["text" ~ i].mobile %}
-    {% if entry is not empty %}
-        {% set listEntries = listEntries | merge([entry]) %}
-    {% endif %}
-{% endfor %}
-
-{% set hasPlaceholder = listEntries | length <= 0 %}
+{% set hasPlaceholder = widget.settings.texts | length <= 0 %}
 
 <div class="widget widget-list{% if hasPlaceholder %} widget-placeholder{% endif %}">
     <div class="widget-inner">
         <div class="list-container">
-            {% for entry in listEntries %}
+            {# FIXME: Should be an ul/li-structure #}
+            {% for entry in widget.settings.texts.mobile %}
                 <div>
                     {% if widget.settings.icon.mobile != "none" %}
                         <i class="fa {{ widget.settings.icon.mobile }}" aria-hidden="true"></i>

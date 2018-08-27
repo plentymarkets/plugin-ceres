@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::TextWidget",
     "label": "Widget.textLabel",
-    "previewImageURL": "/images/widgets/text.png",
+    "previewImageURL": "/images/widgets/text.svg",
     "type": "default",
     "position": 800,
     "allowedNestingTypes": [

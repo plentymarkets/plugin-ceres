@@ -1,9 +1,9 @@
 {
     "identifier": "Ceres::SeparatorWidget",
     "label": "Widget.separatorLabel",
-    "previewImageURL": "https://www.formget.com/wp-content/uploads/2014/12/style-five.png",
+    "previewImageURL": "/images/widgets/separator.svg",
     "type": "default",
-    "position": 400,
+    "position": 1100,
     "widgetClass": "Ceres\\Widgets\\Common\\SeparatorWidget",
     "settings": {}
 }
