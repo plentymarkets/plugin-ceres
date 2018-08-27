@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::ItemListWidget",
     "label": "Widget.itemListLabel",
-    "previewImageURL": "/images/widgets/item-list.png",
+    "previewImageURL": "/images/widgets/item-list.svg",
     "type": "default",
     "position": 700,
     "allowedNestingTypes": [

@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::ThreeColumnWidget",
     "label": "Widget.gridThreeColumnLabel",
-    "previewImageURL": "/images/widgets/grid-3-col.png",
+    "previewImageURL": "/images/widgets/grid-3-col.svg",
     "type": "structure",
     "position": 200,
     "allowedNestingTypes": [

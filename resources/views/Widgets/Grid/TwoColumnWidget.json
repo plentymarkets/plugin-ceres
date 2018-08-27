@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::TwoColumnWidget",
     "label": "Widget.gridTwoColumnLabel",
-    "previewImageURL": "/images/widgets/grid-2-col.png",
+    "previewImageURL": "/images/widgets/grid-2-col.svg",
     "type": "structure",
     "position": 100,
     "allowedNestingTypes": [
