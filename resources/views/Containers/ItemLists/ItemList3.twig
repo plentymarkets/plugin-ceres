@@ -2,13 +2,12 @@
 
 {% set listType = config("Ceres.item.lists.3.list_type") %}
 {% set tagIds = config("Ceres.item.lists.3.tag_ids") | split(",") %}
+{% set tagSorting = config("Ceres.item.lists.tag_sorting") %}
 {% set itemListId = 3 %}
 {% set isHome = services.template.isHome() %}
 
 {% if listType == "cross_selling" %}
     {% set itemList = item.CrossSellingItems.documents %}
-{% elseif listType == "tag_list" %}
-	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
 {% endif %}
 
 {% if listType == "last_seen" %}

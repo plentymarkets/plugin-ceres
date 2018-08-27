@@ -5,7 +5,7 @@
 		display: none;
 	}
 
-	position: fixed;
+	position: absolute;
 	width: 100%;
 	
 	z-index: $zIndex-6;
@@ -17,6 +17,11 @@
 		color: $top-bar-color;
 		outline: none;
 	}
+
+	&.pos-f-t {
+		position: fixed;
+	}
+
 	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;

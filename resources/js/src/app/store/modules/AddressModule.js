@@ -1,4 +1,6 @@
 import ApiService from "services/ApiService";
+import NotificationService from "services/NotificationService";
+import TranslationService from "services/TranslationService";
 
 const state =
     {
@@ -39,6 +41,20 @@ const mutations =
                 {
                     state.billingAddressId = billingAddress.id;
                     state.billingAddress = billingAddress;
+                }
+            }
+        },
+
+        selectDeliveryAddressById(state, deliveryAddressId)
+        {
+            if (deliveryAddressId)
+            {
+                const deliveryAddress = state.deliveryAddressList.find(address => address.id === deliveryAddressId);
+
+                if (deliveryAddress)
+                {
+                    state.deliveryAddressId = deliveryAddress.id;
+                    state.deliveryAddress = deliveryAddress;
                 }
             }
         },
@@ -192,7 +208,7 @@ const actions =
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
         },
 
-        selectAddress({commit, state}, {selectedAddress, addressType})
+        selectAddress({commit, state, rootState, dispatch}, {selectedAddress, addressType})
         {
             return new Promise((resolve, reject) =>
             {
@@ -207,31 +223,42 @@ const actions =
                 {
                     oldAddress = state.deliveryAddress;
                     commit("selectDeliveryAddress", selectedAddress);
-                }
 
-                commit("setIsBasketLoading", true);
-
-                ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
-                    .done(response =>
+                    dispatch("checkAddressChangeValidity", {selectedAddress, addressType}).then(isAddressChangedAllowed =>
                     {
-                        commit("setIsBasketLoading", false);
-
-                        return resolve(response);
-                    })
-                    .fail(error =>
-                    {
-                        if (addressType === "1")
-                        {
-                            commit("selectBillingAddress", oldAddress);
-                        }
-                        else if (addressType === "2")
+                        if (!isAddressChangedAllowed)
                         {
                             commit("selectDeliveryAddress", oldAddress);
+                            NotificationService.error(TranslationService.translate("Ceres::Template.addressSelectedNotAllowed"));
                         }
+                        else
+                        {
+                            commit("setIsBasketLoading", true);
 
-                        commit("setIsBasketLoading", false);
-                        reject(error);
+                            ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
+                                .done(response =>
+                                {
+                                    commit("setIsBasketLoading", false);
+
+                                    return resolve(response);
+                                })
+                                .fail(error =>
+                                {
+                                    if (addressType === "1")
+                                    {
+                                        commit("selectBillingAddress", oldAddress);
+                                    }
+                                    else if (addressType === "2")
+                                    {
+                                        commit("selectDeliveryAddress", oldAddress);
+                                    }
+
+                                    commit("setIsBasketLoading", false);
+                                    reject(error);
+                                });
+                        }
                     });
+                }
             });
         },
 
@@ -279,7 +306,7 @@ const actions =
             });
         },
 
-        createAddress({commit}, {address, addressType})
+        createAddress({commit, dispatch}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
             {
@@ -293,6 +320,13 @@ const actions =
                         else if (addressType === "2")
                         {
                             commit("addDeliveryAddress", {deliveryAddress: response});
+
+                            // setTimeout 0 is required to prevent unactual data in the store before checking the validity of the shipping profile
+                            setTimeout(() =>
+                            {
+                                dispatch("checkAddressChangeValidity", {selectedAddress: response, addressType});
+                            }, 0);
+
                         }
 
                         resolve(response);
@@ -304,7 +338,7 @@ const actions =
             });
         },
 
-        updateAddress({commit}, {address, addressType})
+        updateAddress({commit, dispatch}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
             {
@@ -325,6 +359,8 @@ const actions =
                         else if (addressType === "2")
                         {
                             commit("updateDeliveryAddress", address);
+
+                            dispatch("checkAddressChangeValidity", {selectedAddress: response.data, addressType});
                         }
 
                         resolve(response);
@@ -334,6 +370,47 @@ const actions =
                         reject(error);
                     });
             });
+        },
+
+        checkAddressChangeValidity({commit, state, rootState, dispatch}, {selectedAddress, addressType})
+        {
+            const shippingProfileList = rootState.checkout.shipping.shippingProfileList;
+            const selectedShippingProfile = rootState.checkout.shipping.selectedShippingProfile;
+            const isPostOfficeAndParcelBoxActive = selectedShippingProfile.isPostOffice && selectedShippingProfile.isParcelBox;
+            const isAddressPostOffice = selectedAddress.address1 === "POSTFILIALE";
+            const isAddressParcelBox = selectedAddress.address1 === "PACKSTATION";
+
+            if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
+            {
+                const isUnsupportedPostOffice = isAddressPostOffice && !selectedShippingProfile.isPostOffice;
+                const isUnsupportedParcelBox = isAddressParcelBox && !selectedShippingProfile.isParcelBox;
+
+                if (isUnsupportedPostOffice || isUnsupportedParcelBox)
+                {
+                    let profileToSelect;
+
+                    if (isUnsupportedPostOffice)
+                    {
+                        profileToSelect = shippingProfileList.find(shipping => shipping.isPostOffice);
+                    }
+                    else
+                    {
+                        profileToSelect = shippingProfileList.find(shipping => shipping.isParcelBox);
+                    }
+
+                    if (profileToSelect)
+                    {
+                        dispatch("selectShippingProfile", profileToSelect);
+                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     };
 

@@ -10679,6 +10679,9 @@ a:active {
     border-radius: 0;
 }
 
+.position-fixed {
+    position: fixed !important;
+}
 body {
 
 	background-color: $gray-lightest;
@@ -12692,7 +12695,7 @@ $border-width: 1px;
 		display: none;
 	}
 
-	position: fixed;
+	position: absolute;
 	width: 100%;
 	
 	z-index: $zIndex-6;
@@ -12705,6 +12708,11 @@ $border-width: 1px;
 		color: $top-bar-color;
 		outline: none;
 	}
+
+	&.pos-f-t {
+		position: fixed;
+	}
+
 	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;
@@ -15023,6 +15031,8 @@ nav.navbar.megamenu {
 					.item-name {
 						font-weight: 700;
 						font-size: 80%;
+						overflow-wrap: break-word;
+    					word-wrap: break-word;
 					}
 		
 					.item-base-price {

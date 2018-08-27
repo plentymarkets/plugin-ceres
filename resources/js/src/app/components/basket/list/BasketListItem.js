@@ -1,5 +1,6 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
+import {isNullOrUndefined}from "../../../helper/utils";
 
 const NotificationService = require("services/NotificationService");
 
@@ -35,9 +36,21 @@ Vue.component("basket-list-item", {
 
         altText()
         {
-            const altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data);
+            const images = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+            const altText =  this.$options.filters.itemImageAlternativeText(images);
 
-            return altText;
+            if (altText)
+            {
+                return altText;
+            }
+
+            return this.itemName;
+
+        },
+
+        itemName()
+        {
+            return this.$options.filters.itemName(this.basketItem.variation.data);
         },
 
         isInputLocked()
@@ -59,7 +72,35 @@ Vue.component("basket-list-item", {
 
         itemTotalPrice()
         {
-            return this.basketItem.quantity * (this.basketItem.variation.data.prices.default.unitPrice.value + this.propertySurchargeSum);
+            let price = 0.00;
+
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            {
+                price = this.basketItem.price;
+            }
+            else
+            {
+                price = this.basketItem.variation.data.prices.default.unitPrice.value;
+            }
+            return this.basketItem.quantity * (price + this.propertySurchargeSum);
+        },
+        unitPrice()
+        {
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            {
+                return this.basketItem.price;
+            }
+
+            return this.basketItem.variation.data.prices.default.unitPrice.value;
+        },
+        basePrice()
+        {
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            {
+                return this.basketItem.variation.data.prices.specialOffer.basePrice;
+            }
+
+            return this.basketItem.variation.data.prices.default.basePrice;
         },
 
         ...Vuex.mapState({
