@@ -28,7 +28,9 @@
 {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
 {% if showHeadline == "default-caption" %}
     {% if listType == "category" %}
-        {{ Twig.set("title", "category.details[0].name") }}
+        {{ Twig.if("category") }}
+            {{ Twig.set("title", "category.details[0].name") }}
+        {{ Twig.endif() }}
     {% elseif listType == "last_seen" %}
         {{ Twig.set("title", "trans('Ceres::Template.itemListLastSeen')" ) }}
     {% elseif listType == "tag_list" and itemListId is not empty %}
@@ -37,25 +39,17 @@
         {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
     {% endif %}
 {% elseif showHeadline == "custom-caption" and headline | trim is not empty %}
-    {{ Twig.set("title", headline | json_encode ) }}
+    {{ Twig.set("title", "'#{ headline }'" ) }}
 {% endif %}
 
 <div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}">
-    <div>showHeadline: {{ showHeadline }}</div>
-    <div>Title: {{ Twig.print("title") }}</div>
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
             <last-seen-item-list>
-                {% if showHeadline == "default-caption" %}
-                    <div class="widget-caption m-b-1" slot="heading">
-                        <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
-                    </div>
-                {% elseif showHeadline == "custom-caption" and headline | trim is not empty %}
-                    <div class="widget-caption m-b-1" slot="heading">
-                        <h2>{{ headline }}</h2>
-                    </div>
-                {% endif %}
+                <div class="widget-caption m-b-1" slot="heading">
+                    <h2>{{ Twig.print("title") }}</h2>
+                </div>
             </last-seen-item-list>
         {% else %}
             {# render static item lists #}
