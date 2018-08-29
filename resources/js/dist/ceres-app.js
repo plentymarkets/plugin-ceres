@@ -23682,7 +23682,7 @@ var mutations = {
         if (billingAddress) {
             state.billingAddressId = billingAddress.id;
             state.billingAddress = billingAddress;
-            document.dispatchEvent(new CustomEvent("billingAddressChanged", billingAddress));
+            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
         }
     },
     selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
@@ -23694,20 +23694,20 @@ var mutations = {
             if (billingAddress) {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", billingAddress));
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
     selectDeliveryAddressById: function selectDeliveryAddressById(state, deliveryAddressId) {
         if (deliveryAddressId) {
-            var _deliveryAddress = state.deliveryAddressList.find(function (address) {
+            var deliveryAddress = state.deliveryAddressList.find(function (address) {
                 return address.id === deliveryAddressId;
             });
 
-            if (_deliveryAddress) {
-                state.deliveryAddressId = _deliveryAddress.id;
-                state.deliveryAddress = _deliveryAddress;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", _deliveryAddress));
+            if (deliveryAddress) {
+                state.deliveryAddressId = deliveryAddress.id;
+                state.deliveryAddress = deliveryAddress;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -23720,7 +23720,7 @@ var mutations = {
         if (deliveryAddress) {
             state.deliveryAddressId = deliveryAddress.id;
             state.deliveryAddress = deliveryAddress;
-            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", deliveryAddress));
+            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         }
     },
     removeBillingAddress: function removeBillingAddress(state, billingAddress) {
@@ -23762,7 +23762,7 @@ var mutations = {
                 state.billingAddressList.push(billingAddress);
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", billingAddress));
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -23777,7 +23777,7 @@ var mutations = {
                 state.deliveryAddressList.push(deliveryAddress);
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", deliveryAddress));
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -23793,7 +23793,7 @@ var mutations = {
 
             if (billingAddress.id === state.billingAddressId) {
                 state.billingAddress = billingAddress;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", billingAddress));
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -23809,7 +23809,7 @@ var mutations = {
 
             if (deliveryAddress.id === state.deliveryAddressId) {
                 state.deliveryAddress = deliveryAddress;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", deliveryAddress));
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -23823,7 +23823,7 @@ var mutations = {
             state.deliveryAddressList = [{ id: -99 }];
             state.deliveryAddress = state.deliveryAddressList[0];
             state.deliveryAddressId = state.deliveryAddressList[0].id;
-            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", deliveryAddress));
+            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         }
     }
 };
