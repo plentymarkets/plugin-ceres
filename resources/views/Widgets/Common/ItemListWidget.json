@@ -51,6 +51,42 @@
                 ]
             }
         },
+        "showHeadline": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "default-caption",
+            "options": {
+                "name": "Widget.imageBoxStyleLabel",
+                "tooltip": "Widget.imageBoxStyleTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "default-caption",
+                        "caption": "Widget.DEFAULT",
+                        "position": 0
+                    },
+                    {
+                        "value": "custom-caption",
+                        "caption": "Widget.CUSTOM",
+                        "position": 1
+                    },
+                    {
+                        "value": "no-caption",
+                        "caption": "Widget.NONE",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "headline": {
+            "type": "text",
+            "required": false,
+            "isVisible": "showHeadline === 'custom-caption'",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.imageBoxHeadlineLabel",
+                "tooltip": "Widget.imageBoxHeadlineTooltip"
+            }
+        },
         "listType": {
             "type": "select",
             "required": true,
