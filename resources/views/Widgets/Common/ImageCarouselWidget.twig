@@ -8,15 +8,20 @@
 
 {{ Twig.set("slides", "[]") }}
 
-{% for param in widget.settings.slides.mobile %}
+{% set slideData = widget.settings.slides.mobile %}
+{% if sliderParams is not empty %}
+    {% set slideData = sliderParams.mobile %}
+{% endif %}
+
+{% for slideSettings in slideData %}
 
     {{ Twig.set("slide", "{ }") }}
 
     {% set pushCurrentSlide = false %}
 
-    {% if param.categoryId | trim is not empty %}
+    {% if slideSettings.categoryId | trim is not empty %}
 
-        {{ Twig.set("category", Twig.call("services.category.get", [param.categoryId])) }}
+        {{ Twig.set("category", Twig.call("services.category.get", [slideSettings.categoryId])) }}
         {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"]) ) }}
 
         {{ Twig.set("slide", "slide | merge({ name: category.details[0].name })") }}
@@ -25,9 +30,9 @@
 
         {% set pushCurrentSlide = true %}
 
-    {% elseif param.variationId | trim is not empty %}
+    {% elseif slideSettings.variationId | trim is not empty %}
 
-        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [param.variationId])) }}
+        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [slideSettings.variationId])) }}
         {{ Twig.set("itemData", "itemData.documents[0].data") }}
         {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
 
@@ -43,17 +48,17 @@
 
     {% endif %}
 
-    {% if param.customImagePath | trim is not empty %}
+    {% if slideSettings.customImagePath | trim is not empty %}
 
-        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ param.customImagePath | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ slideSettings.customImagePath | json_encode } })") }}
 
         {% set pushCurrentSlide = true %}
 
     {% endif %}
 
-    {% if param.headline | trim is not empty %}
+    {% if slideSettings.headline | trim is not empty %}
 
-        {{ Twig.set("slide", "slide | merge({ name: #{ (param.headline | json_encode) } })") }}
+        {{ Twig.set("slide", "slide | merge({ name: '#{ (slideSettings.headline) }' })") }}
 
     {% endif %}
 
