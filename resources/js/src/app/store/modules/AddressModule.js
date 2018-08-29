@@ -28,6 +28,7 @@ const mutations =
             {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", billingAddress));
             }
         },
 
@@ -41,6 +42,7 @@ const mutations =
                 {
                     state.billingAddressId = billingAddress.id;
                     state.billingAddress = billingAddress;
+                    document.dispatchEvent(new CustomEvent("billingAddressChanged", billingAddress));
                 }
             }
         },
@@ -55,6 +57,7 @@ const mutations =
                 {
                     state.deliveryAddressId = deliveryAddress.id;
                     state.deliveryAddress = deliveryAddress;
+                    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", deliveryAddress));
                 }
             }
         },
@@ -73,6 +76,7 @@ const mutations =
             {
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", deliveryAddress));
             }
         },
 
@@ -88,6 +92,7 @@ const mutations =
                 {
                     state.billingAddress = null;
                     state.billingAddressId = null;
+                    document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
                 }
             }
         },
@@ -104,6 +109,7 @@ const mutations =
                 {
                     state.deliveryAddress = state.deliveryAddressList.find(address => address.id === -99);
                     state.deliveryAddressId = -99;
+                    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
                 }
             }
         },
@@ -121,6 +127,7 @@ const mutations =
                     state.billingAddressList.push(billingAddress);
                     state.billingAddressId = billingAddress.id;
                     state.billingAddress = billingAddress;
+                    document.dispatchEvent(new CustomEvent("billingAddressChanged", billingAddress));
                 }
             }
         },
@@ -138,6 +145,7 @@ const mutations =
                     state.deliveryAddressList.push(deliveryAddress);
                     state.deliveryAddressId = deliveryAddress.id;
                     state.deliveryAddress = deliveryAddress;
+                    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", deliveryAddress));
                 }
             }
         },
@@ -155,6 +163,7 @@ const mutations =
                 if (billingAddress.id === state.billingAddressId)
                 {
                     state.billingAddress = billingAddress;
+                    document.dispatchEvent(new CustomEvent("billingAddressChanged", billingAddress));
                 }
             }
         },
@@ -172,6 +181,7 @@ const mutations =
                 if (deliveryAddress.id === state.deliveryAddressId)
                 {
                     state.deliveryAddress = deliveryAddress;
+                    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", deliveryAddress));
                 }
 
             }
@@ -184,12 +194,14 @@ const mutations =
                 state.billingAddress = null;
                 state.billingAddressId = null;
                 state.billingAddressList = [];
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
             }
             else if (addressType === "2")
             {
                 state.deliveryAddressList = [{id: -99}];
                 state.deliveryAddress = state.deliveryAddressList[0];
                 state.deliveryAddressId = state.deliveryAddressList[0].id;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", deliveryAddress));
             }
         }
     };
@@ -239,7 +251,6 @@ const actions =
                                 .done(response =>
                                 {
                                     commit("setIsBasketLoading", false);
-
                                     return resolve(response);
                                 })
                                 .fail(error =>
