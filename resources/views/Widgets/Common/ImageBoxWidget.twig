@@ -20,6 +20,7 @@
     {{ Twig.set("name", "category.details[0].name") }}
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
+
     {{ Twig.if("imageUrl | trim is not empty") }}
         {{ Twig.set("imageUrl", "\"documents/\" ~ imageUrl") }}
     {{ Twig.endif() }}
@@ -41,7 +42,7 @@
 {% endif %}
 
 {% if style != "no-caption" and headline is not empty %}
-    {{ Twig.set("name", headline | json_encode) }}
+    {{ Twig.set("name", "'#{ headline }'") }}
 {% endif %}
 
 {{ Twig.if("name | trim is empty and imageUrl | trim is empty") }}
