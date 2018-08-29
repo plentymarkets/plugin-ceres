@@ -24043,7 +24043,6 @@ var mutations = {
         if (billingAddress) {
             state.billingAddressId = billingAddress.id;
             state.billingAddress = billingAddress;
-            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
         }
     },
     selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
@@ -24055,7 +24054,6 @@ var mutations = {
             if (billingAddress) {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -24068,7 +24066,6 @@ var mutations = {
             if (deliveryAddress) {
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -24081,7 +24078,6 @@ var mutations = {
         if (deliveryAddress) {
             state.deliveryAddressId = deliveryAddress.id;
             state.deliveryAddress = deliveryAddress;
-            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         }
     },
     removeBillingAddress: function removeBillingAddress(state, billingAddress) {
@@ -24093,7 +24089,6 @@ var mutations = {
             if (state.billingAddress === billingAddress) {
                 state.billingAddress = null;
                 state.billingAddressId = null;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
             }
         }
     },
@@ -24108,7 +24103,6 @@ var mutations = {
                     return address.id === -99;
                 });
                 state.deliveryAddressId = -99;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -24123,7 +24117,6 @@ var mutations = {
                 state.billingAddressList.push(billingAddress);
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -24138,7 +24131,6 @@ var mutations = {
                 state.deliveryAddressList.push(deliveryAddress);
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -24154,7 +24146,6 @@ var mutations = {
 
             if (billingAddress.id === state.billingAddressId) {
                 state.billingAddress = billingAddress;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -24170,7 +24161,6 @@ var mutations = {
 
             if (deliveryAddress.id === state.deliveryAddressId) {
                 state.deliveryAddress = deliveryAddress;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -24179,12 +24169,10 @@ var mutations = {
             state.billingAddress = null;
             state.billingAddressId = null;
             state.billingAddressList = [];
-            document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
         } else if (addressType === "2") {
             state.deliveryAddressList = [{ id: -99 }];
             state.deliveryAddress = state.deliveryAddressList[0];
             state.deliveryAddressId = state.deliveryAddressList[0].id;
-            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         }
     }
 };
@@ -24237,6 +24225,7 @@ var actions = {
 
                         _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
                             commit("setIsBasketLoading", false);
+
                             return resolve(response);
                         }).fail(function (error) {
                             if (addressType === "1") {
