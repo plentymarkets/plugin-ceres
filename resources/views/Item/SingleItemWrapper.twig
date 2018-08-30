@@ -4,7 +4,7 @@
 
 {% block PartialHead %}
     <meta name="description" content="{{ item.documents[0].data.texts.metaDescription }}">
-    <meta name="keywords" content="{{ item.documents[0].data.texts.keywords | json_encode }}">
+    <meta name="keywords" content="{{ item.documents[0].data.texts.keywords }}">
 
     <meta property="og:title" content="{{ ItemName.get(item.documents[0].data | itemName, item.documents[0].data.variation.bundleType) }}" />
     <meta property="og:type" content="article" />
