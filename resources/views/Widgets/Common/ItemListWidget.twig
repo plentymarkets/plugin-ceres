@@ -1,12 +1,12 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set showHeadline = widget.settings.showHeadline.mobile  %}
-{% set headline     = widget.settings.headline.mobile  %}
-{% set listType     = widget.settings.listType.mobile %}
-{% set itemSort     = widget.settings.itemSort.mobile %}
-{% set maxItems     = widget.settings.maxItems.mobile %}
-{% set categoryId   = widget.settings.categoryId.mobile %}
-{% set itemListId   = widget.settings.tagId.mobile %}
+{% set headlineStyle = widget.settings.headlineStyle.mobile  %}
+{% set headline      = widget.settings.headline.mobile  %}
+{% set listType      = widget.settings.listType.mobile %}
+{% set itemSort      = widget.settings.itemSort.mobile %}
+{% set maxItems      = widget.settings.maxItems.mobile %}
+{% set categoryId    = widget.settings.categoryId.mobile %}
+{% set itemListId    = widget.settings.tagId.mobile %}
 
 {% if listType == "category" %}
     {% set itemListId = categoryId %}
@@ -26,7 +26,7 @@
 {% endif %}
 
 {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
-{% if showHeadline == "default-caption" %}
+{% if headlineStyle == "default-caption" or headlineStyle is empty %}
     {% if listType == "category" %}
         {{ Twig.if("category") }}
             {{ Twig.set("title", "category.details[0].name") }}
@@ -38,7 +38,7 @@
     {% else %}
         {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
     {% endif %}
-{% elseif showHeadline == "custom-caption" and headline | trim is not empty %}
+{% elseif headlineStyle == "custom-caption" and headline | trim is not empty %}
     {{ Twig.set("title", "'#{ headline }'" ) }}
 {% endif %}
 
@@ -53,7 +53,7 @@
             </last-seen-item-list>
         {% else %}
             {# render static item lists #}
-            {% if showHeadline == "default-caption" or showHeadline == "custom-caption" %}
+            {% if headlineStyle == "default-caption" or headlineStyle == "custom-caption" or headlineStyle is empty %}
                 <div class="widget-caption m-b-1">
                     <h2>{{ Twig.print("title") }}</h2>
 

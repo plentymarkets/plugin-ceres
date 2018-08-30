@@ -51,27 +51,27 @@
                 ]
             }
         },
-        "showHeadline": {
+        "headlineStyle": {
             "type": "select",
             "required": true,
             "defaultValue": "default-caption",
             "options": {
-                "name": "Widget.imageBoxStyleLabel",
-                "tooltip": "Widget.imageBoxStyleTooltip",
+                "name": "Widget.itemListCaptionLabel",
+                "tooltip": "Widget.itemListCaptionTooltip",
                 "listBoxValues": [
                     {
                         "value": "default-caption",
-                        "caption": "Widget.DEFAULT",
+                        "caption": "Widget.itemListCaptionDefault",
                         "position": 0
                     },
                     {
                         "value": "custom-caption",
-                        "caption": "Widget.CUSTOM",
+                        "caption": "Widget.itemListCaptionCustom",
                         "position": 1
                     },
                     {
                         "value": "no-caption",
-                        "caption": "Widget.NONE",
+                        "caption": "Widget.itemListCaptionNoCaption",
                         "position": 2
                     }
                 ]
@@ -80,11 +80,11 @@
         "headline": {
             "type": "text",
             "required": false,
-            "isVisible": "showHeadline === 'custom-caption'",
+            "isVisible": "headlineStyle === 'custom-caption'",
             "defaultValue": "",
             "options": {
-                "name": "Widget.imageBoxHeadlineLabel",
-                "tooltip": "Widget.imageBoxHeadlineTooltip"
+                "name": "Widget.itemListHeadlineLabel",
+                "tooltip": "Widget.itemListHeadlineTooltip"
             }
         },
         "listType": {
