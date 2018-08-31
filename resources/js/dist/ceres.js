@@ -21579,7 +21579,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var formatter = new _MonetaryFormatter2.default();
 
 Vue.filter("currency", function (price) {
-    return formatter.format(price, App.activeCurrency);
+    return formatter.format(parseFloat(price).toFixed(2), App.activeCurrency);
 });
 
 },{"../helper/MonetaryFormatter":117}],102:[function(require,module,exports){
