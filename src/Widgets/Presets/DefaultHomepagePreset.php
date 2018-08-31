@@ -201,7 +201,7 @@ class DefaultHomepagePreset implements ContentPreset
         if ( $hasHomepageCategory5 )
         {
             $this->setupImageBoxWidget(
-                is_null($grid) ? $this->preset->createWidget("Ceres::ImageBoxWidget") : $grid->createChild("first", "Ceres::ImageBoxWidget"),
+                is_null($grid) ? $this->preset->createWidget("Ceres::ImageBoxWidget") : $grid->createChild("second", "Ceres::ImageBoxWidget"),
                 $this->ceresConfig->homepage->homepageCategory4,
                 0,
                 "",
