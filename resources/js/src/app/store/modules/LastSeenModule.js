@@ -48,13 +48,13 @@ const actions =
             return null;
         },
 
-        getLastSeenItems({commit})
+        getLastSeenItems({commit}, maxItems)
         {
             if (!state.isLastSeenItemsLoading)
             {
                 return new Promise((resolve, reject) =>
                 {
-                    const params = {items: App.config.itemLists.lastSeenNumber};
+                    const params = {items: maxItems || App.config.itemLists.lastSeenNumber};
 
                     commit("setIsLastSeenItemsLoading", true);
 
