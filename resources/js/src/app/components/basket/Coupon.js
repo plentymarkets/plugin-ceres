@@ -18,9 +18,10 @@ Vue.component("coupon", {
         };
     },
 
-    watch: {
+    watch:
+    {
         redeemedCouponCode: function(val)
-{
+        {
             this.couponCode = val;
         }
     },
