@@ -20,7 +20,7 @@ Vue.component("coupon", {
 
     watch:
     {
-        redeemedCouponCode: function(val)
+        redeemedCouponCode(val)
         {
             this.couponCode = val;
         }
