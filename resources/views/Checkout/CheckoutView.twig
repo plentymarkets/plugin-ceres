@@ -78,34 +78,34 @@
                                     {{ overrideAddressLists }}
                                 {% endif %}
                                 {% set overrideShippingProfiles = LayoutContainer.show("Ceres::Checkout.ShippingProfileList") %}
-                                {% if overrideShippingProfiles|trim is empty %}
-                                    <header class="m-b-1">
-                                        <h3>{{ trans("Ceres::Template.checkoutShippingProfile") }}</h3>
-                                    </header>
+                                <header class="m-b-1">
+                                    <h3>{{ trans("Ceres::Template.checkoutShippingProfile") }}</h3>
+                                </header>
 
-                                    {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingProfileList") }}
+                                {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingProfileList") }}
+                                {% if overrideShippingProfiles|trim is empty %}
                                     <div class="shipping-method-select">
                                         <shipping-profile-select template="#vue-shipping-profile-select"></shipping-profile-select>
                                     </div>
-                                    {{ LayoutContainer.show("Ceres::Checkout.AfterShippingProfileList") }}
                                 {% else %}
                                     {{ overrideShippingProfiles }}
                                 {% endif %}
+                                {{ LayoutContainer.show("Ceres::Checkout.AfterShippingProfileList") }}
 
                                 {% set overridePaymentList = LayoutContainer.show("Ceres::Checkout.PaymentList") %}
-                                {% if overridePaymentList|trim is empty %}
-                                    <header class="m-b-1">
-                                        <h3>{{ trans("Ceres::Template.checkoutPaymentMethod") }}</h3>
-                                    </header>
+                                <header class="m-b-1">
+                                    <h3>{{ trans("Ceres::Template.checkoutPaymentMethod") }}</h3>
+                                </header>
 
-                                    {{ LayoutContainer.show("Ceres::Checkout.BeforePaymentList") }}
+                                {{ LayoutContainer.show("Ceres::Checkout.BeforePaymentList") }}
+                                {% if overridePaymentList|trim is empty %}
                                     <div class="payment-method-select">
                                         <payment-provider-select template="#vue-payment-provider-select"></payment-provider-select>
                                     </div>
-                                    {{ LayoutContainer.show("Ceres::Checkout.AfterPaymentList") }}
                                 {% else %}
                                     {{ overridePaymentList }}
                                 {% endif %}
+                                {{ LayoutContainer.show("Ceres::Checkout.AfterPaymentList") }}
 
                                 <header>
                                     <h3>{{ trans("Ceres::Template.checkoutContactWish") }}</h3>
