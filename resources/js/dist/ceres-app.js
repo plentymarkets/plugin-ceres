@@ -14491,6 +14491,12 @@ Vue.component("coupon", {
     },
 
 
+    watch: {
+        redeemedCouponCode: function redeemedCouponCode(val) {
+            this.couponCode = val;
+        }
+    },
+
     computed: _extends({
         disabled: function disabled() {
             if (this.redeemedCouponCode) {
