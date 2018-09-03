@@ -58,6 +58,15 @@
                 "name": "Widget.imageCarouselSlide"
             },
             "children": {
+                "headline": {
+                    "type": "text",
+                    "required": false,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.imageCarouselHeadlineLabel",
+                        "tooltip": "Widget.imageCarouselHeadlineTooltip"
+                    }
+                },
                 "categoryId": {
                     "type": "category",
                     "required": false,
