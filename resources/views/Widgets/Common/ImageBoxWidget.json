@@ -11,13 +11,13 @@
     "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
     "settings": {
         "appearance": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.widgetAppearanceLabel",
+            "defaultValue": "primary",
             "options": {
+                "name": "Widget.widgetAppearanceLabel",
                 "tooltip": "Widget.widgetAppearanceTooltip",
-                "defaultValue": "primary",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "primary",
                         "caption": "Widget.widgetAppearancePrimary",
@@ -52,13 +52,13 @@
             }
         },
         "style": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.imageBoxStyleLabel",
+            "defaultValue": "block-caption",
             "options": {
+                "name": "Widget.imageBoxStyleLabel",
                 "tooltip": "Widget.imageBoxStyleTooltip",
-                "defaultValue": "block-caption",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "block-caption",
                         "caption": "Widget.imageBoxStyleBlockCaption",
@@ -82,14 +82,24 @@
                 ]
             }
         },
-        "imageSize": {
-            "type": "selectBox",
-            "required": true,
-            "label": "Widget.imageBoxImageSizeLabel",
+        "headline": {
+            "type": "text",
+            "required": false,
+            "isVisible": "style === 'block-caption' || style === 'inline-caption' || style === 'fullwidth'",
+            "defaultValue": "",
             "options": {
+                "name": "Widget.imageBoxHeadlineLabel",
+                "tooltip": "Widget.imageBoxHeadlineTooltip"
+            }
+        },
+        "imageSize": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "cover",
+            "options": {
+                "name": "Widget.imageBoxImageSizeLabel",
                 "tooltip": "Widget.imageBoxImageSizeTooltip",
-                "defaultValue": "cover",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "cover",
                         "caption": "Widget.imageBoxImageSizeCover",
@@ -104,30 +114,30 @@
             }
         },
         "categoryId": {
-            "type": "categoryPicker",
+            "type": "category",
             "required": false,
-            "label": "Widget.imageBoxCategoryIdLabel",
+            "defaultValue": "",
             "options": {
-                "tooltip": "Widget.imageBoxCategoryIdTooltip",
-                "defaultValue": ""
+                "name": "Widget.imageBoxCategoryIdLabel",
+                "tooltip": "Widget.imageBoxCategoryIdTooltip"
             }
         },
         "variationId": {
-            "type": "inputNumber",
+            "type": "number",
             "required": false,
-            "label": "Widget.imageBoxVariationIdLabel",
+            "defaultValue": "",
             "options": {
-                "tooltip": "Widget.imageBoxVariationIdTooltip",
-                "defaultValue": ""
+                "name": "Widget.imageBoxVariationIdLabel",
+                "tooltip": "Widget.imageBoxVariationIdTooltip"
             }
         },
         "customImagePath": {
-            "type": "inputFile",
+            "type": "file",
             "required": false,
-            "label": "Widget.imageBoxCustomImagePathLabel",
+            "defaultValue": "",
             "options": {
-                "tooltip": "Widget.imageBoxCustomImagePathTooltip",
-                "defaultValue": ""
+                "name": "Widget.imageBoxCustomImagePathLabel",
+                "tooltip": "Widget.imageBoxCustomImagePathTooltip"
             }
         }
     }
