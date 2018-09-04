@@ -20017,6 +20017,9 @@ body.menu-is-visible {
   .widget-grid-1-1-1 > .widget-inner .widget-proportional {
     padding-bottom: 66.6666%;
   }
+  .widget-grid-1-1-1-1 > .widget-inner .widget.widget-proportional {
+    padding-bottom: 100%;
+  }
   .widget-grid-1-2 > .widget-inner:last-child .widget-proportional,
   .widget-grid-2-1 > .widget-inner:first-child .widget-proportional,
   .widget-grid-2-1-1 > .widget-inner:first-child .widget-proportional,
@@ -20034,6 +20037,10 @@ body.menu-is-visible {
   .widget-grid-stacked .widget-inner-stacked .widget-proportional > .widget-inner .widget-caption h2, .widget-grid-stacked .widget-inner-stacked .widget-proportional > .widget-inner .widget-caption .h2 {
     font-size: 1.75rem;
   }
+}
+
+.widget-editable-min-height {
+  min-height: 40px;
 }
 
 .widget-grid {

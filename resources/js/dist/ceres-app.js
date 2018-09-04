@@ -19110,7 +19110,7 @@ Vue.component("item-store-special", {
     created: function created() {
 
         if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-            this.tagClass = this.tagClasses[this.storeSpecial.id];
+            this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
         } else {
             this.tagClass = this.tagClasses.default;
         }

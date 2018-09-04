@@ -12,13 +12,13 @@
         "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
         "settings": {
             "appearance": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.widgetAppearanceLabel",
+                "defaultValue": "primary",
                 "options": {
+                    "name": "Widget.widgetAppearanceLabel",
                     "tooltip": "Widget.widgetAppearanceTooltip",
-                    "defaultValue": "primary",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "primary",
                             "caption": "Widget.widgetAppearancePrimary",
@@ -53,13 +53,13 @@
                 }
             },
             "style": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.imageBoxStyleLabel",
+                "defaultValue": "block-caption",
                 "options": {
+                    "name": "Widget.imageBoxStyleLabel",
                     "tooltip": "Widget.imageBoxStyleTooltip",
-                    "defaultValue": "block-caption",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "block-caption",
                             "caption": "Widget.imageBoxStyleBlockCaption",
@@ -83,14 +83,24 @@
                     ]
                 }
             },
-            "imageSize": {
-                "type": "selectBox",
-                "required": true,
-                "label": "Widget.imageBoxImageSizeLabel",
+            "headline": {
+                "type": "text",
+                "required": false,
+                "isVisible": "style === 'block-caption' || style === 'inline-caption' || style === 'fullwidth'",
+                "defaultValue": "",
                 "options": {
+                    "name": "Widget.imageBoxHeadlineLabel",
+                    "tooltip": "Widget.imageBoxHeadlineTooltip"
+                }
+            },
+            "imageSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "cover",
+                "options": {
+                    "name": "Widget.imageBoxImageSizeLabel",
                     "tooltip": "Widget.imageBoxImageSizeTooltip",
-                    "defaultValue": "cover",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "cover",
                             "caption": "Widget.imageBoxImageSizeCover",
@@ -105,30 +115,30 @@
                 }
             },
             "categoryId": {
-                "type": "categoryPicker",
+                "type": "category",
                 "required": false,
-                "label": "Widget.imageBoxCategoryIdLabel",
+                "defaultValue": "",
                 "options": {
-                    "tooltip": "Widget.imageBoxCategoryIdTooltip",
-                    "defaultValue": ""
+                    "name": "Widget.imageBoxCategoryIdLabel",
+                    "tooltip": "Widget.imageBoxCategoryIdTooltip"
                 }
             },
             "variationId": {
-                "type": "inputNumber",
+                "type": "number",
                 "required": false,
-                "label": "Widget.imageBoxVariationIdLabel",
+                "defaultValue": "",
                 "options": {
-                    "tooltip": "Widget.imageBoxVariationIdTooltip",
-                    "defaultValue": ""
+                    "name": "Widget.imageBoxVariationIdLabel",
+                    "tooltip": "Widget.imageBoxVariationIdTooltip"
                 }
             },
             "customImagePath": {
-                "type": "inputFile",
+                "type": "file",
                 "required": false,
-                "label": "Widget.imageBoxCustomImagePathLabel",
+                "defaultValue": "",
                 "options": {
-                    "tooltip": "Widget.imageBoxCustomImagePathTooltip",
-                    "defaultValue": ""
+                    "name": "Widget.imageBoxCustomImagePathLabel",
+                    "tooltip": "Widget.imageBoxCustomImagePathTooltip"
                 }
             }
         }
@@ -193,6 +203,15 @@
                     "name": "Widget.imageCarouselSlide"
                 },
                 "children": {
+                    "headline": {
+                        "type": "text",
+                        "required": false,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.imageCarouselHeadlineLabel",
+                            "tooltip": "Widget.imageCarouselHeadlineTooltip"
+                        }
+                    },
                     "categoryId": {
                         "type": "category",
                         "required": false,
@@ -275,6 +294,42 @@
                             "position": 5
                         }
                     ]
+                }
+            },
+            "headlineStyle": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "default-caption",
+                "options": {
+                    "name": "Widget.itemListCaptionLabel",
+                    "tooltip": "Widget.itemListCaptionTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "default-caption",
+                            "caption": "Widget.itemListCaptionDefault",
+                            "position": 0
+                        },
+                        {
+                            "value": "custom-caption",
+                            "caption": "Widget.itemListCaptionCustom",
+                            "position": 1
+                        },
+                        {
+                            "value": "no-caption",
+                            "caption": "Widget.itemListCaptionNoCaption",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
+            "headline": {
+                "type": "text",
+                "required": false,
+                "isVisible": "headlineStyle === 'custom-caption'",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.itemListHeadlineLabel",
+                    "tooltip": "Widget.itemListHeadlineTooltip"
                 }
             },
             "listType": {

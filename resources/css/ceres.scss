@@ -12694,6 +12694,8 @@ $border-width: 1px;
 
 .top-bar{
 
+
+
 	@media print {
 		display: none;
 	}
@@ -12997,7 +12999,11 @@ $border-width: 1px;
 	}
 
 	#page-header {
-		background:$navbar-background-color;
+		background-color:$navbar-background-color;
+
+		&.top-bar {
+			background-color: $top-bar-bg;
+		}
 	}
 
 	.navbar{
@@ -18822,6 +18828,11 @@ nav.navbar.megamenu {
     {
         padding-bottom: 66.6666%;
     }
+    
+    .widget-grid-1-1-1-1 > .widget-inner .widget.widget-proportional
+    {
+        padding-bottom: 100%;
+    }
 
     .widget-grid-1-2 > .widget-inner:last-child .widget-proportional,
     .widget-grid-2-1 > .widget-inner:first-child .widget-proportional,
@@ -18853,6 +18864,10 @@ nav.navbar.megamenu {
             }
         }
     }
+}
+
+.widget-editable-min-height {
+    min-height: 40px;
 }
 
 .widget-grid
