@@ -19522,9 +19522,12 @@ nav.navbar.megamenu {
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
+            padding: 0;
+            list-style: none;
         }
     }
 }
+
 .widget-link-list {
     .widget-inner {
         padding: 15px 15px 0 15px;

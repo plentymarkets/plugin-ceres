@@ -203,9 +203,36 @@
                     "name": "Widget.imageCarouselSlide"
                 },
                 "children": {
+                    "headlineStyle": {
+                        "type": "select",
+                        "required": true,
+                        "defaultValue": "default-caption",
+                        "options": {
+                            "name": "Widget.imageCarouselCaptionLabel",
+                            "tooltip": "Widget.imageCarouselCaptionTooltip",
+                            "listBoxValues": [
+                                {
+                                    "value": "default-caption",
+                                    "caption": "Widget.imageCarouselCaptionDefault",
+                                    "position": 0
+                                },
+                                {
+                                    "value": "custom-caption",
+                                    "caption": "Widget.imageCarouselCaptionCustom",
+                                    "position": 1
+                                },
+                                {
+                                    "value": "no-caption",
+                                    "caption": "Widget.imageCarouselCaptionNoCaption",
+                                    "position": 2
+                                }
+                            ]
+                        }
+                    },
                     "headline": {
                         "type": "text",
                         "required": false,
+                        "isVisible": "$slides.headlineStyle === 'custom-caption'",
                         "defaultValue": "",
                         "options": {
                             "name": "Widget.imageCarouselHeadlineLabel",
@@ -668,6 +695,7 @@
             "texts": {
                 "type": "text",
                 "required": false,
+                "defaultValue": "",
                 "isList": "[1,]",
                 "options": {
                     "name": "Widget.listTextLabel",
