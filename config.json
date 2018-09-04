@@ -3669,7 +3669,7 @@
                     "required": false,
                     "label": "Config.logDataLabel",
                     "options": {
-                        "defaultValue": "print_errors, print_success",
+                        "defaultValue": "print_errors, print_success, print_warnings",
                         "checkBoxValues": [
                             {
                                 "value": "print_errors",
