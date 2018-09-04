@@ -75,6 +75,7 @@
         "texts": {
             "type": "text",
             "required": false,
+            "defaultValue": "",
             "isList": "[1,]",
             "options": {
                 "name": "Widget.listTextLabel",
