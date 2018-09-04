@@ -15,7 +15,7 @@
 
 {% for slideSettings in slideData %}
 
-    {{ Twig.set("slide", "{ }") }}
+    {{ Twig.set("slide", "{ headlineStyle: '#{ slideSettings.headlineStyle }' }") }}
 
     {% set pushCurrentSlide = false %}
 
@@ -56,7 +56,7 @@
 
     {% endif %}
 
-    {% if slideSettings.headline | trim is not empty %}
+    {% if slideSettings.headline | trim is not empty and slideSettings.headlineStyle == "custom-caption" %}
 
         {{ Twig.set("slide", "slide | merge({ name: '#{ (slideSettings.headline) }' })") }}
 
@@ -85,7 +85,7 @@
                         <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" class="img-cover">
                     {{ Twig.endif() }}
 
-                    {{ Twig.if("slide.name is not empty") }}
+                    {{ Twig.if("slide.name is not empty and slide.headlineStyle != 'no-caption'") }}
                     <div class="widget-caption">
                         <h2>
                             <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("slide.name") }}
