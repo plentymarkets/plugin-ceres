@@ -201,7 +201,7 @@ class DefaultHomepagePreset implements ContentPreset
         if ( $hasHomepageCategory5 )
         {
             $this->setupImageBoxWidget(
-                is_null($grid) ? $this->preset->createWidget("Ceres::ImageBoxWidget") : $grid->createChild("first", "Ceres::ImageBoxWidget"),
+                is_null($grid) ? $this->preset->createWidget("Ceres::ImageBoxWidget") : $grid->createChild("second", "Ceres::ImageBoxWidget"),
                 $this->ceresConfig->homepage->homepageCategory4,
                 0,
                 "",
@@ -225,17 +225,27 @@ class DefaultHomepagePreset implements ContentPreset
 
     private function setupSliderWidget($widget)
     {
+        $slides = [
+            [
+                "categoryId" => "",
+                "variationId" => $this->ceresConfig->homepage->sliderItemId1,
+                "customImagePath" => $this->ceresConfig->homepage->sliderImageUrl1
+            ],
+            [
+                "categoryId" => "",
+                "variationId" => $this->ceresConfig->homepage->sliderItemId2,
+                "customImagePath" => $this->ceresConfig->homepage->sliderImageUrl2
+            ],
+            [
+                "categoryId" => "",
+                "variationId" => $this->ceresConfig->homepage->sliderItemId3,
+                "customImagePath" => $this->ceresConfig->homepage->sliderImageUrl3
+            ]
+        ];
+
         $widget
             ->withSetting("appearance", "primary")
-            ->withSetting("slide1.categoryId", "")
-            ->withSetting("slide1.variationId", $this->ceresConfig->homepage->sliderItemId1)
-            ->withSetting("slide1.customImagePath", $this->ceresConfig->homepage->sliderImageUrl1)
-            ->withSetting("slide2.categoryId", "")
-            ->withSetting("slide2.variationId", $this->ceresConfig->homepage->sliderItemId2)
-            ->withSetting("slide2.customImagePath", $this->ceresConfig->homepage->sliderImageUrl2)
-            ->withSetting("slide3.categoryId", "")
-            ->withSetting("slide3.variationId", $this->ceresConfig->homepage->sliderItemId3)
-            ->withSetting("slide3.customImagePath", $this->ceresConfig->homepage->sliderImageUrl3);
+            ->withSetting("slides", $slides);
     }
 
     /**
