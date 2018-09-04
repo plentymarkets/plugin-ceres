@@ -136,6 +136,7 @@
         "itemSort": {
             "type": "select",
             "required": true,
+            "isVisible": "listType !== 'last_seen'",
             "defaultValue": "texts.name1_asc",
             "options": {
                 "name": "Widget.itemListItemSortLabel",
