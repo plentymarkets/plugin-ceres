@@ -27,7 +27,7 @@
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
-            <last-seen-item-list max-items="{{ maxItems }}">
+            <last-seen-item-list :max-items="{{ maxItems }}">
                 <div class="widget-caption m-b-1" slot="heading">
                     <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
                 </div>
