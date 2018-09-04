@@ -15468,6 +15468,11 @@ Vue.component("last-seen-item-list", {
         template: {
             type: String,
             default: "#vue-last-seen-item-list"
+        },
+
+        maxItems: {
+            type: Number,
+            default: App.config.itemLists.lastSeenNumber || 4
         }
     },
 
@@ -15481,7 +15486,7 @@ Vue.component("last-seen-item-list", {
         this.$options.template = this.template;
     },
     beforeMount: function beforeMount() {
-        this.$store.dispatch("getLastSeenItems");
+        this.$store.dispatch("getLastSeenItems", this.maxItems);
     }
 });
 
@@ -24727,12 +24732,12 @@ var actions = {
 
         return null;
     },
-    getLastSeenItems: function getLastSeenItems(_ref2) {
+    getLastSeenItems: function getLastSeenItems(_ref2, maxItems) {
         var commit = _ref2.commit;
 
         if (!state.isLastSeenItemsLoading) {
             return new Promise(function (resolve, reject) {
-                var params = { items: App.config.itemLists.lastSeenNumber };
+                var params = { items: maxItems || App.config.itemLists.lastSeenNumber };
 
                 commit("setIsLastSeenItemsLoading", true);
 
