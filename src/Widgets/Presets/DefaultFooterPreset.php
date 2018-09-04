@@ -92,7 +92,7 @@ class DefaultFooterPreset implements ContentPreset
                 $listGridPreset
                     ->createChild($this->gridDropzoneNames[$i], "Ceres::ListWidget")
                     ->withSetting("icon", "fa-check")
-                    ->withSetting("text1", $storeFeatureTranslation);
+                    ->withSetting("texts", [$storeFeatureTranslation]);
             }
         }
     }
@@ -122,20 +122,24 @@ class DefaultFooterPreset implements ContentPreset
                 ->withSetting("icon", "none");
 
             $categoryIds = $this->patternFilter->findPattern($configuredCategories[$i], "[0-9]+");
+            $entries = [];
             foreach ($categoryIds as $key=>$categoryId)
             {
-                $entryKey = "entry" . ($key + 1);
                 $category = $this->categoryService->get($categoryId);
 
-                if($category instanceof Category && $category->details[0] !== null)
+                if ($category instanceof Category && $category->details[0] !== null)
                 {
                     $categoryName = $category->details[0]->name;
                     $categoryUrl = $this->categoryService->getURL($category);
 
-                    $linkListPreset->withSetting($entryKey . ".name", $categoryName)
-                        ->withSetting($entryKey . ".url", $categoryUrl);
+                    $entries[] = [
+                        "text" => $categoryName,
+                        "url"  => $categoryUrl
+                    ];
                 }
             }
+
+            $linkListPreset->withSetting("entries", $entries);            
         }
     }
 
