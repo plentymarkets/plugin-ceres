@@ -12694,13 +12694,10 @@ $border-width: 1px;
 
 .top-bar{
 
-
-
 	@media print {
 		display: none;
 	}
 	width: 100%;
-	position: fixed;
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;

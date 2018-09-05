@@ -14461,7 +14461,6 @@ Custom classes
 
 .top-bar {
   width: 100%;
-  position: fixed;
   z-index: 1060;
   color: #fff;
   background-color: #4D4F4D;
