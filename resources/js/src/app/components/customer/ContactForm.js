@@ -56,7 +56,7 @@ Vue.component("contact-form", {
                         this.privacyPolicyShowError = true;
 
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactCheckEntries")
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy")
                         );
                     }
                 })
@@ -67,11 +67,19 @@ Vue.component("contact-form", {
                     if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
                     {
                         this.privacyPolicyShowError = true;
+
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy")
+                        );
                     }
 
-                    NotificationService.error(
-                        TranslationService.translate("Ceres::Template.contactCheckEntries")
-                    );
+                    for (const invalidField of invalidFields)
+                    {
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template." + this._mapInvalidField(invalidField.dataset.model))
+                        );
+                    }
+
                 });
         },
 
@@ -138,6 +146,17 @@ Vue.component("contact-form", {
             }
 
             NotificationService.error(errorMessage);
+        },
+
+        _mapInvalidField(invalidFieldDatasetModel)
+        {
+            switch (invalidFieldDatasetModel)
+            {
+            case "userMail": return "contactEnterConfirmEmail";
+            case "subject": return "contactEditSubject";
+            case "message": return "contactEditMessage";
+            default: return "contactCheckEntries";
+            }
         },
 
         privacyPolicyValueChanged(value)
