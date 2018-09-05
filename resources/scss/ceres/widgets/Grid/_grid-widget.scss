@@ -8,14 +8,14 @@
         display: flex;
     }
 
-    > .widget-inner
+    .widget-inner
     {
         padding-left: 15px;
         padding-right: 15px;
         flex: 1;
     }
 
-    > .widget-inner-stacked
+    .widget-inner-stacked
     {
         margin-left: -15px;
         margin-right: -15px;
