@@ -57,7 +57,7 @@ function parseUserAgent(userAgentString) {
     detected = detected || {};
     detected.bot = true;
   }
-  
+
   return detected;
 }
 
@@ -68,6 +68,7 @@ function getBrowserRules() {
     [ 'yandexbrowser', /YaBrowser\/([0-9\._]+)/ ],
     [ 'vivaldi', /Vivaldi\/([0-9\.]+)/ ],
     [ 'kakaotalk', /KAKAOTALK\s([0-9\.]+)/ ],
+    [ 'samsung', /SamsungBrowser\/([0-9\.]+)/ ],
     [ 'chrome', /(?!Chrom.*OPR)Chrom(?:e|ium)\/([0-9\.]+)(:?\s|$)/ ],
     [ 'phantomjs', /PhantomJS\/([0-9\.]+)(:?\s|$)/ ],
     [ 'crios', /CriOS\/([0-9\.]+)(:?\s|$)/ ],
@@ -83,7 +84,8 @@ function getBrowserRules() {
     [ 'ios', /Version\/([0-9\._]+).*Mobile.*Safari.*/ ],
     [ 'safari', /Version\/([0-9\._]+).*Safari/ ],
     [ 'facebook', /FBAV\/([0-9\.]+)/],
-    [ 'instagram', /Instagram\ ([0-9\.]+)/]
+    [ 'instagram', /Instagram\ ([0-9\.]+)/],
+    [ 'ios-webview', /AppleWebKit\/([0-9\.]+).*Mobile/]
   ]);
 }
 
@@ -135,7 +137,32 @@ module.exports = {
 
 }).call(this,require('_process'))
 
-},{"_process":5,"os":3}],2:[function(require,module,exports){
+},{"_process":6,"os":4}],2:[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+},{}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -10501,7 +10528,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -10552,11 +10579,11 @@ exports.homedir = function () {
 	return '/'
 };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.3
+ * @version 1.14.4
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -10899,10 +10926,10 @@ function getBordersSize(styles, axis) {
 }
 
 function getSize(axis, body, html, computedStyle) {
-  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
+  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? parseInt(html['offset' + axis]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]) : 0);
 }
 
-function getWindowSizes() {
+function getWindowSizes(document) {
   var body = document.body;
   var html = document.documentElement;
   var computedStyle = isIE(10) && getComputedStyle(html);
@@ -11019,7 +11046,7 @@ function getBoundingClientRect(element) {
   };
 
   // subtract scrollbar size from sizes
-  var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
+  var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
   var width = sizes.width || element.clientWidth || result.right - result.left;
   var height = sizes.height || element.clientHeight || result.bottom - result.top;
 
@@ -11054,7 +11081,7 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
-  if (fixedPosition && parent.nodeName === 'HTML') {
+  if (fixedPosition && isHTML) {
     parentRect.top = Math.max(parentRect.top, 0);
     parentRect.left = Math.max(parentRect.left, 0);
   }
@@ -11192,7 +11219,7 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
 
     // In case of HTML, we need a different computation
     if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-      var _getWindowSizes = getWindowSizes(),
+      var _getWindowSizes = getWindowSizes(popper.ownerDocument),
           height = _getWindowSizes.height,
           width = _getWindowSizes.width;
 
@@ -11207,10 +11234,12 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
   }
 
   // Add paddings
-  boundaries.left += padding;
-  boundaries.top += padding;
-  boundaries.right -= padding;
-  boundaries.bottom -= padding;
+  padding = padding || 0;
+  var isPaddingNumber = typeof padding === 'number';
+  boundaries.left += isPaddingNumber ? padding : padding.left || 0;
+  boundaries.top += isPaddingNumber ? padding : padding.top || 0;
+  boundaries.right -= isPaddingNumber ? padding : padding.right || 0;
+  boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0;
 
   return boundaries;
 }
@@ -11535,7 +11564,7 @@ function getSupportedPropertyName(property) {
 }
 
 /**
- * Destroy the popper
+ * Destroys the popper.
  * @method
  * @memberof Popper
  */
@@ -11642,7 +11671,7 @@ function removeEventListeners(reference, state) {
 
 /**
  * It will remove resize/scroll events and won't recalculate popper position
- * when they are triggered. It also won't trigger onUpdate callback anymore,
+ * when they are triggered. It also won't trigger `onUpdate` callback anymore,
  * unless you call `update` method manually.
  * @method
  * @memberof Popper
@@ -11819,12 +11848,22 @@ function computeStyle(data, options) {
   var left = void 0,
       top = void 0;
   if (sideA === 'bottom') {
-    top = -offsetParentRect.height + offsets.bottom;
+    // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
+    // and not the bottom of the html element
+    if (offsetParent.nodeName === 'HTML') {
+      top = -offsetParent.clientHeight + offsets.bottom;
+    } else {
+      top = -offsetParentRect.height + offsets.bottom;
+    }
   } else {
     top = offsets.top;
   }
   if (sideB === 'right') {
-    left = -offsetParentRect.width + offsets.right;
+    if (offsetParent.nodeName === 'HTML') {
+      left = -offsetParent.clientWidth + offsets.right;
+    } else {
+      left = -offsetParentRect.width + offsets.right;
+    }
   } else {
     left = offsets.left;
   }
@@ -11933,7 +11972,7 @@ function arrow(data, options) {
 
   //
   // extends keepTogether behavior making sure the popper and its
-  // reference have enough pixels in conjuction
+  // reference have enough pixels in conjunction
   //
 
   // top/left side
@@ -12003,7 +12042,7 @@ function getOppositeVariation(variation) {
  * - `top-end` (on top of reference, right aligned)
  * - `right-start` (on right of reference, top aligned)
  * - `bottom` (on bottom, centered)
- * - `auto-right` (on the side with more space available, alignment depends by placement)
+ * - `auto-end` (on the side with more space available, alignment depends by placement)
  *
  * @static
  * @type {Array}
@@ -12545,7 +12584,7 @@ var modifiers = {
    * The `offset` modifier can shift your popper on both its axis.
    *
    * It accepts the following units:
-   * - `px` or unitless, interpreted as pixels
+   * - `px` or unit-less, interpreted as pixels
    * - `%` or `%r`, percentage relative to the length of the reference element
    * - `%p`, percentage relative to the length of the popper element
    * - `vw`, CSS viewport width unit
@@ -12553,7 +12592,7 @@ var modifiers = {
    *
    * For length is intended the main axis relative to the placement of the popper.<br />
    * This means that if the placement is `top` or `bottom`, the length will be the
-   * `width`. In case of `left` or `right`, it will be the height.
+   * `width`. In case of `left` or `right`, it will be the `height`.
    *
    * You can provide a single value (as `Number` or `String`), or a pair of values
    * as `String` divided by a comma or one (or more) white spaces.<br />
@@ -12574,7 +12613,7 @@ var modifiers = {
    * ```
    * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
    * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-   * > More on this [reading this issue](https://github.com/FezVrasta/popper.js/issues/373)
+   * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).
    *
    * @memberof modifiers
    * @inner
@@ -12595,7 +12634,7 @@ var modifiers = {
   /**
    * Modifier used to prevent the popper from being positioned outside the boundary.
    *
-   * An scenario exists where the reference itself is not within the boundaries.<br />
+   * A scenario exists where the reference itself is not within the boundaries.<br />
    * We can say it has "escaped the boundaries" — or just "escaped".<br />
    * In this case we need to decide whether the popper should either:
    *
@@ -12625,23 +12664,23 @@ var modifiers = {
     /**
      * @prop {number} padding=5
      * Amount of pixel used to define a minimum distance between the boundaries
-     * and the popper this makes sure the popper has always a little padding
+     * and the popper. This makes sure the popper always has a little padding
      * between the edges of its container
      */
     padding: 5,
     /**
      * @prop {String|HTMLElement} boundariesElement='scrollParent'
-     * Boundaries used by the modifier, can be `scrollParent`, `window`,
+     * Boundaries used by the modifier. Can be `scrollParent`, `window`,
      * `viewport` or any DOM element.
      */
     boundariesElement: 'scrollParent'
   },
 
   /**
-   * Modifier used to make sure the reference and its popper stay near eachothers
-   * without leaving any gap between the two. Expecially useful when the arrow is
-   * enabled and you want to assure it to point to its reference element.
-   * It cares only about the first axis, you can still have poppers with margin
+   * Modifier used to make sure the reference and its popper stay near each other
+   * without leaving any gap between the two. Especially useful when the arrow is
+   * enabled and you want to ensure that it points to its reference element.
+   * It cares only about the first axis. You can still have poppers with margin
    * between the popper and its reference element.
    * @memberof modifiers
    * @inner
@@ -12659,7 +12698,7 @@ var modifiers = {
    * This modifier is used to move the `arrowElement` of the popper to make
    * sure it is positioned between the reference element and its popper element.
    * It will read the outer size of the `arrowElement` node to detect how many
-   * pixels of conjuction are needed.
+   * pixels of conjunction are needed.
    *
    * It has no effect if no `arrowElement` is provided.
    * @memberof modifiers
@@ -12698,7 +12737,7 @@ var modifiers = {
      * @prop {String|Array} behavior='flip'
      * The behavior used to change the popper's placement. It can be one of
      * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-     * placements (with optional variations).
+     * placements (with optional variations)
      */
     behavior: 'flip',
     /**
@@ -12708,9 +12747,9 @@ var modifiers = {
     padding: 5,
     /**
      * @prop {String|HTMLElement} boundariesElement='viewport'
-     * The element which will define the boundaries of the popper position,
-     * the popper will never be placed outside of the defined boundaries
-     * (except if keepTogether is enabled)
+     * The element which will define the boundaries of the popper position.
+     * The popper will never be placed outside of the defined boundaries
+     * (except if `keepTogether` is enabled)
      */
     boundariesElement: 'viewport'
   },
@@ -12774,8 +12813,8 @@ var modifiers = {
     fn: computeStyle,
     /**
      * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
      */
     gpuAcceleration: true,
     /**
@@ -12802,7 +12841,7 @@ var modifiers = {
    * Note that if you disable this modifier, you must make sure the popper element
    * has its position set to `absolute` before Popper.js can do its work!
    *
-   * Just disable this modifier and define you own to achieve the desired effect.
+   * Just disable this modifier and define your own to achieve the desired effect.
    *
    * @memberof modifiers
    * @inner
@@ -12819,27 +12858,27 @@ var modifiers = {
     /**
      * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
      * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
      */
     gpuAcceleration: undefined
   }
 };
 
 /**
- * The `dataObject` is an object containing all the informations used by Popper.js
- * this object get passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
+ * The `dataObject` is an object containing all the information used by Popper.js.
+ * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
  * @name dataObject
  * @property {Object} data.instance The Popper.js instance
  * @property {String} data.placement Placement applied to popper
  * @property {String} data.originalPlacement Placement originally defined on init
  * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
- * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper.
+ * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
  * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
- * @property {Object} data.styles Any CSS property defined here will be applied to the popper, it expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow, it expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
  * @property {Object} data.boundaries Offsets of the popper boundaries
- * @property {Object} data.offsets The measurements of popper, reference and arrow elements.
+ * @property {Object} data.offsets The measurements of popper, reference and arrow elements
  * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
  * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
  * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
@@ -12847,9 +12886,9 @@ var modifiers = {
 
 /**
  * Default options provided to Popper.js constructor.<br />
- * These can be overriden using the `options` argument of Popper.js.<br />
- * To override an option, simply pass as 3rd argument an object with the same
- * structure of this object, example:
+ * These can be overridden using the `options` argument of Popper.js.<br />
+ * To override an option, simply pass an object with the same
+ * structure of the `options` object, as the 3rd argument. For example:
  * ```
  * new Popper(ref, pop, {
  *   modifiers: {
@@ -12863,7 +12902,7 @@ var modifiers = {
  */
 var Defaults = {
   /**
-   * Popper's placement
+   * Popper's placement.
    * @prop {Popper.placements} placement='bottom'
    */
   placement: 'bottom',
@@ -12875,7 +12914,7 @@ var Defaults = {
   positionFixed: false,
 
   /**
-   * Whether events (resize, scroll) are initially enabled
+   * Whether events (resize, scroll) are initially enabled.
    * @prop {Boolean} eventsEnabled=true
    */
   eventsEnabled: true,
@@ -12889,17 +12928,17 @@ var Defaults = {
 
   /**
    * Callback called when the popper is created.<br />
-   * By default, is set to no-op.<br />
+   * By default, it is set to no-op.<br />
    * Access Popper.js instance with `data.instance`.
    * @prop {onCreate}
    */
   onCreate: function onCreate() {},
 
   /**
-   * Callback called when the popper is updated, this callback is not called
+   * Callback called when the popper is updated. This callback is not called
    * on the initialization/creation of the popper, but only on subsequent
    * updates.<br />
-   * By default, is set to no-op.<br />
+   * By default, it is set to no-op.<br />
    * Access Popper.js instance with `data.instance`.
    * @prop {onUpdate}
    */
@@ -12907,7 +12946,7 @@ var Defaults = {
 
   /**
    * List of modifiers used to modify the offsets before they are applied to the popper.
-   * They provide most of the functionalities of Popper.js
+   * They provide most of the functionalities of Popper.js.
    * @prop {modifiers}
    */
   modifiers: modifiers
@@ -12927,10 +12966,10 @@ var Defaults = {
 // Methods
 var Popper = function () {
   /**
-   * Create a new Popper.js instance
+   * Creates a new Popper.js instance.
    * @class Popper
    * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
-   * @param {HTMLElement} popper - The HTML element used as popper.
+   * @param {HTMLElement} popper - The HTML element used as the popper
    * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
    * @return {Object} instance - The generated Popper.js instance
    */
@@ -13026,7 +13065,7 @@ var Popper = function () {
     }
 
     /**
-     * Schedule an update, it will run on the next UI update available
+     * Schedules an update. It will run on the next UI update available.
      * @method scheduleUpdate
      * @memberof Popper
      */
@@ -13063,7 +13102,7 @@ var Popper = function () {
  * new Popper(referenceObject, popperNode);
  * ```
  *
- * NB: This feature isn't supported in Internet Explorer 10
+ * NB: This feature isn't supported in Internet Explorer 10.
  * @name referenceObject
  * @property {Function} data.getBoundingClientRect
  * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
@@ -13085,7 +13124,7 @@ return Popper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -13270,31 +13309,6 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 process.umask = function() { return 0; };
-
-},{}],6:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
 
 },{}],7:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
@@ -13894,25 +13908,24 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./support/isBuffer":7,"_process":5,"inherits":6}],9:[function(require,module,exports){
+},{"./support/isBuffer":7,"_process":6,"inherits":2}],9:[function(require,module,exports){
 /*!
-  * vue-script2 v2.0.1
-  * (c) 2016-2017 Greg Slepak
+  * vue-script2 v2.0.3
+  * (c) 2016-2018 Greg Slepak
   * @license MIT License
   */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global.VueScript2 = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   var Script2 = {
     installed: false,
     p: Promise.resolve(),
-    version: '2.0.1', // grunt will overwrite to match package.json
+    version: '2.0.3', // grunt will overwrite to match package.json
     loaded: {}, // keys are the scripts that have been loaded
     install: function install(Vue) {
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
       if (Script2.installed) return;
       var customAttrs = ['unload'];
@@ -13924,9 +13937,11 @@ function hasOwnProperty(obj, prop) {
       Vue.component('script2', {
         props: props,
         // <slot> is important, see: http://vuejs.org/guide/components.html#Named-Slots
-        template: '<div style="display:none"><slot></slot></div>',
-        // NOTE: I tried doing this with Vue 2's new render() function.
-        //       It was a nightmare and I never got it to work.
+        // template: '<div style="display:none"><slot></slot></div>',
+        // NOTE: Instead of using `template` we can use the `render` function like so:
+        render: function render(h) {
+          return h('div', { style: 'display:none' }, this.$slots.default);
+        },
         mounted: function mounted() {
           var _this = this;
 
@@ -13934,8 +13949,10 @@ function hasOwnProperty(obj, prop) {
           if (!this.src) {
             Script2.p = Script2.p.then(function () {
               var s = document.createElement('script');
+              var h = _this.$el.innerHTML;
+              h = h.replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&amp;/gi, '&');
               s.type = 'text/javascript';
-              s.appendChild(document.createTextNode(_this.$el.innerHTML));
+              s.appendChild(document.createTextNode(h));
               parent.appendChild(s);
             });
           } else {
@@ -13951,7 +13968,9 @@ function hasOwnProperty(obj, prop) {
           // see: https://vuejs.org/v2/guide/migration.html#ready-replaced
           this.$nextTick(function () {
             // code that assumes this.$el is in-document
-            _this.$el.remove(); // remove dummy template <div>
+            // NOTE: we could've done this.$el.remove(), but IE sucks, see:
+            //       https://github.com/taoeffect/vue-script2/pull/17
+            _this.$el.parentElement.removeChild(_this.$el); // remove dummy template <div>
           });
         },
         destroyed: function destroyed() {
@@ -13964,7 +13983,7 @@ function hasOwnProperty(obj, prop) {
       Script2.installed = true;
     },
     load: function load(src) {
-      var opts = arguments.length <= 1 || arguments[1] === undefined ? { parent: document.head } : arguments[1];
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { parent: document.head };
 
       return Script2.loaded[src] ? Promise.resolve(src) : new Promise(function (resolve, reject) {
         var s = document.createElement('script');
@@ -14003,7 +14022,7 @@ function hasOwnProperty(obj, prop) {
     pick: function pick(o, props) {
       var x = {};
       props.forEach(function (k) {
-        return x[k] = o[k];
+        x[k] = o[k];
       });
       return x;
     },
@@ -14038,7 +14057,8 @@ function hasOwnProperty(obj, prop) {
 
   return Script2;
 
-}));
+})));
+
 },{}],10:[function(require,module,exports){
 "use strict";
 
@@ -17404,17 +17424,13 @@ Vue.component("add-to-wish-list", {
 
             if (!this.isLoading) {
                 this.isLoading = true;
-
                 this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
                     _this.isLoading = false;
 
                     NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
                 }, function (error) {
                     _this.isLoading = false;
-                    // this.changeTooltipText();
                 });
-
-                // this.changeTooltipText();
             }
         },
         removeFromWishList: function removeFromWishList() {
@@ -17422,17 +17438,13 @@ Vue.component("add-to-wish-list", {
 
             if (!this.isLoading) {
                 this.isLoading = true;
-
                 this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
                     _this2.isLoading = false;
 
                     NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
                 }, function (error) {
                     _this2.isLoading = false;
-                    // this.changeTooltipText();
                 });
-
-                // this.changeTooltipText();
             }
         },
         changeTooltipText: function changeTooltipText() {
@@ -20610,7 +20622,7 @@ Vue.component("popper", {
     }
 });
 
-},{"../../helper/dom":119,"../../helper/utils":123,"popper.js":4,"services/ModalService":130}],79:[function(require,module,exports){
+},{"../../helper/dom":119,"../../helper/utils":123,"popper.js":5,"services/ModalService":130}],79:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -23286,7 +23298,7 @@ function switchUrl(url, title) {
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, switchUrl: switchUrl };
 
-},{"../helper/url":122,"../helper/utils":123,"jquery":2}],134:[function(require,module,exports){
+},{"../helper/url":122,"../helper/utils":123,"jquery":3}],134:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23521,7 +23533,7 @@ function _eval(input) {
 
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
-},{"jquery":2}],135:[function(require,module,exports){
+},{"jquery":3}],135:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -23680,6 +23692,7 @@ var mutations = {
         if (billingAddress) {
             state.billingAddressId = billingAddress.id;
             state.billingAddress = billingAddress;
+            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
         }
     },
     selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
@@ -23691,6 +23704,7 @@ var mutations = {
             if (billingAddress) {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -23703,6 +23717,7 @@ var mutations = {
             if (deliveryAddress) {
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -23715,6 +23730,7 @@ var mutations = {
         if (deliveryAddress) {
             state.deliveryAddressId = deliveryAddress.id;
             state.deliveryAddress = deliveryAddress;
+            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         }
     },
     removeBillingAddress: function removeBillingAddress(state, billingAddress) {
@@ -23726,6 +23742,7 @@ var mutations = {
             if (state.billingAddress === billingAddress) {
                 state.billingAddress = null;
                 state.billingAddressId = null;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
             }
         }
     },
@@ -23740,6 +23757,7 @@ var mutations = {
                     return address.id === -99;
                 });
                 state.deliveryAddressId = -99;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -23754,6 +23772,7 @@ var mutations = {
                 state.billingAddressList.push(billingAddress);
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -23768,6 +23787,7 @@ var mutations = {
                 state.deliveryAddressList.push(deliveryAddress);
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -23783,6 +23803,7 @@ var mutations = {
 
             if (billingAddress.id === state.billingAddressId) {
                 state.billingAddress = billingAddress;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -23798,6 +23819,7 @@ var mutations = {
 
             if (deliveryAddress.id === state.deliveryAddressId) {
                 state.deliveryAddress = deliveryAddress;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -23806,10 +23828,12 @@ var mutations = {
             state.billingAddress = null;
             state.billingAddressId = null;
             state.billingAddressList = [];
+            document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
         } else if (addressType === "2") {
             state.deliveryAddressList = [{ id: -99 }];
             state.deliveryAddress = state.deliveryAddressList[0];
             state.deliveryAddressId = state.deliveryAddressList[0].id;
+            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         }
     }
 };
@@ -23862,7 +23886,6 @@ var actions = {
 
                         _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
                             commit("setIsBasketLoading", false);
-
                             return resolve(response);
                         }).fail(function (error) {
                             if (addressType === "1") {

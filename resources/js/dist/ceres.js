@@ -17724,6 +17724,8 @@ Vue.component("user-login-handler", {
 },{"../../../helper/utils":123,"services/ApiService":126,"services/ValidationService":134}],43:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
@@ -17734,75 +17736,80 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-wish-list", {
 
-    props: ["isActive", "variationId", "template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-add-to-wish-list"
+        },
+        variationId: Number
+    },
 
     data: function data() {
         return {
-            wishListCount: 0,
-            _isActive: this.isActive,
             isLoading: false
         };
     },
+
+
+    computed: _extends({
+        isVariationInWishList: function isVariationInWishList() {
+            return this.wishListIds.includes(this.variationId);
+        }
+    }, Vuex.mapState({
+        wishListIds: function wishListIds(state) {
+            return state.wishList.wishListIds;
+        }
+    })),
+
+    watch: {
+        isVariationInWishList: function isVariationInWishList() {
+            this.changeTooltipText();
+        }
+    },
+
     created: function created() {
         this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.changeTooltipText();
-        });
     },
 
 
     methods: {
         switchState: function switchState() {
-            if (this.$data._isActive) {
+            if (this.isVariationInWishList) {
                 this.removeFromWishList();
             } else {
                 this.addToWishList();
             }
         },
         addToWishList: function addToWishList() {
-            var _this2 = this;
+            var _this = this;
 
             if (!this.isLoading) {
                 this.isLoading = true;
-                this.$data._isActive = true;
-                this.changeTooltipText();
-
                 this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
-                    _this2.isLoading = false;
+                    _this.isLoading = false;
 
                     NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
                 }, function (error) {
-                    _this2.isLoading = false;
-                    _this2.$data._isActive = false;
-                    _this2.changeTooltipText();
+                    _this.isLoading = false;
                 });
             }
         },
         removeFromWishList: function removeFromWishList() {
-            var _this3 = this;
+            var _this2 = this;
 
             if (!this.isLoading) {
                 this.isLoading = true;
-                this.$data._isActive = false;
-                this.changeTooltipText();
-
                 this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
-                    _this3.isLoading = false;
+                    _this2.isLoading = false;
 
                     NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
                 }, function (error) {
-                    _this3.isLoading = false;
-                    _this3.$data._isActive = true;
-                    _this3.changeTooltipText();
+                    _this2.isLoading = false;
                 });
             }
         },
         changeTooltipText: function changeTooltipText() {
-            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.$data._isActive ? "singleItemWishListRemove" : "singleItemWishListAdd"));
+            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
 
             $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
         }
@@ -18763,9 +18770,6 @@ Vue.component("single-item", {
         },
         variations: function variations(state) {
             return state.item.variationList;
-        },
-        isInWishList: function isInWishList(state) {
-            return state.item.variation.documents[0].isInWishListVariation;
         }
     }), Vuex.mapGetters(["variationTotalPrice", "variationMissingProperties", "variationGroupedProperties", "variationGraduatedPrice"])),
 
@@ -24049,6 +24053,7 @@ var mutations = {
         if (billingAddress) {
             state.billingAddressId = billingAddress.id;
             state.billingAddress = billingAddress;
+            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
         }
     },
     selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
@@ -24060,6 +24065,7 @@ var mutations = {
             if (billingAddress) {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -24072,6 +24078,7 @@ var mutations = {
             if (deliveryAddress) {
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -24084,6 +24091,7 @@ var mutations = {
         if (deliveryAddress) {
             state.deliveryAddressId = deliveryAddress.id;
             state.deliveryAddress = deliveryAddress;
+            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         }
     },
     removeBillingAddress: function removeBillingAddress(state, billingAddress) {
@@ -24095,6 +24103,7 @@ var mutations = {
             if (state.billingAddress === billingAddress) {
                 state.billingAddress = null;
                 state.billingAddressId = null;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
             }
         }
     },
@@ -24109,6 +24118,7 @@ var mutations = {
                     return address.id === -99;
                 });
                 state.deliveryAddressId = -99;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -24123,6 +24133,7 @@ var mutations = {
                 state.billingAddressList.push(billingAddress);
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -24137,6 +24148,7 @@ var mutations = {
                 state.deliveryAddressList.push(deliveryAddress);
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -24152,6 +24164,7 @@ var mutations = {
 
             if (billingAddress.id === state.billingAddressId) {
                 state.billingAddress = billingAddress;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         }
     },
@@ -24167,6 +24180,7 @@ var mutations = {
 
             if (deliveryAddress.id === state.deliveryAddressId) {
                 state.deliveryAddress = deliveryAddress;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     },
@@ -24175,10 +24189,12 @@ var mutations = {
             state.billingAddress = null;
             state.billingAddressId = null;
             state.billingAddressList = [];
+            document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
         } else if (addressType === "2") {
             state.deliveryAddressList = [{ id: -99 }];
             state.deliveryAddress = state.deliveryAddressList[0];
             state.deliveryAddressId = state.deliveryAddressList[0].id;
+            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         }
     }
 };
@@ -24231,7 +24247,6 @@ var actions = {
 
                         _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
                             commit("setIsBasketLoading", false);
-
                             return resolve(response);
                         }).fail(function (error) {
                             if (addressType === "1") {
