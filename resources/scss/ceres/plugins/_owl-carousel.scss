@@ -14,9 +14,12 @@
   position: relative;
   z-index: 1;
 
-  &:hover {
-    .owl-single-item-nav {
-      opacity: 0.3;
+  @include media-breakpoint-up(sm)
+  {
+    &:hover {
+      .owl-single-item-nav {
+        opacity: 0.3;
+      }
     }
   }
 }
@@ -63,7 +66,8 @@
 }
 
 .owl-carousel .owl-nav.disabled,
-.owl-carousel .owl-dots.disabled {
+.owl-carousel .owl-dots.disabled,
+.owl-carousel .owl-single-item-nav.disabled {
   display: none;
 }
 
@@ -344,6 +348,7 @@ Custom classes
     top: 50%;
     transform:translateY(-36%);
   }
+
 }
 
 .owl-carousel .disabled {
@@ -385,6 +390,11 @@ Custom classes
     color: $gray-dark;
     text-shadow: none;
     font-size: 3rem;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 1.5rem;
+      padding: 0 0.5rem;
+    }
   }
   .owl-dots {
     display: block;
