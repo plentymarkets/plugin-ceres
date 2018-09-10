@@ -11,7 +11,7 @@
         <div class="basket-item component-loading with-icon sending" :class="{ 'isLoading': waiting }">
 
             <div class="image-container">
-                <img class="img-basket-small" v-if="image" :src="image" :alt="altText">
+                <img class="img-basket-small" v-if="image" :src="image" :alt="altText" :title="itemName">
             </div>
 
             <div class="meta-container-wrapper">
@@ -21,16 +21,19 @@
                             <a :href="basketItem.variation.data | itemURL" class="item-name">
                                 ${ basketItem.variation.data | itemName }
                             </a>
-    
+
                             <div class="item-base-price">
-                                ${ basketItem.variation.data.prices.default.unitPrice.value | currency }
+                                ${ unitPrice | currency }
+
                             </div>
 
-                            <item-bundle :bundle-type="basketItem.variation.data.variation.bundleType" 
+                            <item-bundle :bundle-type="basketItem.variation.data.variation.bundleType"
                                          :bundle-components="basketItem.variation.data.bundleComponents"></item-bundle>
-    
+
                             <div class="item-small-prices text-muted" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
-                                <div>${ basketItem.variation.data.prices.default.basePrice }</div>
+                                <div>
+                                    ${ basePrice }
+                                </div>
                                 <div>
                                     <strong>{{ trans("Ceres::Template.basketContent") }}: </strong>
                                     ${ basketItem.variation.data.unit.content } ${ basketItem.variation.data.unit.names.name }

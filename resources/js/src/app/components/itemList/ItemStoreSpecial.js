@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
@@ -28,24 +30,38 @@ Vue.component("item-store-special", {
 
     created()
     {
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+
+        if (!isNullOrUndefined(this.storeSpecial))
+        {
+            this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+        }
+        else
+        {
+            this.tagClass = this.tagClasses.default;
+        }
+
         this.label = this.getLabel();
     },
 
     methods: {
         getLabel()
         {
-            if (this.storeSpecial.id === 1 && this.recommendedRetailPrice)
+            if (!isNullOrUndefined(this.storeSpecial))
             {
-                const percent = this.getPercentageSale();
-
-                if (parseInt(percent) < 0)
+                if (this.storeSpecial.id === 1 && this.recommendedRetailPrice)
                 {
-                    return percent + "%";
+                    const percent = this.getPercentageSale();
+
+                    if (parseInt(percent) < 0)
+                    {
+                        return percent + "%";
+                    }
                 }
+
+                return this.storeSpecial.names.name;
             }
 
-            return this.storeSpecial.names.name;
+            return "";
         },
 
         getPercentageSale()

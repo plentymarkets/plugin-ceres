@@ -1,4 +1,5 @@
 {% macro get( itemName, bundleType ) %}
+    {% spaceless %}
     {% if bundleType == "bundle" %}
         {% if "[BUNDLE]" in itemName %}
             {% set itemName = itemName | replace({"[BUNDLE]": ""}) | trim %}
@@ -14,4 +15,5 @@
     {% else %}
         {{ itemName }}
     {% endif %}
+    {% endspaceless %}
 {% endmacro %}
