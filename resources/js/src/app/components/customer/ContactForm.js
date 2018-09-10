@@ -56,7 +56,7 @@ Vue.component("contact-form", {
                         this.privacyPolicyShowError = true;
 
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy")
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {hyphen: "&shy;"})
                         );
                     }
                 })
@@ -69,16 +69,24 @@ Vue.component("contact-form", {
                         this.privacyPolicyShowError = true;
 
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy")
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {hyphen: "&shy;"})
                         );
                     }
 
+                    const invalidFieldNames = [];
+
                     for (const invalidField of invalidFields)
                     {
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template." + this._mapInvalidField(invalidField.dataset.model))
-                        );
+
+                        let invalidFieldName = invalidField.lastElementChild.innerHTML;
+
+                        invalidFieldName = invalidFieldName.slice(-1) === "*" ? invalidFieldName.slice(0, invalidFieldName.length - 1) : invalidFieldName;
+                        invalidFieldNames.push(invalidFieldName);
                     }
+
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.contactCheckFormFields", {fields: invalidFieldNames.join(", ")})
+                    );
 
                 });
         },
@@ -146,17 +154,6 @@ Vue.component("contact-form", {
             }
 
             NotificationService.error(errorMessage);
-        },
-
-        _mapInvalidField(invalidFieldDatasetModel)
-        {
-            switch (invalidFieldDatasetModel)
-            {
-            case "userMail": return "contactEnterConfirmEmail";
-            case "subject": return "contactEditSubject";
-            case "message": return "contactEditMessage";
-            default: return "contactCheckEntries";
-            }
         },
 
         privacyPolicyValueChanged(value)
