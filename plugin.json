@@ -40,6 +40,11 @@
             "key":"Ceres\\Containers\\CeresItemListContainer3",
             "name":"Third item list",
             "description":"Display a configurable list of items in your online store"
+        },
+        {
+            "key":"Ceres\\Containers\\CeresNewsletterInputContainer",
+            "name":"Newsletter input",
+            "description":"Display a newsletter registration form in your online store"
         }
     ],
     "containers"        :
