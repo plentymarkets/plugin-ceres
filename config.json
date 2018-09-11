@@ -3570,7 +3570,7 @@
                                 "required": false,
                                 "label": "Config.availability1",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
@@ -3620,7 +3620,7 @@
                                 "required": false,
                                 "label": "Config.availability2",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
@@ -3670,7 +3670,7 @@
                                 "required": false,
                                 "label": "Config.availability3",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
@@ -3720,7 +3720,7 @@
                                 "required": false,
                                 "label": "Config.availability4",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
@@ -3770,7 +3770,7 @@
                                 "required": false,
                                 "label": "Config.availability5",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
@@ -3820,7 +3820,7 @@
                                 "required": false,
                                 "label": "Config.availability6",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
@@ -3870,7 +3870,7 @@
                                 "required": false,
                                 "label": "Config.availability7",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
@@ -3920,7 +3920,7 @@
                                 "required": false,
                                 "label": "Config.availability8",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
@@ -3970,7 +3970,7 @@
                                 "required": false,
                                 "label": "Config.availability9",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
@@ -4020,7 +4020,7 @@
                                 "required": false,
                                 "label": "Config.availability10",
                                 "options": {
-                                    "defaultValue": "all",
+                                    "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
