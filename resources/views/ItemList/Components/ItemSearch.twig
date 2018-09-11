@@ -1,11 +1,23 @@
 <script type="x/template" id="vue-item-search">
     <div class="search-box-inner">
         <div class="search-box-shadow-frame">
-            <input type="search" class="search-input" v-model="currentSearchString" @keyup.enter="search()"
-                   {% if not services.template.isSearch() %}autofocus{% endif %}>
+            <input type="search" class="search-input" v-model="currentSearchString" @input="autocomplete($event.target.value)"
+                @keyup.enter="prepareSearch()" @keyup.down="keydown()" @keyup.up="keyup()"
+                @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)"
+                {% if not services.template.isSearch() %}autofocus{% endif %}>
+
             <button class="search-submit" type="submit" @click="search()">
                 <i class="fa fa-search sm-up"></i>
             </button>
+
+            <div class="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
+                <div class="autocomplete-suggestion" v-for="(item, index) in autocompleteResult" :key="index" @click="selectAutocompleteItem(item)" :class="{ 'autocomplete-selected': selectedAutocompleteIndex === index }">
+                    <div class="autocomplete-image-container" v-if="showItemImages">
+                        <img class="autocomplete-image" :src="item.img">
+                    </div>
+                    <div class="autocomplete-item-name" v-html="item.displayName"></div>
+                </div>
+            </div>
         </div>
     </div>
 </script>

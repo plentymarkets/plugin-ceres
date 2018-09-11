@@ -1,0 +1,64 @@
+{
+    "identifier": "Ceres::TitleBarWidget",
+    "label": "Widget.titleBarLabel",
+    "previewImageURL": "/images/widgets/title-bar.svg",
+    "type": "default",
+    "position": 400,
+    "allowedNestingTypes": [
+        "default",
+        "structure"
+    ],
+    "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
+    "settings": {
+        "appearance": {
+            "type": "selectBox",
+            "required": true,
+            "label": "Widget.widgetAppearanceLabel",
+            "options": {
+                "tooltip": "Widget.widgetAppearanceTooltip",
+                "defaultValue": "primary",
+                "selectBoxValues": [
+                    {
+                        "value": "primary",
+                        "caption": "Widget.widgetAppearancePrimary",
+                        "position": 0
+                    },
+                    {
+                        "value": "secondary",
+                        "caption": "Widget.widgetAppearanceSecondary",
+                        "position": 1
+                    },
+                    {
+                        "value": "success",
+                        "caption": "Widget.widgetAppearanceSuccess",
+                        "position": 2
+                    },
+                    {
+                        "value": "info",
+                        "caption": "Widget.widgetAppearanceInfo",
+                        "position": 3
+                    },
+                    {
+                        "value": "warning",
+                        "caption": "Widget.widgetAppearanceWarning",
+                        "position": 4
+                    },
+                    {
+                        "value": "danger",
+                        "caption": "Widget.widgetAppearanceDanger",
+                        "position": 5
+                    }
+                ]
+            }
+        },
+        "text": {
+            "type": "inputText",
+            "required": true,
+            "label": "Widget.titleBarTextLabel",
+            "options": {
+                "tooltip": "Widget.titleBarTextTooltip",
+                "defaultValue": ""
+            }
+        }
+    }
+}

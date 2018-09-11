@@ -1,0 +1,54 @@
+{
+    "identifier": "Ceres::ThreeColumnWidget",
+    "label": "Widget.gridThreeColumnLabel",
+    "previewImageURL": "/images/widgets/grid-3-col.svg",
+    "type": "structure",
+    "position": 200,
+    "allowedNestingTypes": [
+        "default"
+    ],
+    "widgetClass": "Ceres\\Widgets\\Grid\\ThreeColumnWidget",
+    "settings": {
+        "layout": {
+            "type": "selectBox",
+            "required": true,
+            "label": "Widget.gridThreeColumnLayoutLabel",
+            "options": {
+                "tooltip": "Widget.gridThreeColumnLayoutTooltip",
+                "defaultValue": "oneToOneToOne",
+                "selectBoxValues": [
+                    {
+                        "value": "oneToOneToOne",
+                        "caption": "Widget.gridThreeColumnLayoutOneToOneToOne",
+                        "position": 0
+                    },
+                    {
+                        "value": "twoToOneToOne",
+                        "caption": "Widget.gridThreeColumnLayoutTwoToOneToOne",
+                        "position": 0
+                    },
+                    {
+                        "value": "oneToTwoToOne",
+                        "caption": "Widget.gridThreeColumnLayoutOneToTwoToOne",
+                        "position": 0
+                    },
+                    {
+                        "value": "oneToOneToTwo",
+                        "caption": "Widget.gridThreeColumnLayoutOneToOneToTwo",
+                        "position": 0
+                    },
+                    {
+                        "value": "twoToOneStacked",
+                        "caption": "Widget.gridThreeColumnLayoutTwoToOneStacked",
+                        "position": 0
+                    },
+                    {
+                        "value": "oneStackedToTwo",
+                        "caption": "Widget.gridThreeColumnLayoutOneStackedToTwo",
+                        "position": 0
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -56,7 +56,7 @@ Vue.component("contact-form", {
                         this.privacyPolicyShowError = true;
 
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactCheckEntries")
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {hyphen: "&shy;"})
                         );
                     }
                 })
@@ -67,11 +67,27 @@ Vue.component("contact-form", {
                     if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
                     {
                         this.privacyPolicyShowError = true;
+
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {hyphen: "&shy;"})
+                        );
+                    }
+
+                    const invalidFieldNames = [];
+
+                    for (const invalidField of invalidFields)
+                    {
+
+                        let invalidFieldName = invalidField.lastElementChild.innerHTML;
+
+                        invalidFieldName = invalidFieldName.slice(-1) === "*" ? invalidFieldName.slice(0, invalidFieldName.length - 1) : invalidFieldName;
+                        invalidFieldNames.push(invalidFieldName);
                     }
 
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.contactCheckEntries")
+                        TranslationService.translate("Ceres::Template.contactCheckFormFields", {fields: invalidFieldNames.join(", ")})
                     );
+
                 });
         },
 

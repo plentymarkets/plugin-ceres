@@ -1,10 +1,12 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set listType = widget.settings.listType.mobile %}
-{% set itemSort = widget.settings.itemSort.mobile %}
-{% set maxItems = widget.settings.maxItems.mobile %}
-{% set categoryId = widget.settings.categoryId.mobile %}
-{% set itemListId = widget.settings.tagId.mobile %}
+{% set headlineStyle = widget.settings.headlineStyle.mobile  %}
+{% set headline      = widget.settings.headline.mobile  %}
+{% set listType      = widget.settings.listType.mobile %}
+{% set itemSort      = widget.settings.itemSort.mobile %}
+{% set maxItems      = widget.settings.maxItems.mobile %}
+{% set categoryId    = widget.settings.categoryId.mobile %}
+{% set itemListId    = widget.settings.tagId.mobile %}
 
 {% if listType == "category" %}
     {% set itemListId = categoryId %}
@@ -23,41 +25,51 @@
     {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems]) ) }}
 {% endif %}
 
+{{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
+{% if headlineStyle == "default-caption" or headlineStyle is empty %}
+    {% if listType == "category" %}
+        {{ Twig.if("category") }}
+            {{ Twig.set("title", "category.details[0].name") }}
+        {{ Twig.endif() }}
+    {% elseif listType == "last_seen" %}
+        {{ Twig.set("title", "trans('Ceres::Template.itemListLastSeen')" ) }}
+    {% elseif listType == "tag_list" and itemListId is not empty %}
+        {{ Twig.set("title", Twig.call("services.tag.getTagName", [itemListId])) }}
+    {% else %}
+        {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
+    {% endif %}
+{% elseif headlineStyle == "custom-caption" and headline | trim is not empty %}
+    {{ Twig.set("title", "'#{ headline }'" ) }}
+{% endif %}
+
 <div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
-            <last-seen-item-list>
+            <last-seen-item-list :max-items="{{ maxItems }}">
                 <div class="widget-caption m-b-1" slot="heading">
-                    <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
+                    <h2>{{ Twig.print("title") }}</h2>
                 </div>
             </last-seen-item-list>
         {% else %}
             {# render static item lists #}
-            <div class="widget-caption m-b-1">
-                {% if listType == "category" %}
-                    {{ Twig.if("category") }}
-                    <h2>{{ Twig.print("category.details[0].name") }}</h2>
-                    <a href="{{ Twig.print(Twig.call("services.category.getURL", [Twig.var("category")])) }}">
-                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
-                    </a>
-                    {{ Twig.else() }}
-                    <h2>{{ Twig.trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
-                    {{ Twig.endif() }}
-                {% elseif listType == "last_seen" and isPreview %}
-                    <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
-                {% elseif listType == "tag_list" and itemListId is not empty %}
-                    <h2>{{ Twig.print(Twig.call("services.tag.getTagName", [itemListId])) }}</h2>
-                {% else %}
-                    <h2>{{ trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
-                {% endif %}
-            </div>
+            {% if headlineStyle == "default-caption" or headlineStyle == "custom-caption" or headlineStyle is empty %}
+                <div class="widget-caption m-b-1">
+                    <h2>{{ Twig.print("title") }}</h2>
 
-        <div class="row clearfix">
-            {{ Twig.if("itemList.documents is not empty") }}
-                <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}"></container-item-list>
-            {{ Twig.endif() }}
-        </div>
+                    {{ Twig.if("category") }}
+                        <a href="{{ Twig.print(Twig.call("services.category.getURL", [Twig.var("category")])) }}">
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
+                        </a>
+                    {{ Twig.endif() }}
+                </div>
+            {% endif %}
+
+            <div class="row clearfix">
+                {{ Twig.if("itemList.documents is not empty") }}
+                    <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}"></container-item-list>
+                {{ Twig.endif() }}
+            </div>
         {% endif %}
     </div>
 </div>

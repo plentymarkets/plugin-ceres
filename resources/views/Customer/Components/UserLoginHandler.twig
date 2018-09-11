@@ -17,8 +17,8 @@
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <span class="hidden-xs-down">{{ trans("Ceres::Template.login") }}</span>
             </a>
-            <span class="pipe"></span>
-            <a data-toggle="modal" href="#registration" @click="unmarkInputFields()">
+            <span class="pipe" v-if="showRegistration"></span>
+            <a data-toggle="modal" href="#registration" @click="unmarkInputFields()" v-if="showRegistration">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                 <span class="hidden-xs-down">{{ trans("Ceres::Template.loginRegister") }}</span>
             </a>

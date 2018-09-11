@@ -1,3 +1,6 @@
+import TranslationService from "services/TranslationService";
+const NotificationService = require("services/NotificationService");
+
 Vue.component("accept-gtc-check", {
 
     delimiters: ["${", "}"],
@@ -27,7 +30,16 @@ Vue.component("accept-gtc-check", {
     {
         validate()
         {
-            this.$store.commit("setGtcShowError", !this.isChecked);
+            const showError = !this.isChecked;
+
+            this.$store.commit("setGtcShowError", showError);
+
+            if (showError)
+            {
+                NotificationService.error(
+                    TranslationService.translate("Ceres::Template.checkoutCheckAcceptGtc")
+                );
+            }
         }
     },
 

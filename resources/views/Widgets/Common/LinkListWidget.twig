@@ -1,0 +1,24 @@
+{% set title            = widget.settings.title.mobile %}
+{% set icon             = widget.settings.icon.mobile %}
+{% set listEntries      = widget.settings.entries.mobile %}
+{% set hasPlaceholder   = title is empty and listEntries | length <= 0 %}
+
+<div class="widget widget-link-list{% if hasPlaceholder %} widget-placeholder{% endif %}">
+    <div class="widget-inner">
+        <nav>
+            <h2 class="h5">{{ title }}</h2>
+            {% if listEntries | length > 0 %}
+                <ul class="list-unstyled">
+                    {% for entry in listEntries %}
+                        <li>
+                            {% if icon != "none" %}
+                                <i class="fa {{ icon }}" aria-hidden="true"></i>
+                            {% endif %}
+                            <a href="{{ entry.url }}">{{ entry.text }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>    
+            {% endif %}
+        </nav>
+    </div>
+</div>

@@ -1,0 +1,144 @@
+{
+    "identifier": "Ceres::ImageBoxWidget",
+    "label": "Widget.imageBoxLabel",
+    "previewImageURL": "/images/widgets/image-box.svg",
+    "type": "default",
+    "position": 600,
+    "allowedNestingTypes": [
+        "default",
+        "structure"
+    ],
+    "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": {
+                "name": "Widget.widgetAppearanceLabel",
+                "tooltip": "Widget.widgetAppearanceTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "primary",
+                        "caption": "Widget.widgetAppearancePrimary",
+                        "position": 0
+                    },
+                    {
+                        "value": "secondary",
+                        "caption": "Widget.widgetAppearanceSecondary",
+                        "position": 1
+                    },
+                    {
+                        "value": "success",
+                        "caption": "Widget.widgetAppearanceSuccess",
+                        "position": 2
+                    },
+                    {
+                        "value": "info",
+                        "caption": "Widget.widgetAppearanceInfo",
+                        "position": 3
+                    },
+                    {
+                        "value": "warning",
+                        "caption": "Widget.widgetAppearanceWarning",
+                        "position": 4
+                    },
+                    {
+                        "value": "danger",
+                        "caption": "Widget.widgetAppearanceDanger",
+                        "position": 5
+                    }
+                ]
+            }
+        },
+        "style": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "block-caption",
+            "options": {
+                "name": "Widget.imageBoxStyleLabel",
+                "tooltip": "Widget.imageBoxStyleTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "block-caption",
+                        "caption": "Widget.imageBoxStyleBlockCaption",
+                        "position": 0
+                    },
+                    {
+                        "value": "inline-caption",
+                        "caption": "Widget.imageBoxStyleInlineCaption",
+                        "position": 1
+                    },
+                    {
+                        "value": "fullwidth",
+                        "caption": "Widget.imageBoxStyleFullwidth",
+                        "position": 2
+                    },
+                    {
+                        "value": "no-caption",
+                        "caption": "Widget.imageBoxStyleNoCaption",
+                        "position": 3
+                    }
+                ]
+            }
+        },
+        "headline": {
+            "type": "text",
+            "required": false,
+            "isVisible": "style === 'block-caption' || style === 'inline-caption' || style === 'fullwidth'",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.imageBoxHeadlineLabel",
+                "tooltip": "Widget.imageBoxHeadlineTooltip"
+            }
+        },
+        "imageSize": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "cover",
+            "options": {
+                "name": "Widget.imageBoxImageSizeLabel",
+                "tooltip": "Widget.imageBoxImageSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "cover",
+                        "caption": "Widget.imageBoxImageSizeCover",
+                        "position": 0
+                    },
+                    {
+                        "value": "contain",
+                        "caption": "Widget.imageBoxImageSizeContain",
+                        "position": 1
+                    }
+                ]
+            }
+        },
+        "categoryId": {
+            "type": "category",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.imageBoxCategoryIdLabel",
+                "tooltip": "Widget.imageBoxCategoryIdTooltip"
+            }
+        },
+        "variationId": {
+            "type": "number",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.imageBoxVariationIdLabel",
+                "tooltip": "Widget.imageBoxVariationIdTooltip"
+            }
+        },
+        "customImagePath": {
+            "type": "file",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.imageBoxCustomImagePathLabel",
+                "tooltip": "Widget.imageBoxCustomImagePathTooltip"
+            }
+        }
+    }
+}

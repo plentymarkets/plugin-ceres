@@ -11,6 +11,10 @@ Vue.component("user-login-handler", {
         template: {
             type: String,
             default: "#vue-user-login-handler"
+        },
+        showRegistration: {
+            type: Boolean,
+            default: true
         }
     },
 

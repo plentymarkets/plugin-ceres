@@ -1,0 +1,43 @@
+{
+    "identifier": "Ceres::BreadcrumbWidget",
+    "label": "Widget.breadcrumbLabel",
+    "previewImageURL": "/images/widgets/breadcrumb.svg",
+    "type": "header",
+    "position": 0,
+    "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",
+    "settings": {
+        "isFixed": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.breadcrumbIsFixedLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "showOnHomepage": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.breadcrumbShowOnHomepageLabel",
+            "visible": "showOnMyAccount.charAt(0) === 'a'",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "showOnMyAccount": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.breadcrumbShowOnMyAccountLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "showOnCheckout": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.breadcrumbShowOnCheckoutLabel",
+            "options": {
+                "defaultValue": true
+            }
+        }
+    }
+}
