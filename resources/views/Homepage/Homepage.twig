@@ -30,15 +30,21 @@
         <div class="home container-max">
             <div class="row">
                 <div class="col">
-                    {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
-                        {{ content.result|raw }}
-                    {% endfor %}
+
+
+                    <div class="widget widget-proportional">
+                        <div class="widget-inner">
+                            <newsletter-input :show-name-inputs="true" :title="'Subtitle'" :sub-title="'Newsletter'"></newsletter-input>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
 
     {% else %}
-        
+
         {% if showDefaultHomepage == "true" %}
             {% include 'Ceres::Homepage.MarketingHomepage.twig' %}
         {% else %}
@@ -49,6 +55,6 @@
 
     {% endif %}
 
-    
+
 
 {% endblock %}
