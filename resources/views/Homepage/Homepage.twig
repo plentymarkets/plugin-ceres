@@ -30,15 +30,9 @@
         <div class="home container-max">
             <div class="row">
                 <div class="col">
-
-
-                    <div class="widget widget-proportional">
-                        <div class="widget-inner">
-                            <newsletter-input :show-name-inputs="true" :title="'Subtitle'" :sub-title="'Newsletter'"></newsletter-input>
-                        </div>
-                    </div>
-
-
+                    {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
+                        {{ content.result|raw }}
+                    {% endfor %}
                 </div>
             </div>
         </div>
