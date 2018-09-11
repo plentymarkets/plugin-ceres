@@ -2,7 +2,7 @@
     <div v-if="items.length">
         <slot name="heading"></slot>
         <div class="row clearfix">
-            <container-item-list :items="items"></container-item-list>
+            <container-item-list :items="items" :items-per-page="itemsPerPage"></container-item-list>
         </div>
     </div>
 </script>

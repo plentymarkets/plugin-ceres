@@ -12,6 +12,12 @@ Vue.component("last-seen-item-list", {
         {
             type: Number,
             default: App.config.itemLists.lastSeenNumber || 4
+        },
+
+        itemsPerPage:
+        {
+            type: Number,
+            default: 4
         }
     },
 
