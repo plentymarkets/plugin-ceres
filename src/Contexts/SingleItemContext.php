@@ -29,7 +29,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $itemData = $this->item['documents'][0]['data'];
 
         $availabiltyId = $itemData['variation']['availability']['id'];
-        $mappedAvailability = $configRepository->get("Ceres.availability.mapping.availability" . $availabiltyId);
+        $mappedAvailability = $configRepository->get('Ceres.availability.mapping.availability' . $availabiltyId);
         $itemData['variation']['availability']['mappedAvailability'] = $mappedAvailability;
         
         /** @var ItemService $itemService */
