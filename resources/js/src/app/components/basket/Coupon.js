@@ -18,6 +18,14 @@ Vue.component("coupon", {
         };
     },
 
+    watch:
+    {
+        redeemedCouponCode(val)
+        {
+            this.couponCode = val;
+        }
+    },
+
     computed:
     {
         disabled()

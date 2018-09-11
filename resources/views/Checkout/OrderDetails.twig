@@ -140,7 +140,7 @@
                     {% set priceNet = orderData.order.amounts[0].isNet %}
                     <article class="cmp cmp-order-item">
                         <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}" class="item-image">
-                            <img alt="{{ item.orderItemName }}" src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}">
+                            <img src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
                         </a>
                         <div class="item-details small">
                             <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}" class="clearfix">

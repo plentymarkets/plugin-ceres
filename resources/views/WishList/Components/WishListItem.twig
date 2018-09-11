@@ -6,7 +6,7 @@
             <div class="col-xs-3 col-sm-2 wish-list-container">
                 <div class="wish-list-image-container">
                     <a :href="wishListItem.data | itemURL">
-                        <img class="wish-list-image" :src="wishListItem.data.images | itemImages('urlMiddle') | itemImage">
+                        <img class="wish-list-image" :src="wishListItem.data.images | itemImages('urlMiddle') | itemImage" :alt="wishListItem.data | itemName" :title="wishListItem.data | itemName">
                     </a>
                 </div>
             </div>

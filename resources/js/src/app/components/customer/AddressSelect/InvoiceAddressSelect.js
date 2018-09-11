@@ -1,3 +1,6 @@
+import TranslationService from "services/TranslationService";
+const NotificationService = require("services/NotificationService");
+
 Vue.component("invoice-address-select", {
 
     delimiters: ["${", "}"],
@@ -45,7 +48,7 @@ Vue.component("invoice-address-select", {
         {
             if (App.isCheckoutView && this.addressList && this.addressList.length <= 0)
             {
-                this.$refs.invoice.showInitialAddModal();
+                this.$refs.invoice.showAddModal("initial");
             }
         });
     },
@@ -77,7 +80,16 @@ Vue.component("invoice-address-select", {
 
         validate()
         {
-            this.$store.commit("setInvoiceAddressShowError", this.billingAddressId <= 0);
+            const showError = this.billingAddressId <= 0;
+
+            this.$store.commit("setInvoiceAddressShowError", showError);
+
+            if (showError)
+            {
+                NotificationService.error(
+                    TranslationService.translate("Ceres::Template.checkoutCheckInvoiceAddress")
+                );
+            }
         }
     },
 
