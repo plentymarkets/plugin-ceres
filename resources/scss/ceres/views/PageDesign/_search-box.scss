@@ -15,10 +15,62 @@
         max-width: 1200px;
         margin: 0 auto;
     }
-    .search-box-shadow-frame {
+     @at-root .search-box-shadow-frame {
         display: flex;
         flex: 100;
-        box-shadow: $box-shadow;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+        position: relative;
+
+        .autocomplete-suggestions {
+            position: absolute;
+            box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            overflow: scroll;
+            -webkit-overflow-scrolling: touch;
+            z-index: 1070;
+            max-height: 310px;
+            width: 100%;
+            top: 100%;
+
+            & > .autocomplete-suggestion {
+                padding: 5px 15px;
+                white-space: nowrap;
+                overflow: hidden;
+                cursor: pointer;
+                display: flex;
+
+                &:hover {
+                    background: $gray-lighter;
+                }
+
+                &.autocomplete-selected {
+                    background: $gray-lighter;
+                }
+
+                & > .autocomplete-item-name {
+                    align-self: center;
+                    color: $gray-dark;
+                }
+
+                & > .autocomplete-image-container {
+                    width: 40px;
+                    height: 40px;
+                    position: relative;
+                    margin-right: 5px;
+
+                    & > .autocomplete-image {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translateY(-50%) translateX(-50%);
+                        max-height: 40px;
+                        max-width: 100%;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                }
+            }
+        }
     }
     .search-input {
         flex: 1 0 70%;
@@ -45,21 +97,4 @@
             color: darken($brand-primary, 20%);
         }
     }
-}
-
-.autocomplete-suggestions {
-    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-    background: #ffffff;
-    overflow: auto;
-}
-
-.autocomplete-suggestion {
-    padding: 5px 15px;
-    white-space: nowrap;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.autocomplete-selected {
-    background: $gray-lighter;
 }

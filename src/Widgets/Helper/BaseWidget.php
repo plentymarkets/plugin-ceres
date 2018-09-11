@@ -36,7 +36,14 @@ class BaseWidget implements Widget
             true
         );
 
-        return $twig->renderString($template);
+        try
+        {
+            return $twig->renderString($template);
+        }
+        catch(\Exception $e)
+        {
+            return "";
+        }
     }
 
     /**

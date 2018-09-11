@@ -15556,6 +15556,11 @@ Vue.component("last-seen-item-list", {
         template: {
             type: String,
             default: "#vue-last-seen-item-list"
+        },
+
+        maxItems: {
+            type: Number,
+            default: App.config.itemLists.lastSeenNumber || 4
         }
     },
 
@@ -15569,7 +15574,7 @@ Vue.component("last-seen-item-list", {
         this.$options.template = this.template;
     },
     beforeMount: function beforeMount() {
-        this.$store.dispatch("getLastSeenItems");
+        this.$store.dispatch("getLastSeenItems", this.maxItems);
     }
 });
 
@@ -17432,6 +17437,10 @@ Vue.component("user-login-handler", {
         template: {
             type: String,
             default: "#vue-user-login-handler"
+        },
+        showRegistration: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -19054,35 +19063,59 @@ Vue.component("item-list-sorting", {
 },{"services/UrlService":133}],59:[function(require,module,exports){
 "use strict";
 
-var _UrlService = require("services/UrlService");
+var _ApiService = require("services/ApiService");
 
-var _UrlService2 = _interopRequireDefault(_UrlService);
+var _ApiService2 = _interopRequireDefault(_ApiService);
 
 var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component("item-search", {
 
-    delimiters: ["${", "}"],
-
-    props: ["template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-search"
+        },
+        showItemImages: {
+            type: Boolean,
+            default: false
+        },
+        forwardToSingleItem: {
+            type: Boolean,
+            default: App.config.search.forwardToSingleItem
+        }
+    },
 
     data: function data() {
         return {
             currentSearchString: "",
-            preventSearch: false
+            promiseCount: 0,
+            autocompleteResult: [],
+            selectedAutocompleteIndex: -1,
+            isSearchFocused: false
         };
     },
 
 
-    computed: Vuex.mapState({
-        searchString: function searchString(state) {
-            return state.itemList.searchString;
+    computed: {
+        selectedAutocompleteItem: function selectedAutocompleteItem() {
+            var selectedAutocompleteItem = this.autocompleteResult[this.selectedAutocompleteIndex];
+
+            if (this.selectedAutocompleteIndex < 0 || !selectedAutocompleteItem) {
+                return null;
+            }
+
+            return selectedAutocompleteItem;
         }
-    }),
+    },
 
     created: function created() {
         this.$options.template = this.template;
@@ -19091,8 +19124,6 @@ Vue.component("item-search", {
         var _this = this;
 
         this.$nextTick(function () {
-            _this.initAutocomplete();
-
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
             _this.$store.commit("setItemListSearchString", urlParams.query);
@@ -19102,15 +19133,34 @@ Vue.component("item-search", {
 
 
     methods: {
+        prepareSearch: function prepareSearch() {
+            if (this.selectedAutocompleteItem) {
+                if (this.forwardToSingleItem) {
+                    window.open(this.selectedAutocompleteItem.url, "_self", false);
+                } else {
+                    this.currentSearchString = this.selectedAutocompleteItem.name;
+                    this.$store.commit("setItemListSearchString", this.currentSearchString);
+
+                    this.search();
+                }
+            } else {
+                this.search();
+            }
+
+            $("#searchBox").collapse("hide");
+        },
         search: function search() {
-            if (this.currentSearchString.length && !this.preventSearch) {
+            if (this.currentSearchString.length) {
                 if (document.location.pathname === "/search") {
                     this.updateTitle(this.currentSearchString);
                     this.$store.dispatch("searchItems", this.currentSearchString);
+
+                    this.selectedAutocompleteIndex = -1;
+                    this.autocompleteResult = [];
                 } else {
                     var searchBaseURL = "/search?query=";
 
-                    if (App.defaultLanguage != App.language) {
+                    if (App.defaultLanguage !== App.language) {
                         searchBaseURL = "/" + App.language + "/search?query=";
                     }
 
@@ -19120,70 +19170,138 @@ Vue.component("item-search", {
                 this.preventSearch = false;
             }
         },
-        openItem: function openItem(suggestion) {
-            this.preventSearch = true;
-            window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
-        },
         updateTitle: function updateTitle(searchString) {
             document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString);
             document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString) + " | " + App.config.header.companyName;
         },
-        initAutocomplete: function initAutocomplete() {
+        autocomplete: function autocomplete(searchString) {
             var _this2 = this;
 
-            $(".search-input").autocomplete({
-                serviceUrl: "/rest/io/item/search/autocomplete",
-                paramName: "query",
-                params: { template: "Ceres::ItemList.Components.ItemSearch" },
-                width: $(".search-box-shadow-frame").width(),
-                zIndex: 1070,
-                maxHeight: 310,
-                minChars: 2,
-                preventBadQueries: false,
-                onSelect: function onSelect(suggestion) {
-                    _this2.$store.commit("setItemListSearchString", suggestion.value);
-                    _this2.currentSearchString = suggestion.value;
-
-                    if (App.config.search.forwardToSingleItem) {
-                        _this2.openItem(suggestion);
-                    } else {
-                        _this2.search();
-                    }
-                },
-                beforeRender: function beforeRender() {
-                    $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-                },
-
-                transformResult: function transformResult(response) {
-                    return _this2.transformSuggestionResult(response);
+            if (searchString.length >= 2) {
+                if (this.promiseCount >= Number.MAX_SAFE_INTEGER) {
+                    this.promiseCount = 0;
                 }
-            });
 
-            $(window).resize(function () {
-                $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-            });
+                var promiseCount = ++this.promiseCount;
+
+                _ApiService2.default.get("/rest/io/item/search/autocomplete", { template: "Ceres::ItemList.Components.ItemSearch", query: searchString }).done(function (response) {
+                    if (_this2.promiseCount === promiseCount) {
+                        _this2.transformAutocomplete(response, searchString);
+                    }
+                });
+            } else {
+                this.autocompleteResult = [];
+            }
         },
-        transformSuggestionResult: function transformSuggestionResult(result) {
+
+
+        // transform the autocomplete result to usable object
+        transformAutocomplete: function transformAutocomplete(data, searchString) {
+            this.autocompleteResult = [];
+            this.selectedAutocompleteIndex = -1;
+
+            if (data && data.documents.length) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = data.documents[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var item = _step.value;
+
+                        var images = this.$options.filters.itemImages(item.data.images, "urlPreview");
+                        var img = this.$options.filters.itemImage(images);
+                        var url = this.$options.filters.itemURL(item.data);
+                        var name = this.$options.filters.itemName(item.data);
+
+                        var displayName = name;
+
+                        var _iteratorNormalCompletion2 = true;
+                        var _didIteratorError2 = false;
+                        var _iteratorError2 = undefined;
+
+                        try {
+                            for (var _iterator2 = searchString.split(" ")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                                var split = _step2.value;
+
+                                displayName = displayName.replace(split, "<strong>" + split + "</strong>");
+                            }
+                        } catch (err) {
+                            _didIteratorError2 = true;
+                            _iteratorError2 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                    _iterator2.return();
+                                }
+                            } finally {
+                                if (_didIteratorError2) {
+                                    throw _iteratorError2;
+                                }
+                            }
+                        }
+
+                        this.autocompleteResult.push({
+                            img: img,
+                            url: url,
+                            name: name,
+                            displayName: displayName
+                        });
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        },
+        selectAutocompleteItem: function selectAutocompleteItem(item) {
+            if (this.forwardToSingleItem) {
+                window.open(item.url, "_self", false);
+            } else {
+                this.currentSearchString = item.name;
+                this.$store.commit("setItemListSearchString", this.currentSearchString);
+
+                this.search();
+            }
+        },
+        keyup: function keyup() {
+            this.selectedAutocompleteIndex--;
+
+            if (this.selectedAutocompleteIndex < 0) {
+                this.selectedAutocompleteIndex = 0;
+            }
+        },
+        keydown: function keydown() {
+            this.selectedAutocompleteIndex++;
+
+            if (this.selectedAutocompleteIndex > this.autocompleteResult.length - 1) {
+                this.selectedAutocompleteIndex = this.autocompleteResult.length - 1;
+            }
+        },
+
+
+        // hide autocomplete after 100ms to make clicking on it possible
+        setIsSearchFocused: function setIsSearchFocused(value) {
             var _this3 = this;
 
-            result = JSON.parse(result);
-            var suggestions = {
-                suggestions: $.map(result.data.documents, function (dataItem) {
-                    var value = _this3.$options.filters.itemName(dataItem.data);
-
-                    return {
-                        value: value,
-                        data: dataItem.data
-                    };
-                })
-            };
-
-            return suggestions;
+            setTimeout(function () {
+                _this3.isSearchFocused = !!value;
+            }, 100);
         }
     }
 });
 
-},{"services/TranslationService":132,"services/UrlService":133}],60:[function(require,module,exports){
+},{"services/ApiService":126,"services/TranslationService":132,"services/UrlService":133}],60:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -25030,12 +25148,12 @@ var actions = {
 
         return null;
     },
-    getLastSeenItems: function getLastSeenItems(_ref2) {
+    getLastSeenItems: function getLastSeenItems(_ref2, maxItems) {
         var commit = _ref2.commit;
 
         if (!state.isLastSeenItemsLoading) {
             return new Promise(function (resolve, reject) {
-                var params = { items: App.config.itemLists.lastSeenNumber };
+                var params = { items: maxItems || App.config.itemLists.lastSeenNumber };
 
                 commit("setIsLastSeenItemsLoading", true);
 
