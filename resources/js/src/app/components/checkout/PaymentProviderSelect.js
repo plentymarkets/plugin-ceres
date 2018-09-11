@@ -1,3 +1,6 @@
+import TranslationService from "services/TranslationService";
+const NotificationService = require("services/NotificationService");
+
 Vue.component("payment-provider-select", {
 
     delimiters: ["${", "}"],
@@ -43,7 +46,16 @@ Vue.component("payment-provider-select", {
 
         validate()
         {
-            this.$store.commit("setPaymentProviderShowError", !(this.methodOfPaymentId > 0));
+            const showError = !(this.methodOfPaymentId > 0);
+
+            this.$store.commit("setPaymentProviderShowError", showError);
+
+            if (showError)
+            {
+                NotificationService.error(
+                    TranslationService.translate("Ceres::Template.checkoutCheckPaymentProvider")
+                );
+            }
         }
     }
 });
