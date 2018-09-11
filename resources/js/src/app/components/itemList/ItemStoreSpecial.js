@@ -62,7 +62,7 @@ Vue.component("item-store-special", {
                 return this.getPercentageSale();
             }
 
-            return this.storeSpecial.names.name;
+            return "";
         },
 
         getPercentageSale()

@@ -82,7 +82,7 @@
                 <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}>
 
                     {{ Twig.if("slide.imageUrl is not empty") }}
-                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" class="img-cover">
+                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
                     {{ Twig.endif() }}
 
                     {{ Twig.if("slide.name is not empty and slide.headlineStyle != 'no-caption'") }}

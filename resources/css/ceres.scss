@@ -10679,6 +10679,9 @@ a:active {
     border-radius: 0;
 }
 
+.position-fixed {
+    position: fixed !important;
+}
 body {
 
 	background-color: $gray-lightest;
@@ -12697,6 +12700,7 @@ $border-width: 1px;
 	@media print {
 		display: none;
 	}
+
 	width: 100%;
 	z-index: $zIndex-6;
 	color: $top-bar-color;
@@ -12775,7 +12779,11 @@ $border-width: 1px;
 		}
 	}
 
-	.controls-list {
+	&.pos-f-t {
+		position: fixed;
+	}
+
+	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;
 		width: 100%;
@@ -15155,6 +15163,8 @@ nav.navbar.megamenu {
 					.item-name {
 						font-weight: 700;
 						font-size: 80%;
+						overflow-wrap: break-word;
+    					word-wrap: break-word;
 					}
 		
 					.item-base-price {
@@ -18939,6 +18949,20 @@ nav.navbar.megamenu {
                 -webkit-box-sizing: content-box;
                         box-sizing: content-box;
                 margin-bottom: 0;
+            }
+
+            &:first-child {
+                .widget-list {
+                    margin-left: 0;
+                    padding-left: 0;
+                }
+            }
+
+            &:last-child {
+                .widget-list {
+                    margin-right: 0;
+                    padding-right: 0;
+                }
             }
 
             @include media-breakpoint-down(sm) {

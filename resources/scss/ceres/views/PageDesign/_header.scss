@@ -10,6 +10,7 @@
 	@media print {
 		display: none;
 	}
+
 	width: 100%;
 	z-index: $zIndex-6;
 	color: $top-bar-color;
@@ -70,7 +71,11 @@
 		}
 	}
 
-	.controls-list {
+	&.pos-f-t {
+		position: fixed;
+	}
+
+	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;
 		width: 100%;

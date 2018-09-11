@@ -97,6 +97,7 @@
                                                {% if slider1.item.texts is not empty %}href="{{ slider1.item | itemURL }}"{% endif %}>
                                                 <img src="{{ slider1.url }}"
                                                      alt="{{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}"
+                                                     title="{{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}"
                                                      class="img-fluid">
                                                 {% if slider1.item.texts is not empty %}
                                                     <div class="carousel-caption">
@@ -115,6 +116,7 @@
                                                {% if slider2.item.texts is not empty %}href="{{ slider2.item | itemURL }}"{% endif %}>
                                                 <img src="{{ slider2.url }}"
                                                      alt="{{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}"
+                                                     title="{{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}"
                                                      class="img-fluid">
                                                 {% if slider2.item.texts is not empty %}
                                                     <div class="carousel-caption">
@@ -133,6 +135,7 @@
                                                {% if slider3.item.texts is not empty %}href="{{ slider3.item | itemURL }}"{% endif %}>
                                                 <img src="{{ slider3.url }}"
                                                      alt="{{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}"
+                                                     title="{{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}"
                                                      class="img-fluid">
                                                 {% if slider3.item.texts is not empty %}
                                                     <div class="carousel-caption">
@@ -185,6 +188,7 @@
                                    {% if heroExtra1.item.texts is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
                                     <img src="{{ heroExtra1.url }}"
                                          alt="{{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}">
+                                         title="{{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}">
                                     {% if heroExtra1.item.texts is not empty %}
                                         <div class="hero-category-inner">
                                             <h2 class="hero-category-headline">
@@ -205,6 +209,7 @@
                                    {% if heroExtra2.item.texts is not empty %}href="{{ heroExtra2.item | itemURL }}"{% endif %}>
                                     <img src="{{ heroExtra2.url }}"
                                          alt="{{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}">
+                                         title="{{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}">
                                     {% if heroExtra2.item.texts is not empty %}
                                         <div class="hero-category-inner">
                                             <h2 class="hero-category-headline">
@@ -237,6 +242,7 @@
                                             {% if category1.details[0].imagePath %}
                                                 <img src="documents/{{ category1.details[0].imagePath }}"
                                                      alt="{{ category1.details[0].name }}">
+                                                     title="{{ category1.details[0].name }}">
                                             {% endif %}
                                             <div class="featured-category-inner">
                                                 <h2 class="featured-category-headline">
@@ -263,6 +269,7 @@
                                             {% if category2.details[0].imagePath %}
                                                 <img src="documents/{{ category2.details[0].imagePath }}"
                                                      alt="{{ category2.details[0].name }}">
+                                                     title="{{ category2.details[0].name }}">
                                             {% endif %}
                                             <div class="featured-category-inner">
                                                 <h2 class="featured-category-headline">
@@ -320,6 +327,7 @@
                                             {% if category4.details[0].imagePath %}
                                                 <img src="/documents/{{ category4.details[0].imagePath }}"
                                                      alt="{{ category4.details[0].name }}">
+                                                     title="{{ category4.details[0].name }}">
                                             {% endif %}
                                             <div class="featured-category-inner">
                                                 <h2 class="featured-category-headline">
@@ -347,6 +355,7 @@
                                             {% if category5.details[0].imagePath %}
                                                 <img src="/documents/{{ category5.details[0].imagePath }}"
                                                      alt="{{ category5.details[0].name }}">
+                                                     title="{{ category5.details[0].name }}">
                                             {% endif %}
                                             <div class="featured-category-inner">
                                                 <h2 class="featured-category-headline">

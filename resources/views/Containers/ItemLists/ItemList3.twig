@@ -2,6 +2,7 @@
 
 {% set listType = config("Ceres.item.lists.3.list_type") %}
 {% set tagIds = config("Ceres.item.lists.3.tag_ids") | split(",") %}
+{% set tagSorting = config("Ceres.item.lists.tag_sorting") %}
 {% set itemListId = 3 %}
 {% set isHome = services.template.isHome() %}
 
