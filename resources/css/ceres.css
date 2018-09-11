@@ -20099,6 +20099,16 @@ body.menu-is-visible {
   margin-bottom: 0;
 }
 
+.footer .widget-grid .widget-inner:first-child .widget-list {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.footer .widget-grid .widget-inner:last-child .widget-list {
+  margin-right: 0;
+  padding-right: 0;
+}
+
 @media (max-width: 767px) {
   .footer .widget-grid .widget-inner:not(:last-child) .widget-list .widget-inner {
     padding-bottom: 0;
