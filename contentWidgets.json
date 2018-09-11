@@ -1318,7 +1318,7 @@
     {
         "identifier": "Ceres::NewsletterWidget",
         "label": "Widget.newsletterLabel",
-        "previewImageURL": "/images/widgets/newsletter.png",
+        "previewImageURL": "/images/widgets/newsletter.svg",
         "type": "default",
         "allowedNestingTypes": [
             "default",
