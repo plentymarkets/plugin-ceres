@@ -8,6 +8,8 @@
 
 {% if listType == "cross_selling" %}
     {% set itemList = item.CrossSellingItems.documents %}
+{% elseif listType == "tag_list" %}
+    {% set itemList = services.itemList.getItemList( listType, tagIds ).documents %}
 {% endif %}
 
 {% if listType == "last_seen" %}
