@@ -5,7 +5,7 @@
 <script type="x/template" id="vue-basket-preview">
     <div class="wrapper-inner basket-preview">
         <header class="basket-header p-a-1">
-            <div class="d-inline-block m-a-0 h3">{{ trans("Ceres::Template.basketPreview") }}</div>
+            <div class="d-inline-block m-a-0 basket-header-caption">{{ trans("Ceres::Template.basketPreview") }}</div>
             <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -31,7 +31,7 @@
 
                 <basket-totals template="#vue-basket-totals"></basket-totals>
 
-                <div class="row">
+                <div class="basket-preview-footer row">
                     <div class="col-xs-6 col-sm-6 m-b-1">
                         <a v-waiting-animation-infinite
                         href="{{ urls.basket }}"

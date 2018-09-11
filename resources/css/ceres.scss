@@ -10786,7 +10786,6 @@ body {
 
 		&.open-right{
 			overflow: hidden;
-			position: fixed;
 
 			.wrapper-right{
 				@include media-breakpoint-up(md) {
@@ -10811,7 +10810,7 @@ body {
 							-webkit-transform 300ms 10ms ease-in-out;
 
 				@include media-breakpoint-down(md) {
-					width: 100% !important;
+					width: 100%;
 				}
 			}
 		}
@@ -14979,12 +14978,11 @@ nav.navbar.megamenu {
 	}
 
 	& .item-bundle {
-		width: 300px;
 		font-weight: 700;
 		font-size: 80%;
 
-		@include media-breakpoint-down(sm) {
-			width: calc(100vw - 155px) !important;
+		@include media-breakpoint-up(md) {
+			width: 300px;
 		}
 	}
 
@@ -15061,12 +15059,11 @@ nav.navbar.megamenu {
 
 		.basket-item-container-right {
 			margin-left: auto;
-			display: -webkit-box;
-			display: -ms-flexbox;
-			display: flex;
 
-			@include media-breakpoint-down(sm) {
-				display: block !important;
+			@include media-breakpoint-up(md) {
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
 			}
 
 			.qty-box-container {

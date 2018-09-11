@@ -6,6 +6,13 @@
     .basket-header{
         flex: 0 0 auto;
         border-bottom: 1px solid $gray-lighter;
+
+        .basket-header-caption {
+            @include media-breakpoint-up(md) {
+                font-size: 1.5rem;
+            }
+            font-size: 1.25rem;
+        }
     } 
 
     .list{
@@ -23,6 +30,15 @@
             max-height: calc(100vh - 305px);
             margin-bottom: 5px;
         }
+
+        .cmp-basket-preview-list {
+            .split-basket-height {
+                @include media-breakpoint-only(sm) {
+                    height: calc(100vh - 70px);
+                    overflow: auto;
+                }
+            }
+        }
     }
 
     .totals{
@@ -30,17 +46,29 @@
 	    display: flex;
 	    flex-flow: column nowrap;
         border-top: 1px solid $gray-lighter;
-        height: 100vh;
+        
         @extend .small;
 
         dd, dt{
             margin-bottom: 0;
         }
 
+        @include media-breakpoint-down(xs) {
+            position: fixed;
+            bottom: 0;
+        }
+
+        @include media-breakpoint-up(sm) {
+            height: 100vh;
+        }
+
         @include media-breakpoint-only(sm) {
             border-top: 0 !important;
         }
-        
+    }
+
+    .basket-preview-footer {
+
     }
 }
 

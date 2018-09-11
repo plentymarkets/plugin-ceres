@@ -54,9 +54,9 @@
 
 	.split-totals-height {
 		@include media-breakpoint-only(sm) {
-			height: calc(100vh - 135px);
-			overflow: auto;
-			overflow-x: hidden;
+			// height: calc(100vh - 135px);
+			// overflow: auto;
+			// overflow-x: hidden;
 		}
 	}
 }

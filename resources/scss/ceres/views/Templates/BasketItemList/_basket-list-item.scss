@@ -241,10 +241,3 @@
 		}
 	}
 }
-
-.split-basket-height {
-	@include media-breakpoint-only(sm) {
-		height: calc(100vh - 70px);
-		overflow: auto;
-	}
-}
