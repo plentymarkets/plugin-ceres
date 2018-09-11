@@ -60,6 +60,20 @@
                 margin-bottom: 0;
             }
 
+            &:first-child {
+                .widget-list {
+                    margin-left: 0;
+                    padding-left: 0;
+                }
+            }
+
+            &:last-child {
+                .widget-list {
+                    margin-right: 0;
+                    padding-right: 0;
+                }
+            }
+
             @include media-breakpoint-down(sm) {
                 &:not(:last-child) {
                     .widget-list {
