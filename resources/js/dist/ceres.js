@@ -15181,6 +15181,14 @@ Vue.component("category-breadcrumbs", {
 },{}],18:[function(require,module,exports){
 "use strict";
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
 Vue.component("accept-gtc-check", {
 
     delimiters: ["${", "}"],
@@ -15208,7 +15216,13 @@ Vue.component("accept-gtc-check", {
 
     methods: {
         validate: function validate() {
-            this.$store.commit("setGtcShowError", !this.isChecked);
+            var showError = !this.isChecked;
+
+            this.$store.commit("setGtcShowError", showError);
+
+            if (showError) {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckAcceptGtc"));
+            }
         }
     },
 
@@ -15221,7 +15235,7 @@ Vue.component("accept-gtc-check", {
     }
 });
 
-},{}],19:[function(require,module,exports){
+},{"services/NotificationService":131,"services/TranslationService":132}],19:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -15418,6 +15432,14 @@ Vue.component("contact-wish-input", {
 },{}],21:[function(require,module,exports){
 "use strict";
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
 Vue.component("payment-provider-select", {
 
     delimiters: ["${", "}"],
@@ -15464,12 +15486,18 @@ Vue.component("payment-provider-select", {
             this.validate();
         },
         validate: function validate() {
-            this.$store.commit("setPaymentProviderShowError", !(this.methodOfPaymentId > 0));
+            var showError = !(this.methodOfPaymentId > 0);
+
+            this.$store.commit("setPaymentProviderShowError", showError);
+
+            if (showError) {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckPaymentProvider"));
+            }
         }
     }
 });
 
-},{}],22:[function(require,module,exports){
+},{"services/NotificationService":131,"services/TranslationService":132}],22:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -15726,6 +15754,14 @@ Vue.component("shipping-privacy-hint-check", {
 },{"services/NotificationService":131,"services/TranslationService":132}],24:[function(require,module,exports){
 "use strict";
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
 Vue.component("shipping-profile-select", {
 
     delimiters: ["${", "}"],
@@ -15775,12 +15811,18 @@ Vue.component("shipping-profile-select", {
             this.validate();
         },
         validate: function validate() {
-            this.$store.commit("setShippingProfileShowError", !(this.shippingProfileId > 0));
+            var showError = !(this.shippingProfileId > 0);
+
+            this.$store.commit("setShippingProfileShowError", showError);
+
+            if (showError) {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckShippingProfile"));
+            }
         }
     }
 });
 
-},{}],25:[function(require,module,exports){
+},{"services/NotificationService":131,"services/TranslationService":132}],25:[function(require,module,exports){
 "use strict";
 
 Vue.component("container-item-list", {
@@ -16395,6 +16437,10 @@ var _ValidationService = require("services/ValidationService");
 
 var _ValidationService2 = _interopRequireDefault(_ValidationService);
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NotificationService = require("services/NotificationService");
@@ -16437,7 +16483,38 @@ Vue.component("create-update-address", {
             _ValidationService2.default.validate($(this.addressFormNames[this.addressType])).done(function () {
                 _this.saveAddress();
             }).fail(function (invalidFields) {
+                var fieldNames = [];
+
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = invalidFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var field = _step.value;
+
+                        var fieldName = field.lastElementChild.innerHTML;
+
+                        fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
+                        fieldNames.push(fieldName);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") }));
             });
         },
 
@@ -16501,27 +16578,27 @@ Vue.component("create-update-address", {
 
             var errorMessage = "";
 
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
 
             try {
-                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var value = _step.value;
+                for (var _iterator2 = Object.values(validationErrors)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var value = _step2.value;
 
                     errorMessage += value + "<br>";
                 }
             } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
                     }
                 } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
                     }
                 }
             }
@@ -16531,13 +16608,13 @@ Vue.component("create-update-address", {
         _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
 
             if (typeof this.addressData.options !== "undefined") {
-                var _iteratorNormalCompletion2 = true;
-                var _didIteratorError2 = false;
-                var _iteratorError2 = undefined;
+                var _iteratorNormalCompletion3 = true;
+                var _didIteratorError3 = false;
+                var _iteratorError3 = undefined;
 
                 try {
-                    for (var _iterator2 = this.addressData.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                        var optionType = _step2.value;
+                    for (var _iterator3 = this.addressData.options[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                        var optionType = _step3.value;
 
                         switch (optionType.typeId) {
                             case 1:
@@ -16575,16 +16652,16 @@ Vue.component("create-update-address", {
                         }
                     }
                 } catch (err) {
-                    _didIteratorError2 = true;
-                    _iteratorError2 = err;
+                    _didIteratorError3 = true;
+                    _iteratorError3 = err;
                 } finally {
                     try {
-                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                            _iterator2.return();
+                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                            _iterator3.return();
                         }
                     } finally {
-                        if (_didIteratorError2) {
-                            throw _iteratorError2;
+                        if (_didIteratorError3) {
+                            throw _iteratorError3;
                         }
                     }
                 }
@@ -16596,8 +16673,16 @@ Vue.component("create-update-address", {
     }
 });
 
-},{"services/NotificationService":131,"services/ValidationService":134}],31:[function(require,module,exports){
+},{"services/NotificationService":131,"services/TranslationService":132,"services/ValidationService":134}],31:[function(require,module,exports){
 "use strict";
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
 
 Vue.component("invoice-address-select", {
 
@@ -16659,7 +16744,13 @@ Vue.component("invoice-address-select", {
             }
         },
         validate: function validate() {
-            this.$store.commit("setInvoiceAddressShowError", this.billingAddressId <= 0);
+            var showError = this.billingAddressId <= 0;
+
+            this.$store.commit("setInvoiceAddressShowError", showError);
+
+            if (showError) {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckInvoiceAddress"));
+            }
         }
     },
 
@@ -16672,7 +16763,7 @@ Vue.component("invoice-address-select", {
     }
 });
 
-},{}],32:[function(require,module,exports){
+},{"services/NotificationService":131,"services/TranslationService":132}],32:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-address-select", {
@@ -16769,16 +16860,49 @@ Vue.component("contact-form", {
                 } else {
                     _this.privacyPolicyShowError = true;
 
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactCheckEntries"));
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" }));
                 }
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
 
                 if (_this.enableConfirmingPrivacyPolicy && !_this.privacyPolicyAccepted) {
                     _this.privacyPolicyShowError = true;
+
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" }));
                 }
 
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactCheckEntries"));
+                var invalidFieldNames = [];
+
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = invalidFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var invalidField = _step.value;
+
+
+                        var invalidFieldName = invalidField.lastElementChild.innerHTML;
+
+                        invalidFieldName = invalidFieldName.slice(-1) === "*" ? invalidFieldName.slice(0, invalidFieldName.length - 1) : invalidFieldName;
+                        invalidFieldNames.push(invalidFieldName);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactCheckFormFields", { fields: invalidFieldNames.join(", ") }));
             });
         },
         sendMail: function sendMail() {
@@ -16823,27 +16947,27 @@ Vue.component("contact-form", {
 
             var errorMessage = "";
 
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
 
             try {
-                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var value = _step.value;
+                for (var _iterator2 = Object.values(validationErrors)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var value = _step2.value;
 
                     errorMessage += value + "<br>";
                 }
             } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
                     }
                 } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
                     }
                 }
             }
@@ -22558,6 +22682,7 @@ function defaultValue(input, defaultValue) {
 "use strict";
 
 var browserDetect = require("detect-browser");
+var NotificationService = require("services/NotificationService");
 // Frontend end scripts
 // eslint-disable-next-line
 var init = function ($, window, document) {
@@ -22710,9 +22835,10 @@ var init = function ($, window, document) {
     }
 
     window.CeresMain = new CeresMain();
+    window.CeresNotification = NotificationService;
 }(jQuery, window, document);
 
-},{"detect-browser":1}],125:[function(require,module,exports){
+},{"detect-browser":1,"services/NotificationService":131}],125:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

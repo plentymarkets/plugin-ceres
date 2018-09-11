@@ -50,7 +50,7 @@ Vue.component("shipping-profile-select", {
             const showError = !(this.shippingProfileId > 0);
 
             this.$store.commit("setShippingProfileShowError", showError);
-            
+
             if (showError)
             {
                 NotificationService.error(
