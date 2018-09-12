@@ -19,7 +19,7 @@
 
 
 <div class="breadcrumbs{% if not isFixed %} unfixed{% endif %}">
-    <nav id="twig-rendered-breadcrumbs" class="container-max small hidden-sm-down">
+    <nav class="container-max small hidden-sm-down" data-component="breadcrumbs" data-renderer="twig">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="{{ Twig.print('urls.home') }}">
