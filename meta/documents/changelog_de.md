@@ -11,8 +11,6 @@
 - Der Titel der Shop Builder Bilderbox kann jetzt bearbeitet werden.
 - Die Überschrift von Artikellisten im Shop Builder kann nun bearbeitet und ausgeblendet werden.
 - Es wurden Vorlagen für Header, Footer und Startseite hinzugefügt, welche im Shop Builder verwendet werden können.
-- Ceres bietet jetzt die Möglichkeit, eine Registrierung für Newsletter durchzuführen.
-- Das Widget für die Newsletter-Registrierung wurde zum Shop Builder hinzugefügt.
 
 ### Geändert
 
