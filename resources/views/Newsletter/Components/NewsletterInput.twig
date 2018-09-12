@@ -7,28 +7,28 @@
                         <span class="h1">${ title }</span>
                     </div>
                     <div class="col-xs-12 m-t-1" v-if="subTitle">
-                        <span>${ subTitle }</span>
+                        <p>${ subTitle }</p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-6" v-if="showNameInputs">
                         <div class="input-unit">
-                            <label for="first_name_input">Vorname</label>
+                            <label for="first_name_input">{{ trans("Ceres::Template.newsletterFirstName") }}</label>
                             <input type="text" id="first_name_input" v-model="firstName">
                         </div>
                     </div>
                     <div class="col-xs-6 p-l-0" v-if="showNameInputs">
                         <div class="input-unit">
-                            <label for="last_name_input">Nachname</label>
+                            <label for="last_name_input">{{ trans("Ceres::Template.newsletterLastName") }}</label>
                             <input type="text" id="last_name_input" v-model="lastName">
                         </div>
                     </div>
 
                     <div class="col-xs-12">
                         <div class="input-group">
-                            <div class="input-unit" data-validate="text">
-                                <label for="email_input_id">E-MAIL *</label>
+                            <div class="input-unit" data-validate="mail">
+                                <label for="email_input_id">{{ trans("Ceres::Template.newsletterEmail") }} *</label>
                                 <input type="email" id="email_input_id" v-model="email">
                             </div>
                             <div class="input-group-btn p-l-1">
@@ -38,6 +38,14 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-xs-12">
+                        <label for="privacy-policy-accept" class="form-check-label" data-validate>
+                            <input type="checkbox" class="form-check-input" id="privacy-policy-accept" :checked="value">
+                            AGBs bestätigen bla bla
+                        </label>
+                    </div>
+
                 </div>
             </form>
         </div>
