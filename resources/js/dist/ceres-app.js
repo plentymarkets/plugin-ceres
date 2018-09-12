@@ -22944,16 +22944,15 @@ function _loadOptionalData(currentCategory) {
 }
 
 function _firstRendering() {
-    var twigBreadcrumbs = document.querySelector("#twig-rendered-breadcrumbs");
+    var twigBreadcrumbs = document.querySelectorAll("[data-component=\"breadcrumbs\"][data-renderer=\"twig\"]");
+    var vueBreadcrumbs = document.querySelectorAll("[data-component=\"breadcrumbs\"][data-renderer=\"vue\"]");
 
-    if (twigBreadcrumbs) {
-        twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+    for (var i = 0; i < twigBreadcrumbs.length; i++) {
+        twigBreadcrumbs[i].remove();
     }
 
-    var vueBreadcrumbs = document.querySelector("#vue-rendered-breadcrumbs");
-
-    if (vueBreadcrumbs) {
-        vueBreadcrumbs.style.removeProperty("display");
+    for (var j = 0; j < vueBreadcrumbs.length; j++) {
+        vueBreadcrumbs[j].style.removeProperty("display");
     }
 }
 
