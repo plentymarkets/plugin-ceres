@@ -11,15 +11,21 @@
         <div class="container-max page-content">
             <div class="row">
                 <div class="col-xs-12 m-b-1">
-                    <div class="input-group">
-                        <input type="email" name="email" class="form-control" id="emailInput" placeholder="Enter email">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                                &nbsp;
-                            </button>
-                        </span>
+                    <span>{{ trans("Ceres::Template.newsletterOptOutInfoText") }}</span>
+                </div>
+                <div class="col-xs-12 m-b-1">
+                    <div class="input-unit">
+                        <label for="email-input-id">Email</label>
+                        <input type="email" name="email" class="form-control" id="email-input-id">
                     </div>
+                </div>
+                <div class="col-xs-12 m-b-1">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                            {{ trans("Ceres::Template.newsletterUnsubscribeButtonLabel") }}
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>

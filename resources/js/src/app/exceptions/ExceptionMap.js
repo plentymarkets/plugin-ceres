@@ -6,6 +6,7 @@ export const exceptionMap = new Map(
         ["4", "notificationsCheckPassword"],
         ["5", "notificationsItemBundleSplitted"],
         ["6", "notificationsItemOutOfStock"],
+        ["7", "newsletterOptOutSuccessMessage"],
         ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"],
         ["401", "notificationsCalculateShippingFailed"]
     ]

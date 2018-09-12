@@ -24,6 +24,11 @@ Vue.component("newsletter-input", {
         {
             type: Boolean,
             default: false
+        },
+        showPrivacyPolicyCheckbox:
+        {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -33,7 +38,8 @@ Vue.component("newsletter-input", {
             firstName: "",
             lastName: "",
             email: "",
-            isDisabled: false
+            isDisabled: false,
+            privacyPolicyValue: false
         };
     },
 
@@ -70,16 +76,23 @@ Vue.component("newsletter-input", {
                 .done(() =>
                 {
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.resetPwChangePasswordSuccessful")
+                        TranslationService.translate("Ceres::Template.newsletterSuccessMessage")
                     ).closeAfter(3000);
-
+                    this.resetInputs();
                 })
                 .fail(() =>
                 {
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.resetPwChangePasswordFailed")
+                        TranslationService.translate("Ceres::Template.newsletterErrorMessage")
                     ).closeAfter(5000);
                 });
+        },
+        resetInputs()
+        {
+            this.firstName = "";
+            this.lastName = "";
+            this.email = "";
+            this.privacyPolicyValue = false;
         }
     }
 });
