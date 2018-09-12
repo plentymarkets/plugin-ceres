@@ -11,8 +11,6 @@
 - You can now edit the title of the image box of the Shop Builder.
 - You can now edit or disable the title of item lists in the Shop Builder.
 - We added templates for the header, footer and homepage that can be used for the Shop Builder.
-- Ceres now offers newsletter registration.
-- We added the widget for newsletter registration to the shop builder.
 
 ### Changed
 
