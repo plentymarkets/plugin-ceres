@@ -1,5 +1,34 @@
 # Release Notes für Ceres
 
+## v2.15.0 (2018-09-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.14.0...2.15.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Dem SEO-Tab der Ceres-Konfiguration wurde ein Mapping hinzugefügt, durch welches Schema.org Verfügbarkeiten auf plentymarkets Verfügbarkeiten übertragen werden können.
+- Die folgenden Shop Builder Widgets wurden hinzugefügt: Top-Bar (Header), Kategorie-Navigation (Header), Breadcrumb-Navigation (Header), Rechtliche Informationen (Footer), Liste, Linkliste, Trennlinie.
+- Die Slides des Shop Builder Bilderkarussels können nun durch zusätzliche Slides erweitert werden.
+- Die Bildüberschriften von Slides im Bilderkarussell des Shop Builders können jetzt bearbeitet und ausgeblendet werden.
+- Der Titel der Shop Builder Bilderbox kann jetzt bearbeitet werden.
+- Die Überschrift von Artikellisten im Shop Builder kann nun bearbeitet und ausgeblendet werden.
+- Es wurden Vorlagen für Header, Footer und Startseite hinzugefügt, welche im Shop Builder verwendet werden können.
+- Ceres bietet jetzt die Möglichkeit, eine Registrierung für Newsletter durchzuführen.
+- Das Widget für die Newsletter-Registrierung wurde zum Shop Builder hinzugefügt.
+
+### Geändert
+
+- In der Kaufabwicklung wurden Events hinzugefügt, die auf Änderungen an der ausgewählten Adresse hinweisen.
+- Die Fehlermeldungen auf der Kontaktseite werden jetzt analog zu Fehlermeldungen auf anderen Seiten dargestellt.
+- Die Fehlermeldungen der Kaufabwicklung wurden dahingehend verbessert, dass ungültige Eingabefelder hervorgehoben werden.
+- Die Fehlermeldungen der Adresseingabe wurden dahingehend verbessert, dass ungültige Eingabefelder hervorgehoben werden.
+- Die Anzahl der sichtbaren Artikel einer Artikelliste ist nun wählbar.
+
+### Behoben
+
+- Die am Kunden hinterlegte Login-URL funktioniert nun auch für Ceres.
+- Durch einen Fehler wurde das Hinzufügen zur Wunschliste durch Klick auf den Wunschlisten-Button nicht immer registriert. Dies wurde behoben.
+- Die Höhe von Widgets in einem Shop Builder Strukturelement mit vier Spalten wird nun korrekt berechnet.
+- Die maximale Anzahl der Artikel wird nun in der "Zuletzt angesehen"-Artikelliste des Shop Builders beachtet.
+
 ## v2.14.0 (2018-08-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
