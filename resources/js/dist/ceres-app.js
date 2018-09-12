@@ -19365,7 +19365,7 @@ Vue.component("item-store-special", {
                 return this.getPercentageSale();
             }
 
-            return "";
+            return this.storeSpecial.names.name;
         },
         getPercentageSale: function getPercentageSale() {
             // eslint-disable-next-line
