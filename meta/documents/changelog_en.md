@@ -1,5 +1,34 @@
 # Release Notes for Ceres
 
+## v2.15.0 (2018-09-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.14.0...2.15.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- We added a mapping for translating the standard availabilities of Schema.org to availabilities in plentymarkets. This is located in the SEO tab of the Ceres configuration.
+- The following widgets have been added to the Shop Builder: Top bar (Header), Category navigation (Header), Breadcrumb navigation (Header), Legal information (Footer), List, Link list, Dividing line.
+- You can now add additional slides to the image carousel of the Shop Builder.
+- You can now edit or disable the image titles of slides in the image carousel of the Shop Builder.
+- You can now edit the title of the image box of the Shop Builder.
+- You can now edit or disable the title of item lists in the Shop Builder.
+- We added templates for the header, footer and homepage that can be used for the Shop Builder.
+- Ceres now offers newsletter registration.
+- We added the widget for newsletter registration to the shop builder.
+
+### Changed
+
+- We added events in the checkout which indicate a change in the selected address.
+- Error messages on the contact page are now displayed analogously to error messages on other pages.
+- Error messages in the checkout have been improved, so that invalid input fields will be highlighted.
+- Error messages of address entry forms have been improved, so that invalid input fields will be highlighted.
+- You can now set the number of visible items in an item list.
+
+### Fixed
+
+- The login URL stored at the level of the customer now also works in Ceres.
+- Due to an error, clicking the wish list button did not always add an item to the wish list. This has been fixed.
+- The height of widgets in a Shop Builder structure element with four columns is now correctly calculated.
+- The maximum number of items is now considered by the item list of the type "last seen" in the Shop Builder.
+
 ## v2.14.0 (2018-08-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
