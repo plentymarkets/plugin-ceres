@@ -15779,7 +15779,6 @@ body.menu-is-visible {
     width: 100%;
     max-width: 100%;
     background: #efefef;
-    top: 96px;
   }
   .wrapper-main .breadcrumbs {
     background: #efefef;
@@ -15793,12 +15792,6 @@ body.menu-is-visible {
     margin: 0 auto;
     background: transparent;
     padding: .5rem 15px;
-  }
-}
-
-@media (min-width: 992px) {
-  .wrapper-main > nav.container-max {
-    top: 88px;
   }
 }
 
