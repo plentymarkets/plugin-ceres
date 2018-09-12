@@ -4,11 +4,11 @@
     {{ Tree.get_nav_bar(
         categories,
         "",
-        config("Ceres.header.megamenu_levels"),
+        ceresConfig.header.megamenuLevels,
         {
-            "1": config('Ceres.header.megamenu_items_stage_1'),
-            "2": config('Ceres.header.megamenu_items_stage_2'),
-            "3": config('Ceres.header.megamenu_items_stage_3')
+            "1": ceresConfig.header.megamenuItemsStage1,
+            "2": ceresConfig.header.megamenuItemsStage2,
+            "3": ceresConfig.header.megamenuItemsStage3
         }
     ) }}
 </ul>
