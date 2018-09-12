@@ -1,23 +1,23 @@
-{% set isNameEmpty = trans("Ceres::Template.itemList" ~ itemListId ~ "ListName") == 'Name' or 
-                     trans("Ceres::Template.itemList" ~ itemListId ~ "ListName") is empty %}
+{% set isNameEmpty = trans("Ceres::Template.itemList" ~ itemListNo ~ "ListName") == 'Name' or
+                     trans("Ceres::Template.itemList" ~ itemListNo ~ "ListName") is empty %}
 
 {% if listType == "last_seen" %}
     {% if isNameEmpty %}
         {% set header = trans("Ceres::Template.itemListLastSeen") %}
     {% else %}
-        {% set header = trans("Ceres::Template.itemList" ~ itemListId ~ "ListName") %}
+        {% set header = trans("Ceres::Template.itemList" ~ itemListNo ~ "ListName") %}
     {% endif %}
 {% elseif listType == "cross_selling" %}
     {% if isNameEmpty %}
         {% set header = trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) %}
     {% else %}
-        {% set header = trans("Ceres::Template.itemList" ~ itemListId ~ "ListName") %}
+        {% set header = trans("Ceres::Template.itemList" ~ itemListNo ~ "ListName") %}
     {% endif %}
 {% elseif listType == "tag_list" %}
     {% if isNameEmpty %}
         {% set header = "Tags" %}
     {% else %}
-        {% set header = trans("Ceres::Template.itemList" ~ itemListId ~ "ListName") %}
+        {% set header = trans("Ceres::Template.itemList" ~ itemListNo ~ "ListName") %}
     {% endif %}
 {% endif %}
 
