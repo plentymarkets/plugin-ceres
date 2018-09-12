@@ -9,6 +9,10 @@
 {% set megaMenuMaxItems3    = widget.settings.megaMenuMaxItems.stage3.mobile %}
 {% set megaMenuMaxItems     = { "1": megaMenuMaxItems1, "2": megaMenuMaxItems2, "3": megaMenuMaxItems3 } %}
 
+{% if companyLogoUrl is empty %}
+    {% set companyLogoUrl = plugin_path('Ceres') ~ "/images/ceres-logo.svg" %}
+{% endif %}
+
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
 <nav class="navbar{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
