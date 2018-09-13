@@ -9,7 +9,7 @@
 {{ Twig.set("slides", "[]") }}
 
 {% set slideData = widget.settings.slides.mobile %}
-{% if sliderParams is not empty %}
+{% if sliderParams is not empty and slideData is empty %}
     {% set slideData = sliderParams.mobile %}
 {% endif %}
 
