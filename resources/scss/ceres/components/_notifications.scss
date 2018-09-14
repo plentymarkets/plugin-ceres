@@ -4,8 +4,9 @@
     right: .5rem;
     top: 10rem;
 
-    @include media-breakpoint-up(xs) {
+    @include media-breakpoint-down(xs) {
         width: 100%;
         padding: 0 15px;
+        right: auto;
     }
 }
