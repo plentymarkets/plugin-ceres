@@ -140,6 +140,7 @@ gulp.task("build:lint", function()
     // Otherwise, the task may end before the stream has finished.
     return gulp.src([
         "resources/js/src/**/*.js",
+        "!resources/js/src/libraries/**",
         "!node_modules/**"
     ])
         .pipe(eslint({
