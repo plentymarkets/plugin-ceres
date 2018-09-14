@@ -15170,10 +15170,6 @@ nav.navbar.megamenu {
 				display: -ms-flexbox;
 				display: flex;
 
-				@include media-breakpoint-down(md) {
-					/* Code */
-				}
-
 				.meta-container {
 					display: -webkit-box;
 					display: -ms-flexbox;
