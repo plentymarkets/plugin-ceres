@@ -4,7 +4,7 @@
 
 ### ToDo
 
-- Im Zuge eines Bugfixes für das Bilderkarussel des Shop Builders wurde die Struktur der Einstellungen angepasst. Bilderkarussells, die vor der Version 2.15 erstellt wurden, funktionieren weiterhin, können jedoch nicht mehr bearbeitet werden. Sollten Sie Änderungen an diesem Widget vornehmen wollen, erstellen Sie bitte ein neues Bilderkarussell.
+- Im Zuge eines Bugfixes für das Bilderkarussell des Shop Builders wurde die Struktur der Einstellungen angepasst. Bilderkarussells, die vor der Version 2.15 erstellt wurden, funktionieren weiterhin, können jedoch nicht mehr bearbeitet werden. Sollten Sie Änderungen an diesem Widget vornehmen wollen, erstellen Sie bitte ein neues Bilderkarussell.
 
 ### Hinzugefügt
 
