@@ -14029,8 +14029,14 @@ Custom classes
   position: fixed;
   right: .5rem;
   top: 10rem;
-  width: 100%;
-  padding: 0 15px;
+}
+
+@media (max-width: 543px) {
+  .notification-wrapper {
+    width: 100%;
+    padding: 0 15px;
+    right: auto;
+  }
 }
 
 .popper {
@@ -16697,6 +16703,12 @@ body.menu-is-visible {
 .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner {
   display: -ms-flexbox;
   display: flex;
+}
+
+@media (max-width: 991px) {
+  .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner {
+    /* Code */
+  }
 }
 
 .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner .meta-container {
