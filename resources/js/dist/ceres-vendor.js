@@ -30625,7 +30625,7 @@ function now() {
   };
 
   if (typeof window !== 'undefined' && typeof window.addEventListener !== 'undefined') {
-    ['resize', 'scroll', 'touchmove'].forEach(function (event) {
+    ['resize', 'scroll'].forEach(function (event) {
       window.addEventListener(event, tick);
     });
   }
