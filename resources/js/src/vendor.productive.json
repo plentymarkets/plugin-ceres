@@ -14,5 +14,5 @@
   "node_modules/bootstrap/dist/js/bootstrap.min.js",
   "node_modules/moment/min/moment.min.js",
 
-  "resources/js/src/libraries/**/*.js"
+  "resources/js/src/libraries/**/*.min.js"
 ]
