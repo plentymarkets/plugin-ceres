@@ -1,0 +1,127 @@
+{
+    "identifier": "Ceres::ImageCarouselWidget",
+    "label": "Widget.imageCarouselLabel",
+    "previewImageURL": "/images/widgets/image-carousel.svg",
+    "type": "default",
+    "position": 500,
+    "allowedNestingTypes": [
+        "default",
+        "structure"
+    ],
+    "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": {
+                "name": "Widget.widgetAppearanceLabel",
+                "tooltip": "Widget.widgetAppearanceTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "primary",
+                        "caption": "Widget.widgetAppearancePrimary",
+                        "position": 0
+                    },
+                    {
+                        "value": "secondary",
+                        "caption": "Widget.widgetAppearanceSecondary",
+                        "position": 1
+                    },
+                    {
+                        "value": "success",
+                        "caption": "Widget.widgetAppearanceSuccess",
+                        "position": 2
+                    },
+                    {
+                        "value": "info",
+                        "caption": "Widget.widgetAppearanceInfo",
+                        "position": 3
+                    },
+                    {
+                        "value": "warning",
+                        "caption": "Widget.widgetAppearanceWarning",
+                        "position": 4
+                    },
+                    {
+                        "value": "danger",
+                        "caption": "Widget.widgetAppearanceDanger",
+                        "position": 5
+                    }
+                ]
+            }
+        },
+        "slides": {
+            "type": "vertical",
+            "isList": "[1,]",
+            "options": {
+                "name": "Widget.imageCarouselSlide"
+            },
+            "children": {
+                "headlineStyle": {
+                    "type": "select",
+                    "required": true,
+                    "defaultValue": "default-caption",
+                    "options": {
+                        "name": "Widget.imageCarouselCaptionLabel",
+                        "tooltip": "Widget.imageCarouselCaptionTooltip",
+                        "listBoxValues": [
+                            {
+                                "value": "default-caption",
+                                "caption": "Widget.imageCarouselCaptionDefault",
+                                "position": 0
+                            },
+                            {
+                                "value": "custom-caption",
+                                "caption": "Widget.imageCarouselCaptionCustom",
+                                "position": 1
+                            },
+                            {
+                                "value": "no-caption",
+                                "caption": "Widget.imageCarouselCaptionNoCaption",
+                                "position": 2
+                            }
+                        ]
+                    }
+                },
+                "headline": {
+                    "type": "text",
+                    "required": false,
+                    "isVisible": "$slides.headlineStyle === 'custom-caption'",
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.imageCarouselHeadlineLabel",
+                        "tooltip": "Widget.imageCarouselHeadlineTooltip"
+                    }
+                },
+                "categoryId": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.imageCarouselCategoryIdLabel",
+                        "tooltip": "Widget.imageCarouselCategoryIdTooltip"
+                    }
+                },
+                "variationId": {
+                    "type": "number",
+                    "required": false,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.imageCarouselVariationIdLabel",
+                        "tooltip": "Widget.imageCarouselVariationIdTooltip"
+                    }
+                },
+                "customImagePath": {
+                    "type": "file",
+                    "required": false,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.imageCarouselCustomImagePathLabel",
+                        "tooltip": "Widget.imageCarouselCustomImagePathTooltip"
+                    }
+                }
+            }
+        }
+    }
+}

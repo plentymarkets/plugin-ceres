@@ -13,6 +13,11 @@ Vue.component("container-item-list", {
         {
             type: Array,
             default: []
+        },
+        itemsPerPage:
+        {
+            type: Number,
+            default: 4
         }
     },
 
@@ -25,7 +30,7 @@ Vue.component("container-item-list", {
     {
         this.$nextTick(() =>
         {
-            if (this.items.length > 4)
+            if (this.items.length > this.itemsPerPage)
             {
                 this.initializeCarousel();
             }
@@ -36,10 +41,21 @@ Vue.component("container-item-list", {
     {
         columnWidths()
         {
+            let itemsPerPage = this.itemsPerPage;
+
+            if (itemsPerPage < 1)
+            {
+                itemsPerPage = 1;
+            }
+            else if (itemsPerPage > 4)
+            {
+                itemsPerPage = 4;
+            }
+
             return [
                 "col-xs-12",
-                "col-sm-6",
-                "col-md-" + (12 / this.items.length)
+                itemsPerPage === 1 ? "col-sm-12" : "col-sm-6",
+                "col-md-" + (12 / itemsPerPage)
             ];
         }
     },
@@ -51,19 +67,16 @@ Vue.component("container-item-list", {
             $(this.$refs.carouselContainer).owlCarousel({
                 autoHeight       : true,
                 dots             : true,
-                items            : 4,
+                items            : this.itemsPerPage,
                 responsive: {
                     0: {
                         items: 1
                     },
                     544: {
-                        items: 2
+                        items: (this.itemsPerPage > 1) ? 2 : 1
                     },
                     768: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 4
+                        items: this.itemsPerPage
                     }
                 },
                 lazyLoad         : false,

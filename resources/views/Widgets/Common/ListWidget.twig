@@ -1,0 +1,17 @@
+{% set hasPlaceholder = widget.settings.texts | length <= 0 %}
+
+<div class="widget widget-list{% if hasPlaceholder %} widget-placeholder{% endif %}">
+    <div class="widget-inner">
+        <ul class="list-container">
+            {% for entry in widget.settings.texts.mobile %}
+                <li>
+                    {% if widget.settings.icon.mobile != "none" %}
+                        <i class="fa {{ widget.settings.icon.mobile }}" aria-hidden="true"></i>
+                    {% endif %}
+
+                    {{ entry }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

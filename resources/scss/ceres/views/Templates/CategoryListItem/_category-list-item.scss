@@ -208,6 +208,10 @@
         .vat-porto-info {
             white-space: normal !important;
         }
+
+        .thumb-image {
+            float: left;
+        }
     }
 
     @include media-breakpoint-down(md){

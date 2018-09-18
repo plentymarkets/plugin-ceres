@@ -1,8 +1,8 @@
 <script type="x/template" id="vue-last-seen-item-list">
     <div v-if="items.length">
-        <slot name="heading"></slot>
-        <div class="row clearfix">
-            <container-item-list :items="items"></container-item-list>
+        <div class="col-xs-12">
+            <slot name="heading"></slot>
         </div>
+        <container-item-list :items="items" :items-per-page="itemsPerPage"></container-item-list>
     </div>
 </script>

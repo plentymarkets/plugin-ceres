@@ -1,0 +1,107 @@
+{
+    "identifier": "Ceres::NavigationWidget",
+    "label": "Widget.navigationLabel",
+    "previewImageURL": "/images/widgets/navigation.svg",
+    "type": "header",
+    "position": 0,
+    "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
+    "settings": {
+        "isFixed": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.navigationIsFixedLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "navigationStyle": {
+            "type": "selectBox",
+            "required": true,
+            "label": "Widget.navigationNavigationStyleLabel",
+            "options": {
+                "tooltip": "Widget.navigationNavigationStyleTooltip",
+                "defaultValue": "normal",
+                "selectBoxValues": [
+                    {
+                        "value": "normal",
+                        "caption": "Widget.navigationNavigationStyleNormal",
+                        "position": 0
+                    },
+                    {
+                        "value": "megaMenu",
+                        "caption": "Widget.navigationNavigationStyleMegaMenu",
+                        "position": 0
+                    }
+                ]
+            }
+        },
+        "megaMenuLevels": {
+            "type": "selectBox",
+            "required": false,
+            "label": "Widget.navigationMegaMenuLevelsLabel",
+            "options": {
+                "tooltip": "Widget.navigationMegaMenuLevelsTooltip",
+                "defaultValue": 2,
+                "selectBoxValues": [
+                    {
+                        "value": 2,
+                        "caption": "Widget.navigationMegaMenuLevels2"
+                    },
+                    {
+                        "value": 3,
+                        "caption": "Widget.navigationMegaMenuLevels3"
+                    },
+                    {
+                        "value": 4,
+                        "caption": "Widget.navigationMegaMenuLevels4"
+                    }
+                ]
+            }
+        },
+        "megaMenuMaxItems": {
+            "type": "verticalContainer",
+            "label": "Widget.navigationMegaMenuMaxItemsLabel",
+            "required": false,
+            "options": {
+                "containerEntries": {
+                    "stage1": {
+                        "type": "inputNumber",
+                        "required": false,
+                        "label": "Widget.navigationMegaMenuMaxItemsStage1Label",
+                        "options": {
+                            "tooltip": "Widget.navigationMegaMenuMaxItemsStage1Tooltip",
+                            "defaultValue": 30
+                        }
+                    },
+                    "stage2": {
+                        "type": "inputNumber",
+                        "required": false,
+                        "label": "Widget.navigationMegaMenuMaxItemsStage2Label",
+                        "options": {
+                            "tooltip": "Widget.navigationMegaMenuMaxItemsStage2Tooltip",
+                            "defaultValue": 3
+                        }
+                    },
+                    "stage3": {
+                        "type": "inputNumber",
+                        "required": false,
+                        "label": "Widget.navigationMegaMenuMaxItemsStage3Label",
+                        "options": {
+                            "tooltip": "Widget.navigationMegaMenuMaxItemsStage3Tooltip",
+                            "defaultValue": 2
+                        }
+                    }
+                }
+            }
+        },
+        "companyLogoUrl": {
+            "type": "inputFile",
+            "required": false,
+            "label": "Widget.navigationCompanyLogoUrlLabel",
+            "options": {
+                "tooltip": "Widget.navigationCompanyLogoUrlTooltip",
+                "defaultValue": ""
+            }
+        }
+    }
+}

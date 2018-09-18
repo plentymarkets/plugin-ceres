@@ -11,6 +11,30 @@
             margin-bottom: 0;
         }
     }
+
+    &.widget-placeholder {
+        position: relative;
+        border: 3px dashed #dadae3;
+        border-radius: 3px;
+        height: 75px;
+        line-height: 75px;
+        vertical-align: middle;
+        text-align: center;
+        color: #dadae3;
+        font-size: 20px;
+        font-style: italic;
+
+        &:after {
+            content: 'Placeholder';
+            text-align: center;
+            display: block;
+            font-size: 20px;
+            top: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    }
 }
 
 @include media-breakpoint-down(sm)
@@ -60,6 +84,11 @@
     {
         padding-bottom: 66.6666%;
     }
+    
+    .widget-grid-1-1-1-1 > .widget-inner .widget.widget-proportional
+    {
+        padding-bottom: 100%;
+    }
 
     .widget-grid-1-2 > .widget-inner:last-child .widget-proportional,
     .widget-grid-2-1 > .widget-inner:first-child .widget-proportional,
@@ -91,4 +120,8 @@
             }
         }
     }
+}
+
+.widget-editable-min-height {
+    min-height: 40px;
 }

@@ -1,4 +1,5 @@
 const browserDetect = require("detect-browser");
+const NotificationService = require("services/NotificationService");
 // Frontend end scripts
 // eslint-disable-next-line
 var init = (function($, window, document)
@@ -195,5 +196,6 @@ var init = (function($, window, document)
     }
 
     window.CeresMain = new CeresMain();
+    window.CeresNotification = NotificationService;
 
 })(jQuery, window, document);

@@ -1,0 +1,44 @@
+{% set configuration = {
+    showCancellationRights: widget.settings.showCancellationRights.mobile,
+    showLegalDisclosure: widget.settings.showLegalDisclosure.mobile,
+    showPrivacyPolicy: widget.settings.showPrivacyPolicy.mobile,
+    showGtc: widget.settings.showGtc.mobile,
+    showCancellationForm: widget.settings.cancellationFormContainer.showCancellationForm.mobile,
+    useCancellationPdfUpload: widget.settings.cancellationFormContainer.useCancellationPdfUpload.mobile,
+    cancellationPdfPath: widget.settings.cancellationFormContainer.cancellationPdfPath.mobile
+} %}
+
+<div class="text-xs-center m-y-1">
+    <div class="static-link-list">
+        {% autoescape false %}
+
+            {% if configuration.showCancellationRights %}
+                <a href="{{ urls.cancellationRights }}">{{ trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
+            {% endif %}
+
+            {% if configuration.showCancellationForm %}
+                {% if not configuration.useCancellationPdfUpload %}
+                    <a href="{{ urls.cancellationForm }}">{{ trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
+                {% elseif configuration.cancellationPdfPath is not empty %}
+                    <a href="{{ configuration.cancellationPdfPath }}" target="_blank">{{ trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>    
+                {% endif %}
+            {% endif %}
+
+            {% if configuration.showLegalDisclosure %}
+                <a href="{{ urls.legalDisclosure }}">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
+            {% endif %}
+
+            {% if configuration.showPrivacyPolicy %}
+                <a href="{{ urls.privacyPolicy }}">{{ trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
+            {% endif %}
+
+            {% if configuration.showGtc %}
+                <a href="{{ urls.gtc }}">{{ trans("Ceres::Template.footerGtc") }}</a>
+            {% endif %}
+
+            {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
+                <a href="{{ urls.contact }}">{{ trans("Ceres::Template.footerContact") }}</a>
+            {% endif %}
+        {% endautoescape %}
+    </div>
+</div>

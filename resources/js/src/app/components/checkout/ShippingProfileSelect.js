@@ -1,3 +1,6 @@
+import TranslationService from "services/TranslationService";
+const NotificationService = require("services/NotificationService");
+
 Vue.component("shipping-profile-select", {
 
     delimiters: ["${", "}"],
@@ -44,7 +47,16 @@ Vue.component("shipping-profile-select", {
 
         validate()
         {
-            this.$store.commit("setShippingProfileShowError", !(this.shippingProfileId > 0));
+            const showError = !(this.shippingProfileId > 0);
+
+            this.$store.commit("setShippingProfileShowError", showError);
+
+            if (showError)
+            {
+                NotificationService.error(
+                    TranslationService.translate("Ceres::Template.checkoutCheckShippingProfile")
+                );
+            }
         }
     }
 });

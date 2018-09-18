@@ -1,7 +1,14 @@
 {% import "Ceres::Category.Macros.CategoryTree" as Tree %}
 
-{% set lang = services.sessionStorage.getLang() %}
-
 <ul class="mainmenu pull-lg-right">
-    {{ Tree.get_nav_bar(categories, "") }}
+    {{ Tree.get_nav_bar(
+        categories,
+        "",
+        ceresConfig.header.megamenuLevels,
+        {
+            "1": ceresConfig.header.megamenuItemsStage1,
+            "2": ceresConfig.header.megamenuItemsStage2,
+            "3": ceresConfig.header.megamenuItemsStage3
+        }
+    ) }}
 </ul>

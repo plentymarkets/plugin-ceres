@@ -1,0 +1,45 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set isFixed              = widget.settings.isFixed.mobile %}
+{% set navigationStyle      = widget.settings.navigationStyle.mobile %}
+{% set companyLogoUrl       = widget.settings.companyLogoUrl.mobile %}
+{% set megaMenuLevels       = widget.settings.megaMenuLevels.mobile %}
+{% set megaMenuMaxItems1    = widget.settings.megaMenuMaxItems.stage1.mobile %}
+{% set megaMenuMaxItems2    = widget.settings.megaMenuMaxItems.stage2.mobile %}
+{% set megaMenuMaxItems3    = widget.settings.megaMenuMaxItems.stage3.mobile %}
+{% set megaMenuMaxItems     = { "1": megaMenuMaxItems1, "2": megaMenuMaxItems2, "3": megaMenuMaxItems3 } %}
+
+{% if companyLogoUrl is empty %}
+    {% set companyLogoUrl = plugin_path('Ceres') ~ "/images/ceres-logo.svg" %}
+{% endif %}
+
+{{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
+
+<nav class="navbar{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
+    <div class="container-max">
+        <div class="row">
+            <div class="brand-wrapper">
+                <a class="navbar-brand pull-lg-left" href="{{ Twig.print('urls.home') }}">
+                    <img alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}" src="{{ companyLogoUrl }}" class="img-fluid" crossorigin="anonymous" />
+                </a>
+
+                <button id="btnMainMenuToggler" v-open-mobile-navigation class="navbar-toggler hidden-lg-up" type="button">
+                    &#9776;
+                </button>
+            </div>
+
+            <div id="mainNavbarCollapsable">
+                <ul class="breadcrumb">
+                    <li class="btnClose"></li>
+                </ul>
+
+
+                <ul class="mainmenu pull-lg-right">
+                    {{ Twig.print(Twig.call("Tree.get_nav_bar", [Twig.var("categories"), "", megaMenuLevels, megaMenuMaxItems])) }}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</nav>
+

@@ -1,0 +1,71 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set isFixed          = widget.settings.isFixed.mobile %}
+{% set showOnHomepage   = widget.settings.showOnHomepage.mobile %}
+{% set showOnMyAccount  = widget.settings.showOnMyAccount.mobile %}
+{% set showOnCheckout   = widget.settings.showOnCheckout.mobile %}
+
+{% if not showOnHomepage %}
+    {{ Twig.if("not services.template.isHome()") }}
+{% endif %}
+
+{% if not showOnMyAccount %}
+    {{ Twig.if("not services.template.isMyAccount()") }}
+{% endif %}
+
+{% if not showOnCheckout %}
+    {{ Twig.if("not services.template.isCheckout()") }}
+{% endif %}
+
+
+<div class="breadcrumbs{% if not isFixed %} unfixed{% endif %}">
+    <nav class="container-max small hidden-sm-down" data-component="breadcrumbs" data-renderer="twig">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ Twig.print('urls.home') }}">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </a>
+            </li>
+
+        {{ Twig.if("categoryBreadcrumbs is not empty") }}
+            {{ Twig.set("break", "false") }}
+            {{ Twig.for("category", "categoryBreadcrumbs[:categoryBreadcrumbs | length - 1]", "not break") }}
+                {{ Twig.if("category.details[0]") }}
+                    <li class="breadcrumb-item">
+                        <a href="{{ Twig.print(Twig.call("services.category.getURLById", [Twig.var("category.id")])) }}"
+                           v-render-category="{ id: {{ Twig.print("category.id") }}, type: '{{ Twig.print("category.type") }}', alwaysOpen: true }">
+
+                            {{ Twig.print("category.details[0].name") }}
+
+                        </a>
+                    </li>
+                {{ Twig.else() }}
+                    {{ Twig.set("break", "true") }}
+                {{ Twig.endif() }}
+            {{ Twig.endfor() }}
+
+            {{ Twig.set("lastCategory", "categoryBreadcrumbs | last") }}
+            {{ Twig.if("lastCategory.details is defined") }}
+                <li class="breadcrumb-item active"><span>{{ Twig.print("lastCategory.details[0].name") }}</span></li>
+            {{ Twig.else() }}
+                <li class="breadcrumb-item active" v-cloak v-if="$store.state.item.variation.documents">
+                    <span>${ $store.state.item.variation.documents[0].data | itemName }</span>
+                </li>
+            {{ Twig.endif() }}
+        {{ Twig.endif() }}
+        </ul>
+    </nav>
+    <category-breadcrumbs template="#vue-category-breadcrumbs"></category-breadcrumbs>
+</div>
+
+{% if not showOnHomepage %}
+    {{ Twig.endif() }}
+{% endif %}
+
+{% if not showOnMyAccount %}
+    {{ Twig.endif() }}
+{% endif %}
+
+{% if not showOnCheckout %}
+    {{ Twig.endif() }}
+{% endif %}
