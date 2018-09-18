@@ -27,7 +27,7 @@
         }
 
         @include media-breakpoint-down(xs) {
-            max-height: calc(100vh - 305px);
+            max-height: calc(100vh - 375px);
             margin-bottom: 5px;
         }
 
