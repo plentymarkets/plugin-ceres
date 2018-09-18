@@ -5,6 +5,9 @@
 <script type="x/template" id="vue-basket-list">
     <div>
         <div class="split-basket-height">
+            <div v-if="!basketItems.length > 0">
+                <div class="h5">{{ trans("Ceres::Template.basketNoItems") }}</div>
+            </div>
             <transition-group name="wish-list-item-transition" tag="div">
                 <basket-list-item template="#vue-basket-list-item" v-for="basketItem in basketItems" :key="basketItem.id" :basket-item="basketItem" :size="size" language="{{ services.sessionStorage.getLang() }}"></basket-list-item>
             </transition-group>
@@ -12,10 +15,6 @@
 
         <div v-if="!isBasketInitiallyLoaded" class="basket-loading-frame loading">
             {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-        </div>
-
-        <div v-else-if="!basketItems.length > 0">
-            <div class="h5">{{ trans("Ceres::Template.basketNoItems") }}</div>
         </div>
     </div>
 </script>
