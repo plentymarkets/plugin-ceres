@@ -218,9 +218,9 @@
 
         if ( !!header )
         {
-            function calculateBodyOffset()
+            window.calculateBodyOffset = function calculateBodyOffset()
             {
-                if ( header.classList.contains('pos-f-t') )
+                if ( header.classList.contains('pos-f-t'))
                 {
                     var bodyOffset = 0;
                     var children = header.children;
@@ -228,7 +228,15 @@
                     {
                         bodyOffset += children[i].getBoundingClientRect().height;
                     }
-                    document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
+                    
+                    if(document.getElementById('vue-app').classList.contains('open-right') && window.matchMedia("(max-width: 991px)").matches)
+                    {
+                        document.getElementById('vue-app').style.marginTop = '0px';
+                    }
+                    else
+                    {
+                        document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
+                    }         
                 }
             }
 

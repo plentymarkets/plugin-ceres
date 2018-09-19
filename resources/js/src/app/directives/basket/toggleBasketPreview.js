@@ -11,6 +11,9 @@ Vue.directive("toggle-basket-preview",
                     const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
 
                     vueApp.classList.toggle(basketOpenClass || "open-hover");
+
+                    window.calculateBodyOffset();
+
                     event.preventDefault();
                     event.stopPropagation();
                 }
