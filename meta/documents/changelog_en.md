@@ -2,6 +2,10 @@
 
 ## v2.15.0 (2018-09-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.14.0...2.15.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### ToDo
+
+- We adjusted the settings of the Shop Builder image carousel in the context of a bugfix. Image carousels created prior to version 2.15 are still working correctly, but can no longer be edited. If you want to make changes to this widget, please create a new image carousel.
+
 ### Added
 
 - We added a mapping for translating the standard availabilities of Schema.org to availabilities in plentymarkets. This is located in the SEO tab of the Ceres configuration.
