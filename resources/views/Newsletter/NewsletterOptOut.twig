@@ -10,16 +10,16 @@
     <form action="/newsletter-opt-out-confirmation">
         <div class="container-max page-content">
             <div class="row">
-                <div class="col-xs-12 m-b-1">
+                <div class="col-xs-12 col-sm-8 col-lg-6 m-b-3 content-center">
+                    <h1 class="m-b-3 m-t-2">{{ trans("Ceres::Template.newsletterOptOutTitle") }}</h1>
+
                     <span>{{ trans("Ceres::Template.newsletterOptOutInfoText") }}</span>
-                </div>
-                <div class="col-xs-12 m-b-1">
-                    <div class="input-unit">
+
+                    <div class="input-unit m-t-1">
                         <label for="email-input-id">Email</label>
                         <input type="email" name="email" class="form-control" id="email-input-id">
                     </div>
-                </div>
-                <div class="col-xs-12 m-b-1">
+
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-primary btn-block">
                             <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
