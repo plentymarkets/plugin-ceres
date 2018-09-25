@@ -138,6 +138,12 @@ button:focus {
 	float: right;
 }
 
+.btn-xs-max-width {
+	@include media-breakpoint-down(xs) {
+		width: 100% !important;
+	}
+}
+
 .btn-labeled {
 	padding-top: 0;
     padding-bottom: 0;
