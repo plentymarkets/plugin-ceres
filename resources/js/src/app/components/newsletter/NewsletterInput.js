@@ -59,6 +59,7 @@ Vue.component("newsletter-input", {
     methods: {
         validateData()
         {
+            this.isDisabled = true;
 
             ValidationService.validate($("#newsletter-input-form"))
                 .done(() =>
@@ -68,6 +69,8 @@ Vue.component("newsletter-input", {
                 .fail(invalidFields =>
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
+
+                    this.isDisabled = false;
                 });
         },
         save()
@@ -79,12 +82,16 @@ Vue.component("newsletter-input", {
                         TranslationService.translate("Ceres::Template.newsletterSuccessMessage")
                     ).closeAfter(3000);
                     this.resetInputs();
+
+                    this.isDisabled = false;
                 })
                 .fail(() =>
                 {
                     NotificationService.error(
                         TranslationService.translate("Ceres::Template.newsletterErrorMessage")
                     ).closeAfter(5000);
+
+                    this.isDisabled = false;
                 });
         },
         resetInputs()
