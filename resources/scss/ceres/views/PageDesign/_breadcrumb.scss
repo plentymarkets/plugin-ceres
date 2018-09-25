@@ -11,7 +11,6 @@
 		    width: 100%;
 		    max-width: 100%;
 		    background:$breadcrumb-bg;
-		    top:96px;
 		}
 		.breadcrumbs {
 			background: $breadcrumb-bg;
@@ -32,9 +31,6 @@
 }
 @include media-breakpoint-up(lg){
 	.wrapper-main {
-		& > nav.container-max {
-		    top:88px;
-		}
 		.breadcrumb{
 			@include media-breakpoint-up(xl){
 				padding: .5rem 0;

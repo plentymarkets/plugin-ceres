@@ -16,12 +16,17 @@ class ImageCarouselWidget extends BaseWidget
         {
             $slide = $widgetSettings[$slideName];
 
-            if (!empty($slide))
+            if (
+                !is_null($slide)
+                && array_key_exists( "mobile", $slide )
+                && !is_null( $slide["mobile"] )
+                && ( !is_null( $slide["mobile"] ) || !is_null( $slide["mobile"] ) || !is_null( $slide["mobile"] ) )
+            )
             {
                 $sliderParams[] = [
-                    "categoryId"      => $slide["categoryId"]["mobile"],
-                    "variationId"     => $slide["variationId"]["mobile"],
-                    "customImagePath" => $slide["customImagePath"]["mobile"]
+                    "categoryId"      => $slide["mobile"]["categoryId"],
+                    "variationId"     => $slide["mobile"]["variationId"],
+                    "customImagePath" => $slide["mobile"]["customImagePath"]
                 ];
             }
         }

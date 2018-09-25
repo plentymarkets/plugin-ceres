@@ -7,6 +7,14 @@
 {% set maxItems      = widget.settings.maxItems.mobile %}
 {% set categoryId    = widget.settings.categoryId.mobile %}
 {% set itemListId    = widget.settings.tagId.mobile %}
+{% set itemsPerPage  = widget.settings.itemsPerPage.mobile %}
+
+{% if itemsPerPage is empty or itemsPerPage > 4 %}
+    {% set itemsPerPage = 4 %}
+{% elseif itemsPerPage < 1 %}
+    {% set itemsPerPage = 1 %}
+{% endif %}
+
 
 {% if listType == "category" %}
     {% set itemListId = categoryId %}
@@ -46,7 +54,7 @@
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
-            <last-seen-item-list :max-items="{{ maxItems }}">
+            <last-seen-item-list :max-items="{{ maxItems }}" :items-per-page="{{ itemsPerPage }}">
                 <div class="widget-caption m-b-1" slot="heading">
                     <h2>{{ Twig.print("title") }}</h2>
                 </div>
@@ -67,7 +75,7 @@
 
             <div class="row clearfix">
                 {{ Twig.if("itemList.documents is not empty") }}
-                    <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}"></container-item-list>
+                    <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}" :items-per-page="{{ itemsPerPage }}"></container-item-list>
                 {{ Twig.endif() }}
             </div>
         {% endif %}

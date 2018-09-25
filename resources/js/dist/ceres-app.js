@@ -15476,6 +15476,10 @@ Vue.component("container-item-list", {
         items: {
             type: Array,
             default: []
+        },
+        itemsPerPage: {
+            type: Number,
+            default: 4
         }
     },
 
@@ -15486,7 +15490,7 @@ Vue.component("container-item-list", {
         var _this = this;
 
         this.$nextTick(function () {
-            if (_this.items.length > 4) {
+            if (_this.items.length > _this.itemsPerPage) {
                 _this.initializeCarousel();
             }
         });
@@ -15495,7 +15499,15 @@ Vue.component("container-item-list", {
 
     computed: {
         columnWidths: function columnWidths() {
-            return ["col-xs-12", "col-sm-6", "col-md-" + 12 / this.items.length];
+            var itemsPerPage = this.itemsPerPage;
+
+            if (itemsPerPage < 1) {
+                itemsPerPage = 1;
+            } else if (itemsPerPage > 4) {
+                itemsPerPage = 4;
+            }
+
+            return ["col-xs-12", itemsPerPage === 1 ? "col-sm-12" : "col-sm-6", "col-md-" + 12 / itemsPerPage];
         }
     },
 
@@ -15506,19 +15518,16 @@ Vue.component("container-item-list", {
             $(this.$refs.carouselContainer).owlCarousel({
                 autoHeight: true,
                 dots: true,
-                items: 4,
+                items: this.itemsPerPage,
                 responsive: {
                     0: {
                         items: 1
                     },
                     544: {
-                        items: 2
+                        items: this.itemsPerPage > 1 ? 2 : 1
                     },
                     768: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 4
+                        items: this.itemsPerPage
                     }
                 },
                 lazyLoad: false,
@@ -15561,6 +15570,11 @@ Vue.component("last-seen-item-list", {
         maxItems: {
             type: Number,
             default: App.config.itemLists.lastSeenNumber || 4
+        },
+
+        itemsPerPage: {
+            type: Number,
+            default: 4
         }
     },
 
@@ -19339,25 +19353,29 @@ Vue.component("item-store-special", {
 
     methods: {
         getLabel: function getLabel() {
-            if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-                if (this.storeSpecial.id === 1 && this.recommendedRetailPrice) {
-                    var percent = this.getPercentageSale();
-
-                    if (parseInt(percent) < 0) {
-                        return percent + "%";
-                    }
+            if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+                if ((0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
+                    return "";
                 }
 
-                return this.storeSpecial.names.name;
+                return this.getPercentageSale();
             }
 
-            return "";
+            if (this.storeSpecial.id === 1 && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
+                return this.getPercentageSale();
+            }
+
+            return this.storeSpecial.names.name;
         },
         getPercentageSale: function getPercentageSale() {
             // eslint-disable-next-line
             var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
 
-            return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator);
+            if (percent < 0) {
+                return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
+            }
+
+            return "";
         }
     }
 });
@@ -22926,16 +22944,15 @@ function _loadOptionalData(currentCategory) {
 }
 
 function _firstRendering() {
-    var twigBreadcrumbs = document.querySelector("#twig-rendered-breadcrumbs");
+    var twigBreadcrumbs = document.querySelectorAll("[data-component=\"breadcrumbs\"][data-renderer=\"twig\"]");
+    var vueBreadcrumbs = document.querySelectorAll("[data-component=\"breadcrumbs\"][data-renderer=\"vue\"]");
 
-    if (twigBreadcrumbs) {
-        twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+    for (var i = 0; i < twigBreadcrumbs.length; i++) {
+        twigBreadcrumbs[i].remove();
     }
 
-    var vueBreadcrumbs = document.querySelector("#vue-rendered-breadcrumbs");
-
-    if (vueBreadcrumbs) {
-        vueBreadcrumbs.style.removeProperty("display");
+    for (var j = 0; j < vueBreadcrumbs.length; j++) {
+        vueBreadcrumbs[j].style.removeProperty("display");
     }
 }
 

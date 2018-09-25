@@ -233,6 +233,15 @@
                 "name": "Widget.itemListMaxItemsLabel",
                 "tooltip": "Widget.itemListMaxItemsTooltip"
             }
+        },
+        "itemsPerPage": {
+            "type": "number",
+            "required": true,
+            "defaultValue": "4",
+            "options": {
+                "name": "Widget.itemListItemsPerPageLabel",
+                "tooltip": "Widget.itemsListItemsPerPageTooltip"
+            }
         }
     }
 }
