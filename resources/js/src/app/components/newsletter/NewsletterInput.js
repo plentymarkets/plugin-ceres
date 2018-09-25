@@ -82,15 +82,15 @@ Vue.component("newsletter-input", {
                         TranslationService.translate("Ceres::Template.newsletterSuccessMessage")
                     ).closeAfter(3000);
                     this.resetInputs();
-
-                    this.isDisabled = false;
                 })
                 .fail(() =>
                 {
                     NotificationService.error(
                         TranslationService.translate("Ceres::Template.newsletterErrorMessage")
                     ).closeAfter(5000);
-
+                })
+                .always(() =>
+                {
                     this.isDisabled = false;
                 });
         },
