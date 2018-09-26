@@ -29,6 +29,11 @@ Vue.component("newsletter-input", {
         {
             type: Boolean,
             default: true
+        },
+        appearance:
+        {
+            type: String,
+            default: "primary"
         }
     },
 
@@ -46,14 +51,6 @@ Vue.component("newsletter-input", {
     created()
     {
         this.$options.template = this.template;
-    },
-
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            this.inputFields = $(".container").find(".input-unit");
-        });
     },
 
     methods: {

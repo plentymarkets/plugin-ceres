@@ -52,7 +52,7 @@
 
                     <div class="col-xs-12 m-t-1">
                          <div class="input-group-btn">
-                            <button type="button" class="btn btn-primary btn-block" @click="validateData" :disabled="isDisabled">
+                            <button type="button" class="btn btn-block" :class="'btn-' + appearance" @click="validateData" :disabled="isDisabled">
                                 <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                 {{ trans('Ceres::Template.newsletterSubscribeButtonLabel') }}
                             </button>
