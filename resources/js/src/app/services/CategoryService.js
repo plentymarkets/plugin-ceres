@@ -116,18 +116,17 @@ function _loadOptionalData(currentCategory)
 
 function _firstRendering()
 {
-    const twigBreadcrumbs = document.querySelector("#twig-rendered-breadcrumbs");
+    const twigBreadcrumbs = document.querySelectorAll("[data-component=\"breadcrumbs\"][data-renderer=\"twig\"]");
+    const vueBreadcrumbs = document.querySelectorAll("[data-component=\"breadcrumbs\"][data-renderer=\"vue\"]");
 
-    if (twigBreadcrumbs)
+    for (let i = 0; i < twigBreadcrumbs.length; i++)
     {
-        twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+        twigBreadcrumbs[i].remove();
     }
 
-    const vueBreadcrumbs = document.querySelector("#vue-rendered-breadcrumbs");
-
-    if (vueBreadcrumbs)
+    for (let j = 0; j < vueBreadcrumbs.length; j++)
     {
-        vueBreadcrumbs.style.removeProperty("display");
+        vueBreadcrumbs[j].style.removeProperty("display");
     }
 }
 
