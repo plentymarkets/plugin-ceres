@@ -796,7 +796,7 @@
                 "required": true,
                 "label": "Widget.newsletterShowPrivacyPolicyCheckboxLabel",
                 "options": {
-                    "defaultValue": false
+                    "defaultValue": true
                 }
             }
         }
