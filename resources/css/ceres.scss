@@ -273,8 +273,8 @@ $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 $brand-primary !default;
 $btn-primary-border:             $btn-primary-bg !default;
 
-$btn-secondary-color:            $gray-dark !default;
-$btn-secondary-bg:               #fff !default;
+$btn-secondary-color:            $white !default;
+$btn-secondary-bg:               $brand-secondary !default;
 $btn-secondary-border:           #ccc !default;
 
 $btn-info-color:                 #fff !default;
@@ -10655,6 +10655,11 @@ a:active {
     }
 }
 
+.content-center {
+    margin: 0 auto;
+    float: none;
+}
+
 .float-right {
     float: right !important;
 }
@@ -10834,6 +10839,16 @@ body {
 //TODO's
 .input-group{
 
+	.input-unit + .input-group-btn
+	{
+		padding-bottom: $grid-gutter-width/2;
+
+		.btn
+		{
+			height: calc(2.8em + 1px);
+		}
+	}
+
 	&.vert{
 		.input-group-btn{
 			display: block;
@@ -10964,6 +10979,12 @@ button:focus {
 
 .btn-right {
 	float: right;
+}
+
+.btn-xs-max-width {
+	@include media-breakpoint-down(xs) {
+		width: 100% !important;
+	}
 }
 
 .btn-labeled {
@@ -12660,6 +12681,32 @@ $border-width: 1px;
         background-color: initial !important;
     }
 }
+
+.form-check-label {
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+
+  &.error {
+    background: $brand-danger !important;
+    color: $white !important;
+    border-radius: .1rem;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    padding: .5em 1.75rem;
+
+    a {
+      color: $white;
+      &:hover {
+        color: $gray-lighter2;
+      }
+    }
+
+    & .text-muted {
+      color: $white !important;
+    }
+  }
+}
+
 
 .custom-select{
 	border: none;
@@ -18008,32 +18055,9 @@ nav.navbar.megamenu {
 		text-align: center;
 	}
 
-	.cmp-address-list,
-	.form-check-label {
+	.cmp-address-list {
 		-webkit-transition: all .3s ease;
 		transition: all .3s ease;
-	}
-
-	.error {
-		background: $brand-danger !important;
-		color: $white !important;
-		border-radius: .1rem;
-		-webkit-transition: all .3s ease;
-		transition: all .3s ease;
-
-		& .text-muted {
-			color: $white !important;
-		}
-
-		&.form-check-label {
-			padding: .5em 1.75rem;
-			a {
-				color: $white;
-				&:hover {
-					color: $gray-lighter2;
-				}
-			}
-		}
 	}
 
 	@include media-breakpoint-up(sm){

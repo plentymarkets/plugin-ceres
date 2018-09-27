@@ -1,0 +1,24 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    <meta name="robots" content="NOINDEX, NOFOLLOW">
+    <title>{{ trans("Ceres::Template.newsletterOptInTitle") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+
+    <div class="page-content container-max m-b-3 m-t-1">
+        <div class="row m-b-3">
+            <div class="col-xs-12">
+                <p>{{ trans('Ceres::Template.newsletterOptInMessage') }}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-6 col-md-4 {% if loggedIn %}offset-md-2{% else %}offset-xs-3 offset-md-4{% endif %}">
+                <a href="{{ homepageURL }}" type="" class="btn btn-primary btn-block bg-primary">{{ trans("Ceres::Template.returnConfirmationHomepage") }}</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
