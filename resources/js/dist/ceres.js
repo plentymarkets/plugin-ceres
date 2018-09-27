@@ -19538,8 +19538,8 @@ Vue.component("item-search", {
             }
         },
         updateTitle: function updateTitle(searchString) {
-            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString);
-            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString) + " | " + App.config.header.companyName;
+            document.querySelector("#searchPageTitle").appendChild(document.createTextNode(_TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString));
+            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
         },
         autocomplete: function autocomplete(searchString) {
             var _this2 = this;
