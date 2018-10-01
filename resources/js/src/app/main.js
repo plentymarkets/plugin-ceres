@@ -198,26 +198,34 @@ var init = (function($, window, document)
     window.CeresMain = new CeresMain();
     window.CeresNotification = NotificationService;
 
-    var showShopNotification = function({type, message}) {
-        switch (type) {
+    var showShopNotification = function(event)
+    {
+        if(event.detail.type)
+        {
+            switch (event.detail.type)
+            {
             case "info":
-                NotificationService.info(message);
+                NotificationService.info(event.detail.message);
                 break;
             case "log":
-                NotificationService.log(message);
+                NotificationService.log(event.detail.message);
                 break;
             case "error":
-                 NotificationService.error(message);
+                NotificationService.error(event.detail.message);
                 break;
             case "success":
-                NotificationService.success(message);
+                NotificationService.success(event.detail.message);
                 break;
             case "warning":
-                NotificationService.warn(message);
+                NotificationService.warn(event.detail.message);
                 break;
+            case "default":
+                console.log("no type such as:" + event.detail.type);
+                break;
+            }
         }
     };
-    
-    document.addEventListener("showShopNotification", )
+
+    document.addEventListener("showShopNotification", showShopNotification);
 
 })(jQuery, window, document);
