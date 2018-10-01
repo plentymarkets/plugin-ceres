@@ -198,4 +198,26 @@ var init = (function($, window, document)
     window.CeresMain = new CeresMain();
     window.CeresNotification = NotificationService;
 
+    var showShopNotification = function({type, message}) {
+        switch (type) {
+            case "info":
+                NotificationService.info(message);
+                break;
+            case "log":
+                NotificationService.log(message);
+                break;
+            case "error":
+                 NotificationService.error(message);
+                break;
+            case "success":
+                NotificationService.success(message);
+                break;
+            case "warning":
+                NotificationService.warn(message);
+                break;
+        }
+    };
+    
+    document.addEventListener("showShopNotification", )
+
 })(jQuery, window, document);
