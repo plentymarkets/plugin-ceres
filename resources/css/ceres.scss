@@ -7910,6 +7910,10 @@ button.close {
   @include text-hide();
 }
 
+.text-wrap {
+  white-space: normal;
+}
+
 // scss-lint:disable ImportantRule
 
 //
