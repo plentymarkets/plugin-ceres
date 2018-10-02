@@ -289,6 +289,16 @@
             "description"   : "Add content before the total sum in the Total column of the shopping cart."
         },
         {
+            "key"           : "BasketList.BeforeItem",
+            "name"          : "Shopping cart items list: Before item",
+            "description"   : "Add content before the item in the Items list of the shopping cart."
+        },
+        {
+            "key"           : "BasketList.AfterItem",
+            "name"          : "Shopping cart items list: After item",
+            "description"   : "Add content after the item in the Items list of the shopping cart."
+        },
+        {
             "key"           : "Basket.BeforeCoupon",
             "name"          : "Shopping cart: Before the coupon input",
             "description"   : "Add content before the Coupon input field in the shopping cart."
