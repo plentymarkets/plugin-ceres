@@ -123,7 +123,7 @@ Vue.component("item-search", {
         updateTitle(searchString)
         {
             document.querySelector("#searchPageTitle").appendChild(document.createTextNode(TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString));
-            document.title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+            document.title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + TranslationService.translate("Ceres::Template.headerCompanyName");
         },
 
         autocomplete(searchString)
