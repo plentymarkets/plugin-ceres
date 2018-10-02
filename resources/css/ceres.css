@@ -12413,6 +12413,10 @@ a:active {
   position: fixed !important;
 }
 
+.text-wrap {
+  white-space: normal;
+}
+
 body {
   background-color: #f7f7f9;
 }

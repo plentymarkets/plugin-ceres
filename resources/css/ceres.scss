@@ -7910,10 +7910,6 @@ button.close {
   @include text-hide();
 }
 
-.text-wrap {
-  white-space: normal;
-}
-
 // scss-lint:disable ImportantRule
 
 //
@@ -10685,6 +10681,10 @@ a:active {
 
 .position-fixed {
     position: fixed !important;
+}
+
+.text-wrap {
+  white-space: normal;
 }
 body {
 
