@@ -125,7 +125,10 @@
             </div>
         {% endif %}
 
-        <shop-country-settings country-flag-prefix="flag-icon-" :localization-data="{{ services.localization.getLocalizationData() | json_encode }}">
+        <shop-country-settings
+                country-flag-prefix="flag-icon-"
+                :shipping-countries="{{ services.country.getActiveCountriesList() | filterFields(['id','currLangName', 'isoCode2', 'states.id', 'states.name']) | json_encode }}"
+                :shipping-country-id="{{ services.checkout.getShippingCountryId }}">
             <div id="countrySettings" class="row cmp cmp-country-settings no-margin collapse">
                 <div class="container-max">
                     <div class="row no-padding">
