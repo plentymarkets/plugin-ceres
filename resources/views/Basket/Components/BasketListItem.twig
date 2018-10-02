@@ -1,3 +1,5 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
 {{ component( "Ceres::Item.Components.ItemBundle" ) }}
 
@@ -7,6 +9,8 @@
 
 <script type="x/template" id="vue-basket-list-item">
     <div class="basket-item-container" :class="{ 'basket-small': size === 'small', 'basket-large': size === 'large' }">
+        
+        {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
         
         <div class="basket-item component-loading with-icon sending" :class="{ 'isLoading': waiting }">
 
@@ -146,5 +150,8 @@
             </div>
 
         </div>
+        
+        {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
+        
     </div>
 </script>
