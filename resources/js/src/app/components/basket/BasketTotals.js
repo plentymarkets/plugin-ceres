@@ -16,6 +16,13 @@ Vue.component("basket-totals", {
         showNetPrices: state => state.basket.showNetPrices
     }),
 
+    methods: {
+        calculation: function(value, percent)
+        {
+            return (value / (100 - percent)) * 100;
+        }
+    },
+
     created()
     {
         this.$options.template = this.template;
