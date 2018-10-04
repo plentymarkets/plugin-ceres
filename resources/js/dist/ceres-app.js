@@ -14582,8 +14582,8 @@ Vue.component("coupon", {
                 343: "couponCampaignNoWebstoreIdGiven"
             };
 
-            if (error && error.error && error.error.code && errorMessageKeys[error.error.code]) {
-                return _TranslationService2.default.translate("Ceres::Template." + errorMessageKeys[error.error.code]);
+            if (error && error.error && error.code && errorMessageKeys[error.code]) {
+                return _TranslationService2.default.translate("Ceres::Template." + errorMessageKeys[error.code]);
             }
 
             return _TranslationService2.default.translate("Ceres::Template.couponRedeemFailure");
@@ -19188,7 +19188,7 @@ Vue.component("item-search", {
         },
         updateTitle: function updateTitle(searchString) {
             document.querySelector("#searchPageTitle").appendChild(document.createTextNode(_TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString));
-            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + _TranslationService2.default.translate("Ceres::Template.headerCompanyName");
         },
         autocomplete: function autocomplete(searchString) {
             var _this2 = this;
@@ -22944,6 +22944,10 @@ var _index2 = _interopRequireDefault(_index);
 
 var _UrlService = require("services/UrlService");
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ApiService = require("services/ApiService");
@@ -23010,7 +23014,7 @@ function _updateCategoryTexts(currentCategory) {
     var categoryTitle = currentCategory.details[0].metaTitle ? currentCategory.details[0].metaTitle : currentCategory.details[0].name;
 
     document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = categoryTitle + " | " + App.config.header.companyName;
+    document.title = categoryTitle + " | " + _TranslationService2.default.translate("Ceres::Template.headerCompanyName");
 
     _loadOptionalData(currentCategory);
 }
@@ -23055,7 +23059,7 @@ exports.default = {
     updateCategoryHtml: updateCategoryHtml
 };
 
-},{"services/ApiService":127,"services/UrlService":134,"store/index.js":137}],129:[function(require,module,exports){
+},{"services/ApiService":127,"services/TranslationService":133,"services/UrlService":134,"store/index.js":137}],129:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
