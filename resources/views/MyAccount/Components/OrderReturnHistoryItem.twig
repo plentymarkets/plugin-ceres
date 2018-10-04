@@ -40,7 +40,7 @@
                     <div class="col-md-3">
                         <div class="order-return-history-image-container">
                             <a :href="returnOrder.itemURLs[orderItem.itemVariationId]">
-                                <img class="order-return-history-image" :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt="${ orderItem | itemBundleName }" :title="${ orderItem | itemBundleName }">
+                                <img class="order-return-history-image" :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt=" orderItem | itemBundleName " :title="orderItem | itemBundleName">
                             </a>
                         </div>
                     </div>
