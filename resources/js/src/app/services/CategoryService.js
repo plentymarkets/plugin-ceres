@@ -1,5 +1,6 @@
 import store from "store/index.js";
 import {switchUrl}from "services/UrlService";
+import TranslationService from "services/TranslationService";
 
 const ApiService = require("services/ApiService");
 let _categoryTree = {};
@@ -77,7 +78,7 @@ function _updateCategoryTexts(currentCategory)
                             currentCategory.details[0].name;
 
     document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = categoryTitle + " | " + App.config.header.companyName;
+    document.title = categoryTitle + " | " + TranslationService.translate("Ceres::Template.headerCompanyName");
 
     _loadOptionalData(currentCategory);
 }

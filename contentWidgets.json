@@ -714,6 +714,94 @@
         }
     },
     {
+        "identifier": "Ceres::NewsletterWidget",
+        "label": "Widget.newsletterLabel",
+        "previewImageURL": "/images/widgets/newsletter.svg",
+        "type": "default",
+        "allowedNestingTypes": [
+            "default",
+            "structure"
+        ],
+        "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
+        "settings": {
+            "appearance": {
+                "type": "selectBox",
+                "required": true,
+                "label": "Widget.widgetAppearanceLabel",
+                "options": {
+                    "tooltip": "Widget.widgetAppearanceTooltip",
+                    "defaultValue": "primary",
+                    "selectBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "title": {
+                "type": "inputText",
+                "required": false,
+                "label": "Widget.newsletterTitleLabel",
+                "options": {
+                    "tooltip": "Widget.newsletterTitleBarTextTooltip",
+                    "defaultValue": ""
+                }
+            },
+            "subTitle": {
+                "type": "inputText",
+                "required": false,
+                "label": "Widget.newsletterDescriptionLabel",
+                "options": {
+                    "tooltip": "Widget.newsletterSubTitleBarTextTooltip",
+                    "defaultValue": ""
+                }
+            },
+            "showNameInputs": {
+                "type": "checkBox",
+                "required": true,
+                "label": "Widget.newsletterShowNameInputsLabel",
+                "options": {
+                    "defaultValue": false
+                }
+            },
+            "showPrivacyPolicyCheckbox": {
+                "type": "checkBox",
+                "required": true,
+                "label": "Widget.newsletterShowPrivacyPolicyCheckboxLabel",
+                "options": {
+                    "defaultValue": true
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::SeparatorWidget",
         "label": "Widget.separatorLabel",
         "previewImageURL": "/images/widgets/separator.svg",
