@@ -21,10 +21,10 @@
                                         @quantity-change="updateQuantity"
                                         @out-of-stock="handleButtonState"
                                         :timeout="0" 
-                                        :min="item.variation.minimumOrderQuantity"
-                                        :max="item.variation.maximumOrderQuantity"
-                                        :interval="item.variation.intervalOrderQuantity"
-                                        :variation-id="item.variation.id"
+                                        :min="minimumQuantity"
+                                        :max="maximumQuantity"
+                                        :interval="intervalQuantity"
+                                        :variation-id="variationId"
                                         template="#vue-quantity-input"></quantity-input>
                         </div>
 
