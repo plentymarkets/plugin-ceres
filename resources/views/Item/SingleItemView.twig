@@ -10,7 +10,6 @@
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 {{ component( "Ceres::Item.Components.ItemBundle" ) }}
 
-
 <single-item v-cloak template="#vue-single-item" :item-data="{{ item | json_encode }}" :variation-list-data="{{ variations | json_encode }}" :attribute-name-map="{{attributeNameMap | json_encode}}">
     <div slot="BeforePrice">{{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}</div>
     <div slot="AfterPrice">{{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}</div>
@@ -22,5 +21,12 @@
     <template slot="AddDetailTabsContent">{{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent", item.documents[0].data) }}</template>
     <div slot="ItemListContainer">{{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}</div>
     <div slot="FeedbackContainer">{{ LayoutContainer.show("Ceres::SingleItem.FeedbackContainer", item) }}</div>
-    <div slot="ImageCarousel">{{ LayoutContainer.show("Ceres::SingleItem.ImageCarousel") }}</div>
+    <div slot="ImageCarousel">
+        {% set ImageCarouselOverride = LayoutContainer.show("Ceres::SingleItem.ImageCarousel") %}
+        {% if ImageCarouselOverride|trim is empty %}
+            <item-image-carousel image-url-accessor="url" template="#vue-item-image-carousel"></item-image-carousel>
+        {% else %}
+            {{ ImageCarouselOverride }}
+        {% endif %}
+    </div>
 </single-item>
