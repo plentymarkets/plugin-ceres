@@ -219,7 +219,7 @@ var init = (function($, window, document)
             case "warning":
                 NotificationService.warn(event.detail.message);
                 break;
-            case "default":
+            default:
                 console.log("no type such as:" + event.detail.type);
                 break;
             }
