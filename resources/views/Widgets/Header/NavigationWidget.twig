@@ -4,9 +4,9 @@
 {% set navigationStyle      = widget.settings.navigationStyle.mobile %}
 {% set companyLogoUrl       = widget.settings.companyLogoUrl.mobile %}
 {% set megaMenuLevels       = widget.settings.megaMenuLevels.mobile %}
-{% set megaMenuMaxItems1    = widget.settings.megaMenuMaxItems.stage1.mobile %}
-{% set megaMenuMaxItems2    = widget.settings.megaMenuMaxItems.stage2.mobile %}
-{% set megaMenuMaxItems3    = widget.settings.megaMenuMaxItems.stage3.mobile %}
+{% set megaMenuMaxItems1    = widget.settings.megaMenuMaxItems.stage1.mobile | default(30) %}
+{% set megaMenuMaxItems2    = widget.settings.megaMenuMaxItems.stage2.mobile | default(3) %}
+{% set megaMenuMaxItems3    = widget.settings.megaMenuMaxItems.stage3.mobile | default(2) %}
 {% set megaMenuMaxItems     = { "1": megaMenuMaxItems1, "2": megaMenuMaxItems2, "3": megaMenuMaxItems3 } %}
 
 {% if companyLogoUrl is empty %}
