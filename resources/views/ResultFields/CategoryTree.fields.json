@@ -3,5 +3,6 @@
     "type",
     "details.name",
     "details.lang",
-    "details.nameUrl"
+    "details.nameUrl",
+    "details.metaTitle"
 ]
