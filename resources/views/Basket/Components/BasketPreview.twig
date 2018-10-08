@@ -34,6 +34,7 @@
                 <div class="col-xs-12 col-sm-6 m-b-1">
                     <a v-waiting-animation-infinite
                        href="{{ urls.basket }}"
+                       rel="nofollow"
                        class="btn btn-outline-primary btn-block basketBtn"
                        :class="{ 'disabled': basketItems.length <= 0 }"
                        title="{{ trans("Ceres::Template.basket") }}">
@@ -48,6 +49,7 @@
                     <div>
                         <a v-waiting-animation-infinite
                            href="{{ urls.checkout }}"
+                           rel="nofollow"
                            :class="{ 'disabled': basketItems.length <= 0 }"
                            class="btn btn-primary btn-block checkOutBtn"
                            title="{{ trans("Ceres::Template.basketCheckout") }}">
