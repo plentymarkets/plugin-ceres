@@ -21123,8 +21123,6 @@ Vue.directive("toggle-basket-preview", {
 
                 vueApp.classList.toggle(basketOpenClass || "open-hover");
 
-                window.calculateBodyOffset();
-
                 event.preventDefault();
                 event.stopPropagation();
             }
