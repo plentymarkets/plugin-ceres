@@ -200,7 +200,7 @@ var init = (function($, window, document)
 
     var showShopNotification = function(event)
     {
-        if(event.detail.type)
+        if (event.detail.type)
         {
             switch (event.detail.type)
             {
