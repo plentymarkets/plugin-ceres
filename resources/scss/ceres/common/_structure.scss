@@ -65,6 +65,7 @@ body {
 		&.open-left,
 		&.open-top,
 		&.open-bottom{
+			margin-top: 0 !important;
 			// dark overlay on body
 			&::after{
 				content : "";
