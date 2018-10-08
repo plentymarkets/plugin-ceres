@@ -22717,6 +22717,33 @@ var init = function ($, window, document) {
 
     window.CeresMain = new CeresMain();
     window.CeresNotification = NotificationService;
+
+    var showShopNotification = function showShopNotification(event) {
+        if (event.detail.type) {
+            switch (event.detail.type) {
+                case "info":
+                    NotificationService.info(event.detail.message);
+                    break;
+                case "log":
+                    NotificationService.log(event.detail.message);
+                    break;
+                case "error":
+                    NotificationService.error(event.detail.message);
+                    break;
+                case "success":
+                    NotificationService.success(event.detail.message);
+                    break;
+                case "warning":
+                    NotificationService.warn(event.detail.message);
+                    break;
+                default:
+                    console.log("no type such as:" + event.detail.type);
+                    break;
+            }
+        }
+    };
+
+    document.addEventListener("showShopNotification", showShopNotification);
 }(jQuery, window, document);
 
 },{"detect-browser":1,"services/NotificationService":131}],126:[function(require,module,exports){
