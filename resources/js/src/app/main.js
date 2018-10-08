@@ -1,5 +1,7 @@
 const browserDetect = require("detect-browser");
 const NotificationService = require("services/NotificationService");
+const AutoFocusService = require("services/AutoFocusService");
+
 // Frontend end scripts
 // eslint-disable-next-line
 var init = (function($, window, document)
@@ -145,6 +147,8 @@ var init = (function($, window, document)
             var duration = 300;
 
             var isDesktop = window.matchMedia("(min-width: 768px)").matches;
+
+            AutoFocusService.autoFocus();
 
             $(window).scroll(function()
             {
