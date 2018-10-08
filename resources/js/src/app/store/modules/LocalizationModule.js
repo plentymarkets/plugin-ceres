@@ -27,12 +27,6 @@ const mutations =
 
 const actions =
     {
-        initLocalization({commit}, {localizationData})
-        {
-            commit("setShippingCountries", localizationData.activeShippingCountries);
-            commit("setShippingCountryId", localizationData.currentShippingCountryId);
-        },
-
         selectShippingCountry({commit, state}, shippingCountryId)
         {
             return new Promise((resolve, reject) =>

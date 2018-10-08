@@ -1,5 +1,3 @@
-var CountryService = require("services/CountryService");
-
 Vue.component("country-select", {
 
     delimiters: ["${", "}"],
@@ -31,7 +29,18 @@ Vue.component("country-select", {
     {
         this.$options.template = this.template;
 
-        CountryService.sortCountries(this.countryList);
+        this.countryList.sort(function(first, second)
+        {
+            if (first.currLangName < second.currLangName)
+            {
+                return -1;
+            }
+            if (first.currLangName > second.currLangName)
+            {
+                return 1;
+            }
+            return 0;
+        });
         this.updateSelectedCountry();
     },
 
@@ -79,7 +88,7 @@ Vue.component("country-select", {
 
             if (this.selectedCountry)
             {
-                this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
+                this.stateList = this.selectedCountry.states || [];
             }
 
             this.countryChanged(countryId);
