@@ -21,7 +21,7 @@ Vue.component("shipping-privacy-hint-check", {
 
         currentPrivacyHints()
         {
-            if (this.currentShippingProfile.shippingPrivacyInformation)
+            if (this.currentShippingProfile && this.currentShippingProfile.shippingPrivacyInformation)
             {
                 return this.currentShippingProfile.shippingPrivacyInformation.filter(entry => !!entry.showDataPrivacyAgreementHint);
             }

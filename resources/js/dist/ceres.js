@@ -15663,7 +15663,7 @@ Vue.component("shipping-privacy-hint-check", {
             });
         },
         currentPrivacyHints: function currentPrivacyHints() {
-            if (this.currentShippingProfile.shippingPrivacyInformation) {
+            if (this.currentShippingProfile && this.currentShippingProfile.shippingPrivacyInformation) {
                 return this.currentShippingProfile.shippingPrivacyInformation.filter(function (entry) {
                     return !!entry.showDataPrivacyAgreementHint;
                 });
