@@ -21122,6 +21122,9 @@ Vue.directive("toggle-basket-preview", {
                 var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
 
                 vueApp.classList.toggle(basketOpenClass || "open-hover");
+
+                window.calculateBodyOffset();
+
                 event.preventDefault();
                 event.stopPropagation();
             }

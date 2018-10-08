@@ -6,6 +6,12 @@ body .wrapper-main{
     display: none;
 }
 
+.hidden-sm {
+    @include media-breakpoint-only(sm) {
+        display: none;
+    }
+}
+
 .page-content{
     @extend .p-t-1;
     background-color: $gray-lightest;
@@ -141,6 +147,10 @@ a:active {
 
 .border-radius-0 {
     border-radius: 0;
+}
+
+.border-top-0 {
+    border-top: 0 !important;
 }
 
 .position-fixed {

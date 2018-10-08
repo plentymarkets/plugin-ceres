@@ -220,7 +220,7 @@
         {
             function calculateBodyOffset()
             {
-                if ( header.classList.contains('pos-f-t') )
+                if ( header.classList.contains('pos-f-t'))
                 {
                     var bodyOffset = 0;
                     var children = header.children;
@@ -228,7 +228,8 @@
                     {
                         bodyOffset += children[i].getBoundingClientRect().height;
                     }
-                    document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
+
+                    document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';       
                 }
             }
 
