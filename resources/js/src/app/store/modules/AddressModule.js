@@ -235,41 +235,41 @@ const actions =
                 {
                     oldAddress = state.deliveryAddress;
                     commit("selectDeliveryAddress", selectedAddress);
-
-                    dispatch("checkAddressChangeValidity", {selectedAddress, addressType}).then(isAddressChangedAllowed =>
-                    {
-                        if (!isAddressChangedAllowed)
-                        {
-                            commit("selectDeliveryAddress", oldAddress);
-                            NotificationService.error(TranslationService.translate("Ceres::Template.addressSelectedNotAllowed"));
-                        }
-                        else
-                        {
-                            commit("setIsBasketLoading", true);
-
-                            ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
-                                .done(response =>
-                                {
-                                    commit("setIsBasketLoading", false);
-                                    return resolve(response);
-                                })
-                                .fail(error =>
-                                {
-                                    if (addressType === "1")
-                                    {
-                                        commit("selectBillingAddress", oldAddress);
-                                    }
-                                    else if (addressType === "2")
-                                    {
-                                        commit("selectDeliveryAddress", oldAddress);
-                                    }
-
-                                    commit("setIsBasketLoading", false);
-                                    reject(error);
-                                });
-                        }
-                    });
                 }
+
+                dispatch("checkAddressChangeValidity", {selectedAddress, addressType}).then(isAddressChangedAllowed =>
+                {
+                    if (!isAddressChangedAllowed)
+                    {
+                        commit("selectDeliveryAddress", oldAddress);
+                        NotificationService.error(TranslationService.translate("Ceres::Template.addressSelectedNotAllowed"));
+                    }
+                    else
+                    {
+                        commit("setIsBasketLoading", true);
+
+                        ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
+                            .done(response =>
+                            {
+                                commit("setIsBasketLoading", false);
+                                return resolve(response);
+                            })
+                            .fail(error =>
+                            {
+                                if (addressType === "1")
+                                {
+                                    commit("selectBillingAddress", oldAddress);
+                                }
+                                else if (addressType === "2")
+                                {
+                                    commit("selectDeliveryAddress", oldAddress);
+                                }
+
+                                commit("setIsBasketLoading", false);
+                                reject(error);
+                            });
+                    }
+                });
             });
         },
 
