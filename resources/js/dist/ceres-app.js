@@ -24227,30 +24227,30 @@ var actions = {
             } else if (addressType === "2") {
                 oldAddress = state.deliveryAddress;
                 commit("selectDeliveryAddress", selectedAddress);
-
-                dispatch("checkAddressChangeValidity", { selectedAddress: selectedAddress, addressType: addressType }).then(function (isAddressChangedAllowed) {
-                    if (!isAddressChangedAllowed) {
-                        commit("selectDeliveryAddress", oldAddress);
-                        _NotificationService2.default.error(_TranslationService2.default.translate("Ceres::Template.addressSelectedNotAllowed"));
-                    } else {
-                        commit("setIsBasketLoading", true);
-
-                        _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
-                            commit("setIsBasketLoading", false);
-                            return resolve(response);
-                        }).fail(function (error) {
-                            if (addressType === "1") {
-                                commit("selectBillingAddress", oldAddress);
-                            } else if (addressType === "2") {
-                                commit("selectDeliveryAddress", oldAddress);
-                            }
-
-                            commit("setIsBasketLoading", false);
-                            reject(error);
-                        });
-                    }
-                });
             }
+
+            dispatch("checkAddressChangeValidity", { selectedAddress: selectedAddress, addressType: addressType }).then(function (isAddressChangedAllowed) {
+                if (!isAddressChangedAllowed) {
+                    commit("selectDeliveryAddress", oldAddress);
+                    _NotificationService2.default.error(_TranslationService2.default.translate("Ceres::Template.addressSelectedNotAllowed"));
+                } else {
+                    commit("setIsBasketLoading", true);
+
+                    _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
+                        commit("setIsBasketLoading", false);
+                        return resolve(response);
+                    }).fail(function (error) {
+                        if (addressType === "1") {
+                            commit("selectBillingAddress", oldAddress);
+                        } else if (addressType === "2") {
+                            commit("selectDeliveryAddress", oldAddress);
+                        }
+
+                        commit("setIsBasketLoading", false);
+                        reject(error);
+                    });
+                }
+            });
         });
     },
     deleteAddress: function deleteAddress(_ref9, _ref10) {
