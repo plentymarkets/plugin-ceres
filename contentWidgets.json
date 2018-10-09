@@ -501,6 +501,7 @@
                 "type": "number",
                 "required": true,
                 "defaultValue": "4",
+                "isVisible": "listType !== 'last_seen'",
                 "options": {
                     "name": "Widget.itemListMaxItemsLabel",
                     "tooltip": "Widget.itemListMaxItemsTooltip"
