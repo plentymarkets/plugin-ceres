@@ -25596,7 +25596,7 @@ var actions = {
             return new Promise(function (resolve, reject) {
                 commit("setIsLastSeenItemsLoading", true);
 
-                _ApiService2.default.put("/rest/io/item/last_seen/" + variationId).done(function (response) {
+                _ApiService2.default.put("/rest/io/item/last_seen/" + variationId + "?items=" + App.config.itemLists.lastSeenNumber || 4).done(function (response) {
                     commit("setLastSeenItems", response.documents);
                     commit("setIsLastSeenItemsLoading", false);
                     resolve(response.documents);
