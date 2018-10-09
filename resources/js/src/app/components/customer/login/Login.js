@@ -1,5 +1,3 @@
-import {navigateTo}from "services/UrlService";
-
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 const ModalService        = require("services/ModalService");
@@ -24,8 +22,7 @@ Vue.component("login", {
             password: "",
             username: "",
             loginFields: [],
-            isDisabled: false,
-            isPwdReset: false
+            isDisabled: false
         };
     },
 
@@ -66,34 +63,15 @@ Vue.component("login", {
 
         validateLogin()
         {
-            if (!this.isPwdReset)
-            {
-                ValidationService.validate($("#login-form-" + this._uid))
-                    .done(() =>
-                    {
-                        this.sendLogin();
-                    })
-                    .fail(invalidFields =>
-                    {
-                        ValidationService.markInvalidFields(invalidFields, "error");
-                    });
-            }
-        },
-
-        validateResetPwd()
-        {
-            if (this.isPwdReset)
-            {
-                ValidationService.validate($("#reset-pwd-form-" + this._uid))
-                    .done(() =>
-                    {
-                        this.sendResetPwd();
-                    })
-                    .fail(invalidFields =>
-                    {
-                        ValidationService.markInvalidFields(invalidFields, "error");
-                    });
-            }
+            ValidationService.validate($("#login-form-" + this._uid))
+                .done(() =>
+                {
+                    this.sendLogin();
+                })
+                .fail(invalidFields =>
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
         },
 
         /**
@@ -150,97 +128,22 @@ Vue.component("login", {
                 });
         },
 
-        /**
-         *  Reset password
-         */
-        sendResetPwd()
-        {
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/customer/password_reset", {email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPwMailSubject"})
-                .done(() =>
-                {
-                    if (document.getElementById(this.modalElement) !== null)
-                    {
-                        ModalService.findModal(document.getElementById(this.modalElement)).hide();
-
-                        this.isDisabled = false;
-
-                        this.cancelResetPwd();
-                    }
-                    else
-                    {
-                        navigateTo(window.location.origin);
-                    }
-
-                    NotificationService.success(
-                        TranslationService.translate("Ceres::Template.loginSendEmailOk")
-                    ).closeAfter(5000);
-
-                })
-                .fail(() =>
-                {
-                    this.isDisabled = false;
-
-                    NotificationService.error(
-                        TranslationService.translate("Ceres::Template.loginResetPwDErrorOnSendEmail")
-                    ).closeAfter(5000);
-                });
-        },
-
         showResetPwdView()
         {
             this.resetError();
-            this.isPwdReset = true;
 
-            if (document.getElementById(this.modalElement) !== null)
+            if (this.modalElement)
             {
-                $(".login-modal .modal-title").html(
-                    TranslationService.translate("Ceres::Template.loginForgotPassword")
-                );
-            }
-            else
-            {
-                $(".login-view-title").html(
-                    TranslationService.translate("Ceres::Template.loginForgotPassword")
-                );
+                ModalService.findModal(document.getElementById(this.modalElement)).hide();
             }
 
-            $(".login-container").slideUp("fast", function()
-            {
-                $(".reset-pwd-container").slideDown("fast");
-            });
-        },
-
-        cancelResetPwd()
-        {
-            this.resetError();
-            this.isPwdReset = false;
-
-            if (document.getElementById(this.modalElement) !== null)
-            {
-                $(".login-modal .modal-title").text(
-                    TranslationService.translate("Ceres::Template.login")
-                );
-            }
-            else
-            {
-                $(".login-view-title").text(
-                    TranslationService.translate("Ceres::Template.login")
-                );
-            }
-
-            $(".reset-pwd-container").slideUp("fast", function()
-            {
-                $(".login-container").slideDown("fast");
-            });
+            ModalService.findModal(document.getElementById("resetPwd")).show();
         },
 
         resetError()
         {
             this.loginFields.removeClass("has-login-error");
             ValidationService.unmarkAllFields($("#login-form-" + this._uid));
-            ValidationService.unmarkAllFields($("#reset-pwd-form-" + this._uid));
         }
     }
 });
