@@ -40,7 +40,7 @@ export function triggerAutoFocus(modal)
 
     setTimeout(() =>
 	{
-        focusElements[0].focus();
+        if (focusElements[0]) focusElements[0].focus();
     }, 0);
 }
 
