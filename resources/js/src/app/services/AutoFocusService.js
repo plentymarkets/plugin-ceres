@@ -4,7 +4,7 @@ export function autoFocus()
 {
     const modals = document.getElementsByClassName("modal");
 
-    for (const modal in modals)
+    for (let modal in modals)
 	{
         if (typeof modals[modal] === "object")
         {
