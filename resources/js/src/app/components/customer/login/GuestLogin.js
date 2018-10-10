@@ -25,6 +25,18 @@ Vue.component("guest-login", {
         this.$options.template = this.template;
     },
 
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            $("#guestLogin").on("hidden.bs.modal", () =>
+			{
+                this.email = "";
+                this.resetError();
+            });
+        });
+    },
+
     methods: {
         validate: function()
         {
@@ -52,10 +64,16 @@ Vue.component("guest-login", {
                     }
                     else
                     {
-                        this.isDisabled = false;
+                        // Go back to Homepage
+                        navigateTo(window.location.origin);
                     }
 
                 }.bind(this));
+        },
+
+        resetError()
+        {
+            ValidationService.unmarkAllFields($("#guest-login-form-" + this._uid));
         }
     }
 });
