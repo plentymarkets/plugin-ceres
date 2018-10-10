@@ -137,9 +137,9 @@ Vue.component("coupon", {
                 343:    "couponCampaignNoWebstoreIdGiven"
             };
 
-            if (error && error.error && error.error.code && errorMessageKeys[error.error.code])
+            if (error && error.error && error.code && errorMessageKeys[error.code])
             {
-                return TranslationService.translate("Ceres::Template." + errorMessageKeys[error.error.code]);
+                return TranslationService.translate("Ceres::Template." + errorMessageKeys[error.code]);
             }
 
             return TranslationService.translate("Ceres::Template.couponRedeemFailure");

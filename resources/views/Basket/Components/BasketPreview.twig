@@ -5,7 +5,7 @@
 <script type="x/template" id="vue-basket-preview">
     <div class="wrapper-inner basket-preview">
         <header class="basket-header p-a-1">
-            <div class="d-inline-block m-a-0 h3">{{ trans("Ceres::Template.basketPreview") }}</div>
+            <div class="d-inline-block m-a-0 basket-header-caption">{{ trans("Ceres::Template.basketPreview") }}</div>
             <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -17,49 +17,53 @@
             </div>
         </div>
 
-        <!-- BASKET LIST -->
-        <div class="p-a-1 list">
-          <div class="cmp cmp-basket-preview-list">
-              <basket-list template="#vue-basket-list" size="small"></basket-list>
-          </div>
-        </div>
-        <!-- ./BASKET LIST -->
-
-        <!-- BASKET PREVIEW BOTTOM -->
-        <div class="p-a-1 bg-faded totals">
-
-            <basket-totals template="#vue-basket-totals"></basket-totals>
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 m-b-1">
-                    <a v-waiting-animation-infinite
-                       href="{{ urls.basket }}"
-                       class="btn btn-outline-primary btn-block basketBtn"
-                       :class="{ 'disabled': basketItems.length <= 0 }"
-                       title="{{ trans("Ceres::Template.basket") }}">
-                        <i class="fa fa-shopping-cart"></i>
-                        {{ trans("Ceres::Template.basket") }} 
-                    </a>
+        <div class="basket-preview-content row p-l-1 p-r-1">
+            <!-- BASKET LIST -->
+            <div class="list col-sm-7 col-md-12 p-t-1">
+                <div class="cmp cmp-basket-preview-list">
+                    <basket-list template="#vue-basket-list" size="small"></basket-list>
                 </div>
+            </div>
+            <!-- ./BASKET LIST -->
 
-                <div class="col-xs-12 col-sm-6">
-                    {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+            <!-- BASKET PREVIEW BOTTOM -->
+            <div class="bg-faded totals col-sm-5 col-md-12 p-t-1">
 
-                    <div>
+                <basket-totals template="#vue-basket-totals"></basket-totals>
+
+                <div class="basket-preview-footer row">
+                    <div class="col-xs-6 col-sm-6 m-b-1">
                         <a v-waiting-animation-infinite
-                           href="{{ urls.checkout }}"
-                           :class="{ 'disabled': basketItems.length <= 0 }"
-                           class="btn btn-primary btn-block checkOutBtn"
-                           title="{{ trans("Ceres::Template.basketCheckout") }}">
-                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                            {{ trans("Ceres::Template.basketCheckout") }}
+                        href="{{ urls.basket }}"
+                        rel="nofollow"
+                        class="btn btn-outline-primary btn-block basketBtn"
+                        :class="{ 'disabled': basketItems.length <= 0 }"
+                        title="{{ trans("Ceres::Template.basket") }}">
+                            <i class="fa fa-shopping-cart hidden-sm"></i>
+                            {{ trans("Ceres::Template.basket") }} 
                         </a>
                     </div>
 
-                    {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+                    <div class="col-xs-6 col-sm-6">
+                        {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+
+                        <div>
+                            <a v-waiting-animation-infinite
+                            href="{{ urls.checkout }}"
+                            :class="{ 'disabled': basketItems.length <= 0 }"
+                            class="btn btn-primary btn-block checkOutBtn"
+                            rel="nofollow"
+                            title="{{ trans("Ceres::Template.basketCheckout") }}">
+                                <i class="fa fa-arrow-right hidden-sm" aria-hidden="true"></i>
+                                {{ trans("Ceres::Template.basketCheckout") }}
+                            </a>
+                        </div>
+
+                        {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+                    </div>
                 </div>
             </div>
+            <!-- ./BASKET PREVIEW BOTTOM -->
         </div>
-        <!-- ./BASKET PREVIEW BOTTOM -->
     </div>
 </script>

@@ -1,6 +1,7 @@
 import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
 import UrlService from "services/UrlService";
+import {isNullOrUndefined}from "../../helper/utils";
 
 Vue.component("item-search", {
 
@@ -122,8 +123,16 @@ Vue.component("item-search", {
 
         updateTitle(searchString)
         {
-            document.querySelector("#searchPageTitle").appendChild(document.createTextNode(TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString));
-            document.title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+            const searchPageTitle = document.querySelector("#searchPageTitle");
+            const title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString;
+
+            if (!isNullOrUndefined(searchPageTitle))
+            {
+                searchPageTitle.innerHTML = "";
+                searchPageTitle.appendChild(document.createTextNode(title));
+            }
+
+            document.title = `${title} | ${TranslationService.translate("Ceres::Template.headerCompanyName")}`;
         },
 
         autocomplete(searchString)
