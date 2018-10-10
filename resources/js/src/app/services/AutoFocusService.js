@@ -6,14 +6,17 @@ export function autoFocus()
 
     for (const modal in modals)
 	{
-        const currentModal = ModalService.findModal(modals[modal]);
+        if (typeof modals[modal] === "object")
+        {
+            const currentModal = ModalService.findModal(modals[modal]);
 
-        if (currentModal)
-		{
-            currentModal.on("shown.bs.modal", () =>
-			{
-                triggerAutoFocus(currentModal);
-            });
+            if (currentModal)
+            {
+                currentModal.on("shown.bs.modal", () =>
+                {
+                    triggerAutoFocus(currentModal);
+                });
+            }
         }
     }
 
