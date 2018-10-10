@@ -9,7 +9,7 @@
             <div class="col-xs-12 col-sm-4">
                 <div class="input-unit"
                     {% if "billing_address.salutation" in addressFieldsRequired %}data-validate{% endif %}>
-                    <salutation-select template="#vue-salutation-select" :address-type="addressType" :address-data="value" @input="emitInputEvent($event.field, $event.value)" data-autofocus tabindex="-1"></salutation-select>
+                    <salutation-select template="#vue-salutation-select" :address-type="addressType" :address-data="value" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                     <label :for="'txtSalutation' + _uid">{{ trans("Ceres::Template.addressSalutation") }}{% if "billing_address.salutation" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
@@ -63,7 +63,7 @@
 
         <div class="col-xs-12 col-sm-4">
             <div class="input-unit" data-validate="text" data-model="name3">
-                <input type="text" name="lastName" :id="'txtLastName' + _uid" :value="value.name3" @input="emitInputEvent('name3', $event.target.value)" data-autofocus>
+                <input type="text" name="lastName" :id="'txtLastName' + _uid" :value="value.name3" @input="emitInputEvent('name3', $event.target.value)">
                 <label :for="'txtLastName' + _uid">{{ trans("Ceres::Template.addressLastName") }}*</label>
             </div>
         </div>
