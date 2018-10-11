@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-salutation-select">
-    <select :value="addressData.addressSalutation" class="custom-select" @change="emitInputEvent(parseInt($event.target.value))">
+    <select :value="addressData.addressSalutation" class="custom-select" @change="emitInputEvent(parseInt($event.target.value))" data-autofocus>
         <option :value="salutation.id" :selected="addressData.gender === mapSalutationIdToGender(salutation.id) && checkGenderCompany(salutation.id)" v-for="(salutation, index) in currentSalutation">
             ${ salutation.value }
         </option>
