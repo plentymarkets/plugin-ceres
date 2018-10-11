@@ -2,8 +2,7 @@
 
 {% set gCapture = config("Ceres.global.google_recaptcha_api_key") %}
 
-<script type="x/template" id="vue-login">
-    
+<script type="x/template" id="vue-login">  
     <div class="login-pwd-reset">
         <form :id="'login-form-' + _uid" class="login-container">
             <div :class="{'modal-body': modalElement}">
@@ -11,7 +10,7 @@
                     <div class="col-xs-12">
                         <div class="input-unit" data-validate="mail">
                             {% set uid_mail = uid() %}
-                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
+                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username" data-autofocus>
                             <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
@@ -39,40 +38,5 @@
                 </div>
             </div>
         </form>
-    
-
-        <form :id="'reset-pwd-form-' + _uid" class="reset-pwd-container">
-            <div :class="{'modal-body': modalElement}">
-                <div class="alert alert-info alert-dismissible pwd-forgot-info">
-                    <span class="info-badge">{{ trans("Ceres::Template.loginForgotPasswordInfo") }}</span>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="mail">
-                            {% set uid_mail = uid() %}
-                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
-                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
-                        </div>
-                        <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
-                    </div>
-                </div>
-            </div>
-            <div :class="{'modal-footer': modalElement, 'row': !modalElement}">
-                <div :class="{'col-xs-12 text-sm-right': !modalElement}">
-                    {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
-
-                    <button type="button" @click.prevent="cancelResetPwd" class="btn btn-secondary btn-medium btn-m-r">
-                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                        {{ trans("Ceres::Template.loginBackToLogin") }}
-                    </button>
-
-                    <button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary btn-medium" :class="{'pull-right': !modalElement }">
-                        <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                        {{ trans("Ceres::Template.loginSend") }}
-                    </button>
-                </div>
-            </div>
-        </form>
-
     </div>
 </script>
