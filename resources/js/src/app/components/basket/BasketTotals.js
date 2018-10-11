@@ -17,7 +17,7 @@ Vue.component("basket-totals", {
     }),
 
     methods: {
-        calculation: function(value, percent)
+        calculateBaseValue: function(value, percent)
         {
             return (value / (100 - percent)) * 100;
         }

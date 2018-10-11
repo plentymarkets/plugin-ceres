@@ -11,25 +11,25 @@
                     {{ trans("Ceres::Template.basketValue") }} ({{ trans("Ceres::Template.basketNet") }})
                 </dt><!--
                 --><dd :class="{ 'font-weight-bold': showNetPrices }">
-                    ${ calculation(basket.itemSumNet, basket.basketRebate) | currency }
+                    ${ calculateBaseValue(basket.itemSumNet, basket.basketRebate) | currency }
                 </dd>
 
                 <dt :class="{ 'font-weight-bold': !showNetPrices }">
                     {{ trans("Ceres::Template.basketValue") }} ({{ trans("Ceres::Template.basketGross") }})
                 </dt><!--
                 --><dd :class="{ 'font-weight-bold': !showNetPrices }">
-                    ${ calculation(basket.itemSum, basket.basketRebate)| currency  }
+                    ${ calculateBaseValue(basket.itemSum, basket.basketRebate)| currency  }
                 </dd>
 
                 <template v-if="basket.basketRebate">
                     <dt class="rebate-hint">
-                        ${ basket.basketRebate }% {{ trans("Ceres::Template.basketRebate") }}
+                        {{ trans("Ceres::Template.basketRebate") }}
                     </dt><!--
                 --><dd class="rebate-hint" v-if="!showNetPrices">
-                        ${ calculation(basket.itemSum, basket.basketRebate) - basket.itemSum | currency  }
+                        ${ calculateBaseValue(basket.itemSum, basket.basketRebate) - basket.itemSum | currency  }
                     </dd><!--
                 --><dd class="rebate-hint" v-else>
-                        ${ calculation(basket.itemSumNet, basket.basketRebate) - basket.itemSumNet | currency  }
+                        ${ calculateBaseValue(basket.itemSumNet, basket.basketRebate) - basket.itemSumNet | currency  }
                     </dd>
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
                         {{ trans("Ceres::Template.basketSubTotal") }} ({{ trans("Ceres::Template.basketNet") }})
