@@ -2,13 +2,11 @@ import ModalService from "services/ModalService";
 
 export function autoFocus()
 {
-    const modals = document.getElementsByClassName("modal");
-
-    for (const modal in modals)
+    for (const modal of document.getElementsByClassName("modal"))
 	{
-        if (typeof modals[modal] === "object")
+        if (typeof modal === "object")
         {
-            const currentModal = ModalService.findModal(modals[modal]);
+            const currentModal = ModalService.findModal(modal);
 
             if (currentModal)
             {
@@ -25,8 +23,6 @@ export function autoFocus()
 
 export function triggerAutoFocus(modal)
 {
-    modal = modal || null;
-
     let focusElements;
 
     if (modal)

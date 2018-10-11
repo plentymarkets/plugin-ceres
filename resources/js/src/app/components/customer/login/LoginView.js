@@ -8,13 +8,6 @@ Vue.component("login-view", {
         "template"
     ],
 
-    data: function()
-    {
-        return {
-
-        };
-    },
-
     created: function()
     {
         this.$options.template = this.template;

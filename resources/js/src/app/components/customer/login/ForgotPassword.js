@@ -9,9 +9,14 @@ Vue.component("forgot-password-modal", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-forgot-password-modal"
+        }
+    },
 
     data()
     {
@@ -53,12 +58,12 @@ Vue.component("forgot-password-modal", {
             ValidationService.validate($("#reset-pwd-form-" + this._uid))
 				.done(() =>
 				{
-					this.sendResetPwd();
-				})
+                    this.sendResetPwd();
+                })
 				.fail(invalidFields =>
 				{
-					ValidationService.markInvalidFields(invalidFields, "error");
-				});
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
         },
 
         /**
