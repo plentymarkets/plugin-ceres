@@ -21858,7 +21858,7 @@ Vue.directive("render-category", {
                 return element.classList.contains("hover");
             });
 
-            if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType) {
+            if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType || currentCategoryType === "content") {
                 _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
 
                 var url = _index2.default.state.navigation.currentCategory.url;
