@@ -31367,16 +31367,9 @@ var TetherClass = (function (_Evented) {
             this.options.bodyElement.appendChild(this.element);
           }
         } else {
-          var isFullscreenElement = function isFullscreenElement(e) {
-            var d = e.ownerDocument;
-            var fe = d.fullscreenElement || d.webkitFullscreenElement || d.mozFullScreenElement || d.msFullscreenElement;
-            return fe === e;
-          };
-
           var offsetParentIsBody = true;
-
           var currentNode = this.element.parentNode;
-          while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY' && !isFullscreenElement(currentNode)) {
+          while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY') {
             if (getComputedStyle(currentNode).position !== 'static') {
               offsetParentIsBody = false;
               break;
