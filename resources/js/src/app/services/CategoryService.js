@@ -77,7 +77,13 @@ function _updateCategoryTexts(currentCategory)
                             currentCategory.details[0].metaTitle :
                             currentCategory.details[0].name;
 
-    document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
+    const categoryNameElement = document.querySelector(".category-title");
+
+    if (categoryNameElement)
+    {
+        categoryNameElement.innerHTML = currentCategory.details[0].name;
+    }
+
     document.title = categoryTitle + " | " + TranslationService.translate("Ceres::Template.headerCompanyName");
 
     _loadOptionalData(currentCategory);
