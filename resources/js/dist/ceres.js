@@ -14550,6 +14550,8 @@ var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
 var _UrlService = require("services/UrlService");
 
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NotificationService = require("services/NotificationService");
@@ -14563,7 +14565,6 @@ Vue.component("add-to-basket", {
             type: String,
             default: "#vue-add-to-basket"
         },
-        item: Object,
         itemUrl: String,
         showQuantity: {
             type: Boolean,
@@ -14582,34 +14583,46 @@ Vue.component("add-to-basket", {
         isVariationSelected: {
             type: Boolean,
             default: true
+        },
+
+        variationId: {
+            type: Number
+        },
+        isSalable: {
+            // = isSalable && !hasChildren
+            type: Boolean,
+            default: false
+        },
+        intervalQuantity: {
+            type: Number,
+            default: 1
+        },
+        minimumQuantity: {
+            type: Number,
+            default: 0
+        },
+        maximumQuantity: {
+            type: Number,
+            default: null
+        },
+        orderProperties: {
+            type: Array,
+            default: function _default() {
+                return [];
+            }
         }
     },
     computed: _extends({
-        hasChildren: function hasChildren() {
-            return this.item.filter && this.item.filter.hasChildren;
+        computedMinimumQuantity: function computedMinimumQuantity() {
+            return this.minimumQuantity <= 0 ? this.intervalQuantity : this.minimumQuantity;
         },
         canBeAddedToBasket: function canBeAddedToBasket() {
-            var isSalable = this.item.filter && this.item.filter.isSalable;
-            var hasChildren = this.item.filter && this.item.filter.hasChildren;
-            var intervalQuantity = this.item.variation.intervalOrderQuantity || 1;
-            var minimumOrderQuantity = this.item.variation.minimumOrderQuantity || intervalQuantity;
-            var requiresProperties = !this.requiresProperties;
-
-            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity && requiresProperties;
-        },
-        variationId: function variationId() {
-            return this.item.variation.id;
+            return this.isSalable && (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) && !this.requiresProperties;
         },
         requiresProperties: function requiresProperties() {
-            if (App.config.item.requireOrderProperties && this.item.properties) {
-                var availableProperties = this.item.properties.filter(function (property) {
-                    return property.property.isShownOnItemPage;
-                });
-
-                return !!availableProperties.length;
-            }
-
-            return false;
+            return App.config.item.requireOrderProperties && this.orderProperties.filter(function (property) {
+                return property.property.isShownOnItemPage;
+            }).length > 0;
         }
     }, Vuex.mapState({
         isBasketLoading: function isBasketLoading(state) {
@@ -14636,19 +14649,24 @@ Vue.component("add-to-basket", {
 
             if (this.missingOrderProperties.length) {
                 this.showMissingPropertiesError();
-            } else if (this.item.filter.isSalable) {
+            } else if (this.isSalable) {
                 this.waiting = true;
 
                 var basketObject = {
                     variationId: this.variationId,
                     quantity: this.quantity,
-                    basketItemOrderParams: this.item.properties
+                    basketItemOrderParams: this.orderProperties
                 };
 
                 this.$store.dispatch("addBasketItem", basketObject).then(function (response) {
+                    var basketItem = response.find(function (item) {
+                        return item.variationId === _this.variationId;
+                    });
+                    var variation = !(0, _utils.isNullOrUndefined)(basketItem) ? basketItem.variation.data : null;
+
                     document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
                     _this.waiting = false;
-                    _this.openAddToBasketOverlay(basketObject.quantity);
+                    _this.openAddToBasketOverlay(basketObject.quantity, variation);
                 }, function (error) {
                     _this.waiting = false;
 
@@ -14704,9 +14722,9 @@ Vue.component("add-to-basket", {
         /**
          * open the AddItemToBasketOverlay
          */
-        openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity) {
+        openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity, item) {
             var latestBasketEntry = {
-                item: this.item,
+                item: item,
                 quantity: stashedQuantity
             };
 
@@ -14729,7 +14747,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"exceptions/ExceptionMap":100,"services/NotificationService":133,"services/TranslationService":134,"services/UrlService":135}],12:[function(require,module,exports){
+},{"../../helper/utils":125,"exceptions/ExceptionMap":100,"services/NotificationService":133,"services/TranslationService":134,"services/UrlService":135}],12:[function(require,module,exports){
 "use strict";
 
 var _ApiService = require("services/ApiService");
