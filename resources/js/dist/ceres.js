@@ -23557,7 +23557,12 @@ function _removeTempDesc() {
 function _updateCategoryTexts(currentCategory) {
     var categoryTitle = currentCategory.details[0].metaTitle ? currentCategory.details[0].metaTitle : currentCategory.details[0].name;
 
-    document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
+    var categoryNameElement = document.querySelector(".category-title");
+
+    if (categoryNameElement) {
+        categoryNameElement.innerHTML = currentCategory.details[0].name;
+    }
+
     document.title = categoryTitle + " | " + _TranslationService2.default.translate("Ceres::Template.headerCompanyName");
 
     _loadOptionalData(currentCategory);
