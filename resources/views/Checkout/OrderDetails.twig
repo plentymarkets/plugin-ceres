@@ -250,19 +250,19 @@
                         </dd>
                         {% if rebatedAmountTotal > 0 %}
                             <dt class="rebate-hint">
-                                {{ trans("Ceres::Template.basketRebate") }}
+                                {{ trans("Ceres::Template.orderConfirmationRebate") }}
                             </dt><!--
                             --><dd class="rebate-hint">
                             {{ rebatedAmountTotal| formatMonetary( basketTotalsCurrency ) }}
                         </dd>
                             <dt {% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                                {{ trans("Ceres::Template.basketSubTotal") }} ({{ trans("Ceres::Template.basketNet") }})
+                                {{ trans("Ceres::Template.orderConfirmationSubTotal") }} ({{ trans("Ceres::Template.checkoutNet") }})
                             </dt><!--
                             --><dd {% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
                             {{ totals.itemSumNet | formatMonetary( basketTotalsCurrency ) }}
                         </dd>
                             <dt {% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                                {{ trans("Ceres::Template.basketSubTotal") }} ({{ trans("Ceres::Template.basketGross") }})
+                                {{ trans("Ceres::Template.orderConfirmationSubTotal") }} ({{ trans("Ceres::Template.checkoutGross") }})
                             </dt><!--
                             --><dd {% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
                             {{ totals.itemSumGross | formatMonetary( basketTotalsCurrency ) }}
