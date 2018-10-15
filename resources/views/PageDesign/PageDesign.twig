@@ -11,6 +11,7 @@
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 {{ component( "Ceres::Category.Components.CategoryBreadcrumbs" ) }}
+{{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
 
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
@@ -129,6 +130,10 @@
         <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
         <!-- ./BASKET MODAL -->
 
+        <!-- PASSWORD RESET MODAL -->
+        <forgot-password-modal></forgot-password-modal>
+        <!-- ./PASSWORD RESET MODAL -->
+
         <!-- SHIPPINGCOSTS MODAL -->
         <div id="shippingscosts-modal-wrapper">
             <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
@@ -221,7 +226,7 @@
         {
             function calculateBodyOffset()
             {
-                if ( header.classList.contains('pos-f-t') )
+                if ( header.classList.contains('pos-f-t'))
                 {
                     var bodyOffset = 0;
                     var children = header.children;
@@ -229,7 +234,8 @@
                     {
                         bodyOffset += children[i].getBoundingClientRect().height;
                     }
-                    document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
+
+                    document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';       
                 }
             }
 

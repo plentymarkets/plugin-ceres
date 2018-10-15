@@ -50,8 +50,27 @@
 
 	.add-item{
 		position: absolute;
-	    top: 1em;
-	    right: 1em;
+		
+		@include media-breakpoint-down(xs)
+		{
+			top: 0;
+			right: 0;
+
+			& button {
+				height: 74px;
+
+				& i {
+					margin-left: 6px;
+					margin-top: 1px;
+				}
+			}
+		}
+
+		@include media-breakpoint-up(sm)
+		{
+			top: 1em;
+			right: 1em;
+		}
 	}
 
 	.item{

@@ -8,8 +8,7 @@
 
 {% block PartialHead %}
     <meta name="description" content="{{ trans('Ceres::Template.homepageMetaDescription') }}">
-    <meta name="robots" content="{{ config("Ceres.meta.robots_home") }}">
-
+    <meta name="robots" content="{% if forceNoIndex %}NOINDEX{% else %}{{ config("Ceres.meta.robots_home") }}{% endif %}">
     <meta property="og:title" content="{{ companyName }}"/>
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}"/>

@@ -249,6 +249,11 @@
             "description"   : "Add customer feedback in the single item view."
         },
         {
+            "key"           : "SingleItem.ImageCarousel",
+            "name"          : "Single item: Override image carousel",
+            "description"   : "Override the image carousel on the single item."
+        },
+        {
             "key"           : "BasketTotals.BeforeItemSum",
             "name"          : "Shopping cart: Before \"Value of items\"",
             "description"   : "Add content before the value of items in the Total column of the shopping cart."

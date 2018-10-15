@@ -29,6 +29,7 @@ class GlobalContext implements ContextInterface
 
     public $lang;
     public $metaLang;
+    public $forceNoIndex;
     public $template = [];
     public $templateName;
     public $categories;
@@ -84,6 +85,8 @@ class GlobalContext implements ContextInterface
         {
             $this->metaLang = $this->lang;
         }
+
+        $this->forceNoIndex = $templateService->isNoIndexForced();
 
         if($templateService->isCategory() || $templateService->isItem())
         {

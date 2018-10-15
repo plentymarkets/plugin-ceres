@@ -30,7 +30,7 @@ const actions =
                 {
                     commit("setIsLastSeenItemsLoading", true);
 
-                    ApiService.put("/rest/io/item/last_seen/" + variationId)
+                    ApiService.put("/rest/io/item/last_seen/" + variationId + "?items=" + App.config.itemLists.lastSeenNumber || 4)
                         .done(response =>
                         {
                             commit("setLastSeenItems", response.documents);
