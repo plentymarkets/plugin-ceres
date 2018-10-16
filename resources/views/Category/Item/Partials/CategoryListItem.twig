@@ -100,6 +100,7 @@
             <div class="thumb-meta">
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
 
+<!--
                 <div class="prices">
                     {% if item.data.prices.rrp is defined and item.data.prices.rrp.price.value != 0 and item.data.prices.rrp.price.value > item.data.prices.default.unitPrice.value %}
                         <div class="price-view-port">
@@ -113,7 +114,7 @@
                         {{ item.data.prices.default.unitPrice.formatted }} *
                     </div>
                 </div>
-
+-->
                 {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}
 
                 {% if not (item.data.unit.unitOfMeasurement == 'C62' and item.data.unit.content == 1) %}
