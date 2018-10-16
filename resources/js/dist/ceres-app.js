@@ -22768,16 +22768,21 @@ module.exports = function ($) {
 
         url = (0, _url.normalizeUrl)(url);
         config = config || {};
-        config.data = data || null;
         config.dataType = config.dataType || "json";
         config.contentType = typeof config.contentType !== "undefined" ? config.contentType : "application/x-www-form-urlencoded; charset=UTF-8";
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
         config.keepOriginalResponse = !!config.keepOriginalResponse;
 
+        if (data) {
+            data.templateEvent = App.templateEvent;
+            config.data = data;
+        }
+
         if (!config.doInBackground) {
             WaitScreenService.showWaitScreen();
         }
+
         $.ajax(url, config).done(function (response) {
             if (config.keepOriginalResponse) {
                 deferred.resolve(response);
@@ -23042,7 +23047,6 @@ function updateItemListUrlParams(searchParams) {
     urlParams.facets = searchParams.facets.length > 0 ? searchParams.facets : null;
     urlParams.priceMin = searchParams.priceMin.length > 0 ? searchParams.priceMin : null;
     urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
-    urlParams.originTemplate = searchParams.originTemplate.length > 0 ? searchParams.originTemplate : null;
 
     if (App.isSearch) {
         urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch ? searchParams.sorting : null;
@@ -25065,8 +25069,7 @@ var actions = {
                 priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
                 priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
                 categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                template: "Ceres::ItemList.ItemListView",
-                originTemplate: "tpl.category.item"
+                template: "Ceres::ItemList.ItemListView"
             };
             var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 

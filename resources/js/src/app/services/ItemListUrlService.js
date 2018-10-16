@@ -11,7 +11,6 @@ export function updateItemListUrlParams(searchParams)
     urlParams.facets = (searchParams.facets.length > 0) ? searchParams.facets : null;
     urlParams.priceMin = (searchParams.priceMin.length > 0) ? searchParams.priceMin : null;
     urlParams.priceMax = (searchParams.priceMax.length > 0) ? searchParams.priceMax : null;
-    urlParams.originTemplate = (searchParams.originTemplate.length > 0) ? searchParams.originTemplate : null;
 
     if (App.isSearch)
     {
