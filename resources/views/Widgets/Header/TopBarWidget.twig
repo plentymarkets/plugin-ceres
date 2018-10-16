@@ -190,7 +190,7 @@
                 <shop-country-settings
                         country-flag-prefix="flag-icon-"
                         :shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode') }}"
-                        :shipping-country-id="{{ Twig.call('services.checkout.getShippingCountryId') }}">
+                        :shipping-country-id="{{ Twig.print('services.checkout.getShippingCountryId | json_encode') }}">
                     <div id="countrySettings" class="row cmp cmp-country-settings no-margin collapse">
                         <div class="container-max">
                             <div class="row no-padding">
