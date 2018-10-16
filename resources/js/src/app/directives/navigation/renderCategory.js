@@ -1,6 +1,27 @@
 import store from "store/index.js";
 import {isNullOrUndefined}from "../../helper/utils";
 
+const navigateToCategoryById = (element, event) =>
+{
+    let url;
+
+    store.dispatch("selectCategory", {categoryId: parseInt(element.dataset.categoryId), withReload: true});
+
+    if (isNullOrUndefined(store.state.navigation.currentCategory) && event.target && event.target.href)
+    {
+        url = event.target.href;
+    }
+    else
+    {
+        url = store.state.navigation.currentCategory.url;
+    }
+
+    if (!isNullOrUndefined(url))
+    {
+        window.open(url, "_self");
+    }
+};
+
 Vue.directive("render-category",
     {
         bind(el, binding)
@@ -25,14 +46,12 @@ Vue.directive("render-category",
                     {
                         if (openCategory && openCategory.contains(event.target) || binding.value.alwaysOpen)
                         {
-                            store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId), withReload: true});
-                            window.open(store.state.navigation.currentCategory.url, "_self");
+                            navigateToCategoryById(el, event);
                         }
                     }
                     else
                     {
-                        store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId), withReload: true});
-                        window.open(store.state.navigation.currentCategory.url, "_self");
+                        navigateToCategoryById(el, event);
                     }
                 }
                 // check if user click the opened category and change the ui handling
