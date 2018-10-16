@@ -9,70 +9,8 @@
 
     {% set lang = services.sessionStorage.getLang() %}
 
-    {% set slider1 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId1")]}).documents[0].data,
-    url: config("Ceres.homepage.sliderImageUrl1") } %}
-    {% set slider2 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId2")]}).documents[0].data,
-    url: config("Ceres.homepage.sliderImageUrl2") } %}
-    {% set slider3 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId3")]}).documents[0].data,
-    url: config("Ceres.homepage.sliderImageUrl3") } %}
+TEST
 
-    {% if slider1.url | trim is empty and slider1.item.texts is not empty %}
-        {% set slider1Image = slider1.item.images | itemImages | orderByKey('position') | first %}
-        {% set slider1 = slider1 | merge({url: slider1Image.url}) %}
-    {% endif %}
-    {% if slider2.url | trim is empty and slider2.item.texts is not empty %}
-        {% set slider2Image = slider2.item.images | itemImages | orderByKey('position') | first %}
-        {% set slider2 = slider2 | merge({url: slider2Image.url}) %}
-    {% endif %}
-    {% if slider3.url | trim is empty and slider3.item.texts is not empty %}
-        {% set slider3Image = slider3.item.images | itemImages | orderByKey('position') | first %}
-        {% set slider3 = slider3 | merge({url: slider3Image.url}) %}
-    {% endif %}
-
-    {% set heroExtra1 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId1")]}).documents[0].data,
-    url: config("Ceres.homepage.heroExtraImageUrl1") } %}
-    {% set heroExtra2 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId2")]}).documents[0].data,
-    url: config("Ceres.homepage.heroExtraImageUrl2") } %}
-
-    {% if heroExtra1.url | trim is empty and heroExtra1.item.texts is not empty %}
-        {% set heroExtra1Image = heroExtra1.item.images | itemImages | orderByKey('position') | first %}
-        {% set heroExtra1 = heroExtra1 | merge({url: heroExtra1Image.url}) %}
-    {% endif %}
-    {% if heroExtra2.url | trim is empty and heroExtra2.item.texts is not empty %}
-        {% set heroExtra2Image = heroExtra2.item.images | itemImages | orderByKey('position') | first %}
-        {% set heroExtra2 = heroExtra2 | merge({url: heroExtra2Image.url}) %}
-    {% endif %}
-
-    {% set category1 = services.category.get(config("Ceres.homepage.homepageCategory1"), lang) %}
-    {% set category2 = services.category.get(config("Ceres.homepage.homepageCategory2"), lang) %}
-    {% set category3 = services.category.get(config("Ceres.homepage.homepageCategory3"), lang) %}
-    {% set category4 = services.category.get(config("Ceres.homepage.homepageCategory4"), lang) %}
-    {% set category5 = services.category.get(config("Ceres.homepage.homepageCategory5"), lang) %}
-    {% set category6 = services.category.get(config("Ceres.homepage.homepageCategory6"), lang) %}
-
-    {% set paginatedCategoryList1 =
-    services.itemLoader.loadForTemplate(
-    'Ceres::ItemList.ItemListView',
-    itemLoaderPresets.categoryList,
-    {'categoryId': category3.id, 'page':1, 'items':4, 'sorting': itemSort}) %}
-
-    {% set paginatedCategoryList2 =
-    services.itemLoader.loadForTemplate(
-    'Ceres::ItemList.ItemListView',
-    itemLoaderPresets.categoryList,
-    {'categoryId': category6.id, 'page':1, 'items':4, 'sorting': itemSort}) %}
-
-    {% set categoryList1 = paginatedCategoryList1.documents %}
-    {% set categoryList2 = paginatedCategoryList2.documents %}
-
-    {{ component( "Ceres::ItemList.Components.ItemList") }}
-    {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
-    {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <div class="home container-max">
         <div class="row">
