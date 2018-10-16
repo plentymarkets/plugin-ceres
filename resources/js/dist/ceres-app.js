@@ -23042,6 +23042,7 @@ function updateItemListUrlParams(searchParams) {
     urlParams.facets = searchParams.facets.length > 0 ? searchParams.facets : null;
     urlParams.priceMin = searchParams.priceMin.length > 0 ? searchParams.priceMin : null;
     urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
+    urlParams.originTemplate = searchParams.originTemplate.length > 0 ? searchParams.originTemplate : null;
 
     if (App.isSearch) {
         urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch ? searchParams.sorting : null;
@@ -25064,7 +25065,8 @@ var actions = {
                 priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
                 priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
                 categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                template: "Ceres::ItemList.ItemListView"
+                template: "Ceres::ItemList.ItemListView",
+                originTemplate: "tpl.category.item"
             };
             var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 

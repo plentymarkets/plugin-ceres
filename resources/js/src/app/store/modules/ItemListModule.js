@@ -212,7 +212,8 @@ const actions =
                         priceMin            : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
                         priceMax            : selectedPriceFacet ? selectedPriceFacet.priceMax : "",
                         categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                        template            : "Ceres::ItemList.ItemListView"
+                        template            : "Ceres::ItemList.ItemListView",
+                        originTemplate      : "tpl.category.item"
                     };
                 const url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 
