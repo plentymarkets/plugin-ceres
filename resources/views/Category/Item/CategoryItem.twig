@@ -117,7 +117,7 @@
 {% endblock %}
 
 {% block PartialHead %}
-    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ webstoreConfig.domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
 
     {% if currentPage-1 > 0 %}
         <link rel="prev" href="{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage-1 }) | url_encode }}" />

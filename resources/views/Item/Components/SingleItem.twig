@@ -1,3 +1,5 @@
+{% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
+
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 {% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
@@ -9,7 +11,7 @@
                 <div class="col-md-7 single-leftside">
                     <div class="row">
                         <div class="col-xs-12">
-                            <item-image-carousel image-url-accessor="url" template="#vue-item-image-carousel"></item-image-carousel>
+                            <slot name="ImageCarousel"></slot>
                         </div>
                     </div>
                 </div>
@@ -97,13 +99,17 @@
 
                     <div class="row m-y-1">
                         <slot name="BeforeAddToBasket"></slot>
-                        <add-to-basket
-                                template="#vue-add-to-basket"
-                                v-if="currentVariation.filter.isSalable"
-                                :item="$store.state.item.variation.documents[0].data"
-                                :show-quantity="true"
-                                :missing-order-properties="variationMissingProperties"
-                                :is-variation-selected="isVariationSelected"></add-to-basket>
+
+                        {{ AddToBasket.printVueComponent(
+                            "currentVariation",
+                            false,
+                            true,
+                            {
+                                "v-if": "currentVariation.filter.isSalable",
+                                "missing-order-properties":"variationMissingProperties",
+                                "is-variation-selected": "isVariationSelected"
+                            }
+                        ) }}
                         <slot name="AfterAddToBasket"></slot>
                     </div>
 

@@ -11,6 +11,7 @@
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 {{ component( "Ceres::Category.Components.CategoryBreadcrumbs" ) }}
+{{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
 
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
@@ -128,6 +129,10 @@
         <!-- BASKET MODAL -->
         <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
         <!-- ./BASKET MODAL -->
+
+        <!-- PASSWORD RESET MODAL -->
+        <forgot-password-modal></forgot-password-modal>
+        <!-- ./PASSWORD RESET MODAL -->
 
         <!-- SHIPPINGCOSTS MODAL -->
         <div id="shippingscosts-modal-wrapper">

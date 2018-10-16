@@ -18,7 +18,7 @@ Vue.directive("render-category",
                 const ddownElements = [].slice.call(document.getElementsByClassName("ddown"));
                 const openCategory = ddownElements.find(element => element.classList.contains("hover"));
 
-                if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType)
+                if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType || currentCategoryType === "content")
                 {
                     store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId), withReload: true});
 
