@@ -152,7 +152,7 @@ Vue.component("basket-list-item", {
                 this.$store.dispatch("updateBasketItemQuantity", {basketItem: this.basketItem, quantity: quantity}).then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: this.basketItem}));
+                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: {basketItem: this.basketItem, origQty: origQty, newQty: quantity}}));
                         this.waiting = false;
                     },
                     error =>

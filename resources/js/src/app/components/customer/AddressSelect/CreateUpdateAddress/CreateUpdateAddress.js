@@ -20,20 +20,20 @@ Vue.component("create-update-address", {
         return {
             waiting: false,
             addressFormNames:
-            {
-                1: "#billing_address_form",
-                2: "#delivery_address_form"
-            }
+                {
+                    1: "#billing_address_form",
+                    2: "#delivery_address_form"
+                }
         };
     },
 
     computed:
-    {
-        addressList()
         {
-            this.$store.getters.getAddressList(this.addressType);
-        }
-    },
+            addressList()
+            {
+                this.$store.getters.getAddressList(this.addressType);
+            }
+        },
 
     created()
     {
@@ -50,6 +50,14 @@ Vue.component("create-update-address", {
                 .done(() =>
                 {
                     this.saveAddress();
+                    if ($(this.addressFormNames[this.addressType]) == "#billing_address_form")
+                    {
+                        document.dispatchEvent(new CustomEvent("onBillingAddressAdded"));
+                    }
+                    else
+                    {
+                        document.dispatchEvent(new CustomEvent("onDeliveryAddressAdded"));
+                    }
                 })
                 .fail(invalidFields =>
                 {
@@ -162,7 +170,7 @@ Vue.component("create-update-address", {
                 {
                     switch (optionType.typeId)
                     {
-                    case 1:
+                        case 1:
                         {
                             if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value)
                             {
@@ -172,7 +180,7 @@ Vue.component("create-update-address", {
                             break;
                         }
 
-                    case 9:
+                        case 9:
                         {
                             if (this.addressData.birthday && this.addressData.birthday !== optionType.value)
                             {
@@ -181,7 +189,7 @@ Vue.component("create-update-address", {
                             break;
                         }
 
-                    case 11:
+                        case 11:
                         {
                             if (this.addressData.title && this.addressData.title !== optionType.value)
                             {
@@ -190,7 +198,7 @@ Vue.component("create-update-address", {
                             break;
                         }
 
-                    case 4:
+                        case 4:
                         {
                             if (this.addressData.telephone && this.addressData.telephone !== optionType.value)
                             {
