@@ -128,13 +128,13 @@
                 {% endif %}
 
             </div>
-            <!--
+           
             <add-to-basket
                 :item="{{ item.data | json_encode() }}"
                 item-url="{{ itemUrl }}">
             </add-to-basket>
             
-            -->
+        
 
             <span class="vat-porto-info small text-muted">
                 * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.itemExclVAT") }}{% else %}{{ trans("Ceres::Template.itemInclVAT") }}{% endif %} {{ trans("Ceres::Template.itemExclusive") }}
