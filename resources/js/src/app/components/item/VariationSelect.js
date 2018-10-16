@@ -13,7 +13,9 @@ Vue.component("variation-select", {
     props: [
         "attributes",
         "variations",
+        "variationUnits",
         "preselect",
+        "unitPreselect",
         "template"
     ],
 
@@ -21,7 +23,9 @@ Vue.component("variation-select", {
     {
         return {
             // Collection of currently selected variation attributes.
-            selectedAttributes: {}
+            selectedAttributes: {},
+            possibleUnitIds: [],
+            selectedUnitId: 0
         };
     },
 
@@ -61,6 +65,17 @@ Vue.component("variation-select", {
                 {
                     // set attributes of preselected variation
                     this.setAttributes(preselectedVariation[0]);
+
+                    if (this.unitPreselect > 0)
+                    {
+                        const possibleVariations = this.filterVariations(this.selectedAttributes);
+
+                        if (possibleVariations.length > 1)
+                        {
+                            this.setUnits(possibleVariations);
+                            this.selectedUnitId = this.unitPreselect;
+                        }
+                    }
                 }
             }
         });
@@ -90,6 +105,9 @@ Vue.component("variation-select", {
                 }
 
                 return variation.attributes.length > 0;
+            }).filter(variation =>
+            {
+                return this.selectedUnitId === 0 || this.selectedUnitId === variation.unitCombinationId;
             });
         },
 
@@ -168,6 +186,11 @@ Vue.component("variation-select", {
 
                 if (possibleVariations.length === 1)
                 {
+                    if (!this.selectedUnitId > 0)
+                    {
+                        this.possibleUnitIds = [];
+                    }
+
                     // only 1 matching variation remaining:
                     // set remaining attributes if not set already. Will trigger this method again.
                     if (!this.setAttributes(possibleVariations[0]))
@@ -179,6 +202,14 @@ Vue.component("variation-select", {
                     {
                         this.onSelectionChange();
                     }
+                }
+                else if (possibleVariations.length > 1)
+                {
+                    this.setUnits(possibleVariations);
+                }
+                else
+                {
+                    this.setUnits([]);
                 }
             }
         },
@@ -217,6 +248,27 @@ Vue.component("variation-select", {
 
                         this.$emit("is-valid-change", true);
                     });
+            }
+        },
+        setUnits(possibleVariations)
+        {
+            let possibleUnitIds = [];
+
+            if (possibleVariations.length > 0)
+            {
+                possibleUnitIds = possibleVariations.map(variation =>
+                {
+                    return variation.unitCombinationId;
+                });
+            }
+
+            if (possibleUnitIds.length > 1)
+            {
+                this.possibleUnitIds = possibleUnitIds;
+            }
+            else
+            {
+                this.selectedUnitId = 0;
             }
         }
     },
