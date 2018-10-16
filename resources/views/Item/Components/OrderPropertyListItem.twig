@@ -2,7 +2,7 @@
     <div>
 
         <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.value, 'error': hasError }" data-validate="text">
-            <input type="text" @change="onInputValueChanged($event.target.value)" v-model="inputValue" v-tooltip data-toggle="tooltip" :title="property.names.description">
+            <input type="text" @input="onInputValueChanged($event.target.value)" v-model="inputValue" v-tooltip data-toggle="tooltip" :title="property.names.description">
             <label>${property.names.name}
                 <strong v-if="surcharge > 0">(+ ${ surcharge | currency})</strong>
             *</label>
