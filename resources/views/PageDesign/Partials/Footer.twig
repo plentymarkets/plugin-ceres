@@ -32,7 +32,7 @@
         </div>
     {% endif %}
 
-
+<!--
     <div class="container-max footer-content">
         <div class="row">
             <div class="col-xs-12">
@@ -106,7 +106,9 @@
                     </div>
                 </div>
             </div>
-        </div>            
+        </div>       
+        
+        -->     
 
         {% set cat = services.category.get(config('Ceres.global.category.legal_disclosure')) %}
         <div class="copyright text-xs-center m-y-1">
@@ -127,7 +129,7 @@
                 {% endautoescape %}
             </div>
         <br>
-            <small>&copy; Copyright by beatinternet.de - {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>
+            <small>Bulid by beatinternet.de - &copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>
         </div>
     </div>
 </div>
