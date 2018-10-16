@@ -1,5 +1,4 @@
 import store from "store/index.js";
-import {switchUrl}from "services/UrlService";
 import TranslationService from "services/TranslationService";
 
 const ApiService = require("services/ApiService");
@@ -48,16 +47,6 @@ function _handleCurrentCategory()
     const currentCategory = store.state.navigation.currentCategory;
 
     _removeTempDesc();
-    _updateHistory(currentCategory);
-}
-
-/**
- * update page informations
- * @param currentCategory
- */
-function _updateHistory(currentCategory)
-{
-    switchUrl(currentCategory.url + window.location.search);
     _updateCategoryTexts(currentCategory);
 }
 

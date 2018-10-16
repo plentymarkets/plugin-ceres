@@ -102,7 +102,10 @@ const actions =
                 commit("setItemListPage", 1);
                 commit("setSelectedFacetsByIds", []);
 
-                dispatch("retrieveItemList");
+                dispatch("retrieveItemList").then(function(data)
+                {
+                    document.dispatchEvent(new CustomEvent("onVueCategoryChanged", {detail: data}));
+                });
             }
         },
 

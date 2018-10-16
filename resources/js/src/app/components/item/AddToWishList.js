@@ -71,7 +71,7 @@ Vue.component("add-to-wish-list", {
                         NotificationService.success(
                             TranslationService.translate("Ceres::Template.singleItemWishListAdded")
                         );
-                        document.dispatchEvent(new CustomEvent("afterWishlistItemAdded",{detail: {variationId: this.variationId, currentwishListIds: this.wishListIds}}));
+                        document.dispatchEvent(new CustomEvent("afterWishlistItemAdded", {detail: {variationId: this.variationId, currentWishListIds: this.wishListIds}}));
                     },
                     error =>
                     {
@@ -92,7 +92,7 @@ Vue.component("add-to-wish-list", {
                     NotificationService.success(
                         TranslationService.translate("Ceres::Template.singleItemWishListRemoved")
                     );
-                    document.dispatchEvent(new CustomEvent("afterWishlistItemRemoved",{detail: {variationId: this.variationId, wishListIds: this.wishListIds}}));
+                    document.dispatchEvent(new CustomEvent("afterWishlistItemRemoved", {detail: {variationId: this.variationId, wishListIds: this.wishListIds}}));
                 },
                 error =>
                 {

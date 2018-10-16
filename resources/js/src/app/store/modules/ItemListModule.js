@@ -152,7 +152,10 @@ const actions =
 
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("retrieveItemList").then(function(data)
+            {
+                document.dispatchEvent(new CustomEvent("onSelectFacet", {detail: data}));
+            });
         },
 
         selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
@@ -161,14 +164,20 @@ const actions =
             commit("setPriceFacetTag");
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("retrieveItemList").then(function(data)
+            {
+                document.dispatchEvent(new CustomEvent("onSelectPriceFacet", {detail: data}));
+            });
         },
 
         selectItemListPage({dispatch, commit}, page)
         {
             commit("setItemListPage", page);
 
-            dispatch("retrieveItemList");
+            dispatch("retrieveItemList").then(function(data)
+            {
+                document.dispatchEvent(new CustomEvent("onItemListPagination", {detail: data}));
+            });
         },
 
         selectItemListSorting({dispatch, commit}, sorting)
@@ -176,7 +185,10 @@ const actions =
             commit("setItemListSorting", sorting);
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("retrieveItemList").then(function(data)
+            {
+                document.dispatchEvent(new CustomEvent("onSelectItemListSorting", {detail: data}));
+            });
         },
 
         selectItemsPerPage({dispatch, commit}, itemsPerPage)
@@ -184,7 +196,10 @@ const actions =
             commit("setItemsPerPage", itemsPerPage);
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("retrieveItemList").then(function(data)
+            {
+                document.dispatchEvent(new CustomEvent("onSelectItemsPerPage", {detail: data}));
+            });
         },
 
         searchItems({dispatch, commit}, searchString)
@@ -193,7 +208,10 @@ const actions =
             commit("setItemListPage", 1);
             commit("setSelectedFacetsByIds", []);
 
-            dispatch("retrieveItemList");
+            dispatch("retrieveItemList").then(function(data)
+            {
+                document.dispatchEvent(new CustomEvent("onSearchItems", {detail: data}));
+            });
         },
 
         retrieveItemList({state, dispatch, commit, getters, rootState})

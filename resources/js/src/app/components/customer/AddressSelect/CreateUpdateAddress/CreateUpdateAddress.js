@@ -50,7 +50,7 @@ Vue.component("create-update-address", {
                 .done(() =>
                 {
                     this.saveAddress();
-                    if ($(this.addressFormNames[this.addressType]) == "#billing_address_form")
+                    if (this.addressType === "1")
                     {
                         document.dispatchEvent(new CustomEvent("onBillingAddressAdded"));
                     }

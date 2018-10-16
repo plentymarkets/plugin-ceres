@@ -1,6 +1,6 @@
 import $ from "jquery";
-import {isNullOrUndefined}from "../helper/utils";
 import {normalizeUrl}from "../helper/url";
+import store from "store/index.js";
 
 export function getUrlParams(urlParams)
 {
@@ -26,11 +26,12 @@ export function getUrlParams(urlParams)
 
 export function setUrlParams(urlParams)
 {
-    var pathName = window.location.pathname;
+    var pathName = store.state.navigation.currentCategory !== null ? store.state.navigation.currentCategory.url : window.location.pathname;
     var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.replaceState({requireReload: true}, titleElement ? titleElement.innerHTML : "", pathName + params);
+    window.history.pushState({requireReload: true}, titleElement ? titleElement.innerHTML : "", pathName + params);
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", {detail: {title: titleElement ? titleElement.innerHTML : "", url:pathName + params}}));
 
     $("a[href][data-update-url]").each((i, element) =>
     {
@@ -44,36 +45,10 @@ export function setUrlParams(urlParams)
     });
 }
 
-export function setUrlParam(key, value)
-{
-    var urlParams = getUrlParams(document.location.search);
-
-    if (value !== null)
-    {
-        urlParams[key] = value;
-    }
-    else
-    {
-        delete urlParams[key];
-    }
-
-    setUrlParams(urlParams);
-}
-
 export function navigateTo(url)
 {
     url = normalizeUrl(url);
     window.location.assign(url);
 }
 
-export function switchUrl(url, title)
-{
-    if (isNullOrUndefined(title))
-    {
-        title = document.getElementsByTagName("title")[0].innerHTML;
-    }
-    url = normalizeUrl(url);
-    window.history.pushState({requireReload: true}, title, url);
-}
-
-export default {setUrlParam, setUrlParams, getUrlParams, navigateTo, switchUrl};
+export default {setUrlParams, getUrlParams, navigateTo};
