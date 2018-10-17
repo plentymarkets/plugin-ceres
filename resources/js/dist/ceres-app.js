@@ -21512,6 +21512,22 @@ var _utils = require("../../helper/utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var navigateToCategoryById = function navigateToCategoryById(element, event) {
+    var url = void 0;
+
+    _index2.default.dispatch("selectCategory", { categoryId: parseInt(element.dataset.categoryId), withReload: true });
+
+    if ((0, _utils.isNullOrUndefined)(_index2.default.state.navigation.currentCategory) && event.target && event.target.href) {
+        url = event.target.href;
+    } else {
+        url = _index2.default.state.navigation.currentCategory.url;
+    }
+
+    if (!(0, _utils.isNullOrUndefined)(url)) {
+        window.open(url, "_self");
+    }
+};
+
 Vue.directive("render-category", {
     bind: function bind(el, binding) {
         el.dataset.categoryId = binding.value.id;
@@ -21532,12 +21548,10 @@ Vue.directive("render-category", {
                 // check if touch device and change the ui handling
                 if (document.body.classList.contains("touch")) {
                     if (openCategory && openCategory.contains(event.target) || binding.value.alwaysOpen) {
-                        _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
-                        window.open(_index2.default.state.navigation.currentCategory.url, "_self");
+                        navigateToCategoryById(el, event);
                     }
                 } else {
-                    _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
-                    window.open(_index2.default.state.navigation.currentCategory.url, "_self");
+                    navigateToCategoryById(el, event);
                 }
             }
             // check if user click the opened category and change the ui handling
