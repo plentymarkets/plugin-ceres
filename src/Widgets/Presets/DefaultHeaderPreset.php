@@ -55,7 +55,8 @@ class DefaultHeaderPreset implements ContentPreset
             ->withSetting("isFixed", false)
             ->withSetting("showOnHomepage", false)
             ->withSetting("showOnMyAccount", false)
-            ->withSetting("showOnCheckout", false);
+            ->withSetting("showOnCheckout", false)
+            ->withSetting("showOnContentCategory", false);
 
         return $preset->toArray();
     }

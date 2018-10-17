@@ -38,6 +38,14 @@
             "options": {
                 "defaultValue": true
             }
+        },
+        "showOnContentCategory": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.breadcrumbShowOnContentCategoryLabel",
+            "options": {
+                "defaultValue": true
+            }
         }
     }
 }
