@@ -22,7 +22,7 @@
                     <option
                             v-for="unitCombinationId in possibleUnitIds"
                             :value="unitCombinationId">
-                        ${ unitCombinationId }
+                        ${ variationUnits[unitId]["values"][unitCombinationId] }
                     </option>
                 </select>
                 <label v-tooltip="isTextCut(unit.name)" data-toggle="tooltip" data-placement="top" title="unit.name">${ unit.name }</label>
