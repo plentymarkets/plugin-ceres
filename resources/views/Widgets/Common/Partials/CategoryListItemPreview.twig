@@ -1,4 +1,4 @@
-{{ component( "Ceres::Basket.Components.AddToBasket" ) }}
+<!-- {{ component( "Ceres::Basket.Components.AddToBasket" ) }}-->
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
@@ -74,7 +74,7 @@
             <div class="thumb-meta">
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
 
-                <div class="prices">
+                <div class="prices hidden">
                     {% if item.data.prices.rrp is defined and item.data.prices.rrp.price.value != 0 %}
                         <div class="price-view-port">
                             <del class="crossprice">
@@ -83,7 +83,7 @@
                         </div>
                     {% endif %}
 
-                    <div class="price">
+                    <div class="price hidden">
                         {% if item is defined %}
                             {{ item.data.prices.default.unitPrice.formatted }} *
                         {% else %}
