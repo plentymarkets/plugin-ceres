@@ -50,14 +50,6 @@ Vue.component("create-update-address", {
                 .done(() =>
                 {
                     this.saveAddress();
-                    if (this.addressType === "1")
-                    {
-                        document.dispatchEvent(new CustomEvent("onBillingAddressAdded"));
-                    }
-                    else
-                    {
-                        document.dispatchEvent(new CustomEvent("onDeliveryAddressAdded"));
-                    }
                 })
                 .fail(invalidFields =>
                 {

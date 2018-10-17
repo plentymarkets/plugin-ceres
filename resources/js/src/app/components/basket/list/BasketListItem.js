@@ -124,10 +124,9 @@ Vue.component("basket-list-item", {
             {
                 this.waitingForDelete = true;
 
-                this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
+                this.$store.dispatch("removeBasketItem", this.basketItem).then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
                         this.waitingForDelete = false;
                     },
                     error =>
@@ -152,7 +151,7 @@ Vue.component("basket-list-item", {
                 this.$store.dispatch("updateBasketItemQuantity", {basketItem: this.basketItem, quantity: quantity}).then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: {basketItem: this.basketItem, origQty: origQty, newQty: quantity}}));
+                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: this.basketItem}));
                         this.waiting = false;
                     },
                     error =>
