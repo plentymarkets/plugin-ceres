@@ -124,9 +124,10 @@ Vue.component("basket-list-item", {
             {
                 this.waitingForDelete = true;
 
-                this.$store.dispatch("removeBasketItem", this.basketItem).then(
+                this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
                     response =>
                     {
+                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
                         this.waitingForDelete = false;
                     },
                     error =>
