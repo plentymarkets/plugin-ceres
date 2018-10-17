@@ -28,7 +28,7 @@ const eventPropagation = store =>
             console.log("event: ", eventName, " - payload: ", mutation.payload);
         }
 
-        oldState = state;
+        oldState = JSON.parse(JSON.stringify(state));
     });
 };
 
