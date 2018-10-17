@@ -55,6 +55,9 @@
                         <order-property-list></order-property-list>
                     </div>
 
+
+{% if frontend.Account.getIsAccountLoggedIn %}
+
                     <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
                     {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
@@ -66,8 +69,6 @@
                     {% endif %}
                     
 
-
-{% if frontend.Account.getIsAccountLoggedIn %}
 <span class="price h1">
                         <span ref="variationTotalPrice" :content="currentVariation.prices.default.price.value">
                             ${ variationTotalPrice | currency(currentVariation.prices.default.currency) }
