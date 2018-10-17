@@ -63,11 +63,11 @@ function _updateHistory(currentCategory)
 
 function _removeTempDesc()
 {
-    const tempDesc = document.querySelector("#category-description-container");
+    const tempDesc = document.querySelectorAll("[data-category-description]");
 
     if (tempDesc)
     {
-        tempDesc.innerHTML = "";
+        _setDescriptions(tempDesc, "");
     }
 }
 
