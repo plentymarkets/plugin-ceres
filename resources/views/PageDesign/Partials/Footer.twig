@@ -25,7 +25,8 @@
                 {% for i in 1..numberOfFeatures %}
                     <div class="col-xs-12 col-sm-4 text-xs-center">
                         <i class="fa fa-check text-success" aria-hidden="true"></i>
-                        {{ trans('Ceres::Template.footerStoreFeature' ~ i) }}
+                       <!-- {{ trans('Ceres::Template.footerStoreFeature' ~ i) }} -->
+                       Alles auf Lager - Schnelle Lieferung - 24 Stunden Verfügbarkeit
                     </div>
                 {% endfor %}
             </div>
@@ -33,7 +34,7 @@
     {% endif %}
 
 
-    <div class="container-max footer-content">
+    <div class="container-max footer-content hidden">
         <div class="row">
             <div class="col-xs-12">
                 <div class="footer-services m-t-2">
@@ -89,7 +90,7 @@
                     </nav>
                 </div>
             {% endfor %}
-            <hr class="hidden-sm-up m-y-2">
+            <hr class="hidden-sm-up m-y-2 hidden">
             <div class="col-xs-6 col-sm-3">
                 <div class="footer-column">
                     {{ LayoutContainer.show("Ceres::Footer.RowOne") }}
