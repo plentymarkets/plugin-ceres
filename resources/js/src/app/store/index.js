@@ -12,6 +12,22 @@ import lastSeen from "store/modules/LastSeenModule";
 
 Vue.use(require("vue-script2"));
 
+const eventPropagation = store =>
+{
+    store.subscribe((mutation, state) =>
+    {
+        const eventName = "on" + mutation.type[0].toUpperCase() + mutation.type.slice(1);
+        const event = new CustomEvent(eventName, {detail: {payload: mutation.payload, state: state}});
+
+        document.dispatchEvent(event);
+
+        if (App.config.log.performanceLevel === "development")
+        {
+            console.log("event: ", eventName, " - payload: ", mutation.payload);
+        }
+    });
+};
+
 // eslint-disable-next-line
 const store = new Vuex.Store(
     {
@@ -28,7 +44,9 @@ const store = new Vuex.Store(
             basket,
             orderReturn,
             lastSeen
-        }
+        },
+
+        plugins: [eventPropagation]
     });
 
 window.ceresStore = store;

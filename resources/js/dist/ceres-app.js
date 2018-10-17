@@ -24151,6 +24151,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 Vue.use(require("vue-script2"));
 
+var eventPropagation = function eventPropagation(store) {
+    store.subscribe(function (mutation, state) {
+        var eventName = "on" + mutation.type[0].toUpperCase() + mutation.type.slice(1);
+        var event = new CustomEvent(eventName, { detail: { payload: mutation.payload, state: state } });
+
+        document.dispatchEvent(event);
+
+        if (App.config.log.performanceLevel === "development") {
+            console.log("event: ", eventName, " - payload: ", mutation.payload);
+        }
+    });
+};
+
 // eslint-disable-next-line
 var store = new Vuex.Store({
     modules: {
@@ -24165,7 +24178,9 @@ var store = new Vuex.Store({
         basket: _BasketModule2.default,
         orderReturn: _OrderReturnModule2.default,
         lastSeen: _LastSeenModule2.default
-    }
+    },
+
+    plugins: [eventPropagation]
 });
 
 window.ceresStore = store;
