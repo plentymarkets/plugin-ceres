@@ -320,7 +320,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: #4D4F4D;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 [tabindex="-1"]:focus {
