@@ -106,18 +106,38 @@ function _loadOptionalData(currentCategory)
         }
     }
 
-    const categoryDescContainer = document.querySelector("#category-description-container");
+    const categoryDesc1Container = document.querySelectorAll("[data-category-description=\"1\"]");
+    const categoryDesc2Container = document.querySelectorAll("[data-category-description=\"2\"]");
 
-    if (categoryDescContainer)
+    const getCategoryDescription1 = categoryDesc1Container.length > 0 ? 1 : 0;
+    const getCategoryDescription2 = categoryDesc2Container.length > 0 ? 1 : 0;
+
+    if (getCategoryDescription1 || getCategoryDescription2)
     {
-        ApiService.get("/rest/io/category/description/" + currentCategory.id)
+        ApiService.get("/rest/io/category/description/" + currentCategory.id, {description1: getCategoryDescription1, description2: getCategoryDescription2})
         .done(response =>
         {
-            if (typeof response !== "object")
+            if (typeof response === "object")
             {
-                categoryDescContainer.innerHTML = response;
+                if (response.description1)
+                {
+                    _setDescriptions(categoryDesc1Container, response.description1);
+                }
+
+                if (response.description2)
+                {
+                    _setDescriptions(categoryDesc2Container, response.description2);
+                }
             }
         });
+    }
+}
+
+function _setDescriptions(elements, description)
+{
+    for (const element of elements)
+    {
+        element.innerHTML = description;
     }
 }
 
