@@ -14,10 +14,12 @@ Vue.use(require("vue-script2"));
 
 const eventPropagation = store =>
 {
+    let oldState = JSON.parse(JSON.stringify(store.state));
+
     store.subscribe((mutation, state) =>
     {
         const eventName = "on" + mutation.type[0].toUpperCase() + mutation.type.slice(1);
-        const event = new CustomEvent(eventName, {detail: {payload: mutation.payload, state: state}});
+        const event = new CustomEvent(eventName, {detail: {payload: mutation.payload, newState: state, oldState}});
 
         document.dispatchEvent(event);
 
@@ -25,6 +27,8 @@ const eventPropagation = store =>
         {
             console.log("event: ", eventName, " - payload: ", mutation.payload);
         }
+
+        oldState = state;
     });
 };
 

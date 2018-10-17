@@ -24152,6 +24152,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Vue.use(require("vue-script2"));
 
 var eventPropagation = function eventPropagation(store) {
+    var oldState = JSON.parse(JSON.stringify(store.state));
+
     store.subscribe(function (mutation, state) {
         var eventName = "on" + mutation.type[0].toUpperCase() + mutation.type.slice(1);
         var event = new CustomEvent(eventName, { detail: { payload: mutation.payload, state: state } });
@@ -24161,6 +24163,8 @@ var eventPropagation = function eventPropagation(store) {
         if (App.config.log.performanceLevel === "development") {
             console.log("event: ", eventName, " - payload: ", mutation.payload);
         }
+
+        oldState = state;
     });
 };
 
