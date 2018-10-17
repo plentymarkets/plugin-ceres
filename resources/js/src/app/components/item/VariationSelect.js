@@ -75,6 +75,11 @@ Vue.component("variation-select", {
                             this.setUnits(possibleVariations);
                             this.selectedUnitId = this.unitPreselect;
                         }
+                        else if (this.variations.length > 1)
+                        {
+                            this.setUnits(this.variations);
+                            this.selectedUnitId = this.unitPreselect;
+                        }
                     }
                 }
             }
@@ -104,7 +109,7 @@ Vue.component("variation-select", {
                     }
                 }
 
-                return variation.attributes.length > 0;
+                return variation.attributes.length > 0 || this.possibleUnitIds.length > 0;
             }).filter(variation =>
             {
                 return this.selectedUnitId === 0 || this.selectedUnitId === variation.unitCombinationId;
