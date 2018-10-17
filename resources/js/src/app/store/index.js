@@ -1,3 +1,5 @@
+const NotificationService = require("services/NotificationService");
+
 import wishList from "store/modules/WishListModule";
 import checkout from "store/modules/CheckoutModule";
 import address from "store/modules/AddressModule";
@@ -14,21 +16,17 @@ Vue.use(require("vue-script2"));
 
 const eventPropagation = store =>
 {
-    let oldState = JSON.parse(JSON.stringify(store.state));
-
     store.subscribe((mutation, state) =>
     {
-        const eventName = "on" + mutation.type[0].toUpperCase() + mutation.type.slice(1);
-        const event = new CustomEvent(eventName, {detail: {payload: mutation.payload, newState: state, oldState}});
-
-        document.dispatchEvent(event);
-
-        if (App.config.log.performanceLevel === "development")
+        if (shouldUpdateOldState)
         {
-            console.log("event: ", eventName, " - payload: ", mutation.payload);
-        }
+            const eventName = "on" + mutation.type.charAt(0).toUpperCase() + mutation.type.substr(1);
+            const event = new CustomEvent(eventName, {detail: {payload: mutation.payload, newState: state}});
 
-        oldState = JSON.parse(JSON.stringify(state));
+            document.dispatchEvent(event);
+
+            NotificationService.log("event: ", eventName, " - payload: ", mutation.payload);
+        }
     });
 };
 
