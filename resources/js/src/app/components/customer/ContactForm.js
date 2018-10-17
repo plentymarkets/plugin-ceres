@@ -113,7 +113,7 @@ Vue.component("contact-form", {
                     NotificationService.success(
                         TranslationService.translate("Ceres::Template.contactSendSuccess")
                     );
-                    document.dispatchEvent(new CustomEvent("onContactFormSend"));
+                    document.dispatchEvent(new CustomEvent("onContactFormSend", {detail: mailObj}));
                 })
                 .fail(response =>
                 {
