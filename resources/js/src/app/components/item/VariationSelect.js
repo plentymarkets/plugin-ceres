@@ -75,7 +75,7 @@ Vue.component("variation-select", {
                             this.setUnits(possibleVariations);
                             this.selectedUnitId = this.unitPreselect;
                         }
-                        else if (this.variations.length > 1)
+                        else if (this.variations.length > 1 && this.attributes.length === 0)
                         {
                             this.setUnits(this.variations);
                             this.selectedUnitId = this.unitPreselect;
