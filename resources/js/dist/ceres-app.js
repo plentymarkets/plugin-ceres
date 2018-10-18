@@ -4572,6 +4572,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 Vue.component("single-item", {
 
+    delimiters: ["${", "}"],
+
     props: ["template", "itemData", "variationListData", "attributeNameMap", "variationUnits"],
 
     data: function data() {

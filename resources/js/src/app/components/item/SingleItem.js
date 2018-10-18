@@ -1,5 +1,7 @@
 Vue.component("single-item", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "itemData",
