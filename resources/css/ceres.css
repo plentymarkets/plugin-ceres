@@ -15812,7 +15812,6 @@ body.menu-is-visible {
   .wrapper-main > nav.container-max {
     padding-left: 0;
     padding-right: 0;
-    position: absolute;
     z-index: 1000;
     display: block;
     width: 100%;
