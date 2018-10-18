@@ -41,6 +41,7 @@ class GlobalContext implements ContextInterface
     public $showNetPrices;
     public $homepageURL;
     public $splitItemBundle;
+    public $templateEvent;
 
     public function init($params)
     {
@@ -106,6 +107,8 @@ class GlobalContext implements ContextInterface
         $this->showNetPrices = $customerService->showNetPrices();
 
         $this->splitItemBundle = $webstoreConfigService->getWebstoreConfig()->dontSplitItemBundle;
+
+        $this->templateEvent = $templateService->getCurrentTemplate();
     }
 
     protected function getParam($key, $defaultValue = null)
