@@ -16961,6 +16961,7 @@ Vue.component("contact-form", {
                 _this2.waiting = false;
                 _this2.clearFields();
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.contactSendSuccess"));
+                document.dispatchEvent(new CustomEvent("onContactFormSend", { detail: mailObj }));
             }).fail(function (response) {
                 _this2.waiting = false;
 
@@ -17274,6 +17275,7 @@ Vue.component("registration", {
 
             ApiService.post("/rest/io/customer", userObject).done(function (response) {
                 ApiService.setToken(response);
+                document.dispatchEvent(new CustomEvent("onSignUpSuccess", { detail: userObject }));
 
                 if (!response.code) {
                     NotificationService.success(_TranslationService2.default.translate("Ceres::Template.regSuccessful")).closeAfter(3000);
@@ -19270,6 +19272,7 @@ Vue.component("variation-select", {
                     var title = document.getElementsByTagName("title")[0].innerHTML;
 
                     window.history.replaceState({}, title, url);
+                    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: title, url: url } }));
                 }
             },
 
@@ -23563,8 +23566,6 @@ var _index = require("store/index.js");
 
 var _index2 = _interopRequireDefault(_index);
 
-var _UrlService = require("services/UrlService");
-
 var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
@@ -23611,15 +23612,6 @@ function _handleCurrentCategory() {
     var currentCategory = _index2.default.state.navigation.currentCategory;
 
     _removeTempDesc();
-    _updateHistory(currentCategory);
-}
-
-/**
- * update page informations
- * @param currentCategory
- */
-function _updateHistory(currentCategory) {
-    (0, _UrlService.switchUrl)(currentCategory.url + window.location.search);
     _updateCategoryTexts(currentCategory);
 }
 
@@ -23685,7 +23677,7 @@ exports.default = {
     updateCategoryHtml: updateCategoryHtml
 };
 
-},{"services/ApiService":128,"services/TranslationService":134,"services/UrlService":135,"store/index.js":138}],131:[function(require,module,exports){
+},{"services/ApiService":128,"services/TranslationService":134,"store/index.js":138}],131:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23716,9 +23708,18 @@ function updateItemListUrlParams(searchParams) {
         urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
     }
 
+    var newUrlParams = _UrlService2.default.getUrlParams(document.location.search);
+
     for (var urlParamKey in urlParams) {
-        _UrlService2.default.setUrlParam(urlParamKey, urlParams[urlParamKey]);
+
+        if (urlParams[urlParamKey] !== null) {
+            newUrlParams[urlParamKey] = urlParams[urlParamKey];
+        } else {
+            delete newUrlParams[urlParamKey];
+        }
     }
+
+    _UrlService2.default.setUrlParams(newUrlParams);
 }
 
 exports.default = {
@@ -24150,9 +24151,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getUrlParams = getUrlParams;
 exports.setUrlParams = setUrlParams;
-exports.setUrlParam = setUrlParam;
 exports.navigateTo = navigateTo;
-exports.switchUrl = switchUrl;
 
 var _jquery = require("jquery");
 
@@ -24161,6 +24160,10 @@ var _jquery2 = _interopRequireDefault(_jquery);
 var _utils = require("../helper/utils");
 
 var _url = require("../helper/url");
+
+var _index = require("store/index.js");
+
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24184,11 +24187,12 @@ function getUrlParams(urlParams) {
 }
 
 function setUrlParams(urlParams) {
-    var pathName = window.location.pathname;
+    var pathName = (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory) ? _index2.default.state.navigation.currentCategory.url : window.location.pathname;
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url: pathName + params } }));
 
     (0, _jquery2.default)("a[href][data-update-url]").each(function (i, element) {
         var $element = (0, _jquery2.default)(element);
@@ -24200,34 +24204,14 @@ function setUrlParams(urlParams) {
     });
 }
 
-function setUrlParam(key, value) {
-    var urlParams = getUrlParams(document.location.search);
-
-    if (value !== null) {
-        urlParams[key] = value;
-    } else {
-        delete urlParams[key];
-    }
-
-    setUrlParams(urlParams);
-}
-
 function navigateTo(url) {
     url = (0, _url.normalizeUrl)(url);
     window.location.assign(url);
 }
 
-function switchUrl(url, title) {
-    if ((0, _utils.isNullOrUndefined)(title)) {
-        title = document.getElementsByTagName("title")[0].innerHTML;
-    }
-    url = (0, _url.normalizeUrl)(url);
-    window.history.pushState({ requireReload: true }, title, url);
-}
+exports.default = { setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo };
 
-exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, switchUrl: switchUrl };
-
-},{"../helper/url":124,"../helper/utils":125,"jquery":3}],136:[function(require,module,exports){
+},{"../helper/url":124,"../helper/utils":125,"jquery":3,"store/index.js":138}],136:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
