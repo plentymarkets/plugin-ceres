@@ -290,6 +290,8 @@ Vue.component("variation-select", {
                     const title = document.getElementsByTagName("title")[0].innerHTML;
 
                     window.history.replaceState({}, title, url);
+                    document.dispatchEvent(new CustomEvent("onHistoryChanged", {detail: {title: title, url:url}}));
+
                 }
             },
             deep: true
