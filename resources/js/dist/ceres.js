@@ -21678,17 +21678,15 @@ Vue.directive("render-category", {
             });
 
             if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType || currentCategoryType === "content") {
-                _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
-
-                var url = _index2.default.state.navigation.currentCategory.url;
-
                 // check if touch device and change the ui handling
                 if (document.body.classList.contains("touch")) {
                     if (openCategory && openCategory.contains(event.target) || binding.value.alwaysOpen) {
-                        window.open(url, "_self");
+                        _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
+                        window.open(_index2.default.state.navigation.currentCategory.url, "_self");
                     }
                 } else {
-                    window.open(url, "_self");
+                    _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
+                    window.open(_index2.default.state.navigation.currentCategory.url, "_self");
                 }
             }
             // check if user click the opened category and change the ui handling
