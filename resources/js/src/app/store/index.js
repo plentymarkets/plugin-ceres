@@ -21,14 +21,15 @@ const eventPropagation = store =>
 
     store.subscribe((mutation, state) =>
     {
+        const nextState = cloneDeep(state);
         const eventName = "on" + mutation.type.charAt(0).toUpperCase() + mutation.type.substr(1);
-        const event = new CustomEvent(eventName, {detail: {payload: mutation.payload, newState: state, oldState}});
+        const event = new CustomEvent(eventName, {detail: {payload: mutation.payload, newState: nextState, oldState}});
 
         document.dispatchEvent(event);
 
         NotificationService.log("event: ", eventName, " - payload: ", mutation.payload);
 
-        oldState = cloneDeep(state);
+        oldState = nextState;
     });
 };
 
