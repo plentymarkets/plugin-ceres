@@ -27004,27 +27004,13 @@ var _LastSeenModule = require("store/modules/LastSeenModule");
 
 var _LastSeenModule2 = _interopRequireDefault(_LastSeenModule);
 
+var _EventPropagationPlugin = require("store/plugins/EventPropagationPlugin");
+
+var _EventPropagationPlugin2 = _interopRequireDefault(_EventPropagationPlugin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var NotificationService = require("services/NotificationService");
-var cloneDeep = require("lodash/cloneDeep");
-
 Vue.use(require("vue-script2"));
-
-var eventPropagation = function eventPropagation(store) {
-    var oldState = cloneDeep(store.state);
-
-    store.subscribe(function (mutation, state) {
-        var eventName = "on" + mutation.type.charAt(0).toUpperCase() + mutation.type.substr(1);
-        var event = new CustomEvent(eventName, { detail: { payload: mutation.payload, newState: state, oldState: oldState } });
-
-        document.dispatchEvent(event);
-
-        NotificationService.log("event: ", eventName, " - payload: ", mutation.payload);
-
-        oldState = cloneDeep(state);
-    });
-};
 
 // eslint-disable-next-line
 var store = new Vuex.Store({
@@ -27042,14 +27028,14 @@ var store = new Vuex.Store({
         lastSeen: _LastSeenModule2.default
     },
 
-    plugins: [eventPropagation]
+    plugins: [_EventPropagationPlugin2.default]
 });
 
 window.ceresStore = store;
 
 exports.default = store;
 
-},{"lodash/cloneDeep":95,"services/NotificationService":241,"store/modules/AddressModule":247,"store/modules/BasketModule":248,"store/modules/CheckoutModule":249,"store/modules/ItemListModule":250,"store/modules/LastSeenModule":251,"store/modules/LocalizationModule":252,"store/modules/NavigationModule":253,"store/modules/OrderReturnModule":254,"store/modules/SingleItemModule":255,"store/modules/UserModule":256,"store/modules/WishListModule":257,"vue-script2":117}],247:[function(require,module,exports){
+},{"store/modules/AddressModule":247,"store/modules/BasketModule":248,"store/modules/CheckoutModule":249,"store/modules/ItemListModule":250,"store/modules/LastSeenModule":251,"store/modules/LocalizationModule":252,"store/modules/NavigationModule":253,"store/modules/OrderReturnModule":254,"store/modules/SingleItemModule":255,"store/modules/UserModule":256,"store/modules/WishListModule":257,"store/plugins/EventPropagationPlugin":258,"vue-script2":117}],247:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29116,7 +29102,33 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":236}]},{},[234,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,147,148,149,150,151,144,145,146,152,153,154,155,156,157,158,159,160,161,162,163,164,172,173,174,175,165,166,167,168,170,169,171,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,228,229,227,230,231,232,233,246,247,248,249,250,251,252,253,254,255,256,257])
+},{"services/ApiService":236}],258:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (store) {
+    var oldState = cloneDeep(store.state);
+
+    store.subscribe(function (mutation, state) {
+        var nextState = cloneDeep(state);
+        var eventName = "on" + mutation.type.charAt(0).toUpperCase() + mutation.type.substr(1);
+        var event = new CustomEvent(eventName, { detail: { payload: mutation.payload, newState: nextState, oldState: oldState } });
+
+        document.dispatchEvent(event);
+
+        NotificationService.log(eventName);
+
+        oldState = nextState;
+    });
+};
+
+var NotificationService = require("services/NotificationService");
+var cloneDeep = require("lodash/cloneDeep");
+
+},{"lodash/cloneDeep":95,"services/NotificationService":241}]},{},[234,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,147,148,149,150,151,144,145,146,152,153,154,155,156,157,158,159,160,161,162,163,164,172,173,174,175,165,166,167,168,170,169,171,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,228,229,227,230,231,232,233,246,247,248,249,250,251,252,253,254,255,256,257,258])
 
 
 //# sourceMappingURL=ceres-app.js.map

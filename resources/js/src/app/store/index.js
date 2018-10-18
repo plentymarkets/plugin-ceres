@@ -1,6 +1,3 @@
-const NotificationService = require("services/NotificationService");
-const cloneDeep = require("lodash/cloneDeep");
-
 import wishList from "store/modules/WishListModule";
 import checkout from "store/modules/CheckoutModule";
 import address from "store/modules/AddressModule";
@@ -12,26 +9,9 @@ import item from "store/modules/SingleItemModule";
 import basket from "store/modules/BasketModule";
 import orderReturn from "store/modules/OrderReturnModule";
 import lastSeen from "store/modules/LastSeenModule";
+import eventPropagation from "store/plugins/EventPropagationPlugin";
 
 Vue.use(require("vue-script2"));
-
-const eventPropagation = store =>
-{
-    let oldState = cloneDeep(store.state);
-
-    store.subscribe((mutation, state) =>
-    {
-        const nextState = cloneDeep(state);
-        const eventName = "on" + mutation.type.charAt(0).toUpperCase() + mutation.type.substr(1);
-        const event = new CustomEvent(eventName, {detail: {payload: mutation.payload, newState: nextState, oldState}});
-
-        document.dispatchEvent(event);
-
-        NotificationService.log("event: ", eventName, " - payload: ", mutation.payload);
-
-        oldState = nextState;
-    });
-};
 
 // eslint-disable-next-line
 const store = new Vuex.Store(
