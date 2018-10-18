@@ -16961,6 +16961,7 @@ Vue.component("contact-form", {
                 _this2.waiting = false;
                 _this2.clearFields();
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.contactSendSuccess"));
+                document.dispatchEvent(new CustomEvent("onContactFormSend", { detail: mailObj }));
             }).fail(function (response) {
                 _this2.waiting = false;
 
@@ -17274,6 +17275,7 @@ Vue.component("registration", {
 
             ApiService.post("/rest/io/customer", userObject).done(function (response) {
                 ApiService.setToken(response);
+                document.dispatchEvent(new CustomEvent("onSignUpSuccess", { detail: userObject }));
 
                 if (!response.code) {
                     NotificationService.success(_TranslationService2.default.translate("Ceres::Template.regSuccessful")).closeAfter(3000);
@@ -18985,7 +18987,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 Vue.component("single-item", {
 
-    props: ["template", "itemData", "variationListData", "attributeNameMap"],
+    props: ["template", "itemData", "variationListData", "attributeNameMap", "variationUnits"],
 
     data: function data() {
         return {
@@ -19044,12 +19046,14 @@ Vue.component("variation-select", {
 
     delimiters: ["${", "}"],
 
-    props: ["attributes", "variations", "preselect", "template"],
+    props: ["attributes", "variations", "variationUnits", "preselect", "unitPreselect", "template"],
 
     data: function data() {
         return {
             // Collection of currently selected variation attributes.
-            selectedAttributes: {}
+            selectedAttributes: {},
+            possibleUnitIds: [],
+            selectedUnitId: 0
         };
     },
 
@@ -19086,6 +19090,18 @@ Vue.component("variation-select", {
                 if (!!preselectedVariation && preselectedVariation.length === 1) {
                     // set attributes of preselected variation
                     _this.setAttributes(preselectedVariation[0]);
+
+                    if (_this.unitPreselect > 0) {
+                        var possibleVariations = _this.filterVariations(_this.selectedAttributes);
+
+                        if (possibleVariations.length > 1) {
+                            _this.setUnits(possibleVariations);
+                            _this.selectedUnitId = _this.unitPreselect;
+                        } else if (_this.variations.length > 1 && _this.attributes.length === 0) {
+                            _this.setUnits(_this.variations);
+                            _this.selectedUnitId = _this.unitPreselect;
+                        }
+                    }
                 }
             }
         });
@@ -19100,6 +19116,8 @@ Vue.component("variation-select", {
          * @returns {array}                    A list of matching variations.
          */
         filterVariations: function filterVariations(attributes) {
+            var _this2 = this;
+
             attributes = attributes || this.selectedAttributes;
             return this.variations.filter(function (variation) {
                 for (var i = 0; i < variation.attributes.length; i++) {
@@ -19111,7 +19129,9 @@ Vue.component("variation-select", {
                     }
                 }
 
-                return variation.attributes.length > 0;
+                return variation.attributes.length > 0 || _this2.possibleUnitIds.length > 0;
+            }).filter(function (variation) {
+                return _this2.selectedUnitId === 0 || _this2.selectedUnitId === variation.unitCombinationId;
             });
         },
 
@@ -19179,6 +19199,10 @@ Vue.component("variation-select", {
                 var possibleVariations = this.filterVariations();
 
                 if (possibleVariations.length === 1) {
+                    if (!this.selectedUnitId > 0) {
+                        this.possibleUnitIds = [];
+                    }
+
                     // only 1 matching variation remaining:
                     // set remaining attributes if not set already. Will trigger this method again.
                     if (!this.setAttributes(possibleVariations[0])) {
@@ -19187,11 +19211,15 @@ Vue.component("variation-select", {
                     } else {
                         this.onSelectionChange();
                     }
+                } else if (possibleVariations.length > 1) {
+                    this.setUnits(possibleVariations);
+                } else {
+                    this.setUnits([]);
                 }
             }
         },
         setVariation: function setVariation(variationId) {
-            var _this2 = this;
+            var _this3 = this;
 
             if (VariationData[variationId]) {
                 // reuse cached variation data
@@ -19211,12 +19239,27 @@ Vue.component("variation-select", {
                     // store received variation data for later reuse
                     VariationData[variationId] = response;
 
-                    _this2.$store.commit("setVariation", response);
+                    _this3.$store.commit("setVariation", response);
 
                     document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
 
-                    _this2.$emit("is-valid-change", true);
+                    _this3.$emit("is-valid-change", true);
                 });
+            }
+        },
+        setUnits: function setUnits(possibleVariations) {
+            var possibleUnitIds = [];
+
+            if (possibleVariations.length > 0) {
+                possibleUnitIds = possibleVariations.map(function (variation) {
+                    return variation.unitCombinationId;
+                });
+            }
+
+            if (possibleUnitIds.length > 1) {
+                this.possibleUnitIds = possibleUnitIds;
+            } else {
+                this.selectedUnitId = 0;
             }
         }
     },
@@ -19229,6 +19272,7 @@ Vue.component("variation-select", {
                     var title = document.getElementsByTagName("title")[0].innerHTML;
 
                     window.history.replaceState({}, title, url);
+                    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: title, url: url } }));
                 }
             },
 
@@ -21866,6 +21910,22 @@ var _utils = require("../../helper/utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var navigateToCategoryById = function navigateToCategoryById(element, event) {
+    var url = void 0;
+
+    _index2.default.dispatch("selectCategory", { categoryId: parseInt(element.dataset.categoryId), withReload: true });
+
+    if ((0, _utils.isNullOrUndefined)(_index2.default.state.navigation.currentCategory) && event.target && event.target.href) {
+        url = event.target.href;
+    } else {
+        url = _index2.default.state.navigation.currentCategory.url;
+    }
+
+    if (!(0, _utils.isNullOrUndefined)(url)) {
+        window.open(url, "_self");
+    }
+};
+
 Vue.directive("render-category", {
     bind: function bind(el, binding) {
         el.dataset.categoryId = binding.value.id;
@@ -21886,12 +21946,10 @@ Vue.directive("render-category", {
                 // check if touch device and change the ui handling
                 if (document.body.classList.contains("touch")) {
                     if (openCategory && openCategory.contains(event.target) || binding.value.alwaysOpen) {
-                        _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
-                        window.open(_index2.default.state.navigation.currentCategory.url, "_self");
+                        navigateToCategoryById(el, event);
                     }
                 } else {
-                    _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
-                    window.open(_index2.default.state.navigation.currentCategory.url, "_self");
+                    navigateToCategoryById(el, event);
                 }
             }
             // check if user click the opened category and change the ui handling
@@ -23508,8 +23566,6 @@ var _index = require("store/index.js");
 
 var _index2 = _interopRequireDefault(_index);
 
-var _UrlService = require("services/UrlService");
-
 var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
@@ -23556,15 +23612,6 @@ function _handleCurrentCategory() {
     var currentCategory = _index2.default.state.navigation.currentCategory;
 
     _removeTempDesc();
-    _updateHistory(currentCategory);
-}
-
-/**
- * update page informations
- * @param currentCategory
- */
-function _updateHistory(currentCategory) {
-    (0, _UrlService.switchUrl)(currentCategory.url + window.location.search);
     _updateCategoryTexts(currentCategory);
 }
 
@@ -23630,7 +23677,7 @@ exports.default = {
     updateCategoryHtml: updateCategoryHtml
 };
 
-},{"services/ApiService":128,"services/TranslationService":134,"services/UrlService":135,"store/index.js":138}],131:[function(require,module,exports){
+},{"services/ApiService":128,"services/TranslationService":134,"store/index.js":138}],131:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23661,9 +23708,18 @@ function updateItemListUrlParams(searchParams) {
         urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
     }
 
+    var newUrlParams = _UrlService2.default.getUrlParams(document.location.search);
+
     for (var urlParamKey in urlParams) {
-        _UrlService2.default.setUrlParam(urlParamKey, urlParams[urlParamKey]);
+
+        if (urlParams[urlParamKey] !== null) {
+            newUrlParams[urlParamKey] = urlParams[urlParamKey];
+        } else {
+            delete newUrlParams[urlParamKey];
+        }
     }
+
+    _UrlService2.default.setUrlParams(newUrlParams);
 }
 
 exports.default = {
@@ -24095,9 +24151,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getUrlParams = getUrlParams;
 exports.setUrlParams = setUrlParams;
-exports.setUrlParam = setUrlParam;
 exports.navigateTo = navigateTo;
-exports.switchUrl = switchUrl;
 
 var _jquery = require("jquery");
 
@@ -24106,6 +24160,10 @@ var _jquery2 = _interopRequireDefault(_jquery);
 var _utils = require("../helper/utils");
 
 var _url = require("../helper/url");
+
+var _index = require("store/index.js");
+
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24129,11 +24187,12 @@ function getUrlParams(urlParams) {
 }
 
 function setUrlParams(urlParams) {
-    var pathName = window.location.pathname;
+    var pathName = (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory) ? _index2.default.state.navigation.currentCategory.url : window.location.pathname;
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url: pathName + params } }));
 
     (0, _jquery2.default)("a[href][data-update-url]").each(function (i, element) {
         var $element = (0, _jquery2.default)(element);
@@ -24145,34 +24204,14 @@ function setUrlParams(urlParams) {
     });
 }
 
-function setUrlParam(key, value) {
-    var urlParams = getUrlParams(document.location.search);
-
-    if (value !== null) {
-        urlParams[key] = value;
-    } else {
-        delete urlParams[key];
-    }
-
-    setUrlParams(urlParams);
-}
-
 function navigateTo(url) {
     url = (0, _url.normalizeUrl)(url);
     window.location.assign(url);
 }
 
-function switchUrl(url, title) {
-    if ((0, _utils.isNullOrUndefined)(title)) {
-        title = document.getElementsByTagName("title")[0].innerHTML;
-    }
-    url = (0, _url.normalizeUrl)(url);
-    window.history.pushState({ requireReload: true }, title, url);
-}
+exports.default = { setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo };
 
-exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, switchUrl: switchUrl };
-
-},{"../helper/url":124,"../helper/utils":125,"jquery":3}],136:[function(require,module,exports){
+},{"../helper/url":124,"../helper/utils":125,"jquery":3,"store/index.js":138}],136:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

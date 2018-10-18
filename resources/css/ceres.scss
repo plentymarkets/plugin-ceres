@@ -14255,7 +14255,6 @@ nav.navbar.megamenu {
 		& > nav.container-max {
 			padding-left:0;
 			padding-right:0;
-			position: absolute;
 		    z-index: 1000;
 		    display: block;
 		    width: 100%;
@@ -15349,8 +15348,10 @@ nav.navbar.megamenu {
 							font-size: 75%;
 							font-weight: normal;
 						}
-						&:after {
-							content: ':';
+						&.colon {
+							&:after {
+								content: ':';
+							}
 						}
 					}
 				}

@@ -1,22 +1,26 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set isFixed          = widget.settings.isFixed.mobile %}
-{% set showOnHomepage   = widget.settings.showOnHomepage.mobile %}
-{% set showOnMyAccount  = widget.settings.showOnMyAccount.mobile %}
-{% set showOnCheckout   = widget.settings.showOnCheckout.mobile %}
+{% set isFixed                 = widget.settings.isFixed.mobile %}
+{% set showOnHomepage          = widget.settings.showOnHomepage.mobile %}
+{% set showOnMyAccount         = widget.settings.showOnMyAccount.mobile %}
+{% set showOnCheckout          = widget.settings.showOnCheckout.mobile %}
+{% set showOnContentCategory   = widget.settings.showOnContentCategory.mobile %}
 
 {% if not showOnHomepage %}
-    {{ Twig.if("not services.template.isHome()") }}
+    {{ Twig.if("not services.template.isCurrentTemplate('tpl.home')") }}
 {% endif %}
 
 {% if not showOnMyAccount %}
-    {{ Twig.if("not services.template.isMyAccount()") }}
+    {{ Twig.if("not services.template.isCurrentTemplate('tpl.my-account')") }}
 {% endif %}
 
 {% if not showOnCheckout %}
-    {{ Twig.if("not services.template.isCheckout()") }}
+    {{ Twig.if("not services.template.isCurrentTemplate('tpl.checkout')") }}
 {% endif %}
 
+{% if not showOnContentCategory %}
+    {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
+{% endif %}
 
 <div class="breadcrumbs{% if not isFixed %} unfixed{% endif %}">
     <nav class="container-max small hidden-sm-down" data-component="breadcrumbs" data-renderer="twig">
@@ -67,5 +71,9 @@
 {% endif %}
 
 {% if not showOnCheckout %}
+    {{ Twig.endif() }}
+{% endif %}
+
+{% if not showOnContentCategory %}
     {{ Twig.endif() }}
 {% endif %}

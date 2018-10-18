@@ -86,7 +86,7 @@
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
 
                             <span :class="{ 'item-property-value': size === 'small' }">
-                                <strong>${ property.name } ({{ trans("Ceres::Template.basketIncludeAbbr") }} ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
+                                <strong :class="{ 'colon': property.type.length > 0 }">${ property.name } ({{ trans("Ceres::Template.basketIncludeAbbr") }} ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
                                 <span v-if="size === 'small'">
                                     <span v-if="property.type === 'file'">
                                         <a :href="property.value | fileUploadPath" target="_blank">
@@ -94,7 +94,7 @@
                                             ${ property.value | fileName }
                                         </a>
                                     </span>
-                                    <span v-else>${ property.value }</span>
+                                    <span v-else-if="property.type.length > 0">${ property.value }</span>
                                 </span>
                             </span>
 
@@ -105,7 +105,7 @@
                                         ${ property.value | fileName }
                                     </a>
                                 </span>
-                                <span v-else>${ property.value }</span>
+                                <span v-else-if="property.type.length > 0">${ property.value }</span>
                             </div>
                         </li>
                     </ul>

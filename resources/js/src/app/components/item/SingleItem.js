@@ -4,7 +4,8 @@ Vue.component("single-item", {
         "template",
         "itemData",
         "variationListData",
-        "attributeNameMap"
+        "attributeNameMap",
+        "variationUnits"
     ],
 
     data()

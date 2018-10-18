@@ -15859,7 +15859,6 @@ body.menu-is-visible {
   .wrapper-main > nav.container-max {
     padding-left: 0;
     padding-right: 0;
-    position: absolute;
     z-index: 1000;
     display: block;
     width: 100%;
@@ -16903,7 +16902,7 @@ body.menu-is-visible {
   font-weight: normal;
 }
 
-.basket-small ul .item-property-value > strong:after {
+.basket-small ul .item-property-value > strong.colon:after {
   content: ':';
 }
 
