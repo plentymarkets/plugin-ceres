@@ -16902,7 +16902,7 @@ body.menu-is-visible {
   font-weight: normal;
 }
 
-.basket-small ul .item-property-value > strong:after {
+.basket-small ul .item-property-value > strong.colon:after {
   content: ':';
 }
 
