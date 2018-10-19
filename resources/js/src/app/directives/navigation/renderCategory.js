@@ -1,4 +1,4 @@
-import store from "store/index.js";
+import store from "../../store/index";
 import {isNullOrUndefined}from "../../helper/utils";
 
 const navigateToCategoryById = (element, event) =>

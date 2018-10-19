@@ -1,4 +1,4 @@
-import store from "store/index.js";
+import store from "../store/index";
 import TranslationService from "services/TranslationService";
 
 const ApiService = require("services/ApiService");
