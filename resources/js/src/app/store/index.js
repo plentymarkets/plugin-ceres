@@ -12,6 +12,7 @@ import lastSeen from "store/modules/LastSeenModule";
 import eventPropagation from "store/plugins/EventPropagationPlugin";
 
 Vue.use(require("vue-script2"));
+Vue.options.delimiters = ["${", "}"];
 
 // eslint-disable-next-line
 const store = new Vuex.Store(
