@@ -50,7 +50,11 @@ gulp.task("build:bundle", [
         .pipe(concat(OUTPUT_PREFIX + ".js"))
         .pipe(gulp.dest(JS_DIST))
         .pipe(rename(OUTPUT_PREFIX + ".min.js"))
-        .pipe(uglify().on("error", gutil.log))
+        .pipe(uglify({
+            compress: {
+                collapse_vars: false
+            }
+        }).on("error", gutil.log))
         .pipe(sourcemaps.write("."))
         .pipe(gulp.dest(JS_DIST));
 });
