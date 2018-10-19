@@ -1,23 +1,23 @@
 # Release Notes für Ceres
 
-## v2.16.0 (2018-10-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.15.0...2.16.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v2.16.0 (2018-10-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.15.0...2.16.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
+- Das Newsletter-Widget für den ShopBuilder wurde zu Ceres hinzugefügt.
 - Es wurden 2 neue Layout-Container in der Artikelliste im Warenkorb hinzugefügt.
 - Es wurde ein neuer Layout-Container hinzugefügt, der es ermöglicht das Bilderkarussell auf der Artikeleinzelansicht auszutauschen.
 - Bei Formularen in Ceres wird nun initial immer das erste Feld fokussiert.
-- Das Newsletter-Widget für den ShopBuilder wurde zu Ceres hinzugefügt.
 - Es wurde ein EventListener hinzugefügt, über welchen man Benachrichtigungen in Ceres ausgeben kann.
 - Dem Breadcrumb-Widget des ShopBuilders wurde die Option "Auf Content-Kategorien anzeigen" hinzugefügt, über welche man die Breadcrumbs auf Content-Kategorien ein- und ausblenden kann.
-- Alle Vuex Mutationen werden nun als JavaScript CustomEvent realisiert, damit andere Plugins/Themes besser auf Änderungen im Webshop reagieren können.
+- Alle Vuex-Mutationen werden nun als JavaScript CustomEvent realisiert, damit andere Plugins/Themes besser auf Änderungen im Webshop reagieren können.
 
 ### Geändert
 
 - Die Warenkorbvorschau wurde überarbeitet, um auf mobilen Endgeräten besser zu funktionieren. Eine neue Landscape-Ansicht wurde hinzugefügt.
 - Bevor der Titel einer Kategorie beim Wechseln aktualisiert wird, wird das Element auf seine Existenz hin geprüft. Hierdurch werden eventuelle Fehler auf Content-Kategorien ausgeschlossen.
 - Der Login-Bereich in Ceres wurde leicht angepasst, um sich der gesamtheitlichen Gestaltung von Ceres anzupassen.
-- Die maximale Anzahl für Kategorien des Navigations-Widgets wird nun auf Standardwerte gesetzt, falls diese unausgefüllt ist. Hierdurch soll verhindert werden, dass Kategorien in der Navigation fehlen.
+- Die Felder für die maximale Kategorieanzahl des Navigations-Widgets werden nun auf Standardwerte gesetzt, falls diese unausgefüllt sind. Hierdurch soll verhindert werden, dass Kategorien in der Navigation fehlen.
 - Die Datenstrukturen für die Kategorie-Navigation wurden minimiert, um die Ladezeit zu verbessern.
 - Breadcrumbs werden nun auf Content-Kategorien ausgegeben, auch wenn diese nicht in der Navigation angezeigt werden.
 - Die Darstellung von Rabatten wurde angepasst.
@@ -27,13 +27,13 @@
 
 ### Behoben
 
-- Durch einen Fehler kam es zu Darstellungsfehlern bei Suchbegriffen auf der Suchseite. Dies wurde behoben.
+- Durch einen Fehler wurden Suchbegriffe auf der Suchseite nicht richtig dargestellt. Dies wurde behoben.
 - Durch einen Fehler wurde die Einwilligung zur Datenübermittlung bei bestimmten Versandprofilen nicht angezeigt. Dies wurde behoben.
 - Im Bereich der Rich Snippets kam es zu einem fehlerhaften Aufruf. Dieses Verhalten wurde behoben. Wir bedanken uns bei @Lauflust für die Hilfe.
 - Durch einen Fehler konnten bestimmte Kategorie-Seiten vom Typ **Content** nicht aufgerufen werden. Dies wurde behoben.
-- Durch einen Fehler kam es auf der Login-Seite zu Konsolenfehlern. Dies wurde behoben.
-- Durch einen Fehler ließ sich die PayPalPlus Wall auf mobilen Endgeräten nicht richtig bedienen. Dies wurde behoben.
-- Die Hintergrundfarbe das Such-Icons in der Top-Bar nutzt nun die korrekte SCSS-Variable.
+- Auf der Login-Seite kam es zu Konsolenfehlern. Diese wurden behoben.
+- Durch einen Fehler ließ sich die PayPal PLUS-Wall auf mobilen Endgeräten nicht richtig bedienen. Dies wurde behoben.
+- Die Hintergrundfarbe des Such-Icons in der Top-Bar nutzt nun die korrekte SCSS-Variable.
 - Durch einen Fehler wurden die Felder **Straße** und **Hausnummer** in der Adresseingabe bei einem Wechsel des Landes zurückgesetzt. Dies wurde behoben.
 - Durch einen Fehler wurden keine Artikel auf der Retourenseite dargestellt. Dies wurde behoben.
 - Durch einen Fehler wurden Icons von Zahlungsanbietern in der Bestellbestätigung nicht angezeigt. Dies wurde behoben.
