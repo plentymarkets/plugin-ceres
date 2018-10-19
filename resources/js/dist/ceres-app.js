@@ -24407,7 +24407,7 @@ Vue.directive("open-mobile-navigation", {
 },{}],204:[function(require,module,exports){
 "use strict";
 
-var _index = require("store/index.js");
+var _index = require("../../store/index");
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -24473,7 +24473,7 @@ Vue.directive("render-category", {
     }
 });
 
-},{"../../helper/utils":233,"store/index.js":246}],205:[function(require,module,exports){
+},{"../../helper/utils":233,"../../store/index":246}],205:[function(require,module,exports){
 "use strict";
 
 Vue.directive("scroll-to-top", {
@@ -26072,7 +26072,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 exports.updateCategoryHtml = updateCategoryHtml;
 
-var _index = require("store/index.js");
+var _index = require("../store/index");
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -26187,7 +26187,7 @@ exports.default = {
     updateCategoryHtml: updateCategoryHtml
 };
 
-},{"services/ApiService":236,"services/TranslationService":242,"store/index.js":246}],239:[function(require,module,exports){
+},{"../store/index":246,"services/ApiService":236,"services/TranslationService":242}],239:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26671,7 +26671,7 @@ var _utils = require("../helper/utils");
 
 var _url = require("../helper/url");
 
-var _index = require("store/index.js");
+var _index = require("../store/index");
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -26721,7 +26721,7 @@ function navigateTo(url) {
 
 exports.default = { setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo };
 
-},{"../helper/url":232,"../helper/utils":233,"jquery":3,"store/index.js":246}],244:[function(require,module,exports){
+},{"../helper/url":232,"../helper/utils":233,"../store/index":246,"jquery":3}],244:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27057,6 +27057,7 @@ var _EventPropagationPlugin2 = _interopRequireDefault(_EventPropagationPlugin);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.use(require("vue-script2"));
+Vue.options.delimiters = ["${", "}"];
 
 // eslint-disable-next-line
 var store = new Vuex.Store({
