@@ -1,7 +1,7 @@
 import $ from "jquery";
 import {isDefined}from "../helper/utils";
 import {normalizeUrl}from "../helper/url";
-import store from "store/index.js";
+import store from "../store/index";
 
 export function getUrlParams(urlParams)
 {
