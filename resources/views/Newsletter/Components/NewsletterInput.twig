@@ -41,7 +41,7 @@
                                 {% autoescape false %}
                                     {% set policyContent %}<!--
                                         --><a href="{{ urls.privacyPolicy }}" target="_blank">
-                                            <span>{{ trans("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
+                                            <span class="btn-link">{{ trans("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
                                         </a><!--
                                     -->{% endset %}
                                     {{ trans('Ceres::Template.newsletterAcceptPrivacyPolicy', {"policy": policyContent} ) }}

@@ -26047,6 +26047,14 @@ var init = function ($, window, document) {
 
             AutoFocusService.autoFocus();
 
+            $("#searchBox").on("shown.bs.collapse", function () {
+                var searchInput = document.querySelector("input.search-input");
+
+                if (searchInput) {
+                    searchInput.focus();
+                }
+            });
+
             $(window).scroll(function () {
                 if (isDesktop) {
                     if ($(this).scrollTop() > offset) {
