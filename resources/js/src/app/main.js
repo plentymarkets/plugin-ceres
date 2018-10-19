@@ -152,7 +152,7 @@ var init = (function($, window, document)
 
             $("#searchBox").on("shown.bs.collapse", function()
             {
-                const searchInput = document.querySelector("input.search-input");
+                var searchInput = document.querySelector("input.search-input");
 
                 if (searchInput)
                 {
