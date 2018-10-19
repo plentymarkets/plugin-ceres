@@ -15618,7 +15618,6 @@ body.menu-is-visible {
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li {
     display: inline-block;
-    break-inside: avoid;
     width: 100%;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li.level1 {
