@@ -1008,7 +1008,10 @@
                             "label": "Widget.legalInformationCancellationPdfUploadLabel",
                             "options": {
                                 "tooltip": "Widget.legalInformationCancellationPdfUploadTooltip",
-                                "defaultValue": ""
+                                "defaultValue": "",
+								"allowedExtensions": [
+									"pdf"
+								]
                             }
                         }
                     }
@@ -1274,7 +1277,13 @@
                 "label": "Widget.navigationCompanyLogoUrlLabel",
                 "options": {
                     "tooltip": "Widget.navigationCompanyLogoUrlTooltip",
-                    "defaultValue": ""
+                    "defaultValue": "",
+					"allowedExtensions": [
+						"png",
+						"jpg",
+						"jpeg",
+						"gif"
+					]
                 }
             }
         }
