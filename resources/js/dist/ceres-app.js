@@ -23499,6 +23499,10 @@ Vue.component("newsletter-input", {
         appearance: {
             type: String,
             default: "primary"
+        },
+        emailFolder: {
+            type: Number,
+            default: 0
         }
     },
 
@@ -23533,7 +23537,7 @@ Vue.component("newsletter-input", {
         save: function save() {
             var _this2 = this;
 
-            ApiService.post("/rest/io/customer/newsletter", { email: this.email, firstName: this.firstName, lastName: this.lastName }).done(function () {
+            ApiService.post("/rest/io/customer/newsletter", { email: this.email, firstName: this.firstName, lastName: this.lastName, emailFolder: this.emailFolder }).done(function () {
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
                 _this2.resetInputs();
             }).fail(function () {
