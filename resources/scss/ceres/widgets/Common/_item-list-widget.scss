@@ -1,5 +1,16 @@
 .widget-item-list
 {
+    .widget-inner
+    {
+        padding-left: 0;
+        padding-right: 0;
+
+        > .row
+        {
+            width: 100%;
+        }
+    }
+
     .widget-caption
     {
         padding: 1rem 1.5rem;
@@ -19,11 +30,6 @@
         {
             color: #fff;
         }
-    }
-
-    &.widget-inner > .row
-    {
-        width: 100%;
     }
 
     &.widget-primary .widget-caption
