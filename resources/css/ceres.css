@@ -20679,6 +20679,11 @@ body.menu-is-visible {
   color: #4D4F4D;
 }
 
+.widget-item-list .widget-inner {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .widget-item-list .widget-caption {
   padding: 1rem 1.5rem;
   display: -ms-flexbox;
@@ -20698,10 +20703,6 @@ body.menu-is-visible {
 
 .widget-item-list .widget-caption a {
   color: #fff;
-}
-
-.widget-item-list.widget-inner > .row {
-  width: 100%;
 }
 
 .widget-item-list.widget-primary .widget-caption {
@@ -20784,6 +20785,11 @@ body.menu-is-visible {
 .widget-title-bar.widget-inverse {
   color: #fff;
   background-color: #4D4F4D;
+}
+
+.widget-newsletter > .widget-inner {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .widget-text .widget-inner {
