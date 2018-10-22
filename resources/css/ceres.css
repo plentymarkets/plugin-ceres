@@ -12489,13 +12489,15 @@ body > #vue-error .wrapper-left {
   transform: translateX(-100%);
 }
 
-body > #vue-app.overlay, body > #vue-app.open-right, body > #vue-app.open-left, body > #vue-app.open-top, body > #vue-app.open-bottom,
-body > #vue-error.overlay,
-body > #vue-error.open-right,
-body > #vue-error.open-left,
-body > #vue-error.open-top,
-body > #vue-error.open-bottom {
-  margin-top: 0 !important;
+@media (max-width: 767px) {
+  body > #vue-app.overlay, body > #vue-app.open-right, body > #vue-app.open-left, body > #vue-app.open-top, body > #vue-app.open-bottom,
+  body > #vue-error.overlay,
+  body > #vue-error.open-right,
+  body > #vue-error.open-left,
+  body > #vue-error.open-top,
+  body > #vue-error.open-bottom {
+    margin-top: 0 !important;
+  }
 }
 
 body > #vue-app.overlay::after, body > #vue-app.open-right::after, body > #vue-app.open-left::after, body > #vue-app.open-top::after, body > #vue-app.open-bottom::after,
