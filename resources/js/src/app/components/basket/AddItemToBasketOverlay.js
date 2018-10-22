@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 const ModalService        = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
@@ -140,6 +142,29 @@ Vue.component("add-item-to-basket-overlay", {
                     clearInterval(this.timerVar);
                 }
             }, 1000);
+        },
+
+        orderParamValue(propertyId)
+        {
+            const orderParams = this.latestBasketEntry.orderParams;
+
+            if (isNullOrUndefined(orderParams))
+            {
+                return "";
+            }
+
+
+            const orderParam = orderParams.find(param =>
+            {
+                return parseInt(param.propertyId) === parseInt(propertyId);
+            });
+
+            if (isNullOrUndefined(orderParam) || orderParam.type.length <= 0)
+            {
+                return "";
+            }
+
+            return orderParam.value;
         }
     }
 });
