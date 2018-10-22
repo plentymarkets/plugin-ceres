@@ -236,7 +236,8 @@
                             bodyOffset += children[i].getBoundingClientRect().height;
                         }
 
-                        document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';       
+                        document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
+                        document.getElementById('vue-app').style.minHeight = "calc(100vh - " + bodyOffset + "px)";
                     }
                 }
 
@@ -293,7 +294,7 @@
                     calculateBodyOffset();
                 });
             }
-        }, 0);
+        }, 1000);
 
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
         {
