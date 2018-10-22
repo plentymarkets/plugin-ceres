@@ -83,6 +83,15 @@
                 "options": {
                     "defaultValue": true
                 }
+            },
+            "emailFolder": {
+                "type": "inputNumber",
+                "required": true,
+                "label": "Widget.newsletterEmailFolderLabel",
+                "options": {
+                    "tooltip": "Widget.newsletterEmailFolderTooltip",
+                    "defaultValue": ""
+                }
             }
         }
 }
