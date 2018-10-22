@@ -65,7 +65,12 @@ body {
 		&.open-left,
 		&.open-top,
 		&.open-bottom{
-			margin-top: 0 !important;
+
+			@include media-breakpoint-down(sm)
+			{
+				margin-top: 0 !important;
+			}
+			
 			// dark overlay on body
 			&::after{
 				content : "";
