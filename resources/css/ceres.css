@@ -13193,7 +13193,6 @@ body.lb-disable-scrolling {
 
 .owl-carousel.owl-grab {
   cursor: move;
-  cursor: -webkit-grab;
   cursor: grab;
 }
 
@@ -20738,6 +20737,11 @@ body.menu-is-visible {
 .widget-item-list.widget-inverse .widget-caption {
   color: #fff;
   background-color: #4D4F4D;
+}
+
+.widget-legal-information a {
+  color: black;
+  margin-right: 10px;
 }
 
 .widget-title-bar .widget-inner {

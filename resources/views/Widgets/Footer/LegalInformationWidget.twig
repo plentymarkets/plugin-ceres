@@ -10,9 +10,10 @@
     cancellationPdfPath: widget.settings.cancellationFormContainer.cancellationPdfPath.mobile
 } %}
 
-<div class="text-xs-center m-y-1">
-    <div class="static-link-list">
+<div class="widget-legal-information text-xs-center m-y-1">
+    <div>
         {{ Twig.do('autoescape false') }}
+
         {% if configuration.showCancellationRights %}
             <a href="{{ Twig.print('urls.cancellationRights') }}">{{ Twig.trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
