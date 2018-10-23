@@ -10776,7 +10776,12 @@ body {
 		&.open-left,
 		&.open-top,
 		&.open-bottom{
-			margin-top: 0 !important;
+
+			@include media-breakpoint-down(sm)
+			{
+				margin-top: 0 !important;
+			}
+			
 			// dark overlay on body
 			&::after{
 				content : "";
@@ -19480,6 +19485,12 @@ nav.navbar.megamenu {
 @include widget-carousel-variant('.widget-inverse', $brand-inverse);
 .widget-item-list
 {
+    .widget-inner
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     .widget-caption
     {
         padding: 1rem 1.5rem;
@@ -19505,11 +19516,6 @@ nav.navbar.megamenu {
         {
             color: #fff;
         }
-    }
-
-    &.widget-inner > .row
-    {
-        width: 100%;
     }
 
     &.widget-primary .widget-caption
@@ -19547,6 +19553,15 @@ nav.navbar.megamenu {
         @include widget-bg-variant($brand-inverse);
     }
 }
+.widget-legal-information
+{
+    a
+    {
+        color: black;
+	    margin-right: 10px;
+    }
+}
+
 .widget-title-bar
 {
     .widget-inner
@@ -19598,6 +19613,15 @@ nav.navbar.megamenu {
         @include widget-bg-variant($brand-inverse);
     }
 }
+.widget-newsletter
+{
+    > .widget-inner
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 .widget-text
 {
     .widget-inner
