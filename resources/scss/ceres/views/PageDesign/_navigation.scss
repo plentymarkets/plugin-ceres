@@ -149,10 +149,6 @@ body.menu-is-visible {
 						transform: rotateX(180deg);
 					}
 				}
-
-				& li.level2 {
-					break-inside: avoid;
-				}
 			}
 			/*&.ddown>a:after {
 				border 			: none;
@@ -319,7 +315,8 @@ nav.navbar.megamenu {
 								background : $megamenu-bg; 
 							}
 							 .level2 { 
-							 	padding : .25em 0!important; 
+								 padding : .25em 0!important; 
+								 break-inside: avoid;
 							 }
 							 .level3 { 
 							 	padding : 0 1em .25em 1.4em !important; 
