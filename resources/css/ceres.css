@@ -20739,6 +20739,11 @@ body.menu-is-visible {
   background-color: #4D4F4D;
 }
 
+.widget-legal-information a {
+  color: black;
+  margin-right: 10px;
+}
+
 .widget-title-bar .widget-inner {
   padding: 1rem 1.5rem;
   text-align: center;
