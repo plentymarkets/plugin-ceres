@@ -17045,10 +17045,10 @@ Vue.component("add-item-to-basket-overlay", {
             }
 
             var orderParam = orderParams.find(function (param) {
-                return parseInt(param.propertyId) === parseInt(propertyId);
+                return parseInt(param.property.id) === parseInt(propertyId);
             });
 
-            return !(0, _utils.isNullOrUndefined)(orderParam) ? orderParam.name : "";
+            return orderParam.property.value;
         }
     }
 });
@@ -17181,7 +17181,7 @@ Vue.component("add-to-basket", {
                         return item.variationId === _this.variationId;
                     });
                     var variation = !(0, _utils.isNullOrUndefined)(basketItem) ? basketItem.variation.data : null;
-                    var orderParams = !(0, _utils.isNullOrUndefined)(basketItem) ? basketItem.basketItemOrderParams : null;
+                    var orderParams = !(0, _utils.isNullOrUndefined)(basketObject) ? basketObject.basketItemOrderParams : null;
 
                     document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
                     _this.waiting = false;
@@ -24070,9 +24070,9 @@ Vue.component("shop-country-settings", {
         this.$store.commit("setShippingCountries", this.shippingCountries);
         this.$store.commit("setShippingCountryId", this.shippingCountryId);
 
-        ApiService.listen("LocalizationChanged", function (localizationData) {
-            _this.$store.commit("setShippingCountries", localizationData.activeShippingCountries);
-            _this.$store.commit("setShippingCountryId", localizationData.currentShippingCountryId);
+        ApiService.listen("LocalizationChanged", function (data) {
+            _this.$store.commit("setShippingCountries", data.localization.activeShippingCountries);
+            _this.$store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
         });
     }
 });
