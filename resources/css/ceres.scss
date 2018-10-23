@@ -13999,7 +13999,9 @@ nav.navbar.megamenu {
 								background : $megamenu-bg; 
 							}
 							 .level2 { 
-							 	padding : .25em 0!important; 
+								 padding : .25em 0!important; 
+								 -webkit-column-break-inside: avoid; 
+								         break-inside: avoid;
 							 }
 							 .level3 { 
 							 	padding : 0 1em .25em 1.4em !important; 
