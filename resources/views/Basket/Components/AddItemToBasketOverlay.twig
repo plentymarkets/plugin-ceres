@@ -48,14 +48,14 @@
 
                                 <p class="small" v-for="property in latestBasketEntry.item.properties">
                                     <template v-if="orderParamValue(property.property.id)">
-                                        <strong>${ property.property.names.name } (+ ${ latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
+                                        <strong>${ property.property.names.name } (+ ${ latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency })</strong>
                                         <span v-if="property.property.valueType === 'file'">
                                             <a :href="orderParamValue(property.property.id) | fileUploadPath" target="_blank">
                                                 <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                ${ orderParamValue(property.property.id) | fileName }
+                                                : ${ orderParamValue(property.property.id) | fileName }
                                             </a>
                                         </span>
-                                        <span v-else>${ orderParamValue(property.property.id) }</span>
+                                        <span v-else-if="property.property.valueType !== 'empty'"><b>: </b>${ orderParamValue(property.property.id) }</span>
                                     </template>
                                 </p>
                             </div>
