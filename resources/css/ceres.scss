@@ -12278,6 +12278,16 @@ Custom classes
     right: .5rem;
     top: 10rem;
 }
+html.safari {
+	.popper {
+		display: none;
+	}
+
+	.popper-visible {
+		display: block;
+	}
+}
+
 .popper {
 	max-width: $popover-max-width;
     padding: $popover-inner-padding;
