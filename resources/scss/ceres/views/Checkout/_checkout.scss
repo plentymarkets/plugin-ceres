@@ -10,30 +10,8 @@
 		text-align: center;
 	}
 
-	.cmp-address-list,
-	.form-check-label {
+	.cmp-address-list {
 		transition: all .3s ease;
-	}
-
-	.error {
-		background: $brand-danger !important;
-		color: $white !important;
-		border-radius: .1rem;
-		transition: all .3s ease;
-
-		& .text-muted {
-			color: $white !important;
-		}
-
-		&.form-check-label {
-			padding: .5em 1.75rem;
-			a {
-				color: $white;
-				&:hover {
-					color: $gray-lighter2;
-				}
-			}
-		}
 	}
 
 	@include media-breakpoint-up(sm){

@@ -4,17 +4,17 @@
 
 ### Added
 
+- We added the ShopBuilder newsletter widget in Ceres.
 - We added 2 new layout container to the item list in the shopping cart.
 - We added a new container with which the image carousel in the single item view can be overwritten.
 - The first input field of forms in Ceres is now always focused.
-- We added the ShopBuilder newsletter widget in Ceres.
 - We added an EventListener via which notifications can be issued in Ceres.
 - We added the option "Display in content categories" to the Breadcrumb widget of the ShopBuilder. This option serves to activate or deactivate breadcrumbs on content category pages.
 - All Vuex mutations are now realised as JavaScript CustomEvents so that external plugins/themes can react better to changes to the online store.
 
 ### Changed
 
-- The shopping cart previews has been revised in order to improve functionality on mobile devices. A new view in landscape format has been added.
+- The shopping cart preview has been revised in order to improve functionality on mobile devices. A new view in landscape format has been added.
 - Before the title of a category is refreshed, the element is checked for existence. This serves to prevent potential errors regarding content categories.
 - The Ceres login area has been slightly modified in order to conform to the overall design of the Ceres online store.
 - If the input fields for number of categories in the navigation widget are empty, their maximum number is now set to standard values. This prevents categories from disappearing from the navigation.
@@ -31,8 +31,8 @@
 - Due to an error, the checkbox for accepting data transmission was not displayed for certain shipping profiles. This has been fixed.
 - Due to an error, incorrect calls emerged in the context of rich snippets. This behaviour has been fixed. We would like to thank @Lauflust for their help.
 - Due to an error, certain content category pages could not be accessed. This has been fixed.
-- Due to an error, the login page would sometimes issue console errors. This has been fixed.
-- Due to an error, the PayPalPlus wall was not functioning properly on mobile devices. This has been fixed.
+- The login page would sometimes issue console errors. This has been fixed.
+- Due to an error, the PayPal PLUS wall was not functioning properly on mobile devices. This has been fixed.
 - The background colour of the search icon in the top bar now uses the correct SCSS variable.
 - Due to an error, the address input fields **Street** and **Street** number were reset when the country was changed. This has been fixed.
 - Due to an error, no items were displayed on the returns page. This has been fixed.
@@ -55,6 +55,10 @@
 - Due to an error pertaining to category images, scrolling in Safari browsers was not working properly. This has been fixed.
 
 ## v2.15.0 (2018-09-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.14.0...2.15.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### ToDo
+
+- We adjusted the settings of the Shop Builder image carousel in the context of a bugfix. Image carousels created prior to version 2.15 are still working correctly, but can no longer be edited. If you want to make changes to this widget, please create a new image carousel.
 
 ### Added
 

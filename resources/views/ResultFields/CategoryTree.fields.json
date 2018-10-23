@@ -1,0 +1,9 @@
+[
+    "id",
+    "type",
+    "details.name",
+    "details.lang",
+    "details.nameUrl",
+    "details.metaTitle",
+    "details.imagePath"
+]

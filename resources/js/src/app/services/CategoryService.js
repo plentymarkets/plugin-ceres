@@ -1,5 +1,5 @@
-import store from "store/index.js";
-import {switchUrl}from "services/UrlService";
+import store from "../store/index";
+import TranslationService from "services/TranslationService";
 
 const ApiService = require("services/ApiService");
 let _categoryTree = {};
@@ -47,16 +47,6 @@ function _handleCurrentCategory()
     const currentCategory = store.state.navigation.currentCategory;
 
     _removeTempDesc();
-    _updateHistory(currentCategory);
-}
-
-/**
- * update page informations
- * @param currentCategory
- */
-function _updateHistory(currentCategory)
-{
-    switchUrl(currentCategory.url + window.location.search);
     _updateCategoryTexts(currentCategory);
 }
 
@@ -76,8 +66,14 @@ function _updateCategoryTexts(currentCategory)
                             currentCategory.details[0].metaTitle :
                             currentCategory.details[0].name;
 
-    document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = categoryTitle + " | " + App.config.header.companyName;
+    const categoryNameElement = document.querySelector(".category-title");
+
+    if (categoryNameElement)
+    {
+        categoryNameElement.innerHTML = currentCategory.details[0].name;
+    }
+
+    document.title = categoryTitle + " | " + TranslationService.translate("Ceres::Template.headerCompanyName");
 
     _loadOptionalData(currentCategory);
 }
