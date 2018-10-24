@@ -3,10 +3,6 @@
     "label": "Widget.newsletterLabel",
     "previewImageURL": "/images/widgets/newsletter.svg",
     "type": "default",
-    "allowedNestingTypes": [
-      "default",
-      "structure"
-    ],
     "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
         "settings": {
             "appearance": {
