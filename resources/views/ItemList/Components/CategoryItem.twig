@@ -57,13 +57,17 @@
                 <div class="thumb-meta">
                     <div class="prices">
                         <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
-                            <del class="crossprice">
+                            <!-- <del class="crossprice" v-if="liveShoppingData.settings.showCrossPrice && itemData.prices.specialOffer"> -->
+                            <del class="crossprice" v-if="itemData.prices.specialOffer">
+                                ${ itemData.prices.default.price.formatted }
+                            </del>
+                            <del class="crossprice" v-else>
                                 ${ itemData.prices.rrp.price.formatted }
                             </del>
                         </div>
 
                         <div class="price">
-                            ${ itemData.prices.default.unitPrice.formatted } *
+                            ${ itemData.prices.default.unitPrice.formatted | specialOffer(itemData.prices, "unitPrice", "formatted") } *
                         </div>
                     </div>
 

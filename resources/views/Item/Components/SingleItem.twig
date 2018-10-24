@@ -69,7 +69,7 @@
 
                     <span class="price h1">
                         <span ref="variationTotalPrice" :content="currentVariation.prices.default.price.value">
-                            ${ variationTotalPrice | itemPrice(currentVariation.prices, "specialOffer") | currency(currentVariation.prices.default.currency) }
+                            ${ variationTotalPrice | currency(currentVariation.prices.default.currency) }
                         </span>
                         <sup>*</sup>
                         <span :content="currentVariation.prices.default.currency"></span>
@@ -84,7 +84,7 @@
                         <div v-if="currentVariation.variation.mayShowUnitPrice">
                             {{ trans("Ceres::Template.singleItemUnitPrice") }}
                             <span class="base-price-value">
-                                ${ variationGraduatedPrice.basePrice }
+                                ${ variationGraduatedPrice.basePrice | specialOffer(currentVariation.prices, "basePrice") }
                             </span>
                         </div>
                     </div>
