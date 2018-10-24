@@ -107,7 +107,7 @@
                     {% endif %}
 
                     <div class="price">
-                        {{ item.data.prices.default.unitPrice.formatted }} * TEST
+                        {{ item.data.prices.default.unitPrice.formatted | specialOffer(item.data.prices, "unitPrice", "formatted") }} *
                     </div>
                 </div>
 
