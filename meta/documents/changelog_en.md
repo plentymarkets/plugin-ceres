@@ -1,6 +1,14 @@
 # Release Notes for Ceres
 
-## v2.16.0 (2018-10-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.15.0...2.16.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v2.16.1 (2018-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.0...2.16.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error in the newsletter widget, the input fields of the newsletter registration were not validated. This has been fixed.
+- We fixed an error concerning the variation selection, due to which items with certain attribute combinations could not be purchased.
+- Due to an error, clicking on a search result collapsed the input field of the search. This has been fixed.
+
+## v2.16.0 (2018-10-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.15.0...2.16.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
 
@@ -51,6 +59,8 @@
 - We fixed an error due to which a selection of variations in the single item view was not possible if 2 or more variations consisted of the same combination of attributes or if the variations had to attributes at all. In these cases, the selection is now possible via the content drop-down list.
 - Due to an error, the category filters were displayed after switching categories. This has been fixed.
 - Due to an error, the value "true" was displayed in the shopping cart after properties that were displayed as checkboxes in the online store. This has been fixed.
+- Due to an error, the ShopBuilder widget for displaying legal information prevented scrolling in the Firefox browser. This has been fixed. You need to save the widget again in the ShopBuilder.
+- Due to an error pertaining to category images, scrolling in Safari browsers was not working properly. This has been fixed.
 
 ## v2.15.0 (2018-09-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.14.0...2.15.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

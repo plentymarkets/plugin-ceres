@@ -1,5 +1,5 @@
 {
-    "version"           : "2.16.0",
+    "version"           : "2.16.1",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -39,11 +39,6 @@
             "key":"Ceres\\Containers\\CeresItemListContainer3",
             "name":"Third item list",
             "description":"Display a configurable list of items in your online store"
-        },
-        {
-            "key":"Ceres\\Containers\\CeresNewsletterInputContainer",
-            "name":"Newsletter input",
-            "description":"Display a newsletter registration form in your online store"
         }
     ],
     "containers"        :

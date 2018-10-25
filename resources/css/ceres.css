@@ -12489,13 +12489,15 @@ body > #vue-error .wrapper-left {
   transform: translateX(-100%);
 }
 
-body > #vue-app.overlay, body > #vue-app.open-right, body > #vue-app.open-left, body > #vue-app.open-top, body > #vue-app.open-bottom,
-body > #vue-error.overlay,
-body > #vue-error.open-right,
-body > #vue-error.open-left,
-body > #vue-error.open-top,
-body > #vue-error.open-bottom {
-  margin-top: 0 !important;
+@media (max-width: 767px) {
+  body > #vue-app.overlay, body > #vue-app.open-right, body > #vue-app.open-left, body > #vue-app.open-top, body > #vue-app.open-bottom,
+  body > #vue-error.overlay,
+  body > #vue-error.open-right,
+  body > #vue-error.open-left,
+  body > #vue-error.open-top,
+  body > #vue-error.open-bottom {
+    margin-top: 0 !important;
+  }
 }
 
 body > #vue-app.overlay::after, body > #vue-app.open-right::after, body > #vue-app.open-left::after, body > #vue-app.open-top::after, body > #vue-app.open-bottom::after,
@@ -13191,7 +13193,6 @@ body.lb-disable-scrolling {
 
 .owl-carousel.owl-grab {
   cursor: move;
-  cursor: -webkit-grab;
   cursor: grab;
 }
 
@@ -14081,6 +14082,14 @@ Custom classes
   position: fixed;
   right: .5rem;
   top: 10rem;
+}
+
+html.safari .popper {
+  display: none;
+}
+
+html.safari .popper-visible {
+  display: block;
 }
 
 .popper {
@@ -15618,7 +15627,6 @@ body.menu-is-visible {
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li {
     display: inline-block;
-    break-inside: avoid;
     width: 100%;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li.level1 {
@@ -15634,6 +15642,7 @@ body.menu-is-visible {
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .level2 {
     padding: 0.25em 0 !important;
+    break-inside: avoid;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .level3 {
     padding: 0 1em .25em 1.4em !important;
@@ -20678,6 +20687,11 @@ body.menu-is-visible {
   color: #4D4F4D;
 }
 
+.widget-item-list .widget-inner {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .widget-item-list .widget-caption {
   padding: 1rem 1.5rem;
   display: -ms-flexbox;
@@ -20697,10 +20711,6 @@ body.menu-is-visible {
 
 .widget-item-list .widget-caption a {
   color: #fff;
-}
-
-.widget-item-list.widget-inner > .row {
-  width: 100%;
 }
 
 .widget-item-list.widget-primary .widget-caption {
@@ -20736,6 +20746,11 @@ body.menu-is-visible {
 .widget-item-list.widget-inverse .widget-caption {
   color: #fff;
   background-color: #4D4F4D;
+}
+
+.widget-legal-information a {
+  color: black;
+  margin-right: 10px;
 }
 
 .widget-title-bar .widget-inner {
@@ -20783,6 +20798,11 @@ body.menu-is-visible {
 .widget-title-bar.widget-inverse {
   color: #fff;
   background-color: #4D4F4D;
+}
+
+.widget-newsletter > .widget-inner {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .widget-text .widget-inner {

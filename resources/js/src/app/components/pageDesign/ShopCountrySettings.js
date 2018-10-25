@@ -15,10 +15,10 @@ Vue.component("shop-country-settings", {
         this.$store.commit("setShippingCountryId", this.shippingCountryId);
 
         ApiService.listen("LocalizationChanged",
-            localizationData =>
+            data =>
             {
-                this.$store.commit("setShippingCountries", localizationData.activeShippingCountries);
-                this.$store.commit("setShippingCountryId", localizationData.currentShippingCountryId);
+                this.$store.commit("setShippingCountries", data.localization.activeShippingCountries);
+                this.$store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
             });
     }
 });

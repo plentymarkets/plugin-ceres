@@ -16921,6 +16921,8 @@ function hasOwnProperty(obj, prop) {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _utils = require("../../helper/utils");
+
 var ModalService = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
@@ -17034,11 +17036,24 @@ Vue.component("add-item-to-basket-overlay", {
                     clearInterval(_this.timerVar);
                 }
             }, 1000);
+        },
+        orderParamValue: function orderParamValue(propertyId) {
+            var orderParams = this.latestBasketEntry.orderParams;
+
+            if ((0, _utils.isNullOrUndefined)(orderParams)) {
+                return "";
+            }
+
+            var orderParam = orderParams.find(function (param) {
+                return parseInt(param.property.id) === parseInt(propertyId);
+            });
+
+            return orderParam.property.value;
         }
     }
 });
 
-},{"services/ModalService":240}],119:[function(require,module,exports){
+},{"../../helper/utils":233,"services/ModalService":240}],119:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -17166,10 +17181,11 @@ Vue.component("add-to-basket", {
                         return item.variationId === _this.variationId;
                     });
                     var variation = !(0, _utils.isNullOrUndefined)(basketItem) ? basketItem.variation.data : null;
+                    var orderParams = !(0, _utils.isNullOrUndefined)(basketObject) ? basketObject.basketItemOrderParams : null;
 
                     document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
                     _this.waiting = false;
-                    _this.openAddToBasketOverlay(basketObject.quantity, variation);
+                    _this.openAddToBasketOverlay(basketObject.quantity, variation, orderParams);
                 }, function (error) {
                     _this.waiting = false;
 
@@ -17225,10 +17241,11 @@ Vue.component("add-to-basket", {
         /**
          * open the AddItemToBasketOverlay
          */
-        openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity, item) {
+        openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity, item, orderParams) {
             var latestBasketEntry = {
                 item: item,
-                quantity: stashedQuantity
+                quantity: stashedQuantity,
+                orderParams: orderParams
             };
 
             this.$store.commit("setLatestBasketEntry", latestBasketEntry);
@@ -21593,10 +21610,12 @@ Vue.component("variation-select", {
                 });
 
                 if (!!preselectedVariation && preselectedVariation.length === 1) {
+                    var _attributes = _this.attributes;
+
                     // set attributes of preselected variation
                     _this.setAttributes(preselectedVariation[0]);
 
-                    if (_this.unitPreselect > 0) {
+                    if (preselectedVariation[0].attributes.length > 0 && _this.unitPreselect > 0 || _attributes.length === 0) {
                         var possibleVariations = _this.filterVariations(_this.selectedAttributes);
 
                         if (possibleVariations.length > 1) {
@@ -23499,6 +23518,10 @@ Vue.component("newsletter-input", {
         appearance: {
             type: String,
             default: "primary"
+        },
+        emailFolder: {
+            type: Number,
+            default: 0
         }
     },
 
@@ -23522,7 +23545,7 @@ Vue.component("newsletter-input", {
 
             this.isDisabled = true;
 
-            _ValidationService2.default.validate($("#newsletter-input-form")).done(function () {
+            _ValidationService2.default.validate($("#newsletter-input-form_" + this._uid)).done(function () {
                 _this.save();
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
@@ -23533,7 +23556,7 @@ Vue.component("newsletter-input", {
         save: function save() {
             var _this2 = this;
 
-            ApiService.post("/rest/io/customer/newsletter", { email: this.email, firstName: this.firstName, lastName: this.lastName }).done(function () {
+            ApiService.post("/rest/io/customer/newsletter", { email: this.email, firstName: this.firstName, lastName: this.lastName, emailFolder: this.emailFolder }).done(function () {
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
                 _this2.resetInputs();
             }).fail(function () {
@@ -24049,9 +24072,9 @@ Vue.component("shop-country-settings", {
         this.$store.commit("setShippingCountries", this.shippingCountries);
         this.$store.commit("setShippingCountryId", this.shippingCountryId);
 
-        ApiService.listen("LocalizationChanged", function (localizationData) {
-            _this.$store.commit("setShippingCountries", localizationData.activeShippingCountries);
-            _this.$store.commit("setShippingCountryId", localizationData.currentShippingCountryId);
+        ApiService.listen("LocalizationChanged", function (data) {
+            _this.$store.commit("setShippingCountries", data.localization.activeShippingCountries);
+            _this.$store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
         });
     }
 });
@@ -25693,6 +25716,14 @@ var init = function ($, window, document) {
 
             AutoFocusService.autoFocus();
 
+            $("#searchBox").on("shown.bs.collapse", function () {
+                var searchInput = document.querySelector("input.search-input");
+
+                if (searchInput) {
+                    searchInput.focus();
+                }
+            });
+
             $(window).scroll(function () {
                 if (isDesktop) {
                     if ($(this).scrollTop() > offset) {
@@ -26067,9 +26098,6 @@ exports.default = { autoFocus: autoFocus, triggerAutoFocus: triggerAutoFocus };
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 exports.updateCategoryHtml = updateCategoryHtml;
 
 var _index = require("../store/index");
@@ -26126,10 +26154,10 @@ function _handleCurrentCategory() {
 }
 
 function _removeTempDesc() {
-    var tempDesc = document.querySelector("#category-description-container");
+    var tempDesc = document.querySelectorAll("[data-category-description]");
 
     if (tempDesc) {
-        tempDesc.innerHTML = "";
+        _setDescriptions(tempDesc, "");
     }
 }
 
@@ -26159,14 +26187,49 @@ function _loadOptionalData(currentCategory) {
         }
     }
 
-    var categoryDescContainer = document.querySelector("#category-description-container");
+    var categoryDesc1Container = document.querySelectorAll("[data-category-description=\"1\"]");
+    var categoryDesc2Container = document.querySelectorAll("[data-category-description=\"2\"]");
 
-    if (categoryDescContainer) {
-        ApiService.get("/rest/io/category/description/" + currentCategory.id).done(function (response) {
-            if ((typeof response === "undefined" ? "undefined" : _typeof(response)) !== "object") {
-                categoryDescContainer.innerHTML = response;
+    var getCategoryDescription1 = categoryDesc1Container.length > 0 ? 1 : 0;
+    var getCategoryDescription2 = categoryDesc2Container.length > 0 ? 1 : 0;
+
+    if (getCategoryDescription1 || getCategoryDescription2) {
+        ApiService.get("/rest/io/category/description/" + currentCategory.id, { description1: getCategoryDescription1, description2: getCategoryDescription2 }).done(function (response) {
+            if (response.description1) {
+                _setDescriptions(categoryDesc1Container, response.description1);
+            }
+
+            if (response.description2) {
+                _setDescriptions(categoryDesc2Container, response.description2);
             }
         });
+    }
+}
+
+function _setDescriptions(elements, description) {
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var element = _step.value;
+
+            element.innerHTML = description;
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
     }
 }
 

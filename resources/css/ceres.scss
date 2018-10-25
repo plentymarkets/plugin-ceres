@@ -10776,7 +10776,12 @@ body {
 		&.open-left,
 		&.open-top,
 		&.open-bottom{
-			margin-top: 0 !important;
+
+			@include media-breakpoint-down(sm)
+			{
+				margin-top: 0 !important;
+			}
+			
 			// dark overlay on body
 			&::after{
 				content : "";
@@ -12273,6 +12278,16 @@ Custom classes
     right: .5rem;
     top: 10rem;
 }
+html.safari {
+	.popper {
+		display: none;
+	}
+
+	.popper-visible {
+		display: block;
+	}
+}
+
 .popper {
 	max-width: $popover-max-width;
     padding: $popover-inner-padding;
@@ -13970,8 +13985,6 @@ nav.navbar.megamenu {
 
 						>li {
 							display 	 : inline-block;
-							-webkit-column-break-inside : avoid;
-							        break-inside : avoid;
 							width 	 	 : 100%; 
 
 							&.level1 { 
@@ -13986,7 +13999,9 @@ nav.navbar.megamenu {
 								background : $megamenu-bg; 
 							}
 							 .level2 { 
-							 	padding : .25em 0!important; 
+								 padding : .25em 0!important; 
+								 -webkit-column-break-inside: avoid; 
+								         break-inside: avoid;
 							 }
 							 .level3 { 
 							 	padding : 0 1em .25em 1.4em !important; 
@@ -19482,6 +19497,12 @@ nav.navbar.megamenu {
 @include widget-carousel-variant('.widget-inverse', $brand-inverse);
 .widget-item-list
 {
+    .widget-inner
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     .widget-caption
     {
         padding: 1rem 1.5rem;
@@ -19507,11 +19528,6 @@ nav.navbar.megamenu {
         {
             color: #fff;
         }
-    }
-
-    &.widget-inner > .row
-    {
-        width: 100%;
     }
 
     &.widget-primary .widget-caption
@@ -19549,6 +19565,15 @@ nav.navbar.megamenu {
         @include widget-bg-variant($brand-inverse);
     }
 }
+.widget-legal-information
+{
+    a
+    {
+        color: black;
+	    margin-right: 10px;
+    }
+}
+
 .widget-title-bar
 {
     .widget-inner
@@ -19600,6 +19625,15 @@ nav.navbar.megamenu {
         @include widget-bg-variant($brand-inverse);
     }
 }
+.widget-newsletter
+{
+    > .widget-inner
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 .widget-text
 {
     .widget-inner

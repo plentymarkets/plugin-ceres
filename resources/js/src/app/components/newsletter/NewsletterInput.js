@@ -34,6 +34,11 @@ Vue.component("newsletter-input", {
         {
             type: String,
             default: "primary"
+        },
+        emailFolder:
+        {
+            type: Number,
+            default: 0
         }
     },
 
@@ -58,7 +63,7 @@ Vue.component("newsletter-input", {
         {
             this.isDisabled = true;
 
-            ValidationService.validate($("#newsletter-input-form"))
+            ValidationService.validate($("#newsletter-input-form_" + this._uid))
                 .done(() =>
                 {
                     this.save();
@@ -72,7 +77,7 @@ Vue.component("newsletter-input", {
         },
         save()
         {
-            ApiService.post("/rest/io/customer/newsletter", {email: this.email, firstName: this.firstName, lastName: this.lastName})
+            ApiService.post("/rest/io/customer/newsletter", {email: this.email, firstName: this.firstName, lastName: this.lastName, emailFolder: this.emailFolder})
                 .done(() =>
                 {
                     NotificationService.success(
