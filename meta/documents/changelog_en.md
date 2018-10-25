@@ -1,5 +1,13 @@
 # Release Notes for Ceres
 
+## v2.16.1 (2018-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.0...2.16.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error in the newsletter widget, the input fields of the newsletter registration were not validated. This has been fixed.
+- We fixed an error concerning the variation selection, due to which items with certain attribute combinations could not be purchased.
+- Due to an error, clicking on a search result collapsed the input field of the search. This has been fixed.
+
 ## v2.16.0 (2018-10-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.15.0...2.16.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
