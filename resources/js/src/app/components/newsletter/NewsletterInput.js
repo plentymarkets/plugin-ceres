@@ -63,7 +63,7 @@ Vue.component("newsletter-input", {
         {
             this.isDisabled = true;
 
-            ValidationService.validate($("#newsletter-input-form"))
+            ValidationService.validate($("#newsletter-input-form_" + this._uid))
                 .done(() =>
                 {
                     this.save();
