@@ -117,17 +117,14 @@ function _loadOptionalData(currentCategory)
         ApiService.get("/rest/io/category/description/" + currentCategory.id, {description1: getCategoryDescription1, description2: getCategoryDescription2})
         .done(response =>
         {
-            if (typeof response === "object")
+            if (response.description1)
             {
-                if (response.description1)
-                {
-                    _setDescriptions(categoryDesc1Container, response.description1);
-                }
+                _setDescriptions(categoryDesc1Container, response.description1);
+            }
 
-                if (response.description2)
-                {
-                    _setDescriptions(categoryDesc2Container, response.description2);
-                }
+            if (response.description2)
+            {
+                _setDescriptions(categoryDesc2Container, response.description2);
             }
         });
     }
