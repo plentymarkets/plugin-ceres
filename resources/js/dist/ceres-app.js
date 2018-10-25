@@ -21610,10 +21610,12 @@ Vue.component("variation-select", {
                 });
 
                 if (!!preselectedVariation && preselectedVariation.length === 1) {
+                    var _attributes = _this.attributes;
+
                     // set attributes of preselected variation
                     _this.setAttributes(preselectedVariation[0]);
 
-                    if (_this.unitPreselect > 0) {
+                    if (preselectedVariation[0].attributes.length > 0 && _this.unitPreselect > 0 || _attributes.length === 0) {
                         var possibleVariations = _this.filterVariations(_this.selectedAttributes);
 
                         if (possibleVariations.length > 1) {
@@ -23543,7 +23545,7 @@ Vue.component("newsletter-input", {
 
             this.isDisabled = true;
 
-            _ValidationService2.default.validate($("#newsletter-input-form")).done(function () {
+            _ValidationService2.default.validate($("#newsletter-input-form_" + this._uid)).done(function () {
                 _this.save();
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
