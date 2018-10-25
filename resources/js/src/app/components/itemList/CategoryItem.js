@@ -7,7 +7,8 @@ Vue.component("category-item", {
     props: [
         "decimalCount",
         "itemData",
-        "imageUrlAccessor"
+        "imageUrlAccessor",
+        "liveShoppingData"
     ],
 
     data()

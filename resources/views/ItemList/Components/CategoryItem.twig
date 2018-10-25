@@ -56,9 +56,8 @@
                 </a>
                 <div class="thumb-meta">
                     <div class="prices">
-                        <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
-                            <!-- <del class="crossprice" v-if="liveShoppingData.settings.showCrossPrice && itemData.prices.specialOffer"> -->
-                            <del class="crossprice" v-if="itemData.prices.specialOffer">
+                        <div v-if="(liveShoppingData && liveShoppingData.settings.showCrossPrice && itemData.prices.specialOffer) || itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
+                            <del class="crossprice" v-if="liveShoppingData.settings.showCrossPrice && itemData.prices.specialOffer">
                                 ${ itemData.prices.default.price.formatted }
                             </del>
                             <del class="crossprice" v-else>
@@ -76,6 +75,10 @@
                         <span>${ itemData.unit.names.name }</span>
                         <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
                     </div>
+                </div>
+
+                <div v-if="liveShoppingData">
+                    <live-shopping-timer :start-time="liveShoppingData.fromTime" :end-time="liveShoppingData.toTime"></live-shopping-timer>
                 </div>
 
                 {{ AddToBasket.printVueComponent( "itemData" ) }}
