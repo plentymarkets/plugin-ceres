@@ -11,7 +11,7 @@
             </button>
 
             <div class="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
-                <div class="autocomplete-suggestion" v-for="(item, index) in autocompleteResult" :key="index" @click="selectAutocompleteItem(item)" :class="{ 'autocomplete-selected': selectedAutocompleteIndex === index }">
+                <div class="autocomplete-suggestion" v-for="(item, index) in autocompleteResult" :key="index" @mousedown="selectAutocompleteItem(item)" :class="{ 'autocomplete-selected': selectedAutocompleteIndex === index }">
                     <div class="autocomplete-image-container" v-if="showItemImages">
                         <img class="autocomplete-image" :src="item.img">
                     </div>
