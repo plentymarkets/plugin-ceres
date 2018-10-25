@@ -18,6 +18,8 @@ class CeresItemConfig extends PluginConfig
     public $categoryShowNav;
     public $showCategoryImage;
     public $showCategoryDescription;
+    public $showCategoryDescriptionTop;
+    public $showCategoryDescriptionBottom;
     public $requireOrderProperties;
     public $loadingAnimationType;
 
@@ -49,15 +51,17 @@ class CeresItemConfig extends PluginConfig
                 "item.variationBase_content"
             ]
         );
-        $this->storeSpecial                 = $this->getIntegerValue( "item.storeSpecial", 0 );
-        $this->showVariationOverDropdown    = $this->getBooleanValue( "item.show_variation_over_dropdown", false );
-        $this->variationShowType            = $this->getTextValue( "item.variation_show_type", "all" );
-        $this->enableImageCarousel          = $this->getBooleanValue( "item.enable_image_carousel", true );
-        $this->categoryShowDots             = $this->getBooleanValue( "item.category_show_dots", true );
-        $this->categoryShowNav              = $this->getBooleanValue( "item.category_show_nav", true );
-        $this->showCategoryImage            = $this->getBooleanValue( "item.show_category_image", true );
-        $this->showCategoryDescription      = $this->getBooleanValue( "item.show_category_description", true );
-        $this->requireOrderProperties       = $this->getBooleanValue( "item.require_all_properties", false );
-        $this->loadingAnimationType         = $this->getTextValue( "item.loading_animation_type", "blur" );
+        $this->storeSpecial                     = $this->getIntegerValue( "item.storeSpecial", 0 );
+        $this->showVariationOverDropdown        = $this->getBooleanValue( "item.show_variation_over_dropdown", false );
+        $this->variationShowType                = $this->getTextValue( "item.variation_show_type", "all" );
+        $this->enableImageCarousel              = $this->getBooleanValue( "item.enable_image_carousel", true );
+        $this->categoryShowDots                 = $this->getBooleanValue( "item.category_show_dots", true );
+        $this->categoryShowNav                  = $this->getBooleanValue( "item.category_show_nav", true );
+        $this->showCategoryImage                = $this->getBooleanValue( "item.show_category_image", true );
+        $this->showCategoryDescription          = $this->getBooleanValue( "item.show_category_description", true );
+        $this->showCategoryDescriptionTop       = $this->getTextValue( "item.show_category_description_top", "description1" );
+        $this->showCategoryDescriptionBottom    = $this->getTextValue( "item.show_category_description_bottom", "none" );
+        $this->requireOrderProperties           = $this->getBooleanValue( "item.require_all_properties", false );
+        $this->loadingAnimationType             = $this->getTextValue( "item.loading_animation_type", "blur" );
     }
 }
