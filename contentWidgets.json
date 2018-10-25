@@ -958,70 +958,69 @@
         "widgetClass": "Ceres\\Widgets\\Footer\\LegalInformationWidget",
         "settings": {
             "showCancellationRights": {
-                "type": "checkBox",
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.legalInformationShowCancellationLabel",
+                "defaultValue": true,
                 "options": {
-                    "defaultValue": true
+                    "name": "Widget.legalInformationShowCancellationLabel"
                 }
             },
             "showLegalDisclosure": {
-                "type": "checkBox",
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.legalInformationShowLegalDisclosureLabel",
+                "defaultValue": true,
                 "options": {
-                    "defaultValue": true
+                    "name": "Widget.legalInformationShowLegalDisclosureLabel"
                 }
             },
             "showPrivacyPolicy": {
-                "type": "checkBox",
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.legalInformationShowPrivacyPolicyLabel",
+                "defaultValue": true,
                 "options": {
-                    "defaultValue": true
+                    "name": "Widget.legalInformationShowPrivacyPolicyLabel"
                 }
             },
             "showGtc": {
-                "type": "checkBox",
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.legalInformationShowGtcLabel",
+                "defaultValue": true,
                 "options": {
-                    "defaultValue": true
+                    "name": "Widget.legalInformationShowGtcLabel"
                 }
             },
             "cancellationFormContainer": {
-                "type": "verticalContainer",
-                "label": "Widget.legalInformationCancellationFormContainerLabel",
-                "required": false,
+                "type": "vertical",
                 "options": {
-                    "containerEntries": {
-                        "showCancellationForm": {
-                            "type": "checkBox",
-                            "required": true,
-                            "label": "Widget.legalInformationShowCancellationFormLabel",
-                            "options": {
-                                "defaultValue": true
-                            }
-                        },
-                        "useCancellationPdfUpload": {
-                            "type": "checkBox",
-                            "required": true,
-                            "label": "Widget.legalInformationCancellationPdfActiveLabel",
-                            "options": {
-                                "defaultValue": false
-                            }
-                        },
-                        "cancellationPdfPath": {
-                            "type": "inputFile",
-                            "required": false,
-                            "label": "Widget.legalInformationCancellationPdfUploadLabel",
-                            "options": {
-                                "tooltip": "Widget.legalInformationCancellationPdfUploadTooltip",
-                                "defaultValue": "",
-								"allowedExtensions": [
-									"pdf"
-								]
-                            }
+                    "name": "Widget.legalInformationCancellationFormContainerLabel"
+                },
+                "children": {
+                    "showCancellationForm": {
+                        "type": "checkbox",
+                        "required": true,
+                        "defaultValue": true,
+                        "options": {
+                            "name": "Widget.legalInformationShowCancellationFormLabel"
+                        }
+                    },
+                    "useCancellationPdfUpload": {
+                        "type": "checkbox",
+                        "required": true,
+                        "defaultValue": false,
+                        "options": {
+                            "name": "Widget.legalInformationCancellationPdfActiveLabel"
+                        }
+                    },
+                    "cancellationPdfPath": {
+                        "type": "file",
+                        "required": false,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.legalInformationCancellationPdfUploadLabel",
+                            "tooltip": "Widget.legalInformationCancellationPdfUploadTooltip",
+                            "allowedExtensions": [
+                                "pdf"
+                            ]
                         }
                     }
                 }
@@ -1286,13 +1285,7 @@
                 "label": "Widget.navigationCompanyLogoUrlLabel",
                 "options": {
                     "tooltip": "Widget.navigationCompanyLogoUrlTooltip",
-                    "defaultValue": "",
-					"allowedExtensions": [
-						"png",
-						"jpg",
-						"jpeg",
-						"gif"
-					]
+                    "defaultValue": ""
                 }
             }
         }
