@@ -4,10 +4,6 @@
     "previewImageURL": "/images/widgets/image-carousel.svg",
     "type": "default",
     "position": 500,
-    "allowedNestingTypes": [
-        "default",
-        "structure"
-    ],
     "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
     "settings": {
         "appearance": {

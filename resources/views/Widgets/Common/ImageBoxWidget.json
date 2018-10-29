@@ -4,10 +4,6 @@
     "previewImageURL": "/images/widgets/image-box.svg",
     "type": "default",
     "position": 600,
-    "allowedNestingTypes": [
-        "default",
-        "structure"
-    ],
     "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
     "settings": {
         "appearance": {
