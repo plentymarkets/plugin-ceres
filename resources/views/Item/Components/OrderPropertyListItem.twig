@@ -8,20 +8,8 @@
             *</label>
         </div>
 
-        <!-- <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" :class="{ 'has-success': property.value, 'has-danger': hasError }" class="form-group">
-            <label :class="{ 'custom-checkbox': inputType === 'checkbox', 'custom-radio': inputType === 'radio' }" class="custom-control" v-tooltip data-toggle="tooltip" :title="property.names.description">
-                <input v-if="inputType === 'checkbox'" @change="onInputValueChanged($event.target.checked)" type="checkbox" class="custom-control-input">
-                <input v-else :name="group ? group.id : 'check' + _uid" :value="property.id" @change="onInputValueChanged($event.target.value)" type="radio" class="custom-control-input">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">
-                    ${ property.names.name }
-                    <strong v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
-                </span>
-            </label>
-        </div> -->
-
         <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
-            <label class="form-check-label" :class="{ 'text-success': property.value, 'text-danger': hasError }">
+            <label class="form-check-label" :class="{ 'text-success': property.value, 'text-danger': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
                 <input :name="group ? group.id : 'check' + _uid" :value="property.id" @change="onInputValueChanged(inputType === 'checkbox' ? $event.target.checked : $event.target.value)" class="form-check-input" :type="inputType">
                 ${ property.names.name }
                 <strong v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
