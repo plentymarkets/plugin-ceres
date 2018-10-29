@@ -5,10 +5,6 @@
         "previewImageURL": "/images/widgets/image-box.svg",
         "type": "default",
         "position": 600,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
         "settings": {
             "appearance": {
@@ -149,10 +145,6 @@
         "previewImageURL": "/images/widgets/image-carousel.svg",
         "type": "default",
         "position": 500,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
         "settings": {
             "appearance": {
@@ -276,10 +268,6 @@
         "previewImageURL": "/images/widgets/item-list.svg",
         "type": "default",
         "position": 700,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
         "settings": {
             "appearance": {
@@ -719,10 +707,6 @@
         "label": "Widget.newsletterLabel",
         "previewImageURL": "/images/widgets/newsletter.svg",
         "type": "default",
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
         "settings": {
             "appearance": {
@@ -826,10 +810,6 @@
         "previewImageURL": "/images/widgets/text.svg",
         "type": "default",
         "position": 800,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
         "settings": {
             "appearance": {
@@ -891,10 +871,6 @@
         "previewImageURL": "/images/widgets/title-bar.svg",
         "type": "default",
         "position": 400,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
         "settings": {
             "appearance": {
