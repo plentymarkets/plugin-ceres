@@ -1,5 +1,15 @@
 .input-group{
 
+	.input-unit + .input-group-btn
+	{
+		padding-bottom: $grid-gutter-width/2;
+
+		.btn
+		{
+			height: calc(2.8em + 1px);
+		}
+	}
+
 	&.vert{
 		.input-group-btn{
 			display: block;
@@ -126,6 +136,12 @@ button:focus {
 
 .btn-right {
 	float: right;
+}
+
+.btn-xs-max-width {
+	@include media-breakpoint-down(xs) {
+		width: 100% !important;
+	}
 }
 
 .btn-labeled {

@@ -1,5 +1,159 @@
 # Release Notes for Ceres
 
+## v2.16.1 (2018-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.0...2.16.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error in the newsletter widget, the input fields of the newsletter registration were not validated. This has been fixed.
+- We fixed an error concerning the variation selection, due to which items with certain attribute combinations could not be purchased.
+- Due to an error, clicking on a search result collapsed the input field of the search. This has been fixed.
+
+## v2.16.0 (2018-10-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.15.0...2.16.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- We added the ShopBuilder newsletter widget in Ceres.
+- We added 2 new layout container to the item list in the shopping cart.
+- We added a new container with which the image carousel in the single item view can be overwritten.
+- The first input field of forms in Ceres is now always focused.
+- We added an EventListener via which notifications can be issued in Ceres.
+- We added the option "Display in content categories" to the Breadcrumb widget of the ShopBuilder. This option serves to activate or deactivate breadcrumbs on content category pages.
+- All Vuex mutations are now realised as JavaScript CustomEvents so that external plugins/themes can react better to changes to the online store.
+
+### Changed
+
+- The shopping cart preview has been revised in order to improve functionality on mobile devices. A new view in landscape format has been added.
+- Before the title of a category is refreshed, the element is checked for existence. This serves to prevent potential errors regarding content categories.
+- The Ceres login area has been slightly modified in order to conform to the overall design of the Ceres online store.
+- If the input fields for number of categories in the navigation widget are empty, their maximum number is now set to standard values. This prevents categories from disappearing from the navigation.
+- The file structures for category navigation have been minimised in order to improve loading times.
+- Breadcrumbs are now displayed on content category pages, even if these are not included in the navigation.
+- We adjusted the way discounts are displayed in the online store.
+- We added new JavaScript events via which changes to the browser history, the user registration and the sending of the contact form can be registered. We would like to thank @felixries for the help.
+- Changes to the filters, the sorting and the page are included as entries in the browser history. We would like to thank @felixries for the help.
+- It is now possible in IO to read the current template during a REST call.
+
+### Fixed
+
+- Due to an error, the search term was not displayed correctly on the search page. This has been fixed.
+- Due to an error, the checkbox for accepting data transmission was not displayed for certain shipping profiles. This has been fixed.
+- Due to an error, incorrect calls emerged in the context of rich snippets. This behaviour has been fixed. We would like to thank @Lauflust for their help.
+- Due to an error, certain content category pages could not be accessed. This has been fixed.
+- The login page would sometimes issue console errors. This has been fixed.
+- Due to an error, the PayPal PLUS wall was not functioning properly on mobile devices. This has been fixed.
+- The background colour of the search icon in the top bar now uses the correct SCSS variable.
+- Due to an error, the address input fields **Street** and **Street** number were reset when the country was changed. This has been fixed.
+- Due to an error, no items were displayed on the returns page. This has been fixed.
+- Due to an error, icons of payment providers were not displayed in the order confirmation. This has been fixed.
+- Due to an error, the page title of content pages was not filled in correctly. This has been fixed.
+- Due to an error, the description of property groups was not displayed correctly. This has been fixed.
+- When navigating through the navigation tree, an obsolete configuration setting was retrieved for the page title, instead of the value from the multilingualism UI. This behaviour has been fixed.
+- Accessing the return overview led to issues. This behaviour has been fixed.
+- Due to an error, the validation of coupons only issued generic error codes and not specific error codes. This has been fixed.
+- We made several SEO-relevant adjustments.
+- Due to an error, not all relevant items were included in the **Last seen** item list. This has been fixed.
+- Due to an error, the selection of an invoice address was not saved correctly. This has been fixed.
+- Due to an error, if an item had multiple order properties of the type text, not all of the values were adopted to the shopping cart. This has been fixed.
+- Due to an error, switching between content categories was not working properly on mobile devices. This has been fixed.
+- Due to an error, the header obscured parts of the online store. This has been fixed.
+- We fixed an error due to which a selection of variations in the single item view was not possible if 2 or more variations consisted of the same combination of attributes or if the variations had to attributes at all. In these cases, the selection is now possible via the content drop-down list.
+- Due to an error, the category filters were displayed after switching categories. This has been fixed.
+- Due to an error, the value "true" was displayed in the shopping cart after properties that were displayed as checkboxes in the online store. This has been fixed.
+- Due to an error, the ShopBuilder widget for displaying legal information prevented scrolling in the Firefox browser. This has been fixed. You need to save the widget again in the ShopBuilder.
+- Due to an error pertaining to category images, scrolling in Safari browsers was not working properly. This has been fixed.
+
+## v2.15.0 (2018-09-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.14.0...2.15.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### ToDo
+
+- We adjusted the settings of the Shop Builder image carousel in the context of a bugfix. Image carousels created prior to version 2.15 are still working correctly, but can no longer be edited. If you want to make changes to this widget, please create a new image carousel.
+
+### Added
+
+- We added a mapping for translating the standard availabilities of Schema.org to availabilities in plentymarkets. This is located in the SEO tab of the Ceres configuration.
+- The following widgets have been added to the Shop Builder: Top bar (Header), Category navigation (Header), Breadcrumb navigation (Header), Legal information (Footer), List, Link list, Dividing line.
+- You can now add additional slides to the image carousel of the Shop Builder.
+- You can now edit or disable the image titles of slides in the image carousel of the Shop Builder.
+- You can now edit the title of the image box of the Shop Builder.
+- You can now edit or disable the title of item lists in the Shop Builder.
+- We added templates for the header, footer and homepage that can be used for the Shop Builder.
+
+### Changed
+
+- We added events in the checkout which indicate a change in the selected address.
+- Error messages on the contact page are now displayed analogously to error messages on other pages.
+- Error messages in the checkout have been improved, so that invalid input fields will be highlighted.
+- Error messages of address entry forms have been improved, so that invalid input fields will be highlighted.
+- You can now set the number of visible items in an item list.
+
+### Fixed
+
+- The login URL stored at the level of the customer now also works in Ceres.
+- Due to an error, clicking the wish list button did not always add an item to the wish list. This has been fixed.
+- The height of widgets in a Shop Builder structure element with four columns is now correctly calculated.
+- The maximum number of items is now considered by the item list of the type "last seen" in the Shop Builder.
+
+## v2.14.0 (2018-08-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- Two additional layout containers have been added so that the header and footer of the Shop Builder can be displayed.
+- Categories have been added as filter options for search results.
+- Item lists and search results can now be sorted randomly.
+- A new event hook has been added, which reacts to the building of plugins. This enables the invalidation of the content cache.
+- A new checkbox has been added to the address input fields, via which the delivery to a Packstation/post office in Germany can be activated. The input fields adapt to the type of delivery destination if the checkbox is activated.
+
+### Changed
+
+- The individual entries of item lists now span the entire width of the list.
+- The live search in the header and the search page have been synchronised so that they provide the same search results.
+
+### Fixed
+
+- Due to an error, users could not select variations of an item if the name of an attribute exceeded a certain length. This has been fixed.
+- Cross-site scripting is now suppressed in the search.
+- The quantity input of items in the shopping cart now considers the decimal separator configured in the IO settings.
+- The option "Fix the navigation bar at the top of the page" in the header tab is now functioning properly again.
+- Due to an error, the login button was shifted outside the displayable area of the screen on mobile devices. This has been fixed.
+- Due to an error, it was not possible to change the number of items for items whose name exceeded a certain length. This has been fixed.
+- Due to an error, the page did not automatically scroll back to the top after switching categories. This has been fixed.
+- An error has been fixed that prevented the display of a conclusive error notification when items for which no stock was available had been moved to the shopping cart.
+- Under certain circumstances item bundles led to JavaScript errors. This behaviour has been fixed.
+- Orders that included items with live shopping prices led to errors in Callisto stores with an installed Ceres checkout. This behaviour has been fixed.
+- The missing title and alt tags have been added in order to improve search engine optimisation.
+- An error led to rounding errors for prices. This behaviour has been fixed.
+
+## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### ToDo
+
+- If item lists are not displayed on the Shop Builder homepage after the upgrade to version 2.13, the Shop Builder homepage has to be saved again.
+
+### Added
+
+- A new layout container has been added underneath the order details on the order confirmation page.
+
+### Changed
+
+- The unit price was not displayed if the number of units was 1. This has ben fixed. The display of the unit price is now exclusively dependent on the setting stored at the variation level.
+- The browser now scrolls back to the top of the page whenever the user changes the category.
+- The drop-down list for addresses is now limited to a maximum height. This prevents that a large number of addresses makes an address selection impossible.
+- Coupons are now distinguished into **gift cards** and **coupons for special offers**. The layout for coupons has been adjusted accordingly.
+
+### Fixed
+
+- The navigation always displayed all categories. This behaviour has been adjusted, so that different navigations can be displayed, depending on different customer classes.
+- Due to an error, Ceres online stores were not working properly on Microsoft Edge browsers. This has been fixed.
+- An error led to roundoff mistakes in the single item view. This has been fixed.
+- Due to an error, item bundles would lead to vue.js issues in the online store under certain circumstances. This has been fixed.
+- The error "No 'Access-Control-Allow-Origin' header is present on the requested resource" will not occur anymore.
+- Due to an error, the VAT ID on the registration page was validated for non-business customers. This has been fixed.
+- If the "Reset password" email was opened via an e-mail client, the link was not recognised as such. This error has been fixed.
+- The .twig file of the third item list used several faulty IDs. This error has been fixed.
+- The CDN URLs for item images are now loaded client-dependently in the correct manner.
+- Due to an error, no items were added to the **last seen** item list, if the list was not also linked to the single item view. This has been fixed.
+- Due to an error, certain items were not displayed on the order confirmation page if they were part of an item bundle. This has been fixed.
+
 ## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
@@ -69,10 +223,6 @@
 - Due to an error, the display of sums in the header did not immediately switch between gross and net sums upon changes. This has been fixed.
 
 ## v2.9.1 (2018-06-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.0...2.9.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
-
-### Changed
-
-- Coupons are now distinguished into **gift cards** and **coupons for special offers**. The layout for coupons has been adjusted accordingly.
 
 ### Fixed
 

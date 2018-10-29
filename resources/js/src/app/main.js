@@ -1,4 +1,7 @@
 const browserDetect = require("detect-browser");
+const NotificationService = require("services/NotificationService");
+const AutoFocusService = require("services/AutoFocusService");
+
 // Frontend end scripts
 // eslint-disable-next-line
 var init = (function($, window, document)
@@ -145,6 +148,18 @@ var init = (function($, window, document)
 
             var isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
+            AutoFocusService.autoFocus();
+
+            $("#searchBox").on("shown.bs.collapse", function()
+            {
+                var searchInput = document.querySelector("input.search-input");
+
+                if (searchInput)
+                {
+                    searchInput.focus();
+                }
+            });
+
             $(window).scroll(function()
             {
                 if (isDesktop)
@@ -195,5 +210,36 @@ var init = (function($, window, document)
     }
 
     window.CeresMain = new CeresMain();
+    window.CeresNotification = NotificationService;
+
+    var showShopNotification = function(event)
+    {
+        if (event.detail.type)
+        {
+            switch (event.detail.type)
+            {
+            case "info":
+                NotificationService.info(event.detail.message);
+                break;
+            case "log":
+                NotificationService.log(event.detail.message);
+                break;
+            case "error":
+                NotificationService.error(event.detail.message);
+                break;
+            case "success":
+                NotificationService.success(event.detail.message);
+                break;
+            case "warning":
+                NotificationService.warn(event.detail.message);
+                break;
+            default:
+                console.log("no type such as:" + event.detail.type);
+                break;
+            }
+        }
+    };
+
+    document.addEventListener("showShopNotification", showShopNotification);
 
 })(jQuery, window, document);

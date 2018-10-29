@@ -4,13 +4,13 @@
 
 <script type="x/template" id="vue-container-item-list">
     <div>
-        <div class="col-xs-12 col-lg-12" v-if="items.length > 4">
+        <div class="col-xs-12 col-lg-12" v-if="items.length > itemsPerPage">
             <div class="list-item-carousel owl-carousel owl-theme owl-single-item" ref="carouselContainer">
                 <category-item v-for="(item, index) in items" :ref="'categoryItem_' + index" :key="item.data.variation.id" :item-data="item.data" decimal-count="{{ decimalCount | json_encode }}" image-url-accessor="urlMiddle"></category-item>
             </div>
         </div>
 
-        <div v-else v-for="item in items" :key="item.data.variation.id" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div v-else v-for="item in items" :key="item.data.variation.id" :class="columnWidths">
             <category-item :item-data="item.data" decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
         </div>
     </div>

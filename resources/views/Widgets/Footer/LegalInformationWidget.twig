@@ -1,0 +1,46 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set configuration = {
+    showCancellationRights: widget.settings.showCancellationRights.mobile,
+    showLegalDisclosure: widget.settings.showLegalDisclosure.mobile,
+    showPrivacyPolicy: widget.settings.showPrivacyPolicy.mobile,
+    showGtc: widget.settings.showGtc.mobile,
+    showCancellationForm: widget.settings.cancellationFormContainer.showCancellationForm.mobile,
+    useCancellationPdfUpload: widget.settings.cancellationFormContainer.useCancellationPdfUpload.mobile,
+    cancellationPdfPath: widget.settings.cancellationFormContainer.cancellationPdfPath.mobile
+} %}
+
+<div class="widget-legal-information text-xs-center m-y-1">
+    <div>
+        {{ Twig.do('autoescape false') }}
+
+        {% if configuration.showCancellationRights %}
+            <a href="{{ Twig.print('urls.cancellationRights') }}">{{ Twig.trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
+        {% endif %}
+
+        {% if configuration.showCancellationForm %}
+            {% if not configuration.useCancellationPdfUpload %}
+                <a href="{{ Twig.print('urls.cancellationForm') }}">{{ Twig.trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
+            {% elseif configuration.cancellationPdfPath is not empty %}
+                <a href="{{ configuration.cancellationPdfPath }}" target="_blank">{{ Twig.trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
+            {% endif %}
+        {% endif %}
+
+        {% if configuration.showLegalDisclosure %}
+            <a href="{{ Twig.print('urls.legalDisclosure') }}">{{ Twig.trans("Ceres::Template.footerLegalDisclosure") }}</a>
+        {% endif %}
+
+        {% if configuration.showPrivacyPolicy %}
+            <a href="{{ Twig.print('urls.privacyPolicy') }}">{{ Twig.trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
+        {% endif %}
+
+        {% if configuration.showGtc %}
+            <a href="{{ Twig.print('urls.gtc') }}">{{ Twig.trans("Ceres::Template.footerGtc") }}</a>
+        {% endif %}
+
+        {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
+            <a href="{{ Twig.print('urls.contact') }}">{{ Twig.trans("Ceres::Template.footerContact") }}</a>
+        {% endif %}
+        {{ Twig.do('endautoescape') }}
+    </div>
+</div>

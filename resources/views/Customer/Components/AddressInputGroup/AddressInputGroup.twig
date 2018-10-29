@@ -3,24 +3,23 @@
 {{ component( "Ceres::Customer.Components.CountrySelect" ) }}
 
 <script type="x/template" id="vue-address-input-group">
-
     <div>
-        <div v-if="localeToShow == 'DE' && addressType === '1'">
+        <div v-if="value.showPickupStation && selectedCountry.isoCode2 === 'DE' && addressType === '2'">
+            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DHLPackingStationAddressInputGroupDE" %}
+        </div>
+        <div v-else-if="localeToShow == 'DE' && addressType === '1'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.BillingAddressInputGroupDE" %}
         </div>
-
-        <div v-if="localeToShow == 'GB' && addressType === '1'">
+        <div v-else-if="localeToShow == 'GB' && addressType === '1'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.BillingAddressInputGroupGB" %}
         </div>
-
-        <div v-if="localeToShow == 'DE' && addressType === '2'">
+        <div v-else-if="localeToShow == 'DE' && addressType === '2'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DeliveryAddressInputGroupDE" %}
         </div>
-
-        <div v-if="localeToShow == 'GB' && addressType === '2'">
+        <div v-else-if="localeToShow == 'GB' && addressType === '2'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DeliveryAddressInputGroupGB" %}
         </div>
-
+        
         <div class="col-xs-12 col-sm-4">
             <country-select
                 template="#vue-country-select"
@@ -28,10 +27,9 @@
                 :selected-state-id="value.stateId"
                 @country-changed="onSelectedCountryChanged($event)"
                 @state-changed="emitInputEvent('stateId', $event)"
-                :country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"
+                :country-list="{{ services.country.getActiveCountriesList() | filterFields(['id','currLangName', 'isoCode2', 'states.id', 'states.name']) | json_encode }}"
                 :address-type="addressType">
             </country-select>
         </div>
     </div>
-
 </script>

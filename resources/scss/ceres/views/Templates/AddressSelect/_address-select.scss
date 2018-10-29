@@ -43,12 +43,34 @@
 		padding: 0;
 		margin: 0;
 		list-style: none;
+		box-shadow: $box-shadow;
+		max-height: 500px;
+		overflow: scroll;
 	}
 
 	.add-item{
 		position: absolute;
-	    top: 1em;
-	    right: 1em;
+		
+		@include media-breakpoint-down(xs)
+		{
+			top: 0;
+			right: 0;
+
+			& button {
+				height: 74px;
+
+				& i {
+					margin-left: 6px;
+					margin-top: 1px;
+				}
+			}
+		}
+
+		@include media-breakpoint-up(sm)
+		{
+			top: 1em;
+			right: 1em;
+		}
 	}
 
 	.item{

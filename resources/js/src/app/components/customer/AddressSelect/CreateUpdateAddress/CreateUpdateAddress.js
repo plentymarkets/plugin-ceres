@@ -1,6 +1,7 @@
 const NotificationService = require("services/NotificationService");
 
 import ValidationService from "services/ValidationService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("create-update-address", {
 
@@ -29,7 +30,7 @@ Vue.component("create-update-address", {
     computed:
     {
         addressList()
-        {
+            {
             this.$store.getters.getAddressList(this.addressType);
         }
     },
@@ -52,7 +53,20 @@ Vue.component("create-update-address", {
                 })
                 .fail(invalidFields =>
                 {
+                    const fieldNames = [];
+
+                    for (const field of invalidFields)
+                    {
+                        let fieldName = field.lastElementChild.innerHTML;
+
+                        fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
+                        fieldNames.push(fieldName);
+                    }
+
                     ValidationService.markInvalidFields(invalidFields, "error");
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", {fields: fieldNames.join(", ")})
+                    );
                 });
         },
 

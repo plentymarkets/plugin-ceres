@@ -1,0 +1,9 @@
+{
+    "identifier": "Ceres::SeparatorWidget",
+    "label": "Widget.separatorLabel",
+    "previewImageURL": "/images/widgets/separator.svg",
+    "type": "default",
+    "position": 1100,
+    "widgetClass": "Ceres\\Widgets\\Common\\SeparatorWidget",
+    "settings": {}
+}

@@ -2,6 +2,7 @@
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
+{% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
 
 {% set image = item.data.images.all | first %}
 {% set itemUrl =  item.data | itemURL %}
@@ -12,11 +13,7 @@
 
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
-        <add-to-basket
-            :item="{{ item.data | json_encode() }}"
-            :use-large-scale="true"
-            item-url="{{ itemUrl }}">
-        </add-to-basket>
+        {{ AddToBasket.printTwigComponent( item.data, true ) }}
 
         <div class="thumb-background"></div>
 
@@ -27,6 +24,7 @@
                         template="#vue-category-image-carousel"
                         :image-urls-data="{{ item.data.images | json_encode() }} | itemImages('urlMiddle')"
                         alt-text="{{ ItemName.get(item.data | itemName, item.data.variation.bundleType) }}"
+                        title-text="{{ ItemName.get(item.data | itemName, item.data.variation.bundleType) }}"
                         item-url="{{ itemUrl }}"
                         :show-dots="{{ ceresConfig.item.categoryShowDots | json_encode }}"
                         :show-nav="{{ ceresConfig.item.categoryShowNav | json_encode }}"
@@ -35,7 +33,7 @@
 
                     <noscript>
                         <a href="{{ itemUrl }}">
-                            <img class="img-fluid" src="{{ image.urlMiddle }}">
+                            <img class="img-fluid" src="{{ image.urlMiddle }}" title="{{ ItemName.get(item.data | itemName, item.data.variation.bundleType) }}" alt="{{ ItemName.get(item.data | itemName, item.data.variation.bundleType) }}">
                         </a>
                     </noscript>
                 </div>
@@ -127,11 +125,8 @@
                 {% endif %}
 
             </div>
-            
-            <add-to-basket
-                :item="{{ item.data | json_encode() }}"
-                item-url="{{ itemUrl }}">
-            </add-to-basket>
+
+            {{ AddToBasket.printTwigComponent( item.data ) }}
 
             <span class="vat-porto-info small text-muted">
                 * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.itemExclVAT") }}{% else %}{{ trans("Ceres::Template.itemInclVAT") }}{% endif %} {{ trans("Ceres::Template.itemExclusive") }}

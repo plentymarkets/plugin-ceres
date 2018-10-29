@@ -1,13 +1,17 @@
 //header scss
+.unfixed
+{
+	left: 0;
+	right: 0;
+}
+
 .top-bar{
 
 	@media print {
 		display: none;
 	}
 
-	position: fixed;
 	width: 100%;
-	
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
@@ -17,6 +21,60 @@
 		color: $top-bar-color;
 		outline: none;
 	}
+
+	.search-shown {
+		display: flex;
+		@include media-breakpoint-up(md) {
+			justify-content: space-between;
+			align-items: center;
+		}
+		@include media-breakpoint-down(sm) {
+			flex-direction: column-reverse;
+		}
+
+		.always-visible-search {
+			margin: 5px 5px;
+			background-color: $white;
+			flex: 1;
+			
+			.search-box-shadow-frame {
+				display: flex;
+				flex: 100;
+	
+				.search-input {
+					border: none;
+					outline: none;
+					padding: 0.4rem 1rem;
+					font-size: 1.3rem;
+					line-height: 1;
+					flex: 1 70%;
+				}
+		
+				.search-submit {
+					color: $brand-primary;
+					border: none;
+					font-size: 1.3rem;
+					line-height: 1;
+					padding: 0.4rem 1rem;
+				}
+			}
+		}
+
+		.controls-list {
+			&>li {
+				@include media-breakpoint-up(md) {
+					a:not(.btn) {
+						padding: 1rem .8rem;
+					}
+				}
+			}
+		}
+	}
+
+	&.pos-f-t {
+		position: fixed;
+	}
+
 	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;
@@ -31,7 +89,7 @@
 
 			// sets the height of the top-bar
 			@include media-breakpoint-down(md) {
-
+				
 				a:not(.btn) {
 					padding: 0.5rem .5rem;
 					display: inline-block;
@@ -51,7 +109,7 @@
 
 			@include media-breakpoint-up(md) {
 				a:not(.btn) {
-					padding: 0.5rem .8rem;
+					padding: .5rem .8rem;
 					display: inline-block;
 					color: $gray-lighter;
 
@@ -225,15 +283,22 @@
 //navigation scss
 .wrapper-main {
 	#page-body {
-		margin-top: 118px;
 
 		@media print {
 			margin-top: 0;
 		}
 	}
+
+	#page-header {
+		background-color:$navbar-background-color;
+
+		&.top-bar {
+			background-color: $top-bar-bg;
+		}
+	}
+
 	.navbar{
 		font-family:$font-family-heading;
-		background:$navbar-background-color;
 		border-bottom:1px solid darken($gray-lighter2, 2%);
 		a {
 			color: $gray-dark;

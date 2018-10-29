@@ -3,6 +3,7 @@
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
 {% set style            = widget.settings.style.mobile %}
+{% set headline         = widget.settings.headline.mobile %}
 {% set imageSize        = widget.settings.imageSize.mobile %}
 {% set categoryId       = widget.settings.categoryId.mobile %}
 {% set variationId      = widget.settings.variationId.mobile %}
@@ -19,6 +20,7 @@
     {{ Twig.set("name", "category.details[0].name") }}
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
+
     {{ Twig.if("imageUrl | trim is not empty") }}
         {{ Twig.set("imageUrl", "\"documents/\" ~ imageUrl") }}
     {{ Twig.endif() }}
@@ -37,6 +39,10 @@
 
 {% if customImagePath | trim is not empty %}
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
+{% endif %}
+
+{% if style != "no-caption" and headline is not empty %}
+    {{ Twig.set("name", "'#{ headline }'") }}
 {% endif %}
 
 {{ Twig.if("name | trim is empty and imageUrl | trim is empty") }}

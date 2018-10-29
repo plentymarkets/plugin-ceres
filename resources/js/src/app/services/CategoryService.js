@@ -1,5 +1,5 @@
-import store from "store/index.js";
-import {switchUrl}from "services/UrlService";
+import store from "../store/index";
+import TranslationService from "services/TranslationService";
 
 const ApiService = require("services/ApiService");
 let _categoryTree = {};
@@ -47,26 +47,16 @@ function _handleCurrentCategory()
     const currentCategory = store.state.navigation.currentCategory;
 
     _removeTempDesc();
-    _updateHistory(currentCategory);
-}
-
-/**
- * update page informations
- * @param currentCategory
- */
-function _updateHistory(currentCategory)
-{
-    switchUrl(currentCategory.url + window.location.search);
     _updateCategoryTexts(currentCategory);
 }
 
 function _removeTempDesc()
 {
-    const tempDesc = document.querySelector("#category-description-container");
+    const tempDesc = document.querySelectorAll("[data-category-description]");
 
     if (tempDesc)
     {
-        tempDesc.innerHTML = "";
+        _setDescriptions(tempDesc, "");
     }
 }
 
@@ -76,8 +66,14 @@ function _updateCategoryTexts(currentCategory)
                             currentCategory.details[0].metaTitle :
                             currentCategory.details[0].name;
 
-    document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = categoryTitle + " | " + App.config.header.companyName;
+    const categoryNameElement = document.querySelector(".category-title");
+
+    if (categoryNameElement)
+    {
+        categoryNameElement.innerHTML = currentCategory.details[0].name;
+    }
+
+    document.title = categoryTitle + " | " + TranslationService.translate("Ceres::Template.headerCompanyName");
 
     _loadOptionalData(currentCategory);
 }
@@ -99,35 +95,51 @@ function _loadOptionalData(currentCategory)
         }
     }
 
-    const categoryDescContainer = document.querySelector("#category-description-container");
+    const categoryDesc1Container = document.querySelectorAll("[data-category-description=\"1\"]");
+    const categoryDesc2Container = document.querySelectorAll("[data-category-description=\"2\"]");
 
-    if (categoryDescContainer)
+    const getCategoryDescription1 = categoryDesc1Container.length > 0 ? 1 : 0;
+    const getCategoryDescription2 = categoryDesc2Container.length > 0 ? 1 : 0;
+
+    if (getCategoryDescription1 || getCategoryDescription2)
     {
-        ApiService.get("/rest/io/category/description/" + currentCategory.id)
+        ApiService.get("/rest/io/category/description/" + currentCategory.id, {description1: getCategoryDescription1, description2: getCategoryDescription2})
         .done(response =>
         {
-            if (typeof response !== "object")
+            if (response.description1)
             {
-                categoryDescContainer.innerHTML = response;
+                _setDescriptions(categoryDesc1Container, response.description1);
+            }
+
+            if (response.description2)
+            {
+                _setDescriptions(categoryDesc2Container, response.description2);
             }
         });
     }
 }
 
+function _setDescriptions(elements, description)
+{
+    for (const element of elements)
+    {
+        element.innerHTML = description;
+    }
+}
+
 function _firstRendering()
 {
-    const twigBreadcrumbs = document.querySelector("#twig-rendered-breadcrumbs");
+    const twigBreadcrumbs = document.querySelectorAll("[data-component=\"breadcrumbs\"][data-renderer=\"twig\"]");
+    const vueBreadcrumbs = document.querySelectorAll("[data-component=\"breadcrumbs\"][data-renderer=\"vue\"]");
 
-    if (twigBreadcrumbs)
+    for (let i = 0; i < twigBreadcrumbs.length; i++)
     {
-        twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+        twigBreadcrumbs[i].remove();
     }
 
-    const vueBreadcrumbs = document.querySelector("#vue-rendered-breadcrumbs");
-
-    if (vueBreadcrumbs)
+    for (let j = 0; j < vueBreadcrumbs.length; j++)
     {
-        vueBreadcrumbs.style.removeProperty("display");
+        vueBreadcrumbs[j].style.removeProperty("display");
     }
 }
 

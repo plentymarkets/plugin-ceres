@@ -1,4 +1,6 @@
 import ApiService from "services/ApiService";
+import NotificationService from "services/NotificationService";
+import TranslationService from "services/TranslationService";
 
 const state =
     {
@@ -26,6 +28,7 @@ const mutations =
             {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         },
 
@@ -39,6 +42,22 @@ const mutations =
                 {
                     state.billingAddressId = billingAddress.id;
                     state.billingAddress = billingAddress;
+                    document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
+                }
+            }
+        },
+
+        selectDeliveryAddressById(state, deliveryAddressId)
+        {
+            if (deliveryAddressId)
+            {
+                const deliveryAddress = state.deliveryAddressList.find(address => address.id === deliveryAddressId);
+
+                if (deliveryAddress)
+                {
+                    state.deliveryAddressId = deliveryAddress.id;
+                    state.deliveryAddress = deliveryAddress;
+                    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
                 }
             }
         },
@@ -57,6 +76,7 @@ const mutations =
             {
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         },
 
@@ -72,6 +92,7 @@ const mutations =
                 {
                     state.billingAddress = null;
                     state.billingAddressId = null;
+                    document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
                 }
             }
         },
@@ -88,6 +109,7 @@ const mutations =
                 {
                     state.deliveryAddress = state.deliveryAddressList.find(address => address.id === -99);
                     state.deliveryAddressId = -99;
+                    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
                 }
             }
         },
@@ -105,6 +127,7 @@ const mutations =
                     state.billingAddressList.push(billingAddress);
                     state.billingAddressId = billingAddress.id;
                     state.billingAddress = billingAddress;
+                    document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
                 }
             }
         },
@@ -122,6 +145,7 @@ const mutations =
                     state.deliveryAddressList.push(deliveryAddress);
                     state.deliveryAddressId = deliveryAddress.id;
                     state.deliveryAddress = deliveryAddress;
+                    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
                 }
             }
         },
@@ -139,6 +163,7 @@ const mutations =
                 if (billingAddress.id === state.billingAddressId)
                 {
                     state.billingAddress = billingAddress;
+                    document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
                 }
             }
         },
@@ -156,6 +181,7 @@ const mutations =
                 if (deliveryAddress.id === state.deliveryAddressId)
                 {
                     state.deliveryAddress = deliveryAddress;
+                    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
                 }
 
             }
@@ -168,12 +194,14 @@ const mutations =
                 state.billingAddress = null;
                 state.billingAddressId = null;
                 state.billingAddressList = [];
+                document.dispatchEvent(new CustomEvent("billingAddressChanged", null));
             }
             else if (addressType === "2")
             {
                 state.deliveryAddressList = [{id: -99}];
                 state.deliveryAddress = state.deliveryAddressList[0];
                 state.deliveryAddressId = state.deliveryAddressList[0].id;
+                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         }
     };
@@ -192,7 +220,7 @@ const actions =
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
         },
 
-        selectAddress({commit, state}, {selectedAddress, addressType})
+        selectAddress({commit, state, rootState, dispatch}, {selectedAddress, addressType})
         {
             return new Promise((resolve, reject) =>
             {
@@ -209,29 +237,39 @@ const actions =
                     commit("selectDeliveryAddress", selectedAddress);
                 }
 
-                commit("setIsBasketLoading", true);
-
-                ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
-                    .done(response =>
+                dispatch("checkAddressChangeValidity", {selectedAddress, addressType}).then(isAddressChangedAllowed =>
+                {
+                    if (!isAddressChangedAllowed)
                     {
-                        commit("setIsBasketLoading", false);
-
-                        return resolve(response);
-                    })
-                    .fail(error =>
+                        commit("selectDeliveryAddress", oldAddress);
+                        NotificationService.error(TranslationService.translate("Ceres::Template.addressSelectedNotAllowed"));
+                    }
+                    else
                     {
-                        if (addressType === "1")
-                        {
-                            commit("selectBillingAddress", oldAddress);
-                        }
-                        else if (addressType === "2")
-                        {
-                            commit("selectDeliveryAddress", oldAddress);
-                        }
+                        commit("setIsBasketLoading", true);
 
-                        commit("setIsBasketLoading", false);
-                        reject(error);
-                    });
+                        ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
+                            .done(response =>
+                            {
+                                commit("setIsBasketLoading", false);
+                                return resolve(response);
+                            })
+                            .fail(error =>
+                            {
+                                if (addressType === "1")
+                                {
+                                    commit("selectBillingAddress", oldAddress);
+                                }
+                                else if (addressType === "2")
+                                {
+                                    commit("selectDeliveryAddress", oldAddress);
+                                }
+
+                                commit("setIsBasketLoading", false);
+                                reject(error);
+                            });
+                    }
+                });
             });
         },
 
@@ -279,7 +317,7 @@ const actions =
             });
         },
 
-        createAddress({commit}, {address, addressType})
+        createAddress({commit, dispatch}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
             {
@@ -293,6 +331,13 @@ const actions =
                         else if (addressType === "2")
                         {
                             commit("addDeliveryAddress", {deliveryAddress: response});
+
+                            // setTimeout 0 is required to prevent unactual data in the store before checking the validity of the shipping profile
+                            setTimeout(() =>
+                            {
+                                dispatch("checkAddressChangeValidity", {selectedAddress: response, addressType});
+                            }, 0);
+
                         }
 
                         resolve(response);
@@ -304,7 +349,7 @@ const actions =
             });
         },
 
-        updateAddress({commit}, {address, addressType})
+        updateAddress({commit, dispatch}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
             {
@@ -325,6 +370,8 @@ const actions =
                         else if (addressType === "2")
                         {
                             commit("updateDeliveryAddress", address);
+
+                            dispatch("checkAddressChangeValidity", {selectedAddress: response.data, addressType});
                         }
 
                         resolve(response);
@@ -334,6 +381,47 @@ const actions =
                         reject(error);
                     });
             });
+        },
+
+        checkAddressChangeValidity({commit, state, rootState, dispatch}, {selectedAddress, addressType})
+        {
+            const shippingProfileList = rootState.checkout.shipping.shippingProfileList;
+            const selectedShippingProfile = rootState.checkout.shipping.selectedShippingProfile;
+            const isPostOfficeAndParcelBoxActive = selectedShippingProfile.isPostOffice && selectedShippingProfile.isParcelBox;
+            const isAddressPostOffice = selectedAddress.address1 === "POSTFILIALE";
+            const isAddressParcelBox = selectedAddress.address1 === "PACKSTATION";
+
+            if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
+            {
+                const isUnsupportedPostOffice = isAddressPostOffice && !selectedShippingProfile.isPostOffice;
+                const isUnsupportedParcelBox = isAddressParcelBox && !selectedShippingProfile.isParcelBox;
+
+                if (isUnsupportedPostOffice || isUnsupportedParcelBox)
+                {
+                    let profileToSelect;
+
+                    if (isUnsupportedPostOffice)
+                    {
+                        profileToSelect = shippingProfileList.find(shipping => shipping.isPostOffice);
+                    }
+                    else
+                    {
+                        profileToSelect = shippingProfileList.find(shipping => shipping.isParcelBox);
+                    }
+
+                    if (profileToSelect)
+                    {
+                        dispatch("selectShippingProfile", profileToSelect);
+                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressShippingChangedWarning"));
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     };
 

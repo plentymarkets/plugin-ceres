@@ -1,14 +1,15 @@
 {
   "name": "Ceres",
   "license": "AGPL-3.0",
-  "version": "2.12.0",
+  "version": "2.16.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
   },
   "scripts": {
-    "build": "gulp",
-    "bundleSass": "gulp copy:sass-vendor && node bundleSass.js"
+    "build": "gulp && npm run collectWidgets",
+    "bundleSass": "gulp copy:sass-vendor && node bundleSass.js",
+    "collectWidgets": "node tools/collectWidgets.js"
   },
   "devDependencies": {
     "autoprefixer": "^8.3.0",
@@ -50,16 +51,15 @@
     "bootstrap": "v4.0.0-alpha.3",
     "custom-event-polyfill": "^0.3.0",
     "detect-browser": "^2.3.0",
-    "devbridge-autocomplete": "^1.4.7",
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.6.3",
     "jquery": "^3.3.1",
     "lightbox2": "^2.10.0",
+    "lodash": "^4.17.11",
     "moment": "^2.22.1",
     "owl.carousel": "2.2.0",
     "popper.js": "^1.14.3",
     "sticky-kit": "^1.1.3",
-    "tether": "^1.4.4",
     "vue": "^2.5.16",
     "vue-script2": "^2.0.1",
     "vuex": "^3.0.1"

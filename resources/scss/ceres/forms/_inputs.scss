@@ -255,3 +255,27 @@ $border-width: 1px;
         background-color: initial !important;
     }
 }
+
+.form-check-label {
+  transition: all .3s ease;
+
+  &.error {
+    background: $brand-danger !important;
+    color: $white !important;
+    border-radius: .1rem;
+    transition: all .3s ease;
+    padding: .5em 1.75rem;
+
+    a {
+      color: $white;
+      &:hover {
+        color: $gray-lighter2;
+      }
+    }
+
+    & .text-muted {
+      color: $white !important;
+    }
+  }
+}
+

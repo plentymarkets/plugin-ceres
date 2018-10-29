@@ -8,8 +8,11 @@ import itemList from "store/modules/ItemListModule";
 import item from "store/modules/SingleItemModule";
 import basket from "store/modules/BasketModule";
 import orderReturn from "store/modules/OrderReturnModule";
+import lastSeen from "store/modules/LastSeenModule";
+import eventPropagation from "store/plugins/EventPropagationPlugin";
 
 Vue.use(require("vue-script2"));
+Vue.options.delimiters = ["${", "}"];
 
 // eslint-disable-next-line
 const store = new Vuex.Store(
@@ -25,8 +28,11 @@ const store = new Vuex.Store(
             itemList,
             item,
             basket,
-            orderReturn
-        }
+            orderReturn,
+            lastSeen
+        },
+
+        plugins: [eventPropagation]
     });
 
 window.ceresStore = store;

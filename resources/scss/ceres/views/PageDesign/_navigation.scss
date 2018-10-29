@@ -301,7 +301,6 @@ nav.navbar.megamenu {
 
 						>li {
 							display 	 : inline-block;
-							break-inside : avoid;
 							width 	 	 : 100%; 
 
 							&.level1 { 
@@ -316,7 +315,8 @@ nav.navbar.megamenu {
 								background : $megamenu-bg; 
 							}
 							 .level2 { 
-							 	padding : .25em 0!important; 
+								 padding : .25em 0!important; 
+								 break-inside: avoid;
 							 }
 							 .level3 { 
 							 	padding : 0 1em .25em 1.4em !important; 

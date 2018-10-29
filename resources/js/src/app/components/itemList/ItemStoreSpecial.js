@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
@@ -28,21 +30,36 @@ Vue.component("item-store-special", {
 
     created()
     {
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+
+        if (!isNullOrUndefined(this.storeSpecial))
+        {
+            this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+        }
+        else
+        {
+            this.tagClass = this.tagClasses.default;
+        }
+
         this.label = this.getLabel();
     },
 
     methods: {
         getLabel()
         {
-            if (this.storeSpecial.id === 1 && this.recommendedRetailPrice)
+            if (isNullOrUndefined(this.storeSpecial))
             {
-                const percent = this.getPercentageSale();
-
-                if (parseInt(percent) < 0)
+                if (isNullOrUndefined(this.recommendedRetailPrice))
                 {
-                    return percent + "%";
+                    return "";
                 }
+
+                return this.getPercentageSale();
+
+            }
+
+            if (this.storeSpecial.id === 1 && !isNullOrUndefined(this.recommendedRetailPrice))
+            {
+                return this.getPercentageSale();
             }
 
             return this.storeSpecial.names.name;
@@ -53,7 +70,12 @@ Vue.component("item-store-special", {
             // eslint-disable-next-line
             let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value ) * -100;
 
-            return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator);
+            if (percent < 0)
+            {
+                return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
+            }
+
+            return "";
         }
     }
 });

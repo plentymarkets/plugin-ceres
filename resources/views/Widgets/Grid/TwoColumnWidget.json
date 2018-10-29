@@ -1,0 +1,39 @@
+{
+    "identifier": "Ceres::TwoColumnWidget",
+    "label": "Widget.gridTwoColumnLabel",
+    "previewImageURL": "/images/widgets/grid-2-col.svg",
+    "type": "structure",
+    "position": 100,
+    "allowedNestingTypes": [
+        "default"
+    ],
+    "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
+    "settings": {
+        "layout": {
+            "type": "selectBox",
+            "required": true,
+            "label": "Widget.gridTwoColumnLayoutLabel",
+            "options": {
+                "tooltip": "Widget.gridTwoColumnLayoutTooltip",
+                "defaultValue": "oneToOne",
+                "selectBoxValues": [
+                    {
+                        "value": "oneToOne",
+                        "caption": "Widget.gridTwoColumnLayoutOneToOne",
+                        "position": 0
+                    },
+                    {
+                        "value": "twoToOne",
+                        "caption": "Widget.gridTwoColumnLayoutTwoToOne",
+                        "position": 1
+                    },
+                    {
+                        "value": "oneToTwo",
+                        "caption": "Widget.gridTwoColumnLayoutOneToTwo",
+                        "position": 2
+                    }
+                ]
+            }
+        }
+    }
+}

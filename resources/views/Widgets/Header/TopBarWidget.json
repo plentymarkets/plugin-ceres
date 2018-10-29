@@ -1,0 +1,142 @@
+{
+    "identifier": "Ceres::TopBarWidget",
+    "label": "Widget.topBarLabel",
+    "previewImageURL": "/images/widgets/top-bar.svg",
+    "type": "header",
+    "position": 0,
+    "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",
+    "settings": {
+        "isFixed": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarIsFixedLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "searchStyle": {
+            "type": "selectBox",
+            "required": true,
+            "label": "Widget.topBarSearchStyleLabel",
+            "options": {
+                "tooltip": "Widget.topBarSearchStyleTooltip",
+                "defaultValue": "onDemand",
+                "selectBoxValues": [
+                    {
+                        "value": "hidden",
+                        "caption": "Widget.topBarSearchStyleHidden",
+                        "position": 0
+                    },
+                    {
+                        "value": "onDemand",
+                        "caption": "Widget.topBarSearchStyleOnDemand",
+                        "position": 0
+                    },
+                    {
+                        "value": "permanent",
+                        "caption": "Widget.topBarSearchStylePermanent",
+                        "position": 0
+                    }
+                ]
+            }
+        },
+        "showItemImages": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarShowItemImagesLabel",
+            "options": {
+                "defaultValue": false
+            }
+        },
+        "forwardToSingleItem": {
+            "type": "checkBox",
+            "required": false,
+            "label": "Widget.topBarForwardToSingleItemLabel",
+            "options": {
+                "defaultValue": false
+            }
+        },
+        "enableLogin": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableLoginLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "enableRegistration": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableRegistrationLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "enableLanguageSelect": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableLanguageSelectLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "enableShippingCountrySelect": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableShippingCountrySelectLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "enableCurrencySelect": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableCurrencySelectLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "enableWishList": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableWishListLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "enableBasketPreview": {
+            "type": "checkBox",
+            "required": true,
+            "label": "Widget.topBarEnableBasketPreviewLabel",
+            "options": {
+                "defaultValue": true
+            }
+        },
+        "basketValues": {
+            "type": "selectBox",
+            "required": true,
+            "label": "Widget.topBarBasketValuesLabel",
+            "options": {
+                "tooltip": "Widget.topBarBasketValuesTooltip",
+                "defaultValue": "sum",
+                "selectBoxValues": [
+                    {
+                        "value": "sum",
+                        "caption": "Widget.topBarBasketValuesSum",
+                        "position": 0
+                    },
+                    {
+                        "value": "quantity",
+                        "caption": "Widget.topBarBasketValuesQuantity",
+                        "position": 0
+                    },
+                    {
+                        "value": "both",
+                        "caption": "Widget.topBarBasketValuesBoth",
+                        "position": 0
+                    }
+                ]
+            }
+        }
+    }
+}

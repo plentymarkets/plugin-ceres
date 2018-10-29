@@ -1,6 +1,7 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
 import {navigateTo}from "services/UrlService";
+import {isNullOrUndefined}from "../../helper/utils";
 
 const NotificationService = require("services/NotificationService");
 
@@ -15,7 +16,6 @@ Vue.component("add-to-basket", {
             type: String,
             default: "#vue-add-to-basket"
         },
-        item: Object,
         itemUrl: String,
         showQuantity:
         {
@@ -36,41 +36,56 @@ Vue.component("add-to-basket", {
         {
             type: Boolean,
             default: true
+        },
+
+        variationId:
+        {
+            type: Number
+        },
+        isSalable:
+        {
+            // = isSalable && !hasChildren
+            type: Boolean,
+            default: false
+        },
+        intervalQuantity:
+        {
+            type: Number,
+            default: 1
+        },
+        minimumQuantity:
+        {
+            type: Number,
+            default: 0
+        },
+        maximumQuantity:
+        {
+            type: Number,
+            default: null
+        },
+        orderProperties:
+        {
+            type: Array,
+            default: () => []
         }
     },
     computed:
     {
-        hasChildren()
+        computedMinimumQuantity()
         {
-            return this.item.filter && this.item.filter.hasChildren;
+            return this.minimumQuantity <= 0 ? this.intervalQuantity : this.minimumQuantity;
         },
-
         canBeAddedToBasket()
         {
-            const isSalable             = this.item.filter && this.item.filter.isSalable;
-            const hasChildren           = this.item.filter && this.item.filter.hasChildren;
-            const intervalQuantity      = this.item.variation.intervalOrderQuantity || 1;
-            const minimumOrderQuantity  = this.item.variation.minimumOrderQuantity || intervalQuantity;
-            const requiresProperties    = !this.requiresProperties;
-
-            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity && requiresProperties;
-        },
-
-        variationId()
-        {
-            return this.item.variation.id;
+            return this.isSalable &&
+                (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) &&
+                !this.requiresProperties;
         },
 
         requiresProperties()
         {
-            if (App.config.item.requireOrderProperties && this.item.properties)
-            {
-                const availableProperties = this.item.properties.filter(property => property.property.isShownOnItemPage);
-
-                return !!availableProperties.length;
-            }
-
-            return false;
+            return App.config.item.requireOrderProperties &&
+                this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0;
         },
 
         ...Vuex.mapState({
@@ -101,7 +116,7 @@ Vue.component("add-to-basket", {
                 this.showMissingPropertiesError();
             }
 
-            else if (this.item.filter.isSalable)
+            else if (this.isSalable)
             {
                 this.waiting = true;
 
@@ -109,15 +124,19 @@ Vue.component("add-to-basket", {
                     {
                         variationId             :   this.variationId,
                         quantity                :   this.quantity,
-                        basketItemOrderParams   :   this.item.properties
+                        basketItemOrderParams   :   this.orderProperties
                     };
 
                 this.$store.dispatch("addBasketItem", basketObject).then(
                     response =>
                     {
+                        const basketItem = response.find(item => item.variationId === this.variationId);
+                        const variation = !isNullOrUndefined(basketItem) ? basketItem.variation.data : null;
+                        const orderParams = !isNullOrUndefined(basketObject) ? basketObject.basketItemOrderParams : null;
+
                         document.dispatchEvent(new CustomEvent("afterBasketItemAdded", {detail: basketObject}));
                         this.waiting = false;
-                        this.openAddToBasketOverlay(basketObject.quantity);
+                        this.openAddToBasketOverlay(basketObject.quantity, variation, orderParams);
                     },
                     error =>
                     {
@@ -162,12 +181,13 @@ Vue.component("add-to-basket", {
         /**
          * open the AddItemToBasketOverlay
          */
-        openAddToBasketOverlay(stashedQuantity)
+        openAddToBasketOverlay(stashedQuantity, item, orderParams)
         {
             const latestBasketEntry =
                 {
-                    item: this.item,
-                    quantity: stashedQuantity
+                    item: item,
+                    quantity: stashedQuantity,
+                    orderParams: orderParams
                 };
 
             this.$store.commit("setLatestBasketEntry", latestBasketEntry);

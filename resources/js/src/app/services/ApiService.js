@@ -102,17 +102,23 @@ module.exports = (function($)
 
         url = normalizeUrl(url);
         config = config || {};
-        config.data = data || null;
         config.dataType = config.dataType || "json";
         config.contentType = typeof config.contentType !== "undefined" ? config.contentType : "application/x-www-form-urlencoded; charset=UTF-8";
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
         config.keepOriginalResponse = !!config.keepOriginalResponse;
 
+        if (data)
+        {
+            data.templateEvent = App.templateEvent;
+            config.data = data;
+        }
+
         if (!config.doInBackground)
         {
             WaitScreenService.showWaitScreen();
         }
+
         $.ajax(url, config)
             .done(function(response)
             {

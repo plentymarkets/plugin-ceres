@@ -33,9 +33,12 @@
 	}
 
 	& .item-bundle {
-		width: 300px;
 		font-weight: 700;
 		font-size: 80%;
+
+		@include media-breakpoint-up(md) {
+			width: 300px;
+		}
 	}
 
 	&.basket-large {
@@ -89,6 +92,8 @@
 					.item-name {
 						font-weight: 700;
 						font-size: 80%;
+						overflow-wrap: break-word;
+    					word-wrap: break-word;
 					}
 		
 					.item-base-price {
@@ -104,10 +109,17 @@
 
 		.basket-item-container-right {
 			margin-left: auto;
-			display: flex;
+
+			@include media-breakpoint-up(md) {
+				display: flex;
+			}
 
 			.qty-box-container {
 				margin: 0 10px;
+
+				@include media-breakpoint-down(sm) {
+					margin: 0 0 5px 27px; 
+				}
 			}
 
 			.price-box {
@@ -168,8 +180,10 @@
 							font-size: 75%;
 							font-weight: normal;
 						}
-						&:after {
-							content: ':';
+						&.colon {
+							&:after {
+								content: ':';
+							}
 						}
 					}
 				}

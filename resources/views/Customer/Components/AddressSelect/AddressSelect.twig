@@ -12,7 +12,7 @@
 
                     <div class="item-inner" v-bind:class="{'error': showError}">
                         <span v-if="selectedAddress && selectedAddress.id == -99">
-                            <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }} -</p>
+                            <p class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                         </span>
                         <span v-else class="item-content">
                             <div v-if="!isAddressListEmpty && selectedAddress">
@@ -25,17 +25,17 @@
                             </div>
 
                             <p v-if="!isAddressListEmpty && !selectedAddress"
-                            class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressPleaseSelect") }}
-                                -</p>
+                            class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressPleaseSelect") }}
+                                </p>
                             <p v-if="isAddressListEmpty"
-                            class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressNoAddress") }}
-                                -</p>
+                            class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressNoAddress") }}
+                                </p>
                         </span>
                     </div>
                 </div>
 
                 <div class="add-item">
-                    <button href="#" class="btn btn-primary btn-medium btn-only-icon-xs-down" v-if="isAddAddressEnabled" @click.prevent="showAddModal" :disabled="isBasketLoading">
+                    <button href="#" class="btn btn-primary btn-medium btn-only-icon-xs-down" v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading">
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
                         <span>{{ trans("Ceres::Template.addressAddAddress") }}</span>
                     </button>
@@ -54,8 +54,8 @@
                             >
                             <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
                             <span v-if="address.id == -99">
-                                <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }}
-                                    -</p>
+                                <p class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressSameAsInvoice") }}
+                                    </p>
                             </span>
                                 <span v-else class="item-content small">
                                 <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>

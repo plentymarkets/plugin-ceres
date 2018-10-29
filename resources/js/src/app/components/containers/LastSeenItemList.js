@@ -1,60 +1,37 @@
-import {isDefined}from "../../helper/utils";
-const ApiService = require("services/ApiService");
-
 Vue.component("last-seen-item-list", {
 
-    props: {
-        template: {
+    props:
+    {
+        template:
+        {
             type: String,
             default: "#vue-last-seen-item-list"
         },
-        variationId: Number
+
+        maxItems:
+        {
+            type: Number,
+            default: App.config.itemLists.lastSeenNumber || 4
+        },
+
+        itemsPerPage:
+        {
+            type: Number,
+            default: 4
+        }
     },
 
-    data()
-    {
-        return {
-            items: []
-        };
-    },
+    computed: Vuex.mapState({
+        items: state => state.lastSeen.lastSeenItems
+    }),
 
     created()
     {
         this.$options.template = this.template;
-
-        if (this.variationId > 0)
-        {
-            this.setLastSeenItem();
-        }
-        else
-        {
-            this.getLastSeenItems();
-        }
     },
 
-    methods:
+    beforeMount()
     {
-        getLastSeenItems()
-        {
-            const params = {items: App.config.itemLists.lastSeenNumber};
-
-            ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
-                .done(response =>
-                {
-                    if (isDefined(response.data))
-                    {
-                        this.items = response.data.documents;
-                    }
-                });
-        },
-
-        setLastSeenItem()
-        {
-            ApiService.put("/rest/io/item/last_seen/" + this.variationId)
-                .done(response =>
-                {
-                    this.items = response.documents;
-                });
-        }
+        this.$store.dispatch("getLastSeenItems", this.maxItems);
     }
 });
