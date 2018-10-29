@@ -452,9 +452,9 @@
             "multiple"      : false
         },
         {
-            "key"           : "OrderConfirmation.AddContentAfterConfirmationText",
-            "name"          : "Order confirmation: Additional Content after Confirmation Message",
-            "description"   : "Additional Content after Confirmation Message on the order confirmation page.",
+            "key"           : "OrderConfirmation.AddContentAfterConfirmationThanks",
+            "name"          : "Order confirmation: Additional content after confirmation thanks",
+            "description"   : "Additional Content after confirmation message on the order confirmation page.",
             "multiple"      : false
         },
         {
