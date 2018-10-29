@@ -12,7 +12,6 @@
     {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
 
     {% set overrideConfirmation = LayoutContainer.show("Ceres::OrderConfirmation.Override") %}
-    {% set addContentAfterConfirmationThanks = LayoutContainer.show("Ceres::OrderConfirmation.AddContentAfterConfirmationThanks", data) %}
     {% set addContentAfterOrderDetailsRow = LayoutContainer.show("Ceres::OrderConfirmation.AddContentAfterOrderDetailsRow") %}
 
     {% if overrideConfirmation|trim is empty %}
@@ -22,7 +21,7 @@
                     <h1 class="h2">{{ trans("Ceres::Template.orderConfirmationThanks") }}</h1>
                     <p>{{ trans("Ceres::Template.orderConfirmationWillBeProcessed") }}</p>
 
-                      {{ addContentAfterConfirmationThanks }}
+                    {% LayoutContainer.show("Ceres::OrderConfirmation.AddContentAfterConfirmationThanks", data) %}
 
                 </div>
             </div>
