@@ -107,6 +107,10 @@ body.menu-is-visible {
 		padding 	: 0;
 		position 	: relative;
 
+		&:empty {
+			min-height: calc(#{ $line-height-base }rem + 1.3rem * 2);
+		}
+
 		li 	{
 			width : 100%;
 			cursor: pointer;
