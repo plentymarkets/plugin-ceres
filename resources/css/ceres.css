@@ -15431,6 +15431,10 @@ body.menu-is-visible {
   position: relative;
 }
 
+#mainNavbarCollapsable ul.mainmenu:empty {
+  min-height: 4.1rem;
+}
+
 #mainNavbarCollapsable ul.mainmenu li {
   width: 100%;
   cursor: pointer;
