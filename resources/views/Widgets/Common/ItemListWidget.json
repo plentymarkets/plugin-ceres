@@ -4,10 +4,6 @@
     "previewImageURL": "/images/widgets/item-list.svg",
     "type": "default",
     "position": 700,
-    "allowedNestingTypes": [
-        "default",
-        "structure"
-    ],
     "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
     "settings": {
         "appearance": {

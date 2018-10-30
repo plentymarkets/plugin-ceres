@@ -21964,10 +21964,12 @@ Vue.component("variation-select", {
                 });
 
                 if (!!preselectedVariation && preselectedVariation.length === 1) {
+                    var _attributes = _this.attributes;
+
                     // set attributes of preselected variation
                     _this.setAttributes(preselectedVariation[0]);
 
-                    if (_this.unitPreselect > 0) {
+                    if (preselectedVariation[0].attributes.length > 0 && _this.unitPreselect > 0 || _attributes.length === 0) {
                         var possibleVariations = _this.filterVariations(_this.selectedAttributes);
 
                         if (possibleVariations.length > 1) {
@@ -23897,7 +23899,7 @@ Vue.component("newsletter-input", {
 
             this.isDisabled = true;
 
-            _ValidationService2.default.validate($("#newsletter-input-form")).done(function () {
+            _ValidationService2.default.validate($("#newsletter-input-form_" + this._uid)).done(function () {
                 _this.save();
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
@@ -26450,9 +26452,6 @@ exports.default = { autoFocus: autoFocus, triggerAutoFocus: triggerAutoFocus };
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 exports.updateCategoryHtml = updateCategoryHtml;
 
 var _index = require("../store/index");
@@ -26509,10 +26508,10 @@ function _handleCurrentCategory() {
 }
 
 function _removeTempDesc() {
-    var tempDesc = document.querySelector("#category-description-container");
+    var tempDesc = document.querySelectorAll("[data-category-description]");
 
     if (tempDesc) {
-        tempDesc.innerHTML = "";
+        _setDescriptions(tempDesc, "");
     }
 }
 
@@ -26542,14 +26541,49 @@ function _loadOptionalData(currentCategory) {
         }
     }
 
-    var categoryDescContainer = document.querySelector("#category-description-container");
+    var categoryDesc1Container = document.querySelectorAll("[data-category-description=\"1\"]");
+    var categoryDesc2Container = document.querySelectorAll("[data-category-description=\"2\"]");
 
-    if (categoryDescContainer) {
-        ApiService.get("/rest/io/category/description/" + currentCategory.id).done(function (response) {
-            if ((typeof response === "undefined" ? "undefined" : _typeof(response)) !== "object") {
-                categoryDescContainer.innerHTML = response;
+    var getCategoryDescription1 = categoryDesc1Container.length > 0 ? 1 : 0;
+    var getCategoryDescription2 = categoryDesc2Container.length > 0 ? 1 : 0;
+
+    if (getCategoryDescription1 || getCategoryDescription2) {
+        ApiService.get("/rest/io/category/description/" + currentCategory.id, { description1: getCategoryDescription1, description2: getCategoryDescription2 }).done(function (response) {
+            if (response.description1) {
+                _setDescriptions(categoryDesc1Container, response.description1);
+            }
+
+            if (response.description2) {
+                _setDescriptions(categoryDesc2Container, response.description2);
             }
         });
+    }
+}
+
+function _setDescriptions(elements, description) {
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var element = _step.value;
+
+            element.innerHTML = description;
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
     }
 }
 

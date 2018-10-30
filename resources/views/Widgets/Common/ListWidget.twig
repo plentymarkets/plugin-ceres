@@ -1,17 +1,25 @@
-{% set hasPlaceholder = widget.settings.texts | length <= 0 %}
+{% set icon          = widget.settings.icon.mobile %}
+{% set listEntries   = widget.settings.texts.mobile %}
+{% set renderContent = false %}
 
-<div class="widget widget-list{% if hasPlaceholder %} widget-placeholder{% endif %}">
-    <div class="widget-inner">
-        <ul class="list-container">
-            {% for entry in widget.settings.texts.mobile %}
-                <li>
-                    {% if widget.settings.icon.mobile != "none" %}
-                        <i class="fa {{ widget.settings.icon.mobile }}" aria-hidden="true"></i>
-                    {% endif %}
+{% for entry in listEntries if entry is not empty %}
+    {% set renderContent = true %}
+{% endfor %}
 
-                    {{ entry }}
-                </li>
-            {% endfor %}
-        </ul>
+{% if renderContent %}
+    <div class="widget widget-list">
+        <div class="widget-inner">
+            <ul class="list-container">
+                {% for entry in listEntries %}
+                    <li>
+                        {% if icon != "none" %}
+                            <i class="fa {{ icon }}" aria-hidden="true"></i>
+                        {% endif %}
+
+                        {{ entry }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-</div>
+{% endif %}
