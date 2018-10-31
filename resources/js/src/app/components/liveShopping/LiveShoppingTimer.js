@@ -27,7 +27,8 @@ Vue.component("live-shopping-timer", {
             days:"",
             minutes:"",
             hours:"",
-            seconds:""
+            seconds:"",
+            now: ""
         };
     },
 
@@ -55,6 +56,8 @@ Vue.component("live-shopping-timer", {
         {
             // Get todays date and time
             const now = Date.now();
+
+            this.now = now;
 
             // Find the distance between now an the count down date
             const distance = start - now;

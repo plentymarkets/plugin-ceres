@@ -1,10 +1,9 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set decimalCount = config("Ceres.item.storeSpecial") %}
-
 {% set title = widget.settings.title.mobile %}
-{% set subTitle = widget.settings.subTitle.mobile %}
-{% set liveShoppingSelection = widget.settings.liveShoppingSelection.mobile %}
+{% set description = widget.settings.description.mobile %}
+
+{{ Twig.set("liveShoppingData", Twig.call("services.liveShopping.getLiveShoppingData", [liveShoppingConfig.liveShoppingSelection, liveShoppingConfig.sorting])) }}
 
 <div class="widget widget-item-list">
     <div class="widget-inner">
@@ -15,18 +14,18 @@
                     <span class="h1">{{ title }}</span>
                 </div>
             {% endif %}
-            {% if subTitle is not empty %}
+            {% if description is not empty %}
                 <div class="col-xs-12 m-t-1">
-                    <p>{{ subTitle }}</p>
+                    <p>{{ description }}</p>
                 </div>
             {% endif %}
+
         </div>
 
         <div class="row clearfix">
-
-            {% if(item is not empty) %}
-                <category-item :item-data="{{ item.data | json_encode }}" decimal-count="{{ decimalCount }}" :live-shopping-data="{{ liveShoppingData | json_encode }}" image-url-accessor="urlMiddle"></category-item>
-            {% endif %}
+            {{ Twig.if("liveShoppingData.item is not empty") }}
+            <category-item :item-data="{{ Twig.print("liveShoppingData.item | json_encode") }}" decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}" :live-shopping-data="{{ Twig.print("liveShoppingData.liveShopping | json_encode") }}" :live-shopping-config="{{ liveShoppingConfig | json_encode }}" image-url-accessor="urlMiddle"></category-item>
+            {{ Twig.endif() }}
         </div>
 
     </div>

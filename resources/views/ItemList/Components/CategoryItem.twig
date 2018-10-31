@@ -56,8 +56,8 @@
                 </a>
                 <div class="thumb-meta">
                     <div class="prices">
-                        <div v-if="(liveShoppingData && liveShoppingData.settings.showCrossPrice && itemData.prices.specialOffer) || itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
-                            <del class="crossprice" v-if="liveShoppingData.settings.showCrossPrice && itemData.prices.specialOffer">
+                        <div v-if="(liveShoppingConfig && liveShoppingConfig.showCrossPrice && itemData.prices.specialOffer) || itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
+                            <del class="crossprice" v-if="liveShoppingConfig.showCrossPrice && itemData.prices.specialOffer">
                                 ${ itemData.prices.default.price.formatted }
                             </del>
                             <del class="crossprice" v-else>
