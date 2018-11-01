@@ -27,7 +27,12 @@ export function getUrlParams(urlParams)
 
 export function setUrlParams(urlParams)
 {
-    var pathName = isDefined(store.state.navigation.currentCategory) ? store.state.navigation.currentCategory.url : window.location.pathname;
+    var pathName =
+        isDefined(store.state.navigation.currentCategory) &&
+        isDefined(store.state.navigation.currentCategory.url) ?
+            store.state.navigation.currentCategory.url :
+            window.location.pathname;
+
     var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
