@@ -21482,6 +21482,20 @@ Vue.component("order-property-list-item", {
             waiting: false
         };
     },
+    mounted: function mounted() {
+        var _this = this;
+
+        document.addEventListener("onVariationChanged", function () {
+
+            if (_this.property.valueType !== "file") {
+                _this.inputValue = "";
+            } else {
+                _this.selectedFile = null;
+            }
+
+            _this.setVariationOrderProperty({ propertyId: _this.property.id, value: null });
+        });
+    },
 
 
     computed: _extends({
@@ -21507,11 +21521,11 @@ Vue.component("order-property-list-item", {
             return "";
         },
         hasError: function hasError() {
-            var _this = this;
+            var _this2 = this;
 
             if (this.variationMarkInvalidProperties && this.inputType === "radio") {
                 return this.variationMissingProperties.find(function (property) {
-                    return property.property.id === _this.property.id;
+                    return property.property.id === _this2.property.id;
                 });
             }
 
@@ -21582,7 +21596,7 @@ Vue.component("order-property-list-item", {
             }
         },
         uploadPropertyFile: function uploadPropertyFile(file) {
-            var _this2 = this;
+            var _this3 = this;
 
             this.setIsBasketLoading(true);
             this.waiting = true;
@@ -21592,13 +21606,13 @@ Vue.component("order-property-list-item", {
             fileData.append("fileData", file);
 
             ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
-                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
+                _this3.setVariationOrderProperty({ propertyId: _this3.property.id, value: response });
             }).fail(function (error) {
-                _this2.clearSelectedFile();
-                _this2._handleValidationErrors(error);
+                _this3.clearSelectedFile();
+                _this3._handleValidationErrors(error);
             }).always(function (response) {
-                _this2.setIsBasketLoading(false);
-                _this2.waiting = false;
+                _this3.setIsBasketLoading(false);
+                _this3.waiting = false;
             });
         },
         clearSelectedFile: function clearSelectedFile() {
