@@ -14084,6 +14084,14 @@ Custom classes
   top: 10rem;
 }
 
+html.safari .popper {
+  display: none;
+}
+
+html.safari .popper-visible {
+  display: block;
+}
+
 .popper {
   max-width: 276px;
   padding: 1px;
@@ -15634,6 +15642,7 @@ body.menu-is-visible {
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .level2 {
     padding: 0.25em 0 !important;
+    break-inside: avoid;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .level3 {
     padding: 0 1em .25em 1.4em !important;
@@ -20737,6 +20746,11 @@ body.menu-is-visible {
 .widget-item-list.widget-inverse .widget-caption {
   color: #fff;
   background-color: #4D4F4D;
+}
+
+.widget-legal-information a {
+  color: black;
+  margin-right: 10px;
 }
 
 .widget-title-bar .widget-inner {

@@ -16921,6 +16921,8 @@ function hasOwnProperty(obj, prop) {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _utils = require("../../helper/utils");
+
 var ModalService = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
@@ -17034,11 +17036,24 @@ Vue.component("add-item-to-basket-overlay", {
                     clearInterval(_this.timerVar);
                 }
             }, 1000);
+        },
+        orderParamValue: function orderParamValue(propertyId) {
+            var orderParams = this.latestBasketEntry.orderParams;
+
+            if ((0, _utils.isNullOrUndefined)(orderParams)) {
+                return "";
+            }
+
+            var orderParam = orderParams.find(function (param) {
+                return parseInt(param.property.id) === parseInt(propertyId);
+            });
+
+            return orderParam.property.value;
         }
     }
 });
 
-},{"services/ModalService":240}],119:[function(require,module,exports){
+},{"../../helper/utils":233,"services/ModalService":240}],119:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -17166,10 +17181,11 @@ Vue.component("add-to-basket", {
                         return item.variationId === _this.variationId;
                     });
                     var variation = !(0, _utils.isNullOrUndefined)(basketItem) ? basketItem.variation.data : null;
+                    var orderParams = !(0, _utils.isNullOrUndefined)(basketObject) ? basketObject.basketItemOrderParams : null;
 
                     document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
                     _this.waiting = false;
-                    _this.openAddToBasketOverlay(basketObject.quantity, variation);
+                    _this.openAddToBasketOverlay(basketObject.quantity, variation, orderParams);
                 }, function (error) {
                     _this.waiting = false;
 
@@ -17225,10 +17241,11 @@ Vue.component("add-to-basket", {
         /**
          * open the AddItemToBasketOverlay
          */
-        openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity, item) {
+        openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity, item, orderParams) {
             var latestBasketEntry = {
                 item: item,
-                quantity: stashedQuantity
+                quantity: stashedQuantity,
+                orderParams: orderParams
             };
 
             this.$store.commit("setLatestBasketEntry", latestBasketEntry);
@@ -21593,10 +21610,12 @@ Vue.component("variation-select", {
                 });
 
                 if (!!preselectedVariation && preselectedVariation.length === 1) {
+                    var _attributes = _this.attributes;
+
                     // set attributes of preselected variation
                     _this.setAttributes(preselectedVariation[0]);
 
-                    if (_this.unitPreselect > 0) {
+                    if (preselectedVariation[0].attributes.length > 0 && _this.unitPreselect > 0 || _attributes.length === 0) {
                         var possibleVariations = _this.filterVariations(_this.selectedAttributes);
 
                         if (possibleVariations.length > 1) {
@@ -23526,7 +23545,7 @@ Vue.component("newsletter-input", {
 
             this.isDisabled = true;
 
-            _ValidationService2.default.validate($("#newsletter-input-form")).done(function () {
+            _ValidationService2.default.validate($("#newsletter-input-form_" + this._uid)).done(function () {
                 _this.save();
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
@@ -24053,9 +24072,9 @@ Vue.component("shop-country-settings", {
         this.$store.commit("setShippingCountries", this.shippingCountries);
         this.$store.commit("setShippingCountryId", this.shippingCountryId);
 
-        ApiService.listen("LocalizationChanged", function (localizationData) {
-            _this.$store.commit("setShippingCountries", localizationData.activeShippingCountries);
-            _this.$store.commit("setShippingCountryId", localizationData.currentShippingCountryId);
+        ApiService.listen("LocalizationChanged", function (data) {
+            _this.$store.commit("setShippingCountries", data.localization.activeShippingCountries);
+            _this.$store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
         });
     }
 });

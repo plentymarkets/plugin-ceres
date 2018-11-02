@@ -63,10 +63,12 @@ Vue.component("variation-select", {
 
                 if (!!preselectedVariation && preselectedVariation.length === 1)
                 {
+                    const attributes = this.attributes;
+
                     // set attributes of preselected variation
                     this.setAttributes(preselectedVariation[0]);
 
-                    if (this.unitPreselect > 0)
+                    if ((preselectedVariation[0].attributes.length > 0 && this.unitPreselect > 0) || attributes.length === 0)
                     {
                         const possibleVariations = this.filterVariations(this.selectedAttributes);
 

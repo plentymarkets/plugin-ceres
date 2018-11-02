@@ -12278,6 +12278,16 @@ Custom classes
     right: .5rem;
     top: 10rem;
 }
+html.safari {
+	.popper {
+		display: none;
+	}
+
+	.popper-visible {
+		display: block;
+	}
+}
+
 .popper {
 	max-width: $popover-max-width;
     padding: $popover-inner-padding;
@@ -13989,7 +13999,9 @@ nav.navbar.megamenu {
 								background : $megamenu-bg; 
 							}
 							 .level2 { 
-							 	padding : .25em 0!important; 
+								 padding : .25em 0!important; 
+								 -webkit-column-break-inside: avoid; 
+								         break-inside: avoid;
 							 }
 							 .level3 { 
 							 	padding : 0 1em .25em 1.4em !important; 
@@ -19553,6 +19565,15 @@ nav.navbar.megamenu {
         @include widget-bg-variant($brand-inverse);
     }
 }
+.widget-legal-information
+{
+    a
+    {
+        color: black;
+	    margin-right: 10px;
+    }
+}
+
 .widget-title-bar
 {
     .widget-inner
