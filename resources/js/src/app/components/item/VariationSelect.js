@@ -1,5 +1,6 @@
 import {isNull}from "util";
 import {textWidth}from "../../helper/dom";
+import uniq from "lodash/uniq";
 
 const ApiService = require("services/ApiService");
 
@@ -263,10 +264,10 @@ Vue.component("variation-select", {
 
             if (possibleVariations.length > 0)
             {
-                possibleUnitIds = possibleVariations.map(variation =>
+                possibleUnitIds = uniq(possibleVariations.map(variation =>
                 {
                     return variation.unitCombinationId;
-                });
+                }));
             }
 
             if (possibleUnitIds.length > 1)
