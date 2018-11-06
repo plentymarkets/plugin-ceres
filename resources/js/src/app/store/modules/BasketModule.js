@@ -117,18 +117,18 @@ const actions =
                             NotificationService.error(
                                 TranslationService.translate("Ceres::Template.basketOops")
                             ).closeAfter(10000);
+                        }).always(data =>
+                        {
+                            setTimeout(() =>
+                            {
+                                $(document.body).trigger("sticky_kit:recalc");
+                            }, 0);
                         });
                 }).fail(error =>
                 {
                     NotificationService.error(
                         TranslationService.translate("Ceres::Template.basketOops")
                     ).closeAfter(10000);
-                }).always(data =>
-                {
-                    setTimeout(() =>
-                    {
-                        $(document.body).trigger("sticky_kit:recalc");
-                    }, 0);
                 });
 
             ApiService.listen("AfterBasketChanged", data =>
