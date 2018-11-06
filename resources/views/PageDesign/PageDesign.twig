@@ -275,10 +275,12 @@
                 });
             }
 
-            setTimeout(calculateBodyOffset(), 500);
+            setTimeout(function() 
+            {
+                calculateBodyOffset()
+                getUnfixedElements();
+            }, 500);
             
-            getUnfixedElements();
-
             $(window).scroll(scrollUnfixedElements);
 
             $(document).on('shopbuilder.after.ready', function()
