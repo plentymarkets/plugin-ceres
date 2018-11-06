@@ -228,8 +228,8 @@
             {
                 if ( header.classList.contains('pos-f-t'))
                 {
-                    console.log("Alter header:" + header);
-                    console.log("Neuer header:" + document.getElementById('page-header'));
+                    // Get current header with children
+                    var currentHeader = document.getElementById('page-header'); 
 
                     var bodyOffset = 0;
                     var children = header.children;
@@ -277,7 +277,8 @@
                 });
             }
 
-            calculateBodyOffset();
+            setTimeout(calculateBodyOffset(), 500);
+            
             getUnfixedElements();
 
             $(window).scroll(scrollUnfixedElements);
