@@ -50,7 +50,16 @@
             <!-- ./STORE SPECIALS -->
 
             <!-- ITEM DETAILS -->
-            <div class="thumb-content">
+            <live-shopping class="thumb-content" v-if="liveShoppingData" :item-data="itemData" :live-shopping-data="liveShoppingData">
+                <div slot="additional-price-info">
+                    * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
+                    <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
+                    {{ trans("Ceres::Template.itemExclusive") }}
+                    <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                </div>
+            </live-shopping>
+
+            <div class="thumb-content" v-else>
                 <a :href="itemData | itemURL" class="thumb-title small">
                     ${ itemData | itemName }
                 </a>
@@ -75,10 +84,6 @@
                         <span>${ itemData.unit.names.name }</span>
                         <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
                     </div>
-                </div>
-
-                <div v-if="liveShoppingData">
-                    <live-shopping-timer :start-time="liveShoppingData.fromTime" :end-time="liveShoppingData.toTime"></live-shopping-timer>
                 </div>
 
                 {{ AddToBasket.printVueComponent( "itemData" ) }}

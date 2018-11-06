@@ -107,12 +107,12 @@ const getters =
             return returnPrice || calculatedPrices.default;
         },
 
-        variationTotalPrice(state, getters, rootState, rootGetters)
-        {
-            const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
+        // variationTotalPrice(state, getters, rootState, rootGetters)
+        // {
+        //     const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-            return getters.variationPropertySurcharge + Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
-        },
+        //     return getters.variationPropertySurcharge + Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+        // },
 
         variationGroupedProperties(state)
         {

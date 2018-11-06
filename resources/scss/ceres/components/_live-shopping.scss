@@ -1,0 +1,93 @@
+$live-shopping-padding: 1rem .8rem;
+
+.live-shopping
+{
+    padding: 0 !important;
+
+    .live-shopping-countdown
+    {
+        padding: $live-shopping-padding;
+        padding-top: .6rem;
+        border-top-left-radius: .25rem;
+        border-top-right-radius: .25rem;
+
+        .live-shopping-countdown-heading
+        {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .live-shopping-countdown-thread-container
+        {
+            display: flex;
+
+            &:not(:last-child)
+            {
+                margin-bottom: .5rem;
+            }
+    
+            .live-shopping-countdown-thread
+            {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+
+                .test
+                {
+                    line-height: 1.1;
+                    font-size: 2rem;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .live-shopping-prices
+    {
+        padding: 0.5rem 1rem 0.8rem 1rem;
+
+        .live-shopping-prices-inner
+        {
+            display: flex;
+
+            .live-shopping-prices-container
+            {
+                margin-left: auto;
+    
+                .live-shopping-price
+                {
+                    line-height: 1.1;
+                    font-size: 2rem;
+                }
+            }
+        }
+
+        .live-shopping-prices-additional-info
+        {
+            font-size: $small-font-size;
+            font-weight: normal;
+            text-align: center;
+            margin-top: .25rem;
+        }
+    }
+    .live-shopping-progress
+    {
+        &:not(:last-child)
+        {
+            margin-bottom: .5rem;
+        }
+
+        .live-shopping-progress-heading
+        {
+            text-align: center;
+            margin-bottom: .5rem;
+        }
+    }
+}
+
+@for $i from 10 to -1 {
+    .progress-#{$i * 10}
+    {
+        background-color: mix($brand-success, $brand-danger, $i * 10);
+    }
+}

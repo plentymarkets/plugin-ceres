@@ -23,9 +23,11 @@
         </div>
 
         <div class="row clearfix">
-            {{ Twig.if("liveShoppingData.item is not empty") }}
-            <category-item :item-data="{{ Twig.print("liveShoppingData.item | json_encode") }}" decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}" :live-shopping-data="{{ Twig.print("liveShoppingData.liveShopping | json_encode") }}" :live-shopping-config="{{ liveShoppingConfig | json_encode }}" image-url-accessor="urlMiddle"></category-item>
-            {{ Twig.endif() }}
+            <div class="col-xs-12">
+                {{ Twig.if("liveShoppingData.item is not empty") }}
+                <category-item :item-data="{{ Twig.print("liveShoppingData.item | json_encode") }}" decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}" :live-shopping-data="{{ Twig.print("liveShoppingData.liveShopping | json_encode") }}" :live-shopping-config="{{ liveShoppingConfig | json_encode }}" image-url-accessor="urlMiddle"></category-item>
+                {{ Twig.endif() }}
+            </div>
         </div>
 
     </div>
