@@ -228,6 +228,9 @@
             {
                 if ( header.classList.contains('pos-f-t'))
                 {
+                    console.log("Alter header:" + header);
+                    console.log("Neuer header:" + document.getElementById('page-header'));
+
                     var bodyOffset = 0;
                     var children = header.children;
                     for( var i = 0; i < children.length; i++ )
