@@ -228,11 +228,9 @@
             {
                 if ( header.classList.contains('pos-f-t'))
                 {
-                    // Get current header with children
-                    var currentHeader = document.getElementById('page-header'); 
-
                     var bodyOffset = 0;
-                    var children = header.children;
+                    // Get current header with children
+                    var children = document.getElementById('page-header').children;
                     for( var i = 0; i < children.length; i++ )
                     {
                         bodyOffset += children[i].getBoundingClientRect().height;
