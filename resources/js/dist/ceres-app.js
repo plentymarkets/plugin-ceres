@@ -1,4 +1,55 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+exports.endianness = function () { return 'LE' };
+
+exports.hostname = function () {
+    if (typeof location !== 'undefined') {
+        return location.hostname
+    }
+    else return '';
+};
+
+exports.loadavg = function () { return [] };
+
+exports.uptime = function () { return 0 };
+
+exports.freemem = function () {
+    return Number.MAX_VALUE;
+};
+
+exports.totalmem = function () {
+    return Number.MAX_VALUE;
+};
+
+exports.cpus = function () { return [] };
+
+exports.type = function () { return 'Browser' };
+
+exports.release = function () {
+    if (typeof navigator !== 'undefined') {
+        return navigator.appVersion;
+    }
+    return '';
+};
+
+exports.networkInterfaces
+= exports.getNetworkInterfaces
+= function () { return {} };
+
+exports.arch = function () { return 'javascript' };
+
+exports.platform = function () { return 'browser' };
+
+exports.tmpdir = exports.tmpDir = function () {
+    return '/tmp';
+};
+
+exports.EOL = '\n';
+
+exports.homedir = function () {
+	return '/'
+};
+
+},{}],2:[function(require,module,exports){
 (function (process){
 function detect() {
   var nodeVersion = getNodeVersion();
@@ -137,32 +188,7 @@ module.exports = {
 
 }).call(this,require('_process'))
 
-},{"_process":129,"os":127}],2:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-},{}],3:[function(require,module,exports){
+},{"_process":128,"os":1}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -12874,14 +12900,6 @@ var freeProcess = moduleExports && freeGlobal.process;
 /** Used to access faster Node.js helpers. */
 var nodeUtil = (function() {
   try {
-    // Use `util.types` for Node.js 10+.
-    var types = freeModule && freeModule.require && freeModule.require('util').types;
-
-    if (types) {
-      return types;
-    }
-
-    // Legacy `process.binding('util')` for Node.js < 10.
     return freeProcess && freeProcess.binding && freeProcess.binding('util');
   } catch (e) {}
 }());
@@ -13758,57 +13776,6 @@ function uniq(array) {
 module.exports = uniq;
 
 },{"./_baseUniq":43}],127:[function(require,module,exports){
-exports.endianness = function () { return 'LE' };
-
-exports.hostname = function () {
-    if (typeof location !== 'undefined') {
-        return location.hostname
-    }
-    else return '';
-};
-
-exports.loadavg = function () { return [] };
-
-exports.uptime = function () { return 0 };
-
-exports.freemem = function () {
-    return Number.MAX_VALUE;
-};
-
-exports.totalmem = function () {
-    return Number.MAX_VALUE;
-};
-
-exports.cpus = function () { return [] };
-
-exports.type = function () { return 'Browser' };
-
-exports.release = function () {
-    if (typeof navigator !== 'undefined') {
-        return navigator.appVersion;
-    }
-    return '';
-};
-
-exports.networkInterfaces
-= exports.getNetworkInterfaces
-= function () { return {} };
-
-exports.arch = function () { return 'javascript' };
-
-exports.platform = function () { return 'browser' };
-
-exports.tmpdir = exports.tmpDir = function () {
-    return '/tmp';
-};
-
-exports.EOL = '\n';
-
-exports.homedir = function () {
-	return '/'
-};
-
-},{}],128:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -16353,7 +16320,7 @@ return Popper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],129:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -16538,6 +16505,31 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 process.umask = function() { return 0; };
+
+},{}],129:[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
 
 },{}],130:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
@@ -17137,24 +17129,25 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./support/isBuffer":130,"_process":129,"inherits":2}],132:[function(require,module,exports){
+},{"./support/isBuffer":130,"_process":128,"inherits":129}],132:[function(require,module,exports){
 /*!
-  * vue-script2 v2.0.3
-  * (c) 2016-2018 Greg Slepak
+  * vue-script2 v2.0.1
+  * (c) 2016-2017 Greg Slepak
   * @license MIT License
   */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global.VueScript2 = factory());
-}(this, (function () { 'use strict';
+}(this, function () { 'use strict';
 
   var Script2 = {
     installed: false,
     p: Promise.resolve(),
-    version: '2.0.3', // grunt will overwrite to match package.json
+    version: '2.0.1', // grunt will overwrite to match package.json
     loaded: {}, // keys are the scripts that have been loaded
     install: function install(Vue) {
+      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
       if (Script2.installed) return;
       var customAttrs = ['unload'];
@@ -17166,11 +17159,9 @@ function hasOwnProperty(obj, prop) {
       Vue.component('script2', {
         props: props,
         // <slot> is important, see: http://vuejs.org/guide/components.html#Named-Slots
-        // template: '<div style="display:none"><slot></slot></div>',
-        // NOTE: Instead of using `template` we can use the `render` function like so:
-        render: function render(h) {
-          return h('div', { style: 'display:none' }, this.$slots.default);
-        },
+        template: '<div style="display:none"><slot></slot></div>',
+        // NOTE: I tried doing this with Vue 2's new render() function.
+        //       It was a nightmare and I never got it to work.
         mounted: function mounted() {
           var _this = this;
 
@@ -17178,10 +17169,8 @@ function hasOwnProperty(obj, prop) {
           if (!this.src) {
             Script2.p = Script2.p.then(function () {
               var s = document.createElement('script');
-              var h = _this.$el.innerHTML;
-              h = h.replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&amp;/gi, '&');
               s.type = 'text/javascript';
-              s.appendChild(document.createTextNode(h));
+              s.appendChild(document.createTextNode(_this.$el.innerHTML));
               parent.appendChild(s);
             });
           } else {
@@ -17197,9 +17186,7 @@ function hasOwnProperty(obj, prop) {
           // see: https://vuejs.org/v2/guide/migration.html#ready-replaced
           this.$nextTick(function () {
             // code that assumes this.$el is in-document
-            // NOTE: we could've done this.$el.remove(), but IE sucks, see:
-            //       https://github.com/taoeffect/vue-script2/pull/17
-            _this.$el.parentElement.removeChild(_this.$el); // remove dummy template <div>
+            _this.$el.remove(); // remove dummy template <div>
           });
         },
         destroyed: function destroyed() {
@@ -17212,7 +17199,7 @@ function hasOwnProperty(obj, prop) {
       Script2.installed = true;
     },
     load: function load(src) {
-      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { parent: document.head };
+      var opts = arguments.length <= 1 || arguments[1] === undefined ? { parent: document.head } : arguments[1];
 
       return Script2.loaded[src] ? Promise.resolve(src) : new Promise(function (resolve, reject) {
         var s = document.createElement('script');
@@ -17251,7 +17238,7 @@ function hasOwnProperty(obj, prop) {
     pick: function pick(o, props) {
       var x = {};
       props.forEach(function (k) {
-        x[k] = o[k];
+        return x[k] = o[k];
       });
       return x;
     },
@@ -17286,8 +17273,7 @@ function hasOwnProperty(obj, prop) {
 
   return Script2;
 
-})));
-
+}));
 },{}],133:[function(require,module,exports){
 "use strict";
 
@@ -24399,7 +24385,7 @@ Vue.component("popper", {
     }
 });
 
-},{"../../helper/dom":244,"../../helper/utils":248,"popper.js":128,"services/ModalService":255}],204:[function(require,module,exports){
+},{"../../helper/dom":244,"../../helper/utils":248,"popper.js":127,"services/ModalService":255}],204:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -24993,7 +24979,7 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
+var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
 
 exports.default = exceptionMap;
 
@@ -26187,7 +26173,7 @@ var init = function ($, window, document) {
     document.addEventListener("showShopNotification", showShopNotification);
 }(jQuery, window, document);
 
-},{"detect-browser":1,"services/AutoFocusService":252,"services/NotificationService":256}],250:[function(require,module,exports){
+},{"detect-browser":2,"services/AutoFocusService":252,"services/NotificationService":256}],250:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26386,8 +26372,8 @@ module.exports = function ($) {
             notification = NotificationService.success(response.success);
         }
 
-        if (response.warning && response.warning.message.length > 0) {
-            notification = NotificationService.warning(response.warning);
+        if (response.warn && response.warn.message.length > 0) {
+            notification = NotificationService.warn(response.warn);
         }
 
         if (response.info && response.info.message.length > 0) {
@@ -27964,8 +27950,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
@@ -28062,26 +28046,21 @@ var actions = {
         var commit = _ref3.commit,
             state = _ref3.state;
 
-        var basketPromise = _ApiService2.default.get("/rest/io/basket/");
-        var basketItemsPromise = _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" });
-
-        Promise.all([basketPromise, basketItemsPromise]).then(function (_ref4) {
-            var _ref5 = _slicedToArray(_ref4, 2),
-                basket = _ref5[0],
-                basketItems = _ref5[1];
-
+        _ApiService2.default.get("/rest/io/basket").done(function (basket) {
             commit("setBasket", basket);
-            commit("setBasketItems", basketItems);
             commit("setIsBasketInitiallyLoaded");
 
-            setTimeout(function () {
-                $(document.body).trigger("sticky_kit:recalc");
-            }, 0);
-        }, function (_ref6) {
-            var _ref7 = _slicedToArray(_ref6, 2),
-                basketError = _ref7[0],
-                basketItemsError = _ref7[1];
-
+            _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
+                commit("setBasketItems", basketItems);
+                commit("setIsBasketInitiallyLoaded");
+            }).fail(function (error) {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
+            }).always(function (data) {
+                setTimeout(function () {
+                    $(document.body).trigger("sticky_kit:recalc");
+                }, 0);
+            });
+        }).fail(function (error) {
             NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
         });
 
@@ -28091,10 +28070,10 @@ var actions = {
             commit("setBasketItems", data.basketItems);
         });
     },
-    addBasketNotification: function addBasketNotification(_ref8, _ref9) {
-        var commit = _ref8.commit;
-        var type = _ref9.type,
-            message = _ref9.message;
+    addBasketNotification: function addBasketNotification(_ref4, _ref5) {
+        var commit = _ref4.commit;
+        var type = _ref5.type,
+            message = _ref5.message;
 
         commit("addBasketNotification", { type: type, message: message });
 
@@ -28102,8 +28081,8 @@ var actions = {
             commit("clearOldestNotification");
         }, 5000);
     },
-    addBasketItem: function addBasketItem(_ref10, basketItem) {
-        var commit = _ref10.commit;
+    addBasketItem: function addBasketItem(_ref6, basketItem) {
+        var commit = _ref6.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -28119,10 +28098,10 @@ var actions = {
             });
         });
     },
-    updateBasketItemQuantity: function updateBasketItemQuantity(_ref11, _ref12) {
-        var commit = _ref11.commit;
-        var basketItem = _ref12.basketItem,
-            quantity = _ref12.quantity;
+    updateBasketItemQuantity: function updateBasketItemQuantity(_ref7, _ref8) {
+        var commit = _ref7.commit;
+        var basketItem = _ref8.basketItem,
+            quantity = _ref8.quantity;
 
         return new Promise(function (resolve, reject) {
             commit("updateBasketItemQuantity", { basketItem: basketItem, quantity: quantity });
@@ -28139,8 +28118,8 @@ var actions = {
             });
         });
     },
-    removeBasketItem: function removeBasketItem(_ref13, basketItemId) {
-        var commit = _ref13.commit;
+    removeBasketItem: function removeBasketItem(_ref9, basketItemId) {
+        var commit = _ref9.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -28159,9 +28138,9 @@ var actions = {
             });
         });
     },
-    redeemCouponCode: function redeemCouponCode(_ref14, couponCode) {
-        var state = _ref14.state,
-            commit = _ref14.commit;
+    redeemCouponCode: function redeemCouponCode(_ref10, couponCode) {
+        var state = _ref10.state,
+            commit = _ref10.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -28176,9 +28155,9 @@ var actions = {
             });
         });
     },
-    removeCouponCode: function removeCouponCode(_ref15, couponCode) {
-        var state = _ref15.state,
-            commit = _ref15.commit;
+    removeCouponCode: function removeCouponCode(_ref11, couponCode) {
+        var state = _ref11.state,
+            commit = _ref11.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -28193,8 +28172,8 @@ var actions = {
             });
         });
     },
-    refreshBasket: function refreshBasket(_ref16) {
-        var commit = _ref16.commit;
+    refreshBasket: function refreshBasket(_ref12) {
+        var commit = _ref12.commit;
 
         return new Promise(function (resolve, reject) {
             _ApiService2.default.get("/rest/io/basket/").done(function (basket) {

@@ -101,22 +101,30 @@ const actions =
     {
         loadBasketData({commit, state})
         {
-            const basketPromise = ApiService.get("/rest/io/basket/");
-            const basketItemsPromise = ApiService.get("/rest/io/basket/items", {template: "Ceres::Basket.Basket"});
-
-            Promise.all([basketPromise, basketItemsPromise]).then(
-                ([basket, basketItems]) =>
+            ApiService.get("/rest/io/basket")
+                .done(basket =>
                 {
                     commit("setBasket", basket);
-                    commit("setBasketItems", basketItems);
                     commit("setIsBasketInitiallyLoaded");
 
-                    setTimeout(() =>
-                    {
-                        $(document.body).trigger("sticky_kit:recalc");
-                    }, 0);
-                },
-                ([basketError, basketItemsError]) =>
+                    ApiService.get("/rest/io/basket/items", {template: "Ceres::Basket.Basket"})
+                        .done(basketItems =>
+                        {
+                            commit("setBasketItems", basketItems);
+                            commit("setIsBasketInitiallyLoaded");
+                        }).fail(error =>
+                        {
+                            NotificationService.error(
+                                TranslationService.translate("Ceres::Template.basketOops")
+                            ).closeAfter(10000);
+                        }).always(data =>
+                        {
+                            setTimeout(() =>
+                            {
+                                $(document.body).trigger("sticky_kit:recalc");
+                            }, 0);
+                        });
+                }).fail(error =>
                 {
                     NotificationService.error(
                         TranslationService.translate("Ceres::Template.basketOops")
