@@ -274,12 +274,6 @@
                     unfixed.element.style.top = unfixed.top - scrollTop + 'px';
                 });
             }
-
-            setTimeout(function() 
-            {
-                calculateBodyOffset()
-                getUnfixedElements();
-            }, 500);
             
             $(window).scroll(scrollUnfixedElements);
 
@@ -296,6 +290,15 @@
             {
                 calculateBodyOffset();
             });
+
+            for (var img in $(document).querySelectorAll("img"))
+            {
+                img.onload = function()
+                {
+                    calculateBodyOffset();
+                    getUnfixedElements();
+                }
+            }
         }
 
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
