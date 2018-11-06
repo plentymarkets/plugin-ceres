@@ -466,6 +466,11 @@
             "multiple"      : false
         },
         {
+            "key"           : "OrderConfirmation.AddContentAfterConfirmationThanks",
+            "name"          : "Order confirmation: Additional content after order confirmation thank you message",
+            "description"   : "Additional content after confirmation message on the order confirmation page."
+        },
+        {
             "key"           : "OrderConfirmation.AfterTotals",
             "name"          : "Order confirmation: Add content after totals",
             "description"   : "Add content after totals on the order confirmation page."
