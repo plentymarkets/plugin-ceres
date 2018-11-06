@@ -274,6 +274,8 @@
                     unfixed.element.style.top = unfixed.top - scrollTop + 'px';
                 });
             }
+
+            getUnfixedElements();
             
             $(window).scroll(scrollUnfixedElements);
 
@@ -296,7 +298,6 @@
                 img.onload = function()
                 {
                     calculateBodyOffset();
-                    getUnfixedElements();
                 }
             }
         }
