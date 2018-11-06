@@ -291,11 +291,10 @@
                 calculateBodyOffset();
             });
 
-            for (var img in header.querySelectorAll("img"))
+            for (var img of header.querySelectorAll("img"))
             {
                 img.onload = function()
                 {
-                    console.log("IMG LOADED");
                     calculateBodyOffset();
                     getUnfixedElements();
                 }
