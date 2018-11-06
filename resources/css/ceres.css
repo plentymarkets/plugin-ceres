@@ -17095,6 +17095,7 @@ body.menu-is-visible {
       flex-direction: column;
   -ms-flex: 1;
       flex: 1;
+  overflow: hidden;
 }
 
 @media (min-width: 544px) and (max-width: 767px) {
