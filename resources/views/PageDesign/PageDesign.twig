@@ -293,9 +293,11 @@
                 calculateBodyOffset();
             });
 
-            for (var img of header.querySelectorAll("img"))
+            var headerImages = header.querySelectorAll("img");
+
+            for (var img in headerImages)
             {
-                img.onload = function()
+                headerImages[img].onload = function()
                 {
                     calculateBodyOffset();
                 }
