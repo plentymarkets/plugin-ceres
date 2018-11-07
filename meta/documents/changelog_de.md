@@ -1,5 +1,13 @@
 # Release Notes für Ceres
 
+## v2.16.2 (2018-11-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.1...2.16.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler war es im Mozilla Firefox Browser nicht möglich, in der Warenkorbvorschau zu scrollen. Dies wurde behoben.
+- Es wurde ein Fehler behoben, durch den die Inhaltsauswahl in der Artikeleinzelansicht angezeigt wurde, obwohl diese nicht benötigt wurde.
+- Es wurde ein Fehler behoben, durch welchen der Warenkorb-Button beim Aufrufen einer nicht kaufbaren Hauptvariante nicht ausgegraut wurde.
+
 ## v2.16.1 (2018-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.0...2.16.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
