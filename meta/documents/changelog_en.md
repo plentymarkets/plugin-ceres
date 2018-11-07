@@ -1,11 +1,10 @@
 # Release Notes for Ceres
 
-## v2.16.2 (2018-11-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.1...2.16.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v2.16.2 (2018-11-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.1...2.16.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
 
 - Due to an error, it was not possible to scroll through the shopping cart preview in the Mozilla Firefox browser. This has been fixed.
-- The specified value of order properties was not correctly calculated when users changed the variation of an item. This has been fixed.
 - Due to an error, the content selection in the single item view was displayed even if it was not necessary for the item. This has been fixed.
 - Due to an error, the shopping cart button was not greyed out for non-purchasable main variations. This has been fixed.
 
