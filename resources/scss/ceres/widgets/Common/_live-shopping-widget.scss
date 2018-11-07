@@ -1,0 +1,83 @@
+@mixin live-shopping-prices-grid()
+{
+    .live-shopping-prices-inner
+    {
+        display: grid;
+        grid-template-areas: 
+        "top"
+        "bottom";
+
+        .live-shopping-prices-rebate
+        {
+            grid-area: bottom;
+        }
+
+        .live-shopping-prices-container
+        {
+            grid-area: top;
+            margin-left: 0;
+        }
+    }
+
+    .live-shopping-prices-additional-info
+    {
+        text-align: left;
+    }
+}
+
+@include media-breakpoint-down(xs)
+{
+    .widget-live-shopping
+    {
+        .thumb-inner
+        {
+            .thumb-image
+            {
+                float: none;
+                width: 100%;
+
+                > .square-container
+                {
+                    padding-bottom: 50%;
+                }
+            }
+
+            .live-shopping
+            {
+                width: 100%;
+
+                .live-shopping-item-name
+                {
+                    > .thumb-title
+                    {
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+    }   
+}
+
+@include media-breakpoint-down(sm)
+{   
+    .widget-live-shopping .live-shopping
+    {
+        @include live-shopping-prices-grid();
+    }
+}
+
+.widget-grid
+{
+    &.widget-grid-1-1-1,
+    &.widget-grid-1-1-2,
+    &.widget-grid-1-2-1,
+    &.widget-grid-2-1-1,
+    &.widget-grid-stacked,
+    &.widget-grid-1-1-1-1
+    {
+        .widget-live-shopping
+        {
+            @include live-shopping-prices-grid();
+        }
+    }
+}

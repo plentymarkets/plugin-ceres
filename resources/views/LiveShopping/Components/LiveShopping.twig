@@ -2,33 +2,31 @@
 
 <script type="x/template" id="vue-live-shopping">
     <div class="live-shopping">
-        <slot name="heading"></slot>
-
-        <div class="h3" style="padding: .8rem; margin: 0;">
-            <a style="text-align: center" class="thumb-title" :href="itemData | itemURL">
+        <div class="h3 live-shopping-item-name">
+            <a class="thumb-title" :href="itemData | itemURL">
                 ${ itemData | itemName }
             </a>
         </div>
 
         <div class="live-shopping-countdown">
-            <hr style="margin-bottom: .5rem; margin-top: 0">
+            <hr class="live-shopping-countdown-separator">
             <div class="live-shopping-countdown-heading">{{ trans("Ceres::Template.liveShoppingOfferEndsIn") }}</div>
 
             <div class="live-shopping-countdown-thread-container">
                 <div v-if="duration.days > 0" class="live-shopping-countdown-thread">
-                    <div class="test">${ duration.days }</div>
+                    <div class="live-shopping-countdown-thread-number">${ duration.days }</div>
                     <div class="small">Tage</div>
                 </div>
                 <div class="live-shopping-countdown-thread">
-                    <div class="test">${ duration.hours }</div>
+                    <div class="live-shopping-countdown-thread-number">${ duration.hours }</div>
                     <div class="small">Stunden</div>
                 </div>
                 <div class="live-shopping-countdown-thread">
-                    <div class="test">${ duration.minutes }</div>
+                    <div class="live-shopping-countdown-thread-number">${ duration.minutes }</div>
                     <div class="small">Minuten</div>
                 </div>
                 <div class="live-shopping-countdown-thread">
-                    <div class="test">${ duration.seconds }</div>
+                    <div class="live-shopping-countdown-thread-number">${ duration.seconds }</div>
                     <div class="small">Sekunden</div>
                 </div>
             </div>
@@ -52,7 +50,7 @@
 
         <div class="live-shopping-prices bg-danger">
             <div class="live-shopping-prices-inner">
-                <div>{{ trans("Ceres::Template.liveShoppingRebate", {"rebate": "${ itemPriceRebatePercentage }" }) }}</div>
+                <div class="live-shopping-prices-rebate">{{ trans("Ceres::Template.liveShoppingRebate", {"rebate": "${ itemPriceRebatePercentage }" }) }}</div>
                 <div class="live-shopping-prices-container">
                     <div class="live-shopping-price">
                         <strong>${ itemData.prices.specialOffer.price.formatted } *</strong>

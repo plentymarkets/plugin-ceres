@@ -4,12 +4,29 @@ $live-shopping-padding: 1rem .8rem;
 {
     padding: 0 !important;
 
+    .live-shopping-item-name
+    {
+        padding: .8rem;
+        margin: 0;
+
+        > a
+        {
+            text-align: center;
+        }
+    }
+
     .live-shopping-countdown
     {
         padding: $live-shopping-padding;
         padding-top: .6rem;
         border-top-left-radius: .25rem;
         border-top-right-radius: .25rem;
+
+        .live-shopping-countdown-separator
+        {
+            margin-bottom: .5rem;
+            margin-top: 0;
+        }
 
         .live-shopping-countdown-heading
         {
@@ -32,7 +49,7 @@ $live-shopping-padding: 1rem .8rem;
                 margin-right: auto;
                 text-align: center;
 
-                .test
+                .live-shopping-countdown-thread-number
                 {
                     line-height: 1.1;
                     font-size: 2rem;
@@ -68,6 +85,12 @@ $live-shopping-padding: 1rem .8rem;
             font-weight: normal;
             text-align: center;
             margin-top: .25rem;
+
+            a
+            {
+                color: inherit;
+                font-weight: bold;
+            }
         }
     }
     .live-shopping-progress

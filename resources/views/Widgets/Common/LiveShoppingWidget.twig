@@ -5,30 +5,26 @@
 
 {{ Twig.set("liveShoppingData", Twig.call("services.liveShopping.getLiveShoppingData", [liveShoppingConfig.liveShoppingSelection, liveShoppingConfig.sorting])) }}
 
-<div class="widget widget-item-list">
-    <div class="widget-inner">
-
-        <div class="row">
-            {% if title is not empty %}
-                <div class="col-xs-12">
-                    <span class="h1">{{ title }}</span>
-                </div>
-            {% endif %}
-            {% if description is not empty %}
-                <div class="col-xs-12 m-t-1">
-                    <p>{{ description }}</p>
-                </div>
-            {% endif %}
-
-        </div>
-
-        <div class="row clearfix">
+<div class="widget-live-shopping widget">
+    <div class="row">
+        {% if title is not empty %}
             <div class="col-xs-12">
-                {{ Twig.if("liveShoppingData.item is not empty") }}
-                <category-item :item-data="{{ Twig.print("liveShoppingData.item | json_encode") }}" decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}" :live-shopping-data="{{ Twig.print("liveShoppingData.liveShopping | json_encode") }}" :live-shopping-config="{{ liveShoppingConfig | json_encode }}" image-url-accessor="urlMiddle"></category-item>
-                {{ Twig.endif() }}
+                <span class="h1">{{ title }}</span>
             </div>
-        </div>
+        {% endif %}
+        {% if description is not empty %}
+            <div class="col-xs-12 m-t-1">
+                <p>{{ description }}</p>
+            </div>
+        {% endif %}
 
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-xs-12">
+            {{ Twig.if("liveShoppingData.item is not empty") }}
+            <category-item :item-data="{{ Twig.print("liveShoppingData.item | json_encode") }}" decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}" :live-shopping-data="{{ Twig.print("liveShoppingData.liveShopping | json_encode") }}" :live-shopping-config="{{ liveShoppingConfig | json_encode }}" image-url-accessor="urlMiddle"></category-item>
+            {{ Twig.endif() }}
+        </div>
     </div>
 </div>

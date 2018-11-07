@@ -3,10 +3,6 @@
     "label": "Widget.liveShoppingLabel",
     "previewImageURL": "/images/widgets/newsletter.svg",
     "type": "default",
-    "allowedNestingTypes": [
-      "default",
-      "structure"
-    ],
     "widgetClass": "Ceres\\Widgets\\Common\\LiveShoppingWidget",
     "settings": {
         "title": {
