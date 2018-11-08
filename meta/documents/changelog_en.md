@@ -110,6 +110,7 @@
 - Item lists and search results can now be sorted randomly.
 - A new event hook has been added, which reacts to the building of plugins. This enables the invalidation of the content cache.
 - A new checkbox has been added to the address input fields, via which the delivery to a Packstation/post office in Germany can be activated. The input fields adapt to the type of delivery destination if the checkbox is activated.
+- A new option has been added to the tab pagination and sorting in the Ceres configuration. This option determines the page number, beginning from which the value **noindex** is set for SEO robots.
 
 ### Changed
 
