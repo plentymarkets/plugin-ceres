@@ -50,7 +50,7 @@
             <!-- ./STORE SPECIALS -->
 
             <!-- ITEM DETAILS -->
-            <live-shopping class="thumb-content" v-if="liveShoppingData" :item-data="itemData" :live-shopping-data="liveShoppingData" :config="liveShoppingConfig">
+            <live-shopping v-if="liveShoppingData" :item-data="itemData" :live-shopping-data="liveShoppingData" :config="liveShoppingConfig">
                 <div slot="additional-price-info">
                     * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
                     <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
