@@ -26,7 +26,7 @@
             :show-quantity="{{ showQuantity | default(false) | json_encode }}"
             :item-url="{{ itemObject }} | itemURL"
             {% for key, value in options if value is defined and value | length > 0 %}
-            :{{ key }}="{{ value }}"
+            {{ key }}="{{ value }}"
             {% endfor %}
     >
     </add-to-basket>

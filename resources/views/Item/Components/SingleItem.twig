@@ -105,9 +105,8 @@
                             false,
                             true,
                             {
-                                "v-if": "currentVariation.filter.isSalable",
-                                "missing-order-properties":"variationMissingProperties",
-                                "is-variation-selected": "isVariationSelected"
+                                ":missing-order-properties":"variationMissingProperties",
+                                ":is-variation-selected": "isVariationSelected && currentVariation.filter.isSalable"
                             }
                         ) }}
                         <slot name="AfterAddToBasket"></slot>
