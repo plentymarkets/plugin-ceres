@@ -16,6 +16,19 @@ Vue.component("live-shopping", {
         {
             type: Object,
             required: true
+        },
+        config:
+        {
+            type: Object,
+            default: () =>
+            {
+                return {
+                    showTimer: true,
+                    showTimerProgress: true,
+                    showStock: true,
+                    showStockProgress: true
+                };
+            }
         }
     },
 

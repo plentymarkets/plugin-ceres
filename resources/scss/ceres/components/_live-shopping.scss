@@ -103,7 +103,11 @@ $live-shopping-padding: 1rem .8rem;
         .live-shopping-progress-heading
         {
             text-align: center;
-            margin-bottom: .5rem;
+
+            &:not(:last-child)
+            {
+                margin-bottom: .5rem;
+            }   
         }
     }
 }
