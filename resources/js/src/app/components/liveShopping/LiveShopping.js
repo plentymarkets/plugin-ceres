@@ -26,7 +26,8 @@ Vue.component("live-shopping", {
                     showTimer: true,
                     showTimerProgress: true,
                     showStock: true,
-                    showStockProgress: true
+                    showStockProgress: true,
+                    showCrossPrice: true
                 };
             }
         }

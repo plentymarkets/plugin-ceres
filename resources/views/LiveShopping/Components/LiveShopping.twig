@@ -55,7 +55,7 @@
                     <div class="live-shopping-price">
                         <strong>${ itemData.prices.specialOffer.price.formatted } *</strong>
                     </div>
-                    <del>${ itemData.prices.default.price.formatted }</del>
+                    <del v-if="config.showCrossPrice">${ itemData.prices.default.price.formatted }</del>
                 </div>
             </div>
 
