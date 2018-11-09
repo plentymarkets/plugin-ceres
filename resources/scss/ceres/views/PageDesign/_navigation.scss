@@ -472,6 +472,20 @@ nav.navbar.megamenu {
 	}
 }
 
+/* Compatibility for Firefox */
+html.firefox nav.navbar.megamenu #mainNavbarCollapsable {
+	@include media-breakpoint-up(lg){
+		ul.mainmenu > li > ul.collapse {
+			/* If LVL1 menü becomes to large ul gets scrollbar */
+			overflow: auto;
+			> li {
+				/* LVL1 Columns in MegaMenu are wrapping correctly */
+				float: none;
+			}
+		}
+	}
+}
+
 .breadcrumb-item-transition {
   transition: all 1s ease;
   overflow: hidden; }
