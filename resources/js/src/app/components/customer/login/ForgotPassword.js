@@ -4,6 +4,8 @@ const ModalService        = require("services/ModalService");
 
 import ValidationService from "services/ValidationService";
 import TranslationService from "services/TranslationService";
+import UrlService from "services/UrlService";
+import {isNullOrUndefined}from "../../../helper/utils";
 
 Vue.component("forgot-password-modal", {
 
@@ -40,6 +42,15 @@ Vue.component("forgot-password-modal", {
 			{
                 this.username = "";
             });
+
+            const urlParams = UrlService.getUrlParams(document.location.search);
+
+            if (!isNullOrUndefined(urlParams.show) && urlParams.show === "forgotPassword")
+            {
+                ModalService.findModal(this.$refs.pwdModal).show();
+
+                this.username = !isNullOrUndefined(urlParams.email) ? urlParams.email : "";
+            }
         });
     },
 

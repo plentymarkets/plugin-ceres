@@ -20799,6 +20799,12 @@ var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+var _utils = require("../../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ApiService = require("services/ApiService");
@@ -20833,6 +20839,14 @@ Vue.component("forgot-password-modal", {
             $("#resetPwd").on("hidden.bs.modal", function () {
                 _this.username = "";
             });
+
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+            if (!(0, _utils.isNullOrUndefined)(urlParams.show) && urlParams.show === "forgotPassword") {
+                ModalService.findModal(_this.$refs.pwdModal).show();
+
+                _this.username = !(0, _utils.isNullOrUndefined)(urlParams.email) ? urlParams.email : "";
+            }
         });
     },
 
@@ -20886,7 +20900,7 @@ Vue.component("forgot-password-modal", {
     }
 });
 
-},{"services/ApiService":251,"services/ModalService":255,"services/NotificationService":256,"services/TranslationService":257,"services/ValidationService":259}],163:[function(require,module,exports){
+},{"../../../helper/utils":248,"services/ApiService":251,"services/ModalService":255,"services/NotificationService":256,"services/TranslationService":257,"services/UrlService":258,"services/ValidationService":259}],163:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
