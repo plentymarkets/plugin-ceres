@@ -1,0 +1,36 @@
+{% set formFieldId  = uid() %}
+{% set width        = widget.settings.width.mobile %}
+{% set isRequired   = widget.settings.isRequired.mobile %}
+{% set label        = widget.settings.label.mobile %}
+{% set allowMailCC  = widget.settings.allowMailCC.mobile %}
+{% set replyToMail  = widget.settings.replyToMail.mobile %}
+
+<div class="col-xs-12 col-md-{{ width }}">
+    <div class="input-unit{% if isRequired %} required{% endif %}{% if allowMailCC %} m-b-0{% endif %}">
+        <input name="{{ formFieldId }}"
+               type="text"
+               id="{{ formFieldId }}"
+               {% if isRequired %}data-validate="mail"{% endif %}>
+
+        <label for="{{ formFieldId }}">
+            {{ label }}{% if isRequired %}*{% endif %}
+        </label>
+
+    </div>
+
+    {% if allowMailCC %}
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input"
+                       data-mail="cc"
+                       value="{{ formFieldId }}"
+                       type="checkbox">
+                {{ trans("Ceres::Template.contactSendMeACopy") }}
+            </label>
+        </div>
+    {% endif %}
+
+    {% if replyToMail %}
+        <input type="hidden" data-mail="reply-to-address" value="{{ formFieldId }}">
+    {% endif %}
+</div>

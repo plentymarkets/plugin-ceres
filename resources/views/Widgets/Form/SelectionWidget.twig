@@ -1,0 +1,46 @@
+{% set formFieldId   = uid() %}
+{% set width         = widget.settings.width.mobile %}
+{% set isRequired    = widget.settings.isRequired.mobile %}
+{% set label         = widget.settings.label.mobile %}
+{% set selectType    = widget.settings.selectType.mobile %}
+{% set selectOptions = widget.settings.selectOptions.mobile %}
+
+<div class="col-xs-12 col-md-{{ width }}">
+    {% if selectType == 'dropdown' %}
+        <div class="input-unit{% if isRequired %} required{% endif %}">
+            <select class="custom-select"
+                    id="{{ formFieldId }}"
+                    name="{{ formFieldId }}"
+                    {% if isRequired %}data-validate=""{% endif %}>
+
+                {% for i, option in selectOptions %}
+                    <option value="{{ i }}">{{ option }}</option>
+                {% endfor %}
+
+            </select>
+
+            <label for="{{ formFieldId }}">
+                {{ label }}{% if isRequired %}*{% endif %}
+            </label>
+
+        </div>
+    {% else %}
+        <div class="select-unit">
+            {% if label %}<label for="{{ formFieldId }}" class="h4">{{ label }}</label>{% endif %}
+            <div class="m-b-1">
+                {% for i, option in selectOptions %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input"
+                                   type="{{ selectType }}"
+                                   name="{{ formFieldId }}{% if selectType == 'checkbox' %}[]{% endif %}"
+                                   value="{{ i }}"
+                                   {% if isRequired %}data-validate=""{% endif %}>
+                            {{ option }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>

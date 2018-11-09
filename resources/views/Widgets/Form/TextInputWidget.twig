@@ -1,0 +1,26 @@
+{% set formFieldId   = uid() %}
+{% set width         = widget.settings.width.mobile %}
+{% set isRequired    = widget.settings.isRequired.mobile %}
+{% set label         = widget.settings.label.mobile %}
+{% set isMailSubject = widget.settings.isMailSubject.mobile %}
+{% set isReplyToName = widget.settings.isReplyToName.mobile %}
+
+<div class="col-xs-12 col-md-{{ width }}">
+    <div class="input-unit{% if isRequired %} required{% endif %}">
+        <input
+            name="{{ formFieldId }}"
+            type="text"
+            id="{{ formFieldId }}"
+            {% if isRequired %}data-validate="text"{% endif %}>
+
+        <label for="{{ formFieldId }}">
+            {{ label }}{% if isRequired %}*{% endif %}
+        </label>
+    </div>
+    {% if isMailSubject %}
+        <input type="hidden" data-mail="subject" value="{{ formFieldId }}">
+    {% endif %}
+    {% if isReplyToName %}
+        <input type="hidden" data-mail="reply-to-name" value="{{ formFieldId }}">
+    {% endif %}
+</div>

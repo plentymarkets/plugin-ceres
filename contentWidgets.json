@@ -1004,6 +1004,464 @@
         }
     },
     {
+        "identifier": "Ceres::MailFormWidget",
+        "label": "Widget.mailFormLabel",
+        "previewImageURL": "/images/widgets/newsletter.svg",
+        "type": "default",
+        "position": 400,
+        "widgetClass": "Ceres\\Widgets\\Form\\MailFormWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltip": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "title": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.mailFormHeadlineLabel",
+                    "tooltip": "Widget.mailFormHeadlineTooltip"
+                }
+            },
+            "labelSubmit": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "ok",
+                "options": {
+                    "name": "Widget.mailFormSubmitLabel",
+                    "tooltip": "Widget.mailFormSubmitTooltip"
+                }
+            },
+            "mailTarget": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.mailFormMailTargetLabel",
+                    "tooltip": "Widget.mailFormMailTargetTooltip"
+                }
+            },
+            "subject": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.mailFormSubjectLabel",
+                    "tooltip": "Widget.mailFormSubjectTooltip"
+                }
+            },
+            "ccAddresses": {
+                "type": "text",
+                "required": false,
+                "isList": true,
+                "options": {
+                    "name": "Widget.mailFormCCAddressesLabel",
+                    "tooltip": "Widget.mailFormCCAddressesTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::MailInputWidget",
+        "label": "Widget.mailInputLabel",
+        "previewImageURL": "/images/widgets/newsletter.svg",
+        "type": "form",
+        "position": 400,
+        "widgetClass": "Ceres\\Widgets\\Form\\MailInputWidget",
+        "settings": {
+            "label": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.mailFormFieldLabelLabel",
+                    "tooltip": "Widget.mailFormFieldLabelTooltip"
+                }
+            },
+            "width": {
+                "type": "select",
+                "required": true,
+                "defaultValue": 12,
+                "options": {
+                    "name": "Widget.mailFormFieldWidthLabel",
+                    "tooltip": "Widget.mailFormFieldWidthTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 3,
+                            "caption": "Widget.mailFormFieldWidth25",
+                            "position": 0
+                        },
+                        {
+                            "value": 4,
+                            "caption": "Widget.mailFormFieldWidth33",
+                            "position": 1
+                        },
+                        {
+                            "value": 6,
+                            "caption": "Widget.mailFormFieldWidth50",
+                            "position": 2
+                        },
+                        {
+                            "value": 8,
+                            "caption": "Widget.mailFormFieldWidth66",
+                            "position": 3
+                        },
+                        {
+                            "value": 9,
+                            "caption": "Widget.mailFormFieldWidth75",
+                            "position": 4
+                        },
+                        {
+                            "value": 12,
+                            "caption": "Widget.mailFormFieldWidth100",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "isRequired": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.mailFormFieldIsRequiredLabel",
+                    "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
+                }
+            },
+            "allowMailCC": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.mailInputAllowMailCCLabel"
+                }
+            },
+            "replyToMail": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.mailInputReplyToMailLabel"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::SelectionWidget",
+        "label": "Widget.selectionLabel",
+        "previewImageURL": "/images/widgets/newsletter.svg",
+        "type": "form",
+        "position": 400,
+        "widgetClass": "Ceres\\Widgets\\Form\\SelectionWidget",
+        "settings": {
+            "label": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.mailFormFieldLabelLabel",
+                    "tooltip": "Widget.mailFormFieldLabelTooltip"
+                }
+            },
+            "width": {
+                "type": "select",
+                "required": true,
+                "defaultValue": 12,
+                "options": {
+                    "name": "Widget.mailFormFieldWidthLabel",
+                    "tooltip": "Widget.mailFormFieldWidthTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 3,
+                            "caption": "Widget.mailFormFieldWidth25",
+                            "position": 0
+                        },
+                        {
+                            "value": 4,
+                            "caption": "Widget.mailFormFieldWidth33",
+                            "position": 1
+                        },
+                        {
+                            "value": 6,
+                            "caption": "Widget.mailFormFieldWidth50",
+                            "position": 2
+                        },
+                        {
+                            "value": 8,
+                            "caption": "Widget.mailFormFieldWidth66",
+                            "position": 3
+                        },
+                        {
+                            "value": 9,
+                            "caption": "Widget.mailFormFieldWidth75",
+                            "position": 4
+                        },
+                        {
+                            "value": 12,
+                            "caption": "Widget.mailFormFieldWidth100",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "isRequired": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.mailFormFieldIsRequiredLabel",
+                    "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
+                }
+            },
+            "selectType": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "dropdown",
+                "options": {
+                    "name": "Widget.selectionSelectTypeLabel",
+                    "tooltip": "Widget.selectionSelectTypeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "dropdown",
+                            "caption": "Widget.selectionSelectTypeDropdown",
+                            "position": 0
+                        },
+                        {
+                            "value": "radio",
+                            "caption": "Widget.selectionSelectTypeRadio",
+                            "position": 1
+                        },
+                        {
+                            "value": "checkbox",
+                            "caption": "Widget.selectionSelectTypeCheckbox",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
+            "selectOptions": {
+                "type": "text",
+                "isList": "[1,]",
+                "options": {
+                    "name": "Widget.selectionOptionsLabel",
+                    "tooltip": "Widget.selectionOptionsTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::TextAreaWidget",
+        "label": "Widget.textAreaLabel",
+        "previewImageURL": "/images/widgets/newsletter.svg",
+        "type": "form",
+        "position": 400,
+        "widgetClass": "Ceres\\Widgets\\Form\\TextAreaWidget",
+        "settings": {
+            "label": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.mailFormFieldLabelLabel",
+                    "tooltip": "Widget.mailFormFieldLabelTooltip"
+                }
+            },
+            "width": {
+                "type": "select",
+                "required": true,
+                "defaultValue": 12,
+                "options": {
+                    "name": "Widget.mailFormFieldWidthLabel",
+                    "tooltip": "Widget.mailFormFieldWidthTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 3,
+                            "caption": "Widget.mailFormFieldWidth25",
+                            "position": 0
+                        },
+                        {
+                            "value": 4,
+                            "caption": "Widget.mailFormFieldWidth33",
+                            "position": 1
+                        },
+                        {
+                            "value": 6,
+                            "caption": "Widget.mailFormFieldWidth50",
+                            "position": 2
+                        },
+                        {
+                            "value": 8,
+                            "caption": "Widget.mailFormFieldWidth66",
+                            "position": 3
+                        },
+                        {
+                            "value": 9,
+                            "caption": "Widget.mailFormFieldWidth75",
+                            "position": 4
+                        },
+                        {
+                            "value": 12,
+                            "caption": "Widget.mailFormFieldWidth100",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "rows": {
+                "type": "number",
+                "required": false,
+                "defaultValue": 15,
+                "options": {
+                    "name": "Widget.textAreaRowsLabel",
+                    "tooltip": "Widget.textAreaRowsTooltip"
+                }
+            },
+            "fixedHeight": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.textAreaFixedHeightLabel",
+                    "tooltip": "Widget.textAreaFixedHeightTooltip"
+                }
+            },
+            "isRequired": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.mailFormFieldIsRequiredLabel",
+                    "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::TextInputWidget",
+        "label": "Widget.textInputLabel",
+        "previewImageURL": "/images/widgets/newsletter.svg",
+        "type": "form",
+        "position": 400,
+        "widgetClass": "Ceres\\Widgets\\Form\\TextInputWidget",
+        "settings": {
+            "label": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.mailFormFieldLabelLabel",
+                    "tooltip": "Widget.mailFormFieldLabelTooltip"
+                }
+            },
+            "width": {
+                "type": "select",
+                "required": true,
+                "defaultValue": 12,
+                "options": {
+                    "name": "Widget.mailFormFieldWidthLabel",
+                    "tooltip": "Widget.mailFormFieldWidthTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 3,
+                            "caption": "Widget.mailFormFieldWidth25",
+                            "position": 0
+                        },
+                        {
+                            "value": 4,
+                            "caption": "Widget.mailFormFieldWidth33",
+                            "position": 1
+                        },
+                        {
+                            "value": 6,
+                            "caption": "Widget.mailFormFieldWidth50",
+                            "position": 2
+                        },
+                        {
+                            "value": 8,
+                            "caption": "Widget.mailFormFieldWidth66",
+                            "position": 3
+                        },
+                        {
+                            "value": 9,
+                            "caption": "Widget.mailFormFieldWidth75",
+                            "position": 4
+                        },
+                        {
+                            "value": 12,
+                            "caption": "Widget.mailFormFieldWidth100",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "isRequired": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.mailFormFieldIsRequiredLabel",
+                    "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
+                }
+            },
+            "isMailSubject": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.textInputIsMailSubjectLabel",
+                    "tooltip": "Widget.textInputIsMailSubjectTooltip"
+                }
+            },
+            "isReplyToName": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.textInputIsReplyToNameLabel",
+                    "tooltip": "Widget.textInputIsReplyToNameTooltip"
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::FourColumnWidget",
         "label": "Widget.gridFourColumnLabel",
         "previewImageURL": "/images/widgets/grid-4-col.svg",

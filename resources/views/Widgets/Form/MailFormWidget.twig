@@ -1,0 +1,42 @@
+{% set appearance   = widget.settings.appearance.mobile %}
+{% set title        = widget.settings.title.mobile %}
+{% set labelSubmit  = widget.settings.labelSubmit.mobile %}
+{% set mailTarget   = widget.settings.mailTarget.mobile %}
+{% set subject      = widget.settings.subject.mobile %}
+{% set ccAddresses  = widget.settings.ccAddresses.mobile %}
+
+{% set formId = uid() %}
+<div class="widget widget-contact-form widget-{{ appearance }}">
+    <div class="widget-inner">
+        <form class="row" id="{{ formId }}" @submit="$store.dispatch('sendContactForm', $event)">
+            {% if title is defined %}
+                <div class="col-xs-12">
+                    <h1>{{ title }}</h1>
+                </div>
+            {% endif %}
+
+            <div class="col-xs-12 cmp-contact">
+                {% if mailTarget is defined and mailTarget | length > 0 %}
+                    <input type="hidden" data-mail="recipient" value="{{ mailTarget }}">
+                {% endif %}
+                {% if subject is defined and subject | length > 0 %}
+                    <input type="hidden" data-mail="subject" value="{{ subject }}">
+                {% endif %}
+                {% for ccAddress in ccAddresses if ccAddress | length > 0 %}
+                    <input type="hidden" data-mail="cc" value="{{ ccAddress }}">
+                {% endfor %}
+                <div class="row"{% if isPreview %} data-builder-child-container="formFields"{% endif %}>{{ children.formFields | raw }}</div>
+            </div>
+
+            {% if hasRequiredFields %}
+                <div class="col-xs-12">
+                    <p class="pull-right">* {{ trans("Ceres::Template.contactRequiredField") }}</p>
+                </div>
+            {% endif %}
+
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-{{ appearance }}">{{ labelSubmit }}</button>
+            </div>
+        </form>
+    </div>
+</div>

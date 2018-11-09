@@ -1,4 +1,5 @@
 import $ from "jquery";
+import {isMail} from "../helper/strings";
 
 let $form;
 
@@ -206,9 +207,7 @@ function _hasValue($formControl)
  */
 function _isMail($formControl)
 {
-    const mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-
-    return mailRegEx.test($formControl.val());
+    return isMail($formControl.val());
 }
 
 /**

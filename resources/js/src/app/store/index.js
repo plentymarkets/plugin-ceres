@@ -9,6 +9,7 @@ import item from "store/modules/SingleItemModule";
 import basket from "store/modules/BasketModule";
 import orderReturn from "store/modules/OrderReturnModule";
 import lastSeen from "store/modules/LastSeenModule";
+import contactForm from "store/modules/ContactForm";
 import eventPropagation from "store/plugins/EventPropagationPlugin";
 
 Vue.use(require("vue-script2"));
@@ -29,7 +30,8 @@ const store = new Vuex.Store(
             item,
             basket,
             orderReturn,
-            lastSeen
+            lastSeen,
+            contactForm
         },
 
         plugins: [eventPropagation]
