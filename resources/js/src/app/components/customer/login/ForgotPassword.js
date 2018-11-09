@@ -73,7 +73,7 @@ Vue.component("forgot-password-modal", {
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", {email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPwMailSubject"})
+            ApiService.post("/rest/io/customer/password_reset", {email: this.username})
                 .done(() =>
                 {
                     ModalService.findModal(document.getElementById("resetPwd")).hide();
