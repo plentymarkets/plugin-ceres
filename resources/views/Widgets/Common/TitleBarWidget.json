@@ -4,10 +4,6 @@
     "previewImageURL": "/images/widgets/title-bar.svg",
     "type": "default",
     "position": 400,
-    "allowedNestingTypes": [
-        "default",
-        "structure"
-    ],
     "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
     "settings": {
         "appearance": {

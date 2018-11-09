@@ -48,10 +48,22 @@
     {% endspaceless -%}
 {% endmacro %}
 
-{% macro trans( key ) %}
+{% macro trans( key, params ) %}
     {%- spaceless %}
         {% import _self as Twig %}
-        {{ Twig.print( "trans(\"" ~ key ~ "\")" ) }}
+        {% if params is not defined %}
+            {{ Twig.print( "trans(\"" ~ key ~ "\")" ) }}
+        {% else %}
+            {% set param = "{" %}
+            {% for key, value in params %}
+                {% set param = param ~ "\"" ~ key ~ "\": " ~ Twig.encode(value) %}
+                {% if not loop.last %}
+                    {% set param = param ~ ", " %}
+                {% endif %}
+            {% endfor %}
+            {% set param = param ~ "}" %}
+            {{ Twig.print( "trans(\"" ~ key ~ "\", " ~ param ~ ")" ) }}
+        {% endif %}
     {% endspaceless -%}
 {% endmacro %}
 

@@ -35,6 +35,8 @@ $menu-font-s-lg  		: 1em;
 $menu-font-f-lg  		: $font-family-serif;
 $menu-li-bg-hover		: $brand-primary;
 $menu-li-color-hover	: $white;
+$menu-li-padding-x      : 1rem;
+$menu-li-padding-y      : 1.3rem;
 // bigmenu
 $menu-big-menu-bg 				: darken($brand-primary,10%);
 $menu-big-menu-li-bg			: transparent;
@@ -106,6 +108,10 @@ body.menu-is-visible {
 		margin 		: 0;
 		padding 	: 0;
 		position 	: relative;
+
+		&:empty {
+			min-height: $line-height-base + $menu-li-padding-y * 2;
+		}
 
 		li 	{
 			width : 100%;
@@ -196,7 +202,7 @@ body.menu-is-visible {
 				position: relative;
 				transition: all 300ms;
 				>a {
-					padding: 1.3rem 1rem;
+					padding: $menu-li-padding-y $menu-li-padding-x;
 					width:100%;
 				}
 				>ul {
@@ -301,7 +307,6 @@ nav.navbar.megamenu {
 
 						>li {
 							display 	 : inline-block;
-							break-inside : avoid;
 							width 	 	 : 100%; 
 
 							&.level1 { 
@@ -316,7 +321,8 @@ nav.navbar.megamenu {
 								background : $megamenu-bg; 
 							}
 							 .level2 { 
-							 	padding : .25em 0!important; 
+								 padding : .25em 0!important; 
+								 break-inside: avoid;
 							 }
 							 .level3 { 
 							 	padding : 0 1em .25em 1.4em !important; 

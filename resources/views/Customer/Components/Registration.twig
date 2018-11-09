@@ -6,7 +6,7 @@
                 <div class="col-sm-12">
                     <div class="input-unit" data-validate="mail">
                         {% set uid_mail = uid() %}
-                        <input type="text" name="email" id="{{ uid_mail }}" v-model="username">
+                        <input type="text" name="email" id="{{ uid_mail }}" v-model="username" data-autofocus>
                         <label for="{{ uid_mail }}">{{ trans("Ceres::Template.regEmail") }}*</label>
                     </div>
                 </div>

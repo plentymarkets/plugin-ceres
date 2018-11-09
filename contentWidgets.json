@@ -5,10 +5,6 @@
         "previewImageURL": "/images/widgets/image-box.svg",
         "type": "default",
         "position": 600,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
         "settings": {
             "appearance": {
@@ -149,10 +145,6 @@
         "previewImageURL": "/images/widgets/image-carousel.svg",
         "type": "default",
         "position": 500,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
         "settings": {
             "appearance": {
@@ -276,10 +268,6 @@
         "previewImageURL": "/images/widgets/item-list.svg",
         "type": "default",
         "position": 700,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
         "settings": {
             "appearance": {
@@ -500,6 +488,7 @@
             "maxItems": {
                 "type": "number",
                 "required": true,
+                "isVisible": "listType !== 'last_seen'",
                 "defaultValue": "4",
                 "options": {
                     "name": "Widget.itemListMaxItemsLabel",
@@ -714,6 +703,99 @@
         }
     },
     {
+        "identifier": "Ceres::NewsletterWidget",
+        "label": "Widget.newsletterLabel",
+        "previewImageURL": "/images/widgets/newsletter.svg",
+        "type": "default",
+        "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
+        "settings": {
+            "appearance": {
+                "type": "selectBox",
+                "required": true,
+                "label": "Widget.widgetAppearanceLabel",
+                "options": {
+                    "tooltip": "Widget.widgetAppearanceTooltip",
+                    "defaultValue": "primary",
+                    "selectBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "title": {
+                "type": "inputText",
+                "required": false,
+                "label": "Widget.newsletterTitleLabel",
+                "options": {
+                    "tooltip": "Widget.newsletterTitleBarTextTooltip",
+                    "defaultValue": ""
+                }
+            },
+            "subTitle": {
+                "type": "inputText",
+                "required": false,
+                "label": "Widget.newsletterDescriptionLabel",
+                "options": {
+                    "tooltip": "Widget.newsletterSubTitleBarTextTooltip",
+                    "defaultValue": ""
+                }
+            },
+            "showNameInputs": {
+                "type": "checkBox",
+                "required": true,
+                "label": "Widget.newsletterShowNameInputsLabel",
+                "options": {
+                    "defaultValue": false
+                }
+            },
+            "showPrivacyPolicyCheckbox": {
+                "type": "checkBox",
+                "required": true,
+                "label": "Widget.newsletterShowPrivacyPolicyCheckboxLabel",
+                "options": {
+                    "defaultValue": true
+                }
+            },
+            "emailFolder": {
+                "type": "inputNumber",
+                "required": true,
+                "label": "Widget.newsletterEmailFolderLabel",
+                "options": {
+                    "tooltip": "Widget.newsletterEmailFolderTooltip",
+                    "defaultValue": ""
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::SeparatorWidget",
         "label": "Widget.separatorLabel",
         "previewImageURL": "/images/widgets/separator.svg",
@@ -728,10 +810,6 @@
         "previewImageURL": "/images/widgets/text.svg",
         "type": "default",
         "position": 800,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
         "settings": {
             "appearance": {
@@ -793,10 +871,6 @@
         "previewImageURL": "/images/widgets/title-bar.svg",
         "type": "default",
         "position": 400,
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
         "settings": {
             "appearance": {
@@ -860,67 +934,69 @@
         "widgetClass": "Ceres\\Widgets\\Footer\\LegalInformationWidget",
         "settings": {
             "showCancellationRights": {
-                "type": "checkBox",
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.legalInformationShowCancellationLabel",
+                "defaultValue": true,
                 "options": {
-                    "defaultValue": true
+                    "name": "Widget.legalInformationShowCancellationLabel"
                 }
             },
             "showLegalDisclosure": {
-                "type": "checkBox",
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.legalInformationShowLegalDisclosureLabel",
+                "defaultValue": true,
                 "options": {
-                    "defaultValue": true
+                    "name": "Widget.legalInformationShowLegalDisclosureLabel"
                 }
             },
             "showPrivacyPolicy": {
-                "type": "checkBox",
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.legalInformationShowPrivacyPolicyLabel",
+                "defaultValue": true,
                 "options": {
-                    "defaultValue": true
+                    "name": "Widget.legalInformationShowPrivacyPolicyLabel"
                 }
             },
             "showGtc": {
-                "type": "checkBox",
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.legalInformationShowGtcLabel",
+                "defaultValue": true,
                 "options": {
-                    "defaultValue": true
+                    "name": "Widget.legalInformationShowGtcLabel"
                 }
             },
             "cancellationFormContainer": {
-                "type": "verticalContainer",
-                "label": "Widget.legalInformationCancellationFormContainerLabel",
-                "required": false,
+                "type": "vertical",
                 "options": {
-                    "containerEntries": {
-                        "showCancellationForm": {
-                            "type": "checkBox",
-                            "required": true,
-                            "label": "Widget.legalInformationShowCancellationFormLabel",
-                            "options": {
-                                "defaultValue": true
-                            }
-                        },
-                        "useCancellationPdfUpload": {
-                            "type": "checkBox",
-                            "required": true,
-                            "label": "Widget.legalInformationCancellationPdfActiveLabel",
-                            "options": {
-                                "defaultValue": false
-                            }
-                        },
-                        "cancellationPdfPath": {
-                            "type": "inputFile",
-                            "required": false,
-                            "label": "Widget.legalInformationCancellationPdfUploadLabel",
-                            "options": {
-                                "tooltip": "Widget.legalInformationCancellationPdfUploadTooltip",
-                                "defaultValue": ""
-                            }
+                    "name": "Widget.legalInformationCancellationFormContainerLabel"
+                },
+                "children": {
+                    "showCancellationForm": {
+                        "type": "checkbox",
+                        "required": true,
+                        "defaultValue": true,
+                        "options": {
+                            "name": "Widget.legalInformationShowCancellationFormLabel"
+                        }
+                    },
+                    "useCancellationPdfUpload": {
+                        "type": "checkbox",
+                        "required": true,
+                        "defaultValue": false,
+                        "options": {
+                            "name": "Widget.legalInformationCancellationPdfActiveLabel"
+                        }
+                    },
+                    "cancellationPdfPath": {
+                        "type": "file",
+                        "required": false,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.legalInformationCancellationPdfUploadLabel",
+                            "tooltip": "Widget.legalInformationCancellationPdfUploadTooltip",
+                            "allowedExtensions": [
+                                "pdf"
+                            ]
                         }
                     }
                 }
@@ -1069,6 +1145,14 @@
                 "type": "checkBox",
                 "required": true,
                 "label": "Widget.breadcrumbShowOnCheckoutLabel",
+                "options": {
+                    "defaultValue": true
+                }
+            },
+            "showOnContentCategory": {
+                "type": "checkBox",
+                "required": true,
+                "label": "Widget.breadcrumbShowOnContentCategoryLabel",
                 "options": {
                     "defaultValue": true
                 }

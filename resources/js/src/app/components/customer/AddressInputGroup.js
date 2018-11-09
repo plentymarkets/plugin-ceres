@@ -82,7 +82,10 @@ Vue.component("address-input-group", {
 
             this.emitInputEvent("countryId", shippingCountry.id);
 
-            this.togglePickupStation(false);
+            if (this.isPickupStation || this.isPostOffice)
+            {
+                this.togglePickupStation(false);
+            }
         },
 
         togglePickupStation(showPickupStation)

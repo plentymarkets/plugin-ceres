@@ -2,6 +2,8 @@
 {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 
+{% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
+
 {% set lang = services.sessionStorage.getLang() %}
 {% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
@@ -16,7 +18,8 @@
 <script type="x/template" id="vue-category-item">
     <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
         <div class="thumb-inner">
-            <add-to-basket :item="itemData" :use-large-scale="true" :item-url="itemData | itemURL"></add-to-basket>
+
+            {{ AddToBasket.printVueComponent( "itemData", true ) }}
 
             <div class="thumb-background"></div>
 
@@ -70,7 +73,9 @@
                         <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
                     </div>
                 </div>
-                <add-to-basket :item="itemData" :item-url="itemData | itemURL"></add-to-basket>
+
+                {{ AddToBasket.printVueComponent( "itemData" ) }}
+
                 <span class="vat small text-muted">
                     * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
                     <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>

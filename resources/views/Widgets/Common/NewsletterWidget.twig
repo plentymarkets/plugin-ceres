@@ -1,0 +1,14 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set appearance = widget.settings.appearance.mobile %}
+{% set title = widget.settings.title.mobile | json_encode %}
+{% set subTitle = widget.settings.subTitle.mobile | json_encode %}
+{% set showNameInputs = widget.settings.showNameInputs.mobile | json_encode %}
+{% set showPrivacyPolicyCheckbox = widget.settings.showPrivacyPolicyCheckbox.mobile | json_encode %}
+{% set emailFolder = widget.settings.emailFolder.mobile | json_encode %}
+
+<div class="widget-newsletter widget">
+    <div class="widget-inner">
+        <newsletter-input appearance="{{ appearance }}" :title="{{ title }}" :sub-title="{{ subTitle }}" :show-name-inputs="{{ showNameInputs }}" :show-privacy-policy-checkbox="{{ showPrivacyPolicyCheckbox }}" :email-folder="{{ emailFolder }}"></newsletter-input>
+    </div>
+</div>

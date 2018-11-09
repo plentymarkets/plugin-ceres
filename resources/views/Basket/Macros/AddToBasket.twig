@@ -1,0 +1,33 @@
+{% macro printTwigComponent( item, useLargeScale, showQuantity ) %}
+    <add-to-basket
+            :variation-id="{{ item.variation.id }}"
+            :is-salable="{{ (item.filter is defined and item.filter.isSalable and not item.filter.hasChildren) | json_encode }}"
+            :interval-quantity="{{ item.variation.intervalOrderQuantity | default(1) }}"
+            :minimum-quantity="{{ item.variation.minimumOrderQuantity }}"
+            {% if item.variation.maximumOrderQuantity is defined and item.variation.maximumOrderQuantity > 0 %}
+                :maximum-quantity="{{ item.variation.maximumOrderQuantity }}"
+            {% endif %}
+            :order-properties="{{ item.properties | json_encode }}"
+            :use-large-scale="{{ useLargeScale | default(false) | json_encode }}"
+            :show-quantity="{{ showQuantity | default(false) | json_encode }}"
+            item-url="{{ item | itemURL }}">
+    </add-to-basket>
+{% endmacro %}
+
+{% macro printVueComponent( itemObject, useLargeScale, showQuantity, options ) %}
+    <add-to-basket
+            :variation-id="{{ itemObject }}.variation.id"
+            :is-salable="!!{{ itemObject }}.filter && {{ itemObject }}.filter.isSalable && !{{ itemObject }}.filter.hasChildren"
+            :interval-quantity="{{ itemObject }}.variation.intervalOrderQuantity || 1"
+            :minimum-quantity="{{ itemObject }}.variation.minimumOrderQuantity"
+            :maximum-quantity="!!{{ itemObject }}.variation.maximumOrderQuantity && {{ itemObject }}.variation.maximumOrderQuantity > 0 ? {{ itemObject }}.variation.maximumOrderQuantity : null"
+            :order-properties="{{ itemObject }}.properties"
+            :use-large-scale="{{ useLargeScale | default(false) | json_encode }}"
+            :show-quantity="{{ showQuantity | default(false) | json_encode }}"
+            :item-url="{{ itemObject }} | itemURL"
+            {% for key, value in options if value is defined and value | length > 0 %}
+            {{ key }}="{{ value }}"
+            {% endfor %}
+    >
+    </add-to-basket>
+{% endmacro %}

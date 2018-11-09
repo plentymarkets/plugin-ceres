@@ -4,10 +4,6 @@
     "previewImageURL": "/images/widgets/item-list.svg",
     "type": "default",
     "position": 700,
-    "allowedNestingTypes": [
-        "default",
-        "structure"
-    ],
     "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
     "settings": {
         "appearance": {
@@ -228,6 +224,7 @@
         "maxItems": {
             "type": "number",
             "required": true,
+            "isVisible": "listType !== 'last_seen'",
             "defaultValue": "4",
             "options": {
                 "name": "Widget.itemListMaxItemsLabel",

@@ -1,3 +1,13 @@
+html.safari {
+	.popper {
+		display: none;
+	}
+
+	.popper-visible {
+		display: block;
+	}
+}
+
 .popper {
 	max-width: $popover-max-width;
     padding: $popover-inner-padding;

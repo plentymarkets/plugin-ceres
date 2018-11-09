@@ -860,9 +860,62 @@
                         "defaultValue": "true"
                     }
                 },
+                "item.show_category_description_top": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.itemShowCategoryDescriptionTopLabel",
+                    "options": {
+                        "defaultValue": "description1",
+                        "selectBoxValues": [
+                            {
+                                "value": "none",
+                                "caption": "Config.itemShowCategoryDescriptionNone"
+                            },
+                            {
+                                "value": "description1",
+                                "caption": "Config.itemShowCategoryDescription1"
+                            },
+                            {
+                                "value": "description2",
+                                "caption": "Config.itemShowCategoryDescription2"
+                            },
+                            {
+                                "value": "both",
+                                "caption": "Config.itemShowCategoryDescriptionBoth"
+                            }
+                        ]
+                    }
+                },
+                "item.show_category_description_bottom": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.itemShowCategoryDescriptionBottomLabel",
+                    "options": {
+                        "defaultValue": "none",
+                        "selectBoxValues": [
+                            {
+                                "value": "none",
+                                "caption": "Config.itemShowCategoryDescriptionNone"
+                            },
+                            {
+                                "value": "description1",
+                                "caption": "Config.itemShowCategoryDescription1"
+                            },
+                            {
+                                "value": "description2",
+                                "caption": "Config.itemShowCategoryDescription2"
+                            },
+                            {
+                                "value": "both",
+                                "caption": "Config.itemShowCategoryDescriptionBoth"
+                            }
+                        ]
+                    }
+                },
                 "item.show_category_description": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemShowCategoryDescriptionLabel",
                     "options": {
                         "defaultValue": "true"

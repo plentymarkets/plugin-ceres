@@ -1,10 +1,13 @@
 Vue.component("single-item", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "itemData",
         "variationListData",
-        "attributeNameMap"
+        "attributeNameMap",
+        "variationUnits"
     ],
 
     data()

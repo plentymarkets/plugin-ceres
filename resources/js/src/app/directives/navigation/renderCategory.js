@@ -1,5 +1,26 @@
-import store from "store/index.js";
+import store from "../../store/index";
 import {isNullOrUndefined}from "../../helper/utils";
+
+const navigateToCategoryById = (element, event) =>
+{
+    let url;
+
+    store.dispatch("selectCategory", {categoryId: parseInt(element.dataset.categoryId), withReload: true});
+
+    if (isNullOrUndefined(store.state.navigation.currentCategory) && event.target && event.target.href)
+    {
+        url = event.target.href;
+    }
+    else
+    {
+        url = store.state.navigation.currentCategory.url;
+    }
+
+    if (!isNullOrUndefined(url))
+    {
+        window.open(url, "_self");
+    }
+};
 
 Vue.directive("render-category",
     {
@@ -18,23 +39,19 @@ Vue.directive("render-category",
                 const ddownElements = [].slice.call(document.getElementsByClassName("ddown"));
                 const openCategory = ddownElements.find(element => element.classList.contains("hover"));
 
-                if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType)
+                if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType || currentCategoryType === "content")
                 {
-                    store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId), withReload: true});
-
-                    const url = store.state.navigation.currentCategory.url;
-
                     // check if touch device and change the ui handling
                     if (document.body.classList.contains("touch"))
                     {
                         if (openCategory && openCategory.contains(event.target) || binding.value.alwaysOpen)
                         {
-                            window.open(url, "_self");
+                            navigateToCategoryById(el, event);
                         }
                     }
                     else
                     {
-                        window.open(url, "_self");
+                        navigateToCategoryById(el, event);
                     }
                 }
                 // check if user click the opened category and change the ui handling

@@ -21,10 +21,23 @@ export function updateItemListUrlParams(searchParams)
         urlParams.sorting = (searchParams.sorting !== App.config.sorting.defaultSorting) ? searchParams.sorting : null;
     }
 
+    var newUrlParams = UrlService.getUrlParams(document.location.search);
+
     for (const urlParamKey in urlParams)
     {
-        UrlService.setUrlParam(urlParamKey, urlParams[urlParamKey]);
+
+        if (urlParams[urlParamKey] !== null)
+        {
+            newUrlParams[urlParamKey] = urlParams[urlParamKey];
+        }
+        else
+        {
+            delete newUrlParams[urlParamKey];
+        }
+
     }
+
+    UrlService.setUrlParams(newUrlParams);
 }
 
 export default {

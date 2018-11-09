@@ -44,7 +44,7 @@
                            aria-label="toggle search"
                            data-toggle="collapse"
                            href="#searchBox"
-                           aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
+                           aria-expanded="false"
                            aria-controls="searchBox"
                            data-parent="#controlsList">
                             <span class="anicon-search-item" aria-hidden="true"></span>
@@ -90,17 +90,9 @@
     {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
 {% endif %}
 
-{% if category.linklist == "Y" %}
-    {% set initialCategory = { id: category.id } %}
-{% else %}
-    {% set initialCategory = category %}
-{% endif %}
-
-<mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" :initial-category="{{ initialCategory | json_encode }}" template="#vue-mobile-navigation"></mobile-navigation>
-
 <div class="container-max page-header">
     <div class="row">
-        <div id="searchBox" class="cmp cmp-search-box collapse {% if services.template.isSearch() %} in {% endif %}">
+        <div id="searchBox" class="cmp cmp-search-box collapse">
             <item-search template="#vue-item-search"></item-search>
         </div>
 
@@ -133,7 +125,10 @@
             </div>
         {% endif %}
 
-        <shop-country-settings country-flag-prefix="flag-icon-" :localization-data="{{ services.localization.getLocalizationData() | json_encode }}">
+        <shop-country-settings
+                country-flag-prefix="flag-icon-"
+                :shipping-countries="{{ services.country.getActiveCountriesList() | filterFields(['id','currLangName', 'isoCode2', 'states.id', 'states.name']) | json_encode }}"
+                :shipping-country-id="{{ services.checkout.getShippingCountryId }}">
             <div id="countrySettings" class="row cmp cmp-country-settings no-margin collapse">
                 <div class="container-max">
                     <div class="row no-padding">

@@ -1,5 +1,6 @@
 import {isNull}from "util";
 import {textWidth}from "../../helper/dom";
+import uniq from "lodash/uniq";
 
 const ApiService = require("services/ApiService");
 
@@ -13,7 +14,9 @@ Vue.component("variation-select", {
     props: [
         "attributes",
         "variations",
+        "variationUnits",
         "preselect",
+        "unitPreselect",
         "template"
     ],
 
@@ -21,7 +24,9 @@ Vue.component("variation-select", {
     {
         return {
             // Collection of currently selected variation attributes.
-            selectedAttributes: {}
+            selectedAttributes: {},
+            possibleUnitIds: [],
+            selectedUnitId: 0
         };
     },
 
@@ -59,8 +64,26 @@ Vue.component("variation-select", {
 
                 if (!!preselectedVariation && preselectedVariation.length === 1)
                 {
+                    const attributes = this.attributes;
+
                     // set attributes of preselected variation
                     this.setAttributes(preselectedVariation[0]);
+
+                    if ((preselectedVariation[0].attributes.length > 0 && this.unitPreselect > 0) || attributes.length === 0)
+                    {
+                        const possibleVariations = this.filterVariations(this.selectedAttributes);
+
+                        if (possibleVariations.length > 1)
+                        {
+                            this.setUnits(possibleVariations);
+                            this.selectedUnitId = this.unitPreselect;
+                        }
+                        else if (this.variations.length > 1 && this.attributes.length === 0)
+                        {
+                            this.setUnits(this.variations);
+                            this.selectedUnitId = this.unitPreselect;
+                        }
+                    }
                 }
             }
         });
@@ -89,7 +112,10 @@ Vue.component("variation-select", {
                     }
                 }
 
-                return variation.attributes.length > 0;
+                return variation.attributes.length > 0 || this.possibleUnitIds.length > 0;
+            }).filter(variation =>
+            {
+                return this.selectedUnitId === 0 || this.selectedUnitId === variation.unitCombinationId;
             });
         },
 
@@ -168,6 +194,11 @@ Vue.component("variation-select", {
 
                 if (possibleVariations.length === 1)
                 {
+                    if (!this.selectedUnitId > 0)
+                    {
+                        this.possibleUnitIds = [];
+                    }
+
                     // only 1 matching variation remaining:
                     // set remaining attributes if not set already. Will trigger this method again.
                     if (!this.setAttributes(possibleVariations[0]))
@@ -179,6 +210,14 @@ Vue.component("variation-select", {
                     {
                         this.onSelectionChange();
                     }
+                }
+                else if (possibleVariations.length > 1)
+                {
+                    this.setUnits(possibleVariations);
+                }
+                else
+                {
+                    this.setUnits([]);
                 }
             }
         },
@@ -218,6 +257,27 @@ Vue.component("variation-select", {
                         this.$emit("is-valid-change", true);
                     });
             }
+        },
+        setUnits(possibleVariations)
+        {
+            let possibleUnitIds = [];
+
+            if (possibleVariations.length > 0)
+            {
+                possibleUnitIds = uniq(possibleVariations.map(variation =>
+                {
+                    return variation.unitCombinationId;
+                }));
+            }
+
+            if (possibleUnitIds.length > 1)
+            {
+                this.possibleUnitIds = possibleUnitIds;
+            }
+            else
+            {
+                this.selectedUnitId = 0;
+            }
         }
     },
 
@@ -233,6 +293,8 @@ Vue.component("variation-select", {
                     const title = document.getElementsByTagName("title")[0].innerHTML;
 
                     window.history.replaceState({}, title, url);
+                    document.dispatchEvent(new CustomEvent("onHistoryChanged", {detail: {title: title, url:url}}));
+
                 }
             },
             deep: true
