@@ -14094,21 +14094,20 @@ Custom classes
   top: 10rem;
 }
 
-<<<<<<< HEAD
 @media (max-width: 543px) {
   .notification-wrapper {
     width: 100%;
     padding: 0 15px;
     right: auto;
   }
-=======
+}
+
 html.safari .popper {
   display: none;
 }
 
 html.safari .popper-visible {
   display: block;
->>>>>>> beta
 }
 
 .popper {
@@ -16826,12 +16825,6 @@ body.menu-is-visible {
 .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner {
   display: -ms-flexbox;
   display: flex;
-}
-
-@media (max-width: 991px) {
-  .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner {
-    /* Code */
-  }
 }
 
 .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner .meta-container {
