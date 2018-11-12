@@ -707,38 +707,34 @@
         "label": "Widget.liveShoppingLabel",
         "previewImageURL": "/images/widgets/newsletter.svg",
         "type": "default",
-        "allowedNestingTypes": [
-            "default",
-            "structure"
-        ],
         "widgetClass": "Ceres\\Widgets\\Common\\LiveShoppingWidget",
         "settings": {
             "title": {
-                "type": "inputText",
+                "type": "text",
                 "required": false,
-                "label": "Widget.liveShoppingTitleLabel",
+                "defaultValue": "",
                 "options": {
-                    "tooltip": "Widget.liveShoppingTitleTooltip",
-                    "defaultValue": ""
+                    "name": "Widget.liveShoppingTitleLabel",
+                    "tooltip": "Widget.liveShoppingTitleTooltip"
                 }
             },
             "description": {
-                "type": "inputText",
+                "type": "text",
                 "required": false,
-                "label": "Widget.liveShoppingDescriptionLabel",
+                "defaultValue": "",
                 "options": {
-                    "tooltip": "Widget.liveShoppingDescriptionTooltip",
-                    "defaultValue": ""
+                    "name": "Widget.liveShoppingDescriptionLabel",
+                    "tooltip": "Widget.liveShoppingDescriptionTooltip"
                 }
             },
             "liveShoppingSelection": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.liveShoppingSelectionLabel",
+                "defaultValue": 1,
                 "options": {
+                    "name": "Widget.liveShoppingSelectionLabel",
                     "tooltip": "Widget.liveShoppingSelectionTooltip",
-                    "defaultValue": 1,
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": 1,
                             "caption": "Widget.liveShoppingSelectionValue1",
@@ -793,13 +789,13 @@
                 }
             },
             "sorting": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.liveShoppingSortingLabel",
+                "defaultValue": 1,
                 "options": {
+                    "name": "Widget.liveShoppingSortingLabel",
                     "tooltip": "Widget.liveShoppingSortingTooltip",
-                    "defaultValue": 1,
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "texts.name1_asc",
                             "caption": "Widget.itemName_asc",
@@ -878,46 +874,54 @@
                     ]
                 }
             },
-            "timer": {
-                "type": "selectBox",
+            "showTimer": {
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.liveShoppingTimerLabel",
+                "defaultValue": true,
                 "options": {
-                    "tooltip": "Widget.liveShoppingTimerTooltip",
-                    "defaultValue": 1,
-                    "selectBoxValues": [
-                        {
-                            "value": 1,
-                            "caption": "Widget.liveShoppingTimerValueTimer",
-                            "position": 0
-                        },
-                        {
-                            "value": 2,
-                            "caption": "Widget.liveShoppingTimerValueStock",
-                            "position": 0
-                        },
-                        {
-                            "value": 3,
-                            "caption": "Widget.liveShoppingTimerValueTimerAndStock",
-                            "position": 0
-                        }
-                    ]
+                    "name": "Widget.liveShoppingShowTimerLabel"
+                }
+            },
+            "showTimerProgress": {
+                "type": "checkbox",
+                "required": true,
+                "isVisible": "showTimer === true",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.liveShoppingShowTimerProgressLabel"
+                }
+            },
+            "showStock": {
+                "type": "checkbox",
+                "required": true,
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.liveShoppingShowStockLabel"
+                }
+            },
+            "showStockProgress": {
+                "type": "checkbox",
+                "required": true,
+                "isVisible": "showStock === true",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.liveShoppingShowStockProgressLabel"
                 }
             },
             "showCrossPrice": {
-                "type": "checkBox",
+                "type": "checkbox",
                 "required": true,
-                "label": "Widget.liveShoppingShowCrossPriceLabel",
+                "defaultValue": true,
                 "options": {
-                    "defaultValue": true
+                    "name": "Widget.liveShoppingShowCrossPriceLabel"
                 }
             },
             "customImagePath": {
-                "type": "inputFile",
+                "type": "file",
                 "required": false,
                 "defaultValue": "",
-                "label": "Widget.liveShoppingCustomImagePathLabel",
                 "options": {
+                    "name": "Widget.liveShoppingCustomImagePathLabel",
                     "tooltip": "Widget.liveShoppingCustomImagePathTooltip"
                 }
             }
