@@ -476,10 +476,10 @@ nav.navbar.megamenu {
 html.firefox nav.navbar.megamenu #mainNavbarCollapsable {
 	@include media-breakpoint-up(lg){
 		ul.mainmenu > li > ul.collapse {
-			/* If LVL1 menü becomes to large ul gets scrollbar */
+			/* If LVL1 column in MegaMenu becomes to large container gets scrollbar */
 			overflow: auto;
 			> li {
-				/* LVL1 Columns in MegaMenu are wrapping correctly */
+				/* LVL1 columns in MegaMenu are wrapping correctly */
 				float: none;
 			}
 		}
