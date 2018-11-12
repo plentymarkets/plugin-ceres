@@ -984,8 +984,8 @@
                                 "caption": "Config.itemListsCrossSellingTypeReplacementPart"
                             },
                             {
-                                "value": "Collection",
-                                "caption": "Config.itemListsCrossSellingTypeCollection"
+                                "value": "Bundle",
+                                "caption": "Config.itemListsCrossSellingTypeBundle"
                             }
                         ]
                     }
