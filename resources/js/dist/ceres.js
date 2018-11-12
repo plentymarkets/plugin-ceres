@@ -25511,7 +25511,9 @@ Vue.filter("fileName", function (path) {
 "use strict";
 
 Vue.filter("fileUploadPath", function (path) {
-    return "/order-property-file/" + path.replace("order_property_files/", "");
+    var position = path.lastIndexOf("/");
+
+    return "/order-property-file/" + path.substring(0, position) + "?filename=" + path.substring(position + 1);
 });
 
 },{}],230:[function(require,module,exports){
@@ -27492,7 +27494,8 @@ function getUrlParams(urlParams) {
 }
 
 function setUrlParams(urlParams) {
-    var pathName = (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory) ? _index2.default.state.navigation.currentCategory.url : window.location.pathname;
+    var pathName = (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory) && (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory.url) ? _index2.default.state.navigation.currentCategory.url : window.location.pathname;
+
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
