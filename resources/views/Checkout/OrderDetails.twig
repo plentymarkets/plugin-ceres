@@ -207,9 +207,23 @@
                                         <strong class="col-xs-6 col-sm-3 item-word-break">{{ property.name }}</strong>
                                         {% if property.value matches '{^[0-9a-f]{8}\/[0-9a-f]{8}\/}' %}
                                             <span class="col-xs-6 col-sm-9 item-word-break">
-                                                <a href="order-property-file/{{ property.value }}?orderId={{ orderData.order.id }}" target="_blank">
+                                                {% set splitPath = property.value |split('/') %}
+                                                {% set filename = '' %}
+                                                {% set path = '' %}
+
+                                                {% for temp in splitPath %}
+                                                    {% if loop.first %}
+                                                        {% set path =  temp %}
+                                                    {% elseif loop.last %}
+                                                        {% set filename = temp %}
+                                                    {% else %}
+                                                        {% set path =  path ~ '/' ~ temp %}
+                                                    {% endif %}
+                                                {% endfor %}
+
+
+                                                <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank">
                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                    {% set splitPath = property.value |split('/') %}
                                                     {{ splitPath | last }}
                                                 </a>
                                             </span>
