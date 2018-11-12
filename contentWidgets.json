@@ -496,12 +496,34 @@
                 }
             },
             "itemsPerPage": {
-                "type": "number",
+                "type": "select",
                 "required": true,
-                "defaultValue": "4",
+                "defaultValue": 4,
                 "options": {
                     "name": "Widget.itemListItemsPerPageLabel",
-                    "tooltip": "Widget.itemsListItemsPerPageTooltip"
+                    "tooltip": "Widget.itemsListItemsPerPageTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 1,
+                            "caption": "Widget.itemListItemsPerPage1",
+                            "position": 0
+                        },
+                        {
+                            "value": 2,
+                            "caption": "Widget.itemListItemsPerPage2",
+                            "position": 0
+                        },
+                        {
+                            "value": 3,
+                            "caption": "Widget.itemListItemsPerPage3",
+                            "position": 0
+                        },
+                        {
+                            "value": 4,
+                            "caption": "Widget.itemListItemsPerPage4",
+                            "position": 0
+                        }
+                    ]
                 }
             }
         }
