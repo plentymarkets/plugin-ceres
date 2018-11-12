@@ -23,7 +23,13 @@
     <div class="row clearfix">
         <div class="col-xs-12">
             {{ Twig.if("liveShoppingData.item is not empty") }}
-                <category-item :item-data="{{ Twig.print("liveShoppingData.item | json_encode") }}" decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}" :live-shopping-data="{{ Twig.print("liveShoppingData.liveShopping | json_encode") }}" :live-shopping-config="{{ liveShoppingConfig | json_encode }}" image-url-accessor="urlMiddle"></category-item>
+                <category-item :item-data="{{ Twig.print("liveShoppingData.item | json_encode") }}" decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}" :live-shopping-data="{{ Twig.print("liveShoppingData.liveShopping | json_encode") }}" :live-shopping-config="{{ liveShoppingConfig | json_encode }}" image-url-accessor="urlMiddle">
+                    {% if liveShoppingConfig.customImagePath is not empty %}
+                        <a slot="custom-image" :href="{{ Twig.print("liveShoppingData.item | json_encode") }} | itemURL">
+                            <item-lazy-img template="#vue-item-lazy-img" image-url="{{ liveShoppingConfig.customImagePath }}" :title="{{ Twig.print("liveShoppingData.item | json_encode") }} | itemName" :alt="{{ Twig.print("liveShoppingData.item | json_encode") }} | itemName"></item-lazy-img>
+                        </a>
+                    {% endif %}
+                </category-item>
             {{ Twig.endif() }}
         </div>
     </div>
