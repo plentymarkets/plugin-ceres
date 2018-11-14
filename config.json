@@ -1469,6 +1469,7 @@
                 },
                 "basket.variations": {
                     "type": "checkBox",
+                    "deprecated": true,
                     "required": false,
                     "label": "Config.basketVariationsLabel",
                     "options": {
