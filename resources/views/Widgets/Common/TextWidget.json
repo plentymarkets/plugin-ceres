@@ -11,7 +11,7 @@
             "required": true,
             "label": "Widget.widgetAppearanceLabel",
             "options": {
-                "tooltip": "Widget.widgetAppearanceTooltip",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
                 "defaultValue": "none",
                 "selectBoxValues": [
                     {
@@ -54,8 +54,9 @@
         },
         "text": {
             "type": "codeEditor",
-            "label": "Widget.textCodeEditorLabel",
-            "options": {}
+            "options": {
+                "name": "Widget.textCodeEditorLabel"
+            }
         }
     }
 }

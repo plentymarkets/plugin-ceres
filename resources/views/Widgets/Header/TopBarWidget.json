@@ -7,21 +7,21 @@
     "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",
     "settings": {
         "isFixed": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.topBarIsFixedLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.topBarIsFixedLabel"
             }
         },
         "searchStyle": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.topBarSearchStyleLabel",
+            "defaultValue": "onDemand",
             "options": {
-                "tooltip": "Widget.topBarSearchStyleTooltip",
-                "defaultValue": "onDemand",
-                "selectBoxValues": [
+                "name": "Widget.topBarSearchStyleLabel",
+                "tooltipText": "Widget.topBarSearchStyleTooltip",
+                "listBoxValues": [
                     {
                         "value": "hidden",
                         "caption": "Widget.topBarSearchStyleHidden",
@@ -41,85 +41,85 @@
             }
         },
         "showItemImages": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.topBarShowItemImagesLabel",
+            "defaultValue": false,
             "options": {
-                "defaultValue": false
+                "name": "Widget.topBarShowItemImagesLabel"
             }
         },
         "forwardToSingleItem": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": false,
-            "label": "Widget.topBarForwardToSingleItemLabel",
+            "defaultValue": false,
             "options": {
-                "defaultValue": false
+                "name": "Widget.topBarForwardToSingleItemLabel"
             }
         },
         "enableLogin": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.topBarEnableLoginLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.topBarEnableLoginLabel"
             }
         },
         "enableRegistration": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.topBarEnableRegistrationLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.topBarEnableRegistrationLabel"
             }
         },
         "enableLanguageSelect": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.topBarEnableLanguageSelectLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.topBarEnableLanguageSelectLabel"
             }
         },
         "enableShippingCountrySelect": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.topBarEnableShippingCountrySelectLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.topBarEnableShippingCountrySelectLabel"
             }
         },
         "enableCurrencySelect": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.topBarEnableCurrencySelectLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.topBarEnableCurrencySelectLabel"
             }
         },
         "enableWishList": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.topBarEnableWishListLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.topBarEnableWishListLabel"
             }
         },
         "enableBasketPreview": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.topBarEnableBasketPreviewLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.topBarEnableBasketPreviewLabel"
             }
         },
         "basketValues": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.topBarBasketValuesLabel",
+            "defaultValue": "sum",
             "options": {
-                "tooltip": "Widget.topBarBasketValuesTooltip",
-                "defaultValue": "sum",
-                "selectBoxValues": [
+                "name": "Widget.topBarBasketValuesLabel",
+                "tooltipText": "Widget.topBarBasketValuesTooltip",
+                "listBoxValues": [
                     {
                         "value": "sum",
                         "caption": "Widget.topBarBasketValuesSum",

@@ -56,6 +56,7 @@
                     "type": "checkbox",
                     "required": true,
                     "defaultValue": false,
+                    "isVisible": "cancellationFormContainer.showCancellationForm",
                     "options": {
                         "name": "Widget.legalInformationCancellationPdfActiveLabel"
                     }
@@ -64,9 +65,10 @@
                     "type": "file",
                     "required": false,
                     "defaultValue": "",
+                    "isVisible": "cancellationFormContainer.showCancellationForm && cancellationFormContainer.useCancellationPdfUpload",
                     "options": {
                         "name": "Widget.legalInformationCancellationPdfUploadLabel",
-                        "tooltip": "Widget.legalInformationCancellationPdfUploadTooltip",
+                        "tooltipText": "Widget.legalInformationCancellationPdfUploadTooltip",
                         "allowedExtensions": [
                             "pdf"
                         ]
