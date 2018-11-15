@@ -1341,6 +1341,7 @@
                 "type": "checkbox",
                 "required": true,
                 "defaultValue": false,
+                "isVisible": "searchStyle !== 'hidden'",
                 "options": {
                     "name": "Widget.topBarShowItemImagesLabel"
                 }
@@ -1349,6 +1350,7 @@
                 "type": "checkbox",
                 "required": false,
                 "defaultValue": false,
+                "isVisible": "searchStyle !== 'hidden'",
                 "options": {
                     "name": "Widget.topBarForwardToSingleItemLabel"
                 }
@@ -1413,6 +1415,7 @@
                 "type": "select",
                 "required": true,
                 "defaultValue": "sum",
+                "isVisible": "enableBasketPreview",
                 "options": {
                     "name": "Widget.topBarBasketValuesLabel",
                     "tooltipText": "Widget.topBarBasketValuesTooltip",
