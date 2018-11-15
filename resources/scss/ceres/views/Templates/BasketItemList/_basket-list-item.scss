@@ -199,7 +199,6 @@
 			}
 		}
 
-
 		.item-additional-information-container {
 			.item-additional-information {
 				font-size: 75%;
@@ -243,3 +242,27 @@
 		}
 	}
 }
+
+/* Compatibility for IE */
+html.ie .basket-item-container .basket-item .meta-container-wrapper {
+
+	// Let shrink if necessary
+	.meta-container {
+		flex-shrink: 2;
+	}
+	
+	// Initialise width and let shrink if necessary
+	.basket-item-container-right {
+		width: 100%;
+		flex-shrink: 2;
+
+		// Arrange to the right
+		.qty-box-container {
+			margin-left: auto;
+		}
+		div.price-box {
+			margin-left: 0;
+		}
+	}
+}
+
