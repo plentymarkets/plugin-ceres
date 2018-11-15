@@ -246,22 +246,34 @@
 /* Compatibility for IE */
 html.ie .basket-item-container .basket-item .meta-container-wrapper {
 
+	// Arrange on top of each other
+	@include media-breakpoint-down(md) {
+		.meta-container-wrapper-inner {
+			display: block
+		}
+		.meta-container {
+			margin-bottom: 10px;
+		}
+	}
+
 	// Let shrink if necessary
 	.meta-container {
-		flex-shrink: 2;
+		flex-shrink: 1;
 	}
 	
-	// Initialise width and let shrink if necessary
+	// Initialise width
 	.basket-item-container-right {
 		width: 100%;
-		flex-shrink: 2;
+		display: flex;
 
 		// Arrange to the right
 		.qty-box-container {
 			margin-left: auto;
+			margin-right: 0px;
 		}
+
 		div.price-box {
-			margin-left: 0;
+			margin-left: 10px;
 		}
 	}
 }
