@@ -17008,6 +17008,36 @@ body.menu-is-visible {
   content: attr(data-show-less);
 }
 
+/* Compatibility for IE */
+@media (max-width: 991px) {
+  html.ie .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner {
+    display: block;
+  }
+  html.ie .basket-item-container .basket-item .meta-container-wrapper .meta-container {
+    margin-bottom: 10px;
+  }
+}
+
+html.ie .basket-item-container .basket-item .meta-container-wrapper .meta-container {
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+}
+
+html.ie .basket-item-container .basket-item .meta-container-wrapper .basket-item-container-right {
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+html.ie .basket-item-container .basket-item .meta-container-wrapper .basket-item-container-right .qty-box-container {
+  margin-left: auto;
+  margin-right: 0px;
+}
+
+html.ie .basket-item-container .basket-item .meta-container-wrapper .basket-item-container-right div.price-box {
+  margin-left: 10px;
+}
+
 @media (min-width: 992px) {
   .control-basket:hover .basket-preview-hover-wrapper {
     display: block;
