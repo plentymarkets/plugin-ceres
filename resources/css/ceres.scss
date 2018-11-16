@@ -8,6 +8,7 @@
 
 // Root directory
 
+
 $root-directory: '..' !default;
 
 // Flags settings
@@ -11959,6 +11960,15 @@ Custom classes
 	right:.5rem;
 }
 
+.alert {
+	@include media-breakpoint-up(sm) {
+	  width: 400px;
+	}
+	@include media-breakpoint-up(xs) {
+	  width: 100%;
+	}
+}
+
 .password-info {
 
 	padding: 10px !important;
@@ -12277,6 +12287,12 @@ Custom classes
     position: fixed;
     right: .5rem;
     top: 10rem;
+
+    @include media-breakpoint-down(xs) {
+        width: 100%;
+        padding: 0 15px;
+        right: auto;
+    }
 }
 html.safari {
 	.popper {
