@@ -1,3 +1,5 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 <header id="page-header" class="top-bar pos-f-t">
     <div>
         <div class="container-max">
@@ -93,7 +95,12 @@
 <div class="container-max page-header">
     <div class="row">
         <div id="searchBox" class="cmp cmp-search-box collapse">
-            <item-search template="#vue-item-search"></item-search>
+            {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
+            {% if overrideSearchBar | trim is empty %}
+                <item-search template="#vue-item-search"></item-search>
+            {% else %}
+                {{ overrideSearchBar | raw }}
+            {% endif %}
         </div>
 
         {% if enableCurrencySelect == "true" %}
