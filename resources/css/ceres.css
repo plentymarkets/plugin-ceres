@@ -13792,6 +13792,16 @@ Custom classes
   right: .5rem;
 }
 
+.alert {
+  width: 100%;
+}
+
+@media (min-width: 544px) {
+  .alert {
+    width: 400px;
+  }
+}
+
 .password-info {
   padding: 10px !important;
 }
@@ -14082,6 +14092,14 @@ Custom classes
   position: fixed;
   right: .5rem;
   top: 10rem;
+}
+
+@media (max-width: 543px) {
+  .notification-wrapper {
+    width: 100%;
+    padding: 0 15px;
+    right: auto;
+  }
 }
 
 html.safari .popper {
