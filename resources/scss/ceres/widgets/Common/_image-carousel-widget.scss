@@ -148,6 +148,15 @@
     }
 }
 
+/* Compatibility for IE */
+html.ie {
+    /* display with optimal aspect ratio */
+    .widget-image-carousel .widget-inner .carousel-item .img-cover {
+        min-height: auto;
+        min-width: auto;
+    }
+}
+
 @include widget-carousel-variant('.widget-primary', $brand-primary);
 @include widget-carousel-variant('.widget-secondary', $brand-secondary);
 @include widget-carousel-variant('.widget-success', $brand-success);
