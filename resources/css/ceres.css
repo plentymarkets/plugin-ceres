@@ -13509,6 +13509,30 @@ Custom classes
   }
 }
 
+/* Compatibility for IE */
+html.ie #single-carousel .owl-item img {
+  width: auto;
+  display: inline-block;
+}
+
+html.ie #single-carousel .owl-item > div {
+  text-align: center;
+}
+
+html.ie #thumb-carousel .owl-stage {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+html.ie #thumb-carousel .owl-stage .owl-item {
+  width: auto !important;
+}
+
+html.ie #thumb-carousel .owl-stage .owl-item img {
+  width: auto;
+  margin-right: 0 !important;
+}
+
 .cmp {
   position: relative;
 }

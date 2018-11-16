@@ -11752,6 +11752,38 @@ Custom classes
   }
 }
 
+/* Compatibility for IE */
+html.ie {
+  // set width to maximal available size
+  #single-carousel .owl-item img {
+    width: auto;
+    display: inline-block;
+  }
+  // align image center
+  #single-carousel .owl-item > div {
+    text-align: center;
+  }
+
+  // prevent wrap
+  #thumb-carousel .owl-stage {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    
+    // thumb-image takes assigned height of parent and displays optimal width
+    .owl-item {
+      width: auto !important;
+
+      img {
+        width: auto;
+        margin-right: 0 !important;
+      }
+    }
+  }
+}
+
+
+
 
 // Components
 
