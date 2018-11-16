@@ -10,13 +10,13 @@
     "widgetClass": "Ceres\\Widgets\\Grid\\ThreeColumnWidget",
     "settings": {
         "layout": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.gridThreeColumnLayoutLabel",
+            "defaultValue": "oneToOneToOne",
             "options": {
-                "tooltip": "Widget.gridThreeColumnLayoutTooltip",
-                "defaultValue": "oneToOneToOne",
-                "selectBoxValues": [
+                "name": "Widget.gridThreeColumnLayoutLabel",
+                "tooltipText": "Widget.gridThreeColumnLayoutTooltip",
+                "listBoxValues": [
                     {
                         "value": "oneToOneToOne",
                         "caption": "Widget.gridThreeColumnLayoutOneToOneToOne",
