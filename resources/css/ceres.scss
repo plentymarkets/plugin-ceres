@@ -8,7 +8,6 @@
 
 // Root directory
 
-
 $root-directory: '..' !default;
 
 // Flags settings
@@ -12290,7 +12289,7 @@ Custom classes
 
     @include media-breakpoint-down(xs) {
         width: 100%;
-        padding: 0 15px;
+        padding: 0 ($grid-gutter-width / 2);
         right: auto;
     }
 }
