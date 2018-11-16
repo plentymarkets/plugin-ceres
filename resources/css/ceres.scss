@@ -15435,7 +15435,6 @@ nav.navbar.megamenu {
 			}
 		}
 
-
 		.item-additional-information-container {
 			.item-additional-information {
 				font-size: 75%;
@@ -15479,6 +15478,46 @@ nav.navbar.megamenu {
 		}
 	}
 }
+
+/* Compatibility for IE */
+html.ie .basket-item-container .basket-item .meta-container-wrapper {
+
+	// Arrange on top of each other
+	@include media-breakpoint-down(md) {
+		.meta-container-wrapper-inner {
+			display: block
+		}
+		.meta-container {
+			margin-bottom: 10px;
+		}
+	}
+
+	// Let shrink if necessary
+	.meta-container {
+		-ms-flex-negative: 1;
+		    flex-shrink: 1;
+	}
+	
+	// Initialise width
+	.basket-item-container-right {
+		width: 100%;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+
+		// Arrange to the right
+		.qty-box-container {
+			margin-left: auto;
+			margin-right: 0px;
+		}
+
+		div.price-box {
+			margin-left: 10px;
+		}
+	}
+}
+
+
 @include media-breakpoint-up(lg) {
 	.control-basket {
 		&:hover {
