@@ -33,6 +33,11 @@
     {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems]) ) }}
 {% endif %}
 
+{% if listType == "manufacturer" %}
+    {# do not get item list for last seen items. Items will be loaded asynchronusly by vue component. #}
+    {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, 2, itemSort, maxItems]) ) }}
+{% endif %}
+
 {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
 {% if headlineStyle == "default-caption" or headlineStyle is empty %}
     {% if listType == "category" %}

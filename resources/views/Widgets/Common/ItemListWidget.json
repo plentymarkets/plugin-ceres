@@ -105,6 +105,11 @@
                         "value": "tag_list",
                         "caption": "Widget.itemListListTypeTaglist",
                         "position": 2
+                    },
+                    {
+                        "value": "manufacturer",
+                        "caption": "Widget.itemListManufacturer",
+                        "position": 3
                     }
                 ]
             }
