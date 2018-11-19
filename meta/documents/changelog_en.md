@@ -1,5 +1,12 @@
 # Release Notes for Ceres
 
+## v2.16.3 (2018-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.2...2.16.3" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Changing the currency via the ShopBuilder top bar widget was not possible. This behaviour has been fixed.
+- Due to an error, the item search was not working properly on certain Android devices. This has been fixed.
+
 ## v2.16.2 (2018-11-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.1...2.16.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
