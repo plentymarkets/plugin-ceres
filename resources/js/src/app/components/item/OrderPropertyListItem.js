@@ -23,6 +23,22 @@ Vue.component("order-property-list-item", {
         };
     },
 
+    mounted()
+    {
+        document.addEventListener("onVariationChanged", () =>
+        {
+            if (this.property.valueType !== "file")
+            {
+                this.inputValue = "";
+            }
+            else
+            {
+                this.selectedFile = null;
+            }
+            this.setVariationOrderProperty({propertyId: this.property.id, value: null});
+        });
+    },
+
     computed:
     {
         inputType()
