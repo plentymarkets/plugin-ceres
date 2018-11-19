@@ -1,11 +1,11 @@
 import moment from "moment";
 
-Vue.component("live-shopping-timer", {
+Vue.component("live-shopping-timer-old", {
     props: {
         template:
         {
             type: String,
-            default: "#vue-live-shopping-timer"
+            default: "#vue-live-shopping-timer-old"
         },
         itemData:
         {
@@ -39,7 +39,8 @@ Vue.component("live-shopping-timer", {
             from: parseInt(this.liveShoppingData.fromTime) * 1000,
             to: parseInt(this.liveShoppingData.toTime) * 1000,
             duration: null,
-            timePercentage: 0
+            timePercentage: 0,
+            down: true
         };
     },
 

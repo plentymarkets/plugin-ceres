@@ -1,0 +1,65 @@
+<script type="x/template" id="vue-live-shopping-details">
+    <div class="live-shopping">
+        <div class="h3 live-shopping-item-name">
+            <a :href="liveShoppingData.item | itemURL">
+                ${ liveShoppingData.item | itemName }
+            </a>
+        </div>
+
+        <div class="live-shopping-countdown" v-if="displaySettings.showTimer || displaySettings.showStock">
+            <hr class="live-shopping-countdown-separator">
+            <div class="live-shopping-countdown-heading" v-if="displaySettings.showTimer">{{ trans("Ceres::Template.liveShoppingOfferEndsIn") }}</div>
+
+            <div class="live-shopping-countdown-thread-container" v-if="displaySettings.showTimer">
+                <div v-if="duration.days > 0" class="live-shopping-countdown-thread">
+                    <div class="live-shopping-countdown-thread-number">${ duration.days }</div>
+                    <div class="small">Tage</div>
+                </div>
+                <div class="live-shopping-countdown-thread">
+                    <div class="live-shopping-countdown-thread-number">${ duration.hours }</div>
+                    <div class="small">Stunden</div>
+                </div>
+                <div class="live-shopping-countdown-thread">
+                    <div class="live-shopping-countdown-thread-number">${ duration.minutes }</div>
+                    <div class="small">Minuten</div>
+                </div>
+                <div v-if="duration.days <= 0" class="live-shopping-countdown-thread">
+                    <div class="live-shopping-countdown-thread-number">${ duration.seconds }</div>
+                    <div class="small">Sekunden</div>
+                </div>
+            </div>
+
+            <div class="live-shopping-progress" v-if="displaySettings.showTimer && displaySettings.showTimerProgress">
+                <div class="bs4-progress">
+                    <div :class="'progress-' + Math.round(timePercentage / 10) * 10" class="bs4-progress-bar" role="progressbar" :style="'width:' + timePercentage + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+
+            <div class="live-shopping-progress" v-if="displaySettings.showStock">
+                <div class="live-shopping-progress-heading">
+                    <span>{{ trans("Ceres::Template.liveShoppingRemainingStock", {"quantityRemaining": "${ itemQuantityRemaining }", "quantityMax": "${ liveShoppingData.liveShopping.quantityMax }"}) }}</span>
+                </div>
+
+                <div class="bs4-progress" v-if="displaySettings.showStockProgress">
+                    <div :class="'progress-' + Math.round(quantitySoldPercentage / 10) * 10" class="bs4-progress-bar" role="progressbar" :style="'width:' + quantitySoldPercentage + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="live-shopping-prices bg-danger">
+            <div class="live-shopping-prices-inner">
+                <div class="live-shopping-prices-rebate">{{ trans("Ceres::Template.liveShoppingRebate", {"rebate": "${ itemPriceRebatePercentage }" }) }}</div>
+                <div class="live-shopping-prices-container">
+                    <div class="live-shopping-price">
+                        <strong>${ liveShoppingData.item.prices.specialOffer.price.formatted } *</strong>
+                    </div>
+                    <del v-if="displaySettings.showCrossPrice">${ liveShoppingData.item.prices.default.price.formatted }</del>
+                </div>
+            </div>
+
+            <div class="live-shopping-prices-additional-info">
+                <slot name="additional-price-info"></slot>
+            </div>
+        </div>
+    </div>
+</script>

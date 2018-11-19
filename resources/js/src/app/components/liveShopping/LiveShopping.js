@@ -1,5 +1,3 @@
-import moment from "moment";
-
 Vue.component("live-shopping", {
     props: {
         template:
@@ -7,108 +5,47 @@ Vue.component("live-shopping", {
             type: String,
             default: "#vue-live-shopping"
         },
-        itemData:
+        liveShoppingId:
         {
-            type: Object,
-            required: true
-        },
-        liveShoppingData:
-        {
-            type: Object,
-            required: true
-        },
-        config:
-        {
-            type: Object,
-            default: () =>
+            type: Number,
+            required: true,
+            validator: value =>
             {
-                return {
-                    showTimer: true,
-                    showTimerProgress: true,
-                    showStock: true,
-                    showStockProgress: true,
-                    showCrossPrice: true
-                };
+                return value % 1 === 0 && value >= 1 && value <= 10;
             }
+        },
+        displaySettings:
+        {
+            type: Object
         }
     },
 
     data()
     {
         return {
-            from: parseInt(this.liveShoppingData.fromTime) * 1000,
-            to: parseInt(this.liveShoppingData.toTime) * 1000,
-            duration: null,
-            timePercentage: 0,
-            test: 100,
-            down: true
         };
     },
 
     computed:
     {
-        quantitySoldPercentage()
+        currentOffer()
         {
-            const percentage = 100 - this.liveShoppingData.quantitySold / this.liveShoppingData.quantityMax * 100;
-
-            return percentage.toFixed(2);
+            return this.liveShoppingOffers[this.liveShoppingId];
         },
 
-        itemPriceRebatePercentage()
-        {
-            const specialOfferPrice = this.itemData.prices.specialOffer.price.value;
-            const defaultPrice      = this.itemData.prices.default.price.value;
-            let percentage          = 100 - specialOfferPrice / defaultPrice * 100;
-
-            percentage = percentage.toFixed(2);
-            percentage = percentage.replace(".", App.decimalSeparator);
-
-            return percentage;
-        }
+        ...Vuex.mapState({
+            liveShoppingOffers: state => state.liveShopping.liveShoppingOffers
+        })
     },
 
     created()
     {
         this.$options.template = this.template;
 
-        this.initTimer();
+        this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
     },
 
     methods:
     {
-        initTimer()
-        {
-            this.calculations();
-
-            setInterval(() =>
-            {
-                this.calculations();
-            }, 1000);
-        },
-
-        calculations()
-        {
-            const momBegin = moment(this.from);
-            const momEnd = moment(this.to);
-            const momNow = moment(Date.now());
-
-            const fullSeconds = momEnd.diff(momBegin, "seconds");
-            const leftSeconds = momEnd.diff(momNow, "seconds");
-
-            this.timePercentage = (leftSeconds / fullSeconds * 100).toFixed(2);
-            this.duration = this.getDuration(leftSeconds);
-        },
-
-        getDuration(seconds)
-        {
-            const duration = moment.duration(seconds, "seconds");
-
-            return {
-                days: duration.days(),
-                hours: duration.hours(),
-                minutes: duration.minutes(),
-                seconds: duration.seconds()
-            };
-        }
     }
 });

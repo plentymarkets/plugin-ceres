@@ -13,6 +13,11 @@ $live-shopping-padding: 1rem .8rem;
 
         > a
         {
+            color: $gray;
+            display: block;
+            font-weight: normal;
+            line-height: 1.5em;
+            position: relative;
             text-align: center;
         }
     }

@@ -1,6 +1,7 @@
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
+{{ component( "Ceres::LiveShopping.Components.LiveShoppingTimerOld" ) }}
 
 {% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
 
@@ -52,14 +53,14 @@
             <!-- ./STORE SPECIALS -->
 
             <!-- ITEM DETAILS -->
-            <live-shopping v-if="liveShoppingData" :item-data="itemData" :live-shopping-data="liveShoppingData" :config="liveShoppingConfig">
+            <live-shopping-timer-old v-if="liveShoppingData" :item-data="itemData" :live-shopping-data="liveShoppingData" :config="liveShoppingConfig">
                 <div slot="additional-price-info">
                     * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
                     <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
                     {{ trans("Ceres::Template.itemExclusive") }}
                     <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                 </div>
-            </live-shopping>
+            </live-shopping-timer-old>
 
             <div class="thumb-content" v-else>
                 <a :href="itemData | itemURL" class="thumb-title small">
