@@ -19567,6 +19567,15 @@ html.ie .basket-item-container .basket-item .meta-container-wrapper {
     }
 }
 
+/* Compatibility for IE */
+/* display img with optimal aspect ratio */
+html.ie {
+    .widget-image-carousel .widget-inner .carousel-item .img-cover {
+        min-height: auto;
+        min-width: auto;
+    }
+}
+
 @include widget-carousel-variant('.widget-primary', $brand-primary);
 @include widget-carousel-variant('.widget-secondary', $brand-secondary);
 @include widget-carousel-variant('.widget-success', $brand-success);
