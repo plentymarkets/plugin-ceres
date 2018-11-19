@@ -22511,7 +22511,6 @@ Vue.component("item-search", {
 
     data: function data() {
         return {
-            currentSearchString: "",
             promiseCount: 0,
             autocompleteResult: [],
             selectedAutocompleteIndex: -1,
@@ -22542,7 +22541,8 @@ Vue.component("item-search", {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
             _this.$store.commit("setItemListSearchString", urlParams.query);
-            _this.currentSearchString = urlParams.query;
+
+            _this.$refs.searchInput.value = !(0, _utils.isNullOrUndefined)(urlParams.query) ? urlParams.query : "";
         });
     },
 
@@ -22553,8 +22553,8 @@ Vue.component("item-search", {
                 if (this.forwardToSingleItem) {
                     window.open(this.selectedAutocompleteItem.url, "_self", false);
                 } else {
-                    this.currentSearchString = this.selectedAutocompleteItem.name;
-                    this.$store.commit("setItemListSearchString", this.currentSearchString);
+                    this.$refs.searchInput.value = this.selectedAutocompleteItem.name;
+                    this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                     this.search();
                 }
@@ -22565,10 +22565,10 @@ Vue.component("item-search", {
             $("#searchBox").collapse("hide");
         },
         search: function search() {
-            if (this.currentSearchString.length) {
+            if (this.$refs.searchInput.value.length) {
                 if (document.location.pathname === "/search") {
-                    this.updateTitle(this.currentSearchString);
-                    this.$store.dispatch("searchItems", this.currentSearchString);
+                    this.updateTitle(this.$refs.searchInput.value);
+                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
 
                     this.selectedAutocompleteIndex = -1;
                     this.autocompleteResult = [];
@@ -22579,7 +22579,7 @@ Vue.component("item-search", {
                         searchBaseURL = "/" + App.language + "/search?query=";
                     }
 
-                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
+                    window.open(searchBaseURL + this.$refs.searchInput.value, "_self", false);
                 }
             } else {
                 this.preventSearch = false;
@@ -22690,8 +22690,8 @@ Vue.component("item-search", {
             if (this.forwardToSingleItem) {
                 window.open(item.url, "_self", false);
             } else {
-                this.currentSearchString = item.name;
-                this.$store.commit("setItemListSearchString", this.currentSearchString);
+                this.$refs.searchInput.value = item.name;
+                this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                 this.search();
             }
@@ -26336,6 +26336,7 @@ module.exports = function ($) {
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
         config.keepOriginalResponse = !!config.keepOriginalResponse;
+        config.headers = config.headers || { "Accept-Language": App.language };
 
         if (data) {
             data.templateEvent = App.templateEvent;
