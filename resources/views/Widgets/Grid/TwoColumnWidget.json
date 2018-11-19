@@ -10,13 +10,13 @@
     "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
     "settings": {
         "layout": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.gridTwoColumnLayoutLabel",
+            "defaultValue": "oneToOne",
             "options": {
-                "tooltip": "Widget.gridTwoColumnLayoutTooltip",
-                "defaultValue": "oneToOne",
-                "selectBoxValues": [
+                "name": "Widget.gridTwoColumnLayoutLabel",
+                "tooltipText": "Widget.gridTwoColumnLayoutTooltip",
+                "listBoxValues": [
                     {
                         "value": "oneToOne",
                         "caption": "Widget.gridTwoColumnLayoutOneToOne",

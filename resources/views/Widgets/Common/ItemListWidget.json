@@ -12,7 +12,7 @@
             "defaultValue": "primary",
             "options": {
                 "name": "Widget.widgetAppearanceLabel",
-                "tooltip": "Widget.widgetAppearanceTooltip",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
                 "listBoxValues": [
                     {
                         "value": "primary",
@@ -53,7 +53,7 @@
             "defaultValue": "default-caption",
             "options": {
                 "name": "Widget.itemListCaptionLabel",
-                "tooltip": "Widget.itemListCaptionTooltip",
+                "tooltipText": "Widget.itemListCaptionTooltip",
                 "listBoxValues": [
                     {
                         "value": "default-caption",
@@ -80,7 +80,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.itemListHeadlineLabel",
-                "tooltip": "Widget.itemListHeadlineTooltip"
+                "tooltipText": "Widget.itemListHeadlineTooltip"
             }
         },
         "listType": {
@@ -89,7 +89,7 @@
             "defaultValue": "category",
             "options": {
                 "name": "Widget.itemListListTypeLabel",
-                "tooltip": "Widget.itemListListTypeTooltip",
+                "tooltipText": "Widget.itemListListTypeTooltip",
                 "listBoxValues": [
                     {
                         "value": "category",
@@ -121,7 +121,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.itemListCategoryIdLabel",
-                "tooltip": "Widget.itemListCategoryIdTooltip"
+                "tooltipText": "Widget.itemListCategoryIdTooltip"
             }
         },
         "tagId": {
@@ -131,7 +131,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.itemListTagIdLabel",
-                "tooltip": "Widget.itemListTagIdTooltip"
+                "tooltipText": "Widget.itemListTagIdTooltip"
             }
         },
         "itemSort": {
@@ -141,7 +141,7 @@
             "defaultValue": "texts.name1_asc",
             "options": {
                 "name": "Widget.itemListItemSortLabel",
-                "tooltip": "Widget.itemListItemSortTooltip",
+                "tooltipText": "Widget.itemListItemSortTooltip",
                 "listBoxValues": [
                     {
                         "value": "default.recommended_sorting",
@@ -233,7 +233,7 @@
             "defaultValue": "4",
             "options": {
                 "name": "Widget.itemListMaxItemsLabel",
-                "tooltip": "Widget.itemListMaxItemsTooltip"
+                "tooltipText": "Widget.itemListMaxItemsTooltip"
             }
         },
         "itemsPerPage": {
@@ -242,7 +242,7 @@
             "defaultValue": 4,
             "options": {
                 "name": "Widget.itemListItemsPerPageLabel",
-                "tooltip": "Widget.itemsListItemsPerPageTooltip",
+                "tooltipText": "Widget.itemsListItemsPerPageTooltip",
                 "listBoxValues": [
                     {
                         "value": 1,
