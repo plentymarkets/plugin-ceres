@@ -2,7 +2,7 @@
 {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
 {{ component( "Ceres::LiveShopping.Components.LiveShoppingDetails" ) }}
 
-<script type="x/template" id="vue-live-shopping">
+<script type="x/template" id="vue-live-shopping-item">
     <div>
         <category-item v-if="!!currentOffer" :item-data="currentOffer.item" decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle">
 

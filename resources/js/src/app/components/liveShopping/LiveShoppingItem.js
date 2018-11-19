@@ -1,9 +1,9 @@
-Vue.component("live-shopping", {
+Vue.component("live-shopping-item", {
     props: {
         template:
         {
             type: String,
-            default: "#vue-live-shopping"
+            default: "#vue-live-shopping-item"
         },
         liveShoppingId:
         {
