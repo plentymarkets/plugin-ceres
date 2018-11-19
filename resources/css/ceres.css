@@ -20572,6 +20572,16 @@ html.ie .basket-item-container .basket-item .meta-container-wrapper .basket-item
   }
 }
 
+/* Compatibility for IE */
+html.ie {
+  /* display with optimal aspect ratio */
+}
+
+html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
+  min-height: auto;
+  min-width: auto;
+}
+
 .widget-image-carousel.widget-primary .widget-caption h2,
 .widget-image-carousel.widget-primary .widget-caption .h2 {
   color: #fff;
