@@ -7,9 +7,7 @@ Vue.component("category-item", {
     props: [
         "decimalCount",
         "itemData",
-        "imageUrlAccessor",
-        "liveShoppingData",
-        "liveShoppingConfig"
+        "imageUrlAccessor"
     ],
 
     data()
@@ -31,7 +29,7 @@ Vue.component("category-item", {
         },
 
         /**
-         * returns itemData.texts[0]
+         * returns itemData.texts
          */
         texts()
         {

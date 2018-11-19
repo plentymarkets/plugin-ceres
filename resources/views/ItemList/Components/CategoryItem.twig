@@ -1,7 +1,6 @@
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
-{{ component( "Ceres::LiveShopping.Components.LiveShoppingTimerOld" ) }}
 
 {% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
 
@@ -27,7 +26,7 @@
             <div class="thumb-image">
                 <div class="square-container">
                     <div class="square-inner main-image">
-                        <slot name="custom-image">
+                        <slot name="item-image">
                             <category-image-carousel template="#vue-category-image-carousel"
                                                     :image-urls-data="itemData.images | itemImages(imageUrlAccessor)"
                                                     :alt-text="itemData | itemName"
@@ -53,51 +52,44 @@
             <!-- ./STORE SPECIALS -->
 
             <!-- ITEM DETAILS -->
-            <live-shopping-timer-old v-if="liveShoppingData" :item-data="itemData" :live-shopping-data="liveShoppingData" :config="liveShoppingConfig">
-                <div slot="additional-price-info">
-                    * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
-                    <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
-                    {{ trans("Ceres::Template.itemExclusive") }}
-                    <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
-                </div>
-            </live-shopping-timer-old>
+            <slot name="item-details">
+                <div class="thumb-content">
+                    <a :href="itemData | itemURL" class="thumb-title small">
+                        ${ itemData | itemName }
+                    </a>
+                    <div class="thumb-meta">
+                        <div class="prices">
+                            <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
+                                <del class="crossprice" v-if="itemData.prices.specialOffer">
+                                    ${ itemData.prices.default.price.formatted }
+                                </del>
+                                <del class="crossprice" v-else>
+                                    ${ itemData.prices.rrp.price.formatted }
+                                </del>
+                            </div>
 
-            <div class="thumb-content" v-else>
-                <a :href="itemData | itemURL" class="thumb-title small">
-                    ${ itemData | itemName }
-                </a>
-                <div class="thumb-meta">
-                    <div class="prices">
-                        <div v-if="(liveShoppingConfig && liveShoppingConfig.showCrossPrice && itemData.prices.specialOffer) || itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
-                            <del class="crossprice" v-if="liveShoppingConfig.showCrossPrice && itemData.prices.specialOffer">
-                                ${ itemData.prices.default.price.formatted }
-                            </del>
-                            <del class="crossprice" v-else>
-                                ${ itemData.prices.rrp.price.formatted }
-                            </del>
+                            <div class="price">
+                                ${ itemData.prices.default.unitPrice.formatted | specialOffer(itemData.prices, "unitPrice", "formatted") } *
+                            </div>
                         </div>
 
-                        <div class="price">
-                            ${ itemData.prices.default.unitPrice.formatted | specialOffer(itemData.prices, "unitPrice", "formatted") } *
+                        <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
+                            <span>${ itemData.unit.content }</span>
+                            <span>${ itemData.unit.names.name }</span>
+                            <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
                         </div>
                     </div>
 
-                    <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
-                        <span>${ itemData.unit.content }</span>
-                        <span>${ itemData.unit.names.name }</span>
-                        <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
-                    </div>
+                    {{ AddToBasket.printVueComponent( "itemData" ) }}
+
+                    <span class="vat small text-muted">
+                        * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
+                        <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
+                        {{ trans("Ceres::Template.itemExclusive") }}
+                        <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                    </span>
                 </div>
-
-                {{ AddToBasket.printVueComponent( "itemData" ) }}
-
-                <span class="vat small text-muted">
-                    * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
-                    <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
-                    {{ trans("Ceres::Template.itemExclusive") }}
-                    <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
-                </span>
-            </div>
+            </slot>
             <!-- ./ITEM DETAILS  -->
         </div>
     </article>

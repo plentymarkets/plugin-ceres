@@ -1,6 +1,6 @@
 $live-shopping-padding: 1rem .8rem;
 
-.live-shopping
+.live-shopping-details
 {
     position: relative;
     padding: 0;
@@ -72,12 +72,21 @@ $live-shopping-padding: 1rem .8rem;
 
         .live-shopping-prices-inner
         {
-            display: flex;
+            display: grid;
+            grid-template-areas: 
+            "top"
+            "bottom";
+
+            .live-shopping-prices-rebate
+            {
+                grid-area: bottom;
+            }
 
             .live-shopping-prices-container
             {
-                margin-left: auto;
-    
+                grid-area: top;
+                margin-left: 0;
+
                 .live-shopping-price
                 {
                     line-height: 1.1;
