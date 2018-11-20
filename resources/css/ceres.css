@@ -14208,6 +14208,11 @@ Custom classes
   margin-bottom: .5rem;
 }
 
+.live-shopping-add-to-basket {
+  padding-left: .8rem;
+  padding-right: .8rem;
+}
+
 .progress-100 {
   background-color: #7ed321;
 }

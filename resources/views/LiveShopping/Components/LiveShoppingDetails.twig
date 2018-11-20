@@ -6,6 +6,8 @@
             </a>
         </div>
 
+        <slot name="after-item-name"></slot>
+
         <div class="live-shopping-countdown" v-if="displaySettings.showTimer || displaySettings.showStock">
             <hr class="live-shopping-countdown-separator">
             <div class="live-shopping-countdown-heading" v-if="displaySettings.showTimer">

@@ -1,7 +1,10 @@
+{{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 {{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
 {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 {{ component( "Ceres::LiveShopping.Components.LiveShoppingDetails" ) }}
+
+{% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
 
 <script type="x/template" id="vue-live-shopping-item">
     <div>
@@ -23,11 +26,15 @@
                     </item-lazy-img>
                 </a>
 
+
             <live-shopping-details v-if="!!currentOffer && isOfferActive" 
                                    slot="item-details"
                                    :live-shopping-data="currentOffer"
                                    @reload-offer="reloadOffer()"
                                    :display-settings="displaySettings">
+                <div class="live-shopping-add-to-basket" slot="after-item-name">
+                    {{ AddToBasket.printVueComponent( "currentOffer.item" ) }}
+                </div>
             </live-shopping-details>
             
         </category-item>
