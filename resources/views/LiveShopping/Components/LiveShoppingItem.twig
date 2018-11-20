@@ -23,7 +23,7 @@
                            :title="currentOffer.item | itemName">
             </item-lazy-img>
 
-            <live-shopping-details v-if="!!currentOffer" 
+            <live-shopping-details v-if="!!currentOffer && isOfferActive" 
                                    slot="item-details"
                                    :live-shopping-data="currentOffer"
                                    :display-settings="displaySettings">
