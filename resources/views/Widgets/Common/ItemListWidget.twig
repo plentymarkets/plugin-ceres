@@ -34,7 +34,6 @@
 {% endif %}
 
 {% if listType == "manufacturer" %}
-    {# do not get item list for last seen items. Items will be loaded asynchronusly by vue component. #}
     {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, 2, itemSort, maxItems]) ) }}
 {% endif %}
 

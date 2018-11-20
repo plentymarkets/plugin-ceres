@@ -378,6 +378,16 @@
                     ]
                 }
             },
+            "manufacturerId": {
+                "type": "number",
+                "required": true,
+                "isVisible": "listType === 'manufacturer'",
+                "defaultValue": "",
+                "options": {
+                    "name": "manufacturerID",
+                    "tooltipText": "Widget.itemListCategoryIdTooltip"
+                }
+            },
             "categoryId": {
                 "type": "category",
                 "required": false,
