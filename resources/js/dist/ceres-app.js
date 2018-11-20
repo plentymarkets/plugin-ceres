@@ -22936,18 +22936,16 @@ Vue.component("live-shopping-item", {
         }
     },
 
-    data: function data() {
-        return {};
-    },
-
-
     computed: _extends({
         currentOffer: function currentOffer() {
             return this.liveShoppingOffers[this.liveShoppingId];
         },
         isOfferActive: function isOfferActive() {
-            // TODO (maybe): bestand noch abfragen hier eventuell
-            return !(0, _utils.isNullOrUndefined)(this.currentOffer.item.prices.specialOffer);
+            var momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
+            var momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
+            var momentNow = moment(Date.now());
+
+            return momentBegin < momentNow && momentNow < momentEnd;
         },
         storeSpecial: function storeSpecial() {
             if (!(0, _utils.isNullOrUndefined)(this.currentOffer)) {
@@ -28732,8 +28730,10 @@ var actions = {
 
         return new Promise(function (resolve, reject) {
             _ApiService2.default.get("/rest/io/live-shopping/" + liveShoppingId).done(function (liveShoppingOffer) {
-                if (liveShoppingOffer && liveShoppingOffer.item) {
+                if (liveShoppingOffer.item) {
                     commit("setLiveShoppingOffer", { liveShoppingId: liveShoppingId, liveShoppingOffer: liveShoppingOffer });
+                } else {
+                    commit("setLiveShoppingOffer", { liveShoppingId: liveShoppingId, liveShoppingOffer: null });
                 }
 
                 resolve(liveShoppingOffer);
