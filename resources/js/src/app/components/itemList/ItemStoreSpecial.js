@@ -30,20 +30,25 @@ Vue.component("item-store-special", {
 
     created()
     {
-
-        if (!isNullOrUndefined(this.storeSpecial))
-        {
-            this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
-        }
-        else
-        {
-            this.tagClass = this.tagClasses.default;
-        }
-
-        this.label = this.getLabel();
+        this.initializeStoreSpecial();
     },
 
-    methods: {
+    methods:
+    {
+        initializeStoreSpecial()
+        {
+            if (!isNullOrUndefined(this.storeSpecial))
+            {
+                this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+            }
+            else
+            {
+                this.tagClass = this.tagClasses.default;
+            }
+
+            this.label = this.getLabel();
+        },
+
         getLabel()
         {
             if (isNullOrUndefined(this.storeSpecial))
@@ -54,7 +59,6 @@ Vue.component("item-store-special", {
                 }
 
                 return this.getPercentageSale();
-
             }
 
             if (this.storeSpecial.id === 1 && !isNullOrUndefined(this.recommendedRetailPrice))
@@ -76,6 +80,14 @@ Vue.component("item-store-special", {
             }
 
             return "";
+        }
+    },
+
+    watch:
+    {
+        storeSpecial()
+        {
+            this.initializeStoreSpecial();
         }
     }
 });
