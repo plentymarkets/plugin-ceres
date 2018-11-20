@@ -29219,15 +29219,15 @@ var getters = {
 
         return returnPrice || calculatedPrices.default;
     },
+    variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
+        var graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
+        if (state.variation.documents) {
+            return getters.variationPropertySurcharge + Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+        }
 
-    // variationTotalPrice(state, getters, rootState, rootGetters)
-    // {
-    //     const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
-
-    //     return getters.variationPropertySurcharge + Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
-    // },
-
+        return null;
+    },
     variationGroupedProperties: function variationGroupedProperties(state) {
         if (!state || !state.variation.documents) {
             return [];
