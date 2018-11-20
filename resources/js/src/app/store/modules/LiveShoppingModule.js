@@ -22,9 +22,13 @@ const actions =
                 ApiService.get("/rest/io/live-shopping/" + liveShoppingId)
                     .done(liveShoppingOffer =>
                     {
-                        if (liveShoppingOffer && liveShoppingOffer.item)
+                        if (liveShoppingOffer.item)
                         {
                             commit("setLiveShoppingOffer", {liveShoppingId, liveShoppingOffer});
+                        }
+                        else
+                        {
+                            commit("setLiveShoppingOffer", {liveShoppingId, liveShoppingOffer: null});
                         }
 
                         resolve(liveShoppingOffer);

@@ -25,12 +25,6 @@ Vue.component("live-shopping-item", {
         }
     },
 
-    data()
-    {
-        return {
-        };
-    },
-
     computed:
     {
         currentOffer()
@@ -40,8 +34,11 @@ Vue.component("live-shopping-item", {
 
         isOfferActive()
         {
-            // TODO (maybe): bestand noch abfragen hier eventuell
-            return !isNullOrUndefined(this.currentOffer.item.prices.specialOffer);
+            const momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
+            const momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
+            const momentNow = moment(Date.now());
+
+            return momentBegin < momentNow && momentNow < momentEnd;
         },
 
         storeSpecial()
