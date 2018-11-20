@@ -1,3 +1,5 @@
+{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
+
 <script type="x/template" id="vue-live-shopping-details">
     <div class="live-shopping-details">
         <div class="h3 live-shopping-item-name">
@@ -67,7 +69,8 @@
             </div>
 
             <div class="live-shopping-prices-additional-info">
-                <slot name="additional-price-info"></slot>
+                * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.itemExclVAT") }}{% else %}{{ trans("Ceres::Template.itemInclVAT") }}{% endif %} {{ trans("Ceres::Template.itemExclusive") }}
+                <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
             </div>
         </div>
     </div>
