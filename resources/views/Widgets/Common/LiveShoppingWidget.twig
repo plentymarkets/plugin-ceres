@@ -1,29 +1,9 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set title = widget.settings.title.mobile %}
-{% set description = widget.settings.description.mobile %}
-
-{{ Twig.set("liveShoppingData", Twig.call("services.liveShopping.getLiveShoppingData", [liveShoppingConfig.liveShoppingSelection, liveShoppingConfig.sorting])) }}
-
 <div class="widget-live-shopping widget">
-    <div class="row">
-        {% if title is not empty %}
-            <div class="col-xs-12">
-                <span class="h1">{{ title }}</span>
-            </div>
-        {% endif %}
-        {% if description is not empty %}
-            <div class="col-xs-12 m-t-1">
-                <p>{{ description }}</p>
-            </div>
-        {% endif %}
-    </div>
-
     <div class="row clearfix">
         <div class="col-xs-12">
-            {{ Twig.if("liveShoppingData.item is not empty") }}
-                <live-shopping-item :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection | json_encode }}" :display-settings="{{ liveShoppingConfig | json_encode }}"></live-shopping-item>
-            {{ Twig.endif() }}
+            <live-shopping-item :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection | json_encode }}" :display-settings="{{ liveShoppingConfig | json_encode }}"></live-shopping-item>
         </div>
     </div>
 </div>

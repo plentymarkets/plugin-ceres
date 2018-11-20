@@ -709,24 +709,6 @@
         "type": "default",
         "widgetClass": "Ceres\\Widgets\\Common\\LiveShoppingWidget",
         "settings": {
-            "title": {
-                "type": "text",
-                "required": false,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.liveShoppingTitleLabel",
-                    "tooltip": "Widget.liveShoppingTitleTooltip"
-                }
-            },
-            "description": {
-                "type": "text",
-                "required": false,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.liveShoppingDescriptionLabel",
-                    "tooltip": "Widget.liveShoppingDescriptionTooltip"
-                }
-            },
             "liveShoppingSelection": {
                 "type": "select",
                 "required": true,
