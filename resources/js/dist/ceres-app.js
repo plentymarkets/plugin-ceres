@@ -22368,18 +22368,20 @@ Vue.component("item-store-special", {
         };
     },
     created: function created() {
-
-        if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-            this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
-        } else {
-            this.tagClass = this.tagClasses.default;
-        }
-
-        this.label = this.getLabel();
+        this.initializeStoreSpecial();
     },
 
 
     methods: {
+        initializeStoreSpecial: function initializeStoreSpecial() {
+            if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+                this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+            } else {
+                this.tagClass = this.tagClasses.default;
+            }
+
+            this.label = this.getLabel();
+        },
         getLabel: function getLabel() {
             if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
                 if ((0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
@@ -22404,6 +22406,12 @@ Vue.component("item-store-special", {
             }
 
             return "";
+        }
+    },
+
+    watch: {
+        storeSpecial: function storeSpecial() {
+            this.initializeStoreSpecial();
         }
     }
 });
@@ -22793,6 +22801,8 @@ Vue.component("live-shopping-details", {
         return {
             currentInterval: null,
             duration: null,
+            hasClosed: null,
+            hasStarted: null,
             itemPriceRebatePercentage: 0,
             itemQuantityRemaining: 0,
             momentBegin: null,
@@ -22812,10 +22822,15 @@ Vue.component("live-shopping-details", {
         initializeDataAndTimer: function initializeDataAndTimer() {
             var _this = this;
 
+            var momentNow = moment(Date.now());
+
             this.momentBegin = moment(parseInt(this.liveShoppingData.liveShopping.fromTime) * 1000);
             this.momentEnd = moment(parseInt(this.liveShoppingData.liveShopping.toTime) * 1000);
             this.setQuantitySoldPercentage();
             this.setItemPriceRebatePercentage();
+
+            this.hasStarted = this.momentBegin < momentNow;
+            this.hasClosed = this.momentEnd < momentNow;
 
             clearInterval(this.currentInterval);
 
@@ -22844,11 +22859,30 @@ Vue.component("live-shopping-details", {
         },
         calculations: function calculations() {
             var momentNow = moment(Date.now());
-            var fullSeconds = this.momentEnd.diff(this.momentBegin, "seconds");
-            var remainSeconds = this.momentEnd.diff(momentNow, "seconds");
+            var fullSeconds = 0;
+            var remainSeconds = 0;
+
+            if (this.hasStarted) {
+                fullSeconds = this.momentEnd.diff(this.momentBegin, "seconds");
+                remainSeconds = this.momentEnd.diff(momentNow, "seconds");
+            } else {
+                fullSeconds = this.momentBegin.diff(this.momentNow, "seconds");
+                remainSeconds = this.momentBegin.diff(momentNow, "seconds");
+            }
 
             this.timePercentage = (remainSeconds / fullSeconds * 100).toFixed(2);
             this.duration = this.getDuration(remainSeconds);
+
+            if (!this.hasStarted && this.momentBegin < momentNow) {
+                this.hasStarted = true;
+                this.$emit("reload-offer");
+                clearInterval(this.currentInterval);
+            }
+            if (!this.hasClosed && this.momentEnd < momentNow) {
+                this.hasClosed = true;
+                this.$emit("reload-offer");
+                clearInterval(this.currentInterval);
+            }
         },
         getDuration: function getDuration(seconds) {
             var duration = moment.duration(seconds, "seconds");
@@ -22859,6 +22893,12 @@ Vue.component("live-shopping-details", {
                 minutes: duration.minutes(),
                 seconds: duration.seconds()
             };
+        }
+    },
+
+    watch: {
+        liveShoppingData: function liveShoppingData() {
+            this.initializeDataAndTimer();
         }
     }
 });
@@ -22959,6 +22999,9 @@ Vue.component("live-shopping-item", {
             }
 
             return TimeEnum.future;
+        },
+        reloadOffer: function reloadOffer() {
+            this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
         }
     }
 });
