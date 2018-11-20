@@ -23116,8 +23116,6 @@ Vue.component("item-filter-tag-list", {
 },{}],176:[function(require,module,exports){
 "use strict";
 
-// import moment from "moment";
-
 Vue.component("live-shopping-details", {
 
     props: {
@@ -23224,6 +23222,16 @@ Vue.component("live-shopping-details", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
+
 Vue.component("live-shopping-item", {
     props: {
         template: {
@@ -23250,6 +23258,32 @@ Vue.component("live-shopping-item", {
     computed: _extends({
         currentOffer: function currentOffer() {
             return this.liveShoppingOffers[this.liveShoppingId];
+        },
+        isOfferActive: function isOfferActive() {
+            // TODO (maybe): bestand noch abfragen hier eventuell
+            return !(0, _utils.isNullOrUndefined)(this.currentOffer.item.prices.specialOffer);
+        },
+        storeSpecial: function storeSpecial() {
+            if (!(0, _utils.isNullOrUndefined)(this.currentOffer)) {
+                if (this.isOfferActive) {
+                    return { id: 1 };
+                }
+
+                var offerTime = this.whenIsCurrentOffer();
+                var name = "";
+
+                if (offerTime === TimeEnum.past) {
+                    name = _TranslationService2.default.translate("Ceres::Template.liveShoppingOfferClosed");
+                } else if (offerTime === TimeEnum.future) {
+                    name = _TranslationService2.default.translate("Ceres::Template.liveShoppingNextOffer");
+                } else if (offerTime === TimeEnum.now) {
+                    name = _TranslationService2.default.translate("Ceres::Template.liveShoppingOfferSoldOut");
+                }
+
+                return { id: 2, names: { name: name } };
+            }
+
+            return null;
         }
     }, Vuex.mapState({
         liveShoppingOffers: function liveShoppingOffers(state) {
@@ -23264,10 +23298,26 @@ Vue.component("live-shopping-item", {
     },
 
 
-    methods: {}
+    methods: {
+        whenIsCurrentOffer: function whenIsCurrentOffer() {
+            var momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
+            var momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
+            var momentNow = moment(Date.now());
+
+            if (momentBegin < momentNow && momentNow > momentEnd) {
+                return TimeEnum.past;
+            }
+
+            if (momentBegin < momentNow && momentNow < momentEnd) {
+                return TimeEnum.now;
+            }
+
+            return TimeEnum.future;
+        }
+    }
 });
 
-},{}],178:[function(require,module,exports){
+},{"../../helper/utils":236,"services/TranslationService":245}],178:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");

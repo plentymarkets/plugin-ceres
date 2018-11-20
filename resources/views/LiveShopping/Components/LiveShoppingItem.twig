@@ -15,13 +15,13 @@
                                 :decimal-count="2">
             </item-store-special>
 
-            <item-lazy-img v-if="!!displaySettings.customImagePath"
-                           slot="item-image"
-                           template="#vue-item-lazy-img"
-                           :image-url="displaySettings.customImagePath"
-                           :alt="currentOffer.item | itemName" 
-                           :title="currentOffer.item | itemName">
-            </item-lazy-img>
+                <a v-if="!!displaySettings.customImagePath" slot="item-image" :href="currentOffer.item | itemURL">
+                    <item-lazy-img template="#vue-item-lazy-img"
+                                   :image-url="displaySettings.customImagePath"
+                                   :alt="currentOffer.item | itemName" 
+                                   :title="currentOffer.item | itemName">
+                    </item-lazy-img>
+                </a>
 
             <live-shopping-details v-if="!!currentOffer && isOfferActive" 
                                    slot="item-details"
