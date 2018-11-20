@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 Vue.component("live-shopping-item", {
     props: {
         template:
@@ -31,6 +33,19 @@ Vue.component("live-shopping-item", {
         currentOffer()
         {
             return this.liveShoppingOffers[this.liveShoppingId];
+        },
+
+        storeSpecial()
+        {
+            if (!isNullOrUndefined(this.currentOffer))
+            {
+                // if the offer is running
+                return {
+                    id: 1
+                };
+            }
+
+            return null;
         },
 
         ...Vuex.mapState({

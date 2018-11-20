@@ -22870,6 +22870,8 @@ Vue.component("live-shopping-details", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _utils = require("../../helper/utils");
+
 Vue.component("live-shopping-item", {
     props: {
         template: {
@@ -22896,6 +22898,16 @@ Vue.component("live-shopping-item", {
     computed: _extends({
         currentOffer: function currentOffer() {
             return this.liveShoppingOffers[this.liveShoppingId];
+        },
+        storeSpecial: function storeSpecial() {
+            if (!(0, _utils.isNullOrUndefined)(this.currentOffer)) {
+                // if the offer is running
+                return {
+                    id: 1
+                };
+            }
+
+            return null;
         }
     }, Vuex.mapState({
         liveShoppingOffers: function liveShoppingOffers(state) {
@@ -22913,7 +22925,7 @@ Vue.component("live-shopping-item", {
     methods: {}
 });
 
-},{}],178:[function(require,module,exports){
+},{"../../helper/utils":236}],178:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");

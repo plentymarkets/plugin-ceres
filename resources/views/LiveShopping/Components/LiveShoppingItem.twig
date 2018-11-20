@@ -1,14 +1,33 @@
 {{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
 {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
+{{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 {{ component( "Ceres::LiveShopping.Components.LiveShoppingDetails" ) }}
 
 <script type="x/template" id="vue-live-shopping-item">
     <div>
         <category-item v-if="!!currentOffer" :item-data="currentOffer.item" decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle">
 
-            <item-lazy-img v-if="!!displaySettings.customImagePath" slot="item-image" template="#vue-item-lazy-img" :image-url="displaySettings.customImagePath" :alt="currentOffer.item | itemName" :title="currentOffer.item | itemName"></item-lazy-img>
+            <item-store-special v-if="!!storeSpecial"
+                                slot="store-special"
+                                :store-special="storeSpecial"
+                                :recommended-retail-price="currentOffer.item.prices.default"
+                                :variation-retail-price="currentOffer.item.prices.specialOffer"
+                                :decimal-count="2">
+            </item-store-special>
 
-            <live-shopping-details v-if="!!currentOffer" slot="item-details" :live-shopping-data="currentOffer" :display-settings="displaySettings"></live-shopping-details>
+            <item-lazy-img v-if="!!displaySettings.customImagePath"
+                           slot="item-image"
+                           template="#vue-item-lazy-img"
+                           :image-url="displaySettings.customImagePath"
+                           :alt="currentOffer.item | itemName" 
+                           :title="currentOffer.item | itemName">
+            </item-lazy-img>
+
+            <live-shopping-details v-if="!!currentOffer" 
+                                   slot="item-details"
+                                   :live-shopping-data="currentOffer"
+                                   :display-settings="displaySettings">
+            </live-shopping-details>
             
         </category-item>
     </div>
