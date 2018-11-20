@@ -106,6 +106,11 @@ Vue.component("live-shopping-item", {
             }
 
             return TimeEnum.future;
+        },
+
+        reloadOffer()
+        {
+            this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
         }
     }
 });

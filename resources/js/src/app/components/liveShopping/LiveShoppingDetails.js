@@ -34,6 +34,8 @@ Vue.component("live-shopping-details", {
         return {
             currentInterval: null,
             duration: null,
+            hasClosed: null,
+            hasStarted: null,
             itemPriceRebatePercentage: 0,
             itemQuantityRemaining: 0,
             momentBegin: null,
@@ -54,10 +56,15 @@ Vue.component("live-shopping-details", {
     {
         initializeDataAndTimer()
         {
+            const momentNow = moment(Date.now());
+
             this.momentBegin = moment(parseInt(this.liveShoppingData.liveShopping.fromTime) * 1000);
             this.momentEnd = moment(parseInt(this.liveShoppingData.liveShopping.toTime) * 1000);
             this.setQuantitySoldPercentage();
             this.setItemPriceRebatePercentage();
+
+            this.hasStarted = this.momentBegin < momentNow;
+            this.hasClosed = this.momentEnd < momentNow;
 
             clearInterval(this.currentInterval);
 
@@ -93,11 +100,33 @@ Vue.component("live-shopping-details", {
         calculations()
         {
             const momentNow = moment(Date.now());
-            const fullSeconds = this.momentEnd.diff(this.momentBegin, "seconds");
-            const remainSeconds = this.momentEnd.diff(momentNow, "seconds");
+            let fullSeconds = 0;
+            let remainSeconds = 0;
+
+            if (this.hasStarted)
+            {
+                fullSeconds = this.momentEnd.diff(this.momentBegin, "seconds");
+                remainSeconds = this.momentEnd.diff(momentNow, "seconds");
+            }
+            else
+            {
+                fullSeconds = this.momentBegin.diff(this.momentNow, "seconds");
+                remainSeconds = this.momentBegin.diff(momentNow, "seconds");
+            }
 
             this.timePercentage = (remainSeconds / fullSeconds * 100).toFixed(2);
             this.duration = this.getDuration(remainSeconds);
+
+            if (!this.hasStarted && this.momentBegin < momentNow)
+            {
+                this.hasStarted = true;
+                this.$emit("reload-offer");
+            }
+            if (!this.hasClosed && this.momentEnd < momentNow)
+            {
+                this.hasClosed = true;
+                this.$emit("reload-offer");
+            }
         },
 
         getDuration(seconds)
