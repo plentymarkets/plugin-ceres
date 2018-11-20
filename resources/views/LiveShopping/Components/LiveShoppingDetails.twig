@@ -8,7 +8,14 @@
 
         <div class="live-shopping-countdown" v-if="displaySettings.showTimer || displaySettings.showStock">
             <hr class="live-shopping-countdown-separator">
-            <div class="live-shopping-countdown-heading" v-if="displaySettings.showTimer">{{ trans("Ceres::Template.liveShoppingOfferEndsIn") }}</div>
+            <div class="live-shopping-countdown-heading" v-if="displaySettings.showTimer">
+                <div v-if="hasStarted">
+                    {{ trans("Ceres::Template.liveShoppingOfferEndsIn") }}
+                </div>
+                <div v-else>
+                    {{ trans("Ceres::Template.liveShoppingOfferBeginsIn") }}
+                </div>
+            </div>
 
             <div class="live-shopping-countdown-thread-container" v-if="displaySettings.showTimer">
                 <div v-if="duration.days > 0" class="live-shopping-countdown-thread">

@@ -121,11 +121,13 @@ Vue.component("live-shopping-details", {
             {
                 this.hasStarted = true;
                 this.$emit("reload-offer");
+                clearInterval(this.currentInterval);
             }
             if (!this.hasClosed && this.momentEnd < momentNow)
             {
                 this.hasClosed = true;
                 this.$emit("reload-offer");
+                clearInterval(this.currentInterval);
             }
         },
 
@@ -139,6 +141,14 @@ Vue.component("live-shopping-details", {
                 minutes: duration.minutes(),
                 seconds: duration.seconds()
             };
+        }
+    },
+
+    watch:
+    {
+        liveShoppingData()
+        {
+            this.initializeDataAndTimer();
         }
     }
 });
