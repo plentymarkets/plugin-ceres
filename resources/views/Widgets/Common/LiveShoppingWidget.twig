@@ -3,7 +3,16 @@
 <div class="widget-live-shopping widget">
     <div class="row clearfix">
         <div class="col-xs-12">
-            <live-shopping-item :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection | json_encode }}" :display-settings="{{ liveShoppingConfig | json_encode }}"></live-shopping-item>
+            <live-shopping-item :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection | json_encode }}" :display-settings="{{ liveShoppingConfig | json_encode }}">
+                {% if isPreview %}
+                    <div class="live-shopping-placeholder">
+                        <div>
+                            <p class="title">Kein Angebot aktiv.</p>
+                            <p class="description">An dieser Stelle wird kein Inhalt angezeigt, bis ein Angebot aktiv ist.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </live-shopping-item>
         </div>
     </div>
 </div>
