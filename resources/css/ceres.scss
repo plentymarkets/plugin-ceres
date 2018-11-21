@@ -12407,7 +12407,7 @@ $live-shopping-padding: 1rem .8rem;
         {
             font-size: $small-font-size;
             font-weight: normal;
-            text-align: center;
+            text-align: left;
             margin-top: .25rem;
 
             a
@@ -19555,33 +19555,6 @@ nav.navbar.megamenu {
     }
 }
 
-@mixin live-shopping-prices-grid()
-{
-    .live-shopping-prices-inner
-    {
-        display: grid;
-        grid-template-areas: 
-        "top"
-        "bottom";
-
-        .live-shopping-prices-rebate
-        {
-            grid-area: bottom;
-        }
-
-        .live-shopping-prices-container
-        {
-            grid-area: top;
-            margin-left: 0;
-        }
-    }
-
-    .live-shopping-prices-additional-info
-    {
-        text-align: left;
-    }
-}
-
 @include media-breakpoint-down(xs)
 {
     .widget-live-shopping
@@ -19614,13 +19587,6 @@ nav.navbar.megamenu {
         }
     }   
 }
-@include media-breakpoint-down(sm)
-{
-    .widget-live-shopping .live-shopping
-    {
-        @include live-shopping-prices-grid();
-    }
-}
 
 .live-shopping-placeholder
 {
@@ -19651,22 +19617,6 @@ nav.navbar.megamenu {
         font-style: italic;
     }
 }
-.widget-grid
-{
-    &.widget-grid-1-1-1,
-    &.widget-grid-1-1-2,
-    &.widget-grid-1-2-1,
-    &.widget-grid-2-1-1,
-    &.widget-grid-stacked,
-    &.widget-grid-1-1-1-1
-    {
-        .widget-live-shopping
-        {
-            @include live-shopping-prices-grid();
-        }
-    }
-}
-
 
 .widget-newsletter
 {

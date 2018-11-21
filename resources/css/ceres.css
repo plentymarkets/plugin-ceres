@@ -14187,7 +14187,7 @@ Custom classes
 .live-shopping-details .live-shopping-prices .live-shopping-prices-additional-info {
   font-size: 80%;
   font-weight: normal;
-  text-align: center;
+  text-align: left;
   margin-top: .25rem;
 }
 
@@ -20807,24 +20807,6 @@ body.menu-is-visible {
   }
 }
 
-@media (max-width: 767px) {
-  .widget-live-shopping .live-shopping .live-shopping-prices-inner {
-    display: -ms-grid;
-    display: grid;
-    grid-template-areas: "top" "bottom";
-  }
-  .widget-live-shopping .live-shopping .live-shopping-prices-inner .live-shopping-prices-rebate {
-    grid-area: bottom;
-  }
-  .widget-live-shopping .live-shopping .live-shopping-prices-inner .live-shopping-prices-container {
-    grid-area: top;
-    margin-left: 0;
-  }
-  .widget-live-shopping .live-shopping .live-shopping-prices-additional-info {
-    text-align: left;
-  }
-}
-
 .live-shopping-placeholder {
   width: 100%;
   padding-bottom: 150%;
@@ -20848,25 +20830,6 @@ body.menu-is-visible {
 
 .live-shopping-placeholder .description {
   font-style: italic;
-}
-
-.widget-grid.widget-grid-1-1-1 .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-1-1-2 .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-1-2-1 .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-2-1-1 .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-stacked .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-1-1-1-1 .widget-live-shopping .live-shopping-prices-inner {
-  display: -ms-grid;
-  display: grid;
-  grid-template-areas: "top" "bottom";
-}
-
-.widget-grid.widget-grid-1-1-1 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-rebate, .widget-grid.widget-grid-1-1-2 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-rebate, .widget-grid.widget-grid-1-2-1 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-rebate, .widget-grid.widget-grid-2-1-1 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-rebate, .widget-grid.widget-grid-stacked .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-rebate, .widget-grid.widget-grid-1-1-1-1 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-rebate {
-  grid-area: bottom;
-}
-
-.widget-grid.widget-grid-1-1-1 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-container, .widget-grid.widget-grid-1-1-2 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-container, .widget-grid.widget-grid-1-2-1 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-container, .widget-grid.widget-grid-2-1-1 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-container, .widget-grid.widget-grid-stacked .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-container, .widget-grid.widget-grid-1-1-1-1 .widget-live-shopping .live-shopping-prices-inner .live-shopping-prices-container {
-  grid-area: top;
-  margin-left: 0;
-}
-
-.widget-grid.widget-grid-1-1-1 .widget-live-shopping .live-shopping-prices-additional-info, .widget-grid.widget-grid-1-1-2 .widget-live-shopping .live-shopping-prices-additional-info, .widget-grid.widget-grid-1-2-1 .widget-live-shopping .live-shopping-prices-additional-info, .widget-grid.widget-grid-2-1-1 .widget-live-shopping .live-shopping-prices-additional-info, .widget-grid.widget-grid-stacked .widget-live-shopping .live-shopping-prices-additional-info, .widget-grid.widget-grid-1-1-1-1 .widget-live-shopping .live-shopping-prices-additional-info {
-  text-align: left;
 }
 
 .widget-newsletter > .widget-inner {
