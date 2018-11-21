@@ -244,36 +244,61 @@
 }
 
 /* Compatibility for IE */
-html.ie .basket-item-container .basket-item .meta-container-wrapper {
+html.ie .checkout .checkout-rightside  {
 
-	// Arrange on top of each other
-	@include media-breakpoint-down(md) {
-		.meta-container-wrapper-inner {
-			display: block
-		}
-		.meta-container {
-			margin-bottom: 10px;
-		}
-	}
-
-	// Let shrink if necessary
-	.meta-container {
-		flex-shrink: 1;
+	// Position absolute
+	.meta-container-wrapper-inner {
+		display: block;
+		position: relative;
 	}
 	
-	// Initialise width
+	.meta-container {
+		position: absolute;
+		left: 0px;
+		right: 55%;
+	}
+
 	.basket-item-container-right {
-		width: 100%;
 		display: flex;
+		position: absolute;
+		right: 0px;
+		left: 45%;
 
-		// Arrange to the right
 		.qty-box-container {
-			margin-left: auto;
-			margin-right: 0px;
+			margin: 0 0 0 auto;
 		}
+		.price-box {
+			margin-left: 5px;
+			min-width: 80px;
+		}
+	}
 
-		div.price-box {
-			margin-left: 10px;
+	// Arrange on top of each other
+	@include media-breakpoint-down(lg) {
+		.meta-container-wrapper-inner {
+
+			.meta-container {
+				position: relative;
+				left: auto;
+				right: auto;
+				margin-bottom: 10px;
+			}
+
+			.basket-item-container-right {
+				position: relative;
+				right: auto;
+				left: auto;
+
+				.price-box {
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+
+	@include media-breakpoint-only(sm) {
+		.meta-container {
+			position: absolute !important;
 		}
 	}
 }
