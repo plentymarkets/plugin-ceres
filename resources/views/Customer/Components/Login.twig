@@ -28,9 +28,9 @@
             <div :class="{'modal-footer': modalElement, 'row': !modalElement}">
                 <div class="reset-pwd-direction" :class="{'col-xs-7 col-sm-4': !modalElement}">
                     <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.loginForgotPassword") }}?</a>
-                    {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
                 </div>
                 <div :class="{'col-xs-5 col-sm-8 text-sm-right': !modalElement}">
+                    {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
                     <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-medium" :class="{'btn-right': !modalElement}">
                         <i class="fa fa-user" v-waiting-animation="isDisabled"></i>
                         {{ trans("Ceres::Template.login") }}

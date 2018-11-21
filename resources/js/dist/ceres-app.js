@@ -12900,6 +12900,14 @@ var freeProcess = moduleExports && freeGlobal.process;
 /** Used to access faster Node.js helpers. */
 var nodeUtil = (function() {
   try {
+    // Use `util.types` for Node.js 10+.
+    var types = freeModule && freeModule.require && freeModule.require('util').types;
+
+    if (types) {
+      return types;
+    }
+
+    // Legacy `process.binding('util')` for Node.js < 10.
     return freeProcess && freeProcess.binding && freeProcess.binding('util');
   } catch (e) {}
 }());
@@ -22509,7 +22517,6 @@ Vue.component("item-search", {
 
     data: function data() {
         return {
-            currentSearchString: "",
             promiseCount: 0,
             autocompleteResult: [],
             selectedAutocompleteIndex: -1,
@@ -22540,7 +22547,8 @@ Vue.component("item-search", {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
             _this.$store.commit("setItemListSearchString", urlParams.query);
-            _this.currentSearchString = urlParams.query;
+
+            _this.$refs.searchInput.value = !(0, _utils.isNullOrUndefined)(urlParams.query) ? urlParams.query : "";
         });
     },
 
@@ -22551,8 +22559,8 @@ Vue.component("item-search", {
                 if (this.forwardToSingleItem) {
                     window.open(this.selectedAutocompleteItem.url, "_self", false);
                 } else {
-                    this.currentSearchString = this.selectedAutocompleteItem.name;
-                    this.$store.commit("setItemListSearchString", this.currentSearchString);
+                    this.$refs.searchInput.value = this.selectedAutocompleteItem.name;
+                    this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                     this.search();
                 }
@@ -22563,10 +22571,10 @@ Vue.component("item-search", {
             $("#searchBox").collapse("hide");
         },
         search: function search() {
-            if (this.currentSearchString.length) {
+            if (this.$refs.searchInput.value.length) {
                 if (document.location.pathname === "/search") {
-                    this.updateTitle(this.currentSearchString);
-                    this.$store.dispatch("searchItems", this.currentSearchString);
+                    this.updateTitle(this.$refs.searchInput.value);
+                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
 
                     this.selectedAutocompleteIndex = -1;
                     this.autocompleteResult = [];
@@ -22577,7 +22585,7 @@ Vue.component("item-search", {
                         searchBaseURL = "/" + App.language + "/search?query=";
                     }
 
-                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
+                    window.open(searchBaseURL + this.$refs.searchInput.value, "_self", false);
                 }
             } else {
                 this.preventSearch = false;
@@ -22688,8 +22696,8 @@ Vue.component("item-search", {
             if (this.forwardToSingleItem) {
                 window.open(item.url, "_self", false);
             } else {
-                this.currentSearchString = item.name;
-                this.$store.commit("setItemListSearchString", this.currentSearchString);
+                this.$refs.searchInput.value = item.name;
+                this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                 this.search();
             }
@@ -25157,7 +25165,9 @@ Vue.filter("fileName", function (path) {
 "use strict";
 
 Vue.filter("fileUploadPath", function (path) {
-    return "/order-property-file/" + path.replace("order_property_files/", "");
+    var position = path.lastIndexOf("/");
+
+    return "/order-property-file/" + path.substring(0, position) + "?filename=" + path.substring(position + 1);
 });
 
 },{}],230:[function(require,module,exports){
@@ -26332,6 +26342,7 @@ module.exports = function ($) {
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
         config.keepOriginalResponse = !!config.keepOriginalResponse;
+        config.headers = config.headers || { "Accept-Language": App.language };
 
         if (data) {
             data.templateEvent = App.templateEvent;
@@ -27138,7 +27149,8 @@ function getUrlParams(urlParams) {
 }
 
 function setUrlParams(urlParams) {
-    var pathName = (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory) ? _index2.default.state.navigation.currentCategory.url : window.location.pathname;
+    var pathName = (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory) && (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory.url) ? _index2.default.state.navigation.currentCategory.url : window.location.pathname;
+
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 

@@ -13510,6 +13510,30 @@ Custom classes
   }
 }
 
+/* Compatibility for IE */
+html.ie #single-carousel .owl-item img {
+  width: auto;
+  display: inline-block;
+}
+
+html.ie #single-carousel .owl-item > div {
+  text-align: center;
+}
+
+html.ie #thumb-carousel .owl-stage {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+html.ie #thumb-carousel .owl-stage .owl-item {
+  width: auto !important;
+}
+
+html.ie #thumb-carousel .owl-stage .owl-item img {
+  width: auto;
+  margin-right: 0 !important;
+}
+
 .cmp {
   position: relative;
 }
@@ -13791,6 +13815,16 @@ Custom classes
   width: auto;
   top: 10rem;
   right: .5rem;
+}
+
+.alert {
+  width: 100%;
+}
+
+@media (min-width: 544px) {
+  .alert {
+    width: 400px;
+  }
 }
 
 .password-info {
@@ -14083,6 +14117,14 @@ Custom classes
   position: fixed;
   right: .5rem;
   top: 10rem;
+}
+
+@media (max-width: 543px) {
+  .notification-wrapper {
+    width: 100%;
+    padding: 0 15px;
+    right: auto;
+  }
 }
 
 html.safari .popper {
@@ -16965,6 +17007,36 @@ body.menu-is-visible {
 
 .basket-item-container .basket-item .item-additional-information-container .basket-expand.opened:after {
   content: attr(data-show-less);
+}
+
+/* Compatibility for IE */
+@media (max-width: 991px) {
+  html.ie .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner {
+    display: block;
+  }
+  html.ie .basket-item-container .basket-item .meta-container-wrapper .meta-container {
+    margin-bottom: 10px;
+  }
+}
+
+html.ie .basket-item-container .basket-item .meta-container-wrapper .meta-container {
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+}
+
+html.ie .basket-item-container .basket-item .meta-container-wrapper .basket-item-container-right {
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+html.ie .basket-item-container .basket-item .meta-container-wrapper .basket-item-container-right .qty-box-container {
+  margin-left: auto;
+  margin-right: 0px;
+}
+
+html.ie .basket-item-container .basket-item .meta-container-wrapper .basket-item-container-right div.price-box {
+  margin-left: 10px;
 }
 
 @media (min-width: 992px) {
@@ -20499,6 +20571,13 @@ body.menu-is-visible {
   .widget-inner-stacked .widget-image-carousel .carousel-control .fa {
     font-size: 1.5rem;
   }
+}
+
+/* Compatibility for IE */
+/* display img with optimal aspect ratio */
+html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
+  min-height: auto;
+  min-width: auto;
 }
 
 .widget-image-carousel.widget-primary .widget-caption h2,

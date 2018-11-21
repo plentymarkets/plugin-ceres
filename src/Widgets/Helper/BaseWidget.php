@@ -2,7 +2,7 @@
 
 namespace Ceres\Widgets\Helper;
 
-use Plenty\Modules\ContentBuilder\Contracts\Widget;
+use Plenty\Modules\ShopBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
 class BaseWidget implements Widget

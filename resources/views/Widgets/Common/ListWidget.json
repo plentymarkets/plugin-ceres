@@ -12,7 +12,7 @@
             "defaultValue": "none",
             "options": {
                 "name": "Widget.listIconLabel",
-                "tooltip": "Widget.listIconTooltip",
+                "tooltipText": "Widget.listIconTooltip",
                 "listBoxValues": [
                     {
                         "value": "none",
@@ -79,7 +79,7 @@
             "isList": "[1,]",
             "options": {
                 "name": "Widget.listTextLabel",
-                "tooltip": "Widget.listTextTooltip"
+                "tooltipText": "Widget.listTextTooltip"
             }
         }
     }
