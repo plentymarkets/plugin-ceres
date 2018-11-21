@@ -334,7 +334,7 @@ Custom classes
   transition: opacity 300ms;
   top: 40%;
   bottom: 40%;
-  max-width: 30px;
+  max-width: 45px;
 
   @include media-breakpoint-down(sm) {
     display: none;
