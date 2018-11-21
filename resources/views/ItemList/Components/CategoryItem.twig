@@ -19,7 +19,9 @@
     <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
         <div class="thumb-inner">
 
-            {{ AddToBasket.printVueComponent( "itemData", true ) }}
+            <slot name="add-to-basket-large">
+                {{ AddToBasket.printVueComponent( "itemData", true ) }}
+            </slot>
 
             <div class="thumb-background"></div>
 

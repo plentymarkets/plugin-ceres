@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="live-shopping-countdown-thread-container" v-if="displaySettings.showTimer">
+            <div class="live-shopping-countdown-thread-container" v-if="displaySettings.showTimer && !!duration">
                 <div v-if="duration.days > 0" class="live-shopping-countdown-thread">
                     <div class="live-shopping-countdown-thread-number">${ duration.days }</div>
                     <div class="small">Tage</div>
@@ -40,24 +40,26 @@
                 </div>
             </div>
 
-            <div class="live-shopping-progress" v-if="displaySettings.showTimer && displaySettings.showTimerProgress">
-                <div class="bs4-progress">
-                    <div :class="'progress-' + Math.round(timePercentage / 10) * 10" class="bs4-progress-bar" role="progressbar" :style="'width:' + timePercentage + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-
-            <div class="live-shopping-progress" v-if="displaySettings.showStock">
-                <div class="live-shopping-progress-heading">
-                    <span>{{ trans("Ceres::Template.liveShoppingRemainingStock", {"quantityRemaining": "${ itemQuantityRemaining }", "quantityMax": "${ liveShoppingData.liveShopping.quantityMax }"}) }}</span>
+            <template v-if="hasStarted && !hasClosed">
+                <div class="live-shopping-progress" v-if="displaySettings.showTimer && displaySettings.showTimerProgress">
+                    <div class="bs4-progress">
+                        <div :class="'progress-' + Math.round(timePercentage / 10) * 10" class="bs4-progress-bar" role="progressbar" :style="'width:' + timePercentage + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
 
-                <div class="bs4-progress" v-if="displaySettings.showStockProgress">
-                    <div :class="'progress-' + Math.round(quantitySoldPercentage / 10) * 10" class="bs4-progress-bar" role="progressbar" :style="'width:' + quantitySoldPercentage + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="live-shopping-progress" v-if="displaySettings.showStock">
+                    <div class="live-shopping-progress-heading">
+                        <span>{{ trans("Ceres::Template.liveShoppingRemainingStock", {"quantityRemaining": "${ itemQuantityRemaining }", "quantityMax": "${ liveShoppingData.liveShopping.quantityMax }"}) }}</span>
+                    </div>
+
+                    <div class="bs4-progress" v-if="displaySettings.showStockProgress">
+                        <div :class="'progress-' + Math.round(quantitySoldPercentage / 10) * 10" class="bs4-progress-bar" role="progressbar" :style="'width:' + quantitySoldPercentage + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
-            </div>
+            </template>
         </div>
 
-        <div class="live-shopping-prices bg-danger">
+        <div class="live-shopping-prices bg-danger" v-if="hasStarted && !hasClosed">
             <div class="live-shopping-prices-inner">
                 <div class="live-shopping-prices-rebate">{{ trans("Ceres::Template.liveShoppingRebate", {"rebate": "${ itemPriceRebatePercentage }" }) }}</div>
                 <div class="live-shopping-prices-container">
