@@ -20825,6 +20825,31 @@ body.menu-is-visible {
   }
 }
 
+.live-shopping-placeholder {
+  width: 100%;
+  padding-bottom: 150%;
+  position: relative;
+  background-color: #dcdbd8;
+}
+
+.live-shopping-placeholder > div {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  padding: 1rem 1rem;
+  width: 100%;
+}
+
+.live-shopping-placeholder .title {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.live-shopping-placeholder .description {
+  font-style: italic;
+}
+
 .widget-grid.widget-grid-1-1-1 .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-1-1-2 .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-1-2-1 .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-2-1-1 .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-stacked .widget-live-shopping .live-shopping-prices-inner, .widget-grid.widget-grid-1-1-1-1 .widget-live-shopping .live-shopping-prices-inner {
   display: -ms-grid;
   display: grid;

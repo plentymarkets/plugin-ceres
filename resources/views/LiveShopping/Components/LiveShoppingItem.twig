@@ -27,7 +27,7 @@
                 </a>
 
 
-            <live-shopping-details v-if="!!currentOffer && isOfferActive" 
+            <live-shopping-details v-if="!!currentOffer && isActive" 
                                    slot="item-details"
                                    :live-shopping-data="currentOffer"
                                    @reload-offer="reloadOffer()"

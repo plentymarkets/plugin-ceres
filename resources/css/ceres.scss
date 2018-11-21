@@ -19614,15 +19614,43 @@ nav.navbar.megamenu {
         }
     }   
 }
-
 @include media-breakpoint-down(sm)
-{   
+{
     .widget-live-shopping .live-shopping
     {
         @include live-shopping-prices-grid();
     }
 }
 
+.live-shopping-placeholder
+{
+    width: 100%;
+    padding-bottom: 150%;
+    position: relative;
+    background-color: $gray-lighter;
+
+    > div
+    {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+        text-align: center;
+        padding: $spacer-x $spacer-y;
+        width: 100%;
+    }
+
+    .title
+    {
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+
+    .description
+    {
+        font-style: italic;
+    }
+}
 .widget-grid
 {
     &.widget-grid-1-1-1,
@@ -19638,6 +19666,7 @@ nav.navbar.megamenu {
         }
     }
 }
+
 
 .widget-newsletter
 {

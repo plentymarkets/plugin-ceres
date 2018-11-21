@@ -32,20 +32,42 @@ Vue.component("live-shopping-item", {
             return this.liveShoppingOffers[this.liveShoppingId];
         },
 
-        isOfferActive()
+        isActive()
         {
-            const momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
-            const momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
-            const momentNow = moment(Date.now());
+            return this.isActiveByTime && this.isActiveByStock;
+        },
 
-            return momentBegin < momentNow && momentNow < momentEnd;
+        isActiveByTime()
+        {
+            if (!isNullOrUndefined(this.currentOffer))
+            {
+                const momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
+                const momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
+                const momentNow = moment(Date.now());
+
+                return momentBegin < momentNow && momentNow < momentEnd;
+            }
+
+            return false;
+        },
+
+        isActiveByStock()
+        {
+            if (!isNullOrUndefined(this.currentOffer))
+            {
+                const liveShopping = this.currentOffer.liveShopping;
+
+                return liveShopping.quantitySold + liveShopping.quantitySoldReal < liveShopping.quantityMax;
+            }
+
+            return false;
         },
 
         storeSpecial()
         {
             if (!isNullOrUndefined(this.currentOffer))
             {
-                if (this.isOfferActive)
+                if (this.isActive)
                 {
                     return {id: 1};
                 }

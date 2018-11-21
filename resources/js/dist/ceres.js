@@ -23294,16 +23294,32 @@ Vue.component("live-shopping-item", {
         currentOffer: function currentOffer() {
             return this.liveShoppingOffers[this.liveShoppingId];
         },
-        isOfferActive: function isOfferActive() {
-            var momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
-            var momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
-            var momentNow = moment(Date.now());
+        isActive: function isActive() {
+            return this.isActiveByTime && this.isActiveByStock;
+        },
+        isActiveByTime: function isActiveByTime() {
+            if (!(0, _utils.isNullOrUndefined)(this.currentOffer)) {
+                var momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
+                var momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
+                var momentNow = moment(Date.now());
 
-            return momentBegin < momentNow && momentNow < momentEnd;
+                return momentBegin < momentNow && momentNow < momentEnd;
+            }
+
+            return false;
+        },
+        isActiveByStock: function isActiveByStock() {
+            if (!(0, _utils.isNullOrUndefined)(this.currentOffer)) {
+                var liveShopping = this.currentOffer.liveShopping;
+
+                return liveShopping.quantitySold + liveShopping.quantitySoldReal < liveShopping.quantityMax;
+            }
+
+            return false;
         },
         storeSpecial: function storeSpecial() {
             if (!(0, _utils.isNullOrUndefined)(this.currentOffer)) {
-                if (this.isOfferActive) {
+                if (this.isActive) {
                     return { id: 1 };
                 }
 
