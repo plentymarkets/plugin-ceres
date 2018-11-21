@@ -50,6 +50,9 @@
     {{ Twig.set("title", "'#{ headline }'" ) }}
 {% endif %}
 
+{{ Twig.component( "Ceres::Containers.Components.ContainerItemList" ) }}
+{{ Twig.component( "Ceres::Containers.Components.LastSeenItemList" ) }}
+
 <div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
