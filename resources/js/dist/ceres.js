@@ -23180,11 +23180,14 @@ Vue.component("live-shopping-details", {
 
             this.momentBegin = moment(parseInt(this.liveShoppingData.liveShopping.fromTime) * 1000);
             this.momentEnd = moment(parseInt(this.liveShoppingData.liveShopping.toTime) * 1000);
-            this.setQuantitySoldPercentage();
-            this.setItemPriceRebatePercentage();
-
             this.hasStarted = this.momentBegin < momentNow;
             this.hasClosed = this.momentEnd < momentNow;
+
+            this.setQuantitySoldPercentage();
+
+            if (this.hasStarted && !this.hasClosed) {
+                this.setItemPriceRebatePercentage();
+            }
 
             clearInterval(this.currentInterval);
 
@@ -23227,15 +23230,13 @@ Vue.component("live-shopping-details", {
             this.timePercentage = (remainSeconds / fullSeconds * 100).toFixed(2);
             this.duration = this.getDuration(remainSeconds);
 
-            if (!this.hasStarted && this.momentBegin < momentNow) {
-                this.hasStarted = true;
-                this.$emit("reload-offer");
+            var hasToStart = !this.hasStarted && this.momentBegin < momentNow;
+            var hasToClose = !this.hasClosed && this.momentEnd < momentNow;
+
+            if (hasToStart || hasToClose) {
                 clearInterval(this.currentInterval);
-            }
-            if (!this.hasClosed && this.momentEnd < momentNow) {
-                this.hasClosed = true;
+
                 this.$emit("reload-offer");
-                clearInterval(this.currentInterval);
             }
         },
         getDuration: function getDuration(seconds) {
