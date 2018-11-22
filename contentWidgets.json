@@ -379,13 +379,13 @@
                 }
             },
             "manufacturerId": {
-                "type": "number",
+                "type": "manufacturer",
                 "required": true,
                 "isVisible": "listType === 'manufacturer'",
                 "defaultValue": "",
                 "options": {
-                    "name": "manufacturerID",
-                    "tooltipText": "Widget.itemListCategoryIdTooltip"
+                    "name": "Widget.itemListManufacturer",
+                    "tooltipText": "Widget.itemListManufacturerTooltip"
                 }
             },
             "categoryId": {

@@ -8,6 +8,7 @@
 {% set categoryId    = widget.settings.categoryId.mobile %}
 {% set itemListId    = widget.settings.tagId.mobile %}
 {% set itemsPerPage  = widget.settings.itemsPerPage.mobile %}
+{% set manufacturerId    = widget.settings.manufacturerId.mobile %}
 
 {% if itemsPerPage is empty or itemsPerPage > 4 %}
     {% set itemsPerPage = 4 %}
@@ -34,7 +35,7 @@
 {% endif %}
 
 {% if listType == "manufacturer" %}
-    {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, 2, itemSort, maxItems]) ) }}
+    {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, manufacturerId, itemSort, maxItems]) ) }}
 {% endif %}
 
 {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
