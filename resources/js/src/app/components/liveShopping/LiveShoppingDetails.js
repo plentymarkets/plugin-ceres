@@ -120,8 +120,6 @@ Vue.component("live-shopping-details", {
         {
             const specialOfferPrice = this.prices.price.price.value;
             const defaultPrice      = this.prices.rrp.price.value;
-            // const specialOfferPrice = this.liveShoppingData.item.prices.specialOffer.price.value;
-            // const defaultPrice      = this.liveShoppingData.item.prices.default.price.value;
             let percentage          = 100 - specialOfferPrice / defaultPrice * 100;
 
             percentage = percentage.toFixed(2);

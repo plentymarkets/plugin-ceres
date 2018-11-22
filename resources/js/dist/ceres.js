@@ -23124,6 +23124,8 @@ Vue.component("item-filter-tag-list", {
 },{}],176:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 Vue.component("live-shopping-details", {
 
     props: {
@@ -23148,6 +23150,26 @@ Vue.component("live-shopping-details", {
                     showTimerProgress: true
                 };
             }
+        }
+    },
+
+    computed: {
+        prices: function prices() {
+            var itemPrices = this.liveShoppingData.item.prices;
+            var prices = {
+                price: null,
+                rrp: null
+            };
+
+            if (!(0, _utils.isNullOrUndefined)(itemPrices.specialOffer) && !(0, _utils.isNullOrUndefined)(itemPrices.default)) {
+                prices.price = itemPrices.specialOffer;
+                prices.rrp = itemPrices.default;
+            } else if (!(0, _utils.isNullOrUndefined)(itemPrices.default) && !(0, _utils.isNullOrUndefined)(itemPrices.rrp)) {
+                prices.price = itemPrices.default;
+                prices.rrp = itemPrices.rrp;
+            }
+
+            return prices;
         }
     },
 
@@ -23205,8 +23227,10 @@ Vue.component("live-shopping-details", {
             this.quantitySoldPercentage = percentage.toFixed(2);
         },
         setItemPriceRebatePercentage: function setItemPriceRebatePercentage() {
-            var specialOfferPrice = this.liveShoppingData.item.prices.specialOffer.price.value;
-            var defaultPrice = this.liveShoppingData.item.prices.default.price.value;
+            var specialOfferPrice = this.prices.price.price.value;
+            var defaultPrice = this.prices.rrp.price.value;
+            // const specialOfferPrice = this.liveShoppingData.item.prices.specialOffer.price.value;
+            // const defaultPrice      = this.liveShoppingData.item.prices.default.price.value;
             var percentage = 100 - specialOfferPrice / defaultPrice * 100;
 
             percentage = percentage.toFixed(2);
@@ -23258,7 +23282,7 @@ Vue.component("live-shopping-details", {
     }
 });
 
-},{}],177:[function(require,module,exports){
+},{"../../helper/utils":236}],177:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -23339,6 +23363,23 @@ Vue.component("live-shopping-item", {
             }
 
             return null;
+        },
+        prices: function prices() {
+            var itemPrices = this.currentOffer.item.prices;
+            var prices = {
+                price: null,
+                rrp: null
+            };
+
+            if (!(0, _utils.isNullOrUndefined)(itemPrices.specialOffer) && !(0, _utils.isNullOrUndefined)(itemPrices.default)) {
+                prices.price = itemPrices.specialOffer;
+                prices.rrp = itemPrices.default;
+            } else if (!(0, _utils.isNullOrUndefined)(itemPrices.default) && !(0, _utils.isNullOrUndefined)(itemPrices.rrp)) {
+                prices.price = itemPrices.default;
+                prices.rrp = itemPrices.rrp;
+            }
+
+            return prices;
         }
     }, Vuex.mapState({
         liveShoppingOffers: function liveShoppingOffers(state) {
