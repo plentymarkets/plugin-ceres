@@ -1,14 +1,14 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set headlineStyle = widget.settings.headlineStyle.mobile  %}
-{% set headline      = widget.settings.headline.mobile  %}
-{% set listType      = widget.settings.listType.mobile %}
-{% set itemSort      = widget.settings.itemSort.mobile %}
-{% set maxItems      = widget.settings.maxItems.mobile %}
-{% set categoryId    = widget.settings.categoryId.mobile %}
-{% set itemListId    = widget.settings.tagId.mobile %}
-{% set itemsPerPage  = widget.settings.itemsPerPage.mobile %}
-{% set manufacturerId    = widget.settings.manufacturerId.mobile %}
+{% set headlineStyle  = widget.settings.headlineStyle.mobile  %}
+{% set headline       = widget.settings.headline.mobile  %}
+{% set listType       = widget.settings.listType.mobile %}
+{% set itemSort       = widget.settings.itemSort.mobile %}
+{% set maxItems       = widget.settings.maxItems.mobile %}
+{% set categoryId     = widget.settings.categoryId.mobile %}
+{% set itemListId     = widget.settings.tagId.mobile %}
+{% set itemsPerPage   = widget.settings.itemsPerPage.mobile %}
+{% set manufacturerId = widget.settings.manufacturerId.mobile %}
 
 {% if itemsPerPage is empty or itemsPerPage > 4 %}
     {% set itemsPerPage = 4 %}
