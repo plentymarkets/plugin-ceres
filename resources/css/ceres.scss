@@ -15227,6 +15227,56 @@ nav.navbar.megamenu {
 	pointer-events: none;
 }
 
+/* Compatibility for IE */
+html.ie .confirmation-order-list .cmp-order-item {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
+	-ms-flex-preferred-size: 84px;
+	    flex-basis: 84px;
+
+	.item-image {
+		width: 84px;
+		height: auto;
+	}
+	.item-name {
+		max-height: none;
+	}
+	.item-details {
+		margin-top: 0;
+		display: block;
+		-webkit-box-flex: 2;
+		    -ms-flex-positive: 2;
+		        flex-grow: 2;
+
+		.row {
+			strong:first-of-type {
+				min-width: 90px;
+				width: auto;
+			}
+			span,
+			strong:nth-of-type(2) {
+				width: auto;
+			}
+		}
+	}
+	@include media-breakpoint-down(sm) {
+		.item-details {
+			-ms-flex-order: 2;
+			-webkit-box-ordinal-group: 3;
+			        order: 2;
+			-ms-flex: 1;
+			-webkit-box-flex: 1;
+			        flex: 1;
+		}
+	}
+}
 .top-bar .controls-list > li .basket-preview-hover {
 	.basket-item {
 		a {

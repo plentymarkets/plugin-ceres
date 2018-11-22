@@ -16767,6 +16767,53 @@ body.menu-is-visible {
   pointer-events: none;
 }
 
+/* Compatibility for IE */
+html.ie .confirmation-order-list .cmp-order-item {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-preferred-size: 84px;
+      flex-basis: 84px;
+}
+
+html.ie .confirmation-order-list .cmp-order-item .item-image {
+  width: 84px;
+  height: auto;
+}
+
+html.ie .confirmation-order-list .cmp-order-item .item-name {
+  max-height: none;
+}
+
+html.ie .confirmation-order-list .cmp-order-item .item-details {
+  margin-top: 0;
+  display: block;
+  -ms-flex-positive: 2;
+      flex-grow: 2;
+}
+
+html.ie .confirmation-order-list .cmp-order-item .item-details .row strong:first-of-type {
+  min-width: 90px;
+  width: auto;
+}
+
+html.ie .confirmation-order-list .cmp-order-item .item-details .row span,
+html.ie .confirmation-order-list .cmp-order-item .item-details .row strong:nth-of-type(2) {
+  width: auto;
+}
+
+@media (max-width: 767px) {
+  html.ie .confirmation-order-list .cmp-order-item .item-details {
+    -ms-flex-order: 2;
+    order: 2;
+    -ms-flex: 1;
+    flex: 1;
+  }
+}
+
 .top-bar .controls-list > li .basket-preview-hover .basket-item a {
   padding: 0;
   color: #008ebd;
