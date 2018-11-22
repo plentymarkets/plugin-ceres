@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-item-store-special">
-    <div class="special-tags">
+    <div class="special-tags" v-show="label.length">
         <span v-if="bundleType === 'bundle'" class="tag bg-info">
             {{ trans("Ceres::Template.itemBundle") }}
         </span>
