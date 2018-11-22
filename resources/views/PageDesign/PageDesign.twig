@@ -295,13 +295,18 @@
 
             var headerImages = header.querySelectorAll("img");
 
-            for (var img in headerImages)
+            if(headerImages.length)
             {
-                headerImages[img].onload = function()
+                for (var img in headerImages)
                 {
-                    calculateBodyOffset();
+                    headerImages[img].onload = function()
+                    {
+                        calculateBodyOffset();
+                    }
                 }
             }
+
+            calculateBodyOffset();
         }
 
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)

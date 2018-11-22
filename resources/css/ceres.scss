@@ -11752,6 +11752,38 @@ Custom classes
   }
 }
 
+/* Compatibility for IE */
+html.ie {
+  // set width to maximal available size
+  #single-carousel .owl-item img {
+    width: auto;
+    display: inline-block;
+  }
+  // align image center
+  #single-carousel .owl-item > div {
+    text-align: center;
+  }
+
+  // prevent wrap
+  #thumb-carousel .owl-stage {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    
+    // thumb-image takes assigned height of parent and displays optimal width
+    .owl-item {
+      width: auto !important;
+
+      img {
+        width: auto;
+        margin-right: 0 !important;
+      }
+    }
+  }
+}
+
+
+
 
 // Components
 
@@ -11957,6 +11989,15 @@ Custom classes
 	width: auto;
 	top: 10rem;
 	right:.5rem;
+}
+
+.alert {
+	@include media-breakpoint-up(sm) {
+	  width: 400px;
+	}
+	@include media-breakpoint-up(xs) {
+	  width: 100%;
+	}
 }
 
 .password-info {
@@ -12277,6 +12318,12 @@ Custom classes
     position: fixed;
     right: .5rem;
     top: 10rem;
+
+    @include media-breakpoint-down(xs) {
+        width: 100%;
+        padding: 0 ($grid-gutter-width / 2);
+        right: auto;
+    }
 }
 html.safari {
 	.popper {
@@ -15388,7 +15435,6 @@ nav.navbar.megamenu {
 			}
 		}
 
-
 		.item-additional-information-container {
 			.item-additional-information {
 				font-size: 75%;
@@ -15432,6 +15478,70 @@ nav.navbar.megamenu {
 		}
 	}
 }
+
+/* Compatibility for IE */
+html.ie .checkout .checkout-rightside  {
+
+	// Position absolute
+	.meta-container-wrapper-inner {
+		display: block;
+		position: relative;
+	}
+	
+	.meta-container {
+		position: absolute;
+		left: 0px;
+		right: 55%;
+	}
+
+	.basket-item-container-right {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		position: absolute;
+		right: 0px;
+		left: 45%;
+
+		.qty-box-container {
+			margin: 0 0 0 auto;
+		}
+		.price-box {
+			margin-left: 5px;
+			min-width: 80px;
+		}
+	}
+
+	// Arrange on top of each other
+	@include media-breakpoint-down(lg) {
+		.meta-container-wrapper-inner {
+
+			.meta-container {
+				position: relative;
+				left: auto;
+				right: auto;
+				margin-bottom: 10px;
+			}
+
+			.basket-item-container-right {
+				position: relative;
+				right: auto;
+				left: auto;
+
+				.price-box {
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+
+	@include media-breakpoint-only(sm) {
+		.meta-container {
+			position: absolute !important;
+		}
+	}
+}
+
+
 @include media-breakpoint-up(lg) {
 	.control-basket {
 		&:hover {
@@ -15644,6 +15754,40 @@ nav.navbar.megamenu {
 {
     display: table;
     width: 100%;
+}
+
+/* Compatibility for IE */
+html.ie .basket-preview .basket-item-container {
+
+    // Float both containers
+	.meta-container-wrapper-inner {
+        display: block;
+        
+        .meta-container {
+            width: 50%;
+            display: block;
+            float: left;
+        }
+	}
+      
+	.basket-item-container-right {
+        width: 50%;
+        display: block;
+        float: left;
+
+        // Align childs right
+        .qty-box-container {
+            margin-right: 0;
+
+            .qty-box {
+                margin: 0 0 5px 0;
+    
+                .qty-input {
+                    margin-left: auto;
+                }
+            }
+        }
+	}
 }
 
 .cmp-totals{
@@ -19478,6 +19622,15 @@ nav.navbar.megamenu {
                 font-size: 1.5rem;
             }
         }
+    }
+}
+
+/* Compatibility for IE */
+/* display img with optimal aspect ratio */
+html.ie {
+    .widget-image-carousel .widget-inner .carousel-item .img-cover {
+        min-height: auto;
+        min-width: auto;
     }
 }
 

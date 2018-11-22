@@ -12,7 +12,7 @@
             "defaultValue": "primary",
             "options": {
                 "name": "Widget.widgetAppearanceLabel",
-                "tooltip": "Widget.widgetAppearanceTooltip",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
                 "listBoxValues": [
                     {
                         "value": "primary",
@@ -53,7 +53,7 @@
             "defaultValue": "block-caption",
             "options": {
                 "name": "Widget.imageBoxStyleLabel",
-                "tooltip": "Widget.imageBoxStyleTooltip",
+                "tooltipText": "Widget.imageBoxStyleTooltip",
                 "listBoxValues": [
                     {
                         "value": "block-caption",
@@ -85,7 +85,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.imageBoxHeadlineLabel",
-                "tooltip": "Widget.imageBoxHeadlineTooltip"
+                "tooltipText": "Widget.imageBoxHeadlineTooltip"
             }
         },
         "imageSize": {
@@ -94,7 +94,7 @@
             "defaultValue": "cover",
             "options": {
                 "name": "Widget.imageBoxImageSizeLabel",
-                "tooltip": "Widget.imageBoxImageSizeTooltip",
+                "tooltipText": "Widget.imageBoxImageSizeTooltip",
                 "listBoxValues": [
                     {
                         "value": "cover",
@@ -115,7 +115,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.imageBoxCategoryIdLabel",
-                "tooltip": "Widget.imageBoxCategoryIdTooltip"
+                "tooltipText": "Widget.imageBoxCategoryIdTooltip"
             }
         },
         "variationId": {
@@ -124,7 +124,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.imageBoxVariationIdLabel",
-                "tooltip": "Widget.imageBoxVariationIdTooltip"
+                "tooltipText": "Widget.imageBoxVariationIdTooltip"
             }
         },
         "customImagePath": {
@@ -133,7 +133,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.imageBoxCustomImagePathLabel",
-                "tooltip": "Widget.imageBoxCustomImagePathTooltip"
+                "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
             }
         }
     }

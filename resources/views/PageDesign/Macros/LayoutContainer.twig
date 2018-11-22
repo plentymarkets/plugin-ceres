@@ -1,4 +1,8 @@
 {% macro show( containerName, object ) %}
+    {% for content in container_internal(containerName, object) %}
+        {{ content|raw }}
+    {% endfor %}
+
     {% if object == null %}
         {% for content in container(containerName) %}
             {{ content.result|raw|filter_tags(containerName) }}
@@ -8,4 +12,5 @@
             {{ content.result|raw|filter_tags(containerName) }}
         {% endfor %}
     {% endif %}
+
 {% endmacro %}

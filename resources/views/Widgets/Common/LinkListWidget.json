@@ -12,7 +12,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.linkListTitleLabel",
-                "tooltip": "Widget.linkListTitleTooltip"
+                "tooltipText": "Widget.linkListTitleTooltip"
             }
         },
         "icon": {
@@ -21,7 +21,7 @@
             "defaultValue": "none",
             "options": {
                 "name": "Widget.linkListIconLabel",
-                "tooltip": "Widget.linkListIconTooltip",
+                "tooltipText": "Widget.linkListIconTooltip",
                 "listBoxValues": [
                     {
                         "value": "none",
@@ -93,7 +93,7 @@
                     "required": false,
                     "options": {
                         "name": "Widget.linkListEntryNameLabel",
-                        "tooltip": "Widget.linkListEntryNameTooltip"
+                        "tooltipText": "Widget.linkListEntryNameTooltip"
                     }
                 },
                 "url": {
@@ -101,7 +101,7 @@
                     "required": false,
                     "options": {
                         "name": "Widget.linkListEntryUrlLabel",
-                        "tooltip": "Widget.linkListEntryUrlTooltip"
+                        "tooltipText": "Widget.linkListEntryUrlTooltip"
                     }
                 }
             }

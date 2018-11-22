@@ -20461,6 +20461,12 @@ var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+var _utils = require("../../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ApiService = require("services/ApiService");
@@ -20495,6 +20501,14 @@ Vue.component("forgot-password-modal", {
             $("#resetPwd").on("hidden.bs.modal", function () {
                 _this.username = "";
             });
+
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+            if (!(0, _utils.isNullOrUndefined)(urlParams.show) && urlParams.show === "forgotPassword") {
+                ModalService.findModal(_this.$refs.pwdModal).show();
+
+                _this.username = !(0, _utils.isNullOrUndefined)(urlParams.email) ? urlParams.email : "";
+            }
         });
     },
 
@@ -20525,7 +20539,7 @@ Vue.component("forgot-password-modal", {
 
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPwMailSubject" }).done(function () {
+            ApiService.post("/rest/io/customer/password_reset", { email: this.username }).done(function () {
                 ModalService.findModal(document.getElementById("resetPwd")).hide();
                 _this3.isDisabled = false;
 
@@ -20548,7 +20562,7 @@ Vue.component("forgot-password-modal", {
     }
 });
 
-},{"services/ApiService":251,"services/ModalService":255,"services/NotificationService":256,"services/TranslationService":257,"services/ValidationService":259}],163:[function(require,module,exports){
+},{"../../../helper/utils":248,"services/ApiService":251,"services/ModalService":255,"services/NotificationService":256,"services/TranslationService":257,"services/UrlService":258,"services/ValidationService":259}],163:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -22511,7 +22525,6 @@ Vue.component("item-search", {
 
     data: function data() {
         return {
-            currentSearchString: "",
             promiseCount: 0,
             autocompleteResult: [],
             selectedAutocompleteIndex: -1,
@@ -22542,7 +22555,8 @@ Vue.component("item-search", {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
             _this.$store.commit("setItemListSearchString", urlParams.query);
-            _this.currentSearchString = urlParams.query;
+
+            _this.$refs.searchInput.value = !(0, _utils.isNullOrUndefined)(urlParams.query) ? urlParams.query : "";
         });
     },
 
@@ -22553,8 +22567,8 @@ Vue.component("item-search", {
                 if (this.forwardToSingleItem) {
                     window.open(this.selectedAutocompleteItem.url, "_self", false);
                 } else {
-                    this.currentSearchString = this.selectedAutocompleteItem.name;
-                    this.$store.commit("setItemListSearchString", this.currentSearchString);
+                    this.$refs.searchInput.value = this.selectedAutocompleteItem.name;
+                    this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                     this.search();
                 }
@@ -22565,10 +22579,10 @@ Vue.component("item-search", {
             $("#searchBox").collapse("hide");
         },
         search: function search() {
-            if (this.currentSearchString.length) {
+            if (this.$refs.searchInput.value.length) {
                 if (document.location.pathname === "/search") {
-                    this.updateTitle(this.currentSearchString);
-                    this.$store.dispatch("searchItems", this.currentSearchString);
+                    this.updateTitle(this.$refs.searchInput.value);
+                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
 
                     this.selectedAutocompleteIndex = -1;
                     this.autocompleteResult = [];
@@ -22579,7 +22593,7 @@ Vue.component("item-search", {
                         searchBaseURL = "/" + App.language + "/search?query=";
                     }
 
-                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
+                    window.open(searchBaseURL + this.$refs.searchInput.value, "_self", false);
                 }
             } else {
                 this.preventSearch = false;
@@ -22690,8 +22704,8 @@ Vue.component("item-search", {
             if (this.forwardToSingleItem) {
                 window.open(item.url, "_self", false);
             } else {
-                this.currentSearchString = item.name;
-                this.$store.commit("setItemListSearchString", this.currentSearchString);
+                this.$refs.searchInput.value = item.name;
+                this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                 this.search();
             }
@@ -25149,17 +25163,34 @@ Vue.filter("date", dateFilter);
 },{}],228:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../helper/utils");
+
 Vue.filter("fileName", function (path) {
     var splitPath = path.split("/");
+    var fileName = splitPath[splitPath.length - 1];
+    var match = /^(Item\w+)_(Char\d+)_(\d{4})_(.*)$/.exec(fileName);
 
-    return splitPath[splitPath.length - 1];
+    if (!(0, _utils.isNullOrUndefined)(match) && !(0, _utils.isNullOrUndefined)(match[4])) {
+        return match[4];
+    }
+
+    match = /^\w+_\d+_(.*)$/.exec(fileName);
+    if (!(0, _utils.isNullOrUndefined)(match) && !(0, _utils.isNullOrUndefined)(match[1])) {
+        return match[1];
+    }
+
+    return fileName;
 });
 
-},{}],229:[function(require,module,exports){
+},{"../helper/utils":248}],229:[function(require,module,exports){
 "use strict";
 
 Vue.filter("fileUploadPath", function (path) {
     var position = path.lastIndexOf("/");
+
+    if (position <= 0) {
+        return "/?GetOrderParamsFileName=" + path;
+    }
 
     return "/order-property-file/" + path.substring(0, position) + "?filename=" + path.substring(position + 1);
 });
@@ -26336,6 +26367,7 @@ module.exports = function ($) {
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
         config.keepOriginalResponse = !!config.keepOriginalResponse;
+        config.headers = config.headers || { "Accept-Language": App.language };
 
         if (data) {
             data.templateEvent = App.templateEvent;

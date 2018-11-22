@@ -26,7 +26,6 @@ Vue.component("item-search", {
     data()
     {
         return {
-            currentSearchString: "",
             promiseCount: 0,
             autocompleteResult: [],
             selectedAutocompleteIndex: -1,
@@ -61,7 +60,8 @@ Vue.component("item-search", {
             const urlParams = UrlService.getUrlParams(document.location.search);
 
             this.$store.commit("setItemListSearchString", urlParams.query);
-            this.currentSearchString = urlParams.query;
+
+            this.$refs.searchInput.value = !isNullOrUndefined(urlParams.query) ? urlParams.query : "";
         });
     },
 
@@ -77,8 +77,8 @@ Vue.component("item-search", {
                 }
                 else
                 {
-                    this.currentSearchString = this.selectedAutocompleteItem.name;
-                    this.$store.commit("setItemListSearchString", this.currentSearchString);
+                    this.$refs.searchInput.value = this.selectedAutocompleteItem.name;
+                    this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                     this.search();
                 }
@@ -93,12 +93,12 @@ Vue.component("item-search", {
 
         search()
         {
-            if (this.currentSearchString.length)
+            if (this.$refs.searchInput.value.length)
             {
                 if (document.location.pathname === "/search")
                 {
-                    this.updateTitle(this.currentSearchString);
-                    this.$store.dispatch("searchItems", this.currentSearchString);
+                    this.updateTitle(this.$refs.searchInput.value);
+                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
 
                     this.selectedAutocompleteIndex = -1;
                     this.autocompleteResult = [];
@@ -112,7 +112,7 @@ Vue.component("item-search", {
                         searchBaseURL = `/${App.language}/search?query=`;
                     }
 
-                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
+                    window.open(searchBaseURL + this.$refs.searchInput.value, "_self", false);
                 }
             }
             else
@@ -201,8 +201,8 @@ Vue.component("item-search", {
             }
             else
             {
-                this.currentSearchString = item.name;
-                this.$store.commit("setItemListSearchString", this.currentSearchString);
+                this.$refs.searchInput.value = item.name;
+                this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                 this.search();
             }
