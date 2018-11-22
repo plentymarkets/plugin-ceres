@@ -25508,17 +25508,34 @@ Vue.filter("date", dateFilter);
 },{}],228:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../helper/utils");
+
 Vue.filter("fileName", function (path) {
     var splitPath = path.split("/");
+    var fileName = splitPath[splitPath.length - 1];
+    var match = /^(Item\w+)_(Char\d+)_(\d{4})_(.*)$/.exec(fileName);
 
-    return splitPath[splitPath.length - 1];
+    if (!(0, _utils.isNullOrUndefined)(match) && !(0, _utils.isNullOrUndefined)(match[4])) {
+        return match[4];
+    }
+
+    match = /^\w+_\d+_(.*)$/.exec(fileName);
+    if (!(0, _utils.isNullOrUndefined)(match) && !(0, _utils.isNullOrUndefined)(match[1])) {
+        return match[1];
+    }
+
+    return fileName;
 });
 
-},{}],229:[function(require,module,exports){
+},{"../helper/utils":248}],229:[function(require,module,exports){
 "use strict";
 
 Vue.filter("fileUploadPath", function (path) {
     var position = path.lastIndexOf("/");
+
+    if (position <= 0) {
+        return "/?GetOrderParamsFileName=" + path;
+    }
 
     return "/order-property-file/" + path.substring(0, position) + "?filename=" + path.substring(position + 1);
 });
