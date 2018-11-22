@@ -17303,7 +17303,17 @@ Vue.component("add-item-to-basket-overlay", {
 
     delimiters: ["${", "}"],
 
-    props: ["basketAddInformation", "template"],
+    props: {
+        basketAddInformation: String,
+        template: {
+            type: String,
+            default: "#vue-add-item-to-basket-overlay"
+        },
+        defaultTimeToClose: {
+            type: Number,
+            default: 15
+        }
+    },
 
     data: function data() {
         return {
@@ -17399,7 +17409,7 @@ Vue.component("add-item-to-basket-overlay", {
                 clearInterval(this.timerVar);
             }
 
-            this.timeToClose = 10;
+            this.timeToClose = this.defaultTimeToClose;
 
             this.timerVar = setInterval(function () {
                 _this.timeToClose -= 1;
