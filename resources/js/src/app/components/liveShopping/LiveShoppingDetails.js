@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 Vue.component("live-shopping-details", {
 
     props: {
@@ -26,6 +28,31 @@ Vue.component("live-shopping-details", {
                     showTimerProgress: true
                 };
             }
+        }
+    },
+
+    computed:
+    {
+        prices()
+        {
+            const itemPrices = this.liveShoppingData.item.prices;
+            const prices = {
+                price: null,
+                rrp  : null
+            };
+
+            if (!isNullOrUndefined(itemPrices.specialOffer) && !isNullOrUndefined(itemPrices.default))
+            {
+                prices.price = itemPrices.specialOffer;
+                prices.rrp = itemPrices.default;
+            }
+            else if (!isNullOrUndefined(itemPrices.default) && !isNullOrUndefined(itemPrices.rrp))
+            {
+                prices.price = itemPrices.default;
+                prices.rrp = itemPrices.rrp;
+            }
+
+            return prices;
         }
     },
 
@@ -91,8 +118,10 @@ Vue.component("live-shopping-details", {
 
         setItemPriceRebatePercentage()
         {
-            const specialOfferPrice = this.liveShoppingData.item.prices.specialOffer.price.value;
-            const defaultPrice      = this.liveShoppingData.item.prices.default.price.value;
+            const specialOfferPrice = this.prices.price.price.value;
+            const defaultPrice      = this.prices.rrp.price.value;
+            // const specialOfferPrice = this.liveShoppingData.item.prices.specialOffer.price.value;
+            // const defaultPrice      = this.liveShoppingData.item.prices.default.price.value;
             let percentage          = 100 - specialOfferPrice / defaultPrice * 100;
 
             percentage = percentage.toFixed(2);

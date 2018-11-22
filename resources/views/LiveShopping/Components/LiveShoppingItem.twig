@@ -12,11 +12,11 @@
 
             <div v-if="whenIsCurrentOffer() !== 2" slot="add-to-basket-large"></div>
 
-            <item-store-special v-if="!!storeSpecial && currentOffer.item.prices.specialOffer"
+            <item-store-special v-if="!!storeSpecial"
                                 slot="store-special"
                                 :store-special="storeSpecial"
-                                :recommended-retail-price="currentOffer.item.prices.default"
-                                :variation-retail-price="currentOffer.item.prices.specialOffer"
+                                :recommended-retail-price="prices.rrp"
+                                :variation-retail-price="prices.price"
                                 :decimal-count="2">
             </item-store-special>
 
@@ -29,7 +29,7 @@
                 </a>
 
 
-            <live-shopping-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1 && !!currentOffer.item.prices.specialOffer"
+            <live-shopping-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1"
                                    slot="item-details"
                                    :live-shopping-data="currentOffer"
                                    @reload-offer="reloadOffer()"

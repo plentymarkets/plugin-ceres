@@ -94,6 +94,28 @@ Vue.component("live-shopping-item", {
             return null;
         },
 
+        prices()
+        {
+            const itemPrices = this.currentOffer.item.prices;
+            const prices = {
+                price: null,
+                rrp  : null
+            };
+
+            if (!isNullOrUndefined(itemPrices.specialOffer) && !isNullOrUndefined(itemPrices.default))
+            {
+                prices.price = itemPrices.specialOffer;
+                prices.rrp = itemPrices.default;
+            }
+            else if (!isNullOrUndefined(itemPrices.default) && !isNullOrUndefined(itemPrices.rrp))
+            {
+                prices.price = itemPrices.default;
+                prices.rrp = itemPrices.rrp;
+            }
+
+            return prices;
+        },
+
         ...Vuex.mapState({
             liveShoppingOffers: state => state.liveShopping.liveShoppingOffers
         })
