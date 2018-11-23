@@ -98,19 +98,14 @@ Vue.component("live-shopping-item", {
         {
             const itemPrices = this.currentOffer.item.prices;
             const prices = {
-                price: null,
-                rrp  : null
+                price: itemPrices.default,
+                rrp: itemPrices.rrp
             };
 
-            if (!isNullOrUndefined(itemPrices.specialOffer) && !isNullOrUndefined(itemPrices.default))
+            if (!isNullOrUndefined(itemPrices.specialOffer))
             {
                 prices.price = itemPrices.specialOffer;
-                prices.rrp = itemPrices.default;
-            }
-            else if (!isNullOrUndefined(itemPrices.default) && !isNullOrUndefined(itemPrices.rrp))
-            {
-                prices.price = itemPrices.default;
-                prices.rrp = itemPrices.rrp;
+                prices.rrp = itemPrices.default || itemPrices.rrp;
             }
 
             return prices;
