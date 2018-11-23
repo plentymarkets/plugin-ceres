@@ -33,7 +33,8 @@
                                    slot="item-details"
                                    :live-shopping-data="currentOffer"
                                    @reload-offer="reloadOffer()"
-                                   :display-settings="displaySettings">
+                                   :display-settings="displaySettings"
+                                   :prices="prices">
                 <div class="live-shopping-add-to-basket" slot="after-item-name">
                     {{ AddToBasket.printVueComponent( "currentOffer.item" ) }}
                 </div>
