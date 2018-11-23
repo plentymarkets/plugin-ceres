@@ -113,7 +113,7 @@ Vue.component("live-shopping-details", {
             const percentage      = 100 - quantitySoldSum / data.quantityMax * 100;
 
             this.itemQuantityRemaining = data.quantityMax - quantitySoldSum;
-            this.quantitySoldPercentage = percentage.toFixed(2);
+            this.quantitySoldPercentage = percentage.toFixed(App.config.item.storeSpecial);
         },
 
         setItemPriceRebatePercentage()
@@ -122,7 +122,7 @@ Vue.component("live-shopping-details", {
             const defaultPrice      = this.prices.rrp.price.value;
             let percentage          = 100 - specialOfferPrice / defaultPrice * 100;
 
-            percentage = percentage.toFixed(2);
+            percentage = percentage.toFixed(App.config.item.storeSpecial);
             percentage = percentage.replace(".", App.decimalSeparator);
 
             this.itemPriceRebatePercentage = percentage;
@@ -145,7 +145,7 @@ Vue.component("live-shopping-details", {
                 remainSeconds = this.momentBegin.diff(momentNow, "seconds");
             }
 
-            this.timePercentage = (remainSeconds / fullSeconds * 100).toFixed(2);
+            this.timePercentage = (remainSeconds / fullSeconds * 100).toFixed(App.config.item.storeSpecial);
             this.duration = this.getDuration(remainSeconds);
 
             const hasToStart = !this.hasStarted && this.momentBegin < momentNow;

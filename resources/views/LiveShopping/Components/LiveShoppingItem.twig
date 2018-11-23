@@ -17,7 +17,7 @@
                                 :store-special="storeSpecial"
                                 :recommended-retail-price="prices.rrp"
                                 :variation-retail-price="prices.price"
-                                :decimal-count="2">
+                                :decimal-count="{{ ceresConfig.item.storeSpecial }}">
             </item-store-special>
 
                 <a v-if="!!displaySettings.customImagePath" slot="item-image" :href="currentOffer.item | itemURL">
