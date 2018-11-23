@@ -13535,8 +13535,6 @@ Custom classes
   }
 }
 
-<<<<<<< HEAD
-=======
 /* Compatibility for IE */
 html.ie #single-carousel .owl-item img {
   width: auto;
@@ -13561,56 +13559,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   margin-right: 0 !important;
 }
 
-.cmp {
-  position: relative;
-}
-
-.cmp::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  z-index: 1080;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: opacity 300ms, width 0ms 310ms, height 0ms 310ms;
-}
-
-.cmp::after {
-  content: "Loading…";
-  color: white;
-  font-weight: 700;
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1090;
-  opacity: 0;
-  visibility: hidden;
-  transform: translate(-50%, -50%);
-  transition: opacity 300ms, visibility 0ms 310ms;
-}
-
-.cmp.wait {
-  pointer-events: none;
-}
-
-.cmp.wait::before {
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  transition: width 0ms, height 0ms, opacity 300ms 10ms;
-}
-
-.cmp.wait::after {
-  opacity: 1;
-  visibility: visible;
-  transition: visibility 0ms, opacity 300ms 100ms;
-}
-
->>>>>>> beta
 .cmp-accordion .accordion-control {
   display: none;
 }
