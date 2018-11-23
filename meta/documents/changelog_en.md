@@ -1,5 +1,20 @@
 # Release Notes for Ceres
 
+## v2.16.3 (2018-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.2...2.16.3" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Changing the currency via the ShopBuilder top bar widget was not possible. This behaviour has been fixed.
+- Due to an error, the item search was not working properly on certain Android devices. This has been fixed.
+
+## v2.16.2 (2018-11-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.1...2.16.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, it was not possible to scroll through the shopping cart preview in the Mozilla Firefox browser. This has been fixed.
+- Due to an error, the content selection in the single item view was displayed even if it was not necessary for the item. This has been fixed.
+- Due to an error, the shopping cart button was not greyed out for non-purchasable main variations. This has been fixed.
+
 ## v2.16.1 (2018-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.0...2.16.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
@@ -102,6 +117,7 @@
 - Item lists and search results can now be sorted randomly.
 - A new event hook has been added, which reacts to the building of plugins. This enables the invalidation of the content cache.
 - A new checkbox has been added to the address input fields, via which the delivery to a Packstation/post office in Germany can be activated. The input fields adapt to the type of delivery destination if the checkbox is activated.
+- A new option has been added to the tab pagination and sorting in the Ceres configuration. This option determines the page number, beginning from which the value **noindex** is set for SEO robots.
 
 ### Changed
 

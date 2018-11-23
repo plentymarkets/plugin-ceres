@@ -7,21 +7,21 @@
     "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
     "settings": {
         "isFixed": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.navigationIsFixedLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.navigationIsFixedLabel"
             }
         },
         "navigationStyle": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.navigationNavigationStyleLabel",
+            "defaultValue": "normal",
             "options": {
-                "tooltip": "Widget.navigationNavigationStyleTooltip",
-                "defaultValue": "normal",
-                "selectBoxValues": [
+                "name": "Widget.navigationNavigationStyleLabel",
+                "tooltipText": "Widget.navigationNavigationStyleTooltip",
+                "listBoxValues": [
                     {
                         "value": "normal",
                         "caption": "Widget.navigationNavigationStyleNormal",
@@ -36,13 +36,14 @@
             }
         },
         "megaMenuLevels": {
-            "type": "selectBox",
+            "type": "select",
             "required": false,
-            "label": "Widget.navigationMegaMenuLevelsLabel",
+            "defaultValue": 2,
+            "isVisible": "navigationStyle === 'megaMenu'",
             "options": {
-                "tooltip": "Widget.navigationMegaMenuLevelsTooltip",
-                "defaultValue": 2,
-                "selectBoxValues": [
+                "name": "Widget.navigationMegaMenuLevelsLabel",
+                "tooltipText": "Widget.navigationMegaMenuLevelsTooltip",
+                "listBoxValues": [
                     {
                         "value": 2,
                         "caption": "Widget.navigationMegaMenuLevels2"
@@ -59,48 +60,52 @@
             }
         },
         "megaMenuMaxItems": {
-            "type": "verticalContainer",
-            "label": "Widget.navigationMegaMenuMaxItemsLabel",
+            "type": "vertical",
             "required": false,
+            "isVisible": "navigationStyle === 'megaMenu'",
             "options": {
-                "containerEntries": {
-                    "stage1": {
-                        "type": "inputNumber",
-                        "required": false,
-                        "label": "Widget.navigationMegaMenuMaxItemsStage1Label",
-                        "options": {
-                            "tooltip": "Widget.navigationMegaMenuMaxItemsStage1Tooltip",
-                            "defaultValue": 30
-                        }
-                    },
-                    "stage2": {
-                        "type": "inputNumber",
-                        "required": false,
-                        "label": "Widget.navigationMegaMenuMaxItemsStage2Label",
-                        "options": {
-                            "tooltip": "Widget.navigationMegaMenuMaxItemsStage2Tooltip",
-                            "defaultValue": 3
-                        }
-                    },
-                    "stage3": {
-                        "type": "inputNumber",
-                        "required": false,
-                        "label": "Widget.navigationMegaMenuMaxItemsStage3Label",
-                        "options": {
-                            "tooltip": "Widget.navigationMegaMenuMaxItemsStage3Tooltip",
-                            "defaultValue": 2
-                        }
+                "name": "Widget.navigationMegaMenuMaxItemsLabel"
+            },
+            "children": {
+                "stage1": {
+                    "type": "number",
+                    "required": false,
+                    "defaultValue": 30,
+                    "isVisible": "megaMenuLevels >= 2",
+                    "options": {
+                        "name": "Widget.navigationMegaMenuMaxItemsStage1Label",
+                        "tooltipText": "Widget.navigationMegaMenuMaxItemsStage1Tooltip"
+                    }
+                },
+                "stage2": {
+                    "type": "number",
+                    "required": false,
+                    "defaultValue": 3,
+                    "isVisible": "megaMenuLevels >= 3",
+                    "options": {
+                        "name": "Widget.navigationMegaMenuMaxItemsStage2Label",
+                        "tooltipText": "Widget.navigationMegaMenuMaxItemsStage2Tooltip"
+                    }
+                },
+                "stage3": {
+                    "type": "number",
+                    "required": false,
+                    "defaultValue": 2,
+                    "isVisible": "megaMenuLevels >= 4",
+                    "options": {
+                        "name": "Widget.navigationMegaMenuMaxItemsStage3Label",
+                        "tooltipText": "Widget.navigationMegaMenuMaxItemsStage3Tooltip"
                     }
                 }
             }
         },
         "companyLogoUrl": {
-            "type": "inputFile",
+            "type": "file",
             "required": false,
-            "label": "Widget.navigationCompanyLogoUrlLabel",
+            "defaultValue": "",
             "options": {
-                "tooltip": "Widget.navigationCompanyLogoUrlTooltip",
-                "defaultValue": ""
+                "name": "Widget.navigationCompanyLogoUrlLabel",
+                "tooltipText": "Widget.navigationCompanyLogoUrlTooltip"
             }
         }
     }

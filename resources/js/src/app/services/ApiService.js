@@ -107,6 +107,7 @@ module.exports = (function($)
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
         config.keepOriginalResponse = !!config.keepOriginalResponse;
+        config.headers = config.headers || {"Accept-Language": App.language};
 
         if (data)
         {
@@ -162,9 +163,9 @@ module.exports = (function($)
             notification = NotificationService.success(response.success);
         }
 
-        if (response.warning && response.warning.message.length > 0)
+        if (response.warn && response.warn.message.length > 0)
         {
-            notification = NotificationService.warning(response.warning);
+            notification = NotificationService.warn(response.warn);
         }
 
         if (response.info && response.info.message.length > 0)

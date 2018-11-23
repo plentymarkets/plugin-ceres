@@ -353,16 +353,12 @@
                     "deprecated": true
                 },
                 "header.show_category_types": {
-                    "type": "selectBox",
+                    "type": "multiCheckBox",
                     "required": false,
                     "label": "Config.headerShowCategoryTypesLabel",
                     "options": {
                         "defaultValue": "all",
-                        "selectBoxValues": [
-                            {
-                                "value": "all",
-                                "caption": "Config.headerShowCategoryTypesAll"
-                            },
+                        "checkBoxValues": [
                             {
                                 "value": "item",
                                 "caption": "Config.headerShowCategoryTypesItem"
@@ -370,6 +366,10 @@
                             {
                                 "value": "content",
                                 "caption": "Config.headerShowCategoryTypesContent"
+                            },
+                            {
+                                "value": "blog",
+                                "caption": "Config.headerShowCategoryTypesBlog"
                             }
                         ]
                     }
@@ -984,8 +984,8 @@
                                 "caption": "Config.itemListsCrossSellingTypeReplacementPart"
                             },
                             {
-                                "value": "Collection",
-                                "caption": "Config.itemListsCrossSellingTypeCollection"
+                                "value": "Bundle",
+                                "caption": "Config.itemListsCrossSellingTypeBundle"
                             }
                         ]
                     }
@@ -1469,6 +1469,7 @@
                 },
                 "basket.variations": {
                     "type": "checkBox",
+                    "deprecated": true,
                     "required": false,
                     "label": "Config.basketVariationsLabel",
                     "options": {

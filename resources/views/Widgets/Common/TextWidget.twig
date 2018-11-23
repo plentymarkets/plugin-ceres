@@ -1,13 +1,10 @@
-{% set text = widget.settings.text.mobile %}
+{% set text         = widget.settings.text.mobile %}
+{% set appearance   = widget.settings.appearance.mobile %}
 
-<div class="widget widget-text widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+{% if text | trim is not empty %}
+<div class="widget widget-text widget-{{ appearance | default('primary') }}">
     <div class="widget-inner">
-        {% if text | trim is not empty %}
-            {{ text | raw }}
-        {% else %}
-            <div class="placeholder-text">
-                {{ trans("Ceres::Widget.textPlaceholder") }}
-            </div>
-        {% endif %}
+        {{ text | raw }}
     </div>
 </div>
+{% endif %}
