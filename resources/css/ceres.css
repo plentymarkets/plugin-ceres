@@ -15436,7 +15436,7 @@ html.safari .popper-visible {
   .cmp-country-settings,
   .cmp-currency-select {
     overflow: auto;
-    max-height: calc(100% - 1.2rem);
+    max-height: 60vh;
   }
 }
 
@@ -15568,7 +15568,6 @@ html.safari .popper-visible {
 
 .pos-f-t .cmp-country-settings,
 .pos-f-t .cmp-currency-select {
-  position: absolute;
   top: auto;
 }
 
@@ -20608,6 +20607,10 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
   background-color: rgba(77, 79, 77, 0.9);
 }
 
+.widget-image-carousel.widget-proportional {
+  min-height: 175px;
+}
+
 .widget-image-carousel .widget-inner {
   padding-left: 0;
   padding-right: 0;
@@ -20619,7 +20622,7 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
   bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
+  width: 70%;
 }
 
 .widget-image-carousel .widget-inner .widget-caption h2, .widget-image-carousel .widget-inner .widget-caption .h2 {
