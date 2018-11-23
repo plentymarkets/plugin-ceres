@@ -37,6 +37,7 @@
     "variation.bundleType",
     "filter.hasChildren",
     "filter.isSalable",
+    "filter.hasActiveChildren",
     "unit.content",
     "unit.names.name",
     "unit.names.lang",
