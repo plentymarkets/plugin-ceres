@@ -23124,10 +23124,7 @@ Vue.component("item-filter-tag-list", {
 },{}],176:[function(require,module,exports){
 "use strict";
 
-var _utils = require("../../helper/utils");
-
 Vue.component("live-shopping-details", {
-
     props: {
         template: {
             type: String,
@@ -23150,26 +23147,10 @@ Vue.component("live-shopping-details", {
                     showTimerProgress: true
                 };
             }
-        }
-    },
-
-    computed: {
-        prices: function prices() {
-            var itemPrices = this.liveShoppingData.item.prices;
-            var prices = {
-                price: null,
-                rrp: null
-            };
-
-            if (!(0, _utils.isNullOrUndefined)(itemPrices.specialOffer) && !(0, _utils.isNullOrUndefined)(itemPrices.default)) {
-                prices.price = itemPrices.specialOffer;
-                prices.rrp = itemPrices.default;
-            } else if (!(0, _utils.isNullOrUndefined)(itemPrices.default) && !(0, _utils.isNullOrUndefined)(itemPrices.rrp)) {
-                prices.price = itemPrices.default;
-                prices.rrp = itemPrices.rrp;
-            }
-
-            return prices;
+        },
+        prices: {
+            type: Object,
+            required: true
         }
     },
 
@@ -23224,16 +23205,14 @@ Vue.component("live-shopping-details", {
             var percentage = 100 - quantitySoldSum / data.quantityMax * 100;
 
             this.itemQuantityRemaining = data.quantityMax - quantitySoldSum;
-            this.quantitySoldPercentage = percentage.toFixed(2);
+            this.quantitySoldPercentage = percentage.toFixed(App.config.item.storeSpecial);
         },
         setItemPriceRebatePercentage: function setItemPriceRebatePercentage() {
             var specialOfferPrice = this.prices.price.price.value;
             var defaultPrice = this.prices.rrp.price.value;
-            // const specialOfferPrice = this.liveShoppingData.item.prices.specialOffer.price.value;
-            // const defaultPrice      = this.liveShoppingData.item.prices.default.price.value;
             var percentage = 100 - specialOfferPrice / defaultPrice * 100;
 
-            percentage = percentage.toFixed(2);
+            percentage = percentage.toFixed(App.config.item.storeSpecial);
             percentage = percentage.replace(".", App.decimalSeparator);
 
             this.itemPriceRebatePercentage = percentage;
@@ -23251,7 +23230,7 @@ Vue.component("live-shopping-details", {
                 remainSeconds = this.momentBegin.diff(momentNow, "seconds");
             }
 
-            this.timePercentage = (remainSeconds / fullSeconds * 100).toFixed(2);
+            this.timePercentage = (remainSeconds / fullSeconds * 100).toFixed(App.config.item.storeSpecial);
             this.duration = this.getDuration(remainSeconds);
 
             var hasToStart = !this.hasStarted && this.momentBegin < momentNow;
@@ -23282,7 +23261,7 @@ Vue.component("live-shopping-details", {
     }
 });
 
-},{"../../helper/utils":236}],177:[function(require,module,exports){
+},{}],177:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -23367,16 +23346,13 @@ Vue.component("live-shopping-item", {
         prices: function prices() {
             var itemPrices = this.currentOffer.item.prices;
             var prices = {
-                price: null,
-                rrp: null
+                price: itemPrices.default,
+                rrp: itemPrices.rrp
             };
 
-            if (!(0, _utils.isNullOrUndefined)(itemPrices.specialOffer) && !(0, _utils.isNullOrUndefined)(itemPrices.default)) {
+            if (!(0, _utils.isNullOrUndefined)(itemPrices.specialOffer)) {
                 prices.price = itemPrices.specialOffer;
-                prices.rrp = itemPrices.default;
-            } else if (!(0, _utils.isNullOrUndefined)(itemPrices.default) && !(0, _utils.isNullOrUndefined)(itemPrices.rrp)) {
-                prices.price = itemPrices.default;
-                prices.rrp = itemPrices.rrp;
+                prices.rrp = itemPrices.default || itemPrices.rrp;
             }
 
             return prices;

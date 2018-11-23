@@ -821,6 +821,11 @@ $pre-scrollable-max-height:   340px !default;
 
 $category-text-color:         #fff !default;
 
+// Liveshopping
+
+$live-shopping-padding-x: .8rem;
+$live-shopping-padding-y: 1rem;
+
 // ==========================================================================
 // External Libs
 // ==========================================================================
@@ -12304,8 +12309,6 @@ Custom classes
 		}
 	}
 }
-$live-shopping-padding: 1rem .8rem;
-
 .live-shopping-details
 {
     position: relative;
@@ -12314,7 +12317,7 @@ $live-shopping-padding: 1rem .8rem;
 
     .live-shopping-item-name
     {
-        padding: .8rem;
+        padding: $live-shopping-padding-x;
         margin: 0;
 
         > a
@@ -12330,7 +12333,7 @@ $live-shopping-padding: 1rem .8rem;
 
     .live-shopping-countdown
     {
-        padding: $live-shopping-padding;
+        padding: $live-shopping-padding-y $live-shopping-padding-x;
         padding-top: .6rem;
         border-top-left-radius: .25rem;
         border-top-right-radius: .25rem;
@@ -12438,8 +12441,8 @@ $live-shopping-padding: 1rem .8rem;
 
 .live-shopping-add-to-basket
 {
-    padding-left: .8rem;
-    padding-right: .8rem;
+    padding-left: $live-shopping-padding-x;
+    padding-right: $live-shopping-padding-x;
 }
 
 @for $i from 10 to -1 {

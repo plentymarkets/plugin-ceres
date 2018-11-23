@@ -14109,7 +14109,7 @@ Custom classes
 }
 
 .live-shopping-details .live-shopping-item-name {
-  padding: .8rem;
+  padding: 0.8rem;
   margin: 0;
 }
 
@@ -14209,8 +14209,8 @@ Custom classes
 }
 
 .live-shopping-add-to-basket {
-  padding-left: .8rem;
-  padding-right: .8rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
 }
 
 .progress-100 {
