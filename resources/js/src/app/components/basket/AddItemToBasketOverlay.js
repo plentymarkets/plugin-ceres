@@ -117,7 +117,7 @@ Vue.component("add-item-to-basket-overlay", {
                 const graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 
-                this.price = graduatedPrice + propertySurcharge;
+                this.price = this.$options.filters.specialOffer(graduatedPrice, this.latestBasketEntry.item.prices, "price", "value") + propertySurcharge;
             }
         },
 
