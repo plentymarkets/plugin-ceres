@@ -26,8 +26,8 @@
 
 	@include media-breakpoint-down(sm) {
 		overflow: auto;
-		max-height: 90vh;
-	}
+		max-height: 60vh;
+		}
 
 	.country-settings-inner,
 	.currency-select-inner {
