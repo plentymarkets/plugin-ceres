@@ -58,7 +58,7 @@ Vue.component("item-filter-price", {
             if (!this.isDisabled)
             {
                 // TODO reload
-                // this.$store.dispatch("selectPriceFacet", {priceMin: this.priceMin, priceMax: this.priceMax});
+                this.$store.dispatch("selectPriceFacet", {priceMin: this.priceMin, priceMax: this.priceMax});
             }
         }
     }

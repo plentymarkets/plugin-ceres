@@ -32,7 +32,7 @@ Vue.component("item-list-sorting", {
         updateSorting()
         {
             // TODO reload
-            // this.$store.dispatch("selectItemListSorting", this.selectedSorting);
+            this.$store.dispatch("selectItemListSorting", this.selectedSorting);
         },
 
         /**

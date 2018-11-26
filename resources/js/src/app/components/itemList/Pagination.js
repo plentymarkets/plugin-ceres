@@ -59,7 +59,7 @@ Vue.component("pagination", {
         setPage(page)
         {
             // TODO reload
-            // this.$store.dispatch("selectItemListPage", page);
+            this.$store.dispatch("selectItemListPage", page);
 
             $("html, body").animate({scrollTop: 0}, "slow");
         }
