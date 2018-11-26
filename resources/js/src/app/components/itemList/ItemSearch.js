@@ -98,7 +98,8 @@ Vue.component("item-search", {
                 if (document.location.pathname === "/search")
                 {
                     this.updateTitle(this.$refs.searchInput.value);
-                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
+                    // TODO reload?
+                    // this.$store.dispatch("searchItems", this.$refs.searchInput.value);
 
                     this.selectedAutocompleteIndex = -1;
                     this.autocompleteResult = [];

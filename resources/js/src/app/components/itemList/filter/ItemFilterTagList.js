@@ -19,7 +19,8 @@ Vue.component("item-filter-tag-list", {
     {
         removeTag(tag)
         {
-            this.$store.dispatch("selectFacet", tag);
+            // TODO reload
+            // this.$store.dispatch("selectFacet", tag);
         }
     }
 });

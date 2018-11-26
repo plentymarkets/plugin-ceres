@@ -31,7 +31,8 @@ Vue.component("item-list-sorting", {
          */
         updateSorting()
         {
-            this.$store.dispatch("selectItemListSorting", this.selectedSorting);
+            // TODO reload
+            // this.$store.dispatch("selectItemListSorting", this.selectedSorting);
         },
 
         /**

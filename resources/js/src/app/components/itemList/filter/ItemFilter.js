@@ -53,7 +53,8 @@ Vue.component("item-filter", {
     {
         updateFacet(facetValue)
         {
-            this.$store.dispatch("selectFacet", facetValue);
+            // TODO reload
+            // this.$store.dispatch("selectFacet", facetValue);
         },
 
         isSelected(facetValueId)
