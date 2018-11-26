@@ -57,7 +57,7 @@ Vue.component("live-shopping-item", {
             {
                 const liveShopping = this.currentOffer.liveShopping;
 
-                return liveShopping.quantitySold + liveShopping.quantitySoldReal < liveShopping.quantityMax;
+                return liveShopping.quantitySold < liveShopping.quantityMax;
             }
 
             return false;
