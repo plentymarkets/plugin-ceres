@@ -109,9 +109,14 @@ const getters =
 
         variationTotalPrice(state, getters, rootState, rootGetters)
         {
-            const graduatedPrice = getters.variationGraduatedPrice;
+            const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-            return getters.variationPropertySurcharge + (graduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0);
+            if (state.variation.documents)
+            {
+                return getters.variationPropertySurcharge + Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+            }
+
+            return null;
         },
 
         variationGroupedProperties(state)
