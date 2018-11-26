@@ -1,0 +1,20 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.component( 'Ceres::LiveShopping.Components.LiveShoppingItem' ) }}
+
+<div class="widget-live-shopping widget">
+    <div class="row clearfix">
+        <div class="col-xs-12">
+            <live-shopping-item :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection }}" :display-settings="{{ liveShoppingConfig | json_encode }}">
+                {% if isPreview %}
+                    <div class="live-shopping-placeholder">
+                        <div>
+                            <p class="title">{{ Twig.trans("Ceres::Widget.liveShoppingPlaceholderTitle") }}</p>
+                            <p class="description">{{ Twig.trans("Ceres::Widget.liveShoppingPlaceholderDescription") }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </live-shopping-item>
+        </div>
+    </div>
+</div>

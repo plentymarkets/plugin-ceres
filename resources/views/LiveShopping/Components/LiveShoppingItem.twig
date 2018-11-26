@@ -1,0 +1,48 @@
+{{ component( "Ceres::Basket.Components.AddToBasket" ) }}
+{{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
+{{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
+{{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
+{{ component( "Ceres::LiveShopping.Components.LiveShoppingDetails" ) }}
+
+{% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
+
+<script type="x/template" id="vue-live-shopping-item">
+    <div>
+        <category-item v-if="!!currentOffer" :item-data="currentOffer.item" decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle">
+
+            <div v-if="whenIsCurrentOffer() !== 2" slot="add-to-basket-large"></div>
+
+            <item-store-special v-if="!!storeSpecial"
+                                slot="store-special"
+                                :store-special="storeSpecial"
+                                :recommended-retail-price="prices.rrp"
+                                :variation-retail-price="prices.price"
+                                :decimal-count="{{ ceresConfig.item.storeSpecial }}">
+            </item-store-special>
+
+                <a v-if="!!displaySettings.customImagePath" slot="item-image" :href="currentOffer.item | itemURL">
+                    <item-lazy-img template="#vue-item-lazy-img"
+                                   :image-url="displaySettings.customImagePath"
+                                   :alt="currentOffer.item | itemName" 
+                                   :title="currentOffer.item | itemName">
+                    </item-lazy-img>
+                </a>
+
+
+            <live-shopping-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1"
+                                   slot="item-details"
+                                   :live-shopping-data="currentOffer"
+                                   @reload-offer="reloadOffer()"
+                                   :display-settings="displaySettings"
+                                   :prices="prices">
+                <div class="live-shopping-add-to-basket" slot="after-item-name">
+                    {{ AddToBasket.printVueComponent( "currentOffer.item" ) }}
+                </div>
+            </live-shopping-details>
+            
+        </category-item>
+        <div v-else>
+            <slot></slot>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,21 @@
+.bs4-progress
+{
+    display: flex;
+    height: .75rem;
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: .25rem;
+}
+
+.bs4-progress-bar
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $white;
+    text-align: center;
+    white-space: nowrap;
+    background-color: $brand-primary;
+    transition: width .6s ease;
+}

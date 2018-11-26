@@ -29,7 +29,7 @@ Vue.component("category-item", {
         },
 
         /**
-         * returns itemData.texts[0]
+         * returns itemData.texts
          */
         texts()
         {
