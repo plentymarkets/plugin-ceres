@@ -71,6 +71,12 @@
             </div>
 
             <div class="live-shopping-prices-additional-info">
+                <div v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
+                    <span>${ liveShoppingData.item.unit.content }</span>
+                    <span>${ liveShoppingData.item.unit.names.name }</span>
+                    <span v-if="liveShoppingData.item.variation.mayShowUnitPrice">| ${ prices.price.basePrice }</span>
+                </div>
+
                 * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.itemExclVAT") }}{% else %}{{ trans("Ceres::Template.itemInclVAT") }}{% endif %} {{ trans("Ceres::Template.itemExclusive") }}
                 <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
             </div>
