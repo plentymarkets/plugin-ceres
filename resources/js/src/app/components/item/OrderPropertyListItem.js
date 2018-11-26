@@ -33,7 +33,7 @@ Vue.component("order-property-list-item", {
             }
             else
             {
-                this.selectedFile = null;
+                this.clearSelectedFile();
             }
             this.setVariationOrderProperty({propertyId: this.property.id, value: null});
         });
@@ -202,6 +202,7 @@ Vue.component("order-property-list-item", {
         {
             this.selectedFile = null;
             this.setVariationOrderProperty({propertyId: this.property.id, value: null});
+            this.$refs.fileInput.value = "";
         },
 
         _handleValidationErrors(error)

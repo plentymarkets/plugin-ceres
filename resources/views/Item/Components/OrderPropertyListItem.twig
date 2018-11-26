@@ -40,7 +40,7 @@
                 <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
                     <i class="fa fa-times"></i>
                 </span>
-                <input :disabled="waiting" type="file" size="50" accept="image/*" @change="setPropertyFile($event)">
+                <input :disabled="waiting" ref="fileInput" type="file" size="50" accept="image/*" @change="setPropertyFile($event)">
             </label>
         </div>
 
