@@ -67,8 +67,8 @@ Vue.component("live-shopping-details", {
         {
             const momentNow = moment(Date.now());
 
-            this.momentBegin = moment(parseInt(this.liveShoppingData.liveShopping.fromTime) * 1000);
-            this.momentEnd = moment(parseInt(this.liveShoppingData.liveShopping.toTime) * 1000);
+            this.momentBegin = moment.unix(this.liveShoppingData.liveShopping.fromTime).utc(true);
+            this.momentEnd = moment.unix(this.liveShoppingData.liveShopping.toTime).utc(true);
             this.hasStarted = this.momentBegin < momentNow;
             this.hasClosed = this.momentEnd < momentNow;
 
