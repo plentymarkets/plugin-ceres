@@ -99,13 +99,15 @@ Vue.component("live-shopping-item", {
             const itemPrices = this.currentOffer.item.prices;
             const prices = {
                 price: itemPrices.default,
-                rrp: itemPrices.rrp
+                rrp: itemPrices.rrp,
+                isRrpDefaultPrice: false
             };
 
             if (!isNullOrUndefined(itemPrices.specialOffer))
             {
                 prices.price = itemPrices.specialOffer;
                 prices.rrp = itemPrices.default || itemPrices.rrp;
+                prices.isRrpDefaultPrice = !!itemPrices.default;
             }
 
             return prices;
