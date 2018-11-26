@@ -31,6 +31,10 @@ Vue.component("live-shopping-details", {
         {
             type: Object,
             required: true
+        },
+        isActiveByStock:
+        {
+            type: Boolean
         }
     },
 
