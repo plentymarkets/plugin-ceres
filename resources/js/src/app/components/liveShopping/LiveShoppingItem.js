@@ -41,8 +41,8 @@ Vue.component("live-shopping-item", {
         {
             if (!isNullOrUndefined(this.currentOffer))
             {
-                const momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime).utc(true);
-                const momentEnd = moment.unix(this.currentOffer.liveShopping.toTime).utc(true);
+                const momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
+                const momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
                 const momentNow = moment(Date.now());
 
                 return momentBegin < momentNow && momentNow < momentEnd;
@@ -129,8 +129,8 @@ Vue.component("live-shopping-item", {
     {
         whenIsCurrentOffer()
         {
-            const momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime).utc(true);
-            const momentEnd = moment.unix(this.currentOffer.liveShopping.toTime).utc(true);
+            const momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
+            const momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
             const momentNow = moment(Date.now());
 
             if (momentBegin < momentNow && momentNow > momentEnd)
