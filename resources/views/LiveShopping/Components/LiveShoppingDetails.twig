@@ -61,7 +61,7 @@
 
         <div class="live-shopping-prices bg-danger" v-if="hasStarted && !hasClosed">
             <div class="live-shopping-prices-inner">
-                <div class="live-shopping-prices-rebate" v-if="isNaN(itemPriceRebatePercentage)">{{ trans("Ceres::Template.liveShoppingRebate", {"rebate": "${ itemPriceRebatePercentage }" }) }}</div>
+                <div class="live-shopping-prices-rebate" v-if="!isNaN(itemPriceRebatePercentage)">{{ trans("Ceres::Template.liveShoppingRebate", {"rebate": "${ itemPriceRebatePercentage }" }) }}</div>
                 <div class="live-shopping-prices-container">
                     <div class="live-shopping-price">
                         <strong>${ prices.price.price.formatted } *</strong>
@@ -88,9 +88,12 @@
         <div class="thumb-content" v-else>
             <div>
                 <div class="prices">
-                    <del class="crossprice" v-if="displaySettings.showCrossPrice && prices.rrp.price.value > 0">
-                        ${ prices.rrp.price.formatted }
-                    </del>
+                    <div class="price-view-port">
+                        <del class="crossprice" v-if="displaySettings.showCrossPrice && prices.rrp.price.value > 0">
+                            ${ prices.rrp.price.formatted }
+                        </del>
+                    </div>
+                    
                     <div class="price">
                         ${ prices.price.price.formatted } *
                     </div>

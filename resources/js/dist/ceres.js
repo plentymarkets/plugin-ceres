@@ -23600,8 +23600,8 @@ Vue.component("live-shopping-details", {
 
             var momentNow = moment(Date.now());
 
-            this.momentBegin = moment.unix(this.liveShoppingData.liveShopping.fromTime).utc(true);
-            this.momentEnd = moment.unix(this.liveShoppingData.liveShopping.toTime).utc(true);
+            this.momentBegin = moment.unix(this.liveShoppingData.liveShopping.fromTime);
+            this.momentEnd = moment.unix(this.liveShoppingData.liveShopping.toTime);
             this.hasStarted = this.momentBegin < momentNow;
             this.hasClosed = this.momentEnd < momentNow;
 
@@ -23721,8 +23721,8 @@ Vue.component("live-shopping-item", {
         },
         isActiveByTime: function isActiveByTime() {
             if (!(0, _utils.isNullOrUndefined)(this.currentOffer)) {
-                var momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime).utc(true);
-                var momentEnd = moment.unix(this.currentOffer.liveShopping.toTime).utc(true);
+                var momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
+                var momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
                 var momentNow = moment(Date.now());
 
                 return momentBegin < momentNow && momentNow < momentEnd;
@@ -23792,8 +23792,8 @@ Vue.component("live-shopping-item", {
 
     methods: {
         whenIsCurrentOffer: function whenIsCurrentOffer() {
-            var momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime).utc(true);
-            var momentEnd = moment.unix(this.currentOffer.liveShopping.toTime).utc(true);
+            var momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
+            var momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
             var momentNow = moment(Date.now());
 
             if (momentBegin < momentNow && momentNow > momentEnd) {
