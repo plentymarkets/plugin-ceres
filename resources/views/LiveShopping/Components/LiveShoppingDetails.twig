@@ -67,8 +67,8 @@
                         <strong>${ prices.price.price.formatted } *</strong>
                     </div>
                     <span v-if="displaySettings.showCrossPrice && prices.rrp.price.value > 0">
-                        <span v-if="prices.isRrpDefaultPrice">{{ trans("Ceres::Template.liveShoppingBefore", {"price": "${ prices.rrp.price.formatted }"}) | raw }}</span>
-                        <span v-else>{{ trans("Ceres::Template.liveShoppingRrp", {"price": "${ prices.rrp.price.formatted }"}) | raw }}</span>
+                        <span v-if="prices.isRrpDefaultPrice">{{ trans("Ceres::Template.liveShoppingBefore", {"price": "<del>${ prices.rrp.price.formatted }</del>"}) | raw }}</span>
+                        <span v-else>{{ trans("Ceres::Template.liveShoppingRrp", {"price": "<del>${ prices.rrp.price.formatted }</del>"}) | raw }}</span>
                     </span>
                 </div>
             </div>
