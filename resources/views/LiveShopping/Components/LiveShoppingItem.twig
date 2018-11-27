@@ -10,8 +10,6 @@
     <div>
         <category-item v-if="!!currentOffer" :item-data="currentOffer.item" decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle">
 
-            <div v-if="whenIsCurrentOffer() !== 2" slot="add-to-basket-large"></div>
-
             <item-store-special v-if="!!storeSpecial"
                                 slot="store-special"
                                 :store-special="storeSpecial"
@@ -29,12 +27,13 @@
                 </a>
 
 
-            <live-shopping-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1"
+            <live-shopping-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1 && isActiveByStock"
                                    slot="item-details"
                                    :live-shopping-data="currentOffer"
                                    @reload-offer="reloadOffer()"
                                    :display-settings="displaySettings"
-                                   :prices="prices">
+                                   :prices="prices"
+                                   :is-active-by-stock="isActiveByStock">
                 <div class="live-shopping-add-to-basket" slot="after-item-name">
                     {{ AddToBasket.printVueComponent( "currentOffer.item" ) }}
                 </div>
