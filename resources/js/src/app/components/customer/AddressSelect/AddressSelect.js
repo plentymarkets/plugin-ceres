@@ -334,7 +334,7 @@ Vue.component("address-select", {
     {
         optionType(selectedAddress, typeId)
         {
-            if (selectedAddress && selectedAddress.name2)
+            if (selectedAddress && selectedAddress.options)
             {
                 for (const optionType of selectedAddress.options)
                 {
@@ -346,7 +346,6 @@ Vue.component("address-select", {
             }
 
             return "";
-
         }
     }
 });

@@ -17,19 +17,16 @@
                         <span v-else class="item-content">
                             <div v-if="!isAddressListEmpty && selectedAddress">
                                 <strong v-if="selectedAddress && selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
+                                <span>${ selectedAddress | optionType(12) }</span>
                                 <strong v-if="selectedAddress && !selectedAddress.name1 || selectedAddress.name1.length == 0">${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</strong>
-                                <span v-else>${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</span>
+                                <span v-else-if="!selectedAddress.name1">${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</span>
                                 <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
                                 <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
                                 <span>${getCountryName(selectedAddress.countryId)}</span>
                             </div>
 
-                            <p v-if="!isAddressListEmpty && !selectedAddress"
-                            class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressPleaseSelect") }}
-                                </p>
-                            <p v-if="isAddressListEmpty"
-                            class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressNoAddress") }}
-                                </p>
+                            <p v-if="!isAddressListEmpty && !selectedAddress" class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressPleaseSelect") }}</p>
+                            <p v-if="isAddressListEmpty" class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressNoAddress") }}</p>
                         </span>
                     </div>
                 </div>
@@ -50,12 +47,10 @@
                                     :id="'addressSelectItem' + _uid + address.id"
                                     :value="address.id"
                                     :checked="selectedAddress && selectedAddress.id === address.id"
-                                    @change="onAddressChanged(address)"
-                            >
+                                    @change="onAddressChanged(address)">
                             <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
                             <span v-if="address.id == -99">
-                                <p class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressSameAsInvoice") }}
-                                    </p>
+                                <p class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                             </span>
                                 <span v-else class="item-content small">
                                 <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
