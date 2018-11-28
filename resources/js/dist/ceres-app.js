@@ -24177,13 +24177,6 @@ Vue.component("mobile-navigation", {
                 }
             }
         },
-        navigateTo: function navigateTo(category) {
-            this.closeNavigation();
-
-            if (App.isCategoryView && category.children && category.showChildren) {
-                this.slideTo(category.children);
-            }
-        },
         slideTo: function slideTo(children, back) {
             back = !!back;
 
