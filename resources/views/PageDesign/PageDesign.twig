@@ -194,7 +194,7 @@
 <script>
     {% if ceresConfig.log.checkSyntax %}
         var rootElement = document.getElementById("vue-app");
-        rootElement.innerHTML = rootElement.innerHTML.replace(/(\s*(?::)\S+=(?:""|''))/g, '');
+        rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, '');
 
         var vueApp = new Vue({
             store: window.ceresStore
