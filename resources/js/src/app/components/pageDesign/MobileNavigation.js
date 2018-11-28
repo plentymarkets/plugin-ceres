@@ -92,16 +92,6 @@ Vue.component("mobile-navigation", {
             }
         },
 
-        navigateTo(category)
-        {
-            this.closeNavigation();
-
-            if (App.isCategoryView && category.children && category.showChildren)
-            {
-                this.slideTo(category.children);
-            }
-        },
-
         slideTo(children, back)
         {
             back = !!back;
