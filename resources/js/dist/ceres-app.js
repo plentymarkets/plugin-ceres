@@ -26522,7 +26522,7 @@ exports.default = { autoFocus: autoFocus, triggerAutoFocus: triggerAutoFocus };
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.updateItemListUrlParams = updateItemListUrlParams;
+exports.getItemListUrlParams = getItemListUrlParams;
 
 var _UrlService = require("services/UrlService");
 
@@ -26530,7 +26530,7 @@ var _UrlService2 = _interopRequireDefault(_UrlService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function updateItemListUrlParams(searchParams) {
+function getItemListUrlParams(searchParams) {
     var urlParams = {};
     var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
 
@@ -26550,7 +26550,6 @@ function updateItemListUrlParams(searchParams) {
     var newUrlParams = _UrlService2.default.getUrlParams(document.location.search);
 
     for (var urlParamKey in urlParams) {
-
         if (urlParams[urlParamKey] !== null) {
             newUrlParams[urlParamKey] = urlParams[urlParamKey];
         } else {
@@ -26558,11 +26557,11 @@ function updateItemListUrlParams(searchParams) {
         }
     }
 
-    _UrlService2.default.setUrlParams(newUrlParams);
+    return newUrlParams;
 }
 
 exports.default = {
-    updateItemListUrlParams: updateItemListUrlParams
+    getItemListUrlParams: getItemListUrlParams
 };
 
 },{"services/UrlService":257}],254:[function(require,module,exports){
@@ -26991,6 +26990,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getUrlParams = getUrlParams;
 exports.setUrlParams = setUrlParams;
 exports.navigateTo = navigateTo;
+exports.navigateToParams = navigateToParams;
 
 var _jquery = require("jquery");
 
@@ -27046,6 +27046,14 @@ function setUrlParams(urlParams) {
 
 function navigateTo(url) {
     url = (0, _url.normalizeUrl)(url);
+    window.location.assign(url);
+}
+
+function navigateToParams(urlParams) {
+    var pathName = (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory) && (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory.url) ? _index2.default.state.navigation.currentCategory.url : window.location.pathname;
+    var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
+    var url = (0, _url.normalizeUrl)(pathName + params);
+
     window.location.assign(url);
 }
 
@@ -28331,13 +28339,14 @@ Object.defineProperty(exports, "__esModule", {
 
 var _ItemListUrlService = require("services/ItemListUrlService");
 
+var _UrlService = require("services/UrlService");
+
 var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import ApiService from "services/ApiService";
 var state = {
     facets: [],
     selectedFacets: [],
@@ -28481,7 +28490,7 @@ var actions = {
 
         commit("setItemListPage", 1);
 
-        dispatch("retrieveItemList");
+        dispatch("loadItemList");
     },
     selectPriceFacet: function selectPriceFacet(_ref3, _ref4) {
         var dispatch = _ref3.dispatch,
@@ -28493,7 +28502,7 @@ var actions = {
         commit("setPriceFacetTag");
         commit("setItemListPage", 1);
 
-        dispatch("retrieveItemList");
+        dispatch("loadItemList");
     },
     selectItemListPage: function selectItemListPage(_ref5, page) {
         var dispatch = _ref5.dispatch,
@@ -28501,7 +28510,7 @@ var actions = {
 
         commit("setItemListPage", page);
 
-        dispatch("retrieveItemList");
+        dispatch("loadItemList");
     },
     selectItemListSorting: function selectItemListSorting(_ref6, sorting) {
         var dispatch = _ref6.dispatch,
@@ -28510,7 +28519,7 @@ var actions = {
         commit("setItemListSorting", sorting);
         commit("setItemListPage", 1);
 
-        dispatch("retrieveItemList");
+        dispatch("loadItemList");
     },
     selectItemsPerPage: function selectItemsPerPage(_ref7, itemsPerPage) {
         var dispatch = _ref7.dispatch,
@@ -28519,7 +28528,7 @@ var actions = {
         commit("setItemsPerPage", itemsPerPage);
         commit("setItemListPage", 1);
 
-        dispatch("retrieveItemList");
+        dispatch("loadItemList");
     },
     searchItems: function searchItems(_ref8, searchString) {
         var dispatch = _ref8.dispatch,
@@ -28529,55 +28538,28 @@ var actions = {
         commit("setItemListPage", 1);
         commit("setSelectedFacetsByIds", []);
 
-        dispatch("retrieveItemList");
+        dispatch("loadItemList");
     },
-    retrieveItemList: function retrieveItemList(_ref9) {
+    loadItemList: function loadItemList(_ref9) {
         var state = _ref9.state,
-            dispatch = _ref9.dispatch,
             commit = _ref9.commit,
-            getters = _ref9.getters,
-            rootState = _ref9.rootState;
+            getters = _ref9.getters;
 
-        return new Promise(function (resolve, reject) {
-            var selectedPriceFacet = state.selectedFacets.find(function (facet) {
-                return facet.id === "price";
-            });
-
-            var searchParams = {
-                query: state.searchString,
-                items: state.itemsPerPage,
-                sorting: state.sorting,
-                page: state.page,
-                facets: getters.selectedFacetIdsForUrl.toString(),
-                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                template: "Ceres::ItemList.ItemListView"
-            };
-            // const url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
-
-            (0, _ItemListUrlService.updateItemListUrlParams)(searchParams);
-            commit("setIsItemListLoading", true);
-
-            // TODO load new twig item list
-            // window.history.pushState(stateObj, "seite 2", "");
-            window.location.reload();
-
-            //     ApiService.get(url, searchParams)
-            //         .done(data =>
-            //         {
-            //             commit("setItemListItems", data.itemList.documents);
-            //             commit("setItemListTotalItems", data.itemList.total);
-            //             commit("setFacets", data.facets);
-            //             commit("setIsItemListLoading", false);
-            //             resolve(data);
-            //         })
-            //         .fail(error =>
-            //         {
-            //             commit("setIsItemListLoading", false);
-            //             reject(error);
-            //         });
+        var selectedPriceFacet = state.selectedFacets.find(function (facet) {
+            return facet.id === "price";
         });
+        var searchParams = {
+            query: state.searchString,
+            items: state.itemsPerPage,
+            sorting: state.sorting,
+            page: state.page,
+            facets: getters.selectedFacetIdsForUrl.toString(),
+            priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+            priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : ""
+        };
+
+        commit("setIsItemListLoading", true);
+        (0, _UrlService.navigateToParams)((0, _ItemListUrlService.getItemListUrlParams)(searchParams));
     }
 };
 
@@ -28611,7 +28593,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ItemListUrlService":253,"services/TranslationService":256}],265:[function(require,module,exports){
+},{"services/ItemListUrlService":253,"services/TranslationService":256,"services/UrlService":257}],265:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

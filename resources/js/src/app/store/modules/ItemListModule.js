@@ -1,5 +1,5 @@
-// import ApiService from "services/ApiService";
-import {updateItemListUrlParams}from "services/ItemListUrlService";
+import {getItemListUrlParams}from "services/ItemListUrlService";
+import {navigateToParams}from "services/UrlService";
 import TranslationService from "services/TranslationService";
 
 const state =
@@ -152,7 +152,7 @@ const actions =
 
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
         selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
@@ -161,14 +161,14 @@ const actions =
             commit("setPriceFacetTag");
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
         selectItemListPage({dispatch, commit}, page)
         {
             commit("setItemListPage", page);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
         selectItemListSorting({dispatch, commit}, sorting)
@@ -176,7 +176,7 @@ const actions =
             commit("setItemListSorting", sorting);
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
         selectItemsPerPage({dispatch, commit}, itemsPerPage)
@@ -184,7 +184,7 @@ const actions =
             commit("setItemsPerPage", itemsPerPage);
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
         searchItems({dispatch, commit}, searchString)
@@ -193,51 +193,25 @@ const actions =
             commit("setItemListPage", 1);
             commit("setSelectedFacetsByIds", []);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
-        retrieveItemList({state, dispatch, commit, getters, rootState})
+        loadItemList({state, commit, getters})
         {
-            return new Promise((resolve, reject) =>
-            {
-                const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
+            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
+            const searchParams =
+                {
+                    query               : state.searchString,
+                    items               : state.itemsPerPage,
+                    sorting             : state.sorting,
+                    page                : state.page,
+                    facets              : getters.selectedFacetIdsForUrl.toString(),
+                    priceMin            : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+                    priceMax            : selectedPriceFacet ? selectedPriceFacet.priceMax : ""
+                };
 
-                const searchParams =
-                    {
-                        query               : state.searchString,
-                        items               : state.itemsPerPage,
-                        sorting             : state.sorting,
-                        page                : state.page,
-                        facets              : getters.selectedFacetIdsForUrl.toString(),
-                        priceMin            : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-                        priceMax            : selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-                        categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                        template            : "Ceres::ItemList.ItemListView"
-                    };
-                // const url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
-
-                updateItemListUrlParams(searchParams);
-                commit("setIsItemListLoading", true);
-
-                // TODO load new twig item list
-                // window.history.pushState(stateObj, "seite 2", "");
-                window.location.reload();
-
-            //     ApiService.get(url, searchParams)
-            //         .done(data =>
-            //         {
-            //             commit("setItemListItems", data.itemList.documents);
-            //             commit("setItemListTotalItems", data.itemList.total);
-            //             commit("setFacets", data.facets);
-            //             commit("setIsItemListLoading", false);
-            //             resolve(data);
-            //         })
-            //         .fail(error =>
-            //         {
-            //             commit("setIsItemListLoading", false);
-            //             reject(error);
-            //         });
-            });
+            commit("setIsItemListLoading", true);
+            navigateToParams(getItemListUrlParams(searchParams));
         }
     };
 

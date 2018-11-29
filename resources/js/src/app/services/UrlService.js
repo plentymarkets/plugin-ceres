@@ -57,4 +57,17 @@ export function navigateTo(url)
     window.location.assign(url);
 }
 
+export function navigateToParams(urlParams)
+{
+    const pathName =
+        isDefined(store.state.navigation.currentCategory) &&
+        isDefined(store.state.navigation.currentCategory.url) ?
+            store.state.navigation.currentCategory.url :
+            window.location.pathname;
+    const params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
+    const url = normalizeUrl(pathName + params);
+
+    window.location.assign(url);
+}
+
 export default {setUrlParams, getUrlParams, navigateTo};
