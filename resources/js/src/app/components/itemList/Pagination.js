@@ -4,9 +4,19 @@ Vue.component("pagination", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-pagination"
+        },
+        totalItems:
+        {
+            type: Number,
+            default: 0
+        }
+    },
 
     data()
     {
@@ -39,8 +49,7 @@ Vue.component("pagination", {
         ...Vuex.mapState({
             page: state => state.itemList.page || 1,
             isLoading: state => state.itemList.isLoading,
-            itemsPerPage: state => state.itemList.itemsPerPage,
-            totalItems: state => state.itemList.totalItems
+            itemsPerPage: state => state.itemList.itemsPerPage
         })
     },
 
@@ -52,6 +61,7 @@ Vue.component("pagination", {
         const page = urlParams.page || 1;
 
         this.$store.commit("setItemListPage", parseInt(page));
+        this.$store.commit("setItemListTotalItems", this.totalItems);
     },
 
     methods:
