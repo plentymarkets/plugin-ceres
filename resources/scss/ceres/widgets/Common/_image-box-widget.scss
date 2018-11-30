@@ -191,3 +191,20 @@
     }
 
 }
+
+/* Compatibility for IE */
+/* display img with optimal aspect ratio */
+html.ie {
+    .widget-image-box.widget-proportional {
+        min-height: auto;
+        padding-bottom: 0 !important;
+
+        .img-cover {
+            width: 100%;
+            top: auto;
+            left: auto;
+            transform: none;
+            position: relative;
+        }
+    }
+}
