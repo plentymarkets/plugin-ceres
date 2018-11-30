@@ -155,26 +155,9 @@
 /* Compatibility for IE */
 /* display img with optimal aspect ratio */
 html.ie {
-
-    .widget-image-carousel.widget-proportional {
+    .widget-image-carousel .widget-inner .carousel-item .img-cover {
         min-height: auto;
-        padding-bottom: 0 !important;
-
-        .carousel {
-            position: relative;
-            top: auto;
-            right: auto;
-            bottom: auto;
-            left: auto;
-
-            .carousel-item .img-cover {
-                width: 100%;
-                top: auto;
-                left: auto;
-                transform: none;
-                position: relative;
-            }
-        }
+        min-width: auto;
     }
 }
 
