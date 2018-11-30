@@ -3,15 +3,15 @@
         <ul class="pagination col-xs-12 m-y-0">
 
             <!-- PREV LINK -->
-            <li class="page-item{% if page == 1 %} disabled{% endif %}">
-                <a class="page-link" href="?{{ query | merge({'page' : page-1 }) | url_encode }}">
+            <li class="page-item{% if currentPage <= 1 %} disabled{% endif %}">
+                <a class="page-link"{% if currentPage <= 1 %} href="?{{ query | merge({'page' : currentPage - 1 }) | url_encode }}"{% endif %}>
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </a>
             </li>
             <!-- ./PREV LINK -->
 
             <!-- FIRST PAGE LINK -->
-            {% if page > 2 and config('Ceres.pagination.showFirstPage') == "true" %}
+            {% if currentPage > 2 and config('Ceres.pagination.showFirstPage') == "true" %}
                 <li class="page-item">
                     <a class="page-link"
                        href="?{{ query | merge({'page' : 1 }) | url_encode }}">1</a>
@@ -21,41 +21,41 @@
             <!-- ./FIRST PAGE LINK -->
 
             <!-- PAGINATION -->
-            {% if page == pageMax and page > 2 %}
+            {% if currentPage == pageMax and currentPage > 2 %}
                 <li class="page-item">
                     <a class="page-link"
-                       href="?{{ query | merge({'page' : page-2 }) | url_encode }}">{{ page - 2 }}</a>
+                       href="?{{ query | merge({'page' : currentPage - 2 }) | url_encode }}">{{ currentPage - 2 }}</a>
                 </li>
             {% endif %}
 
             {% if page > 1 %}
                 <li class="page-item">
                     <a class="page-link"
-                       href="?{{ query | merge({'page' : page-1 }) | url_encode }}">{{ page - 1 }}</a>
+                       href="?{{ query | merge({'page' : currentPage - 1 }) | url_encode }}">{{ currentPage - 1 }}</a>
                 </li>
             {% endif %}
 
             <li class="page-item active">
-                <a class="page-link">{{ page }}</a>
+                <a class="page-link">{{ currentPage }}</a>
             </li>
 
-            {% if page+1 <= pageMax %}
+            {% if currentPage + 1 <= pageMax %}
                 <li class="page-item">
                     <a class="page-link"
-                       href="?{{ query | merge({'page' : page+1 }) | url_encode }}">{{ page + 1 }}</a>
+                       href="?{{ query | merge({'page' : currentPage + 1 }) | url_encode }}">{{ currentPage + 1 }}</a>
                 </li>
             {% endif %}
 
-            {% if page == 1 and page+2 <= pageMax %}
+            {% if currentPage == 1 and currentPage + 2 <= pageMax %}
                 <li class="page-item">
                     <a class="page-link"
-                       href="?{{ query | merge({'page' : page+2 }) | url_encode }}">{{ page + 2 }}</a>
+                       href="?{{ query | merge({'page' : currentPage + 2 }) | url_encode }}">{{ currentPage + 2 }}</a>
                 </li>
             {% endif %}
             <!-- ./PAGINATION -->
 
             <!-- LAST PAGE LINK -->
-            {% if pageMax > 3 and page < pageMax-1 and config('Ceres.pagination.showLastPage') == "true" %}
+            {% if pageMax > 3 and currentPage < pageMax - 1 and config('Ceres.pagination.showLastPage') == "true" %}
                 <li class="page-item page-link">...</li>
                 <li class="page-item">
                     <a class="page-link"
@@ -65,9 +65,8 @@
             <!-- ./LAST PAGE LINK -->
 
             <!-- NEXT LINK -->
-            <li class="page-item{% if page == pageMax %} disabled{% endif %}">
-                <a class="page-link"
-                   href="?{{ query | merge({'page' : page+1 }) | url_encode }}">
+            <li class="page-item{% if currentPage >= pageMax %} disabled{% endif %}">
+                <a class="page-link"{% if currentPage >= pageMax %} href="?{{ query | merge({'page' : currentPage + 1 }) | url_encode }}"{% endif %}>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
             </li>
