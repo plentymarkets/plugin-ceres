@@ -22880,7 +22880,16 @@ Vue.component("pagination", {
 
     delimiters: ["${", "}"],
 
-    props: ["template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-pagination"
+        },
+        totalItems: {
+            type: Number,
+            default: 0
+        }
+    },
 
     data: function data() {
         return {
@@ -22914,9 +22923,6 @@ Vue.component("pagination", {
         },
         itemsPerPage: function itemsPerPage(state) {
             return state.itemList.itemsPerPage;
-        },
-        totalItems: function totalItems(state) {
-            return state.itemList.totalItems;
         }
     })),
 
@@ -22927,6 +22933,7 @@ Vue.component("pagination", {
         var page = urlParams.page || 1;
 
         this.$store.commit("setItemListPage", parseInt(page));
+        this.$store.commit("setItemListTotalItems", this.totalItems);
     },
 
 
@@ -24737,30 +24744,47 @@ Vue.directive("waiting-animation-infinite", {
 },{}],215:[function(require,module,exports){
 "use strict";
 
-Vue.directive("hover-mega-menu", {
+Vue.directive("navigation-touch-handler", {
     bind: function bind(el) {
-        $(el).click(function (event) {
-            event.preventDefault();
+        if (document.body.classList.contains("touch")) {
+            var className = "hover";
 
-            if (document.body.classList.contains("touch")) {
-                // get hover state
-                var isHover = event.currentTarget.classList.contains("hover");
+            el.addEventListener("touchstart", function (event) {
+                var isHover = el.classList.contains(className);
 
-                // clear all hover states
-                var ddownElements = [].slice.call(document.getElementsByClassName("ddown"));
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
 
-                ddownElements.find(function (element) {
-                    return element.classList.remove("hover");
-                });
+                try {
+                    for (var _iterator = document.querySelectorAll(".ddown.hover")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var element = _step.value;
 
-                // toggle old hover state (switch between top level categories makes this necessary)
-                if (isHover) {
-                    event.currentTarget.classList.remove("hover");
-                } else {
-                    event.currentTarget.classList.add("hover");
+                        element.classList.remove(className);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
                 }
-            }
-        });
+
+                if (isHover) {
+                    el.classList.remove(className);
+                } else {
+                    el.classList.add(className);
+                    event.preventDefault();
+                }
+            });
+        }
     }
 });
 
@@ -28469,11 +28493,7 @@ exports.default = {
     getters: getters
 };
 
-<<<<<<< HEAD
-},{"services/ItemListUrlService":253,"services/TranslationService":256,"services/UrlService":257}],265:[function(require,module,exports){
-=======
-},{"services/ItemListUrlService":250,"services/TranslationService":253}],262:[function(require,module,exports){
->>>>>>> 3c906e572112485ec6b0e076bb0cccdf2d09847f
+},{"services/ItemListUrlService":250,"services/TranslationService":253,"services/UrlService":254}],262:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
