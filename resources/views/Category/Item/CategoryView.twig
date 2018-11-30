@@ -87,6 +87,23 @@
             {% endif %}
 
             <div class="col-xs-12 col-lg-{% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}9{% else %}12{% endif %}">
+                {% if config("Ceres.test.twig") == "true" %}
+                <div id="twig-rendered-item-list" class="item-list-frame{% if ceresConfig.item.loadingAnimationType == "blur" %} blur-effect{% endif %}">
+
+                    {% if ceresConfig.item.loadingAnimationType != "blur" %}
+                        {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                    {% endif %}
+
+                    <ul class="product-list row grid" :class="{ 'loading': $store.state.itemList.isLoading }">
+                        {% for item in itemList %}
+                            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}4{% else %}3{% endif %}">
+                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, 'shippingCat': shippingCat } %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {% else %}
 
                 {# TODO remove #}
                 <div id="vue-rendered-item-list">
@@ -127,6 +144,8 @@
                         </ul>
                     </item-list>
                 </div>
+
+                {% endif %}
 
             </div>
         </div>

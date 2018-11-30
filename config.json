@@ -4295,6 +4295,14 @@
                             }
                         ]
                     }
+                },
+                "test.twig": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "USE TWIG",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         }
