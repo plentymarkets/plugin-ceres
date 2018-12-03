@@ -1,7 +1,8 @@
 {% macro printTwigComponent( item, useLargeScale, showQuantity ) %}
     <add-to-basket
             :variation-id="{{ item.variation.id }}"
-            :is-salable="{{ (item.filter is defined and item.filter.isSalable and not item.filter.hasActiveChildren) | json_encode }}"
+            :is-salable="{{ (item.filter is defined and item.filter.isSalable) | json_encode }}"
+            :has-children="{{ (item.filter is defined and item.filter.hasActiveChildren) | json_encode }}"
             :interval-quantity="{{ item.variation.intervalOrderQuantity | default(1) }}"
             :minimum-quantity="{{ item.variation.minimumOrderQuantity }}"
             {% if item.variation.maximumOrderQuantity is defined and item.variation.maximumOrderQuantity > 0 %}
@@ -17,7 +18,8 @@
 {% macro printVueComponent( itemObject, useLargeScale, showQuantity, options ) %}
     <add-to-basket
             :variation-id="{{ itemObject }}.variation.id"
-            :is-salable="!!{{ itemObject }}.filter && {{ itemObject }}.filter.isSalable && !{{ itemObject }}.filter.hasActiveChildren"
+            :is-salable="!!{{ itemObject }}.filter && {{ itemObject }}.filter.isSalable"
+            :has-children="!!{{ itemObject }}.filter && {{ itemObject }}.filter.hasActiveChildren"
             :interval-quantity="{{ itemObject }}.variation.intervalOrderQuantity || 1"
             :minimum-quantity="{{ itemObject }}.variation.minimumOrderQuantity"
             :maximum-quantity="!!{{ itemObject }}.variation.maximumOrderQuantity && {{ itemObject }}.variation.maximumOrderQuantity > 0 ? {{ itemObject }}.variation.maximumOrderQuantity : null"

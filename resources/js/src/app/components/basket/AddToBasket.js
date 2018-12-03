@@ -44,7 +44,11 @@ Vue.component("add-to-basket", {
         },
         isSalable:
         {
-            // = isSalable && !hasChildren
+            type: Boolean,
+            default: false
+        },
+        hasChildren:
+        {
             type: Boolean,
             default: false
         },
@@ -78,6 +82,7 @@ Vue.component("add-to-basket", {
         canBeAddedToBasket()
         {
             return this.isSalable &&
+                !this.hasChildren &&
                 (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) &&
                 !this.requiresProperties;
         },
