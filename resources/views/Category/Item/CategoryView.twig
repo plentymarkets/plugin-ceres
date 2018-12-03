@@ -42,6 +42,10 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="list-wrapper">
+                            {#
+                                {% include "Ceres::Category.Item.Partials.CategorySorting" with { 'sortingData': searchOptions.sorting, 'selectedSorting': itemSorting } %}
+                            #}
+
                             <item-list-sorting template="#vue-item-list-sorting" :sorting-list="{{ searchOptions.sorting | json_encode }}" :default-sorting="{{ searchOptions.defaultSorting | json_encode }}"></item-list-sorting>
                             <items-per-page
                                 template="#vue-items-per-page"
