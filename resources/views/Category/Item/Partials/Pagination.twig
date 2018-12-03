@@ -11,7 +11,7 @@
             <!-- ./PREV LINK -->
 
             <!-- FIRST PAGE LINK -->
-            {% if currentPage > 2 and config('Ceres.pagination.showFirstPage') == "true" %}
+            {% if currentPage > 2 and ceresConfig.pagination.showFirstPage %}
                 <li class="page-item">
                     <a class="page-link" href="{{ queryString({ 'page': 1 }) }}">1</a>
                 </li>
@@ -53,7 +53,7 @@
             <!-- ./PAGINATION -->
 
             <!-- LAST PAGE LINK -->
-            {% if pageMax > 3 and currentPage < pageMax - 1 and config('Ceres.pagination.showLastPage') == "true" %}
+            {% if pageMax > 3 and currentPage < pageMax - 1 and ceresConfig.pagination.showLastPage %}
                 <li class="page-item disabled">
                     <a class="page-link">...</a>
                 </li>
