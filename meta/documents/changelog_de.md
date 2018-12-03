@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v2.17.1 (2018-12-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.17.0...2.17.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler konnten Hauptvarianten mit Attributverknüpfung nicht in den Warenkorb gelegt werden. Dies wurde behoben.
+
 ## v2.17.0 (2018-11-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.3...2.17.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
