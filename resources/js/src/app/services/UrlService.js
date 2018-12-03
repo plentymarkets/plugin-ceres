@@ -1,31 +1,37 @@
 import $ from "jquery";
-import {isDefined}from "../helper/utils";
+import {isDefined, isNullOrUndefined}from "../helper/utils";
 import {normalizeUrl}from "../helper/url";
 import store from "../store/index";
 
 export function getUrlParams(urlParams)
 {
-    if (urlParams)
+    if (isNullOrUndefined(urlParams) && isDefined(document.location.search))
     {
-        var tokens;
-        var params = {};
-        var regex = /[?&]?([^=]+)=([^&]*)/g;
-
-        urlParams = urlParams.split("+").join(" ");
-
-        // eslint-disable-next-line
-        while (tokens = regex.exec(urlParams))
-        {
-            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-        }
-
-        return params;
+        urlParams = document.location.search;
     }
 
-    return {};
+    if (isNullOrUndefined(urlParams))
+    {
+        return {};
+    }
+
+    const result = {};
+    const params = (window.location.search.split("?")[1] || "").split("&");
+
+    for (const param in params)
+    {
+        if (params.hasOwnProperty(param))
+        {
+            const paramParts = params[param].split("=");
+
+            result[paramParts[0]] = decodeURIComponent(paramParts[1] || "");
+        }
+    }
+
+    return result;
 }
 
-export function setUrlParams(urlParams)
+export function setUrlParams(urlParams, pushState = true)
 {
     var pathName =
         isDefined(store.state.navigation.currentCategory) &&
@@ -36,7 +42,15 @@ export function setUrlParams(urlParams)
     var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.pushState({requireReload: true}, titleElement ? titleElement.innerHTML : "", pathName + params);
+    if (pushState)
+    {
+        window.history.pushState({requireReload: true}, titleElement ? titleElement.innerHTML : "", pathName + params);
+    }
+    else
+    {
+        window.history.replaceState({requireReload: true}, titleElement ? titleElement.innerHTML : "", pathName + params);
+    }
+
     document.dispatchEvent(new CustomEvent("onHistoryChanged", {detail: {title: titleElement ? titleElement.innerHTML : "", url:pathName + params}}));
 
     $("a[href][data-update-url]").each((i, element) =>
@@ -49,6 +63,35 @@ export function setUrlParams(urlParams)
             $element.attr("href", href[1] + params);
         }
     });
+}
+
+export function setUrlParam(urlParam)
+{
+    const urlParams = getUrlParams();
+
+    for (const key in urlParam)
+    {
+        urlParams[key] = urlParam[key];
+    }
+
+    setUrlParams(urlParams, false);
+}
+
+export function removeUrlParam(urlParamToDelete)
+{
+    removeUrlParams([urlParamToDelete]);
+}
+
+export function removeUrlParams(urlParamsToDelete)
+{
+    const urlParams = getUrlParams();
+
+    for (const param of urlParamsToDelete)
+    {
+        delete urlParams[param];
+    }
+
+    setUrlParams(urlParams, false);
 }
 
 export function navigateTo(url)
@@ -70,4 +113,4 @@ export function navigateToParams(urlParams)
     window.location.assign(url);
 }
 
-export default {setUrlParams, getUrlParams, navigateTo};
+export default {setUrlParams, getUrlParams, navigateTo, setUrlParam, removeUrlParams, removeUrlParam};
