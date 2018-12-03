@@ -4,7 +4,7 @@
 
             <!-- PREV LINK -->
             <li class="page-item{% if currentPage <= 1 %} disabled{% endif %}">
-                <a class="page-link"{% if currentPage <= 1 %} href="?{{ query | merge({'page' : currentPage - 1 }) | url_encode }}"{% endif %}>
+                <a class="page-link"{% if currentPage > 1 %} href="{{ queryString({ 'page': currentPage - 1 }) }}"{% endif %}>
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </a>
             </li>
@@ -13,25 +13,25 @@
             <!-- FIRST PAGE LINK -->
             {% if currentPage > 2 and config('Ceres.pagination.showFirstPage') == "true" %}
                 <li class="page-item">
-                    <a class="page-link"
-                       href="?{{ query | merge({'page' : 1 }) | url_encode }}">1</a>
+                    <a class="page-link" href="{{ queryString({ 'page': 1 }) }}">1</a>
                 </li>
-                <li class="page-item page-link">...</li>
+
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
             {% endif %}
             <!-- ./FIRST PAGE LINK -->
 
             <!-- PAGINATION -->
             {% if currentPage == pageMax and currentPage > 2 %}
                 <li class="page-item">
-                    <a class="page-link"
-                       href="?{{ query | merge({'page' : currentPage - 2 }) | url_encode }}">{{ currentPage - 2 }}</a>
+                    <a class="page-link" href="{{ queryString({ 'page': currentPage - 2 }) }}">{{ currentPage - 2 }}</a>
                 </li>
             {% endif %}
 
-            {% if page > 1 %}
+            {% if currentPage > 1 %}
                 <li class="page-item">
-                    <a class="page-link"
-                       href="?{{ query | merge({'page' : currentPage - 1 }) | url_encode }}">{{ currentPage - 1 }}</a>
+                    <a class="page-link" href="{{ queryString({ 'page': currentPage - 1 }) }}">{{ currentPage - 1 }}</a>
                 </li>
             {% endif %}
 
@@ -41,32 +41,32 @@
 
             {% if currentPage + 1 <= pageMax %}
                 <li class="page-item">
-                    <a class="page-link"
-                       href="?{{ query | merge({'page' : currentPage + 1 }) | url_encode }}">{{ currentPage + 1 }}</a>
+                    <a class="page-link" href="{{ queryString({ 'page': currentPage + 1 }) }}">{{ currentPage + 1 }}</a>
                 </li>
             {% endif %}
 
             {% if currentPage == 1 and currentPage + 2 <= pageMax %}
                 <li class="page-item">
-                    <a class="page-link"
-                       href="?{{ query | merge({'page' : currentPage + 2 }) | url_encode }}">{{ currentPage + 2 }}</a>
+                    <a class="page-link" href="{{ queryString({ 'page': currentPage + 2 }) }}">{{ currentPage + 2 }}</a>
                 </li>
             {% endif %}
             <!-- ./PAGINATION -->
 
             <!-- LAST PAGE LINK -->
             {% if pageMax > 3 and currentPage < pageMax - 1 and config('Ceres.pagination.showLastPage') == "true" %}
-                <li class="page-item page-link">...</li>
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+
                 <li class="page-item">
-                    <a class="page-link"
-                       href="?{{ query | merge({'page' : pageMax }) | url_encode }}">{{ pageMax }}</a>
+                    <a class="page-link" href="{{ queryString({ 'page': pageMax }) }}">{{ pageMax }}</a>
                 </li>
             {% endif %}
             <!-- ./LAST PAGE LINK -->
 
             <!-- NEXT LINK -->
             <li class="page-item{% if currentPage >= pageMax %} disabled{% endif %}">
-                <a class="page-link"{% if currentPage >= pageMax %} href="?{{ query | merge({'page' : currentPage + 1 }) | url_encode }}"{% endif %}>
+                <a class="page-link"{% if currentPage < pageMax %} href="{{ queryString({ 'page': currentPage + 1 }) }}"{% endif %}>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
             </li>
