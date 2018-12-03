@@ -4,10 +4,19 @@ Vue.component("item-filter-list", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template",
-        "facetData"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-filter-list"
+        },
+        facetData: {
+            type: Array,
+            default()
+            {
+                return [];
+            }
+        }
+    },
 
     data()
     {
@@ -39,7 +48,7 @@ Vue.component("item-filter-list", {
     {
         this.$store.commit("setFacets", this.facetData);
 
-        this.$options.template = this.template || "#vue-item-filter-list";
+        this.$options.template = this.template;
 
         const urlParams = UrlService.getUrlParams(document.location.search);
 
@@ -48,6 +57,11 @@ Vue.component("item-filter-list", {
         if (urlParams.facets)
         {
             selectedFacets = urlParams.facets.split(",");
+        }
+
+        if ("showFilter" in urlParams)
+        {
+            this.isActive = true;
         }
 
         if (urlParams.priceMin || urlParams.priceMax)
@@ -72,6 +86,15 @@ Vue.component("item-filter-list", {
         {
             window.setTimeout(() =>
             {
+                if (!this.isActive)
+                {
+                    UrlService.setUrlParam({showFilter: null});
+                }
+                else
+                {
+                    UrlService.removeUrlParam("showFilter");
+                }
+
                 this.isActive = !this.isActive;
             }, 300);
         }

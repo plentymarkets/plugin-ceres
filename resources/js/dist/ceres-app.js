@@ -23024,7 +23024,18 @@ Vue.component("item-filter-list", {
 
     delimiters: ["${", "}"],
 
-    props: ["template", "facetData"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-filter-list"
+        },
+        facetData: {
+            type: Array,
+            default: function _default() {
+                return [];
+            }
+        }
+    },
 
     data: function data() {
         return {
@@ -23051,7 +23062,7 @@ Vue.component("item-filter-list", {
     created: function created() {
         this.$store.commit("setFacets", this.facetData);
 
-        this.$options.template = this.template || "#vue-item-filter-list";
+        this.$options.template = this.template;
 
         var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
@@ -23059,6 +23070,10 @@ Vue.component("item-filter-list", {
 
         if (urlParams.facets) {
             selectedFacets = urlParams.facets.split(",");
+        }
+
+        if ("showFilter" in urlParams) {
+            this.isActive = true;
         }
 
         if (urlParams.priceMin || urlParams.priceMax) {
@@ -23081,6 +23096,12 @@ Vue.component("item-filter-list", {
             var _this = this;
 
             window.setTimeout(function () {
+                if (!_this.isActive) {
+                    _UrlService2.default.setUrlParam({ showFilter: null });
+                } else {
+                    _UrlService2.default.removeUrlParam("showFilter");
+                }
+
                 _this.isActive = !_this.isActive;
             }, 300);
         }
@@ -26889,6 +26910,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getUrlParams = getUrlParams;
 exports.setUrlParams = setUrlParams;
+exports.setUrlParam = setUrlParam;
+exports.removeUrlParam = removeUrlParam;
+exports.removeUrlParams = removeUrlParams;
 exports.navigateTo = navigateTo;
 exports.navigateToParams = navigateToParams;
 
@@ -26907,31 +26931,42 @@ var _index2 = _interopRequireDefault(_index);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function getUrlParams(urlParams) {
-    if (urlParams) {
-        var tokens;
-        var params = {};
-        var regex = /[?&]?([^=]+)=([^&]*)/g;
-
-        urlParams = urlParams.split("+").join(" ");
-
-        // eslint-disable-next-line
-        while (tokens = regex.exec(urlParams)) {
-            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-        }
-
-        return params;
+    if ((0, _utils.isNullOrUndefined)(urlParams) && (0, _utils.isDefined)(document.location.search)) {
+        urlParams = document.location.search;
     }
 
-    return {};
+    if ((0, _utils.isNullOrUndefined)(urlParams)) {
+        return {};
+    }
+
+    var result = {};
+    var params = (window.location.search.split("?")[1] || "").split("&");
+
+    for (var param in params) {
+        if (params.hasOwnProperty(param)) {
+            var paramParts = params[param].split("=");
+
+            result[paramParts[0]] = decodeURIComponent(paramParts[1] || "");
+        }
+    }
+
+    return result;
 }
 
 function setUrlParams(urlParams) {
+    var pushState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
     var pathName = (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory) && (0, _utils.isDefined)(_index2.default.state.navigation.currentCategory.url) ? _index2.default.state.navigation.currentCategory.url : window.location.pathname;
 
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    if (pushState) {
+        window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    } else {
+        window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    }
+
     document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url: pathName + params } }));
 
     (0, _jquery2.default)("a[href][data-update-url]").each(function (i, element) {
@@ -26942,6 +26977,51 @@ function setUrlParams(urlParams) {
             $element.attr("href", href[1] + params);
         }
     });
+}
+
+function setUrlParam(urlParam) {
+    var urlParams = getUrlParams();
+
+    for (var key in urlParam) {
+        urlParams[key] = urlParam[key];
+    }
+
+    setUrlParams(urlParams, false);
+}
+
+function removeUrlParam(urlParamToDelete) {
+    removeUrlParams([urlParamToDelete]);
+}
+
+function removeUrlParams(urlParamsToDelete) {
+    var urlParams = getUrlParams();
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = urlParamsToDelete[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var param = _step.value;
+
+            delete urlParams[param];
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    setUrlParams(urlParams, false);
 }
 
 function navigateTo(url) {
@@ -26957,7 +27037,7 @@ function navigateToParams(urlParams) {
     window.location.assign(url);
 }
 
-exports.default = { setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo };
+exports.default = { setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, setUrlParam: setUrlParam, removeUrlParams: removeUrlParams, removeUrlParam: removeUrlParam };
 
 },{"../helper/url":244,"../helper/utils":245,"../store/index":257,"jquery":3}],255:[function(require,module,exports){
 "use strict";
