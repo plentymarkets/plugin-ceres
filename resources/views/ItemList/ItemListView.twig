@@ -58,7 +58,7 @@
 
                     <ul class="product-list row grid" :class="{ 'loading': $store.state.itemList.isLoading }">
                         {% for item in itemList %}
-                            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}4{% else %}3{% endif %}">
+                            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                 {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, 'shippingCat': shippingCat } %}
                             </li>
                         {% endfor %}
