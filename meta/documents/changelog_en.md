@@ -4,7 +4,7 @@
 
 ### Fixed
 
-- Due to an error, main variation which are linked to an attribute could not be added to basket. This has been fixed.
+- Due to an error, main variations linked to an attribute could not be added to the shopping cart. This has been fixed.
 
 ## v2.17.0 (2018-11-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.3...2.17.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
