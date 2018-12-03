@@ -46,10 +46,23 @@
                                 {% include "Ceres::Category.Item.Partials.CategorySorting" with { 'sortingData': searchOptions.sorting, 'selectedSorting': itemSorting } %}
                             #}
 
-                            <item-list-sorting template="#vue-item-list-sorting" :sorting-list="{{ searchOptions.sorting | json_encode }}" :default-sorting="{{ searchOptions.defaultSorting | json_encode }}"></item-list-sorting>
-                            <items-per-page
-                                template="#vue-items-per-page"
-                                :pagination-values="{{ searchOptions.itemsPerPage | json_encode }}"></items-per-page>
+                            <item-list-sorting template="#vue-item-list-sorting" :sorting-list="{{ searchOptions.sorting | json_encode }}" :default-sorting="{{ searchOptions.defaultSorting | json_encode }}">
+                                <div class="list-sort">
+                                    <select class="custom-select">
+                                        <option>{{ searchOptions.sorting[itemSorting] }}</option>
+                                    </select>
+                                </div>
+                            </item-list-sorting>
+
+                            <items-per-page template="#vue-items-per-page" :pagination-values="{{ searchOptions.itemsPerPage | json_encode }}">
+                                <div class="list-itemsperpage">
+                                    <select class="custom-select">
+                                        <option>{{ itemsPerPage }}</option>
+                                    </select>
+                                </div>                                
+                            </items-per-page>
+
+
                             {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets ) %}
                             {% if overrideSearchFilters | trim is empty %}
                                 <item-filter-list :facet-data="{{ facets | json_encode }}"></item-filter-list>
