@@ -17491,7 +17491,10 @@ Vue.component("add-to-basket", {
             type: Number
         },
         isSalable: {
-            // = isSalable && !hasChildren
+            type: Boolean,
+            default: false
+        },
+        hasChildren: {
             type: Boolean,
             default: false
         },
@@ -17519,7 +17522,7 @@ Vue.component("add-to-basket", {
             return this.minimumQuantity <= 0 ? this.intervalQuantity : this.minimumQuantity;
         },
         canBeAddedToBasket: function canBeAddedToBasket() {
-            return this.isSalable && (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) && !this.requiresProperties;
+            return this.isSalable && !this.hasChildren && (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) && !this.requiresProperties;
         },
         requiresProperties: function requiresProperties() {
             return App.config.item.requireOrderProperties && this.orderProperties.filter(function (property) {
