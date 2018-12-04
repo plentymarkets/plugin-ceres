@@ -27,7 +27,6 @@ Vue.component("items-per-page", {
     {
         itemsPerPageChanged()
         {
-            // TODO reload
             this.$store.dispatch("selectItemsPerPage", this.selectedValue);
         },
 
