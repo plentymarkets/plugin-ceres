@@ -15,6 +15,8 @@ export function getUrlParams(urlParams)
         return {};
     }
 
+    urlParams = urlParams.split("+").join(" ");
+
     const result = {};
     const params = (window.location.search.split("?")[1] || "").split("&");
 
