@@ -24728,42 +24728,6 @@ Vue.directive("logout", {
 },{"services/ApiService":249,"services/UrlService":255}],213:[function(require,module,exports){
 "use strict";
 
-Vue.directive("waiting-animation", {
-    bind: function bind(el) {
-        el.initialClass = el.className;
-        el.waitingClass = el.getAttribute("waiting-class") || "fa fa-circle-o-notch fa-spin";
-    },
-    update: function update(el, binding) {
-        if (binding.value) {
-            el.className = "";
-            el.className = el.waitingClass;
-
-            if (el.initialClass.includes("fa-lg")) {
-                el.className += " fa-lg";
-            }
-        } else {
-            el.className = el.initialClass;
-        }
-    }
-});
-
-},{}],214:[function(require,module,exports){
-"use strict";
-
-Vue.directive("waiting-animation-infinite", {
-    bind: function bind(el) {
-        $(el).click(function (event) {
-            event.currentTarget.classList.add("disabled");
-
-            event.currentTarget.children[0].className = "";
-            event.currentTarget.children[0].className = "fa fa-circle-o-notch fa-spin";
-        });
-    }
-});
-
-},{}],215:[function(require,module,exports){
-"use strict";
-
 var _index = require("../../store/index");
 
 var _index2 = _interopRequireDefault(_index);
@@ -24788,7 +24752,43 @@ Vue.directive("populate-store", {
     }
 });
 
-},{"../../helper/utils":246,"../../store/index":258}],216:[function(require,module,exports){
+},{"../../helper/utils":246,"../../store/index":258}],214:[function(require,module,exports){
+"use strict";
+
+Vue.directive("waiting-animation", {
+    bind: function bind(el) {
+        el.initialClass = el.className;
+        el.waitingClass = el.getAttribute("waiting-class") || "fa fa-circle-o-notch fa-spin";
+    },
+    update: function update(el, binding) {
+        if (binding.value) {
+            el.className = "";
+            el.className = el.waitingClass;
+
+            if (el.initialClass.includes("fa-lg")) {
+                el.className += " fa-lg";
+            }
+        } else {
+            el.className = el.initialClass;
+        }
+    }
+});
+
+},{}],215:[function(require,module,exports){
+"use strict";
+
+Vue.directive("waiting-animation-infinite", {
+    bind: function bind(el) {
+        $(el).click(function (event) {
+            event.currentTarget.classList.add("disabled");
+
+            event.currentTarget.children[0].className = "";
+            event.currentTarget.children[0].className = "fa fa-circle-o-notch fa-spin";
+        });
+    }
+});
+
+},{}],216:[function(require,module,exports){
 "use strict";
 
 Vue.directive("navigation-touch-handler", {
@@ -29467,7 +29467,7 @@ exports.default = function (store) {
 var NotificationService = require("services/NotificationService");
 var cloneDeep = require("lodash/cloneDeep");
 
-},{"lodash/cloneDeep":108,"services/NotificationService":253}]},{},[247,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,162,163,164,165,166,159,160,161,167,168,169,170,171,172,173,174,175,176,177,178,179,187,188,189,190,180,181,182,183,185,184,186,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,215,213,214,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,241,242,240,243,244,245,246,258,259,260,261,262,263,264,265,266,267,268,269,270])
+},{"lodash/cloneDeep":108,"services/NotificationService":253}]},{},[247,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,162,163,164,165,166,159,160,161,167,168,169,170,171,172,173,174,175,176,177,178,179,187,188,189,190,180,181,182,183,185,184,186,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,241,242,240,243,244,245,246,258,259,260,261,262,263,264,265,266,267,268,269,270])
 
 
 //# sourceMappingURL=ceres-app.js.map
