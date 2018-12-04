@@ -71,16 +71,16 @@
 
                 {% endif %}
 
-                {% if item.data.variation.bundleType == "bundle" %}
+                {% if item.data.item.storeSpecial.id > 0 %}
 
-                    <span class="tag bg-info">
-                        {{ trans("Ceres::Template.itemBundle") }}
+                    <span class="tag bg-{{ storeSpecialColor }}">
+                        {{ storeSpecial }}
                     </span>
 
                 {% else %}
 
-                    <span class="tag bg-{{ storeSpecialColor }}">
-                        {{ storeSpecial }}
+                    <span class="tag bg-info">
+                        {{ trans("Ceres::Template.itemBundle") }}
                     </span>
 
                 {% endif %}
