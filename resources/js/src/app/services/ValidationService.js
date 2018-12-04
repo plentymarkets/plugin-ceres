@@ -180,6 +180,7 @@ function _validateInput($formControl, validationKey)
     case "ref":
         return _compareRef($.trim($formControl.val()), $.trim($formControl.attr("data-validate-ref")));
     case "date":
+        console.log(_isValidDate($formControl));
         return _isValidDate($formControl);
     case "mail":
         return _isMail($formControl);
@@ -209,7 +210,7 @@ function _hasValue($formControl)
  */
 function _isValidDate($formControl)
 {
-    return moment($formControl.val(), "DD-MM-YYYY").isValid();
+    return moment($formControl.val(), ["DD.MM.YYYY", "D.MM.YYYY", "DD.M.YYYY", "D.M.YYYY", "DD.MM.YY", "D.MM.YY", "DD.M.YY", "D.M.YY", "DD/MM/YYYY", "D/MM/YYYY", "DD/M/YYYY", "D/M/YYYY", "DD/MM/YY", "D/MM/YY", "DD/M/YY", "D/M/YY", "DD-MM-YYYY", "D-MM-YYYY", "DD-M-YYYY", "D-M-YYYY", "DD-MM-YY", "D-MM-YY", "DD-M-YY", "D-M-YY"], true).isValid();
 }
 
 /**
