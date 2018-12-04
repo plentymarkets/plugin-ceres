@@ -30,9 +30,38 @@ Vue.component("variation-select", {
         };
     },
 
-    computed: Vuex.mapState({
-        currentVariation: state => state.item.variation
-    }),
+    computed: {
+        ...Vuex.mapState({
+            currentVariation: state => state.item.variation
+        }),
+        hasEmptyOption()
+        {
+            const hasEmptyVariation = this.variations.some(variation =>
+            {
+                return variation.attributes.length <= 0;
+            });
+
+            if (hasEmptyVariation)
+            {
+                // main variation is selectable
+                return true;
+            }
+
+            // Check if all possible combinations can be selected or if an empty option is required to reset the current selection
+            const attributeCombinationCount = Object.keys(this.attributes)
+                .map(attributeId =>
+                {
+                    return Object.keys(this.attributes[attributeId].values).length;
+                })
+                .reduce((prod, current) =>
+                {
+                    return prod * current;
+                }, 1);
+
+            return (attributeCombinationCount * Object.keys(this.variationUnits).length) !== this.variations.length;
+
+        }
+    },
 
     created()
     {
