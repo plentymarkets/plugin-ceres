@@ -17509,7 +17509,7 @@ html.ie .basket-preview .basket-item-container {
   position: absolute;
 }
 
-.product-list{
+.product-list {
 	list-style-type: none;
 	padding: 0;
 	margin-bottom: 0;
@@ -17519,15 +17519,24 @@ html.ie .basket-preview .basket-item-container {
 	display: -ms-flexbox;
 
 	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: row wrap;
-	        flex-flow: row wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    
+    category-item {
+        background: $white;
+        display: block;
+        height: 145px;
+        margin-bottom: 15px;
+        width: 100%;
 
-//	li{
-//        @include make-col-ready(12);
-//        @include make-col(12);
-//	}
+        @include media-breakpoint-up(sm) {
+            margin-bottom: 30px;
+            padding-bottom: calc(100% + 100px);
+            height: unset;
+        }
+    }
 }
 
 .lazy{
