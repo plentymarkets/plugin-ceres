@@ -26939,6 +26939,8 @@ function getUrlParams(urlParams) {
         return {};
     }
 
+    urlParams = urlParams.split("+").join(" ");
+
     var result = {};
     var params = (window.location.search.split("?")[1] || "").split("&");
 
