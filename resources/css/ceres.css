@@ -18854,6 +18854,22 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
       flex-flow: row wrap;
 }
 
+.product-list category-item {
+  background: #fff;
+  display: block;
+  height: 145px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+@media (min-width: 544px) {
+  .product-list category-item {
+    margin-bottom: 30px;
+    padding-bottom: calc(100% + 100px);
+    height: unset;
+  }
+}
+
 .lazy {
   display: none;
 }

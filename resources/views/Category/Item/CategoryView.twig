@@ -4,11 +4,12 @@
 
 {% set categoryDescriptionBottom = ceresConfig.item.showCategoryDescriptionBottom %}
 {% set categoryDescriptionTop = ceresConfig.item.showCategoryDescriptionTop %}
+{% set decimalCount = ceresConfig.item.storeSpecial %}
 {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets ) %}
-{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
 {% block PageBody %}
 
+    {{ component( "Ceres::ItemList.Components.CategoryItem") }}
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
     {{ component( "Ceres::ItemList.Components.ItemList") }}
@@ -84,66 +85,16 @@
             {% endif %}
 
             <div class="col-xs-12 col-lg-{% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}9{% else %}12{% endif %}">
-                {% if config("Ceres.test.twig") == "true" %}
-                <div id="twig-rendered-item-list" class="item-list-frame{% if ceresConfig.item.loadingAnimationType == "blur" %} blur-effect{% endif %}">
-
-                    {% if ceresConfig.item.loadingAnimationType != "blur" %}
-                        {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-                    {% endif %}
-
-                    <ul class="product-list row grid" :class="{ 'loading': $store.state.itemList.isLoading }">
-                        {% for item in itemList %}
-                            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}4{% else %}3{% endif %}">
-                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, 'shippingCat': shippingCat } %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                {% else %}
-
-                {# TODO remove #}
-                <div id="vue-rendered-item-list">
-                    <item-list :item-data="{{ itemList | json_encode }}" template="#vue-item-list" :total-items-data="{{ itemCountTotal }}" :category-id="{{ category.id }}">
-                        <ul class="product-list row grid">
-                            {% for item in itemList %}
-                                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                    <article class="cmp cmp-product-thumb">
-                                        <div class="thumb-inner">
-                                            <div class="thumb-image">
-                                                <div class="square-container">
-                                                    <div class="square-inner main-image">
-                                                        <a>
-                                                            <img class="img-fluid" src="" alt="">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="thumb-content">
-                                                <div class="thumb-meta">
-                                                    <div class="prices">
-                                                        <div class="price-view-port">
-                                                            <del class="crossprice">
-                                                                100,00EUR
-                                                            </del>
-                                                        </div> 
-                                                        <div class="price">
-                                                            79,00EUR *
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </item-list>
-                </div>
-
-                {% endif %}
-
+                <ul class="product-list row grid">
+                    {% for item in itemList %}
+                        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}4{% else %}3{% endif %}">
+                            <category-item
+                                :item-data="{{ item.data | json_encode }}"
+                                :decimal-count="{{ decimalCount }}">
+                            </category-item>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
         {% if ceresConfig.pagination.position in ['bottom', 'top_bottom'] %}
@@ -153,7 +104,7 @@
                 </div>
             </div>
         {% endif %}
-
+        
         <div class="col-xs-12">
             {% if categoryDescriptionBottom == "description1" or categoryDescriptionBottom == "both" %}
                 <div class="category-description m-b-1">{{ category.details[0].description | raw }}</div>

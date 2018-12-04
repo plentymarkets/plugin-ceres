@@ -22326,12 +22326,24 @@ Vue.component("category-image-carousel", {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 Vue.component("category-item", {
-
-    delimiters: ["${", "}"],
-
-    template: "#vue-category-item",
-
-    props: ["decimalCount", "itemData", "imageUrlAccessor"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-category-item"
+        },
+        decimalCount: {
+            type: Number,
+            default: 0
+        },
+        imageUrlAccessor: {
+            type: String,
+            default: "urlMiddle"
+        },
+        itemData: {
+            type: Object,
+            required: true
+        }
+    },
 
     data: function data() {
         return {
@@ -22363,6 +22375,8 @@ Vue.component("category-item", {
     })),
 
     created: function created() {
+        this.$options.template = this.template;
+
         if (this.itemData.prices.rrp) {
             this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
         }

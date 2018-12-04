@@ -1,6 +1,8 @@
 {% extends getPartial('page-design') %}
 
+{% set decimalCount = ceresConfig.item.storeSpecial %}
 {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets) %}
+{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
 {% block PageBody %}
 
@@ -51,33 +53,16 @@
             </div>
         {% endif %}
 
-        <div class="row">
-            <div class="col-xs-12">
-
-                <div id="twig-rendered-item-list" class="item-list-frame{% if ceresConfig.item.loadingAnimationType == "blur" %} blur-effect{% endif %}">
-
-                    {% if ceresConfig.item.loadingAnimationType != "blur" %}
-                        {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-                    {% endif %}
-
-                    <ul class="product-list row grid" :class="{ 'loading': $store.state.itemList.isLoading }">
-                        {% for item in itemList %}
-                            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, 'shippingCat': shippingCat } %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                {# <div id="vue-rendered-item-list" class="item-list-frame"> #}
-                    {# TODO ersetzten mit twig #}
-                    {# 
-                        <item-list :item-data="{{ itemList | json_encode }}" :total-items-data="{{ itemCountTotal }}" template="#vue-item-list"></item-list>
-                    #}
-                {# </div> #}
-
-            </div>
-        </div>
+        <ul class="product-list row grid">
+            {% for item in itemList %}
+                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <category-item
+                        :item-data="{{ item.data | json_encode }}"
+                        :decimal-count="{{ decimalCount | json_encode }}">
+                    </category-item>
+                </li>
+            {% endfor %}
+        </ul>
 
         {% if ceresConfig.pagination.position in ['bottom', 'top_bottom'] %}
             <div class="list-controls m-b-3 row">
