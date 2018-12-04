@@ -1,5 +1,9 @@
 <div class="list-itemsperpage">
-    <select class="custom-select" @change="$store.dispatch('selectItemsPerPage', $event.target.value)">
+    <select
+        class="custom-select"
+        @change="$store.dispatch('selectItemsPerPage', $event.target.value)"
+        v-populate-store:mutation="{ name: 'setItemsPerPage', data: {{selectedValue}} }"
+    >
         {% for value in itemsPerPage %}
             <option value="{{ value }}"{% if value == selectedValue %} selected{% endif %}>
                 {{ value }}
