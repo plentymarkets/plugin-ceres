@@ -1,10 +1,10 @@
 <script type="x/template" id="vue-item-store-special">
     <div class="special-tags" v-show="label.length || bundleType === 'bundle'">
-        <span v-if="bundleType === 'bundle'" class="tag bg-info">
-            {{ trans("Ceres::Template.itemBundle") }}
-        </span>
-        <span v-else class="tag" v-bind:class="tagClass">
+        <span v-if="storeSpecial.id > 0" class="tag" v-bind:class="tagClass">
             ${ label }
+        </span>
+        <span v-else class="tag tag-bundle bg-info">
+            {{ trans("Ceres::Template.itemBundle") }}
         </span>
     </div>
 </script>
