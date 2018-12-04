@@ -9,9 +9,6 @@
     {{ component( "Ceres::ItemList.Components.ItemList") }}
     {{ component( "Ceres::ItemList.Components.CategoryItem") }}
     {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
-    {{ component( "Ceres::ItemList.Components.ItemListSorting") }}
-    {{ component( "Ceres::ItemList.Components.ItemsPerPage") }}
-    {{ component( "Ceres::ItemList.Components.Pagination") }}
 
     {% if ceresConfig.item.showCategoryImage %}
         {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
@@ -46,10 +43,6 @@
 
                             {% include "Ceres::Category.Item.Partials.ItemsPerPage" with { 'itemsPerPage': searchOptions.itemsPerPage, 'selectedValue': itemsPerPage } %}
 
-                            <!-- <item-list-sorting template="#vue-item-list-sorting" :sorting-list="{{ searchOptions.sorting | json_encode }}" :default-sorting="{{ searchOptions.defaultSorting | json_encode }}"></item-list-sorting>
-                            
-                            <items-per-page template="#vue-items-per-page" :pagination-values="{{ searchOptions.itemsPerPage | json_encode }}"></items-per-page> -->
-
                             {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets ) %}
                             {% if overrideSearchFilters | trim is empty %}
                                 <item-filter-list :facet-data="{{ facets | json_encode }}">
@@ -74,10 +67,7 @@
         {% if ceresConfig.pagination.position in ['top', 'top_bottom'] %}
             <div class="list-controls m-b-3 row">
                 <div class="col-xs-12">
-                    <!-- <pagination :total-items="{{ itemCountTotal }}"></pagination> -->
                     {% include "Ceres::Category.Item.Partials.Pagination" %}
-                    <!-- <noscript>
-                    </noscript> -->
                 </div>
             </div>
         {% endif %}
@@ -162,10 +152,7 @@
         {% if ceresConfig.pagination.position in ['bottom', 'top_bottom'] %}
             <div class="list-controls m-b-3 row">
                 <div class="col-xs-12">
-                    <!-- <pagination :total-items="{{ itemCountTotal }}"></pagination> -->
                     {% include "Ceres::Category.Item.Partials.Pagination" %}
-                    <!-- <noscript>
-                    </noscript> -->
                 </div>
             </div>
         {% endif %}
