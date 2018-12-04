@@ -28356,8 +28356,6 @@ var _ItemListUrlService = require("services/ItemListUrlService");
 
 var _UrlService = require("services/UrlService");
 
-var _utils = require("../../helper/utils");
-
 var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
@@ -28621,7 +28619,7 @@ exports.default = {
     getters: getters
 };
 
-},{"../../helper/utils":246,"services/ItemListUrlService":251,"services/TranslationService":254,"services/UrlService":255}],263:[function(require,module,exports){
+},{"services/ItemListUrlService":251,"services/TranslationService":254,"services/UrlService":255}],263:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

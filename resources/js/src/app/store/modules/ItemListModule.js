@@ -1,6 +1,5 @@
 import {getItemListUrlParams}from "services/ItemListUrlService";
 import {navigateToParams, setUrlParam}from "services/UrlService";
-import {isDefined}from "../../helper/utils";
 import TranslationService from "services/TranslationService";
 
 const state =
