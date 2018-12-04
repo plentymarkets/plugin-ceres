@@ -169,12 +169,13 @@
 {% block PartialHead %}
     <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ webstoreConfig.domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
 
-    {% if currentPage-1 > 0 %}
-        <link rel="prev" href="{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage-1 }) | url_encode }}" />
+    {% set canonicalUrl = services.url.getCanonicalURL() %}
+    {% if currentPage - 1 > 0 %}
+        <link rel="prev" href="{{ canonicalUrl ~ queryString({'page': currentPage - 1}) }}" />
     {% endif %}
 
-    {% if currentPage+1 <= pageMax %}
-        <link rel="next" href="{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage+1 }) | url_encode }}" />
+    {% if currentPage + 1 <= pageMax %}
+        <link rel="next" href="{{ canonicalUrl ~ queryString({'page': currentPage + 1}) }}" />
     {% endif %}
 
     <title>{% if category.details[0].metaTitle %}{{ category.details[0].metaTitle }}{% else %}{{ category.details[0].name }}{% endif %} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
