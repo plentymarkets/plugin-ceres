@@ -1,5 +1,6 @@
 import {getItemListUrlParams}from "services/ItemListUrlService";
-import {navigateToParams}from "services/UrlService";
+import {navigateToParams, setUrlParam}from "services/UrlService";
+import {isDefined}from "../../helper/utils";
 import TranslationService from "services/TranslationService";
 
 const state =
@@ -139,7 +140,7 @@ const mutations =
 
 const actions =
     {
-        selectFacet({dispatch, commit}, facetValue)
+        selectFacet({dispatch, commit}, {facetValue, showFilter})
         {
             if (facetValue.id === "price")
             {
@@ -152,14 +153,24 @@ const actions =
 
             commit("setItemListPage", 1);
 
+            if (showFilter)
+            {
+                setUrlParam({showFilter: null});
+            }
+
             dispatch("loadItemList");
         },
 
-        selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
+        selectPriceFacet({dispatch, commit}, {priceMin, priceMax, showFilter})
         {
             commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
             commit("setPriceFacetTag");
             commit("setItemListPage", 1);
+
+            if (showFilter)
+            {
+                setUrlParam({showFilter: null});
+            }
 
             dispatch("loadItemList");
         },
