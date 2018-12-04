@@ -3,7 +3,7 @@
         <ul class="pagination col-xs-12 m-y-0">
 
             <!-- FIRST PAGE LINK -->
-            {% if currentPage > 2 and ceresConfig.pagination.showFirstPage %}
+            {% if ceresConfig.pagination.showFirstPage and currentPage > 2 %}
                 <li class="page-item">
                     <a class="page-link" href="{{ queryString({ 'page': 1 }) }}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
@@ -59,7 +59,7 @@
             <!-- ./NEXT LINK -->
 
             <!-- LAST PAGE LINK -->
-            {% if pageMax > 3 and currentPage < pageMax - 1 and ceresConfig.pagination.showLastPage %}
+            {% if ceresConfig.pagination.showLastPage and pageMax > 3 and currentPage < pageMax - 1 %}
                 <li class="page-item">
                     <a class="page-link" href="{{ queryString({ 'page': pageMax }) }}">
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
