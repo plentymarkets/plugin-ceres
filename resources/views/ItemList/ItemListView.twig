@@ -25,7 +25,13 @@
                             {% include "Ceres::Category.Item.Partials.ItemsPerPage" with { 'itemsPerPage': searchOptions.itemsPerPage, 'selectedValue': itemsPerPage } %}
 
                             {% if overrideSearchFilters | trim is empty %}
-                                <item-filter-list :is-active="true" :facet-data="{{ facets | json_encode }}"></item-filter-list>
+                                <item-filter-list :facet-data="{{ facets | json_encode }}">
+                                    {% if facets | length > 0 %}
+                                        <a class="btn btn-link filter-toggle" href="#filterCollapse">
+                                            <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ trans("Ceres::Template.itemFilter") }}
+                                        </a>
+                                    {% endif %}
+                                </item-filter-list>
                             {% else %}
                                 {{ overrideSearchFilters }}
                             {% endif %}
