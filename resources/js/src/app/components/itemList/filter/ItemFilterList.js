@@ -62,6 +62,7 @@ Vue.component("item-filter-list", {
         if ("showFilter" in urlParams)
         {
             this.isActive = true;
+            UrlService.removeUrlParam("showFilter");
         }
 
         if (urlParams.priceMin || urlParams.priceMax)
@@ -69,7 +70,7 @@ Vue.component("item-filter-list", {
             const priceMin = urlParams.priceMin || "";
             const priceMax = urlParams.priceMax || "";
 
-            this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+            this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax, showFilter: true});
 
             selectedFacets.push("price");
         }
@@ -86,15 +87,6 @@ Vue.component("item-filter-list", {
         {
             window.setTimeout(() =>
             {
-                if (!this.isActive)
-                {
-                    UrlService.setUrlParam({showFilter: null});
-                }
-                else
-                {
-                    UrlService.removeUrlParam("showFilter");
-                }
-
                 this.isActive = !this.isActive;
             }, 300);
         }

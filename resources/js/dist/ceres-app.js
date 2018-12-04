@@ -23013,8 +23013,7 @@ Vue.component("item-filter", {
 
     methods: {
         updateFacet: function updateFacet(facetValue) {
-            // TODO reload
-            this.$store.dispatch("selectFacet", facetValue);
+            this.$store.dispatch("selectFacet", { facetValue: facetValue, showFilter: true });
         },
         isSelected: function isSelected(facetValueId) {
             return this.selectedFacets.findIndex(function (selectedFacet) {
@@ -23087,13 +23086,14 @@ Vue.component("item-filter-list", {
 
         if ("showFilter" in urlParams) {
             this.isActive = true;
+            _UrlService2.default.removeUrlParam("showFilter");
         }
 
         if (urlParams.priceMin || urlParams.priceMax) {
             var priceMin = urlParams.priceMin || "";
             var priceMax = urlParams.priceMax || "";
 
-            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax, showFilter: true });
 
             selectedFacets.push("price");
         }
@@ -23109,12 +23109,6 @@ Vue.component("item-filter-list", {
             var _this = this;
 
             window.setTimeout(function () {
-                if (!_this.isActive) {
-                    _UrlService2.default.setUrlParam({ showFilter: null });
-                } else {
-                    _UrlService2.default.removeUrlParam("showFilter");
-                }
-
                 _this.isActive = !_this.isActive;
             }, 300);
         }
@@ -23205,8 +23199,7 @@ Vue.component("item-filter-tag-list", {
 
     methods: {
         removeTag: function removeTag(tag) {
-            // TODO reload
-            this.$store.dispatch("selectFacet", tag);
+            this.$store.dispatch("selectFacet", { facetValue: tag });
         }
     }
 });
@@ -28363,6 +28356,8 @@ var _ItemListUrlService = require("services/ItemListUrlService");
 
 var _UrlService = require("services/UrlService");
 
+var _utils = require("../../helper/utils");
+
 var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
@@ -28500,9 +28495,11 @@ var mutations = {
 };
 
 var actions = {
-    selectFacet: function selectFacet(_ref2, facetValue) {
+    selectFacet: function selectFacet(_ref2, _ref3) {
         var dispatch = _ref2.dispatch,
             commit = _ref2.commit;
+        var facetValue = _ref3.facetValue,
+            showFilter = _ref3.showFilter;
 
         if (facetValue.id === "price") {
             commit("removePriceFacet");
@@ -28512,49 +28509,58 @@ var actions = {
 
         commit("setItemListPage", 1);
 
+        if (showFilter) {
+            (0, _UrlService.setUrlParam)({ showFilter: null });
+        }
+
         dispatch("loadItemList");
     },
-    selectPriceFacet: function selectPriceFacet(_ref3, _ref4) {
-        var dispatch = _ref3.dispatch,
-            commit = _ref3.commit;
-        var priceMin = _ref4.priceMin,
-            priceMax = _ref4.priceMax;
+    selectPriceFacet: function selectPriceFacet(_ref4, _ref5) {
+        var dispatch = _ref4.dispatch,
+            commit = _ref4.commit;
+        var priceMin = _ref5.priceMin,
+            priceMax = _ref5.priceMax,
+            showFilter = _ref5.showFilter;
 
         commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
         commit("setPriceFacetTag");
         commit("setItemListPage", 1);
 
+        if (showFilter) {
+            (0, _UrlService.setUrlParam)({ showFilter: null });
+        }
+
         dispatch("loadItemList");
     },
-    selectItemListPage: function selectItemListPage(_ref5, page) {
-        var dispatch = _ref5.dispatch,
-            commit = _ref5.commit;
+    selectItemListPage: function selectItemListPage(_ref6, page) {
+        var dispatch = _ref6.dispatch,
+            commit = _ref6.commit;
 
         commit("setItemListPage", page);
 
         dispatch("loadItemList");
     },
-    selectItemListSorting: function selectItemListSorting(_ref6, sorting) {
-        var dispatch = _ref6.dispatch,
-            commit = _ref6.commit;
+    selectItemListSorting: function selectItemListSorting(_ref7, sorting) {
+        var dispatch = _ref7.dispatch,
+            commit = _ref7.commit;
 
         commit("setItemListSorting", sorting);
         commit("setItemListPage", 1);
 
         dispatch("loadItemList");
     },
-    selectItemsPerPage: function selectItemsPerPage(_ref7, itemsPerPage) {
-        var dispatch = _ref7.dispatch,
-            commit = _ref7.commit;
+    selectItemsPerPage: function selectItemsPerPage(_ref8, itemsPerPage) {
+        var dispatch = _ref8.dispatch,
+            commit = _ref8.commit;
 
         commit("setItemsPerPage", itemsPerPage);
         commit("setItemListPage", 1);
 
         dispatch("loadItemList");
     },
-    searchItems: function searchItems(_ref8, searchString) {
-        var dispatch = _ref8.dispatch,
-            commit = _ref8.commit;
+    searchItems: function searchItems(_ref9, searchString) {
+        var dispatch = _ref9.dispatch,
+            commit = _ref9.commit;
 
         commit("setItemListSearchString", searchString);
         commit("setItemListPage", 1);
@@ -28562,10 +28568,10 @@ var actions = {
 
         dispatch("loadItemList");
     },
-    loadItemList: function loadItemList(_ref9) {
-        var state = _ref9.state,
-            commit = _ref9.commit,
-            getters = _ref9.getters;
+    loadItemList: function loadItemList(_ref10) {
+        var state = _ref10.state,
+            commit = _ref10.commit,
+            getters = _ref10.getters;
 
         var selectedPriceFacet = state.selectedFacets.find(function (facet) {
             return facet.id === "price";
@@ -28615,7 +28621,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ItemListUrlService":251,"services/TranslationService":254,"services/UrlService":255}],263:[function(require,module,exports){
+},{"../../helper/utils":246,"services/ItemListUrlService":251,"services/TranslationService":254,"services/UrlService":255}],263:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
