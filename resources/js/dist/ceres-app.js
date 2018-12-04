@@ -22781,8 +22781,9 @@ Vue.component("item-store-special", {
             tagClass: "",
             label: "",
             tagClasses: {
-                1: "bg-danger",
-                2: "bg-primary",
+                1: "tag-offer bg-danger",
+                2: "tag-new bg-primary",
+                3: "tag-top bg-success",
                 default: "bg-success"
             }
         };
