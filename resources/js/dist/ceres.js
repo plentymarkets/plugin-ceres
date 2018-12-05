@@ -17844,7 +17844,10 @@ Vue.component("add-to-basket", {
             type: Number
         },
         isSalable: {
-            // = isSalable && !hasChildren
+            type: Boolean,
+            default: false
+        },
+        hasChildren: {
             type: Boolean,
             default: false
         },
@@ -17872,7 +17875,7 @@ Vue.component("add-to-basket", {
             return this.minimumQuantity <= 0 ? this.intervalQuantity : this.minimumQuantity;
         },
         canBeAddedToBasket: function canBeAddedToBasket() {
-            return this.isSalable && (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) && !this.requiresProperties;
+            return this.isSalable && !this.hasChildren && (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) && !this.requiresProperties;
         },
         requiresProperties: function requiresProperties() {
             return App.config.item.requireOrderProperties && this.orderProperties.filter(function (property) {
@@ -21879,6 +21882,18 @@ Vue.component("order-property-list-item", {
             waiting: false
         };
     },
+    mounted: function mounted() {
+        var _this = this;
+
+        document.addEventListener("onVariationChanged", function () {
+            if (_this.property.valueType !== "file") {
+                _this.inputValue = "";
+            } else {
+                _this.clearSelectedFile();
+            }
+            _this.setVariationOrderProperty({ propertyId: _this.property.id, value: null });
+        });
+    },
 
 
     computed: _extends({
@@ -21904,11 +21919,11 @@ Vue.component("order-property-list-item", {
             return "";
         },
         hasError: function hasError() {
-            var _this = this;
+            var _this2 = this;
 
             if (this.variationMarkInvalidProperties && this.inputType === "radio") {
                 return this.variationMissingProperties.find(function (property) {
-                    return property.property.id === _this.property.id;
+                    return property.property.id === _this2.property.id;
                 });
             }
 
@@ -21979,7 +21994,7 @@ Vue.component("order-property-list-item", {
             }
         },
         uploadPropertyFile: function uploadPropertyFile(file) {
-            var _this2 = this;
+            var _this3 = this;
 
             this.setIsBasketLoading(true);
             this.waiting = true;
@@ -21989,18 +22004,19 @@ Vue.component("order-property-list-item", {
             fileData.append("fileData", file);
 
             ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
-                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
+                _this3.setVariationOrderProperty({ propertyId: _this3.property.id, value: response });
             }).fail(function (error) {
-                _this2.clearSelectedFile();
-                _this2._handleValidationErrors(error);
+                _this3.clearSelectedFile();
+                _this3._handleValidationErrors(error);
             }).always(function (response) {
-                _this2.setIsBasketLoading(false);
-                _this2.waiting = false;
+                _this3.setIsBasketLoading(false);
+                _this3.waiting = false;
             });
         },
         clearSelectedFile: function clearSelectedFile() {
             this.selectedFile = null;
             this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
+            this.$refs.fileInput.value = "";
         },
         _handleValidationErrors: function _handleValidationErrors(error) {
             if (error.hasOwnProperty("validation_errors")) {
@@ -23118,8 +23134,9 @@ Vue.component("item-store-special", {
             tagClass: "",
             label: "",
             tagClasses: {
-                1: "bg-danger",
-                2: "bg-primary",
+                1: "tag-offer bg-danger",
+                2: "tag-new bg-primary",
+                3: "tag-top bg-success",
                 default: "bg-success"
             }
         };
@@ -23554,6 +23571,9 @@ Vue.component("live-shopping-details", {
         prices: {
             type: Object,
             required: true
+        },
+        isActiveByStock: {
+            type: Boolean
         }
     },
 
@@ -23584,8 +23604,8 @@ Vue.component("live-shopping-details", {
 
             var momentNow = moment(Date.now());
 
-            this.momentBegin = moment(parseInt(this.liveShoppingData.liveShopping.fromTime) * 1000);
-            this.momentEnd = moment(parseInt(this.liveShoppingData.liveShopping.toTime) * 1000);
+            this.momentBegin = moment.unix(this.liveShoppingData.liveShopping.fromTime);
+            this.momentEnd = moment.unix(this.liveShoppingData.liveShopping.toTime);
             this.hasStarted = this.momentBegin < momentNow;
             this.hasClosed = this.momentEnd < momentNow;
 
@@ -23604,10 +23624,9 @@ Vue.component("live-shopping-details", {
         },
         setQuantitySoldPercentage: function setQuantitySoldPercentage() {
             var data = this.liveShoppingData.liveShopping;
-            var quantitySoldSum = data.quantitySold + data.quantitySoldReal;
-            var percentage = 100 - quantitySoldSum / data.quantityMax * 100;
+            var percentage = 100 - data.quantitySold / data.quantityMax * 100;
 
-            this.itemQuantityRemaining = data.quantityMax - quantitySoldSum;
+            this.itemQuantityRemaining = data.quantityMax - data.quantitySold;
             this.quantitySoldPercentage = percentage.toFixed(App.config.item.storeSpecial);
         },
         setItemPriceRebatePercentage: function setItemPriceRebatePercentage() {
@@ -23706,8 +23725,8 @@ Vue.component("live-shopping-item", {
         },
         isActiveByTime: function isActiveByTime() {
             if (!(0, _utils.isNullOrUndefined)(this.currentOffer)) {
-                var momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
-                var momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
+                var momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
+                var momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
                 var momentNow = moment(Date.now());
 
                 return momentBegin < momentNow && momentNow < momentEnd;
@@ -23719,7 +23738,7 @@ Vue.component("live-shopping-item", {
             if (!(0, _utils.isNullOrUndefined)(this.currentOffer)) {
                 var liveShopping = this.currentOffer.liveShopping;
 
-                return liveShopping.quantitySold + liveShopping.quantitySoldReal < liveShopping.quantityMax;
+                return liveShopping.quantitySold < liveShopping.quantityMax;
             }
 
             return false;
@@ -23750,12 +23769,14 @@ Vue.component("live-shopping-item", {
             var itemPrices = this.currentOffer.item.prices;
             var prices = {
                 price: itemPrices.default,
-                rrp: itemPrices.rrp
+                rrp: itemPrices.rrp,
+                isRrpDefaultPrice: false
             };
 
             if (!(0, _utils.isNullOrUndefined)(itemPrices.specialOffer)) {
                 prices.price = itemPrices.specialOffer;
                 prices.rrp = itemPrices.default || itemPrices.rrp;
+                prices.isRrpDefaultPrice = !!itemPrices.default;
             }
 
             return prices;
@@ -23775,8 +23796,8 @@ Vue.component("live-shopping-item", {
 
     methods: {
         whenIsCurrentOffer: function whenIsCurrentOffer() {
-            var momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
-            var momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
+            var momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
+            var momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
             var momentNow = moment(Date.now());
 
             if (momentBegin < momentNow && momentNow > momentEnd) {

@@ -9,6 +9,12 @@
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
 {{ component( "Ceres::Category.Components.CategoryBreadcrumbs" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
+
+{# TODO: remove if shop builder pages can be rebuild by migrations #}
+{{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
+{{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
+{{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
+
 {% if request.get('isContentBuilder') == 1 %}
     {% include "Ceres::Widgets.WidgetComponents" %}
 {% endif %}
@@ -154,10 +160,6 @@
     </div>
 </div>
 
-<div id="vue-error" style="display:none">
-    {% include "Ceres::PageDesign.Partials.VueError" %}
-</div>
-
 <script>
     App = {
         config: {{ ceresConfig | json_encode | raw }},
@@ -196,26 +198,28 @@
 {{ get_filtered_tags() }}
 
 <script>
-    var rootElement = document.getElementById("vue-app");
-    var errorElement = document.getElementById("vue-error");
+    {% if ceresConfig.log.checkSyntax %}
+        var rootElement = document.getElementById("vue-app");
+        rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, '');
+
+        var vueApp = new Vue({
+            store: window.ceresStore
+        });
+
+        vueApp.$mount( rootElement.cloneNode(true) );
+
+        if ( vueApp.$el.id === "vue-app")
+        {
+            document.body.replaceChild( vueApp.$el, rootElement );
+        }
+    {% else %}
+        var vueApp = new Vue({
+            el: "#vue-app",
+            store: window.ceresStore
+        });
+    {% endif %}
 
     var vueEventHub = new Vue();
-
-    var vueApp = new Vue({
-        store: window.ceresStore
-    });
-    vueApp.$mount( rootElement.cloneNode(true) );
-
-    if ( vueApp.$el.id !== "vue-app")
-    {
-        rootElement.parentNode.removeChild(rootElement);
-        errorElement.style.display = "block";
-    }
-    else
-    {
-        document.body.replaceChild( vueApp.$el, rootElement );
-        errorElement.parentNode.removeChild(errorElement);
-    }
 
     (function($) {
         

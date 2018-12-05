@@ -24,19 +24,19 @@
             <div class="live-shopping-countdown-thread-container" v-if="displaySettings.showTimer && !!duration">
                 <div v-if="duration.days > 0" class="live-shopping-countdown-thread">
                     <div class="live-shopping-countdown-thread-number">${ duration.days }</div>
-                    <div class="small">Tage</div>
+                    <div class="small">{{ trans("Ceres::Template.liveShoppingDays") }}</div>
                 </div>
                 <div class="live-shopping-countdown-thread">
                     <div class="live-shopping-countdown-thread-number">${ duration.hours }</div>
-                    <div class="small">Stunden</div>
+                    <div class="small">{{ trans("Ceres::Template.liveShoppingHours") }}</div>
                 </div>
                 <div class="live-shopping-countdown-thread">
                     <div class="live-shopping-countdown-thread-number">${ duration.minutes }</div>
-                    <div class="small">Minuten</div>
+                    <div class="small">{{ trans("Ceres::Template.liveShoppingMinutes") }}</div>
                 </div>
                 <div v-if="duration.days <= 0" class="live-shopping-countdown-thread">
                     <div class="live-shopping-countdown-thread-number">${ duration.seconds }</div>
-                    <div class="small">Sekunden</div>
+                    <div class="small">{{ trans("Ceres::Template.liveShoppingSeconds") }}</div>
                 </div>
             </div>
 
@@ -61,19 +61,56 @@
 
         <div class="live-shopping-prices bg-danger" v-if="hasStarted && !hasClosed">
             <div class="live-shopping-prices-inner">
-                <div class="live-shopping-prices-rebate" v-if="isNaN(itemPriceRebatePercentage)">{{ trans("Ceres::Template.liveShoppingRebate", {"rebate": "${ itemPriceRebatePercentage }" }) }}</div>
+                <div class="live-shopping-prices-rebate" v-if="!isNaN(itemPriceRebatePercentage)">{{ trans("Ceres::Template.liveShoppingRebate", {"rebate": "${ itemPriceRebatePercentage }" }) }}</div>
                 <div class="live-shopping-prices-container">
                     <div class="live-shopping-price">
                         <strong>${ prices.price.price.formatted } *</strong>
                     </div>
-                    <del v-if="displaySettings.showCrossPrice && prices.rrp.price.value > 0">${ prices.rrp.price.formatted }</del>
+                    <span v-if="displaySettings.showCrossPrice && prices.rrp.price.value > 0">
+                        <span v-if="prices.isRrpDefaultPrice">{{ trans("Ceres::Template.liveShoppingBefore", {"price": "<del>${ prices.rrp.price.formatted }</del>"}) | raw }}</span>
+                        <span v-else>{{ trans("Ceres::Template.liveShoppingRrp", {"price": "<del>${ prices.rrp.price.formatted }</del>"}) | raw }}</span>
+                    </span>
                 </div>
             </div>
 
             <div class="live-shopping-prices-additional-info">
+                <div v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
+                    <span>${ liveShoppingData.item.unit.content }</span>
+                    <span>${ liveShoppingData.item.unit.names.name }</span>
+                    <span v-if="liveShoppingData.item.variation.mayShowUnitPrice">| ${ prices.price.basePrice }</span>
+                </div>
+
                 * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.itemExclVAT") }}{% else %}{{ trans("Ceres::Template.itemInclVAT") }}{% endif %} {{ trans("Ceres::Template.itemExclusive") }}
                 <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
             </div>
         </div>
+
+        <div class="thumb-content" v-else>
+            <div>
+                <div class="prices">
+                    <div class="price-view-port">
+                        <del class="crossprice" v-if="displaySettings.showCrossPrice && prices.rrp.price.value > 0">
+                            ${ prices.rrp.price.formatted }
+                        </del>
+                    </div>
+                    
+                    <div class="price">
+                        ${ prices.price.price.formatted } *
+                    </div>
+                </div>
+
+                <div class="category-unit-price" v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
+                    <span>${ liveShoppingData.item.unit.content }</span>
+                    <span>${ liveShoppingData.item.unit.names.name }</span>
+                    <span v-if="liveShoppingData.item.variation.mayShowUnitPrice">| ${ prices.price.basePrice }</span>
+                </div>
+
+                <span class="vat small text-muted">
+                    * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.itemExclVAT") }}{% else %}{{ trans("Ceres::Template.itemInclVAT") }}{% endif %} {{ trans("Ceres::Template.itemExclusive") }}
+                    <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                </span>
+            </div>
+        </div>
+
     </div>
 </script>

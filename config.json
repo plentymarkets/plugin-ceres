@@ -4279,6 +4279,14 @@
                             }
                         ]
                     }
+                },
+                "log.check_syntax": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.logCheckSyntax",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         }
