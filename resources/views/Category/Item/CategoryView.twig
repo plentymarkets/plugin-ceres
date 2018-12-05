@@ -12,7 +12,6 @@
     {{ component( "Ceres::ItemList.Components.CategoryItem") }}
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
-    {{ component( "Ceres::ItemList.Components.ItemList") }}
 
     {% if ceresConfig.item.showCategoryImage %}
         {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
