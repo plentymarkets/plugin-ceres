@@ -205,7 +205,7 @@ function _hasValue($formControl)
 }
 
 /**
- * @param {any} value
+ * @param {object} $formControl - Input inside Formular
  * @returns value is valid date
  */
 function _isValidDate($formControl)
