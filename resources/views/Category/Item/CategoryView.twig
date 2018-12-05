@@ -91,6 +91,8 @@
                             <category-item
                                 :item-data="{{ item.data | json_encode }}"
                                 :decimal-count="{{ decimalCount }}">
+                                <template slot="BeforePrices">{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
+                                <template slot="AfterPrices">{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
                             </category-item>
                         </li>
                     {% endfor %}
