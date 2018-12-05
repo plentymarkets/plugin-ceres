@@ -41,7 +41,7 @@ class TemplateServiceProvider extends ServiceProvider
     [
         'tpl.home'                          => ['Homepage.Homepage',                      GlobalContext::class],     // provide template to use for homepage
         'tpl.category.content'              => ['Category.Content.CategoryContent',       CategoryContext::class],   // provide template to use for content categories
-        'tpl.category.item'                 => ['Category.Item.CategoryView',             CategoryItemContext::class],          // provide template to use for item categories
+        'tpl.category.item'                 => ['Category.CategoryView',                  CategoryItemContext::class],          // provide template to use for item categories
         'tpl.category.blog'                 => ['PageDesign.PageDesign',                  GlobalContext::class],               // provide template to use for blog categories
         'tpl.category.container'            => ['PageDesign.PageDesign',                  GlobalContext::class],               // provide template to use for container categories
         'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],                 // provide template to use for single items
