@@ -1,0 +1,87 @@
+{% extends getPartial('page-design') %}
+
+{% set decimalCount = ceresConfig.item.storeSpecial %}
+{% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets) %}
+{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
+
+{% block PageBody %}
+
+    {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
+    {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
+    {{ component( "Ceres::ItemList.Components.ItemList" ) }}
+
+    <div class="categoriegrid page-content container-max">
+        <div class="row m-t-1">
+            <div class="col-xs-12">
+                <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>
+            </div>
+        </div>
+
+        <div class="list-controls m-b-3">
+            <div class="list-controls-inner">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="list-wrapper">
+                            {% include "Ceres::Category.Item.Partials.ItemSorting" with { 'sortingData': searchOptions.sorting, 'selectedSorting': itemSorting } %}
+
+                            {% include "Ceres::Category.Item.Partials.ItemsPerPage" with { 'itemsPerPage': searchOptions.itemsPerPage, 'selectedValue': itemsPerPage } %}
+
+                            {% if overrideSearchFilters | trim is empty %}
+                                <item-filter-list :facet-data="{{ facets | json_encode }}">
+                                    {% if facets | length > 0 %}
+                                        <a class="btn btn-link filter-toggle" href="#filterCollapse">
+                                            <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ trans("Ceres::Template.itemFilter") }}
+                                        </a>
+                                    {% endif %}
+                                </item-filter-list>
+                            {% else %}
+                                {{ overrideSearchFilters }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <item-filter-tag-list></item-filter-tag-list>
+        </div>
+
+        {% if ceresConfig.pagination.position in ['top', 'top_bottom'] %}
+            <div class="list-controls m-b-3 row">
+                <div class="col-xs-12">
+                    {% include "Ceres::Category.Item.Partials.Pagination" %}
+                </div>
+            </div>
+        {% endif %}
+
+        <ul class="product-list row grid">
+            {% for item in itemList %}
+                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <category-item
+                        :item-data="{{ item.data | json_encode }}"
+                        :decimal-count="{{ decimalCount }}">
+                        <template slot="BeforePrices">{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
+                        <template slot="AfterPrices">{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
+                    </category-item>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if ceresConfig.pagination.position in ['bottom', 'top_bottom'] %}
+            <div class="list-controls m-b-3 row">
+                <div class="col-xs-12">
+                    {% include "Ceres::Category.Item.Partials.Pagination" %}
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+
+{% block PartialHead %}
+<script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ webstoreConfig.domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    {% if isSearch %}
+        <meta name="robots" content="{{ config("Ceres.meta.robots_search_result") }}">
+        <title>{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% endif %}
+{% endblock %}

@@ -54,7 +54,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.guest'                         => ['Customer.Guest',                         GlobalContext::class],                      // provide template to use for guest
         'tpl.password-reset'                => ['Customer.ResetPassword',                 PasswordResetContext::class],              // provide template to use for password-reset
         'tpl.contact'                       => ['Customer.Contact',                       GlobalContext::class],                    // provide template to use for contact
-        'tpl.search'                        => ['ItemList.ItemListView',                  ItemSearchContext::class],               // provide template to use for item search
+        'tpl.search'                        => ['ItemList.ItemSearchView',                ItemSearchContext::class],               // provide template to use for item search
         'tpl.wish-list'                     => ['WishList.WishListView',                  ItemWishListContext::class],               // provide template to use for wishlist
         'tpl.order.return'                  => ['OrderReturn.OrderReturnView',            OrderReturnContext::class],         // provide template to use for order return
         'tpl.order.return.confirmation'     => ['OrderReturn.OrderReturnConfirmation',    GlobalContext::class], // provide template to use for order return confirmation
@@ -65,7 +65,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.terms-conditions'              => ['StaticPages.TermsAndConditions',         GlobalContext::class],      // provide template to use for terms and conditions
         'tpl.item-not-found'                => ['StaticPages.ItemNotFound',               GlobalContext::class],            // provide template to use for item not found
         'tpl.page-not-found'                => ['StaticPages.PageNotFound',               GlobalContext::class],       // provide template to use for page not found
-        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut', GlobalContext::class]
+        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class]
     ];
 
     public function register(){
