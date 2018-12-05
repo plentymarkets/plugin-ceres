@@ -54,6 +54,10 @@
       "prefix": "item"
     },
     {
+      "name": "MultilingualismConfig.liveShopping",
+      "prefix": "liveShopping"
+    },
+    {
       "name": "MultilingualismConfig.legalDisclosure",
       "prefix": "legalDisclosure"
     },
@@ -70,8 +74,12 @@
       "prefix": "pageNotFound"
     },
     {
+      "name": "MultilingualismConfig.newsletter",
+      "prefix": "newsletter"
+    },
+    {
       "name": "MultilingualismConfig.notifications",
-      "prefix": "notifications"
+      "prefix": "notification"
     },
     {
       "name": "MultilingualismConfig.orderConfirmation",
@@ -112,6 +120,10 @@
     {
       "name": "MultilingualismConfig.singleItem",
       "prefix": "singleItem"
+    },
+    {
+      "name": "MultilingualismConfig.storeSpecial",
+      "prefix": "storeSpecial"
     },
     {
       "name": "MultilingualismConfig.termsAndConditions",
