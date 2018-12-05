@@ -3,8 +3,6 @@
     {% set maxItems = maxItems | default({"1": 30, "2": 3, "3": 2}) %}
     {% import _self as childlist %}
     {% set counter = 0 %}
-    <!-- {{ megaMenuLevels | json_encode }} -->
-    <!-- {{ maxItems | json_encode }} -->
     {% if level < megaMenuLevels %}
         {% for child in category.children if counter < maxItems[level] %}
             {% if (child.details | length > 0) %}
