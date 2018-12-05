@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        {% if "billing_address.name1" in addressFields %}
+        {% if "delivery_address.name1" in addressFields %}
             <div class="col-xs-12 col-sm-8" v-if="value.addressSalutation === 2">
                 <div class="input-unit" data-validate="text" data-model="contactPerson">
                     <input type="text" name="lastName" :id="'txtContactPerson' + _uid" :value="value.contactPerson" @input="emitInputEvent('contactPerson', $event.target.value)">

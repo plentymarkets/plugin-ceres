@@ -54,6 +54,7 @@
                             </span>
                                 <span v-else class="item-content small">
                                 <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
+                                <span>${ selectedAddress | optionType(12) }</span>
                                 <strong v-if="!address.name1 || address.name1.length == 0">${address | optionType(11)} ${address.name2} ${address.name3}</strong>
                                 <span v-else>${selectedAddress | optionType(11)} ${address.name2} ${address.name3}</span>
                                 <span>${address.name4}</span>
