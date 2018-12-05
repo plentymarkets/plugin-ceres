@@ -59,15 +59,19 @@
                         {% set dezimalcount = ceresConfig.item.storeSpecial %}
                         {% set percent = percent | number_format(dezimalcount, ',', '.') %}
                         {% set storeSpecial = percent ~"%" %}
+                    {% else %}
+                        {% set storeSpecial = trans("Ceres::Template.storeSpecialOffer") %}
                     {% endif %}
 
                 {% elseif  item.data.item.storeSpecial.id == 2 %}
 
                     {% set storeSpecialClasses = 'tag-new bg-primary' %}
+                    {% set storeSpecial = trans("Ceres::Template.storeSpecialNew") %}
 
                 {% elseif  item.data.item.storeSpecial.id == 3 %}
 
                     {% set storeSpecialClasses = 'tag-top bg-success' %}
+                    {% set storeSpecial = trans("Ceres::Template.storeSpecialTop") %}
 
                 {% else %}
 
