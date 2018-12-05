@@ -1,4 +1,5 @@
 import $ from "jquery";
+import {isNull, isUndefined}from "../helper/utils";
 
 let $form;
 
@@ -180,7 +181,6 @@ function _validateInput($formControl, validationKey)
     case "ref":
         return _compareRef($.trim($formControl.val()), $.trim($formControl.attr("data-validate-ref")));
     case "date":
-        console.log(_isValidDate($formControl));
         return _isValidDate($formControl);
     case "mail":
         return _isMail($formControl);
@@ -210,7 +210,34 @@ function _hasValue($formControl)
  */
 function _isValidDate($formControl)
 {
-    return moment($formControl.val(), ["DD.MM.YYYY", "D.MM.YYYY", "DD.M.YYYY", "D.M.YYYY", "DD.MM.YY", "D.MM.YY", "DD.M.YY", "D.M.YY", "DD/MM/YYYY", "D/MM/YYYY", "DD/M/YYYY", "D/M/YYYY", "DD/MM/YY", "D/MM/YY", "DD/M/YY", "D/M/YY", "DD-MM-YYYY", "D-MM-YYYY", "DD-M-YYYY", "D-M-YYYY", "DD-MM-YY", "D-MM-YY", "DD-M-YY", "D-M-YY"], true).isValid();
+    var string = $formControl.val();
+    var match = string.match(/^(?:(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4}))|(?:(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2}))$/);
+
+    // If match is null date is not valid
+    if (isNull(match))
+    {
+        return false;
+    }
+
+    // Check if year,month,day is valid
+    var currentYear = new Date().getFullYear();
+
+    // YYYY-MM-DD Format
+    if (isUndefined(match[3]))
+    {
+        if ((match[4] >= 1901 && match[4] <= currentYear) && (match[5] >= 1 && match[5] <= 12) && (match[6] >= 1 && match[6] <= 31))
+        {
+            return true;
+        }
+    }
+
+    // DD-MM-YYYY Format
+    if ((match[1] >= 1 && match[1] <= 31) && (match[2] >= 1 && match[2] <= 12) && (match[3] >= 1901 && match[3] <= currentYear))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 /**
