@@ -3,7 +3,7 @@
         <ul class="pagination col-xs-12 m-y-0">
 
             <!-- FIRST PAGE LINK -->
-            {% if ceresConfig.pagination.showFirstPage and currentPage > 2 %}
+            {% if ceresConfig.pagination.showFirstPage and pageMax > 3 and currentPage > 2 %}
                 <li class="page-item">
                     <a class="page-link" href="{{ queryString({ 'page': 1 }) }}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
