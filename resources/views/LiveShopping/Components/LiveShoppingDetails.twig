@@ -24,19 +24,19 @@
             <div class="live-shopping-countdown-thread-container" v-if="displaySettings.showTimer && !!duration">
                 <div v-if="duration.days > 0" class="live-shopping-countdown-thread">
                     <div class="live-shopping-countdown-thread-number">${ duration.days }</div>
-                    <div class="small">Tage</div>
+                    <div class="small">{{ trans("Ceres::Template.liveShoppingDays") }}</div>
                 </div>
                 <div class="live-shopping-countdown-thread">
                     <div class="live-shopping-countdown-thread-number">${ duration.hours }</div>
-                    <div class="small">Stunden</div>
+                    <div class="small">{{ trans("Ceres::Template.liveShoppingHours") }}</div>
                 </div>
                 <div class="live-shopping-countdown-thread">
                     <div class="live-shopping-countdown-thread-number">${ duration.minutes }</div>
-                    <div class="small">Minuten</div>
+                    <div class="small">{{ trans("Ceres::Template.liveShoppingMinutes") }}</div>
                 </div>
                 <div v-if="duration.days <= 0" class="live-shopping-countdown-thread">
                     <div class="live-shopping-countdown-thread-number">${ duration.seconds }</div>
-                    <div class="small">Sekunden</div>
+                    <div class="small">{{ trans("Ceres::Template.liveShoppingSeconds") }}</div>
                 </div>
             </div>
 

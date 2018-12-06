@@ -23121,6 +23121,12 @@ Vue.component("item-search", {
 
 var _utils = require("../../helper/utils");
 
+var _TranslationService = require("../../services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
@@ -23134,9 +23140,15 @@ Vue.component("item-store-special", {
             tagClass: "",
             label: "",
             tagClasses: {
-                1: "bg-danger",
-                2: "bg-primary",
+                1: "tag-offer bg-danger",
+                2: "tag-new bg-primary",
+                3: "tag-top bg-success",
                 default: "bg-success"
+            },
+            labels: {
+                1: _TranslationService2.default.translate("Ceres::Template.storeSpecialOffer"),
+                2: _TranslationService2.default.translate("Ceres::Template.storeSpecialNew"),
+                3: _TranslationService2.default.translate("Ceres::Template.storeSpecialTop")
             }
         };
     },
@@ -23156,19 +23168,11 @@ Vue.component("item-store-special", {
             this.label = this.getLabel();
         },
         getLabel: function getLabel() {
-            if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-                if ((0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
-                    return "";
-                }
-
+            if (((0, _utils.isNullOrUndefined)(this.storeSpecial) || this.storeSpecial.id === 1) && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
                 return this.getPercentageSale();
             }
 
-            if (this.storeSpecial.id === 1 && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
-                return this.getPercentageSale();
-            }
-
-            return this.storeSpecial.names.name;
+            return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
         },
         getPercentageSale: function getPercentageSale() {
             // eslint-disable-next-line
@@ -23189,7 +23193,7 @@ Vue.component("item-store-special", {
     }
 });
 
-},{"../../helper/utils":251}],185:[function(require,module,exports){
+},{"../../helper/utils":251,"../../services/TranslationService":260}],185:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
