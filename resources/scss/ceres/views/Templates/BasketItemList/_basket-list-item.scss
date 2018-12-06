@@ -244,7 +244,7 @@
 }
 
 /* Compatibility for IE */
-html.ie #vue-app .basket-item-container {
+html.ie .wrapper-main .basket-item-container {
 
 	// Position absolute
 	.meta-container-wrapper-inner {
@@ -307,7 +307,7 @@ html.ie #vue-app .basket-item-container {
 }
 
 // For Checkout
-html.ie #vue-app .checkout .checkout-rightside .basket-item-container .basket-item {
+html.ie .wrapper-main .checkout .checkout-rightside .basket-item-container .basket-item {
 	@include media-breakpoint-down(lg) {
 		.meta-container-wrapper-inner {
 			display: block;
