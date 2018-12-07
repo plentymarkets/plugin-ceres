@@ -157,9 +157,7 @@ const actions =
                 categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
                 facets:     getters.selectedFacetIdsForUrl.toString(),
                 items:      0,
-                page:       1,
                 query:      state.searchString,
-                sorting:    state.sorting,
                 template:   "Ceres::ItemList.ItemListView"
             };
 

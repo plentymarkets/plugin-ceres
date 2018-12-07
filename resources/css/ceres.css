@@ -18212,6 +18212,7 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
   opacity: 0;
   transition: opacity .1s ease-out;
   visibility: hidden;
+  z-index: 1;
 }
 
 .component-loading.with-icon:after {
@@ -18234,6 +18235,7 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
   opacity: 0;
   transition: opacity .1s ease-out;
   visibility: hidden;
+  z-index: 10;
 }
 
 .component-loading.with-icon.refreshing:after {

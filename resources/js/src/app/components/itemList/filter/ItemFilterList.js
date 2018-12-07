@@ -41,7 +41,8 @@ Vue.component("item-filter-list", {
 
                 return 0;
             });
-        }
+        },
+        isLoading: state => state.itemList.isLoading
     }),
 
     created()

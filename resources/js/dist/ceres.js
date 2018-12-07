@@ -23204,6 +23204,10 @@ Vue.component("item-filter-list", {
 
                 return 0;
             });
+        },
+
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
         }
     }),
 
@@ -28654,9 +28658,7 @@ var actions = {
             categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
             facets: getters.selectedFacetIdsForUrl.toString(),
             items: 0,
-            page: 1,
             query: state.searchString,
-            sorting: state.sorting,
             template: "Ceres::ItemList.ItemListView"
         };
 
