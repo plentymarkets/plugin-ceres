@@ -18318,6 +18318,7 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
 
 .cmp-paginator {
   line-height: 1;
+  min-height: calc(1rem + 1rem + 2px);
 }
 
 @media (max-width: 543px) {
