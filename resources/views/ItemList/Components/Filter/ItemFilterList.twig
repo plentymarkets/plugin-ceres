@@ -14,7 +14,12 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-12 text-xs-right">
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-primary btn-medium" data-toggle="collapse" href="#filterCollapse" aria-controls="filterCollapse" @click="$store.dispatch('loadItemList')">
+                            <i aria-hidden="true">🦄</i> Anwenden
+                        </button>
+                    </div>
+                    <div class="col-xs-6 text-xs-right">
                         <button type="button" class="btn btn-primary btn-medium" data-toggle="collapse" href="#filterCollapse" aria-controls="filterCollapse" @click="toggleOpeningState()">
                             <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.itemClose") }}
                         </button>

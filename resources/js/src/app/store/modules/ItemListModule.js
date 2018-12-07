@@ -1,3 +1,4 @@
+import ApiService from "services/ApiService";
 import {getItemListUrlParams}from "services/ItemListUrlService";
 import {navigateToParams, setUrlParam}from "services/UrlService";
 import TranslationService from "services/TranslationService";
@@ -139,6 +140,42 @@ const mutations =
 
 const actions =
     {
+        selectFacetNew({state, dispatch, commit, getters, rootState}, {facetValue, showFilter})
+        {
+            commit("setIsItemListLoading", true);
+
+            if (facetValue.id === "price")
+            {
+                commit("removePriceFacet");
+            }
+            else
+            {
+                commit("toggleSelectedFacet", facetValue);
+            }
+
+            const params = {
+                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
+                facets:     getters.selectedFacetIdsForUrl.toString(),
+                items:      0,
+                page:       1,
+                query:      state.searchString,
+                sorting:    state.sorting,
+                template:   "Ceres::ItemList.ItemListView"
+            };
+
+            const url = params.categoryId ? "/rest/io/category" : "/rest/io/item/search";
+
+            ApiService.get(url, params)
+                .done(data =>
+                {
+                    commit("setFacets", data.facets);
+                    commit("setIsItemListLoading", false);
+                })
+                .fail(error =>
+                {
+                });
+        },
+
         selectFacet({dispatch, commit}, {facetValue, showFilter})
         {
             if (facetValue.id === "price")

@@ -23148,7 +23148,8 @@ Vue.component("item-filter", {
 
     methods: {
         updateFacet: function updateFacet(facetValue) {
-            this.$store.dispatch("selectFacet", { facetValue: facetValue, showFilter: true });
+            this.$store.dispatch("selectFacetNew", { facetValue: facetValue, showFilter: true });
+            // this.$store.dispatch("selectFacet", {facetValue, showFilter: true});
         },
         isSelected: function isSelected(facetValueId) {
             return this.selectedFacets.findIndex(function (selectedFacet) {
@@ -28487,6 +28488,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
 var _ItemListUrlService = require("services/ItemListUrlService");
 
 var _UrlService = require("services/UrlService");
@@ -28628,11 +28633,45 @@ var mutations = {
 };
 
 var actions = {
-    selectFacet: function selectFacet(_ref2, _ref3) {
-        var dispatch = _ref2.dispatch,
-            commit = _ref2.commit;
+    selectFacetNew: function selectFacetNew(_ref2, _ref3) {
+        var state = _ref2.state,
+            dispatch = _ref2.dispatch,
+            commit = _ref2.commit,
+            getters = _ref2.getters,
+            rootState = _ref2.rootState;
         var facetValue = _ref3.facetValue,
             showFilter = _ref3.showFilter;
+
+        commit("setIsItemListLoading", true);
+
+        if (facetValue.id === "price") {
+            commit("removePriceFacet");
+        } else {
+            commit("toggleSelectedFacet", facetValue);
+        }
+
+        var params = {
+            categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
+            facets: getters.selectedFacetIdsForUrl.toString(),
+            items: 0,
+            page: 1,
+            query: state.searchString,
+            sorting: state.sorting,
+            template: "Ceres::ItemList.ItemListView"
+        };
+
+        var url = params.categoryId ? "/rest/io/category" : "/rest/io/item/search";
+
+        _ApiService2.default.get(url, params).done(function (data) {
+            commit("setFacets", data.facets);
+            commit("setIsItemListLoading", false);
+        }).fail(function (error) {});
+    },
+    selectFacet: function selectFacet(_ref4, _ref5) {
+        var dispatch = _ref4.dispatch,
+            commit = _ref4.commit;
+        var facetValue = _ref5.facetValue,
+            showFilter = _ref5.showFilter;
 
         if (facetValue.id === "price") {
             commit("removePriceFacet");
@@ -28648,12 +28687,12 @@ var actions = {
 
         dispatch("loadItemList");
     },
-    selectPriceFacet: function selectPriceFacet(_ref4, _ref5) {
-        var dispatch = _ref4.dispatch,
-            commit = _ref4.commit;
-        var priceMin = _ref5.priceMin,
-            priceMax = _ref5.priceMax,
-            showFilter = _ref5.showFilter;
+    selectPriceFacet: function selectPriceFacet(_ref6, _ref7) {
+        var dispatch = _ref6.dispatch,
+            commit = _ref6.commit;
+        var priceMin = _ref7.priceMin,
+            priceMax = _ref7.priceMax,
+            showFilter = _ref7.showFilter;
 
         commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
         commit("setPriceFacetTag");
@@ -28665,35 +28704,35 @@ var actions = {
 
         dispatch("loadItemList");
     },
-    selectItemListPage: function selectItemListPage(_ref6, page) {
-        var dispatch = _ref6.dispatch,
-            commit = _ref6.commit;
+    selectItemListPage: function selectItemListPage(_ref8, page) {
+        var dispatch = _ref8.dispatch,
+            commit = _ref8.commit;
 
         commit("setItemListPage", page);
 
         dispatch("loadItemList");
     },
-    selectItemListSorting: function selectItemListSorting(_ref7, sorting) {
-        var dispatch = _ref7.dispatch,
-            commit = _ref7.commit;
+    selectItemListSorting: function selectItemListSorting(_ref9, sorting) {
+        var dispatch = _ref9.dispatch,
+            commit = _ref9.commit;
 
         commit("setItemListSorting", sorting);
         commit("setItemListPage", 1);
 
         dispatch("loadItemList");
     },
-    selectItemsPerPage: function selectItemsPerPage(_ref8, itemsPerPage) {
-        var dispatch = _ref8.dispatch,
-            commit = _ref8.commit;
+    selectItemsPerPage: function selectItemsPerPage(_ref10, itemsPerPage) {
+        var dispatch = _ref10.dispatch,
+            commit = _ref10.commit;
 
         commit("setItemsPerPage", itemsPerPage);
         commit("setItemListPage", 1);
 
         dispatch("loadItemList");
     },
-    searchItems: function searchItems(_ref9, searchString) {
-        var dispatch = _ref9.dispatch,
-            commit = _ref9.commit;
+    searchItems: function searchItems(_ref11, searchString) {
+        var dispatch = _ref11.dispatch,
+            commit = _ref11.commit;
 
         commit("setItemListSearchString", searchString);
         commit("setItemListPage", 1);
@@ -28701,10 +28740,10 @@ var actions = {
 
         dispatch("loadItemList");
     },
-    loadItemList: function loadItemList(_ref10) {
-        var state = _ref10.state,
-            commit = _ref10.commit,
-            getters = _ref10.getters;
+    loadItemList: function loadItemList(_ref12) {
+        var state = _ref12.state,
+            commit = _ref12.commit,
+            getters = _ref12.getters;
 
         var selectedPriceFacet = state.selectedFacets.find(function (facet) {
             return facet.id === "price";
@@ -28754,7 +28793,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ItemListUrlService":247,"services/TranslationService":250,"services/UrlService":251}],259:[function(require,module,exports){
+},{"services/ApiService":245,"services/ItemListUrlService":247,"services/TranslationService":250,"services/UrlService":251}],259:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
