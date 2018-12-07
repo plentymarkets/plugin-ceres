@@ -1,5 +1,5 @@
-{% if pageMax > 1 %}
-    <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
+<nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
+    {% if pageMax > 1 %}
         <ul class="pagination col-xs-12 m-y-0">
 
             <!-- FIRST PAGE LINK -->
@@ -68,5 +68,5 @@
             {% endif %}
             <!-- ./LAST PAGE LINK -->
         </ul>
-    </nav>
-{% endif %}
+    {% endif %}
+</nav>
