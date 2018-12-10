@@ -23148,8 +23148,8 @@ Vue.component("item-filter", {
 
     methods: {
         updateFacet: function updateFacet(facetValue) {
-            this.$store.dispatch("selectFacetNew", { facetValue: facetValue, showFilter: true, isSelected: this.isSelected(facetValue.id) });
-            // this.$store.dispatch("selectFacet", {facetValue, showFilter: true});
+            this.$store.dispatch("selectFacetNew", { facetValue: facetValue, isSelected: this.isSelected(facetValue.id) });
+            // this.$store.dispatch("selectFacet", {facetValue});
         },
         isSelected: function isSelected(facetValueId) {
             return this.selectedFacets.findIndex(function (selectedFacet) {
@@ -23283,16 +23283,11 @@ Vue.component("item-filter-list", {
             selectedFacets = urlParams.facets.split(",");
         }
 
-        if ("showFilter" in urlParams) {
-            this.isActive = true;
-            _UrlService2.default.removeUrlParam("showFilter");
-        }
-
         if (urlParams.priceMin || urlParams.priceMax) {
             var priceMin = urlParams.priceMin || "";
             var priceMax = urlParams.priceMax || "";
 
-            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax, showFilter: true });
+            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
 
             selectedFacets.push("price");
         }
@@ -28715,8 +28710,7 @@ var actions = {
             commit = _ref2.commit,
             getters = _ref2.getters,
             rootState = _ref2.rootState;
-        var facetValue = _ref3.facetValue,
-            showFilter = _ref3.showFilter;
+        var facetValue = _ref3.facetValue;
 
         commit("setIsItemListLoading", true);
 
@@ -28744,8 +28738,7 @@ var actions = {
     selectFacet: function selectFacet(_ref4, _ref5) {
         var dispatch = _ref4.dispatch,
             commit = _ref4.commit;
-        var facetValue = _ref5.facetValue,
-            showFilter = _ref5.showFilter;
+        var facetValue = _ref5.facetValue;
 
         if (facetValue.id === "price") {
             commit("removePriceFacet");
@@ -28755,26 +28748,17 @@ var actions = {
 
         commit("setItemListPage", 1);
 
-        if (showFilter) {
-            (0, _UrlService.setUrlParam)({ showFilter: null });
-        }
-
         dispatch("loadItemList");
     },
     selectPriceFacet: function selectPriceFacet(_ref6, _ref7) {
         var dispatch = _ref6.dispatch,
             commit = _ref6.commit;
         var priceMin = _ref7.priceMin,
-            priceMax = _ref7.priceMax,
-            showFilter = _ref7.showFilter;
+            priceMax = _ref7.priceMax;
 
         commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
         commit("setPriceFacetTag");
         commit("setItemListPage", 1);
-
-        if (showFilter) {
-            (0, _UrlService.setUrlParam)({ showFilter: null });
-        }
 
         dispatch("loadItemList");
     },

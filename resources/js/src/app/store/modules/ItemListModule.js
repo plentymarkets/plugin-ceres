@@ -1,6 +1,6 @@
 import ApiService from "services/ApiService";
 import {getItemListUrlParams}from "services/ItemListUrlService";
-import {navigateToParams, setUrlParam}from "services/UrlService";
+import {navigateToParams}from "services/UrlService";
 import TranslationService from "services/TranslationService";
 
 const state =
