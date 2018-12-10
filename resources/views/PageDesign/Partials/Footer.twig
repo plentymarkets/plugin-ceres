@@ -36,24 +36,24 @@
     <div class="container-max footer-content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="footer-services m-t-2">
+                <div class="footer-services mt-4">
                     {% set paymentMethodContent = LayoutContainer.show("Ceres::Homepage.PaymentMethods") %}
                     {% if paymentMethodContent|trim is not empty %}
-                        <div class="services-payment m-b-1">
+                        <div class="services-payment mb-3">
                             <strong class="services-title">{{ trans("Ceres::Template.footerPaymentMethods") }}</strong>
                             {{ paymentMethodContent }}
                         </div>
                     {% endif %}
                     {% set shippingContent = LayoutContainer.show("Ceres::Homepage.Shipping") %}
                     {% if shippingContent|trim is not empty %}
-                        <div class="services-shipping m-b-1">
+                        <div class="services-shipping mb-3">
                             <strong class="services-title">{{ trans("Ceres::Template.footerOrderShippedBy") }}</strong>
                             {{ shippingContent }}
                         </div>
                     {% endif %}
                     {% set certifiedContent = LayoutContainer.show("Ceres::Homepage.Certified") %}
                     {% if certifiedContent|trim is not empty %}
-                        <div class="services-certificate m-b-1">
+                        <div class="services-certificate mb-3">
                             <strong class="services-title">{{ trans("Ceres::Template.footerCertifiedBy") }}</strong>
                             {{ certifiedContent }}
                         </div>
@@ -66,7 +66,7 @@
             <hr class="m-y-2">
             {% for i in 1..numberOfCols %}
                 <div class="col-xs-6 col-sm-3 col-lg-2">
-                    <nav class="footer-column m-b-2">
+                    <nav class="footer-column mb-4">
                         <h2 class="h5">{{ trans('Ceres::Template.footerColumnTitle' ~ i) }}</h2>
                         <ul class="list-unstyled">
 

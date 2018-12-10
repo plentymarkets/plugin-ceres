@@ -17,9 +17,9 @@
     {% set isReturnActive = services.order.isReturnActive() %}
     {% set contactHasReturns = services.customer.hasReturns() %}
 
-    <div class="page-content myaccount container-max m-b-3 m-t-1">
+    <div class="page-content myaccount container-max mb-5 mt-3">
         <!-- HEADER -->
-        <div class="row m-b-3">
+        <div class="row mb-5">
             <div class="col-sm-9">
                 <h1 class="h2">{{ trans("Ceres::Template.myAccount") }}</h1>
                 {% if frontend.Account.getIsAccountLoggedIn %}
@@ -75,7 +75,7 @@
                 </h4>
                 <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountChangeLoginData") }}</p>
 
-                <div class="card m-b-3">
+                <div class="card mb-5">
                     <account-settings template="#vue-account-settings" :user-data="{{ userObject }}">
                         <account-settings>
                 </div>

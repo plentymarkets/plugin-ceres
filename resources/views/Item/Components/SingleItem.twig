@@ -7,7 +7,7 @@
 <script type="x/template" id="vue-single-item">
     <div>
         <div class="single container-max page-content">
-            <div class="row m-t-3">
+            <div class="row mt-5">
                 <div class="col-md-7 single-leftside">
                     <div class="row">
                         <div class="col-xs-12">
@@ -17,7 +17,7 @@
                 </div>
 
                 <!-- ITEM DETAIL -->
-                <div class="col-md-5 single-rightside m-t-1" v-stick-in-parent>
+                <div class="col-md-5 single-rightside mt-3" v-stick-in-parent>
                     <div class="producertag h6 producer text-muted" v-if="currentVariation.filter.hasManufacturer">
                         ${ currentVariation.item.manufacturer.externalName }
                     </div>
@@ -34,7 +34,7 @@
 
                     <hr>
 
-                    <div class="m-b-3">
+                    <div class="mb-5">
                         <span class="articlenumber small text-muted">
                             <b>{{ trans("Ceres::Template.singleItemNumber") }}</b>
                             <span>${ currentVariation.variation.number }</span>
@@ -42,7 +42,7 @@
                     </div>
 
                     <!-- Variation -->
-                    <div class="row m-b-1" v-if="variations.length > 0">
+                    <div class="row mb-3" v-if="variations.length > 0">
                         <variation-select template="#vue-variation-select" :attributes="attributeNameMap" :variation-units="variationUnits" :variations="variations" :preselect="currentVariation.variation.id" :unitPreselect="currentVariation.variation.unitCombinationId" @is-valid-change="isVariationSelected = $event"></variation-select>
                     </div>
                     <!-- /Variation -->
