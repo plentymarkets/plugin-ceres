@@ -61,7 +61,7 @@ Vue.component("item-filter-list", {
                     {
                         return -1;
                     }
-    
+
                     return 0;
                 });
             },

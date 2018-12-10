@@ -23148,7 +23148,7 @@ Vue.component("item-filter", {
 
     methods: {
         updateFacet: function updateFacet(facetValue) {
-            this.$store.dispatch("selectFacetNew", { facetValue: facetValue, showFilter: true });
+            this.$store.dispatch("selectFacetNew", { facetValue: facetValue, showFilter: true, isSelected: this.isSelected(facetValue.id) });
             // this.$store.dispatch("selectFacet", {facetValue, showFilter: true});
         },
         isSelected: function isSelected(facetValueId) {
@@ -23161,6 +23161,10 @@ Vue.component("item-filter", {
 
 },{"services/TranslationService":250}],184:[function(require,module,exports){
 "use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _UrlService = require("services/UrlService");
 
@@ -23187,12 +23191,64 @@ Vue.component("item-filter-list", {
 
     data: function data() {
         return {
+            initialSelectedFacets: [],
             isActive: false
         };
     },
 
 
-    computed: Vuex.mapState({
+    computed: _extends({
+        isInitialFacetSelectionActive: function isInitialFacetSelectionActive() {
+            var _this = this;
+
+            var selectedFacetIds = this.selectedFacets.map(function (facet) {
+                return facet.id;
+            });
+
+            if (this.initialSelectedFacets.length === selectedFacetIds.length) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    var _loop = function _loop() {
+                        var selectedFacetId = _step.value;
+
+                        if (!_this.initialSelectedFacets.find(function (initialFacetId) {
+                            return initialFacetId === selectedFacetId;
+                        })) {
+                            return {
+                                v: false
+                            };
+                        }
+                    };
+
+                    for (var _iterator = selectedFacetIds[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var _ret = _loop();
+
+                        if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+    }, Vuex.mapState({
         facets: function facets(state) {
             return state.itemList.facets.sort(function (facetA, facetB) {
                 if (facetA.position > facetB.position) {
@@ -23208,8 +23264,11 @@ Vue.component("item-filter-list", {
 
         isLoading: function isLoading(state) {
             return state.itemList.isLoading;
+        },
+        selectedFacets: function selectedFacets(state) {
+            return state.itemList.selectedFacets;
         }
-    }),
+    })),
 
     created: function created() {
         this.$store.commit("setFacets", this.facetData);
@@ -23241,15 +23300,21 @@ Vue.component("item-filter-list", {
         if (selectedFacets.length > 0) {
             this.$store.commit("setSelectedFacetsByIds", selectedFacets);
         }
+
+        this.initialSelectedFacets = selectedFacets;
     },
 
 
     methods: {
         toggleOpeningState: function toggleOpeningState() {
-            var _this = this;
+            var _this2 = this;
 
             window.setTimeout(function () {
-                _this.isActive = !_this.isActive;
+                if (_this2.isActive && !_this2.isInitialFacetSelectionActive) {
+                    _this2.$store.dispatch("loadItemList");
+                }
+
+                _this2.isActive = !_this2.isActive;
             }, 300);
         }
     }
