@@ -30,10 +30,8 @@ Vue.component("variation-select", {
         };
     },
 
-    computed: {
-        ...Vuex.mapState({
-            currentVariation: state => state.item.variation
-        }),
+    computed:
+    {
         hasEmptyOption()
         {
             const hasEmptyVariation = this.variations.some(variation =>
@@ -60,7 +58,10 @@ Vue.component("variation-select", {
 
             return (attributeCombinationCount * Object.keys(this.variationUnits).length) !== this.variations.length;
 
-        }
+        },
+        ...Vuex.mapState({
+            currentVariation: state => state.item.variation
+        })
     },
 
     created()
