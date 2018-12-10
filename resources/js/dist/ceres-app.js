@@ -22963,6 +22963,10 @@ Vue.component("item-filter-list", {
 
                 _this2.isActive = !_this2.isActive;
             }, 300);
+        },
+        resetAllSelectedFacets: function resetAllSelectedFacets() {
+            this.$store.commit("resetAllSelectedFacets");
+            this.$store.dispatch("loadItemList");
         }
     }
 });
@@ -28324,6 +28328,9 @@ var mutations = {
                 return selectedFacet.id !== facetValue.id;
             });
         }
+    },
+    resetAllSelectedFacets: function resetAllSelectedFacets(state) {
+        state.selectedFacets = [];
     },
     setItemListPage: function setItemListPage(state, page) {
         state.page = page;

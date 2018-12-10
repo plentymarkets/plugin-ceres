@@ -102,6 +102,11 @@ const mutations =
             }
         },
 
+        resetAllSelectedFacets(state)
+        {
+            state.selectedFacets = [];
+        },
+
         setItemListPage(state, page)
         {
             state.page = page;

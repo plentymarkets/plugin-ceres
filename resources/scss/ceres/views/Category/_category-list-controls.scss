@@ -29,6 +29,15 @@
             }
         }
     }
+
+    a.filter-reset-all {
+        color: $link-color;
+
+        &:hover {
+            color: $link-hover-color;
+        }
+    }
+
     .filter-toggle {
         text-decoration: none;
 
@@ -42,6 +51,7 @@
             }
         }
     }
+
     #filterCollapse {
         position: absolute;
         z-index: 1050;
@@ -119,7 +129,8 @@
         .list-itemsperpage {
             display: inline-block;
         }
-        .filter-toggle {
+
+        .filter-controls {
             top: 50%;
             transform: translateY(-50%);
             position: absolute;
