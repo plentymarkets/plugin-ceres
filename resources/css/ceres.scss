@@ -15884,6 +15884,13 @@ html.ie .checkout .checkout-rightside  {
 		padding: 1rem;
 	}
 }
+
+html.ie .basket-preview-hover {
+	@include media-breakpoint-up(sm) {
+		height: 85vh;
+		min-height: 85vh;
+	}
+}
 .basket-preview
 {
 	display: -webkit-box;
@@ -17708,8 +17715,6 @@ html.ie .basket-preview .basket-item-container {
 
 
 // Pages
-.categories-list{}
-
 .page-infos{
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -17728,7 +17733,6 @@ html.ie .basket-preview .basket-item-container {
     	        flex: 1;
     }
 }
-
 
 .item-confirm-special-case-close {
   float: right;
@@ -17754,11 +17758,6 @@ html.ie .basket-preview .basket-item-container {
 	-webkit-box-direction: normal;
 	    -ms-flex-flow: row wrap;
 	        flex-flow: row wrap;
-
-//	li{
-//        @include make-col-ready(12);
-//        @include make-col(12);
-//	}
 }
 
 .lazy{
@@ -17779,7 +17778,6 @@ html.ie .basket-preview .basket-item-container {
     	li{
             -webkit-box-shadow: none;
                     box-shadow: none;
-            //@include make-col(6);
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -17792,7 +17790,6 @@ html.ie .basket-preview .basket-item-container {
     .product-list.grid{
 
         li{
-            //@include make-col(4);
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -17804,7 +17801,6 @@ html.ie .basket-preview .basket-item-container {
       .product-list.grid{
 
             li{
-                //@include make-col(3);
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
@@ -17819,6 +17815,9 @@ html.ie .basket-preview .basket-item-container {
 
 .parallax-img-container {
     height: auto;
+    max-width: none;
+    position: relative;
+    width: 100%;
 
     .parallax-text-wrapper {
         @include media-breakpoint-up(xl){
@@ -17840,20 +17839,16 @@ html.ie .basket-preview .basket-item-container {
         }
     }
 
-    &[style^='background-image'] {
-        width: 100%;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
+    .parallax-img-container-inner[style^='background-image'] {
         height: 300px;
-        max-width: none;
-        position: relative;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: top center;
 
         @include media-breakpoint-up(sm) {
             height: 350px;
-        }
-
+        }    
         @include media-breakpoint-up(md) {
             height: 400px;
         }
@@ -17862,17 +17857,12 @@ html.ie .basket-preview .basket-item-container {
             max-width: 100%;
             position: absolute;
             bottom: 0;
-            padding-right: 30px;
-
-            @include media-breakpoint-up(md) {
-                margin-right: 0;
-            }
-
+            padding-right: 30px;            
+    
             @include media-breakpoint-up(xl) {
                 max-width: 1200px;
-                padding-right: 0;
             }
-
+    
             h1 {
                 color: $category-text-color;
                 font-size: 300%;
@@ -17881,29 +17871,26 @@ html.ie .basket-preview .basket-item-container {
                 width: 100%;
                 margin-bottom: .5rem;
                 letter-spacing: 1px;
-
+    
                 @include media-breakpoint-up(sm) {
                     font-size: 400%;
                     margin: 0 0 1rem;
-                }
-
+                }    
                 @include media-breakpoint-up(md) {
                     font-size: 500%;
-                    margin-bottom: 1.5rem;
                 }
             }
-
+    
             .category-description {
                 font-size: 1rem;
                 line-height: 1.25;
                 color: $white;
                 text-shadow: 0 0 0.2em rgba(0,0,0,.75);
                 letter-spacing: 1px;
-
+    
                 @include media-breakpoint-up(sm){
                     font-size: 1.25rem;
-                }
-
+                }    
                 @include media-breakpoint-up(md) {
                     font-size: 2rem;
                 }

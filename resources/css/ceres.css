@@ -17390,6 +17390,13 @@ html.ie .checkout .checkout-rightside .basket-item-container-right .price-box {
   padding: 1rem;
 }
 
+@media (min-width: 544px) {
+  html.ie .basket-preview-hover {
+    height: 85vh;
+    min-height: 85vh;
+  }
+}
+
 .basket-preview {
   display: -ms-flexbox;
   display: flex;
@@ -19117,6 +19124,9 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
 
 .parallax-img-container {
   height: auto;
+  max-width: none;
+  position: relative;
+  width: 100%;
 }
 
 @media (min-width: 1200px) {
@@ -19139,50 +19149,40 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
   word-wrap: break-word;
 }
 
-.parallax-img-container[style^='background-image'] {
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+.parallax-img-container .parallax-img-container-inner[style^='background-image'] {
   height: 300px;
-  max-width: none;
-  position: relative;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: top center;
 }
 
 @media (min-width: 544px) {
-  .parallax-img-container[style^='background-image'] {
+  .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
     height: 350px;
   }
 }
 
 @media (min-width: 768px) {
-  .parallax-img-container[style^='background-image'] {
+  .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
     height: 400px;
   }
 }
 
-.parallax-img-container[style^='background-image'] .parallax-text-container {
+.parallax-img-container .parallax-img-container-inner[style^='background-image'] .parallax-text-container {
   max-width: 100%;
   position: absolute;
   bottom: 0;
   padding-right: 30px;
 }
 
-@media (min-width: 768px) {
-  .parallax-img-container[style^='background-image'] .parallax-text-container {
-    margin-right: 0;
-  }
-}
-
 @media (min-width: 1200px) {
-  .parallax-img-container[style^='background-image'] .parallax-text-container {
+  .parallax-img-container .parallax-img-container-inner[style^='background-image'] .parallax-text-container {
     max-width: 1200px;
-    padding-right: 0;
   }
 }
 
-.parallax-img-container[style^='background-image'] .parallax-text-container h1 {
+.parallax-img-container .parallax-img-container-inner[style^='background-image'] .parallax-text-container h1 {
   color: #fff;
   font-size: 300%;
   text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.75);
@@ -19193,20 +19193,19 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
 }
 
 @media (min-width: 544px) {
-  .parallax-img-container[style^='background-image'] .parallax-text-container h1 {
+  .parallax-img-container .parallax-img-container-inner[style^='background-image'] .parallax-text-container h1 {
     font-size: 400%;
     margin: 0 0 1rem;
   }
 }
 
 @media (min-width: 768px) {
-  .parallax-img-container[style^='background-image'] .parallax-text-container h1 {
+  .parallax-img-container .parallax-img-container-inner[style^='background-image'] .parallax-text-container h1 {
     font-size: 500%;
-    margin-bottom: 1.5rem;
   }
 }
 
-.parallax-img-container[style^='background-image'] .parallax-text-container .category-description {
+.parallax-img-container .parallax-img-container-inner[style^='background-image'] .parallax-text-container .category-description {
   font-size: 1rem;
   line-height: 1.25;
   color: #fff;
@@ -19215,13 +19214,13 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
 }
 
 @media (min-width: 544px) {
-  .parallax-img-container[style^='background-image'] .parallax-text-container .category-description {
+  .parallax-img-container .parallax-img-container-inner[style^='background-image'] .parallax-text-container .category-description {
     font-size: 1.25rem;
   }
 }
 
 @media (min-width: 768px) {
-  .parallax-img-container[style^='background-image'] .parallax-text-container .category-description {
+  .parallax-img-container .parallax-img-container-inner[style^='background-image'] .parallax-text-container .category-description {
     font-size: 2rem;
   }
 }
