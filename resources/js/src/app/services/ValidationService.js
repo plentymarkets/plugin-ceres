@@ -1,5 +1,5 @@
 import $ from "jquery";
-import {isNull, isUndefined}from "../helper/utils";
+import {isNull}from "../helper/utils";
 
 let $form;
 
@@ -205,7 +205,7 @@ function _hasValue($formControl)
 }
 
 /**
- * @param {object} $formControl - Input inside Formular
+ * @param {any} $formControl - Input inside Formular
  * @returns value is valid date
  */
 function _isValidDate($formControl)
@@ -219,20 +219,12 @@ function _isValidDate($formControl)
         return false;
     }
 
-    // Check if year,month,day is valid
-    var currentYear = new Date().getFullYear();
+    const year = match[3] || match[4];
+    const month = match[2] || match[5];
+    const day = match[1] || match[6];
 
-    // YYYY-MM-DD Format
-    if (isUndefined(match[3]))
-    {
-        if ((match[4] >= 1901 && match[4] <= currentYear) && (match[5] >= 1 && match[5] <= 12) && (match[6] >= 1 && match[6] <= 31))
-        {
-            return true;
-        }
-    }
-
-    // DD-MM-YYYY Format
-    if ((match[1] >= 1 && match[1] <= 31) && (match[2] >= 1 && match[2] <= 12) && (match[3] >= 1901 && match[3] <= currentYear))
+    // Additional checks
+    if ((year >= 1901) && (month >= 1 && month <= 12) && (day >= 1 && day <= 31))
     {
         return true;
     }
