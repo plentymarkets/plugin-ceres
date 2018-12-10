@@ -191,3 +191,12 @@
     }
 
 }
+
+/* Compatibility for IE */
+/* display img with optimal aspect ratio */
+html.ie {
+    .widget-image-box .img-cover {
+        min-height: auto;
+        min-width: auto;
+    }
+}

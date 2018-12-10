@@ -742,7 +742,7 @@
     {
         "identifier": "Ceres::LiveShoppingWidget",
         "label": "Widget.liveShoppingLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/live-shopping.svg",
         "type": "default",
         "widgetClass": "Ceres\\Widgets\\Common\\LiveShoppingWidget",
         "settings": {

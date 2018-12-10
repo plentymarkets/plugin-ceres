@@ -20607,13 +20607,20 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
   background-color: rgba(77, 79, 77, 0.9);
 }
 
+/* Compatibility for IE */
+/* display img with optimal aspect ratio */
+html.ie .widget-image-box .img-cover {
+  min-height: auto;
+  min-width: auto;
+}
+
 .widget-image-carousel.widget-proportional {
   min-height: 175px;
 }
 
 .widget-image-carousel .widget-inner {
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .widget-image-carousel .widget-inner .widget-caption {

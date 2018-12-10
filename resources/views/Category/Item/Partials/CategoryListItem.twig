@@ -49,7 +49,7 @@
             <div class="special-tags">
                 {% if  item.data.item.storeSpecial.id == 1 %}
 
-                    {% set storeSpecialColor = 'danger' %}
+                    {% set storeSpecialClasses = 'tag-offer bg-danger' %}
                     {% set percent = 0 %}
                     {% if item.data.prices.rrp is defined %}
                         {% set percent = (1 - item.data.prices.default.unitPrice.value / item.data.prices.rrp.price.value ) * -100 %}
@@ -59,28 +59,36 @@
                         {% set dezimalcount = ceresConfig.item.storeSpecial %}
                         {% set percent = percent | number_format(dezimalcount, ',', '.') %}
                         {% set storeSpecial = percent ~"%" %}
+                    {% else %}
+                        {% set storeSpecial = trans("Ceres::Template.storeSpecialOffer") %}
                     {% endif %}
 
                 {% elseif  item.data.item.storeSpecial.id == 2 %}
 
-                    {% set storeSpecialColor = 'primary' %}
+                    {% set storeSpecialClasses = 'tag-new bg-primary' %}
+                    {% set storeSpecial = trans("Ceres::Template.storeSpecialNew") %}
 
                 {% elseif  item.data.item.storeSpecial.id == 3 %}
 
-                    {% set storeSpecialColor = 'success' %}
+                    {% set storeSpecialClasses = 'tag-top bg-success' %}
+                    {% set storeSpecial = trans("Ceres::Template.storeSpecialTop") %}
+
+                {% else %}
+
+                    {% set storeSpecialClasses = 'bg-success' %}
 
                 {% endif %}
 
-                {% if item.data.variation.bundleType == "bundle" %}
+                {% if item.data.item.storeSpecial.id > 0 %}
 
-                    <span class="tag bg-info">
-                        {{ trans("Ceres::Template.itemBundle") }}
+                    <span class="tag {{ storeSpecialClasses }}">
+                        {{ storeSpecial }}
                     </span>
 
                 {% else %}
 
-                    <span class="tag bg-{{ storeSpecialColor }}">
-                        {{ storeSpecial }}
+                    <span class="tag tag-bundle bg-info">
+                        {{ trans("Ceres::Template.itemBundle") }}
                     </span>
 
                 {% endif %}

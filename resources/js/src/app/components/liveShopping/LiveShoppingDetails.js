@@ -31,6 +31,10 @@ Vue.component("live-shopping-details", {
         {
             type: Object,
             required: true
+        },
+        isActiveByStock:
+        {
+            type: Boolean
         }
     },
 
@@ -63,8 +67,8 @@ Vue.component("live-shopping-details", {
         {
             const momentNow = moment(Date.now());
 
-            this.momentBegin = moment(parseInt(this.liveShoppingData.liveShopping.fromTime) * 1000);
-            this.momentEnd = moment(parseInt(this.liveShoppingData.liveShopping.toTime) * 1000);
+            this.momentBegin = moment.unix(this.liveShoppingData.liveShopping.fromTime);
+            this.momentEnd = moment.unix(this.liveShoppingData.liveShopping.toTime);
             this.hasStarted = this.momentBegin < momentNow;
             this.hasClosed = this.momentEnd < momentNow;
 
@@ -87,10 +91,9 @@ Vue.component("live-shopping-details", {
         setQuantitySoldPercentage()
         {
             const data            = this.liveShoppingData.liveShopping;
-            const quantitySoldSum = data.quantitySold + data.quantitySoldReal;
-            const percentage      = 100 - quantitySoldSum / data.quantityMax * 100;
+            const percentage      = 100 - data.quantitySold / data.quantityMax * 100;
 
-            this.itemQuantityRemaining = data.quantityMax - quantitySoldSum;
+            this.itemQuantityRemaining = data.quantityMax - data.quantitySold;
             this.quantitySoldPercentage = percentage.toFixed(App.config.item.storeSpecial);
         },
 

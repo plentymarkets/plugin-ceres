@@ -41,8 +41,8 @@ Vue.component("live-shopping-item", {
         {
             if (!isNullOrUndefined(this.currentOffer))
             {
-                const momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
-                const momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
+                const momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
+                const momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
                 const momentNow = moment(Date.now());
 
                 return momentBegin < momentNow && momentNow < momentEnd;
@@ -57,7 +57,7 @@ Vue.component("live-shopping-item", {
             {
                 const liveShopping = this.currentOffer.liveShopping;
 
-                return liveShopping.quantitySold + liveShopping.quantitySoldReal < liveShopping.quantityMax;
+                return liveShopping.quantitySold < liveShopping.quantityMax;
             }
 
             return false;
@@ -99,13 +99,15 @@ Vue.component("live-shopping-item", {
             const itemPrices = this.currentOffer.item.prices;
             const prices = {
                 price: itemPrices.default,
-                rrp: itemPrices.rrp
+                rrp: itemPrices.rrp,
+                isRrpDefaultPrice: false
             };
 
             if (!isNullOrUndefined(itemPrices.specialOffer))
             {
                 prices.price = itemPrices.specialOffer;
                 prices.rrp = itemPrices.default || itemPrices.rrp;
+                prices.isRrpDefaultPrice = !!itemPrices.default;
             }
 
             return prices;
@@ -127,8 +129,8 @@ Vue.component("live-shopping-item", {
     {
         whenIsCurrentOffer()
         {
-            const momentBegin = moment(parseInt(this.currentOffer.liveShopping.fromTime) * 1000);
-            const momentEnd = moment(parseInt(this.currentOffer.liveShopping.toTime) * 1000);
+            const momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
+            const momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
             const momentNow = moment(Date.now());
 
             if (momentBegin < momentNow && momentNow > momentEnd)
