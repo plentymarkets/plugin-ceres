@@ -27571,6 +27571,8 @@ var _jquery = require("jquery");
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _utils = require("../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var $form = void 0;
@@ -27713,6 +27715,7 @@ function _validateSelect($formControl, validationKey) {
 }
 
 function _validateInput($formControl, validationKey) {
+
     switch (validationKey) {
         case "text":
             return _hasValue($formControl);
@@ -27720,6 +27723,8 @@ function _validateInput($formControl, validationKey) {
             return _hasValue($formControl) && _jquery2.default.isNumeric(_jquery2.default.trim($formControl.val()));
         case "ref":
             return _compareRef(_jquery2.default.trim($formControl.val()), _jquery2.default.trim($formControl.attr("data-validate-ref")));
+        case "date":
+            return _isValidDate($formControl);
         case "mail":
             return _isMail($formControl);
         case "password":
@@ -27739,6 +27744,31 @@ function _validateInput($formControl, validationKey) {
 
 function _hasValue($formControl) {
     return _jquery2.default.trim($formControl.val()).length > 0;
+}
+
+/**
+ * @param {any} $formControl - Input inside Formular
+ * @returns value is valid date
+ */
+function _isValidDate($formControl) {
+    var string = $formControl.val();
+    var match = string.match(/^(?:(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4}))|(?:(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2}))$/);
+
+    // If match is null date is not valid
+    if ((0, _utils.isNull)(match)) {
+        return false;
+    }
+
+    var year = match[3] || match[4];
+    var month = match[2] || match[5];
+    var day = match[1] || match[6];
+
+    // Additional checks
+    if (year >= 1901 && month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+        return true;
+    }
+
+    return false;
 }
 
 /**
@@ -27790,7 +27820,7 @@ function _eval(input) {
 
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
-},{"jquery":3}],263:[function(require,module,exports){
+},{"../helper/utils":251,"jquery":3}],263:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
