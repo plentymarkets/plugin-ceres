@@ -85,18 +85,12 @@ Vue.component("item-filter-list", {
             selectedFacets = urlParams.facets.split(",");
         }
 
-        if ("showFilter" in urlParams)
-        {
-            this.isActive = true;
-            UrlService.removeUrlParam("showFilter");
-        }
-
         if (urlParams.priceMin || urlParams.priceMax)
         {
             const priceMin = urlParams.priceMin || "";
             const priceMax = urlParams.priceMax || "";
 
-            this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax, showFilter: true});
+            this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
 
             selectedFacets.push("price");
         }

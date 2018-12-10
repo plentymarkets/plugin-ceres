@@ -140,7 +140,7 @@ const mutations =
 
 const actions =
     {
-        selectFacetNew({state, dispatch, commit, getters, rootState}, {facetValue, showFilter})
+        selectFacetNew({state, dispatch, commit, getters, rootState}, {facetValue})
         {
             commit("setIsItemListLoading", true);
 
@@ -174,7 +174,7 @@ const actions =
                 });
         },
 
-        selectFacet({dispatch, commit}, {facetValue, showFilter})
+        selectFacet({dispatch, commit}, {facetValue})
         {
             if (facetValue.id === "price")
             {
@@ -187,24 +187,14 @@ const actions =
 
             commit("setItemListPage", 1);
 
-            if (showFilter)
-            {
-                setUrlParam({showFilter: null});
-            }
-
             dispatch("loadItemList");
         },
 
-        selectPriceFacet({dispatch, commit}, {priceMin, priceMax, showFilter})
+        selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
         {
             commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
             commit("setPriceFacetTag");
             commit("setItemListPage", 1);
-
-            if (showFilter)
-            {
-                setUrlParam({showFilter: null});
-            }
 
             dispatch("loadItemList");
         },
