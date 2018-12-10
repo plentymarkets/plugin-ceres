@@ -210,8 +210,8 @@ function _hasValue($formControl)
  */
 function _isValidDate($formControl)
 {
-    var string = $formControl.val();
-    var match = string.match(/^(?:(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4}))|(?:(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2}))$/);
+    const string = $formControl.val();
+    const match = string.match(/^(?:(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4}))|(?:(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2}))$/);
 
     // If match is null date is not valid
     if (isNull(match))
