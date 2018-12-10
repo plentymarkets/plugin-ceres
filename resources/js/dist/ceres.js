@@ -22320,6 +22320,8 @@ Vue.component("single-item", {
 },{}],177:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _util = require("util");
 
 var _dom = require("../../helper/dom");
@@ -22353,50 +22355,72 @@ Vue.component("variation-select", {
     },
 
 
-    computed: Vuex.mapState({
+    computed: _extends({
+        hasEmptyOption: function hasEmptyOption() {
+            var _this = this;
+
+            var hasEmptyVariation = this.variations.some(function (variation) {
+                return variation.attributes.length <= 0;
+            });
+
+            if (hasEmptyVariation) {
+                // main variation is selectable
+                return true;
+            }
+
+            // Check if all possible combinations can be selected or if an empty option is required to reset the current selection
+            var attributeCombinationCount = Object.keys(this.attributes).map(function (attributeId) {
+                return Object.keys(_this.attributes[attributeId].values).length;
+            }).reduce(function (prod, current) {
+                return prod * current;
+            }, 1);
+
+            return attributeCombinationCount * Object.keys(this.variationUnits).length !== this.variations.length;
+        }
+    }, Vuex.mapState({
         currentVariation: function currentVariation(state) {
             return state.item.variation;
         }
-    }),
+    })),
 
     created: function created() {
         this.$options.template = this.template;
     },
     mounted: function mounted() {
-        var _this = this;
+        var _this2 = this;
 
         this.$nextTick(function () {
             // initialize selected attributes to be tracked by change detection
             var attributes = {};
 
-            for (var attributeId in _this.attributes) {
+            for (var attributeId in _this2.attributes) {
                 attributes[attributeId] = null;
             }
-            _this.selectedAttributes = attributes;
+            _this2.selectedAttributes = attributes;
 
             // set attributes of preselected variation if exists
-            if (_this.preselect) {
+            if (_this2.preselect) {
                 // find variation by id
-                var preselectedVariation = _this.variations.filter(function (variation) {
+                var preselectedVariation = _this2.variations.filter(function (variation) {
                     // eslint-disable-next-line eqeqeq
-                    return variation.variationId == _this.preselect;
+                    return variation.variationId == _this2.preselect;
                 });
 
                 if (!!preselectedVariation && preselectedVariation.length === 1) {
-                    var _attributes = _this.attributes;
+                    var _attributes = _this2.attributes;
 
                     // set attributes of preselected variation
-                    _this.setAttributes(preselectedVariation[0]);
+                    _this2.setAttributes(preselectedVariation[0]);
 
-                    if (preselectedVariation[0].attributes.length > 0 && _this.unitPreselect > 0 || _attributes.length === 0) {
-                        var possibleVariations = _this.filterVariations(_this.selectedAttributes);
+                    if (preselectedVariation[0].attributes.length > 0 && _this2.unitPreselect > 0 || _attributes.length === 0) {
+                        var possibleVariations = _this2.filterVariations(_this2.selectedAttributes);
 
                         if (possibleVariations.length > 1) {
-                            _this.setUnits(possibleVariations);
-                            _this.selectedUnitId = _this.unitPreselect;
-                        } else if (_this.variations.length > 1 && _this.attributes.length === 0) {
-                            _this.setUnits(_this.variations);
-                            _this.selectedUnitId = _this.unitPreselect;
+                            _this2.setUnits(possibleVariations);
+                            _this2.selectedUnitId = _this2.unitPreselect;
+                        } else if (_this2.variations.length > 1 && _this2.attributes.length === 0) {
+                            _this2.setUnits(_this2.variations);
+                            _this2.selectedUnitId = _this2.unitPreselect;
                         }
                     }
                 }
@@ -22413,7 +22437,7 @@ Vue.component("variation-select", {
          * @returns {array}                    A list of matching variations.
          */
         filterVariations: function filterVariations(attributes) {
-            var _this2 = this;
+            var _this3 = this;
 
             attributes = attributes || this.selectedAttributes;
             return this.variations.filter(function (variation) {
@@ -22426,9 +22450,9 @@ Vue.component("variation-select", {
                     }
                 }
 
-                return variation.attributes.length > 0 || _this2.possibleUnitIds.length > 0;
+                return variation.attributes.length > 0 || _this3.possibleUnitIds.length > 0;
             }).filter(function (variation) {
-                return _this2.selectedUnitId === 0 || _this2.selectedUnitId === variation.unitCombinationId;
+                return _this3.selectedUnitId === 0 || _this3.selectedUnitId === variation.unitCombinationId;
             });
         },
 
@@ -22516,7 +22540,7 @@ Vue.component("variation-select", {
             }
         },
         setVariation: function setVariation(variationId) {
-            var _this3 = this;
+            var _this4 = this;
 
             if (VariationData[variationId]) {
                 // reuse cached variation data
@@ -22536,11 +22560,11 @@ Vue.component("variation-select", {
                     // store received variation data for later reuse
                     VariationData[variationId] = response;
 
-                    _this3.$store.commit("setVariation", response);
+                    _this4.$store.commit("setVariation", response);
 
                     document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
 
-                    _this3.$emit("is-valid-change", true);
+                    _this4.$emit("is-valid-change", true);
                 });
             }
         },

@@ -19493,6 +19493,15 @@ html.ie .basket-preview .basket-item-container {
     }
 
 }
+
+/* Compatibility for IE */
+/* display img with optimal aspect ratio */
+html.ie {
+    .widget-image-box .img-cover {
+        min-height: auto;
+        min-width: auto;
+    }
+}
 @mixin widget-carousel-variant($parent, $color)
 {
     .widget-image-carousel#{$parent}
@@ -19534,8 +19543,8 @@ html.ie .basket-preview .basket-item-container {
 
     .widget-inner
     {
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
 
         .widget-caption
         {
