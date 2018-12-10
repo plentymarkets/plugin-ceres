@@ -7,7 +7,7 @@
         <div class="basket-preview-hover-wrapper-inner">
             <div class="basket-preview-hover" :class="{ 'empty': !basketItems.length }">
 
-                <header class="basket-header m-b-2 hidden-lg-up">
+                <header class="basket-header m-b-2 d-lg-none">
                     <div class="d-inline-block m-a-0 h3">{{ trans("Ceres::Template.basketPreview") }}</div>
                     <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
