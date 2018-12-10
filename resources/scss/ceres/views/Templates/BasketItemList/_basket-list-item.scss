@@ -244,62 +244,93 @@
 }
 
 /* Compatibility for IE */
-html.ie .checkout .checkout-rightside  {
+html.ie .wrapper-main .basket-item-container {
 
 	// Position absolute
 	.meta-container-wrapper-inner {
 		display: block;
-		position: relative;
-	}
-	
-	.meta-container {
-		position: absolute;
-		left: 0px;
-		right: 55%;
+
+		.meta-container {
+			float: left;
+			width: 65%;
+			display: block;
+		}
 	}
 
 	.basket-item-container-right {
-		display: flex;
-		position: absolute;
-		right: 0px;
-		left: 45%;
+        width: 35%;
+        display: block;
 
-		.qty-box-container {
-			margin: 0 0 0 auto;
-		}
-		.price-box {
-			margin-left: 5px;
-			min-width: 80px;
-		}
+        // Align childs right
+        .qty-box-container {
+            margin-right: 0;
+
+            .qty-box {
+                margin: 0 0 5px 0;
+    
+                .qty-input {
+                    margin-left: auto;
+                }
+            }
+        }
+        .price-box {
+            min-width: 80px;
+        }
 	}
 
-	// Arrange on top of each other
-	@include media-breakpoint-down(lg) {
+	// For Basket-Preview and Basket
+	@include media-breakpoint-down(sm) {
 		.meta-container-wrapper-inner {
-
+			display: block;
+	
 			.meta-container {
-				position: relative;
-				left: auto;
-				right: auto;
 				margin-bottom: 10px;
+				width: 100%;
 			}
-
+	
+			// Initialise width
 			.basket-item-container-right {
-				position: relative;
-				right: auto;
-				left: auto;
-
+				width: 100%;
+				display: flex;
+				// Arrange to the right
+				.qty-box-container {
+					margin-left: auto;
+					margin-right: 0px;
+				}
 				.price-box {
 					margin-left: 10px;
+					min-width: 80px;
 				}
 			}
-		}
-	}
-
-	@include media-breakpoint-only(sm) {
-		.meta-container {
-			position: absolute !important;
-		}
+		}	
 	}
 }
 
+// For Checkout
+html.ie .wrapper-main .checkout .checkout-rightside .basket-item-container .basket-item {
+	@include media-breakpoint-down(lg) {
+		.meta-container-wrapper-inner {
+			display: block;
+	
+			.meta-container {
+				margin-bottom: 10px;
+				width: 100%;
+			}
+	
+			// Initialise width
+			.basket-item-container-right {
+				width: 100%;
+				display: flex;
+				// Arrange to the right
+				.qty-box-container {
+					margin-left: auto;
+					margin-right: 0px;
+				}
+				.price-box {
+					margin-left: 10px;
+					min-width: 80px;
+				}
+			}
+		}	
+	}
+}
