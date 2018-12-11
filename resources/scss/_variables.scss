@@ -107,7 +107,7 @@ $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
 $font-family-heading:     $font-family-sans-serif;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
-$font-size-base: .875rem !default;
+$font-size-root: 14px;
 
 $h1-font-size: 2rem !default;
 $h2-font-size: 1.8rem !default;
