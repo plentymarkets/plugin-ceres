@@ -77,7 +77,7 @@
 				padding: .4rem;
 				color: $white;
 				&:hover {
-					background:$brand-primary;
+					background:$primary;
 					color: $white;
 				}
 
@@ -92,7 +92,7 @@
 
 			&.active{
 				a{
-					background-color:$brand-primary;
+					background-color:$primary;
 
 					&.is-disabled{
 						background-color:$gray-dark;

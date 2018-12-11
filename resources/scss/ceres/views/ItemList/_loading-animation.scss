@@ -53,7 +53,7 @@
 }
 
 .loading-animation > div {
-  background-color: $brand-primary;
+  background-color: $primary;
   height: 100%;
   width: 18px;
   display: inline-block;
@@ -123,7 +123,7 @@
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: $brand-primary;
+  background-color: $primary;
   border-radius: 100%;
   -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
   animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;

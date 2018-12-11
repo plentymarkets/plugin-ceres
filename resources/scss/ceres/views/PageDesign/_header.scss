@@ -51,7 +51,7 @@
 				}
 		
 				.search-submit {
-					color: $brand-primary;
+					color: $primary;
 					border: none;
 					font-size: 1.3rem;
 					line-height: 1;
@@ -96,7 +96,7 @@
 					color: $gray-lighter;
 	
 					&[aria-expanded="true"] {
-						background-color: $brand-primary;
+						background-color: $primary;
 						color: $white;
 					}
 				}
@@ -115,7 +115,7 @@
 
 					&[aria-expanded="true"],
 					&:hover{
-						background-color: $brand-primary;
+						background-color: $primary;
 						color: $white;
 					}
 				}
@@ -190,7 +190,7 @@
 							color: $white;
 							background-color: $gray-darker;
 							&:hover {
-								background-color: $brand-primary;
+								background-color: $primary;
 							}
 	
 							& > .fa-user {
@@ -331,7 +331,7 @@
 						}
 					}
 					.dropdown-menu {
-						background:$brand-primary;
+						background:$primary;
 						border:0;
 						border-left:0;
 						border-right:0;
@@ -345,7 +345,7 @@
 						    border-bottom: .5em solid;
 						    border-right: .5em solid transparent;
 						    border-left: .5em solid transparent;
-						    color: $brand-primary;
+						    color: $primary;
 						    position: absolute;
 						    top: -.5em;
 						    left: 50%;
@@ -356,7 +356,7 @@
 							font-size: .9rem;
 							padding: .75rem 1rem !important;
 							&:hover {
-								background: darken($brand-primary, 10%);
+								background: darken($primary, 10%);
 								color: white;
 							}
 						}
@@ -541,7 +541,7 @@
 	.navbar-nav{
 		&>.nav-item{
 			&>.nav-link{
-				padding: $nav-link-padding;
+				padding: $nav-link-padding-y $nav-link-padding-x;
 			}
 		}
 	}

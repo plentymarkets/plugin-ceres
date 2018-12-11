@@ -2,7 +2,7 @@
 	.basket-item {
 		a {
 			padding: 0;
-			color: $brand-primary;
+			color: $primary;
 			
 			&:hover {
 				color: darken($top-bar-basket-btn, 10%);
@@ -142,7 +142,7 @@
 					cursor: pointer;
 					padding: 0;
 					background: none;
-					color: $brand-danger;
+					color: $danger;
 					border: none;
 
 					&.disabled {

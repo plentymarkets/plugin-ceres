@@ -89,7 +89,7 @@
         }  
         
         & i {
-            color: $brand-success;
+            color: $success;
         }
     }
 
@@ -104,7 +104,7 @@
         transition: border-color .3s ease-out;
 
         &.active {
-            border-color: $brand-success;
+            border-color: $success;
         }
     }
 }
@@ -220,20 +220,20 @@
                     background-color: $gray-lighter;
 
                     &.error {
-                        // background-color: lighten($brand-danger, 25%);
-                        background-color: mix($brand-danger, $gray-lighter);
-                        border-color: mix(lighten($brand-danger, 25%), $gray-lighter);
+                        // background-color: lighten($danger, 25%);
+                        background-color: mix($danger, $gray-lighter);
+                        border-color: mix(lighten($danger, 25%), $gray-lighter);
                     }
                 }
 
                 &.highlight {
-                    background-color: $brand-primary;
-                    border-color: lighten($brand-primary, 25%);
+                    background-color: $primary;
+                    border-color: lighten($primary, 25%);
                 }
 
                 &.error {
-                    background-color: $brand-danger;
-                    border-color: lighten($brand-danger, 25%);
+                    background-color: $danger;
+                    border-color: lighten($danger, 25%);
                 }
             }
         }

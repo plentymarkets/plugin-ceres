@@ -147,18 +147,18 @@ $border-width: 1px;
 
 	&.error{
 		z-index: $zIndex-1;
-    	border-color: $brand-danger;
+    	border-color: $danger;
 
 		input{
-        	color: $brand-danger;
+        	color: $danger;
 		}
 
         label{
-            color: $brand-danger;
+            color: $danger;
         }
 
         i{
-            background-color: $brand-danger;
+            background-color: $danger;
             color: white;
         }
 
@@ -166,18 +166,18 @@ $border-width: 1px;
 
     &.success{
     	z-index: $zIndex-1;
-    	border-color: $brand-success;
+    	border-color: $success;
 
     	input{
-        	color: $brand-success;
+        	color: $success;
 		}
 
         label{
-            color:$brand-success;
+            color:$success;
         }
 
         i{
-            background-color:$brand-success;
+            background-color:$success;
             color: white;
         }
         
@@ -219,19 +219,19 @@ $border-width: 1px;
             height: 18px;
             font-weight: 300;
             background-color: $border-color;
-            color: $text-color;
+            color: $body-color;
         }
     }
     
     &.success .input-unit-btn,
     &.success .input-unit-btn i {
-        background-color: $brand-success;
+        background-color: $success;
         color: #fff;
     }
     
     &.error .input-unit-btn,
     &.error .input-unit-btn i {
-        background-color: $brand-danger;
+        background-color: $danger;
         color: #fff;
     }
 }
@@ -260,7 +260,7 @@ $border-width: 1px;
   transition: all .3s ease;
 
   &.error {
-    background: $brand-danger !important;
+    background: $danger !important;
     color: $white !important;
     border-radius: .1rem;
     transition: all .3s ease;

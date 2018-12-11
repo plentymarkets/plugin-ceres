@@ -29,17 +29,17 @@ html.safari {
 	}
 
 	& .popper-title {
-		padding: $popover-title-padding-y $popover-title-padding-x;
+		padding: $popover-header-padding-y $popover-header-padding-x;
 		margin: 0;
 		font-size: 1rem;
-		background-color: $popover-title-bg;
+		background-color: $popover-header-bg;
 		border-bottom: $border-width solid #ebebeb;
 		border-radius: .12857rem .12857rem 0 0;
 		text-align: center;
 	}
 
 	& .popper-content {
-		padding: $popover-content-padding-y $popover-content-padding-x;
+		padding: $popover-body-padding-y $popover-body-padding-x;
 		line-height: 1.5;
 		font-size: .875rem;
 		word-wrap: break-word;
@@ -90,7 +90,7 @@ html.safari {
 
 			&:after {
 				border-top-width: 0;
-				border-bottom-color: $popover-title-bg;
+				border-bottom-color: $popover-header-bg;
 				left: -10px;
 				bottom: -11px;
 			}

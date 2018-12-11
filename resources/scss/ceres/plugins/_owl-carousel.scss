@@ -385,7 +385,7 @@ Custom classes
     }
     &:hover {
       opacity: 1 !important;
-      i {color:$brand-primary;}
+      i {color:$primary;}
     }
   }
   .owl-single-item-control {
@@ -426,7 +426,7 @@ Custom classes
     margin:.5rem .5rem 0 0;
     &.active,
     &:hover {
-      border:1px solid $brand-primary;
+      border:1px solid $primary;
       cursor: pointer;
     }
 

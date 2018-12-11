@@ -31,7 +31,7 @@
 
 	.form-check-label {
 		&.error {
-			background: $brand-danger !important;
+			background: $danger !important;
 			color: $white !important;
 			border-radius: .1rem;
 			transition: all .3s ease;

@@ -1,13 +1,13 @@
-@mixin widget-bg-variant($color, $text-color: #fff)
+@mixin widget-bg-variant($color, $body-color: #fff)
 {
-    color: $text-color;
+    color: $body-color;
     background-color: $color;
 }
 
-@mixin widget-bg-pseudo($color, $text-color: #fff)
+@mixin widget-bg-pseudo($color, $body-color: #fff)
 {
     position: relative;
-    color: $text-color;
+    color: $body-color;
 
     &:before {
         content: '';
