@@ -116,12 +116,6 @@ Vue.component("item-filter-list", {
 
                 this.isActive = !this.isActive;
             }, 300);
-        },
-
-        resetAllSelectedFacets()
-        {
-            this.$store.commit("resetAllSelectedFacets");
-            this.$store.dispatch("loadItemList");
         }
     }
 });

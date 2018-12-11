@@ -20,6 +20,12 @@ Vue.component("item-filter-tag-list", {
         removeTag(tag)
         {
             this.$store.dispatch("selectFacet", {facetValue: tag});
+        },
+
+        resetAllTags()
+        {
+            this.$store.commit("resetAllSelectedFacets");
+            this.$store.dispatch("loadItemList");
         }
     }
 });

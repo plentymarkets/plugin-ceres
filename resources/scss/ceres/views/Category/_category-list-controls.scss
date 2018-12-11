@@ -27,14 +27,15 @@
             &:hover {
                 color: $brand-danger;
             }
-        }
-    }
 
-    a.filter-reset-all {
-        color: $link-color;
+            &.reset-all {
+                color: $white;
+                background-color: $brand-primary;
 
-        &:hover {
-            color: $link-hover-color;
+                &:hover {
+                    background-color: darken($brand-primary, 15%);
+                }
+            }
         }
     }
 
@@ -130,7 +131,7 @@
             display: inline-block;
         }
 
-        .filter-controls {
+        .filter-toggle {
             top: 50%;
             transform: translateY(-50%);
             position: absolute;
