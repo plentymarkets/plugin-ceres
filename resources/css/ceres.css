@@ -19055,12 +19055,13 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
   color: #d9534f;
 }
 
-.list-controls a.filter-reset-all {
-  color: #008ebd;
+.list-controls .selected-filters .selected-filter.reset-all {
+  color: #fff;
+  background-color: #008ebd;
 }
 
-.list-controls a.filter-reset-all:hover {
-  color: #005571;
+.list-controls .selected-filters .selected-filter.reset-all:hover {
+  background-color: #005571;
 }
 
 .list-controls .filter-toggle {
@@ -19159,7 +19160,7 @@ html.ie .basket-preview .basket-item-container .basket-item-container-right .qty
   .list-controls .list-itemsperpage {
     display: inline-block;
   }
-  .list-controls .filter-controls {
+  .list-controls .filter-toggle {
     top: 50%;
     transform: translateY(-50%);
     position: absolute;

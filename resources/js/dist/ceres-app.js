@@ -22958,10 +22958,6 @@ Vue.component("item-filter-list", {
 
                 _this2.isActive = !_this2.isActive;
             }, 300);
-        },
-        resetAllSelectedFacets: function resetAllSelectedFacets() {
-            this.$store.commit("resetAllSelectedFacets");
-            this.$store.dispatch("loadItemList");
         }
     }
 });
@@ -23051,6 +23047,10 @@ Vue.component("item-filter-tag-list", {
     methods: {
         removeTag: function removeTag(tag) {
             this.$store.dispatch("selectFacet", { facetValue: tag });
+        },
+        resetAllTags: function resetAllTags() {
+            this.$store.commit("resetAllSelectedFacets");
+            this.$store.dispatch("loadItemList");
         }
     }
 });
