@@ -75,7 +75,7 @@
                         <span :content="currentVariation.prices.default.currency"></span>
                     </span>
 
-                    <div class="base-price text-muted m-y-1" v-if="currentVariation.unit">
+                    <div class="base-price text-muted my-3" v-if="currentVariation.unit">
                         <div>
                             {{ trans("Ceres::Template.singleItemContent") }}
                             <span>${ currentVariation.unit.content | numberFormat }</span>
@@ -97,7 +97,7 @@
                         </span>
                     </span>
 
-                    <div class="row m-y-1">
+                    <div class="row my-3">
                         <slot name="BeforeAddToBasket"></slot>
 
                         {{ AddToBasket.printVueComponent(
@@ -133,7 +133,7 @@
                 </div>
 
                 <!-- ITEM DESCRIPTION -->
-                <div class="col-md-7 m-y-3">
+                <div class="col-md-7 my-5">
                     <ul class="nav nav-tabs" role="tablist">
                         {% if 'item.description' in itemData or 'all' in itemData %}
                             <li class="nav-item" v-if="isDescriptionTabActive">
@@ -157,20 +157,20 @@
                     <div class="tab-content">
                         {% if 'item.description' in itemData or 'all' in itemData %}
                             <div class="tab-pane active" :id="'details-' + currentVariation.variation.id" role="tabpanel" v-if="isDescriptionTabActive">
-                                <div class="m-y-2" v-html="currentVariation.texts.description">
+                                <div class="my-4" v-html="currentVariation.texts.description">
                                 </div>
                             </div>
                         {% endif %}
 
                         {% if 'item.technical_data' in itemData or 'all' in itemData %}
                             <div :class="{ 'active': !isDescriptionTabActive && isTechnicalDataTabActive }" class="tab-pane" :id="'data-' + currentVariation.variation.id" role="tabpanel" v-if="isTechnicalDataTabActive">
-                                <div class="m-y-2" v-html="currentVariation.texts.technicalData">
+                                <div class="my-4" v-html="currentVariation.texts.technicalData">
                                 </div>
                             </div>
                         {% endif %}
 
                         <div :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="tab-pane" id="assessments-details" role="tabpanel">
-                            <div class="m-y-2">
+                            <div class="my-4">
                                 <table class="table table-striped table-hover table-sm">
                                     <tbody>
                                     {% if 'item.id' in itemData or 'all' in itemData %}

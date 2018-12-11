@@ -231,7 +231,7 @@
             {% set homepageContainer5 = LayoutContainer.show("Ceres::Homepage.Container5") %}
 
             {% if category1.details is not empty or homepageContainer4 | trim is not empty or category2.details is not empty or homepageContainer5 | trim is not empty %}
-                <div class="row prop-row m-y-2 sale-new">
+                <div class="row prop-row my-4 sale-new">
                     {% if category1.details is not empty or homepageContainer4 | trim is not empty %}
                         <div class="col-xs-{% if category2 is empty and homepageContainer5 | trim is empty %}12{% else %}6{% endif %}">
                             <div class="prop-xs-6-4 prop-md-3-1">
@@ -316,7 +316,7 @@
             {% set homepageContainer7 = LayoutContainer.show("Ceres::Homepage.Container7") %}
             {% set homepageContainer8 = LayoutContainer.show("Ceres::Homepage.Container8") %}
             {% if category4.details is not empty or homepageContainer7 | trim is not empty or category5.details is not empty or homepageContainer8 | trim is not empty %}
-                <div class="row prop-row m-y-2 featured-categories">
+                <div class="row prop-row my-4 featured-categories">
                     {% if category4.details is not empty or homepageContainer7 | trim is not empty %}
                         <div class="col-xs-12 col-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}8{% else %}12{% endif %}">
                             <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}2{% else %}3{% endif %}-1">
