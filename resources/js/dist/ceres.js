@@ -27300,7 +27300,7 @@ function _updateCategoryTexts(currentCategory) {
 
 function _loadOptionalData(currentCategory) {
     var categoryImage = currentCategory.details[0].imagePath;
-    var parallaxImgContainer = document.querySelector(".parallax-img-container");
+    var parallaxImgContainer = document.querySelector(".parallax-img-container-inner");
 
     if (parallaxImgContainer) {
         if (categoryImage) {
