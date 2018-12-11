@@ -136,4 +136,7 @@ SassResolver.prototype.bundle = function( targetFile )
 console.log("Start bundling scss");
 var resolverBootstrap = new SassResolver('resources/scss/Ceres.scss');
 resolverBootstrap.bundle('resources/css/ceres.scss');
+
+var resolverBootstrapLegacy = new SassResolver('resources/scss/Ceres_legacy.scss');
+resolverBootstrapLegacy.bundle('resources/css/ceres-legacy.scss');
 console.log("=> done!");

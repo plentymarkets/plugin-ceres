@@ -26,7 +26,7 @@
                 <!-- ORDER PAGINATION -->
                 {% if orderList.lastPageNumber > 1 %}
                 <div class="clearfix history-pagination">
-                    <div class="pull-xs-left counter">
+                    <div class="float-xs-left counter">
                         {{ trans("Ceres::Template.orderHistoryShow", {"countStart": orderList.firstOnPage, "countEnd": orderList.lastOnPage, "orderMaxCount": orderList.totalsCount }) }}
                     </div>
                     {% include "Ceres::Category.Item.Partials.Pagination" %}

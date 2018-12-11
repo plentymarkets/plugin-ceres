@@ -38,13 +38,13 @@
 					<div class="modal-footer">
 						<div class="row">
 							 <div class="col-sm-3 offset-sm-6">
-								<button type="button" data-dismiss="modal" class="btn btn-secondary btn-block pull-xs-right btn-medium">
+								<button type="button" data-dismiss="modal" class="btn btn-secondary btn-block float-xs-right btn-medium">
 									<i class="fa fa-times" aria-hidden="true"></i>
 									{{ trans("Ceres::Template.returnCancel") }}
 								</button>		
 							</div>
 							 <div class="col-sm-3">
-								<button :disabled="isLoading" @click="sendReturnItems()" type="button" class="btn btn-primary btn-block pull-xs-right btn-medium">
+								<button :disabled="isLoading" @click="sendReturnItems()" type="button" class="btn btn-primary btn-block float-xs-right btn-medium">
 									<i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
 									{{ trans("Ceres::Template.returnConfirm") }}
 								</button>

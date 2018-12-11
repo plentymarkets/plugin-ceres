@@ -25,7 +25,7 @@
                 </span>
             </div>
 
-            <div class="btn pull-right" @click="slideTo(activeSlide + 1)" :class="{'btn-primary': activeSlide < sortedGroupedProperties.length - 1, 'btn-secondary disabled': activeSlide >= sortedGroupedProperties.length - 1 }" tabindex="0">
+            <div class="btn float-right" @click="slideTo(activeSlide + 1)" :class="{'btn-primary': activeSlide < sortedGroupedProperties.length - 1, 'btn-secondary disabled': activeSlide >= sortedGroupedProperties.length - 1 }" tabindex="0">
                 <span class="fa fa-chevron-right"></span>
             </div>
         </div>

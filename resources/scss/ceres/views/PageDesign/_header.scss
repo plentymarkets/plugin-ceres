@@ -265,6 +265,10 @@
 				color: $top-bar-basket-color;
 
 				.badge{
+					font-size: inherit;
+					padding: 0;
+					line-height: inherit;
+					font-weight: inherit;
 					margin-left: .5rem;
 				}
 
@@ -456,16 +460,22 @@
 
 @include media-breakpoint-up(sm){
 
-	.top-bar{
-		.controls-list{
-			width: auto;
-			float:right;
+	.top-bar
+	{
+		.row
+		{
+			flex-direction: row-reverse;
+		}
 
-			&>li{
+		.controls-list
+		{
+			&>li
+			{
 				// default font size for all items
 				font-size: .8rem;
 
-				.fa:not(.qty-sign){
+				.fa:not(.qty-sign)
+				{
 					// icons should be slightly larger
 					font-size: 1rem;
 					line-height: .8rem;

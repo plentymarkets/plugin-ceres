@@ -19,7 +19,7 @@
     <div class="container-max">
         <div class="row">
             <div class="brand-wrapper">
-                <a class="navbar-brand pull-lg-left" href="{{ Twig.print('urls.home') }}">
+                <a class="navbar-brand float-lg-left" href="{{ Twig.print('urls.home') }}">
                     <img alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}" src="{{ companyLogoUrl }}" class="img-fluid" crossorigin="anonymous" />
                 </a>
 
@@ -34,7 +34,7 @@
                 </ul>
 
 
-                <ul class="mainmenu pull-lg-right">
+                <ul class="mainmenu float-lg-right">
                     {{ Twig.print(Twig.call("Tree.get_nav_bar", [Twig.var("categories"), "", megaMenuLevels, megaMenuMaxItems])) }}
                 </ul>
             </div>
