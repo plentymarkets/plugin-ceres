@@ -12,7 +12,7 @@
 
                     <div class="item-inner" v-bind:class="{'error': showError}">
                         <span v-if="selectedAddress && selectedAddress.id == -99">
-                            <p class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
+                            <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                         </span>
                         <span v-else class="item-content">
                             <div v-if="!isAddressListEmpty && selectedAddress">
@@ -25,10 +25,10 @@
                             </div>
 
                             <p v-if="!isAddressListEmpty && !selectedAddress"
-                            class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressPleaseSelect") }}
+                            class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressPleaseSelect") }}
                                 </p>
                             <p v-if="isAddressListEmpty"
-                            class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressNoAddress") }}
+                            class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressNoAddress") }}
                                 </p>
                         </span>
                     </div>
@@ -54,7 +54,7 @@
                             >
                             <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
                             <span v-if="address.id == -99">
-                                <p class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressSameAsInvoice") }}
+                                <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}
                                     </p>
                             </span>
                                 <span v-else class="item-content small">

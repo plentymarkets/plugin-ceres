@@ -26,13 +26,13 @@
 			<div class="row">
 
                 {% if contactConfigSet %}
-					<div class="col-xs-12 {% if googleApiKey %}col-md-6 p-t-2 {% else %}col-sm-12 col-md-4 col-lg-3 {% endif %}p-b-3">
+					<div class="col-xs-12 {% if googleApiKey %}col-md-6 pt-4 {% else %}col-sm-12 col-md-4 col-lg-3 {% endif %}pb-5">
 					{% include "Ceres::Customer.Components.Contact.ContactCard" %}
 					</div>
                 {% endif %}
 
                 {% if googleApiKey and contactConfigSet %}
-					<div class="col-xs-12 col-md-6 p-b-3 p-t-2{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
+					<div class="col-xs-12 col-md-6 pb-5 pt-4{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
 						<contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
 					</div>
                 {% endif %}
