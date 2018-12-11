@@ -23,7 +23,7 @@
         <div class="footer-features p-y-1 container-max">
             <div class="row">
                 {% for i in 1..numberOfFeatures %}
-                    <div class="col-xs-12 col-sm-4 text-xs-center">
+                    <div class="col-xs-12 col-sm-4 text-center">
                         <i class="fa fa-check text-success" aria-hidden="true"></i>
                         {{ trans('Ceres::Template.footerStoreFeature' ~ i) }}
                     </div>
@@ -109,7 +109,7 @@
         </div>            
 
         {% set cat = services.category.get(config('Ceres.global.category.legal_disclosure')) %}
-        <div class="copyright text-xs-center my-3">
+        <div class="copyright text-center my-3">
             <div class="static-link-list">
                 {% autoescape false %}
                     <a href="{{ urls.cancellationRights }}">{{ trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
