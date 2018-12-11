@@ -19,7 +19,7 @@
                     <h1 class="print-header">{{ trans("Ceres::Template.cancellationForm", {"hyphen": "&shy;"}) }}</h1>
                 {% endautoescape %}
 
-                <hr class="m-y-3">
+                <hr class="my-5">
 
                 {% if withdrawalForm.htmlText %}
                     {{ withdrawalForm.htmlText | raw }}
@@ -29,7 +29,7 @@
 
                 {{ LayoutContainer.show("Ceres::StaticPages.CancellationForm") }}
 
-				<hr class="m-y-3 no-print">
+				<hr class="my-5 no-print">
 
 				<div class="col-xs-12 col-md-12 no-padding no-print">
 					<button type="submit" class="btn btn-primary btn-medium float-right" onclick="window.print()">

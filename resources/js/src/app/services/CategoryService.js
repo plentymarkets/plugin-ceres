@@ -81,7 +81,7 @@ function _updateCategoryTexts(currentCategory)
 function _loadOptionalData(currentCategory)
 {
     const categoryImage = currentCategory.details[0].imagePath;
-    const parallaxImgContainer = document.querySelector(".parallax-img-container");
+    const parallaxImgContainer = document.querySelector(".parallax-img-container-inner");
 
     if (parallaxImgContainer)
     {

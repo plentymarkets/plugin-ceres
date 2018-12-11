@@ -17,7 +17,7 @@
         <hr>
         <div class="row">
             {% set loggedIn = frontend.Account.getIsAccountLoggedIn %}
-            <div class="col-xs-6 col-md-4 {% if loggedIn %}offset-md-2{% else %}offset-xs-3 offset-md-4{% endif %}">
+            <div class="col-xs-6 col-md-4 {% if loggedIn %}offset-md-2{% else %}offset-3 offset-md-4{% endif %}">
                 <a href="{{ homepageURL }}" type="" class="btn btn-primary btn-block bg-primary">{{ trans("Ceres::Template.returnConfirmationHomepage") }}</a>
             </div>
 
