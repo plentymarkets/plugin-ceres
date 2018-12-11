@@ -13,7 +13,7 @@ body .wrapper-main{
 }
 
 .page-content{
-    @extend .p-t-1;
+    @extend .pt-3;
     background-color: $gray-lightest;
     &.basket,
     &.checkout,

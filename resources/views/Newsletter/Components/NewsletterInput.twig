@@ -16,7 +16,7 @@
                         <input type="text" :id="'first-name-input_' + _uid" v-model="firstName">
                     </div>
                 </div>
-                <div class="col-xs-6 p-l-0" v-if="showNameInputs">
+                <div class="col-xs-6 pl-0" v-if="showNameInputs">
                     <div class="input-unit">
                         <label :for="'last-name-input_' + _uid">{{ trans("Ceres::Template.newsletterLastName") }}</label>
                         <input type="text" :id="'last-name-input_' + _uid" v-model="lastName">
