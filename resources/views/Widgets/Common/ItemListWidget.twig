@@ -58,14 +58,14 @@
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
             <last-seen-item-list :max-items="{{ maxItems }}" :items-per-page="{{ itemsPerPage }}">
-                <div class="widget-caption m-b-1" slot="heading">
+                <div class="widget-caption mb-3" slot="heading">
                     <h2>{{ Twig.print("title") }}</h2>
                 </div>
             </last-seen-item-list>
         {% else %}
             {# render static item lists #}
             {% if headlineStyle == "default-caption" or headlineStyle == "custom-caption" or headlineStyle is empty %}
-                <div class="widget-caption m-b-1">
+                <div class="widget-caption mb-3">
                     <h2>{{ Twig.print("title") }}</h2>
 
                     {{ Twig.if("category") }}

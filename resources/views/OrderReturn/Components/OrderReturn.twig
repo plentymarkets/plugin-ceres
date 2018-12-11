@@ -5,11 +5,11 @@
 	<div>
 		<order-return-item v-for="(orderItem, index) in orderData.order.orderItems" :key="index"  :order-item="orderItem" template="#vue-order-return-item"></order-return-item>
 
-		<button class="btn btn-primary btn-medium-large m-t-2" @click="selectAllItems()">
+		<button class="btn btn-primary btn-medium-large mt-4" @click="selectAllItems()">
 			<i class="fa fa-check-square-o" aria-hidden="true"></i>
 			{{ trans("Ceres::Template.returnSelectAll") }}
 		</button>
-		<button class="btn btn-primary btn-right btn-medium-large m-t-2" :disabled="isDisabled || isLoading" @click="showConfirmationModal()">
+		<button class="btn btn-primary btn-right btn-medium-large mt-4" :disabled="isDisabled || isLoading" @click="showConfirmationModal()">
 			<i class="fa fa-arrow-right" aria-hidden="true"></i>
 			{{ trans("Ceres::Template.returnTrigger") }}
 		</button>
@@ -29,7 +29,7 @@
 							</li>
 						</ul>
 
-						<div class="input-unit textarea cmp-contact m-t-2">
+						<div class="input-unit textarea cmp-contact mt-4">
 							<textarea id="contact_wish" class="no-resize" rows="5" @change="updateOrderReturnNote($event.target.value)"></textarea>
 							<label for="contact_wish">{{ trans("Ceres::Template.returnReason") }}</label>
 						</div>

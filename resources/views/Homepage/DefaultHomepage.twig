@@ -76,7 +76,7 @@
 
     <div class="home container-max">
         <div class="row">
-            <div class="homepage-title m-b-1">
+            <div class="homepage-title mb-3">
                 <h1>{{ trans("Ceres::Template.headerCompanyName") }}</h1>
             </div>
         </div>
@@ -290,9 +290,9 @@
 
             {% set homepageContainer6 = LayoutContainer.show("Ceres::Homepage.Container6") %}
             {% if categoryList1 is not empty or homepageContainer6 | trim is not empty %}
-                <div class="m-b-2 clearfix">
+                <div class="mb-4 clearfix">
                     {% if homepageContainer6 | trim is empty %}
-                        <div class="section-header m-b-1">
+                        <div class="section-header mb-3">
                             <h2>{{ category3.details[0].name }}</h2>
                             <a href="{{ services.category.getURL(category3, lang) }}"
                                class="section-link-all"><i
@@ -378,9 +378,9 @@
 
             {% set homepageContainer9 = LayoutContainer.show("Ceres::Homepage.Container9") %}
             {% if categoryList2 is not empty or homepageContainer9 | trim is not empty %}
-                <div class="m-b-2 clearfix">
+                <div class="mb-4 clearfix">
                     {% if homepageContainer9 | trim is empty %}
-                        <div class="section-header m-b-1">
+                        <div class="section-header mb-3">
                             <h2>{{ category6.details[0].name }}</h2>
                             <a href="{{ services.category.getURL(category6, lang) }}"
                                class="section-link-all"><i

@@ -19,7 +19,7 @@
 
 			<hr>
 
-			<p class="m-b-3">
+			<p class="mb-5">
                 {{ trans("Ceres::Template.contactShopMessage") }}
 			</p>
 
@@ -40,13 +40,13 @@
 				<div class="col-xs-12 p-x-0 {% if contactConfigSet and not googleApiKey %}col-sm-12 col-md-8 col-lg-9 {% endif %}well well-sm">
 					<form id="contact-form">
 
-						<div class="col-xs-12 col-md-6 m-b-1">
+						<div class="col-xs-12 col-md-6 mb-3">
 							<div class="input-unit input-name-field">
 								<input type="name" name="name" v-model="name" id="txt_name">
 								<label for="txt_name">{{ trans("Ceres::Template.contactName") }} ({{ trans("Ceres::Template.contactOptional") }})</label>
 							</div>
 						</div>
-						<div class="col-xs-12 col-md-6 m-b-1">
+						<div class="col-xs-12 col-md-6 mb-3">
 							<div class="input-unit input-mail-field" data-validate="regex" data-model="userMail">
 								{% set uid_mail = uid() %}
 								<input type="email" name="email" v-model="userMail" id="{{ uid_mail }}" data-validate-ref="{{ mailRegex }}">
@@ -54,14 +54,14 @@
 							</div>
 							<div class="error-feedback">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</div>
 						</div>
-						<div class="col-xs-12 col-md-6 m-b-1">
+						<div class="col-xs-12 col-md-6 mb-3">
 							<div class="input-unit" data-validate="text" data-model="subject">
 								<input type="subject" name="subject" v-model="subject" id="txt_subject">
 								<label for="txt_subject">{{ trans("Ceres::Template.contactSubject") }}*</label>
 							</div>
 							<div class="error-feedback">{{ trans("Ceres::Template.contactEditSubject") }}</div>
 						</div>
-						<div class="col-xs-12 col-md-6 m-b-1">
+						<div class="col-xs-12 col-md-6 mb-3">
 							<div class="input-unit">
 								<input type="order" name="order" v-model="orderId" id="txt_order">
 								<label for="txt_order">{{ trans("Ceres::Template.contactOrderId") }} ({{ trans("Ceres::Template.contactOptional") }})</label>
@@ -101,7 +101,7 @@
 				</div>
 
 				<div class="col-xs-12">
-					<accept-privacy-policy-check class="m-b-1" v-if="enableConfirmingPrivacyPolicy" v-model="privacyPolicyAccepted" @input="privacyPolicyValueChanged($event)" :show-error="privacyPolicyShowError"></accept-privacy-policy-check>
+					<accept-privacy-policy-check class="mb-3" v-if="enableConfirmingPrivacyPolicy" v-model="privacyPolicyAccepted" @input="privacyPolicyValueChanged($event)" :show-error="privacyPolicyShowError"></accept-privacy-policy-check>
 				</div>
 
 				<div class="col-xs-12 col-md-3 offset-md-9 send-mail">
@@ -112,7 +112,7 @@
 				</div>
 
                 {% if googleApiKey and not contactConfigSet %}
-					<div class="col-xs-12 m-t-3{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
+					<div class="col-xs-12 mt-5{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
 						<contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
 					</div>
                 {% endif %}
