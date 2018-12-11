@@ -1,7 +1,15 @@
-nav.navbar {
-	.container-max,
-	.row {
+nav.navbar
+{
+	.container-max
+	{
 		display: block;
+	}
+
+	.row
+	{
+		display: block;
+        margin-left: 0;
+        margin-right: 0;
 	}
 }
 
