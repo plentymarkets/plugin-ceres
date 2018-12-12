@@ -1,4 +1,5 @@
 import {isNullOrUndefined}from "../../helper/utils";
+import TranslationService from "../../services/TranslationService";
 
 Vue.component("item-store-special", {
 
@@ -21,48 +22,52 @@ Vue.component("item-store-special", {
             label: "",
             tagClasses:
             {
-                1: "bg-danger",
-                2: "bg-primary",
+                1: "tag-offer bg-danger",
+                2: "tag-new bg-primary",
+                3: "tag-top bg-success",
                 default: "bg-success"
+            },
+            labels:
+            {
+                1: TranslationService.translate("Ceres::Template.storeSpecialOffer"),
+                2: TranslationService.translate("Ceres::Template.storeSpecialNew"),
+                3: TranslationService.translate("Ceres::Template.storeSpecialTop")
             }
         };
     },
 
     created()
     {
-
-        if (!isNullOrUndefined(this.storeSpecial))
-        {
-            this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
-        }
-        else
-        {
-            this.tagClass = this.tagClasses.default;
-        }
-
-        this.label = this.getLabel();
+        this.initializeStoreSpecial();
     },
 
-    methods: {
+    methods:
+    {
+        initializeStoreSpecial()
+        {
+            if (!isNullOrUndefined(this.storeSpecial))
+            {
+                this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+            }
+            else
+            {
+                this.tagClass = this.tagClasses.default;
+            }
+
+            this.label = this.getLabel();
+        },
+
         getLabel()
         {
-            if (isNullOrUndefined(this.storeSpecial))
-            {
-                if (isNullOrUndefined(this.recommendedRetailPrice))
-                {
-                    return "";
-                }
-
-                return this.getPercentageSale();
-
-            }
-
-            if (this.storeSpecial.id === 1 && !isNullOrUndefined(this.recommendedRetailPrice))
+            if (
+                (isNullOrUndefined(this.storeSpecial) || this.storeSpecial.id === 1) &&
+                !isNullOrUndefined(this.recommendedRetailPrice)
+            )
             {
                 return this.getPercentageSale();
             }
 
-            return this.storeSpecial.names.name;
+            return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
         },
 
         getPercentageSale()
@@ -76,6 +81,14 @@ Vue.component("item-store-special", {
             }
 
             return "";
+        }
+    },
+
+    watch:
+    {
+        storeSpecial()
+        {
+            this.initializeStoreSpecial();
         }
     }
 });

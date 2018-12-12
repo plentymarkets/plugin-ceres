@@ -26,8 +26,8 @@
 
 	@include media-breakpoint-down(sm) {
 		overflow: auto;
-		max-height: calc(100% - 1.2rem);
-	}
+		max-height: 60vh;
+		}
 
 	.country-settings-inner,
 	.currency-select-inner {
@@ -145,6 +145,5 @@
 .pos-f-t .cmp-country-settings,
 .pos-f-t .cmp-currency-select
 {
-	position: absolute;
 	top: auto;
 }

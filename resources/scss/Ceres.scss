@@ -23,16 +23,18 @@
 @import "ceres/common/card";
 
 // External plugins overrides
+@import "ceres/plugins/bs4-progress";
 @import "ceres/plugins/lightbox";
 @import "ceres/plugins/owl-carousel";
 
 // Components
-@import "ceres/components/component-base";
 @import "ceres/components/accordion";
 @import "ceres/components/alerts";
+@import "ceres/components/anicon";
+@import "ceres/components/component-base";
 @import "ceres/components/featured-category";
 @import "ceres/components/featured-sale-new";
-@import "ceres/components/anicon";
+@import "ceres/components/live-shopping";
 @import "ceres/components/notifications";
 @import "ceres/components/popper";
 

@@ -1,5 +1,3 @@
-.categories-list{}
-
 .page-infos{
 	display: flex;
     flex-flow: row nowrap;
@@ -9,7 +7,6 @@
     	flex: 1;
     }
 }
-
 
 .item-confirm-special-case-close {
   float: right;
@@ -59,7 +56,6 @@
 
     	li{
             box-shadow: none;
-            //@include make-col(6);
             display: flex;
     	}
 
@@ -70,7 +66,6 @@
     .product-list.grid{
 
         li{
-            //@include make-col(4);
             display: flex;
         }
     }
@@ -80,7 +75,6 @@
       .product-list.grid{
 
             li{
-                //@include make-col(3);
                 display: flex;
             }
       }
@@ -93,6 +87,9 @@
 
 .parallax-img-container {
     height: auto;
+    max-width: none;
+    position: relative;
+    width: 100%;
 
     .parallax-text-wrapper {
         @include media-breakpoint-up(xl){
@@ -114,20 +111,16 @@
         }
     }
 
-    &[style^='background-image'] {
-        width: 100%;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
+    .parallax-img-container-inner[style^='background-image'] {
         height: 300px;
-        max-width: none;
-        position: relative;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: top center;
 
         @include media-breakpoint-up(sm) {
             height: 350px;
-        }
-
+        }    
         @include media-breakpoint-up(md) {
             height: 400px;
         }
@@ -136,17 +129,12 @@
             max-width: 100%;
             position: absolute;
             bottom: 0;
-            padding-right: 30px;
-
-            @include media-breakpoint-up(md) {
-                margin-right: 0;
-            }
-
+            padding-right: 30px;            
+    
             @include media-breakpoint-up(xl) {
                 max-width: 1200px;
-                padding-right: 0;
             }
-
+    
             h1 {
                 color: $category-text-color;
                 font-size: 300%;
@@ -155,29 +143,26 @@
                 width: 100%;
                 margin-bottom: .5rem;
                 letter-spacing: 1px;
-
+    
                 @include media-breakpoint-up(sm) {
                     font-size: 400%;
                     margin: 0 0 1rem;
-                }
-
+                }    
                 @include media-breakpoint-up(md) {
                     font-size: 500%;
-                    margin-bottom: 1.5rem;
                 }
             }
-
+    
             .category-description {
                 font-size: 1rem;
                 line-height: 1.25;
                 color: $white;
                 text-shadow: 0 0 0.2em rgba(0,0,0,.75);
                 letter-spacing: 1px;
-
+    
                 @include media-breakpoint-up(sm){
                     font-size: 1.25rem;
-                }
-
+                }    
                 @include media-breakpoint-up(md) {
                     font-size: 2rem;
                 }

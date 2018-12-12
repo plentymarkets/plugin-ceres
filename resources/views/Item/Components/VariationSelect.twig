@@ -3,7 +3,7 @@
         <div class="col-xs-12 col-md-6 col-lg-4 variation-select" v-for="(attribute, attributeId) in attributes">
             <div class="input-unit" ref="labelBoxRef">
                 <select class="custom-select text-gray-dark" v-model="selectedAttributes[attributeId]" @change="onSelectionChange(selectedAttributes[attributeId])">
-                        <option :value="null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+                        <option :value="null" v-if="hasEmptyOption">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
                         <option
                             v-for="(attributeValue, attributeValueId) in attribute.values"
                             :value="attributeValueId"
@@ -18,7 +18,7 @@
         <div class="col-xs-12 col-md-6 col-lg-4 variation-select" v-if="possibleUnitIds.length > 1">
             <div class="input-unit">
                 <select class="custom-select text-gray-dark" v-model="selectedUnitId" @change="onSelectionChange(possibleUnitIds[selectedUnitId])">
-                    <option :value="0">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+                    <option :value="0" v-if="hasEmptyOption">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
                     <option
                             v-for="unitCombinationId in possibleUnitIds"
                             :value="unitCombinationId">
