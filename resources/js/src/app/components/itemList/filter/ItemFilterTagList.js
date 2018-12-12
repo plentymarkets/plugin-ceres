@@ -22,13 +22,23 @@ Vue.component("item-filter-tag-list", {
     {
         removeTag(tag)
         {
-            this.$store.dispatch("selectFacet", {facetValue: tag});
+            this.selectFacet({facetValue: tag});
+            this.loadItemList();
         },
 
         resetAllTags()
         {
-            this.$store.commit("resetAllSelectedFacets");
-            this.$store.dispatch("loadItemList");
-        }
+            this.resetAllSelectedFacets();
+            this.loadItemList();
+        },
+
+        ...Vuex.mapMutations([
+            "resetAllSelectedFacets"
+        ]),
+
+        ...Vuex.mapActions([
+            "selectFacet",
+            "loadItemList"
+        ])
     }
 });
