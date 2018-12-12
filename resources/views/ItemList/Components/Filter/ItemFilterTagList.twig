@@ -4,7 +4,7 @@
             <i class="fa fa-times" aria-hidden="true"></i> ${ tag.name }
         </span>
 
-        <span class="selected-filter reset-all" v-if="tagList.length > 2" @click="resetAllTags()">
+        <span class="selected-filter reset-all" v-if="tagList.length >= 2" @click="resetAllTags()">
             {{ trans("Ceres::Template.itemFilterReset") }}
         </span>
     </div>
