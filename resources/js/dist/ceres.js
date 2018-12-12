@@ -23148,8 +23148,7 @@ Vue.component("item-filter", {
 
     methods: {
         updateFacet: function updateFacet(facetValue) {
-            this.$store.dispatch("selectFacetNew", { facetValue: facetValue });
-            // this.$store.dispatch("sselectFacet", {facetValue});
+            this.$store.dispatch("selectFacet", { facetValue: facetValue });
         },
         isSelected: function isSelected(facetValueId) {
             return this.selectedFacets.findIndex(function (selectedFacet) {
@@ -23397,9 +23396,7 @@ Vue.component("item-filter-price", {
         },
         triggerFilter: function triggerFilter() {
             if (!this.isDisabled) {
-                // TODO reload
-                this.$store.dispatch("selectPriceFacetNew", { priceMin: this.priceMin, priceMax: this.priceMax });
-                // this.$store.dispatch("selectPriceFacet", {priceMin: this.priceMin, priceMax: this.priceMax});
+                this.$store.dispatch("selectPriceFacet", { priceMin: this.priceMin, priceMax: this.priceMax });
             }
         }
     }
@@ -27209,16 +27206,18 @@ function getUrlParams(urlParams) {
 
     urlParams = urlParams.split("+").join(" ");
 
-    var params = {};
-    var re = /[?&]?([^=]+)=([^&]*)/g;
-    var tokens = void 0;
+    var result = {};
+    var params = (window.location.search.split("?")[1] || "").split("&");
 
-    while (tokens) {
-        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-        tokens = re.exec(urlParams);
+    for (var param in params) {
+        if (params.hasOwnProperty(param)) {
+            var paramParts = params[param].split("=");
+
+            result[paramParts[0]] = decodeURIComponent(paramParts[1] || "");
+        }
     }
 
-    return params;
+    return result;
 }
 
 function setUrlParams(urlParams) {
@@ -28733,16 +28732,11 @@ var mutations = {
 };
 
 var actions = {
-    selectFacetNew: function selectFacetNew(_ref2, _ref3) {
-        var state = _ref2.state,
-            dispatch = _ref2.dispatch,
-            commit = _ref2.commit,
-            getters = _ref2.getters,
-            rootState = _ref2.rootState;
+    selectFacet: function selectFacet(_ref2, _ref3) {
+        var dispatch = _ref2.dispatch,
+            commit = _ref2.commit;
         var facetValue = _ref3.facetValue;
 
-        commit("setIsItemListLoading", true);
-
         if (facetValue.id === "price") {
             commit("removePriceFacet");
         } else {
@@ -28750,111 +28744,48 @@ var actions = {
         }
 
         commit("setItemListPage", 1);
-
-        var selectedPriceFacet = state.selectedFacets.find(function (facet) {
-            return facet.id === "price";
-        });
-        var params = {
-            categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-            facets: getters.selectedFacetIdsForUrl.toString(),
-            priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-            priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-            query: state.searchString
-        };
-
-        _ApiService2.default.get("/rest/io/facet", params).done(function (data) {
-            commit("setFacets", data.facets);
-            commit("setIsItemListLoading", false);
-        }).fail(function (error) {
-            commit("setIsItemListLoading", false);
-        });
+        dispatch("loadFacets");
     },
-    selectFacet: function selectFacet(_ref4, _ref5) {
+    selectPriceFacet: function selectPriceFacet(_ref4, _ref5) {
         var dispatch = _ref4.dispatch,
             commit = _ref4.commit;
-        var facetValue = _ref5.facetValue;
-
-        if (facetValue.id === "price") {
-            commit("removePriceFacet");
-        } else {
-            commit("toggleSelectedFacet", facetValue);
-        }
-
-        commit("setItemListPage", 1);
-
-        dispatch("loadItemList");
-    },
-    selectPriceFacetNew: function selectPriceFacetNew(_ref6, _ref7) {
-        var commit = _ref6.commit,
-            getters = _ref6.getters,
-            rootState = _ref6.rootState;
-        var priceMin = _ref7.priceMin,
-            priceMax = _ref7.priceMax;
-
-        commit("setIsItemListLoading", true);
-        commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
-        commit("setPriceFacetTag");
-        commit("setItemListPage", 1);
-
-        var selectedPriceFacet = state.selectedFacets.find(function (facet) {
-            return facet.id === "price";
-        });
-        var params = {
-            categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-            facets: getters.selectedFacetIdsForUrl.toString(),
-            priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-            priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-            query: state.searchString
-        };
-
-        _ApiService2.default.get("/rest/io/facet", params).done(function (data) {
-            commit("setFacets", data.facets);
-            commit("setIsItemListLoading", false);
-        }).fail(function (error) {
-            commit("setIsItemListLoading", false);
-        });
-    },
-    selectPriceFacet: function selectPriceFacet(_ref8, _ref9) {
-        var dispatch = _ref8.dispatch,
-            commit = _ref8.commit;
-        var priceMin = _ref9.priceMin,
-            priceMax = _ref9.priceMax;
+        var priceMin = _ref5.priceMin,
+            priceMax = _ref5.priceMax;
 
         commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
         commit("setPriceFacetTag");
         commit("setItemListPage", 1);
-
-        dispatch("loadItemList");
+        dispatch("loadFacets");
     },
-    selectItemListPage: function selectItemListPage(_ref10, page) {
-        var dispatch = _ref10.dispatch,
-            commit = _ref10.commit;
+    selectItemListPage: function selectItemListPage(_ref6, page) {
+        var dispatch = _ref6.dispatch,
+            commit = _ref6.commit;
 
         commit("setItemListPage", page);
 
         dispatch("loadItemList");
     },
-    selectItemListSorting: function selectItemListSorting(_ref11, sorting) {
-        var dispatch = _ref11.dispatch,
-            commit = _ref11.commit;
+    selectItemListSorting: function selectItemListSorting(_ref7, sorting) {
+        var dispatch = _ref7.dispatch,
+            commit = _ref7.commit;
 
         commit("setItemListSorting", sorting);
         commit("setItemListPage", 1);
 
         dispatch("loadItemList");
     },
-    selectItemsPerPage: function selectItemsPerPage(_ref12, itemsPerPage) {
-        var dispatch = _ref12.dispatch,
-            commit = _ref12.commit;
+    selectItemsPerPage: function selectItemsPerPage(_ref8, itemsPerPage) {
+        var dispatch = _ref8.dispatch,
+            commit = _ref8.commit;
 
         commit("setItemsPerPage", itemsPerPage);
         commit("setItemListPage", 1);
 
         dispatch("loadItemList");
     },
-    searchItems: function searchItems(_ref13, searchString) {
-        var dispatch = _ref13.dispatch,
-            commit = _ref13.commit;
+    searchItems: function searchItems(_ref9, searchString) {
+        var dispatch = _ref9.dispatch,
+            commit = _ref9.commit;
 
         commit("setItemListSearchString", searchString);
         commit("setItemListPage", 1);
@@ -28862,10 +28793,41 @@ var actions = {
 
         dispatch("loadItemList");
     },
-    loadItemList: function loadItemList(_ref14) {
-        var state = _ref14.state,
-            commit = _ref14.commit,
-            getters = _ref14.getters;
+    loadFacets: function loadFacets(_ref10) {
+        var commit = _ref10.commit,
+            getters = _ref10.getters,
+            rootState = _ref10.rootState;
+
+        var selectedPriceFacet = state.selectedFacets.find(function (facet) {
+            return facet.id === "price";
+        });
+        var params = {
+            categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
+            facets: getters.selectedFacetIdsForUrl.toString(),
+            priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+            priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+            query: state.searchString
+        };
+
+        commit("setIsItemListLoading", true);
+
+        return new Promise(function (resolve, reject) {
+            _ApiService2.default.get("/rest/io/facet", params).done(function (data) {
+                commit("setFacets", data.facets);
+                commit("setIsItemListLoading", false);
+
+                resolve(data);
+            }).fail(function (error) {
+                commit("setIsItemListLoading", false);
+
+                reject(error);
+            });
+        });
+    },
+    loadItemList: function loadItemList(_ref11) {
+        var state = _ref11.state,
+            commit = _ref11.commit,
+            getters = _ref11.getters;
 
         var selectedPriceFacet = state.selectedFacets.find(function (facet) {
             return facet.id === "price";
