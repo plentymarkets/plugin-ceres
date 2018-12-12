@@ -3,10 +3,6 @@ nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
 	margin-top: 0px;
 }
 
-// li.nav-item.dropdown {
-// 	min-width: 140px;
-// }
-
 .dropdown-menu.dropdown-menu-right {
 	min-width: 100%;
 }
@@ -275,79 +271,62 @@ body.menu-is-visible {
 
 nav.navbar.megamenu {
 	@include media-breakpoint-up(lg){ position : relative; }
-	#mainNavbarCollapsable {
+	#mainNavbarCollapsable ul.mainmenu {
 
-		@include media-breakpoint-up(lg){
-			ul.mainmenu {
-				background 		: transparent;
-				display 		: flex;
-				justify-content : flex-end; 
-				width 			: 100%; 
+		background 		: transparent;
+		display 		: flex;
+		justify-content : flex-end; 
+		width 			: 100%; 
 
-				>li {
-					position : static;
+		>li {
+			position : static;
 
-					.no-touch &:hover,
-					.touch &.hover {
-						background : $megamenu-bg; 
-						color 	   : $megamenu-btn-hover !important;  
+			.no-touch &:hover,
+			.touch &.hover {
+				background : transparent !important; 
+				color 	   : $megamenu-btn-hover !important;  
 
-						>ul.collapse { display : block; } 
-					}
+				>ul.collapse { display : block; } 
+			}
 
-					>ul.collapse {
-						background-color: $megamenu-bg;
-						columns 		: 5 228px;
-						column-gap 		: .5em;
-						column-rule 	: 1px solid #dcdbd7;
-						display 		: none;
-						padding 		: 1em;
-						min-height		: 10em;
-						max-height		: 50em;  
+			>ul.collapse {
+				background-color: $megamenu-bg;
+				columns 		: 5 228px;
+				column-gap 		: .5em;
+				column-rule 	: 1px solid #dcdbd7;
+				display 		: none;
+				padding 		: 1em;
+				min-height		: 10em;
+				max-height		: 50em;  
+				// padding-left	: 5px;
 
-						>li {
-							display 	 : inline-block;
-							width 	 	 : 100%; 
+				>li ul.nav-dropdown-inner {
+					background-color	: $megamenu-bg;
+					padding-bottom		: .5rem;
 
-							&.level1 { 
-								padding : .5em 1em;
-								>a {								
-									color 		: $megamenu-color-top-btn; 
-									font-weight : bold; 
-								}
-							}
-							.no-touch &:hover,
-							.touch &.hover { 
-								background : $megamenu-bg; 
-							}
-							 .level2 { 
-								 padding : .25em 0!important; 
-								 break-inside: avoid;
-							 }
-							 .level3 { 
-							 	padding : 0 1em .25em 1.4em !important; 
-							 }
-							.bt-more>a { 
-								color 			: $gray;
-								text-transform 	: lowercase; 
-							}
-							a {
-								background 	: $white;
-								color 		: $megamenu-color-bottom-btn;
-								padding 	: 0;
-								text-align 	: left;
-
-								.no-touch &:hover,
-								.touch &.hover { 
-									background 	: $megamenu-bg; 
-									color 		: $megamenu-btn-hover !important;  
-								}
-							}
-							ul { background-color : $megamenu-bg; }
+					.level1 { 
+						>a {								
+							color 		: $megamenu-color-top-btn; 
+							font-weight : bold; 
 						}
-
+					}
+					.level3 { 
+						padding-left: 2.5em;
 					}
 
+					>li {
+						padding-left	: 1.5em;
+						line-height		: 170%;
+	
+						.bt-more>a {
+							color 			: $gray;
+							text-transform 	: lowercase; 
+						}
+						a {
+							color 		: $megamenu-color-bottom-btn;
+							padding 	: 0;
+						}
+					}
 				}
 			}
 		}

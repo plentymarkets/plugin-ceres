@@ -8,15 +8,15 @@
     {% if level < megaMenuLevels %}
         {% for child in category.children if counter < maxItems[level] %}
             {% if (child.details | length > 0) %}
-                <li class="level{{ level }}">
-                    {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
-                    <a href="{{ newScope }}{{ urls.trailingSlashSuffix }}" v-render-category="{ id: {{ child.id }}, type: '{{ child.type }}', scrollToTop: 600 }">{{ child.details[0].name }}</a>
-                    {% if child.children %}
-                        {% if level == 1 %}<ul>{% endif %}
-                        {{ childlist.get_children(child, newScope, level + 1, megaMenuLevels, maxItems) }}
-                        {% if level == 1 %}</ul>{% endif %}
-                    {% endif %}
-                </li>
+                {% if level == 1 %}<li><ul class="nav-dropdown-inner">{% endif %}
+                    <li class="level{{ level }}">
+                        {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
+                        <a href="{{ newScope }}{{ urls.trailingSlashSuffix }}" v-render-category="{ id: {{ child.id }}, type: '{{ child.type }}', scrollToTop: 600 }">{{ child.details[0].name }}</a>
+                        {% if child.children %}
+                            {{ childlist.get_children(child, newScope, level + 1, megaMenuLevels, maxItems) }}
+                        {% endif %}
+                    </li>
+                {% if level == 1 %}</ul></li>{% endif %}
                 {% set counter = counter + 1 %}
                 {% if counter == maxItems[level]%}
                     <li class="level{{ level }} bt-more"><a href="{{ currentScopeUrl }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}', scrollToTop: 600 }">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
