@@ -26853,16 +26853,18 @@ function getUrlParams(urlParams) {
 
     urlParams = urlParams.split("+").join(" ");
 
-    var params = {};
-    var re = /[?&]?([^=]+)=([^&]*)/g;
-    var tokens = void 0;
+    var result = {};
+    var params = (window.location.search.split("?")[1] || "").split("&");
 
-    while (tokens) {
-        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-        tokens = re.exec(urlParams);
+    for (var param in params) {
+        if (params.hasOwnProperty(param)) {
+            var paramParts = params[param].split("=");
+
+            result[paramParts[0]] = decodeURIComponent(paramParts[1] || "");
+        }
     }
 
-    return params;
+    return result;
 }
 
 function setUrlParams(urlParams) {
