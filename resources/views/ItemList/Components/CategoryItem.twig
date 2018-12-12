@@ -22,7 +22,7 @@
             {{ AddToBasket.printVueComponent( "itemData", true ) }}
 
             <div class="thumb-background"></div>
-
+            
             <div class="thumb-image">
                 <div class="square-container">
                     <div class="square-inner main-image">
@@ -76,6 +76,7 @@
                                 ${ itemData.prices.default.unitPrice.formatted | specialOffer(itemData.prices, "unitPrice", "formatted") } *
                             </div>
                         </div>
+                    </div>
 
                     <slot name="AfterPrices"></slot>
 
