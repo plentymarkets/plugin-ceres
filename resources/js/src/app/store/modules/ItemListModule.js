@@ -145,42 +145,6 @@ const mutations =
 
 const actions =
     {
-        selectFacetNew({state, dispatch, commit, getters, rootState}, {facetValue})
-        {
-            commit("setIsItemListLoading", true);
-
-            if (facetValue.id === "price")
-            {
-                commit("removePriceFacet");
-            }
-            else
-            {
-                commit("toggleSelectedFacet", facetValue);
-            }
-
-            commit("setItemListPage", 1);
-
-            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
-            const params = {
-                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                facets: getters.selectedFacetIdsForUrl.toString(),
-                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-                query: state.searchString
-            };
-
-            ApiService.get("/rest/io/facet", params)
-                .done(data =>
-                {
-                    commit("setFacets", data.facets);
-                    commit("setIsItemListLoading", false);
-                })
-                .fail(error =>
-                {
-                    commit("setIsItemListLoading", false);
-                });
-        },
-
         selectFacet({dispatch, commit}, {facetValue})
         {
             if (facetValue.id === "price")
@@ -193,36 +157,7 @@ const actions =
             }
 
             commit("setItemListPage", 1);
-
-            dispatch("loadItemList");
-        },
-
-        selectPriceFacetNew({commit, getters, rootState}, {priceMin, priceMax})
-        {
-            commit("setIsItemListLoading", true);
-            commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
-            commit("setPriceFacetTag");
-            commit("setItemListPage", 1);
-
-            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
-            const params = {
-                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                facets: getters.selectedFacetIdsForUrl.toString(),
-                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-                query: state.searchString
-            };
-
-            ApiService.get("/rest/io/facet", params)
-                .done(data =>
-                {
-                    commit("setFacets", data.facets);
-                    commit("setIsItemListLoading", false);
-                })
-                .fail(error =>
-                {
-                    commit("setIsItemListLoading", false);
-                });
+            dispatch("loadFacets");
         },
 
         selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
@@ -230,8 +165,7 @@ const actions =
             commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
             commit("setPriceFacetTag");
             commit("setItemListPage", 1);
-
-            dispatch("loadItemList");
+            dispatch("loadFacets");
         },
 
         selectItemListPage({dispatch, commit}, page)
@@ -264,6 +198,38 @@ const actions =
             commit("setSelectedFacetsByIds", []);
 
             dispatch("loadItemList");
+        },
+
+        loadFacets({commit, getters, rootState})
+        {
+            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
+            const params = {
+                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
+                facets: getters.selectedFacetIdsForUrl.toString(),
+                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+                query: state.searchString
+            };
+
+            commit("setIsItemListLoading", true);
+
+            return new Promise((resolve, reject) =>
+            {
+                ApiService.get("/rest/io/facet", params)
+                    .done(data =>
+                    {
+                        commit("setFacets", data.facets);
+                        commit("setIsItemListLoading", false);
+
+                        resolve(data);
+                    })
+                    .fail(error =>
+                    {
+                        commit("setIsItemListLoading", false);
+
+                        reject(error);
+                    });
+            });
         },
 
         loadItemList({state, commit, getters})
