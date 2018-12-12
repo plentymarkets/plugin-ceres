@@ -23148,8 +23148,8 @@ Vue.component("item-filter", {
 
     methods: {
         updateFacet: function updateFacet(facetValue) {
-            this.$store.dispatch("selectFacetNew", { facetValue: facetValue, isSelected: this.isSelected(facetValue.id) });
-            // this.$store.dispatch("selectFacet", {facetValue});
+            this.$store.dispatch("selectFacetNew", { facetValue: facetValue });
+            // this.$store.dispatch("sselectFacet", {facetValue});
         },
         isSelected: function isSelected(facetValueId) {
             return this.selectedFacets.findIndex(function (selectedFacet) {
@@ -23410,9 +23410,12 @@ Vue.component("item-filter-price", {
 
 Vue.component("item-filter-tag-list", {
 
-    delimiters: ["${", "}"],
-
-    props: ["template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-filter-tag-list"
+        }
+    },
 
     computed: Vuex.mapState({
         tagList: function tagList(state) {
@@ -23421,7 +23424,7 @@ Vue.component("item-filter-tag-list", {
     }),
 
     created: function created() {
-        this.$options.template = this.template || "#vue-item-filter-tag-list";
+        this.$options.template = this.template;
     },
 
 
@@ -27206,18 +27209,16 @@ function getUrlParams(urlParams) {
 
     urlParams = urlParams.split("+").join(" ");
 
-    var result = {};
-    var params = (window.location.search.split("?")[1] || "").split("&");
+    var params = {};
+    var re = /[?&]?([^=]+)=([^&]*)/g;
+    var tokens = void 0;
 
-    for (var param in params) {
-        if (params.hasOwnProperty(param)) {
-            var paramParts = params[param].split("=");
-
-            result[paramParts[0]] = decodeURIComponent(paramParts[1] || "");
-        }
+    while (tokens) {
+        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        tokens = re.exec(urlParams);
     }
 
-    return result;
+    return params;
 }
 
 function setUrlParams(urlParams) {

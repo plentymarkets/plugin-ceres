@@ -1,10 +1,13 @@
 Vue.component("item-filter-tag-list", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-item-filter-tag-list"
+        }
+    },
 
     computed: Vuex.mapState({
         tagList: state => state.itemList.selectedFacets
@@ -12,7 +15,7 @@ Vue.component("item-filter-tag-list", {
 
     created()
     {
-        this.$options.template = this.template || "#vue-item-filter-tag-list";
+        this.$options.template = this.template;
     },
 
     methods:
