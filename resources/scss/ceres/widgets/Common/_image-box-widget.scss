@@ -1,5 +1,9 @@
 .widget-image-box
 {
+    @include media-breakpoint-down(sm) {
+        padding-bottom: 0 !important;
+    }
+
     > img
     {
         position: absolute;
@@ -38,6 +42,11 @@
     {
         > .widget-inner
         {
+            @include media-breakpoint-down(sm) {
+                position: relative;
+                padding: 0;
+            }
+            
             .widget-caption
             {
                 width: 100%;
@@ -65,9 +74,17 @@
         {
             align-items: flex-end;
 
+            @include media-breakpoint-down(sm) {
+                position: relative;
+            }
+
             .widget-caption
             {
                 padding: 1.5rem;
+
+                @include media-breakpoint-down(sm) {
+                    margin: 0 auto;
+                }
             }
         }
     }
@@ -76,8 +93,17 @@
     {
         > .widget-inner
         {
+            @include media-breakpoint-down(sm) {
+                position: relative;
+                padding: 0;
+            }
+
             .widget-caption
             {
+                @include media-breakpoint-down(sm) {
+                    position: relative;
+                }
+
                 position: absolute;
                 left: 0;
                 right: 0;
