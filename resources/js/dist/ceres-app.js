@@ -26864,6 +26864,10 @@ function getUrlParams(urlParams) {
         }
     }
 
+    if (result.hasOwnProperty("")) {
+        delete result[""];
+    }
+
     return result;
 }
 
