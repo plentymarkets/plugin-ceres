@@ -22,6 +22,8 @@ Vue.component("item-filter-list", {
     {
         return {
             initialSelectedFacets: [],
+            initialPriceMin: "",
+            initialPriceMax: "",
             isActive: false
         };
     },
@@ -30,6 +32,11 @@ Vue.component("item-filter-list", {
     {
         isInitialFacetSelectionActive()
         {
+            if (!this.isInitialPriceFacetActive)
+            {
+                return false;
+            }
+
             const selectedFacetIds = this.selectedFacets.map(facet => facet.id);
 
             if (this.initialSelectedFacets.length === selectedFacetIds.length)
@@ -43,6 +50,27 @@ Vue.component("item-filter-list", {
                 }
 
                 return true;
+            }
+
+            return false;
+        },
+
+        isInitialPriceFacetActive()
+        {
+            const currentPriceFacet = this.selectedFacets.filter(facet => facet.id === "price")[0];
+
+            // no initial price facet and no current one
+            if (!this.initialPriceMin && !this.initialPriceMax && !currentPriceFacet)
+            {
+                return true;
+            }
+
+            if (currentPriceFacet)
+            {
+                if (currentPriceFacet.priceMin === this.initialPriceMin && currentPriceFacet.priceMax === this.initialPriceMax)
+                {
+                    return true;
+                }
             }
 
             return false;
@@ -91,6 +119,9 @@ Vue.component("item-filter-list", {
             const priceMax = urlParams.priceMax || "";
 
             this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+
+            this.initialPriceMin = priceMin;
+            this.initialPriceMax = priceMax;
 
             selectedFacets.push("price");
         }

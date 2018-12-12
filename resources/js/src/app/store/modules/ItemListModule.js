@@ -158,10 +158,15 @@ const actions =
                 commit("toggleSelectedFacet", facetValue);
             }
 
+            // commit("setItemListPage", 1);
+
+            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
             const params = {
                 categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
                 facets:     getters.selectedFacetIdsForUrl.toString(),
                 items:      0,
+                priceMax    : selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+                priceMin    : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
                 query:      state.searchString,
                 template:   "Ceres::ItemList.ItemListView"
             };
@@ -193,6 +198,38 @@ const actions =
             commit("setItemListPage", 1);
 
             dispatch("loadItemList");
+        },
+
+        selectPriceFacetNew({commit, getters, rootState}, {priceMin, priceMax})
+        {
+            commit("setIsItemListLoading", true);
+            commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+            commit("setPriceFacetTag");
+
+            // commit("setItemListPage", 1);
+
+            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
+            const params = {
+                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
+                facets:     getters.selectedFacetIdsForUrl.toString(),
+                items:      0,
+                priceMax    : selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+                priceMin    : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+                query:      state.searchString,
+                template:   "Ceres::ItemList.ItemListView"
+            };
+
+            const url = params.categoryId ? "/rest/io/category" : "/rest/io/item/search";
+
+            ApiService.get(url, params)
+                .done(data =>
+                {
+                    commit("setFacets", data.facets);
+                    commit("setIsItemListLoading", false);
+                })
+                .fail(error =>
+                {
+                });
         },
 
         selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
