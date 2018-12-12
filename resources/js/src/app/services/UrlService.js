@@ -17,20 +17,17 @@ export function getUrlParams(urlParams)
 
     urlParams = urlParams.split("+").join(" ");
 
-    const result = {};
-    const params = (window.location.search.split("?")[1] || "").split("&");
+    const params = {};
+    const re = /[?&]?([^=]+)=([^&]*)/g;
+    let tokens;
 
-    for (const param in params)
+    while (tokens)
     {
-        if (params.hasOwnProperty(param))
-        {
-            const paramParts = params[param].split("=");
-
-            result[paramParts[0]] = decodeURIComponent(paramParts[1] || "");
-        }
+        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        tokens = re.exec(urlParams);
     }
 
-    return result;
+    return params;
 }
 
 export function setUrlParams(urlParams, pushState = true)
