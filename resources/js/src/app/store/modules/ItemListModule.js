@@ -158,22 +158,18 @@ const actions =
                 commit("toggleSelectedFacet", facetValue);
             }
 
-            // commit("setItemListPage", 1);
+            commit("setItemListPage", 1);
 
             const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
             const params = {
                 categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                facets:     getters.selectedFacetIdsForUrl.toString(),
-                items:      0,
-                priceMax    : selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-                priceMin    : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-                query:      state.searchString,
-                template:   "Ceres::ItemList.ItemListView"
+                facets: getters.selectedFacetIdsForUrl.toString(),
+                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+                query: state.searchString
             };
 
-            const url = params.categoryId ? "/rest/io/category" : "/rest/io/item/search";
-
-            ApiService.get(url, params)
+            ApiService.get("/rest/io/facet", params)
                 .done(data =>
                 {
                     commit("setFacets", data.facets);
@@ -181,6 +177,7 @@ const actions =
                 })
                 .fail(error =>
                 {
+                    commit("setIsItemListLoading", false);
                 });
         },
 
@@ -205,23 +202,18 @@ const actions =
             commit("setIsItemListLoading", true);
             commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
             commit("setPriceFacetTag");
-
-            // commit("setItemListPage", 1);
+            commit("setItemListPage", 1);
 
             const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
             const params = {
                 categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                facets:     getters.selectedFacetIdsForUrl.toString(),
-                items:      0,
-                priceMax    : selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-                priceMin    : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-                query:      state.searchString,
-                template:   "Ceres::ItemList.ItemListView"
+                facets: getters.selectedFacetIdsForUrl.toString(),
+                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+                query: state.searchString
             };
 
-            const url = params.categoryId ? "/rest/io/category" : "/rest/io/item/search";
-
-            ApiService.get(url, params)
+            ApiService.get("/rest/io/facet", params)
                 .done(data =>
                 {
                     commit("setFacets", data.facets);
@@ -229,6 +221,7 @@ const actions =
                 })
                 .fail(error =>
                 {
+                    commit("setIsItemListLoading", false);
                 });
         },
 
