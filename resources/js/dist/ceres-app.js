@@ -23052,6 +23052,8 @@ Vue.component("item-filter-price", {
 },{"services/UrlService":251}],186:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 Vue.component("item-filter-tag-list", {
 
     props: {
@@ -23072,15 +23074,16 @@ Vue.component("item-filter-tag-list", {
     },
 
 
-    methods: {
+    methods: _extends({
         removeTag: function removeTag(tag) {
-            this.$store.dispatch("selectFacet", { facetValue: tag });
+            this.selectFacet({ facetValue: tag });
+            this.loadItemList();
         },
         resetAllTags: function resetAllTags() {
-            this.$store.commit("resetAllSelectedFacets");
-            this.$store.dispatch("loadItemList");
+            this.resetAllSelectedFacets();
+            this.loadItemList();
         }
-    }
+    }, Vuex.mapMutations(["resetAllSelectedFacets"]), Vuex.mapActions(["selectFacet", "loadItemList"]))
 });
 
 },{}],187:[function(require,module,exports){
