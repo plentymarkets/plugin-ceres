@@ -21,9 +21,9 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="list-wrapper">
-                            {% include "Ceres::Category.Partials.ItemSorting" with { 'sortingData': searchOptions.sorting, 'selectedSorting': itemSorting } %}
+                            {% include "Ceres::Category.Item.Partials.ItemSorting" with { 'sortingData': searchOptions.sorting, 'selectedSorting': itemSorting } %}
 
-                            {% include "Ceres::Category.Partials.ItemsPerPage" with { 'itemsPerPage': searchOptions.itemsPerPage, 'selectedValue': itemsPerPage } %}
+                            {% include "Ceres::Category.Item.Partials.ItemsPerPage" with { 'itemsPerPage': searchOptions.itemsPerPage, 'selectedValue': itemsPerPage } %}
 
                             {% if overrideSearchFilters | trim is empty %}
                                 <item-filter-list :facet-data="{{ facets | json_encode }}">
@@ -47,7 +47,7 @@
         {% if ceresConfig.pagination.position in ['top', 'top_bottom'] %}
             <div class="list-controls m-b-3 row">
                 <div class="col-xs-12">
-                    {% include "Ceres::Category.Partials.Pagination" %}
+                    {% include "Ceres::Category.Item.Partials.Pagination" %}
                 </div>
             </div>
         {% endif %}
@@ -68,7 +68,7 @@
         {% if ceresConfig.pagination.position in ['bottom', 'top_bottom'] %}
             <div class="list-controls m-b-3 row">
                 <div class="col-xs-12">
-                    {% include "Ceres::Category.Partials.Pagination" %}
+                    {% include "Ceres::Category.Item.Partials.Pagination" %}
                 </div>
             </div>
         {% endif %}

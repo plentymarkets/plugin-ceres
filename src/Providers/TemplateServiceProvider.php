@@ -40,8 +40,8 @@ class TemplateServiceProvider extends ServiceProvider
     private static $templateKeyToViewMap =
     [
         'tpl.home'                          => ['Homepage.Homepage',                      GlobalContext::class],     // provide template to use for homepage
-        'tpl.category.content'              => ['Category.CategoryContentView',           CategoryContext::class],   // provide template to use for content categories
-        'tpl.category.item'                 => ['Category.CategoryView',                  CategoryItemContext::class],          // provide template to use for item categories
+        'tpl.category.content'              => ['Category.Content.CategoryContent',       CategoryContext::class],   // provide template to use for content categories
+        'tpl.category.item'                 => ['Category.Item.CategoryItem',             CategoryItemContext::class],          // provide template to use for item categories
         'tpl.category.blog'                 => ['PageDesign.PageDesign',                  GlobalContext::class],               // provide template to use for blog categories
         'tpl.category.container'            => ['PageDesign.PageDesign',                  GlobalContext::class],               // provide template to use for container categories
         'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],                 // provide template to use for single items
@@ -54,7 +54,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.guest'                         => ['Customer.Guest',                         GlobalContext::class],                      // provide template to use for guest
         'tpl.password-reset'                => ['Customer.ResetPassword',                 PasswordResetContext::class],              // provide template to use for password-reset
         'tpl.contact'                       => ['Customer.Contact',                       GlobalContext::class],                    // provide template to use for contact
-        'tpl.search'                        => ['ItemList.ItemSearchView',                ItemSearchContext::class],               // provide template to use for item search
+        'tpl.search'                        => ['ItemList.ItemListView',                  ItemSearchContext::class],               // provide template to use for item search
         'tpl.wish-list'                     => ['WishList.WishListView',                  ItemWishListContext::class],               // provide template to use for wishlist
         'tpl.order.return'                  => ['OrderReturn.OrderReturnView',            OrderReturnContext::class],         // provide template to use for order return
         'tpl.order.return.confirmation'     => ['OrderReturn.OrderReturnConfirmation',    GlobalContext::class], // provide template to use for order return confirmation

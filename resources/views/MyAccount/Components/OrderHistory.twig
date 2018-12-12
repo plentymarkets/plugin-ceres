@@ -29,7 +29,7 @@
                     <div class="pull-xs-left counter">
                         {{ trans("Ceres::Template.orderHistoryShow", {"countStart": orderList.firstOnPage, "countEnd": orderList.lastOnPage, "orderMaxCount": orderList.totalsCount }) }}
                     </div>
-                    {% include "Ceres::Category.Partials.Pagination" with { 'currentPage': page } %}
+                    {% include "Ceres::Category.Item.Partials.Pagination" with { 'currentPage': page } %}
                 </div>
                 {% endif %}
                 <!-- ./ORDER PAGINATION -->
