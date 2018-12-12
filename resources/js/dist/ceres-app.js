@@ -23057,9 +23057,12 @@ Vue.component("item-filter-price", {
 
 Vue.component("item-filter-tag-list", {
 
-    delimiters: ["${", "}"],
-
-    props: ["template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-filter-tag-list"
+        }
+    },
 
     computed: Vuex.mapState({
         tagList: function tagList(state) {
@@ -23068,7 +23071,7 @@ Vue.component("item-filter-tag-list", {
     }),
 
     created: function created() {
-        this.$options.template = this.template || "#vue-item-filter-tag-list";
+        this.$options.template = this.template;
     },
 
 
