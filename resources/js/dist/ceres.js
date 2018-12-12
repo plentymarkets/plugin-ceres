@@ -23192,6 +23192,8 @@ Vue.component("item-filter-list", {
     data: function data() {
         return {
             initialSelectedFacets: [],
+            initialPriceMin: "",
+            initialPriceMax: "",
             isActive: false
         };
     },
@@ -23200,6 +23202,10 @@ Vue.component("item-filter-list", {
     computed: _extends({
         isInitialFacetSelectionActive: function isInitialFacetSelectionActive() {
             var _this = this;
+
+            if (!this.isInitialPriceFacetActive) {
+                return false;
+            }
 
             var selectedFacetIds = this.selectedFacets.map(function (facet) {
                 return facet.id;
@@ -23247,6 +23253,24 @@ Vue.component("item-filter-list", {
             }
 
             return false;
+        },
+        isInitialPriceFacetActive: function isInitialPriceFacetActive() {
+            var currentPriceFacet = this.selectedFacets.filter(function (facet) {
+                return facet.id === "price";
+            })[0];
+
+            // no initial price facet and no current one
+            if (!this.initialPriceMin && !this.initialPriceMax && !currentPriceFacet) {
+                return true;
+            }
+
+            if (currentPriceFacet) {
+                if (currentPriceFacet.priceMin === this.initialPriceMin && currentPriceFacet.priceMax === this.initialPriceMax) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }, Vuex.mapState({
         facets: function facets(state) {
@@ -23288,6 +23312,9 @@ Vue.component("item-filter-list", {
             var priceMax = urlParams.priceMax || "";
 
             this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+
+            this.initialPriceMin = priceMin;
+            this.initialPriceMax = priceMax;
 
             selectedFacets.push("price");
         }
@@ -23371,7 +23398,8 @@ Vue.component("item-filter-price", {
         triggerFilter: function triggerFilter() {
             if (!this.isDisabled) {
                 // TODO reload
-                this.$store.dispatch("selectPriceFacet", { priceMin: this.priceMin, priceMax: this.priceMax });
+                this.$store.dispatch("selectPriceFacetNew", { priceMin: this.priceMin, priceMax: this.priceMax });
+                // this.$store.dispatch("selectPriceFacet", {priceMin: this.priceMin, priceMax: this.priceMax});
             }
         }
     }
@@ -28720,10 +28748,17 @@ var actions = {
             commit("toggleSelectedFacet", facetValue);
         }
 
+        // commit("setItemListPage", 1);
+
+        var selectedPriceFacet = state.selectedFacets.find(function (facet) {
+            return facet.id === "price";
+        });
         var params = {
             categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
             facets: getters.selectedFacetIdsForUrl.toString(),
             items: 0,
+            priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+            priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
             query: state.searchString,
             template: "Ceres::ItemList.ItemListView"
         };
@@ -28750,11 +28785,44 @@ var actions = {
 
         dispatch("loadItemList");
     },
-    selectPriceFacet: function selectPriceFacet(_ref6, _ref7) {
-        var dispatch = _ref6.dispatch,
-            commit = _ref6.commit;
+    selectPriceFacetNew: function selectPriceFacetNew(_ref6, _ref7) {
+        var commit = _ref6.commit,
+            getters = _ref6.getters,
+            rootState = _ref6.rootState;
         var priceMin = _ref7.priceMin,
             priceMax = _ref7.priceMax;
+
+        commit("setIsItemListLoading", true);
+        commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+        commit("setPriceFacetTag");
+
+        // commit("setItemListPage", 1);
+
+        var selectedPriceFacet = state.selectedFacets.find(function (facet) {
+            return facet.id === "price";
+        });
+        var params = {
+            categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
+            facets: getters.selectedFacetIdsForUrl.toString(),
+            items: 0,
+            priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+            priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+            query: state.searchString,
+            template: "Ceres::ItemList.ItemListView"
+        };
+
+        var url = params.categoryId ? "/rest/io/category" : "/rest/io/item/search";
+
+        _ApiService2.default.get(url, params).done(function (data) {
+            commit("setFacets", data.facets);
+            commit("setIsItemListLoading", false);
+        }).fail(function (error) {});
+    },
+    selectPriceFacet: function selectPriceFacet(_ref8, _ref9) {
+        var dispatch = _ref8.dispatch,
+            commit = _ref8.commit;
+        var priceMin = _ref9.priceMin,
+            priceMax = _ref9.priceMax;
 
         commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
         commit("setPriceFacetTag");
@@ -28762,35 +28830,35 @@ var actions = {
 
         dispatch("loadItemList");
     },
-    selectItemListPage: function selectItemListPage(_ref8, page) {
-        var dispatch = _ref8.dispatch,
-            commit = _ref8.commit;
+    selectItemListPage: function selectItemListPage(_ref10, page) {
+        var dispatch = _ref10.dispatch,
+            commit = _ref10.commit;
 
         commit("setItemListPage", page);
 
         dispatch("loadItemList");
     },
-    selectItemListSorting: function selectItemListSorting(_ref9, sorting) {
-        var dispatch = _ref9.dispatch,
-            commit = _ref9.commit;
+    selectItemListSorting: function selectItemListSorting(_ref11, sorting) {
+        var dispatch = _ref11.dispatch,
+            commit = _ref11.commit;
 
         commit("setItemListSorting", sorting);
         commit("setItemListPage", 1);
 
         dispatch("loadItemList");
     },
-    selectItemsPerPage: function selectItemsPerPage(_ref10, itemsPerPage) {
-        var dispatch = _ref10.dispatch,
-            commit = _ref10.commit;
+    selectItemsPerPage: function selectItemsPerPage(_ref12, itemsPerPage) {
+        var dispatch = _ref12.dispatch,
+            commit = _ref12.commit;
 
         commit("setItemsPerPage", itemsPerPage);
         commit("setItemListPage", 1);
 
         dispatch("loadItemList");
     },
-    searchItems: function searchItems(_ref11, searchString) {
-        var dispatch = _ref11.dispatch,
-            commit = _ref11.commit;
+    searchItems: function searchItems(_ref13, searchString) {
+        var dispatch = _ref13.dispatch,
+            commit = _ref13.commit;
 
         commit("setItemListSearchString", searchString);
         commit("setItemListPage", 1);
@@ -28798,10 +28866,10 @@ var actions = {
 
         dispatch("loadItemList");
     },
-    loadItemList: function loadItemList(_ref12) {
-        var state = _ref12.state,
-            commit = _ref12.commit,
-            getters = _ref12.getters;
+    loadItemList: function loadItemList(_ref14) {
+        var state = _ref14.state,
+            commit = _ref14.commit,
+            getters = _ref14.getters;
 
         var selectedPriceFacet = state.selectedFacets.find(function (facet) {
             return facet.id === "price";
