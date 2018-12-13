@@ -1,5 +1,4 @@
 import MonetaryFormatter from "../helper/MonetaryFormatter";
-import {isNull}from "../helper/utils";
 
 const formatter = new MonetaryFormatter();
 
