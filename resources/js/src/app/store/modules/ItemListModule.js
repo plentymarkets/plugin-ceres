@@ -119,7 +119,7 @@ const mutations =
 
         setItemsPerPage(state, itemsPerPage)
         {
-            state.itemsPerPage = itemsPerPage;
+            state.itemsPerPage = parseInt(itemsPerPage);
         },
 
         setIsItemListLoading(state, isLoading)
@@ -238,7 +238,7 @@ const actions =
             const searchParams =
                 {
                     query               : state.searchString,
-                    items               : state.itemsPerPage,
+                    items               : parseInt(state.itemsPerPage),
                     sorting             : state.sorting,
                     page                : state.page,
                     facets              : getters.selectedFacetIdsForUrl.toString(),

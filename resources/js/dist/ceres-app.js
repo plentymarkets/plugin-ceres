@@ -22561,7 +22561,6 @@ Vue.component("item-search", {
             if (this.$refs.searchInput.value.length) {
                 if (document.location.pathname === "/search") {
                     this.updateTitle(this.$refs.searchInput.value);
-                    // TODO reload?
                     this.$store.dispatch("searchItems", this.$refs.searchInput.value);
 
                     this.selectedAutocompleteIndex = -1;
@@ -28750,7 +28749,7 @@ var mutations = {
         state.sorting = sorting;
     },
     setItemsPerPage: function setItemsPerPage(state, itemsPerPage) {
-        state.itemsPerPage = itemsPerPage;
+        state.itemsPerPage = parseInt(itemsPerPage);
     },
     setIsItemListLoading: function setIsItemListLoading(state, isLoading) {
         state.isLoading = isLoading;
@@ -28869,7 +28868,7 @@ var actions = {
         });
         var searchParams = {
             query: state.searchString,
-            items: state.itemsPerPage,
+            items: parseInt(state.itemsPerPage),
             sorting: state.sorting,
             page: state.page,
             facets: getters.selectedFacetIdsForUrl.toString(),

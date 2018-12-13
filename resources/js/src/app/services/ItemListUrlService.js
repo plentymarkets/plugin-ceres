@@ -21,7 +21,7 @@ export function getItemListUrlParams(searchParams)
         urlParams.sorting = (searchParams.sorting !== App.config.sorting.defaultSorting) ? searchParams.sorting : null;
     }
 
-    var newUrlParams = UrlService.getUrlParams(document.location.search);
+    const newUrlParams = UrlService.getUrlParams(document.location.search);
 
     for (const urlParamKey in urlParams)
     {
