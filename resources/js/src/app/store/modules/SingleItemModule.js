@@ -111,6 +111,11 @@ const getters =
         {
             const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
+            if (graduatedPrice === null)
+            {
+                return null;
+            }
+
             if (state.variation.documents)
             {
                 return getters.variationPropertySurcharge + Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
