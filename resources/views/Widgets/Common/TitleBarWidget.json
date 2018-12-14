@@ -2,7 +2,7 @@
     "identifier": "Ceres::TitleBarWidget",
     "label": "Widget.titleBarLabel",
     "previewImageURL": "/images/widgets/title-bar.svg",
-    "type": "default",
+    "type": "text",
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
     "settings": {

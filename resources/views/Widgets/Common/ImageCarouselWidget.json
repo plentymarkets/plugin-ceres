@@ -2,7 +2,7 @@
     "identifier": "Ceres::ImageCarouselWidget",
     "label": "Widget.imageCarouselLabel",
     "previewImageURL": "/images/widgets/image-carousel.svg",
-    "type": "default",
+    "type": "image",
     "position": 500,
     "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
     "settings": {

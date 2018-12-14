@@ -3,7 +3,7 @@
         "identifier": "Ceres::ImageBoxWidget",
         "label": "Widget.imageBoxLabel",
         "previewImageURL": "/images/widgets/image-box.svg",
-        "type": "default",
+        "type": "image",
         "position": 600,
         "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
         "settings": {
@@ -143,7 +143,7 @@
         "identifier": "Ceres::ImageCarouselWidget",
         "label": "Widget.imageCarouselLabel",
         "previewImageURL": "/images/widgets/image-carousel.svg",
-        "type": "default",
+        "type": "image",
         "position": 500,
         "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
         "settings": {
@@ -1027,7 +1027,7 @@
         "identifier": "Ceres::TextWidget",
         "label": "Widget.textLabel",
         "previewImageURL": "/images/widgets/text.svg",
-        "type": "default",
+        "type": "text",
         "position": 800,
         "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
         "settings": {
@@ -1089,7 +1089,7 @@
         "identifier": "Ceres::TitleBarWidget",
         "label": "Widget.titleBarLabel",
         "previewImageURL": "/images/widgets/title-bar.svg",
-        "type": "default",
+        "type": "text",
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
         "settings": {

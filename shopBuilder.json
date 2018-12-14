@@ -34,5 +34,31 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
             }
         ]
-    }
+    },
+    "widgetTypes": [
+        {
+            "type": "default",
+            "label": "Widget.typeDefault"
+        },
+        {
+            "type": "image",
+            "label": "Widget.typeImage"
+        },
+        {
+            "type": "text",
+            "label": "Widget.typeText"
+        },
+        {
+            "type": "structure",
+            "label": "Widget.typeStructure"
+        },
+        {
+            "type": "header",
+            "label": "Widget.typeHeader"
+        },
+        {
+            "type": "footer",
+            "label": "Widget.typeFooter"
+        }
+    ]
 }

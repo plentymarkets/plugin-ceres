@@ -2,7 +2,7 @@
     "identifier": "Ceres::TextWidget",
     "label": "Widget.textLabel",
     "previewImageURL": "/images/widgets/text.svg",
-    "type": "default",
+    "type": "text",
     "position": 800,
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {
