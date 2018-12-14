@@ -26,7 +26,7 @@
 <div class="top-bar{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
         <div class="row">
-            {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Header.LeftSide"])) }}
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Header.LeftSide"])) }}
             <div class="top-bar-items {% if searchStyle == "permanent" %}search-shown{% endif %}">
                 {% if searchStyle == "permanent" %}
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
