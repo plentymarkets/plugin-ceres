@@ -1,11 +1,11 @@
 {% extends getPartial('page-design') %}
 
+{% set decimalCount = ceresConfig.item.storeSpecial %}
+{% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets) %}
+{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
+
 {% block PageBody %}
 
-    {{ component( "Ceres::ItemList.Components.ItemList" ) }}
-    {{ component( "Ceres::ItemList.Components.ItemListSorting" ) }}
-    {{ component( "Ceres::ItemList.Components.ItemsPerPage" ) }}
-    {{ component( "Ceres::ItemList.Components.Pagination" ) }}
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
 
@@ -21,13 +21,18 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="list-wrapper">
-                            <item-list-sorting template="#vue-item-list-sorting" :sorting-list="{{ searchOptions.sorting | json_encode }}" :default-sorting="{{ searchOptions.defaultSorting | json_encode }}"></item-list-sorting>
-                            <items-per-page
-                                template="#vue-items-per-page"
-                                :pagination-values="{{ searchOptions.itemsPerPage | json_encode }}"></items-per-page>
-                            {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets) %}
+                            {% include "Ceres::Category.Item.Partials.ItemSorting" with { 'sortingData': searchOptions.sorting, 'selectedSorting': itemSorting } %}
+
+                            {% include "Ceres::Category.Item.Partials.ItemsPerPage" with { 'itemsPerPage': searchOptions.itemsPerPage, 'selectedValue': itemsPerPage } %}
+
                             {% if overrideSearchFilters | trim is empty %}
-                                <item-filter-list :facet-data="{{ facets | json_encode }}"></item-filter-list>
+                                <item-filter-list :facet-data="{{ facets | json_encode }}">
+                                    {% if facets | length > 0 %}
+                                        <a class="btn btn-link filter-toggle" href="#filterCollapse">
+                                            <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ trans("Ceres::Template.itemFilter") }}
+                                        </a>
+                                    {% endif %}
+                                </item-filter-list>
                             {% else %}
                                 {{ overrideSearchFilters }}
                             {% endif %}
@@ -42,29 +47,28 @@
         {% if ceresConfig.pagination.position in ['top', 'top_bottom'] %}
             <div class="list-controls m-b-3 row">
                 <div class="col-xs-12">
-                    <pagination template="#vue-pagination"></pagination>
+                    {% include "Ceres::Category.Item.Partials.Pagination" %}
                 </div>
             </div>
         {% endif %}
 
-        <div class="row">
-            <div class="col-xs-12">
-
-                <div id="vue-rendered-item-list" class="item-list-frame">
-                    <item-list
-                        :item-data="{{ itemList | json_encode }}"
-                        :total-items-data="{{ itemCountTotal }}"
-                        template="#vue-item-list">
-                    </item-list>
-                </div>
-
-            </div>
-        </div>
+        <ul class="product-list row grid">
+            {% for item in itemList %}
+                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <category-item
+                        :item-data="{{ item.data | json_encode }}"
+                        :decimal-count="{{ decimalCount }}">
+                        <template slot="BeforePrices">{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
+                        <template slot="AfterPrices">{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
+                    </category-item>
+                </li>
+            {% endfor %}
+        </ul>
 
         {% if ceresConfig.pagination.position in ['bottom', 'top_bottom'] %}
             <div class="list-controls m-b-3 row">
                 <div class="col-xs-12">
-                    <pagination template="#vue-pagination"></pagination>
+                    {% include "Ceres::Category.Item.Partials.Pagination" %}
                 </div>
             </div>
         {% endif %}
