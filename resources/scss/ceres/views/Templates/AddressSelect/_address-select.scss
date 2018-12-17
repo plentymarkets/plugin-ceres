@@ -51,11 +51,6 @@
 	.add-item{
 		position: absolute;
 		
-		.btn {
-			width: auto;
-			min-width: 10rem;
-		}
-
 		@include media-breakpoint-down(xs)
 		{
 			top: 0;
