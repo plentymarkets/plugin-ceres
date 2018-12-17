@@ -10,7 +10,7 @@
                         {{ trans("Ceres::Template.returnHistoryShow", {"countStart": "${ returnsList.firstOnPage }", "countEnd": "${ returnsList.lastOnPage }", "orderMaxCount": "${ returnsList.totalsCount }" }) }}
                     </div>
 
-					{% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'returnsList.page', 'pageMax': 'returnsList.lastPageNumber', 'setPage': 'setPage' } %}
+					{% include "Ceres::PageDesign.Item.Partials.PaginationTemplate" with { 'page': 'returnsList.page', 'pageMax': 'returnsList.lastPageNumber', 'setPage': 'setPage' } %}
 
                 </div>
                 <!-- ./RETURN PAGINATION -->

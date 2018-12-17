@@ -7,10 +7,10 @@
                 <div class="parallax-text-container">
                     <h1 class="h2 p-t-2 category-title">{{ category.details[0].name | raw }}</h1>
                     {% if categoryDescriptionTop == "description1" or categoryDescriptionTop == "both" %}
-                        <div class="category-description m-b-1" data-category-description="1">{{ category.details[0].description | raw }}</div>
+                        <div class="category-description m-b-1">{{ category.details[0].description | raw }}</div>
                     {% endif %}
                     {% if categoryDescriptionTop == "description2" or categoryDescriptionTop == "both" %}
-                        <div class="category-description m-b-1" data-category-description="2">{{ category.details[0].description2 | raw }}</div>
+                        <div class="category-description m-b-1">{{ category.details[0].description2 | raw }}</div>
                     {% endif %}
                 </div>
             </div>
