@@ -24,7 +24,7 @@
                                 <span>
                                     <template v-if="selectedAddress.address1 === 'PACKSTATION' || selectedAddress.address1 === 'POSTFILIALE'">
                                         {{ trans("Ceres::Template.addressPostNummer") }}
-                                    <template> 
+                                    </template> 
                                     
                                     ${ selectedAddress.address3 }
                                 </span>
@@ -74,7 +74,7 @@
                                 <span>
                                     <template v-if="address.address1 === 'PACKSTATION' || address.address1 === 'POSTFILIALE'">
                                         {{ trans("Ceres::Template.addressPostNummer") }}
-                                    <template> 
+                                    </template> 
                                     
                                     ${ address.address3 }
                                 </span>
@@ -153,7 +153,7 @@
                                             <span>
                                                 <template v-if="addressToDelete.address1 === 'PACKSTATION' || addressToDelete.address1 === 'POSTFILIALE'">
                                                     {{ trans("Ceres::Template.addressPostNummer") }}
-                                                <template> 
+                                                </template> 
                                                 
                                                 ${ addressToDelete.address3 }
                                             </span>
