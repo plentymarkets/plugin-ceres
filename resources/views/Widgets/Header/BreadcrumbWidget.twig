@@ -36,11 +36,8 @@
             {{ Twig.for("category", "categoryBreadcrumbs[:categoryBreadcrumbs | length - 1]", "not break") }}
                 {{ Twig.if("category.details[0]") }}
                     <li class="breadcrumb-item">
-                        <a href="{{ Twig.print(Twig.call("services.category.getURLById", [Twig.var("category.id")])) }}"
-                           v-render-category="{ id: {{ Twig.print("category.id") }}, type: '{{ Twig.print("category.type") }}', alwaysOpen: true }">
-
+                        <a href="{{ Twig.print(Twig.call("services.category.getURLById", [Twig.var("category.id")])) }}">
                             {{ Twig.print("category.details[0].name") }}
-
                         </a>
                     </li>
                 {{ Twig.else() }}

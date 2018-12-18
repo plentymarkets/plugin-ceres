@@ -24,6 +24,12 @@
 </header>
 {% endif %}
 
+{% set scriptId = uid() %}
+<script id="{{ scriptId }}">
+    document.getElementById("vue-app").style.marginTop = document.getElementById("page-header").getBoundingClientRect().height + 'px';
+    document.getElementById("{{ scriptId }}").remove();
+</script>
+
 <div>
     {% if category.linklist == "Y" %}
         {% set initialCategory = { id: category.id } %}

@@ -1,4 +1,5 @@
 import {isNullOrUndefined}from "../../helper/utils";
+import TranslationService from "../../services/TranslationService";
 
 Vue.component("item-store-special", {
 
@@ -25,6 +26,12 @@ Vue.component("item-store-special", {
                 2: "tag-new bg-primary",
                 3: "tag-top bg-success",
                 default: "bg-success"
+            },
+            labels:
+            {
+                1: TranslationService.translate("Ceres::Template.storeSpecialOffer"),
+                2: TranslationService.translate("Ceres::Template.storeSpecialNew"),
+                3: TranslationService.translate("Ceres::Template.storeSpecialTop")
             }
         };
     },
@@ -52,22 +59,15 @@ Vue.component("item-store-special", {
 
         getLabel()
         {
-            if (isNullOrUndefined(this.storeSpecial))
-            {
-                if (isNullOrUndefined(this.recommendedRetailPrice))
-                {
-                    return "";
-                }
-
-                return this.getPercentageSale();
-            }
-
-            if (this.storeSpecial.id === 1 && !isNullOrUndefined(this.recommendedRetailPrice))
+            if (
+                (isNullOrUndefined(this.storeSpecial) || this.storeSpecial.id === 1) &&
+                !isNullOrUndefined(this.recommendedRetailPrice)
+            )
             {
                 return this.getPercentageSale();
             }
 
-            return this.storeSpecial.names.name;
+            return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
         },
 
         getPercentageSale()

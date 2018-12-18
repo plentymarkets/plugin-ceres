@@ -65,7 +65,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.terms-conditions'              => ['StaticPages.TermsAndConditions',         GlobalContext::class],      // provide template to use for terms and conditions
         'tpl.item-not-found'                => ['StaticPages.ItemNotFound',               GlobalContext::class],            // provide template to use for item not found
         'tpl.page-not-found'                => ['StaticPages.PageNotFound',               GlobalContext::class],       // provide template to use for page not found
-        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut', GlobalContext::class]
+        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class]
     ];
 
     public function register(){
