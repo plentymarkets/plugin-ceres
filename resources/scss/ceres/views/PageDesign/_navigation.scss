@@ -291,41 +291,47 @@ nav.navbar.megamenu {
 
 			>ul.collapse {
 				background-color: $megamenu-bg;
-				columns 		: 5 228px;
 				column-gap 		: .5em;
 				column-rule 	: 1px solid #dcdbd7;
 				display 		: none;
-				padding 		: 1em;
-				min-height		: 10em;
-				max-height		: 50em;  
-				// padding-left	: 5px;
+				padding 		: 1em 0;
+				min-height		: 7em;
+				max-height		: 86vh;  
+				column-count	: 5;
+				overflow-x		: auto;
+				overflow-y		: hidden;
+
+				li {
+					display		: list-item;
+					float		: none;
+				}
 
 				>li ul.nav-dropdown-inner {
 					background-color	: $megamenu-bg;
-					padding-bottom		: .5rem;
+					padding-bottom		: 1em;
 
+					>li {
+						padding	: 0 1.5em;
+						line-height		: 170%;
+						text-align		: left;
+	
+						&.bt-more>a {
+							color 			: $megamenu-btn-more;
+							text-transform 	: lowercase; 
+						}
+						>a {
+							color	: $megamenu-color-bottom-btn;
+							padding	: 0;
+						}
+					}
 					.level1 { 
 						>a {								
-							color 		: $megamenu-color-top-btn; 
-							font-weight : bold; 
+							color		: $megamenu-color-top-btn; 
+							font-weight	: bold; 
 						}
 					}
 					.level3 { 
-						padding-left: 2.5em;
-					}
-
-					>li {
-						padding-left	: 1.5em;
-						line-height		: 170%;
-	
-						.bt-more>a {
-							color 			: $gray;
-							text-transform 	: lowercase; 
-						}
-						a {
-							color 		: $megamenu-color-bottom-btn;
-							padding 	: 0;
-						}
+						padding-left	: 2.5em;
 					}
 				}
 			}
