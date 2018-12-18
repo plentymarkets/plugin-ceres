@@ -259,7 +259,7 @@ body.menu-is-visible {
 @include media-breakpoint-up(lg){ 
 	nav.navbar.megamenu {
 		position : relative;
-		
+
 		#mainNavbarCollapsable ul.mainmenu {
 			background 		: transparent;
 			display 		: flex;
@@ -279,15 +279,16 @@ body.menu-is-visible {
 
 				>ul.collapse {
 					background-color: $megamenu-bg;
-					column-gap 		: .5em;
-					column-rule 	: 1px solid #dcdbd7;
-					display 		: none;
-					padding 		: 1em 0;
+					column-gap		: .5em;
+					column-rule		: 1px solid #dcdbd7;
+					display			: none;
+					padding			: 1em 0;
 					min-height		: 7em;
 					max-height		: 86vh;  
 					column-count	: 5;
 					overflow-x		: auto;
 					overflow-y		: hidden;
+					column-fill		: balance;
 
 					li {
 						display		: list-item;
