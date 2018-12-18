@@ -1,6 +1,3 @@
-{% set pageBeforePrevious = currentPage - 2 != 1 ? currentPage - 2 : null %}
-{% set pagePrevious       = currentPage - 1 != 1 ? currentPage - 1 : null %}
-
 <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
     {% if pageMax > 1 %}
         <ul class="pagination col-xs-12 m-y-0">
@@ -8,7 +5,7 @@
             <!-- FIRST PAGE LINK -->
             {% if ceresConfig.pagination.showFirstPage and pageMax > 3 and currentPage > 2 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ queryString({ 'page': null }) }}">
+                    <a class="page-link" href="{{ queryString({ 'page': 1 }) }}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                 </li>
@@ -17,7 +14,7 @@
 
             <!-- PREV LINK -->
             <li class="page-item{% if currentPage <= 1 %} disabled{% endif %}">
-                <a class="page-link"{% if currentPage > 1 %} href="{{ queryString({ 'page': pagePrevious }) }}"{% endif %}>
+                <a class="page-link"{% if currentPage > 1 %} href="{{ queryString({ 'page': currentPage - 1 }) }}"{% endif %}>
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </a>
             </li>
@@ -26,13 +23,13 @@
             <!-- PAGINATION -->
             {% if currentPage == pageMax and currentPage > 2 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ queryString({ 'page': pageBeforePrevious }) }}">{{ currentPage - 2 }}</a>
+                    <a class="page-link" href="{{ queryString({ 'page': currentPage - 2 }) }}">{{ currentPage - 2 }}</a>
                 </li>
             {% endif %}
 
             {% if currentPage > 1 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ queryString({ 'page': pagePrevious }) }}">{{ currentPage - 1 }}</a>
+                    <a class="page-link" href="{{ queryString({ 'page': currentPage - 1 }) }}">{{ currentPage - 1 }}</a>
                 </li>
             {% endif %}
 
