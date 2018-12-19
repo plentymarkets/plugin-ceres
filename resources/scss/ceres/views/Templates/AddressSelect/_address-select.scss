@@ -45,7 +45,8 @@
 		list-style: none;
 		box-shadow: $box-shadow;
 		max-height: 500px;
-		overflow: scroll;
+		overflow-x: none;
+		overflow-y: auto;
 	}
 
 	.add-item{
