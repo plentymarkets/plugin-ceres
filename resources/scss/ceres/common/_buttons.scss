@@ -118,15 +118,15 @@ button:focus {
 	}
 
 	&.btn-medium {
-		width: 10rem;
+		min-width: 10rem;
 	}
 
 	&.btn-medium-large {
-		width: 12rem;
+		min-width: 12rem;
 	}
 
 	&.btn-large {
-		width: 15rem;
+		min-width: 15rem;
 	}
 
 	&.btn-m-r {
