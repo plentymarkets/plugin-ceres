@@ -143,8 +143,8 @@ Vue.component("address-select", {
                 this.addressToEdit = {
                     addressSalutation: 0,
                     gender: "male",
-                    countryId        : this.shippingCountryId,
-                    showPickupStation : false
+                    countryId: this.shippingCountryId,
+                    showPickupStation: false
                 };
             }
             else
