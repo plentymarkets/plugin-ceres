@@ -19063,7 +19063,8 @@ Vue.component("address-select", {
                 1: "vatNumber",
                 4: "telephone",
                 9: "birthday",
-                11: "title"
+                11: "title",
+                12: "contactPerson"
             }
         };
     },
@@ -19341,7 +19342,7 @@ Vue.component("address-select", {
 
     filters: {
         optionType: function optionType(selectedAddress, typeId) {
-            if (selectedAddress && selectedAddress.name2) {
+            if (selectedAddress && selectedAddress.options) {
                 var _iteratorNormalCompletion2 = true;
                 var _didIteratorError2 = false;
                 var _iteratorError2 = undefined;
@@ -19591,6 +19592,13 @@ Vue.component("create-update-address", {
                                 {
                                     if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
                                         optionType.value = this.addressData.telephone;
+                                    }
+                                    break;
+                                }
+                            case 12:
+                                {
+                                    if (this.addressData.contactPerson && this.addressData.contactPerson !== optionType.value) {
+                                        optionType.value = this.addressData.contactPerson;
                                     }
                                     break;
                                 }
@@ -20443,6 +20451,10 @@ Vue.component("salutation-select", {
             this.$emit("input", { field: "gender", value: gender });
             this.$emit("input", { field: "addressSalutation", value: value });
             this.$emit("input", { field: "name1", value: "" });
+            this.$emit("input", { field: "name2", value: "" });
+            this.$emit("input", { field: "name3", value: "" });
+            this.$emit("input", { field: "vatNumber", value: "" });
+            this.$emit("input", { field: "contactPerson", value: "" });
         },
         mapSalutationIdToGender: function mapSalutationIdToGender(id) {
             if (id === 0) {
