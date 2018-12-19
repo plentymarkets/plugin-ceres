@@ -108,23 +108,27 @@
 		}
 
 		.basket-item-container-right {
+			display: block;
 			margin-left: auto;
 
-			@include media-breakpoint-up(md) {
-				display: flex;
-			}
-
 			.qty-box-container {
-				margin: 0 10px;
+				margin: 0 0 0 10px;
 
 				@include media-breakpoint-down(sm) {
 					margin: 0 0 5px 27px; 
+				}
+
+				.qty-box {
+					margin: 0 0 5px auto;
+		
+					.qty-input {
+						margin-left: auto;
+					}
 				}
 			}
 
 			.price-box {
 				margin-left: auto;
-				min-width: 100px;
 			}
 
 			.item-total-price {
@@ -245,8 +249,6 @@
 
 /* Compatibility for IE */
 html.ie .wrapper-main .basket-item-container {
-
-	// Position absolute
 	.meta-container-wrapper-inner {
 		display: block;
 
@@ -262,20 +264,13 @@ html.ie .wrapper-main .basket-item-container {
         display: block;
 
         // Align childs right
-        .qty-box-container {
-            margin-right: 0;
-
-            .qty-box {
-                margin: 0 0 5px 0;
+        .qty-box-container .qty-box {
+			margin: 0 0 5px 0;
     
-                .qty-input {
-                    margin-left: auto;
-                }
-            }
-        }
-        .price-box {
-            min-width: 80px;
-        }
+			.qty-input {
+				margin-left: auto;
+			}
+		}
 	}
 
 	// For Basket-Preview and Basket
@@ -295,11 +290,9 @@ html.ie .wrapper-main .basket-item-container {
 				// Arrange to the right
 				.qty-box-container {
 					margin-left: auto;
-					margin-right: 0px;
 				}
 				.price-box {
 					margin-left: 10px;
-					min-width: 80px;
 				}
 			}
 		}	
@@ -324,11 +317,9 @@ html.ie .wrapper-main .checkout .checkout-rightside .basket-item-container .bask
 				// Arrange to the right
 				.qty-box-container {
 					margin-left: auto;
-					margin-right: 0px;
 				}
 				.price-box {
 					margin-left: 10px;
-					min-width: 80px;
 				}
 			}
 		}	
