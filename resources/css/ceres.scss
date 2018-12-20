@@ -17991,16 +17991,23 @@ html.ie .basket-preview-hover {
                     color: $gray-dark;
                 }
                 .form-check {
-                    .form-check-input:checked + label {
-                        background: $gray-lighter2;
-                        color: $gray-darker;
-                        padding-left: 1.75rem;
-                        &::before {
-                            font-family: "FontAwesome";
-                            content: "\f046";
-                            opacity: 1;
+                    .form-check-input {
+                        &:checked + label {
+                            background: $gray-lighter2;
+                            color: $gray-darker;
+                            padding-left: 1.75rem;
+                            &::before {
+                                font-family: "FontAwesome";
+                                content: "\f046";
+                                opacity: 1;
+                            }
+                        }
+
+                        &:disabled + label {
+                            cursor: not-allowed;
                         }
                     }
+
                     .form-check-label {
                         padding: 0.5rem 0;
                         padding-left: 0;
@@ -18889,70 +18896,6 @@ html.ie .basket-preview-hover {
     .quantity-input-container {
         margin-right: 15px;
     }
-}
-
-.blur-effect.loading {
-  -webkit-animation-name: blur-loading;
-          animation-name: blur-loading;
-  -webkit-animation-duration: 500ms;
-          animation-duration: 500ms;
-  -webkit-filter: blur(3px);
-          filter: blur(3px);
-}
-
-@-webkit-keyframes blur-loading {
-  0% {
-    -webkit-filter: blur(0px);
-            filter: blur(0px);
-  }
-
-  100% {
-    -webkit-filter: blur(3px);
-            filter: blur(3px);
-  }
-}
-
-@keyframes blur-loading {
-  0% {
-    -webkit-filter: blur(0px);
-            filter: blur(0px);
-  }
-
-  100% {
-    -webkit-filter: blur(3px);
-            filter: blur(3px);
-  }
-}
-
-.blur-effect.is-loaded {
-  -webkit-animation-name: blur-is-loaded;
-          animation-name: blur-is-loaded;
-  -webkit-animation-duration: 1000ms;
-          animation-duration: 1000ms;
-}
-
-@-webkit-keyframes blur-is-loaded {
-  0% {
-    -webkit-filter: blur(3px);
-            filter: blur(3px);
-  }
-
-  100% {
-    -webkit-filter: blur(0px);
-            filter: blur(0px);
-  }
-}
-
-@keyframes blur-is-loaded {
-  0% {
-    -webkit-filter: blur(3px);
-            filter: blur(3px);
-  }
-
-  100% {
-    -webkit-filter: blur(0px);
-            filter: blur(0px);
-  }
 }
 
 .loading {
