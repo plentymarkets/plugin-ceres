@@ -218,10 +218,6 @@ button:focus {
 	}
 	.btn-only-icon-#{$bp}-down {
 	  @include media-breakpoint-down($bp) {
-		height: 74px;
-		min-width: auto !important;
-		width: 50px;
-
         & span {
 			display: none !important;
 		}

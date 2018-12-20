@@ -58,12 +58,9 @@
 			right: 0;
 
 			& button {
+				min-width: auto !important;
+				width: 50px;
 				height: 74px;
-
-				& i {
-					margin-left: 6px;
-					margin-top: 1px;
-				}
 			}
 		}
 
