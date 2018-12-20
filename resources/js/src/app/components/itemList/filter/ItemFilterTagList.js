@@ -1,10 +1,13 @@
 Vue.component("item-filter-tag-list", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-item-filter-tag-list"
+        }
+    },
 
     computed: Vuex.mapState({
         tagList: state => state.itemList.selectedFacets
@@ -12,14 +15,30 @@ Vue.component("item-filter-tag-list", {
 
     created()
     {
-        this.$options.template = this.template || "#vue-item-filter-tag-list";
+        this.$options.template = this.template;
     },
 
     methods:
     {
         removeTag(tag)
         {
-            this.$store.dispatch("selectFacet", tag);
-        }
+            this.selectFacet({facetValue: tag});
+            this.loadItemList();
+        },
+
+        resetAllTags()
+        {
+            this.resetAllSelectedFacets();
+            this.loadItemList();
+        },
+
+        ...Vuex.mapMutations([
+            "resetAllSelectedFacets"
+        ]),
+
+        ...Vuex.mapActions([
+            "selectFacet",
+            "loadItemList"
+        ])
     }
 });

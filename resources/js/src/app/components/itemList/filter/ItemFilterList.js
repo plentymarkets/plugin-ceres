@@ -4,42 +4,105 @@ Vue.component("item-filter-list", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template",
-        "facetData"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-filter-list"
+        },
+        facetData: {
+            type: Array,
+            default()
+            {
+                return [];
+            }
+        }
+    },
 
     data()
     {
         return {
+            initialSelectedFacets: [],
+            initialPriceMin: "",
+            initialPriceMax: "",
             isActive: false
         };
     },
 
-    computed: Vuex.mapState({
-        facets(state)
+    computed:
+    {
+        isInitialFacetSelectionActive()
         {
-            return state.itemList.facets.sort((facetA, facetB) =>
+            if (!this.isInitialPriceFacetActive)
             {
-                if (facetA.position > facetB.position)
+                return false;
+            }
+
+            const selectedFacetIds = this.selectedFacets.map(facet => facet.id);
+
+            if (this.initialSelectedFacets.length === selectedFacetIds.length)
+            {
+                for (const selectedFacetId of selectedFacetIds)
                 {
-                    return 1;
-                }
-                if (facetA.position < facetB.position)
-                {
-                    return -1;
+                    if (!this.initialSelectedFacets.find(initialFacetId => initialFacetId === selectedFacetId))
+                    {
+                        return false;
+                    }
                 }
 
-                return 0;
-            });
-        }
-    }),
+                return true;
+            }
+
+            return false;
+        },
+
+        isInitialPriceFacetActive()
+        {
+            const currentPriceFacet = this.selectedFacets.filter(facet => facet.id === "price")[0];
+
+            // no initial price facet and no current one
+            if (!this.initialPriceMin && !this.initialPriceMax && !currentPriceFacet)
+            {
+                return true;
+            }
+
+            if (currentPriceFacet)
+            {
+                if (currentPriceFacet.priceMin === this.initialPriceMin && currentPriceFacet.priceMax === this.initialPriceMax)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        ...Vuex.mapState({
+            facets(state)
+            {
+                return state.itemList.facets.sort((facetA, facetB) =>
+                {
+                    if (facetA.position > facetB.position)
+                    {
+                        return 1;
+                    }
+                    if (facetA.position < facetB.position)
+                    {
+                        return -1;
+                    }
+
+                    return 0;
+                });
+            },
+            isLoading: state => state.itemList.isLoading,
+            selectedFacets: state => state.itemList.selectedFacets
+        })
+    },
 
     created()
     {
         this.$store.commit("setFacets", this.facetData);
 
-        this.$options.template = this.template || "#vue-item-filter-list";
+        this.$options.template = this.template;
 
         const urlParams = UrlService.getUrlParams(document.location.search);
 
@@ -57,6 +120,9 @@ Vue.component("item-filter-list", {
 
             this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
 
+            this.initialPriceMin = priceMin;
+            this.initialPriceMax = priceMax;
+
             selectedFacets.push("price");
         }
 
@@ -64,6 +130,8 @@ Vue.component("item-filter-list", {
         {
             this.$store.commit("setSelectedFacetsByIds", selectedFacets);
         }
+
+        this.initialSelectedFacets = selectedFacets;
     },
 
     methods:
@@ -72,6 +140,11 @@ Vue.component("item-filter-list", {
         {
             window.setTimeout(() =>
             {
+                if (this.isActive && !this.isInitialFacetSelectionActive)
+                {
+                    this.$store.dispatch("loadItemList");
+                }
+
                 this.isActive = !this.isActive;
             }, 300);
         }
