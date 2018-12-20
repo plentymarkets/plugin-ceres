@@ -12811,13 +12811,12 @@ button:focus {
 }
 
 @media (max-width: 543px) {
-  .btn-only-icon-xs-down {
-    width: 2.2rem !important;
-    padding-right: 8px;
-    height: 2.2rem;
-  }
   .btn-only-icon-xs-down span {
     display: none !important;
+  }
+  .btn-only-icon-xs-down i {
+    margin: 0 !important;
+    float: none !important;
   }
 }
 
@@ -12833,13 +12832,12 @@ button:focus {
 }
 
 @media (max-width: 767px) {
-  .btn-only-icon-sm-down {
-    width: 2.2rem !important;
-    padding-right: 8px;
-    height: 2.2rem;
-  }
   .btn-only-icon-sm-down span {
     display: none !important;
+  }
+  .btn-only-icon-sm-down i {
+    margin: 0 !important;
+    float: none !important;
   }
 }
 
@@ -12855,13 +12853,12 @@ button:focus {
 }
 
 @media (max-width: 991px) {
-  .btn-only-icon-md-down {
-    width: 2.2rem !important;
-    padding-right: 8px;
-    height: 2.2rem;
-  }
   .btn-only-icon-md-down span {
     display: none !important;
+  }
+  .btn-only-icon-md-down i {
+    margin: 0 !important;
+    float: none !important;
   }
 }
 
@@ -12877,13 +12874,12 @@ button:focus {
 }
 
 @media (max-width: 1199px) {
-  .btn-only-icon-lg-down {
-    width: 2.2rem !important;
-    padding-right: 8px;
-    height: 2.2rem;
-  }
   .btn-only-icon-lg-down span {
     display: none !important;
+  }
+  .btn-only-icon-lg-down i {
+    margin: 0 !important;
+    float: none !important;
   }
 }
 
@@ -12898,14 +12894,13 @@ button:focus {
   }
 }
 
-.btn-only-icon-xl-down {
-  width: 2.2rem !important;
-  padding-right: 8px;
-  height: 2.2rem;
-}
-
 .btn-only-icon-xl-down span {
   display: none !important;
+}
+
+.btn-only-icon-xl-down i {
+  margin: 0 !important;
+  float: none !important;
 }
 
 .card .item-edit, .cmp-address-list .items > div:first-child .item-edit {
@@ -16496,7 +16491,8 @@ body.menu-is-visible {
   list-style: none;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   max-height: 500px;
-  overflow: scroll;
+  overflow-x: none;
+  overflow-y: auto;
 }
 
 .cmp-address-list .add-item {
@@ -16509,11 +16505,9 @@ body.menu-is-visible {
     right: 0;
   }
   .cmp-address-list .add-item button {
+    min-width: auto !important;
+    width: 50px;
     height: 74px;
-  }
-  .cmp-address-list .add-item button i {
-    margin-left: 6px;
-    margin-top: 1px;
   }
 }
 
@@ -19872,6 +19866,12 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .price
       flex-direction: column;
 }
 
+@media (max-width: 767px) {
+  .payment-change-box {
+    margin-top: 15px;
+  }
+}
+
 .payment-change-box .payment-change-box-item:nth-child(2) {
   -ms-flex-order: 1;
       order: 1;
@@ -19880,6 +19880,7 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .price
 .payment-change-box .cannot-change-payment {
   font-size: 1rem;
   padding: 5px;
+  width: 100%;
 }
 
 .payment-change-box .cannot-change-payment .info-badge {
