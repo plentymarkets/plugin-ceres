@@ -1,5 +1,10 @@
 .widget-image-box
 {
+    @include media-breakpoint-only(xs) {
+        padding-bottom: 0 !important;
+        min-height: 10rem;
+    }
+
     > img
     {
         position: absolute;
@@ -37,12 +42,19 @@
     &.widget-image-box-fullwidth
     {
         > .widget-inner
-        {
+        {   
+            @include media-breakpoint-only(xs) {
+                position: relative;
+                min-height: 12rem;
+                padding-top: 2rem;
+            }
+
             .widget-caption
             {
                 width: 100%;
                 display: flex;
                 align-items: center;
+                padding: 1rem;
 
                 h2, .h2
                 {
@@ -50,7 +62,11 @@
                     width: 100%;
                     text-transform: uppercase;
 
-                    @include media-breakpoint-up(md)
+                    @include media-breakpoint-up(sm)
+                    {
+                        font-size: 3rem;
+                    }
+                    @include media-breakpoint-up(lg)
                     {
                         font-size: 4rem;
                     }
@@ -65,6 +81,11 @@
         {
             align-items: flex-end;
 
+            @include media-breakpoint-only(xs) {
+                position: relative;
+                padding-top: 14%;
+            }
+
             .widget-caption
             {
                 padding: 1.5rem;
@@ -76,8 +97,18 @@
     {
         > .widget-inner
         {
+            @include media-breakpoint-only(xs) {
+                position: relative;
+                padding: 25% 0 0 0;
+            }
+
             .widget-caption
             {
+                @include media-breakpoint-only(xs) {
+                    position: relative;
+                    width: 100%;
+                }
+
                 position: absolute;
                 left: 0;
                 right: 0;
@@ -190,6 +221,10 @@
         }
     }
 
+}
+
+.widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
+    font-size: 2rem;
 }
 
 /* Compatibility for IE */
