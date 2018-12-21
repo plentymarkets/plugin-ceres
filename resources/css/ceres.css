@@ -19335,6 +19335,10 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .price
   opacity: 1;
 }
 
+.list-controls #filterCollapse .page-content .card .form-check .form-check-input:disabled + label, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-input:disabled + label, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-input:disabled + label {
+  cursor: not-allowed;
+}
+
 .list-controls #filterCollapse .page-content .card .form-check .form-check-label, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-label, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-label {
   padding: 0.5rem 0;
   padding-left: 0;
@@ -20130,35 +20134,6 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .price
 
 .add-to-basket-container .quantity-input-container {
   margin-right: 15px;
-}
-
-.blur-effect.loading {
-  animation-name: blur-loading;
-  animation-duration: 500ms;
-  filter: blur(3px);
-}
-
-@keyframes blur-loading {
-  0% {
-    filter: blur(0px);
-  }
-  100% {
-    filter: blur(3px);
-  }
-}
-
-.blur-effect.is-loaded {
-  animation-name: blur-is-loaded;
-  animation-duration: 1000ms;
-}
-
-@keyframes blur-is-loaded {
-  0% {
-    filter: blur(3px);
-  }
-  100% {
-    filter: blur(0px);
-  }
 }
 
 .loading .loading-animation-frame {
