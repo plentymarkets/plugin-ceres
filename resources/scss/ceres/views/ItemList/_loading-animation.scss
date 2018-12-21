@@ -1,34 +1,3 @@
-.blur-effect.loading {
-  animation-name: blur-loading;
-  animation-duration: 500ms;
-  filter: blur(3px);
-}
-
-@keyframes blur-loading {
-  0% {
-    filter: blur(0px);
-  }
-
-  100% {
-    filter: blur(3px);
-  }
-}
-
-.blur-effect.is-loaded {
-  animation-name: blur-is-loaded;
-  animation-duration: 1000ms;
-}
-
-@keyframes blur-is-loaded {
-  0% {
-    filter: blur(3px);
-  }
-
-  100% {
-    filter: blur(0px);
-  }
-}
-
 .loading {
   & .loading-animation-frame {
     display: block;
