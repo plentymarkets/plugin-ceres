@@ -141,5 +141,14 @@
                 {{ footerContainer | raw }}
             </div>
         </div>
+        <div class="{% if topButtonPosition == "right" %}back-to-top{% else %}back-to-top-center{% endif %} hidden-sm-down">
+            <i class="fa fa-chevron-up"></i>
+        </div>
+
+        <div class="row">
+            <div class="to-top hidden-md-up" v-scroll-to-top>
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+            </div>
+        </div>
     </div>
 {% endif %}
