@@ -15660,16 +15660,6 @@ body.menu-is-visible {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  /*&.ddown>a:after {
-				border 			: none;
-				content			: "\f0da";
-				float 			: right;
-				font-family 	: FontAwesome;
-				font-size 		: 1.5rem;
-				height 			: auto;
-				padding 		: 0 .5em 0 1em;
-				width 			: auto;
-			}*/
 }
 
 #mainNavbarCollapsable ul.mainmenu li a {
@@ -15757,8 +15747,6 @@ body.menu-is-visible {
     width: auto;
     max-width: 25em;
     min-width: 100%;
-    /*left 			: 50%;
-					transform 		: translateX(-50%);*/
     word-wrap: break-word;
     position: absolute;
   }
@@ -15813,9 +15801,6 @@ body.menu-is-visible {
   nav.navbar.megamenu {
     position: relative;
   }
-}
-
-@media (min-width: 992px) {
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu {
     background: transparent;
     display: -ms-flexbox;
@@ -15829,7 +15814,7 @@ body.menu-is-visible {
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover {
-    background: #fff;
+    background: transparent !important;
     color: #004157 !important;
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover > ul.collapse,
@@ -15838,53 +15823,44 @@ body.menu-is-visible {
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse {
     background-color: #fff;
-    columns: 5 228px;
     column-gap: .5em;
     column-rule: 1px solid #dcdbd7;
     display: none;
-    padding: 1em;
-    min-height: 10em;
-    max-height: 50em;
+    padding: 1em 0;
+    min-height: 7em;
+    max-height: 86vh;
+    column-count: 5;
+    overflow-x: auto;
+    overflow-y: hidden;
+    column-fill: balance;
   }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li {
-    display: inline-block;
-    width: 100%;
+  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse li {
+    display: list-item;
+    float: none;
   }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li.level1 {
-    padding: .5em 1em;
+  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner {
+    background-color: #fff;
+    padding-bottom: 1em;
   }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li.level1 > a {
-    color: #008ebd;
-    font-weight: bold;
+  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li {
+    padding: 0 1.5em;
+    line-height: 170%;
+    text-align: left;
   }
-  .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li:hover,
-  .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li.hover {
-    background: #fff;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .level2 {
-    padding: 0.25em 0 !important;
-    break-inside: avoid;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .level3 {
-    padding: 0 1em .25em 1.4em !important;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .bt-more > a {
+  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li.bt-more > a {
     color: #7a7f7f;
     text-transform: lowercase;
   }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a {
-    background: #fff;
+  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li > a {
     color: #000;
     padding: 0;
-    text-align: left;
   }
-  .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a:hover,
-  .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a.hover {
-    background: #fff;
-    color: #004157 !important;
+  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner .level1 > a {
+    color: #008ebd;
+    font-weight: bold;
   }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul {
-    background-color: #fff;
+  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner .level3 {
+    padding-left: 2.5em;
   }
 }
 
