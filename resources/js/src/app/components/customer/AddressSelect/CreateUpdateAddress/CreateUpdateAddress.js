@@ -108,6 +108,10 @@ Vue.component("create-update-address", {
                         {
                             this._handleValidationErrors(error.validation_errors);
                         }
+                        else if (error.error)
+                        {
+                            this._handleError(error.error);
+                        }
                     }
                 );
         },
@@ -135,6 +139,10 @@ Vue.component("create-update-address", {
                         {
                             this._handleValidationErrors(error.validation_errors);
                         }
+                        else if (error.error)
+                        {
+                            this._handleError(error.error);
+                        }
                     }
                 );
         },
@@ -151,6 +159,15 @@ Vue.component("create-update-address", {
             }
 
             NotificationService.error(errorMessage);
+        },
+
+        _handleError(error)
+        {
+            if (error.code === 11)
+            {
+                NotificationService.error({code: error.code, message: ""});
+                window.location.reload();
+            }
         },
 
         _syncOptionTypesAddressData()
