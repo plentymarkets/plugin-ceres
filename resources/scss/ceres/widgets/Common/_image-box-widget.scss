@@ -43,11 +43,18 @@
     {
         > .widget-inner
         {   
+            @include media-breakpoint-only(xs) {
+                position: relative;
+                min-height: 12rem;
+                padding-top: 2rem;
+            }
+
             .widget-caption
             {
                 width: 100%;
                 display: flex;
                 align-items: center;
+                padding: 1rem;
 
                 h2, .h2
                 {
