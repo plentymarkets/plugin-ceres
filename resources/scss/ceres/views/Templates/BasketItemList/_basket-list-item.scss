@@ -1,3 +1,24 @@
+// Arrange counter and price side by side
+@include media-breakpoint-up(sm) {
+	.main .basket .basket-item-container .basket-item-container-right {	
+		display: flex;
+
+		.qty-box-container {
+			margin-right: 15px;
+		}
+	}
+}
+// Arrange counter and price side by side
+@include media-breakpoint-only(sm) {
+	.main .checkout .basket-item-container .basket-item-container-right {	
+		display: flex;
+
+		.qty-box-container {
+			margin-right: 15px;
+		}
+	}
+}
+
 .top-bar .controls-list > li .basket-preview-hover {
 	.basket-item {
 		a {
