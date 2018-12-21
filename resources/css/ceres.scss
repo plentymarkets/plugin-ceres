@@ -11094,13 +11094,13 @@ button:focus {
 	}
 	.btn-only-icon-#{$bp}-down {
 	  @include media-breakpoint-down($bp) {
-		width: 2.2rem !important;
-        padding-right: 8px;
-        height: 2.2rem;
-
         & span {
-            display: none !important;
-        }
+			display: none !important;
+		}
+		i {
+			margin: 0 !important;
+			float: none !important;
+		}
 	  }
 	}
   }
@@ -14924,7 +14924,8 @@ nav.navbar.megamenu {
 		-webkit-box-shadow: $box-shadow;
 		        box-shadow: $box-shadow;
 		max-height: 500px;
-		overflow: scroll;
+		overflow-x: none;
+		overflow-y: auto;
 	}
 
 	.add-item{
@@ -14936,12 +14937,9 @@ nav.navbar.megamenu {
 			right: 0;
 
 			& button {
+				min-width: auto !important;
+				width: 50px;
 				height: 74px;
-
-				& i {
-					margin-left: 6px;
-					margin-top: 1px;
-				}
 			}
 		}
 
@@ -18609,6 +18607,11 @@ html.ie .basket-preview-hover {
 	-webkit-box-direction: normal;
 	    -ms-flex-direction: column;
 	        flex-direction: column;
+	
+	@include media-breakpoint-down(sm){
+		margin-top: 15px;
+	}
+
 	.payment-change-box-item:nth-child(2) {
 		-webkit-box-ordinal-group: 2;
 		    -ms-flex-order: 1;
@@ -18617,6 +18620,7 @@ html.ie .basket-preview-hover {
 	.cannot-change-payment {
 		font-size: 1rem;
 		padding: 5px;
+		width: 100%;
 		.info-badge {
 			margin-left: .2rem;
 		}
