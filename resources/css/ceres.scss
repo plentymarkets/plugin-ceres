@@ -15454,6 +15454,31 @@ html.ie .confirmation-order-list .cmp-order-item {
 		}
 	}
 }
+// Arrange counter and price side by side
+@include media-breakpoint-up(sm) {
+	.main .basket .basket-item-container .basket-item-container-right {	
+		display: -webkit-box;	
+		display: -ms-flexbox;	
+		display: flex;
+
+		.qty-box-container {
+			margin-right: 15px;
+		}
+	}
+}
+// Arrange counter and price side by side
+@include media-breakpoint-only(sm) {
+	.main .checkout .basket-item-container .basket-item-container-right {	
+		display: -webkit-box;	
+		display: -ms-flexbox;	
+		display: flex;
+
+		.qty-box-container {
+			margin-right: 15px;
+		}
+	}
+}
+
 .top-bar .controls-list > li .basket-preview-hover {
 	.basket-item {
 		a {
@@ -15571,25 +15596,27 @@ html.ie .confirmation-order-list .cmp-order-item {
 		}
 
 		.basket-item-container-right {
+			display: block;
 			margin-left: auto;
 
-			@include media-breakpoint-up(md) {
-				display: -webkit-box;
-				display: -ms-flexbox;
-				display: flex;
-			}
-
 			.qty-box-container {
-				margin: 0 10px;
+				margin: 0 0 0 10px;
 
 				@include media-breakpoint-down(sm) {
 					margin: 0 0 5px 27px; 
+				}
+
+				.qty-box {
+					margin: 0 0 5px auto;
+		
+					.qty-input {
+						margin-left: auto;
+					}
 				}
 			}
 
 			.price-box {
 				margin-left: auto;
-				min-width: 100px;
 			}
 
 			.item-total-price {
@@ -15710,8 +15737,6 @@ html.ie .confirmation-order-list .cmp-order-item {
 
 /* Compatibility for IE */
 html.ie .wrapper-main .basket-item-container {
-
-	// Position absolute
 	.meta-container-wrapper-inner {
 		display: block;
 
@@ -15727,20 +15752,13 @@ html.ie .wrapper-main .basket-item-container {
         display: block;
 
         // Align childs right
-        .qty-box-container {
-            margin-right: 0;
-
-            .qty-box {
-                margin: 0 0 5px 0;
+        .qty-box-container .qty-box {
+			margin: 0 0 5px 0;
     
-                .qty-input {
-                    margin-left: auto;
-                }
-            }
-        }
-        .price-box {
-            min-width: 80px;
-        }
+			.qty-input {
+				margin-left: auto;
+			}
+		}
 	}
 
 	// For Basket-Preview and Basket
@@ -15762,11 +15780,9 @@ html.ie .wrapper-main .basket-item-container {
 				// Arrange to the right
 				.qty-box-container {
 					margin-left: auto;
-					margin-right: 0px;
 				}
 				.price-box {
 					margin-left: 10px;
-					min-width: 80px;
 				}
 			}
 		}	
@@ -15793,11 +15809,9 @@ html.ie .wrapper-main .checkout .checkout-rightside .basket-item-container .bask
 				// Arrange to the right
 				.qty-box-container {
 					margin-left: auto;
-					margin-right: 0px;
 				}
 				.price-box {
 					margin-left: 10px;
-					min-width: 80px;
 				}
 			}
 		}	
