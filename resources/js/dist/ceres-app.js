@@ -22966,7 +22966,7 @@ Vue.component("item-filter-list", {
                         var selectedFacetId = _step.value;
 
                         if (!_this.initialSelectedFacets.find(function (initialFacetId) {
-                            return initialFacetId === selectedFacetId;
+                            return initialFacetId.toString() === selectedFacetId.toString();
                         })) {
                             return {
                                 v: false
