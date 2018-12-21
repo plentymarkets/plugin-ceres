@@ -19531,6 +19531,8 @@ Vue.component("create-update-address", {
 
                 if (error.validation_errors) {
                     _this2._handleValidationErrors(error.validation_errors);
+                } else if (error.error) {
+                    _this2._handleError(error.error);
                 }
             });
         },
@@ -19553,6 +19555,8 @@ Vue.component("create-update-address", {
 
                 if (error.validation_errors) {
                     _this3._handleValidationErrors(error.validation_errors);
+                } else if (error.error) {
+                    _this3._handleError(error.error);
                 }
             });
         },
@@ -19587,6 +19591,12 @@ Vue.component("create-update-address", {
             }
 
             NotificationService.error(errorMessage);
+        },
+        _handleError: function _handleError(error) {
+            if (error.code === 11) {
+                NotificationService.error({ code: error.code, message: "" });
+                window.location.reload();
+            }
         },
         _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
 
@@ -25205,7 +25215,7 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
+var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
 
 exports.default = exceptionMap;
 
