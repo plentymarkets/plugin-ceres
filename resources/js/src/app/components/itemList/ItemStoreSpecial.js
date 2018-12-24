@@ -22,10 +22,10 @@ Vue.component("item-store-special", {
             label: "",
             tagClasses:
             {
-                1: "tag-offer bg-danger",
-                2: "tag-new bg-primary",
-                3: "tag-top bg-success",
-                default: "bg-success"
+                1: "badge-offer badge-danger",
+                2: "badge-new badge-primary",
+                3: "badge-top badge-success",
+                default: "badge-success"
             },
             labels:
             {

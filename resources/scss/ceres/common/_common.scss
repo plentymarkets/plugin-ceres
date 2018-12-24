@@ -53,7 +53,8 @@ body .wrapper-main{
 .rating{
     line-height: 1;
 
-    .tag{
+    .tag,
+    .badge {
         padding-right: 0;
         overflow: hidden;
         cursor: pointer;

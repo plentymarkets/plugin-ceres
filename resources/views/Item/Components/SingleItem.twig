@@ -91,25 +91,32 @@
 
                     <slot name="AfterPrice"></slot>
 
-                    <span v-if="currentVariation.variation.availability" :class="'availability tag availability_' + currentVariation.variation.availability.id">
+                    <span v-if="currentVariation.variation.availability" :class="'availability badge availability_' + currentVariation.variation.availability.id">
                         <span>
                             ${ currentVariation.variation.availability.names.name }
                         </span>
                     </span>
 
                     <div class="row my-3">
-                        <slot name="BeforeAddToBasket"></slot>
+                        <div class="w-100">
+                            <slot name="BeforeAddToBasket"></slot>
+                        </div>
 
-                        {{ AddToBasket.printVueComponent(
-                            "currentVariation",
-                            false,
-                            true,
-                            {
-                                ":missing-order-properties":"variationMissingProperties",
-                                ":is-variation-selected": "isVariationSelected && currentVariation.filter.isSalable"
-                            }
-                        ) }}
-                        <slot name="AfterAddToBasket"></slot>
+                        <div class="w-100">
+                            {{ AddToBasket.printVueComponent(
+                                "currentVariation",
+                                false,
+                                true,
+                                {
+                                    ":missing-order-properties":"variationMissingProperties",
+                                    ":is-variation-selected": "isVariationSelected && currentVariation.filter.isSalable"
+                                }
+                            ) }}
+                        </div>
+
+                        <div class="w-100">
+                            <slot name="AfterAddToBasket"></slot>
+                        </div>
                     </div>
 
                     {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}

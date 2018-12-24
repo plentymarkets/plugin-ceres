@@ -109,20 +109,24 @@
     }
 }
 
-.availability_1,
-.availability_2 {background-color: $availability_1;}
-.availability_3,
-.availability_4 {background-color: $availability_3;}
-.availability_5,
-.availability_6,
-.availability_7,
-.availability_8 {background-color: $availability_5;}
-.availability_9,
-.availability_10 {background-color: $availability_9}
+[class^="availability"] {
+    color: $white;
+}
+
+.availability_1  {background-color: $availability_1;}
+.availability_2  {background-color: $availability_2;}
+.availability_3  {background-color: $availability_3;}
+.availability_4  {background-color: $availability_4;}
+.availability_5  {background-color: $availability_5;}
+.availability_6  {background-color: $availability_6;}
+.availability_7  {background-color: $availability_7;}
+.availability_8  {background-color: $availability_8;}
+.availability_9  {background-color: $availability_9;}
+.availability_10 {background-color: $availability_10;}
 
 
 .rating{
-    .tag{
+    .tag, .badge {
         padding-right: 0;
         overflow: hidden;
         cursor: pointer;

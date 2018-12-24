@@ -55,3 +55,27 @@ $legacySpacers:
 
 .m-x-auto { @extend .mx-auto; }
 .m-y-auto { @extend .my-auto; }
+
+$contexts:
+(
+    "primary",
+    "secondary",
+    "success",
+    "info",
+    "warning",
+    "danger",
+);
+
+.tag
+{
+    @extend .badge;
+    color: $white;
+}
+
+@each $context in $contexts {
+    .tag-#{$context}
+    {
+        @extend .badge-#{$context};
+        color: $white;
+    }
+}
