@@ -473,6 +473,7 @@
 		.row
 		{
 			flex-direction: row-reverse;
+			position: relative;
 		}
 
 		.controls-list
@@ -553,6 +554,8 @@
 		top: 50%;
 		transform: translateY(-50%);
 		z-index:1000;
+		width: auto;
+		left: 0;
 	}
 
 	.navbar-nav{

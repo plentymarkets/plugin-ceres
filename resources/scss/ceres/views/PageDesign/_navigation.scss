@@ -363,6 +363,7 @@ body.menu-is-visible {
 		max-width  : initial;
 		font-size  : .8em;
 		padding    : 0 calc(15px + .5em) 0 15px;
+		display    : block;
 
 		li {
 			display : inline-block;
