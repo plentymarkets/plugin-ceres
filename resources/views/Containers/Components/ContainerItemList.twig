@@ -1,4 +1,4 @@
-{% set decimalCount = config("Ceres.item.storeSpecial") %}
+{% set decimalCount = ceresConfig.item.storeSpecial %}
 
 {{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
 
@@ -6,12 +6,12 @@
     <div>
         <div class="col-xs-12 col-lg-12" v-if="items.length > itemsPerPage">
             <div class="list-item-carousel owl-carousel owl-theme owl-single-item" ref="carouselContainer">
-                <category-item v-for="(item, index) in items" :ref="'categoryItem_' + index" :key="item.data.variation.id" :item-data="item.data" decimal-count="{{ decimalCount | json_encode }}" image-url-accessor="urlMiddle"></category-item>
+                <category-item v-for="(item, index) in items" :ref="'categoryItem_' + index" :key="item.data.variation.id" :item-data="item.data" :decimal-count="{{ decimalCount | json_encode }}" image-url-accessor="urlMiddle"></category-item>
             </div>
         </div>
 
         <div v-else v-for="item in items" :key="item.data.variation.id" :class="columnWidths">
-            <category-item :item-data="item.data" decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
+            <category-item :item-data="item.data" :decimal-count="{{ decimalCount | json_encode }}" image-url-accessor="urlMiddle"></category-item>
         </div>
     </div>
 </script>

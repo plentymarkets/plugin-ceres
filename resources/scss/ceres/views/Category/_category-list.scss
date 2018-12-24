@@ -18,13 +18,27 @@
   position: absolute;
 }
 
-.product-list{
+.product-list {
 	list-style-type: none;
 	padding: 0;
 	margin-bottom: 0;
 
 	display: flex;
-	flex-flow: row wrap;
+    flex-flow: row wrap;
+    
+    category-item {
+        background: $white;
+        display: block;
+        height: 145px;
+        margin-bottom: 15px;
+        width: 100%;
+
+        @include media-breakpoint-up(sm) {
+            margin-bottom: 30px;
+            padding-bottom: calc(100% + 100px);
+            height: unset;
+        }
+    }
 }
 
 .lazy{

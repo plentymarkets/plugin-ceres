@@ -835,12 +835,8 @@
                     "required": false,
                     "label": "Config.itemLoadingAnimationTypeLabel",
                     "options": {
-                        "defaultValue": "blur",
+                        "defaultValue": "bars",
                         "selectBoxValues": [
-                            {
-                                "value": "blur",
-                                "caption": "Config.itemLoadingAnimationTypeBlur"
-                            },
                             {
                                 "value": "bars",
                                 "caption": "Config.itemLoadingAnimationTypeBars"

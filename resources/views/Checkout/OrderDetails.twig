@@ -163,14 +163,12 @@
                                 </div>
                             {% endif %}
 
-
-
                             {% if item.amounts[0].discount > 0 %}
                                 {% if item.amounts[0].isPercentage ==  "1" %}
-                                    {% set rebatedAmountItemGross = ((item.amounts[0].priceGross  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceGross %}
-                                    {% set rebatedAmountItemNet = ((item.amounts[0].priceNet  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceNet %}
+                                    {% set rebatedAmountItemGross = (item.quantity * (((item.amounts[0].priceGross  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceGross)) %}
+                                    {% set rebatedAmountItemNet = (item.quantity * (((item.amounts[0].priceNet  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceNet)) %}
                                 {% else %}
-                                    {% set rebatedAmountItemGross = item.amounts[0].discount  %}
+                                    {% set rebatedAmountItemGross = (item.quantity * item.amounts[0].discount)  %}
                                 {% endif %}
                                 {% set rebatedAmountTotalGross = rebatedAmountTotalGross + rebatedAmountItemGross %}
                                 {% set rebatedAmountTotalNet = rebatedAmountTotalNet + rebatedAmountItemNet %}

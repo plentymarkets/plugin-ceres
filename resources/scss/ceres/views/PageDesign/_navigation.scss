@@ -18,10 +18,6 @@ nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
 	margin-top: 0px;
 }
 
-// li.nav-item.dropdown {
-// 	min-width: 140px;
-// }
-
 .dropdown-menu.dropdown-menu-right {
 	min-width: 100%;
 }
@@ -171,16 +167,6 @@ body.menu-is-visible {
 					}
 				}
 			}
-			/*&.ddown>a:after {
-				border 			: none;
-				content			: "\f0da";
-				float 			: right;
-				font-family 	: FontAwesome;
-				font-size 		: 1.5rem;
-				height 			: auto;
-				padding 		: 0 .5em 0 1em;
-				width 			: auto;
-			}*/
 		}
 	}
 
@@ -232,8 +218,6 @@ body.menu-is-visible {
 					width 			: auto;
 					max-width 		: 25em;
 					min-width 		: 100%;
-					/*left 			: 50%;
-					transform 		: translateX(-50%);*/
 					word-wrap		: break-word;
 					position 		: absolute;
 
@@ -285,84 +269,75 @@ body.menu-is-visible {
 			}
 		}
 	}
-
 }
 
-nav.navbar.megamenu {
-	@include media-breakpoint-up(lg){ position : relative; }
-	#mainNavbarCollapsable {
+@include media-breakpoint-up(lg){ 
+	nav.navbar.megamenu {
+		position : relative;
 
-		@include media-breakpoint-up(lg){
-			ul.mainmenu {
-				background 		: transparent;
-				display 		: flex;
-				justify-content : flex-end; 
-				width 			: 100%; 
+		#mainNavbarCollapsable ul.mainmenu {
+			background 		: transparent;
+			display 		: flex;
+			justify-content : flex-end; 
+			width 			: 100%; 
 
-				>li {
-					position : static;
+			>li {
+				position : static;
 
-					.no-touch &:hover,
-					.touch &.hover {
-						background : $megamenu-bg; 
-						color 	   : $megamenu-btn-hover !important;  
+				.no-touch &:hover,
+				.touch &.hover {
+					background : transparent !important; 
+					color 	   : $megamenu-btn-hover !important;  
 
-						>ul.collapse { display : block; } 
+					>ul.collapse { display : block; } 
+				}
+
+				>ul.collapse {
+					background-color: $megamenu-bg;
+					column-gap		: .5em;
+					column-rule		: 1px solid #dcdbd7;
+					display			: none;
+					padding			: 1em 0;
+					min-height		: 7em;
+					max-height		: 86vh;  
+					column-count	: 5;
+					overflow-x		: auto;
+					overflow-y		: hidden;
+					column-fill		: balance;
+
+					li {
+						display		: list-item;
+						float		: none;
 					}
 
-					>ul.collapse {
-						background-color: $megamenu-bg;
-						columns 		: 5 228px;
-						column-gap 		: .5em;
-						column-rule 	: 1px solid #dcdbd7;
-						display 		: none;
-						padding 		: 1em;
-						min-height		: 10em;
-						max-height		: 50em;  
+					>li ul.nav-dropdown-inner {
+						background-color	: $megamenu-bg;
+						padding-bottom		: 1em;
 
 						>li {
-							display 	 : inline-block;
-							width 	 	 : 100%; 
-
-							&.level1 { 
-								padding : .5em 1em;
-								>a {								
-									color 		: $megamenu-color-top-btn; 
-									font-weight : bold; 
-								}
-							}
-							.no-touch &:hover,
-							.touch &.hover { 
-								background : $megamenu-bg; 
-							}
-							 .level2 { 
-								 padding : .25em 0!important; 
-								 break-inside: avoid;
-							 }
-							 .level3 { 
-							 	padding : 0 1em .25em 1.4em !important; 
-							 }
-							.bt-more>a { 
-								color 			: $gray;
+							padding	: 0 1.5em;
+							line-height		: 170%;
+							text-align		: left;
+		
+							&.bt-more>a {
+								color 			: $megamenu-btn-more;
 								text-transform 	: lowercase; 
 							}
-							a {
-								background 	: $white;
-								color 		: $megamenu-color-bottom-btn;
-								padding 	: 0;
-								text-align 	: left;
-
-								.no-touch &:hover,
-								.touch &.hover { 
-									background 	: $megamenu-bg; 
-									color 		: $megamenu-btn-hover !important;  
-								}
+							>a {
+								color	: $megamenu-color-bottom-btn;
+								padding	: 0;
 							}
-							ul { background-color : $megamenu-bg; }
 						}
-
+						.level1 { 
+							>a {								
+								color		: $megamenu-color-top-btn; 
+								font-weight	: bold; 
+							}
+						}
+						.level3 { 
+							padding-left	: 2.5em;
+						}
 					}
-
 				}
 			}
 		}

@@ -56,11 +56,11 @@
     "jquery": "^3.3.1",
     "lightbox2": "^2.10.0",
     "lodash": "^4.17.11",
-    "moment": "^2.22.1",
+    "moment": "^2.23.0",
     "owl.carousel": "2.2.0",
-    "popper.js": "^1.14.3",
+    "popper.js": "^1.14.6",
     "sticky-kit": "^1.1.3",
-    "vue": "^2.5.16",
+    "vue": "^2.5.21",
     "vue-script2": "^2.0.1",
     "vuex": "^3.0.1"
   }

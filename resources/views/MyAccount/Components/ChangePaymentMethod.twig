@@ -99,7 +99,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <button type="button" class="btn btn-danger btn-m-r" data-dismiss="modal">
                                 <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.orderHistoryCancel") }}
                             </button>
                             <button type="button" :disabled="isPending || paymentMethod === 0" :class="{'disabled': isPending || paymentMethod === 0}" class="btn btn-primary" @click="changePaymentMethod()">
