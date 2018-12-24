@@ -12568,6 +12568,11 @@ body > #vue-error.open-hover .basket-preview-hover-wrapper {
   }
 }
 
+.modal-footer > .fa {
+  margin-top: 1px;
+  margin-left: 5px;
+}
+
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px;
 }
