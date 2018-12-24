@@ -43,7 +43,7 @@ Vue.component("item-filter-list", {
             {
                 for (const selectedFacetId of selectedFacetIds)
                 {
-                    if (!this.initialSelectedFacets.find(initialFacetId => initialFacetId === selectedFacetId))
+                    if (!this.initialSelectedFacets.find(initialFacetId => initialFacetId.toString() === selectedFacetId.toString()))
                     {
                         return false;
                     }

@@ -65,12 +65,12 @@
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
                                     <span class="item-edit">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressEdit") }}" class="btn btn-primary btn-medium" @click.prevent="showEditModal(address)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressEdit") }}" class="btn btn-primary" @click.prevent="showEditModal(address)">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressDelete") }}" class="btn btn-medium btn-remove-address" @click.prevent="showDeleteModal(address)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressDelete") }}" class="btn btn-remove-address" @click.prevent="showDeleteModal(address)">
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </span>

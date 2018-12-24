@@ -78,16 +78,23 @@
                     color: $gray-dark;
                 }
                 .form-check {
-                    .form-check-input:checked + label {
-                        background: $gray-lighter2;
-                        color: $gray-darker;
-                        padding-left: 1.75rem;
-                        &::before {
-                            font-family: "FontAwesome";
-                            content: "\f046";
-                            opacity: 1;
+                    .form-check-input {
+                        &:checked + label {
+                            background: $gray-lighter2;
+                            color: $gray-darker;
+                            padding-left: 1.75rem;
+                            &::before {
+                                font-family: "FontAwesome";
+                                content: "\f046";
+                                opacity: 1;
+                            }
+                        }
+
+                        &:disabled + label {
+                            cursor: not-allowed;
                         }
                     }
+
                     .form-check-label {
                         padding: 0.5rem 0;
                         padding-left: 0;
