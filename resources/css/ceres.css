@@ -17021,12 +17021,6 @@ html.ie .confirmation-order-list .cmp-order-item .item-details .row strong:nth-o
   font-size: 80%;
 }
 
-@media (min-width: 768px) {
-  .basket-item-container .item-bundle {
-    width: 300px;
-  }
-}
-
 .basket-item-container.basket-large {
   padding: 1.5rem 0;
 }

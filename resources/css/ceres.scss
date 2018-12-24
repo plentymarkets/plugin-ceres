@@ -15498,10 +15498,6 @@ html.ie .confirmation-order-list .cmp-order-item {
 	& .item-bundle {
 		font-weight: 700;
 		font-size: 80%;
-
-		@include media-breakpoint-up(md) {
-			width: 300px;
-		}
 	}
 
 	&.basket-large {
