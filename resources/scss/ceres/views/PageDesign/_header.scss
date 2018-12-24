@@ -15,7 +15,6 @@
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
-	box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 	a:not(.btn) {
 		text-decoration: none;
 		color: $top-bar-color;
@@ -295,9 +294,16 @@
 
 	#page-header {
 		background-color:$navbar-background-color;
+		box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 
 		&.top-bar {
 			background-color: $top-bar-bg;
+		}
+	}
+
+	@include media-breakpoint-up(md){
+		#page-header {
+			box-shadow: none;
 		}
 	}
 
@@ -398,6 +404,8 @@
 .brand-wrapper{
 	position: relative;
 	padding:0 15px;
+	display: block;
+	width: 100%;
 }
 
 .navbar-brand {
@@ -465,8 +473,6 @@
 		.row
 		{
 			flex-direction: row-reverse;
-			margin-left: 0;
-			margin-right: 0;
 		}
 
 		.controls-list
@@ -510,7 +516,6 @@
 	}
 
 	.top-bar {
-		box-shadow: none;
 		.list-inline {
 			.list-inline-item {
 				#login-change {
