@@ -17727,7 +17727,7 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.basketAddInformation === "overlay") {
                 this.setPriceFromData();
 
-                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose).show();
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
             } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
                 setTimeout(function () {
                     var vueApp = document.querySelector("#vue-app");
@@ -20906,8 +20906,9 @@ Vue.component("forgot-password-modal", {
         cancelResetPwd: function cancelResetPwd() {
             this.resetError();
 
-            ModalService.findModal(document.getElementById("resetPwd")).hide();
-            ModalService.findModal(document.getElementById("login")).show();
+            ModalService.findModal(document.getElementById("resetPwd")).hide().then(function () {
+                ModalService.findModal(document.getElementById("login")).show();
+            });
         },
         resetError: function resetError() {
             _ValidationService2.default.unmarkAllFields($("#reset-pwd-form-" + this._uid));
@@ -21110,10 +21111,12 @@ Vue.component("login", {
             this.resetError();
 
             if (this.modalElement) {
-                ModalService.findModal(document.getElementById(this.modalElement)).hide();
+                ModalService.findModal(document.getElementById(this.modalElement)).hide().then(function () {
+                    ModalService.findModal(document.getElementById("resetPwd")).show();
+                });
+            } else {
+                ModalService.findModal(document.getElementById("resetPwd")).show();
             }
-
-            ModalService.findModal(document.getElementById("resetPwd")).show();
         },
         resetError: function resetError() {
             this.loginFields.removeClass("has-login-error");

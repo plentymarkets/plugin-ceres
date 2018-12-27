@@ -108,22 +108,24 @@
                             <div class="modal-title h3">
                                 {{ trans("Ceres::Template.regCreateAccount") }}
 
-                                <popper v-cloak class="float-right mr-3">
-                                    <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
-                                        <i class="fa fa-info"></i>
-                                    </button>
-                                    <div slot="title">
-                                        {{ trans("Ceres::Template.regContactInformations") }}
-                                    </div>
-                                    <ul slot="content" class='pl-3'>
-                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-                                    </ul>
-                                </popper>
                             </div>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                            <popper v-cloak class="ml-auto">
+                                <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
+                                    <i class="fa fa-info"></i>
+                                </button>
+                                <div slot="title">
+                                    {{ trans("Ceres::Template.regContactInformations") }}
+                                </div>
+                                <ul slot="content" class='pl-3'>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                    <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                </ul>
+                            </popper>
+
+                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
                     </div>
