@@ -1,3 +1,7 @@
+{% set canonicalURL = services.url.getCanonicalURL() %}
+{% set prevPage = currentPage - 1 <= 1 ? null : currentPage - 1 %}
+{% set beforePrevPage = currentPage - 2 <= 1 ? null : currentPage - 2 %}
+
 <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
     {% if pageMax > 1 %}
         <ul class="pagination col-xs-12 m-y-0">
@@ -5,7 +9,7 @@
             <!-- FIRST PAGE LINK -->
             {% if ceresConfig.pagination.showFirstPage and pageMax > 3 and currentPage > 2 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ queryString({ 'page': 1 }) }}">
+                    <a class="page-link" href="{{ canonicalURL ~ queryString({ 'page': null }) }}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                 </li>
@@ -14,7 +18,7 @@
 
             <!-- PREV LINK -->
             <li class="page-item{% if currentPage <= 1 %} disabled{% endif %}">
-                <a class="page-link"{% if currentPage > 1 %} href="{{ queryString({ 'page': currentPage - 1 }) }}"{% endif %}>
+                <a class="page-link"{% if currentPage > 1 %} href="{{ canonicalURL ~ queryString({ 'page': prevPage }) }}"{% endif %}>
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </a>
             </li>
@@ -23,13 +27,13 @@
             <!-- PAGINATION -->
             {% if currentPage == pageMax and currentPage > 2 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ queryString({ 'page': currentPage - 2 }) }}">{{ currentPage - 2 }}</a>
+                    <a class="page-link" href="{{ canonicalURL ~ queryString({ 'page': beforePrevPage }) }}">{{ currentPage - 2 }}</a>
                 </li>
             {% endif %}
 
             {% if currentPage > 1 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ queryString({ 'page': currentPage - 1 }) }}">{{ currentPage - 1 }}</a>
+                    <a class="page-link" href="{{ canonicalURL ~ queryString({ 'page': prevPage }) }}">{{ currentPage - 1 }}</a>
                 </li>
             {% endif %}
 
@@ -39,20 +43,20 @@
 
             {% if currentPage + 1 <= pageMax %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ queryString({ 'page': currentPage + 1 }) }}">{{ currentPage + 1 }}</a>
+                    <a class="page-link" href="{{ canonicalURL ~ queryString({ 'page': currentPage + 1 }) }}">{{ currentPage + 1 }}</a>
                 </li>
             {% endif %}
 
             {% if currentPage == 1 and currentPage + 2 <= pageMax %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ queryString({ 'page': currentPage + 2 }) }}">{{ currentPage + 2 }}</a>
+                    <a class="page-link" href="{{ canonicalURL ~ queryString({ 'page': currentPage + 2 }) }}">{{ currentPage + 2 }}</a>
                 </li>
             {% endif %}
             <!-- ./PAGINATION -->
 
             <!-- NEXT LINK -->
             <li class="page-item{% if currentPage >= pageMax %} disabled{% endif %}">
-                <a class="page-link"{% if currentPage < pageMax %} href="{{ queryString({ 'page': currentPage + 1 }) }}"{% endif %}>
+                <a class="page-link"{% if currentPage < pageMax %} href="{{ canonicalURL ~ queryString({ 'page': currentPage + 1 }) }}"{% endif %}>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
             </li>
@@ -61,7 +65,7 @@
             <!-- LAST PAGE LINK -->
             {% if ceresConfig.pagination.showLastPage and pageMax > 3 and currentPage < pageMax - 1 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ queryString({ 'page': pageMax }) }}">
+                    <a class="page-link" href="{{ canonicalURL ~ queryString({ 'page': pageMax }) }}">
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     </a>
                 </li>
