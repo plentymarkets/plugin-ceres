@@ -41,7 +41,7 @@ $cyan:                      #17a2b8 !default;
 
 // legacy
 $brand-primary:             $blue !default;
-$brand-secondary:           #d4021d !default;
+$brand-secondary:           $red !default;
 $brand-success:             $green !default;
 $brand-info:                $cyan !default;
 $brand-warning:             $yellow !default;
@@ -10430,6 +10430,12 @@ body {
 		}
 	}
 }
+.modal-header {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .modal-footer {
   >.fa {
     margin-top: 1px;
@@ -10675,15 +10681,14 @@ button:focus {
 	  }
 	}
   }
-
-// TODO create component based on card to show these modifications
 .card{
 	
 	.item-edit{
 		position: absolute;
-		top: 1.25rem;
-		right: 1.25rem;
-		font-size: 1.5em;
+		top: 1rem;
+		right: 1rem;
+		font-size: 1.5rem;
+		line-height: 1.5rem;
 		
 		.fa{
     		width: 1em;
@@ -17322,16 +17327,6 @@ html.ie .basket-preview-hover {
     	    -ms-flex: 1;
     	        flex: 1;
     }
-}
-
-.item-confirm-special-case-close {
-  float: right;
-}
-
-.item-confirm-special-case-blue {
-  float: left;
-  width: initial;
-  position: absolute;
 }
 
 .product-list {
