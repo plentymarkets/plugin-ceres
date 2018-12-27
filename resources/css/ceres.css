@@ -12568,6 +12568,11 @@ body > #vue-error.open-hover .basket-preview-hover-wrapper {
   }
 }
 
+.modal-footer > .fa {
+  margin-top: 1px;
+  margin-left: 5px;
+}
+
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px;
 }
@@ -17014,12 +17019,6 @@ html.ie .confirmation-order-list .cmp-order-item .item-details .row strong:nth-o
 .basket-item-container .item-bundle {
   font-weight: 700;
   font-size: 80%;
-}
-
-@media (min-width: 768px) {
-  .basket-item-container .item-bundle {
-    width: 300px;
-  }
 }
 
 .basket-item-container.basket-large {
