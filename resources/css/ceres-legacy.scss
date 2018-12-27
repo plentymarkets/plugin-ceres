@@ -12673,7 +12673,7 @@ $border-width: 1px;
 	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;
-		width: 100%;
+		//width: 100%;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -13083,6 +13083,8 @@ $border-width: 1px;
 			    -ms-flex-direction: row-reverse;
 			        flex-direction: row-reverse;
 			position: relative;
+			margin-left: 0;
+			margin-right: 0;
 		}
 
 		.controls-list

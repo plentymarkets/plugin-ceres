@@ -17523,7 +17523,6 @@ html.safari .popper-visible {
 .top-bar .controls-list {
   margin-bottom: 0;
   font-size: 0;
-  width: 100%;
   display: -ms-flexbox;
   display: flex;
 }
@@ -17881,6 +17880,8 @@ html.safari .popper-visible {
     -ms-flex-direction: row-reverse;
         flex-direction: row-reverse;
     position: relative;
+    margin-left: 0;
+    margin-right: 0;
   }
   .top-bar .controls-list > li {
     font-size: .8rem;
