@@ -299,6 +299,16 @@
             "description"   : "Add content after the item in the Items list of the shopping cart."
         },
         {
+            "key"           : "BasketList.BeforeBasketTotals",
+            "name"          : "TODO",
+            "description"   : "TODO"
+        },
+        {
+            "key"           : "BasketList.AfterBasketTotals",
+            "name"          : "TODO",
+            "description"   : "TODO"
+        },
+        {
             "key"           : "Basket.BeforeCoupon",
             "name"          : "Shopping cart: Before the coupon input",
             "description"   : "Add content before the Coupon input field in the shopping cart."
@@ -317,6 +327,16 @@
             "key"           : "Basket.ExtendOverlayButtons",
             "name"          : "Shopping cart overlay: Extend buttons",
             "description"   : "Add additional content to the 'add to basket overlay' buttons."
+        },
+        {
+            "key"           : "BasketPreview.BeforeBasketTotals",
+            "name"          : "TODO",
+            "description"   : "TODO"
+        },
+        {
+            "key"           : "BasketPreview.AfterBasketTotals",
+            "name"          : "TODO",
+            "description"   : "TODO"
         },
         {
             "key"           : "BasketPreview.BeforeCheckoutButton",
