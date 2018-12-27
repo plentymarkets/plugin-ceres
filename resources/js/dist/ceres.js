@@ -25444,23 +25444,20 @@ Vue.directive("scroll-to-top", {
 },{}],217:[function(require,module,exports){
 "use strict";
 
-var checkElement = function checkElement(el, breakpoint) {
-    var isSticky = el.dataset.isSticky === "true";
-    var matchesBreakpoint = window.matchMedia("(min-width: " + breakpoint + "px)").matches;
+var stickInParent = function stickInParent(el, minWidth, isActive) {
+    var currentActiveState = el.dataset.isSticky === "true";
+    var isInSize = window.matchMedia("(min-width: " + minWidth + "px)").matches;
 
-    if (matchesBreakpoint && !isSticky) {
+    var activeState = !(isActive === false) && isInSize;
+
+    if (activeState && !currentActiveState) {
         var $element = $(el);
         var headHeight = $(".top-bar").height();
 
-        el.dataset.isSticky = true;
-        $element.stick_in_parent({ offset_top: headHeight + 10 });
-
-        $element.on("sticky_kit:bottom", function () {
-            $element.parent().css("position", "static");
-        }).on("sticky_kit:unbottom", function () {
-            $element.parent().css("position", "relative");
-        });
-    } else if (!matchesBreakpoint && isSticky) {
+        if ($element.stick_in_parent({ offset_top: headHeight + 10 })) {
+            el.dataset.isSticky = true;
+        }
+    } else if (!activeState && currentActiveState) {
         el.dataset.isSticky = false;
         $(el).trigger("sticky_kit:detach");
     }
@@ -25468,15 +25465,21 @@ var checkElement = function checkElement(el, breakpoint) {
 
 Vue.directive("stick-in-parent", {
     bind: function bind(el, binding) {
-        var minSize = binding.value || 768;
-
         window.addEventListener("resize", function () {
-            checkElement(el, minSize);
+            stickInParent(el, parseInt(binding.arg) || 768);
         });
 
         setTimeout(function () {
-            checkElement(el, minSize);
+            stickInParent(el, parseInt(binding.arg) || 768, binding.value);
         }, 0);
+    },
+    update: function update(el, binding) {
+        setTimeout(function () {
+            stickInParent(el, parseInt(binding.arg) || 768, binding.value);
+        }, 0);
+    },
+    unbind: function unbind(el) {
+        stickInParent(el, 0, false);
     }
 });
 
@@ -28594,17 +28597,12 @@ var actions = {
 
         _ApiService2.default.get("/rest/io/basket").done(function (basket) {
             commit("setBasket", basket);
-            commit("setIsBasketInitiallyLoaded");
 
             _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
                 commit("setBasketItems", basketItems);
                 commit("setIsBasketInitiallyLoaded");
             }).fail(function (error) {
                 NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
-            }).always(function (data) {
-                setTimeout(function () {
-                    $(document.body).trigger("sticky_kit:recalc");
-                }, 0);
             });
         }).fail(function (error) {
             NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);

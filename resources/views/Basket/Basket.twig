@@ -30,11 +30,7 @@
             </div>
 
             <div class="col-md-5">
-                {# this container is required for the v-stick-in-parent directive below #}
-            </div>
-
-            <div class="col-md-5 float-right" v-stick-in-parent>
-                <div class="col-xs-12 py-4 bg-white">
+                <div class="col-xs-12 py-4 bg-white" v-stick-in-parent="$store.state.basket.isBasketInitiallyLoaded">
                     <hr class="d-md-none">
                     <basket-totals class="mb-4" template="#vue-basket-totals"></basket-totals>
 

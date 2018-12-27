@@ -129,7 +129,7 @@
                             <h3>{{ trans("Ceres::Template.checkoutBasket") }}</h3>
                             <hr class="mb-0">
                         </div>
-                        <div class="col-xs-12 pt-4 bg-white">
+                        <div class="col-xs-12 pt-4 pb-3 bg-white">
                             <aside class="sidebar">
                                 <div class="cmp cmp-checkout-sidebar">
                                     <div class="cmp cmp-basket-preview-list">
@@ -137,14 +137,12 @@
                                     </div>
                                     <hr>
                                     <coupon template="#vue-coupon"></coupon>
-                                    <hr>
+                                    <hr class="mb-0">
                                 </div>
                             </aside>
                         </div>
-                    </div>
 
-                    <div class="col-md-5 checkout-rightside float-right" v-stick-in-parent>
-                        <div class="col-xs-12 pt-3 bg-white">
+                        <div class="col-xs-12 py-3 bg-white" v-stick-in-parent="$store.state.basket.isBasketInitiallyLoaded">
                             <aside class="sidebar">
                                 <div class="cmp cmp-checkout-sidebar">
                                     {{ LayoutContainer.show("Ceres::Checkout.BeforeBasketTotals") }}
@@ -152,9 +150,7 @@
                                     {{ LayoutContainer.show("Ceres::Checkout.AfterBasketTotals") }}
                                 </div>
                             </aside>
-                        </div>
 
-                        <div class="col-xs-12 pb-3 bg-white">
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
                             <place-order template="#vue-place-order" target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
