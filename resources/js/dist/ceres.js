@@ -17676,9 +17676,7 @@ Vue.component("add-item-to-basket-overlay", {
     data: function data() {
         return {
             currency: "",
-            price: 0,
-            timeToClose: 0,
-            timerVar: null
+            price: 0
         };
     },
 
@@ -17729,9 +17727,7 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.basketAddInformation === "overlay") {
                 this.setPriceFromData();
 
-                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-
-                this.startCounter();
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose).show();
             } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
                 setTimeout(function () {
                     var vueApp = document.querySelector("#vue-app");
@@ -17754,30 +17750,6 @@ Vue.component("add-item-to-basket-overlay", {
 
                 this.price = this.$options.filters.specialOffer(graduatedPrice, this.latestBasketEntry.item.prices, "price", "value") + propertySurcharge;
             }
-        },
-        closeOverlay: function closeOverlay() {
-            if (this.timerVar) {
-                clearInterval(this.timerVar);
-            }
-        },
-        startCounter: function startCounter() {
-            var _this = this;
-
-            if (this.timerVar) {
-                clearInterval(this.timerVar);
-            }
-
-            this.timeToClose = this.defaultTimeToClose;
-
-            this.timerVar = setInterval(function () {
-                _this.timeToClose -= 1;
-
-                if (_this.timeToClose === 0) {
-                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
-
-                    clearInterval(_this.timerVar);
-                }
-            }, 1000);
         },
         orderParamValue: function orderParamValue(propertyId) {
             var orderParams = this.latestBasketEntry.orderParams;
@@ -27158,18 +27130,26 @@ module.exports = function ($) {
         };
 
         function show() {
-            $bsModal.modal("show");
+            return new Promise(function (resolve, reject) {
+                $bsModal.modal("show");
 
-            if ($bsModal.timeout > 0) {
-                startTimeout();
-            }
+                if ($bsModal.timeout > 0) {
+                    startTimeout();
+                }
 
-            return self;
+                $bsModal.one("shown.bs.modal", function () {
+                    resolve(self);
+                });
+            });
         }
 
         function hide() {
-            $bsModal.modal("hide");
-            return self;
+            return new Promise(function (resolve, reject) {
+                $bsModal.modal("hide");
+                $bsModal.one("hidden.bs.modal", function () {
+                    resolve(self);
+                });
+            });
         }
 
         function getModalContainer() {

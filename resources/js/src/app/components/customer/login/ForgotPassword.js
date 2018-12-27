@@ -66,15 +66,16 @@ Vue.component("forgot-password-modal", {
     {
         validateResetPwd()
         {
-            ValidationService.validate($("#reset-pwd-form-" + this._uid))
+            ValidationService
+                .validate($("#reset-pwd-form-" + this._uid))
 				.done(() =>
 				{
-    this.sendResetPwd();
-})
-				.fail(invalidFields =>
-				{
-    ValidationService.markInvalidFields(invalidFields, "error");
-});
+                    this.sendResetPwd();
+                })
+                .fail(invalidFields =>
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
         },
 
         /**
@@ -109,8 +110,15 @@ Vue.component("forgot-password-modal", {
         {
             this.resetError();
 
-            ModalService.findModal(document.getElementById("resetPwd")).hide();
-            ModalService.findModal(document.getElementById("login")).show();
+            ModalService
+                .findModal(document.getElementById("resetPwd"))
+                .hide()
+                .then(() =>
+                {
+                    ModalService
+                        .findModal(document.getElementById("login"))
+                        .show();
+                });
         },
 
         resetError()
