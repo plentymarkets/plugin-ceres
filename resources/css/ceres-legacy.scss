@@ -6,136 +6,136 @@
 //
 // Colors
 //
-$white:                 #fff !default;
+$white:                     #fff !default;
 
-$gray-100:              #f8f9fa !default;
-$gray-200:              #e9ecef !default;
-$gray-300:              #dee2e6 !default;
-$gray-400:              #ced4da !default;
-$gray-500:              #adb5bd !default;
-$gray-600:              #6c757d !default;
-$gray-700:              #495057 !default;
-$gray-800:              #343a40 !default;
-$gray-900:              #212529 !default;
+$gray-100:                  #f8f9fa !default;
+$gray-200:                  #e9ecef !default;
+$gray-300:                  #dee2e6 !default;
+$gray-400:                  #ced4da !default;
+$gray-500:                  #adb5bd !default;
+$gray-600:                  #6c757d !default;
+$gray-700:                  #495057 !default;
+$gray-800:                  #343a40 !default;
+$gray-900:                  #212529 !default;
 
-$gray-lightest:         #f7f7f9 !default;
-$gray-lighter2:         #f4f4f4 !default;
-$gray-lighter:          #dcdbd8 !default;
-$gray-light:            #b2b1a7 !default;
-$gray:                  #7a7f7f !default;
-$gray-dark:             #4D4F4D !default;
-$gray-darker:           #282d2f !default;
+$gray-lightest:             #f7f7f9 !default;
+$gray-lighter2:             #f4f4f4 !default;
+$gray-lighter:              #dcdbd8 !default;
+$gray-light:                #b2b1a7 !default;
+$gray:                      #7a7f7f !default;
+$gray-dark:                 #4D4F4D !default;
+$gray-darker:               #282d2f !default;
 
-$black:                 #000 !default;
+$black:                     #000 !default;
 
-$blue:                  #008ebd !default;
-$indigo:                #6610f2 !default;
-$purple:                #6f42c1 !default;
-$pink:                  #e83e8c !default;
-$red:                   #dc3545 !default;
-$orange:                #fd7e14 !default;
-$yellow:                #ffc107 !default;
-$green:                 #28a745 !default;
-$teal:                  #20c997 !default;
-$cyan:                  #17a2b8 !default;
+$blue:                      #008ebd !default;
+$indigo:                    #6610f2 !default;
+$purple:                    #6f42c1 !default;
+$pink:                      #e83e8c !default;
+$red:                       #dc3545 !default;
+$orange:                    #fd7e14 !default;
+$yellow:                    #ffc107 !default;
+$green:                     #28a745 !default;
+$teal:                      #20c997 !default;
+$cyan:                      #17a2b8 !default;
 
 // legacy
-$brand-primary:         $blue !default;
-$brand-secondary:       #d4021d !default;
-$brand-success:         $green !default;
-$brand-info:            $cyan !default;
-$brand-warning:         $yellow !default;
-$brand-danger:          $red !default;
+$brand-primary:             $blue !default;
+$brand-secondary:           #d4021d !default;
+$brand-success:             $green !default;
+$brand-info:                $cyan !default;
+$brand-warning:             $yellow !default;
+$brand-danger:              $red !default;
 
-$primary:               $brand-primary !default;
-$secondary:             $brand-secondary !default;
-$success:               $brand-success !default;
-$info:                  $brand-info !default;
-$warning:               $brand-warning !default;
-$danger:                $brand-danger !default;
-$light:                 $gray-100 !default;
-$dark:                  $gray-800 !default;
+$primary:                   $brand-primary !default;
+$secondary:                 $brand-secondary !default;
+$success:                   $brand-success !default;
+$info:                      $brand-info !default;
+$warning:                   $brand-warning !default;
+$danger:                    $brand-danger !default;
+$light:                     $gray-100 !default;
+$dark:                      $gray-800 !default;
 
 //
 // Fonts
 //
-$root-directory: '..' !default;
+$root-directory:            '..' !default;
 
-$flag-icon-css-path: '#{$root-directory}/images/flags' !default;
-$flag-icon-rect-path: '/4x3' !default;
-$flag-icon-square-path: '/1x1' !default;
+$flag-icon-css-path:        '#{$root-directory}/images/flags' !default;
+$flag-icon-rect-path:       '/4x3' !default;
+$flag-icon-square-path:     '/1x1' !default;
 
-$fa-font-path: "#{$root-directory}/documents/fonts" !default;
+$fa-font-path:              "#{$root-directory}/documents/fonts" !default;
 
 //
 // Top Bar
 //
-$top-bar-bg:            $gray-dark;
-$top-bar-color:         #fff;
-$top-bar-basket-btn:    $brand-primary;
-$top-bar-basket-color:  #fff;
+$top-bar-bg:                $gray-dark;
+$top-bar-color:             #fff;
+$top-bar-basket-btn:        $brand-primary;
+$top-bar-basket-color:      #fff;
 
 //
 // Footer
 //
-$footer-bg:             $gray-lightest;
-$footer-color:          $gray-dark;
+$footer-bg:                 $gray-lightest;
+$footer-color:              $gray-dark;
 
-$footer-features-bg:    darken($gray-lightest, 10%);
-$footer-features-color: $gray-dark;
+$footer-features-bg:        darken($gray-lightest, 10%);
+$footer-features-color:     $gray-dark;
 
 //
 // Availability
 //
-$availability_1:        $brand-success !default;
-$availability_2:        $brand-success !default;
-$availability_3:        $brand-warning !default;
-$availability_4:        $brand-warning !default;
-$availability_5:        $brand-danger !default;
-$availability_6:        $brand-danger !default;
-$availability_7:        $brand-danger !default;
-$availability_8:        $brand-danger !default;
-$availability_9:        $gray-dark !default;
-$availability_10:       $gray-dark !default;
+$availability_1:            $brand-success !default;
+$availability_2:            $brand-success !default;
+$availability_3:            $brand-warning !default;
+$availability_4:            $brand-warning !default;
+$availability_5:            $brand-danger !default;
+$availability_6:            $brand-danger !default;
+$availability_7:            $brand-danger !default;
+$availability_8:            $brand-danger !default;
+$availability_9:            $gray-dark !default;
+$availability_10:           $gray-dark !default;
 
 
 //
 // Typography
 //
-$font-family-sans-serif:  Custom-Font, Helvetica, Arial, sans-serif !default;
-$font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
-$font-family-heading:     $font-family-sans-serif;
+$font-family-sans-serif:    Custom-Font, Helvetica, Arial, sans-serif !default;
+$font-family-serif:         Georgia, "Times New Roman", Times, serif !default;
+$font-family-heading:       $font-family-sans-serif;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
-$font-size-root: 14px;
+$font-size-root:            14px;
 
-$h1-font-size: 2rem !default;
-$h2-font-size: 1.8rem !default;
-$h3-font-size: 1.5rem !default;
-$h4-font-size: 1.25rem !default;
-$h5-font-size: 1rem !default;
-$h6-font-size: .8rem !default;
+$h1-font-size:              2rem !default;
+$h2-font-size:              1.8rem !default;
+$h3-font-size:              1.5rem !default;
+$h4-font-size:              1.25rem !default;
+$h5-font-size:              1rem !default;
+$h6-font-size:              .8rem !default;
 
-$display1-size: 4rem !default;
-$display2-size: 3.5rem !default;
-$display3-size: 2.5rem !default;
-$display4-size: 1.5rem !default;
+$display1-size:             4rem !default;
+$display2-size:             3.5rem !default;
+$display3-size:             2.5rem !default;
+$display4-size:             1.5rem !default;
 
-$headings-line-height:   1.1 !default;
+$headings-line-height:      1.1 !default;
 
-$hr-border-color: $gray-lighter !default;
+$hr-border-color:           $gray-lighter !default;
 
-$list-inline-padding: 5px !default;
+$list-inline-padding:       5px !default;
 
 // Components
 //
 // Define common padding and border radius sizes and more.
 
-$line-height-lg:         (4 / 3) !default;
+$line-height-lg:            (4 / 3) !default;
 
-$border-radius:          .1rem !default;
-$border-radius-sm:       .15rem !default;
-$border-radius-lg:       .2rem !default;
+$border-radius:             .1rem !default;
+$border-radius-sm:          .15rem !default;
+$border-radius-lg:          .2rem !default;
 
 //Ceres 4 variables
 $aside-columns-width: 30em !default;
@@ -144,59 +144,59 @@ $aside-columns-width: 30em !default;
 //
 // For each of Bootstrap's buttons, define text, background and border color.
 
-$btn-padding-x:                  1rem !default;
-$btn-padding-y:                  .5rem !default;
-$btn-line-height:                1.25 !default;
+$btn-padding-x:             1rem !default;
+$btn-padding-y:             .5rem !default;
+$btn-line-height:           1.25 !default;
 
-$btn-padding-x-lg:               1.5rem !default;
-$btn-padding-y-lg:               .75rem !default;
+$btn-padding-x-lg:          1.5rem !default;
+$btn-padding-y-lg:          .75rem !default;
 
-$btn-block-spacing-y:            .5rem !default;
-$btn-toolbar-margin:             .5rem !default;
+$btn-block-spacing-y:       .5rem !default;
+$btn-toolbar-margin:        .5rem !default;
 
 // Forms
 
-$input-padding-y:                .5rem !default;
-$input-line-height:              1.25 !default;
+$input-padding-y:           .5rem !default;
+$input-line-height:         1.25 !default;
 
-$input-border-color:             rgba(0,0,0,.15) !default;
+$input-border-color:        rgba(0,0,0,.15) !default;
 
-$input-focus-border-color:       #66afe9 !default;
-$input-focus-box-shadow:         rgba(102,175,233,.6) !default;
+$input-focus-border-color:  #66afe9 !default;
+$input-focus-box-shadow:    rgba(102,175,233,.6) !default;
 
-$input-placeholder-color:        #999 !default;
+$input-placeholder-color:   #999 !default;
 
-$input-padding-y-lg:             .75rem !default;
-$input-padding-x-lg:             1.5rem !default;
+$input-padding-y-lg:        .75rem !default;
+$input-padding-x-lg:        1.5rem !default;
 
-$custom-control-indicator-disabled-bg:        #eee !default;
-$custom-control-label-disabled-color:         #767676 !default;
+$custom-control-indicator-disabled-bg:          #eee !default;
+$custom-control-label-disabled-color:           #767676 !default;
 
-$custom-control-checked-indicator-color:      #fff !default;
-$custom-control-checked-indicator-bg:         #0074d9 !default;
+$custom-control-checked-indicator-color:        #fff !default;
+$custom-control-checked-indicator-bg:           #0074d9 !default;
 
-$custom-control-indicator-focus-box-shadow:   0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9 !default;
+$custom-control-indicator-focus-box-shadow:     0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9 !default;
 
-$custom-control-indicator-active-color:      #fff !default;
-$custom-control-indicator-active-bg:         #84c6ff !default;
+$custom-control-indicator-active-color:         #fff !default;
+$custom-control-indicator-active-bg:            #84c6ff !default;
 
-$custom-checkbox-indicator-indeterminate-bg: #0074d9 !default;
+$custom-checkbox-indicator-indeterminate-bg:    #0074d9 !default;
 
-$custom-select-bg:            #fff !default;
+$custom-select-bg:                              #fff !default;
 
-$custom-select-focus-border-color: #51a7e8 !default;
-$custom-select-focus-box-shadow:   inset 0 1px 2px rgba(0, 0, 0, .075), 0 0 5px rgba(81, 167, 232, .5) !default;
+$custom-select-focus-border-color:              #51a7e8 !default;
+$custom-select-focus-box-shadow:                inset 0 1px 2px rgba(0, 0, 0, .075), 0 0 5px rgba(81, 167, 232, .5) !default;
 
-$custom-file-height:           2.5rem !default;
-$custom-file-focus-box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9 !default;
+$custom-file-height:                            2.5rem !default;
+$custom-file-focus-box-shadow:                  0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9 !default;
 
-$custom-file-padding-x:     .5rem !default;
-$custom-file-padding-y:     1rem !default;
-$custom-file-color:         #555 !default;
-$custom-file-bg:            #fff !default;
-$custom-file-border-color:  #ddd !default;
-$custom-file-box-shadow:    inset 0 .2rem .4rem rgba(0,0,0,.05) !default;
-$custom-file-button-bg:     #eee !default;
+$custom-file-padding-x:                         .5rem !default;
+$custom-file-padding-y:                         1rem !default;
+$custom-file-color:                             #555 !default;
+$custom-file-bg:                                #fff !default;
+$custom-file-border-color:                      #ddd !default;
+$custom-file-box-shadow:                        inset 0 .2rem .4rem rgba(0,0,0,.05) !default;
+$custom-file-button-bg:                         #eee !default;
 
 // This allows us to at a glance determine relative layers of our application and prevents bugs
 // arrising from arbitrary z-index values. Do not edit the z-index scale! Only add application
@@ -205,32 +205,31 @@ $custom-file-button-bg:     #eee !default;
 
 // Z-Index Scale
 // --------------------------------------------------
-$zIndex-0:   990 !default;
-$zIndex-1:   1000 !default;
-$zIndex-2:   1020 !default;
-$zIndex-3:   1030 !default;
-$zIndex-4:   1040 !default;
-$zIndex-5:   1050 !default;
-$zIndex-6:   1060 !default;
-$zIndex-7:   1070 !default;
-$zIndex-8:   1080 !default;
-$zIndex-9:   1090 !default;
-$zIndex-10: 10000 !default;
+$zIndex-0:                          990 !default;
+$zIndex-1:                          1000 !default;
+$zIndex-2:                          1020 !default;
+$zIndex-3:                          1030 !default;
+$zIndex-4:                          1040 !default;
+$zIndex-5:                          1050 !default;
+$zIndex-6:                          1060 !default;
+$zIndex-7:                          1070 !default;
+$zIndex-8:                          1080 !default;
+$zIndex-9:                          1090 !default;
+$zIndex-10:                         10000 !default;
 
 // Z-index master list
 //
 // Warning: Avoid customizing these values. They're used for a bird's eye view
 // of components dependent on the z-axis and are designed to all work together.
 
-// TODO use values from Z-Index Scale above
-$zindex-dropdown:          $zIndex-1 !default;
-$zindex-sticky:            $zIndex-3 !default;
-$zindex-fixed:             $zIndex-3 !default;
-$zindex-modal-backdrop:    $zIndex-7 !default;
-$zindex-modal:             $zIndex-8 !default;
-$zindex-navbar:            $zIndex-5 !default;
-$zindex-popover:           $zIndex-6 !default;
-$zindex-tooltip:           $zIndex-7 !default;
+$zindex-dropdown:                   $zIndex-1 !default;
+$zindex-sticky:                     $zIndex-3 !default;
+$zindex-fixed:                      $zIndex-3 !default;
+$zindex-modal-backdrop:             $zIndex-7 !default;
+$zindex-modal:                      $zIndex-8 !default;
+$zindex-navbar:                     $zIndex-5 !default;
+$zindex-popover:                    $zIndex-6 !default;
+$zindex-tooltip:                    $zIndex-7 !default;
 
 // Navbar
 $navbar-background-color:           $gray-lightest !default;
@@ -240,32 +239,37 @@ $navbar-dark-disabled-color:        $gray-light !default;
 
 // Navs
 
-$nav-link-padding-y:            1.3rem !default;
-$nav-link-hover-bg:             $brand-primary !default;
+$nav-link-padding-y:                1.3rem !default;
+$nav-link-hover-bg:                 $brand-primary !default;
 
-$nav-tabs-border-color:         #ddd !default;
+$nav-tabs-border-color:             #ddd !default;
 
 
 // Popovers
-$popover-inner-padding:               1px !default;
+$popover-inner-padding:             1px !default;
 
 // Padding applied to the modal body
-$modal-dialog-margin:         0px !default;
+$modal-dialog-margin:               0px !default;
+
+$modal-lg:                          900px !default;
+$modal-md:                          600px !default;
+$modal-sm:                          300px !default;
+
 
 
 // Breadcrumbs
 
-$breadcrumb-padding-y:          .5rem !default;
-$breadcrumb-bg:                 darken($gray-lighter2, 2%) !default;
+$breadcrumb-padding-y:              .5rem !default;
+$breadcrumb-bg:                     darken($gray-lighter2, 2%) !default;
 
 // Category
 
-$category-text-color:         #fff !default;
+$category-text-color:               #fff !default;
 
 // Liveshopping
 
-$live-shopping-padding-x: .8rem;
-$live-shopping-padding-y: 1rem;
+$live-shopping-padding-x:           0.8rem;
+$live-shopping-padding-y:           1rem;
 
 // ==========================================================================
 // External Libs
@@ -12673,7 +12677,6 @@ $border-width: 1px;
 	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;
-		//width: 100%;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;

@@ -17415,7 +17415,7 @@ Vue.component("add-item-to-basket-overlay", {
                 _this.timeToClose -= 1;
 
                 if (_this.timeToClose === 0) {
-                    // ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
+                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
 
                     clearInterval(_this.timerVar);
                 }

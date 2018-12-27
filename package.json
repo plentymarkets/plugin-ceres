@@ -7,7 +7,7 @@
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
   },
   "scripts": {
-    "build": "gulp && npm run collectWidgets",
+    "build": "gulp && npm run collectWidgets && node bundleSass.js",
     "bundleSass": "gulp copy:sass-vendor && node bundleSass.js",
     "collectWidgets": "node tools/collectWidgets.js"
   },
