@@ -18260,8 +18260,8 @@ html.safari .popper-visible {
 
 .list-sort .custom-select,
 .list-itemsperpage .custom-select {
-  padding: .8rem 2rem .8rem 1rem;
-  background-position: calc(100% - 1rem) 1rem;
+  padding: 0 2rem 0 1rem;
+  background-position: calc(100% - 1rem) 0.85rem;
 }
 
 .login-form .custom-select {
