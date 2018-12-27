@@ -4152,7 +4152,7 @@
                     "scss": true,
                     "label": "Config.brandSecondaryLabel",
                     "options": {
-                        "defaultValue": "#d4021d"
+                        "defaultValue": "#dc3545"
                     }
                 },
                 "brand-success": {
@@ -4161,7 +4161,7 @@
                     "scss": true,
                     "label": "Config.brandSuccessLabel",
                     "options": {
-                        "defaultValue": "#7ED321"
+                        "defaultValue": "#28a745"
                     }
                 },
                 "brand-info": {
@@ -4170,7 +4170,7 @@
                     "scss": true,
                     "label": "Config.brandInfoLabel",
                     "options": {
-                        "defaultValue": "#5bc0de"
+                        "defaultValue": "#17a2b8"
                     }
                 },
                 "brand-warning": {
@@ -4179,7 +4179,7 @@
                     "scss": true,
                     "label": "Config.brandWarningLabel",
                     "options": {
-                        "defaultValue": "#f0ad4e"
+                        "defaultValue": "#ffc107"
                     }
                 },
                 "brand-danger": {
@@ -4188,7 +4188,7 @@
                     "scss": true,
                     "label": "Config.brandDangerLabel",
                     "options": {
-                        "defaultValue": "#d9534f"
+                        "defaultValue": "#dc3545"
                     }
                 },
                 "custom-font-regular": {
