@@ -76,11 +76,10 @@
                 </div>
             {% endif %}
 
-            <div class="row clearfix">
-                {{ Twig.if("itemList.documents is not empty") }}
-                    <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}" :items-per-page="{{ itemsPerPage }}"></container-item-list>
-                {{ Twig.endif() }}
-            </div>
+            {{ Twig.if("itemList.documents is not empty") }}
+                <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}" :items-per-page="{{ itemsPerPage }}"></container-item-list>
+            {{ Twig.endif() }}
+            
         {% endif %}
     </div>
 </div>
