@@ -19492,9 +19492,15 @@ html.ie {
 
             li
             {
-                width: 10px;
-                height: 10px;
-                margin: 1px;
+                /* Bootstrap override */
+                -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                border-radius: .8rem;
+                width: .8rem;
+                height: .8rem;
+                margin: 2px;
+                border: 1px solid #fff;
+                background-color: transparent;
             }
         }
 
@@ -19566,10 +19572,6 @@ html.ie {
     {
         padding-left: 0;
         padding-right: 0;
-
-        .row {
-            display: block;
-        }
     }
 
     .widget-caption
