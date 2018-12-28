@@ -182,10 +182,11 @@ $custom-control-indicator-active-bg:            #84c6ff !default;
 
 $custom-checkbox-indicator-indeterminate-bg:    #0074d9 !default;
 
-$custom-select-bg:                              #fff !default;
-
-$custom-select-focus-border-color:              #51a7e8 !default;
-$custom-select-focus-box-shadow:                inset 0 1px 2px rgba(0, 0, 0, .075), 0 0 5px rgba(81, 167, 232, .5) !default;
+$custom-select-padding-y:                       .8rem;
+$custom-select-padding-x:                       1rem;
+$custom-select-height:                          auto;
+$custom-select-line-height:                     1.2;
+$custom-select-border-width:                    0px;
 
 $custom-file-height:                            2.5rem !default;
 $custom-file-focus-box-shadow:                  0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9 !default;
@@ -12514,138 +12515,12 @@ html.ie {
         right: auto;
     }
 }
-html.safari {
-	.popper {
-		display: none;
-	}
-
-	.popper-visible {
-		display: block;
-	}
-}
-
-.popper {
-	max-width: $popover-max-width;
-    padding: $popover-inner-padding;
-    text-align: left;
-    background-color: $white;
-	border: $border-width solid $popover-border-color;
-	border-radius: $border-radius-lg;
-	visibility: hidden;
-	margin: 5px;
-	z-index: $zIndex-10;
-	position: absolute;
-
-	& .popper__arrow {
-		width: 0;
-		height: 0;
-		margin: 0 2px;
-		position: absolute;
-		border: solid;
-	}
-
-	& .popper-title {
-		padding: $popover-header-padding-y $popover-header-padding-x;
-		margin: 0;
-		font-size: 1rem;
-		background-color: $popover-header-bg;
-		border-bottom: $border-width solid #ebebeb;
-		border-radius: .12857rem .12857rem 0 0;
-		text-align: center;
-	}
-
-	& .popper-content {
-		padding: $popover-body-padding-y $popover-body-padding-x;
-		line-height: 1.5;
-		font-size: .875rem;
-		word-wrap: break-word;
-	}
-
-	&.popper-visible {
-		visibility: visible;
-	}
-
-	&[x-placement] {
-		& .popper__arrow
-		{
-			border: $popover-arrow-width solid transparent;
-			&:after 
-			{
-				border: $popover-arrow-width solid transparent;
-				content: "";
-				position: absolute;
-				border-style: solid;
-			}
-		}
-	}
-
-	&[x-placement^="top"] {
-		margin-bottom: 11px;
-		& .popper__arrow {
-			border-bottom-width: 0;
-			border-top-color: $popover-border-color;
-			bottom: -10px;
-			left: calc(50% - 5px);
-
-			&:after {
-				border-bottom-width: 0;
-				border-top-color: $white;
-				left: -10px;
-				bottom: 1px;
-			}
-		}
-	}
-
-	&[x-placement^="bottom"] {
-		margin-top: 11px;
-		& .popper__arrow {
-			border-top-width: 0;
-		  	border-bottom-color: $popover-border-color;
-		  	top: -10px;
-		  	left: calc(50% - 5px);
-
-			&:after {
-				border-top-width: 0;
-				border-bottom-color: $popover-header-bg;
-				left: -10px;
-				bottom: -11px;
-			}
-		}
-	}
-
-	&[x-placement^="right"] {
-		margin-left: 11px;
-		& .popper__arrow {
-			border-left-width: 0;
-			border-right-color: $popover-border-color;
-			left: -12px;
-			top: calc(50% - 5px);
-
-			&:after {
-				border-left-width: 0;
-				border-right-color:  $white;
-				left: 1px;
-				bottom: -10px;
-			}
-		}
-	}
-
-	&[x-placement^="left"] {
-		margin-right: 11px;
-		& .popper__arrow {
-			border-right-width: 0;
-			border-left-color: $popover-border-color;
-			right: -12px;
-			top: calc(50% - 5px);
-			
-			&:after {
-				border-right-width: 0;
-				border-left-color:  $white;
-				left: -11px;
-				bottom: -10px;
-			}
-		}
-	}
+.popover[x-placement="bottom"]
+{
+    .arrow::after
+    {
+        border-bottom-color: $popover-header-bg;
+    }
 }
 
 // Forms
@@ -12685,7 +12560,6 @@ html.safari {
 }
 
 
-
 $color: $gray-dark;
 $background: white;
 $active-background: white;
@@ -12693,92 +12567,103 @@ $border-color: $gray-lighter;
 $border-active: $gray-light;
 $border-width: 1px;
 
-.input-unit.textarea{
+.input-unit.textarea
+{
     background-color: #fff;
 
-    & > textarea {
+    & > textarea
+    {
         overflow-y: auto;
         white-space: normal;
     }
 
-    & > label {
+    & > label
+    {
         background-color: #fff;
         opacity: 0.9;
     }
 }
 
-.input-unit{
-    position:relative;
-    
+.input-unit
+{
+    position: relative;
     width: 100%;
     margin-bottom: $grid-gutter-width/2;
-    border:$border-width solid $border-color;
-	border-radius: $border-radius;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
     overflow: hidden;
 
-    &.media-xs-d {
-        @include media-breakpoint-down(xs) { 
+    &.media-xs-d
+    {
+        @include media-breakpoint-down(xs)
+        {
             margin-bottom: $grid-gutter-width/2 !important;
         }
     }
 
-    &.no-bottom {
-        margin-bottom: 0px; 
+    &.no-bottom
+    {
+        margin-bottom: 0px;
     }
 
-  input[type="date"]{
-    max-height: 38px;
-  }
+    input[type="date"]
+    {
+        max-height: 38px;
+    }
 
     input[type], textarea,
-	input:not([type="checkbox"]),
-	input:not([type="radio"]),
-	.input-unit-preview {
+    input:not([type="checkbox"]),
+    input:not([type="radio"]),
+    .input-unit-preview
+    {
 
-	    color: $color;
-	    background-color: $background;
-	    border: none;
-	    -webkit-box-shadow: none;
-	            box-shadow: none;//inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
-	    line-height: 1.2em!important;
-	    padding: 1.3rem 1rem .3rem 1rem;
-	    width: 100%;
-	    font-size: 1em;
-	    // text-align: right;
-	    outline: none!important;
+        color: $color;
+        background-color: $background;
+        border: none;
+        -webkit-box-shadow: none;
+                box-shadow: none; //inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
+        line-height: 1.2em !important;
+        padding: 1.3rem 1rem .3rem 1rem;
+        width: 100%;
+        font-size: 1em;
+        // text-align: right;
+        outline: none !important;
 
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
         display: block;
 
-	    -webkit-transition: all .2s;
+        -webkit-transition: all .2s;
 
-	    transition: all .2s;
+        transition: all .2s;
 
-	    
-	    &:focus,
-	    &.filled{
-	        color: $color;
-	        background-color: $active-background;
-	        border-color: $border-active;
-	    }
+        &:focus,
+        &.filled
+        {
+            color: $color;
+            background-color: $active-background;
+            border-color: $border-active;
+        }
 
-	    &.disabled,
-	    &:disabled {
+        &.disabled,
+        &:disabled
+        {
             background-color: $gray-lightest;
             border-color: $gray-lighter;
-			cursor: not-allowed;
+            cursor: not-allowed;
 
-            & ~ label{
-            	color: $gray-lighter;
-            	cursor: not-allowed;
+            & ~ label
+            {
+                color: $gray-lighter;
+                cursor: not-allowed;
             }
-	    }
-        
-        & + .symbol{
-            color:$gray;
-            position:absolute;
+        }
+
+        & + .symbol
+        {
+            color: $gray;
+            position: absolute;
             top: $border-width;
             right: $border-width;
 
@@ -12788,92 +12673,114 @@ $border-width: 1px;
         }
 
         &.disabled,
-        &:disabled {
-            & + .symbol{
+        &:disabled
+        {
+            & + .symbol
+            {
                 color: $gray;
             }
 
-            & + label{
-                color: $gray-light!important;
+            & + label
+            {
+                color: $gray-light !important;
             }
         }
-	}
+    }
 
-	label,
-	.input-unit-label{
+    label,
+    .input-unit-label
+    {
         font-size: .65em;
-        line-height: 1em!important;
+        line-height: 1em !important;
         text-transform: uppercase;
-		letter-spacing: .1px;
-		font-weight: 600;
+        letter-spacing: .1px;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
 
         width: 100%;
         padding: 0.35rem 1rem 0;
         margin-bottom: 0;
         color: $gray-light;
 
-        position:absolute;
+        position: absolute;
         top: 0;
         left: 0;
         -webkit-transition: color .15s;
         transition: color .15s;
         cursor: pointer;
         /* Better Font Rendering =========== */
-	    -webkit-font-smoothing: antialiased;
-	    -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
-    i{
-    	font-style: normal;
-	    font-weight: bold;
-	    position: absolute;
-	    top: 0;
-	    left: 0;
-	    background-color: $gray-lightest;
-	    color: $gray-lighter;
-	    line-height: 1.2em;
-	    width: 1.2em;
-	    text-align: center;
-	    cursor: pointer;
-	    border-bottom-right-radius: 2px;
+    i
+    {
+        font-style: normal;
+        font-weight: bold;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $gray-lightest;
+        color: $gray-lighter;
+        line-height: 1.2em;
+        width: 1.2em;
+        text-align: center;
+        cursor: pointer;
+        border-bottom-right-radius: 2px;
     }
 
-	&.error{
-		z-index: $zIndex-1;
-    	border-color: $danger;
+    &.error
+    {
+        z-index: $zIndex-1;
+        border-color: $danger;
 
-		input{
-        	color: $danger;
-		}
-
-        label{
+        input
+        {
             color: $danger;
         }
 
-        i{
+        label
+        {
+            color: $danger;
+        }
+
+        i
+        {
             background-color: $danger;
             color: white;
         }
 
     }
 
-    &.success{
-    	z-index: $zIndex-1;
-    	border-color: $success;
+    &.success
+    {
+        z-index: $zIndex-1;
+        border-color: $success;
 
-    	input{
-        	color: $success;
-		}
-
-        label{
-            color:$success;
+        input
+        {
+            color: $success;
         }
 
-        i{
-            background-color:$success;
+        label
+        {
+            color: $success;
+        }
+
+        i
+        {
+            background-color: $success;
             color: white;
         }
-        
+
+    }
+
+    .custom-select
+    {
+        padding: 1.2rem 2rem .4rem 1rem;
+        background-position: calc(100% - 1rem) 1.2rem;
     }
 }
 
@@ -12881,7 +12788,7 @@ $border-width: 1px;
 {
     height: 38px;
     cursor: pointer;
-    
+
     > input[type="file"]
     {
         width: 0;
@@ -12889,12 +12796,12 @@ $border-width: 1px;
         padding: 0;
         visibility: hidden;
     }
-    
+
     > .input-unit-preview
     {
         height: 38px;
     }
-    
+
     > .input-unit-btn
     {
         content: "";
@@ -12905,8 +12812,9 @@ $border-width: 1px;
         display: block;
         right: 0;
         top: 0;
-        
-        i {
+
+        i
+        {
             margin: 10px;
             width: 18px;
             height: 18px;
@@ -12915,106 +12823,83 @@ $border-width: 1px;
             color: $body-color;
         }
     }
-    
+
     &.success .input-unit-btn,
-    &.success .input-unit-btn i {
+    &.success .input-unit-btn i
+    {
         background-color: $success;
         color: #fff;
     }
-    
+
     &.error .input-unit-btn,
-    &.error .input-unit-btn i {
+    &.error .input-unit-btn i
+    {
         background-color: $danger;
         color: #fff;
     }
 }
 
-.input-unit.multiple{
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
+.input-unit.multiple
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-flow: row nowrap;
             flex-flow: row nowrap;
 
-    &>input{
-    	width: 70%;
+    & > input
+    {
+        width: 70%;
     }
 
-    &>select{
-    	width: 30%;
-    	border-left: $border-width solid $border-color;
+    & > select
+    {
+        width: 30%;
+        border-left: $border-width solid $border-color;
     }
 }
 
-.remove-disabled-coloring {
-    &:disabled {
+.remove-disabled-coloring
+{
+    &:disabled
+    {
         background-color: initial !important;
     }
 }
 
-.form-check-label {
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease;
-
-  &.error {
-    background: $danger !important;
-    color: $white !important;
-    border-radius: .1rem;
+.form-check-label
+{
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
-    padding: .5em 1.75rem;
 
-    a {
-      color: $white;
-      &:hover {
-        color: $gray-lighter2;
-      }
+    &.error
+    {
+        background: $danger !important;
+        color: $white !important;
+        border-radius: .1rem;
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+        padding: .5em 1.75rem;
+
+        a
+        {
+            color: $white;
+            &:hover
+            {
+                color: $gray-lighter2;
+            }
+        }
+
+        & .text-muted
+        {
+            color: $white !important;
+        }
     }
-
-    & .text-muted {
-      color: $white !important;
-    }
-  }
 }
 
 
-.custom-select{
-	border: none;
-	width: 100%;
-	text-align: left;
-	text-align-last: left;
-	line-height: 1.2em;
-
-	padding: 1.2rem 2rem .4rem 1rem;
-	background-position: calc(100% - 1rem) 1.2rem;
-
-	option{
-		width: auto;
-	}
-}
-.list-sort .custom-select,
-.list-itemsperpage .custom-select {
-	padding: .8rem 2rem .8rem 1rem;
-	background-position: calc(100% - 1rem) 1rem;
-}
-.login-form {
-	.custom-select{
-		text-align: left;
-		text-align-last: left;
-	}
-}
-
-.variation-select {
-
-	& label {
-		text-overflow: ellipsis;
-		overflow: hidden;
-		width: 140px;
-		white-space: nowrap;
-	}
-}
 
 // Page Design / Global components
 //header scss
@@ -13187,7 +13072,7 @@ $border-width: 1px;
 						}
 					}
 	
-					&.open {
+					&.show {
 						& > .dropdown-toggle {
 							background-color: $gray-darker;
 						}
@@ -13513,9 +13398,9 @@ $border-width: 1px;
 
 @include media-breakpoint-up(sm){
 
-	.top-bar
+	.wrapper-main header
 	{
-		.row
+		.container-max > .row
 		{
 			-webkit-box-orient: horizontal;
 			-webkit-box-direction: reverse;
@@ -16007,8 +15892,8 @@ html.ie .basket-preview-hover {
 	        -ms-flex-flow: column nowrap;
 	            flex-flow: column nowrap;
     	-webkit-box-flex: 1;
-    	    -ms-flex: 1;
-    	        flex: 1;
+    	    -ms-flex: 1 1 auto;
+    	        flex: 1 1 auto;
         overflow: auto;
 
         @include media-breakpoint-only(sm)
@@ -16026,6 +15911,9 @@ html.ie .basket-preview-hover {
 	    -webkit-box-direction: normal;
 	        -ms-flex-flow: column nowrap;
 	            flex-flow: column nowrap;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
         border-top: 1px solid $gray-lighter;
 
         @extend .small;

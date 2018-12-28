@@ -469,7 +469,7 @@
 
 	.wrapper-main header
 	{
-		.row
+		.container-max > .row
 		{
 			flex-direction: row-reverse;
 			position: relative;

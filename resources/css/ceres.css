@@ -18566,7 +18566,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 }
 
 @media (min-width: 576px) {
-  .wrapper-main header .row {
+  .wrapper-main header .container-max > .row {
     -ms-flex-direction: row-reverse;
         flex-direction: row-reverse;
     position: relative;

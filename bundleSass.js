@@ -130,6 +130,10 @@ SassResolver.prototype.bundle = function( targetFile )
         .then(function( result )
         {
             fs.writeFileSync( targetFile, result.content );
+        })
+        .catch(function(err)
+        {
+            console.log("ERROR: " + err.reason + " at " + err.file + ":" + err.line);
         });
 };
 

@@ -17407,9 +17407,7 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.basketAddInformation === "overlay") {
                 this.setPriceFromData();
 
-                ModalService.findModal(document.getElementById("add-item-to-basket-overlay"))
-                // .setTimeout(this.defaultTimeToClose * 1000)
-                .show();
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
             } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
                 setTimeout(function () {
                     var vueApp = document.querySelector("#vue-app");
