@@ -2659,10 +2659,6 @@
                         "defaultValue": "",
                         "checkBoxValues": [
                             {
-                                "value": "billing_address.name1",
-                                "caption": "Config.addressFieldName1"
-                            },
-                            {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldVatNumber"
                             },
@@ -2750,10 +2746,6 @@
                     "options": {
                         "defaultValue": "",
                         "checkBoxValues": [
-                            {
-                                "value": "delivery_address.name1",
-                                "caption": "Config.addressFieldName1"
-                            },
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
@@ -2843,10 +2835,6 @@
                         "defaultValue": "",
                         "checkBoxValues": [
                             {
-                                "value": "billing_address.name1",
-                                "caption": "Config.addressFieldEnName1"
-                            },
-                            {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldEnVatNumber"
                             },
@@ -2934,10 +2922,6 @@
                     "options": {
                         "defaultValue": "",
                         "checkBoxValues": [
-                            {
-                                "value": "delivery_address.name1",
-                                "caption": "Config.addressFieldEnName1"
-                            },
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldEnSalutation"
