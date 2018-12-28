@@ -50,9 +50,10 @@
     {{ Twig.set("title", "'#{ headline }'" ) }}
 {% endif %}
 
-{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component( "Ceres::Containers.Components.LastSeenItemList" ) }}
+{{ Twig.component( "Ceres::ItemList.Components.CategoryItem" ) }}
 {{ Twig.component( "Ceres::PageDesign.Components.Carousel" ) }}
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
 <div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <div class="widget-inner">
