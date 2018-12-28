@@ -23189,7 +23189,7 @@ Vue.component("item-store-special", {
         },
         getPercentageSale: function getPercentageSale() {
             // eslint-disable-next-line
-            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
+            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value) * -100;
 
             if (percent < 0) {
                 return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
