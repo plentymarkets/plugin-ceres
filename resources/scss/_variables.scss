@@ -180,12 +180,13 @@ $custom-control-indicator-focus-box-shadow:     0 0 0 .075rem #fff, 0 0 0 .2rem 
 $custom-control-indicator-active-color:         #fff !default;
 $custom-control-indicator-active-bg:            #84c6ff !default;
 
-$custom-checkbox-indicator-indeterminate-bg:    #0074d9 !default;
+$custom-checkbox-indicator-indeterminate-bg:    #0074d9 !default
 
-$custom-select-bg:                              #fff !default;
-
-$custom-select-focus-border-color:              #51a7e8 !default;
-$custom-select-focus-box-shadow:                inset 0 1px 2px rgba(0, 0, 0, .075), 0 0 5px rgba(81, 167, 232, .5) !default;
+$custom-select-padding-y:                       .8rem;
+$custom-select-padding-x:                       1rem;
+$custom-select-height:                          auto;
+$custom-select-line-height:                     1.2;
+$custom-select-border-width:                    0px;
 
 $custom-file-height:                            2.5rem !default;
 $custom-file-focus-box-shadow:                  0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9 !default;
