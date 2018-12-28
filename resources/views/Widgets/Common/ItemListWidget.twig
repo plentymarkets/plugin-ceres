@@ -84,7 +84,7 @@
                             <div slot="items">
                                 <category-item
                                     :item-data="{{ Twig.print("item.data | json_encode") }}"
-                                    :decimal-count="2">
+                                    :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}">
                                     <template slot="BeforePrices">{{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.BeforePrices", "item.data"])) }}</template>
                                     <template slot="AfterPrices">{{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", "item.data"])) }}</template>
                                 </category-item>
