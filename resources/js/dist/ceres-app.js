@@ -25257,6 +25257,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var formatter = new _MonetaryFormatter2.default();
 
 Vue.filter("currency", function (price) {
+    if (price === "N / A") {
+        return price;
+    }
+
     return formatter.format(parseFloat(price).toFixed(2), App.activeCurrency);
 });
 
@@ -26477,7 +26481,7 @@ function isAddressFieldEnabled(countryId, addressType, field) {
     if (addressType === "1") {
         address = "billing_address";
 
-        if (countryId === 1) {
+        if (parseInt(countryId) === 1) {
             enabledFields = App.config.addresses.billingAddressShow;
         } else {
             enabledFields = App.config.addresses.billingAddressShow_en;
@@ -26485,7 +26489,7 @@ function isAddressFieldEnabled(countryId, addressType, field) {
     } else {
         address = "delivery_address";
 
-        if (countryId === "1") {
+        if (parseInt(countryId) === 1) {
             enabledFields = App.config.addresses.deliveryAddressShow;
         } else {
             enabledFields = App.config.addresses.deliveryAddressShow_en;
@@ -29440,6 +29444,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _utils = require("../../helper/utils");
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var state = {
@@ -29552,8 +29558,10 @@ var getters = {
     variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
         var graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-        if (state.variation.documents) {
-            return getters.variationPropertySurcharge + Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+        if (!(0, _utils.isNullOrUndefined)(graduatedPrice) && state.variation.documents) {
+            var specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+
+            return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
         }
 
         return null;
@@ -29704,7 +29712,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],268:[function(require,module,exports){
+},{"../../helper/utils":245}],268:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
