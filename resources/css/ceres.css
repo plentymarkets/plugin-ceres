@@ -20801,8 +20801,8 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   display: flex;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
-  -ms-flex: 1;
-      flex: 1;
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
   overflow: auto;
 }
 
@@ -20817,6 +20817,8 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   display: flex;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
   border-top: 1px solid #dcdbd8;
 }
 
