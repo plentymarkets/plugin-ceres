@@ -28,8 +28,10 @@
 
             <!-- BASKET PREVIEW BOTTOM -->
             <div class="bg-faded totals col-sm-5 col-md-12 p-t-1">
-
+                
+                {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
                 <basket-totals template="#vue-basket-totals"></basket-totals>
+                {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
 
                 <div class="basket-preview-footer row">
                     <div class="col-xs-6 col-sm-6 m-b-1">
