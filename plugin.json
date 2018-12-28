@@ -299,14 +299,14 @@
             "description"   : "Add content after the item in the Items list of the shopping cart."
         },
         {
-            "key"           : "BasketList.BeforeBasketTotals",
-            "name"          : "TODO",
-            "description"   : "TODO"
+            "key"           : "Basket.BeforeBasketTotals",
+            "name"          : "Shopping cart: Before basket totals",
+            "description"   : "Add content before the basket totals in the shopping cart."
         },
         {
-            "key"           : "BasketList.AfterBasketTotals",
-            "name"          : "TODO",
-            "description"   : "TODO"
+            "key"           : "Basket.AfterBasketTotals",
+            "name"          : "Shopping cart: After basket totals",
+            "description"   : "Add content after the basket totals in the shopping cart."
         },
         {
             "key"           : "Basket.BeforeCoupon",
@@ -330,13 +330,13 @@
         },
         {
             "key"           : "BasketPreview.BeforeBasketTotals",
-            "name"          : "TODO",
-            "description"   : "TODO"
+            "name"          : "Shopping cart preview: Before basket totals",
+            "description"   : "Add content before the basket totals in the shopping cart preview."
         },
         {
             "key"           : "BasketPreview.AfterBasketTotals",
-            "name"          : "TODO",
-            "description"   : "TODO"
+            "name"          : "Shopping cart preview: After basket totals",
+            "description"   : "Add content after the basket totals in the shopping cart preview."
         },
         {
             "key"           : "BasketPreview.BeforeCheckoutButton",
