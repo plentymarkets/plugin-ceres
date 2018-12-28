@@ -4,7 +4,7 @@ const formatter = new MonetaryFormatter();
 
 Vue.filter("currency", function(price)
 {
-    if(price === "N / A")
+    if (price === "N / A")
     {
         return price;
     }

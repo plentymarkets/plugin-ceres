@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 const state =
     {
         variation: {},
@@ -111,14 +113,9 @@ const getters =
         {
             const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-            if (graduatedPrice === null)
+            if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
             {
-                return null;
-            }
-
-            if (state.variation.documents)
-            {
-                const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+                const specialOfferPrice = Vueilter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
 
                 return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
             }
