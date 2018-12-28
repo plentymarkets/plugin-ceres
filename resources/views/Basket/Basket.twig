@@ -36,7 +36,10 @@
             <div class="col-md-5 float-right" v-stick-in-parent>
                 <div class="col-xs-12 p-y-2 bg-white">
                     <hr class="hidden-md-up">
+                    
+                    {{ LayoutContainer.show("Ceres::Basket.BeforeBasketTotals") }}
                     <basket-totals class="m-b-2" template="#vue-basket-totals"></basket-totals>
+                    {{ LayoutContainer.show("Ceres::Basket.AfterBasketTotals") }}
 
                     <hr>
                     <coupon template="#vue-coupon"></coupon>

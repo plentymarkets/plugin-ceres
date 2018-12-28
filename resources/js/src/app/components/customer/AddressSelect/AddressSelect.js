@@ -36,7 +36,8 @@ Vue.component("address-select", {
                 1: "vatNumber",
                 4: "telephone",
                 9: "birthday",
-                11: "title"
+                11: "title",
+                12: "contactPerson"
             }
         };
     },
@@ -142,8 +143,8 @@ Vue.component("address-select", {
                 this.addressToEdit = {
                     addressSalutation: 0,
                     gender: "male",
-                    countryId        : this.shippingCountryId,
-                    showPickupStation : false
+                    countryId: this.shippingCountryId,
+                    showPickupStation: false
                 };
             }
             else
@@ -333,7 +334,7 @@ Vue.component("address-select", {
     {
         optionType(selectedAddress, typeId)
         {
-            if (selectedAddress && selectedAddress.name2)
+            if (selectedAddress && selectedAddress.options)
             {
                 for (const optionType of selectedAddress.options)
                 {
@@ -345,7 +346,6 @@ Vue.component("address-select", {
             }
 
             return "";
-
         }
     }
 });

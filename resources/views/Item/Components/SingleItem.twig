@@ -60,9 +60,9 @@
                     <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
                     {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
-                        <div class="crossprice" v-if="currentVariation.prices.rrp && currentVariation.prices.rrp.price.value > 0 && currentVariation.prices.rrp.price.value > currentVariation.prices.default.price.value">
+                        <div class="crossprice" v-if="currentVariation.prices.rrp && currentVariation.prices.rrp.unitPrice.value > 0 && currentVariation.prices.rrp.unitPrice.value > currentVariation.prices.default.unitPrice.value">
                             <del class="text-muted small">
-                                ${ currentVariation.prices.rrp.price.formatted }
+                                ${ currentVariation.prices.rrp.unitPrice.formatted }
                             </del>
                         </div>
                     {% endif %}

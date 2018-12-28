@@ -2579,6 +2579,28 @@
                         "defaultValue": "false"
                     }
                 },
+                "my_account.confirmation_link_expiration": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.myAccountConfirmationLinkExpirationLabel",
+                    "options": {
+                        "defaultValue": "always",
+                        "selectBoxValues": [
+                            {
+                              "value": "always",
+                              "caption": "Config.myAccountConfirmationLinkExpirationAlways"
+                            },
+                            {
+                              "value": "30",
+                              "caption": "Config.myAccountConfirmationLinkExpirationThirtyDays"
+                            },
+                            {
+                                "value": "90",
+                                "caption": "Config.myAccountConfirmationLinkExpirationNinetyDays"
+                            }
+                        ]
+                    }
+                },
                 "billing_address.show": {
                     "type": "multiCheckBox",
                     "required": false,
@@ -2636,10 +2658,6 @@
                     "options": {
                         "defaultValue": "",
                         "checkBoxValues": [
-                            {
-                                "value": "billing_address.name1",
-                                "caption": "Config.addressFieldName1"
-                            },
                             {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldVatNumber"
@@ -2729,10 +2747,6 @@
                         "defaultValue": "",
                         "checkBoxValues": [
                             {
-                                "value": "delivery_address.name1",
-                                "caption": "Config.addressFieldName1"
-                            },
-                            {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
                             },
@@ -2821,10 +2835,6 @@
                         "defaultValue": "",
                         "checkBoxValues": [
                             {
-                                "value": "billing_address.name1",
-                                "caption": "Config.addressFieldEnName1"
-                            },
-                            {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldEnVatNumber"
                             },
@@ -2912,10 +2922,6 @@
                     "options": {
                         "defaultValue": "",
                         "checkBoxValues": [
-                            {
-                                "value": "delivery_address.name1",
-                                "caption": "Config.addressFieldEnName1"
-                            },
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldEnSalutation"

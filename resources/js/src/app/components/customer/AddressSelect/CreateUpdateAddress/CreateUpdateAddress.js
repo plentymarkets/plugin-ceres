@@ -215,6 +215,14 @@ Vue.component("create-update-address", {
                             }
                             break;
                         }
+                    case 12:
+                        {
+                            if (this.addressData.contactPerson && this.addressData.contactPerson !== optionType.value)
+                            {
+                                optionType.value = this.addressData.contactPerson;
+                            }
+                            break;
+                        }
                     }
                 }
             }
