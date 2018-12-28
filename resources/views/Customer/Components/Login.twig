@@ -25,8 +25,8 @@
                     </div>
                 </div>
             </div>
-            <div :class="{'modal-footer': modalElement, 'row': !modalElement}">
-                <div class="reset-pwd-direction" :class="{'col-xs-7 col-sm-4': !modalElement}">
+            <div :class="{'modal-footer justify-content-between': modalElement, 'row': !modalElement}">
+                <div :class="{'col-xs-7 col-sm-4': !modalElement}">
                     <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.loginForgotPassword") }}?</a>
                 </div>
                 <div :class="{'col-xs-5 col-sm-8 text-sm-right': !modalElement}">
