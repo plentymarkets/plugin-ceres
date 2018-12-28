@@ -55,6 +55,8 @@ $legacySpacers:
 
 .m-x-auto { @extend .mx-auto; }
 .m-y-auto { @extend .my-auto; }
+.p-x-auto { @extend .px-auto; }
+.p-y-auto { @extend .py-auto; }
 
 $contexts:
 (
@@ -79,3 +81,5 @@ $contexts:
         color: $white;
     }
 }
+
+.card-block { @extend .card-body };

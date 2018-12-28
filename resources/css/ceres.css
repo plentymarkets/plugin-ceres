@@ -14896,62 +14896,6 @@ a.text-dark:hover, a.text-dark:focus {
   background-image: url(../images/flags/1x1/zw.svg);
 }
 
-.flag-icon-es-ct {
-  background-image: url(../images/flags/4x3/es-ct.svg);
-}
-
-.flag-icon-es-ct.flag-icon-squared {
-  background-image: url(../images/flags/1x1/es-ct.svg);
-}
-
-.flag-icon-eu {
-  background-image: url(../images/flags/4x3/eu.svg);
-}
-
-.flag-icon-eu.flag-icon-squared {
-  background-image: url(../images/flags/1x1/eu.svg);
-}
-
-.flag-icon-gb-eng {
-  background-image: url(../images/flags/4x3/gb-eng.svg);
-}
-
-.flag-icon-gb-eng.flag-icon-squared {
-  background-image: url(../images/flags/1x1/gb-eng.svg);
-}
-
-.flag-icon-gb-nir {
-  background-image: url(../images/flags/4x3/gb-nir.svg);
-}
-
-.flag-icon-gb-nir.flag-icon-squared {
-  background-image: url(../images/flags/1x1/gb-nir.svg);
-}
-
-.flag-icon-gb-sct {
-  background-image: url(../images/flags/4x3/gb-sct.svg);
-}
-
-.flag-icon-gb-sct.flag-icon-squared {
-  background-image: url(../images/flags/1x1/gb-sct.svg);
-}
-
-.flag-icon-gb-wls {
-  background-image: url(../images/flags/4x3/gb-wls.svg);
-}
-
-.flag-icon-gb-wls.flag-icon-squared {
-  background-image: url(../images/flags/1x1/gb-wls.svg);
-}
-
-.flag-icon-un {
-  background-image: url(../images/flags/4x3/un.svg);
-}
-
-.flag-icon-un.flag-icon-squared {
-  background-image: url(../images/flags/1x1/un.svg);
-}
-
 .square-container {
   position: relative;
   display: block;
