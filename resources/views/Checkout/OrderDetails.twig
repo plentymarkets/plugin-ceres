@@ -55,6 +55,13 @@
                                     <div>{{ orderData.order.deliveryAddress.name2 }} {{ orderData.order.deliveryAddress.name3 }}</div>
                                     <div>{{ orderData.order.deliveryAddress.name4 }}</div>
                                     <div>{{ orderData.order.deliveryAddress.address1 }} {{ orderData.order.deliveryAddress.address2 }}</div>
+                                    <div>
+                                        {% if orderData.order.deliveryAddress.address1 == 'PACKSTATION' or orderData.order.deliveryAddress.address1 == 'POSTFILIALE' %}
+                                            {{ trans("Ceres::Template.addressPostNummer") }}
+                                        {% endif %}
+                                        
+                                        {{ orderData.order.deliveryAddress.address3 }}
+                                    </div>
                                     <div>{{ orderData.order.deliveryAddress.postalCode }} {{ orderData.order.deliveryAddress.town }}</div>
                                     <div>{{ services.country.getCountryName(orderData.order.deliveryAddress.countryId) }}</div>
                                 </span>
@@ -163,14 +170,12 @@
                                 </div>
                             {% endif %}
 
-
-
                             {% if item.amounts[0].discount > 0 %}
                                 {% if item.amounts[0].isPercentage ==  "1" %}
-                                    {% set rebatedAmountItemGross = ((item.amounts[0].priceGross  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceGross %}
-                                    {% set rebatedAmountItemNet = ((item.amounts[0].priceNet  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceNet %}
+                                    {% set rebatedAmountItemGross = (item.quantity * (((item.amounts[0].priceGross  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceGross)) %}
+                                    {% set rebatedAmountItemNet = (item.quantity * (((item.amounts[0].priceNet  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceNet)) %}
                                 {% else %}
-                                    {% set rebatedAmountItemGross = item.amounts[0].discount  %}
+                                    {% set rebatedAmountItemGross = (item.quantity * item.amounts[0].discount)  %}
                                 {% endif %}
                                 {% set rebatedAmountTotalGross = rebatedAmountTotalGross + rebatedAmountItemGross %}
                                 {% set rebatedAmountTotalNet = rebatedAmountTotalNet + rebatedAmountItemNet %}
