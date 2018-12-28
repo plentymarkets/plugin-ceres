@@ -19766,11 +19766,7 @@ Vue.component("create-update-address", {
 
     data: function data() {
         return {
-            waiting: false,
-            addressFormNames: {
-                1: "#billing_address_form",
-                2: "#delivery_address_form"
-            }
+            waiting: false
         };
     },
 
@@ -19793,7 +19789,7 @@ Vue.component("create-update-address", {
         validate: function validate() {
             var _this = this;
 
-            _ValidationService2.default.validate($(this.addressFormNames[this.addressType])).done(function () {
+            _ValidationService2.default.validate(this.$refs.addressForm).done(function () {
                 _this.saveAddress();
             }).fail(function (invalidFields) {
                 var fieldNames = [];
@@ -19891,7 +19887,7 @@ Vue.component("create-update-address", {
             });
         },
         _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-            _ValidationService2.default.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
+            _ValidationService2.default.markFailedValidationFields(this.$refs.addressForm, validationErrors);
 
             var errorMessage = "";
 

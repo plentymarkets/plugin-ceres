@@ -40,13 +40,15 @@
                     </div>
                 </div>
 
-                <address-input-group
-                    template="#vue-address-input-group"
-                    v-if="!isSimpleRegistration"
-                    address-type="1"
-                    :value="billingAddress"
-                    @input="setAddressDataField($event)">
-                </address-input-group>
+                <div class="col-xs-12">
+                    <address-input-group
+                        template="#vue-address-input-group"
+                        v-if="!isSimpleRegistration"
+                        address-type="1"
+                        :value="billingAddress"
+                        @input="setAddressDataField($event)">
+                    </address-input-group>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
