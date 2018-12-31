@@ -16176,6 +16176,8 @@ button:focus {
 
 .btn > .fa {
   float: right;
+  margin-top: 1px;
+  margin-left: 5px;
 }
 
 .btn > .fa.default-float {
