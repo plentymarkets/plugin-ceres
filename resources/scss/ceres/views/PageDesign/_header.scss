@@ -60,6 +60,7 @@
 		}
 
 		.controls-list {
+
 			&>li {
 				@include media-breakpoint-up(md) {
 					a:not(.btn) {
@@ -75,6 +76,7 @@
 	}
 
 	.controls-list{
+		width: 100%;
 		margin-bottom: 0;
 		font-size: 0;
 		display: flex;
@@ -485,6 +487,8 @@
 
 		.controls-list
 		{
+			width: auto;
+
 			&>li
 			{
 				// default font size for all items
