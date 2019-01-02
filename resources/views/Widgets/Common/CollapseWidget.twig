@@ -13,21 +13,19 @@
       <div class="widget-inner">
         {% for collapseBox in collapseBoxes %}
         <div class="card">
-          {% for i in 0..collapseBoxes %}
-          <div class="card-header" id="heading_{{ collapseId }}_{{ i }}">
+          <div class="card-header" id="heading_{{ collapseId }}">
             <h5 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}_{{ i }}" aria-expanded="true" aria-controls="collapse_{{ collapseId }}_{{ i }}">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}" aria-expanded="true" aria-controls="collapse_{{ collapseId }}">
                 {{ collapseBox.headline | raw }}
               </button>
             </h5>
           </div>
 
-          <div id="collapse_{{ collapseId }}_{{ i }}" class="collapse show" aria-labelledby="heading_{{ collapseId }}_{{ i }}" data-parent="#accordion_{{ collapseId }}">
+          <div id="collapse_{{ collapseId }}" class="collapse show" aria-labelledby="heading_{{ collapseId }}" data-parent="#accordion_{{ collapseId }}">
             <div class="card-body">
               {{ collapseBox.text | raw }}
             </div>
           </div>
-          {% endfor %}
         </div>
         {% endfor %}
       </div>

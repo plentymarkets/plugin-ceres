@@ -16,7 +16,7 @@
               "headline": {
                   "type": "text",
                   "required": true,
-                  "defaultValue": "",
+                  "defaultValue": "Frage",
                   "options": {
                       "name": "Widget.collapseBoxHeadlineLabel",
                       "tooltipText": "Widget.collapseBoxHeadlineTooltip"
@@ -25,7 +25,7 @@
               "text": {
                   "type": "textarea",
                   "required": true,
-                  "defaultValue": "",
+                  "defaultValue": "Antwort",
                   "options": {
                       "name": "Widget.collapseBoxTextareaLabel",
                       "tooltipText": "Widget.collapseBoxTextareaTooltip"
