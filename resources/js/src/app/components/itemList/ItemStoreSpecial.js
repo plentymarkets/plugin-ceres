@@ -59,6 +59,11 @@ Vue.component("item-store-special", {
 
         getLabel()
         {
+            if (isNullOrUndefined(this.storeSpecial) && isNullOrUndefined(this.recommendedRetailPrice))
+            {
+                return "";
+            }
+
             if (
                 (isNullOrUndefined(this.storeSpecial) || this.storeSpecial.id === 1) &&
                 !isNullOrUndefined(this.recommendedRetailPrice)

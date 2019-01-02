@@ -22799,6 +22799,10 @@ Vue.component("item-store-special", {
             this.label = this.getLabel();
         },
         getLabel: function getLabel() {
+            if ((0, _utils.isNullOrUndefined)(this.storeSpecial) && (0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
+                return "";
+            }
+
             if (((0, _utils.isNullOrUndefined)(this.storeSpecial) || this.storeSpecial.id === 1) && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
                 return this.getPercentageSale();
             }
@@ -25257,8 +25261,6 @@ var initTooltip = function initTooltip(el) {
         setTimeout(function () {
             $(el).tooltip({
                 trigger: "hover"
-                // eslint-disable-next-line
-                // template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
             });
         }, 1);
     }
