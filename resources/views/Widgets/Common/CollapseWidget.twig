@@ -9,19 +9,19 @@
     {% set renderContent = true %}
 {% endfor %}
 
-    <div class="accordion widget" id="accordionExample">
+    <div class="widget accordion" id="accordion_{{ collapseId }}">
       <div class="widget-inner">
-        {% for collapseBox in collapseBoxes %}
+        {% for collapseBox in collapseBoxes, i in 0..collapseBoxes %}
         <div class="card">
-          <div class="card-header" id="heading_{{ collapseId }}">
+          <div class="card-header" id="heading_{{ collapseId }}_{{ i }}">
             <h5 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}" aria-expanded="true" aria-controls="collapse_{{ collapseId }}">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}_{{ i }}" aria-expanded="true" aria-controls="collapse_{{ collapseId }}_{{ i }}">
                 {{ collapseBox.headline | raw }}
               </button>
             </h5>
           </div>
 
-          <div id="collapse_{{ collapseId }}" class="collapse show" aria-labelledby="heading_{{ collapseId }}" data-parent="#accordionExample">
+          <div id="collapse_{{ collapseId }}_{{ i }}" class="collapse show" aria-labelledby="heading_{{ collapseId }}_{{ i }}" data-parent="#accordion_{{ collapseId }}">
             <div class="card-body">
               {{ collapseBox.text | raw }}
             </div>
