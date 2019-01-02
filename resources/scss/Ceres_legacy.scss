@@ -84,4 +84,7 @@ $contexts:
 
 .bg-faded { @extend .bg-light; }
 
-.form-check-label { @extend .custom-control; }
+.modal-header .close
+{
+    order: 999;
+}

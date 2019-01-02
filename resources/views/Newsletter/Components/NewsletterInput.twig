@@ -33,9 +33,9 @@
                 </div>
 
                 <div class="col-xs-12" v-if="showPrivacyPolicyCheckbox">
-                    <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label" data-validate>
+                    <div class="form-check small" data-validate>
                         <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + _uid" name="privacy-policy-accept" v-model="privacyPolicyValue">
-                        <small>
+                        <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label">
                             {% autoescape false %}
                                 {% set policyContent %}
                                     <a href="{{ urls.privacyPolicy }}" target="_blank">
@@ -44,8 +44,8 @@
                                 {% endset %}
                                 {{ trans('Ceres::Template.newsletterAcceptPrivacyPolicy', {"policy": policyContent} ) }}
                             {% endautoescape %}
-                        </small>
-                    </label>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="col-xs-12 mt-3">

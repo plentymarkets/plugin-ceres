@@ -29,23 +29,6 @@
 		border-color: rgba(0,0,0,.15);
 	}
 
-	.form-check-label {
-		&.error {
-			background: $danger !important;
-			color: $white !important;
-			border-radius: .1rem;
-			transition: all .3s ease;
-			padding: .5em 1.75rem;
-
-			a {
-				color: $white;
-				&:hover {
-					color: $gray-lighter2;
-				}
-			}
-		}
-	}
-
 	.contact-card{
 		p{
 			&.contact-address,&.contact-vat-number{

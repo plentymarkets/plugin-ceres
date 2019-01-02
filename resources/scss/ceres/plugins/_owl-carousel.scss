@@ -379,6 +379,7 @@ Custom classes
     text-align:left;
     &.right {
       text-align:right;
+      right: 0;
       .owl-single-item-control {
         right: 0;
       }

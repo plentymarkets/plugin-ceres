@@ -16920,6 +16920,7 @@ Custom classes
 
 .owl-carousel .carousel-control.right {
   text-align: right;
+  right: 0;
 }
 
 .owl-carousel .carousel-control.right .owl-single-item-control {
@@ -18063,12 +18064,12 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   background-color: initial !important;
 }
 
-.form-check-label {
+.form-check {
   transition: all .3s ease;
   cursor: pointer;
 }
 
-.form-check-label.error {
+.form-check.error {
   background: #dc3545 !important;
   color: #fff !important;
   border-radius: .1rem;
@@ -18076,15 +18077,15 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   padding: .5em 1.75rem;
 }
 
-.form-check-label.error a {
+.form-check.error a {
   color: #fff;
 }
 
-.form-check-label.error a:hover {
+.form-check.error a:hover {
   color: #f4f4f4;
 }
 
-.form-check-label.error .text-muted {
+.form-check.error .text-muted {
   color: #fff !important;
 }
 
@@ -21320,22 +21321,6 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 
 .cmp-contact textarea:focus {
   border-color: rgba(0, 0, 0, 0.15);
-}
-
-.cmp-contact .form-check-label.error {
-  background: #dc3545 !important;
-  color: #fff !important;
-  border-radius: .1rem;
-  transition: all .3s ease;
-  padding: .5em 1.75rem;
-}
-
-.cmp-contact .form-check-label.error a {
-  color: #fff;
-}
-
-.cmp-contact .form-check-label.error a:hover {
-  color: #f4f4f4;
 }
 
 .cmp-contact .contact-card p.contact-address span, .cmp-contact .contact-card p.contact-vat-number span {
