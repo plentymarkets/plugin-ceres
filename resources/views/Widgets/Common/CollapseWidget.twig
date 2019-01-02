@@ -13,15 +13,15 @@
       <div class="widget-inner">
         {% for collapseBox in collapseBoxes %}
         <div class="card">
-          <div class="card-header" id="heading_{{ collapseId }}">
+          <div class="card-header" id="heading_{{ collapseId }}_{{ loop.index }}">
             <h5 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}" aria-expanded="true" aria-controls="collapse_{{ collapseId }}">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}_{{ loop.index }}" aria-expanded="true" aria-controls="collapse_{{ collapseId }}_{{ loop.index }}">
                 {{ collapseBox.headline | raw }}
               </button>
             </h5>
           </div>
 
-          <div id="collapse_{{ collapseId }}" class="collapse show" aria-labelledby="heading_{{ collapseId }}" data-parent="#accordion_{{ collapseId }}">
+          <div id="collapse_{{ collapseId }}_{{ loop.index }}" class="collapse show" aria-labelledby="heading_{{ collapseId }}_{{ loop.index }}" data-parent="#accordion_{{ collapseId }}">
             <div class="card-body">
               {{ collapseBox.text | raw }}
             </div>
