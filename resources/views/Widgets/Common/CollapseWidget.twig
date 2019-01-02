@@ -1,8 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set appearance    = widget.settings.appearance.mobile %}
 {% set collapseBoxes = widget.settings.collapseBox.mobile %}
-{% set collapseBoxId = uid() %}
 {% set renderContent = false %}
 
 
@@ -10,18 +8,19 @@
     {% set renderContent = true %}
 {% endfor %}
 
-    <div class="widget accordion widget-{{ widget.settings.appearance.mobile | default('primary') }} widget-proportional" id="collapseBox">
+    <div class="widget accordion widget-proportional" id="collapseBox">
 
     {% for collapseBox in collapseBoxes %}
       <div class="card">
-        <div class="card-header" id="heading_{{ collapseBoxId }}">
+        <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseBoxId }}" aria-expanded="true" aria-controls="collapse_{{ collapseBoxId }}">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               {{ collapseBox.headline | raw }}
             </button>
           </h5>
         </div>
-        <div id="collapse_{{ collapseBoxId }}" class="collapse show" aria-labelledby="heading_{{ collapseBoxId }}" data-parent="#collapseBox">
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#collapseBox">
           <div class="card-body">
               {{ collapseBox.text | raw }}
           </div>
