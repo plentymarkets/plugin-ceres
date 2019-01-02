@@ -298,6 +298,12 @@
 		&.top-bar {
 			background-color: $top-bar-bg;
 		}
+
+		@include media-breakpoint-up(sm){
+			.container-max {
+				padding: 0;
+			}
+		}
 	}
 
 	@include media-breakpoint-up(md){

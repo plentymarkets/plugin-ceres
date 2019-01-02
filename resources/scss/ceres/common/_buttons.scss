@@ -101,6 +101,8 @@ button:focus {
 
 	& > .fa {
 		float: right;
+		margin-top: 1px;
+		margin-left: 5px;
 
 		&.default-float {
 			float: none;

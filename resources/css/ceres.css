@@ -16176,6 +16176,8 @@ button:focus {
 
 .btn > .fa {
   float: right;
+  margin-top: 1px;
+  margin-left: 5px;
 }
 
 .btn > .fa.default-float {
@@ -18378,6 +18380,12 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .wrapper-main #page-header.top-bar {
   background-color: #4D4F4D;
+}
+
+@media (min-width: 576px) {
+  .wrapper-main #page-header .container-max {
+    padding: 0;
+  }
 }
 
 @media (min-width: 768px) {
