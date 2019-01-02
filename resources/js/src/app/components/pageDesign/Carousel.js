@@ -56,7 +56,10 @@ Vue.component("carousel", {
     {
         this.$options.template = this.template;
 
-        this.itemCount = this.$slots.items.length;
+        if (this.$slots.items)
+        {
+            this.itemCount = this.$slots.items.length;
+        }
     },
 
     mounted()

@@ -22,7 +22,8 @@ Vue.component("last-seen-item-list", {
     },
 
     computed: Vuex.mapState({
-        items: state => state.lastSeen.lastSeenItems
+        items: state => state.lastSeen.lastSeenItems,
+        containers: state => state.lastSeen.containers
     }),
 
     created()
@@ -33,5 +34,20 @@ Vue.component("last-seen-item-list", {
     beforeMount()
     {
         this.$store.dispatch("getLastSeenItems", this.maxItems);
+    },
+
+    methods:
+    {
+        getContainerContentById(variationId, containerKey)
+        {
+            const container = this.containers[variationId];
+
+            if (!!container && !!container[containerKey])
+            {
+                return container[containerKey];
+            }
+
+            return [];
+        }
     }
 });

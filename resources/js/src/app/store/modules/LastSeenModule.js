@@ -4,7 +4,8 @@ import {isDefined}from "../../helper/utils";
 const state =
     {
         lastSeenItems: [],
-        isLastSeenItemsLoading: false
+        isLastSeenItemsLoading: false,
+        containers: {}
     };
 
 const mutations =
@@ -17,6 +18,11 @@ const mutations =
         setIsLastSeenItemsLoading(state, isLoading)
         {
             state.isLastSeenItemsLoading = isLoading;
+        },
+
+        setLastSeenItemContainers(state, containers)
+        {
+            state.containers = containers;
         }
     };
 
@@ -61,11 +67,13 @@ const actions =
                     ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
                         .done(response =>
                         {
-                            if (isDefined(response.data))
+                            if (isDefined(response.data) && isDefined(response.data.lastSeenItems))
                             {
-                                commit("setLastSeenItems", response.data.documents);
+                                commit("setLastSeenItems", response.data.lastSeenItems.documents);
+                                commit("setLastSeenItemContainers", response.data.containers);
                                 commit("setIsLastSeenItemsLoading", false);
-                                resolve(response.data.documents);
+
+                                resolve(response.data.lastSeenItems.documents);
                             }
                         })
                         .fail(error =>

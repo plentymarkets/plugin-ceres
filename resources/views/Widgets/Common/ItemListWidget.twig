@@ -59,11 +59,13 @@
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
-            <last-seen-item-list :max-items="{{ maxItems }}" :items-per-page="{{ itemsPerPage }}">
-                <div class="widget-caption m-b-1" slot="heading">
-                    <h2>{{ Twig.print("title") }}</h2>
-                </div>
-            </last-seen-item-list>
+            <div class="row clearfix">
+                <last-seen-item-list :max-items="{{ maxItems }}" :items-per-page="{{ itemsPerPage }}" v-cloak>
+                    <div class="widget-caption m-b-1" slot="heading">
+                        <h2>{{ Twig.print("title") }}</h2>
+                    </div>
+                </last-seen-item-list>
+            </div>
         {% else %}
             {# render static item lists #}
             {% if headlineStyle == "default-caption" or headlineStyle == "custom-caption" or headlineStyle is empty %}
@@ -82,14 +84,13 @@
                 {{ Twig.if("itemList.documents is not empty") }}
                     <carousel :items-per-page="{{ itemsPerPage }}">
                         {{ Twig.for("item", "itemList.documents") }}
-                            <div slot="items">
-                                <category-item
-                                    :item-data="{{ Twig.print("item.data | json_encode") }}"
-                                    :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}">
-                                    <template slot="BeforePrices">{{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.BeforePrices", "item.data"])) }}</template>
-                                    <template slot="AfterPrices">{{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", "item.data"])) }}</template>
-                                </category-item>
-                            </div>
+                            <category-item
+                                slot="items"
+                                :item-data="{{ Twig.print("item.data | json_encode") }}"
+                                :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}">
+                                <template slot="BeforePrices">{{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.BeforePrices", "item.data"])) }}</template>
+                                <template slot="AfterPrices">{{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", "item.data"])) }}</template>
+                            </category-item>
                         {{ Twig.endfor() }}
                     </carousel>
                 {{ Twig.endif() }}
