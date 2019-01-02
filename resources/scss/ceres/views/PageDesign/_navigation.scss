@@ -229,6 +229,10 @@ body.menu-is-visible {
 							text-decoration : none;
 						}
 
+						.megamenu &:hover {
+							background: none;
+						}
+
 						>a {
 							width:100%;
 						}
