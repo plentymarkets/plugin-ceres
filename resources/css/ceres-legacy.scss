@@ -56,6 +56,8 @@ $danger:                    $brand-danger !default;
 $light:                     $gray-100 !default;
 $dark:                      $gray-800 !default;
 
+$yiq-contrasted-threshold:  186 !default;
+
 //
 // Fonts
 //
@@ -12942,6 +12944,7 @@ $border-width: 1px;
 		}
 
 		.controls-list {
+
 			&>li {
 				@include media-breakpoint-up(md) {
 					a:not(.btn) {
@@ -12957,6 +12960,7 @@ $border-width: 1px;
 	}
 
 	.controls-list{
+		width: 100%;
 		margin-bottom: 0;
 		font-size: 0;
 		display: -webkit-box;
@@ -13380,6 +13384,8 @@ $border-width: 1px;
 
 		.controls-list
 		{
+			width: auto;
+
 			&>li
 			{
 				// default font size for all items
@@ -17853,7 +17859,9 @@ html.ie .basket-preview-hover {
         z-index: 1050;
         width: 100%;
         margin-left: -15px;
+        padding-right: 15px;
         top: 100%;
+
         .page-content {
             background: $white;
             padding: 2em !important;
