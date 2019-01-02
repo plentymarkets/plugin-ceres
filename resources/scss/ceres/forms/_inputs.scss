@@ -299,6 +299,7 @@ $border-width: 1px;
 .form-check-label
 {
     transition: all .3s ease;
+    cursor: pointer;
 
     &.error
     {
