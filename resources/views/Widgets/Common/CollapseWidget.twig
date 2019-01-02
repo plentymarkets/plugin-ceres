@@ -13,15 +13,15 @@
       <div class="widget-inner">
         {% for collapseBox in collapseBoxes %}
         <div class="card">
-          <div class="card-header" id="heading_{{ carouselId }}">
+          <div class="card-header" id="heading_{{ collapseId }}">
             <h5 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ carouselId }}" aria-expanded="true" aria-controls="collapse_{{ carouselId }}">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}" aria-expanded="true" aria-controls="collapse_{{ collapseId }}">
                 {{ collapseBox.headline | raw }}
               </button>
             </h5>
           </div>
 
-          <div id="collapse_{{ carouselId }}" class="collapse show" aria-labelledby="heading_{{ carouselId }}" data-parent="#accordionExample">
+          <div id="collapse_{{ collapseId }}" class="collapse show" aria-labelledby="heading_{{ collapseId }}" data-parent="#accordionExample">
             <div class="card-body">
               {{ collapseBox.text | raw }}
             </div>
