@@ -8,7 +8,6 @@
 
 {% if renderContent %}
     <div class="widget accordion widget-{{ widget.settings.appearance.mobile | default('primary')  }}" id="accordion_{{ collapseId }}">
-      <div class="widget-inner">
         {% for collapseBox in collapseBoxes %}
         <div class="card">
           <div class="card-header" id="heading_{{ collapseId }}_{{ loop.index }}">
@@ -26,6 +25,5 @@
           </div>
         </div>
         {% endfor %}
-      </div>
     </div>
 {% endif %}
