@@ -1,13 +1,14 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
 {% set collapseBoxes = widget.settings.collapseBox.mobile %}
-{% set collapseId = uid() %}
 {% set renderContent = false %}
 
 
 {% for collapseBox in collapseBoxes if collapseBox.headline is not empty %}
     {% set renderContent = true %}
 {% endfor %}
+
+{% set collapseId = uid() %}
 
     <div class="widget accordion widget-{{ widget.settings.appearance.mobile | default('primary')  }}" id="accordion_{{ collapseId }}">
       <div class="widget-inner">
