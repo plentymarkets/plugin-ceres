@@ -25256,9 +25256,9 @@ var initTooltip = function initTooltip(el) {
     if (window.matchMedia("(min-width: 768px)").matches) {
         setTimeout(function () {
             $(el).tooltip({
-                trigger: "hover",
+                trigger: "hover"
                 // eslint-disable-next-line
-                template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+                // template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
             });
         }, 1);
     }
