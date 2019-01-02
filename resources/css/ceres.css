@@ -20000,6 +20000,8 @@ body.menu-is-visible {
 
 .cmp-basket-item .item-details, .cmp-order-item .item-details {
   margin-top: 1em;
+  -ms-flex: 1;
+      flex: 1;
 }
 
 .cmp-basket-item .item-details > div[class^="item-"], .cmp-order-item .item-details > div[class^="item-"] {

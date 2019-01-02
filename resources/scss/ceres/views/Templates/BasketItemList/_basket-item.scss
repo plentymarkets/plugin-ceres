@@ -22,6 +22,7 @@
 	
 	.item-details{
 		margin-top: 1em;
+		flex: 1;
 
 		&>div[class^="item-"]{
 			display: block;

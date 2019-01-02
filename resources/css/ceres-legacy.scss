@@ -14979,6 +14979,9 @@ body.menu-is-visible {
 	
 	.item-details{
 		margin-top: 1em;
+		-webkit-box-flex: 1;
+		    -ms-flex: 1;
+		        flex: 1;
 
 		&>div[class^="item-"]{
 			display: block;
