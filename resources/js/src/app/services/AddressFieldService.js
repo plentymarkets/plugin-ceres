@@ -12,7 +12,7 @@ export function isAddressFieldEnabled(countryId, addressType, field)
     {
         address = "billing_address";
 
-        if (countryId === 1)
+        if (parseInt(countryId) === 1)
         {
             enabledFields = App.config.addresses.billingAddressShow;
         }
@@ -25,7 +25,7 @@ export function isAddressFieldEnabled(countryId, addressType, field)
     {
         address = "delivery_address";
 
-        if (countryId === "1")
+        if (parseInt(countryId) === 1)
         {
             enabledFields = App.config.addresses.deliveryAddressShow;
         }

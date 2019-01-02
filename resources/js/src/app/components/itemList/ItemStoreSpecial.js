@@ -73,7 +73,7 @@ Vue.component("item-store-special", {
         getPercentageSale()
         {
             // eslint-disable-next-line
-            let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value ) * -100;
+            let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value ) * -100;
 
             if (percent < 0)
             {
