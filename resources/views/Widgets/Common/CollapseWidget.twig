@@ -9,7 +9,7 @@
     {% set renderContent = true %}
 {% endfor %}
 
-    <div class="widget accordion" id="accordion_{{ collapseId }}">
+    <div class="widget accordion widget-{{ widget.settings.appearance.mobile | default('primary')  }}" id="accordion_{{ collapseId }}">
       <div class="widget-inner">
         {% for collapseBox in collapseBoxes %}
         <div class="card">
