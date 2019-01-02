@@ -200,6 +200,8 @@
 {{ get_filtered_tags() }}
 
 <script>
+    vueEventHub = new Vue();
+
     {% if ceresConfig.log.checkSyntax %}
         var rootElement = document.getElementById("vue-app");
         rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, '');
@@ -221,7 +223,6 @@
         });
     {% endif %}
 
-    var vueEventHub = new Vue();
 
     (function($) {
         
