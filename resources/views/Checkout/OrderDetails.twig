@@ -195,16 +195,16 @@
                             {% endif %}
 
                             <div class="row">
-                                <strong class="col-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
-                                <span class="col-6 col-sm-9">{{ (itemPrice + rebatedAmount) | formatMonetary( item.amounts[0].currency ) }}</span>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
+                                <span class="col-6 col-sm-9 col-md-7">{{ (itemPrice + rebatedAmount) | formatMonetary( item.amounts[0].currency ) }}</span>
                             </div>
                             <div class="row">
-                                <strong class="col-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationPeace") }}</strong>
-                                <span class="col-6 col-sm-9">{{ item.quantity }}</span>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPeace") }}</strong>
+                                <span class="col-6 col-sm-9 col-md-7">{{ item.quantity }}</span>
                             </div>
                             <div class="row">
-                                <strong class="col-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
-                                <strong class="col-6 col-sm-9">{{ (item.quantity * (itemPrice + rebatedAmount)) | formatMonetary( item.amounts[0].currency ) }}</strong>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
+                                <strong class="col-6 col-sm-9 col-md-7">{{ (item.quantity * (itemPrice + rebatedAmount)) | formatMonetary( item.amounts[0].currency ) }}</strong>
                             </div>
                             {% if item.orderProperties %}
                                 {% for property in item.orderProperties %}
