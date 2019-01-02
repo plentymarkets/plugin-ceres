@@ -83,3 +83,5 @@ $contexts:
 .card-block { @extend .card-body; }
 
 .bg-faded { @extend .bg-light; }
+
+.form-check-label { @extend .custom-control; }

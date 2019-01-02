@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-accept-gtc-check">
-    <label class="form-check-label" for="gtc-accept" v-bind:class="{ 'error': showError }">
+    <label class="form-check-label custom-control" for="gtc-accept" v-bind:class="{ 'error': showError }">
         <input class="form-check-input" type="checkbox" value="" id="gtc-accept" v-model="isChecked">
         {% autoescape false %}
             {% set gtcContent %}<!--

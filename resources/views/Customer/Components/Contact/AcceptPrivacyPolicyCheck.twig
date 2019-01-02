@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-accept-privacy-policy-check">
-    <label class="form-check-label" for="privacy-policy-accept" :class="{ 'error': showError }">
+    <label class="form-check-label custom-control" for="privacy-policy-accept" :class="{ 'error': showError }">
         <input class="form-check-input" type="checkbox" id="privacy-policy-accept" :checked="value" @change="onValueChanged($event.target.checked)">
         {% autoescape false %}
             {% set policyContent %}<!--
