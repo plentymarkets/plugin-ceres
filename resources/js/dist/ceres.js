@@ -23161,6 +23161,10 @@ Vue.component("item-store-special", {
                 return this.getPercentageSale();
             }
 
+            if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+                return "";
+            }
+
             return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
         },
         getPercentageSale: function getPercentageSale() {
@@ -25614,9 +25618,7 @@ var initTooltip = function initTooltip(el) {
     if (window.matchMedia("(min-width: 768px)").matches) {
         setTimeout(function () {
             $(el).tooltip({
-                trigger: "hover",
-                // eslint-disable-next-line
-                template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+                trigger: "hover"
             });
         }, 1);
     }

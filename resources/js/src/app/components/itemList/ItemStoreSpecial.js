@@ -59,17 +59,17 @@ Vue.component("item-store-special", {
 
         getLabel()
         {
-            if (isNullOrUndefined(this.storeSpecial) && isNullOrUndefined(this.recommendedRetailPrice))
-            {
-                return "";
-            }
-
             if (
                 (isNullOrUndefined(this.storeSpecial) || this.storeSpecial.id === 1) &&
                 !isNullOrUndefined(this.recommendedRetailPrice)
             )
             {
                 return this.getPercentageSale();
+            }
+
+            if (isNullOrUndefined(this.storeSpecial))
+            {
+                return "";
             }
 
             return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;

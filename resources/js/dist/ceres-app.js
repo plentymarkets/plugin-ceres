@@ -22799,12 +22799,12 @@ Vue.component("item-store-special", {
             this.label = this.getLabel();
         },
         getLabel: function getLabel() {
-            if ((0, _utils.isNullOrUndefined)(this.storeSpecial) && (0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
-                return "";
-            }
-
             if (((0, _utils.isNullOrUndefined)(this.storeSpecial) || this.storeSpecial.id === 1) && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
                 return this.getPercentageSale();
+            }
+
+            if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+                return "";
             }
 
             return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
