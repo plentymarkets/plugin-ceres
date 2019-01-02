@@ -14,7 +14,7 @@
 
     <div class="container-max page-content">
         <div class="row">
-            <div class="col-xs-12 mb-5">
+            <div class="col-12 mb-5">
                 {% autoescape false %}
                     <h1 class="print-header">{{ trans("Ceres::Template.cancellationForm", {"hyphen": "&shy;"}) }}</h1>
                 {% endautoescape %}
@@ -31,7 +31,7 @@
 
 				<hr class="my-5 no-print">
 
-				<div class="col-xs-12 col-md-12 no-padding no-print">
+				<div class="col-12 col-md-12 no-padding no-print">
 					<button type="submit" class="btn btn-primary btn-medium float-right" onclick="window.print()">
 						<i class="fa fa-print" aria-hidden="true"></i> 
 						{{ trans("Ceres::Template.cancellationFormPrint") }}

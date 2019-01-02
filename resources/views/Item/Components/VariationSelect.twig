@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-variation-select">
     <div class="row">
-        <div class="col-xs-12 col-md-6 col-lg-4 variation-select" v-for="(attribute, attributeId) in attributes">
+        <div class="col-12 col-md-6 col-lg-4 variation-select" v-for="(attribute, attributeId) in attributes">
             <div class="input-unit" ref="labelBoxRef">
                 <select class="custom-select" v-model="selectedAttributes[attributeId]" @change="onSelectionChange(selectedAttributes[attributeId])">
                         <option :value="null" v-if="hasEmptyOption">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-md-6 col-lg-4 variation-select" v-if="possibleUnitIds.length > 1">
+        <div class="col-12 col-md-6 col-lg-4 variation-select" v-if="possibleUnitIds.length > 1">
             <div class="input-unit">
                 <select class="custom-select" v-model="selectedUnitId" @change="onSelectionChange(possibleUnitIds[selectedUnitId])">
                     <option :value="0" v-if="hasEmptyOption">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>

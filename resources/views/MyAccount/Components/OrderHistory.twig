@@ -22,7 +22,7 @@
     {% if orderList.totalsCount > 0 %}
     <div class="form-group">
         <div class="row mb-3">
-            <div class="col-xs-12 col-md-12 col-lg-12">
+            <div class="col-12 col-md-12 col-lg-12">
                 <!-- ORDER PAGINATION -->
                 {% if orderList.lastPageNumber > 1 %}
                 <div class="clearfix history-pagination">
@@ -44,24 +44,24 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12 col-md-8">
+                                    <div class="col-12 col-md-8">
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryDate") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.devDateTimeFormat") ) }} {{ trans("Ceres::Template.orderHistoryTime") }}</span>
+                                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryDate") }}</strong>
+                                            <span class="col-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.devDateTimeFormat") ) }} {{ trans("Ceres::Template.orderHistoryTime") }}</span>
                                         </div>
                                         <div class="row my-account-no-line">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryStatus") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">{{ entry.order.statusName }}</span>
+                                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryStatus") }}</strong>
+                                            <span class="col-6 col-sm-7">{{ entry.order.statusName }}</span>
                                         </div>
                                         {% if entry.paymentMethodName | trim is not empty %}
                                             <div class="row">
-                                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</strong>
-                                                <span class="col-xs-6 col-sm-7" id="payment_name_{{ entry.order.id }}">{{ entry.paymentMethodName }}</span>
+                                                <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</strong>
+                                                <span class="col-6 col-sm-7" id="payment_name_{{ entry.order.id }}">{{ entry.paymentMethodName }}</span>
                                             </div>
                                         {% endif %}
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</strong>
-                                            <span class="col-xs-6 col-sm-7" id="payment_state_{{ entry.order.id }}">
+                                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</strong>
+                                            <span class="col-6 col-sm-7" id="payment_state_{{ entry.order.id }}">
                                                 {% for propertyKey in entry.order.properties %}
                                                     {% if entry.order.properties[loop.index0].typeId == 4 %}
                                                         {% set paymentStatus = entry.order.properties[loop.index0].value %}
@@ -77,7 +77,7 @@
 
                                     {% set currentTemplate = services.template.getCurrentTemplate() %}
 
-                                    <div class="col-xs-12 col-md-4">
+                                    <div class="col-12 col-md-4">
                                         <div class="payment-change-box">
                                             <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">
                                                 <i class="fa fa-search" aria-hidden="true"></i>

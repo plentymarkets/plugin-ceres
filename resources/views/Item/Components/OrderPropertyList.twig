@@ -8,7 +8,7 @@
             </div>
         </div>
 
-        <div class="order-property-slider-controls col-xs-12" v-if="sortedGroupedProperties.length > 1">
+        <div class="order-property-slider-controls col-12" v-if="sortedGroupedProperties.length > 1">
             <div class="btn" @click="slideTo(activeSlide - 1)" :class="{'btn-primary': activeSlide > 0, 'btn-secondary disabled': activeSlide === 0}" tabindex="0">
                 <span class="fa fa-chevron-left"></span>
             </div>

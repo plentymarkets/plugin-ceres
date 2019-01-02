@@ -22769,7 +22769,7 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   letter-spacing: 1.25px;
 }
 
-.home .product-list .col-xs-12 {
+.home .product-list .col-12 {
   margin: 0 15px;
 }
 
@@ -22880,13 +22880,13 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   background-size: contain;
 }
 
-.sale-new .col-xs-6 .prop-inner {
+.sale-new .col-6 .prop-inner {
   padding: 15px 0;
   left: 15px;
   width: calc(100% - 15px);
 }
 
-.sale-new .col-xs-6:last-child .prop-inner {
+.sale-new .col-6:last-child .prop-inner {
   left: 0;
 }
 
@@ -22922,7 +22922,7 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   .home .product-list {
     margin: 0;
   }
-  .home .product-list .col-xs-12 {
+  .home .product-list .col-12 {
     margin: 0;
   }
 }
@@ -22938,12 +22938,12 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   .featured-categories .col-md-4 .prop-inner {
     padding: 15px 0 15px 7.5px;
   }
-  .sale-new .col-xs-6 .prop-inner {
+  .sale-new .col-6 .prop-inner {
     padding: 15px 7.5px 15px 15px;
     left: 0;
     width: 100%;
   }
-  .sale-new .col-xs-6:last-child .prop-inner {
+  .sale-new .col-6:last-child .prop-inner {
     left: 0;
     padding: 15px 15px 15px 7.5px;
   }
