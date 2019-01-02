@@ -7,7 +7,7 @@
             <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ trans("Ceres::Template.itemFilter") }}
         </a>
 
-        <div class="collapse" :class="{in: isActive}" id="filterCollapse">
+        <div class="collapse" :class="{show: isActive}" id="filterCollapse">
             <div class="container-max page-content component-loading" :class="{ 'isLoading': isLoading }">
                 <div class="card-columns">
                     <item-filter v-for="facet in facets" :facet="facet" :key="facet.id"></item-filter>
