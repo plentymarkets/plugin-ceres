@@ -10658,36 +10658,8 @@ a:active {
     float: none;
 }
 
-.float-right {
-    float: right !important;
-}
-
 .bg-white {
     background-color: $white !important;
-}
-
-.text-gray-dark {
-    color: $gray-dark;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.d-table {
-    display: table;
-}
-
-.border-radius-0 {
-    border-radius: 0;
-}
-
-.border-top-0 {
-    border-top: 0 !important;
-}
-
-.position-fixed {
-    position: fixed !important;
 }
 
 .text-wrap {
@@ -10984,6 +10956,8 @@ button:focus {
 
 	& > .fa {
 		float: right;
+		margin-top: 1px;
+		margin-left: 5px;
 
 		&.default-float {
 			float: none;
@@ -12546,19 +12520,6 @@ html.ie {
 
 }
 
-.inline-form {
-
-	& .input-group-addon,
-	& .form-control {
-		border: 1px solid #D9D9D9;
-	}
-
-	& .btn {
-		padding-top: 8px;
-    	padding-bottom: 8px;
-	}
-}
-
 
 $color: $gray-dark;
 $background: white;
@@ -13225,6 +13186,12 @@ $border-width: 1px;
 
 		&.top-bar {
 			background-color: $top-bar-bg;
+		}
+
+		@include media-breakpoint-up(sm){
+			.container-max {
+				padding: 0;
+			}
 		}
 	}
 
@@ -16691,73 +16658,82 @@ html.ie .basket-preview-hover {
     }
   }
 }
-.reset-pwd{
+.reset-pwd
+{
 
-  input{
-    height: 45px;
-  }
-
-  .save-new-pwd-btn{
-    display: block;
-    width: 100%;
-
-    i{
-      margin-right: 6px;
-    }
-  }
-
-  @include media-breakpoint-up(sm){
-
-    .save-new-pwd-btn {
-      display: inline-block;
-      width: 10rem;
-    }
-  }
-
-  .input-unit{
-
-    &+.error-msg{
-      display: none;
-      font-size: 12px;
-      color: #d9534f;
-      margin-bottom: 10px;
+    input
+    {
+        height: 45px;
     }
 
-    &.check-pwds-error{
-      z-index: 1000;
-      border-color: #d9534f;
-
-      input{
-        color: #d9534f;
-      }
-
-      label{
-        color: #d9534f;
-      }
-    }
-
-    &.error{
-      margin-bottom: 2px;
-
-      &+.error-msg{
+    .save-new-pwd-btn
+    {
         display: block;
-      }
+        width: 100%;
+
+        i
+        {
+            margin-right: 6px;
+        }
     }
-  }
 
-  .error-save-pwd-msg{
-    display: none;
-    font-size: 12px;
-    color: #d9534f;
-    margin-bottom: 5px;
-  }
+    @include media-breakpoint-up(sm)
+    {
+
+        .save-new-pwd-btn
+        {
+            display: inline-block;
+            width: 10rem;
+        }
+    }
+
+    .input-unit
+    {
+
+        & + .error-msg
+        {
+            display: none;
+            font-size: 12px;
+            color: #d9534f;
+            margin-bottom: 10px;
+        }
+
+        &.check-pwds-error
+        {
+            z-index: 1000;
+            border-color: #d9534f;
+
+            input
+            {
+                color: #d9534f;
+            }
+
+            label
+            {
+                color: #d9534f;
+            }
+        }
+
+        &.error
+        {
+            margin-bottom: 2px;
+
+            & + .error-msg
+            {
+                display: block;
+            }
+        }
+    }
+
+    .error-save-pwd-msg
+    {
+        display: none;
+        font-size: 12px;
+        color: #d9534f;
+        margin-bottom: 5px;
+    }
 }
 
-.login-pwd-reset {
-  & .reset-pwd-direction {
-    float: left;
-  }
-}
 .cmp-hero{
 	
 
@@ -18059,7 +18035,7 @@ html.ie .basket-preview-hover {
 .home {
 
 	.product-list {
-		.col-xs-12 {
+		.col-12 {
 			margin: 0 15px;
 		}
 	}
@@ -18187,7 +18163,7 @@ html.ie .basket-preview-hover {
 	}
 }
 .sale-new {
-	.col-xs-6 {
+	.col-6 {
 		.prop-inner {
 			padding: 15px 0;
 			left: 15px;
@@ -18230,7 +18206,7 @@ html.ie .basket-preview-hover {
 	.home {
 		.product-list {
 			margin:0;
-			.col-xs-12 {
+			.col-12 {
 				margin: 0;
 			}
 		}
@@ -18255,7 +18231,7 @@ html.ie .basket-preview-hover {
 		}
 	}
 	.sale-new {
-		.col-xs-6 {
+		.col-6 {
 			.prop-inner {
 				padding: 15px 7.5px 15px 15px;
 				left: 0;
@@ -20149,3 +20125,5 @@ $contexts:
 .card-block { @extend .card-body; }
 
 .bg-faded { @extend .bg-light; }
+
+.form-check-label { @extend .custom-control; }

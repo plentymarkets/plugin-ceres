@@ -19160,7 +19160,7 @@ Vue.component("container-item-list", {
                 itemsPerPage = 4;
             }
 
-            return ["col-xs-12", itemsPerPage === 1 ? "col-sm-12" : "col-sm-6", "col-md-" + 12 / itemsPerPage];
+            return ["col-12", itemsPerPage === 1 ? "col-sm-12" : "col-sm-6", "col-md-" + 12 / itemsPerPage];
         }
     },
 
