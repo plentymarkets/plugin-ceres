@@ -8,7 +8,8 @@
                         v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
                         data-toggle="dropdown"
                         aria-haspopup="true"
-                        aria-expanded="false">
+                        aria-expanded="false"
+                        data-boundary="window">
 
                     <div class="item-inner" v-bind:class="{'error': showError}">
                         <span v-if="selectedAddress && selectedAddress.id == -99">
