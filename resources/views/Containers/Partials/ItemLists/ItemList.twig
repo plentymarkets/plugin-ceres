@@ -14,15 +14,17 @@
 
 <div class="row">
     {% if listType == "last_seen" %}
-        <last-seen-item-list>
-            <div slot="heading">
-                {% if not isHome %}
-                    <hr>
-                {% endif %}
+        <div class="col-12">
+            <last-seen-item-list>
+                <div slot="heading">
+                    {% if not isHome %}
+                        <hr>
+                    {% endif %}
 
-                {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader' with { itemListNo: itemListNo, listType: listType, isHome: isHome } %}
-            </div>
-        </last-seen-item-list>
+                    {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader' with { itemListNo: itemListNo, listType: listType, isHome: isHome } %}
+                </div>
+            </last-seen-item-list>
+        </div>
     {% elseif itemList is not empty %}
         <div class="col-12">
             {% if not isHome %}
@@ -31,6 +33,8 @@
 
             {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader' with { itemListNo: itemListNo, listType: listType, isHome: isHome } %}
         </div>
-        <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
+        <div class="col-12">
+            <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
+        </div>
     {% endif %}
 </div>
