@@ -118,6 +118,19 @@ Vue.component("carousel", {
                     }
                 }
             });
+        },
+
+        test()
+        {
+            if (this.timeoutId)
+            {
+                window.clearTimeout(this.timeoutId);
+            }
+
+            this.timeoutId = setTimeout(() =>
+            {
+                $(this.carouselContainer).trigger("refresh.owl.carousel");
+            }, 100);
         }
     }
 });

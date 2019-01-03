@@ -2,7 +2,7 @@
     <div>
         <div class="col-xs-12 col-lg-12" v-if="itemCount > itemsPerPage">
             <div class="list-item-carousel owl-carousel owl-theme owl-single-item" ref="carouselContainer">
-                <slot-component v-for="(item, index) in $slots.items" :key="index" :vnode="item" :ref="'categoryItem_' + index"/>
+                <slot-component v-for="(item, index) in $slots.items" :key="index" :vnode="item" :ref="'categoryItem_' + index" :on:component-mounted="test()"/>
             </div>
         </div>
 
