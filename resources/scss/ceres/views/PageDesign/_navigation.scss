@@ -38,14 +38,14 @@ $menu-color-lg 			: $primary;
 $menu-font-s-lg  		: 1rem;
 $menu-font-f-lg  		: $font-family-serif;
 $menu-li-bg-hover		: $primary;
-$menu-li-color-hover	: $white;
+$menu-li-color-hover	: color-yiq($primary);
 $menu-li-padding-x      : 1rem;
 $menu-li-padding-y      : 1.3rem;
 // bigmenu
 $menu-big-menu-bg 				: darken($primary,10%);
-$menu-big-menu-li-bg			: transparent;
+$menu-big-menu-li-bg			: transparent; //color-yiq($primary, $gray-dark, transparent);
 $menu-big-menu-li-bg-hover		: $primary;
-$menu-big-menu-li-color			: $white;
+$menu-big-menu-li-color			: color-yiq($primary);
 $menu-big-menu-li-color-hover	: $body-color;
 // megamenu
 $megamenu-bg 					: $white;
@@ -175,7 +175,7 @@ body.menu-is-visible {
 	}
 
 	@include media-breakpoint-up(lg){
-		background-color : transparent;
+		background-color : $menu-bg-lg;
 		display 		 : block!important;
 		opacity 		 : 1;
 		overflow 		 : visible;

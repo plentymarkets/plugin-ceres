@@ -97,7 +97,7 @@
 	
 					&[aria-expanded="true"] {
 						background-color: $primary;
-						color: $white;
+						color: color-yiq($primary);
 					}
 				}
 
@@ -116,7 +116,7 @@
 					&[aria-expanded="true"],
 					&:hover{
 						background-color: $primary;
-						color: $white;
+						color: color-yiq($primary);
 					}
 				}
 			}
@@ -187,9 +187,10 @@
 							border:0;
 							border-top: 1px solid $gray-lighter;
 							display: block;
-							color: $white;
 							background-color: $gray-darker;
+							color: color-yiq($gray-darker);
 							&:hover {
+								color: color-yiq($primary);
 								background-color: $primary;
 							}
 	
@@ -262,7 +263,7 @@
 
 			.toggle-basket-preview{
 				background-color: $top-bar-basket-btn;
-				color: $top-bar-basket-color;
+				color: color-yiq($top-bar-basket-color);
 
 				.badge{
 					font-size: inherit;
@@ -369,12 +370,12 @@
 						    transform: translateX(-50%);
 						}
 						.dropdown-item {
-							color: $white;
+							color: color-yiq($primary);
 							font-size: .9rem;
 							padding: .75rem 1rem !important;
 							&:hover {
 								background: darken($primary, 10%);
-								color: white;
+								color: color-yiq($primary);
 							}
 						}
 					}
