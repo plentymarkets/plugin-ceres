@@ -90,7 +90,7 @@
 			// sets the height of the top-bar
 
 				a:not(.btn) {
-					padding: 0.5rem .5rem;
+					padding: 0.5rem .8rem;
 					display: inline-block;
 					color: $gray-lighter;
 
@@ -100,7 +100,8 @@
 				}
 
 			@include media-breakpoint-down(md) {
-				.anicon {
+				.anicon,
+				a:not(.btn) {
 					padding: 0.5rem .8rem;
 				}
 

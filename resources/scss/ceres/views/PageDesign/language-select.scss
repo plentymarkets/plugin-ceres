@@ -54,10 +54,6 @@
 		}
 	}
 
-	.list-title{
-
-	}
-
 	ul{
 		@include reset-list();
 
@@ -145,4 +141,16 @@
 .fixed-top .cmp-currency-select
 {
 	top: auto;
+}
+
+.wrapper-main header
+{
+	.cmp-country-settings,
+	.cmp-currency-select
+	{
+		.container-max > .row
+		{
+			flex-direction: row;
+		}
+	}
 }

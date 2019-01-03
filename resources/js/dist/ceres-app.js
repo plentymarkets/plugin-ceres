@@ -25254,16 +25254,8 @@ Vue.directive("stick-in-parent", {
 },{}],219:[function(require,module,exports){
 "use strict";
 
-var _utils = require("../../helper/utils");
-
-var initTooltip = function initTooltip(el) {
-    if (window.matchMedia("(min-width: 768px)").matches) {
-        setTimeout(function () {
-            $(el).tooltip({
-                trigger: "hover"
-            });
-        }, 1);
-    }
+var checkTooltip = function checkTooltip(el, disable) {
+    $(el).tooltip(disable ? "disable" : "enable");
 };
 
 Vue.directive("tooltip", {
@@ -25271,34 +25263,19 @@ Vue.directive("tooltip", {
         $(el).tooltip("dispose");
     },
     update: function update(el, binding) {
-        if (typeof binding.value === "undefined" || binding.value) {
-            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title")) && !(0, _utils.isNullOrUndefined)(el.getAttribute("data-title"))) {
-                el.setAttribute("title", el.getAttribute("data-title"));
-                el.removeAttribute("data-title");
-            }
-            initTooltip(el);
-        } else {
-            setTimeout(function () {
-                $(el).tooltip("dispose");
-
-                if (!(0, _utils.isNullOrUndefined)(el.getAttribute("title"))) {
-                    el.setAttribute("data-title", el.getAttribute("title"));
-                    el.removeAttribute("title");
-                }
-            }, 1);
-        }
+        checkTooltip(el, binding.value === false);
     },
     bind: function bind(el, binding) {
-        if (typeof binding.value === "undefined" || binding.value) {
-            initTooltip(el);
-        } else {
-            el.setAttribute("data-title", el.getAttribute("title"));
-            el.removeAttribute("title");
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            setTimeout(function () {
+                $(el).tooltip();
+                checkTooltip(el, binding.value === false);
+            }, 1);
         }
     }
 });
 
-},{"../../helper/utils":246}],220:[function(require,module,exports){
+},{}],220:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

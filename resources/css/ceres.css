@@ -18191,7 +18191,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 }
 
 .top-bar .controls-list > li a:not(.btn) {
-  padding: 0.5rem .5rem;
+  padding: 0.5rem .8rem;
   display: inline-block;
   color: #dcdbd8;
 }
@@ -18202,7 +18202,8 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 }
 
 @media (max-width: 991.98px) {
-  .top-bar .controls-list > li .anicon {
+  .top-bar .controls-list > li .anicon,
+  .top-bar .controls-list > li a:not(.btn) {
     padding: 0.5rem .8rem;
   }
 }
@@ -18890,6 +18891,12 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .fixed-top .cmp-country-settings,
 .fixed-top .cmp-currency-select {
   top: auto;
+}
+
+.wrapper-main header .cmp-country-settings .container-max > .row,
+.wrapper-main header .cmp-currency-select .container-max > .row {
+  -ms-flex-direction: row;
+      flex-direction: row;
 }
 
 nav.navbar .container-max {
