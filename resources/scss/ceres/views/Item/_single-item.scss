@@ -109,20 +109,16 @@
     }
 }
 
-[class^="availability"] {
-    color: $white;
-}
-
-.availability_1  {background-color: $availability_1;}
-.availability_2  {background-color: $availability_2;}
-.availability_3  {background-color: $availability_3;}
-.availability_4  {background-color: $availability_4;}
-.availability_5  {background-color: $availability_5;}
-.availability_6  {background-color: $availability_6;}
-.availability_7  {background-color: $availability_7;}
-.availability_8  {background-color: $availability_8;}
-.availability_9  {background-color: $availability_9;}
-.availability_10 {background-color: $availability_10;}
+.availability_1  { @include context-bg($availability_1); }
+.availability_2  { @include context-bg($availability_2); }
+.availability_3  { @include context-bg($availability_3); }
+.availability_4  { @include context-bg($availability_4); }
+.availability_5  { @include context-bg($availability_5); }
+.availability_6  { @include context-bg($availability_6); }
+.availability_7  { @include context-bg($availability_7); }
+.availability_8  { @include context-bg($availability_8); }
+.availability_9  { @include context-bg($availability_9); }
+.availability_10 { @include context-bg($availability_10); }
 
 
 .rating{

@@ -28,7 +28,7 @@
 
         <div class="home container-max">
             <div class="row">
-                <div class="w-100">
+                <div class="col">
                     {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
                         {{ content.result|raw }}
                     {% endfor %}

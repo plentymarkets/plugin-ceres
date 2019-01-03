@@ -27,12 +27,11 @@
 	    box-shadow: none;
 	    align-self: flex-start;
 	    font-size: 1.25rem;
-	    background: rgba($primary,.8);
 	    margin: 1rem;
 	    width: auto;
 	    text-align: left;
-	    color: $white;
 	    transition: all .3s ease;
+		@include context-bg(rgba($primary, .8));
 	}
 
 	.featured-category-cta{

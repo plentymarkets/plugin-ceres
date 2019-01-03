@@ -77,25 +77,24 @@
 				padding: .4rem;
 				color: $white;
 				&:hover {
-					background:$primary;
-					color: $white;
+					@include context-bg($primary);
 				}
 
 				&.is-disabled{
 					cursor: not-allowed;
 
 					&:hover {
-						background:$gray-dark;
+						@include context-bg($gray-dark);
 					}
 				}
 			}
 
 			&.active{
 				a{
-					background-color:$primary;
+					@include context-bg($primary);
 
 					&.is-disabled{
-						background-color:$gray-dark;
+						@include context-bg($gray-dark);
 					}
 				}
 			}

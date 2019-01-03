@@ -1,21 +1,9 @@
-@mixin widget-bg-variant($color, $body-color: #fff)
+@mixin widget-bg-variant($color)
 {
-    color: $body-color;
+    color: color-yiq($color);
     background-color: $color;
-}
 
-@mixin widget-bg-pseudo($color, $body-color: #fff)
-{
-    position: relative;
-    color: $body-color;
-
-    &:before {
-        content: '';
-        position: absolute;
-        height: 100%;
-        width: calc(100% - 30px);
-        top: 0;
-        left: 15px;
-        background-color: $color;
+    a {
+        color: color-yiq($color);
     }
 }

@@ -88,37 +88,22 @@
 			margin-right: 0;
 
 			// sets the height of the top-bar
-			@include media-breakpoint-down(md) {
-				
+
 				a:not(.btn) {
 					padding: 0.5rem .5rem;
 					display: inline-block;
 					color: $gray-lighter;
-	
-					&[aria-expanded="true"] {
-						background-color: $primary;
-						color: color-yiq($primary);
+
+					&:hover {
+						@include context-bg($primary);
 					}
 				}
 
+			@include media-breakpoint-down(md) {
 				.anicon {
 					padding: 0.5rem .8rem;
 				}
 
-			}
-
-			@include media-breakpoint-up(md) {
-				a:not(.btn) {
-					padding: .5rem .8rem;
-					display: inline-block;
-					color: $gray-lighter;
-
-					&[aria-expanded="true"],
-					&:hover{
-						background-color: $primary;
-						color: color-yiq($primary);
-					}
-				}
 			}
 
 			// icons should be slightly larger
@@ -150,7 +135,7 @@
 	
 					&.show {
 						& > .dropdown-toggle {
-							background-color: $gray-darker;
+							@include context-bg($gray-darker);
 						}
 	
 						& .dropdown-menu {
@@ -263,7 +248,7 @@
 
 			.toggle-basket-preview{
 				background-color: $top-bar-basket-btn;
-				color: color-yiq($top-bar-basket-color);
+				color: $top-bar-basket-color;
 
 				.badge{
 					font-size: inherit;
@@ -482,8 +467,8 @@
 		{
 			flex-direction: row-reverse;
 			position: relative;
-			margin-left: 0;
-			margin-right: 0;
+			margin-left: $grid-gutter-width / 2;
+			margin-right: $grid-gutter-width / 2;
 		}
 
 		.controls-list

@@ -50,7 +50,7 @@
             border-color: transparent $primary transparent transparent;
 
             & > i{
-                color: #fff;
+                color: color-yiq($primary);
             }
         }
     }

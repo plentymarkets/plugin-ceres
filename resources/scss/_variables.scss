@@ -56,6 +56,8 @@ $danger:                    $brand-danger !default;
 $light:                     $gray-100 !default;
 $dark:                      $gray-800 !default;
 
+$yiq-text-dark:             $gray-900 !default;
+$yiq-text-light:            $white !default;
 $yiq-contrasted-threshold:  186 !default;
 
 //
@@ -73,9 +75,9 @@ $fa-font-path:              "#{$root-directory}/documents/fonts" !default;
 // Top Bar
 //
 $top-bar-bg:                $gray-dark;
-$top-bar-color:             #fff;
+$top-bar-color:             color-yiq($top-bar-bg);
 $top-bar-basket-btn:        $brand-primary;
-$top-bar-basket-color:      #fff;
+$top-bar-basket-color:      color-yiq($top-bar-basket-btn);
 
 //
 // Footer
@@ -273,3 +275,7 @@ $category-text-color:               #fff !default;
 
 $live-shopping-padding-x:           0.8rem;
 $live-shopping-padding-y:           1rem;
+
+$component-active-bg:               $primary !default;
+$component-active-color:            color-yiq($component-active-bg) !default;
+

@@ -6,10 +6,8 @@
             </div>
         </div>
 
-        <div v-else>
-            <div :class="columnWidths" v-for="item in $slots.items">
-                <slot-component :vnode="item"/>
-            </div>
+        <div :class="columnWidths" v-else v-for="item in $slots.items">
+            <slot-component :vnode="item"/>
         </div>
     </div>
 </script>

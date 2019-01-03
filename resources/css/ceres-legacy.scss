@@ -73,9 +73,9 @@ $fa-font-path:              "#{$root-directory}/documents/fonts" !default;
 // Top Bar
 //
 $top-bar-bg:                $gray-dark;
-$top-bar-color:             #fff;
+$top-bar-color:             color-yiq($top-bar-bg);
 $top-bar-basket-btn:        $brand-primary;
-$top-bar-basket-color:      #fff;
+$top-bar-basket-color:      color-yiq($top-bar-basket-btn);
 
 //
 // Footer
@@ -273,6 +273,10 @@ $category-text-color:               #fff !default;
 
 $live-shopping-padding-x:           0.8rem;
 $live-shopping-padding-y:           1rem;
+
+$component-active-bg:               $primary !default;
+$component-active-color:            color-yiq($component-active-bg) !default;
+
 
 // ==========================================================================
 // External Libs
@@ -10439,6 +10443,11 @@ $flag-icon-square-path: '/1x1' !default;
     border-bottom: $w solid transparent;
 }
 
+@mixin context-bg($color)
+{
+    background-color: $color;
+    color: color-yiq($color);
+}
 $widths: 1, 2, 3, 4, 5, 6;
 $heights: 1, 2, 3, 4, 5, 6;
 
@@ -11138,12 +11147,11 @@ button:focus {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    color: $white;
     text-align: center;
     white-space: nowrap;
-    background-color: $primary;
     -webkit-transition: width .6s ease;
     transition: width .6s ease;
+    @include context-bg($primary);
 }
 
 
@@ -12185,13 +12193,12 @@ html.ie {
 	    -ms-flex-item-align: start;
 	        align-self: flex-start;
 	    font-size: 1.25rem;
-	    background: rgba($primary,.8);
 	    margin: 1rem;
 	    width: auto;
 	    text-align: left;
-	    color: $white;
 	    -webkit-transition: all .3s ease;
 	    transition: all .3s ease;
+		@include context-bg(rgba($primary, .8));
 	}
 
 	.featured-category-cta{
@@ -12976,37 +12983,22 @@ $border-width: 1px;
 			margin-right: 0;
 
 			// sets the height of the top-bar
-			@include media-breakpoint-down(md) {
-				
+
 				a:not(.btn) {
 					padding: 0.5rem .5rem;
 					display: inline-block;
 					color: $gray-lighter;
-	
-					&[aria-expanded="true"] {
-						background-color: $primary;
-						color: $white;
+
+					&:hover {
+						@include context-bg($primary);
 					}
 				}
 
+			@include media-breakpoint-down(md) {
 				.anicon {
 					padding: 0.5rem .8rem;
 				}
 
-			}
-
-			@include media-breakpoint-up(md) {
-				a:not(.btn) {
-					padding: .5rem .8rem;
-					display: inline-block;
-					color: $gray-lighter;
-
-					&[aria-expanded="true"],
-					&:hover{
-						background-color: $primary;
-						color: $white;
-					}
-				}
 			}
 
 			// icons should be slightly larger
@@ -13041,7 +13033,7 @@ $border-width: 1px;
 	
 					&.show {
 						& > .dropdown-toggle {
-							background-color: $gray-darker;
+							@include context-bg($gray-darker);
 						}
 	
 						& .dropdown-menu {
@@ -13079,9 +13071,10 @@ $border-width: 1px;
 							border:0;
 							border-top: 1px solid $gray-lighter;
 							display: block;
-							color: $white;
 							background-color: $gray-darker;
+							color: color-yiq($gray-darker);
 							&:hover {
+								color: color-yiq($primary);
 								background-color: $primary;
 							}
 	
@@ -13264,12 +13257,12 @@ $border-width: 1px;
 						            transform: translateX(-50%);
 						}
 						.dropdown-item {
-							color: $white;
+							color: color-yiq($primary);
 							font-size: .9rem;
 							padding: .75rem 1rem !important;
 							&:hover {
 								background: darken($primary, 10%);
-								color: white;
+								color: color-yiq($primary);
 							}
 						}
 					}
@@ -13380,8 +13373,8 @@ $border-width: 1px;
 			    -ms-flex-direction: row-reverse;
 			        flex-direction: row-reverse;
 			position: relative;
-			margin-left: 0;
-			margin-right: 0;
+			margin-left: $grid-gutter-width / 2;
+			margin-right: $grid-gutter-width / 2;
 		}
 
 		.controls-list
@@ -13701,25 +13694,24 @@ $border-width: 1px;
 				padding: .4rem;
 				color: $white;
 				&:hover {
-					background:$primary;
-					color: $white;
+					@include context-bg($primary);
 				}
 
 				&.is-disabled{
 					cursor: not-allowed;
 
 					&:hover {
-						background:$gray-dark;
+						@include context-bg($gray-dark);
 					}
 				}
 			}
 
 			&.active{
 				a{
-					background-color:$primary;
+					@include context-bg($primary);
 
 					&.is-disabled{
-						background-color:$gray-dark;
+						@include context-bg($gray-dark);
 					}
 				}
 			}
@@ -13812,14 +13804,14 @@ $menu-color-lg 			: $primary;
 $menu-font-s-lg  		: 1rem;
 $menu-font-f-lg  		: $font-family-serif;
 $menu-li-bg-hover		: $primary;
-$menu-li-color-hover	: $white;
+$menu-li-color-hover	: color-yiq($primary);
 $menu-li-padding-x      : 1rem;
 $menu-li-padding-y      : 1.3rem;
 // bigmenu
 $menu-big-menu-bg 				: darken($primary,10%);
-$menu-big-menu-li-bg			: transparent;
+$menu-big-menu-li-bg			: transparent; //color-yiq($primary, $gray-dark, transparent);
 $menu-big-menu-li-bg-hover		: $primary;
-$menu-big-menu-li-color			: $white;
+$menu-big-menu-li-color			: color-yiq($primary);
 $menu-big-menu-li-color-hover	: $body-color;
 // megamenu
 $megamenu-bg 					: $white;
@@ -13964,7 +13956,7 @@ body.menu-is-visible {
 	}
 
 	@include media-breakpoint-up(lg){
-		background-color : transparent;
+		background-color : $menu-bg-lg;
 		display 		 : block!important;
 		opacity 		 : 1;
 		overflow 		 : visible;
@@ -16039,7 +16031,7 @@ html.ie .basket-preview-hover {
             border-color: transparent $primary transparent transparent;
 
             & > i{
-                color: #fff;
+                color: color-yiq($primary);
             }
         }
     }
@@ -17816,8 +17808,7 @@ html.ie .basket-preview-hover {
             }
 
             &.reset-all {
-                color: $white;
-                background-color: $primary;
+                @include context-bg($primary);
 
                 &:hover {
                     background-color: darken($primary, 15%);
@@ -18623,20 +18614,16 @@ html.ie .basket-preview-hover {
     }
 }
 
-[class^="availability"] {
-    color: $white;
-}
-
-.availability_1  {background-color: $availability_1;}
-.availability_2  {background-color: $availability_2;}
-.availability_3  {background-color: $availability_3;}
-.availability_4  {background-color: $availability_4;}
-.availability_5  {background-color: $availability_5;}
-.availability_6  {background-color: $availability_6;}
-.availability_7  {background-color: $availability_7;}
-.availability_8  {background-color: $availability_8;}
-.availability_9  {background-color: $availability_9;}
-.availability_10 {background-color: $availability_10;}
+.availability_1  { @include context-bg($availability_1); }
+.availability_2  { @include context-bg($availability_2); }
+.availability_3  { @include context-bg($availability_3); }
+.availability_4  { @include context-bg($availability_4); }
+.availability_5  { @include context-bg($availability_5); }
+.availability_6  { @include context-bg($availability_6); }
+.availability_7  { @include context-bg($availability_7); }
+.availability_8  { @include context-bg($availability_8); }
+.availability_9  { @include context-bg($availability_9); }
+.availability_10 { @include context-bg($availability_10); }
 
 
 .rating{
@@ -19101,25 +19088,13 @@ html.ie .basket-preview-hover {
 }
 
 // Widgets
-@mixin widget-bg-variant($color, $body-color: #fff)
+@mixin widget-bg-variant($color)
 {
-    color: $body-color;
+    color: color-yiq($color);
     background-color: $color;
-}
 
-@mixin widget-bg-pseudo($color, $body-color: #fff)
-{
-    position: relative;
-    color: $body-color;
-
-    &:before {
-        content: '';
-        position: absolute;
-        height: 100%;
-        width: calc(100% - 30px);
-        top: 0;
-        left: 15px;
-        background-color: $color;
+    a {
+        color: color-yiq($color);
     }
 }
 
@@ -19567,11 +19542,6 @@ html.ie {
             margin: 0;
             text-transform: uppercase;
             font-size: 1.75rem;
-        }
-
-        a
-        {
-            color: #fff;
         }
     }
 

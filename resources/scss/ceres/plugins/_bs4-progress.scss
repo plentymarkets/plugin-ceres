@@ -13,9 +13,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: $white;
     text-align: center;
     white-space: nowrap;
-    background-color: $primary;
     transition: width .6s ease;
+    @include context-bg($primary);
 }

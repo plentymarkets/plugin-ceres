@@ -28,8 +28,7 @@
             }
 
             &.reset-all {
-                color: $white;
-                background-color: $primary;
+                @include context-bg($primary);
 
                 &:hover {
                     background-color: darken($primary, 15%);
