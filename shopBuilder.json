@@ -1,17 +1,20 @@
 {
     "containers": {
         "header": {
-            "label":    "Widget.containerHeader",
-            "name":     "Ceres::Header"
+            "label":            "Widget.containerHeader",
+            "name":             "Ceres::Header",
+            "allowedTypes":     ["header"]
         },
         "footer": {
-            "label":    "Widget.containerFooter",
-            "name":     "Ceres::Footer"
+            "label":            "Widget.containerFooter",
+            "name":             "Ceres::Footer",
+            "allowedTypes":     ["footer", "structure", "default"]
         },
         "content": [
             {
-                "label": "Widget.containerHomepage",
-                "name":  "Ceres::Homepage"
+                "label":        "Widget.containerHomepage",
+                "name":         "Ceres::Homepage",
+                "allowedTypes": ["default", "image", "text", "structure"]
             }
         ]
     },
