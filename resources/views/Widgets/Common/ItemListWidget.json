@@ -117,7 +117,7 @@
         "manufacturerId":
         {
             "type": "manufacturer",
-            "required": true,
+            "required": false,
             "isVisible": "listType === 'manufacturer'",
             "defaultValue": "",
             "options": {
