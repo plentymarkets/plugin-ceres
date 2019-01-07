@@ -5890,7 +5890,7 @@ a.close.disabled {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1060;
+  z-index: 10000;
   display: block;
   max-width: 276px;
   font-family: Custom-Font, Helvetica, Arial, sans-serif;
@@ -16176,8 +16176,6 @@ button:focus {
 
 .btn > .fa {
   float: right;
-  margin-top: 1px;
-  margin-left: 5px;
 }
 
 .btn > .fa.default-float {
@@ -19934,7 +19932,6 @@ body.menu-is-visible {
 }
 
 .add-item .fa {
-  color: #fff;
   transition: all .2s ease-in-out;
   margin-left: 6px;
   margin-top: 1px;
