@@ -8,12 +8,6 @@ Vue.component("last-seen-item-list", {
             default: "#vue-last-seen-item-list"
         },
 
-        maxItems:
-        {
-            type: Number,
-            default: App.config.itemLists.lastSeenNumber || 4
-        },
-
         itemsPerPage:
         {
             type: Number,
@@ -33,7 +27,7 @@ Vue.component("last-seen-item-list", {
 
     beforeMount()
     {
-        this.$store.dispatch("getLastSeenItems", this.maxItems);
+        this.$store.dispatch("getLastSeenItems");
     },
 
     methods:

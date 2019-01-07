@@ -54,17 +54,15 @@ const actions =
             return null;
         },
 
-        getLastSeenItems({commit}, maxItems)
+        getLastSeenItems({commit})
         {
             if (!state.isLastSeenItemsLoading)
             {
                 return new Promise((resolve, reject) =>
                 {
-                    const params = {items: maxItems || App.config.itemLists.lastSeenNumber};
-
                     commit("setIsLastSeenItemsLoading", true);
 
-                    ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
+                    ApiService.get("/rest/io/item/last_seen", {items: App.config.itemLists.lastSeenNumber}, {keepOriginalResponse: true})
                         .done(response =>
                         {
                             if (isDefined(response.data) && isDefined(response.data.lastSeenItems))
