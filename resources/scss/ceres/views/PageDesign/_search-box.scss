@@ -1,13 +1,14 @@
-.cmp-search-box {
+.cmp-search-box
+{
     background-color: $gray-darker;
-    padding: 0px 15px;
     z-index: 1070;
     position: fixed;
     top: 30px;
     right: 0;
     left: 0;
     width: 100%;
-    .search-box-inner {
+    .search-box-inner
+    {
         display: flex;
         flex-flow: row nowrap;
         padding: 1rem 0em;
@@ -15,13 +16,16 @@
         max-width: 1200px;
         margin: 0 auto;
     }
-     @at-root .search-box-shadow-frame {
+    @at-root .search-box-shadow-frame
+    {
         display: flex;
         flex: 100;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
         position: relative;
+        padding: 0 $grid-gutter-width / 2;
 
-        .autocomplete-suggestions {
+        .autocomplete-suggestions
+        {
             position: absolute;
             box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
             background: #ffffff;
@@ -32,33 +36,39 @@
             width: 100%;
             top: 100%;
 
-            & > .autocomplete-suggestion {
+            & > .autocomplete-suggestion
+            {
                 padding: 5px 15px;
                 white-space: nowrap;
                 overflow: hidden;
                 cursor: pointer;
                 display: flex;
 
-                &:hover {
+                &:hover
+                {
                     background: $gray-lighter;
                 }
 
-                &.autocomplete-selected {
+                &.autocomplete-selected
+                {
                     background: $gray-lighter;
                 }
 
-                & > .autocomplete-item-name {
+                & > .autocomplete-item-name
+                {
                     align-self: center;
                     color: $gray-dark;
                 }
 
-                & > .autocomplete-image-container {
+                & > .autocomplete-image-container
+                {
                     width: 40px;
                     height: 40px;
                     position: relative;
                     margin-right: 5px;
 
-                    & > .autocomplete-image {
+                    & > .autocomplete-image
+                    {
                         position: absolute;
                         top: 50%;
                         left: 50%;
@@ -72,7 +82,8 @@
             }
         }
     }
-    .search-input {
+    .search-input
+    {
         flex: 1 0 70%;
         display: inline-block;
         vertical-align: top;
@@ -82,18 +93,21 @@
         padding: .4rem 1rem;
         outline: none;
     }
-    .search-submit {
+
+    .search-submit
+    {
         display: inline-block;
         vertical-align: top;
         font-size: 1.3rem;
         line-height: 1;
-        background: #ffffff;
+        background-color: $gray-200;
         padding: .4rem 1rem;
         color: $primary;
         border: none;
         transition: all 300ms;
         outline: none;
-        &:hover {
+        &:hover
+        {
             color: darken($primary, 20%);
         }
     }

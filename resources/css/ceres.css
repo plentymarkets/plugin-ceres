@@ -16182,6 +16182,11 @@ button:focus {
   float: none;
 }
 
+.btn > span + .fa {
+  margin-left: 5px;
+  margin-top: 1px;
+}
+
 .btn.btn-remove-address {
   background-color: #dc3545;
   margin-right: -5px;
@@ -18114,6 +18119,8 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .top-bar .search-shown {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex: 1;
+      flex: 1;
 }
 
 @media (min-width: 768px) {
@@ -18158,6 +18165,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .top-bar .search-shown .always-visible-search .search-box-shadow-frame .search-submit {
   color: #008ebd;
+  background-color: #e9ecef;
   border: none;
   font-size: 1.3rem;
   line-height: 1;
@@ -18606,7 +18614,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .cmp-search-box {
   background-color: #282d2f;
-  padding: 0px 15px;
   z-index: 1070;
   position: fixed;
   top: 30px;
@@ -18633,6 +18640,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
       flex: 100;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   position: relative;
+  padding: 0 15px;
 }
 
 .search-box-shadow-frame .autocomplete-suggestions {
@@ -18706,7 +18714,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   vertical-align: top;
   font-size: 1.3rem;
   line-height: 1;
-  background: #ffffff;
+  background-color: #e9ecef;
   padding: .4rem 1rem;
   color: #008ebd;
   border: none;
@@ -19929,12 +19937,6 @@ body.menu-is-visible {
 
 .checkout header h4 {
   line-height: 2.5rem;
-}
-
-.add-item .fa {
-  transition: all .2s ease-in-out;
-  margin-left: 6px;
-  margin-top: 1px;
 }
 
 .cmp-basket-item, .cmp-order-item {

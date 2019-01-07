@@ -11062,6 +11062,11 @@ button:focus {
 		}
 	}
 
+	& > span + .fa {
+		margin-left: 5px;
+		margin-top: 1px;
+	}
+
 	&.btn-remove-address {
 		background-color: $danger;
 		margin-right: -5px;
@@ -12988,6 +12993,9 @@ $border-width: 1px;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
+		-webkit-box-flex: 1;
+		    -ms-flex: 1;
+		        flex: 1;
 		@include media-breakpoint-up(md) {
 			-webkit-box-pack: justify;
 			    -ms-flex-pack: justify;
@@ -13031,6 +13039,7 @@ $border-width: 1px;
 		
 				.search-submit {
 					color: $primary;
+					background-color: $gray-200;
 					border: none;
 					font-size: 1.3rem;
 					line-height: 1;
@@ -13576,16 +13585,17 @@ $border-width: 1px;
 	min-width: 100%;
 }
 
-.cmp-search-box {
+.cmp-search-box
+{
     background-color: $gray-darker;
-    padding: 0px 15px;
     z-index: 1070;
     position: fixed;
     top: 30px;
     right: 0;
     left: 0;
     width: 100%;
-    .search-box-inner {
+    .search-box-inner
+    {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -13598,7 +13608,8 @@ $border-width: 1px;
         max-width: 1200px;
         margin: 0 auto;
     }
-     @at-root .search-box-shadow-frame {
+    @at-root .search-box-shadow-frame
+    {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -13608,8 +13619,10 @@ $border-width: 1px;
         -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
         position: relative;
+        padding: 0 $grid-gutter-width / 2;
 
-        .autocomplete-suggestions {
+        .autocomplete-suggestions
+        {
             position: absolute;
             -webkit-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
                     box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
@@ -13621,7 +13634,8 @@ $border-width: 1px;
             width: 100%;
             top: 100%;
 
-            & > .autocomplete-suggestion {
+            & > .autocomplete-suggestion
+            {
                 padding: 5px 15px;
                 white-space: nowrap;
                 overflow: hidden;
@@ -13630,27 +13644,32 @@ $border-width: 1px;
                 display: -ms-flexbox;
                 display: flex;
 
-                &:hover {
+                &:hover
+                {
                     background: $gray-lighter;
                 }
 
-                &.autocomplete-selected {
+                &.autocomplete-selected
+                {
                     background: $gray-lighter;
                 }
 
-                & > .autocomplete-item-name {
+                & > .autocomplete-item-name
+                {
                     -ms-flex-item-align: center;
                         align-self: center;
                     color: $gray-dark;
                 }
 
-                & > .autocomplete-image-container {
+                & > .autocomplete-image-container
+                {
                     width: 40px;
                     height: 40px;
                     position: relative;
                     margin-right: 5px;
 
-                    & > .autocomplete-image {
+                    & > .autocomplete-image
+                    {
                         position: absolute;
                         top: 50%;
                         left: 50%;
@@ -13665,7 +13684,8 @@ $border-width: 1px;
             }
         }
     }
-    .search-input {
+    .search-input
+    {
         -webkit-box-flex: 1;
             -ms-flex: 1 0 70%;
                 flex: 1 0 70%;
@@ -13677,23 +13697,27 @@ $border-width: 1px;
         padding: .4rem 1rem;
         outline: none;
     }
-    .search-submit {
+
+    .search-submit
+    {
         display: inline-block;
         vertical-align: top;
         font-size: 1.3rem;
         line-height: 1;
-        background: #ffffff;
+        background-color: $gray-200;
         padding: .4rem 1rem;
         color: $primary;
         border: none;
         -webkit-transition: all 300ms;
         transition: all 300ms;
         outline: none;
-        &:hover {
+        &:hover
+        {
             color: darken($primary, 20%);
         }
     }
 }
+
 .cmp-country-settings,
 .cmp-currency-select {
 	background-color: $gray-darker;
@@ -15038,16 +15062,6 @@ body.menu-is-visible {
 		}
 	}
 }
-
-	.add-item{
-
-    	.fa{
-			-webkit-transition: all .2s ease-in-out;
-			transition: all .2s ease-in-out;
-			margin-left: 6px;
-			margin-top: 1px;
-    	}
-	}
 
 .cmp-basket-item{
 	position: relative;
