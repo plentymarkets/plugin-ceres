@@ -74,7 +74,7 @@
                                         {% if 'item.age_rating' in itemData or 'all' in itemData %}
                                             <tr>
                                                 <td>{{ trans("Ceres::Template.singleItemAge") }}</td>
-                                                <td>{{ trans("Ceres::Template.singleItemFSK", {"age": item.documents[0].data.item.ageRestriction }) }}</td>
+                                                <td>${ currentVariation.item.ageRestriction | ageRestriction }</td>
                                             </tr>
                                         {% endif %}
 
