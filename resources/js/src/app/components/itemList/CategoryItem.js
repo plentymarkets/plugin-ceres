@@ -65,17 +65,6 @@ Vue.component("category-item", {
         this.variationRetailPrice = this.itemData.prices.default.price.value;
     },
 
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            setTimeout(() =>
-            {
-                this.$emit("component-mounted");
-            }, 0);
-        });
-    },
-
     methods:
     {
         loadFirstImage()
