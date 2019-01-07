@@ -320,7 +320,7 @@ $zindex-fixed:                      $zIndex-3 !default;
 $zindex-modal-backdrop:             $zIndex-7 !default;
 $zindex-modal:                      $zIndex-8 !default;
 $zindex-navbar:                     $zIndex-5 !default;
-$zindex-popover:                    $zIndex-6 !default;
+$zindex-popover:                    $zIndex-10 !default;
 $zindex-tooltip:                    $zIndex-7 !default;
 
 // Navbar
@@ -11056,8 +11056,6 @@ button:focus {
 
 	& > .fa {
 		float: right;
-		margin-top: 1px;
-		margin-left: 5px;
 
 		&.default-float {
 			float: none;
@@ -13761,14 +13759,6 @@ $border-width: 1px;
 		}
 	}
 
-	.row
-	{
-		-webkit-box-orient: horizontal;
-		-webkit-box-direction: normal;
-		    -ms-flex-direction: row;
-		        flex-direction: row;
-	}
-
 	ul{
 		@include reset-list();
 
@@ -13858,6 +13848,20 @@ $border-width: 1px;
 	top: auto;
 }
 
+.wrapper-main header
+{
+	.cmp-country-settings,
+	.cmp-currency-select
+	{
+		.container-max > .row
+		{
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			    -ms-flex-direction: row;
+			        flex-direction: row;
+		}
+	}
+}
 nav.navbar
 {
 	.container-max
@@ -15038,7 +15042,6 @@ body.menu-is-visible {
 	.add-item{
 
     	.fa{
-			color: #fff;
 			-webkit-transition: all .2s ease-in-out;
 			transition: all .2s ease-in-out;
 			margin-left: 6px;
