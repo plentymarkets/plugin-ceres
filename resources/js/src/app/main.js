@@ -122,26 +122,6 @@ var init = (function($, window, document)
                     $(element).collapse("hide");
                 }
             });
-
-            /*
-            if ((evt.target.id != "countrySettings") &&
-                ($(evt.target).parents("#countrySettings").length <= 0))
-            {
-                $("#countrySettings").collapse("hide");
-            }
-
-            if ((evt.target.id != "searchBox") &&
-                ($(evt.target).parents("#searchBox").length <= 0))
-            {
-                $("#searchBox").collapse("hide");
-            }
-
-            if ((evt.target.id != "currencySelect") &&
-                ($(evt.target).parents("#currencySelect").length <= 0))
-            {
-                $("#currencySelect").collapse("hide");
-            }
-            */
         });
 
         $toggleListView.on("click", function(evt)

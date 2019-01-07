@@ -1,4 +1,4 @@
-const checkTooltip = (el, disable) =>
+const toggleTooltip = (el, disable) =>
 {
     $(el).tooltip(disable ? "disable" : "enable");
 };
@@ -12,7 +12,7 @@ Vue.directive("tooltip", {
 
     update(el, binding)
     {
-        checkTooltip(el, binding.value === false);
+        toggleTooltip(el, binding.value === false);
     },
 
     bind(el, binding)
@@ -22,7 +22,7 @@ Vue.directive("tooltip", {
             setTimeout(() =>
             {
                 $(el).tooltip();
-                checkTooltip(el, binding.value === false);
+                toggleTooltip(el, binding.value === false);
             }, 1);
         }
 

@@ -38,7 +38,7 @@ Vue.component("forgot-password-modal", {
     {
         this.$nextTick(() =>
         {
-            $("#resetPwd").on("hidden.bs.modal", () =>
+            $(this.$refs.pwdModal).on("hidden.bs.modal", () =>
 			{
                 this.username = "";
             });
@@ -67,7 +67,7 @@ Vue.component("forgot-password-modal", {
         validateResetPwd()
         {
             ValidationService
-                .validate($("#reset-pwd-form-" + this._uid))
+                .validate(this.$refs.pwdModal)
 				.done(() =>
 				{
     this.sendResetPwd();
@@ -88,7 +88,7 @@ Vue.component("forgot-password-modal", {
             ApiService.post("/rest/io/customer/password_reset", {email: this.username})
                 .done(() =>
                 {
-                    ModalService.findModal(document.getElementById("resetPwd")).hide();
+                    ModalService.findModal(this.$refs.pwdModal).hide();
                     this.isDisabled = false;
 
                     NotificationService.success(
@@ -111,7 +111,7 @@ Vue.component("forgot-password-modal", {
             this.resetError();
 
             ModalService
-                .findModal(document.getElementById("resetPwd"))
+                .findModal(this.$refs.pwdModal)
                 .hide()
                 .then(() =>
                 {
@@ -123,7 +123,7 @@ Vue.component("forgot-password-modal", {
 
         resetError()
         {
-            ValidationService.unmarkAllFields($("#reset-pwd-form-" + this._uid));
+            ValidationService.unmarkAllFields(this.$refs.pwdModal);
         }
     }
 });
