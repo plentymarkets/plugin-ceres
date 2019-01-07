@@ -2,15 +2,15 @@ import TranslationService from "services/TranslationService";
 
 Vue.filter("ageRestriction", value =>
 {
-    value = value < 18 ? 0 : value;
-
     const map = {
-        0: "singleItemAgeRestriction",
-        18: "singleItemAgeRestrictionShort",
+        0: "singleItemAgeRestrictionNone",
+        1: "singleItemAgeRestriction",
         50: "singleItemAgeRestrictionNotFlagged",
         88: "singleItemAgeRestrictionNotRequired",
         99: "singleItemAgeRestrictionNotUnknown"
     };
 
-    return TranslationService.translate("Ceres::Template." + map[value], {age: value});
+    const mapAccessor = value > 0 && value <= 18 ? 1 : value;
+
+    return TranslationService.translate("Ceres::Template." + map[mapAccessor], {age: value});
 });
