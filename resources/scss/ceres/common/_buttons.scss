@@ -107,6 +107,11 @@ button:focus {
 		}
 	}
 
+	& > span + .fa {
+		margin-left: 5px;
+		margin-top: 1px;
+	}
+
 	&.btn-remove-address {
 		background-color: $danger;
 		margin-right: -5px;

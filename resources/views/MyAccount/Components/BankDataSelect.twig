@@ -57,8 +57,8 @@
             </div>
             <div class="add-item">
                 <button href="#" class="btn btn-primary btn-only-icon-xs-down" @click.prevent="openAddBank()">
-                    <i class="fa fa-plus-square" aria-hidden="true"></i>
                     <span>{{ trans("Ceres::Template.myAccountBankAddDataTitle") }}</span>
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -109,7 +109,10 @@
                         <div class="modal-footer">
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-primary btn-block" @click="validateInput()">{{ trans("Ceres::Template.myAccountSave") }}</button>
+                                    <button type="button" class="btn btn-primary btn-block" @click="validateInput()">
+                                        <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
