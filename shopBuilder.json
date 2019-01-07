@@ -8,13 +8,13 @@
         "footer": {
             "label":            "Widget.containerFooter",
             "name":             "Ceres::Footer",
-            "allowedTypes":     ["footer", "structure", "default"]
+            "allowedTypes":     ["footer", "structure", "static"]
         },
         "content": [
             {
                 "label":        "Widget.containerHomepage",
                 "name":         "Ceres::Homepage",
-                "allowedTypes": ["default", "image", "text", "structure"]
+                "allowedTypes": ["static", "structure"]
             }
         ]
     },
@@ -38,30 +38,41 @@
             }
         ]
     },
-    "widgetTypes": [
+    "categories": [
         {
-            "type": "default",
-            "label": "Widget.typeDefault"
+            "key": "header",
+            "label": "Widget.categoryHeader",
+            "position": 100
         },
         {
-            "type": "image",
-            "label": "Widget.typeImage"
+            "key": "structure",
+            "label": "Widget.categoryStructure",
+            "position": 200
         },
         {
-            "type": "text",
-            "label": "Widget.typeText"
+            "key": "text",
+            "label": "Widget.categoryText",
+            "position": 300
         },
         {
-            "type": "structure",
-            "label": "Widget.typeStructure"
+            "key": "text.test",
+            "label": "Widget.categoryText",
+            "position": 300
         },
         {
-            "type": "header",
-            "label": "Widget.typeHeader"
+            "key": "image",
+            "label": "Widget.categoryImage",
+            "position": 400
         },
         {
-            "type": "footer",
-            "label": "Widget.typeFooter"
+            "key": "item",
+            "label": "Widget.categoryItem",
+            "position": 500
+        },
+        {
+            "key": "footer",
+            "label": "Widget.categoryFooter",
+            "position": 600
         }
     ]
 }

@@ -2,7 +2,8 @@
     "identifier": "Ceres::ItemListWidget",
     "label": "Widget.itemListLabel",
     "previewImageURL": "/images/widgets/item-list.svg",
-    "type": "default",
+    "type": "static",
+    "categories": ["item"],
     "position": 700,
     "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
     "settings": {
