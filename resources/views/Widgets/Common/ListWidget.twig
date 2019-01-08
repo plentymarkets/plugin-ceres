@@ -1,25 +1,33 @@
-{% set icon          = widget.settings.icon.mobile %}
-{% set listEntries   = widget.settings.texts.mobile %}
-{% set renderContent = false %}
+{% set title            = widget.settings.title.mobile %}
+{% set icon             = widget.settings.icon.mobile %}
+{% set centered         = widget.settings.centered.mobile %}
+{% set hasEntries    = false %}
 
-{% for entry in listEntries if entry is not empty %}
-    {% set renderContent = true %}
+{% for entry in listEntries if entry.text is not empty %}
+    {% set hasEntries = true %}
 {% endfor %}
 
-{% if renderContent %}
+{% if hasEntries or title is not empty %}
     <div class="widget widget-list">
         <div class="widget-inner">
-            <ul class="list-container">
-                {% for entry in listEntries %}
-                    <li>
-                        {% if icon != "none" %}
-                            <i class="fa {{ icon }}" aria-hidden="true"></i>
-                        {% endif %}
+            {% if title is not empty %}<p class="h4">{{ title }}</p>{% endif %}
+            {% if listEntries | length > 0 %}
+                <ul class="list-unstyled{% if centered %} list-centered{% endif %}">
+                    {% for entry in listEntries %}
+                        <li>
+                            {% if icon != "none" %}
+                                <i class="fa {{ icon }}" aria-hidden="true"></i>
+                            {% endif %}
 
-                        {{ entry }}
-                    </li>
-                {% endfor %}
-            </ul>
+                            {% if entry.url is not empty %}
+                                <a href="{{ entry.url }}">{{ entry.text }}</a>
+                            {% else %}
+                                {{ entry.text }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
     </div>
 {% endif %}

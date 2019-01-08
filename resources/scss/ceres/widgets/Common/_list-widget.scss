@@ -2,9 +2,8 @@
 {
     .widget-inner
     {
-        padding: 1rem 15px;
-
-        .list-container {
+        .list-container,
+        .list-centered {
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
@@ -12,6 +11,10 @@
             padding: 0;
             list-style: none;
             text-align: center;
+        }
+
+        a {
+            color: $footer-color;
         }
     }
 }

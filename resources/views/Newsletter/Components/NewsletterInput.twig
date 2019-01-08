@@ -2,10 +2,8 @@
         <form :id="'newsletter-input-form_' + _uid">
             <div class="row">
                 <div class="col-xs-12" v-if="title">
-                    <span class="h1">${ title }</span>
-                </div>
-                <div class="col-xs-12 mt-3" v-if="subTitle">
-                    <p>${ subTitle }</p>
+                    <p class="h4">${ title }</p>
+                    <p v-if="subTitle">${ subTitle }</p>
                 </div>
             </div>
 

@@ -58,6 +58,11 @@
                 padding-right: 15px;
                 box-sizing: content-box;
                 margin-bottom: 0;
+
+                .widget-inner
+                {
+                    padding: 1rem;
+                }
             }
 
             &:first-child {
