@@ -18,12 +18,7 @@ Vue.component("create-update-address", {
     data()
     {
         return {
-            waiting: false,
-            addressFormNames:
-            {
-                1: "#billing_address_form",
-                2: "#delivery_address_form"
-            }
+            waiting: false
         };
     },
 
@@ -46,7 +41,7 @@ Vue.component("create-update-address", {
          */
         validate()
         {
-            ValidationService.validate($(this.addressFormNames[this.addressType]))
+            ValidationService.validate(this.$refs.addressForm)
                 .done(() =>
                 {
                     this.saveAddress();
@@ -149,7 +144,7 @@ Vue.component("create-update-address", {
 
         _handleValidationErrors(validationErrors)
         {
-            ValidationService.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
+            ValidationService.markFailedValidationFields(this.$refs.addressForm, validationErrors);
 
             let errorMessage = "";
 

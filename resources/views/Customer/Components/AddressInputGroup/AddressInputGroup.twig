@@ -3,24 +3,24 @@
 {{ component( "Ceres::Customer.Components.CountrySelect" ) }}
 
 <script type="x/template" id="vue-address-input-group">
-    <div>
-        <div v-if="value.showPickupStation && selectedCountry.isoCode2 === 'DE' && addressType === '2'">
+    <div class="row">
+        <template v-if="value.showPickupStation && selectedCountry.isoCode2 === 'DE' && addressType === '2'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DHLPackingStationAddressInputGroupDE" %}
-        </div>
-        <div v-else-if="localeToShow == 'DE' && addressType === '1'">
+        </template>
+        <template v-else-if="localeToShow == 'DE' && addressType === '1'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.BillingAddressInputGroupDE" %}
-        </div>
-        <div v-else-if="localeToShow == 'GB' && addressType === '1'">
+        </template>
+        <template v-else-if="localeToShow == 'GB' && addressType === '1'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.BillingAddressInputGroupGB" %}
-        </div>
-        <div v-else-if="localeToShow == 'DE' && addressType === '2'">
+        </template>
+        <template v-else-if="localeToShow == 'DE' && addressType === '2'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DeliveryAddressInputGroupDE" %}
-        </div>
-        <div v-else-if="localeToShow == 'GB' && addressType === '2'">
+        </template>
+        <template v-else-if="localeToShow == 'GB' && addressType === '2'">
             {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DeliveryAddressInputGroupGB" %}
-        </div>
+        </template>
         
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-12 col-sm-4">
             <country-select
                 template="#vue-country-select"
                 :selected-country-id="value.countryId"

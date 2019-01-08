@@ -149,10 +149,19 @@ Vue.component("login", {
 
             if (this.modalElement)
             {
-                ModalService.findModal(document.getElementById(this.modalElement)).hide();
+                ModalService
+                    .findModal(document.getElementById(this.modalElement))
+                    .hide()
+                    .then(() =>
+                    {
+                        ModalService.findModal(document.getElementById("resetPwd")).show();
+                    });
+            }
+            else
+            {
+                ModalService.findModal(document.getElementById("resetPwd")).show();
             }
 
-            ModalService.findModal(document.getElementById("resetPwd")).show();
         },
 
         resetError()

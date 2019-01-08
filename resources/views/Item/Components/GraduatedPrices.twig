@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-graduated-prices">
     <div>
-        <div class="m-y-1" v-if="graduatedPrices[0]">
+        <div class="my-3" v-if="graduatedPrices[0]">
             <b>{{ trans("Ceres::Template.singleItemGraduatedPrices") }}:</b>
             
             <table class="graduated-prices-table text-muted">
@@ -9,7 +9,7 @@
                     <td>
                         ${ price.unitPrice.formatted }
                         <transition name="fade">
-                            <i class="fa fa-lg fa-check-circle-o m-l-1" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
+                            <i class="fa fa-lg fa-check-circle-o ml-3" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
                         </transition>
                     </td>
                 </tr>
