@@ -4158,7 +4158,7 @@
                     "scss": true,
                     "label": "Config.brandSecondaryLabel",
                     "options": {
-                        "defaultValue": "#dc3545"
+                        "defaultValue": "#d4021d"
                     }
                 },
                 "brand-success": {
