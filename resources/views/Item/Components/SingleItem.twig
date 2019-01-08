@@ -1,4 +1,5 @@
 {% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
+{% import "Ceres::Item.Macros.AgeRestriction" as AgeRestriction %}
 
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
@@ -190,7 +191,7 @@
                                     {% if 'item.age_rating' in itemData or 'all' in itemData %}
                                         <tr>
                                             <td>{{ trans("Ceres::Template.singleItemAge") }}</td>
-                                            <td>${ currentVariation.item.ageRestriction | ageRestriction }</td>
+                                            <td>{{ AgeRestriction.getText(item.documents[0].data.item.ageRestriction) }}</td>
                                         </tr>
                                     {% endif %}
 
