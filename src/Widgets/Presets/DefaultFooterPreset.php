@@ -64,13 +64,8 @@ class DefaultFooterPreset implements ContentPreset
 
         if ($numberOfFeatures === 1)
         {
-            $storeFeatureTranslation = $this->translator->trans("Ceres::Template.footerStoreFeature1");
-
             $listGridPreset = $this->preset->createWidget("Ceres::ThreeColumnWidget")
-                ->withSetting("layout", "oneToOneToOne")
-                ->createChild("second", "Ceres::ListWidget")
-                ->withSetting("icon", "fa-check")
-                ->withSetting("text1", $storeFeatureTranslation);
+                ->withSetting("layout", "oneToOneToOne");
         }
         else if ($numberOfFeatures === 2)
         {
@@ -92,7 +87,10 @@ class DefaultFooterPreset implements ContentPreset
                 $listGridPreset
                     ->createChild($this->gridDropzoneNames[$i], "Ceres::ListWidget")
                     ->withSetting("icon", "fa-check")
-                    ->withSetting("texts", [$storeFeatureTranslation]);
+                    ->withSetting("entries", [
+                        ["text" => $storeFeatureTranslation, "url" => ""]
+                    ])
+                    ->withSetting("centered", true);
             }
         }
     }
@@ -117,7 +115,7 @@ class DefaultFooterPreset implements ContentPreset
         for ($i = 1; $i <= $numberOfCols && $i <= 3; $i++)
         {
             $columnTitleTranslation = $this->translator->trans("Ceres::Template.footerColumnTitle" . $i);
-            $linkListPreset = $linkListGridPreset->createChild($this->gridDropzoneNames[$i], "Ceres::LinkListWidget")
+            $linkListPreset = $linkListGridPreset->createChild($this->gridDropzoneNames[$i], "Ceres::ListWidget")
                 ->withSetting("title", $columnTitleTranslation)
                 ->withSetting("icon", "none");
 
@@ -140,6 +138,7 @@ class DefaultFooterPreset implements ContentPreset
             }
 
             $linkListPreset->withSetting("entries", $entries);            
+            $linkListPreset->withSetting("centered", false);
         }
     }
 
