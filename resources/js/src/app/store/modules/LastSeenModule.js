@@ -39,9 +39,17 @@ const actions =
                     ApiService.put("/rest/io/item/last_seen/" + variationId + "?items=" + App.config.itemLists.lastSeenNumber || 4)
                         .done(response =>
                         {
-                            commit("setLastSeenItems", response.documents);
-                            commit("setIsLastSeenItemsLoading", false);
-                            resolve(response.documents);
+                            if (isDefined(response.lastSeenItems))
+                            {
+                                commit("setLastSeenItems", response.lastSeenItems.documents);
+                                commit("setLastSeenItemContainers", response.containers);
+                                commit("setIsLastSeenItemsLoading", false);
+                                resolve(response.lastSeenItems.documents);
+                            }
+                            else
+                            {
+                                resolve(null);
+                            }
                         })
                         .fail(error =>
                         {
@@ -72,6 +80,10 @@ const actions =
                                 commit("setIsLastSeenItemsLoading", false);
 
                                 resolve(response.data.lastSeenItems.documents);
+                            }
+                            else
+                            {
+                                resolve(null);
                             }
                         })
                         .fail(error =>
