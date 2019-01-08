@@ -19686,6 +19686,105 @@ html.ie {
         @include widget-bg-variant($danger);
     }
 }
+.widget.accordion {
+    .card {
+        button {
+            text-align: left;
+            padding: $card-spacer-x;
+
+            h5 {
+                line-height: inherit;
+                font-weight: bold;
+                position: relative;
+
+                > .fa {
+                    position: absolute;
+                    right: 0;
+                    top: -4px;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        button:hover,
+        button:focus { 
+            color: black;
+        }
+    }
+
+    &.widget-primary
+    {
+        button:hover,
+        button:focus {
+            -webkit-text-decoration-color: $primary;
+                    text-decoration-color: $primary;
+        }
+        h5 {
+            color: $primary;
+        }
+    }
+
+    &.widget-secondary
+    {
+        button:hover,
+        button:focus {
+            -webkit-text-decoration-color: $secondary;
+                    text-decoration-color: $secondary;
+        }
+        h5 {
+            color: $secondary;
+        }
+    }
+
+    &.widget-success
+    {
+        button:hover,
+        button:focus {
+            -webkit-text-decoration-color: $success;
+                    text-decoration-color: $success;
+        }
+        h5 {
+            color: $success;
+        }
+    }
+
+    &.widget-info
+    {
+        button:hover,
+        button:focus {
+            -webkit-text-decoration-color: $info;
+                    text-decoration-color: $info;
+        }
+        h5 {
+            color: $info;
+        }
+    }
+
+    &.widget-warning
+    {
+        button:hover,
+        button:focus {
+            -webkit-text-decoration-color: $warning;
+                    text-decoration-color: $warning;
+        }
+        h5 {
+            color: $warning;
+        }
+    }
+
+    &.widget-danger
+    {
+        button:hover,
+        button:focus {
+            -webkit-text-decoration-color: $danger;
+                    text-decoration-color: $danger;
+        }
+        h5 {
+            color: $danger;
+        }
+    }
+}
+
+
 .widget-legal-information
 {
     a
@@ -19924,6 +20023,12 @@ html.ie {
         -webkit-box-flex: 1;
             -ms-flex: 1;
                 flex: 1;
+
+        // widget-inner inside grid should not display paddings
+        .widget .widget-inner {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
 
     .widget-inner-stacked

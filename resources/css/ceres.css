@@ -24424,6 +24424,14 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 .widget.accordion .card button h5, .widget.accordion .cmp-address-list .items > div:first-child button h5, .cmp-address-list .widget.accordion .items > div:first-child button h5 {
   line-height: inherit;
   font-weight: bold;
+  position: relative;
+}
+
+.widget.accordion .card button h5 > .fa, .widget.accordion .cmp-address-list .items > div:first-child button h5 > .fa, .cmp-address-list .widget.accordion .items > div:first-child button h5 > .fa {
+  position: absolute;
+  right: 0;
+  top: -4px;
+  font-size: 1.5rem;
 }
 
 .widget.accordion .card button:hover, .widget.accordion .cmp-address-list .items > div:first-child button:hover, .cmp-address-list .widget.accordion .items > div:first-child button:hover,
@@ -24730,6 +24738,11 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   padding-right: 15px;
   -ms-flex: 1;
       flex: 1;
+}
+
+.widget-grid .widget-inner .widget .widget-inner {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .widget-grid .widget-inner-stacked {

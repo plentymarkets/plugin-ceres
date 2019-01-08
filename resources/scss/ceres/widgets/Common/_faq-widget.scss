@@ -7,6 +7,14 @@
             h5 {
                 line-height: inherit;
                 font-weight: bold;
+                position: relative;
+
+                > .fa {
+                    position: absolute;
+                    right: 0;
+                    top: -4px;
+                    font-size: 1.5rem;
+                }
             }
         }
         button:hover,

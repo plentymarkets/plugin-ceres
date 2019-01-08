@@ -6,32 +6,78 @@
     "position": 1300,
     "widgetClass": "Ceres\\Widgets\\Common\\CollapseWidget",
     "settings": {
-      "collapseBox": {
-          "type": "vertical",
-          "isList": "[1,]",
-          "options": {
-              "name": "Widget.collapseBoxLabel"
-          },
-          "children": {
-              "headline": {
-                  "type": "text",
-                  "required": true,
-                  "defaultValue": "",
-                  "options": {
-                      "name": "Widget.collapseBoxHeadlineLabel",
-                      "tooltipText": "Widget.collapseBoxHeadlineTooltip"
-                  }
-              },
-              "text": {
-                  "type": "codeEditor",
-                  "required": true,
-                  "defaultValue": "",
-                  "options": {
-                      "name": "Widget.collapseBoxTextareaLabel",
-                      "tooltipText": "Widget.collapseBoxTextareaTooltip"
-                  }
-              }
-          }
-      }
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": {
+                "name": "Widget.widgetAppearanceLabel",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "none",
+                        "caption": "Widget.widgetAppearanceNone",
+                        "position": 0
+                    },
+                    {
+                        "value": "primary",
+                        "caption": "Widget.widgetAppearancePrimary",
+                        "position": 1
+                    },
+                    {
+                        "value": "secondary",
+                        "caption": "Widget.widgetAppearanceSecondary",
+                        "position": 2
+                    },
+                    {
+                        "value": "success",
+                        "caption": "Widget.widgetAppearanceSuccess",
+                        "position": 3
+                    },
+                    {
+                        "value": "info",
+                        "caption": "Widget.widgetAppearanceInfo",
+                        "position": 4
+                    },
+                    {
+                        "value": "warning",
+                        "caption": "Widget.widgetAppearanceWarning",
+                        "position": 5
+                    },
+                    {
+                        "value": "danger",
+                        "caption": "Widget.widgetAppearanceDanger",
+                        "position": 6
+                    }
+                ]
+            }
+        },
+        "collapseBox": {
+            "type": "vertical",
+            "isList": "[1,]",
+            "options": {
+                "name": "Widget.collapseBoxLabel"
+            },
+            "children": {
+                "headline": {
+                    "type": "text",
+                    "required": true,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.collapseBoxHeadlineLabel",
+                        "tooltipText": "Widget.collapseBoxHeadlineTooltip"
+                    }
+                },
+                "text": {
+                    "type": "codeEditor",
+                    "required": true,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.collapseBoxTextareaLabel",
+                        "tooltipText": "Widget.collapseBoxTextareaTooltip"
+                    }
+                }
+            }
+        }
     }
 }
