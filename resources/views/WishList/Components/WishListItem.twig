@@ -3,7 +3,7 @@
     <article v-for="(wishListItem, index) in wishListItems" :key="wishListItem.id" class="wish-list-item" :id="'article_' + index ">
 
         <div class="row">
-            <div class="col-xs-3 col-sm-2 wish-list-container">
+            <div class="col-3 col-sm-2 wish-list-container">
                 <div class="wish-list-image-container">
                     <a :href="wishListItem.data | itemURL">
                         <img class="wish-list-image" :src="wishListItem.data.images | itemImages('urlMiddle') | itemImage" :alt="wishListItem.data | itemName" :title="wishListItem.data | itemName">
@@ -11,22 +11,22 @@
                 </div>
             </div>
 
-            <div class="col-xs-5 col-sm-7 wish-list-texts">
+            <div class="col-5 col-sm-7 wish-list-texts">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xs-12 col-lg-6">
+                        <div class="col-12 col-lg-6">
                             <a :href="wishListItem.data | itemURL">
                                 <h2 class="h5 wish-list-name">${ wishListItem.data | itemName }</h2>
                             </a>
                         </div>
-                        <div :class="'col-xs-12 col-lg-6 wish-list-availability availability_' + wishListItem.data.variation.availability.id">
+                        <div :class="'col-12 col-lg-6 wish-list-availability availability_' + wishListItem.data.variation.availability.id">
                             ${ wishListItem.data.variation.availability.names.name }
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1 wish-list-container">
+            <div class="col-4 col-sm-3 col-lg-2 offset-lg-1 wish-list-container">
                 <div class="wish-list-price">${ wishListItem.data.prices.default.unitPrice.value | currency(wishListItem.data.prices.default.currency) }</div>
                 <div class="wish-list-remove" @click="removeItem({id: wishListItem.data.variation.id, wishListItem: wishListItem, index: index})"><i class="fa fa-trash" aria-hidden="true"></i></div>
             </div>

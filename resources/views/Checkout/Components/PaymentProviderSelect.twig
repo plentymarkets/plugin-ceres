@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-payment-provider-select">
-    <div class="cmp cmp-method-list list m-b-2" v-bind:class="{ 'error': this.showError }">
+    <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': this.showError }">
         <ul class="method-list component-loading" :class="{ 'isLoading': isBasketLoading }">
             <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id">
                 <input
@@ -21,7 +21,7 @@
                     </div><!--
                     --><div class="content">
                     ${ paymentProvider.name }
-                        <small v-if="paymentProvider.sourceUrl" class="pull-xs-right">
+                        <small v-if="paymentProvider.sourceUrl" class="float-right">
                             <a :href="paymentProvider.sourceUrl" rel="noopener noreferrer" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
                         </small>
                         <div>

@@ -46,7 +46,7 @@
 		</p>
     {% endif %}
     {% if "fon" in showData or showData == 'all' %}
-		<p class="m-y-0">
+		<p class="my-0">
             <a href="tel:{{ fon | replace('/[^0-9+]/',' ') | trimNewlines }}">
                 <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
                 <span class="d-inline-block">{{ fon }}</span>
@@ -55,7 +55,7 @@
     {% endif %}
 
     {% if "hotline" in showData or showData == 'all' %}
-		<p class="m-y-0">
+		<p class="my-0">
             <a href="tel:{{ hotline | replace('/[^0-9+]/',' ') | trimNewlines }}">
                 <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
                 <span class="d-inline-block">{{ hotline }}</span>
@@ -64,14 +64,14 @@
     {% endif %}
 
     {% if "fax" in showData or showData == 'all' %}
-		<p class="m-y-0">
+		<p class="my-0">
             <i class="fa fa-fw fa-fax" aria-hidden="true"></i>
             <span class="d-inline-block">{{ fax }}</span>
 		</p>
     {% endif %}
 
     {% if "email" in showData or showData == 'all' %}
-		<p class="m-y-0">
+		<p class="my-0">
             <a href="mailto:{{ email }}">
                 <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
                 <span class="d-inline-block">{{ email }}</span>
@@ -80,7 +80,7 @@
     {% endif %}
 
     {% if "opening_times" in showData or showData == 'all' %}
-		<p class="m-y-0">
+		<p class="my-0">
 			<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
 			<span class="d-inline-block">
                 {{ trans("Ceres::Template.contactOpeningTimes") }}
@@ -89,14 +89,14 @@
     {% endif %}
 
     {% if "timezone" in showData or showData == 'all' %}
-		<p class="m-y-0">
+		<p class="my-0">
 			<i class="fa fa-fw fa-globe" aria-hidden="true"></i>
 			<span class="d-inline-block">{{ timezone }}</span>
 		</p>
     {% endif %}
 
     {% if "vatNumber" in showData or showData == 'all' %}
-		<p class="m-y-0 contact-vat-number">
+		<p class="my-0 contact-vat-number">
 			<i class="fa fa-fw" aria-hidden="true"></i>
 			<span class="d-inline-block vat-number-field">{{ trans("Ceres::Template.contactVatNumber") }}:</span><br>
 			<span class="d-inline-block">{{ vat }}</span>

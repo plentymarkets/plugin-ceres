@@ -105,7 +105,6 @@ const actions =
                 .done(basket =>
                 {
                     commit("setBasket", basket);
-                    commit("setIsBasketInitiallyLoaded");
 
                     ApiService.get("/rest/io/basket/items", {template: "Ceres::Basket.Basket"})
                         .done(basketItems =>
@@ -117,12 +116,6 @@ const actions =
                             NotificationService.error(
                                 TranslationService.translate("Ceres::Template.basketOops")
                             ).closeAfter(10000);
-                        }).always(data =>
-                        {
-                            setTimeout(() =>
-                            {
-                                $(document.body).trigger("sticky_kit:recalc");
-                            }, 0);
                         });
                 }).fail(error =>
                 {

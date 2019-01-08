@@ -3,10 +3,12 @@
 <script type="x/template" id="vue-order-return-item">
 	<article  class="order-return-item" :id="'article_' + _uid">
 		<div class="row">
-			<div class="col-xs-3 col-sm-2 order-flex">
+			<div class="col-3 col-sm-2 order-flex">
 				<div class="input-group">
-					<span class="input-group-addon">
-						<input type="checkbox" v-model="isChecked" @change="updateValue($event)">
+					<span class="input-group-prepend">
+						<label class="input-group-text">
+							<input type="checkbox" v-model="isChecked" @change="updateValue($event)">
+						</label>
 					</span>
 					<input 	type="number" 
 							min="1" 
@@ -24,7 +26,7 @@
 					${ orderItem.quantity }
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-2 order-return-container">
+			<div class="col-3 col-sm-2 order-return-container">
 				<div class="order-return-image-container">
 					<a :href="orderItemURL">
 						<img class="order-return-image" :src="orderItemImage" :alt="orderItem | itemBundleName" :title="orderItem | itemBundleName">
@@ -32,10 +34,10 @@
 				</div>
 			</div>
 
-			<div class="col-xs-5 col-sm-4 order-return-texts">
+			<div class="col-5 col-sm-4 order-return-texts">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-xs-12 col-lg-12">
+						<div class="col-12 col-lg-12">
 							<a :href="orderItemURL">
 								<h2 class="h5 order-return-name">${ orderItem | itemBundleName }</h2>
 							</a>

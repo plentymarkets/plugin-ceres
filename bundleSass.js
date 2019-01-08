@@ -130,10 +130,17 @@ SassResolver.prototype.bundle = function( targetFile )
         .then(function( result )
         {
             fs.writeFileSync( targetFile, result.content );
+        })
+        .catch(function(err)
+        {
+            console.log("ERROR: " + err.reason + " at " + err.file + ":" + err.line);
         });
 };
 
 console.log("Start bundling scss");
 var resolverBootstrap = new SassResolver('resources/scss/Ceres.scss');
 resolverBootstrap.bundle('resources/css/ceres.scss');
+
+var resolverBootstrapLegacy = new SassResolver('resources/scss/Ceres_legacy.scss');
+resolverBootstrapLegacy.bundle('resources/css/ceres-legacy.scss');
 console.log("=> done!");

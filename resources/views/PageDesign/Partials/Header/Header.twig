@@ -19,7 +19,7 @@
 {% if headerContainer is empty %}
     {% include "Ceres::PageDesign.Partials.Header.DefaultHeader" %}
 {% else %}
-<header id="page-header" class="pos-f-t">
+<header id="page-header" class="fixed-top">
     {{ headerContainer | raw }}
 </header>
 {% endif %}

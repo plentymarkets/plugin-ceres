@@ -47,10 +47,10 @@
         }
 
         &:hover{
-            border-color: transparent $brand-primary transparent transparent;
+            border-color: transparent $primary transparent transparent;
 
             & > i{
-                color: #fff;
+                color: color-yiq($primary);
             }
         }
     }
@@ -109,7 +109,8 @@
         padding: .5rem;
 
         .special-tag,
-        .tag{
+        .tag,
+        .badge {
             display: block;
             padding: .3em .5em .2rem;
             font-size: .9rem;
