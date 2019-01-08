@@ -55,11 +55,6 @@
             "position": 300
         },
         {
-            "key": "text.test",
-            "label": "Widget.categoryText",
-            "position": 300
-        },
-        {
             "key": "image",
             "label": "Widget.categoryImage",
             "position": 400

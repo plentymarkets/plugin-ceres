@@ -3,7 +3,7 @@
     "label": "Widget.textLabel",
     "previewImageURL": "/images/widgets/text.svg",
     "type": "static",
-    "categories": ["text.test"],
+    "categories": ["text"],
     "position": 800,
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {

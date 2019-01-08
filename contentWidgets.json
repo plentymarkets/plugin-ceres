@@ -1050,7 +1050,7 @@
         "previewImageURL": "/images/widgets/text.svg",
         "type": "static",
         "categories": [
-            "text.test"
+            "text"
         ],
         "position": 800,
         "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
@@ -1113,7 +1113,7 @@
         "identifier": "Ceres::TitleBarWidget",
         "label": "Widget.titleBarLabel",
         "previewImageURL": "/images/widgets/title-bar.svg",
-        "type": "text",
+        "type": "static",
         "categories": [
             "text"
         ],
