@@ -24,7 +24,7 @@
                         }
                     },
                     "text": {
-                        "type": "textarea",
+                        "type": "codeEditor",
                         "required": true,
                         "defaultValue": "",
                         "options": {
