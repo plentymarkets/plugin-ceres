@@ -20539,7 +20539,7 @@ Vue.component("forgot-password-modal", {
         var _this = this;
 
         this.$nextTick(function () {
-            $("#resetPwd").on("hidden.bs.modal", function () {
+            $(_this.$refs.pwdModal).on("hidden.bs.modal", function () {
                 _this.username = "";
             });
 
@@ -25254,7 +25254,7 @@ Vue.directive("stick-in-parent", {
 },{}],219:[function(require,module,exports){
 "use strict";
 
-var checkTooltip = function checkTooltip(el, disable) {
+var toggleTooltip = function toggleTooltip(el, disable) {
     $(el).tooltip(disable ? "disable" : "enable");
 };
 
@@ -25263,13 +25263,13 @@ Vue.directive("tooltip", {
         $(el).tooltip("dispose");
     },
     update: function update(el, binding) {
-        checkTooltip(el, binding.value === false);
+        toggleTooltip(el, binding.value === false);
     },
     bind: function bind(el, binding) {
         if (window.matchMedia("(min-width: 768px)").matches) {
             setTimeout(function () {
                 $(el).tooltip();
-                checkTooltip(el, binding.value === false);
+                toggleTooltip(el, binding.value === false);
             }, 1);
         }
     }
@@ -26439,24 +26439,6 @@ var init = function ($, window, document) {
                     $(element).collapse("hide");
                 }
             });
-
-            /*
-            if ((evt.target.id != "countrySettings") &&
-                ($(evt.target).parents("#countrySettings").length <= 0))
-            {
-                $("#countrySettings").collapse("hide");
-            }
-             if ((evt.target.id != "searchBox") &&
-                ($(evt.target).parents("#searchBox").length <= 0))
-            {
-                $("#searchBox").collapse("hide");
-            }
-             if ((evt.target.id != "currencySelect") &&
-                ($(evt.target).parents("#currencySelect").length <= 0))
-            {
-                $("#currencySelect").collapse("hide");
-            }
-            */
         });
 
         $toggleListView.on("click", function (evt) {
