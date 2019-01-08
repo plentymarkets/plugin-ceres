@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::LinkListWidget",
-    "label": "Widget.listLabel",
-    "previewImageURL": "/images/widgets/list.svg",
+    "label": "Widget.linkListLabel",
+    "previewImageURL": "/images/widgets/link-list.svg",
     "type": "default",
     "position": 900,
     "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
