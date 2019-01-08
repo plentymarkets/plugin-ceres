@@ -4,8 +4,8 @@
 
 <script type="x/template" id="vue-basket-preview">
     <div class="wrapper-inner basket-preview">
-        <header class="basket-header p-a-1">
-            <div class="d-inline-block m-a-0 basket-header-caption">{{ trans("Ceres::Template.basketPreview") }}</div>
+        <header class="basket-header p-3">
+            <div class="d-inline-block basket-header-caption">{{ trans("Ceres::Template.basketPreview") }}</div>
             <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -17,9 +17,9 @@
             </div>
         </div>
 
-        <div class="basket-preview-content row p-l-1 p-r-1">
+        <div class="basket-preview-content">
             <!-- BASKET LIST -->
-            <div class="list col-sm-7 col-md-12 p-t-1">
+            <div class="list col-sm-7 col-md-12 pt-3">
                 <div class="cmp cmp-basket-preview-list">
                     <basket-list template="#vue-basket-list" size="small"></basket-list>
                 </div>
@@ -27,14 +27,14 @@
             <!-- ./BASKET LIST -->
 
             <!-- BASKET PREVIEW BOTTOM -->
-            <div class="bg-faded totals col-sm-5 col-md-12 p-t-1">
-                
+            <div class="bg-light totals col-sm-5 col-md-12 pt-3">
+
                 {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
                 <basket-totals template="#vue-basket-totals"></basket-totals>
                 {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
 
                 <div class="basket-preview-footer row">
-                    <div class="col-xs-6 col-sm-6 m-b-1">
+                    <div class="col-6 col-sm-6 mb-3">
                         <a v-waiting-animation-infinite
                         href="{{ urls.basket }}"
                         rel="nofollow"
@@ -46,7 +46,7 @@
                         </a>
                     </div>
 
-                    <div class="col-xs-6 col-sm-6">
+                    <div class="col-6 col-sm-6">
                         {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
 
                         <div>

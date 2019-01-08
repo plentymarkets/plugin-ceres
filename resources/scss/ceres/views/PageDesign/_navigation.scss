@@ -1,3 +1,11 @@
+nav.navbar
+{
+	.container-max
+	{
+		display: block;
+	}
+}
+
 nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
 	display: block;
 	margin-top: 0px;
@@ -15,7 +23,7 @@ nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
 // mobile
 $menu-h-sm  			: 100%;
 $menu-w-sm  			: 100%;
-$menu-bg-sm 			: $brand-primary;
+$menu-bg-sm 			: $primary;
 $menu-breadcrumb-bg 	: $gray-darker;
 $menu-breadcrumb-color 	: $white;
 $menu-color-sm 			: $white;
@@ -26,22 +34,22 @@ $menu-font-f-sm  		: $font-family-serif;
 $menu-h-lg  			: 100%;
 $menu-w-lg  			: 100%;
 $menu-bg-lg 			: transparent;
-$menu-color-lg 			: $brand-primary;
-$menu-font-s-lg  		: 1em;
+$menu-color-lg 			: $primary;
+$menu-font-s-lg  		: 1rem;
 $menu-font-f-lg  		: $font-family-serif;
-$menu-li-bg-hover		: $brand-primary;
-$menu-li-color-hover	: $white;
+$menu-li-bg-hover		: $primary;
+$menu-li-color-hover	: color-yiq($primary);
 $menu-li-padding-x      : 1rem;
 $menu-li-padding-y      : 1.3rem;
 // bigmenu
-$menu-big-menu-bg 				: darken($brand-primary,10%);
-$menu-big-menu-li-bg			: transparent;
-$menu-big-menu-li-bg-hover		: $brand-primary;
-$menu-big-menu-li-color			: $white;
-$menu-big-menu-li-color-hover	: $text-color;
+$menu-big-menu-bg 				: darken($primary,10%);
+$menu-big-menu-li-bg			: transparent; //color-yiq($primary, $gray-dark, transparent);
+$menu-big-menu-li-bg-hover		: $primary;
+$menu-big-menu-li-color			: color-yiq($primary);
+$menu-big-menu-li-color-hover	: $body-color;
 // megamenu
 $megamenu-bg 					: $white;
-$megamenu-color-top-btn			: $brand-primary;
+$megamenu-color-top-btn			: $primary;
 $megamenu-color-bottom-btn		: $black;
 $megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
 $megamenu-btn-more 				: $gray;
@@ -167,7 +175,7 @@ body.menu-is-visible {
 	}
 
 	@include media-breakpoint-up(lg){
-		background-color : transparent;
+		background-color : $menu-bg-lg;
 		display 		 : block!important;
 		opacity 		 : 1;
 		overflow 		 : visible;
@@ -219,6 +227,10 @@ body.menu-is-visible {
 							background  	: $menu-big-menu-li-bg-hover;
 							color 			: $menu-big-menu-li-color;
 							text-decoration : none;
+						}
+
+						.megamenu &:hover {
+							background: none;
 						}
 
 						>a {
@@ -355,6 +367,7 @@ body.menu-is-visible {
 		max-width  : initial;
 		font-size  : .8em;
 		padding    : 0 calc(15px + .5em) 0 15px;
+		display    : block;
 
 		li {
 			display : inline-block;

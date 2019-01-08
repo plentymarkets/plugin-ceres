@@ -38,7 +38,7 @@ Vue.component("forgot-password-modal", {
     {
         this.$nextTick(() =>
         {
-            $("#resetPwd").on("hidden.bs.modal", () =>
+            $(this.$refs.pwdModal).on("hidden.bs.modal", () =>
 			{
                 this.username = "";
             });
@@ -66,15 +66,16 @@ Vue.component("forgot-password-modal", {
     {
         validateResetPwd()
         {
-            ValidationService.validate($("#reset-pwd-form-" + this._uid))
+            ValidationService
+                .validate(this.$refs.pwdModal)
 				.done(() =>
 				{
     this.sendResetPwd();
 })
-				.fail(invalidFields =>
-				{
-    ValidationService.markInvalidFields(invalidFields, "error");
-});
+                .fail(invalidFields =>
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
         },
 
         /**
@@ -87,7 +88,7 @@ Vue.component("forgot-password-modal", {
             ApiService.post("/rest/io/customer/password_reset", {email: this.username})
                 .done(() =>
                 {
-                    ModalService.findModal(document.getElementById("resetPwd")).hide();
+                    ModalService.findModal(this.$refs.pwdModal).hide();
                     this.isDisabled = false;
 
                     NotificationService.success(
@@ -109,13 +110,20 @@ Vue.component("forgot-password-modal", {
         {
             this.resetError();
 
-            ModalService.findModal(document.getElementById("resetPwd")).hide();
-            ModalService.findModal(document.getElementById("login")).show();
+            ModalService
+                .findModal(this.$refs.pwdModal)
+                .hide()
+                .then(() =>
+                {
+                    ModalService
+                        .findModal(document.getElementById("login"))
+                        .show();
+                });
         },
 
         resetError()
         {
-            ValidationService.unmarkAllFields($("#reset-pwd-form-" + this._uid));
+            ValidationService.unmarkAllFields(this.$refs.pwdModal);
         }
     }
 });

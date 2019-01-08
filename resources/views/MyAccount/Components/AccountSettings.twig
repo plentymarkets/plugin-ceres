@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-account-settings">
-    <div class="card-block">
-        <div class="row  m-b-1">
+    <div class="card-body">
+        <div class="row  mb-3">
             <div class="col-sm-4">
                 <strong>{{ trans("Ceres::Template.myAccountEmail") }}</strong>
             </div>
@@ -26,20 +26,20 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChangePassword") }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="clearFields">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChangePassword") }}</h4>
                         </div>
                         <div class="modal-body form-horizontal">
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-12">
                                     <div class="input-unit">
                                         <input type="password" name="new_password" v-model="newPassword" data-autofocus>
                                         <label for="new_password">{{ trans("Ceres::Template.myAccountNewPassword") }}</label>
                                     </div>
                                 </div>
-                                <div class="col-xs-12">
+                                <div class="col-12">
                                     <div class="input-unit no-bottom">
                                         <input type="password" name="confirm_password" v-model="confirmPassword">
                                         <label for="confirm_password">{{ trans("Ceres::Template.myAccountRepeatPassword") }}</label>

@@ -62,7 +62,7 @@
 		transition: color 250ms;
 
 	    &:hover{
-	    	color: $brand-danger;
+	    	color: $danger;
 	    }
 	}
 
@@ -99,7 +99,7 @@
 }
 
 .payment-link-style {
-	color: $brand-primary !important;
+	color: $primary !important;
 	cursor: pointer!important;
 	padding: 0 15px!important;
 	span {

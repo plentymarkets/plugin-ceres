@@ -11,11 +11,11 @@
 
                     <!-- MODAL HEADER -->
                     <div class="modal-header">
-                        <button type="button" @click="closeOverlay()" class="close" data-dismiss="modal" aria-label="Close">
+                        <div class="modal-title h5">{{ trans("Ceres::Template.singleItemAdded") }}</div>
+                        <span class="text-muted ml-auto"><span class="timer"></span>s</span>
+                        <button type="button" class="close ml-0 pl-1" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <span style="float: right; margin-right: 5px; color: lightgray;"><span class="timer">${ timeToClose }</span>s</span>
-                        <div class="modal-title h5">{{ trans("Ceres::Template.singleItemAdded") }}</div>
                     </div>
                     <!-- ./MODAL HEADER -->
 
@@ -23,7 +23,7 @@
                     <div class="modal-body">
                         <div class="row is-table-row">
                             <div class="col-md-4" style="min-height: 80px;">
-                                <img style="max-height: 140px;" class="img-fluid m-x-auto" :src="imageUrl" :alt="imageAlternativeText || itemName" :title="itemName"/>
+                                <img style="max-height: 140px;" class="img-fluid mx-auto" :src="imageUrl" :alt="imageAlternativeText || itemName" :title="itemName"/>
                             </div>
                             <div class="col-md-8">
                                 <p>
@@ -65,19 +65,14 @@
 
                     <!-- MODAL FOOTER -->
                     <div class="modal-footer">
-                        <div class="row">
-                            <div class="col-sm-8 offset-sm-2 item-confirm-special-case-close">
-                                <a v-waiting-animation-infinite href="{{ urls.basket }}" rel="nofollow" class="btn btn-primary btn-medium btn-m-r btn-outline-primary">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                    {{ trans("Ceres::Template.singleItemBasket") }}
-                                </a>
-                                <a v-waiting-animation-infinite href="{{ urls.checkout }}" rel="nofollow" class="btn btn-primary btn-medium">
-                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                    {{ trans("Ceres::Template.singleItemCheckout") }}
-                                </a>
-                                {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
-                            </div>
-                        </div>
+                        <a v-waiting-animation-infinite href="{{ urls.basket }}" rel="nofollow" class="btn btn-outline-primary btn-medium btn-m-r">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            {{ trans("Ceres::Template.singleItemBasket") }}
+                        </a>
+                        <a v-waiting-animation-infinite href="{{ urls.checkout }}" rel="nofollow" class="btn btn-primary btn-medium">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            {{ trans("Ceres::Template.singleItemCheckout") }}
+                        </a>
                     </div>
                     <!-- ./MODAL FOOTER -->
 

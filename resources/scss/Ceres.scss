@@ -1,3 +1,4 @@
+@import "bootstrap/scss/functions";
 @import "variables";
 // ==========================================================================
 // External Libs
@@ -37,12 +38,11 @@
 @import "ceres/components/featured-sale-new";
 @import "ceres/components/live-shopping";
 @import "ceres/components/notifications";
-@import "ceres/components/popper";
+@import "ceres/components/popover";
 
 // Forms
 @import "ceres/forms/input-groups";
 @import "ceres/forms/inputs";
-@import "ceres/forms/select";
 
 // Page Design / Global components
 @import "ceres/views/PageDesign/header";
@@ -89,3 +89,6 @@
 
 // Widgets
 @import "ceres/widgets/widgets";
+
+// Bootstrap Compatibility 
+@import "ceres/common/visibility";

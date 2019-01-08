@@ -101,9 +101,14 @@
 
             li
             {
-                width: 10px;
-                height: 10px;
-                margin: 1px;
+                /* Bootstrap override */
+                box-sizing: border-box;
+                border-radius: .8rem;
+                width: .8rem;
+                height: .8rem;
+                margin: 2px;
+                border: 1px solid #fff;
+                background-color: transparent;
             }
         }
 
@@ -161,10 +166,9 @@ html.ie {
     }
 }
 
-@include widget-carousel-variant('.widget-primary', $brand-primary);
-@include widget-carousel-variant('.widget-secondary', $brand-secondary);
-@include widget-carousel-variant('.widget-success', $brand-success);
-@include widget-carousel-variant('.widget-info', $brand-info);
-@include widget-carousel-variant('.widget-warning', $brand-warning);
-@include widget-carousel-variant('.widget-danger', $brand-danger);
-@include widget-carousel-variant('.widget-inverse', $brand-inverse);
+@include widget-carousel-variant('.widget-primary', $primary);
+@include widget-carousel-variant('.widget-secondary', $secondary);
+@include widget-carousel-variant('.widget-success', $success);
+@include widget-carousel-variant('.widget-info', $info);
+@include widget-carousel-variant('.widget-warning', $warning);
+@include widget-carousel-variant('.widget-danger', $danger);
