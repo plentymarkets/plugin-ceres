@@ -7,23 +7,23 @@
 {% set basketTotalsCurrency = totals.currency %}
 
 <div class="row">
-    <div class="col-md-6 m-b-2">
+    <div class="col-md-6 mb-4">
         <div class="card small">
             <!-- ORDER -->
             <div class="card-header">
                 <h5>{{ trans("Ceres::Template.orderConfirmationOrderId") }} {{ orderData.order.id }}</h5>
             </div>
 
-            <div class="card-block">
+            <div class="card-body">
                 <div class="details">
                     <div class="row">
-                        <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationDate") }}</strong>
-                        <span class="col-xs-6 col-sm-7">{{ orderData.order.createdAt | formatDateTime | date(trans("Ceres::Template.devDateTimeFormat")) }}</span>
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationDate") }}</strong>
+                        <span class="col-6 col-sm-7">{{ orderData.order.createdAt | formatDateTime | date(trans("Ceres::Template.devDateTimeFormat")) }}</span>
                     </div>
 
                     <div class="row">
-                        <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationStatus") }}</strong>
-                        <span class="col-xs-6 col-sm-7">{{ orderData.order.statusName }}</span>
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationStatus") }}</strong>
+                        <span class="col-6 col-sm-7">{{ orderData.order.statusName }}</span>
                     </div>
                 </div>
 
@@ -31,8 +31,8 @@
 
                 <div>
                     <div class="row">
-                        <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
-                        <span class="col-xs-6 col-sm-7">
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
+                        <span class="col-6 col-sm-7">
                             <div>{{ orderData.order.billingAddress.name1 }}</div>
                             <div>{{ orderData.order.billingAddress.name2 }} {{ orderData.order.billingAddress.name3 }}</div>
                             <div>{{ orderData.order.billingAddress.name4 }}</div>
@@ -42,9 +42,9 @@
                         </span>
                     </div>
 
-                    <div class="row m-t-1">
-                        <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationShippingAddress") }}</strong>
-                        <span class="col-xs-6 col-sm-7">
+                    <div class="row mt-3">
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationShippingAddress") }}</strong>
+                        <span class="col-6 col-sm-7">
                             {% if orderData.order.billingAddress.id == orderData.order.deliveryAddress.id %}
                                 <span>
                                     {{ trans("Ceres::Template.orderConfirmationSameAsInvoice") }}
@@ -74,16 +74,16 @@
 
                 <div>
                     <div class="row">
-                        <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationPaymentMethod") }}</strong>
-                        <span class="col-xs-6 col-sm-7" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</span>
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationPaymentMethod") }}</strong>
+                        <span class="col-6 col-sm-7" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</span>
                     </div>
                     <div class="row">
-                        <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationPaymentStatus") }}</strong>
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationPaymentStatus") }}</strong>
                         {% set paymentMethodId = -1 %}
                         {% for propertyKey in orderData.order.properties %}
                             {% if orderData.order.properties[loop.index0].typeId == 4 %}
                                 {% set paymentStatus = entry.order.properties[loop.index0].value %}
-                                <span class="col-xs-6 col-sm-7" id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderConfirmationPaymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
+                                <span class="col-6 col-sm-7" id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderConfirmationPaymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
                             {% elseif orderData.order.properties[loop.index0].typeId == 3 %}
                                 {% set paymentMethodId = orderData.order.properties[loop.index0].value %}
                             {% endif %}
@@ -111,8 +111,8 @@
 
                 <div>
                     <div class="row">
-                        <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationShippingProfile") }}</strong>
-                        <span class="col-xs-6 col-sm-7">{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</span>
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationShippingProfile") }}</strong>
+                        <span class="col-6 col-sm-7">{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</span>
                     </div>
                     
                     {% set shippingDate = "" %}
@@ -124,8 +124,8 @@
 
                     {% if shippingDate %}
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationEstimatedShippingDate") }}</strong>
-                            <span class="col-xs-6 col-sm-7">{{ shippingDate | date(trans("Ceres::Template.devDateFormat")) }}</span>
+                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationEstimatedShippingDate") }}</strong>
+                            <span class="col-6 col-sm-7">{{ shippingDate | date(trans("Ceres::Template.devDateFormat")) }}</span>
                         </div>
                     {% endif %}
 
@@ -160,7 +160,7 @@
                             </a>
 
                             {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
-                                <div class="m-b-1 item-bundle">
+                                <div class="mb-3 item-bundle">
                                     {% for bundleComponent in item.bundleComponents %}
                                         <div>
                                             <span class="text-muted">{{ bundleComponent.quantity }} x</span>
@@ -195,23 +195,23 @@
                             {% endif %}
 
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
-                                <span class="col-xs-6 col-sm-9">{{ (itemPrice + rebatedAmount) | formatMonetary( item.amounts[0].currency ) }}</span>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
+                                <span class="col-6 col-sm-9 col-md-7">{{ (itemPrice + rebatedAmount) | formatMonetary( item.amounts[0].currency ) }}</span>
                             </div>
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationPeace") }}</strong>
-                                <span class="col-xs-6 col-sm-9">{{ item.quantity }}</span>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPeace") }}</strong>
+                                <span class="col-6 col-sm-9 col-md-7">{{ item.quantity }}</span>
                             </div>
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
-                                <strong class="col-xs-6 col-sm-9">{{ (item.quantity * (itemPrice + rebatedAmount)) | formatMonetary( item.amounts[0].currency ) }}</strong>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
+                                <strong class="col-6 col-sm-9 col-md-7">{{ (item.quantity * (itemPrice + rebatedAmount)) | formatMonetary( item.amounts[0].currency ) }}</strong>
                             </div>
                             {% if item.orderProperties %}
                                 {% for property in item.orderProperties %}
                                     <div class="row">
-                                        <strong class="col-xs-6 col-sm-3 item-word-break">{{ property.name }}</strong>
+                                        <strong class="col-6 col-sm-3 item-word-break">{{ property.name }}</strong>
                                         {% if property.value matches '{^[0-9a-f]{8}\/[0-9a-f]{8}\/}' %}
-                                            <span class="col-xs-6 col-sm-9 item-word-break">
+                                            <span class="col-6 col-sm-9 item-word-break">
                                                 {% set splitPath = property.value |split('/') %}
                                                 {% set filename = '' %}
                                                 {% set path = '' %}
@@ -233,7 +233,7 @@
                                                 </a>
                                             </span>
                                         {% else %}
-                                            <span class="col-xs-6 col-sm-9 item-word-break">{{ property.value }}</span>
+                                            <span class="col-6 col-sm-9 item-word-break">{{ property.value }}</span>
                                         {% endif %}
                                     </div>
                                 {% endfor %}

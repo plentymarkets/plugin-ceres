@@ -9,7 +9,7 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-12 col-md-12">
+                <div class="col-12 col-md-12">
                     <div class="row">
                         <div class="col-md-2">
                             <strong>{{ trans("Ceres::Template.returnHistoryReturnId") }}: </strong>
@@ -36,7 +36,7 @@
 
             {# show initial #}
             <div class="row">
-                <div class="col-md-6 m-t-1 order-return-history-item" v-for="orderItem in itemsToRender">
+                <div class="col-md-6 mt-3 order-return-history-item" v-for="orderItem in itemsToRender">
                     <div class="col-md-3">
                         <div class="order-return-history-image-container">
                             <a :href="returnOrder.itemURLs[orderItem.itemVariationId]">

@@ -22,9 +22,7 @@ Vue.component("add-item-to-basket-overlay", {
     {
         return {
             currency: "",
-            price: 0,
-            timeToClose: 0,
-            timerVar: null
+            price: 0
         };
     },
 
@@ -87,9 +85,10 @@ Vue.component("add-item-to-basket-overlay", {
             {
                 this.setPriceFromData();
 
-                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-
-                this.startCounter();
+                ModalService
+                    .findModal(document.getElementById("add-item-to-basket-overlay"))
+                    .setTimeout(this.defaultTimeToClose * 1000)
+                    .show();
             }
             else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0)
             {
@@ -119,36 +118,6 @@ Vue.component("add-item-to-basket-overlay", {
 
                 this.price = this.$options.filters.specialOffer(graduatedPrice, this.latestBasketEntry.item.prices, "price", "value") + propertySurcharge;
             }
-        },
-
-        closeOverlay()
-        {
-            if (this.timerVar)
-            {
-                clearInterval(this.timerVar);
-            }
-        },
-
-        startCounter()
-        {
-            if (this.timerVar)
-            {
-                clearInterval(this.timerVar);
-            }
-
-            this.timeToClose = this.defaultTimeToClose;
-
-            this.timerVar = setInterval(() =>
-            {
-                this.timeToClose -= 1;
-
-                if (this.timeToClose === 0)
-                {
-                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
-
-                    clearInterval(this.timerVar);
-                }
-            }, 1000);
         },
 
         orderParamValue(propertyId)

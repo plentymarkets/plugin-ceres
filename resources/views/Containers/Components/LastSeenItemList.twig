@@ -2,25 +2,27 @@
 {{ component( "Ceres::PageDesign.Components.Carousel" ) }}
 
 <script type="x/template" id="vue-last-seen-item-list">
-    <div v-if="items.length">
-        <div class="col-xs-12">
+    <div class="row" v-if="items.length">
+        <div class="col-12">
             <slot name="heading"></slot>
         </div>
 
-        <carousel :items-per-page="itemsPerPage">
-            <category-item
-                slot="items"
-                v-for="item in items"
-                :key="item.id"
-                :item-data="item.data"
-                :decimal-count="{{ ceresConfig.item.storeSpecial }}">
-                <template slot="BeforePrices">
-                    <div v-html="getContainerContentById(item.id, 'beforePrices')"></div>
-                </template>
-                <template slot="AfterPrices">
-                    <div v-html="getContainerContentById(item.id, 'afterPrices')"></div>
-                </template>
-            </category-item>
-        </carousel>
+        <div class="col-12">
+            <carousel :items-per-page="itemsPerPage">
+                <category-item
+                    slot="items"
+                    v-for="item in items"
+                    :key="item.id"
+                    :item-data="item.data"
+                    :decimal-count="{{ ceresConfig.item.storeSpecial }}">
+                    <template slot="BeforePrices">
+                        <div v-html="getContainerContentById(item.id, 'beforePrices')"></div>
+                    </template>
+                    <template slot="AfterPrices">
+                        <div v-html="getContainerContentById(item.id, 'afterPrices')"></div>
+                    </template>
+                </category-item>
+            </carousel>
+        </div>
     </div>
 </script>

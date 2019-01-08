@@ -17356,9 +17356,7 @@ Vue.component("add-item-to-basket-overlay", {
     data: function data() {
         return {
             currency: "",
-            price: 0,
-            timeToClose: 0,
-            timerVar: null
+            price: 0
         };
     },
 
@@ -17409,9 +17407,7 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.basketAddInformation === "overlay") {
                 this.setPriceFromData();
 
-                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-
-                this.startCounter();
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
             } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
                 setTimeout(function () {
                     var vueApp = document.querySelector("#vue-app");
@@ -17434,30 +17430,6 @@ Vue.component("add-item-to-basket-overlay", {
 
                 this.price = this.$options.filters.specialOffer(graduatedPrice, this.latestBasketEntry.item.prices, "price", "value") + propertySurcharge;
             }
-        },
-        closeOverlay: function closeOverlay() {
-            if (this.timerVar) {
-                clearInterval(this.timerVar);
-            }
-        },
-        startCounter: function startCounter() {
-            var _this = this;
-
-            if (this.timerVar) {
-                clearInterval(this.timerVar);
-            }
-
-            this.timeToClose = this.defaultTimeToClose;
-
-            this.timerVar = setInterval(function () {
-                _this.timeToClose -= 1;
-
-                if (_this.timeToClose === 0) {
-                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
-
-                    clearInterval(_this.timerVar);
-                }
-            }, 1000);
         },
         orderParamValue: function orderParamValue(propertyId) {
             var orderParams = this.latestBasketEntry.orderParams;
@@ -18830,7 +18802,7 @@ Vue.component("container-item-list", {
                 itemsPerPage = 4;
             }
 
-            return ["col-xs-12", itemsPerPage === 1 ? "col-sm-12" : "col-sm-6", "col-md-" + 12 / itemsPerPage];
+            return ["col-12", itemsPerPage === 1 ? "col-sm-12" : "col-sm-6", "col-md-" + 12 / itemsPerPage];
         }
     },
 
@@ -19437,11 +19409,7 @@ Vue.component("create-update-address", {
 
     data: function data() {
         return {
-            waiting: false,
-            addressFormNames: {
-                1: "#billing_address_form",
-                2: "#delivery_address_form"
-            }
+            waiting: false
         };
     },
 
@@ -19464,7 +19432,7 @@ Vue.component("create-update-address", {
         validate: function validate() {
             var _this = this;
 
-            _ValidationService2.default.validate($(this.addressFormNames[this.addressType])).done(function () {
+            _ValidationService2.default.validate(this.$refs.addressForm).done(function () {
                 _this.saveAddress();
             }).fail(function (invalidFields) {
                 var fieldNames = [];
@@ -19562,7 +19530,7 @@ Vue.component("create-update-address", {
             });
         },
         _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-            _ValidationService2.default.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
+            _ValidationService2.default.markFailedValidationFields(this.$refs.addressForm, validationErrors);
 
             var errorMessage = "";
 
@@ -20571,7 +20539,7 @@ Vue.component("forgot-password-modal", {
         var _this = this;
 
         this.$nextTick(function () {
-            $("#resetPwd").on("hidden.bs.modal", function () {
+            $(_this.$refs.pwdModal).on("hidden.bs.modal", function () {
                 _this.username = "";
             });
 
@@ -20596,7 +20564,7 @@ Vue.component("forgot-password-modal", {
         validateResetPwd: function validateResetPwd() {
             var _this2 = this;
 
-            _ValidationService2.default.validate($("#reset-pwd-form-" + this._uid)).done(function () {
+            _ValidationService2.default.validate(this.$refs.pwdModal).done(function () {
                 _this2.sendResetPwd();
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
@@ -20613,7 +20581,7 @@ Vue.component("forgot-password-modal", {
             this.isDisabled = true;
 
             ApiService.post("/rest/io/customer/password_reset", { email: this.username }).done(function () {
-                ModalService.findModal(document.getElementById("resetPwd")).hide();
+                ModalService.findModal(_this3.$refs.pwdModal).hide();
                 _this3.isDisabled = false;
 
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.loginSendEmailOk")).closeAfter(5000);
@@ -20626,11 +20594,12 @@ Vue.component("forgot-password-modal", {
         cancelResetPwd: function cancelResetPwd() {
             this.resetError();
 
-            ModalService.findModal(document.getElementById("resetPwd")).hide();
-            ModalService.findModal(document.getElementById("login")).show();
+            ModalService.findModal(this.$refs.pwdModal).hide().then(function () {
+                ModalService.findModal(document.getElementById("login")).show();
+            });
         },
         resetError: function resetError() {
-            _ValidationService2.default.unmarkAllFields($("#reset-pwd-form-" + this._uid));
+            _ValidationService2.default.unmarkAllFields(this.$refs.pwdModal);
         }
     }
 });
@@ -20830,10 +20799,12 @@ Vue.component("login", {
             this.resetError();
 
             if (this.modalElement) {
-                ModalService.findModal(document.getElementById(this.modalElement)).hide();
+                ModalService.findModal(document.getElementById(this.modalElement)).hide().then(function () {
+                    ModalService.findModal(document.getElementById("resetPwd")).show();
+                });
+            } else {
+                ModalService.findModal(document.getElementById("resetPwd")).show();
             }
-
-            ModalService.findModal(document.getElementById("resetPwd")).show();
         },
         resetError: function resetError() {
             this.loginFields.removeClass("has-login-error");
@@ -22800,10 +22771,10 @@ Vue.component("item-store-special", {
             tagClass: "",
             label: "",
             tagClasses: {
-                1: "tag-offer bg-danger",
-                2: "tag-new bg-primary",
-                3: "tag-top bg-success",
-                default: "bg-success"
+                1: "badge-offer badge-danger",
+                2: "badge-new badge-primary",
+                3: "badge-top badge-success",
+                default: "badge-success"
             },
             labels: {
                 1: _TranslationService2.default.translate("Ceres::Template.storeSpecialOffer"),
@@ -22830,6 +22801,10 @@ Vue.component("item-store-special", {
         getLabel: function getLabel() {
             if (((0, _utils.isNullOrUndefined)(this.storeSpecial) || this.storeSpecial.id === 1) && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
                 return this.getPercentageSale();
+            }
+
+            if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+                return "";
             }
 
             return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
@@ -24444,7 +24419,7 @@ Vue.component("carousel", {
                 itemsPerPage = 4;
             }
 
-            return ["col-xs-12", itemsPerPage === 1 ? "col-sm-12" : "col-sm-6", "col-md-" + 12 / itemsPerPage];
+            return ["col-12", itemsPerPage === 1 ? "col-sm-12" : "col-sm-6", "col-md-" + 12 / itemsPerPage];
         }
     },
 
@@ -25237,23 +25212,20 @@ Vue.directive("scroll-to-top", {
 },{}],218:[function(require,module,exports){
 "use strict";
 
-var checkElement = function checkElement(el, breakpoint) {
-    var isSticky = el.dataset.isSticky === "true";
-    var matchesBreakpoint = window.matchMedia("(min-width: " + breakpoint + "px)").matches;
+var stickInParent = function stickInParent(el, minWidth, isActive) {
+    var currentActiveState = el.dataset.isSticky === "true";
+    var isInSize = window.matchMedia("(min-width: " + minWidth + "px)").matches;
 
-    if (matchesBreakpoint && !isSticky) {
+    var activeState = !(isActive === false) && isInSize;
+
+    if (activeState && !currentActiveState) {
         var $element = $(el);
         var headHeight = $(".top-bar").height();
 
-        el.dataset.isSticky = true;
-        $element.stick_in_parent({ offset_top: headHeight + 10 });
-
-        $element.on("sticky_kit:bottom", function () {
-            $element.parent().css("position", "static");
-        }).on("sticky_kit:unbottom", function () {
-            $element.parent().css("position", "relative");
-        });
-    } else if (!matchesBreakpoint && isSticky) {
+        if ($element.stick_in_parent({ offset_top: headHeight + 10 })) {
+            el.dataset.isSticky = true;
+        }
+    } else if (!activeState && currentActiveState) {
         el.dataset.isSticky = false;
         $(el).trigger("sticky_kit:detach");
     }
@@ -25261,33 +25233,29 @@ var checkElement = function checkElement(el, breakpoint) {
 
 Vue.directive("stick-in-parent", {
     bind: function bind(el, binding) {
-        var minSize = binding.value || 768;
-
         window.addEventListener("resize", function () {
-            checkElement(el, minSize);
+            stickInParent(el, parseInt(binding.arg) || 768);
         });
 
         setTimeout(function () {
-            checkElement(el, minSize);
+            stickInParent(el, parseInt(binding.arg) || 768, binding.value);
         }, 0);
+    },
+    update: function update(el, binding) {
+        setTimeout(function () {
+            stickInParent(el, parseInt(binding.arg) || 768, binding.value);
+        }, 0);
+    },
+    unbind: function unbind(el) {
+        stickInParent(el, 0, false);
     }
 });
 
 },{}],219:[function(require,module,exports){
 "use strict";
 
-var _utils = require("../../helper/utils");
-
-var initTooltip = function initTooltip(el) {
-    if (window.matchMedia("(min-width: 768px)").matches) {
-        setTimeout(function () {
-            $(el).tooltip({
-                trigger: "hover",
-                // eslint-disable-next-line
-                template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-            });
-        }, 1);
-    }
+var toggleTooltip = function toggleTooltip(el, disable) {
+    $(el).tooltip(disable ? "disable" : "enable");
 };
 
 Vue.directive("tooltip", {
@@ -25295,34 +25263,19 @@ Vue.directive("tooltip", {
         $(el).tooltip("dispose");
     },
     update: function update(el, binding) {
-        if (typeof binding.value === "undefined" || binding.value) {
-            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title")) && !(0, _utils.isNullOrUndefined)(el.getAttribute("data-title"))) {
-                el.setAttribute("title", el.getAttribute("data-title"));
-                el.removeAttribute("data-title");
-            }
-            initTooltip(el);
-        } else {
-            setTimeout(function () {
-                $(el).tooltip("dispose");
-
-                if (!(0, _utils.isNullOrUndefined)(el.getAttribute("title"))) {
-                    el.setAttribute("data-title", el.getAttribute("title"));
-                    el.removeAttribute("title");
-                }
-            }, 1);
-        }
+        toggleTooltip(el, binding.value === false);
     },
     bind: function bind(el, binding) {
-        if (typeof binding.value === "undefined" || binding.value) {
-            initTooltip(el);
-        } else {
-            el.setAttribute("data-title", el.getAttribute("title"));
-            el.removeAttribute("title");
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            setTimeout(function () {
+                $(el).tooltip();
+                toggleTooltip(el, binding.value === false);
+            }, 1);
         }
     }
 });
 
-},{"../../helper/utils":246}],220:[function(require,module,exports){
+},{}],220:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26375,6 +26328,21 @@ var AutoFocusService = require("services/AutoFocusService");
 // Frontend end scripts
 // eslint-disable-next-line
 var init = function ($, window, document) {
+    var headerCollapses = [];
+
+    function HeaderCollapse(selector) {
+        headerCollapses.push(selector);
+        $(document).ready(function () {
+            $(selector).on("show.bs.collapse", function () {
+                headerCollapses.forEach(function (element) {
+                    if (!$(element).is(selector)) {
+                        $(element).collapse("hide");
+                    }
+                });
+            });
+        });
+    }
+
     function CeresMain() {
         var browser = browserDetect.detect();
 
@@ -26402,6 +26370,10 @@ var init = function ($, window, document) {
 
         // init bootstrap tooltips
         $("[data-toggle=\"tooltip\"]").tooltip();
+
+        HeaderCollapse("#countrySettings");
+        HeaderCollapse("#currencySelect");
+        HeaderCollapse("#searchBox");
 
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function () {
@@ -26439,17 +26411,11 @@ var init = function ($, window, document) {
                 }
             }
 
-            if (evt.target.id != "countrySettings" && $(evt.target).parents("#countrySettings").length <= 0 && $("#countrySettings").attr("aria-expanded") == "true") {
-                $("#countrySettings").collapse("hide");
-            }
-
-            if (evt.target.id != "searchBox" && $(evt.target).parents("#searchBox").length <= 0 && $("#searchBox").attr("aria-expanded") == "true") {
-                $("#searchBox").collapse("hide");
-            }
-
-            if (evt.target.id != "currencySelect" && $(evt.target).parents("#currencySelect").length <= 0 && $("#currencySelect").attr("aria-expanded") == "true") {
-                $("#currencySelect").collapse("hide");
-            }
+            headerCollapses.forEach(function (element) {
+                if (evt.target !== element && $(evt.target).parents(element).length <= 0) {
+                    $(element).collapse("hide");
+                }
+            });
         });
 
         $toggleListView.on("click", function (evt) {
@@ -26952,18 +26918,26 @@ module.exports = function ($) {
         };
 
         function show() {
-            $bsModal.modal("show");
+            return new Promise(function (resolve, reject) {
+                $bsModal.modal("show");
 
-            if ($bsModal.timeout > 0) {
-                startTimeout();
-            }
+                if ($bsModal.timeout > 0) {
+                    startTimeout();
+                }
 
-            return self;
+                $bsModal.one("shown.bs.modal", function () {
+                    resolve(self);
+                });
+            });
         }
 
         function hide() {
-            $bsModal.modal("hide");
-            return self;
+            return new Promise(function (resolve, reject) {
+                $bsModal.modal("hide");
+                $bsModal.one("hidden.bs.modal", function () {
+                    resolve(self);
+                });
+            });
         }
 
         function getModalContainer() {
@@ -28391,17 +28365,12 @@ var actions = {
 
         _ApiService2.default.get("/rest/io/basket").done(function (basket) {
             commit("setBasket", basket);
-            commit("setIsBasketInitiallyLoaded");
 
             _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
                 commit("setBasketItems", basketItems);
                 commit("setIsBasketInitiallyLoaded");
             }).fail(function (error) {
                 NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
-            }).always(function (data) {
-                setTimeout(function () {
-                    $(document.body).trigger("sticky_kit:recalc");
-                }, 0);
             });
         }).fail(function (error) {
             NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);

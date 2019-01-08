@@ -16,24 +16,22 @@
 
         .selected-filter {
             font-size: 0.8rem;
-            padding: 0;
             margin: 0 0 0 10px;
             padding: 5px 10px;
             background-color: darken($gray-lighter2, 2%);
-            color: $brand-primary;
+            color: $primary;
             float: left;
             cursor: pointer;
             display: inline-block;
             &:hover {
-                color: $brand-danger;
+                color: $danger;
             }
 
             &.reset-all {
-                color: $white;
-                background-color: $brand-primary;
+                @include context-bg($primary);
 
                 &:hover {
-                    background-color: darken($brand-primary, 15%);
+                    background-color: darken($primary, 15%);
                 }
             }
         }
@@ -58,7 +56,9 @@
         z-index: 1050;
         width: 100%;
         margin-left: -15px;
+        padding-right: 15px;
         top: 100%;
+
         .page-content {
             background: $white;
             padding: 2em !important;
@@ -97,7 +97,6 @@
 
                     .form-check-label {
                         padding: 0.5rem 0;
-                        padding-left: 0;
                         color: $gray-dark;
                         display: block;
                         transition: all 0.1s ease;
@@ -159,7 +158,7 @@
 .sidebar-categories {
     background: $white;
     font-family: $font-family-heading;
-    height: 100%;
+
     .category-title {
         background: #efefef;
         padding: 1.2rem 2rem;

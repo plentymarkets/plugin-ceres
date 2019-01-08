@@ -2,9 +2,9 @@
 {% set prevPage = currentPage - 1 <= 1 ? null : currentPage - 1 %}
 {% set beforePrevPage = currentPage - 2 <= 1 ? null : currentPage - 2 %}
 
-<nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
+<nav class="cmp cmp-paginator row float-right text-center">
     {% if pageMax > 1 %}
-        <ul class="pagination col-xs-12 m-y-0">
+        <ul class="pagination col-12 m-y-0">
 
             <!-- FIRST PAGE LINK -->
             {% if ceresConfig.pagination.showFirstPage and pageMax > 3 and currentPage > 2 %}

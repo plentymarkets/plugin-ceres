@@ -4,7 +4,7 @@
                 <div class="col-xs-12" v-if="title">
                     <span class="h1">${ title }</span>
                 </div>
-                <div class="col-xs-12 m-t-1" v-if="subTitle">
+                <div class="col-xs-12 mt-3" v-if="subTitle">
                     <p>${ subTitle }</p>
                 </div>
             </div>
@@ -16,7 +16,7 @@
                         <input type="text" :id="'first-name-input_' + _uid" v-model="firstName">
                     </div>
                 </div>
-                <div class="col-xs-6 p-l-0" v-if="showNameInputs">
+                <div class="col-xs-6 pl-0" v-if="showNameInputs">
                     <div class="input-unit">
                         <label :for="'last-name-input_' + _uid">{{ trans("Ceres::Template.newsletterLastName") }}</label>
                         <input type="text" :id="'last-name-input_' + _uid" v-model="lastName">
@@ -33,22 +33,22 @@
                 </div>
 
                 <div class="col-xs-12" v-if="showPrivacyPolicyCheckbox">
-                    <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label" data-validate>
+                    <div class="form-check small" data-validate>
                         <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + _uid" name="privacy-policy-accept" v-model="privacyPolicyValue">
-                        <small>
+                        <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label">
                             {% autoescape false %}
-                                {% set policyContent %}<!--
-                                    --><a href="{{ urls.privacyPolicy }}" target="_blank">
+                                {% set policyContent %}
+                                    <a href="{{ urls.privacyPolicy }}" target="_blank">
                                         <span class="btn-link">{{ trans("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
-                                    </a><!--
-                                -->{% endset %}
+                                    </a>
+                                {% endset %}
                                 {{ trans('Ceres::Template.newsletterAcceptPrivacyPolicy', {"policy": policyContent} ) }}
                             {% endautoescape %}
-                        </small>
-                    </label>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="col-xs-12 m-t-1">
+                <div class="col-xs-12 mt-3">
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-block" :class="'btn-' + appearance" @click="validateData" :disabled="isDisabled">
                                 <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
