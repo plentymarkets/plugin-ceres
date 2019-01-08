@@ -20897,7 +20897,7 @@ Vue.component("forgot-password-modal", {
         var _this = this;
 
         this.$nextTick(function () {
-            $("#resetPwd").on("hidden.bs.modal", function () {
+            $(_this.$refs.pwdModal).on("hidden.bs.modal", function () {
                 _this.username = "";
             });
 
@@ -20922,7 +20922,7 @@ Vue.component("forgot-password-modal", {
         validateResetPwd: function validateResetPwd() {
             var _this2 = this;
 
-            _ValidationService2.default.validate($("#reset-pwd-form-" + this._uid)).done(function () {
+            _ValidationService2.default.validate(this.$refs.pwdModal).done(function () {
                 _this2.sendResetPwd();
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
@@ -20939,7 +20939,7 @@ Vue.component("forgot-password-modal", {
             this.isDisabled = true;
 
             ApiService.post("/rest/io/customer/password_reset", { email: this.username }).done(function () {
-                ModalService.findModal(document.getElementById("resetPwd")).hide();
+                ModalService.findModal(_this3.$refs.pwdModal).hide();
                 _this3.isDisabled = false;
 
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.loginSendEmailOk")).closeAfter(5000);
@@ -20952,12 +20952,12 @@ Vue.component("forgot-password-modal", {
         cancelResetPwd: function cancelResetPwd() {
             this.resetError();
 
-            ModalService.findModal(document.getElementById("resetPwd")).hide().then(function () {
+            ModalService.findModal(this.$refs.pwdModal).hide().then(function () {
                 ModalService.findModal(document.getElementById("login")).show();
             });
         },
         resetError: function resetError() {
-            _ValidationService2.default.unmarkAllFields($("#reset-pwd-form-" + this._uid));
+            _ValidationService2.default.unmarkAllFields(this.$refs.pwdModal);
         }
     }
 });
@@ -25612,7 +25612,7 @@ Vue.directive("stick-in-parent", {
 },{}],219:[function(require,module,exports){
 "use strict";
 
-var checkTooltip = function checkTooltip(el, disable) {
+var toggleTooltip = function toggleTooltip(el, disable) {
     $(el).tooltip(disable ? "disable" : "enable");
 };
 
@@ -25621,13 +25621,13 @@ Vue.directive("tooltip", {
         $(el).tooltip("dispose");
     },
     update: function update(el, binding) {
-        checkTooltip(el, binding.value === false);
+        toggleTooltip(el, binding.value === false);
     },
     bind: function bind(el, binding) {
         if (window.matchMedia("(min-width: 768px)").matches) {
             setTimeout(function () {
                 $(el).tooltip();
-                checkTooltip(el, binding.value === false);
+                toggleTooltip(el, binding.value === false);
             }, 1);
         }
     }
@@ -26774,24 +26774,6 @@ var init = function ($, window, document) {
                     $(element).collapse("hide");
                 }
             });
-
-            /*
-            if ((evt.target.id != "countrySettings") &&
-                ($(evt.target).parents("#countrySettings").length <= 0))
-            {
-                $("#countrySettings").collapse("hide");
-            }
-             if ((evt.target.id != "searchBox") &&
-                ($(evt.target).parents("#searchBox").length <= 0))
-            {
-                $("#searchBox").collapse("hide");
-            }
-             if ((evt.target.id != "currencySelect") &&
-                ($(evt.target).parents("#currencySelect").length <= 0))
-            {
-                $("#currencySelect").collapse("hide");
-            }
-            */
         });
 
         $toggleListView.on("click", function (evt) {
