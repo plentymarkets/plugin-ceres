@@ -1,3 +1,5 @@
+import {isDefined}from "../../helper/utils";
+
 Vue.component("last-seen-item-list", {
 
     props:
@@ -34,14 +36,19 @@ Vue.component("last-seen-item-list", {
     {
         getContainerContentById(variationId, containerKey)
         {
-            const container = this.containers[variationId];
+            const containersById = this.containers[variationId];
 
-            if (!!container && !!container[containerKey])
+            if (isDefined(containersById))
             {
-                return container[containerKey];
+                const container = containersById[containerKey];
+
+                if (isDefined(container))
+                {
+                    return container;
+                }
             }
 
-            return [];
+            return "";
         }
     }
 });

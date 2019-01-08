@@ -15,10 +15,10 @@
                 :item-data="item.data"
                 :decimal-count="{{ ceresConfig.item.storeSpecial }}">
                 <template slot="BeforePrices">
-                    <div v-for="container in getContainerContentById(item.id, 'beforePrices')" v-html="container"></div>
+                    <div v-html="getContainerContentById(item.id, 'beforePrices')"></div>
                 </template>
                 <template slot="AfterPrices">
-                    <div v-for="container in getContainerContentById(item.id, 'afterPrices')" v-html="container"></div>
+                    <div v-html="getContainerContentById(item.id, 'afterPrices')"></div>
                 </template>
             </category-item>
         </carousel>
