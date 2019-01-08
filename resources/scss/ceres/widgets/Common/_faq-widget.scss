@@ -1,0 +1,84 @@
+.widget.accordion {
+    .card {
+        button {
+            text-align: left;
+            padding: $card-spacer-x;
+
+            h5 {
+                line-height: inherit;
+                font-weight: bold;
+            }
+        }
+        button:hover,
+        button:focus { 
+            color: black;
+        }
+    }
+
+    &.widget-primary
+    {
+        button:hover,
+        button:focus {
+            text-decoration-color: $primary;
+        }
+        h5 {
+            color: $primary;
+        }
+    }
+
+    &.widget-secondary
+    {
+        button:hover,
+        button:focus {
+            text-decoration-color: $secondary;
+        }
+        h5 {
+            color: $secondary;
+        }
+    }
+
+    &.widget-success
+    {
+        button:hover,
+        button:focus {
+            text-decoration-color: $success;
+        }
+        h5 {
+            color: $success;
+        }
+    }
+
+    &.widget-info
+    {
+        button:hover,
+        button:focus {
+            text-decoration-color: $info;
+        }
+        h5 {
+            color: $info;
+        }
+    }
+
+    &.widget-warning
+    {
+        button:hover,
+        button:focus {
+            text-decoration-color: $warning;
+        }
+        h5 {
+            color: $warning;
+        }
+    }
+
+    &.widget-danger
+    {
+        button:hover,
+        button:focus {
+            text-decoration-color: $danger;
+        }
+        h5 {
+            color: $danger;
+        }
+    }
+}
+

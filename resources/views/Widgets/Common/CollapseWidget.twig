@@ -7,18 +7,16 @@
 {% endfor %}
 
 {% if renderContent %}
-    <div class="widget accordion" id="accordion_{{ collapseId }}">
+    <div class="widget accordion widget-{{ widget.settings.appearance.mobile | default('primary')  }}" id="accordion_{{ collapseId }}">
         {% for collapseBox in collapseBoxes %}
         <div class="card">
-          <div class="card-header" id="heading_{{ collapseId }}_{{ loop.index }}">
-            <h5 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}_{{ loop.index }}" aria-expanded="true" aria-controls="collapse_{{ collapseId }}_{{ loop.index }}">
+          <button class="card-header btn btn-link" id="heading_{{ collapseId }}_{{ loop.index }}" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}_{{ loop.index }}" aria-expanded="true" aria-controls="collapse_{{ collapseId }}_{{ loop.index }}">
+            <h5 class="h5 mb-0">
                 {{ collapseBox.headline | raw }}
-              </button>
             </h5>
-          </div>
+          </button>
 
-          <div id="collapse_{{ collapseId }}_{{ loop.index }}" class="collapse show" aria-labelledby="heading_{{ collapseId }}_{{ loop.index }}" data-parent="#accordion_{{ collapseId }}">
+          <div id="collapse_{{ collapseId }}_{{ loop.index }}" class="collapse{% if loop.index == 1%} show{% endif %}" aria-labelledby="heading_{{ collapseId }}_{{ loop.index }}" data-parent="#accordion_{{ collapseId }}">
             <div class="card-body">
               {{ collapseBox.text | raw }}
             </div>

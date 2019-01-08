@@ -24416,6 +24416,83 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   color: #fff;
 }
 
+.widget.accordion .card button, .widget.accordion .cmp-address-list .items > div:first-child button, .cmp-address-list .widget.accordion .items > div:first-child button {
+  text-align: left;
+  padding: 1.25rem;
+}
+
+.widget.accordion .card button h5, .widget.accordion .cmp-address-list .items > div:first-child button h5, .cmp-address-list .widget.accordion .items > div:first-child button h5 {
+  line-height: inherit;
+  font-weight: bold;
+}
+
+.widget.accordion .card button:hover, .widget.accordion .cmp-address-list .items > div:first-child button:hover, .cmp-address-list .widget.accordion .items > div:first-child button:hover,
+.widget.accordion .card button:focus,
+.widget.accordion .cmp-address-list .items > div:first-child button:focus,
+.cmp-address-list .widget.accordion .items > div:first-child button:focus {
+  color: black;
+}
+
+.widget.accordion.widget-primary button:hover,
+.widget.accordion.widget-primary button:focus {
+  -webkit-text-decoration-color: #008ebd;
+          text-decoration-color: #008ebd;
+}
+
+.widget.accordion.widget-primary h5 {
+  color: #008ebd;
+}
+
+.widget.accordion.widget-secondary button:hover,
+.widget.accordion.widget-secondary button:focus {
+  -webkit-text-decoration-color: #d4021d;
+          text-decoration-color: #d4021d;
+}
+
+.widget.accordion.widget-secondary h5 {
+  color: #d4021d;
+}
+
+.widget.accordion.widget-success button:hover,
+.widget.accordion.widget-success button:focus {
+  -webkit-text-decoration-color: #28a745;
+          text-decoration-color: #28a745;
+}
+
+.widget.accordion.widget-success h5 {
+  color: #28a745;
+}
+
+.widget.accordion.widget-info button:hover,
+.widget.accordion.widget-info button:focus {
+  -webkit-text-decoration-color: #17a2b8;
+          text-decoration-color: #17a2b8;
+}
+
+.widget.accordion.widget-info h5 {
+  color: #17a2b8;
+}
+
+.widget.accordion.widget-warning button:hover,
+.widget.accordion.widget-warning button:focus {
+  -webkit-text-decoration-color: #ffc107;
+          text-decoration-color: #ffc107;
+}
+
+.widget.accordion.widget-warning h5 {
+  color: #ffc107;
+}
+
+.widget.accordion.widget-danger button:hover,
+.widget.accordion.widget-danger button:focus {
+  -webkit-text-decoration-color: #dc3545;
+          text-decoration-color: #dc3545;
+}
+
+.widget.accordion.widget-danger h5 {
+  color: #dc3545;
+}
+
 .widget-legal-information a {
   color: black;
   margin-right: 10px;
