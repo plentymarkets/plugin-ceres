@@ -247,3 +247,20 @@
         margin-right: 15px;
     }
 }
+
+.single-leftside
+{
+    margin-top: 1rem;
+}
+
+@include media-breakpoint-up(md)
+{
+    .single-leftside
+    {
+        margin-top: 0;
+        position: absolute;
+        left: (7/12)*100%;
+        top: 0;
+        bottom: 0;
+    }
+}
