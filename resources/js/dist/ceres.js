@@ -25578,7 +25578,7 @@ var stickInParent = function stickInParent(el, minWidth, isActive) {
 
     if (activeState && !currentActiveState) {
         var $element = $(el);
-        var headHeight = $(".top-bar").height();
+        var headHeight = $("#page-header").height();
 
         if ($element.stick_in_parent({ offset_top: headHeight + 10 })) {
             el.dataset.isSticky = true;
