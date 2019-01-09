@@ -534,7 +534,7 @@
         "previewImageURL": "/images/widgets/link-list.svg",
         "type": "default",
         "position": 900,
-        "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
+        "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
         "settings": {
             "title": {
                 "type": "text",

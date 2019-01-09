@@ -19695,35 +19695,28 @@ html.ie {
     }
 }
 
-.widget-link-list {
-    .widget-inner {
-        padding: 15px 15px 0 15px;
-
-        h2 {
-            font-weight: 700;
-        }
-
-        a {
-            color: $footer-color;
-        }
-    }
-}
-.widget-list
+.widget-list,
+.widget-link-list
 {
     .widget-inner
     {
-        padding: 1rem 15px;
-
-        .list-container {
+        .list-container,
+        .list-centered {
             width: -webkit-fit-content;
             width: -moz-fit-content;
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: 0;
-            padding: 0;
-            list-style: none;
             text-align: center;
+        }
+
+        ul
+        {
+            margin-bottom: 0;
+        }
+
+        a {
+            color: $footer-color;
         }
     }
 }
@@ -19977,6 +19970,11 @@ html.ie {
                 -webkit-box-sizing: content-box;
                         box-sizing: content-box;
                 margin-bottom: 0;
+
+                .widget-inner
+                {
+                    padding: 1rem;
+                }
             }
 
             &:first-child {

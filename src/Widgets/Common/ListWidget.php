@@ -28,7 +28,8 @@ class ListWidget extends BaseWidget
         }
 
         return [
-            "listEntries" => $listEntries
+            "listEntries"   => $listEntries,
+            "isLinkList"    => false
         ];
     }
 }

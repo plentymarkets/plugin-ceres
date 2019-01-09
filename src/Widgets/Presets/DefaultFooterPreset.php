@@ -115,7 +115,7 @@ class DefaultFooterPreset implements ContentPreset
         for ($i = 1; $i <= $numberOfCols && $i <= 3; $i++)
         {
             $columnTitleTranslation = $this->translator->trans("Ceres::Template.footerColumnTitle" . $i);
-            $linkListPreset = $linkListGridPreset->createChild($this->gridDropzoneNames[$i], "Ceres::ListWidget")
+            $linkListPreset = $linkListGridPreset->createChild($this->gridDropzoneNames[$i], "Ceres::LinkListWidget")
                 ->withSetting("title", $columnTitleTranslation)
                 ->withSetting("icon", "none");
 

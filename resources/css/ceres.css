@@ -24422,19 +24422,24 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 }
 
 .widget-list .widget-inner .list-container,
-.widget-list .widget-inner .list-centered {
+.widget-list .widget-inner .list-centered,
+.widget-link-list .widget-inner .list-container,
+.widget-link-list .widget-inner .list-centered {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0;
-  padding: 0;
-  list-style: none;
   text-align: center;
 }
 
-.widget-list .widget-inner a {
+.widget-list .widget-inner ul,
+.widget-link-list .widget-inner ul {
+  margin-bottom: 0;
+}
+
+.widget-list .widget-inner a,
+.widget-link-list .widget-inner a {
   color: #4D4F4D;
 }
 
