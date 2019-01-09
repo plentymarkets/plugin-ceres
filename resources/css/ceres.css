@@ -24416,6 +24416,14 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   color: #fff;
 }
 
+.widget.accordion .card:first-of-type, .widget.accordion .cmp-address-list .items > div:first-of-type:first-child, .cmp-address-list .widget.accordion .items > div:first-of-type:first-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.widget.accordion .card:nth-of-type(2), .widget.accordion .cmp-address-list .items > div:nth-of-type(2):first-child, .cmp-address-list .widget.accordion .items > div:nth-of-type(2):first-child {
+  border-top: 0;
+}
+
 .widget.accordion .card button, .widget.accordion .cmp-address-list .items > div:first-child button, .cmp-address-list .widget.accordion .items > div:first-child button {
   text-align: left;
   padding: 1.25rem;
@@ -24439,6 +24447,10 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 .widget.accordion .cmp-address-list .items > div:first-child button:focus,
 .cmp-address-list .widget.accordion .items > div:first-child button:focus {
   color: black;
+}
+
+.widget.accordion div .card-body p {
+  margin: 0;
 }
 
 .widget.accordion.widget-primary button:hover,

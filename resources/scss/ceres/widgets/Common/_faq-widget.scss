@@ -1,5 +1,12 @@
 .widget.accordion {
     .card {
+        &:first-of-type {
+            border-bottom: $card-border-width solid $card-border-color;;
+        }
+        &:nth-of-type(2) {
+            border-top: 0;
+        }
+
         button {
             text-align: left;
             padding: $card-spacer-x;
@@ -21,6 +28,10 @@
         button:focus { 
             color: black;
         }
+    }
+
+    div .card-body p {
+        margin: 0;
     }
 
     &.widget-primary
