@@ -106,19 +106,19 @@
         {% if enableCurrencySelect == "true" %}
             <div id="currencySelect" class="cmp cmp-currency-select collapse">
                 <div class="container-max">
-                    <div class="currency-select-inner row">
+                    <div class="row py-3">
 
                         <div class="currency-list col-12">
                             <div class="list-title">
                                 <strong>{{ trans("Ceres::Template.headerCurrency") }}</strong>
                                 <hr>
                             </div>
-                            <ul>
+                            <ul class="text-center text-sm-left">
                                 {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' or currency.name == services.checkout.getCurrencyData().name %}
                                     <li{% if currency.name == services.checkout.getCurrencyData().name %} class="active"{% endif %}>
                                         <a href="{{ queryString({"currency": currency.name}) }}" rel="nofollow">
                                             {% if currencyFormatSelect == 'all' %}
-                                                {{ currency.name }} ({{ currency.symbol }})
+                                                {{ currency.name }} <br class="d-block d-sm-none" />({{ currency.symbol }})
                                             {% else %}
                                                 {{ currency[currencyFormatSelect] }}
                                             {% endif %}
@@ -136,10 +136,10 @@
                 country-flag-prefix="flag-icon-"
                 :shipping-countries="{{ services.country.getActiveCountriesList() | filterFields(['id','currLangName', 'isoCode2', 'states.id', 'states.name']) | json_encode }}"
                 :shipping-country-id="{{ services.checkout.getShippingCountryId }}">
-            <div id="countrySettings" class="row cmp cmp-country-settings no-margin collapse">
+            <div id="countrySettings" class="cmp cmp-country-settings collapse">
                 <div class="container-max">
-                    <div class="row no-padding">
-                        <div class="country-settings-inner languages col-lg-6">
+                    <div class="row py-3">
+                        <div class="col-12 col-lg-6">
 
                             <div class="language-settings">
                                 <div class="list-title">
@@ -161,7 +161,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="country-settings-inner countries col-lg-6">
+                        <div class="col-12 col-lg-6">
                             <div class="shipping-settings">
                                 <div class="list-title">
                                     <strong>{{ trans("Ceres::Template.headerSelectShippingCountry") }}</strong>

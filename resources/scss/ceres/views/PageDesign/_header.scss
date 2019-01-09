@@ -499,15 +499,8 @@
 
 }
 
-@include media-breakpoint-up(md){
-	.wrapper-main header
-	{
-		.container-max > .row
-		{
-			margin-left: $grid-gutter-width / 2;
-			margin-right: $grid-gutter-width / 2;
-		}
-	}
+@include media-breakpoint-up(md)
+{
 
 	.wrapper-main .navbar .navbar-nav .nav-item:hover .dropdown-menu {
 		text-align: left;
