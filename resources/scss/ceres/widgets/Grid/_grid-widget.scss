@@ -15,7 +15,8 @@
         flex: 1;
 
         // widget-inner inside grid should not display paddings
-        .widget .widget-inner {
+        .widget-newsletter .widget-inner,
+        .widget-item-list .widget-inner {
             padding-left: 0;
             padding-right: 0;
         }
