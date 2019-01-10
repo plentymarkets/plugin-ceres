@@ -24430,44 +24430,52 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   color: #fff;
 }
 
-.widget.accordion .card:first-of-type, .widget.accordion .cmp-address-list .items > div:first-of-type:first-child, .cmp-address-list .widget.accordion .items > div:first-of-type:first-child {
+.widget.accordion div.card:first-of-type, .widget.accordion .cmp-address-list .items > div:first-of-type:first-child, .cmp-address-list .widget.accordion .items > div:first-of-type:first-child {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.widget.accordion .card:nth-of-type(2), .widget.accordion .cmp-address-list .items > div:nth-of-type(2):first-child, .cmp-address-list .widget.accordion .items > div:nth-of-type(2):first-child {
+.widget.accordion div.card:nth-of-type(2), .widget.accordion .cmp-address-list .items > div:nth-of-type(2):first-child, .cmp-address-list .widget.accordion .items > div:nth-of-type(2):first-child {
   border-top: 0;
 }
 
-.widget.accordion .card button, .widget.accordion .cmp-address-list .items > div:first-child button, .cmp-address-list .widget.accordion .items > div:first-child button {
+.widget.accordion div.card button.collapsed h5 > .fa, .widget.accordion .cmp-address-list .items > div:first-child button.collapsed h5 > .fa, .cmp-address-list .widget.accordion .items > div:first-child button.collapsed h5 > .fa {
+  transform: scaleY(1);
+}
+
+.widget.accordion div.card button, .widget.accordion .cmp-address-list .items > div:first-child button, .cmp-address-list .widget.accordion .items > div:first-child button {
   text-align: left;
   padding: 1.25rem;
   border-top-width: 0;
 }
 
-.widget.accordion .card button h5, .widget.accordion .cmp-address-list .items > div:first-child button h5, .cmp-address-list .widget.accordion .items > div:first-child button h5 {
+.widget.accordion div.card button h5, .widget.accordion .cmp-address-list .items > div:first-child button h5, .cmp-address-list .widget.accordion .items > div:first-child button h5 {
   font-weight: bold;
   position: relative;
 }
 
-.widget.accordion .card button h5 > .fa, .widget.accordion .cmp-address-list .items > div:first-child button h5 > .fa, .cmp-address-list .widget.accordion .items > div:first-child button h5 > .fa {
+.widget.accordion div.card button h5 > .fa, .widget.accordion .cmp-address-list .items > div:first-child button h5 > .fa, .cmp-address-list .widget.accordion .items > div:first-child button h5 > .fa {
   position: absolute;
   right: 0;
   top: -4px;
   font-size: 1.5rem;
+  transform: scaleY(-1);
+  transition-timing-function: ease;
+  transition-duration: .35s;
+  transform-origin: 50% 60%;
 }
 
-.widget.accordion .card button:hover, .widget.accordion .cmp-address-list .items > div:first-child button:hover, .cmp-address-list .widget.accordion .items > div:first-child button:hover,
-.widget.accordion .card button:focus,
+.widget.accordion div.card button:hover, .widget.accordion .cmp-address-list .items > div:first-child button:hover, .cmp-address-list .widget.accordion .items > div:first-child button:hover,
+.widget.accordion div.card button:focus,
 .widget.accordion .cmp-address-list .items > div:first-child button:focus,
 .cmp-address-list .widget.accordion .items > div:first-child button:focus {
   color: black;
 }
 
-.widget.accordion .card div .card-body, .widget.accordion .cmp-address-list .items > div:first-child div .card-body, .cmp-address-list .widget.accordion .items > div:first-child div .card-body {
+.widget.accordion div.card div .card-body, .widget.accordion .cmp-address-list .items > div:first-child div .card-body, .cmp-address-list .widget.accordion .items > div:first-child div .card-body {
   margin-top: 1px;
 }
 
-.widget.accordion .card div .card-body p, .widget.accordion .cmp-address-list .items > div:first-child div .card-body p, .cmp-address-list .widget.accordion .items > div:first-child div .card-body p {
+.widget.accordion div.card div .card-body p, .widget.accordion .cmp-address-list .items > div:first-child div .card-body p, .cmp-address-list .widget.accordion .items > div:first-child div .card-body p {
   margin: 0;
   line-height: 1.1;
 }
@@ -24530,6 +24538,26 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 
 .widget.accordion.widget-danger h5 {
   color: #dc3545;
+}
+
+.widget.accordion.widget-light button:hover,
+.widget.accordion.widget-light button:focus {
+  -webkit-text-decoration-color: #f8f9fa;
+          text-decoration-color: #f8f9fa;
+}
+
+.widget.accordion.widget-light h5 {
+  color: #f8f9fa;
+}
+
+.widget.accordion.widget-dark button:hover,
+.widget.accordion.widget-dark button:focus {
+  -webkit-text-decoration-color: #343a40;
+          text-decoration-color: #343a40;
+}
+
+.widget.accordion.widget-dark h5 {
+  color: #343a40;
 }
 
 .widget-legal-information a {

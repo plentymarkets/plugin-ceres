@@ -1,5 +1,5 @@
 .widget.accordion {
-    .card {
+    div.card {
         &:first-of-type {
             border-bottom: $card-border-width solid $card-border-color;
         }
@@ -7,6 +7,13 @@
             border-top: 0;
         }
 
+        button.collapsed {
+            h5 {
+                > .fa {
+                    transform: scaleY(1);
+                }
+            }
+        }
         button {
             text-align: left;
             padding: $card-spacer-x;
@@ -21,6 +28,10 @@
                     right: 0;
                     top: -4px;
                     font-size: 1.5rem;
+                    transform: scaleY(-1);
+                    transition-timing-function: ease;
+                    transition-duration: .35s;
+                    transform-origin: 50% 60%;
                 }
             }
         }        
@@ -39,69 +50,15 @@
         }
     }
 
-    &.widget-primary
-    {
-        button:hover,
-        button:focus {
-            text-decoration-color: $primary;
-        }
-        h5 {
-            color: $primary;
-        }
-    }
-
-    &.widget-secondary
-    {
-        button:hover,
-        button:focus {
-            text-decoration-color: $secondary;
-        }
-        h5 {
-            color: $secondary;
-        }
-    }
-
-    &.widget-success
-    {
-        button:hover,
-        button:focus {
-            text-decoration-color: $success;
-        }
-        h5 {
-            color: $success;
-        }
-    }
-
-    &.widget-info
-    {
-        button:hover,
-        button:focus {
-            text-decoration-color: $info;
-        }
-        h5 {
-            color: $info;
-        }
-    }
-
-    &.widget-warning
-    {
-        button:hover,
-        button:focus {
-            text-decoration-color: $warning;
-        }
-        h5 {
-            color: $warning;
-        }
-    }
-
-    &.widget-danger
-    {
-        button:hover,
-        button:focus {
-            text-decoration-color: $danger;
-        }
-        h5 {
-            color: $danger;
+    @each $color, $value in $theme-colors {
+        &.widget-#{$color} {
+            button:hover,
+            button:focus {
+                text-decoration-color: $value;
+            }
+            h5 {
+                color: $value;
+            }
         }
     }
 }

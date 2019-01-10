@@ -19704,7 +19704,7 @@ html.ie {
     }
 }
 .widget.accordion {
-    .card {
+    div.card {
         &:first-of-type {
             border-bottom: $card-border-width solid $card-border-color;
         }
@@ -19712,6 +19712,14 @@ html.ie {
             border-top: 0;
         }
 
+        button.collapsed {
+            h5 {
+                > .fa {
+                    -webkit-transform: scaleY(1);
+                            transform: scaleY(1);
+                }
+            }
+        }
         button {
             text-align: left;
             padding: $card-spacer-x;
@@ -19726,6 +19734,14 @@ html.ie {
                     right: 0;
                     top: -4px;
                     font-size: 1.5rem;
+                    -webkit-transform: scaleY(-1);
+                            transform: scaleY(-1);
+                    -webkit-transition-timing-function: ease;
+                            transition-timing-function: ease;
+                    -webkit-transition-duration: .35s;
+                            transition-duration: .35s;
+                    -webkit-transform-origin: 50% 60%;
+                            transform-origin: 50% 60%;
                 }
             }
         }        
@@ -19744,75 +19760,16 @@ html.ie {
         }
     }
 
-    &.widget-primary
-    {
-        button:hover,
-        button:focus {
-            -webkit-text-decoration-color: $primary;
-                    text-decoration-color: $primary;
-        }
-        h5 {
-            color: $primary;
-        }
-    }
-
-    &.widget-secondary
-    {
-        button:hover,
-        button:focus {
-            -webkit-text-decoration-color: $secondary;
-                    text-decoration-color: $secondary;
-        }
-        h5 {
-            color: $secondary;
-        }
-    }
-
-    &.widget-success
-    {
-        button:hover,
-        button:focus {
-            -webkit-text-decoration-color: $success;
-                    text-decoration-color: $success;
-        }
-        h5 {
-            color: $success;
-        }
-    }
-
-    &.widget-info
-    {
-        button:hover,
-        button:focus {
-            -webkit-text-decoration-color: $info;
-                    text-decoration-color: $info;
-        }
-        h5 {
-            color: $info;
-        }
-    }
-
-    &.widget-warning
-    {
-        button:hover,
-        button:focus {
-            -webkit-text-decoration-color: $warning;
-                    text-decoration-color: $warning;
-        }
-        h5 {
-            color: $warning;
-        }
-    }
-
-    &.widget-danger
-    {
-        button:hover,
-        button:focus {
-            -webkit-text-decoration-color: $danger;
-                    text-decoration-color: $danger;
-        }
-        h5 {
-            color: $danger;
+    @each $color, $value in $theme-colors {
+        &.widget-#{$color} {
+            button:hover,
+            button:focus {
+                -webkit-text-decoration-color: $value;
+                        text-decoration-color: $value;
+            }
+            h5 {
+                color: $value;
+            }
         }
     }
 }
