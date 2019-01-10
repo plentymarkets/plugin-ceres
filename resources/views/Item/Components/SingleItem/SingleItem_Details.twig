@@ -1,0 +1,121 @@
+<div v-stick-in-parent>
+    <div class="producertag h6 producer text-muted" v-if="currentVariation.filter.hasManufacturer">
+        ${ currentVariation.item.manufacturer.externalName }
+    </div>
+
+    <h1 class="h2 title">
+                            <span>
+                                ${ currentVariation | itemName }
+                            </span>
+    </h1>
+
+    {% if ('item.shortDescription' in itemData or 'all' in itemData)%}
+        <p class="single-description" v-if="currentVariation.texts.shortDescription !== ''" v-html="currentVariation.texts.shortDescription"></p>
+    {% endif %}
+
+    <hr>
+
+    <div class="mb-5">
+                            <span class="articlenumber small text-muted">
+                                <b>{{ trans("Ceres::Template.singleItemNumber") }}</b>
+                                <span>${ currentVariation.variation.number }</span>
+                            </span>
+    </div>
+
+    <!-- Variation -->
+    <div class="mb-3" v-if="variations.length > 0">
+        <variation-select template="#vue-variation-select" :attributes="attributeNameMap" :variation-units="variationUnits" :variations="variations" :preselect="currentVariation.variation.id" :unitPreselect="currentVariation.variation.unitCombinationId" @is-valid-change="isVariationSelected = $event"></variation-select>
+    </div>
+    <!-- /Variation -->
+
+    <!-- Item Bundle -->
+    <item-bundle :bundle-type="currentVariation.variation.bundleType" :bundle-components="currentVariation.bundleComponents"></item-bundle>
+    <!-- /Item Bundle -->
+
+    <slot name="BeforePrice"></slot>
+
+    <div class="row" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
+        <order-property-list></order-property-list>
+    </div>
+
+    <graduated-prices template="#vue-graduated-prices"></graduated-prices>
+
+    {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
+        <div class="crossprice" v-if="currentVariation.prices.rrp && currentVariation.prices.rrp.unitPrice.value > 0 && currentVariation.prices.rrp.unitPrice.value > currentVariation.prices.default.unitPrice.value">
+            <del class="text-muted small">
+                ${ currentVariation.prices.rrp.unitPrice.formatted }
+            </del>
+        </div>
+    {% endif %}
+
+    <span class="price h1">
+                            <span ref="variationTotalPrice" :content="currentVariation.prices.default.price.value">
+                                ${ variationTotalPrice | currency(currentVariation.prices.default.currency) }
+                            </span>
+                            <sup>*</sup>
+                            <span :content="currentVariation.prices.default.currency"></span>
+                        </span>
+
+    <div class="base-price text-muted my-3" v-if="currentVariation.unit">
+        <div>
+            {{ trans("Ceres::Template.singleItemContent") }}
+            <span>${ currentVariation.unit.content | numberFormat }</span>
+            <span>${ currentVariation.unit.names.name }</span>
+        </div>
+        <div v-if="currentVariation.variation.mayShowUnitPrice">
+            {{ trans("Ceres::Template.singleItemUnitPrice") }}
+            <span class="base-price-value">
+                                    ${ variationGraduatedPrice.basePrice | specialOffer(currentVariation.prices, "basePrice") }
+                                </span>
+        </div>
+    </div>
+
+    <slot name="AfterPrice"></slot>
+
+    <span v-if="currentVariation.variation.availability" :class="'availability badge availability_' + currentVariation.variation.availability.id">
+                            <span>
+                                ${ currentVariation.variation.availability.names.name }
+                            </span>
+                        </span>
+
+    <div class="row my-3">
+        <div class="w-100">
+            <slot name="BeforeAddToBasket"></slot>
+        </div>
+
+        <div class="w-100">
+            {{ AddToBasket.printVueComponent(
+                "currentVariation",
+                false,
+                true,
+                {
+                    ":missing-order-properties":"variationMissingProperties",
+                    ":is-variation-selected": "isVariationSelected && currentVariation.filter.isSalable"
+                }
+            ) }}
+        </div>
+
+        <div class="w-100">
+            <slot name="AfterAddToBasket"></slot>
+        </div>
+    </div>
+
+    {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+        <div class="row">
+            <add-to-wish-list :variation-id="currentVariation.variation.id"></add-to-wish-list>
+        </div>
+    {% endif %}
+    <!-- ./ITEM DETAIL -->
+
+    <slot name="AdditionalContentAfterAddToBasket"></slot>
+
+    <hr>
+
+    <span class="vat small text-muted">
+                            * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.singleItemExclVAT") }}{% else %}{{ trans("Ceres::Template.singleItemInclVAT") }}{% endif %} {{ trans("Ceres::Template.singleItemExclusive") }}
+        <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a>
+                        </span>
+
+    <slot name="AdditionalContentAfterVAT"></slot>
+
+</div>
