@@ -24678,22 +24678,25 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   height: 100%;
   color: #4D4F4D;
   background-color: #dadae3;
-  margin-left: -15px;
-  margin-right: -15px;
-  padding-left: 15px;
-  padding-right: 15px;
   box-sizing: content-box;
   margin-bottom: 0;
 }
 
-.footer .widget-grid .widget-inner:first-child .widget-list {
-  margin-left: 0;
-  padding-left: 0;
-}
-
-.footer .widget-grid .widget-inner:last-child .widget-list {
-  margin-right: 0;
-  padding-right: 0;
+@media (min-width: 768px) {
+  .footer .widget-grid .widget-inner .widget-list {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .footer .widget-grid .widget-inner:first-child .widget-list {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .footer .widget-grid .widget-inner:last-child .widget-list {
+    margin-right: 0;
+    padding-right: 0;
+  }
 }
 
 @media (max-width: 767.98px) {
