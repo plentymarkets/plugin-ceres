@@ -25474,6 +25474,8 @@ Vue.directive("toggle-faq-icon", {
             var parentElements = parent.parentElement.querySelectorAll(".card");
             var iconElement = el.querySelector(".fa");
 
+            console.log(iconElement);
+
             // Return while animating
             if (parent.querySelector("div").classList.contains("collapsing")) {
                 return;
@@ -25483,6 +25485,7 @@ Vue.directive("toggle-faq-icon", {
             parentElements.forEach(function (singleParent) {
                 var elm = singleParent.querySelectorAll(".fa")[0];
 
+                console.log(elm);
                 elm.classList.add(oldIcon);
                 elm.classList.remove(newIcon);
             });

@@ -19689,7 +19689,7 @@ html.ie {
 .widget.accordion {
     .card {
         &:first-of-type {
-            border-bottom: $card-border-width solid $card-border-color;;
+            border-bottom: $card-border-width solid $card-border-color;
         }
         &:nth-of-type(2) {
             border-top: 0;
@@ -19698,9 +19698,9 @@ html.ie {
         button {
             text-align: left;
             padding: $card-spacer-x;
+            border-top-width: 0;
 
             h5 {
-                line-height: inherit;
                 font-weight: bold;
                 position: relative;
 
@@ -19711,15 +19711,20 @@ html.ie {
                     font-size: 1.5rem;
                 }
             }
-        }
+        }        
         button:hover,
         button:focus { 
             color: black;
         }
-    }
 
-    div .card-body p {
-        margin: 0;
+        div .card-body {
+            margin-top: 1px;
+
+            p {
+                margin: 0;
+                line-height: $headings-line-height;
+            }
+        }
     }
 
     &.widget-primary

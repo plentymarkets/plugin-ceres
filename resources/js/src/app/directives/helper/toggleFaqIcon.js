@@ -20,13 +20,13 @@ Vue.directive("toggle-faq-icon",
                 // reset all icons
                 parentElements.forEach(singleParent =>
                 {
-                    const elm = singleParent.querySelectorAll(".fa")[0];
+                    const childElement = singleParent.querySelector(".fa");
 
-                    elm.classList.add(oldIcon);
-                    elm.classList.remove(newIcon);
+                    childElement.classList.add(oldIcon);
+                    childElement.classList.remove(newIcon);
                 });
 
-                // set clicked icon
+                // set icon on clicked element
                 if (el.getAttribute("aria-expanded") === "true")
                 {
                     iconElement.classList.add(oldIcon);

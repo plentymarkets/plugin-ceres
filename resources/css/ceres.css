@@ -24427,10 +24427,10 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 .widget.accordion .card button, .widget.accordion .cmp-address-list .items > div:first-child button, .cmp-address-list .widget.accordion .items > div:first-child button {
   text-align: left;
   padding: 1.25rem;
+  border-top-width: 0;
 }
 
 .widget.accordion .card button h5, .widget.accordion .cmp-address-list .items > div:first-child button h5, .cmp-address-list .widget.accordion .items > div:first-child button h5 {
-  line-height: inherit;
   font-weight: bold;
   position: relative;
 }
@@ -24449,8 +24449,13 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   color: black;
 }
 
-.widget.accordion div .card-body p {
+.widget.accordion .card div .card-body, .widget.accordion .cmp-address-list .items > div:first-child div .card-body, .cmp-address-list .widget.accordion .items > div:first-child div .card-body {
+  margin-top: 1px;
+}
+
+.widget.accordion .card div .card-body p, .widget.accordion .cmp-address-list .items > div:first-child div .card-body p, .cmp-address-list .widget.accordion .items > div:first-child div .card-body p {
   margin: 0;
+  line-height: 1.1;
 }
 
 .widget.accordion.widget-primary button:hover,
