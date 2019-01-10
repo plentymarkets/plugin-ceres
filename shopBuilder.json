@@ -2,21 +2,23 @@
     "containers": {
         "header": {
             "label":            "Widget.containerHeader",
-            "name":             "Ceres::Header",
-            "allowedTypes":     ["header"]
+            "name":             "Ceres::Header"
         },
         "footer": {
             "label":            "Widget.containerFooter",
-            "name":             "Ceres::Footer",
-            "allowedTypes":     ["footer", "structure", "static"]
+            "name":             "Ceres::Footer"
         },
         "content": [
             {
                 "label":        "Widget.containerHomepage",
-                "name":         "Ceres::Homepage",
-                "allowedTypes": ["static", "structure"]
+                "name":         "Ceres::Homepage"
             }
         ]
+    },
+    "allowedTypes": {
+        "header": ["header"],
+        "footer": ["footer", "static", "structure"],
+        "content": ["static", "structure"]
     },
     "presets": {
         "header": [
