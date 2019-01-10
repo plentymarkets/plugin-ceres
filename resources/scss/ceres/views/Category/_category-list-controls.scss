@@ -78,6 +78,8 @@
                     color: $gray-dark;
                 }
                 .form-check {
+                    padding-left: 0;
+
                     .form-check-input {
                         &:checked + label {
                             background: $gray-lighter2;

@@ -18170,6 +18170,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   font-size: 1.3rem;
   line-height: 1;
   padding: 0.4rem 1rem;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -18384,7 +18385,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   background-color: #4D4F4D;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 991.98px) {
   .wrapper-main #page-header .container-max {
     padding: 0;
   }
@@ -18537,14 +18538,15 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   }
 }
 
+.wrapper-main header .container-max > .row {
+  -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse;
+  position: relative;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 @media (min-width: 576px) {
-  .wrapper-main header .container-max > .row {
-    -ms-flex-direction: row-reverse;
-        flex-direction: row-reverse;
-    position: relative;
-    margin-left: 15px;
-    margin-right: 15px;
-  }
   .wrapper-main header .controls-list {
     width: auto;
   }
@@ -18640,7 +18642,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
       flex: 100;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   position: relative;
-  padding: 0 15px;
 }
 
 .search-box-shadow-frame .autocomplete-suggestions {
@@ -18744,11 +18745,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   overflow: hidden;
 }
 
-.cmp-country-settings.no-margin,
-.cmp-currency-select.no-margin {
-  margin: 0;
-}
-
 @media (min-width: 992px) {
   .cmp-country-settings,
   .cmp-currency-select {
@@ -18762,28 +18758,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   .cmp-currency-select {
     overflow: auto;
     max-height: 60vh;
-  }
-}
-
-.cmp-country-settings .country-settings-inner,
-.cmp-country-settings .currency-select-inner,
-.cmp-currency-select .country-settings-inner,
-.cmp-currency-select .currency-select-inner {
-  padding: 1rem;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-flow: row nowrap;
-      flex-flow: row nowrap;
-  margin: 0 auto;
-}
-
-@media (min-width: 992px) {
-  .cmp-country-settings .country-settings-inner.languages,
-  .cmp-country-settings .currency-select-inner.languages,
-  .cmp-currency-select .country-settings-inner.languages,
-  .cmp-currency-select .currency-select-inner.languages {
-    -ms-flex-pack: end;
-        justify-content: flex-end;
   }
 }
 
@@ -18879,7 +18853,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .cmp-country-settings .currency-list ul > li,
 .cmp-currency-select .currency-list ul > li {
-  width: 12.5%;
+  width: 16.666667%;
 }
 
 .flag-icon-en {
@@ -19446,6 +19420,7 @@ body.menu-is-visible {
   padding: .5rem .5rem;
   text-decoration: none !important;
   cursor: pointer;
+  width: 100%;
 }
 
 .to-top:hover {
@@ -22614,6 +22589,10 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   color: #4D4F4D;
 }
 
+.list-controls #filterCollapse .page-content .card .form-check, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check {
+  padding-left: 0;
+}
+
 .list-controls #filterCollapse .page-content .card .form-check .form-check-input:checked + label, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-input:checked + label, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-input:checked + label {
   background: #f4f4f4;
   color: #282d2f;
@@ -24834,22 +24813,25 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   height: 100%;
   color: #4D4F4D;
   background-color: #dadae3;
-  margin-left: -15px;
-  margin-right: -15px;
-  padding-left: 15px;
-  padding-right: 15px;
   box-sizing: content-box;
   margin-bottom: 0;
 }
 
-.footer .widget-grid .widget-inner:first-child .widget-list {
-  margin-left: 0;
-  padding-left: 0;
-}
-
-.footer .widget-grid .widget-inner:last-child .widget-list {
-  margin-right: 0;
-  padding-right: 0;
+@media (min-width: 768px) {
+  .footer .widget-grid .widget-inner .widget-list {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .footer .widget-grid .widget-inner:first-child .widget-list {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .footer .widget-grid .widget-inner:last-child .widget-list {
+    margin-right: 0;
+    padding-right: 0;
+  }
 }
 
 @media (max-width: 767.98px) {
