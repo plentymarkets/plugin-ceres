@@ -19686,6 +19686,78 @@ html.ie {
         @include widget-bg-variant($danger);
     }
 }
+.widget.accordion {
+    div.card {
+        &:first-of-type {
+            border-bottom: $card-border-width solid $card-border-color;
+        }
+        &:nth-of-type(2) {
+            border-top: 0;
+        }
+
+        button.collapsed {
+            h5 {
+                > .fa {
+                    -webkit-transform: scaleY(1);
+                            transform: scaleY(1);
+                }
+            }
+        }
+        button {
+            text-align: left;
+            padding: $card-spacer-x;
+            border-top-width: 0;
+
+            h5 {
+                font-weight: bold;
+                position: relative;
+
+                > .fa {
+                    position: absolute;
+                    right: 0;
+                    top: -4px;
+                    font-size: 1.5rem;
+                    -webkit-transform: scaleY(-1);
+                            transform: scaleY(-1);
+                    -webkit-transition-timing-function: ease;
+                            transition-timing-function: ease;
+                    -webkit-transition-duration: .35s;
+                            transition-duration: .35s;
+                    -webkit-transform-origin: 50% 60%;
+                            transform-origin: 50% 60%;
+                }
+            }
+        }        
+        button:hover,
+        button:focus { 
+            color: black;
+        }
+
+        div .card-body {
+            margin-top: 1px;
+
+            p {
+                margin: 0;
+                line-height: $headings-line-height;
+            }
+        }
+    }
+
+    @each $color, $value in $theme-colors {
+        &.widget-#{$color} {
+            button:hover,
+            button:focus {
+                -webkit-text-decoration-color: $value;
+                        text-decoration-color: $value;
+            }
+            h5 {
+                color: $value;
+            }
+        }
+    }
+}
+
+
 .widget-legal-information
 {
     a
@@ -19924,6 +19996,12 @@ html.ie {
         -webkit-box-flex: 1;
             -ms-flex: 1;
                 flex: 1;
+
+        // widget-inner inside grid should not display paddings
+        .widget .widget-inner {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
 
     .widget-inner-stacked
