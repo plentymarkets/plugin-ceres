@@ -10,7 +10,7 @@
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
-  --red: #dc3545;
+  --red: #d4021d;
   --orange: #fd7e14;
   --yellow: #ffc107;
   --green: #28a745;
@@ -24778,7 +24778,8 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
       flex: 1;
 }
 
-.widget-grid .widget-inner .widget .widget-inner {
+.widget-grid .widget-inner .widget-newsletter .widget-inner,
+.widget-grid .widget-inner .widget-item-list .widget-inner {
   padding-left: 0;
   padding-right: 0;
 }
