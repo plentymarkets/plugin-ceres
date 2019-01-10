@@ -19420,6 +19420,7 @@ body.menu-is-visible {
   padding: .5rem .5rem;
   text-decoration: none !important;
   cursor: pointer;
+  width: 100%;
 }
 
 .to-top:hover {
@@ -22588,6 +22589,10 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   color: #4D4F4D;
 }
 
+.list-controls #filterCollapse .page-content .card .form-check, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check {
+  padding-left: 0;
+}
+
 .list-controls #filterCollapse .page-content .card .form-check .form-check-input:checked + label, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-input:checked + label, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-input:checked + label {
   background: #f4f4f4;
   color: #282d2f;
@@ -23427,6 +23432,20 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 
 .add-to-basket-container .quantity-input-container {
   margin-right: 15px;
+}
+
+.single-leftside {
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .single-leftside {
+    margin-top: 0;
+    position: absolute;
+    left: 58.33333%;
+    top: 0;
+    bottom: 0;
+  }
 }
 
 .loading .loading-animation-frame {

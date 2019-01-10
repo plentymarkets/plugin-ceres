@@ -13044,6 +13044,7 @@ $border-width: 1px;
 					font-size: 1.3rem;
 					line-height: 1;
 					padding: 0.4rem 1rem;
+					cursor: pointer;
 				}
 			}
 		}
@@ -13284,7 +13285,7 @@ $border-width: 1px;
 			background-color: $top-bar-bg;
 		}
 
-		@include media-breakpoint-up(sm){
+		@include media-breakpoint-down(md){
 			.container-max {
 				padding: 0;
 			}
@@ -13458,22 +13459,25 @@ $border-width: 1px;
 	}
 }
 
+.wrapper-main header
+{
+	.container-max > .row
+	{
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: reverse;
+		    -ms-flex-direction: row-reverse;
+		        flex-direction: row-reverse;
+		position: relative;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
 
 @include media-breakpoint-up(sm){
 
 	.wrapper-main header
 	{
-		.container-max > .row
-		{
-			-webkit-box-orient: horizontal;
-			-webkit-box-direction: reverse;
-			    -ms-flex-direction: row-reverse;
-			        flex-direction: row-reverse;
-			position: relative;
-			margin-left: $grid-gutter-width / 2;
-			margin-right: $grid-gutter-width / 2;
-		}
-
 		.controls-list
 		{
 			width: auto;
@@ -13495,7 +13499,9 @@ $border-width: 1px;
 
 }
 
-@include media-breakpoint-up(md){
+@include media-breakpoint-up(md)
+{
+
 	.wrapper-main .navbar .navbar-nav .nav-item:hover .dropdown-menu {
 		text-align: left;
 	}
@@ -13619,7 +13625,6 @@ $border-width: 1px;
         -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
         position: relative;
-        padding: 0 $grid-gutter-width / 2;
 
         .autocomplete-suggestions
         {
@@ -13717,7 +13722,6 @@ $border-width: 1px;
         }
     }
 }
-
 .cmp-country-settings,
 .cmp-currency-select {
 	background-color: $gray-darker;
@@ -13735,10 +13739,6 @@ $border-width: 1px;
 	&.collapsing {
 		overflow: hidden;
 	}
-	
-	&.no-margin {
-		margin: 0;
-	}
 
 	@include media-breakpoint-up(lg) {
 		overflow: auto;
@@ -13748,27 +13748,6 @@ $border-width: 1px;
 	@include media-breakpoint-down(sm) {
 		overflow: auto;
 		max-height: 60vh;
-		}
-
-	.country-settings-inner,
-	.currency-select-inner {
-		padding: 1rem;
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-    	-webkit-box-orient: horizontal;
-    	-webkit-box-direction: normal;
-    	    -ms-flex-flow: row nowrap;
-    	        flex-flow: row nowrap;
-		margin: 0 auto;
-		
-		&.languages {
-			@include media-breakpoint-up(lg) {
-				-webkit-box-pack: end;
-				    -ms-flex-pack: end;
-				        justify-content: flex-end;
-			}
-		}
 	}
 
 	.shipping-settings, 
@@ -13849,7 +13828,7 @@ $border-width: 1px;
 	
 	.currency-list {
 		ul > li {
-			width: 12.5%;
+			width: 16.666667%;
 		}
 	}
 }
@@ -14537,6 +14516,8 @@ body.menu-is-visible {
     padding: .5rem .5rem;
 	text-decoration:none!important;
 	cursor: pointer;
+	width: 100%;
+
     &:hover {
     	background-color: $gray-darker;
     }
@@ -17971,6 +17952,8 @@ html.ie .basket-preview-hover {
                     color: $gray-dark;
                 }
                 .form-check {
+                    padding-left: 0;
+
                     .form-check-input {
                         &:checked + label {
                             background: $gray-lighter2;
