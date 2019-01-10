@@ -25474,8 +25474,6 @@ Vue.directive("toggle-faq-icon", {
             var parentElements = parent.parentElement.querySelectorAll(".card");
             var iconElement = el.querySelector(".fa");
 
-            console.log(iconElement);
-
             // Return while animating
             if (parent.querySelector("div").classList.contains("collapsing")) {
                 return;
@@ -25483,14 +25481,13 @@ Vue.directive("toggle-faq-icon", {
 
             // reset all icons
             parentElements.forEach(function (singleParent) {
-                var elm = singleParent.querySelectorAll(".fa")[0];
+                var childElement = singleParent.querySelector(".fa");
 
-                console.log(elm);
-                elm.classList.add(oldIcon);
-                elm.classList.remove(newIcon);
+                childElement.classList.add(oldIcon);
+                childElement.classList.remove(newIcon);
             });
 
-            // set clicked icon
+            // set icon on clicked element
             if (el.getAttribute("aria-expanded") === "true") {
                 iconElement.classList.add(oldIcon);
                 iconElement.classList.remove(newIcon);
@@ -25619,7 +25616,7 @@ var stickInParent = function stickInParent(el, minWidth, isActive) {
 
     if (activeState && !currentActiveState) {
         var $element = $(el);
-        var headHeight = $(".top-bar").height();
+        var headHeight = $("#page-header").height();
 
         if ($element.stick_in_parent({ offset_top: headHeight + 10 })) {
             el.dataset.isSticky = true;
