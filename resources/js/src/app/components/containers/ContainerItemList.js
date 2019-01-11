@@ -77,7 +77,7 @@ Vue.component("container-item-list", {
                     },
                     768: {
                         items: (this.itemsPerPage > 3) ? 3 : this.itemsPerPage
-                    }, 
+                    },
                     992: {
                         items: this.itemsPerPage
                     }
