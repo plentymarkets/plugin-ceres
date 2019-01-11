@@ -119,7 +119,7 @@ $blue:                      #008ebd !default;
 $indigo:                    #6610f2 !default;
 $purple:                    #6f42c1 !default;
 $pink:                      #e83e8c !default;
-$red:                       #dc3545 !default;
+$red:                       #d4021d !default;
 $orange:                    #fd7e14 !default;
 $yellow:                    #ffc107 !default;
 $green:                     #28a745 !default;
@@ -13044,6 +13044,7 @@ $border-width: 1px;
 					font-size: 1.3rem;
 					line-height: 1;
 					padding: 0.4rem 1rem;
+					cursor: pointer;
 				}
 			}
 		}
@@ -13284,7 +13285,7 @@ $border-width: 1px;
 			background-color: $top-bar-bg;
 		}
 
-		@include media-breakpoint-up(sm){
+		@include media-breakpoint-down(md){
 			.container-max {
 				padding: 0;
 			}
@@ -13458,22 +13459,25 @@ $border-width: 1px;
 	}
 }
 
+.wrapper-main header
+{
+	.container-max > .row
+	{
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: reverse;
+		    -ms-flex-direction: row-reverse;
+		        flex-direction: row-reverse;
+		position: relative;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
 
 @include media-breakpoint-up(sm){
 
 	.wrapper-main header
 	{
-		.container-max > .row
-		{
-			-webkit-box-orient: horizontal;
-			-webkit-box-direction: reverse;
-			    -ms-flex-direction: row-reverse;
-			        flex-direction: row-reverse;
-			position: relative;
-			margin-left: $grid-gutter-width / 2;
-			margin-right: $grid-gutter-width / 2;
-		}
-
 		.controls-list
 		{
 			width: auto;
@@ -13495,7 +13499,9 @@ $border-width: 1px;
 
 }
 
-@include media-breakpoint-up(md){
+@include media-breakpoint-up(md)
+{
+
 	.wrapper-main .navbar .navbar-nav .nav-item:hover .dropdown-menu {
 		text-align: left;
 	}
@@ -13619,7 +13625,6 @@ $border-width: 1px;
         -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
         position: relative;
-        padding: 0 $grid-gutter-width / 2;
 
         .autocomplete-suggestions
         {
@@ -13717,7 +13722,6 @@ $border-width: 1px;
         }
     }
 }
-
 .cmp-country-settings,
 .cmp-currency-select {
 	background-color: $gray-darker;
@@ -13735,10 +13739,6 @@ $border-width: 1px;
 	&.collapsing {
 		overflow: hidden;
 	}
-	
-	&.no-margin {
-		margin: 0;
-	}
 
 	@include media-breakpoint-up(lg) {
 		overflow: auto;
@@ -13748,27 +13748,6 @@ $border-width: 1px;
 	@include media-breakpoint-down(sm) {
 		overflow: auto;
 		max-height: 60vh;
-		}
-
-	.country-settings-inner,
-	.currency-select-inner {
-		padding: 1rem;
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-    	-webkit-box-orient: horizontal;
-    	-webkit-box-direction: normal;
-    	    -ms-flex-flow: row nowrap;
-    	        flex-flow: row nowrap;
-		margin: 0 auto;
-		
-		&.languages {
-			@include media-breakpoint-up(lg) {
-				-webkit-box-pack: end;
-				    -ms-flex-pack: end;
-				        justify-content: flex-end;
-			}
-		}
 	}
 
 	.shipping-settings, 
@@ -13849,7 +13828,7 @@ $border-width: 1px;
 	
 	.currency-list {
 		ul > li {
-			width: 12.5%;
+			width: 16.666667%;
 		}
 	}
 }
@@ -14537,6 +14516,8 @@ body.menu-is-visible {
     padding: .5rem .5rem;
 	text-decoration:none!important;
 	cursor: pointer;
+	width: 100%;
+
     &:hover {
     	background-color: $gray-darker;
     }
@@ -17971,6 +17952,8 @@ html.ie .basket-preview-hover {
                     color: $gray-dark;
                 }
                 .form-check {
+                    padding-left: 0;
+
                     .form-check-input {
                         &:checked + label {
                             background: $gray-lighter2;
@@ -18877,6 +18860,23 @@ html.ie .basket-preview-hover {
     }
 }
 
+.single-leftside
+{
+    margin-top: 1rem;
+}
+
+@include media-breakpoint-up(md)
+{
+    .single-leftside
+    {
+        margin-top: 0;
+        position: absolute;
+        left: (7/12)*100%;
+        top: 0;
+        bottom: 0;
+    }
+}
+
 .loading {
   & .loading-animation-frame {
     display: block;
@@ -19686,6 +19686,78 @@ html.ie {
         @include widget-bg-variant($danger);
     }
 }
+.widget.accordion {
+    div.card {
+        &:first-of-type {
+            border-bottom: $card-border-width solid $card-border-color;
+        }
+        &:nth-of-type(2) {
+            border-top: 0;
+        }
+
+        button.collapsed {
+            h5 {
+                > .fa {
+                    -webkit-transform: scaleY(1);
+                            transform: scaleY(1);
+                }
+            }
+        }
+        button {
+            text-align: left;
+            padding: $card-spacer-x;
+            border-top-width: 0;
+
+            h5 {
+                font-weight: bold;
+                position: relative;
+
+                > .fa {
+                    position: absolute;
+                    right: 0;
+                    top: -4px;
+                    font-size: 1.5rem;
+                    -webkit-transform: scaleY(-1);
+                            transform: scaleY(-1);
+                    -webkit-transition-timing-function: ease;
+                            transition-timing-function: ease;
+                    -webkit-transition-duration: .35s;
+                            transition-duration: .35s;
+                    -webkit-transform-origin: 50% 60%;
+                            transform-origin: 50% 60%;
+                }
+            }
+        }        
+        button:hover,
+        button:focus { 
+            color: black;
+        }
+
+        div .card-body {
+            margin-top: 1px;
+
+            p {
+                margin: 0;
+                line-height: $headings-line-height;
+            }
+        }
+    }
+
+    @each $color, $value in $theme-colors {
+        &.widget-#{$color} {
+            button:hover,
+            button:focus {
+                -webkit-text-decoration-color: $value;
+                        text-decoration-color: $value;
+            }
+            h5 {
+                color: $value;
+            }
+        }
+    }
+}
+
+
 .widget-legal-information
 {
     a
@@ -19917,6 +19989,13 @@ html.ie {
         -webkit-box-flex: 1;
             -ms-flex: 1;
                 flex: 1;
+
+        // widget-inner inside grid should not display paddings
+        .widget-newsletter .widget-inner,
+        .widget-item-list .widget-inner {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
 
     .widget-inner-stacked
@@ -19963,10 +20042,6 @@ html.ie {
                 height: 100%;
                 color: $footer-features-color;
                 background-color: $footer-features-bg;
-                margin-left: -15px;
-                margin-right: -15px;
-                padding-left: 15px;
-                padding-right: 15px;
                 -webkit-box-sizing: content-box;
                         box-sizing: content-box;
                 margin-bottom: 0;
@@ -19977,19 +20052,31 @@ html.ie {
                 }
             }
 
-            &:first-child {
-                .widget-list {
-                    margin-left: 0;
-                    padding-left: 0;
+            @include media-breakpoint-up(md)
+            {
+                .widget-list
+                {
+                    margin-left: -15px;
+                    margin-right: -15px;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                }
+
+                &:first-child {
+                    .widget-list {
+                        margin-left: 0;
+                        padding-left: 0;
+                    }
+                }
+
+                &:last-child {
+                    .widget-list {
+                        margin-right: 0;
+                        padding-right: 0;
+                    }
                 }
             }
 
-            &:last-child {
-                .widget-list {
-                    margin-right: 0;
-                    padding-right: 0;
-                }
-            }
 
             @include media-breakpoint-down(sm) {
                 &:not(:last-child) {
