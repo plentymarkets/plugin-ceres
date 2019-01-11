@@ -61,6 +61,11 @@
                 background-color: $footer-features-bg;
                 box-sizing: content-box;
                 margin-bottom: 0;
+
+                .widget-inner
+                {
+                    padding: 1rem;
+                }
             }
 
             @include media-breakpoint-up(md)

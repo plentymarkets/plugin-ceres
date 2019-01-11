@@ -24544,32 +24544,26 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   margin-right: 10px;
 }
 
-.widget-link-list .widget-inner {
-  padding: 15px 15px 0 15px;
-}
-
-.widget-link-list .widget-inner h2 {
-  font-weight: 700;
-}
-
-.widget-link-list .widget-inner a {
-  color: #4D4F4D;
-}
-
-.widget-list .widget-inner {
-  padding: 1rem 15px;
-}
-
-.widget-list .widget-inner .list-container {
+.widget-list .widget-inner .list-container,
+.widget-list .widget-inner .list-centered,
+.widget-link-list .widget-inner .list-container,
+.widget-link-list .widget-inner .list-centered {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0;
-  padding: 0;
-  list-style: none;
   text-align: center;
+}
+
+.widget-list .widget-inner ul,
+.widget-link-list .widget-inner ul {
+  margin-bottom: 0;
+}
+
+.widget-list .widget-inner a,
+.widget-link-list .widget-inner a {
+  color: #4D4F4D;
 }
 
 @media (max-width: 575.98px) {
@@ -24816,6 +24810,10 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   background-color: #dadae3;
   box-sizing: content-box;
   margin-bottom: 0;
+}
+
+.footer .widget-grid .widget-inner .widget-list .widget-inner {
+  padding: 1rem;
 }
 
 @media (min-width: 768px) {
