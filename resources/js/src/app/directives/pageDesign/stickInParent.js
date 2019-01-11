@@ -8,7 +8,7 @@ const stickInParent = (el, minWidth, isActive) =>
     if (activeState && !currentActiveState)
     {
         const $element = $(el);
-        const headHeight = $(".top-bar").height();
+        const headHeight = $("#page-header").height();
 
         if ($element.stick_in_parent({offset_top: headHeight + 10}))
         {

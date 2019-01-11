@@ -5,6 +5,8 @@
     padding: .5rem .5rem;
 	text-decoration:none!important;
 	cursor: pointer;
+	width: 100%;
+
     &:hover {
     	background-color: $gray-darker;
     }
