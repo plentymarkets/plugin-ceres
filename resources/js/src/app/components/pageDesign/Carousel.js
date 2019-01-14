@@ -81,11 +81,11 @@ Vue.component("carousel", {
                 autoHeight       : true,
                 dots             : true,
                 items            : this.itemsPerPage,
-                responsive:
-                {
+                responsive: {
                     0:   {items: 1},
-                    544: {items: (this.itemsPerPage > 1) ? 2 : 1},
-                    768: {items: this.itemsPerPage}
+                    544: {items: this.itemsPerPage > 1 ? 2 : 1},
+                    768: {items: this.itemsPerPage > 3 ? 3 : this.itemsPerPage},
+                    992: {items: this.itemsPerPage}
                 },
                 lazyLoad         : false,
                 loop             : false,
