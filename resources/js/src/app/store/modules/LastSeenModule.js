@@ -3,9 +3,9 @@ import {isDefined}from "../../helper/utils";
 
 const state =
     {
-        lastSeenItems: [],
+        containers: {},
         isLastSeenItemsLoading: false,
-        containers: {}
+        lastSeenItems: []
     };
 
 const mutations =
@@ -36,7 +36,7 @@ const actions =
                 {
                     commit("setIsLastSeenItemsLoading", true);
 
-                    ApiService.put("/rest/io/item/last_seen/" + variationId + "?items=" + App.config.itemLists.lastSeenNumber || 4)
+                    ApiService.put(`/rest/io/item/last_seen/${variationId}`)
                         .done(response =>
                         {
                             if (isDefined(response.lastSeenItems))
@@ -69,17 +69,16 @@ const actions =
                 return new Promise((resolve, reject) =>
                 {
                     commit("setIsLastSeenItemsLoading", true);
-
-                    ApiService.get("/rest/io/item/last_seen", {items: App.config.itemLists.lastSeenNumber}, {keepOriginalResponse: true})
+                    ApiService.get("/rest/io/item/last_seen", {keepOriginalResponse: true})
                         .done(response =>
                         {
-                            if (isDefined(response.data) && isDefined(response.data.lastSeenItems))
+                            if (isDefined(response) && isDefined(response.lastSeenItems))
                             {
-                                commit("setLastSeenItems", response.data.lastSeenItems.documents);
-                                commit("setLastSeenItemContainers", response.data.containers);
+                                commit("setLastSeenItems", response.lastSeenItems.documents);
+                                commit("setLastSeenItemContainers", response.containers);
                                 commit("setIsLastSeenItemsLoading", false);
 
-                                resolve(response.data.lastSeenItems.documents);
+                                resolve(response.lastSeenItems.documents);
                             }
                             else
                             {

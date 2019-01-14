@@ -14,11 +14,20 @@ Vue.component("last-seen-item-list", {
         {
             type: Number,
             default: 4
+        },
+
+        maxItems:
+        {
+            type: Number,
+            default: 4
         }
     },
 
     computed: Vuex.mapState({
-        items: state => state.lastSeen.lastSeenItems,
+        items(state)
+        {
+            return state.lastSeen.lastSeenItems.slice(0, this.maxItems);
+        },
         containers: state => state.lastSeen.containers
     }),
 
