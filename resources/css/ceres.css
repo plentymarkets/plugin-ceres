@@ -24772,19 +24772,35 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
       flex: 1;
 }
 
-.widget-grid .widget-inner .widget-newsletter .widget-inner,
-.widget-grid .widget-inner .widget-item-list .widget-inner {
+.widget-grid .widget-inner .widget-inner {
   padding-left: 0;
   padding-right: 0;
 }
 
+.widget-grid > .widget-inner > div {
+  height: 100%;
+  width: 100%;
+}
+
 .widget-grid .widget-inner-stacked {
-  margin-left: -15px;
-  margin-right: -15px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column;
+}
+
+.widget-grid .widget-inner-stacked > .widget-inner {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.widget-grid .widget-inner-stacked > .widget-inner > div {
+  -ms-flex: 1;
+      flex: 1;
+}
+
+.widget-grid .widget-inner-stacked > .widget-inner [data-builder-child-container] {
+  min-height: 100px;
 }
 
 @media (min-width: 768px) {
@@ -24799,8 +24815,8 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 .widget-grid.widget-grid-1-2-1 .widget-inner:nth-child(2),
 .widget-grid.widget-grid-2-1-1 .widget-inner:first-child,
 .widget-grid.widget-grid-stacked .widget-inner:not(.widget-inner-stacked) {
-  -ms-flex: 2;
-      flex: 2;
+  -ms-flex: 2 1 auto;
+      flex: 2 1 auto;
 }
 
 .footer .widget-grid .widget-inner .widget-list {
@@ -24855,6 +24871,9 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   .widget {
     margin-bottom: 1rem;
   }
+  .widget.widget-grid {
+    margin-bottom: 0;
+  }
   .widget .widget-inner .widget {
     margin-bottom: 1rem;
   }
@@ -24900,7 +24919,7 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   }
   .widget-grid-stacked .widget-inner-stacked .widget-proportional {
     padding-bottom: 0;
-    height: 100%;
+    min-height: 100%;
   }
   .widget-grid-stacked .widget-inner-stacked .widget-proportional > .widget-inner .widget-caption h2, .widget-grid-stacked .widget-inner-stacked .widget-proportional > .widget-inner .widget-caption .h2 {
     font-size: 1.75rem;

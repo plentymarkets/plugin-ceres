@@ -19991,17 +19991,23 @@ html.ie {
                 flex: 1;
 
         // widget-inner inside grid should not display paddings
-        .widget-newsletter .widget-inner,
-        .widget-item-list .widget-inner {
+        .widget-inner {
             padding-left: 0;
             padding-right: 0;
         }
     }
 
+    > .widget-inner
+    {
+        > div
+        {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
     .widget-inner-stacked
     {
-        margin-left: -15px;
-        margin-right: -15px;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -20009,6 +20015,26 @@ html.ie {
         -webkit-box-direction: normal;
             -ms-flex-direction: column;
                 flex-direction: column;
+
+        > .widget-inner
+        {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+
+            > div
+            {
+                -webkit-box-flex: 1;
+                    -ms-flex: 1;
+                        flex: 1;
+
+            }
+
+            [data-builder-child-container]
+            {
+                min-height: 100px;
+            }
+        }
     }
 
     @include media-breakpoint-up(md)
@@ -20027,8 +20053,8 @@ html.ie {
     &.widget-grid-stacked .widget-inner:not(.widget-inner-stacked)
     {
         -webkit-box-flex: 2;
-            -ms-flex: 2;
-                flex: 2;
+            -ms-flex: 2 1 auto;
+                flex: 2 1 auto;
     }
 }
 
@@ -20112,6 +20138,11 @@ html.ie {
     {
         margin-bottom: 1rem;
 
+        &.widget-grid
+        {
+            margin-bottom: 0;
+        }
+
         .widget-inner
         {
             .widget
@@ -20178,7 +20209,7 @@ html.ie {
         .widget-inner-stacked .widget-proportional
         {
             padding-bottom: 0;
-            height: 100%;
+            min-height: 100%;
 
             > .widget-inner .widget-caption
             {

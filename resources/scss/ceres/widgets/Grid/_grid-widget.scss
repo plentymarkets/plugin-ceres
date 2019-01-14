@@ -15,19 +15,41 @@
         flex: 1;
 
         // widget-inner inside grid should not display paddings
-        .widget-newsletter .widget-inner,
-        .widget-item-list .widget-inner {
+        .widget-inner {
             padding-left: 0;
             padding-right: 0;
         }
     }
 
+    > .widget-inner
+    {
+        > div
+        {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
     .widget-inner-stacked
     {
-        margin-left: -15px;
-        margin-right: -15px;
         display: flex;
         flex-direction: column;
+
+        > .widget-inner
+        {
+            display: flex;
+
+            > div
+            {
+                flex: 1;
+
+            }
+
+            [data-builder-child-container]
+            {
+                min-height: 100px;
+            }
+        }
     }
 
     @include media-breakpoint-up(md)
@@ -45,7 +67,7 @@
     &.widget-grid-2-1-1 .widget-inner:first-child,
     &.widget-grid-stacked .widget-inner:not(.widget-inner-stacked)
     {
-        flex: 2;
+        flex: 2 1 auto;
     }
 }
 
