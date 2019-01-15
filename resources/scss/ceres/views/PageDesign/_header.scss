@@ -61,17 +61,6 @@
 				}
 			}
 		}
-
-		.controls-list {
-
-			&>li {
-				@include media-breakpoint-up(md) {
-					a:not(.btn) {
-						padding: 1rem .8rem;
-					}
-				}
-			}
-		}
 	}
 
 	&.fixed-top {
@@ -122,7 +111,6 @@
 
 		.control-user{
 			flex: 1 0 auto;
-			margin-left: 1rem;
 			//login | register
 			#login-change {
 				position:relative;
@@ -446,7 +434,49 @@
 	transform: translate(0, -50%);
 }
 
-// Mobile only
+.wrapper-main header
+{
+	.container-max > .row
+	{
+		flex-direction: row-reverse;
+		position: relative;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.controls-list
+	{
+		width: auto;
+
+		&>li
+		{
+			// default font size for all items
+			font-size: .8rem;
+
+			.fa:not(.qty-sign)
+			{
+				// icons should be slightly larger
+				font-size: 1rem;
+				line-height: .8rem;
+			}
+		}
+	}
+}
+
+@include media-breakpoint-only(xs) {
+	.top-bar .controls-list {
+		> li .anicon,
+		> li a:not(.btn) {
+			padding: .5rem;
+		}
+		.pipe {
+			margin: 0 0.3em 0 0;
+		}
+		.anicon-search-xcross {
+			width: 2.2rem;
+		}
+	}
+}
+
 @include media-breakpoint-down(md) {
 	.navbar {
 		.navbar-nav{
@@ -460,43 +490,6 @@
 			}
 		}
 	}
-}
-
-.wrapper-main header
-{
-	.container-max > .row
-	{
-		flex-direction: row-reverse;
-		position: relative;
-		margin-left: 0;
-		margin-right: 0;
-	}
-}
-
-
-@include media-breakpoint-up(sm){
-
-	.wrapper-main header
-	{
-		.controls-list
-		{
-			width: auto;
-
-			&>li
-			{
-				// default font size for all items
-				font-size: .8rem;
-
-				.fa:not(.qty-sign)
-				{
-					// icons should be slightly larger
-					font-size: 1rem;
-					line-height: .8rem;
-				}
-			}
-		}
-	}
-
 }
 
 @include media-breakpoint-up(md)
