@@ -1,10 +1,10 @@
 {% set layout = widget.settings.layout.mobile %}
 
-<div class="widget widget-grid widget-grid-{% if layout == "oneToOne" %}1-1{% elseif layout == "twoToOne" %}2-1{% else %}1-2{% endif %}">
-    <div class="widget-inner">
+<div class="widget widget-grid row">
+    <div class="widget-inner col-12 {{ gridLayouts[layout][0] }}">
         <div{% if isPreview %} data-builder-child-container="first"{% endif %}>{{ children.first | raw }}</div>
     </div>
-    <div class="widget-inner">
+    <div class="widget-inner col-12 {{ gridLayouts[layout][1] }}">
         <div{% if isPreview %} data-builder-child-container="second"{% endif %}>{{ children.second | raw }}</div>
     </div>
 </div>
