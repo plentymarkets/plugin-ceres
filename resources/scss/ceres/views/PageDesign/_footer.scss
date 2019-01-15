@@ -107,16 +107,17 @@
 		border-top: 1px solid transparent;
 		background-color: $footer-features-bg;
 		color: $footer-features-color;
+		max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
 		i {
 			color:$footer-features-color !important;
 		}
 	}
 
-	.footer-content{
-
+	.footer-content {
+		max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
 	}
 
-	.footer-services{
+	.footer-services {
 		display: flex;
 		flex-flow: column nowrap;
 		
