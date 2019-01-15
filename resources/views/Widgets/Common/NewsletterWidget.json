@@ -5,47 +5,7 @@
     "type": "default",
     "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
     "settings": {
-        "appearance": {
-            "type": "select",
-            "required": true,
-            "defaultValue": "primary",
-            "options": {
-                "name": "Widget.widgetAppearanceLabel",
-                "tooltipText": "Widget.widgetAppearanceTooltip",
-                "listBoxValues": [
-                    {
-                        "value": "primary",
-                        "caption": "Widget.widgetAppearancePrimary",
-                        "position": 0
-                    },
-                    {
-                        "value": "secondary",
-                        "caption": "Widget.widgetAppearanceSecondary",
-                        "position": 1
-                    },
-                    {
-                        "value": "success",
-                        "caption": "Widget.widgetAppearanceSuccess",
-                        "position": 2
-                    },
-                    {
-                        "value": "info",
-                        "caption": "Widget.widgetAppearanceInfo",
-                        "position": 3
-                    },
-                    {
-                        "value": "warning",
-                        "caption": "Widget.widgetAppearanceWarning",
-                        "position": 4
-                    },
-                    {
-                        "value": "danger",
-                        "caption": "Widget.widgetAppearanceDanger",
-                        "position": 5
-                    }
-                ]
-            }
-        },
+        "appearance": "@glob(appearance)",
         "title": {
             "type": "text",
             "required": false,
