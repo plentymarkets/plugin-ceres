@@ -595,7 +595,7 @@
                 "defaultValue": 4,
                 "options": {
                     "name": "Widget.itemListItemsPerPageLabel",
-                    "tooltipText": "Widget.itemsListItemsPerPageTooltip",
+                    "tooltipText": "Widget.itemListItemsPerPageTooltip",
                     "listBoxValues": [
                         {
                             "value": 1,
@@ -1179,13 +1179,13 @@
         "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
         "settings": {
             "appearance": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.widgetAppearanceLabel",
+                "defaultValue": "primary",
                 "options": {
+                    "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
-                    "defaultValue": "none",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "none",
                             "caption": "Widget.widgetAppearanceNone",

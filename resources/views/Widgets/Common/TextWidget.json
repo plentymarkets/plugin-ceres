@@ -8,13 +8,13 @@
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {
         "appearance": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.widgetAppearanceLabel",
+            "defaultValue": "primary",
             "options": {
+                "name": "Widget.widgetAppearanceLabel",
                 "tooltipText": "Widget.widgetAppearanceTooltip",
-                "defaultValue": "none",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "none",
                         "caption": "Widget.widgetAppearanceNone",
