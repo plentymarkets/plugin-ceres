@@ -86,7 +86,10 @@
         "identifier": "Ceres::ImageBoxWidget",
         "label": "Widget.imageBoxLabel",
         "previewImageURL": "/images/widgets/image-box.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "image"
+        ],
         "position": 600,
         "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
         "settings": {
@@ -226,7 +229,10 @@
         "identifier": "Ceres::ImageCarouselWidget",
         "label": "Widget.imageCarouselLabel",
         "previewImageURL": "/images/widgets/image-carousel.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "image"
+        ],
         "position": 500,
         "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
         "settings": {
@@ -349,7 +355,10 @@
         "identifier": "Ceres::ItemListWidget",
         "label": "Widget.itemListLabel",
         "previewImageURL": "/images/widgets/item-list.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "item"
+        ],
         "position": 700,
         "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
         "settings": {
@@ -615,8 +624,11 @@
         "identifier": "Ceres::LinkListWidget",
         "label": "Widget.linkListLabel",
         "previewImageURL": "/images/widgets/link-list.svg",
-        "type": "default",
-        "position": 900,
+        "type": "static",
+        "categories": [
+            "text"
+        ],
+        "position": 1000,
         "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
         "settings": {
             "title": {
@@ -732,7 +744,10 @@
         "identifier": "Ceres::ListWidget",
         "label": "Widget.listLabel",
         "previewImageURL": "/images/widgets/list.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
         "position": 900,
         "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
         "settings": {
@@ -849,7 +864,10 @@
         "identifier": "Ceres::LiveShoppingWidget",
         "label": "Widget.liveShoppingLabel",
         "previewImageURL": "/images/widgets/live-shopping.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "item"
+        ],
         "widgetClass": "Ceres\\Widgets\\Common\\LiveShoppingWidget",
         "settings": {
             "liveShoppingSelection": {
@@ -1046,7 +1064,7 @@
         "identifier": "Ceres::NewsletterWidget",
         "label": "Widget.newsletterLabel",
         "previewImageURL": "/images/widgets/newsletter.svg",
-        "type": "default",
+        "type": "static",
         "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
         "settings": {
             "appearance": {
@@ -1139,7 +1157,10 @@
         "identifier": "Ceres::SeparatorWidget",
         "label": "Widget.separatorLabel",
         "previewImageURL": "/images/widgets/separator.svg",
-        "type": "default",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
         "position": 1100,
         "widgetClass": "Ceres\\Widgets\\Common\\SeparatorWidget",
         "settings": {}
@@ -1148,7 +1169,10 @@
         "identifier": "Ceres::TextWidget",
         "label": "Widget.textLabel",
         "previewImageURL": "/images/widgets/text.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
         "position": 800,
         "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
         "settings": {
@@ -1210,7 +1234,10 @@
         "identifier": "Ceres::TitleBarWidget",
         "label": "Widget.titleBarLabel",
         "previewImageURL": "/images/widgets/title-bar.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
         "settings": {
@@ -1271,6 +1298,9 @@
         "label": "Widget.legalInformationLabel",
         "previewImageURL": "/images/widgets/legal-information.svg",
         "type": "footer",
+        "categories": [
+            "footer"
+        ],
         "position": 1200,
         "widgetClass": "Ceres\\Widgets\\Footer\\LegalInformationWidget",
         "settings": {
@@ -1351,10 +1381,10 @@
         "label": "Widget.gridFourColumnLabel",
         "previewImageURL": "/images/widgets/grid-4-col.svg",
         "type": "structure",
-        "position": 300,
-        "allowedNestingTypes": [
-            "default"
+        "categories": [
+            "structure"
         ],
+        "position": 300,
         "widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
         "settings": {}
     },
@@ -1363,10 +1393,10 @@
         "label": "Widget.gridThreeColumnLabel",
         "previewImageURL": "/images/widgets/grid-3-col.svg",
         "type": "structure",
-        "position": 200,
-        "allowedNestingTypes": [
-            "default"
+        "categories": [
+            "structure"
         ],
+        "position": 200,
         "widgetClass": "Ceres\\Widgets\\Grid\\ThreeColumnWidget",
         "settings": {
             "layout": {
@@ -1417,10 +1447,10 @@
         "label": "Widget.gridTwoColumnLabel",
         "previewImageURL": "/images/widgets/grid-2-col.svg",
         "type": "structure",
-        "position": 100,
-        "allowedNestingTypes": [
-            "default"
+        "categories": [
+            "structure"
         ],
+        "position": 100,
         "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
         "settings": {
             "layout": {
@@ -1456,6 +1486,9 @@
         "label": "Widget.breadcrumbLabel",
         "previewImageURL": "/images/widgets/breadcrumb.svg",
         "type": "header",
+        "categories": [
+            "header"
+        ],
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",
         "settings": {
@@ -1506,6 +1539,9 @@
         "label": "Widget.navigationLabel",
         "previewImageURL": "/images/widgets/navigation.svg",
         "type": "header",
+        "categories": [
+            "header"
+        ],
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
         "settings": {
@@ -1618,6 +1654,9 @@
         "label": "Widget.topBarLabel",
         "previewImageURL": "/images/widgets/top-bar.svg",
         "type": "header",
+        "categories": [
+            "header"
+        ],
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",
         "settings": {
