@@ -20225,82 +20225,39 @@ Vue.component("reset-password-form", {
         return {
             passwordFirst: "",
             passwordSecond: "",
-            pwdFields: [],
             isDisabled: false
         };
     },
     created: function created() {
         this.$options.template = this.template;
     },
-    mounted: function mounted() {
-        var _this = this;
 
-        this.$nextTick(function () {
-            _this.pwdFields = $("#reset-password-form-" + _this._uid).find(".input-unit");
-        });
-    },
-
-
-    watch: {
-        passwordFirst: function passwordFirst(val, oldVal) {
-            this.resetError();
-        },
-        passwordSecond: function passwordSecond(val, oldVal) {
-            this.resetError();
-        }
-    },
 
     methods: {
         validatePassword: function validatePassword() {
-            var _this2 = this;
+            var _this = this;
 
-            _ValidationService2.default.validate($("#reset-password-form-" + this._uid)).done(function () {
-                if (_this2.checkPasswordEquals()) {
-                    _this2.saveNewPassword();
-                }
+            _ValidationService2.default.validate(this.$refs.resetPasswordForm).done(function () {
+                _this.saveNewPassword();
             }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+                _ValidationService2.default.markInvalidFields(invalidFields, "has-error");
             });
         },
-        resetError: function resetError() {
-            _ValidationService2.default.unmarkAllFields($("#reset-password-form-" + this._uid));
-            this.pwdFields.removeClass("check-pwds-error");
-            $(".error-save-pwd-msg").hide();
-        },
-        checkPasswordEquals: function checkPasswordEquals() {
-            if (this.passwordFirst !== this.passwordSecond) {
-                this.pwdFields.addClass("check-pwds-error");
-                $(".error-save-pwd-msg").show();
-
-                return false;
-            }
-
-            return true;
-        },
         saveNewPassword: function saveNewPassword() {
-            var _this3 = this;
+            var _this2 = this;
 
             this.isDisabled = true;
 
             ApiService.post("/rest/io/customer/password", { password: this.passwordFirst, password2: this.passwordSecond, contactId: this.contactId, hash: this.hash }).done(function () {
-                _this3.resetFields();
-
-                _this3.isDisabled = false;
 
                 (0, _UrlService.navigateTo)(window.location.origin);
 
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.resetPwChangePasswordSuccessful")).closeAfter(3000);
             }).fail(function () {
-                _this3.isDisabled = false;
+                _this2.isDisabled = false;
 
                 NotificationService.error(_TranslationService2.default.translate("Ceres::Template.resetPwChangePasswordFailed")).closeAfter(5000);
             });
-        },
-        resetFields: function resetFields() {
-            this.passwordFirst = "";
-            this.passwordSecond = "";
-            this.contactId = 0;
-            this.hash = "";
         }
     }
 

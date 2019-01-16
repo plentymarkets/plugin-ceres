@@ -17964,38 +17964,46 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   border-bottom-right-radius: 2px;
 }
 
-.input-unit.error {
+.input-unit.error,
+.input-feedback-container.has-error > .input-unit {
   z-index: 1000;
   border-color: #dc3545;
 }
 
-.input-unit.error input {
+.input-unit.error input,
+.input-feedback-container.has-error > .input-unit input {
   color: #dc3545;
 }
 
-.input-unit.error label {
+.input-unit.error label,
+.input-feedback-container.has-error > .input-unit label {
   color: #dc3545;
 }
 
-.input-unit.error i {
+.input-unit.error i,
+.input-feedback-container.has-error > .input-unit i {
   background-color: #dc3545;
   color: white;
 }
 
-.input-unit.success {
+.input-unit.success,
+.input-feedback-container.has-success > .input-unit {
   z-index: 1000;
   border-color: #28a745;
 }
 
-.input-unit.success input {
+.input-unit.success input,
+.input-feedback-container.has-success > .input-unit input {
   color: #28a745;
 }
 
-.input-unit.success label {
+.input-unit.success label,
+.input-feedback-container.has-success > .input-unit label {
   color: #28a745;
 }
 
-.input-unit.success i {
+.input-unit.success i,
+.input-feedback-container.has-success > .input-unit i {
   background-color: #28a745;
   color: white;
 }
@@ -18096,6 +18104,33 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .form-check.error .text-muted {
   color: #fff !important;
+}
+
+.input-feedback-container {
+  margin-bottom: 15px;
+}
+
+.input-feedback-container .input-unit {
+  margin-bottom: 0;
+}
+
+.input-feedback-container .feedback {
+  font-size: .8rem;
+  text-align: right;
+  display: none;
+}
+
+.input-feedback-container .feedback-error {
+  color: #dc3545;
+}
+
+.input-feedback-container .feedback-success {
+  color: #28a745;
+}
+
+.input-feedback-container.has-error .feedback-error,
+.input-feedback-container.has-success .feedback-success {
+  display: block;
 }
 
 .unfixed {
@@ -21449,61 +21484,6 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 
 .login-pwd-reset .input-unit.error + .error-msg {
   display: block;
-}
-
-.reset-pwd input {
-  height: 45px;
-}
-
-.reset-pwd .save-new-pwd-btn {
-  display: block;
-  width: 100%;
-}
-
-.reset-pwd .save-new-pwd-btn i {
-  margin-right: 6px;
-}
-
-@media (min-width: 576px) {
-  .reset-pwd .save-new-pwd-btn {
-    display: inline-block;
-    width: 10rem;
-  }
-}
-
-.reset-pwd .input-unit + .error-msg {
-  display: none;
-  font-size: 12px;
-  color: #d9534f;
-  margin-bottom: 10px;
-}
-
-.reset-pwd .input-unit.check-pwds-error {
-  z-index: 1000;
-  border-color: #d9534f;
-}
-
-.reset-pwd .input-unit.check-pwds-error input {
-  color: #d9534f;
-}
-
-.reset-pwd .input-unit.check-pwds-error label {
-  color: #d9534f;
-}
-
-.reset-pwd .input-unit.error {
-  margin-bottom: 2px;
-}
-
-.reset-pwd .input-unit.error + .error-msg {
-  display: block;
-}
-
-.reset-pwd .error-save-pwd-msg {
-  display: none;
-  font-size: 12px;
-  color: #d9534f;
-  margin-bottom: 5px;
 }
 
 .cmp-hero .hero-category {

@@ -12805,7 +12805,8 @@ $border-width: 1px;
         border-bottom-right-radius: 2px;
     }
 
-    &.error
+    &.error,
+    .input-feedback-container.has-error > &
     {
         z-index: $zIndex-1;
         border-color: $danger;
@@ -12828,7 +12829,8 @@ $border-width: 1px;
 
     }
 
-    &.success
+    &.success,
+    .input-feedback-container.has-success > &
     {
         z-index: $zIndex-1;
         border-color: $success;
@@ -12975,6 +12977,38 @@ $border-width: 1px;
     }
 }
 
+.input-feedback-container
+{
+    margin-bottom: $grid-gutter-width/2;
+
+    .input-unit
+    {
+        margin-bottom: 0;
+    }
+
+    .feedback
+    {
+        font-size: .8rem;
+        text-align: right;
+        display: none;
+    }
+
+    .feedback-error
+    {
+        color: $danger;
+    }
+
+    .feedback-success
+    {
+        color: $success;
+    }
+
+    &.has-error .feedback-error,
+    &.has-success .feedback-success
+    {
+        display: block;
+    }
+}
 
 // Page Design / Global components
 //header scss
@@ -16751,82 +16785,6 @@ html.ie .basket-preview-hover {
     }
   }
 }
-.reset-pwd
-{
-
-    input
-    {
-        height: 45px;
-    }
-
-    .save-new-pwd-btn
-    {
-        display: block;
-        width: 100%;
-
-        i
-        {
-            margin-right: 6px;
-        }
-    }
-
-    @include media-breakpoint-up(sm)
-    {
-
-        .save-new-pwd-btn
-        {
-            display: inline-block;
-            width: 10rem;
-        }
-    }
-
-    .input-unit
-    {
-
-        & + .error-msg
-        {
-            display: none;
-            font-size: 12px;
-            color: #d9534f;
-            margin-bottom: 10px;
-        }
-
-        &.check-pwds-error
-        {
-            z-index: 1000;
-            border-color: #d9534f;
-
-            input
-            {
-                color: #d9534f;
-            }
-
-            label
-            {
-                color: #d9534f;
-            }
-        }
-
-        &.error
-        {
-            margin-bottom: 2px;
-
-            & + .error-msg
-            {
-                display: block;
-            }
-        }
-    }
-
-    .error-save-pwd-msg
-    {
-        display: none;
-        font-size: 12px;
-        color: #d9534f;
-        margin-bottom: 5px;
-    }
-}
-
 .cmp-hero{
 	
 
