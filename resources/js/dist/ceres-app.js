@@ -18822,6 +18822,9 @@ Vue.component("container-item-list", {
                         items: this.itemsPerPage > 1 ? 2 : 1
                     },
                     768: {
+                        items: this.itemsPerPage > 3 ? 3 : this.itemsPerPage
+                    },
+                    992: {
                         items: this.itemsPerPage
                     }
                 },

@@ -2,7 +2,8 @@
     "identifier": "Ceres::LiveShoppingWidget",
     "label": "Widget.liveShoppingLabel",
     "previewImageURL": "/images/widgets/live-shopping.svg",
-    "type": "default",
+    "type": "static",
+    "categories": ["item"],
     "widgetClass": "Ceres\\Widgets\\Common\\LiveShoppingWidget",
     "settings": {
         "liveShoppingSelection": {
