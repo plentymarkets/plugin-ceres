@@ -32,9 +32,8 @@
                                                     :alt-text="itemData | itemName"
                                                     :title-text="itemData | itemName"
                                                     :item-url="itemData | itemURL"
-                                                    :show-dots="{{ ceresConfig.item.categoryShowDots | json_encode }}"
-                                                    :show-nav="{{ ceresConfig.item.categoryShowNav | json_encode }}"
                                                     :enable-carousel="{{ enableCarousel }}"
+                                                    :disable-carousel-on-mobile="disableCarouselOnMobile"
                                                     ref="categoryImageCarousel">
                             </category-image-carousel>
                         </slot>
