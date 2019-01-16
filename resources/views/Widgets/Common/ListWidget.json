@@ -7,6 +7,15 @@
     "position": 900,
     "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
     "settings": {
+        "title": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.listTitleLabel",
+                "tooltipText": "Widget.listTitleTooltip"
+            }
+        },
         "icon": {
             "type": "select",
             "required": true,
@@ -73,14 +82,36 @@
                 ]
             }
         },
-        "texts": {
-            "type": "text",
-            "required": false,
-            "defaultValue": "",
+        "centered": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.listCenteredLabel"
+            }
+        },
+        "entries": {
+            "type": "vertical",
             "isList": "[1,]",
             "options": {
-                "name": "Widget.listTextLabel",
-                "tooltipText": "Widget.listTextTooltip"
+                "name": "Widget.listEntryLabel"
+            },
+            "children": {
+                "text": {
+                    "type": "text",
+                    "required": false,
+                    "options": {
+                        "name": "Widget.listEntryNameLabel",
+                        "tooltipText": "Widget.listEntryNameTooltip"
+                    }
+                },
+                "url": {
+                    "type": "text",
+                    "required": false,
+                    "options": {
+                        "name": "Widget.listEntryUrlLabel",
+                        "tooltipText": "Widget.listEntryUrlTooltip"
+                    }
+                }
             }
         }
     }

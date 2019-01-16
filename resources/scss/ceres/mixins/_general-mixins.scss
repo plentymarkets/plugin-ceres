@@ -277,3 +277,9 @@
     border-left: $h solid $color;
     border-bottom: $w solid transparent;
 }
+
+@mixin context-bg($color)
+{
+    background-color: $color;
+    color: color-yiq($color);
+}

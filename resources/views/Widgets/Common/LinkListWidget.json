@@ -12,8 +12,8 @@
             "required": false,
             "defaultValue": "",
             "options": {
-                "name": "Widget.linkListTitleLabel",
-                "tooltipText": "Widget.linkListTitleTooltip"
+                "name": "Widget.listTitleLabel",
+                "tooltipText": "Widget.listTitleTooltip"
             }
         },
         "icon": {
@@ -21,8 +21,8 @@
             "required": true,
             "defaultValue": "none",
             "options": {
-                "name": "Widget.linkListIconLabel",
-                "tooltipText": "Widget.linkListIconTooltip",
+                "name": "Widget.listIconLabel",
+                "tooltipText": "Widget.listIconTooltip",
                 "listBoxValues": [
                     {
                         "value": "none",
@@ -82,27 +82,34 @@
                 ]
             }
         },
+        "centered": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.listCenteredLabel"
+            }
+        },
         "entries": {
             "type": "vertical",
             "isList": "[1,]",
             "options": {
-                "name": "Widget.linkListEntryLabel"
+                "name": "Widget.listEntryLabel"
             },
             "children": {
                 "text": {
                     "type": "text",
                     "required": false,
                     "options": {
-                        "name": "Widget.linkListEntryNameLabel",
-                        "tooltipText": "Widget.linkListEntryNameTooltip"
+                        "name": "Widget.listEntryNameLabel",
+                        "tooltipText": "Widget.listEntryNameTooltip"
                     }
                 },
                 "url": {
                     "type": "text",
                     "required": false,
                     "options": {
-                        "name": "Widget.linkListEntryUrlLabel",
-                        "tooltipText": "Widget.linkListEntryUrlTooltip"
+                        "name": "Widget.listEntryUrlLabel",
+                        "tooltipText": "Widget.listEntryUrlTooltip"
                     }
                 }
             }

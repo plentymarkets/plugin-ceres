@@ -82,7 +82,7 @@ button:focus {
 
 // create gray outline button 
 .btn-outline-default{
-	@include button-outline-variant($btn-default-color);
+	@include button-outline-variant($gray-light);
 }
 
 .btn {
@@ -107,8 +107,13 @@ button:focus {
 		}
 	}
 
+	& > span + .fa {
+		margin-left: 5px;
+		margin-top: 1px;
+	}
+
 	&.btn-remove-address {
-		background-color: $brand-danger;
+		background-color: $danger;
 		margin-right: -5px;
 		color: #fff;
 
@@ -218,13 +223,13 @@ button:focus {
 	}
 	.btn-only-icon-#{$bp}-down {
 	  @include media-breakpoint-down($bp) {
-		width: 2.2rem !important;
-        padding-right: 8px;
-        height: 2.2rem;
-
         & span {
-            display: none !important;
-        }
+			display: none !important;
+		}
+		i {
+			margin: 0 !important;
+			float: none !important;
+		}
 	  }
 	}
   }

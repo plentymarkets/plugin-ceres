@@ -1,12 +1,12 @@
 <script type="x/template" id="vue-bank-data-select">
     <div>
-        <div class="cmp cmp-address-list m-b-3">
+        <div class="cmp cmp-address-list mb-5">
 
             <div class="items items-empty" v-show="userBankData.length == 0">
                 <div class="card">
                     <span class="item-inner">
                         <span class="item-content">
-                            <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.myAccountBankNoBankData") }} -</p>
+                            <p class="text-muted small font-italic pt-3">- {{ trans("Ceres::Template.myAccountBankNoBankData") }} -</p>
                         </span>
                     </span>
                 </div>
@@ -22,7 +22,7 @@
                         </span>
 
                         <span class="item-content" v-show="!selectedBankData">
-                            <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.myAccountPleaseSelect") }} -</p>
+                            <p class="text-muted small font-italic pt-3">- {{ trans("Ceres::Template.myAccountPleaseSelect") }} -</p>
                         </span>
                     </span>
                 </div>
@@ -54,11 +54,11 @@
                         </li>
                     </ul>
                 </div>
-            </div><!--
-            --><div class="add-item">
-                <button href="#" class="btn btn-primary" @click.prevent="openAddBank()">
+            </div>
+            <div class="add-item">
+                <button href="#" class="btn btn-primary btn-only-icon-xs-down" @click.prevent="openAddBank()">
+                    <span>{{ trans("Ceres::Template.myAccountBankAddDataTitle") }}</span>
                     <i class="fa fa-plus-square" aria-hidden="true"></i>
-                    {{ trans("Ceres::Template.myAccountBankAddDataTitle") }}
                 </button>
             </div>
         </div>
@@ -68,35 +68,35 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <h4 class="modal-title">${headline}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title">${headline}</h4>
                         </div>
 
                         <div class="modal-body">
                             <fieldset>
                                 <form id="my-bankForm">
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-12">
                                             <div class="input-unit accountOwner" data-validate="text">
                                                 <input type="text" name="kontoinhaber" v-model="updateBankData.accountOwner" data-autofocus>
                                                 <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.myAccountHolder") }}*</label>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12">
+                                        <div class="col-12">
                                             <div class="input-unit">
                                                 <input type="text" name="kreditInstitut" v-model="updateBankData.bankName">
                                                 <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.myAccountBank") }}</label>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12">
+                                        <div class="col-12">
                                             <div class="input-unit iban" data-validate="regex">
                                                 <input type="text" name="iban" data-validate-ref="/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/" maxlength="32" v-model="updateBankData.iban">
                                                 <label :for="'txt_firma' + _uid">IBAN*</label>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12">
+                                        <div class="col-12">
                                             <div class="input-unit no-bottom" data-validate="regex">
                                                 <input type="text" name="bic" data-validate-ref="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" v-model="updateBankData.bic">
                                                 <label :for="'txt_firma' + _uid">BIC* - {{ trans("Ceres::Template.myAccountBankBicNotification") }}</label>
@@ -108,8 +108,11 @@
                         </div>
                         <div class="modal-footer">
                             <div class="row">
-                                <div class="col-xs-12">
-                                    <button type="button" class="btn btn-primary btn-block" @click="validateInput()">{{ trans("Ceres::Template.myAccountSave") }}</button>
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary btn-block" @click="validateInput()">
+                                        <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -123,10 +126,10 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <h4 class="modal-title">{{ trans("Ceres::Template.myAccountBankDeleteTitle") }}</h4>
                             <button type="button" class="close" @click="closeDeleteModal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title">{{ trans("Ceres::Template.myAccountBankDeleteTitle") }}</h4>
                         </div>
 
                         <div class="modal-body">

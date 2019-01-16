@@ -19,15 +19,23 @@
 {% if headerContainer is empty %}
     {% include "Ceres::PageDesign.Partials.Header.DefaultHeader" %}
 {% else %}
-<header id="page-header" class="pos-f-t">
+<header id="page-header" class="fixed-top">
     {{ headerContainer | raw }}
 </header>
 {% endif %}
 
 {% set scriptId = uid() %}
 <script id="{{ scriptId }}">
-    document.getElementById("vue-app").style.marginTop = document.getElementById("page-header").getBoundingClientRect().height + 'px';
-    document.getElementById("{{ scriptId }}").remove();
+    var vueApp = document.getElementById("vue-app");
+    var pageHeader = document.getElementById("page-header");
+
+    if ( !!vueApp && !!pageHeader )
+    {
+        vueApp.style.marginTop = pageHeader.getBoundingClientRect().height + 'px';
+    }
+
+    var scriptElement = document.getElementById("{{ scriptId }}");
+    scriptElement.parentElement.removeChild(scriptElement);
 </script>
 
 <div>

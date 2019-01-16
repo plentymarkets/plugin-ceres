@@ -1,46 +1,63 @@
-const checkElement = (el, breakpoint) =>
+const stickInParent = (el, minWidth, isActive) =>
 {
-    const isSticky = el.dataset.isSticky === "true";
-    const matchesBreakpoint = window.matchMedia("(min-width: " + breakpoint + "px)").matches;
+    const currentActiveState = el.dataset.isSticky === "true";
+    const isInSize = window.matchMedia("(min-width: " + minWidth + "px)").matches;
 
-    if (matchesBreakpoint && !isSticky)
+    const activeState = !(isActive === false) && isInSize;
+
+    if (activeState && !currentActiveState)
     {
         const $element = $(el);
-        const headHeight = $(".top-bar").height();
+        const headHeight = $("#page-header").height();
 
-        el.dataset.isSticky = true;
-        $element.stick_in_parent({offset_top: headHeight + 10});
-
-        $element.on("sticky_kit:bottom", () =>
+        if ($element.stick_in_parent({offset_top: headHeight + 10}))
         {
-            $element.parent().css("position", "static");
-        })
-        .on("sticky_kit:unbottom", () =>
-        {
-            $element.parent().css("position", "relative");
-        });
+            el.dataset.isSticky = true;
+        }
     }
-    else if (!matchesBreakpoint && isSticky)
+    else if (!activeState && currentActiveState)
     {
         el.dataset.isSticky = false;
         $(el).trigger("sticky_kit:detach");
     }
+
 };
 
 Vue.directive("stick-in-parent",
     {
         bind(el, binding)
         {
-            const minSize = binding.value || 768;
-
             window.addEventListener("resize", () =>
             {
-                checkElement(el, minSize);
+                stickInParent(el, parseInt(binding.arg) || 768);
             });
 
             setTimeout(() =>
             {
-                checkElement(el, minSize);
+                stickInParent(
+                    el,
+                    parseInt(binding.arg) || 768,
+                    binding.value
+                );
             }, 0);
+        },
+        update(el, binding)
+        {
+            setTimeout(() =>
+            {
+                stickInParent(
+                    el,
+                    parseInt(binding.arg) || 768,
+                    binding.value
+                );
+            }, 0);
+        },
+        unbind(el)
+        {
+            stickInParent(
+                el,
+                0,
+                false
+            );
         }
     });

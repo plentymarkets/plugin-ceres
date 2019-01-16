@@ -1,43 +1,49 @@
 {{ component( "Ceres::Customer.Components.AddressSelect.CreateUpdateAddress") }}
 <script type="x/template" id="vue-address-select">
     <div>
-        <div class="cmp cmp-address-list m-b-2">
+        <div class="cmp cmp-address-list mb-4">
             <div class="dropdown items">
 
                 <div class="component-loading" :id="'addressMultiSelect' + _uid"
                         v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
                         data-toggle="dropdown"
                         aria-haspopup="true"
-                        aria-expanded="false">
+                        aria-expanded="false"
+                        data-boundary="window">
 
                     <div class="item-inner" v-bind:class="{'error': showError}">
                         <span v-if="selectedAddress && selectedAddress.id == -99">
-                            <p class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
+                            <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                         </span>
                         <span v-else class="item-content">
                             <div v-if="!isAddressListEmpty && selectedAddress">
                                 <strong v-if="selectedAddress && selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
+                                <span>${ selectedAddress | optionType(12) }</span>
                                 <strong v-if="selectedAddress && !selectedAddress.name1 || selectedAddress.name1.length == 0">${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</strong>
-                                <span v-else>${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</span>
+                                <span v-else-if="!selectedAddress.name1">${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</span>
+                                <span>${selectedAddress.name4}</span>
                                 <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
+                                <span>
+                                    <template v-if="selectedAddress.address1 === 'PACKSTATION' || selectedAddress.address1 === 'POSTFILIALE'">
+                                        {{ trans("Ceres::Template.addressPostNummer") }}
+                                    </template> 
+                                    
+                                    ${ selectedAddress.address3 }
+                                </span>
                                 <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
                                 <span>${getCountryName(selectedAddress.countryId)}</span>
                             </div>
 
-                            <p v-if="!isAddressListEmpty && !selectedAddress"
-                            class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressPleaseSelect") }}
-                                </p>
-                            <p v-if="isAddressListEmpty"
-                            class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressNoAddress") }}
-                                </p>
+                            <p v-if="!isAddressListEmpty && !selectedAddress" class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressPleaseSelect") }}</p>
+                            <p v-if="isAddressListEmpty" class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressNoAddress") }}</p>
                         </span>
                     </div>
                 </div>
 
                 <div class="add-item">
                     <button href="#" class="btn btn-primary btn-medium btn-only-icon-xs-down" v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading">
-                        <i class="fa fa-plus-square" aria-hidden="true"></i>
                         <span>{{ trans("Ceres::Template.addressAddAddress") }}</span>
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
                     </button>
                 </div>
 
@@ -50,31 +56,37 @@
                                     :id="'addressSelectItem' + _uid + address.id"
                                     :value="address.id"
                                     :checked="selectedAddress && selectedAddress.id === address.id"
-                                    @change="onAddressChanged(address)"
-                            >
+                                    @change="onAddressChanged(address)">
                             <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
                             <span v-if="address.id == -99">
-                                <p class="text-muted small font-italic p-t-1">{{ trans("Ceres::Template.addressSameAsInvoice") }}
-                                    </p>
+                                <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                             </span>
                                 <span v-else class="item-content small">
                                 <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
+                                <span>${ selectedAddress | optionType(12) }</span>
                                 <strong v-if="!address.name1 || address.name1.length == 0">${address | optionType(11)} ${address.name2} ${address.name3}</strong>
                                 <span v-else>${selectedAddress | optionType(11)} ${address.name2} ${address.name3}</span>
                                 <span>${address.name4}</span>
                                 <span>${address.address1} ${address.address2}</span>
+                                <span>
+                                    <template v-if="address.address1 === 'PACKSTATION' || address.address1 === 'POSTFILIALE'">
+                                        {{ trans("Ceres::Template.addressPostNummer") }}
+                                    </template> 
+                                    
+                                    ${ address.address3 }
+                                </span>
                                 <span>${address.postalCode} ${address.town}</span>
                                 <span>${getCountryName(address.countryId)}</span>
                             </span>
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
                                     <span class="item-edit">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressEdit") }}" class="btn btn-primary btn-medium" @click.prevent="showEditModal(address)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressEdit") }}" class="btn btn-primary" @click.prevent="showEditModal(address)">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressDelete") }}" class="btn btn-medium btn-remove-address" @click.prevent="showDeleteModal(address)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressDelete") }}" class="btn btn-remove-address" @click.prevent="showDeleteModal(address)">
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </span>
@@ -91,10 +103,10 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <h4 class="modal-title">${headline}</h4>
                             <button type="button" class="close" @click="closeAddressModal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title">${headline}</h4>
                         </div>
 
                         <div class="modal-body">
@@ -119,10 +131,10 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <h4 class="modal-title">${headline}</h4>
                             <button type="button" class="close" @click="closeDeleteModal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title">${headline}</h4>
                         </div>
 
                         <div class="modal-body">
@@ -135,6 +147,13 @@
                                             <span v-else>${selectedAddress | optionType(11)} ${addressToDelete.name2} ${addressToDelete.name3}</span>
                                             <span>${addressToDelete.name4}</span>
                                             <span>${addressToDelete.address1} ${addressToDelete.address2}</span>
+                                            <span>
+                                                <template v-if="addressToDelete.address1 === 'PACKSTATION' || addressToDelete.address1 === 'POSTFILIALE'">
+                                                    {{ trans("Ceres::Template.addressPostNummer") }}
+                                                </template> 
+                                                
+                                                ${ addressToDelete.address3 }
+                                            </span>
                                             <span>${addressToDelete.postalCode} ${addressToDelete.town}</span>
                                             <span>${getCountryName(addressToDelete.countryId)}</span>
                                         </div>
@@ -144,18 +163,14 @@
                         </div>
 
                         <div class="modal-footer">
-                            <div class="row">
-                                <div class="col-sm-8 offset-sm-2 item-confirm-special-case-close">
-                                    <button type="button" class="btn btn-primary btn-medium btn-m-r btn-outline-primary" @click="closeDeleteModal">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                        {{ trans("Ceres::Template.addressCancel") }}
-                                    </button>
-                                    <button type="button" class="btn btn-primary btn-medium" :disabled="deleteModalWaiting" @click="deleteAddress">
-                                        <i v-waiting-animation="deleteModalWaiting" class="fa fa-trash" aria-hidden="true"></i>
-                                        {{ trans("Ceres::Template.addressDelete") }}
-                                    </button>
-                                </div>
-                            </div>
+                            <button type="button" class="btn btn-medium btn-m-r btn-outline-primary" @click="closeDeleteModal">
+                                <span>{{ trans("Ceres::Template.addressCancel") }}</span>
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-medium" :disabled="deleteModalWaiting" @click="deleteAddress">
+                                <span>{{ trans("Ceres::Template.addressDelete") }}</span>
+                                <i v-waiting-animation="deleteModalWaiting" class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

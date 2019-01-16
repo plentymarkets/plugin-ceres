@@ -58,7 +58,7 @@
 
     {% if slideSettings.headline | trim is not empty and slideSettings.headlineStyle == "custom-caption" %}
 
-        {{ Twig.set("slide", "slide | merge({ name: '#{ (slideSettings.headline) }' })") }}
+        {{ Twig.set("slide", "slide | merge({ name: #{ (slideSettings.headline | json_encode) } })") }}
 
     {% endif %}
 
@@ -97,7 +97,7 @@
             </div>
             {{ Twig.endfor() }}
         </div>
-
+        
         {{ Twig.if("slides | length > 1") }}
             <ol class="carousel-indicators">
                 {{ Twig.for("i", "1..slides | length") }}
@@ -105,12 +105,12 @@
                 {{ Twig.endfor() }}
             </ol>
 
-            <a class="left carousel-control" href="#image-carousel_{{ carouselId }}" role="button" data-slide="prev">
+            <a class="left carousel-control carousel-control-prev" href="#image-carousel_{{ carouselId }}" role="button" data-slide="prev">
                 <span class="fa fa-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">{{ trans("Ceres::Template.homepageBack") }}</span>
             </a>
 
-            <a class="right carousel-control" href="#image-carousel_{{ carouselId }}" role="button" data-slide="next">
+            <a class="right carousel-control carousel-control-next" href="#image-carousel_{{ carouselId }}" role="button" data-slide="next">
                 <span class="fa fa-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
             </a>

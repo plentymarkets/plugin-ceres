@@ -53,7 +53,7 @@ Vue.component("container-item-list", {
             }
 
             return [
-                "col-xs-12",
+                "col-12",
                 itemsPerPage === 1 ? "col-sm-12" : "col-sm-6",
                 "col-md-" + (12 / itemsPerPage)
             ];
@@ -76,6 +76,9 @@ Vue.component("container-item-list", {
                         items: (this.itemsPerPage > 1) ? 2 : 1
                     },
                     768: {
+                        items: (this.itemsPerPage > 3) ? 3 : this.itemsPerPage
+                    },
+                    992: {
                         items: this.itemsPerPage
                     }
                 },

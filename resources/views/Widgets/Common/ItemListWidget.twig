@@ -47,25 +47,27 @@
         {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
     {% endif %}
 {% elseif headlineStyle == "custom-caption" and headline | trim is not empty %}
-    {{ Twig.set("title", "'#{ headline }'" ) }}
+    {{ Twig.set("title", headline | json_encode ) }}
 {% endif %}
 
-{{ Twig.component( "Ceres::Containers.Components.ContainerItemList" ) }}
 {{ Twig.component( "Ceres::Containers.Components.LastSeenItemList" ) }}
+{{ Twig.component( "Ceres::ItemList.Components.CategoryItem" ) }}
+{{ Twig.component( "Ceres::PageDesign.Components.Carousel" ) }}
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
 <div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
             <last-seen-item-list :max-items="{{ maxItems }}" :items-per-page="{{ itemsPerPage }}">
-                <div class="widget-caption m-b-1" slot="heading">
+                <div class="widget-caption mb-3" slot="heading">
                     <h2>{{ Twig.print("title") }}</h2>
                 </div>
             </last-seen-item-list>
         {% else %}
             {# render static item lists #}
             {% if headlineStyle == "default-caption" or headlineStyle == "custom-caption" or headlineStyle is empty %}
-                <div class="widget-caption m-b-1">
+                <div class="widget-caption mb-3">
                     <h2>{{ Twig.print("title") }}</h2>
 
                     {{ Twig.if("category") }}
@@ -76,11 +78,24 @@
                 </div>
             {% endif %}
 
-            <div class="row clearfix">
-                {{ Twig.if("itemList.documents is not empty") }}
-                    <container-item-list :items="{{ Twig.print("itemList.documents | json_encode") }}" :items-per-page="{{ itemsPerPage }}"></container-item-list>
-                {{ Twig.endif() }}
-            </div>
+            {{ Twig.if("itemList.documents is not empty") }}
+                <carousel :items-per-page="{{ itemsPerPage }}">
+                    {{ Twig.for("item", "itemList.documents") }}
+                        <template slot="items">
+                            <category-item
+                                :item-data="{{ Twig.print("item.data | json_encode") }}"
+                                :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial") }}">
+                                <template slot="BeforePrices">
+                                    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.BeforePrices", Twig.var("item.data")])) }}
+                                </template>
+                                <template slot="AfterPrices">
+                                    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", Twig.var("item.data")])) }}
+                                </template>
+                            </category-item>
+                        </template>
+                    {{ Twig.endfor() }}
+                </carousel>
+            {{ Twig.endif() }}
         {% endif %}
     </div>
 </div>
