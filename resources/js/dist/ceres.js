@@ -24802,16 +24802,16 @@ Vue.component("carousel", {
 
     methods: {
         initializeCarousel: function initializeCarousel() {
-            var _this2 = this;
+            var self = this;
 
             $(this.$refs.carouselContainer).owlCarousel({
                 autoHeight: true,
                 dots: true,
-                items: this.itemsPerPage,
+                items: self.itemsPerPage,
                 responsive: {
                     0: { items: 1 },
-                    544: { items: this.itemsPerPage > 1 ? 2 : 1 },
-                    768: { items: this.itemsPerPage }
+                    544: { items: self.itemsPerPage > 1 ? 2 : 1 },
+                    768: { items: self.itemsPerPage }
                 },
                 lazyLoad: false,
                 loop: false,
@@ -24827,7 +24827,7 @@ Vue.component("carousel", {
                     var end = begin + property.page.size;
 
                     for (var i = begin; i < end; i++) {
-                        var childComponent = _this2.$children[i];
+                        var childComponent = self.$children[i];
 
                         if (childComponent && childComponent.loadFirstImage) {
                             childComponent.loadFirstImage();
