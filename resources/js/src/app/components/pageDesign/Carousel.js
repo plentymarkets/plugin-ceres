@@ -56,7 +56,10 @@ Vue.component("carousel", {
     {
         this.$options.template = this.template;
 
-        this.itemCount = this.$slots.items.length;
+        if (this.$slots.items)
+        {
+            this.itemCount = this.$slots.items.length;
+        }
     },
 
     mounted()
@@ -80,11 +83,11 @@ Vue.component("carousel", {
                 autoHeight       : true,
                 dots             : true,
                 items            : self.itemsPerPage,
-                responsive:
-                {
+                responsive: {
                     0:   { items: 1 },
-                    544: { items: (self.itemsPerPage > 1) ? 2 : 1 },
-                    768: { items: self.itemsPerPage }
+                    576: { items: self.itemsPerPage > 1 ? 2 : 1 },
+                    768: { items: self.itemsPerPage > 3 ? 3 : self.itemsPerPage },
+                    992: { items: self.itemsPerPage }
                 },
                 lazyLoad         : false,
                 loop             : false,
