@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from "../../helper/utils";
+
 const state =
     {
         variation: {},
@@ -22,7 +24,7 @@ const mutations =
             state.variationList = variationList;
         },
 
-        setVariationOrderProperty(state, {propertyId, value})
+        setVariationOrderProperty(state, { propertyId, value })
         {
             const index = state.variation.documents[0].data.properties.findIndex(property => property.property.id === propertyId);
 
@@ -109,9 +111,16 @@ const getters =
 
         variationTotalPrice(state, getters, rootState, rootGetters)
         {
-            const graduatedPrice = getters.variationGraduatedPrice;
+            const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-            return getters.variationPropertySurcharge + (graduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0);
+            if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
+            {
+                const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+
+                return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+            }
+
+            return null;
         },
 
         variationGroupedProperties(state)
@@ -139,7 +148,7 @@ const getters =
                         group: groupProperties[0].group,
                         properties: groupProperties.map(property =>
                         {
-                            return {...property.property, itemSurcharge: property.surcharge};
+                            return { ...property.property, itemSurcharge: property.surcharge };
                         })
                     });
                 }

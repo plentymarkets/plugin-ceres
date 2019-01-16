@@ -1,13 +1,14 @@
 @import "mixins/mixins";
 
-@import "Helper/base-widget";
-@import "Grid/grid-widget";
 @import "Common/image-box-widget";
 @import "Common/image-carousel-widget";
 @import "Common/item-list-widget";
+@import "Common/faq-widget";
 @import "Common/legal-information-widget";
-@import "Common/title-bar-widget";
+@import "Common/list-widget";
+@import "Common/live-shopping-widget";
 @import "Common/newsletter-widget";
 @import "Common/text-widget";
-@import "Common/list-widget";
-@import "Common/link-list-widget";
+@import "Common/title-bar-widget";
+@import "Grid/grid-widget";
+@import "Helper/base-widget";

@@ -6,6 +6,27 @@ const AutoFocusService = require("services/AutoFocusService");
 // eslint-disable-next-line
 var init = (function($, window, document)
 {
+    var headerCollapses = [];
+
+    function HeaderCollapse(selector)
+    {
+        headerCollapses.push(selector);
+        $(document).ready(function()
+        {
+            $(selector).on("show.bs.collapse", () =>
+            {
+                headerCollapses.forEach(element =>
+                {
+                    if (!$(element).is(selector))
+                    {
+                        $(element).collapse("hide");
+                    }
+                });
+            });
+
+        });
+    }
+
     function CeresMain()
     {
         const browser = browserDetect.detect();
@@ -44,6 +65,10 @@ var init = (function($, window, document)
 
         // init bootstrap tooltips
         $("[data-toggle=\"tooltip\"]").tooltip();
+
+        HeaderCollapse("#countrySettings");
+        HeaderCollapse("#currencySelect");
+        HeaderCollapse("#searchBox");
 
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
@@ -90,26 +115,13 @@ var init = (function($, window, document)
                 }
             }
 
-            if ((evt.target.id != "countrySettings") &&
-                ($(evt.target).parents("#countrySettings").length <= 0) &&
-                ($("#countrySettings").attr("aria-expanded") == "true"))
+            headerCollapses.forEach(element =>
             {
-                $("#countrySettings").collapse("hide");
-            }
-
-            if ((evt.target.id != "searchBox") &&
-                ($(evt.target).parents("#searchBox").length <= 0) &&
-                ($("#searchBox").attr("aria-expanded") == "true"))
-            {
-                $("#searchBox").collapse("hide");
-            }
-
-            if ((evt.target.id != "currencySelect") &&
-                ($(evt.target).parents("#currencySelect").length <= 0) &&
-                ($("#currencySelect").attr("aria-expanded") == "true"))
-            {
-                $("#currencySelect").collapse("hide");
-            }
+                if (evt.target !== element && $(evt.target).parents(element).length <= 0)
+                {
+                    $(element).collapse("hide");
+                }
+            });
         });
 
         $toggleListView.on("click", function(evt)
@@ -186,7 +198,7 @@ var init = (function($, window, document)
             {
                 event.preventDefault();
 
-                $("html, body").animate({scrollTop: 0}, duration);
+                $("html, body").animate({ scrollTop: 0 }, duration);
 
                 return false;
             });
@@ -195,7 +207,7 @@ var init = (function($, window, document)
             {
                 event.preventDefault();
 
-                $("html, body").animate({scrollTop: 0}, duration);
+                $("html, body").animate({ scrollTop: 0 }, duration);
 
                 return false;
             });

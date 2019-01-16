@@ -13,6 +13,7 @@
 {% set showItemImages               = widget.settings.showItemImages.mobile %}
 {% set forwardToSingleItem          = widget.settings.forwardToSingleItem.mobile %}
 
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.set("currencyFormat", Twig.call("config", ["Ceres.currency.format"])) }}
 {{ Twig.set("currencyFormatSelect", Twig.call("config", ["Ceres.currency.format_selection"])) }}
 {{ Twig.set("currencyData", Twig.call("services.checkout.getCurrencyData") ~ "[currencyFormat]") }}
@@ -20,26 +21,32 @@
 {{ Twig.set("basketPreviewType", Twig.call("config", ["Ceres.basket.preview_type"])) }}
 {{ Twig.set("activeCurrencies", Twig.call("config", ["Ceres.currency.available_currencies"]) ~ " | split(\", \")") }}
 {{ Twig.set("defaultLanguage", Twig.call("services.webstoreConfig.getDefaultLanguage")) }}
+{{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
 <div class="top-bar{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
         <div class="row">
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Header.LeftSide"])) }}
             <div class="top-bar-items {% if searchStyle == "permanent" %}search-shown{% endif %}">
                 {% if searchStyle == "permanent" %}
-                    <div class="always-visible-search">
-                        <item-search template="#vue-item-search"
-                                     :show-item-images="{{ showItemImages | json_encode }}"
-                                     :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
-                            <div class="search-box-inner">
-                                <div class="search-box-shadow-frame">
-                                    <input type="search" class="search-input"/>
-                                    <button class="search-submit" type="submit">
-                                        <i class="fa fa-search sm-up"></i>
-                                    </button>
+                    {{ Twig.if("overrideSearchBar | trim is empty") }}
+                        <div class="always-visible-search">
+                            <item-search template="#vue-item-search"
+                                         :show-item-images="{{ showItemImages | json_encode }}"
+                                         :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
+                                <div class="search-box-inner">
+                                    <div class="search-box-shadow-frame">
+                                        <input type="search" class="search-input"/>
+                                        <button class="search-submit" type="submit">
+                                            <i class="fa fa-search sm-up"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </item-search>
-                    </div>
+                            </item-search>
+                        </div>
+                    {{ Twig.else() }}
+                        {{ Twig.print("overrideSearchBar | raw") }}
+                    {{ Twig.endif() }}
                 {% endif %}
                 <div class="controls">
                     <ul id="controlsList" class="controls-list list-inline">
@@ -148,30 +155,34 @@
         <div class="row">
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse">
-                    <item-search
-                        :show-item-images="{{ showItemImages | json_encode }}"
-                        :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
+                    {{ Twig.if("overrideSearchBar | trim is empty") }}
+                        <item-search
+                            :show-item-images="{{ showItemImages | json_encode }}"
+                            :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
+                    {{ Twig.else() }}
+                        {{ Twig.print("overrideSearchBar | raw") }}
+                    {{ Twig.endif() }}
                 </div>
             {% endif %}
 
             {% if enableCurrencySelect %}
                 <div id="currencySelect" class="cmp cmp-currency-select collapse">
                     <div class="container-max">
-                        <div class="currency-select-inner row">
+                        <div class="row py-3">
 
-                            <div class="currency-list col-xs-12">
+                            <div class="currency-list col-12">
                                 <div class="list-title">
                                     <strong>{{ Twig.print('trans("Ceres::Template.headerCurrency")') }}</strong>
                                     <hr>
                                 </div>
-                                <ul>
+                                <ul class="text-center text-sm-left">
                                     {{ Twig.set("activeCurrency", Twig.call("services.checkout.getCurrencyData().name")) }}
                                     {{ Twig.for("currency", Twig.call("services.checkout.getCurrencyList")) }}
                                     {{ Twig.if("currency.name in activeCurrencies or \"all\" in activeCurrencies or currency.name == activeCurrency") }}
                                         <li{{ Twig.if("currency.name == activeCurrency") }} class="active"{{ Twig.endif() }}>
-                                            <a href="{{ Twig.print(Twig.call("queryString", ["{\"currency\": activeCurrency}"])) }}" rel="nofollow">
+                                            <a href="{{ Twig.print("queryString({currency: currency.name})") }}" rel="nofollow">
                                                 {{ Twig.if("currencyFormatSelect == 'all'") }}
-                                                    {{ Twig.print("currency.name") }} ({{ Twig.print("currency.symbol") }})
+                                                    {{ Twig.print("currency.name") }} <br class="d-block d-sm-none" />({{ Twig.print("currency.symbol") }})
                                                 {{ Twig.else() }}
                                                     {{ Twig.print("currency[currencyFormatSelect]") }}
                                                 {{ Twig.endif }}
@@ -191,11 +202,11 @@
                         country-flag-prefix="flag-icon-"
                         :shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode') }}"
                         :shipping-country-id="{{ Twig.print('services.checkout.getShippingCountryId() | json_encode') }}">
-                    <div id="countrySettings" class="row cmp cmp-country-settings no-margin collapse">
+                    <div id="countrySettings" class="cmp cmp-country-settings collapse">
                         <div class="container-max">
-                            <div class="row no-padding">
+                            <div class="row py-3">
                                 {% if enableLanguageSelect %}
-                                    <div class="country-settings-inner languages {% if enableShippingCountrySelect %}col-lg-6{% else %}col-lg-12{% endif %}">
+                                    <div class="col-12 {% if enableShippingCountrySelect %}col-lg-6{% else %}col-lg-12{% endif %}">
 
                                         <div class="language-settings">
                                             <div class="list-title">
@@ -225,7 +236,7 @@
                                     </div>
                                 {% endif %}
                                 {% if enableShippingCountrySelect %}
-                                    <div class="country-settings-inner countries {% if enableLanguageSelect %}col-lg-6{% else %}col-lg-12{% endif %}">
+                                    <div class="col-12 {% if enableLanguageSelect %}col-lg-6{% else %}col-lg-12{% endif %}">
                                         <div class="shipping-settings">
                                             <div class="list-title">
                                                 <strong>{{ Twig.print('trans("Ceres::Template.headerSelectShippingCountry")') }}</strong>

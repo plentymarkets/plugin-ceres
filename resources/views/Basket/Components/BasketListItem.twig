@@ -4,7 +4,6 @@
 {{ component( "Ceres::Item.Components.ItemBundle" ) }}
 
 {% set itemsData = config("Ceres.basket.item_data")|split(', ') %}
-{% set showItemVariation = config("Ceres.basket.variations") %}
 {% set basketDetailsData = config("Ceres.basket.item_data")|split(', ') %}
 
 <script type="x/template" id="vue-basket-list-item">
@@ -114,7 +113,7 @@
                 <div class="item-additional-information-container">
                     <div class="item-additional-information" v-if="size === 'large' && showMoreInformation">
                         {% if "basket.item.item_id" in basketDetailsData %}
-                            <div class="m-t-1">
+                            <div class="mt-3">
                                 <strong>{{ trans("Ceres::Template.basketItemId") }}:</strong>
                                 <span>${ basketItem.itemId }</span>
                             </div>
@@ -135,11 +134,11 @@
                         {% endif %}
 
                         {% if "basket.item.description_long" in basketDetailsData %}
-                            <p class="m-y-1" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.description"></p>
+                            <p class="my-3" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.description"></p>
                         {% endif %}
 
                         {% if "basket.item.description_short" in basketDetailsData %}
-                            <p class="m-y-1" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.shortDescription"></p>
+                            <p class="my-3" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.shortDescription"></p>
                         {% endif %}
                     </div>
 

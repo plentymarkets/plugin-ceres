@@ -1,5 +1,6 @@
 import $ from "jquery";
-import {isMail} from "../helper/strings";
+import { isMail } from "../helper/strings";
+import { isNull } from "../helper/utils";
 
 let $form;
 
@@ -158,7 +159,7 @@ function _validateGroup($formControl, validationKey)
 {
     const groupName = $formControl.attr("name");
     const $group    = $form.find("[name=\"" + groupName + "\"]");
-    const range     = _eval(validationKey) || {min: 1, max: 1};
+    const range     = _eval(validationKey) || { min: 1, max: 1 };
     const checked   = $group.filter(":checked").length;
 
     return checked >= range.min && checked <= range.max;
@@ -171,6 +172,7 @@ function _validateSelect($formControl, validationKey)
 
 function _validateInput($formControl, validationKey)
 {
+
     switch (validationKey)
     {
     case "text":
@@ -179,6 +181,8 @@ function _validateInput($formControl, validationKey)
         return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
     case "ref":
         return _compareRef($.trim($formControl.val()), $.trim($formControl.attr("data-validate-ref")));
+    case "date":
+        return _isValidDate($formControl);
     case "mail":
         return _isMail($formControl);
     case "password":
@@ -199,6 +203,34 @@ function _validateInput($formControl, validationKey)
 function _hasValue($formControl)
 {
     return $.trim($formControl.val()).length > 0;
+}
+
+/**
+ * @param {any} $formControl - Input inside Formular
+ * @returns value is valid date
+ */
+function _isValidDate($formControl)
+{
+    const string = $formControl.val();
+    const match = string.match(/^(?:(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4}))|(?:(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2}))$/);
+
+    // If match is null date is not valid
+    if (isNull(match))
+    {
+        return false;
+    }
+
+    const year = match[3] || match[4];
+    const month = match[2] || match[5];
+    const day = match[1] || match[6];
+
+    // Additional checks
+    if ((year >= 1901) && (month >= 1 && month <= 12) && (day >= 1 && day <= 31))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 /**
@@ -254,4 +286,4 @@ function _eval(input)
     return (new Function("return " + input))();
 }
 
-export default {validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields};
+export default { validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields };

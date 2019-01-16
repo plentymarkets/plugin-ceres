@@ -1,5 +1,57 @@
 # Release Notes für Ceres
 
+## v2.17.1 (2018-12-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.17.0...2.17.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler konnten Hauptvarianten mit Attributverknüpfung nicht in den Warenkorb gelegt werden. Dies wurde behoben.
+
+## v2.17.0 (2018-11-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.3...2.17.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Durch die Umstellung auf den automatischen E-Mail-Versand in Ceres, muss die "Passwort vergessen" E-Mail-Vorlage in das Menü **System » Mandant » Mandant wählen » E-Mail » Vorlagen** überführt werden.
+- Durch die Umstellung auf den automatischen E-Mail-Versand in Ceres muss die Ereignisaktion für das Versenden der Bestellbestätigung gelöscht werden, da sonst 2 Mails verschickt werden.
+
+### Hinzugefügt
+
+- Die Konfiguration der Kategoriebeschreibungen wurde angepasst und ermöglicht es nun, Kategoriebeschreibung 1 und 2 auf den Kategorieseiten auszugeben und diese über oder unter der Artikelliste zu positionieren.
+- Auf der Bestellbestätigungsseite wurde ein neuer Layout-Container hinzugefügt. Dieser befindet sich unterhalb des Textes "Ihre Bestellung wird bearbeitet."
+- Es wurde ein neues Widget hinzugefügt, um Live-Shopping-Angebote im ShopBuilder zu platzieren.
+
+### Geändert
+
+- Der Konfigurationswert: "Variante-ändern-Button anzeigen" wurde deprecated.
+- Fehlermeldungen im Frontend werden jetzt responsive mit einheitlicher Breite dargestellt.
+- Preisangaben in strukturierten Daten werden jetzt auf zwei Stellen gerundet.
+- Die Position des Layout-Containers "LoginOverlay.ExtendOverlayButtons" wurde angepasst, sodass Inhalte wieder an der erwarteten Stelle ausgegeben werden.
+
+### Behoben
+
+- Es wurde ein Darstellungsfehler behoben, durch den Bilder in Slidern im Internet Explorer 11 verzerrt dargestellt wurden.
+- Es wurde ein Darstellungsfehler behoben, durch den im Warenkorb der Gesamtpreis und der Löschen-Button im Internet Explorer 11 abgeschnitten wurden.
+- Es wurde ein Darstellungsfehler behoben, durch den in der Sprachauswahl des Headers nicht alle Sprachen angezeigt wurden.
+- Es wurde ein Darstellungsfehler behoben, durch den Texte auf kleinen Bildschirmen im Slider-Widget abgeschnitten wurden.
+- Es wurde ein Darstellungsfehler behoben, durch den Artikelinformationen in der Bestellbestätigung im Internet Explorer 11 falsch dargestellt wurden.
+- Im ShopBuilder-Widget für rechtliche Informationen können ab sofort .pdf-Dateien hochgeladen werden.
+- Bestellmerkmale vom Typ **Keine** zeigen nun den Tooltip mit der Beschreibung korrekt an.
+- Wenn die Kategorie-Navigation keine Kategorien enthält, wird nun eine Mindesthöhe gesetzt.
+- Bei Artikeln mit Varianten wurde bei einem Variantenwechsel der eingetragende Wert der Bestellmerkmale nicht berechnet. Dies wurde behoben.
+- Artikel werden nun aus dem Warenkorb entfernt, wenn diese zwischenzeitlich, beispielsweise aufgrund eines Sprachwechsels, nicht mehr verfügbar sind.
+- Cross-Selling-Artikel vom Typ **Paket** werden nun korrekt angezeigt.
+- Die URLs für Bestellmerkmale vom Typ **Datei** wurden teilweise als 404-Seite ausgegeben. Das Verhalten wurde behoben.
+- Es kam zu Fehlern, wenn man auf einer Kategorieseite war, die nicht in der Linkliste angezeigt wurde und die Seite oder Sortierung gewechselt hat. Dieses Verhalten wurde behoben.
+- Es wurde in Fehler behoben, durch den die Höhe des Headers falsch berechnet wurde, wenn das Webshop-Logo aus dem Cache geladen wurde.
+- Hauptvarianten mit inaktiven Varianten zeigen in der Kategorieansicht nun den "In den Warenkorb" Button an. Vorher wurde der Pfeil "Zum Artikel" angezeigt.
+
+
+## v2.16.3 (2018-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.2...2.16.3" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Das Wechseln der Währung über die Top Bar des ShopBuilders war nicht möglich. Dies wurde behoben.
+- Es wurde ein Fehler behoben, durch welchen die Artikelsuche auf bestimmten Android-Endgeräten nicht funktionierte.
+
 ## v2.16.2 (2018-11-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.1...2.16.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
@@ -110,6 +162,7 @@
 - Artikellisten und Suchergebnisse können jetzt zufällig sortiert werden.
 - Es wurde ein neuer Hook hinzugefügt, über welchen auf das Ereignis Plugin-Bau reagiert werden kann. Dadurch wird die Invalidierung des Content Caches für das gebaute Plugin-Set ermöglicht.
 - Es wurde eine Checkbox zur Adresseingabe hinzugefügt, über welche die Lieferung an eine Packstation/Postfiliale in Deutschland aktiviert werden kann. Bei der Aktivierung der Checkbox passen sich die Eingabefelder an den Typ des Lieferorts an.
+- Es wurde eine neue Option zum Tab Paginierung und Sortierung der Ceres Konfiguration hinzugefügt. Diese bestimmt, ab welcher Seitenzahl der Wert **noindex** für SEO robots gesetzt wird.
 
 ### Geändert
 

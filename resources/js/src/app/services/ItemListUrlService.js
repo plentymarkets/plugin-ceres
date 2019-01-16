@@ -1,6 +1,6 @@
 import UrlService from "services/UrlService";
 
-export function updateItemListUrlParams(searchParams)
+export function getItemListUrlParams(searchParams)
 {
     const urlParams = {};
     const defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
@@ -21,11 +21,10 @@ export function updateItemListUrlParams(searchParams)
         urlParams.sorting = (searchParams.sorting !== App.config.sorting.defaultSorting) ? searchParams.sorting : null;
     }
 
-    var newUrlParams = UrlService.getUrlParams(document.location.search);
+    const newUrlParams = UrlService.getUrlParams(document.location.search);
 
     for (const urlParamKey in urlParams)
     {
-
         if (urlParams[urlParamKey] !== null)
         {
             newUrlParams[urlParamKey] = urlParams[urlParamKey];
@@ -34,12 +33,11 @@ export function updateItemListUrlParams(searchParams)
         {
             delete newUrlParams[urlParamKey];
         }
-
     }
 
-    UrlService.setUrlParams(newUrlParams);
+    return newUrlParams;
 }
 
 export default {
-    updateItemListUrlParams
+    getItemListUrlParams
 };

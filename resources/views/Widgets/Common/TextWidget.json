@@ -2,7 +2,8 @@
     "identifier": "Ceres::TextWidget",
     "label": "Widget.textLabel",
     "previewImageURL": "/images/widgets/text.svg",
-    "type": "default",
+    "type": "static",
+    "categories": ["text"],
     "position": 800,
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {
@@ -11,7 +12,7 @@
             "required": true,
             "label": "Widget.widgetAppearanceLabel",
             "options": {
-                "tooltip": "Widget.widgetAppearanceTooltip",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
                 "defaultValue": "none",
                 "selectBoxValues": [
                     {
@@ -54,8 +55,9 @@
         },
         "text": {
             "type": "codeEditor",
-            "label": "Widget.textCodeEditorLabel",
-            "options": {}
+            "options": {
+                "name": "Widget.textCodeEditorLabel"
+            }
         }
     }
 }

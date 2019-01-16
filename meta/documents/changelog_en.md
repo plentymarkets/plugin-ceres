@@ -1,5 +1,56 @@
 # Release Notes for Ceres
 
+## v2.17.1 (2018-12-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.17.0...2.17.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, main variations linked to an attribute could not be added to the shopping cart. This has been fixed.
+
+## v2.17.0 (2018-11-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.3...2.17.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to the conversion to the automated email service, you need to transfer the "Forgot password" email template to the **System » Client » Select client » Email » Templates menu**.
+- Due to the conversion to the automated email service, you need to delete the event procedure for sending the order confirmation. Otherwise, the email will be sent twice.
+
+### Added
+
+- The configuration of the category description has been adjusted. Both category descriptions 1 and 2 can now be displayed on the category page and can be positioned above or below the item list.
+- We added a new layout container to the order confirmation page. The container is displayed below the "Your order is being processed." text.
+- In order to place live shopping offers in the ShopBuilder, a new widget has been added.
+
+### Changed
+
+- The Ceres configuration setting "Display the change variation button" has been deprecated.
+- Error messages in the frontend are now displayed responsively/on mobile devices with a uniform length.
+- Pricing information in structured data is now rounded to two decimal places.
+- The position of the layout container "LoginOverlay.ExtendOverlayButtons" has been adjusted, so that the content is now displayed at the expected place again.
+
+### Fixed
+
+- Due to an error, images in the slider widget were displayed in a contorted way when viewed in the Internet Explorer 11. This has been fixed.
+- Due to an error, the total sum and the delete button in the shopping cart were cut off when using the Internet Explorer 11. This has been fixed.
+- Due to an error, not all languages were shown in the header's language selection. This has been fixed.
+- Due to an error, texts in the slider widget weren't fully displayed on small screens. This has been fixed.
+- Due to an error, item information was displayed incorrectly in the order confirmation overview when viewing it in Internet Explorer 11. This has been fixed.
+- You can now upload .pdf files in the legal information widget of the ShopBuilder.
+- Order properties of the type **None** now correctly display the description tooltip.
+- If the category navigation has no categories, it is now set to a minimum height.
+- The specified value of order properties was not correctly calculated when users changed the variation of an item. This has been fixed.
+- If the shopping cart contains items that become unavailable during the session, these items are now removed from the shopping cart.
+- Cross-selling items of the type **Bundle** are now displayed correctly.
+- The URLs of order properties of the type **file** partially linked to 404 pages. This behaviour has been fixed.
+- Errors could occur when attempting to change the page or sorting on a category page that was not listed in the link list. This behaviour has been fixed.
+- Due to an error, the height of the header was calculated incorrectly if the logo of the online store was loaded from the cache. This has been fixed.
+- In the category view, items with inactive variations now show the "Add to basket" button. This was previously the arrow "Show item".
+
+## v2.16.3 (2018-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.2...2.16.3" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Changing the currency via the ShopBuilder top bar widget was not possible. This behaviour has been fixed.
+- Due to an error, the item search was not working properly on certain Android devices. This has been fixed.
+
 ## v2.16.2 (2018-11-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.16.1...2.16.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
@@ -110,6 +161,7 @@
 - Item lists and search results can now be sorted randomly.
 - A new event hook has been added, which reacts to the building of plugins. This enables the invalidation of the content cache.
 - A new checkbox has been added to the address input fields, via which the delivery to a Packstation/post office in Germany can be activated. The input fields adapt to the type of delivery destination if the checkbox is activated.
+- A new option has been added to the tab pagination and sorting in the Ceres configuration. This option determines the page number, beginning from which the value **noindex** is set for SEO robots.
 
 ### Changed
 

@@ -330,9 +330,11 @@ Custom classes
 
 .owl-single-item-nav {
   cursor: pointer;
-  bottom: 0;
   opacity: 0;
   transition: opacity 300ms;
+  top: 40%;
+  bottom: 40%;
+  max-width: 45px;
 
   @include media-breakpoint-down(sm) {
     display: none;
@@ -377,13 +379,14 @@ Custom classes
     text-align:left;
     &.right {
       text-align:right;
+      right: 0;
       .owl-single-item-control {
         right: 0;
       }
     }
     &:hover {
       opacity: 1 !important;
-      i {color:$brand-primary;}
+      i {color:$primary;}
     }
   }
   .owl-single-item-control {
@@ -424,7 +427,7 @@ Custom classes
     margin:.5rem .5rem 0 0;
     &.active,
     &:hover {
-      border:1px solid $brand-primary;
+      border:1px solid $primary;
       cursor: pointer;
     }
 
@@ -443,3 +446,33 @@ Custom classes
     height: 700px;
   }
 }
+
+/* Compatibility for IE */
+html.ie {
+  // set width to maximal available size
+  #single-carousel .owl-item img {
+    width: auto;
+    display: inline-block;
+  }
+  // align image center
+  #single-carousel .owl-item > div {
+    text-align: center;
+  }
+
+  // prevent wrap
+  #thumb-carousel .owl-stage {
+    display: flex;
+    
+    // thumb-image takes assigned height of parent and displays optimal width
+    .owl-item {
+      width: auto !important;
+
+      img {
+        width: auto;
+        margin-right: 0 !important;
+      }
+    }
+  }
+}
+
+

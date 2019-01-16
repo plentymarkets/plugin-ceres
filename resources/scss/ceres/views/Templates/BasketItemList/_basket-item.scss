@@ -22,6 +22,7 @@
 	
 	.item-details{
 		margin-top: 1em;
+		flex: 1;
 
 		&>div[class^="item-"]{
 			display: block;
@@ -174,7 +175,7 @@
 		}
 
 		&:hover {
-    		color: $brand-danger;
+    		color: $danger;
 		}
 
 		&.btn-danger:hover {
@@ -261,4 +262,44 @@
 
 .no-pointer-events {
 	pointer-events: none;
+}
+
+/* Compatibility for IE */
+html.ie .confirmation-order-list .cmp-order-item {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	flex-basis: 84px;
+
+	.item-image {
+		width: 84px;
+		height: auto;
+	}
+	.item-name {
+		max-height: none;
+	}
+	.item-details {
+		margin-top: 0;
+		display: block;
+		flex-grow: 2;
+
+		.row {
+			strong:first-of-type {
+				min-width: 90px;
+				width: auto;
+			}
+			span,
+			strong:nth-of-type(2) {
+				width: auto;
+			}
+		}
+	}
+	@include media-breakpoint-down(sm) {
+		.item-details {
+			-ms-flex-order: 2;
+			order: 2;
+			-ms-flex: 1;
+			flex: 1;
+		}
+	}
 }

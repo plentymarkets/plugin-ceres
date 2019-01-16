@@ -1,3 +1,4 @@
+@import "bootstrap/scss/functions";
 @import "variables";
 // ==========================================================================
 // External Libs
@@ -17,29 +18,32 @@
 @import "ceres/common/typography";
 @import "ceres/common/common";
 @import "ceres/common/structure";
+@import "ceres/common/modal";
+@import "ceres/common/reboot";
 
 //TODO's
 @import "ceres/common/buttons";
 @import "ceres/common/card";
 
 // External plugins overrides
+@import "ceres/plugins/bs4-progress";
 @import "ceres/plugins/lightbox";
 @import "ceres/plugins/owl-carousel";
 
 // Components
-@import "ceres/components/component-base";
 @import "ceres/components/accordion";
 @import "ceres/components/alerts";
+@import "ceres/components/anicon";
+@import "ceres/components/component-base";
 @import "ceres/components/featured-category";
 @import "ceres/components/featured-sale-new";
-@import "ceres/components/anicon";
+@import "ceres/components/live-shopping";
 @import "ceres/components/notifications";
-@import "ceres/components/popper";
+@import "ceres/components/popover";
 
 // Forms
 @import "ceres/forms/input-groups";
 @import "ceres/forms/inputs";
-@import "ceres/forms/select";
 
 // Page Design / Global components
 @import "ceres/views/PageDesign/header";
@@ -86,3 +90,6 @@
 
 // Widgets
 @import "ceres/widgets/widgets";
+
+// Bootstrap Compatibility 
+@import "ceres/common/visibility";

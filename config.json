@@ -353,16 +353,12 @@
                     "deprecated": true
                 },
                 "header.show_category_types": {
-                    "type": "selectBox",
+                    "type": "multiCheckBox",
                     "required": false,
                     "label": "Config.headerShowCategoryTypesLabel",
                     "options": {
                         "defaultValue": "all",
-                        "selectBoxValues": [
-                            {
-                                "value": "all",
-                                "caption": "Config.headerShowCategoryTypesAll"
-                            },
+                        "checkBoxValues": [
                             {
                                 "value": "item",
                                 "caption": "Config.headerShowCategoryTypesItem"
@@ -370,6 +366,10 @@
                             {
                                 "value": "content",
                                 "caption": "Config.headerShowCategoryTypesContent"
+                            },
+                            {
+                                "value": "blog",
+                                "caption": "Config.headerShowCategoryTypesBlog"
                             }
                         ]
                     }
@@ -835,12 +835,8 @@
                     "required": false,
                     "label": "Config.itemLoadingAnimationTypeLabel",
                     "options": {
-                        "defaultValue": "blur",
+                        "defaultValue": "bars",
                         "selectBoxValues": [
-                            {
-                                "value": "blur",
-                                "caption": "Config.itemLoadingAnimationTypeBlur"
-                            },
                             {
                                 "value": "bars",
                                 "caption": "Config.itemLoadingAnimationTypeBars"
@@ -984,8 +980,8 @@
                                 "caption": "Config.itemListsCrossSellingTypeReplacementPart"
                             },
                             {
-                                "value": "Collection",
-                                "caption": "Config.itemListsCrossSellingTypeCollection"
+                                "value": "Bundle",
+                                "caption": "Config.itemListsCrossSellingTypeBundle"
                             }
                         ]
                     }
@@ -1469,6 +1465,7 @@
                 },
                 "basket.variations": {
                     "type": "checkBox",
+                    "deprecated": true,
                     "required": false,
                     "label": "Config.basketVariationsLabel",
                     "options": {
@@ -2582,6 +2579,28 @@
                         "defaultValue": "false"
                     }
                 },
+                "my_account.confirmation_link_expiration": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.myAccountConfirmationLinkExpirationLabel",
+                    "options": {
+                        "defaultValue": "always",
+                        "selectBoxValues": [
+                            {
+                              "value": "always",
+                              "caption": "Config.myAccountConfirmationLinkExpirationAlways"
+                            },
+                            {
+                              "value": "30",
+                              "caption": "Config.myAccountConfirmationLinkExpirationThirtyDays"
+                            },
+                            {
+                                "value": "90",
+                                "caption": "Config.myAccountConfirmationLinkExpirationNinetyDays"
+                            }
+                        ]
+                    }
+                },
                 "billing_address.show": {
                     "type": "multiCheckBox",
                     "required": false,
@@ -2639,10 +2658,6 @@
                     "options": {
                         "defaultValue": "",
                         "checkBoxValues": [
-                            {
-                                "value": "billing_address.name1",
-                                "caption": "Config.addressFieldName1"
-                            },
                             {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldVatNumber"
@@ -2732,10 +2747,6 @@
                         "defaultValue": "",
                         "checkBoxValues": [
                             {
-                                "value": "delivery_address.name1",
-                                "caption": "Config.addressFieldName1"
-                            },
-                            {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
                             },
@@ -2824,10 +2835,6 @@
                         "defaultValue": "",
                         "checkBoxValues": [
                             {
-                                "value": "billing_address.name1",
-                                "caption": "Config.addressFieldEnName1"
-                            },
-                            {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldEnVatNumber"
                             },
@@ -2915,10 +2922,6 @@
                     "options": {
                         "defaultValue": "",
                         "checkBoxValues": [
-                            {
-                                "value": "delivery_address.name1",
-                                "caption": "Config.addressFieldEnName1"
-                            },
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldEnSalutation"
@@ -4164,7 +4167,7 @@
                     "scss": true,
                     "label": "Config.brandSuccessLabel",
                     "options": {
-                        "defaultValue": "#7ED321"
+                        "defaultValue": "#28a745"
                     }
                 },
                 "brand-info": {
@@ -4173,7 +4176,7 @@
                     "scss": true,
                     "label": "Config.brandInfoLabel",
                     "options": {
-                        "defaultValue": "#5bc0de"
+                        "defaultValue": "#17a2b8"
                     }
                 },
                 "brand-warning": {
@@ -4182,7 +4185,7 @@
                     "scss": true,
                     "label": "Config.brandWarningLabel",
                     "options": {
-                        "defaultValue": "#f0ad4e"
+                        "defaultValue": "#ffc107"
                     }
                 },
                 "brand-danger": {
@@ -4191,7 +4194,7 @@
                     "scss": true,
                     "label": "Config.brandDangerLabel",
                     "options": {
-                        "defaultValue": "#d9534f"
+                        "defaultValue": "#dc3545"
                     }
                 },
                 "custom-font-regular": {
@@ -4293,6 +4296,14 @@
                                 "caption": "Config.logPerformanceLevelLive"
                             }
                         ]
+                    }
+                },
+                "log.check_syntax": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.logCheckSyntax",
+                    "options": {
+                        "defaultValue": "true"
                     }
                 }
             }

@@ -42,7 +42,7 @@
 {% endif %}
 
 {% if style != "no-caption" and headline is not empty %}
-    {{ Twig.set("name", "'#{ headline }'") }}
+    {{ Twig.set("name", headline | json_encode ) }}
 {% endif %}
 
 {{ Twig.if("name | trim is empty and imageUrl | trim is empty") }}

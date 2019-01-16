@@ -1,5 +1,5 @@
-import {defaultValue, isNullOrUndefined}from "../helper/utils";
-import {replaceAll, capitalize}from "../helper/strings";
+import { defaultValue, isNullOrUndefined } from "../helper/utils";
+import { replaceAll, capitalize } from "../helper/strings";
 
 const TranslationService = (function($)
 {

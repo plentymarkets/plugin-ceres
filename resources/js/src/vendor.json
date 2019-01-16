@@ -5,14 +5,10 @@
     "node_modules/jquery-lazyload/jquery.lazyload.js",
     "node_modules/vue/dist/vue.js",
     "node_modules/vuex/dist/vuex.js",
-    "node_modules/tether/dist/js/tether.js",
-    "node_modules/popper/dist/esm/popper.js",
-
+    "node_modules/popper.js/dist/umd/popper.js",
     "node_modules/sticky-kit/dist/sticky-kit.js",
     "node_modules/lightbox2/dist/js/lightbox.js",
     "node_modules/owl.carousel/dist/owl.carousel.js",
     "node_modules/bootstrap/dist/js/bootstrap.js",
-    "node_modules/moment/moment.js",
-
-    "resources/js/src/libraries/**/*.js"
+    "node_modules/moment/moment.js"
 ]

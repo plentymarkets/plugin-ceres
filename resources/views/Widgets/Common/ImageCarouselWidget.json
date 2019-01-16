@@ -2,7 +2,8 @@
     "identifier": "Ceres::ImageCarouselWidget",
     "label": "Widget.imageCarouselLabel",
     "previewImageURL": "/images/widgets/image-carousel.svg",
-    "type": "default",
+    "type": "static",
+    "categories": ["image"],
     "position": 500,
     "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
     "settings": {
@@ -12,7 +13,7 @@
             "defaultValue": "primary",
             "options": {
                 "name": "Widget.widgetAppearanceLabel",
-                "tooltip": "Widget.widgetAppearanceTooltip",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
                 "listBoxValues": [
                     {
                         "value": "primary",
@@ -60,7 +61,7 @@
                     "defaultValue": "default-caption",
                     "options": {
                         "name": "Widget.imageCarouselCaptionLabel",
-                        "tooltip": "Widget.imageCarouselCaptionTooltip",
+                        "tooltipText": "Widget.imageCarouselCaptionTooltip",
                         "listBoxValues": [
                             {
                                 "value": "default-caption",
@@ -87,7 +88,7 @@
                     "defaultValue": "",
                     "options": {
                         "name": "Widget.imageCarouselHeadlineLabel",
-                        "tooltip": "Widget.imageCarouselHeadlineTooltip"
+                        "tooltipText": "Widget.imageCarouselHeadlineTooltip"
                     }
                 },
                 "categoryId": {
@@ -96,7 +97,7 @@
                     "defaultValue": "",
                     "options": {
                         "name": "Widget.imageCarouselCategoryIdLabel",
-                        "tooltip": "Widget.imageCarouselCategoryIdTooltip"
+                        "tooltipText": "Widget.imageCarouselCategoryIdTooltip"
                     }
                 },
                 "variationId": {
@@ -105,7 +106,7 @@
                     "defaultValue": "",
                     "options": {
                         "name": "Widget.imageCarouselVariationIdLabel",
-                        "tooltip": "Widget.imageCarouselVariationIdTooltip"
+                        "tooltipText": "Widget.imageCarouselVariationIdTooltip"
                     }
                 },
                 "customImagePath": {
@@ -114,7 +115,7 @@
                     "defaultValue": "",
                     "options": {
                         "name": "Widget.imageCarouselCustomImagePathLabel",
-                        "tooltip": "Widget.imageCarouselCustomImagePathTooltip"
+                        "tooltipText": "Widget.imageCarouselCustomImagePathTooltip"
                     }
                 }
             }

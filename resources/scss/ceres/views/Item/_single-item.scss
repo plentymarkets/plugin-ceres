@@ -89,7 +89,7 @@
         }  
         
         & i {
-            color: $brand-success;
+            color: $success;
         }
     }
 
@@ -104,25 +104,25 @@
         transition: border-color .3s ease-out;
 
         &.active {
-            border-color: $brand-success;
+            border-color: $success;
         }
     }
 }
 
-.availability_1,
-.availability_2 {background-color: $availability_1;}
-.availability_3,
-.availability_4 {background-color: $availability_3;}
-.availability_5,
-.availability_6,
-.availability_7,
-.availability_8 {background-color: $availability_5;}
-.availability_9,
-.availability_10 {background-color: $availability_9}
+.availability_1  { @include context-bg($availability_1); }
+.availability_2  { @include context-bg($availability_2); }
+.availability_3  { @include context-bg($availability_3); }
+.availability_4  { @include context-bg($availability_4); }
+.availability_5  { @include context-bg($availability_5); }
+.availability_6  { @include context-bg($availability_6); }
+.availability_7  { @include context-bg($availability_7); }
+.availability_8  { @include context-bg($availability_8); }
+.availability_9  { @include context-bg($availability_9); }
+.availability_10 { @include context-bg($availability_10); }
 
 
 .rating{
-    .tag{
+    .tag, .badge {
         padding-right: 0;
         overflow: hidden;
         cursor: pointer;
@@ -220,20 +220,20 @@
                     background-color: $gray-lighter;
 
                     &.error {
-                        // background-color: lighten($brand-danger, 25%);
-                        background-color: mix($brand-danger, $gray-lighter);
-                        border-color: mix(lighten($brand-danger, 25%), $gray-lighter);
+                        // background-color: lighten($danger, 25%);
+                        background-color: mix($danger, $gray-lighter);
+                        border-color: mix(lighten($danger, 25%), $gray-lighter);
                     }
                 }
 
                 &.highlight {
-                    background-color: $brand-primary;
-                    border-color: lighten($brand-primary, 25%);
+                    background-color: $primary;
+                    border-color: lighten($primary, 25%);
                 }
 
                 &.error {
-                    background-color: $brand-danger;
-                    border-color: lighten($brand-danger, 25%);
+                    background-color: $danger;
+                    border-color: lighten($danger, 25%);
                 }
             }
         }
@@ -245,5 +245,22 @@
 
     .quantity-input-container {
         margin-right: 15px;
+    }
+}
+
+.single-rightside
+{
+    margin-top: 1rem;
+}
+
+@include media-breakpoint-up(md)
+{
+    .single-rightside
+    {
+        margin-top: 0;
+        position: absolute;
+        left: (7/12)*100%;
+        top: 0;
+        bottom: 0;
     }
 }

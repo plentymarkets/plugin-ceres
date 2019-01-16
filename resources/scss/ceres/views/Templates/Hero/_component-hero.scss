@@ -144,7 +144,7 @@
 
 			.hero-category-headline{
 				padding: 1.5rem;
-				font-size: $font-size-h4;
+				font-size: $h4-font-size;
 			}
 
 			.hero-category-cta{
@@ -214,6 +214,7 @@
 		opacity: 0;
 		transition: opacity .1s ease-out;
 		visibility: hidden;
+		z-index: 1;
 	}
 
 	&.with-icon {
@@ -234,8 +235,7 @@
 			opacity: 0;
 			transition: opacity .1s ease-out;
 			visibility: hidden;
-
-			
+			z-index: 10;
 		}
 
 		&.refreshing {

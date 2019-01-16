@@ -2,18 +2,19 @@
     "identifier": "Ceres::TitleBarWidget",
     "label": "Widget.titleBarLabel",
     "previewImageURL": "/images/widgets/title-bar.svg",
-    "type": "default",
+    "type": "static",
+    "categories": ["text"],
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
     "settings": {
         "appearance": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.widgetAppearanceLabel",
+            "defaultValue": "primary",
             "options": {
-                "tooltip": "Widget.widgetAppearanceTooltip",
-                "defaultValue": "primary",
-                "selectBoxValues": [
+                "name": "Widget.widgetAppearanceLabel",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
+                "listBoxValues": [
                     {
                         "value": "primary",
                         "caption": "Widget.widgetAppearancePrimary",
@@ -48,12 +49,12 @@
             }
         },
         "text": {
-            "type": "inputText",
+            "type": "text",
             "required": true,
-            "label": "Widget.titleBarTextLabel",
+            "defaultValue": "",
             "options": {
-                "tooltip": "Widget.titleBarTextTooltip",
-                "defaultValue": ""
+                "name": "Widget.titleBarTextLabel",
+                "tooltipText": "Widget.titleBarTextTooltip"
             }
         }
     }

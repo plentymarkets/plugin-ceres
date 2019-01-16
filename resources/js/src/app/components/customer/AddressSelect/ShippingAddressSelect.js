@@ -27,8 +27,8 @@ Vue.component("shipping-address-select", {
             this.addressList = [];
         }
         // Adds the dummy entry for "delivery address same as invoice address"
-        this.addressList.unshift({id: -99});
-        this.$store.dispatch("initDeliveryAddress", {id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList});
+        this.addressList.unshift({ id: -99 });
+        this.$store.dispatch("initDeliveryAddress", { id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList });
     },
 
     methods:
@@ -39,11 +39,11 @@ Vue.component("shipping-address-select", {
          */
         addressChanged(selectedAddress)
         {
-            this.$store.dispatch("selectAddress", {selectedAddress, addressType: "2"})
+            this.$store.dispatch("selectAddress", { selectedAddress, addressType: "2" })
                 .then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", {detail: this.deliveryAddressId}));
+                        document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: this.deliveryAddressId }));
                     },
                     error =>
                     {

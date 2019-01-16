@@ -7,11 +7,19 @@
 {{ component( "Ceres::Customer.Components.Registration" ) }}
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
-{{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
-{{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
-{{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 {{ component( "Ceres::Category.Components.CategoryBreadcrumbs" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
+
+{# TODO: remove if shop builder pages can be rebuild by migrations #}
+{{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
+{{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
+{{ component( "Ceres::ItemList.Components.CategoryItem") }}
+{{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
+{{ component( "Ceres::PageDesign.Components.Carousel" ) }}
+
+{% if request.get('isContentBuilder') == 1 %}
+    {% include "Ceres::Widgets.WidgetComponents" %}
+{% endif %}
 
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
@@ -83,8 +91,8 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <login template="#vue-login" modal-element="login-modal-wrapper"></login>
                     </div>
@@ -99,25 +107,27 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <div class="modal-title h3">
                                 {{ trans("Ceres::Template.regCreateAccount") }}
 
-                                <popper v-cloak class="pull-right m-r-1">
-                                    <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
-                                        <i class="fa fa-info"></i>
-                                    </button>
-                                    <div slot="title">
-                                        {{ trans("Ceres::Template.regContactInformations") }}
-                                    </div>
-                                    <ul slot="content" class='p-l-1'>
-                                        <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                                        <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                                        <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-                                    </ul>
-                                </popper>
                             </div>
+
+                            <popper v-cloak class="ml-auto">
+                                <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
+                                    <i class="fa fa-info"></i>
+                                </button>
+                                <div slot="title">
+                                    {{ trans("Ceres::Template.regContactInformations") }}
+                                </div>
+                                <ul slot="content" class='pl-3'>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                    <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                </ul>
+                            </popper>
+
+                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
                     </div>
@@ -127,7 +137,7 @@
         <!-- ./REGISTRATION MODAL -->
 
         <!-- BASKET MODAL -->
-        <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
+        <add-item-to-basket-overlay :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
         <!-- ./BASKET MODAL -->
 
         <!-- PASSWORD RESET MODAL -->
@@ -140,8 +150,8 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
                             {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
@@ -152,10 +162,6 @@
         </div>
         <!-- ./SHIPPINGCOSTS MODAL -->
     </div>
-</div>
-
-<div id="vue-error" style="display:none">
-    {% include "Ceres::PageDesign.Partials.VueError" %}
 </div>
 
 <script>
@@ -196,26 +202,29 @@
 {{ get_filtered_tags() }}
 
 <script>
-    var rootElement = document.getElementById("vue-app");
-    var errorElement = document.getElementById("vue-error");
+    vueEventHub = new Vue();
 
-    var vueEventHub = new Vue();
+    {% if ceresConfig.log.checkSyntax %}
+        var rootElement = document.getElementById("vue-app");
+        rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, '');
 
-    var vueApp = new Vue({
-        store: window.ceresStore
-    });
-    vueApp.$mount( rootElement.cloneNode(true) );
+        var vueApp = new Vue({
+            store: window.ceresStore
+        });
 
-    if ( vueApp.$el.id !== "vue-app")
-    {
-        rootElement.parentNode.removeChild(rootElement);
-        errorElement.style.display = "block";
-    }
-    else
-    {
-        document.body.replaceChild( vueApp.$el, rootElement );
-        errorElement.parentNode.removeChild(errorElement);
-    }
+        vueApp.$mount( rootElement.cloneNode(true) );
+
+        if ( vueApp.$el.id === "vue-app")
+        {
+            document.body.replaceChild( vueApp.$el, rootElement );
+        }
+    {% else %}
+        var vueApp = new Vue({
+            el: "#vue-app",
+            store: window.ceresStore
+        });
+    {% endif %}
+
 
     (function($) {
         
@@ -226,7 +235,7 @@
         {
             function calculateBodyOffset()
             {
-                if ( header.classList.contains('pos-f-t'))
+                if ( header.classList.contains('fixed-top'))
                 {
                     var bodyOffset = 0;
                     // Get current header with children
@@ -295,13 +304,18 @@
 
             var headerImages = header.querySelectorAll("img");
 
-            for (var img in headerImages)
+            if(headerImages.length)
             {
-                headerImages[img].onload = function()
+                for (var img in headerImages)
                 {
-                    calculateBodyOffset();
+                    headerImages[img].onload = function()
+                    {
+                        calculateBodyOffset();
+                    }
                 }
             }
+
+            calculateBodyOffset();
         }
 
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)

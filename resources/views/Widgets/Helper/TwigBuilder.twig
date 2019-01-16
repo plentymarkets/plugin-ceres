@@ -152,3 +152,10 @@
         {{ Twig.do("import \"" ~ template ~ "\" as " ~ name ) }}
     {% endspaceless -%}
 {% endmacro %}
+
+{% macro component(template) %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.print("component(\"" ~ template ~ "\")") }}
+    {% endspaceless -%}
+{% endmacro %}

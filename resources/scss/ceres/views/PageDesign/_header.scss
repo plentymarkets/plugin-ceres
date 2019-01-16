@@ -15,7 +15,6 @@
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
-	box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 	a:not(.btn) {
 		text-decoration: none;
 		color: $top-bar-color;
@@ -24,6 +23,7 @@
 
 	.search-shown {
 		display: flex;
+		flex: 1;
 		@include media-breakpoint-up(md) {
 			justify-content: space-between;
 			align-items: center;
@@ -51,16 +51,19 @@
 				}
 		
 				.search-submit {
-					color: $brand-primary;
+					color: $primary;
+					background-color: $gray-200;
 					border: none;
 					font-size: 1.3rem;
 					line-height: 1;
 					padding: 0.4rem 1rem;
+					cursor: pointer;
 				}
 			}
 		}
 
 		.controls-list {
+
 			&>li {
 				@include media-breakpoint-up(md) {
 					a:not(.btn) {
@@ -71,14 +74,14 @@
 		}
 	}
 
-	&.pos-f-t {
+	&.fixed-top {
 		position: fixed;
 	}
 
 	.controls-list{
+		width: 100%;
 		margin-bottom: 0;
 		font-size: 0;
-		width: 100%;
 		display: flex;
 
 		&>li{
@@ -88,37 +91,23 @@
 			margin-right: 0;
 
 			// sets the height of the top-bar
-			@include media-breakpoint-down(md) {
-				
+
 				a:not(.btn) {
-					padding: 0.5rem .5rem;
+					padding: 0.5rem .8rem;
 					display: inline-block;
 					color: $gray-lighter;
-	
-					&[aria-expanded="true"] {
-						background-color: $brand-primary;
-						color: $white;
+
+					&:hover {
+						@include context-bg($primary);
 					}
 				}
 
-				.anicon {
+			@include media-breakpoint-down(md) {
+				.anicon,
+				a:not(.btn) {
 					padding: 0.5rem .8rem;
 				}
 
-			}
-
-			@include media-breakpoint-up(md) {
-				a:not(.btn) {
-					padding: .5rem .8rem;
-					display: inline-block;
-					color: $gray-lighter;
-
-					&[aria-expanded="true"],
-					&:hover{
-						background-color: $brand-primary;
-						color: $white;
-					}
-				}
 			}
 
 			// icons should be slightly larger
@@ -148,9 +137,9 @@
 						}
 					}
 	
-					&.open {
+					&.show {
 						& > .dropdown-toggle {
-							background-color: $gray-darker;
+							@include context-bg($gray-darker);
 						}
 	
 						& .dropdown-menu {
@@ -187,10 +176,11 @@
 							border:0;
 							border-top: 1px solid $gray-lighter;
 							display: block;
-							color: $white;
 							background-color: $gray-darker;
+							color: color-yiq($gray-darker);
 							&:hover {
-								background-color: $brand-primary;
+								color: color-yiq($primary);
+								background-color: $primary;
 							}
 	
 							& > .fa-user {
@@ -265,6 +255,10 @@
 				color: $top-bar-basket-color;
 
 				.badge{
+					font-size: inherit;
+					padding: 0;
+					line-height: inherit;
+					font-weight: inherit;
 					margin-left: .5rem;
 				}
 
@@ -291,9 +285,22 @@
 
 	#page-header {
 		background-color:$navbar-background-color;
+		box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 
 		&.top-bar {
 			background-color: $top-bar-bg;
+		}
+
+		@include media-breakpoint-down(md){
+			.container-max {
+				padding: 0;
+			}
+		}
+	}
+
+	@include media-breakpoint-up(md){
+		#page-header {
+			box-shadow: none;
 		}
 	}
 
@@ -331,7 +338,7 @@
 						}
 					}
 					.dropdown-menu {
-						background:$brand-primary;
+						background:$primary;
 						border:0;
 						border-left:0;
 						border-right:0;
@@ -345,19 +352,19 @@
 						    border-bottom: .5em solid;
 						    border-right: .5em solid transparent;
 						    border-left: .5em solid transparent;
-						    color: $brand-primary;
+						    color: $primary;
 						    position: absolute;
 						    top: -.5em;
 						    left: 50%;
 						    transform: translateX(-50%);
 						}
 						.dropdown-item {
-							color: $white;
+							color: color-yiq($primary);
 							font-size: .9rem;
 							padding: .75rem 1rem !important;
 							&:hover {
-								background: darken($brand-primary, 10%);
-								color: white;
+								background: darken($primary, 10%);
+								color: color-yiq($primary);
 							}
 						}
 					}
@@ -394,6 +401,8 @@
 .brand-wrapper{
 	position: relative;
 	padding:0 15px;
+	display: block;
+	width: 100%;
 }
 
 .navbar-brand {
@@ -453,19 +462,33 @@
 	}
 }
 
+.wrapper-main header
+{
+	.container-max > .row
+	{
+		flex-direction: row-reverse;
+		position: relative;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
 
 @include media-breakpoint-up(sm){
 
-	.top-bar{
-		.controls-list{
+	.wrapper-main header
+	{
+		.controls-list
+		{
 			width: auto;
-			float:right;
 
-			&>li{
+			&>li
+			{
 				// default font size for all items
 				font-size: .8rem;
 
-				.fa:not(.qty-sign){
+				.fa:not(.qty-sign)
+				{
 					// icons should be slightly larger
 					font-size: 1rem;
 					line-height: .8rem;
@@ -476,7 +499,9 @@
 
 }
 
-@include media-breakpoint-up(md){
+@include media-breakpoint-up(md)
+{
+
 	.wrapper-main .navbar .navbar-nav .nav-item:hover .dropdown-menu {
 		text-align: left;
 	}
@@ -498,7 +523,6 @@
 	}
 
 	.top-bar {
-		box-shadow: none;
 		.list-inline {
 			.list-inline-item {
 				#login-change {
@@ -536,12 +560,14 @@
 		top: 50%;
 		transform: translateY(-50%);
 		z-index:1000;
+		width: auto;
+		left: 0;
 	}
 
 	.navbar-nav{
 		&>.nav-item{
 			&>.nav-link{
-				padding: $nav-link-padding;
+				padding: $nav-link-padding-y $nav-link-padding-x;
 			}
 		}
 	}

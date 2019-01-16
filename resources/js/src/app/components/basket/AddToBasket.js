@@ -1,7 +1,7 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
-import {navigateTo}from "services/UrlService";
-import {isNullOrUndefined}from "../../helper/utils";
+import { navigateTo } from "services/UrlService";
+import { isNullOrUndefined } from "../../helper/utils";
 
 const NotificationService = require("services/NotificationService");
 
@@ -44,7 +44,11 @@ Vue.component("add-to-basket", {
         },
         isSalable:
         {
-            // = isSalable && !hasChildren
+            type: Boolean,
+            default: false
+        },
+        hasChildren:
+        {
             type: Boolean,
             default: false
         },
@@ -78,6 +82,7 @@ Vue.component("add-to-basket", {
         canBeAddedToBasket()
         {
             return this.isSalable &&
+                !this.hasChildren &&
                 (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) &&
                 !this.requiresProperties;
         },
@@ -134,7 +139,7 @@ Vue.component("add-to-basket", {
                         const variation = !isNullOrUndefined(basketItem) ? basketItem.variation.data : null;
                         const orderParams = !isNullOrUndefined(basketObject) ? basketObject.basketItemOrderParams : null;
 
-                        document.dispatchEvent(new CustomEvent("afterBasketItemAdded", {detail: basketObject}));
+                        document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
                         this.waiting = false;
                         this.openAddToBasketOverlay(basketObject.quantity, variation, orderParams);
                     },

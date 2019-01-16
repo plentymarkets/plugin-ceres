@@ -3,48 +3,48 @@
     "label": "Widget.breadcrumbLabel",
     "previewImageURL": "/images/widgets/breadcrumb.svg",
     "type": "header",
+    "categories": ["header"],
     "position": 0,
     "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",
     "settings": {
         "isFixed": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.breadcrumbIsFixedLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.breadcrumbIsFixedLabel"
             }
         },
         "showOnHomepage": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.breadcrumbShowOnHomepageLabel",
-            "visible": "showOnMyAccount.charAt(0) === 'a'",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.breadcrumbShowOnHomepageLabel"
             }
         },
         "showOnMyAccount": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.breadcrumbShowOnMyAccountLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.breadcrumbShowOnMyAccountLabel"
             }
         },
         "showOnCheckout": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.breadcrumbShowOnCheckoutLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.breadcrumbShowOnCheckoutLabel"
             }
         },
         "showOnContentCategory": {
-            "type": "checkBox",
+            "type": "checkbox",
             "required": true,
-            "label": "Widget.breadcrumbShowOnContentCategoryLabel",
+            "defaultValue": true,
             "options": {
-                "defaultValue": true
+                "name": "Widget.breadcrumbShowOnContentCategoryLabel"
             }
         }
     }
