@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "./utils";
+import { isNullOrUndefined } from "./utils";
 
 const MonetaryFormatter = (function()
 {

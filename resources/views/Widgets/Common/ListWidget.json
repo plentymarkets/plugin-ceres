@@ -2,7 +2,8 @@
     "identifier": "Ceres::ListWidget",
     "label": "Widget.listLabel",
     "previewImageURL": "/images/widgets/list.svg",
-    "type": "default",
+    "type": "static",
+    "categories": ["text"],
     "position": 900,
     "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
     "settings": {

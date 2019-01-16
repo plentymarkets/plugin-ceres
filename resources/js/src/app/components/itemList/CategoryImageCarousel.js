@@ -3,18 +3,18 @@ Vue.component("category-image-carousel", {
     delimiters: ["${", "}"],
 
     props: {
-        imageUrlsData  : {type: Array},
-        itemUrl        : {type: String},
-        altText        : {type: String},
-        titleText      : {type: String},
-        showDots       : {type: Boolean},
-        showNav        : {type: Boolean},
+        imageUrlsData  : { type: Array },
+        itemUrl        : { type: String },
+        altText        : { type: String },
+        titleText      : { type: String },
+        showDots       : { type: Boolean },
+        showNav        : { type: Boolean },
         disableLazyLoad: {
             type   : Boolean,
             default: false
         },
-        enableCarousel : {type: Boolean},
-        template       : {type: String}
+        enableCarousel : { type: Boolean },
+        template       : { type: String }
     },
 
     data()
@@ -83,7 +83,7 @@ Vue.component("category-image-carousel", {
                     const target = $(event.currentTarget);
                     const owlItem = $(target.find(".owl-item.active"));
 
-                    owlItem.find(".img-fluid.lazy").show().lazyload({threshold : 100});
+                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold : 100 });
                 },
                 onInitialized: event =>
                 {

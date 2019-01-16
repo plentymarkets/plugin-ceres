@@ -9,7 +9,7 @@ export default function(store)
     {
         const nextState = cloneDeep(state);
         const eventName = "on" + mutation.type.charAt(0).toUpperCase() + mutation.type.substr(1);
-        const event = new CustomEvent(eventName, {detail: {payload: mutation.payload, newState: nextState, oldState}});
+        const event = new CustomEvent(eventName, { detail: { payload: mutation.payload, newState: nextState, oldState } });
 
         document.dispatchEvent(event);
 

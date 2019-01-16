@@ -114,7 +114,7 @@ const mutations =
             }
         },
 
-        addBillingAddress(state, {billingAddress, addressIndex})
+        addBillingAddress(state, { billingAddress, addressIndex })
         {
             if (billingAddress)
             {
@@ -132,7 +132,7 @@ const mutations =
             }
         },
 
-        addDeliveryAddress(state, {deliveryAddress, addressIndex})
+        addDeliveryAddress(state, { deliveryAddress, addressIndex })
         {
             if (deliveryAddress)
             {
@@ -198,7 +198,7 @@ const mutations =
             }
             else if (addressType === "2")
             {
-                state.deliveryAddressList = [{id: -99}];
+                state.deliveryAddressList = [{ id: -99 }];
                 state.deliveryAddress = state.deliveryAddressList[0];
                 state.deliveryAddressId = state.deliveryAddressList[0].id;
                 document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
@@ -208,19 +208,19 @@ const mutations =
 
 const actions =
     {
-        initBillingAddress({commit}, {id, addressList})
+        initBillingAddress({ commit }, { id, addressList })
         {
             commit("setBillingAddressList", addressList);
             commit("selectBillingAddress", addressList.find(address => address.id === id));
         },
 
-        initDeliveryAddress({commit}, {id, addressList})
+        initDeliveryAddress({ commit }, { id, addressList })
         {
             commit("setDeliveryAddressList", addressList);
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
         },
 
-        selectAddress({commit, state, rootState, dispatch}, {selectedAddress, addressType})
+        selectAddress({ commit, state, rootState, dispatch }, { selectedAddress, addressType })
         {
             return new Promise((resolve, reject) =>
             {
@@ -237,7 +237,7 @@ const actions =
                     commit("selectDeliveryAddress", selectedAddress);
                 }
 
-                dispatch("checkAddressChangeValidity", {selectedAddress, addressType}).then(isAddressChangedAllowed =>
+                dispatch("checkAddressChangeValidity", { selectedAddress, addressType }).then(isAddressChangedAllowed =>
                 {
                     if (!isAddressChangedAllowed)
                     {
@@ -248,7 +248,7 @@ const actions =
                     {
                         commit("setIsBasketLoading", true);
 
-                        ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
+                        ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true })
                             .done(response =>
                             {
                                 commit("setIsBasketLoading", false);
@@ -273,7 +273,7 @@ const actions =
             });
         },
 
-        deleteAddress({dispatch, state, commit}, {address, addressType})
+        deleteAddress({ dispatch, state, commit }, { address, addressType })
         {
             return new Promise((resolve, reject) =>
             {
@@ -290,7 +290,7 @@ const actions =
                     commit("removeDeliveryAddress", address);
                 }
 
-                ApiService.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, {keepOriginalResponse: true})
+                ApiService.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, { keepOriginalResponse: true })
                     .done(response =>
                     {
                         if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout)
@@ -306,36 +306,36 @@ const actions =
                     {
                         if (addressType === "1")
                         {
-                            commit("addBillingAddress", {billingAddress: address, addressIndex});
+                            commit("addBillingAddress", { billingAddress: address, addressIndex });
                         }
                         else if (addressType === "2")
                         {
-                            commit("addDeliveryAddress", {deliveryAddress: address, addressIndex});
+                            commit("addDeliveryAddress", { deliveryAddress: address, addressIndex });
                         }
                         reject(error);
                     });
             });
         },
 
-        createAddress({commit, dispatch}, {address, addressType})
+        createAddress({ commit, dispatch }, { address, addressType })
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, {supressNotifications: true})
+                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true })
                     .done(response =>
                     {
                         if (addressType === "1")
                         {
-                            commit("addBillingAddress", {billingAddress: response});
+                            commit("addBillingAddress", { billingAddress: response });
                         }
                         else if (addressType === "2")
                         {
-                            commit("addDeliveryAddress", {deliveryAddress: response});
+                            commit("addDeliveryAddress", { deliveryAddress: response });
 
                             // setTimeout 0 is required to prevent unactual data in the store before checking the validity of the shipping profile
                             setTimeout(() =>
                             {
-                                dispatch("checkAddressChangeValidity", {selectedAddress: response, addressType});
+                                dispatch("checkAddressChangeValidity", { selectedAddress: response, addressType });
                             }, 0);
 
                         }
@@ -349,11 +349,11 @@ const actions =
             });
         },
 
-        updateAddress({commit, dispatch}, {address, addressType})
+        updateAddress({ commit, dispatch }, { address, addressType })
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, {supressNotifications: true, keepOriginalResponse: true})
+                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true, keepOriginalResponse: true })
                     .done(response =>
                     {
                         if (addressType === "1")
@@ -371,7 +371,7 @@ const actions =
                         {
                             commit("updateDeliveryAddress", address);
 
-                            dispatch("checkAddressChangeValidity", {selectedAddress: response.data, addressType});
+                            dispatch("checkAddressChangeValidity", { selectedAddress: response.data, addressType });
                         }
 
                         resolve(response);
@@ -383,7 +383,7 @@ const actions =
             });
         },
 
-        checkAddressChangeValidity({commit, state, rootState, dispatch}, {selectedAddress, addressType})
+        checkAddressChangeValidity({ commit, state, rootState, dispatch }, { selectedAddress, addressType })
         {
             const shippingProfileList = rootState.checkout.shipping.shippingProfileList;
             const selectedShippingProfile = rootState.checkout.shipping.selectedShippingProfile;

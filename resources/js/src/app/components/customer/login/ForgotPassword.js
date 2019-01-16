@@ -5,7 +5,7 @@ const ModalService        = require("services/ModalService");
 import ValidationService from "services/ValidationService";
 import TranslationService from "services/TranslationService";
 import UrlService from "services/UrlService";
-import {isNullOrUndefined}from "../../../helper/utils";
+import { isNullOrUndefined } from "../../../helper/utils";
 
 Vue.component("forgot-password-modal", {
 
@@ -85,7 +85,7 @@ Vue.component("forgot-password-modal", {
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", {email: this.username})
+            ApiService.post("/rest/io/customer/password_reset", { email: this.username })
                 .done(() =>
                 {
                     ModalService.findModal(this.$refs.pwdModal).hide();

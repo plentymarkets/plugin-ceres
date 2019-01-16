@@ -84,7 +84,7 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                this.$store.dispatch("removeWishListItem", {id: parseInt(this.variationId)}).then(response =>
+                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(response =>
                 {
                     this.isLoading = false;
 

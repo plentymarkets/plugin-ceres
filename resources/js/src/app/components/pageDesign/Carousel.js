@@ -82,9 +82,9 @@ Vue.component("carousel", {
                 items            : self.itemsPerPage,
                 responsive:
                 {
-                    0:   {items: 1},
-                    544: {items: (self.itemsPerPage > 1) ? 2 : 1},
-                    768: {items: self.itemsPerPage}
+                    0:   { items: 1 },
+                    544: { items: (self.itemsPerPage > 1) ? 2 : 1 },
+                    768: { items: self.itemsPerPage }
                 },
                 lazyLoad         : false,
                 loop             : false,

@@ -3,10 +3,8 @@
     "label": "Widget.gridTwoColumnLabel",
     "previewImageURL": "/images/widgets/grid-2-col.svg",
     "type": "structure",
+    "categories": ["structure"],
     "position": 100,
-    "allowedNestingTypes": [
-        "default"
-    ],
     "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
     "settings": {
         "layout": {
