@@ -252,10 +252,13 @@
 
             function getUnfixedElements()
             {
+                debugger
                 unfixedElements = [];
                 $('#page-header .unfixed').each(function(i, elem)
                 {
+                    
                     var rect = elem.getBoundingClientRect();
+                    console.log(rect);
                     unfixedElements.push({
                         element: elem,
                         top: rect.top,
@@ -270,6 +273,7 @@
                 var scrollTop = window.scrollY;
                 unfixedElements.forEach(function(unfixed)
                 {
+                    console.log(unfixed);
                     var spacingTop = unfixed.height - scrollTop;
                     if ( !!unfixed.element.previousElementSibling )
                     {
@@ -279,6 +283,7 @@
                     {
                         unfixed.element.parentElement.style.paddingTop = (spacingTop >= 0 ? spacingTop : 0) + 'px';
                     }
+                    
                     unfixed.element.style.position = 'absolute';
                     unfixed.element.style.top = unfixed.top - scrollTop + 'px';
                 });

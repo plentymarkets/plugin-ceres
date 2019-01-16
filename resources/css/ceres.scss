@@ -12985,7 +12985,6 @@ $border-width: 1px;
 }
 
 .top-bar{
-
 	@media print {
 		display: none;
 	}
@@ -12994,6 +12993,7 @@ $border-width: 1px;
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
+
 	a:not(.btn) {
 		text-decoration: none;
 		color: $top-bar-color;
@@ -13007,6 +13007,7 @@ $border-width: 1px;
 		-webkit-box-flex: 1;
 		    -ms-flex: 1;
 		        flex: 1;
+
 		@include media-breakpoint-up(md) {
 			-webkit-box-pack: justify;
 			    -ms-flex-pack: justify;
@@ -13014,6 +13015,13 @@ $border-width: 1px;
 			-webkit-box-align: center;
 			    -ms-flex-align: center;
 			        align-items: center;
+
+			.controls {
+				.anicon,
+				a:not(.btn) {
+					padding: 1rem .8rem;
+				}
+			}
 		}
 		@include media-breakpoint-down(sm) {
 			-webkit-box-orient: vertical;
@@ -13079,24 +13087,14 @@ $border-width: 1px;
 			color: $gray-lighter;
 			margin-right: 0;
 
-			// sets the height of the top-bar
+			a:not(.btn) {
+				padding: 0.5rem .8rem;
+				display: inline-block;
+				color: $gray-lighter;
 
-				a:not(.btn) {
-					padding: 0.5rem .8rem;
-					display: inline-block;
-					color: $gray-lighter;
-
-					&:hover {
-						@include context-bg($primary);
-					}
+				&:hover {
+					@include context-bg($primary);
 				}
-
-			@include media-breakpoint-down(md) {
-				.anicon,
-				a:not(.btn) {
-					padding: 0.5rem .8rem;
-				}
-
 			}
 
 			// icons should be slightly larger
@@ -13401,7 +13399,6 @@ $border-width: 1px;
 }
 
 .navbar-brand {
-
 	float: none;
 	padding: .5rem 0;
   	display: inline-block;
@@ -13598,15 +13595,34 @@ $border-width: 1px;
 	min-width: 100%;
 }
 
+.top-bar {
+    .cmp-search-box {
+        position: relative;
+        top: auto; 
+        right: auto;
+        left: auto;
+        .search-box-inner {
+            margin: 5px 0;
+            @include media-breakpoint-down(md) {
+                margin: 5px 5px;
+            }
+        }
+    }
+}
+
 .cmp-search-box
 {
-    background-color: $gray-darker;
+    background-color: $top-bar-bg;
     z-index: 1070;
     position: fixed;
-    top: 30px;
+    top: 44px;
     right: 0;
     left: 0;
     width: 100%;
+    @include media-breakpoint-down(sm) {
+        top: 30px;
+    }
+    
     .search-box-inner
     {
         display: -webkit-box;
@@ -13616,11 +13632,15 @@ $border-width: 1px;
         -webkit-box-direction: normal;
             -ms-flex-flow: row nowrap;
                 flex-flow: row nowrap;
-        padding: 1rem 0em;
+        margin: 5px 15px;
         position: relative;
         max-width: 1200px;
         margin: 0 auto;
+        @include media-breakpoint-down(md) {
+			margin: 5px 5px;
+		}
     }
+    
     @at-root .search-box-shadow-frame
     {
         display: -webkit-box;

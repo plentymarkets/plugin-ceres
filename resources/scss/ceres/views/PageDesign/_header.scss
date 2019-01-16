@@ -6,7 +6,6 @@
 }
 
 .top-bar{
-
 	@media print {
 		display: none;
 	}
@@ -15,6 +14,7 @@
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
+
 	a:not(.btn) {
 		text-decoration: none;
 		color: $top-bar-color;
@@ -24,9 +24,17 @@
 	.search-shown {
 		display: flex;
 		flex: 1;
+
 		@include media-breakpoint-up(md) {
 			justify-content: space-between;
 			align-items: center;
+
+			.controls {
+				.anicon,
+				a:not(.btn) {
+					padding: 1rem .8rem;
+				}
+			}
 		}
 		@include media-breakpoint-down(sm) {
 			flex-direction: column-reverse;
@@ -79,24 +87,14 @@
 			color: $gray-lighter;
 			margin-right: 0;
 
-			// sets the height of the top-bar
+			a:not(.btn) {
+				padding: 0.5rem .8rem;
+				display: inline-block;
+				color: $gray-lighter;
 
-				a:not(.btn) {
-					padding: 0.5rem .8rem;
-					display: inline-block;
-					color: $gray-lighter;
-
-					&:hover {
-						@include context-bg($primary);
-					}
+				&:hover {
+					@include context-bg($primary);
 				}
-
-			@include media-breakpoint-down(md) {
-				.anicon,
-				a:not(.btn) {
-					padding: 0.5rem .8rem;
-				}
-
 			}
 
 			// icons should be slightly larger
@@ -394,7 +392,6 @@
 }
 
 .navbar-brand {
-
 	float: none;
 	padding: .5rem 0;
   	display: inline-block;
