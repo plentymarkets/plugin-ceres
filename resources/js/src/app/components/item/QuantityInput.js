@@ -1,7 +1,7 @@
-import {floatLength, formatFloat, limit}from "../../helper/number";
-import {defaultValue, isDefined, isNullOrUndefined}from "../../helper/utils";
+import { floatLength, formatFloat, limit } from "../../helper/number";
+import { defaultValue, isDefined, isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
-import {debounce}from "../../helper/debounce";
+import { debounce } from "../../helper/debounce";
 
 Vue.component("quantity-input", {
 

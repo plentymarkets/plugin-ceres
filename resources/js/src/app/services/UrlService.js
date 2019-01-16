@@ -1,6 +1,6 @@
 import $ from "jquery";
-import {isDefined, isNullOrUndefined}from "../helper/utils";
-import {normalizeUrl}from "../helper/url";
+import { isDefined, isNullOrUndefined } from "../helper/utils";
+import { normalizeUrl } from "../helper/url";
 import store from "../store/index";
 
 export function getUrlParams(urlParams)
@@ -51,14 +51,14 @@ export function setUrlParams(urlParams, pushState = true)
 
     if (pushState)
     {
-        window.history.pushState({requireReload: true}, titleElement ? titleElement.innerHTML : "", pathName + params);
+        window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
     }
     else
     {
-        window.history.replaceState({requireReload: true}, titleElement ? titleElement.innerHTML : "", pathName + params);
+        window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
     }
 
-    document.dispatchEvent(new CustomEvent("onHistoryChanged", {detail: {title: titleElement ? titleElement.innerHTML : "", url:pathName + params}}));
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url:pathName + params } }));
 
     $("a[href][data-update-url]").each((i, element) =>
     {
@@ -120,4 +120,4 @@ export function navigateToParams(urlParams)
     window.location.assign(url);
 }
 
-export default {setUrlParams, getUrlParams, navigateTo, setUrlParam, removeUrlParams, removeUrlParam};
+export default { setUrlParams, getUrlParams, navigateTo, setUrlParam, removeUrlParams, removeUrlParam };

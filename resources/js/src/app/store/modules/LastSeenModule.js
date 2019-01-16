@@ -1,5 +1,5 @@
 import ApiService from "services/ApiService";
-import {isDefined}from "../../helper/utils";
+import { isDefined } from "../../helper/utils";
 
 const state =
     {
@@ -22,7 +22,7 @@ const mutations =
 
 const actions =
     {
-        addLastSeenItem({commit, state}, variationId)
+        addLastSeenItem({ commit, state }, variationId)
         {
             if (!state.isLastSeenItemsLoading)
             {
@@ -48,17 +48,17 @@ const actions =
             return null;
         },
 
-        getLastSeenItems({commit}, maxItems)
+        getLastSeenItems({ commit }, maxItems)
         {
             if (!state.isLastSeenItemsLoading)
             {
                 return new Promise((resolve, reject) =>
                 {
-                    const params = {items: maxItems || App.config.itemLists.lastSeenNumber};
+                    const params = { items: maxItems || App.config.itemLists.lastSeenNumber };
 
                     commit("setIsLastSeenItemsLoading", true);
 
-                    ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
+                    ApiService.get("/rest/io/item/last_seen", params, { keepOriginalResponse: true })
                         .done(response =>
                         {
                             if (isDefined(response.data))

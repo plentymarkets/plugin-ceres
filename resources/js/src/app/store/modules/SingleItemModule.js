@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 
 const state =
     {
@@ -24,7 +24,7 @@ const mutations =
             state.variationList = variationList;
         },
 
-        setVariationOrderProperty(state, {propertyId, value})
+        setVariationOrderProperty(state, { propertyId, value })
         {
             const index = state.variation.documents[0].data.properties.findIndex(property => property.property.id === propertyId);
 
@@ -148,7 +148,7 @@ const getters =
                         group: groupProperties[0].group,
                         properties: groupProperties.map(property =>
                         {
-                            return {...property.property, itemSurcharge: property.surcharge};
+                            return { ...property.property, itemSurcharge: property.surcharge };
                         })
                     });
                 }

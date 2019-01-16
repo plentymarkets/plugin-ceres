@@ -1,6 +1,6 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
-import {isNullOrUndefined}from "../../../helper/utils";
+import { isNullOrUndefined } from "../../../helper/utils";
 
 const NotificationService = require("services/NotificationService");
 
@@ -127,7 +127,7 @@ Vue.component("basket-list-item", {
                 this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
+                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: this.basketItem }));
                         this.waitingForDelete = false;
                     },
                     error =>
@@ -149,10 +149,10 @@ Vue.component("basket-list-item", {
 
                 const origQty = this.basketItem.quantity;
 
-                this.$store.dispatch("updateBasketItemQuantity", {basketItem: this.basketItem, quantity: quantity}).then(
+                this.$store.dispatch("updateBasketItemQuantity", { basketItem: this.basketItem, quantity: quantity }).then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: this.basketItem}));
+                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: this.basketItem }));
                         this.waiting = false;
                     },
                     error =>

@@ -40,4 +40,4 @@ export function triggerAutoFocus(modal)
     }, 0);
 }
 
-export default {autoFocus, triggerAutoFocus};
+export default { autoFocus, triggerAutoFocus };

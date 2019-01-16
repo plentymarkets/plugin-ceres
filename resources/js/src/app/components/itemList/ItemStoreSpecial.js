@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 
 Vue.component("item-store-special", {

@@ -22,7 +22,7 @@ Vue.component("item-filter-tag-list", {
     {
         removeTag(tag)
         {
-            this.selectFacet({facetValue: tag});
+            this.selectFacet({ facetValue: tag });
             this.loadItemList();
         },
 

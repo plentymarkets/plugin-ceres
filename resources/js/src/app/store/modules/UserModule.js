@@ -1,4 +1,4 @@
-import {isDefined}from "../../helper/utils";
+import { isDefined } from "../../helper/utils";
 
 const state =
     {
