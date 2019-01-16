@@ -16,7 +16,7 @@
         ]
     },
     "allowedTypes": {
-        "header": ["header", "static", "structure"],
+        "header": ["header"],
         "footer": ["footer", "static", "structure"],
         "content": ["static", "structure"]
     },
