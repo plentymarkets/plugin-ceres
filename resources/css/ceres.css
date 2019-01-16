@@ -18643,20 +18643,25 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   }
 }
 
-.cmp-search-box {
-  background-color: #4D4F4D;
+div:not(.top-bar) > .page-header > div > .cmp-search-box {
+  top: 30px;
   z-index: 1070;
   position: fixed;
-  top: 44px;
   right: 0;
   left: 0;
-  width: 100%;
 }
 
-@media (max-width: 767.98px) {
-  .cmp-search-box {
-    top: 30px;
+@media (min-width: 992px) {
+  div:not(.top-bar) > .page-header > div > .cmp-search-box .search-box-inner {
+    margin: 5px auto;
+    padding-left: 15px;
+    padding-right: 15px;
   }
+}
+
+.cmp-search-box {
+  background-color: #4D4F4D;
+  width: 100%;
 }
 
 .cmp-search-box .search-box-inner {
