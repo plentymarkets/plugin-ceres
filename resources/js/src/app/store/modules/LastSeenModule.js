@@ -69,7 +69,7 @@ const actions =
                 return new Promise((resolve, reject) =>
                 {
                     commit("setIsLastSeenItemsLoading", true);
-                    ApiService.get("/rest/io/item/last_seen", {keepOriginalResponse: true})
+                    ApiService.get("/rest/io/item/last_seen")
                         .done(response =>
                         {
                             if (isDefined(response) && isDefined(response.lastSeenItems))
