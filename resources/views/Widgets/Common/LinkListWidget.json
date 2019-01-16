@@ -2,8 +2,9 @@
     "identifier": "Ceres::LinkListWidget",
     "label": "Widget.linkListLabel",
     "previewImageURL": "/images/widgets/link-list.svg",
-    "type": "default",
-    "position": 900,
+    "type": "static",
+    "categories": ["text"],
+    "position": 1000,
     "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
     "settings": {
         "title": {

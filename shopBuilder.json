@@ -1,19 +1,24 @@
 {
     "containers": {
         "header": {
-            "label":    "Widget.containerHeader",
-            "name":     "Ceres::Header"
+            "label":            "Widget.containerHeader",
+            "name":             "Ceres::Header"
         },
         "footer": {
-            "label":    "Widget.containerFooter",
-            "name":     "Ceres::Footer"
+            "label":            "Widget.containerFooter",
+            "name":             "Ceres::Footer"
         },
         "content": [
             {
-                "label": "Widget.containerHomepage",
-                "name":  "Ceres::Homepage"
+                "label":        "Widget.containerHomepage",
+                "name":         "Ceres::Homepage"
             }
         ]
+    },
+    "allowedTypes": {
+        "header": ["header"],
+        "footer": ["footer", "static", "structure", "default"],
+        "content": ["static", "structure", "default"]
     },
     "presets": {
         "header": [
@@ -34,5 +39,37 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
             }
         ]
-    }
+    },
+    "categories": [
+        {
+            "key": "header",
+            "label": "Widget.categoryHeader",
+            "position": 100
+        },
+        {
+            "key": "structure",
+            "label": "Widget.categoryStructure",
+            "position": 200
+        },
+        {
+            "key": "text",
+            "label": "Widget.categoryText",
+            "position": 300
+        },
+        {
+            "key": "image",
+            "label": "Widget.categoryImage",
+            "position": 400
+        },
+        {
+            "key": "item",
+            "label": "Widget.categoryItem",
+            "position": 500
+        },
+        {
+            "key": "footer",
+            "label": "Widget.categoryFooter",
+            "position": 600
+        }
+    ]
 }

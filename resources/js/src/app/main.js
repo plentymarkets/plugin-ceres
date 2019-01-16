@@ -198,7 +198,7 @@ var init = (function($, window, document)
             {
                 event.preventDefault();
 
-                $("html, body").animate({scrollTop: 0}, duration);
+                $("html, body").animate({ scrollTop: 0 }, duration);
 
                 return false;
             });
@@ -207,7 +207,7 @@ var init = (function($, window, document)
             {
                 event.preventDefault();
 
-                $("html, body").animate({scrollTop: 0}, duration);
+                $("html, body").animate({ scrollTop: 0 }, duration);
 
                 return false;
             });

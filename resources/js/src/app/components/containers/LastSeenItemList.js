@@ -1,4 +1,4 @@
-import {isDefined}from "../../helper/utils";
+import { isDefined } from "../../helper/utils";
 
 Vue.component("last-seen-item-list", {
 

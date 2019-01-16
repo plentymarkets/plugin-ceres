@@ -1,4 +1,4 @@
-import {isNullOrUndefined, isNull, isDefined}from "../../../helper/utils";
+import { isNullOrUndefined, isNull, isDefined } from "../../../helper/utils";
 
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
@@ -149,7 +149,7 @@ Vue.component("address-select", {
             }
             else
             {
-                this.addressToEdit = {countryId: this.shippingCountryId};
+                this.addressToEdit = { countryId: this.shippingCountryId };
             }
 
             this.updateHeadline();
@@ -232,7 +232,7 @@ Vue.component("address-select", {
         {
             this.deleteModalWaiting = true;
 
-            this.$store.dispatch("deleteAddress", {address: this.addressToDelete, addressType: this.addressType})
+            this.$store.dispatch("deleteAddress", { address: this.addressToDelete, addressType: this.addressType })
                 .then(
                     response =>
                     {
@@ -323,7 +323,7 @@ Vue.component("address-select", {
             return "";
         },
 
-        setAddressToEditField({field, value})
+        setAddressToEditField({ field, value })
         {
             this.addressToEdit[field] = value;
             this.addressToEdit = Object.assign({}, this.addressToEdit);

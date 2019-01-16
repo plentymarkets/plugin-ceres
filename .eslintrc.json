@@ -110,6 +110,9 @@
         "overrides": {
           "this": {
             "before": true
+          },
+          "from": {
+            "before": true
           }
         }
       }
@@ -158,6 +161,7 @@
     "new-cap": ["error", {
       "newIsCap": false,
       "capIsNew": false
-    }]
+    }],
+    "object-curly-spacing"    : ["error", "always"]
   }
 }

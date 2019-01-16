@@ -1,4 +1,4 @@
-import {exceptionMap}from "exceptions/ExceptionMap";
+import { exceptionMap } from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
 
 module.exports = (function($)

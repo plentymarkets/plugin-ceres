@@ -3,6 +3,7 @@
     "label": "Widget.navigationLabel",
     "previewImageURL": "/images/widgets/navigation.svg",
     "type": "header",
+    "categories": ["header"],
     "position": 0,
     "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
     "settings": {

@@ -1,5 +1,5 @@
 import ApiService from "services/ApiService";
-import {isDefined}from "../../helper/utils";
+import { isDefined } from "../../helper/utils";
 
 const state =
     {
@@ -28,7 +28,7 @@ const mutations =
 
 const actions =
     {
-        addLastSeenItem({commit, state}, variationId)
+        addLastSeenItem({ commit, state }, variationId)
         {
             if (!state.isLastSeenItemsLoading)
             {
@@ -62,7 +62,7 @@ const actions =
             return null;
         },
 
-        getLastSeenItems({commit})
+        getLastSeenItems({ commit })
         {
             if (!state.isLastSeenItemsLoading)
             {

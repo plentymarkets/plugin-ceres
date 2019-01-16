@@ -16045,6 +16045,12 @@ body > #vue-error.open-hover .basket-preview-hover-wrapper {
   margin-left: 5px;
 }
 
+html.ios input,
+html.ios select,
+html.ios textarea {
+  font-size: 16px !important;
+}
+
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px;
 }
@@ -19525,10 +19531,15 @@ body.menu-is-visible {
   border-top: 1px solid transparent;
   background-color: #dadae3;
   color: #4D4F4D;
+  max-width: 1170px;
 }
 
 .footer .footer-features i {
   color: #4D4F4D !important;
+}
+
+.footer .footer-content {
+  max-width: 1170px;
 }
 
 .footer .footer-services {
@@ -23434,12 +23445,12 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   margin-right: 15px;
 }
 
-.single-leftside {
+.single-rightside {
   margin-top: 1rem;
 }
 
 @media (min-width: 768px) {
-  .single-leftside {
+  .single-rightside {
     margin-top: 0;
     position: absolute;
     left: 58.33333%;

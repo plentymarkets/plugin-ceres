@@ -118,7 +118,7 @@ Vue.component("item-filter-list", {
             const priceMin = urlParams.priceMin || "";
             const priceMax = urlParams.priceMax || "";
 
-            this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
 
             this.initialPriceMin = priceMin;
             this.initialPriceMax = priceMax;

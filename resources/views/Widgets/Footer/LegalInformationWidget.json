@@ -3,6 +3,7 @@
     "label": "Widget.legalInformationLabel",
     "previewImageURL": "/images/widgets/legal-information.svg",
     "type": "footer",
+    "categories": ["footer"],
     "position": 1200,
     "widgetClass": "Ceres\\Widgets\\Footer\\LegalInformationWidget",
     "settings": {
