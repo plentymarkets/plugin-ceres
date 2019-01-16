@@ -13031,7 +13031,7 @@ $border-width: 1px;
 		}
 
 		.always-visible-search {
-			margin: 5px 5px;
+			margin: 5px;
 			background-color: $white;
 			-webkit-box-flex: 1;
 			    -ms-flex: 1;
@@ -13595,6 +13595,7 @@ $border-width: 1px;
 	min-width: 100%;
 }
 
+// Searchbar in widget
 .top-bar {
     .cmp-search-box {
         position: relative;
@@ -13610,6 +13611,7 @@ $border-width: 1px;
     }
 }
 
+// Searchbar in standard-header
 .cmp-search-box
 {
     background-color: $top-bar-bg;
