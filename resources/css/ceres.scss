@@ -10947,6 +10947,17 @@ body {
   }
 }
 
+// additional compatibility scss to bootstrap's reboot
+
+// prevent iOS standard zoom on input elements on focus
+html.ios {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
 
 //TODO's
 .input-group{
@@ -14619,16 +14630,17 @@ body.menu-is-visible {
 		border-top: 1px solid transparent;
 		background-color: $footer-features-bg;
 		color: $footer-features-color;
+		max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
 		i {
 			color:$footer-features-color !important;
 		}
 	}
 
-	.footer-content{
-
+	.footer-content {
+		max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
 	}
 
-	.footer-services{
+	.footer-services {
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -18860,14 +18872,14 @@ html.ie .basket-preview-hover {
     }
 }
 
-.single-leftside
+.single-rightside
 {
     margin-top: 1rem;
 }
 
 @include media-breakpoint-up(md)
 {
-    .single-leftside
+    .single-rightside
     {
         margin-top: 0;
         position: absolute;
@@ -20103,6 +20115,11 @@ html.ie {
         &.widget-grid
         {
             margin-bottom: 0;
+
+            + .widget-grid
+            {
+                margin-top: 1rem;
+            }
         }
 
         .widget-inner
