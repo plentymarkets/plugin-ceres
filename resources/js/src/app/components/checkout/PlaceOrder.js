@@ -2,7 +2,7 @@ var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
 import TranslationService from "services/TranslationService";
-import {navigateTo}from "services/UrlService";
+import { navigateTo } from "services/UrlService";
 
 Vue.component("place-order", {
 
@@ -40,8 +40,8 @@ Vue.component("place-order", {
             this.waiting = true;
 
             const url = "/rest/io/order/additional_information";
-            const params = {orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted};
-            const options = {supressNotifications: true};
+            const params = { orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted };
+            const options = { supressNotifications: true };
 
             ApiService.post(url, params, options)
                 .always(() =>

@@ -16,7 +16,7 @@ Vue.component("order-return-history", {
 	{
         return {
             waiting: false,
-            returnsList: {page: 1}
+            returnsList: { page: 1 }
         };
     },
 
@@ -40,7 +40,7 @@ Vue.component("order-return-history", {
 
                 this.returnsList.page = page;
 
-                ApiService.get("/rest/io/customer/order/return", {page: page, items: this.itemsPerPage})
+                ApiService.get("/rest/io/customer/order/return", { page: page, items: this.itemsPerPage })
                 .done(response =>
                 {
                     this.waiting = false;

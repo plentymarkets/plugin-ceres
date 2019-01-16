@@ -35,7 +35,7 @@ Vue.component("shipping-profile-select", {
             this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(shippingProfile => shippingProfile.parcelServicePresetId === shippingProfileId))
                 .then(data =>
                 {
-                    document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", {detail: this.shippingProfileId}));
+                    document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: this.shippingProfileId }));
                 },
                 error =>
                 {

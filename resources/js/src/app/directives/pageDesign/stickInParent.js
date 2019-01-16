@@ -10,7 +10,7 @@ const stickInParent = (el, minWidth, isActive) =>
         const $element = $(el);
         const headHeight = $("#page-header").height();
 
-        if ($element.stick_in_parent({offset_top: headHeight + 10}))
+        if ($element.stick_in_parent({ offset_top: headHeight + 10 }))
         {
             el.dataset.isSticky = true;
         }

@@ -33,7 +33,7 @@ Vue.component("order-property-list-group", {
 
             for (const property of propertiesToUnselect)
             {
-                this.setVariationOrderProperty({propertyId: property.id, value: null});
+                this.setVariationOrderProperty({ propertyId: property.id, value: null });
             }
         },
 

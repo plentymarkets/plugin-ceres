@@ -96,7 +96,7 @@ Vue.component("login", {
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
+            ApiService.post("/rest/io/customer/login", { email: this.username, password: this.password }, { supressNotifications: true })
                 .done(response =>
                 {
                     ApiService.setToken(response);

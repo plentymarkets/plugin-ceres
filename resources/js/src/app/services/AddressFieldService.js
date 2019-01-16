@@ -48,4 +48,4 @@ export function isAddressFieldEnabled(countryId, addressType, field)
     return false;
 }
 
-export default {isAddressFieldEnabled};
+export default { isAddressFieldEnabled };

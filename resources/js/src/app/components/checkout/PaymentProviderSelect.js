@@ -34,7 +34,7 @@ Vue.component("payment-provider-select", {
             this.$store.dispatch("selectMethodOfPayment", newMethodOfPayment.id)
                 .then(data =>
                 {
-                    document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {detail: this.methodOfPaymentId}));
+                    document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", { detail: this.methodOfPaymentId }));
                 },
                 error =>
                 {
