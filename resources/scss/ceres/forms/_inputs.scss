@@ -163,7 +163,8 @@ $border-width: 1px;
         border-bottom-right-radius: 2px;
     }
 
-    &.error
+    &.error,
+    .input-feedback-container.has-error > &
     {
         z-index: $zIndex-1;
         border-color: $danger;
@@ -186,7 +187,8 @@ $border-width: 1px;
 
     }
 
-    &.success
+    &.success,
+    .input-feedback-container.has-success > &
     {
         z-index: $zIndex-1;
         border-color: $success;
@@ -323,5 +325,38 @@ $border-width: 1px;
         {
             color: $white !important;
         }
+    }
+}
+
+.input-feedback-container
+{
+    margin-bottom: $grid-gutter-width/2;
+
+    .input-unit
+    {
+        margin-bottom: 0;
+    }
+
+    .feedback
+    {
+        font-size: .8rem;
+        text-align: right;
+        display: none;
+    }
+
+    .feedback-error
+    {
+        color: $danger;
+    }
+
+    .feedback-success
+    {
+        color: $success;
+    }
+
+    &.has-error .feedback-error,
+    &.has-success .feedback-success
+    {
+        display: block;
     }
 }
