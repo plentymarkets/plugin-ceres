@@ -2,12 +2,12 @@ import ApiService from "services/ApiService";
 
 const state =
     {
-        liveShoppingOffers: {1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null, 9: null, 10: null}
+        liveShoppingOffers: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null, 9: null, 10: null }
     };
 
 const mutations =
     {
-        setLiveShoppingOffer(state, {liveShoppingId, liveShoppingOffer})
+        setLiveShoppingOffer(state, { liveShoppingId, liveShoppingOffer })
         {
             state.liveShoppingOffers[liveShoppingId] = liveShoppingOffer;
         }
@@ -15,7 +15,7 @@ const mutations =
 
 const actions =
     {
-        retrieveLiveShoppingOffer({commit}, liveShoppingId)
+        retrieveLiveShoppingOffer({ commit }, liveShoppingId)
         {
             return new Promise((resolve, reject) =>
             {
@@ -24,11 +24,11 @@ const actions =
                     {
                         if (liveShoppingOffer.item)
                         {
-                            commit("setLiveShoppingOffer", {liveShoppingId, liveShoppingOffer});
+                            commit("setLiveShoppingOffer", { liveShoppingId, liveShoppingOffer });
                         }
                         else
                         {
-                            commit("setLiveShoppingOffer", {liveShoppingId, liveShoppingOffer: null});
+                            commit("setLiveShoppingOffer", { liveShoppingId, liveShoppingOffer: null });
                         }
 
                         resolve(liveShoppingOffer);

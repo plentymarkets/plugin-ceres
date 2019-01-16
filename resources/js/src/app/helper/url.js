@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "./utils";
+import { isNullOrUndefined } from "./utils";
 
 export function normalizeUrl(url)
 {

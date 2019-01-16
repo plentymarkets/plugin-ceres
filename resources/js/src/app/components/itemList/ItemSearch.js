@@ -1,7 +1,7 @@
 import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
 import UrlService from "services/UrlService";
-import {isNullOrUndefined}from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("item-search", {
 
@@ -146,7 +146,7 @@ Vue.component("item-search", {
 
                 const promiseCount = ++this.promiseCount;
 
-                ApiService.get("/rest/io/item/search/autocomplete", {template: "Ceres::ItemList.Components.ItemSearch", query: searchString})
+                ApiService.get("/rest/io/item/search/autocomplete", { template: "Ceres::ItemList.Components.ItemSearch", query: searchString })
                     .done(response =>
                     {
                         if (this.promiseCount === promiseCount)

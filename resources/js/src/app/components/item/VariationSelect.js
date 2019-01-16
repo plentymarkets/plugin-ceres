@@ -1,5 +1,5 @@
-import {isNull}from "util";
-import {textWidth}from "../../helper/dom";
+import { isNull } from "util";
+import { textWidth } from "../../helper/dom";
 import uniq from "lodash/uniq";
 
 const ApiService = require("services/ApiService");
@@ -274,7 +274,7 @@ Vue.component("variation-select", {
             {
                 // get variation data from remote
                 ApiService
-                    .get("/rest/io/variations/" + variationId, {template: "Ceres::Item.SingleItem"})
+                    .get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" })
                     .done(response =>
                     {
                         // store received variation data for later reuse
@@ -282,7 +282,7 @@ Vue.component("variation-select", {
 
                         this.$store.commit("setVariation", response);
 
-                        document.dispatchEvent(new CustomEvent("onVariationChanged", {detail: {attributes: response.attributes, documents: response.documents}}));
+                        document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
 
                         this.$emit("is-valid-change", true);
                     });
@@ -323,7 +323,7 @@ Vue.component("variation-select", {
                     const title = document.getElementsByTagName("title")[0].innerHTML;
 
                     window.history.replaceState({}, title, url);
-                    document.dispatchEvent(new CustomEvent("onHistoryChanged", {detail: {title: title, url:url}}));
+                    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: title, url:url } }));
 
                 }
             },

@@ -60,7 +60,7 @@ Vue.component("create-update-address", {
 
                     ValidationService.markInvalidFields(invalidFields, "error");
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", {fields: fieldNames.join(", ")})
+                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
                     );
                 });
         },
@@ -88,7 +88,7 @@ Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
-            this.$store.dispatch("updateAddress", {address: this.addressData, addressType: this.addressType})
+            this.$store.dispatch("updateAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
                     resolve =>
                     {
@@ -119,7 +119,7 @@ Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
-            this.$store.dispatch("createAddress", {address: this.addressData, addressType: this.addressType})
+            this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
                     response =>
                     {
@@ -160,7 +160,7 @@ Vue.component("create-update-address", {
         {
             if (error.code === 11)
             {
-                NotificationService.error({code: error.code, message: ""});
+                NotificationService.error({ code: error.code, message: "" });
                 window.location.reload();
             }
         },

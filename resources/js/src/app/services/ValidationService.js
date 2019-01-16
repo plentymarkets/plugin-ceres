@@ -1,5 +1,5 @@
 import $ from "jquery";
-import {isNull}from "../helper/utils";
+import { isNull } from "../helper/utils";
 
 let $form;
 
@@ -158,7 +158,7 @@ function _validateGroup($formControl, validationKey)
 {
     const groupName = $formControl.attr("name");
     const $group    = $form.find("[name=\"" + groupName + "\"]");
-    const range     = _eval(validationKey) || {min: 1, max: 1};
+    const range     = _eval(validationKey) || { min: 1, max: 1 };
     const checked   = $group.filter(":checked").length;
 
     return checked >= range.min && checked <= range.max;
@@ -287,4 +287,4 @@ function _eval(input)
     return (new Function("return " + input))();
 }
 
-export default {validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields};
+export default { validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields };

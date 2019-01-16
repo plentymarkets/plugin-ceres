@@ -1,6 +1,6 @@
 import ValidationService from "services/ValidationService";
 import TranslationService from "services/TranslationService";
-import {navigateTo}from "services/UrlService";
+import { navigateTo } from "services/UrlService";
 
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
@@ -92,7 +92,7 @@ Vue.component("reset-password-form", {
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password", {password: this.passwordFirst, password2: this.passwordSecond, contactId: this.contactId, hash: this.hash})
+            ApiService.post("/rest/io/customer/password", { password: this.passwordFirst, password2: this.passwordSecond, contactId: this.contactId, hash: this.hash })
                 .done(() =>
                 {
                     this.resetFields();

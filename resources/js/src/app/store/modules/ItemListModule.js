@@ -1,6 +1,6 @@
 import ApiService from "services/ApiService";
-import {getItemListUrlParams}from "services/ItemListUrlService";
-import {navigateToParams}from "services/UrlService";
+import { getItemListUrlParams } from "services/ItemListUrlService";
+import { navigateToParams } from "services/UrlService";
 import TranslationService from "services/TranslationService";
 
 const state =
@@ -23,7 +23,7 @@ const mutations =
             state.facets = facets || [];
         },
 
-        setPriceFacet(state, {priceMin, priceMax})
+        setPriceFacet(state, { priceMin, priceMax })
         {
             const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
             const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
@@ -145,7 +145,7 @@ const mutations =
 
 const actions =
     {
-        selectFacet({dispatch, commit}, {facetValue})
+        selectFacet({ dispatch, commit }, { facetValue })
         {
             if (facetValue.id === "price")
             {
@@ -160,22 +160,22 @@ const actions =
             dispatch("loadFacets");
         },
 
-        selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
+        selectPriceFacet({ dispatch, commit }, { priceMin, priceMax })
         {
-            commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+            commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
             commit("setPriceFacetTag");
             commit("setItemListPage", 1);
             dispatch("loadFacets");
         },
 
-        selectItemListPage({dispatch, commit}, page)
+        selectItemListPage({ dispatch, commit }, page)
         {
             commit("setItemListPage", page);
 
             dispatch("loadItemList");
         },
 
-        selectItemListSorting({dispatch, commit}, sorting)
+        selectItemListSorting({ dispatch, commit }, sorting)
         {
             commit("setItemListSorting", sorting);
             commit("setItemListPage", 1);
@@ -183,7 +183,7 @@ const actions =
             dispatch("loadItemList");
         },
 
-        selectItemsPerPage({dispatch, commit}, itemsPerPage)
+        selectItemsPerPage({ dispatch, commit }, itemsPerPage)
         {
             commit("setItemsPerPage", itemsPerPage);
             commit("setItemListPage", 1);
@@ -191,7 +191,7 @@ const actions =
             dispatch("loadItemList");
         },
 
-        searchItems({dispatch, commit}, searchString)
+        searchItems({ dispatch, commit }, searchString)
         {
             commit("setItemListSearchString", searchString);
             commit("setItemListPage", 1);
@@ -200,7 +200,7 @@ const actions =
             dispatch("loadItemList");
         },
 
-        loadFacets({commit, getters, rootState})
+        loadFacets({ commit, getters, rootState })
         {
             const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
             const params = {
@@ -232,7 +232,7 @@ const actions =
             });
         },
 
-        loadItemList({state, commit, getters})
+        loadItemList({ state, commit, getters })
         {
             const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
             const searchParams =
