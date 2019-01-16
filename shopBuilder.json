@@ -17,8 +17,8 @@
     },
     "allowedTypes": {
         "header": ["header"],
-        "footer": ["footer", "static", "structure"],
-        "content": ["static", "structure"]
+        "footer": ["footer", "static", "structure", "default"],
+        "content": ["static", "structure", "default"]
     },
     "presets": {
         "header": [

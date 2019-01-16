@@ -3,7 +3,10 @@
         "identifier": "Ceres::CollapseWidget",
         "label": "Widget.collapseLabel",
         "previewImageURL": "/images/widgets/collapse.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
         "position": 1300,
         "widgetClass": "Ceres\\Widgets\\Common\\CollapseWidget",
         "settings": {
