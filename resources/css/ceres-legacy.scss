@@ -10739,20 +10739,6 @@ a:active {
     cursor: pointer;
 }
 
-@include media-breakpoint-up(xl){
-    .page-content{
-        padding-left: 0;
-        padding-right: 0;
-        &.basket,
-        &.checkout,
-        &.contact,
-        &.myaccount {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    }
-}
-
 .content-center {
     margin: 0 auto;
     float: none;
@@ -12951,6 +12937,7 @@ $border-width: 1px;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
     cursor: pointer;
+    margin-bottom: .75rem;
 
     &.error
     {
