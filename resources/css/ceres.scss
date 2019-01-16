@@ -18872,14 +18872,14 @@ html.ie .basket-preview-hover {
     }
 }
 
-.single-leftside
+.single-rightside
 {
     margin-top: 1rem;
 }
 
 @include media-breakpoint-up(md)
 {
-    .single-leftside
+    .single-rightside
     {
         margin-top: 0;
         position: absolute;

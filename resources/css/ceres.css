@@ -23445,12 +23445,12 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   margin-right: 15px;
 }
 
-.single-leftside {
+.single-rightside {
   margin-top: 1rem;
 }
 
 @media (min-width: 768px) {
-  .single-leftside {
+  .single-rightside {
     margin-top: 0;
     position: absolute;
     left: 58.33333%;
