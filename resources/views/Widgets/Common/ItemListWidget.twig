@@ -59,7 +59,7 @@
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
-            <last-seen-item-list :max-items="{{ maxItems }}" :items-per-page="{{ itemsPerPage }}">
+            <last-seen-item-list :items-per-page="{{ itemsPerPage }}" :max-items="{{ maxItems }}" v-cloak>
                 <div class="widget-caption mb-3" slot="heading">
                     <h2>{{ Twig.print("title") }}</h2>
                 </div>
