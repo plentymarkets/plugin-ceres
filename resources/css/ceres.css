@@ -18161,6 +18161,10 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
     -ms-flex-align: center;
         align-items: center;
   }
+  .top-bar .search-shown .controls .anicon,
+  .top-bar .search-shown .controls a:not(.btn) {
+    padding: 1rem .8rem;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -18171,7 +18175,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 }
 
 .top-bar .search-shown .always-visible-search {
-  margin: 5px 5px;
+  margin: 5px;
   background-color: #fff;
   -ms-flex: 1;
       flex: 1;
@@ -18204,12 +18208,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  .top-bar .search-shown .controls-list > li a:not(.btn) {
-    padding: 1rem .8rem;
-  }
-}
-
 .top-bar.fixed-top {
   position: fixed;
 }
@@ -18239,13 +18237,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   color: #fff;
 }
 
-@media (max-width: 991.98px) {
-  .top-bar .controls-list > li .anicon,
-  .top-bar .controls-list > li a:not(.btn) {
-    padding: 0.5rem .8rem;
-  }
-}
-
 .top-bar .controls-list > li .fa:not(.qty-sign) {
   font-size: 1.2rem;
 }
@@ -18257,7 +18248,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .top-bar .controls-list .control-user {
   -ms-flex: 1 0 auto;
       flex: 1 0 auto;
-  margin-left: 1rem;
 }
 
 .top-bar .controls-list .control-user #login-change {
@@ -18560,15 +18550,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   transform: translate(0, -50%);
 }
 
-@media (max-width: 991.98px) {
-  .navbar .navbar-nav .dropdown-menu {
-    position: relative;
-    float: none;
-    background-color: #f4f4f4;
-    border: none;
-  }
-}
-
 .wrapper-main header .container-max > .row {
   -ms-flex-direction: row-reverse;
       flex-direction: row-reverse;
@@ -18577,16 +18558,41 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   margin-right: 0;
 }
 
-@media (min-width: 576px) {
-  .wrapper-main header .controls-list {
-    width: auto;
+.wrapper-main header .controls-list {
+  width: auto;
+}
+
+.wrapper-main header .controls-list > li {
+  font-size: .8rem;
+}
+
+.wrapper-main header .controls-list > li .fa:not(.qty-sign) {
+  font-size: 1rem;
+  line-height: .8rem;
+}
+
+@media (max-width: 575.98px) {
+  .top-bar .controls-list > li .anicon,
+  .top-bar .controls-list > li a:not(.btn) {
+    padding: .5rem;
   }
-  .wrapper-main header .controls-list > li {
-    font-size: .8rem;
+  .top-bar .controls-list .pipe {
+    margin: 0 0.3em 0 0;
   }
-  .wrapper-main header .controls-list > li .fa:not(.qty-sign) {
-    font-size: 1rem;
-    line-height: .8rem;
+  .top-bar .controls-list .anicon-search-xcross {
+    width: 2.2rem;
+  }
+  .top-bar .controls-list .badge-right {
+    display: none;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .navbar .navbar-nav .dropdown-menu {
+    position: relative;
+    float: none;
+    background-color: #f4f4f4;
+    border: none;
   }
 }
 
@@ -18645,13 +18651,41 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   min-width: 100%;
 }
 
-.cmp-search-box {
-  background-color: #282d2f;
+.top-bar .cmp-search-box {
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+}
+
+.top-bar .cmp-search-box .search-box-inner {
+  margin: 5px 0;
+}
+
+@media (max-width: 991.98px) {
+  .top-bar .cmp-search-box .search-box-inner {
+    margin: 5px 5px;
+  }
+}
+
+div:not(.top-bar) > .page-header > div > .cmp-search-box {
+  top: 30px;
   z-index: 1070;
   position: fixed;
-  top: 30px;
   right: 0;
   left: 0;
+}
+
+@media (min-width: 992px) {
+  div:not(.top-bar) > .page-header > div > .cmp-search-box .search-box-inner {
+    margin: 5px auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.cmp-search-box {
+  background-color: #4D4F4D;
   width: 100%;
 }
 
@@ -18660,10 +18694,16 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   display: flex;
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
-  padding: 1rem 0em;
+  margin: 5px 15px;
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+@media (max-width: 991.98px) {
+  .cmp-search-box .search-box-inner {
+    margin: 5px 5px;
+  }
 }
 
 .search-box-shadow-frame {
