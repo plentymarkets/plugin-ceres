@@ -19,17 +19,17 @@ const mutations =
 
 const actions =
     {
-        initNavigationTree({dispatch, commit}, navigationTree)
+        initNavigationTree({ dispatch, commit }, navigationTree)
         {
             if (navigationTree)
             {
-                dispatch("buildNavigationTreeItem", {navigationTree});
+                dispatch("buildNavigationTreeItem", { navigationTree });
             }
 
             commit("setNavigationTree", navigationTree);
         },
 
-        buildNavigationTreeItem({state, commit, dispatch}, {navigationTree, parent})
+        buildNavigationTreeItem({ state, commit, dispatch }, { navigationTree, parent })
         {
             let showChildren = false;
 
@@ -71,7 +71,7 @@ const actions =
 
                     if (category.children)
                     {
-                        dispatch("buildNavigationTreeItem", {navigationTree: category.children, parent: category});
+                        dispatch("buildNavigationTreeItem", { navigationTree: category.children, parent: category });
                     }
                 }
             }
@@ -82,7 +82,7 @@ const actions =
             }
         },
 
-        setCurrentCategoryById({state, commit, dispatch}, {categoryId, categories})
+        setCurrentCategoryById({ state, commit, dispatch }, { categoryId, categories })
         {
             categories = categories || state.tree;
 
@@ -95,7 +95,7 @@ const actions =
                 }
                 else if (category.children)
                 {
-                    dispatch("setCurrentCategoryById", {categoryId, categories: category.children});
+                    dispatch("setCurrentCategoryById", { categoryId, categories: category.children });
                 }
             }
         }

@@ -2,18 +2,19 @@
     "identifier": "Ceres::TextWidget",
     "label": "Widget.textLabel",
     "previewImageURL": "/images/widgets/text.svg",
-    "type": "default",
+    "type": "static",
+    "categories": ["text"],
     "position": 800,
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {
         "appearance": {
-            "type": "selectBox",
+            "type": "select",
             "required": true,
-            "label": "Widget.widgetAppearanceLabel",
+            "defaultValue": "none",
             "options": {
+                "name": "Widget.widgetAppearanceLabel",
                 "tooltipText": "Widget.widgetAppearanceTooltip",
-                "defaultValue": "none",
-                "selectBoxValues": [
+                "listBoxValues": [
                     {
                         "value": "none",
                         "caption": "Widget.widgetAppearanceNone",

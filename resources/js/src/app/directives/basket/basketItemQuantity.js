@@ -1,5 +1,5 @@
-import {floatLength}from "../../helper/number";
-import {defaultValue}from "../../helper/utils";
+import { floatLength } from "../../helper/number";
+import { defaultValue } from "../../helper/utils";
 
 Vue.directive("basket-item-quantity",
     {

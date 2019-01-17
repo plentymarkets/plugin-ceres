@@ -74,6 +74,13 @@
     {% endspaceless -%}
 {% endmacro %}
 
+{% macro setEscaped( variable, value ) %}
+    {%- spaceless %}
+        {% import _self as Twig %}
+        {{ Twig.do( "set " ~ variable ~ " = " ~ value | json_encode(constant('JSON_UNESCAPED_UNICODE'))) }}
+    {% endspaceless -%}
+{% endmacro %}
+
 {% macro end( blockname ) %}
     {%- spaceless %}
         {% import _self as Twig %}

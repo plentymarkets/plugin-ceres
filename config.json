@@ -941,6 +941,7 @@
                 "item.lists.last_seen_number": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemListsLastSeenNumberLabel",
                     "options": {
                         "defaultValue": "4",

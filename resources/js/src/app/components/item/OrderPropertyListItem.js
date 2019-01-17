@@ -35,7 +35,7 @@ Vue.component("order-property-list-item", {
             {
                 this.clearSelectedFile();
             }
-            this.setVariationOrderProperty({propertyId: this.property.id, value: null});
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
         });
     },
 
@@ -123,7 +123,7 @@ Vue.component("order-property-list-item", {
                 this.$emit("radio-change", this.property.id);
             }
 
-            this.setVariationOrderProperty({propertyId: this.property.id, value: value});
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
         },
 
         validateInt(value)
@@ -181,10 +181,10 @@ Vue.component("order-property-list-item", {
 
             fileData.append("fileData", file);
 
-            ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true})
+            ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true })
                 .done(response =>
                 {
-                    this.setVariationOrderProperty({propertyId: this.property.id, value: response});
+                    this.setVariationOrderProperty({ propertyId: this.property.id, value: response });
                 })
                 .fail(error =>
                 {
@@ -201,7 +201,7 @@ Vue.component("order-property-list-item", {
         clearSelectedFile()
         {
             this.selectedFile = null;
-            this.setVariationOrderProperty({propertyId: this.property.id, value: null});
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
             this.$refs.fileInput.value = "";
         },
 

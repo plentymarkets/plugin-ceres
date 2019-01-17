@@ -58,7 +58,8 @@
 
     {% if slideSettings.headline | trim is not empty and slideSettings.headlineStyle == "custom-caption" %}
 
-        {{ Twig.set("slide", "slide | merge({ name: #{ (slideSettings.headline | json_encode) } })") }}
+        {{ Twig.setEscaped("customCaption", slideSettings.headline) }}
+        {{ Twig.set("slide", "slide | merge({ name: customCaption })") }}
 
     {% endif %}
 

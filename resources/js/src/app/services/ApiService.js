@@ -1,4 +1,4 @@
-import {normalizeUrl}from "../helper/url";
+import { normalizeUrl } from "../helper/url";
 
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
@@ -107,7 +107,7 @@ module.exports = (function($)
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
         config.keepOriginalResponse = !!config.keepOriginalResponse;
-        config.headers = config.headers || {"Accept-Language": App.language};
+        config.headers = config.headers || { "Accept-Language": App.language };
 
         if (data)
         {

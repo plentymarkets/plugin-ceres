@@ -56,7 +56,10 @@ Vue.component("carousel", {
     {
         this.$options.template = this.template;
 
-        this.itemCount = this.$slots.items.length;
+        if (this.$slots.items)
+        {
+            this.itemCount = this.$slots.items.length;
+        }
     },
 
     mounted()
@@ -74,15 +77,17 @@ Vue.component("carousel", {
     {
         initializeCarousel()
         {
+            const self = this;
+
             $(this.$refs.carouselContainer).owlCarousel({
                 autoHeight       : true,
                 dots             : true,
-                items            : this.itemsPerPage,
-                responsive:
-                {
-                    0:   {items: 1},
-                    544: {items: (this.itemsPerPage > 1) ? 2 : 1},
-                    768: {items: this.itemsPerPage}
+                items            : self.itemsPerPage,
+                responsive: {
+                    0:   { items: 1 },
+                    576: { items: self.itemsPerPage > 1 ? 2 : 1 },
+                    768: { items: self.itemsPerPage > 3 ? 3 : self.itemsPerPage },
+                    992: { items: self.itemsPerPage }
                 },
                 lazyLoad         : false,
                 loop             : false,
@@ -106,7 +111,7 @@ Vue.component("carousel", {
 
                     for (let i = begin; i < end; i++)
                     {
-                        const childComponent = this.$children[i];
+                        const childComponent = self.$children[i];
 
                         if (childComponent && childComponent.loadFirstImage)
                         {
