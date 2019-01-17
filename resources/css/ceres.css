@@ -2010,7 +2010,7 @@ textarea.form-control {
 
 .form-check-input {
   position: absolute;
-  margin-top: 0.3rem;
+  margin-top: 0.1rem;
   margin-left: -1.25rem;
 }
 
@@ -15866,17 +15866,6 @@ a:active {
   cursor: pointer;
 }
 
-@media (min-width: 1200px) {
-  .page-content {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .page-content.basket, .page-content.checkout, .page-content.contact, .page-content.myaccount {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
 .content-center {
   margin: 0 auto;
   float: none;
@@ -18084,6 +18073,7 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .form-check {
   transition: all .3s ease;
   cursor: pointer;
+  margin-bottom: .75rem;
 }
 
 .form-check.error {

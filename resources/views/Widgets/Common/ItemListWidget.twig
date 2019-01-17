@@ -47,7 +47,7 @@
         {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
     {% endif %}
 {% elseif headlineStyle == "custom-caption" and headline | trim is not empty %}
-    {{ Twig.set("title", headline | json_encode ) }}
+    {{ Twig.setEscaped("title", headline) }}
 {% endif %}
 
 {{ Twig.component( "Ceres::Containers.Components.LastSeenItemList" ) }}
