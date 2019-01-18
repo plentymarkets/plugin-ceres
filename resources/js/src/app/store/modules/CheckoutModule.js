@@ -199,8 +199,10 @@ const actions =
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
                 const isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
-                const isAddressPostOffice = getters.getSelectedAddress("2").address1 === "POSTFILIALE";
-                const isAddressParcelBox = getters.getSelectedAddress("2").address1 === "PACKSTATION";
+                
+                const selectedAddress = getters.getSelectedAddress("2");
+                const isAddressPostOffice = selectedAddress ? selectedAddress.address1 === "POSTFILIALE" : false;
+                const isAddressParcelBox = selectedAddress ? selectedAddress.address1 === "PACKSTATION" : false;
 
                 if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
                 {
@@ -235,15 +237,15 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 ApiService.get("/rest/io/checkout/")
-                        .done(checkout =>
-                        {
-                            dispatch("setCheckout", checkout);
-                            resolve(checkout);
-                        })
-                        .fail(error =>
-                        {
-                            reject(error);
-                        });
+                    .done(checkout =>
+                    {
+                        dispatch("setCheckout", checkout);
+                        resolve(checkout);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
             });
         },
 

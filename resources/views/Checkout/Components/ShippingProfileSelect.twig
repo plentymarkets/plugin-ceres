@@ -5,7 +5,7 @@
                 <input
                         type="radio"
                         :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
-                        name="ShippingProfileID"
+                        :name="'shippingProfileSelect' + _uid"
                         :value="shippingProfile.parcelServicePresetId"
                         @change="onShippingProfileChange(shippingProfile.parcelServicePresetId)"
                         :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
