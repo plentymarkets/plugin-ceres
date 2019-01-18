@@ -1,5 +1,17 @@
 [
     {
+        "identifier": "Ceres::ShippingProfileWidget",
+        "label": "Widget.shippingProfileLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
+        "settings": {}
+    },
+    {
         "identifier": "Ceres::CollapseWidget",
         "label": "Widget.collapseLabel",
         "previewImageURL": "/images/widgets/collapse.svg",
