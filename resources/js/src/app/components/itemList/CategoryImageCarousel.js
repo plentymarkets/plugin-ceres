@@ -79,8 +79,9 @@ Vue.component("category-image-carousel", {
         this.$options.template = this.template;
 
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
 
-        this.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : this.enableCarousel && this.imageUrls.length > 1;
+        this.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
     },
 
     mounted()
