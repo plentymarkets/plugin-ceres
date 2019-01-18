@@ -175,18 +175,23 @@ PropertyTokenStream.prototype.next = function()
 };
 
 const reader = new PropertyReader();
+let hasError = false;
 
 function compareProperties(de, en, filename)
 {
     Object.keys(en)
         .filter(entry => !de.hasOwnProperty(entry))
-        .forEach(entry => {
+        .forEach(entry =>
+        {
+            hasError = true;
             console.log(entry + " is missing in resources/lang/de/" + filename)
         });
 
     Object.keys(de)
         .filter(entry => !en.hasOwnProperty(entry))
-        .forEach(entry => {
+        .forEach(entry =>
+        {
+            hasError = true;
             console.log(entry + " is missing in resources/lang/en/" + filename)
         });
 }
@@ -201,4 +206,11 @@ glob.sync(path.resolve(__dirname, "../resources/lang/de/*.properties"))
         compareProperties(germanProperties, englishProperties, path.basename(germanPropertyFile));
     });
 
-console.log("Done");
+if (hasError)
+{
+    console.log("Done: See errors above.");
+}
+else
+{
+    console.log("Done: All properties files contain the same keys");
+}
