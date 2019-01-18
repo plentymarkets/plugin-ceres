@@ -67,6 +67,11 @@
             "position": 500
         },
         {
+            "key": "checkout",
+            "label": "Widget.categoryCheckout",
+            "position": 600
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
             "position": 600
