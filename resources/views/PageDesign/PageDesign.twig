@@ -286,8 +286,6 @@
                     });
                 }
             }
-
-            getUnfixedElements();
             
             $(window).scroll(scrollUnfixedElements);
 
@@ -308,7 +306,7 @@
             var headerImages = header.querySelectorAll("img");
 
             Promise.all(
-                Array.prototype.slice.call(headerImages).forEach(function(headerImage)
+                (Array.prototype.slice.call(headerImages).forEach(function(headerImage)
                 {
                     return new Promise(function(resolve)
                     {
@@ -317,10 +315,11 @@
                             resolve();
                         }
                     });
-                })
+                }) || [])
             ).then(function()
             {
                 headerLoaded = true;
+                getUnfixedElements();
                 calculateBodyOffset();
             });
 
