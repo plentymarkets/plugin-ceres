@@ -1,12 +1,3 @@
-<?php 
-
-include 'http://http://www.beatinternet.de/mueller/footer.php';
-
-echo "**** bis hier include Bereich"; // Test Text
-
-?>
-
-<!-- -->
 
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
@@ -22,7 +13,32 @@ echo "**** bis hier include Bereich"; // Test Text
 
 <div class="footer">
 
- 1 2 3 4 5 6 7 89 
+
+<div class="container">
+  
+  <div class="row">
+    <div class="col">
+    3
+    </div>
+    <div class="col">
+      3
+    </div>
+    <div class="col-6">
+      6
+    </div>
+  </div>
+</div>
+
+ <div class="row">
+    <div class="col">
+    links
+    </div>
+    <div class="col">
+   rechts
+    </div>
+   
+  </div>
+</div>
  
  
     <div class="{% if topButtonPosition == "right" %}back-to-top{% else %}back-to-top-center{% endif %} hidden-sm-down">
