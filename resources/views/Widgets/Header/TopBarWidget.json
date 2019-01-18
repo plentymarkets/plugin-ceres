@@ -3,6 +3,7 @@
     "label": "Widget.topBarLabel",
     "previewImageURL": "/images/widgets/top-bar.svg",
     "type": "header",
+    "categories": ["header"],
     "position": 0,
     "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",
     "settings": {

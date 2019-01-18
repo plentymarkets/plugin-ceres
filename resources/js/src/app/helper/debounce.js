@@ -1,4 +1,4 @@
-import {defaultValue, isNullOrUndefined}from "./utils";
+import { defaultValue, isNullOrUndefined } from "./utils";
 
 /**
  * Makes a function executed after defined timeout.

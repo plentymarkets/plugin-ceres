@@ -77,7 +77,7 @@ Vue.component("newsletter-input", {
         },
         save()
         {
-            ApiService.post("/rest/io/customer/newsletter", {email: this.email, firstName: this.firstName, lastName: this.lastName, emailFolder: this.emailFolder})
+            ApiService.post("/rest/io/customer/newsletter", { email: this.email, firstName: this.firstName, lastName: this.lastName, emailFolder: this.emailFolder })
                 .done(() =>
                 {
                     NotificationService.success(

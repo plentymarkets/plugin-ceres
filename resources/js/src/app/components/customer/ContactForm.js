@@ -56,7 +56,7 @@ Vue.component("contact-form", {
                         this.privacyPolicyShowError = true;
 
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {hyphen: "&shy;"})
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
                         );
                     }
                 })
@@ -69,7 +69,7 @@ Vue.component("contact-form", {
                         this.privacyPolicyShowError = true;
 
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {hyphen: "&shy;"})
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
                         );
                     }
 
@@ -85,7 +85,7 @@ Vue.component("contact-form", {
                     }
 
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.contactCheckFormFields", {fields: invalidFieldNames.join(", ")})
+                        TranslationService.translate("Ceres::Template.contactCheckFormFields", { fields: invalidFieldNames.join(", ") })
                     );
 
                 });
@@ -105,7 +105,7 @@ Vue.component("contact-form", {
                     cc      : this.cc
                 };
 
-            ApiService.post("/rest/io/customer/contact/mail", {contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"}, {supressNotifications: true})
+            ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail" }, { supressNotifications: true })
                 .done(response =>
                 {
                     this.waiting = false;
@@ -113,7 +113,7 @@ Vue.component("contact-form", {
                     NotificationService.success(
                         TranslationService.translate("Ceres::Template.contactSendSuccess")
                     );
-                    document.dispatchEvent(new CustomEvent("onContactFormSend", {detail: mailObj}));
+                    document.dispatchEvent(new CustomEvent("onContactFormSend", { detail: mailObj }));
                 })
                 .fail(response =>
                 {

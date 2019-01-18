@@ -1,5 +1,6 @@
-{{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
+{{ component( "Ceres::ItemList.Components.CategoryItem") }}
+{{ component( "Ceres::PageDesign.Components.Carousel" ) }}
 
 {% set listType = config("Ceres.item.lists." ~ itemListNo ~ ".list_type") %}
 {% set tagIds = config("Ceres.item.lists." ~ itemListNo ~ ".tag_ids") | split(",") %}
@@ -34,7 +35,20 @@
             {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader' with { itemListNo: itemListNo, listType: listType, isHome: isHome } %}
         </div>
         <div class="col-12">
-            <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
+            
+            <carousel>
+                {% for item in itemList.documents %}
+                    <template slot="items">
+                        <category-item
+                            :item-data="{{ item.data | json_encode }}"
+                            :decimal-count="{{ ceresConfig.item.storeSpecial }}"
+                            :disable-carousel-on-mobile="true">
+                            <template slot="BeforePrices">{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
+                            <template slot="AfterPrices">{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
+                        </category-item>
+                    </template>
+                {% endfor %}
+            </carousel>
         </div>
     {% endif %}
 </div>

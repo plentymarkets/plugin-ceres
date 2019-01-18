@@ -3,18 +3,48 @@ Vue.component("category-image-carousel", {
     delimiters: ["${", "}"],
 
     props: {
-        imageUrlsData  : {type: Array},
-        itemUrl        : {type: String},
-        altText        : {type: String},
-        titleText      : {type: String},
-        showDots       : {type: Boolean},
-        showNav        : {type: Boolean},
+        imageUrlsData:
+        {
+            type: Array
+        },
+        itemUrl:
+        {
+            type: String
+        },
+        altText:
+        {
+            type: String
+        },
+        titleText:
+        {
+            type: String
+        },
+        showDots:
+        {
+            type: Boolean,
+            default: App.config.item.categoryShowDots
+        },
+        showNav:
+        {
+            type: Boolean,
+            default: App.config.item.categoryShowNav
+        },
         disableLazyLoad: {
-            type   : Boolean,
+            type: Boolean,
             default: false
         },
-        enableCarousel : {type: Boolean},
-        template       : {type: String}
+        disableCarouselOnMobile:
+        {
+            type: Boolean
+        },
+        enableCarousel:
+        {
+            type: Boolean
+        },
+        template:
+        {
+            type: String
+        }
     },
 
     data()
@@ -48,7 +78,10 @@ Vue.component("category-image-carousel", {
     {
         this.$options.template = this.template;
 
-        this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
+
+        this.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
     },
 
     mounted()
@@ -83,7 +116,7 @@ Vue.component("category-image-carousel", {
                     const target = $(event.currentTarget);
                     const owlItem = $(target.find(".owl-item.active"));
 
-                    owlItem.find(".img-fluid.lazy").show().lazyload({threshold : 100});
+                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold : 100 });
                 },
                 onInitialized: event =>
                 {

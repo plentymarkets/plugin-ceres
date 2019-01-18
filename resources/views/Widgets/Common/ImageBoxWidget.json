@@ -2,7 +2,8 @@
     "identifier": "Ceres::ImageBoxWidget",
     "label": "Widget.imageBoxLabel",
     "previewImageURL": "/images/widgets/image-box.svg",
-    "type": "default",
+    "type": "static",
+    "categories": ["image"],
     "position": 600,
     "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
     "settings": {

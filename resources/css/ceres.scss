@@ -290,6 +290,8 @@ $custom-file-border-color:                      #ddd !default;
 $custom-file-box-shadow:                        inset 0 .2rem .4rem rgba(0,0,0,.05) !default;
 $custom-file-button-bg:                         #eee !default;
 
+$form-check-input-margin-y:                     .1rem;
+
 // This allows us to at a glance determine relative layers of our application and prevents bugs
 // arrising from arbitrary z-index values. Do not edit the z-index scale! Only add application
 // scoped z-index values.
@@ -10739,20 +10741,6 @@ a:active {
     cursor: pointer;
 }
 
-@include media-breakpoint-up(xl){
-    .page-content{
-        padding-left: 0;
-        padding-right: 0;
-        &.basket,
-        &.checkout,
-        &.contact,
-        &.myaccount {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    }
-}
-
 .content-center {
     margin: 0 auto;
     float: none;
@@ -10945,6 +10933,17 @@ body {
     margin-top: 1px;
     margin-left: 5px;
   }
+}
+
+// additional compatibility scss to bootstrap's reboot
+
+// prevent iOS standard zoom on input elements on focus
+html.ios {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
 }
 
 
@@ -12794,7 +12793,8 @@ $border-width: 1px;
         border-bottom-right-radius: 2px;
     }
 
-    &.error
+    &.error,
+    .input-feedback-container.has-error > &
     {
         z-index: $zIndex-1;
         border-color: $danger;
@@ -12817,7 +12817,8 @@ $border-width: 1px;
 
     }
 
-    &.success
+    &.success,
+    .input-feedback-container.has-success > &
     {
         z-index: $zIndex-1;
         border-color: $success;
@@ -12938,6 +12939,7 @@ $border-width: 1px;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
     cursor: pointer;
+    margin-bottom: .75rem;
 
     &.error
     {
@@ -12964,6 +12966,38 @@ $border-width: 1px;
     }
 }
 
+.input-feedback-container
+{
+    margin-bottom: $grid-gutter-width/2;
+
+    .input-unit
+    {
+        margin-bottom: 0;
+    }
+
+    .feedback
+    {
+        font-size: .8rem;
+        text-align: right;
+        display: none;
+    }
+
+    .feedback-error
+    {
+        color: $danger;
+    }
+
+    .feedback-success
+    {
+        color: $success;
+    }
+
+    &.has-error .feedback-error,
+    &.has-success .feedback-success
+    {
+        display: block;
+    }
+}
 
 // Page Design / Global components
 //header scss
@@ -12974,7 +13008,6 @@ $border-width: 1px;
 }
 
 .top-bar{
-
 	@media print {
 		display: none;
 	}
@@ -12983,6 +13016,7 @@ $border-width: 1px;
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
+
 	a:not(.btn) {
 		text-decoration: none;
 		color: $top-bar-color;
@@ -12996,6 +13030,7 @@ $border-width: 1px;
 		-webkit-box-flex: 1;
 		    -ms-flex: 1;
 		        flex: 1;
+
 		@include media-breakpoint-up(md) {
 			-webkit-box-pack: justify;
 			    -ms-flex-pack: justify;
@@ -13003,6 +13038,13 @@ $border-width: 1px;
 			-webkit-box-align: center;
 			    -ms-flex-align: center;
 			        align-items: center;
+
+			.controls {
+				.anicon,
+				a:not(.btn) {
+					padding: 1rem .8rem;
+				}
+			}
 		}
 		@include media-breakpoint-down(sm) {
 			-webkit-box-orient: vertical;
@@ -13012,7 +13054,7 @@ $border-width: 1px;
 		}
 
 		.always-visible-search {
-			margin: 5px 5px;
+			margin: 5px;
 			background-color: $white;
 			-webkit-box-flex: 1;
 			    -ms-flex: 1;
@@ -13048,17 +13090,6 @@ $border-width: 1px;
 				}
 			}
 		}
-
-		.controls-list {
-
-			&>li {
-				@include media-breakpoint-up(md) {
-					a:not(.btn) {
-						padding: 1rem .8rem;
-					}
-				}
-			}
-		}
 	}
 
 	&.fixed-top {
@@ -13079,24 +13110,14 @@ $border-width: 1px;
 			color: $gray-lighter;
 			margin-right: 0;
 
-			// sets the height of the top-bar
+			a:not(.btn) {
+				padding: 0.5rem .8rem;
+				display: inline-block;
+				color: $gray-lighter;
 
-				a:not(.btn) {
-					padding: 0.5rem .8rem;
-					display: inline-block;
-					color: $gray-lighter;
-
-					&:hover {
-						@include context-bg($primary);
-					}
+				&:hover {
+					@include context-bg($primary);
 				}
-
-			@include media-breakpoint-down(md) {
-				.anicon,
-				a:not(.btn) {
-					padding: 0.5rem .8rem;
-				}
-
 			}
 
 			// icons should be slightly larger
@@ -13113,7 +13134,6 @@ $border-width: 1px;
 			-webkit-box-flex: 1;
 			    -ms-flex: 1 0 auto;
 			        flex: 1 0 auto;
-			margin-left: 1rem;
 			//login | register
 			#login-change {
 				position:relative;
@@ -13402,7 +13422,6 @@ $border-width: 1px;
 }
 
 .navbar-brand {
-
 	float: none;
 	padding: .5rem 0;
   	display: inline-block;
@@ -13443,7 +13462,55 @@ $border-width: 1px;
 	        transform: translate(0, -50%);
 }
 
-// Mobile only
+.wrapper-main header
+{
+	.container-max > .row
+	{
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: reverse;
+		    -ms-flex-direction: row-reverse;
+		        flex-direction: row-reverse;
+		position: relative;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.controls-list
+	{
+		width: auto;
+
+		&>li
+		{
+			// default font size for all items
+			font-size: .8rem;
+
+			.fa:not(.qty-sign)
+			{
+				// icons should be slightly larger
+				font-size: 1rem;
+				line-height: .8rem;
+			}
+		}
+	}
+}
+
+@include media-breakpoint-only(xs) {
+	.top-bar .controls-list {
+		> li .anicon,
+		> li a:not(.btn) {
+			padding: .5rem;
+		}
+		.pipe {
+			margin: 0 0.3em 0 0;
+		}
+		.anicon-search-xcross {
+			width: 2.2rem;
+		}
+		.badge-right {
+			display: none;
+		}
+	}
+}
+
 @include media-breakpoint-down(md) {
 	.navbar {
 		.navbar-nav{
@@ -13457,46 +13524,6 @@ $border-width: 1px;
 			}
 		}
 	}
-}
-
-.wrapper-main header
-{
-	.container-max > .row
-	{
-		-webkit-box-orient: horizontal;
-		-webkit-box-direction: reverse;
-		    -ms-flex-direction: row-reverse;
-		        flex-direction: row-reverse;
-		position: relative;
-		margin-left: 0;
-		margin-right: 0;
-	}
-}
-
-
-@include media-breakpoint-up(sm){
-
-	.wrapper-main header
-	{
-		.controls-list
-		{
-			width: auto;
-
-			&>li
-			{
-				// default font size for all items
-				font-size: .8rem;
-
-				.fa:not(.qty-sign)
-				{
-					// icons should be slightly larger
-					font-size: 1rem;
-					line-height: .8rem;
-				}
-			}
-		}
-	}
-
 }
 
 @include media-breakpoint-up(md)
@@ -13591,15 +13618,50 @@ $border-width: 1px;
 	min-width: 100%;
 }
 
+// Searchbar in widget
+.top-bar {
+    .cmp-search-box {
+        position: relative;
+        top: auto; 
+        right: auto;
+        left: auto;
+        .search-box-inner {
+            margin: 5px 0;
+            @include media-breakpoint-down(md) {
+                margin: 5px 5px;
+            }
+        }
+    }
+}
+
+// Searchbar in standard-header
+div:not(.top-bar) {
+    > .page-header {
+        > div {
+            > .cmp-search-box {
+                top: 30px;
+                z-index: 1070;
+                position: fixed;
+                right: 0;
+                left: 0;
+
+                @include media-breakpoint-up(lg) {
+                    .search-box-inner {
+                        margin: 5px auto;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                    }
+                }
+            }
+        } 
+    }
+}
+
 .cmp-search-box
 {
-    background-color: $gray-darker;
-    z-index: 1070;
-    position: fixed;
-    top: 30px;
-    right: 0;
-    left: 0;
+    background-color: $top-bar-bg;
     width: 100%;
+    
     .search-box-inner
     {
         display: -webkit-box;
@@ -13609,11 +13671,15 @@ $border-width: 1px;
         -webkit-box-direction: normal;
             -ms-flex-flow: row nowrap;
                 flex-flow: row nowrap;
-        padding: 1rem 0em;
+        margin: 5px 15px;
         position: relative;
         max-width: 1200px;
         margin: 0 auto;
+        @include media-breakpoint-down(md) {
+			margin: 5px 5px;
+		}
     }
+    
     @at-root .search-box-shadow-frame
     {
         display: -webkit-box;
@@ -14619,16 +14685,17 @@ body.menu-is-visible {
 		border-top: 1px solid transparent;
 		background-color: $footer-features-bg;
 		color: $footer-features-color;
+		max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
 		i {
 			color:$footer-features-color !important;
 		}
 	}
 
-	.footer-content{
-
+	.footer-content {
+		max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
 	}
 
-	.footer-services{
+	.footer-services {
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -16739,82 +16806,6 @@ html.ie .basket-preview-hover {
     }
   }
 }
-.reset-pwd
-{
-
-    input
-    {
-        height: 45px;
-    }
-
-    .save-new-pwd-btn
-    {
-        display: block;
-        width: 100%;
-
-        i
-        {
-            margin-right: 6px;
-        }
-    }
-
-    @include media-breakpoint-up(sm)
-    {
-
-        .save-new-pwd-btn
-        {
-            display: inline-block;
-            width: 10rem;
-        }
-    }
-
-    .input-unit
-    {
-
-        & + .error-msg
-        {
-            display: none;
-            font-size: 12px;
-            color: #d9534f;
-            margin-bottom: 10px;
-        }
-
-        &.check-pwds-error
-        {
-            z-index: 1000;
-            border-color: #d9534f;
-
-            input
-            {
-                color: #d9534f;
-            }
-
-            label
-            {
-                color: #d9534f;
-            }
-        }
-
-        &.error
-        {
-            margin-bottom: 2px;
-
-            & + .error-msg
-            {
-                display: block;
-            }
-        }
-    }
-
-    .error-save-pwd-msg
-    {
-        display: none;
-        font-size: 12px;
-        color: #d9534f;
-        margin-bottom: 5px;
-    }
-}
-
 .cmp-hero{
 	
 
@@ -18860,14 +18851,14 @@ html.ie .basket-preview-hover {
     }
 }
 
-.single-leftside
+.single-rightside
 {
     margin-top: 1rem;
 }
 
 @include media-breakpoint-up(md)
 {
-    .single-leftside
+    .single-rightside
     {
         margin-top: 0;
         position: absolute;
@@ -20103,6 +20094,11 @@ html.ie {
         &.widget-grid
         {
             margin-bottom: 0;
+
+            + .widget-grid
+            {
+                margin-top: 1rem;
+            }
         }
 
         .widget-inner

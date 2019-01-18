@@ -22,6 +22,11 @@
         &.widget-grid
         {
             margin-bottom: 0;
+
+            + .widget-grid
+            {
+                margin-top: 1rem;
+            }
         }
 
         .widget-inner

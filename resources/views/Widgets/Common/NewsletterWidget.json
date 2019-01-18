@@ -2,7 +2,7 @@
     "identifier": "Ceres::NewsletterWidget",
     "label": "Widget.newsletterLabel",
     "previewImageURL": "/images/widgets/newsletter.svg",
-    "type": "default",
+    "type": "static",
     "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
     "settings": {
         "appearance": "@include(appearance)",

@@ -1,10 +1,29 @@
+{{ component( "Ceres::ItemList.Components.CategoryItem") }}
+{{ component( "Ceres::PageDesign.Components.Carousel" ) }}
+
 <script type="x/template" id="vue-last-seen-item-list">
     <div class="row" v-if="items.length">
         <div class="col-12">
             <slot name="heading"></slot>
         </div>
+
         <div class="col-12">
-            <container-item-list :items="items" :items-per-page="itemsPerPage"></container-item-list>
+            <carousel :items-per-page="itemsPerPage">
+                <category-item
+                    slot="items"
+                    v-for="item in items"
+                    :key="item.id"
+                    :item-data="item.data"
+                    :decimal-count="{{ ceresConfig.item.storeSpecial }}"
+                    :disable-carousel-on-mobile="items.length > itemsPerPage">
+                    <template slot="BeforePrices">
+                        <div v-html="getContainerContentById(item.id, 'beforePrices')"></div>
+                    </template>
+                    <template slot="AfterPrices">
+                        <div v-html="getContainerContentById(item.id, 'afterPrices')"></div>
+                    </template>
+                </category-item>
+            </carousel>
         </div>
     </div>
 </script>
