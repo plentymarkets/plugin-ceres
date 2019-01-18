@@ -42,8 +42,8 @@ Fax: +49 (0) 6221 33937-59<br>
 mail: info@mb-mueller.com<br>
 </div>
                     </div>
-                     <div class="col-xs-12 col-sm-3 text-xs-center">
-                      <div style="text-align: left;">
+                     <div class="col-xs-12 col-sm-4 text-xs-center">
+                      <div style="text-align: left;"><br><br><br>
                        <!-- {{ trans('Ceres::Template.footerStoreFeature' ~ i) }} -->
                          {% autoescape false %}
                     <a href="{{ urls.cancellationRights }}">{{ trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
@@ -52,15 +52,15 @@ mail: info@mb-mueller.com<br>
                     {% else %}
                        <br> <br> <a href="{{ urls.cancellationForm }}">{{ trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
                     {% endif %}
-                   <br> <br>  <a href="{{ urls.legalDisclosure }}">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
-                    <br> <br><a href="{{ urls.privacyPolicy }}">{{ trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
-                    <br> <br><a href="{{ urls.gtc }}">{{ trans("Ceres::Template.footerGtc") }}</a>
+                   <br><a href="{{ urls.legalDisclosure }}">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
+                    <br><a href="{{ urls.privacyPolicy }}">{{ trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
+                    <br><a href="{{ urls.gtc }}">{{ trans("Ceres::Template.footerGtc") }}</a>
                     {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
                         <a href="{{ urls.contact }}">{{ trans("Ceres::Template.footerContact") }}</a>
                     {% endif %}
                 {% endautoescape %}</div>
                     </div>
-                     <div class="col-xs-12 col-sm-6 text-xs-center">
+                     <div class="col-xs-12 col-sm-5 text-xs-center">
                       <div style="text-align: left;">
                        <!-- {{ trans('Ceres::Template.footerStoreFeature' ~ i) }} -->
                      <h3>  Newsletter </h3> <br><br>
@@ -82,17 +82,17 @@ mail: info@mb-mueller.com<br>
            <div class="footer-features p-y-1 container-max" style="background-color:white;">
             <div class="row">
                
-                    <div class="col-xs-12 col-sm-6 text-xs-center" style="text-align:left;">
+                    <div class="col-xs-12 col-sm-9 text-xs-center" style="text-align:left;">
                        <!-- {{ trans('Ceres::Template.footerStoreFeature' ~ i) }} -->
                        <div style="text-align: left;"><b>Copyright MB-Müller 2019</b></div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 text-xs-center" style="align-items:right;">
+                    <div class="col-xs-12 col-sm-3 text-xs-center" style="align-items:right;">
                        <!-- {{ trans('Ceres::Template.footerStoreFeature' ~ i) }} -->
                        <div style="text-align: left;">
-		       <img src="http://www.beatinternet.de/mueller/img/paypal.png">  
-		       <img src="http://www.beatinternet.de/mueller/img/master.png">  
-		       <img src="http://www.beatinternet.de/mueller/img/visa.png">  
-		       <img src="http://www.beatinternet.de/mueller/img/am.png">  
+		       <img src="http://www.beatinternet.de/mueller/img/paypal.png"> 
+		       <img src="http://www.beatinternet.de/mueller/img/master.png"> 
+		       <img src="http://www.beatinternet.de/mueller/img/visa.png"> 
+		       <img src="http://www.beatinternet.de/mueller/img/am.png"> 
 		       </div>
                    </div>
             </div>
