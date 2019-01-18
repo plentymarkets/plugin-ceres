@@ -20,6 +20,10 @@ Vue.component("category-item", {
         {
             type: Object,
             required: true
+        },
+        disableCarouselOnMobile:
+        {
+            type: Boolean
         }
     },
 

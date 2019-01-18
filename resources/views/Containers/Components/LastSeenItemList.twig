@@ -14,7 +14,8 @@
                     v-for="item in items"
                     :key="item.id"
                     :item-data="item.data"
-                    :decimal-count="{{ ceresConfig.item.storeSpecial }}">
+                    :decimal-count="{{ ceresConfig.item.storeSpecial }}"
+                    :disable-carousel-on-mobile="items.length > itemsPerPage">
                     <template slot="BeforePrices">
                         <div v-html="getContainerContentById(item.id, 'beforePrices')"></div>
                     </template>
