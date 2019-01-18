@@ -41,7 +41,7 @@ mail: info@mb-mueller.com<br>
 </div>
                     </div>
                      <div class="col-xs-12 col-sm-3 text-xs-center">
-                        <i class="fa fa-check text-success" aria-hidden="true"></i>
+                      <div style="text-align: left;">
                        <!-- {{ trans('Ceres::Template.footerStoreFeature' ~ i) }} -->
                          {% autoescape false %}
                     <a href="{{ urls.cancellationRights }}">{{ trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
@@ -56,12 +56,17 @@ mail: info@mb-mueller.com<br>
                     {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
                         <a href="{{ urls.contact }}">{{ trans("Ceres::Template.footerContact") }}</a>
                     {% endif %}
-                {% endautoescape %}
+                {% endautoescape %}</div>
                     </div>
                      <div class="col-xs-12 col-sm-6 text-xs-center">
-                        <i class="fa fa-check text-success" aria-hidden="true"></i>
+                     
                        <!-- {{ trans('Ceres::Template.footerStoreFeature' ~ i) }} -->
-                       Newsletter
+                     <h3>  Newsletter </h3> <br><br>
+                     
+                     <form accept-charset="UTF-8" action="action_page.php" autocomplete="off" method="GET" target="_blank">
+	<input name="name" type="text" value="Frank" /> <br /> 
+</form>
+
                     </div>
                
             </div>
