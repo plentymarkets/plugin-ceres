@@ -50,11 +50,11 @@ mail: info@mb-mueller.com<br>
                     {% if config("Ceres.footer.cancellation_use_pdf") == "true" %}
                         <a href="{{ config('Ceres.footer.cancellation_pdf_path') }}" target="_blank">{{ trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
                     {% else %}
-                        <a href="{{ urls.cancellationForm }}">{{ trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
+                       <br> <br> <a href="{{ urls.cancellationForm }}">{{ trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
                     {% endif %}
-                    <a href="{{ urls.legalDisclosure }}">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
-                    <a href="{{ urls.privacyPolicy }}">{{ trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
-                    <a href="{{ urls.gtc }}">{{ trans("Ceres::Template.footerGtc") }}</a>
+                   <br> <br>  <a href="{{ urls.legalDisclosure }}">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
+                    <br> <br><a href="{{ urls.privacyPolicy }}">{{ trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
+                    <br> <br><a href="{{ urls.gtc }}">{{ trans("Ceres::Template.footerGtc") }}</a>
                     {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
                         <a href="{{ urls.contact }}">{{ trans("Ceres::Template.footerContact") }}</a>
                     {% endif %}
@@ -68,6 +68,23 @@ mail: info@mb-mueller.com<br>
                
             </div>
         </div>
+        <br>
+           <div class="footer-features p-y-1 container-max" style="background-color:white;">
+            <div class="row">
+               
+                    <div class="col-xs-12 col-sm-6 text-xs-center" style="text-align:left;">
+                       <!-- {{ trans('Ceres::Template.footerStoreFeature' ~ i) }} --><div style="text-align: left;"> Copyright MB-Müller 2019
+    </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 text-xs-center" style="text-align:left;">
+                       <!-- {{ trans('Ceres::Template.footerStoreFeature' ~ i) }} --><div style="text-align: left;"> 
+                       PAYMENTS
+                    </div>
+                   </div>
+            </div>
+        </div>     
+        
+        
     {% endif %}
 
 
@@ -148,7 +165,7 @@ mail: info@mb-mueller.com<br>
         
    
 
-        {% set cat = services.category.get(config('Ceres.global.category.legal_disclosure')) %}
+    <!--    {% set cat = services.category.get(config('Ceres.global.category.legal_disclosure')) %}
         <div class="copyright text-xs-center m-y-1">
             <div class="static-link-list">
                 {% autoescape false %}
@@ -168,7 +185,7 @@ mail: info@mb-mueller.com<br>
             </div>
         <br>
             <small>&copy; Copyright MB Müller {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>
-        </div>
+        </div> -->
     </div>
 </div>
 {% else %}
