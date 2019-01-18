@@ -6,7 +6,7 @@
     "position": 600,
     "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
     "settings": {
-        "appearance": "@glob(appearance)",
+        "appearance": "@include(appearance)",
         "style": {
             "type": "select",
             "required": true,

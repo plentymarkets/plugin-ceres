@@ -6,7 +6,7 @@
     "position": 800,
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {
-        "appearance": "@glob(optionalAppearance)",
+        "appearance": "@include(optionalAppearance)",
         "text": {
             "type": "codeEditor",
             "options": {

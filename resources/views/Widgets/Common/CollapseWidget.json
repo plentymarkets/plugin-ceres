@@ -6,7 +6,7 @@
     "position": 1300,
     "widgetClass": "Ceres\\Widgets\\Common\\CollapseWidget",
     "settings": {
-        "appearance": "@glob(optionalAppearance)",
+        "appearance": "@include(optionalAppearance)",
         "collapseBox": {
             "type": "vertical",
             "isList": "[1,]",

@@ -6,7 +6,7 @@
     "position": 700,
     "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
     "settings": {
-        "appearance": "@glob(appearance)",
+        "appearance": "@include(appearance.inc.json)",
         "headlineStyle": {
             "type": "select",
             "required": true,

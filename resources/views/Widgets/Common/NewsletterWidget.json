@@ -5,7 +5,7 @@
     "type": "default",
     "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
     "settings": {
-        "appearance": "@glob(appearance)",
+        "appearance": "@include(appearance)",
         "title": {
             "type": "text",
             "required": false,

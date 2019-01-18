@@ -6,7 +6,7 @@
     "position": 500,
     "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
     "settings": {
-        "appearance": "@glob(appearance)",
+        "appearance": "@include(appearance)",
         "slides": {
             "type": "vertical",
             "isList": "[1,]",

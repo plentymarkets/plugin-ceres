@@ -6,7 +6,7 @@
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
     "settings": {
-        "appearance": "@glob(appearance)",
+        "appearance": "@include(appearance)",
         "text": {
             "type": "text",
             "required": true,

@@ -3,9 +3,9 @@ var path = require('path');
 var glob = require('glob');
 
 var WIDGET_FILES = 'resources/views/Widgets/**/*.json';
-var GLOB_FILES   = 'resources/views/Widgets/**/*.glob.json';
+var GLOB_FILES   = 'resources/views/Widgets/**/*.inc.json';
 var TARGET_FILE  = 'contentWidgets.json';
-var INCLUDE_PATTERN = /^@glob\((\w+)\)$/;
+var INCLUDE_PATTERN = /^@include\(\s*(\S+)\s*\)$/;
 
 console.log("Collecting widget definitions.");
 
@@ -31,7 +31,7 @@ var globFiles = glob.sync(root(GLOB_FILES));
 
 globFiles.forEach(function(globFile)
 {
-    var key = path.basename(globFile, ".glob.json");
+    var key = path.basename(globFile, ".inc.json");
     globals[key] = readJsonFile(globFile);
 });
 
@@ -44,9 +44,10 @@ function injectGlobals(widgetSettings)
         if ( typeof widgetSettings[key] === "string"
             && (match = INCLUDE_PATTERN.exec(widgetSettings[key])) !== null )
         {
-            if ( globals.hasOwnProperty(match[1]) )
+            let basename = path.basename(match[1], ".inc.json");
+            if ( globals.hasOwnProperty(basename) )
             {
-                widgetSettings[key] = globals[match[1]];
+                widgetSettings[key] = globals[basename];
             }
         }
         else if (!!widgetSettings[key].children)
