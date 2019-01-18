@@ -19425,15 +19425,6 @@ html.ie .basket-preview-hover {
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
     font-size: 2rem;
 }
-
-/* Compatibility for IE */
-/* display img with optimal aspect ratio */
-html.ie {
-    .widget-image-box .img-cover {
-        min-height: auto;
-        min-width: auto;
-    }
-}
 @mixin widget-carousel-variant($parent, $color)
 {
     .widget-image-carousel#{$parent}
