@@ -1,0 +1,10 @@
+{
+    "identifier": "Ceres::ShippingProfileWidget",
+    "label": "Widget.TODO",
+    "previewImageURL": "/images/widgets/TODO.svg",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 1200,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
+    "settings": {}
+}

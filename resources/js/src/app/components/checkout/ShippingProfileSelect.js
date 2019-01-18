@@ -5,9 +5,12 @@ Vue.component("shipping-profile-select", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-shipping-profile-select"
+        }
+    },
 
     computed: Vuex.mapState({
         shippingProfileList: state => state.checkout.shipping.shippingProfileList,
