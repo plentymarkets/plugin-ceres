@@ -8,7 +8,7 @@
     "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
     "settings": {
         "hinttext": {
-            "type": "textarea",
+            "type": "codeEditor",
             "defaultValue": "",
             "options": {
                 "name": "Widget.paymentProviderHinttextLabel",

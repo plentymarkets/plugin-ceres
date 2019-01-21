@@ -12,7 +12,7 @@
     </header>
 
     {% if hinttext is not empty %}
-        <p>{{ hinttext }}</p>
+        <p>{{ hinttext | raw }}</p>
     {% endif %}
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingProfileList"])) }}

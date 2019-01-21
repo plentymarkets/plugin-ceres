@@ -23,7 +23,7 @@
         "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
         "settings": {
             "hinttext": {
-                "type": "text",
+                "type": "codeEditor",
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.paymentProviderHinttextLabel",
@@ -42,7 +42,16 @@
         ],
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
-        "settings": {}
+        "settings": {
+            "hinttext": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.shippingProfileHinttextLabel",
+                    "tooltipText": "Widget.shippingProfileHinttextTooltip"
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::CollapseWidget",
