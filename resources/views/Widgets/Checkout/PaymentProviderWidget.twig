@@ -12,7 +12,7 @@
     </header>
 
     {% if hinttext is not empty %}
-        <p class="small text-muted">{{ hinttext }}</p>
+        <p>{{ hinttext }}</p>
     {% endif %}
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforePaymentList"])) }}
