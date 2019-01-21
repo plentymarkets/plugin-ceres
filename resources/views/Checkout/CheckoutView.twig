@@ -100,7 +100,7 @@
                                 {{ LayoutContainer.show("Ceres::Checkout.BeforePaymentList") }}
                                 {% if overridePaymentList|trim is empty %}
                                     <div class="payment-method-select">
-                                        <payment-provider-select template="#vue-payment-provider-select"></payment-provider-select>
+                                        <payment-provider-select></payment-provider-select>
                                     </div>
                                 {% else %}
                                     {{ overridePaymentList }}

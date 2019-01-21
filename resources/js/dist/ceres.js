@@ -18733,10 +18733,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var NotificationService = require("services/NotificationService");
 
 Vue.component("payment-provider-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-payment-provider-select"
+        }
+    },
 
     computed: Vuex.mapState({
         methodOfPaymentList: function methodOfPaymentList(state) {
@@ -28932,8 +28934,10 @@ var actions = {
             commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
             var isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
-            var isAddressPostOffice = getters.getSelectedAddress("2").address1 === "POSTFILIALE";
-            var isAddressParcelBox = getters.getSelectedAddress("2").address1 === "PACKSTATION";
+
+            var selectedAddress = getters.getSelectedAddress("2");
+            var isAddressPostOffice = selectedAddress ? selectedAddress.address1 === "POSTFILIALE" : false;
+            var isAddressParcelBox = selectedAddress ? selectedAddress.address1 === "PACKSTATION" : false;
 
             if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox)) {
                 var isUnsupportedPostOffice = isAddressPostOffice && !shippingProfile.isPostOffice;

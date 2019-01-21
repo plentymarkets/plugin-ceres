@@ -23803,6 +23803,60 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   width: 100% !important;
 }
 
+.widget-payment-provider.widget-primary {
+  color: #fff;
+  background-color: #008ebd;
+}
+
+.widget-payment-provider.widget-primary a {
+  color: #fff;
+}
+
+.widget-payment-provider.widget-secondary {
+  color: #fff;
+  background-color: #d4021d;
+}
+
+.widget-payment-provider.widget-secondary a {
+  color: #fff;
+}
+
+.widget-payment-provider.widget-success {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.widget-payment-provider.widget-success a {
+  color: #fff;
+}
+
+.widget-payment-provider.widget-info {
+  color: #fff;
+  background-color: #17a2b8;
+}
+
+.widget-payment-provider.widget-info a {
+  color: #fff;
+}
+
+.widget-payment-provider.widget-warning {
+  color: #212529;
+  background-color: #ffc107;
+}
+
+.widget-payment-provider.widget-warning a {
+  color: #212529;
+}
+
+.widget-payment-provider.widget-danger {
+  color: #fff;
+  background-color: #dc3545;
+}
+
+.widget-payment-provider.widget-danger a {
+  color: #fff;
+}
+
 @media (max-width: 575.98px) {
   .widget-image-box {
     padding-bottom: 0 !important;

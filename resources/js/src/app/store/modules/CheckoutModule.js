@@ -199,7 +199,7 @@ const actions =
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
                 const isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
-                
+
                 const selectedAddress = getters.getSelectedAddress("2");
                 const isAddressPostOffice = selectedAddress ? selectedAddress.address1 === "POSTFILIALE" : false;
                 const isAddressParcelBox = selectedAddress ? selectedAddress.address1 === "PACKSTATION" : false;

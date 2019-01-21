@@ -18375,10 +18375,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var NotificationService = require("services/NotificationService");
 
 Vue.component("payment-provider-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-payment-provider-select"
+        }
+    },
 
     computed: Vuex.mapState({
         methodOfPaymentList: function methodOfPaymentList(state) {

@@ -19200,6 +19200,38 @@ html.ie .basket-preview-hover {
     }
 }
 
+.widget-payment-provider
+{
+    &.widget-primary
+    {
+        @include widget-bg-variant($primary);
+    }
+
+    &.widget-secondary
+    {
+        @include widget-bg-variant($secondary);
+    }
+
+    &.widget-success
+    {
+        @include widget-bg-variant($success);
+    }
+
+    &.widget-info
+    {
+        @include widget-bg-variant($info);
+    }
+
+    &.widget-warning
+    {
+        @include widget-bg-variant($warning);
+    }
+
+    &.widget-danger
+    {
+        @include widget-bg-variant($danger);
+    }
+}
 .widget-image-box
 {
     @include media-breakpoint-only(xs) {

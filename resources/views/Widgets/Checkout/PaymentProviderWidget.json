@@ -1,0 +1,10 @@
+{
+    "identifier": "Ceres::PaymentProviderWidget",
+    "label": "Widget.paymentProviderLabel",
+    "previewImageURL": "",
+    "type": "static",
+    "categories": ["checkout"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
+    "settings": {}
+}
