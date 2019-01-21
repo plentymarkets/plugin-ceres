@@ -70,339 +70,341 @@
     {% set categoryList1 = paginatedCategoryList1.documents %}
     {% set categoryList2 = paginatedCategoryList2.documents %}
 
-    {{ component( "Ceres::ItemList.Components.ItemList") }}
     {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <div class="home container-max">
         <div class="row">
-            <div class="homepage-title mb-3">
-                <h1>{{ trans("Ceres::Template.headerCompanyName") }}</h1>
+            <div class="col-12">
+                <div class="homepage-title mb-3">
+                    <h1>{{ trans("Ceres::Template.headerCompanyName") }}</h1>
+                </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="cmp cmp-hero">
-                {% set homepageContainer1 = LayoutContainer.show("Ceres::Homepage.Container1") %}
-                {% if homepageContainer1 | trim is empty %}
-                    {% if slider1.url or slider2.url or slider3.url %}
-                        <div class="hero-main">
-                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner" role="listbox">
-                                    {% set slideCount = 0 %}
-                                    {% if slider1.url | trim is not empty %}
-                                        {% set slideCount = slideCount + 1 %}
-                                        <div class="carousel-item active">
-                                            <a class="hero-category"
-                                               {% if slider1.item.texts is not empty %}href="{{ slider1.item | itemURL }}"{% endif %}>
-                                                <img src="{{ slider1.url }}"
-                                                     alt="{{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}"
-                                                     title="{{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}"
-                                                     class="img-fluid">
-                                                {% if slider1.item.texts is not empty %}
-                                                    <div class="carousel-caption">
-                                                        <h2><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}
-                                                        </h2>
-                                                    </div>
-                                                {% endif %}
-                                            </a>
-                                        </div>
+            <div class="col-12">
+                <div class="cmp cmp-hero">
+                    {% set homepageContainer1 = LayoutContainer.show("Ceres::Homepage.Container1") %}
+                    {% if homepageContainer1 | trim is empty %}
+                        {% if slider1.url or slider2.url or slider3.url %}
+                            <div class="hero-main">
+                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        {% set slideCount = 0 %}
+                                        {% if slider1.url | trim is not empty %}
+                                            {% set slideCount = slideCount + 1 %}
+                                            <div class="carousel-item active">
+                                                <a class="hero-category"
+                                                   {% if slider1.item.texts is not empty %}href="{{ slider1.item | itemURL }}"{% endif %}>
+                                                    <img src="{{ slider1.url }}"
+                                                         alt="{{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}"
+                                                         title="{{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}"
+                                                         class="img-fluid">
+                                                    {% if slider1.item.texts is not empty %}
+                                                        <div class="carousel-caption">
+                                                            <h2><i class="fa fa-angle-double-right"
+                                                                   aria-hidden="true"></i> {{ ItemName.get(slider1.item | itemName, slider1.item.variation.bundleType) }}
+                                                            </h2>
+                                                        </div>
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                        {% if slider2.url | trim is not empty %}
+                                            {% set slideCount = slideCount + 1 %}
+                                            <div class="carousel-item {% if slider1.url | trim is empty %}active{% endif %}">
+                                                <a class="hero-category"
+                                                   {% if slider2.item.texts is not empty %}href="{{ slider2.item | itemURL }}"{% endif %}>
+                                                    <img src="{{ slider2.url }}"
+                                                         alt="{{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}"
+                                                         title="{{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}"
+                                                         class="img-fluid">
+                                                    {% if slider2.item.texts is not empty %}
+                                                        <div class="carousel-caption">
+                                                            <h2><i class="fa fa-angle-double-right"
+                                                                   aria-hidden="true"></i> {{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}
+                                                            </h2>
+                                                        </div>
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                        {% if slider3.url | trim is not empty %}
+                                            {% set slideCount = slideCount +1 %}
+                                            <div class="carousel-item {% if slider1.url | trim is empty and slider2.url | trim is empty %}active{% endif %}">
+                                                <a class="hero-category"
+                                                   {% if slider3.item.texts is not empty %}href="{{ slider3.item | itemURL }}"{% endif %}>
+                                                    <img src="{{ slider3.url }}"
+                                                         alt="{{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}"
+                                                         title="{{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}"
+                                                         class="img-fluid">
+                                                    {% if slider3.item.texts is not empty %}
+                                                        <div class="carousel-caption">
+                                                            <h2><i class="fa fa-angle-double-right"
+                                                                   aria-hidden="true"></i> {{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}
+                                                            </h2>
+                                                        </div>
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    {% if slideCount > 1 %}
+                                        <ol class="carousel-indicators">
+                                            {% for i in 1..slideCount %}
+                                                <li data-target="#carousel-example-generic" data-slide-to="{{ i - 1 }}"
+                                                    {% if loop.first %}class="active"{% endif %}></li>
+                                            {% endfor %}
+                                        </ol>
+
+                                        <a class="left carousel-control carousel-control-prev" href="#carousel-example-generic" role="button"
+                                           data-slide="prev">
+                                            <span class="icon-prev" aria-hidden="true"></span>
+                                            <span class="sr-only">{{ trans("Ceres::Template.homepageBack") }}</span>
+                                        </a>
+
+                                        <a class="right carousel-control carousel-control-next" href="#carousel-example-generic" role="button"
+                                           data-slide="next">
+                                            <span class="icon-next" aria-hidden="true"></span>
+                                            <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
+                                        </a>
                                     {% endif %}
-                                    {% if slider2.url | trim is not empty %}
-                                        {% set slideCount = slideCount + 1 %}
-                                        <div class="carousel-item {% if slider1.url | trim is empty %}active{% endif %}">
-                                            <a class="hero-category"
-                                               {% if slider2.item.texts is not empty %}href="{{ slider2.item | itemURL }}"{% endif %}>
-                                                <img src="{{ slider2.url }}"
-                                                     alt="{{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}"
-                                                     title="{{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}"
-                                                     class="img-fluid">
-                                                {% if slider2.item.texts is not empty %}
-                                                    <div class="carousel-caption">
-                                                        <h2><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ ItemName.get(slider2.item | itemName, slider2.item.variation.bundleType) }}
-                                                        </h2>
-                                                    </div>
-                                                {% endif %}
-                                            </a>
-                                        </div>
-                                    {% endif %}
-                                    {% if slider3.url | trim is not empty %}
-                                        {% set slideCount = slideCount +1 %}
-                                        <div class="carousel-item {% if slider1.url | trim is empty and slider2.url | trim is empty %}active{% endif %}">
-                                            <a class="hero-category"
-                                               {% if slider3.item.texts is not empty %}href="{{ slider3.item | itemURL }}"{% endif %}>
-                                                <img src="{{ slider3.url }}"
-                                                     alt="{{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}"
-                                                     title="{{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}"
-                                                     class="img-fluid">
-                                                {% if slider3.item.texts is not empty %}
-                                                    <div class="carousel-caption">
-                                                        <h2><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ ItemName.get(slider3.item | itemName, slider3.item.variation.bundleType) }}
-                                                        </h2>
-                                                    </div>
-                                                {% endif %}
-                                            </a>
-                                        </div>
-                                    {% endif %}
+
                                 </div>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        {{ homepageContainer1 }}
+                    {% endif %}
 
-                                {% if slideCount > 1 %}
-                                    <ol class="carousel-indicators">
-                                        {% for i in 1..slideCount %}
-                                            <li data-target="#carousel-example-generic" data-slide-to="{{ i - 1 }}"
-                                                {% if loop.first %}class="active"{% endif %}></li>
-                                        {% endfor %}
-                                    </ol>
+                    {% set homepageContainer2 = LayoutContainer.show("Ceres::Homepage.Container2") %}
+                    {% set homepageContainer3 = LayoutContainer.show("Ceres::Homepage.Container3") %}
 
-                                    <a class="left carousel-control carousel-control-prev" href="#carousel-example-generic" role="button"
-                                       data-slide="prev">
-                                        <span class="icon-prev" aria-hidden="true"></span>
-                                        <span class="sr-only">{{ trans("Ceres::Template.homepageBack") }}</span>
-                                    </a>
-
-                                    <a class="right carousel-control carousel-control-next" href="#carousel-example-generic" role="button"
-                                       data-slide="next">
-                                        <span class="icon-next" aria-hidden="true"></span>
-                                        <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
+                    {% if heroExtra1.url | trim is not empty or heroExtra2.url | trim is not empty or homepageContainer2 | trim is not empty or homepageContainer3 | trim is not empty %}
+                        <div class="hero-xtras">
+                            {% if homepageContainer2 | trim is empty %}
+                                {% if heroExtra1.url | trim is not empty %}
+                                    <a class="hero-category"
+                                       {% if heroExtra1.item.texts is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
+                                        <img src="{{ heroExtra1.url }}"
+                                             alt="{{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}">
+                                             title="{{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}">
+                                        {% if heroExtra1.item.texts is not empty %}
+                                            <div class="hero-category-inner">
+                                                <h2 class="hero-category-headline">
+                                                    <i class="fa fa-angle-double-right"
+                                                       aria-hidden="true"></i> {{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}
+                                                </h2>
+                                            </div>
+                                        {% endif %}
                                     </a>
                                 {% endif %}
+                            {% else %}
+                                {{ homepageContainer2 }}
+                            {% endif %}
 
-                            </div>
+                            {% if homepageContainer3 | trim is empty %}
+                                {% if heroExtra2.url | trim is not empty %}
+                                    <a class="hero-category"
+                                       {% if heroExtra2.item.texts is not empty %}href="{{ heroExtra2.item | itemURL }}"{% endif %}>
+                                        <img src="{{ heroExtra2.url }}"
+                                             alt="{{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}">
+                                             title="{{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}">
+                                        {% if heroExtra2.item.texts is not empty %}
+                                            <div class="hero-category-inner">
+                                                <h2 class="hero-category-headline">
+                                                    <i class="fa fa-angle-double-right"
+                                                       aria-hidden="true"></i> {{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}
+                                                </h2>
+                                            </div>
+                                        {% endif %}
+                                    </a>
+                                {% endif %}
+                            {% else %}
+                                {{ homepageContainer3 }}
+                            {% endif %}
                         </div>
                     {% endif %}
-                {% else %}
-                    {{ homepageContainer1 }}
-                {% endif %}
+                </div>
 
-                {% set homepageContainer2 = LayoutContainer.show("Ceres::Homepage.Container2") %}
-                {% set homepageContainer3 = LayoutContainer.show("Ceres::Homepage.Container3") %}
+                {% set homepageContainer4 = LayoutContainer.show("Ceres::Homepage.Container4") %}
+                {% set homepageContainer5 = LayoutContainer.show("Ceres::Homepage.Container5") %}
 
-                {% if heroExtra1.url | trim is not empty or heroExtra2.url | trim is not empty or homepageContainer2 | trim is not empty or homepageContainer3 | trim is not empty %}
-                    <div class="hero-xtras">
-                        {% if homepageContainer2 | trim is empty %}
-                            {% if heroExtra1.url | trim is not empty %}
-                                <a class="hero-category"
-                                   {% if heroExtra1.item.texts is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
-                                    <img src="{{ heroExtra1.url }}"
-                                         alt="{{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}">
-                                         title="{{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}">
-                                    {% if heroExtra1.item.texts is not empty %}
-                                        <div class="hero-category-inner">
-                                            <h2 class="hero-category-headline">
-                                                <i class="fa fa-angle-double-right"
-                                                   aria-hidden="true"></i> {{ ItemName.get(heroExtra1.item | itemName, heroExtra1.item.variation.bundleType) }}
-                                            </h2>
+                {% if category1.details is not empty or homepageContainer4 | trim is not empty or category2.details is not empty or homepageContainer5 | trim is not empty %}
+                    <div class="row prop-row my-4 sale-new">
+                        {% if category1.details is not empty or homepageContainer4 | trim is not empty %}
+                            <div class="col-xs-{% if category2 is empty and homepageContainer5 | trim is empty %}12{% else %}6{% endif %}">
+                                <div class="prop-xs-6-4 prop-md-3-1">
+                                    {% if homepageContainer4 | trim is empty %}
+                                        <div class="prop-inner">
+                                            <a class="featured-sale-new"
+                                               href="{{ services.category.getURL(category1, lang) }}">
+                                                {% if category1.details[0].imagePath %}
+                                                    <img src="documents/{{ category1.details[0].imagePath }}"
+                                                         alt="{{ category1.details[0].name }}">
+                                                         title="{{ category1.details[0].name }}">
+                                                {% endif %}
+                                                <div class="featured-category-inner">
+                                                    <h2 class="featured-category-headline">
+                                                        <i class="fa fa-angle-double-right"
+                                                           aria-hidden="true"></i> {{ category1.details[0].name }}
+                                                    </h2>
+                                                </div>
+                                            </a>
                                         </div>
+                                    {% else %}
+                                        {{ homepageContainer4 }}
                                     {% endif %}
-                                </a>
-                            {% endif %}
-                        {% else %}
-                            {{ homepageContainer2 }}
+                                </div>
+                            </div>
                         {% endif %}
 
-                        {% if homepageContainer3 | trim is empty %}
-                            {% if heroExtra2.url | trim is not empty %}
-                                <a class="hero-category"
-                                   {% if heroExtra2.item.texts is not empty %}href="{{ heroExtra2.item | itemURL }}"{% endif %}>
-                                    <img src="{{ heroExtra2.url }}"
-                                         alt="{{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}">
-                                         title="{{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}">
-                                    {% if heroExtra2.item.texts is not empty %}
-                                        <div class="hero-category-inner">
-                                            <h2 class="hero-category-headline">
-                                                <i class="fa fa-angle-double-right"
-                                                   aria-hidden="true"></i> {{ ItemName.get(heroExtra2.item | itemName, heroExtra2.item.variation.bundleType) }}
-                                            </h2>
+                        {% if category2.details is not empty or homepageContainer5 | trim is not empty %}
+                            <div class="col-xs-{% if category1 is empty and homepageContainer4 | trim is empty %}12{% else %}6{% endif %}">
+                                <div class="prop-xs-6-4 prop-md-3-1">
+                                    {% if homepageContainer5 | trim is empty %}
+                                        <div class="prop-inner">
+                                            <a class="featured-sale-new"
+                                               href="{{ services.category.getURL(category2, lang) }}">
+                                                {% if category2.details[0].imagePath %}
+                                                    <img src="documents/{{ category2.details[0].imagePath }}"
+                                                         alt="{{ category2.details[0].name }}">
+                                                         title="{{ category2.details[0].name }}">
+                                                {% endif %}
+                                                <div class="featured-category-inner">
+                                                    <h2 class="featured-category-headline">
+                                                        <i class="fa fa-angle-double-right"
+                                                           aria-hidden="true"></i> {{ category2.details[0].name }}
+                                                    </h2>
+                                                </div>
+                                            </a>
                                         </div>
+                                    {% else %}
+                                        {{ homepageContainer5 }}
                                     {% endif %}
-                                </a>
-                            {% endif %}
-                        {% else %}
-                            {{ homepageContainer3 }}
+                                </div>
+                            </div>
                         {% endif %}
                     </div>
                 {% endif %}
+
+                {% set homepageContainer6 = LayoutContainer.show("Ceres::Homepage.Container6") %}
+                {% if categoryList1 is not empty or homepageContainer6 | trim is not empty %}
+                    <div class="mb-4 clearfix">
+                        {% if homepageContainer6 | trim is empty %}
+                            <div class="section-header mb-3">
+                                <h2>{{ category3.details[0].name }}</h2>
+                                <a href="{{ services.category.getURL(category3, lang) }}"
+                                   class="section-link-all"><i
+                                            class="fa fa-angle-double-right"
+                                            aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}</a>
+                            </div>
+                            <ul class="product-list row grid">
+                                {% for item in categoryList1 %}
+                                    <li class="col-12 col-sm-6 col-md-6 col-lg-3">
+                                        {% include "Ceres::Category.Partials.CategoryListItem" with { 'item': item } %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            {{ homepageContainer6 }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {#<!-- CATEGORIES -->#}
+                {% set homepageContainer7 = LayoutContainer.show("Ceres::Homepage.Container7") %}
+                {% set homepageContainer8 = LayoutContainer.show("Ceres::Homepage.Container8") %}
+                {% if category4.details is not empty or homepageContainer7 | trim is not empty or category5.details is not empty or homepageContainer8 | trim is not empty %}
+                    <div class="row prop-row my-4 featured-categories">
+                        {% if category4.details is not empty or homepageContainer7 | trim is not empty %}
+                            <div class="col-12 col-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}8{% else %}12{% endif %}">
+                                <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}2{% else %}3{% endif %}-1">
+                                    {% if homepageContainer7 | trim is empty %}
+                                        <div class="prop-inner">
+                                            <a class="featured-category"
+                                               href="{{ services.category.getURL(category4, lang) }}">
+                                                {% if category4.details[0].imagePath %}
+                                                    <img src="/documents/{{ category4.details[0].imagePath }}"
+                                                         alt="{{ category4.details[0].name }}">
+                                                         title="{{ category4.details[0].name }}">
+                                                {% endif %}
+                                                <div class="featured-category-inner">
+                                                    <h2 class="featured-category-headline">
+                                                        <i class="fa fa-angle-double-right"
+                                                           aria-hidden="true"></i> {{ category4.details[0].name }}
+                                                    </h2>
+
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% else %}
+                                        {{ homepageContainer7 }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if category5.details is not empty or homepageContainer8 | trim is not empty %}
+                            <div class="col-12 col-lg-{% if category4.details is not empty or homepageContainer7 | trim is not empty %}4{% else %}12{% endif %}">
+                                <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category4.details is not empty or homepageContainer7 | trim is not empty %}1{% else %}3{% endif %}-1">
+                                    {% if homepageContainer8 | trim is empty %}
+                                        <div class="prop-inner">
+                                            <a class="featured-category"
+                                               href="{{ services.category.getURL(category5, lang) }}">
+                                                {% if category5.details[0].imagePath %}
+                                                    <img src="/documents/{{ category5.details[0].imagePath }}"
+                                                         alt="{{ category5.details[0].name }}">
+                                                         title="{{ category5.details[0].name }}">
+                                                {% endif %}
+                                                <div class="featured-category-inner">
+                                                    <h2 class="featured-category-headline">
+                                                        <i class="fa fa-angle-double-right"
+                                                           aria-hidden="true"></i> {{ category5.details[0].name }}
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% else %}
+                                        {{ homepageContainer8 }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <!-- END CATEGORIES -->
+
+                {% set homepageContainer9 = LayoutContainer.show("Ceres::Homepage.Container9") %}
+                {% if categoryList2 is not empty or homepageContainer9 | trim is not empty %}
+                    <div class="mb-4 clearfix">
+                        {% if homepageContainer9 | trim is empty %}
+                            <div class="section-header mb-3">
+                                <h2>{{ category6.details[0].name }}</h2>
+                                <a href="{{ services.category.getURL(category6, lang) }}"
+                                   class="section-link-all"><i
+                                            class="fa fa-angle-double-right"
+                                            aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}</a>
+                            </div>
+                            <!-- crosssell start -->
+                            <ul class="product-list row grid">
+                                {% for item in categoryList2 %}
+                                    <li class="col-12 col-sm-6 col-md-6 col-lg-3">
+                                        {% include "Ceres::Category.Partials.CategoryListItem" with { 'item': item } %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            {{ homepageContainer9 }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {{ LayoutContainer.show("Ceres::Homepage.Container10") }}
             </div>
-
-            {% set homepageContainer4 = LayoutContainer.show("Ceres::Homepage.Container4") %}
-            {% set homepageContainer5 = LayoutContainer.show("Ceres::Homepage.Container5") %}
-
-            {% if category1.details is not empty or homepageContainer4 | trim is not empty or category2.details is not empty or homepageContainer5 | trim is not empty %}
-                <div class="row prop-row my-4 sale-new">
-                    {% if category1.details is not empty or homepageContainer4 | trim is not empty %}
-                        <div class="col-xs-{% if category2 is empty and homepageContainer5 | trim is empty %}12{% else %}6{% endif %}">
-                            <div class="prop-xs-6-4 prop-md-3-1">
-                                {% if homepageContainer4 | trim is empty %}
-                                    <div class="prop-inner">
-                                        <a class="featured-sale-new"
-                                           href="{{ services.category.getURL(category1, lang) }}">
-                                            {% if category1.details[0].imagePath %}
-                                                <img src="documents/{{ category1.details[0].imagePath }}"
-                                                     alt="{{ category1.details[0].name }}">
-                                                     title="{{ category1.details[0].name }}">
-                                            {% endif %}
-                                            <div class="featured-category-inner">
-                                                <h2 class="featured-category-headline">
-                                                    <i class="fa fa-angle-double-right"
-                                                       aria-hidden="true"></i> {{ category1.details[0].name }}
-                                                </h2>
-                                            </div>
-                                        </a>
-                                    </div>
-                                {% else %}
-                                    {{ homepageContainer4 }}
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if category2.details is not empty or homepageContainer5 | trim is not empty %}
-                        <div class="col-xs-{% if category1 is empty and homepageContainer4 | trim is empty %}12{% else %}6{% endif %}">
-                            <div class="prop-xs-6-4 prop-md-3-1">
-                                {% if homepageContainer5 | trim is empty %}
-                                    <div class="prop-inner">
-                                        <a class="featured-sale-new"
-                                           href="{{ services.category.getURL(category2, lang) }}">
-                                            {% if category2.details[0].imagePath %}
-                                                <img src="documents/{{ category2.details[0].imagePath }}"
-                                                     alt="{{ category2.details[0].name }}">
-                                                     title="{{ category2.details[0].name }}">
-                                            {% endif %}
-                                            <div class="featured-category-inner">
-                                                <h2 class="featured-category-headline">
-                                                    <i class="fa fa-angle-double-right"
-                                                       aria-hidden="true"></i> {{ category2.details[0].name }}
-                                                </h2>
-                                            </div>
-                                        </a>
-                                    </div>
-                                {% else %}
-                                    {{ homepageContainer5 }}
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-            {% endif %}
-
-            {% set homepageContainer6 = LayoutContainer.show("Ceres::Homepage.Container6") %}
-            {% if categoryList1 is not empty or homepageContainer6 | trim is not empty %}
-                <div class="mb-4 clearfix">
-                    {% if homepageContainer6 | trim is empty %}
-                        <div class="section-header mb-3">
-                            <h2>{{ category3.details[0].name }}</h2>
-                            <a href="{{ services.category.getURL(category3, lang) }}"
-                               class="section-link-all"><i
-                                        class="fa fa-angle-double-right"
-                                        aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}</a>
-                        </div>
-                        <ul class="product-list row grid">
-                            {% for item in categoryList1 %}
-                                <li class="col-12 col-sm-6 col-md-6 col-lg-3">
-                                    {% include "Ceres::Category.Partials.CategoryListItem" with { 'item': item } %}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        {{ homepageContainer6 }}
-                    {% endif %}
-                </div>
-            {% endif %}
-
-            {#<!-- CATEGORIES -->#}
-            {% set homepageContainer7 = LayoutContainer.show("Ceres::Homepage.Container7") %}
-            {% set homepageContainer8 = LayoutContainer.show("Ceres::Homepage.Container8") %}
-            {% if category4.details is not empty or homepageContainer7 | trim is not empty or category5.details is not empty or homepageContainer8 | trim is not empty %}
-                <div class="row prop-row my-4 featured-categories">
-                    {% if category4.details is not empty or homepageContainer7 | trim is not empty %}
-                        <div class="col-12 col-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}8{% else %}12{% endif %}">
-                            <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}2{% else %}3{% endif %}-1">
-                                {% if homepageContainer7 | trim is empty %}
-                                    <div class="prop-inner">
-                                        <a class="featured-category"
-                                           href="{{ services.category.getURL(category4, lang) }}">
-                                            {% if category4.details[0].imagePath %}
-                                                <img src="/documents/{{ category4.details[0].imagePath }}"
-                                                     alt="{{ category4.details[0].name }}">
-                                                     title="{{ category4.details[0].name }}">
-                                            {% endif %}
-                                            <div class="featured-category-inner">
-                                                <h2 class="featured-category-headline">
-                                                    <i class="fa fa-angle-double-right"
-                                                       aria-hidden="true"></i> {{ category4.details[0].name }}
-                                                </h2>
-
-                                            </div>
-                                        </a>
-                                    </div>
-                                {% else %}
-                                    {{ homepageContainer7 }}
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if category5.details is not empty or homepageContainer8 | trim is not empty %}
-                        <div class="col-12 col-lg-{% if category4.details is not empty or homepageContainer7 | trim is not empty %}4{% else %}12{% endif %}">
-                            <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category4.details is not empty or homepageContainer7 | trim is not empty %}1{% else %}3{% endif %}-1">
-                                {% if homepageContainer8 | trim is empty %}
-                                    <div class="prop-inner">
-                                        <a class="featured-category"
-                                           href="{{ services.category.getURL(category5, lang) }}">
-                                            {% if category5.details[0].imagePath %}
-                                                <img src="/documents/{{ category5.details[0].imagePath }}"
-                                                     alt="{{ category5.details[0].name }}">
-                                                     title="{{ category5.details[0].name }}">
-                                            {% endif %}
-                                            <div class="featured-category-inner">
-                                                <h2 class="featured-category-headline">
-                                                    <i class="fa fa-angle-double-right"
-                                                       aria-hidden="true"></i> {{ category5.details[0].name }}
-                                                </h2>
-                                            </div>
-                                        </a>
-                                    </div>
-                                {% else %}
-                                    {{ homepageContainer8 }}
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-            {% endif %}
-
-            <!-- END CATEGORIES -->
-
-            {% set homepageContainer9 = LayoutContainer.show("Ceres::Homepage.Container9") %}
-            {% if categoryList2 is not empty or homepageContainer9 | trim is not empty %}
-                <div class="mb-4 clearfix">
-                    {% if homepageContainer9 | trim is empty %}
-                        <div class="section-header mb-3">
-                            <h2>{{ category6.details[0].name }}</h2>
-                            <a href="{{ services.category.getURL(category6, lang) }}"
-                               class="section-link-all"><i
-                                        class="fa fa-angle-double-right"
-                                        aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}</a>
-                        </div>
-                        <!-- crosssell start -->
-                        <ul class="product-list row grid">
-                            {% for item in categoryList2 %}
-                                <li class="col-12 col-sm-6 col-md-6 col-lg-3">
-                                    {% include "Ceres::Category.Partials.CategoryListItem" with { 'item': item } %}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        {{ homepageContainer9 }}
-                    {% endif %}
-                </div>
-            {% endif %}
-
-            {{ LayoutContainer.show("Ceres::Homepage.Container10") }}
-
         </div>
     </div>
 {% else %}
