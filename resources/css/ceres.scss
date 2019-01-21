@@ -19200,38 +19200,49 @@ html.ie .basket-preview-hover {
     }
 }
 
-.widget-payment-provider
+
+@mixin widget-list-box-shadow($color)
+{
+    > .cmp-method-list .method-list-item > label
+    {
+        -webkit-box-shadow: inset 0 0 0 0.1rem $color;
+                box-shadow: inset 0 0 0 0.1rem $color;
+    }
+}
+
+.widget-payment-provider, .widget-shipping-profile
 {
     &.widget-primary
     {
-        @include widget-bg-variant($primary);
+        @include widget-list-box-shadow($primary);
     }
 
     &.widget-secondary
     {
-        @include widget-bg-variant($secondary);
+        @include widget-list-box-shadow($secondary);
     }
 
     &.widget-success
     {
-        @include widget-bg-variant($success);
+        @include widget-list-box-shadow($success);
     }
 
     &.widget-info
     {
-        @include widget-bg-variant($info);
+        @include widget-list-box-shadow($info);
     }
 
     &.widget-warning
     {
-        @include widget-bg-variant($warning);
+        @include widget-list-box-shadow($warning);
     }
 
     &.widget-danger
     {
-        @include widget-bg-variant($danger);
+        @include widget-list-box-shadow($danger);
     }
 }
+
 .widget-image-box
 {
     @include media-breakpoint-only(xs) {

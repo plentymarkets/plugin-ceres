@@ -1,13 +1,24 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{{ Twig.component( 'Ceres::Checkout.Components.ShippingProfileSelect' ) }}
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.component("Ceres::Checkout.Components.ShippingProfileSelect") }}
 
-<div>
+{{ Twig.set("overrideShippingProfiles", Twig.call("LayoutContainer.show", ["Ceres::Checkout.ShippingProfileList"])) }}
+
+<div class="widget widget-shipping-profile widget-{{ widget.settings.appearance.mobile | default("primary") }}">
     <header class="mb-3">
         <h3>{{ trans("Ceres::Template.checkoutShippingProfile") }}</h3>
     </header>
 
-    <div class="shipping-method-select">
-        <shipping-profile-select template="#vue-shipping-profile-select"></shipping-profile-select>
-    </div>
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingProfileList"])) }}
+
+    {{ Twig.if("overrideShippingProfiles | trim is empty") }}
+        <div class="shipping-method-select">
+            <shipping-profile-select template="#vue-shipping-profile-select"></shipping-profile-select>
+        </div>
+    {{ Twig.else() }}
+        {{ Twig.print("overridePaymentList") }}
+    {{ Twig.endif() }}
+
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterShippingProfileList"])) }}
 </div>

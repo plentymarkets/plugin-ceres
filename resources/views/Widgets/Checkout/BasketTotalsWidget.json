@@ -1,0 +1,10 @@
+{
+    "identifier": "Ceres::BasketTotalsWidget",
+    "label": "Widget.basketTotalsLabel",
+    "previewImageURL": "",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 400,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\BasketTotalsWidget",
+    "settings": {}
+}

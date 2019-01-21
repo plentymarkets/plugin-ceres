@@ -1,7 +1,7 @@
 [
     {
         "identifier": "Ceres::CouponWidget",
-        "label": "Widget.couponLabel",
+        "label": "Widget.couponLabel"
         "previewImageURL": "",
         "type": "checkout",
         "categories": [
@@ -9,6 +9,13 @@
         ],
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Checkout\\CouponWidget",
+    },
+    {
+
+        "identifier": "Ceres::BasketTotalsWidget",
+        "label": "Widget.basketTotalsLabel",
+        "position": 400,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\BasketTotalsWidget",
         "settings": {}
     },
     {
