@@ -7,6 +7,7 @@
     "position": 200,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
     "settings": {
+        "appearance": "@include(appearance)",
         "hinttext": {
             "type": "codeEditor",
             "defaultValue": "",
