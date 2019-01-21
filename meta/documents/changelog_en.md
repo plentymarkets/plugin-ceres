@@ -13,13 +13,14 @@
 - We added the FAQ widget for the ShopBuilder. This widget serves to integrate an FAQ page in the online store.
 - We added the 4 new layout containers **Basket.BeforeBasketTotals**, **Basket.AfterBasketTotals**, **BasketPreview.BeforeBasketTotals** and **BasketPreview.AfterBasketTotals**.
 - Addresses for B2B customers now include a field for a contact person, instead of the fields for first and last name.
+- The validity of the checkout URL can now be specified in the Ceres configuration.
 
 ### Changed
 
 - The Bootstrap framework has been updated to version 4.2.1. For further information about Boostrap and about updating themes, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/reference/ceres-3-update" target="_blank" rel="noopener"><b>manual</b></a>.
-- Widgets are displayed in categories in the ShopBuilder.
-- The dynamic display of variations now considers the attribute setting "Groupable in item lists".
-- The TopBar widget has been optimized to fit smaller screen resolutions.
+- Widgets are now grouped in categories in the ShopBuilder.
+- The dynamic display of variations now considers the attribute setting **Groupable in item lists**.
+- The TopBar widget has been optimised to fit smaller screen resolutions.
 - The zoom feature on iOS devices is prevented when tapping into input fields, such as address input fields.
 - The texts for an item's age restriction in the single item view have been updated.
 - The setting for limiting the last seen items in the respective list has been marked as **deprecated**.
@@ -31,7 +32,7 @@
 - The mega menu has been reworked and is now displayed more consistently on different browsers.
 - On smaller devices with a resolution between 768px and 992px a maximum of 3 items will be displayed in a row. Thanks to <a href="https://github.com/lkreimann" target="_blank" rel="noopener"><b>@lkreimann</b></a> for this change.
 - Items in the shopping cart, the shopping cart preview and the checkout are now displayed in a uniform fashion when using the Internet Explorer.
-- The width of the "New address" button in the checkout now adapts to the length of the text it contains.
+- The width of the **New address** button in the checkout now adapts to the length of the text it contains.
 - Tags for store specials are now displayed for item packages.
 - The display of item information in the shopping cart, the shopping cart preview and the checkout have been optimised.
 - The date of birth entered in the checkout is now being validated.
@@ -41,7 +42,7 @@
 - Due to an error, sorting and filtering items by price was not working correctly. This has been fixed.
 - We fixed a display error that affected the list widget in the footer on mobile devices.
 - Due to an error, the shopping cart preview was not displayed with the correct height when using the Internet Explorer. This has been fixed.
-- The "Please select" option in the attribute selection is now hidden if the main variation is not active.
+- The **Please select** option in the attribute selection is now hidden if the main variation is not active.
 - In the ShopBuilder live shopping widget, the texts "Days", "Hours", "Minutes" and "Seconds" were not translated correctly. This has been fixed.
 - For shipments to Packstation/post office, the customer number is now displayed in the address.
 - Due to an error, the layout container **RegistrationOverlay.ExtendOverlay** was not working properly. This has been fixed.
@@ -49,7 +50,6 @@
 - Links to previous and next category pages are now displayed in the correct way.
 - Due to an error, the image box widget of the ShopBuilder was not displayed correctly on mobile devices under certain circumstances. This has been fixed.
 - Texts for store specials can now be translated in the **CMS » Multilingualism** menu.
-- The validity of the checkout URL can now be specified in the Ceres configuration.
 - Due to an error, guest accounts could create addresses without specifying an email address. This has been fixed.
 - Due to an error, the filters of a category included categories that were only supposed to appear in the search. This has been fixed.
 - Due to an error, the Back-To-Top button wasn't displayed in the footer of the ShopBuilder. This has been fixed.
