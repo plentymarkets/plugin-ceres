@@ -21,7 +21,16 @@
         ],
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
-        "settings": {}
+        "settings": {
+            "hinttext": {
+                "type": "text",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.paymentProviderHinttextLabel",
+                    "tooltipText": "Widget.paymentProviderHinttextTooltip"
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::ShippingProfileWidget",
