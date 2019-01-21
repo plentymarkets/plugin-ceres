@@ -1,5 +1,17 @@
 [
     {
+        "identifier": "Ceres::CouponWidget",
+        "label": "Widget.couponLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\CouponWidget",
+        "settings": {}
+    },
+    {
         "identifier": "Ceres::PaymentProviderWidget",
         "label": "Widget.paymentProviderLabel",
         "previewImageURL": "",

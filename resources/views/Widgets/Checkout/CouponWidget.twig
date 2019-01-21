@@ -1,0 +1,7 @@
+{% set appearance   = widget.settings.appearance.mobile %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{{ Twig.component("Ceres::Basket.Components.Coupon") }}
+
+<div class="widget">
+    <coupon appearance="{{ appearance }}" template="#vue-coupon"></coupon>
+</div>
