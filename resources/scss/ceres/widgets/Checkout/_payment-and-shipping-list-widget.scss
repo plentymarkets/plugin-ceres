@@ -1,8 +1,11 @@
 @mixin widget-list-box-shadow($color)
 {
-    > .cmp-method-list .method-list-item > label
+    > .payment-method-select, > .shipping-method-select
     {
-        box-shadow: inset 0 0 0 0.1rem $color;
+        > .cmp-method-list .method-list-item > label
+        {
+            box-shadow: inset 0 0 0 0.1rem $color;
+        }
     }
 }
 
