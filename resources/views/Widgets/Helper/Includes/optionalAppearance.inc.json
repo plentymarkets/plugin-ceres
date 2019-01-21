@@ -1,7 +1,7 @@
 {
     "type": "select",
     "required": true,
-    "defaultValue": "primary",
+    "defaultValue": "none",
     "options": {
         "name": "Widget.widgetAppearanceLabel",
         "tooltipText": "Widget.widgetAppearanceTooltip",
