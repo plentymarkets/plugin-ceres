@@ -299,6 +299,7 @@
             $(document).on('shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate', function()
             {
                 calculateBodyOffset();
+                $('.owl-carousel').trigger('refresh.owl.carousel');
             });
 
             var headerImages = header.querySelectorAll("img");
@@ -330,6 +331,11 @@
                 $(elem).click(function(event) {
                     event.preventDefault();
                 });
+            });
+
+            $(component.$el).find('.owl-carousel').on('resized.owl.carousel', function()
+            {
+                window.dispatchEvent(new Event('resize'));
             });
         });
 
