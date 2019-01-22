@@ -1,4 +1,9 @@
 <script type="x/template" id="vue-item-filter-price">
+
+{% if frontend.Account.getIsAccountLoggedIn %}
+
+
+
 	<div class="row inline-form">
 		<div class="col-lg-5 p-r-0 d-table p-b-1">
 			<div class="input-group-addon border-radius-0">${ currency }</div>
@@ -17,4 +22,12 @@
 			</button>
 		</div>
 	</div>	
+	
+	
+
+{% else %}
+Preise erst nach Anmeldung
+{% endif %}
+
+
 </script>
