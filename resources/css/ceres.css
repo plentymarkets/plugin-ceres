@@ -23803,27 +23803,27 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   width: 100% !important;
 }
 
-.widget-payment-provider.widget-primary > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-payment-provider.widget-primary > .shipping-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-primary > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-primary > .shipping-method-select > .cmp-method-list .method-list-item > label {
+.widget-payment-provider.widget-primary > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-primary > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-primary > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-primary > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
   box-shadow: inset 0 0 0 0.1rem #008ebd;
 }
 
-.widget-payment-provider.widget-secondary > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-payment-provider.widget-secondary > .shipping-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-secondary > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-secondary > .shipping-method-select > .cmp-method-list .method-list-item > label {
+.widget-payment-provider.widget-secondary > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-secondary > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-secondary > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-secondary > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
   box-shadow: inset 0 0 0 0.1rem #d4021d;
 }
 
-.widget-payment-provider.widget-success > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-payment-provider.widget-success > .shipping-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-success > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-success > .shipping-method-select > .cmp-method-list .method-list-item > label {
+.widget-payment-provider.widget-success > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-success > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-success > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-success > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
   box-shadow: inset 0 0 0 0.1rem #28a745;
 }
 
-.widget-payment-provider.widget-info > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-payment-provider.widget-info > .shipping-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-info > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-info > .shipping-method-select > .cmp-method-list .method-list-item > label {
+.widget-payment-provider.widget-info > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-info > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-info > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-info > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
   box-shadow: inset 0 0 0 0.1rem #17a2b8;
 }
 
-.widget-payment-provider.widget-warning > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-payment-provider.widget-warning > .shipping-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-warning > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-warning > .shipping-method-select > .cmp-method-list .method-list-item > label {
+.widget-payment-provider.widget-warning > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-warning > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-warning > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-warning > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
   box-shadow: inset 0 0 0 0.1rem #ffc107;
 }
 
-.widget-payment-provider.widget-danger > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-payment-provider.widget-danger > .shipping-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-danger > .payment-method-select > .cmp-method-list .method-list-item > label, .widget-shipping-profile.widget-danger > .shipping-method-select > .cmp-method-list .method-list-item > label {
+.widget-payment-provider.widget-danger > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-danger > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-danger > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-danger > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
   box-shadow: inset 0 0 0 0.1rem #dc3545;
 }
 
