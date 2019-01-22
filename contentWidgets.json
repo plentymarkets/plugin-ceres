@@ -36,6 +36,18 @@
         "settings": {}
     },
     {
+        "identifier": "Ceres::ContactWishWidget",
+        "label": "Widget.contactWishLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 999,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
+        "settings": {}
+    },
+    {
         "identifier": "Ceres::PaymentProviderWidget",
         "label": "Widget.paymentProviderLabel",
         "previewImageURL": "",

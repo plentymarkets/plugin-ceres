@@ -1,0 +1,9 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.component( "Ceres::Checkout.Components.ContactWishInput" ) }}
+
+<div class="widget widget-contact-wish">
+    <h3>{{ Twig.trans("Ceres::Template.checkoutContactWish") }}</h3>
+
+    <contact-wish-input class="pb-3" template="#vue-contact-wish-input"></contact-wish-input>
+</div>
