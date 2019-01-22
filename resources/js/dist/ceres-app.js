@@ -18436,11 +18436,15 @@ Vue.component("payment-provider-select", {
 },{"services/NotificationService":252,"services/TranslationService":253}],145:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _utils = require("../../helper/utils");
+
+var _UrlService = require("services/UrlService");
+
 var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _UrlService = require("services/UrlService");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18448,10 +18452,29 @@ var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
 Vue.component("place-order", {
-
-    delimiters: ["${", "}"],
-
-    props: ["targetContinue", "template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-place-order"
+        },
+        targetContinue: {
+            type: String
+        },
+        appearance: {
+            type: [String, null],
+            default: "success",
+            validator: function validator(value) {
+                return ["primary", "secondary", "success", "info", "warning", "danger"].indexOf(value) !== -1;
+            }
+        },
+        buttonSize: {
+            type: [String, null],
+            default: null,
+            validator: function validator(value) {
+                return ["sm", "lg"].indexOf(value) !== -1;
+            }
+        }
+    },
 
     data: function data() {
         return {
@@ -18460,7 +18483,17 @@ Vue.component("place-order", {
     },
 
 
-    computed: Vuex.mapState({
+    computed: _extends({
+        buttonClasses: function buttonClasses() {
+            var classes = ["btn-" + this.appearance];
+
+            if ((0, _utils.isDefined)(this.buttonSize)) {
+                classes.push("btn-" + this.buttonSize);
+            }
+
+            return classes;
+        }
+    }, Vuex.mapState({
         checkoutValidation: function checkoutValidation(state) {
             return state.checkout.validation;
         },
@@ -18479,7 +18512,7 @@ Vue.component("place-order", {
         shippingPrivacyHintAccepted: function shippingPrivacyHintAccepted(state) {
             return state.checkout.shippingPrivacyHintAccepted;
         }
-    }),
+    })),
 
     created: function created() {
         this.$options.template = this.template;
@@ -18575,7 +18608,7 @@ Vue.component("place-order", {
     }
 });
 
-},{"services/ApiService":248,"services/NotificationService":252,"services/TranslationService":253,"services/UrlService":254}],146:[function(require,module,exports){
+},{"../../helper/utils":245,"services/ApiService":248,"services/NotificationService":252,"services/TranslationService":253,"services/UrlService":254}],146:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };

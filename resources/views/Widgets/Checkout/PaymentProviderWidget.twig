@@ -6,7 +6,7 @@
 {{ Twig.set("overridePaymentList", Twig.call("LayoutContainer.show", ["Ceres::Checkout.PaymentList"])) }}
 {% set hinttext = widget.settings.hinttext.mobile %}
 
-<div class="widget widget-payment-provider widget-{{ widget.settings.appearance.mobile | default('primary')  }}">
+<div class="widget widget-payment-provider widget-{{ widget.settings.appearance.mobile | default("primary") }}">
     <header class="mb-3">
         <h3>{{ Twig.trans("Ceres::Template.checkoutPaymentMethod") }}</h3>
     </header>
