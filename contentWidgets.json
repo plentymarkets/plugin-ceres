@@ -1,5 +1,17 @@
 [
     {
+        "identifier": "Ceres::AddressWidget",
+        "label": "Widget.addressLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\AddressWidget",
+        "settings": {}
+    },
+    {
         "identifier": "Ceres::BasketTotalsWidget",
         "label": "Widget.basketTotalsLabel",
         "previewImageURL": "",
