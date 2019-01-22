@@ -7,8 +7,9 @@
     "position": 200,
     "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
     "settings": {
+        "appearance": "@include(appearance)",
         "hinttext": {
-            "type": "text",
+            "type": "codeEditor",
             "defaultValue": "",
             "options": {
                 "name": "Widget.paymentProviderHinttextLabel",

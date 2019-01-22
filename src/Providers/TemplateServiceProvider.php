@@ -47,6 +47,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],                 // provide template to use for single items
         'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],                       // provide template to use for basket
         'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],               // provide template to use for checkout
+        'tpl.category.checkout'             => ['Checkout.CheckoutCategory',              CategoryContext::class],               // provide template to use for container categories
         'tpl.my-account'                    => ['MyAccount.MyAccount',                    GlobalContext::class],                 // provide template to use for my-account
         'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],          // provide template to use for confirmation
         'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],                      // provide template to use for login
