@@ -2163,7 +2163,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 .has-danger .input-group-addon {
   color: #d9534f;
   border-color: #d9534f;
-  background-color: #fdf7f7;
+  background-color: #ffffff;
 }
 
 .has-danger .form-control-feedback {
@@ -5406,7 +5406,7 @@ button.close {
   padding: 8px 14px;
   margin: 0;
   font-size: 1rem;
-  background-color: #f7f7f7;
+  background-color: #ffffff;
   border-bottom: 1px solid #ebebeb;
   border-radius: 0.12857rem 0.12857rem 0 0;
 }
@@ -5659,7 +5659,7 @@ button.close {
 }
 
 .bg-faded {
-  background-color: #f7f7f9;
+  background-color: #ffffff;
 }
 
 .bg-primary {
@@ -12274,7 +12274,7 @@ body .wrapper-main {
 }
 
 .page-content {
-  background-color: #f7f7f9;
+  background-color: #ffffff;
 }
 
 .page-content.basket, .page-content.checkout, .page-content.contact, .page-content.myaccount {
@@ -12301,12 +12301,12 @@ body .wrapper-main {
 }
 
 .page-not-found .default-not-found {
-  background-color: #f7f7f9;
+  background-color: #ffffff;
 }
 
 .page-not-found .not-found-text {
   font-size: 115px;
-  text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.5);
+  text-shadow: 4px 3px 0 #Ffffff, 9px 8px 0 rgba(218, 218, 227, 0.5);
 }
 
 .rating {
@@ -12419,7 +12419,7 @@ a:active {
 }
 
 body {
-  background-color: #f7f7f9;
+  background-color: #ffffff;
 }
 
 body > #vue-app,
