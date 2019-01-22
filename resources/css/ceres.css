@@ -16208,6 +16208,10 @@ button:focus {
   margin-right: 10px;
 }
 
+.btn.btn-block > .fa {
+  line-height: inherit;
+}
+
 .btn-right {
   float: right;
 }
