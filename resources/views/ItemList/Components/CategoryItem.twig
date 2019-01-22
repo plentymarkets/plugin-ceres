@@ -51,6 +51,10 @@
                 <a :href="itemData | itemURL" class="thumb-title small">
                     ${ itemData | itemName }
                 </a>
+                
+                {% if frontend.Account.getIsAccountLoggedIn %}
+
+
                 <div class="thumb-meta">
                     <div class="prices">
                         <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
@@ -77,6 +81,12 @@
                     {{ trans("Ceres::Template.itemExclusive") }}
                     <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                 </span>
+                
+                
+
+{% else %}
+Preise nur nach Login
+{% endif %}
             </div>
             <!-- ./ITEM DETAILS  -->
         </div>
