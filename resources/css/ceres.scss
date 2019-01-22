@@ -10539,7 +10539,7 @@ body .wrapper-main{
 
 .page-content{
     @extend .p-t-1;
-    background-color: $gray-lightest;
+    background-color: #ffffff;
     &.basket,
     &.checkout,
     &.contact,
@@ -10547,7 +10547,7 @@ body .wrapper-main{
         &:not(.checkout):not(.basket) {
             background-color: $white;
         }
-        color: $gray-darker;
+        color: #000000;
         margin-top: 30px;
         padding-bottom: 30px;
     }
