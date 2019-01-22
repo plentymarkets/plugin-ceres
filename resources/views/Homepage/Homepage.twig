@@ -28,7 +28,7 @@
     {% if ceresConfig.homepage.showShopBuilderContent or request.get('isContentBuilder') == 1 %}
     {{ component( "Ceres::Checkout.Components.Checkout" ) }}
 
-        <div class="home container-max">
+        <div class="page-content checkout container-max">
             <div class="row">
                 <div class="col">
                     <checkout v-cloak template="#vue-checkout" :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}">
