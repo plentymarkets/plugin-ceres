@@ -20,7 +20,19 @@
             "checkout"
         ],
         "position": 400,
-        "widgetClass": "Ceres\\Widgets\\Checkout\\BasketTotalsWidget",
+        "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
+        "settings": {}
+    },
+    {
+        "identifier": "Ceres::BasketWidget",
+        "label": "Widget.basketLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 999,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
         "settings": {}
     },
     {

@@ -17890,10 +17890,16 @@ Vue.component("coupon", {
 "use strict";
 
 Vue.component("basket-list", {
-
-    delimiters: ["${", "}"],
-
-    props: ["size", "template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-basket-list"
+        },
+        size: {
+            type: String,
+            default: "small"
+        }
+    },
 
     computed: Vuex.mapState({
         basketItems: function basketItems(state) {
@@ -17929,9 +17935,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
-
-    delimiters: ["${", "}"],
-
     props: ["basketItem", "size", "language", "template"],
 
     data: function data() {
