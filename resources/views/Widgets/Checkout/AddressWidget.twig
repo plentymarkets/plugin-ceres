@@ -1,5 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
 
 <div>
@@ -7,9 +8,7 @@
     {% if overrideAddressLists|trim is empty %}
         {% set overrideBillingAddress = LayoutContainer.show("Ceres::Checkout.BillingAddress") %}
         {% if overrideBillingAddress|trim is empty %}
-            <header class="mb-3">
-                <h3>{{ Twig.trans("Ceres::Template.checkoutInvoiceAddress") }}</h3>
-            </header>
+            <h3 class="mb-3">{{ Twig.trans("Ceres::Template.checkoutInvoiceAddress") }}</h3>
 
             {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
             <div class="invoice-addresses-select">
@@ -26,9 +25,7 @@
 
         {% set overrideShippingAddress = LayoutContainer.show("Ceres::Checkout.ShippingAddress") %}
         {% if overrideShippingAddress|trim is empty %}
-            <header class="mb-3">
-                <h3>{{ Twig.trans("Ceres::Template.checkoutShippingAddress") }}</h3>
-            </header>
+            <h3 class="mb-3">{{ Twig.trans("Ceres::Template.checkoutShippingAddress") }}</h3>
 
             {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingAddress") }}
             <div class="shipping-addresses-select">
