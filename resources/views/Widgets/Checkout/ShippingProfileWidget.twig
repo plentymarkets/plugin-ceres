@@ -8,7 +8,7 @@
 
 <div class="widget widget-shipping-profile widget-{{ widget.settings.appearance.mobile | default("primary") }}">
     <header class="mb-3">
-        <h3>{{ trans("Ceres::Template.checkoutShippingProfile") }}</h3>
+        <h3>{{ Twig.trans("Ceres::Template.checkoutShippingProfile") }}</h3>
     </header>
 
     {% if hinttext is not empty %}

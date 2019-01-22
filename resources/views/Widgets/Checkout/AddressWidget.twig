@@ -1,6 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{{ component( "Ceres::Customer.Components.AddressSelect.AddressSelect" ) }}
+{{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
 
 <div>
     {% set overrideAddressLists = LayoutContainer.show("Ceres::Checkout.AddressLists") %}
@@ -8,15 +8,15 @@
         {% set overrideBillingAddress = LayoutContainer.show("Ceres::Checkout.BillingAddress") %}
         {% if overrideBillingAddress|trim is empty %}
             <header class="mb-3">
-                <h3>{{ trans("Ceres::Template.checkoutInvoiceAddress") }}</h3>
+                <h3>{{ Twig.trans("Ceres::Template.checkoutInvoiceAddress") }}</h3>
             </header>
 
             {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
             <div class="invoice-addresses-select">
                 <invoice-address-select
-                        :address-list="{{ services.customer.getAddresses(1) | json_encode }}"
+                        :address-list="{{ Twig.print("services.customer.getAddresses(1) | json_encode") }}"
                         has-to-validate="true"
-                        :selected-address-id="{{ services.checkout.getBillingAddressId() | json_encode }}">
+                        :selected-address-id="{{ Twig.print("services.checkout.getBillingAddressId() | json_encode") }}">
                 </invoice-address-select>
             </div>
             {{ LayoutContainer.show("Ceres::Checkout.AfterBillingAddress") }}
@@ -27,14 +27,14 @@
         {% set overrideShippingAddress = LayoutContainer.show("Ceres::Checkout.ShippingAddress") %}
         {% if overrideShippingAddress|trim is empty %}
             <header class="mb-3">
-                <h3>{{ trans("Ceres::Template.checkoutShippingAddress") }}</h3>
+                <h3>{{ Twig.trans("Ceres::Template.checkoutShippingAddress") }}</h3>
             </header>
 
             {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingAddress") }}
             <div class="shipping-addresses-select">
                 <shipping-address-select
-                        :address-list="{{ services.customer.getAddresses(2) | json_encode }}"
-                        :selected-address-id="{{ services.checkout.getDeliveryAddressId() | json_encode }}">
+                        :address-list="{{ Twig.print("services.customer.getAddresses(2) | json_encode") }}"
+                        :selected-address-id="{{ Twig.print("services.checkout.getDeliveryAddressId() | json_encode") }}">
                 </shipping-address-select>
             </div>
             {{ LayoutContainer.show("Ceres::Checkout.AfterShippingAddress") }}
