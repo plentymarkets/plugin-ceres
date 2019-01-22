@@ -16,8 +16,11 @@
 <script type="x/template" id="vue-category-item">
     <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
         <div class="thumb-inner">
+        {% if frontend.Account.getIsAccountLoggedIn %}
             <add-to-basket :item="itemData" :use-large-scale="true" :item-url="itemData | itemURL"></add-to-basket>
+{% else %}
 
+{% endif %}
             <div class="thumb-background"></div>
 
             <div class="thumb-image">
