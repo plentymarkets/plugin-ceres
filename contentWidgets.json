@@ -20,7 +20,7 @@
             "checkout"
         ],
         "position": 400,
-        "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
+        "widgetClass": "Ceres\\Widgets\\Checkout\\BasketTotalsWidget",
         "settings": {}
     },
     {
