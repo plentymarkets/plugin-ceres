@@ -4,6 +4,6 @@
 
 {{ Twig.component("Ceres::Basket.Components.Coupon") }}
 
-<div class="widget widget-coupon widget-{{ appearance | default('primary')  }}">
-    <coupon template="#vue-coupon"></coupon>
+<div class="widget widget-coupon">
+    <coupon appearance="{{ appearance }}"></coupon>
 </div>

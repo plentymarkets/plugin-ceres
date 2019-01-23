@@ -7,7 +7,7 @@
                     <i v-waiting-animation="waiting" class="fa fa-gift" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.couponRedeem") }}
                 </button>
-                <button class="btn btn-medium" type="button" @click="removeCode()" :disabled="waiting" v-else>
+                <button class="btn btn-medium btn-danger" type="button" @click="removeCode()" :disabled="waiting" v-else>
                     <i v-waiting-animation="waiting" class="fa fa-trash" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.couponRemove") }}
                 </button>

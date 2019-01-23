@@ -18132,8 +18132,6 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("coupon", {
 
-    delimiters: ["${", "}"],
-
     props: {
         template: {
             type: String,
