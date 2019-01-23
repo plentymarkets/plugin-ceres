@@ -6,5 +6,27 @@
     "categories": ["checkout"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Checkout\\AddressWidget",
-    "settings": {}
+    "settings": {
+        "addressType": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "onDemand",
+            "options": {
+                "name": "Widget.addressType",
+                "tooltipText": "Widget.addressTypeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "1",
+                        "caption": "Widget.addressInvoice",
+                        "position": 0
+                    },
+                    {
+                        "value": "2",
+                        "caption": "Widget.addressShipping",
+                        "position": 0
+                    }
+                ]
+            }
+        }
+    }
 }

@@ -3,7 +3,10 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
 
+{{ Twig.set("overrideAddressLists", Twig.call("LayoutContainer.show", ["Ceres::Checkout.AddressLists"])) }}
+
 <div>
+    {{widget.settings.addressType.mobile}}
     {% set overrideAddressLists = LayoutContainer.show("Ceres::Checkout.AddressLists") %}
     {% if overrideAddressLists|trim is empty %}
         {% set overrideBillingAddress = LayoutContainer.show("Ceres::Checkout.BillingAddress") %}
