@@ -39,7 +39,12 @@ Vue.component("variation-select", {
                 return variation.attributes.length <= 0;
             });
 
-            if (hasEmptyVariation)
+            const preselectedVariationExists = this.variations.some(variation =>
+            {
+                return variation.id === this.preselect;
+            });
+
+            if (hasEmptyVariation || !preselectedVariationExists)
             {
                 // main variation is selectable
                 return true;
