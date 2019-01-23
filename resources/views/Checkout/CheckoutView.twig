@@ -131,7 +131,7 @@
                             <aside class="sidebar">
                                 <div class="cmp cmp-checkout-sidebar">
                                     <div class="cmp cmp-basket-preview-list">
-                                        <basket-list template="#vue-basket-list" size="small"></basket-list>
+                                        <basket-list size="small"></basket-list>
                                     </div>
                                     <hr>
                                     <coupon template="#vue-coupon"></coupon>
@@ -150,7 +150,7 @@
                             </aside>
 
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
-                            <place-order template="#vue-place-order" target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
+                            <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
                         </div>
                     </div>

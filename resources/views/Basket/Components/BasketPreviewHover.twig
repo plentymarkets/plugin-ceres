@@ -14,7 +14,7 @@
                     </button>
                 </header>
 
-                <basket-list class="item-list" v-if="basketItems.length" template="#vue-basket-list" size="small"></basket-list>
+                <basket-list class="item-list" v-if="basketItems.length" size="small"></basket-list>
                 <div class="no-items" v-else>{{ trans("Ceres::Template.basketNoItems") }}</div>
 
                 <div class="basket-totals" v-if="basketItems.length">

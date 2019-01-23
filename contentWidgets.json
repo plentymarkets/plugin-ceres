@@ -1,7 +1,24 @@
 [
     {
+<<<<<<< HEAD
         "identifier": "Ceres::CouponWidget",
         "label": "Widget.couponLabel"
+=======
+        "identifier": "Ceres::AddressWidget",
+        "label": "Widget.addressLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\AddressWidget",
+        "settings": {}
+    },
+    {
+        "identifier": "Ceres::BasketTotalsWidget",
+        "label": "Widget.basketTotalsLabel",
+>>>>>>> feature/shop_builder_checkout
         "previewImageURL": "",
         "type": "checkout",
         "categories": [
@@ -19,6 +36,30 @@
         "settings": {}
     },
     {
+        "identifier": "Ceres::BasketWidget",
+        "label": "Widget.basketLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 999,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
+        "settings": {}
+    },
+    {
+        "identifier": "Ceres::ContactWishWidget",
+        "label": "Widget.contactWishLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 999,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
+        "settings": {}
+    },
+    {
         "identifier": "Ceres::PaymentProviderWidget",
         "label": "Widget.paymentProviderLabel",
         "previewImageURL": "",
@@ -28,7 +69,137 @@
         ],
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
-        "settings": {}
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hinttext": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.paymentProviderHinttextLabel",
+                    "tooltipText": "Widget.paymentProviderHinttextTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::PlaceOrderWidget",
+        "label": "Widget.placeOrderLabel",
+        "previewImageURL": "",
+        "type": "static",
+        "categories": [
+            "checkout"
+        ],
+        "position": 999,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "sm",
+                            "caption": "sm",
+                            "position": 0
+                        },
+                        {
+                            "value": "",
+                            "caption": "normal",
+                            "position": 1
+                        },
+                        {
+                            "value": "lg",
+                            "caption": "lg",
+                            "position": 2
+                        }
+                    ]
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::ShippingProfileWidget",
@@ -40,7 +211,57 @@
         ],
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
-        "settings": {}
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hinttext": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.shippingProfileHinttextLabel",
+                    "tooltipText": "Widget.shippingProfileHinttextTooltip"
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::CollapseWidget",
@@ -56,7 +277,7 @@
             "appearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "primary",
+                "defaultValue": "none",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",

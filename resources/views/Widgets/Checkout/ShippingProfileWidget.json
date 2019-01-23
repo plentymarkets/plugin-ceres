@@ -6,5 +6,15 @@
     "categories": ["checkout"],
     "position": 200,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
-    "settings": {}
+    "settings": {
+        "appearance": "@include(appearance)",
+        "hinttext": {
+            "type": "codeEditor",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.shippingProfileHinttextLabel",
+                "tooltipText": "Widget.shippingProfileHinttextTooltip"
+            }
+        }
+    }
 }

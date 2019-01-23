@@ -1,17 +1,41 @@
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
-import TranslationService from "services/TranslationService";
+import { isDefined } from "../../helper/utils";
 import { navigateTo } from "services/UrlService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("place-order", {
-
-    delimiters: ["${", "}"],
-
-    props: [
-        "targetContinue",
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-place-order"
+        },
+        targetContinue:
+        {
+            type: String
+        },
+        appearance:
+        {
+            type: [String, null],
+            default: "success",
+            validator: value =>
+            {
+                return ["primary", "secondary", "success", "info", "warning", "danger"].indexOf(value) !== -1;
+            }
+        },
+        buttonSize:
+        {
+            type: [String, null],
+            default: null,
+            validator: value =>
+            {
+                return ["sm", "lg"].indexOf(value) !== -1;
+            }
+        }
+    },
 
     data()
     {
@@ -20,14 +44,29 @@ Vue.component("place-order", {
         };
     },
 
-    computed: Vuex.mapState({
-        checkoutValidation: state => state.checkout.validation,
-        contactWish: state => state.checkout.contactWish,
-        isBasketLoading: state => state.basket.isBasketLoading,
-        basketItemQuantity: state => state.basket.data.itemQuantity,
-        isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
-        shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted
-    }),
+    computed:
+    {
+        buttonClasses()
+        {
+            const classes = [`btn-${this.appearance}`];
+
+            if (isDefined(this.buttonSize))
+            {
+                classes.push(`btn-${this.buttonSize}`);
+            }
+
+            return classes;
+        },
+
+        ...Vuex.mapState({
+            checkoutValidation: state => state.checkout.validation,
+            contactWish: state => state.checkout.contactWish,
+            isBasketLoading: state => state.basket.isBasketLoading,
+            basketItemQuantity: state => state.basket.data.itemQuantity,
+            isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
+            shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted
+        })
+    },
 
     created()
     {

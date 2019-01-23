@@ -1,0 +1,38 @@
+{
+    "identifier": "Ceres::PlaceOrderWidget",
+    "label": "Widget.placeOrderLabel",
+    "previewImageURL": "",
+    "type": "static",
+    "categories": ["checkout"],
+    "position": 999,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",
+    "settings": {
+        "appearance": "@include(appearance)",
+        "buttonSize": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetAppearanceLabel",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "sm",
+                        "caption": "sm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "normal",
+                        "position": 1
+                    },
+                    {
+                        "value": "lg",
+                        "caption": "lg",
+                        "position": 2
+                    }
+                ]
+            }
+        }
+    }
+}

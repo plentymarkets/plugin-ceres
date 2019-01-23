@@ -11091,6 +11091,13 @@ button:focus {
 	&.btn-m-r {
 		margin-right: 10px;
 	}
+
+	&.btn-block {
+		> .fa {
+			line-height: inherit;
+		}
+	}
+
 }
 
 .btn-right {
@@ -19200,13 +19207,15 @@ html.ie .basket-preview-hover {
     }
 }
 
-
 @mixin widget-list-box-shadow($color)
 {
-    > .cmp-method-list .method-list-item > label
+    > .payment-method-select, > .shipping-method-select
     {
-        -webkit-box-shadow: inset 0 0 0 0.1rem $color;
-                box-shadow: inset 0 0 0 0.1rem $color;
+        > .cmp-method-list .method-list-item > input:checked + label
+        {
+            -webkit-box-shadow: inset 0 0 0 0.1rem $color;
+                    box-shadow: inset 0 0 0 0.1rem $color;
+        }
     }
 }
 
