@@ -1,9 +1,5 @@
 [
     {
-<<<<<<< HEAD
-        "identifier": "Ceres::CouponWidget",
-        "label": "Widget.couponLabel"
-=======
         "identifier": "Ceres::AddressWidget",
         "label": "Widget.addressLabel",
         "previewImageURL": "",
@@ -18,19 +14,11 @@
     {
         "identifier": "Ceres::BasketTotalsWidget",
         "label": "Widget.basketTotalsLabel",
->>>>>>> feature/shop_builder_checkout
         "previewImageURL": "",
         "type": "checkout",
         "categories": [
             "checkout"
         ],
-        "position": 200,
-        "widgetClass": "Ceres\\Widgets\\Checkout\\CouponWidget",
-    },
-    {
-
-        "identifier": "Ceres::BasketTotalsWidget",
-        "label": "Widget.basketTotalsLabel",
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Checkout\\BasketTotalsWidget",
         "settings": {}
@@ -58,6 +46,65 @@
         "position": 999,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
         "settings": {}
+    },
+    {
+        "identifier": "Ceres::CouponWidget",
+        "label": "Widget.couponLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\CouponWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::PaymentProviderWidget",
