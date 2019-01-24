@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <checkout v-cloak template="#vue-checkout" :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}">
+            <checkout v-cloak :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}">
                 <div class="row" slot-scope="checkoutComp">
                     <!-- ADDRESS SELECT -->
                     <div class="col-md-7">
@@ -85,7 +85,7 @@
                                 {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingProfileList") }}
                                 {% if overrideShippingProfiles|trim is empty %}
                                     <div class="shipping-method-select">
-                                        <shipping-profile-select template="#vue-shipping-profile-select"></shipping-profile-select>
+                                        <shipping-profile-select></shipping-profile-select>
                                     </div>
                                 {% else %}
                                     {{ overrideShippingProfiles }}
@@ -111,11 +111,11 @@
                                     <h3>{{ trans("Ceres::Template.checkoutContactWish") }}</h3>
                                 </header>
 
-                                <contact-wish-input class="pb-3" template="#vue-contact-wish-input"></contact-wish-input>
+                                <contact-wish-input class="pb-3"></contact-wish-input>
 
                                 <shipping-privacy-hint-check></shipping-privacy-hint-check>
 
-                                <accept-gtc-check template="#vue-accept-gtc-check"></accept-gtc-check>
+                                <accept-gtc-check></accept-gtc-check>
                                 {{ LayoutContainer.show("Ceres::Checkout.OptIns") }}
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                             <aside class="sidebar">
                                 <div class="cmp cmp-checkout-sidebar">
                                     {{ LayoutContainer.show("Ceres::Checkout.BeforeBasketTotals") }}
-                                    <basket-totals template="#vue-basket-totals"></basket-totals>
+                                    <basket-totals></basket-totals>
                                     {{ LayoutContainer.show("Ceres::Checkout.AfterBasketTotals") }}
                                 </div>
                             </aside>

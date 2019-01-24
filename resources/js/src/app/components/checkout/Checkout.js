@@ -5,10 +5,18 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("checkout", {
 
-    props: [
-        "template",
-        "initialCheckout"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-checkout"
+        },
+        initialCheckout:
+        {
+            type: Object
+        }
+    },
 
     computed: Vuex.mapState({
         checkout: state => state.checkout

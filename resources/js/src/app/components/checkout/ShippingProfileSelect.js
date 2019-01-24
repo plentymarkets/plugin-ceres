@@ -3,8 +3,6 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("shipping-profile-select", {
 
-    delimiters: ["${", "}"],
-
     props: {
         template: {
             type: String,

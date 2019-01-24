@@ -18090,7 +18090,8 @@ Vue.component("basket-totals", {
 
     props: {
         template: {
-            type: String
+            type: String,
+            default: "#vue-basket-totals"
         }
     },
 
@@ -18493,9 +18494,12 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("accept-gtc-check", {
 
-    delimiters: ["${", "}"],
-
-    props: ["template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-accept-gtc-check"
+        }
+    },
 
     data: function data() {
         return {
@@ -18553,7 +18557,15 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("checkout", {
 
-    props: ["template", "initialCheckout"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-checkout"
+        },
+        initialCheckout: {
+            type: Object
+        }
+    },
 
     computed: Vuex.mapState({
         checkout: function checkout(state) {
@@ -18712,7 +18724,12 @@ Vue.component("checkout", {
 
 Vue.component("contact-wish-input", {
 
-    props: ["template"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-contact-wish-input"
+        }
+    },
 
     computed: Vuex.mapState({
         contactWish: function contactWish(state) {
@@ -19100,8 +19117,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var NotificationService = require("services/NotificationService");
 
 Vue.component("shipping-profile-select", {
-
-    delimiters: ["${", "}"],
 
     props: {
         template: {
