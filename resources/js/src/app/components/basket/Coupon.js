@@ -4,8 +4,6 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("coupon", {
 
-    delimiters: ["${", "}"],
-
     props: {
         template:
         {

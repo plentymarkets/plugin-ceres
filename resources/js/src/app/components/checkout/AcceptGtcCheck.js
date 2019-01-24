@@ -3,11 +3,14 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("accept-gtc-check", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-accept-gtc-check"
+        }
+    },
 
     data()
     {
