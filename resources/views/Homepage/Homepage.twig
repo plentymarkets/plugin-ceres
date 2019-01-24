@@ -31,7 +31,21 @@
         <div class="page-content checkout container-max">
             <div class="row">
                 <div class="col">
-                    <checkout v-cloak template="#vue-checkout" :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}">
+                {#  
+                    :address-list="{{ Twig.print("services.customer.getAddresses(1) | json_encode") }}"
+                    :selected-address-id="{{ Twig.print("services.checkout.getBillingAddressId() | json_encode") }}"
+                    has-to-validate="true"
+                    
+                    :address-list="{{ Twig.print("services.customer.getAddresses(2) | json_encode") }}"
+                    :selected-address-id="{{ Twig.print("services.checkout.getDeliveryAddressId() | json_encode") }}"
+                #}
+                    <checkout
+                        v-cloak
+                        :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+                        :delivery-address-list="{{ Twig.print("services.customer.getAddresses(2) | json_encode") }}"
+                        :selected-delivery-address="{{ Twig.print("services.checkout.getDeliveryAddressId() | json_encode") }}"
+                        :billing-address-list="{{ Twig.print("services.customer.getAddresses(1) | json_encode") }}"
+                        :selected-billing-address="{{ Twig.print("services.checkout.getBillingAddressId() | json_encode") }}">
                         {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
                             {{ content.result|raw }}
                         {% endfor %}
