@@ -105,12 +105,12 @@
                 </div>
             </div>
         {% endif %}
-        
+
         <div class="col-12">
-            {% if categoryDescriptionTop == "description1" or categoryDescriptionTop == "both" and category.details[0].description | trim is not empty %}
+            {% if categoryDescriptionBottom == "description1" or categoryDescriptionBottom == "both" and category.details[0].description | trim is not empty %}
                 <div class="category-description mb-3">{{ category.details[0].description | raw }}</div>
             {% endif %}
-            {% if categoryDescriptionTop == "description2" or categoryDescriptionTop == "both" and category.details[0].description2 | trim is not empty %}
+            {% if categoryDescriptionBottom == "description2" or categoryDescriptionBottom == "both" and category.details[0].description2 | trim is not empty %}
                 <div class="category-description mb-3">{{ category.details[0].description2 | raw }}</div>
             {% endif %}
         </div>
