@@ -7,7 +7,7 @@
 
 <nav class="navbar{% if useMegaMenu %} megamenu{%endif%}">
     <div class="container-max">
-        <div class="row">
+        <div class="row" style="background-color:black;color:white;" >
             <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
                 <a class="navbar-brand pull-lg-left" href="{{ homepageURL }}">
                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
