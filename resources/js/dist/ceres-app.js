@@ -18204,9 +18204,16 @@ Vue.component("checkout", {
             type: String,
             default: "#vue-checkout"
         },
+
         initialCheckout: {
-            type: Object
-        }
+            type: Object,
+            required: true
+        },
+
+        deliveryAddressList: Object,
+        selectedDeliveryAddress: Number,
+        billingAddressList: Object,
+        selectedBillingAddress: Number
     },
 
     computed: Vuex.mapState({
@@ -18217,7 +18224,11 @@ Vue.component("checkout", {
 
     created: function created() {
         this.$options.template = this.template;
+
         this.$store.dispatch("setCheckout", this.initialCheckout);
+        this.$store.dispatch("initBillingAddress", { id: this.selectedBillingAddress, addressList: this.billingAddressList });
+        this.$store.dispatch("initDeliveryAddress", { id: this.selectedDeliveryAddress, addressList: this.deliveryAddressList });
+
         this.addEventHandler();
     },
 
@@ -19667,7 +19678,7 @@ Vue.component("invoice-address-select", {
      * Initialise the event listener
      */
     created: function created() {
-        this.$store.dispatch("initBillingAddress", { id: this.selectedAddressId, addressList: this.addressList });
+        // this.$store.dispatch("initBillingAddress", { id: this.selectedAddressId, addressList: this.addressList });
 
         if (this.hasToValidate) {
             this.$store.commit("setInvoiceAddressValidator", this.validate);
@@ -19747,8 +19758,8 @@ Vue.component("shipping-address-select", {
             this.addressList = [];
         }
         // Adds the dummy entry for "delivery address same as invoice address"
-        this.addressList.unshift({ id: -99 });
-        this.$store.dispatch("initDeliveryAddress", { id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList });
+        // this.addressList.unshift({ id: -99 });
+        // this.$store.dispatch("initDeliveryAddress", { id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList });
     },
 
 
@@ -27845,9 +27856,11 @@ var state = {
     billingAddressId: null,
     billingAddress: null,
     billingAddressList: [],
+    billingAddressSettings: null,
     deliveryAddressId: null,
     deliveryAddress: null,
-    deliveryAddressList: []
+    deliveryAddressList: [],
+    deliveryAddressSettings: null
 };
 
 var mutations = {
@@ -28003,6 +28016,12 @@ var mutations = {
             state.deliveryAddressId = state.deliveryAddressList[0].id;
             document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         }
+    },
+    setBillingAddressSettings: function setBillingAddressSettings(state, settings) {
+        state.billingAddressSettings = settings;
+    },
+    setDeliveryAddressSettings: function setDeliveryAddressSettings(state, settings) {
+        state.deliveryAddressSettings = settings;
     }
 };
 
@@ -28021,6 +28040,9 @@ var actions = {
         var commit = _ref5.commit;
         var id = _ref6.id,
             addressList = _ref6.addressList;
+
+        addressList.unshift({ id: -99 });
+        id = this.selectedAddressId === 0 ? -99 : id;
 
         commit("setDeliveryAddressList", addressList);
         commit("selectDeliveryAddress", addressList.find(function (address) {

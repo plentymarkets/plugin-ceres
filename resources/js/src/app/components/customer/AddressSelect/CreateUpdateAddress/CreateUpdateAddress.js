@@ -25,7 +25,7 @@ Vue.component("create-update-address", {
     computed:
     {
         addressList()
-            {
+        {
             this.$store.getters.getAddressList(this.addressType);
         }
     },
