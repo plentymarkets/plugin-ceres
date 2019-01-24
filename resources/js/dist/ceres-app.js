@@ -21926,7 +21926,11 @@ Vue.component("variation-select", {
                 return variation.attributes.length <= 0;
             });
 
-            if (hasEmptyVariation) {
+            var preselectedVariationExists = this.variations.some(function (variation) {
+                return variation.id === _this.preselect;
+            });
+
+            if (hasEmptyVariation || !preselectedVariationExists) {
                 // main variation is selectable
                 return true;
             }
