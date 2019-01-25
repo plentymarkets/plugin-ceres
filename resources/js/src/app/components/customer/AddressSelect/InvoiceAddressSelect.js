@@ -8,8 +8,7 @@ Vue.component("invoice-address-select", {
     template: `
         <address-select 
             ref="invoice"
-            template="#vue-address-select"
-            v-on:address-changed="addressChanged"
+            @address-changed="addressChanged"
             address-type="1"
             :show-error='showError'>
         </address-select>
