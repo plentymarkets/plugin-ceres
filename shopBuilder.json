@@ -71,5 +71,23 @@
             "label": "Widget.categoryFooter",
             "position": 600
         }
-    ]
+    ],
+    "globalSettings": {
+        "category_checkout": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.globalShippingCostsCategoryIdLabel"
+            }
+        },
+        "enabled_routes_checkout": {
+            "type": "checkbox",
+            "required": false,
+            "options": {
+                "name": "Config.globalEnableOldUrlPatternLabel"
+            }
+        }
+    },
+    "globalSettingsHandler": "Ceres\\ShopBuilderSettingsHandler"
 }
