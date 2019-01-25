@@ -30,7 +30,7 @@ Vue.component("accept-gtc-check", {
         },
         customText:
         {
-            type: Text,
+            type: String,
             default: ""
         }
     },
