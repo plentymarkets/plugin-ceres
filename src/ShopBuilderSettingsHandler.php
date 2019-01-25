@@ -78,7 +78,8 @@ class ShopBuilderSettingsHandler
             $config[$key] = $oldConfigEntry;
         }
         
-        return $config;
+        //return $config;
+        return [];
     }
     
     public function write($pluginSetId, $pluginName, $values)
