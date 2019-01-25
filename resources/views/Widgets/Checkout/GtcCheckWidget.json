@@ -28,6 +28,7 @@
         "isRequired": {
             "type": "checkbox",
             "isVisible": "hideCheckbox !== true",
+            "defaultValue": true,
             "options": {
                 "name": "Widget.gtcCheckIsRequiredLabel",
                 "tooltip": "Widget.gtcCheckIsRequiredTooltip"
