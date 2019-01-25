@@ -18156,7 +18156,7 @@ Vue.component("accept-gtc-check", {
             default: true
         },
         customText: {
-            type: Boolean,
+            type: Text,
             default: ""
         }
     },
