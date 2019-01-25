@@ -173,6 +173,7 @@
             "isRequired": {
                 "type": "checkbox",
                 "isVisible": "hideCheckbox !== true",
+                "defaultValue": true,
                 "options": {
                     "name": "Widget.gtcCheckIsRequiredLabel",
                     "tooltip": "Widget.gtcCheckIsRequiredTooltip"
@@ -337,6 +338,18 @@
                 }
             }
         }
+    },
+    {
+        "identifier": "Ceres::ShippingPrivacyCheckWidget",
+        "label": "Widget.shippingPrivacyCheckLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 999,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingPrivacyCheckWidget",
+        "settings": {}
     },
     {
         "identifier": "Ceres::ShippingProfileWidget",
