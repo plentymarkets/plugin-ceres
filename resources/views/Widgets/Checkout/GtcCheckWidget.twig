@@ -1,0 +1,28 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set appearance = widget.settings.appearance.mobile %}
+{% set hideCheckbox = widget.settings.hideCheckbox.mobile %}
+{% set isPreselected = widget.settings.isPreselected.mobile %}
+{% set isRequired = widget.settings.isRequired.mobile %}
+{% set hasCustomText = widget.settings.hasCustomText.mobile %}
+{% set customText = widget.settings.customText.mobile %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.component("Ceres::Checkout.Components.AcceptGtcCheck") }}
+
+<div class="widget widget-gtc-check">
+    <accept-gtc-check 
+        {% if hideCheckbox %}class="pl-0"{% endif %}
+        appearance="{{ appearance }}"
+        :hide-checkbox="{{ hideCheckbox | json_encode }}"
+        {% if not hideCheckbox %}
+            :is-preselected="{{ isPreselected | json_encode }}"
+            :is-required="{{ isRequired | json_encode }}"
+        {% endif %}
+        {% if hasCustomText %}
+            custom-text="{{ customText }}"
+        {% endif %}>
+    </accept-gtc-check>
+
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.OptIns"])) }}
+</div>
