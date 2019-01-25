@@ -16,9 +16,9 @@ Vue.component("checkout", {
             required: true
         },
 
-        deliveryAddressList: Object,
+        deliveryAddressList: Array,
         selectedDeliveryAddress: Number,
-        billingAddressList: Object,
+        billingAddressList: Array,
         selectedBillingAddress: Number
     },
 

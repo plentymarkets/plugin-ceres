@@ -20,7 +20,7 @@ Vue.component("address-select", {
             type: String,
             required: true
         },
-        showError: Object
+        showError: Boolean
     },
 
     data()
@@ -307,7 +307,7 @@ Vue.component("address-select", {
          */
         getCountryName(countryId)
         {
-            return this.$store.localization.getters.getCountryName(countryId);
+            return this.$store.getters.getCountryName(countryId);
         },
 
         setAddressToEditField({ field, value })
