@@ -44,7 +44,7 @@ Vue.component("shipping-privacy-hint-check", {
                 parcelServiceInformation += `<strong>${hint.parcelServiceName}, ${hint.parcelServiceAddress}</strong>`;
             }
 
-            return TranslationService.translate("Ceres::Template.checkoutShippingPrivacyHint", {parcelServiceInformation});
+            return TranslationService.translate("Ceres::Template.checkoutShippingPrivacyHint", { parcelServiceInformation });
         },
 
         ...Vuex.mapState({

@@ -1,14 +1,31 @@
 Vue.component("category-item", {
-
-    delimiters: ["${", "}"],
-
-    template: "#vue-category-item",
-
-    props: [
-        "decimalCount",
-        "itemData",
-        "imageUrlAccessor"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-category-item"
+        },
+        decimalCount:
+        {
+            type: Number,
+            default: 0
+        },
+        imageUrlAccessor:
+        {
+            type: String,
+            default: "urlMiddle"
+        },
+        itemData:
+        {
+            type: Object,
+            required: true
+        },
+        disableCarouselOnMobile:
+        {
+            type: Boolean
+        }
+    },
 
     data()
     {
@@ -43,6 +60,8 @@ Vue.component("category-item", {
 
     created()
     {
+        this.$options.template = this.template;
+
         if (this.itemData.prices.rrp)
         {
             this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;

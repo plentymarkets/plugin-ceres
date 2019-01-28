@@ -22,7 +22,7 @@
             {{ AddToBasket.printVueComponent( "itemData", true ) }}
 
             <div class="thumb-background"></div>
-
+            
             <div class="thumb-image">
                 <div class="square-container">
                     <div class="square-inner main-image">
@@ -32,9 +32,8 @@
                                                     :alt-text="itemData | itemName"
                                                     :title-text="itemData | itemName"
                                                     :item-url="itemData | itemURL"
-                                                    :show-dots="{{ ceresConfig.item.categoryShowDots | json_encode }}"
-                                                    :show-nav="{{ ceresConfig.item.categoryShowNav | json_encode }}"
                                                     :enable-carousel="{{ enableCarousel }}"
+                                                    :disable-carousel-on-mobile="disableCarouselOnMobile"
                                                     ref="categoryImageCarousel">
                             </category-image-carousel>
                         </slot>
@@ -57,16 +56,19 @@
             <slot name="item-details">
                 <div class="thumb-content">
                     <a :href="itemData | itemURL" class="thumb-title small">
-                        ${ itemData | itemName }
+                        ${ itemData | itemName }<!--
+                        --><span v-for="attribute in itemData.groupedAttributes">${ "Ceres::Template.itemGroupedAttribute" | translate(attribute) }</span>
                     </a>
                     <div class="thumb-meta">
+                        <slot name="BeforePrices"></slot>
+
                         <div class="prices">
                             <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
                                 <del class="crossprice" v-if="itemData.prices.specialOffer">
-                                    ${ itemData.prices.default.price.formatted }
+                                    ${ itemData.prices.default.unitPrice.formatted }
                                 </del>
                                 <del class="crossprice" v-else>
-                                    ${ itemData.prices.rrp.price.formatted }
+                                    ${ itemData.prices.rrp.unitPrice.formatted }
                                 </del>
                             </div>
 
@@ -74,12 +76,14 @@
                                 ${ itemData.prices.default.unitPrice.formatted | specialOffer(itemData.prices, "unitPrice", "formatted") } *
                             </div>
                         </div>
+                    </div>
 
-                        <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
-                            <span>${ itemData.unit.content }</span>
-                            <span>${ itemData.unit.names.name }</span>
-                            <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
-                        </div>
+                    <slot name="AfterPrices"></slot>
+
+                    <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
+                        <span>${ itemData.unit.content }</span>
+                        <span>${ itemData.unit.names.name }</span>
+                        <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
                     </div>
 
                     {{ AddToBasket.printVueComponent( "itemData" ) }}

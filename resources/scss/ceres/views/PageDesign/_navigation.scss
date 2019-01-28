@@ -1,11 +1,15 @@
+nav.navbar
+{
+	.container-max
+	{
+		display: block;
+	}
+}
+
 nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
 	display: block;
 	margin-top: 0px;
 }
-
-// li.nav-item.dropdown {
-// 	min-width: 140px;
-// }
 
 .dropdown-menu.dropdown-menu-right {
 	min-width: 100%;
@@ -19,7 +23,7 @@ nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
 // mobile
 $menu-h-sm  			: 100%;
 $menu-w-sm  			: 100%;
-$menu-bg-sm 			: $brand-primary;
+$menu-bg-sm 			: $primary;
 $menu-breadcrumb-bg 	: $gray-darker;
 $menu-breadcrumb-color 	: $white;
 $menu-color-sm 			: $white;
@@ -30,22 +34,22 @@ $menu-font-f-sm  		: $font-family-serif;
 $menu-h-lg  			: 100%;
 $menu-w-lg  			: 100%;
 $menu-bg-lg 			: transparent;
-$menu-color-lg 			: $brand-primary;
-$menu-font-s-lg  		: 1em;
+$menu-color-lg 			: $primary;
+$menu-font-s-lg  		: 1rem;
 $menu-font-f-lg  		: $font-family-serif;
-$menu-li-bg-hover		: $brand-primary;
-$menu-li-color-hover	: $white;
+$menu-li-bg-hover		: $primary;
+$menu-li-color-hover	: color-yiq($primary);
 $menu-li-padding-x      : 1rem;
 $menu-li-padding-y      : 1.3rem;
 // bigmenu
-$menu-big-menu-bg 				: darken($brand-primary,10%);
-$menu-big-menu-li-bg			: transparent;
-$menu-big-menu-li-bg-hover		: $brand-primary;
-$menu-big-menu-li-color			: $white;
-$menu-big-menu-li-color-hover	: $text-color;
+$menu-big-menu-bg 				: darken($primary,10%);
+$menu-big-menu-li-bg			: transparent; //color-yiq($primary, $gray-dark, transparent);
+$menu-big-menu-li-bg-hover		: $primary;
+$menu-big-menu-li-color			: color-yiq($primary);
+$menu-big-menu-li-color-hover	: $body-color;
 // megamenu
 $megamenu-bg 					: $white;
-$megamenu-color-top-btn			: $brand-primary;
+$megamenu-color-top-btn			: $primary;
 $megamenu-color-bottom-btn		: $black;
 $megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
 $megamenu-btn-more 				: $gray;
@@ -156,16 +160,6 @@ body.menu-is-visible {
 					}
 				}
 			}
-			/*&.ddown>a:after {
-				border 			: none;
-				content			: "\f0da";
-				float 			: right;
-				font-family 	: FontAwesome;
-				font-size 		: 1.5rem;
-				height 			: auto;
-				padding 		: 0 .5em 0 1em;
-				width 			: auto;
-			}*/
 		}
 	}
 
@@ -181,7 +175,7 @@ body.menu-is-visible {
 	}
 
 	@include media-breakpoint-up(lg){
-		background-color : transparent;
+		background-color : $menu-bg-lg;
 		display 		 : block!important;
 		opacity 		 : 1;
 		overflow 		 : visible;
@@ -217,8 +211,6 @@ body.menu-is-visible {
 					width 			: auto;
 					max-width 		: 25em;
 					min-width 		: 100%;
-					/*left 			: 50%;
-					transform 		: translateX(-50%);*/
 					word-wrap		: break-word;
 					position 		: absolute;
 
@@ -235,6 +227,10 @@ body.menu-is-visible {
 							background  	: $menu-big-menu-li-bg-hover;
 							color 			: $menu-big-menu-li-color;
 							text-decoration : none;
+						}
+
+						.megamenu &:hover {
+							background: none;
 						}
 
 						>a {
@@ -270,84 +266,75 @@ body.menu-is-visible {
 			}
 		}
 	}
-
 }
 
-nav.navbar.megamenu {
-	@include media-breakpoint-up(lg){ position : relative; }
-	#mainNavbarCollapsable {
+@include media-breakpoint-up(lg){ 
+	nav.navbar.megamenu {
+		position : relative;
 
-		@include media-breakpoint-up(lg){
-			ul.mainmenu {
-				background 		: transparent;
-				display 		: flex;
-				justify-content : flex-end; 
-				width 			: 100%; 
+		#mainNavbarCollapsable ul.mainmenu {
+			background 		: transparent;
+			display 		: flex;
+			justify-content : flex-end; 
+			width 			: 100%; 
 
-				>li {
-					position : static;
+			>li {
+				position : static;
 
-					.no-touch &:hover,
-					.touch &.hover {
-						background : $megamenu-bg; 
-						color 	   : $megamenu-btn-hover !important;  
+				.no-touch &:hover,
+				.touch &.hover {
+					background : transparent !important; 
+					color 	   : $megamenu-btn-hover !important;  
 
-						>ul.collapse { display : block; } 
+					>ul.collapse { display : block; } 
+				}
+
+				>ul.collapse {
+					background-color: $megamenu-bg;
+					column-gap		: .5em;
+					column-rule		: 1px solid #dcdbd7;
+					display			: none;
+					padding			: 1em 0;
+					min-height		: 7em;
+					max-height		: 86vh;  
+					column-count	: 5;
+					overflow-x		: auto;
+					overflow-y		: hidden;
+					column-fill		: balance;
+
+					li {
+						display		: list-item;
+						float		: none;
 					}
 
-					>ul.collapse {
-						background-color: $megamenu-bg;
-						columns 		: 5 228px;
-						column-gap 		: .5em;
-						column-rule 	: 1px solid #dcdbd7;
-						display 		: none;
-						padding 		: 1em;
-						min-height		: 10em;
-						max-height		: 50em;  
+					>li ul.nav-dropdown-inner {
+						background-color	: $megamenu-bg;
+						padding-bottom		: 1em;
 
 						>li {
-							display 	 : inline-block;
-							width 	 	 : 100%; 
-
-							&.level1 { 
-								padding : .5em 1em;
-								>a {								
-									color 		: $megamenu-color-top-btn; 
-									font-weight : bold; 
-								}
-							}
-							.no-touch &:hover,
-							.touch &.hover { 
-								background : $megamenu-bg; 
-							}
-							 .level2 { 
-								 padding : .25em 0!important; 
-								 break-inside: avoid;
-							 }
-							 .level3 { 
-							 	padding : 0 1em .25em 1.4em !important; 
-							 }
-							.bt-more>a { 
-								color 			: $gray;
+							padding	: 0 1.5em;
+							line-height		: 170%;
+							text-align		: left;
+		
+							&.bt-more>a {
+								color 			: $megamenu-btn-more;
 								text-transform 	: lowercase; 
 							}
-							a {
-								background 	: $white;
-								color 		: $megamenu-color-bottom-btn;
-								padding 	: 0;
-								text-align 	: left;
-
-								.no-touch &:hover,
-								.touch &.hover { 
-									background 	: $megamenu-bg; 
-									color 		: $megamenu-btn-hover !important;  
-								}
+							>a {
+								color	: $megamenu-color-bottom-btn;
+								padding	: 0;
 							}
-							ul { background-color : $megamenu-bg; }
 						}
-
+						.level1 { 
+							>a {								
+								color		: $megamenu-color-top-btn; 
+								font-weight	: bold; 
+							}
+						}
+						.level3 { 
+							padding-left	: 2.5em;
+						}
 					}
-
 				}
 			}
 		}
@@ -380,6 +367,7 @@ nav.navbar.megamenu {
 		max-width  : initial;
 		font-size  : .8em;
 		padding    : 0 calc(15px + .5em) 0 15px;
+		display    : block;
 
 		li {
 			display : inline-block;

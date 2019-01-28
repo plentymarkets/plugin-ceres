@@ -115,7 +115,7 @@ Vue.component("address-input-group", {
          */
         emitInputEvent(field, value)
         {
-            this.$emit("input", {field, value});
+            this.$emit("input", { field, value });
         }
     }
 });

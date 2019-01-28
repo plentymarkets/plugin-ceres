@@ -1,0 +1,41 @@
+{
+    "identifier": "Ceres::CollapseWidget",
+    "label": "Widget.collapseLabel",
+    "previewImageURL": "/images/widgets/collapse.svg",
+    "type": "static",
+    "categories": [
+        "text"
+    ],
+    "position": 1300,
+    "widgetClass": "Ceres\\Widgets\\Common\\CollapseWidget",
+    "settings": {
+        "appearance": "@include(optionalAppearance)",
+        "collapseBox": {
+            "type": "vertical",
+            "isList": "[1,]",
+            "options": {
+                "name": "Widget.collapseBoxLabel"
+            },
+            "children": {
+                "headline": {
+                    "type": "text",
+                    "required": true,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.collapseBoxHeadlineLabel",
+                        "tooltipText": "Widget.collapseBoxHeadlineTooltip"
+                    }
+                },
+                "text": {
+                    "type": "codeEditor",
+                    "required": true,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.collapseBoxTextareaLabel",
+                        "tooltipText": "Widget.collapseBoxTextareaTooltip"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 
 Vue.component("item-store-special", {
@@ -22,10 +22,10 @@ Vue.component("item-store-special", {
             label: "",
             tagClasses:
             {
-                1: "tag-offer bg-danger",
-                2: "tag-new bg-primary",
-                3: "tag-top bg-success",
-                default: "bg-success"
+                1: "badge-offer badge-danger",
+                2: "badge-new badge-primary",
+                3: "badge-top badge-success",
+                default: "badge-success"
             },
             labels:
             {
@@ -67,13 +67,18 @@ Vue.component("item-store-special", {
                 return this.getPercentageSale();
             }
 
+            if (isNullOrUndefined(this.storeSpecial))
+            {
+                return "";
+            }
+
             return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
         },
 
         getPercentageSale()
         {
             // eslint-disable-next-line
-            let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value ) * -100;
+            let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value ) * -100;
 
             if (percent < 0)
             {

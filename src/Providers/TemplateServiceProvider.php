@@ -47,6 +47,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],                 // provide template to use for single items
         'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],                       // provide template to use for basket
         'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],               // provide template to use for checkout
+        'tpl.category.checkout'             => ['Checkout.CheckoutCategory',              CategoryContext::class],               // provide template to use for container categories
         'tpl.my-account'                    => ['MyAccount.MyAccount',                    GlobalContext::class],                 // provide template to use for my-account
         'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],          // provide template to use for confirmation
         'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],                      // provide template to use for login
@@ -65,7 +66,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.terms-conditions'              => ['StaticPages.TermsAndConditions',         GlobalContext::class],      // provide template to use for terms and conditions
         'tpl.item-not-found'                => ['StaticPages.ItemNotFound',               GlobalContext::class],            // provide template to use for item not found
         'tpl.page-not-found'                => ['StaticPages.PageNotFound',               GlobalContext::class],       // provide template to use for page not found
-        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut', GlobalContext::class]
+        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class]
     ];
 
     public function register(){

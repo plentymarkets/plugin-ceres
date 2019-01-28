@@ -1,5 +1,5 @@
 {
-    "version"           : "2.17.1",
+    "version"           : "3.0.1",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -299,6 +299,16 @@
             "description"   : "Add content after the item in the Items list of the shopping cart."
         },
         {
+            "key"           : "Basket.BeforeBasketTotals",
+            "name"          : "Shopping cart: Before basket totals",
+            "description"   : "Add content before the basket totals in the shopping cart."
+        },
+        {
+            "key"           : "Basket.AfterBasketTotals",
+            "name"          : "Shopping cart: After basket totals",
+            "description"   : "Add content after the basket totals in the shopping cart."
+        },
+        {
             "key"           : "Basket.BeforeCoupon",
             "name"          : "Shopping cart: Before the coupon input",
             "description"   : "Add content before the Coupon input field in the shopping cart."
@@ -317,6 +327,16 @@
             "key"           : "Basket.ExtendOverlayButtons",
             "name"          : "Shopping cart overlay: Extend buttons",
             "description"   : "Add additional content to the 'add to basket overlay' buttons."
+        },
+        {
+            "key"           : "BasketPreview.BeforeBasketTotals",
+            "name"          : "Shopping cart preview: Before basket totals",
+            "description"   : "Add content before the basket totals in the shopping cart preview."
+        },
+        {
+            "key"           : "BasketPreview.AfterBasketTotals",
+            "name"          : "Shopping cart preview: After basket totals",
+            "description"   : "Add content after the basket totals in the shopping cart preview."
         },
         {
             "key"           : "BasketPreview.BeforeCheckoutButton",

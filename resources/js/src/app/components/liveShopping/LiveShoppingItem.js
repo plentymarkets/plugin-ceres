@@ -1,7 +1,7 @@
-import {isNullOrUndefined}from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "services/TranslationService";
 
-const TimeEnum = Object.freeze({past: 1, now: 2, future: 3});
+const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
 Vue.component("live-shopping-item", {
     props: {
@@ -69,7 +69,7 @@ Vue.component("live-shopping-item", {
             {
                 if (this.isActive)
                 {
-                    return {id: 1};
+                    return { id: 1 };
                 }
 
                 const offerTime = this.whenIsCurrentOffer();
@@ -88,7 +88,7 @@ Vue.component("live-shopping-item", {
                     name = TranslationService.translate("Ceres::Template.liveShoppingOfferSoldOut");
                 }
 
-                return {id: 2, names: {name}};
+                return { id: 2, names: { name } };
             }
 
             return null;

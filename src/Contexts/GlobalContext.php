@@ -94,7 +94,6 @@ class GlobalContext implements ContextInterface
             $this->categoryBreadcrumbs = $categoryService->getHierarchy();
             $crossSellingService->setType($this->ceresConfig->itemLists->crossSellingType);
             $crossSellingService->setSorting($this->ceresConfig->itemLists->crossSellingSorting);
-            $itemLastSeenService->setLastSeenMaxCount($this->ceresConfig->itemLists->lastSeenNumber);
         }
 
         $this->categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6, $customerService->getContactClassId());

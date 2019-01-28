@@ -1,5 +1,10 @@
 .widget-image-box
 {
+    @include media-breakpoint-only(xs) {
+        padding-bottom: 0 !important;
+        min-height: 10rem;
+    }
+
     > img
     {
         position: absolute;
@@ -37,12 +42,19 @@
     &.widget-image-box-fullwidth
     {
         > .widget-inner
-        {
+        {   
+            @include media-breakpoint-only(xs) {
+                position: relative;
+                min-height: 12rem;
+                padding-top: 2rem;
+            }
+
             .widget-caption
             {
                 width: 100%;
                 display: flex;
                 align-items: center;
+                padding: 1rem;
 
                 h2, .h2
                 {
@@ -50,7 +62,11 @@
                     width: 100%;
                     text-transform: uppercase;
 
-                    @include media-breakpoint-up(md)
+                    @include media-breakpoint-up(sm)
+                    {
+                        font-size: 3rem;
+                    }
+                    @include media-breakpoint-up(lg)
                     {
                         font-size: 4rem;
                     }
@@ -65,6 +81,11 @@
         {
             align-items: flex-end;
 
+            @include media-breakpoint-only(xs) {
+                position: relative;
+                padding-top: 14%;
+            }
+
             .widget-caption
             {
                 padding: 1.5rem;
@@ -76,8 +97,18 @@
     {
         > .widget-inner
         {
+            @include media-breakpoint-only(xs) {
+                position: relative;
+                padding: 25% 0 0 0;
+            }
+
             .widget-caption
             {
+                @include media-breakpoint-only(xs) {
+                    position: relative;
+                    width: 100%;
+                }
+
                 position: absolute;
                 left: 0;
                 right: 0;
@@ -103,12 +134,12 @@
     {
         .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-primary, .8) );
+            @include widget-bg-variant( rgba($primary, .8) );
         }
 
         a[href].widget-inner:hover .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-primary, .9) );
+            @include widget-bg-variant( rgba($primary, .9) );
         }
     }
 
@@ -116,12 +147,12 @@
     {
         .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-secondary, .8) );
+            @include widget-bg-variant( rgba($secondary, .8) );
         }
 
         a[href].widget-inner:hover .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-secondary, .9) );
+            @include widget-bg-variant( rgba($secondary, .9) );
         }
     }
 
@@ -129,12 +160,12 @@
     {
         .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-success, .8) );
+            @include widget-bg-variant( rgba($success, .8) );
         }
 
         a[href].widget-inner:hover .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-success, .9) );
+            @include widget-bg-variant( rgba($success, .9) );
         }
     }
 
@@ -142,12 +173,12 @@
     {
         .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-info, .8) );
+            @include widget-bg-variant( rgba($info, .8) );
         }
 
         a[href].widget-inner:hover .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-info, .9) );
+            @include widget-bg-variant( rgba($info, .9) );
         }
     }
 
@@ -155,12 +186,12 @@
     {
         .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-warning, .8) );
+            @include widget-bg-variant( rgba($warning, .8) );
         }
 
         a[href].widget-inner:hover .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-warning, .9) );
+            @include widget-bg-variant( rgba($warning, .9) );
         }
     }
 
@@ -168,28 +199,18 @@
     {
         .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-danger, .8) );
+            @include widget-bg-variant( rgba($danger, .8) );
         }
 
         a[href].widget-inner:hover .widget-caption
         {
-            @include widget-bg-variant( rgba($brand-danger, .9) );
+            @include widget-bg-variant( rgba($danger, .9) );
         }
     }
+}
 
-    &.widget-inverse
-    {
-        .widget-caption
-        {
-            @include widget-bg-variant( rgba($brand-inverse, .8) );
-        }
-
-        a[href].widget-inner:hover .widget-caption
-        {
-            @include widget-bg-variant( rgba($brand-inverse, .9) );
-        }
-    }
-
+.widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
+    font-size: 2rem;
 }
 
 /* Compatibility for IE */

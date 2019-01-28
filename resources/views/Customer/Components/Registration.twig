@@ -1,3 +1,5 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 <script type="x/template" id="vue-registration">
     <div>
@@ -19,7 +21,7 @@
                             <div slot="title">
                                 {{ trans("Ceres::Template.regPasswordHintTitle") }}
                             </div>
-                            <ul slot="content" class="p-l-1">
+                            <ul slot="content" class="pl-3">
                                 <li>{{ trans("Ceres::Template.regPasswordHintLength") }}</li>
                                 <li>{{ trans("Ceres::Template.regPasswordHintDigit") }}</li>
                                 <li>{{ trans("Ceres::Template.regPasswordHintChar") }}</li>
@@ -38,13 +40,15 @@
                     </div>
                 </div>
 
-                <address-input-group
-                    template="#vue-address-input-group"
-                    v-if="!isSimpleRegistration"
-                    address-type="1"
-                    :value="billingAddress"
-                    @input="setAddressDataField($event)">
-                </address-input-group>
+                <div class="col-12">
+                    <address-input-group
+                        template="#vue-address-input-group"
+                        v-if="!isSimpleRegistration"
+                        address-type="1"
+                        :value="billingAddress"
+                        @input="setAddressDataField($event)">
+                    </address-input-group>
+                </div>
             </div>
         </div>
         <div class="modal-footer">

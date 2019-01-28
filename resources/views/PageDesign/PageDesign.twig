@@ -11,9 +11,10 @@
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
 
 {# TODO: remove if shop builder pages can be rebuild by migrations #}
-{{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
-{{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
+{{ component( "Ceres::ItemList.Components.CategoryItem") }}
+{{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
+{{ component( "Ceres::PageDesign.Components.Carousel" ) }}
 
 {% if request.get('isContentBuilder') == 1 %}
     {% include "Ceres::Widgets.WidgetComponents" %}
@@ -89,8 +90,8 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <login template="#vue-login" modal-element="login-modal-wrapper"></login>
                     </div>
@@ -105,25 +106,27 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <div class="modal-title h3">
                                 {{ trans("Ceres::Template.regCreateAccount") }}
 
-                                <popper v-cloak class="pull-right m-r-1">
-                                    <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
-                                        <i class="fa fa-info"></i>
-                                    </button>
-                                    <div slot="title">
-                                        {{ trans("Ceres::Template.regContactInformations") }}
-                                    </div>
-                                    <ul slot="content" class='p-l-1'>
-                                        <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                                        <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                                        <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-                                    </ul>
-                                </popper>
                             </div>
+
+                            <popper v-cloak class="ml-auto">
+                                <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
+                                    <i class="fa fa-info"></i>
+                                </button>
+                                <div slot="title">
+                                    {{ trans("Ceres::Template.regContactInformations") }}
+                                </div>
+                                <ul slot="content" class='pl-3'>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                    <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                </ul>
+                            </popper>
+
+                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
                     </div>
@@ -146,8 +149,8 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
                             {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
@@ -198,6 +201,8 @@
 {{ get_filtered_tags() }}
 
 <script>
+    vueEventHub = new Vue();
+
     {% if ceresConfig.log.checkSyntax %}
         var rootElement = document.getElementById("vue-app");
         rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, '');
@@ -219,18 +224,18 @@
         });
     {% endif %}
 
-    var vueEventHub = new Vue();
 
     (function($) {
         
         var header = document.getElementById('page-header');
+        var headerLoaded = false;
         var unfixedElements = [];
 
         if ( !!header )
         {
             function calculateBodyOffset()
             {
-                if ( header.classList.contains('pos-f-t'))
+                if (headerLoaded && header.classList.contains('fixed-top'))
                 {
                     var bodyOffset = 0;
                     // Get current header with children
@@ -262,24 +267,25 @@
 
             function scrollUnfixedElements()
             {
-                var scrollTop = window.scrollY;
-                unfixedElements.forEach(function(unfixed)
+                if (headerLoaded)
                 {
-                    var spacingTop = unfixed.height - scrollTop;
-                    if ( !!unfixed.element.previousElementSibling )
+                    var scrollTop = window.scrollY;
+                    unfixedElements.forEach(function(unfixed)
                     {
-                        unfixed.element.previousElementSibling.style.marginBottom = (spacingTop >= 0 ? spacingTop : 0) + 'px'
-                    }
-                    else
-                    {
-                        unfixed.element.parentElement.style.paddingTop = (spacingTop >= 0 ? spacingTop : 0) + 'px';
-                    }
-                    unfixed.element.style.position = 'absolute';
-                    unfixed.element.style.top = unfixed.top - scrollTop + 'px';
-                });
+                        var spacingTop = unfixed.height - scrollTop;
+                        if ( !!unfixed.element.previousElementSibling )
+                        {
+                            unfixed.element.previousElementSibling.style.marginBottom = (spacingTop >= 0 ? spacingTop : 0) + 'px'
+                        }
+                        else
+                        {
+                            unfixed.element.parentElement.style.paddingTop = (spacingTop >= 0 ? spacingTop : 0) + 'px';
+                        }
+                        unfixed.element.style.position = 'absolute';
+                        unfixed.element.style.top = unfixed.top - scrollTop + 'px';
+                    });
+                }
             }
-
-            getUnfixedElements();
             
             $(window).scroll(scrollUnfixedElements);
 
@@ -295,20 +301,28 @@
             $(document).on('shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate', function()
             {
                 calculateBodyOffset();
+                $('.owl-carousel').trigger('refresh.owl.carousel');
             });
 
             var headerImages = header.querySelectorAll("img");
 
-            if(headerImages.length)
-            {
-                for (var img in headerImages)
+            Promise.all(
+                Array.prototype.slice.call(headerImages).map(function(headerImage)
                 {
-                    headerImages[img].onload = function()
+                    return new Promise(function(resolve)
                     {
-                        calculateBodyOffset();
-                    }
-                }
-            }
+                        headerImage.onload = function()
+                        {
+                            resolve();
+                        }
+                    });
+                })
+            ).then(function()
+            {
+                headerLoaded = true;
+                getUnfixedElements();
+                calculateBodyOffset();
+            });
 
             calculateBodyOffset();
         }
@@ -326,6 +340,11 @@
                 $(elem).click(function(event) {
                     event.preventDefault();
                 });
+            });
+
+            $(component.$el).find('.owl-carousel').on('resized.owl.carousel', function()
+            {
+                window.dispatchEvent(new Event('resize'));
             });
         });
 

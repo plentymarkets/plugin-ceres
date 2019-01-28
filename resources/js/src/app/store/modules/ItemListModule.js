@@ -1,5 +1,6 @@
 import ApiService from "services/ApiService";
-import {updateItemListUrlParams}from "services/ItemListUrlService";
+import { getItemListUrlParams } from "services/ItemListUrlService";
+import { navigateToParams } from "services/UrlService";
 import TranslationService from "services/TranslationService";
 
 const state =
@@ -22,7 +23,7 @@ const mutations =
             state.facets = facets || [];
         },
 
-        setPriceFacet(state, {priceMin, priceMax})
+        setPriceFacet(state, { priceMin, priceMax })
         {
             const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
             const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
@@ -101,6 +102,11 @@ const mutations =
             }
         },
 
+        resetAllSelectedFacets(state)
+        {
+            state.selectedFacets = [];
+        },
+
         setItemListPage(state, page)
         {
             state.page = page;
@@ -113,7 +119,7 @@ const mutations =
 
         setItemsPerPage(state, itemsPerPage)
         {
-            state.itemsPerPage = itemsPerPage;
+            state.itemsPerPage = parseInt(itemsPerPage);
         },
 
         setIsItemListLoading(state, isLoading)
@@ -139,7 +145,7 @@ const mutations =
 
 const actions =
     {
-        selectFacet({dispatch, commit}, facetValue)
+        selectFacet({ dispatch, commit }, { facetValue })
         {
             if (facetValue.id === "price")
             {
@@ -151,89 +157,97 @@ const actions =
             }
 
             commit("setItemListPage", 1);
-
-            dispatch("retrieveItemList");
+            dispatch("loadFacets");
         },
 
-        selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
+        selectPriceFacet({ dispatch, commit }, { priceMin, priceMax })
         {
-            commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+            commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
             commit("setPriceFacetTag");
             commit("setItemListPage", 1);
-
-            dispatch("retrieveItemList");
+            dispatch("loadFacets");
         },
 
-        selectItemListPage({dispatch, commit}, page)
+        selectItemListPage({ dispatch, commit }, page)
         {
             commit("setItemListPage", page);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
-        selectItemListSorting({dispatch, commit}, sorting)
+        selectItemListSorting({ dispatch, commit }, sorting)
         {
             commit("setItemListSorting", sorting);
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
-        selectItemsPerPage({dispatch, commit}, itemsPerPage)
+        selectItemsPerPage({ dispatch, commit }, itemsPerPage)
         {
             commit("setItemsPerPage", itemsPerPage);
             commit("setItemListPage", 1);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
-        searchItems({dispatch, commit}, searchString)
+        searchItems({ dispatch, commit }, searchString)
         {
             commit("setItemListSearchString", searchString);
             commit("setItemListPage", 1);
             commit("setSelectedFacetsByIds", []);
 
-            dispatch("retrieveItemList");
+            dispatch("loadItemList");
         },
 
-        retrieveItemList({state, dispatch, commit, getters, rootState})
+        loadFacets({ commit, getters, rootState })
         {
+            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
+            const params = {
+                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
+                facets: getters.selectedFacetIdsForUrl.toString(),
+                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
+                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+                query: state.searchString
+            };
+
+            commit("setIsItemListLoading", true);
+
             return new Promise((resolve, reject) =>
             {
-                const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
-
-                const searchParams =
-                    {
-                        query               : state.searchString,
-                        items               : state.itemsPerPage,
-                        sorting             : state.sorting,
-                        page                : state.page,
-                        facets              : getters.selectedFacetIdsForUrl.toString(),
-                        priceMin            : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-                        priceMax            : selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-                        categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                        template            : "Ceres::ItemList.ItemListView"
-                    };
-                const url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
-
-                updateItemListUrlParams(searchParams);
-                commit("setIsItemListLoading", true);
-
-                ApiService.get(url, searchParams)
+                ApiService.get("/rest/io/facet", params)
                     .done(data =>
                     {
-                        commit("setItemListItems", data.itemList.documents);
-                        commit("setItemListTotalItems", data.itemList.total);
                         commit("setFacets", data.facets);
                         commit("setIsItemListLoading", false);
+
                         resolve(data);
                     })
                     .fail(error =>
                     {
                         commit("setIsItemListLoading", false);
+
                         reject(error);
                     });
             });
+        },
+
+        loadItemList({ state, commit, getters })
+        {
+            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
+            const searchParams =
+                {
+                    query               : state.searchString,
+                    items               : parseInt(state.itemsPerPage),
+                    sorting             : state.sorting,
+                    page                : state.page,
+                    facets              : getters.selectedFacetIdsForUrl.toString(),
+                    priceMin            : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+                    priceMax            : selectedPriceFacet ? selectedPriceFacet.priceMax : ""
+                };
+
+            commit("setIsItemListLoading", true);
+            navigateToParams(getItemListUrlParams(searchParams));
         }
     };
 
