@@ -14,7 +14,8 @@ Vue.component("checkout", {
         },
         initialCheckout:
         {
-            type: Object
+            type: Object,
+            required: true
         }
     },
 

@@ -18563,7 +18563,8 @@ Vue.component("checkout", {
             default: "#vue-checkout"
         },
         initialCheckout: {
-            type: Object
+            type: Object,
+            required: true
         }
     },
 

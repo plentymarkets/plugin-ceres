@@ -1,3 +1,23 @@
+
+
+{% set marginBottom = widget.settings.marginBottom.mobile %}
+{% set marginBottomUnit = widget.settings.customMarginUnitBottom.mobile %}
+{% set marginBottomValue = widget.settings.customMarginValueBottom.mobile %}
+
+{% set marginTop = widget.settings.marginTop.mobile %}
+{% set marginTopUnit = widget.settings.customMarginUnitTop.mobile %}
+{% set marginTopValue = widget.settings.customMarginValueTop.mobile %}
+
 {% if isPreview %}<div class="widget-editable-min-height">{% endif %}
-    <hr class="my-4">
+    {% if marginBottom == 'custom-margin' and marginTop == 'custom-margin' %}
+        <hr style="margin-top:{{ marginTopValue }}{{ marginTopUnit }}; margin-bottom:{{ marginBottomValue }}{{ marginBottomUnit }}">
+    {% elseif marginBottom == 'custom-margin' and marginTop != 'custom-margin'%}
+        <hr class="mt-{{ marginTop }}" style="margin-top:{{ marginBottomValue }}{{ marginBottomUnit }}">
+    {% elseif marginBottom != 'custom-margin' and marginTop == 'custom-margin'%}
+        <hr class="mb-{{ marginBottom }}" style="margin-top:{{ marginTopValue }}{{ marginTopUnit }}">
+    {% else %}
+        <hr class="mt-{{ marginTop }} mb-{{ marginBottom }}">
+    {% endif %}
 {% if isPreview %}</div>{% endif %}
+
+
