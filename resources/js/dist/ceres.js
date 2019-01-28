@@ -25498,8 +25498,9 @@ var stickInParent = function stickInParent(el, minWidth, isActive) {
     if (activeState && !currentActiveState) {
         var $element = $(el);
         var headHeight = $("#page-header").height();
+        var offset = parseInt(el.dataset.stickyOffset) || 0;
 
-        if ($element.stick_in_parent({ offset_top: headHeight + 10 })) {
+        if ($element.stick_in_parent({ offset_top: headHeight + offset })) {
             el.dataset.isSticky = true;
         }
     } else if (!activeState && currentActiveState) {
