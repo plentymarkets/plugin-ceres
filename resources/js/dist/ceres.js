@@ -19119,7 +19119,7 @@ Vue.component("shipping-privacy-hint-check", {
             if (this.shippingPrivacyHintAccepted && value.parcelServiceId !== oldValue.parcelServiceId) {
                 this.setValue(false);
 
-                $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+                $(this.$refs.formCheck).fadeTo(100, 0.1).fadeTo(400, 1.0);
 
                 NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
             } else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint) {
