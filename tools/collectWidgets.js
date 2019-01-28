@@ -35,7 +35,7 @@ globFiles.forEach(function(globFile)
     globals[key] = readJsonFile(globFile);
 });
 
-function injectGlobals(widgetSettings)
+function injectGlobals(widgetSettings, pathAlreadyPassed = "", level = 0)
 {
     var match;
 
@@ -47,12 +47,34 @@ function injectGlobals(widgetSettings)
             let basename = path.basename(match[1], ".inc.json");
             if ( globals.hasOwnProperty(basename) )
             {
-                widgetSettings[key] = globals[basename];
+                if (level === 0)
+                {
+                    widgetSettings[key] = globals[basename];
+                }
+                else
+                {
+                    const currentPath = pathAlreadyPassed + "." + key;
+                    let currentField = globals[basename];
+
+                    for (const splitOfPath of currentPath.split("."))
+                    {
+                        if (splitOfPath.length)
+                        {
+                            currentField = currentField[splitOfPath];
+                        }
+                    }
+
+                    widgetSettings[key] = currentField;
+                }
             }
         }
         else if (!!widgetSettings[key].children)
         {
             widgetSettings[key].children = injectGlobals(widgetSettings[key].children);
+        }
+        else if (typeof widgetSettings[key] === typeof Object())
+        {
+            widgetSettings[key] = injectGlobals(widgetSettings[key], level > 0 ? pathAlreadyPassed + "" + key : "", level + 1);
         }
     });
 
