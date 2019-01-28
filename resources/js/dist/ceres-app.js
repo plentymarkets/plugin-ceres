@@ -18140,12 +18140,30 @@ Vue.component("accept-gtc-check", {
         template: {
             type: String,
             default: "#vue-accept-gtc-check"
+        },
+        appearance: {
+            type: String,
+            default: "primary"
+        },
+        hideCheckbox: {
+            type: Boolean
+        },
+        isPreselected: {
+            type: Boolean
+        },
+        isRequired: {
+            type: Boolean,
+            default: true
+        },
+        customText: {
+            type: String,
+            default: ""
         }
     },
 
     data: function data() {
         return {
-            isChecked: false
+            isChecked: this.isPreselected
         };
     },
 
@@ -18158,7 +18176,12 @@ Vue.component("accept-gtc-check", {
 
     created: function created() {
         this.$options.template = this.template;
-        this.$store.commit("setGtcValidator", this.validate);
+
+        if (this.hideCheckbox) {
+            this.isChecked = true;
+        } else if (this.isRequired) {
+            this.$store.commit("setGtcValidator", this.validate);
+        }
     },
 
 
@@ -18738,7 +18761,7 @@ Vue.component("shipping-privacy-hint-check", {
             if (this.shippingPrivacyHintAccepted && value.parcelServiceId !== oldValue.parcelServiceId) {
                 this.setValue(false);
 
-                $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+                $(this.$refs.formCheck).fadeTo(100, 0.1).fadeTo(400, 1.0);
 
                 NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
             } else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint) {

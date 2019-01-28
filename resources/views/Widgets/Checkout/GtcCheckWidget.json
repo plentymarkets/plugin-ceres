@@ -1,0 +1,54 @@
+{
+    "identifier": "Ceres::GtcCheckWidget",
+    "label": "Widget.gtcCheckLabel",
+    "previewImageURL": "",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 999,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\GtcCheckWidget",
+    "settings": {
+        "appearance": "@include(appearance)",
+        "hideCheckbox": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.gtcCheckHideCheckboxLabel",
+                "tooltip": "Widget.gtcCheckHideCheckboxTooltip"
+            }
+        },
+        "isPreselected": {
+            "type": "checkbox",
+            "isVisible": "hideCheckbox !== true",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.gtcCheckIsPreselectedLabel",
+                "tooltip": "Widget.gtcCheckIsPreselectedTooltip"
+            }
+        },
+        "isRequired": {
+            "type": "checkbox",
+            "isVisible": "hideCheckbox !== true",
+            "defaultValue": true,
+            "options": {
+                "name": "Widget.gtcCheckIsRequiredLabel",
+                "tooltip": "Widget.gtcCheckIsRequiredTooltip"
+            }
+        },
+        "hasCustomText": {
+            "type": "checkbox",
+            "options": {
+                "name": "Widget.gtcCheckHasCustomTextLabel",
+                "tooltip": "Widget.gtcCheckHasCustomTextTooltip"
+            }            
+        },
+        "customText": {
+            "type": "text",
+            "isVisible": "hasCustomText === true",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.gtcCheckCustomTextLabel",
+                "tooltip": "Widget.gtcCheckCustomTextTooltip"
+            }
+        }
+    }
+}
