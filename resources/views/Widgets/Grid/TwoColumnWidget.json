@@ -29,6 +29,16 @@
                         "value": "oneToTwo",
                         "caption": "Widget.gridTwoColumnLayoutOneToTwo",
                         "position": 2
+                    },
+                    {
+                        "value": "fiveToSeven",
+                        "caption": "Widget.gridTwoColumnLayoutFiveToSeven",
+                        "position": 3
+                    },
+                    {
+                        "value": "SevenToFive",
+                        "caption": "Widget.gridTwoColumnLayoutSevenToFive",
+                        "position": 4
                     }
                 ]
             }
