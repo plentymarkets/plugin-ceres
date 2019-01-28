@@ -1,5 +1,5 @@
-<div class="widget widget-sticky">
-    <div class="widget-inner" v-stick-in-parent{% if isPreview %} data-builder-child-container="children"{% endif %}>
-        {{ children.children | raw }}
+<div class="widget widget-sticky" v-stick-in-parent>
+    <div class="widget-inner"{% if isPreview %} data-builder-child-container="sticky"{% endif %}>
+        {{ children.sticky | raw }}
     </div>
 </div>

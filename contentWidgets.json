@@ -1392,8 +1392,8 @@
     },
     {
         "identifier": "Ceres::StickyContainerWidget",
-        "label": "Widget.gridStickyContainerLabel",
-        "previewImageURL": "/images/widgets/grid-4-col.svg",
+        "label": "Widget.stickyContainerLabel",
+        "previewImageURL": "",
         "type": "structure",
         "categories": [
             "structure"
