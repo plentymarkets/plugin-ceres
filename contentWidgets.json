@@ -467,7 +467,7 @@
                         },
                         {
                             "value": "manufacturer",
-                            "caption": "Widget.itemListManufacturer",
+                            "caption": "Widget.itemListListTypeManufacturer",
                             "position": 3
                         }
                     ]
@@ -475,11 +475,11 @@
             },
             "manufacturerId": {
                 "type": "manufacturer",
-                "required": true,
+                "required": false,
                 "isVisible": "listType === 'manufacturer'",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.itemListManufacturer",
+                    "name": "Widget.itemListListTypeManufacturer",
                     "tooltipText": "Widget.itemListManufacturerTooltip"
                 }
             },

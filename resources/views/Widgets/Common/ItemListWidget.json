@@ -69,7 +69,7 @@
                     },
                     {
                         "value": "manufacturer",
-                        "caption": "Widget.itemListManufacturer",
+                        "caption": "Widget.itemListListTypeManufacturer",
                         "position": 3
                     }
                 ]
@@ -82,7 +82,7 @@
             "isVisible": "listType === 'manufacturer'",
             "defaultValue": "",
             "options": {
-                "name": "Widget.itemListManufacturer",
+                "name": "Widget.itemListListTypeManufacturer",
                 "tooltipText": "Widget.itemListManufacturerTooltip"
             }
         },
