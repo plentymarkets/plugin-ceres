@@ -24843,6 +24843,10 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   }
 }
 
+.widget-sticky {
+  height: 100%;
+}
+
 .widget {
   margin-bottom: 2rem;
 }

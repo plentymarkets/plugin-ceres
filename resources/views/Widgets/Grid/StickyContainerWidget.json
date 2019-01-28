@@ -1,0 +1,10 @@
+{
+    "identifier": "Ceres::StickyContainerWidget",
+    "label": "Widget.stickyContainerLabel",
+    "previewImageURL": "/images/widgets/grid-4-col.svg",
+    "type": "structure",
+    "categories": ["structure"],
+    "position": 300,
+    "widgetClass": "Ceres\\Widgets\\Grid\\StickyContainerWidget",
+    "settings": {}
+}
