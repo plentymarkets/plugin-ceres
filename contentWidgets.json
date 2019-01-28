@@ -1391,6 +1391,18 @@
         "settings": {}
     },
     {
+        "identifier": "Ceres::StickyContainerWidget",
+        "label": "Widget.stickyContainerLabel",
+        "previewImageURL": "",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
+        "position": 300,
+        "widgetClass": "Ceres\\Widgets\\Grid\\StickyContainerWidget",
+        "settings": {}
+    },
+    {
         "identifier": "Ceres::ThreeColumnWidget",
         "label": "Widget.gridThreeColumnLabel",
         "previewImageURL": "/images/widgets/grid-3-col.svg",
