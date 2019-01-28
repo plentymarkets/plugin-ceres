@@ -12,7 +12,7 @@
     {% if marginBottom == 'custom-margin' and marginTop == 'custom-margin' %}
         <hr style="margin-top:{{ marginTopValue }}{{ marginTopUnit }}; margin-bottom:{{ marginBottomValue }}{{ marginBottomUnit }}">
     {% elseif marginBottom == 'custom-margin' and marginTop != 'custom-margin'%}
-        <hr class="mt-{{ marginTop }}" style="margin-top:{{ marginBottomValue }}{{ marginBottomUnit }}">
+        <hr class="mt-{{ marginTop }}" style="margin-bottom:{{ marginBottomValue }}{{ marginBottomUnit }}">
     {% elseif marginBottom != 'custom-margin' and marginTop == 'custom-margin'%}
         <hr class="mb-{{ marginBottom }}" style="margin-top:{{ marginTopValue }}{{ marginTopUnit }}">
     {% else %}
