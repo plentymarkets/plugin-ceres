@@ -1,23 +1,31 @@
 
 
 {% set marginBottom = widget.settings.marginBottom.mobile %}
-{% set marginBottomUnit = widget.settings.customMarginUnitBottom.mobile %}
-{% set marginBottomValue = widget.settings.customMarginValueBottom.mobile %}
+{% set marginBottomInlineStyle = widget.settings.customMarginValueBottom.mobile ~ widget.settings.customMarginUnitBottom.mobile %}
 
 {% set marginTop = widget.settings.marginTop.mobile %}
-{% set marginTopUnit = widget.settings.customMarginUnitTop.mobile %}
-{% set marginTopValue = widget.settings.customMarginValueTop.mobile %}
+{% set marginTopInlineStyle = widget.settings.customMarginValueTop.mobile ~ widget.settings.customMarginUnitTop.mobile %}
 
 {% if isPreview %}<div class="widget-editable-min-height">{% endif %}
+    {# When both selects contain custom values #}
     {% if marginBottom == 'custom-margin' and marginTop == 'custom-margin' %}
-        <hr style="margin-top:{{ marginTopValue }}{{ marginTopUnit }}; margin-bottom:{{ marginBottomValue }}{{ marginBottomUnit }}">
+        <hr style="margin-top:{{ marginTopInlineStyle }}; margin-bottom:{{ marginBottomInlineStyle }}">
+    {# When one of both selects contains a custom value #}
     {% elseif marginBottom == 'custom-margin' and marginTop != 'custom-margin'%}
-        <hr class="mt-{{ marginTop }}" style="margin-bottom:{{ marginBottomValue }}{{ marginBottomUnit }}">
+        <hr class="mt-{{ marginTop }}" style="margin-bottom:{{ marginBottomInlineStyle }}">
+    {# When one of both selects contains a custom value #}
     {% elseif marginBottom != 'custom-margin' and marginTop == 'custom-margin'%}
-        <hr class="mb-{{ marginBottom }}" style="margin-top:{{ marginTopValue }}{{ marginTopUnit }}">
+        <hr class="mb-{{ marginBottom }}" style="margin-top:{{ marginTopInlineStyle }}">
+    {# When both selects contain standard Bootstrap Spacer Values #}
     {% else %}
         <hr class="mt-{{ marginTop }} mb-{{ marginBottom }}">
     {% endif %}
 {% if isPreview %}</div>{% endif %}
+
+
+
+
+
+
 
 

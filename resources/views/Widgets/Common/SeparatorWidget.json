@@ -9,9 +9,9 @@
     "settings": {
         "marginTop": {
             "type": "select",
+            "defaultValue": 4,
             "options": {
                 "name": "Widget.seperatorMarginTop",
-                "defaultValue": 4,
                 "listBoxValues": [
                     {
                         "value": 0,
@@ -40,44 +40,40 @@
                     {
                         "value": "custom-margin",
                         "caption": "Widget.seperatorMarginCustom"
-                    }
-                ]
-            }
-        },
-        "customMarginUnitTop": {
-            "name": "Widget.seperator",
-            "type": "select",
-            "isVisible": "marginTop === 'custom-margin'",
-            "defaultValue": "px",
-            "options": {
-                "name": "Widget.seperatorCustomUnit",
-                "defaultValue": "px",
-                "listBoxValues": [
-                    {
-                        "value": "px",
-                        "caption": "Widget.widgetUnitPx"
-                    },
-                    {
-                        "value": "rem",
-                        "caption": "Widget.widgetUnitRem"
                     }
                 ]
             }
         },
         "customMarginValueTop": {
-            "name": "Widget.seperatorMarginValue",
             "type": "number",
             "isVisible": "marginTop === 'custom-margin'",
-            "required": false,
             "options": {
                 "name": "Widget.seperatorMarginValue"
             }
         },
+        "customMarginUnitTop": {
+            "type": "select",
+            "isVisible": "marginTop === 'custom-margin'",
+            "defaultValue": "px",
+            "options": {
+                "name": "Widget.seperatorCustomUnit",
+                "listBoxValues": [
+                    {
+                        "value": "px",
+                        "caption": "Widget.widgetUnitPx"
+                    },
+                    {
+                        "value": "rem",
+                        "caption": "Widget.widgetUnitRem"
+                    }
+                ]
+            }
+        },
         "marginBottom": {
             "type": "select",
+            "defaultValue": 4,
             "options": {
                 "name": "Widget.seperatorMarginBottom",
-                "defaultValue": 4,
                 "listBoxValues": [
                     {
                         "value": 0,
@@ -110,14 +106,19 @@
                 ]
             }
         },
+        "customMarginValueBottom": {
+            "type": "number",
+            "isVisible": "marginBottom === 'custom-margin'",
+            "options": {
+                "name": "Widget.seperatorMarginValue"
+            }
+        },
         "customMarginUnitBottom": {
-            "name": "Widget.seperator",
             "type": "select",
             "isVisible": "marginBottom === 'custom-margin'",
             "defaultValue": "px",
             "options": {
                 "name": "Widget.seperatorCustomUnit",
-                "defaultValue": "px",
                 "listBoxValues": [
                     {
                         "value": "px",
@@ -128,15 +129,6 @@
                         "caption": "Widget.widgetUnitRem"
                     }
                 ]
-            }
-        },
-        "customMarginValueBottom": {
-            "name": "Widget.seperatorMarginValue",
-            "type": "number",
-            "isVisible": "marginBottom === 'custom-margin'",
-            "required": false,
-            "options": {
-                "name": "Widget.seperatorMarginValue"
             }
         }
     }
