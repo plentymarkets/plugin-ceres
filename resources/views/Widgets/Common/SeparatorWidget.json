@@ -9,32 +9,32 @@
     "settings": {
         "marginTop": {
             "type": "select",
-            "defaultValue": 4,
+            "defaultValue": "4",
             "options": {
                 "name": "Widget.seperatorMarginTop",
                 "listBoxValues": [
                     {
-                        "value": 0,
+                        "value": "0",
                         "caption": "Widget.widgetNum0"
                     },
                     {
-                        "value": 1,
+                        "value": "1",
                         "caption": "Widget.widgetNum1"
                     },
                     {
-                        "value": 2,
+                        "value": "2",
                         "caption": "Widget.widgetNum2"
                     },
                     {
-                        "value": 3,
+                        "value": "3",
                         "caption": "Widget.widgetNum3"
                     },
                     {
-                        "value": 4,
+                        "value": "4",
                         "caption": "Widget.widgetNum4"
                     },
                     {
-                        "value": 5,
+                        "value": "5",
                         "caption": "Widget.widgetNum5"
                     },
                     {
@@ -71,32 +71,32 @@
         },
         "marginBottom": {
             "type": "select",
-            "defaultValue": 4,
+            "defaultValue": "4",
             "options": {
                 "name": "Widget.seperatorMarginBottom",
                 "listBoxValues": [
                     {
-                        "value": 0,
+                        "value": "0",
                         "caption": "Widget.widgetNum0"
                     },
                     {
-                        "value": 1,
+                        "value": "1",
                         "caption": "Widget.widgetNum1"
                     },
                     {
-                        "value": 2,
+                        "value": "2",
                         "caption": "Widget.widgetNum2"
                     },
                     {
-                        "value": 3,
+                        "value": "3",
                         "caption": "Widget.widgetNum3"
                     },
                     {
-                        "value": 4,
+                        "value": "4",
                         "caption": "Widget.widgetNum4"
                     },
                     {
-                        "value": 5,
+                        "value": "5",
                         "caption": "Widget.widgetNum5"
                     },
                     {

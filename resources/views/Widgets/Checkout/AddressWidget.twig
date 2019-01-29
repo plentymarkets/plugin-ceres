@@ -3,42 +3,33 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
 
+
 <div>
-    {% set overrideAddressLists = LayoutContainer.show("Ceres::Checkout.AddressLists") %}
-    {% if overrideAddressLists|trim is empty %}
-        {% set overrideBillingAddress = LayoutContainer.show("Ceres::Checkout.BillingAddress") %}
-        {% if overrideBillingAddress|trim is empty %}
+    {% if widget.settings.addressType.mobile == "1" %}
+        {{ Twig.set("overrideBillingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.BillingAddress"])) }}
+        {{ Twig.if("overrideBillingAddress | trim is empty") }}
             <h3 class="mb-3">{{ Twig.trans("Ceres::Template.checkoutInvoiceAddress") }}</h3>
-
-            {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
+            
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBillingAddress"])) }}
             <div class="invoice-addresses-select">
-                <invoice-address-select
-                        :address-list="{{ Twig.print("services.customer.getAddresses(1) | json_encode") }}"
-                        has-to-validate="true"
-                        :selected-address-id="{{ Twig.print("services.checkout.getBillingAddressId() | json_encode") }}">
-                </invoice-address-select>
+                <invoice-address-select has-to-validate="true"></invoice-address-select>
             </div>
-            {{ LayoutContainer.show("Ceres::Checkout.AfterBillingAddress") }}
-        {% else %}
-            {{ overrideBillingAddress }}
-        {% endif %}
-
-        {% set overrideShippingAddress = LayoutContainer.show("Ceres::Checkout.ShippingAddress") %}
-        {% if overrideShippingAddress|trim is empty %}
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBillingAddress"])) }}
+        {{ Twig.else() }}
+            {{ Twig.print("overrideBillingAddress") }}
+        {{ Twig.endif() }}
+    {% elseif widget.settings.addressType.mobile == "2" %}
+        {{ Twig.set("overrideShippingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.ShippingAddress"])) }}
+        {{ Twig.if("overrideShippingAddress | trim is empty") }}
             <h3 class="mb-3">{{ Twig.trans("Ceres::Template.checkoutShippingAddress") }}</h3>
 
-            {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingAddress") }}
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingAddress"])) }}
             <div class="shipping-addresses-select">
-                <shipping-address-select
-                        :address-list="{{ Twig.print("services.customer.getAddresses(2) | json_encode") }}"
-                        :selected-address-id="{{ Twig.print("services.checkout.getDeliveryAddressId() | json_encode") }}">
-                </shipping-address-select>
+                <shipping-address-select></shipping-address-select>
             </div>
-            {{ LayoutContainer.show("Ceres::Checkout.AfterShippingAddress") }}
-        {% else %}
-            {{ overrideShippingAddress }}
-        {% endif %}
-    {% else %}
-        {{ overrideAddressLists }}
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterShippingAddress"])) }}
+        {{ Twig.else() }}
+            {{ Twig.print("overrideShippingAddress") }}
+        {{ Twig.endif() }}
     {% endif %}
 </div>

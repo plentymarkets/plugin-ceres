@@ -9,7 +9,393 @@
         ],
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\Checkout\\AddressWidget",
-        "settings": {}
+        "settings": {
+            "addressType": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "1",
+                "options": {
+                    "name": "Widget.addressType",
+                    "tooltipText": "Widget.addressTypeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "1",
+                            "caption": "Widget.addressInvoice",
+                            "position": 0
+                        },
+                        {
+                            "value": "2",
+                            "caption": "Widget.addressShipping",
+                            "position": 1
+                        }
+                    ]
+                }
+            },
+            "addressLayout": {
+                "type": "select",
+                "defaultValue": "DE",
+                "options": {
+                    "name": "Widget.addressLayout",
+                    "tooltipText": "Widget.addressLayoutTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "DE",
+                            "caption": "Widget.addressLayoutDE",
+                            "position": 0
+                        },
+                        {
+                            "value": "GB",
+                            "caption": "Widget.addressLayoutGB",
+                            "position": 1
+                        }
+                    ]
+                }
+            },
+            "addressFieldsInvoiceDE": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '1' && addressLayout === 'DE'",
+                "options": {
+                    "name": "Widget.addressFieldsInvoiceDE",
+                    "valueList": [
+                        {
+                            "value": "billing_address.name1",
+                            "caption": "Config.addressFieldName1"
+                        },
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Config.addressFieldVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Config.addressFieldSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Config.addressFieldTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Config.addressFieldBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Config.addressFieldName4"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Config.addressFieldAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Config.addressFieldAddress4"
+                        },
+                        {
+                            "value": "billing_address.stateId",
+                            "caption": "Config.addressFieldStateId"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Config.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressRequiredFieldsInvoiceDE": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '1' && addressLayout === 'DE'",
+                "options": {
+                    "name": "Widget.addressFieldsInvoiceDE",
+                    "valueList": [
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Config.addressFieldVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Config.addressFieldSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Config.addressFieldTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Config.addressFieldBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Config.addressFieldName4"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Config.addressFieldAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Config.addressFieldAddress4"
+                        },
+                        {
+                            "value": "billing_address.stateId",
+                            "caption": "Config.addressFieldStateId"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Config.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressFieldsInvoiceGB": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '1' && addressLayout === 'GB'",
+                "options": {
+                    "name": "Widget.addressFieldsInvoiceDE",
+                    "valueList": [
+                        {
+                            "value": "billing_address.name1",
+                            "caption": "Config.addressFieldEnName1"
+                        },
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Config.addressFieldEnVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Config.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Config.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Config.addressFieldEnBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Config.addressFieldEnName4"
+                        },
+                        {
+                            "value": "billing_address.address2",
+                            "caption": "Config.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Config.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Config.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Config.addressFieldEnPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressRequiredFieldsInvoiceGB": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '1' && addressLayout === 'GB'",
+                "options": {
+                    "name": "Widget.addressFieldsInvoiceDE",
+                    "valueList": [
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Config.addressFieldEnVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Config.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Config.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Config.addressFieldEnBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Config.addressFieldEnName4"
+                        },
+                        {
+                            "value": "billing_address.address2",
+                            "caption": "Config.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Config.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Config.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Config.addressFieldEnPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressFieldsShippingDE": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '2' && addressLayout === 'DE'",
+                "options": {
+                    "name": "Widget.addressFieldsInvoiceDE",
+                    "valueList": [
+                        {
+                            "value": "delivery_address.name1",
+                            "caption": "Config.addressFieldName1"
+                        },
+                        {
+                            "value": "delivery_address.salutation",
+                            "caption": "Config.addressFieldSalutation"
+                        },
+                        {
+                            "value": "delivery_address.title",
+                            "caption": "Config.addressFieldTitle"
+                        },
+                        {
+                            "value": "delivery_address.name4",
+                            "caption": "Config.addressFieldName4"
+                        },
+                        {
+                            "value": "delivery_address.address3",
+                            "caption": "Config.addressFieldAddress3"
+                        },
+                        {
+                            "value": "delivery_address.address4",
+                            "caption": "Config.addressFieldAddress4"
+                        },
+                        {
+                            "value": "delivery_address.stateId",
+                            "caption": "Config.addressFieldStateId"
+                        },
+                        {
+                            "value": "delivery_address.phoneNumber",
+                            "caption": "Config.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressRequiredFieldsShippingDE": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '2' && addressLayout === 'DE'",
+                "options": {
+                    "name": "Widget.addressRequiredFieldsShippingDE",
+                    "valueList": [
+                        {
+                            "value": "delivery_address.salutation",
+                            "caption": "Config.addressFieldSalutation"
+                        },
+                        {
+                            "value": "delivery_address.title",
+                            "caption": "Config.addressFieldTitle"
+                        },
+                        {
+                            "value": "delivery_address.name4",
+                            "caption": "Config.addressFieldName4"
+                        },
+                        {
+                            "value": "delivery_address.address3",
+                            "caption": "Config.addressFieldAddress3"
+                        },
+                        {
+                            "value": "delivery_address.address4",
+                            "caption": "Config.addressFieldAddress4"
+                        },
+                        {
+                            "value": "delivery_address.stateId",
+                            "caption": "Config.addressFieldStateId"
+                        },
+                        {
+                            "value": "delivery_address.phoneNumber",
+                            "caption": "Config.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressFieldsShippingGB": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '2' && addressLayout === 'GB'",
+                "options": {
+                    "name": "Widget.addressFieldsInvoiceDE",
+                    "valueList": [
+                        {
+                            "value": "delivery_address.name1",
+                            "caption": "Config.addressFieldEnName1"
+                        },
+                        {
+                            "value": "delivery_address.salutation",
+                            "caption": "Config.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "delivery_address.title",
+                            "caption": "Config.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "delivery_address.name4",
+                            "caption": "Config.addressFieldEnName4"
+                        },
+                        {
+                            "value": "delivery_address.address2",
+                            "caption": "Config.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "delivery_address.address3",
+                            "caption": "Config.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "delivery_address.address4",
+                            "caption": "Config.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "delivery_address.phoneNumber",
+                            "caption": "Config.addressFieldEnPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressRequiredFieldsShippingGB": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '2' && addressLayout === 'GB'",
+                "options": {
+                    "name": "Widget.addressFieldsInvoiceDE",
+                    "valueList": [
+                        {
+                            "value": "delivery_address.salutation",
+                            "caption": "Config.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "delivery_address.title",
+                            "caption": "Config.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "delivery_address.name4",
+                            "caption": "Config.addressFieldEnName4"
+                        },
+                        {
+                            "value": "delivery_address.address2",
+                            "caption": "Config.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "delivery_address.address3",
+                            "caption": "Config.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "delivery_address.address4",
+                            "caption": "Config.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "delivery_address.phoneNumber",
+                            "caption": "Config.addressFieldEnPhoneNumber"
+                        }
+                    ]
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::BasketTotalsWidget",
@@ -1582,32 +1968,32 @@
         "settings": {
             "marginTop": {
                 "type": "select",
-                "defaultValue": 4,
+                "defaultValue": "4",
                 "options": {
                     "name": "Widget.seperatorMarginTop",
                     "listBoxValues": [
                         {
-                            "value": 0,
+                            "value": "0",
                             "caption": "Widget.widgetNum0"
                         },
                         {
-                            "value": 1,
+                            "value": "1",
                             "caption": "Widget.widgetNum1"
                         },
                         {
-                            "value": 2,
+                            "value": "2",
                             "caption": "Widget.widgetNum2"
                         },
                         {
-                            "value": 3,
+                            "value": "3",
                             "caption": "Widget.widgetNum3"
                         },
                         {
-                            "value": 4,
+                            "value": "4",
                             "caption": "Widget.widgetNum4"
                         },
                         {
-                            "value": 5,
+                            "value": "5",
                             "caption": "Widget.widgetNum5"
                         },
                         {
@@ -1644,32 +2030,32 @@
             },
             "marginBottom": {
                 "type": "select",
-                "defaultValue": 4,
+                "defaultValue": "4",
                 "options": {
                     "name": "Widget.seperatorMarginBottom",
                     "listBoxValues": [
                         {
-                            "value": 0,
+                            "value": "0",
                             "caption": "Widget.widgetNum0"
                         },
                         {
-                            "value": 1,
+                            "value": "1",
                             "caption": "Widget.widgetNum1"
                         },
                         {
-                            "value": 2,
+                            "value": "2",
                             "caption": "Widget.widgetNum2"
                         },
                         {
-                            "value": 3,
+                            "value": "3",
                             "caption": "Widget.widgetNum3"
                         },
                         {
-                            "value": 4,
+                            "value": "4",
                             "caption": "Widget.widgetNum4"
                         },
                         {
-                            "value": 5,
+                            "value": "5",
                             "caption": "Widget.widgetNum5"
                         },
                         {
