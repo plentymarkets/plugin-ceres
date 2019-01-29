@@ -30,7 +30,7 @@
                         <p class="single-description" v-if="currentVariation.texts.shortDescription !== ''" v-html="currentVariation.texts.shortDescription"></p>
                     {% endif %}
 
-                    <hr>
+                    
 
                     <div class="m-b-3">
                         <span class="articlenumber small text-muted">
@@ -131,7 +131,7 @@ Melden Sie sich bitte bei uns an und Sie werden in den nächsten 24 Stunden für
 
                     <slot name="AdditionalContentAfterAddToBasket"></slot>
 
-                    <hr>
+                   
 
                     <span class="vat small text-muted">
                         * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.singleItemExclVAT") }}{% else %}{{ trans("Ceres::Template.singleItemInclVAT") }}{% endif %} {{ trans("Ceres::Template.singleItemExclusive") }}
