@@ -16,11 +16,11 @@
 
                 <!-- ITEM DETAIL -->
                 <div class="col-md-5 single-rightside m-t-1" v-stick-in-parent>
-                    <div class="producertag h6 producer text-muted" v-if="currentVariation.filter.hasManufacturer">
+                    <div class="producertag h6 producer text-muted hidden " v-if="currentVariation.filter.hasManufacturer">
                         ${ currentVariation.item.manufacturer.externalName }
                     </div>
 
-                    <h1 class="h2 title">
+                    <h1 class="h2 title" style="color:black;" >
                         <span>
                             ${ currentVariation | itemName }
                         </span>
