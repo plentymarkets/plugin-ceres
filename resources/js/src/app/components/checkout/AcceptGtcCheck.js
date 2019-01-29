@@ -9,13 +9,36 @@ Vue.component("accept-gtc-check", {
         {
             type: String,
             default: "#vue-accept-gtc-check"
+        },
+        appearance:
+        {
+            type: String,
+            default: "primary"
+        },
+        hideCheckbox:
+        {
+            type: Boolean
+        },
+        isPreselected:
+        {
+            type: Boolean
+        },
+        isRequired:
+        {
+            type: Boolean,
+            default: true
+        },
+        customText:
+        {
+            type: String,
+            default: ""
         }
     },
 
     data()
     {
         return {
-            isChecked: false
+            isChecked: this.isPreselected
         };
     },
 
@@ -26,7 +49,15 @@ Vue.component("accept-gtc-check", {
     created()
     {
         this.$options.template = this.template;
-        this.$store.commit("setGtcValidator", this.validate);
+
+        if (this.hideCheckbox)
+        {
+            this.isChecked = true;
+        }
+        else if (this.isRequired)
+        {
+            this.$store.commit("setGtcValidator", this.validate);
+        }
     },
 
     methods:

@@ -10,12 +10,10 @@ Vue.component("checkout", {
             type: String,
             default: "#vue-checkout"
         },
-
         initialCheckout: {
             type: Object,
             required: true
         },
-
         deliveryAddressList: Array,
         selectedDeliveryAddress: Number,
         billingAddressList: Array,
