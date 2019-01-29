@@ -30,7 +30,13 @@
                 </div>
             </div>
 
-            <checkout v-cloak :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}">
+            <checkout
+                v-cloak
+                :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+                :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
+                :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
+                :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
+                :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
                 <div class="row" slot-scope="checkoutComp">
                     <!-- ADDRESS SELECT -->
                     <div class="col-md-7">
@@ -46,11 +52,7 @@
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
                                         <div class="invoice-addresses-select">
-                                            <invoice-address-select
-                                                    :address-list="{{ services.customer.getAddresses(1) | json_encode }}"
-                                                    has-to-validate="true"
-                                                    :selected-address-id="{{ services.checkout.getBillingAddressId() | json_encode }}">
-                                            </invoice-address-select>
+                                            <invoice-address-select has-to-validate="true"></invoice-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterBillingAddress") }}
                                     {% else %}
@@ -65,10 +67,7 @@
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingAddress") }}
                                         <div class="shipping-addresses-select">
-                                            <shipping-address-select
-                                                    :address-list="{{ services.customer.getAddresses(2) | json_encode }}"
-                                                    :selected-address-id="{{ services.checkout.getDeliveryAddressId() | json_encode }}">
-                                            </shipping-address-select>
+                                            <shipping-address-select></shipping-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterShippingAddress") }}
                                     {% else %}

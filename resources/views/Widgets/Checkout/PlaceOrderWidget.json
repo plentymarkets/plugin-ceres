@@ -13,22 +13,22 @@
             "required": true,
             "defaultValue": "",
             "options": {
-                "name": "Widget.widgetAppearanceLabel",
-                "tooltipText": "Widget.widgetAppearanceTooltip",
+                "name": "Widget.placeOrderButtonSizeLabel",
+                "tooltipText": "Widget.placeOrderButtonSizeTooltip",
                 "listBoxValues": [
                     {
                         "value": "sm",
-                        "caption": "sm",
+                        "caption": "Widget.placeOrderButtonSizeSm",
                         "position": 0
                     },
                     {
                         "value": "",
-                        "caption": "normal",
+                        "caption": "Widget.placeOrderButtonSizeNormal",
                         "position": 1
                     },
                     {
                         "value": "lg",
-                        "caption": "lg",
+                        "caption": "Widget.placeOrderButtonSizeLg",
                         "position": 2
                     }
                 ]

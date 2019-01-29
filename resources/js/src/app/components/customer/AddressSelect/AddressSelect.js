@@ -1,4 +1,4 @@
-import { isNullOrUndefined, isNull, isDefined } from "../../../helper/utils";
+import { isNull, isDefined } from "../../../helper/utils";
 
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
@@ -11,11 +11,17 @@ Vue.component("address-select", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template",
-        "addressType",
-        "showError"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-address-select"
+        },
+        addressType: {
+            type: String,
+            required: true
+        },
+        showError: Boolean
+    },
 
     data()
     {
@@ -120,15 +126,6 @@ Vue.component("address-select", {
         onAddressChanged(address)
         {
             this.$emit("address-changed", address);
-        },
-
-        /**
-         * Check whether a company name exists and show it in bold
-         * @returns {boolean}
-         */
-        showNameStrong()
-        {
-            return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
         },
 
         /**
@@ -310,17 +307,7 @@ Vue.component("address-select", {
          */
         getCountryName(countryId)
         {
-            if (countryId > 0)
-            {
-                const country = this.countryList.find(country => country.id === countryId);
-
-                if (!isNullOrUndefined(country))
-                {
-                    return country.currLangName;
-                }
-            }
-
-            return "";
+            return this.$store.getters.getCountryName(countryId);
         },
 
         setAddressToEditField({ field, value })
