@@ -13,7 +13,7 @@
             "appearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "primary",
+                "defaultValue": "none",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
@@ -1391,6 +1391,18 @@
         "settings": {}
     },
     {
+        "identifier": "Ceres::StickyContainerWidget",
+        "label": "Widget.stickyContainerLabel",
+        "previewImageURL": "",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
+        "position": 300,
+        "widgetClass": "Ceres\\Widgets\\Grid\\StickyContainerWidget",
+        "settings": {}
+    },
+    {
         "identifier": "Ceres::ThreeColumnWidget",
         "label": "Widget.gridThreeColumnLabel",
         "previewImageURL": "/images/widgets/grid-3-col.svg",
@@ -1477,6 +1489,16 @@
                             "value": "oneToTwo",
                             "caption": "Widget.gridTwoColumnLayoutOneToTwo",
                             "position": 2
+                        },
+                        {
+                            "value": "fiveToSeven",
+                            "caption": "Widget.gridTwoColumnLayoutFiveToSeven",
+                            "position": 3
+                        },
+                        {
+                            "value": "sevenToFive",
+                            "caption": "Widget.gridTwoColumnLayoutSevenToFive",
+                            "position": 4
                         }
                     ]
                 }

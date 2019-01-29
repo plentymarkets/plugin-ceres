@@ -18400,6 +18400,8 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .wrapper-main #page-header {
   background-color: #f7f7f9;
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 .wrapper-main #page-header.top-bar {

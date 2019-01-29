@@ -22284,7 +22284,11 @@ Vue.component("variation-select", {
                 return variation.attributes.length <= 0;
             });
 
-            if (hasEmptyVariation) {
+            var preselectedVariationExists = this.variations.some(function (variation) {
+                return variation.id === _this.preselect;
+            });
+
+            if (hasEmptyVariation || !preselectedVariationExists) {
                 // main variation is selectable
                 return true;
             }
@@ -25577,8 +25581,9 @@ var stickInParent = function stickInParent(el, minWidth, isActive) {
     if (activeState && !currentActiveState) {
         var $element = $(el);
         var headHeight = $("#page-header").height();
+        var offset = parseInt(el.dataset.stickyOffset) || 0;
 
-        if ($element.stick_in_parent({ offset_top: headHeight + 10 })) {
+        if ($element.stick_in_parent({ offset_top: headHeight + offset })) {
             el.dataset.isSticky = true;
         }
     } else if (!activeState && currentActiveState) {
