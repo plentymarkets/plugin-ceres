@@ -15879,6 +15879,10 @@ a:active {
   white-space: normal;
 }
 
+.is_stuck {
+  z-index: 1;
+}
+
 html {
   font-size: 14px;
 }
