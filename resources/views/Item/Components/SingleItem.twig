@@ -16,9 +16,9 @@
 
                 <!-- ITEM DETAIL -->
                 <div class="col-md-5 single-rightside m-t-1" v-stick-in-parent>
-                    <div class="producertag h6 producer text-muted hidden " v-if="currentVariation.filter.hasManufacturer">
+                   <!-- <div class="producertag h6 producer text-muted hidden " v-if="currentVariation.filter.hasManufacturer">
                         ${ currentVariation.item.manufacturer.externalName }
-                    </div>
+                    </div>-->
 
                     <h1 class="h2 title" style="color:black;" >
                         <span>
@@ -33,7 +33,7 @@
                     
 
                     <div class="m-b-3">
-                        <span class="articlenumber small text-muted">
+                        <span class="articlenumber small text-muted" style="color:black;">
                             <b>{{ trans("Ceres::Template.singleItemNumber") }}</b>
                             <span>${ currentVariation.variation.number }</span>
                         </span>
