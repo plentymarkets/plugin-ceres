@@ -1,5 +1,3 @@
-{{ services.lastSeen.setLastSeenMaxCount(config("Ceres.item.lists.last_seen_number")) }}
-
 {{ component( "Ceres::Item.Components.VariationSelect" ) }}
 {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
 {{ component( "Ceres::Item.Components.AddToWishList" ) }}
@@ -19,8 +17,8 @@
     <div slot="AdditionalContentAfterVAT">{{ LayoutContainer.show("Ceres::SingleItem.AdditionalContentAfterVAT", item.documents[0].data) }}</div>
     <template slot="AddDetailTabs">{{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabs", item.documents[0].data) }}</template>
     <template slot="AddDetailTabsContent">{{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent", item.documents[0].data) }}</template>
-    <div slot="ItemListContainer">{{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}</div>
-    <div slot="FeedbackContainer">{{ LayoutContainer.show("Ceres::SingleItem.FeedbackContainer", item) }}</div>
+    <template slot="ItemListContainer">{{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}</template>
+    <template slot="FeedbackContainer">{{ LayoutContainer.show("Ceres::SingleItem.FeedbackContainer", item) }}</template>
     <div slot="ImageCarousel">
         {% set ImageCarouselOverride = LayoutContainer.show("Ceres::SingleItem.ImageCarousel") %}
         {% if ImageCarouselOverride|trim is empty %}

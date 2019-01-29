@@ -43,7 +43,7 @@ Vue.component("item-filter-list", {
             {
                 for (const selectedFacetId of selectedFacetIds)
                 {
-                    if (!this.initialSelectedFacets.find(initialFacetId => initialFacetId === selectedFacetId))
+                    if (!this.initialSelectedFacets.find(initialFacetId => initialFacetId.toString() === selectedFacetId.toString()))
                     {
                         return false;
                     }
@@ -118,7 +118,7 @@ Vue.component("item-filter-list", {
             const priceMin = urlParams.priceMin || "";
             const priceMax = urlParams.priceMax || "";
 
-            this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
 
             this.initialPriceMin = priceMin;
             this.initialPriceMax = priceMax;

@@ -1,10 +1,11 @@
 import ApiService from "services/ApiService";
-import {isDefined}from "../../helper/utils";
+import { isDefined } from "../../helper/utils";
 
 const state =
     {
-        lastSeenItems: [],
-        isLastSeenItemsLoading: false
+        containers: {},
+        isLastSeenItemsLoading: false,
+        lastSeenItems: []
     };
 
 const mutations =
@@ -17,12 +18,17 @@ const mutations =
         setIsLastSeenItemsLoading(state, isLoading)
         {
             state.isLastSeenItemsLoading = isLoading;
+        },
+
+        setLastSeenItemContainers(state, containers)
+        {
+            state.containers = containers;
         }
     };
 
 const actions =
     {
-        addLastSeenItem({commit, state}, variationId)
+        addLastSeenItem({ commit, state }, variationId)
         {
             if (!state.isLastSeenItemsLoading)
             {
@@ -30,12 +36,20 @@ const actions =
                 {
                     commit("setIsLastSeenItemsLoading", true);
 
-                    ApiService.put("/rest/io/item/last_seen/" + variationId + "?items=" + App.config.itemLists.lastSeenNumber || 4)
+                    ApiService.put(`/rest/io/item/last_seen/${variationId}`)
                         .done(response =>
                         {
-                            commit("setLastSeenItems", response.documents);
-                            commit("setIsLastSeenItemsLoading", false);
-                            resolve(response.documents);
+                            if (isDefined(response.lastSeenItems))
+                            {
+                                commit("setLastSeenItems", response.lastSeenItems.documents);
+                                commit("setLastSeenItemContainers", response.containers);
+                                commit("setIsLastSeenItemsLoading", false);
+                                resolve(response.lastSeenItems.documents);
+                            }
+                            else
+                            {
+                                resolve(null);
+                            }
                         })
                         .fail(error =>
                         {
@@ -48,24 +62,27 @@ const actions =
             return null;
         },
 
-        getLastSeenItems({commit}, maxItems)
+        getLastSeenItems({ commit })
         {
             if (!state.isLastSeenItemsLoading)
             {
                 return new Promise((resolve, reject) =>
                 {
-                    const params = {items: maxItems || App.config.itemLists.lastSeenNumber};
-
                     commit("setIsLastSeenItemsLoading", true);
-
-                    ApiService.get("/rest/io/item/last_seen", params, {keepOriginalResponse: true})
+                    ApiService.get("/rest/io/item/last_seen")
                         .done(response =>
                         {
-                            if (isDefined(response.data))
+                            if (isDefined(response) && isDefined(response.lastSeenItems))
                             {
-                                commit("setLastSeenItems", response.data.documents);
+                                commit("setLastSeenItems", response.lastSeenItems.documents);
+                                commit("setLastSeenItemContainers", response.containers);
                                 commit("setIsLastSeenItemsLoading", false);
-                                resolve(response.data.documents);
+
+                                resolve(response.lastSeenItems.documents);
+                            }
+                            else
+                            {
+                                resolve(null);
                             }
                         })
                         .fail(error =>

@@ -1,4 +1,4 @@
-import {isDefined}from "../../../helper/utils";
+import { isDefined } from "../../../helper/utils";
 const ApiService = require("services/ApiService");
 
 import ValidationService from "services/ValidationService";
@@ -27,7 +27,7 @@ Vue.component("user-login-handler", {
     {
         this.$options.template = this.template;
 
-        ApiService.get("/rest/io/customer", {}, {keepOriginalResponse: true})
+        ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
             .done(response =>
             {
                 if (isDefined(response.data))

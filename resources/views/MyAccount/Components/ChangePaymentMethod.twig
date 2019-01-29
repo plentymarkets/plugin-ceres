@@ -22,13 +22,13 @@
         <!-- CONFIRMATION  -->
         <div class="row top-spacer" v-if="currentTemplate == 'tpl.confirmation'">
 
-            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryChangePayment") }}</strong>
+            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryChangePayment") }}</strong>
             <a v-if="changePossible" class="payment-link-style" @click="openPaymentChangeModal()">
                 <i class="fa fa-retweet" aria-hidden="true"></i>
                 <span>{{ trans("Ceres::Template.orderHistoryChangePaymentLink") }}</span>
             </a>
 
-            <div v-if="paymentStatus != 'fullyPaid'" class="col-xs-6 col-sm-7">
+            <div v-if="paymentStatus != 'fullyPaid'" class="col-6 col-sm-7">
                 <span v-if="!changePossible" class="payment-align-center">{{ trans("Ceres::Template.orderHistoryChangePaymentNotPossible") }}</span>
             </div>
 
@@ -41,10 +41,10 @@
                 <div class="modal-dialog" role="dialog">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <h4 class="modal-title">{{ trans("Ceres::Template.orderHistoryChooseNewPayment") }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title">{{ trans("Ceres::Template.orderHistoryChooseNewPayment") }}</h4>
                         </div>
                         <div class="modal-body form-horizontal">
 
@@ -55,7 +55,7 @@
                                 <p class="warning-text">{{ trans("Ceres::Template.orderHistoryChangePaymentNotSwitchableWarning") }}</p>
                             </div>
 
-                            <div class="cmp cmp-method-list list m-b-3">
+                            <div class="cmp cmp-method-list list mb-5">
                             <ul class="method-list">
                                 <div class="method-list-item current-payment-text">
                                     <div class="content alert-info current-payment-width">
@@ -82,7 +82,7 @@
                                             </div><!--
                                         --><div class="content">
                                                 ${ paymentProvider.name }
-                                                <small v-if="paymentProvider.sourceUrl" class="pull-xs-right">
+                                                <small v-if="paymentProvider.sourceUrl" class="float-right">
                                                     <a :href="paymentProvider.sourceUrl" rel="noopener noreferrer" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
                                                 </small>
                                                 <div>
@@ -99,7 +99,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <button type="button" class="btn btn-danger btn-m-r" data-dismiss="modal">
                                 <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.orderHistoryCancel") }}
                             </button>
                             <button type="button" :disabled="isPending || paymentMethod === 0" :class="{'disabled': isPending || paymentMethod === 0}" class="btn btn-primary" @click="changePaymentMethod()">

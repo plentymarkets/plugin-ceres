@@ -1,18 +1,19 @@
-Vue.component("container-item-list", {
+Vue.component("carousel", {
 
-    delimiters: ["${", "}"],
-
-    props:
+    components:
     {
+        SlotComponent:
+        {
+            functional: true,
+            render: (createElement, context) => context.props.vnode
+        }
+    },
+
+    props: {
         template:
         {
             type: String,
-            default: "#vue-container-item-list"
-        },
-        items:
-        {
-            type: Array,
-            default: []
+            default: "#vue-carousel"
         },
         itemsPerPage:
         {
@@ -21,20 +22,11 @@ Vue.component("container-item-list", {
         }
     },
 
-    created()
+    data()
     {
-        this.$options.template = this.template;
-    },
-
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            if (this.items.length > this.itemsPerPage)
-            {
-                this.initializeCarousel();
-            }
-        });
+        return {
+            itemCount: 0
+        };
     },
 
     computed:
@@ -53,31 +45,49 @@ Vue.component("container-item-list", {
             }
 
             return [
-                "col-xs-12",
+                "col-12",
                 itemsPerPage === 1 ? "col-sm-12" : "col-sm-6",
                 "col-md-" + (12 / itemsPerPage)
             ];
         }
     },
 
+    created()
+    {
+        this.$options.template = this.template;
+
+        if (this.$slots.items)
+        {
+            this.itemCount = this.$slots.items.length;
+        }
+    },
+
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            if (this.itemCount > this.itemsPerPage)
+            {
+                this.initializeCarousel();
+            }
+        });
+    },
+
     methods:
     {
         initializeCarousel()
         {
+            const self = this;
+
             $(this.$refs.carouselContainer).owlCarousel({
                 autoHeight       : true,
                 dots             : true,
-                items            : this.itemsPerPage,
+                items            : self.itemsPerPage,
                 responsive: {
-                    0: {
-                        items: 1
-                    },
-                    544: {
-                        items: (this.itemsPerPage > 1) ? 2 : 1
-                    },
-                    768: {
-                        items: this.itemsPerPage
-                    }
+                    0:   { items: 1 },
+                    576: { items: self.itemsPerPage > 1 ? 2 : 1 },
+                    768: { items: self.itemsPerPage > 3 ? 3 : self.itemsPerPage },
+                    992: { items: self.itemsPerPage }
                 },
                 lazyLoad         : false,
                 loop             : false,
@@ -101,11 +111,11 @@ Vue.component("container-item-list", {
 
                     for (let i = begin; i < end; i++)
                     {
-                        const categoryItem = this.$refs["categoryItem_" + i];
+                        const childComponent = self.$children[i];
 
-                        if (categoryItem)
+                        if (childComponent && childComponent.loadFirstImage)
                         {
-                            categoryItem[0].loadFirstImage();
+                            childComponent.loadFirstImage();
                         }
                     }
                 }

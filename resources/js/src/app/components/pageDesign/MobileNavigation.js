@@ -69,7 +69,7 @@ Vue.component("mobile-navigation", {
                 }
                 else
                 {
-                    this.$store.dispatch("setCurrentCategoryById", {categoryId: parseInt(this.initialCategory.id)});
+                    this.$store.dispatch("setCurrentCategoryById", { categoryId: parseInt(this.initialCategory.id) });
                     this.initialSlide(this.$store.state.navigation.currentCategory);
                 }
             }
@@ -100,15 +100,15 @@ Vue.component("mobile-navigation", {
             {
                 this.dataContainer1 = children;
 
-                $("#menu-2").trigger("menu-deactivated", {back: back});
-                $("#menu-1").trigger("menu-activated", {back: back});
+                $("#menu-2").trigger("menu-deactivated", { back: back });
+                $("#menu-1").trigger("menu-activated", { back: back });
             }
             else
             {
                 this.dataContainer2 = children;
 
-                $("#menu-1").trigger("menu-deactivated", {back: back});
-                $("#menu-2").trigger("menu-activated", {back: back});
+                $("#menu-1").trigger("menu-deactivated", { back: back });
+                $("#menu-2").trigger("menu-activated", { back: back });
             }
 
             this.useFirstContainer = !this.useFirstContainer;

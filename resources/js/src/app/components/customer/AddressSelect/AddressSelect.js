@@ -1,4 +1,4 @@
-import {isNullOrUndefined, isNull, isDefined}from "../../../helper/utils";
+import { isNullOrUndefined, isNull, isDefined } from "../../../helper/utils";
 
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
@@ -36,7 +36,8 @@ Vue.component("address-select", {
                 1: "vatNumber",
                 4: "telephone",
                 9: "birthday",
-                11: "title"
+                11: "title",
+                12: "contactPerson"
             }
         };
     },
@@ -142,13 +143,13 @@ Vue.component("address-select", {
                 this.addressToEdit = {
                     addressSalutation: 0,
                     gender: "male",
-                    countryId        : this.shippingCountryId,
-                    showPickupStation : false
+                    countryId: this.shippingCountryId,
+                    showPickupStation: false
                 };
             }
             else
             {
-                this.addressToEdit = {countryId: this.shippingCountryId};
+                this.addressToEdit = { countryId: this.shippingCountryId };
             }
 
             this.updateHeadline();
@@ -231,7 +232,7 @@ Vue.component("address-select", {
         {
             this.deleteModalWaiting = true;
 
-            this.$store.dispatch("deleteAddress", {address: this.addressToDelete, addressType: this.addressType})
+            this.$store.dispatch("deleteAddress", { address: this.addressToDelete, addressType: this.addressType })
                 .then(
                     response =>
                     {
@@ -322,7 +323,7 @@ Vue.component("address-select", {
             return "";
         },
 
-        setAddressToEditField({field, value})
+        setAddressToEditField({ field, value })
         {
             this.addressToEdit[field] = value;
             this.addressToEdit = Object.assign({}, this.addressToEdit);
@@ -333,7 +334,7 @@ Vue.component("address-select", {
     {
         optionType(selectedAddress, typeId)
         {
-            if (selectedAddress && selectedAddress.name2)
+            if (selectedAddress && selectedAddress.options)
             {
                 for (const optionType of selectedAddress.options)
                 {
@@ -345,7 +346,6 @@ Vue.component("address-select", {
             }
 
             return "";
-
         }
     }
 });

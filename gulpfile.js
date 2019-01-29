@@ -161,11 +161,13 @@ gulp.task("build:lint", function()
 // SASS
 gulp.task("build:sass-min", ["build:sass"], function()
 {
+    buildSass(OUTPUT_PREFIX + "-legacy.min.css", "compressed", true);
     return buildSass(OUTPUT_PREFIX + ".min.css", "compressed");
 });
 
 gulp.task("build:sass", ["copy:sass-vendor"], function()
 {
+    buildSass(OUTPUT_PREFIX + "-legacy.css", "expanded", true);
     return buildSass(OUTPUT_PREFIX + ".css", "expanded");
 });
 
@@ -180,7 +182,7 @@ gulp.task("copy:sass-vendor", function()
         .pipe(copy(SCSS_SRC, {prefix: 1}))
 });
 
-function buildSass(outputFile, outputStyle)
+function buildSass(outputFile, outputStyle, isLegacy)
 {
     var config = {
         scssOptions  : {
@@ -229,7 +231,7 @@ function buildSass(outputFile, outputStyle)
     }
 
     return gulp
-        .src(SCSS_SRC + "Ceres.scss")
+        .src(SCSS_SRC + (isLegacy ? "Ceres_legacy.scss" : "Ceres.scss"))
         .pipe(insert.prepend(scssConfig))
         .pipe(sourcemaps.init())
         .pipe(sass(config.scssOptions).on("error", sass.logError))

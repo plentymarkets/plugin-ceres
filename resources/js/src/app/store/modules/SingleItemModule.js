@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from "../../helper/utils";
+
 const state =
     {
         variation: {},
@@ -22,7 +24,7 @@ const mutations =
             state.variationList = variationList;
         },
 
-        setVariationOrderProperty(state, {propertyId, value})
+        setVariationOrderProperty(state, { propertyId, value })
         {
             const index = state.variation.documents[0].data.properties.findIndex(property => property.property.id === propertyId);
 
@@ -111,9 +113,11 @@ const getters =
         {
             const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-            if (state.variation.documents)
+            if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
             {
-                return getters.variationPropertySurcharge + Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+                const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+
+                return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
             }
 
             return null;
@@ -144,7 +148,7 @@ const getters =
                         group: groupProperties[0].group,
                         properties: groupProperties.map(property =>
                         {
-                            return {...property.property, itemSurcharge: property.surcharge};
+                            return { ...property.property, itemSurcharge: property.surcharge };
                         })
                     });
                 }

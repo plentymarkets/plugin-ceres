@@ -105,9 +105,13 @@ Vue.component("salutation-select", {
         {
             const gender = this.mapSalutationIdToGender(value);
 
-            this.$emit("input", {field: "gender", value: gender});
-            this.$emit("input", {field: "addressSalutation", value: value});
-            this.$emit("input", {field: "name1", value: ""});
+            this.$emit("input", { field: "gender", value: gender });
+            this.$emit("input", { field: "addressSalutation", value: value });
+            this.$emit("input", { field: "name1", value: "" });
+            this.$emit("input", { field: "name2", value: "" });
+            this.$emit("input", { field: "name3", value: "" });
+            this.$emit("input", { field: "vatNumber", value: "" });
+            this.$emit("input", { field: "contactPerson", value: "" });
         },
 
         mapSalutationIdToGender(id)

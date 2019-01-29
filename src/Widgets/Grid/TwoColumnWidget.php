@@ -2,9 +2,7 @@
 
 namespace Ceres\Widgets\Grid;
 
-use Ceres\Widgets\Helper\BaseWidget;
-
-class TwoColumnWidget extends BaseWidget
+class TwoColumnWidget extends GridWidget
 {
     protected $template = "Ceres::Widgets.Grid.TwoColumnWidget";
 }

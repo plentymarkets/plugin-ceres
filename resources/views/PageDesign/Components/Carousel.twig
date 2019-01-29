@@ -1,0 +1,13 @@
+<script type="x/template" id="vue-carousel">
+    <div class="row">
+        <div class="col-12 col-lg-12" v-if="itemCount > itemsPerPage">
+            <div class="list-item-carousel owl-carousel owl-theme owl-single-item" ref="carouselContainer">
+                <slot-component v-for="(item, index) in $slots.items" :key="index" :vnode="item" />
+            </div>
+        </div>
+
+        <div :class="columnWidths" v-else v-for="item in $slots.items">
+            <slot-component :vnode="item"/>
+        </div>
+    </div>
+</script>

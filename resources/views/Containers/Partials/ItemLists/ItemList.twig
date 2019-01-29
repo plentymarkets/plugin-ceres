@@ -1,5 +1,6 @@
-{{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
+{{ component( "Ceres::ItemList.Components.CategoryItem") }}
+{{ component( "Ceres::PageDesign.Components.Carousel" ) }}
 
 {% set listType = config("Ceres.item.lists." ~ itemListNo ~ ".list_type") %}
 {% set tagIds = config("Ceres.item.lists." ~ itemListNo ~ ".tag_ids") | split(",") %}
@@ -14,23 +15,39 @@
 
 <div class="row">
     {% if listType == "last_seen" %}
-        <last-seen-item-list>
-            <div slot="heading">
-                {% if not isHome %}
-                    <hr>
-                {% endif %}
+        <div class="col-12">
+            <last-seen-item-list>
+                <div slot="heading">
+                    {% if not isHome %}
+                        <hr>
+                    {% endif %}
 
-                {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader' with { itemListNo: itemListNo, listType: listType, isHome: isHome } %}
-            </div>
-        </last-seen-item-list>
+                    {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader' with { itemListNo: itemListNo, listType: listType, isHome: isHome } %}
+                </div>
+            </last-seen-item-list>
+        </div>
     {% elseif itemList is not empty %}
-        <div class="col-xs-12">
+        <div class="col-12">
             {% if not isHome %}
                 <hr>
             {% endif %}
 
             {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader' with { itemListNo: itemListNo, listType: listType, isHome: isHome } %}
         </div>
-        <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
+        <div class="col-12">
+            <carousel>
+                {% for item in itemList %}
+                    <template slot="items">
+                        <category-item
+                            :item-data="{{ item.data | json_encode }}"
+                            :decimal-count="{{ ceresConfig.item.storeSpecial }}"
+                            :disable-carousel-on-mobile="true">
+                            <template slot="BeforePrices">{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
+                            <template slot="AfterPrices">{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
+                        </category-item>
+                    </template>
+                {% endfor %}
+            </carousel>
+        </div>
     {% endif %}
 </div>

@@ -73,7 +73,7 @@ Vue.component("account-settings", {
 
             if (this.newPassword !== "" && (this.newPassword === this.confirmPassword))
             {
-                APIService.post("/rest/io/customer/password", {password: this.newPassword, password2: this.confirmPassword})
+                APIService.post("/rest/io/customer/password", { password: this.newPassword, password2: this.confirmPassword })
                     .done(function(response)
                     {
                         self.clearFieldsAndClose();
