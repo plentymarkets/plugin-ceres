@@ -24035,13 +24035,6 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   font-size: 2rem;
 }
 
-/* Compatibility for IE */
-/* display img with optimal aspect ratio */
-html.ie .widget-image-box .img-cover {
-  min-height: auto;
-  min-width: auto;
-}
-
 .widget-image-carousel.widget-proportional {
   min-height: 175px;
 }
