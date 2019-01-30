@@ -6,5 +6,58 @@
     "categories": ["checkout"],
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Checkout\\BasketTotalsWidget",
-    "settings": {}
+    "settings": {
+        "visibleFields": {
+            "type": "checkboxGroup",
+            "options": {
+                "name": "Widget.basketTotalsVisibleFields",
+                "valueList": [
+                    {
+                        "value": "basketValueNet",
+                        "caption": "Widget.showBasketValueNet"
+                    },
+                    {
+                        "value": "basketValueGross",
+                        "caption": "Widget.showBasketValueGross"
+                    },
+                    {
+                        "value": "rebate",
+                        "caption": "Widget.showBasketTotalsRebate"
+                    },
+                    {
+                        "value": "shippingCostsNet",
+                        "caption": "Widget.showBasketShippingCostsNet"
+                    },
+                    {
+                        "value": "shippingCostsGross",
+                        "caption": "Widget.showBasketShippingCostsGross"
+                    },
+                    {
+                        "value": "totalSumNet",
+                        "caption": "Widget.showBasketTotalSumNet"
+                    },
+                    {
+                        "value": "coupon",
+                        "caption": "Widget.showBasketCoupon"
+                    },
+                    {
+                        "value": "vats",
+                        "caption": "Widget.showBasketVats"
+                    },
+                    {
+                        "value": "totalSumGross",
+                        "caption": "Widget.showBasketTotalSumGross"
+                    },
+                    {
+                        "value": "couponDiscount",
+                        "caption": "Widget.showBasketCouponDiscount"
+                    },
+                    {
+                        "value": "openAmount",
+                        "caption": "Widget.showBasketOpenAmount"
+                    }
+                ]
+            }
+        }
+    }
 }
