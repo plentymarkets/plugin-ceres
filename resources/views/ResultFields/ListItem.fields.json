@@ -14,8 +14,6 @@
     "images.variation.names.lang",
     "item.storeSpecial",
     "properties.*",
-    "salesPrices.price",
-    "salesPrices.type",
     "item.id",
     "item.manufacturer.position",
     "item.manufacturer.externalName",
