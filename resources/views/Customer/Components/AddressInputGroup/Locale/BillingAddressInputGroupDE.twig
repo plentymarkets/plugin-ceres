@@ -3,7 +3,9 @@
 <div class="col-12">
     <div class="row">
         <div v-if="isInOptionalFields('de', 'billing_address.salutation')" class="col-12 col-sm-4">
-            <div class="input-unit" v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'billing_address.salutation'), validateType: ''}">
+            <div
+                class="input-unit"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'billing_address.salutation'), validateType: ''}">
                 <salutation-select template="#vue-salutation-select" :address-type="addressType" :address-data="value" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                 <label :for="'txtSalutation' + _uid">
                     ${ '{{ trans("Ceres::Template.addressSalutation") }}' | transformRequiredLabel(isInOptionalFields('de', 'billing_address.salutation')) }
@@ -27,7 +29,8 @@
         <div
             class="col-12 col-sm-6"
             v-if="(isInOptionalFields('de', 'billing_address.salutation') && value.addressSalutation === 2) || isInOptionalFields('de', 'billing_address.vatNumber')">
-            <div class="input-unit"
+            <div
+                class="input-unit"
                 data-model="vatNumber"
                 v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'billing_address.vatNumber'), validateType: 'text'}">
                 <input type="text" name="vatNumber" :id="'txtVatNumber' + _uid" :value="value.vatNumber"  @input="emitInputEvent('vatNumber', $event.target.value)" data-autofocus>
