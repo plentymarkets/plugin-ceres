@@ -70,32 +70,10 @@
                 ]
             }
         },
-        "categoryId": {
-            "type": "category",
+        "urlPicker":
+        {
             "required": false,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.imageBoxCategoryIdLabel",
-                "tooltipText": "Widget.imageBoxCategoryIdTooltip"
-            }
-        },
-        "variationId": {
-            "type": "number",
-            "required": false,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.imageBoxVariationIdLabel",
-                "tooltipText": "Widget.imageBoxVariationIdTooltip"
-            }
-        },
-        "customImagePath": {
-            "type": "file",
-            "required": false,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.imageBoxCustomImagePathLabel",
-                "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
-            }
+            "type": "urlPicker"
         }
     }
 }

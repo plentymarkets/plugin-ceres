@@ -5,29 +5,28 @@
 {% set style            = widget.settings.style.mobile %}
 {% set headline         = widget.settings.headline.mobile %}
 {% set imageSize        = widget.settings.imageSize.mobile %}
-{% set categoryId       = widget.settings.categoryId.mobile %}
-{% set variationId      = widget.settings.variationId.mobile %}
-{% set customImagePath  = widget.settings.customImagePath.mobile %}
+{% set urlPickerType    = widget.settings.urlPicker.type.mobile %}
+{% set urlPickerValue   = widget.settings.urlPicker.value.mobile %}
 
 {{ Twig.set("name", "" | json_encode) }}
 {{ Twig.set("url", "" | json_encode) }}
 {{ Twig.set("imageUrl", "" | json_encode) }}
 
-{% if categoryId | trim is not empty %}
+{% if urlPickerType == 'category' %}
 
-    {{ Twig.set("category", Twig.call("services.category.get", [categoryId])) }}
+    {{ Twig.set("category", Twig.call("services.category.get", [urlPickerValue])) }}
 
     {{ Twig.set("name", "category.details[0].name") }}
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
 
     {{ Twig.if("imageUrl | trim is not empty") }}
-        {{ Twig.set("imageUrl", "\"documents/\" ~ imageUrl") }}
+    {{ Twig.set("imageUrl", "\"documents/\" ~ imageUrl") }}
     {{ Twig.endif() }}
 
-{% elseif variationId | trim is not empty %}
-    
-    {{ Twig.set("itemData", Twig.call("services.item.getVariation", [variationId])) }}
+{% elseif urlPickerType == 'item' %}
+
+    {{ Twig.set("itemData", Twig.call("services.item.getVariation", [urlPickerValue])) }}
     {{ Twig.set("itemData", "itemData.documents[0].data") }}
     {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
 
@@ -37,8 +36,8 @@
 
 {% endif %}
 
-{% if customImagePath | trim is not empty %}
-    {{ Twig.set("imageUrl", customImagePath | json_encode) }}
+{% if urlPickerType == 'external' or urlPickerType == 'file' %}
+    {{ Twig.set("imageUrl", urlPickerValue | json_encode) }}
 {% endif %}
 
 {% if style != "no-caption" and headline is not empty %}
