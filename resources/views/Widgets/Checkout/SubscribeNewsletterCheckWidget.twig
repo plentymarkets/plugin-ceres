@@ -1,18 +1,17 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set appearance = widget.settings.appearance.mobile %}
+{% set emailFolder = widget.settings.emailFolder.mobile %}
 {% set hideCheckbox = widget.settings.hideCheckbox.mobile %}
 {% set isPreselected = widget.settings.isPreselected.mobile %}
 {% set isRequired = widget.settings.isRequired.mobile %}
 {% set customText = widget.settings.customText.mobile %}
 
-{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
-{{ Twig.component("Ceres::Checkout.Components.AcceptGtcCheck") }}
+{{ Twig.component("Ceres::Checkout.Components.SubscribeNewsletterCheck") }}
 
-<div class="widget widget-gtc-check">
-    <accept-gtc-check
+<div class="widget widget-subscribe-newsletter-check">
+    <subscribe-newsletter-check
         {% if hideCheckbox %}class="pl-0"{% endif %}
-        appearance="{{ appearance }}"
+        :email-folder="{{ emailFolder | json_encode }}"
         :hide-checkbox="{{ hideCheckbox | json_encode }}"
         {% if not hideCheckbox %}
             :is-preselected="{{ isPreselected | json_encode }}"
@@ -21,7 +20,5 @@
         {% if customText | length > 0 %}
             custom-text="{{ customText }}"
         {% endif %}>
-    </accept-gtc-check>
-
-    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.OptIns"])) }}
+    </subscribe-newsletter-check>
 </div>

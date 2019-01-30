@@ -34,16 +34,8 @@
                 "tooltip": "Widget.gtcCheckIsRequiredTooltip"
             }
         },
-        "hasCustomText": {
-            "type": "checkbox",
-            "options": {
-                "name": "Widget.gtcCheckHasCustomTextLabel",
-                "tooltip": "Widget.gtcCheckHasCustomTextTooltip"
-            }            
-        },
         "customText": {
             "type": "text",
-            "isVisible": "hasCustomText === true",
             "defaultValue": "",
             "options": {
                 "name": "Widget.gtcCheckCustomTextLabel",
