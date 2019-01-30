@@ -35,7 +35,8 @@ const state =
                 showError: false,
                 validate: null
             }
-        }
+        },
+        newsletterSubscription: {}
     };
 
 const mutations =
@@ -135,6 +136,21 @@ const mutations =
         setPostOfficeAvailability(state, availability)
         {
             state.shipping.isPostOfficeAvailable = availability;
+        },
+
+        setSubscribeNewsletterCheck(state, { emailFolder, value })
+        {
+            Vue.set(state.newsletterSubscription, emailFolder, value);
+        },
+
+        addSubscribeNewsletterValidate(state, { emailFolder, validator })
+        {
+            Vue.set(state.validation, `subscribeNewsletter_${emailFolder}`, { validate: validator, showError: false });
+        },
+
+        setSubscribeNewsletterShowErr(state, { emailFolder, showError })
+        {
+            Vue.set(state.validation[`subscribeNewsletter_${emailFolder}`], "showError", showError);
         }
     };
 

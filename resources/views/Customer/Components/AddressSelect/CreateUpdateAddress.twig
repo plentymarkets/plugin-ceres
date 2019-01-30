@@ -2,7 +2,19 @@
 
 <script type="x/template" id="vue-create-update-address">
     <form ref="addressForm">
-        <address-input-group template="#vue-address-input-group" :address-type="addressType" :modal-type="modalType" :value="addressData" @input="emitInputEvent($event)"></address-input-group>
-        <button type="button" class="btn btn-primary btn-block" @click="validate" :disabled="waiting">{{ trans("Ceres::Template.addressSave") }}</button>
+        <address-input-group
+            template="#vue-address-input-group"
+            :address-type="addressType"
+            :modal-type="modalType"
+            :value="addressData"
+            @input="emitInputEvent($event)">
+        </address-input-group>
+        <button
+            type="button"
+            class="btn btn-primary btn-block"
+            @click="validate"
+            :disabled="waiting">
+            {{ trans("Ceres::Template.addressSave") }}
+        </button>
     </form>
 </script>

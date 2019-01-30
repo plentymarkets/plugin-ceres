@@ -8,8 +8,7 @@ Vue.component("invoice-address-select", {
     template: `
         <address-select 
             ref="invoice"
-            template="#vue-address-select"
-            v-on:address-changed="addressChanged"
+            @address-changed="addressChanged"
             address-type="1"
             :show-error='showError'>
         </address-select>
@@ -31,7 +30,7 @@ Vue.component("invoice-address-select", {
      */
     created()
     {
-        this.$store.dispatch("initBillingAddress", { id: this.selectedAddressId, addressList: this.addressList });
+        // this.$store.dispatch("initBillingAddress", { id: this.selectedAddressId, addressList: this.addressList });
 
         if (this.hasToValidate)
         {
@@ -63,14 +62,14 @@ Vue.component("invoice-address-select", {
         {
             this.$store.dispatch("selectAddress", { selectedAddress, addressType: "1" })
                 .then(
-                response =>
-                {
-                    document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: this.billingAddressId }));
-                },
-                error =>
-                {
+                    response =>
+                    {
+                        document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: this.billingAddressId }));
+                    },
+                    error =>
+                    {
 
-                });
+                    });
 
             if (this.hasToValidate)
             {

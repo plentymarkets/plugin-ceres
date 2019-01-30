@@ -7,9 +7,11 @@ const state =
         billingAddressId: null,
         billingAddress: null,
         billingAddressList: [],
+        billingAddressSettings: null,
         deliveryAddressId: null,
         deliveryAddress: null,
-        deliveryAddressList: []
+        deliveryAddressList: [],
+        deliveryAddressSettings: null
     };
 
 const mutations =
@@ -203,6 +205,16 @@ const mutations =
                 state.deliveryAddressId = state.deliveryAddressList[0].id;
                 document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
+        },
+
+        setBillingAddressSettings(state, settings)
+        {
+            state.billingAddressSettings = settings;
+        },
+
+        setDeliveryAddressSettings(state, settings)
+        {
+            state.deliveryAddressSettings = settings;
         }
     };
 
@@ -216,6 +228,9 @@ const actions =
 
         initDeliveryAddress({ commit }, { id, addressList })
         {
+            addressList.unshift({ id: -99 });
+            id = this.selectedAddressId === 0 ? -99 : id;
+
             commit("setDeliveryAddressList", addressList);
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
         },

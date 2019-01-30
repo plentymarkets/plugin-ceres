@@ -58,13 +58,31 @@ Vue.component("place-order", {
             return classes;
         },
 
+        activeNewsletterSubscriptions()
+        {
+            const activeNewsletterSubscriptions = [];
+
+            for (const emailFolder in this.newsletterSubscription)
+            {
+                const emailFolderValue = this.newsletterSubscription[emailFolder];
+
+                if (emailFolderValue)
+                {
+                    activeNewsletterSubscriptions.push(emailFolder);
+                }
+            }
+
+            return activeNewsletterSubscriptions;
+        },
+
         ...Vuex.mapState({
             checkoutValidation: state => state.checkout.validation,
             contactWish: state => state.checkout.contactWish,
             isBasketLoading: state => state.basket.isBasketLoading,
             basketItemQuantity: state => state.basket.data.itemQuantity,
             isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
-            shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted
+            shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
+            newsletterSubscription: state => state.checkout.newsletterSubscription
         })
     },
 
@@ -79,7 +97,11 @@ Vue.component("place-order", {
             this.waiting = true;
 
             const url = "/rest/io/order/additional_information";
-            const params = { orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted };
+            const params = {
+                orderContactWish: this.contactWish,
+                shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
+                newsletterSubscriptions: this.activeNewsletterSubscriptions
+            };
             const options = { supressNotifications: true };
 
             ApiService.post(url, params, options)
