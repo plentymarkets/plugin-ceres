@@ -51,9 +51,10 @@
         "addressFieldsInvoiceDE": {
             "type": "checkboxGroup",
             "isVisible": "addressType === '1' && addressLayout === 'DE'",
+            "defaultValue": "billing_address.name1, billing_address.salutation",
             "options": {
                 "name": "Widget.addressFieldsInvoiceDE",
-                "valueList": [
+                "checkboxValues": [
                     {
                         "value": "billing_address.name1",
                         "caption": "Widget.addressFieldName1"
@@ -102,7 +103,7 @@
             "isVisible": "addressType === '1' && addressLayout === 'DE'",
             "options": {
                 "name": "Widget.addressRequiredFieldsInvoiceDE",
-                "valueList": [
+                "checkboxValues": [
                     {
                         "value": "billing_address.vatNumber",
                         "caption": "Widget.addressFieldVatNumber"
@@ -145,9 +146,10 @@
         "addressFieldsInvoiceGB": {
             "type": "checkboxGroup",
             "isVisible": "addressType === '1' && addressLayout === 'GB'",
+            "defaultValue": "billing_address.name1, billing_address.address2, billing_address.salutation",
             "options": {
                 "name": "Widget.addressFieldsInvoiceGB",
-                "valueList": [
+                "checkboxValues": [
                     {
                         "value": "billing_address.name1",
                         "caption": "Widget.addressFieldEnName1"
@@ -196,7 +198,7 @@
             "isVisible": "addressType === '1' && addressLayout === 'GB'",
             "options": {
                 "name": "Widget.addressRequiredFieldsInvoiceGB",
-                "valueList": [
+                "checkboxValues": [
                     {
                         "value": "billing_address.vatNumber",
                         "caption": "Widget.addressFieldEnVatNumber"
@@ -239,9 +241,10 @@
         "addressFieldsShippingDE": {
             "type": "checkboxGroup",
             "isVisible": "addressType === '2' && addressLayout === 'DE'",
+            "defaultValue": "delivery_address.name1, delivery_address.salutation",
             "options": {
                 "name": "Widget.addressFieldsShippingDE",
-                "valueList": [
+                "checkboxValues": [
                     {
                         "value": "delivery_address.name1",
                         "caption": "Widget.addressFieldName1"
@@ -282,7 +285,7 @@
             "isVisible": "addressType === '2' && addressLayout === 'DE'",
             "options": {
                 "name": "Widget.addressRequiredFieldsShippingDE",
-                "valueList": [
+                "checkboxValues": [
                     {
                         "value": "delivery_address.salutation",
                         "caption": "Widget.addressFieldSalutation"
@@ -317,9 +320,10 @@
         "addressFieldsShippingGB": {
             "type": "checkboxGroup",
             "isVisible": "addressType === '2' && addressLayout === 'GB'",
+            "defaultValue": "delivery_address.name1, delivery_address.salutation",
             "options": {
                 "name": "Widget.addressFieldsShippingGB",
-                "valueList": [
+                "checkboxValues": [
                     {
                         "value": "delivery_address.name1",
                         "caption": "Widget.addressFieldEnName1"
@@ -360,7 +364,7 @@
             "isVisible": "addressType === '2' && addressLayout === 'GB'",
             "options": {
                 "name": "Widget.addressRequiredFieldsShippingGB",
-                "valueList": [
+                "checkboxValues": [
                     {
                         "value": "delivery_address.salutation",
                         "caption": "Widget.addressFieldEnSalutation"
