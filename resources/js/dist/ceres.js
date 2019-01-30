@@ -19234,6 +19234,16 @@ Vue.component("shipping-profile-select", {
 },{"services/NotificationService":254,"services/TranslationService":255}],148:[function(require,module,exports){
 "use strict";
 
+var _NotificationService = require("services/NotificationService");
+
+var _NotificationService2 = _interopRequireDefault(_NotificationService);
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 Vue.component("subscribe-newsletter-check", {
 
     props: {
@@ -19244,28 +19254,74 @@ Vue.component("subscribe-newsletter-check", {
         emailFolder: {
             type: Number,
             default: 0
+        },
+        hideCheckbox: {
+            type: Boolean
+        },
+        isPreselected: {
+            type: Boolean
+        },
+        isRequired: {
+            type: Boolean,
+            default: true
+        },
+        customText: {
+            type: String,
+            default: ""
         }
     },
 
     computed: Vuex.mapState({
         newsletterSubscription: function newsletterSubscription(state) {
             return state.checkout.newsletterSubscription[this.emailFolder];
+        },
+        showError: function showError(state) {
+            if (state.checkout.validation["subscribeNewsletter_" + this.emailFolder]) {
+                return state.checkout.validation["subscribeNewsletter_" + this.emailFolder].showError;
+            }
+
+            return null;
         }
     }),
 
     created: function created() {
         this.$options.template = this.template;
+
+        if (this.isPreselected || this.hideCheckbox) {
+            this.setValue(true);
+        }
+
+        if (this.isRequired) {
+            this.$store.commit("addSubscribeNewsletterValidate", { emailFolder: this.emailFolder, validator: this.validate });
+        }
     },
 
 
     methods: {
         setValue: function setValue(value) {
             this.$store.commit("setSubscribeNewsletterCheck", { emailFolder: this.emailFolder, value: value });
+        },
+        validate: function validate() {
+            var showError = this.isRequired && !this.newsletterSubscription;
+
+            this.$store.commit("setSubscribeNewsletterShowErr", { emailFolder: this.emailFolder, showError: showError });
+
+            if (showError) {
+                _NotificationService2.default.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckAcceptNewsletterSubscription"));
+            }
+        }
+    },
+
+    watch: {
+        newsletterSubscription: function newsletterSubscription() {
+            if (this.showError) {
+                this.validate();
+            }
         }
     }
 });
 
-},{}],149:[function(require,module,exports){
+},{"services/NotificationService":254,"services/TranslationService":255}],149:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -29114,13 +29170,25 @@ var mutations = {
             value = _ref.value;
 
         Vue.set(state.newsletterSubscription, emailFolder, value);
+    },
+    addSubscribeNewsletterValidate: function addSubscribeNewsletterValidate(state, _ref2) {
+        var emailFolder = _ref2.emailFolder,
+            validator = _ref2.validator;
+
+        Vue.set(state.validation, "subscribeNewsletter_" + emailFolder, { validate: validator, showError: false });
+    },
+    setSubscribeNewsletterShowErr: function setSubscribeNewsletterShowErr(state, _ref3) {
+        var emailFolder = _ref3.emailFolder,
+            showError = _ref3.showError;
+
+        Vue.set(state.validation["subscribeNewsletter_" + emailFolder], "showError", showError);
     }
 };
 
 var actions = {
-    setCheckout: function setCheckout(_ref2, checkout) {
-        var commit = _ref2.commit,
-            dispatch = _ref2.dispatch;
+    setCheckout: function setCheckout(_ref4, checkout) {
+        var commit = _ref4.commit,
+            dispatch = _ref4.dispatch;
 
         commit("setShippingCountryId", checkout.shippingCountryId);
         commit("setShippingProfile", checkout.shippingProfileId);
@@ -29131,9 +29199,9 @@ var actions = {
         dispatch("setShippingProfileById", checkout.shippingProfileId);
         dispatch("initProfileAvailabilities");
     },
-    setShippingProfileById: function setShippingProfileById(_ref3, shippingProfileId) {
-        var state = _ref3.state,
-            commit = _ref3.commit;
+    setShippingProfileById: function setShippingProfileById(_ref5, shippingProfileId) {
+        var state = _ref5.state,
+            commit = _ref5.commit;
 
         var shippingProfile = state.shipping.shippingProfileList.find(function (profile) {
             return profile.parcelServicePresetId === shippingProfileId;
@@ -29143,9 +29211,9 @@ var actions = {
             commit("setSelectedShippingProfile", shippingProfile);
         }
     },
-    selectMethodOfPayment: function selectMethodOfPayment(_ref4, methodOfPaymentId) {
-        var commit = _ref4.commit,
-            dispatch = _ref4.dispatch;
+    selectMethodOfPayment: function selectMethodOfPayment(_ref6, methodOfPaymentId) {
+        var commit = _ref6.commit,
+            dispatch = _ref6.dispatch;
 
         return new Promise(function (resolve, reject) {
             var oldMethodOfPayment = state.payment.methodOfPaymentId;
@@ -29163,10 +29231,10 @@ var actions = {
             });
         });
     },
-    selectShippingProfile: function selectShippingProfile(_ref5, shippingProfile) {
-        var commit = _ref5.commit,
-            dispatch = _ref5.dispatch,
-            getters = _ref5.getters;
+    selectShippingProfile: function selectShippingProfile(_ref7, shippingProfile) {
+        var commit = _ref7.commit,
+            dispatch = _ref7.dispatch,
+            getters = _ref7.getters;
 
         return new Promise(function (resolve, reject) {
             var oldShippingProfile = state.shipping.shippingProfileId;
@@ -29201,9 +29269,9 @@ var actions = {
             });
         });
     },
-    refreshCheckout: function refreshCheckout(_ref6) {
-        var commit = _ref6.commit,
-            dispatch = _ref6.dispatch;
+    refreshCheckout: function refreshCheckout(_ref8) {
+        var commit = _ref8.commit,
+            dispatch = _ref8.dispatch;
 
         return new Promise(function (resolve, reject) {
             _ApiService2.default.get("/rest/io/checkout/").done(function (checkout) {
@@ -29214,9 +29282,9 @@ var actions = {
             });
         });
     },
-    initProfileAvailabilities: function initProfileAvailabilities(_ref7) {
-        var commit = _ref7.commit,
-            state = _ref7.state;
+    initProfileAvailabilities: function initProfileAvailabilities(_ref9) {
+        var commit = _ref9.commit,
+            state = _ref9.state;
 
         commit("setParcelBoxAvailability", !(0, _utils.isNullOrUndefined)(state.shipping.shippingProfileList.find(function (shipping) {
             return shipping.isParcelBox;

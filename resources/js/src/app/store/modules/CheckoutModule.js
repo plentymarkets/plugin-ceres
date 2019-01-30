@@ -141,6 +141,16 @@ const mutations =
         setSubscribeNewsletterCheck(state, { emailFolder, value })
         {
             Vue.set(state.newsletterSubscription, emailFolder, value);
+        },
+
+        addSubscribeNewsletterValidate(state, { emailFolder, validator })
+        {
+            Vue.set(state.validation, `subscribeNewsletter_${emailFolder}`, { validate: validator, showError: false });
+        },
+
+        setSubscribeNewsletterShowErr(state, { emailFolder, showError })
+        {
+            Vue.set(state.validation[`subscribeNewsletter_${emailFolder}`], "showError", showError);
         }
     };
 

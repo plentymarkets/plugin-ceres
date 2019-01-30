@@ -362,7 +362,7 @@
         "addressRequiredFieldsShippingGB": {
             "type": "checkboxGroup",
             "isVisible": "addressType === '2' && addressLayout === 'GB'",
-            "options": {
+            "options": { 
                 "name": "Widget.addressRequiredFieldsShippingGB",
                 "checkboxValues": [
                     {

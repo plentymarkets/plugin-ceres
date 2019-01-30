@@ -622,16 +622,8 @@
                     "tooltip": "Widget.gtcCheckIsRequiredTooltip"
                 }
             },
-            "hasCustomText": {
-                "type": "checkbox",
-                "options": {
-                    "name": "Widget.gtcCheckHasCustomTextLabel",
-                    "tooltip": "Widget.gtcCheckHasCustomTextTooltip"
-                }
-            },
             "customText": {
                 "type": "text",
-                "isVisible": "hasCustomText === true",
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.gtcCheckCustomTextLabel",
@@ -852,6 +844,62 @@
                 "options": {
                     "name": "Widget.shippingProfileHinttextLabel",
                     "tooltipText": "Widget.shippingProfileHinttextTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::SubscribeNewsletterCheckWidget",
+        "label": "Widget.subscribeNewsletterCheckLabel",
+        "previewImageURL": "",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 999,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\SubscribeNewsletterCheckWidget",
+        "settings": {
+            "emailFolder": {
+                "type": "number",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckEmailFolderLabel",
+                    "tooltipText": "Widget.subscribeNewsletterCheckEmailFolderTooltip"
+                }
+            },
+            "hideCheckbox": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckHideCheckboxLabel",
+                    "tooltip": "Widget.subscribeNewsletterCheckHideCheckboxTooltip"
+                }
+            },
+            "isPreselected": {
+                "type": "checkbox",
+                "isVisible": "hideCheckbox !== true",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckIsPreselectedLabel",
+                    "tooltip": "Widget.subscribeNewsletterCheckIsPreselectedTooltip"
+                }
+            },
+            "isRequired": {
+                "type": "checkbox",
+                "isVisible": "hideCheckbox !== true",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckIsRequiredLabel",
+                    "tooltip": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
+                }
+            },
+            "customText": {
+                "type": "text",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
+                    "tooltip": "Widget.subscribeNewsletterCheckCustomTextTooltip"
                 }
             }
         }
