@@ -17,6 +17,20 @@ Vue.component("address-input-group", {
             {
                 return {};
             }
+        },
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
         }
     },
 

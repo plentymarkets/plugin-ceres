@@ -19092,6 +19092,18 @@ Vue.component("address-input-group", {
             default: function _default() {
                 return {};
             }
+        },
+        optionalAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
         }
     },
 
@@ -19278,7 +19290,19 @@ Vue.component("address-select", {
             type: String,
             required: true
         },
-        showError: Boolean
+        showError: Boolean,
+        optionalAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
     },
 
     data: function data() {
@@ -19611,7 +19635,35 @@ Vue.component("create-update-address", {
 
     delimiters: ["${", "}"],
 
-    props: ["addressData", "addressModal", "modalType", "addressType", "template"],
+    props: {
+        addressData: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        addressModal: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        modalType: String,
+        addressType: String,
+        template: String,
+        optionalAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
+    },
 
     data: function data() {
         return {
@@ -19863,9 +19915,26 @@ Vue.component("invoice-address-select", {
 
     delimiters: ["${", "}"],
 
-    template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'>\n        </address-select>\n    ",
+    template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\">\n        </address-select>\n    ",
 
-    props: ["selectedAddressId", "addressList", "hasToValidate"],
+    props: {
+        optionalAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        hasToValidate: {
+            type: String,
+            default: false
+        }
+    },
 
     computed: Vuex.mapState({
         billingAddressId: function billingAddressId(state) {
@@ -19945,9 +20014,22 @@ Vue.component("shipping-address-select", {
 
     delimiters: ["${", "}"],
 
-    template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"2\">\n        </address-select>\n    ",
+    template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            @address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\">\n        </address-select>\n    ",
 
-    props: ["selectedAddressId", "addressList"],
+    props: {
+        optionalAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
+    },
 
     computed: Vuex.mapState({
         deliveryAddressId: function deliveryAddressId(state) {

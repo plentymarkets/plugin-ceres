@@ -10,15 +10,32 @@ Vue.component("invoice-address-select", {
             ref="invoice"
             @address-changed="addressChanged"
             address-type="1"
-            :show-error='showError'>
+            :show-error='showError'
+            :optional-address-fields="optionalAddressFields"
+            :required-address-fields="requiredAddressFields">
         </address-select>
     `,
 
-    props: [
-        "selectedAddressId",
-        "addressList",
-        "hasToValidate"
-    ],
+    props: {
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        hasToValidate: {
+            type: String,
+            default: false
+        }
+    },
 
     computed: Vuex.mapState({
         billingAddressId: state => state.address.billingAddressId,

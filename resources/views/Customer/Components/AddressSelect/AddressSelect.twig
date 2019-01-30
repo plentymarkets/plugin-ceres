@@ -92,7 +92,9 @@
                                     :address-modal="addressModal"
                                     :modal-type="modalType"
                                     :address-type="addressType"
-                                    @input="setAddressToEditField($event)">
+                                    @input="setAddressToEditField($event)"
+                                    :optional-address-fields="optionalAddressFields"
+                                    :required-address-fields="requiredAddressFields">
                                 </create-update-address>
                             </fieldset>
                         </div>

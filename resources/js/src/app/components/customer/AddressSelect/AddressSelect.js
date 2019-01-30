@@ -20,7 +20,21 @@ Vue.component("address-select", {
             type: String,
             required: true
         },
-        showError: Boolean
+        showError: Boolean,
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        }
     },
 
     data()

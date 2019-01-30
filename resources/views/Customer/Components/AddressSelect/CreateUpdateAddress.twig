@@ -7,7 +7,9 @@
             :address-type="addressType"
             :modal-type="modalType"
             :value="addressData"
-            @input="emitInputEvent($event)">
+            @input="emitInputEvent($event)"
+            :optional-address-fields="optionalAddressFields"
+            :required-address-fields="requiredAddressFields">
         </address-input-group>
         <button
             type="button"

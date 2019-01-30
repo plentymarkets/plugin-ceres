@@ -6,15 +6,29 @@ Vue.component("shipping-address-select", {
         <address-select
             ref:shipping-address-select
             template="#vue-address-select"
-            v-on:address-changed="addressChanged"
-            address-type="2">
+            @address-changed="addressChanged"
+            address-type="2"
+            :optional-address-fields="optionalAddressFields"
+            :required-address-fields="requiredAddressFields">
         </address-select>
     `,
 
-    props: [
-        "selectedAddressId",
-        "addressList"
-    ],
+    props: {
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        }
+    },
 
     computed: Vuex.mapState({
         deliveryAddressId: state => state.address.deliveryAddressId

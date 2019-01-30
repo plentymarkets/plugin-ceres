@@ -12,7 +12,22 @@
             
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBillingAddress"])) }}
             <div class="invoice-addresses-select">
-                <invoice-address-select has-to-validate="true"></invoice-address-select>
+                {% set optionalInvoiceAddressFields = {
+                    "de": widget.settings.addressFieldsInvoiceDE.mobile,
+                    "gb": widget.settings.addressFieldsInvoiceGB.mobile
+                    }
+                %}
+                {% set requiredInvoiceAddressFields = {
+                    "de": widget.settings.addressRequiredFieldsInvoiceDE.mobile,
+                    "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile
+                    }
+                %}
+
+                <invoice-address-select
+                    has-to-validate="true"
+                    :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+                    :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                </invoice-address-select>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBillingAddress"])) }}
         {{ Twig.else() }}
@@ -25,7 +40,21 @@
 
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingAddress"])) }}
             <div class="shipping-addresses-select">
-                <shipping-address-select></shipping-address-select>
+                {% set optionalShippingAddressFields = {
+                    "de": widget.settings.addressFieldsShippingDE.mobile,
+                    "gb": widget.settings.addressFieldsShippingGB.mobile
+                    }
+                %}
+                {% set requiredShippingAddressFields = {
+                    "de": widget.settings.addressRequiredFieldsShippingDE.mobile,
+                    "gb": widget.settings.addressRequiredFieldsShippingGB.mobile
+                    }
+                %}
+
+                <shipping-address-select
+                    :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
+                    :required-address-fields="{{ requiredShippingAddressFields | json_encode }}">
+                </shipping-address-select>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterShippingAddress"])) }}
         {{ Twig.else() }}
