@@ -19188,6 +19188,15 @@ Vue.component("address-input-group", {
          */
         emitInputEvent: function emitInputEvent(field, value) {
             this.$emit("input", { field: field, value: value });
+        },
+        isInOptionalFields: function isInOptionalFields(locale, key) {
+            return this.optionalAddressFields[locale].includes(key);
+        }
+    },
+
+    filters: {
+        transformRequiredLabel: function transformRequiredLabel(label, shouldMarkRequired) {
+            return shouldMarkRequired ? label + "*" : label;
         }
     }
 });

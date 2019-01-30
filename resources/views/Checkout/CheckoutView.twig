@@ -52,6 +52,10 @@
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
                                         <div class="invoice-addresses-select">
+                                            {% set addressFields = config("Ceres.billing_address.show") | split(', ') %}
+                                            {% set addressFieldsRequired = config("Ceres.billing_address.require") | split(', ') %}
+                                            {% set addressFields = config("Ceres.billing_address.en.show") | split(', ') %}
+                                            {% set addressFieldsRequired = config("Ceres.billing_address.en.require") | split(', ') %}
                                             <invoice-address-select has-to-validate="true"></invoice-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterBillingAddress") }}
@@ -67,6 +71,10 @@
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingAddress") }}
                                         <div class="shipping-addresses-select">
+                                            {% set addressFields = config("Ceres.delivery_address.show") | split(', ') %}
+                                            {% set addressFieldsRequired = config("Ceres.delivery_address.require") | split(', ') %}
+                                            {% set addressFields = config("Ceres.delivery_address.en.show") | split(', ') %}
+                                            {% set addressFieldsRequired = config("Ceres.delivery_address.en.require") | split(', ') %}
                                             <shipping-address-select></shipping-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterShippingAddress") }}
