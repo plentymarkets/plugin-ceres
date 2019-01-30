@@ -18126,6 +18126,8 @@ Vue.component("category-breadcrumbs", {
 },{}],141:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
@@ -18168,7 +18170,21 @@ Vue.component("accept-gtc-check", {
     },
 
 
-    computed: Vuex.mapState({
+    computed: _extends({
+        appearanceClass: function appearanceClass() {
+            if (!this.showError) {
+                return "text-" + this.appearance;
+            }
+
+            return null;
+        }
+    }, Vuex.mapState({
+        showError: function showError(state) {
+            return state.checkout.validation.gtc.showError;
+        }
+    })),
+
+    computed2: Vuex.mapState({
         showError: function showError(state) {
             return state.checkout.validation.gtc.showError;
         }

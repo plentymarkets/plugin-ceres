@@ -5,18 +5,18 @@
         <label v-if="!customText.length" class="form-check-label" :for="'gtc-accept' + _uid">
             {% autoescape false %}
                 {% set gtcContent %}<!--
-                --><a :class="'text-' + appearance" href="{{ urls.gtc }}" target="_blank">
+                --><a :class="appearanceClass" href="{{ urls.gtc }}" target="_blank">
                     <span>{{ trans("Ceres::Template.checkoutGtc") }}</span>
                 </a><!--
             -->{% endset %}
                 {% set cancellationContent %}<!--
-                --><a :class="'text-' + appearance" href="{{ urls.cancellationRights }}" target="_blank">
+                --><a :class="appearanceClass" href="{{ urls.cancellationRights }}" target="_blank">
                     <strong>{{ trans("Ceres::Template.checkoutCancellationRight", {"hyphen": "&shy;"}) }}</strong>
                 </a><!--
             -->{% endset %}
 
                 {% set policyContent %}<!--
-                --><a :class="'text-' + appearance" href="{{ urls.privacyPolicy }}" target="_blank">
+                --><a :class="appearanceClass" href="{{ urls.privacyPolicy }}" target="_blank">
                     <span>{{ trans("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
                 </a><!--
             -->{% endset %}

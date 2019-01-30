@@ -42,7 +42,24 @@ Vue.component("accept-gtc-check", {
         };
     },
 
-    computed: Vuex.mapState({
+    computed:
+    {
+        appearanceClass()
+        {
+            if (!this.showError)
+            {
+                return `text-${this.appearance}`;
+            }
+
+            return null;
+        },
+
+        ...Vuex.mapState({
+            showError: state => state.checkout.validation.gtc.showError
+        })
+    },
+
+    computed2: Vuex.mapState({
         showError: state => state.checkout.validation.gtc.showError
     }),
 
