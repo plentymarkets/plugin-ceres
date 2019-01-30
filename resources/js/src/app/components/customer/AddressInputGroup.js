@@ -22,14 +22,20 @@ Vue.component("address-input-group", {
             type: Object,
             default: () =>
             {
-                return {};
+                return {
+                    de:[],
+                    uk:[]
+                };
             }
         },
         requiredAddressFields: {
             type: Object,
             default: () =>
             {
-                return {};
+                return {
+                    de:[],
+                    uk:[]
+                };
             }
         }
     },
@@ -135,6 +141,11 @@ Vue.component("address-input-group", {
         isInOptionalFields(locale, key)
         {
             return this.optionalAddressFields[locale].includes(key);
+        },
+
+        isInRequiredFields(locale, key)
+        {
+            return (this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key));
         }
     },
 
@@ -142,6 +153,18 @@ Vue.component("address-input-group", {
         transformRequiredLabel(label, shouldMarkRequired)
         {
             return shouldMarkRequired ? label + "*" : label;
+        }
+    },
+
+    directives: {
+        "data-validate": {
+            inserted(el, binding)
+            {
+                if (binding.value.shouldAddProperty)
+                {
+                    el.dataset.validate = binding.value.validateType;
+                }
+            }
         }
     }
 });
