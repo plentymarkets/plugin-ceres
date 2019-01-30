@@ -54,7 +54,10 @@
             "addressFieldsInvoiceDE": {
                 "type": "checkboxGroup",
                 "isVisible": "addressType === '1' && addressLayout === 'DE'",
-                "defaultValue": "billing_address.name1, billing_address.salutation",
+                "defaultValue": [
+                    "billing_address.name1",
+                    "billing_address.salutation"
+                ],
                 "options": {
                     "name": "Widget.addressFieldsInvoiceDE",
                     "checkboxValues": [
@@ -149,7 +152,11 @@
             "addressFieldsInvoiceGB": {
                 "type": "checkboxGroup",
                 "isVisible": "addressType === '1' && addressLayout === 'GB'",
-                "defaultValue": "billing_address.name1, billing_address.address2, billing_address.salutation",
+                "defaultValue": [
+                    "billing_address.name1",
+                    "billing_address.address2",
+                    "billing_address.salutation"
+                ],
                 "options": {
                     "name": "Widget.addressFieldsInvoiceGB",
                     "checkboxValues": [
@@ -244,7 +251,10 @@
             "addressFieldsShippingDE": {
                 "type": "checkboxGroup",
                 "isVisible": "addressType === '2' && addressLayout === 'DE'",
-                "defaultValue": "delivery_address.name1, delivery_address.salutation",
+                "defaultValue": [
+                    "delivery_address.name1",
+                    "delivery_address.salutation"
+                ],
                 "options": {
                     "name": "Widget.addressFieldsShippingDE",
                     "checkboxValues": [
@@ -323,7 +333,10 @@
             "addressFieldsShippingGB": {
                 "type": "checkboxGroup",
                 "isVisible": "addressType === '2' && addressLayout === 'GB'",
-                "defaultValue": "delivery_address.name1, delivery_address.salutation",
+                "defaultValue": [
+                    "delivery_address.name1",
+                    "delivery_address.salutation"
+                ],
                 "options": {
                     "name": "Widget.addressFieldsShippingGB",
                     "checkboxValues": [
