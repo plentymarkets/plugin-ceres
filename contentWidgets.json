@@ -464,8 +464,23 @@
                             "value": "tag_list",
                             "caption": "Widget.itemListListTypeTaglist",
                             "position": 2
+                        },
+                        {
+                            "value": "manufacturer",
+                            "caption": "Widget.itemListListTypeManufacturer",
+                            "position": 3
                         }
                     ]
+                }
+            },
+            "manufacturerId": {
+                "type": "manufacturer",
+                "required": false,
+                "isVisible": "listType === 'manufacturer'",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.itemListListTypeManufacturer",
+                    "tooltipText": "Widget.itemListManufacturerTooltip"
                 }
             },
             "categoryId": {
