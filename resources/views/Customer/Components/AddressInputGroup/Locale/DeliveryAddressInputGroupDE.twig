@@ -37,7 +37,7 @@
             <div
                 class="input-unit"
                 data-model="title"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.title'), validateType: 'text'}">>
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.title'), validateType: 'text'}">
                 <input type="text" name="title" :id="'txtTitle' + _uid" :value="value.title" @input="emitInputEvent('title', $event.target.value)" data-autofocus>
                 <label :for="'txtTitle' + _uid">
                     ${ '{{ trans("Ceres::Template.addressTitle") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.title')) }
