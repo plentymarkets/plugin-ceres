@@ -153,7 +153,7 @@
             <div
                 class="input-unit"
                 data-model="address4"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'billing_address.address4'), validateType: 'text'}">>
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'billing_address.address4'), validateType: 'text'}">
                 <input type="text" name="decorateAddress" :id="'decorateAddress1' + _uid" :value="value.address4" @input="emitInputEvent('address4', $event.target.value)">
                 <label :for="'decorateAddress1' + _uid">
                     ${ '{{ trans("Ceres::Template.addressAdditionalAddress2") }}' | transformRequiredLabel(isInOptionalFields('de', 'billing_address.address4')) }
