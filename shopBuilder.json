@@ -79,14 +79,14 @@
             "required": false,
             "defaultValue": null,
             "options": {
-                "name": "Config.globalShippingCostsCategoryIdLabel"
+                "name": "Config.routingCategoryCheckout"
             }
         },
         "enabled_routes_checkout": {
             "type": "checkbox",
             "required": false,
             "options": {
-                "name": "Config.globalEnableOldUrlPatternLabel"
+                "name": "Config.routingDefaultCheckout"
             }
         }
     },
