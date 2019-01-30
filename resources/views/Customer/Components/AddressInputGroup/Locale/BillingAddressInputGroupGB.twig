@@ -1,9 +1,5 @@
 {{ component( "Ceres::Customer.Components.SalutationSelect" ) }}
 
-{% set addressFields = config("Ceres.billing_address.en.show") | split(', ') %}
-{% set addressFieldsRequired = config("Ceres.billing_address.en.require") | split(', ') %}
-
-
 <div class="col-12">
     <div class="row">
         <div v-if="isInOptionalFields('gb', 'billing_address.salutation')" class="col-12 col-sm-4">
@@ -138,25 +134,29 @@
 
 <div class="col-12">
     <div class="row">
-        {% if "billing_address.address3" in addressFields %}
-            <div v-if="isInOptionalFields('gb', 'billing_address.address3')" class="col-12 col-sm-12">
-                <div class="input-unit"
-                     {% if "billing_address.address3" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="address3">
-                    <input type="text" name="buildingName" :id="'decorateAddress0' + _uid" :value="value.address3"  @input="emitInputEvent('address3', $event.target.value)">
-                    <label :for="'decorateAddress0' + _uid">{{ trans("Ceres::Template.addressENAddressLine3") }}{% if "billing_address.address3" in addressFieldsRequired %}*{% endif %}</label>
-                </div>
+        <div v-if="isInOptionalFields('gb', 'billing_address.address3')" class="col-12 col-sm-12">
+            <div
+                class="input-unit"
+                data-model="address3"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('gb', 'billing_address.address3'), validateType: 'text'}">
+                <input type="text" name="buildingName" :id="'decorateAddress0' + _uid" :value="value.address3"  @input="emitInputEvent('address3', $event.target.value)">
+                <label :for="'decorateAddress0' + _uid">
+                    ${ '{{ trans("Ceres::Template.addressENAddressLine3") }}' | transformRequiredLabel(isInOptionalFields('gb', 'billing_address.address3')) }
+                </label>
             </div>
-        {% endif %}
+        </div>
 
-        {% if "billing_address.address4" in addressFields %}
-            <div class="col-12 col-sm-12">
-                <div class="input-unit"
-                     {% if "billing_address.address4" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="address4">
-                    <input type="text" name="buildingName" :id="'decorateAddress0' + _uid" :value="value.address4"  @input="emitInputEvent('address4', $event.target.value)">
-                    <label :for="'decorateAddress0' + _uid">{{ trans("Ceres::Template.addressENAddressLine4") }}{% if "billing_address.address4" in addressFieldsRequired %}*{% endif %}</label>
-                </div>
+        <div v-if="isInOptionalFields('gb', 'billing_address.address4')" class="col-12 col-sm-12">
+            <div
+                class="input-unit"
+                data-model="address4"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('gb', 'billing_address.address4'), validateType: 'text'}">
+                <input type="text" name="buildingName" :id="'decorateAddress0' + _uid" :value="value.address4"  @input="emitInputEvent('address4', $event.target.value)">
+                <label :for="'decorateAddress0' + _uid">
+                    ${ '{{ trans("Ceres::Template.addressENAddressLine4") }}' | transformRequiredLabel(isInOptionalFields('gb', 'billing_address.address4')) }
+                </label>
             </div>
-        {% endif %}
+        </div>
     </div>
 </div>
 
