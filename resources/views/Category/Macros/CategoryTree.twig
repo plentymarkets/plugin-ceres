@@ -11,7 +11,7 @@
                 {% endif %}
                     <li class="level{{ level }}">
                         {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
-                        <a v-on:touchstart.stop href="{{ newScope }}{{ urls.trailingSlashSuffix }}">{{ child.details[0].name }}</a>
+                        <a @touchstart.stop href="{{ newScope }}{{ urls.trailingSlashSuffix }}">{{ child.details[0].name }}</a>
                     </li>
                     {% if child.children %}
                         {{ childlist.get_children(child, newScope, level + 1, megaMenuLevels, maxItems) }}
@@ -21,7 +21,7 @@
                 {% endif %}
                 {% set counter = counter + 1 %}
                 {% if counter == maxItems[level]%}
-                    <li class="level{{ level }} bt-more"><a v-on:touchstart.stop href="{{ currentScopeUrl }}">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
+                    <li class="level{{ level }} bt-more"><a @touchstart.stop href="{{ currentScopeUrl }}">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
                 {% endif %}
             {% endif %}
         {% endfor %}
