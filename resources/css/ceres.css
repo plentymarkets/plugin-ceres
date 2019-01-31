@@ -15552,8 +15552,8 @@ body.menu-is-visible {
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover {
-    background: #ffffff;
-    color: #000000 !important;
+    background: #000000;
+    color: #ffffff !important;
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover > ul.collapse,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover > ul.collapse {
