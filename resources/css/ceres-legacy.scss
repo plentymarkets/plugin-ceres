@@ -17854,6 +17854,13 @@ html.ie .basket-preview-hover {
     }
 }
 
+/* IOS compatibility */
+html.ios {
+    .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
+        background-size: contain;
+    }
+}
+
 .list-controls {
     position: relative;
     .list-controls-inner {
