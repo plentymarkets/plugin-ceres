@@ -3,7 +3,6 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
 
-
 <div>
     {% if widget.settings.addressType.mobile == "1" %}
         {{ Twig.set("overrideBillingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.BillingAddress"])) }}
@@ -13,16 +12,15 @@
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBillingAddress"])) }}
             <div class="invoice-addresses-select">
                 {% set optionalInvoiceAddressFields = {
-                    "de": widget.settings.addressFieldsInvoiceDE.mobile,
-                    "gb": widget.settings.addressFieldsInvoiceGB.mobile
+                    "de": ceresConfig.addresses.billingAddressShow,
+                    "gb": ceresConfig.addresses.billingAddressShow_en
                     }
                 %}
                 {% set requiredInvoiceAddressFields = {
-                    "de": widget.settings.addressRequiredFieldsInvoiceDE.mobile,
-                    "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile
+                    "de": ceresConfig.addresses.billingAddressRequire,
+                    "gb": ceresConfig.addresses.billingAddressRequire_en
                     }
                 %}
-
                 <invoice-address-select
                     has-to-validate="true"
                     :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
@@ -41,13 +39,13 @@
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingAddress"])) }}
             <div class="shipping-addresses-select">
                 {% set optionalShippingAddressFields = {
-                    "de": widget.settings.addressFieldsShippingDE.mobile,
-                    "gb": widget.settings.addressFieldsShippingGB.mobile
+                    "de": ceresConfig.addresses.deliveryAddressShow,
+                    "gb": ceresConfig.addresses.deliveryAddressShow_en
                     }
                 %}
                 {% set requiredShippingAddressFields = {
-                    "de": widget.settings.addressRequiredFieldsShippingDE.mobile,
-                    "gb": widget.settings.addressRequiredFieldsShippingGB.mobile
+                    "de": ceresConfig.addresses.deliveryAddressRequire,
+                    "gb": ceresConfig.addresses.billingAddressRequire_en
                     }
                 %}
 
