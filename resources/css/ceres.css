@@ -15313,7 +15313,7 @@ body.menu-is-visible {
 }
 
 #mainNavbarCollapsable {
-  background: #008ebd;
+  background: #000000;
   bottom: 0;
   color: #fff;
   font-size: 1.2em;
@@ -15411,7 +15411,7 @@ body.menu-is-visible {
 }
 
 #mainNavbarCollapsable ul.mainmenu li ul {
-  background: #008ebd;
+  background: #000000;
   left: 0;
   list-style: none;
   margin: 0;
@@ -15495,7 +15495,7 @@ body.menu-is-visible {
   }
   .no-touch #mainNavbarCollapsable ul.mainmenu > li > ul > li:hover,
   .touch #mainNavbarCollapsable ul.mainmenu > li > ul > li.hover {
-    background: #008ebd;
+    background: #000000;
     color: #fff;
     text-decoration: none;
   }
@@ -15504,7 +15504,7 @@ body.menu-is-visible {
   }
   .no-touch #mainNavbarCollapsable ul.mainmenu > li:hover,
   .touch #mainNavbarCollapsable ul.mainmenu > li.hover {
-    background-color: #008ebd;
+    background-color: #000000;
     color: #fff;
     transition: all .1s ease;
   }
@@ -15553,7 +15553,7 @@ body.menu-is-visible {
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover {
     background: #000000;
-    color: #ffffff !important;
+    color: #ffffff;
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover > ul.collapse,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover > ul.collapse {
@@ -15604,7 +15604,7 @@ body.menu-is-visible {
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a:hover,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a.hover {
     background: #000000;
-    color: #ffffff !important;
+    color: #ffffff;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul {
     background-color: #000000;
