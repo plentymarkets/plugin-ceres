@@ -228,13 +228,14 @@
     (function($) {
         
         var header = document.getElementById('page-header');
+        var headerLoaded = false;
         var unfixedElements = [];
 
         if ( !!header )
         {
             function calculateBodyOffset()
             {
-                if ( header.classList.contains('fixed-top'))
+                if (headerLoaded && header.classList.contains('fixed-top'))
                 {
                     var bodyOffset = 0;
                     // Get current header with children
@@ -266,24 +267,25 @@
 
             function scrollUnfixedElements()
             {
-                var scrollTop = window.scrollY;
-                unfixedElements.forEach(function(unfixed)
+                if (headerLoaded)
                 {
-                    var spacingTop = unfixed.height - scrollTop;
-                    if ( !!unfixed.element.previousElementSibling )
+                    var scrollTop = window.scrollY;
+                    unfixedElements.forEach(function(unfixed)
                     {
-                        unfixed.element.previousElementSibling.style.marginBottom = (spacingTop >= 0 ? spacingTop : 0) + 'px'
-                    }
-                    else
-                    {
-                        unfixed.element.parentElement.style.paddingTop = (spacingTop >= 0 ? spacingTop : 0) + 'px';
-                    }
-                    unfixed.element.style.position = 'absolute';
-                    unfixed.element.style.top = unfixed.top - scrollTop + 'px';
-                });
+                        var spacingTop = unfixed.height - scrollTop;
+                        if ( !!unfixed.element.previousElementSibling )
+                        {
+                            unfixed.element.previousElementSibling.style.marginBottom = (spacingTop >= 0 ? spacingTop : 0) + 'px'
+                        }
+                        else
+                        {
+                            unfixed.element.parentElement.style.paddingTop = (spacingTop >= 0 ? spacingTop : 0) + 'px';
+                        }
+                        unfixed.element.style.position = 'absolute';
+                        unfixed.element.style.top = unfixed.top - scrollTop + 'px';
+                    });
+                }
             }
-
-            getUnfixedElements();
             
             $(window).scroll(scrollUnfixedElements);
 
@@ -299,20 +301,28 @@
             $(document).on('shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate', function()
             {
                 calculateBodyOffset();
+                $('.owl-carousel').trigger('refresh.owl.carousel');
             });
 
             var headerImages = header.querySelectorAll("img");
 
-            if(headerImages.length)
-            {
-                for (var img in headerImages)
+            Promise.all(
+                Array.prototype.slice.call(headerImages).map(function(headerImage)
                 {
-                    headerImages[img].onload = function()
+                    return new Promise(function(resolve)
                     {
-                        calculateBodyOffset();
-                    }
-                }
-            }
+                        headerImage.onload = function()
+                        {
+                            resolve();
+                        }
+                    });
+                })
+            ).then(function()
+            {
+                headerLoaded = true;
+                getUnfixedElements();
+                calculateBodyOffset();
+            });
 
             calculateBodyOffset();
         }
@@ -330,6 +340,11 @@
                 $(elem).click(function(event) {
                     event.preventDefault();
                 });
+            });
+
+            $(component.$el).find('.owl-carousel').on('resized.owl.carousel', function()
+            {
+                window.dispatchEvent(new Event('resize'));
             });
         });
 

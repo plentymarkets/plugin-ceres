@@ -22,6 +22,14 @@ class GridWidget extends BaseWidget
                     "col-md-4 widget-prop-auto",
                     "col-md-8 widget-prop-2-1"
                 ],
+                "fiveToSeven" => [
+                    "col-md-5 widget-prop-auto",
+                    "col-md-7 widget-prop-2-1"
+                ],
+                "sevenToFive" => [
+                    "col-md-7 widget-prop-2-1",
+                    "col-md-5 widget-prop-auto"
+                ],
                 "oneToOneToOne" => [
                     "col-md-4 widget-prop-3-2",
                     "col-md-4 widget-prop-3-2",

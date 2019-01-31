@@ -15879,6 +15879,10 @@ a:active {
   white-space: normal;
 }
 
+.is_stuck {
+  z-index: 1;
+}
+
 html {
   font-size: 14px;
 }
@@ -18400,6 +18404,8 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .wrapper-main #page-header {
   background-color: #f7f7f9;
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 .wrapper-main #page-header.top-bar {
@@ -22522,6 +22528,11 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   }
 }
 
+/* IOS compatibility */
+html.ios .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
+  background-size: contain;
+}
+
 .list-controls {
   position: relative;
 }
@@ -24027,13 +24038,6 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
   font-size: 2rem;
-}
-
-/* Compatibility for IE */
-/* display img with optimal aspect ratio */
-html.ie .widget-image-box .img-cover {
-  min-height: auto;
-  min-width: auto;
 }
 
 .widget-image-carousel.widget-proportional {

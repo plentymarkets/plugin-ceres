@@ -160,3 +160,10 @@
         }
     }
 }
+
+/* IOS compatibility */
+html.ios {
+    .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
+        background-size: contain;
+    }
+}
