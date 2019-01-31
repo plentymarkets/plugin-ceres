@@ -14605,7 +14605,7 @@ Custom classes
 
 .top-bar .controls-list > li {
   font-size: 1rem;
-  color: #dcdbd8;
+  color: #ffffff;
   margin-right: 0;
 }
 
@@ -14613,7 +14613,7 @@ Custom classes
   .top-bar .controls-list > li a:not(.btn) {
     padding: 0.5rem .5rem;
     display: inline-block;
-    color: #dcdbd8;
+    color: #ffffff;
   }
   .top-bar .controls-list > li a:not(.btn)[aria-expanded="true"] {
     background-color: #008ebd;
