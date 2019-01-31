@@ -3,7 +3,7 @@
 // in Sass 3.3 this can be improved with: function-exists(twbs-font-path)
 // $bootstrap-sass-asset-helper: (twbs-font-path("") != unquote('twbs-font-path("")'));
 //
-// Variables 1
+// Variables
 // --------------------------------------------------
 
 // Root directory
@@ -97,10 +97,10 @@ $custom-colors: (
   "gelb": "#ffff00",
 ) !default;
 
-$top-bar-bg:            #000000;
-$top-bar-color:         #ffffff;
-$top-bar-basket-btn:    #ffffff;
-$top-bar-basket-color:  #ffffff;
+$top-bar-bg:            $gray-dark;
+$top-bar-color:         #fff;
+$top-bar-basket-btn:    $brand-primary;
+$top-bar-basket-color:  #fff;
 
 $footer-bg:             $gray-lightest;
 $footer-color:          $gray-dark;
@@ -13631,20 +13631,20 @@ $menu-big-menu-li-bg-hover		: $brand-primary;
 $menu-big-menu-li-color			: $white;
 $menu-big-menu-li-color-hover	: $text-color;
 // megamenu
-$megamenu-bg 					: #000000;
-$megamenu-color-top-btn			: $white;
-$megamenu-color-bottom-btn		: $white;
+$megamenu-bg 					: $white;
+$megamenu-color-top-btn			: $brand-primary;
+$megamenu-color-bottom-btn		: $black;
 $megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
-$megamenu-btn-more 				: $white;
+$megamenu-btn-more 				: $gray;
 
 body.menu-is-visible { 
 	overflow-y : hidden;
 	position: fixed;
 }
 #mainNavbarCollapsable {
-	background 	: #000000;
+	background 	: $menu-bg-sm;
 	bottom 		: 0;
-	color 		: #ffffff;
+	color 		: $menu-color-sm;
 	font-size 	: $menu-font-s-sm;
 	left 		: 0;
 	opacity 	: .6;
