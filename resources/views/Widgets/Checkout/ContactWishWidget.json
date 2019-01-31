@@ -12,7 +12,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.contactWishHinttextLabel",
-                "tooltipText": "Widget.contactWishLabelHinttextTooltip"
+                "tooltipText": "Widget.contactWishHinttextTooltip"
             }
         }
     }
