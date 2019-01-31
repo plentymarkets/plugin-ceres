@@ -15583,7 +15583,7 @@ body.menu-is-visible {
     padding: .5em 1em;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li.level1 > a {
-    color: #000000;
+    color: #ffffff;
     font-weight: bold;
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li:hover,
