@@ -14515,8 +14515,8 @@ Custom classes
 .top-bar {
   width: 100%;
   z-index: 1060;
-  color: #fff;
-  background-color: #4D4F4D;
+  color: #ffffff;
+  background-color: #000000;
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
 }
 
