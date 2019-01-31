@@ -15373,6 +15373,7 @@ body.menu-is-visible {
   margin: 0;
   padding: 0;
   position: relative;
+	color: #ffffff;
 }
 
 #mainNavbarCollapsable ul.mainmenu li {
