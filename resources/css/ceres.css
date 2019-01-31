@@ -15535,6 +15535,10 @@ body.menu-is-visible {
 @media (min-width: 992px) {
   nav.navbar.megamenu {
     position: relative;
+    background-color: #000000;
+}
+
+
   }
 }
 
