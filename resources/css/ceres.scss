@@ -97,10 +97,10 @@ $custom-colors: (
   "gelb": "#ffff00",
 ) !default;
 
-$top-bar-bg:            $gray-dark;
-$top-bar-color:         #000000;
-$top-bar-basket-btn:    $brand-primary;
-$top-bar-basket-color:  #fff;
+$top-bar-bg:            #000000;
+$top-bar-color:         #ffffff;
+$top-bar-basket-btn:    $ffffff;
+$top-bar-basket-color:  #ffffff;
 
 $footer-bg:             $gray-lightest;
 $footer-color:          $gray-dark;
@@ -13632,10 +13632,10 @@ $menu-big-menu-li-color			: $white;
 $menu-big-menu-li-color-hover	: $text-color;
 // megamenu
 $megamenu-bg 					: #000000;
-$megamenu-color-top-btn			: $brand-primary;
-$megamenu-color-bottom-btn		: $black;
+$megamenu-color-top-btn			: $white;
+$megamenu-color-bottom-btn		: $white;
 $megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
-$megamenu-btn-more 				: $gray;
+$megamenu-btn-more 				: $white;
 
 body.menu-is-visible { 
 	overflow-y : hidden;
