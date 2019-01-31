@@ -501,7 +501,16 @@
         ],
         "position": 999,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
-        "settings": {}
+        "settings": {
+            "hinttext": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.contactWishHinttextLabel",
+                    "tooltipText": "Widget.contactWishHinttextTooltip"
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::CouponWidget",
