@@ -70,7 +70,7 @@
                 ]
             }
         },
-        "urlPicker":
+        "url":
         {
             "required": false,
             "type": "urlPicker"
