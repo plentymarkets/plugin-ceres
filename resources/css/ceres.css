@@ -15552,8 +15552,8 @@ body.menu-is-visible {
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover {
-    background: #000000;
-    color: #ffffff !important;
+    background: #ffffff;
+    color: #000000 !important;
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover > ul.collapse,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover > ul.collapse {
@@ -15583,7 +15583,7 @@ body.menu-is-visible {
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li:hover,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li.hover {
-    background: #000000;
+    background: #ffffff;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .level2 {
     padding: 0.25em 0 !important;
@@ -15597,7 +15597,7 @@ body.menu-is-visible {
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a {
     background: #000000;
-    color: #000;
+    color: #ffffff;
     padding: 0;
     text-align: left;
   }
@@ -15612,9 +15612,9 @@ body.menu-is-visible {
 }
 
 .mobile-navigation {
-  background: #008ebd;
+  background: #000000;
   bottom: 0;
-  color: #fff;
+  color: #ffffff;
   font-size: 1.2em;
   left: 0;
   opacity: .6;
