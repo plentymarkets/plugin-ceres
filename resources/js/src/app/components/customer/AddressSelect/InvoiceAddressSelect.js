@@ -47,8 +47,6 @@ Vue.component("invoice-address-select", {
      */
     created()
     {
-        // this.$store.dispatch("initBillingAddress", { id: this.selectedAddressId, addressList: this.addressList });
-
         if (this.hasToValidate)
         {
             this.$store.commit("setInvoiceAddressValidator", this.validate);
