@@ -9,7 +9,8 @@ Vue.component("basket-list-item", {
         "basketItem",
         "size",
         "language",
-        "template"
+        "template",
+        "appearance"
     ],
 
     data()

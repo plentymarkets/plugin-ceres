@@ -6,5 +6,7 @@
     "categories": ["checkout"],
     "position": 999,
     "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
-    "settings": {}
+    "settings": {
+        "appearance": "@include(appearance)"
+    }
 }
