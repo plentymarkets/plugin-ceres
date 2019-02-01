@@ -21844,6 +21844,14 @@ Vue.component("quantity-input", {
       },
       deep: true
     },
+    min: function min(newValue) {
+      this.compMin = newValue;
+      this.fetchQuantityFromBasket();
+    },
+    max: function max(newValue) {
+      this.compMax = newValue;
+      this.fetchQuantityFromBasket();
+    },
     value: function value(newValue, oldValue) {
       if (newValue !== oldValue) {
         this.setValue(newValue);
