@@ -1,7 +1,7 @@
 {% set title            = widget.settings.title.mobile %}
 {% set icon             = widget.settings.icon.mobile %}
 {% set centered         = widget.settings.centered.mobile %}
-{% set hasEntries    = false %}
+{% set hasEntries       = false %}
 
 {% for entry in listEntries if entry.text is not empty %}
     {% set hasEntries = true %}
@@ -14,13 +14,14 @@
             {% if listEntries | length > 0 %}
                 <ul class="list-unstyled{% if centered %} list-centered{% endif %}">
                     {% for entry in listEntries %}
+                        {#{{ dump(entry) }}#}
                         <li>
                             {% if icon != "none" %}
                                 <i class="fa {{ icon }}" aria-hidden="true"></i>
                             {% endif %}
 
-                            {% if entry.url is not empty %}
-                                <a href="{{ entry.url }}">{{ entry.text }}</a>
+                            {% if entry.url.value is not empty %}
+                                <a href="{{ entry.url.value }}">{{ entry.text }}</a>
                             {% else %}
                                 {{ entry.text }}
                             {% endif %}
