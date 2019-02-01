@@ -34,13 +34,6 @@ Vue.component("shipping-address-select", {
         deliveryAddressId: state => state.address.deliveryAddressId
     }),
 
-    created()
-    {
-        // Adds the dummy entry for "delivery address same as invoice address"
-        // this.addressList.unshift({ id: -99 });
-        // this.$store.dispatch("initDeliveryAddress", { id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList });
-    },
-
     methods:
     {
         /**

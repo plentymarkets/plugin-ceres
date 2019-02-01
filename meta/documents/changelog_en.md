@@ -1,5 +1,13 @@
 # Release Notes for Ceres
 
+## v3.0.1 (2019-01-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.0.0...3.0.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, item lists of the types cross-selling and tags were not displayed in the single item view. This has been fixed.
+- Category descriptions 1 and 2 were not correctly displayed on category pages. This has been fixed.
+- Under certain circumstances, the option "Please select" was not displayed in the drop-down list in the single item view. This has been fixed.
+
 ## v3.0.0 (2019-01-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.17.1...3.0.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO

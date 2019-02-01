@@ -38,8 +38,6 @@
 
     "bundleComponents.*",
 
-    "salesPrices.*",
-
     "unit.content",
     "unit.names.name",
     "unit.names.lang",

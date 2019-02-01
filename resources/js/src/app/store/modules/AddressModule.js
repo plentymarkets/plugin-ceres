@@ -7,11 +7,9 @@ const state =
         billingAddressId: null,
         billingAddress: null,
         billingAddressList: [],
-        billingAddressSettings: null,
         deliveryAddressId: null,
         deliveryAddress: null,
-        deliveryAddressList: [],
-        deliveryAddressSettings: null
+        deliveryAddressList: []
     };
 
 const mutations =
@@ -205,16 +203,6 @@ const mutations =
                 state.deliveryAddressId = state.deliveryAddressList[0].id;
                 document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
-        },
-
-        setBillingAddressSettings(state, settings)
-        {
-            state.billingAddressSettings = settings;
-        },
-
-        setDeliveryAddressSettings(state, settings)
-        {
-            state.deliveryAddressSettings = settings;
         }
     };
 

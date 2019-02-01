@@ -18,7 +18,8 @@
     "allowedTypes": {
         "header": ["header"],
         "footer": ["footer", "static", "structure", "default"],
-        "content": ["static", "structure", "default", "checkout"]
+        "content": ["static", "structure", "default"],
+        "checkout": ["static", "structure", "default", "checkout"]
     },
     "presets": {
         "header": [
@@ -37,7 +38,9 @@
             {
                 "label": "Widget.presetHomepageDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
-            },
+            }
+        ],
+        "checkout": [
             {
                 "label": "Widget.presetCheckoutDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"

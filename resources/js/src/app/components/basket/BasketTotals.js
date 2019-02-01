@@ -8,6 +8,11 @@ Vue.component("basket-totals", {
         {
             type: String,
             default: "#vue-basket-totals"
+        },
+        visibleFields:
+        {
+            type: Array,
+            default: () => []
         }
     },
 

@@ -12,15 +12,13 @@
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBillingAddress"])) }}
             <div class="invoice-addresses-select">
                 {% set optionalInvoiceAddressFields = {
-                    "de": ceresConfig.addresses.billingAddressShow,
-                    "gb": ceresConfig.addresses.billingAddressShow_en
-                    }
-                %}
+                    "de": widget.settings.addressFieldsInvoiceDE.mobile,
+                    "gb": widget.settings.addressFieldsInvoiceGB.mobile
+                } %}
                 {% set requiredInvoiceAddressFields = {
-                    "de": ceresConfig.addresses.billingAddressRequire,
-                    "gb": ceresConfig.addresses.billingAddressRequire_en
-                    }
-                %}
+                    "de": widget.settings.addressRequiredFieldsInvoiceDE.mobile,
+                    "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile
+                } %}
                 <invoice-address-select
                     has-to-validate="true"
                     :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
@@ -39,15 +37,13 @@
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingAddress"])) }}
             <div class="shipping-addresses-select">
                 {% set optionalShippingAddressFields = {
-                    "de": ceresConfig.addresses.deliveryAddressShow,
-                    "gb": ceresConfig.addresses.deliveryAddressShow_en
-                    }
-                %}
+                    "de": widget.settings.addressFieldsShippingDE.mobile,
+                    "gb": widget.settings.addressFieldsShippingGB.mobile
+                } %}
                 {% set requiredShippingAddressFields = {
-                    "de": ceresConfig.addresses.deliveryAddressRequire,
-                    "gb": ceresConfig.addresses.billingAddressRequire_en
-                    }
-                %}
+                    "de": widget.settings.addressRequiredFieldsShippingDE.mobile,
+                    "gb": widget.settings.addressRequiredFieldsShippingGB.mobile
+                } %}
 
                 <shipping-address-select
                     :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"

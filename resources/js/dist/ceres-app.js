@@ -17734,6 +17734,12 @@ Vue.component("basket-totals", {
         template: {
             type: String,
             default: "#vue-basket-totals"
+        },
+        visibleFields: {
+            type: Array,
+            default: function _default() {
+                return [];
+            }
         }
     },
 
@@ -18640,7 +18646,6 @@ Vue.component("place-order", {
                     _this2.waiting = false;
                 });
             } else {
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckEntries"));
                 this.waiting = false;
             }
         },

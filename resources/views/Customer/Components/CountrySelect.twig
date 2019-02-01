@@ -1,8 +1,3 @@
-{% set billingAddressFields = config("Ceres.billing_address.show") | split(', ') %}
-{% set billingAddressFieldsRequired = config("Ceres.billing_address.require") | split(', ') %}
-{% set deliveryAddressFields = config("Ceres.delivery_address.show") | split(', ') %}
-{% set deliveryAddressFieldsRequired = config("Ceres.delivery_address.require") | split(', ') %}
-
 <script type="x/template" id="vue-country-select">
     <div>
         <div class="input-unit" data-validate="" data-model="countryId">

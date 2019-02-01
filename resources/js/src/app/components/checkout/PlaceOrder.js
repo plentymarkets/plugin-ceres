@@ -129,9 +129,6 @@ Vue.component("place-order", {
             }
             else
             {
-                NotificationService.error(
-                    TranslationService.translate("Ceres::Template.checkoutCheckEntries")
-                );
                 this.waiting = false;
             }
         },
