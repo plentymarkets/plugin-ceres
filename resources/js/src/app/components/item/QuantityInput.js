@@ -144,13 +144,11 @@ Vue.component("quantity-input", {
         },
         min(newValue)
         {
-            console.log("new min: " + newValue);
             this.compMin = newValue;
             this.fetchQuantityFromBasket();
         },
         max(newValue)
         {
-            console.log("new max: " + newValue);
             this.compMax = newValue;
             this.fetchQuantityFromBasket();
         },
