@@ -58,6 +58,19 @@ Vue.component("basket-list-item", {
             return this.waiting || this.isBasketLoading;
         },
 
+        variationPropertyGroups()
+        {
+            const variationPropertyGroups = this.basketItem.variation.data.variationPropertyGroups;
+            const variationProperties = this.basketItem.variation.data.variationProperties;
+
+            if (variationProperties.length)
+            {
+                return this.$options.filters.variationProperties(variationPropertyGroups, variationProperties, ["empty"], "displayInOrderProcess");
+            }
+
+            return [];
+        },
+
         propertySurchargeSum()
         {
             let sum = 0;
@@ -84,6 +97,7 @@ Vue.component("basket-list-item", {
             }
             return this.basketItem.quantity * (price + this.propertySurchargeSum);
         },
+
         unitPrice()
         {
             if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
@@ -93,6 +107,7 @@ Vue.component("basket-list-item", {
 
             return this.basketItem.variation.data.prices.default.unitPrice.value;
         },
+
         basePrice()
         {
             if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
