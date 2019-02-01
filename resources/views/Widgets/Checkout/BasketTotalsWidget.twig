@@ -2,11 +2,11 @@
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Basket.Components.BasketTotals") }}
+{% set shownFields = {
 
+} %}
 <div>
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBasketTotals"])) }}
-
-    <basket-totals></basket-totals>
-
+    <basket-totals :visible-fields="{{ widget.settings.visibleFields.mobile }}"></basket-totals>
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBasketTotals"])) }}
 </div>

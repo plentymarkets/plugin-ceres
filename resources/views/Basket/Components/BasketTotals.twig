@@ -5,8 +5,9 @@
         <div class="h3">{{ trans("Ceres::Template.basketSum") }}</div>
         <div class="component-loading with-icon refreshing split-totals-height" :class="{ 'isLoading': isBasketLoading }">
             <dl>
-                {# Basket value (net) #}
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+                
+                {# Basket value (net) #}
                 <dt :class="{ 'font-weight-bold': showNetPrices }">
                     {{ trans("Ceres::Template.basketValue") }} ({{ trans("Ceres::Template.basketNet") }})
                 </dt><!--
@@ -121,7 +122,7 @@
                     </dd>
                     {# Total sum (gross) #}
 
-                    {# Coupon discount #}
+                    {# Coupon #}
                     <template v-if="basket.couponCode && basket.couponCampaignType === 'sales'">
                         <dt>
                             {{ trans("Ceres::Template.basketCoupon") }}</strong>
@@ -130,7 +131,7 @@
                             ${ basket.couponDiscount | currency }
                         </dd>
                     </template>
-                    {# Coupon discount #}
+                    {# Coupon #}
 
                     {# Coupon open amount #}
                     <template v-if="basket.couponCampaignType === 'sales'">

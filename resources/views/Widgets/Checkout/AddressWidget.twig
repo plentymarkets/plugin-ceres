@@ -43,13 +43,11 @@
                 {% set optionalShippingAddressFields = {
                     "de": widget.settings.addressFieldsShippingDE.mobile,
                     "gb": widget.settings.addressFieldsShippingGB.mobile
-                    }
-                %}
+                } %}
                 {% set requiredShippingAddressFields = {
                     "de": widget.settings.addressRequiredFieldsShippingDE.mobile,
                     "gb": widget.settings.addressRequiredFieldsShippingGB.mobile
-                    }
-                %}
+                } %}
 
                 <shipping-address-select
                     :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
