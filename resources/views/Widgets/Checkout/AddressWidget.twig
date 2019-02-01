@@ -3,7 +3,6 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
 
-
 <div>
     {% if widget.settings.addressType.mobile == "1" %}
         {{ Twig.set("overrideBillingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.BillingAddress"])) }}
@@ -15,14 +14,11 @@
                 {% set optionalInvoiceAddressFields = {
                     "de": widget.settings.addressFieldsInvoiceDE.mobile,
                     "gb": widget.settings.addressFieldsInvoiceGB.mobile
-                    }
-                %}
+                } %}
                 {% set requiredInvoiceAddressFields = {
                     "de": widget.settings.addressRequiredFieldsInvoiceDE.mobile,
                     "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile
-                    }
-                %}
-
+                } %}
                 <invoice-address-select
                     has-to-validate="true"
                     :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"

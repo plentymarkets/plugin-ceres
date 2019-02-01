@@ -20,6 +20,28 @@
     {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
     {{ component( "Ceres::Checkout.Components.Checkout" ) }}
 
+    {% set optionalInvoiceAddressFields = {
+        "de": ceresConfig.addresses.billingAddressShow,
+        "gb": ceresConfig.addresses.billingAddressShow_en
+        }
+    %}
+    {% set requiredInvoiceAddressFields = {
+        "de": ceresConfig.addresses.billingAddressRequire,
+        "gb": ceresConfig.addresses.billingAddressRequire_en
+        }
+    %}
+
+    {% set optionalShippingAddressFields = {
+        "de": ceresConfig.addresses.deliveryAddressShow,
+        "gb": ceresConfig.addresses.deliveryAddressShow_en
+        }
+    %}
+    {% set requiredShippingAddressFields = {
+        "de": ceresConfig.addresses.deliveryAddressRequire,
+        "gb": ceresConfig.addresses.billingAddressRequire_en
+        }
+    %}
+
     <div class="page-content checkout container-max">
         {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
         {% if overrideCheckout|trim is empty %}
@@ -56,7 +78,11 @@
                                             {% set addressFieldsRequired = config("Ceres.billing_address.require") | split(', ') %}
                                             {% set addressFields = config("Ceres.billing_address.en.show") | split(', ') %}
                                             {% set addressFieldsRequired = config("Ceres.billing_address.en.require") | split(', ') %}
-                                            <invoice-address-select has-to-validate="true"></invoice-address-select>
+                                            <invoice-address-select
+                                                has-to-validate="true"
+                                                :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+                                                :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                                            </invoice-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterBillingAddress") }}
                                     {% else %}
@@ -75,7 +101,10 @@
                                             {% set addressFieldsRequired = config("Ceres.delivery_address.require") | split(', ') %}
                                             {% set addressFields = config("Ceres.delivery_address.en.show") | split(', ') %}
                                             {% set addressFieldsRequired = config("Ceres.delivery_address.en.require") | split(', ') %}
-                                            <shipping-address-select></shipping-address-select>
+                                            <shipping-address-select
+                                                :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
+                                                :required-address-fields="{{ requiredShippingAddressFields | json_encode }}">
+                                            </shipping-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterShippingAddress") }}
                                     {% else %}
