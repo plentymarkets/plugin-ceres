@@ -88,7 +88,6 @@ Vue.component("quantity-input", {
 
             return basketObject ? basketObject.quantity : 0;
         },
-
         isMinimum()
         {
             return isDefined(this.compMin) && (this.compValue - this.compInterval) < this.compMin;
@@ -143,7 +142,18 @@ Vue.component("quantity-input", {
             },
             deep: true
         },
-
+        min(newValue)
+        {
+            console.log("new min: " + newValue);
+            this.compMin = newValue;
+            this.fetchQuantityFromBasket();
+        },
+        max(newValue)
+        {
+            console.log("new max: " + newValue);
+            this.compMax = newValue;
+            this.fetchQuantityFromBasket();
+        },
         value(newValue, oldValue)
         {
             if (newValue !== oldValue)
