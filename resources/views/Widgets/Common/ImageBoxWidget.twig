@@ -52,7 +52,7 @@
 
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ widget.settings.appearance.mobile | default('primary')  }} widget-proportional">
     {{ Twig.if("imageUrl | trim is not empty") }}
-        <img class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" />
+        <img{% if imageSize == "cover" %} v-ie-objectfit-polyfill="'cover'"{% endif %} class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" />
     {{ Twig.endif() }}
 
     <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }} class="widget-inner">

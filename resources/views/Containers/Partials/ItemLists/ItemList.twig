@@ -35,9 +35,8 @@
             {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader' with { itemListNo: itemListNo, listType: listType, isHome: isHome } %}
         </div>
         <div class="col-12">
-            
             <carousel>
-                {% for item in itemList.documents %}
+                {% for item in itemList %}
                     <template slot="items">
                         <category-item
                             :item-data="{{ item.data | json_encode }}"

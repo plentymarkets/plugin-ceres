@@ -1,0 +1,5 @@
+<div class="widget widget-sticky" v-stick-in-parent>
+    <div class="widget-inner"{% if isPreview %} data-builder-child-container="sticky"{% endif %}>
+        {{ children.sticky | raw }}
+    </div>
+</div>
