@@ -10754,15 +10754,12 @@ a:active {
   white-space: normal;
 }
 
-.is_stuck {
-    z-index: 1;
-}
-
 html {
 	font-size: $font-size-root;
 }
 
 body {
+
 	background-color: $gray-lightest;
 
 	> #vue-app,
@@ -10773,10 +10770,15 @@ body {
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
 			z-index 	: $zIndex-8;
+
+			.wrapper-inner{
+				
+			}
 		} 
 
 		.wrapper-main{
 			position: relative;
+			//z-index: $zIndex-1;
 		}
 		
 		.wrapper-top {
@@ -10904,12 +10906,19 @@ body {
 			}
 		}
 
+		@include media-breakpoint-up(sm){
+		}
+
 		@include media-breakpoint-up(md){
 			&.open-right{
 				.wrapper-right{
 					width: $aside-columns-width;
 				}
 			}
+		}
+
+		@include media-breakpoint-up(lg){
+			
 		}
 	}
 }
@@ -11082,6 +11091,13 @@ button:focus {
 	&.btn-m-r {
 		margin-right: 10px;
 	}
+
+	&.btn-block {
+		> .fa {
+			line-height: inherit;
+		}
+	}
+
 }
 
 .btn-right {
@@ -13291,8 +13307,6 @@ $border-width: 1px;
 		background-color:$navbar-background-color;
 		-webkit-box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 		        box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
-		-webkit-backface-visibility: hidden;
-		        backface-visibility: hidden;
 
 		&.top-bar {
 			background-color: $top-bar-bg;
@@ -17854,13 +17868,6 @@ html.ie .basket-preview-hover {
     }
 }
 
-/* IOS compatibility */
-html.ios {
-    .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
-        background-size: contain;
-    }
-}
-
 .list-controls {
     position: relative;
     .list-controls-inner {
@@ -19200,6 +19207,51 @@ html.ios {
     }
 }
 
+@mixin widget-list-box-shadow($color)
+{
+    > .payment-method-select, > .shipping-method-select
+    {
+        > .cmp-method-list .method-list-item > input:checked + label
+        {
+            -webkit-box-shadow: inset 0 0 0 0.1rem $color;
+                    box-shadow: inset 0 0 0 0.1rem $color;
+        }
+    }
+}
+
+.widget-payment-provider, .widget-shipping-profile
+{
+    &.widget-primary
+    {
+        @include widget-list-box-shadow($primary);
+    }
+
+    &.widget-secondary
+    {
+        @include widget-list-box-shadow($secondary);
+    }
+
+    &.widget-success
+    {
+        @include widget-list-box-shadow($success);
+    }
+
+    &.widget-info
+    {
+        @include widget-list-box-shadow($info);
+    }
+
+    &.widget-warning
+    {
+        @include widget-list-box-shadow($warning);
+    }
+
+    &.widget-danger
+    {
+        @include widget-list-box-shadow($danger);
+    }
+}
+
 .widget-image-box
 {
     @include media-breakpoint-only(xs) {
@@ -19424,6 +19476,15 @@ html.ios {
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
     font-size: 2rem;
+}
+
+/* Compatibility for IE */
+/* display img with optimal aspect ratio */
+html.ie {
+    .widget-image-box .img-cover {
+        min-height: auto;
+        min-width: auto;
+    }
 }
 @mixin widget-carousel-variant($parent, $color)
 {

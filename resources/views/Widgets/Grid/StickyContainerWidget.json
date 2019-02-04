@@ -4,7 +4,7 @@
     "previewImageURL": "",
     "type": "structure",
     "categories": ["structure"],
-    "position": 300,
+    "position": 400,
     "widgetClass": "Ceres\\Widgets\\Grid\\StickyContainerWidget",
     "settings": {}
 }

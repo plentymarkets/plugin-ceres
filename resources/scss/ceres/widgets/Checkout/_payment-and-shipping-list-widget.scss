@@ -1,0 +1,43 @@
+@mixin widget-list-box-shadow($color)
+{
+    > .payment-method-select, > .shipping-method-select
+    {
+        > .cmp-method-list .method-list-item > input:checked + label
+        {
+            box-shadow: inset 0 0 0 0.1rem $color;
+        }
+    }
+}
+
+.widget-payment-provider, .widget-shipping-profile
+{
+    &.widget-primary
+    {
+        @include widget-list-box-shadow($primary);
+    }
+
+    &.widget-secondary
+    {
+        @include widget-list-box-shadow($secondary);
+    }
+
+    &.widget-success
+    {
+        @include widget-list-box-shadow($success);
+    }
+
+    &.widget-info
+    {
+        @include widget-list-box-shadow($info);
+    }
+
+    &.widget-warning
+    {
+        @include widget-list-box-shadow($warning);
+    }
+
+    &.widget-danger
+    {
+        @include widget-list-box-shadow($danger);
+    }
+}

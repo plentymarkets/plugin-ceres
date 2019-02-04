@@ -1,7 +1,8 @@
 <script type="x/template" id="vue-shipping-privacy-hint-check">
-    <div class="form-check" v-if="currentPrivacyHints.length" ref="variationTotalPrice">
-        <input class="form-check-input" type="checkbox" id="shipping-service-privacy-accept" :checked="shippingPrivacyHintAccepted" @change="setValue($event.target.checked)">
-        <label class="form-check-label" for="shipping-service-privacy-accept">
+    <div class="form-check" v-if="currentPrivacyHints.length" ref="formCheck">
+        <input class="form-check-input" type="checkbox" :id="'shipping-service-privacy-accept' + _uid" :checked="shippingPrivacyHintAccepted" @change="setValue($event.target.checked)">
+        
+        <label class="form-check-label" :for="'shipping-service-privacy-accept' + _uid">
             <div v-html="privacyHintContent"></div>
         </label>
     </div>

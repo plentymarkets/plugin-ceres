@@ -6,7 +6,13 @@ Vue.component("basket-totals", {
     {
         template:
         {
-            type: String
+            type: String,
+            default: "#vue-basket-totals"
+        },
+        visibleFields:
+        {
+            type: Array,
+            default: () => []
         }
     },
 

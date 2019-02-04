@@ -1,0 +1,24 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set emailFolder = widget.settings.emailFolder.mobile %}
+{% set hideCheckbox = widget.settings.hideCheckbox.mobile %}
+{% set isPreselected = widget.settings.isPreselected.mobile %}
+{% set isRequired = widget.settings.isRequired.mobile %}
+{% set customText = widget.settings.customText.mobile %}
+
+{{ Twig.component("Ceres::Checkout.Components.SubscribeNewsletterCheck") }}
+
+<div class="widget widget-subscribe-newsletter-check">
+    <subscribe-newsletter-check
+        {% if hideCheckbox %}class="pl-0"{% endif %}
+        :email-folder="{{ emailFolder | json_encode }}"
+        :hide-checkbox="{{ hideCheckbox | json_encode }}"
+        {% if not hideCheckbox %}
+            :is-preselected="{{ isPreselected | json_encode }}"
+            :is-required="{{ isRequired | json_encode }}"
+        {% endif %}
+        {% if customText | length > 0 %}
+            custom-text="{{ customText }}"
+        {% endif %}>
+    </subscribe-newsletter-check>
+</div>

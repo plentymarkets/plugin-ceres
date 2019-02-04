@@ -1,15 +1,19 @@
 {{ component( "Ceres::Customer.Components.AddressSelect.CreateUpdateAddress") }}
+{{ component( "Ceres::Customer.Components.AddressSelect.AddressHeader") }}
+
+
 <script type="x/template" id="vue-address-select">
     <div>
         <div class="cmp cmp-address-list mb-4">
             <div class="dropdown items">
-
-                <div class="component-loading" :id="'addressMultiSelect' + _uid"
-                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        data-boundary="window">
+                <div
+                    class="component-loading"
+                    :id="'addressMultiSelect' + _uid"
+                    v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-boundary="window">
 
                     <div class="item-inner" v-bind:class="{'error': showError}">
                         <span v-if="selectedAddress && selectedAddress.id == -99">
@@ -17,23 +21,8 @@
                         </span>
                         <span v-else class="item-content">
                             <div v-if="!isAddressListEmpty && selectedAddress">
-                                <strong v-if="selectedAddress && selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
-                                <span>${ selectedAddress | optionType(12) }</span>
-                                <strong v-if="selectedAddress && !selectedAddress.name1 || selectedAddress.name1.length == 0">${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</strong>
-                                <span v-else-if="!selectedAddress.name1">${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</span>
-                                <span>${selectedAddress.name4}</span>
-                                <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
-                                <span>
-                                    <template v-if="selectedAddress.address1 === 'PACKSTATION' || selectedAddress.address1 === 'POSTFILIALE'">
-                                        {{ trans("Ceres::Template.addressPostNummer") }}
-                                    </template> 
-                                    
-                                    ${ selectedAddress.address3 }
-                                </span>
-                                <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
-                                <span>${getCountryName(selectedAddress.countryId)}</span>
+                                <address-header :address="selectedAddress"></address-header>
                             </div>
-
                             <p v-if="!isAddressListEmpty && !selectedAddress" class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressPleaseSelect") }}</p>
                             <p v-if="isAddressListEmpty" class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressNoAddress") }}</p>
                         </span>
@@ -51,32 +40,18 @@
                     <ul>
                         <li class="item" v-for="(address, index) in addressList">
                             <input
-                                    type="radio"
-                                    :name="'shippingAddress' + _uid"
-                                    :id="'addressSelectItem' + _uid + address.id"
-                                    :value="address.id"
-                                    :checked="selectedAddress && selectedAddress.id === address.id"
-                                    @change="onAddressChanged(address)">
+                                type="radio"
+                                :name="'shippingAddress' + _uid"
+                                :id="'addressSelectItem' + _uid + address.id"
+                                :value="address.id"
+                                :checked="selectedAddress && selectedAddress.id === address.id"
+                                @change="onAddressChanged(address)">
                             <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
                             <span v-if="address.id == -99">
                                 <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                             </span>
                                 <span v-else class="item-content small">
-                                <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
-                                <span>${ selectedAddress | optionType(12) }</span>
-                                <strong v-if="!address.name1 || address.name1.length == 0">${address | optionType(11)} ${address.name2} ${address.name3}</strong>
-                                <span v-else>${selectedAddress | optionType(11)} ${address.name2} ${address.name3}</span>
-                                <span>${address.name4}</span>
-                                <span>${address.address1} ${address.address2}</span>
-                                <span>
-                                    <template v-if="address.address1 === 'PACKSTATION' || address.address1 === 'POSTFILIALE'">
-                                        {{ trans("Ceres::Template.addressPostNummer") }}
-                                    </template> 
-                                    
-                                    ${ address.address3 }
-                                </span>
-                                <span>${address.postalCode} ${address.town}</span>
-                                <span>${getCountryName(address.countryId)}</span>
+                                <address-header :address="address"></address-header>
                             </span>
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
@@ -112,12 +87,14 @@
                         <div class="modal-body">
                             <fieldset>
                                 <create-update-address
-                                        template="#vue-create-update-address"
-                                        :address-data="addressToEdit"
-                                        :address-modal="addressModal"
-                                        :modal-type="modalType"
-                                        :address-type="addressType"
-                                        @input="setAddressToEditField($event)">
+                                    template="#vue-create-update-address"
+                                    :address-data="addressToEdit"
+                                    :address-modal="addressModal"
+                                    :modal-type="modalType"
+                                    :address-type="addressType"
+                                    @input="setAddressToEditField($event)"
+                                    :optional-address-fields="optionalAddressFields"
+                                    :required-address-fields="requiredAddressFields">
                                 </create-update-address>
                             </fieldset>
                         </div>

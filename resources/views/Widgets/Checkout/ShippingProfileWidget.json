@@ -1,0 +1,20 @@
+{
+    "identifier": "Ceres::ShippingProfileWidget",
+    "label": "Widget.shippingProfileLabel",
+    "previewImageURL": "",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
+    "settings": {
+        "appearance": "@include(appearance)",
+        "hinttext": {
+            "type": "codeEditor",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.shippingProfileHinttextLabel",
+                "tooltipText": "Widget.shippingProfileHinttextTooltip"
+            }
+        }
+    }
+}

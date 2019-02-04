@@ -5,45 +5,47 @@
 
 <div class="col-12">
     <div class="row">
-        {% if "delivery_address.salutation" in addressFields %}
-            <div class="col-12 col-sm-4">
-                <div class="input-unit"
-                {% if "delivery_address.salutation" in addressFieldsRequired %}data-validate{% endif %}>
-                    <salutation-select template="#vue-salutation-select" :address-type="addressType" :address-data="value" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
-                    <label :for="'txtSalutation' + _uid">{{ trans("Ceres::Template.addressSalutation") }}{% if "delivery_address.salutation" in addressFieldsRequired %}*{% endif %}</label>
-                </div>
+        <div v-if="isInOptionalFields('de', 'delivery_address.salutation')" class="col-12 col-sm-4">
+            <div 
+                class="input-unit"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.salutation'), validateType: ''}">
+                <salutation-select template="#vue-salutation-select" :address-type="addressType" :address-data="value" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
+                <label :for="'txtSalutation' + _uid">
+                    ${ '{{ trans("Ceres::Template.addressSalutation") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.salutation')) }
+                </label>
             </div>
-        {% endif %}
+        </div>
     </div>
 </div>
 
 <div class="col-12">
     <div class="row">
-        {% if "delivery_address.name1" in addressFields %}
-            <div class="col-12 col-sm-6" {% if "delivery_address.salutation" in addressFields %}v-if="value.addressSalutation === 2"{% endif %}>
-                <div class="input-unit" data-validate="text" data-model="name1">
-                    <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)" data-autofocus>
-                    <label :for="'txtCompany' + _uid">{{ trans("Ceres::Template.addressCompany") }}*</label>
-                </div>
+        <div 
+            class="col-12 col-sm-6"
+            v-if="(isInOptionalFields('de', 'delivery_address.salutation') && value.addressSalutation === 2) || isInOptionalFields('de', 'delivery_address.name1')">
+            <div class="input-unit" data-validate="text" data-model="name1">
+                <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)" data-autofocus>
+                <label :for="'txtCompany' + _uid">{{ trans("Ceres::Template.addressCompany") }}*</label>
             </div>
-        {% endif %}
+        </div>
     </div>
 </div>
 
 <div class="col-12">
     <div class="row">
-
-        {% if "delivery_address.title" in addressFields %}
-            <div class="col-12 col-sm-4">
-                <div class="input-unit"
-                     {% if "delivery_address.title" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="title">
-                    <input type="text" name="title" :id="'txtTitle' + _uid" :value="value.title" @input="emitInputEvent('title', $event.target.value)" data-autofocus>
-                    <label :for="'txtTitle' + _uid">{{ trans("Ceres::Template.addressTitle") }}{% if "delivery_address.title" in addressFieldsRequired %}*{% endif %}</label>
-                </div>
+        <div v-if="isInOptionalFields('de', 'delivery_address.title')" class="col-12 col-sm-4">
+            <div
+                class="input-unit"
+                data-model="title"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.title'), validateType: 'text'}">
+                <input type="text" name="title" :id="'txtTitle' + _uid" :value="value.title" @input="emitInputEvent('title', $event.target.value)" data-autofocus>
+                <label :for="'txtTitle' + _uid">
+                    ${ '{{ trans("Ceres::Template.addressTitle") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.title')) }
+                </label>
             </div>
-        {% endif %}
+        </div>
 
-        {% if not ("delivery_address.name1" in addressFields and "delivery_address.salutation" not in addressFields) %}
+        <template v-if="!isInOptionalFields('de', 'delivery_address.name1') && !isInOptionalFields('de', 'delivery_address.salutation')">
             <div class="col-12 col-sm-4" v-if="value.addressSalutation !== 2">
                 <div class="input-unit" data-validate="text" data-model="name2">
                     <input type="text" name="firstName" :id="'txtFirstName' + _uid" :value="value.name2" @input="emitInputEvent('name2', $event.target.value)" data-autofocus>
@@ -57,36 +59,40 @@
                     <label :for="'txtLastName' + _uid">{{ trans("Ceres::Template.addressLastName") }}*</label>
                 </div>
             </div>
-        {% endif %}
+        </template>
 
-        {% if "delivery_address.name1" in addressFields %}
-            <div class="col-xs-12 col-sm-8" {% if "delivery_address.salutation" in addressFields %}v-if="value.addressSalutation === 2"{% endif %}>
-                <div class="input-unit" data-validate="text" data-model="contactPerson">
-                    <input type="text" name="lastName" :id="'txtContactPerson' + _uid" :value="value.contactPerson" @input="emitInputEvent('contactPerson', $event.target.value)">
-                    <label :for="'txtContactPerson' + _uid">{{ trans("Ceres::Template.addressContactPerson") }}*</label>
-                </div>
+        <div 
+            class="col-xs-12 col-sm-8"
+            v-if="(isInOptionalFields('de', 'delivery_address.salutation') && value.addressSalutation === 2) || isInOptionalFields('de', 'delivery_address.name1')">
+            <div class="input-unit" data-validate="text" data-model="contactPerson">
+                <input type="text" name="lastName" :id="'txtContactPerson' + _uid" :value="value.contactPerson" @input="emitInputEvent('contactPerson', $event.target.value)">
+                <label :for="'txtContactPerson' + _uid">{{ trans("Ceres::Template.addressContactPerson") }}*</label>
             </div>
-        {% endif %}
+        </div>
 
-        {% if "delivery_address.name4" in addressFields %}
-            <div class="col-12 col-sm-4">
-                <div class="input-unit"
-                     {% if "delivery_address.name4" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="name4">
-                    <input type="text" name="decorateName" :id="'txtAdditionalName' + _uid" :value="value.name4" @input="emitInputEvent('name4', $event.target.value)">
-                    <label :for="'txtAdditionalName' + _uid">{{ trans("Ceres::Template.addressAdditionalName") }}{% if "delivery_address.name4" in addressFieldsRequired %}*{% endif %}</label>
-                </div>
+        <div v-if="isInOptionalFields('de', 'delivery_address.name4')" class="col-12 col-sm-4">
+            <div
+                class="input-unit"
+                data-model="name4"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.name4'), validateType: 'text'}">
+                <input type="text" name="decorateName" :id="'txtAdditionalName' + _uid" :value="value.name4" @input="emitInputEvent('name4', $event.target.value)">
+                <label :for="'txtAdditionalName' + _uid">
+                    ${ '{{ trans("Ceres::Template.addressAdditionalName") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.name4')) }
+                </label>
             </div>
-        {% endif %}
+        </div>
 
-        {% if "delivery_address.phoneNumber" in addressFields %}
-            <div class="col-12 col-sm-4">
-                <div class="input-unit"
-                     {% if "delivery_address.phoneNumber" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="telephone">
-                    <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
-                    <label :for="'txtTelephone' + _uid">{{ trans("Ceres::Template.addressTelephone") }}{% if "delivery_address.phoneNumber" in addressFieldsRequired %}*{% endif %}</label>
-                </div>
+        <div v-if="isInOptionalFields('de', 'delivery_address.phoneNumber')" class="col-12 col-sm-4">
+            <div
+                class="input-unit"
+                data-model="telephone"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.phoneNumber'), validateType: 'text'}">
+                <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
+                <label :for="'txtTelephone' + _uid">
+                    ${ '{{ trans("Ceres::Template.addressTelephone") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.phoneNumber')) }
+                </label>
             </div>
-        {% endif %}
+        </div>
     </div>
 </div>
 
@@ -119,27 +125,31 @@
 
 <div class="col-12">
     <div class="row">
-        {% if "delivery_address.address3" in addressFields %}
-            <div class="col-12 col-sm-6">
-                <div class="input-unit"
-                     {% if "delivery_address.address3" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="address3">
-                    <input type="text" name="decorateAddress" :id="'decorateAddress0' + _uid"
-                           :value="value.address3" @input="emitInputEvent('address3', $event.target.value)">
-                    <label :for="'decorateAddress0' + _uid">{{ trans("Ceres::Template.addressAdditionalAddress1") }}{% if "delivery_address.address3" in addressFieldsRequired %}*{% endif %}</label>
-                </div>
+        <div v-if="isInOptionalFields('de', 'delivery_address.address3')" class="col-12 col-sm-6">
+            <div
+                class="input-unit"
+                data-model="address3"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.address3'), validateType: 'text'}">
+                <input type="text" name="decorateAddress" :id="'decorateAddress0' + _uid"
+                        :value="value.address3" @input="emitInputEvent('address3', $event.target.value)">
+                <label :for="'decorateAddress0' + _uid">
+                    ${ '{{ trans("Ceres::Template.addressAdditionalAddress1") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.address3')) }
+                </label>
             </div>
-        {% endif %}
+        </div>
 
-        {% if "delivery_address.address4" in addressFields %}
-            <div class="col-12 col-sm-6">
-                <div class="input-unit"
-                     {% if "delivery_address.address4" in addressFieldsRequired %}data-validate="text" {% endif %}data-model="address4">
-                    <input type="text" name="decorateAddress" :id="'decorateAddress1' + _uid"
-                           :value="value.address4" @input="emitInputEvent('address4', $event.target.value)">
-                    <label :for="'decorateAddress1' + _uid">{{ trans("Ceres::Template.addressAdditionalAddress2") }}{% if "delivery_address.address4" in addressFieldsRequired %}*{% endif %}</label>
-                </div>
+        <div v-if="isInOptionalFields('de', 'delivery_address.address4')" class="col-12 col-sm-6">
+            <div
+                class="input-unit"
+                data-model="address4"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.address4'), validateType: 'text'}">
+                <input type="text" name="decorateAddress" :id="'decorateAddress1' + _uid"
+                        :value="value.address4" @input="emitInputEvent('address4', $event.target.value)">
+                <label :for="'decorateAddress1' + _uid">{{ trans("Ceres::Template.addressAdditionalAddress2") }}
+                    ${ '{{ trans("Ceres::Template.addressAdditionalAddress2") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.address4')) }
+                </label>
             </div>
-        {% endif %}
+        </div>
     </div>
 </div>
 

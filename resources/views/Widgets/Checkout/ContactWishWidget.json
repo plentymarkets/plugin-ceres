@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::ContactWishWidget",
+    "label": "Widget.contactWishLabel",
+    "previewImageURL": "",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 999,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
+    "settings": {
+        "hinttext": {
+            "type": "codeEditor",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.contactWishHinttextLabel",
+                "tooltipText": "Widget.contactWishHinttextTooltip"
+            }
+        }
+    }
+}

@@ -1,17 +1,41 @@
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
-import TranslationService from "services/TranslationService";
+import { isDefined } from "../../helper/utils";
 import { navigateTo } from "services/UrlService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("place-order", {
-
-    delimiters: ["${", "}"],
-
-    props: [
-        "targetContinue",
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-place-order"
+        },
+        targetContinue:
+        {
+            type: String
+        },
+        appearance:
+        {
+            type: [String, null],
+            default: "success",
+            validator: value =>
+            {
+                return ["primary", "secondary", "success", "info", "warning", "danger"].indexOf(value) !== -1;
+            }
+        },
+        buttonSize:
+        {
+            type: [String, null],
+            default: null,
+            validator: value =>
+            {
+                return ["sm", "lg"].indexOf(value) !== -1;
+            }
+        }
+    },
 
     data()
     {
@@ -20,14 +44,47 @@ Vue.component("place-order", {
         };
     },
 
-    computed: Vuex.mapState({
-        checkoutValidation: state => state.checkout.validation,
-        contactWish: state => state.checkout.contactWish,
-        isBasketLoading: state => state.basket.isBasketLoading,
-        basketItemQuantity: state => state.basket.data.itemQuantity,
-        isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
-        shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted
-    }),
+    computed:
+    {
+        buttonClasses()
+        {
+            const classes = [`btn-${this.appearance}`];
+
+            if (isDefined(this.buttonSize))
+            {
+                classes.push(`btn-${this.buttonSize}`);
+            }
+
+            return classes;
+        },
+
+        activeNewsletterSubscriptions()
+        {
+            const activeNewsletterSubscriptions = [];
+
+            for (const emailFolder in this.newsletterSubscription)
+            {
+                const emailFolderValue = this.newsletterSubscription[emailFolder];
+
+                if (emailFolderValue)
+                {
+                    activeNewsletterSubscriptions.push(emailFolder);
+                }
+            }
+
+            return activeNewsletterSubscriptions;
+        },
+
+        ...Vuex.mapState({
+            checkoutValidation: state => state.checkout.validation,
+            contactWish: state => state.checkout.contactWish,
+            isBasketLoading: state => state.basket.isBasketLoading,
+            basketItemQuantity: state => state.basket.data.itemQuantity,
+            isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
+            shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
+            newsletterSubscription: state => state.checkout.newsletterSubscription
+        })
+    },
 
     created()
     {
@@ -40,7 +97,11 @@ Vue.component("place-order", {
             this.waiting = true;
 
             const url = "/rest/io/order/additional_information";
-            const params = { orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted };
+            const params = {
+                orderContactWish: this.contactWish,
+                shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
+                newsletterSubscriptions: this.activeNewsletterSubscriptions
+            };
             const options = { supressNotifications: true };
 
             ApiService.post(url, params, options)
@@ -68,9 +129,6 @@ Vue.component("place-order", {
             }
             else
             {
-                NotificationService.error(
-                    TranslationService.translate("Ceres::Template.checkoutCheckEntries")
-                );
                 this.waiting = false;
             }
         },
