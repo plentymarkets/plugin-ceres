@@ -1,6 +1,6 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
-import { isNullOrUndefined } from "../../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../../helper/utils";
 
 const NotificationService = require("services/NotificationService");
 
@@ -63,7 +63,7 @@ Vue.component("basket-list-item", {
             const variationPropertyGroups = this.basketItem.variation.data.variationPropertyGroups;
             const variationProperties = this.basketItem.variation.data.variationProperties;
 
-            if (variationProperties.length)
+            if (isDefined(variationProperties) && variationProperties.length)
             {
                 return this.$options.filters.variationProperties(variationPropertyGroups, variationProperties, ["empty"], "displayInOrderProcess");
             }
