@@ -14517,7 +14517,7 @@ Custom classes
   width: 100%;
   z-index: 1060;
   color: #fff;
-  background-color: #4D4F4D;
+  background-color: #000000;
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -14664,7 +14664,7 @@ Custom classes
 }
 
 .top-bar .controls-list .control-user #login-change > .dropdown.open > .dropdown-toggle {
-  background-color: #282d2f;
+  background-color: #000000;
 }
 
 .top-bar .controls-list .control-user #login-change > .dropdown.open .dropdown-menu {
@@ -14704,7 +14704,7 @@ Custom classes
   border-top: 1px solid #dcdbd8;
   display: block;
   color: #fff;
-  background-color: #282d2f;
+  background-color: #000000;
 }
 
 .top-bar .controls-list .control-user #login-change > .dropdown .dropdown-menu a:hover {
