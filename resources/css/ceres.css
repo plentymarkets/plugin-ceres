@@ -3680,6 +3680,9 @@ input[type="button"].btn-block {
 .navbar {
   position: relative;
   padding: 0.5rem 1rem;
+	color:#ffffff;
+	  background-color:#000000;
+	  
 }
 
 .navbar::after {
@@ -14793,11 +14796,11 @@ Custom classes
 }
 
 .wrapper-main #page-header {
-  background-color: #f7f7f9;
+  background-color: #000000;
 }
 
 .wrapper-main #page-header.top-bar {
-  background-color: #4D4F4D;
+  background-color: #000000;
 }
 
 .wrapper-main .navbar {
