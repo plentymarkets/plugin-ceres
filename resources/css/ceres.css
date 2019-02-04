@@ -15553,15 +15553,15 @@ body.menu-is-visible {
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover {
-    background: #fff;
-    color: #004157 !important;
+    background: #000000;
+    color: #ffffff !important;
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover > ul.collapse,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover > ul.collapse {
     display: block;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse {
-    background-color: #fff;
+    background-color: #000000;
     columns: 5 228px;
     column-gap: .5em;
     column-rule: 1px solid #dcdbd7;
@@ -15579,7 +15579,7 @@ body.menu-is-visible {
     padding: .5em 1em;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li.level1 > a {
-    color: #008ebd;
+    color: #ffffff;
     font-weight: bold;
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li:hover,
@@ -15593,7 +15593,7 @@ body.menu-is-visible {
     padding: 0 1em .25em 1.4em !important;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .bt-more > a {
-    color: #7a7f7f;
+    color: #ffffff;
     text-transform: lowercase;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a {
@@ -15608,7 +15608,7 @@ body.menu-is-visible {
     color: #004157 !important;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul {
-    background-color: #fff;
+    background-color: #000000;
   }
 }
 
