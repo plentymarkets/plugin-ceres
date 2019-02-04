@@ -9,9 +9,10 @@
     "settings": {
         "visibleFields": {
             "type": "checkboxGroup",
+            "defaultValue": ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "coupon", "vats", "totalSumGross", "couponDiscount", "openAmount"],
             "options": {
                 "name": "Widget.basketTotalsVisibleFields",
-                "valueList": [
+                "checkboxValues": [
                     {
                         "value": "basketValueNet",
                         "caption": "Widget.showBasketValueNet"
