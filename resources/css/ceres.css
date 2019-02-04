@@ -272,6 +272,9 @@ textarea {
   }
   .navbar {
     display: none;
+	  color:#ffffff;
+	  background-color:#000000;
+	  
   }
   .btn > .caret,
   .dropup > .btn > .caret {
