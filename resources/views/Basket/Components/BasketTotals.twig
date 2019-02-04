@@ -87,10 +87,10 @@
 
                 {# Coupon #}
                 <template v-if="basket.couponCode && basket.couponCampaignType === 'promotion'">
-                    <dt>
+                    <dt class="font-weight-bold">
                         {{ trans("Ceres::Template.basketCoupon") }}
                     </dt><!--
-                --><dd>
+                --><dd class="font-weight-bold">
                         ${ basket.couponDiscount | currency }
                     </dd>
                 </template>
@@ -124,10 +124,10 @@
 
                     {# Coupon #}
                     <template v-if="basket.couponCode && basket.couponCampaignType === 'sales'">
-                        <dt>
+                        <dt class="font-weight-bold">
                             {{ trans("Ceres::Template.basketCoupon") }}</strong>
                         </dt><!--
-                     --><dd>
+                     --><dd class="font-weight-bold">
                             ${ basket.couponDiscount | currency }
                         </dd>
                     </template>
