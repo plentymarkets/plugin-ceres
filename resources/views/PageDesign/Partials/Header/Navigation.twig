@@ -5,7 +5,7 @@
 {% set useMegaMenu  = config("Ceres.header.megamenu_levels") > 1 %}
 
 
-<nav class="navbar{% if useMegaMenu %} megamenu{%endif%}">
+<nav class="navbar{% if useMegaMenu %} megamenu{%endif%}" style="background-color:#000000;color:#ffffff;">
     <div class="container-max">
         <div class="row"  >
             <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
