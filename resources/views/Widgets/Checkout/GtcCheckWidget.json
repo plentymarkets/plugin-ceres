@@ -6,6 +6,7 @@
     "categories": ["checkout"],
     "position": 999,
     "widgetClass": "Ceres\\Widgets\\Checkout\\GtcCheckWidget",
+    "maxPerPage": 1,
     "settings": {
         "appearance": "@include(appearance)",
         "hideCheckbox": {
