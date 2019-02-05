@@ -85,6 +85,7 @@
         "enabled_routes_checkout": {
             "type": "checkbox",
             "required": false,
+            "isVisible": "!category_checkout",
             "options": {
                 "name": "Config.routingDefaultCheckout"
             }
