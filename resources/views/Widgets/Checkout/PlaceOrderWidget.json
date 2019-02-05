@@ -1,8 +1,8 @@
 {
     "identifier": "Ceres::PlaceOrderWidget",
     "label": "Widget.placeOrderLabel",
-    "previewImageURL": "",
-    "type": "static",
+    "previewImageURL": "/images/widgets/place-order.svg",
+    "type": "checkout",
     "categories": ["checkout"],
     "position": 999,
     "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",

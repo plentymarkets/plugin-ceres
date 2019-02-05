@@ -2,7 +2,7 @@
     {
         "identifier": "Ceres::AddressWidget",
         "label": "Widget.addressLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/address.svg",
         "type": "checkout",
         "categories": [
             "checkout"
@@ -417,7 +417,7 @@
     {
         "identifier": "Ceres::BasketTotalsWidget",
         "label": "Widget.basketTotalsLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/basket-totals.svg",
         "type": "checkout",
         "categories": [
             "checkout"
@@ -482,7 +482,7 @@
     {
         "identifier": "Ceres::BasketWidget",
         "label": "Widget.basketLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/basket.svg",
         "type": "checkout",
         "categories": [
             "checkout"
@@ -536,7 +536,7 @@
     {
         "identifier": "Ceres::ContactWishWidget",
         "label": "Widget.contactWishLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/contact-wish.svg",
         "type": "checkout",
         "categories": [
             "checkout"
@@ -557,7 +557,7 @@
     {
         "identifier": "Ceres::CouponWidget",
         "label": "Widget.couponLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/coupon.svg",
         "type": "checkout",
         "categories": [
             "checkout"
@@ -611,7 +611,7 @@
     {
         "identifier": "Ceres::GtcCheckWidget",
         "label": "Widget.gtcCheckLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/gtc-check.svg",
         "type": "checkout",
         "categories": [
             "checkout"
@@ -699,8 +699,8 @@
     {
         "identifier": "Ceres::PaymentProviderWidget",
         "label": "Widget.paymentProviderLabel",
-        "previewImageURL": "",
-        "type": "static",
+        "previewImageURL": "/images/widgets/payment-select.svg",
+        "type": "checkout",
         "categories": [
             "checkout"
         ],
@@ -761,8 +761,8 @@
     {
         "identifier": "Ceres::PlaceOrderWidget",
         "label": "Widget.placeOrderLabel",
-        "previewImageURL": "",
-        "type": "static",
+        "previewImageURL": "/images/widgets/place-order.svg",
+        "type": "checkout",
         "categories": [
             "checkout"
         ],
@@ -841,7 +841,7 @@
     {
         "identifier": "Ceres::ShippingPrivacyCheckWidget",
         "label": "Widget.shippingPrivacyCheckLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/shipping-privacy-check.svg",
         "type": "checkout",
         "categories": [
             "checkout"
@@ -853,7 +853,7 @@
     {
         "identifier": "Ceres::ShippingProfileWidget",
         "label": "Widget.shippingProfileLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/shipping-select.svg",
         "type": "checkout",
         "categories": [
             "checkout"
@@ -915,7 +915,7 @@
     {
         "identifier": "Ceres::SubscribeNewsletterCheckWidget",
         "label": "Widget.subscribeNewsletterCheckLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/newsletter-subscription-check.svg",
         "type": "checkout",
         "categories": [
             "checkout"
@@ -2495,19 +2495,19 @@
         "categories": [
             "structure"
         ],
-        "position": 300,
+        "position": 100,
         "widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
         "settings": {}
     },
     {
         "identifier": "Ceres::StickyContainerWidget",
         "label": "Widget.stickyContainerLabel",
-        "previewImageURL": "",
+        "previewImageURL": "/images/widgets/sticky-container.svg",
         "type": "structure",
         "categories": [
             "structure"
         ],
-        "position": 300,
+        "position": 400,
         "widgetClass": "Ceres\\Widgets\\Grid\\StickyContainerWidget",
         "settings": {}
     },
@@ -2573,7 +2573,7 @@
         "categories": [
             "structure"
         ],
-        "position": 100,
+        "position": 300,
         "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
         "settings": {
             "layout": {

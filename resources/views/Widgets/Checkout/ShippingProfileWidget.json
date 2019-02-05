@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::ShippingProfileWidget",
     "label": "Widget.shippingProfileLabel",
-    "previewImageURL": "",
+    "previewImageURL": "/images/widgets/shipping-select.svg",
     "type": "checkout",
     "categories": ["checkout"],
     "position": 200,

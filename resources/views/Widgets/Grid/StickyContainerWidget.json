@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::StickyContainerWidget",
     "label": "Widget.stickyContainerLabel",
-    "previewImageURL": "",
+    "previewImageURL": "/images/widgets/sticky-container.svg",
     "type": "structure",
     "categories": ["structure"],
     "position": 400,
