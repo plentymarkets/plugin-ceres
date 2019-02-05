@@ -21,11 +21,12 @@
                 </a><!--
             -->{% endset %}
 
-                {{ trans("Ceres::Template.checkoutChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}
+                {{ trans("Ceres::Template.checkoutChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}<!--
+                --><template v-if="isRequired">*</template>
             {% endautoescape %}
         </label>
         <label v-else class="form-check-label" :for="'gtc-accept' + _uid">
-            ${ customText }
+            ${ customText }<template v-if="isRequired">*</template>
         </label>
     </div>
 </script>
