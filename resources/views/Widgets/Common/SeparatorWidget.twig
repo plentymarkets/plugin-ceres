@@ -9,7 +9,7 @@
 {% endset %}
 
 {% if isPreview %}<div class="widget-editable-min-height">{% endif %}
-    <div {% if inlineSpacings | trim | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{% if spacingClasses | trim | length > 0 %} class="{{ spacingClasses }}"{% endif %}></div>
+    <hr {% if inlineSpacings | trim | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{% if spacingClasses | trim | length > 0 %} class="{{ spacingClasses }}"{% endif %}>
 {% if isPreview %}</div>{% endif %}
 
 
