@@ -7,7 +7,7 @@
                 {{ trans("Ceres::Template.newsletterCheckboxLabel") }}
             </template>
             <template v-else>
-                ${ customText }
+                ${ customText | raw }
             </template>
         </label>
     </div>

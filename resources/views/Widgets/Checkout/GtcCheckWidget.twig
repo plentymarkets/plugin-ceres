@@ -19,7 +19,7 @@
             :is-required="{{ isRequired | json_encode }}"
         {% endif %}
         {% if customText | length > 0 %}
-            custom-text="{{ customText }}"
+            custom-text="{{ customText | raw }}"
         {% endif %}>
     </accept-gtc-check>
 

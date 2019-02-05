@@ -43,7 +43,7 @@
             }
         },
         "customText": {
-            "type": "text",
+            "type": "codeEditor",
             "defaultValue": "",
             "options": {
                 "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
