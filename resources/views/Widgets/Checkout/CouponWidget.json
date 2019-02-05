@@ -1,12 +1,12 @@
 {
-	"identifier": "Ceres::CouponWidget",
-	"label": "Widget.couponLabel",
-	"previewImageURL": "",
-	"type": "checkout",
-	"categories": ["checkout"],
-	"position": 200,
-	"widgetClass": "Ceres\\Widgets\\Checkout\\CouponWidget",
-	"settings": {
-		"appearance": "@include(appearance)"
-	}
+    "identifier": "Ceres::CouponWidget",
+    "label": "Widget.couponLabel",
+    "previewImageURL": "",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\CouponWidget",
+    "settings": {
+        "appearance": "@include(appearance)"
+    }
 }

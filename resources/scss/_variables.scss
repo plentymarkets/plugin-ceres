@@ -281,3 +281,13 @@ $live-shopping-padding-y:           1rem;
 $component-active-bg:               $primary !default;
 $component-active-color:            color-yiq($component-active-bg) !default;
 
+// Shopbuilder
+$shop-builder-colors:
+  (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger
+  );
