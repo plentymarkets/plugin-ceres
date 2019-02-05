@@ -7,7 +7,7 @@
                 {{ trans("Ceres::Template.newsletterCheckboxLabel") }}<!--
             --></template>
             <template v-else>
-                ${ customText }<!--
+                ${ customText | raw }<!--
             --></template><!--
             --><template v-if="isRequired">*</template>
         </label>
