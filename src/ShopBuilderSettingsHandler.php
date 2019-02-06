@@ -36,11 +36,10 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         }
         else if ( !$value && in_array($key, $enabledRoutes) )
         {
-            array_splice(
-                $enabledRoutes,
-                array_search($key, $enabledRoutes),
-                1
-            );
+            $enabledRoutes = array_filter($enabledRoutes, function($route) use ($key)
+            {
+                return $route !== $key;
+            });
         }
 
         return implode(", ", $enabledRoutes);
