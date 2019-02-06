@@ -7,7 +7,12 @@
     "position": 999,
     "widgetClass": "Ceres\\Widgets\\Checkout\\GtcCheckWidget",
     "settings": {
-        "appearance": "@include(appearance)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
         "hideCheckbox": {
             "type": "checkbox",
             "defaultValue": false,

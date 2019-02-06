@@ -7,6 +7,11 @@
     "position": 999,
     "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
     "settings": {
-        "appearance": "@include(appearance)"
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        }
     }
 }

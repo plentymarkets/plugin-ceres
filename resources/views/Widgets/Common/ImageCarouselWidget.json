@@ -7,7 +7,12 @@
     "position": 500,
     "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
     "settings": {
-        "appearance": "@include(appearance)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
         "slides": {
             "type": "vertical",
             "isList": "[1,]",
