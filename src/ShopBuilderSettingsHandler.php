@@ -7,12 +7,12 @@ use Plenty\Modules\ShopBuilder\Helper\MappableSettingsHandler;
 class ShopBuilderSettingsHandler extends MappableSettingsHandler
 {
     protected $mappings = [
-        'category_checkout'         => 'IO.routing.category_checkout',
-        'enabled_routes_checkout'   => 'IO.routing.enabled_routes'
+        'checkoutCategory'      => 'IO.routing.category_checkout',
+        'checkoutEnableRoute'   => 'IO.routing.enabled_routes'
     ];
 
     protected $casts = [
-        'category_checkout'         => 'int'
+        'category_checkout'     => 'int'
     ];
 
     public function readEnabledRoutesCheckout($pluginConfigValue)
