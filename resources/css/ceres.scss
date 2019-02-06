@@ -19238,6 +19238,14 @@ html.ios {
     }
 }
 
+.widget-shipping-privacy-check
+{
+    .widget-placeholder
+    {
+        padding-bottom: 50%;
+    }
+}
+
 .widget-image-box
 {
     @include media-breakpoint-only(xs) {
@@ -19813,9 +19821,9 @@ html.ie {
     }
 }
 
-@include media-breakpoint-down(xs)
+.widget-live-shopping
 {
-    .widget-live-shopping
+    @include media-breakpoint-down(xs)
     {
         .thumb-inner
         {
@@ -19843,36 +19851,11 @@ html.ie {
                 }
             }
         }
-    }   
-}
-
-.live-shopping-placeholder
-{
-    width: 100%;
-    padding-bottom: 150%;
-    position: relative;
-    background-color: $gray-lighter;
-
-    > div
-    {
-        position: absolute;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-                transform: translateY(-50%);
-        text-align: center;
-        padding: $spacer;
-        width: 100%;
     }
 
-    .title
+    .widget-placeholder
     {
-        font-weight: bold;
-        font-size: 1.3rem;
-    }
-
-    .description
-    {
-        font-style: italic;
+        padding-bottom: 150%;
     }
 }
 
@@ -20183,6 +20166,36 @@ html.ie {
 
 .widget-editable-min-height {
     min-height: 40px;
+}
+
+.widget-placeholder
+{
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+    background-color: $gray-lighter;
+
+    > div
+    {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+        text-align: center;
+        padding: $spacer;
+        width: 100%;
+    }
+
+    .title
+    {
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+
+    .description
+    {
+        font-style: italic;
+    }
 }
 
 
