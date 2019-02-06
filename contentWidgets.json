@@ -965,7 +965,7 @@
             "isRequired": {
                 "type": "checkbox",
                 "isVisible": "hideCheckbox !== true",
-                "defaultValue": true,
+                "defaultValue": false,
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckIsRequiredLabel",
                     "tooltip": "Widget.subscribeNewsletterCheckIsRequiredTooltip"

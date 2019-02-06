@@ -290,7 +290,7 @@ $custom-file-border-color:                      #ddd !default;
 $custom-file-box-shadow:                        inset 0 .2rem .4rem rgba(0,0,0,.05) !default;
 $custom-file-button-bg:                         #eee !default;
 
-$form-check-input-margin-y:                     .1rem;
+$form-check-input-margin-y:                     .2rem;
 
 // This allows us to at a glance determine relative layers of our application and prevents bugs
 // arrising from arbitrary z-index values. Do not edit the z-index scale! Only add application
@@ -368,6 +368,16 @@ $live-shopping-padding-y:           1rem;
 $component-active-bg:               $primary !default;
 $component-active-color:            color-yiq($component-active-bg) !default;
 
+// Shopbuilder
+$shop-builder-colors:
+  (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger
+  );
 
 // ==========================================================================
 // External Libs
@@ -10664,6 +10674,10 @@ body .wrapper-main{
     i.fa-search {
         font-size: 10em;
     }
+    i.fa-home {
+        margin-left: 5px;
+        margin-top: 2px;
+    }
     .default-not-found {
         background-color: rgb(247, 247, 249);
     }
@@ -10754,12 +10768,15 @@ a:active {
   white-space: normal;
 }
 
+.is_stuck {
+    z-index: 1;
+}
+
 html {
 	font-size: $font-size-root;
 }
 
 body {
-
 	background-color: $gray-lightest;
 
 	> #vue-app,
@@ -10770,15 +10787,10 @@ body {
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
 			z-index 	: $zIndex-8;
-
-			.wrapper-inner{
-				
-			}
 		} 
 
 		.wrapper-main{
 			position: relative;
-			//z-index: $zIndex-1;
 		}
 		
 		.wrapper-top {
@@ -10906,19 +10918,12 @@ body {
 			}
 		}
 
-		@include media-breakpoint-up(sm){
-		}
-
 		@include media-breakpoint-up(md){
 			&.open-right{
 				.wrapper-right{
 					width: $aside-columns-width;
 				}
 			}
-		}
-
-		@include media-breakpoint-up(lg){
-			
 		}
 	}
 }
@@ -12945,7 +12950,6 @@ $border-width: 1px;
 {
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
-    cursor: pointer;
     margin-bottom: .75rem;
 
     &.error
@@ -12970,6 +12974,9 @@ $border-width: 1px;
         {
             color: $white !important;
         }
+    }
+    .form-check-input {
+        cursor: pointer;
     }
 }
 
@@ -13307,6 +13314,8 @@ $border-width: 1px;
 		background-color:$navbar-background-color;
 		-webkit-box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 		        box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
+		-webkit-backface-visibility: hidden;
+		        backface-visibility: hidden;
 
 		&.top-bar {
 			background-color: $top-bar-bg;
@@ -17868,6 +17877,13 @@ html.ie .basket-preview-hover {
     }
 }
 
+/* IOS compatibility */
+html.ios {
+    .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
+        background-size: contain;
+    }
+}
+
 .list-controls {
     position: relative;
     .list-controls-inner {
@@ -19207,48 +19223,18 @@ html.ie .basket-preview-hover {
     }
 }
 
-@mixin widget-list-box-shadow($color)
+.widget-provider-select
 {
-    > .payment-method-select, > .shipping-method-select
+    @each $color, $value in $shop-builder-colors
     {
-        > .cmp-method-list .method-list-item > input:checked + label
+        &.widget-#{$color}
         {
-            -webkit-box-shadow: inset 0 0 0 0.1rem $color;
-                    box-shadow: inset 0 0 0 0.1rem $color;
+            input:checked + .provider-select-label
+            {
+                -webkit-box-shadow: inset 0 0 0 0.1rem $value;
+                        box-shadow: inset 0 0 0 0.1rem $value;   
+            }
         }
-    }
-}
-
-.widget-payment-provider, .widget-shipping-profile
-{
-    &.widget-primary
-    {
-        @include widget-list-box-shadow($primary);
-    }
-
-    &.widget-secondary
-    {
-        @include widget-list-box-shadow($secondary);
-    }
-
-    &.widget-success
-    {
-        @include widget-list-box-shadow($success);
-    }
-
-    &.widget-info
-    {
-        @include widget-list-box-shadow($info);
-    }
-
-    &.widget-warning
-    {
-        @include widget-list-box-shadow($warning);
-    }
-
-    &.widget-danger
-    {
-        @include widget-list-box-shadow($danger);
     }
 }
 
@@ -19476,15 +19462,6 @@ html.ie .basket-preview-hover {
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
     font-size: 2rem;
-}
-
-/* Compatibility for IE */
-/* display img with optimal aspect ratio */
-html.ie {
-    .widget-image-box .img-cover {
-        min-height: auto;
-        min-width: auto;
-    }
 }
 @mixin widget-carousel-variant($parent, $color)
 {
