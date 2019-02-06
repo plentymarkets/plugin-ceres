@@ -1,15 +1,16 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set inlineSpacings %}
-    {{ WidgetHelper.getInlineSpacings( widget.settings.margin, "margin" ) }}
+    {{- WidgetHelper.getInlineSpacings( widget.settings.margin, "margin" ) | trim -}}
 {% endset %}
 
 {% set spacingClasses %}
-    {{ WidgetHelper.getSpacingClasses( widget.settings.margin, "m" ) }}
+    {{- WidgetHelper.getSpacingClasses( widget.settings.margin, "m" ) | trim -}}
 {% endset %}
 
+
 {% if isPreview %}<div class="widget-editable-min-height">{% endif %}
-    <hr {% if inlineSpacings | trim | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{% if spacingClasses | trim | length > 0 %} class="{{ spacingClasses }}"{% endif %}>
+    <hr{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{% if spacingClasses | length > 0 %} class="{{ spacingClasses }}"{% endif %}>
 {% if isPreview %}</div>{% endif %}
 
 
