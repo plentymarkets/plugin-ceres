@@ -90,8 +90,7 @@ class TemplateServiceProvider extends ServiceProvider
                 }
                 else
                 {
-                    $templateName = self::$templateKeyToViewMap[$template][0];
-                    $templateContainer->setTemplate('Ceres::' . $templateName);
+                    $templateContainer->setTemplate('Ceres::' . self::$templateKeyToViewMap[$template][0]);
                 }
             }
         }, self::EVENT_LISTENER_PRIORITY);
