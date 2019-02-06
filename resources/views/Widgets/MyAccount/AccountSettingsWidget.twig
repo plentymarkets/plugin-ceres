@@ -1,5 +1,15 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.component("Ceres::MyAccount.Components.AccountSettings") }}
+
 <div>
-    <p>Dies ist ein TestWidget</p>
+    <h4>
+        {{ trans("Ceres::Template.myAccountSettings") }}
+    </h4>
+    <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountChangeLoginData") }}</p>
+
+    <div class="card mb-5">
+        <account-settings :user-data="{{ userObject }}"></account-settings>
+    </div>
 </div>

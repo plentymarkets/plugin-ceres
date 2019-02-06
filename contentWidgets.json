@@ -1840,9 +1840,9 @@
         "identifier": "Ceres::AccountSettingsWidget",
         "label": "Widget.accountSettingsLabel",
         "previewImageURL": "/images/widgets/accountSettings.svg",
-        "type": "myaccount",
+        "type": "static",
         "categories": [
-            "myaccount"
+            "static"
         ],
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",

@@ -6,12 +6,17 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("account-settings", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "userData",
-        "template"
-    ],
+    props: {
+        userData:
+        {
+            type: Object
+        },
+        template:
+        {
+            type: String,
+            default: "#vue-account-settings"
+        }
+    },
 
     data: function()
     {
