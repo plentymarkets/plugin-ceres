@@ -1835,5 +1835,17 @@
                 }
             }
         }
+    },
+    {
+        "identifier": "Ceres::AccountSettingsWidget",
+        "label": "Widget.accountSettingsLabel",
+        "previewImageURL": "/images/widgets/accountSettings.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
+        "settings": {}
     }
 ]

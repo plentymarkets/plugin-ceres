@@ -5,7 +5,7 @@
     "type": "myaccount",
     "categories": ["myaccount"],
     "position": 100,
-    "widgetClass": "Ceres\\Widgets\\MyAccount\\AddressWidget",
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
     "settings": {
 
     }
