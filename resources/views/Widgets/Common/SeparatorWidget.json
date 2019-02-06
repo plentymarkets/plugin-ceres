@@ -6,5 +6,130 @@
     "categories": ["structure"],
     "position": 1100,
     "widgetClass": "Ceres\\Widgets\\Common\\SeparatorWidget",
-    "settings": {}
+    "settings": {
+        "marginTop": {
+            "type": "select",
+            "defaultValue": "4",
+            "options": {
+                "name": "Widget.seperatorMarginTop",
+                "listBoxValues": [
+                    {
+                        "value": "0",
+                        "caption": "Widget.widgetNum0"
+                    },
+                    {
+                        "value": "1",
+                        "caption": "Widget.widgetNum1"
+                    },
+                    {
+                        "value": "2",
+                        "caption": "Widget.widgetNum2"
+                    },
+                    {
+                        "value": "3",
+                        "caption": "Widget.widgetNum3"
+                    },
+                    {
+                        "value": "4",
+                        "caption": "Widget.widgetNum4"
+                    },
+                    {
+                        "value": "5",
+                        "caption": "Widget.widgetNum5"
+                    },
+                    {
+                        "value": "custom-margin",
+                        "caption": "Widget.seperatorMarginCustom"
+                    }
+                ]
+            }
+        },
+        "customMarginValueTop": {
+            "type": "number",
+            "isVisible": "marginTop === 'custom-margin'",
+            "options": {
+                "name": "Widget.seperatorMarginValue"
+            }
+        },
+        "customMarginUnitTop": {
+            "type": "select",
+            "isVisible": "marginTop === 'custom-margin'",
+            "defaultValue": "px",
+            "options": {
+                "name": "Widget.seperatorCustomUnit",
+                "listBoxValues": [
+                    {
+                        "value": "px",
+                        "caption": "Widget.widgetUnitPx"
+                    },
+                    {
+                        "value": "rem",
+                        "caption": "Widget.widgetUnitRem"
+                    }
+                ]
+            }
+        },
+        "marginBottom": {
+            "type": "select",
+            "defaultValue": "4",
+            "options": {
+                "name": "Widget.seperatorMarginBottom",
+                "listBoxValues": [
+                    {
+                        "value": "0",
+                        "caption": "Widget.widgetNum0"
+                    },
+                    {
+                        "value": "1",
+                        "caption": "Widget.widgetNum1"
+                    },
+                    {
+                        "value": "2",
+                        "caption": "Widget.widgetNum2"
+                    },
+                    {
+                        "value": "3",
+                        "caption": "Widget.widgetNum3"
+                    },
+                    {
+                        "value": "4",
+                        "caption": "Widget.widgetNum4"
+                    },
+                    {
+                        "value": "5",
+                        "caption": "Widget.widgetNum5"
+                    },
+                    {
+                        "value": "custom-margin",
+                        "caption": "Widget.seperatorMarginCustom"
+                    }
+                ]
+            }
+        },
+        "customMarginValueBottom": {
+            "type": "number",
+            "isVisible": "marginBottom === 'custom-margin'",
+            "options": {
+                "name": "Widget.seperatorMarginValue"
+            }
+        },
+        "customMarginUnitBottom": {
+            "type": "select",
+            "isVisible": "marginBottom === 'custom-margin'",
+            "defaultValue": "px",
+            "options": {
+                "name": "Widget.seperatorCustomUnit",
+                "listBoxValues": [
+                    {
+                        "value": "px",
+                        "caption": "Widget.widgetUnitPx"
+                    },
+                    {
+                        "value": "rem",
+                        "caption": "Widget.widgetUnitRem"
+                    }
+                ]
+            }
+        }
+    }
 }

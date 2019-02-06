@@ -1,44 +1,48 @@
-{% set billingAddressFields = config("Ceres.billing_address.show") | split(', ') %}
-{% set billingAddressFieldsRequired = config("Ceres.billing_address.require") | split(', ') %}
-{% set deliveryAddressFields = config("Ceres.delivery_address.show") | split(', ') %}
-{% set deliveryAddressFieldsRequired = config("Ceres.delivery_address.require") | split(', ') %}
-
 <script type="x/template" id="vue-country-select">
-<div>
-    <div class="input-unit" data-validate="" data-model="countryId">
-        <select  :value="selectedCountryId" class="custom-select" @change="countryChanged($event.target.value)">
-            <option :value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList">
-                ${ country.currLangName }
-            </option>
-        </select>
-        <label>{{ trans("Ceres::Template.headerCountry") }}</label>
-    </div>
-
-    {% if "billing_address.stateId" in billingAddressFields %}
-    <div class="input-unit" v-if="stateList && stateList.length > 0 && addressType === '1'" {% if "billing_address.stateId" in billingAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
-        <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
-            <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
-            <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList">
-                ${ state.name }
-            </option>
-        </select>
-        <label>{{ trans("Ceres::Template.headerState") }}{% if "billing_address.stateId" in billingAddressFieldsRequired %}*{% endif %}</label>
-    </div>
-    {% endif %}
-
-
-    {% if "delivery_address.stateId" in deliveryAddressFields %}
-        <div class="input-unit" v-if="stateList && stateList.length > 0 && addressType === '2'" {% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
-            <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
-                <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
-                <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList">
-                    ${ state.name }
+    <div>
+        <div class="input-unit" data-validate="" data-model="countryId">
+            <select  :value="selectedCountryId" class="custom-select" @change="countryChanged($event.target.value)">
+                <option :value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList">
+                    ${ country.currLangName }
                 </option>
             </select>
-            <label>{{ trans("Ceres::Template.headerState") }}{% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}*{% endif %}</label>
+            <label>{{ trans("Ceres::Template.headerCountry") }}</label>
         </div>
-    {% endif %}
 
+        <template v-if="isInOptionalFields('de', 'billing_address.stateId')">
+            <div
+                class="input-unit"
+                v-if="stateList && stateList.length > 0 && addressType === '1'"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'billing_address.stateId'), validateType: ''}"
+                data-model="stateId">
+                <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
+                    <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
+                    <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList">
+                        ${ state.name }
+                    </option>
+                </select>
+                <label>
+                    ${ '{{ trans("Ceres::Template.headerState") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.stateId')) }
+                </label>
+            </div>
+        </template>
+
+        <template v-if="isInOptionalFields('de', 'delivery_address.stateId')">
+            <div
+                class="input-unit"
+                v-if="stateList && stateList.length > 0 && addressType === '2'"
+                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.stateId'), validateType: ''}"
+                data-model="stateId">
+                <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
+                    <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
+                    <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList">
+                        ${ state.name }
+                    </option>
+                </select>
+                <label>
+                    ${ '{{ trans("Ceres::Template.headerState") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.stateId')) }
+                </label>
+            </div>
+        </template>
     </div>
-
 </script>

@@ -39,6 +39,12 @@
                 "label": "Widget.presetHomepageDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
             }
+        ],
+        "checkout": [
+            {
+                "label": "Widget.presetCheckoutDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"
+            }
         ]
     },
     "categories": [
@@ -68,9 +74,14 @@
             "position": 500
         },
         {
+            "key": "checkout",
+            "label": "Widget.categoryCheckout",
+            "position": 600
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 600
+            "position": 700
         }
     ],
     "globalSettings": {

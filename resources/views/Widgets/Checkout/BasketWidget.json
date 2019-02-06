@@ -1,0 +1,12 @@
+{
+    "identifier": "Ceres::BasketWidget",
+    "label": "Widget.basketLabel",
+    "previewImageURL": "/images/widgets/basket.svg",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 999,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
+    "settings": {
+        "appearance": "@include(appearance)"
+    }
+}

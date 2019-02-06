@@ -7,13 +7,39 @@ Vue.component("create-update-address", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "addressData",
-        "addressModal",
-        "modalType",
-        "addressType",
-        "template"
-    ],
+    props: {
+        addressData: {
+            type: Object,
+            default()
+            {
+                return {};
+            }
+        },
+        addressModal: {
+            type: Object,
+            default()
+            {
+                return {};
+            }
+        },
+        modalType: String,
+        addressType: String,
+        template: String,
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        }
+    },
 
     data()
     {
@@ -25,7 +51,7 @@ Vue.component("create-update-address", {
     computed:
     {
         addressList()
-            {
+        {
             this.$store.getters.getAddressList(this.addressType);
         }
     },

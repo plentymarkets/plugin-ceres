@@ -1,13 +1,14 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set headlineStyle = widget.settings.headlineStyle.mobile  %}
-{% set headline      = widget.settings.headline.mobile  %}
-{% set listType      = widget.settings.listType.mobile %}
-{% set itemSort      = widget.settings.itemSort.mobile %}
-{% set maxItems      = widget.settings.maxItems.mobile %}
-{% set categoryId    = widget.settings.categoryId.mobile %}
-{% set itemListId    = widget.settings.tagId.mobile %}
-{% set itemsPerPage  = widget.settings.itemsPerPage.mobile %}
+{% set headlineStyle  = widget.settings.headlineStyle.mobile  %}
+{% set headline       = widget.settings.headline.mobile  %}
+{% set listType       = widget.settings.listType.mobile %}
+{% set itemSort       = widget.settings.itemSort.mobile %}
+{% set maxItems       = widget.settings.maxItems.mobile %}
+{% set categoryId     = widget.settings.categoryId.mobile %}
+{% set itemListId     = widget.settings.tagId.mobile %}
+{% set itemsPerPage   = widget.settings.itemsPerPage.mobile %}
+{% set manufacturerId = widget.settings.manufacturerId.mobile %}
 
 {% if itemsPerPage is empty or itemsPerPage > 4 %}
     {% set itemsPerPage = 4 %}
@@ -31,6 +32,10 @@
 {% if listType != "last_seen" or not isPreview %}
     {# do not get item list for last seen items. Items will be loaded asynchronusly by vue component. #}
     {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems]) ) }}
+{% endif %}
+
+{% if listType == "manufacturer" %}
+    {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, manufacturerId, itemSort, maxItems]) ) }}
 {% endif %}
 
 {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
