@@ -3,9 +3,9 @@
         "identifier": "Ceres::AddressWidget",
         "label": "Widget.addressLabel",
         "previewImageURL": "/images/widgets/address.svg",
-        "type": "checkout",
+        "type": "customer",
         "categories": [
-            "checkout"
+            "customer"
         ],
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\Checkout\\AddressWidget",
@@ -418,18 +418,31 @@
         "identifier": "Ceres::BasketTotalsWidget",
         "label": "Widget.basketTotalsLabel",
         "previewImageURL": "/images/widgets/basket-totals.svg",
-        "type": "checkout",
+        "type": "basket",
         "categories": [
-            "checkout"
+            "basket"
         ],
-        "position": 400,
+        "position": 200,
         "widgetClass": "Ceres\\Widgets\\Checkout\\BasketTotalsWidget",
         "settings": {
             "visibleFields": {
                 "type": "checkboxGroup",
+                "defaultValue": [
+                    "basketValueNet",
+                    "basketValueGross",
+                    "rebate",
+                    "shippingCostsNet",
+                    "shippingCostsGross",
+                    "totalSumNet",
+                    "coupon",
+                    "vats",
+                    "totalSumGross",
+                    "couponDiscount",
+                    "openAmount"
+                ],
                 "options": {
                     "name": "Widget.basketTotalsVisibleFields",
-                    "valueList": [
+                    "checkboxValues": [
                         {
                             "value": "basketValueNet",
                             "caption": "Widget.showBasketValueNet"
@@ -483,11 +496,11 @@
         "identifier": "Ceres::BasketWidget",
         "label": "Widget.basketLabel",
         "previewImageURL": "/images/widgets/basket.svg",
-        "type": "checkout",
+        "type": "basket",
         "categories": [
-            "checkout"
+            "basket"
         ],
-        "position": 999,
+        "position": 100,
         "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
         "settings": {
             "appearance": {
@@ -541,7 +554,7 @@
         "categories": [
             "checkout"
         ],
-        "position": 999,
+        "position": 300,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
         "settings": {
             "hinttext": {
@@ -562,7 +575,7 @@
         "categories": [
             "checkout"
         ],
-        "position": 200,
+        "position": 600,
         "widgetClass": "Ceres\\Widgets\\Checkout\\CouponWidget",
         "settings": {
             "appearance": {
@@ -616,7 +629,7 @@
         "categories": [
             "checkout"
         ],
-        "position": 999,
+        "position": 500,
         "widgetClass": "Ceres\\Widgets\\Checkout\\GtcCheckWidget",
         "settings": {
             "appearance": {
@@ -687,7 +700,7 @@
                 }
             },
             "customText": {
-                "type": "text",
+                "type": "codeEditor",
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.gtcCheckCustomTextLabel",
@@ -766,7 +779,7 @@
         "categories": [
             "checkout"
         ],
-        "position": 999,
+        "position": 700,
         "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",
         "settings": {
             "appearance": {
@@ -846,7 +859,7 @@
         "categories": [
             "checkout"
         ],
-        "position": 999,
+        "position": 400,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingPrivacyCheckWidget",
         "settings": {}
     },
@@ -858,7 +871,7 @@
         "categories": [
             "checkout"
         ],
-        "position": 200,
+        "position": 100,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
         "settings": {
             "appearance": {
@@ -920,7 +933,7 @@
         "categories": [
             "checkout"
         ],
-        "position": 999,
+        "position": 800,
         "widgetClass": "Ceres\\Widgets\\Checkout\\SubscribeNewsletterCheckWidget",
         "settings": {
             "emailFolder": {
@@ -959,7 +972,7 @@
                 }
             },
             "customText": {
-                "type": "text",
+                "type": "codeEditor",
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckCustomTextLabel",

@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/coupon.svg",
     "type": "checkout",
     "categories": ["checkout"],
-    "position": 200,
+    "position": 600,
     "widgetClass": "Ceres\\Widgets\\Checkout\\CouponWidget",
     "settings": {
         "appearance": "@include(appearance)"
