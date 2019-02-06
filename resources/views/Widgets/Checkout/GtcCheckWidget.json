@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::GtcCheckWidget",
     "label": "Widget.gtcCheckLabel",
-    "previewImageURL": "",
+    "previewImageURL": "/images/widgets/gtc-check.svg",
     "type": "checkout",
     "categories": ["checkout"],
     "position": 999,

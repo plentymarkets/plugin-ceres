@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::CouponWidget",
     "label": "Widget.couponLabel",
-    "previewImageURL": "",
+    "previewImageURL": "/images/widgets/coupon.svg",
     "type": "checkout",
     "categories": ["checkout"],
     "position": 200,

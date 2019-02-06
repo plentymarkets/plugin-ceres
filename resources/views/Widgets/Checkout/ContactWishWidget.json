@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::ContactWishWidget",
     "label": "Widget.contactWishLabel",
-    "previewImageURL": "",
+    "previewImageURL": "/images/widgets/contact-wish.svg",
     "type": "checkout",
     "categories": ["checkout"],
     "position": 999,

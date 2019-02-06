@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::BasketTotalsWidget",
     "label": "Widget.basketTotalsLabel",
-    "previewImageURL": "",
+    "previewImageURL": "/images/widgets/basket-totals.svg",
     "type": "checkout",
     "categories": ["checkout"],
     "position": 400,
