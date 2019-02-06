@@ -2,6 +2,7 @@
 
 namespace Ceres;
 
+use IO\Helper\RouteConfig;
 use Plenty\Modules\ShopBuilder\Helper\MappableSettingsHandler;
 
 class ShopBuilderSettingsHandler extends MappableSettingsHandler
@@ -12,28 +13,22 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     ];
 
     protected $casts = [
-        'category_checkout'     => 'int'
+        'checkoutCategory'      => 'int'
     ];
 
-    public function readEnabledRoutesCheckout($pluginConfigValue)
+    public function readCheckoutEnableRoute()
     {
-        $enabledRoutes = explode(", ", $pluginConfigValue);
-        return in_array("checkout", $enabledRoutes) || $pluginConfigValue === "all";
+        return in_array( RouteConfig::CHECKOUT, RouteConfig::getEnabledRoutes());
     }
 
-    public function writeEnabledRoutesCheckout($enableCheckoutRoute, $currentValue)
+    public function writeCheckoutEnableRoute($enableCheckoutRoute)
     {
-        return $this->setEnabledRoute("checkout", $enableCheckoutRoute, $currentValue);
+        return $this->setEnabledRoute(RouteConfig::CHECKOUT, $enableCheckoutRoute);
     }
 
-    private function setEnabledRoute($key, $value, $currentValue)
+    private function setEnabledRoute($key, $value)
     {
-        $enabledRoutes = explode(", ", $currentValue );
-
-        if ( $enabledRoutes === "all" )
-        {
-            $enabledRoutes = [];
-        }
+        $enabledRoutes = RouteConfig::getEnabledRoutes();
 
         if( $value && !in_array($key, $enabledRoutes) )
         {
