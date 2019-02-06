@@ -2,9 +2,9 @@
     "identifier": "Ceres::BasketTotalsWidget",
     "label": "Widget.basketTotalsLabel",
     "previewImageURL": "/images/widgets/basket-totals.svg",
-    "type": "checkout",
-    "categories": ["checkout"],
-    "position": 400,
+    "type": "basket",
+    "categories": ["basket"],
+    "position": 200,
     "widgetClass": "Ceres\\Widgets\\Checkout\\BasketTotalsWidget",
     "settings": {
         "visibleFields": {

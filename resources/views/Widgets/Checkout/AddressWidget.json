@@ -2,8 +2,8 @@
     "identifier": "Ceres::AddressWidget",
     "label": "Widget.addressLabel",
     "previewImageURL": "/images/widgets/address.svg",
-    "type": "checkout",
-    "categories": ["checkout"],
+    "type": "customer",
+    "categories": ["customer"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Checkout\\AddressWidget",
     "settings": {

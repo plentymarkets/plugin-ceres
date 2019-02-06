@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/place-order.svg",
     "type": "checkout",
     "categories": ["checkout"],
-    "position": 999,
+    "position": 700,
     "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",
     "settings": {
         "appearance": "@include(appearance)",
