@@ -9,7 +9,7 @@
 {% macro getSpacingClasses( spacingValue, classPrefix ) %}
     {%- spaceless %}
         {% for d, direction in {"t": "top", "r": "right", "b": "bottom", "l": "left"} if spacingValue[direction].unit is defined and spacingValue[direction].unit.mobile is null and spacingValue[direction].value.mobile > 0 %}
-            {{ spacingType | default("m") }}-{{ d }}-{{ spacingValue[direction].value.mobile }}
+            {{ spacingType | default("m") }}{{ d }}-{{ spacingValue[direction].value.mobile }}
         {% endfor %}
     {% endspaceless -%}
 {% endmacro %}
