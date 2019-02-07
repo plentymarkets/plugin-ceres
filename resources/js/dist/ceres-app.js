@@ -19665,10 +19665,6 @@ Vue.component("contact-form", {
         document.dispatchEvent(new CustomEvent("onContactFormSend", {
           detail: mailObj
         }));
-
-        if (!(0, _utils.isNullOrUndefined)(grecaptcha)) {
-          grecaptcha.reset();
-        }
       }).fail(function (response) {
         _this2.waiting = false;
 
@@ -19676,6 +19672,10 @@ Vue.component("contact-form", {
           _this2._handleValidationErrors(response.validation_errors);
         } else {
           NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactSendFail"));
+        }
+      }).always(function () {
+        if (!(0, _utils.isNullOrUndefined)(grecaptcha)) {
+          grecaptcha.reset();
         }
       });
     },
