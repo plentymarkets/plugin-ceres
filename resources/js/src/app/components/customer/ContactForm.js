@@ -116,11 +116,6 @@ Vue.component("contact-form", {
                         TranslationService.translate("Ceres::Template.contactSendSuccess")
                     );
                     document.dispatchEvent(new CustomEvent("onContactFormSend", { detail: mailObj }));
-
-                    if (!isNullOrUndefined(grecaptcha))
-                    {
-                        grecaptcha.reset();
-                    }
                 })
                 .fail(response =>
                 {
@@ -135,6 +130,13 @@ Vue.component("contact-form", {
                         NotificationService.error(
                             TranslationService.translate("Ceres::Template.contactSendFail")
                         );
+                    }
+                })
+                .always(() =>
+                {
+                    if (!isNullOrUndefined(grecaptcha))
+                    {
+                        grecaptcha.reset();
                     }
                 });
         },
