@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <template v-if="!isInOptionalFields('gb', 'delivery_address.name1') && !isInOptionalFields('gb', 'delivery_address.salutation')">
+        <template v-if="!(isInOptionalFields('gb', 'delivery_address.name1') && !isInOptionalFields('gb', 'delivery_address.salutation'))">
             <div class="col-12 col-sm-4" v-if="value.addressSalutation !== 2">
                 <div class="input-unit" data-validate="text" data-model="name2">
                     <input type="text" name="firstName" :id="'txtFirstName' + _uid" :value="value.name2" @input="emitInputEvent('name2', $event.target.value)" data-autofocus>
