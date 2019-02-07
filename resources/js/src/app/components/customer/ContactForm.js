@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from "../../helper/utils";
+
 const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
@@ -114,6 +116,11 @@ Vue.component("contact-form", {
                         TranslationService.translate("Ceres::Template.contactSendSuccess")
                     );
                     document.dispatchEvent(new CustomEvent("onContactFormSend", { detail: mailObj }));
+
+                    if (!isNullOrUndefined(grecaptcha))
+                    {
+                        grecaptcha.reset();
+                    }
                 })
                 .fail(response =>
                 {
