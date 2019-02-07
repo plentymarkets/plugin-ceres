@@ -746,7 +746,7 @@
                         }
                     },
                     "url": {
-                        "type": "text",
+                        "type": "urlPicker",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
@@ -866,7 +866,7 @@
                         }
                     },
                     "url": {
-                        "type": "text",
+                        "type": "urlPicker",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",

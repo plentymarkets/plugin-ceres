@@ -1,0 +1,36 @@
+{% macro getUrlPicker(urlValue, urlType) %}
+
+    {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+    {{ Twig.set("imageUrl", "" | json_encode) }}
+    {{ Twig.set("name", "" | json_encode) }}
+    {{ Twig.set("url", "" | json_encode) }}
+
+    {% if urlType == 'category' %}
+
+        {{ Twig.set("category", Twig.call("services.category.get", [urlValue])) }}
+
+        {{ Twig.set("name", "category.details[0].name") }}
+        {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
+        {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
+
+        {{ Twig.if("imageUrl | trim is not empty") }}
+        {{ Twig.set("imageUrl", "\"documents/\" ~ imageUrl") }}
+        {{ Twig.endif() }}
+
+    {% elseif urlType == 'item' %}
+
+        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [urlValue])) }}
+        {{ Twig.set("itemData", "itemData.documents[0].data") }}
+        {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
+
+        {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
+        {{ Twig.set("url", "itemData | itemURL") }}
+        {{ Twig.set("imageUrl", "itemImage.url") }}
+
+    {% endif %}
+
+    {% if urlType == 'external' or urlType == 'file' %}
+        {{ Twig.set("imageUrl", urlValue | json_encode) }}
+    {% endif %}
+
+{% endmacro %}
