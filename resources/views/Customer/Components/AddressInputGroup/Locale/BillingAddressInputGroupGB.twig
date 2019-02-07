@@ -6,7 +6,7 @@
             <div
                 class="input-unit"
                 v-data-validate="{shouldAddProperty: isInRequiredFields('gb', 'billing_address.salutation'), validateType: ''}">
-                <salutation-select template="#vue-salutation-select" :address-type="addressType" :address-data="value" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
+                <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                 <label :for="'txtSalutation' + _uid">{{ trans("Ceres::Template.addressSalutation") }}{% if "billing_address.salutation" in addressFieldsRequired %}*{% endif %}</label>
             </div>
         </div>
