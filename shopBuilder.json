@@ -93,5 +93,24 @@
             "label": "Widget.categoryFooter",
             "position": 900
         }
-    ]
+    ],
+    "globalSettings": {
+        "checkoutCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCheckout"
+            }
+        },
+        "checkoutEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!checkoutCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCheckout"
+            }
+        }
+    },
+    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler"
 }
