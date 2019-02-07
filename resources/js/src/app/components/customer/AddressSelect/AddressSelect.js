@@ -2,14 +2,11 @@ import { isNull, isDefined } from "../../../helper/utils";
 
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
-const AddressFieldService = require("services/AddressFieldService");
 
 import ValidationService from "services/ValidationService";
 import TranslationService from "services/TranslationService";
 
 Vue.component("address-select", {
-
-    delimiters: ["${", "}"],
 
     props: {
         template: {
@@ -25,7 +22,10 @@ Vue.component("address-select", {
             type: Object,
             default: () =>
             {
-                return {};
+                return {
+                    de: [],
+                    gb: []
+                };
             }
         },
         requiredAddressFields: {
@@ -94,6 +94,15 @@ Vue.component("address-select", {
             return !(this.addressList && this.addressList.length > 0);
         },
 
+        isSalutationEnabled()
+        {
+            const countryId = parseInt(this.addressToEdit.countryId) || 1;
+            const addressKey = parseInt(this.addressType) === 1 ? "billing_address" : "delivery_address";
+            const countryKey = countryId === 12 ? "gb" : "de";
+
+            return this.optionalAddressFields[countryKey].includes(`${addressKey}.salutation`);
+        },
+
         ...Vuex.mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             countryList: state => state.localization.shippingCountries
@@ -149,7 +158,7 @@ Vue.component("address-select", {
         {
             this.modalType = type || "create";
 
-            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            if (this.isSalutationEnabled)
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
