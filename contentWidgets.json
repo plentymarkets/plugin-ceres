@@ -323,9 +323,32 @@
                             "tooltipText": "Widget.imageCarouselHeadlineTooltip"
                         }
                     },
-                    "url": {
-                        "type": "urlPicker",
-                        "required": false
+                    "categoryId": {
+                        "type": "category",
+                        "required": false,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.imageCarouselCategoryIdLabel",
+                            "tooltipText": "Widget.imageCarouselCategoryIdTooltip"
+                        }
+                    },
+                    "variationId": {
+                        "type": "number",
+                        "required": false,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.imageCarouselVariationIdLabel",
+                            "tooltipText": "Widget.imageCarouselVariationIdTooltip"
+                        }
+                    },
+                    "customImagePath": {
+                        "type": "file",
+                        "required": false,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.imageCarouselCustomImagePathLabel",
+                            "tooltipText": "Widget.imageCarouselCustomImagePathTooltip"
+                        }
                     }
                 }
             }
@@ -723,7 +746,7 @@
                         }
                     },
                     "url": {
-                        "type": "urlPicker",
+                        "type": "text",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
@@ -843,7 +866,7 @@
                         }
                     },
                     "url": {
-                        "type": "urlPicker",
+                        "type": "text",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
