@@ -108,9 +108,9 @@
             "required": false,
             "isVisible": "!checkoutCategory",
             "options": {
-                "name": "Config.routingDefaultCheckout"
+                "name": "Config.routingEnableRouteCheckout"
             }
         }
     },
-    "globalSettingsHandler": "Ceres\\ShopBuilderSettingsHandler"
+    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler"
 }
