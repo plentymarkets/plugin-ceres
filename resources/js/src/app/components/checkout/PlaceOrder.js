@@ -3,7 +3,6 @@ var NotificationService = require("services/NotificationService");
 
 import { isDefined } from "../../helper/utils";
 import { navigateTo } from "services/UrlService";
-import TranslationService from "services/TranslationService";
 
 Vue.component("place-order", {
     props:

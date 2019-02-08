@@ -1,11 +1,11 @@
 {
     "identifier": "Ceres::AddressWidget",
     "label": "Widget.addressLabel",
-    "previewImageURL": "",
-    "type": "checkout",
-    "categories": ["checkout"],
+    "previewImageURL": "/images/widgets/address.svg",
+    "type": "customer",
+    "categories": ["customer"],
     "position": 100,
-    "widgetClass": "Ceres\\Widgets\\Checkout\\AddressWidget",
+    "widgetClass": "Ceres\\Widgets\\Customer\\AddressWidget",
     "settings": {
         "addressType": {
             "type": "select",

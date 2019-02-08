@@ -9,7 +9,12 @@
     "position": 1300,
     "widgetClass": "Ceres\\Widgets\\Common\\CollapseWidget",
     "settings": {
-        "appearance": "@include(optionalAppearance)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
         "collapseBox": {
             "type": "vertical",
             "isList": "[1,]",

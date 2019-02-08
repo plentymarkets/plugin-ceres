@@ -19,7 +19,7 @@
         "header": ["header"],
         "footer": ["footer", "static", "structure", "default"],
         "content": ["static", "structure", "default"],
-        "checkout": ["static", "structure", "default", "checkout"]
+        "checkout": ["static", "structure", "default", "checkout", "customer", "basket"]
     },
     "presets": {
         "header": [
@@ -74,14 +74,43 @@
             "position": 500
         },
         {
+            "key": "customer",
+            "label": "Widget.categoryCustomer",
+            "position": 600
+        },
+        {
+            "key": "basket",
+            "label": "Widget.categoryBasket",
+            "position": 700
+        },
+        {
             "key": "checkout",
             "label": "Widget.categoryCheckout",
-            "position": 600
+            "position": 800
         },
         {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 700
+            "position": 900
         }
-    ]
+    ],
+    "globalSettings": {
+        "checkoutCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCheckout"
+            }
+        },
+        "checkoutEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!checkoutCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCheckout"
+            }
+        }
+    },
+    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler"
 }

@@ -59,10 +59,6 @@ Vue.component("accept-gtc-check", {
         })
     },
 
-    computed2: Vuex.mapState({
-        showError: state => state.checkout.validation.gtc.showError
-    }),
-
     created()
     {
         this.$options.template = this.template;

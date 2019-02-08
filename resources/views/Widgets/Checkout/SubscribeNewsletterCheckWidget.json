@@ -1,10 +1,10 @@
 {
     "identifier": "Ceres::SubscribeNewsletterCheckWidget",
     "label": "Widget.subscribeNewsletterCheckLabel",
-    "previewImageURL": "",
+    "previewImageURL": "/images/widgets/newsletter-subscription-check.svg",
     "type": "checkout",
     "categories": ["checkout"],
-    "position": 999,
+    "position": 600,
     "widgetClass": "Ceres\\Widgets\\Checkout\\SubscribeNewsletterCheckWidget",
     "settings": {
         "emailFolder": {
@@ -36,14 +36,14 @@
         "isRequired": {
             "type": "checkbox",
             "isVisible": "hideCheckbox !== true",
-            "defaultValue": true,
+            "defaultValue": false,
             "options": {
                 "name": "Widget.subscribeNewsletterCheckIsRequiredLabel",
                 "tooltip": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
             }
         },
         "customText": {
-            "type": "text",
+            "type": "codeEditor",
             "defaultValue": "",
             "options": {
                 "name": "Widget.subscribeNewsletterCheckCustomTextLabel",

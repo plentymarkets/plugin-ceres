@@ -1,10 +1,10 @@
 {
     "identifier": "Ceres::ShippingPrivacyCheckWidget",
     "label": "Widget.shippingPrivacyCheckLabel",
-    "previewImageURL": "",
+    "previewImageURL": "/images/widgets/shipping-privacy-check.svg",
     "type": "checkout",
     "categories": ["checkout"],
-    "position": 999,
+    "position": 500,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingPrivacyCheckWidget",
     "settings": {}
 }

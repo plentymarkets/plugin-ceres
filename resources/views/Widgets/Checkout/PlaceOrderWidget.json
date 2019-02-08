@@ -1,13 +1,18 @@
 {
     "identifier": "Ceres::PlaceOrderWidget",
     "label": "Widget.placeOrderLabel",
-    "previewImageURL": "",
-    "type": "static",
+    "previewImageURL": "/images/widgets/place-order.svg",
+    "type": "checkout",
     "categories": ["checkout"],
-    "position": 999,
+    "position": 700,
     "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",
     "settings": {
-        "appearance": "@include(appearance)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "success",
+            "options": "@include(appearance)"
+        },
         "buttonSize": {
             "type": "select",
             "required": true,

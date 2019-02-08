@@ -8,7 +8,7 @@
 
 {{ Twig.component("Ceres::Checkout.Components.SubscribeNewsletterCheck") }}
 
-<div class="widget widget-subscribe-newsletter-check">
+<div class="widget widget-newsletter-subscription-checkbox">
     <subscribe-newsletter-check
         {% if hideCheckbox %}class="pl-0"{% endif %}
         :email-folder="{{ emailFolder | json_encode }}"

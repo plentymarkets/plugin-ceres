@@ -11,7 +11,7 @@
                         :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
                         :disabled = "isBasketLoading"
                 >
-                <label :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId">
+                <label class="provider-select-label" :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId">
                     <div class="icon">
                         {#<img src="">#}
                     </div><!--

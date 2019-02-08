@@ -10,7 +10,7 @@ Vue.component("invoice-address-select", {
             ref="invoice"
             @address-changed="addressChanged"
             address-type="1"
-            :show-error='showError'
+            :show-error="showError"
             :optional-address-fields="optionalAddressFields"
             :required-address-fields="requiredAddressFields">
         </address-select>
