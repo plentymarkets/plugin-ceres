@@ -357,5 +357,16 @@ Vue.component("address-select", {
 
             return "";
         }
+    },
+
+    watch:
+    {
+        isSalutationEnabled(newVal)
+        {
+            if (!newVal)
+            {
+                delete this.addressToEdit.addressSalutation;
+            }
+        }
     }
 });
