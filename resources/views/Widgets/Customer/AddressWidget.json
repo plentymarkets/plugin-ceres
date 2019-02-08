@@ -7,6 +7,12 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Customer\\AddressWidget",
     "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
         "addressType": {
             "type": "select",
             "required": true,
