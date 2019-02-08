@@ -149,5 +149,22 @@ Vue.component("salutation-select", {
             }
             return true;
         }
+    },
+
+    watch:
+    {
+        currentSalutation(newVal, oldVal)
+        {
+            if (newVal !== oldVal)
+            {
+                const selectedSalutation = this.addressData.addressSalutation;
+
+                // cleanse the current selected salutation, if it's not longer included in the choice
+                if (!newVal.map(salutation => salutation.id).includes(selectedSalutation))
+                {
+                    this.emitInputEvent(newVal[0].id);
+                }
+            }
+        }
     }
 });
