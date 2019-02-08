@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/shipping-select.svg",
     "type": "checkout",
     "categories": ["checkout"],
-    "position": 200,
+    "position": 100,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
     "settings": {
         "appearance": {

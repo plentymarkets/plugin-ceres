@@ -2010,7 +2010,7 @@ textarea.form-control {
 
 .form-check-input {
   position: absolute;
-  margin-top: 0.1rem;
+  margin-top: 0.2rem;
   margin-left: -1.25rem;
 }
 
@@ -15789,6 +15789,11 @@ body .wrapper-main {
   font-size: 10em;
 }
 
+.page-not-found i.fa-home {
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
 .page-not-found .default-not-found {
   background-color: #f7f7f9;
 }
@@ -15877,6 +15882,10 @@ a:active {
 
 .text-wrap {
   white-space: normal;
+}
+
+.is_stuck {
+  z-index: 1;
 }
 
 html {
@@ -18076,7 +18085,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .form-check {
   transition: all .3s ease;
-  cursor: pointer;
   margin-bottom: .75rem;
 }
 
@@ -18098,6 +18106,10 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .form-check.error .text-muted {
   color: #fff !important;
+}
+
+.form-check .form-check-input {
+  cursor: pointer;
 }
 
 .input-feedback-container {
@@ -18404,6 +18416,8 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .wrapper-main #page-header {
   background-color: #f7f7f9;
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 .wrapper-main #page-header.top-bar {
@@ -22526,6 +22540,11 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   }
 }
 
+/* IOS compatibility */
+html.ios .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
+  background-size: contain;
+}
+
 .list-controls {
   position: relative;
 }
@@ -23807,27 +23826,27 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   width: 100% !important;
 }
 
-.widget-payment-provider.widget-primary > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-primary > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-primary > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-primary > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
+.widget-provider-select.widget-primary input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #008ebd;
 }
 
-.widget-payment-provider.widget-secondary > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-secondary > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-secondary > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-secondary > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
+.widget-provider-select.widget-secondary input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #d4021d;
 }
 
-.widget-payment-provider.widget-success > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-success > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-success > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-success > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
+.widget-provider-select.widget-success input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #28a745;
 }
 
-.widget-payment-provider.widget-info > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-info > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-info > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-info > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
+.widget-provider-select.widget-info input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #17a2b8;
 }
 
-.widget-payment-provider.widget-warning > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-warning > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-warning > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-warning > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
+.widget-provider-select.widget-warning input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #ffc107;
 }
 
-.widget-payment-provider.widget-danger > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-payment-provider.widget-danger > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-danger > .payment-method-select > .cmp-method-list .method-list-item > input:checked + label, .widget-shipping-profile.widget-danger > .shipping-method-select > .cmp-method-list .method-list-item > input:checked + label {
+.widget-provider-select.widget-danger input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #dc3545;
 }
 
@@ -24055,13 +24074,6 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
   font-size: 2rem;
-}
-
-/* Compatibility for IE */
-/* display img with optimal aspect ratio */
-html.ie .widget-image-box .img-cover {
-  min-height: auto;
-  min-width: auto;
 }
 
 .widget-image-carousel.widget-proportional {

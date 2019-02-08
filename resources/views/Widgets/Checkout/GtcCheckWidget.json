@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/gtc-check.svg",
     "type": "checkout",
     "categories": ["checkout"],
-    "position": 999,
+    "position": 400,
     "widgetClass": "Ceres\\Widgets\\Checkout\\GtcCheckWidget",
     "settings": {
         "appearance": {

@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/contact-wish.svg",
     "type": "checkout",
     "categories": ["checkout"],
-    "position": 999,
+    "position": 300,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
     "settings": {
         "hinttext": {

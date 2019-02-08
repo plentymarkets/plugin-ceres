@@ -2,10 +2,10 @@
     "identifier": "Ceres::BasketWidget",
     "label": "Widget.basketLabel",
     "previewImageURL": "/images/widgets/basket.svg",
-    "type": "checkout",
-    "categories": ["checkout"],
-    "position": 999,
-    "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
+    "type": "basket",
+    "categories": ["basket"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Basket\\BasketWidget",
     "settings": {
         "appearance": {
             "type": "select",

@@ -2,10 +2,10 @@
     "identifier": "Ceres::CouponWidget",
     "label": "Widget.couponLabel",
     "previewImageURL": "/images/widgets/coupon.svg",
-    "type": "checkout",
-    "categories": ["checkout"],
+    "type": "basket",
+    "categories": ["basket"],
     "position": 200,
-    "widgetClass": "Ceres\\Widgets\\Checkout\\CouponWidget",
+    "widgetClass": "Ceres\\Widgets\\Basket\\CouponWidget",
     "settings": {
         "appearance": {
             "type": "select",
