@@ -7,7 +7,12 @@
     "position": 700,
     "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",
     "settings": {
-        "appearance": "@include(appearance)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "success",
+            "options": "@include(appearance)"
+        },
         "buttonSize": {
             "type": "select",
             "required": true,

@@ -7,6 +7,11 @@
     "position": 200,
     "widgetClass": "Ceres\\Widgets\\Basket\\CouponWidget",
     "settings": {
-        "appearance": "@include(appearance)"
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        }
     }
 }
