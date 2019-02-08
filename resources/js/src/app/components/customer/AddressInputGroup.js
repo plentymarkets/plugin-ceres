@@ -154,17 +154,5 @@ Vue.component("address-input-group", {
         {
             return shouldMarkRequired ? label + "*" : label;
         }
-    },
-
-    directives: {
-        "data-validate": {
-            inserted(el, binding)
-            {
-                if (binding.value.shouldAddProperty)
-                {
-                    el.dataset.validate = binding.value.validateType;
-                }
-            }
-        }
     }
 });

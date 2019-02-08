@@ -114,18 +114,6 @@ Vue.component("country-select", {
         }
     },
 
-    directives: {
-        "data-validate": {
-            inserted(el, binding)
-            {
-                if (binding.value.shouldAddProperty)
-                {
-                    el.dataset.validate = binding.value.validateType;
-                }
-            }
-        }
-    },
-
     watch: {
         selectedCountryId()
         {

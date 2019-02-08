@@ -5,7 +5,7 @@
         <div v-if="isInOptionalFields('de', 'delivery_address.salutation')" class="col-12 col-sm-4">
             <div
                 class="input-unit"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.salutation'), validateType: ''}">
+                v-validate="isInRequiredFields('de', 'delivery_address.salutation')">
                 <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                 <label :for="'txtSalutation' + _uid">
                     ${ '{{ trans("Ceres::Template.addressSalutation") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.salutation')) }
@@ -23,7 +23,7 @@
             <div
                 class="input-unit"
                 data-model="name1"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.name1'), validateType: 'text'}">
+                v-validate.text="isInRequiredFields('de', 'delivery_address.name1')">
                 <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)">
                 <label :for="'txtCompany' + _uid">
                     ${ '{{ trans("Ceres::Template.addressCompany") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.name1')) }
@@ -39,7 +39,7 @@
             <div
                 class="input-unit"
                 data-model="title"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.title'), validateType: 'text'}">
+                v-validate.text="isInRequiredFields('de', 'delivery_address.title')">
                 <input type="text" name="title" :id="'txtTitle' + _uid" :value="value.title" @input="emitInputEvent('title', $event.target.value)">
                 <label :for="'txtTitle' + _uid">
                     ${ '{{ trans("Ceres::Template.addressTitle") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.title')) }
@@ -79,7 +79,7 @@
             <div
                 class="input-unit"
                 data-model="name4"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.name4'), validateType: 'text'}">
+                v-validate.text="isInRequiredFields('de', 'delivery_address.name4')">
                 <input type="text" name="decorateName" :id="'txtAdditionalName' + _uid" :value="value.name4" @input="emitInputEvent('name4', $event.target.value)">
                 <label :for="'txtAdditionalName' + _uid">
                     ${ '{{ trans("Ceres::Template.addressAdditionalName") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.name4')) }
@@ -92,7 +92,7 @@
             <div
                 class="input-unit"
                 data-model="telephone"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.phoneNumber'), validateType: 'text'}">
+                v-validate.text="isInRequiredFields('de', 'delivery_address.phoneNumber')">
                 <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
                 <label :for="'txtTelephone' + _uid">
                     ${ '{{ trans("Ceres::Template.addressTelephone") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.phoneNumber')) }
@@ -149,7 +149,7 @@
             <div
                 class="input-unit"
                 data-model="address4"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.address4'), validateType: 'text'}">
+                v-validate.text="isInRequiredFields('de', 'delivery_address.address4')">
                 <input type="text" name="decorateAddress" :id="'decorateAddress1' + _uid"
                         :value="value.address4" @input="emitInputEvent('address4', $event.target.value)">
                 <label :for="'decorateAddress1' + _uid">
