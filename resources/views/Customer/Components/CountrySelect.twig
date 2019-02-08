@@ -13,7 +13,7 @@
             <div
                 class="input-unit"
                 v-if="stateList && stateList.length > 0 && addressType === '1'"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'billing_address.stateId'), validateType: ''}"
+                v-validate="isInRequiredFields('de', 'billing_address.stateId')"
                 data-model="stateId">
                 <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
                     <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
@@ -22,7 +22,7 @@
                     </option>
                 </select>
                 <label>
-                    ${ '{{ trans("Ceres::Template.headerState") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.stateId')) }
+                    ${ '{{ trans("Ceres::Template.headerState") }}' | transformRequiredLabel(isInRequiredFields('de', 'billing_address.stateId')) }
                 </label>
             </div>
         </template>
@@ -31,7 +31,7 @@
             <div
                 class="input-unit"
                 v-if="stateList && stateList.length > 0 && addressType === '2'"
-                v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.stateId'), validateType: ''}"
+                v-validate="isInRequiredFields('de', 'delivery_address.stateId')"
                 data-model="stateId">
                 <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
                     <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
@@ -40,7 +40,7 @@
                     </option>
                 </select>
                 <label>
-                    ${ '{{ trans("Ceres::Template.headerState") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.stateId')) }
+                    ${ '{{ trans("Ceres::Template.headerState") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.stateId')) }
                 </label>
             </div>
         </template>

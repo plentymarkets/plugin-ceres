@@ -7,6 +7,12 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Customer\\AddressWidget",
     "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
         "addressType": {
             "type": "select",
             "required": true,
@@ -101,6 +107,7 @@
         "addressRequiredFieldsInvoiceDE": {
             "type": "checkboxGroup",
             "isVisible": "addressType === '1' && addressLayout === 'DE'",
+            "defaultValue": [],
             "options": {
                 "name": "Widget.addressRequiredFieldsInvoiceDE",
                 "checkboxValues": [
@@ -196,6 +203,7 @@
         "addressRequiredFieldsInvoiceGB": {
             "type": "checkboxGroup",
             "isVisible": "addressType === '1' && addressLayout === 'GB'",
+            "defaultValue": [],
             "options": {
                 "name": "Widget.addressRequiredFieldsInvoiceGB",
                 "checkboxValues": [
@@ -283,6 +291,7 @@
         "addressRequiredFieldsShippingDE": {
             "type": "checkboxGroup",
             "isVisible": "addressType === '2' && addressLayout === 'DE'",
+            "defaultValue": [],
             "options": {
                 "name": "Widget.addressRequiredFieldsShippingDE",
                 "checkboxValues": [
@@ -362,6 +371,7 @@
         "addressRequiredFieldsShippingGB": {
             "type": "checkboxGroup",
             "isVisible": "addressType === '2' && addressLayout === 'GB'",
+            "defaultValue": [],
             "options": { 
                 "name": "Widget.addressRequiredFieldsShippingGB",
                 "checkboxValues": [

@@ -149,22 +149,11 @@ Vue.component("address-input-group", {
         }
     },
 
-    filters: {
+    filters:
+    {
         transformRequiredLabel(label, shouldMarkRequired)
         {
             return shouldMarkRequired ? label + "*" : label;
-        }
-    },
-
-    directives: {
-        "data-validate": {
-            inserted(el, binding)
-            {
-                if (binding.value.shouldAddProperty)
-                {
-                    el.dataset.validate = binding.value.validateType;
-                }
-            }
         }
     }
 });

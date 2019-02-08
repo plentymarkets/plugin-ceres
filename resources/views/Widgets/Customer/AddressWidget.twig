@@ -3,7 +3,7 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
 
-<div>
+<div class="widget widget-address widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     {% if widget.settings.addressType.mobile == "1" %}
         {{ Twig.set("overrideBillingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.BillingAddress"])) }}
         {{ Twig.if("overrideBillingAddress | trim is empty") }}
