@@ -8,7 +8,7 @@
                 v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.salutation'), validateType: ''}">
                 <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                 <label :for="'txtSalutation' + _uid">
-                    ${ '{{ trans("Ceres::Template.addressSalutation") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.salutation')) }
+                    ${ '{{ trans("Ceres::Template.addressSalutation") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.salutation')) }
                 </label>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.name1'), validateType: 'text'}">
                 <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)">
                 <label :for="'txtCompany' + _uid">
-                    ${ '{{ trans("Ceres::Template.addressCompany") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.name1')) }
+                    ${ '{{ trans("Ceres::Template.addressCompany") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.name1')) }
                 </label>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.title'), validateType: 'text'}">
                 <input type="text" name="title" :id="'txtTitle' + _uid" :value="value.title" @input="emitInputEvent('title', $event.target.value)">
                 <label :for="'txtTitle' + _uid">
-                    ${ '{{ trans("Ceres::Template.addressTitle") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.title')) }
+                    ${ '{{ trans("Ceres::Template.addressTitle") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.title')) }
                 </label>
             </div>
         </div>
@@ -82,7 +82,7 @@
                 v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.name4'), validateType: 'text'}">
                 <input type="text" name="decorateName" :id="'txtAdditionalName' + _uid" :value="value.name4" @input="emitInputEvent('name4', $event.target.value)">
                 <label :for="'txtAdditionalName' + _uid">
-                    ${ '{{ trans("Ceres::Template.addressAdditionalName") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.name4')) }
+                    ${ '{{ trans("Ceres::Template.addressAdditionalName") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.name4')) }
                 </label>
             </div>
         </div>
@@ -95,7 +95,7 @@
                 v-data-validate="{shouldAddProperty: isInRequiredFields('de', 'delivery_address.phoneNumber'), validateType: 'text'}">
                 <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
                 <label :for="'txtTelephone' + _uid">
-                    ${ '{{ trans("Ceres::Template.addressTelephone") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.phoneNumber')) }
+                    ${ '{{ trans("Ceres::Template.addressTelephone") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.phoneNumber')) }
                 </label>
             </div>
         </div>
@@ -153,7 +153,7 @@
                 <input type="text" name="decorateAddress" :id="'decorateAddress1' + _uid"
                         :value="value.address4" @input="emitInputEvent('address4', $event.target.value)">
                 <label :for="'decorateAddress1' + _uid">
-                    ${ '{{ trans("Ceres::Template.addressAdditionalAddress2") }}' | transformRequiredLabel(isInOptionalFields('de', 'delivery_address.address4')) }
+                    ${ '{{ trans("Ceres::Template.addressAdditionalAddress2") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.address4')) }
                 </label>
             </div>
         </div>

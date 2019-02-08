@@ -149,7 +149,8 @@ Vue.component("address-input-group", {
         }
     },
 
-    filters: {
+    filters:
+    {
         transformRequiredLabel(label, shouldMarkRequired)
         {
             return shouldMarkRequired ? label + "*" : label;
