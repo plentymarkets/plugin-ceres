@@ -78,7 +78,7 @@ Vue.component("create-update-address", {
 
                     for (const field of invalidFields)
                     {
-                        let fieldName = field.lastElementChild.innerHTML;
+                        let fieldName = field.lastElementChild.innerHTML.trim();
 
                         fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
                         fieldNames.push(fieldName);
