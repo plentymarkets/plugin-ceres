@@ -8,7 +8,7 @@ Vue.directive("validate", {
         }
         else
         {
-            el.dataset.validate = binding.argument || null;
+            el.dataset.validate = binding.arg || null;
         }
     }
 });
