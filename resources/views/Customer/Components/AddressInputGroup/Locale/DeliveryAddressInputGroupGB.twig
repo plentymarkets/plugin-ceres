@@ -38,7 +38,7 @@
             <div
                 class="input-unit"
                 data-model="title"
-                v-validate.text="isInRequiredFields('gb', 'delivery_address.title')">
+                v-validate:text="isInRequiredFields('gb', 'delivery_address.title')">
                 <input type="text" name="title" :id="'txtTitle' + _uid" :value="value.title"  @input="emitInputEvent('title', $event.target.value)" data-autofocus>
                 <label :for="'txtTitle' + _uid">
                     ${ '{{ trans("Ceres::Template.addressTitle") }}' | transformRequiredLabel(isInRequiredFields('gb', 'delivery_address.title')) }
@@ -75,7 +75,7 @@
             <div
                 class="input-unit"
                 data-model="name4"
-                v-validate.text="isInRequiredFields('gb', 'delivery_address.name4')">
+                v-validate:text="isInRequiredFields('gb', 'delivery_address.name4')">
                 <input type="text" name="decorateName" :id="'txtAdditionalName' + _uid" :value="value.name4" @input="emitInputEvent('name4', $event.target.value)">
                 <label :for="'txtAdditionalName' + _uid">
                     ${ '{{ trans("Ceres::Template.addressGBNameAffix") }}' | transformRequiredLabel(isInRequiredFields('gb', 'delivery_address.name4')) }
@@ -87,7 +87,7 @@
             <div
                 class="input-unit"
                 data-model="telephone"
-                v-validate.text="isInRequiredFields('gb', 'delivery_address.phoneNumber')">
+                v-validate:text="isInRequiredFields('gb', 'delivery_address.phoneNumber')">
                 <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
                 <label :for="'txtTelephone' + _uid">
                     ${ '{{ trans("Ceres::Template.addressTelephone") }}' | transformRequiredLabel(isInRequiredFields('gb', 'delivery_address.phoneNumber')) }
@@ -109,7 +109,7 @@
             <div
                 class="input-unit"
                 data-model="address2"
-                v-validate.text="isInRequiredFields('gb', 'delivery_address.address2')">
+                v-validate:text="isInRequiredFields('gb', 'delivery_address.address2')">
                 <input type="text" name="housenumber" autocomplete="address-line2" :id="'txtNumber' + _uid" :value="value.address2" @input="emitInputEvent('address2', $event.target.value)">
                 <label :for="'txtNumber' + _uid">
                     ${ '{{ trans("Ceres::Template.addressENAddressLine2") }}' | transformRequiredLabel(isInRequiredFields('gb', 'delivery_address.address2')) }
@@ -125,7 +125,7 @@
             <div
                 class="input-unit"
                 data-model="address3"
-                v-validate.text="isInRequiredFields('gb', 'delivery_address.address3')">
+                v-validate:text="isInRequiredFields('gb', 'delivery_address.address3')">
                 <input type="text" name="buildingName" :id="'decorateAddress0' + _uid" :value="value.address3" @input="emitInputEvent('address3', $event.target.value)">
                 <label :for="'decorateAddress0' + _uid">
                     ${ '{{ trans("Ceres::Template.addressENAddressLine3") }}' | transformRequiredLabel(isInRequiredFields('gb', 'delivery_address.address3')) }
@@ -137,7 +137,7 @@
             <div
                 class="input-unit"
                 data-model="address4"
-                v-validate.text="isInRequiredFields('gb', 'delivery_address.address4')">
+                v-validate:text="isInRequiredFields('gb', 'delivery_address.address4')">
                 <input type="text" name="buildingName" :id="'decorateAddress1' + _uid" :value="value.address4" @input="emitInputEvent('address4', $event.target.value)">
                 <label :for="'decorateAddress1' + _uid">
                     ${ '{{ trans("Ceres::Template.addressENAddressLine4") }}' | transformRequiredLabel(isInRequiredFields('gb', 'delivery_address.address4')) }

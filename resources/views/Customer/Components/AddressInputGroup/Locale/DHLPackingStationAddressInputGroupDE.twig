@@ -23,7 +23,7 @@
             <div
                 class="input-unit"
                 data-model="name1"
-                v-validate.text="isInRequiredFields('de', 'delivery_address.name1')">
+                v-validate:text="isInRequiredFields('de', 'delivery_address.name1')">
                 <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)">
                 <label :for="'txtCompany' + _uid">
                     ${ '{{ trans("Ceres::Template.addressCompany") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.name1')) }
@@ -39,7 +39,7 @@
             <div
                 class="input-unit"
                 data-model="title"
-                v-validate.text="isInRequiredFields('de', 'delivery_address.title')">
+                v-validate:text="isInRequiredFields('de', 'delivery_address.title')">
                 <input type="text" name="title" :id="'txtTitle' + _uid" :value="value.title" @input="emitInputEvent('title', $event.target.value)">
                 <label :for="'txtTitle' + _uid">
                     ${ '{{ trans("Ceres::Template.addressTitle") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.title')) }
@@ -79,7 +79,7 @@
             <div
                 class="input-unit"
                 data-model="name4"
-                v-validate.text="isInRequiredFields('de', 'delivery_address.name4')">
+                v-validate:text="isInRequiredFields('de', 'delivery_address.name4')">
                 <input type="text" name="decorateName" :id="'txtAdditionalName' + _uid" :value="value.name4" @input="emitInputEvent('name4', $event.target.value)">
                 <label :for="'txtAdditionalName' + _uid">
                     ${ '{{ trans("Ceres::Template.addressAdditionalName") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.name4')) }
@@ -92,7 +92,7 @@
             <div
                 class="input-unit"
                 data-model="telephone"
-                v-validate.text="isInRequiredFields('de', 'delivery_address.phoneNumber')">
+                v-validate:text="isInRequiredFields('de', 'delivery_address.phoneNumber')">
                 <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
                 <label :for="'txtTelephone' + _uid">
                     ${ '{{ trans("Ceres::Template.addressTelephone") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.phoneNumber')) }
@@ -149,7 +149,7 @@
             <div
                 class="input-unit"
                 data-model="address4"
-                v-validate.text="isInRequiredFields('de', 'delivery_address.address4')">
+                v-validate:text="isInRequiredFields('de', 'delivery_address.address4')">
                 <input type="text" name="decorateAddress" :id="'decorateAddress1' + _uid"
                         :value="value.address4" @input="emitInputEvent('address4', $event.target.value)">
                 <label :for="'decorateAddress1' + _uid">
