@@ -4,10 +4,15 @@
     "previewImageURL": "/images/widgets/gtc-check.svg",
     "type": "checkout",
     "categories": ["checkout"],
-    "position": 500,
+    "position": 400,
     "widgetClass": "Ceres\\Widgets\\Checkout\\GtcCheckWidget",
     "settings": {
-        "appearance": "@include(appearance)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
         "hideCheckbox": {
             "type": "checkbox",
             "defaultValue": false,
