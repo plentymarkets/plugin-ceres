@@ -1,64 +1,238 @@
-const stickInParent = (el, minWidth, isActive) =>
+import { isNullOrUndefined } from "../../helper/utils";
+
+const STICKY_EVENTS = [
+    "resize",
+    "scroll",
+    "touchstart",
+    "touchmove",
+    "touchend",
+    "pageshow",
+    "load",
+    "move-sticky"
+];
+
+const applyStyles = function(el, styles)
 {
-    const currentActiveState = el.dataset.isSticky === "true";
-    const isInSize = window.matchMedia("(min-width: " + minWidth + "px)").matches;
-
-    const activeState = !(isActive === false) && isInSize;
-
-    if (activeState && !currentActiveState)
+    Object.keys(styles).forEach(key =>
     {
-        const $element = $(el);
-        const headHeight = $("#page-header").height();
-        const offset = parseInt(el.dataset.stickyOffset) || 0;
+        const value = styles[key];
 
-        if ($element.stick_in_parent({ offset_top: headHeight + offset }))
+        if (isNullOrUndefined(value))
         {
-            el.dataset.isSticky = true;
+            el.style.removeProperty(key);
+        }
+        else
+        {
+            el.style[key] = value;
+        }
+    });
+};
+
+class StickyElement
+{
+    constructor(el, vm, minWidth)
+    {
+        this.el = el;
+        this.vm = vm;
+        this.offsetTop = 0;
+        this.minWidth = minWidth;
+        this.isMinWidth = true;
+        this.resizeListener = this.checkMinWidth.bind(this);
+        window.addEventListener("resize", this.resizeListener);
+        this.checkMinWidth();
+    }
+
+    enable()
+    {
+        this.vm.$nextTick(() =>
+        {
+            if (this.enabled || this.isMinWidth)
+            {
+                return;
+            }
+
+            this.animationFrame = 0;
+            this.placeholder = document.createElement("DIV");
+            this.el.parentNode.insertBefore(this.placeholder, this.el);
+            this.eventListener = this.tick.bind(this);
+            this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
+
+            document.addEventListener("storeChanged", this.eventListener);
+            STICKY_EVENTS.forEach(event =>
+            {
+                window.addEventListener(event, this.eventListener);
+            });
+
+            this.enabled = true;
+            this.tick();
+        });
+    }
+
+    disable()
+    {
+        this.vm.$nextTick(() =>
+        {
+            if (!isNullOrUndefined(this.placeholder))
+            {
+                this.el.parentElement.removeChild(this.placeholder);
+            }
+            this.placeholder = null;
+        });
+
+        applyStyles(this.el, {
+            position: null,
+            top: null,
+            left: null,
+            width: null
+        });
+
+        document.removeEventListener("storeChanged", this.eventListener);
+        STICKY_EVENTS.forEach(event =>
+        {
+            window.removeEventListener(event, this.eventListener);
+        });
+        this.eventListener = null;
+        this.animationFrame = 0;
+        this.enabled = false;
+
+    }
+
+    tick()
+    {
+        if (this.enabled)
+        {
+            if (this.animationFrame > 0)
+            {
+                cancelAnimationFrame(this.animationFrame);
+            }
+
+            this.animationFrame = requestAnimationFrame(() =>
+            {
+                this.checkElement();
+                this.updateStyles();
+                this.animationFrame = 0;
+            });
         }
     }
-    else if (!activeState && currentActiveState)
+
+    checkElement()
     {
-        el.dataset.isSticky = false;
-        $(el).trigger("sticky_kit:detach");
+        const elementRect = this.el.getBoundingClientRect();
+        const placeholderRect = this.placeholder.getBoundingClientRect();
+        const containerRect = this.el.parentElement.getBoundingClientRect();
+        const maxBottom = Math.min(containerRect.bottom - elementRect.height - this.offsetTop, 0);
+
+        this.position = {
+            height: elementRect.height,
+            width: placeholderRect.width,
+            // eslint-disable-next-line id-length
+            x: placeholderRect.left,
+            // eslint-disable-next-line id-length
+            y: maxBottom + this.offsetTop,
+            isSticky: elementRect.height < containerRect.height && placeholderRect.top <= this.offsetTop
+        };
     }
 
-};
+    updateStyles()
+    {
+        let styles = {
+            position: null,
+            top: null,
+            left: null,
+            width: null
+        };
+
+        let placeholderStyles = {
+            "padding-top": null
+        };
+
+        if (this.position.isSticky)
+        {
+            styles = {
+                position:   "fixed",
+                top:        this.position.y + "px",
+                left:       this.position.x + "px",
+                width:      this.position.width + "px"
+            };
+
+            placeholderStyles = {
+                "padding-top": this.position.height + "px"
+            };
+        }
+
+        applyStyles(this.el, styles);
+        applyStyles(this.placeholder, placeholderStyles);
+    }
+
+    checkMinWidth()
+    {
+        const oldValue = this.isMinWidth;
+
+        if (window.matchMedia("(min-width: " + this.minWidth + "px)").matches)
+        {
+            this.isMinWidth = false;
+            if (oldValue)
+            {
+                this.enable();
+            }
+        }
+        else
+        {
+            this.isMinWidth = true;
+            if (!oldValue)
+            {
+                this.disable();
+            }
+        }
+    }
+
+    destroy()
+    {
+        window.removeEventListener("resize", this.resizeListener);
+    }
+}
 
 Vue.directive("stick-in-parent",
     {
-        bind(el, binding)
+        bind(el, binding, vnode)
         {
-            window.addEventListener("resize", () =>
-            {
-                stickInParent(el, parseInt(binding.arg) || 768);
-            });
+            el.__sticky = new StickyElement(
+                el,
+                vnode.context,
+                parseInt(binding.arg) || 768
+            );
 
-            setTimeout(() =>
+            if (binding.value === false)
             {
-                stickInParent(
-                    el,
-                    parseInt(binding.arg) || 768,
-                    binding.value
-                );
-            }, 0);
+                el.__sticky.disable();
+            }
+            else
+            {
+                el.__sticky.enable();
+            }
         },
         update(el, binding)
         {
-            setTimeout(() =>
+            if (!isNullOrUndefined(el.__sticky))
             {
-                stickInParent(
-                    el,
-                    parseInt(binding.arg) || 768,
-                    binding.value
-                );
-            }, 0);
+                el.__sticky.minWidth = parseInt(binding.arg) || 768;
+                if (binding.value === false)
+                {
+                    el.__sticky.disable();
+                }
+                else
+                {
+                    el.__sticky.enable();
+                }
+                el.__sticky.checkMinWidth();
+            }
         },
         unbind(el)
         {
-            stickInParent(
-                el,
-                0,
-                false
-            );
+            if (!isNullOrUndefined(el.__sticky))
+            {
+                el.__sticky.destroy();
+                el.__sticky = null;
+            }
         }
     });
