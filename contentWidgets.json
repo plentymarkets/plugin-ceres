@@ -370,7 +370,7 @@
             "appearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "primary",
+                "defaultValue": "success",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
@@ -935,7 +935,7 @@
             "appearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "success",
+                "defaultValue": "primary",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
