@@ -217,7 +217,10 @@ const actions =
         initDeliveryAddress({ commit }, { id, addressList })
         {
             addressList.unshift({ id: -99 });
-            id = this.selectedAddressId === 0 ? -99 : id;
+            if (addressList.every(address => address.id !== id))
+            {
+                id = -99;
+            }
 
             commit("setDeliveryAddressList", addressList);
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));

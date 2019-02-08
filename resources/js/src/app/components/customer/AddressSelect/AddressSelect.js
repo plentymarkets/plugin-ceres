@@ -337,6 +337,16 @@ Vue.component("address-select", {
         {
             this.addressToEdit[field] = value;
             this.addressToEdit = Object.assign({}, this.addressToEdit);
+        },
+
+        onDropdownClicked(event)
+        {
+            if (this.isAddressListEmpty || (parseInt(this.addressType) === 2 && this.addressList.length === 1))
+            {
+                event.preventDefault();
+                event.stopPropagation();
+                this.showAddModal();
+            }
         }
     },
 

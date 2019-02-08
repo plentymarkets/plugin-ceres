@@ -10,6 +10,7 @@
                     class="component-loading"
                     :id="'addressMultiSelect' + _uid"
                     v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
+                    @click="onDropdownClicked($event)"
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
@@ -36,7 +37,7 @@
                     </button>
                 </div>
 
-                <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)">
+                <div class="dropdown-menu" :aria-labelledby="'addressMultiSelect' + _uid" v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)">
                     <ul>
                         <li class="item" v-for="(address, index) in addressList">
                             <input
