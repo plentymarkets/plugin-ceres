@@ -64,6 +64,11 @@
             "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised."
         },
         {
+            "key"           : "PageDesign.AfterOpeningBodyTag",
+            "name"          : "Page Desgin: After opening body tag",
+            "description"   : "Add content after the opening body tag."
+        },
+        {
             "key"           : "StaticPages.CancellationRights",
             "name"          : "Static Pages: Cancellation rights",
             "description"   : "Add additional content on the cancellation rights page."
