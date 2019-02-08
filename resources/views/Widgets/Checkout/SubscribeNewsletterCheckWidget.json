@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/newsletter-subscription-check.svg",
     "type": "checkout",
     "categories": ["checkout"],
-    "position": 800,
+    "position": 600,
     "widgetClass": "Ceres\\Widgets\\Checkout\\SubscribeNewsletterCheckWidget",
     "settings": {
         "emailFolder": {

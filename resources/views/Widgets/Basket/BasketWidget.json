@@ -5,7 +5,7 @@
     "type": "basket",
     "categories": ["basket"],
     "position": 100,
-    "widgetClass": "Ceres\\Widgets\\Checkout\\BasketWidget",
+    "widgetClass": "Ceres\\Widgets\\Basket\\BasketWidget",
     "settings": {
         "appearance": "@include(appearance)"
     }

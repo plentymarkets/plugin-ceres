@@ -4,8 +4,8 @@
     "previewImageURL": "/images/widgets/basket-totals.svg",
     "type": "basket",
     "categories": ["basket"],
-    "position": 200,
-    "widgetClass": "Ceres\\Widgets\\Checkout\\BasketTotalsWidget",
+    "position": 300,
+    "widgetClass": "Ceres\\Widgets\\Basket\\BasketTotalsWidget",
     "settings": {
         "visibleFields": {
             "type": "checkboxGroup",
