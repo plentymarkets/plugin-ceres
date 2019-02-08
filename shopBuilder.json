@@ -18,7 +18,7 @@
     "allowedTypes": {
         "header": ["header"],
         "footer": ["footer", "static", "structure", "default"],
-        "content": ["static", "structure", "default", "basket"],
+        "content": ["static", "structure", "default"],
         "checkout": ["static", "structure", "default", "checkout", "customer", "basket"]
     },
     "presets": {
