@@ -19511,6 +19511,13 @@ Vue.component("address-select", {
 
       return "";
     }
+  },
+  watch: {
+    isSalutationEnabled: function isSalutationEnabled(newVal) {
+      if (!newVal) {
+        delete this.addressToEdit.addressSalutation;
+      }
+    }
   }
 });
 
@@ -20468,6 +20475,8 @@ Vue.component("reset-password-form", {
 },{"services/ApiService":250,"services/NotificationService":254,"services/TranslationService":255,"services/UrlService":256,"services/ValidationService":257}],162:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 Vue.component("salutation-select", {
   props: {
     template: {
@@ -20553,6 +20562,11 @@ Vue.component("salutation-select", {
    */
   created: function created() {
     this.$options.template = this.template;
+    var selectedSalutation = this.addressData.addressSalutation;
+
+    if ((0, _utils.isNullOrUndefined)(selectedSalutation)) {
+      this.emitInputEvent(this.currentSalutation[0].id);
+    }
   },
   methods: {
     emitInputEvent: function emitInputEvent(value) {
@@ -20603,10 +20617,23 @@ Vue.component("salutation-select", {
 
       return true;
     }
+  },
+  watch: {
+    currentSalutation: function currentSalutation(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        var selectedSalutation = this.addressData.addressSalutation; // cleanse the current selected salutation, if it's not longer included in the choice
+
+        if (!newVal.map(function (salutation) {
+          return salutation.id;
+        }).includes(selectedSalutation)) {
+          this.emitInputEvent(newVal[0].id);
+        }
+      }
+    }
   }
 });
 
-},{}],163:[function(require,module,exports){
+},{"../../helper/utils":248}],163:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
