@@ -1,5 +1,7 @@
 import { isNullOrUndefined } from "../../helper/utils";
 
+const IS_CONTENT_BUILDER = (new URLSearchParams(window.location.search)).get("isContentBuilder") === "1";
+
 const STICKY_EVENTS = [
     "resize",
     "scroll",
@@ -55,7 +57,7 @@ class StickyElement
     {
         this.vm.$nextTick(() =>
         {
-            if (this.enabled || this.isMinWidth)
+            if (this.enabled || this.isMinWidth || IS_CONTENT_BUILDER)
             {
                 return;
             }
@@ -73,6 +75,7 @@ class StickyElement
             });
 
             this.enabled = true;
+            this.calculateOffset();
             this.tick();
         });
     }
@@ -152,6 +155,10 @@ class StickyElement
 
     calculateOffset()
     {
+        if (!this.enabled)
+        {
+            return;
+        }
         this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
         this.offsetBottom = 0;
         if (isNullOrUndefined(this.position))
