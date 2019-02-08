@@ -7,14 +7,19 @@ import TranslationService from "services/TranslationService";
 Vue.component("account-settings", {
 
     props: {
-        userData:
-        {
-            type: Object
-        },
         template:
         {
             type: String,
             default: "#vue-account-settings"
+        },
+        userData:
+        {
+            type: Object
+        },
+        appearance:
+        {
+            type: String,
+            default: "primary"
         }
     },
 

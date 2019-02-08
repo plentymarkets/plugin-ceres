@@ -1,15 +1,23 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+
 {{ Twig.component("Ceres::MyAccount.Components.AccountSettings") }}
 
-<div>
-    <h4>
-        {{ trans("Ceres::Template.myAccountSettings") }}
-    </h4>
-    <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountChangeLoginData") }}</p>
+{{ Twig.set("userObject", Twig.call("services.customer.getContact")) }}
+{% set appearance = widget.settings.appearance.mobile %}
+{% set hinttext = widget.settings.text.mobile %}
 
-    <div class="card mb-5">
-        <account-settings :user-data="{{ userObject }}"></account-settings>
+<div class="widget widget-account-settings">
+    <h4>
+        {{ Twig.trans("Ceres::Template.myAccountSettings") }}
+    </h4>
+    {% if hinttext is not empty %}
+        {{ hinttext | raw }}
+    {% else %}
+        <p class="text-muted small font-italic">{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</p>
+    {% endif %}
+    <div class="card">
+        <account-settings appearance="{{ appearance | default("primary") }}" :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
     </div>
 </div>
