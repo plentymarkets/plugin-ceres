@@ -19,7 +19,7 @@
     <div class="row">
         <div
             class="col-12 col-sm-6"
-            v-if="(isInOptionalFields('de', 'delivery_address.salutation') && value.addressSalutation === 2) || isInOptionalFields('de', 'delivery_address.name1')">
+            v-if="isInOptionalFields('de', 'delivery_address.salutation') && value.addressSalutation === 2 || isInOptionalFields('de', 'delivery_address.name1') && !isInOptionalFields('de', 'delivery_address.salutation')">
             <div
                 class="input-unit"
                 data-model="name1"
