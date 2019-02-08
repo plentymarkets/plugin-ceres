@@ -1,0 +1,18 @@
+{
+    "identifier": "Ceres::BankDataSelectWidget",
+    "label": "Template.myAccountBankDetails",
+    "previewImageURL": "/images/widgets/BankDataSelect.svg",
+    "type": "static",
+    "categories": ["static"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\BankDataSelectWidget",
+    "settings": {
+        "appearance": "@include(appearance)",
+        "text": {
+            "type": "codeEditor",
+            "options": {
+                "name": "Widget.myAccountHintTextLabel"
+            }
+        }
+    }
+}

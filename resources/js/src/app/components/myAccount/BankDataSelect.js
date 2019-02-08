@@ -7,13 +7,26 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("bank-data-select", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "userBankData",
-        "contactId",
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-bank-data-select"
+        },
+        userBankData:
+        {
+            type: Array
+        },
+        contactId:
+        {
+            type: String
+        },
+        appearance:
+        {
+            type: String,
+            default: "primary"
+        }
+    },
 
     data()
     {
