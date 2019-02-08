@@ -65,7 +65,7 @@
         },
         {
             "key"           : "PageDesign.AfterOpeningBodyTag",
-            "name"          : "Page Desgin: After opening body tag",
+            "name"          : "Page Design: After opening body tag",
             "description"   : "Add content after the opening body tag."
         },
         {
