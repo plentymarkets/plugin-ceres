@@ -25376,7 +25376,7 @@ Vue.directive("validate", {
     if (binding.value === false) {
       delete el.dataset.validate;
     } else {
-      el.dataset.validate = binding.argument || null;
+      el.dataset.validate = binding.arg || "";
     }
   }
 });
