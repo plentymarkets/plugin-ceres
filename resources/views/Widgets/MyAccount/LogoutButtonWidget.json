@@ -1,6 +1,6 @@
 {
     "identifier": "Ceres::LogoutButtonWidget",
-    "label": "Widget.placeOrderLabel",
+    "label": "Widget.logoutButtonLabel",
     "previewImageURL": "/images/widgets/logout-button.svg",
     "type": "static",
     "categories": ["static"],
@@ -16,10 +16,10 @@
         "buttonSize": {
             "type": "select",
             "required": true,
-            "defaultValue": "",
+            "defaultValue": "md",
             "options": {
                 "name": "Widget.placeOrderButtonSizeLabel",
-                "tooltipText": "Widget.placeOrderButtonSizeTooltip",
+                "tooltipText": "Widget.logoutButtonSizeTooltip",
                 "listBoxValues": [
                     {
                         "value": "sm",
