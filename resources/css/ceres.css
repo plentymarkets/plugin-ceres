@@ -272,8 +272,7 @@ textarea {
   }
   .navbar {
     display: none;
-	  color:#ffffff;
-	  background-color:#000000;
+	
 	  
   }
   .btn > .caret,
@@ -3680,8 +3679,7 @@ input[type="button"].btn-block {
 .navbar {
   position: relative;
   padding: 0.5rem 1rem;
-	color:#ffffff;
-	  background-color:#000000;
+
 	  
 }
 
