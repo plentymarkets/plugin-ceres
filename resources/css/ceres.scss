@@ -12730,8 +12730,8 @@ $border-width: 1px;
 
 	width: 100%;
 	z-index: $zIndex-6;
-	color: $top-bar-color;
-	background-color: $top-bar-bg;
+	color: #ffffff !important;
+	background-color: #000000 !important;
 	-webkit-box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 	        box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 	a:not(.btn) {
