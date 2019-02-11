@@ -16,10 +16,11 @@
         ]
     },
     "allowedTypes": {
-        "header": ["header"],
-        "footer": ["footer", "static", "structure", "default"],
-        "content": ["static", "structure", "default"],
-        "checkout": ["static", "structure", "default", "checkout", "customer", "basket"]
+        "header":       ["header"],
+        "footer":       ["footer", "static", "structure", "default"],
+        "content":      ["static", "structure", "default"],
+        "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
     },
     "presets": {
         "header": [
