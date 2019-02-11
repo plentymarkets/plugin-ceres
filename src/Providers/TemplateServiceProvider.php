@@ -7,6 +7,7 @@ use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
 use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
+use Ceres\Contexts\CheckoutContext;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
 use Ceres\Contexts\ItemWishListContext;
@@ -100,7 +101,7 @@ class TemplateServiceProvider extends ServiceProvider
 
             if ( $template === 'tpl.checkout' && RouteConfig::getCategoryId(RouteConfig::CHECKOUT) > 0 )
             {
-                $templateContextClass = CategoryContext::class;
+                $templateContextClass = CheckoutContext::class;
             }
             else
             {

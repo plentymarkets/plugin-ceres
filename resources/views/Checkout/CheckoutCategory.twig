@@ -19,7 +19,7 @@
                 <div class="col">
                     <checkout
                         v-cloak
-                        :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+                        :initial-checkout="{{ checkout | json_encode() }}"
                         :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
                         :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
                         :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
@@ -32,7 +32,7 @@
     {% else %}
         <checkout
             v-cloak
-            :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+            :initial-checkout="{{ checkout | json_encode() }}"
             :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
             :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
             :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
