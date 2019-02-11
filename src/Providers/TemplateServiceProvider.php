@@ -88,6 +88,10 @@ class TemplateServiceProvider extends ServiceProvider
                 {
                     $templateContainer->setTemplate('Ceres::Checkout.CheckoutCategory');
                 }
+                else if ( $template === 'tpl.my-account' && RouteConfig::getCategoryId(RouteConfig::MY_ACCOUNT) > 0 )
+                {
+                    $templateContainer->setTemplate('Ceres::MyAccount.MyAccountCategory');
+                }
                 else
                 {
                     $templateContainer->setTemplate('Ceres::' . self::$templateKeyToViewMap[$template][0]);

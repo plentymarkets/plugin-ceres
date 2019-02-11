@@ -110,6 +110,22 @@
             "options": {
                 "name": "Config.routingEnableRouteCheckout"
             }
+        },
+        "myAccountCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryMyAccount"
+            }
+        },
+        "myAccountEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!myAccountCategory",
+            "options": {
+                "name": "Config.routingEnableRouteMyAccount"
+            }
         }
     },
     "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler"
