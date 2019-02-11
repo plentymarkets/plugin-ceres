@@ -21,7 +21,7 @@
             "defaultValue": false,
             "options": {
                 "name": "Widget.subscribeNewsletterCheckHideCheckboxLabel",
-                "tooltip": "Widget.subscribeNewsletterCheckHideCheckboxTooltip"
+                "tooltipText": "Widget.subscribeNewsletterCheckHideCheckboxTooltip"
             }
         },
         "isPreselected": {
@@ -30,7 +30,7 @@
             "defaultValue": false,
             "options": {
                 "name": "Widget.subscribeNewsletterCheckIsPreselectedLabel",
-                "tooltip": "Widget.subscribeNewsletterCheckIsPreselectedTooltip"
+                "tooltipText": "Widget.subscribeNewsletterCheckIsPreselectedTooltip"
             }
         },
         "isRequired": {
@@ -39,7 +39,7 @@
             "defaultValue": false,
             "options": {
                 "name": "Widget.subscribeNewsletterCheckIsRequiredLabel",
-                "tooltip": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
+                "tooltipText": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
             }
         },
         "customText": {
@@ -47,7 +47,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
-                "tooltip": "Widget.subscribeNewsletterCheckCustomTextTooltip"
+                "tooltipText": "Widget.subscribeNewsletterCheckCustomTextTooltip"
             }
         }
     }
