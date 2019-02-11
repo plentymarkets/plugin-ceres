@@ -7,6 +7,7 @@ use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
 use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
+use Ceres\Contexts\CheckoutContext;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
 use Ceres\Contexts\ItemWishListContext;
@@ -48,7 +49,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],
         'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],
         'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],
-        'tpl.checkout.category'             => ['Checkout.CheckoutCategory',              CategoryContext::class],
+        'tpl.checkout.category'             => ['Checkout.CheckoutCategory',              CheckoutContext::class],
         'tpl.my-account'                    => ['MyAccount.MyAccount',                    GlobalContext::class],
         'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            CategoryContext::class],
         'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],

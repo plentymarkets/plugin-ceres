@@ -9,7 +9,7 @@
     "settings": {
         "visibleFields": {
             "type": "checkboxGroup",
-            "defaultValue": ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "coupon", "vats", "totalSumGross", "couponDiscount", "openAmount"],
+            "defaultValue": ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"],
             "options": {
                 "name": "Widget.basketTotalsVisibleFields",
                 "checkboxValues": [
@@ -38,8 +38,8 @@
                         "caption": "Widget.showBasketTotalSumNet"
                     },
                     {
-                        "value": "coupon",
-                        "caption": "Widget.showBasketCoupon"
+                        "value": "promotionCoupon",
+                        "caption": "Widget.showBasketPromotionCoupon"
                     },
                     {
                         "value": "vats",
@@ -50,8 +50,8 @@
                         "caption": "Widget.showBasketTotalSumGross"
                     },
                     {
-                        "value": "couponDiscount",
-                        "caption": "Widget.showBasketCouponDiscount"
+                        "value": "salesCoupon",
+                        "caption": "Widget.showBasketSalesCoupon"
                     },
                     {
                         "value": "openAmount",

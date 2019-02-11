@@ -19,10 +19,10 @@
                     "shippingCostsNet",
                     "shippingCostsGross",
                     "totalSumNet",
-                    "coupon",
+                    "promotionCoupon",
                     "vats",
                     "totalSumGross",
-                    "couponDiscount",
+                    "salesCoupon",
                     "openAmount"
                 ],
                 "options": {
@@ -53,8 +53,8 @@
                             "caption": "Widget.showBasketTotalSumNet"
                         },
                         {
-                            "value": "coupon",
-                            "caption": "Widget.showBasketCoupon"
+                            "value": "promotionCoupon",
+                            "caption": "Widget.showBasketPromotionCoupon"
                         },
                         {
                             "value": "vats",
@@ -65,8 +65,8 @@
                             "caption": "Widget.showBasketTotalSumGross"
                         },
                         {
-                            "value": "couponDiscount",
-                            "caption": "Widget.showBasketCouponDiscount"
+                            "value": "salesCoupon",
+                            "caption": "Widget.showBasketSalesCoupon"
                         },
                         {
                             "value": "openAmount",
@@ -216,6 +216,7 @@
         ],
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Checkout\\GtcCheckWidget",
+        "maxPerPage": 1,
         "settings": {
             "appearance": {
                 "type": "select",
@@ -2875,5 +2876,17 @@
                 }
             }
         }
+    },
+    {
+        "identifier": "Ceres::AccountSettingsWidget",
+        "label": "Widget.accountSettingsLabel",
+        "previewImageURL": "/images/widgets/accountSettings.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
+        "settings": {}
     }
 ]

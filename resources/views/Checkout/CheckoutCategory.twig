@@ -19,26 +19,26 @@
                 <div class="col">
                     <checkout
                         v-cloak
-                        :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+                        :initial-checkout="{{ checkout | json_encode() }}"
                         :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
                         :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
                         :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
                         :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
                             {{ shopBuilderTemplate | raw }}
-                    </chekcout>
+                    </checkout>
                 </div>
             </div>
         </div>
     {% else %}
         <checkout
             v-cloak
-            :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+            :initial-checkout="{{ checkout | json_encode() }}"
             :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
             :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
             :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
             :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
             {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
-        </chekcout>
+        </checkout>
     {% endif %}
 
 {% endblock %}
