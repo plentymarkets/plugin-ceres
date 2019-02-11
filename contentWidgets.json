@@ -1847,5 +1847,17 @@
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
         "settings": {}
+    },
+    {
+        "identifier": "Ceres::OrderHistoryWidget",
+        "label": "Widget.orderHistoryLabel",
+        "previewImageURL": "TODO",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderHistoryWidget",
+        "settings": {}
     }
 ]
