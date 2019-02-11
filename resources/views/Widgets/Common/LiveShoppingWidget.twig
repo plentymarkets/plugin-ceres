@@ -7,7 +7,7 @@
         <div class="col-12">
             <live-shopping-item :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection }}" :display-settings="{{ liveShoppingConfig | json_encode }}">
                 {% if isPreview %}
-                    <div class="live-shopping-placeholder">
+                    <div class="widget-placeholder">
                         <div>
                             <p class="title">{{ Twig.trans("Ceres::Widget.liveShoppingPlaceholderTitle") }}</p>
                             <p class="description">{{ Twig.trans("Ceres::Widget.liveShoppingPlaceholderDescription") }}</p>

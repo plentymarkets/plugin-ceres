@@ -1,0 +1,43 @@
+{
+    "identifier": "Ceres::PlaceOrderWidget",
+    "label": "Widget.placeOrderLabel",
+    "previewImageURL": "/images/widgets/place-order.svg",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 700,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "success",
+            "options": "@include(appearance)"
+        },
+        "buttonSize": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.placeOrderButtonSizeLabel",
+                "tooltipText": "Widget.placeOrderButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "sm",
+                        "caption": "Widget.placeOrderButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.placeOrderButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "lg",
+                        "caption": "Widget.placeOrderButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        }
+    }
+}

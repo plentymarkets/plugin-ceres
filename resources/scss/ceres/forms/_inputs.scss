@@ -302,7 +302,6 @@ $border-width: 1px;
 .form-check
 {
     transition: all .3s ease;
-    cursor: pointer;
     margin-bottom: .75rem;
 
     &.error
@@ -326,6 +325,9 @@ $border-width: 1px;
         {
             color: $white !important;
         }
+    }
+    .form-check-input {
+        cursor: pointer;
     }
 }
 
