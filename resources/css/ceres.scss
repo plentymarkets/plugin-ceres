@@ -13632,7 +13632,7 @@ $menu-big-menu-li-color			: $white;
 $menu-big-menu-li-color-hover	: $text-color;
 // megamenu
 $megamenu-bg 					: #000000;
-$megamenu-color-top-btn			: $brand-primary;
+$megamenu-color-top-btn			: $white;
 $megamenu-color-bottom-btn		: $black;
 $megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
 $megamenu-btn-more 				: $gray;
@@ -13898,8 +13898,8 @@ nav.navbar.megamenu {
 
 					.no-touch &:hover,
 					.touch &.hover {
-						background : $megamenu-bg; 
-						color 	   : $megamenu-btn-hover !important;  
+						background : #000000; 
+						color 	   : #ffffff;  
 
 						>ul.collapse { display : block; } 
 					}
@@ -13926,13 +13926,13 @@ nav.navbar.megamenu {
 							&.level1 { 
 								padding : .5em 1em;
 								>a {								
-									color 		: $megamenu-color-top-btn; 
+									color 		: #ffffff; 
 									font-weight : bold; 
 								}
 							}
 							.no-touch &:hover,
 							.touch &.hover { 
-								background : $megamenu-bg; 
+								background : #000000; 
 							}
 							 .level2 { 
 							 	padding : .25em 0!important; 
@@ -13941,22 +13941,22 @@ nav.navbar.megamenu {
 							 	padding : 0 1em .25em 1.4em !important; 
 							 }
 							.bt-more>a { 
-								color 			: $gray;
+								color 			: #e9e9e9;
 								text-transform 	: lowercase; 
 							}
 							a {
-								background 	: $white;
-								color 		: $megamenu-color-bottom-btn;
+								background 	: #000000;
+								color 		: #ffffff;
 								padding 	: 0;
 								text-align 	: left;
 
 								.no-touch &:hover,
 								.touch &.hover { 
-									background 	: $megamenu-bg; 
-									color 		: $megamenu-btn-hover !important;  
+									background 	: #000000; 
+									color 		: #ffffff;  
 								}
 							}
-							ul { background-color : $megamenu-bg; }
+							ul { background-color : #000000; }
 						}
 
 					}
