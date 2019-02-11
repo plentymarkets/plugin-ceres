@@ -25,7 +25,7 @@
                         :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
                         :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
                             {{ shopBuilderTemplate | raw }}
-                    </chekcout>
+                    </checkout>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
             :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
             {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
-        </chekcout>
+        </checkout>
     {% endif %}
 
 {% endblock %}
