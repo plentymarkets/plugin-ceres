@@ -15587,7 +15587,7 @@ body.menu-is-visible {
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li:hover,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li.hover {
-    background: #fff;
+    background: #000000;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li .level2 {
     padding: 0.25em 0 !important;
@@ -15600,14 +15600,14 @@ body.menu-is-visible {
     text-transform: lowercase;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a {
-    background: #fff;
+    background: #000000;
     color: #000;
     padding: 0;
     text-align: left;
   }
   .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a:hover,
   .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li a.hover {
-    background: #fff;
+    background: #000000;
     color: #004157 !important;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul {
