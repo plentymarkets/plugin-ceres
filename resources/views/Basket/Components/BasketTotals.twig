@@ -96,7 +96,7 @@
                 {# Total sum (net) #}
 
                 {# Coupon #}
-                <template v-if="visibleFields.includes('coupon') && basket.couponCode && basket.couponCampaignType === 'promotion'">
+                <template v-if="visibleFields.includes('promotionCoupon') && basket.couponCode && basket.couponCampaignType === 'promotion'">
                     <dt class="font-weight-bold">
                         {{ trans("Ceres::Template.basketCoupon") }}
                     </dt><!--
@@ -135,7 +135,7 @@
                     {# Total sum (gross) #}
 
                     {# Coupon #}
-                    <template v-if="visibleFields.includes('couponDiscount') && basket.couponCode && basket.couponCampaignType === 'sales'">
+                    <template v-if="visibleFields.includes('salesCoupon') && basket.couponCode && basket.couponCampaignType === 'sales'">
                         <dt class="font-weight-bold">
                             {{ trans("Ceres::Template.basketCoupon") }}</strong>
                         </dt><!--

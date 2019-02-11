@@ -19,10 +19,10 @@
                     "shippingCostsNet",
                     "shippingCostsGross",
                     "totalSumNet",
-                    "coupon",
+                    "promotionCoupon",
                     "vats",
                     "totalSumGross",
-                    "couponDiscount",
+                    "salesCoupon",
                     "openAmount"
                 ],
                 "options": {
@@ -53,8 +53,8 @@
                             "caption": "Widget.showBasketTotalSumNet"
                         },
                         {
-                            "value": "coupon",
-                            "caption": "Widget.showBasketCoupon"
+                            "value": "promotionCoupon",
+                            "caption": "Widget.showBasketPromotionCoupon"
                         },
                         {
                             "value": "vats",
@@ -65,8 +65,8 @@
                             "caption": "Widget.showBasketTotalSumGross"
                         },
                         {
-                            "value": "couponDiscount",
-                            "caption": "Widget.showBasketCouponDiscount"
+                            "value": "salesCoupon",
+                            "caption": "Widget.showBasketSalesCoupon"
                         },
                         {
                             "value": "openAmount",
