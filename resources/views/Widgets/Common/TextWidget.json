@@ -7,7 +7,12 @@
     "position": 800,
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {
-        "appearance": "@include(optionalAppearance)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
         "text": {
             "type": "codeEditor",
             "options": {

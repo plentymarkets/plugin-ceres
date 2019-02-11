@@ -1,0 +1,19 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.component("Ceres::Checkout.Components.PlaceOrder") }}
+
+{% set buttonSize = widget.settings.buttonSize.mobile %}
+
+<div class="widget widget-place-order">
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforePlaceOrder"])) }}
+
+    <place-order
+        appearance="{{ widget.settings.appearance.mobile | default("success") }}"
+        {% if buttonSize is not empty %}button-size="{{ buttonSize }}"{% endif %}
+        target-continue="{{ Twig.print("homepageURL") }}{{ Twig.if("homepageURL | last != '/'") }}/{{ Twig.endif() }}place-order{{ Twig.if("urls.appendTrailingSlash") }}/{{ Twig.endif() }}"
+        @payment-response="checkoutComp.showModal($event)">
+    </place-order>
+    
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterPlaceOrder"])) }}
+</div>
