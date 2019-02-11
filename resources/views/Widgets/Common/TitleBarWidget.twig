@@ -1,13 +1,15 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set text = widget.settings.text.mobile %}
+{% set text = widget.settings.content.mobile %}
 
 <div class="widget widget-title-bar widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <div class="widget-inner">
-        {% if text | trim is not empty %}
-            <h1>{{ text }}</h1>
-        {% else %}
-            <h1>{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}</h1>
-        {% endif %}
+            <h1 data-builder-editable="content" data-builder-editor-toolbar="bold,italic,underline,strike">
+                {% if text | trim is not empty %}
+                    {{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}
+                {% else %}
+                    {{ text | raw }}
+                {% endif %}
+            </h1>
     </div>
 </div>

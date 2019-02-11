@@ -1,10 +1,8 @@
 {% set text         = widget.settings.text.mobile %}
 {% set appearance   = widget.settings.appearance.mobile %}
 
-{% if text | trim is not empty %}
 <div class="widget widget-text widget-{{ appearance | default('primary') }}">
-    <div class="widget-inner">
+    <div class="widget-inner" data-builder-editable="text">
         {{ text | raw }}
     </div>
 </div>
-{% endif %}

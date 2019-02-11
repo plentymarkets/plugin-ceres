@@ -12,12 +12,6 @@
             "required": true,
             "defaultValue": "none",
             "options": "@include(optionalAppearance)"
-        },
-        "text": {
-            "type": "codeEditor",
-            "options": {
-                "name": "Widget.textCodeEditorLabel"
-            }
         }
     }
 }
