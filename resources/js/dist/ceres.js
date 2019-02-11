@@ -19825,6 +19825,13 @@ Vue.component("address-select", {
           value = _ref.value;
       this.addressToEdit[field] = value;
       this.addressToEdit = Object.assign({}, this.addressToEdit);
+    },
+    onDropdownClicked: function onDropdownClicked(event) {
+      if (this.isAddressListEmpty || parseInt(this.addressType) === 2 && this.addressList.length === 1) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.showAddModal();
+      }
     }
   },
   filters: {
@@ -19943,7 +19950,7 @@ Vue.component("create-update-address", {
         try {
           for (var _iterator = invalidFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var field = _step.value;
-            var fieldName = field.lastElementChild.innerHTML;
+            var fieldName = field.lastElementChild.innerHTML.trim();
             fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
             fieldNames.push(fieldName);
           }
@@ -28274,7 +28281,13 @@ var actions = {
     addressList.unshift({
       id: -99
     });
-    id = this.selectedAddressId === 0 ? -99 : id;
+
+    if (addressList.every(function (address) {
+      return address.id !== id;
+    })) {
+      id = -99;
+    }
+
     commit("setDeliveryAddressList", addressList);
     commit("selectDeliveryAddress", addressList.find(function (address) {
       return address.id === id;

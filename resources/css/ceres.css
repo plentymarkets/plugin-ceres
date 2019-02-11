@@ -25034,6 +25034,7 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 
 .widget-editable-min-height {
   min-height: 40px;
+  padding-bottom: 0.1px;
 }
 
 .widget-placeholder {
