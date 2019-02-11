@@ -10695,7 +10695,7 @@ body {
 	> #vue-app,
 	> #vue-error {
 
-		background-color: #000000 !important;
+		background-color: $gray-lightest;
 		
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
