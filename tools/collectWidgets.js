@@ -50,9 +50,9 @@ function injectGlobals(widgetSettings)
                 widgetSettings[key] = globals[basename];
             }
         }
-        else if (!!widgetSettings[key].children)
+        else if (typeof widgetSettings[key] === typeof Object())
         {
-            widgetSettings[key].children = injectGlobals(widgetSettings[key].children);
+            widgetSettings[key] = injectGlobals(widgetSettings[key]);
         }
     });
 

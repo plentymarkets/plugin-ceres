@@ -1,0 +1,9 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set appearance = widget.settings.appearance.mobile %}
+
+{{ Twig.component("Ceres::Basket.Components.Coupon") }}
+
+<div class="widget widget-coupon">
+    <coupon appearance="{{ appearance | default("primary") }}"></coupon>
+</div>

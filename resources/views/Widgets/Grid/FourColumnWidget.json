@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/grid-4-col.svg",
     "type": "structure",
     "categories": ["structure"],
-    "position": 300,
+    "position": 100,
     "widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
     "settings": {
     }

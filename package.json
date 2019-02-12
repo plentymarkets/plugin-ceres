@@ -60,7 +60,6 @@
     "moment": "^2.23.0",
     "owl.carousel": "2.2.0",
     "popper.js": "^1.14.6",
-    "sticky-kit": "^1.1.3",
     "vue": "^2.5.21",
     "vue-script2": "^2.0.1",
     "vuex": "^3.0.1"

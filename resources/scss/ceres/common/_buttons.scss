@@ -131,6 +131,13 @@ button:focus {
 	&.btn-m-r {
 		margin-right: 10px;
 	}
+
+	&.btn-block {
+		> .fa {
+			line-height: inherit;
+		}
+	}
+
 }
 
 .btn-right {
