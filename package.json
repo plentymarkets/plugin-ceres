@@ -9,7 +9,8 @@
   "scripts": {
     "build": "gulp && npm run collectWidgets && node bundleSass.js",
     "bundleSass": "gulp copy:sass-vendor && node bundleSass.js",
-    "collectWidgets": "node tools/collectWidgets.js"
+    "collectWidgets": "node tools/collectWidgets.js",
+    "compareTranslations": "node tools/compareTranslations.js"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
