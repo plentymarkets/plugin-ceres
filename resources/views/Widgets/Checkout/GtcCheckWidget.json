@@ -19,7 +19,7 @@
             "defaultValue": false,
             "options": {
                 "name": "Widget.gtcCheckHideCheckboxLabel",
-                "tooltip": "Widget.gtcCheckHideCheckboxTooltip"
+                "tooltipText": "Widget.gtcCheckHideCheckboxTooltip"
             }
         },
         "isPreselected": {
@@ -28,7 +28,7 @@
             "defaultValue": false,
             "options": {
                 "name": "Widget.gtcCheckIsPreselectedLabel",
-                "tooltip": "Widget.gtcCheckIsPreselectedTooltip"
+                "tooltipText": "Widget.gtcCheckIsPreselectedTooltip"
             }
         },
         "isRequired": {
@@ -37,7 +37,7 @@
             "defaultValue": true,
             "options": {
                 "name": "Widget.gtcCheckIsRequiredLabel",
-                "tooltip": "Widget.gtcCheckIsRequiredTooltip"
+                "tooltipText": "Widget.gtcCheckIsRequiredTooltip"
             }
         },
         "customText": {
@@ -45,7 +45,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.gtcCheckCustomTextLabel",
-                "tooltip": "Widget.gtcCheckCustomTextTooltip"
+                "tooltipText": "Widget.gtcCheckCustomTextTooltip"
             }
         }
     }
