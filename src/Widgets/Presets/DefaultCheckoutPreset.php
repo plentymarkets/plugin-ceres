@@ -88,7 +88,7 @@ class DefaultCheckoutPreset implements ContentPreset
     private function createContactWishWidget()
     {
         $this->twoColumnWidget->createChild('first','Ceres::ContactWishWidget')
-            ->withSetting('hinttext', '');
+            ->withSetting('hintText', '');
     }
     
     private function createCouponWidget()
@@ -107,7 +107,7 @@ class DefaultCheckoutPreset implements ContentPreset
     private function createPaymentProviderWidget()
     {
         $this->twoColumnWidget->createChild('first','Ceres::PaymentProviderWidget')
-            ->withSetting('hinttext', '');
+            ->withSetting('hintText', '');
     }
     
     private function createPlaceOrderWidget()
@@ -124,7 +124,7 @@ class DefaultCheckoutPreset implements ContentPreset
     private function createShippingProfileWidget()
     {
         $this->twoColumnWidget->createChild('first','Ceres::ShippingProfileWidget')
-            ->withSetting('hinttext', '');
+            ->withSetting('hintText', '');
     }
     
     private function createAsteriks()
