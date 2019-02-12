@@ -1,0 +1,17 @@
+.widget-address
+{
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {
+            .btn-primary
+            {
+                @extend .btn-#{$color};
+            }
+            .btn-outline-primary
+            {
+                @extend .btn-outline-#{$color};
+            }
+        }
+    }
+}

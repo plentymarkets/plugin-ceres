@@ -24,14 +24,24 @@
 
 {% block PageBody %}
 
-    {% if ceresConfig.homepage.showShopBuilderContent or request.get('isContentBuilder') == 1 %}
 
-        <div class="home container-max">
+    {% if ceresConfig.homepage.showShopBuilderContent or request.get('isContentBuilder') == 1 %}
+    {{ component( "Ceres::Checkout.Components.Checkout" ) }}
+
+        <div class="page-content checkout container-max">
             <div class="row">
                 <div class="col">
-                    {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
-                        {{ content.result|raw }}
-                    {% endfor %}
+                    <checkout
+                        v-cloak
+                        :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+                        :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
+                        :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
+                        :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
+                        :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
+                        {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
+                            {{ content.result|raw }}
+                        {% endfor %}
+                    </chekcout>
                 </div>
             </div>
         </div>

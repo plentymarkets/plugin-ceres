@@ -1,0 +1,11 @@
+{% macro getInlineSpacings( spacingValue, spacingType ) %}
+    {%- for direction in ["top", "right", "bottom", "left"] if spacingValue[direction].unit is defined and spacingValue[direction].unit.mobile is not null %}
+        {{- spacingType | default("margin") }}-{{ direction }}: {{ spacingValue[direction].value.mobile }}{{ spacingValue[direction].unit.mobile ~ "; " -}}
+    {% endfor -%}
+{% endmacro %}
+
+{% macro getSpacingClasses( spacingValue, classPrefix ) -%}
+    {%- for d, direction in {"t": "top", "r": "right", "b": "bottom", "l": "left"} if spacingValue[direction].unit is defined and spacingValue[direction].unit.mobile is null and spacingValue[direction].value.mobile > 0 %}
+        {{- classPrefix | default("m") }}{{ d }}-{{ spacingValue[direction].value.mobile ~ " " -}}
+    {%- endfor -%}
+{% endmacro %}

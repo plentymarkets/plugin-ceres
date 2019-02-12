@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 350 120" style="enable-background:new 0 0 350 120;" xml:space="preserve">
+<rect style="fill:#008EBD;" width="350" height="120"/>
+<g>
+	<path style="fill:#FFFFFF;" d="M203.941,75h-47.383c-1.665,0-3.027-1.435-3.088-3.223c-0.549-2.328-7.459-31.623-7.859-33.577
+		L145.365,37h65.544c1.704,0,3.091,1.502,3.091,3.348l-0.023,0.217c0,0-6.953,31.341-6.959,31.409
+		C206.868,73.67,205.545,75,203.941,75z M147.838,39c1.406,6.154,7.632,32.744,7.635,32.789c0.056,0.679,0.521,1.211,1.085,1.211
+		h47.383c0.54,0,0.99-0.488,1.076-1.127c0.01-0.072,6.98-31.622,6.98-31.622c-0.04-0.698-0.513-1.25-1.088-1.25H147.838z"/>
+	
+		<polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+		202,81 156,81 144,30 132,30 	"/>
+	<circle style="fill:#FFFFFF;" cx="165" cy="90" r="6"/>
+	<circle style="fill:#FFFFFF;" cx="194" cy="90" r="6"/>
+	<line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;" x1="165" y1="38" x2="172" y2="74"/>
+	<line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;" x1="188" y1="74" x2="195" y2="38"/>
+	<line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;" x1="151" y1="55" x2="209" y2="55"/>
+</g>
+</svg>

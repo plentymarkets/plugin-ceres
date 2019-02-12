@@ -16,10 +16,11 @@
         ]
     },
     "allowedTypes": {
-        "header": ["header"],
-        "footer": ["footer", "static", "structure", "default"],
-        "content": ["static", "structure", "default"],
-        "checkout": ["static", "structure", "default", "checkout"]
+        "header":       ["header"],
+        "footer":       ["footer", "static", "structure", "default"],
+        "content":      ["static", "structure", "default"],
+        "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
     },
     "presets": {
         "header": [
@@ -38,6 +39,12 @@
             {
                 "label": "Widget.presetHomepageDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
+            }
+        ],
+        "checkout": [
+            {
+                "label": "Widget.presetCheckoutDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"
             }
         ]
     },
@@ -68,9 +75,59 @@
             "position": 500
         },
         {
+            "key": "customer",
+            "label": "Widget.categoryCustomer",
+            "position": 600
+        },
+        {
+            "key": "basket",
+            "label": "Widget.categoryBasket",
+            "position": 700
+        },
+        {
+            "key": "checkout",
+            "label": "Widget.categoryCheckout",
+            "position": 800
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 600
+            "position": 900
         }
-    ]
+    ],
+    "globalSettings": {
+        "checkoutCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCheckout"
+            }
+        },
+        "checkoutEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!checkoutCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCheckout"
+            }
+        },
+        "myAccountCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryMyAccount"
+            }
+        },
+        "myAccountEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!myAccountCategory",
+            "options": {
+                "name": "Config.routingEnableRouteMyAccount"
+            }
+        }
+    },
+    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler"
 }

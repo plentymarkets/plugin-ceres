@@ -9,8 +9,8 @@
 
 {{ Twig.component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 
-<div class="widget-newsletter widget">
+<div class="widget widget-newsletter">
     <div class="widget-inner">
-        <newsletter-input appearance="{{ appearance }}" :title="{{ title }}" :sub-title="{{ subTitle }}" :show-name-inputs="{{ showNameInputs }}" :show-privacy-policy-checkbox="{{ showPrivacyPolicyCheckbox }}" :email-folder="{{ emailFolder }}"></newsletter-input>
+        <newsletter-input appearance="{{ appearance | default("primary") }}" :title="{{ title }}" :sub-title="{{ subTitle }}" :show-name-inputs="{{ showNameInputs }}" :show-privacy-policy-checkbox="{{ showPrivacyPolicyCheckbox }}" :email-folder="{{ emailFolder }}"></newsletter-input>
     </div>
 </div>
