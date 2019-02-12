@@ -151,13 +151,15 @@ class DefaultCheckoutPreset implements ContentPreset
                               ->withSetting("margin.bottom.unit", null);
 
         $this->preset->createWidget('Ceres::SeparatorWidget')
-            ->withSetting('margin', 'auto');
+            ->withSetting('margin.top', 'auto')
+            ->withSetting('margin.bottom', 'auto');
     }
     
     private function createSeparatorWidget($dropZone = 'first')
     {
         $this->twoColumnWidget->createChild($dropZone, 'Ceres::SeparatorWidget')
-            ->withSetting('margin', 'auto');
+            ->withSetting('margin.top', 'auto')
+            ->withSetting('margin.bottom', 'auto');
     }
     
     private function createStickyContainer()
