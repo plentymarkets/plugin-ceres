@@ -264,7 +264,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.gtcCheckHideCheckboxLabel",
-                    "tooltip": "Widget.gtcCheckHideCheckboxTooltip"
+                    "tooltipText": "Widget.gtcCheckHideCheckboxTooltip"
                 }
             },
             "isPreselected": {
@@ -273,7 +273,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.gtcCheckIsPreselectedLabel",
-                    "tooltip": "Widget.gtcCheckIsPreselectedTooltip"
+                    "tooltipText": "Widget.gtcCheckIsPreselectedTooltip"
                 }
             },
             "isRequired": {
@@ -282,7 +282,7 @@
                 "defaultValue": true,
                 "options": {
                     "name": "Widget.gtcCheckIsRequiredLabel",
-                    "tooltip": "Widget.gtcCheckIsRequiredTooltip"
+                    "tooltipText": "Widget.gtcCheckIsRequiredTooltip"
                 }
             },
             "customText": {
@@ -290,7 +290,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.gtcCheckCustomTextLabel",
-                    "tooltip": "Widget.gtcCheckCustomTextTooltip"
+                    "tooltipText": "Widget.gtcCheckCustomTextTooltip"
                 }
             }
         }
@@ -536,7 +536,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckHideCheckboxLabel",
-                    "tooltip": "Widget.subscribeNewsletterCheckHideCheckboxTooltip"
+                    "tooltipText": "Widget.subscribeNewsletterCheckHideCheckboxTooltip"
                 }
             },
             "isPreselected": {
@@ -545,7 +545,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckIsPreselectedLabel",
-                    "tooltip": "Widget.subscribeNewsletterCheckIsPreselectedTooltip"
+                    "tooltipText": "Widget.subscribeNewsletterCheckIsPreselectedTooltip"
                 }
             },
             "isRequired": {
@@ -554,7 +554,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckIsRequiredLabel",
-                    "tooltip": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
+                    "tooltipText": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
                 }
             },
             "customText": {
@@ -562,7 +562,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
-                    "tooltip": "Widget.subscribeNewsletterCheckCustomTextTooltip"
+                    "tooltipText": "Widget.subscribeNewsletterCheckCustomTextTooltip"
                 }
             }
         }
@@ -1461,7 +1461,7 @@
                 "defaultValue": 1,
                 "options": {
                     "name": "Widget.liveShoppingSelectionLabel",
-                    "tooltip": "Widget.liveShoppingSelectionTooltip",
+                    "tooltipText": "Widget.liveShoppingSelectionTooltip",
                     "listBoxValues": [
                         {
                             "value": 1,
@@ -1522,7 +1522,7 @@
                 "defaultValue": "sorting.price.avg_asc",
                 "options": {
                     "name": "Widget.liveShoppingSortingLabel",
-                    "tooltip": "Widget.liveShoppingSortingTooltip",
+                    "tooltipText": "Widget.liveShoppingSortingTooltip",
                     "listBoxValues": [
                         {
                             "value": "sorting.price.avg_asc",
@@ -1640,7 +1640,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.liveShoppingCustomImagePathLabel",
-                    "tooltip": "Widget.liveShoppingCustomImagePathTooltip"
+                    "tooltipText": "Widget.liveShoppingCustomImagePathTooltip"
                 }
             }
         }
