@@ -2,6 +2,7 @@ import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
 import UrlService from "services/UrlService";
 import { isNullOrUndefined } from "../../helper/utils";
+import {pathnameEquals} from "../../helper/url";
 
 Vue.component("item-search", {
 
@@ -95,7 +96,7 @@ Vue.component("item-search", {
         {
             if (this.$refs.searchInput.value.length)
             {
-                if (document.location.pathname === "/search")
+                if (pathnameEquals(App.urls.search))
                 {
                     this.updateTitle(this.$refs.searchInput.value);
                     this.$store.dispatch("searchItems", this.$refs.searchInput.value);
@@ -105,14 +106,7 @@ Vue.component("item-search", {
                 }
                 else
                 {
-                    let searchBaseURL = "/search?query=";
-
-                    if (App.defaultLanguage !== App.language)
-                    {
-                        searchBaseURL = `/${App.language}/search?query=`;
-                    }
-
-                    window.open(searchBaseURL + this.$refs.searchInput.value, "_self", false);
+                    window.open(`${App.urls.search}?query=${this.$refs.searchInput.value}`, "_self", false);
                 }
             }
             else
