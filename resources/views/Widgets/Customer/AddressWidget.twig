@@ -16,12 +16,12 @@
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBillingAddress"])) }}
             <div class="invoice-addresses-select">
                 {% set optionalInvoiceAddressFields = {
-                    "de": widget.settings.addressFieldsInvoiceDE.mobile,
-                    "gb": widget.settings.addressFieldsInvoiceGB.mobile
+                    "de": widget.settings.addressFieldsInvoiceDE.mobile | default([]),
+                    "gb": widget.settings.addressFieldsInvoiceGB.mobile | default([])
                 } %}
                 {% set requiredInvoiceAddressFields = {
-                    "de": widget.settings.addressRequiredFieldsInvoiceDE.mobile,
-                    "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile
+                    "de": widget.settings.addressRequiredFieldsInvoiceDE.mobile | default([]),
+                    "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile | default([])
                 } %}
                 <invoice-address-select
                     has-to-validate="true"
@@ -45,12 +45,12 @@
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingAddress"])) }}
             <div class="shipping-addresses-select">
                 {% set optionalShippingAddressFields = {
-                    "de": widget.settings.addressFieldsShippingDE.mobile,
-                    "gb": widget.settings.addressFieldsShippingGB.mobile
+                    "de": widget.settings.addressFieldsShippingDE.mobile | default([]),
+                    "gb": widget.settings.addressFieldsShippingGB.mobile | default([])
                 } %}
                 {% set requiredShippingAddressFields = {
-                    "de": widget.settings.addressRequiredFieldsShippingDE.mobile,
-                    "gb": widget.settings.addressRequiredFieldsShippingGB.mobile
+                    "de": widget.settings.addressRequiredFieldsShippingDE.mobile | default([]),
+                    "gb": widget.settings.addressRequiredFieldsShippingGB.mobile | default([])
                 } %}
 
                 <shipping-address-select
