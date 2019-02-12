@@ -16,10 +16,11 @@
         ]
     },
     "allowedTypes": {
-        "header": ["header"],
-        "footer": ["footer", "static", "structure", "default"],
-        "content": ["static", "structure", "default"],
-        "checkout": ["static", "structure", "default", "checkout", "customer", "basket"]
+        "header":       ["header"],
+        "footer":       ["footer", "static", "structure", "default"],
+        "content":      ["static", "structure", "default"],
+        "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
     },
     "presets": {
         "header": [
@@ -109,6 +110,22 @@
             "isVisible": "!checkoutCategory",
             "options": {
                 "name": "Config.routingEnableRouteCheckout"
+            }
+        },
+        "myAccountCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryMyAccount"
+            }
+        },
+        "myAccountEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!myAccountCategory",
+            "options": {
+                "name": "Config.routingEnableRouteMyAccount"
             }
         }
     },

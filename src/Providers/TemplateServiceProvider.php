@@ -41,32 +41,34 @@ class TemplateServiceProvider extends ServiceProvider
 
     private static $templateKeyToViewMap =
     [
-        'tpl.home'                          => ['Homepage.Homepage',                      GlobalContext::class],     // provide template to use for homepage
-        'tpl.category.content'              => ['Category.Content.CategoryContent',       CategoryContext::class],   // provide template to use for content categories
-        'tpl.category.item'                 => ['Category.Item.CategoryItem',             CategoryItemContext::class],          // provide template to use for item categories
-        'tpl.category.blog'                 => ['PageDesign.PageDesign',                  GlobalContext::class],               // provide template to use for blog categories
-        'tpl.category.container'            => ['PageDesign.PageDesign',                  GlobalContext::class],               // provide template to use for container categories
-        'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],                 // provide template to use for single items
-        'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],                       // provide template to use for basket
-        'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],               // provide template to use for checkout
-        'tpl.my-account'                    => ['MyAccount.MyAccount',                    GlobalContext::class],                 // provide template to use for my-account
-        'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],          // provide template to use for confirmation
-        'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],                      // provide template to use for login
-        'tpl.register'                      => ['Customer.Register',                      GlobalContext::class],                   // provide template to use for register
-        'tpl.guest'                         => ['Customer.Guest',                         GlobalContext::class],                      // provide template to use for guest
-        'tpl.password-reset'                => ['Customer.ResetPassword',                 PasswordResetContext::class],              // provide template to use for password-reset
-        'tpl.contact'                       => ['Customer.Contact',                       GlobalContext::class],                    // provide template to use for contact
-        'tpl.search'                        => ['ItemList.ItemListView',                  ItemSearchContext::class],               // provide template to use for item search
-        'tpl.wish-list'                     => ['WishList.WishListView',                  ItemWishListContext::class],               // provide template to use for wishlist
-        'tpl.order.return'                  => ['OrderReturn.OrderReturnView',            OrderReturnContext::class],         // provide template to use for order return
-        'tpl.order.return.confirmation'     => ['OrderReturn.OrderReturnConfirmation',    GlobalContext::class], // provide template to use for order return confirmation
-        'tpl.cancellation-rights'           => ['StaticPages.CancellationRights',         GlobalContext::class],      // provide template to use for cancellation rights
-        'tpl.cancellation-form'             => ['StaticPages.CancellationForm',           GlobalContext::class],        // provide template to use for cancellation form
-        'tpl.legal-disclosure'              => ['StaticPages.LegalDisclosure',            GlobalContext::class],         // provide template to use for legal disclosure
-        'tpl.privacy-policy'                => ['StaticPages.PrivacyPolicy',              GlobalContext::class],           // provide template to use for privacy policy
-        'tpl.terms-conditions'              => ['StaticPages.TermsAndConditions',         GlobalContext::class],      // provide template to use for terms and conditions
-        'tpl.item-not-found'                => ['StaticPages.ItemNotFound',               GlobalContext::class],            // provide template to use for item not found
-        'tpl.page-not-found'                => ['StaticPages.PageNotFound',               GlobalContext::class],       // provide template to use for page not found
+        'tpl.home'                          => ['Homepage.Homepage',                      GlobalContext::class],
+        'tpl.category.content'              => ['Category.Content.CategoryContent',       CategoryContext::class],
+        'tpl.category.item'                 => ['Category.Item.CategoryItem',             CategoryItemContext::class],
+        'tpl.category.blog'                 => ['PageDesign.PageDesign',                  GlobalContext::class],
+        'tpl.category.container'            => ['PageDesign.PageDesign',                  GlobalContext::class],
+        'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],
+        'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],
+        'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],
+        'tpl.checkout.category'             => ['Checkout.CheckoutCategory',              CheckoutContext::class],
+        'tpl.my-account'                    => ['MyAccount.MyAccount',                    GlobalContext::class],
+        'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            CategoryContext::class],
+        'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],
+        'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],
+        'tpl.register'                      => ['Customer.Register',                      GlobalContext::class],
+        'tpl.guest'                         => ['Customer.Guest',                         GlobalContext::class],
+        'tpl.password-reset'                => ['Customer.ResetPassword',                 PasswordResetContext::class],
+        'tpl.contact'                       => ['Customer.Contact',                       GlobalContext::class],
+        'tpl.search'                        => ['ItemList.ItemListView',                  ItemSearchContext::class],
+        'tpl.wish-list'                     => ['WishList.WishListView',                  ItemWishListContext::class],
+        'tpl.order.return'                  => ['OrderReturn.OrderReturnView',            OrderReturnContext::class],
+        'tpl.order.return.confirmation'     => ['OrderReturn.OrderReturnConfirmation',    GlobalContext::class],
+        'tpl.cancellation-rights'           => ['StaticPages.CancellationRights',         GlobalContext::class],
+        'tpl.cancellation-form'             => ['StaticPages.CancellationForm',           GlobalContext::class],
+        'tpl.legal-disclosure'              => ['StaticPages.LegalDisclosure',            GlobalContext::class],
+        'tpl.privacy-policy'                => ['StaticPages.PrivacyPolicy',              GlobalContext::class],
+        'tpl.terms-conditions'              => ['StaticPages.TermsAndConditions',         GlobalContext::class],
+        'tpl.item-not-found'                => ['StaticPages.ItemNotFound',               GlobalContext::class],
+        'tpl.page-not-found'                => ['StaticPages.PageNotFound',               GlobalContext::class],
         'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class]
     ];
 
@@ -84,36 +86,12 @@ class TemplateServiceProvider extends ServiceProvider
         $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
             if ( !$templateContainer->hasTemplate() )
             {
-                $template = $templateContainer->getTemplateKey();
-                if ( $template === 'tpl.checkout' && RouteConfig::getCategoryId(RouteConfig::CHECKOUT) > 0 )
-                {
-                    $templateContainer->setTemplate('Ceres::Checkout.CheckoutCategory');
-                }
-                else
-                {
-                    $templateContainer->setTemplate('Ceres::' . self::$templateKeyToViewMap[$template][0]);
-                }
+                $this->setTemplateAndContext($templateContainer);
             }
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen('IO.ctx.*', function (TemplateContainer $templateContainer, $templateData = []) {
-            $template = $templateContainer->getTemplateKey();
-
-            if ( $template === 'tpl.checkout' && RouteConfig::getCategoryId(RouteConfig::CHECKOUT) > 0 )
-            {
-                $templateContextClass = CheckoutContext::class;
-            }
-            else
-            {
-                $templateContextClass = self::$templateKeyToViewMap[$template][1];
-            }
-
-            if(!strlen($templateContextClass))
-            {
-                $templateContextClass = GlobalContext::class;
-            }
-
-            $templateContainer->setContext( $templateContextClass );
+            $this->setTemplateAndContext($templateContainer);
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
@@ -126,7 +104,9 @@ class TemplateServiceProvider extends ServiceProvider
             ]);
         }, self::EVENT_LISTENER_PRIORITY);
 
-        // provide mapped category IDs - DEPRECATED?
+        /**
+         * @deprecated this event is not in use and will be removed
+         */
         $eventDispatcher->listen('init.categories', function (CategoryMap $categoryMap) use (&$config) {
             $categoryMap->setCategoryMap(array(
                 CategoryKey::HOME => $config->get("Ceres.global.category.home"),
@@ -149,5 +129,22 @@ class TemplateServiceProvider extends ServiceProvider
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen(AfterBuildPlugins::class, CeresAfterBuildPlugins::class);
+    }
+
+    /**
+     * @param TemplateContainer $templateContainer
+     */
+    private function setTemplateAndContext( $templateContainer )
+    {
+        $templateEvent  = $templateContainer->getTemplateKey();
+        $template = substr($templateEvent, 4);
+        if ( RouteConfig::getCategoryId( $template ) > 0 )
+        {
+            $templateEvent .= '.category';
+        }
+
+        $templateConfig = self::$templateKeyToViewMap[$templateEvent];
+        $templateContainer->setTemplate( 'Ceres::' . $templateConfig[0] );
+        $templateContainer->setContext( $templateConfig[1] );
     }
 }
