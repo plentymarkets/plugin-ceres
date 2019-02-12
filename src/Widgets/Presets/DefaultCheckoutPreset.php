@@ -140,8 +140,16 @@ class DefaultCheckoutPreset implements ContentPreset
         $text = '<h1 class="h2">{{ trans("Ceres::Template.checkout") }}</h1>';
         $this->preset->createWidget('Ceres::TextWidget')
                               ->withSetting("text", $text)
-                              ->withSetting("appearance", "none");
-        
+                              ->withSetting("appearance", "none")
+                              ->withSetting("customPadding", true)
+                              ->withSetting("padding.top.value", 4)
+                              ->withSetting("padding.top.unit", null)
+                              ->withSetting("padding.bottom.value", 2)
+                              ->withSetting("padding.bottom.unit", null)
+                              ->withSetting("customMargin", true)
+                              ->withSetting("margin.bottom.value", 0)
+                              ->withSetting("margin.bottom.unit", null);
+
         $this->preset->createWidget('Ceres::SeparatorWidget')
             ->withSetting('margin', 'auto');
     }
