@@ -96,3 +96,12 @@
         }
     }
 }
+
+.checkout
+{
+    .widget-grid .widget-inner > div
+    {
+        background-color: $white;
+        padding: $spacer;
+    }
+}
