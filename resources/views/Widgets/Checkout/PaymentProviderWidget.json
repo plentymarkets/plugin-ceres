@@ -13,12 +13,12 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "hinttext": {
+        "hintText": {
             "type": "codeEditor",
             "defaultValue": "",
             "options": {
-                "name": "Widget.paymentProviderHinttextLabel",
-                "tooltipText": "Widget.paymentProviderHinttextTooltip"
+                "name": "Widget.paymentProviderHintTextLabel",
+                "tooltipText": "Widget.paymentProviderHintTextTooltip"
             }
         }
     }

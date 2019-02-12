@@ -13,12 +13,12 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "hinttext": {
+        "hintText": {
             "type": "codeEditor",
             "defaultValue": "",
             "options": {
-                "name": "Widget.shippingProfileHinttextLabel",
-                "tooltipText": "Widget.shippingProfileHinttextTooltip"
+                "name": "Widget.shippingProfileHintTextLabel",
+                "tooltipText": "Widget.shippingProfileHintTextTooltip"
             }
         }
     }
