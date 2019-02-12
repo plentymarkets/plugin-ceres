@@ -1,0 +1,13 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.set("userObject", Twig.call("services.customer.getContact" )) }}
+
+<div class="widget widget-greeting">
+    {% if frontend.Account.getIsAccountLoggedIn %}
+        {% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
+            <span class="text-muted">{{ trans("Ceres::Template.myAccountHello", {"username": userObject.firstName ~ " " ~ userObject.lastName}) }}</span>
+        {% else %}
+            <span class="text-muted">{{ trans("Ceres::Template.myAccountHello", {"username": userObject.email}) }}</span>
+        {% endif %}
+    {% endif %}
+</div>

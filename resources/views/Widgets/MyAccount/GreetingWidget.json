@@ -1,0 +1,12 @@
+{
+    "identifier": "Ceres::GreetingWidget",
+    "label": "Widget.greetingWidgetLabel",
+    "previewImageURL": "/images/widgets/greeting.svg",
+    "type": "static",
+    "categories": ["static"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\GreetingWidget",
+    "settings": {
+        
+    }
+}
