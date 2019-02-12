@@ -20292,6 +20292,8 @@ Vue.component("shipping-address-select", {
 },{}],157:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -20415,6 +20417,10 @@ Vue.component("contact-form", {
         } else {
           NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactSendFail"));
         }
+      }).always(function () {
+        if (!(0, _utils.isNullOrUndefined)(grecaptcha)) {
+          grecaptcha.reset();
+        }
       });
     },
     clearFields: function clearFields() {
@@ -20450,7 +20456,7 @@ Vue.component("contact-form", {
   }
 });
 
-},{"services/ApiService":252,"services/NotificationService":256,"services/TranslationService":257,"services/ValidationService":259}],158:[function(require,module,exports){
+},{"../../helper/utils":250,"services/ApiService":252,"services/NotificationService":256,"services/TranslationService":257,"services/ValidationService":259}],158:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-map", {
@@ -22275,6 +22281,14 @@ Vue.component("quantity-input", {
         }
       },
       deep: true
+    },
+    min: function min(newValue) {
+      this.compMin = newValue;
+      this.fetchQuantityFromBasket();
+    },
+    max: function max(newValue) {
+      this.compMax = newValue;
+      this.fetchQuantityFromBasket();
     },
     value: function value(newValue, oldValue) {
       if (newValue !== oldValue) {
@@ -25645,7 +25659,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.exceptionMap = void 0;
-var exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["401", "notificationsCalculateShippingFailed"]]);
 exports.exceptionMap = exceptionMap;
 var _default = exceptionMap;
 exports.default = _default;
