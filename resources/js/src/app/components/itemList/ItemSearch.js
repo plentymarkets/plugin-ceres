@@ -2,7 +2,7 @@ import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
 import UrlService from "services/UrlService";
 import { isNullOrUndefined } from "../../helper/utils";
-import {pathnameEquals} from "../../helper/url";
+import { pathnameEquals } from "../../helper/url";
 
 Vue.component("item-search", {
 

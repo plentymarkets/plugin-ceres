@@ -22584,6 +22584,8 @@ var _UrlService = _interopRequireDefault(require("services/UrlService"));
 
 var _utils = require("../../helper/utils");
 
+var _url = require("../../helper/url");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component("item-search", {
@@ -22652,19 +22654,13 @@ Vue.component("item-search", {
     },
     search: function search() {
       if (this.$refs.searchInput.value.length) {
-        if (document.location.pathname === "/search") {
+        if ((0, _url.pathnameEquals)(App.urls.search)) {
           this.updateTitle(this.$refs.searchInput.value);
           this.$store.dispatch("searchItems", this.$refs.searchInput.value);
           this.selectedAutocompleteIndex = -1;
           this.autocompleteResult = [];
         } else {
-          var searchBaseURL = "/search?query=";
-
-          if (App.defaultLanguage !== App.language) {
-            searchBaseURL = "/".concat(App.language, "/search?query=");
-          }
-
-          window.open(searchBaseURL + this.$refs.searchInput.value, "_self", false);
+          window.open("".concat(App.urls.search, "?query=").concat(this.$refs.searchInput.value), "_self", false);
         }
       } else {
         this.preventSearch = false;
@@ -22802,7 +22798,7 @@ Vue.component("item-search", {
   }
 });
 
-},{"../../helper/utils":250,"services/ApiService":252,"services/TranslationService":257,"services/UrlService":258}],183:[function(require,module,exports){
+},{"../../helper/url":249,"../../helper/utils":250,"services/ApiService":252,"services/TranslationService":257,"services/UrlService":258}],183:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -26526,6 +26522,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.normalizeUrl = normalizeUrl;
+exports.pathnameEquals = pathnameEquals;
 
 var _utils = require("./utils");
 
@@ -26547,6 +26544,10 @@ function normalizeUrl(url) {
   }
 
   return targetUrl;
+}
+
+function pathnameEquals(pathname) {
+  return window.location.pathname === pathname || window.location.pathname === pathname + "/" || window.location.pathname + "/" === pathname;
 }
 
 },{"./utils":250}],250:[function(require,module,exports){
@@ -28470,6 +28471,8 @@ var _TranslationService = _interopRequireDefault(require("services/TranslationSe
 
 var _UrlService = require("../../services/UrlService");
 
+var _url = require("../../helper/url");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NotificationService = require("services/NotificationService");
@@ -28639,8 +28642,8 @@ var actions = {
         commit("setIsBasketLoading", false);
         resolve(basketItems);
 
-        if (window.location.pathname === "/checkout" && !basketItems.length) {
-          (0, _UrlService.navigateTo)("/basket");
+        if ((0, _url.pathnameEquals)(App.urls.checkout) && !basketItems.length) {
+          (0, _UrlService.navigateTo)(App.urls.basket);
         }
       }).fail(function (error) {
         commit("setIsBasketLoading", false);
@@ -28703,7 +28706,7 @@ var _default = {
 };
 exports.default = _default;
 
-},{"../../services/UrlService":258,"services/ApiService":252,"services/NotificationService":256,"services/TranslationService":257}],264:[function(require,module,exports){
+},{"../../helper/url":249,"../../services/UrlService":258,"services/ApiService":252,"services/NotificationService":256,"services/TranslationService":257}],264:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
