@@ -5,12 +5,29 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("order-return-history", {
 
-    props: [
-        "template",
-        "itemsPerPage",
-        "showFirstPage",
-        "showLastPage"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-order-return-history"
+        },
+        itemsPerPage:
+        {
+            type: Number,
+            default: 5
+        },
+        showFirstPage:
+        {
+            type: Number,
+            default: true
+        },
+        showLastPage:
+        {
+            type: Number,
+            default: true
+        }
+    },
 
     data()
 	{
@@ -23,8 +40,11 @@ Vue.component("order-return-history", {
     created()
 	{
         this.$options.template = this.template;
-        this.itemsPerPage = this.itemsPerPage || 10;
 
+        /**
+         * temporary
+         */
+        this.setPage(1);
         vueEventHub.$on("returns-first-opening", () => this.setPage(1));
     },
 

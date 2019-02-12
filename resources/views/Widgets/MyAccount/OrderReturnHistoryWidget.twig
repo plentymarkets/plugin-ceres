@@ -1,0 +1,15 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.component("Ceres::MyAccount.Components.OrderReturnHistory") }}
+
+{% set appearance   = widget.settings.appearance.mobile | default("primary") %}
+{% set hintText     = widget.settings.hintText.mobile %}
+{% set itemsPerPage = widget.settings.itemsPerPage.mobile | default(5) %}
+
+<div class="widget widget-order-return-history widget-{{ appearance }}">
+    {% if hintText is not empty %}
+        <p>{{ hintText | raw }}</p>
+    {% endif %}
+
+    <order-return-history :items-per-page="{{ itemsPerPage }}"></order-return-history>
+</div>

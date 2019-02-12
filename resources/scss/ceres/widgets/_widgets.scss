@@ -2,10 +2,10 @@
 
 @import "Checkout/provider-select-widget";
 @import "Checkout/shipping-privacy-check";
+@import "Common/faq-widget";
 @import "Common/image-box-widget";
 @import "Common/image-carousel-widget";
 @import "Common/item-list-widget";
-@import "Common/faq-widget";
 @import "Common/legal-information-widget";
 @import "Common/list-widget";
 @import "Common/live-shopping-widget";
@@ -16,3 +16,4 @@
 @import "Grid/grid-widget";
 @import "Helper/base-widget";
 @import "Helper/widget-placeholder";
+@import "MyAccount/order-return-history-widget";

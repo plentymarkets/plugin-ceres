@@ -1,0 +1,23 @@
+.widget-order-return-history
+{
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {
+            .order-return-history-item-name
+            {
+                color: $value;
+            }
+            
+            .loading-animation > div
+            {
+                background-color: $value;
+            }
+
+            .sk-fading-circle .sk-circle:before
+            {
+                background-color: $value;
+            }
+        }
+    }
+}

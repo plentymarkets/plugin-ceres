@@ -47,7 +47,7 @@
 
                     <div class="col-md-8">
                         <div class="order-return-history-text-container">
-                            <a :href="returnOrder.itemURLs[orderItem.itemVariationId]">
+                            <a class="order-return-history-item-name" :href="returnOrder.itemURLs[orderItem.itemVariationId]">
                                 <h2 class="h5 order-return-history-name">${ orderItem | itemBundleName }</h2>
                             </a>
                             <h2 class="h5 order-return-history-count">{{ trans("Ceres::Template.returnHistoryReturnCount") }}: ${ orderItem.quantity}</h2>
