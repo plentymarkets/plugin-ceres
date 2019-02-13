@@ -16823,7 +16823,6 @@ html.ie .basket-preview-hover {
   }
 }
 .cmp-hero{
-	
 
 	.hero-category{
 		position: relative;
@@ -16860,8 +16859,6 @@ html.ie .basket-preview-hover {
 			}
 		}
 	}
-
-
 
 	.hero-main{
 		margin-bottom: 1rem;
@@ -16972,10 +16969,6 @@ html.ie .basket-preview-hover {
 		}
 	}
 
-	@include media-breakpoint-up(sm){
-
-	}
-
 	@include media-breakpoint-up(md){
 		.hero-main{
 			.hero-category{
@@ -17082,10 +17075,12 @@ html.ie .basket-preview-hover {
 			content: "";
 			font-family: FontAwesome;
 			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
+			width: auto;
+			height: auto;
+			top: 50%;
+			left: 50%;
+			bottom: 50%;
+			right: 50%;
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
@@ -17134,6 +17129,19 @@ html.ie .basket-preview-hover {
 	}
 }
 
+/* IE Compatibility */
+html.ie {
+	.component-loading {
+		&.with-icon {
+			&:after {
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+			}
+		}
+	}
+}
 .qty-box {
     display: -webkit-box;
     display: -ms-flexbox;
