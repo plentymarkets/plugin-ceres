@@ -3,10 +3,10 @@
 	.items{
 		position: relative;
 
-		@include media-breakpoint-up(md){
+		@include media-breakpoint-up(md) {
 			display: inline-block;
 			vertical-align: middle;
-			width:100%;
+			width: 100%;
 		}
 
 		//TODO add class to this div and set this rule by the class
@@ -14,7 +14,7 @@
 			@extend .card;
 			margin-bottom: 0;
 
-			@include media-breakpoint-down(xs){
+			@include media-breakpoint-down(xs) {
 				min-height: 115px;
 			}
 		}
@@ -123,11 +123,11 @@
 }
 
 .checkout {
-	header {
-		h4 {
-    		line-height: 2.5rem;
-		}
-	}
+    header {
+        h4 {
+            line-height: 2.5rem;
+        }
+    }
 }
 
 .add-item {
