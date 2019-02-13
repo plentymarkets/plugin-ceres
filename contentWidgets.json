@@ -2907,6 +2907,93 @@
         ],
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderHistoryWidget",
-        "settings": {}
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.orderHistoryHintTextLabel",
+                    "tooltipText": "Widget.orderHistoryHintTextTooltip"
+                }
+            },
+            "ordersPerPage": {
+                "type": "select",
+                "defaultValue": 5,
+                "options": {
+                    "name": "Widget.ordersPerPage",
+                    "tooltipText": "Widget.ordersPerPageTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 5,
+                            "caption": "5",
+                            "position": 0
+                        },
+                        {
+                            "value": 10,
+                            "caption": "10",
+                            "position": 1
+                        },
+                        {
+                            "value": 25,
+                            "caption": "25",
+                            "position": 2
+                        },
+                        {
+                            "value": 50,
+                            "caption": "50",
+                            "position": 3
+                        }
+                    ]
+                }
+            },
+            "allowPaymentProviderChange": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.allowPaymentProviderChange"
+                }
+            }
+        }
     }
 ]

@@ -1,3 +1,5 @@
+{{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
+
 <script type="x/template" id="vue-order-history-item">
     <article class="cmp cmp-order-item">
         <div class="item-details small">
@@ -43,7 +45,7 @@
                         <change-payment-method  template="#vue-change-payment-method"
                                                 :current-order="order.order"
                                                 :change-possible="order.allowPaymentMethodSwitchFrom"
-                                                :allowed-payment-methods="paymentMethodListForSwitch"
+                                                :allowed-payment-methods="order.paymentMethodListForSwitch"
                                                 :payment-status="order.paymentStatus"
                                                 :current-template="{{ currentTemplate | json_encode() }}"
                                                 :current-payment-method-name="order.paymentMethodName">
