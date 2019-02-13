@@ -22087,7 +22087,6 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   vertical-align: top;
   margin-top: -1px;
   margin-left: -1px;
-  background-color: #fff;
 }
 
 .cmp-method-list .method-list-item > input:disabled ~ label {
@@ -22112,6 +22111,7 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   margin-bottom: 0;
   width: 100%;
   overflow: hidden;
+  background-color: #fff;
 }
 
 .cmp-method-list .method-list-item .content,

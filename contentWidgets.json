@@ -196,12 +196,12 @@
         "position": 300,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
         "settings": {
-            "hinttext": {
+            "hintText": {
                 "type": "codeEditor",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.contactWishHinttextLabel",
-                    "tooltipText": "Widget.contactWishHinttextTooltip"
+                    "name": "Widget.contactWishHintTextLabel",
+                    "tooltipText": "Widget.contactWishHintTextTooltip"
                 }
             }
         }
@@ -347,12 +347,12 @@
                     ]
                 }
             },
-            "hinttext": {
+            "hintText": {
                 "type": "codeEditor",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.paymentProviderHinttextLabel",
-                    "tooltipText": "Widget.paymentProviderHinttextTooltip"
+                    "name": "Widget.paymentProviderHintTextLabel",
+                    "tooltipText": "Widget.paymentProviderHintTextTooltip"
                 }
             }
         }
@@ -501,12 +501,12 @@
                     ]
                 }
             },
-            "hinttext": {
+            "hintText": {
                 "type": "codeEditor",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.shippingProfileHinttextLabel",
-                    "tooltipText": "Widget.shippingProfileHinttextTooltip"
+                    "name": "Widget.shippingProfileHintTextLabel",
+                    "tooltipText": "Widget.shippingProfileHintTextTooltip"
                 }
             }
         }
@@ -1962,6 +1962,14 @@
                             "position": 1
                         }
                     ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.addressHintTextLabel",
+                    "tooltipText": "Widget.addressHintTextTooltip"
                 }
             },
             "addressLayout": {
