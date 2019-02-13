@@ -142,6 +142,8 @@ Vue.component("order-property-list-item", {
 
         validateFloat(value)
         {
+            const lastChar = value.slice(-1);
+
             value = parseFloat(value.replace(App.decimalSeparator, "."));
 
             if (isNaN(value))
@@ -150,6 +152,11 @@ Vue.component("order-property-list-item", {
             }
             else
             {
+                if (lastChar === "." || lastChar === App.decimalSeparator)
+                {
+                    value += lastChar;
+                }
+
                 value = value.toString().replace(".", App.decimalSeparator);
             }
 
