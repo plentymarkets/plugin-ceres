@@ -2,7 +2,7 @@
 
 <script type="x/template" id="vue-order-return-history">
 	<div>
-		<div v-if="isUserLoggedIn !== false" class="form-group">
+		<div v-if="isUserLoggedIn" class="form-group">
 			<div class="row mb-3">
 	            <div class="col-12 col-md-12 col-lg-12">
 					<!-- RETURN PAGINATION -->
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 
-		<div v-if="isUserLoggedIn === false">
+		<div v-if="!isUserLoggedIn">
 			<slot></slot>
 		</div>
 	</div>
