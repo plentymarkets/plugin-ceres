@@ -35,7 +35,7 @@ Vue.component("order-return-history", {
         return {
             waiting: false,
             returnsList: { page: 1 },
-            isUserLoggedIn: null
+            isUserLoggedIn: false
         };
     },
 
@@ -46,21 +46,6 @@ Vue.component("order-return-history", {
     created()
 	{
         this.$options.template = this.template;
-
-        /**
-         * temporary
-         */
-        if (isDefined(this.userData))
-        {
-            this.isUserLoggedIn = true;
-            this.setPage(1);
-        }
-        else
-        {
-            this.isUserLoggedIn = false;
-        }
-
-        vueEventHub.$on("returns-first-opening", () => this.setPage(1));
     },
 
     methods:
@@ -89,6 +74,18 @@ Vue.component("order-return-history", {
                         TranslationService.translate("Ceres::Template.returnHistoryOops")
                     );
                 });
+            }
+        }
+    },
+
+    watch:
+    {
+        userData(newVal)
+        {
+            if (isDefined(newVal) && !this.isUserLoggedIn)
+            {
+                this.isUserLoggedIn = true;
+                this.setPage(1);
             }
         }
     }
