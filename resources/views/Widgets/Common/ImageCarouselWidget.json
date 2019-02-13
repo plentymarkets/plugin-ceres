@@ -77,6 +77,12 @@
                         "name": "Widget.imageCarouselCustomImagePathLabel",
                         "tooltipText": "Widget.imageCarouselCustomImagePathTooltip"
                     }
+                },
+                "url":
+                {
+                    "type": "url",
+                    "required": false,
+                    "options": {}
                 }
             }
         }
