@@ -1,0 +1,57 @@
+<script type="x/template" id="vue-order-history-item">
+    <article class="cmp cmp-order-item">
+        <div class="item-details small">
+            <div class="mb-3">
+                <h5>{{ trans("Ceres::Template.orderHistoryOrderId") }} ${ order.order.id }</h5>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="row">
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryDate") }}</strong>
+                        <span class="col-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.devDateTimeFormat") ) }} {{ trans("Ceres::Template.orderHistoryTime") }}</span>
+                    </div>
+                    <div class="row my-account-no-line">
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryStatus") }}</strong>
+                        <span class="col-6 col-sm-7">${ order.order.statusName }</span>
+                    </div>
+                        <div class="row" v-if="order.paymentMethodName.trim().length > 0">
+                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</strong>
+                            <span class="col-6 col-sm-7" :id="'payment_name_' + order.order.id">${ order.paymentMethodName }</span>
+                        </div>
+                    <div class="row">
+                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</strong>
+                        <span class="col-6 col-sm-7" :id="'payment_state_' + order.order.id">
+                            ${ 'Ceres::Template.orderHistoryPaymentStatus_' + order.paymentStatus | translate() }
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="payment-change-box">
+                        <button class="btn btn-primary btn-block" @click="setCurrentOrder()">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            {{ trans("Ceres::Template.orderHistoryOrderDetails") }}
+                        </button>
+
+                        <a v-if="order.isReturnable" v-waiting-animation-infinite class="btn btn-primary btn-block" :href="'/returns/' + order.order.id">
+                            <i class="fa fa-undo" aria-hidden="true"></i>
+                            {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
+                        </a>
+
+                        {% set currentTemplate = services.template.getCurrentTemplate() %}
+                        <change-payment-method  template="#vue-change-payment-method"
+                                                :current-order="order.order"
+                                                :change-possible="order.allowPaymentMethodSwitchFrom"
+                                                :allowed-payment-methods="paymentMethodListForSwitch"
+                                                :payment-status="order.paymentStatus"
+                                                :current-template="{{ currentTemplate | json_encode() }}"
+                                                :current-payment-method-name="order.paymentMethodName">
+                        </change-payment-method>
+                        <slot name="OrderHistoryPaymentInformation"></slot>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</script>

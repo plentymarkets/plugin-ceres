@@ -1,9 +1,64 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ Twig.component( "Ceres::MyAccount.Components.OrderHistory" ) }}
+{{ Twig.component( "Ceres::MyAccount.Components.OrderHistoryItem" ) }}
+
+{% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
+
+{% set ordersPerPage = widget.settings.ordersPerPage.mobile %}
+{% set page = request.get("page") | default(1) %}
+{% set orderList = services.customer.getOrders(page, ordersPerPage).toArray() %}
 
 <div>
-    <p>Dies ist ein TestWidget</p>
+    {% if orderList.totalsCount > 0 %}
+        <div class="form-group">
+            <div class="row mb-3">
+                <div class="col-12 col-md-12 col-lg-12">
+                    <!-- ORDER PAGINATION -->
+                    {% if orderList.lastPageNumber > 1 %}
+                    <div class="clearfix history-pagination">
+                        <div class="float-left counter">
+                            {{ trans("Ceres::Template.orderHistoryShow", {"countStart": orderList.firstOnPage, "countEnd": orderList.lastOnPage, "orderMaxCount": orderList.totalsCount }) }}
+                        </div>
+                        {% include "Ceres::Category.Item.Partials.Pagination" with { 'currentPage': page } %}
+                    </div>
+                    {% endif %}
+                    <!-- ./ORDER PAGINATION -->
+                    <hr>
+                    <!-- ORDER HISTORY TWIG -->
+                    <div class="order-list">
+                        {% for order in orderList.entries %}
+                            <order-history-item :order="{{ order | json_encode }}">
+                                <template slot="OrderHistoryPaymentInformation">
+                                    {{ Twig.call("LayoutContainer.show", ["Ceres::MyAccount.OrderHistoryPaymentInformation", Twig.var("order.order")]) }}
+                                </template>
+                            </order-history-item>
+                        {% endfor %}
+                    </div>
+                    <!-- ./ORDER HISTORY TWIG -->
+                </div>
 
-    <order-history></order-history>
+                <!-- ORDER DETAILS MODAL -->
+                <div class="modal fade" ref="orderDetails" v-if="currentOrder" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">{{ trans("Ceres::Template.orderHistoryOrderDetails") }}</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body" :class="{'loading': isLoading}" style="min-height:350px">
+                                {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                                <div id="dynamic-twig-content">
+                                    {# DYNAMIC ADD CONTENT #}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./ORDER DETAILS MODAL -->
+            </div>
+        </div>
+    {% else %}
+        <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
+    {% endif %}
 </div>
