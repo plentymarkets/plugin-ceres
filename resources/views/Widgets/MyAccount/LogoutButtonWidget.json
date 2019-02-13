@@ -1,16 +1,16 @@
 {
-    "identifier": "Ceres::PlaceOrderWidget",
-    "label": "Widget.placeOrderLabel",
-    "previewImageURL": "/images/widgets/place-order.svg",
-    "type": "checkout",
-    "categories": ["checkout"],
+    "identifier": "Ceres::LogoutButtonWidget",
+    "label": "Widget.logoutButtonLabel",
+    "previewImageURL": "/images/widgets/logout-button.svg",
+    "type": "myaccount",
+    "categories": ["myaccount"],
     "position": 700,
-    "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\LogoutButtonWidget",
     "settings": {
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "success",
+            "defaultValue": "danger",
             "options": "@include(appearance)"
         },
         "buttonSize": {

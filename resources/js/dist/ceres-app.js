@@ -19934,6 +19934,8 @@ Vue.component("shipping-address-select", {
 },{}],157:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -20057,6 +20059,10 @@ Vue.component("contact-form", {
         } else {
           NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactSendFail"));
         }
+      }).always(function () {
+        if (!(0, _utils.isNullOrUndefined)(grecaptcha)) {
+          grecaptcha.reset();
+        }
       });
     },
     clearFields: function clearFields() {
@@ -20092,7 +20098,7 @@ Vue.component("contact-form", {
   }
 });
 
-},{"services/ApiService":252,"services/NotificationService":256,"services/TranslationService":257,"services/ValidationService":259}],158:[function(require,module,exports){
+},{"../../helper/utils":250,"services/ApiService":252,"services/NotificationService":256,"services/TranslationService":257,"services/ValidationService":259}],158:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-map", {

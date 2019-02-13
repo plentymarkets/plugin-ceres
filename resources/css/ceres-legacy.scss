@@ -17391,7 +17391,6 @@ html.ie .basket-preview-hover {
 		vertical-align:top;
 		margin-top: -1px;
 		margin-left: -1px;
-		background-color: $card-bg;
 
 		& > input:disabled ~ label {
 			opacity: .5;
@@ -17419,6 +17418,7 @@ html.ie .basket-preview-hover {
 			margin-bottom: 0;
 			width:100%;
 			overflow: hidden;
+			background-color: $card-bg;
 		}
 
 		.content,
