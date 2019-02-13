@@ -1,20 +1,36 @@
-import AddressFieldService from "services/AddressFieldService";
+import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("salutation-select", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "addressData",
-        "addressType"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-salutation-select"
+        },
+        addressData:
+        {
+            type: Object,
+            required: true
+        },
+        addressType:
+        {
+            type: [Number, String],
+            default: 1
+        },
+        enabledAddressFields:
+        {
+            type: Object,
+            default: () => []
+        }
+    },
 
     data()
     {
         return {
-            salutations      : {
-                complete      : {
+            salutations: {
+                complete: {
                     de: [
                         {
                             value: "Herr",
@@ -66,9 +82,26 @@ Vue.component("salutation-select", {
                         }
                     ]
                 }
-            },
-            currentSalutation: {}
+            }
         };
+    },
+
+    computed:
+    {
+        currentSalutation()
+        {
+            const countryId = parseInt(this.addressData.countryId) || 1;
+            const addressKey = parseInt(this.addressType) === 1 ? "billing_address" : "delivery_address";
+            const languageKey = App.language === "de" ? "de" : "en";
+            const countryKey = countryId === 12 ? "gb" : "de";
+
+            if (this.enabledAddressFields[countryKey].includes(`${addressKey}.name1`))
+            {
+                return this.salutations.complete[languageKey];
+            }
+
+            return this.salutations.withoutCompany[languageKey];
+        }
     },
 
     /**
@@ -78,24 +111,11 @@ Vue.component("salutation-select", {
     {
         this.$options.template = this.template;
 
-        if (App.language === "de")
+        const selectedSalutation = this.addressData.addressSalutation;
+
+        if (isNullOrUndefined(selectedSalutation))
         {
-            if (AddressFieldService.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1"))
-            {
-                this.currentSalutation = this.salutations.complete.de;
-            }
-            else
-            {
-                this.currentSalutation = this.salutations.withoutCompany.de;
-            }
-        }
-        else if (AddressFieldService.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1"))
-        {
-            this.currentSalutation = this.salutations.complete.en;
-        }
-        else
-        {
-            this.currentSalutation = this.salutations.withoutCompany.en;
+            this.emitInputEvent(this.currentSalutation[0].id);
         }
     },
 
@@ -137,6 +157,23 @@ Vue.component("salutation-select", {
                 return (gender === null && this.addressData.name1 !== null) || (gender === null && this.addressData.name1 !== "");
             }
             return true;
+        }
+    },
+
+    watch:
+    {
+        currentSalutation(newVal, oldVal)
+        {
+            if (newVal !== oldVal)
+            {
+                const selectedSalutation = this.addressData.addressSalutation;
+
+                // cleanse the current selected salutation, if it's not longer included in the choice
+                if (!newVal.map(salutation => salutation.id).includes(selectedSalutation))
+                {
+                    this.emitInputEvent(newVal[0].id);
+                }
+            }
         }
     }
 });

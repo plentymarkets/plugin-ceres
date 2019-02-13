@@ -1,6 +1,6 @@
-@include media-breakpoint-down(xs)
+.widget-live-shopping
 {
-    .widget-live-shopping
+    @include media-breakpoint-down(xs)
     {
         .thumb-inner
         {
@@ -28,34 +28,10 @@
                 }
             }
         }
-    }   
-}
-
-.live-shopping-placeholder
-{
-    width: 100%;
-    padding-bottom: 150%;
-    position: relative;
-    background-color: $gray-lighter;
-
-    > div
-    {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        text-align: center;
-        padding: $spacer;
-        width: 100%;
     }
 
-    .title
+    .widget-placeholder
     {
-        font-weight: bold;
-        font-size: 1.3rem;
-    }
-
-    .description
-    {
-        font-style: italic;
+        padding-bottom: 150%;
     }
 }

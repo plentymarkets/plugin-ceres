@@ -1,12 +1,28 @@
 Vue.component("basket-totals", {
 
-    delimiters: ["${", "}"],
-
     props:
     {
         template:
         {
-            type: String
+            type: String,
+            default: "#vue-basket-totals"
+        },
+        visibleFields:
+        {
+            type: Array,
+            default: () => [
+                "basketValueNet",
+                "basketValueGross",
+                "rebate",
+                "shippingCostsNet",
+                "shippingCostsGross",
+                "totalSumNet",
+                "coupon",
+                "vats",
+                "totalSumGross",
+                "couponDiscount",
+                "openAmount"
+            ]
         }
     },
 

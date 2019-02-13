@@ -5,7 +5,12 @@
     "type": "static",
     "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
     "settings": {
-        "appearance": "@include(appearance)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
         "title": {
             "type": "text",
             "required": false,
