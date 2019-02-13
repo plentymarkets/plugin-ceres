@@ -105,7 +105,7 @@
                     }
                 },
                 "url": {
-                    "type": "text",
+                    "type": "url",
                     "required": false,
                     "options": {
                         "name": "Widget.listEntryUrlLabel",
