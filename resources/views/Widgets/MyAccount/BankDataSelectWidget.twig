@@ -6,14 +6,14 @@
 
 {{ Twig.set("userBankData", Twig.call("services.contactBank.getBanksOfContact", ["$frontend.Account.AccountContactId"])) }}
 {% set appearance = widget.settings.appearance.mobile %}
-{% set hinttext = widget.settings.text.mobile %}
+{% set hintText = widget.settings.text.mobile %}
 
 <div class="widget widget-bank-details">
     <h4>
         {{ Twig.trans("Ceres::Template.myAccountBankDetails") }}
     </h4>
-    {% if hinttext is not empty %}
-        {{ hinttext | raw }}
+    {% if hintText is not empty %}
+        {{ hintText | raw }}
     {% else %}
         <p class="text-muted small font-italic">{{ Twig.trans("Ceres::Template.myAccountChangePaymentInformation") }}</p>
     {% endif %}

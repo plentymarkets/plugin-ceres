@@ -15,7 +15,8 @@ Vue.component("bank-data-select", {
         },
         userBankData:
         {
-            type: Array
+            type: Array,
+            default: () => []
         },
         contactId:
         {
