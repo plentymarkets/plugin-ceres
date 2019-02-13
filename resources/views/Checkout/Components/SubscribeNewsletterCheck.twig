@@ -5,11 +5,11 @@
         <label class="form-check-label" :for="'subscribe-newsletter-check' + _uid">
             <template v-if="!customText.length">
                 {{ trans("Ceres::Template.newsletterCheckboxLabel") }}<!--
-            --></template>
-            <template v-else>
-                ${ customText | raw }<!--
-            --></template><!--
-            --><template v-if="isRequired">*</template>
+             --><template v-if="isRequired && !hideCheckbox">
+                    <sup>*</sup>
+                </template>
+                </template>
+            <span v-if="customText.length" v-html="customText">
         </label>
     </div>
 </script>

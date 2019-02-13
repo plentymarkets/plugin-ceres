@@ -24,3 +24,10 @@ export function normalizeUrl(url)
 
     return targetUrl;
 }
+
+export function pathnameEquals(pathname)
+{
+    return window.location.pathname === pathname ||
+        window.location.pathname === pathname + "/" ||
+        window.location.pathname + "/" === pathname;
+}

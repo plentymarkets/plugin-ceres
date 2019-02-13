@@ -38,8 +38,8 @@
         {{ Twig.if("overrideShippingAddress | trim is empty") }}
             <h3 class="mb-3">{{ Twig.trans("Ceres::Template.checkoutShippingAddress") }}</h3>
 
-            {% if hintText is not empty %}
-                <p>{{ hintText | raw }}</p>
+            {% if widget.settings.hintText.mobile is not empty %}
+                <p>{{ widget.settings.hintText.mobile | raw }}</p>
             {% endif %}
 
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingAddress"])) }}
