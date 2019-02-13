@@ -2,6 +2,7 @@ const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
 import TranslationService from "services/TranslationService";
+import { isDefined } from "../../helper/utils";
 
 Vue.component("order-return-history", {
 
@@ -19,12 +20,12 @@ Vue.component("order-return-history", {
         },
         showFirstPage:
         {
-            type: Number,
+            type: Boolean,
             default: true
         },
         showLastPage:
         {
-            type: Number,
+            type: Boolean,
             default: true
         }
     },
@@ -33,9 +34,14 @@ Vue.component("order-return-history", {
 	{
         return {
             waiting: false,
-            returnsList: { page: 1 }
+            returnsList: { page: 1 },
+            isUserLoggedIn: null
         };
     },
+
+    computed: Vuex.mapState({
+        userData: state => state.user.userData
+    }),
 
     created()
 	{
@@ -44,7 +50,16 @@ Vue.component("order-return-history", {
         /**
          * temporary
          */
-        this.setPage(1);
+        if (isDefined(this.userData))
+        {
+            this.isUserLoggedIn = true;
+            this.setPage(1);
+        }
+        else
+        {
+            this.isUserLoggedIn = false;
+        }
+
         vueEventHub.$on("returns-first-opening", () => this.setPage(1));
     },
 

@@ -11,5 +11,14 @@
         <p>{{ hintText | raw }}</p>
     {% endif %}
 
-    <order-return-history :items-per-page="{{ itemsPerPage }}"></order-return-history>
+    <order-return-history :items-per-page="{{ itemsPerPage }}">
+        {% if isPreview %}
+            <div class="widget-placeholder">
+                <div>
+                    <p class="title">{{ Twig.trans("Ceres::Widget.orderReturnHistoryLabel") }}</p>
+                    <p class="description">{{ Twig.trans("Ceres::Widget.orderReturnHistoryPlaceholderDescription") }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </order-return-history>
 </div>
