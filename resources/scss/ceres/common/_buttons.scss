@@ -89,10 +89,6 @@ button:focus {
 
 	outline: 0 !important;
 
-	&.btn-right {
-		float: right;
-	}
-
 	& .btn-label {
 		&.btn-trans {
 			background: transparent;
@@ -141,6 +137,7 @@ button:focus {
 	&.btn-block {
 		> .fa {
 			line-height: inherit;
+			margin-top: 0;
 		}
 	}
 
