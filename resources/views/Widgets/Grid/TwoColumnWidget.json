@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/grid-2-col.svg",
     "type": "structure",
     "categories": ["structure"],
-    "position": 100,
+    "position": 300,
     "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
     "settings": {
         "layout": {
@@ -29,6 +29,16 @@
                         "value": "oneToTwo",
                         "caption": "Widget.gridTwoColumnLayoutOneToTwo",
                         "position": 2
+                    },
+                    {
+                        "value": "fiveToSeven",
+                        "caption": "Widget.gridTwoColumnLayoutFiveToSeven",
+                        "position": 3
+                    },
+                    {
+                        "value": "sevenToFive",
+                        "caption": "Widget.gridTwoColumnLayoutSevenToFive",
+                        "position": 4
                     }
                 ]
             }

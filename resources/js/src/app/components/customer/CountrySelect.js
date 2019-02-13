@@ -7,7 +7,9 @@ Vue.component("country-select", {
         "selectedCountryId",
         "selectedStateId",
         "template",
-        "addressType"
+        "addressType",
+        "optionalAddressFields",
+        "requiredAddressFields"
     ],
 
     data()
@@ -92,6 +94,23 @@ Vue.component("country-select", {
             }
 
             this.countryChanged(countryId);
+        },
+
+        isInOptionalFields(locale, key)
+        {
+            return this.optionalAddressFields[locale].includes(key);
+        },
+
+        isInRequiredFields(locale, key)
+        {
+            return (this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key));
+        }
+    },
+
+    filters: {
+        transformRequiredLabel(label, shouldMarkRequired)
+        {
+            return shouldMarkRequired ? label + "*" : label;
         }
     },
 

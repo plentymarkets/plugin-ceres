@@ -2,12 +2,14 @@ import TranslationService from "services/TranslationService";
 const NotificationService = require("services/NotificationService");
 
 Vue.component("payment-provider-select", {
-
-    delimiters: ["${", "}"],
-
-    props: [
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-payment-provider-select"
+        }
+    },
 
     computed: Vuex.mapState({
         methodOfPaymentList: state => state.checkout.payment.methodOfPaymentList,

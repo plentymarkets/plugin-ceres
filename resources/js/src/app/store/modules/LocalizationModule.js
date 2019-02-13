@@ -52,9 +52,28 @@ const actions =
         }
     };
 
+const getters =
+    {
+        getCountryName: state => countryId =>
+        {
+            if (countryId > 0)
+            {
+                const country = state.shippingCountries.find(country => country.id === countryId);
+
+                if (!isNullOrUndefined(country))
+                {
+                    return country.currLangName;
+                }
+            }
+
+            return "";
+        }
+    };
+
 export default
 {
     state,
     mutations,
-    actions
+    actions,
+    getters
 };

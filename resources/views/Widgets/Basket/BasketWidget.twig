@@ -1,0 +1,18 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.component("Ceres::Basket.Components.BasketList") }}
+
+{% set appearance = widget.settings.appearance.mobile %}
+
+<div class="widget widget-basket">
+    <div>
+        <h3>{{ Twig.trans("Ceres::Template.checkoutBasket") }}</h3>
+        <hr class="mb-0">
+    </div>
+    
+    <div class="pt-4 pb-3">
+        <div class="cmp">
+            <basket-list appearance="{{ appearance | default("primary") }}" size="small"></basket-list>
+        </div>
+    </div>
+</div>

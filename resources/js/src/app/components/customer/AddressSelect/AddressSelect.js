@@ -1,21 +1,41 @@
-import { isNullOrUndefined, isNull, isDefined } from "../../../helper/utils";
+import { isNull, isDefined } from "../../../helper/utils";
 
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
-const AddressFieldService = require("services/AddressFieldService");
 
 import ValidationService from "services/ValidationService";
 import TranslationService from "services/TranslationService";
 
 Vue.component("address-select", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "addressType",
-        "showError"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-address-select"
+        },
+        addressType: {
+            type: String,
+            required: true
+        },
+        showError: Boolean,
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {
+                    de: [],
+                    gb: []
+                };
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        }
+    },
 
     data()
     {
@@ -74,6 +94,15 @@ Vue.component("address-select", {
             return !(this.addressList && this.addressList.length > 0);
         },
 
+        isSalutationEnabled()
+        {
+            const countryId = parseInt(this.addressToEdit.countryId) || 1;
+            const addressKey = parseInt(this.addressType) === 1 ? "billing_address" : "delivery_address";
+            const countryKey = countryId === 12 ? "gb" : "de";
+
+            return this.optionalAddressFields[countryKey].includes(`${addressKey}.salutation`);
+        },
+
         ...Vuex.mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             countryList: state => state.localization.shippingCountries
@@ -123,22 +152,13 @@ Vue.component("address-select", {
         },
 
         /**
-         * Check whether a company name exists and show it in bold
-         * @returns {boolean}
-         */
-        showNameStrong()
-        {
-            return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
-        },
-
-        /**
          * Show the add modal
          */
         showAddModal(type)
         {
             this.modalType = type || "create";
 
-            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            if (this.isSalutationEnabled)
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
@@ -310,23 +330,23 @@ Vue.component("address-select", {
          */
         getCountryName(countryId)
         {
-            if (countryId > 0)
-            {
-                const country = this.countryList.find(country => country.id === countryId);
-
-                if (!isNullOrUndefined(country))
-                {
-                    return country.currLangName;
-                }
-            }
-
-            return "";
+            return this.$store.getters.getCountryName(countryId);
         },
 
         setAddressToEditField({ field, value })
         {
             this.addressToEdit[field] = value;
             this.addressToEdit = Object.assign({}, this.addressToEdit);
+        },
+
+        onDropdownClicked(event)
+        {
+            if (this.isAddressListEmpty || (parseInt(this.addressType) === 2 && this.addressList.length === 1))
+            {
+                event.preventDefault();
+                event.stopPropagation();
+                this.showAddModal();
+            }
         }
     },
 
@@ -346,6 +366,17 @@ Vue.component("address-select", {
             }
 
             return "";
+        }
+    },
+
+    watch:
+    {
+        isSalutationEnabled(newVal)
+        {
+            if (!newVal)
+            {
+                delete this.addressToEdit.addressSalutation;
+            }
         }
     }
 });
