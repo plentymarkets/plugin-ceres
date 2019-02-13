@@ -5,14 +5,12 @@ import { isNullOrUndefined } from "../../../helper/utils";
 const NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
-
-    delimiters: ["${", "}"],
-
     props: [
         "basketItem",
         "size",
         "language",
-        "template"
+        "template",
+        "appearance"
     ],
 
     data()

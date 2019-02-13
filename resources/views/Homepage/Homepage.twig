@@ -25,8 +25,7 @@
 {% block PageBody %}
 
     {% if ceresConfig.homepage.showShopBuilderContent or request.get('isContentBuilder') == 1 %}
-
-        <div class="home container-max">
+        <div class="container-max">
             <div class="row">
                 <div class="col">
                     {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
@@ -47,7 +46,5 @@
         {% endif %}
 
     {% endif %}
-
-
 
 {% endblock %}
