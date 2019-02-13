@@ -24888,6 +24888,11 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   }
 }
 
+.checkout .widget-grid .widget-inner > div {
+  background-color: #fff;
+  padding: 1rem;
+}
+
 .widget {
   margin-bottom: 2rem;
 }

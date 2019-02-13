@@ -20099,6 +20099,14 @@ html.ie {
     }
 }
 
+.checkout
+{
+    .widget-grid .widget-inner > div
+    {
+        background-color: $white;
+        padding: $spacer;
+    }
+}
 .widget
 {
     margin-bottom: 2rem;
