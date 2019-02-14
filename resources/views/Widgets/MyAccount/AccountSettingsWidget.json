@@ -1,12 +1,22 @@
 {
     "identifier": "Ceres::AccountSettingsWidget",
-    "label": "Widget.accountSettingsLabel",
+    "label": "Widget.myAccountAccountSettingsLabel",
     "previewImageURL": "/images/widgets/accountSettings.svg",
     "type": "myaccount",
     "categories": ["myaccount"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
     "settings": {
-
+        "appearance": { 
+            "type": "select", 
+            "defaultValue": "primary", 
+            "options": "@include(appearance)" 
+        },
+        "text": {
+            "type": "codeEditor",
+            "options": {
+                "name": "Widget.myAccountHintTextLabel"
+            }
+        }
     }
 }

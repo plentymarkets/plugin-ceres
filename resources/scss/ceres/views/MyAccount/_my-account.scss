@@ -87,3 +87,17 @@
 {
     width: 100%!important;
 }
+
+.card-body {
+    padding: 1rem;
+
+    .add-item {
+        bottom: 0;
+
+        @include media-breakpoint-down(xs) {
+            button {
+                height: 100%;
+            }
+        }
+    }
+}
