@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as TwigHelper %}
 
 {% set placeholder = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163165fc73f%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163165fc73f%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.45%22%3E%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" %}
 
@@ -8,18 +9,18 @@
 
 {{ Twig.set("slides", "[]") }}
 
-{% set slideData = widget.settings.slides %}
+{% set slideData = widget.settings.slides.mobile %}
 {% if sliderParams is not empty and slideData is empty %}
     {% set slideData = sliderParams.mobile %}
 {% endif %}
 
-{% for slideSettings in slideData.mobile %}
+{% for slideSettings in slideData %}
 
     {{ Twig.set("slide", "{ headlineStyle: '#{ slideSettings.headlineStyle }' }") }}
 
     {% set pushCurrentSlide = false %}
 
-    {% if slideSettings.url.type == 'category' %}
+    {% if slideSettings.categoryId | trim is not empty %}
 
         {{ Twig.set("category", Twig.call("services.category.get", [slideSettings.categoryId])) }}
         {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"]) ) }}
@@ -30,7 +31,7 @@
 
         {% set pushCurrentSlide = true %}
 
-    {% elseif slideSettings.url.type == 'item' %}
+    {% elseif slideSettings.variationId | trim is not empty %}
 
         {{ Twig.set("itemData", Twig.call("services.item.getVariation", [slideSettings.variationId])) }}
         {{ Twig.set("itemData", "itemData.documents[0].data") }}
@@ -48,7 +49,7 @@
 
     {% endif %}
 
-    {% if slideSettings.url.type == 'file' or slideSettings.url.type == 'external' %}
+    {% if slideSettings.customImagePath | trim is not empty %}
 
         {{ Twig.set("slide", "slide | merge({ imageUrl: #{ slideSettings.customImagePath | json_encode } })") }}
 
@@ -61,6 +62,13 @@
         {{ Twig.setEscaped("customCaption", slideSettings.headline) }}
         {{ Twig.set("slide", "slide | merge({ name: customCaption })") }}
 
+    {% endif %}
+
+    {% if slideSettings.url.value is not empty %}
+        {{ TwigHelper.getUrl(slideSettings.url.value, slideSettings.url.type) }}
+        {{ Twig.set("slide", "slide | merge({ url: url })") }}
+        {# {{ Twig.setEscaped("openInNewTab", slideSettings.url.openInNewTab)}}
+        {{ Twig.set("slide", "slide | merge({ openInNewTab: })") }} #}
     {% endif %}
 
     {% if pushCurrentSlide %}
@@ -79,9 +87,9 @@
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
             {{ Twig.for("slide", "slides") }}
+            
             <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
                 <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}>
-
                     {{ Twig.if("slide.imageUrl is not empty") }}
                         <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
                     {{ Twig.endif() }}
@@ -93,7 +101,6 @@
                         </h2>
                     </div>
                     {{ Twig.endif() }}
-
                 </a>
             </div>
             {{ Twig.endfor() }}
