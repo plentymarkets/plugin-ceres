@@ -20,7 +20,8 @@ Vue.component("order-history-item", {
             type: Object,
             default: () =>
             {}
-        }
+        },
+        orderDetailModalId: String
     },
 
     data()
@@ -39,12 +40,12 @@ Vue.component("order-history-item", {
     {
         setCurrentOrder()
         {
-            $("#dynamic-twig-content").html("");
+            $("#dynamic-twig-content" + this.orderDetailModalId).html("");
             this.isLoading = true;
 
             Vue.nextTick(() =>
             {
-                $(this.$refs.orderDetails).modal("show");
+                $("#orderDetails" + this.orderDetailModalId).modal("show");
             });
 
             ApiService
@@ -52,7 +53,7 @@ Vue.component("order-history-item", {
                 .done(response =>
                 {
                     this.isLoading = false;
-                    $("#dynamic-twig-content").html(response);
+                    $("#dynamic-twig-content" + this.orderDetailModalId).html(response);
                 });
         }
     }

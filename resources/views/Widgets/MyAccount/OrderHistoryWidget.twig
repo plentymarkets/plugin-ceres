@@ -12,9 +12,18 @@
 {% set ordersPerPage = widget.settings.ordersPerPage.mobile %}
 {{ Twig.set("page", "request.get('page') | default(1)" ) }}
 
+{{ Twig.set("orderDetailModalId", "uid()") }}
+
 {{ Twig.set("orderList", Twig.call("services.customer.getOrders", [Twig.var("page"), ordersPerPage]) ~ ".toArray()"  ) }}
 
 <div class="widget widget-address widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+    
+    <h3 class="mb-3">{{ Twig.trans("Ceres::Template.orderHistory") }}</h3>
+
+    {% if hintText is not empty %}
+        <p>{{ hintText | raw }}</p>
+    {% endif %}
+
     {{ Twig.if("orderList.totalsCount > 0") }}
         <div class="form-group">
             <div class="row mb-3">
@@ -33,7 +42,9 @@
                     <!-- ORDER HISTORY TWIG -->
                     <div class="order-list">
                         {{ Twig.for("order", "orderList.entries") }}
-                            <order-history-item :order="{{ Twig.print("order | json_encode") }}">
+                            <order-history-item
+                                :order="{{ Twig.print("order | json_encode") }}"
+                                :order-detail-modal-id="{{ Twig.print('orderDetailModalId | json_encode') }}">
                                 <template slot="OrderHistoryPaymentInformation">
                                     {{ Twig.print( Twig.call("LayoutContainer.show", ["Ceres::MyAccount.OrderHistoryPaymentInformation", Twig.var("order.order")]) ) }}
                                 </template>
@@ -44,16 +55,16 @@
                 </div>
 
                 <!-- ORDER DETAILS MODAL -->
-                <div class="modal fade" ref="orderDetails" v-if="currentOrder" tabindex="-1" role="dialog">
+                <div id="orderDetails{{ Twig.print('orderDetailModalId') }}" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h3 class="modal-title">{{ trans("Ceres::Template.orderHistoryOrderDetails") }}</h3>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
-                            <div class="modal-body" :class="{'loading': isLoading}" style="min-height:350px">
+                            <div class="modal-body" style="min-height:350px">
                                 {{ Twig.do("include 'Ceres::ItemList.Partials.LoadingAnimation'") }}
-                                <div id="dynamic-twig-content">
+                                <div id="dynamic-twig-content{{ Twig.print('orderDetailModalId') }}">
                                     {# DYNAMIC ADD CONTENT #}
                                 </div>
                             </div>
