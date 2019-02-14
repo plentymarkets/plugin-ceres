@@ -1,25 +1,20 @@
 <script type="x/template" id="vue-account-settings">
     <div class="card-body">
-        <div class="row  mb-3">
-            <div class="col-sm-4">
-                <strong>{{ trans("Ceres::Template.myAccountEmail") }}</strong>
-            </div>
-            <div class="col-sm-8">
-                <span>${ userData.email }</span>
-            </div>
+ 
+        <div><strong>{{ trans("Ceres::Template.myAccountEmail") }}</strong></div>
+        <div>${ userData.email }</div>
+        <div><strong>{{ trans("Ceres::Template.myAccountPassword") }}</strong></div>
+        <div>***********</div>
+
+        <div class="add-item">
+            <span class="item-edit">
+                <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountChangeSettings") }}" class="btn btn-medium btn-only-icon-xs-down" :class="'btn-' + appearance" @click="showChangeAccountSettings">
+                    <span>{{ trans("Ceres::Template.myAccountChangeSettings") }}</span>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+            </span>
         </div>
 
-        <div class="row">
-            <div class="col-sm-4">
-                <strong>{{ trans("Ceres::Template.myAccountPassword") }}</strong>
-            </div>
-            <div class="col-sm-8">
-                <span>***********</span>
-            </div>
-        </div>
-        <span class="item-edit" @click="showChangeAccountSettings" data-toggle="tooltip" data-placement="right" title="{{ trans("Ceres::Template.myAccountChangeSettings") }}">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-        </span>
         <!-- EDIT_MODAL -->
         <div ref="accountSettingsModal">
             <div class="modal fade" data-backdrop="static">
@@ -45,7 +40,11 @@
                                         <label for="confirm_password">{{ trans("Ceres::Template.myAccountRepeatPassword") }}</label>
                                     </div>
                                 </div>
-                                <div v-show="!matchPassword" style="color: red;">{{ trans("Ceres::Template.myAccountCorrectPassword") }}</div>
+                            </div>
+                             <div class="row my-2">
+                                <div class="col-12">
+                                    <div v-show="!matchPassword" class="text-danger">{{ trans("Ceres::Template.myAccountCorrectPassword") }}</div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">

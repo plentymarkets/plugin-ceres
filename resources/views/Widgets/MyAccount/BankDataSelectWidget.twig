@@ -1,0 +1,21 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+
+{{ Twig.component("Ceres::MyAccount.Components.BankDataSelect") }}
+
+{{ Twig.set("userBankData", Twig.call("services.contactBank.getBanksOfContact", ["$frontend.Account.AccountContactId"])) }}
+{% set appearance = widget.settings.appearance.mobile %}
+{% set hintText = widget.settings.text.mobile %}
+
+<div class="widget widget-bank-details">
+    <h4>
+        {{ Twig.trans("Ceres::Template.myAccountBankDetails") }}
+    </h4>
+    {% if hintText is not empty %}
+        {{ hintText | raw }}
+    {% else %}
+        <p class="text-muted small font-italic">{{ Twig.trans("Ceres::Template.myAccountChangePaymentInformation") }}</p>
+    {% endif %}
+    <bank-data-select appearance="{{ appearance | default("primary") }}" :user-bank-data="{{ Twig.print("userBankData | json_encode") }}" contact-id="{{ Twig.print("frontend.Account.AccountContactId | json_encode") }}"></bank-data-select>
+</div>
