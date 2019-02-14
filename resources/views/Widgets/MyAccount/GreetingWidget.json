@@ -7,6 +7,36 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\GreetingWidget",
     "settings": {
-        
+        "salutation": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "fs",
+            "options": {
+                "name": "Widget.greetingWidgetSalutationStyle",
+                "tooltipText": "Widget.greetingWidgetSalutationStyleTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "fs",
+                        "caption": "Widget.greetingWidgetForenameSurname"
+                    },
+                    {
+                        "value": "f",
+                        "caption": "Widget.greetingWidgetForename"
+                    },
+                    {
+                        "value": "sf",
+                        "caption": "Widget.greetingWidgetSurnameForename"
+                    },
+                    {
+                        "value": "ts",
+                        "caption": "Widget.greetingWidgetTitleSurname"
+                    },
+                    {
+                        "value": "e",
+                        "caption": "Widget.greetingWidgetEmail"
+                    }
+                ]
+            }
+        }
     }
 }

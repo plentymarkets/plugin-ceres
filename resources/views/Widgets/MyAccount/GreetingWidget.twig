@@ -2,12 +2,62 @@
 
 {{ Twig.set("userObject", Twig.call("services.customer.getContact" )) }}
 
+{% set style = widget.settings.salutation.mobile %}
+
 <div class="widget widget-greeting">
-    {% if frontend.Account.getIsAccountLoggedIn %}
-        {% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
-            <span class="text-muted">{{ trans("Ceres::Template.myAccountHello", {"username": userObject.firstName ~ " " ~ userObject.lastName}) }}</span>
-        {% else %}
-            <span class="text-muted">{{ trans("Ceres::Template.myAccountHello", {"username": userObject.email}) }}</span>
-        {% endif %}
+
+    <span>{{ style }}</span>
+    
+    {# {{ Twig.if("(userObject.gender == 'female') | json_encode")  }}
+        <p>Dieses1</p>
+    {{ Twig.else() }}
+        <p>Jenes1</p>
+    {{ Twig.endif() }}
+    {{ Twig.if("userObject.gender == 'female'")  }}
+        <p>Dieses2</p>
+    {{ Twig.else() }}
+        <p>Jenes2</p>
+    {{ Twig.endif() }}
+    {{ Twig.if("userObject.gender == 'female' | json_encode")  }}
+        <p>Dieses3</p>
+    {{ Twig.else() }}
+        <p>Jenes3</p>
+    {{ Twig.endif() }} #}
+
+    {% if style == "fs" %}
+        {{ Twig.if ("userObject.firstName | length > 0 and userObject.lastName | length > 0") }}
+            {{ Twig.set("name", "userObject.firstName ~ ' ' ~ userObject.lastName" ) }}
+        {{ Twig.endif() }}
+    {% elseif style == "f" %}
+        {{ Twig.if ("userObject.firstName | length > 0") }}
+            {{ Twig.set("name", "userObject.firstName" ) }}
+        {{ Twig.endif() }}
+    {% elseif style == "sf" %}
+        {{ Twig.if ("userObject.firstName | length > 0 and userObject.lastName | length > 0") }}
+            {{ Twig.set("name", "userObject.lastName ~ ', ' ~ userObject.firstName" ) }}
+        {{ Twig.endif() }}
+    {% elseif style == "ts" %}
+        {{ Twig.if ("userObject.gender | length > 0 and userObject.lastName | length > 0") }}
+            {{ Twig.if("userObject.gender == 'male'")  }}
+                {# {{ Twig.set("name", "Twig.trans('Ceres::Widget.greetingWidgetMale') ~ ' ' ~ userObject.lastName" ) }} #}
+                {# {{ Twig.set("name", Twig.trans('Ceres::Widget.greetingWidgetMale') ~ ' ' ~ userObject.lastName ) }} #}
+                {{ Twig.set("name", "trans('Ceres::Widget.greetingWidgetMale') ~ ' ' ~ userObject.lastName" ) }}
+            {{ Twig.endif() }}
+
+            {{ Twig.if("userObject.gender == 'female'")  }}
+                {# {{ Twig.set("name", "Twig.trans('Ceres::Widget.greetingWidgetFemale') ~ ' ' ~ userObject.lastName" ) }} #}
+                {# {{ Twig.set("name", Twig.trans('Ceres::Widget.greetingWidgetFemale') ~ ' ' ~ userObject.lastName ) }}  #}
+                {{ Twig.set("name", "trans('Ceres::Widget.greetingWidgetFemale') ~ ' ' ~ userObject.lastName" ) }}
+            {{ Twig.endif() }}
+        {{ Twig.endif() }}
+    {% elseif style == "e" %}
+        {{ Twig.if ("userObject.email | length > 0") }}
+            {{ Twig.set("name", "userObject.email" ) }}
+        {{ Twig.endif() }}
     {% endif %}
+
+    {{ Twig.if("frontend.Account.getIsAccountLoggedIn") }}
+        <span class="text-muted">{{ Twig.trans("Ceres::Template.myAccountHello", {"username": Twig.var("name")}) }}</span>
+    {{ Twig.endif() }}
+
 </div>
