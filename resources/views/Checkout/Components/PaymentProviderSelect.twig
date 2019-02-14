@@ -5,13 +5,13 @@
                 <input
                         type="radio"
                         :id="'paymentMethod' + _uid + paymentProvider.id"
-                        name="MethodOfPaymentID"
+                        :name="'MethodOfPaymentID' + _uid"
                         :value="paymentProvider.id"
                         @change="onPaymentProviderChange(paymentProvider)"
                         :checked="methodOfPaymentId === paymentProvider.id"
                         :disabled="!paymentProvider.isSelectable"
                 >
-                <label :for="'paymentMethod' + _uid + paymentProvider.id">
+                <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id">
                     <div class="icon">
                         <div class="square-container">
                             <div class="square-inner center-xy">

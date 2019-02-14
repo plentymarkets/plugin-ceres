@@ -7,7 +7,12 @@
     "position": 700,
     "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
     "settings": {
-        "appearance": "@include(appearance)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
         "headlineStyle": {
             "type": "select",
             "required": true,
@@ -75,8 +80,7 @@
                 ]
             }
         },
-        "manufacturerId":
-        {
+        "manufacturerId": {
             "type": "manufacturer",
             "required": false,
             "isVisible": "listType === 'manufacturer'",
@@ -194,6 +198,16 @@
                         "value": "item.random",
                         "caption": "Widget.itemRandom",
                         "position": 15
+                    },
+                    {
+                        "value": "variation.position_asc",
+                        "caption": "Widget.itemVariationTopseller_asc",
+                        "position": 16
+                    },
+                    {
+                        "value": "variation.position_desc",
+                        "caption": "Widget.itemVariationTopseller_desc",
+                        "position": 17
                     }
                 ]
             }

@@ -8,18 +8,34 @@ Vue.component("invoice-address-select", {
     template: `
         <address-select 
             ref="invoice"
-            template="#vue-address-select"
-            v-on:address-changed="addressChanged"
+            @address-changed="addressChanged"
             address-type="1"
-            :show-error='showError'>
+            :show-error="showError"
+            :optional-address-fields="optionalAddressFields"
+            :required-address-fields="requiredAddressFields">
         </address-select>
     `,
 
-    props: [
-        "selectedAddressId",
-        "addressList",
-        "hasToValidate"
-    ],
+    props: {
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        hasToValidate: {
+            type: String,
+            default: false
+        }
+    },
 
     computed: Vuex.mapState({
         billingAddressId: state => state.address.billingAddressId,
@@ -31,8 +47,6 @@ Vue.component("invoice-address-select", {
      */
     created()
     {
-        this.$store.dispatch("initBillingAddress", { id: this.selectedAddressId, addressList: this.addressList });
-
         if (this.hasToValidate)
         {
             this.$store.commit("setInvoiceAddressValidator", this.validate);
@@ -63,14 +77,14 @@ Vue.component("invoice-address-select", {
         {
             this.$store.dispatch("selectAddress", { selectedAddress, addressType: "1" })
                 .then(
-                response =>
-                {
-                    document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: this.billingAddressId }));
-                },
-                error =>
-                {
+                    response =>
+                    {
+                        document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: this.billingAddressId }));
+                    },
+                    error =>
+                    {
 
-                });
+                    });
 
             if (this.hasToValidate)
             {

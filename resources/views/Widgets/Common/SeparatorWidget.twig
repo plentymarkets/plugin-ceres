@@ -1,3 +1,16 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set inlineSpacings = WidgetHelper.getInlineSpacings( widget.settings, false, true ) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses( widget.settings, false, true ) %}
+
 {% if isPreview %}<div class="widget-editable-min-height">{% endif %}
-    <hr class="my-4">
+    <hr{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{% if spacingClasses | length > 0 %} class="{{ spacingClasses }}"{% endif %}>
 {% if isPreview %}</div>{% endif %}
+
+
+
+
+
+
+
+

@@ -12,9 +12,11 @@ export default function(store)
         const event = new CustomEvent(eventName, { detail: { payload: mutation.payload, newState: nextState, oldState } });
 
         document.dispatchEvent(event);
+        document.dispatchEvent(
+            new CustomEvent("storeChanged", { detail: { payload: mutation.payload, newState: nextState, oldState } })
+        );
 
         NotificationService.log(eventName);
-
         oldState = nextState;
     });
 }
