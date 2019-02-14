@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="add-item">
-                <button href="#" class="btn btn-primary btn-only-icon-xs-down" @click.prevent="openAddBank()">
+                <button href="#" class="btn btn-only-icon-xs-down" :class="'btn-' + appearance" @click.prevent="openAddBank()">
                     <span>{{ trans("Ceres::Template.myAccountBankAddDataTitle") }}</span>
                     <i class="fa fa-plus-square" aria-hidden="true"></i>
                 </button>

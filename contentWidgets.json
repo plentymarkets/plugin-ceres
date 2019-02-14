@@ -2939,5 +2939,17 @@
                 }
             }
         }
+    },
+    {
+        "identifier": "Ceres::BankDetailsWidget",
+        "label": "Template.myAccountBankDetails",
+        "previewImageURL": "/images/widgets/bankDetails.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\BankDetailsWidget",
+        "settings": {}
     }
 ]
