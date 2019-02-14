@@ -1,0 +1,9 @@
+{% set appearance = widget.settings.appearance.mobile %}
+{% set buttonSize = widget.settings.buttonSize.mobile %}
+
+<div class="widget widget-logout-button">
+    <a href="#" class="btn btn-block btn-{{ appearance | default("danger") }} btn-{{ buttonSize }}" v-logout>
+        <span>{{ trans("Ceres::Template.myAccountLogout") }}</span>
+        <i class="fa fa-sign-out"></i>
+    </a>
+</div>
