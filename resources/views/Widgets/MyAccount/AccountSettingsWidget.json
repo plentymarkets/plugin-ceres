@@ -7,7 +7,11 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
     "settings": {
-        "appearance": "@include(appearance)",
+        "appearance": { 
+            "type": "select", 
+            "defaultValue": "primary", 
+            "options": "@include(appearance)" 
+        },
         "text": {
             "type": "codeEditor",
             "options": {
