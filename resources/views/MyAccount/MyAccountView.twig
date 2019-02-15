@@ -39,10 +39,6 @@
         }
     %}
 
-deliveryAddressList: Array,
-selectedDeliveryAddress: Number,
-billingAddressList: Array,
-selectedBillingAddress: Number
     <my-account
         :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
         :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
