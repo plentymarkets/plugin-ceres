@@ -1161,6 +1161,16 @@
                             "value": "item.random",
                             "caption": "Widget.itemRandom",
                             "position": 15
+                        },
+                        {
+                            "value": "variation.position_asc",
+                            "caption": "Widget.itemVariationTopseller_asc",
+                            "position": 16
+                        },
+                        {
+                            "value": "variation.position_desc",
+                            "caption": "Widget.itemVariationTopseller_desc",
+                            "position": 17
                         }
                     ]
                 }

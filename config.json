@@ -1628,6 +1628,14 @@
                                 "caption": "Config.sortDataRecommendedSorting"
                             },
                             {
+                                "value": "variation.position_asc",
+                                "caption": "Config.sortDataTopsellerAsc"
+                            },
+                            {
+                                "value": "variation.position_desc",
+                                "caption": "Config.sortDataTopsellerDesc"
+                            },
+                            {
                                 "value": "texts.name1_asc",
                                 "caption": "Config.sortDataNameAsc"
                             },
@@ -1696,6 +1704,14 @@
                             {
                                 "value": "default.recommended_sorting",
                                 "caption": "Config.sortDataRecommendedSorting"
+                            },
+                            {
+                                "value": "variation.position_asc",
+                                "caption": "Config.sortDataTopsellerAsc"
+                            },
+                            {
+                                "value": "variation.position_desc",
+                                "caption": "Config.sortDataTopsellerDesc"
                             },
                             {
                                 "value": "texts.name1_asc",
@@ -2108,6 +2124,14 @@
                             {
                                 "value": "default.recommended_sorting",
                                 "caption": "Config.sortDataRecommendedSorting"
+                            },
+                            {
+                                "value": "variation.position_asc",
+                                "caption": "Config.sortDataTopsellerAsc"
+                            },
+                            {
+                                "value": "variation.position_desc",
+                                "caption": "Config.sortDataTopsellerDesc"
                             },
                             {
                                 "value": "texts.name1_asc",
