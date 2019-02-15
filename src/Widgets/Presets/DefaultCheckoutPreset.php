@@ -37,7 +37,6 @@ class DefaultCheckoutPreset implements ContentPreset
         $this->createContactWishWidget();
         $this->createShippingPrivacyCheckWidget();
         $this->createGtcCheckWidget();
-        $this->createAsteriks();
         $this->createBasketWidget();
         $this->createSeparatorWidget('second');
         $this->createCouponWidget();
@@ -46,6 +45,8 @@ class DefaultCheckoutPreset implements ContentPreset
         $this->createBasketTotalsWidget();
         $this->createPlaceOrderWidget();
         
+        $this->createAsteriks();
+
         return $this->preset->toArray();
     }
     
@@ -130,9 +131,17 @@ class DefaultCheckoutPreset implements ContentPreset
     private function createAsteriks()
     {
         $text = '&#42;)&nbsp;{{ trans("Ceres::Template.contactRequiredField") }}';
-        $this->twoColumnWidget->createChild('first','Ceres::TextWidget')
+        $this->preset->createWidget('Ceres::TextWidget')
                               ->withSetting("text", $text)
-                              ->withSetting("appearance", "none");
+                              ->withSetting("appearance", "none")
+                              ->withSetting("customPadding", true)
+                              ->withSetting("padding.top.value", 0)
+                              ->withSetting("padding.top.unit", null)
+                              ->withSetting("padding.bottom.value", 0)
+                              ->withSetting("padding.bottom.unit", null)
+                              ->withSetting("customMargin", true)
+                              ->withSetting("margin.bottom.value", 0)
+                              ->withSetting("margin.bottom.unit", null);                              
     }
     
     private function createHeadline()
