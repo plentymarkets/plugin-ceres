@@ -32,7 +32,7 @@ Vue.component("invoice-address-select", {
             }
         },
         hasToValidate: {
-            type: String,
+            type: Boolean,
             default: false
         }
     },
