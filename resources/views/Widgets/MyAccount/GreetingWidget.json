@@ -2,37 +2,33 @@
     "identifier": "Ceres::GreetingWidget",
     "label": "Widget.greetingWidgetLabel",
     "previewImageURL": "/images/widgets/greeting.svg",
-    "type": "static",
-    "categories": ["static"],
+    "type": "default",
+    "categories": ["customer"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\GreetingWidget",
     "settings": {
         "salutation": {
             "type": "select",
             "required": true,
-            "defaultValue": "fs",
+            "defaultValue": "firstname_surname",
             "options": {
                 "name": "Widget.greetingWidgetSalutationStyle",
                 "tooltipText": "Widget.greetingWidgetSalutationStyleTooltip",
                 "listBoxValues": [
                     {
-                        "value": "fs",
+                        "value": "firstname_surname",
                         "caption": "Widget.greetingWidgetForenameSurname"
                     },
                     {
-                        "value": "f",
+                        "value": "firstname",
                         "caption": "Widget.greetingWidgetForename"
                     },
                     {
-                        "value": "sf",
-                        "caption": "Widget.greetingWidgetSurnameForename"
-                    },
-                    {
-                        "value": "ts",
+                        "value": "title_surname",
                         "caption": "Widget.greetingWidgetTitleSurname"
                     },
                     {
-                        "value": "e",
+                        "value": "email",
                         "caption": "Widget.greetingWidgetEmail"
                     }
                 ]

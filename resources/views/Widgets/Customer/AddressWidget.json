@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/address.svg",
     "type": "customer",
     "categories": ["customer"],
-    "position": 100,
+    "position": 200,
     "widgetClass": "Ceres\\Widgets\\Customer\\AddressWidget",
     "settings": {
         "appearance": {
