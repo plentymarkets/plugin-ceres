@@ -130,14 +130,14 @@ class DefaultCheckoutPreset implements ContentPreset
     
     private function createAsteriks()
     {
-        $text = '&#42;)&nbsp;{{ trans("Ceres::Template.contactRequiredField") }}';
+        $text = '*)&nbsp;{{ trans("Ceres::Template.contactRequiredField") }}';
         $this->preset->createWidget('Ceres::TextWidget')
                               ->withSetting("text", $text)
                               ->withSetting("appearance", "none")
                               ->withSetting("customPadding", true)
-                              ->withSetting("padding.top.value", 0)
+                              ->withSetting("padding.top.value", 2)
                               ->withSetting("padding.top.unit", null)
-                              ->withSetting("padding.bottom.value", 0)
+                              ->withSetting("padding.bottom.value", 2)
                               ->withSetting("padding.bottom.unit", null)
                               ->withSetting("customMargin", true)
                               ->withSetting("margin.bottom.value", 0)
