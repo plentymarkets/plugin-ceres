@@ -19837,6 +19837,9 @@ Vue.component("invoice-address-select", {
     billingAddressId: function billingAddressId(state) {
       return state.address.billingAddressId;
     },
+    billingAddressList: function billingAddressList(state) {
+      return state.address.billingAddressList;
+    },
     showError: function showError(state) {
       return state.checkout.validation.invoiceAddress.showError;
     }
@@ -19858,7 +19861,7 @@ Vue.component("invoice-address-select", {
     var _this = this;
 
     this.$nextTick(function () {
-      if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
+      if (App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
         _this.$refs.invoice.showAddModal("initial");
       }
     });
