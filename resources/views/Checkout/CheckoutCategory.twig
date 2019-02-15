@@ -14,7 +14,7 @@
 
     {% set shopBuilderTemplate = shop_builder_category_template(category.id, "checkout") %}
     {% if shopBuilderTemplate | trim is not empty %}
-        <div class="page-content checkout container-max">
+        <div class="container-max checkout">
             <div class="row">
                 <div class="col">
                     <checkout
@@ -24,7 +24,9 @@
                         :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
                         :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
                         :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
-                            {{ shopBuilderTemplate | raw }}
+                            <div slot-scope="checkoutComp">
+                                {{ shopBuilderTemplate | raw }}
+                            </div>
                     </checkout>
                 </div>
             </div>
@@ -37,7 +39,9 @@
             :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
             :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
             :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
-            {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
+                <div slot-scope="checkoutComp">
+                    {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
+                </div>
         </checkout>
     {% endif %}
 

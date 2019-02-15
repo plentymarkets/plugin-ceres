@@ -1,6 +1,7 @@
 import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
+import { pathnameEquals } from "../../helper/url";
 const NotificationService = require("services/NotificationService");
 
 const state =
@@ -200,9 +201,9 @@ const actions =
                         commit("setIsBasketLoading", false);
                         resolve(basketItems);
 
-                        if (window.location.pathname === "/checkout" && !basketItems.length)
+                        if (pathnameEquals(App.urls.checkout) && !basketItems.length)
                         {
-                            navigateTo("/basket");
+                            navigateTo(App.urls.basket);
                         }
                     })
                     .fail(error =>

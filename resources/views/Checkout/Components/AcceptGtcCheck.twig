@@ -22,11 +22,11 @@
             -->{% endset %}
 
                 {{ trans("Ceres::Template.checkoutChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}<!--
-                --><template v-if="isRequired">*</template>
+                --><template v-if="isRequired && !hideCheckbox">
+                    <sup>*</sup>
+                </template>
             {% endautoescape %}
         </label>
-        <label v-else class="form-check-label" :for="'gtc-accept' + _uid">
-            ${ customText }<template v-if="isRequired">*</template>
-        </label>
+        <label v-else class="form-check-label" :for="'gtc-accept' + _uid" v-html="customText"></label>
     </div>
 </script>

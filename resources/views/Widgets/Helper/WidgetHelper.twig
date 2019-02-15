@@ -1,11 +1,73 @@
-{% macro getInlineSpacings( spacingValue, spacingType ) %}
+{% macro _getInlineSpacings( spacingValue, spacingType ) %}
     {%- for direction in ["top", "right", "bottom", "left"] if spacingValue[direction].unit is defined and spacingValue[direction].unit.mobile is not null %}
         {{- spacingType | default("margin") }}-{{ direction }}: {{ spacingValue[direction].value.mobile }}{{ spacingValue[direction].unit.mobile ~ "; " -}}
     {% endfor -%}
 {% endmacro %}
 
-{% macro getSpacingClasses( spacingValue, classPrefix ) -%}
-    {%- for d, direction in {"t": "top", "r": "right", "b": "bottom", "l": "left"} if spacingValue[direction].unit is defined and spacingValue[direction].unit.mobile is null and spacingValue[direction].value.mobile > 0 %}
+{% macro _getSpacingClasses( spacingValue, classPrefix ) -%}
+    {%- for d, direction in {"t": "top", "r": "right", "b": "bottom", "l": "left"} if spacingValue[direction].unit is defined and spacingValue[direction].unit.mobile is null %}
         {{- classPrefix | default("m") }}{{ d }}-{{ spacingValue[direction].value.mobile ~ " " -}}
     {%- endfor -%}
+{% endmacro %}
+
+{% macro getInlineSpacings( widgetSettings, paddingKey, marginKey ) %}
+{% set result %}
+    {% import _self as WidgetHelper %}
+
+    {% set padding = "" %}
+    {% if paddingKey != false %}
+        {% set paddingKey = paddingKey | default("padding") %}
+        {% if paddingKey == true %}
+            {% set paddingKey = "padding" %}
+        {% endif %}
+        {% if widgetSettings[paddingKey] is defined %}
+            {% set padding = WidgetHelper._getInlineSpacings( widgetSettings[paddingKey], "padding" ) | trim %}
+        {% endif %}
+    {% endif %}
+
+    {% set margin = "" %}
+    {% if marginKey != false %}
+        {% set marginKey = marginKey | default("margin") %}
+        {% if marginKey == true %}
+            {% set marginKey = "margin" %}
+        {% endif %}
+        {% if widgetSettings[marginKey] is defined %}
+            {% set margin = WidgetHelper._getInlineSpacings( widgetSettings[marginKey], "margin" ) | trim %}
+        {% endif %}
+    {% endif %}
+
+    {{- padding | trim ~ " " ~ margin | trim -}}
+    {% endset %}
+{{- result | trim -}}
+{% endmacro %}
+
+{% macro getSpacingClasses( widgetSettings, paddingKey, marginKey ) %}
+{% set result %}
+    {% import _self as WidgetHelper %}
+
+    {% set padding = "" %}
+    {% if paddingKey != false %}
+        {% set paddingKey = paddingKey | default("padding") %}
+        {% if paddingKey == true %}
+            {% set paddingKey = "padding" %}
+        {% endif %}
+        {% if widgetSettings[paddingKey] is defined %}
+            {% set padding = WidgetHelper._getSpacingClasses( widgetSettings[paddingKey], "p" ) | trim %}
+        {% endif %}
+    {% endif %}
+
+    {% set margin = "" %}
+    {% if marginKey != false %}
+        {% set marginKey = marginKey | default("margin") %}
+        {% if marginKey == true %}
+            {% set marginKey = "margin" %}
+        {% endif %}
+        {% if widgetSettings[marginKey] is defined %}
+            {% set margin = WidgetHelper._getSpacingClasses( widgetSettings[marginKey], "m" ) | trim %}
+        {% endif %}
+    {% endif %}
+
+    {{- padding | trim ~ " " ~ margin | trim -}}
+{% endset %}
+{{- result | trim -}}
 {% endmacro %}

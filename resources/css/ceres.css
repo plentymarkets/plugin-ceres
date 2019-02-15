@@ -21783,10 +21783,12 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   content: "";
   font-family: FontAwesome;
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  bottom: 50%;
+  right: 50%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -21819,6 +21821,14 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 .component-loading.isLoading:after {
   opacity: 1;
   visibility: visible;
+}
+
+/* IE Compatibility */
+html.ie .component-loading.with-icon:after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .qty-box {
@@ -24886,6 +24896,11 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   .footer .widget-grid .widget-inner:not(:last-child) .widget-list .widget-inner {
     padding-bottom: 0;
   }
+}
+
+.checkout .widget-grid .widget-inner > div {
+  background-color: #fff;
+  padding: 1rem;
 }
 
 .widget {

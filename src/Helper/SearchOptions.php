@@ -28,7 +28,9 @@ class SearchOptions
         "item.manufacturer.externalName_asc"        => "itemProducerName_asc",
         "item.manufacturer.externalName_desc"       => "itemProducerName_desc",
         "item.score"                                => "itemRelevance",
-        "item.random"                               => "itemRandom"
+        "item.random"                               => "itemRandom",
+        "variation.position_asc"                    => "itemVariationTopseller_asc",
+        "variation.position_desc"                   => "itemVariationTopseller_desc",
     ];
 
     public $itemsPerPage        = [];
