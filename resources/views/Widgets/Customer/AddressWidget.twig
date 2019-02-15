@@ -24,7 +24,7 @@
                     "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile | default([])
                 } %}
                 <invoice-address-select
-                    has-to-validate="true"
+                    :has-to-validate="true"
                     :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
                     :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
                 </invoice-address-select>
