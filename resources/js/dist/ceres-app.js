@@ -18180,10 +18180,26 @@ Vue.component("checkout", {
       type: Object,
       required: true
     },
-    deliveryAddressList: Array,
-    selectedDeliveryAddress: Number,
-    billingAddressList: Array,
-    selectedBillingAddress: Number
+    deliveryAddressList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    selectedDeliveryAddress: {
+      type: Number,
+      default: -99
+    },
+    billingAddressList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    selectedBillingAddress: {
+      type: Number,
+      default: 0
+    }
   },
   computed: Vuex.mapState({
     checkout: function checkout(state) {
@@ -19813,7 +19829,7 @@ Vue.component("invoice-address-select", {
       }
     },
     hasToValidate: {
-      type: String,
+      type: Boolean,
       default: false
     }
   },
@@ -23957,10 +23973,26 @@ Vue.component("history", {
 Vue.component("my-account", {
   template: "\n    <div>\n        <slot>\n        </slot>\n    </div>\n    ",
   props: {
-    deliveryAddressList: Array,
-    selectedDeliveryAddress: Number,
-    billingAddressList: Array,
-    selectedBillingAddress: Number
+    deliveryAddressList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    selectedDeliveryAddress: {
+      type: Number,
+      default: -99
+    },
+    billingAddressList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    selectedBillingAddress: {
+      type: Number,
+      default: 0
+    }
   },
   created: function created() {
     this.$store.dispatch("initBillingAddress", {
