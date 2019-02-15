@@ -24,7 +24,9 @@
                         :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
                         :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
                         :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
-                            {{ shopBuilderTemplate | raw }}
+                            <div slot-scope="checkoutComp">
+                                {{ shopBuilderTemplate | raw }}
+                            </div>
                     </checkout>
                 </div>
             </div>
@@ -37,7 +39,9 @@
             :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
             :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
             :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
-            {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
+                <div slot-scope="checkoutComp">
+                    {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
+                </div>
         </checkout>
     {% endif %}
 
