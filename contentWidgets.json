@@ -2887,7 +2887,7 @@
     },
     {
         "identifier": "Ceres::AccountSettingsWidget",
-        "label": "Widget.accountSettingsLabel",
+        "label": "Widget.myAccountAccountSettingsLabel",
         "previewImageURL": "/images/widgets/accountSettings.svg",
         "type": "myaccount",
         "categories": [
@@ -2895,7 +2895,50 @@
         ],
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
-        "settings": {}
+        "settings": {
+            "appearance": {
+                "name": "Widget.widgetAppearanceLabel",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "primary",
+                        "caption": "Widget.widgetAppearancePrimary",
+                        "position": 0
+                    },
+                    {
+                        "value": "secondary",
+                        "caption": "Widget.widgetAppearanceSecondary",
+                        "position": 1
+                    },
+                    {
+                        "value": "success",
+                        "caption": "Widget.widgetAppearanceSuccess",
+                        "position": 2
+                    },
+                    {
+                        "value": "info",
+                        "caption": "Widget.widgetAppearanceInfo",
+                        "position": 3
+                    },
+                    {
+                        "value": "warning",
+                        "caption": "Widget.widgetAppearanceWarning",
+                        "position": 4
+                    },
+                    {
+                        "value": "danger",
+                        "caption": "Widget.widgetAppearanceDanger",
+                        "position": 5
+                    }
+                ]
+            },
+            "text": {
+                "type": "codeEditor",
+                "options": {
+                    "name": "Widget.myAccountHintTextLabel"
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::BankDetailsWidget",

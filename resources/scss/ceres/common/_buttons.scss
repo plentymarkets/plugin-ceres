@@ -108,14 +108,8 @@ button:focus {
 		margin-top: 1px;
 	}
 
-	&.btn-remove-address {
-		background-color: $danger;
-		margin-right: -5px;
-		color: #fff;
-
-		&:hover{
-			background-color: #c9302c;
-		}
+	&.btn-danger:hover {
+		background-color: #c9302c;
 	}
 
 	&.btn-medium {
