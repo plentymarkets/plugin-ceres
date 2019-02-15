@@ -39,6 +39,7 @@ Vue.component("invoice-address-select", {
 
     computed: Vuex.mapState({
         billingAddressId: state => state.address.billingAddressId,
+        billingAddressList: state => state.address.billingAddressList,
         showError: state => state.checkout.validation.invoiceAddress.showError
     }),
 
@@ -60,7 +61,7 @@ Vue.component("invoice-address-select", {
     {
         this.$nextTick(() =>
         {
-            if (App.isCheckoutView && this.addressList && this.addressList.length <= 0)
+            if (App.isCheckoutView && this.billingAddressList && this.billingAddressList.length <= 0)
             {
                 this.$refs.invoice.showAddModal("initial");
             }
