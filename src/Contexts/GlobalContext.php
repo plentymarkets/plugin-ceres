@@ -15,6 +15,7 @@ use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
 use IO\Services\UrlService;
 use IO\Services\WebstoreConfigurationService;
+use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
 use Plenty\Plugin\Http\Request;
 
 class GlobalContext implements ContextInterface
