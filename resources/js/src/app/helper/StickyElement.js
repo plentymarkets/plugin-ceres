@@ -112,6 +112,10 @@ export class StickyElement
 
     checkElement(skipOffsetCalculation)
     {
+        if (isNullOrUndefined(this.el) || isNullOrUndefined(this.placeholder))
+        {
+            return;
+        }
         const oldValue          = this.position || {};
         const elementRect       = this.el.getBoundingClientRect();
         const placeholderRect   = this.placeholder.getBoundingClientRect();
