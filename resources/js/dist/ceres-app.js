@@ -19861,7 +19861,7 @@ Vue.component("invoice-address-select", {
     var _this = this;
 
     this.$nextTick(function () {
-      if (App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
+      if (!App.isShopBuilder && App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
         _this.$refs.invoice.showAddModal("initial");
       }
     });
