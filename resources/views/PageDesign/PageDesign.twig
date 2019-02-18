@@ -177,7 +177,7 @@
         defaultLanguage: "{{ defaultLanguage }}",
         decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
         urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
-        isShopBuilder: {{ isShopBuilder | json_encode }}
+        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }}
     };
 </script>
 

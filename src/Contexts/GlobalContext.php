@@ -19,8 +19,6 @@ use Plenty\Plugin\Http\Request;
 
 class GlobalContext implements ContextInterface
 {
-    use EnvironmentContext;
-
     protected $params = [];
 
     /** @var CeresConfig $ceresConfig  */
@@ -44,6 +42,7 @@ class GlobalContext implements ContextInterface
     public $homepageURL;
     public $splitItemBundle;
     public $templateEvent;
+    public $isShopBuilder;
 
     public function init($params)
     {
@@ -75,6 +74,9 @@ class GlobalContext implements ContextInterface
 
         /** @var CustomerService $customerService */
         $customerService = pluginApp(CustomerService::class);
+
+        /** @var ShopBuilderRequest $shopBuilderRequest */
+        $shopBuilderRequest = pluginApp(ShopBuilderRequest::class);
 
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
@@ -111,7 +113,7 @@ class GlobalContext implements ContextInterface
 
         $this->templateEvent = $templateService->getCurrentTemplate();
 
-        $this->initEnvironmentInformation();
+        $this->isShopBuilder = $shopBuilderRequest->isShopBuilder();
     }
 
     protected function getParam($key, $defaultValue = null)
