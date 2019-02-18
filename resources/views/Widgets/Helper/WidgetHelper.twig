@@ -80,8 +80,6 @@
     {% if urlType == 'category' %}
 
         {{ Twig.set("category", Twig.call("services.category.get", [urlValue])) }}
-
-        {{ Twig.set("name", "category.details[0].name") }}
         {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
 
     {% elseif urlType == 'item' %}
