@@ -52,7 +52,7 @@
 
                             {% if services.template.isCurrentTemplate("tpl.checkout") %}
                                 <div class="item-small-prices text-muted">
-                                    <template v-for="propertyGroup in variationPropertyGroups">
+                                    <template v-for="propertyGroup in basketItem.variation.data.transformedVariationPropGroups">
                                         <div v-for="property in propertyGroup.properties">
                                             <strong v-if="propertyGroup.name">${ propertyGroup.name }:</strong>
                                             <span>${ property.names.name }</span>

@@ -1,6 +1,7 @@
 import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
+import { transformBasketItems } from "../../services/VariationPropertyService";
 const NotificationService = require("services/NotificationService");
 
 const state =
@@ -31,7 +32,7 @@ const mutations =
 
         setBasketItems(state, basketItems)
         {
-            state.items = basketItems;
+            state.items = transformBasketItems(basketItems, ["empty"], "displayInOrderProcess");
         },
 
         addBasketItem(state, basketItem)
