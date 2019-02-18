@@ -413,24 +413,24 @@
             "buttonSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "",
+                "defaultValue": "md",
                 "options": {
-                    "name": "Widget.placeOrderButtonSizeLabel",
-                    "tooltipText": "Widget.placeOrderButtonSizeTooltip",
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
                     "listBoxValues": [
                         {
                             "value": "sm",
-                            "caption": "Widget.placeOrderButtonSizeSm",
+                            "caption": "Widget.widgetButtonSizeSm",
                             "position": 0
                         },
                         {
-                            "value": "",
-                            "caption": "Widget.placeOrderButtonSizeNormal",
+                            "value": "md",
+                            "caption": "Widget.widgetButtonSizeNormal",
                             "position": 1
                         },
                         {
                             "value": "lg",
-                            "caption": "Widget.placeOrderButtonSizeLg",
+                            "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
                         }
                     ]
@@ -1947,7 +1947,7 @@
         "categories": [
             "customer"
         ],
-        "position": 100,
+        "position": 200,
         "widgetClass": "Ceres\\Widgets\\Customer\\AddressWidget",
         "settings": {
             "appearance": {
@@ -2611,6 +2611,11 @@
                             "value": "sevenToFive",
                             "caption": "Widget.gridTwoColumnLayoutSevenToFive",
                             "position": 4
+                        },
+                        {
+                            "value": "nineToThree",
+                            "caption": "Widget.gridTwoColumnLayoutNineToThree",
+                            "position": 5
                         }
                     ]
                 }
@@ -2945,40 +2950,44 @@
         "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
         "settings": {
             "appearance": {
-                "name": "Widget.widgetAppearanceLabel",
-                "tooltipText": "Widget.widgetAppearanceTooltip",
-                "listBoxValues": [
-                    {
-                        "value": "primary",
-                        "caption": "Widget.widgetAppearancePrimary",
-                        "position": 0
-                    },
-                    {
-                        "value": "secondary",
-                        "caption": "Widget.widgetAppearanceSecondary",
-                        "position": 1
-                    },
-                    {
-                        "value": "success",
-                        "caption": "Widget.widgetAppearanceSuccess",
-                        "position": 2
-                    },
-                    {
-                        "value": "info",
-                        "caption": "Widget.widgetAppearanceInfo",
-                        "position": 3
-                    },
-                    {
-                        "value": "warning",
-                        "caption": "Widget.widgetAppearanceWarning",
-                        "position": 4
-                    },
-                    {
-                        "value": "danger",
-                        "caption": "Widget.widgetAppearanceDanger",
-                        "position": 5
-                    }
-                ]
+                "type": "select",
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
             },
             "text": {
                 "type": "codeEditor",
@@ -2989,15 +2998,183 @@
         }
     },
     {
-        "identifier": "Ceres::BankDetailsWidget",
+        "identifier": "Ceres::BankDataSelectWidget",
         "label": "Template.myAccountBankDetails",
-        "previewImageURL": "/images/widgets/bankDetails.svg",
+        "previewImageURL": "/images/widgets/BankDataSelect.svg",
         "type": "myaccount",
         "categories": [
             "myaccount"
         ],
         "position": 100,
-        "widgetClass": "Ceres\\Widgets\\MyAccount\\BankDetailsWidget",
-        "settings": {}
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\BankDataSelectWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "text": {
+                "type": "codeEditor",
+                "options": {
+                    "name": "Widget.myAccountHintTextLabel"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::GreetingWidget",
+        "label": "Widget.greetingWidgetLabel",
+        "previewImageURL": "/images/widgets/greeting.svg",
+        "type": "default",
+        "categories": [
+            "customer"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\GreetingWidget",
+        "settings": {
+            "salutation": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "firstname_surname",
+                "options": {
+                    "name": "Widget.greetingWidgetSalutationStyle",
+                    "tooltipText": "Widget.greetingWidgetSalutationStyleTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "firstname_surname",
+                            "caption": "Widget.greetingWidgetForenameSurname"
+                        },
+                        {
+                            "value": "firstname",
+                            "caption": "Widget.greetingWidgetForename"
+                        },
+                        {
+                            "value": "title_surname",
+                            "caption": "Widget.greetingWidgetTitleSurname"
+                        },
+                        {
+                            "value": "email",
+                            "caption": "Widget.greetingWidgetEmail"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::LogoutButtonWidget",
+        "label": "Widget.logoutButtonLabel",
+        "previewImageURL": "/images/widgets/logout-button.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 700,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\LogoutButtonWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "danger",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "md",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "md",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            }
+        }
     }
 ]

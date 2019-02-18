@@ -23820,8 +23820,21 @@ var APIService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {
-  delimiters: ["${", "}"],
-  props: ["userData", "template"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-account-settings"
+    },
+    userData: {
+      type: Object,
+      // eslint-disable-next-line
+      default: function _default() {}
+    },
+    appearance: {
+      type: String,
+      default: "primary"
+    }
+  },
   data: function data() {
     return {
       newPassword: "",
@@ -23919,8 +23932,25 @@ var NotificationService = require("services/NotificationService");
 var ModalService = require("services/ModalService");
 
 Vue.component("bank-data-select", {
-  delimiters: ["${", "}"],
-  props: ["userBankData", "contactId", "template"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-bank-data-select"
+    },
+    userBankData: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    contactId: {
+      type: String
+    },
+    appearance: {
+      type: String,
+      default: "primary"
+    }
+  },
   data: function data() {
     return {
       bankInfoModal: {},
