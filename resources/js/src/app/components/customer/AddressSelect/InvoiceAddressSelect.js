@@ -61,7 +61,7 @@ Vue.component("invoice-address-select", {
     {
         this.$nextTick(() =>
         {
-            if (App.isCheckoutView && this.billingAddressList && this.billingAddressList.length <= 0)
+            if (!App.isShopBuilder && App.isCheckoutView && this.billingAddressList && this.billingAddressList.length <= 0)
             {
                 this.$refs.invoice.showAddModal("initial");
             }
