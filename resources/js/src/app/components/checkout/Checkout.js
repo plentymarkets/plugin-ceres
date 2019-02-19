@@ -5,10 +5,38 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("checkout", {
 
-    props: [
-        "template",
-        "initialCheckout"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-checkout"
+        },
+        initialCheckout: {
+            type: Object,
+            required: true
+        },
+        deliveryAddressList:
+        {
+            type: Array,
+            default: () =>
+            []
+        },
+        selectedDeliveryAddress:
+        {
+            type: Number,
+            default: -99
+        },
+        billingAddressList:
+        {
+            type: Array,
+            default: () =>
+            []
+        },
+        selectedBillingAddress:
+        {
+            type: Number,
+            default: 0
+        }
+    },
 
     computed: Vuex.mapState({
         checkout: state => state.checkout
@@ -17,7 +45,11 @@ Vue.component("checkout", {
     created()
     {
         this.$options.template = this.template;
+
         this.$store.dispatch("setCheckout", this.initialCheckout);
+        this.$store.dispatch("initBillingAddress", { id: this.selectedBillingAddress, addressList: this.billingAddressList });
+        this.$store.dispatch("initDeliveryAddress", { id: this.selectedDeliveryAddress, addressList: this.deliveryAddressList });
+
         this.addEventHandler();
     },
 

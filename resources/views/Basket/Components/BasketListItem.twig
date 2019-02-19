@@ -21,7 +21,7 @@
                 <div class="meta-container-wrapper-inner">
                     <div class="meta-container">
                         <div>
-                            <a :href="basketItem.variation.data | itemURL" class="item-name">
+                            <a :href="basketItem.variation.data | itemURL" class="item-name" :class="'text-' + appearance">
                                 ${ basketItem.variation.data | itemName }
                             </a>
 

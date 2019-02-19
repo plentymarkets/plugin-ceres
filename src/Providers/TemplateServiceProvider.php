@@ -7,6 +7,7 @@ use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
 use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
+use Ceres\Contexts\CheckoutContext;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
 use Ceres\Contexts\ItemWishListContext;
@@ -20,6 +21,7 @@ use Ceres\Hooks\CeresAfterBuildPlugins;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\CategoryKey;
 use IO\Helper\CategoryMap;
+use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
 use IO\Services\ContentCaching\Services\Container;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
@@ -47,8 +49,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],                 // provide template to use for single items
         'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],                       // provide template to use for basket
         'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],               // provide template to use for checkout
-        'tpl.category.checkout'             => ['Checkout.CheckoutCategory',              CategoryContext::class],               // provide template to use for container categories
-        'tpl.my-account'                    => ['MyAccount.MyAccount',                    GlobalContext::class],                 // provide template to use for my-account
+        'tpl.my-account'                    => ['MyAccount.MyAccountView',                GlobalContext::class],                 // provide template to use for my-account
         'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],          // provide template to use for confirmation
         'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],                      // provide template to use for login
         'tpl.register'                      => ['Customer.Register',                      GlobalContext::class],                   // provide template to use for register
@@ -83,17 +84,35 @@ class TemplateServiceProvider extends ServiceProvider
         $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
             if ( !$templateContainer->hasTemplate() )
             {
-                $templateName = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][0];
-                $templateContainer->setTemplate('Ceres::' . $templateName);
+                $template = $templateContainer->getTemplateKey();
+                if ( $template === 'tpl.checkout' && RouteConfig::getCategoryId(RouteConfig::CHECKOUT) > 0 )
+                {
+                    $templateContainer->setTemplate('Ceres::Checkout.CheckoutCategory');
+                }
+                else
+                {
+                    $templateContainer->setTemplate('Ceres::' . self::$templateKeyToViewMap[$template][0]);
+                }
             }
         }, self::EVENT_LISTENER_PRIORITY);
-        
+
         $eventDispatcher->listen('IO.ctx.*', function (TemplateContainer $templateContainer, $templateData = []) {
-            $templateContextClass = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][1];
+            $template = $templateContainer->getTemplateKey();
+
+            if ( $template === 'tpl.checkout' && RouteConfig::getCategoryId(RouteConfig::CHECKOUT) > 0 )
+            {
+                $templateContextClass = CheckoutContext::class;
+            }
+            else
+            {
+                $templateContextClass = self::$templateKeyToViewMap[$template][1];
+            }
+
             if(!strlen($templateContextClass))
             {
                 $templateContextClass = GlobalContext::class;
             }
+
             $templateContainer->setContext( $templateContextClass );
         }, self::EVENT_LISTENER_PRIORITY);
 
