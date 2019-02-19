@@ -5,7 +5,7 @@
 			<strong>{{ trans("Ceres::Template.itemBundleContent") }}</strong>
 			<div v-for="item in bundleComponents">
 				<span class="text-muted">${ item.quantity } x</span>
-				<a :href="item.data | itemURL"> ${ getBundleInnerText(item.data) | itemName } </a>
+				<a :class="'text-' + appearance" :href="item.data | itemURL"> ${ getBundleInnerText(item.data) | itemName } </a>
 			</div>
 		</div>
 	</div>
