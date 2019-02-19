@@ -1,10 +1,17 @@
-import cloneDeep from "lodash/cloneDeep";
 import { orderArrayByKey, isDefined } from "../helper/utils";
 
 const PROPERTY_ORDER_BY_KEY = "position";
+const _cachedVariationProperties = {};
 
-export function transformItem(item, propertyTypes = [], displaySetting)
+export function transformVariationProperties(item, propertyTypes = [], displaySetting)
 {
+    const variationId = item.variation.id;
+
+    if (_cachedVariationProperties[variationId])
+    {
+        return _cachedVariationProperties[variationId];
+    }
+
     const variationProperties = item.variationProperties;
     const variationPropertyGroups = item.variationPropertyGroups;
 
@@ -21,10 +28,10 @@ export function transformItem(item, propertyTypes = [], displaySetting)
     {
         property = property.property;
 
-        const matchDisplaySettings = isDefined(displaySetting) && displaySetting.length ? property.display.includes(displaySetting) : true;
+        const matchDisplaySetting = isDefined(displaySetting) && displaySetting.length ? property.display.includes(displaySetting) : true;
         const isCorrectType = isDefined(propertyTypes) && propertyTypes.length ? propertyTypes.includes(property.cast) : true;
 
-        if (!matchDisplaySettings || !isCorrectType)
+        if (!matchDisplaySetting || !isCorrectType)
         {
             continue;
         }
@@ -68,27 +75,14 @@ export function transformItem(item, propertyTypes = [], displaySetting)
         });
     }
 
-    const clonedItem = cloneDeep(item);
+    _cachedVariationProperties[variationId] = orderArrayByKey(groups, PROPERTY_ORDER_BY_KEY);
 
-    clonedItem.transformedVariationPropGroups = orderArrayByKey(groups, PROPERTY_ORDER_BY_KEY);
-    return clonedItem;
+    return _cachedVariationProperties[variationId];
 }
 
-export function transformBasketItem(basketItem, propertyTypes = [], displaySetting)
+export function transformBasketItemProperties(basketItem, propertyTypes = [], displaySetting)
 {
-    basketItem.variation.data = transformItem(basketItem.variation.data, propertyTypes, displaySetting);
-
-    return basketItem;
+    return transformVariationProperties(basketItem.variation.data, propertyTypes, displaySetting);
 }
 
-export function transformBasketItems(basketItems, propertyTypes = [], displaySetting)
-{
-    for (const basketItem of basketItems)
-    {
-        transformBasketItem(basketItem);
-    }
-
-    return basketItems;
-}
-
-export default { transformItem, transformBasketItem, transformBasketItems };
+export default { transformVariationProperties, transformBasketItemProperties };

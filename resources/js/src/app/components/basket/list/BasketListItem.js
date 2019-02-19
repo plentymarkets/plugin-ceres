@@ -1,6 +1,7 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
 import { isNullOrUndefined } from "../../../helper/utils";
+import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -103,6 +104,11 @@ Vue.component("basket-list-item", {
             }
 
             return this.basketItem.variation.data.prices.default.basePrice;
+        },
+
+        transformedVariationProperties()
+        {
+            return transformBasketItemProperties(this.basketItem, ["empty"], "displayInOrderProcess");
         },
 
         ...Vuex.mapState({

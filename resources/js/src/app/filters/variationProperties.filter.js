@@ -1,6 +1,6 @@
-import { transformItem } from "../services/VariationPropertyService";
+import { transformVariationProperties } from "../services/VariationPropertyService";
 
 Vue.filter("variationProperties", (variationPropertyGroups, variationProperties, propertyTypes = [], displaySetting) =>
 {
-    return transformItem(variationPropertyGroups, variationProperties, propertyTypes, displaySetting);
+    return transformVariationProperties(variationPropertyGroups, variationProperties, propertyTypes, displaySetting);
 });
