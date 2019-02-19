@@ -101,6 +101,12 @@
                 "name": "Widget.imageBoxCustomImagePathLabel",
                 "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
             }
+        },
+        "url":
+        {
+            "type": "url",
+            "required": false,
+            "options": {}
         }
     }
 }

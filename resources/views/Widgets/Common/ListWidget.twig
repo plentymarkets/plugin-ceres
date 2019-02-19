@@ -1,3 +1,6 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelpers %}
+
 {% set title            = widget.settings.title.mobile %}
 {% set icon             = widget.settings.icon.mobile %}
 {% set centered         = widget.settings.centered.mobile %}
@@ -14,15 +17,17 @@
             {% if listEntries | length > 0 %}
                 <ul class="list-unstyled{% if centered %} list-centered{% endif %}">
                     {% for entry in listEntries %}
+                        {{ WidgetHelpers.getUrl(entry.url.value, entry.url.type) }}
                         <li>
                             {% if icon != "none" %}
                                 <i class="fa {{ icon }}" aria-hidden="true"></i>
                             {% endif %}
 
-                            {% if entry.url is not empty %}
-                                <a href="{{ entry.url }}">{{ entry.text }}</a>
-                            {% else %}
-                                {{ entry.text }}
+                            {% if entry.text is not empty %}
+                                <a {% if entry.url.openInNewTab == true %} target="_blank" {% endif %} 
+                                {{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
+                                    {{ entry.text }}
+                                </a>
                             {% endif %}
                         </li>
                     {% endfor %}

@@ -795,6 +795,11 @@
                     "name": "Widget.imageBoxCustomImagePathLabel",
                     "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
                 }
+            },
+            "url": {
+                "type": "url",
+                "required": false,
+                "options": {}
             }
         }
     },
@@ -919,6 +924,11 @@
                             "name": "Widget.imageCarouselCustomImagePathLabel",
                             "tooltipText": "Widget.imageCarouselCustomImagePathTooltip"
                         }
+                    },
+                    "url": {
+                        "type": "url",
+                        "required": false,
+                        "options": {}
                     }
                 }
             }
@@ -1326,7 +1336,7 @@
                         }
                     },
                     "url": {
-                        "type": "text",
+                        "type": "url",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
@@ -1446,7 +1456,7 @@
                         }
                     },
                     "url": {
-                        "type": "text",
+                        "type": "url",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
