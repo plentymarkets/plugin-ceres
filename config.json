@@ -16,6 +16,7 @@
                 "header.company_logo": {
                     "type": "inputFile",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.headerCompanyLogoLabel",
                     "options": {
                         "defaultValue": "images/ceres-logo.svg"
@@ -2629,6 +2630,7 @@
                 "billing_address.show": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.billingAddressShowLabel",
                     "options": {
                         "defaultValue": "billing_address.name1, billing_address.salutation",
@@ -2679,6 +2681,7 @@
                 "billing_address.require": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.billingAddressRequireLabel",
                     "options": {
                         "defaultValue": "",
@@ -2725,6 +2728,7 @@
                 "delivery_address.show": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.deliveryAddressShowLabel",
                     "options": {
                         "defaultValue": "delivery_address.name1, delivery_address.salutation",
@@ -2767,6 +2771,7 @@
                 "delivery_address.require": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.deliveryAddressRequireLabel",
                     "options": {
                         "defaultValue": "",
@@ -2805,6 +2810,7 @@
                 "billing_address.en.show": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.billingAddressEnShowLabel",
                     "options": {
                         "defaultValue": "billing_address.name1, billing_address.address2, billing_address.salutation",
@@ -2855,6 +2861,7 @@
                 "billing_address.en.require": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.billingAddressEnRequireLabel",
                     "options": {
                         "defaultValue": "",
@@ -2901,6 +2908,7 @@
                 "delivery_address.en.show": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.deliveryAddressEnShowLabel",
                     "options": {
                         "defaultValue": "delivery_address.name1, delivery_address.salutation",
@@ -2943,6 +2951,7 @@
                 "delivery_address.en.require": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.deliveryAddressEnRequireLabel",
                     "options": {
                         "defaultValue": "",
