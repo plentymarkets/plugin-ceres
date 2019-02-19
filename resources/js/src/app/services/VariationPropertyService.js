@@ -6,15 +6,14 @@ const _cachedVariationProperties = {};
 export function transformVariationProperties(item, propertyTypes = [], displaySetting)
 {
     const variationId = item.variation.id;
-
-    if (_cachedVariationProperties[variationId])
-    {
-        return _cachedVariationProperties[variationId];
-    }
-
     const variationProperties = item.variationProperties;
     const variationPropertyGroups = item.variationPropertyGroups;
+    const cacheKey = `${variationId}_${propertyTypes.toString()}_${displaySetting}`;
 
+    if (_cachedVariationProperties[cacheKey])
+    {
+        return _cachedVariationProperties[cacheKey];
+    }
     if (!(isDefined(variationProperties) && variationProperties.length))
     {
         return [];
@@ -75,9 +74,9 @@ export function transformVariationProperties(item, propertyTypes = [], displaySe
         });
     }
 
-    _cachedVariationProperties[variationId] = orderArrayByKey(groups, PROPERTY_ORDER_BY_KEY);
+    _cachedVariationProperties[cacheKey] = orderArrayByKey(groups, PROPERTY_ORDER_BY_KEY);
 
-    return _cachedVariationProperties[variationId];
+    return _cachedVariationProperties[cacheKey];
 }
 
 export function transformBasketItemProperties(basketItem, propertyTypes = [], displaySetting)
