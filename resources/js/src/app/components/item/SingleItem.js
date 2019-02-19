@@ -1,3 +1,5 @@
+import { transformVariationProperties } from "../../services/VariationPropertyService";
+
 Vue.component("single-item", {
 
     delimiters: ["${", "}"],
@@ -27,6 +29,11 @@ Vue.component("single-item", {
         isTechnicalDataTabActive()
         {
             return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
+        },
+
+        transformedVariationProperties()
+        {
+            return transformVariationProperties(this.currentVariation, ["empty"], "showInItemListing");
         },
 
         ...Vuex.mapState({
