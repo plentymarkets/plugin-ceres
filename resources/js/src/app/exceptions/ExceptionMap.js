@@ -18,6 +18,7 @@ export const exceptionMap = new Map(
         ["113", "errorBasketItemMaximumQuantityReachedForVariation"],
         ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"],
         ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"],
+        ["302", "couponNoMatchingItemInBasket"],
         ["401", "notificationsCalculateShippingFailed"]
     ]
 );
