@@ -71,3 +71,26 @@
 {% endset %}
 {{- result | trim -}}
 {% endmacro %}
+
+{% macro getUrl(urlValue, urlType) %}
+
+    {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+    {{ Twig.set("url", "" | json_encode) }}
+
+    {% if urlType == 'category' %}
+
+        {{ Twig.set("category", Twig.call("services.category.get", [urlValue])) }}
+        {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
+
+    {% elseif urlType == 'item' %}
+
+        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [urlValue])) }}
+        {{ Twig.set("itemData", "itemData.documents[0].data") }}
+        {{ Twig.set("url", "itemData | itemURL") }}
+    {% endif %}
+
+    {% if urlType == 'external' or urlType == 'file' %}
+        {{ Twig.set("url", urlValue | json_encode) }}
+    {% endif %}
+
+{% endmacro %}
