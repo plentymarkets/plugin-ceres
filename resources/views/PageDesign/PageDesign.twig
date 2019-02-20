@@ -39,6 +39,9 @@
 </head>
 
 <body>
+
+{{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
+
 <script>
     if('ontouchstart' in document.documentElement)
     {
@@ -228,7 +231,7 @@
 
 
     (function($) {
-        
+
         var header = document.getElementById('page-header');
         var headerLoaded = false;
         var unfixedElements = [];
@@ -288,7 +291,7 @@
                     });
                 }
             }
-            
+
             $(window).scroll(scrollUnfixedElements);
 
             $(document).on('shopbuilder.after.ready', function()
