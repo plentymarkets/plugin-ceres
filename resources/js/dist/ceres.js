@@ -19103,7 +19103,7 @@ Vue.component("shipping-profile-select", {
             this.validate();
         },
         validate: function validate() {
-            var showError = !(this.shippingProfileId > 0);
+            var showError = this.shippingProfileId <= 0 || this.shippingProfileList.length <= 0;
 
             this.$store.commit("setShippingProfileShowError", showError);
 
