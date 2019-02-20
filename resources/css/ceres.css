@@ -24922,10 +24922,7 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   .widget.widget-grid {
     margin-bottom: 0;
   }
-  .widget.widget-grid + .widget-grid {
-    margin-top: 1rem;
-  }
-  .widget .widget-inner .widget {
+  .widget .widget-inner .widget:not(.widget-grid) {
     margin-bottom: 1rem;
   }
 }
