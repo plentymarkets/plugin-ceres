@@ -27,11 +27,6 @@ Vue.component("category-item", {
         }
     },
 
-    data()
-    {
-        return {};
-    },
-
     computed:
     {
         /**
