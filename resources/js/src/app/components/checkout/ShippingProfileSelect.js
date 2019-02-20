@@ -47,7 +47,7 @@ Vue.component("shipping-profile-select", {
 
         validate()
         {
-            const showError = !(this.shippingProfileId > 0);
+            const showError = this.shippingProfileId <= 0 || this.shippingProfileList.length <= 0;
 
             this.$store.commit("setShippingProfileShowError", showError);
 
