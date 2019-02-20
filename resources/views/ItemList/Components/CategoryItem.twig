@@ -65,10 +65,10 @@
                         <div class="prices">
                             <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
                                 <del class="crossprice" v-if="itemData.prices.specialOffer">
-                                    ${ itemData.prices.default.unitPrice.formatted }
+                                    ${ itemData.prices.default.unitPrice.formatted | itemCrossPrice(true) }
                                 </del>
                                 <del class="crossprice" v-else>
-                                    ${ itemData.prices.rrp.unitPrice.formatted }
+                                    ${ itemData.prices.rrp.unitPrice.formatted | itemCrossPrice }
                                 </del>
                             </div>
 
