@@ -1858,7 +1858,6 @@
                 "type": "spacing",
                 "isVisible": "!!customPadding",
                 "options": {
-                    "name": "Widget.widgetPadding",
                     "units": [
                         "px",
                         "rem"
@@ -1876,7 +1875,6 @@
                 "type": "spacing",
                 "isVisible": "!!customMargin",
                 "options": {
-                    "name": "Widget.widgetMargin",
                     "units": [
                         "px",
                         "rem"
