@@ -17895,6 +17895,11 @@ Vue.component("add-to-basket", {
         this.showMissingPropertiesError();
       } else if (this.isSalable) {
         this.waiting = true;
+        this.orderProperties.forEach(function (orderProperty) {
+          if (orderProperty.property.valueType === "float" && orderProperty.property.value.slice(-1) === App.decimalSeparator) {
+            orderProperty.property.value = orderProperty.property.value.substr(0, orderProperty.property.value.length - 1);
+          }
+        });
         var basketObject = {
           variationId: this.variationId,
           quantity: this.quantity,
@@ -22100,11 +22105,16 @@ Vue.component("order-property-list-item", {
       return value;
     },
     validateFloat: function validateFloat(value) {
+      var lastChar = value.slice(-1);
       value = parseFloat(value.replace(App.decimalSeparator, "."));
 
       if (isNaN(value)) {
         value = null;
       } else {
+        if (lastChar === "." || lastChar === App.decimalSeparator) {
+          value += lastChar;
+        }
+
         value = value.toString().replace(".", App.decimalSeparator);
       }
 
