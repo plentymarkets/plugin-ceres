@@ -19276,7 +19276,7 @@ body.menu-is-visible {
     padding-bottom: 1em;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li {
-    padding: 0 1.5em;
+    padding: 0.1px 1.5em;
     line-height: 170%;
     text-align: left;
   }
