@@ -22099,7 +22099,8 @@ html.ie .component-loading.with-icon:after {
   margin-left: -1px;
 }
 
-.cmp-method-list .method-list-item > input:disabled ~ label {
+.cmp-method-list .method-list-item > input:disabled ~ label,
+.cmp-method-list .method-list-item > input:disabled ~ .label {
   opacity: .5;
   cursor: not-allowed;
 }
@@ -22109,35 +22110,42 @@ html.ie .component-loading.with-icon:after {
   transition: box-shadow 2s;
 }
 
-.cmp-method-list .method-list-item input:checked + label {
+.cmp-method-list .method-list-item input:checked + label,
+.cmp-method-list .method-list-item input:checked + .label {
   box-shadow: inset 0 0 0 0.1rem #008ebd;
 }
 
-.cmp-method-list .method-list-item label {
+.cmp-method-list .method-list-item label,
+.cmp-method-list .method-list-item .label {
   border: 1px solid #dcdbd8;
   border-radius: 0.1rem;
   cursor: pointer;
+  height: 5rem;
   padding: .5em;
   margin-bottom: 0;
   width: 100%;
   overflow: hidden;
+<<<<<<< HEAD
   background-color: #fff;
+=======
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.cmp-method-list .method-list-item.has-error label,
+.cmp-method-list .method-list-item.has-error .label {
+  box-shadow: inset 0 0 0 0.1rem #721c24;
+  color: #721c24;
+  background-color: #f8d7da;
+>>>>>>> stable
 }
 
 .cmp-method-list .method-list-item .content,
 .cmp-method-list .method-list-item .icon {
   display: inline-block;
   vertical-align: middle;
-}
-
-.cmp-method-list .method-list-item .icon {
-  width: 3.5rem;
-  height: 3.5rem;
-}
-
-.cmp-method-list .method-list-item .icon img {
-  width: 100%;
-  height: auto;
 }
 
 .cmp-method-list .method-list-item .content {
@@ -22157,7 +22165,11 @@ html.ie .component-loading.with-icon:after {
 
 .cmp-method-list.list .icon {
   width: 4rem;
-  height: 4rem;
+}
+
+.cmp-method-list.list .icon img {
+  width: 100%;
+  height: auto;
 }
 
 @media (min-width: 768px) {

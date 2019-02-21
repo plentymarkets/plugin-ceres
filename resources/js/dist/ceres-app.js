@@ -18868,9 +18868,31 @@ Vue.component("subscribe-newsletter-check", {
   created: function created() {
     this.$options.template = this.template;
 
+<<<<<<< HEAD
     if (this.isPreselected || this.hideCheckbox) {
       this.setValue(true);
     }
+=======
+    methods: {
+        /**
+         * Method on shipping profile changed
+         */
+        onShippingProfileChange: function onShippingProfileChange(shippingProfileId) {
+            var _this = this;
+
+            this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(function (shippingProfile) {
+                return shippingProfile.parcelServicePresetId === shippingProfileId;
+            })).then(function (data) {
+                document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: _this.shippingProfileId }));
+            }, function (error) {
+                console.log("error");
+            });
+
+            this.validate();
+        },
+        validate: function validate() {
+            var showError = this.shippingProfileId <= 0 || this.shippingProfileList.length <= 0;
+>>>>>>> stable
 
     if (this.isRequired) {
       this.$store.commit("addSubscribeNewsletterValidate", {

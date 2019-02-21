@@ -19159,9 +19159,39 @@ Vue.component("shipping-profile-select", {
       var showError = !(this.shippingProfileId > 0);
       this.$store.commit("setShippingProfileShowError", showError);
 
+<<<<<<< HEAD
       if (showError) {
         NotificationService.error(_TranslationService.default.translate("Ceres::Template.checkoutCheckShippingProfile"));
       }
+=======
+
+    methods: {
+        /**
+         * Method on shipping profile changed
+         */
+        onShippingProfileChange: function onShippingProfileChange(shippingProfileId) {
+            var _this = this;
+
+            this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(function (shippingProfile) {
+                return shippingProfile.parcelServicePresetId === shippingProfileId;
+            })).then(function (data) {
+                document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: _this.shippingProfileId }));
+            }, function (error) {
+                console.log("error");
+            });
+
+            this.validate();
+        },
+        validate: function validate() {
+            var showError = this.shippingProfileId <= 0 || this.shippingProfileList.length <= 0;
+
+            this.$store.commit("setShippingProfileShowError", showError);
+
+            if (showError) {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckShippingProfile"));
+            }
+        }
+>>>>>>> stable
     }
   }
 });

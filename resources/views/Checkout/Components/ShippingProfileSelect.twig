@@ -25,6 +25,13 @@
                     </div>
                 </label>
             </li><!-- -->
+            <li v-if="shippingProfileList.length <= 0" class="method-list-item has-error">
+                <div class="label">
+                    <div class="content">
+                        {{ trans("Ceres::Template.notificationsCalculateShippingFailed") }}
+                    </div>
+                </div>
+            </li><!-- -->
         </ul>
     </div>
 </script>
