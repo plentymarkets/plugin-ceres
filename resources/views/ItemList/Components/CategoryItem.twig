@@ -4,9 +4,6 @@
 
 {% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
 
-{% set lang = services.sessionStorage.getLang() %}
-{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
-
 {% if enableCarousel is not defined %}
     {% if config("Ceres.item.enable_image_carousel") == "true" %}
         {% set enableCarousel = "true" %}
@@ -92,7 +89,7 @@
                         * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
                         <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
                         {{ trans("Ceres::Template.itemExclusive") }}
-                        <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                        <a {% if ceresConfig.global.shippingCostsCategoryId is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                     </span>
                 </div>
             </slot>
