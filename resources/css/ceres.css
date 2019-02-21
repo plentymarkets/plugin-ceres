@@ -22125,9 +22125,7 @@ html.ie .component-loading.with-icon:after {
   margin-bottom: 0;
   width: 100%;
   overflow: hidden;
-<<<<<<< HEAD
   background-color: #fff;
-=======
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -22139,7 +22137,6 @@ html.ie .component-loading.with-icon:after {
   box-shadow: inset 0 0 0 0.1rem #721c24;
   color: #721c24;
   background-color: #f8d7da;
->>>>>>> stable
 }
 
 .cmp-method-list .method-list-item .content,
