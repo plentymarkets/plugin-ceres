@@ -46,13 +46,13 @@
 
     {% elseif slideUrlType == 'file' and slideUrlValue | trim is not empty %}
 
-        {{ Twig.set("slide", "slide | merge({ url: #{ urlValue | json_encode } })") }}
-        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ urlValue | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ url: #{ slideUrlValue | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ slideUrlValue | json_encode } })") }}
         {% set pushCurrentSlide = true %}
 
     {% elseif slideUrlType == 'external' and slideUrlValue | trim is not empty %}
 
-        {{ Twig.set("slide", "slide | merge({ url: #{ urlValue | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ url: #{ slideUrlValue | json_encode } })") }}
         {% set pushCurrentSlide = true %}
 
     {% endif %}
