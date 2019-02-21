@@ -147,6 +147,7 @@
         <!-- ./PASSWORD RESET MODAL -->
 
         <!-- SHIPPINGCOSTS MODAL -->
+        {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
         <div id="shippingscosts-modal-wrapper">
             <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -167,6 +168,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         <!-- ./SHIPPINGCOSTS MODAL -->
     </div>
 </div>
