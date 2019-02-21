@@ -33,6 +33,7 @@
                 "global.shippingCostsCategoryId": {
                     "type": "categoryPicker",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.globalShippingCostsCategoryIdLabel",
                     "options": {}
                 },

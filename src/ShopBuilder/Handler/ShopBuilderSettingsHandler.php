@@ -8,11 +8,13 @@ use Plenty\Modules\ShopBuilder\Helper\MappableSettingsHandler;
 class ShopBuilderSettingsHandler extends MappableSettingsHandler
 {
     protected $mappings = [
+        'shippingCategory'      => 'Ceres.global.shippingCostsCategoryId',
         'checkoutCategory'      => 'IO.routing.category_checkout',
         'checkoutEnableRoute'   => 'IO.routing.enabled_routes'
     ];
 
     protected $casts = [
+        'shippingCategory'      => 'int',
         'checkoutCategory'      => 'int'
     ];
 
