@@ -209,8 +209,8 @@
                             {% if item.orderProperties %}
                                 {% for property in item.orderProperties %}
                                     <div class="row">
-                                        <strong class="col-6 col-sm-3 item-word-break">{{ property.name }}</strong>
-                                        {% if property.value matches '{^[0-9a-f]{8}\/[0-9a-f]{8}\/}' %}
+                                        <strong class="col-6 col-sm-3 col-md-5 item-word-break">{{ property.name }}</strong>
+                                        {% if property.type == 'file' %}
                                             <span class="col-6 col-sm-9 item-word-break">
                                                 {% set splitPath = property.value |split('/') %}
                                                 {% set filename = '' %}
@@ -232,8 +232,8 @@
                                                     {{ splitPath | last }}
                                                 </a>
                                             </span>
-                                        {% else %}
-                                            <span class="col-6 col-sm-9 item-word-break">{{ property.value }}</span>
+                                        {% elseif property.type | length > 0 %}
+                                            <span class="col-6 col-sm-9 col-md-7 item-word-break">{{ property.value }}</span>
                                         {% endif %}
                                     </div>
                                 {% endfor %}

@@ -19276,7 +19276,7 @@ body.menu-is-visible {
     padding-bottom: 1em;
   }
   nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li {
-    padding: 0 1.5em;
+    padding: 0.1px 1.5em;
     line-height: 170%;
     text-align: left;
   }
@@ -21783,10 +21783,12 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   content: "";
   font-family: FontAwesome;
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  bottom: 50%;
+  right: 50%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -21819,6 +21821,14 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 .component-loading.isLoading:after {
   opacity: 1;
   visibility: visible;
+}
+
+/* IE Compatibility */
+html.ie .component-loading.with-icon:after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .qty-box {
@@ -22087,10 +22097,10 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   vertical-align: top;
   margin-top: -1px;
   margin-left: -1px;
-  background-color: #fff;
 }
 
-.cmp-method-list .method-list-item > input:disabled ~ label {
+.cmp-method-list .method-list-item > input:disabled ~ label,
+.cmp-method-list .method-list-item > input:disabled ~ .label {
   opacity: .5;
   cursor: not-allowed;
 }
@@ -22100,34 +22110,39 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   transition: box-shadow 2s;
 }
 
-.cmp-method-list .method-list-item input:checked + label {
+.cmp-method-list .method-list-item input:checked + label,
+.cmp-method-list .method-list-item input:checked + .label {
   box-shadow: inset 0 0 0 0.1rem #008ebd;
 }
 
-.cmp-method-list .method-list-item label {
+.cmp-method-list .method-list-item label,
+.cmp-method-list .method-list-item .label {
   border: 1px solid #dcdbd8;
   border-radius: 0.1rem;
   cursor: pointer;
+  height: 5rem;
   padding: .5em;
   margin-bottom: 0;
   width: 100%;
   overflow: hidden;
+  background-color: #fff;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.cmp-method-list .method-list-item.has-error label,
+.cmp-method-list .method-list-item.has-error .label {
+  box-shadow: inset 0 0 0 0.1rem #721c24;
+  color: #721c24;
+  background-color: #f8d7da;
 }
 
 .cmp-method-list .method-list-item .content,
 .cmp-method-list .method-list-item .icon {
   display: inline-block;
   vertical-align: middle;
-}
-
-.cmp-method-list .method-list-item .icon {
-  width: 3.5rem;
-  height: 3.5rem;
-}
-
-.cmp-method-list .method-list-item .icon img {
-  width: 100%;
-  height: auto;
 }
 
 .cmp-method-list .method-list-item .content {
@@ -22147,7 +22162,11 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 
 .cmp-method-list.list .icon {
   width: 4rem;
-  height: 4rem;
+}
+
+.cmp-method-list.list .icon img {
+  width: 100%;
+  height: auto;
 }
 
 @media (min-width: 768px) {
@@ -24888,6 +24907,11 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   }
 }
 
+.checkout .widget-grid .widget-inner > div {
+  background-color: #fff;
+  padding: 1rem;
+}
+
 .widget {
   margin-bottom: 2rem;
 }
@@ -24907,10 +24931,7 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   .widget.widget-grid {
     margin-bottom: 0;
   }
-  .widget.widget-grid + .widget-grid {
-    margin-top: 1rem;
-  }
-  .widget .widget-inner .widget {
+  .widget .widget-inner .widget:not(.widget-grid) {
     margin-bottom: 1rem;
   }
 }
@@ -25034,6 +25055,7 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 
 .widget-editable-min-height {
   min-height: 40px;
+  padding-bottom: 0.1px;
 }
 
 .widget-placeholder {

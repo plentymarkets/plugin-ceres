@@ -87,22 +87,22 @@
 {% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl) %}
 
     {% import _self as sidemenu %}
-    {% set urlNow = currentScopeUrl %}
+    {% for category in categories if category.details[0] %}
 
-    {% for category in categories %}
-
-        {% set urlNow = currentScopeUrl ~ "/" ~ category.details[0].nameUrl %}
-
-        {% if category.details[0] %}
-            <ul>
-                <li class="nav-item{% for breadcrumb in breadcrumbs %}{% if category.id == breadcrumb.id %} active{% endif %}{% endfor %}">
-                    <a href="{{ urlNow }}{{ urls.trailingSlashSuffix }}" class="nav-link">{{ category.details[0].name }}</a>
-                    {% if category.children is not empty %}
-                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, urlNow) }}
-                    {% endif %}
-                </li>
-            </ul>
+        {% set currentUrl = currentScopeUrl %}
+        {% if currentUrl is empty and urls.includeLanguage %}
+            {% set currentUrl = "/" ~ category.details[0].lang %}
         {% endif %}
+
+        {% set currentUrl = currentUrl ~ "/" ~ category.details[0].nameUrl  %}
+        <ul>
+            <li class="nav-item{% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
+                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link">{{ category.details[0].name }}</a>
+                {% if category.children is not empty %}
+                    {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl) }}
+                {% endif %}
+            </li>
+        </ul>
 
     {% endfor %}
 

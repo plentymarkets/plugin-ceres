@@ -14291,7 +14291,8 @@ body.menu-is-visible {
 						padding-bottom		: 1em;
 
 						>li {
-							padding	: 0 1.5em;
+							// 0.1px for rendering fix
+							padding	: 0.1px 1.5em;
 							line-height		: 170%;
 							text-align		: left;
 		
@@ -16823,7 +16824,6 @@ html.ie .basket-preview-hover {
   }
 }
 .cmp-hero{
-	
 
 	.hero-category{
 		position: relative;
@@ -16860,8 +16860,6 @@ html.ie .basket-preview-hover {
 			}
 		}
 	}
-
-
 
 	.hero-main{
 		margin-bottom: 1rem;
@@ -16972,10 +16970,6 @@ html.ie .basket-preview-hover {
 		}
 	}
 
-	@include media-breakpoint-up(sm){
-
-	}
-
 	@include media-breakpoint-up(md){
 		.hero-main{
 			.hero-category{
@@ -17082,10 +17076,12 @@ html.ie .basket-preview-hover {
 			content: "";
 			font-family: FontAwesome;
 			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
+			width: auto;
+			height: auto;
+			top: 50%;
+			left: 50%;
+			bottom: 50%;
+			right: 50%;
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
@@ -17134,6 +17130,19 @@ html.ie .basket-preview-hover {
 	}
 }
 
+/* IE Compatibility */
+html.ie {
+	.component-loading {
+		&.with-icon {
+			&:after {
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+			}
+		}
+	}
+}
 .qty-box {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -17391,9 +17400,9 @@ html.ie .basket-preview-hover {
 		vertical-align:top;
 		margin-top: -1px;
 		margin-left: -1px;
-		background-color: $card-bg;
 
-		& > input:disabled ~ label {
+		& > input:disabled ~ label,
+		& > input:disabled ~ .label {
 			opacity: .5;
 			cursor: not-allowed;
 		}
@@ -17406,35 +17415,43 @@ html.ie .basket-preview-hover {
 			transition: box-shadow 2s, -webkit-box-shadow 2s;
 		}
 
-		input:checked + label{
+		input:checked + label,
+		input:checked + .label {
 			-webkit-box-shadow: inset 0 0 0 .1rem $primary;
 			        box-shadow: inset 0 0 0 .1rem $primary;
 		}
 
-		label{
+		label,
+		.label {
 			border: 1px solid $gray-lighter;
 			border-radius: $border-radius;
 			cursor: pointer;
+			height: 5rem;
 			padding: .5em;
 			margin-bottom: 0;
 			width:100%;
 			overflow: hidden;
+			background-color: $card-bg;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-align: center;
+			    -ms-flex-align: center;
+			        align-items: center;
+		}
+
+		&.has-error label,
+		&.has-error .label {
+			-webkit-box-shadow: inset 0 0 0 .1rem theme-color-level("danger", 6);
+			        box-shadow: inset 0 0 0 .1rem theme-color-level("danger", 6);
+			color: theme-color-level("danger", 6);
+			background-color: theme-color-level("danger", -10);
 		}
 
 		.content,
 		.icon{
 			display: inline-block;
 			vertical-align: middle;
-		}
-
-		.icon{
-			width: 3.5rem;
-			height: 3.5rem;
-
-			img{
-				width: 100%;
-				height: auto;
-			}
 		}
 
 		.content{
@@ -17453,7 +17470,11 @@ html.ie .basket-preview-hover {
 		}
 		.icon{
 			width: 4rem;
-			height: 4rem;
+
+			img{
+				width: 100%;
+				height: auto;
+			}
 		}
 	}
 
@@ -20099,6 +20120,14 @@ html.ie {
     }
 }
 
+.checkout
+{
+    .widget-grid .widget-inner > div
+    {
+        background-color: $white;
+        padding: $spacer;
+    }
+}
 .widget
 {
     margin-bottom: 2rem;
@@ -20123,16 +20152,11 @@ html.ie {
         &.widget-grid
         {
             margin-bottom: 0;
-
-            + .widget-grid
-            {
-                margin-top: 1rem;
-            }
         }
 
         .widget-inner
         {
-            .widget
+            .widget:not(.widget-grid)
             {
                 margin-bottom: 1rem;
             }
@@ -20183,6 +20207,7 @@ html.ie {
 
 .widget-editable-min-height {
     min-height: 40px;
+    padding-bottom: 0.1px;
 }
 
 .widget-placeholder

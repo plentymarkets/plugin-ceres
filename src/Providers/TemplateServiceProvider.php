@@ -7,6 +7,7 @@ use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
 use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
+use Ceres\Contexts\CheckoutContext;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
 use Ceres\Contexts\ItemWishListContext;
@@ -48,7 +49,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],                 // provide template to use for single items
         'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],                       // provide template to use for basket
         'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],               // provide template to use for checkout
-        'tpl.my-account'                    => ['MyAccount.MyAccount',                    GlobalContext::class],                 // provide template to use for my-account
+        'tpl.my-account'                    => ['MyAccount.MyAccountView',                GlobalContext::class],                 // provide template to use for my-account
         'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],          // provide template to use for confirmation
         'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],                      // provide template to use for login
         'tpl.register'                      => ['Customer.Register',                      GlobalContext::class],                   // provide template to use for register
@@ -100,7 +101,7 @@ class TemplateServiceProvider extends ServiceProvider
 
             if ( $template === 'tpl.checkout' && RouteConfig::getCategoryId(RouteConfig::CHECKOUT) > 0 )
             {
-                $templateContextClass = CategoryContext::class;
+                $templateContextClass = CheckoutContext::class;
             }
             else
             {

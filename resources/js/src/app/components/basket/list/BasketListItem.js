@@ -1,6 +1,7 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
 import { isNullOrUndefined } from "../../../helper/utils";
+import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -82,6 +83,7 @@ Vue.component("basket-list-item", {
             }
             return this.basketItem.quantity * (price + this.propertySurchargeSum);
         },
+
         unitPrice()
         {
             if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
@@ -91,6 +93,7 @@ Vue.component("basket-list-item", {
 
             return this.basketItem.variation.data.prices.default.unitPrice.value;
         },
+
         basePrice()
         {
             if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
@@ -99,6 +102,11 @@ Vue.component("basket-list-item", {
             }
 
             return this.basketItem.variation.data.prices.default.basePrice;
+        },
+
+        transformedVariationProperties()
+        {
+            return transformBasketItemProperties(this.basketItem, ["empty"], "displayInOrderProcess");
         },
 
         ...Vuex.mapState({

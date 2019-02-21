@@ -19,10 +19,10 @@
                     "shippingCostsNet",
                     "shippingCostsGross",
                     "totalSumNet",
-                    "coupon",
+                    "promotionCoupon",
                     "vats",
                     "totalSumGross",
-                    "couponDiscount",
+                    "salesCoupon",
                     "openAmount"
                 ],
                 "options": {
@@ -53,8 +53,8 @@
                             "caption": "Widget.showBasketTotalSumNet"
                         },
                         {
-                            "value": "coupon",
-                            "caption": "Widget.showBasketCoupon"
+                            "value": "promotionCoupon",
+                            "caption": "Widget.showBasketPromotionCoupon"
                         },
                         {
                             "value": "vats",
@@ -65,8 +65,8 @@
                             "caption": "Widget.showBasketTotalSumGross"
                         },
                         {
-                            "value": "couponDiscount",
-                            "caption": "Widget.showBasketCouponDiscount"
+                            "value": "salesCoupon",
+                            "caption": "Widget.showBasketSalesCoupon"
                         },
                         {
                             "value": "openAmount",
@@ -196,12 +196,12 @@
         "position": 300,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
         "settings": {
-            "hinttext": {
+            "hintText": {
                 "type": "codeEditor",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.contactWishHinttextLabel",
-                    "tooltipText": "Widget.contactWishHinttextTooltip"
+                    "name": "Widget.contactWishHintTextLabel",
+                    "tooltipText": "Widget.contactWishHintTextTooltip"
                 }
             }
         }
@@ -216,6 +216,7 @@
         ],
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Checkout\\GtcCheckWidget",
+        "maxPerPage": 1,
         "settings": {
             "appearance": {
                 "type": "select",
@@ -263,7 +264,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.gtcCheckHideCheckboxLabel",
-                    "tooltip": "Widget.gtcCheckHideCheckboxTooltip"
+                    "tooltipText": "Widget.gtcCheckHideCheckboxTooltip"
                 }
             },
             "isPreselected": {
@@ -272,7 +273,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.gtcCheckIsPreselectedLabel",
-                    "tooltip": "Widget.gtcCheckIsPreselectedTooltip"
+                    "tooltipText": "Widget.gtcCheckIsPreselectedTooltip"
                 }
             },
             "isRequired": {
@@ -281,7 +282,7 @@
                 "defaultValue": true,
                 "options": {
                     "name": "Widget.gtcCheckIsRequiredLabel",
-                    "tooltip": "Widget.gtcCheckIsRequiredTooltip"
+                    "tooltipText": "Widget.gtcCheckIsRequiredTooltip"
                 }
             },
             "customText": {
@@ -289,7 +290,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.gtcCheckCustomTextLabel",
-                    "tooltip": "Widget.gtcCheckCustomTextTooltip"
+                    "tooltipText": "Widget.gtcCheckCustomTextTooltip"
                 }
             }
         }
@@ -304,6 +305,7 @@
         ],
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
+        "maxPerPage": 1,
         "settings": {
             "appearance": {
                 "type": "select",
@@ -346,12 +348,12 @@
                     ]
                 }
             },
-            "hinttext": {
+            "hintText": {
                 "type": "codeEditor",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.paymentProviderHinttextLabel",
-                    "tooltipText": "Widget.paymentProviderHinttextTooltip"
+                    "name": "Widget.paymentProviderHintTextLabel",
+                    "tooltipText": "Widget.paymentProviderHintTextTooltip"
                 }
             }
         }
@@ -458,6 +460,7 @@
         ],
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
+        "maxPerPage": 1,
         "settings": {
             "appearance": {
                 "type": "select",
@@ -500,12 +503,12 @@
                     ]
                 }
             },
-            "hinttext": {
+            "hintText": {
                 "type": "codeEditor",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.shippingProfileHinttextLabel",
-                    "tooltipText": "Widget.shippingProfileHinttextTooltip"
+                    "name": "Widget.shippingProfileHintTextLabel",
+                    "tooltipText": "Widget.shippingProfileHintTextTooltip"
                 }
             }
         }
@@ -535,7 +538,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckHideCheckboxLabel",
-                    "tooltip": "Widget.subscribeNewsletterCheckHideCheckboxTooltip"
+                    "tooltipText": "Widget.subscribeNewsletterCheckHideCheckboxTooltip"
                 }
             },
             "isPreselected": {
@@ -544,7 +547,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckIsPreselectedLabel",
-                    "tooltip": "Widget.subscribeNewsletterCheckIsPreselectedTooltip"
+                    "tooltipText": "Widget.subscribeNewsletterCheckIsPreselectedTooltip"
                 }
             },
             "isRequired": {
@@ -553,7 +556,7 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckIsRequiredLabel",
-                    "tooltip": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
+                    "tooltipText": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
                 }
             },
             "customText": {
@@ -561,7 +564,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
-                    "tooltip": "Widget.subscribeNewsletterCheckCustomTextTooltip"
+                    "tooltipText": "Widget.subscribeNewsletterCheckCustomTextTooltip"
                 }
             }
         }
@@ -735,16 +738,6 @@
                     ]
                 }
             },
-            "headline": {
-                "type": "text",
-                "required": false,
-                "isVisible": "style === 'block-caption' || style === 'inline-caption' || style === 'fullwidth'",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.imageBoxHeadlineLabel",
-                    "tooltipText": "Widget.imageBoxHeadlineTooltip"
-                }
-            },
             "imageSize": {
                 "type": "select",
                 "required": true,
@@ -766,22 +759,21 @@
                     ]
                 }
             },
-            "categoryId": {
-                "type": "category",
+            "url": {
+                "type": "url",
                 "required": false,
-                "defaultValue": "",
                 "options": {
-                    "name": "Widget.imageBoxCategoryIdLabel",
-                    "tooltipText": "Widget.imageBoxCategoryIdTooltip"
+                    "name": "Widget.imageBoxUrlLabel"
                 }
             },
-            "variationId": {
-                "type": "number",
+            "headline": {
+                "type": "text",
                 "required": false,
+                "isVisible": "style !== 'no-caption'",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.imageBoxVariationIdLabel",
-                    "tooltipText": "Widget.imageBoxVariationIdTooltip"
+                    "name": "Widget.imageBoxHeadlineLabel",
+                    "tooltipText": "Widget.imageBoxHeadlineTooltip"
                 }
             },
             "customImagePath": {
@@ -890,22 +882,11 @@
                             "tooltipText": "Widget.imageCarouselHeadlineTooltip"
                         }
                     },
-                    "categoryId": {
-                        "type": "category",
+                    "url": {
+                        "type": "url",
                         "required": false,
-                        "defaultValue": "",
                         "options": {
-                            "name": "Widget.imageCarouselCategoryIdLabel",
-                            "tooltipText": "Widget.imageCarouselCategoryIdTooltip"
-                        }
-                    },
-                    "variationId": {
-                        "type": "number",
-                        "required": false,
-                        "defaultValue": "",
-                        "options": {
-                            "name": "Widget.imageCarouselVariationIdLabel",
-                            "tooltipText": "Widget.imageCarouselVariationIdTooltip"
+                            "name": "Widget.imageCarouselUrlLabel"
                         }
                     },
                     "customImagePath": {
@@ -1158,6 +1139,16 @@
                             "value": "item.random",
                             "caption": "Widget.itemRandom",
                             "position": 15
+                        },
+                        {
+                            "value": "variation.position_asc",
+                            "caption": "Widget.itemVariationTopseller_asc",
+                            "position": 16
+                        },
+                        {
+                            "value": "variation.position_desc",
+                            "caption": "Widget.itemVariationTopseller_desc",
+                            "position": 17
                         }
                     ]
                 }
@@ -1313,7 +1304,7 @@
                         }
                     },
                     "url": {
-                        "type": "text",
+                        "type": "url",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
@@ -1433,7 +1424,7 @@
                         }
                     },
                     "url": {
-                        "type": "text",
+                        "type": "url",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
@@ -1460,7 +1451,7 @@
                 "defaultValue": 1,
                 "options": {
                     "name": "Widget.liveShoppingSelectionLabel",
-                    "tooltip": "Widget.liveShoppingSelectionTooltip",
+                    "tooltipText": "Widget.liveShoppingSelectionTooltip",
                     "listBoxValues": [
                         {
                             "value": 1,
@@ -1521,7 +1512,7 @@
                 "defaultValue": "sorting.price.avg_asc",
                 "options": {
                     "name": "Widget.liveShoppingSortingLabel",
-                    "tooltip": "Widget.liveShoppingSortingTooltip",
+                    "tooltipText": "Widget.liveShoppingSortingTooltip",
                     "listBoxValues": [
                         {
                             "value": "sorting.price.avg_asc",
@@ -1639,7 +1630,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.liveShoppingCustomImagePathLabel",
-                    "tooltip": "Widget.liveShoppingCustomImagePathTooltip"
+                    "tooltipText": "Widget.liveShoppingCustomImagePathTooltip"
                 }
             }
         }
@@ -1824,6 +1815,40 @@
                 "options": {
                     "name": "Widget.textCodeEditorLabel"
                 }
+            },
+            "customPadding": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomPadding"
+                }
+            },
+            "padding": {
+                "type": "spacing",
+                "isVisible": "!!customPadding",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
+            },
+            "customMargin": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomMargin"
+                }
+            },
+            "margin": {
+                "type": "spacing",
+                "isVisible": "!!customMargin",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
             }
         }
     },
@@ -1961,6 +1986,14 @@
                             "position": 1
                         }
                     ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.addressHintTextLabel",
+                    "tooltipText": "Widget.addressHintTextTooltip"
                 }
             },
             "addressLayout": {

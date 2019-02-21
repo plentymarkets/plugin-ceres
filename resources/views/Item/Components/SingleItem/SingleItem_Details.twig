@@ -43,7 +43,7 @@
     {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
         <div class="crossprice" v-if="currentVariation.prices.rrp && currentVariation.prices.rrp.unitPrice.value > 0 && currentVariation.prices.rrp.unitPrice.value > currentVariation.prices.default.unitPrice.value">
             <del class="text-muted small">
-                ${ currentVariation.prices.rrp.unitPrice.formatted }
+                ${ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice  }
             </del>
         </div>
     {% endif %}
@@ -113,7 +113,7 @@
 
     <span class="vat small text-muted">
                             * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.singleItemExclVAT") }}{% else %}{{ trans("Ceres::Template.singleItemInclVAT") }}{% endif %} {{ trans("Ceres::Template.singleItemExclusive") }}
-        <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a>
+        <a {% if ceresConfig.global.shippingCostsCategoryId is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a>
                         </span>
 
     <slot name="AdditionalContentAfterVAT"></slot>

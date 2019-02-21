@@ -14,10 +14,28 @@ Vue.component("checkout", {
             type: Object,
             required: true
         },
-        deliveryAddressList: Array,
-        selectedDeliveryAddress: Number,
-        billingAddressList: Array,
-        selectedBillingAddress: Number
+        deliveryAddressList:
+        {
+            type: Array,
+            default: () =>
+            []
+        },
+        selectedDeliveryAddress:
+        {
+            type: Number,
+            default: -99
+        },
+        billingAddressList:
+        {
+            type: Array,
+            default: () =>
+            []
+        },
+        selectedBillingAddress:
+        {
+            type: Number,
+            default: 0
+        }
     },
 
     computed: Vuex.mapState({

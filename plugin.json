@@ -1,5 +1,5 @@
 {
-    "version"           : "3.0.1",
+    "version"           : "3.0.2",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -11,7 +11,7 @@
     "authorIcon"        : "icon_author_xs.png",
     "email"             : "sales@plentymarkets.com",
     "phone"             : "+49 561 98 681 100",
-    "categories"        : ["3517"],
+    "categories"        : ["3885"],
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
     "require"           : ["IO"],
@@ -62,6 +62,11 @@
             "key"           : "Script.AfterScriptsLoaded",
             "name"          : "Script loader: After scripts loaded",
             "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised."
+        },
+        {
+            "key"           : "PageDesign.AfterOpeningBodyTag",
+            "name"          : "Page Design: After opening HTML body tag",
+            "description"   : "Add content after the opening HTML body tag."
         },
         {
             "key"           : "StaticPages.CancellationRights",

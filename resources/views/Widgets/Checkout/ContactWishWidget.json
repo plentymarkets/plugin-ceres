@@ -7,12 +7,12 @@
     "position": 300,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
     "settings": {
-        "hinttext": {
+        "hintText": {
             "type": "codeEditor",
             "defaultValue": "",
             "options": {
-                "name": "Widget.contactWishHinttextLabel",
-                "tooltipText": "Widget.contactWishHinttextTooltip"
+                "name": "Widget.contactWishHintTextLabel",
+                "tooltipText": "Widget.contactWishHintTextTooltip"
             }
         }
     }

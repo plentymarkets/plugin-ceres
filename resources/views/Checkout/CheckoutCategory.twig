@@ -14,31 +14,35 @@
 
     {% set shopBuilderTemplate = shop_builder_category_template(category.id, "checkout") %}
     {% if shopBuilderTemplate | trim is not empty %}
-        <div class="page-content checkout container-max">
+        <div class="container-max checkout">
             <div class="row">
                 <div class="col">
                     <checkout
                         v-cloak
-                        :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+                        :initial-checkout="{{ checkout | json_encode() }}"
                         :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
                         :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
                         :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
                         :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
-                            {{ shopBuilderTemplate | raw }}
-                    </chekcout>
+                            <div slot-scope="checkoutComp">
+                                {{ shopBuilderTemplate | raw }}
+                            </div>
+                    </checkout>
                 </div>
             </div>
         </div>
     {% else %}
         <checkout
             v-cloak
-            :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+            :initial-checkout="{{ checkout | json_encode() }}"
             :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
             :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
             :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
             :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
-            {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
-        </chekcout>
+                <div slot-scope="checkoutComp">
+                    {% include category_template( category.id, lang, webstoreConfig.webstoreId ) ignore missing %}
+                </div>
+        </checkout>
     {% endif %}
 
 {% endblock %}

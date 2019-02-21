@@ -39,6 +39,9 @@
 </head>
 
 <body>
+
+{{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
+
 <script>
     if('ontouchstart' in document.documentElement)
     {
@@ -153,7 +156,12 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                            {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                            {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
+                            {% if shopBuilderShippingTemplate | trim is not empty %}
+                                {{ shopBuilderShippingTemplate | raw }}
+                            {% else %}
+                                {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -166,6 +174,7 @@
 <script>
     App = {
         config: {{ ceresConfig | json_encode | raw }},
+        urls: {{ urls | json_encode | raw }},
         activeCurrency: "{{ currencyData[currencyFormat] }}",
         currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
@@ -175,7 +184,8 @@
         language: "{{ lang }}",
         defaultLanguage: "{{ defaultLanguage }}",
         decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
-        urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }}
+        urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
+        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }}
     };
 </script>
 
@@ -226,7 +236,7 @@
 
 
     (function($) {
-        
+
         var header = document.getElementById('page-header');
         var headerLoaded = false;
         var unfixedElements = [];
@@ -286,7 +296,7 @@
                     });
                 }
             }
-            
+
             $(window).scroll(scrollUnfixedElements);
 
             $(document).on('shopbuilder.after.ready', function()

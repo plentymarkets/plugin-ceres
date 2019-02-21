@@ -12,7 +12,7 @@
             "defaultValue": 1,
             "options": {
                 "name": "Widget.liveShoppingSelectionLabel",
-                "tooltip": "Widget.liveShoppingSelectionTooltip",
+                "tooltipText": "Widget.liveShoppingSelectionTooltip",
                 "listBoxValues": [
                     {
                         "value": 1,
@@ -73,7 +73,7 @@
             "defaultValue": "sorting.price.avg_asc",
             "options": {
                 "name": "Widget.liveShoppingSortingLabel",
-                "tooltip": "Widget.liveShoppingSortingTooltip",
+                "tooltipText": "Widget.liveShoppingSortingTooltip",
                 "listBoxValues": [
                     {
                         "value": "sorting.price.avg_asc",
@@ -191,7 +191,7 @@
             "defaultValue": "",
             "options": {
                 "name": "Widget.liveShoppingCustomImagePathLabel",
-                "tooltip": "Widget.liveShoppingCustomImagePathTooltip"
+                "tooltipText": "Widget.liveShoppingCustomImagePathTooltip"
             }
         }
     }
