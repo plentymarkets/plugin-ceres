@@ -44,16 +44,6 @@
                 ]
             }
         },
-        "headline": {
-            "type": "text",
-            "required": false,
-            "isVisible": "style === 'block-caption' || style === 'inline-caption' || style === 'fullwidth'",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.imageBoxHeadlineLabel",
-                "tooltipText": "Widget.imageBoxHeadlineTooltip"
-            }
-        },
         "imageSize": {
             "type": "select",
             "required": true,
@@ -75,22 +65,21 @@
                 ]
             }
         },
-        "categoryId": {
-            "type": "category",
+        "url": {
+            "type": "url",
             "required": false,
-            "defaultValue": "",
             "options": {
-                "name": "Widget.imageBoxCategoryIdLabel",
-                "tooltipText": "Widget.imageBoxCategoryIdTooltip"
+                "name": "Widget.imageBoxUrlLabel"
             }
         },
-        "variationId": {
-            "type": "number",
+        "headline": {
+            "type": "text",
             "required": false,
+            "isVisible": "style !== 'no-caption'",
             "defaultValue": "",
             "options": {
-                "name": "Widget.imageBoxVariationIdLabel",
-                "tooltipText": "Widget.imageBoxVariationIdTooltip"
+                "name": "Widget.imageBoxHeadlineLabel",
+                "tooltipText": "Widget.imageBoxHeadlineTooltip"
             }
         },
         "customImagePath": {
@@ -101,12 +90,6 @@
                 "name": "Widget.imageBoxCustomImagePathLabel",
                 "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
             }
-        },
-        "url":
-        {
-            "type": "url",
-            "required": false,
-            "options": {}
         }
     }
 }
