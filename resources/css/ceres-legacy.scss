@@ -17823,13 +17823,6 @@ html.ie {
     max-width: none;
     position: relative;
     width: 100%;
-
-    .parallax-text-wrapper {
-        @include media-breakpoint-up(xl){
-            margin-left: -15px;
-            margin-right: -15px;
-        }
-    }
         
     .parallax-text-container {
         position: inherit;
