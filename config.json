@@ -149,6 +149,14 @@
                         "defaultValue": ""
                     }
                 },
+                "global.google_recaptcha_secret": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaSecretLabel",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
                 "contact.api_key": {
                     "type": "inputText",
                     "required": false,

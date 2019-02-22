@@ -93,7 +93,7 @@ Vue.component("contact-form", {
                 });
         },
 
-        sendMail()
+        sendMail(recaptchaToken = null)
         {
             this.waiting = true;
 
@@ -107,7 +107,7 @@ Vue.component("contact-form", {
                     cc      : this.cc
                 };
 
-            ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail" }, { supressNotifications: true })
+            ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail", recaptchaToken: recaptchaToken }, { supressNotifications: true })
                 .done(response =>
                 {
                     this.waiting = false;
