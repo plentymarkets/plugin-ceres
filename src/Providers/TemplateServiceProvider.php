@@ -50,7 +50,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],
         'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],
         'tpl.checkout.category'             => ['Checkout.CheckoutCategory',              CheckoutContext::class],
-        'tpl.my-account'                    => ['MyAccount.MyAccount',                    GlobalContext::class],
+        'tpl.my-account'                    => ['MyAccount.MyAccountView',                GlobalContext::class],
         'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            CategoryContext::class],
         'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],
         'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],

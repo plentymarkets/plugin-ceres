@@ -74,12 +74,8 @@
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
                                         <div class="invoice-addresses-select">
-                                            {% set addressFields = config("Ceres.billing_address.show") | split(', ') %}
-                                            {% set addressFieldsRequired = config("Ceres.billing_address.require") | split(', ') %}
-                                            {% set addressFields = config("Ceres.billing_address.en.show") | split(', ') %}
-                                            {% set addressFieldsRequired = config("Ceres.billing_address.en.require") | split(', ') %}
                                             <invoice-address-select
-                                                has-to-validate="true"
+                                                :has-to-validate="true"
                                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
                                                 :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
                                             </invoice-address-select>
@@ -97,10 +93,6 @@
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingAddress") }}
                                         <div class="shipping-addresses-select">
-                                            {% set addressFields = config("Ceres.delivery_address.show") | split(', ') %}
-                                            {% set addressFieldsRequired = config("Ceres.delivery_address.require") | split(', ') %}
-                                            {% set addressFields = config("Ceres.delivery_address.en.show") | split(', ') %}
-                                            {% set addressFieldsRequired = config("Ceres.delivery_address.en.require") | split(', ') %}
                                             <shipping-address-select
                                                 :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
                                                 :required-address-fields="{{ requiredShippingAddressFields | json_encode }}">

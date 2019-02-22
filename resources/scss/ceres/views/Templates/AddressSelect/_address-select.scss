@@ -3,18 +3,27 @@
 	.items{
 		position: relative;
 
+		@include media-breakpoint-up(md) {
+			display: inline-block;
+			vertical-align: middle;
+			width: 100%;
+		}
+
 		//TODO add class to this div and set this rule by the class
 		&>div:first-child{
 			@extend .card;
 			margin-bottom: 0;
+
+			@include media-breakpoint-down(xs) {
+				min-height: 115px;
+			}
 		}
 	}
 
 	.dropdown-toggle{
-
 		&:after{
 		    position: absolute;
-				top: 80%;
+			top: 80%;
     		right: 1.5rem;
 		    transform: translateY(-50%);
 		}
@@ -49,32 +58,11 @@
 		overflow-y: auto;
 	}
 
-	.add-item{
-		position: absolute;
-		
-		@include media-breakpoint-down(xs)
-		{
-			top: 0;
-			right: 0;
-
-			& button {
-				min-width: auto !important;
-				width: 50px;
-				height: 74px;
-			}
-		}
-
-		@include media-breakpoint-up(sm)
-		{
-			top: 1em;
-			right: 1em;
-		}
-	}
-
 	.item{
 		padding: 0;
 		border-bottom: 1px solid $gray-lighter;
 		position:relative;
+
 		input{ display: none; }
 
 		input:checked{
@@ -83,14 +71,6 @@
 				box-shadow: inset 0 0 0 0.1rem $primary;
 				color: $black;
 				background-color: #d9edf7;
-			}
-
-			& + .item-inner .item-edit .fa:hover{
-				color: white;
-			}
-			& + .item-controls .fa:hover{
-				color: white;
-				cursor: pointer;
 			}
 		}
 
@@ -107,46 +87,32 @@
 		padding: 1em;
 		margin-bottom: 0;
 
-		& .item-controls {
-			@include media-breakpoint-down(md) {
-				width: 83px;
-			}
+		.item-controls {
+			display: flex;
 
-			@include media-breakpoint-up(md) {
-				width: 75px;
+			.item-edit .fa {
+				padding-left: 0.1rem;
+				padding-top: 0.3rem;
+			}
+			.item-remove .fa {
+				padding-top: 0.1rem;
+			}
+			.fa {
+				transition: all .2s ease-in-out;
+				float: none;
+			}
+			.btn {
+				width: 2.2rem;
+				height: 2.2rem;
+				margin-left: 5px;
+				padding: 0;
 			}
 		}
 	}
 
-	.item-edit{
-		& .btn {
-			width: 2.2rem;
-			padding-right: 6px;
-			height: 2.2rem;
-		}
-		.fa{
-			color: #fff;
-			margin-top: 1px;
-			transition: all .2s ease-in-out;
-			
-    	}
-	}
-	.item-remove {
-		& .btn {
-			width: 2.2rem;
-			padding-right: 9px;
-			height: 2.2rem;
-		}
-	    .fa {
-	    	color: #fff;
-			transition: all .2s ease-in-out;
-			margin-top: -1px;
-	    }
-	}
 
 	.item-content{
 		display: inline-block;
-	    // width: calc( 100% - 4em );
 	    width: 100%;
 	    flex: 1 1 auto;
 
@@ -154,29 +120,35 @@
 			display: block;
 		}
 	}
-
-	@include media-breakpoint-up(sm){
-
-	}
-
-	@include media-breakpoint-up(md){
-		.items{
-			display: inline-block;
-			vertical-align: middle;
-			// width: calc( 100% - 5em );
-			width:100%;
-		}
-
-	}
-
-	@include media-breakpoint-up(lg){
-
-	}
 }
+
 .checkout {
-	header{
-		h4 {
-    	line-height: 2.5rem;
+    header {
+        h4 {
+            line-height: 2.5rem;
+        }
+    }
+}
+
+.add-item {
+	position: absolute;
+	cursor: pointer;
+	
+	@include media-breakpoint-down(xs)
+	{
+		top: 0;
+		right: 0;
+
+		& button {
+			min-width: auto !important;
+			width: 50px;
+			height: 74px;
 		}
+	}
+
+	@include media-breakpoint-up(sm)
+	{
+		top: 1em;
+		right: 1em;
 	}
 }

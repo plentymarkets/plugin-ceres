@@ -39,7 +39,12 @@
                         "value": "sevenToFive",
                         "caption": "Widget.gridTwoColumnLayoutSevenToFive",
                         "position": 4
-                    }
+                    },
+                    {
+                        "value": "nineToThree",
+                        "caption": "Widget.gridTwoColumnLayoutNineToThree",
+                        "position": 5
+                    }                    
                 ]
             }
         }

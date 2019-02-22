@@ -6,6 +6,7 @@
     "categories": ["checkout"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
+    "maxPerPage": 1,
     "settings": {
         "appearance": {
             "type": "select",

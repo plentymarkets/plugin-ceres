@@ -6,12 +6,24 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("account-settings", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "userData",
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-account-settings"
+        },
+        userData:
+        {
+            type: Object,
+            // eslint-disable-next-line
+            default: () => {}
+        },
+        appearance:
+        {
+            type: String,
+            default: "primary"
+        }
+    },
 
     data: function()
     {

@@ -2,20 +2,21 @@
 
 namespace Ceres\Contexts;
 
+use Ceres\Config\CeresConfig;
 use IO\Helper\ContextInterface;
+use IO\Services\BasketService;
+use IO\Services\CategoryService;
+use IO\Services\CheckoutService;
 use IO\Services\CustomerService;
+use IO\Services\ItemCrossSellingService;
 use IO\Services\ItemLastSeenService;
 use IO\Services\NotificationService;
-use IO\Services\UrlService;
-use IO\Services\WebstoreConfigurationService;
-use Plenty\Plugin\Http\Request;
-use Ceres\Config\CeresConfig;
-use IO\Services\CategoryService;
-use IO\Services\ItemCrossSellingService;
 use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
-use IO\Services\BasketService;
-use IO\Services\CheckoutService;
+use IO\Services\UrlService;
+use IO\Services\WebstoreConfigurationService;
+use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
+use Plenty\Plugin\Http\Request;
 
 class GlobalContext implements ContextInterface
 {
@@ -42,6 +43,7 @@ class GlobalContext implements ContextInterface
     public $homepageURL;
     public $splitItemBundle;
     public $templateEvent;
+    public $isShopBuilder;
 
     public function init($params)
     {
@@ -73,6 +75,9 @@ class GlobalContext implements ContextInterface
 
         /** @var CustomerService $customerService */
         $customerService = pluginApp(CustomerService::class);
+
+        /** @var ShopBuilderRequest $shopBuilderRequest */
+        $shopBuilderRequest = pluginApp(ShopBuilderRequest::class);
 
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
@@ -108,6 +113,8 @@ class GlobalContext implements ContextInterface
         $this->splitItemBundle = $webstoreConfigService->getWebstoreConfig()->dontSplitItemBundle;
 
         $this->templateEvent = $templateService->getCurrentTemplate();
+
+        $this->isShopBuilder = $shopBuilderRequest->isShopBuilder();
     }
 
     protected function getParam($key, $defaultValue = null)

@@ -18538,10 +18538,26 @@ Vue.component("checkout", {
       type: Object,
       required: true
     },
-    deliveryAddressList: Array,
-    selectedDeliveryAddress: Number,
-    billingAddressList: Array,
-    selectedBillingAddress: Number
+    deliveryAddressList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    selectedDeliveryAddress: {
+      type: Number,
+      default: -99
+    },
+    billingAddressList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    selectedBillingAddress: {
+      type: Number,
+      default: 0
+    }
   },
   computed: Vuex.mapState({
     checkout: function checkout(state) {
@@ -20171,13 +20187,16 @@ Vue.component("invoice-address-select", {
       }
     },
     hasToValidate: {
-      type: String,
+      type: Boolean,
       default: false
     }
   },
   computed: Vuex.mapState({
     billingAddressId: function billingAddressId(state) {
       return state.address.billingAddressId;
+    },
+    billingAddressList: function billingAddressList(state) {
+      return state.address.billingAddressList;
     },
     showError: function showError(state) {
       return state.checkout.validation.invoiceAddress.showError;
@@ -20200,7 +20219,7 @@ Vue.component("invoice-address-select", {
     var _this = this;
 
     this.$nextTick(function () {
-      if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
+      if (!App.isShopBuilder && App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
         _this.$refs.invoice.showAddModal("initial");
       }
     });
@@ -22942,6 +22961,8 @@ var _UrlService = _interopRequireDefault(require("services/UrlService"));
 
 var _utils = require("../../helper/utils");
 
+var _url = require("../../helper/url");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component("item-search", {
@@ -23010,19 +23031,13 @@ Vue.component("item-search", {
     },
     search: function search() {
       if (this.$refs.searchInput.value.length) {
-        if (document.location.pathname === "/search") {
+        if ((0, _url.pathnameEquals)(App.urls.search)) {
           this.updateTitle(this.$refs.searchInput.value);
           this.$store.dispatch("searchItems", this.$refs.searchInput.value);
           this.selectedAutocompleteIndex = -1;
           this.autocompleteResult = [];
         } else {
-          var searchBaseURL = "/search?query=";
-
-          if (App.defaultLanguage !== App.language) {
-            searchBaseURL = "/".concat(App.language, "/search?query=");
-          }
-
-          window.open(searchBaseURL + this.$refs.searchInput.value, "_self", false);
+          window.open("".concat(App.urls.search, "?query=").concat(this.$refs.searchInput.value), "_self", false);
         }
       } else {
         this.preventSearch = false;
@@ -23160,7 +23175,7 @@ Vue.component("item-search", {
   }
 });
 
-},{"../../helper/utils":252,"services/ApiService":254,"services/TranslationService":259,"services/UrlService":260}],183:[function(require,module,exports){
+},{"../../helper/url":251,"../../helper/utils":252,"services/ApiService":254,"services/TranslationService":259,"services/UrlService":260}],183:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -23835,8 +23850,21 @@ var APIService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {
-  delimiters: ["${", "}"],
-  props: ["userData", "template"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-account-settings"
+    },
+    userData: {
+      type: Object,
+      // eslint-disable-next-line
+      default: function _default() {}
+    },
+    appearance: {
+      type: String,
+      default: "primary"
+    }
+  },
   data: function data() {
     return {
       newPassword: "",
@@ -23934,8 +23962,25 @@ var NotificationService = require("services/NotificationService");
 var ModalService = require("services/ModalService");
 
 Vue.component("bank-data-select", {
-  delimiters: ["${", "}"],
-  props: ["userBankData", "contactId", "template"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-bank-data-select"
+    },
+    userBankData: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    contactId: {
+      type: String
+    },
+    appearance: {
+      type: String,
+      default: "primary"
+    }
+  },
   data: function data() {
     return {
       bankInfoModal: {},
@@ -24317,14 +24362,38 @@ Vue.component("history", {
 "use strict";
 
 Vue.component("my-account", {
+  template: "\n    <div>\n        <slot>\n        </slot>\n    </div>\n    ",
   props: {
-    template: {
-      type: String,
-      default: "#vue-my-account"
+    deliveryAddressList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    selectedDeliveryAddress: {
+      type: Number,
+      default: -99
+    },
+    billingAddressList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    selectedBillingAddress: {
+      type: Number,
+      default: 0
     }
   },
   created: function created() {
-    this.$options.template = this.template; // set data for my account
+    this.$store.dispatch("initBillingAddress", {
+      id: this.selectedBillingAddress,
+      addressList: this.billingAddressList
+    });
+    this.$store.dispatch("initDeliveryAddress", {
+      id: this.selectedDeliveryAddress,
+      addressList: this.deliveryAddressList
+    });
   }
 });
 
@@ -24343,10 +24412,6 @@ Vue.component("order-history", {
     orderDetailsTemplate: {
       type: String,
       default: "Ceres::Checkout.OrderDetails"
-    },
-    orderData: {
-      type: Object,
-      default: function _default() {}
     }
   },
   data: function data() {
@@ -24395,7 +24460,8 @@ Vue.component("order-history-item", {
     order: {
       type: Object,
       default: function _default() {}
-    }
+    },
+    orderDetailModalId: String
   },
   data: function data() {
     return {
@@ -24409,14 +24475,14 @@ Vue.component("order-history-item", {
     setCurrentOrder: function setCurrentOrder() {
       var _this = this;
 
-      $("#dynamic-twig-content").html("");
+      $("#dynamic-twig-content" + this.orderDetailModalId).html("");
       this.isLoading = true;
       Vue.nextTick(function () {
-        $(_this.$refs.orderDetails).modal("show");
+        $("#orderDetails" + _this.orderDetailModalId).modal("show");
       });
       ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.order.id).done(function (response) {
         _this.isLoading = false;
-        $("#dynamic-twig-content").html(response);
+        $("#dynamic-twig-content" + _this.orderDetailModalId).html(response);
       });
     }
   }
@@ -26936,6 +27002,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.normalizeUrl = normalizeUrl;
+exports.pathnameEquals = pathnameEquals;
 
 var _utils = require("./utils");
 
@@ -26957,6 +27024,10 @@ function normalizeUrl(url) {
   }
 
   return targetUrl;
+}
+
+function pathnameEquals(pathname) {
+  return window.location.pathname === pathname || window.location.pathname === pathname + "/" || window.location.pathname + "/" === pathname;
 }
 
 },{"./utils":252}],252:[function(require,module,exports){
@@ -28880,6 +28951,8 @@ var _TranslationService = _interopRequireDefault(require("services/TranslationSe
 
 var _UrlService = require("../../services/UrlService");
 
+var _url = require("../../helper/url");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NotificationService = require("services/NotificationService");
@@ -29049,8 +29122,8 @@ var actions = {
         commit("setIsBasketLoading", false);
         resolve(basketItems);
 
-        if (window.location.pathname === "/checkout" && !basketItems.length) {
-          (0, _UrlService.navigateTo)("/basket");
+        if ((0, _url.pathnameEquals)(App.urls.checkout) && !basketItems.length) {
+          (0, _UrlService.navigateTo)(App.urls.basket);
         }
       }).fail(function (error) {
         commit("setIsBasketLoading", false);
@@ -29113,7 +29186,7 @@ var _default = {
 };
 exports.default = _default;
 
-},{"../../services/UrlService":260,"services/ApiService":254,"services/NotificationService":258,"services/TranslationService":259}],266:[function(require,module,exports){
+},{"../../helper/url":251,"../../services/UrlService":260,"services/ApiService":254,"services/NotificationService":258,"services/TranslationService":259}],266:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
