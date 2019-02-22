@@ -22487,13 +22487,6 @@ html.ie .component-loading.with-icon:after {
   width: 100%;
 }
 
-@media (min-width: 1200px) {
-  .parallax-img-container .parallax-text-wrapper {
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-}
-
 .parallax-img-container .parallax-text-container {
   position: inherit;
 }
