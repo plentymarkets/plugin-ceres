@@ -20057,6 +20057,7 @@ Vue.component("contact-form", {
     sendMail: function sendMail() {
       var _this2 = this;
 
+      var recaptchaToken = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.waiting = true;
       var mailObj = {
         subject: this.subject,
@@ -20068,7 +20069,8 @@ Vue.component("contact-form", {
       };
       ApiService.post("/rest/io/customer/contact/mail", {
         contactData: mailObj,
-        template: "Ceres::Customer.Components.Contact.ContactMail"
+        template: "Ceres::Customer.Components.Contact.ContactMail",
+        recaptchaToken: recaptchaToken
       }, {
         supressNotifications: true
       }).done(function (response) {
