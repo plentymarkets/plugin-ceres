@@ -46,7 +46,7 @@ Vue.component("contact-form", {
                     {
                         if (useCapture)
                         {
-                            grecaptcha.execute();
+                            window.grecaptcha.execute();
                         }
                         else
                         {
@@ -134,9 +134,9 @@ Vue.component("contact-form", {
                 })
                 .always(() =>
                 {
-                    if (!isNullOrUndefined(grecaptcha))
+                    if (!isNullOrUndefined(window.grecaptcha))
                     {
-                        grecaptcha.reset();
+                        window.grecaptcha.reset();
                     }
                 });
         },
