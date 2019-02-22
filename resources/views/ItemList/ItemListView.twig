@@ -1,4 +1,11 @@
+{#
+    DEPRECATION NOTICE
+    This template is deprecated and will be removed in Ceres 4.0
+    Use "resources/views/Category/Items/CategoryItem.twig" instead
+#}
+
 {% extends getPartial('page-design') %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set decimalCount = ceresConfig.item.storeSpecial %}
 {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets) %}
@@ -9,7 +16,9 @@
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
     {{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
 
-    <div class="categoriegrid page-content container-max">
+
+    {{ overrideSearchFilters | json_encode }}
+    <div class="categoriegrid page-content container-max" data-test="foo">
         <div class="row mt-3">
             <div class="col-12">
                 <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>
