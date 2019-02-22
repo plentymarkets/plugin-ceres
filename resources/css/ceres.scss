@@ -10772,6 +10772,12 @@ a:active {
     z-index: 1;
 }
 
+@each $color, $value in $theme-colors {
+    @include bg-variant(".bg-#{$color}", $value);
+    .bg-#{$color} {
+        @include context-bg($value);
+    }
+}
 html {
 	font-size: $font-size-root;
 }
@@ -17817,6 +17823,13 @@ html.ie {
     max-width: none;
     position: relative;
     width: 100%;
+
+    .parallax-text-wrapper {
+        @include media-breakpoint-up(xl){
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+    }
         
     .parallax-text-container {
         position: inherit;
