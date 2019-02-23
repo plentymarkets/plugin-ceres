@@ -8,8 +8,7 @@
 
 {% block PartialHead %}
     <meta name="description" content="{{ trans('Ceres::Template.homepageMetaDescription') }}">
-    <meta name="robots" content="{{ config("Ceres.meta.robots_home") }}">
-
+    <meta name="robots" content="{% if forceNoIndex %}NOINDEX{% else %}{{ config("Ceres.meta.robots_home") }}{% endif %}">
     <meta property="og:title" content="{{ companyName }}"/>
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}"/>
@@ -20,7 +19,7 @@
         {"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}
     </script>
 
-    <title>MB Müller - Extraordinary Gifts - www.mb-mueller.com </title>
+    <title>{{ companyName }}</title>
 {% endblock %}
 
 {% block PageBody %}
@@ -29,7 +28,7 @@
 
         <div class="home container-max">
             <div class="row">
-                <div class="col clearfix">
+                <div class="col">
                     {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
                         {{ content.result|raw }}
                     {% endfor %}
@@ -38,7 +37,7 @@
         </div>
 
     {% else %}
-        
+
         {% if showDefaultHomepage == "true" %}
             {% include 'Ceres::Homepage.MarketingHomepage.twig' %}
         {% else %}
@@ -49,6 +48,6 @@
 
     {% endif %}
 
-    
+
 
 {% endblock %}
