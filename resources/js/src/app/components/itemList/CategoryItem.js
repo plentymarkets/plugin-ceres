@@ -47,18 +47,6 @@ Vue.component("category-item", {
             return this.itemData.texts;
         },
 
-        hasPrice()
-        {
-            const defaultPrice = this.itemData.prices.default;
-
-            if (isDefined(defaultPrice))
-            {
-                return !isNaN(defaultPrice.price.value);
-            }
-
-            return false;
-        },
-
         ...Vuex.mapState({
             showNetPrices: state => state.basket.showNetPrices
         })

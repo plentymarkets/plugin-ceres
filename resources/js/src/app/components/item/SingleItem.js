@@ -37,18 +37,6 @@ Vue.component("single-item", {
             return transformVariationProperties(this.currentVariation, ["empty"], "showInItemListing");
         },
 
-        hasPrice()
-        {
-            const defaultPrice = this.currentVariation.prices.default;
-
-            if (isDefined(defaultPrice))
-            {
-                return !isNaN(defaultPrice.price.value);
-            }
-
-            return false;
-        },
-
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
             variations: state => state.item.variationList
