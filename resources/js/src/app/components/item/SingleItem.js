@@ -1,4 +1,5 @@
 import { transformVariationProperties } from "../../services/VariationPropertyService";
+import { isDefined } from "../../helper/utils";
 
 Vue.component("single-item", {
 
@@ -34,6 +35,18 @@ Vue.component("single-item", {
         transformedVariationProperties()
         {
             return transformVariationProperties(this.currentVariation, ["empty"], "showInItemListing");
+        },
+
+        hasPrice()
+        {
+            const defaultPrice = this.currentVariation.prices.default;
+
+            if (isDefined(defaultPrice))
+            {
+                return !isNaN(defaultPrice.price.value);
+            }
+
+            return false;
         },
 
         ...Vuex.mapState({

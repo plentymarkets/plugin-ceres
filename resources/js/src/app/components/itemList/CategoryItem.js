@@ -1,3 +1,5 @@
+import { isDefined } from "../../helper/utils";
+
 Vue.component("category-item", {
     props:
     {
@@ -43,6 +45,18 @@ Vue.component("category-item", {
         texts()
         {
             return this.itemData.texts;
+        },
+
+        hasPrice()
+        {
+            const defaultPrice = this.itemData.prices.default;
+
+            if (isDefined(defaultPrice))
+            {
+                return !isNaN(defaultPrice.price.value);
+            }
+
+            return false;
         },
 
         ...Vuex.mapState({
