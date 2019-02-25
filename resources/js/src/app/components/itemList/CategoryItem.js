@@ -1,5 +1,3 @@
-import { isDefined } from "../../helper/utils";
-
 Vue.component("category-item", {
     props:
     {

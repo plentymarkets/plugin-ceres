@@ -1,5 +1,4 @@
 import { transformVariationProperties } from "../../services/VariationPropertyService";
-import { isDefined } from "../../helper/utils";
 
 Vue.component("single-item", {
 
