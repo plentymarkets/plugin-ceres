@@ -1,0 +1,27 @@
+
+<script type="x/template" id="vue-order-list">
+    <div>
+        <h4>{{ Twig.trans("Ceres::Template.orderHistory") }}</h4>
+        <p v-if="hintText" v-html="hintText" class="text-muted small font-italic">${ hintText | raw }}</p>
+
+        {{ Twig.if("orderList.totalsCount > 0") }}
+            <div class="row headerpart d-none d-sm-flex pb-2">
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-3">Auftrags ID</div>
+                        <div class="col-sm-3">Auftragsdatum</div>
+                        <div class="col-sm-3">Summe</div>
+                        <div class="col-sm-3">Auftragsstatus</div>
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            
+            <div class="order-item">
+                <order-list-item v-for="" :order-data=""></order-history-item>
+            </div>
+        {{ Twig.else() }}
+            <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
+        {{ Twig.endif() }}
+    </div>
+</script>
