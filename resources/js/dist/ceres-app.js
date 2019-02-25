@@ -17709,7 +17709,7 @@ Vue.component("basket-totals", {
     visibleFields: {
       type: Array,
       default: function _default() {
-        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"];
+        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "coupon", "vats", "totalSumGross", "couponDiscount", "openAmount"];
       }
     }
   },
@@ -17970,8 +17970,8 @@ Vue.component("basket-list-item", {
     itemTotalPrice: function itemTotalPrice() {
       var price = 0.00;
 
-      if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
-        price = this.basketItem.price;
+      if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer)) {
+        price = this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
       } else {
         price = this.basketItem.variation.data.prices.default.unitPrice.value;
       }
@@ -17979,14 +17979,14 @@ Vue.component("basket-list-item", {
       return this.basketItem.quantity * (price + this.propertySurchargeSum);
     },
     unitPrice: function unitPrice() {
-      if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
-        return this.basketItem.price;
+      if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer)) {
+        return this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
       }
 
       return this.basketItem.variation.data.prices.default.unitPrice.value;
     },
     basePrice: function basePrice() {
-      if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value) {
+      if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer)) {
         return this.basketItem.variation.data.prices.specialOffer.basePrice;
       }
 
@@ -20002,7 +20002,7 @@ Vue.component("contact-form", {
       _ValidationService.default.validate($("#contact-form")).done(function () {
         if (!_this.enableConfirmingPrivacyPolicy || _this.privacyPolicyAccepted) {
           if (useCapture) {
-            window.grecaptcha.execute();
+            grecaptcha.execute();
           } else {
             _this.sendMail();
           }
@@ -20091,8 +20091,8 @@ Vue.component("contact-form", {
           NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactSendFail"));
         }
       }).always(function () {
-        if (!(0, _utils.isNullOrUndefined)(window.grecaptcha)) {
-          window.grecaptcha.reset();
+        if (!(0, _utils.isNullOrUndefined)(grecaptcha)) {
+          grecaptcha.reset();
         }
       });
     },
