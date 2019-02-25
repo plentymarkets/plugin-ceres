@@ -17,10 +17,10 @@ Vue.component("basket-totals", {
                 "shippingCostsNet",
                 "shippingCostsGross",
                 "totalSumNet",
-                "coupon",
+                "promotionCoupon",
                 "vats",
                 "totalSumGross",
-                "couponDiscount",
+                "salesCoupon",
                 "openAmount"
             ]
         }
