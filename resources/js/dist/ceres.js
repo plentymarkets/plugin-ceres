@@ -20349,7 +20349,7 @@ Vue.component("contact-form", {
       _ValidationService.default.validate($("#contact-form")).done(function () {
         if (!_this.enableConfirmingPrivacyPolicy || _this.privacyPolicyAccepted) {
           if (useCapture) {
-            grecaptcha.execute();
+            window.grecaptcha.execute();
           } else {
             _this.sendMail();
           }
@@ -20438,8 +20438,8 @@ Vue.component("contact-form", {
           NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactSendFail"));
         }
       }).always(function () {
-        if (!(0, _utils.isNullOrUndefined)(grecaptcha)) {
-          grecaptcha.reset();
+        if (!(0, _utils.isNullOrUndefined)(window.grecaptcha)) {
+          window.grecaptcha.reset();
         }
       });
     },
