@@ -32,7 +32,7 @@
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.singleItemAddToBasket") }}
                         </button>
-                        <button v-else-if="!buttonLockState" :disabled="waiting" class="btn btn-block btn-primary" @click="addToBasket()">
+                        <button v-else-if="!buttonLockState" :disabled="waiting || !hasPrice" class="btn btn-block btn-primary" @click="addToBasket()">
                             <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.singleItemAddToBasket") }}
                         </button>

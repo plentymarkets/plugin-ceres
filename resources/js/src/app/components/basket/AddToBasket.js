@@ -71,6 +71,11 @@ Vue.component("add-to-basket", {
         {
             type: Array,
             default: () => []
+        },
+        hasPrice:
+        {
+            type: Boolean,
+            default: true
         }
     },
     computed:
@@ -84,7 +89,8 @@ Vue.component("add-to-basket", {
             return this.isSalable &&
                 !this.hasChildren &&
                 (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) &&
-                !this.requiresProperties;
+                !this.requiresProperties &&
+                this.hasPrice;
         },
 
         requiresProperties()
