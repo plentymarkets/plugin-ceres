@@ -11,6 +11,7 @@
     {{ component( "Ceres::MyAccount.Components.AccountSettings" ) }}
     {{ component( "Ceres::MyAccount.Components.History" ) }}
     {{ component( "Ceres::MyAccount.Components.BankDataSelect" ) }}
+    {{ component("Ceres::MyAccount.Components.OrderDocuments") }}
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
