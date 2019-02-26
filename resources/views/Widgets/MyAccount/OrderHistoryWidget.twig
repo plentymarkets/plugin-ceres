@@ -13,112 +13,15 @@
 
 {{ Twig.set("page", "request.get('page') | default(1)" ) }}
 
-{{ Twig.set("orderDetailModalId", "uid()") }}
+{{ Twig.set("orderList", "services.order.getOrderOverviewListForMyAccount(services.customer.getContactId(), 1, 1)") }}
 
-{{ Twig.set("orderList", Twig.call("services.customer.getOrders", [Twig.var("page"), ordersPerPage]) ~ ".toArray()"  ) }}
+<div class="widget widget-order-history container-max widget-{{ widget.settings.appearance.mobile | default('primary') }}">
 
-<div class="widget widget-address widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+    {{ Twig.print("orderList | json_encode")}}
     
-    <h3 class="mb-3">{{ Twig.trans("Ceres::Template.orderHistory") }}</h3>
-
-    {% if hintText is not empty %}
-        <p>{{ hintText | raw }}</p>
-    {% endif %}
-
-    {{ Twig.if("orderList.totalsCount > 0") }}
-        <div class="form-group">
-            <div class="row mb-3">
-                <div class="col-12 col-md-12 col-lg-12">
-                    <!-- ORDER PAGINATION -->
-                    {{ Twig.if("orderList.lastPageNumber > 1") }}
-                        <div class="clearfix history-pagination">
-                            <div class="float-left counter">
-                                {{ Twig.trans("Ceres::Template.orderHistoryShow", {"countStart": Twig.var("orderList.firstOnPage"), "countEnd": Twig.var("orderList.lastOnPage"), "orderMaxCount": Twig.var("orderList.totalsCount") }) }}
-                            </div>
-                            {{ Twig.do("include 'Ceres::Category.Item.Partials.Pagination' with { 'currentPage': page }") }}
-                        </div>
-                    {{ Twig.endif() }}
-                    <!-- ./ORDER PAGINATION -->
-                    <hr>
-                    <!-- ORDER HISTORY TWIG -->
-                    <div class="order-list">
-                        {{ Twig.for("order", "orderList.entries") }}
-                            <order-history-item
-                                :order="{{ Twig.print("order | json_encode") }}"
-                                :order-detail-modal-id="{{ Twig.print('orderDetailModalId | json_encode') }}">
-                                <template slot="OrderHistoryPaymentInformation">
-                                    {{ Twig.print( Twig.call("LayoutContainer.show", ["Ceres::MyAccount.OrderHistoryPaymentInformation", Twig.var("order.order")]) ) }}
-                                </template>
-                            </order-history-item>
-                        {{ Twig.endfor() }}
-                    </div>
-                    <!-- ./ORDER HISTORY TWIG -->
-                </div>
-
-                <!-- ORDER DETAILS MODAL -->
-                <div id="orderDetails{{ Twig.print('orderDetailModalId') }}" class="modal fade" tabindex="-1" role="dialog">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3 class="modal-title">{{ trans("Ceres::Template.orderHistoryOrderDetails") }}</h3>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body" style="min-height:350px">
-                                {{ Twig.do("include 'Ceres::ItemList.Partials.LoadingAnimation'") }}
-                                <div id="dynamic-twig-content{{ Twig.print('orderDetailModalId') }}">
-                                    {# DYNAMIC ADD CONTENT #}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./ORDER DETAILS MODAL -->
-            </div>
-        </div>
-    {{ Twig.else() }}
-        <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
-    {{ Twig.endif() }}
-</div>
-
-
-
-
-
-{# ======================= #}
-
-
-<div class="widget widget-order-history container-max widget-{{ widget.settings.appearance.mobile | default('primary') }}">
-    <h4>{{ Twig.trans("Ceres::Template.orderHistory") }}</h4>
-    {% if hintText is not empty %}
-        <p class="text-muted small font-italic">{{ hintText | raw }}</p>
-    {% endif %}
-
-    {{ Twig.if("orderList.totalsCount > 0") }}
-        <div class="row headerpart d-none d-sm-flex pb-2">
-            <div class="col-sm-9">
-                <div class="row">
-                    <div class="col-sm-3">Auftrags ID</div>
-                    <div class="col-sm-3">Auftragsdatum</div>
-                    <div class="col-sm-3">Summe</div>
-                    <div class="col-sm-3">Auftragsstatus</div>
-                </div>
-            </div>
-            <div class="col-sm-3"></div>
-        </div>
-        
-        <div class="order-item">
-            <order-history-item v-for="" :order-data=""></order-history-item>
-        </div>
-    {{ Twig.else() }}
-        <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
-    {{ Twig.endif() }}
-</div>
-
-{# ======================= #}
-
-<div class="widget widget-order-history container-max widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <order-history-list
-        :order-list=""
+        :order-list="[105]"
+        :orders-per-page="{{ ordersPerPage }}"
         :hint-text="{{ hintText | raw }}"
         :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile }}">
     </order-history-list>
