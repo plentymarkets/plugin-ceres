@@ -23,5 +23,22 @@
         {{ Twig.else() }}
             <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
         {{ Twig.endif() }}
+
+
+
+
+
+
+
+        <!-- RETURN PAGINATION -->
+        <div class="clearfix history-pagination" v-if="returnsList.totalsCount > itemsPerPage">
+            <div class="float-left counter">
+                {{ trans("Ceres::Template.returnHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+            </div>
+
+            {% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'orderList.page', 'pageMax': 'orderList.lastPageNumber', 'setPage': 'setPage' } %}
+
+        </div>
+        <!-- ./RETURN PAGINATION -->
     </div>
 </script>
