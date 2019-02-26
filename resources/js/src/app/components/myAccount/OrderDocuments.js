@@ -13,6 +13,32 @@ Vue.component("order-documents", {
         {
             type: Array,
             default: () => []
+        },
+
+        type:
+        {
+            type: String,
+            default: "order"
+        },
+
+        allowedTypesForOrders:
+        {
+            type: Array,
+            default: () => [
+                "invoice",
+                "invoice_external",
+                "delivery_note",
+                "order_confirmation",
+                "pickup_delivery"
+            ]
+        },
+
+        allowedTypesForReturns:
+        {
+            type: Array,
+            default: () => [
+                "return_note"
+            ]
         }
     },
 
@@ -21,11 +47,24 @@ Vue.component("order-documents", {
         this.$options.template = this.template;
     },
 
+    computed:
+    {
+        activeDocuments()
+        {
+            if (this.type === "order")
+            {
+                return this.documents.filter(document => this.allowedTypesForOrders.includes(document.type));
+            }
+
+            return this.documents.filter(document => this.allowedTypesForReturns.includes(document.type));
+        }
+    },
+
     methods:
     {
         getTypeName(type)
         {
-            const types = {
+            return ({
                 correction_document: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsCorrectionDocument"),
                 credit_note: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsCreditNote"),
                 delivery_note: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsDeliveryNote"),
@@ -39,9 +78,7 @@ Vue.component("order-documents", {
                 receipt: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsReceipt"),
                 return_note: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsReturnNote"),
                 success_confirmation: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsSuccessConfirmation")
-            };
-
-            return types[type];
+            })[type];
         }
     }
 });
