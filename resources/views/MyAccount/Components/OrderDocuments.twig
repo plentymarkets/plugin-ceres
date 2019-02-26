@@ -1,0 +1,10 @@
+<script type="x/template" id="vue-order-documents">
+    <div>
+        <div class="h3">{{ trans("Ceres::Template.myAccountOrderReceipts") }}</div>
+        <div v-for="receipt of documents">
+            <a class="btn btn-warning btn-block mb-1" :href="'/order-document/' + receipt.id" target="_blank">
+                ${ getTypeName(receipt.type) }
+            </a>
+        </div>
+    </div>
+</script>
