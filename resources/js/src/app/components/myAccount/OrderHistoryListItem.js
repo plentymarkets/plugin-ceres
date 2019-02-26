@@ -42,7 +42,7 @@ Vue.component("order-history-list-item", {
                 {
                     this.orderDetails = orderDetails;
 
-                    const compiled = Vue.compile(this.$refs.orderDetailsContainer.outerHTML);
+                    const compiled = Vue.compile(`<div>${orderDetails}</div>`);
                     const component = new Vue({
                         store: window.ceresStore,
                         render: compiled.render,
