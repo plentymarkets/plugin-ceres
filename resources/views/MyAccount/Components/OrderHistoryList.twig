@@ -6,14 +6,14 @@
         <h4>{{ Twig.trans("Ceres::Template.orderHistory") }}</h4>
         <p v-if="hintText" v-html="hintText" class="text-muted small font-italic">${ hintText | raw }}</p>
 
-        {{ Twig.if("orderList.totalsCount > 0") }}
+        <template v-if="orderList.totalsCount > 0">
             <div class="row headerpart d-none d-sm-flex pb-2">
                 <div class="col-sm-9">
                     <div class="row">
-                        <div class="col-sm-3">Auftrags ID</div>
-                        <div class="col-sm-3">Auftragsdatum</div>
-                        <div class="col-sm-3">Summe</div>
-                        <div class="col-sm-3">Auftragsstatus</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryOrderId") }}</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryDate") }}</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryTotal") }}</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryStatus") }}</div>
                     </div>
                 </div>
                 <div class="col-sm-3"></div>
@@ -26,9 +26,10 @@
                     :order="order">
                 </order-history-list-item>
             </div>
-        {{ Twig.else() }}
+        </template>
+        <template v-else>
             <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
-        {{ Twig.endif() }}
+        </template>
 
 
 
