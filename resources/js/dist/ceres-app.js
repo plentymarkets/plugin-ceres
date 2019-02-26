@@ -24186,8 +24186,8 @@ Vue.component("order-history-list-item", {
       type: String,
       default: "Ceres::MyAccount.Partials.OrderHistoryListItemDetails"
     },
-    orderId: {
-      type: Number,
+    order: {
+      type: Object,
       required: true
     }
   },
@@ -24203,7 +24203,7 @@ Vue.component("order-history-list-item", {
     loadOrderDetailTemplate: function loadOrderDetailTemplate() {
       var _this = this;
 
-      _ApiService.default.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.orderId).done(function (orderDetails) {
+      _ApiService.default.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
         _this.orderDetails = orderDetails;
       });
     },

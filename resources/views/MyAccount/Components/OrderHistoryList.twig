@@ -20,7 +20,11 @@
             </div>
             
             <div class="order-item">
-                <order-history-list-item v-for="order in orderList.orders" :order-data="order"></order-history-list-item>
+                <order-history-list-item
+                    v-for="order in orderList.entries"
+                    :key="order.id"
+                    :order="order">
+                </order-history-list-item>
             </div>
         {{ Twig.else() }}
             <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>

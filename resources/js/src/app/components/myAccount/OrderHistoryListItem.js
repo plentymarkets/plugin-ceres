@@ -13,9 +13,9 @@ Vue.component("order-history-list-item", {
             type: String,
             default: "Ceres::MyAccount.Partials.OrderHistoryListItemDetails"
         },
-        orderId:
+        order:
         {
-            type: Number,
+            type: Object,
             required: true
         }
     },
@@ -37,7 +37,7 @@ Vue.component("order-history-list-item", {
         loadOrderDetailTemplate()
         {
             ApiService
-                .get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.orderId)
+                .get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id)
                 .done(orderDetails =>
                 {
                     this.orderDetails = orderDetails;
