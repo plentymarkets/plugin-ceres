@@ -24057,14 +24057,45 @@ Vue.component("order-documents", {
       default: function _default() {
         return [];
       }
+    },
+    type: {
+      type: String,
+      default: "order"
+    },
+    allowedTypesForOrders: {
+      type: Array,
+      default: function _default() {
+        return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery"];
+      }
+    },
+    allowedTypesForReturns: {
+      type: Array,
+      default: function _default() {
+        return ["return_note"];
+      }
     }
   },
   created: function created() {
     this.$options.template = this.template;
   },
+  computed: {
+    activeDocuments: function activeDocuments() {
+      var _this = this;
+
+      if (this.type === "order") {
+        return this.documents.filter(function (document) {
+          return _this.allowedTypesForOrders.includes(document.type);
+        });
+      }
+
+      return this.documents.filter(function (document) {
+        return _this.allowedTypesForReturns.includes(document.type);
+      });
+    }
+  },
   methods: {
     getTypeName: function getTypeName(type) {
-      var types = {
+      return {
         correction_document: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsCorrectionDocument"),
         credit_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsCreditNote"),
         delivery_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsDeliveryNote"),
@@ -24078,8 +24109,7 @@ Vue.component("order-documents", {
         receipt: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsReceipt"),
         return_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsReturnNote"),
         success_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsSuccessConfirmation")
-      };
-      return types[type];
+      }[type];
     }
   }
 });

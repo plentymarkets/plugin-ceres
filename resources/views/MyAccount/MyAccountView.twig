@@ -147,10 +147,12 @@
 
         {% set orderList = services.order.getOrderOverviewListForMyAccount(1, 2) %}
 
-        <order-history-list
-            :order-list="{{orderList | json_encode }}"
-            :orders-per-page="5">
-        </order-history-list>
+        <div class="container-max">
+            <order-history-list
+                :order-list="{{orderList | json_encode }}"
+                :orders-per-page="5">
+            </order-history-list>
+        </div>
     </my-account>
 
 {% endblock %}

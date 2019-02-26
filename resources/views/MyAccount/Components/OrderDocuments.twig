@@ -4,7 +4,7 @@
     <div>
         {% if "order-document" in enabledRoutes or "all" in enabledRoutes %}
             <div class="h3">{{ trans("Ceres::Template.myAccountOrderReceipts") }}</div>
-            <div v-for="receipt of documents">
+            <div v-for="receipt of activeDocuments">
                 <a class="btn btn-warning btn-block mb-1" :href="'/order-document/' + receipt.id" target="_blank">
                     ${ getTypeName(receipt.type) }
                 </a>
