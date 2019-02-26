@@ -1,4 +1,4 @@
-Vue.component("order-list-item", {
+Vue.component("order-history-list-item", {
 
     props:
     {
@@ -9,7 +9,7 @@ Vue.component("order-list-item", {
         orderDetailsTemplate:
         {
             type: String,
-            default: "Ceres::Checkout.OrderDetails"
+            default: "Ceres::MyAccount.Partials.OrderHistoryItemDetails"
         }
     },
 
@@ -27,5 +27,8 @@ Vue.component("order-list-item", {
 
     methods:
     {
+        loadOrderDetailTemplate()
+        {
+        }
     }
 });

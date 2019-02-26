@@ -1,7 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ Twig.component( "Ceres::MyAccount.Components.OrderHistoryItem" ) }}
+{{ Twig.component( "Ceres::MyAccount.Components.OrderHistoryList" ) }}
 
 {{ Twig.set("loadingAnimationType", "config('Ceres.item.loading_animation_type')") }}
 
@@ -117,7 +117,9 @@
 {# ======================= #}
 
 <div class="widget widget-order-history container-max widget-{{ widget.settings.appearance.mobile | default('primary') }}">
-    <order-list :order-list="" :hint-text="" :allow-payment-provider-change=""></order-list>
+    <order-history-list
+        :order-list=""
+        :hint-text="{{ hintText | raw }}"
+        :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile }}">
+    </order-history-list>
 </div>
-
-
