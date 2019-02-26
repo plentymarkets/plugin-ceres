@@ -6,7 +6,7 @@ Vue.component("order-history-list-item", {
     {
         template: {
             type: String,
-            default: "#vue-order-list-item"
+            default: "#vue-order-history-list-item"
         },
         orderDetailsTemplate:
         {

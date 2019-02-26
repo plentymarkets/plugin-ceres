@@ -1,5 +1,7 @@
 
-<script type="x/template" id="vue-order-list">
+{{ component( "Ceres::MyAccount.Components.OrderHistoryListItem" ) }}
+
+<script type="x/template" id="vue-order-history-list">
     <div>
         <h4>{{ Twig.trans("Ceres::Template.orderHistory") }}</h4>
         <p v-if="hintText" v-html="hintText" class="text-muted small font-italic">${ hintText | raw }}</p>
@@ -18,7 +20,7 @@
             </div>
             
             <div class="order-item">
-                <order-history-list-item v-for="" :order-data=""></order-history-list-item>
+                <order-history-list-item v-for="order in orderList.orders" :order-data="order"></order-history-list-item>
             </div>
         {{ Twig.else() }}
             <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
@@ -30,15 +32,14 @@
 
 
 
-        <!-- RETURN PAGINATION -->
-        <div class="clearfix history-pagination" v-if="returnsList.totalsCount > itemsPerPage">
+        <div class="clearfix history-pagination" v-if="orderList.totalsCount > ordersPerPage">
             <div class="float-left counter">
-                {{ trans("Ceres::Template.returnHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+                {{ trans("Ceres::Template.orderHistoryShow", {"countStart": orderList.firstOnPage, "countEnd": orderList.lastOnPage, "orderMaxCount": orderList.totalsCount }) }}
             </div>
 
             {% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'orderList.page', 'pageMax': 'orderList.lastPageNumber', 'setPage': 'setPage' } %}
-
         </div>
-        <!-- ./RETURN PAGINATION -->
+
+
     </div>
 </script>

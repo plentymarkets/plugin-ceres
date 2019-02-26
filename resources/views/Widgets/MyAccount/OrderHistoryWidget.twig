@@ -13,9 +13,15 @@
 
 {{ Twig.set("page", "request.get('page') | default(1)" ) }}
 
+{{ Twig.set("orderList", "services.order.getOrderOverviewListForMyAccount(services.customer.getContactId(), 1, 1)") }}
+
 <div class="widget widget-order-history container-max widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+
+    {{ Twig.print("orderList | json_encode")}}
+    
     <order-history-list
         :order-list="[105]"
+        :orders-per-page="{{ ordersPerPage }}"
         :hint-text="{{ hintText | raw }}"
         :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile }}">
     </order-history-list>
