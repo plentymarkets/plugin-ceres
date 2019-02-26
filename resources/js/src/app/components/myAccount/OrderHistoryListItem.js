@@ -23,7 +23,6 @@ Vue.component("order-history-list-item", {
     data()
     {
         return {
-            orderDetails: ""
         };
     },
 
@@ -40,9 +39,7 @@ Vue.component("order-history-list-item", {
                 .get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id)
                 .done(orderDetails =>
                 {
-                    this.orderDetails = orderDetails;
-
-                    const compiled = Vue.compile(`<div>${orderDetails}</div>`);
+                    const compiled = Vue.compile(orderDetails);
                     const component = new Vue({
                         store: window.ceresStore,
                         render: compiled.render,
@@ -51,11 +48,6 @@ Vue.component("order-history-list-item", {
 
                     component.$mount(this.$refs.orderDetailsContainer);
                 });
-        },
-
-        getOrderDocument()
-        {
-            // $router->get('order-document/{documentId}', 'IO\Controllers\DocumentController@download');
         }
     }
 });

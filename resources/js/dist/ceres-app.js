@@ -24237,9 +24237,7 @@ Vue.component("order-history-list-item", {
     }
   },
   data: function data() {
-    return {
-      orderDetails: ""
-    };
+    return {};
   },
   created: function created() {
     this.$options.template = this.template;
@@ -24249,8 +24247,7 @@ Vue.component("order-history-list-item", {
       var _this = this;
 
       _ApiService.default.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
-        _this.orderDetails = orderDetails;
-        var compiled = Vue.compile(_this.$refs.orderDetailsContainer.outerHTML);
+        var compiled = Vue.compile(orderDetails);
         var component = new Vue({
           store: window.ceresStore,
           render: compiled.render,
@@ -24258,8 +24255,6 @@ Vue.component("order-history-list-item", {
         });
         component.$mount(_this.$refs.orderDetailsContainer);
       });
-    },
-    getOrderDocument: function getOrderDocument() {// $router->get('order-document/{documentId}', 'IO\Controllers\DocumentController@download');
     }
   }
 });
