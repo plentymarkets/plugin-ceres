@@ -1,3 +1,5 @@
+{{ component("Ceres::MyAccount.Components.OrderDocuments") }}
+
 <script type="x/template" id="vue-order-history-list-item">
     <div class="order">
         <div @click="loadOrderDetailTemplate()" class="row container_clickable border py-3">
@@ -28,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div v-html="orderDetails" class="container_main">
+        <div ref="orderDetailsContainer" v-html="orderDetails" class="container_main">
             {# lazy load: Ceres::MyAccount.Partials.OrderHistoryListItemDetails #}
         </div>
     </div>

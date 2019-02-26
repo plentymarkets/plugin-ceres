@@ -41,6 +41,15 @@ Vue.component("order-history-list-item", {
                 .done(orderDetails =>
                 {
                     this.orderDetails = orderDetails;
+
+                    const compiled = Vue.compile(this.$refs.orderDetailsContainer.outerHTML);
+                    const component = new Vue({
+                        store: window.ceresStore,
+                        render: compiled.render,
+                        staticRenderFns: compiled.staticRenderFns
+                    });
+
+                    component.$mount(this.$refs.orderDetailsContainer);
                 });
         },
 
