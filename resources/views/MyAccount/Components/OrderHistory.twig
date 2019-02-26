@@ -37,8 +37,6 @@
                 <!-- ORDER HISTORY TWIG -->
                 <div class="order-list">
                     {% for entry in orderList.entries %}
-                        <order-documents :documents="{{ entry.order.documents | json_encode }}"></order-documents>
-
                         <article class="cmp cmp-order-item">
                             <div class="item-details small">
                                 <div class="mb-3">

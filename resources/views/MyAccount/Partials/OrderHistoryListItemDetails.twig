@@ -1,4 +1,3 @@
-{#  #}
 <div class="row middlepart border">
     <div class="col-md-7 products border">
         <div class="row">
@@ -181,5 +180,6 @@
         <a href="#" class="btn btn-primary btn-block">Lieferschein öffnen<i class="fa fa-file-text" aria-hidden="true"></i></a>
         <a href="#" class="btn btn-primary btn-block">Rechnung öffnen<i class="fa fa-file-text" aria-hidden="true"></i></a>
         <a href="#" class="btn btn-primary btn-block">Retour<i class="fa fa-repeat" aria-hidden="true"></i></a>
+        <order-documents :documents="{{ orderData.order.documents | json_encode }}"></order-documents>
     </div>
 </div>
