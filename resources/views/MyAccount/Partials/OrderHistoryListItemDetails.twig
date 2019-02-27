@@ -1,7 +1,9 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
+{% set initialMaxItemsPerOrder = 5 %}
 {% set basketTotalsCurrency = totals.currency %}
+
 <div>
     <div class="row container_middle border">
         <div class="col-md-7 products border">
@@ -11,6 +13,11 @@
                 {% set rebatedAmountTotal = 0 %}
 
                 {% for item in orderData.order.orderItems %}
+                    
+                    {% if loop.index == initialMaxItemsPerOrder + 1 %}
+                        <div :id="'collapse_'+ _uid" class="collapse">
+                    {% endif %}
+
                     {% if item.itemVariationId > 0 and not ('[-]' in item.orderItemName) %}
                         {% set currentVariationId = item.itemVariationId | trimNewlines %}
 
@@ -97,8 +104,23 @@
                         </div>
                     {% endif %}
                 {% endfor %}
+
+            {% if orderData.order.orderItems | length > initialMaxItemsPerOrder %}
+                </div>
+            {% endif %}
+
             </div>
-            <div class="row mb-2"><div class="col-sm-12 text-center "><a class="text-primary" href="#">Alles anzeigen</a></div></div>
+
+            {% if orderData.order.orderItems | length > initialMaxItemsPerOrder %}
+                <div class="row mb-2">
+                    <div class="col-sm-12 text-center ">
+                        <a class="btn text-primary collapsed" data-toggle="collapse" :data-target="'#collapse_'+ _uid" aria-expanded="false" :aria-controls="'collapse_'+ _uid">
+                            Alles anzeigen
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+
         </div>
         <div class="col-md-5 sum">
             <div class="cmp cmp-totals row pt-3">
