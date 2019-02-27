@@ -3272,7 +3272,8 @@
                 "type": "checkbox",
                 "defaultValue": true,
                 "options": {
-                    "name": "Widget.allowPaymentProviderChange"
+                    "name": "Widget.orderHistoryAllowPaymentProviderChangeLabel",
+                    "tooltip": "Widget.orderHistoryAllowPaymentProviderChangeTooltip"
                 }
             }
         }

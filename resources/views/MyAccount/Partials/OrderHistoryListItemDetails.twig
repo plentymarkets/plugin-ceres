@@ -286,16 +286,18 @@
         </div>
         <div class="col-md-5">
             {# <a href="#" class="btn btn-primary btn-block">Zahlungsänderung<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> #}
-            <change-payment-method
-                template="#vue-change-payment-method"
-                :current-order="{{ orderData.order | json_encode }}"
-                :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
-                :allowed-payment-methods="{{ orderData.paymentMethodListForSwitch | json_encode }}"
-                :payment-status="{{ orderData.paymentStatus | json_encode }}"
-                current-template="tpl.my-account"
-                :current-payment-method-name="{{ orderData.paymentMethodName | json_encode }}">
-            </change-payment-method>
-            {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", orderData.order) }}
+            <template v-if="allowPaymentProviderChange">
+                <change-payment-method
+                    template="#vue-change-payment-method"
+                    :current-order="{{ orderData.order | json_encode }}"
+                    :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
+                    :allowed-payment-methods="{{ orderData.paymentMethodListForSwitch | json_encode }}"
+                    :payment-status="{{ orderData.paymentStatus | json_encode }}"
+                    current-template="tpl.my-account"
+                    :current-payment-method-name="{{ orderData.paymentMethodName | json_encode }}">
+                </change-payment-method>
+                {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", orderData.order) }}
+            </template>
             
             {% if orderData.isReturnable %}
                 <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="/returns/{{ orderData.order.id }}">
