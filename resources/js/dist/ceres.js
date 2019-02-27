@@ -24644,6 +24644,10 @@ Vue.component("order-history-list-item", {
     order: {
       type: Object,
       required: true
+    },
+    allowPaymentProviderChange: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -24667,7 +24671,8 @@ Vue.component("order-history-list-item", {
           var compiled = Vue.compile(orderDetails);
           var component = new Vue({
             data: {
-              showAllOrderItems: _this.showAllOrderItems
+              showAllOrderItems: _this.showAllOrderItems,
+              allowPaymentProviderChange: _this.allowPaymentProviderChange
             },
             store: window.ceresStore,
             render: compiled.render,

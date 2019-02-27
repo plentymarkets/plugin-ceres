@@ -24325,7 +24325,7 @@ Vue.component("order-history-list-item", {
           var component = new Vue({
             data: {
               showAllOrderItems: _this.showAllOrderItems,
-              allowPaymentProviderChange: allowPaymentProviderChange
+              allowPaymentProviderChange: _this.allowPaymentProviderChange
             },
             store: window.ceresStore,
             render: compiled.render,

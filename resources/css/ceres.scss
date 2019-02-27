@@ -20299,6 +20299,11 @@ html.ie {
                 background-color: $value;
             }
 
+            .sk-fading-circle > .sk-circle:before
+            {
+                background-color: $value;
+            }
+
             .text-primary
             {
                 @extend .text-#{$color};
@@ -20328,6 +20333,7 @@ html.ie {
         }
     }
 }
+
 
 
 // Bootstrap Compatibility 
