@@ -25,7 +25,8 @@
                 <order-history-list-item
                     v-for="order in orderList.entries"
                     :key="order.id"
-                    :order="order">
+                    :order="order"
+                    :allow-payment-provider-change="allowPaymentProviderChange">
                 </order-history-list-item>
             </div>
         </template>

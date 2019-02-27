@@ -287,6 +287,7 @@
         <div class="col-md-5">
             {# <a href="#" class="btn btn-primary btn-block">Zahlungsänderung<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> #}
             <change-payment-method
+                v-if="allowPaymentProviderChange"
                 template="#vue-change-payment-method"
                 :current-order="{{ orderData.order | json_encode }}"
                 :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
