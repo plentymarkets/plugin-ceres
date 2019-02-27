@@ -15,7 +15,7 @@
                 {% for item in orderData.order.orderItems %}
                     
                     {% if loop.index == initialMaxItemsPerOrder + 1 %}
-                        <div :id="'collapse_'+ _uid" class="collapse">
+                        <div v-if="showAllOrderItems">
                     {% endif %}
 
                     {% if item.itemVariationId > 0 and not ('[-]' in item.orderItemName) %}
@@ -113,13 +113,17 @@
             {% if orderData.order.orderItems | length > initialMaxItemsPerOrder %}
                 <div class="row mb-2">
                     <div class="col-sm-12 text-center ">
-                        <a class="btn text-primary collapsed" data-toggle="collapse" :data-target="'#collapse_'+ _uid" aria-expanded="false" :aria-controls="'collapse_'+ _uid">
-                            Alles anzeigen
+                        <a class="btn text-primary collapsed" @click="showAllOrderItems = !showAllOrderItems">
+                            <template v-if="showAllOrderItems">
+                                {{ trans("Ceres::Template.orderHistoryReturnShowLess") }}
+                            </template>
+                            <template v-else>
+                                {{ trans("Ceres::Template.returnHistoryReturnShowMore") }}
+                            </template>
                         </a>
                     </div>
                 </div>
             {% endif %}
-
         </div>
         <div class="col-md-5 sum">
             <div class="cmp cmp-totals row pt-3">

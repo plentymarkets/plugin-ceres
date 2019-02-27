@@ -24,7 +24,8 @@ Vue.component("order-history-list-item", {
     {
         return {
             waiting: false,
-            isDataLoaded: false
+            isDataLoaded: false,
+            showAllOrderItems: false
         };
     },
 
@@ -47,6 +48,7 @@ Vue.component("order-history-list-item", {
                     {
                         const compiled = Vue.compile(orderDetails);
                         const component = new Vue({
+                            data: { showAllOrderItems: this.showAllOrderItems },
                             store: window.ceresStore,
                             render: compiled.render,
                             staticRenderFns: compiled.staticRenderFns
