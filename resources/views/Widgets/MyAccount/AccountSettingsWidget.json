@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::AccountSettingsWidget",
     "label": "Widget.myAccountAccountSettingsLabel",
-    "previewImageURL": "/images/widgets/accountSettings.svg",
+    "previewImageURL": "/images/widgets/account-settings.svg",
     "type": "myaccount",
     "categories": ["myaccount"],
     "position": 100,
