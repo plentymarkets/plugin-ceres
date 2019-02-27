@@ -24302,7 +24302,8 @@ Vue.component("order-history-list-item", {
   data: function data() {
     return {
       waiting: false,
-      isDataLoaded: false
+      isDataLoaded: false,
+      showAllOrderItems: false
     };
   },
   created: function created() {
@@ -24318,6 +24319,9 @@ Vue.component("order-history-list-item", {
         _ApiService.default.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
           var compiled = Vue.compile(orderDetails);
           var component = new Vue({
+            data: {
+              showAllOrderItems: _this.showAllOrderItems
+            },
             store: window.ceresStore,
             render: compiled.render,
             staticRenderFns: compiled.staticRenderFns
