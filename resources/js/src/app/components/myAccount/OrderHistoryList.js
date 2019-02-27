@@ -1,3 +1,7 @@
+import ApiService from "services/ApiService";
+import TranslationService from "services/TranslationService";
+import NotificationService from "services/NotificationService";
+
 Vue.component("order-history-list", {
 
     props:
@@ -6,11 +10,6 @@ Vue.component("order-history-list", {
         {
             type: String,
             default: "#vue-order-history-list"
-        },
-        orderList:
-        {
-            type: Object,
-            required: true
         },
         page:
         {
@@ -37,16 +36,44 @@ Vue.component("order-history-list", {
     data()
     {
         return {
-
+            waiting: false,
+            orderList: {}
         };
     },
 
     created()
     {
         this.$options.template = this.template;
+        this.setPage(1);
     },
 
     methods:
     {
+        setPage(page = 1)
+        {
+            if (!this.waiting)
+            {
+                this.waiting = true;
+
+                const lastPage = this.orderList.page;
+
+                this.orderList.page = page;
+
+                ApiService.get("/rest/io/customer/order/list", { page: page, items: this.ordersPerPage })
+                    .done(response =>
+                    {
+                        this.waiting = false;
+                        this.orderList = response;
+                    })
+                    .fail(response =>
+                    {
+                        this.waiting = false;
+                        this.orderList.page = lastPage;
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.returnHistoryOops")
+                        );
+                    });
+            }
+        }
     }
 });

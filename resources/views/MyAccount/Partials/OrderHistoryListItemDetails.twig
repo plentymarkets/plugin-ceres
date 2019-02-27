@@ -49,7 +49,6 @@
                                 <div>{{ trans("Ceres::Template.orderHistoryQuantity") }}: {{ item.quantity }}</div>
                                 <div>{{ trans("Ceres::Template.orderHistoryTotal") }}: {{ (item.quantity * (itemPrice + rebatedAmount)) | formatMonetary( item.amounts[0].currency ) }}</div>
 
-                                {# TETS ItemBundle #}
                                 {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
                                     <div class="item-bundle">
                                         {% for bundleComponent in item.bundleComponents %}

@@ -24208,15 +24208,19 @@ Vue.component("order-history-item", {
 },{"services/ApiService":257}],198:[function(require,module,exports){
 "use strict";
 
+var _ApiService = _interopRequireDefault(require("services/ApiService"));
+
+var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
+
+var _NotificationService = _interopRequireDefault(require("services/NotificationService"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 Vue.component("order-history-list", {
   props: {
     template: {
       type: String,
       default: "#vue-order-history-list"
-    },
-    orderList: {
-      type: Object,
-      required: true
     },
     page: {
       type: Number,
@@ -24236,15 +24240,44 @@ Vue.component("order-history-list", {
     }
   },
   data: function data() {
-    return {};
+    return {
+      waiting: false,
+      orderList: {}
+    };
   },
   created: function created() {
     this.$options.template = this.template;
+    this.setPage(1);
   },
-  methods: {}
+  methods: {
+    setPage: function setPage() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      if (!this.waiting) {
+        this.waiting = true;
+        var lastPage = this.orderList.page;
+        this.orderList.page = page;
+
+        _ApiService.default.get("/rest/io/customer/order/list", {
+          page: page,
+          items: this.ordersPerPage
+        }).done(function (response) {
+          _this.waiting = false;
+          _this.orderList = response;
+        }).fail(function (response) {
+          _this.waiting = false;
+          _this.orderList.page = lastPage;
+
+          _NotificationService.default.error(_TranslationService.default.translate("Ceres::Template.returnHistoryOops"));
+        });
+      }
+    }
+  }
 });
 
-},{}],199:[function(require,module,exports){
+},{"services/ApiService":257,"services/NotificationService":261,"services/TranslationService":262}],199:[function(require,module,exports){
 "use strict";
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
@@ -24267,7 +24300,10 @@ Vue.component("order-history-list-item", {
     }
   },
   data: function data() {
-    return {};
+    return {
+      waiting: false,
+      isDataLoaded: false
+    };
   },
   created: function created() {
     this.$options.template = this.template;
@@ -24276,15 +24312,22 @@ Vue.component("order-history-list-item", {
     loadOrderDetailTemplate: function loadOrderDetailTemplate() {
       var _this = this;
 
-      _ApiService.default.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
-        var compiled = Vue.compile(orderDetails);
-        var component = new Vue({
-          store: window.ceresStore,
-          render: compiled.render,
-          staticRenderFns: compiled.staticRenderFns
+      if (!this.waiting && !this.isDataLoaded) {
+        this.waiting = true;
+
+        _ApiService.default.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
+          var compiled = Vue.compile(orderDetails);
+          var component = new Vue({
+            store: window.ceresStore,
+            render: compiled.render,
+            staticRenderFns: compiled.staticRenderFns
+          });
+          component.$mount(_this.$refs.orderDetailsContainer);
+          _this.isDataLoaded = true;
+        }).always(function () {
+          _this.waiting = true;
         });
-        component.$mount(_this.$refs.orderDetailsContainer);
-      });
+      }
     }
   }
 });
