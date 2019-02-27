@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 350 120" style="enable-background:new 0 0 350 120;" xml:space="preserve">
+<rect x="-0.125" y="0.212" style="fill:#008EBD;" width="350" height="120"/>
+<g>
+	<g>
+		<g>
+			<path style="fill:#FFFFFF;" d="M201.59,18.637l14,14h-14V18.637 M201.59,16.637c-0.258,0-0.517,0.05-0.765,0.152
+				c-0.747,0.31-1.235,1.039-1.235,1.848v14c0,1.105,0.895,2,2,2h14c0.809,0,1.538-0.487,1.848-1.235
+				c0.31-0.747,0.138-1.608-0.434-2.18l-14-14C202.622,16.84,202.11,16.637,201.59,16.637L201.59,16.637z"/>
+		</g>
+		<g>
+			<path style="fill:#FFFFFF;" d="M201.412,18.637l14.178,14.178v57.822h-62v-72H201.412 M201.412,16.637H153.59
+				c-1.105,0-2,0.895-2,2v72c0,1.105,0.895,2,2,2h62c1.105,0,2-0.895,2-2V32.814c0-0.53-0.211-1.039-0.586-1.414l-14.178-14.178
+				C202.452,16.848,201.943,16.637,201.412,16.637L201.412,16.637z"/>
+		</g>
+	</g>
+	<g>
+		<circle style="fill:#008EBD;" cx="217.625" cy="87.788" r="15"/>
+		<path style="fill:#FFFFFF;" d="M217.625,73.788c7.732,0,14,6.268,14,14s-6.268,14-14,14s-14-6.268-14-14
+			S209.893,73.788,217.625,73.788 M217.625,71.788c-8.822,0-16,7.178-16,16s7.178,16,16,16s16-7.178,16-16
+			S226.447,71.788,217.625,71.788L217.625,71.788z"/>
+	</g>
+	
+		<polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+		216.125,79.788 216.125,90.788 226.125,90.788 	"/>
+	<rect x="134.625" y="46.288" style="fill:#008EBD;" width="34" height="42"/>
+	<g>
+		
+			<polyline style="fill:none;stroke:#FFFFFF;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+			157.069,76.081 131.477,76.081 124.801,47.707 118.125,47.707 		"/>
+		<circle style="fill:#FFFFFF;" cx="136.484" cy="82.046" r="3.338"/>
+		<circle style="fill:#FFFFFF;" cx="152.618" cy="82.046" r="3.338"/>
+		
+			<line style="fill:none;stroke:#FFFFFF;stroke-width:1.5;stroke-miterlimit:10;" x1="137.53" y1="51.113" x2="141.125" y2="71.88"/>
+		
+			<line style="fill:none;stroke:#FFFFFF;stroke-width:1.5;stroke-miterlimit:10;" x1="149.489" y1="71.88" x2="153.174" y2="51.113"/>
+		
+			<line style="fill:none;stroke:#FFFFFF;stroke-width:1.5;stroke-miterlimit:10;" x1="127.534" y1="61.616" x2="162.034" y2="61.616"/>
+		
+			<polygon style="fill:none;stroke:#FFFFFF;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+			125.443,50.971 164.125,50.971 159.943,71.88 130.559,71.88 		"/>
+	</g>
+	
+		<line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="162.125" y1="33.788" x2="191.125" y2="33.788"/>
+	
+		<line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="162.125" y1="45.454" x2="205.125" y2="45.454"/>
+	
+		<line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="169.125" y1="57.121" x2="205.125" y2="57.121"/>
+	
+		<line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="169.125" y1="68.788" x2="205.125" y2="68.788"/>
+</g>
+</svg>
