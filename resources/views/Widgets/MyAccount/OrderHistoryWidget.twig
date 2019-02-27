@@ -3,26 +3,16 @@
 
 {{ Twig.component( "Ceres::MyAccount.Components.OrderHistoryList" ) }}
 
-{{ Twig.set("loadingAnimationType", "config('Ceres.item.loading_animation_type')") }}
-
 {% set hintText = widget.settings.hintText.mobile %}
 {% set appearance = widget.settings.appearance.mobile %}
 {% set allowPaymentProviderChange = widget.settings.allowPaymentProviderChange.mobile %}
 
 {% set ordersPerPage = widget.settings.ordersPerPage.mobile %}
 
-{{ Twig.set("page", "request.get('page') | default(1)" ) }}
-
-{{ Twig.set("orderList", "services.order.getOrderOverviewListForMyAccount(services.customer.getContactId(), 1, 1)") }}
-
 <div class="widget widget-order-history container-max widget-{{ widget.settings.appearance.mobile | default('primary') }}">
-
-    {{ Twig.print("orderList | json_encode")}}
-    
     <order-history-list
-        :order-list="[105]"
         :orders-per-page="{{ ordersPerPage }}"
-        :hint-text="{{ hintText | raw }}"
-        :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile }}">
+        hint-text="{{ hintText | raw }}"
+        :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | json_encode }}">
     </order-history-list>
 </div>

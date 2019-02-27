@@ -3,7 +3,7 @@
 <script type="x/template" id="vue-order-history-list">
     <div class="order-history-list">
         <h4>{{ trans("Ceres::Template.orderHistory") }}</h4>
-        <p v-if="hintText" v-html="hintText" class="text-muted small font-italic">${ hintText | raw }}</p>
+        <p v-if="hintText" v-html="hintText">${ hintText | raw }}</p>
 
         <div v-if="waiting" class="loading">
             {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
