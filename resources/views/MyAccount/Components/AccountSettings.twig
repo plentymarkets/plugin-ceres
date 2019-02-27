@@ -2,7 +2,7 @@
     <div class="card-body">
  
         <div><strong>{{ trans("Ceres::Template.myAccountEmail") }}</strong></div>
-        <div>${ userData.email }</div>
+        <div v-if="!!userData">${ userData.email }</div>
         <div><strong>{{ trans("Ceres::Template.myAccountPassword") }}</strong></div>
         <div>***********</div>
 
