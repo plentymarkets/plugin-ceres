@@ -65,19 +65,19 @@ Vue.component("order-documents", {
         getTypeName(type)
         {
             return ({
-                correction_document: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsCorrectionDocument"),
-                credit_note: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsCreditNote"),
-                delivery_note: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsDeliveryNote"),
-                dunning_letter: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsDunningLetter"),
-                invoice_external: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsInvoiceExternal"),
-                invoice: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsInvoice"),
-                offer: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsOffer"),
-                order_confirmation: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsOrderConfirmation"),
-                pickup_delivery: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsPickupDelivery"),
-                pro_forma_invoice: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsProFormaInvoice"),
-                receipt: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsReceipt"),
-                return_note: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsReturnNote"),
-                success_confirmation: TranslationService.translate("Ceres::Template.myAccountOrderReceiptsSuccessConfirmation")
+                correction_document: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsCorrectionDocument"),
+                credit_note: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsCreditNote"),
+                delivery_note: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsDeliveryNote"),
+                dunning_letter: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsDunningLetter"),
+                invoice_external: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsInvoiceExternal"),
+                invoice: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsInvoice"),
+                offer: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsOffer"),
+                order_confirmation: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsOrderConfirmation"),
+                pickup_delivery: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsPickupDelivery"),
+                pro_forma_invoice: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsProFormaInvoice"),
+                receipt: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsReceipt"),
+                return_note: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsReturnNote"),
+                success_confirmation: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation")
             })[type];
         }
     }

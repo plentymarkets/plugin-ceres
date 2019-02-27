@@ -24096,19 +24096,19 @@ Vue.component("order-documents", {
   methods: {
     getTypeName: function getTypeName(type) {
       return {
-        correction_document: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsCorrectionDocument"),
-        credit_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsCreditNote"),
-        delivery_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsDeliveryNote"),
-        dunning_letter: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsDunningLetter"),
-        invoice_external: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsInvoiceExternal"),
-        invoice: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsInvoice"),
-        offer: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsOffer"),
-        order_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsOrderConfirmation"),
-        pickup_delivery: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsPickupDelivery"),
-        pro_forma_invoice: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsProFormaInvoice"),
-        receipt: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsReceipt"),
-        return_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsReturnNote"),
-        success_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderReceiptsSuccessConfirmation")
+        correction_document: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsCorrectionDocument"),
+        credit_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsCreditNote"),
+        delivery_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsDeliveryNote"),
+        dunning_letter: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsDunningLetter"),
+        invoice_external: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsInvoiceExternal"),
+        invoice: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsInvoice"),
+        offer: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsOffer"),
+        order_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsOrderConfirmation"),
+        pickup_delivery: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsPickupDelivery"),
+        pro_forma_invoice: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsProFormaInvoice"),
+        receipt: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsReceipt"),
+        return_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsReturnNote"),
+        success_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation")
       }[type];
     }
   }
