@@ -90,9 +90,14 @@
             "position": 800
         },
         {
+            "key": "myaccount",
+            "label": "Widget.categoryMyAccount",
+            "position": 900
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 900
+            "position": 1000
         }
     ],
     "globalSettings": {
