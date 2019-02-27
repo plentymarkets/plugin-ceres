@@ -1,3 +1,5 @@
+{{ component("Ceres::MyAccount.Components.OrderDocuments") }}
+
 <script type="x/template" id="vue-order-return-history-list-item">
     <div :id="'accordion_' + _uid" class="accordion col-sm-12">
         <div :id="'heading_' + _uid" class="row container_clickable collapsed border py-3" data-toggle="collapse" :data-target="'#collapse_'+ _uid" aria-expanded="false" :aria-controls="'collapse_'+ _uid">
@@ -10,16 +12,7 @@
                     <div class="col-sm-3"><span>{{ trans("Ceres::Template.returnHistoryPaymentMethod") }}</span><span>${ returnOrder.paymentMethodName }</span></div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="icons d-none d-sm-block">
-                    <a href="#" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.returnHistoryReceipt") }}"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
-                    <a href="#" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.returnHistoryLabel") }}"><i class="fa fa-clipboard" aria-hidden="true"></i></a>
-                </div>
-                <div class="buttons d-block d-sm-none mt-2">
-                    <a href="#" class="btn btn-primary btn-block"><span>{{ trans("Ceres::Template.returnHistoryReceipt") }}</span><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
-                    <a href="#" class="btn btn-primary btn-block"><span>{{ trans("Ceres::Template.returnHistoryLabel") }}</span><i class="fa fa-clipboard" aria-hidden="true"></i></a>
-                </div>
-            </div>
+            <order-documents :documents="returnOrder.order.documents" :appearance="appearance" class="col-sm-3" type="return"></order-documents>
         </div>
         <div :id="'collapse_'+ _uid" class="row container_middle border collapse" :aria-labelledby="'heading_'+ _uid" :data-parent="'#accordion_'+ _uid">
             <div class="col-sm-12 item py-2" v-for="orderItem in itemsToRender">
@@ -29,14 +22,16 @@
                             <img :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt=" orderItem | itemBundleName " :title="orderItem | itemBundleName">
                         </a>
                         <div class="d-inline-block item-description">
-                            <div><a class="text-primary" :href="returnOrder.itemURLs[orderItem.itemVariationId]">${ orderItem | itemBundleName }</a></div>
+                            <div><a :href="returnOrder.itemURLs[orderItem.itemVariationId]" :class="'text-' + appearance">${ orderItem | itemBundleName }</a></div>
                             <div>{{ trans("Ceres::Template.returnHistoryQuantity") }}: ${ orderItem.quantity}</div>
                         </div>
                     </div>
                 </div> 
             </div> 
-            <div class="col-sm-12 text-center">
-                <a class="text-primary" href="#">Alles anzeigen</a>
+            <div class="col-sm-12 text-center mb-2">
+                <a v-if="returnOrder.order.orderItems.length > itemsPerList" @click="toggleNaming('more-return-text-' + _uid)" :id="'more-return-text-' + _uid" :class="'text-' + appearance" data-toggle="collapse" :href="'#more-return-items-' + _uid" aria-expanded="false" aria-controls="collapseExample">
+                    {{ trans("Ceres::Template.returnHistoryReturnShowMore") }}
+                </a>
             </div>
         </div> 
     </div>

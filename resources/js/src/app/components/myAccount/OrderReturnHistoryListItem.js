@@ -8,6 +8,11 @@ Vue.component("order-return-history-list-item", {
             type: String,
             default: "#vue-order-return-history-list-item"
         },
+        appearance:
+        {
+            type: String,
+            default: "primary"
+        },
         returnOrder:
         {
             type: Object,
@@ -33,7 +38,6 @@ Vue.component("order-return-history-list-item", {
     created()
 	{
         this.$options.template = this.template;
-        // this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
     },
 
@@ -48,7 +52,7 @@ Vue.component("order-return-history-list-item", {
             }
             else
             {
-                this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
+                this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
                 document.getElementById(element).innerText = TranslationService.translate("Ceres::Template.returnHistoryReturnShowMore");
             }
         },

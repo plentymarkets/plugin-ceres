@@ -7,6 +7,7 @@
 {% set hintText = widget.settings.text.mobile %}
 {% set returnsPerPage = widget.settings.returnsPerPage.mobile %}
 {% set itemsPerList = widget.settings.itemsPerList.mobile %}
+{% set appearance = widget.settings.appearance.mobile %}
 
 <div class="widget widget-order-return-history">
     <h3>{{ Twig.trans("Ceres::Template.returnHistory") }}</h3>
@@ -15,15 +16,12 @@
     {% else %}
         <p class="text-muted small font-italic">{{ Twig.trans("Ceres::Template.returnHistoryHint") }}</p>
     {% endif %}
-
-    {% if orderList.totalsCount > 30 %}
-        <order-return-history-list
-            :returns-per-page="{{ returnsPerPage }}"
-            :items-per-list="{{ itemsPerList }}"
-            :show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
-            :show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
-        </order-return-history-list>
-    {% else %}
-        <p class="text-muted h4 my-4 text-center">{{ trans("Ceres::Template.returnHistoryNoReturns") }}</p>
-    {% endif %}
+    
+    <order-return-history-list
+        appearance="{{ appearance | default("primary") }}"
+        :returns-per-page="{{ returnsPerPage }}"
+        :items-per-list="{{ itemsPerList }}"
+        :show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
+        :show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
+    </order-return-history-list>
 </div>

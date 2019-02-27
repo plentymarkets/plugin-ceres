@@ -10,39 +10,13 @@
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "danger",
+            "defaultValue": "primary",
             "options": "@include(appearance)"
         },
         "text": {
             "type": "codeEditor",
             "options": {
                 "name": "Widget.myAccountHintTextLabel"
-            }
-        },
-        "buttonSize": {
-            "type": "select",
-            "required": true,
-            "defaultValue": "md",
-            "options": {
-                "name": "Widget.widgetButtonSizeLabel",
-                "tooltipText": "Widget.widgetButtonSizeTooltip",
-                "listBoxValues": [
-                    {
-                        "value": "sm",
-                        "caption": "Widget.widgetButtonSizeSm",
-                        "position": 0
-                    },
-                    {
-                        "value": "md",
-                        "caption": "Widget.widgetButtonSizeNormal",
-                        "position": 1
-                    },
-                    {
-                        "value": "lg",
-                        "caption": "Widget.widgetButtonSizeLg",
-                        "position": 2
-                    }
-                ]
             }
         },
         "itemsPerList": {
@@ -57,7 +31,7 @@
         "returnsPerPage": {
             "type": "number",
             "required": true,
-            "defaultValue": 3,
+            "defaultValue": 5,
             "options": {
                 "name": "Widget.orderReturnHistoryPage",
                 "tooltipText": "Widget.orderReturnHistoryPageTooltip"
