@@ -153,9 +153,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 
@@ -171,15 +168,7 @@
                     <p>
                         <strong>{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</strong>
                         <br>
-                        {% set paymentMethodId = -1 %}
-                        {% for propertyKey in orderData.order.properties %}
-                            {% if orderData.order.properties[loop.index0].typeId == 4 %}
-                                {% set paymentStatus = entry.order.properties[loop.index0].value %}
-                                <span id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderHistoryPaymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
-                            {% elseif orderData.order.properties[loop.index0].typeId == 3 %}
-                                {% set paymentMethodId = orderData.order.properties[loop.index0].value %}
-                            {% endif %}
-                        {% endfor %}
+                        <span id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderHistoryPaymentStatus_" ~ orderData.paymentStatus) }}</span>
                     </p>
                     <p><strong>{{ trans("Ceres::Template.orderHistoryShippingProfile") }}</strong><br>{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</p>
                 </div>
@@ -191,7 +180,13 @@
                         </div>
                         <div class="col-sm-6">
                             <h5 class="mb-3"><strong>{{ trans("Ceres::Template.orderHistoryShippingAddress") }}</strong></h5>
-                            <address-header :address="{{orderData.order.deliveryAddress | json_encode }}"></address-header>
+                            {% if orderData.order.billingAddress.id == orderData.order.deliveryAddress.id %}
+                                <span>
+                                    {{ trans("Ceres::Template.orderHistorySameAsInvoice") }}
+                                </span>
+                            {% else %}
+                                <address-header :address="{{orderData.order.deliveryAddress | json_encode }}"></address-header>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
