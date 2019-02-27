@@ -5,6 +5,14 @@
         <h4>{{ trans("Ceres::Template.orderHistory") }}</h4>
         <p v-if="hintText" v-html="hintText">${ hintText | raw }}</p>
 
+        <div class="clearfix history-pagination" v-if="orderList.totalsCount > ordersPerPage">
+            <div class="float-left counter">
+                {{ trans("Ceres::Template.orderHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+            </div>
+
+            {% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'orderList.page', 'pageMax': 'orderList.lastPageNumber', 'setPage': 'setPage' } %}
+        </div>
+
         <div v-if="waiting" class="loading">
             {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
         </div>
@@ -33,13 +41,5 @@
         <template v-else>
             <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
         </template>
-
-        <div class="clearfix history-pagination" v-if="orderList.totalsCount > ordersPerPage">
-            <div class="float-left counter">
-                {{ trans("Ceres::Template.orderHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
-            </div>
-
-            {% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'orderList.page', 'pageMax': 'orderList.lastPageNumber', 'setPage': 'setPage' } %}
-        </div>
     </div>
 </script>
