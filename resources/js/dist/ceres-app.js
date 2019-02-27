@@ -27171,7 +27171,9 @@ module.exports = function ($) {
     return _send(url, data, config);
   }
 
-  function _send(url, data, config) {
+  function _send(url) {
+    var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var config = arguments.length > 2 ? arguments[2] : undefined;
     var deferred = $.Deferred();
     url = (0, _url.normalizeUrl)(url);
     config = config || {};
@@ -27183,11 +27185,8 @@ module.exports = function ($) {
     config.headers = config.headers || {
       "Accept-Language": App.language
     };
-
-    if (data) {
-      data.templateEvent = App.templateEvent;
-      config.data = data;
-    }
+    data.templateEvent = App.templateEvent;
+    config.data = data;
 
     if (!config.doInBackground) {
       WaitScreenService.showWaitScreen();
