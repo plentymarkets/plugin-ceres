@@ -1,4 +1,4 @@
-.widget-retour-history {
+.order-return-history-list {
     .container_header {
         .row {
             div { 
@@ -12,6 +12,10 @@
         .item {
             border-top: 1px solid #dee2e6 !important;
             
+            &:first-child {
+                border-top: 0 !important;
+            }
+
             img {
                 height: 80px;
                 width: 80px;
@@ -37,7 +41,13 @@
     .container_clickable {
         cursor: pointer;
 
-        .fa-chevron-down {
+        &.collapsed {
+            .fa-chevron-up {
+                transform: scaleY(-1);
+                top: 5px;
+            }
+        }
+        .fa-chevron-up {
             position: absolute;
             left: 1.25rem;
             font-size: 1.5rem;
@@ -83,7 +93,7 @@
                     left: 170px;
                 }
             }
-            .fa-chevron-down {
+            .fa-chevron-up {
                 right: 3.25rem;
                 top: 2rem;
                 left: auto;
