@@ -21,10 +21,12 @@
                         <span class="col-6 col-sm-7">{{ orderData.order.createdAt | formatDateTime | date(trans("Ceres::Template.devDateTimeFormat")) }}</span>
                     </div>
 
-                    <div class="row">
-                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationStatus") }}</strong>
-                        <span class="col-6 col-sm-7">{{ orderData.order.statusName }}</span>
-                    </div>
+                    {% if orderData.status is defined and orderData.status.isFrontendVisible and orderData.status.names[lang] is not empty %}
+                        <div class="row">
+                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationStatus") }}</strong>
+                            <span class="col-6 col-sm-7">{{ orderData.status.names[lang] }}</span>
+                        </div>
+                    {% endif %}
                 </div>
 
                 <hr>
