@@ -20283,6 +20283,51 @@ html.ie {
     }
 }
 
+.widget-order-history
+{
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {
+            a
+            {
+                color: $value;
+            }
+
+            .loading-animation > div
+            {
+                background-color: $value;
+            }
+
+            .text-primary
+            {
+                @extend .text-#{$color};
+            }
+
+            .pagination
+            {
+                .page-item
+                {
+                    .page-link
+                    {
+                        color: $value;
+
+                        &:hover
+                        {
+                            color: darken($value, 15%);
+                        }
+                    }
+
+                    &.active .page-link
+                    {
+                        border-color: $value;
+                        @include context-bg($value);
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 // Bootstrap Compatibility 
