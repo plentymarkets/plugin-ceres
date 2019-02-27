@@ -4,7 +4,7 @@
             <!-- FIRST PAGE LINK -->
             {% if config('Ceres.pagination.showFirstPage') == "true" %}
                 <li class="page-item" v-if="{{ page }} > 2">
-                    <a class="page-link" href="" @click="{{ setPage }}(1)">
+                    <a class="page-link" @click="{{ setPage }}(1)">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                 </li>
@@ -13,7 +13,7 @@
 
             <!-- PREV LINK -->
             <li class="page-item" :class="{'disabled': {{ page }} <= 1}">
-                <a class="page-link" href="" @click="{{ setPage }}({{ page }}-1)">
+                <a class="page-link" @click="{{ setPage }}({{ page }}-1)">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </a>
             </li>
@@ -21,11 +21,11 @@
 
             <!-- PAGINATION -->
             <li class="page-item" v-if="{{ page }} === {{ pageMax }} && {{ page }} > 2">
-                <a class="page-link" href="" @click="{{ setPage }}({{ page }} - 2)">${ {{ page }} - 2 }</a>
+                <a class="page-link" @click="{{ setPage }}({{ page }} - 2)">${ {{ page }} - 2 }</a>
             </li>
 
             <li class="page-item" v-if="{{ page }} > 1">
-                <a class="page-link" href="" @click="{{ setPage }}({{ page }} - 1)">${ {{ page }} - 1 }</a>
+                <a class="page-link" @click="{{ setPage }}({{ page }} - 1)">${ {{ page }} - 1 }</a>
             </li>
 
             <li class="page-item active">
@@ -33,17 +33,17 @@
             </li>
 
             <li class="page-item" v-if="{{ page }} + 1 <= {{ pageMax }}">
-                <a class="page-link" href="" @click="{{ setPage }}({{ page }} + 1)">${ {{ page }} + 1 }</a>
+                <a class="page-link" @click="{{ setPage }}({{ page }} + 1)">${ {{ page }} + 1 }</a>
             </li>
 
             <li class="page-item" v-if="{{ page }} === 1 && {{ page }} + 2 <= {{ pageMax }}">
-                <a class="page-link" href="" @click="{{ setPage }}({{ page }} + 2)">${ {{ page }} + 2 }</a>
+                <a class="page-link" @click="{{ setPage }}({{ page }} + 2)">${ {{ page }} + 2 }</a>
             </li>
             <!-- ./PAGINATION -->
 
             <!-- NEXT LINK -->
             <li class="page-item" :class="{'disabled': {{ page }} >= {{ pageMax }}}">
-                <a class="page-link" href="" @click="{{ setPage }}({{ page }} + 1)">
+                <a class="page-link" @click="{{ setPage }}({{ page }} + 1)">
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
             </li>
@@ -52,7 +52,7 @@
             <!-- LAST PAGE LINK -->
             {% if config('Ceres.pagination.showLastPage') == "true" %}
                 <li class="page-item" v-if="{{ pageMax }} > 3 && {{ page }} < {{ pageMax }} - 1">
-                    <a class="page-link" href="" @click="{{ setPage }}({{ pageMax }})">
+                    <a class="page-link" @click="{{ setPage }}({{ pageMax }})">
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     </a>
                 </li>
