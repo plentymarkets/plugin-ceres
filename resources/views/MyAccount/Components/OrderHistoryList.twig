@@ -2,10 +2,13 @@
 
 <script type="x/template" id="vue-order-history-list">
     <div class="order-history-list">
-        <h4>{{ Twig.trans("Ceres::Template.orderHistory") }}</h4>
+        <h4>{{ trans("Ceres::Template.orderHistory") }}</h4>
         <p v-if="hintText" v-html="hintText" class="text-muted small font-italic">${ hintText | raw }}</p>
 
-        <template v-if="orderList.totalsCount > 0">
+        <div v-if="waiting" class="loading">
+            {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+        </div>
+        <template v-else-if="orderList.totalsCount > 0">
             <div class="row container_header d-none d-sm-flex pb-2">
                 <div class="col-sm-9">
                     <div class="row">
