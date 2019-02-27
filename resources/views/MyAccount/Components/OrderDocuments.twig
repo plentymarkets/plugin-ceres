@@ -4,8 +4,9 @@
     <div>
         {% if "order-document" in enabledRoutes or "all" in enabledRoutes %}
             <div v-for="receipt of activeDocuments">
-                <a class="btn btn-warning btn-block mb-1" :href="'/order-document/' + receipt.id" target="_blank">
+                <a class="btn btn-primary btn-block" :href="'/order-document/' + receipt.id" target="_blank">
                     ${ getTypeName(receipt.type) }
+                    <i class="fa fa-file-text" aria-hidden="true"></i>
                 </a>
             </div>
         {% endif %}
