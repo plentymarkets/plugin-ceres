@@ -3,7 +3,7 @@
 <script type="x/template" id="vue-order-return-history-list">
 
     <div class="order-return-history-list">
-		<div v-if="waiting" class="row">
+		<div v-if="waiting" class="row loading">
 			{% include "Ceres::ItemList.Partials.LoadingAnimation" %}
 		</div>
 	    <template v-else-if="returnsList.totalsCount > 0">
