@@ -22132,6 +22132,107 @@ html.ie .component-loading.with-icon:after {
       align-items: center;
 }
 
+.order-return-history-list .container_header .row div {
+  display: inline-block;
+  text-align: right;
+}
+
+.order-return-history-list .container_middle .item {
+  border-top: 1px solid #dee2e6 !important;
+}
+
+.order-return-history-list .container_middle .item:first-child {
+  border-top: 0 !important;
+}
+
+.order-return-history-list .container_middle .item img {
+  height: 80px;
+  width: 80px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.order-return-history-list .container_middle .item .item-description {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.order-return-history-list .container_middle .item .row .col-sm-4 {
+  text-align: right;
+}
+
+@media (max-width: 575.98px) {
+  .order-return-history-list .container_middle .item .row .col-sm-4 {
+    margin-top: 10px;
+  }
+}
+
+.order-return-history-list .container_clickable {
+  cursor: pointer;
+}
+
+.order-return-history-list .container_clickable.collapsed .fa-chevron-up {
+  transform: scaleY(-1);
+  top: 5px;
+}
+
+.order-return-history-list .container_clickable .fa-chevron-up {
+  position: absolute;
+  left: 1.25rem;
+  font-size: 1.5rem;
+}
+
+.order-return-history-list .container_clickable .col-sm-3 span:nth-child(2) {
+  vertical-align: sub;
+}
+
+@media (min-width: 576px) {
+  .order-return-history-list .container_clickable {
+    text-align: right;
+  }
+  .order-return-history-list .container_clickable .row div span:first-child {
+    display: none;
+  }
+  .order-return-history-list .container_clickable .icons {
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+  .order-return-history-list .container_clickable .icons .fa {
+    font-size: 2.4rem;
+    vertical-align: middle;
+  }
+  .order-return-history-list .container_clickable .icons a {
+    display: inline-block;
+  }
+  .order-return-history-list .container_clickable .icons a:nth-of-type(2) {
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .order-return-history-list .container_clickable div.icons {
+    position: relative;
+    margin-top: 0.75rem;
+  }
+  .order-return-history-list .container_clickable .row div span:first-child {
+    text-align: left;
+  }
+  .order-return-history-list .container_clickable .row div span:nth-child(2) {
+    position: absolute;
+    left: 170px;
+  }
+  .order-return-history-list .container_clickable .fa-chevron-up {
+    right: 3.25rem;
+    top: 2rem;
+    left: auto;
+  }
+}
+
+.order-return-history-list .fa-truck,
+.order-return-history-list .fa-repeat {
+  transform: scaleX(-1);
+}
+
 .cmp-method-list .method-list {
   list-style-type: none;
   margin: 0;
