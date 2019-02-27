@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::OrderHistoryWidget",
     "label": "Widget.orderHistoryLabel",
-    "previewImageURL": "TODO",
+    "previewImageURL": "/images/widgets/order-history.svg",
     "type": "myaccount",
     "categories": ["myaccount"],
     "position": 100,

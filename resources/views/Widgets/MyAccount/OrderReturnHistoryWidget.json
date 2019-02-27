@@ -1,9 +1,9 @@
 {
     "identifier": "Ceres::OrderReturnHistoryWidget",
     "label": "Widget.orderReturnHistoryLabel",
-    "previewImageURL": "/images/widgets/order-return-history.svg",
-    "type": "static",
-    "categories": ["static"],
+    "previewImageURL": "/images/widgets/return-history.svg",
+    "type": "myaccount",
+    "categories": ["myaccount"],
     "position": 700,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderReturnHistoryWidget",
     "settings": {
