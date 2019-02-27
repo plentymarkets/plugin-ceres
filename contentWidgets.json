@@ -3186,6 +3186,7 @@
             "myaccount"
         ],
         "position": 100,
+        "maxPerPage": 1,
         "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderHistoryWidget",
         "settings": {
             "appearance": {
