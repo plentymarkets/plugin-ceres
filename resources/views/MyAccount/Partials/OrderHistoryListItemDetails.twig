@@ -204,8 +204,8 @@
                 :current-order="{{ orderData.order | json_encode }}"
                 :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
                 :allowed-payment-methods="{{ orderData.paymentMethodListForSwitch | json_encode }}"
-                :payment-status="{{ paymentStatus | json_encode }}"
-                :current-template="{{ currentTemplate | json_encode }}"
+                :payment-status="{{ orderData.paymentStatus | json_encode }}"
+                current-template="tpl.my-account"
                 :current-payment-method-name="{{ orderData.paymentMethodName | json_encode }}">
             </change-payment-method>
             {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", orderData.order) }}
