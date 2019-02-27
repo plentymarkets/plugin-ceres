@@ -1,37 +1,102 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
 {% set basketTotalsCurrency = totals.currency %}
 <div>
     <div class="row container_middle border">
         <div class="col-md-7 products border">
             <div class="row">
-                <div class="col-sm-12 item py-3">
-                    <img class="d-inline-block" src="https://cdn02.plentymarkets.com/jpx0tvae1136/item/images/107/full/107-Barhocker-Fury-gepolstert.jpg">
-                    <div class="d-inline-block item-description">
-                        <div><a class="text-primary" href="https://cdn02.plentymarkets.com/jpx0tvae1136/item/images/107/full/107-Barhocker-Fury-gepolstert.jpg">Barhocker White SanFrancisco</a></div>
-                        <div>Einzelpreis: 149,00 EUR</div>
-                        <div>Stückzahl: 1</div>
-                        <div>Gesamt: 149,00 EUR</div>
-                    </div>
-                </div>
-                <div class="col-sm-12 item py-3">
-                    <img class="d-inline-block" src="https://cdn02.plentymarkets.com/jpx0tvae1136/item/images/107/full/107-Barhocker-Fury-gepolstert.jpg">
-                    <div class="d-inline-block item-description">
-                        <div><a class="text-primary" href="https://cdn02.plentymarkets.com/jpx0tvae1136/item/images/107/full/107-Barhocker-Fury-gepolstert.jpg">Barhocker White SanFrancisco</a>
-                        <br>Einzelpreis: 149,00 EUR
-                        <br>Stückzahl: 1
-                        <br>Gesamt: 149,00 EUR</div>
-                    </div>
-                </div>
-                <div class="col-sm-12 item py-3">
-                    <img class="d-inline-block" src="https://cdn02.plentymarkets.com/jpx0tvae1136/item/images/107/full/107-Barhocker-Fury-gepolstert.jpg">
-                    <div class="d-inline-block item-description">
-                        <div><a class="text-primary" href="https://cdn02.plentymarkets.com/jpx0tvae1136/item/images/107/full/107-Barhocker-Fury-gepolstert.jpg">Barhocker White SanFrancisco</a></div>
-                        <div>Einzelpreis: 149,00 EUR</div>
-                        <div>Stückzahl: 1</div>
-                        <div>Gesamt: 149,00 EUR</div>
-                    </div>
-                </div>
+                {% set rebatedAmountTotalGross = 0 %}
+                {% set rebatedAmountTotalNet = 0 %}
+                {% set rebatedAmountTotal = 0 %}
+
+                {% for item in orderData.order.orderItems %}
+                    {% if item.itemVariationId > 0 and not ('[-]' in item.orderItemName) %}
+                        {% set currentVariationId = item.itemVariationId | trimNewlines %}
+
+                        {% if item.amounts[0].discount > 0 %}
+                            {% if item.amounts[0].isPercentage ==  "1" %}
+                                {% set rebatedAmountItemGross = (item.quantity * (((item.amounts[0].priceGross  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceGross)) %}
+                                {% set rebatedAmountItemNet = (item.quantity * (((item.amounts[0].priceNet  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceNet)) %}
+                            {% else %}
+                                {% set rebatedAmountItemGross = (item.quantity * item.amounts[0].discount)  %}
+                            {% endif %}
+                            {% set rebatedAmountTotalGross = rebatedAmountTotalGross + rebatedAmountItemGross %}
+                            {% set rebatedAmountTotalNet = rebatedAmountTotalNet + rebatedAmountItemNet %}
+                        {% endif %}
+
+                        {% set itemPrice = 0 %}
+                        {% set rebatedAmount = 0 %}
+
+                        {% if orderData.highlightNetPrices %}
+                            {% set itemPrice = item.amounts[0].priceNet %}
+                            {% set rebatedAmount = rebatedAmountItemNet %}
+                            {% set rebatedAmountTotal = rebatedAmountTotalNet %}
+                        {% else %}
+                            {% set itemPrice = item.amounts[0].priceGross %}
+                            {% set rebatedAmount = rebatedAmountItemGross %}
+                            {% set rebatedAmountTotal = rebatedAmountTotalGross %}
+                        {% endif %}
+
+                        <div class="col-sm-12 item py-3">
+                            <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}">
+                                <img class="d-inline-block" src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
+                            </a>
+
+                            <div class="d-inline-block item-description">
+                                <div><a class="text-primary" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
+                                <div>{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}: {{ (itemPrice + rebatedAmount) | formatMonetary( item.amounts[0].currency ) }}</div>
+                                <div>{{ trans("Ceres::Template.orderHistoryQuantity") }}: {{ item.quantity }}</div>
+                                <div>{{ trans("Ceres::Template.orderHistoryTotal") }}: {{ (item.quantity * (itemPrice + rebatedAmount)) | formatMonetary( item.amounts[0].currency ) }}</div>
+
+                                {# TETS ItemBundle #}
+                                {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
+                                    <div class="item-bundle">
+                                        {% for bundleComponent in item.bundleComponents %}
+                                            <div>
+                                                <span class="text-muted">{{ bundleComponent.quantity }} x</span>
+                                                <a href="{{ bundleComponent.data | itemURL }}"> {{ bundleComponent.data | itemName }} </a>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+
+                                {% if item.orderProperties %}
+                                    {% for property in item.orderProperties %}
+                                        <div class="row">
+                                            <strong class="col-6 col-sm-3 col-md-5 item-word-break">{{ property.name }}</strong>
+                                            {% if property.type == 'file' %}
+                                                <span class="col-6 col-sm-9 item-word-break">
+                                                    {% set splitPath = property.value |split('/') %}
+                                                    {% set filename = '' %}
+                                                    {% set path = '' %}
+
+                                                    {% for temp in splitPath %}
+                                                        {% if loop.first %}
+                                                            {% set path =  temp %}
+                                                        {% elseif loop.last %}
+                                                            {% set filename = temp %}
+                                                        {% else %}
+                                                            {% set path =  path ~ '/' ~ temp %}
+                                                        {% endif %}
+                                                    {% endfor %}
+
+
+                                                    <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank">
+                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                        {{ splitPath | last }}
+                                                    </a>
+                                                </span>
+                                            {% elseif property.type | length > 0 %}
+                                                <span class="col-6 col-sm-9 col-md-7 item-word-break">{{ property.value }}</span>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
             <div class="row mb-2"><div class="col-sm-12 text-center "><a class="text-primary" href="#">Alles anzeigen</a></div></div>
         </div>
