@@ -1,6 +1,6 @@
 const ApiService = require("services/ApiService");
 
-Vue.component("order-history", {
+Vue.component("order-history-item", {
 
     delimiters: ["${", "}"],
 
@@ -8,19 +8,25 @@ Vue.component("order-history", {
         template:
         {
             type: String,
-            default: "#vue-order-history"
+            default: "#vue-order-history-item"
         },
         orderDetailsTemplate:
         {
             type: String,
             default: "Ceres::Checkout.OrderDetails"
-        }
+        },
+        order:
+        {
+            type: Object,
+            default: () =>
+            {}
+        },
+        orderDetailModalId: String
     },
 
     data()
     {
         return {
-            currentOrder: null,
             isLoading: false
         };
     },
@@ -32,23 +38,22 @@ Vue.component("order-history", {
 
     methods:
     {
-        setCurrentOrder(order)
+        setCurrentOrder()
         {
-            $("#dynamic-twig-content").html("");
+            $("#dynamic-twig-content" + this.orderDetailModalId).html("");
             this.isLoading = true;
-            this.currentOrder = order;
 
             Vue.nextTick(() =>
             {
-                $(this.$refs.orderDetails).modal("show");
+                $("#orderDetails" + this.orderDetailModalId).modal("show");
             });
 
             ApiService
-                .get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + order.order.id)
+                .get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.order.id)
                 .done(response =>
                 {
                     this.isLoading = false;
-                    $("#dynamic-twig-content").html(response);
+                    $("#dynamic-twig-content" + this.orderDetailModalId).html(response);
                 });
         }
     }

@@ -1,0 +1,44 @@
+{{ component( "Ceres::MyAccount.Components.OrderHistoryListItem" ) }}
+
+<script type="x/template" id="vue-order-history-list">
+    <div class="order-history-list">
+        <h4>{{ trans("Ceres::Template.orderHistory") }}</h4>
+        <p v-if="hintText" v-html="hintText">${ hintText | raw }}</p>
+
+        <div v-if="waiting" class="loading">
+            {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+        </div>
+        <template v-else-if="orderList.totalsCount > 0">
+            <div class="row container_header d-none d-sm-flex pb-2">
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryOrderId") }}</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryDate") }}</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryTotal") }}</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryStatus") }}</div>
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            
+            <div class="order-item">
+                <order-history-list-item
+                    v-for="order in orderList.entries"
+                    :key="order.id"
+                    :order="order">
+                </order-history-list-item>
+            </div>
+        </template>
+        <template v-else>
+            <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
+        </template>
+
+        <div class="clearfix history-pagination" v-if="orderList.totalsCount > ordersPerPage">
+            <div class="float-left counter">
+                {{ trans("Ceres::Template.orderHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+            </div>
+
+            {% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'orderList.page', 'pageMax': 'orderList.lastPageNumber', 'setPage': 'setPage' } %}
+        </div>
+    </div>
+</script>

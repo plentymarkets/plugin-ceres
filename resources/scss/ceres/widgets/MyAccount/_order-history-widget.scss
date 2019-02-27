@@ -1,101 +1,45 @@
-.widget-order-history {
-
-    .container_header {
-        .row {
-            div { 
-                display: inline-block;
-                text-align: right;
-            }
-        }
-    }
-
-    .container_middle {
-        .item {
-            border-top: 1px solid #dee2e6 !important;
-            
-            img {
-                height: 80px;
-                width: 80px;
-                object-fit: contain;
-                vertical-align: middle;
-            }
-            .item-description {
-                text-align: left;
-                vertical-align: middle;
-            }
-        }
-        .order-item {
-            border-top: 0 !important;
-            
-            .row div:first-child {
-                border-top: 0 !important;
+.widget-order-history
+{
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {
+            a
+            {
+                color: $value;
             }
 
-            @include media-breakpoint-up(md) {
-                border-bottom: 0 !important;
+            .loading-animation > div
+            {
+                background-color: $value;
             }
-        }
-    }
 
-    .container_clickable {
-        cursor: pointer;
-
-        .fa-chevron-down {
-            position: absolute;
-            left: 1.25rem;
-            font-size: 1.5rem;
-        }
-        .col-sm-3 span:nth-child(2) {
-            vertical-align: sub;
-        }
-
-        @include media-breakpoint-up(sm) {
-            text-align: right;
-
-            .row div span:first-child {
-                display: none
+            .text-primary
+            {
+                @extend .text-#{$color};
             }
-            .icons {
-                margin-top: -2px;
-                margin-bottom: -2px;
 
-                .fa {
-                    font-size: 2.4rem;
-                    vertical-align: middle;
-                }
-                a {
-                    display: inline-block;
-                }
-                a:nth-of-type(2) {
-                    margin-left: 10px;
+            .pagination
+            {
+                .page-item
+                {
+                    .page-link
+                    {
+                        color: $value;
+
+                        &:hover
+                        {
+                            color: darken($value, 15%);
+                        }
+                    }
+
+                    &.active .page-link
+                    {
+                        border-color: $value;
+                        @include context-bg($value);
+                    }
                 }
             }
         }
-
-        @include media-breakpoint-down(xs) {
-            div.icons {
-                position: relative;
-                margin-top: 0.75rem;
-            }
-            .row div {
-                span:first-child {
-                    text-align: left;
-                }
-                span:nth-child(2) {
-                    position: absolute;
-                    left: 170px;
-                }
-            }
-            .fa-chevron-down {
-                right: 3.25rem;
-                top: 2rem;
-                left: auto;
-            }
-        }
-    }
-
-    .fa-truck,
-    .fa-repeat {
-        transform: scaleX(-1);
     }
 }

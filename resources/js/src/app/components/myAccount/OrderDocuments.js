@@ -8,11 +8,13 @@ Vue.component("order-documents", {
             type: String,
             default: "#vue-order-documents"
         },
+
         appearance:
         {
             type: String,
             default: "primary"
         },
+
         documents:
         {
             type: Array,

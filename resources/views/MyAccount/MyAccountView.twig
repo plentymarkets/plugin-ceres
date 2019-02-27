@@ -12,6 +12,8 @@
     {{ component( "Ceres::MyAccount.Components.History" ) }}
     {{ component( "Ceres::MyAccount.Components.BankDataSelect" ) }}
 
+    {{ component( "Ceres::MyAccount.Components.OrderHistoryList" ) }}
+
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
     {% set isReturnActive = services.order.isReturnActive() %}
@@ -141,6 +143,12 @@
                     :contact-has-returns="{{ contactHasReturns | json_encode }}">
             </history>
             <!-- ./HISTORY -->
+        </div>
+
+
+        <div class="container-max">
+            <order-history-list :orders-per-page="5">
+            </order-history-list>
         </div>
     </my-account>
 

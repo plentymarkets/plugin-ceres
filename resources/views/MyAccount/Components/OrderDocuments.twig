@@ -16,7 +16,8 @@
                 <template v-for="document of activeDocuments">
                     <div v-if="document.type == 'return_note'">
                         <div class="icons d-none d-sm-block">
-                            <a target="_blank" :class="'text-' + appearance" :href="'/order-document/' + document.id" @click.stop v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.returnHistoryReceipt') }}"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+                            <a target="_blank" :class="'text-' + appearance" :href="'/order-document/' + document.id" @click.stop v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.returnHistory
+                            ') }}"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
                         </div>
                         <div class="buttons d-block d-sm-none mt-2">
                             <a target="_blank" :class="'btn-' + appearance" :href="'/order-document/' + document.id" @click.stop class="btn btn-block"><span>{{ trans("Ceres::Template.returnHistoryReceipt") }}</span><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
