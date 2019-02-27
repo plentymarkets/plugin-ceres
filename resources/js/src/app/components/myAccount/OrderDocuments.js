@@ -9,6 +9,12 @@ Vue.component("order-documents", {
             default: "#vue-order-documents"
         },
 
+        appearance:
+        {
+            type: String,
+            default: "primary"
+        },
+
         documents:
         {
             type: Array,
