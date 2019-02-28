@@ -17,6 +17,11 @@ Vue.component("order-history-list-item", {
         {
             type: Object,
             required: true
+        },
+        allowPaymentProviderChange:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -48,7 +53,7 @@ Vue.component("order-history-list-item", {
                     {
                         const compiled = Vue.compile(orderDetails);
                         const component = new Vue({
-                            data: { showAllOrderItems: this.showAllOrderItems },
+                            data: { showAllOrderItems: this.showAllOrderItems, allowPaymentProviderChange: this.allowPaymentProviderChange },
                             store: window.ceresStore,
                             render: compiled.render,
                             staticRenderFns: compiled.staticRenderFns
