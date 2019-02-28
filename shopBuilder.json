@@ -46,6 +46,12 @@
                 "label": "Widget.presetCheckoutDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"
             }
+        ],
+        "myaccount": [
+            {
+              "label": "Widget.presetMyAccountDefault",
+              "presetClass": "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset"
+            }
         ]
     },
     "categories": [
