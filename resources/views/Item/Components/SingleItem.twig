@@ -3,7 +3,6 @@
 
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
-{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
 <script type="x/template" id="vue-single-item">
     <div>

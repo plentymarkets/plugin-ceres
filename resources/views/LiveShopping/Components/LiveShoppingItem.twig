@@ -8,7 +8,7 @@
 
 <script type="x/template" id="vue-live-shopping-item">
     <div>
-        <category-item v-if="!!currentOffer" :item-data="currentOffer.item" decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle">
+        <category-item v-if="!!currentOffer" :item-data="currentOffer.item" :decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle">
 
             <item-store-special v-if="!!storeSpecial"
                                 slot="store-special"

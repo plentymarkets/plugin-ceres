@@ -312,7 +312,8 @@ body.menu-is-visible {
 						padding-bottom		: 1em;
 
 						>li {
-							padding	: 0 1.5em;
+							// 0.1px for rendering fix
+							padding	: 0.1px 1.5em;
 							line-height		: 170%;
 							text-align		: left;
 		

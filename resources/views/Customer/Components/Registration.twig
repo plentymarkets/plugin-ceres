@@ -1,6 +1,18 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
+
+{% set optionalInvoiceAddressFields = {
+    "de": ceresConfig.addresses.billingAddressShow,
+    "gb": ceresConfig.addresses.billingAddressShow_en
+    }
+%}
+{% set requiredInvoiceAddressFields = {
+    "de": ceresConfig.addresses.billingAddressRequire,
+    "gb": ceresConfig.addresses.billingAddressRequire_en
+    }
+%}
+
 <script type="x/template" id="vue-registration">
     <div>
         <div class="modal-body">
@@ -46,7 +58,9 @@
                         v-if="!isSimpleRegistration"
                         address-type="1"
                         :value="billingAddress"
-                        @input="setAddressDataField($event)">
+                        @input="setAddressDataField($event)"
+                        :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+                        :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
                     </address-input-group>
                 </div>
             </div>

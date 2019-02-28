@@ -8,20 +8,18 @@
 
 {{ Twig.set("slides", "[]") }}
 
-{% set slideData = widget.settings.slides.mobile %}
-{% if sliderParams is not empty and slideData is empty %}
-    {% set slideData = sliderParams.mobile %}
-{% endif %}
-
-{% for slideSettings in slideData %}
+{% for slideSettings in sliderParams.mobile %}
 
     {{ Twig.set("slide", "{ headlineStyle: '#{ slideSettings.headlineStyle }' }") }}
 
     {% set pushCurrentSlide = false %}
+    {% set slideUrlType         = slideSettings.url.type %}
+    {% set slideUrlValue        = slideSettings.url.value %}
+    {% set slideOpenInNewTab    = slideSettings.url.openInNewTab %}
 
-    {% if slideSettings.categoryId | trim is not empty %}
+    {% if slideUrlType == 'category' and slideUrlValue | trim is not empty %}
 
-        {{ Twig.set("category", Twig.call("services.category.get", [slideSettings.categoryId])) }}
+        {{ Twig.set("category", Twig.call("services.category.get", [slideUrlValue])) }}
         {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"]) ) }}
 
         {{ Twig.set("slide", "slide | merge({ name: category.details[0].name })") }}
@@ -30,9 +28,9 @@
 
         {% set pushCurrentSlide = true %}
 
-    {% elseif slideSettings.variationId | trim is not empty %}
+    {% elseif slideUrlType == 'item' and slideUrlValue | trim is not empty %}
 
-        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [slideSettings.variationId])) }}
+        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [slideUrlValue])) }}
         {{ Twig.set("itemData", "itemData.documents[0].data") }}
         {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
 
@@ -44,6 +42,17 @@
         {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
 
+        {% set pushCurrentSlide = true %}
+
+    {% elseif slideUrlType == 'file' and slideUrlValue | trim is not empty %}
+
+        {{ Twig.set("slide", "slide | merge({ url: #{ slideUrlValue | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ slideUrlValue | json_encode } })") }}
+        {% set pushCurrentSlide = true %}
+
+    {% elseif slideUrlType == 'external' and slideUrlValue | trim is not empty %}
+
+        {{ Twig.set("slide", "slide | merge({ url: #{ slideUrlValue | json_encode } })") }}
         {% set pushCurrentSlide = true %}
 
     {% endif %}
@@ -63,6 +72,11 @@
 
     {% endif %}
 
+    {% if slideOpenInNewTab is not empty %}
+        {{ Twig.setEscaped("openInNewTab", slideOpenInNewTab) }}
+        {{ Twig.set("slide", "slide | merge({ openInNewTab: openInNewTab})") }}
+    {% endif %}
+
     {% if pushCurrentSlide %}
         {{ Twig.set("slides", "slides | merge([slide])") }}
     {% endif %}
@@ -79,9 +93,10 @@
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
             {{ Twig.for("slide", "slides") }}
+            
             <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
-                <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}>
-
+                <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}
+                    {{ Twig.if("slide.openInNewTab is not empty") }} target="_blank" {{ Twig.endif() }}>
                     {{ Twig.if("slide.imageUrl is not empty") }}
                         <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
                     {{ Twig.endif() }}
@@ -93,7 +108,6 @@
                         </h2>
                     </div>
                     {{ Twig.endif() }}
-
                 </a>
             </div>
             {{ Twig.endfor() }}
