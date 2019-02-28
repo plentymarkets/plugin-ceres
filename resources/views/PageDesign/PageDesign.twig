@@ -39,6 +39,9 @@
 </head>
 
 <body>
+
+{{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
+
 <script>
     if('ontouchstart' in document.documentElement)
     {
@@ -144,6 +147,7 @@
         <!-- ./PASSWORD RESET MODAL -->
 
         <!-- SHIPPINGCOSTS MODAL -->
+        {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
         <div id="shippingscosts-modal-wrapper">
             <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -153,12 +157,18 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                            {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                            {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
+                            {% if shopBuilderShippingTemplate | trim is not empty %}
+                                {{ shopBuilderShippingTemplate | raw }}
+                            {% else %}
+                                {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {% endif %}
         <!-- ./SHIPPINGCOSTS MODAL -->
     </div>
 </div>
@@ -228,7 +238,7 @@
 
 
     (function($) {
-        
+
         var header = document.getElementById('page-header');
         var headerLoaded = false;
         var unfixedElements = [];
@@ -288,7 +298,7 @@
                     });
                 }
             }
-            
+
             $(window).scroll(scrollUnfixedElements);
 
             $(document).on('shopbuilder.after.ready', function()

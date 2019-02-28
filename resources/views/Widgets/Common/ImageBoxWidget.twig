@@ -5,18 +5,16 @@
 {% set style            = widget.settings.style.mobile %}
 {% set headline         = widget.settings.headline.mobile %}
 {% set imageSize        = widget.settings.imageSize.mobile %}
-{% set categoryId       = widget.settings.categoryId.mobile %}
-{% set variationId      = widget.settings.variationId.mobile %}
+{% set openInNewTab     = widget.settings.url.openInNewTab.mobile %}
 {% set customImagePath  = widget.settings.customImagePath.mobile %}
 
 {{ Twig.set("name", "" | json_encode) }}
 {{ Twig.set("url", "" | json_encode) }}
 {{ Twig.set("imageUrl", "" | json_encode) }}
 
-{% if categoryId | trim is not empty %}
+{% if urlType == 'category' and urlValue | trim is not empty %}
 
-    {{ Twig.set("category", Twig.call("services.category.get", [categoryId])) }}
-
+    {{ Twig.set("category", Twig.call("services.category.get", [urlValue])) }}
     {{ Twig.set("name", "category.details[0].name") }}
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
@@ -25,15 +23,24 @@
         {{ Twig.set("imageUrl", "\"documents/\" ~ imageUrl") }}
     {{ Twig.endif() }}
 
-{% elseif variationId | trim is not empty %}
-    
-    {{ Twig.set("itemData", Twig.call("services.item.getVariation", [variationId])) }}
+{% elseif urlType == 'item' and urlValue | trim is not empty %}
+
+    {{ Twig.set("itemData", Twig.call("services.item.getVariation", [urlValue])) }}
     {{ Twig.set("itemData", "itemData.documents[0].data") }}
     {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
 
     {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
     {{ Twig.set("url", "itemData | itemURL") }}
     {{ Twig.set("imageUrl", "itemImage.url") }}
+
+{% elseif urlType == 'file' and urlValue | trim is not empty %}
+
+    {{ Twig.set("url", urlValue | json_encode) }}
+    {{ Twig.set("imageUrl", urlValue | json_encode) }}
+
+{% elseif urlType == 'external' and urlValue | trim is not empty %}
+
+    {{ Twig.set("url", urlValue | json_encode) }}
 
 {% endif %}
 
@@ -55,7 +62,7 @@
         <img{% if imageSize == "cover" %} v-ie-objectfit-polyfill="'cover'"{% endif %} class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" />
     {{ Twig.endif() }}
 
-    <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }} class="widget-inner">
+    <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}{% if openInNewTab == true %} target="_blank"{% endif %}{% if urlType == 'external' %} rel="noopener"{% endif %} class="widget-inner">
         <div class="widget-caption">
             {{ Twig.if("name | trim is not empty") }}
             <h2>
