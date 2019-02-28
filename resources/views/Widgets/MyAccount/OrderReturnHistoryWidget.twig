@@ -9,7 +9,7 @@
 {% set itemsPerList = widget.settings.itemsPerList.mobile %}
 {% set appearance = widget.settings.appearance.mobile %}
 
-<div class="widget widget-order-return-history">
+<div class="widget widget-order-return-history widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <h3>{{ Twig.trans("Ceres::Template.returnHistory") }}</h3>
     {% if hintText is not empty %}
         {{ hintText | raw }}
