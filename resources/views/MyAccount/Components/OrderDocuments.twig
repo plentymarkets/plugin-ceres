@@ -4,11 +4,18 @@
     <div>
         {% if "order-document" in enabledRoutes or "all" in enabledRoutes %}
             <template v-if="type == 'order'">
-                <div v-for="receipt of activeDocuments">
-                    <a class="btn btn-primary btn-block" :href="'/order-document/' + receipt.id" target="_blank">
-                        ${ getTypeName(receipt.type) }
-                        <i class="fa fa-file-text" aria-hidden="true"></i>
-                    </a>
+                <div v-for="document of activeDocuments">
+                    <div class="icons d-none d-sm-block">
+                        <a :class="'text-' + appearance" :href="'/order-document/' + document.id" target="_blank" @click.stop v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.returnHistory') }}">
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="buttons d-block d-sm-none mt-2">
+                        <a class="btn btn-block" :class="'btn-' + appearance" :href="'/order-document/' + document.id" target="_blank" @click.stop >
+                            <span>${ getTypeName(document.type) }</span>
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
             </template>
 
@@ -16,14 +23,17 @@
                 <template v-for="document of activeDocuments">
                     <div v-if="document.type == 'return_note'">
                         <div class="icons d-none d-sm-block">
-                            <a target="_blank" :class="'text-' + appearance" :href="'/order-document/' + document.id" @click.stop v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.returnHistory
-                            ') }}"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+                            <a :class="'text-' + appearance" :href="'/order-document/' + document.id" target="_blank" @click.stop v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.returnHistory') }}">
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            </a>
                         </div>
                         <div class="buttons d-block d-sm-none mt-2">
-                            <a target="_blank" :class="'btn-' + appearance" :href="'/order-document/' + document.id" @click.stop class="btn btn-block"><span>{{ trans("Ceres::Template.returnHistoryReceipt") }}</span><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+                            <a class="btn btn-block" :class="'btn-' + appearance" :href="'/order-document/' + document.id" target="_blank" @click.stop
+                                <span>{{ trans("Ceres::Template.returnHistoryReceipt") }}</span>
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </div>
-                    <p v-else="document.type == 'return_note'">RababerRababer</p>
                 </template>
             </template>
         {% endif %}
