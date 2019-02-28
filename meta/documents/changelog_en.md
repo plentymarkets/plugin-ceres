@@ -1,5 +1,48 @@
 # Release Notes for Ceres
 
+## v3.1.0 (2019-02-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.0.2...3.1.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- To ensure the secure use of the Google reCAPTCHA in the contact form, you need to save the secret site key you receive from Google in the Ceres configuration.
+
+### Added
+
+- We added a computed property to the SingleItem component so that the variation properties of an item can be read. This makes it possible for themes to access them.
+- Variation properties of the type **None** can now be displayed in the shopping cart during the order process.
+- The URL picker component can now be used by ShopBuilder widgets. This component serves to define specific link targets, e.g. in image carousels. The URL picker has been added to the image box, the image carousel and the link list.
+- The margins and paddings of the separator line widget can now be edited in the widget settings.
+- We added a ShopBuilder preset for the checkout. This includes all widgets necessary for the order process and replicates the standard Ceres checkout design in the ShopBuilder.
+- The ShopBuilder item list widget has been extended to offer the possibility of filtering items according to their manufacturer.
+
+### Changed
+
+- ShopBuilder content in the category for shipping information is now displayed in the corresponding overlay on item and category pages.
+- The settings for linking a category for displaying additional shipping information has been relocated to the global settings of the ShopBuilder.
+- We added translations so that the formatting of strikethrough prices can now be configured.
+- Prior to the sending of the contact form, the Google reCAPTCHA is verified via the secret site key.
+
+### Fixed
+
+- Due to an error, item-dependent coupons were not removed if the corresponding item was removed from the shopping cart. This has been fixed.
+- The URLs in the sidebar navigation are now generated correctly for all languages.
+- If certain restrictions inhibit the selection of a shipping profile, a corresponding error notification is now issued in the checkout and the purchase is blocked.
+- Due to an error, the same form of address in the address input was displayed for different countries of delivery, even though these had been configured differently. This has been fixed.
+- Due to an error, the height of the footer was not calculated correctly on mobile devices. This has been fixed.
+- We fixed a display error which caused other elements to overlap with the place order button in the checkout.
+- Due to an error, the image box widget was not displayed correctly in the Internet Explorer. This has been fixed.
+- Due to an error, the pagination in the MyAccount area was not working properly. This has been fixed.
+- The pagination of category pages was not working properly for additional clients. This behaviour has been fixed.
+- Due to an error, clicking a link in the mega menu was not working properly on touch devices. This has been fixed.
+- Due to an error, loading animations caused the scroll bar to appear. This has been fixed.
+- Changes to the minimum and maximum order quantity were not taken into account when the variation was changed in the single item view. This has been fixed.
+- The Google ReCAPTCHA request is now reset after sending the contact form so that the contact form can be sent again.
+- You can now access categories in the preview mode that are not linked to a client.
+- Order properties of the type **decimal number** were not working properly. This has been fixed.
+- Due to an error, the name of a category in the category view was positioned too far left. This has been fixed.
+- Due to an error, the category image was displayed larger than intended on iOS devices. This has been fixed.
+- You can no longer move items without a price to the shopping cart in the admin preview.
+
 ## v3.0.2 (2019-02-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.0.1...3.0.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed

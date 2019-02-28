@@ -58,7 +58,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.guest'                         => ['Customer.Guest',                         GlobalContext::class],
         'tpl.password-reset'                => ['Customer.ResetPassword',                 PasswordResetContext::class],
         'tpl.contact'                       => ['Customer.Contact',                       GlobalContext::class],
-        'tpl.search'                        => ['ItemList.ItemListView',                  ItemSearchContext::class],
+        'tpl.search'                        => ['Category.Item.CategoryItem',             ItemSearchContext::class],
         'tpl.wish-list'                     => ['WishList.WishListView',                  ItemWishListContext::class],
         'tpl.order.return'                  => ['OrderReturn.OrderReturnView',            OrderReturnContext::class],
         'tpl.order.return.confirmation'     => ['OrderReturn.OrderReturnConfirmation',    GlobalContext::class],

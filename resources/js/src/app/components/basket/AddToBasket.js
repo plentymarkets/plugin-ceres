@@ -71,6 +71,11 @@ Vue.component("add-to-basket", {
         {
             type: Array,
             default: () => []
+        },
+        hasPrice:
+        {
+            type: Boolean,
+            default: true
         }
     },
     computed:
@@ -84,7 +89,8 @@ Vue.component("add-to-basket", {
             return this.isSalable &&
                 !this.hasChildren &&
                 (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) &&
-                !this.requiresProperties;
+                !this.requiresProperties &&
+                this.hasPrice;
         },
 
         requiresProperties()
@@ -124,6 +130,14 @@ Vue.component("add-to-basket", {
             else if (this.isSalable)
             {
                 this.waiting = true;
+
+                this.orderProperties.forEach(function(orderProperty)
+{
+                    if (orderProperty.property.valueType === "float" && orderProperty.property.value.slice(-1) === App.decimalSeparator)
+                    {
+                        orderProperty.property.value = orderProperty.property.value.substr(0, orderProperty.property.value.length - 1);
+                    }
+                });
 
                 const basketObject =
                     {

@@ -8,7 +8,12 @@ Vue.component("item-bundle", {
             default: "#vue-item-bundle"
         },
         bundleType: String,
-        bundleComponents: Array
+        bundleComponents: Array,
+        appearance:
+        {
+            type: String,
+            default: "primary"
+        }
     },
 
     data()

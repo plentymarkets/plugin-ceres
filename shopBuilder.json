@@ -101,6 +101,14 @@
         }
     ],
     "globalSettings": {
+        "shippingCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.globalShippingCostsCategoryIdLabel"
+            }
+        },
         "checkoutCategory": {
             "type": "category",
             "required": false,

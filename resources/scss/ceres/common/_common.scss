@@ -132,3 +132,10 @@ a:active {
 .is_stuck {
     z-index: 1;
 }
+
+@each $color, $value in $theme-colors {
+    @include bg-variant(".bg-#{$color}", $value);
+    .bg-#{$color} {
+        @include context-bg($value);
+    }
+}
