@@ -9701,51 +9701,51 @@ button.bg-dark:focus {
   color: #fff !important;
 }
 
-.text-primary, .widget-order-history.widget-primary .text-primary {
+.text-primary, .widget-order-history.widget-primary .text-primary, .widget-order-return-history.widget-primary .text-primary {
   color: #008ebd !important;
 }
 
-a.text-primary:hover, .widget-order-history.widget-primary a.text-primary:hover, a.text-primary:focus, .widget-order-history.widget-primary a.text-primary:focus {
+a.text-primary:hover, .widget-order-history.widget-primary a.text-primary:hover, .widget-order-return-history.widget-primary a.text-primary:hover, a.text-primary:focus, .widget-order-history.widget-primary a.text-primary:focus, .widget-order-return-history.widget-primary a.text-primary:focus {
   color: #005571 !important;
 }
 
-.text-secondary, .widget-order-history.widget-secondary .text-primary {
+.text-secondary, .widget-order-history.widget-secondary .text-primary, .widget-order-return-history.widget-secondary .text-primary {
   color: #d4021d !important;
 }
 
-a.text-secondary:hover, .widget-order-history.widget-secondary a.text-primary:hover, a.text-secondary:focus, .widget-order-history.widget-secondary a.text-primary:focus {
+a.text-secondary:hover, .widget-order-history.widget-secondary a.text-primary:hover, .widget-order-return-history.widget-secondary a.text-primary:hover, a.text-secondary:focus, .widget-order-history.widget-secondary a.text-primary:focus, .widget-order-return-history.widget-secondary a.text-primary:focus {
   color: #880113 !important;
 }
 
-.text-success, .widget-order-history.widget-success .text-primary {
+.text-success, .widget-order-history.widget-success .text-primary, .widget-order-return-history.widget-success .text-primary {
   color: #28a745 !important;
 }
 
-a.text-success:hover, .widget-order-history.widget-success a.text-primary:hover, a.text-success:focus, .widget-order-history.widget-success a.text-primary:focus {
+a.text-success:hover, .widget-order-history.widget-success a.text-primary:hover, .widget-order-return-history.widget-success a.text-primary:hover, a.text-success:focus, .widget-order-history.widget-success a.text-primary:focus, .widget-order-return-history.widget-success a.text-primary:focus {
   color: #19692c !important;
 }
 
-.text-info, .widget-order-history.widget-info .text-primary {
+.text-info, .widget-order-history.widget-info .text-primary, .widget-order-return-history.widget-info .text-primary {
   color: #17a2b8 !important;
 }
 
-a.text-info:hover, .widget-order-history.widget-info a.text-primary:hover, a.text-info:focus, .widget-order-history.widget-info a.text-primary:focus {
+a.text-info:hover, .widget-order-history.widget-info a.text-primary:hover, .widget-order-return-history.widget-info a.text-primary:hover, a.text-info:focus, .widget-order-history.widget-info a.text-primary:focus, .widget-order-return-history.widget-info a.text-primary:focus {
   color: #0f6674 !important;
 }
 
-.text-warning, .widget-order-history.widget-warning .text-primary {
+.text-warning, .widget-order-history.widget-warning .text-primary, .widget-order-return-history.widget-warning .text-primary {
   color: #ffc107 !important;
 }
 
-a.text-warning:hover, .widget-order-history.widget-warning a.text-primary:hover, a.text-warning:focus, .widget-order-history.widget-warning a.text-primary:focus {
+a.text-warning:hover, .widget-order-history.widget-warning a.text-primary:hover, .widget-order-return-history.widget-warning a.text-primary:hover, a.text-warning:focus, .widget-order-history.widget-warning a.text-primary:focus, .widget-order-return-history.widget-warning a.text-primary:focus {
   color: #ba8b00 !important;
 }
 
-.text-danger, .widget-order-history.widget-danger .text-primary {
+.text-danger, .widget-order-history.widget-danger .text-primary, .widget-order-return-history.widget-danger .text-primary {
   color: #dc3545 !important;
 }
 
-a.text-danger:hover, .widget-order-history.widget-danger a.text-primary:hover, a.text-danger:focus, .widget-order-history.widget-danger a.text-primary:focus {
+a.text-danger:hover, .widget-order-history.widget-danger a.text-primary:hover, .widget-order-return-history.widget-danger a.text-primary:hover, a.text-danger:focus, .widget-order-history.widget-danger a.text-primary:focus, .widget-order-return-history.widget-danger a.text-primary:focus {
   color: #a71d2a !important;
 }
 
@@ -25510,6 +25510,138 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 }
 
 .widget-order-history.widget-danger .pagination .page-item.active .page-link {
+  border-color: #dc3545;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.widget-order-return-history.widget-primary a {
+  color: #008ebd;
+}
+
+.widget-order-return-history.widget-primary .loading-animation > div {
+  background-color: #008ebd;
+}
+
+.widget-order-return-history.widget-primary .pagination .page-item .page-link {
+  color: #008ebd;
+}
+
+.widget-order-return-history.widget-primary .pagination .page-item .page-link:hover {
+  color: #005571;
+}
+
+.widget-order-return-history.widget-primary .pagination .page-item.active .page-link {
+  border-color: #008ebd;
+  background-color: #008ebd;
+  color: #fff;
+}
+
+.widget-order-return-history.widget-secondary a {
+  color: #d4021d;
+}
+
+.widget-order-return-history.widget-secondary .loading-animation > div {
+  background-color: #d4021d;
+}
+
+.widget-order-return-history.widget-secondary .pagination .page-item .page-link {
+  color: #d4021d;
+}
+
+.widget-order-return-history.widget-secondary .pagination .page-item .page-link:hover {
+  color: #880113;
+}
+
+.widget-order-return-history.widget-secondary .pagination .page-item.active .page-link {
+  border-color: #d4021d;
+  background-color: #d4021d;
+  color: #fff;
+}
+
+.widget-order-return-history.widget-success a {
+  color: #28a745;
+}
+
+.widget-order-return-history.widget-success .loading-animation > div {
+  background-color: #28a745;
+}
+
+.widget-order-return-history.widget-success .pagination .page-item .page-link {
+  color: #28a745;
+}
+
+.widget-order-return-history.widget-success .pagination .page-item .page-link:hover {
+  color: #19692c;
+}
+
+.widget-order-return-history.widget-success .pagination .page-item.active .page-link {
+  border-color: #28a745;
+  background-color: #28a745;
+  color: #fff;
+}
+
+.widget-order-return-history.widget-info a {
+  color: #17a2b8;
+}
+
+.widget-order-return-history.widget-info .loading-animation > div {
+  background-color: #17a2b8;
+}
+
+.widget-order-return-history.widget-info .pagination .page-item .page-link {
+  color: #17a2b8;
+}
+
+.widget-order-return-history.widget-info .pagination .page-item .page-link:hover {
+  color: #0f6674;
+}
+
+.widget-order-return-history.widget-info .pagination .page-item.active .page-link {
+  border-color: #17a2b8;
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.widget-order-return-history.widget-warning a {
+  color: #ffc107;
+}
+
+.widget-order-return-history.widget-warning .loading-animation > div {
+  background-color: #ffc107;
+}
+
+.widget-order-return-history.widget-warning .pagination .page-item .page-link {
+  color: #ffc107;
+}
+
+.widget-order-return-history.widget-warning .pagination .page-item .page-link:hover {
+  color: #ba8b00;
+}
+
+.widget-order-return-history.widget-warning .pagination .page-item.active .page-link {
+  border-color: #ffc107;
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.widget-order-return-history.widget-danger a {
+  color: #dc3545;
+}
+
+.widget-order-return-history.widget-danger .loading-animation > div {
+  background-color: #dc3545;
+}
+
+.widget-order-return-history.widget-danger .pagination .page-item .page-link {
+  color: #dc3545;
+}
+
+.widget-order-return-history.widget-danger .pagination .page-item .page-link:hover {
+  color: #a71d2a;
+}
+
+.widget-order-return-history.widget-danger .pagination .page-item.active .page-link {
   border-color: #dc3545;
   background-color: #dc3545;
   color: #fff;

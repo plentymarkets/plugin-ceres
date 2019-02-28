@@ -19257,6 +19257,7 @@ html.ios {
   0%, 39%, 100% { opacity: 0; }
   40% { opacity: 1; }
 }
+
 .static-page-plain-text {
   white-space: pre-line;
 }
@@ -20419,6 +20420,52 @@ html.ie {
             }
 
             .sk-fading-circle > .sk-circle:before
+            {
+                background-color: $value;
+            }
+
+            .text-primary
+            {
+                @extend .text-#{$color};
+            }
+
+            .pagination
+            {
+                .page-item
+                {
+                    .page-link
+                    {
+                        color: $value;
+
+                        &:hover
+                        {
+                            color: darken($value, 15%);
+                        }
+                    }
+
+                    &.active .page-link
+                    {
+                        border-color: $value;
+                        @include context-bg($value);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.widget-order-return-history
+{
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {
+            a
+            {
+                color: $value;
+            }
+
+            .loading-animation > div
             {
                 background-color: $value;
             }
