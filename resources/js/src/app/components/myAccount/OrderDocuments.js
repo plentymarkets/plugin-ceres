@@ -85,6 +85,11 @@ Vue.component("order-documents", {
                 return_note: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsReturnNote"),
                 success_confirmation: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation")
             })[type];
+        },
+
+        getDownloadTooltip(type)
+        {
+            return TranslationService.translate("Ceres::Template.orderHistoryOpenDocument", { documentName: this.getTypeName(type) });
         }
     }
 });

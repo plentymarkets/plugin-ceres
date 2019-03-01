@@ -24114,6 +24114,12 @@ Vue.component("order-documents", {
         return_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsReturnNote"),
         success_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation")
       }[type];
+    },
+    getDownloadTooltip: function getDownloadTooltip(type) {
+      console.log("test");
+      return _TranslationService.default.translate("Ceres::Template.orderHistoryOpenDocument", {
+        documentName: this.getTypeName(type)
+      });
     }
   }
 });
@@ -24515,9 +24521,8 @@ Vue.component("order-return-history-list-item", {
     },
     returnOrder: {
       type: Object,
-      default: function _default() {
-        return {};
-      }
+      // eslint-disable-next-line
+      default: function _default() {}
     },
     itemsPerList: {
       type: Number,
