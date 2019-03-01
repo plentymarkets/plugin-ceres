@@ -33,7 +33,7 @@ Vue.component("order-return-history-list-item", {
     },
 
     created()
-	{
+    {
         this.$options.template = this.template;
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
     },
