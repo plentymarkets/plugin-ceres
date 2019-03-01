@@ -31,7 +31,8 @@ Vue.component("order-return-history-list-item", {
     data()
 	{
         return {
-            itemsToRender: []
+            itemsToRender: [],
+            showAllOrderItem: false
         };
     },
 
@@ -43,18 +44,18 @@ Vue.component("order-return-history-list-item", {
 
     methods:
     {
-        toggleNaming(element)
+        toggleShowAllOrderItems()
         {
-            if (document.getElementById(element).innerText === TranslationService.translate("Ceres::Template.returnHistoryReturnShowMore"))
+            if (this.showAllOrderItems)
             {
                 this.itemsToRender = this.returnOrder.order.orderItems;
-                document.getElementById(element).innerText = TranslationService.translate("Ceres::Template.returnHistoryReturnShowLess");
             }
             else
             {
                 this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
-                document.getElementById(element).innerText = TranslationService.translate("Ceres::Template.returnHistoryReturnShowMore");
             }
+
+            this.showAllOrderItems = !this.showAllOrderItems;
         },
 
         getOriginOrderId(order)
