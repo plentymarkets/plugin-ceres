@@ -16,11 +16,6 @@ Vue.component("order-history-list", {
             type: String,
             default: "primary"
         },
-        page:
-        {
-            type: Number,
-            default: 1
-        },
         ordersPerPage:
         {
             type: Number,
@@ -42,7 +37,8 @@ Vue.component("order-history-list", {
     {
         return {
             waiting: false,
-            orderList: {}
+            orderList: {},
+            page: 1
         };
     },
 
