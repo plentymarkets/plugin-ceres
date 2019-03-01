@@ -24486,12 +24486,6 @@ Vue.component("order-return-history-list", {
     itemsPerList: {
       type: Number,
       default: 5
-    },
-    showFirstPage: {
-      type: Boolean
-    },
-    showLastPage: {
-      type: Boolean
     }
   },
   data: function data() {
