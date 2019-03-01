@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::BankDataSelectWidget",
     "label": "Template.myAccountBankDetails",
-    "previewImageURL": "/images/widgets/BankDataSelect.svg",
+    "previewImageURL": "/images/widgets/bank-details.svg",
     "type": "myaccount",
     "categories": ["myaccount"],
     "position": 100,

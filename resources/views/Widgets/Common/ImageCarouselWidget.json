@@ -56,22 +56,12 @@
                         "tooltipText": "Widget.imageCarouselHeadlineTooltip"
                     }
                 },
-                "categoryId": {
-                    "type": "category",
+                "url":
+                {
+                    "type": "url",
                     "required": false,
-                    "defaultValue": "",
                     "options": {
-                        "name": "Widget.imageCarouselCategoryIdLabel",
-                        "tooltipText": "Widget.imageCarouselCategoryIdTooltip"
-                    }
-                },
-                "variationId": {
-                    "type": "number",
-                    "required": false,
-                    "defaultValue": "",
-                    "options": {
-                        "name": "Widget.imageCarouselVariationIdLabel",
-                        "tooltipText": "Widget.imageCarouselVariationIdTooltip"
+                        "name": "Widget.imageCarouselUrlLabel"
                     }
                 },
                 "customImagePath": {

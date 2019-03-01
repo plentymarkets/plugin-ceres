@@ -10768,6 +10768,12 @@ a:active {
     z-index: 1;
 }
 
+@each $color, $value in $theme-colors {
+    @include bg-variant(".bg-#{$color}", $value);
+    .bg-#{$color} {
+        @include context-bg($value);
+    }
+}
 html {
 	font-size: $font-size-root;
 }
@@ -14303,7 +14309,8 @@ body.menu-is-visible {
 						padding-bottom		: 1em;
 
 						>li {
-							padding	: 0 1.5em;
+							// 0.1px for rendering fix
+							padding	: 0.1px 1.5em;
 							line-height		: 170%;
 							text-align		: left;
 		
@@ -17529,7 +17536,8 @@ html.ie {
 		margin-top: -1px;
 		margin-left: -1px;
 
-		& > input:disabled ~ label {
+		& > input:disabled ~ label,
+		& > input:disabled ~ .label {
 			opacity: .5;
 			cursor: not-allowed;
 		}
@@ -17542,36 +17550,43 @@ html.ie {
 			transition: box-shadow 2s, -webkit-box-shadow 2s;
 		}
 
-		input:checked + label{
+		input:checked + label,
+		input:checked + .label {
 			-webkit-box-shadow: inset 0 0 0 .1rem $primary;
 			        box-shadow: inset 0 0 0 .1rem $primary;
 		}
 
-		label{
+		label,
+		.label {
 			border: 1px solid $gray-lighter;
 			border-radius: $border-radius;
 			cursor: pointer;
+			height: 5rem;
 			padding: .5em;
 			margin-bottom: 0;
 			width:100%;
 			overflow: hidden;
 			background-color: $card-bg;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-align: center;
+			    -ms-flex-align: center;
+			        align-items: center;
+		}
+
+		&.has-error label,
+		&.has-error .label {
+			-webkit-box-shadow: inset 0 0 0 .1rem theme-color-level("danger", 6);
+			        box-shadow: inset 0 0 0 .1rem theme-color-level("danger", 6);
+			color: theme-color-level("danger", 6);
+			background-color: theme-color-level("danger", -10);
 		}
 
 		.content,
 		.icon{
 			display: inline-block;
 			vertical-align: middle;
-		}
-
-		.icon{
-			width: 3.5rem;
-			height: 3.5rem;
-
-			img{
-				width: 100%;
-				height: auto;
-			}
 		}
 
 		.content{
@@ -17590,7 +17605,11 @@ html.ie {
 		}
 		.icon{
 			width: 4rem;
-			height: 4rem;
+
+			img{
+				width: 100%;
+				height: auto;
+			}
 		}
 	}
 
@@ -17933,13 +17952,6 @@ html.ie {
     max-width: none;
     position: relative;
     width: 100%;
-
-    .parallax-text-wrapper {
-        @include media-breakpoint-up(xl){
-            margin-left: -15px;
-            margin-right: -15px;
-        }
-    }
         
     .parallax-text-container {
         position: inherit;
@@ -20252,7 +20264,7 @@ html.ie {
 
 .checkout
 {
-    .widget-grid .widget-inner > div
+    .widget-grid > .widget-inner > div
     {
         background-color: $white;
         padding: $spacer;
@@ -20282,16 +20294,11 @@ html.ie {
         &.widget-grid
         {
             margin-bottom: 0;
-
-            + .widget-grid
-            {
-                margin-top: 1rem;
-            }
         }
 
         .widget-inner
         {
-            .widget
+            .widget:not(.widget-grid)
             {
                 margin-bottom: 1rem;
             }

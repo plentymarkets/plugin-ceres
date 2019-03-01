@@ -31,18 +31,39 @@ class ImageCarouselWidget extends BaseWidget
             }
         }
 
-        if (count($sliderParams) > 0)
+        if (count($sliderParams) <= 0)
         {
-            return [
-                "sliderParams" => [
-                    "mobile"       => $sliderParams,
-                    "tablet"       => $sliderParams,
-                    "desktop"      => $sliderParams,
-                    "largeDesktop" => $sliderParams
-                ]
-            ];
+            $sliderParams = $widgetSettings["slides"]["mobile"];
         }
-            
-        return null;
+
+        foreach($sliderParams as $i => $sliderParam)
+        {
+            if ( !array_key_exists("url", $sliderParam) || !$sliderParam["url"]["value"] )
+            {
+                if ( $sliderParam["categoryId"] )
+                {
+                    $sliderParams[$i]["url"] = [
+                        "type"  => "category",
+                        "value" => $sliderParam["categoryId"]
+                    ];
+                }
+                else
+                {
+                    $sliderParams[$i]["url"] = [
+                        "type"  => "item",
+                        "value" => $sliderParam["variationId"]
+                    ];
+                }
+            }
+        }
+
+        return [
+            "sliderParams" => [
+                "mobile"       => $sliderParams,
+                "tablet"       => $sliderParams,
+                "desktop"      => $sliderParams,
+                "largeDesktop" => $sliderParams
+            ]
+        ];
     }
 }

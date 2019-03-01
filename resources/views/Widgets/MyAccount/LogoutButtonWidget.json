@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::LogoutButtonWidget",
     "label": "Widget.logoutButtonLabel",
-    "previewImageURL": "/images/widgets/logout-button.svg",
+    "previewImageURL": "/images/widgets/logout.svg",
     "type": "myaccount",
     "categories": ["myaccount"],
     "position": 700,

@@ -34,6 +34,12 @@
     "variation.bundleType",
     "variation.unitCombinationId",
 
+    "variationProperties.property.cast",
+    "variationProperties.property.display",
+    "variationProperties.property.groups",
+    "variationProperties.property.names.*",
+    "variationProperties.property.position",
+
     "texts.*",
 
     "bundleComponents.*",

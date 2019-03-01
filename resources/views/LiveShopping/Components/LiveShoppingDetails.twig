@@ -1,5 +1,3 @@
-{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
-
 <script type="x/template" id="vue-live-shopping-details">
     <div class="live-shopping-details">
         <div class="h3 live-shopping-item-name">
@@ -81,7 +79,7 @@
                 </div>
 
                 * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.itemExclVAT") }}{% else %}{{ trans("Ceres::Template.itemInclVAT") }}{% endif %} {{ trans("Ceres::Template.itemExclusive") }}
-                <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
             </div>
         </div>
 
@@ -90,7 +88,7 @@
                 <div class="prices">
                     <div class="price-view-port">
                         <del class="crossprice" v-if="displaySettings.showCrossPrice && prices.rrp.price.value > 0">
-                            ${ prices.rrp.price.formatted }
+                            ${ prices.rrp.price.formatted | itemCrossPrice  }
                         </del>
                     </div>
                     
@@ -107,7 +105,7 @@
 
                 <span class="vat small text-muted">
                     * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.itemExclVAT") }}{% else %}{{ trans("Ceres::Template.itemInclVAT") }}{% endif %} {{ trans("Ceres::Template.itemExclusive") }}
-                    <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                    <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                 </span>
             </div>
         </div>

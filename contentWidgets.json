@@ -738,16 +738,6 @@
                     ]
                 }
             },
-            "headline": {
-                "type": "text",
-                "required": false,
-                "isVisible": "style === 'block-caption' || style === 'inline-caption' || style === 'fullwidth'",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.imageBoxHeadlineLabel",
-                    "tooltipText": "Widget.imageBoxHeadlineTooltip"
-                }
-            },
             "imageSize": {
                 "type": "select",
                 "required": true,
@@ -769,22 +759,21 @@
                     ]
                 }
             },
-            "categoryId": {
-                "type": "category",
+            "url": {
+                "type": "url",
                 "required": false,
-                "defaultValue": "",
                 "options": {
-                    "name": "Widget.imageBoxCategoryIdLabel",
-                    "tooltipText": "Widget.imageBoxCategoryIdTooltip"
+                    "name": "Widget.imageBoxUrlLabel"
                 }
             },
-            "variationId": {
-                "type": "number",
+            "headline": {
+                "type": "text",
                 "required": false,
+                "isVisible": "style !== 'no-caption'",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.imageBoxVariationIdLabel",
-                    "tooltipText": "Widget.imageBoxVariationIdTooltip"
+                    "name": "Widget.imageBoxHeadlineLabel",
+                    "tooltipText": "Widget.imageBoxHeadlineTooltip"
                 }
             },
             "customImagePath": {
@@ -893,22 +882,11 @@
                             "tooltipText": "Widget.imageCarouselHeadlineTooltip"
                         }
                     },
-                    "categoryId": {
-                        "type": "category",
+                    "url": {
+                        "type": "url",
                         "required": false,
-                        "defaultValue": "",
                         "options": {
-                            "name": "Widget.imageCarouselCategoryIdLabel",
-                            "tooltipText": "Widget.imageCarouselCategoryIdTooltip"
-                        }
-                    },
-                    "variationId": {
-                        "type": "number",
-                        "required": false,
-                        "defaultValue": "",
-                        "options": {
-                            "name": "Widget.imageCarouselVariationIdLabel",
-                            "tooltipText": "Widget.imageCarouselVariationIdTooltip"
+                            "name": "Widget.imageCarouselUrlLabel"
                         }
                     },
                     "customImagePath": {
@@ -1326,7 +1304,7 @@
                         }
                     },
                     "url": {
-                        "type": "text",
+                        "type": "url",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
@@ -1446,7 +1424,7 @@
                         }
                     },
                     "url": {
-                        "type": "text",
+                        "type": "url",
                         "required": false,
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
@@ -1848,7 +1826,6 @@
                 "type": "spacing",
                 "isVisible": "!!customPadding",
                 "options": {
-                    "name": "Widget.widgetPadding",
                     "units": [
                         "px",
                         "rem"
@@ -1866,7 +1843,6 @@
                 "type": "spacing",
                 "isVisible": "!!customMargin",
                 "options": {
-                    "name": "Widget.widgetMargin",
                     "units": [
                         "px",
                         "rem"
@@ -2941,7 +2917,7 @@
     {
         "identifier": "Ceres::AccountSettingsWidget",
         "label": "Widget.myAccountAccountSettingsLabel",
-        "previewImageURL": "/images/widgets/accountSettings.svg",
+        "previewImageURL": "/images/widgets/account-settings.svg",
         "type": "myaccount",
         "categories": [
             "myaccount"
@@ -3000,7 +2976,7 @@
     {
         "identifier": "Ceres::BankDataSelectWidget",
         "label": "Template.myAccountBankDetails",
-        "previewImageURL": "/images/widgets/BankDataSelect.svg",
+        "previewImageURL": "/images/widgets/bank-details.svg",
         "type": "myaccount",
         "categories": [
             "myaccount"
@@ -3100,7 +3076,7 @@
     {
         "identifier": "Ceres::LogoutButtonWidget",
         "label": "Widget.logoutButtonLabel",
-        "previewImageURL": "/images/widgets/logout-button.svg",
+        "previewImageURL": "/images/widgets/logout.svg",
         "type": "myaccount",
         "categories": [
             "myaccount"

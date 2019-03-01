@@ -94,7 +94,7 @@ export class StickyElement
 
     tick()
     {
-        if (this.enabled)
+        if (this.enabled && !this.isMinWidth)
         {
             if (this.animationFrame > 0)
             {
@@ -112,6 +112,12 @@ export class StickyElement
 
     checkElement(skipOffsetCalculation)
     {
+        /*
+        if (isNullOrUndefined(this.el) || isNullOrUndefined(this.placeholder))
+        {
+            return;
+        }
+        */
         const oldValue          = this.position || {};
         const elementRect       = this.el.getBoundingClientRect();
         const placeholderRect   = this.placeholder.getBoundingClientRect();
@@ -202,24 +208,7 @@ export class StickyElement
 
     checkMinWidth()
     {
-        const oldValue = this.isMinWidth;
-
-        if (window.matchMedia("(min-width: " + this.minWidth + "px)").matches)
-        {
-            this.isMinWidth = false;
-            if (oldValue)
-            {
-                this.enable();
-            }
-        }
-        else
-        {
-            this.isMinWidth = true;
-            if (!oldValue)
-            {
-                this.disable();
-            }
-        }
+        this.isMinWidth = !window.matchMedia("(min-width: " + this.minWidth + "px)").matches;
     }
 
     getSiblingStickies()

@@ -1,6 +1,6 @@
-var ModalService        = require("services/ModalService");
-var APIService          = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
+const ModalService        = require("services/ModalService");
+const APIService          = require("services/ApiService");
+const NotificationService = require("services/NotificationService");
 
 import TranslationService from "services/TranslationService";
 
@@ -25,9 +25,10 @@ Vue.component("account-settings", {
         }
     },
 
-    data: function()
+    data()
     {
         return {
+            oldPassword         : "",
             newPassword         : "",
             confirmPassword     : "",
             accountSettingsClass: "",
@@ -35,7 +36,7 @@ Vue.component("account-settings", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
@@ -43,7 +44,7 @@ Vue.component("account-settings", {
     /**
      * Initialise the account settings modal
      */
-    mounted: function()
+    mounted()
     {
         this.$nextTick(() =>
         {
@@ -56,13 +57,14 @@ Vue.component("account-settings", {
          * Check whether the passwords match
          * @returns {boolean}
          */
-        matchPassword: function()
+        matchPassword()
         {
-            if (this.confirmPassword !== "")
-            {
-                return this.newPassword === this.confirmPassword;
-            }
-            return true;
+            return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
+        },
+
+        isValid()
+        {
+            return this.oldPassword.length > 0 && this.newPassword.length > 0 && (this.newPassword === this.confirmPassword);
         }
     },
 
@@ -81,20 +83,17 @@ Vue.component("account-settings", {
          */
         saveAccountSettings: function()
         {
-            var self = this;
-
-            if (this.newPassword !== "" && (this.newPassword === this.confirmPassword))
+            if (this.isValid)
             {
-                APIService.post("/rest/io/customer/password", { password: this.newPassword, password2: this.confirmPassword })
-                    .done(function(response)
+                APIService.post("/rest/io/customer/password", { oldPassword: this.oldPassword, password: this.newPassword, password2: this.confirmPassword })
+                    .done(response =>
                     {
-                        self.clearFieldsAndClose();
+                        this.clearFieldsAndClose();
                         NotificationService.success(
                             TranslationService.translate("Ceres::Template.myAccountChangePasswordSuccessful")
                         ).closeAfter(3000);
-                    }).fail(function(response)
+                    }).fail(response =>
                     {
-                        self.clearFieldsAndClose();
                         NotificationService.error(
                             TranslationService.translate("Ceres::Template.myAccountChangePasswordFailed")
                         ).closeAfter(5000);
@@ -107,6 +106,7 @@ Vue.component("account-settings", {
          */
         clearFields: function()
         {
+            this.oldPassword = "";
             this.newPassword = "";
             this.confirmPassword = "";
         },
