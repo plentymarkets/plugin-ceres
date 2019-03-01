@@ -25,7 +25,7 @@
         "itemsPerList": {
             "type": "number",
             "required": true,
-            "defaultValue": 3,
+            "defaultValue": 5,
             "options": {
                 "name": "Widget.orderReturnHistoryItem",
                 "tooltipText": "Widget.orderReturnHistoryItemTooltip"

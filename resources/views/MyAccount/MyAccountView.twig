@@ -12,8 +12,6 @@
     {{ component( "Ceres::MyAccount.Components.History" ) }}
     {{ component( "Ceres::MyAccount.Components.BankDataSelect" ) }}
 
-    {{ component( "Ceres::MyAccount.Components.OrderHistoryList" ) }}
-
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
     {% set isReturnActive = services.order.isReturnActive() %}
