@@ -17,8 +17,7 @@
 {
     position: relative;
     width: 100vw;
-    margin-left: -50vw;
-    left: 50%;
+    left: calc(-1 * (100vw - 100%) / 2);
 }
 
 @include media-breakpoint-down(sm)
