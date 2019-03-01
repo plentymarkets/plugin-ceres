@@ -24503,10 +24503,6 @@ Vue.component("order-return-history-list", {
 },{"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263}],202:[function(require,module,exports){
 "use strict";
 
-var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 Vue.component("order-return-history-list-item", {
   props: {
     template: {
@@ -24530,7 +24526,8 @@ Vue.component("order-return-history-list-item", {
   },
   data: function data() {
     return {
-      itemsToRender: []
+      itemsToRender: [],
+      showAllOrderItem: false
     };
   },
   created: function created() {
@@ -24538,14 +24535,14 @@ Vue.component("order-return-history-list-item", {
     this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
   },
   methods: {
-    toggleNaming: function toggleNaming(element) {
-      if (document.getElementById(element).innerText === _TranslationService.default.translate("Ceres::Template.returnHistoryReturnShowMore")) {
+    toggleShowAllOrderItems: function toggleShowAllOrderItems() {
+      if (this.showAllOrderItems) {
         this.itemsToRender = this.returnOrder.order.orderItems;
-        document.getElementById(element).innerText = _TranslationService.default.translate("Ceres::Template.returnHistoryReturnShowLess");
       } else {
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
-        document.getElementById(element).innerText = _TranslationService.default.translate("Ceres::Template.returnHistoryReturnShowMore");
       }
+
+      this.showAllOrderItems = !this.showAllOrderItems;
     },
     getOriginOrderId: function getOriginOrderId(order) {
       var _iteratorNormalCompletion = true;
@@ -24580,7 +24577,7 @@ Vue.component("order-return-history-list-item", {
   }
 });
 
-},{"services/TranslationService":263}],203:[function(require,module,exports){
+},{}],203:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));

@@ -1,5 +1,3 @@
-import TranslationService from "services/TranslationService";
-
 Vue.component("order-return-history-list-item", {
 
     props: {
@@ -16,10 +14,8 @@ Vue.component("order-return-history-list-item", {
         returnOrder:
         {
             type: Object,
-            default: function()
-            {
-                return {};
-            }
+            // eslint-disable-next-line
+            default: () => {} 
         },
         itemsPerList:
         {
