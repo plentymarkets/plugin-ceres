@@ -1,0 +1,64 @@
+{
+    "identifier": "Ceres::OrderHistoryWidget",
+    "label": "Widget.orderHistoryLabel",
+    "previewImageURL": "TODO",
+    "type": "myaccount",
+    "categories": ["myaccount"],
+    "position": 100,
+    "maxPerPage": 1,
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderHistoryWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "hintText": {
+            "type": "codeEditor",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.orderHistoryHintTextLabel",
+                "tooltipText": "Widget.orderHistoryHintTextTooltip"
+            }
+        },
+        "ordersPerPage": {
+            "type": "select",
+            "defaultValue": 5,
+            "options": {
+                "name": "Widget.orderHistoryOrdersPerPageLabel",
+                "tooltipText": "Widget.orderHistoryOrdersPerPageTooltip",
+                "listBoxValues": [
+                    {
+                        "value": 5,
+                        "caption": "orderHistoryOrdersPerPage5",
+                        "position": 0
+                    },
+                    {
+                        "value": 10,
+                        "caption": "orderHistoryOrdersPerPage10",
+                        "position": 1
+                    },
+                    {
+                        "value": 25,
+                        "caption": "orderHistoryOrdersPerPage25",
+                        "position": 2
+                    },
+                    {
+                        "value": 50,
+                        "caption": "orderHistoryOrdersPerPage50",
+                        "position": 3
+                    }
+                ]
+            }
+        },
+        "allowPaymentProviderChange": {
+            "type": "checkbox",
+            "defaultValue": true,
+            "options": {
+                "name": "Widget.orderHistoryAllowPaymentProviderChangeLabel",
+                "tooltip": "Widget.orderHistoryAllowPaymentProviderChangeTooltip"
+            }
+        }
+    }
+}

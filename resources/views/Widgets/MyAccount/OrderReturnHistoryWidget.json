@@ -1,0 +1,44 @@
+{
+    "identifier": "Ceres::OrderReturnHistoryWidget",
+    "label": "Widget.orderReturnHistoryLabel",
+    "previewImageURL": "/images/widgets/return-history.svg",
+    "type": "myaccount",
+    "categories": ["myaccount"],
+    "position": 200,
+    "maxPerPage": 1,
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderReturnHistoryWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "hintText": {
+            "type": "codeEditor",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.orderHistoryHintTextLabel",
+                "tooltipText": "Widget.orderHistoryHintTextTooltip"
+            }
+        },
+        "itemsPerList": {
+            "type": "number",
+            "required": true,
+            "defaultValue": 5,
+            "options": {
+                "name": "Widget.orderReturnHistoryItem",
+                "tooltipText": "Widget.orderReturnHistoryItemTooltip"
+            }
+        },
+        "returnsPerPage": {
+            "type": "number",
+            "required": true,
+            "defaultValue": 5,
+            "options": {
+                "name": "Widget.orderReturnHistoryPage",
+                "tooltipText": "Widget.orderReturnHistoryPageTooltip"
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.component( "Ceres::MyAccount.Components.OrderReturnHistoryList" ) }}
+
+{% set hintText = widget.settings.hintText.mobile %}
+{% set appearance = widget.settings.appearance.mobile %}
+{% set returnsPerPage = widget.settings.returnsPerPage.mobile %}
+{% set itemsPerList = widget.settings.itemsPerList.mobile %}
+
+<div class="widget widget-order-return-history widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+    <order-return-history-list
+        appearance="{{ appearance | default("primary") }}"
+        hint-text="{{ hintText | raw }}"
+        :returns-per-page="{{ returnsPerPage }}"
+        :items-per-list="{{ itemsPerList }}"
+        :show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
+        :show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
+    </order-return-history-list>
+</div>
