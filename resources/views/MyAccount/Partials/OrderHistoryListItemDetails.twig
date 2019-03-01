@@ -5,7 +5,7 @@
 {% set basketTotalsCurrency = totals.currency %}
 
 <div>
-    <div class="row container_middle border">
+    <div class="row container-middle border">
         <div class="col-md-7 products border">
             <div class="row">
                 {% set rebatedAmountTotalGross = 0 %}
@@ -301,7 +301,7 @@
             
             {% if orderData.isReturnable %}
                 <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="/returns/{{ orderData.order.id }}">
-                    <i class="fa fa-repeat" aria-hidden="true"></i>
+                    <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>
             {% endif %}

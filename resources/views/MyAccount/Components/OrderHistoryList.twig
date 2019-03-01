@@ -3,22 +3,23 @@
 
 <script type="x/template" id="vue-order-history-list">
     <div class="order-history-list">
-        <h4>{{ trans("Ceres::Template.orderHistory") }}</h4>
-        <p v-if="hintText" v-html="hintText">${ hintText | raw }}</p>
+        <h3>{{ trans("Ceres::Template.orderHistory") }}</h3>
+        <div v-if="hintText" v-html="hintText">${ hintText }</div>
 
-        <div class="clearfix history-pagination" v-if="orderList.totalsCount > ordersPerPage">
-            <div class="float-left counter">
-                {{ trans("Ceres::Template.orderHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+        <div class="row history-pagination" v-if="orderList.totalsCount > ordersPerPage">
+            <div class="col-sm-12">
+                <div class="float-left counter">
+                    {{ trans("Ceres::Template.orderHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+                </div>
+                {% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'orderList.page', 'pageMax': 'orderList.lastPageNumber', 'setPage': 'setPage' } %}
             </div>
-
-            {% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'orderList.page', 'pageMax': 'orderList.lastPageNumber', 'setPage': 'setPage' } %}
         </div>
 
         <div v-if="waiting" class="loading">
             {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
         </div>
         <template v-else-if="orderList.totalsCount > 0">
-            <div class="row container_header d-none d-sm-flex pb-2">
+            <div class="row container-header d-none d-sm-flex pb-2">
                 <div class="col-sm-9">
                     <div class="row">
                         <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryOrderId") }}</div>
@@ -30,7 +31,7 @@
                 <div class="col-sm-3"></div>
             </div>
             
-            <div class="order-item">
+            <div class="order-item border-top-0">
                 <order-history-list-item
                     v-for="order in orderList.entries"
                     :key="order.id"
@@ -40,7 +41,7 @@
             </div>
         </template>
         <template v-else>
-            <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
+            <p class="text-muted h4 my-4 text-center">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
         </template>
     </div>
 </script>

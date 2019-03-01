@@ -16,6 +16,11 @@ Vue.component("order-return-history-list", {
             type: String,
             default: "primary"
         },
+        hintText:
+        {
+            type: String,
+            default: null
+        },
         returnsPerPage: {
             type: Number,
             default: 5
