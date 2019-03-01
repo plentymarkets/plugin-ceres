@@ -17435,11 +17435,7 @@ Vue.component("add-item-to-basket-overlay", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/ModalService":261}],134:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/ModalService":258}],134:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/ModalService":263}],134:[function(require,module,exports){
 "use strict";
 
 var _ExceptionMap = _interopRequireDefault(require("exceptions/ExceptionMap"));
@@ -17653,11 +17649,7 @@ Vue.component("add-to-basket", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"exceptions/ExceptionMap":229,"services/NotificationService":262,"services/TranslationService":263,"services/UrlService":264}],135:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"exceptions/ExceptionMap":224,"services/NotificationService":259,"services/TranslationService":260,"services/UrlService":261}],135:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"exceptions/ExceptionMap":229,"services/NotificationService":264,"services/TranslationService":265,"services/UrlService":266}],135:[function(require,module,exports){
 "use strict";
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
@@ -17709,11 +17701,7 @@ Vue.component("basket-preview", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258}],136:[function(require,module,exports){
-=======
-},{"services/ApiService":255}],136:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260}],136:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-totals", {
@@ -17874,11 +17862,7 @@ Vue.component("coupon", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263}],138:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260}],138:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265}],138:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-list", {
@@ -18091,11 +18075,7 @@ Vue.component("basket-list-item", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../../helper/utils":256,"exceptions/ExceptionMap":229,"services/NotificationService":262,"services/TranslationService":263}],140:[function(require,module,exports){
-=======
-},{"../../../helper/utils":253,"../../../services/VariationPropertyService":263,"exceptions/ExceptionMap":224,"services/NotificationService":259,"services/TranslationService":260}],140:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../../helper/utils":258,"../../../services/VariationPropertyService":268,"exceptions/ExceptionMap":229,"services/NotificationService":264,"services/TranslationService":265}],140:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-breadcrumbs", {
@@ -18191,11 +18171,7 @@ Vue.component("accept-gtc-check", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263}],142:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260}],142:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265}],142:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -18393,11 +18369,7 @@ Vue.component("checkout", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263}],143:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/NotificationService":259,"services/TranslationService":260}],143:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],143:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-wish-input", {
@@ -18487,11 +18459,7 @@ Vue.component("payment-provider-select", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263}],145:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260}],145:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265}],145:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -18681,11 +18649,7 @@ Vue.component("place-order", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/ApiService":258,"services/NotificationService":262,"services/UrlService":264}],146:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/ApiService":255,"services/NotificationService":259,"services/UrlService":261}],146:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/ApiService":260,"services/NotificationService":264,"services/UrlService":266}],146:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -18791,11 +18755,7 @@ Vue.component("shipping-privacy-hint-check", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263}],147:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260}],147:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265}],147:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -18863,11 +18823,7 @@ Vue.component("shipping-profile-select", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263}],148:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260}],148:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265}],148:[function(require,module,exports){
 "use strict";
 
 var _NotificationService = _interopRequireDefault(require("services/NotificationService"));
@@ -18955,11 +18911,7 @@ Vue.component("subscribe-newsletter-check", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263}],149:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260}],149:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265}],149:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -19010,11 +18962,7 @@ Vue.component("last-seen-item-list", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256}],150:[function(require,module,exports){
-=======
-},{"../../helper/utils":253}],150:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258}],150:[function(require,module,exports){
 "use strict";
 
 Vue.component("accept-privacy-policy-check", {
@@ -19601,11 +19549,7 @@ Vue.component("address-select", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../../helper/utils":256,"services/ApiService":258,"services/ModalService":261,"services/TranslationService":263,"services/ValidationService":265}],154:[function(require,module,exports){
-=======
-},{"../../../helper/utils":253,"services/ApiService":255,"services/ModalService":258,"services/TranslationService":260,"services/ValidationService":262}],154:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../../helper/utils":258,"services/ApiService":260,"services/ModalService":263,"services/TranslationService":265,"services/ValidationService":267}],154:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -19873,11 +19817,7 @@ Vue.component("create-update-address", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263,"services/ValidationService":265}],155:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260,"services/ValidationService":262}],155:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265,"services/ValidationService":267}],155:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -19979,11 +19919,7 @@ Vue.component("invoice-address-select", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263}],156:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260}],156:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265}],156:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-address-select", {
@@ -20197,11 +20133,7 @@ Vue.component("contact-form", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263,"services/ValidationService":265}],158:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/ApiService":255,"services/NotificationService":259,"services/TranslationService":260,"services/ValidationService":262}],158:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265,"services/ValidationService":267}],158:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-map", {
@@ -20513,11 +20445,7 @@ Vue.component("registration", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/ApiService":258,"services/ModalService":261,"services/NotificationService":262,"services/TranslationService":263,"services/UrlService":264,"services/ValidationService":265}],161:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/ApiService":255,"services/ModalService":258,"services/NotificationService":259,"services/TranslationService":260,"services/UrlService":261,"services/ValidationService":262}],161:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/ApiService":260,"services/ModalService":263,"services/NotificationService":264,"services/TranslationService":265,"services/UrlService":266,"services/ValidationService":267}],161:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -20574,11 +20502,7 @@ Vue.component("reset-password-form", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263,"services/UrlService":264,"services/ValidationService":265}],162:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/NotificationService":259,"services/TranslationService":260,"services/UrlService":261,"services/ValidationService":262}],162:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265,"services/UrlService":266,"services/ValidationService":267}],162:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -20739,11 +20663,7 @@ Vue.component("salutation-select", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256}],163:[function(require,module,exports){
-=======
-},{"../../helper/utils":253}],163:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258}],163:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -20842,11 +20762,7 @@ Vue.component("forgot-password-modal", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../../helper/utils":256,"services/ApiService":258,"services/ModalService":261,"services/NotificationService":262,"services/TranslationService":263,"services/UrlService":264,"services/ValidationService":265}],164:[function(require,module,exports){
-=======
-},{"../../../helper/utils":253,"services/ApiService":255,"services/ModalService":258,"services/NotificationService":259,"services/TranslationService":260,"services/UrlService":261,"services/ValidationService":262}],164:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../../helper/utils":258,"services/ApiService":260,"services/ModalService":263,"services/NotificationService":264,"services/TranslationService":265,"services/UrlService":266,"services/ValidationService":267}],164:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -20907,11 +20823,7 @@ Vue.component("guest-login", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/UrlService":264,"services/ValidationService":265}],165:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/UrlService":261,"services/ValidationService":262}],165:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/UrlService":266,"services/ValidationService":267}],165:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -21047,11 +20959,7 @@ Vue.component("login", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/AutoFocusService":259,"services/ModalService":261,"services/NotificationService":262,"services/TranslationService":263,"services/ValidationService":265}],166:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/AutoFocusService":256,"services/ModalService":258,"services/NotificationService":259,"services/TranslationService":260,"services/ValidationService":262}],166:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/AutoFocusService":261,"services/ModalService":263,"services/NotificationService":264,"services/TranslationService":265,"services/ValidationService":267}],166:[function(require,module,exports){
 "use strict";
 
 var ModalService = require("services/ModalService");
@@ -21069,11 +20977,7 @@ Vue.component("login-view", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ModalService":261}],167:[function(require,module,exports){
-=======
-},{"services/ModalService":258}],167:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ModalService":263}],167:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../../helper/utils");
@@ -21142,11 +21046,7 @@ Vue.component("user-login-handler", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../../helper/utils":256,"services/ApiService":258,"services/ValidationService":265}],168:[function(require,module,exports){
-=======
-},{"../../../helper/utils":253,"services/ApiService":255,"services/ValidationService":262}],168:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../../helper/utils":258,"services/ApiService":260,"services/ValidationService":267}],168:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -21233,11 +21133,7 @@ Vue.component("add-to-wish-list", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263}],169:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260}],169:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265}],169:[function(require,module,exports){
 "use strict";
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -21519,11 +21415,7 @@ Vue.component("item-image-carousel", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/TranslationService":263}],172:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/TranslationService":260}],172:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/TranslationService":265}],172:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-properties", {
@@ -21949,11 +21841,7 @@ Vue.component("order-property-list-item", {
   })
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/NotificationService":262}],176:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/NotificationService":259}],176:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/NotificationService":264}],176:[function(require,module,exports){
 "use strict";
 
 var _number = require("../../helper/number");
@@ -22168,11 +22056,7 @@ Vue.component("quantity-input", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/debounce":251,"../../helper/number":253,"../../helper/utils":256,"../../services/TranslationService":263}],177:[function(require,module,exports){
-=======
-},{"../../helper/debounce":248,"../../helper/number":250,"../../helper/utils":253,"../../services/TranslationService":260}],177:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/debounce":253,"../../helper/number":255,"../../helper/utils":258,"../../services/TranslationService":265}],177:[function(require,module,exports){
 "use strict";
 
 var _VariationPropertyService = require("../../services/VariationPropertyService");
@@ -22222,7 +22106,7 @@ Vue.component("single-item", {
   }
 });
 
-},{"../../services/VariationPropertyService":263}],178:[function(require,module,exports){
+},{"../../services/VariationPropertyService":268}],178:[function(require,module,exports){
 "use strict";
 
 var _util = require("util");
@@ -22511,11 +22395,7 @@ Vue.component("variation-select", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/dom":252,"lodash/uniq":126,"services/ApiService":258,"util":131}],179:[function(require,module,exports){
-=======
-},{"../../helper/dom":249,"lodash/uniq":126,"services/ApiService":255,"util":131}],179:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/dom":254,"lodash/uniq":126,"services/ApiService":260,"util":131}],179:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-image-carousel", {
@@ -22955,11 +22835,7 @@ Vue.component("item-search", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/url":255,"../../helper/utils":256,"services/ApiService":258,"services/TranslationService":263,"services/UrlService":264}],183:[function(require,module,exports){
-=======
-},{"../../helper/url":252,"../../helper/utils":253,"services/ApiService":255,"services/TranslationService":260,"services/UrlService":261}],183:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/url":257,"../../helper/utils":258,"services/ApiService":260,"services/TranslationService":265,"services/UrlService":266}],183:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -23031,11 +22907,7 @@ Vue.component("item-store-special", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"../../services/TranslationService":263}],184:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"../../services/TranslationService":260}],184:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"../../services/TranslationService":265}],184:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -23095,11 +22967,7 @@ Vue.component("item-filter", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/TranslationService":263}],185:[function(require,module,exports){
-=======
-},{"services/TranslationService":260}],185:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/TranslationService":265}],185:[function(require,module,exports){
 "use strict";
 
 var _UrlService = _interopRequireDefault(require("services/UrlService"));
@@ -23272,11 +23140,7 @@ Vue.component("item-filter-list", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/UrlService":264}],186:[function(require,module,exports){
-=======
-},{"services/UrlService":261}],186:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/UrlService":266}],186:[function(require,module,exports){
 "use strict";
 
 var _UrlService = _interopRequireDefault(require("services/UrlService"));
@@ -23334,11 +23198,7 @@ Vue.component("item-filter-price", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/UrlService":264}],187:[function(require,module,exports){
-=======
-},{"services/UrlService":261}],187:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/UrlService":266}],187:[function(require,module,exports){
 "use strict";
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -23636,11 +23496,7 @@ Vue.component("live-shopping-item", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/TranslationService":263}],190:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/TranslationService":260}],190:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/TranslationService":265}],190:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -23752,11 +23608,7 @@ Vue.component("account-settings", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/ModalService":261,"services/NotificationService":262,"services/TranslationService":263}],191:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/ModalService":258,"services/NotificationService":259,"services/TranslationService":260}],191:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/ModalService":263,"services/NotificationService":264,"services/TranslationService":265}],191:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -24008,11 +23860,7 @@ Vue.component("bank-data-select", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/ModalService":261,"services/NotificationService":262,"services/TranslationService":263,"services/ValidationService":265}],192:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/ModalService":258,"services/NotificationService":259,"services/TranslationService":260,"services/ValidationService":262}],192:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/ModalService":263,"services/NotificationService":264,"services/TranslationService":265,"services/ValidationService":267}],192:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -24144,11 +23992,7 @@ Vue.component("change-payment-method", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/ModalService":261,"services/TranslationService":263}],193:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/ModalService":258,"services/TranslationService":260}],193:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/ModalService":263,"services/TranslationService":265}],193:[function(require,module,exports){
 "use strict";
 
 Vue.component("history", {
@@ -24292,7 +24136,6 @@ Vue.component("order-documents", {
       }[type];
     },
     getDownloadTooltip: function getDownloadTooltip(type) {
-      console.log("test");
       return _TranslationService.default.translate("Ceres::Template.orderHistoryOpenDocument", {
         documentName: this.getTypeName(type)
       });
@@ -24300,7 +24143,7 @@ Vue.component("order-documents", {
   }
 });
 
-},{"services/TranslationService":263}],196:[function(require,module,exports){
+},{"services/TranslationService":265}],196:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -24344,7 +24187,7 @@ Vue.component("order-history", {
   }
 });
 
-},{"services/ApiService":258}],197:[function(require,module,exports){
+},{"services/ApiService":260}],197:[function(require,module,exports){
 "use strict";
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
@@ -24361,9 +24204,9 @@ Vue.component("order-history-list", {
       type: String,
       default: "#vue-order-history-list"
     },
-    page: {
-      type: Number,
-      default: 1
+    appearance: {
+      type: String,
+      default: "primary"
     },
     ordersPerPage: {
       type: Number,
@@ -24381,7 +24224,8 @@ Vue.component("order-history-list", {
   data: function data() {
     return {
       waiting: false,
-      orderList: {}
+      orderList: {},
+      page: 1
     };
   },
   created: function created() {
@@ -24416,7 +24260,7 @@ Vue.component("order-history-list", {
   }
 });
 
-},{"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263}],198:[function(require,module,exports){
+},{"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],198:[function(require,module,exports){
 "use strict";
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
@@ -24428,6 +24272,10 @@ Vue.component("order-history-list-item", {
     template: {
       type: String,
       default: "#vue-order-history-list-item"
+    },
+    appearance: {
+      type: String,
+      default: "primary"
     },
     orderDetailsTemplate: {
       type: String,
@@ -24480,11 +24328,7 @@ Vue.component("order-history-list-item", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258}],199:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/TranslationService":260}],196:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260}],199:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -24538,11 +24382,7 @@ Vue.component("order-return-history", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263}],200:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/NotificationService":259,"services/TranslationService":260}],197:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],200:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -24614,8 +24454,7 @@ Vue.component("order-return-history-item", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/TranslationService":263}],201:[function(require,module,exports){
+},{"services/TranslationService":265}],201:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -24691,7 +24530,7 @@ Vue.component("order-return-history-list", {
   }
 });
 
-},{"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263}],202:[function(require,module,exports){
+},{"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],202:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-return-history-list-item", {
@@ -24717,7 +24556,7 @@ Vue.component("order-return-history-list-item", {
   data: function data() {
     return {
       itemsToRender: [],
-      showAllOrderItem: false
+      showAllOrderItems: false
     };
   },
   created: function created() {
@@ -24768,9 +24607,6 @@ Vue.component("order-return-history-list-item", {
 });
 
 },{}],203:[function(require,module,exports){
-=======
-},{"services/TranslationService":260}],198:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -24867,11 +24703,7 @@ Vue.component("newsletter-input", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263,"services/ValidationService":265}],204:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/NotificationService":259,"services/TranslationService":260,"services/ValidationService":262}],199:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265,"services/ValidationService":267}],204:[function(require,module,exports){
 "use strict";
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -25284,11 +25116,7 @@ Vue.component("notifications", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/NotificationService":262}],209:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/NotificationService":259}],204:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/NotificationService":264}],209:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -25386,11 +25214,7 @@ Vue.component("popper", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/dom":252,"../../helper/utils":256,"popper.js":128,"services/ModalService":261}],210:[function(require,module,exports){
-=======
-},{"../../helper/dom":249,"../../helper/utils":253,"popper.js":128,"services/ModalService":258}],205:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/dom":254,"../../helper/utils":258,"popper.js":128,"services/ModalService":263}],210:[function(require,module,exports){
 "use strict";
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -25455,11 +25279,7 @@ Vue.component("shop-country-settings", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258}],212:[function(require,module,exports){
-=======
-},{"services/ApiService":255}],207:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260}],212:[function(require,module,exports){
 "use strict";
 
 var WaitScreenService = require("services/WaitScreenService");
@@ -25494,11 +25314,7 @@ Vue.component("wait-screen", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/WaitScreenService":266}],213:[function(require,module,exports){
-=======
-},{"services/WaitScreenService":264}],208:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/WaitScreenService":269}],213:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -25549,11 +25365,7 @@ Vue.component("wish-list", {
   }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
 });
 
-<<<<<<< HEAD
-},{"services/NotificationService":262,"services/TranslationService":263}],214:[function(require,module,exports){
-=======
-},{"services/NotificationService":259,"services/TranslationService":260}],209:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/NotificationService":264,"services/TranslationService":265}],214:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -25586,11 +25398,7 @@ Vue.component("wish-list-count", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/ApiService":258}],215:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/ApiService":255}],210:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/ApiService":260}],215:[function(require,module,exports){
 "use strict";
 
 var _number = require("../../helper/number");
@@ -25605,11 +25413,7 @@ Vue.directive("basket-item-quantity", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/number":253,"../../helper/utils":256}],216:[function(require,module,exports){
-=======
-},{"../../helper/number":250,"../../helper/utils":253}],211:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/number":255,"../../helper/utils":258}],216:[function(require,module,exports){
 "use strict";
 
 Vue.directive("basket-item-sum", {
@@ -25670,11 +25474,7 @@ Vue.directive("logout", {
   }
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/UrlService":264}],219:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/UrlService":261}],214:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/UrlService":266}],219:[function(require,module,exports){
 "use strict";
 
 var _index = _interopRequireDefault(require("../../store/index"));
@@ -25699,11 +25499,7 @@ Vue.directive("populate-store", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"../../store/index":267}],220:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"../../store/index":265}],215:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"../../store/index":270}],220:[function(require,module,exports){
 "use strict";
 
 Vue.directive("validate", {
@@ -25942,11 +25738,7 @@ Vue.directive("stick-in-parent", {
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/StickyElement":250,"../../helper/utils":256}],228:[function(require,module,exports){
-=======
-},{"../../helper/StickyElement":247,"../../helper/utils":253}],223:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/StickyElement":252,"../../helper/utils":258}],228:[function(require,module,exports){
 "use strict";
 
 var toggleTooltip = function toggleTooltip(el, disable) {
@@ -26012,11 +25804,7 @@ Vue.filter("currency", function (price) {
   return formatter.format(parseFloat(price).toFixed(2), App.activeCurrency);
 });
 
-<<<<<<< HEAD
-},{"../helper/MonetaryFormatter":249}],233:[function(require,module,exports){
-=======
-},{"../helper/MonetaryFormatter":246}],228:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../helper/MonetaryFormatter":251}],233:[function(require,module,exports){
 "use strict";
 
 // for docs see https://github.com/brockpetrie/vue-moment
@@ -26158,11 +25946,7 @@ Vue.filter("fileName", function (path) {
   return fileName;
 });
 
-<<<<<<< HEAD
-},{"../helper/utils":256}],235:[function(require,module,exports){
-=======
-},{"../helper/utils":253}],230:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../helper/utils":258}],235:[function(require,module,exports){
 "use strict";
 
 Vue.filter("fileUploadPath", function (path) {
@@ -26208,7 +25992,7 @@ Vue.filter("hasItemDefaultPrice", function (itemData) {
   return (0, _utils.isDefined)(defaultPrice) && !isNaN(defaultPrice.price.value);
 });
 
-},{"../helper/utils":253}],233:[function(require,module,exports){
+},{"../helper/utils":258}],238:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -26232,10 +26016,7 @@ Vue.filter("itemBundleName", function (item) {
   return prefixName;
 });
 
-<<<<<<< HEAD
-},{"services/TranslationService":263}],238:[function(require,module,exports){
-=======
-},{"services/TranslationService":260}],234:[function(require,module,exports){
+},{"services/TranslationService":265}],239:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("../services/TranslationService"));
@@ -26254,8 +26035,7 @@ Vue.filter("itemCrossPrice", function (crossPrice, isSpecialOffer) {
   });
 });
 
-},{"../services/TranslationService":260}],235:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../services/TranslationService":265}],240:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemImage", function (itemImages, highestPosition) {
@@ -26278,11 +26058,7 @@ Vue.filter("itemImage", function (itemImages, highestPosition) {
   }).url;
 });
 
-<<<<<<< HEAD
-},{}],239:[function(require,module,exports){
-=======
-},{}],236:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],241:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemImageAlternativeText", function (itemImages, highestPosition) {
@@ -26305,11 +26081,7 @@ Vue.filter("itemImageAlternativeText", function (itemImages, highestPosition) {
   }).alternate;
 });
 
-<<<<<<< HEAD
-},{}],240:[function(require,module,exports){
-=======
-},{}],237:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],242:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemImages", function (images, accessor) {
@@ -26337,11 +26109,7 @@ Vue.filter("itemImages", function (images, accessor) {
   return imageUrls;
 });
 
-<<<<<<< HEAD
-},{}],241:[function(require,module,exports){
-=======
-},{}],238:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],243:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -26385,11 +26153,7 @@ Vue.filter("itemName", function (_ref) {
   return itemName;
 });
 
-<<<<<<< HEAD
-},{"services/TranslationService":263}],242:[function(require,module,exports){
-=======
-},{"services/TranslationService":260}],239:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/TranslationService":265}],244:[function(require,module,exports){
 "use strict";
 
 Vue.filter("specialOffer", function (defaultPrice, prices, priceType, exact) {
@@ -26408,11 +26172,7 @@ Vue.filter("specialOffer", function (defaultPrice, prices, priceType, exact) {
   return price;
 });
 
-<<<<<<< HEAD
-},{}],243:[function(require,module,exports){
-=======
-},{}],240:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],245:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -26456,11 +26216,7 @@ Vue.filter("itemURL", function (item) {
   return link + suffix + trailingSlash;
 });
 
-<<<<<<< HEAD
-},{"../helper/utils":256}],244:[function(require,module,exports){
-=======
-},{"../helper/utils":253}],241:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../helper/utils":258}],246:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -26485,11 +26241,7 @@ Vue.filter("numberFormat", function (number, decimals, separator) {
   return number.toFixed(decimals).replace(".", separator);
 });
 
-<<<<<<< HEAD
-},{"../helper/number":253,"../helper/utils":256}],245:[function(require,module,exports){
-=======
-},{"../helper/number":250,"../helper/utils":253}],242:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../helper/number":255,"../helper/utils":258}],247:[function(require,module,exports){
 "use strict";
 
 Vue.filter("propertySurcharge", function (properties, propertyId) {
@@ -26508,11 +26260,7 @@ Vue.filter("propertySurcharge", function (properties, propertyId) {
   return 0;
 });
 
-<<<<<<< HEAD
-},{}],246:[function(require,module,exports){
-=======
-},{}],243:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],248:[function(require,module,exports){
 "use strict";
 
 Vue.filter("propertySurchargeSum", function (item) {
@@ -26550,11 +26298,7 @@ Vue.filter("propertySurchargeSum", function (item) {
   return sum;
 });
 
-<<<<<<< HEAD
-},{}],247:[function(require,module,exports){
-=======
-},{}],244:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],249:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
@@ -26565,11 +26309,7 @@ Vue.filter("translate", function (value, params) {
   return _TranslationService.default.translate(value, params);
 });
 
-<<<<<<< HEAD
-},{"services/TranslationService":263}],248:[function(require,module,exports){
-=======
-},{"services/TranslationService":260}],245:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/TranslationService":265}],250:[function(require,module,exports){
 "use strict";
 
 Vue.filter("truncate", function (string, value) {
@@ -26580,11 +26320,7 @@ Vue.filter("truncate", function (string, value) {
   return string;
 });
 
-<<<<<<< HEAD
-},{}],249:[function(require,module,exports){
-=======
-},{}],246:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],251:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26755,11 +26491,7 @@ var MonetaryFormatter = function () {
 var _default = MonetaryFormatter;
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"./utils":256}],250:[function(require,module,exports){
-=======
-},{"./utils":253}],247:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"./utils":258}],252:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27011,11 +26743,7 @@ function () {
 
 exports.StickyElement = StickyElement;
 
-<<<<<<< HEAD
-},{"./dom":252,"./utils":256}],251:[function(require,module,exports){
-=======
-},{"./dom":249,"./utils":253}],248:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"./dom":254,"./utils":258}],253:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27061,11 +26789,7 @@ function debounce(callback, timeout) {
   return callback;
 }
 
-<<<<<<< HEAD
-},{"./utils":256}],252:[function(require,module,exports){
-=======
-},{"./utils":253}],249:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"./utils":258}],254:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27156,11 +26880,7 @@ function applyStyles(el, styles) {
   });
 }
 
-<<<<<<< HEAD
-},{"./utils":256}],253:[function(require,module,exports){
-=======
-},{"./utils":253}],250:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"./utils":258}],255:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27244,11 +26964,7 @@ function formatFloat(value, decimals, round) {
   return parseFloat(value.toFixed(decimals));
 }
 
-<<<<<<< HEAD
-},{"./utils":256}],254:[function(require,module,exports){
-=======
-},{"./utils":253}],251:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"./utils":258}],256:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27292,11 +27008,7 @@ function capitalize(input) {
   return ("" + input).charAt(0).toUpperCase() + ("" + input).substr(1);
 }
 
-<<<<<<< HEAD
-},{"./utils":256}],255:[function(require,module,exports){
-=======
-},{"./utils":253}],252:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"./utils":258}],257:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27331,11 +27043,7 @@ function pathnameEquals(pathname) {
   return window.location.pathname === pathname || window.location.pathname === pathname + "/" || window.location.pathname + "/" === pathname;
 }
 
-<<<<<<< HEAD
-},{"./utils":256}],256:[function(require,module,exports){
-=======
-},{"./utils":253}],253:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"./utils":258}],258:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27414,9 +27122,6 @@ function defaultValue(input, defaultValue) {
   return input;
 }
 
-<<<<<<< HEAD
-},{}],257:[function(require,module,exports){
-=======
 function orderArrayByKey(array, key, desc) {
   return array.sort(function (valueA, valueB) {
     if (valueA[key] > valueB[key]) {
@@ -27431,8 +27136,7 @@ function orderArrayByKey(array, key, desc) {
   });
 }
 
-},{}],254:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],259:[function(require,module,exports){
 "use strict";
 
 var browserDetect = require("detect-browser");
@@ -27611,11 +27315,7 @@ var init = function ($, window, document) {
   document.addEventListener("showShopNotification", showShopNotification);
 }(jQuery, window, document);
 
-<<<<<<< HEAD
-},{"detect-browser":1,"services/AutoFocusService":259,"services/NotificationService":262}],258:[function(require,module,exports){
-=======
-},{"detect-browser":1,"services/AutoFocusService":256,"services/NotificationService":259}],255:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"detect-browser":1,"services/AutoFocusService":261,"services/NotificationService":264}],260:[function(require,module,exports){
 "use strict";
 
 var _url = require("../helper/url");
@@ -27773,11 +27473,7 @@ module.exports = function ($) {
   }
 }(jQuery);
 
-<<<<<<< HEAD
-},{"../helper/url":255,"services/NotificationService":262,"services/WaitScreenService":266}],259:[function(require,module,exports){
-=======
-},{"../helper/url":252,"services/NotificationService":259,"services/WaitScreenService":264}],256:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../helper/url":257,"services/NotificationService":264,"services/WaitScreenService":269}],261:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27852,11 +27548,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"services/ModalService":261}],260:[function(require,module,exports){
-=======
-},{"services/ModalService":258}],257:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ModalService":263}],262:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27903,11 +27595,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"services/UrlService":264}],261:[function(require,module,exports){
-=======
-},{"services/UrlService":261}],258:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/UrlService":266}],263:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -28027,11 +27715,7 @@ module.exports = function ($) {
   }
 }(jQuery);
 
-<<<<<<< HEAD
-},{}],262:[function(require,module,exports){
-=======
-},{}],259:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],264:[function(require,module,exports){
 "use strict";
 
 var _ExceptionMap = require("exceptions/ExceptionMap");
@@ -28204,11 +27888,7 @@ module.exports = function ($) {
   }
 }(jQuery);
 
-<<<<<<< HEAD
-},{"exceptions/ExceptionMap":229,"services/TranslationService":263}],263:[function(require,module,exports){
-=======
-},{"exceptions/ExceptionMap":224,"services/TranslationService":260}],260:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"exceptions/ExceptionMap":229,"services/TranslationService":265}],265:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28324,11 +28004,7 @@ var TranslationService = function ($) {
 var _default = TranslationService;
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../helper/strings":254,"../helper/utils":256}],264:[function(require,module,exports){
-=======
-},{"../helper/strings":251,"../helper/utils":253}],261:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../helper/strings":256,"../helper/utils":258}],266:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28477,11 +28153,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../helper/url":255,"../helper/utils":256,"../store/index":267,"jquery":3}],265:[function(require,module,exports){
-=======
-},{"../helper/url":252,"../helper/utils":253,"../store/index":265,"jquery":3}],262:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../helper/url":257,"../helper/utils":258,"../store/index":270,"jquery":3}],267:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28749,10 +28421,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../helper/utils":256,"jquery":3}],266:[function(require,module,exports){
-=======
-},{"../helper/utils":253,"jquery":3}],263:[function(require,module,exports){
+},{"../helper/utils":258,"jquery":3}],268:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28903,8 +28572,7 @@ var _default = {
 };
 exports.default = _default;
 
-},{"../helper/utils":253}],264:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../helper/utils":258}],269:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -28946,11 +28614,7 @@ module.exports = function ($) {
   }
 }(jQuery);
 
-<<<<<<< HEAD
-},{}],267:[function(require,module,exports){
-=======
-},{}],265:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],270:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29010,11 +28674,7 @@ window.ceresStore = store;
 var _default = store;
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"store/modules/AddressModule":268,"store/modules/BasketModule":269,"store/modules/CheckoutModule":270,"store/modules/ItemListModule":271,"store/modules/LastSeenModule":272,"store/modules/LiveShoppingModule":273,"store/modules/LocalizationModule":274,"store/modules/NavigationModule":275,"store/modules/OrderReturnModule":276,"store/modules/SingleItemModule":277,"store/modules/UserModule":278,"store/modules/WishListModule":279,"store/plugins/EventPropagationPlugin":280,"vue-script2":132}],268:[function(require,module,exports){
-=======
-},{"store/modules/AddressModule":266,"store/modules/BasketModule":267,"store/modules/CheckoutModule":268,"store/modules/ItemListModule":269,"store/modules/LastSeenModule":270,"store/modules/LiveShoppingModule":271,"store/modules/LocalizationModule":272,"store/modules/NavigationModule":273,"store/modules/OrderReturnModule":274,"store/modules/SingleItemModule":275,"store/modules/UserModule":276,"store/modules/WishListModule":277,"store/plugins/EventPropagationPlugin":278,"vue-script2":132}],266:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"store/modules/AddressModule":271,"store/modules/BasketModule":272,"store/modules/CheckoutModule":273,"store/modules/ItemListModule":274,"store/modules/LastSeenModule":275,"store/modules/LiveShoppingModule":276,"store/modules/LocalizationModule":277,"store/modules/NavigationModule":278,"store/modules/OrderReturnModule":279,"store/modules/SingleItemModule":280,"store/modules/UserModule":281,"store/modules/WishListModule":282,"store/plugins/EventPropagationPlugin":283,"vue-script2":132}],271:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29455,11 +29115,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263}],269:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/NotificationService":259,"services/TranslationService":260}],267:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],272:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29708,11 +29364,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../../helper/url":255,"../../services/UrlService":264,"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263}],270:[function(require,module,exports){
-=======
-},{"../../helper/url":252,"../../services/UrlService":261,"services/ApiService":255,"services/NotificationService":259,"services/TranslationService":260}],268:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/url":257,"../../services/UrlService":266,"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],273:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29959,11 +29611,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/ApiService":258,"services/NotificationService":262,"services/TranslationService":263}],271:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/ApiService":255,"services/NotificationService":259,"services/TranslationService":260}],269:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],274:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30237,11 +29885,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"services/ApiService":258,"services/ItemListUrlService":260,"services/TranslationService":263,"services/UrlService":264}],272:[function(require,module,exports){
-=======
-},{"services/ApiService":255,"services/ItemListUrlService":257,"services/TranslationService":260,"services/UrlService":261}],270:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260,"services/ItemListUrlService":262,"services/TranslationService":265,"services/UrlService":266}],275:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30331,11 +29975,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/ApiService":258}],273:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/ApiService":255}],271:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/ApiService":260}],276:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30401,11 +30041,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"services/ApiService":258}],274:[function(require,module,exports){
-=======
-},{"services/ApiService":255}],272:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260}],277:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30485,11 +30121,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../../helper/utils":256,"services/ApiService":258}],275:[function(require,module,exports){
-=======
-},{"../../helper/utils":253,"services/ApiService":255}],273:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258,"services/ApiService":260}],278:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30652,11 +30284,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{}],276:[function(require,module,exports){
-=======
-},{}],274:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{}],279:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30757,11 +30385,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"services/ApiService":258}],277:[function(require,module,exports){
-=======
-},{"services/ApiService":255}],275:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260}],280:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31038,11 +30662,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../../helper/utils":256}],278:[function(require,module,exports){
-=======
-},{"../../helper/utils":253}],276:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258}],281:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31097,11 +30717,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../../helper/utils":256}],279:[function(require,module,exports){
-=======
-},{"../../helper/utils":253}],277:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"../../helper/utils":258}],282:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31213,11 +30829,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"services/ApiService":258}],280:[function(require,module,exports){
-=======
-},{"services/ApiService":255}],278:[function(require,module,exports){
->>>>>>> feature/beta/shop_builder_myaccount
+},{"services/ApiService":260}],283:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31254,11 +30866,7 @@ function _default(store) {
   });
 }
 
-<<<<<<< HEAD
-},{"lodash/cloneDeep":108,"services/NotificationService":262}]},{},[257,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,163,164,165,166,167,160,161,162,168,169,170,171,172,173,174,175,176,177,178,179,180,184,185,186,187,181,182,183,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,251,252,249,253,250,254,255,256,267,268,269,270,271,272,273,274,275,276,277,278,279,280])
-=======
-},{"lodash/cloneDeep":108,"services/NotificationService":259}]},{},[254,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,163,164,165,166,167,160,161,162,168,169,170,171,172,173,174,175,176,177,178,179,180,184,185,186,187,181,182,183,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,248,249,246,250,247,251,252,253,265,266,267,268,269,270,271,272,273,274,275,276,277,278])
->>>>>>> feature/beta/shop_builder_myaccount
+},{"lodash/cloneDeep":108,"services/NotificationService":264}]},{},[259,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,163,164,165,166,167,160,161,162,168,169,170,171,172,173,174,175,176,177,178,179,180,184,185,186,187,181,182,183,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,253,254,251,255,252,256,257,258,270,271,272,273,274,275,276,277,278,279,280,281,282,283])
 
 
 //# sourceMappingURL=ceres-app.js.map

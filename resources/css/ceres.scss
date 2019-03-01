@@ -12572,52 +12572,53 @@ html.ie {
         right: auto;
     }
 }
-@each $color, $value in $shop-builder-colors
-{
-    &.widget-#{$color}
+.widget-order-history,
+.widget-order-return-history {
+    @each $color, $value in $shop-builder-colors
     {
-        a
-        {
-            color: $value;
-        }
-
-        .loading-animation > div
-        {
-            background-color: $value;
-        }
-
-        .text-primary
-        {
-            @extend .text-#{$color};
-        }
-
-        .pagination
-        {
-            .page-item
+        &.widget-#{$color}
+        {        
+            .loading-animation > div
             {
-                .page-link
+                background-color: $value;
+            }
+    
+            .text-primary
+            {
+                @extend .text-#{$color};
+            }
+    
+            .pagination
+            {
+                a
                 {
                     color: $value;
-
-                    &:hover
-                    {
-                        color: darken($value, 15%);
-                    }
                 }
-
-                &.active .page-link
+    
+                .page-item
                 {
-                    border-color: $value;
-                    @include context-bg($value);
+                    .page-link
+                    {
+                        color: $value;
+    
+                        &:hover
+                        {
+                            color: darken($value, 15%);
+                        }
+                    }
+    
+                    &.active .page-link
+                    {
+                        border-color: $value;
+                        @include context-bg($value);
+                    }
                 }
             }
         }
     }
 }
 
-.pagination > li {
-    cursor: pointer;
-}
+
 
 
 .popover[x-placement="bottom"]
