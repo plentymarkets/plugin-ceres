@@ -23874,6 +23874,7 @@ Vue.component("account-settings", {
   },
   data: function data() {
     return {
+      oldPassword: "",
       newPassword: "",
       confirmPassword: "",
       accountSettingsClass: "",
@@ -23900,11 +23901,10 @@ Vue.component("account-settings", {
      * @returns {boolean}
      */
     matchPassword: function matchPassword() {
-      if (this.confirmPassword !== "") {
-        return this.newPassword === this.confirmPassword;
-      }
-
-      return true;
+      return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
+    },
+    isValid: function isValid() {
+      return this.oldPassword.length > 0 && this.newPassword.length > 0 && this.newPassword === this.confirmPassword;
     }
   },
   methods: {
@@ -23919,17 +23919,18 @@ Vue.component("account-settings", {
      * Save the new password
      */
     saveAccountSettings: function saveAccountSettings() {
-      var self = this;
+      var _this2 = this;
 
-      if (this.newPassword !== "" && this.newPassword === this.confirmPassword) {
+      if (this.isValid) {
         APIService.post("/rest/io/customer/password", {
+          oldPassword: this.oldPassword,
           password: this.newPassword,
           password2: this.confirmPassword
         }).done(function (response) {
-          self.clearFieldsAndClose();
+          _this2.clearFieldsAndClose();
+
           NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountChangePasswordSuccessful")).closeAfter(3000);
         }).fail(function (response) {
-          self.clearFieldsAndClose();
           NotificationService.error(_TranslationService.default.translate("Ceres::Template.myAccountChangePasswordFailed")).closeAfter(5000);
         });
       }
@@ -23939,6 +23940,7 @@ Vue.component("account-settings", {
      * Clear the password fields in the modal
      */
     clearFields: function clearFields() {
+      this.oldPassword = "";
       this.newPassword = "";
       this.confirmPassword = "";
     },
