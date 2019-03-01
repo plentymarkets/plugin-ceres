@@ -12,8 +12,6 @@
         appearance="{{ appearance | default("primary") }}"
         hint-text="{{ hintText | raw }}"
         :returns-per-page="{{ returnsPerPage }}"
-        :items-per-list="{{ itemsPerList }}"
-        :show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
-        :show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
+        :items-per-list="{{ itemsPerList }}">
     </order-return-history-list>
 </div>
