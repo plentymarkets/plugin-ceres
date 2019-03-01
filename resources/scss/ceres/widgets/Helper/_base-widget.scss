@@ -13,6 +13,14 @@
     }
 }
 
+.widget-fw
+{
+    position: relative;
+    width: 100vw;
+    margin-left: -50vw;
+    left: 50%;
+}
+
 @include media-breakpoint-down(sm)
 {
     .widget

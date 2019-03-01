@@ -6,7 +6,7 @@
 
 <nav class="navbar{% if useMegaMenu %} megamenu{%endif%}">
     <div class="container-max">
-        <div class="row">
+        <div class="row mx-0">
             <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
                 <a class="navbar-brand float-lg-left" href="{{ homepageURL }}">
                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
