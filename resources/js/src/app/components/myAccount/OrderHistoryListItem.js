@@ -4,9 +4,15 @@ Vue.component("order-history-list-item", {
 
     props:
     {
-        template: {
+        template:
+        {
             type: String,
             default: "#vue-order-history-list-item"
+        },
+        appearance:
+        {
+            type: String,
+            default: "primary"
         },
         orderDetailsTemplate:
         {

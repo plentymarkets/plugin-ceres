@@ -34,6 +34,7 @@
             <div class="order-item border-top-0">
                 <order-history-list-item
                     v-for="order in orderList.entries"
+                    :appearance="appearance"
                     :key="order.id"
                     :order="order"
                     :allow-payment-provider-change="allowPaymentProviderChange">
