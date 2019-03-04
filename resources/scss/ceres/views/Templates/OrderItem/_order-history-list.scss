@@ -116,9 +116,11 @@
                 margin-bottom: auto;
             }
         }
-        .address-list span,
-        .address-list strong {
-            display: block;
+
+        .address-list {
+            span, strong {
+                display: block;
+            }
         }
     }
 }
