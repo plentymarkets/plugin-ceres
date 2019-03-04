@@ -3,7 +3,7 @@
 <header id="page-header" class="top-bar fixed-top">
     <div>
         <div class="container-max">
-            <div class="row">
+            <div class="row mx-0">
                 {{ LayoutContainer.show("Ceres::Header.LeftSide") }}
 
                 <ul id="controlsList" class="controls-list list-inline">
@@ -91,7 +91,7 @@
 {% endif %}
 
 <div class="container-max page-header">
-    <div class="row">
+    <div class="row mx-0">
         <div id="searchBox" class="cmp cmp-search-box collapse">
             {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
             {% if overrideSearchBar | trim is empty %}

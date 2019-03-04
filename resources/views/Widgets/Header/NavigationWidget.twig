@@ -15,9 +15,9 @@
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
-<nav class="navbar{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
+<nav class="widget-fw navbar{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
-        <div class="row">
+        <div class="row mx-0">
             <div class="brand-wrapper">
                 <a class="navbar-brand float-lg-left" href="{{ Twig.print('urls.home') }}">
                     <img alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}" src="{{ companyLogoUrl }}" class="img-fluid" />

@@ -1,5 +1,12 @@
 # Release Notes for Ceres
 
+## v3.1.1 (2019-03-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.1.0...3.1.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Variations in the image box widget are now displayed correctly. We would like to thank daniel-mannheimer for the contribution.
+- Under certain circumstances, it was impossible to move items to the shopping cart. This has been fixed.
+
 ## v3.1.0 (2019-02-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.0.2...3.1.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
