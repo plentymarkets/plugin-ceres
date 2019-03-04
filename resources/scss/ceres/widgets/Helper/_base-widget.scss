@@ -13,13 +13,6 @@
     }
 }
 
-.widget-fw
-{
-    position: relative;
-    width: 100vw;
-    left: calc(-1 * (100vw - 100%) / 2);
-}
-
 @include media-breakpoint-down(sm)
 {
     .widget
@@ -39,6 +32,18 @@
             }
         }
     }
+}
+
+header .widget
+{
+    margin-bottom: 0;
+}
+
+.widget-fw
+{
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2);
 }
 
 .widget-proportional
