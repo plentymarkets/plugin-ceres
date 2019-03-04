@@ -7,6 +7,11 @@ use Plenty\Plugin\Templates\Twig;
 
 class BaseWidget implements Widget
 {
+    const TOOLBAR_LAYOUT = [
+        "NONE"   => "",
+        "INLINE" => "bold,italic,underline,strike|h1,h2,h3|align",
+        "ALL"    => "bold,italic,underline,strike|headline|align,ul,ol|color,background"
+    ];
     /**
      * The template to e used for this widget
      *
@@ -80,6 +85,7 @@ class BaseWidget implements Widget
         ];
         $templateData["children"]  = $children;
         $templateData["isPreview"] = $isPreview;
+        $templateData["TOOLBAR_LAYOUT"] = self::TOOLBAR_LAYOUT;
 
         return $twig->render($this->template, $templateData);
     }

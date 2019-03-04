@@ -3,15 +3,28 @@
     .widget-inner
     {
         padding: 1rem 1.5rem;
-        text-align: center;
     }
 
-    .h1, h1
+    .h1, h1,
+    .h2, h2,
+    .h3, h3
     {
         margin: 0.5rem auto;
         font-size: 2.5rem;
         letter-spacing: 1.25px;
         display: block;
+    }
+
+    .h2, h2
+    {
+        margin: 0.4rem 0;
+        font-size: 2.25rem;
+    }
+
+    .h3, h3
+    {
+        margin: 0.25rem 0;
+        font-size: 2rem;
     }
 
     &.widget-primary

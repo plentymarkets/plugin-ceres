@@ -93,3 +93,9 @@
     {% endif %}
 
 {% endmacro %}
+
+{% macro makeEditable(variableName, toolbarLayout, isPreview, additionalClasses) %}
+    {%- spaceless %}
+        {% if isPreview %} data-builder-editable="{{ variableName }}" data-builder-editor-toolbar="{{ toolbarLayout }}"{% if additionalClasses %} data-builder-editor-classes="{{ additionalClasses }}"{% endif %}{% endif %}
+    {% endspaceless -%}
+{% endmacro %}
