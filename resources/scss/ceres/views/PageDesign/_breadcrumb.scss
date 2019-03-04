@@ -28,12 +28,3 @@
 	}
 	
 }
-@include media-breakpoint-up(lg){
-	.wrapper-main {
-		.breadcrumb{
-			@include media-breakpoint-up(xl){
-				padding: .5rem 0;
-			}
-		}
-	}
-}
