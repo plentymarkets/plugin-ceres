@@ -13,12 +13,6 @@
             "defaultValue": "none",
             "options": "@include(optionalAppearance)"
         },
-        "text": {
-            "type": "codeEditor",
-            "options": {
-                "name": "Widget.textCodeEditorLabel"
-            }
-        },
         "customPadding": {
             "type": "checkbox",
             "options": {

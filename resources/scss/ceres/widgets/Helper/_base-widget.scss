@@ -11,6 +11,7 @@
             margin-bottom: 0;
         }
     }
+
 }
 
 @include media-breakpoint-down(sm)
@@ -78,4 +79,40 @@
 .widget-editable-min-height {
     min-height: 40px;
     padding-bottom: 0.1px;
+}
+
+/*
+ * INLINE EDITOR CLASSES
+ */
+@each $color, $value in $shop-builder-colors
+{
+    .color-#{$color}
+    {
+        color: $value !important;
+    }
+
+    .bg-#{$color}
+    {
+        @include context-bg($value);
+    }
+}
+
+.align-center
+{
+    text-align: center;
+}
+
+.align-left
+{
+    text-align: left;
+}
+
+.align-right
+{
+    text-align: right;
+}
+
+.align-justify
+{
+    text-align: justify;
 }
