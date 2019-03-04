@@ -1,11 +1,9 @@
 .order-history-list,
 .order-return-history-list {
     .container-header {
-        .row {
-            div {
-                display: inline-block;
-                text-align: right;
-            }
+        > div {
+            display: inline-block;
+            text-align: right;
         }
     }
 
@@ -39,71 +37,6 @@
     .container-clickable {
         cursor: pointer;
 
-        .fa-chevron-down {
-            position: absolute;
-            left: 1.25rem;
-            font-size: 1.5rem;
-        }
-        .col-sm-3 span:nth-child(2) {
-            vertical-align: sub;
-        }
-
-        @include media-breakpoint-up(sm) {
-            text-align: right;
-
-            .row div span:first-child {
-                display: none;
-            }
-            .icons {
-                margin-top: -5px;
-                .fa {
-                    font-size: 2.4rem;
-                    vertical-align: middle;
-                }
-            }
-        }
-
-        @include media-breakpoint-down(xs) {
-            div.icons {
-                position: relative;
-                margin-top: 0.75rem;
-            }
-            .row div {
-                span:first-child {
-                    text-align: left;
-                }
-                span:nth-child(2) {
-                    position: absolute;
-                    left: 170px;
-                }
-            }
-            .fa-chevron-down,
-            .fa-chevron-up {
-                right: 3.25rem;
-                top: 2rem;
-                left: auto;
-            }
-        }
-    }
-}
-
-.order-return-history-list {
-    .container-middle {
-        .item {
-            .row {
-                .col-sm-4 {
-                    text-align: right;
-                    @include media-breakpoint-down(xs) {
-                        margin-top: 10px;
-                    }
-                }
-            }    
-        }
-    }
-
-    .container-clickable {
-        cursor: pointer;
-
         &.collapsed {
             .fa-chevron-up {
                 transform: scaleY(-1);
@@ -115,26 +48,77 @@
             left: 1.25rem;
             font-size: 1.5rem;
         }
-        .col-sm-3 span:nth-child(2) {
-            vertical-align: sub;
-        }
 
         @include media-breakpoint-up(sm) {
-            .icons {
-                margin-top: -2px;
-                margin-bottom: -2px;
+            text-align: right;
 
+            .row div span:first-child {
+                display: none;
+            }
+            .icons {
+                margin-top: -5px;
                 .fa {
-                    font-size: 2.4rem;
+                    font-size: 2rem;
                     vertical-align: middle;
-                }
-                a {
-                    display: inline-block;
-                }
-                a:nth-of-type(2) {
-                    margin-left: 10px;
+                    margin-bottom: -10px;
                 }
             }
+        }
+
+        @include media-breakpoint-down(xs) {
+            .row div {
+                span:first-child {
+                    text-align: left;
+                }
+            }
+            .fa-chevron-up {
+                right: 1.15rem;
+                top: 0;
+                left: auto;
+            }
+        }
+    }
+}
+
+.order-history-list {
+    .container-middle {
+        .products {
+            @include media-breakpoint-down(sm) {
+                border-right: 0 !important;
+            }
+            @include media-breakpoint-up(md) {
+                border-bottom: 0 !important;
+            }
+        }
+        @include media-breakpoint-down(xs) {
+            .cmp-totals {
+                dd,
+                dt {
+                    text-align: left;
+                    display: block;
+                }
+            }
+        }
+    }
+    .container-bottom {
+        .button-spacer {
+            margin-top: auto;
+        }
+        @include media-breakpoint-down(sm) {
+            .button-container {
+                margin-top: 0.5rem;
+            }
+        }
+
+        .payment-change-box-item {
+            .cannot-change-payment {
+                width: 100%;
+                margin-bottom: auto;
+            }
+        }
+        .address-list span,
+        .address-list strong {
+            display: block;
         }
     }
 }

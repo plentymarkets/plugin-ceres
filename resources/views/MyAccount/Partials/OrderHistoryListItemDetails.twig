@@ -5,8 +5,8 @@
 {% set basketTotalsCurrency = totals.currency %}
 
 <div>
-    <div class="row container-middle border">
-        <div class="col-md-7 products border">
+    <div class="row container-middle border-left border-right">
+        <div class="col-md-7 products border-bottom border-right">
             <div class="row">
                 {% set rebatedAmountTotalGross = 0 %}
                 {% set rebatedAmountTotalNet = 0 %}
@@ -248,30 +248,27 @@
         </div>
     </div>
 
-    <div class="row container_bottom border py-4">
+    <div class="row container-bottom border py-4">
         <div class="col-md-7">
             <div class="row">
                 <div class="col-sm-4">                            
-                    <p>
-                        <strong>{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</strong>
-                        <br>
-                        <span id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</span>
-                    </p>
-                    <p>
-                        <strong>{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</strong>
-                        <br>
-                        <span id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderHistoryPaymentStatus_" ~ orderData.paymentStatus) }}</span>
-                    </p>
-                    <p><strong>{{ trans("Ceres::Template.orderHistoryShippingProfile") }}</strong><br>{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</p>
+                    <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</b></h5>
+                    <div class="mb-3" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</div>
+
+                    <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</b></h5>
+                    <div class="mb-3" id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderHistoryPaymentStatus_" ~ orderData.paymentStatus) }}</div>
+
+                    <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryShippingProfile") }}</b></h5>
+                    <div class="mb-3">{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</div>
                 </div>
                 <div class="col-sm-8">
                     <div class="row">
-                        <div class="col-sm-6">
-                            <h5 class="mb-3"><strong>{{ trans("Ceres::Template.orderHistoryInvoiceAddress") }}</strong></h5>
-                            <address-header :address="{{ orderData.order.billingAddress | json_encode }}"></address-header>
+                        <div class="col-sm-6 address-list">
+                            <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryInvoiceAddress") }}</b></h5>
+                            <address-header class="mb-3" :address="{{ orderData.order.billingAddress | json_encode }}"></address-header>
                         </div>
                         <div class="col-sm-6">
-                            <h5 class="mb-3"><strong>{{ trans("Ceres::Template.orderHistoryShippingAddress") }}</strong></h5>
+                            <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryShippingAddress") }}</b></h5>
                             {% if orderData.order.billingAddress.id == orderData.order.deliveryAddress.id %}
                                 <span>
                                     {{ trans("Ceres::Template.orderHistorySameAsInvoice") }}
@@ -284,8 +281,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
-            {# <a href="#" class="btn btn-primary btn-block">Zahlungsänderung<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> #}
+        <div class="col-md-5 button-container">
             <template v-if="allowPaymentProviderChange">
                 <change-payment-method
                     template="#vue-change-payment-method"
