@@ -5,8 +5,8 @@
         {% if "order-document" in enabledRoutes or "all" in enabledRoutes %}
             <div v-for="document of activeDocuments">
                 <template v-if="type == 'order'">
-                    <div class="buttons d-block d-sm-none mt-2">
-                        <a class="btn btn-block" :class="'btn-' + appearance" :href="'/order-document/' + document.id" target="_blank">
+                    <div class="buttons mt-2">
+                        <a class="btn btn-block" :class="'btn-' + appearance" :href="'/order-document/' + document.id" target="_blank" @click.stop>
                             <span>${ getTypeName(document.type) }</span>
                             <i class="fa fa-file-text-o" aria-hidden="true"></i>
                         </a>
@@ -14,7 +14,7 @@
                 </template>
                 <template v-else>
                     <div class="icons d-none d-sm-block">
-                        <a :class="'text-' + appearance" :href="'/order-document/' + document.id" target="_blank" @click.stop v-tooltip data-toggle="tooltip" data-placement="top" :title="getDownloadTooltip(document.type)">
+                        <a :class="'text-' + appearance" :href="'/order-document/' + document.id" target="_blank" v-tooltip data-toggle="tooltip" data-placement="top" :title="getDownloadTooltip(document.type)" @click.stop>
                             <i class="fa fa-file-text-o" aria-hidden="true"></i>
                         </a>
                     </div>
