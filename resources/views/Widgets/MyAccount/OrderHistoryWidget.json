@@ -62,7 +62,7 @@
         },
         "allowReturn": {
             "type": "checkbox",
-            "default": true,
+            "defaultValue": true,
             "options": {
                 "name": "Widget.TODO",
                 "tooltip": "Widget.TODO"
