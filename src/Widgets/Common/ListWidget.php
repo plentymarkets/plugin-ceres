@@ -27,6 +27,17 @@ class ListWidget extends BaseWidget
             }
         }
 
+        foreach( $listEntries as $i => $listEntry )
+        {
+            if ( is_string($listEntry["url"]) )
+            {
+                $listEntries[$i]["url"] = [
+                    "type" => "external",
+                    "value" => $listEntry["url"]
+                ];
+            }
+        }
+
         return [
             "listEntries"   => $listEntries,
             "isLinkList"    => false
