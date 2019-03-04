@@ -4,15 +4,17 @@
 {{ Twig.component( "Ceres::MyAccount.Components.OrderHistoryList" ) }}
 
 {% set hintText = widget.settings.hintText.mobile %}
-{% set appearance = widget.settings.appearance.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default('primary') %}
 {% set allowPaymentProviderChange = widget.settings.allowPaymentProviderChange.mobile %}
+{% set allowReturn = widget.settings.allowReturn.mobile %}
 {% set ordersPerPage = widget.settings.ordersPerPage.mobile %}
 
-<div class="widget widget-order-history widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+<div class="widget widget-order-history widget-{{ appearance }}">
     <order-history-list
-        appearance="{{ appearance | default("primary") }}"
+        appearance="{{ appearance }}"
         hint-text="{{ hintText | raw }}"
         :orders-per-page="{{ ordersPerPage }}"
-        :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | json_encode }}">
+        :allow-payment-provider-change="{{ allowPaymentProviderChange | json_encode }}"
+        :allow-return="{{ allowReturn | json_encode }}">
     </order-history-list>
 </div>
