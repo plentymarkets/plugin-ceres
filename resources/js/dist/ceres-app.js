@@ -17553,7 +17553,7 @@ Vue.component("add-to-basket", {
       } else if (this.isSalable) {
         this.waiting = true;
         this.orderProperties.forEach(function (orderProperty) {
-          if (orderProperty.property.valueType === "float" && orderProperty.property.value.slice(-1) === App.decimalSeparator) {
+          if (orderProperty.property.valueType === "float" && !(0, _utils.isNullOrUndefined)(orderProperty.property.value) && orderProperty.property.value.slice(-1) === App.decimalSeparator) {
             orderProperty.property.value = orderProperty.property.value.substr(0, orderProperty.property.value.length - 1);
           }
         });
@@ -24559,13 +24559,13 @@ Vue.component("order-return-history-list-item", {
   },
   methods: {
     toggleShowAllOrderItems: function toggleShowAllOrderItems() {
+      this.showAllOrderItems = !this.showAllOrderItems;
+
       if (this.showAllOrderItems) {
         this.itemsToRender = this.returnOrder.order.orderItems;
       } else {
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
       }
-
-      this.showAllOrderItems = !this.showAllOrderItems;
     },
     getOriginOrderId: function getOriginOrderId(order) {
       var _iteratorNormalCompletion = true;

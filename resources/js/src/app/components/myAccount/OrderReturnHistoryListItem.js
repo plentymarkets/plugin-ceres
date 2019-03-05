@@ -42,6 +42,8 @@ Vue.component("order-return-history-list-item", {
     {
         toggleShowAllOrderItems()
         {
+            this.showAllOrderItems = !this.showAllOrderItems;
+
             if (this.showAllOrderItems)
             {
                 this.itemsToRender = this.returnOrder.order.orderItems;
@@ -50,8 +52,6 @@ Vue.component("order-return-history-list-item", {
             {
                 this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
             }
-
-            this.showAllOrderItems = !this.showAllOrderItems;
         },
 
         getOriginOrderId(order)
