@@ -267,7 +267,7 @@
                             <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryInvoiceAddress") }}</b></h5>
                             <address-header class="mb-3" :address="{{ orderData.order.billingAddress | json_encode }}"></address-header>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 address-list">
                             <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryShippingAddress") }}</b></h5>
                             {% if orderData.order.billingAddress.id == orderData.order.deliveryAddress.id %}
                                 <span>
