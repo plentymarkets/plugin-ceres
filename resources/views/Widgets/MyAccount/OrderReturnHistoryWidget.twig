@@ -11,7 +11,7 @@
     <order-return-history-list
         appearance="{{ appearance | default("primary") }}"
         hint-text="{{ hintText | raw }}"
-        :returns-per-page="{{ returnsPerPage }}"
-        :items-per-list="{{ itemsPerList }}">
+        :returns-per-page="{{ returnsPerPage | default(5) | json_encode }}"
+        :items-per-list="{{ itemsPerList | default(5) | json_encode }}">
     </order-return-history-list>
 </div>
