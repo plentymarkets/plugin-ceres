@@ -69,10 +69,10 @@
 
                                 {% if item.orderProperties %}
                                     {% for property in item.orderProperties %}
-                                        <div class="row">
-                                            <strong class="col-6 col-sm-3 col-md-5 item-word-break">{{ property.name }}</strong>
+                                        <div>
+                                            <strong>{{ property.name }}</strong>
                                             {% if property.type == 'file' %}
-                                                <span class="col-6 col-sm-9 item-word-break">
+                                                <span>
                                                     {% set splitPath = property.value |split('/') %}
                                                     {% set filename = '' %}
                                                     {% set path = '' %}
@@ -94,7 +94,7 @@
                                                     </a>
                                                 </span>
                                             {% elseif property.type | length > 0 %}
-                                                <span class="col-6 col-sm-9 col-md-7 item-word-break">{{ property.value }}</span>
+                                                <span>: {{ property.value }}</span>
                                             {% endif %}
                                         </div>
                                     {% endfor %}
@@ -284,7 +284,6 @@
         <div class="col-md-5 button-container">
             <template v-if="allowPaymentProviderChange">
                 <change-payment-method
-                    template="#vue-change-payment-method"
                     :current-order="{{ orderData.order | json_encode }}"
                     :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
                     :allowed-payment-methods="{{ orderData.paymentMethodListForSwitch | json_encode }}"
@@ -296,7 +295,7 @@
             </template>
             
             {% if orderData.isReturnable %}
-                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="/returns/{{ orderData.order.id }}">
+                <a v-waiting-animation-infinite class="btn btn-primary btn-block mb-2" href="/returns/{{ orderData.order.id }}">
                     <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>
