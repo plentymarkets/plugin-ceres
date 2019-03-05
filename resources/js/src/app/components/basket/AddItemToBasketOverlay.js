@@ -129,12 +129,24 @@ Vue.component("add-item-to-basket-overlay", {
                 return "";
             }
 
-            const orderParam = orderParams.find(param =>
+            const property = this.latestBasketEntry.item.properties.find(property =>
             {
-                return parseInt(param.property.id) === parseInt(propertyId);
+                return parseInt(property.property.id) === parseInt(propertyId);
             });
 
-            return orderParam.property.value;
+            if (isNullOrUndefined(property) || !property.property.isOderProperty)
+            {
+                return "";
+            }
+            else
+            {
+                const orderParam = orderParams.find(param =>
+                {
+                    return parseInt(param.property.id) === parseInt(propertyId);
+                });
+
+                return orderParam.property.value;
+            }
         }
     }
 });
