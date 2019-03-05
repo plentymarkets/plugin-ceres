@@ -1810,11 +1810,16 @@
                     ]
                 }
             },
+            "useCustomMarkup": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.textUseCustomMarkupLabel"
+                }
+            },
             "text": {
                 "type": "codeEditor",
-                "options": {
-                    "name": "Widget.textCodeEditorLabel"
-                }
+                "isVisible": "!!useCustomMarkup",
+                "options": {}
             },
             "customPadding": {
                 "type": "checkbox",
@@ -1902,15 +1907,6 @@
                             "position": 5
                         }
                     ]
-                }
-            },
-            "text": {
-                "type": "text",
-                "required": true,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.titleBarTextLabel",
-                    "tooltipText": "Widget.titleBarTextTooltip"
                 }
             }
         }

@@ -13,6 +13,17 @@
             "defaultValue": "none",
             "options": "@include(optionalAppearance)"
         },
+        "useCustomMarkup": {
+            "type": "checkbox",
+            "options": {
+                "name": "Widget.textUseCustomMarkupLabel"
+            }
+        },
+        "text": {
+            "type": "codeEditor",
+            "isVisible": "!!useCustomMarkup",
+            "options": {}
+        },
         "customPadding": {
             "type": "checkbox",
             "options": {
