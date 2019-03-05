@@ -27,8 +27,8 @@
             </div>
             <div class="col-sm-3">
                 <div class="icons d-none d-sm-block">
-                    <a href="" @click.stop><i class="fa fa-truck fa-flip-horizontal" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryTracking') }}"></i></a>
-                    <a href="" @click.stop><i class="fa fa-shopping-cart" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryAgain') }}"></i></a>
+                    <a href="" @click.stop><i class="fa fa-truck fa-flip-horizontal" :class="'text-' + appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryTracking') }}"></i></a>
+                    <a href="" @click.stop><i class="fa fa-shopping-cart" :class="'text-' + appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryAgain') }}"></i></a>
                 </div>
                 <div class="buttons d-block d-sm-none mt-2">
                     <a href="" @click.stop class="btn btn-block" :class="'btn-' + appearance"><span>{{ trans("Ceres::Template.orderHistoryTracking") }}</span><i class="fa fa-truck fa-flip-horizontal" aria-hidden="true"></i></a>

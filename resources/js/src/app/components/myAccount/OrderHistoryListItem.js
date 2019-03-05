@@ -59,7 +59,7 @@ Vue.component("order-history-list-item", {
                     {
                         const compiled = Vue.compile(orderDetails);
                         const component = new Vue({
-                            data: { showAllOrderItems: this.showAllOrderItems, allowPaymentProviderChange: this.allowPaymentProviderChange },
+                            data: { showAllOrderItems: this.showAllOrderItems, allowPaymentProviderChange: this.allowPaymentProviderChange, appearance: this.appearance },
                             store: window.ceresStore,
                             render: compiled.render,
                             staticRenderFns: compiled.staticRenderFns
