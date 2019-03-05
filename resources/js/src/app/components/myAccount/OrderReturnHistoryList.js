@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from "../../helper/utils";
+
 const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
@@ -28,6 +30,11 @@ Vue.component("order-return-history-list", {
         itemsPerList: {
             type: Number,
             default: 5
+        },
+        initialData:
+        {
+            type: Object,
+            default: null
         }
     },
 
@@ -42,7 +49,14 @@ Vue.component("order-return-history-list", {
     created()
 	{
         this.$options.template = this.template;
-        this.setPage(1);
+        if (!isNullOrUndefined(this.initialData))
+        {
+            this.orderList = this.initialData;
+        }
+        else
+        {
+            this.setPage(1);
+        }
     },
 
     methods:

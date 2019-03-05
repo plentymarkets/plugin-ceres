@@ -2,9 +2,12 @@
 
 namespace Ceres\Widgets\MyAccount;
 
-use Ceres\Widgets\Helper\BaseWidget;
-
-class OrderReturnHistoryWidget extends BaseWidget
+class OrderReturnHistoryWidget extends OrderHistoryBaseWidget
 {
-    protected $template = "Ceres::Widgets.MyAccount.OrderReturnHistoryWidget";
+    protected $template = "Ceres::Widgets.MyAccount.OrderHistoryWidget";
+
+    protected function getItemsPerPage($widgetSettings)
+    {
+        return $widgetSettings["returnsPerPage"]["mobile"] ?? 5;
+    }
 }
