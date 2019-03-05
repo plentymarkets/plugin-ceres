@@ -2,16 +2,12 @@
 
 namespace Ceres\Widgets\MyAccount;
 
+use Ceres\Widgets\Helper\BaseWidget;
 use Plenty\Plugin\Translation\Translator;
 
-class OrderReturnHistoryWidget extends OrderHistoryBaseWidget
+class OrderReturnHistoryWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.MyAccount.OrderReturnHistoryWidget";
-
-    protected function getItemsPerPage($widgetSettings)
-    {
-        return $widgetSettings["returnsPerPage"]["mobile"] ?? 5;
-    }
 
     protected function getTemplateData($widgetSettings, $isPreview)
     {
@@ -46,7 +42,7 @@ class OrderReturnHistoryWidget extends OrderHistoryBaseWidget
                         ]
                     ];
                 },
-                $this->getItemsPerPage($widgetSettings)
+                $widgetSettings["returnsPerPage"]["mobile"] ?? 5
 
             );
         }

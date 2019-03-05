@@ -2,8 +2,16 @@
 
 namespace Ceres\Widgets\MyAccount;
 
-class OrderHistoryWidget extends OrderHistoryBaseWidget
+use Ceres\Widgets\Helper\BaseWidget;
+use IO\Services\SessionStorageService;
+use Plenty\Modules\Order\Report\KPIs\OrderStatus;
+use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
+
+class OrderHistoryWidget extends BaseWidget
 {
+    private $statuses = null;
+    private $lang = null;
+
     protected $template = "Ceres::Widgets.MyAccount.OrderHistoryWidget";
 
     protected function getItemsPerPage($widgetSettings)
@@ -35,5 +43,34 @@ class OrderHistoryWidget extends OrderHistoryBaseWidget
         return [
             "previewData" => $previewData
         ];
+    }
+
+    private function getRandomStatusName()
+    {
+        if ( is_null($this->statuses) )
+        {
+            $this->statuses = [];
+            $statuses = pluginApp(OrderStatusRepositoryContract::class)->all();
+
+            /** @var OrderStatus $status */
+            foreach( $statuses as $status )
+            {
+                if ($status->isFrontendVisible)
+                {
+                    $this->statuses[] = $status;
+                }
+            }
+            $this->lang     = pluginApp(SessionStorageService::class)->getLang();
+        }
+
+        $idx = rand(0, count($this->statuses) - 1);
+        $status = $this->statuses[$idx];
+
+        if (isset($status))
+        {
+            return $status->names[$this->lang];
+        }
+
+        return "";
     }
 }
