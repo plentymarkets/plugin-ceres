@@ -43,6 +43,9 @@ class DefaultMyAccountPreset implements ContentPreset
         $this->createAccountSettingsWidget();
         $this->createBankDataSelectWidget();
         
+        $this->createOrderHistoryWidget();
+        $this->createOrderReturnHistoryWidget();
+        
         return $this->preset->toArray();
     }
     
@@ -86,7 +89,8 @@ class DefaultMyAccountPreset implements ContentPreset
                 ->withSetting('addressFieldsInvoiceDE', $this->ceresConfig->addresses->billingAddressShow)
                 ->withSetting('addressRequiredFieldsInvoiceDE', $this->ceresConfig->addresses->billingAddressRequire)
                 ->withSetting('addressFieldsInvoiceGB', $this->ceresConfig->addresses->billingAddressShow_en)
-                ->withSetting('addressRequiredFieldsInvoiceGB', $this->ceresConfig->addresses->billingAddressRequire_en);
+                ->withSetting('addressRequiredFieldsInvoiceGB', $this->ceresConfig->addresses->billingAddressRequire_en)
+                ->withSetting('hintText', '');
         }
         elseif($type == '2')
         {
@@ -94,20 +98,40 @@ class DefaultMyAccountPreset implements ContentPreset
                 ->withSetting('addressFieldsShippingDE', $this->ceresConfig->addresses->deliveryAddressShow)
                 ->withSetting('addressRequiredFieldsShippingDE', $this->ceresConfig->addresses->deliveryAddressRequire)
                 ->withSetting('addressFieldsShippingGB', $this->ceresConfig->addresses->deliveryAddressShow_en)
-                ->withSetting('addressRequiredFieldsShippingGB', $this->ceresConfig->addresses->deliveryAddressRequire_en);
+                ->withSetting('addressRequiredFieldsShippingGB', $this->ceresConfig->addresses->deliveryAddressRequire_en)
+                ->withSetting('hintText', '');
         }
     }
     
     private function createAccountSettingsWidget()
     {
         $this->twoColumnWidgetAccountSettings->createChild('first', 'Ceres::AccountSettingsWidget')
-            ->withSetting('appearance', 'primary');
+            ->withSetting('appearance', 'primary')
+            ->withSetting('hintText', '');
     }
     
     private function createBankDataSelectWidget()
     {
         $this->twoColumnWidgetAccountSettings->createChild('second', 'Ceres::BankDataSelectWidget')
-                                             ->withSetting('appearance', 'primary');
+            ->withSetting('appearance', 'primary')
+            ->withSetting('hintText', '');
+    }
+    
+    private function createOrderHistoryWidget()
+    {
+        $this->preset->createWidget('Ceres::OrderHistoryWidget')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('ordersPerPage', $this->ceresConfig->myAccount->ordersPerPage)
+            ->withSetting('allowPaymentProviderChange', $this->ceresConfig->myAccount->changePayment)
+            ->withSetting('allowReturn', $this->ceresConfig->myAccount->orderReturnActive);
+    }
+    
+    private function createOrderReturnHistoryWidget()
+    {
+        $this->preset->createWidget('Ceres::OrderReturnHistoryWidget')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('returnsPerPage', 5)
+            ->withSetting('itemsPerList', 5);
     }
     
     private function createTwoColumnWidgetTop()
