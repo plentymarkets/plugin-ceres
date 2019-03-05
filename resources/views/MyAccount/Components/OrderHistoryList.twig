@@ -1,0 +1,48 @@
+{{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
+{{ component( "Ceres::MyAccount.Components.OrderHistoryListItem" ) }}
+
+<script type="x/template" id="vue-order-history-list">
+    <div class="order-history-list">
+        <h3>{{ trans("Ceres::Template.orderHistory") }}</h3>
+        <div v-if="hintText" v-html="hintText">${ hintText }</div>
+
+        <div class="row history-pagination mb-2" v-if="orderList.totalsCount > ordersPerPage">
+            <div class="col-sm-12">
+                <div class="float-left counter">
+                    {{ trans("Ceres::Template.orderHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+                </div>
+                {% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'orderList.page', 'pageMax': 'orderList.lastPageNumber', 'setPage': 'setPage' } %}
+            </div>
+        </div>
+
+        <div v-if="waiting" class="loading">
+            {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+        </div>
+        <template v-else-if="orderList.totalsCount > 0">
+            <div class="container-header d-none d-sm-flex mb-2">
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryOrderId") }}</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryDate") }}</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryTotal") }}</div>
+                        <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryStatus") }}</div>
+                    </div>
+                </div>
+                <div class="col-sm-3">{{ trans("Ceres::Template.orderHistoryFastAction") }}</div>
+            </div>
+            
+            <div class="order-item border-top">
+                <order-history-list-item
+                    v-for="order in orderList.entries"
+                    :appearance="appearance"
+                    :key="order.id"
+                    :order="order"
+                    :allow-payment-provider-change="allowPaymentProviderChange">
+                </order-history-list-item>
+            </div>
+        </template>
+        <template v-else>
+            <p class="text-muted h4 my-4 text-center">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
+        </template>
+    </div>
+</script>

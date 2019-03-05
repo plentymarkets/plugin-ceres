@@ -1,5 +1,12 @@
 # Release Notes für Ceres
 
+## v3.1.1 (2019-03-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.1.0...3.1.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Im Bilderbox-Widget werden Varianten wieder korrekt dargestellt. Danke an daniel-mannheimer.
+- Durch einen Fehler konnten Artikel unter gewissen Umständen nicht in den Warenkorb gelegt werden. Dies wurde behoben.
+
 ## v3.1.0 (2019-02-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.0.2...3.1.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO

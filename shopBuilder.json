@@ -16,11 +16,11 @@
         ]
     },
     "allowedTypes": {
-        "header":       ["header"],
-        "footer":       ["footer", "static", "structure", "default"],
-        "content":      ["static", "structure", "default"],
-        "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
-        "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
+        "header":   ["header", "static", "structure", "default"],
+        "footer":   ["footer", "static", "structure", "default"],
+        "content":  ["static", "structure", "default"],
+        "checkout": ["static", "structure", "default", "checkout", "customer", "basket"],
+        "myaccount":["static", "structure", "default", "myaccount", "customer", "basket"]
     },
     "presets": {
         "header": [
@@ -96,9 +96,14 @@
             "position": 800
         },
         {
+            "key": "myaccount",
+            "label": "Widget.categoryMyAccount",
+            "position": 900
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 900
+            "position": 1000
         }
     ],
     "globalSettings": {

@@ -21,10 +21,12 @@
                         <span class="col-6 col-sm-7">{{ orderData.order.createdAt | formatDateTime | date(trans("Ceres::Template.devDateTimeFormat")) }}</span>
                     </div>
 
-                    <div class="row">
-                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationStatus") }}</strong>
-                        <span class="col-6 col-sm-7">{{ orderData.order.statusName }}</span>
-                    </div>
+                    {% if orderData.status is defined and orderData.status.isFrontendVisible and orderData.status.names[lang] is not empty %}
+                        <div class="row">
+                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationStatus") }}</strong>
+                            <span class="col-6 col-sm-7">{{ orderData.status.names[lang] }}</span>
+                        </div>
+                    {% endif %}
                 </div>
 
                 <hr>
@@ -34,6 +36,7 @@
                         <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
                         <span class="col-6 col-sm-7">
                             <div>{{ orderData.order.billingAddress.name1 }}</div>
+                            <div>{{ orderData.order.billingAddress | addressOptionType(12) }}</div>
                             <div>{{ orderData.order.billingAddress.name2 }} {{ orderData.order.billingAddress.name3 }}</div>
                             <div>{{ orderData.order.billingAddress.name4 }}</div>
                             <div>{{ orderData.order.billingAddress.address1 }} {{ orderData.order.billingAddress.address2 }}</div>
@@ -52,6 +55,7 @@
                             {% else %}
                                 <span>
                                     <div>{{ orderData.order.deliveryAddress.name1 }}</div>
+                                    <div>{{ orderData.order.deliveryAddress | addressOptionType(12) }}</div>
                                     <div>{{ orderData.order.deliveryAddress.name2 }} {{ orderData.order.deliveryAddress.name3 }}</div>
                                     <div>{{ orderData.order.deliveryAddress.name4 }}</div>
                                     <div>{{ orderData.order.deliveryAddress.address1 }} {{ orderData.order.deliveryAddress.address2 }}</div>
@@ -199,7 +203,7 @@
                                 <span class="col-6 col-sm-9 col-md-7">{{ (itemPrice + rebatedAmount) | formatMonetary( item.amounts[0].currency ) }}</span>
                             </div>
                             <div class="row">
-                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPeace") }}</strong>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
                                 <span class="col-6 col-sm-9 col-md-7">{{ item.quantity }}</span>
                             </div>
                             <div class="row">
