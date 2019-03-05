@@ -43,6 +43,9 @@ class DefaultMyAccountPreset implements ContentPreset
         $this->createAccountSettingsWidget();
         $this->createBankDataSelectWidget();
         
+        $this->createOrderHistoryWidget();
+        $this->createOrderReturnHistoryWidget();
+        
         return $this->preset->toArray();
     }
     
@@ -108,6 +111,23 @@ class DefaultMyAccountPreset implements ContentPreset
     {
         $this->twoColumnWidgetAccountSettings->createChild('second', 'Ceres::BankDataSelectWidget')
                                              ->withSetting('appearance', 'primary');
+    }
+    
+    private function createOrderHistoryWidget()
+    {
+        $this->preset->createWidget('Ceres::OrderHistoryWidget')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('ordersPerPage', $this->ceresConfig->myAccount->ordersPerPage)
+            ->withSetting('allowPaymentProviderChange', $this->ceresConfig->myAccount->changePayment)
+            ->withSetting('allowReturn', $this->ceresConfig->myAccount->orderReturnActive);
+    }
+    
+    private function createOrderReturnHistoryWidget()
+    {
+        $this->preset->createWidget('Ceres::OrderReturnHistoryWidget')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('returnsPerPage', 5)
+            ->withSetting('itemsPerList', 5);
     }
     
     private function createTwoColumnWidgetTop()
