@@ -13,6 +13,7 @@
         appearance="{{ appearance | default("primary") }}"
         hint-text="{{ hintText | raw }}"
         :orders-per-page="{{ ordersPerPage | default(5) | json_encode }}"
-        :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | default(true) | json_encode }}">
+        :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | default(true) | json_encode }}"
+        {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}>
     </order-history-list>
 </div>

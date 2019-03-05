@@ -95,4 +95,22 @@ class BaseWidget implements Widget
     {
         return [];
     }
+
+    protected function mockPaginatedResult( \Closure $factory, $itemsPerPage = 10, $currentPage = 1, $pages = 5 )
+    {
+        $entries = [];
+        for( $i = 0; $i < $itemsPerPage; $i++ )
+        {
+            $entries[] = $factory->call($this, $i);
+        }
+
+        return [
+            "page" => $currentPage,
+            "firstOnPage" => (($currentPage - 1) * $itemsPerPage) + 1,
+            "lastOnPage" => $currentPage * $itemsPerPage,
+            "totalsCount" => $pages * $itemsPerPage,
+            "lastPageNumber" => $pages,
+            "entries" => $entries
+        ];
+    }
 }

@@ -12,6 +12,7 @@
         appearance="{{ appearance | default("primary") }}"
         hint-text="{{ hintText | raw }}"
         :returns-per-page="{{ returnsPerPage | default(5) | json_encode }}"
-        :items-per-list="{{ itemsPerList | default(5) | json_encode }}">
+        :items-per-list="{{ itemsPerList | default(5) | json_encode }}"
+        {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}>
     </order-return-history-list>
 </div>
