@@ -16,37 +16,6 @@ class OrderHistoryBaseWidget extends BaseWidget
     /** @var string */
     private $lang = null;
 
-    protected function getItemsPerPage($widgetSettings)
-    {
-        return 5;
-    }
-
-    protected function getTemplateData($widgetSettings, $isPreview)
-    {
-        $previewData = null;
-
-        if ( $isPreview )
-        {
-            $previewData = $this->mockPaginatedResult(
-                function($i)
-                {
-                    return [
-                        "id"            => $i,
-                        "total"         => rand(100, 100000) / 100,
-                        "status"        => $this->getRandomStatusName(),
-                        "creationDate"  => date("Y-m-d H:i:s")
-                    ];
-                },
-                $this->getItemsPerPage($widgetSettings)
-
-            );
-        }
-
-        return [
-            "previewData" => $previewData
-        ];
-    }
-
     protected function getRandomStatusName()
     {
         if ( is_null($this->statuses) )
@@ -66,7 +35,13 @@ class OrderHistoryBaseWidget extends BaseWidget
         }
 
         $idx = rand(0, count($this->statuses) - 1);
+        $status = $this->statuses[$idx];
 
-        return $this->statuses[$idx];
+        if (isset($status))
+        {
+            return $status->names[$this->lang];
+        }
+
+        return "";
     }
 }

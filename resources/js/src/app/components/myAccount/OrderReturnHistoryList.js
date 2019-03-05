@@ -51,7 +51,7 @@ Vue.component("order-return-history-list", {
         this.$options.template = this.template;
         if (!isNullOrUndefined(this.initialData))
         {
-            this.orderList = this.initialData;
+            this.returnsList = this.initialData;
         }
         else
         {
