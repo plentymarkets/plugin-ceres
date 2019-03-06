@@ -36,6 +36,7 @@
                         <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
                         <span class="col-6 col-sm-7">
                             <div>{{ orderData.order.billingAddress.name1 }}</div>
+                            <div>{{ orderData.order.billingAddress | addressOptionType(12) }}</div>
                             <div>{{ orderData.order.billingAddress.name2 }} {{ orderData.order.billingAddress.name3 }}</div>
                             <div>{{ orderData.order.billingAddress.name4 }}</div>
                             <div>{{ orderData.order.billingAddress.address1 }} {{ orderData.order.billingAddress.address2 }}</div>
@@ -54,6 +55,7 @@
                             {% else %}
                                 <span>
                                     <div>{{ orderData.order.deliveryAddress.name1 }}</div>
+                                    <div>{{ orderData.order.deliveryAddress | addressOptionType(12) }}</div>
                                     <div>{{ orderData.order.deliveryAddress.name2 }} {{ orderData.order.deliveryAddress.name3 }}</div>
                                     <div>{{ orderData.order.deliveryAddress.name4 }}</div>
                                     <div>{{ orderData.order.deliveryAddress.address1 }} {{ orderData.order.deliveryAddress.address2 }}</div>
@@ -95,13 +97,13 @@
                     {% set currentTemplate = services.template.getCurrentTemplate() %}
 
                     {% if paymentMethoId != -1 and showAdditionalPaymentInformation == true %}
-                        <change-payment-method  template="#vue-change-payment-method"
-                                                :current-order="{{ orderData.order | json_encode() }}"
-                                                :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
-                                                :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}"
-                                                :payment-status="{{ paymentStatus | json_encode() }}"
-                                                :current-payment-method-name="{{ orderData.paymentMethodName | json_encode() }}"
-                                                :current-template="{{ currentTemplate | json_encode() }}">
+                        <change-payment-method
+                            :current-order="{{ orderData.order | json_encode() }}"
+                            :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
+                            :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}"
+                            :payment-status="{{ paymentStatus | json_encode() }}"
+                            :current-payment-method-name="{{ orderData.paymentMethodName | json_encode() }}"
+                            :current-template="{{ currentTemplate | json_encode() }}">
                         </change-payment-method>
                     {% endif %}
 

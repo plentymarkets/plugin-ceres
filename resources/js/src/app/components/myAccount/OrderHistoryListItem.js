@@ -67,7 +67,8 @@ Vue.component("order-history-list-item", {
                             data: {
                                 showAllOrderItems: this.showAllOrderItems,
                                 allowPaymentProviderChange: this.allowPaymentProviderChange,
-                                allowReturn: this.allowReturn
+                                allowReturn: this.allowReturn,
+                                appearance: this.appearance
                             },
                             store: window.ceresStore,
                             render: compiled.render,

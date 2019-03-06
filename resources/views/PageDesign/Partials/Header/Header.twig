@@ -20,7 +20,13 @@
     {% include "Ceres::PageDesign.Partials.Header.DefaultHeader" %}
 {% else %}
 <header id="page-header" class="fixed-top">
-    {{ headerContainer | raw }}
+    <div class="container-max">
+        <div class="row">
+            <div class="col-12">
+                {{ headerContainer | raw }}
+            </div>
+        </div>
+    </div>
 </header>
 {% endif %}
 

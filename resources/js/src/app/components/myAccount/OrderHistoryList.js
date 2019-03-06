@@ -1,6 +1,7 @@
 import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
 import NotificationService from "services/NotificationService";
+import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("order-history-list", {
 
@@ -35,6 +36,11 @@ Vue.component("order-history-list", {
         {
             type: Boolean,
             default: true
+        },
+        initialData:
+        {
+            type: Object,
+            default: null
         }
     },
 
@@ -50,7 +56,15 @@ Vue.component("order-history-list", {
     created()
     {
         this.$options.template = this.template;
-        this.setPage(1);
+
+        if (!isNullOrUndefined(this.initialData))
+        {
+            this.orderList = this.initialData;
+        }
+        else
+        {
+            this.setPage(1);
+        }
     },
 
     methods:

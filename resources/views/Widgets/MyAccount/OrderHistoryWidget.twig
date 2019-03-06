@@ -13,8 +13,9 @@
     <order-history-list
         appearance="{{ appearance }}"
         hint-text="{{ hintText | raw }}"
-        :orders-per-page="{{ ordersPerPage }}"
-        :allow-payment-provider-change="{{ allowPaymentProviderChange | json_encode }}"
+        :orders-per-page="{{ ordersPerPage | default(5) | json_encode }}"
+        :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | default(true) | json_encode }}"
+        {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}
         :allow-return="{{ allowReturn | json_encode }}">
     </order-history-list>
 </div>

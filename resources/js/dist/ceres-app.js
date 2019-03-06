@@ -17553,7 +17553,7 @@ Vue.component("add-to-basket", {
       } else if (this.isSalable) {
         this.waiting = true;
         this.orderProperties.forEach(function (orderProperty) {
-          if (orderProperty.property.valueType === "float" && orderProperty.property.value.slice(-1) === App.decimalSeparator) {
+          if (orderProperty.property.valueType === "float" && !(0, _utils.isNullOrUndefined)(orderProperty.property.value) && orderProperty.property.value.slice(-1) === App.decimalSeparator) {
             orderProperty.property.value = orderProperty.property.value.substr(0, orderProperty.property.value.length - 1);
           }
         });
@@ -23874,8 +23874,34 @@ var ModalService = require("services/ModalService");
 var ApiService = require("services/ApiService");
 
 Vue.component("change-payment-method", {
-  delimiters: ["${", "}"],
-  props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentStatus", "currentTemplate", "currentPaymentMethodName"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-change-payment-method"
+    },
+    appearance: {
+      type: String,
+      default: "primary"
+    },
+    currentOrder: {
+      type: Object
+    },
+    allowedPaymentMethods: {
+      type: Array
+    },
+    changePossible: {
+      type: Boolean
+    },
+    paymentStatus: {
+      type: String
+    },
+    currentTemplate: {
+      type: String
+    },
+    currentPaymentMethodName: {
+      type: String
+    }
+  },
   data: function data() {
     return {
       compAllowedPaymentMethods: this.allowedPaymentMethods,
@@ -24196,6 +24222,8 @@ var _TranslationService = _interopRequireDefault(require("services/TranslationSe
 
 var _NotificationService = _interopRequireDefault(require("services/NotificationService"));
 
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component("order-history-list", {
@@ -24219,6 +24247,10 @@ Vue.component("order-history-list", {
     allowPaymentProviderChange: {
       type: Boolean,
       default: false
+    },
+    initialData: {
+      type: Object,
+      default: null
     }
   },
   data: function data() {
@@ -24230,7 +24262,12 @@ Vue.component("order-history-list", {
   },
   created: function created() {
     this.$options.template = this.template;
-    this.setPage(1);
+
+    if (!(0, _utils.isNullOrUndefined)(this.initialData)) {
+      this.orderList = this.initialData;
+    } else {
+      this.setPage(1);
+    }
   },
   methods: {
     setPage: function setPage() {
@@ -24260,7 +24297,7 @@ Vue.component("order-history-list", {
   }
 });
 
-},{"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],198:[function(require,module,exports){
+},{"../../helper/utils":258,"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],198:[function(require,module,exports){
 "use strict";
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
@@ -24312,7 +24349,8 @@ Vue.component("order-history-list-item", {
           var component = new Vue({
             data: {
               showAllOrderItems: _this.showAllOrderItems,
-              allowPaymentProviderChange: _this.allowPaymentProviderChange
+              allowPaymentProviderChange: _this.allowPaymentProviderChange,
+              appearance: _this.appearance
             },
             store: window.ceresStore,
             render: compiled.render,
@@ -24457,6 +24495,8 @@ Vue.component("order-return-history-item", {
 },{"services/TranslationService":265}],201:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -24486,6 +24526,10 @@ Vue.component("order-return-history-list", {
     itemsPerList: {
       type: Number,
       default: 5
+    },
+    initialData: {
+      type: Object,
+      default: null
     }
   },
   data: function data() {
@@ -24498,7 +24542,12 @@ Vue.component("order-return-history-list", {
   },
   created: function created() {
     this.$options.template = this.template;
-    this.setPage(1);
+
+    if (!(0, _utils.isNullOrUndefined)(this.initialData)) {
+      this.returnsList = this.initialData;
+    } else {
+      this.setPage(1);
+    }
   },
   methods: {
     setPage: function setPage(page) {
@@ -24524,7 +24573,7 @@ Vue.component("order-return-history-list", {
   }
 });
 
-},{"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],202:[function(require,module,exports){
+},{"../../helper/utils":258,"services/ApiService":260,"services/NotificationService":264,"services/TranslationService":265}],202:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-return-history-list-item", {
@@ -24559,13 +24608,13 @@ Vue.component("order-return-history-list-item", {
   },
   methods: {
     toggleShowAllOrderItems: function toggleShowAllOrderItems() {
+      this.showAllOrderItems = !this.showAllOrderItems;
+
       if (this.showAllOrderItems) {
         this.itemsToRender = this.returnOrder.order.orderItems;
       } else {
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
       }
-
-      this.showAllOrderItems = !this.showAllOrderItems;
     },
     getOriginOrderId: function getOriginOrderId(order) {
       var _iteratorNormalCompletion = true;
