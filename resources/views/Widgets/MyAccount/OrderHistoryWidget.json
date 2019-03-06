@@ -64,8 +64,8 @@
             "type": "checkbox",
             "defaultValue": true,
             "options": {
-                "name": "Widget.TODO",
-                "tooltip": "Widget.TODO"
+                "name": "Widget.orderHistoryAllowReturnLabel",
+                "tooltip": "Widget.orderHistoryAllowReturnTooltip"
             }
         }
     }
