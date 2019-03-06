@@ -24620,6 +24620,17 @@ Vue.component("order-history-list", {
       this.setPage(1);
     }
   },
+  computed: {
+    showTrackingColumn: function showTrackingColumn() {
+      if ((0, _utils.isDefined)(this.orderList.entries)) {
+        return this.orderList.entries.filter(function (entry) {
+          return !!entry.trackingURL;
+        }).length;
+      }
+
+      return false;
+    }
+  },
   methods: {
     setPage: function setPage() {
       var _this = this;
