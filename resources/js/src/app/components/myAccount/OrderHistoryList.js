@@ -32,6 +32,11 @@ Vue.component("order-history-list", {
             type: Boolean,
             default: false
         },
+        allowReturn:
+        {
+            type: Boolean,
+            default: true
+        },
         initialData:
         {
             type: Object,

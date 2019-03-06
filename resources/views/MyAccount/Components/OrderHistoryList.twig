@@ -4,7 +4,7 @@
 <script type="x/template" id="vue-order-history-list">
     <div class="order-history-list">
         <h3>{{ trans("Ceres::Template.orderHistory") }}</h3>
-        <div v-if="hintText" v-html="hintText">${ hintText }</div>
+        <div v-if="hintText" v-html="hintText"></div>
 
         <div class="row history-pagination mb-2" v-if="orderList.totalsCount > ordersPerPage">
             <div class="col-sm-12">
@@ -37,7 +37,8 @@
                     :appearance="appearance"
                     :key="order.id"
                     :order="order"
-                    :allow-payment-provider-change="allowPaymentProviderChange">
+                    :allow-payment-provider-change="allowPaymentProviderChange"
+                    :allow-return="allowReturn">
                 </order-history-list-item>
             </div>
         </template>

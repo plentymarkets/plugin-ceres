@@ -296,7 +296,7 @@
             </template>
             
             {% if orderData.isReturnable %}
-                <a v-waiting-animation-infinite class="btn btn-block mb-2" :class="'btn-' + appearance" href="/returns/{{ orderData.order.id }}">
+                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block mb-2" :class="'btn-' + appearance" href="/returns/{{ orderData.order.id }}">
                     <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>
