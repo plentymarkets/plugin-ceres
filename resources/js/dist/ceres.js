@@ -24595,6 +24595,10 @@ Vue.component("order-history-list", {
       type: Boolean,
       default: false
     },
+    allowReturn: {
+      type: Boolean,
+      default: true
+    },
     initialData: {
       type: Object,
       default: null
@@ -24671,7 +24675,11 @@ Vue.component("order-history-list-item", {
     },
     allowPaymentProviderChange: {
       type: Boolean,
-      default: false
+      default: true
+    },
+    allowReturn: {
+      type: Boolean,
+      default: true
     }
   },
   data: function data() {
@@ -24697,6 +24705,7 @@ Vue.component("order-history-list-item", {
             data: {
               showAllOrderItems: _this.showAllOrderItems,
               allowPaymentProviderChange: _this.allowPaymentProviderChange,
+              allowReturn: _this.allowReturn,
               appearance: _this.appearance
             },
             store: window.ceresStore,
