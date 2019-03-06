@@ -22167,10 +22167,69 @@ html.ie .component-loading.with-icon:after {
   outline: none;
 }
 
+.order-history-list .order-list > div:nth-child(odd) > div.container-clickable,
+.order-history-list .order-item > div:nth-child(odd) > div.container-clickable,
+.order-return-history-list .order-list > div:nth-child(odd) > div.container-clickable,
+.order-return-history-list .order-item > div:nth-child(odd) > div.container-clickable {
+  background: #f7f7f9;
+}
+
 .order-history-list .container-header > div,
 .order-return-history-list .container-header > div {
   display: inline-block;
   text-align: right;
+}
+
+.order-history-list .container-clickable,
+.order-return-history-list .container-clickable {
+  cursor: pointer;
+}
+
+.order-history-list .container-clickable.collapsed .fa-chevron-up,
+.order-return-history-list .container-clickable.collapsed .fa-chevron-up {
+  transform: scaleY(-1);
+  top: 2px;
+}
+
+.order-history-list .container-clickable .fa-chevron-up,
+.order-return-history-list .container-clickable .fa-chevron-up {
+  position: absolute;
+  left: 1.25rem;
+  font-size: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .order-history-list .container-clickable,
+  .order-return-history-list .container-clickable {
+    text-align: right;
+  }
+  .order-history-list .container-clickable .row div span:first-child,
+  .order-return-history-list .container-clickable .row div span:first-child {
+    display: none;
+  }
+  .order-history-list .container-clickable .icons,
+  .order-return-history-list .container-clickable .icons {
+    margin-top: -5px;
+  }
+  .order-history-list .container-clickable .icons .fa,
+  .order-return-history-list .container-clickable .icons .fa {
+    font-size: 2rem;
+    vertical-align: middle;
+    margin-bottom: -6px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .order-history-list .container-clickable .row div span:first-child,
+  .order-return-history-list .container-clickable .row div span:first-child {
+    text-align: left;
+  }
+  .order-history-list .container-clickable .fa-chevron-up,
+  .order-return-history-list .container-clickable .fa-chevron-up {
+    right: 1.15rem;
+    top: 0;
+    left: auto;
+  }
 }
 
 .order-history-list .container-middle .item img,
@@ -22204,56 +22263,10 @@ html.ie .component-loading.with-icon:after {
   }
 }
 
-.order-history-list .container-clickable,
-.order-return-history-list .container-clickable {
-  cursor: pointer;
-}
-
-.order-history-list .container-clickable.collapsed .fa-chevron-up,
-.order-return-history-list .container-clickable.collapsed .fa-chevron-up {
-  transform: scaleY(-1);
-  top: 5px;
-}
-
-.order-history-list .container-clickable .fa-chevron-up,
-.order-return-history-list .container-clickable .fa-chevron-up {
-  position: absolute;
-  left: 1.25rem;
-  font-size: 1.5rem;
-}
-
-@media (min-width: 576px) {
-  .order-history-list .container-clickable,
-  .order-return-history-list .container-clickable {
-    text-align: right;
-  }
-  .order-history-list .container-clickable .row div span:first-child,
-  .order-return-history-list .container-clickable .row div span:first-child {
-    display: none;
-  }
-  .order-history-list .container-clickable .icons,
-  .order-return-history-list .container-clickable .icons {
-    margin-top: -5px;
-  }
-  .order-history-list .container-clickable .icons .fa,
-  .order-return-history-list .container-clickable .icons .fa {
-    font-size: 2rem;
-    vertical-align: middle;
-    margin-bottom: -10px;
-  }
-}
-
-@media (max-width: 575.98px) {
-  .order-history-list .container-clickable .row div span:first-child,
-  .order-return-history-list .container-clickable .row div span:first-child {
-    text-align: left;
-  }
-  .order-history-list .container-clickable .fa-chevron-up,
-  .order-return-history-list .container-clickable .fa-chevron-up {
-    right: 1.15rem;
-    top: 0;
-    left: auto;
-  }
+.order-history-list .container-bottom .address-list span, .order-history-list .container-bottom .address-list strong,
+.order-return-history-list .container-bottom .address-list span,
+.order-return-history-list .container-bottom .address-list strong {
+  display: block;
 }
 
 @media (max-width: 767.98px) {
@@ -22276,14 +22289,12 @@ html.ie .component-loading.with-icon:after {
   }
 }
 
-.order-history-list .container-bottom .button-spacer {
-  margin-top: auto;
+.order-history-list .container-bottom {
+  background: #f7f7f9;
 }
 
-@media (max-width: 767.98px) {
-  .order-history-list .container-bottom .button-container {
-    margin-top: 0.5rem;
-  }
+.order-history-list .container-bottom .button-spacer {
+  margin-top: auto;
 }
 
 .order-history-list .container-bottom .payment-change-box-item .cannot-change-payment {
@@ -22291,8 +22302,10 @@ html.ie .component-loading.with-icon:after {
   margin-bottom: auto;
 }
 
-.order-history-list .container-bottom .address-list span, .order-history-list .container-bottom .address-list strong {
-  display: block;
+@media (max-width: 767.98px) {
+  .order-history-list .container-bottom .button-container {
+    margin-top: 0.5rem;
+  }
 }
 
 .cmp-order-item {

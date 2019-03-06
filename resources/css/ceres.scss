@@ -17221,10 +17221,65 @@ html.ie {
 }
 .order-history-list,
 .order-return-history-list {
+    .order-list,
+    .order-item {
+        > div:nth-child(odd) {
+            > div.container-clickable {
+                background: $gray-lightest;
+            }
+        }
+    }
+
     .container-header {
         > div {
             display: inline-block;
             text-align: right;
+        }
+    }
+
+    .container-clickable {
+        cursor: pointer;
+
+        &.collapsed {
+            .fa-chevron-up {
+                -webkit-transform: scaleY(-1);
+                        transform: scaleY(-1);
+                top: 2px;
+            }
+        }
+        .fa-chevron-up {
+            position: absolute;
+            left: 1.25rem;
+            font-size: 1.5rem;
+        }
+
+        @include media-breakpoint-up(sm) {
+            text-align: right;
+
+            .row div span:first-child {
+                display: none;
+            }
+            .icons {
+                margin-top: -5px;
+                .fa {
+                    font-size: 2rem;
+                    vertical-align: middle;
+                    margin-bottom: -6px;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(xs) {
+            .row div {
+                span:first-child {
+                    text-align: left;
+                }
+            }
+            .fa-chevron-up {
+                right: 1.15rem;
+                top: 0;
+                left: auto;
+            }
         }
     }
 
@@ -17256,48 +17311,10 @@ html.ie {
         }
     }
 
-    .container-clickable {
-        cursor: pointer;
-
-        &.collapsed {
-            .fa-chevron-up {
-                -webkit-transform: scaleY(-1);
-                        transform: scaleY(-1);
-                top: 5px;
-            }
-        }
-        .fa-chevron-up {
-            position: absolute;
-            left: 1.25rem;
-            font-size: 1.5rem;
-        }
-
-        @include media-breakpoint-up(sm) {
-            text-align: right;
-
-            .row div span:first-child {
-                display: none;
-            }
-            .icons {
-                margin-top: -5px;
-                .fa {
-                    font-size: 2rem;
-                    vertical-align: middle;
-                    margin-bottom: -10px;
-                }
-            }
-        }
-
-        @include media-breakpoint-down(xs) {
-            .row div {
-                span:first-child {
-                    text-align: left;
-                }
-            }
-            .fa-chevron-up {
-                right: 1.15rem;
-                top: 0;
-                left: auto;
+    .container-bottom {
+        .address-list {
+            span, strong {
+                display: block;
             }
         }
     }
@@ -17323,31 +17340,26 @@ html.ie {
             }
         }
     }
+
     .container-bottom {
+        background: $gray-lightest;
+
         .button-spacer {
             margin-top: auto;
         }
-        @include media-breakpoint-down(sm) {
-            .button-container {
-                margin-top: 0.5rem;
-            }
-        }
-
         .payment-change-box-item {
             .cannot-change-payment {
                 width: 100%;
                 margin-bottom: auto;
             }
         }
-
-        .address-list {
-            span, strong {
-                display: block;
+        @include media-breakpoint-down(sm) {
+            .button-container {
+                margin-top: 0.5rem;
             }
         }
     }
 }
-
 .cmp-order-item{
 
 	@extend .cmp-basket-item; 
