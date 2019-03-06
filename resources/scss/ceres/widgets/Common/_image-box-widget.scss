@@ -30,12 +30,6 @@
         .widget-caption
         {
             transition: 300ms all ease;
-
-            h2, .h2
-            {
-                margin: 0;
-                font-size: 1.75rem;
-            }
         }
     }
 
@@ -56,20 +50,10 @@
                 align-items: center;
                 padding: 1rem;
 
-                h2, .h2
+                > div
                 {
-                    text-align: center;
+                    display: block;
                     width: 100%;
-                    text-transform: uppercase;
-
-                    @include media-breakpoint-up(sm)
-                    {
-                        font-size: 3rem;
-                    }
-                    @include media-breakpoint-up(lg)
-                    {
-                        font-size: 4rem;
-                    }
                 }
             }
         }
@@ -88,7 +72,7 @@
 
             .widget-caption
             {
-                padding: 1.5rem;
+                padding: 0 1.5rem;
             }
         }
     }
@@ -113,7 +97,7 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                padding: 1rem;
+                padding: 0 1rem;
             }
         }
     }
@@ -211,4 +195,96 @@
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
     font-size: 2rem;
+}
+
+.widget-image-box-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+    }
+
+    h1
+    {
+        font-size: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    h2
+    {
+        font-size: 1.75rem;
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+    }
+
+    h3
+    {
+        font-size: 1.5rem;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+
+    p
+    {
+        padding-top: .2rem;
+        padding-bottom: .2rem;
+    }
+
+    &.fullwidth
+    {
+        h1,
+        h2,
+        h3
+        {
+            text-transform: uppercase;
+        }
+
+        h1
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 4rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 6rem;
+            }
+        }
+
+        h2
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 2.5rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 4rem;
+            }
+        }
+
+        h3
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 1.5rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 2.5rem;
+            }
+        }
+    }
+
+    &.inline-caption
+    {
+        h1
+        {
+
+        }
+    }
 }

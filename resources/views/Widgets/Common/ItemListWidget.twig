@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set headlineStyle  = widget.settings.headlineStyle.mobile  %}
 {% set headline       = widget.settings.headline.mobile  %}
@@ -51,8 +52,6 @@
     {% else %}
         {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
     {% endif %}
-{% elseif headlineStyle == "custom-caption" and headline | trim is not empty %}
-    {{ Twig.setEscaped("title", headline) }}
 {% endif %}
 
 {{ Twig.component( "Ceres::Containers.Components.LastSeenItemList" ) }}
@@ -65,15 +64,31 @@
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
             <last-seen-item-list :items-per-page="{{ itemsPerPage }}" :max-items="{{ maxItems }}" v-cloak>
-                <div class="widget-caption mb-3" slot="heading">
-                    <h2>{{ Twig.print("title") }}</h2>
+                <div class="widget-caption widget-item-list-caption mb-3" slot="heading">
+                    {% if headlineStyle == "custom-caption" %}
+                        <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-caption") }}>
+                            {{ headline | raw }}
+                        </div>
+                    {% else %}
+                        <div>
+                            <h2>{{ Twig.print("title") }}</h2>
+                        </div>
+                    {% endif %}
                 </div>
             </last-seen-item-list>
         {% else %}
             {# render static item lists #}
             {% if headlineStyle == "default-caption" or headlineStyle == "custom-caption" or headlineStyle is empty %}
-                <div class="widget-caption mb-3">
-                    <h2>{{ Twig.print("title") }}</h2>
+                <div class="widget-caption widget-item-list-caption mb-3">
+                    {% if headlineStyle == "custom-caption" %}
+                        <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-caption") }}>
+                            {{ headline | raw }}
+                        </div>
+                    {% else %}
+                        <div>
+                            <h2>{{ Twig.print("title") }}</h2>
+                        </div>
+                    {% endif %}
 
                     {{ Twig.if("category") }}
                         <a href="{{ Twig.print(Twig.call("services.category.getURL", [Twig.var("category")])) }}">
