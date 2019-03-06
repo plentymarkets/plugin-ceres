@@ -30,7 +30,12 @@
 				<div class="col-sm-3">{{ trans("Ceres::Template.returnHistoryDocuments") }}</div>
 			</div>
 			<div v-if="!waiting" class="order-list border-top">
-				<order-return-history-list-item :appearance="appearance" v-for="returnOrder in returnsList.entries" :items-per-list="itemsPerList" :return-order="returnOrder" :key="returnOrder.order.id"></order-return-history-list-item>
+                <order-return-history-list-item v-for="returnOrder in returnsList.entries" 
+                    :appearance="appearance" 
+                    :items-per-list="itemsPerList" 
+                    :return-order="returnOrder" 
+                    :key="returnOrder.order.id">
+                </order-return-history-list-item>
 			</div>
 		</template>
 		<template v-else>

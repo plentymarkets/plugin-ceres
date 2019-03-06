@@ -1,7 +1,7 @@
 import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
 import NotificationService from "services/NotificationService";
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 
 Vue.component("order-history-list", {
 
@@ -59,6 +59,18 @@ Vue.component("order-history-list", {
         else
         {
             this.setPage(1);
+        }
+    },
+
+    computed:
+    {
+        showTrackingColumn()
+        {
+            if (isDefined(this.orderList.entries))
+            {
+                return this.orderList.entries.filter(entry => !!entry.trackingURL).length;
+            }
+            return false;
         }
     },
 
