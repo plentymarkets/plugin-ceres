@@ -4,19 +4,14 @@
 	<div class="form-group">
 		<div class="row mb-3">
             <div class="col-12 col-md-12 col-lg-12">
-				<!-- RETURN PAGINATION -->
                 <div class="clearfix history-pagination" v-if="returnsList.totalsCount > itemsPerPage">
                     <div class="float-left counter">
                         {{ trans("Ceres::Template.returnHistoryShow", {"countStart": "${ returnsList.firstOnPage }", "countEnd": "${ returnsList.lastOnPage }", "orderMaxCount": "${ returnsList.totalsCount }" }) }}
                     </div>
 
 					{% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'returnsList.page', 'pageMax': 'returnsList.lastPageNumber', 'setPage': 'setPage' } %}
-
                 </div>
-                <!-- ./RETURN PAGINATION -->
-
 				<hr>
-
 				<div :class="{ 'loading': waiting }">
 					{% include "Ceres::ItemList.Partials.LoadingAnimation" %}
 				</div>

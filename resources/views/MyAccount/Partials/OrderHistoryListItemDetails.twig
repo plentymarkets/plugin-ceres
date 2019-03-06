@@ -52,27 +52,28 @@
 
                             <div class="d-inline-block item-description">
                                 <div><a class="text-primary" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
-                                <div>{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}: {{ (itemPrice + rebatedAmount) | formatMonetary( item.amounts[0].currency ) }}</div>
-                                <div>{{ trans("Ceres::Template.orderHistoryQuantity") }}: {{ item.quantity }}</div>
-                                <div>{{ trans("Ceres::Template.orderHistoryTotal") }}: {{ (item.quantity * (itemPrice + rebatedAmount)) | formatMonetary( item.amounts[0].currency ) }}</div>
-
+                                
                                 {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
                                     <div class="item-bundle">
                                         {% for bundleComponent in item.bundleComponents %}
                                             <div>
                                                 <span class="text-muted">{{ bundleComponent.quantity }} x</span>
-                                                <a href="{{ bundleComponent.data | itemURL }}"> {{ bundleComponent.data | itemName }} </a>
+                                                <a href="{{ bundleComponent.data | itemURL }}" :class="'text-' + appearance"> {{ bundleComponent.data | itemName }} </a>
                                             </div>
                                         {% endfor %}
                                     </div>
                                 {% endif %}
 
+                                <div>{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}: {{ (itemPrice + rebatedAmount) | formatMonetary( item.amounts[0].currency ) }}</div>
+                                <div>{{ trans("Ceres::Template.orderHistoryQuantity") }}: {{ item.quantity }}</div>
+                                <div>{{ trans("Ceres::Template.orderHistoryTotal") }}: {{ (item.quantity * (itemPrice + rebatedAmount)) | formatMonetary( item.amounts[0].currency ) }}</div>
+
                                 {% if item.orderProperties %}
                                     {% for property in item.orderProperties %}
-                                        <div class="row">
-                                            <strong class="col-6 col-sm-3 col-md-5 item-word-break">{{ property.name }}</strong>
+                                        <div>
+                                            <strong>{{ property.name }}</strong>
                                             {% if property.type == 'file' %}
-                                                <span class="col-6 col-sm-9 item-word-break">
+                                                <span>
                                                     {% set splitPath = property.value |split('/') %}
                                                     {% set filename = '' %}
                                                     {% set path = '' %}
@@ -87,14 +88,13 @@
                                                         {% endif %}
                                                     {% endfor %}
 
-
-                                                    <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank">
+                                                    <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank" :class="'text-' + appearance">
                                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                                         {{ splitPath | last }}
                                                     </a>
                                                 </span>
                                             {% elseif property.type | length > 0 %}
-                                                <span class="col-6 col-sm-9 col-md-7 item-word-break">{{ property.value }}</span>
+                                                <span>: {{ property.value }}</span>
                                             {% endif %}
                                         </div>
                                     {% endfor %}
@@ -126,7 +126,7 @@
             {% endif %}
         </div>
         <div class="col-md-5 sum">
-            <div class="cmp cmp-totals row pt-3">
+            <div class="cmp cmp-totals row pt-3" v-stick-in-parent>
                 <div class="col-sm-12">
                     <h3>{{ trans("Ceres::Template.orderHistorySum") }}</h3>
                     <div>
@@ -267,7 +267,7 @@
                             <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryInvoiceAddress") }}</b></h5>
                             <address-header class="mb-3" :address="{{ orderData.order.billingAddress | json_encode }}"></address-header>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 address-list">
                             <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryShippingAddress") }}</b></h5>
                             {% if orderData.order.billingAddress.id == orderData.order.deliveryAddress.id %}
                                 <span>
@@ -284,7 +284,7 @@
         <div class="col-md-5 button-container">
             <template v-if="allowPaymentProviderChange">
                 <change-payment-method
-                    template="#vue-change-payment-method"
+                    :appearance="appearance"
                     :current-order="{{ orderData.order | json_encode }}"
                     :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
                     :allowed-payment-methods="{{ orderData.paymentMethodListForSwitch | json_encode }}"
@@ -296,13 +296,16 @@
             </template>
             
             {% if orderData.isReturnable %}
-                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="/returns/{{ orderData.order.id }}">
+                <a v-waiting-animation-infinite class="btn btn-block mb-2" :class="'btn-' + appearance" href="/returns/{{ orderData.order.id }}">
                     <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>
             {% endif %}
             
-            <order-documents :documents="{{ orderData.order.documents | json_encode }}"></order-documents>
+            <order-documents 
+                :documents="{{ orderData.order.documents | json_encode }}"
+                :appearance="appearance">
+            </order-documents>
         </div>
     </div>
 </div>
