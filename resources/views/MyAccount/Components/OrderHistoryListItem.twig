@@ -27,12 +27,28 @@
             </div>
             <div class="col-sm-3">
                 <div class="icons d-none d-sm-block">
-                    <a href="" @click.stop><i class="fa fa-truck fa-flip-horizontal" :class="'text-' + appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryTracking') }}"></i></a>
-                    <a href="" @click.stop><i class="fa fa-shopping-cart" :class="'text-' + appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryAgain') }}"></i></a>
+                    <a v-if="!!order.trackingURL" :href="order.trackingURL" @click.stop target="_blank" rel="noopener">
+                        <i class="fa fa-truck fa-flip-horizontal" :class="'text-' + appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryTracking') }}"></i>
+                    </a>
+                    {#
+                        <!-- for "order again" in the future -->
+                        <a href="" @click.stop>
+                            <i class="fa fa-shopping-cart" :class="'text-' + appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryAgain') }}"></i>
+                        </a>
+                    #}
                 </div>
                 <div class="buttons d-block d-sm-none mt-2">
-                    <a href="" @click.stop class="btn btn-block" :class="'btn-' + appearance"><span>{{ trans("Ceres::Template.orderHistoryTracking") }}</span><i class="fa fa-truck fa-flip-horizontal" aria-hidden="true"></i></a>
-                    <a href="" @click.stop class="btn btn-block" :class="'btn-' + appearance"><span>{{ trans("Ceres::Template.orderHistoryAgain") }}</span><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    <a v-if="!!order.trackingURL" :href="order.trackingURL" @click.stop target="_blank" rel="noopener" class="btn btn-block" :class="'btn-' + appearance">
+                        <span>{{ trans("Ceres::Template.orderHistoryTracking") }}</span>
+                        <i class="fa fa-truck fa-flip-horizontal" aria-hidden="true"></i>
+                    </a>
+                    {#
+                        <!-- for "order again" in the future -->
+                        <a href="" @click.stop class="btn btn-block" :class="'btn-' + appearance">
+                            <span>{{ trans("Ceres::Template.orderHistoryAgain") }}</span>
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                    #}
                 </div>
             </div>
         </div>
