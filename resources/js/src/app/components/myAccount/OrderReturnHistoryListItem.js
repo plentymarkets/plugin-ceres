@@ -16,11 +16,6 @@ Vue.component("order-return-history-list-item", {
             type: Object,
             // eslint-disable-next-line
             default: () => {} 
-        },
-        itemsPerList:
-        {
-            type: Number,
-            default: 5
         }
     },
 
@@ -35,7 +30,7 @@ Vue.component("order-return-history-list-item", {
     created()
     {
         this.$options.template = this.template;
-        this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
+        this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 5);
     },
 
     methods:
@@ -50,7 +45,7 @@ Vue.component("order-return-history-list-item", {
             }
             else
             {
-                this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
+                this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 5);
             }
         },
 
