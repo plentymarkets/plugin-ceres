@@ -99,3 +99,10 @@
         {% if isPreview %} data-builder-editable="{{ variableName }}" data-builder-editor-toolbar="{{ toolbarLayout }}"{% if additionalClasses %} data-builder-editor-classes="{{ additionalClasses }}"{% endif %}{% endif %}
     {% endspaceless -%}
 {% endmacro %}
+
+{% macro editableTwig(isPreview, template) %}
+    {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+    {% if isPreview %}{{ Twig.do("verbatim") }}{% endif %}
+        {{ template | raw }}
+    {% if isPreview %}{{ Twig.do("endverbatim") }}{% endif %}
+{% endmacro %}

@@ -6,9 +6,9 @@
 <div class="widget widget-title-bar widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <div class="widget-inner" {{ WidgetHelper.makeEditable("content", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-title-bar") }}>
         {% if text | trim is empty %}
-            <h1 class="align-center">{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}</h1>
+            <h1 class="align-center">{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.headerCompanyName")) }}</h1>
         {% else %}
-            {{ text | raw }}
+            {{ WidgetHelper.editableTwig(isPreview, text) }}
         {% endif %}
     </div>
 </div>

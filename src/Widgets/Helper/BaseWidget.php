@@ -9,8 +9,8 @@ class BaseWidget implements Widget
 {
     const TOOLBAR_LAYOUT = [
         "NONE"   => "",
-        "INLINE" => "bold,italic,underline,strike|h1,h2,h3|align",
-        "ALL"    => "bold,italic,underline,strike|headline|align,ul,ol|color,background"
+        "INLINE" => "bold,italic,underline,strike|h1,h2,h3|align|translation",
+        "ALL"    => "bold,italic,underline,strike|headline|align,ul,ol|color,background|translation"
     ];
     /**
      * The template to e used for this widget

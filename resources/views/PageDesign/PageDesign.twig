@@ -341,7 +341,7 @@
 
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
         {
-            var compiled = Vue.compile(widgetElement[0].outerHTML );
+            var compiled = Vue.compile(widgetElement[0].outerHTML, { delimiters: ["${", "}"] } );
             var component = new Vue({
                 store: window.ceresStore,
                 render: compiled.render,
