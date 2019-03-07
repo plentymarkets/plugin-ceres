@@ -12572,55 +12572,6 @@ html.ie {
         right: auto;
     }
 }
-.widget-order-history,
-.widget-order-return-history {
-    @each $color, $value in $shop-builder-colors
-    {
-        &.widget-#{$color}
-        {        
-            .loading-animation > div
-            {
-                background-color: $value;
-            }
-    
-            .text-primary
-            {
-                @extend .text-#{$color};
-            }
-    
-            .pagination
-            {
-                a
-                {
-                    color: $value;
-                }
-    
-                .page-item
-                {
-                    .page-link
-                    {
-                        color: $value;
-    
-                        &:hover
-                        {
-                            color: darken($value, 15%);
-                        }
-                    }
-    
-                    &.active .page-link
-                    {
-                        border-color: $value;
-                        @include context-bg($value);
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-
-
 .popover[x-placement="bottom"]
 {
     .arrow::after
@@ -19396,6 +19347,78 @@ html.ios {
     }
 }
 
+.widget.accordion {
+    div.card {
+        &:first-of-type {
+            border-bottom: $card-border-width solid $card-border-color;
+        }
+        &:nth-of-type(2) {
+            border-top: 0;
+        }
+
+        button.collapsed {
+            h5 {
+                > .fa {
+                    -webkit-transform: scaleY(1);
+                            transform: scaleY(1);
+                }
+            }
+        }
+        button {
+            text-align: left;
+            padding: $card-spacer-x;
+            border-top-width: 0;
+
+            h5 {
+                font-weight: bold;
+                position: relative;
+
+                > .fa {
+                    position: absolute;
+                    right: 0;
+                    top: -4px;
+                    font-size: 1.5rem;
+                    -webkit-transform: scaleY(-1);
+                            transform: scaleY(-1);
+                    -webkit-transition-timing-function: ease;
+                            transition-timing-function: ease;
+                    -webkit-transition-duration: .35s;
+                            transition-duration: .35s;
+                    -webkit-transform-origin: 50% 60%;
+                            transform-origin: 50% 60%;
+                }
+            }
+        }        
+        button:hover,
+        button:focus { 
+            color: black;
+        }
+
+        div .card-body {
+            margin-top: 1px;
+
+            p {
+                margin: 0;
+                line-height: $headings-line-height;
+            }
+        }
+    }
+
+    @each $color, $value in $theme-colors {
+        &.widget-#{$color} {
+            button:hover,
+            button:focus {
+                -webkit-text-decoration-color: $value;
+                        text-decoration-color: $value;
+            }
+            h5 {
+                color: $value;
+            }
+        }
+    }
+}
+
+
 .widget-image-box
 {
     @include media-breakpoint-only(xs) {
@@ -19864,78 +19887,6 @@ html.ie {
         @include widget-bg-variant($danger);
     }
 }
-.widget.accordion {
-    div.card {
-        &:first-of-type {
-            border-bottom: $card-border-width solid $card-border-color;
-        }
-        &:nth-of-type(2) {
-            border-top: 0;
-        }
-
-        button.collapsed {
-            h5 {
-                > .fa {
-                    -webkit-transform: scaleY(1);
-                            transform: scaleY(1);
-                }
-            }
-        }
-        button {
-            text-align: left;
-            padding: $card-spacer-x;
-            border-top-width: 0;
-
-            h5 {
-                font-weight: bold;
-                position: relative;
-
-                > .fa {
-                    position: absolute;
-                    right: 0;
-                    top: -4px;
-                    font-size: 1.5rem;
-                    -webkit-transform: scaleY(-1);
-                            transform: scaleY(-1);
-                    -webkit-transition-timing-function: ease;
-                            transition-timing-function: ease;
-                    -webkit-transition-duration: .35s;
-                            transition-duration: .35s;
-                    -webkit-transform-origin: 50% 60%;
-                            transform-origin: 50% 60%;
-                }
-            }
-        }        
-        button:hover,
-        button:focus { 
-            color: black;
-        }
-
-        div .card-body {
-            margin-top: 1px;
-
-            p {
-                margin: 0;
-                line-height: $headings-line-height;
-            }
-        }
-    }
-
-    @each $color, $value in $theme-colors {
-        &.widget-#{$color} {
-            button:hover,
-            button:focus {
-                -webkit-text-decoration-color: $value;
-                        text-decoration-color: $value;
-            }
-            h5 {
-                color: $value;
-            }
-        }
-    }
-}
-
-
 .widget-legal-information
 {
     a
@@ -20378,6 +20329,57 @@ header .widget
     .description
     {
         font-style: italic;
+    }
+}
+
+.widget-order-history,
+.widget-order-return-history {
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {        
+            .loading-animation > div
+            {
+                background-color: $value;
+            }
+
+            .sk-fading-circle > .sk-circle:before
+            {
+                background-color: $value;
+            }
+    
+            .text-primary
+            {
+                @extend .text-#{$color};
+            }
+    
+            .pagination
+            {
+                a
+                {
+                    color: $value;
+                }
+    
+                .page-item
+                {
+                    .page-link
+                    {
+                        color: $value;
+    
+                        &:hover
+                        {
+                            color: darken($value, 15%);
+                        }
+                    }
+    
+                    &.active .page-link
+                    {
+                        border-color: $value;
+                        @include context-bg($value);
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -3251,6 +3251,14 @@
                     "name": "Widget.orderHistoryAllowPaymentProviderChangeLabel",
                     "tooltip": "Widget.orderHistoryAllowPaymentProviderChangeTooltip"
                 }
+            },
+            "allowReturn": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.orderHistoryAllowReturnLabel",
+                    "tooltip": "Widget.orderHistoryAllowReturnTooltip"
+                }
             }
         }
     },
