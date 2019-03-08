@@ -47,6 +47,7 @@ export class StickyElement
             this.el.parentNode.insertBefore(this.placeholder, this.el);
             this.eventListener = this.tick.bind(this);
             this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
+            this.placeholder.style.width = this.el.getBoundingClientRect().width + "px";
 
             document.addEventListener("storeChanged", this.eventListener);
             STICKY_EVENTS.forEach(event =>
