@@ -34,14 +34,6 @@
                 ]
             }
         },
-        "hintText": {
-            "type": "codeEditor",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.addressHintTextLabel",
-                "tooltipText": "Widget.addressHintTextTooltip"
-            }
-        },
         "addressLayout": {
             "type": "select",
             "defaultValue": "DE",

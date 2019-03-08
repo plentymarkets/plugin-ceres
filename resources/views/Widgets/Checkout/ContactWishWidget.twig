@@ -1,13 +1,17 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {{ Twig.component("Ceres::Checkout.Components.ContactWishInput") }}
 {% set hintText = widget.settings.hintText.mobile %}
 
 <div class="widget widget-contact-wish">
-    <h3>{{ Twig.trans("Ceres::Template.checkoutContactWish") }}</h3>
-    {% if hintText is not empty %}
-        <p>{{ hintText | raw }}</p>
-    {% endif %}
-    
+    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
+        {% if hintText is empty %}
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutContactWish")) }}</h3>
+        {% else %}
+            {{ WidgetHelper.editableTwig(isPreview, hintText) }}
+        {% endif %}
+    </div>
+
     <contact-wish-input class="pb-3" template="#vue-contact-wish-input"></contact-wish-input>
 </div>
