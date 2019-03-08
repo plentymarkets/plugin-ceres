@@ -98,13 +98,13 @@
                     {% set currentTemplate = services.template.getCurrentTemplate() %}
 
                     {% if paymentMethoId != -1 and showAdditionalPaymentInformation == true %}
-                        <change-payment-method  template="#vue-change-payment-method"
-                                                :current-order="{{ orderData.order | json_encode() }}"
-                                                :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
-                                                :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}"
-                                                :payment-status="{{ paymentStatus | json_encode() }}"
-                                                :current-payment-method-name="{{ orderData.paymentMethodName | json_encode() }}"
-                                                :current-template="{{ currentTemplate | json_encode() }}">
+                        <change-payment-method
+                            :current-order="{{ orderData.order | json_encode() }}"
+                            :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
+                            :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}"
+                            :payment-status="{{ paymentStatus | json_encode() }}"
+                            :current-payment-method-name="{{ orderData.paymentMethodName | json_encode() }}"
+                            :current-template="{{ currentTemplate | json_encode() }}">
                         </change-payment-method>
                     {% endif %}
 
@@ -187,7 +187,7 @@
                                 <span class="col-6 col-sm-9 col-md-7">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
                             </div>
                             <div class="row">
-                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPeace") }}</strong>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
                                 <span class="col-6 col-sm-9 col-md-7">{{ item.quantity }}</span>
                             </div>
                             <div class="row">

@@ -3152,5 +3152,195 @@
                 }
             }
         }
+    },
+    {
+        "identifier": "Ceres::OrderHistoryWidget",
+        "label": "Widget.orderHistoryLabel",
+        "previewImageURL": "/images/widgets/order-history.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 100,
+        "maxPerPage": 1,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderHistoryWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.orderHistoryHintTextLabel",
+                    "tooltipText": "Widget.orderHistoryHintTextTooltip"
+                }
+            },
+            "ordersPerPage": {
+                "type": "select",
+                "defaultValue": 5,
+                "options": {
+                    "name": "Widget.orderHistoryOrdersPerPageLabel",
+                    "tooltipText": "Widget.orderHistoryOrdersPerPageTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 5,
+                            "caption": "Widget.orderHistoryOrdersPerPage5",
+                            "position": 0
+                        },
+                        {
+                            "value": 10,
+                            "caption": "Widget.orderHistoryOrdersPerPage10",
+                            "position": 1
+                        },
+                        {
+                            "value": 25,
+                            "caption": "Widget.orderHistoryOrdersPerPage25",
+                            "position": 2
+                        },
+                        {
+                            "value": 50,
+                            "caption": "Widget.orderHistoryOrdersPerPage50",
+                            "position": 3
+                        }
+                    ]
+                }
+            },
+            "allowPaymentProviderChange": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.orderHistoryAllowPaymentProviderChangeLabel",
+                    "tooltip": "Widget.orderHistoryAllowPaymentProviderChangeTooltip"
+                }
+            },
+            "allowReturn": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.orderHistoryAllowReturnLabel",
+                    "tooltip": "Widget.orderHistoryAllowReturnTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::OrderReturnHistoryWidget",
+        "label": "Widget.orderReturnHistoryLabel",
+        "previewImageURL": "/images/widgets/return-history.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 200,
+        "maxPerPage": 1,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderReturnHistoryWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.orderHistoryHintTextLabel",
+                    "tooltipText": "Widget.orderHistoryHintTextTooltip"
+                }
+            },
+            "itemsPerList": {
+                "type": "number",
+                "required": true,
+                "defaultValue": 5,
+                "options": {
+                    "name": "Widget.orderReturnHistoryItem",
+                    "tooltipText": "Widget.orderReturnHistoryItemTooltip"
+                }
+            },
+            "returnsPerPage": {
+                "type": "number",
+                "required": true,
+                "defaultValue": 5,
+                "options": {
+                    "name": "Widget.orderReturnHistoryPage",
+                    "tooltipText": "Widget.orderReturnHistoryPageTooltip"
+                }
+            }
+        }
     }
 ]

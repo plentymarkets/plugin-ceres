@@ -1,0 +1,21 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{{ Twig.component( "Ceres::MyAccount.Components.OrderHistoryList" ) }}
+
+{% set hintText = widget.settings.hintText.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default('primary') %}
+{% set allowPaymentProviderChange = widget.settings.allowPaymentProviderChange.mobile %}
+{% set allowReturn = widget.settings.allowReturn.mobile %}
+{% set ordersPerPage = widget.settings.ordersPerPage.mobile %}
+
+<div class="widget widget-order-history widget-{{ appearance }}">
+    <order-history-list
+        appearance="{{ appearance }}"
+        hint-text="{{ hintText }}"
+        :orders-per-page="{{ ordersPerPage | default(5) | json_encode }}"
+        :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | default(true) | json_encode }}"
+        {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}
+        :allow-return="{{ allowReturn | json_encode }}">
+    </order-history-list>
+</div>
