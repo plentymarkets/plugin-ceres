@@ -17204,7 +17204,7 @@ html.ie {
             font-size: 1.5rem;
         }
 
-        @include media-breakpoint-up(sm) {
+        @include media-breakpoint-up(md) {
             text-align: right;
 
             .row div span:first-child {
@@ -17220,7 +17220,7 @@ html.ie {
             }
         }
 
-        @include media-breakpoint-down(xs) {
+        @include media-breakpoint-down(sm) {
             .row div {
                 span:first-child {
                     text-align: left;

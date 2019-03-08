@@ -24543,10 +24543,6 @@ Vue.component("order-return-history-list", {
       type: Number,
       default: 5
     },
-    itemsPerList: {
-      type: Number,
-      default: 5
-    },
     initialData: {
       type: Object,
       default: null
@@ -24610,10 +24606,6 @@ Vue.component("order-return-history-list-item", {
       type: Object,
       // eslint-disable-next-line
       default: function _default() {}
-    },
-    itemsPerList: {
-      type: Number,
-      default: 5
     }
   },
   data: function data() {
@@ -24624,7 +24616,7 @@ Vue.component("order-return-history-list-item", {
   },
   created: function created() {
     this.$options.template = this.template;
-    this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
+    this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 5);
   },
   methods: {
     toggleShowAllOrderItems: function toggleShowAllOrderItems() {
@@ -24633,7 +24625,7 @@ Vue.component("order-return-history-list-item", {
       if (this.showAllOrderItems) {
         this.itemsToRender = this.returnOrder.order.orderItems;
       } else {
-        this.itemsToRender = this.returnOrder.order.orderItems.slice(0, this.itemsPerList);
+        this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 5);
       }
     },
     getOriginOrderId: function getOriginOrderId(order) {

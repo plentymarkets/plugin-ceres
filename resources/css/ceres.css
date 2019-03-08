@@ -22036,7 +22036,7 @@ html.ie .component-loading.with-icon:after {
   font-size: 1.5rem;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 768px) {
   .order-history-list .container-clickable,
   .order-return-history-list .container-clickable {
     text-align: right;
@@ -22057,7 +22057,7 @@ html.ie .component-loading.with-icon:after {
   }
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 767.98px) {
   .order-history-list .container-clickable .row div span:first-child,
   .order-return-history-list .container-clickable .row div span:first-child {
     text-align: left;
