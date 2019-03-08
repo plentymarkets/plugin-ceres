@@ -13,12 +13,12 @@
                     </div>
                 </template>
                 <template v-else> <!-- Returnhistory -->
-                    <div class="icons d-none d-md-block">
+                    <div class="icons d-none d-sm-block">
                         <a :class="'text-' + appearance" :href="'/order-document/' + document.id" target="_blank" v-tooltip data-toggle="tooltip" data-placement="top" :title="getDownloadTooltip(document.type)" @click.stop>
                             <i class="fa fa-file-text-o" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <div class="buttons d-block d-md-none mt-2">
+                    <div class="buttons d-block d-sm-none mt-2">
                         <a class="btn btn-block" :class="'btn-' + appearance" :href="'/order-document/' + document.id" target="_blank" @click.stop>
                             <span>${ getTypeName(document.type) }</span>
                             <i class="fa fa-file-text-o" aria-hidden="true"></i>
