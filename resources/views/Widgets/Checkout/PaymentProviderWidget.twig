@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Checkout.Components.PaymentProviderSelect") }}
@@ -7,11 +8,13 @@
 {% set hintText = widget.settings.hintText.mobile %}
 
 <div class="widget widget-provider-select widget-{{ widget.settings.appearance.mobile | default("primary") }}">
-    <h3 class="mb-3">{{ Twig.trans("Ceres::Template.checkoutPaymentMethod") }}</h3>
-
-    {% if hintText is not empty %}
-        <p>{{ hintText | raw }}</p>
-    {% endif %}
+    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
+        {% if hintText is empty %}
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutPaymentMethod")) }}</h3>
+        {% else %}
+            {{ WidgetHelper.editableTwig(isPreview, hintText) }}
+        {% endif %}
+    </div>
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforePaymentList"])) }}
 
