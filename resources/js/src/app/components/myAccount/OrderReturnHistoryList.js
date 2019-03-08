@@ -27,10 +27,6 @@ Vue.component("order-return-history-list", {
             type: Number,
             default: 5
         },
-        itemsPerList: {
-            type: Number,
-            default: 5
-        },
         initialData:
         {
             type: Object,

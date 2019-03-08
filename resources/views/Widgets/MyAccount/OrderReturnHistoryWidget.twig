@@ -5,14 +5,12 @@
 {% set hintText = widget.settings.hintText.mobile %}
 {% set appearance = widget.settings.appearance.mobile %}
 {% set returnsPerPage = widget.settings.returnsPerPage.mobile %}
-{% set itemsPerList = widget.settings.itemsPerList.mobile %}
 
 <div class="widget widget-order-return-history widget-{{ widget.settings.appearance.mobile | default('primary') }}">
     <order-return-history-list
         appearance="{{ appearance | default("primary") }}"
         hint-text="{{ hintText }}"
         :returns-per-page="{{ returnsPerPage | default(5) | json_encode }}"
-        :items-per-list="{{ itemsPerList | default(5) | json_encode }}"
         {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}>
     </order-return-history-list>
 </div>
