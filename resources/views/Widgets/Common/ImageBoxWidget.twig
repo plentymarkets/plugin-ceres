@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
@@ -7,6 +8,7 @@
 {% set imageSize        = widget.settings.imageSize.mobile %}
 {% set openInNewTab     = widget.settings.url.openInNewTab.mobile %}
 {% set customImagePath  = widget.settings.customImagePath.mobile %}
+{% set customCaption    = widget.settings.customCaption.mobile %}
 
 {{ Twig.set("name", "" | json_encode) }}
 {{ Twig.set("url", "" | json_encode) }}
@@ -48,10 +50,6 @@
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
 {% endif %}
 
-{% if style != "no-caption" and headline is not empty %}
-    {{ Twig.setEscaped("name", headline) }}
-{% endif %}
-
 {{ Twig.if("name | trim is empty and imageUrl | trim is empty") }}
     {{ Twig.set("name", trans("Ceres::Widget.imageBoxPlaceholderName") | json_encode) }}
     {{ Twig.set("imageUrl", "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_161c3653395%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_161c3653395%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.45%22%3E%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" | json_encode) }}
@@ -63,13 +61,21 @@
     {{ Twig.endif() }}
 
     <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}{% if openInNewTab == true %} target="_blank"{% endif %}{% if urlType == 'external' %} rel="noopener"{% endif %} class="widget-inner">
-        <div class="widget-caption">
-            {{ Twig.if("name | trim is not empty") }}
-            <h2>
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                {{ Twig.print("name") }}
-            </h2>
-            {{ Twig.endif() }}
+        <div class="widget-caption widget-image-box-caption {{ style }}">
+            {% if customCaption %}
+                <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-image-box-caption " ~ style ) }}>
+                    {{ headline | raw }}
+                </div>
+            {% else %}
+                {{ Twig.if("name | trim is not empty") }}
+                    <div>
+                        <h2>
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                            {{ Twig.print("name") }}
+                        </h2>
+                    </div>
+                {{ Twig.endif() }}
+            {% endif %}
         </div>
     </a>
 </div>

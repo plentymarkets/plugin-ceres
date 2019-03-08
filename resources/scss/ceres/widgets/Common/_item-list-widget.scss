@@ -8,18 +8,15 @@
 
     .widget-caption
     {
-        padding: 1rem 1.5rem;
+        padding: 0.25rem 1.5rem;
         display: flex;
         align-items: center;
 
-        h2, .h2
+        > div
         {
             flex: 1;
-            padding-top: .2rem;
-            margin: 0;
-            text-transform: uppercase;
-            font-size: 1.75rem;
         }
+
     }
 
     &.widget-primary .widget-caption
@@ -50,5 +47,39 @@
     &.widget-danger .widget-caption
     {
         @include widget-bg-variant($danger);
+    }
+}
+
+.widget-item-list-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    h1
+    {
+        font-size: 2rem;
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+    }
+
+    h2
+    {
+        font-size: 1.75rem;
+        padding-top: .6rem;
+        padding-bottom: .4rem;
+    }
+
+    h3
+    {
+        font-size: 1.5rem;
+        padding-top: .4rem;
+        padding-bottom: .1rem;
+
     }
 }

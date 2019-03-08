@@ -72,14 +72,11 @@
                 "name": "Widget.imageBoxUrlLabel"
             }
         },
-        "headline": {
-            "type": "text",
-            "required": false,
+        "customCaption": {
+            "type": "checkbox",
             "isVisible": "style !== 'no-caption'",
-            "defaultValue": "",
             "options": {
-                "name": "Widget.imageBoxHeadlineLabel",
-                "tooltipText": "Widget.imageBoxHeadlineTooltip"
+                "name": "Widget.imageBoxCustomCaption"
             }
         },
         "customImagePath": {
