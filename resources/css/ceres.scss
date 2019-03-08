@@ -19291,12 +19291,6 @@ html.ios {
         {
             -webkit-transition: 300ms all ease;
             transition: 300ms all ease;
-
-            h2, .h2
-            {
-                margin: 0;
-                font-size: 1.75rem;
-            }
         }
     }
 
@@ -19321,20 +19315,10 @@ html.ios {
                         align-items: center;
                 padding: 1rem;
 
-                h2, .h2
+                > div
                 {
-                    text-align: center;
+                    display: block;
                     width: 100%;
-                    text-transform: uppercase;
-
-                    @include media-breakpoint-up(sm)
-                    {
-                        font-size: 3rem;
-                    }
-                    @include media-breakpoint-up(lg)
-                    {
-                        font-size: 4rem;
-                    }
                 }
             }
         }
@@ -19355,7 +19339,7 @@ html.ios {
 
             .widget-caption
             {
-                padding: 1.5rem;
+                padding: 0 1.5rem;
             }
         }
     }
@@ -19380,7 +19364,7 @@ html.ios {
                 left: 0;
                 right: 0;
                 bottom: 0;
-                padding: 1rem;
+                padding: 0 1rem;
             }
         }
     }
@@ -19478,6 +19462,98 @@ html.ios {
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
     font-size: 2rem;
+}
+
+.widget-image-box-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+    }
+
+    h1
+    {
+        font-size: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    h2
+    {
+        font-size: 1.75rem;
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+    }
+
+    h3
+    {
+        font-size: 1.5rem;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+
+    p
+    {
+        padding-top: .2rem;
+        padding-bottom: .2rem;
+    }
+
+    &.fullwidth
+    {
+        h1,
+        h2,
+        h3
+        {
+            text-transform: uppercase;
+        }
+
+        h1
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 4rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 6rem;
+            }
+        }
+
+        h2
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 2.5rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 4rem;
+            }
+        }
+
+        h3
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 1.5rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 2.5rem;
+            }
+        }
+    }
+
+    &.inline-caption
+    {
+        h1
+        {
+
+        }
+    }
 }
 @mixin widget-carousel-variant($parent, $color)
 {
@@ -19672,7 +19748,7 @@ html.ie {
 
     .widget-caption
     {
-        padding: 1rem 1.5rem;
+        padding: 0.25rem 1.5rem;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -19680,16 +19756,13 @@ html.ie {
             -ms-flex-align: center;
                 align-items: center;
 
-        h2, .h2
+        > div
         {
             -webkit-box-flex: 1;
                 -ms-flex: 1;
                     flex: 1;
-            padding-top: .2rem;
-            margin: 0;
-            text-transform: uppercase;
-            font-size: 1.75rem;
         }
+
     }
 
     &.widget-primary .widget-caption
@@ -19720,6 +19793,40 @@ html.ie {
     &.widget-danger .widget-caption
     {
         @include widget-bg-variant($danger);
+    }
+}
+
+.widget-item-list-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    h1
+    {
+        font-size: 2rem;
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+    }
+
+    h2
+    {
+        font-size: 1.75rem;
+        padding-top: .6rem;
+        padding-bottom: .4rem;
+    }
+
+    h3
+    {
+        font-size: 1.5rem;
+        padding-top: .4rem;
+        padding-bottom: .1rem;
+
     }
 }
 .widget.accordion {
@@ -19940,15 +20047,28 @@ html.ie {
     .widget-inner
     {
         padding: 1rem 1.5rem;
-        text-align: center;
     }
 
-    .h1, h1
+    .h1, h1,
+    .h2, h2,
+    .h3, h3
     {
         margin: 0.5rem auto;
         font-size: 2.5rem;
         letter-spacing: 1.25px;
         display: block;
+    }
+
+    .h2, h2
+    {
+        margin: 0.4rem 0;
+        font-size: 2.25rem;
+    }
+
+    .h3, h3
+    {
+        margin: 0.25rem 0;
+        font-size: 2rem;
     }
 
     &.widget-primary
@@ -20128,6 +20248,7 @@ html.ie {
             margin-bottom: 0;
         }
     }
+
 }
 
 @include media-breakpoint-down(sm)
@@ -20209,6 +20330,41 @@ header .widget
     padding-bottom: 0.1px;
 }
 
+/*
+ * INLINE EDITOR CLASSES
+ */
+@each $color, $value in $shop-builder-colors
+{
+    .color-#{$color}
+    {
+        color: $value !important;
+    }
+
+    .bg-#{$color}
+    {
+        @include context-bg($value);
+    }
+}
+
+.align-center
+{
+    text-align: center;
+}
+
+.align-left
+{
+    text-align: left;
+}
+
+.align-right
+{
+    text-align: right;
+}
+
+.align-justify
+{
+    text-align: justify;
+}
 .widget-placeholder
 {
     width: 100%;

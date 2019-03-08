@@ -195,16 +195,7 @@
         ],
         "position": 300,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
-        "settings": {
-            "hintText": {
-                "type": "codeEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.contactWishHintTextLabel",
-                    "tooltipText": "Widget.contactWishHintTextTooltip"
-                }
-            }
-        }
+        "settings": {}
     },
     {
         "identifier": "Ceres::GtcCheckWidget",
@@ -346,14 +337,6 @@
                             "position": 5
                         }
                     ]
-                }
-            },
-            "hintText": {
-                "type": "codeEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.paymentProviderHintTextLabel",
-                    "tooltipText": "Widget.paymentProviderHintTextTooltip"
                 }
             }
         }
@@ -501,14 +484,6 @@
                             "position": 5
                         }
                     ]
-                }
-            },
-            "hintText": {
-                "type": "codeEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.shippingProfileHintTextLabel",
-                    "tooltipText": "Widget.shippingProfileHintTextTooltip"
                 }
             }
         }
@@ -766,14 +741,11 @@
                     "name": "Widget.imageBoxUrlLabel"
                 }
             },
-            "headline": {
-                "type": "text",
-                "required": false,
+            "customCaption": {
+                "type": "checkbox",
                 "isVisible": "style !== 'no-caption'",
-                "defaultValue": "",
                 "options": {
-                    "name": "Widget.imageBoxHeadlineLabel",
-                    "tooltipText": "Widget.imageBoxHeadlineTooltip"
+                    "name": "Widget.imageBoxCustomCaption"
                 }
             },
             "customImagePath": {
@@ -978,16 +950,6 @@
                             "position": 2
                         }
                     ]
-                }
-            },
-            "headline": {
-                "type": "text",
-                "required": false,
-                "isVisible": "headlineStyle === 'custom-caption'",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.itemListHeadlineLabel",
-                    "tooltipText": "Widget.itemListHeadlineTooltip"
                 }
             },
             "listType": {
@@ -1683,24 +1645,6 @@
                     ]
                 }
             },
-            "title": {
-                "type": "text",
-                "required": false,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.newsletterTitleLabel",
-                    "tooltipText": "Widget.newsletterTitleBarTextTooltip"
-                }
-            },
-            "subTitle": {
-                "type": "text",
-                "required": false,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.newsletterDescriptionLabel",
-                    "tooltipText": "Widget.newsletterSubTitleBarTextTooltip"
-                }
-            },
             "showNameInputs": {
                 "type": "checkbox",
                 "required": true,
@@ -1810,12 +1754,6 @@
                     ]
                 }
             },
-            "text": {
-                "type": "codeEditor",
-                "options": {
-                    "name": "Widget.textCodeEditorLabel"
-                }
-            },
             "customPadding": {
                 "type": "checkbox",
                 "options": {
@@ -1903,15 +1841,6 @@
                         }
                     ]
                 }
-            },
-            "text": {
-                "type": "text",
-                "required": true,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.titleBarTextLabel",
-                    "tooltipText": "Widget.titleBarTextTooltip"
-                }
             }
         }
     },
@@ -1986,14 +1915,6 @@
                             "position": 1
                         }
                     ]
-                }
-            },
-            "hintText": {
-                "type": "codeEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.addressHintTextLabel",
-                    "tooltipText": "Widget.addressHintTextTooltip"
                 }
             },
             "addressLayout": {
