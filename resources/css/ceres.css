@@ -22119,14 +22119,6 @@ html.ie .component-loading.with-icon:after {
   }
 }
 
-@media (max-width: 575.98px) {
-  .order-history-list .container-middle .cmp-totals dd,
-  .order-history-list .container-middle .cmp-totals dt {
-    text-align: left;
-    display: block;
-  }
-}
-
 .order-history-list .container-bottom {
   background: #f7f7f9;
 }
