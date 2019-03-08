@@ -35,7 +35,8 @@ Vue.component("order-documents", {
                 "invoice_external",
                 "delivery_note",
                 "order_confirmation",
-                "pickup_delivery"
+                "pickup_delivery",
+                "reversal_document"
             ]
         },
 
@@ -83,7 +84,8 @@ Vue.component("order-documents", {
                 pro_forma_invoice: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsProFormaInvoice"),
                 receipt: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsReceipt"),
                 return_note: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsReturnNote"),
-                success_confirmation: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation")
+                success_confirmation: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation"),
+                reversal_document: TranslationService.translate("Ceres::Template.myAccountOrderDocumentsReversalDocument")
             })[type];
         },
 
