@@ -10751,10 +10751,6 @@ a:active {
     background-size: 100% 100%;
 }
 
-.pagination > li {
-    cursor: pointer;
-}
-
 .content-center {
     margin: 0 auto;
     float: none;
@@ -17174,6 +17170,147 @@ html.ie {
 		}
 	}
 }
+.order-history-list,
+.order-return-history-list {
+    .order-list,
+    .order-item {
+        > div:nth-child(odd) {
+            > div.container-clickable {
+                background: $gray-lightest;
+            }
+        }
+    }
+
+    .container-header {
+        > div {
+            display: inline-block;
+            text-align: right;
+        }
+    }
+
+    .container-clickable {
+        cursor: pointer;
+
+        &.collapsed {
+            .fa-chevron-up {
+                -webkit-transform: scaleY(-1);
+                        transform: scaleY(-1);
+                top: 2px;
+            }
+        }
+        .fa-chevron-up {
+            position: absolute;
+            left: 1.25rem;
+            font-size: 1.5rem;
+        }
+
+        @include media-breakpoint-up(sm) {
+            text-align: right;
+
+            .row div span:first-child {
+                display: none;
+            }
+            .icons {
+                margin-top: -5px;
+                .fa {
+                    font-size: 2rem;
+                    vertical-align: middle;
+                    margin-bottom: -6px;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(xs) {
+            .row div {
+                span:first-child {
+                    text-align: left;
+                }
+            }
+            .fa-chevron-up {
+                right: 1.15rem;
+                top: 0;
+                left: auto;
+            }
+        }
+    }
+
+    .container-middle {
+        .item {
+            img {
+                height: 80px;
+                width: 80px;
+                -o-object-fit: contain;
+                   object-fit: contain;
+                vertical-align: middle;
+            }
+            &:first-child {
+                border-top: 0 !important;
+            }
+            .item-description {
+                text-align: left;
+                vertical-align: middle;
+            }
+        }
+        .order-item {
+            .row div:first-child {
+                border-top: 0 !important;
+            }
+
+            @include media-breakpoint-up(md) {
+                border-bottom: 0 !important;
+            }
+        }
+    }
+
+    .container-bottom {
+        .address-list {
+            span, strong {
+                display: block;
+            }
+        }
+    }
+}
+
+.order-history-list {
+    .container-middle {
+        .products {
+            @include media-breakpoint-down(sm) {
+                border-right: 0 !important;
+            }
+            @include media-breakpoint-up(md) {
+                border-bottom: 0 !important;
+            }
+        }
+        @include media-breakpoint-down(xs) {
+            .cmp-totals {
+                dd,
+                dt {
+                    text-align: left;
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .container-bottom {
+        background: $gray-lightest;
+
+        .button-spacer {
+            margin-top: auto;
+        }
+        .payment-change-box-item {
+            .cannot-change-payment {
+                width: 100%;
+                margin-bottom: auto;
+            }
+        }
+        @include media-breakpoint-down(sm) {
+            .button-container {
+                margin-top: 0.5rem;
+            }
+        }
+    }
+}
 .cmp-order-item{
 
 	@extend .cmp-basket-item; 
@@ -17320,6 +17457,7 @@ html.ie {
                 align-items: center;
     }
 }
+
 .cmp-method-list{
 
 	.method-list{
@@ -19209,6 +19347,78 @@ html.ios {
     }
 }
 
+.widget.accordion {
+    div.card {
+        &:first-of-type {
+            border-bottom: $card-border-width solid $card-border-color;
+        }
+        &:nth-of-type(2) {
+            border-top: 0;
+        }
+
+        button.collapsed {
+            h5 {
+                > .fa {
+                    -webkit-transform: scaleY(1);
+                            transform: scaleY(1);
+                }
+            }
+        }
+        button {
+            text-align: left;
+            padding: $card-spacer-x;
+            border-top-width: 0;
+
+            h5 {
+                font-weight: bold;
+                position: relative;
+
+                > .fa {
+                    position: absolute;
+                    right: 0;
+                    top: -4px;
+                    font-size: 1.5rem;
+                    -webkit-transform: scaleY(-1);
+                            transform: scaleY(-1);
+                    -webkit-transition-timing-function: ease;
+                            transition-timing-function: ease;
+                    -webkit-transition-duration: .35s;
+                            transition-duration: .35s;
+                    -webkit-transform-origin: 50% 60%;
+                            transform-origin: 50% 60%;
+                }
+            }
+        }        
+        button:hover,
+        button:focus { 
+            color: black;
+        }
+
+        div .card-body {
+            margin-top: 1px;
+
+            p {
+                margin: 0;
+                line-height: $headings-line-height;
+            }
+        }
+    }
+
+    @each $color, $value in $theme-colors {
+        &.widget-#{$color} {
+            button:hover,
+            button:focus {
+                -webkit-text-decoration-color: $value;
+                        text-decoration-color: $value;
+            }
+            h5 {
+                color: $value;
+            }
+        }
+    }
+}
+
+
 .widget-image-box
 {
     @include media-breakpoint-only(xs) {
@@ -19677,78 +19887,6 @@ html.ie {
         @include widget-bg-variant($danger);
     }
 }
-.widget.accordion {
-    div.card {
-        &:first-of-type {
-            border-bottom: $card-border-width solid $card-border-color;
-        }
-        &:nth-of-type(2) {
-            border-top: 0;
-        }
-
-        button.collapsed {
-            h5 {
-                > .fa {
-                    -webkit-transform: scaleY(1);
-                            transform: scaleY(1);
-                }
-            }
-        }
-        button {
-            text-align: left;
-            padding: $card-spacer-x;
-            border-top-width: 0;
-
-            h5 {
-                font-weight: bold;
-                position: relative;
-
-                > .fa {
-                    position: absolute;
-                    right: 0;
-                    top: -4px;
-                    font-size: 1.5rem;
-                    -webkit-transform: scaleY(-1);
-                            transform: scaleY(-1);
-                    -webkit-transition-timing-function: ease;
-                            transition-timing-function: ease;
-                    -webkit-transition-duration: .35s;
-                            transition-duration: .35s;
-                    -webkit-transform-origin: 50% 60%;
-                            transform-origin: 50% 60%;
-                }
-            }
-        }        
-        button:hover,
-        button:focus { 
-            color: black;
-        }
-
-        div .card-body {
-            margin-top: 1px;
-
-            p {
-                margin: 0;
-                line-height: $headings-line-height;
-            }
-        }
-    }
-
-    @each $color, $value in $theme-colors {
-        &.widget-#{$color} {
-            button:hover,
-            button:focus {
-                -webkit-text-decoration-color: $value;
-                        text-decoration-color: $value;
-            }
-            h5 {
-                color: $value;
-            }
-        }
-    }
-}
-
-
 .widget-legal-information
 {
     a
@@ -20191,6 +20329,57 @@ header .widget
     .description
     {
         font-style: italic;
+    }
+}
+
+.widget-order-history,
+.widget-order-return-history {
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {        
+            .loading-animation > div
+            {
+                background-color: $value;
+            }
+
+            .sk-fading-circle > .sk-circle:before
+            {
+                background-color: $value;
+            }
+    
+            .text-primary
+            {
+                @extend .text-#{$color};
+            }
+    
+            .pagination
+            {
+                a
+                {
+                    color: $value;
+                }
+    
+                .page-item
+                {
+                    .page-link
+                    {
+                        color: $value;
+    
+                        &:hover
+                        {
+                            color: darken($value, 15%);
+                        }
+                    }
+    
+                    &.active .page-link
+                    {
+                        border-color: $value;
+                        @include context-bg($value);
+                    }
+                }
+            }
+        }
     }
 }
 
