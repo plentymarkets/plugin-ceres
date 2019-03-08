@@ -107,15 +107,6 @@
                 border-bottom: 0 !important;
             }
         }
-        @include media-breakpoint-down(xs) {
-            .cmp-totals {
-                dd,
-                dt {
-                    text-align: left;
-                    display: block;
-                }
-            }
-        }
     }
 
     .container-bottom {
