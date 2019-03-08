@@ -130,7 +130,7 @@ class DefaultMyAccountPreset implements ContentPreset
     {
         $this->preset->createWidget('Ceres::OrderReturnHistoryWidget')
             ->withSetting('appearance', 'primary')
-            ->withSetting('returnsPerPage', 5)
+            ->withSetting('returnsPerPage', 5);
     }
     
     private function createTwoColumnWidgetTop()
