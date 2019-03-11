@@ -26460,7 +26460,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var IS_CONTENT_BUILDER = new URLSearchParams(window.location.search).get("isContentBuilder") === "1";
 var STICKY_EVENTS = ["resize", "scroll", "touchstart", "touchmove", "touchend", "pageshow", "load", "move-sticky"];
 
 var StickyElement =
@@ -26496,7 +26495,7 @@ function () {
       var _this2 = this;
 
       this.vm.$nextTick(function () {
-        if (_this2.enabled || _this2.isMinWidth || IS_CONTENT_BUILDER) {
+        if (_this2.enabled || _this2.isMinWidth || App.isShopBuilder) {
           return;
         }
 

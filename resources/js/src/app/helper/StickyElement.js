@@ -1,8 +1,6 @@
 import { isNullOrUndefined } from "./utils";
 import { applyStyles } from "./dom";
 
-const IS_CONTENT_BUILDER = (new URLSearchParams(window.location.search)).get("isContentBuilder") === "1";
-
 const STICKY_EVENTS = [
     "resize",
     "scroll",
@@ -39,7 +37,7 @@ export class StickyElement
     {
         this.vm.$nextTick(() =>
         {
-            if (this.enabled || this.isMinWidth || IS_CONTENT_BUILDER)
+            if (this.enabled || this.isMinWidth || App.isShopBuilder)
             {
                 return;
             }
