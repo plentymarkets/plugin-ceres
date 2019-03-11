@@ -3327,8 +3327,8 @@
                 "type": "select",
                 "defaultValue": 5,
                 "options": {
-                    "name": "Widget.orderHistoryOrdersPerPageLabel",
-                    "tooltipText": "Widget.orderHistoryOrdersPerPageTooltip",
+                    "name": "Widget.orderReturnHistoryOrdersPerPageLabel",
+                    "tooltipText": "Widget.orderReturnHistoryOrdersPerPageTooltip",
                     "listBoxValues": [
                         {
                             "value": 5,
