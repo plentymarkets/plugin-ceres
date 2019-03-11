@@ -17,11 +17,6 @@ Vue.component("account-settings", {
             type: Object,
             // eslint-disable-next-line
             default: () => {}
-        },
-        appearance:
-        {
-            type: String,
-            default: "primary"
         }
     },
 
