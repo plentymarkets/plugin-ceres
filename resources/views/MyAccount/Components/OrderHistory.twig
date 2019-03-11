@@ -49,10 +49,10 @@
                                             <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryDate") }}</strong>
                                             <span class="col-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.devDateTimeFormat") ) }} {{ trans("Ceres::Template.orderHistoryTime") }}</span>
                                         </div>
-                                        {% if entry.order.status is defined and entry.order.status is not empty %}
+                                        {% if entry.status is defined and entry.status is not empty %}
                                             <div class="row my-account-no-line">
                                                 <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryStatus") }}</strong>
-                                                <span class="col-6 col-sm-7">{{ entry.order.status }}</span>
+                                                <span class="col-6 col-sm-7">{{ entry.status }}</span>
                                             </div>
                                         {% endif %}
                                         {% if entry.paymentMethodName | trim is not empty %}
