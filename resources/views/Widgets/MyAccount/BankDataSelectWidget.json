@@ -12,12 +12,6 @@
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
-        },
-        "text": {
-            "type": "codeEditor",
-            "options": {
-                "name": "Widget.myAccountHintTextLabel"
-            }
         }
     }
 }

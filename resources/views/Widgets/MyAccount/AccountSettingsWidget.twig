@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
@@ -9,14 +10,15 @@
 {% set hintText = widget.settings.text.mobile %}
 
 <div class="widget widget-account-settings">
-    <h3>
-        {{ Twig.trans("Ceres::Template.myAccountSettings") }}
-    </h3>
-    {% if hintText is not empty %}
-        {{ hintText | raw }}
-    {% else %}
-        <p class="text-muted small font-italic">{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</p>
-    {% endif %}
+    <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+        {% if hintText is empty %}
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountSettings")) }}</h3>
+            <p><em>{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</em></p>
+        {% else %}
+            {{ hintText | raw }}
+        {% endif %}
+    </div>
+
     <div class="card">
         <account-settings appearance="{{ appearance | default("primary") }}" :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
     </div>

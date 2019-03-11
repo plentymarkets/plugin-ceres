@@ -10,6 +10,14 @@
 {% set ordersPerPage = widget.settings.ordersPerPage.mobile %}
 
 <div class="widget widget-order-history widget-{{ appearance }}">
+    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+        {% if hintText is empty %}
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.orderHistory")) }}</h3>
+        {% else %}
+            {{ WidgetHelper.editableTwig(isPreview, hintText) }}
+        {% endif %}
+    </div>
+
     <order-history-list
         appearance="{{ appearance }}"
         hint-text="{{ hintText }}"

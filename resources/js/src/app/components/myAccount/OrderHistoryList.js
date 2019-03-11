@@ -22,11 +22,6 @@ Vue.component("order-history-list", {
             type: Number,
             default: 5
         },
-        hintText:
-        {
-            type: String,
-            default: null
-        },
         allowPaymentProviderChange:
         {
             type: Boolean,
