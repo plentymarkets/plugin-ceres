@@ -1,13 +1,16 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set text           = widget.settings.text.mobile %}
 {% set appearance     = widget.settings.appearance.mobile %}
 {% set hasSpacing     = widget.settings.customMargin.mobile or widget.settings.customPadding.mobile %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
 <div class="widget widget-text widget-{{ appearance | default('primary') }}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}"{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
-        {{ text | raw }}
+    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}"{% if isInlineEditable %}{{ WidgetHelper.makeEditable("content", TOOLBAR_LAYOUT.ALL, isPreview) }}{% endif %}>
+        {% if isInlineEditable %}
+            {{ WidgetHelper.editableTwig(isPreview, content) }}
+        {% else %}
+            {{ content | raw }}
+        {% endif %}
     </div>
 </div>
