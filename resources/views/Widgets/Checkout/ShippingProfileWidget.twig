@@ -8,7 +8,7 @@
 {% set hintText = widget.settings.hintText.mobile %}
 
 <div class="widget widget-provider-select widget-{{ widget.settings.appearance.mobile | default("primary") }}">
-    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
+    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}
             <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutShippingProfile")) }}</h3>
         {% else %}
