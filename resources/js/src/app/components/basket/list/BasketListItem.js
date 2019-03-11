@@ -10,8 +10,7 @@ Vue.component("basket-list-item", {
         "basketItem",
         "size",
         "language",
-        "template",
-        "appearance"
+        "template"
     ],
 
     data()

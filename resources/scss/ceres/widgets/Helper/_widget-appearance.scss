@@ -1,0 +1,28 @@
+@each $color, $value in $shop-builder-colors
+{
+    .widget-#{$color}
+    {
+        @include text-emphasis-variant(".text-appearance", $value);
+
+        .bg-appearance
+        {
+            @include context-bg($value);
+        }
+
+        a.bg-appearance:hover,
+        button.bg-appearance:hover
+        {
+            @include context-bg(darken($value, 10%));
+        }
+
+        .btn-appearance
+        {
+            @include button-variant($value, $value);
+        }
+
+        .btn-outline-appearance
+        {
+            @include button-outline-variant($value);
+        }
+    }
+}
