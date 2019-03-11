@@ -3,13 +3,14 @@
         <!-- MyAccount -->
         <div class="button-spacer" v-if="currentTemplate == 'tpl.my-account'">
 
-            <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
-                {{ trans("Ceres::Template.orderHistoryChangePayment") }}
-            </button>
+            <div v-if="changePossible" class="btn btn-block" :class="'btn-' + appearance" @click="openPaymentChangeModal()">
+                <span>{{ trans("Ceres::Template.orderHistoryChangePayment") }}</span>
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </div>
 
             <div class="payment-change-box-item" v-if="paymentStatus != 'fullyPaid'">
                 <div v-if="!changePossible" class="payment-align-center">
-                    <div class="alert alert-info cannot-change-payment">
+                    <div class="alert alert-info cannot-change-payment mb-2">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                         <span class="info-badge">{{ trans("Ceres::Template.orderHistoryChangePaymentNotAllowed") }}</span>
                     </div>

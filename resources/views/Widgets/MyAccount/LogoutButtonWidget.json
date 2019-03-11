@@ -1,0 +1,43 @@
+{
+    "identifier": "Ceres::LogoutButtonWidget",
+    "label": "Widget.logoutButtonLabel",
+    "previewImageURL": "/images/widgets/logout.svg",
+    "type": "myaccount",
+    "categories": ["myaccount"],
+    "position": 700,
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\LogoutButtonWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "danger",
+            "options": "@include(appearance)"
+        },
+        "buttonSize": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "md",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "md",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        }
+    }
+}

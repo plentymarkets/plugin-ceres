@@ -13,7 +13,11 @@
 
             <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
                 {% if hintText is empty %}
-                    <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutInvoiceAddress")) }}</h3>
+                    {{ Twig.if("services.template.isCurrentTemplate('tpl.checkout')") }}
+                        <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutInvoiceAddress")) }}</h3>
+                    {{ Twig.else() }}
+                        <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountInvoiceAddresses")) }}</h3>
+                    {{ Twig.endif() }}
                 {% else %}
                     {{ WidgetHelper.editableTwig(isPreview, hintText) }}
                 {% endif %}
@@ -30,7 +34,7 @@
                     "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile | default([])
                 } %}
                 <invoice-address-select
-                    :has-to-validate="true"
+                    :has-to-validate="{{ Twig.print("services.template.isCurrentTemplate('tpl.checkout') | json_encode") }}"
                     :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
                     :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
                 </invoice-address-select>
@@ -45,7 +49,11 @@
 
             <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
                 {% if hintText is empty %}
-                    <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutShippingAddress")) }}</h3>
+                    {{ Twig.if("services.template.isCurrentTemplate('tpl.checkout')") }}
+                        <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutShippingAddress")) }}</h3>
+                    {{ Twig.else() }}
+                        <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountShippingAddresses")) }}</h3>
+                    {{ Twig.endif() }}
                 {% else %}
                     {{ WidgetHelper.editableTwig(isPreview, hintText) }}
                 {% endif %}

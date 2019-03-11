@@ -16,10 +16,11 @@
         ]
     },
     "allowedTypes": {
-        "header": ["header", "static", "structure", "default"],
-        "footer": ["footer", "static", "structure", "default"],
-        "content": ["static", "structure", "default"],
-        "checkout": ["static", "structure", "default", "checkout", "customer", "basket"]
+        "header":       ["header", "static", "structure", "default"],
+        "footer":       ["footer", "static", "structure", "default"],
+        "content":      ["static", "structure", "default"],
+        "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
     },
     "presets": {
         "header": [
@@ -44,6 +45,12 @@
             {
                 "label": "Widget.presetCheckoutDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"
+            }
+        ],
+        "myaccount": [
+            {
+              "label": "Widget.presetMyAccountDefault",
+              "presetClass": "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset"
             }
         ]
     },
@@ -89,9 +96,14 @@
             "position": 800
         },
         {
+            "key": "myaccount",
+            "label": "Widget.categoryMyAccount",
+            "position": 900
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 900
+            "position": 1000
         }
     ],
     "globalSettings": {
@@ -117,6 +129,22 @@
             "isVisible": "!checkoutCategory",
             "options": {
                 "name": "Config.routingEnableRouteCheckout"
+            }
+        },
+        "myAccountCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryMyAccount"
+            }
+        },
+        "myAccountEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!myAccountCategory",
+            "options": {
+                "name": "Config.routingEnableRouteMyAccount"
             }
         }
     },
