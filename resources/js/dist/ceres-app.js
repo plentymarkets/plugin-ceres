@@ -24115,7 +24115,7 @@ Vue.component("order-documents", {
     allowedTypesForOrders: {
       type: Array,
       default: function _default() {
-        return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery"];
+        return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery", "reversal_document"];
       }
     },
     allowedTypesForReturns: {
@@ -24158,7 +24158,8 @@ Vue.component("order-documents", {
         pro_forma_invoice: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsProFormaInvoice"),
         receipt: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsReceipt"),
         return_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsReturnNote"),
-        success_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation")
+        success_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation"),
+        reversal_document: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsReversalDocument")
       }[type];
     },
     getDownloadTooltip: function getDownloadTooltip(type) {
