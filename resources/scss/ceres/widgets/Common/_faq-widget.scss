@@ -49,17 +49,5 @@
             }
         }
     }
-
-    @each $color, $value in $theme-colors {
-        &.widget-#{$color} {
-            button:hover,
-            button:focus {
-                text-decoration-color: $value;
-            }
-            h5 {
-                color: $value;
-            }
-        }
-    }
 }
 

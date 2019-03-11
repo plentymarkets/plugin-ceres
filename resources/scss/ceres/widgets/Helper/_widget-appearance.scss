@@ -7,6 +7,11 @@
         .bg-appearance
         {
             @include context-bg($value);
+
+            a
+            {
+                color: color-yiq($value);
+            }
         }
 
         a.bg-appearance:hover,
@@ -18,6 +23,17 @@
         .btn-appearance
         {
             @include button-variant($value, $value);
+        }
+
+
+        a.text-appearance,
+        .btn-appearance
+        {
+            text-decoration-color: $value;
+
+            @include hover-focus {
+                text-decoration-color: darken($value, 7.5);
+            }
         }
 
         .btn-outline-appearance
