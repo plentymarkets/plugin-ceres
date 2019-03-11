@@ -36,9 +36,21 @@
             }
         }
 
-        .btn-outline-appearance
+        .pagination .page-item
         {
-            @include button-outline-variant($value);
+            .page-link
+            {
+                color: $value;
+                @include hover-focus {
+                    color: darken($value, 15%);
+                }
+            }
+
+            &.active .page-link
+            {
+                border-color: $value;
+                @include context-bg($value);
+            }
         }
     }
 }
