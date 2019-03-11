@@ -3,9 +3,12 @@
 <script type="x/template" id="vue-order-return-history-item">
     <article class="cmp cmp-order-item">
         <div class="item-details small">
-
             <div class="item-name">
-                <h5 class="h4">{{ trans("Ceres::Template.returnHistoryStatus") }}: ${ returnOrder.order.statusName }</h5>
+                <h5
+                    v-if="returnOrder.status && returnOrder.status.length > 0"
+                    class="h4">
+                    {{ trans("Ceres::Template.returnHistoryStatus") }}: ${ returnOrder.status }
+                </h5>
             </div>
 
             <div class="row">

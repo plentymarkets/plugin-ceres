@@ -14,7 +14,6 @@
             <div class="card-header">
                 <h5>{{ trans("Ceres::Template.orderConfirmationOrderId") }} {{ orderData.order.id }}</h5>
             </div>
-
             <div class="card-body">
                 <div class="details">
                     <div class="row">
@@ -22,10 +21,10 @@
                         <span class="col-6 col-sm-7">{{ orderData.order.createdAt | formatDateTime | date(trans("Ceres::Template.devDateTimeFormat")) }}</span>
                     </div>
 
-                    {% if orderData.status is defined and orderData.status.isFrontendVisible and orderData.status.names[lang] is not empty %}
+                    {% if orderData.status is defined and orderData.status is not empty %}
                         <div class="row">
                             <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationStatus") }}</strong>
-                            <span class="col-6 col-sm-7">{{ orderData.status.names[lang] }}</span>
+                            <span class="col-6 col-sm-7">{{ orderData.status }}</span>
                         </div>
                     {% endif %}
                 </div>
