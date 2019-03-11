@@ -284,7 +284,6 @@
         <div class="col-md-5 button-container">
             <template v-if="allowPaymentProviderChange">
                 <change-payment-method
-                    :appearance="appearance"
                     :current-order="{{ orderData.order | json_encode }}"
                     :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
                     :allowed-payment-methods="{{ orderData.paymentMethodListForSwitch | json_encode }}"
@@ -302,10 +301,7 @@
                 </a>
             {% endif %}
             
-            <order-documents 
-                :documents="{{ orderData.order.documents | json_encode }}"
-                :appearance="appearance">
-            </order-documents>
+            <order-documents :documents="{{ orderData.order.documents | json_encode }}"></order-documents>
         </div>
     </div>
 </div>

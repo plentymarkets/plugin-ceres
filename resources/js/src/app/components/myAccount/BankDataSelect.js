@@ -21,11 +21,6 @@ Vue.component("bank-data-select", {
         contactId:
         {
             type: String
-        },
-        appearance:
-        {
-            type: String,
-            default: "primary"
         }
     },
 
