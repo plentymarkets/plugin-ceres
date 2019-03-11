@@ -2569,6 +2569,7 @@
                 "my_account.orders_per_page": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.myAccountOrdersPerPageLabel",
                     "options": {
                         "defaultValue": "5"
@@ -2576,6 +2577,7 @@
                 },
                 "my_account.order_return_active": {
                     "type": "checkBox",
+                    "deprecated": true,
                     "required": false,
                     "label": "Config.myAccountOrderReturnActiveLabel",
                     "options": {
@@ -2601,6 +2603,7 @@
                 "my_account.change_payment": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.myAccountChangePaymentLabel",
                     "options": {
                         "defaultValue": "true"
