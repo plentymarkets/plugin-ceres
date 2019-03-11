@@ -9,10 +9,9 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Checkout.Components.AcceptGtcCheck") }}
 
-<div class="widget widget-gtc-check">
+<div class="widget widget-gtc-check widget-{{ appearance | default("primary") }}">
     <accept-gtc-check
         {% if hideCheckbox %}class="pl-0"{% endif %}
-        appearance="{{ appearance }}"
         :hide-checkbox="{{ hideCheckbox | json_encode }}"
         {% if not hideCheckbox %}
             :is-preselected="{{ isPreselected | json_encode }}"
