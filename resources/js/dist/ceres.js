@@ -24576,14 +24576,6 @@ Vue.component("newsletter-input", {
       type: String,
       default: "#vue-newsletter-input"
     },
-    title: {
-      type: String,
-      default: ""
-    },
-    subTitle: {
-      type: String,
-      default: ""
-    },
     showNameInputs: {
       type: Boolean,
       default: false
