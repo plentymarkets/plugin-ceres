@@ -6,11 +6,6 @@ Vue.component("order-return-history-list-item", {
             type: String,
             default: "#vue-order-return-history-list-item"
         },
-        appearance:
-        {
-            type: String,
-            default: "primary"
-        },
         returnOrder:
         {
             type: Object,

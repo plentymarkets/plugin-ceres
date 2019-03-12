@@ -10,11 +10,6 @@ Vue.component("basket-list", {
         {
             type: String,
             default: "small"
-        },
-        appearance:
-        {
-            type: String,
-            default: "primary"
         }
     },
 

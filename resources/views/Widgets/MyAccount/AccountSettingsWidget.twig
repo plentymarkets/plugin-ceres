@@ -8,7 +8,7 @@
 {% set appearance = widget.settings.appearance.mobile %}
 {% set hintText = widget.settings.text.mobile %}
 
-<div class="widget widget-account-settings">
+<div class="widget widget-account-settings widget-{{ appearance | default("primary") }}">
     <h3>
         {{ Twig.trans("Ceres::Template.myAccountSettings") }}
     </h3>
@@ -18,6 +18,6 @@
         <p class="text-muted small font-italic">{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</p>
     {% endif %}
     <div class="card">
-        <account-settings appearance="{{ appearance | default("primary") }}" :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
+        <account-settings :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
     </div>
 </div>

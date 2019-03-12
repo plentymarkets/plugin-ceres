@@ -9,7 +9,7 @@
 
 {% if text | trim is not empty %}
 <div class="widget widget-text widget-{{ appearance | default('primary') }}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}">
+    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %} bg-appearance">
         {{ text | raw }}
     </div>
 </div>

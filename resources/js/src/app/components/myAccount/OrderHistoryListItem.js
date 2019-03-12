@@ -9,11 +9,6 @@ Vue.component("order-history-list-item", {
             type: String,
             default: "#vue-order-history-list-item"
         },
-        appearance:
-        {
-            type: String,
-            default: "primary"
-        },
         orderDetailsTemplate:
         {
             type: String,
@@ -67,8 +62,7 @@ Vue.component("order-history-list-item", {
                             data: {
                                 showAllOrderItems: this.showAllOrderItems,
                                 allowPaymentProviderChange: this.allowPaymentProviderChange,
-                                allowReturn: this.allowReturn,
-                                appearance: this.appearance
+                                allowReturn: this.allowReturn
                             },
                             store: window.ceresStore,
                             render: compiled.render,

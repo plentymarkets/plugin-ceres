@@ -11,7 +11,6 @@
 
 <div class="widget widget-order-history widget-{{ appearance }}">
     <order-history-list
-        appearance="{{ appearance }}"
         hint-text="{{ hintText }}"
         :orders-per-page="{{ ordersPerPage | default(5) | json_encode }}"
         :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | default(true) | json_encode }}"
