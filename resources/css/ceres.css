@@ -23471,7 +23471,14 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   padding: .3rem;
 }
 
+@media (max-width: 575.98px) {
+  .single .nav-tabs {
+    display: block;
+  }
+}
+
 .single .nav-tabs .nav-item {
+  cursor: pointer;
   float: none;
 }
 
