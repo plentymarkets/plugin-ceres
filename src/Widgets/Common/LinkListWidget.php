@@ -2,9 +2,12 @@
 
 namespace Ceres\Widgets\Common;
 
-use Ceres\Widgets\Helper\BaseWidget;
-
-class LinkListWidget extends BaseWidget
+class LinkListWidget extends ListWidget
 {
-    protected $template = "Ceres::Widgets.Common.LinkListWidget";
+    protected function getTemplateData($widgetSettings, $isPreview)
+    {
+        $templateData = parent::getTemplateData($widgetSettings, $isPreview);
+        $templateData['isLinkList'] = true;
+        return $templateData;
+    }
 }

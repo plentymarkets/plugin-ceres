@@ -1,7 +1,7 @@
 import ApiService from "services/ApiService";
 import NotificationService from "services/NotificationService";
 import TranslationService from "services/TranslationService";
-import {isNullOrUndefined}from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 
 const state =
     {
@@ -35,7 +35,8 @@ const state =
                 showError: false,
                 validate: null
             }
-        }
+        },
+        newsletterSubscription: {}
     };
 
 const mutations =
@@ -135,12 +136,27 @@ const mutations =
         setPostOfficeAvailability(state, availability)
         {
             state.shipping.isPostOfficeAvailable = availability;
+        },
+
+        setSubscribeNewsletterCheck(state, { emailFolder, value })
+        {
+            Vue.set(state.newsletterSubscription, emailFolder, value);
+        },
+
+        addSubscribeNewsletterValidate(state, { emailFolder, validator })
+        {
+            Vue.set(state.validation, `subscribeNewsletter_${emailFolder}`, { validate: validator, showError: false });
+        },
+
+        setSubscribeNewsletterShowErr(state, { emailFolder, showError })
+        {
+            Vue.set(state.validation[`subscribeNewsletter_${emailFolder}`], "showError", showError);
         }
     };
 
 const actions =
     {
-        setCheckout({commit, dispatch}, checkout)
+        setCheckout({ commit, dispatch }, checkout)
         {
             commit("setShippingCountryId", checkout.shippingCountryId);
             commit("setShippingProfile", checkout.shippingProfileId);
@@ -152,7 +168,7 @@ const actions =
             dispatch("initProfileAvailabilities");
         },
 
-        setShippingProfileById({state, commit}, shippingProfileId)
+        setShippingProfileById({ state, commit }, shippingProfileId)
         {
             const shippingProfile = state.shipping.shippingProfileList.find(profile =>
             {
@@ -165,7 +181,7 @@ const actions =
             }
         },
 
-        selectMethodOfPayment({commit, dispatch}, methodOfPaymentId)
+        selectMethodOfPayment({ commit, dispatch }, methodOfPaymentId)
         {
             return new Promise((resolve, reject) =>
             {
@@ -174,7 +190,7 @@ const actions =
                 commit("setIsBasketLoading", true);
                 commit("setMethodOfPayment", methodOfPaymentId);
 
-                ApiService.post("/rest/io/checkout/paymentId/", {paymentId: methodOfPaymentId})
+                ApiService.post("/rest/io/checkout/paymentId/", { paymentId: methodOfPaymentId })
                     .done(response =>
                     {
                         commit("setIsBasketLoading", false);
@@ -189,7 +205,7 @@ const actions =
             });
         },
 
-        selectShippingProfile({commit, dispatch, getters}, shippingProfile)
+        selectShippingProfile({ commit, dispatch, getters }, shippingProfile)
         {
             return new Promise((resolve, reject) =>
             {
@@ -199,8 +215,10 @@ const actions =
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
                 const isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
-                const isAddressPostOffice = getters.getSelectedAddress("2").address1 === "POSTFILIALE";
-                const isAddressParcelBox = getters.getSelectedAddress("2").address1 === "PACKSTATION";
+
+                const selectedAddress = getters.getSelectedAddress("2");
+                const isAddressPostOffice = selectedAddress ? selectedAddress.address1 === "POSTFILIALE" : false;
+                const isAddressParcelBox = selectedAddress ? selectedAddress.address1 === "PACKSTATION" : false;
 
                 if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
                 {
@@ -214,7 +232,7 @@ const actions =
                     }
                 }
 
-                ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.parcelServicePresetId})
+                ApiService.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId })
                     .done(response =>
                     {
                         commit("setSelectedShippingProfile", shippingProfile);
@@ -230,24 +248,24 @@ const actions =
             });
         },
 
-        refreshCheckout({commit, dispatch})
+        refreshCheckout({ commit, dispatch })
         {
             return new Promise((resolve, reject) =>
             {
                 ApiService.get("/rest/io/checkout/")
-                        .done(checkout =>
-                        {
-                            dispatch("setCheckout", checkout);
-                            resolve(checkout);
-                        })
-                        .fail(error =>
-                        {
-                            reject(error);
-                        });
+                    .done(checkout =>
+                    {
+                        dispatch("setCheckout", checkout);
+                        resolve(checkout);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
             });
         },
 
-        initProfileAvailabilities({commit, state})
+        initProfileAvailabilities({ commit, state })
         {
             commit("setParcelBoxAvailability", !isNullOrUndefined(state.shipping.shippingProfileList.find(shipping => shipping.isParcelBox)));
 

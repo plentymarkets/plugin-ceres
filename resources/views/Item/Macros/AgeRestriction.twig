@@ -1,0 +1,15 @@
+{% macro getText( age ) %}
+    {% spaceless %}
+        {% if age == 0 %}
+            {{ trans("Ceres::Template.singleItemAgeRestrictionNone", {"age": age }) }}
+        {% elseif age > 0 and age <= 18 %}
+            {{ trans("Ceres::Template.singleItemAgeRestriction", {"age": age }) }}
+        {% elseif age == 50 %}
+            {{ trans("Ceres::Template.singleItemAgeRestrictionNotFlagged", {"age": age }) }}
+        {% elseif age == 88 %}
+            {{ trans("Ceres::Template.singleItemAgeRestrictionNotRequired", {"age": age }) }}
+        {% else %}
+            {{ trans("Ceres::Template.singleItemAgeRestrictionUnknown", {"age": age }) }}
+        {% endif %}
+    {% endspaceless %}
+{% endmacro %}

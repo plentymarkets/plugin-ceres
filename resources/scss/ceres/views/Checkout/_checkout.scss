@@ -13,19 +13,6 @@
 	.cmp-address-list {
 		transition: all .3s ease;
 	}
-
-	@include media-breakpoint-up(sm){
-
-	}
-
-	@include media-breakpoint-up(md){
-
-	}
-
-	@include media-breakpoint-up(lg){
-
-	}
-
 }
 
 .my-account-no-line {
@@ -45,12 +32,18 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	
+	@include media-breakpoint-down(sm){
+		margin-top: 15px;
+	}
+
 	.payment-change-box-item:nth-child(2) {
 		order: 1;
 	}
 	.cannot-change-payment {
 		font-size: 1rem;
 		padding: 5px;
+		width: 100%;
 		.info-badge {
 			margin-left: .2rem;
 		}

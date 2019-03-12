@@ -14,12 +14,12 @@
 
     <div class="container-max page-content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-12">
                 {% autoescape false %}
                     <h1>{{ trans("Ceres::Template.termsAndConditions") }}</h1>
                 {% endautoescape %}
 
-                <hr class="m-y-3">
+                <hr class="my-5">
 
                 {% if termsAndConditions.htmlText %}
                     {{ termsAndConditions.htmlText | raw }}

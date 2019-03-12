@@ -39,7 +39,9 @@ class CeresSortingConfig extends PluginConfig
                 "variation.updatedAt_asc",
                 "variation.updatedAt_desc",
                 "item.manufacturer.externalName_asc",
-                "item.manufacturer.externalName_desc"
+                "item.manufacturer.externalName_desc",
+                "variation.position_asc",
+                "variation.position_desc"
             ],
             [
                 "texts.name1_asc",

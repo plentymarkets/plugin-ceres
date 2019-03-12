@@ -1,7 +1,7 @@
-import {floatLength, formatFloat, limit}from "../../helper/number";
-import {defaultValue, isDefined, isNullOrUndefined}from "../../helper/utils";
+import { floatLength, formatFloat, limit } from "../../helper/number";
+import { defaultValue, isDefined, isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
-import {debounce}from "../../helper/debounce";
+import { debounce } from "../../helper/debounce";
 
 Vue.component("quantity-input", {
 
@@ -88,7 +88,6 @@ Vue.component("quantity-input", {
 
             return basketObject ? basketObject.quantity : 0;
         },
-
         isMinimum()
         {
             return isDefined(this.compMin) && (this.compValue - this.compInterval) < this.compMin;
@@ -143,7 +142,16 @@ Vue.component("quantity-input", {
             },
             deep: true
         },
-
+        min(newValue)
+        {
+            this.compMin = newValue;
+            this.fetchQuantityFromBasket();
+        },
+        max(newValue)
+        {
+            this.compMax = newValue;
+            this.fetchQuantityFromBasket();
+        },
         value(newValue, oldValue)
         {
             if (newValue !== oldValue)

@@ -4,7 +4,7 @@ Vue.directive("scroll-to-top",
         {
             el.onclick = event =>
             {
-                $("html, body").animate({scrollTop: 0}, "slow");
+                $("html, body").animate({ scrollTop: 0 }, "slow");
             };
         }
     });

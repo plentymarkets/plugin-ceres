@@ -1,0 +1,10 @@
+<div class="list-sort">
+    <select
+        class="custom-select"
+        @change="$store.dispatch('selectItemListSorting', $event.target.value)"
+        v-populate-store:mutation="{ name: 'setItemListSorting', data: '{{selectedSorting}}' }">
+        {% for key, value in sortingData %}
+            <option value="{{ key }}"{% if key == selectedSorting %}selected{% endif %}>{{ value }}</option>
+        {% endfor %}
+    </select>
+</div>

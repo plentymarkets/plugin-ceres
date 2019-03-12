@@ -1,21 +1,30 @@
 Vue.component("category-item", {
-
-    delimiters: ["${", "}"],
-
-    template: "#vue-category-item",
-
-    props: [
-        "decimalCount",
-        "itemData",
-        "imageUrlAccessor"
-    ],
-
-    data()
+    props:
     {
-        return {
-            recommendedRetailPrice: 0,
-            variationRetailPrice  : 0
-        };
+        template:
+        {
+            type: String,
+            default: "#vue-category-item"
+        },
+        decimalCount:
+        {
+            type: Number,
+            default: 0
+        },
+        imageUrlAccessor:
+        {
+            type: String,
+            default: "urlMiddle"
+        },
+        itemData:
+        {
+            type: Object,
+            required: true
+        },
+        disableCarouselOnMobile:
+        {
+            type: Boolean
+        }
     },
 
     computed:
@@ -43,11 +52,7 @@ Vue.component("category-item", {
 
     created()
     {
-        if (this.itemData.prices.rrp)
-        {
-            this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
-        }
-        this.variationRetailPrice = this.itemData.prices.default.price.value;
+        this.$options.template = this.template;
     },
 
     methods:
@@ -62,5 +67,4 @@ Vue.component("category-item", {
             }
         }
     }
-
 });

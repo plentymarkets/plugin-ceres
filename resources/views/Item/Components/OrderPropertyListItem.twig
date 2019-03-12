@@ -9,8 +9,19 @@
         </div>
 
         <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
-            <label class="form-check-label" :class="{ 'text-success': property.value, 'text-danger': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
-                <input :name="group ? group.id : 'check' + _uid" :value="property.id" v-model="property.value" @change="onInputValueChanged(inputType === 'checkbox' ? $event.target.checked : $event.target.value)" class="form-check-input" :type="inputType">
+            <input :name="group ? group.id : 'check' + _uid"
+                   :id="'check' + _uid"
+                   :value="property.id"
+                   v-model="property.value"
+                   @change="onInputValueChanged(inputType === 'checkbox' ? $event.target.checked : $event.target.value)"
+                   class="form-check-input"
+                   :type="inputType">
+
+            <label class="form-check-label"
+                   :for="'check' + _uid"
+                   :class="{ 'text-success': property.value, 'text-danger': hasError }"
+                   v-tooltip data-toggle="tooltip"
+                   :title="property.names.description">
                 ${ property.names.name }
                 <strong v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
             </label>

@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "./utils";
+import { isNullOrUndefined } from "./utils";
 
 export function normalizeUrl(url)
 {
@@ -23,4 +23,11 @@ export function normalizeUrl(url)
     }
 
     return targetUrl;
+}
+
+export function pathnameEquals(pathname)
+{
+    return window.location.pathname === pathname ||
+        window.location.pathname === pathname + "/" ||
+        window.location.pathname + "/" === pathname;
 }

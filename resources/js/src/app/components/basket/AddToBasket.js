@@ -1,7 +1,7 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
-import {navigateTo}from "services/UrlService";
-import {isNullOrUndefined}from "../../helper/utils";
+import { navigateTo } from "services/UrlService";
+import { isNullOrUndefined } from "../../helper/utils";
 
 const NotificationService = require("services/NotificationService");
 
@@ -44,7 +44,11 @@ Vue.component("add-to-basket", {
         },
         isSalable:
         {
-            // = isSalable && !hasChildren
+            type: Boolean,
+            default: false
+        },
+        hasChildren:
+        {
             type: Boolean,
             default: false
         },
@@ -67,6 +71,11 @@ Vue.component("add-to-basket", {
         {
             type: Array,
             default: () => []
+        },
+        hasPrice:
+        {
+            type: Boolean,
+            default: true
         }
     },
     computed:
@@ -78,8 +87,10 @@ Vue.component("add-to-basket", {
         canBeAddedToBasket()
         {
             return this.isSalable &&
+                !this.hasChildren &&
                 (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) &&
-                !this.requiresProperties;
+                !this.requiresProperties &&
+                this.hasPrice;
         },
 
         requiresProperties()
@@ -120,6 +131,16 @@ Vue.component("add-to-basket", {
             {
                 this.waiting = true;
 
+                this.orderProperties.forEach(function(orderProperty)
+{
+                    if (orderProperty.property.valueType === "float" &&
+                        !isNullOrUndefined(orderProperty.property.value) &&
+                        orderProperty.property.value.slice(-1) === App.decimalSeparator)
+                    {
+                        orderProperty.property.value = orderProperty.property.value.substr(0, orderProperty.property.value.length - 1);
+                    }
+                });
+
                 const basketObject =
                     {
                         variationId             :   this.variationId,
@@ -134,7 +155,7 @@ Vue.component("add-to-basket", {
                         const variation = !isNullOrUndefined(basketItem) ? basketItem.variation.data : null;
                         const orderParams = !isNullOrUndefined(basketObject) ? basketObject.basketItemOrderParams : null;
 
-                        document.dispatchEvent(new CustomEvent("afterBasketItemAdded", {detail: basketObject}));
+                        document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
                         this.waiting = false;
                         this.openAddToBasketOverlay(basketObject.quantity, variation, orderParams);
                     },

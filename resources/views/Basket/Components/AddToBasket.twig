@@ -14,7 +14,7 @@
 
         <div class="category-list-view-port" v-if="showQuantity && !useLargeScale">
             <span>
-                <div class="col-xs-12 col-sm-7 col-md-12 col-lg-8 m-y-1">
+                <div class="col-12 col-sm-7 col-md-12 col-lg-8 my-3">
                     <div class="add-to-basket-container">
                         <div class="quantity-input-container">
                             <quantity-input :value="1"
@@ -32,7 +32,7 @@
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.singleItemAddToBasket") }}
                         </button>
-                        <button v-else-if="!buttonLockState" :disabled="waiting" class="btn btn-block btn-primary" @click="addToBasket()">
+                        <button v-else-if="!buttonLockState" :disabled="waiting || !hasPrice" class="btn btn-block btn-primary" @click="addToBasket()">
                             <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.singleItemAddToBasket") }}
                         </button>

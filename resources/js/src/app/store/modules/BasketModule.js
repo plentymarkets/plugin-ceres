@@ -1,6 +1,7 @@
 import ApiService from "services/ApiService";
 import TranslationService from "services/TranslationService";
-import {navigateTo}from "../../services/UrlService";
+import { navigateTo } from "../../services/UrlService";
+import { pathnameEquals } from "../../helper/url";
 const NotificationService = require("services/NotificationService");
 
 const state =
@@ -23,7 +24,7 @@ const mutations =
         {
             if (state.data.id && JSON.stringify(basket) !== JSON.stringify(state.data))
             {
-                document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: basket}));
+                document.dispatchEvent(new CustomEvent("afterBasketChanged", { detail: basket }));
             }
 
             state.data = basket;
@@ -49,9 +50,9 @@ const mutations =
             }
         },
 
-        addBasketNotification(state, {type, message})
+        addBasketNotification(state, { type, message })
         {
-            state.basketNotifications.push({type: type, message: message});
+            state.basketNotifications.push({ type: type, message: message });
         },
 
         clearOldestNotification(state)
@@ -59,7 +60,7 @@ const mutations =
             state.basketNotifications.splice(0, 1);
         },
 
-        updateBasketItemQuantity(state, {basketItem, quantity})
+        updateBasketItemQuantity(state, { basketItem, quantity })
         {
             const item = state.items.find(item => basketItem.id === item.id);
 
@@ -99,15 +100,14 @@ const mutations =
 
 const actions =
     {
-        loadBasketData({commit, state})
+        loadBasketData({ commit, state })
         {
             ApiService.get("/rest/io/basket")
                 .done(basket =>
                 {
                     commit("setBasket", basket);
-                    commit("setIsBasketInitiallyLoaded");
 
-                    ApiService.get("/rest/io/basket/items", {template: "Ceres::Basket.Basket"})
+                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" })
                         .done(basketItems =>
                         {
                             commit("setBasketItems", basketItems);
@@ -117,12 +117,6 @@ const actions =
                             NotificationService.error(
                                 TranslationService.translate("Ceres::Template.basketOops")
                             ).closeAfter(10000);
-                        }).always(data =>
-                        {
-                            setTimeout(() =>
-                            {
-                                $(document.body).trigger("sticky_kit:recalc");
-                            }, 0);
                         });
                 }).fail(error =>
                 {
@@ -139,9 +133,9 @@ const actions =
             });
         },
 
-        addBasketNotification({commit}, {type, message})
+        addBasketNotification({ commit }, { type, message })
         {
-            commit("addBasketNotification", {type, message});
+            commit("addBasketNotification", { type, message });
 
             setTimeout(() =>
             {
@@ -149,7 +143,7 @@ const actions =
             }, 5000);
         },
 
-        addBasketItem({commit}, basketItem)
+        addBasketItem({ commit }, basketItem)
         {
             return new Promise((resolve, reject) =>
             {
@@ -171,11 +165,11 @@ const actions =
             });
         },
 
-        updateBasketItemQuantity({commit}, {basketItem, quantity})
+        updateBasketItemQuantity({ commit }, { basketItem, quantity })
         {
             return new Promise((resolve, reject) =>
             {
-                commit("updateBasketItemQuantity", {basketItem, quantity});
+                commit("updateBasketItemQuantity", { basketItem, quantity });
                 commit("setIsBasketLoading", true);
 
                 basketItem.template = "Ceres::Basket.Basket";
@@ -194,22 +188,22 @@ const actions =
             });
         },
 
-        removeBasketItem({commit}, basketItemId)
+        removeBasketItem({ commit }, basketItemId)
         {
             return new Promise((resolve, reject) =>
             {
                 commit("setIsBasketLoading", true);
 
-                ApiService.delete("/rest/io/basket/items/" + basketItemId, {template: "Ceres::Basket.Basket"})
+                ApiService.delete("/rest/io/basket/items/" + basketItemId, { template: "Ceres::Basket.Basket" })
                     .done(basketItems =>
                     {
                         commit("setBasketItems", basketItems);
                         commit("setIsBasketLoading", false);
                         resolve(basketItems);
 
-                        if (window.location.pathname === "/checkout" && !basketItems.length)
+                        if (pathnameEquals(App.urls.checkout) && !basketItems.length)
                         {
-                            navigateTo("/basket");
+                            navigateTo(App.urls.basket);
                         }
                     })
                     .fail(error =>
@@ -220,13 +214,13 @@ const actions =
             });
         },
 
-        redeemCouponCode({state, commit}, couponCode)
+        redeemCouponCode({ state, commit }, couponCode)
         {
             return new Promise((resolve, reject) =>
             {
                 commit("setIsBasketLoading", true);
 
-                ApiService.post("/rest/io/coupon", {couponCode}, {supressNotifications: true})
+                ApiService.post("/rest/io/coupon", { couponCode }, { supressNotifications: true })
                     .done(data =>
                     {
                         commit("setCouponCode", couponCode);
@@ -241,7 +235,7 @@ const actions =
             });
         },
 
-        removeCouponCode({state, commit}, couponCode)
+        removeCouponCode({ state, commit }, couponCode)
         {
             return new Promise((resolve, reject) =>
             {
@@ -262,7 +256,7 @@ const actions =
             });
         },
 
-        refreshBasket({commit})
+        refreshBasket({ commit })
         {
             return new Promise((resolve, reject) =>
             {

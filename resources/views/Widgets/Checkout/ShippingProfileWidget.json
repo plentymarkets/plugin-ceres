@@ -1,0 +1,26 @@
+{
+    "identifier": "Ceres::ShippingProfileWidget",
+    "label": "Widget.shippingProfileLabel",
+    "previewImageURL": "/images/widgets/shipping-select.svg",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
+    "maxPerPage": 1,
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "hintText": {
+            "type": "codeEditor",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.shippingProfileHintTextLabel",
+                "tooltipText": "Widget.shippingProfileHintTextTooltip"
+            }
+        }
+    }
+}

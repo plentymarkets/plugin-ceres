@@ -1,0 +1,7 @@
+.popover[x-placement="bottom"]
+{
+    .arrow::after
+    {
+        border-bottom-color: $popover-header-bg;
+    }
+}

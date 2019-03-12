@@ -1,0 +1,307 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
+
+{% set initialMaxItemsPerOrder = 5 %}
+{% set basketTotalsCurrency = totals.currency %}
+
+<div>
+    <div class="row container-middle border-left border-right">
+        <div class="col-md-7 products border-bottom border-right">
+            <div class="row">
+                {% set rebatedAmountTotalGross = 0 %}
+                {% set rebatedAmountTotalNet = 0 %}
+                {% set rebatedAmountTotal = 0 %}
+
+                {% for item in orderData.order.orderItems %}
+                    
+                    {% if loop.index == initialMaxItemsPerOrder + 1 %}
+                        <div v-if="showAllOrderItems">
+                    {% endif %}
+
+                    {% if item.itemVariationId > 0 and not ('[-]' in item.orderItemName) %}
+                        {% set currentVariationId = item.itemVariationId | trimNewlines %}
+
+                        {% if item.amounts[0].discount > 0 %}
+                            {% if item.amounts[0].isPercentage ==  "1" %}
+                                {% set rebatedAmountItemGross = (item.quantity * (((item.amounts[0].priceGross  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceGross)) %}
+                                {% set rebatedAmountItemNet = (item.quantity * (((item.amounts[0].priceNet  / (100 - item.amounts[0].discount)) * 100) - item.amounts[0].priceNet)) %}
+                            {% else %}
+                                {% set rebatedAmountItemGross = (item.quantity * item.amounts[0].discount)  %}
+                            {% endif %}
+                            {% set rebatedAmountTotalGross = rebatedAmountTotalGross + rebatedAmountItemGross %}
+                            {% set rebatedAmountTotalNet = rebatedAmountTotalNet + rebatedAmountItemNet %}
+                        {% endif %}
+
+                        {% set itemPrice = 0 %}
+                        {% set rebatedAmount = 0 %}
+
+                        {% if orderData.highlightNetPrices %}
+                            {% set itemPrice = item.amounts[0].priceNet %}
+                            {% set rebatedAmount = rebatedAmountItemNet %}
+                            {% set rebatedAmountTotal = rebatedAmountTotalNet %}
+                        {% else %}
+                            {% set itemPrice = item.amounts[0].priceGross %}
+                            {% set rebatedAmount = rebatedAmountItemGross %}
+                            {% set rebatedAmountTotal = rebatedAmountTotalGross %}
+                        {% endif %}
+
+                        <div class="col-sm-12 item py-3">
+                            <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}">
+                                <img class="d-inline-block" src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
+                            </a>
+
+                            <div class="d-inline-block item-description">
+                                <div><a class="text-primary text-appearance" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
+                                
+                                {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
+                                    <div class="item-bundle">
+                                        {% for bundleComponent in item.bundleComponents %}
+                                            <div>
+                                                <span class="text-muted">{{ bundleComponent.quantity }} x</span>
+                                                <a href="{{ bundleComponent.data | itemURL }}" class="text-primary text-appearance"> {{ bundleComponent.data | itemName }} </a>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+
+                                <div>{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}: {{ (itemPrice + rebatedAmount) | formatMonetary( item.amounts[0].currency ) }}</div>
+                                <div>{{ trans("Ceres::Template.orderHistoryQuantity") }}: {{ item.quantity }}</div>
+                                <div>{{ trans("Ceres::Template.orderHistoryTotal") }}: {{ (item.quantity * (itemPrice + rebatedAmount)) | formatMonetary( item.amounts[0].currency ) }}</div>
+
+                                {% if item.orderProperties %}
+                                    {% for property in item.orderProperties %}
+                                        <div>
+                                            <strong>{{ property.name }}</strong>
+                                            {% if property.type == 'file' %}
+                                                <span>
+                                                    {% set splitPath = property.value |split('/') %}
+                                                    {% set filename = '' %}
+                                                    {% set path = '' %}
+
+                                                    {% for temp in splitPath %}
+                                                        {% if loop.first %}
+                                                            {% set path =  temp %}
+                                                        {% elseif loop.last %}
+                                                            {% set filename = temp %}
+                                                        {% else %}
+                                                            {% set path =  path ~ '/' ~ temp %}
+                                                        {% endif %}
+                                                    {% endfor %}
+
+                                                    <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
+                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                        {{ splitPath | last }}
+                                                    </a>
+                                                </span>
+                                            {% elseif property.type | length > 0 %}
+                                                <span>: {{ property.value }}</span>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            {% if orderData.order.orderItems | length > initialMaxItemsPerOrder %}
+                </div>
+            {% endif %}
+
+            </div>
+
+            {% if orderData.order.orderItems | length > initialMaxItemsPerOrder %}
+                <div class="row mb-2">
+                    <div class="col-sm-12 text-center ">
+                        <a class="btn text-primary text-appearance collapsed" @click="showAllOrderItems = !showAllOrderItems">
+                            <template v-if="showAllOrderItems">
+                                {{ trans("Ceres::Template.orderHistoryReturnShowLess") }}
+                            </template>
+                            <template v-else>
+                                {{ trans("Ceres::Template.returnHistoryReturnShowMore") }}
+                            </template>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-5 sum">
+            <div class="cmp cmp-totals pt-3 d-flex" v-stick-in-parent>
+                <div>
+                    <h3>{{ trans("Ceres::Template.orderHistorySum") }}</h3>
+                    <div>
+                        <dl>
+                            <dt{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ trans("Ceres::Template.orderHistoryValue") }} ({{ trans("Ceres::Template.orderHistoryNet") }})
+                            </dt><!--
+                        --><dd{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ (totals.itemSumNet + rebatedAmountTotalNet) | formatMonetary( basketTotalsCurrency ) }}
+                            </dd>
+    
+                            <dt{% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ trans("Ceres::Template.orderHistoryValue") }} ({{ trans("Ceres::Template.orderHistoryGross") }})
+                            </dt><!--
+                        --><dd{% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {% if orderData.order.amounts[0].isNet %}
+                                    {{ (totals.itemSumGross + rebatedAmountTotalNet) | formatMonetary( basketTotalsCurrency ) }}
+                                {% else %}
+                                    {{ (totals.itemSumGross + rebatedAmountTotalGross) | formatMonetary( basketTotalsCurrency ) }}
+                                {% endif %}
+                            </dd>
+                            {% if rebatedAmountTotal > 0 %}
+                                <dt class="rebate-hint">
+                                    {{ trans("Ceres::Template.orderHistoryRebate") }}
+                                </dt><!--
+                                --><dd class="rebate-hint">
+                                {{ rebatedAmountTotal| formatMonetary( basketTotalsCurrency ) }}
+                            </dd>
+                                <dt {% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                    {{ trans("Ceres::Template.orderHistorySubTotal") }} ({{ trans("Ceres::Template.orderHistoryNet") }})
+                                </dt><!--
+                                --><dd {% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ totals.itemSumNet | formatMonetary( basketTotalsCurrency ) }}
+                            </dd>
+                                <dt {% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                    {{ trans("Ceres::Template.orderHistorySubTotal") }} ({{ trans("Ceres::Template.orderHistoryGross") }})
+                                </dt><!--
+                                --><dd {% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ totals.itemSumGross | formatMonetary( basketTotalsCurrency ) }}
+                            </dd>
+                            {% endif %}
+                            <dt{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ trans("Ceres::Template.orderHistoryShippingCosts") }} ({{ trans("Ceres::Template.orderHistoryNet") }})
+                            </dt><!--
+                        --><dd{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ totals.shippingNet | formatMonetary( basketTotalsCurrency ) }}
+                            </dd>
+                            <dt{% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ trans("Ceres::Template.orderHistoryShippingCosts") }} ({{ trans("Ceres::Template.orderHistoryGross") }})
+                            </dt><!--
+                        --><dd{% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ totals.shippingGross | formatMonetary( basketTotalsCurrency ) }}
+                            </dd>
+    
+                            <hr>
+    
+                            {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", orderData.order) %}
+                            {% if grossNet|trim is not empty %}
+                                {{ grossNet }}
+                            {% else %}
+                                <dt{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                    {{ trans("Ceres::Template.orderHistoryTotalSum") }} ({{ trans("Ceres::Template.orderHistoryNet") }})
+                                </dt><!--
+                                --><dd{% if orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ totals.totalNet | formatMonetary( basketTotalsCurrency ) }}
+                            </dd>
+    
+                                {% if totals.couponType == 'promotional' and (totals.couponValue | trimNewlines) != 0 %}
+                                    <dt{% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                        {{ trans("Ceres::Template.orderHistoryCoupon") }}
+                                    </dt><!--
+                                    --><dd{% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                    {{ totals.couponValue | formatMonetary( basketTotalsCurrency ) }}
+                                </dd>
+                                {% endif %}
+    
+                                {% if not orderData.order.amounts[0].isNet %}
+                                    <div class="vatTotals">
+                                        {% for vat in totals.vats %}
+                                            <dt>
+                                                {{ trans("Ceres::Template.orderHistoryVAT") }} {{ vat.rate }}%
+                                            </dt><!--
+                                            --><dd>
+                                                {{ vat.value | formatMonetary( basketTotalsCurrency ) }}
+                                            </dd>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+    
+                                <div class="totalSum">
+                                    <hr>
+                                    <dt{% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                        {{ trans("Ceres::Template.orderHistoryTotalSum") }} ({{ trans("Ceres::Template.orderHistoryGross") }})
+                                    </dt><!--
+                                    --><dd{% if not orderData.highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                        {{ totals.totalGross | formatMonetary( basketTotalsCurrency ) }}
+                                    </dd>
+                                </div>
+                            {% endif %} <!-- GrossNetReplace|else -->
+                            {% if totals.couponType == 'sales' and (totals.couponValue | trimNewlines) != 0 %}
+                                <dt>
+                                    {{ trans("Ceres::Template.orderHistoryCoupon") }}
+                                </dt><!--
+                                      --><dd>
+                                {{ totals.couponValue | formatMonetary( basketTotalsCurrency ) }}
+                            </dd>
+                                <dt>
+                                    <strong>{{ trans("Ceres::Template.orderHistoryOpenAmount") }}</strong>
+                                </dt><!--
+                                        --><dd>
+                                <strong>{{ totals.openAmount | formatMonetary( basketTotalsCurrency ) }}</strong>
+                            </dd>
+                            {% endif %}
+                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", orderData.order) }}
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row container-bottom border py-4">
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-sm-4">                            
+                    <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</b></h5>
+                    <div class="mb-3" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</div>
+
+                    <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</b></h5>
+                    <div class="mb-3" id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderHistoryPaymentStatus_" ~ orderData.paymentStatus) }}</div>
+
+                    <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryShippingProfile") }}</b></h5>
+                    <div class="mb-3">{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-6 address-list">
+                            <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryInvoiceAddress") }}</b></h5>
+                            <address-header class="mb-3" :address="{{ orderData.order.billingAddress | json_encode }}"></address-header>
+                        </div>
+                        <div class="col-sm-6 address-list">
+                            <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryShippingAddress") }}</b></h5>
+                            {% if orderData.order.billingAddress.id == orderData.order.deliveryAddress.id %}
+                                <span>
+                                    {{ trans("Ceres::Template.orderHistorySameAsInvoice") }}
+                                </span>
+                            {% else %}
+                                <address-header :address="{{orderData.order.deliveryAddress | json_encode }}"></address-header>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 button-container">
+            <template v-if="allowPaymentProviderChange">
+                <change-payment-method
+                    :current-order="{{ orderData.order | json_encode }}"
+                    :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
+                    :allowed-payment-methods="{{ orderData.paymentMethodListForSwitch | json_encode }}"
+                    :payment-status="{{ orderData.paymentStatus | json_encode }}"
+                    current-template="tpl.my-account"
+                    :current-payment-method-name="{{ orderData.paymentMethodName | json_encode }}">
+                </change-payment-method>
+                {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", orderData.order) }}
+            </template>
+            
+            {% if orderData.isReturnable %}
+                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="/returns/{{ orderData.order.id }}">
+                    <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
+                    {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
+                </a>
+            {% endif %}
+            
+            <order-documents :documents="{{ orderData.order.documents | json_encode }}"></order-documents>
+        </div>
+    </div>
+</div>

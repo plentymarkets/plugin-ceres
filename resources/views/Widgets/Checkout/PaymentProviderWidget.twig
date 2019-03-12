@@ -1,0 +1,27 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.component("Ceres::Checkout.Components.PaymentProviderSelect") }}
+
+{{ Twig.set("overridePaymentList", Twig.call("LayoutContainer.show", ["Ceres::Checkout.PaymentList"])) }}
+{% set hintText = widget.settings.hintText.mobile %}
+
+<div class="widget widget-provider-select widget-{{ widget.settings.appearance.mobile | default("primary") }}">
+    <h3 class="mb-3">{{ Twig.trans("Ceres::Template.checkoutPaymentMethod") }}</h3>
+
+    {% if hintText is not empty %}
+        <p>{{ hintText | raw }}</p>
+    {% endif %}
+
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforePaymentList"])) }}
+
+    {{ Twig.if("overridePaymentList | trim is empty") }}
+        <div class="payment-method-select">
+            <payment-provider-select></payment-provider-select>
+        </div>
+    {{ Twig.else() }}
+        {{ Twig.print("overridePaymentList") }}
+    {{ Twig.endif() }}
+
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterPaymentList"])) }}
+</div>

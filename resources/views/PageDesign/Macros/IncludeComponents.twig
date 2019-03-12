@@ -1,5 +1,5 @@
 {% macro include_components() %}
-    {% include get_component_template() %}
+    {% include get_component_template() ignore missing %}
 
     {% if has_component_template() %}
         {{ _self.include_components() }}

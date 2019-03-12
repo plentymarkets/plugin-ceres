@@ -1,7 +1,7 @@
 .homepage-title {
 	padding: 1rem 1.5rem;
 	border-bottom: 0;
-	background: $brand-primary;
+	background: $primary;
 	position: relative;
 	display: flex;
 
@@ -18,7 +18,7 @@
 .home {
 
 	.product-list {
-		.col-xs-12 {
+		.col-12 {
 			margin: 0 15px;
 		}
 	}
@@ -37,7 +37,7 @@
 							font-family: $font-family-heading;
 							text-shadow: none;
 							color: $white;
-							background: rgba($brand-primary, .8);
+							background: rgba($primary, .8);
 							padding: .5rem 1rem;
 							font-size: 1.25rem;
 							display: inline-block;
@@ -51,7 +51,7 @@
 					}
 					.hero-category:hover {
 						h3, h2, h1 {
-							background: rgba($brand-primary, 1);
+							background: rgba($primary, 1);
 							transition: all .3s ease;
 						}
 					}
@@ -64,9 +64,9 @@
 				transform: translateX(-50%);
 				right:auto;
 				li {
-					border-color: $brand-primary;
+					border-color: $primary;
 					&.active {
-						background:$brand-primary;
+						background:$primary;
 					}
 				}
 			}
@@ -81,7 +81,7 @@
 				span:before {
 					font-family: 'FontAwesome';
 					content: "\f053";
-					color: $brand-primary;
+					color: $primary;
 				}
 				.icon-next:before {
 					content: "\f054";
@@ -100,7 +100,7 @@
 				    align-self: flex-start;
 				    font-weight: normal;
 				    font-size: 1.25rem;
-				    background: rgba($brand-primary, .8);
+				    background: rgba($primary, .8);
 				    margin: 1rem;
 				    display: block;
 				    width: auto;
@@ -111,7 +111,7 @@
 			}
 			&:hover {
 				.hero-category-headline {
-					background: rgba($brand-primary, 1);
+					background: rgba($primary, 1);
 					transition: all .3s ease;
 				}
 			}
@@ -138,7 +138,7 @@
 	}
 }
 .sale-new {
-	.col-xs-6 {
+	.col-6 {
 		.prop-inner {
 			padding: 15px 0;
 			left: 15px;
@@ -155,7 +155,7 @@
 .section-header{
 	padding: 1rem 1.5rem;
 	border-bottom: 0;
-	background: $brand-primary;
+	background: $primary;
     position: relative;
     font-family: $font-family-heading;
     h1, h2, h3, h4, h5, h6 {
@@ -180,7 +180,7 @@
 	.home {
 		.product-list {
 			margin:0;
-			.col-xs-12 {
+			.col-12 {
 				margin: 0;
 			}
 		}
@@ -205,7 +205,7 @@
 		}
 	}
 	.sale-new {
-		.col-xs-6 {
+		.col-6 {
 			.prop-inner {
 				padding: 15px 7.5px 15px 15px;
 				left: 0;
@@ -250,9 +250,9 @@
 					bottom: 0;
     				top: auto;
 					li {
-						border-color: $brand-primary;
+						border-color: $primary;
 						&.active {
-							background:$brand-primary;
+							background:$primary;
 						}
 					}
 				}
@@ -262,7 +262,7 @@
 						bottom: 10%;
     					top: auto;
     					&:before {
-    						color: $brand-primary;
+    						color: $primary;
     					}
 					}
 				}

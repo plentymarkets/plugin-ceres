@@ -1,5 +1,5 @@
 {
-    "version"           : "2.17.0",
+    "version"           : "3.1.1",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -11,7 +11,7 @@
     "authorIcon"        : "icon_author_xs.png",
     "email"             : "sales@plentymarkets.com",
     "phone"             : "+49 561 98 681 100",
-    "categories"        : ["3517"],
+    "categories"        : ["3885"],
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
     "require"           : ["IO"],
@@ -62,6 +62,11 @@
             "key"           : "Script.AfterScriptsLoaded",
             "name"          : "Script loader: After scripts loaded",
             "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised."
+        },
+        {
+            "key"           : "PageDesign.AfterOpeningBodyTag",
+            "name"          : "Page Design: After opening HTML body tag",
+            "description"   : "Add content after the opening HTML body tag."
         },
         {
             "key"           : "StaticPages.CancellationRights",
@@ -299,6 +304,16 @@
             "description"   : "Add content after the item in the Items list of the shopping cart."
         },
         {
+            "key"           : "Basket.BeforeBasketTotals",
+            "name"          : "Shopping cart: Before basket totals",
+            "description"   : "Add content before the basket totals in the shopping cart."
+        },
+        {
+            "key"           : "Basket.AfterBasketTotals",
+            "name"          : "Shopping cart: After basket totals",
+            "description"   : "Add content after the basket totals in the shopping cart."
+        },
+        {
             "key"           : "Basket.BeforeCoupon",
             "name"          : "Shopping cart: Before the coupon input",
             "description"   : "Add content before the Coupon input field in the shopping cart."
@@ -317,6 +332,16 @@
             "key"           : "Basket.ExtendOverlayButtons",
             "name"          : "Shopping cart overlay: Extend buttons",
             "description"   : "Add additional content to the 'add to basket overlay' buttons."
+        },
+        {
+            "key"           : "BasketPreview.BeforeBasketTotals",
+            "name"          : "Shopping cart preview: Before basket totals",
+            "description"   : "Add content before the basket totals in the shopping cart preview."
+        },
+        {
+            "key"           : "BasketPreview.AfterBasketTotals",
+            "name"          : "Shopping cart preview: After basket totals",
+            "description"   : "Add content after the basket totals in the shopping cart preview."
         },
         {
             "key"           : "BasketPreview.BeforeCheckoutButton",

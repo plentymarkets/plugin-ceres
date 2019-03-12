@@ -1,0 +1,16 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.component("Ceres::Checkout.Components.ShippingPrivacyHintCheck") }}
+
+<div class="widget widget-shipping-privacy-check">
+    <shipping-privacy-hint-check>
+        {% if isPreview %}
+            <div class="widget-placeholder">
+                <div>
+                    <p class="title">{{ Twig.trans("Ceres::Widget.shippingPrivacyCheckLabel") }}</p>
+                    <p class="description">{{ Twig.trans("Ceres::Widget.shippingPrivacyCheckPlaceholderDescription") }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </shipping-privacy-hint-check>
+</div>

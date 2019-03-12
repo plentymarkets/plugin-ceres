@@ -1,4 +1,4 @@
-import {normalizeUrl}from "../helper/url";
+import { normalizeUrl } from "../helper/url";
 
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
@@ -96,7 +96,7 @@ module.exports = (function($)
         return _send(url, data, config);
     }
 
-    function _send(url, data, config)
+    function _send(url, data = {}, config)
     {
         var deferred = $.Deferred();
 
@@ -107,13 +107,10 @@ module.exports = (function($)
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
         config.keepOriginalResponse = !!config.keepOriginalResponse;
-        config.headers = config.headers || {"Accept-Language": App.language};
+        config.headers = config.headers || { "Accept-Language": App.language };
 
-        if (data)
-        {
-            data.templateEvent = App.templateEvent;
-            config.data = data;
-        }
+        data.templateEvent = App.templateEvent;
+        config.data = data;
 
         if (!config.doInBackground)
         {

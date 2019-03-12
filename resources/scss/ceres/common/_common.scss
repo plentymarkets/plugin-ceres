@@ -13,7 +13,7 @@ body .wrapper-main{
 }
 
 .page-content{
-    @extend .p-t-1;
+    padding-top: $spacer;
     background-color: $gray-lightest;
     &.basket,
     &.checkout,
@@ -41,6 +41,10 @@ body .wrapper-main{
     i.fa-search {
         font-size: 10em;
     }
+    i.fa-home {
+        margin-left: 5px;
+        margin-top: 2px;
+    }
     .default-not-found {
         background-color: rgb(247, 247, 249);
     }
@@ -53,7 +57,8 @@ body .wrapper-main{
 .rating{
     line-height: 1;
 
-    .tag{
+    .tag,
+    .badge {
         padding-right: 0;
         overflow: hidden;
         cursor: pointer;
@@ -107,61 +112,26 @@ a:active {
     background-size: 100% 100%;
 }
 
-.pagination > li {
-    cursor: pointer;
-}
-
-@include media-breakpoint-up(xl){
-    .page-content{
-        padding-left: 0;
-        padding-right: 0;
-        &.basket,
-        &.checkout,
-        &.contact,
-        &.myaccount {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    }
-}
-
 .content-center {
     margin: 0 auto;
     float: none;
-}
-
-.float-right {
-    float: right !important;
 }
 
 .bg-white {
     background-color: $white !important;
 }
 
-.text-gray-dark {
-    color: $gray-dark;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.d-table {
-    display: table;
-}
-
-.border-radius-0 {
-    border-radius: 0;
-}
-
-.border-top-0 {
-    border-top: 0 !important;
-}
-
-.position-fixed {
-    position: fixed !important;
-}
-
 .text-wrap {
   white-space: normal;
+}
+
+.is_stuck {
+    z-index: 1;
+}
+
+@each $color, $value in $theme-colors {
+    @include bg-variant(".bg-#{$color}", $value);
+    .bg-#{$color} {
+        @include context-bg($value);
+    }
 }

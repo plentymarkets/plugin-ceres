@@ -3,27 +3,59 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("accept-gtc-check", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-accept-gtc-check"
+        },
+        hideCheckbox:
+        {
+            type: Boolean
+        },
+        isPreselected:
+        {
+            type: Boolean
+        },
+        isRequired:
+        {
+            type: Boolean,
+            default: true
+        },
+        customText:
+        {
+            type: String,
+            default: ""
+        }
+    },
 
     data()
     {
         return {
-            isChecked: false
+            isChecked: this.isPreselected
         };
     },
 
-    computed: Vuex.mapState({
-        showError: state => state.checkout.validation.gtc.showError
-    }),
+    computed:
+    {
+        ...Vuex.mapState({
+            showError: state => state.checkout.validation.gtc.showError
+        })
+    },
 
     created()
     {
         this.$options.template = this.template;
-        this.$store.commit("setGtcValidator", this.validate);
+
+        if (this.hideCheckbox)
+        {
+            this.isChecked = true;
+        }
+        else if (this.isRequired)
+        {
+            this.$store.commit("setGtcValidator", this.validate);
+        }
     },
 
     methods:

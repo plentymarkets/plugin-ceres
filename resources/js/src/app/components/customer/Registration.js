@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
@@ -6,7 +6,7 @@ const ModalService        = require("services/ModalService");
 
 import ValidationService from "services/ValidationService";
 import TranslationService from "services/TranslationService";
-import {navigateTo}from "services/UrlService";
+import { navigateTo } from "services/UrlService";
 
 Vue.component("registration", {
 
@@ -14,8 +14,8 @@ Vue.component("registration", {
 
     props: {
         modalElement: String,
-        guestMode: {type: Boolean, default: false},
-        isSimpleRegistration: {type: Boolean, default: false},
+        guestMode: { type: Boolean, default: false },
+        isSimpleRegistration: { type: Boolean, default: false },
         template: String,
         backlink: String
     },
@@ -75,7 +75,7 @@ Vue.component("registration", {
                 .done(response =>
                 {
                     ApiService.setToken(response);
-                    document.dispatchEvent(new CustomEvent("onSignUpSuccess", {detail: userObject}));
+                    document.dispatchEvent(new CustomEvent("onSignUpSuccess", { detail: userObject }));
 
                     if (!response.code)
                     {
@@ -112,7 +112,7 @@ Vue.component("registration", {
                 });
         },
 
-        setAddressDataField({field, value})
+        setAddressDataField({ field, value })
         {
             this.billingAddress[field] = value;
             this.billingAddress = Object.assign({}, this.billingAddress);

@@ -1,19 +1,26 @@
 {
     "containers": {
         "header": {
-            "label":    "Widget.containerHeader",
-            "name":     "Ceres::Header"
+            "label":            "Widget.containerHeader",
+            "name":             "Ceres::Header"
         },
         "footer": {
-            "label":    "Widget.containerFooter",
-            "name":     "Ceres::Footer"
+            "label":            "Widget.containerFooter",
+            "name":             "Ceres::Footer"
         },
         "content": [
             {
-                "label": "Widget.containerHomepage",
-                "name":  "Ceres::Homepage"
+                "label":        "Widget.containerHomepage",
+                "name":         "Ceres::Homepage"
             }
         ]
+    },
+    "allowedTypes": {
+        "header":       ["header", "static", "structure", "default"],
+        "footer":       ["footer", "static", "structure", "default"],
+        "content":      ["static", "structure", "default"],
+        "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
     },
     "presets": {
         "header": [
@@ -33,6 +40,113 @@
                 "label": "Widget.presetHomepageDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
             }
+        ],
+        "checkout": [
+            {
+                "label": "Widget.presetCheckoutDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"
+            }
+        ],
+        "myaccount": [
+            {
+              "label": "Widget.presetMyAccountDefault",
+              "presetClass": "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset"
+            }
         ]
-    }
+    },
+    "categories": [
+        {
+            "key": "header",
+            "label": "Widget.categoryHeader",
+            "position": 100
+        },
+        {
+            "key": "structure",
+            "label": "Widget.categoryStructure",
+            "position": 200
+        },
+        {
+            "key": "text",
+            "label": "Widget.categoryText",
+            "position": 300
+        },
+        {
+            "key": "image",
+            "label": "Widget.categoryImage",
+            "position": 400
+        },
+        {
+            "key": "item",
+            "label": "Widget.categoryItem",
+            "position": 500
+        },
+        {
+            "key": "customer",
+            "label": "Widget.categoryCustomer",
+            "position": 600
+        },
+        {
+            "key": "basket",
+            "label": "Widget.categoryBasket",
+            "position": 700
+        },
+        {
+            "key": "checkout",
+            "label": "Widget.categoryCheckout",
+            "position": 800
+        },
+        {
+            "key": "myaccount",
+            "label": "Widget.categoryMyAccount",
+            "position": 900
+        },
+        {
+            "key": "footer",
+            "label": "Widget.categoryFooter",
+            "position": 1000
+        }
+    ],
+    "globalSettings": {
+        "shippingCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.globalShippingCostsCategoryIdLabel"
+            }
+        },
+        "checkoutCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCheckout"
+            }
+        },
+        "checkoutEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!checkoutCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCheckout"
+            }
+        },
+        "myAccountCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryMyAccount"
+            }
+        },
+        "myAccountEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!myAccountCategory",
+            "options": {
+                "name": "Config.routingEnableRouteMyAccount"
+            }
+        }
+    },
+    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler"
 }

@@ -1,46 +1,47 @@
-const checkElement = (el, breakpoint) =>
-{
-    const isSticky = el.dataset.isSticky === "true";
-    const matchesBreakpoint = window.matchMedia("(min-width: " + breakpoint + "px)").matches;
-
-    if (matchesBreakpoint && !isSticky)
-    {
-        const $element = $(el);
-        const headHeight = $(".top-bar").height();
-
-        el.dataset.isSticky = true;
-        $element.stick_in_parent({offset_top: headHeight + 10});
-
-        $element.on("sticky_kit:bottom", () =>
-        {
-            $element.parent().css("position", "static");
-        })
-        .on("sticky_kit:unbottom", () =>
-        {
-            $element.parent().css("position", "relative");
-        });
-    }
-    else if (!matchesBreakpoint && isSticky)
-    {
-        el.dataset.isSticky = false;
-        $(el).trigger("sticky_kit:detach");
-    }
-};
+import { isNullOrUndefined } from "../../helper/utils";
+import { StickyElement } from "../../helper/StickyElement";
 
 Vue.directive("stick-in-parent",
     {
-        bind(el, binding)
+        bind(el, binding, vnode)
         {
-            const minSize = binding.value || 768;
+            el.__sticky = new StickyElement(
+                el,
+                vnode.context,
+                parseInt(binding.arg) || 768
+            );
 
-            window.addEventListener("resize", () =>
+            if (binding.value === false)
             {
-                checkElement(el, minSize);
-            });
-
-            setTimeout(() =>
+                el.__sticky.disable();
+            }
+            else
             {
-                checkElement(el, minSize);
-            }, 0);
+                el.__sticky.enable();
+            }
+        },
+        update(el, binding)
+        {
+            if (!isNullOrUndefined(el.__sticky))
+            {
+                el.__sticky.minWidth = parseInt(binding.arg) || 768;
+                if (binding.value === false)
+                {
+                    el.__sticky.disable();
+                }
+                else
+                {
+                    el.__sticky.enable();
+                }
+                el.__sticky.checkMinWidth();
+            }
+        },
+        unbind(el)
+        {
+            if (!isNullOrUndefined(el.__sticky))
+            {
+                el.__sticky.destroy();
+                el.__sticky = null;
+            }
         }
     });

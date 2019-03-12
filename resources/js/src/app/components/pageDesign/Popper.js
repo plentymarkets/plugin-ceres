@@ -1,5 +1,5 @@
-import {isNullOrUndefined}from "../../helper/utils";
-import {findParent}from "../../helper/dom";
+import { isNullOrUndefined } from "../../helper/utils";
+import { findParent } from "../../helper/dom";
 
 const Popper              = require("popper.js");
 const ModalService        = require("services/ModalService");

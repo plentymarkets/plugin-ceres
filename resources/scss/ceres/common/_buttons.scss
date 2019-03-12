@@ -82,16 +82,12 @@ button:focus {
 
 // create gray outline button 
 .btn-outline-default{
-	@include button-outline-variant($btn-default-color);
+	@include button-outline-variant($gray-light);
 }
 
 .btn {
 
 	outline: 0 !important;
-
-	&.btn-right {
-		float: right;
-	}
 
 	& .btn-label {
 		&.btn-trans {
@@ -107,31 +103,38 @@ button:focus {
 		}
 	}
 
-	&.btn-remove-address {
-		background-color: $brand-danger;
-		margin-right: -5px;
-		color: #fff;
+	& > span + .fa {
+		margin-left: 5px;
+		margin-top: 1px;
+	}
 
-		&:hover{
-			background-color: #c9302c;
-		}
+	&.btn-danger:hover {
+		background-color: #c9302c;
 	}
 
 	&.btn-medium {
-		width: 10rem;
+		min-width: 10rem;
 	}
 
 	&.btn-medium-large {
-		width: 12rem;
+		min-width: 12rem;
 	}
 
 	&.btn-large {
-		width: 15rem;
+		min-width: 15rem;
 	}
 
 	&.btn-m-r {
 		margin-right: 10px;
 	}
+
+	&.btn-block {
+		> .fa {
+			line-height: inherit;
+			margin-top: 0;
+		}
+	}
+
 }
 
 .btn-right {
@@ -218,13 +221,13 @@ button:focus {
 	}
 	.btn-only-icon-#{$bp}-down {
 	  @include media-breakpoint-down($bp) {
-		width: 2.2rem !important;
-        padding-right: 8px;
-        height: 2.2rem;
-
         & span {
-            display: none !important;
-        }
+			display: none !important;
+		}
+		i {
+			margin: 0 !important;
+			float: none !important;
+		}
 	  }
 	}
   }

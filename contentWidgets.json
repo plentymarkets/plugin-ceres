@@ -1,9 +1,668 @@
 [
     {
+        "identifier": "Ceres::BasketTotalsWidget",
+        "label": "Widget.basketTotalsLabel",
+        "previewImageURL": "/images/widgets/basket-totals.svg",
+        "type": "basket",
+        "categories": [
+            "basket"
+        ],
+        "position": 300,
+        "widgetClass": "Ceres\\Widgets\\Basket\\BasketTotalsWidget",
+        "settings": {
+            "visibleFields": {
+                "type": "checkboxGroup",
+                "defaultValue": [
+                    "basketValueNet",
+                    "basketValueGross",
+                    "rebate",
+                    "shippingCostsNet",
+                    "shippingCostsGross",
+                    "totalSumNet",
+                    "promotionCoupon",
+                    "vats",
+                    "totalSumGross",
+                    "salesCoupon",
+                    "openAmount"
+                ],
+                "options": {
+                    "name": "Widget.basketTotalsVisibleFields",
+                    "checkboxValues": [
+                        {
+                            "value": "basketValueNet",
+                            "caption": "Widget.showBasketValueNet"
+                        },
+                        {
+                            "value": "basketValueGross",
+                            "caption": "Widget.showBasketValueGross"
+                        },
+                        {
+                            "value": "rebate",
+                            "caption": "Widget.showBasketTotalsRebate"
+                        },
+                        {
+                            "value": "shippingCostsNet",
+                            "caption": "Widget.showBasketShippingCostsNet"
+                        },
+                        {
+                            "value": "shippingCostsGross",
+                            "caption": "Widget.showBasketShippingCostsGross"
+                        },
+                        {
+                            "value": "totalSumNet",
+                            "caption": "Widget.showBasketTotalSumNet"
+                        },
+                        {
+                            "value": "promotionCoupon",
+                            "caption": "Widget.showBasketPromotionCoupon"
+                        },
+                        {
+                            "value": "vats",
+                            "caption": "Widget.showBasketVats"
+                        },
+                        {
+                            "value": "totalSumGross",
+                            "caption": "Widget.showBasketTotalSumGross"
+                        },
+                        {
+                            "value": "salesCoupon",
+                            "caption": "Widget.showBasketSalesCoupon"
+                        },
+                        {
+                            "value": "openAmount",
+                            "caption": "Widget.showBasketOpenAmount"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::BasketWidget",
+        "label": "Widget.basketLabel",
+        "previewImageURL": "/images/widgets/basket.svg",
+        "type": "basket",
+        "categories": [
+            "basket"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Basket\\BasketWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::CouponWidget",
+        "label": "Widget.couponLabel",
+        "previewImageURL": "/images/widgets/coupon.svg",
+        "type": "basket",
+        "categories": [
+            "basket"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Basket\\CouponWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::ContactWishWidget",
+        "label": "Widget.contactWishLabel",
+        "previewImageURL": "/images/widgets/contact-wish.svg",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 300,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
+        "settings": {
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.contactWishHintTextLabel",
+                    "tooltipText": "Widget.contactWishHintTextTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::GtcCheckWidget",
+        "label": "Widget.gtcCheckLabel",
+        "previewImageURL": "/images/widgets/gtc-check.svg",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 400,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\GtcCheckWidget",
+        "maxPerPage": 1,
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hideCheckbox": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.gtcCheckHideCheckboxLabel",
+                    "tooltipText": "Widget.gtcCheckHideCheckboxTooltip"
+                }
+            },
+            "isPreselected": {
+                "type": "checkbox",
+                "isVisible": "hideCheckbox !== true",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.gtcCheckIsPreselectedLabel",
+                    "tooltipText": "Widget.gtcCheckIsPreselectedTooltip"
+                }
+            },
+            "isRequired": {
+                "type": "checkbox",
+                "isVisible": "hideCheckbox !== true",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.gtcCheckIsRequiredLabel",
+                    "tooltipText": "Widget.gtcCheckIsRequiredTooltip"
+                }
+            },
+            "customText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.gtcCheckCustomTextLabel",
+                    "tooltipText": "Widget.gtcCheckCustomTextTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::PaymentProviderWidget",
+        "label": "Widget.paymentProviderLabel",
+        "previewImageURL": "/images/widgets/payment-select.svg",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
+        "maxPerPage": 1,
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.paymentProviderHintTextLabel",
+                    "tooltipText": "Widget.paymentProviderHintTextTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::PlaceOrderWidget",
+        "label": "Widget.placeOrderLabel",
+        "previewImageURL": "/images/widgets/place-order.svg",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 700,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\PlaceOrderWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "success",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "md",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "md",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::ShippingPrivacyCheckWidget",
+        "label": "Widget.shippingPrivacyCheckLabel",
+        "previewImageURL": "/images/widgets/shipping-privacy-check.svg",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 500,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingPrivacyCheckWidget",
+        "settings": {}
+    },
+    {
+        "identifier": "Ceres::ShippingProfileWidget",
+        "label": "Widget.shippingProfileLabel",
+        "previewImageURL": "/images/widgets/shipping-select.svg",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingProfileWidget",
+        "maxPerPage": 1,
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.shippingProfileHintTextLabel",
+                    "tooltipText": "Widget.shippingProfileHintTextTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::SubscribeNewsletterCheckWidget",
+        "label": "Widget.subscribeNewsletterCheckLabel",
+        "previewImageURL": "/images/widgets/newsletter-subscription-check.svg",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 600,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\SubscribeNewsletterCheckWidget",
+        "settings": {
+            "emailFolder": {
+                "type": "number",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckEmailFolderLabel",
+                    "tooltipText": "Widget.subscribeNewsletterCheckEmailFolderTooltip"
+                }
+            },
+            "hideCheckbox": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckHideCheckboxLabel",
+                    "tooltipText": "Widget.subscribeNewsletterCheckHideCheckboxTooltip"
+                }
+            },
+            "isPreselected": {
+                "type": "checkbox",
+                "isVisible": "hideCheckbox !== true",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckIsPreselectedLabel",
+                    "tooltipText": "Widget.subscribeNewsletterCheckIsPreselectedTooltip"
+                }
+            },
+            "isRequired": {
+                "type": "checkbox",
+                "isVisible": "hideCheckbox !== true",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckIsRequiredLabel",
+                    "tooltipText": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
+                }
+            },
+            "customText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
+                    "tooltipText": "Widget.subscribeNewsletterCheckCustomTextTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::CollapseWidget",
+        "label": "Widget.collapseLabel",
+        "previewImageURL": "/images/widgets/collapse.svg",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
+        "position": 1300,
+        "widgetClass": "Ceres\\Widgets\\Common\\CollapseWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            },
+            "collapseBox": {
+                "type": "vertical",
+                "isList": "[1,]",
+                "options": {
+                    "name": "Widget.collapseBoxLabel"
+                },
+                "children": {
+                    "headline": {
+                        "type": "text",
+                        "required": true,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.collapseBoxHeadlineLabel",
+                            "tooltipText": "Widget.collapseBoxHeadlineTooltip"
+                        }
+                    },
+                    "text": {
+                        "type": "codeEditor",
+                        "required": true,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.collapseBoxTextareaLabel",
+                            "tooltipText": "Widget.collapseBoxTextareaTooltip"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::ImageBoxWidget",
         "label": "Widget.imageBoxLabel",
         "previewImageURL": "/images/widgets/image-box.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "image"
+        ],
         "position": 600,
         "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
         "settings": {
@@ -79,16 +738,6 @@
                     ]
                 }
             },
-            "headline": {
-                "type": "text",
-                "required": false,
-                "isVisible": "style === 'block-caption' || style === 'inline-caption' || style === 'fullwidth'",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.imageBoxHeadlineLabel",
-                    "tooltipText": "Widget.imageBoxHeadlineTooltip"
-                }
-            },
             "imageSize": {
                 "type": "select",
                 "required": true,
@@ -110,22 +759,21 @@
                     ]
                 }
             },
-            "categoryId": {
-                "type": "category",
+            "url": {
+                "type": "url",
                 "required": false,
-                "defaultValue": "",
                 "options": {
-                    "name": "Widget.imageBoxCategoryIdLabel",
-                    "tooltipText": "Widget.imageBoxCategoryIdTooltip"
+                    "name": "Widget.imageBoxUrlLabel"
                 }
             },
-            "variationId": {
-                "type": "number",
+            "headline": {
+                "type": "text",
                 "required": false,
+                "isVisible": "style !== 'no-caption'",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.imageBoxVariationIdLabel",
-                    "tooltipText": "Widget.imageBoxVariationIdTooltip"
+                    "name": "Widget.imageBoxHeadlineLabel",
+                    "tooltipText": "Widget.imageBoxHeadlineTooltip"
                 }
             },
             "customImagePath": {
@@ -143,7 +791,10 @@
         "identifier": "Ceres::ImageCarouselWidget",
         "label": "Widget.imageCarouselLabel",
         "previewImageURL": "/images/widgets/image-carousel.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "image"
+        ],
         "position": 500,
         "widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
         "settings": {
@@ -231,22 +882,11 @@
                             "tooltipText": "Widget.imageCarouselHeadlineTooltip"
                         }
                     },
-                    "categoryId": {
-                        "type": "category",
+                    "url": {
+                        "type": "url",
                         "required": false,
-                        "defaultValue": "",
                         "options": {
-                            "name": "Widget.imageCarouselCategoryIdLabel",
-                            "tooltipText": "Widget.imageCarouselCategoryIdTooltip"
-                        }
-                    },
-                    "variationId": {
-                        "type": "number",
-                        "required": false,
-                        "defaultValue": "",
-                        "options": {
-                            "name": "Widget.imageCarouselVariationIdLabel",
-                            "tooltipText": "Widget.imageCarouselVariationIdTooltip"
+                            "name": "Widget.imageCarouselUrlLabel"
                         }
                     },
                     "customImagePath": {
@@ -266,7 +906,10 @@
         "identifier": "Ceres::ItemListWidget",
         "label": "Widget.itemListLabel",
         "previewImageURL": "/images/widgets/item-list.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "item"
+        ],
         "position": 700,
         "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
         "settings": {
@@ -369,8 +1012,23 @@
                             "value": "tag_list",
                             "caption": "Widget.itemListListTypeTaglist",
                             "position": 2
+                        },
+                        {
+                            "value": "manufacturer",
+                            "caption": "Widget.itemListListTypeManufacturer",
+                            "position": 3
                         }
                     ]
+                }
+            },
+            "manufacturerId": {
+                "type": "manufacturer",
+                "required": false,
+                "isVisible": "listType === 'manufacturer'",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.itemListListTypeManufacturer",
+                    "tooltipText": "Widget.itemListManufacturerTooltip"
                 }
             },
             "categoryId": {
@@ -481,6 +1139,16 @@
                             "value": "item.random",
                             "caption": "Widget.itemRandom",
                             "position": 15
+                        },
+                        {
+                            "value": "variation.position_asc",
+                            "caption": "Widget.itemVariationTopseller_asc",
+                            "position": 16
+                        },
+                        {
+                            "value": "variation.position_desc",
+                            "caption": "Widget.itemVariationTopseller_desc",
+                            "position": 17
                         }
                     ]
                 }
@@ -488,7 +1156,6 @@
             "maxItems": {
                 "type": "number",
                 "required": true,
-                "isVisible": "listType !== 'last_seen'",
                 "defaultValue": "4",
                 "options": {
                     "name": "Widget.itemListMaxItemsLabel",
@@ -501,7 +1168,7 @@
                 "defaultValue": 4,
                 "options": {
                     "name": "Widget.itemListItemsPerPageLabel",
-                    "tooltipText": "Widget.itemsListItemsPerPageTooltip",
+                    "tooltipText": "Widget.itemListItemsPerPageTooltip",
                     "listBoxValues": [
                         {
                             "value": 1,
@@ -532,7 +1199,10 @@
         "identifier": "Ceres::LinkListWidget",
         "label": "Widget.linkListLabel",
         "previewImageURL": "/images/widgets/link-list.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
         "position": 1000,
         "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
         "settings": {
@@ -541,111 +1211,10 @@
                 "required": false,
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.linkListTitleLabel",
-                    "tooltipText": "Widget.linkListTitleTooltip"
+                    "name": "Widget.listTitleLabel",
+                    "tooltipText": "Widget.listTitleTooltip"
                 }
             },
-            "icon": {
-                "type": "select",
-                "required": true,
-                "defaultValue": "none",
-                "options": {
-                    "name": "Widget.linkListIconLabel",
-                    "tooltipText": "Widget.linkListIconTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": "none",
-                            "caption": "Widget.widgetIconNone",
-                            "position": 0
-                        },
-                        {
-                            "value": "fa-check",
-                            "caption": "Widget.widgetIconCheck",
-                            "position": 1
-                        },
-                        {
-                            "value": "fa-circle",
-                            "caption": "Widget.widgetIconCircle",
-                            "position": 1
-                        },
-                        {
-                            "value": "fa-circle-thin",
-                            "caption": "Widget.widgetIconCircleThin",
-                            "position": 1
-                        },
-                        {
-                            "value": "fa-comment-o",
-                            "caption": "Widget.widgetIconComment",
-                            "position": 1
-                        },
-                        {
-                            "value": "fa-credit-card",
-                            "caption": "Widget.widgetIconCreditcard",
-                            "position": 1
-                        },
-                        {
-                            "value": "fa-envelope-o",
-                            "caption": "Widget.widgetIconEnvelope",
-                            "position": 1
-                        },
-                        {
-                            "value": "fa-heart",
-                            "caption": "Widget.widgetIconHeart",
-                            "position": 1
-                        },
-                        {
-                            "value": "fa-thumbs-o-up",
-                            "caption": "Widget.widgetIconThumbsUp",
-                            "position": 1
-                        },
-                        {
-                            "value": "fa-euro",
-                            "caption": "Widget.widgetIconEuro",
-                            "position": 1
-                        },
-                        {
-                            "value": "fa-dollar",
-                            "caption": "Widget.widgetIconDollar",
-                            "position": 1
-                        }
-                    ]
-                }
-            },
-            "entries": {
-                "type": "vertical",
-                "isList": "[1,]",
-                "options": {
-                    "name": "Widget.linkListEntryLabel"
-                },
-                "children": {
-                    "text": {
-                        "type": "text",
-                        "required": false,
-                        "options": {
-                            "name": "Widget.linkListEntryNameLabel",
-                            "tooltipText": "Widget.linkListEntryNameTooltip"
-                        }
-                    },
-                    "url": {
-                        "type": "text",
-                        "required": false,
-                        "options": {
-                            "name": "Widget.linkListEntryUrlLabel",
-                            "tooltipText": "Widget.linkListEntryUrlTooltip"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    {
-        "identifier": "Ceres::ListWidget",
-        "label": "Widget.listLabel",
-        "previewImageURL": "/images/widgets/list.svg",
-        "type": "default",
-        "position": 900,
-        "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
-        "settings": {
             "icon": {
                 "type": "select",
                 "required": true,
@@ -712,14 +1281,156 @@
                     ]
                 }
             },
-            "texts": {
+            "centered": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.listCenteredLabel"
+                }
+            },
+            "entries": {
+                "type": "vertical",
+                "isList": "[1,]",
+                "options": {
+                    "name": "Widget.listEntryLabel"
+                },
+                "children": {
+                    "text": {
+                        "type": "text",
+                        "required": false,
+                        "options": {
+                            "name": "Widget.listEntryNameLabel",
+                            "tooltipText": "Widget.listEntryNameTooltip"
+                        }
+                    },
+                    "url": {
+                        "type": "url",
+                        "required": false,
+                        "options": {
+                            "name": "Widget.listEntryUrlLabel",
+                            "tooltipText": "Widget.listEntryUrlTooltip"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::ListWidget",
+        "label": "Widget.listLabel",
+        "previewImageURL": "/images/widgets/list.svg",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
+        "position": 900,
+        "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
+        "settings": {
+            "title": {
                 "type": "text",
                 "required": false,
                 "defaultValue": "",
+                "options": {
+                    "name": "Widget.listTitleLabel",
+                    "tooltipText": "Widget.listTitleTooltip"
+                }
+            },
+            "icon": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.listIconLabel",
+                    "tooltipText": "Widget.listIconTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetIconNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "fa-check",
+                            "caption": "Widget.widgetIconCheck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-circle",
+                            "caption": "Widget.widgetIconCircle",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-circle-thin",
+                            "caption": "Widget.widgetIconCircleThin",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-comment-o",
+                            "caption": "Widget.widgetIconComment",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-credit-card",
+                            "caption": "Widget.widgetIconCreditcard",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-envelope-o",
+                            "caption": "Widget.widgetIconEnvelope",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-heart",
+                            "caption": "Widget.widgetIconHeart",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-thumbs-o-up",
+                            "caption": "Widget.widgetIconThumbsUp",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-euro",
+                            "caption": "Widget.widgetIconEuro",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-dollar",
+                            "caption": "Widget.widgetIconDollar",
+                            "position": 1
+                        }
+                    ]
+                }
+            },
+            "centered": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.listCenteredLabel"
+                }
+            },
+            "entries": {
+                "type": "vertical",
                 "isList": "[1,]",
                 "options": {
-                    "name": "Widget.listTextLabel",
-                    "tooltipText": "Widget.listTextTooltip"
+                    "name": "Widget.listEntryLabel"
+                },
+                "children": {
+                    "text": {
+                        "type": "text",
+                        "required": false,
+                        "options": {
+                            "name": "Widget.listEntryNameLabel",
+                            "tooltipText": "Widget.listEntryNameTooltip"
+                        }
+                    },
+                    "url": {
+                        "type": "url",
+                        "required": false,
+                        "options": {
+                            "name": "Widget.listEntryUrlLabel",
+                            "tooltipText": "Widget.listEntryUrlTooltip"
+                        }
+                    }
                 }
             }
         }
@@ -728,7 +1439,10 @@
         "identifier": "Ceres::LiveShoppingWidget",
         "label": "Widget.liveShoppingLabel",
         "previewImageURL": "/images/widgets/live-shopping.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "item"
+        ],
         "widgetClass": "Ceres\\Widgets\\Common\\LiveShoppingWidget",
         "settings": {
             "liveShoppingSelection": {
@@ -737,7 +1451,7 @@
                 "defaultValue": 1,
                 "options": {
                     "name": "Widget.liveShoppingSelectionLabel",
-                    "tooltip": "Widget.liveShoppingSelectionTooltip",
+                    "tooltipText": "Widget.liveShoppingSelectionTooltip",
                     "listBoxValues": [
                         {
                             "value": 1,
@@ -798,7 +1512,7 @@
                 "defaultValue": "sorting.price.avg_asc",
                 "options": {
                     "name": "Widget.liveShoppingSortingLabel",
-                    "tooltip": "Widget.liveShoppingSortingTooltip",
+                    "tooltipText": "Widget.liveShoppingSortingTooltip",
                     "listBoxValues": [
                         {
                             "value": "sorting.price.avg_asc",
@@ -916,7 +1630,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.liveShoppingCustomImagePathLabel",
-                    "tooltip": "Widget.liveShoppingCustomImagePathTooltip"
+                    "tooltipText": "Widget.liveShoppingCustomImagePathTooltip"
                 }
             }
         }
@@ -925,7 +1639,7 @@
         "identifier": "Ceres::NewsletterWidget",
         "label": "Widget.newsletterLabel",
         "previewImageURL": "/images/widgets/newsletter.svg",
-        "type": "default",
+        "type": "static",
         "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
         "settings": {
             "appearance": {
@@ -1018,27 +1732,46 @@
         "identifier": "Ceres::SeparatorWidget",
         "label": "Widget.separatorLabel",
         "previewImageURL": "/images/widgets/separator.svg",
-        "type": "default",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
         "position": 1100,
         "widgetClass": "Ceres\\Widgets\\Common\\SeparatorWidget",
-        "settings": {}
+        "settings": {
+            "margin": {
+                "type": "spacing",
+                "required": false,
+                "options": {
+                    "name": "Widget.separatorMargin",
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "vertical"
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::TextWidget",
         "label": "Widget.textLabel",
         "previewImageURL": "/images/widgets/text.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
         "position": 800,
         "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
         "settings": {
             "appearance": {
-                "type": "selectBox",
+                "type": "select",
                 "required": true,
-                "label": "Widget.widgetAppearanceLabel",
+                "defaultValue": "none",
                 "options": {
+                    "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
-                    "defaultValue": "none",
-                    "selectBoxValues": [
+                    "listBoxValues": [
                         {
                             "value": "none",
                             "caption": "Widget.widgetAppearanceNone",
@@ -1082,6 +1815,40 @@
                 "options": {
                     "name": "Widget.textCodeEditorLabel"
                 }
+            },
+            "customPadding": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomPadding"
+                }
+            },
+            "padding": {
+                "type": "spacing",
+                "isVisible": "!!customPadding",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
+            },
+            "customMargin": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomMargin"
+                }
+            },
+            "margin": {
+                "type": "spacing",
+                "isVisible": "!!customMargin",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
             }
         }
     },
@@ -1089,7 +1856,10 @@
         "identifier": "Ceres::TitleBarWidget",
         "label": "Widget.titleBarLabel",
         "previewImageURL": "/images/widgets/title-bar.svg",
-        "type": "default",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
         "settings": {
@@ -1146,10 +1916,481 @@
         }
     },
     {
+        "identifier": "Ceres::AddressWidget",
+        "label": "Widget.addressLabel",
+        "previewImageURL": "/images/widgets/address.svg",
+        "type": "customer",
+        "categories": [
+            "customer"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Customer\\AddressWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "addressType": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "1",
+                "options": {
+                    "name": "Widget.addressType",
+                    "tooltipText": "Widget.addressTypeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "1",
+                            "caption": "Widget.addressInvoice",
+                            "position": 0
+                        },
+                        {
+                            "value": "2",
+                            "caption": "Widget.addressShipping",
+                            "position": 1
+                        }
+                    ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.addressHintTextLabel",
+                    "tooltipText": "Widget.addressHintTextTooltip"
+                }
+            },
+            "addressLayout": {
+                "type": "select",
+                "defaultValue": "DE",
+                "options": {
+                    "name": "Widget.addressLayout",
+                    "tooltipText": "Widget.addressLayoutTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "DE",
+                            "caption": "Widget.addressLayoutDE",
+                            "position": 0
+                        },
+                        {
+                            "value": "GB",
+                            "caption": "Widget.addressLayoutGB",
+                            "position": 1
+                        }
+                    ]
+                }
+            },
+            "addressFieldsInvoiceDE": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '1' && addressLayout === 'DE'",
+                "defaultValue": [
+                    "billing_address.name1",
+                    "billing_address.salutation"
+                ],
+                "options": {
+                    "name": "Widget.addressFieldsInvoiceDE",
+                    "checkboxValues": [
+                        {
+                            "value": "billing_address.name1",
+                            "caption": "Widget.addressFieldName1"
+                        },
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Widget.addressFieldSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Widget.addressFieldTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Widget.addressFieldBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Widget.addressFieldName4"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Widget.addressFieldAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Widget.addressFieldAddress4"
+                        },
+                        {
+                            "value": "billing_address.stateId",
+                            "caption": "Widget.addressFieldStateId"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Widget.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressRequiredFieldsInvoiceDE": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '1' && addressLayout === 'DE'",
+                "defaultValue": [],
+                "options": {
+                    "name": "Widget.addressRequiredFieldsInvoiceDE",
+                    "checkboxValues": [
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Widget.addressFieldSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Widget.addressFieldTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Widget.addressFieldBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Widget.addressFieldName4"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Widget.addressFieldAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Widget.addressFieldAddress4"
+                        },
+                        {
+                            "value": "billing_address.stateId",
+                            "caption": "Widget.addressFieldStateId"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Widget.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressFieldsInvoiceGB": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '1' && addressLayout === 'GB'",
+                "defaultValue": [
+                    "billing_address.name1",
+                    "billing_address.address2",
+                    "billing_address.salutation"
+                ],
+                "options": {
+                    "name": "Widget.addressFieldsInvoiceGB",
+                    "checkboxValues": [
+                        {
+                            "value": "billing_address.name1",
+                            "caption": "Widget.addressFieldEnName1"
+                        },
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Widget.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Widget.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Widget.addressFieldEnBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Widget.addressFieldEnName4"
+                        },
+                        {
+                            "value": "billing_address.address2",
+                            "caption": "Widget.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Widget.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Widget.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Widget.addressFieldEnPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressRequiredFieldsInvoiceGB": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '1' && addressLayout === 'GB'",
+                "defaultValue": [],
+                "options": {
+                    "name": "Widget.addressRequiredFieldsInvoiceGB",
+                    "checkboxValues": [
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Widget.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Widget.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Widget.addressFieldEnBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Widget.addressFieldEnName4"
+                        },
+                        {
+                            "value": "billing_address.address2",
+                            "caption": "Widget.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Widget.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Widget.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Widget.addressFieldEnPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressFieldsShippingDE": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '2' && addressLayout === 'DE'",
+                "defaultValue": [
+                    "delivery_address.name1",
+                    "delivery_address.salutation"
+                ],
+                "options": {
+                    "name": "Widget.addressFieldsShippingDE",
+                    "checkboxValues": [
+                        {
+                            "value": "delivery_address.name1",
+                            "caption": "Widget.addressFieldName1"
+                        },
+                        {
+                            "value": "delivery_address.salutation",
+                            "caption": "Widget.addressFieldSalutation"
+                        },
+                        {
+                            "value": "delivery_address.title",
+                            "caption": "Widget.addressFieldTitle"
+                        },
+                        {
+                            "value": "delivery_address.name4",
+                            "caption": "Widget.addressFieldName4"
+                        },
+                        {
+                            "value": "delivery_address.address3",
+                            "caption": "Widget.addressFieldAddress3"
+                        },
+                        {
+                            "value": "delivery_address.address4",
+                            "caption": "Widget.addressFieldAddress4"
+                        },
+                        {
+                            "value": "delivery_address.stateId",
+                            "caption": "Widget.addressFieldStateId"
+                        },
+                        {
+                            "value": "delivery_address.phoneNumber",
+                            "caption": "Widget.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressRequiredFieldsShippingDE": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '2' && addressLayout === 'DE'",
+                "defaultValue": [],
+                "options": {
+                    "name": "Widget.addressRequiredFieldsShippingDE",
+                    "checkboxValues": [
+                        {
+                            "value": "delivery_address.salutation",
+                            "caption": "Widget.addressFieldSalutation"
+                        },
+                        {
+                            "value": "delivery_address.title",
+                            "caption": "Widget.addressFieldTitle"
+                        },
+                        {
+                            "value": "delivery_address.name4",
+                            "caption": "Widget.addressFieldName4"
+                        },
+                        {
+                            "value": "delivery_address.address3",
+                            "caption": "Widget.addressFieldAddress3"
+                        },
+                        {
+                            "value": "delivery_address.address4",
+                            "caption": "Widget.addressFieldAddress4"
+                        },
+                        {
+                            "value": "delivery_address.stateId",
+                            "caption": "Widget.addressFieldStateId"
+                        },
+                        {
+                            "value": "delivery_address.phoneNumber",
+                            "caption": "Widget.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressFieldsShippingGB": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '2' && addressLayout === 'GB'",
+                "defaultValue": [
+                    "delivery_address.name1",
+                    "delivery_address.salutation"
+                ],
+                "options": {
+                    "name": "Widget.addressFieldsShippingGB",
+                    "checkboxValues": [
+                        {
+                            "value": "delivery_address.name1",
+                            "caption": "Widget.addressFieldEnName1"
+                        },
+                        {
+                            "value": "delivery_address.salutation",
+                            "caption": "Widget.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "delivery_address.title",
+                            "caption": "Widget.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "delivery_address.name4",
+                            "caption": "Widget.addressFieldEnName4"
+                        },
+                        {
+                            "value": "delivery_address.address2",
+                            "caption": "Widget.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "delivery_address.address3",
+                            "caption": "Widget.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "delivery_address.address4",
+                            "caption": "Widget.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "delivery_address.phoneNumber",
+                            "caption": "Widget.addressFieldEnPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "addressRequiredFieldsShippingGB": {
+                "type": "checkboxGroup",
+                "isVisible": "addressType === '2' && addressLayout === 'GB'",
+                "defaultValue": [],
+                "options": {
+                    "name": "Widget.addressRequiredFieldsShippingGB",
+                    "checkboxValues": [
+                        {
+                            "value": "delivery_address.salutation",
+                            "caption": "Widget.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "delivery_address.title",
+                            "caption": "Widget.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "delivery_address.name4",
+                            "caption": "Widget.addressFieldEnName4"
+                        },
+                        {
+                            "value": "delivery_address.address2",
+                            "caption": "Widget.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "delivery_address.address3",
+                            "caption": "Widget.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "delivery_address.address4",
+                            "caption": "Widget.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "delivery_address.phoneNumber",
+                            "caption": "Widget.addressFieldEnPhoneNumber"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::LegalInformationWidget",
         "label": "Widget.legalInformationLabel",
         "previewImageURL": "/images/widgets/legal-information.svg",
         "type": "footer",
+        "categories": [
+            "footer"
+        ],
         "position": 1200,
         "widgetClass": "Ceres\\Widgets\\Footer\\LegalInformationWidget",
         "settings": {
@@ -1230,11 +2471,23 @@
         "label": "Widget.gridFourColumnLabel",
         "previewImageURL": "/images/widgets/grid-4-col.svg",
         "type": "structure",
-        "position": 300,
-        "allowedNestingTypes": [
-            "default"
+        "categories": [
+            "structure"
         ],
+        "position": 100,
         "widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
+        "settings": {}
+    },
+    {
+        "identifier": "Ceres::StickyContainerWidget",
+        "label": "Widget.stickyContainerLabel",
+        "previewImageURL": "/images/widgets/sticky-container.svg",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
+        "position": 400,
+        "widgetClass": "Ceres\\Widgets\\Grid\\StickyContainerWidget",
         "settings": {}
     },
     {
@@ -1242,10 +2495,10 @@
         "label": "Widget.gridThreeColumnLabel",
         "previewImageURL": "/images/widgets/grid-3-col.svg",
         "type": "structure",
-        "position": 200,
-        "allowedNestingTypes": [
-            "default"
+        "categories": [
+            "structure"
         ],
+        "position": 200,
         "widgetClass": "Ceres\\Widgets\\Grid\\ThreeColumnWidget",
         "settings": {
             "layout": {
@@ -1296,10 +2549,10 @@
         "label": "Widget.gridTwoColumnLabel",
         "previewImageURL": "/images/widgets/grid-2-col.svg",
         "type": "structure",
-        "position": 100,
-        "allowedNestingTypes": [
-            "default"
+        "categories": [
+            "structure"
         ],
+        "position": 300,
         "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
         "settings": {
             "layout": {
@@ -1324,6 +2577,21 @@
                             "value": "oneToTwo",
                             "caption": "Widget.gridTwoColumnLayoutOneToTwo",
                             "position": 2
+                        },
+                        {
+                            "value": "fiveToSeven",
+                            "caption": "Widget.gridTwoColumnLayoutFiveToSeven",
+                            "position": 3
+                        },
+                        {
+                            "value": "sevenToFive",
+                            "caption": "Widget.gridTwoColumnLayoutSevenToFive",
+                            "position": 4
+                        },
+                        {
+                            "value": "nineToThree",
+                            "caption": "Widget.gridTwoColumnLayoutNineToThree",
+                            "position": 5
                         }
                     ]
                 }
@@ -1335,6 +2603,9 @@
         "label": "Widget.breadcrumbLabel",
         "previewImageURL": "/images/widgets/breadcrumb.svg",
         "type": "header",
+        "categories": [
+            "header"
+        ],
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",
         "settings": {
@@ -1385,6 +2656,9 @@
         "label": "Widget.navigationLabel",
         "previewImageURL": "/images/widgets/navigation.svg",
         "type": "header",
+        "categories": [
+            "header"
+        ],
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
         "settings": {
@@ -1497,6 +2771,9 @@
         "label": "Widget.topBarLabel",
         "previewImageURL": "/images/widgets/top-bar.svg",
         "type": "header",
+        "categories": [
+            "header"
+        ],
         "position": 0,
         "widgetClass": "Ceres\\Widgets\\Header\\TopBarWidget",
         "settings": {
@@ -1631,6 +2908,447 @@
                             "value": "both",
                             "caption": "Widget.topBarBasketValuesBoth",
                             "position": 0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::AccountSettingsWidget",
+        "label": "Widget.myAccountAccountSettingsLabel",
+        "previewImageURL": "/images/widgets/account-settings.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "text": {
+                "type": "codeEditor",
+                "options": {
+                    "name": "Widget.myAccountHintTextLabel"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::BankDataSelectWidget",
+        "label": "Template.myAccountBankDetails",
+        "previewImageURL": "/images/widgets/bank-details.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\BankDataSelectWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "text": {
+                "type": "codeEditor",
+                "options": {
+                    "name": "Widget.myAccountHintTextLabel"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::GreetingWidget",
+        "label": "Widget.greetingWidgetLabel",
+        "previewImageURL": "/images/widgets/greeting.svg",
+        "type": "default",
+        "categories": [
+            "customer"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\GreetingWidget",
+        "settings": {
+            "salutation": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "firstname_surname",
+                "options": {
+                    "name": "Widget.greetingWidgetSalutationStyle",
+                    "tooltipText": "Widget.greetingWidgetSalutationStyleTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "firstname_surname",
+                            "caption": "Widget.greetingWidgetForenameSurname"
+                        },
+                        {
+                            "value": "firstname",
+                            "caption": "Widget.greetingWidgetForename"
+                        },
+                        {
+                            "value": "title_surname",
+                            "caption": "Widget.greetingWidgetTitleSurname"
+                        },
+                        {
+                            "value": "email",
+                            "caption": "Widget.greetingWidgetEmail"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::LogoutButtonWidget",
+        "label": "Widget.logoutButtonLabel",
+        "previewImageURL": "/images/widgets/logout.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 700,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\LogoutButtonWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "danger",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "md",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "md",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::OrderHistoryWidget",
+        "label": "Widget.orderHistoryLabel",
+        "previewImageURL": "/images/widgets/order-history.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 100,
+        "maxPerPage": 1,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderHistoryWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.orderHistoryHintTextLabel",
+                    "tooltipText": "Widget.orderHistoryHintTextTooltip"
+                }
+            },
+            "ordersPerPage": {
+                "type": "select",
+                "defaultValue": 5,
+                "options": {
+                    "name": "Widget.orderHistoryOrdersPerPageLabel",
+                    "tooltipText": "Widget.orderHistoryOrdersPerPageTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 5,
+                            "caption": "Widget.orderHistoryOrdersPerPage5",
+                            "position": 0
+                        },
+                        {
+                            "value": 10,
+                            "caption": "Widget.orderHistoryOrdersPerPage10",
+                            "position": 1
+                        },
+                        {
+                            "value": 25,
+                            "caption": "Widget.orderHistoryOrdersPerPage25",
+                            "position": 2
+                        },
+                        {
+                            "value": 50,
+                            "caption": "Widget.orderHistoryOrdersPerPage50",
+                            "position": 3
+                        }
+                    ]
+                }
+            },
+            "allowPaymentProviderChange": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.orderHistoryAllowPaymentProviderChangeLabel",
+                    "tooltip": "Widget.orderHistoryAllowPaymentProviderChangeTooltip"
+                }
+            },
+            "allowReturn": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.orderHistoryAllowReturnLabel",
+                    "tooltip": "Widget.orderHistoryAllowReturnTooltip"
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::OrderReturnHistoryWidget",
+        "label": "Widget.orderReturnHistoryLabel",
+        "previewImageURL": "/images/widgets/return-history.svg",
+        "type": "myaccount",
+        "categories": [
+            "myaccount"
+        ],
+        "position": 200,
+        "maxPerPage": 1,
+        "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderReturnHistoryWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.orderHistoryHintTextLabel",
+                    "tooltipText": "Widget.orderHistoryHintTextTooltip"
+                }
+            },
+            "returnsPerPage": {
+                "type": "select",
+                "defaultValue": 5,
+                "options": {
+                    "name": "Widget.orderReturnHistoryOrdersPerPageLabel",
+                    "tooltipText": "Widget.orderReturnHistoryOrdersPerPageTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 5,
+                            "caption": "Widget.orderHistoryOrdersPerPage5",
+                            "position": 0
+                        },
+                        {
+                            "value": 10,
+                            "caption": "Widget.orderHistoryOrdersPerPage10",
+                            "position": 1
+                        },
+                        {
+                            "value": 25,
+                            "caption": "Widget.orderHistoryOrdersPerPage25",
+                            "position": 2
+                        },
+                        {
+                            "value": 50,
+                            "caption": "Widget.orderHistoryOrdersPerPage50",
+                            "position": 3
                         }
                     ]
                 }

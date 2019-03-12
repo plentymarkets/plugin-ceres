@@ -1,4 +1,4 @@
-import {navigateTo}from "services/UrlService";
+import { navigateTo } from "services/UrlService";
 
 var ApiService = require("services/ApiService");
 

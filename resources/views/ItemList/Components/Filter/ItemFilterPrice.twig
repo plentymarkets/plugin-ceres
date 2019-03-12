@@ -1,13 +1,27 @@
 <script type="x/template" id="vue-item-filter-price">
-	<div class="row inline-form">
-		<div class="col-lg-5 p-r-0 d-table p-b-1">
-			<div class="input-group-addon border-radius-0">${ currency }</div>
-			<input type="number" class="form-control border-radius-0" @focus="selectAll($event)" placeholder="Min" v-model="priceMin">
+	<div class="row">
+		<div class="input-group col-lg-5 pb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">${ currency }</span>
+			</div>
+
+			<input type="number"
+				   class="form-control"
+				   @focus="selectAll($event)"
+				   placeholder="Min"
+				   v-model="priceMin">
 		</div>
 
-		<div class="col-lg-5 p-r-0 d-table p-b-1">
-			<div class="input-group-addon border-radius-0">${ currency }</div>
-			<input type="number" class="form-control border-radius-0" @focus="selectAll($event)" placeholder="Max" v-model="priceMax">
+		<div class="input-group col-lg-5 pb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">${ currency }</span>
+			</div>
+
+			<input type="number"
+				   class="form-control"
+				   @focus="selectAll($event)"
+				   placeholder="Max"
+				   v-model="priceMax">
 		</div>
 
 		<div class="col-lg-2">

@@ -3,10 +3,8 @@
     "label": "Widget.gridThreeColumnLabel",
     "previewImageURL": "/images/widgets/grid-3-col.svg",
     "type": "structure",
+    "categories": ["structure"],
     "position": 200,
-    "allowedNestingTypes": [
-        "default"
-    ],
     "widgetClass": "Ceres\\Widgets\\Grid\\ThreeColumnWidget",
     "settings": {
         "layout": {

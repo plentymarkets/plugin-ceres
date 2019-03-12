@@ -41,7 +41,7 @@ const mutations =
 
 const actions =
     {
-        initWishListItems({commit}, ids)
+        initWishListItems({ commit }, ids)
         {
             return new Promise((resolve, reject) =>
             {
@@ -49,7 +49,7 @@ const actions =
                 {
                     commit("setWishListIds", ids);
 
-                    ApiService.get("/rest/io/variations/", {variationIds: ids, template: "Ceres::WishList.WishList"})
+                    ApiService.get("/rest/io/variations/", { variationIds: ids, template: "Ceres::WishList.WishList" })
                         .done(data =>
                         {
                             commit("setWishListItems", data.documents);
@@ -67,7 +67,7 @@ const actions =
             });
         },
 
-        removeWishListItem({commit}, {id, wishListItem, index})
+        removeWishListItem({ commit }, { id, wishListItem, index })
         {
             return new Promise((resolve, reject) =>
             {
@@ -93,12 +93,12 @@ const actions =
             });
         },
 
-        addToWishList({commit}, id)
+        addToWishList({ commit }, id)
         {
             return new Promise((resolve, reject) =>
             {
                 commit("addWishListId", id);
-                ApiService.post("/rest/io/itemWishList", {variationId: id})
+                ApiService.post("/rest/io/itemWishList", { variationId: id })
                     .done(data =>
                     {
                         resolve(data);

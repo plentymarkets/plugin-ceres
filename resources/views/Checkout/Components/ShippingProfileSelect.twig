@@ -1,17 +1,17 @@
 <script type="x/template" id="vue-shipping-profile-select">
-    <div class="cmp cmp-method-list list m-b-2" v-bind:class="{ 'error': showError }">
+    <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
         <ul class="method-list component-loading" :class="{ 'isLoading': isBasketLoading }">
             <li v-for="shippingProfile in shippingProfileList" class="method-list-item" :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
                         :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
-                        name="ShippingProfileID"
+                        :name="'shippingProfileSelect' + _uid"
                         :value="shippingProfile.parcelServicePresetId"
                         @change="onShippingProfileChange(shippingProfile.parcelServicePresetId)"
                         :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
                         :disabled = "isBasketLoading"
                 >
-                <label :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId">
+                <label class="provider-select-label" :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId">
                     <div class="icon">
                         {#<img src="">#}
                     </div><!--
@@ -24,6 +24,13 @@
                         </div>
                     </div>
                 </label>
+            </li><!-- -->
+            <li v-if="shippingProfileList.length <= 0" class="method-list-item has-error">
+                <div class="label">
+                    <div class="content">
+                        {{ trans("Ceres::Template.notificationsCalculateShippingFailed") }}
+                    </div>
+                </div>
             </li><!-- -->
         </ul>
     </div>

@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "services/TranslationService";
 
 Vue.component("item-image-carousel", {
@@ -143,7 +143,7 @@ Vue.component("item-image-carousel", {
                     {
                         current -= imageCount;
                     }
-                    return TranslationService.translate("Ceres::Template.singleItemImagePreviewCaption", {current: current, total: imageCount});
+                    return TranslationService.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
                 };
 
                 const originalFn = window.lightbox.changeImage;

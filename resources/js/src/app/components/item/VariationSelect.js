@@ -1,5 +1,5 @@
-import {isNull}from "util";
-import {textWidth}from "../../helper/dom";
+import { isNull } from "util";
+import { textWidth } from "../../helper/dom";
 import uniq from "lodash/uniq";
 
 const ApiService = require("services/ApiService");
@@ -30,9 +30,44 @@ Vue.component("variation-select", {
         };
     },
 
-    computed: Vuex.mapState({
-        currentVariation: state => state.item.variation
-    }),
+    computed:
+    {
+        hasEmptyOption()
+        {
+            const hasEmptyVariation = this.variations.some(variation =>
+            {
+                return variation.attributes.length <= 0;
+            });
+
+            const preselectedVariationExists = this.variations.some(variation =>
+            {
+                return variation.id === this.preselect;
+            });
+
+            if (hasEmptyVariation || !preselectedVariationExists)
+            {
+                // main variation is selectable
+                return true;
+            }
+
+            // Check if all possible combinations can be selected or if an empty option is required to reset the current selection
+            const attributeCombinationCount = Object.keys(this.attributes)
+                .map(attributeId =>
+                {
+                    return Object.keys(this.attributes[attributeId].values).length;
+                })
+                .reduce((prod, current) =>
+                {
+                    return prod * current;
+                }, 1);
+
+            return (attributeCombinationCount * Object.keys(this.variationUnits).length) !== this.variations.length;
+
+        },
+        ...Vuex.mapState({
+            currentVariation: state => state.item.variation
+        })
+    },
 
     created()
     {
@@ -244,7 +279,7 @@ Vue.component("variation-select", {
             {
                 // get variation data from remote
                 ApiService
-                    .get("/rest/io/variations/" + variationId, {template: "Ceres::Item.SingleItem"})
+                    .get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" })
                     .done(response =>
                     {
                         // store received variation data for later reuse
@@ -252,7 +287,7 @@ Vue.component("variation-select", {
 
                         this.$store.commit("setVariation", response);
 
-                        document.dispatchEvent(new CustomEvent("onVariationChanged", {detail: {attributes: response.attributes, documents: response.documents}}));
+                        document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
 
                         this.$emit("is-valid-change", true);
                     });
@@ -293,7 +328,7 @@ Vue.component("variation-select", {
                     const title = document.getElementsByTagName("title")[0].innerHTML;
 
                     window.history.replaceState({}, title, url);
-                    document.dispatchEvent(new CustomEvent("onHistoryChanged", {detail: {title: title, url:url}}));
+                    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: title, url:url } }));
 
                 }
             },

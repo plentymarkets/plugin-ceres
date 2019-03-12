@@ -3,6 +3,7 @@
     "label": "Widget.breadcrumbLabel",
     "previewImageURL": "/images/widgets/breadcrumb.svg",
     "type": "header",
+    "categories": ["header"],
     "position": 0,
     "widgetClass": "Ceres\\Widgets\\Header\\BreadcrumbWidget",
     "settings": {

@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "../helper/utils";
+import { isNullOrUndefined } from "../helper/utils";
 
 Vue.filter("fileName", path =>
 {

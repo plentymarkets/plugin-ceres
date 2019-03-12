@@ -1,5 +1,5 @@
-import {isNullOrUndefined}from "../helper/utils";
-import {floatLength}from "../helper/number";
+import { isNullOrUndefined } from "../helper/utils";
+import { floatLength } from "../helper/number";
 
 Vue.filter("numberFormat", function(number, decimals, separator)
 {

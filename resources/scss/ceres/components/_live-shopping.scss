@@ -135,6 +135,6 @@
 @for $i from 10 to -1 {
     .progress-#{$i * 10}
     {
-        background-color: mix($brand-success, $brand-danger, $i * 10);
+        background-color: mix($success, $danger, $i * 10);
     }
 }

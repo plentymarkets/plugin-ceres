@@ -2,7 +2,8 @@
     "identifier": "Ceres::ItemListWidget",
     "label": "Widget.itemListLabel",
     "previewImageURL": "/images/widgets/item-list.svg",
-    "type": "default",
+    "type": "static",
+    "categories": ["item"],
     "position": 700,
     "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
     "settings": {
@@ -10,42 +11,7 @@
             "type": "select",
             "required": true,
             "defaultValue": "primary",
-            "options": {
-                "name": "Widget.widgetAppearanceLabel",
-                "tooltipText": "Widget.widgetAppearanceTooltip",
-                "listBoxValues": [
-                    {
-                        "value": "primary",
-                        "caption": "Widget.widgetAppearancePrimary",
-                        "position": 0
-                    },
-                    {
-                        "value": "secondary",
-                        "caption": "Widget.widgetAppearanceSecondary",
-                        "position": 1
-                    },
-                    {
-                        "value": "success",
-                        "caption": "Widget.widgetAppearanceSuccess",
-                        "position": 2
-                    },
-                    {
-                        "value": "info",
-                        "caption": "Widget.widgetAppearanceInfo",
-                        "position": 3
-                    },
-                    {
-                        "value": "warning",
-                        "caption": "Widget.widgetAppearanceWarning",
-                        "position": 4
-                    },
-                    {
-                        "value": "danger",
-                        "caption": "Widget.widgetAppearanceDanger",
-                        "position": 5
-                    }
-                ]
-            }
+            "options": "@include(appearance)"
         },
         "headlineStyle": {
             "type": "select",
@@ -105,8 +71,23 @@
                         "value": "tag_list",
                         "caption": "Widget.itemListListTypeTaglist",
                         "position": 2
+                    },
+                    {
+                        "value": "manufacturer",
+                        "caption": "Widget.itemListListTypeManufacturer",
+                        "position": 3
                     }
                 ]
+            }
+        },
+        "manufacturerId": {
+            "type": "manufacturer",
+            "required": false,
+            "isVisible": "listType === 'manufacturer'",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.itemListListTypeManufacturer",
+                "tooltipText": "Widget.itemListManufacturerTooltip"
             }
         },
         "categoryId": {
@@ -217,6 +198,16 @@
                         "value": "item.random",
                         "caption": "Widget.itemRandom",
                         "position": 15
+                    },
+                    {
+                        "value": "variation.position_asc",
+                        "caption": "Widget.itemVariationTopseller_asc",
+                        "position": 16
+                    },
+                    {
+                        "value": "variation.position_desc",
+                        "caption": "Widget.itemVariationTopseller_desc",
+                        "position": 17
                     }
                 ]
             }
@@ -224,7 +215,6 @@
         "maxItems": {
             "type": "number",
             "required": true,
-            "isVisible": "listType !== 'last_seen'",
             "defaultValue": "4",
             "options": {
                 "name": "Widget.itemListMaxItemsLabel",
@@ -237,7 +227,7 @@
             "defaultValue": 4,
             "options": {
                 "name": "Widget.itemListItemsPerPageLabel",
-                "tooltipText": "Widget.itemsListItemsPerPageTooltip",
+                "tooltipText": "Widget.itemListItemsPerPageTooltip",
                 "listBoxValues": [
                     {
                         "value": 1,

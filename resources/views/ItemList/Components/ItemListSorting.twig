@@ -1,9 +1,0 @@
-<script type="x/template" id="vue-item-list-sorting">
-    <div class="list-sort">
-        <select class="custom-select" v-model="selectedSorting" @change="updateSorting()">
-            <option :value="key" v-for="(value, key) in sortingList" :selected="selectedSorting == key">
-                ${ value }
-            </option>
-        </select>
-    </div>
-</script>

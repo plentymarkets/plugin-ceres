@@ -1,10 +1,12 @@
 @import "mixins/mixins";
 
+@import "Checkout/provider-select-widget";
+@import "Checkout/shipping-privacy-check";
+@import "Common/faq-widget";
 @import "Common/image-box-widget";
 @import "Common/image-carousel-widget";
 @import "Common/item-list-widget";
 @import "Common/legal-information-widget";
-@import "Common/link-list-widget";
 @import "Common/list-widget";
 @import "Common/live-shopping-widget";
 @import "Common/newsletter-widget";
@@ -12,3 +14,5 @@
 @import "Common/title-bar-widget";
 @import "Grid/grid-widget";
 @import "Helper/base-widget";
+@import "Helper/widget-appearance";
+@import "Helper/widget-placeholder";

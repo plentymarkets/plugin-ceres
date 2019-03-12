@@ -16,7 +16,7 @@ const mutations =
             state.orderData = orderData;
         },
 
-        updateOrderReturnItems(state, {quantity, orderItem})
+        updateOrderReturnItems(state, { quantity, orderItem })
 		{
             if (quantity <= orderItem.quantity)
 			{
@@ -26,12 +26,12 @@ const mutations =
 				{
                     if (orderItemIndex === -1)
                     {
-                        state.orderReturnItems.push({quantity, orderItem});
+                        state.orderReturnItems.push({ quantity, orderItem });
                     }
                     else
                     {
                         state.orderReturnItems.splice(orderItemIndex, 1);
-                        state.orderReturnItems.splice(orderItemIndex, 0, {quantity, orderItem});
+                        state.orderReturnItems.splice(orderItemIndex, 0, { quantity, orderItem });
                     }
                 }
                 else
@@ -49,7 +49,7 @@ const mutations =
 
 const actions =
     {
-        sendOrderReturn({state})
+        sendOrderReturn({ state })
 		{
             return new Promise((resolve, reject) =>
             {
@@ -62,7 +62,7 @@ const actions =
                         variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
                     }
 
-                    ApiService.post("/rest/io/order/return", {orderId: state.orderData.order.id, variationIds, returnNote: state.orderReturnNote})
+                    ApiService.post("/rest/io/order/return", { orderId: state.orderData.order.id, variationIds, returnNote: state.orderReturnNote })
                         .done(data =>
                         {
                             resolve(data);

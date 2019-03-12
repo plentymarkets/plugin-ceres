@@ -1,6 +1,17 @@
-<div class="widget widget-grid widget-grid-1-1-1-1">
-    <div class="widget-inner" data-builder-child-container="first">{{ children.first | raw }}</div>
-    <div class="widget-inner" data-builder-child-container="second">{{ children.second | raw }}</div>
-    <div class="widget-inner" data-builder-child-container="third">{{ children.third | raw }}</div>
-    <div class="widget-inner" data-builder-child-container="fourth">{{ children.fourth | raw }}</div>
+<div class="widget widget-grid row">
+    <div class="widget-inner col-12 {{ gridLayouts.oneToOneToOneToOne[0] }}">
+        <div{% if isPreview %} data-builder-child-container="first"{% endif %}>{{ children.first | raw }}</div>
+    </div>
+
+    <div class="widget-inner col-12 {{ gridLayouts.oneToOneToOneToOne[1] }}">
+        <div{% if isPreview %} data-builder-child-container="second"{% endif %}>{{ children.second | raw }}</div>
+    </div>
+
+    <div class="widget-inner col-12 {{ gridLayouts.oneToOneToOneToOne[2] }}">
+        <div{% if isPreview %} data-builder-child-container="third"{% endif %}>{{ children.third | raw }}</div>
+    </div>
+
+    <div class="widget-inner col-12 {{ gridLayouts.oneToOneToOneToOne[3] }}">
+        <div{% if isPreview %} data-builder-child-container="fourth"{% endif %}>{{ children.fourth | raw }}</div>
+    </div>
 </div>

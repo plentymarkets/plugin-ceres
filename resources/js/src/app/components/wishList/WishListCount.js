@@ -1,4 +1,4 @@
-import {isDefined}from "../../helper/utils";
+import { isDefined } from "../../helper/utils";
 const ApiService = require("services/ApiService");
 
 Vue.component("wish-list-count", {
@@ -21,7 +21,7 @@ Vue.component("wish-list-count", {
     {
         this.$options.template = this.template;
 
-        ApiService.get("/rest/io/itemWishList", {}, {keepOriginalResponse: true})
+        ApiService.get("/rest/io/itemWishList", {}, { keepOriginalResponse: true })
             .done(response =>
             {
                 if (isDefined(response.data))

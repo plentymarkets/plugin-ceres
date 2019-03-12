@@ -1,13 +1,11 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
-import {isNullOrUndefined}from "../../../helper/utils";
+import { isNullOrUndefined } from "../../../helper/utils";
+import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
 
 const NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
-
-    delimiters: ["${", "}"],
-
     props: [
         "basketItem",
         "size",
@@ -74,9 +72,9 @@ Vue.component("basket-list-item", {
         {
             let price = 0.00;
 
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
             {
-                price = this.basketItem.price;
+                price = this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
             }
             else
             {
@@ -84,23 +82,30 @@ Vue.component("basket-list-item", {
             }
             return this.basketItem.quantity * (price + this.propertySurchargeSum);
         },
+
         unitPrice()
         {
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
             {
-                return this.basketItem.price;
+                return this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
             }
 
             return this.basketItem.variation.data.prices.default.unitPrice.value;
         },
+
         basePrice()
         {
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
             {
                 return this.basketItem.variation.data.prices.specialOffer.basePrice;
             }
 
             return this.basketItem.variation.data.prices.default.basePrice;
+        },
+
+        transformedVariationProperties()
+        {
+            return transformBasketItemProperties(this.basketItem, ["empty"], "displayInOrderProcess");
         },
 
         ...Vuex.mapState({
@@ -127,7 +132,7 @@ Vue.component("basket-list-item", {
                 this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
+                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: this.basketItem }));
                         this.waitingForDelete = false;
                     },
                     error =>
@@ -149,10 +154,10 @@ Vue.component("basket-list-item", {
 
                 const origQty = this.basketItem.quantity;
 
-                this.$store.dispatch("updateBasketItemQuantity", {basketItem: this.basketItem, quantity: quantity}).then(
+                this.$store.dispatch("updateBasketItemQuantity", { basketItem: this.basketItem, quantity: quantity }).then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: this.basketItem}));
+                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: this.basketItem }));
                         this.waiting = false;
                     },
                     error =>

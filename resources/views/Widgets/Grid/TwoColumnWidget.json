@@ -3,10 +3,8 @@
     "label": "Widget.gridTwoColumnLabel",
     "previewImageURL": "/images/widgets/grid-2-col.svg",
     "type": "structure",
-    "position": 100,
-    "allowedNestingTypes": [
-        "default"
-    ],
+    "categories": ["structure"],
+    "position": 300,
     "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
     "settings": {
         "layout": {
@@ -31,7 +29,22 @@
                         "value": "oneToTwo",
                         "caption": "Widget.gridTwoColumnLayoutOneToTwo",
                         "position": 2
-                    }
+                    },
+                    {
+                        "value": "fiveToSeven",
+                        "caption": "Widget.gridTwoColumnLayoutFiveToSeven",
+                        "position": 3
+                    },
+                    {
+                        "value": "sevenToFive",
+                        "caption": "Widget.gridTwoColumnLayoutSevenToFive",
+                        "position": 4
+                    },
+                    {
+                        "value": "nineToThree",
+                        "caption": "Widget.gridTwoColumnLayoutNineToThree",
+                        "position": 5
+                    }                    
                 ]
             }
         }

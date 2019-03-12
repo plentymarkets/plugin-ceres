@@ -13,7 +13,7 @@ Vue.component("order-property-list", {
     {
         return {
             activeSlide: 0,
-            touchedSlides: {0: true}
+            touchedSlides: { 0: true }
         };
     },
 

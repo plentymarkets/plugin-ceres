@@ -36,7 +36,7 @@
     {
 	    display: flex;
 	    flex-flow: column nowrap;
-    	flex: 1;
+    	flex: 1 1 auto;
         overflow: auto;
 
         @include media-breakpoint-only(sm)
@@ -49,6 +49,7 @@
     {
 	    display: flex;
 	    flex-flow: column nowrap;
+        flex: 0 0 auto;
         border-top: 1px solid $gray-lighter;
 
         @extend .small;
@@ -70,38 +71,4 @@
 {
     display: table;
     width: 100%;
-}
-
-/* Compatibility for IE */
-html.ie .basket-preview .basket-item-container {
-
-    // Float both containers
-	.meta-container-wrapper-inner {
-        display: block;
-        
-        .meta-container {
-            width: 50%;
-            display: block;
-            float: left;
-        }
-	}
-      
-	.basket-item-container-right {
-        width: 50%;
-        display: block;
-        float: left;
-
-        // Align childs right
-        .qty-box-container {
-            margin-right: 0;
-
-            .qty-box {
-                margin: 0 0 5px 0;
-    
-                .qty-input {
-                    margin-left: auto;
-                }
-            }
-        }
-	}
 }

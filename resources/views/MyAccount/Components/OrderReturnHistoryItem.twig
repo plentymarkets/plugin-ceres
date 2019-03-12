@@ -3,13 +3,16 @@
 <script type="x/template" id="vue-order-return-history-item">
     <article class="cmp cmp-order-item">
         <div class="item-details small">
-
             <div class="item-name">
-                <h5 class="h4">{{ trans("Ceres::Template.returnHistoryStatus") }}: ${ returnOrder.order.statusName }</h5>
+                <h5
+                    v-if="returnOrder.status && returnOrder.status.length > 0"
+                    class="h4">
+                    {{ trans("Ceres::Template.returnHistoryStatus") }}: ${ returnOrder.status }
+                </h5>
             </div>
 
             <div class="row">
-                <div class="col-xs-12 col-md-12">
+                <div class="col-12 col-md-12">
                     <div class="row">
                         <div class="col-md-2">
                             <strong>{{ trans("Ceres::Template.returnHistoryReturnId") }}: </strong>
@@ -36,8 +39,8 @@
 
             {# show initial #}
             <div class="row">
-                <div class="col-md-6 m-t-1 order-return-history-item" v-for="orderItem in itemsToRender">
-                    <div class="col-md-3">
+                <div class="col-md-6 mt-3 order-return-history-item" v-for="orderItem in itemsToRender">
+                    <div class="col-md-4">
                         <div class="order-return-history-image-container">
                             <a :href="returnOrder.itemURLs[orderItem.itemVariationId]">
                                 <img class="order-return-history-image" :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt=" orderItem | itemBundleName " :title="orderItem | itemBundleName">

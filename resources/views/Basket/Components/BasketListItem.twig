@@ -21,7 +21,7 @@
                 <div class="meta-container-wrapper-inner">
                     <div class="meta-container">
                         <div>
-                            <a :href="basketItem.variation.data | itemURL" class="item-name">
+                            <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance">
                                 ${ basketItem.variation.data | itemName }
                             </a>
 
@@ -49,6 +49,17 @@
                                     <span>${ attribute.value.names.name }</span>
                                 </div>
                             </div>
+
+                            {% if services.template.isCurrentTemplate("tpl.checkout") %}
+                                <div class="item-small-prices text-muted">
+                                    <template v-for="propertyGroup in transformedVariationProperties">
+                                        <div v-for="property in propertyGroup.properties">
+                                            <strong v-if="propertyGroup.name">${ propertyGroup.name }:</strong>
+                                            <span>${ property.names.name }</span>
+                                        </div>
+                                    </template>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
     
@@ -113,7 +124,7 @@
                 <div class="item-additional-information-container">
                     <div class="item-additional-information" v-if="size === 'large' && showMoreInformation">
                         {% if "basket.item.item_id" in basketDetailsData %}
-                            <div class="m-t-1">
+                            <div class="mt-3">
                                 <strong>{{ trans("Ceres::Template.basketItemId") }}:</strong>
                                 <span>${ basketItem.itemId }</span>
                             </div>
@@ -134,11 +145,11 @@
                         {% endif %}
 
                         {% if "basket.item.description_long" in basketDetailsData %}
-                            <p class="m-y-1" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.description"></p>
+                            <p class="my-3" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.description"></p>
                         {% endif %}
 
                         {% if "basket.item.description_short" in basketDetailsData %}
-                            <p class="m-y-1" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.shortDescription"></p>
+                            <p class="my-3" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.shortDescription"></p>
                         {% endif %}
                     </div>
 
