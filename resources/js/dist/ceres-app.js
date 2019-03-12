@@ -17427,6 +17427,14 @@ Vue.component("add-item-to-basket-overlay", {
         return "";
       }
 
+      var property = this.latestBasketEntry.item.properties.find(function (property) {
+        return parseInt(property.property.id) === parseInt(propertyId);
+      });
+
+      if ((0, _utils.isNullOrUndefined)(property) || !property.property.isOderProperty) {
+        return "";
+      }
+
       var orderParam = orderParams.find(function (param) {
         return parseInt(param.property.id) === parseInt(propertyId);
       });
