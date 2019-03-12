@@ -17756,10 +17756,6 @@ Vue.component("coupon", {
     template: {
       type: String,
       default: "#vue-coupon"
-    },
-    appearance: {
-      type: String,
-      default: "primary"
     }
   },
   data: function data() {
@@ -17874,10 +17870,6 @@ Vue.component("basket-list", {
     size: {
       type: String,
       default: "small"
-    },
-    appearance: {
-      type: String,
-      default: "primary"
     }
   },
   computed: Vuex.mapState({
@@ -17913,7 +17905,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
-  props: ["basketItem", "size", "language", "template", "appearance"],
+  props: ["basketItem", "size", "language", "template"],
   data: function data() {
     return {
       waiting: false,
@@ -18106,10 +18098,6 @@ Vue.component("accept-gtc-check", {
       type: String,
       default: "#vue-accept-gtc-check"
     },
-    appearance: {
-      type: String,
-      default: "primary"
-    },
     hideCheckbox: {
       type: Boolean
     },
@@ -18130,15 +18118,7 @@ Vue.component("accept-gtc-check", {
       isChecked: this.isPreselected
     };
   },
-  computed: _objectSpread({
-    appearanceClass: function appearanceClass() {
-      if (!this.showError) {
-        return "text-".concat(this.appearance);
-      }
-
-      return null;
-    }
-  }, Vuex.mapState({
+  computed: _objectSpread({}, Vuex.mapState({
     showError: function showError(state) {
       return state.checkout.validation.gtc.showError;
     }
@@ -18483,13 +18463,6 @@ Vue.component("place-order", {
     targetContinue: {
       type: String
     },
-    appearance: {
-      type: [String, null],
-      default: "success",
-      validator: function validator(value) {
-        return ["primary", "secondary", "success", "info", "warning", "danger"].indexOf(value) !== -1;
-      }
-    },
     buttonSize: {
       type: [String, null],
       default: null,
@@ -18505,7 +18478,7 @@ Vue.component("place-order", {
   },
   computed: _objectSpread({
     buttonClasses: function buttonClasses() {
-      var classes = ["btn-".concat(this.appearance)];
+      var classes = [];
 
       if ((0, _utils.isDefined)(this.buttonSize)) {
         classes.push("btn-".concat(this.buttonSize));
@@ -21197,11 +21170,7 @@ Vue.component("item-bundle", {
       default: "#vue-item-bundle"
     },
     bundleType: String,
-    bundleComponents: Array,
-    appearance: {
-      type: String,
-      default: "primary"
-    }
+    bundleComponents: Array
   },
   data: function data() {
     return {
@@ -23519,10 +23488,6 @@ Vue.component("account-settings", {
       type: Object,
       // eslint-disable-next-line
       default: function _default() {}
-    },
-    appearance: {
-      type: String,
-      default: "primary"
     }
   },
   data: function data() {
@@ -23637,10 +23602,6 @@ Vue.component("bank-data-select", {
     },
     contactId: {
       type: String
-    },
-    appearance: {
-      type: String,
-      default: "primary"
     }
   },
   data: function data() {
@@ -23879,10 +23840,6 @@ Vue.component("change-payment-method", {
       type: String,
       default: "#vue-change-payment-method"
     },
-    appearance: {
-      type: String,
-      default: "primary"
-    },
     currentOrder: {
       type: Object
     },
@@ -24098,10 +24055,6 @@ Vue.component("order-documents", {
       type: String,
       default: "#vue-order-documents"
     },
-    appearance: {
-      type: String,
-      default: "primary"
-    },
     documents: {
       type: Array,
       default: function _default() {
@@ -24233,10 +24186,6 @@ Vue.component("order-history-list", {
       type: String,
       default: "#vue-order-history-list"
     },
-    appearance: {
-      type: String,
-      default: "primary"
-    },
     ordersPerPage: {
       type: Number,
       default: 5
@@ -24326,10 +24275,6 @@ Vue.component("order-history-list-item", {
       type: String,
       default: "#vue-order-history-list-item"
     },
-    appearance: {
-      type: String,
-      default: "primary"
-    },
     orderDetailsTemplate: {
       type: String,
       default: "Ceres::MyAccount.Partials.OrderHistoryListItemDetails"
@@ -24370,8 +24315,7 @@ Vue.component("order-history-list-item", {
             data: {
               showAllOrderItems: _this.showAllOrderItems,
               allowPaymentProviderChange: _this.allowPaymentProviderChange,
-              allowReturn: _this.allowReturn,
-              appearance: _this.appearance
+              allowReturn: _this.allowReturn
             },
             store: window.ceresStore,
             render: compiled.render,
@@ -24532,10 +24476,6 @@ Vue.component("order-return-history-list", {
       type: String,
       default: "#vue-order-return-history-list"
     },
-    appearance: {
-      type: String,
-      default: "primary"
-    },
     hintText: {
       type: String,
       default: null
@@ -24598,10 +24538,6 @@ Vue.component("order-return-history-list-item", {
     template: {
       type: String,
       default: "#vue-order-return-history-list-item"
-    },
-    appearance: {
-      type: String,
-      default: "primary"
     },
     returnOrder: {
       type: Object,
@@ -24696,10 +24632,6 @@ Vue.component("newsletter-input", {
     showPrivacyPolicyCheckbox: {
       type: Boolean,
       default: true
-    },
-    appearance: {
-      type: String,
-      default: "primary"
     },
     emailFolder: {
       type: Number,
