@@ -59,6 +59,9 @@
         }
     }
     .nav-tabs {
+        @include media-breakpoint-only(xs) {
+            display: block;
+        }
         .nav-item {
             float: none;
             .nav-link {
