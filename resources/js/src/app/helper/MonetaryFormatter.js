@@ -142,8 +142,7 @@ const MonetaryFormatter = (function()
             case T_DECIMAL: {
                 const numberOfDecimals = parseInt(partial.value);
 
-                value = parseFloat(value.toFixed(numberOfDecimals));
-                let result = (value * Math.pow(10, numberOfDecimals))
+                let result = Math.round(value * Math.pow(10, numberOfDecimals))
                     .toFixed(0)
                     .substr(-1 * numberOfDecimals, numberOfDecimals);
 
