@@ -11,7 +11,7 @@
         {{ Twig.set("overrideBillingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.BillingAddress"])) }}
         {{ Twig.if("overrideBillingAddress | trim is empty") }}
 
-            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
+            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
                 {% if hintText is empty %}
                     {{ Twig.if("services.template.isCurrentTemplate('tpl.checkout')") }}
                         <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutInvoiceAddress")) }}</h3>
@@ -47,7 +47,7 @@
         {{ Twig.set("overrideShippingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.ShippingAddress"])) }}
         {{ Twig.if("overrideShippingAddress | trim is empty") }}
 
-            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
+            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
                 {% if hintText is empty %}
                     {{ Twig.if("services.template.isCurrentTemplate('tpl.checkout')") }}
                         <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutShippingAddress")) }}</h3>

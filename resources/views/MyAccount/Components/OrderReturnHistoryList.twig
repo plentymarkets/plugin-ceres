@@ -2,8 +2,6 @@
 
 <script type="x/template" id="vue-order-return-history-list">
     <div class="order-return-history-list">
-        <h3>{{ trans("Ceres::Template.returnHistory") }}</h3>
-        <div v-if="hintText" v-html="hintText"></div>
 
 		<div class="row history-pagination mb-2" v-if="returnsList.totalsCount > returnsPerPage">
 			<div class="col-sm-12">

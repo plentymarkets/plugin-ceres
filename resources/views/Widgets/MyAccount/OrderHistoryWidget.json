@@ -14,14 +14,6 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "hintText": {
-            "type": "codeEditor",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.orderHistoryHintTextLabel",
-                "tooltipText": "Widget.orderHistoryHintTextTooltip"
-            }
-        },
         "ordersPerPage": {
             "type": "select",
             "defaultValue": 5,

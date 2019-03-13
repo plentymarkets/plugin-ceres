@@ -5,7 +5,7 @@
 {% set hintText = widget.settings.hintText.mobile %}
 
 <div class="widget widget-contact-wish">
-    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
+    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}
             <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutContactWish")) }}</h3>
         {% else %}
