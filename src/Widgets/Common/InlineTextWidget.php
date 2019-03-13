@@ -6,5 +6,5 @@ use Ceres\Widgets\Helper\BaseWidget;
 
 class InlineTextWidget extends BaseWidget
 {
-    protected $template = "Ceres::Widgets.Common.TextWidget";
+    protected $template = "Ceres::Widgets.Common.InlineTextWidget";
 }
