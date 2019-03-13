@@ -1,0 +1,45 @@
+{
+    "identifier": "Ceres::InlineTextWidget",
+    "label": "Widget.textLabel",
+    "previewImageURL": "/images/widgets/text.svg",
+    "type": "static",
+    "categories": ["text"],
+    "position": 800,
+    "widgetClass": "Ceres\\Widgets\\Common\\InlineTextWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "customPadding": {
+            "type": "checkbox",
+            "options": {
+                "name": "Widget.widgetCustomPadding"
+            }
+        },
+        "padding": {
+            "type": "spacing",
+            "isVisible": "!!customPadding",
+            "options": {
+                "units": ["px", "rem"],
+                "direction": "all"
+            }
+        },
+        "customMargin": {
+            "type": "checkbox",
+            "options": {
+                "name": "Widget.widgetCustomMargin"
+            }
+        },
+        "margin": {
+            "type": "spacing",
+            "isVisible": "!!customMargin",
+            "options": {
+                "units": ["px", "rem"],
+                "direction": "all"
+            }
+        }
+    }
+}
