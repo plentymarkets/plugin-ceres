@@ -17427,6 +17427,14 @@ Vue.component("add-item-to-basket-overlay", {
         return "";
       }
 
+      var property = this.latestBasketEntry.item.properties.find(function (property) {
+        return parseInt(property.property.id) === parseInt(propertyId);
+      });
+
+      if ((0, _utils.isNullOrUndefined)(property) || !property.property.isOderProperty) {
+        return "";
+      }
+
       var orderParam = orderParams.find(function (param) {
         return parseInt(param.property.id) === parseInt(propertyId);
       });
@@ -25789,7 +25797,7 @@ Vue.filter("currency", function (price) {
     return price;
   }
 
-  return formatter.format(parseFloat(price).toFixed(2), App.activeCurrency);
+  return formatter.format(parseFloat(price), App.activeCurrency);
 });
 
 },{"../helper/MonetaryFormatter":251}],233:[function(require,module,exports){
@@ -26346,11 +26354,13 @@ var MonetaryFormatter = function () {
           type: T_DIGIT
         });
         pattern = pattern.substr(5);
-      } else if (pattern.indexOf(".00") === 0) {
+      } else if (/^\.0+/.test(pattern)) {
+        var match = /^\.(0+)/.exec(pattern);
         parsed.push({
-          type: T_DECIMAL
+          type: T_DECIMAL,
+          value: match[1].length
         });
-        pattern = pattern.substr(3);
+        pattern = pattern.substr(match[0].length);
       } else if (pattern.indexOf("-") === 0) {
         parsed.push({
           type: T_SIGN
@@ -26366,21 +26376,6 @@ var MonetaryFormatter = function () {
     }
 
     return parsed;
-  }
-
-  function _getDecimalValue(value) {
-    var extend = 0;
-    value += "";
-
-    if (value.length === 1) {
-      value = extend + value;
-    } else {
-      while (value.length < 2) {
-        value += extend;
-      }
-    }
-
-    return value;
   }
 
   MonetaryFormatter.prototype.setPattern = function (pattern) {
@@ -26446,7 +26441,14 @@ var MonetaryFormatter = function () {
 
         case T_DECIMAL:
           {
-            return _this2.separatorDecimals + _getDecimalValue(Math.floor(value * 1000 / 10).toFixed(0).substr(-2, 2));
+            var numberOfDecimals = parseInt(partial.value);
+            var result = Math.round(value * Math.pow(10, numberOfDecimals)).toFixed(0).substr(-1 * numberOfDecimals, numberOfDecimals);
+
+            while (result.length < numberOfDecimals) {
+              result = "0" + result;
+            }
+
+            return _this2.separatorDecimals + result;
           }
 
         case T_CURRENCY:

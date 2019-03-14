@@ -59,7 +59,11 @@
         }
     }
     .nav-tabs {
+        @include media-breakpoint-only(xs) {
+            display: block;
+        }
         .nav-item {
+            cursor: pointer;
             float: none;
             .nav-link {
                 border:1px solid $nav-tabs-border-color;
