@@ -20882,6 +20882,7 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 }
 
 .basket-preview .basket-header {
+  position: relative;
   -ms-flex: 0 0 auto;
       flex: 0 0 auto;
   border-bottom: 1px solid #dcdbd8;
@@ -20895,6 +20896,14 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   .basket-preview .basket-header .basket-header-caption {
     font-size: 1.5rem;
   }
+}
+
+.basket-preview .basket-header .close {
+  height: 100%;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .basket-preview .basket-preview-content {

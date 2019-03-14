@@ -15924,6 +15924,7 @@ html.ie .basket-preview-hover {
 
     .basket-header
     {
+        position: relative;
         -webkit-box-flex: 0;
             -ms-flex: 0 0 auto;
                 flex: 0 0 auto;
@@ -15937,6 +15938,14 @@ html.ie .basket-preview-hover {
             }
 
             font-size: 1.25rem;
+        }
+
+        .close {
+            height: 100%;
+            width: 50px;
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     }
 
