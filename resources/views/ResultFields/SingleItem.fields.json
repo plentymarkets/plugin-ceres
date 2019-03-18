@@ -6,7 +6,6 @@
     "id",
     "item.id",
     "item.manufacturer.externalName",
-    "item.documents.data",
     "item.ageRestriction",
     "item.customsTariffNumber",
     "item.producingCountry.names.*",
