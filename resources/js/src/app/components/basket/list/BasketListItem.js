@@ -73,15 +73,15 @@ Vue.component("basket-list-item", {
         {
             let price = 0.00;
 
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
+            if (this.showNetPrice)
             {
-                price = this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
+                price = (this.basketItem.price * 100) / (100 + this.basketItem.vat);
             }
             else
             {
-                price = this.basketItem.variation.data.prices.default.unitPrice.value;
+                price = this.basketItem.price;
             }
-            return this.basketItem.quantity * (price + this.propertySurchargeSum);
+            return this.basketItem.quantity * price;
         },
 
         unitPrice()
@@ -110,7 +110,8 @@ Vue.component("basket-list-item", {
         },
 
         ...Vuex.mapState({
-            isBasketLoading: state => state.basket.isBasketLoading
+            isBasketLoading: state => state.basket.isBasketLoading,
+            showNetPrice: state => state.basket.showNetPrices
         })
     },
 
