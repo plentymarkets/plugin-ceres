@@ -13,6 +13,49 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
+        "aspectRatio": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "auto",
+            "options": {
+                "name": "Widget.imageBoxAspectRatioLabel",
+                "tooltipText": "Widget.imageBoxAspectRatioTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "auto",
+                        "caption": "Widget.imageBoxAspectRatioAuto"
+                    },
+                    {
+                        "value": "prop-xs-3-1",
+                        "caption": "Widget.imageBoxAspectRatioThreeToOne"
+                    },
+                    {
+                        "value": "prop-xs-2-1",
+                        "caption": "Widget.imageBoxAspectRatioTwoToOne"
+                    },
+                    {
+                        "value": "prop-xs-3-2",
+                        "caption": "Widget.imageBoxAspectRatioThreeToTwo"
+                    },
+                    {
+                        "value": "prop-xs-1-1",
+                        "caption": "Widget.imageBoxAspectRatioOneToOne"
+                    },
+                    {
+                        "value": "prop-xs-2-3",
+                        "caption": "Widget.imageBoxAspectRatioTwoToThree"
+                    },
+                    {
+                        "value": "prop-xs-1-2",
+                        "caption": "Widget.imageBoxAspectRatioOneToTwo"
+                    },
+                    {
+                        "value": "prop-xs-1-3",
+                        "caption": "Widget.imageBoxAspectRatioOneToThree"
+                    }
+                ]
+            }
+        },
         "style": {
             "type": "select",
             "required": true,
