@@ -27,19 +27,16 @@
             </label>
         </div>
 
+        {#
         <div v-else-if="inputType === 'selection'">
-            <div class="input-unit order-property-input" :class="{ 'active': property.value, 'error': hasError }">
-                <select :value="property.value" @change="onInputValueChanged($event.target.value)" class="custom-select">
+            <div class="input-unit">
+                <select class="custom-select">
                     <option :selected="true" :value="null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
-                    <option :selected="property.value === id" :value="id" v-for="(value, id) in property.selectionValues">${ value.name }</option>
                 </select>
-                <label>
-                    ${property.names.name}
-                    <strong v-if="surcharge > 0">(+ ${ surcharge | currency})</strong>
-                    *
-                </label>
+                <label>${property.names.name}</label>
             </div>
         </div>
+        #}
 
         <div v-else-if="inputType === 'file'">
             <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'isLoading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">

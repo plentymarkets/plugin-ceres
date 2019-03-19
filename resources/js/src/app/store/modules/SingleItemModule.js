@@ -165,7 +165,7 @@ const getters =
             {
                 let missingProperties = state.variation.documents[0].data.properties.filter(property =>
                 {
-                    // selection isn't supported yet - TODO check
+                    // selection isn't supported yet
                     return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
                 });
 
