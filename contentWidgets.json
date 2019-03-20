@@ -2555,13 +2555,13 @@
         "position": 300,
         "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
         "settings": {
-            "layout": {
+            "layoutDesktop": {
                 "type": "select",
                 "required": true,
                 "defaultValue": "oneToOne",
                 "options": {
-                    "name": "Widget.gridTwoColumnLayoutLabel",
-                    "tooltipText": "Widget.gridTwoColumnLayoutTooltip",
+                    "name": "Widget.gridTwoColumnLayoutDesktopLabel",
+                    "tooltipText": "Widget.gridTwoColumnLayoutDesktopTooltip",
                     "listBoxValues": [
                         {
                             "value": "oneToOne",
@@ -2592,6 +2592,88 @@
                             "value": "nineToThree",
                             "caption": "Widget.gridTwoColumnLayoutNineToThree",
                             "position": 5
+                        },
+                        {
+                            "value": "threeToNine",
+                            "caption": "Widget.gridTwoColumnLayoutThreeToNine",
+                            "position": 6
+                        },
+                        {
+                            "value": "stacked",
+                            "caption": "Widget.gridTwoColumnLayoutStacked",
+                            "position": 7
+                        }
+                    ]
+                }
+            },
+            "layoutTablet": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "oneToOne",
+                "options": {
+                    "name": "Widget.gridTwoColumnLayoutTabletLabel",
+                    "tooltipText": "Widget.gridTwoColumnLayoutTabletTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "oneToOne",
+                            "caption": "Widget.gridTwoColumnLayoutOneToOne",
+                            "position": 0
+                        },
+                        {
+                            "value": "twoToOne",
+                            "caption": "Widget.gridTwoColumnLayoutTwoToOne",
+                            "position": 1
+                        },
+                        {
+                            "value": "oneToTwo",
+                            "caption": "Widget.gridTwoColumnLayoutOneToTwo",
+                            "position": 2
+                        },
+                        {
+                            "value": "fiveToSeven",
+                            "caption": "Widget.gridTwoColumnLayoutFiveToSeven",
+                            "position": 3
+                        },
+                        {
+                            "value": "sevenToFive",
+                            "caption": "Widget.gridTwoColumnLayoutSevenToFive",
+                            "position": 4
+                        },
+                        {
+                            "value": "nineToThree",
+                            "caption": "Widget.gridTwoColumnLayoutNineToThree",
+                            "position": 5
+                        },
+                        {
+                            "value": "threeToNine",
+                            "caption": "Widget.gridTwoColumnLayoutThreeToNine",
+                            "position": 6
+                        },
+                        {
+                            "value": "stacked",
+                            "caption": "Widget.gridTwoColumnLayoutStacked",
+                            "position": 7
+                        }
+                    ]
+                }
+            },
+            "layoutMobile": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "stacked",
+                "options": {
+                    "name": "Widget.gridTwoColumnLayoutMobileLabel",
+                    "tooltipText": "Widget.gridTwoColumnLayoutMobileTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "oneToOne",
+                            "caption": "Widget.gridTwoColumnLayoutOneToOne",
+                            "position": 0
+                        },
+                        {
+                            "value": "stacked",
+                            "caption": "Widget.gridTwoColumnLayoutStacked",
+                            "position": 1
                         }
                     ]
                 }

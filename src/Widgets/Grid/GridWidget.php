@@ -33,7 +33,15 @@ class GridWidget extends BaseWidget
                 "nineToThree" => [
                     "col-md-9 widget-prop-2-1",
                     "col-md-3 widget-prop-auto"
-                ],                
+                ],
+                "threeToNine" => [
+                    "col-md-3 widget-prop-auto",
+                    "col-md-9 widget-prop-2-1"
+                ],
+                "stacked" => [
+                    "col-md-12 widget-prop-auto",
+                    "col-md-12 widget-prop-auto"
+                ],                  
                 "oneToOneToOne" => [
                     "col-md-4 widget-prop-3-2",
                     "col-md-4 widget-prop-3-2",
