@@ -18326,7 +18326,7 @@ Vue.component("basket-list-item", {
     itemTotalPrice: function itemTotalPrice() {
       var price = 0.00;
 
-      if (this.showNetPrice) {
+      if (this.showNetPrice && this.basketItem.price === this.basketItem.priceGross) {
         price = this.basketItem.price * 100 / (100 + this.basketItem.vat);
       } else {
         price = this.basketItem.price;
