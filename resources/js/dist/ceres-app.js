@@ -17966,15 +17966,7 @@ Vue.component("basket-list-item", {
       return sum;
     },
     itemTotalPrice: function itemTotalPrice() {
-      var price = 0.00;
-
-      if (this.showNetPrice && this.basketItem.price === this.basketItem.priceGross) {
-        price = this.basketItem.price * 100 / (100 + this.basketItem.vat);
-      } else {
-        price = this.basketItem.price;
-      }
-
-      return this.basketItem.quantity * price;
+      return this.basketItem.quantity * this.basketItem.price;
     },
     unitPrice: function unitPrice() {
       if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer)) {

@@ -71,17 +71,7 @@ Vue.component("basket-list-item", {
 
         itemTotalPrice()
         {
-            let price = 0.00;
-
-            if (this.showNetPrice && this.basketItem.price === this.basketItem.priceGross)
-            {
-                price = (this.basketItem.price * 100) / (100 + this.basketItem.vat);
-            }
-            else
-            {
-                price = this.basketItem.price;
-            }
-            return this.basketItem.quantity * price;
+            return this.basketItem.quantity * this.basketItem.price;
         },
 
         unitPrice()
