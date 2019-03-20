@@ -21703,6 +21703,16 @@ Vue.component("order-property-list-item", {
     },
     surcharge: function surcharge() {
       return this.property.itemSurcharge || this.property.surcharge;
+    },
+    selectedDescription: function selectedDescription() {
+      if (this.inputType !== "selection") {
+        return null;
+      }
+
+      var selectedProperty = this.property.selectedValues.find(function (value) {
+        return value.name === property.value;
+      });
+      return selectedProperty.description;
     }
   }, Vuex.mapState({
     isBasketLoading: function isBasketLoading(state) {
@@ -30568,8 +30578,7 @@ var getters = {
   variationMissingProperties: function variationMissingProperties(state, getters) {
     if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.item.requireOrderProperties) {
       var missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
-        // selection isn't supported yet - TODO check
-        return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
+        return property.property.isShownOnItemPage && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
       });
 
       if (missingProperties.length) {

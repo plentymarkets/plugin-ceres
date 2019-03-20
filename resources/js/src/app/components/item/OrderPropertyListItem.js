@@ -84,6 +84,18 @@ Vue.component("order-property-list-item", {
             return this.property.itemSurcharge || this.property.surcharge;
         },
 
+        selectedDescription()
+        {
+            if (this.inputType !== "selection")
+            {
+                return null;
+            }
+
+            const selectedProperty = this.property.selectedValues.find(value => value.name === property.value);
+
+            return selectedProperty.description;
+        },
+
         ...Vuex.mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties

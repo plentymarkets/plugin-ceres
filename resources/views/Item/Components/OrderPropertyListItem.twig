@@ -27,23 +27,36 @@
             </label>
         </div>
 
-        <div
-            v-else-if="inputType === 'selection'"
-            class="input-unit order-property-input"
-            :class="{ 'active': property.value, 'error': hasError }"
-            v-tooltip
-            data-toggle="tooltip"
-            :title="property.names.description"
-        >
-            <select :value="property.value" @change="onInputValueChanged($event.target.value)" class="custom-select">
-                <option :selected="true" :value="null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
-                <option :selected="property.value === value.name" :value="value.name" v-for="(value, id) in property.selectionValues">${ value.name }</option>
-            </select>
-            <label>
-                ${property.names.name}
-                <strong v-if="surcharge > 0">(+ ${ surcharge | currency})</strong>
-                *
-            </label>
+        <div v-else-if="inputType === 'selection'">
+            <div
+                class="input-unit order-property-input"
+                :class="{ 'active': property.value, 'error': hasError }"
+                v-tooltip
+                data-toggle="tooltip"
+                :title="property.names.description">
+                <select :value="property.value" @change="onInputValueChanged($event.target.value)" class="custom-select">
+                    <option :selected="true" :value="null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+                    <option :selected="property.value === value.name" :value="value.name" v-for="(value, id) in property.selectionValues">${ value.name }</option>
+                </select>
+                <label>
+                    ${property.names.name}
+                    <strong v-if="surcharge > 0">(+ ${ surcharge | currency})</strong>
+                    *
+                </label>
+            </div>
+            <popper v-cloak>
+                <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
+                    <i class="fa fa-info"></i>
+                </button>
+                <div slot="title">
+                    TODO desc
+                </div>
+                <ul slot="content" class='pl-3'>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam est error dicta? Est harum impedit dolorem, veniam ullam non iste perspiciatis delectus doloribus labore adipisci maiores! Hic, maxime enim.
+                    Fuga laboriosam earum possimus nihil consequatur, ex, aliquid vel temporibus placeat perferendis fugiat illum animi odio similique quo, corrupti id error maiores? Cupiditate fugit debitis qui aut blanditiis reiciendis velit?
+                    Fugit magnam voluptates soluta aut?
+                </ul>
+            </popper>
         </div>
 
         <div v-else-if="inputType === 'file'">
