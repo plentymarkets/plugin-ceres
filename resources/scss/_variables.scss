@@ -291,3 +291,18 @@ $shop-builder-colors:
     "warning":    $warning,
     "danger":     $danger
   );
+
+$shop-builder-breakpoints: ("xs", "sm", "lg");
+$shop-builder-breakpoints:
+  (
+    "mobile":   "xs",
+    "tablet":   "sm",
+    "desktop":  "lg"
+  );
+
+$shop-builder-breakpoints-down:
+  (
+    "mobile":   "xs",
+    "tablet":   "md",
+    "desktop":  "xl"
+  );

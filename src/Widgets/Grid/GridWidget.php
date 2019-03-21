@@ -11,36 +11,36 @@ class GridWidget extends BaseWidget
         return [
             "gridLayouts" => [
                 "oneToOne" => [
-                    "col-md-6",
-                    "col-md-6"
+                    "col-md-6 widget-prop-md-3-1",
+                    "col-md-6 widget-prop-md-3-1"
                 ],
                 "twoToOne" => [
-                    "col-md-8 widget-prop-2-1",
-                    "col-md-4 widget-prop-auto"
+                    "col-md-8 widget-prop-md-2-1",
+                    "col-md-4 widget-prop-md-auto"
                 ],
                 "oneToTwo" => [
-                    "col-md-4 widget-prop-auto",
-                    "col-md-8 widget-prop-2-1"
+                    "col-md-4 widget-prop-md-auto",
+                    "col-md-8 widget-prop-md-2-1"
                 ],
                 "fiveToSeven" => [
-                    "col-md-5 widget-prop-auto",
-                    "col-md-7 widget-prop-2-1"
+                    "col-md-5 widget-prop-md-auto",
+                    "col-md-7 widget-prop-md-2-1"
                 ],
                 "sevenToFive" => [
-                    "col-md-7 widget-prop-2-1",
-                    "col-md-5 widget-prop-auto"
+                    "col-md-7 widget-prop-md-2-1",
+                    "col-md-5 widget-prop-md-auto"
                 ],
                 "nineToThree" => [
-                    "col-md-9 widget-prop-2-1",
-                    "col-md-3 widget-prop-auto"
+                    "col-md-9 widget-prop-md-2-1",
+                    "col-md-3 widget-prop-md-auto"
                 ],
                 "threeToNine" => [
-                    "col-md-3 widget-prop-auto",
-                    "col-md-9 widget-prop-2-1"
+                    "col-md-3 widget-prop-md-auto",
+                    "col-md-9 widget-prop-md-2-1"
                 ],
                 "stacked" => [
-                    "col-md-12 widget-prop-auto",
-                    "col-md-12 widget-prop-auto"
+                    "col-md-12 widget-prop-md-3-1 widget-stacked",
+                    "col-md-12 widget-prop-md-3-1"
                 ],                  
                 "oneToOneToOne" => [
                     "col-md-4 widget-prop-3-2",

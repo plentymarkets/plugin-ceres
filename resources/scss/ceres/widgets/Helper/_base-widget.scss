@@ -17,14 +17,28 @@
 {
     .widget
     {
-        margin-bottom: 1rem;
-
         &.widget-grid
         {
             margin-bottom: 0;
         }
 
-        .widget-inner
+        .widget-inner:not(.widget-stacked)
+        {
+            .widget:not(.widget-grid)
+            {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(xs)
+{
+    .widget
+    {
+        margin-bottom: 1rem;
+
+        .widget-inner:not(.widget-stacked)
         {
             .widget:not(.widget-grid)
             {
@@ -62,28 +76,64 @@ header .widget
     }
 }
 
-@include media-breakpoint-up(md)
+@each $display, $breakpoint in $shop-builder-breakpoints
 {
-    @each $i in 1,2,3,4
-    {
-        @each $j in 1,2,3,4
-        {
-            .widget-prop-#{$i}-#{$j} .widget-proportional
-            {
-                padding-bottom: percentage($j / $i);
-            }
+    $infix: breakpoint-infix($breakpoint);
+    $displayEnd: map-get($shop-builder-breakpoints-down, $display);
+    $next: breakpoint-next($displayEnd);
 
-            .widget-proportional.widget-prop-#{$i}-#{$j}
+    @include media-breakpoint-up($breakpoint)
+    {
+        @each $i in 1, 2, 3, 4
+        {
+            @each $j in 1, 2, 3, 4
             {
-                padding-bottom: percentage($j / $i) !important;
+                .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional
+                {
+                    padding-bottom: percentage($j / $i);
+                }
+
+                .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j}
+                {
+                    padding-bottom: percentage($j / $i) !important;
+                }
+
             }
         }
 
+        @include media-breakpoint-down($next)
+        {
+            .widget-prop#{$infix}-auto .widget-proportional
+            {
+                padding-bottom: 0;
+                min-height: 100%;
+            }
+
+        }
     }
-    .widget-prop-auto .widget-proportional
+}
+
+@include media-breakpoint-down(xs)
+{
+    .widget-grid .widget-inner.col-12.widget-stacked
     {
-        padding-bottom: 0;
-        min-height: 100%;
+        padding-bottom: 1rem;
+    }
+}
+
+@include media-breakpoint-between(sm, lg)
+{
+    .widget-grid .widget-inner.col-sm-12.widget-stacked
+    {
+        padding-bottom: 2rem;
+    }
+}
+
+@include media-breakpoint-up(lg)
+{
+    .widget-grid .widget-inner.col-lg-12.widget-stacked
+    {
+        padding-bottom: 2rem;
     }
 }
 
