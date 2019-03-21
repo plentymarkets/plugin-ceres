@@ -139,9 +139,16 @@ Vue.component("order-property-list-item", {
             }
             else if (this.inputType === "selection")
             {
-                const name = this.property.selectionValues[value].name;
+                if (isNullOrUndefined(value) || value.length <= 0)
+                {
+                    value = null;
+                }
+                else
+                {
+                    const name = this.property.selectionValues[value].name;
 
-                value = name;
+                    value = name;
+                }
             }
 
             this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
