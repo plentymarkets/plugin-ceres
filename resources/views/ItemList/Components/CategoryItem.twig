@@ -16,7 +16,7 @@
     <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
         <div class="thumb-inner">
 
-            {{ AddToBasket.printVueComponent( "itemData", true, false, { ":has-price": "itemData | hasItemDefaultPrice" } ) }}
+            {{ AddToBasket.printVueComponent( "item", true, false, { ":has-price": "item | hasItemDefaultPrice" } ) }}
 
             <div class="thumb-background"></div>
             
@@ -25,10 +25,10 @@
                     <div class="square-inner main-image">
                         <slot name="item-image">
                             <category-image-carousel template="#vue-category-image-carousel"
-                                                    :image-urls-data="itemData.images | itemImages(imageUrlAccessor)"
-                                                    :alt-text="itemData | itemName"
-                                                    :title-text="itemData | itemName"
-                                                    :item-url="itemData | itemURL"
+                                                    :image-urls-data="item.images | itemImages(imageUrlAccessor)"
+                                                    :alt-text="item | itemName"
+                                                    :title-text="item | itemName"
+                                                    :item-url="item | itemURL"
                                                     :enable-carousel="{{ enableCarousel }}"
                                                     :disable-carousel-on-mobile="disableCarouselOnMobile"
                                                     ref="categoryImageCarousel">
@@ -40,50 +40,50 @@
 
             <!-- STORE SPECIALS -->
             <slot name="store-special">
-                <item-store-special v-if="storeSpecial || itemData.variation.bundleType == 'bundle'"
+                <item-store-special v-if="storeSpecial || item.variation.bundleType == 'bundle'"
                                     :store-special="storeSpecial"
-                                    :recommended-retail-price="itemData.prices.rrp"
-                                    :variation-retail-price="itemData.prices.default"
+                                    :recommended-retail-price="item.prices.rrp"
+                                    :variation-retail-price="item.prices.default"
                                     :decimal-count="decimalCount"
-                                    :bundle-type="itemData.variation.bundleType"></item-store-special>
+                                    :bundle-type="item.variation.bundleType"></item-store-special>
             </slot>
             <!-- ./STORE SPECIALS -->
 
             <!-- ITEM DETAILS -->
             <slot name="item-details">
                 <div class="thumb-content">
-                    <a :href="itemData | itemURL" class="thumb-title small">
-                        ${ itemData | itemName }<!--
-                        --><span v-for="attribute in itemData.groupedAttributes">${ "Ceres::Template.itemGroupedAttribute" | translate(attribute) }</span>
+                    <a :href="item | itemURL" class="thumb-title small">
+                        ${ item | itemName }<!--
+                        --><span v-for="attribute in item.groupedAttributes">${ "Ceres::Template.itemGroupedAttribute" | translate(attribute) }</span>
                     </a>
                     <div class="thumb-meta">
                         <slot name="BeforePrices"></slot>
 
                         <div class="prices">
-                            <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0 && itemData.prices.rrp.price.value > itemData.prices.default.unitPrice.value" class="price-view-port">
-                                <del class="crossprice" v-if="itemData.prices.specialOffer">
-                                    ${ itemData.prices.default.unitPrice.formatted | itemCrossPrice(true) }
+                            <div v-if="item.prices.rrp && item.prices.rrp.price.value > 0 && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
+                                <del class="crossprice" v-if="item.prices.specialOffer">
+                                    ${ item.prices.default.unitPrice.formatted | itemCrossPrice(true) }
                                 </del>
                                 <del class="crossprice" v-else>
-                                    ${ itemData.prices.rrp.unitPrice.formatted | itemCrossPrice }
+                                    ${ item.prices.rrp.unitPrice.formatted | itemCrossPrice }
                                 </del>
                             </div>
 
                             <div class="price">
-                                ${ itemData.prices.default.unitPrice.formatted | specialOffer(itemData.prices, "unitPrice", "formatted") } *
+                                ${ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") } *
                             </div>
                         </div>
                     </div>
 
                     <slot name="AfterPrices"></slot>
 
-                    <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
-                        <span>${ itemData.unit.content }</span>
-                        <span>${ itemData.unit.names.name }</span>
-                        <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
+                    <div class="category-unit-price" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
+                        <span>${ item.unit.content }</span>
+                        <span>${ item.unit.names.name }</span>
+                        <span v-if="item.variation.mayShowUnitPrice">| ${ item.prices.default.basePrice }</span>
                     </div>
 
-                    {{ AddToBasket.printVueComponent( "itemData", false, false, { ":has-price": "itemData | hasItemDefaultPrice" } ) }}
+                    {{ AddToBasket.printVueComponent( "item", false, false, { ":has-price": "item | hasItemDefaultPrice" } ) }}
 
                     <span class="vat small text-muted">
                         * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
