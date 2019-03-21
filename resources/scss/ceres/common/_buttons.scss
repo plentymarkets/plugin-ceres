@@ -127,7 +127,9 @@ button:focus {
 
 	&.btn-description {
         color: white;
-        
+        > .fa {
+            top: 0;
+        }
         > .fa-info {
             line-height: 2rem;
 		}
