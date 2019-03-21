@@ -15139,147 +15139,147 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .prop-xs-1-1 {
-  padding-bottom: 100%;
+  padding-bottom: 100% !important;
 }
 
 .prop-xs-1-2 {
-  padding-bottom: 200%;
+  padding-bottom: 200% !important;
 }
 
 .prop-xs-1-3 {
-  padding-bottom: 300%;
+  padding-bottom: 300% !important;
 }
 
 .prop-xs-1-4 {
-  padding-bottom: 400%;
+  padding-bottom: 400% !important;
 }
 
 .prop-xs-1-5 {
-  padding-bottom: 500%;
+  padding-bottom: 500% !important;
 }
 
 .prop-xs-1-6 {
-  padding-bottom: 600%;
+  padding-bottom: 600% !important;
 }
 
 .prop-xs-2-1 {
-  padding-bottom: 50%;
+  padding-bottom: 50% !important;
 }
 
 .prop-xs-2-2 {
-  padding-bottom: 100%;
+  padding-bottom: 100% !important;
 }
 
 .prop-xs-2-3 {
-  padding-bottom: 150%;
+  padding-bottom: 150% !important;
 }
 
 .prop-xs-2-4 {
-  padding-bottom: 200%;
+  padding-bottom: 200% !important;
 }
 
 .prop-xs-2-5 {
-  padding-bottom: 250%;
+  padding-bottom: 250% !important;
 }
 
 .prop-xs-2-6 {
-  padding-bottom: 300%;
+  padding-bottom: 300% !important;
 }
 
 .prop-xs-3-1 {
-  padding-bottom: 33.33333%;
+  padding-bottom: 33.33333% !important;
 }
 
 .prop-xs-3-2 {
-  padding-bottom: 66.66667%;
+  padding-bottom: 66.66667% !important;
 }
 
 .prop-xs-3-3 {
-  padding-bottom: 100%;
+  padding-bottom: 100% !important;
 }
 
 .prop-xs-3-4 {
-  padding-bottom: 133.33333%;
+  padding-bottom: 133.33333% !important;
 }
 
 .prop-xs-3-5 {
-  padding-bottom: 166.66667%;
+  padding-bottom: 166.66667% !important;
 }
 
 .prop-xs-3-6 {
-  padding-bottom: 200%;
+  padding-bottom: 200% !important;
 }
 
 .prop-xs-4-1 {
-  padding-bottom: 25%;
+  padding-bottom: 25% !important;
 }
 
 .prop-xs-4-2 {
-  padding-bottom: 50%;
+  padding-bottom: 50% !important;
 }
 
 .prop-xs-4-3 {
-  padding-bottom: 75%;
+  padding-bottom: 75% !important;
 }
 
 .prop-xs-4-4 {
-  padding-bottom: 100%;
+  padding-bottom: 100% !important;
 }
 
 .prop-xs-4-5 {
-  padding-bottom: 125%;
+  padding-bottom: 125% !important;
 }
 
 .prop-xs-4-6 {
-  padding-bottom: 150%;
+  padding-bottom: 150% !important;
 }
 
 .prop-xs-5-1 {
-  padding-bottom: 20%;
+  padding-bottom: 20% !important;
 }
 
 .prop-xs-5-2 {
-  padding-bottom: 40%;
+  padding-bottom: 40% !important;
 }
 
 .prop-xs-5-3 {
-  padding-bottom: 60%;
+  padding-bottom: 60% !important;
 }
 
 .prop-xs-5-4 {
-  padding-bottom: 80%;
+  padding-bottom: 80% !important;
 }
 
 .prop-xs-5-5 {
-  padding-bottom: 100%;
+  padding-bottom: 100% !important;
 }
 
 .prop-xs-5-6 {
-  padding-bottom: 120%;
+  padding-bottom: 120% !important;
 }
 
 .prop-xs-6-1 {
-  padding-bottom: 16.66667%;
+  padding-bottom: 16.66667% !important;
 }
 
 .prop-xs-6-2 {
-  padding-bottom: 33.33333%;
+  padding-bottom: 33.33333% !important;
 }
 
 .prop-xs-6-3 {
-  padding-bottom: 50%;
+  padding-bottom: 50% !important;
 }
 
 .prop-xs-6-4 {
-  padding-bottom: 66.66667%;
+  padding-bottom: 66.66667% !important;
 }
 
 .prop-xs-6-5 {
-  padding-bottom: 83.33333%;
+  padding-bottom: 83.33333% !important;
 }
 
 .prop-xs-6-6 {
-  padding-bottom: 100%;
+  padding-bottom: 100% !important;
 }
 
 @media (min-width: 576px) {
@@ -15288,112 +15288,112 @@ a.text-dark:hover, a.text-dark:focus {
     padding-bottom: 0;
   }
   .prop-sm-1-1 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-sm-1-2 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-sm-1-3 {
-    padding-bottom: 300%;
+    padding-bottom: 300% !important;
   }
   .prop-sm-1-4 {
-    padding-bottom: 400%;
+    padding-bottom: 400% !important;
   }
   .prop-sm-1-5 {
-    padding-bottom: 500%;
+    padding-bottom: 500% !important;
   }
   .prop-sm-1-6 {
-    padding-bottom: 600%;
+    padding-bottom: 600% !important;
   }
   .prop-sm-2-1 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-sm-2-2 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-sm-2-3 {
-    padding-bottom: 150%;
+    padding-bottom: 150% !important;
   }
   .prop-sm-2-4 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-sm-2-5 {
-    padding-bottom: 250%;
+    padding-bottom: 250% !important;
   }
   .prop-sm-2-6 {
-    padding-bottom: 300%;
+    padding-bottom: 300% !important;
   }
   .prop-sm-3-1 {
-    padding-bottom: 33.33333%;
+    padding-bottom: 33.33333% !important;
   }
   .prop-sm-3-2 {
-    padding-bottom: 66.66667%;
+    padding-bottom: 66.66667% !important;
   }
   .prop-sm-3-3 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-sm-3-4 {
-    padding-bottom: 133.33333%;
+    padding-bottom: 133.33333% !important;
   }
   .prop-sm-3-5 {
-    padding-bottom: 166.66667%;
+    padding-bottom: 166.66667% !important;
   }
   .prop-sm-3-6 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-sm-4-1 {
-    padding-bottom: 25%;
+    padding-bottom: 25% !important;
   }
   .prop-sm-4-2 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-sm-4-3 {
-    padding-bottom: 75%;
+    padding-bottom: 75% !important;
   }
   .prop-sm-4-4 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-sm-4-5 {
-    padding-bottom: 125%;
+    padding-bottom: 125% !important;
   }
   .prop-sm-4-6 {
-    padding-bottom: 150%;
+    padding-bottom: 150% !important;
   }
   .prop-sm-5-1 {
-    padding-bottom: 20%;
+    padding-bottom: 20% !important;
   }
   .prop-sm-5-2 {
-    padding-bottom: 40%;
+    padding-bottom: 40% !important;
   }
   .prop-sm-5-3 {
-    padding-bottom: 60%;
+    padding-bottom: 60% !important;
   }
   .prop-sm-5-4 {
-    padding-bottom: 80%;
+    padding-bottom: 80% !important;
   }
   .prop-sm-5-5 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-sm-5-6 {
-    padding-bottom: 120%;
+    padding-bottom: 120% !important;
   }
   .prop-sm-6-1 {
-    padding-bottom: 16.66667%;
+    padding-bottom: 16.66667% !important;
   }
   .prop-sm-6-2 {
-    padding-bottom: 33.33333%;
+    padding-bottom: 33.33333% !important;
   }
   .prop-sm-6-3 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-sm-6-4 {
-    padding-bottom: 66.66667%;
+    padding-bottom: 66.66667% !important;
   }
   .prop-sm-6-5 {
-    padding-bottom: 83.33333%;
+    padding-bottom: 83.33333% !important;
   }
   .prop-sm-6-6 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
 }
 
@@ -15403,112 +15403,112 @@ a.text-dark:hover, a.text-dark:focus {
     padding-bottom: 0;
   }
   .prop-md-1-1 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-md-1-2 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-md-1-3 {
-    padding-bottom: 300%;
+    padding-bottom: 300% !important;
   }
   .prop-md-1-4 {
-    padding-bottom: 400%;
+    padding-bottom: 400% !important;
   }
   .prop-md-1-5 {
-    padding-bottom: 500%;
+    padding-bottom: 500% !important;
   }
   .prop-md-1-6 {
-    padding-bottom: 600%;
+    padding-bottom: 600% !important;
   }
   .prop-md-2-1 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-md-2-2 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-md-2-3 {
-    padding-bottom: 150%;
+    padding-bottom: 150% !important;
   }
   .prop-md-2-4 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-md-2-5 {
-    padding-bottom: 250%;
+    padding-bottom: 250% !important;
   }
   .prop-md-2-6 {
-    padding-bottom: 300%;
+    padding-bottom: 300% !important;
   }
   .prop-md-3-1 {
-    padding-bottom: 33.33333%;
+    padding-bottom: 33.33333% !important;
   }
   .prop-md-3-2 {
-    padding-bottom: 66.66667%;
+    padding-bottom: 66.66667% !important;
   }
   .prop-md-3-3 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-md-3-4 {
-    padding-bottom: 133.33333%;
+    padding-bottom: 133.33333% !important;
   }
   .prop-md-3-5 {
-    padding-bottom: 166.66667%;
+    padding-bottom: 166.66667% !important;
   }
   .prop-md-3-6 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-md-4-1 {
-    padding-bottom: 25%;
+    padding-bottom: 25% !important;
   }
   .prop-md-4-2 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-md-4-3 {
-    padding-bottom: 75%;
+    padding-bottom: 75% !important;
   }
   .prop-md-4-4 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-md-4-5 {
-    padding-bottom: 125%;
+    padding-bottom: 125% !important;
   }
   .prop-md-4-6 {
-    padding-bottom: 150%;
+    padding-bottom: 150% !important;
   }
   .prop-md-5-1 {
-    padding-bottom: 20%;
+    padding-bottom: 20% !important;
   }
   .prop-md-5-2 {
-    padding-bottom: 40%;
+    padding-bottom: 40% !important;
   }
   .prop-md-5-3 {
-    padding-bottom: 60%;
+    padding-bottom: 60% !important;
   }
   .prop-md-5-4 {
-    padding-bottom: 80%;
+    padding-bottom: 80% !important;
   }
   .prop-md-5-5 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-md-5-6 {
-    padding-bottom: 120%;
+    padding-bottom: 120% !important;
   }
   .prop-md-6-1 {
-    padding-bottom: 16.66667%;
+    padding-bottom: 16.66667% !important;
   }
   .prop-md-6-2 {
-    padding-bottom: 33.33333%;
+    padding-bottom: 33.33333% !important;
   }
   .prop-md-6-3 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-md-6-4 {
-    padding-bottom: 66.66667%;
+    padding-bottom: 66.66667% !important;
   }
   .prop-md-6-5 {
-    padding-bottom: 83.33333%;
+    padding-bottom: 83.33333% !important;
   }
   .prop-md-6-6 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
 }
 
@@ -15518,112 +15518,112 @@ a.text-dark:hover, a.text-dark:focus {
     padding-bottom: 0;
   }
   .prop-lg-1-1 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-lg-1-2 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-lg-1-3 {
-    padding-bottom: 300%;
+    padding-bottom: 300% !important;
   }
   .prop-lg-1-4 {
-    padding-bottom: 400%;
+    padding-bottom: 400% !important;
   }
   .prop-lg-1-5 {
-    padding-bottom: 500%;
+    padding-bottom: 500% !important;
   }
   .prop-lg-1-6 {
-    padding-bottom: 600%;
+    padding-bottom: 600% !important;
   }
   .prop-lg-2-1 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-lg-2-2 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-lg-2-3 {
-    padding-bottom: 150%;
+    padding-bottom: 150% !important;
   }
   .prop-lg-2-4 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-lg-2-5 {
-    padding-bottom: 250%;
+    padding-bottom: 250% !important;
   }
   .prop-lg-2-6 {
-    padding-bottom: 300%;
+    padding-bottom: 300% !important;
   }
   .prop-lg-3-1 {
-    padding-bottom: 33.33333%;
+    padding-bottom: 33.33333% !important;
   }
   .prop-lg-3-2 {
-    padding-bottom: 66.66667%;
+    padding-bottom: 66.66667% !important;
   }
   .prop-lg-3-3 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-lg-3-4 {
-    padding-bottom: 133.33333%;
+    padding-bottom: 133.33333% !important;
   }
   .prop-lg-3-5 {
-    padding-bottom: 166.66667%;
+    padding-bottom: 166.66667% !important;
   }
   .prop-lg-3-6 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-lg-4-1 {
-    padding-bottom: 25%;
+    padding-bottom: 25% !important;
   }
   .prop-lg-4-2 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-lg-4-3 {
-    padding-bottom: 75%;
+    padding-bottom: 75% !important;
   }
   .prop-lg-4-4 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-lg-4-5 {
-    padding-bottom: 125%;
+    padding-bottom: 125% !important;
   }
   .prop-lg-4-6 {
-    padding-bottom: 150%;
+    padding-bottom: 150% !important;
   }
   .prop-lg-5-1 {
-    padding-bottom: 20%;
+    padding-bottom: 20% !important;
   }
   .prop-lg-5-2 {
-    padding-bottom: 40%;
+    padding-bottom: 40% !important;
   }
   .prop-lg-5-3 {
-    padding-bottom: 60%;
+    padding-bottom: 60% !important;
   }
   .prop-lg-5-4 {
-    padding-bottom: 80%;
+    padding-bottom: 80% !important;
   }
   .prop-lg-5-5 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-lg-5-6 {
-    padding-bottom: 120%;
+    padding-bottom: 120% !important;
   }
   .prop-lg-6-1 {
-    padding-bottom: 16.66667%;
+    padding-bottom: 16.66667% !important;
   }
   .prop-lg-6-2 {
-    padding-bottom: 33.33333%;
+    padding-bottom: 33.33333% !important;
   }
   .prop-lg-6-3 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-lg-6-4 {
-    padding-bottom: 66.66667%;
+    padding-bottom: 66.66667% !important;
   }
   .prop-lg-6-5 {
-    padding-bottom: 83.33333%;
+    padding-bottom: 83.33333% !important;
   }
   .prop-lg-6-6 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
 }
 
@@ -15633,112 +15633,112 @@ a.text-dark:hover, a.text-dark:focus {
     padding-bottom: 0;
   }
   .prop-xl-1-1 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-xl-1-2 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-xl-1-3 {
-    padding-bottom: 300%;
+    padding-bottom: 300% !important;
   }
   .prop-xl-1-4 {
-    padding-bottom: 400%;
+    padding-bottom: 400% !important;
   }
   .prop-xl-1-5 {
-    padding-bottom: 500%;
+    padding-bottom: 500% !important;
   }
   .prop-xl-1-6 {
-    padding-bottom: 600%;
+    padding-bottom: 600% !important;
   }
   .prop-xl-2-1 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-xl-2-2 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-xl-2-3 {
-    padding-bottom: 150%;
+    padding-bottom: 150% !important;
   }
   .prop-xl-2-4 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-xl-2-5 {
-    padding-bottom: 250%;
+    padding-bottom: 250% !important;
   }
   .prop-xl-2-6 {
-    padding-bottom: 300%;
+    padding-bottom: 300% !important;
   }
   .prop-xl-3-1 {
-    padding-bottom: 33.33333%;
+    padding-bottom: 33.33333% !important;
   }
   .prop-xl-3-2 {
-    padding-bottom: 66.66667%;
+    padding-bottom: 66.66667% !important;
   }
   .prop-xl-3-3 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-xl-3-4 {
-    padding-bottom: 133.33333%;
+    padding-bottom: 133.33333% !important;
   }
   .prop-xl-3-5 {
-    padding-bottom: 166.66667%;
+    padding-bottom: 166.66667% !important;
   }
   .prop-xl-3-6 {
-    padding-bottom: 200%;
+    padding-bottom: 200% !important;
   }
   .prop-xl-4-1 {
-    padding-bottom: 25%;
+    padding-bottom: 25% !important;
   }
   .prop-xl-4-2 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-xl-4-3 {
-    padding-bottom: 75%;
+    padding-bottom: 75% !important;
   }
   .prop-xl-4-4 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-xl-4-5 {
-    padding-bottom: 125%;
+    padding-bottom: 125% !important;
   }
   .prop-xl-4-6 {
-    padding-bottom: 150%;
+    padding-bottom: 150% !important;
   }
   .prop-xl-5-1 {
-    padding-bottom: 20%;
+    padding-bottom: 20% !important;
   }
   .prop-xl-5-2 {
-    padding-bottom: 40%;
+    padding-bottom: 40% !important;
   }
   .prop-xl-5-3 {
-    padding-bottom: 60%;
+    padding-bottom: 60% !important;
   }
   .prop-xl-5-4 {
-    padding-bottom: 80%;
+    padding-bottom: 80% !important;
   }
   .prop-xl-5-5 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
   .prop-xl-5-6 {
-    padding-bottom: 120%;
+    padding-bottom: 120% !important;
   }
   .prop-xl-6-1 {
-    padding-bottom: 16.66667%;
+    padding-bottom: 16.66667% !important;
   }
   .prop-xl-6-2 {
-    padding-bottom: 33.33333%;
+    padding-bottom: 33.33333% !important;
   }
   .prop-xl-6-3 {
-    padding-bottom: 50%;
+    padding-bottom: 50% !important;
   }
   .prop-xl-6-4 {
-    padding-bottom: 66.66667%;
+    padding-bottom: 66.66667% !important;
   }
   .prop-xl-6-5 {
-    padding-bottom: 83.33333%;
+    padding-bottom: 83.33333% !important;
   }
   .prop-xl-6-6 {
-    padding-bottom: 100%;
+    padding-bottom: 100% !important;
   }
 }
 
@@ -24147,13 +24147,13 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
 }
 
 @media (max-width: 575.98px) {
-  .widget-image-box {
-    padding-bottom: 0 !important;
+  .widget.widget-image-box {
+    padding-bottom: 0;
     min-height: 10rem;
   }
 }
 
-.widget-image-box > img {
+.widget.widget-image-box > img {
   position: absolute;
   max-width: 100%;
   max-height: 100%;
@@ -24162,36 +24162,36 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   transform: translate(-50%, -50%);
 }
 
-.widget-image-box > img.img-cover {
+.widget.widget-image-box > img.img-cover {
   min-width: 100%;
   min-height: 100%;
   object-fit: cover;
 }
 
-.widget-image-box > .widget-inner {
+.widget.widget-image-box > .widget-inner {
   padding: 1.5rem;
   display: -ms-flexbox;
   display: flex;
 }
 
-.widget-image-box > .widget-inner .widget-caption {
+.widget.widget-image-box > .widget-inner .widget-caption {
   transition: 300ms all ease;
 }
 
-.widget-image-box > .widget-inner .widget-caption h2, .widget-image-box > .widget-inner .widget-caption .h2 {
+.widget.widget-image-box > .widget-inner .widget-caption h2, .widget.widget-image-box > .widget-inner .widget-caption .h2 {
   margin: 0;
   font-size: 1.75rem;
 }
 
 @media (max-width: 575.98px) {
-  .widget-image-box.widget-image-box-fullwidth > .widget-inner {
+  .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner {
     position: relative;
     min-height: 12rem;
     padding-top: 2rem;
   }
 }
 
-.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption {
+.widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption {
   width: 100%;
   display: -ms-flexbox;
   display: flex;
@@ -24200,48 +24200,48 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   padding: 1rem;
 }
 
-.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption h2, .widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption .h2 {
+.widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption h2, .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption .h2 {
   text-align: center;
   width: 100%;
   text-transform: uppercase;
 }
 
 @media (min-width: 576px) {
-  .widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption h2, .widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption .h2 {
+  .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption h2, .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption .h2 {
     font-size: 3rem;
   }
 }
 
 @media (min-width: 992px) {
-  .widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption h2, .widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption .h2 {
+  .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption h2, .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption .h2 {
     font-size: 4rem;
   }
 }
 
-.widget-image-box.widget-image-box-inline-caption > .widget-inner {
+.widget.widget-image-box.widget-image-box-inline-caption > .widget-inner {
   -ms-flex-align: end;
       align-items: flex-end;
 }
 
 @media (max-width: 575.98px) {
-  .widget-image-box.widget-image-box-inline-caption > .widget-inner {
+  .widget.widget-image-box.widget-image-box-inline-caption > .widget-inner {
     position: relative;
     padding-top: 14%;
   }
 }
 
-.widget-image-box.widget-image-box-inline-caption > .widget-inner .widget-caption {
+.widget.widget-image-box.widget-image-box-inline-caption > .widget-inner .widget-caption {
   padding: 1.5rem;
 }
 
 @media (max-width: 575.98px) {
-  .widget-image-box.widget-image-box-block-caption > .widget-inner {
+  .widget.widget-image-box.widget-image-box-block-caption > .widget-inner {
     position: relative;
     padding: 25% 0 0 0;
   }
 }
 
-.widget-image-box.widget-image-box-block-caption > .widget-inner .widget-caption {
+.widget.widget-image-box.widget-image-box-block-caption > .widget-inner .widget-caption {
   position: absolute;
   left: 0;
   right: 0;
@@ -24250,121 +24250,121 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
 }
 
 @media (max-width: 575.98px) {
-  .widget-image-box.widget-image-box-block-caption > .widget-inner .widget-caption {
+  .widget.widget-image-box.widget-image-box-block-caption > .widget-inner .widget-caption {
     position: relative;
     width: 100%;
   }
 }
 
-.widget-image-box.widget-image-box-no-caption > .widget-inner .widget-caption {
+.widget.widget-image-box.widget-image-box-no-caption > .widget-inner .widget-caption {
   display: none;
 }
 
-.widget-image-box.widget-primary .widget-caption {
+.widget.widget-image-box.widget-primary .widget-caption {
   color: #fff;
   background-color: rgba(0, 142, 189, 0.8);
 }
 
-.widget-image-box.widget-primary .widget-caption a {
+.widget.widget-image-box.widget-primary .widget-caption a {
   color: #fff;
 }
 
-.widget-image-box.widget-primary a[href].widget-inner:hover .widget-caption {
+.widget.widget-image-box.widget-primary a[href].widget-inner:hover .widget-caption {
   color: #fff;
   background-color: rgba(0, 142, 189, 0.9);
 }
 
-.widget-image-box.widget-primary a[href].widget-inner:hover .widget-caption a {
+.widget.widget-image-box.widget-primary a[href].widget-inner:hover .widget-caption a {
   color: #fff;
 }
 
-.widget-image-box.widget-secondary .widget-caption {
+.widget.widget-image-box.widget-secondary .widget-caption {
   color: #fff;
   background-color: rgba(212, 2, 29, 0.8);
 }
 
-.widget-image-box.widget-secondary .widget-caption a {
+.widget.widget-image-box.widget-secondary .widget-caption a {
   color: #fff;
 }
 
-.widget-image-box.widget-secondary a[href].widget-inner:hover .widget-caption {
+.widget.widget-image-box.widget-secondary a[href].widget-inner:hover .widget-caption {
   color: #fff;
   background-color: rgba(212, 2, 29, 0.9);
 }
 
-.widget-image-box.widget-secondary a[href].widget-inner:hover .widget-caption a {
+.widget.widget-image-box.widget-secondary a[href].widget-inner:hover .widget-caption a {
   color: #fff;
 }
 
-.widget-image-box.widget-success .widget-caption {
+.widget.widget-image-box.widget-success .widget-caption {
   color: #fff;
   background-color: rgba(40, 167, 69, 0.8);
 }
 
-.widget-image-box.widget-success .widget-caption a {
+.widget.widget-image-box.widget-success .widget-caption a {
   color: #fff;
 }
 
-.widget-image-box.widget-success a[href].widget-inner:hover .widget-caption {
+.widget.widget-image-box.widget-success a[href].widget-inner:hover .widget-caption {
   color: #fff;
   background-color: rgba(40, 167, 69, 0.9);
 }
 
-.widget-image-box.widget-success a[href].widget-inner:hover .widget-caption a {
+.widget.widget-image-box.widget-success a[href].widget-inner:hover .widget-caption a {
   color: #fff;
 }
 
-.widget-image-box.widget-info .widget-caption {
+.widget.widget-image-box.widget-info .widget-caption {
   color: #fff;
   background-color: rgba(23, 162, 184, 0.8);
 }
 
-.widget-image-box.widget-info .widget-caption a {
+.widget.widget-image-box.widget-info .widget-caption a {
   color: #fff;
 }
 
-.widget-image-box.widget-info a[href].widget-inner:hover .widget-caption {
+.widget.widget-image-box.widget-info a[href].widget-inner:hover .widget-caption {
   color: #fff;
   background-color: rgba(23, 162, 184, 0.9);
 }
 
-.widget-image-box.widget-info a[href].widget-inner:hover .widget-caption a {
+.widget.widget-image-box.widget-info a[href].widget-inner:hover .widget-caption a {
   color: #fff;
 }
 
-.widget-image-box.widget-warning .widget-caption {
+.widget.widget-image-box.widget-warning .widget-caption {
   color: #212529;
   background-color: rgba(255, 193, 7, 0.8);
 }
 
-.widget-image-box.widget-warning .widget-caption a {
+.widget.widget-image-box.widget-warning .widget-caption a {
   color: #212529;
 }
 
-.widget-image-box.widget-warning a[href].widget-inner:hover .widget-caption {
+.widget.widget-image-box.widget-warning a[href].widget-inner:hover .widget-caption {
   color: #212529;
   background-color: rgba(255, 193, 7, 0.9);
 }
 
-.widget-image-box.widget-warning a[href].widget-inner:hover .widget-caption a {
+.widget.widget-image-box.widget-warning a[href].widget-inner:hover .widget-caption a {
   color: #212529;
 }
 
-.widget-image-box.widget-danger .widget-caption {
+.widget.widget-image-box.widget-danger .widget-caption {
   color: #fff;
   background-color: rgba(220, 53, 69, 0.8);
 }
 
-.widget-image-box.widget-danger .widget-caption a {
+.widget.widget-image-box.widget-danger .widget-caption a {
   color: #fff;
 }
 
-.widget-image-box.widget-danger a[href].widget-inner:hover .widget-caption {
+.widget.widget-image-box.widget-danger a[href].widget-inner:hover .widget-caption {
   color: #fff;
   background-color: rgba(220, 53, 69, 0.9);
 }
 
-.widget-image-box.widget-danger a[href].widget-inner:hover .widget-caption a {
+.widget.widget-image-box.widget-danger a[href].widget-inner:hover .widget-caption a {
   color: #fff;
 }
 
