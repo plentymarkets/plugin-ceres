@@ -53,11 +53,6 @@ export function transformVariationProperties(item, propertyTypes = [], displaySe
         }
     }
 
-    if (groupedProperties)
-    {
-
-    }
-
     const groups = [];
 
     for (const group of variationPropertyGroups)
