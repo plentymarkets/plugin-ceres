@@ -44,16 +44,14 @@
                     *
                 </label>
             </div>
-            <popper v-cloak v-if="selectedDescription">
+            <popper class="order-property-selection-info-popper" v-cloak v-if="selectedDescription" placement="bottom">
                 <button slot="handle" class="btn btn-description">
                     <i class="fa fa-circle fa-stack-2x icon-background"></i>
                     <i class="fa fa-info fa-stack-1x"></i>
                 </button>
-                <div slot="title">
-                    TODO desc
-                </div>
                 <ul slot="content" class='pl-3'>
                     ${ selectedDescription }
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum reiciendis sint eos autem suscipit fuga saepe cupiditate libero veritatis, debitis non corporis odit doloribus ad nam, ratione rerum temporibus molestiae!Earum delectus facere possimus consectetur laudantium, magnam autem accusantium eum ullam quidem veniam, quisquam unde. Adipisci suscipit consequuntur ea magnam, error recusandae quasi sunt quia magni voluptates inventore illo quos.
                 </ul>
             </popper>
         </div>

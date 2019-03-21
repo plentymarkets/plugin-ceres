@@ -1,4 +1,7 @@
-
+.order-property-selection-info-popper {
+float:left;
+display:inline-block;
+}
 .single {
     .list-item-carousel {
         .list-control-special{
@@ -106,6 +109,7 @@
 
     .order-property-input {
         transition: border-color .3s ease-out;
+        float: left;
 
         &.active {
             border-color: $success;
