@@ -28894,8 +28894,6 @@ function transformVariationProperties(item) {
     }
   }
 
-  if (groupedProperties) {}
-
   var groups = [];
   var _iteratorNormalCompletion2 = true;
   var _didIteratorError2 = false;
