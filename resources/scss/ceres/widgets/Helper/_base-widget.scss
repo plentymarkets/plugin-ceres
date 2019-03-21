@@ -103,7 +103,7 @@ header .widget
 
         @include media-breakpoint-down($next)
         {
-            .widget-prop#{$infix}-auto .widget-proportional
+            .widget-two-col .widget-prop#{$infix}-auto .widget-proportional
             {
                 padding-bottom: 0;
                 min-height: 100%;
