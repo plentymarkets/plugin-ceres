@@ -53,94 +53,7 @@
                         "defaultValue": "false"
                     }
                 },
-                "contact.shop_mail": {
-                    "type": "inputText",
-                    "required": false,
-                    "label": "Config.contactShopMailLabel",
-                    "options": {
-                        "defaultValue": "your@email.com"
-                    }
-                },
-                "contact.opening_times": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.contactOpeningTimesLabel",
-                    "options": {
-                        "defaultValue": "Montag - Freitag, 00:00 - 24:00"
-                    }
-                },
-                "contact.en.opening_times": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.contactEnOpeningTimesLabel",
-                    "options": {
-                        "defaultValue": "Monday - Friday, 00:00 - 24:00"
-                    }
-                },
-                "contact.show_data": {
-                    "type": "multiCheckBox",
-                    "required": false,
-                    "label": "Config.contactShowDataLabel",
-                    "options": {
-                        "defaultValue": "street, zip, city, hotline, email, opening_times",
-                        "checkBoxValues": [
-                            {
-                                "value": "name",
-                                "caption": "Config.contactShowDataName"
-                            },
-                            {
-                                "value": "ceo",
-                                "caption": "Config.contactShowDataCeo"
-                            },
-                            {
-                                "value": "city",
-                                "caption": "Config.contactShowDataCity"
-                            },
-                            {
-                                "value": "country",
-                                "caption": "Config.contactShowDataCountry"
-                            },
-                            {
-                                "value": "email",
-                                "caption": "Config.contactShowDataEmail"
-                            },
-                            {
-                                "value": "fax",
-                                "caption": "Config.contactShowDataFax"
-                            },
-                            {
-                                "value": "fon",
-                                "caption": "Config.contactShowDataFon"
-                            },
-                            {
-                                "value": "hotline",
-                                "caption": "Config.contactShowDataHotline"
-                            },
-                            {
-                                "value": "street",
-                                "caption": "Config.contactShowDataStreet"
-                            },
-                            {
-                                "value": "vatNumber",
-                                "caption": "Config.contactShowDataVatNumber"
-                            },
-                            {
-                                "value": "zip",
-                                "caption": "Config.contactShowDataZip"
-                            },
-                            {
-                                "value": "timezone",
-                                "caption": "Config.contactShowDataTimezone"
-                            },
-                            {
-                                "value": "opening_times",
-                                "caption": "Config.contactShowDataOpeningTimes"
-                            }
-                        ]
-                    }
-                },
+                
                 "global.google_recaptcha_api_key": {
                     "type": "inputText",
                     "required": false,
@@ -155,38 +68,6 @@
                     "label": "Config.globalGoogleRecaptchaSecretLabel",
                     "options": {
                         "defaultValue": ""
-                    }
-                },
-                "contact.api_key": {
-                    "type": "inputText",
-                    "required": false,
-                    "label": "Config.contactApiKeyLabel",
-                    "options": {
-                        "defaultValue": "API key"
-                    }
-                },
-                "contact.map_zoom": {
-                    "type": "inputText",
-                    "required": false,
-                    "label": "Config.contactMapZoomLabel",
-                    "options": {
-                        "defaultValue": "16"
-                    }
-                },
-                "contact.map_show_in_mobile": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Config.contactMapShowInMobileLabel",
-                    "options": {
-                        "defaultValue": "false"
-                    }
-                },
-                "contact.enable_confirming_privacy_policy": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Config.contactEnableConfirmingPrivacyPolicyLabel",
-                    "options": {
-                        "defaultValue": "true"
                     }
                 }
             }
@@ -1521,6 +1402,155 @@
                                 "caption": "Config.basketPreviewTypeRight"
                             }
                         ]
+                    }
+                }
+            }
+        },        
+        "Config.ContactTab": {
+            "label": "Config.contactTab",
+            "formFields": {
+                "contact.shop_mail": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.contactShopMailLabel",
+                    "options": {
+                        "defaultValue": "your@email.com"
+                    }
+                },
+                "contact.shop_mail_cc": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.contactShopMailCcLabel",
+                    "options": {
+                        "defaultValue": "your2@email.com,your3@email.com"
+                    }
+                },
+                "contact.shop_mail_bcc": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.contactShopMailBccLabel",
+                    "options": {
+                        "defaultValue": "your2@email.com,your3@email.com"
+                    }
+                },
+                "contact.extend_orderid_to_mail_subject": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.contactExtendOrderidToMailSubjectLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+                "contact.opening_times": {
+                    "type": "inputText",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactOpeningTimesLabel",
+                    "options": {
+                        "defaultValue": "Montag - Freitag, 00:00 - 24:00"
+                    }
+                },
+                "contact.en.opening_times": {
+                    "type": "inputText",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactEnOpeningTimesLabel",
+                    "options": {
+                        "defaultValue": "Monday - Friday, 00:00 - 24:00"
+                    }
+                },
+                "contact.show_data": {
+                    "type": "multiCheckBox",
+                    "required": false,
+                    "label": "Config.contactShowDataLabel",
+                    "options": {
+                        "defaultValue": "street, zip, city, hotline, email, opening_times",
+                        "checkBoxValues": [
+                            {
+                                "value": "name",
+                                "caption": "Config.contactShowDataName"
+                            },
+                            {
+                                "value": "ceo",
+                                "caption": "Config.contactShowDataCeo"
+                            },
+                            {
+                                "value": "city",
+                                "caption": "Config.contactShowDataCity"
+                            },
+                            {
+                                "value": "country",
+                                "caption": "Config.contactShowDataCountry"
+                            },
+                            {
+                                "value": "email",
+                                "caption": "Config.contactShowDataEmail"
+                            },
+                            {
+                                "value": "fax",
+                                "caption": "Config.contactShowDataFax"
+                            },
+                            {
+                                "value": "fon",
+                                "caption": "Config.contactShowDataFon"
+                            },
+                            {
+                                "value": "hotline",
+                                "caption": "Config.contactShowDataHotline"
+                            },
+                            {
+                                "value": "street",
+                                "caption": "Config.contactShowDataStreet"
+                            },
+                            {
+                                "value": "vatNumber",
+                                "caption": "Config.contactShowDataVatNumber"
+                            },
+                            {
+                                "value": "zip",
+                                "caption": "Config.contactShowDataZip"
+                            },
+                            {
+                                "value": "timezone",
+                                "caption": "Config.contactShowDataTimezone"
+                            },
+                            {
+                                "value": "opening_times",
+                                "caption": "Config.contactShowDataOpeningTimes"
+                            }
+                        ]
+                    }
+                },
+                "contact.api_key": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.contactApiKeyLabel",
+                    "options": {
+                        "defaultValue": "API key"
+                    }
+                },
+                "contact.map_zoom": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.contactMapZoomLabel",
+                    "options": {
+                        "defaultValue": "16"
+                    }
+                },
+                "contact.map_show_in_mobile": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.contactMapShowInMobileLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+                "contact.enable_confirming_privacy_policy": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.contactEnableConfirmingPrivacyPolicyLabel",
+                    "options": {
+                        "defaultValue": "true"
                     }
                 }
             }
