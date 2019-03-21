@@ -137,6 +137,15 @@ header .widget
     }
 }
 
+@include media-breakpoint-up(md)
+{
+    .widget-grid:not(.widget-two-col) .widget-prop-auto .widget-proportional
+    {
+        padding-bottom: 0;
+        min-height: 100%;
+    }
+}
+
 .widget-editable-min-height {
     min-height: 40px;
     padding-bottom: 0.1px;
