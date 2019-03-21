@@ -90,7 +90,7 @@
 
 {{ Twig.endif() }}
 
-<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional {{ aspectRatio }}">
+<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}">
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
             {{ Twig.for("slide", "slides") }}
