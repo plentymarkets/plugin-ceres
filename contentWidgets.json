@@ -2966,7 +2966,7 @@
                 }
             },
             "text": {
-                "type": "codeEditor",
+                "type": "noteEditor",
                 "options": {
                     "name": "Widget.myAccountHintTextLabel"
                 }
@@ -3026,7 +3026,7 @@
                 }
             },
             "text": {
-                "type": "codeEditor",
+                "type": "noteEditor",
                 "options": {
                     "name": "Widget.myAccountHintTextLabel"
                 }
@@ -3207,7 +3207,7 @@
                 }
             },
             "hintText": {
-                "type": "codeEditor",
+                "type": "noteEditor",
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.orderHistoryHintTextLabel",
@@ -3316,7 +3316,7 @@
                 }
             },
             "hintText": {
-                "type": "codeEditor",
+                "type": "noteEditor",
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.orderHistoryHintTextLabel",
