@@ -19,7 +19,8 @@ Vue.component("order-property-list-item", {
         return {
             inputValue: "",
             selectedFile: null,
-            waiting: false
+            waiting: false,
+            selectionValue: null
         };
     },
 
@@ -91,7 +92,9 @@ Vue.component("order-property-list-item", {
                 return null;
             }
 
-            const selectedProperty = this.property.selectedValues.find(value => value.name === property.value);
+            const selectedProperty =
+                Object.values(this.property.selectionValues)
+                    .find(value => value.name === this.property.value);
 
             return selectedProperty.description;
         },
@@ -133,6 +136,12 @@ Vue.component("order-property-list-item", {
             else if (this.inputType === "radio")
             {
                 this.$emit("radio-change", this.property.id);
+            }
+            else if (this.inputType === "selection")
+            {
+                const name = this.property.selectionValues[value].name;
+
+                value = name;
             }
 
             this.setVariationOrderProperty({ propertyId: this.property.id, value: value });

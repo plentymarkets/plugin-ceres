@@ -34,9 +34,9 @@
                 v-tooltip
                 data-toggle="tooltip"
                 :title="property.names.description">
-                <select :value="property.value" @change="onInputValueChanged($event.target.value)" class="custom-select">
+                <select v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select">
                     <option :selected="true" :value="null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
-                    <option :selected="property.value === value.name" :value="value.name" v-for="(value, id) in property.selectionValues">${ value.name }</option>
+                    <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues">${ value.name }</option>
                 </select>
                 <label>
                     ${property.names.name}
