@@ -126,16 +126,13 @@ button:focus {
 	}
 
 	&.btn-description {
-        background-color: $gray-500; 
         color: white;
-        width: 1rem;
-        height: 1rem;
-        border-radius: 1rem;
-        padding: 9px;
-        > .fa {
-            position: absolute;
-            top: 2px;
-            left: 7px;
+        
+        > .fa-info {
+            line-height: 2rem;
+		}
+        > .fa-circle {
+            color: $gray-500; 
 		}
 	}
 }
