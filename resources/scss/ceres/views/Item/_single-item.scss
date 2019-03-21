@@ -1,7 +1,3 @@
-.order-property-selection-info-popper {
-float:left;
-display:inline-block;
-}
 .single {
     .list-item-carousel {
         .list-control-special{
@@ -109,19 +105,16 @@ display:inline-block;
 
     .order-property-input {
         transition: border-color .3s ease-out;
-        float: left;
 
         &.active {
             border-color: $success;
         }
     }
 
-    .btn.btn-description {
+    .order-property-selection-info-popper {
         position: absolute;
+        top: 6px;
         right: -20px;
-        top: 5px;
-        height: 2rem;
-        width: 2rem;
     }
 }
 
