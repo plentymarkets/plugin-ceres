@@ -51,7 +51,7 @@
         {% set initialCategory = category %}
     {% endif %}
     <mobile-navigation
-            :navigation-tree-data="{{ categories | json_encode }}"
+            navigation-tree-data="{{ categories | json_data }}"
             :initial-category="{{ initialCategory | json_encode }}"
             template="#vue-mobile-navigation">
     </mobile-navigation>
