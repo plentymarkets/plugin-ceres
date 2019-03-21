@@ -111,6 +111,13 @@
             border-color: $success;
         }
     }
+
+    .btn.btn-description {
+        position: absolute;
+        right: -16px;
+        top: 10px;
+
+    }
 }
 
 .availability_1  { @include context-bg($availability_1); }

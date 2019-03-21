@@ -80,13 +80,7 @@ button:focus {
     }
 }
 
-// create gray outline button 
-.btn-outline-default{
-	@include button-outline-variant($gray-light);
-}
-
 .btn {
-
 	outline: 0 !important;
 
 	& .btn-label {
@@ -106,10 +100,6 @@ button:focus {
 	& > span + .fa {
 		margin-left: 5px;
 		margin-top: 1px;
-	}
-
-	&.btn-danger:hover {
-		background-color: #c9302c;
 	}
 
 	&.btn-medium {
@@ -135,6 +125,19 @@ button:focus {
 		}
 	}
 
+	&.btn-description {
+        background-color: $gray-500; 
+        color: white;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 1rem;
+        padding: 9px;
+        > .fa {
+            position: absolute;
+            top: 2px;
+            left: 7px;
+		}
+	}
 }
 
 .btn-right {
