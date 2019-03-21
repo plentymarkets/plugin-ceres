@@ -44,7 +44,7 @@
                     *
                 </label>
             </div>
-            <popper v-cloak>
+            <popper v-cloak v-if="selectedDescription">
                 <button slot="handle" class="btn btn-description">
                     <i class="fa fa-info"></i>
                 </button>
@@ -52,9 +52,7 @@
                     TODO desc
                 </div>
                 <ul slot="content" class='pl-3'>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam est error dicta? Est harum impedit dolorem, veniam ullam non iste perspiciatis delectus doloribus labore adipisci maiores! Hic, maxime enim.
-                    Fuga laboriosam earum possimus nihil consequatur, ex, aliquid vel temporibus placeat perferendis fugiat illum animi odio similique quo, corrupti id error maiores? Cupiditate fugit debitis qui aut blanditiis reiciendis velit?
-                    Fugit magnam voluptates soluta aut?
+                    ${ selectedDescription }
                 </ul>
             </popper>
         </div>

@@ -1,6 +1,8 @@
 const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
+import { isNullOrUndefined } from "../../helper/utils";
+
 Vue.component("order-property-list-item", {
 
     props:
@@ -87,14 +89,12 @@ Vue.component("order-property-list-item", {
 
         selectedDescription()
         {
-            if (this.inputType !== "selection")
+            if (this.inputType !== "selection" || isNullOrUndefined(this.selectionValue))
             {
                 return null;
             }
 
-            const selectedProperty =
-                Object.values(this.property.selectionValues)
-                    .find(value => value.name === this.property.value);
+            const selectedProperty = this.property.selectionValues[this.selectionValue];
 
             return selectedProperty.description;
         },
