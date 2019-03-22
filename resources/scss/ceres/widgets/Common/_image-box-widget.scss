@@ -1,7 +1,7 @@
-.widget-image-box
+.widget.widget-image-box
 {
     @include media-breakpoint-only(xs) {
-        padding-bottom: 0 !important;
+        padding-bottom: 0;
         min-height: 10rem;
     }
 

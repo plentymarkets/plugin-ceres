@@ -10622,7 +10622,7 @@ $heights: 1, 2, 3, 4, 5, 6;
 }
 
 @mixin make-prop($width, $height) {
-    padding-bottom: percentage($height / $width);
+    padding-bottom: percentage($height / $width) !important;
 }
 
 @include make-props();
@@ -19410,10 +19410,10 @@ html.ios {
 }
 
 
-.widget-image-box
+.widget.widget-image-box
 {
     @include media-breakpoint-only(xs) {
-        padding-bottom: 0 !important;
+        padding-bottom: 0;
         min-height: 10rem;
     }
 

@@ -10,6 +10,11 @@ Vue.component("basket-list", {
         {
             type: String,
             default: "small"
+        },
+        isPreview:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
