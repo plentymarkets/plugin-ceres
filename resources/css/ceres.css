@@ -16250,38 +16250,6 @@ button:focus {
   width: auto;
 }
 
-.btn-outline-default {
-  color: #b2b1a7;
-  border-color: #b2b1a7;
-}
-
-.btn-outline-default:hover {
-  color: #fff;
-  background-color: #b2b1a7;
-  border-color: #b2b1a7;
-}
-
-.btn-outline-default:focus, .btn-outline-default.focus {
-  box-shadow: 0 0 0 0.2rem rgba(178, 177, 167, 0.5);
-}
-
-.btn-outline-default.disabled, .btn-outline-default:disabled {
-  color: #b2b1a7;
-  background-color: transparent;
-}
-
-.btn-outline-default:not(:disabled):not(.disabled):active, .btn-outline-default:not(:disabled):not(.disabled).active,
-.show > .btn-outline-default.dropdown-toggle {
-  color: #fff;
-  background-color: #b2b1a7;
-  border-color: #b2b1a7;
-}
-
-.btn-outline-default:not(:disabled):not(.disabled):active:focus, .btn-outline-default:not(:disabled):not(.disabled).active:focus,
-.show > .btn-outline-default.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(178, 177, 167, 0.5);
-}
-
 .btn {
   outline: 0 !important;
 }
@@ -16301,10 +16269,6 @@ button:focus {
 .btn > span + .fa {
   margin-left: 5px;
   margin-top: 1px;
-}
-
-.btn.btn-danger:hover {
-  background-color: #c9302c;
 }
 
 .btn.btn-medium {
@@ -16384,6 +16348,44 @@ button:focus {
 
 .btn-icon.btn-sm .fa, .btn-group-sm > .btn-icon.btn .fa {
   width: 12px;
+}
+
+.btn-icon.btn-circle {
+  border-radius: 50%;
+}
+
+.btn-default {
+  color: #212529;
+  background-color: #dcdbd8;
+  border-color: #dcdbd8;
+}
+
+.btn-default:hover {
+  color: #212529;
+  background-color: #cac8c4;
+  border-color: #c4c2bd;
+}
+
+.btn-default:focus, .btn-default.focus {
+  box-shadow: 0 0 0 0.2rem rgba(192, 192, 190, 0.5);
+}
+
+.btn-default.disabled, .btn-default:disabled {
+  color: #212529;
+  background-color: #dcdbd8;
+  border-color: #dcdbd8;
+}
+
+.btn-default:not(:disabled):not(.disabled):active, .btn-default:not(:disabled):not(.disabled).active,
+.show > .btn-default.dropdown-toggle {
+  color: #212529;
+  background-color: #c4c2bd;
+  border-color: #bebcb6;
+}
+
+.btn-default:not(:disabled):not(.disabled):active:focus, .btn-default:not(:disabled):not(.disabled).active:focus,
+.show > .btn-default.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(192, 192, 190, 0.5);
 }
 
 .btn-only-icon-xs-up {
@@ -23532,6 +23534,12 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
 
 .single .order-property-input.active {
   border-color: #28a745;
+}
+
+.single .order-property-selection-info-popper {
+  position: absolute;
+  top: 6px;
+  right: 18px;
 }
 
 .availability_1 {
