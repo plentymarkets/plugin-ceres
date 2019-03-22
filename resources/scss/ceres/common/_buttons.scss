@@ -124,20 +124,6 @@ button:focus {
 			margin-top: 0;
 		}
 	}
-
-	&.btn-description {
-        color: white;
-        height: 2rem;
-        > .fa {
-            top: 0;
-        }
-        > .fa-info {
-            line-height: 2rem;
-		}
-        > .fa-circle {
-            color: $gray-500; 
-		}
-	}
 }
 
 .btn-right {
@@ -206,6 +192,15 @@ button:focus {
 			width: 12px;
 		}
 	}
+
+	&.btn-circle
+	{
+		border-radius: 50%;
+	}
+}
+
+.btn-default {
+	@include button-variant($gray-lighter, $gray-lighter);
 }
 
 // Responsive button text and icon visibility
