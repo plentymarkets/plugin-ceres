@@ -17878,6 +17878,10 @@ Vue.component("basket-list", {
     size: {
       type: String,
       default: "small"
+    },
+    isPreview: {
+      type: Boolean,
+      default: false
     }
   },
   computed: Vuex.mapState({
@@ -17913,7 +17917,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
-  props: ["basketItem", "size", "language", "template"],
+  props: ["basketItem", "size", "language", "template", "isPreview"],
   data: function data() {
     return {
       waiting: false,
@@ -18043,7 +18047,7 @@ Vue.component("basket-list-item", {
         }, function (error) {
           _this2.basketItem.quantity = origQty;
 
-          if (_this2.size === "small") {
+          if (_this2.isPreview) {
             _this2.$store.dispatch("addBasketNotification", {
               type: "error",
               message: _TranslationService.default.translate("Ceres::Template." + _ExceptionMap.default.get(error.data.exceptionCode.toString()))
