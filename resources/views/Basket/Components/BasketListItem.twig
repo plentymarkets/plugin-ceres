@@ -43,6 +43,13 @@
                                 </div>
                             </div>
 
+                            <div class="item-small-prices" v-if="basketItem.inputLength > 0 || basketItem.inputWidth > 0">
+                                <div>
+                                    <strong>{{ trans("Ceres::Template.itemInput") }} ${ basketItem | inputUnit(true)}: </strong>
+                                    ${ basketItem | inputUnit}
+                                </div>
+                            </div>
+
                             <div class="item-small-prices">
                                 <div v-for="attribute in basketItem.variation.data.attributes">
                                     <strong>${ attribute.attribute.names.name }:</strong>
