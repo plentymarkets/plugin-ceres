@@ -19,12 +19,12 @@
     {
         margin-bottom: 2rem;
 
-        &.widget-grid
+        &.widget-grid:not(.widget-two-col)
         {
             margin-bottom: 0;
         }
 
-        .widget-inner:not(.widget-stacked)
+        &:not(.widget-two-col) .widget-inner:not(.widget-stacked)
         {
             .widget:not(.widget-grid)
             {
@@ -40,7 +40,7 @@
     {
         margin-bottom: 1rem;
 
-        .widget-inner:not(.widget-stacked)
+        &:not(.widget-two-col) .widget-inner:not(.widget-stacked)
         {
             .widget:not(.widget-grid)
             {
@@ -79,11 +79,10 @@ header .widget
 }
 
 
-@each $display, $breakpoint in $shop-builder-breakpoints
+@each $breakpoint in map-keys($grid-breakpoints)
 {
     $infix: breakpoint-infix($breakpoint);
-    $displayEnd: map-get($shop-builder-breakpoints-down, $display);
-    $next: breakpoint-next($displayEnd);
+    $next: breakpoint-next($breakpoint);
 
     @include media-breakpoint-up($breakpoint)
     {
@@ -104,13 +103,13 @@ header .widget
             }
         }
 
-        @include media-breakpoint-down($next)
+    }
+    @include media-breakpoint-only($breakpoint)
+    {
+        .widget-prop#{$infix}-auto > div > .widget-proportional
         {
-            .widget-prop#{$infix}-auto > div > .widget-proportional
-            {
-                padding-bottom: 0;
-                min-height: 100%;
-            }
+            padding-bottom: 0;
+            min-height: 100%;
         }
     }
 }
@@ -143,7 +142,7 @@ header .widget
 {
     .widget-grid
     {
-        > .widget-inner.widget-prop-sm-auto
+        > .widget-inner.widget-prop-md-auto
         {
             &.col-md-3 > div > .widget-proportional
             {

@@ -4,13 +4,17 @@
 
 <div class="widget widget-grid widget-two-col row">
     <div class="widget-inner
+        {{- " " ~ gridLayouts[layoutDesktop][0] | replace({"-md-": "-xl-"}) }}
         {{- " " ~ gridLayouts[layoutDesktop][0] | replace({"-md-": "-lg-"}) }}
+        {{- " " ~ gridLayouts[layoutTablet][0] }}
         {{- " " ~ gridLayouts[layoutTablet][0] | replace({"-md-": "-sm-"}) }}
         {{- " " ~ gridLayouts[layoutMobile][0] | replace({"-md-": "-"}) }}">
         <div{% if isPreview %} data-builder-child-container="first"{% endif %}>{{ children.first | raw }}</div>
     </div>
     <div class="widget-inner         
+        {{- " " ~ gridLayouts[layoutDesktop][1] | replace({"-md-": "-xl-"}) }}
         {{- " " ~ gridLayouts[layoutDesktop][1] | replace({"-md-": "-lg-"}) }}
+        {{- " " ~ gridLayouts[layoutTablet][1] }}
         {{- " " ~ gridLayouts[layoutTablet][1] | replace({"-md-": "-sm-"}) }}
         {{- " " ~ gridLayouts[layoutMobile][1] | replace({"-md-": "-"}) }}">
         <div{% if isPreview %} data-builder-child-container="second"{% endif %}>{{ children.second | raw }}</div>
