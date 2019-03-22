@@ -22,9 +22,12 @@
                 min-height: 100px;
             }
 
-            .widget-proportional
+            @include media-breakpoint-up(md)
             {
-                height: 100%;
+                .widget-proportional
+                {
+                    height: 100%;
+                }
             }
         }
     }

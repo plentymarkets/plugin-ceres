@@ -43,38 +43,38 @@ class GridWidget extends BaseWidget
                     "col-md-12 widget-prop-md-3-1"
                 ],                  
                 "oneToOneToOne" => [
-                    "col-md-4 widget-prop-3-2",
-                    "col-md-4 widget-prop-3-2",
-                    "col-md-4 widget-prop-3-2"
+                    "col-md-4 widget-prop-sm-3-2",
+                    "col-md-4 widget-prop-sm-3-2",
+                    "col-md-4 widget-prop-sm-3-2"
                 ],
                 "oneToOneToTwo" => [
-                    "col-md-3 widget-prop-auto",
-                    "col-md-3 widget-prop-auto",
-                    "col-md-6 widget-prop-2-1"
+                    "col-md-3 widget-prop-sm-auto",
+                    "col-md-3 widget-prop-sm-auto",
+                    "col-md-6 widget-prop-sm-2-1"
                 ],
                 "oneToTwoToOne" => [
-                    "col-md-3 widget-prop-auto",
-                    "col-md-6 widget-prop-2-1",
-                    "col-md-3 widget-prop-auto"
+                    "col-md-3 widget-prop-sm-auto",
+                    "col-md-6 widget-prop-sm-2-1",
+                    "col-md-3 widget-prop-sm-auto"
                 ],
                 "twoToOneToOne" => [
-                    "col-md-6 widget-prop-2-1",
-                    "col-md-3 widget-prop-auto",
-                    "col-md-3 widget-prop-auto"
+                    "col-md-6 widget-prop-sm-2-1",
+                    "col-md-3 widget-prop-sm-auto",
+                    "col-md-3 widget-prop-sm-auto"
                 ],
                 "oneStackedToTwo" => [
-                    "col-md-4 widget-prop-auto",
-                    "col-md-8 widget-prop-3-2"
+                    "col-md-4 widget-prop-sm-auto",
+                    "col-md-8 widget-prop-sm-3-2"
                 ],
                 "twoToOneStacked" => [
-                    "col-md-8 widget-prop-3-2",
-                    "col-md-4 widget-prop-auto"
+                    "col-md-8 widget-prop-sm-3-2",
+                    "col-md-4 widget-prop-sm-auto"
                 ],
                 "oneToOneToOneToOne" => [
-                    "col-md-3 widget-prop-1-1",
-                    "col-md-3 widget-prop-1-1",
-                    "col-md-3 widget-prop-1-1",
-                    "col-md-3 widget-prop-1-1"
+                    "col-md-3 widget-prop-sm-1-1",
+                    "col-md-3 widget-prop-sm-1-1",
+                    "col-md-3 widget-prop-sm-1-1",
+                    "col-md-3 widget-prop-sm-1-1"
                 ]
             ]
         ];
