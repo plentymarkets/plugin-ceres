@@ -21974,6 +21974,8 @@ Vue.component("order-property-list-group", {
 },{}],175:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -21995,7 +21997,8 @@ Vue.component("order-property-list-item", {
     return {
       inputValue: "",
       selectedFile: null,
-      waiting: false
+      waiting: false,
+      selectionValue: null
     };
   },
   mounted: function mounted() {
@@ -22049,6 +22052,14 @@ Vue.component("order-property-list-item", {
     },
     surcharge: function surcharge() {
       return this.property.itemSurcharge || this.property.surcharge;
+    },
+    selectedDescription: function selectedDescription() {
+      if (this.inputType !== "selection" || (0, _utils.isNullOrUndefined)(this.selectionValue)) {
+        return null;
+      }
+
+      var selectedProperty = this.property.selectionValues[this.selectionValue];
+      return selectedProperty.description;
     }
   }, Vuex.mapState({
     isBasketLoading: function isBasketLoading(state) {
@@ -22073,6 +22084,13 @@ Vue.component("order-property-list-item", {
         }
       } else if (this.inputType === "radio") {
         this.$emit("radio-change", this.property.id);
+      } else if (this.inputType === "selection") {
+        if ((0, _utils.isNullOrUndefined)(value) || value.length <= 0) {
+          value = null;
+        } else {
+          var name = this.property.selectionValues[value].name;
+          value = name;
+        }
       }
 
       this.setVariationOrderProperty({
@@ -22164,7 +22182,7 @@ Vue.component("order-property-list-item", {
   })
 });
 
-},{"services/ApiService":261,"services/NotificationService":265}],176:[function(require,module,exports){
+},{"../../helper/utils":259,"services/ApiService":261,"services/NotificationService":265}],176:[function(require,module,exports){
 "use strict";
 
 var _number = require("../../helper/number");
@@ -30953,8 +30971,7 @@ var getters = {
   variationMissingProperties: function variationMissingProperties(state, getters) {
     if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.item.requireOrderProperties) {
       var missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
-        // selection isn't supported yet
-        return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
+        return property.property.isShownOnItemPage && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
       });
 
       if (missingProperties.length) {
