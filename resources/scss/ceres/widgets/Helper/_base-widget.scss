@@ -139,10 +139,15 @@ header .widget
 
 @include media-breakpoint-up(md)
 {
-    .widget-grid:not(.widget-two-col) .widget-prop-auto .widget-proportional
+    .widget-grid
     {
-        padding-bottom: 0;
-        min-height: 100%;
+        > .widget-inner.widget-prop-auto
+        {
+            &.col-md-3 > div > .widget-proportional
+            {
+                padding-bottom: calc(100% + 15px);
+            }
+        }
     }
 }
 
