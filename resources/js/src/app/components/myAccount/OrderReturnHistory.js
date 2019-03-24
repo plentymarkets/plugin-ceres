@@ -22,7 +22,6 @@ Vue.component("order-return-history", {
 
     created()
 	{
-        this.$options.template = this.template;
         this.itemsPerPage = this.itemsPerPage || 10;
 
         vueEventHub.$on("returns-first-opening", () => this.setPage(1));

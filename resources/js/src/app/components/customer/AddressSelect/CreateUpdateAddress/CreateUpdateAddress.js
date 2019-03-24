@@ -56,11 +56,6 @@ Vue.component("create-update-address", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods: {
         /**
          * Validate the address fields

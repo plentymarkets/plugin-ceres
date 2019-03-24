@@ -23,7 +23,6 @@ Vue.component("payment-provider-select", {
      */
     created()
     {
-        this.$options.template = this.template;
         this.$store.commit("setPaymentProviderValidator", this.validate);
     },
 

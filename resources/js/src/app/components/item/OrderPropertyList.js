@@ -51,11 +51,6 @@ Vue.component("order-property-list", {
         ])
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         sortGroupProperties(group)

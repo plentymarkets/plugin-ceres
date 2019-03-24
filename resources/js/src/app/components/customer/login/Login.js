@@ -27,11 +27,6 @@ Vue.component("login", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>

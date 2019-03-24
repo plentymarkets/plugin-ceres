@@ -20,11 +20,6 @@ Vue.component("order-property-list-group", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         unsetDeselectedRadios(propertyId)

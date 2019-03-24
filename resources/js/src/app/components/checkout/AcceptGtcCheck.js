@@ -46,8 +46,6 @@ Vue.component("accept-gtc-check", {
 
     created()
     {
-        this.$options.template = this.template;
-
         if (this.hideCheckbox)
         {
             this.isChecked = true;
