@@ -103,7 +103,9 @@
 
     {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
         <div class="row">
-            <add-to-wish-list :variation-id="currentVariation.variation.id"></add-to-wish-list>
+            <div class="col-12">
+                <add-to-wish-list :variation-id="currentVariation.variation.id"></add-to-wish-list>
+            </div>
         </div>
     {% endif %}
     <!-- ./ITEM DETAIL -->

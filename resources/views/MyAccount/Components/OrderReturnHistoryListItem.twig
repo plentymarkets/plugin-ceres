@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <order-documents :documents="returnOrder.order.documents" :appearance="appearance" class="col-md-2" type="return"></order-documents>
+            <order-documents :documents="returnOrder.order.documents" class="col-md-2" type="return"></order-documents>
         </div>
         <div :id="'collapse_'+ _uid" class="row container-middle border border-top-0 collapse" :aria-labelledby="'heading_'+ _uid" :data-parent="'#accordion_'+ _uid">
             <div class="col-sm-12 item py-2" v-for="orderItem in itemsToRender">
@@ -34,14 +34,14 @@
                             <img :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt=" orderItem | itemBundleName " :title="orderItem | itemBundleName">
                         </a>
                         <div class="d-inline-block item-description">
-                            <div><a :href="returnOrder.itemURLs[orderItem.itemVariationId]" :class="'text-' + appearance">${ orderItem | itemBundleName }</a></div>
+                            <div><a class="text-primary text-appearance" :href="returnOrder.itemURLs[orderItem.itemVariationId]">${ orderItem | itemBundleName }</a></div>
                             <div>{{ trans("Ceres::Template.returnHistoryQuantity") }}: ${ orderItem.quantity}</div>
                         </div>
                     </div>
                 </div> 
             </div> 
             <div class="col-sm-12 text-center mb-2">
-                <a v-if="returnOrder.order.orderItems.length > 5" @click="toggleShowAllOrderItems()" :id="'more-return-text-' + _uid" :class="'text-' + appearance" data-toggle="collapse" :href="'#more-return-items-' + _uid" aria-expanded="false" aria-controls="collapseExample">
+                <a class="text-primary text-appearance" v-if="returnOrder.order.orderItems.length > 5" @click="toggleShowAllOrderItems()" :id="'more-return-text-' + _uid" data-toggle="collapse" :href="'#more-return-items-' + _uid" aria-expanded="false" aria-controls="collapseExample">
                     <template v-if="showAllOrderItems">
                         {{ trans("Ceres::Template.returnHistoryReturnShowLess") }}
                     </template>

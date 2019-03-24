@@ -9,11 +9,6 @@ Vue.component("coupon", {
         {
             type: String,
             default: "#vue-coupon"
-        },
-        appearance:
-        {
-            type: String,
-            default: "primary"
         }
     },
 

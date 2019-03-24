@@ -15,7 +15,7 @@
             "options": "@include(appearance)"
         },
         "hintText": {
-            "type": "codeEditor",
+            "type": "noteEditor",
             "defaultValue": "",
             "options": {
                 "name": "Widget.orderHistoryHintTextLabel",

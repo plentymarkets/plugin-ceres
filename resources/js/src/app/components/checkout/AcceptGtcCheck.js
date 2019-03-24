@@ -10,11 +10,6 @@ Vue.component("accept-gtc-check", {
             type: String,
             default: "#vue-accept-gtc-check"
         },
-        appearance:
-        {
-            type: String,
-            default: "primary"
-        },
         hideCheckbox:
         {
             type: Boolean
@@ -44,16 +39,6 @@ Vue.component("accept-gtc-check", {
 
     computed:
     {
-        appearanceClass()
-        {
-            if (!this.showError)
-            {
-                return `text-${this.appearance}`;
-            }
-
-            return null;
-        },
-
         ...Vuex.mapState({
             showError: state => state.checkout.validation.gtc.showError
         })

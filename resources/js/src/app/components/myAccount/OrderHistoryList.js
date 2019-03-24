@@ -12,11 +12,6 @@ Vue.component("order-history-list", {
             type: String,
             default: "#vue-order-history-list"
         },
-        appearance:
-        {
-            type: String,
-            default: "primary"
-        },
         ordersPerPage:
         {
             type: Number,

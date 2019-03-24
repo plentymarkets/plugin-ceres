@@ -16,15 +16,6 @@ Vue.component("place-order", {
         {
             type: String
         },
-        appearance:
-        {
-            type: [String, null],
-            default: "success",
-            validator: value =>
-            {
-                return ["primary", "secondary", "success", "info", "warning", "danger"].indexOf(value) !== -1;
-            }
-        },
         buttonSize:
         {
             type: [String, null],
@@ -47,7 +38,7 @@ Vue.component("place-order", {
     {
         buttonClasses()
         {
-            const classes = [`btn-${this.appearance}`];
+            const classes = [];
 
             if (isDefined(this.buttonSize))
             {

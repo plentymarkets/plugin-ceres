@@ -6,9 +6,8 @@
 {% set appearance = widget.settings.appearance.mobile %}
 {% set returnsPerPage = widget.settings.returnsPerPage.mobile %}
 
-<div class="widget widget-order-return-history widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+<div class="widget widget-order-return-history widget-{{ appearance | default('primary') }}">
     <order-return-history-list
-        appearance="{{ appearance | default("primary") }}"
         hint-text="{{ hintText }}"
         :returns-per-page="{{ returnsPerPage | default(5) | json_encode }}"
         {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}>

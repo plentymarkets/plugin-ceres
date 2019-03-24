@@ -13,7 +13,7 @@
             "options": "@include(appearance)" 
         },
         "text": {
-            "type": "codeEditor",
+            "type": "noteEditor",
             "options": {
                 "name": "Widget.myAccountHintTextLabel"
             }

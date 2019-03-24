@@ -10622,7 +10622,7 @@ $heights: 1, 2, 3, 4, 5, 6;
 }
 
 @mixin make-prop($width, $height) {
-    padding-bottom: percentage($height / $width);
+    padding-bottom: percentage($height / $width) !important;
 }
 
 @include make-props();
@@ -11041,13 +11041,7 @@ button:focus {
     }
 }
 
-// create gray outline button 
-.btn-outline-default{
-	@include button-outline-variant($gray-light);
-}
-
 .btn {
-
 	outline: 0 !important;
 
 	& .btn-label {
@@ -11067,10 +11061,6 @@ button:focus {
 	& > span + .fa {
 		margin-left: 5px;
 		margin-top: 1px;
-	}
-
-	&.btn-danger:hover {
-		background-color: #c9302c;
 	}
 
 	&.btn-medium {
@@ -11095,7 +11085,6 @@ button:focus {
 			margin-top: 0;
 		}
 	}
-
 }
 
 .btn-right {
@@ -11166,6 +11155,15 @@ button:focus {
 			width: 12px;
 		}
 	}
+
+	&.btn-circle
+	{
+		border-radius: 50%;
+	}
+}
+
+.btn-default {
+	@include button-variant($gray-lighter, $gray-lighter);
 }
 
 // Responsive button text and icon visibility
@@ -12933,10 +12931,10 @@ $border-width: 1px;
 
         a
         {
-            color: $white;
+            color: $white !important;
             &:hover
             {
-                color: $gray-lighter2;
+                color: $gray-lighter2 !important;
             }
         }
 
@@ -15924,6 +15922,7 @@ html.ie .basket-preview-hover {
 
     .basket-header
     {
+        position: relative;
         -webkit-box-flex: 0;
             -ms-flex: 0 0 auto;
                 flex: 0 0 auto;
@@ -15937,6 +15936,14 @@ html.ie .basket-preview-hover {
             }
 
             font-size: 1.25rem;
+        }
+
+        .close {
+            height: 100%;
+            width: 50px;
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     }
 
@@ -18687,7 +18694,6 @@ html.ios {
 		}
 	}
 }
-
 .single {
     .list-item-carousel {
         .list-control-special{
@@ -18748,7 +18754,11 @@ html.ios {
         }
     }
     .nav-tabs {
+        @include media-breakpoint-only(xs) {
+            display: block;
+        }
         .nav-item {
+            cursor: pointer;
             float: none;
             .nav-link {
                 border:1px solid $nav-tabs-border-color;
@@ -18797,6 +18807,12 @@ html.ios {
         &.active {
             border-color: $success;
         }
+    }
+
+    .order-property-selection-info-popper {
+        position: absolute;
+        top: 6px;
+        right: 18px;
     }
 }
 
@@ -19394,26 +19410,13 @@ html.ios {
             }
         }
     }
-
-    @each $color, $value in $theme-colors {
-        &.widget-#{$color} {
-            button:hover,
-            button:focus {
-                -webkit-text-decoration-color: $value;
-                        text-decoration-color: $value;
-            }
-            h5 {
-                color: $value;
-            }
-        }
-    }
 }
 
 
-.widget-image-box
+.widget.widget-image-box
 {
     @include media-breakpoint-only(xs) {
-        padding-bottom: 0 !important;
+        padding-bottom: 0;
         min-height: 10rem;
     }
 
@@ -19847,36 +19850,6 @@ html.ie {
             font-size: 1.75rem;
         }
     }
-
-    &.widget-primary .widget-caption
-    {
-        @include widget-bg-variant($primary);
-    }
-
-    &.widget-secondary .widget-caption
-    {
-        @include widget-bg-variant($secondary);
-    }
-
-    &.widget-success .widget-caption
-    {
-        @include widget-bg-variant($success);
-    }
-
-    &.widget-info .widget-caption
-    {
-        @include widget-bg-variant($info);
-    }
-
-    &.widget-warning .widget-caption
-    {
-        @include widget-bg-variant($warning);
-    }
-
-    &.widget-danger .widget-caption
-    {
-        @include widget-bg-variant($danger);
-    }
 }
 .widget-legal-information
 {
@@ -19966,58 +19939,6 @@ html.ie {
     {
         padding: 1rem 1.5rem;
     }
-
-    .placeholder-text
-    {
-        border: 3px dashed #dadae3;
-        border-radius: 3px;
-        height: 75px;
-        line-height: 75px;
-        vertical-align: middle;
-        text-align: center;
-        color: #dadae3;
-        font-size: 20px;
-        font-style: italic;
-    }
-
-    &.widget-primary, &.widget-secondary, &.widget-success, &.widget-info, &.widget-warning, &.widget-danger, &.widget-inverse
-    {
-        .placeholder-text
-        {
-            border-color: white;
-            color: white;
-        }
-    }
-
-    &.widget-primary
-    {
-        @include widget-bg-variant($primary);
-    }
-
-    &.widget-secondary
-    {
-        @include widget-bg-variant($secondary);
-    }
-
-    &.widget-success
-    {
-        @include widget-bg-variant($success);
-    }
-
-    &.widget-info
-    {
-        @include widget-bg-variant($info);
-    }
-
-    &.widget-warning
-    {
-        @include widget-bg-variant($warning);
-    }
-
-    &.widget-danger
-    {
-        @include widget-bg-variant($danger);
-    }
 }
 .widget-title-bar
 {
@@ -20033,53 +19954,6 @@ html.ie {
         font-size: 2.5rem;
         letter-spacing: 1.25px;
         display: block;
-    }
-
-    &.widget-primary
-    {
-        @include widget-bg-variant($primary);
-    }
-
-    &.widget-secondary
-    {
-        @include widget-bg-variant($secondary);
-    }
-
-    &.widget-success
-    {
-        @include widget-bg-variant($success);
-    }
-
-    &.widget-info
-    {
-        @include widget-bg-variant($info);
-    }
-
-    &.widget-warning
-    {
-        @include widget-bg-variant($warning);
-    }
-
-    &.widget-danger
-    {
-        @include widget-bg-variant($danger);
-    }
-}
-.widget-address
-{
-    @each $color, $value in $shop-builder-colors
-    {
-        &.widget-#{$color}
-        {
-            .btn-primary
-            {
-                @extend .btn-#{$color};
-            }
-            .btn-outline-primary
-            {
-                @extend .btn-outline-#{$color};
-            }
-        }
     }
 }
 .widget-grid
@@ -20293,6 +20167,64 @@ header .widget
     padding-bottom: 0.1px;
 }
 
+@each $color, $value in $shop-builder-colors
+{
+    .widget-#{$color}
+    {
+        @include text-emphasis-variant(".text-appearance", $value);
+
+        .bg-appearance
+        {
+            @include context-bg($value);
+
+            a
+            {
+                color: color-yiq($value);
+            }
+        }
+
+        a.bg-appearance:hover,
+        button.bg-appearance:hover
+        {
+            @include context-bg(darken($value, 10%));
+        }
+
+        .btn-appearance
+        {
+            @include button-variant($value, $value);
+        }
+
+
+        a.text-appearance,
+        .btn-appearance
+        {
+            -webkit-text-decoration-color: $value;
+                    text-decoration-color: $value;
+
+            @include hover-focus {
+                -webkit-text-decoration-color: darken($value, 7.5);
+                        text-decoration-color: darken($value, 7.5);
+            }
+        }
+
+        .pagination .page-item
+        {
+            .page-link
+            {
+                color: $value;
+                @include hover-focus {
+                    color: darken($value, 15%);
+                }
+            }
+
+            &.active .page-link
+            {
+                border-color: $value;
+                @include context-bg($value);
+            }
+        }
+    }
+}
 .widget-placeholder
 {
     width: 100%;
@@ -20320,57 +20252,6 @@ header .widget
     .description
     {
         font-style: italic;
-    }
-}
-
-.widget-order-history,
-.widget-order-return-history {
-    @each $color, $value in $shop-builder-colors
-    {
-        &.widget-#{$color}
-        {        
-            .loading-animation > div
-            {
-                background-color: $value;
-            }
-
-            .sk-fading-circle > .sk-circle:before
-            {
-                background-color: $value;
-            }
-    
-            .text-primary
-            {
-                @extend .text-#{$color};
-            }
-    
-            .pagination
-            {
-                a
-                {
-                    color: $value;
-                }
-    
-                .page-item
-                {
-                    .page-link
-                    {
-                        color: $value;
-    
-                        &:hover
-                        {
-                            color: darken($value, 15%);
-                        }
-                    }
-    
-                    &.active .page-link
-                    {
-                        border-color: $value;
-                        @include context-bg($value);
-                    }
-                }
-            }
-        }
     }
 }
 

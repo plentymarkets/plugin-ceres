@@ -5,6 +5,7 @@
 
     .basket-header
     {
+        position: relative;
         flex: 0 0 auto;
         border-bottom: 1px solid $gray-lighter;
 
@@ -16,6 +17,14 @@
             }
 
             font-size: 1.25rem;
+        }
+
+        .close {
+            height: 100%;
+            width: 50px;
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     }
 

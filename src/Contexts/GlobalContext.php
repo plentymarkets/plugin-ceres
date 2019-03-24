@@ -96,7 +96,7 @@ class GlobalContext implements ContextInterface
 
         if($templateService->isCategory() || $templateService->isItem())
         {
-            $this->categoryBreadcrumbs = $categoryService->getHierarchy();
+            $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
             $crossSellingService->setType($this->ceresConfig->itemLists->crossSellingType);
             $crossSellingService->setSorting($this->ceresConfig->itemLists->crossSellingSorting);
         }
