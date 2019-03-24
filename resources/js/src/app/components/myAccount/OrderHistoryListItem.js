@@ -45,11 +45,6 @@ Vue.component("order-history-list-item", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         loadOrderDetailTemplate()

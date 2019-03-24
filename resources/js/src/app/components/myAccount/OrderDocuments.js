@@ -49,11 +49,6 @@ Vue.component("order-documents", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     computed:
     {
         activeDocuments()

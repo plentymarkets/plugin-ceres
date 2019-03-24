@@ -59,8 +59,6 @@ Vue.component("quantity-input", {
 
     created()
     {
-        this.$options.template = this.template;
-
         this.compInterval = defaultValue(this.compInterval, 1);
         this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
 

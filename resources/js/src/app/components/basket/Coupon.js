@@ -50,11 +50,6 @@ Vue.component("coupon", {
         })
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>

@@ -23,7 +23,6 @@ Vue.component("shipping-profile-select", {
      */
     created()
     {
-        this.$options.template = this.template;
         this.$store.commit("setShippingProfileValidator", this.validate);
     },
 

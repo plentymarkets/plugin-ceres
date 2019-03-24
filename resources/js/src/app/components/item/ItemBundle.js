@@ -24,11 +24,6 @@ Vue.component("item-bundle", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>

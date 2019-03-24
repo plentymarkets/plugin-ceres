@@ -114,11 +114,6 @@ Vue.component("basket-list-item", {
         })
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods: {
 
         /**

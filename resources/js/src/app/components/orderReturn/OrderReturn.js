@@ -14,8 +14,6 @@ Vue.component("order-return", {
 
     created()
     {
-        this.$options.template = this.template;
-
         this.$store.commit("setOrderReturnData", this.initOrderData);
     },
 

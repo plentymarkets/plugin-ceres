@@ -4,10 +4,18 @@ Vue.component("item-filter", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template",
-        "facet"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-item-filter"
+        },
+        facet:
+        {
+            type: Object
+        }
+    },
 
     computed:
     {
@@ -42,11 +50,6 @@ Vue.component("item-filter", {
             selectedFacets: state => state.itemList.selectedFacets,
             isLoading: state => state.itemList.isLoading
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template || "#vue-item-filter";
     },
 
     methods:

@@ -36,11 +36,6 @@ Vue.component("registration", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods: {
         /**
          * Validate the registration form

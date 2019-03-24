@@ -37,10 +37,5 @@ Vue.component("basket-totals", {
         {
             return (value / (100 - percent)) * 100;
         }
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     }
 });

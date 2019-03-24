@@ -54,11 +54,6 @@ Vue.component("change-payment-method", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     /**
      * Initialize the change payment modal
      */

@@ -73,14 +73,6 @@ Vue.component("address-input-group", {
         };
     },
 
-    /**
-     * Check whether the address data exists. Else, create an empty one
-     */
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         /**

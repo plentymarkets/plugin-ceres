@@ -94,11 +94,6 @@ Vue.component("order-property-list-item", {
         ])
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         onInputValueChanged(value)

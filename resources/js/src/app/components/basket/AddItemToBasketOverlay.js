@@ -72,11 +72,6 @@ Vue.component("add-item-to-basket-overlay", {
         })
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     watch:
     {
         latestBasketEntry()

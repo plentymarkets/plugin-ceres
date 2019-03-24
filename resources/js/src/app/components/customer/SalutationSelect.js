@@ -109,8 +109,6 @@ Vue.component("salutation-select", {
      */
     created()
     {
-        this.$options.template = this.template;
-
         const selectedSalutation = this.addressData.addressSalutation;
 
         if (isNullOrUndefined(selectedSalutation))

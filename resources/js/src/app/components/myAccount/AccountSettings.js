@@ -36,11 +36,6 @@ Vue.component("account-settings", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     /**
      * Initialise the account settings modal
      */
