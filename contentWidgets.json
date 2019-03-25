@@ -2641,7 +2641,7 @@
         "position": 300,
         "widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
         "settings": {
-            "layoutDesktop": {
+            "layout": {
                 "type": "select",
                 "required": true,
                 "defaultValue": "oneToOne",
