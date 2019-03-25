@@ -5,6 +5,8 @@
 ### TODO
 
 - Order characteristics of the type **Selection** are now supported and the description of the characteristic is displayed in the front end. You should check the **description** of the order characteristic and review whether you want the description to be displayed in the online store.
+- In case the markup is displayed incorrectly, you can use the **Regenerate contents** button.
+
 
 ### Added
 
