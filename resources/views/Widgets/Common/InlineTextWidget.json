@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::InlineTextWidget",
     "label": "Widget.textLabel",
-    "previewImageURL": "/images/widgets/text.svg",
+    "previewImageURL": "/images/widgets/inline-text.svg",
     "type": "static",
     "categories": ["text"],
     "position": 800,
