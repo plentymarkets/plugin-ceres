@@ -19318,6 +19318,10 @@ Vue.component("accept-privacy-policy-check", {
 },{}],151:[function(require,module,exports){
 "use strict";
 
+var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -19442,16 +19446,17 @@ Vue.component("address-input-group", {
     },
     isInRequiredFields: function isInRequiredFields(locale, key) {
       return this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key);
-    }
-  },
-  filters: {
-    transformRequiredLabel: function transformRequiredLabel(label, shouldMarkRequired) {
-      return shouldMarkRequired ? label + "*" : label;
+    },
+    transformTranslation: function transformTranslation(translationKey, locale, addressKey) {
+      var translation = _TranslationService.default.translate(translationKey);
+
+      var isRequired = this.isInRequiredFields(locale, addressKey);
+      return translation + (isRequired ? "*" : "");
     }
   }
 });
 
-},{}],152:[function(require,module,exports){
+},{"services/TranslationService":266}],152:[function(require,module,exports){
 "use strict";
 
 Vue.component("address-header", {
@@ -20537,6 +20542,10 @@ Vue.component("contact-map", {
 },{}],159:[function(require,module,exports){
 "use strict";
 
+var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 Vue.component("country-select", {
   delimiters: ["${", "}"],
   props: ["countryList", "selectedCountryId", "selectedStateId", "template", "addressType", "optionalAddressFields", "requiredAddressFields"],
@@ -20614,11 +20623,12 @@ Vue.component("country-select", {
     },
     isInRequiredFields: function isInRequiredFields(locale, key) {
       return this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key);
-    }
-  },
-  filters: {
-    transformRequiredLabel: function transformRequiredLabel(label, shouldMarkRequired) {
-      return shouldMarkRequired ? label + "*" : label;
+    },
+    transformTranslation: function transformTranslation(translationKey, locale, addressKey) {
+      var translation = _TranslationService.default.translate(translationKey);
+
+      var isRequired = this.isInRequiredFields(locale, addressKey);
+      return translation + (isRequired ? "*" : "");
     }
   },
   watch: {
@@ -20628,7 +20638,7 @@ Vue.component("country-select", {
   }
 });
 
-},{}],160:[function(require,module,exports){
+},{"services/TranslationService":266}],160:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
