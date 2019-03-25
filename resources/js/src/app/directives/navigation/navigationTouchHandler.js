@@ -5,7 +5,7 @@ Vue.directive("navigation-touch-handler", {
         {
             const className = "hover";
 
-            el.addEventListener("click", event =>
+            el.addEventListener("touchstart", event =>
             {
                 const isHover = el.classList.contains(className);
 
