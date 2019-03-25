@@ -36,6 +36,11 @@
                         <div class="d-inline-block item-description">
                             <div><a class="text-primary text-appearance" :href="returnOrder.itemURLs[orderItem.itemVariationId]">${ orderItem | itemBundleName }</a></div>
                             <div>{{ trans("Ceres::Template.returnHistoryQuantity") }}: ${ orderItem.quantity}</div>
+                            <template v-if="returnOrder.order.orderItems[0].orderProperties && returnOrder.order.orderItems[0].orderProperties.length > 0">
+                                <div v-for="property in returnOrder.order.orderItems[0].orderProperties">
+                                    <b>${ property.name }</b><span v-if="!!property.type"> : ${ property.value }</span>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div> 
