@@ -107,7 +107,7 @@ const actions =
                 {
                     commit("setBasket", basket);
 
-                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" })
+                    ApiService.get("/rest/io/basket/items", { cache: false, template: "Ceres::Basket.Basket" })
                         .done(basketItems =>
                         {
                             commit("setBasketItems", basketItems);
