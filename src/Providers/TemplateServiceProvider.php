@@ -15,6 +15,7 @@ use Ceres\Contexts\OrderConfirmationContext;
 use Ceres\Contexts\OrderReturnContext;
 use Ceres\Contexts\PasswordResetContext;
 use Ceres\Contexts\SingleItemContext;
+use Ceres\Extensions\TwigJsonDataContainer;
 use Ceres\Extensions\TwigLayoutContainerInternal;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
@@ -82,6 +83,7 @@ class TemplateServiceProvider extends ServiceProvider
         $twig->addExtension('Twig_Extension_StringLoader');
         $twig->addExtension(TwigStyleScriptTagFilter::class);
         $twig->addExtension(TwigLayoutContainerInternal::class);
+        $twig->addExtension(TwigJsonDataContainer::class);
 
         $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
             if ( !$templateContainer->hasTemplate() )

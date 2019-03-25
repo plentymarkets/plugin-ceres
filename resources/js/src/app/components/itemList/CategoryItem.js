@@ -18,8 +18,7 @@ Vue.component("category-item", {
         },
         itemData:
         {
-            type: Object,
-            required: true
+            type: Object
         },
         disableCarouselOnMobile:
         {
@@ -27,14 +26,23 @@ Vue.component("category-item", {
         }
     },
 
+    jsonDataFields: [
+        "itemDataRef"
+    ],
+
     computed:
     {
+        item()
+        {
+            return this.itemData || this.itemDataRef;
+        },
+
         /**
          * returns itemData.item.storeSpecial
          */
         storeSpecial()
         {
-            return this.itemData.item.storeSpecial;
+            return this.item.item.storeSpecial;
         },
 
         /**
@@ -42,7 +50,7 @@ Vue.component("category-item", {
          */
         texts()
         {
-            return this.itemData.texts;
+            return this.item.texts;
         },
 
         ...Vuex.mapState({
