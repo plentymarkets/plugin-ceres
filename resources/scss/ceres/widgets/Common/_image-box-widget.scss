@@ -30,6 +30,7 @@
         .widget-caption
         {
             transition: 300ms all ease;
+            word-break: break-word;
 
             h2, .h2
             {
@@ -42,13 +43,7 @@
     &.widget-image-box-fullwidth
     {
         > .widget-inner
-        {   
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                min-height: 12rem;
-                padding-top: 2rem;
-            }
-
+        {
             .widget-caption
             {
                 width: 100%;
@@ -81,11 +76,6 @@
         {
             align-items: flex-end;
 
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                padding-top: 14%;
-            }
-
             .widget-caption
             {
                 padding: 1.5rem;
@@ -97,22 +87,12 @@
     {
         > .widget-inner
         {
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                padding: 25% 0 0 0;
-            }
+            padding: 0;
+            top: auto;
 
             .widget-caption
             {
-                @include media-breakpoint-only(xs) {
-                    position: relative;
-                    width: 100%;
-                }
-
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: 0;
+                width: 100%;
                 padding: 1rem;
             }
         }
