@@ -10623,6 +10623,7 @@ $heights: 1, 2, 3, 4, 5, 6;
 
 @mixin make-prop($width, $height) {
     padding-bottom: percentage($height / $width) !important;
+    min-height: auto !important;
 }
 
 @include make-props();
@@ -19450,6 +19451,7 @@ html.ios {
         {
             -webkit-transition: 300ms all ease;
             transition: 300ms all ease;
+            word-break: break-word;
 
             h2, .h2
             {
@@ -19462,13 +19464,7 @@ html.ios {
     &.widget-image-box-fullwidth
     {
         > .widget-inner
-        {   
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                min-height: 12rem;
-                padding-top: 2rem;
-            }
-
+        {
             .widget-caption
             {
                 width: 100%;
@@ -19507,11 +19503,6 @@ html.ios {
                 -ms-flex-align: end;
                     align-items: flex-end;
 
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                padding-top: 14%;
-            }
-
             .widget-caption
             {
                 padding: 1.5rem;
@@ -19523,22 +19514,12 @@ html.ios {
     {
         > .widget-inner
         {
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                padding: 25% 0 0 0;
-            }
+            padding: 0;
+            top: auto;
 
             .widget-caption
             {
-                @include media-breakpoint-only(xs) {
-                    position: relative;
-                    width: 100%;
-                }
-
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: 0;
+                width: 100%;
                 padding: 1rem;
             }
         }
@@ -19946,6 +19927,7 @@ html.ie {
     {
         padding: 1rem 1.5rem;
         text-align: center;
+        word-break: break-word;
     }
 
     .h1, h1
@@ -19960,9 +19942,15 @@ html.ie {
 {
     > .widget-inner
     {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
         > div
         {
-            height: 100%;
+            -webkit-box-flex: 1;
+                -ms-flex: 1;
+                    flex: 1;
         }
     }
 
@@ -19978,21 +19966,17 @@ html.ie {
 
         > .widget-inner
         {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-
-            > div
-            {
-                -webkit-box-flex: 1;
-                    -ms-flex: 1;
-                        flex: 1;
-
-            }
-
             [data-builder-child-container]
             {
                 min-height: 100px;
+            }
+
+            @include media-breakpoint-up(md)
+            {
+                .widget-proportional
+                {
+                    height: 100%;
+                }
             }
         }
     }
@@ -20092,14 +20076,30 @@ html.ie {
 {
     .widget
     {
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
 
-        &.widget-grid
+        &.widget-grid:not(.widget-two-col)
         {
             margin-bottom: 0;
         }
 
-        .widget-inner
+        &:not(.widget-two-col) .widget-inner:not(.widget-stacked)
+        {
+            .widget:not(.widget-grid)
+            {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(xs)
+{
+    .widget
+    {
+        margin-bottom: 1rem;
+
+        &:not(.widget-two-col) .widget-inner:not(.widget-stacked)
         {
             .widget:not(.widget-grid)
             {
@@ -20137,28 +20137,77 @@ header .widget
     }
 }
 
-@include media-breakpoint-up(md)
-{
-    @each $i in 1,2,3,4
-    {
-        @each $j in 1,2,3,4
-        {
-            .widget-prop-#{$i}-#{$j} .widget-proportional
-            {
-                padding-bottom: percentage($j / $i);
-            }
 
-            .widget-proportional.widget-prop-#{$i}-#{$j}
+@each $breakpoint in map-keys($grid-breakpoints)
+{
+    $infix: breakpoint-infix($breakpoint);
+    $next: breakpoint-next($breakpoint);
+
+    @include media-breakpoint-up($breakpoint)
+    {
+        @each $i in 1, 2, 3, 4
+        {
+            @each $j in 1, 2, 3, 4
             {
-                padding-bottom: percentage($j / $i) !important;
+                .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional
+                {
+                    padding-bottom: percentage($j / $i);
+                }
+
+                .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j}
+                {
+                    padding-bottom: percentage($j / $i) !important;
+                }
+
             }
         }
 
     }
-    .widget-prop-auto .widget-proportional
+    @include media-breakpoint-only($breakpoint)
     {
-        padding-bottom: 0;
-        min-height: 100%;
+        .widget-prop#{$infix}-auto > div > .widget-proportional
+        {
+            padding-bottom: 0;
+            min-height: 100%;
+        }
+    }
+}
+
+@include media-breakpoint-down(xs)
+{
+    .widget-grid .widget-inner.col-12.widget-stacked
+    {
+        padding-bottom: 1rem;
+    }
+}
+
+@include media-breakpoint-between(sm, lg)
+{
+    .widget-grid .widget-inner.col-sm-12.widget-stacked
+    {
+        padding-bottom: 2rem;
+    }
+}
+
+@include media-breakpoint-up(lg)
+{
+    .widget-grid .widget-inner.col-lg-12.widget-stacked
+    {
+        padding-bottom: 2rem;
+    }
+}
+
+@include media-breakpoint-up(md)
+{
+    .widget-grid
+    {
+        > .widget-inner.widget-prop-md-auto
+        {
+            &.col-md-3 > div > .widget-proportional
+            {
+                padding-bottom: calc(100% + 15px);
+            }
+        }
     }
 }
 
