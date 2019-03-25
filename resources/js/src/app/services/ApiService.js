@@ -117,7 +117,7 @@ module.exports = (function($)
             WaitScreenService.showWaitScreen();
         }
 
-        $.ajax(url, config)
+        var request = $.ajax(url, config)
             .done(function(response)
             {
                 if (config.keepOriginalResponse)
@@ -133,7 +133,7 @@ module.exports = (function($)
             {
                 var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
 
-                deferred.reject(response);
+                deferred.reject(response, jqXHR.status);
             })
             .always(function()
             {
@@ -142,6 +142,8 @@ module.exports = (function($)
                     WaitScreenService.hideWaitScreen();
                 }
             });
+
+        deferred.abort = request.abort;
 
         return deferred;
     }
