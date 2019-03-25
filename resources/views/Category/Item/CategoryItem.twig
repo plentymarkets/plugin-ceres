@@ -15,6 +15,15 @@
     {% endif %}
 
     <div class="categoriegrid page-content container-max">
+
+        {% if category is not defined and itemList is not empty %}
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>
+                </div>
+            </div>
+        {% endif %}
+
         {% if category is defined and not ceresConfig.item.showCategoryImage %}
             <div class="row mt-3">
                 <div class="col-12">
@@ -93,6 +102,10 @@
                         </li>
                     {% endfor %}
                 </ul>
+
+                {% if category is not defined and itemList is empty %}
+                    <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
+                {% endif %}
             </div>
         </div>
 
