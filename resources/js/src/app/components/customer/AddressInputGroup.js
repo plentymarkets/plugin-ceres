@@ -152,7 +152,7 @@ Vue.component("address-input-group", {
 
         transformTranslation(translationKey, locale, addressKey)
         {
-            const translation = TranslationService.translate(translationKey)
+            const translation = TranslationService.translate(translationKey);
             const isRequired = this.isInRequiredFields(locale, addressKey);
 
             return translation + (isRequired ? "*" : "");
