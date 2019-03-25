@@ -8,6 +8,7 @@
 
 ### Added
 
+- The widget "Two column grid" can now be arranged individually for each display size.
 - The aspect ratio of images can now be specified in the image carousel widget of the ShopBuilder.
 - The aspect ratio of images can now be specified in the image box widget of the ShopBuilder.
 - We added the new layout container **Basket.ExtendOverlayButtons**.

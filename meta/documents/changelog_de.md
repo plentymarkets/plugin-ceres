@@ -8,6 +8,7 @@
 
 ### Hinzugefügt
 
+- Das Widget "Raster mit 2 Spalten" kann jetzt für verschiedene Displaygrößen unterschiedlich angeordnet werden.
 - Im Bilderkarussell-Widget des ShopBuilders kann nun das Seitenverhältnis der Bilder eingestellt werden.
 - Im Bilderbox-Widget des ShopBuilders kann nun das Seitenverhältnis des Bildes eingestellt werden.
 - Der Layout-Container **Basket.ExtendOverlayButtons** wurde hinzugefügt.
