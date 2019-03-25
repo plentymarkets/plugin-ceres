@@ -102,7 +102,7 @@ const actions =
     {
         loadBasketData({ commit, state })
         {
-            ApiService.get("/rest/io/basket")
+            ApiService.get("/rest/io/basket", { cache: false })
                 .done(basket =>
                 {
                     commit("setBasket", basket);

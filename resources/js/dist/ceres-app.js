@@ -29281,7 +29281,9 @@ var actions = {
     var commit = _ref3.commit,
         state = _ref3.state;
 
-    _ApiService.default.get("/rest/io/basket").done(function (basket) {
+    _ApiService.default.get("/rest/io/basket", {
+      cache: false
+    }).done(function (basket) {
       commit("setBasket", basket);
 
       _ApiService.default.get("/rest/io/basket/items", {
