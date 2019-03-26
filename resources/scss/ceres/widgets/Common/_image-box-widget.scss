@@ -1,7 +1,7 @@
-.widget-image-box
+.widget.widget-image-box
 {
     @include media-breakpoint-only(xs) {
-        padding-bottom: 0 !important;
+        padding-bottom: 0;
         min-height: 10rem;
     }
 
@@ -30,19 +30,20 @@
         .widget-caption
         {
             transition: 300ms all ease;
+            word-break: break-word;
+
+            h2, .h2
+            {
+                margin: 0;
+                font-size: 1.75rem;
+            }
         }
     }
 
     &.widget-image-box-fullwidth
     {
         > .widget-inner
-        {   
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                min-height: 12rem;
-                padding-top: 2rem;
-            }
-
+        {
             .widget-caption
             {
                 width: 100%;
@@ -65,11 +66,6 @@
         {
             align-items: flex-end;
 
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                padding-top: 14%;
-            }
-
             .widget-caption
             {
                 padding: 0 1.5rem;
@@ -81,10 +77,8 @@
     {
         > .widget-inner
         {
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                padding: 25% 0 0 0;
-            }
+            padding: 0;
+            top: auto;
 
             .widget-caption
             {
@@ -97,7 +91,8 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                padding: 0 1rem;
+                width: 100%;
+                padding: 1rem;
             }
         }
     }
@@ -277,14 +272,6 @@
             {
                 font-size: 2.5rem;
             }
-        }
-    }
-
-    &.inline-caption
-    {
-        h1
-        {
-
         }
     }
 }

@@ -1,3 +1,5 @@
+import TranslationService from "services/TranslationService";
+
 Vue.component("country-select", {
 
     delimiters: ["${", "}"],
@@ -104,13 +106,14 @@ Vue.component("country-select", {
         isInRequiredFields(locale, key)
         {
             return (this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key));
-        }
-    },
+        },
 
-    filters: {
-        transformRequiredLabel(label, shouldMarkRequired)
+        transformTranslation(translationKey, locale, addressKey)
         {
-            return shouldMarkRequired ? label + "*" : label;
+            const translation = TranslationService.translate(translationKey);
+            const isRequired = this.isInRequiredFields(locale, addressKey);
+
+            return translation + (isRequired ? "*" : "");
         }
     },
 

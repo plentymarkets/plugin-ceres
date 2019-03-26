@@ -28,8 +28,7 @@
 				<div class="col-md-2">{{ trans("Ceres::Template.returnHistoryDocuments") }}</div>
 			</div>
 			<div v-if="!waiting" class="order-list border-top">
-                <order-return-history-list-item v-for="returnOrder in returnsList.entries" 
-                    :appearance="appearance" 
+                <order-return-history-list-item v-for="returnOrder in returnsList.entries"
                     :return-order="returnOrder" 
                     :key="returnOrder.order.id">
                 </order-return-history-list-item>

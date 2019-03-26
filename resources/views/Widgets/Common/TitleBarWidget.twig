@@ -5,7 +5,7 @@
 {% set appearance = widget.settings.appearance.mobile | default('primary') %}
 
 <div class="widget widget-title-bar widget-{{ appearance }}">
-    <div class="widget-inner" {{ WidgetHelper.makeEditable("content", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-title-bar widget-" ~ appearance) }}>
+    <div class="widget-inner bg-appearance" {{ WidgetHelper.makeEditable("content", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-title-bar widget-" ~ appearance) }}>
         {% if text | trim is empty %}
             <h1 class="align-center">{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.headerCompanyName")) }}</h1>
         {% else %}

@@ -4,12 +4,12 @@
 {{ Twig.component("Ceres::Checkout.Components.PlaceOrder") }}
 
 {% set buttonSize = widget.settings.buttonSize.mobile %}
+{% set appearance = widget.settings.appearance.mobile %}
 
-<div class="widget widget-place-order">
+<div class="widget widget-place-order widget-{{ appearance | default("success") }}">
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforePlaceOrder"])) }}
 
     <place-order
-        appearance="{{ widget.settings.appearance.mobile | default("success") }}"
         {% if buttonSize is not empty %}button-size="{{ buttonSize }}"{% endif %}
         target-continue="{{ Twig.print("homepageURL") }}{{ Twig.if("homepageURL | last != '/'") }}/{{ Twig.endif() }}place-order{{ Twig.if("urls.appendTrailingSlash") }}/{{ Twig.endif() }}"
         @payment-response="checkoutComp.showModal($event)">

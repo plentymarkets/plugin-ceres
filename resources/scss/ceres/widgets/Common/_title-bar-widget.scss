@@ -3,6 +3,8 @@
     .widget-inner
     {
         padding: 1rem 1.5rem;
+        text-align: center;
+        word-break: break-word;
     }
 
     .h1, h1,
@@ -25,35 +27,5 @@
     {
         margin: 0.25rem 0;
         font-size: 2rem;
-    }
-
-    &.widget-primary
-    {
-        @include widget-bg-variant($primary);
-    }
-
-    &.widget-secondary
-    {
-        @include widget-bg-variant($secondary);
-    }
-
-    &.widget-success
-    {
-        @include widget-bg-variant($success);
-    }
-
-    &.widget-info
-    {
-        @include widget-bg-variant($info);
-    }
-
-    &.widget-warning
-    {
-        @include widget-bg-variant($warning);
-    }
-
-    &.widget-danger
-    {
-        @include widget-bg-variant($danger);
     }
 }

@@ -64,7 +64,7 @@
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
             <last-seen-item-list :items-per-page="{{ itemsPerPage }}" :max-items="{{ maxItems }}" v-cloak>
-                <div class="widget-caption widget-item-list-caption mb-3" slot="heading">
+                <div class="widget-caption bg-appearance widget-item-list-caption mb-3" slot="heading">
                     {% if headlineStyle == "custom-caption" %}
                         <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-caption") }}>
                             {{ headline | raw }}
@@ -79,7 +79,7 @@
         {% else %}
             {# render static item lists #}
             {% if headlineStyle == "default-caption" or headlineStyle == "custom-caption" or headlineStyle is empty %}
-                <div class="widget-caption widget-item-list-caption mb-3">
+                <div class="widget-caption widget-item-list-caption mb-3 bg-appearance">
                     {% if headlineStyle == "custom-caption" %}
                         <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-caption") }}>
                             {{ headline | raw }}

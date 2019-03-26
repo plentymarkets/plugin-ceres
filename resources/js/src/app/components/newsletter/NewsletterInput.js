@@ -20,11 +20,6 @@ Vue.component("newsletter-input", {
             type: Boolean,
             default: true
         },
-        appearance:
-        {
-            type: String,
-            default: "primary"
-        },
         emailFolder:
         {
             type: Number,

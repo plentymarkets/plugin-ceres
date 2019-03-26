@@ -10,7 +10,7 @@
         "appearance": { 
             "type": "select", 
             "defaultValue": "primary", 
-            "options": "@include(appearance)" 
+            "options": "@include(appearance)"
         }
     }
 }
