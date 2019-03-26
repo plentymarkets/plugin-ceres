@@ -5,9 +5,12 @@ Vue.component("shop-country-settings", {
     template: "<div><slot></slot></div>",
 
     props: {
-        shippingCountries: Array,
         shippingCountryId: Number
     },
+
+    jsonDataFields: [
+        "shippingCountries"
+    ],
 
     created()
     {

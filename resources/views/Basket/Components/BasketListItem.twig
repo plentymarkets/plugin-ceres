@@ -83,7 +83,7 @@
                         </div>
     
                         <div class="price-box">
-                            <div class="item-total-price">${ itemTotalPrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
+                            <div class="item-total-price">${ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }</div>
                 
                             <div class="item-remove-container">
                                 <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || waitingForDelete }" @click="deleteItem">
@@ -99,7 +99,7 @@
 
                 <div class="item-properties" v-if="basketItem.basketItemOrderParams.length">
                     <div class="item-properties-header">{{ trans("Ceres::Template.basketAdditionalOptions") }}:</div>
-                    <ul>
+                    <ul class="ml-3">
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
 
                             <span :class="{ 'item-property-value': size === 'small' }">
