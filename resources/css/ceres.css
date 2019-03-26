@@ -18493,6 +18493,10 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   cursor: pointer;
 }
 
+.top-bar .account-menu {
+  min-width: 100%;
+}
+
 .top-bar.fixed-top {
   position: fixed;
 }
@@ -18603,11 +18607,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .top-bar .controls-list .control-user #login-change > .dropdown .dropdown-menu a > .fa-sign-out {
   margin-right: 3px;
-}
-
-.top-bar .controls-list .control-user .account-menu {
-  padding: 0;
-  margin: 0;
 }
 
 .top-bar .controls-list .control-wish-list a .badge-right {
@@ -18800,7 +18799,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   position: relative;
   padding: 0 15px;
   display: block;
-  width: 100%;
 }
 
 .navbar-brand {
@@ -18910,14 +18908,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 }
 
 @media (min-width: 992px) {
-  .brand-wrapper {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1000;
-    width: auto;
-    left: 0;
-  }
   .navbar-nav > .nav-item > .nav-link {
     padding: 1.3rem 1rem;
   }
@@ -18930,10 +18920,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   .sticky .header .navbar {
     max-width: 1110px;
   }
-}
-
-.account-menu.dropdown-menu.dropdown-menu-right.small, .account-menu.dropdown-menu.dropdown-menu-right.btn-labeled, .basket-preview .account-menu.dropdown-menu.dropdown-menu-right.totals {
-  min-width: 100%;
 }
 
 .top-bar .cmp-search-box {
@@ -19235,41 +19221,69 @@ div:not(.top-bar) > .page-header > div > .cmp-search-box {
       flex-direction: row;
 }
 
-nav.navbar .container-max {
-  display: block;
-}
-
+/* settings */
 nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
   display: block;
   margin-top: 0px;
 }
 
-.dropdown-menu.dropdown-menu-right {
-  min-width: 100%;
-}
-
-.dropdown-item.special-case {
-  padding: 3px 5px !important;
-}
-
-/* settings */
 body.menu-is-visible {
   overflow-y: hidden;
   position: fixed;
 }
 
+nav.navbar:not(.megamenu) .nav-dropdown-inner {
+  width: 100%;
+}
+
+nav.navbar:not(.megamenu) .nav-dropdown-inner li:hover {
+  background: #00688a;
+}
+
+nav.navbar .container-max {
+  display: block;
+}
+
+nav.navbar .container-max > div.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+nav.navbar .container-max > div.row .brand-wrapper {
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+  -ms-flex-item-align: auto;
+      -ms-grid-row-align: auto;
+      align-self: auto;
+}
+
+@media (max-width: 991.98px) {
+  nav.navbar .container-max > div.row .brand-wrapper {
+    width: 100%;
+  }
+}
+
+nav.navbar .container-max > div.row #mainNavbarCollapsable {
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+  -ms-flex-item-align: stretch;
+      -ms-grid-row-align: stretch;
+      align-self: stretch;
+}
+
 #mainNavbarCollapsable {
-  background: #008ebd;
-  bottom: 0;
-  color: #fff;
   font-size: 1.2em;
-  left: 0;
   opacity: .6;
-  overflow-y: auto;
-  position: fixed;
-  right: 0;
-  top: 0;
-  transform: translateX(-100%);
   transition: all .3s ease;
 }
 
@@ -19318,7 +19332,13 @@ body.menu-is-visible {
   height: 100%;
   margin: 0;
   padding: 0;
-  position: relative;
+  float: right;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  -ms-flex-pack: end;
+      justify-content: flex-end;
 }
 
 #mainNavbarCollapsable ul.mainmenu:empty {
@@ -19328,7 +19348,6 @@ body.menu-is-visible {
 #mainNavbarCollapsable ul.mainmenu li {
   width: 100%;
   cursor: pointer;
-  float: left;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
@@ -19351,14 +19370,9 @@ body.menu-is-visible {
 }
 
 #mainNavbarCollapsable ul.mainmenu li ul {
-  background: #008ebd;
   left: 0;
   list-style: none;
-  margin: 0;
   padding: 0;
-  position: relative;
-  top: 0;
-  width: 100%;
 }
 
 #mainNavbarCollapsable ul.mainmenu li.ddown .nav-direction i {
@@ -19379,12 +19393,7 @@ body.menu-is-visible {
 @media (min-width: 992px) {
   #mainNavbarCollapsable {
     background-color: transparent;
-    display: block !important;
     opacity: 1;
-    overflow: visible;
-    position: relative;
-    transform: translateX(0);
-    width: 100%;
     font-size: 1rem;
     transition: all .1s ease;
   }
@@ -19413,7 +19422,7 @@ body.menu-is-visible {
     visibility: hidden;
     opacity: 0;
     transition: all .1s ease;
-    background: #00688a;
+    background: #008ebd;
     height: auto;
     top: 100%;
     text-align: center;
@@ -19422,6 +19431,7 @@ body.menu-is-visible {
     min-width: 100%;
     word-wrap: break-word;
     position: absolute;
+    z-index: 1;
   }
   #mainNavbarCollapsable ul.mainmenu > li > ul > li {
     background: transparent;
@@ -19429,7 +19439,7 @@ body.menu-is-visible {
     transition: all .1s ease;
     width: 100%;
     min-width: 150px;
-    text-align: initial;
+    text-align: left;
   }
   .no-touch #mainNavbarCollapsable ul.mainmenu > li > ul > li:hover,
   .touch #mainNavbarCollapsable ul.mainmenu > li > ul > li.hover {
@@ -19473,84 +19483,81 @@ body.menu-is-visible {
   }
 }
 
-@media (min-width: 992px) {
-  nav.navbar.megamenu {
-    position: relative;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu {
-    background: transparent;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: end;
-        justify-content: flex-end;
-    width: 100%;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li {
-    position: static;
-  }
-  .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover,
-  .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover {
-    background: transparent !important;
-    color: #004157 !important;
-  }
-  .no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover > ul.collapse,
-  .touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover > ul.collapse {
-    display: block;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse {
-    background-color: #fff;
-    column-gap: .5em;
-    column-rule: 1px solid #dcdbd7;
-    display: none;
-    padding: 1em 0;
-    min-height: 7em;
-    max-height: 86vh;
-    column-count: 5;
-    overflow-x: auto;
-    overflow-y: hidden;
-    column-fill: balance;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse li {
-    display: list-item;
-    float: none;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner {
-    background-color: #fff;
-    padding-bottom: 1em;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li {
-    padding: 0.1px 1.5em;
-    line-height: 170%;
-    text-align: left;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li.bt-more > a {
-    color: #7a7f7f;
-    text-transform: lowercase;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li > a {
-    color: #000;
-    padding: 0;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner .level1 > a {
-    color: #008ebd;
-    font-weight: bold;
-  }
-  nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner .level3 {
-    padding-left: 2.5em;
-  }
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li {
+  position: static;
+}
+
+.no-touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li:hover > ul.collapse,
+.touch nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li.hover > ul.collapse {
+  display: block;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse {
+  background-color: #fff;
+  column-gap: .5em;
+  column-rule: 1px solid #dcdbd7;
+  display: none;
+  padding: 1em 0;
+  min-height: 7em;
+  max-height: 86vh;
+  column-count: 5;
+  overflow-x: auto;
+  overflow-y: hidden;
+  column-fill: balance;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse li {
+  display: list-item;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner {
+  padding-bottom: 1em;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li {
+  padding: 0.1px 1.5em;
+  line-height: 170%;
+  text-align: left;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li.bt-more > a {
+  color: #7a7f7f;
+  text-transform: lowercase;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li > a {
+  color: #000;
+  padding: 0;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner > li:hover a {
+  color: #008ebd;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner .level1 > a {
+  color: #008ebd;
+  font-weight: bold;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner .level1:hover a {
+  color: #004157;
+}
+
+nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li ul.nav-dropdown-inner .level3 {
+  padding-left: 2.5em;
 }
 
 .mobile-navigation {
-  background: #008ebd;
+  top: 0;
+  right: 0;
   bottom: 0;
+  left: 0;
+  background: #008ebd;
   color: #fff;
   font-size: 1.2em;
-  left: 0;
   opacity: .6;
   overflow-y: auto;
   position: fixed;
-  right: 0;
-  top: 0;
   transform: translateX(100%);
   transition: all .3s ease;
   z-index: 99999;
@@ -19671,14 +19678,18 @@ body.menu-is-visible {
   transform: rotateX(180deg);
 }
 
-.breadcrumb-item-transition {
-  transition: all 1s ease;
-  overflow: hidden;
+html.ie nav.navbar #mainNavbarCollapsable {
+  width: 100%;
 }
 
-.breadcrumb-item-enter, .breadcrumb-item-leave {
-  opacity: 0;
-  transform: translateX(-30px);
+html.ie .mobile-navigation ul.mainmenu li a {
+  -ms-flex: 1 0 75%;
+      flex: 1 0 75%;
+}
+
+html.ie .mobile-navigation ul.mainmenu li .nav-direction {
+  -ms-flex: 1 0 10%;
+      flex: 1 0 10%;
 }
 
 .mainmenu-[class^='animate-'],
@@ -22129,6 +22140,10 @@ html.ie .component-loading.with-icon:after {
 .cmp-paginator {
   line-height: 1;
   min-height: calc(1rem + 1rem + 2px);
+}
+
+html.ie .cmp-paginator {
+  display: block !important;
 }
 
 @media (max-width: 575.98px) {
