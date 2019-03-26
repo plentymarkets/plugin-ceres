@@ -28,7 +28,7 @@
 {% if category is defined %}
     {% set bodyClasses = "page-category category-" ~ category.id %}
 {% elseif item is defined %}
-    {% set bodyClasses = "page-item item-#{item.documents[0].data.item.id} variation-#{item.documents[0].data.variation.id}" %}
+    {% set bodyClasses = "page-items item-#{item.documents[0].data.item.id} variation-#{item.documents[0].data.variation.id}" %}
 {% endif %}
 
 {% spaceless %}
