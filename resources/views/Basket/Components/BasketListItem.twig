@@ -21,7 +21,7 @@
                 <div class="meta-container-wrapper-inner">
                     <div class="meta-container">
                         <div>
-                            <a :href="basketItem.variation.data | itemURL" class="item-name" :class="'text-' + appearance">
+                            <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance">
                                 ${ basketItem.variation.data | itemName }
                             </a>
 
@@ -30,8 +30,7 @@
 
                             </div>
 
-                            <item-bundle :appearance="appearance"
-                                         :bundle-type="basketItem.variation.data.variation.bundleType"
+                            <item-bundle :bundle-type="basketItem.variation.data.variation.bundleType"
                                          :bundle-components="basketItem.variation.data.bundleComponents"></item-bundle>
 
                             <div class="item-small-prices text-muted" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
@@ -41,6 +40,13 @@
                                 <div>
                                     <strong>{{ trans("Ceres::Template.basketContent") }}: </strong>
                                     ${ basketItem.variation.data.unit.content } ${ basketItem.variation.data.unit.names.name }
+                                </div>
+                            </div>
+
+                            <div class="item-small-prices" v-if="basketItem.inputLength > 0 || basketItem.inputWidth > 0">
+                                <div>
+                                    <strong>{{ trans("Ceres::Template.itemInput") }} ${ basketItem | inputUnit(true)}: </strong>
+                                    ${ basketItem | inputUnit}
                                 </div>
                             </div>
 
@@ -93,7 +99,7 @@
 
                 <div class="item-properties" v-if="basketItem.basketItemOrderParams.length">
                     <div class="item-properties-header">{{ trans("Ceres::Template.basketAdditionalOptions") }}:</div>
-                    <ul>
+                    <ul class="ml-3">
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
 
                             <span :class="{ 'item-property-value': size === 'small' }">

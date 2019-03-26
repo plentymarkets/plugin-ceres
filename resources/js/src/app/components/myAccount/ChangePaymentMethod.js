@@ -12,11 +12,6 @@ Vue.component("change-payment-method", {
             type: String,
             default: "#vue-change-payment-method"
         },
-        appearance:
-        {
-            type: String,
-            default: "primary"
-        },
         currentOrder:
         {
             type: Object

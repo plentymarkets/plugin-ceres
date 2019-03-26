@@ -4,7 +4,7 @@
 
 {% set appearance = widget.settings.appearance.mobile %}
 
-<div class="widget widget-basket">
+<div class="widget widget-basket widget-{{ appearance | default("primary") }}">
     <div>
         <h3>{{ Twig.trans("Ceres::Template.checkoutBasket") }}</h3>
         <hr class="mb-0">
@@ -12,7 +12,7 @@
     
     <div class="pt-4 pb-3">
         <div class="cmp">
-            <basket-list appearance="{{ appearance | default("primary") }}" size="small"></basket-list>
+            <basket-list size="small"></basket-list>
         </div>
     </div>
 </div>

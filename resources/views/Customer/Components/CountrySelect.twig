@@ -22,7 +22,7 @@
                     </option>
                 </select>
                 <label>
-                    ${ '{{ trans("Ceres::Template.headerState") }}' | transformRequiredLabel(isInRequiredFields('de', 'billing_address.stateId')) }
+                    ${ transformTranslation("Ceres::Template.headerState", "de", "billing_address.stateId") }
                 </label>
             </div>
         </template>
@@ -40,7 +40,7 @@
                     </option>
                 </select>
                 <label>
-                    ${ '{{ trans("Ceres::Template.headerState") }}' | transformRequiredLabel(isInRequiredFields('de', 'delivery_address.stateId')) }
+                    ${ transformTranslation("Ceres::Template.headerState", "de", "delivery_address.stateId") }
                 </label>
             </div>
         </template>

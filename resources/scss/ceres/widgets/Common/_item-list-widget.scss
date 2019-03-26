@@ -18,36 +18,6 @@
         }
 
     }
-
-    &.widget-primary .widget-caption
-    {
-        @include widget-bg-variant($primary);
-    }
-
-    &.widget-secondary .widget-caption
-    {
-        @include widget-bg-variant($secondary);
-    }
-
-    &.widget-success .widget-caption
-    {
-        @include widget-bg-variant($success);
-    }
-
-    &.widget-info .widget-caption
-    {
-        @include widget-bg-variant($info);
-    }
-
-    &.widget-warning .widget-caption
-    {
-        @include widget-bg-variant($warning);
-    }
-
-    &.widget-danger .widget-caption
-    {
-        @include widget-bg-variant($danger);
-    }
 }
 
 .widget-item-list-caption

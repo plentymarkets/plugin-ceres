@@ -22,12 +22,12 @@
         </div>
 
         <div class="widget-inner widget-inner-stacked col-12 {{ gridLayouts[layout][1] }}">
-            <div class="widget-inner">
-                <div{% if isPreview %} data-builder-child-container="second"{% endif %}>{{ children.second | raw }}</div>
+            <div class="widget-inner row">
+                <div class="col-12"{% if isPreview %} data-builder-child-container="second"{% endif %}>{{ children.second | raw }}</div>
             </div>
 
-            <div class="widget-inner">
-                <div{% if isPreview %} data-builder-child-container="third"{% endif %}>{{ children.third | raw }}</div>
+            <div class="widget-inner row">
+                <div class="col-12"{% if isPreview %} data-builder-child-container="third"{% endif %}>{{ children.third | raw }}</div>
             </div>
         </div>
 

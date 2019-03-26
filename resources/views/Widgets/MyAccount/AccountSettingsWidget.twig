@@ -9,7 +9,7 @@
 {% set appearance = widget.settings.appearance.mobile %}
 {% set hintText = widget.settings.text.mobile %}
 
-<div class="widget widget-account-settings">
+<div class="widget widget-account-settings widget-{{ appearance | default("primary") }}">
     <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}
             <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountSettings")) }}</h3>
@@ -20,6 +20,6 @@
     </div>
 
     <div class="card">
-        <account-settings appearance="{{ appearance | default("primary") }}" :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
+        <account-settings :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
     </div>
 </div>

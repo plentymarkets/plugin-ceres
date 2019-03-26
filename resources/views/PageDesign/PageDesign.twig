@@ -240,6 +240,7 @@
     (function($) {
 
         var header = document.getElementById('page-header');
+        var headerElements = document.getElementById('page-header-children');
         var headerLoaded = false;
         var unfixedElements = [];
 
@@ -251,7 +252,12 @@
                 {
                     var bodyOffset = 0;
                     // Get current header with children
-                    var children = document.getElementById('page-header').children;
+                    if(headerElements !== null){
+                        var children = headerElements.children;
+                    } else {
+                        return;
+                    }
+
                     for( var i = 0; i < children.length; i++ )
                     {
                         bodyOffset += children[i].getBoundingClientRect().height;

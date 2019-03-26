@@ -51,14 +51,14 @@
                             </a>
 
                             <div class="d-inline-block item-description">
-                                <div><a class="text-primary" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
+                                <div><a class="text-primary text-appearance" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
                                 
                                 {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
                                     <div class="item-bundle">
                                         {% for bundleComponent in item.bundleComponents %}
                                             <div>
                                                 <span class="text-muted">{{ bundleComponent.quantity }} x</span>
-                                                <a href="{{ bundleComponent.data | itemURL }}" :class="'text-' + appearance"> {{ bundleComponent.data | itemName }} </a>
+                                                <a href="{{ bundleComponent.data | itemURL }}" class="text-primary text-appearance"> {{ bundleComponent.data | itemName }} </a>
                                             </div>
                                         {% endfor %}
                                     </div>
@@ -88,7 +88,7 @@
                                                         {% endif %}
                                                     {% endfor %}
 
-                                                    <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank" :class="'text-' + appearance">
+                                                    <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
                                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                                         {{ splitPath | last }}
                                                     </a>
@@ -113,7 +113,7 @@
             {% if orderData.order.orderItems | length > initialMaxItemsPerOrder %}
                 <div class="row mb-2">
                     <div class="col-sm-12 text-center ">
-                        <a class="btn text-primary collapsed" @click="showAllOrderItems = !showAllOrderItems">
+                        <a class="btn text-primary text-appearance collapsed" @click="showAllOrderItems = !showAllOrderItems">
                             <template v-if="showAllOrderItems">
                                 {{ trans("Ceres::Template.orderHistoryReturnShowLess") }}
                             </template>
@@ -284,7 +284,6 @@
         <div class="col-md-5 button-container">
             <template v-if="allowPaymentProviderChange">
                 <change-payment-method
-                    :appearance="appearance"
                     :current-order="{{ orderData.order | json_encode }}"
                     :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
                     :allowed-payment-methods="{{ orderData.paymentMethodListForSwitch | json_encode }}"
@@ -296,16 +295,13 @@
             </template>
             
             {% if orderData.isReturnable %}
-                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block mb-2" :class="'btn-' + appearance" href="/returns/{{ orderData.order.id }}">
+                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="/returns/{{ orderData.order.id }}">
                     <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>
             {% endif %}
             
-            <order-documents 
-                :documents="{{ orderData.order.documents | json_encode }}"
-                :appearance="appearance">
-            </order-documents>
+            <order-documents :documents="{{ orderData.order.documents | json_encode }}"></order-documents>
         </div>
     </div>
 </div>

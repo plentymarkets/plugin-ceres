@@ -3,7 +3,7 @@
         <!-- MyAccount -->
         <div class="button-spacer" v-if="currentTemplate == 'tpl.my-account'">
 
-            <div v-if="changePossible" class="btn btn-block" :class="'btn-' + appearance" @click="openPaymentChangeModal()">
+            <div v-if="changePossible" class="btn btn-primary btn-appearance btn-block" @click="openPaymentChangeModal()">
                 <span>{{ trans("Ceres::Template.orderHistoryChangePayment") }}</span>
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </div>

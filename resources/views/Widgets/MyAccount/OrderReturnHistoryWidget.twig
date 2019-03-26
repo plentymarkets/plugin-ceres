@@ -7,7 +7,7 @@
 {% set appearance = widget.settings.appearance.mobile %}
 {% set returnsPerPage = widget.settings.returnsPerPage.mobile %}
 
-<div class="widget widget-order-return-history widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+<div class="widget widget-order-return-history widget-{{ appearance | default('primary') }}">
     <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}
             <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.returnHistory")) }}</h3>
@@ -17,8 +17,6 @@
     </div>
 
     <order-return-history-list
-        appearance="{{ appearance | default("primary") }}"
-        hint-text="{{ hintText }}"
         :returns-per-page="{{ returnsPerPage | default(5) | json_encode }}"
         {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}>
     </order-return-history-list>

@@ -314,10 +314,10 @@ $border-width: 1px;
 
         a
         {
-            color: $white;
+            color: $white !important;
             &:hover
             {
-                color: $gray-lighter2;
+                color: $gray-lighter2 !important;
             }
         }
 

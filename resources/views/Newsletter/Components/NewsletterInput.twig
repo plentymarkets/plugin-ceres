@@ -30,7 +30,7 @@
                             {% autoescape false %}
                                 {% set policyContent %}
                                     <a href="{{ urls.privacyPolicy }}" target="_blank">
-                                        <span class="btn-link">{{ trans("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
+                                        <span class="text-primary text-appearance">{{ trans("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
                                     </a>
                                 {% endset %}
                                 {{ trans('Ceres::Template.newsletterAcceptPrivacyPolicy', {"policy": policyContent} ) }}
@@ -41,7 +41,7 @@
 
                 <div class="col-xs-12 mt-3">
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-block" :class="'btn-' + appearance" @click="validateData" :disabled="isDisabled">
+                            <button type="button" class="btn btn-block btn-primary btn-appearance" @click="validateData" :disabled="isDisabled">
                                 <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                 {{ trans('Ceres::Template.newsletterSubscribeButtonLabel') }}
                             </button>
