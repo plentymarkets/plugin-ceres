@@ -106,3 +106,7 @@
         {{ template | raw }}
     {% if isPreview %}{{ Twig.do("endverbatim") }}{% endif %}
 {% endmacro %}
+
+{% macro makeCodeEditable(variableName, labelTranslationKey, isPreview) %}
+    {%- if isPreview %} data-builder-code="{{ variableName }}" data-builder-code-label="{{ trans(labelTranslationKey) }}"{% endif -%}
+{% endmacro %}
