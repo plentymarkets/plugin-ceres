@@ -102,12 +102,12 @@ const actions =
     {
         loadBasketData({ commit, state })
         {
-            ApiService.get("/rest/io/basket", { cache: false })
+            ApiService.get("/rest/io/basket", {}, { cache: false })
                 .done(basket =>
                 {
                     commit("setBasket", basket);
 
-                    ApiService.get("/rest/io/basket/items", { cache: false, template: "Ceres::Basket.Basket" })
+                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
                         .done(basketItems =>
                         {
                             commit("setBasketItems", basketItems);

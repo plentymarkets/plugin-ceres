@@ -29322,14 +29322,15 @@ var actions = {
     var commit = _ref3.commit,
         state = _ref3.state;
 
-    _ApiService.default.get("/rest/io/basket", {
+    _ApiService.default.get("/rest/io/basket", {}, {
       cache: false
     }).done(function (basket) {
       commit("setBasket", basket);
 
       _ApiService.default.get("/rest/io/basket/items", {
-        cache: false,
         template: "Ceres::Basket.Basket"
+      }, {
+        cache: false
       }).done(function (basketItems) {
         commit("setBasketItems", basketItems);
         commit("setIsBasketInitiallyLoaded");
