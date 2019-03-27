@@ -1,4 +1,5 @@
 import { normalizeUrl } from "../helper/url";
+import { isDefined } from "../helper/utils";
 
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
@@ -100,6 +101,7 @@ module.exports = (function($)
     {
         var deferred = $.Deferred();
 
+        data = isDefined(data) ? data : {};
         url = normalizeUrl(url);
         config = config || {};
         config.dataType = config.dataType || "json";
