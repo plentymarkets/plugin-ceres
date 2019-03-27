@@ -200,7 +200,7 @@
             {% if enableLanguageSelect or enableShippingCountrySelect %}
                 <shop-country-settings
                         country-flag-prefix="flag-icon-"
-                        :shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode') }}"
+                        :shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_data("activeCountriesList")') }}"
                         :shipping-country-id="{{ Twig.print('services.checkout.getShippingCountryId() | json_encode') }}">
                     <div id="countrySettings" class="cmp cmp-country-settings collapse">
                         <div class="container-max">
