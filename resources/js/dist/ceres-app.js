@@ -22661,7 +22661,7 @@ Vue.component("item-search", {
   },
   data: function data() {
     return {
-      promiseCount: 0,
+      autocompleteRequest: null,
       autocompleteResult: [],
       selectedAutocompleteIndex: -1,
       isSearchFocused: false
@@ -22737,87 +22737,86 @@ Vue.component("item-search", {
       var _this2 = this;
 
       if (searchString.length >= 2) {
-        if (this.promiseCount >= Number.MAX_SAFE_INTEGER) {
-          this.promiseCount = 0;
+        if (!(0, _utils.isNullOrUndefined)(this.autocompleteRequest) && typeof this.autocompleteRequest.abort === "function") {
+          this.autocompleteRequest.abort();
         }
 
-        var promiseCount = ++this.promiseCount;
-
-        _ApiService.default.get("/rest/io/item/search/autocomplete", {
+        this.autocompleteRequest = _ApiService.default.get("/rest/io/item/search/autocomplete", {
           template: "Ceres::ItemList.Components.ItemSearch",
           query: searchString
-        }).done(function (response) {
-          if (_this2.promiseCount === promiseCount) {
-            _this2.transformAutocomplete(response, searchString);
+        });
+        this.autocompleteRequest.done(function (response) {
+          _this2.autocompleteRequest = null;
+          _this2.autocompleteResult = [];
+          _this2.selectedAutocompleteIndex = -1;
+
+          if (response && response.documents.length) {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+              for (var _iterator = response.documents[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var item = _step.value;
+
+                var images = _this2.$options.filters.itemImages(item.data.images, "urlPreview");
+
+                var img = _this2.$options.filters.itemImage(images);
+
+                var url = _this2.$options.filters.itemURL(item.data);
+
+                var name = _this2.$options.filters.itemName(item.data);
+
+                var displayName = name;
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                  for (var _iterator2 = searchString.split(" ")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var split = _step2.value;
+                    displayName = displayName.replace(split, "<strong>".concat(split, "</strong>"));
+                  }
+                } catch (err) {
+                  _didIteratorError2 = true;
+                  _iteratorError2 = err;
+                } finally {
+                  try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                      _iterator2.return();
+                    }
+                  } finally {
+                    if (_didIteratorError2) {
+                      throw _iteratorError2;
+                    }
+                  }
+                }
+
+                _this2.autocompleteResult.push({
+                  img: img,
+                  url: url,
+                  name: name,
+                  displayName: displayName
+                });
+              }
+            } catch (err) {
+              _didIteratorError = true;
+              _iteratorError = err;
+            } finally {
+              try {
+                if (!_iteratorNormalCompletion && _iterator.return != null) {
+                  _iterator.return();
+                }
+              } finally {
+                if (_didIteratorError) {
+                  throw _iteratorError;
+                }
+              }
+            }
           }
         });
       } else {
         this.autocompleteResult = [];
-      }
-    },
-    // transform the autocomplete result to usable object
-    transformAutocomplete: function transformAutocomplete(data, searchString) {
-      this.autocompleteResult = [];
-      this.selectedAutocompleteIndex = -1;
-
-      if (data && data.documents.length) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = data.documents[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var item = _step.value;
-            var images = this.$options.filters.itemImages(item.data.images, "urlPreview");
-            var img = this.$options.filters.itemImage(images);
-            var url = this.$options.filters.itemURL(item.data);
-            var name = this.$options.filters.itemName(item.data);
-            var displayName = name;
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
-
-            try {
-              for (var _iterator2 = searchString.split(" ")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var split = _step2.value;
-                displayName = displayName.replace(split, "<strong>".concat(split, "</strong>"));
-              }
-            } catch (err) {
-              _didIteratorError2 = true;
-              _iteratorError2 = err;
-            } finally {
-              try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                  _iterator2.return();
-                }
-              } finally {
-                if (_didIteratorError2) {
-                  throw _iteratorError2;
-                }
-              }
-            }
-
-            this.autocompleteResult.push({
-              img: img,
-              url: url,
-              name: name,
-              displayName: displayName
-            });
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
       }
     },
     selectAutocompleteItem: function selectAutocompleteItem(item) {
@@ -27521,7 +27520,7 @@ module.exports = function ($) {
       WaitScreenService.showWaitScreen();
     }
 
-    $.ajax(url, config).done(function (response) {
+    var request = $.ajax(url, config).done(function (response) {
       if (config.keepOriginalResponse) {
         deferred.resolve(response);
       } else {
@@ -27529,12 +27528,13 @@ module.exports = function ($) {
       }
     }).fail(function (jqXHR) {
       var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
-      deferred.reject(response);
+      deferred.reject(response, jqXHR.status);
     }).always(function () {
       if (!config.doInBackground) {
         WaitScreenService.hideWaitScreen();
       }
     });
+    deferred.abort = request.abort;
     return deferred;
   }
 
@@ -29321,20 +29321,18 @@ var actions = {
   loadBasketData: function loadBasketData(_ref3) {
     var commit = _ref3.commit,
         state = _ref3.state;
-
-    _ApiService.default.get("/rest/io/basket").done(function (basket) {
+    jQuery.when(_ApiService.default.get("/rest/io/basket"), _ApiService.default.get("/rest/io/basket/items", {
+      template: "Ceres::Basket.Basket"
+    })).then(function (basket, basketItems) {
       commit("setBasket", basket);
+      commit("setBasketItems", basketItems);
+      commit("setIsBasketInitiallyLoaded");
+    }).catch(function (error, status) {
+      console.log(error, status);
 
-      _ApiService.default.get("/rest/io/basket/items", {
-        template: "Ceres::Basket.Basket"
-      }).done(function (basketItems) {
-        commit("setBasketItems", basketItems);
-        commit("setIsBasketInitiallyLoaded");
-      }).fail(function (error) {
+      if (status > 0) {
         NotificationService.error(_TranslationService.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
-      });
-    }).fail(function (error) {
-      NotificationService.error(_TranslationService.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
+      }
     });
 
     _ApiService.default.listen("AfterBasketChanged", function (data) {
