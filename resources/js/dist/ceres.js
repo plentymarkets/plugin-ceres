@@ -29668,8 +29668,12 @@ var actions = {
   loadBasketData: function loadBasketData(_ref3) {
     var commit = _ref3.commit,
         state = _ref3.state;
-    jQuery.when(_ApiService.default.get("/rest/io/basket"), _ApiService.default.get("/rest/io/basket/items", {
+    jQuery.when(_ApiService.default.get("/rest/io/basket", {}, {
+      cache: false
+    }), _ApiService.default.get("/rest/io/basket/items", {
       template: "Ceres::Basket.Basket"
+    }, {
+      cache: false
     })).then(function (basket, basketItems) {
       commit("setBasket", basket);
       commit("setBasketItems", basketItems);
