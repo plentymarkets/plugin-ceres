@@ -2,7 +2,10 @@ Vue.component("mobile-navigation", {
 
     props: [
         "template",
-        "initialCategory",
+        "initialCategory"
+    ],
+
+    jsonDataFields: [
         "navigationTreeData"
     ],
 

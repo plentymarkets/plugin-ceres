@@ -63,7 +63,23 @@
     "images.variation.names.alternate",
     "images.variation.names.lang",
 
-    "properties.*",
+    "properties.property.id",
+    "properties.property.isShownOnItemPage",
+    "properties.property.isShownOnItemList",
+    "properties.property.isShownAtCheckout",
+    "properties.property.isOderProperty",
+    "properties.property.valueType",
+    "properties.property.value",
+    "properties.property.surcharge",
+    "properties.property.names.lang",
+    "properties.property.names.name",
+    "properties.property.names.description",
+
+    "properties.group.id",
+    "properties.group.orderPropertyGroupingType",
+    "properties.group.names.lang",
+    "properties.group.names.name",
+    "properties.group.names.description",
 
     "defaultCategories",
 

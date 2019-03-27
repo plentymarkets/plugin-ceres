@@ -8,7 +8,7 @@
 {% set isHome = services.template.isHome() %}
 
 {% if listType == "cross_selling" %}
-    {% set itemList = item.CrossSellingItems.documents %}
+    {% set itemList = services.itemList.getItemList( listType, item.documents[0].data.item.id ).documents %}
 {% elseif listType == "tag_list" %}
     {% set itemList = services.itemList.getItemList( listType, tagIds ).documents %}
 {% endif %}
