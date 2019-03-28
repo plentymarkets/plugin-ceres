@@ -17400,9 +17400,6 @@ Vue.component("add-item-to-basket-overlay", {
       return state.basket.latestEntry;
     }
   })),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   watch: {
     latestBasketEntry: function latestBasketEntry() {
       if (this.basketAddInformation === "overlay") {
@@ -17555,9 +17552,6 @@ Vue.component("add-to-basket", {
       waiting: false
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     /**
      * add an item to basket-resource
@@ -17697,7 +17691,6 @@ Vue.component("basket-preview", {
     }
   }),
   created: function created() {
-    this.$options.template = this.template;
     this.$store.dispatch("loadBasketData");
     this.$store.commit("setShowNetPrices", this.showNetPrices);
   },
@@ -17749,9 +17742,6 @@ Vue.component("basket-totals", {
     calculateBaseValue: function calculateBaseValue(value, percent) {
       return value / (100 - percent) * 100;
     }
-  },
-  created: function created() {
-    this.$options.template = this.template;
   }
 });
 
@@ -17799,9 +17789,6 @@ Vue.component("coupon", {
       return state.basket.data.couponCode;
     }
   })),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   mounted: function mounted() {
     var _this = this;
 
@@ -17900,10 +17887,7 @@ Vue.component("basket-list", {
     isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
       return state.basket.isBasketInitiallyLoaded;
     }
-  }),
-  created: function created() {
-    this.$options.template = this.template;
-  }
+  })
 });
 
 },{}],139:[function(require,module,exports){
@@ -18012,9 +17996,6 @@ Vue.component("basket-list-item", {
       return state.basket.showNetPrices;
     }
   })),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     /**
      * Delete item from basket
@@ -18089,10 +18070,7 @@ Vue.component("basket-list-item", {
 Vue.component("category-breadcrumbs", {
   delimiters: ["${", "}"],
   props: ["template"],
-  computed: Vuex.mapGetters(["breadcrumbs"]),
-  created: function created() {
-    this.$options.template = this.template;
-  }
+  computed: Vuex.mapGetters(["breadcrumbs"])
 });
 
 },{}],141:[function(require,module,exports){
@@ -18140,8 +18118,6 @@ Vue.component("accept-gtc-check", {
     }
   })),
   created: function created() {
-    this.$options.template = this.template;
-
     if (this.hideCheckbox) {
       this.isChecked = true;
     } else if (this.isRequired) {
@@ -18217,7 +18193,6 @@ Vue.component("checkout", {
     }
   }),
   created: function created() {
-    this.$options.template = this.template;
     this.$store.dispatch("setCheckout", this.initialCheckout);
     this.$store.dispatch("initBillingAddress", {
       id: this.selectedBillingAddress,
@@ -18380,9 +18355,6 @@ Vue.component("contact-wish-input", {
       return state.checkout.contactWish;
     }
   }),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     updateContactWish: function updateContactWish(event) {
       this.$store.commit("setContactWish", event.srcElement.value);
@@ -18425,7 +18397,6 @@ Vue.component("payment-provider-select", {
    * Initialise the event listener
    */
   created: function created() {
-    this.$options.template = this.template;
     this.$store.commit("setPaymentProviderValidator", this.validate);
   },
   methods: {
@@ -18538,9 +18509,6 @@ Vue.component("place-order", {
       return state.checkout.newsletterSubscription;
     }
   })),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     placeOrder: function placeOrder() {
       var _this = this;
@@ -18723,9 +18691,6 @@ Vue.component("shipping-privacy-hint-check", {
       return state.checkout.shippingPrivacyHintAccepted;
     }
   })),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     setValue: function setValue(value) {
       this.$store.commit("setShippingPrivacyHintAccepted", value);
@@ -18780,7 +18745,6 @@ Vue.component("shipping-profile-select", {
    * Initialise the event listener
    */
   created: function created() {
-    this.$options.template = this.template;
     this.$store.commit("setShippingProfileValidator", this.validate);
   },
   methods: {
@@ -18859,8 +18823,6 @@ Vue.component("subscribe-newsletter-check", {
     }
   }),
   created: function created() {
-    this.$options.template = this.template;
-
     if (this.isPreselected || this.hideCheckbox) {
       this.setValue(true);
     }
@@ -18928,9 +18890,6 @@ Vue.component("last-seen-item-list", {
       return state.lastSeen.containers;
     }
   }),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   beforeMount: function beforeMount() {
     this.$store.dispatch("getLastSeenItems");
   },
@@ -18966,9 +18925,6 @@ Vue.component("accept-privacy-policy-check", {
     showError: {
       type: Boolean
     }
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   methods: {
     onValueChanged: function onValueChanged(value) {
@@ -19049,13 +19005,6 @@ Vue.component("address-input-group", {
       selectedCountry: null
     };
   },
-
-  /**
-   * Check whether the address data exists. Else, create an empty one
-   */
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     /**
      * Update the address input group to show.
@@ -19131,9 +19080,6 @@ Vue.component("address-header", {
       type: Object,
       required: true
     }
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   methods: {
     getCountryName: function getCountryName(countryId) {
@@ -19284,7 +19230,6 @@ Vue.component("address-select", {
    *  Check whether the address list is not empty and select the address with the matching ID
    */
   created: function created() {
-    this.$options.template = this.template;
     this.addEventListener();
   },
 
@@ -19594,9 +19539,6 @@ Vue.component("create-update-address", {
     addressList: function addressList() {
       this.$store.getters.getAddressList(this.addressType);
     }
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   methods: {
     /**
@@ -19990,7 +19932,6 @@ Vue.component("contact-form", {
     };
   },
   created: function created() {
-    this.$options.template = this.template;
     window.sendMail = this.sendMail;
   },
   methods: {
@@ -20132,9 +20073,6 @@ Vue.component("contact-form", {
 
 Vue.component("contact-map", {
   props: ["mapZoom", "zip", "street", "googleApiKey", "template"],
-  created: function created() {
-    this.$options.template = this.template;
-  },
   mounted: function mounted() {
     var _this = this;
 
@@ -20228,7 +20166,6 @@ Vue.component("country-select", {
    * Get the shipping countries
    */
   created: function created() {
-    this.$options.template = this.template;
     this.countryList.sort(function (first, second) {
       if (first.currLangName < second.currLangName) {
         return -1;
@@ -20349,9 +20286,6 @@ Vue.component("registration", {
       isDisabled: false
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     /**
      * Validate the registration form
@@ -20468,9 +20402,6 @@ Vue.component("reset-password-form", {
       passwordSecond: "",
       isDisabled: false
     };
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   methods: {
     validatePassword: function validatePassword() {
@@ -20591,7 +20522,6 @@ Vue.component("salutation-select", {
    * Get the shipping countries
    */
   created: function created() {
-    this.$options.template = this.template;
     var selectedSalutation = this.addressData.addressSalutation;
 
     if ((0, _utils.isNullOrUndefined)(selectedSalutation)) {
@@ -20697,9 +20627,6 @@ Vue.component("forgot-password-modal", {
       isDisabled: false
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   mounted: function mounted() {
     var _this = this;
 
@@ -20782,9 +20709,6 @@ Vue.component("guest-login", {
       isDisabled: false
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   mounted: function mounted() {
     var _this = this;
 
@@ -20850,9 +20774,6 @@ Vue.component("login", {
       loginFields: [],
       isDisabled: false
     };
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   mounted: function mounted() {
     var _this = this;
@@ -20967,9 +20888,6 @@ var ModalService = require("services/ModalService");
 Vue.component("login-view", {
   delimiters: ["${", "}"],
   props: ["template"],
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     openGuestModal: function openGuestModal() {
       ModalService.findModal(document.getElementById("guestLogin")).show();
@@ -21004,7 +20922,6 @@ Vue.component("user-login-handler", {
   created: function created() {
     var _this = this;
 
-    this.$options.template = this.template;
     ApiService.get("/rest/io/customer", {}, {
       keepOriginalResponse: true
     }).done(function (response) {
@@ -21085,9 +21002,6 @@ Vue.component("add-to-wish-list", {
     isVariationInWishList: function isVariationInWishList() {
       this.changeTooltipText();
     }
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   methods: {
     switchState: function switchState() {
@@ -21181,10 +21095,7 @@ Vue.component("graduated-prices", {
     variationOrderQuantity: function variationOrderQuantity(state) {
       return state.item.variationOrderQuantity;
     }
-  })),
-  created: function created() {
-    this.$options.template = this.template;
-  }
+  }))
 });
 
 },{}],170:[function(require,module,exports){
@@ -21204,9 +21115,6 @@ Vue.component("item-bundle", {
       bundleSetting: null,
       showItemBundleItems: true
     };
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   mounted: function mounted() {
     var _this = this;
@@ -21272,9 +21180,6 @@ Vue.component("item-image-carousel", {
       },
       deep: true
     }
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   mounted: function mounted() {
     var _this2 = this;
@@ -21421,9 +21326,6 @@ Vue.component("order-properties", {
       return state.item.variation.documents[0].data.properties;
     }
   }),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: Vuex.mapMutations(["setVariationOrderProperty"])
 });
 
@@ -21500,9 +21402,6 @@ Vue.component("order-property-list", {
       return state.item.variationMarkInvalidProperties;
     }
   }), Vuex.mapGetters(["variationGroupedProperties", "variationMissingProperties"])),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     sortGroupProperties: function sortGroupProperties(group) {
       return group.properties.sort(function (prev, current) {
@@ -21593,9 +21492,6 @@ Vue.component("order-property-list-group", {
       });
       return properties.length;
     }
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   methods: _objectSpread({
     unsetDeselectedRadios: function unsetDeselectedRadios(propertyId) {
@@ -21742,9 +21638,6 @@ Vue.component("order-property-list-item", {
       return state.item.variationMarkInvalidProperties;
     }
   }), Vuex.mapGetters(["variationMissingProperties"])),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: _objectSpread({
     onInputValueChanged: function onInputValueChanged(value) {
       if (this.inputType === "int") {
@@ -21924,7 +21817,6 @@ Vue.component("quantity-input", {
   created: function created() {
     var _this = this;
 
-    this.$options.template = this.template;
     this.compInterval = (0, _utils.defaultValue)(this.compInterval, 1);
     this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
     this.compDecimals = (0, _number.floatLength)(this.compInterval);
@@ -22109,7 +22001,6 @@ Vue.component("single-item", {
   created: function created() {
     var _this = this;
 
-    this.$options.template = this.template;
     this.$store.commit("setVariation", this.itemData);
     this.$store.commit("setVariationList", this.variationListData);
     this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
@@ -22188,9 +22079,6 @@ Vue.component("variation-select", {
       return state.item.variation;
     }
   })),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   mounted: function mounted() {
     var _this2 = this;
 
@@ -22471,7 +22359,6 @@ Vue.component("category-image-carousel", {
     }
   },
   created: function created() {
-    this.$options.template = this.template;
     var isMobile = window.matchMedia("(max-width: 768px)").matches;
     var shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
     this.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
@@ -22588,9 +22475,6 @@ Vue.component("category-item", {
       return state.basket.showNetPrices;
     }
   })),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     loadFirstImage: function loadFirstImage() {
       var categoryImageCarousel = this.$refs.categoryImageCarousel;
@@ -22608,9 +22492,6 @@ Vue.component("category-item", {
 Vue.component("item-lazy-img", {
   delimiters: ["${", "}"],
   props: ["imageUrl", "template"],
-  created: function created() {
-    this.$options.template = this.template;
-  },
   mounted: function mounted() {
     var _this = this;
 
@@ -22677,9 +22558,6 @@ Vue.component("item-search", {
 
       return selectedAutocompleteItem;
     }
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   mounted: function mounted() {
     var _this = this;
@@ -22938,7 +22816,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 Vue.component("item-filter", {
   delimiters: ["${", "}"],
-  props: ["template", "facet"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-item-filter"
+    },
+    facet: {
+      type: Object
+    }
+  },
   computed: _objectSpread({
     facets: function facets() {
       return this.facet.values.sort(function (facetA, facetB) {
@@ -22968,9 +22854,6 @@ Vue.component("item-filter", {
       return state.itemList.isLoading;
     }
   })),
-  created: function created() {
-    this.$options.template = this.template || "#vue-item-filter";
-  },
   methods: {
     updateFacet: function updateFacet(facetValue) {
       this.$store.dispatch("selectFacet", {
@@ -23115,7 +22998,6 @@ Vue.component("item-filter-list", {
   })),
   created: function created() {
     this.$store.commit("setFacets", this.facetData);
-    this.$options.template = this.template;
 
     var urlParams = _UrlService.default.getUrlParams(document.location.search);
 
@@ -23185,8 +23067,6 @@ Vue.component("item-filter-price", {
     };
   },
   created: function created() {
-    this.$options.template = this.template || "#vue-item-filter-price";
-
     var urlParams = _UrlService.default.getUrlParams(document.location.search);
 
     this.priceMin = urlParams.priceMin || "";
@@ -23235,9 +23115,6 @@ Vue.component("item-filter-tag-list", {
       return state.itemList.selectedFacets;
     }
   }),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: _objectSpread({
     removeTag: function removeTag(tag) {
       this.selectFacet({
@@ -23300,7 +23177,6 @@ Vue.component("live-shopping-details", {
     };
   },
   created: function created() {
-    this.$options.template = this.template;
     this.initializeDataAndTimer();
   },
   methods: {
@@ -23489,7 +23365,6 @@ Vue.component("live-shopping-item", {
     }
   })),
   created: function created() {
-    this.$options.template = this.template;
     this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
   },
   methods: {
@@ -23547,9 +23422,6 @@ Vue.component("account-settings", {
       accountSettingsClass: "",
       accountSettingsModal: {}
     };
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
 
   /**
@@ -23663,9 +23535,6 @@ Vue.component("bank-data-select", {
       doUpdate: null,
       headline: ""
     };
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
 
   /**
@@ -23917,9 +23786,6 @@ Vue.component("change-payment-method", {
       showErrorMessage: false
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
 
   /**
    * Initialize the change payment modal
@@ -24039,9 +23905,6 @@ Vue.component("history", {
       returnsFirstOpened: false
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     returnsTabsOpened: function returnsTabsOpened() {
       if (!this.returnsFirstOpened) {
@@ -24127,9 +23990,6 @@ Vue.component("order-documents", {
       }
     }
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   computed: {
     activeDocuments: function activeDocuments() {
       var _this = this;
@@ -24194,9 +24054,6 @@ Vue.component("order-history", {
       currentOrder: null,
       isLoading: false
     };
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   methods: {
     setCurrentOrder: function setCurrentOrder(order) {
@@ -24264,8 +24121,6 @@ Vue.component("order-history-list", {
     };
   },
   created: function created() {
-    this.$options.template = this.template;
-
     if (!(0, _utils.isNullOrUndefined)(this.initialData)) {
       this.orderList = this.initialData;
     } else {
@@ -24348,9 +24203,6 @@ Vue.component("order-history-list-item", {
       showAllOrderItems: false
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     loadOrderDetailTemplate: function loadOrderDetailTemplate() {
       var _this = this;
@@ -24404,7 +24256,6 @@ Vue.component("order-return-history", {
   created: function created() {
     var _this = this;
 
-    this.$options.template = this.template;
     this.itemsPerPage = this.itemsPerPage || 10;
     vueEventHub.$on("returns-first-opening", function () {
       return _this.setPage(1);
@@ -24460,7 +24311,6 @@ Vue.component("order-return-history-item", {
     };
   },
   created: function created() {
-    this.$options.template = this.template;
     this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
   },
   methods: {
@@ -24547,8 +24397,6 @@ Vue.component("order-return-history-list", {
     };
   },
   created: function created() {
-    this.$options.template = this.template;
-
     if (!(0, _utils.isNullOrUndefined)(this.initialData)) {
       this.returnsList = this.initialData;
     } else {
@@ -24601,7 +24449,6 @@ Vue.component("order-return-history-list-item", {
     };
   },
   created: function created() {
-    this.$options.template = this.template;
     this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 5);
   },
   methods: {
@@ -24696,9 +24543,6 @@ Vue.component("newsletter-input", {
       privacyPolicyValue: false
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   methods: {
     validateData: function validateData() {
       var _this = this;
@@ -24755,7 +24599,6 @@ Vue.component("order-return", {
     };
   },
   created: function created() {
-    this.$options.template = this.template;
     this.$store.commit("setOrderReturnData", this.initOrderData);
   },
   computed: Vuex.mapState({
@@ -24805,7 +24648,6 @@ Vue.component("order-return-item", {
   created: function created() {
     var _this = this;
 
-    this.$options.template = this.template;
     vueEventHub.$on("select-all-items", function () {
       return _this.selectItem();
     });
@@ -24891,8 +24733,6 @@ Vue.component("carousel", {
     }
   },
   created: function created() {
-    this.$options.template = this.template;
-
     if (this.$slots.items) {
       this.itemCount = this.$slots.items.length;
     }
@@ -24992,9 +24832,6 @@ Vue.component("mobile-navigation", {
       return state.navigation.tree;
     }
   })),
-  created: function created() {
-    this.$options.template = this.template;
-  },
   mounted: function mounted() {
     var _this = this;
 
@@ -25108,9 +24945,6 @@ Vue.component("notifications", {
       notifications: []
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   mounted: function mounted() {
     var _this = this;
 
@@ -25180,9 +25014,6 @@ Vue.component("popper", {
       type: String,
       default: "click"
     }
-  },
-  created: function created() {
-    this.$options.template = this.template;
   },
   mounted: function mounted() {
     var _this = this;
@@ -25269,9 +25100,6 @@ Vue.component("shipping-country-select", {
       type: Boolean
     }
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   computed: _objectSpread({
     isDisabled: function isDisabled() {
       return !!this.basket.customerInvoiceAddressId || !!this.basket.customerShippingAddressId || this.disableInput;
@@ -25338,9 +25166,6 @@ Vue.component("wait-screen", {
       overlay: WaitScreenService.getOverlay()
     };
   },
-  created: function created() {
-    this.$options.template = this.template;
-  },
   computed: {
     /**
      * Show an overlay over the page
@@ -25386,7 +25211,6 @@ Vue.component("wish-list", {
     var _this = this;
 
     this.$store.commit("setWishListIds", this.initIds);
-    this.$options.template = this.template;
     this.isLoading = true;
     this.initWishListItems(this.wishListIds).then(function (response) {
       _this.isLoading = false;
@@ -25425,7 +25249,6 @@ Vue.component("wish-list-count", {
   created: function created() {
     var _this = this;
 
-    this.$options.template = this.template;
     ApiService.get("/rest/io/itemWishList", {}, {
       keepOriginalResponse: true
     }).done(function (response) {
@@ -27206,16 +27029,14 @@ function orderArrayByKey(array, key, desc) {
 },{}],260:[function(require,module,exports){
 "use strict";
 
-require("./mixins/index");
-
 var browserDetect = require("detect-browser");
 
 var NotificationService = require("services/NotificationService");
 
-var AutoFocusService = require("services/AutoFocusService");
-
-// Frontend end scripts
+var AutoFocusService = require("services/AutoFocusService"); // Frontend end scripts
 // eslint-disable-next-line
+
+
 var init = function ($, window, document) {
   var headerCollapses = [];
 
@@ -27384,7 +27205,7 @@ var init = function ($, window, document) {
   document.addEventListener("showShopNotification", showShopNotification);
 }(jQuery, window, document);
 
-},{"./mixins/index":262,"detect-browser":1,"services/AutoFocusService":264,"services/NotificationService":267}],261:[function(require,module,exports){
+},{"detect-browser":1,"services/AutoFocusService":264,"services/NotificationService":267}],261:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -27414,9 +27235,15 @@ Vue.mixin({
 },{"../helper/utils":259}],262:[function(require,module,exports){
 "use strict";
 
-require("./getJsonData.mixin");
+Vue.mixin({
+  created: function created() {
+    if (this.$props && this.$props.template) {
+      this.$options.template = this.$props.template;
+    }
+  }
+});
 
-},{"./getJsonData.mixin":261}],263:[function(require,module,exports){
+},{}],263:[function(require,module,exports){
 "use strict";
 
 var _url = require("../helper/url");
