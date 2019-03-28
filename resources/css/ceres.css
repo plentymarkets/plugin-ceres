@@ -24964,6 +24964,7 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 }
 
 .widget-grid > .widget-inner > div {
+  max-width: 100%;
   -ms-flex: 1;
       flex: 1;
 }
