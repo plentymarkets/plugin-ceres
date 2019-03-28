@@ -20185,9 +20185,6 @@ Vue.component("country-select", {
     addressKeyPrefix: function addressKeyPrefix() {
       return this.addressType === "1" ? "billing_address." : "delivery_address.";
     },
-    selectedCountryIso: function selectedCountryIso() {
-      this.selectedCountry.isoCode2.toLowerCase();
-    },
     optionalFields: function optionalFields() {
       var iso = this.selectedCountry.isoCode2.toLowerCase();
 

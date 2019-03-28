@@ -20491,11 +20491,36 @@ Vue.component("contact-map", {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 Vue.component("country-select", {
   delimiters: ["${", "}"],
-  props: ["selectedCountryId", "selectedStateId", "template", "addressType", "optionalAddressFields", "requiredAddressFields"],
+  props: {
+    selectedCountryId: Number,
+    selectedStateId: Number,
+    template: {
+      type: String,
+      default: "#vue-country-select"
+    },
+    addressType: {
+      type: String,
+      required: true
+    },
+    optionalAddressFields: {
+      type: Object,
+      default: function _default() {}
+    },
+    requiredAddressFields: {
+      type: Object,
+      default: function _default() {}
+    }
+  },
   jsonDataFields: ["countryList"],
   data: function data() {
     return {
@@ -20503,11 +20528,33 @@ Vue.component("country-select", {
       selectedCountry: {}
     };
   },
-  computed: Vuex.mapState({
+  computed: _objectSpread({
+    addressKeyPrefix: function addressKeyPrefix() {
+      return this.addressType === "1" ? "billing_address." : "delivery_address.";
+    },
+    optionalFields: function optionalFields() {
+      var iso = this.selectedCountry.isoCode2.toLowerCase();
+
+      if ((0, _utils.isNullOrUndefined)(this.optionalAddressFields[iso])) {
+        return this.optionalAddressFields.de;
+      }
+
+      return this.optionalAddressFields[iso];
+    },
+    requiredFields: function requiredFields() {
+      var iso = this.selectedCountry.isoCode2.toLowerCase();
+
+      if ((0, _utils.isNullOrUndefined)(this.requiredAddressFields[iso])) {
+        return this.requiredAddressFields.de;
+      }
+
+      return this.requiredAddressFields[iso];
+    }
+  }, Vuex.mapState({
     shippingCountryId: function shippingCountryId(state) {
       return state.localization.shippingCountryId;
     }
-  }),
+  })),
 
   /**
    * Get the shipping countries
@@ -20565,16 +20612,16 @@ Vue.component("country-select", {
 
       this.countryChanged(countryId);
     },
-    isInOptionalFields: function isInOptionalFields(locale, key) {
-      return this.optionalAddressFields[locale].includes(key);
+    isInOptionalFields: function isInOptionalFields(key) {
+      return this.optionalFields.includes(this.addressKeyPrefix + key);
     },
-    isInRequiredFields: function isInRequiredFields(locale, key) {
-      return this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key);
+    isInRequiredFields: function isInRequiredFields(key) {
+      return this.requiredFields.includes(this.addressKeyPrefix + key);
     },
-    transformTranslation: function transformTranslation(translationKey, locale, addressKey) {
+    transformTranslation: function transformTranslation(translationKey, addressKey) {
       var translation = _TranslationService.default.translate(translationKey);
 
-      var isRequired = this.isInRequiredFields(locale, addressKey);
+      var isRequired = this.isInRequiredFields(addressKey);
       return translation + (isRequired ? "*" : "");
     }
   },
@@ -20585,7 +20632,7 @@ Vue.component("country-select", {
   }
 });
 
-},{"services/TranslationService":268}],160:[function(require,module,exports){
+},{"../../helper/utils":259,"services/TranslationService":268}],160:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
