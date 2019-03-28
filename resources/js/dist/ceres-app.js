@@ -27421,6 +27421,8 @@ require("./getJsonData.mixin");
 
 var _url = require("../helper/url");
 
+var _utils = require("../helper/utils");
+
 var NotificationService = require("services/NotificationService");
 
 var WaitScreenService = require("services/WaitScreenService");
@@ -27503,6 +27505,7 @@ module.exports = function ($) {
     var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var config = arguments.length > 2 ? arguments[2] : undefined;
     var deferred = $.Deferred();
+    data = (0, _utils.isDefined)(data) ? data : {};
     url = (0, _url.normalizeUrl)(url);
     config = config || {};
     config.dataType = config.dataType || "json";
@@ -27575,7 +27578,7 @@ module.exports = function ($) {
   }
 }(jQuery);
 
-},{"../helper/url":258,"services/NotificationService":267,"services/WaitScreenService":272}],264:[function(require,module,exports){
+},{"../helper/url":258,"../helper/utils":259,"services/NotificationService":267,"services/WaitScreenService":272}],264:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
