@@ -16,16 +16,6 @@ import eventPropagation from "store/plugins/EventPropagationPlugin";
 Vue.use(require("vue-script2"));
 Vue.options.delimiters = ["${", "}"];
 
-Vue.mixin({
-    created()
-    {
-        if (this.$props && this.$props.template)
-        {
-            this.$options.template = this.$props.template;
-        }
-    }
-});
-
 // eslint-disable-next-line
 const store = new Vuex.Store(
     {
