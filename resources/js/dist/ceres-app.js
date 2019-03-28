@@ -20340,7 +20340,7 @@ Vue.component("country-select", {
     transformTranslation: function transformTranslation(translationKey, addressKey) {
       var translation = _TranslationService.default.translate(translationKey);
 
-      var isRequired = this.isInRequiredFields(this.selectedCountryIso, this.addressKeyPrefix + addressKey);
+      var isRequired = this.isInRequiredFields(addressKey);
       return translation + (isRequired ? "*" : "");
     }
   },

@@ -48,11 +48,6 @@ Vue.component("country-select", {
             return this.addressType === "1" ? "billing_address." : "delivery_address.";
         },
 
-        selectedCountryIso()
-        {
-            this.selectedCountry.isoCode2.toLowerCase();
-        },
-
         optionalFields()
         {
             const iso = this.selectedCountry.isoCode2.toLowerCase();
@@ -167,7 +162,7 @@ Vue.component("country-select", {
         transformTranslation(translationKey, addressKey)
         {
             const translation = TranslationService.translate(translationKey);
-            const isRequired = this.isInRequiredFields(this.selectedCountryIso, this.addressKeyPrefix + addressKey);
+            const isRequired = this.isInRequiredFields(addressKey);
 
             return translation + (isRequired ? "*" : "");
         }
