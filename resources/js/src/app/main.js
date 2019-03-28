@@ -2,8 +2,6 @@ const browserDetect = require("detect-browser");
 const NotificationService = require("services/NotificationService");
 const AutoFocusService = require("services/AutoFocusService");
 
-import "./mixins/index";
-
 // Frontend end scripts
 // eslint-disable-next-line
 var init = (function($, window, document)
