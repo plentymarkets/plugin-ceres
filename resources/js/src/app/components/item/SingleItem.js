@@ -6,10 +6,13 @@ Vue.component("single-item", {
 
     props: [
         "template",
-        "itemData",
-        "variationListData",
         "attributeNameMap",
         "variationUnits"
+    ],
+
+    jsonDataFields: [
+        "itemData",
+        "variationListData"
     ],
 
     data()

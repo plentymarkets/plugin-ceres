@@ -5,6 +5,8 @@
 ### TODO
 
 - Order characteristics of the type **Selection** are now supported and the description of the characteristic is displayed in the front end. You should check the **description** of the order characteristic and review whether you want the description to be displayed in the online store.
+- In case the markup is displayed incorrectly, you can use the **Regenerate contents** button.
+
 
 ### Added
 
@@ -36,6 +38,7 @@
 - The mapping between availabilities configured in the back end and availabilities specified by search engines was not working properly. This behaviour has been fixed.
 - Due to an error pertaining to variation properties, the shopping cart was not properly rendered in the checkout. This has been fixed.
 - The category option "Visible: After login" is now applicable in Ceres online stores. Categories for which this option is active are only displayed in the navigation after a login. Directly accessing the URL redirects to the login page.
+- In the address overlay, it was not possible to enter anything containing an apostrophe. This error has been fixed.
 
 ## v3.1.3 (2019-03-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.1.2...3.1.3" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

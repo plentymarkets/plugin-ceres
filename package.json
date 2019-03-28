@@ -13,9 +13,9 @@
     "compareTranslations": "node tools/compareTranslations.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
     "autoprefixer": "^8.3.0",
     "babelify": "^10.0.0",
     "browserify": "^16.2.0",
@@ -39,7 +39,7 @@
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^1.12.1",
     "gulp-tap": "^0.1.3",
-    "gulp-uglify": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.7",
     "jquery-lazyload": "^1.9.7",
     "postcss": "^6.0.21",
@@ -58,11 +58,11 @@
     "jquery": "^3.3.1",
     "lightbox2": "^2.10.0",
     "lodash": "^4.17.11",
-    "moment": "^2.23.0",
+    "moment": "^2.24.0",
     "owl.carousel": "2.2.0",
-    "popper.js": "^1.14.6",
-    "vue": "^2.5.21",
+    "popper.js": "^1.14.7",
+    "vue": "^2.6.10",
     "vue-script2": "^2.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.1.0"
   }
 }
