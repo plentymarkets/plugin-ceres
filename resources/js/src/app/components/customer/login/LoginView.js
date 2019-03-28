@@ -8,11 +8,6 @@ Vue.component("login-view", {
         "template"
     ],
 
-    created: function()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         openGuestModal()

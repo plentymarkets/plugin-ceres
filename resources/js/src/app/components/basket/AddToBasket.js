@@ -111,10 +111,6 @@ Vue.component("add-to-basket", {
             waiting: false
         };
     },
-    created()
-    {
-        this.$options.template = this.template;
-    },
     methods:
     {
         /**

@@ -29,11 +29,6 @@ Vue.component("forgot-password-modal", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>

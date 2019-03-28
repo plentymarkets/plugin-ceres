@@ -8,10 +8,5 @@ Vue.component("category-breadcrumbs",
 
         computed: Vuex.mapGetters([
             "breadcrumbs"
-        ]),
-
-        created()
-        {
-            this.$options.template = this.template;
-        }
+        ])
     });

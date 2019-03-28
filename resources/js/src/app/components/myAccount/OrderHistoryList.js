@@ -50,8 +50,6 @@ Vue.component("order-history-list", {
 
     created()
     {
-        this.$options.template = this.template;
-
         if (!isNullOrUndefined(this.initialData))
         {
             this.orderList = this.initialData;

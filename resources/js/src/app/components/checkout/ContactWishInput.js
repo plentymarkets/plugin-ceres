@@ -13,11 +13,6 @@ Vue.component("contact-wish-input", {
         contactWish: state => state.checkout.contactWish
     }),
 
-    created: function()
-    {
-        this.$options.template = this.template;
-    },
-
     methods: {
         updateContactWish(event)
         {
