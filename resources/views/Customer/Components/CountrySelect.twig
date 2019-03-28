@@ -9,11 +9,11 @@
             <label>{{ trans("Ceres::Template.headerCountry") }}</label>
         </div>
 
-        <template v-if="isInOptionalFields('de', 'billing_address.stateId')">
+        <template v-if="isInOptionalFields('stateId')">
             <div
                 class="input-unit"
-                v-if="stateList && stateList.length > 0 && addressType === '1'"
-                v-validate="isInRequiredFields('de', 'billing_address.stateId')"
+                v-if="stateList && stateList.length > 0"
+                v-validate="isInRequiredFields('stateId')"
                 data-model="stateId">
                 <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
                     <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
@@ -22,25 +22,7 @@
                     </option>
                 </select>
                 <label>
-                    ${ transformTranslation("Ceres::Template.headerState", "de", "billing_address.stateId") }
-                </label>
-            </div>
-        </template>
-
-        <template v-if="isInOptionalFields('de', 'delivery_address.stateId')">
-            <div
-                class="input-unit"
-                v-if="stateList && stateList.length > 0 && addressType === '2'"
-                v-validate="isInRequiredFields('de', 'delivery_address.stateId')"
-                data-model="stateId">
-                <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
-                    <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
-                    <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList">
-                        ${ state.name }
-                    </option>
-                </select>
-                <label>
-                    ${ transformTranslation("Ceres::Template.headerState", "de", "delivery_address.stateId") }
+                    ${ transformTranslation("Ceres::Template.headerState", "stateId") }
                 </label>
             </div>
         </template>
