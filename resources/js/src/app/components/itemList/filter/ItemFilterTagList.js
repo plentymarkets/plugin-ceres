@@ -13,11 +13,6 @@ Vue.component("item-filter-tag-list", {
         tagList: state => state.itemList.selectedFacets
     }),
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         removeTag(tag)

@@ -27,7 +27,6 @@ Vue.component("order-return-history-item", {
 
     created()
 	{
-        this.$options.template = this.template;
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
     },
 

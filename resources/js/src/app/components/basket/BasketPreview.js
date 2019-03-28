@@ -24,8 +24,6 @@ Vue.component("basket-preview", {
 
     created()
     {
-        this.$options.template = this.template;
-
         this.$store.dispatch("loadBasketData");
         this.$store.commit("setShowNetPrices", this.showNetPrices);
     },

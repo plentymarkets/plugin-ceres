@@ -31,11 +31,6 @@ Vue.component("last-seen-item-list", {
         containers: state => state.lastSeen.containers
     }),
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     beforeMount()
     {
         this.$store.dispatch("getLastSeenItems");

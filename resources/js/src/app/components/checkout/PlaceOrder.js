@@ -76,11 +76,6 @@ Vue.component("place-order", {
         })
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods: {
         placeOrder()
         {

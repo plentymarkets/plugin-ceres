@@ -7,11 +7,6 @@ Vue.component("item-lazy-img", {
         "template"
     ],
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>

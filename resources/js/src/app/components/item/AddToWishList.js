@@ -39,11 +39,6 @@ Vue.component("add-to-wish-list", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         switchState()

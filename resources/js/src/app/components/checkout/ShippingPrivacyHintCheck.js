@@ -54,11 +54,6 @@ Vue.component("shipping-privacy-hint-check", {
         })
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         setValue(value)

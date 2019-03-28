@@ -34,8 +34,6 @@ Vue.component("country-select", {
      */
     created()
     {
-        this.$options.template = this.template;
-
         this.countryList.sort(function(first, second)
         {
             if (first.currLangName < second.currLangName)

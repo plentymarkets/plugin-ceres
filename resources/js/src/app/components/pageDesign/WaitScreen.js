@@ -24,11 +24,6 @@ Vue.component("wait-screen", {
         };
     },
 
-    created: function()
-    {
-        this.$options.template = this.template;
-    },
-
     computed: {
         /**
          * Show an overlay over the page
