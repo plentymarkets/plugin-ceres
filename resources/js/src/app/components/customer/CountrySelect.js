@@ -1,17 +1,33 @@
 import TranslationService from "services/TranslationService";
+import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("country-select", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "selectedCountryId",
-        "selectedStateId",
-        "template",
-        "addressType",
-        "optionalAddressFields",
-        "requiredAddressFields"
-    ],
+    props:
+    {
+        selectedCountryId: Number,
+        selectedStateId: Number,
+        template: {
+            type: String,
+            default: "#vue-country-select"
+        },
+        addressType: {
+            type: String,
+            required: true
+        },
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {}
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {}
+        }
+    },
 
     jsonDataFields: [
         "countryList"
@@ -25,9 +41,46 @@ Vue.component("country-select", {
         };
     },
 
-    computed: Vuex.mapState({
-        shippingCountryId: state => state.localization.shippingCountryId
-    }),
+    computed:
+    {
+        addressKeyPrefix()
+        {
+            return this.addressType === "1" ? "billing_address." : "delivery_address.";
+        },
+
+        selectedCountryIso()
+        {
+            this.selectedCountry.isoCode2.toLowerCase();
+        },
+
+        optionalFields()
+        {
+            const iso = this.selectedCountry.isoCode2.toLowerCase();
+
+            if (isNullOrUndefined(this.optionalAddressFields[iso]))
+            {
+                return this.optionalAddressFields.de;
+            }
+
+            return this.optionalAddressFields[iso];
+        },
+
+        requiredFields()
+        {
+            const iso = this.selectedCountry.isoCode2.toLowerCase();
+
+            if (isNullOrUndefined(this.requiredAddressFields[iso]))
+            {
+                return this.requiredAddressFields.de;
+            }
+
+            return this.requiredAddressFields[iso];
+        },
+
+        ...Vuex.mapState({
+            shippingCountryId: state => state.localization.shippingCountryId
+        })
+    },
 
     /**
      * Get the shipping countries
@@ -101,20 +154,20 @@ Vue.component("country-select", {
             this.countryChanged(countryId);
         },
 
-        isInOptionalFields(locale, key)
+        isInOptionalFields(key)
         {
-            return this.optionalAddressFields[locale].includes(key);
+            return this.optionalFields.includes(this.addressKeyPrefix + key);
         },
 
-        isInRequiredFields(locale, key)
+        isInRequiredFields(key)
         {
-            return (this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key));
+            return this.requiredFields.includes(this.addressKeyPrefix + key);
         },
 
-        transformTranslation(translationKey, locale, addressKey)
+        transformTranslation(translationKey, addressKey)
         {
             const translation = TranslationService.translate(translationKey);
-            const isRequired = this.isInRequiredFields(locale, addressKey);
+            const isRequired = this.isInRequiredFields(this.selectedCountryIso, this.addressKeyPrefix + addressKey);
 
             return translation + (isRequired ? "*" : "");
         }
