@@ -7,7 +7,6 @@
 {{ component( "Ceres::Customer.Components.Registration" ) }}
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
-{{ component( "Ceres::Category.Components.CategoryBreadcrumbs" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
 
 {# TODO: remove if shop builder pages can be rebuild by migrations #}
@@ -23,6 +22,7 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
 
+{% spaceless %}
 <!DOCTYPE html>
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
@@ -211,6 +211,7 @@
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
 {{ get_filtered_tags() }}
+{{ get_json_data() }}
 
 <script>
     vueEventHub = new Vue();
@@ -373,3 +374,4 @@
 {{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
 </body>
 </html>
+{% endspaceless %}

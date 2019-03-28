@@ -5,13 +5,16 @@ Vue.component("country-select", {
     delimiters: ["${", "}"],
 
     props: [
-        "countryList",
         "selectedCountryId",
         "selectedStateId",
         "template",
         "addressType",
         "optionalAddressFields",
         "requiredAddressFields"
+    ],
+
+    jsonDataFields: [
+        "countryList"
     ],
 
     data()

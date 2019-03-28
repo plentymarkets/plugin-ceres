@@ -1877,6 +1877,7 @@
         }
     },
     {
+        "deprecated": true,
         "identifier": "Ceres::TextWidget",
         "label": "Widget.textLabel",
         "previewImageURL": "/images/widgets/text.svg",

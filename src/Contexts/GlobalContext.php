@@ -8,8 +8,6 @@ use IO\Services\BasketService;
 use IO\Services\CategoryService;
 use IO\Services\CheckoutService;
 use IO\Services\CustomerService;
-use IO\Services\ItemCrossSellingService;
-use IO\Services\ItemLastSeenService;
 use IO\Services\NotificationService;
 use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
@@ -58,15 +56,9 @@ class GlobalContext implements ContextInterface
         /** @var TemplateService $templateService */
         $templateService = pluginApp(TemplateService::class);
 
-        /** @var ItemCrossSellingService $crossSellingService */
-        $crossSellingService = pluginApp(ItemCrossSellingService::class);
-
         /** @var WebstoreConfigurationService $webstoreConfigService */
         $webstoreConfigService = pluginApp(WebstoreConfigurationService::class);
-
-        /** @var ItemLastSeenService $itemLastSeenService */
-        $itemLastSeenService = pluginApp(ItemLastSeenService::class);
-
+        
         /** @var BasketService $basketService */
         $basketService = pluginApp(BasketService::class);
 
@@ -97,8 +89,6 @@ class GlobalContext implements ContextInterface
         if($templateService->isCategory() || $templateService->isItem())
         {
             $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
-            $crossSellingService->setType($this->ceresConfig->itemLists->crossSellingType);
-            $crossSellingService->setSorting($this->ceresConfig->itemLists->crossSellingSorting);
         }
 
         $this->categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6, $customerService->getContactClassId());

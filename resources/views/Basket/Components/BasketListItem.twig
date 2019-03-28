@@ -83,7 +83,7 @@
                         </div>
     
                         <div class="price-box">
-                            <div class="item-total-price">${ itemTotalPrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
+                            <div class="item-total-price">${ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }</div>
                 
                             <div class="item-remove-container">
                                 <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || waitingForDelete }" @click="deleteItem">

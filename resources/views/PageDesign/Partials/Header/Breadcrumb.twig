@@ -1,4 +1,3 @@
-{{ component("Ceres::Category.Components.CategoryBreadcrumbs") }}
 {% set homepageURL = services.url.getHomepageURL() %}
 
 {% if categoryBreadcrumbs is not empty %}
@@ -31,6 +30,4 @@
             {% endif %}
         </ul>
     </nav>
-
-    <category-breadcrumbs template="#vue-category-breadcrumbs"></category-breadcrumbs>
 {% endif %}
