@@ -1,0 +1,11 @@
+{
+    "identifier": "Ceres::TabWidget",
+    "label": "Widget.tabLabel",
+    "previewImageURL": "/images/widgets/tab.svg",
+    "type": "structure",
+    "categories": ["structure"],
+    "position": 500,
+    "widgetClass": "Ceres\\Widgets\\Grid\\TabWidget",
+    "settings": {
+    }
+}
