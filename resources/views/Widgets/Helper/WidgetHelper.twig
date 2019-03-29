@@ -93,3 +93,7 @@
     {% endif %}
 
 {% endmacro %}
+
+{% macro makeClickable(isPreview) %}
+    {%- if isPreview %} data-builder-clickable{% endif -%}
+{% endmacro %}
