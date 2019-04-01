@@ -1,4 +1,8 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
 {{ Twig.if("frontend.Account.getIsAccountLoggedIn or #{ isPreview | json_encode }") }}
 
@@ -14,7 +18,8 @@
     {% set setting = widget.settings.salutation.mobile %}
     {{ Twig.set( "pattern" , setting | json_encode ) }}
 
-    <div class="widget widget-greeting">
+    <div class="widget widget-greeting {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         {% if setting == "firstname_surname" %}
             {{ Twig.if ("userObject.firstName | length > 0 and userObject.lastName | length > 0") }}
                 {{ Twig.set("name", "userObject.firstName ~ ' ' ~ userObject.lastName" ) }}
