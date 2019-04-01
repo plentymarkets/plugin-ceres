@@ -1,8 +1,13 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {{ Twig.component( 'Ceres::LiveShopping.Components.LiveShoppingItem' ) }}
 
-<div class="widget-live-shopping widget">
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+
+<div class="widget-live-shopping widget {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="row clearfix">
         <div class="col-12">
             <live-shopping-item :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection }}" :display-settings="{{ liveShoppingConfig | json_encode }}">
