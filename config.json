@@ -2656,6 +2656,10 @@
                                 "caption": "Config.addressFieldVatNumber"
                             },
                             {
+                                "value": "billing_address.contactPerson",
+                                "caption": "Config.addressFieldContactPerson"
+                            },
+                            {
                                 "value": "billing_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
                             },
@@ -2711,6 +2715,10 @@
                                 "caption": "Config.addressFieldTitle"
                             },
                             {
+                                "value": "billing_address.contactPerson",
+                                "caption": "Config.addressFieldContactPerson"
+                            },
+                            {
                                 "value": "billing_address.birthday",
                                 "caption": "Config.addressFieldBirthday"
                             },
@@ -2752,6 +2760,10 @@
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
+                            },
+                            {
+                                "value": "delivery_address.contactPerson",
+                                "caption": "Config.addressFieldContactPerson"
                             },
                             {
                                 "value": "delivery_address.title",
@@ -2797,6 +2809,10 @@
                                 "caption": "Config.addressFieldTitle"
                             },
                             {
+                                "value": "delivery_address.contactPerson",
+                                "caption": "Config.addressFieldContactPerson"
+                            },
+                            {
                                 "value": "delivery_address.name4",
                                 "caption": "Config.addressFieldName4"
                             },
@@ -2834,6 +2850,10 @@
                             {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldEnVatNumber"
+                            },
+                            {
+                                "value": "billing_address.contactPerson",
+                                "caption": "Config.addressFieldEnContactPerson"
                             },
                             {
                                 "value": "billing_address.salutation",
@@ -2891,6 +2911,10 @@
                                 "caption": "Config.addressFieldEnTitle"
                             },
                             {
+                                "value": "billing_address.contactPerson",
+                                "caption": "Config.addressFieldEnContactPerson"
+                            },
+                            {
                                 "value": "billing_address.birthday",
                                 "caption": "Config.addressFieldEnBirthday"
                             },
@@ -2934,6 +2958,10 @@
                                 "caption": "Config.addressFieldEnSalutation"
                             },
                             {
+                                "value": "delivery_address.contactPerson",
+                                "caption": "Config.addressFieldEnContactPerson"
+                            },
+                            {
                                 "value": "delivery_address.title",
                                 "caption": "Config.addressFieldEnTitle"
                             },
@@ -2975,6 +3003,10 @@
                             {
                                 "value": "delivery_address.title",
                                 "caption": "Config.addressFieldEnTitle"
+                            },
+                            {
+                                "value": "delivery_address.contactPerson",
+                                "caption": "Config.addressFieldEnContactPerson"
                             },
                             {
                                 "value": "delivery_address.name4",
