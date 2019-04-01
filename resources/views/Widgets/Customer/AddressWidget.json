@@ -78,6 +78,10 @@
                         "caption": "Widget.addressFieldVatNumber"
                     },
                     {
+                        "value": "billing_address.contactPerson",
+                        "caption": "Widget.addressFieldContactPerson"
+                    },
+                    {
                         "value": "billing_address.salutation",
                         "caption": "Widget.addressFieldSalutation"
                     },
@@ -132,6 +136,10 @@
                         "caption": "Widget.addressFieldTitle"
                     },
                     {
+                        "value": "billing_address.contactPerson",
+                        "caption": "Widget.addressFieldContactPerson"
+                    },
+                    {
                         "value": "billing_address.birthday",
                         "caption": "Widget.addressFieldBirthday"
                     },
@@ -172,6 +180,10 @@
                     {
                         "value": "billing_address.vatNumber",
                         "caption": "Widget.addressFieldEnVatNumber"
+                    },
+                    {
+                        "value": "billing_address.contactPerson",
+                        "caption": "Widget.addressFieldEnContactPerson"
                     },
                     {
                         "value": "billing_address.salutation",
@@ -228,6 +240,10 @@
                         "caption": "Widget.addressFieldEnTitle"
                     },
                     {
+                        "value": "billing_address.contactPerson",
+                        "caption": "Widget.addressFieldEnContactPerson"
+                    },
+                    {
                         "value": "billing_address.birthday",
                         "caption": "Widget.addressFieldEnBirthday"
                     },
@@ -268,6 +284,10 @@
                     {
                         "value": "delivery_address.salutation",
                         "caption": "Widget.addressFieldSalutation"
+                    },
+                    {
+                        "value": "delivery_address.contactPerson",
+                        "caption": "Widget.addressFieldContactPerson"
                     },
                     {
                         "value": "delivery_address.title",
@@ -312,6 +332,10 @@
                         "caption": "Widget.addressFieldTitle"
                     },
                     {
+                        "value": "delivery_address.contactPerson",
+                        "caption": "Widget.addressFieldContactPerson"
+                    },
+                    {
                         "value": "delivery_address.name4",
                         "caption": "Widget.addressFieldName4"
                     },
@@ -348,6 +372,10 @@
                     {
                         "value": "delivery_address.salutation",
                         "caption": "Widget.addressFieldEnSalutation"
+                    },
+                    {
+                        "value": "delivery_address.contactPerson",
+                        "caption": "Widget.addressFieldEnContactPerson"
                     },
                     {
                         "value": "delivery_address.title",
@@ -390,6 +418,10 @@
                     {
                         "value": "delivery_address.title",
                         "caption": "Widget.addressFieldEnTitle"
+                    },
+                    {
+                        "value": "delivery_address.contactPerson",
+                        "caption": "Widget.addressFieldEnContactPerson"
                     },
                     {
                         "value": "delivery_address.name4",
