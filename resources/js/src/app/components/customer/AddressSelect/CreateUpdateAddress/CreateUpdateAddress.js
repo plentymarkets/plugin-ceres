@@ -247,6 +247,11 @@ Vue.component("create-update-address", {
         emitInputEvent(event)
         {
             this.$emit("input", event);
+
+            if ((event.field === "gender" && event.field.value !== this.addressData.gender) || (event.field === "countryId" && event.field.value !== this.addressData.countryId))
+            {
+                ValidationService.unmarkAllFields(this.$refs.addressForm);
+            }
         }
     }
 });
