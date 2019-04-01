@@ -150,6 +150,14 @@ Vue.component("address-input-group", {
             return translation + (isRequired ? "*" : "");
         },
 
+        areNameFieldsShown(locale, keyPrefix)
+        {
+            const condition1 = this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.isInOptionalFields(locale, `${keyPrefix}.contactPerson`) && this.value.addressSalutation === 2;
+            const condition2 = !this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.isInOptionalFields(locale, `${keyPrefix}.name1`) && this.isInOptionalFields(locale, `${keyPrefix}.contactPerson`);
+
+            return !(condition1 || condition2);
+        },
+
         areNameFieldsRequired(locale, keyPrefix)
         {
             const condition1 = this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.value.addressSalutation !== 2;

@@ -42,9 +42,7 @@
             </div>
         </div>
 
-        <template
-            v-if="!((isInOptionalFields('de', 'delivery_address.salutation') && isInOptionalFields('de', 'delivery_address.contactPerson') && value.addressSalutation === 2) ||
-                (!isInOptionalFields('de', 'delivery_address.salutation') && isInOptionalFields('de', 'delivery_address.name1') && isInOptionalFields('de', 'delivery_address.contactPerson')))">
+        <template v-if="areNameFieldsShown('de', 'delivery_address')">
             {# First name #}
             <div class="col-12 col-sm-4">
                 <div class="input-unit" data-model="name2" v-validate:text="areNameFieldsRequired('de', 'delivery_address')">
