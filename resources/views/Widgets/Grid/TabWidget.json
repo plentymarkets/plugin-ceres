@@ -7,5 +7,11 @@
     "position": 500,
     "widgetClass": "Ceres\\Widgets\\Grid\\TabWidget",
     "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        }
     }
 }

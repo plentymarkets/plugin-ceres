@@ -2578,6 +2578,60 @@
         "settings": {}
     },
     {
+        "identifier": "Ceres::TabWidget",
+        "label": "Widget.tabLabel",
+        "previewImageURL": "/images/widgets/tab.svg",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
+        "position": 500,
+        "widgetClass": "Ceres\\Widgets\\Grid\\TabWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::ThreeColumnWidget",
         "label": "Widget.gridThreeColumnLabel",
         "previewImageURL": "/images/widgets/grid-3-col.svg",
