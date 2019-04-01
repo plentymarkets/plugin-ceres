@@ -81,7 +81,9 @@
                 data-model="contactPerson"
                 v-validate:text="isInRequiredFields('gb', 'billing_address.contactPerson')">
                 <input type="text" name="lastName" :id="'txtContactPerson' + _uid" :value="value.contactPerson" @input="emitInputEvent('contactPerson', $event.target.value)">
-                <label :for="'txtContactPerson' + _uid">{{ trans("Ceres::Template.addressContactPerson") }}*</label>
+                <label :for="'txtContactPerson' + _uid">
+                    ${ transformTranslation("Ceres::Template.addressContactPerson", "gb", "billing_address.contactPerson") }
+                </label>
             </div>
         </div>
 
