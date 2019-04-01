@@ -6,12 +6,16 @@
 {% set centered         = widget.settings.centered.mobile %}
 {% set hasEntries    = false %}
 
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+
 {% for entry in listEntries if entry.text is not empty %}
     {% set hasEntries = true %}
 {% endfor %}
 
 {% if hasEntries or title is not empty %}
-    <div class="widget {% if isLinkList %}widget-link-list{% else %}widget-list{% endif %}">
+    <div class="widget {% if isLinkList %}widget-link-list{% else %}widget-list{% endif %}
+     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="widget-inner">
             {% if title is not empty %}<p class="h4">{{ title }}</p>{% endif %}
             {% if listEntries | length > 0 %}

@@ -827,6 +827,23 @@
                     "name": "Widget.imageBoxCustomImagePathLabel",
                     "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
                 }
+            },
+            "customMargin": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomMargin"
+                }
+            },
+            "margin": {
+                "type": "spacing",
+                "isVisible": "!!customMargin",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
             }
         }
     },
@@ -984,6 +1001,23 @@
                             "tooltipText": "Widget.imageCarouselCustomImagePathTooltip"
                         }
                     }
+                }
+            },
+            "customMargin": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomMargin"
+                }
+            },
+            "margin": {
+                "type": "spacing",
+                "isVisible": "!!customMargin",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
                 }
             }
         }
@@ -1278,6 +1312,40 @@
                         }
                     ]
                 }
+            },
+            "customPadding": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomPadding"
+                }
+            },
+            "padding": {
+                "type": "spacing",
+                "isVisible": "!!customPadding",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
+            },
+            "customMargin": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomMargin"
+                }
+            },
+            "margin": {
+                "type": "spacing",
+                "isVisible": "!!customMargin",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
             }
         }
     },
@@ -1398,6 +1466,40 @@
                         }
                     }
                 }
+            },
+            "customPadding": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomPadding"
+                }
+            },
+            "padding": {
+                "type": "spacing",
+                "isVisible": "!!customPadding",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
+            },
+            "customMargin": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomMargin"
+                }
+            },
+            "margin": {
+                "type": "spacing",
+                "isVisible": "!!customMargin",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
             }
         }
     },
@@ -1517,6 +1619,40 @@
                             "tooltipText": "Widget.listEntryUrlTooltip"
                         }
                     }
+                }
+            },
+            "customPadding": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomPadding"
+                }
+            },
+            "padding": {
+                "type": "spacing",
+                "isVisible": "!!customPadding",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
+            },
+            "customMargin": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomMargin"
+                }
+            },
+            "margin": {
+                "type": "spacing",
+                "isVisible": "!!customMargin",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
                 }
             }
         }

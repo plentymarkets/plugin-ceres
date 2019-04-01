@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set headlineStyle  = widget.settings.headlineStyle.mobile  %}
 {% set headline       = widget.settings.headline.mobile  %}
@@ -9,6 +10,9 @@
 {% set itemListId     = widget.settings.tagId.mobile %}
 {% set itemsPerPage   = widget.settings.itemsPerPage.mobile %}
 {% set manufacturerId = widget.settings.manufacturerId.mobile %}
+
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
 {% if itemsPerPage is empty or itemsPerPage > 4 %}
     {% set itemsPerPage = 4 %}
@@ -60,7 +64,7 @@
 {{ Twig.component( "Ceres::PageDesign.Components.Carousel" ) }}
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
-<div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+<div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }} {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}

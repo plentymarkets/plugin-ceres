@@ -251,6 +251,34 @@
                     }
                 ]
             }
+        },
+        "customPadding": {
+            "type": "checkbox",
+            "options": {
+                "name": "Widget.widgetCustomPadding"
+            }
+        },
+        "padding": {
+            "type": "spacing",
+            "isVisible": "!!customPadding",
+            "options": {
+                "units": ["px", "rem"],
+                "direction": "all"
+            }
+        },
+        "customMargin": {
+            "type": "checkbox",
+            "options": {
+                "name": "Widget.widgetCustomMargin"
+            }
+        },
+        "margin": {
+            "type": "spacing",
+            "isVisible": "!!customMargin",
+            "options": {
+                "units": ["px", "rem"],
+                "direction": "all"
+            }
         }
     }
 }
