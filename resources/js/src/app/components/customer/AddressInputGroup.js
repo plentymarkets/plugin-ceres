@@ -148,6 +148,16 @@ Vue.component("address-input-group", {
             const isRequired = this.isInRequiredFields(locale, addressKey);
 
             return translation + (isRequired ? "*" : "");
+        },
+
+        areNameFieldsRequired(locale, keyPrefix)
+        {
+            const condition1 = this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.value.addressSalutation !== 2;
+            const condition2 = this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.value.addressSalutation === 2 && this.isInRequiredFields(locale, `${keyPrefix}.contactPerson`);
+            const condition3 = !this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.isInOptionalFields(locale, `${keyPrefix}.name1`) && this.isInRequiredFields(locale, `${keyPrefix}.contactPerson`);
+            const condition4 = !this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && !this.isInOptionalFields(locale, `${keyPrefix}.name1`);
+
+            return condition1 || condition2 || condition3 || condition4;
         }
     }
 });
