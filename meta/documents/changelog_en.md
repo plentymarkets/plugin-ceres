@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## v3.2.1 (2019-04-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.0...3.2.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Fixed
+
+- Due to an error, the "Order history"-widget could not be displayed by variable users. This has been fixed.
+
 ## v3.2.0 (2019-03-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.1.3...3.2.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
