@@ -10,14 +10,20 @@ const TabNavItem = {
             {
                 staticClass: "nav-link",
                 class: {
-                    // TODO get active state form tab
-                    active: false
+                    active: this.tab.localActive
                 },
                 attrs: {
-                    role: "tab"
+                    role: "tab",
+                    href: "#"
+                },
+                on: {
+                    click: evt =>
+                    {
+                        this.$emit("click", evt);
+                    }
                 }
             },
-            "Title" + this.tabIndex
+            [this.tab.$slots.title || this.tab.title]
         );
 
         return createElement(
@@ -52,6 +58,12 @@ Vue.component("tab-list", {
                     props: {
                         tab: tab,
                         tabIndex: index
+                    },
+                    on: {
+                        click: evt =>
+                        {
+                            this.activateTab(tab, evt);
+                        }
                     }
                 });
         });
@@ -123,6 +135,14 @@ Vue.component("tab-list", {
         updateTabs()
         {
             this.tabs = this.getTabs();
+        },
+
+        activateTab(tab, event)
+        {
+            const activeTab = this.tabs.find(tab => tab.localActive);
+
+            tab.setActive(true);
+            activeTab.setActive(false);
         }
     }
 });

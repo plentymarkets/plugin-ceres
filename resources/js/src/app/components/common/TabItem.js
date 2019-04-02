@@ -8,7 +8,7 @@ Vue.component("tab-item", {
             {
                 staticClass: "tab-pane",
                 class: {
-                    active: this.active
+                    active: this.localActive
                 },
                 attrs: {
                     role: "tabpanel"
@@ -34,7 +34,7 @@ Vue.component("tab-item", {
     data()
     {
         return {
-
+            localActive: this.active
         };
     },
 
@@ -49,6 +49,9 @@ Vue.component("tab-item", {
 
     methods:
     {
-        
+        setActive(isActive)
+        {
+            this.localActive = isActive;
+        }
     }
 });
