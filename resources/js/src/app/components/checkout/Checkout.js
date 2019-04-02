@@ -127,8 +127,6 @@ Vue.component("checkout", {
 
             if (this.deliveryAddressId !== responseDeliveryAddressId)
             {
-                console.log(this.deliveryAddressId, responseDeliveryAddressId);
-
                 NotificationService.warn(
                     TranslationService.translate("Ceres::Template.addressChangedWarning")
                 );
