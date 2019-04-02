@@ -7,6 +7,9 @@ Vue.component("tab-item", {
             "div",
             {
                 staticClass: "tab-pane",
+                class: {
+                    active: this.active
+                },
                 attrs: {
                     role: "tabpanel"
                 }

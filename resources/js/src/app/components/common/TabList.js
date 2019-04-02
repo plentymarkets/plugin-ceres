@@ -9,6 +9,10 @@ const TabNavItem = {
             "a",
             {
                 staticClass: "nav-link",
+                class: {
+                    // TODO get active state form tab
+                    active: false
+                },
                 attrs: {
                     role: "tab"
                 }
@@ -52,9 +56,22 @@ Vue.component("tab-list", {
                 });
         });
 
+        const nav = createElement(
+            "ul",
+            {
+                staticClass: "nav nav-tabs",
+                attrs: {
+                    role: "tablist"
+                }
+            },
+            [navElements]
+        );
+
         const content = createElement(
             "div",
-            {},
+            {
+                staticClass: "tab-content"
+            },
             [this.$slots.default]
         );
 
@@ -62,7 +79,7 @@ Vue.component("tab-list", {
             "div",
             {},
             [
-                navElements,
+                nav,
                 content
             ]
         );
