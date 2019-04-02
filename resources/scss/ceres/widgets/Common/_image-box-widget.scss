@@ -88,12 +88,13 @@
         > .widget-inner
         {
             padding: 0;
-            top: auto;
 
             .widget-caption
             {
                 width: 100%;
                 padding: 1rem;
+                position: absolute;
+                bottom: 0;
             }
         }
     }
