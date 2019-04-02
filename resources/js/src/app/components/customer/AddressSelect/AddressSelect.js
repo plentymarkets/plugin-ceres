@@ -1,4 +1,4 @@
-import { isNull, isDefined } from "../../../helper/utils";
+import { isDefined } from "../../../helper/utils";
 
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
@@ -34,6 +34,10 @@ Vue.component("address-select", {
             {
                 return {};
             }
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
         }
     },
 
@@ -44,8 +48,7 @@ Vue.component("address-select", {
             modalType      : "",
             headline       : "",
             addressToEdit  : {
-                addressSalutation: 0,
-                gender: "male",
+                gender: this.defaultSalutation,
                 countryId        : this.shippingCountryId
             },
             addressToDelete: {},
@@ -161,8 +164,7 @@ Vue.component("address-select", {
             if (this.isSalutationEnabled)
             {
                 this.addressToEdit = {
-                    addressSalutation: 0,
-                    gender: "male",
+                    gender: this.defaultSalutation,
                     countryId: this.shippingCountryId,
                     showPickupStation: false
                 };
@@ -190,20 +192,6 @@ Vue.component("address-select", {
         {
             this.modalType = "update";
             this.addressToEdit = this.getAddressToEdit(address);
-
-            if (this.addressToEdit.gender === "female")
-            {
-                this.addressToEdit.addressSalutation = 1;
-            }
-            else if (isNull(this.addressToEdit.gender) && this.addressToEdit.name1)
-            {
-                this.addressToEdit.addressSalutation = 2;
-            }
-            else
-            {
-                this.addressToEdit.addressSalutation = 0;
-                this.addressToEdit.gender = "male";
-            }
 
             if (isDefined(this.addressToEdit.address1) && (this.addressToEdit.address1 === "PACKSTATION" || this.addressToEdit.address1 === "POSTFILIALE") && this.$store.getters.isParcelOrOfficeAvailable)
             {
@@ -375,7 +363,7 @@ Vue.component("address-select", {
         {
             if (!newVal)
             {
-                delete this.addressToEdit.addressSalutation;
+                delete this.addressToEdit.gender;
             }
         }
     }
