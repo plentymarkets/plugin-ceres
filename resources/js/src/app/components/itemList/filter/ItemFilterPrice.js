@@ -24,8 +24,6 @@ Vue.component("item-filter-price", {
 
     created()
     {
-        this.$options.template = this.template || "#vue-item-filter-price";
-
         const urlParams = UrlService.getUrlParams(document.location.search);
 
         this.priceMin = urlParams.priceMin || "";

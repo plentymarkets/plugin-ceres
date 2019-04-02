@@ -120,8 +120,6 @@ Vue.component("live-shopping-item", {
 
     created()
     {
-        this.$options.template = this.template;
-
         this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
     },
 

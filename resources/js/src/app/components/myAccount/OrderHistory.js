@@ -25,11 +25,6 @@ Vue.component("order-history", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         setCurrentOrder(order)

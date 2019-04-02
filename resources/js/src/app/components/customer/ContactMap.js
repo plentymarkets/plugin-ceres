@@ -8,11 +8,6 @@ Vue.component("contact-map", {
         "template"
     ],
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>

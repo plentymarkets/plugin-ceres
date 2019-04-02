@@ -53,8 +53,6 @@ Vue.component("subscribe-newsletter-check", {
 
     created()
     {
-        this.$options.template = this.template;
-
         if (this.isPreselected || this.hideCheckbox)
         {
             this.setValue(true);

@@ -37,6 +37,7 @@
                     {{ LayoutContainer.show("Ceres::Basket.AfterBasketTotals") }}
 
                     <hr>
+                    {{ LayoutContainer.show("Ceres::Basket.BeforeCoupon") }}
                     <coupon></coupon>
                     <hr>
 
@@ -49,12 +50,5 @@
                 </div>
             </div>
         </div>
-
-        {% set beforeCouponContainer = LayoutContainer.show("Ceres::Basket.BeforeCoupon") %}
-
-        {% if beforeCouponContainer|trim is not empty %}
-            {{ beforeCouponContainer }}
-            <hr class="my-4">
-        {% endif %}
     </div>
 {% endblock %}
