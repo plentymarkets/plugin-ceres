@@ -27987,6 +27987,7 @@ exports.removeUrlParam = removeUrlParam;
 exports.removeUrlParams = removeUrlParams;
 exports.navigateTo = navigateTo;
 exports.navigateToParams = navigateToParams;
+exports.encodeParams = encodeParams;
 exports.default = void 0;
 
 var _jquery = _interopRequireDefault(require("jquery"));
@@ -27998,6 +27999,8 @@ var _url = require("../helper/url");
 var _index = _interopRequireDefault(require("../store/index"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function getUrlParams(urlParams) {
   if ((0, _utils.isNullOrUndefined)(urlParams) && (0, _utils.isDefined)(document.location.search)) {
@@ -28108,9 +28111,32 @@ function navigateTo(url) {
 
 function navigateToParams(urlParams) {
   var pathName = (0, _utils.isDefined)(_index.default.state.navigation.currentCategory) && (0, _utils.isDefined)(_index.default.state.navigation.currentCategory.url) ? _index.default.state.navigation.currentCategory.url : window.location.pathname;
-  var params = _jquery.default.isEmptyObject(urlParams) ? "" : "?" + _jquery.default.param(urlParams);
-  var url = (0, _url.normalizeUrl)(pathName + params);
+  var url = (0, _url.normalizeUrl)(pathName + "?" + encodeParams(urlParams));
   window.location.assign(url);
+}
+
+function encodeParams(params, prefix) {
+  if ((0, _utils.isNullOrUndefined)(params)) {
+    return "";
+  }
+
+  if (Array.isArray(params)) {
+    return params.map(function (listValue, i) {
+      return encodeParams(listValue, "".concat(prefix, "[").concat(i, "]"));
+    }).join("&");
+  } else if (_typeof(params) === "object") {
+    return Object.keys(params).filter(function (key) {
+      return !(isNaN(params[key]) && typeof params[key] === "number") && !(0, _utils.isNullOrUndefined)(params[key]);
+    }).map(function (key) {
+      return encodeParams(params[key], !(0, _utils.isNullOrUndefined)(prefix) ? "".concat(prefix, "[").concat(key, "]") : key);
+    }).join("&");
+  }
+
+  if ((0, _utils.isNullOrUndefined)(prefix)) {
+    return encodeURIComponent(params);
+  }
+
+  return prefix + "=" + encodeURIComponent(params);
 }
 
 var _default = {
