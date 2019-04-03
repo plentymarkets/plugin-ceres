@@ -251,6 +251,14 @@
                     }
                 ]
             }
+        },
+        "spacing":
+        {
+            "type": "vertical",
+            "options": {
+                "name": "Widget.widgetSpacing"
+            },
+            "children": "@include(spacing)"
         }
     }
 }
