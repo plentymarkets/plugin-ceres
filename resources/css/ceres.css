@@ -16203,7 +16203,7 @@ body > #vue-error > .wrapper-left,
 body > #vue-error > .wrapper-right,
 body > #vue-error > .wrapper-bottom {
   position: absolute;
-  z-index: 1080;
+  z-index: 1090;
 }
 
 body > #vue-app .wrapper-main,
@@ -24425,12 +24425,13 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
 
 .widget.widget-image-box.widget-image-box-block-caption > .widget-inner {
   padding: 0;
-  top: auto;
 }
 
 .widget.widget-image-box.widget-image-box-block-caption > .widget-inner .widget-caption {
   width: 100%;
   padding: 1rem;
+  position: absolute;
+  bottom: 0;
 }
 
 .widget.widget-image-box.widget-image-box-no-caption > .widget-inner .widget-caption {
