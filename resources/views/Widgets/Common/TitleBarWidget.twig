@@ -1,12 +1,13 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
-
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 {% set text = widget.settings.text.mobile %}
 
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-title-bar widget-{{ widget.settings.appearance.mobile | default('primary') }}">
+<div class="widget widget-title-bar widget-{{ widget.settings.appearance.mobile | default('primary') }} {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner bg-appearance">
         {% if text | trim is not empty %}
             <h1>{{ text }}</h1>
