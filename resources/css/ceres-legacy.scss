@@ -317,13 +317,14 @@ $zIndex-10:                         10000 !default;
 // of components dependent on the z-axis and are designed to all work together.
 
 $zindex-dropdown:                   $zIndex-1 !default;
-$zindex-sticky:                     $zIndex-3 !default;
 $zindex-fixed:                      $zIndex-3 !default;
 $zindex-modal-backdrop:             $zIndex-7 !default;
 $zindex-modal:                      $zIndex-8 !default;
 $zindex-navbar:                     $zIndex-5 !default;
 $zindex-popover:                    $zIndex-10 !default;
+$zindex-sticky:                     $zIndex-3 !default;
 $zindex-tooltip:                    $zIndex-7 !default;
+$zindex-wrapper-top:                $zIndex-9 !default;
 
 // Navbar
 $navbar-background-color:           $gray-lightest !default;
@@ -10789,7 +10790,7 @@ body {
 		
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
-			z-index 	: $zIndex-8;
+			z-index 	: $zindex-wrapper-top;
 		} 
 
 		.wrapper-main{
@@ -19519,7 +19520,6 @@ html.ios {
         > .widget-inner
         {
             padding: 0;
-            top: auto;
 
             .widget-caption
             {
@@ -19534,6 +19534,8 @@ html.ios {
                 bottom: 0;
                 width: 100%;
                 padding: 1rem;
+                position: absolute;
+                bottom: 0;
             }
         }
     }
@@ -20090,6 +20092,7 @@ html.ie {
 
         > div
         {
+            max-width: 100%;
             -webkit-box-flex: 1;
                 -ms-flex: 1;
                     flex: 1;
