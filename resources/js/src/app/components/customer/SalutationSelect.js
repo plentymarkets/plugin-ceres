@@ -102,7 +102,6 @@ Vue.component("salutation-select", {
         emitInputEvent(value)
         {
             this.$emit("input", { field: "gender", value: value });
-            // this.$emit("input", { field: "addressSalutation", value: value });
             this.$emit("input", { field: "name1", value: "" });
             this.$emit("input", { field: "name2", value: "" });
             this.$emit("input", { field: "name3", value: "" });
