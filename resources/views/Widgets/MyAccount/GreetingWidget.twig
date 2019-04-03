@@ -1,8 +1,9 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {{ Twig.if("frontend.Account.getIsAccountLoggedIn or #{ isPreview | json_encode }") }}
 
