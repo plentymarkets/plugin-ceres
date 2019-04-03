@@ -7,7 +7,7 @@ const TabNavItem = {
     {
         const anchorAttrs = {
             role: "tab",
-            href: "#"
+            href: ""
         };
 
         if (this.tab.dataBuilderClickable)
@@ -26,6 +26,7 @@ const TabNavItem = {
                 on: {
                     click: evt =>
                     {
+                        evt.preventDefault();
                         this.$emit("click", evt);
                     }
                 }
