@@ -5,6 +5,16 @@ const TabNavItem = {
 
     render(createElement)
     {
+        const anchorAttrs = {
+            role: "tab",
+            href: "#"
+        };
+
+        if (this.tab.dataBuilderClickable)
+        {
+            anchorAttrs["data-builder-clickable"] = "";
+        }
+
         const anchor = createElement(
             "a",
             {
@@ -12,10 +22,7 @@ const TabNavItem = {
                 class: {
                     active: this.tab.localActive
                 },
-                attrs: {
-                    role: "tab",
-                    href: "#"
-                },
+                attrs: anchorAttrs,
                 on: {
                     click: evt =>
                     {

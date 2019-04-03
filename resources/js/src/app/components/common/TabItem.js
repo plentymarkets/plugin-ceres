@@ -28,6 +28,11 @@ Vue.component("tab-item", {
         {
             type: String,
             default: null
+        },
+        dataBuilderClickable:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
