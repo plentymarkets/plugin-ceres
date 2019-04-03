@@ -7,7 +7,13 @@
 {% endfor %}
 
 {% if renderContent %}
-    <div class="widget accordion widget-{{ widget.settings.appearance.mobile | default('primary')  }}" id="accordion_{{ collapseId }}">
+    {% set spacingSettings = widget.settings.spacing %}
+    {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+    {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+    <div class="widget accordion widget-{{ widget.settings.appearance.mobile | default('primary')  }} 
+      {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+      {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %} id="accordion_{{ collapseId }}">
         {% for collapseBox in collapseBoxes %}
         <div class="card">
           <button class="card-header btn btn-link text-appearance collapsed" id="heading_{{ collapseId }}_{{ loop.index }}" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}_{{ loop.index }}" aria-expanded="false" aria-controls="collapse_{{ collapseId }}_{{ loop.index }}">
