@@ -3,23 +3,15 @@
 
 <div class="widget widget-tab">
     <div class="widget-inner">
-        <ul class="nav nav-tabs" role="tablist">
+        <tab-list>
             {% for tab in tabs %}
-                <li class="nav-item">
-                    <a class="nav-link{% if loop.first %} active{% endif %}"
-                       data-toggle="tab"
-                       href="#tab-{{ tab.uuid }}"
-                       role="tab"
-                       {{ WidgetHelper.makeClickable(isPreview) }}>{{ tab.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-        <div class="tab-content">
-            {% for tab in tabs %}
-                <div class="tab-pane overflow-auto{% if loop.first %} active{% endif %}" id="tab-{{ tab.uuid }}" role="tabpanel">
+                <tab-item
+                    title="{{ tab.title }}"
+                    {% if loop.first %} active{% endif %}
+                    {{ WidgetHelper.makeClickable(isPreview) }}>
                     <div class="my-4" data-builder-child-container="{{ tab.uuid }}">{{ children[tab.uuid] | raw }}</div>
-                </div>
+                </tab-item>
             {% endfor %}
-        </div>
+        </tab-list>
     </div>
 </div>
