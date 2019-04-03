@@ -30,7 +30,7 @@
                 :country-list="{{ services.country.getActiveCountriesList() | filterFields(['id','currLangName', 'isoCode2', 'states.id', 'states.name']) | json_encode }}"
                 :address-type="addressType"
                 :optional-address-fields="optionalAddressFields"
-                :required-address-fields="requiredAddressFields"
+                :required-address-fields="requiredAddressFields">
             </country-select>
         </div>
     </div>
