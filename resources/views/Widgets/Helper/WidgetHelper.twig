@@ -110,3 +110,7 @@
 {% macro makeCodeEditable(variableName, labelTranslationKey, isPreview) %}
     {%- if isPreview %} data-builder-code="{{ variableName }}" data-builder-code-label="{{ trans(labelTranslationKey) }}"{% endif -%}
 {% endmacro %}
+
+{% macro makeClickable(isPreview) %}
+    {%- if isPreview %} data-builder-clickable{% endif -%}
+{% endmacro %}

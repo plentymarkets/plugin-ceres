@@ -35,10 +35,5 @@ Vue.component("graduated-prices", {
         ...Vuex.mapState({
             variationOrderQuantity: state => state.item.variationOrderQuantity
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     }
 });

@@ -50,11 +50,6 @@ Vue.component("item-image-carousel", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>

@@ -44,8 +44,6 @@ Vue.component("checkout", {
 
     created()
     {
-        this.$options.template = this.template;
-
         this.$store.dispatch("setCheckout", this.initialCheckout);
         this.$store.dispatch("initBillingAddress", { id: this.selectedBillingAddress, addressList: this.billingAddressList });
         this.$store.dispatch("initDeliveryAddress", { id: this.selectedDeliveryAddress, addressList: this.deliveryAddressList });

@@ -37,11 +37,6 @@ Vue.component("bank-data-select", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     /**
      * Select the modals
      */

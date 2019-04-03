@@ -45,11 +45,6 @@ Vue.component("mobile-navigation", {
         })
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>

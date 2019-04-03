@@ -38,11 +38,6 @@ Vue.component("newsletter-input", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods: {
         validateData()
         {

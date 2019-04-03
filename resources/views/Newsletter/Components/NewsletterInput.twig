@@ -18,7 +18,7 @@
                     <div class="input-group">
                         <div class="input-unit" data-validate="mail">
                             <label :for="'email-input-id_' + _uid">{{ trans("Ceres::Template.newsletterEmail") }} *</label>
-                            <input type="email" :id="'email-input-id_' + _uid" v-model="email">
+                            <input type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email">
                         </div>
                     </div>
                 </div>

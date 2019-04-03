@@ -114,7 +114,6 @@ Vue.component("address-select", {
      */
     created()
     {
-        this.$options.template = this.template;
         this.addEventListener();
     },
 

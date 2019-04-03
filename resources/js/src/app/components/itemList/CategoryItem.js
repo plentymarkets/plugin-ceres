@@ -58,11 +58,6 @@ Vue.component("category-item", {
         })
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         loadFirstImage()

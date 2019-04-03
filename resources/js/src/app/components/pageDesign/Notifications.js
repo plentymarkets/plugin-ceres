@@ -18,11 +18,6 @@ Vue.component("notifications", {
         };
     },
 
-    created: function()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted: function()
     {
         this.$nextTick(() =>
