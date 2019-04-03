@@ -1,38 +1,25 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{% set tabs = widget.settings.tabs.mobile %}
 
 <div class="widget widget-tab">
     <div class="widget-inner">
         <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#details" role="tab" {{ WidgetHelper.makeClickable(isPreview) }}> {{ WidgetHelper.makeClickable(isPreview) }} {{ trans("Ceres::Template.singleItemDescription") }}</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#technical-details" role="tab"  {{ WidgetHelper.makeClickable(isPreview) }}>{{ trans("Ceres::Template.singleItemTechnicalData") }}</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#assessments-details" role="tab"  {{ WidgetHelper.makeClickable(isPreview) }}>{{ trans("Ceres::Template.singleItemMoreDetails") }}</a>
-            </li>
+            {% for tab in tabs %}
+                <li class="nav-item">
+                    <a class="nav-link{% if loop.first %} active{% endif %}"
+                       data-toggle="tab"
+                       href="#tab-{{ tab.uuid }}"
+                       role="tab"
+                       {{ WidgetHelper.makeClickable(isPreview) }}>{{ tab.title }}</a>
+                </li>
+            {% endfor %}
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active overflow-auto" id="details" role="tabpanel">
-                <div class="my-4">
-                    1. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae est obcaecati id ad quisquam dolore dignissimos sequi ex! Fugit enim itaque rem illum optio similique, eius id odio qui? Libero.
+            {% for tab in tabs %}
+                <div class="tab-pane overflow-auto{% if loop.first %} active{% endif %}" id="tab-{{ tab.uuid }}" role="tabpanel">
+                    <div class="my-4" data-builder-child-container="{{ tab.uuid }}">{{ children[tab.uuid] | raw }}</div>
                 </div>
-            </div>
-
-            <div class="tab-pane" id="technical-details" role="tabpanel">
-                <div class="my-4">
-                    2. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae est obcaecati id ad quisquam dolore dignissimos sequi ex! Fugit enim itaque rem illum optio similique, eius id odio qui? Libero.
-                </div>
-            </div>
-
-            <div class="tab-pane" id="assessments-details" role="tabpanel">
-                <div class="my-4">
-                    3. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae est obcaecati id ad quisquam dolore dignissimos sequi ex! Fugit enim itaque rem illum optio similique, eius id odio qui? Libero.
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

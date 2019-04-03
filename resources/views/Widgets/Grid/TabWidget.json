@@ -12,6 +12,22 @@
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
+        },
+        "tabs": {
+            "type": "vertical",
+            "isList": "[1,]",
+            "options": {
+                "name": "Tabs"
+            },
+            "children": {
+                "title": {
+                    "type": "text",
+                    "defaultValue": "Neues Tab"
+                },
+                "uuid": {
+                    "type": "uuid"
+                }
+            }
         }
     }
 }
