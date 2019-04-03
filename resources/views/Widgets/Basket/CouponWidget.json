@@ -12,6 +12,13 @@
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
+        },
+        "spacing":{
+            "type": "vertical",
+            "options": {
+                "name": "Widget.widgetSpacing"
+            },
+            "children": "@include(spacing)"
         }
     }
 }
