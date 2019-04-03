@@ -10,7 +10,7 @@
                     <div class="col-12">
                         <div class="input-unit" data-validate="mail">
                             {% set uid_mail = uid() %}
-                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username" data-autofocus>
+                            <input type="email" name="email" autocomplete="email" id="{{ uid_mail }}" v-model="username" data-autofocus>
                             <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
@@ -18,7 +18,7 @@
                     <div class="col-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
                             {% set uid_pwd = uid() %}
-                            <input type="password" name="password" id="{{ uid_pwd }}" v-model="password">
+                            <input type="password" name="password" autocomplete="current-password" id="{{ uid_pwd }}" v-model="password">
                             <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.loginPassword") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.loginEmptyPassword") }}</span>

@@ -11,7 +11,7 @@
                         <div class="modal-body">
                             <div class="input-unit" data-validate="mail">
                                 {% set uid_mail = uid() %}
-                                <input type="email" name="email" id="{{ uid_mail }}" v-model="email" data-autofocus>
+                                <input type="email" name="email" autocomplete="email" id="{{ uid_mail }}" v-model="email" data-autofocus>
                                 <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
                             </div>
                             <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
