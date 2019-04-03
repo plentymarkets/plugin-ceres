@@ -38,15 +38,6 @@ Vue.component("tab-item", {
         };
     },
 
-    computed: Vuex.mapState({
-
-    }),
-
-    created()
-    {
-
-    },
-
     methods:
     {
         setActive(isActive)

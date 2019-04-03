@@ -62,7 +62,10 @@ Vue.component("tab-list", {
                     on: {
                         click: evt =>
                         {
-                            this.activateTab(tab, evt);
+                            if (!tab.localActive)
+                            {
+                                this.activateTab(tab, evt);
+                            }
                         }
                     }
                 });
@@ -97,17 +100,11 @@ Vue.component("tab-list", {
         );
     },
 
-    props: {
-    },
-
     data()
     {
         return {
             tabs: []
         };
-    },
-
-    computed: {
     },
 
     created()
@@ -142,7 +139,11 @@ Vue.component("tab-list", {
             const activeTab = this.tabs.find(tab => tab.localActive);
 
             tab.setActive(true);
-            activeTab.setActive(false);
+
+            if (tab !== activeTab)
+            {
+                activeTab.setActive(false);
+            }
         }
     }
 });
