@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set emailFolder = widget.settings.emailFolder.mobile %}
 {% set hideCheckbox = widget.settings.hideCheckbox.mobile %}
@@ -6,9 +7,15 @@
 {% set isRequired = widget.settings.isRequired.mobile %}
 {% set customText = widget.settings.customText.mobile %}
 
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
 {{ Twig.component("Ceres::Checkout.Components.SubscribeNewsletterCheck") }}
 
-<div class="widget widget-newsletter-subscription-checkbox">
+<div class="widget widget-newsletter-subscription-checkbox 
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <subscribe-newsletter-check
         {% if hideCheckbox %}class="pl-0"{% endif %}
         :email-folder="{{ emailFolder | json_encode }}"

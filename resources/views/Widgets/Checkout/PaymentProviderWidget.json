@@ -21,6 +21,13 @@
                 "name": "Widget.paymentProviderHintTextLabel",
                 "tooltipText": "Widget.paymentProviderHintTextTooltip"
             }
+        },
+        "spacing":{
+            "type": "vertical",
+            "options": {
+                "name": "Spacings"
+            },
+            "children": "@include(spacing)"
         }
     }
 }

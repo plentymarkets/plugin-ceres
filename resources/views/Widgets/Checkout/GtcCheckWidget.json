@@ -47,6 +47,13 @@
                 "name": "Widget.gtcCheckCustomTextLabel",
                 "tooltipText": "Widget.gtcCheckCustomTextTooltip"
             }
+        },
+        "spacing":{
+            "type": "vertical",
+            "options": {
+                "name": "Spacings"
+            },
+            "children": "@include(spacing)"
         }
     }
 }
