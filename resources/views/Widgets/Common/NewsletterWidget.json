@@ -58,7 +58,7 @@
         {
             "type": "vertical",
             "options": {
-                "name": "Spacings"
+                "name": "Widget.widgetSpacing"
             },
             "children": "@include(spacing)"
         }

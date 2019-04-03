@@ -11,8 +11,9 @@
 {% set itemsPerPage   = widget.settings.itemsPerPage.mobile %}
 {% set manufacturerId = widget.settings.manufacturerId.mobile %}
 
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {% if itemsPerPage is empty or itemsPerPage > 4 %}
     {% set itemsPerPage = 4 %}

@@ -207,7 +207,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -338,7 +338,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -443,7 +443,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -565,7 +565,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -620,7 +620,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -725,7 +725,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -823,7 +823,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -951,7 +951,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -1650,38 +1650,46 @@
                     ]
                 }
             },
-            "customPadding": {
-                "type": "checkbox",
+            "spacing": {
+                "type": "vertical",
                 "options": {
-                    "name": "Widget.widgetCustomPadding"
-                }
-            },
-            "padding": {
-                "type": "spacing",
-                "isVisible": "!!customPadding",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
-                }
-            },
-            "customMargin": {
-                "type": "checkbox",
-                "options": {
-                    "name": "Widget.widgetCustomMargin"
-                }
-            },
-            "margin": {
-                "type": "spacing",
-                "isVisible": "!!customMargin",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -1807,7 +1815,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -1969,7 +1977,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -2211,7 +2219,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -2346,7 +2354,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -2576,7 +2584,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
@@ -3086,7 +3094,7 @@
             "spacing": {
                 "type": "vertical",
                 "options": {
-                    "name": "Spacings"
+                    "name": "Widget.widgetSpacing"
                 },
                 "children": {
                     "customPadding": {
