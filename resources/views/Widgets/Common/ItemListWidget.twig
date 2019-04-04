@@ -112,6 +112,11 @@
                                 <template slot="AfterPrices">
                                     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", Twig.var("item.data")])) }}
                                 </template>
+
+                                <a href="{{ Twig.print("item.data | itemURL") }}" class="small">
+                                    <i class="fa fa-image"></i>
+                                    <span>{{ Twig.print("item.data | itemName") }}</span>
+                                </a>
                             </category-item>
                         </template>
                     {{ Twig.endfor() }}
