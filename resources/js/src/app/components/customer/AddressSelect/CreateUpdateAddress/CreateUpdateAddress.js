@@ -38,6 +38,10 @@ Vue.component("create-update-address", {
             {
                 return {};
             }
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
         }
     },
 

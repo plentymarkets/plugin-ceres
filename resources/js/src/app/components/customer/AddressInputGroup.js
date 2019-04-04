@@ -39,6 +39,10 @@ Vue.component("address-input-group", {
                     uk:[]
                 };
             }
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
         }
     },
 

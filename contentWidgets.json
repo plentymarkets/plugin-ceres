@@ -195,7 +195,16 @@
         ],
         "position": 300,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
-        "settings": {}
+        "settings": {
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.contactWishHintTextLabel",
+                    "tooltipText": "Widget.contactWishHintTextTooltip"
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::GtcCheckWidget",
@@ -337,6 +346,14 @@
                             "position": 5
                         }
                     ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.paymentProviderHintTextLabel",
+                    "tooltipText": "Widget.paymentProviderHintTextTooltip"
                 }
             }
         }
@@ -485,6 +502,14 @@
                         }
                     ]
                 }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.shippingProfileHintTextLabel",
+                    "tooltipText": "Widget.shippingProfileHintTextTooltip"
+                }
             }
         }
     },
@@ -540,99 +565,6 @@
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
                     "tooltipText": "Widget.subscribeNewsletterCheckCustomTextTooltip"
-                }
-            }
-        }
-    },
-    {
-        "identifier": "Ceres::CodeWidget",
-        "label": "Widget.codeLabel",
-        "previewImageURL": "/images/widgets/code.svg",
-        "type": "static",
-        "categories": [
-            "text"
-        ],
-        "position": 800,
-        "widgetClass": "Ceres\\Widgets\\Common\\CodeWidget",
-        "settings": {
-            "appearance": {
-                "type": "select",
-                "required": true,
-                "defaultValue": "none",
-                "options": {
-                    "name": "Widget.widgetAppearanceLabel",
-                    "tooltipText": "Widget.widgetAppearanceTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": "none",
-                            "caption": "Widget.widgetAppearanceNone",
-                            "position": 0
-                        },
-                        {
-                            "value": "primary",
-                            "caption": "Widget.widgetAppearancePrimary",
-                            "position": 1
-                        },
-                        {
-                            "value": "secondary",
-                            "caption": "Widget.widgetAppearanceSecondary",
-                            "position": 2
-                        },
-                        {
-                            "value": "success",
-                            "caption": "Widget.widgetAppearanceSuccess",
-                            "position": 3
-                        },
-                        {
-                            "value": "info",
-                            "caption": "Widget.widgetAppearanceInfo",
-                            "position": 4
-                        },
-                        {
-                            "value": "warning",
-                            "caption": "Widget.widgetAppearanceWarning",
-                            "position": 5
-                        },
-                        {
-                            "value": "danger",
-                            "caption": "Widget.widgetAppearanceDanger",
-                            "position": 6
-                        }
-                    ]
-                }
-            },
-            "customPadding": {
-                "type": "checkbox",
-                "options": {
-                    "name": "Widget.widgetCustomPadding"
-                }
-            },
-            "padding": {
-                "type": "spacing",
-                "isVisible": "!!customPadding",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
-                }
-            },
-            "customMargin": {
-                "type": "checkbox",
-                "options": {
-                    "name": "Widget.widgetCustomMargin"
-                }
-            },
-            "margin": {
-                "type": "spacing",
-                "isVisible": "!!customMargin",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
                 }
             }
         }
@@ -877,11 +809,14 @@
                     "name": "Widget.imageBoxUrlLabel"
                 }
             },
-            "customCaption": {
-                "type": "checkbox",
+            "headline": {
+                "type": "text",
+                "required": false,
                 "isVisible": "style !== 'no-caption'",
+                "defaultValue": "",
                 "options": {
-                    "name": "Widget.imageBoxCustomCaption"
+                    "name": "Widget.imageBoxHeadlineLabel",
+                    "tooltipText": "Widget.imageBoxHeadlineTooltip"
                 }
             },
             "customImagePath": {
@@ -1054,99 +989,6 @@
         }
     },
     {
-        "identifier": "Ceres::InlineTextWidget",
-        "label": "Widget.textLabel",
-        "previewImageURL": "/images/widgets/text-inline.svg",
-        "type": "static",
-        "categories": [
-            "text"
-        ],
-        "position": 800,
-        "widgetClass": "Ceres\\Widgets\\Common\\InlineTextWidget",
-        "settings": {
-            "appearance": {
-                "type": "select",
-                "required": true,
-                "defaultValue": "none",
-                "options": {
-                    "name": "Widget.widgetAppearanceLabel",
-                    "tooltipText": "Widget.widgetAppearanceTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": "none",
-                            "caption": "Widget.widgetAppearanceNone",
-                            "position": 0
-                        },
-                        {
-                            "value": "primary",
-                            "caption": "Widget.widgetAppearancePrimary",
-                            "position": 1
-                        },
-                        {
-                            "value": "secondary",
-                            "caption": "Widget.widgetAppearanceSecondary",
-                            "position": 2
-                        },
-                        {
-                            "value": "success",
-                            "caption": "Widget.widgetAppearanceSuccess",
-                            "position": 3
-                        },
-                        {
-                            "value": "info",
-                            "caption": "Widget.widgetAppearanceInfo",
-                            "position": 4
-                        },
-                        {
-                            "value": "warning",
-                            "caption": "Widget.widgetAppearanceWarning",
-                            "position": 5
-                        },
-                        {
-                            "value": "danger",
-                            "caption": "Widget.widgetAppearanceDanger",
-                            "position": 6
-                        }
-                    ]
-                }
-            },
-            "customPadding": {
-                "type": "checkbox",
-                "options": {
-                    "name": "Widget.widgetCustomPadding"
-                }
-            },
-            "padding": {
-                "type": "spacing",
-                "isVisible": "!!customPadding",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
-                }
-            },
-            "customMargin": {
-                "type": "checkbox",
-                "options": {
-                    "name": "Widget.widgetCustomMargin"
-                }
-            },
-            "margin": {
-                "type": "spacing",
-                "isVisible": "!!customMargin",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
-                }
-            }
-        }
-    },
-    {
         "identifier": "Ceres::ItemListWidget",
         "label": "Widget.itemListLabel",
         "previewImageURL": "/images/widgets/item-list.svg",
@@ -1222,6 +1064,16 @@
                             "position": 2
                         }
                     ]
+                }
+            },
+            "headline": {
+                "type": "text",
+                "required": false,
+                "isVisible": "headlineStyle === 'custom-caption'",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.itemListHeadlineLabel",
+                    "tooltipText": "Widget.itemListHeadlineTooltip"
                 }
             },
             "listType": {
@@ -1917,6 +1769,24 @@
                     ]
                 }
             },
+            "title": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.newsletterTitleLabel",
+                    "tooltipText": "Widget.newsletterTitleBarTextTooltip"
+                }
+            },
+            "subTitle": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.newsletterDescriptionLabel",
+                    "tooltipText": "Widget.newsletterSubTitleBarTextTooltip"
+                }
+            },
             "showNameInputs": {
                 "type": "checkbox",
                 "required": true,
@@ -1970,7 +1840,6 @@
         }
     },
     {
-        "deprecated": true,
         "identifier": "Ceres::TextWidget",
         "label": "Widget.textLabel",
         "previewImageURL": "/images/widgets/text.svg",
@@ -2120,6 +1989,15 @@
                         }
                     ]
                 }
+            },
+            "text": {
+                "type": "text",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.titleBarTextLabel",
+                    "tooltipText": "Widget.titleBarTextTooltip"
+                }
             }
         }
     },
@@ -2192,6 +2070,44 @@
                             "value": "2",
                             "caption": "Widget.addressShipping",
                             "position": 1
+                        }
+                    ]
+                }
+            },
+            "hintText": {
+                "type": "codeEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.addressHintTextLabel",
+                    "tooltipText": "Widget.addressHintTextTooltip"
+                }
+            },
+            "addressDefaultSalutation": {
+                "type": "select",
+                "defaultValue": "male",
+                "options": {
+                    "name": "Widget.addressDefaultSalutation",
+                    "tooltipText": "Widget.addressDefaultSalutationTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "male",
+                            "caption": "Widget.addressDefaultSalutationValueMale",
+                            "position": 0
+                        },
+                        {
+                            "value": "female",
+                            "caption": "Widget.addressDefaultSalutationValueFemale",
+                            "position": 1
+                        },
+                        {
+                            "value": "diverse",
+                            "caption": "Widget.addressDefaultSalutationValueDiverse",
+                            "position": 2
+                        },
+                        {
+                            "value": "company",
+                            "caption": "Widget.addressDefaultSalutationValueCompany",
+                            "position": 3
                         }
                     ]
                 }
@@ -3246,6 +3162,12 @@
                         }
                     ]
                 }
+            },
+            "text": {
+                "type": "noteEditor",
+                "options": {
+                    "name": "Widget.myAccountHintTextLabel"
+                }
             }
         }
     },
@@ -3299,6 +3221,12 @@
                             "position": 5
                         }
                     ]
+                }
+            },
+            "text": {
+                "type": "noteEditor",
+                "options": {
+                    "name": "Widget.myAccountHintTextLabel"
                 }
             }
         }
@@ -3476,6 +3404,14 @@
                     ]
                 }
             },
+            "hintText": {
+                "type": "noteEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.orderHistoryHintTextLabel",
+                    "tooltipText": "Widget.orderHistoryHintTextTooltip"
+                }
+            },
             "ordersPerPage": {
                 "type": "select",
                 "defaultValue": 5,
@@ -3575,6 +3511,14 @@
                             "position": 5
                         }
                     ]
+                }
+            },
+            "hintText": {
+                "type": "noteEditor",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.orderHistoryHintTextLabel",
+                    "tooltipText": "Widget.orderHistoryHintTextTooltip"
                 }
             },
             "returnsPerPage": {

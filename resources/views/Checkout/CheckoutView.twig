@@ -77,7 +77,8 @@
                                             <invoice-address-select
                                                 :has-to-validate="true"
                                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
-                                                :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                                                :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+                                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                                             </invoice-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterBillingAddress") }}
@@ -95,7 +96,8 @@
                                         <div class="shipping-addresses-select">
                                             <shipping-address-select
                                                 :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
-                                                :required-address-fields="{{ requiredShippingAddressFields | json_encode }}">
+                                                :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
+                                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                                             </shipping-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterShippingAddress") }}
