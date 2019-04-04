@@ -99,7 +99,10 @@
                                 <template slot="BeforePrices">{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
                                 <template slot="AfterPrices">{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
 
-                                <a href="{{ item.data | itemURL }}">{{ item.data | itemName }}</a>
+                                <a href="{{ item.data | itemURL }}" class="small">
+                                    <i class="fa fa-image"></i>
+                                    <span>{{ item.data | itemName }}</span>
+                                </a>
                             </category-item>
                         </li>
                     {% endfor %}
