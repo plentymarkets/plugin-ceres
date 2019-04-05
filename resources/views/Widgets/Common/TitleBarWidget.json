@@ -21,6 +21,14 @@
                 "name": "Widget.titleBarTextLabel",
                 "tooltipText": "Widget.titleBarTextTooltip"
             }
+        },
+        "spacing":
+        {
+            "type": "vertical",
+            "options": {
+                "name": "Widget.widgetSpacing"
+            },
+            "children": "@include(spacing)"
         }
     }
 }
