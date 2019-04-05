@@ -68,6 +68,6 @@
                 "tooltip": "Widget.orderHistoryAllowReturnTooltip"
             }
         },
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }
