@@ -22,12 +22,6 @@
                 "tooltipText": "Widget.shippingProfileHintTextTooltip"
             }
         },
-        "spacing":{
-            "type": "vertical",
-            "options": {
-                "name": "Widget.widgetSpacing"
-            },
-            "children": "@include(spacing)"
-        }
+        "spacing":"@include(spacing)"
     }
 }
