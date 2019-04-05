@@ -2,8 +2,10 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
@@ -14,8 +16,8 @@
 {% set hintText = widget.settings.text.mobile %}
 
 <div class="widget widget-account-settings widget-{{ appearance | default("primary") }} 
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
-    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <h3>
         {{ Twig.trans("Ceres::Template.myAccountSettings") }}
     </h3>
@@ -24,7 +26,9 @@
     {% else %}
         <p class="text-muted small font-italic">{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</p>
     {% endif %}
-    <div class="card">
+    <div class="card 
+        {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
+        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         <account-settings :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
     </div>
 </div>
