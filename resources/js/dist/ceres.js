@@ -24481,10 +24481,6 @@ Vue.component("order-history-list", {
       type: Number,
       default: 5
     },
-    hintText: {
-      type: String,
-      default: null
-    },
     allowPaymentProviderChange: {
       type: Boolean,
       default: false
@@ -24760,10 +24756,6 @@ Vue.component("order-return-history-list", {
       type: String,
       default: "#vue-order-return-history-list"
     },
-    hintText: {
-      type: String,
-      default: null
-    },
     returnsPerPage: {
       type: Number,
       default: 5
@@ -24897,14 +24889,6 @@ Vue.component("newsletter-input", {
     template: {
       type: String,
       default: "#vue-newsletter-input"
-    },
-    title: {
-      type: String,
-      default: ""
-    },
-    subTitle: {
-      type: String,
-      default: ""
     },
     showNameInputs: {
       type: Boolean,
