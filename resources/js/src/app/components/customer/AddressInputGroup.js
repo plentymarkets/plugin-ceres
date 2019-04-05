@@ -152,18 +152,28 @@ Vue.component("address-input-group", {
 
         areNameFieldsShown(locale, keyPrefix)
         {
-            const condition1 = this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.isInOptionalFields(locale, `${keyPrefix}.contactPerson`) && this.value.addressSalutation === 2;
-            const condition2 = !this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.isInOptionalFields(locale, `${keyPrefix}.name1`) && this.isInOptionalFields(locale, `${keyPrefix}.contactPerson`);
+            const isSalutationActive = this.isInOptionalFields(locale, `${keyPrefix}.salutation`);
+            const isContactPersonActive = this.isInOptionalFields(locale, `${keyPrefix}.contactPerson`);
+            const isName1Active = this.isInOptionalFields(locale, `${keyPrefix}.name1`);
+            const isSelectedSalutationCompany = this.value.addressSalutation === 2;
+
+            const condition1 = isSalutationActive && isContactPersonActive && isSelectedSalutationCompany;
+            const condition2 = !isSalutationActive && isName1Active && isContactPersonActive;
 
             return !(condition1 || condition2);
         },
 
         areNameFieldsRequired(locale, keyPrefix)
         {
-            const condition1 = this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.value.addressSalutation !== 2;
-            const condition2 = this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.value.addressSalutation === 2 && this.isInRequiredFields(locale, `${keyPrefix}.contactPerson`);
-            const condition3 = !this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && this.isInOptionalFields(locale, `${keyPrefix}.name1`) && this.isInRequiredFields(locale, `${keyPrefix}.contactPerson`);
-            const condition4 = !this.isInOptionalFields(locale, `${keyPrefix}.salutation`) && !this.isInOptionalFields(locale, `${keyPrefix}.name1`);
+            const isSalutationActive = this.isInOptionalFields(locale, `${keyPrefix}.salutation`);
+            const isName1Active = this.isInOptionalFields(locale, `${keyPrefix}.name1`);
+            const isContactPersonRequired = this.isInRequiredFields(locale, `${keyPrefix}.contactPerson`);
+            const isSelectedSalutationCompany = this.value.addressSalutation === 2;
+
+            const condition1 = isSalutationActive && !isSelectedSalutationCompany;
+            const condition2 = isSalutationActive && isSelectedSalutationCompany && isContactPersonRequired;
+            const condition3 = !isSalutationActive && isName1Active && isContactPersonRequired;
+            const condition4 = !isSalutationActive && !isName1Active;
 
             return condition1 || condition2 || condition3 || condition4;
         }
