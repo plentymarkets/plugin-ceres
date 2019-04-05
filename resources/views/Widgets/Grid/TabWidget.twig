@@ -7,7 +7,7 @@
         {% for tab in tabs if children[tab.uuid] | raw is not empty or isPreview %}
             <tab-item
                 title="{{ tab.title }}"
-                {% if loop.first %} active{% endif %}
+                {% if loop.first %}active{% endif %}
                 {{ WidgetHelper.makeClickable(isPreview) }}>
                 <div class="my-4" data-builder-child-container="{{ tab.uuid }}">{{ children[tab.uuid] | raw }}</div>
             </tab-item>
