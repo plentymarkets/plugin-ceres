@@ -39,16 +39,6 @@
                 ]
             }
         },
-        "headline": {
-            "type": "text",
-            "required": false,
-            "isVisible": "headlineStyle === 'custom-caption'",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.itemListHeadlineLabel",
-                "tooltipText": "Widget.itemListHeadlineTooltip"
-            }
-        },
         "listType": {
             "type": "select",
             "required": true,
