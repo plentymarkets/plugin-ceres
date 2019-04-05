@@ -1,0 +1,12 @@
+.widget-tab
+{
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {
+            > .widget-inner > .nav-tabs > .nav-item > a[role="tab"]:not(.active) {
+                color: $value;
+            }
+        }
+    }
+}

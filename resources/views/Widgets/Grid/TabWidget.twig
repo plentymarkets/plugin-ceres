@@ -1,17 +1,16 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 {% set tabs = widget.settings.tabs.mobile %}
+{% set appearance = widget.settings.appearance.mobile %}
 
-<div class="widget widget-tab">
-    <div class="widget-inner">
-        <tab-list>
-            {% for tab in tabs if children[tab.uuid] | raw is not empty or isPreview %}
-                <tab-item
-                    title="{{ tab.title }}"
-                    {% if loop.first %} active{% endif %}
-                    {{ WidgetHelper.makeClickable(isPreview) }}>
-                    <div class="my-4" data-builder-child-container="{{ tab.uuid }}">{{ children[tab.uuid] | raw }}</div>
-                </tab-item>
-            {% endfor %}
-        </tab-list>
-    </div>
+<div class="widget widget-tab widget-{{ appearance | default("primary") }}">
+    <tab-list class="widget-inner">
+        {% for tab in tabs if children[tab.uuid] | raw is not empty or isPreview %}
+            <tab-item
+                title="{{ tab.title }}"
+                {% if loop.first %} active{% endif %}
+                {{ WidgetHelper.makeClickable(isPreview) }}>
+                <div class="my-4" data-builder-child-container="{{ tab.uuid }}">{{ children[tab.uuid] | raw }}</div>
+            </tab-item>
+        {% endfor %}
+    </tab-list>
 </div>
