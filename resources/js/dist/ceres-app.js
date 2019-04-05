@@ -18876,6 +18876,10 @@ Vue.component("tab-item", {
     title: {
       type: String,
       default: null
+    },
+    dataBuilderClickable: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -18883,8 +18887,6 @@ Vue.component("tab-item", {
       localActive: this.active
     };
   },
-  computed: Vuex.mapState({}),
-  created: function created() {},
   methods: {
     setActive: function setActive(isActive) {
       this.localActive = isActive;
@@ -18902,17 +18904,25 @@ var TabNavItem = {
   render: function render(createElement) {
     var _this = this;
 
+    var anchorAttrs = {
+      role: "tab",
+      href: ""
+    };
+
+    if (this.tab.dataBuilderClickable) {
+      anchorAttrs["data-builder-clickable"] = "";
+    }
+
     var anchor = createElement("a", {
       staticClass: "nav-link",
       class: {
         active: this.tab.localActive
       },
-      attrs: {
-        role: "tab",
-        href: "#"
-      },
+      attrs: anchorAttrs,
       on: {
         click: function click(evt) {
+          evt.preventDefault();
+
           _this.$emit("click", evt);
         }
       }

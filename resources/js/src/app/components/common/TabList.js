@@ -134,7 +134,7 @@ Vue.component("tab-list", {
                 return vnode.componentInstance;
             });
 
-            return tabComps.filter(tab => isDefined(tab));
+            return tabComps.filter(tab => isDefined(tab) && isDefined(tab.$slots.default));
         },
 
         updateTabs()

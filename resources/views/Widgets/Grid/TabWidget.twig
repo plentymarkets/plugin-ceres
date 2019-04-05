@@ -4,7 +4,7 @@
 <div class="widget widget-tab">
     <div class="widget-inner">
         <tab-list>
-            {% for tab in tabs %}
+            {% for tab in tabs if children[tab.uuid] | raw is not empty or isPreview %}
                 <tab-item
                     title="{{ tab.title }}"
                     {% if loop.first %} active{% endif %}
