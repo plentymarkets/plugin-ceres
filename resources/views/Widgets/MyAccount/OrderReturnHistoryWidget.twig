@@ -1,4 +1,10 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
 
 {{ Twig.component( "Ceres::MyAccount.Components.OrderReturnHistoryList" ) }}
 
@@ -6,7 +12,8 @@
 {% set appearance = widget.settings.appearance.mobile %}
 {% set returnsPerPage = widget.settings.returnsPerPage.mobile %}
 
-<div class="widget widget-order-return-history widget-{{ appearance | default('primary') }}">
+<div class="widget widget-order-return-history widget-{{ appearance | default('primary') }} {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <order-return-history-list
         hint-text="{{ hintText }}"
         :returns-per-page="{{ returnsPerPage | default(5) | json_encode }}"
