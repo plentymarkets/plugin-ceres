@@ -49,6 +49,13 @@
                 "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
                 "tooltipText": "Widget.subscribeNewsletterCheckCustomTextTooltip"
             }
+        },
+        "spacing":{
+            "type": "vertical",
+            "options": {
+                "name": "Widget.widgetSpacing"
+            },
+            "children": "@include(spacing)"
         }
     }
 }
