@@ -1,12 +1,4 @@
-.widget-tab
+.nav-link.text-appearance.active
 {
-    @each $color, $value in $shop-builder-colors
-    {
-        &.widget-#{$color}
-        {
-            > .widget-inner > .nav-tabs > .nav-item > a[role="tab"]:not(.active) {
-                color: $value;
-            }
-        }
-    }
+    color: $nav-tabs-link-active-color !important;
 }

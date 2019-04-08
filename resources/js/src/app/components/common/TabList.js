@@ -18,7 +18,7 @@ const TabNavItem = {
         const anchor = createElement(
             "a",
             {
-                staticClass: "nav-link",
+                staticClass: "nav-link text-appearance",
                 class: {
                     active: this.tab.localActive
                 },
@@ -83,6 +83,7 @@ Vue.component("tab-list", {
             "ul",
             {
                 staticClass: "nav nav-tabs",
+                class: ["widget-" + this.appearance],
                 attrs: {
                     role: "tablist"
                 }
@@ -106,6 +107,13 @@ Vue.component("tab-list", {
                 content
             ]
         );
+    },
+
+    props: {
+        appearance:
+        {
+            default: "none"
+        }
     },
 
     data()
