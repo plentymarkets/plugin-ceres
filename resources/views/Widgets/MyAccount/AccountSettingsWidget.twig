@@ -15,19 +15,19 @@
 {% set appearance = widget.settings.appearance.mobile %}
 {% set hintText = widget.settings.text.mobile %}
 
-<div class="widget widget-account-settings widget-{{ appearance | default("primary") }} 
+<div class="widget widget-account-settings widget-{{ appearance | default("primary") }}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <h3>
-        {{ Twig.trans("Ceres::Template.myAccountSettings") }}
-    </h3>
-    {% if hintText is not empty %}
-        {{ hintText | raw }}
-    {% else %}
-        <p class="text-muted small font-italic">{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</p>
-    {% endif %}
-    <div class="card 
-        {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
+    <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+        {% if hintText is empty %}
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountSettings")) }}</h3>
+            <p><em>{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</em></p>
+        {% else %}
+            {{ hintText | raw }}
+        {% endif %}
+    </div>
+
+    <div class="card {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         <account-settings :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
     </div>

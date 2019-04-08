@@ -991,6 +991,107 @@
         }
     },
     {
+        "identifier": "Ceres::CodeWidget",
+        "label": "Widget.codeLabel",
+        "previewImageURL": "/images/widgets/code.svg",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
+        "position": 800,
+        "widgetClass": "Ceres\\Widgets\\Common\\CodeWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::CollapseWidget",
         "label": "Widget.collapseLabel",
         "previewImageURL": "/images/widgets/collapse.svg",
@@ -1272,14 +1373,11 @@
                     "name": "Widget.imageBoxUrlLabel"
                 }
             },
-            "headline": {
-                "type": "text",
-                "required": false,
+            "customCaption": {
+                "type": "checkbox",
                 "isVisible": "style !== 'no-caption'",
-                "defaultValue": "",
                 "options": {
-                    "name": "Widget.imageBoxHeadlineLabel",
-                    "tooltipText": "Widget.imageBoxHeadlineTooltip"
+                    "name": "Widget.imageBoxCustomCaption"
                 }
             },
             "customImagePath": {
@@ -1291,21 +1389,26 @@
                     "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
                 }
             },
-            "customMargin": {
-                "type": "checkbox",
-                "options": {
-                    "name": "Widget.widgetCustomMargin"
-                }
-            },
-            "margin": {
-                "type": "spacing",
-                "isVisible": "!!customMargin",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -1466,6 +1569,104 @@
                     }
                 }
             },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::InlineTextWidget",
+        "label": "Widget.textLabel",
+        "previewImageURL": "/images/widgets/text-inline.svg",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
+        "position": 800,
+        "widgetClass": "Ceres\\Widgets\\Common\\InlineTextWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            },
+            "customPadding": {
+                "type": "checkbox",
+                "options": {
+                    "name": "Widget.widgetCustomPadding"
+                }
+            },
+            "padding": {
+                "type": "spacing",
+                "isVisible": "!!customPadding",
+                "options": {
+                    "units": [
+                        "px",
+                        "rem"
+                    ],
+                    "direction": "all"
+                }
+            },
             "customMargin": {
                 "type": "checkbox",
                 "options": {
@@ -1561,16 +1762,6 @@
                             "position": 2
                         }
                     ]
-                }
-            },
-            "headline": {
-                "type": "text",
-                "required": false,
-                "isVisible": "headlineStyle === 'custom-caption'",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.itemListHeadlineLabel",
-                    "tooltipText": "Widget.itemListHeadlineTooltip"
                 }
             },
             "listType": {
@@ -2434,24 +2625,6 @@
                     ]
                 }
             },
-            "title": {
-                "type": "text",
-                "required": false,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.newsletterTitleLabel",
-                    "tooltipText": "Widget.newsletterTitleBarTextTooltip"
-                }
-            },
-            "subTitle": {
-                "type": "text",
-                "required": false,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.newsletterDescriptionLabel",
-                    "tooltipText": "Widget.newsletterSubTitleBarTextTooltip"
-                }
-            },
             "showNameInputs": {
                 "type": "checkbox",
                 "required": true,
@@ -2824,14 +2997,6 @@
                     ]
                 }
             },
-            "hintText": {
-                "type": "codeEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.addressHintTextLabel",
-                    "tooltipText": "Widget.addressHintTextTooltip"
-                }
-            },
             "addressLayout": {
                 "type": "select",
                 "defaultValue": "DE",
@@ -2869,6 +3034,10 @@
                         {
                             "value": "billing_address.vatNumber",
                             "caption": "Widget.addressFieldVatNumber"
+                        },
+                        {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
                         },
                         {
                             "value": "billing_address.salutation",
@@ -2925,6 +3094,10 @@
                             "caption": "Widget.addressFieldTitle"
                         },
                         {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
+                        },
+                        {
                             "value": "billing_address.birthday",
                             "caption": "Widget.addressFieldBirthday"
                         },
@@ -2969,6 +3142,10 @@
                         {
                             "value": "billing_address.vatNumber",
                             "caption": "Widget.addressFieldEnVatNumber"
+                        },
+                        {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
                         },
                         {
                             "value": "billing_address.salutation",
@@ -3025,6 +3202,10 @@
                             "caption": "Widget.addressFieldEnTitle"
                         },
                         {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
+                        },
+                        {
                             "value": "billing_address.birthday",
                             "caption": "Widget.addressFieldEnBirthday"
                         },
@@ -3070,6 +3251,10 @@
                             "caption": "Widget.addressFieldSalutation"
                         },
                         {
+                            "value": "delivery_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
+                        },
+                        {
                             "value": "delivery_address.title",
                             "caption": "Widget.addressFieldTitle"
                         },
@@ -3110,6 +3295,10 @@
                         {
                             "value": "delivery_address.title",
                             "caption": "Widget.addressFieldTitle"
+                        },
+                        {
+                            "value": "delivery_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
                         },
                         {
                             "value": "delivery_address.name4",
@@ -3153,6 +3342,10 @@
                             "caption": "Widget.addressFieldEnSalutation"
                         },
                         {
+                            "value": "delivery_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
+                        },
+                        {
                             "value": "delivery_address.title",
                             "caption": "Widget.addressFieldEnTitle"
                         },
@@ -3193,6 +3386,10 @@
                         {
                             "value": "delivery_address.title",
                             "caption": "Widget.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "delivery_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
                         },
                         {
                             "value": "delivery_address.name4",
@@ -4398,14 +4595,6 @@
                     ]
                 }
             },
-            "hintText": {
-                "type": "noteEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.orderHistoryHintTextLabel",
-                    "tooltipText": "Widget.orderHistoryHintTextTooltip"
-                }
-            },
             "ordersPerPage": {
                 "type": "select",
                 "defaultValue": 5,
@@ -4527,14 +4716,6 @@
                             "position": 5
                         }
                     ]
-                }
-            },
-            "hintText": {
-                "type": "noteEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.orderHistoryHintTextLabel",
-                    "tooltipText": "Widget.orderHistoryHintTextTooltip"
                 }
             },
             "returnsPerPage": {

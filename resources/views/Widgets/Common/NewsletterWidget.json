@@ -11,24 +11,6 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "title": {
-            "type": "text",
-            "required": false,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.newsletterTitleLabel",
-                "tooltipText": "Widget.newsletterTitleBarTextTooltip"
-            }
-        },
-        "subTitle": {
-            "type": "text",
-            "required": false,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.newsletterDescriptionLabel",
-                "tooltipText": "Widget.newsletterSubTitleBarTextTooltip"
-            }
-        },
         "showNameInputs": {
             "type": "checkbox",
             "required": true,

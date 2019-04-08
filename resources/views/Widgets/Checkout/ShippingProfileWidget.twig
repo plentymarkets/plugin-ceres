@@ -11,14 +11,16 @@
 {{ Twig.set("overrideShippingProfiles", Twig.call("LayoutContainer.show", ["Ceres::Checkout.ShippingProfileList"])) }}
 {% set hintText = widget.settings.hintText.mobile %}
 
-<div class="widget widget-provider-select widget-{{ widget.settings.appearance.mobile | default("primary") }}
+<div class="widget widget-provider-select widget-{{ widget.settings.appearance.mobile | default("primary") }} 
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <h3 class="mb-3">{{ Twig.trans("Ceres::Template.checkoutShippingProfile") }}</h3>
-
-    {% if hintText is not empty %}
-        <p>{{ hintText | raw }}</p>
-    {% endif %}
+    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+        {% if hintText is empty %}
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutShippingProfile")) }}</h3>
+        {% else %}
+            {{ WidgetHelper.editableTwig(isPreview, hintText) }}
+        {% endif %}
+    </div>
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingProfileList"])) }}
 

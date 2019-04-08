@@ -118,19 +118,6 @@
                 }
             }
         },
-        "customMargin": {
-            "type": "checkbox",
-            "options": {
-                "name": "Widget.widgetCustomMargin"
-            }
-        },
-        "margin": {
-            "type": "spacing",
-            "isVisible": "!!customMargin",
-            "options": {
-                "units": ["px", "rem"],
-                "direction": "all"
-            }
-        }
+        "spacing":"@include(spacingMargin)"
     }
 }

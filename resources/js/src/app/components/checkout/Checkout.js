@@ -39,7 +39,8 @@ Vue.component("checkout", {
     },
 
     computed: Vuex.mapState({
-        checkout: state => state.checkout
+        checkout: state => state.checkout,
+        deliveryAddressId: state => state.address.deliveryAddressId
     }),
 
     created()
@@ -120,6 +121,16 @@ Vue.component("checkout", {
             if (this.checkout.shipping.shippingCountryId !== checkout.shippingCountryId)
             {
                 this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
+            }
+
+            const responseDeliveryAddressId = checkout.deliveryAddressId !== 0 ? checkout.deliveryAddressId : -99;
+
+            if (this.deliveryAddressId !== responseDeliveryAddressId)
+            {
+                NotificationService.warn(
+                    TranslationService.translate("Ceres::Template.addressChangedWarning")
+                );
+                this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
             }
         },
 
