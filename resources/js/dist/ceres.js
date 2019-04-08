@@ -19411,6 +19411,26 @@ Vue.component("address-input-group", {
 
       var isRequired = this.isInRequiredFields(locale, addressKey);
       return translation + (isRequired ? "*" : "");
+    },
+    areNameFieldsShown: function areNameFieldsShown(locale, keyPrefix) {
+      var isSalutationActive = this.isInOptionalFields(locale, "".concat(keyPrefix, ".salutation"));
+      var isContactPersonActive = this.isInOptionalFields(locale, "".concat(keyPrefix, ".contactPerson"));
+      var isName1Active = this.isInOptionalFields(locale, "".concat(keyPrefix, ".name1"));
+      var isSelectedSalutationCompany = this.value.addressSalutation === 2;
+      var condition1 = isSalutationActive && isContactPersonActive && isSelectedSalutationCompany;
+      var condition2 = !isSalutationActive && isName1Active && isContactPersonActive;
+      return !(condition1 || condition2);
+    },
+    areNameFieldsRequired: function areNameFieldsRequired(locale, keyPrefix) {
+      var isSalutationActive = this.isInOptionalFields(locale, "".concat(keyPrefix, ".salutation"));
+      var isName1Active = this.isInOptionalFields(locale, "".concat(keyPrefix, ".name1"));
+      var isContactPersonRequired = this.isInRequiredFields(locale, "".concat(keyPrefix, ".contactPerson"));
+      var isSelectedSalutationCompany = this.value.addressSalutation === 2;
+      var condition1 = isSalutationActive && !isSelectedSalutationCompany;
+      var condition2 = isSalutationActive && isSelectedSalutationCompany && isContactPersonRequired;
+      var condition3 = !isSalutationActive && isName1Active && isContactPersonRequired;
+      var condition4 = !isSalutationActive && !isName1Active;
+      return condition1 || condition2 || condition3 || condition4;
     }
   }
 });
@@ -20097,6 +20117,16 @@ Vue.component("create-update-address", {
     },
     emitInputEvent: function emitInputEvent(event) {
       this.$emit("input", event);
+      this.checkInputEventForUnmarkFields(event);
+    },
+    checkInputEventForUnmarkFields: function checkInputEventForUnmarkFields(event) {
+      var genderCondition = event.field === "gender" && event.field.value !== this.addressData.gender;
+      var countryCondition = event.field === "countryId" && event.field.value !== this.addressData.countryId;
+      var pickupCondition = event.field === "showPickupStation" && event.field.value !== this.addressData.showPickupStation;
+
+      if (genderCondition || countryCondition || pickupCondition) {
+        _ValidationService.default.unmarkAllFields(this.$refs.addressForm);
+      }
     }
   }
 });
@@ -25743,6 +25773,11 @@ Vue.directive("populate-store", {
 "use strict";
 
 Vue.directive("validate", {
+  bind: function bind(el, binding) {
+    if (binding.value !== false) {
+      el.dataset.validate = binding.arg || "";
+    }
+  },
   update: function update(el, binding) {
     if (binding.value === false) {
       delete el.dataset.validate;
@@ -28581,6 +28616,8 @@ function unmarkAllFields(form) {
   $form.find("[data-validate]").each(function (i, elem) {
     var $elem = (0, _jquery.default)(elem);
     $elem.removeClass("error");
+
+    _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
   });
 }
 
