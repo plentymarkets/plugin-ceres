@@ -3,12 +3,15 @@
 {% set text = widget.settings.text.mobile %}
 
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-title-bar widget-{{ widget.settings.appearance.mobile | default('primary') }} {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
-    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div class="widget-inner bg-appearance">
+<div class="widget widget-title-bar widget-{{ widget.settings.appearance.mobile | default('primary') }} {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner bg-appearance {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
+        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         {% if text | trim is not empty %}
             <h1>{{ text }}</h1>
         {% else %}
