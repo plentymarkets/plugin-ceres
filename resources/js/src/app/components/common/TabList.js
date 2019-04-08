@@ -46,10 +46,12 @@ const TabNavItem = {
     props: {
         tab:
         {
+            type: Object,
             default: null
         },
         tabIndex:
         {
+            type: Number,
             default: null
         }
     }
@@ -112,6 +114,7 @@ Vue.component("tab-list", {
     props: {
         appearance:
         {
+            type: String,
             default: "none"
         }
     },
