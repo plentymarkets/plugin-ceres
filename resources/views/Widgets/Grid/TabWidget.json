@@ -17,12 +17,11 @@
             "type": "vertical",
             "isList": "[1,]",
             "options": {
-                "name": "Tabs"
+                "name": "Widget.tabNewTabLabel"
             },
             "children": {
                 "title": {
-                    "type": "text",
-                    "defaultValue": "Neues Tab"
+                    "type": "text"
                 },
                 "uuid": {
                     "type": "uuid"
