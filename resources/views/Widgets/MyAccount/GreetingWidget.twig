@@ -33,6 +33,9 @@
                 {{ Twig.if("userObject.gender == 'female'")  }}
                     {{ Twig.set("name", "trans('Ceres::Widget.greetingWidgetFemale') ~ ' ' ~ userObject.lastName" ) }}
                 {{ Twig.endif() }}
+                {{ Twig.if("userObject.gender == 'diverse'")  }}
+                    {{ Twig.set("name", "trans('Ceres::Widget.greetingWidgetDiverse') ~ ' ' ~ userObject.lastName" ) }}
+                {{ Twig.endif() }}
             {{ Twig.endif() }}
 
         {% elseif setting == "email" %}
