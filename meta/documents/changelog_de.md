@@ -24,7 +24,7 @@
 
 ### Geändert
 
-- In den Adressinformationen der Bestellbestätigungsseite wird jetzt die Kontaktperson ausgegeben, wenn es sich um eine Firmenadresse handelt.
+- In den Adressinformationen der Bestellbestätigungsseite wird jetzt die Ansprechpartner ausgegeben, wenn es sich um eine Firmenadresse handelt.
 - Im Header können jetzt alle Widgets des ShopBuilders verwendet werden, die auch für statische Seiten zur Verfügung stehen.
 - Folgende Einstellungen wurden `deprecated` gesetzt und aus dem Bereich **Kaufabwicklung und Mein Konto** der Ceres-Konfiguration entfernt: Anzahl der Aufträge pro Seite in der Auftragshistorie, Retourenabwicklung im Mein-Konto-Bereich zulassen, Änderung der Zahlungsart durch den Kunden zulassen. Diese Einstellungen sind nun im ShopBuilder-Widget **Auftragshistorie** zu finden.
 - Zum Ändern des Passworts im Mein-Konto-Bereich ist jetzt die Eingabe des bisherigen Passworts erforderlich.
@@ -135,7 +135,7 @@
 - Artikel, die aufgrund ihrer Einstellungen (z.B. kein Preis für den Webshop) nicht im Shop angezeigt werden würden, werden nun im Vorschaumodus des Webshops angezeigt.
 - Das FAQ-Widget für den ShopBuilder wurde hinzugefügt. Mithilfe des Widgets lässt sich eine FAQ-Seite im Webshop pflegen.
 - Es wurden 4 neue Layout-Container hinzugefügt: **Basket.BeforeBasketTotals**, **Basket.AfterBasketTotals**, **BasketPreview.BeforeBasketTotals** und **BasketPreview.AfterBasketTotals**.
-- Adressen für Firmenkunden haben nun anstelle der Felder für Vor- und Nachname ein Feld für die Kontaktperson.
+- Adressen für Firmenkunden haben nun anstelle der Felder für Vor- und Nachname ein Feld für die Ansprechpartner.
 - Die Gültigkeit der Kaufabwicklungs-URL kann nun in der Ceres-Konfiguration festgelegt werden.
 
 ### Geändert
