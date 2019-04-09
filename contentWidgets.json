@@ -2151,6 +2151,10 @@
                             "caption": "Widget.addressFieldVatNumber"
                         },
                         {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
+                        },
+                        {
                             "value": "billing_address.salutation",
                             "caption": "Widget.addressFieldSalutation"
                         },
@@ -2205,6 +2209,10 @@
                             "caption": "Widget.addressFieldTitle"
                         },
                         {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
+                        },
+                        {
                             "value": "billing_address.birthday",
                             "caption": "Widget.addressFieldBirthday"
                         },
@@ -2249,6 +2257,10 @@
                         {
                             "value": "billing_address.vatNumber",
                             "caption": "Widget.addressFieldEnVatNumber"
+                        },
+                        {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
                         },
                         {
                             "value": "billing_address.salutation",
@@ -2305,6 +2317,10 @@
                             "caption": "Widget.addressFieldEnTitle"
                         },
                         {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
+                        },
+                        {
                             "value": "billing_address.birthday",
                             "caption": "Widget.addressFieldEnBirthday"
                         },
@@ -2350,6 +2366,10 @@
                             "caption": "Widget.addressFieldSalutation"
                         },
                         {
+                            "value": "delivery_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
+                        },
+                        {
                             "value": "delivery_address.title",
                             "caption": "Widget.addressFieldTitle"
                         },
@@ -2390,6 +2410,10 @@
                         {
                             "value": "delivery_address.title",
                             "caption": "Widget.addressFieldTitle"
+                        },
+                        {
+                            "value": "delivery_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
                         },
                         {
                             "value": "delivery_address.name4",
@@ -2433,6 +2457,10 @@
                             "caption": "Widget.addressFieldEnSalutation"
                         },
                         {
+                            "value": "delivery_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
+                        },
+                        {
                             "value": "delivery_address.title",
                             "caption": "Widget.addressFieldEnTitle"
                         },
@@ -2473,6 +2501,10 @@
                         {
                             "value": "delivery_address.title",
                             "caption": "Widget.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "delivery_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
                         },
                         {
                             "value": "delivery_address.name4",
@@ -2605,6 +2637,79 @@
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Grid\\StickyContainerWidget",
         "settings": {}
+    },
+    {
+        "identifier": "Ceres::TabWidget",
+        "label": "Widget.tabLabel",
+        "previewImageURL": "/images/widgets/tab.svg",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
+        "position": 500,
+        "widgetClass": "Ceres\\Widgets\\Grid\\TabWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "tabs": {
+                "type": "vertical",
+                "isList": "[1,]",
+                "options": {
+                    "name": "Widget.tabNewTabLabel"
+                },
+                "children": {
+                    "title": {
+                        "type": "text",
+                        "options": {
+                            "name": "Widget.tabNewTabInputName",
+                            "tooltipText": "Widget.tabNewTabInputTooltip"
+                        }
+                    },
+                    "uuid": {
+                        "type": "uuid"
+                    }
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::ThreeColumnWidget",

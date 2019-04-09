@@ -99,6 +99,8 @@ export function unmarkAllFields(form)
         const $elem = $(elem);
 
         $elem.removeClass("error");
+
+        _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
     });
 }
 
