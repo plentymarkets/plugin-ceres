@@ -22812,18 +22812,42 @@ html.ie .cmp-paginator {
       flex-flow: row wrap;
 }
 
-.product-list category-item {
-  background: #fff;
+category-item {
   display: block;
   height: 145px;
-  margin-bottom: 15px;
   width: 100%;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+category-item a {
+  padding-top: 100%;
+  display: block;
+  color: #7a7f7f;
+}
+
+category-item a:hover {
+  color: #7a7f7f;
+}
+
+category-item a span {
+  padding: .8rem .8rem 74px .8rem;
+  display: block;
+}
+
+category-item .fa {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  right: 0;
+  font-size: 160px;
+  text-align: center;
+  color: #f7f7f9;
 }
 
 @media (min-width: 576px) {
-  .product-list category-item {
+  category-item {
     margin-bottom: 30px;
-    padding-bottom: calc(100% + 100px);
     height: unset;
   }
 }
