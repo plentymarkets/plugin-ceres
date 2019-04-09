@@ -1,0 +1,36 @@
+{
+    "identifier": "Ceres::TabWidget",
+    "label": "Widget.tabLabel",
+    "previewImageURL": "/images/widgets/tab.svg",
+    "type": "structure",
+    "categories": ["structure"],
+    "position": 500,
+    "widgetClass": "Ceres\\Widgets\\Grid\\TabWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "tabs": {
+            "type": "vertical",
+            "isList": "[1,]",
+            "options": {
+                "name": "Widget.tabNewTabLabel"
+            },
+            "children": {
+                "title": {
+                    "type": "text",
+                    "options": {
+                        "name": "Widget.tabNewTabInputName",
+                        "tooltipText": "Widget.tabNewTabInputTooltip"
+                    }
+                },
+                "uuid": {
+                    "type": "uuid"
+                }
+            }
+        }
+    }
+}
