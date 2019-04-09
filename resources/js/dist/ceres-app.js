@@ -18924,7 +18924,7 @@ var TabNavItem = {
     }
 
     var anchor = createElement("a", {
-      staticClass: "nav-link",
+      staticClass: "nav-link text-appearance",
       class: {
         active: this.tab.localActive
       },
@@ -18943,9 +18943,11 @@ var TabNavItem = {
   },
   props: {
     tab: {
+      type: Object,
       default: null
     },
     tabIndex: {
+      type: Number,
       default: null
     }
   }
@@ -18971,6 +18973,7 @@ Vue.component("tab-list", {
     });
     var nav = createElement("ul", {
       staticClass: "nav nav-tabs",
+      class: ["widget-" + this.appearance],
       attrs: {
         role: "tablist"
       }
@@ -18979,6 +18982,12 @@ Vue.component("tab-list", {
       staticClass: "tab-content"
     }, [this.$slots.default]);
     return createElement("div", {}, [nav, content]);
+  },
+  props: {
+    appearance: {
+      type: String,
+      default: "none"
+    }
   },
   data: function data() {
     return {
@@ -18999,7 +19008,7 @@ Vue.component("tab-list", {
         return vnode.componentInstance;
       });
       return tabComps.filter(function (tab) {
-        return (0, _utils.isDefined)(tab);
+        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots.default);
       });
     },
     updateTabs: function updateTabs() {
@@ -29236,11 +29245,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"services/ApiService":264,"services/NotificationService":268,"services/TranslationService":269}],276:[function(require,module,exports){
-=======
-},{"services/ApiService":262}],274:[function(require,module,exports){
->>>>>>> beta
+},{"services/ApiService":264}],276:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29719,11 +29724,7 @@ var _default = {
 };
 exports.default = _default;
 
-<<<<<<< HEAD
-},{"../../helper/utils":260,"services/ApiService":264,"services/NotificationService":268,"services/TranslationService":269}],278:[function(require,module,exports){
-=======
-},{"../../helper/utils":258,"services/ApiService":262}],276:[function(require,module,exports){
->>>>>>> beta
+},{"../../helper/utils":260,"services/ApiService":264}],278:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
