@@ -143,8 +143,15 @@ class TemplateServiceProvider extends ServiceProvider
             $templateEvent .= '.category';
         }
 
-        $templateConfig = self::$templateKeyToViewMap[$templateEvent];
-        $templateContainer->setTemplate( 'Ceres::' . $templateConfig[0] );
-        $templateContainer->setContext( $templateConfig[1] );
+        if( in_array($templateEvent, self::$templateKeyToViewMap) )
+        {
+            $templateConfig = self::$templateKeyToViewMap[$templateEvent];
+            $templateContainer->setTemplate( 'Ceres::' . $templateConfig[0] );
+            $templateContainer->setContext( $templateConfig[1] );
+        }
+        else
+        {
+            $templateContainer->setContext( GlobalContext::class );
+        }
     }
 }
