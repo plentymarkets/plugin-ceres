@@ -6,10 +6,8 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
-{% if text | trim is not empty %}
 <div class="widget widget-text widget-{{ appearance | default('primary') }}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %} bg-appearance">
-        {{ text | raw }}
+    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}" {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+        {{ WidgetHelper.editableTwig(isPreview, text) }}
     </div>
 </div>
-{% endif %}

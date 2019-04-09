@@ -24396,22 +24396,9 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   padding: 1rem;
 }
 
-.widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption h2, .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption .h2 {
-  text-align: center;
+.widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption > div {
+  display: block;
   width: 100%;
-  text-transform: uppercase;
-}
-
-@media (min-width: 576px) {
-  .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption h2, .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption .h2 {
-    font-size: 3rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption h2, .widget.widget-image-box.widget-image-box-fullwidth > .widget-inner .widget-caption .h2 {
-    font-size: 4rem;
-  }
 }
 
 .widget.widget-image-box.widget-image-box-inline-caption > .widget-inner {
@@ -24420,17 +24407,29 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
 }
 
 .widget.widget-image-box.widget-image-box-inline-caption > .widget-inner .widget-caption {
-  padding: 1.5rem;
+  padding: 0 1.5rem;
 }
 
 .widget.widget-image-box.widget-image-box-block-caption > .widget-inner {
   padding: 0;
-  top: auto;
 }
 
 .widget.widget-image-box.widget-image-box-block-caption > .widget-inner .widget-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   padding: 1rem;
+  position: absolute;
+  bottom: 0;
+}
+
+@media (max-width: 575.98px) {
+  .widget.widget-image-box.widget-image-box-block-caption > .widget-inner .widget-caption {
+    position: relative;
+    width: 100%;
+  }
 }
 
 .widget.widget-image-box.widget-image-box-no-caption > .widget-inner .widget-caption {
@@ -24547,6 +24546,78 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
   font-size: 2rem;
+}
+
+.widget-image-box-caption h1,
+.widget-image-box-caption h2,
+.widget-image-box-caption h3,
+.widget-image-box-caption p {
+  margin: 0;
+}
+
+.widget-image-box-caption h1 {
+  font-size: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.widget-image-box-caption h2 {
+  font-size: 1.75rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+}
+
+.widget-image-box-caption h3 {
+  font-size: 1.5rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+.widget-image-box-caption p {
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+}
+
+.widget-image-box-caption.fullwidth h1,
+.widget-image-box-caption.fullwidth h2,
+.widget-image-box-caption.fullwidth h3 {
+  text-transform: uppercase;
+}
+
+@media (min-width: 576px) {
+  .widget-image-box-caption.fullwidth h1 {
+    font-size: 4rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .widget-image-box-caption.fullwidth h1 {
+    font-size: 6rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .widget-image-box-caption.fullwidth h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .widget-image-box-caption.fullwidth h2 {
+    font-size: 4rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .widget-image-box-caption.fullwidth h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .widget-image-box-caption.fullwidth h3 {
+    font-size: 2.5rem;
+  }
 }
 
 .widget-image-carousel.widget-proportional {
@@ -24873,20 +24944,42 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 }
 
 .widget-item-list .widget-caption {
-  padding: 1rem 1.5rem;
+  padding: 0.25rem 1.5rem;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
       align-items: center;
 }
 
-.widget-item-list .widget-caption h2, .widget-item-list .widget-caption .h2 {
+.widget-item-list .widget-caption > div {
   -ms-flex: 1;
       flex: 1;
-  padding-top: .2rem;
+}
+
+.widget-item-list-caption h1,
+.widget-item-list-caption h2,
+.widget-item-list-caption h3,
+.widget-item-list-caption p {
   margin: 0;
   text-transform: uppercase;
+}
+
+.widget-item-list-caption h1 {
+  font-size: 2rem;
+  padding-top: .7rem;
+  padding-bottom: .7rem;
+}
+
+.widget-item-list-caption h2 {
   font-size: 1.75rem;
+  padding-top: .6rem;
+  padding-bottom: .4rem;
+}
+
+.widget-item-list-caption h3 {
+  font-size: 1.5rem;
+  padding-top: .4rem;
+  padding-bottom: .1rem;
 }
 
 .widget-legal-information a {
@@ -24951,11 +25044,23 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   word-break: break-word;
 }
 
-.widget-title-bar .h1, .widget-title-bar h1 {
+.widget-title-bar .h1, .widget-title-bar h1,
+.widget-title-bar .h2, .widget-title-bar h2,
+.widget-title-bar .h3, .widget-title-bar h3 {
   margin: 0.5rem auto;
   font-size: 2.5rem;
   letter-spacing: 1.25px;
   display: block;
+}
+
+.widget-title-bar .h2, .widget-title-bar h2 {
+  margin: 0.4rem 0;
+  font-size: 2.25rem;
+}
+
+.widget-title-bar .h3, .widget-title-bar h3 {
+  margin: 0.25rem 0;
+  font-size: 2rem;
 }
 
 .widget-grid > .widget-inner {
@@ -25676,6 +25781,79 @@ header .widget {
 .widget-editable-min-height {
   min-height: 40px;
   padding-bottom: 0.1px;
+}
+
+/*
+ * INLINE EDITOR CLASSES
+ */
+.color-primary {
+  color: #008ebd !important;
+}
+
+.bg-primary {
+  background-color: #008ebd;
+  color: #fff;
+}
+
+.color-secondary {
+  color: #d4021d !important;
+}
+
+.bg-secondary {
+  background-color: #d4021d;
+  color: #fff;
+}
+
+.color-success {
+  color: #28a745 !important;
+}
+
+.bg-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.color-info {
+  color: #17a2b8 !important;
+}
+
+.bg-info {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.color-warning {
+  color: #ffc107 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.color-danger {
+  color: #dc3545 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-justify {
+  text-align: justify;
 }
 
 .widget-primary .text-appearance {
