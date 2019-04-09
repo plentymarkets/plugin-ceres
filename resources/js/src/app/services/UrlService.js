@@ -114,10 +114,44 @@ export function navigateToParams(urlParams)
         isDefined(store.state.navigation.currentCategory.url) ?
             store.state.navigation.currentCategory.url :
             window.location.pathname;
-    const params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
-    const url = normalizeUrl(pathName + params);
+    const url = normalizeUrl(pathName + "?" + encodeParams(urlParams));
 
     window.location.assign(url);
+}
+
+export function encodeParams(params, prefix)
+{
+    if (isNullOrUndefined(params))
+    {
+        return "";
+    }
+
+    if (Array.isArray(params))
+    {
+        return params.map((listValue, i) =>
+        {
+            return encodeParams(listValue, `${prefix}[${i}]`);
+        }).join("&");
+    }
+    else if (typeof params === "object")
+    {
+        return Object.keys(params)
+            .filter(key =>
+            {
+                return !(isNaN(params[key]) && typeof params[key] === "number") && !isNullOrUndefined(params[key]);
+            })
+            .map(key =>
+            {
+                return encodeParams(params[key], !isNullOrUndefined(prefix) ? `${prefix}[${key}]` : key);
+            })
+            .join("&");
+    }
+
+    if (isNullOrUndefined(prefix))
+    {
+        return encodeURIComponent(params);
+    }
+    return prefix + "=" + encodeURIComponent(params);
 }
 
 export default { setUrlParams, getUrlParams, navigateTo, setUrlParam, removeUrlParams, removeUrlParam };

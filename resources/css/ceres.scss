@@ -317,13 +317,14 @@ $zIndex-10:                         10000 !default;
 // of components dependent on the z-axis and are designed to all work together.
 
 $zindex-dropdown:                   $zIndex-1 !default;
-$zindex-sticky:                     $zIndex-3 !default;
 $zindex-fixed:                      $zIndex-3 !default;
 $zindex-modal-backdrop:             $zIndex-7 !default;
 $zindex-modal:                      $zIndex-8 !default;
 $zindex-navbar:                     $zIndex-5 !default;
 $zindex-popover:                    $zIndex-10 !default;
+$zindex-sticky:                     $zIndex-3 !default;
 $zindex-tooltip:                    $zIndex-7 !default;
+$zindex-wrapper-top:                $zIndex-9 !default;
 
 // Navbar
 $navbar-background-color:           $gray-lightest !default;
@@ -10789,7 +10790,7 @@ body {
 		
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
-			z-index 	: $zIndex-8;
+			z-index 	: $zindex-wrapper-top;
 		} 
 
 		.wrapper-main{
@@ -17829,19 +17830,43 @@ html.ie {
     -webkit-box-direction: normal;
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
-    
-    category-item {
-        background: $white;
-        display: block;
-        height: 145px;
-        margin-bottom: 15px;
-        width: 100%;
+}
 
-        @include media-breakpoint-up(sm) {
-            margin-bottom: 30px;
-            padding-bottom: calc(100% + 100px);
-            height: unset;
+category-item {
+    display: block;
+    height: 145px;
+    width: 100%;
+    margin-bottom: 15px;
+    background-color: $white;
+
+    a {
+        padding-top: 100%;
+        display: block;
+        color: $gray;
+
+        &:hover {
+            color: $gray;
         }
+
+        span {
+            padding: .8rem .8rem 74px .8rem;
+            display: block;
+        }
+    }
+
+    .fa {
+        position: absolute;
+        top: 48px;
+        left: 0;
+        right: 0;
+        font-size: 160px;
+        text-align: center;
+        color: $gray-lightest;
+    }
+
+    @include media-breakpoint-up(sm) {
+        margin-bottom: 30px;
+        height: unset;
     }
 }
 
@@ -19490,20 +19515,10 @@ html.ios {
                         align-items: center;
                 padding: 1rem;
 
-                h2, .h2
+                > div
                 {
-                    text-align: center;
+                    display: block;
                     width: 100%;
-                    text-transform: uppercase;
-
-                    @include media-breakpoint-up(sm)
-                    {
-                        font-size: 3rem;
-                    }
-                    @include media-breakpoint-up(lg)
-                    {
-                        font-size: 4rem;
-                    }
                 }
             }
         }
@@ -19519,7 +19534,7 @@ html.ios {
 
             .widget-caption
             {
-                padding: 1.5rem;
+                padding: 0 1.5rem;
             }
         }
     }
@@ -19529,12 +19544,22 @@ html.ios {
         > .widget-inner
         {
             padding: 0;
-            top: auto;
 
             .widget-caption
             {
+                @include media-breakpoint-only(xs) {
+                    position: relative;
+                    width: 100%;
+                }
+
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
                 width: 100%;
                 padding: 1rem;
+                position: absolute;
+                bottom: 0;
             }
         }
     }
@@ -19632,6 +19657,90 @@ html.ios {
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
     font-size: 2rem;
+}
+
+.widget-image-box-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+    }
+
+    h1
+    {
+        font-size: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    h2
+    {
+        font-size: 1.75rem;
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+    }
+
+    h3
+    {
+        font-size: 1.5rem;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+
+    p
+    {
+        padding-top: .2rem;
+        padding-bottom: .2rem;
+    }
+
+    &.fullwidth
+    {
+        h1,
+        h2,
+        h3
+        {
+            text-transform: uppercase;
+        }
+
+        h1
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 4rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 6rem;
+            }
+        }
+
+        h2
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 2.5rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 4rem;
+            }
+        }
+
+        h3
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 1.5rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 2.5rem;
+            }
+        }
+    }
 }
 @mixin widget-carousel-variant($parent, $color)
 {
@@ -19826,7 +19935,7 @@ html.ie {
 
     .widget-caption
     {
-        padding: 1rem 1.5rem;
+        padding: 0.25rem 1.5rem;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -19834,16 +19943,47 @@ html.ie {
             -ms-flex-align: center;
                 align-items: center;
 
-        h2, .h2
+        > div
         {
             -webkit-box-flex: 1;
                 -ms-flex: 1;
                     flex: 1;
-            padding-top: .2rem;
-            margin: 0;
-            text-transform: uppercase;
-            font-size: 1.75rem;
         }
+
+    }
+}
+
+.widget-item-list-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    h1
+    {
+        font-size: 2rem;
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+    }
+
+    h2
+    {
+        font-size: 1.75rem;
+        padding-top: .6rem;
+        padding-bottom: .4rem;
+    }
+
+    h3
+    {
+        font-size: 1.5rem;
+        padding-top: .4rem;
+        padding-bottom: .1rem;
+
     }
 }
 .widget-legal-information
@@ -19944,12 +20084,26 @@ html.ie {
         word-break: break-word;
     }
 
-    .h1, h1
+    .h1, h1,
+    .h2, h2,
+    .h3, h3
     {
         margin: 0.5rem auto;
         font-size: 2.5rem;
         letter-spacing: 1.25px;
         display: block;
+    }
+
+    .h2, h2
+    {
+        margin: 0.4rem 0;
+        font-size: 2.25rem;
+    }
+
+    .h3, h3
+    {
+        margin: 0.25rem 0;
+        font-size: 2rem;
     }
 }
 .widget-grid
@@ -20085,6 +20239,7 @@ html.ie {
             margin-bottom: 0;
         }
     }
+
 }
 
 @include media-breakpoint-down(sm)
@@ -20231,6 +20386,41 @@ header .widget
     padding-bottom: 0.1px;
 }
 
+/*
+ * INLINE EDITOR CLASSES
+ */
+@each $color, $value in $shop-builder-colors
+{
+    .color-#{$color}
+    {
+        color: $value !important;
+    }
+
+    .bg-#{$color}
+    {
+        @include context-bg($value);
+    }
+}
+
+.align-center
+{
+    text-align: center;
+}
+
+.align-left
+{
+    text-align: left;
+}
+
+.align-right
+{
+    text-align: right;
+}
+
+.align-justify
+{
+    text-align: justify;
+}
 @each $color, $value in $shop-builder-colors
 {
     .widget-#{$color}

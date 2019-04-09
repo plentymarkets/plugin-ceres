@@ -14,13 +14,13 @@
 %}
 
 <script type="x/template" id="vue-registration">
-    <div>
+    <form autocomplete="on">
         <div class="modal-body">
             <div class="row" :id="'registration' + _uid">
                 <div class="col-sm-12">
                     <div class="input-unit" data-validate="mail">
                         {% set uid_mail = uid() %}
-                        <input type="text" name="email" id="{{ uid_mail }}" v-model="username" data-autofocus>
+                        <input type="email" name="email" autocomplete="email" id="{{ uid_mail }}" v-model="username" data-autofocus>
                         <label for="{{ uid_mail }}">{{ trans("Ceres::Template.regEmail") }}*</label>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="input-unit" :class="{'no-bottom media-xs-d': modalElement}" data-validate="password" ref="passwordInput">
                         <popper v-cloak trigger="focus" placement="left" ref="passwordHint">
                             {% set uid_pwd = uid() %}
-                            <input slot="handle" type="password" name="password" id="{{ uid_pwd }}" v-model="password">
+                            <input slot="handle" type="password" name="password" autocomplete="new-password" id="{{ uid_pwd }}" v-model="password">
                             <div slot="title">
                                 {{ trans("Ceres::Template.regPasswordHintTitle") }}
                             </div>
@@ -47,7 +47,7 @@
                 <div class="col-sm-6 input-unit-group" v-if="!guestMode">
                     <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="ref">
                         {% set uid_pwd_repeat = uid() %}
-                        <input type="password" name="password-repeat" id="{{ uid_pwd_repeat }}" v-model="passwordRepeat" data-validate-ref="#{{ uid_pwd }}">
+                        <input type="password" name="password-repeat" autocomplete="new-password" id="{{ uid_pwd_repeat }}" v-model="passwordRepeat" data-validate-ref="#{{ uid_pwd }}">
                         <label for="{{ uid_pwd_repeat }}">{{ trans("Ceres::Template.regRepeatPassword") }}*</label>
                     </div>
                 </div>
@@ -73,5 +73,5 @@
                 {{ trans("Ceres::Template.regRegister") }}
             </button>
         </div>
-    </div>
+    </form>
 </script>

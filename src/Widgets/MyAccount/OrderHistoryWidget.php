@@ -4,6 +4,7 @@ namespace Ceres\Widgets\MyAccount;
 
 use Ceres\Widgets\Helper\BaseWidget;
 use IO\Services\SessionStorageService;
+use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Order\Report\KPIs\OrderStatus;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
 
@@ -50,7 +51,11 @@ class OrderHistoryWidget extends BaseWidget
         if ( is_null($this->statuses) )
         {
             $this->statuses = [];
-            $statuses = pluginApp(OrderStatusRepositoryContract::class)->all();
+            /** @var AuthHelper $authHelper */
+            $authHelper = pluginApp(AuthHelper::class);
+            $statuses = $authHelper->processUnguarded(function() {
+                return pluginApp(OrderStatusRepositoryContract::class)->all();
+            });
 
             /** @var OrderStatus $status */
             foreach( $statuses as $status )

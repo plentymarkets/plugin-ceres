@@ -30,19 +30,19 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-unit">
-                                        <input type="password" name="old_password" v-model="oldPassword" data-autofocus>
+                                        <input type="password" name="old_password" autocomplete="old-password" v-model="oldPassword" data-autofocus>
                                         <label for="old_password">{{ trans("Ceres::Template.myAccountOldPassword") }}</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-unit">
-                                        <input type="password" name="new_password" v-model="newPassword">
+                                        <input type="password" name="new_password" autocomplete="new-password" v-model="newPassword">
                                         <label for="new_password">{{ trans("Ceres::Template.myAccountNewPassword") }}</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-unit no-bottom">
-                                        <input type="password" name="confirm_password" v-model="confirmPassword">
+                                        <input type="password" name="confirm_password" autocomplete="new-password" v-model="confirmPassword">
                                         <label for="confirm_password">{{ trans("Ceres::Template.myAccountRepeatPassword") }}</label>
                                     </div>
                                 </div>
