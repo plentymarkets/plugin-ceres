@@ -24,11 +24,6 @@
 
 {% block PageBody %}
 
-<script2>
-        const itemData = ({{ services.itemList.getItemList("category", 19, null, 1) | json_encode }})
-        vueApp.$store.commit("setVariation", itemData)
-</script2>
-
     {% if ceresConfig.homepage.showShopBuilderContent or request.get('isContentBuilder') == 1 %}
         <div class="container-max">
             <div class="row">
