@@ -25,7 +25,7 @@
 {% block PageBody %}
 
 <script2>
-        const itemData = ({{ services.itemList.getItemList("category", 16, null, 1) | json_encode }})
+        const itemData = ({{ services.itemList.getItemList("category", 19, null, 1) | json_encode }})
         vueApp.$store.commit("setVariation", itemData)
 </script2>
 
