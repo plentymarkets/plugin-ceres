@@ -1,4 +1,5 @@
 [
+    "images.*",
     "images.all.urlMiddle",
     "images.all.position",
     "images.all.path",
@@ -9,7 +10,6 @@
     "images.variation.path",
     "images.variation.names.alternate",
     "images.variation.names.lang",
-
 
     "properties.property.id",
     "properties.property.isShownOnItemPage",
