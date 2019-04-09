@@ -2637,7 +2637,11 @@
                 },
                 "children": {
                     "title": {
-                        "type": "text"
+                        "type": "text",
+                        "options": {
+                            "name": "Widget.tabNewTabInputName",
+                            "tooltipText": "Widget.tabNewTabInputTooltip"
+                        }
                     },
                     "uuid": {
                         "type": "uuid"
