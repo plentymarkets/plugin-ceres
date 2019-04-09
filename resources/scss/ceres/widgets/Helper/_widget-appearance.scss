@@ -25,7 +25,6 @@
             @include button-variant($value, $value);
         }
 
-
         a.text-appearance,
         .btn-appearance
         {
@@ -34,6 +33,12 @@
             @include hover-focus {
                 text-decoration-color: darken($value, 7.5);
             }
+        }
+
+        .border-appearance.active,
+        .border-appearance:hover
+        {
+            border-color: $value;
         }
 
         .pagination .page-item

@@ -3,12 +3,33 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("item-image-carousel", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "imageUrlAccessor",
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-item-image-carousel"
+        },
+        quantity:
+        {
+            type: Number,
+            default: 10
+        },
+        imageUrlAccessor:
+        {
+            type: String,
+            default: "url"
+        },
+        showThumbs:
+        {
+            type: Boolean,
+            default: true
+        },
+        showDots:
+        {
+            type: Boolean,
+            default: true
+        }
+    },
 
     data()
     {
@@ -63,7 +84,7 @@ Vue.component("item-image-carousel", {
     {
         getImageCount()
         {
-            return this.carouselImages.length;
+            return this.carouselImages.length > this.quantity ? this.quantity : this.carouselImages.length;
         },
 
         reInitialize()
@@ -90,7 +111,7 @@ Vue.component("item-image-carousel", {
 
             $(this.$refs.single).owlCarousel({
                 autoHeight       : true,
-                dots             : true,
+                dots             : this.showDots,
                 items            : 1,
                 lazyLoad         : true,
                 loop             : true,
