@@ -45,12 +45,14 @@
                 </label>
             </div>
             <popper class="order-property-selection-info-popper" v-cloak v-if="selectedDescription" placement="bottom">
-                <button slot="handle" class="btn btn-icon btn-circle btn-default">
-                    <i class="fa fa-info"></i>
-                </button>
-                <div slot="content">
+                <template #handle>
+                    <button class="btn btn-icon btn-circle btn-default">
+                        <i class="fa fa-info"></i>
+                    </button>
+                </template>
+                <template #content>
                     ${ selectedDescription }
-                </div>
+                </template>
             </popper>
         </div>
 
