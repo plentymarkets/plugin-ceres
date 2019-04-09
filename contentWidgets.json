@@ -3305,9 +3305,9 @@
         "identifier": "Ceres::ItemImageWidget",
         "label": "Widget.itemImageLabel",
         "previewImageURL": "/images/widgets/item-image.svg",
-        "type": "static",
+        "type": "item",
         "categories": [
-            "static"
+            "item"
         ],
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Item\\ItemImageWidget",
