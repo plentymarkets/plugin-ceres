@@ -13,8 +13,9 @@
 {% set customCaption    = widget.settings.customCaption.mobile %}
 
 
-{% set inlineMargin = WidgetHelper.getInlineSpacings(widget.settings,"", widget.settings.customMargin.mobile) %}
-{% set margin = WidgetHelper.getSpacingClasses(widget.settings,"", widget.settings.customMargin.mobile) %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineMargin = WidgetHelper.getInlineSpacings(spacingSettings,"", spacingSettings.customMargin.mobile) %}
+{% set margin = WidgetHelper.getSpacingClasses(spacingSettings,"", spacingSettings.customMargin.mobile) %}
 
 {{ Twig.set("name", "" | json_encode) }}
 {{ Twig.set("url", "" | json_encode) }}
