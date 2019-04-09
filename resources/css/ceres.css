@@ -23973,6 +23973,7 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   height: 100%;
   width: 18px;
   display: inline-block;
+  margin: 0 .1rem;
   animation: sk-stretchdelay 0.8s infinite ease-in-out;
 }
 
@@ -25954,6 +25955,11 @@ header .widget {
           text-decoration-color: #007197;
 }
 
+.widget-primary .border-appearance.active,
+.widget-primary .border-appearance:hover {
+  border-color: #008ebd;
+}
+
 .widget-primary .pagination .page-item .page-link {
   color: #008ebd;
 }
@@ -26036,6 +26042,11 @@ header .widget {
 .widget-secondary .btn-appearance:focus {
   -webkit-text-decoration-color: #ae0218;
           text-decoration-color: #ae0218;
+}
+
+.widget-secondary .border-appearance.active,
+.widget-secondary .border-appearance:hover {
+  border-color: #d4021d;
 }
 
 .widget-secondary .pagination .page-item .page-link {
@@ -26122,6 +26133,11 @@ header .widget {
           text-decoration-color: #218838;
 }
 
+.widget-success .border-appearance.active,
+.widget-success .border-appearance:hover {
+  border-color: #28a745;
+}
+
 .widget-success .pagination .page-item .page-link {
   color: #28a745;
 }
@@ -26204,6 +26220,11 @@ header .widget {
 .widget-info .btn-appearance:focus {
   -webkit-text-decoration-color: #138496;
           text-decoration-color: #138496;
+}
+
+.widget-info .border-appearance.active,
+.widget-info .border-appearance:hover {
+  border-color: #17a2b8;
 }
 
 .widget-info .pagination .page-item .page-link {
@@ -26290,6 +26311,11 @@ header .widget {
           text-decoration-color: #e0a800;
 }
 
+.widget-warning .border-appearance.active,
+.widget-warning .border-appearance:hover {
+  border-color: #ffc107;
+}
+
 .widget-warning .pagination .page-item .page-link {
   color: #ffc107;
 }
@@ -26372,6 +26398,11 @@ header .widget {
 .widget-danger .btn-appearance:focus {
   -webkit-text-decoration-color: #c82333;
           text-decoration-color: #c82333;
+}
+
+.widget-danger .border-appearance.active,
+.widget-danger .border-appearance:hover {
+  border-color: #dc3545;
 }
 
 .widget-danger .pagination .page-item .page-link {
