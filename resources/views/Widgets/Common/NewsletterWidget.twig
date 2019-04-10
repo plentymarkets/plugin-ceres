@@ -7,8 +7,8 @@
 {% set emailFolder = widget.settings.emailFolder.mobile | json_encode %}
 
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
 {{ Twig.component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 

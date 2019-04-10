@@ -36,6 +36,6 @@
                 "tooltipText": "Widget.newsletterEmailFolderTooltip"
             }
         },
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }
