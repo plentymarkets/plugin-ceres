@@ -13,6 +13,36 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
+        "addressDefaultSalutation": {
+            "type": "select",
+            "defaultValue": "male",
+            "options": {
+                "name": "Widget.addressDefaultSalutation",
+                "tooltipText": "Widget.addressDefaultSalutationTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "male",
+                        "caption": "Widget.addressDefaultSalutationValueMale",
+                        "position": 0
+                    },
+                    {
+                        "value": "female",
+                        "caption": "Widget.addressDefaultSalutationValueFemale",
+                        "position": 1
+                    },
+                    {
+                        "value": "diverse",
+                        "caption": "Widget.addressDefaultSalutationValueDiverse",
+                        "position": 2
+                    },
+                    {
+                        "value": "company",
+                        "caption": "Widget.addressDefaultSalutationValueCompany",
+                        "position": 3
+                    }
+                ]
+            }
+        },
         "addressType": {
             "type": "select",
             "required": true,

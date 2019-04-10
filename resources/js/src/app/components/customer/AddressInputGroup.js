@@ -39,6 +39,10 @@ Vue.component("address-input-group", {
                     uk:[]
                 };
             }
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
         }
     },
 
@@ -155,7 +159,7 @@ Vue.component("address-input-group", {
             const isSalutationActive = this.isInOptionalFields(locale, `${keyPrefix}.salutation`);
             const isContactPersonActive = this.isInOptionalFields(locale, `${keyPrefix}.contactPerson`);
             const isName1Active = this.isInOptionalFields(locale, `${keyPrefix}.name1`);
-            const isSelectedSalutationCompany = this.value.addressSalutation === 2;
+            const isSelectedSalutationCompany = this.value.gender === "company";
 
             const condition1 = isSalutationActive && isContactPersonActive && isSelectedSalutationCompany;
             const condition2 = !isSalutationActive && isName1Active && isContactPersonActive;
@@ -168,7 +172,7 @@ Vue.component("address-input-group", {
             const isSalutationActive = this.isInOptionalFields(locale, `${keyPrefix}.salutation`);
             const isName1Active = this.isInOptionalFields(locale, `${keyPrefix}.name1`);
             const isContactPersonRequired = this.isInRequiredFields(locale, `${keyPrefix}.contactPerson`);
-            const isSelectedSalutationCompany = this.value.addressSalutation === 2;
+            const isSelectedSalutationCompany = this.value.gender === "company";
 
             const condition1 = isSalutationActive && !isSelectedSalutationCompany;
             const condition2 = isSalutationActive && isSelectedSalutationCompany && isContactPersonRequired;
