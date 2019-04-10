@@ -1,0 +1,27 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.component( "Ceres::Item.Components.ItemImageCarousel" ) }}
+
+{% set appearance = widget.settings.appearance.mobile %}
+{% set maxQuantity = widget.settings.maxQuantity.mobile %}
+{% set imageSize = widget.settings.imageSize.mobile %}
+{% set showThumbs = widget.settings.showThumbs.mobile %}
+{% set showDots = widget.settings.showDots.mobile %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+
+<div class="widget widget-item-image widget-{{ appearance | default("primary") }}">
+    {% set ImageCarouselOverride = LayoutContainer.show("Ceres::SingleItem.ImageCarousel") %}
+    {% if ImageCarouselOverride|trim is empty %}
+        <item-image-carousel v-if="!!$store && !!$store.state.item.variation && !!$store.state.item.variation.documents && !!$store.state.item.variation.documents.length"
+            :max-quantity="{{ maxQuantity }}"
+            image-url-accessor="{{ imageSize }}"
+            :show-thumbs="{{ showThumbs | json_encode }}"
+            :show-dots="{{ showDots | json_encode }}">
+        </item-image-carousel>
+    {% else %}
+        {{ ImageCarouselOverride }}
+    {% endif %}
+</div>
+
+

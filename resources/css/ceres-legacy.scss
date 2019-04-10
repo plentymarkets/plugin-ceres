@@ -11823,6 +11823,7 @@ Custom classes
     height: 500px;
   }
 }
+
 .owl-thumbs {
   display: inline-block;
   .owl-thumb {
@@ -19053,6 +19054,7 @@ html.ios {
   height: 100%;
   width: 18px;
   display: inline-block;
+  margin: 0 .1rem;
 
   -webkit-animation: sk-stretchdelay 0.8s infinite ease-in-out;
   animation: sk-stretchdelay 0.8s infinite ease-in-out;
@@ -20120,7 +20122,6 @@ html.ie {
             -webkit-box-flex: 1;
                 -ms-flex: 1;
                     flex: 1;
-            max-width: 100%;
         }
     }
 
@@ -20453,7 +20454,6 @@ header .widget
             @include button-variant($value, $value);
         }
 
-
         a.text-appearance,
         .btn-appearance
         {
@@ -20464,6 +20464,12 @@ header .widget
                 -webkit-text-decoration-color: darken($value, 7.5);
                         text-decoration-color: darken($value, 7.5);
             }
+        }
+
+        .border-appearance.active,
+        .border-appearance:hover
+        {
+            border-color: $value;
         }
 
         .pagination .page-item

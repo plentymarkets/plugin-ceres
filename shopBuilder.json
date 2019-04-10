@@ -19,6 +19,7 @@
         "header":       ["header", "static", "structure", "default"],
         "footer":       ["footer", "static", "structure", "default"],
         "content":      ["static", "structure", "default"],
+        "singleitem":   ["static", "structure", "default", "item"],
         "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
         "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
     },
