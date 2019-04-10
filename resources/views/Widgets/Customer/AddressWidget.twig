@@ -36,7 +36,8 @@
                 <invoice-address-select
                     :has-to-validate="{{ Twig.print("services.template.isCurrentTemplate('tpl.checkout') | json_encode") }}"
                     :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
-                    :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                    :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}">
                 </invoice-address-select>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBillingAddress"])) }}
@@ -72,7 +73,8 @@
 
                 <shipping-address-select
                     :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
-                    :required-address-fields="{{ requiredShippingAddressFields | json_encode }}">
+                    :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
+                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}">
                 </shipping-address-select>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterShippingAddress"])) }}

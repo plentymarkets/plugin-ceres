@@ -9,7 +9,7 @@ Vue.component("item-image-carousel", {
             type: String,
             default: "#vue-item-image-carousel"
         },
-        quantity:
+        maxQuantity:
         {
             type: Number,
             default: 10
@@ -42,12 +42,22 @@ Vue.component("item-image-carousel", {
     {
         carouselImages()
         {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+            return this.orderByPosition(
+                this.$options.filters.itemImages(
+                    this.currentVariation.documents[0].data.images,
+                    "urlPreview"
+                )
+            ).slice(0, this.maxQuantity);
         },
 
         singleImages()
         {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+            return this.orderByPosition(
+                this.$options.filters.itemImages(
+                    this.currentVariation.documents[0].data.images,
+                    this.imageUrlAccessor
+                )
+            ).slice(0, this.maxQuantity);
         },
 
         ...Vuex.mapState({
@@ -84,7 +94,7 @@ Vue.component("item-image-carousel", {
     {
         getImageCount()
         {
-            return this.carouselImages.length > this.quantity ? this.quantity : this.carouselImages.length;
+            return this.carouselImages.length > this.maxQuantity ? this.maxQuantity : this.carouselImages.length;
         },
 
         reInitialize()

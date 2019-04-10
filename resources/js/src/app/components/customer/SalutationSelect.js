@@ -1,4 +1,5 @@
 import { isNullOrUndefined } from "../../helper/utils";
+import TranslationService from "services/TranslationService";
 
 Vue.component("salutation-select", {
 
@@ -23,66 +24,34 @@ Vue.component("salutation-select", {
         {
             type: Object,
             default: () => []
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
         }
     },
 
     data()
     {
         return {
-            salutations: {
-                complete: {
-                    de: [
-                        {
-                            value: "Herr",
-                            id   : 0
-                        },
-                        {
-                            value: "Frau",
-                            id   : 1
-                        },
-                        {
-                            value: "Firma",
-                            id   : 2
-                        }
-                    ],
-                    en: [
-                        {
-                            value: "Mr.",
-                            id   : 0
-                        },
-                        {
-                            value: "Ms.",
-                            id   : 1
-                        },
-                        {
-                            value: "Company",
-                            id   : 2
-                        }
-                    ]
+            salutations: [
+                {
+                    key: "male",
+                    name: "addressSalutationMale"
                 },
-                withoutCompany: {
-                    de: [
-                        {
-                            value: "Herr",
-                            id   : 0
-                        },
-                        {
-                            value: "Frau",
-                            id   : 1
-                        }
-                    ],
-                    en: [
-                        {
-                            value: "Mr.",
-                            id   : 0
-                        },
-                        {
-                            value: "Ms.",
-                            id   : 1
-                        }
-                    ]
+                {
+                    key: "female",
+                    name: "addressSalutationFemale"
+                },
+                {
+                    key: "diverse",
+                    name: "addressSalutationDiverse"
+                },
+                {
+                    key: "company",
+                    name: "addressSalutationCompany"
                 }
-            }
+            ]
         };
     },
 
@@ -92,15 +61,22 @@ Vue.component("salutation-select", {
         {
             const countryId = parseInt(this.addressData.countryId) || 1;
             const addressKey = parseInt(this.addressType) === 1 ? "billing_address" : "delivery_address";
-            const languageKey = App.language === "de" ? "de" : "en";
             const countryKey = countryId === 12 ? "gb" : "de";
+
+            const salutations = this.salutations.map(salutation =>
+            {
+                return {
+                    key: salutation.key,
+                    name: TranslationService.translate("Ceres::Template." + salutation.name)
+                };
+            });
 
             if (this.enabledAddressFields[countryKey].includes(`${addressKey}.name1`))
             {
-                return this.salutations.complete[languageKey];
+                return salutations;
             }
 
-            return this.salutations.withoutCompany[languageKey];
+            return salutations.filter(salutation => salutation.key !== "company");
         }
     },
 
@@ -109,22 +85,23 @@ Vue.component("salutation-select", {
      */
     created()
     {
-        const selectedSalutation = this.addressData.addressSalutation;
+        this.$options.template = this.template;
+
+        let selectedSalutation = this.defaultSalutation;
 
         if (isNullOrUndefined(selectedSalutation))
         {
-            this.emitInputEvent(this.currentSalutation[0].id);
+            selectedSalutation = this.currentSalutation[0].key;
         }
+
+        this.emitInputEvent(selectedSalutation);
     },
 
     methods:
     {
         emitInputEvent(value)
         {
-            const gender = this.mapSalutationIdToGender(value);
-
-            this.$emit("input", { field: "gender", value: gender });
-            this.$emit("input", { field: "addressSalutation", value: value });
+            this.$emit("input", { field: "gender", value: value });
             this.$emit("input", { field: "name1", value: "" });
             this.$emit("input", { field: "name2", value: "" });
             this.$emit("input", { field: "name3", value: "" });
@@ -132,27 +109,11 @@ Vue.component("salutation-select", {
             this.$emit("input", { field: "contactPerson", value: "" });
         },
 
-        mapSalutationIdToGender(id)
+        checkGenderCompany(gender)
         {
-            if (id === 0)
+            if (gender === "company")
             {
-                return "male";
-            }
-            else if (id === 1)
-            {
-                return "female";
-            }
-            return null;
-
-        },
-
-        checkGenderCompany(id)
-        {
-            if (id === 2)
-            {
-                const gender = this.mapSalutationIdToGender(id);
-
-                return (gender === null && this.addressData.name1 !== null) || (gender === null && this.addressData.name1 !== "");
+                return (this.addressData.name1 !== null) || (this.addressData.name1 !== "");
             }
             return true;
         }
@@ -164,12 +125,12 @@ Vue.component("salutation-select", {
         {
             if (newVal !== oldVal)
             {
-                const selectedSalutation = this.addressData.addressSalutation;
+                const selectedSalutation = this.addressData.gender;
 
                 // cleanse the current selected salutation, if it's not longer included in the choice
-                if (!newVal.map(salutation => salutation.id).includes(selectedSalutation))
+                if (!newVal.map(salutation => salutation.key).includes(selectedSalutation))
                 {
-                    this.emitInputEvent(newVal[0].id);
+                    this.emitInputEvent(newVal[0].key);
                 }
             }
         }
