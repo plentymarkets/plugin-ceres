@@ -42,12 +42,22 @@ Vue.component("item-image-carousel", {
     {
         carouselImages()
         {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+            return this.orderByPosition(
+                this.$options.filters.itemImages(
+                    this.currentVariation.documents[0].data.images,
+                    "urlPreview"
+                )
+            ).slice(0, this.maxQuantity);
         },
 
         singleImages()
         {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+            return this.orderByPosition(
+                this.$options.filters.itemImages(
+                    this.currentVariation.documents[0].data.images,
+                    this.imageUrlAccessor
+                )
+            ).slice(0, this.maxQuantity);
         },
 
         ...Vuex.mapState({
