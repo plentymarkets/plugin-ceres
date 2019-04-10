@@ -15,6 +15,6 @@
                 "tooltipText": "Widget.contactWishHintTextTooltip"
             }
         },
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }
