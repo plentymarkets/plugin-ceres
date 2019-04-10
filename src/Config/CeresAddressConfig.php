@@ -7,6 +7,7 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresAddressConfig extends PluginConfig
 {
+    public $defaultSalutation;
     public $billingAddressShow;
     public $billingAddressShow_en;
     public $billingAddressRequire;
@@ -19,6 +20,9 @@ class CeresAddressConfig extends PluginConfig
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
+        
+        $this->defaultSalutation = $this->getTextValue('addresses.defaultSalutation');
+        
         $this->billingAddressShow = $this->getMultiSelectValue(
             "billing_address.show",
             [

@@ -14,7 +14,7 @@
 %}
 
 <script type="x/template" id="vue-registration">
-    <form autocomplete="on">
+    <form class="w-100" autocomplete="on">
         <div class="modal-body">
             <div class="row" :id="'registration' + _uid">
                 <div class="col-sm-12">
@@ -60,7 +60,8 @@
                         :value="billingAddress"
                         @input="setAddressDataField($event)"
                         :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
-                        :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                        :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+                        default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                     </address-input-group>
                 </div>
             </div>

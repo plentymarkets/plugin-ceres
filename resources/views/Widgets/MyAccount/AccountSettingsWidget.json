@@ -10,13 +10,7 @@
         "appearance": { 
             "type": "select", 
             "defaultValue": "primary", 
-            "options": "@include(appearance)" 
-        },
-        "text": {
-            "type": "noteEditor",
-            "options": {
-                "name": "Widget.myAccountHintTextLabel"
-            }
+            "options": "@include(appearance)"
         }
     }
 }

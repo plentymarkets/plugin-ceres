@@ -1,6 +1,4 @@
 import ApiService from "services/ApiService";
-import NotificationService from "services/NotificationService";
-import TranslationService from "services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
 
 const state =
@@ -213,24 +211,6 @@ const actions =
 
                 commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
-
-                const isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
-
-                const selectedAddress = getters.getSelectedAddress("2");
-                const isAddressPostOffice = selectedAddress ? selectedAddress.address1 === "POSTFILIALE" : false;
-                const isAddressParcelBox = selectedAddress ? selectedAddress.address1 === "PACKSTATION" : false;
-
-                if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
-                {
-                    const isUnsupportedPostOffice = isAddressPostOffice && !shippingProfile.isPostOffice;
-                    const isUnsupportedParcelBox = isAddressParcelBox && !shippingProfile.isParcelBox;
-
-                    if (isUnsupportedPostOffice || isUnsupportedParcelBox)
-                    {
-                        commit("selectDeliveryAddressById", -99);
-                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressChangedWarning"));
-                    }
-                }
 
                 ApiService.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId })
                     .done(response =>
