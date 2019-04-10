@@ -25096,6 +25096,7 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   max-width: 100%;
   -ms-flex: 1;
       flex: 1;
+  max-width: 100%;
 }
 
 .widget-grid .widget-inner-stacked {
