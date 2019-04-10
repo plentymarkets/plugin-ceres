@@ -6,6 +6,7 @@
 
 - All global data is now loaded per default if no context is explicitly specified.
 - Due to an error, several widgets extended beyond the limits of a grid widget. This has been fixed.
+- Due to an error, categories were not correctly displayed in the category navigation widget of the ShopBuilder header. This has been fixed.
 
 ## v3.2.1 (2019-04-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.0...3.2.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
