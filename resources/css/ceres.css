@@ -16961,7 +16961,6 @@ body.lb-disable-scrolling {
 
 .owl-carousel.owl-grab {
   cursor: move;
-  cursor: -webkit-grab;
   cursor: grab;
 }
 
