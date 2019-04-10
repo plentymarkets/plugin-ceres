@@ -19377,6 +19377,7 @@ Vue.component("address-select", {
       addressOptionTypeFieldMap: {
         1: "vatNumber",
         4: "telephone",
+        6: "postNumber",
         9: "birthday",
         11: "title",
         12: "contactPerson"
@@ -19880,6 +19881,24 @@ Vue.component("create-update-address", {
                   break;
                 }
 
+              case 4:
+                {
+                  if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
+                    optionType.value = this.addressData.telephone;
+                  }
+
+                  break;
+                }
+
+              case 6:
+                {
+                  if (this.addressData.postNumber && this.addressData.postNumber !== optionType.value) {
+                    optionType.value = this.addressData.postNumber;
+                  }
+
+                  break;
+                }
+
               case 9:
                 {
                   if (this.addressData.birthday && this.addressData.birthday !== optionType.value) {
@@ -19893,15 +19912,6 @@ Vue.component("create-update-address", {
                 {
                   if (this.addressData.title && this.addressData.title !== optionType.value) {
                     optionType.value = this.addressData.title;
-                  }
-
-                  break;
-                }
-
-              case 4:
-                {
-                  if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
-                    optionType.value = this.addressData.telephone;
                   }
 
                   break;
