@@ -23973,6 +23973,7 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   height: 100%;
   width: 18px;
   display: inline-block;
+  margin: 0 .1rem;
   animation: sk-stretchdelay 0.8s infinite ease-in-out;
 }
 
