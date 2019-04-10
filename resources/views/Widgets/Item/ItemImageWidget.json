@@ -13,13 +13,13 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "quantity": {
+        "maxQuantity": {
             "type": "number",
             "required": true,
             "defaultValue": 10,
             "options": {
-                "name": "Widget.itemImageQuantityLabel",
-                "tooltipText": "Widget.itemImageQuantityTooltip"
+                "name": "Widget.itemImageMaxQuantityLabel",
+                "tooltipText": "Widget.itemImageMaxQuantityTooltip"
             }        
         },
         "imageSize": {
