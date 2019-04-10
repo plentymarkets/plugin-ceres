@@ -2639,6 +2639,33 @@
                         ]
                     }
                 },
+                "addresses.defaultSalutation": {
+                    "type": "selectBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.addressDefaultSalutation",
+                    "options": {
+                        "defaultValue": "male",
+                        "selectBoxValues": [
+                            {
+                                "value": "male",
+                                "caption": "Config.addressDefaultSalutationValueMale"
+                            },
+                            {
+                                "value": "female",
+                                "caption": "Config.addressDefaultSalutationValueFemale"
+                            },
+                            {
+                                "value": "diverse",
+                                "caption": "Config.addressDefaultSalutationValueDiverse"
+                            },
+                            {
+                                "value": "company",
+                                "caption": "Config.addressDefaultSalutationValueCompany"
+                            }
+                        ]
+                    }
+                },
                 "billing_address.show": {
                     "type": "multiCheckBox",
                     "required": false,

@@ -12,7 +12,8 @@ Vue.component("invoice-address-select", {
             address-type="1"
             :show-error="showError"
             :optional-address-fields="optionalAddressFields"
-            :required-address-fields="requiredAddressFields">
+            :required-address-fields="requiredAddressFields"
+            :default-salutation="defaultSalutation">
         </address-select>
     `,
 
@@ -30,6 +31,10 @@ Vue.component("invoice-address-select", {
             {
                 return {};
             }
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
         },
         hasToValidate: {
             type: Boolean,

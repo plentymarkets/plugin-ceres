@@ -9,7 +9,8 @@ Vue.component("shipping-address-select", {
             @address-changed="addressChanged"
             address-type="2"
             :optional-address-fields="optionalAddressFields"
-            :required-address-fields="requiredAddressFields">
+            :required-address-fields="requiredAddressFields"
+            :default-salutation="defaultSalutation">
         </address-select>
     `,
 
@@ -27,6 +28,10 @@ Vue.component("shipping-address-select", {
             {
                 return {};
             }
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
         }
     },
 
