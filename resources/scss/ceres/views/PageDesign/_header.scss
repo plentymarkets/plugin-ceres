@@ -273,6 +273,16 @@
 		box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 		backface-visibility: hidden;
 
+		#page-header-children {
+			div:not(.unfixed),
+			nav:not(.unfixed){
+				z-index: 10;
+			}
+			.unfixed {
+				z-index: 0;
+			}
+		}
+
 		&.top-bar {
 			background-color: $top-bar-bg;
 		}

@@ -242,6 +242,7 @@
 
         var header = document.getElementById('page-header');
         var headerElements = document.getElementById('page-header-children');
+        var headerElementsChildren = headerElements.children;
         var headerLoaded = false;
         var unfixedElements = [];
 
@@ -253,15 +254,13 @@
                 {
                     var bodyOffset = 0;
                     // Get current header with children
-                    if(headerElements !== null){
-                        var children = headerElements.children;
-                    } else {
+                    if(headerElements === null){
                         return;
                     }
 
-                    for( var i = 0; i < children.length; i++ )
+                    for( var i = 0; i < headerElementsChildren.length; i++ )
                     {
-                        bodyOffset += children[i].getBoundingClientRect().height;
+                        bodyOffset += headerElementsChildren[i].getBoundingClientRect().height;
                     }
 
                     document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
@@ -271,7 +270,6 @@
 
             function getUnfixedElements()
             {
-                unfixedElements = [];
                 $('#page-header .unfixed').each(function(i, elem)
                 {
                     var rect = elem.getBoundingClientRect();
@@ -281,32 +279,56 @@
                         height: rect.height
                     });
                 });
-                scrollUnfixedElements();
+                scrollHeaderElements();
             }
 
-            function scrollUnfixedElements()
+            function scrollHeaderElements()
             {
                 if (headerLoaded)
                 {
-                    var scrollTop = window.scrollY;
+                    var scrollTop = window.pageYOffset;
+                    var unfixedElementsHeight = 0;
+                    var hasUnfixedParent = false;
+
+                    // Position Top for unfixed, absolute elements
                     unfixedElements.forEach(function(unfixed)
                     {
-                        var spacingTop = unfixed.height - scrollTop;
-                        if ( !!unfixed.element.previousElementSibling )
-                        {
-                            unfixed.element.previousElementSibling.style.marginBottom = (spacingTop >= 0 ? spacingTop : 0) + 'px'
-                        }
-                        else
-                        {
-                            unfixed.element.parentElement.style.paddingTop = (spacingTop >= 0 ? spacingTop : 0) + 'px';
-                        }
                         unfixed.element.style.position = 'absolute';
                         unfixed.element.style.top = unfixed.top - scrollTop + 'px';
                     });
+
+                    // Margin-Top for fixed elements after unfixed elements
+                    for (var i = 0; i < headerElementsChildren.length; i++)
+                    {
+                        var elm = headerElementsChildren[i];
+                        var elmHeight = elm.offsetHeight;
+                        
+                        if (elm.classList.contains("unfixed"))
+                        {
+                            unfixedElementsHeight = unfixedElementsHeight + elmHeight;
+                            hasUnfixedParent = true;
+                        }
+                        else if (hasUnfixedParent)
+                        {
+                            var offset = unfixedElementsHeight - scrollTop;
+                            
+
+                            if (offset >= 0)
+                            {
+                                elm.style.marginTop = offset + "px";
+                                unfixedElementsHeight = 0;
+                                hasUnfixedParent = false;
+                            } 
+                            else
+                            {
+                                elm.style.marginTop = 0;    
+                            }
+                        }
+                    }
                 }
             }
 
-            $(window).scroll(scrollUnfixedElements);
+            $(window).scroll(scrollHeaderElements);
 
             $(document).on('shopbuilder.after.ready', function()
             {
@@ -314,7 +336,7 @@
                 {
                     $(unfixed.element).attr('css', '');
                 });
-                scrollUnfixedElements = function() {};
+                scrollHeaderElements = function() {};
             });
 
             $(document).on('shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate', function()
