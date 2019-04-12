@@ -10622,7 +10622,8 @@ $heights: 1, 2, 3, 4, 5, 6;
 }
 
 @mixin make-prop($width, $height) {
-    padding-bottom: percentage($height / $width);
+    padding-bottom: percentage($height / $width) !important;
+    min-height: auto !important;
 }
 
 @include make-props();
@@ -10749,10 +10750,6 @@ a:active {
     height: 20px;
     background: transparent no-repeat center center;
     background-size: 100% 100%;
-}
-
-.pagination > li {
-    cursor: pointer;
 }
 
 .content-center {
@@ -11045,18 +11042,8 @@ button:focus {
     }
 }
 
-// create gray outline button 
-.btn-outline-default{
-	@include button-outline-variant($gray-light);
-}
-
 .btn {
-
 	outline: 0 !important;
-
-	&.btn-right {
-		float: right;
-	}
 
 	& .btn-label {
 		&.btn-trans {
@@ -11075,16 +11062,6 @@ button:focus {
 	& > span + .fa {
 		margin-left: 5px;
 		margin-top: 1px;
-	}
-
-	&.btn-remove-address {
-		background-color: $danger;
-		margin-right: -5px;
-		color: #fff;
-
-		&:hover{
-			background-color: #c9302c;
-		}
 	}
 
 	&.btn-medium {
@@ -11106,9 +11083,9 @@ button:focus {
 	&.btn-block {
 		> .fa {
 			line-height: inherit;
+			margin-top: 0;
 		}
 	}
-
 }
 
 .btn-right {
@@ -11179,6 +11156,15 @@ button:focus {
 			width: 12px;
 		}
 	}
+
+	&.btn-circle
+	{
+		border-radius: 50%;
+	}
+}
+
+.btn-default {
+	@include button-variant($gray-lighter, $gray-lighter);
 }
 
 // Responsive button text and icon visibility
@@ -11207,29 +11193,6 @@ button:focus {
 	  }
 	}
   }
-.card{
-	
-	.item-edit{
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		font-size: 1.5rem;
-		line-height: 1.5rem;
-		
-		.fa{
-    		width: 1em;
-		    height: 1em;
-		    color: $gray-light;
-		    -webkit-transition: all .2s ease-in-out;
-		    transition: all .2s ease-in-out;
-
-		    &:hover{
-				color: $primary;
-				border-color: $primary;
-	    	}
-    	}
-	}
-}
 
 // External plugins overrides
 .bs4-progress
@@ -12969,10 +12932,10 @@ $border-width: 1px;
 
         a
         {
-            color: $white;
+            color: $white !important;
             &:hover
             {
-                color: $gray-lighter2;
+                color: $gray-lighter2 !important;
             }
         }
 
@@ -13493,8 +13456,6 @@ $border-width: 1px;
 		    -ms-flex-direction: row-reverse;
 		        flex-direction: row-reverse;
 		position: relative;
-		margin-left: 0;
-		margin-right: 0;
 	}
 	.controls-list
 	{
@@ -14588,16 +14549,6 @@ body.menu-is-visible {
 	}
 	
 }
-@include media-breakpoint-up(lg){
-	.wrapper-main {
-		.breadcrumb{
-			@include media-breakpoint-up(xl){
-				padding: .5rem 0;
-			}
-		}
-	}
-}
-
 .to-top {
     display: block;
     background-color: $gray-dark;
@@ -14944,18 +14895,27 @@ body.menu-is-visible {
 	.items{
 		position: relative;
 
+		@include media-breakpoint-up(md) {
+			display: inline-block;
+			vertical-align: middle;
+			width: 100%;
+		}
+
 		//TODO add class to this div and set this rule by the class
 		&>div:first-child{
 			@extend .card;
 			margin-bottom: 0;
+
+			@include media-breakpoint-down(xs) {
+				min-height: 115px;
+			}
 		}
 	}
 
 	.dropdown-toggle{
-
 		&:after{
 		    position: absolute;
-				top: 80%;
+			top: 80%;
     		right: 1.5rem;
 		    -webkit-transform: translateY(-50%);
 		            transform: translateY(-50%);
@@ -14992,32 +14952,11 @@ body.menu-is-visible {
 		overflow-y: auto;
 	}
 
-	.add-item{
-		position: absolute;
-		
-		@include media-breakpoint-down(xs)
-		{
-			top: 0;
-			right: 0;
-
-			& button {
-				min-width: auto !important;
-				width: 50px;
-				height: 74px;
-			}
-		}
-
-		@include media-breakpoint-up(sm)
-		{
-			top: 1em;
-			right: 1em;
-		}
-	}
-
 	.item{
 		padding: 0;
 		border-bottom: 1px solid $gray-lighter;
 		position:relative;
+
 		input{ display: none; }
 
 		input:checked{
@@ -15027,14 +14966,6 @@ body.menu-is-visible {
 				        box-shadow: inset 0 0 0 0.1rem $primary;
 				color: $black;
 				background-color: #d9edf7;
-			}
-
-			& + .item-inner .item-edit .fa:hover{
-				color: white;
-			}
-			& + .item-controls .fa:hover{
-				color: white;
-				cursor: pointer;
 			}
 		}
 
@@ -15056,48 +14987,35 @@ body.menu-is-visible {
 		padding: 1em;
 		margin-bottom: 0;
 
-		& .item-controls {
-			@include media-breakpoint-down(md) {
-				width: 83px;
-			}
+		.item-controls {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
 
-			@include media-breakpoint-up(md) {
-				width: 75px;
+			.item-edit .fa {
+				padding-left: 0.1rem;
+				padding-top: 0.3rem;
+			}
+			.item-remove .fa {
+				padding-top: 0.1rem;
+			}
+			.fa {
+				-webkit-transition: all .2s ease-in-out;
+				transition: all .2s ease-in-out;
+				float: none;
+			}
+			.btn {
+				width: 2.2rem;
+				height: 2.2rem;
+				margin-left: 5px;
+				padding: 0;
 			}
 		}
 	}
 
-	.item-edit{
-		& .btn {
-			width: 2.2rem;
-			padding-right: 6px;
-			height: 2.2rem;
-		}
-		.fa{
-			color: #fff;
-			margin-top: 1px;
-			-webkit-transition: all .2s ease-in-out;
-			transition: all .2s ease-in-out;
-			
-    	}
-	}
-	.item-remove {
-		& .btn {
-			width: 2.2rem;
-			padding-right: 9px;
-			height: 2.2rem;
-		}
-	    .fa {
-	    	color: #fff;
-			-webkit-transition: all .2s ease-in-out;
-			transition: all .2s ease-in-out;
-			margin-top: -1px;
-	    }
-	}
 
 	.item-content{
 		display: inline-block;
-	    // width: calc( 100% - 4em );
 	    width: 100%;
 	    -webkit-box-flex: 1;
 	        -ms-flex: 1 1 auto;
@@ -15107,30 +15025,36 @@ body.menu-is-visible {
 			display: block;
 		}
 	}
-
-	@include media-breakpoint-up(sm){
-
-	}
-
-	@include media-breakpoint-up(md){
-		.items{
-			display: inline-block;
-			vertical-align: middle;
-			// width: calc( 100% - 5em );
-			width:100%;
-		}
-
-	}
-
-	@include media-breakpoint-up(lg){
-
-	}
 }
+
 .checkout {
-	header{
-		h4 {
-    	line-height: 2.5rem;
+    header {
+        h4 {
+            line-height: 2.5rem;
+        }
+    }
+}
+
+.add-item {
+	position: absolute;
+	cursor: pointer;
+	
+	@include media-breakpoint-down(xs)
+	{
+		top: 0;
+		right: 0;
+
+		& button {
+			min-width: auto !important;
+			width: 50px;
+			height: 74px;
 		}
+	}
+
+	@include media-breakpoint-up(sm)
+	{
+		top: 1em;
+		right: 1em;
 	}
 }
 
@@ -15999,6 +15923,7 @@ html.ie .basket-preview-hover {
 
     .basket-header
     {
+        position: relative;
         -webkit-box-flex: 0;
             -ms-flex: 0 0 auto;
                 flex: 0 0 auto;
@@ -16012,6 +15937,14 @@ html.ie .basket-preview-hover {
             }
 
             font-size: 1.25rem;
+        }
+
+        .close {
+            height: 100%;
+            width: 50px;
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     }
 
@@ -17245,6 +17178,138 @@ html.ie {
 		}
 	}
 }
+.order-history-list,
+.order-return-history-list {
+    .order-list,
+    .order-item {
+        > div:nth-child(odd) {
+            > div.container-clickable {
+                background: $gray-lightest;
+            }
+        }
+    }
+
+    .container-header {
+        > div {
+            display: inline-block;
+            text-align: right;
+        }
+    }
+
+    .container-clickable {
+        cursor: pointer;
+
+        &.collapsed {
+            .fa-chevron-up {
+                -webkit-transform: scaleY(-1);
+                        transform: scaleY(-1);
+                top: 2px;
+            }
+        }
+        .fa-chevron-up {
+            position: absolute;
+            left: 1.25rem;
+            font-size: 1.5rem;
+        }
+
+        @include media-breakpoint-up(md) {
+            text-align: right;
+
+            .row div span:first-child {
+                display: none;
+            }
+            .icons {
+                margin-top: -5px;
+                .fa {
+                    font-size: 2rem;
+                    vertical-align: middle;
+                    margin-bottom: -6px;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+            .row div {
+                span:first-child {
+                    text-align: left;
+                }
+            }
+            .fa-chevron-up {
+                right: 1.15rem;
+                top: 0;
+                left: auto;
+            }
+        }
+    }
+
+    .container-middle {
+        .item {
+            img {
+                height: 80px;
+                width: 80px;
+                -o-object-fit: contain;
+                   object-fit: contain;
+                vertical-align: middle;
+            }
+            &:first-child {
+                border-top: 0 !important;
+            }
+            .item-description {
+                text-align: left;
+                vertical-align: middle;
+            }
+        }
+        .order-item {
+            .row div:first-child {
+                border-top: 0 !important;
+            }
+
+            @include media-breakpoint-up(md) {
+                border-bottom: 0 !important;
+            }
+        }
+    }
+
+    .container-bottom {
+        .address-list {
+            span, strong {
+                display: block;
+            }
+        }
+    }
+}
+
+.order-history-list {
+    .container-middle {
+        .products {
+            @include media-breakpoint-down(sm) {
+                border-right: 0 !important;
+            }
+            @include media-breakpoint-up(md) {
+                border-bottom: 0 !important;
+            }
+        }
+    }
+
+    .container-bottom {
+        background: $gray-lightest;
+
+        .button-spacer {
+            margin-top: auto;
+        }
+        .payment-change-box-item {
+            .cannot-change-payment {
+                width: 100%;
+                margin-bottom: auto;
+            }
+        }
+        @include media-breakpoint-down(sm) {
+            .button-container {
+                margin-top: 0.5rem;
+            }
+        }
+    }
+}
 .cmp-order-item{
 
 	@extend .cmp-basket-item; 
@@ -17391,6 +17456,7 @@ html.ie {
                 align-items: center;
     }
 }
+
 .cmp-method-list{
 
 	.method-list{
@@ -18629,7 +18695,6 @@ html.ios {
 		}
 	}
 }
-
 .single {
     .list-item-carousel {
         .list-control-special{
@@ -18690,7 +18755,11 @@ html.ios {
         }
     }
     .nav-tabs {
+        @include media-breakpoint-only(xs) {
+            display: block;
+        }
         .nav-item {
+            cursor: pointer;
             float: none;
             .nav-link {
                 border:1px solid $nav-tabs-border-color;
@@ -18739,6 +18808,12 @@ html.ios {
         &.active {
             border-color: $success;
         }
+    }
+
+    .order-property-selection-info-popper {
+        position: absolute;
+        top: 6px;
+        right: 18px;
     }
 }
 
@@ -19232,6 +19307,20 @@ html.ios {
     width: 100%!important;
 }
 
+.card-body {
+    padding: 1rem;
+
+    .add-item {
+        bottom: 0;
+
+        @include media-breakpoint-down(xs) {
+            button {
+                height: 100%;
+            }
+        }
+    }
+}
+
 // Widgets
 @mixin widget-bg-variant($color)
 {
@@ -19266,10 +19355,69 @@ html.ios {
     }
 }
 
-.widget-image-box
+.widget.accordion {
+    div.card {
+        &:first-of-type {
+            border-bottom: $card-border-width solid $card-border-color;
+        }
+        &:nth-of-type(2) {
+            border-top: 0;
+        }
+
+        button.collapsed {
+            h5 {
+                > .fa {
+                    -webkit-transform: scaleY(1);
+                            transform: scaleY(1);
+                }
+            }
+        }
+        button {
+            text-align: left;
+            padding: $card-spacer-x;
+            border-top-width: 0;
+
+            h5 {
+                font-weight: bold;
+                position: relative;
+
+                > .fa {
+                    position: absolute;
+                    right: 0;
+                    top: -4px;
+                    font-size: 1.5rem;
+                    -webkit-transform: scaleY(-1);
+                            transform: scaleY(-1);
+                    -webkit-transition-timing-function: ease;
+                            transition-timing-function: ease;
+                    -webkit-transition-duration: .35s;
+                            transition-duration: .35s;
+                    -webkit-transform-origin: 50% 60%;
+                            transform-origin: 50% 60%;
+                }
+            }
+        }        
+        button:hover,
+        button:focus { 
+            color: black;
+        }
+
+        div .card-body {
+            margin-top: 1px;
+
+            p {
+                margin: 0;
+                line-height: $headings-line-height;
+            }
+        }
+    }
+}
+
+
+.widget.widget-image-box
 {
     @include media-breakpoint-only(xs) {
-        padding-bottom: 0 !important;
+        padding-bottom: 0;
         min-height: 10rem;
     }
 
@@ -19303,6 +19451,7 @@ html.ios {
         {
             -webkit-transition: 300ms all ease;
             transition: 300ms all ease;
+            word-break: break-word;
 
             h2, .h2
             {
@@ -19315,13 +19464,7 @@ html.ios {
     &.widget-image-box-fullwidth
     {
         > .widget-inner
-        {   
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                min-height: 12rem;
-                padding-top: 2rem;
-            }
-
+        {
             .widget-caption
             {
                 width: 100%;
@@ -19360,11 +19503,6 @@ html.ios {
                 -ms-flex-align: end;
                     align-items: flex-end;
 
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                padding-top: 14%;
-            }
-
             .widget-caption
             {
                 padding: 1.5rem;
@@ -19376,22 +19514,12 @@ html.ios {
     {
         > .widget-inner
         {
-            @include media-breakpoint-only(xs) {
-                position: relative;
-                padding: 25% 0 0 0;
-            }
+            padding: 0;
+            top: auto;
 
             .widget-caption
             {
-                @include media-breakpoint-only(xs) {
-                    position: relative;
-                    width: 100%;
-                }
-
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: 0;
+                width: 100%;
                 padding: 1rem;
             }
         }
@@ -19703,109 +19831,7 @@ html.ie {
             font-size: 1.75rem;
         }
     }
-
-    &.widget-primary .widget-caption
-    {
-        @include widget-bg-variant($primary);
-    }
-
-    &.widget-secondary .widget-caption
-    {
-        @include widget-bg-variant($secondary);
-    }
-
-    &.widget-success .widget-caption
-    {
-        @include widget-bg-variant($success);
-    }
-
-    &.widget-info .widget-caption
-    {
-        @include widget-bg-variant($info);
-    }
-
-    &.widget-warning .widget-caption
-    {
-        @include widget-bg-variant($warning);
-    }
-
-    &.widget-danger .widget-caption
-    {
-        @include widget-bg-variant($danger);
-    }
 }
-.widget.accordion {
-    div.card {
-        &:first-of-type {
-            border-bottom: $card-border-width solid $card-border-color;
-        }
-        &:nth-of-type(2) {
-            border-top: 0;
-        }
-
-        button.collapsed {
-            h5 {
-                > .fa {
-                    -webkit-transform: scaleY(1);
-                            transform: scaleY(1);
-                }
-            }
-        }
-        button {
-            text-align: left;
-            padding: $card-spacer-x;
-            border-top-width: 0;
-
-            h5 {
-                font-weight: bold;
-                position: relative;
-
-                > .fa {
-                    position: absolute;
-                    right: 0;
-                    top: -4px;
-                    font-size: 1.5rem;
-                    -webkit-transform: scaleY(-1);
-                            transform: scaleY(-1);
-                    -webkit-transition-timing-function: ease;
-                            transition-timing-function: ease;
-                    -webkit-transition-duration: .35s;
-                            transition-duration: .35s;
-                    -webkit-transform-origin: 50% 60%;
-                            transform-origin: 50% 60%;
-                }
-            }
-        }        
-        button:hover,
-        button:focus { 
-            color: black;
-        }
-
-        div .card-body {
-            margin-top: 1px;
-
-            p {
-                margin: 0;
-                line-height: $headings-line-height;
-            }
-        }
-    }
-
-    @each $color, $value in $theme-colors {
-        &.widget-#{$color} {
-            button:hover,
-            button:focus {
-                -webkit-text-decoration-color: $value;
-                        text-decoration-color: $value;
-            }
-            h5 {
-                color: $value;
-            }
-        }
-    }
-}
-
-
 .widget-legal-information
 {
     a
@@ -19894,58 +19920,6 @@ html.ie {
     {
         padding: 1rem 1.5rem;
     }
-
-    .placeholder-text
-    {
-        border: 3px dashed #dadae3;
-        border-radius: 3px;
-        height: 75px;
-        line-height: 75px;
-        vertical-align: middle;
-        text-align: center;
-        color: #dadae3;
-        font-size: 20px;
-        font-style: italic;
-    }
-
-    &.widget-primary, &.widget-secondary, &.widget-success, &.widget-info, &.widget-warning, &.widget-danger, &.widget-inverse
-    {
-        .placeholder-text
-        {
-            border-color: white;
-            color: white;
-        }
-    }
-
-    &.widget-primary
-    {
-        @include widget-bg-variant($primary);
-    }
-
-    &.widget-secondary
-    {
-        @include widget-bg-variant($secondary);
-    }
-
-    &.widget-success
-    {
-        @include widget-bg-variant($success);
-    }
-
-    &.widget-info
-    {
-        @include widget-bg-variant($info);
-    }
-
-    &.widget-warning
-    {
-        @include widget-bg-variant($warning);
-    }
-
-    &.widget-danger
-    {
-        @include widget-bg-variant($danger);
-    }
 }
 .widget-title-bar
 {
@@ -19953,6 +19927,7 @@ html.ie {
     {
         padding: 1rem 1.5rem;
         text-align: center;
+        word-break: break-word;
     }
 
     .h1, h1
@@ -19962,61 +19937,21 @@ html.ie {
         letter-spacing: 1.25px;
         display: block;
     }
-
-    &.widget-primary
-    {
-        @include widget-bg-variant($primary);
-    }
-
-    &.widget-secondary
-    {
-        @include widget-bg-variant($secondary);
-    }
-
-    &.widget-success
-    {
-        @include widget-bg-variant($success);
-    }
-
-    &.widget-info
-    {
-        @include widget-bg-variant($info);
-    }
-
-    &.widget-warning
-    {
-        @include widget-bg-variant($warning);
-    }
-
-    &.widget-danger
-    {
-        @include widget-bg-variant($danger);
-    }
-}
-.widget-address
-{
-    @each $color, $value in $shop-builder-colors
-    {
-        &.widget-#{$color}
-        {
-            .btn-primary
-            {
-                @extend .btn-#{$color};
-            }
-            .btn-outline-primary
-            {
-                @extend .btn-outline-#{$color};
-            }
-        }
-    }
 }
 .widget-grid
 {
     > .widget-inner
     {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
         > div
         {
-            height: 100%;
+            -webkit-box-flex: 1;
+                -ms-flex: 1;
+                    flex: 1;
+            max-width: 100%;
         }
     }
 
@@ -20032,21 +19967,17 @@ html.ie {
 
         > .widget-inner
         {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-
-            > div
-            {
-                -webkit-box-flex: 1;
-                    -ms-flex: 1;
-                        flex: 1;
-
-            }
-
             [data-builder-child-container]
             {
                 min-height: 100px;
+            }
+
+            @include media-breakpoint-up(md)
+            {
+                .widget-proportional
+                {
+                    height: 100%;
+                }
             }
         }
     }
@@ -20146,14 +20077,30 @@ html.ie {
 {
     .widget
     {
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
 
-        &.widget-grid
+        &.widget-grid:not(.widget-two-col)
         {
             margin-bottom: 0;
         }
 
-        .widget-inner
+        &:not(.widget-two-col) .widget-inner:not(.widget-stacked)
+        {
+            .widget:not(.widget-grid)
+            {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(xs)
+{
+    .widget
+    {
+        margin-bottom: 1rem;
+
+        &:not(.widget-two-col) .widget-inner:not(.widget-stacked)
         {
             .widget:not(.widget-grid)
             {
@@ -20161,6 +20108,18 @@ html.ie {
             }
         }
     }
+}
+
+header .widget
+{
+    margin-bottom: 0;
+}
+
+.widget-fw
+{
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2);
 }
 
 .widget-proportional
@@ -20179,28 +20138,77 @@ html.ie {
     }
 }
 
-@include media-breakpoint-up(md)
-{
-    @each $i in 1,2,3,4
-    {
-        @each $j in 1,2,3,4
-        {
-            .widget-prop-#{$i}-#{$j} .widget-proportional
-            {
-                padding-bottom: percentage($j / $i);
-            }
 
-            .widget-proportional.widget-prop-#{$i}-#{$j}
+@each $breakpoint in map-keys($grid-breakpoints)
+{
+    $infix: breakpoint-infix($breakpoint);
+    $next: breakpoint-next($breakpoint);
+
+    @include media-breakpoint-up($breakpoint)
+    {
+        @each $i in 1, 2, 3, 4
+        {
+            @each $j in 1, 2, 3, 4
             {
-                padding-bottom: percentage($j / $i) !important;
+                .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional
+                {
+                    padding-bottom: percentage($j / $i);
+                }
+
+                .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j}
+                {
+                    padding-bottom: percentage($j / $i) !important;
+                }
+
             }
         }
 
     }
-    .widget-prop-auto .widget-proportional
+    @include media-breakpoint-only($breakpoint)
     {
-        padding-bottom: 0;
-        min-height: 100%;
+        .widget-prop#{$infix}-auto > div > .widget-proportional
+        {
+            padding-bottom: 0;
+            min-height: 100%;
+        }
+    }
+}
+
+@include media-breakpoint-down(xs)
+{
+    .widget-grid .widget-inner.col-12.widget-stacked
+    {
+        padding-bottom: 1rem;
+    }
+}
+
+@include media-breakpoint-between(sm, lg)
+{
+    .widget-grid .widget-inner.col-sm-12.widget-stacked
+    {
+        padding-bottom: 2rem;
+    }
+}
+
+@include media-breakpoint-up(lg)
+{
+    .widget-grid .widget-inner.col-lg-12.widget-stacked
+    {
+        padding-bottom: 2rem;
+    }
+}
+
+@include media-breakpoint-up(md)
+{
+    .widget-grid
+    {
+        > .widget-inner.widget-prop-md-auto
+        {
+            &.col-md-3 > div > .widget-proportional
+            {
+                padding-bottom: calc(100% + 15px);
+            }
+        }
     }
 }
 
@@ -20209,6 +20217,64 @@ html.ie {
     padding-bottom: 0.1px;
 }
 
+@each $color, $value in $shop-builder-colors
+{
+    .widget-#{$color}
+    {
+        @include text-emphasis-variant(".text-appearance", $value);
+
+        .bg-appearance
+        {
+            @include context-bg($value);
+
+            a
+            {
+                color: color-yiq($value);
+            }
+        }
+
+        a.bg-appearance:hover,
+        button.bg-appearance:hover
+        {
+            @include context-bg(darken($value, 10%));
+        }
+
+        .btn-appearance
+        {
+            @include button-variant($value, $value);
+        }
+
+
+        a.text-appearance,
+        .btn-appearance
+        {
+            -webkit-text-decoration-color: $value;
+                    text-decoration-color: $value;
+
+            @include hover-focus {
+                -webkit-text-decoration-color: darken($value, 7.5);
+                        text-decoration-color: darken($value, 7.5);
+            }
+        }
+
+        .pagination .page-item
+        {
+            .page-link
+            {
+                color: $value;
+                @include hover-focus {
+                    color: darken($value, 15%);
+                }
+            }
+
+            &.active .page-link
+            {
+                border-color: $value;
+                @include context-bg($value);
+            }
+        }
+    }
+}
 .widget-placeholder
 {
     width: 100%;

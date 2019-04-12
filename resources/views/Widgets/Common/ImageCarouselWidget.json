@@ -13,6 +13,49 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
+        "aspectRatio": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "auto",
+            "options": {
+                "name": "Widget.imageCarouselAspectRatioLabel",
+                "tooltipText": "Widget.imageCarouselAspectRatioTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "auto",
+                        "caption": "Widget.imageCarouselAspectRatioAuto"
+                    },
+                    {
+                        "value": "3-1",
+                        "caption": "Widget.imageCarouselAspectRatioThreeToOne"
+                    },
+                    {
+                        "value": "2-1",
+                        "caption": "Widget.imageCarouselAspectRatioTwoToOne"
+                    },
+                    {
+                        "value": "3-2",
+                        "caption": "Widget.imageCarouselAspectRatioThreeToTwo"
+                    },
+                    {
+                        "value": "1-1",
+                        "caption": "Widget.imageCarouselAspectRatioOneToOne"
+                    },
+                    {
+                        "value": "2-3",
+                        "caption": "Widget.imageCarouselAspectRatioTwoToThree"
+                    },
+                    {
+                        "value": "1-2",
+                        "caption": "Widget.imageCarouselAspectRatioOneToTwo"
+                    },
+                    {
+                        "value": "1-3",
+                        "caption": "Widget.imageCarouselAspectRatioOneToThree"
+                    }
+                ]
+            }
+        },
         "slides": {
             "type": "vertical",
             "isList": "[1,]",

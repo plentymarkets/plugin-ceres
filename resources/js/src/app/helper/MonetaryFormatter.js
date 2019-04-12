@@ -36,12 +36,15 @@ const MonetaryFormatter = (function()
                 });
                 pattern = pattern.substr(5);
             }
-            else if (pattern.indexOf(".00") === 0)
+            else if (/^\.0+/.test(pattern))
             {
+                const match = /^\.(0+)/.exec(pattern);
+
                 parsed.push({
-                    type: T_DECIMAL
+                    type: T_DECIMAL,
+                    value: match[1].length
                 });
-                pattern = pattern.substr(3);
+                pattern = pattern.substr(match[0].length);
             }
             else if (pattern.indexOf("-") === 0)
             {
@@ -61,27 +64,6 @@ const MonetaryFormatter = (function()
         }
 
         return parsed;
-    }
-
-    function _getDecimalValue(value)
-    {
-        const extend = 0;
-
-        value += "";
-
-        if (value.length === 1)
-        {
-            value = extend + value;
-        }
-        else
-        {
-            while (value.length < 2)
-            {
-                value += extend;
-            }
-        }
-
-        return value;
     }
 
     MonetaryFormatter.prototype.setPattern = function(pattern)
@@ -158,7 +140,18 @@ const MonetaryFormatter = (function()
                 return digits;
             }
             case T_DECIMAL: {
-                return this.separatorDecimals + _getDecimalValue(Math.floor(value * 1000 / 10).toFixed(0).substr(-2, 2));
+                const numberOfDecimals = parseInt(partial.value);
+
+                let result = Math.round(value * Math.pow(10, numberOfDecimals))
+                    .toFixed(0)
+                    .substr(-1 * numberOfDecimals, numberOfDecimals);
+
+                while (result.length < numberOfDecimals)
+                {
+                    result = "0" + result;
+                }
+
+                return this.separatorDecimals + result;
             }
             case T_CURRENCY: {
                 return currency;

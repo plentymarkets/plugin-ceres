@@ -80,18 +80,8 @@ button:focus {
     }
 }
 
-// create gray outline button 
-.btn-outline-default{
-	@include button-outline-variant($gray-light);
-}
-
 .btn {
-
 	outline: 0 !important;
-
-	&.btn-right {
-		float: right;
-	}
 
 	& .btn-label {
 		&.btn-trans {
@@ -110,16 +100,6 @@ button:focus {
 	& > span + .fa {
 		margin-left: 5px;
 		margin-top: 1px;
-	}
-
-	&.btn-remove-address {
-		background-color: $danger;
-		margin-right: -5px;
-		color: #fff;
-
-		&:hover{
-			background-color: #c9302c;
-		}
 	}
 
 	&.btn-medium {
@@ -141,9 +121,9 @@ button:focus {
 	&.btn-block {
 		> .fa {
 			line-height: inherit;
+			margin-top: 0;
 		}
 	}
-
 }
 
 .btn-right {
@@ -212,6 +192,15 @@ button:focus {
 			width: 12px;
 		}
 	}
+
+	&.btn-circle
+	{
+		border-radius: 50%;
+	}
+}
+
+.btn-default {
+	@include button-variant($gray-lighter, $gray-lighter);
 }
 
 // Responsive button text and icon visibility

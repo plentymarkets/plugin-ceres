@@ -11,7 +11,7 @@ Vue.component("basket-list-item", {
         "size",
         "language",
         "template",
-        "appearance"
+        "isPreview"
     ],
 
     data()
@@ -156,7 +156,7 @@ Vue.component("basket-list-item", {
                     {
                         this.basketItem.quantity = origQty;
 
-                        if (this.size === "small")
+                        if (this.isPreview)
                         {
                             this.$store.dispatch(
                                 "addBasketNotification",

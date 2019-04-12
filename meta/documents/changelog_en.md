@@ -1,5 +1,59 @@
 # Release Notes for Ceres
 
+## v3.2.2 (2019-04-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.1...3.2.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- All global data is now loaded per default if no context is explicitly specified.
+- Due to an error, several widgets extended beyond the limits of a grid widget. This has been fixed.
+- Due to an error, categories were not correctly displayed in the category navigation widget of the ShopBuilder header. This has been fixed.
+
+## v3.2.1 (2019-04-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.0...3.2.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the order history widget could not be displayed for variable users. This has been fixed.
+
+## v3.2.0 (2019-03-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.1.3...3.2.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Order characteristics of the type **Selection** are now supported and the description of the characteristic is displayed in the front end. You should check the **description** of the order characteristic and review whether you want the description to be displayed in the online store.
+- In case the markup is displayed incorrectly, you can use the **Regenerate contents** button.
+
+
+### Added
+
+- The widget "Two column grid" can now be arranged individually for each display size.
+- The aspect ratio of images can now be specified in the image carousel widget of the ShopBuilder.
+- The aspect ratio of images can now be specified in the image box widget of the ShopBuilder.
+- We added the new layout container **Basket.ExtendOverlayButtons**.
+- Ceres now considers the visibility of order statuses as specified in the back end.
+- Order characteristics of the type **Selection** are now supported.
+
+### Changed
+
+- The address information on the order confirmation page now includes the contact person for B2B company addresses.
+- You can now use all ShopBuilder widgets for static pages in the header.
+- The following settings have been marked as `deprecated` and have been removed from the section **Checkout and My account** from the Ceres configuration: Number of orders to show per page in the order history, Allow returns in My account, Allow customers to change the payment method. These settings have been relocated to the **Order history** widget of the ShopBuilder.
+- It is now required to enter the old password in order to change the password in the MyAccount area.
+- The loading of the category tree has been refactored, resulting in a significantly better performance.
+- We added notification messages to the Ceres search, which state the number of search results.
+
+### Fixed
+
+- Due to an error, the space between the page body and the header was calculated incorrectly. This has been fixed.
+- Item bundles were not displayed correctly if the option **Replace item bundle with base items** was selected. This has been fixed.
+- Due to an error, images were not loaded correctly in Internet Explorer 11. This has been fixed.
+- Tab spaces in the description of the structured data on the single item view caused errors. This behaviour has been fixed.
+- The setting for the number of decimal places is now interpreted correctly again.
+- Item properties no longer prevent adding the items to the shopping cart from item lists.
+- Empty error messages are no longer displayed.
+- The mapping between availabilities configured in the back end and availabilities specified by search engines was not working properly. This behaviour has been fixed.
+- Due to an error pertaining to variation properties, the shopping cart was not properly rendered in the checkout. This has been fixed.
+- The category option "Visible: After login" is now applicable in Ceres online stores. Categories for which this option is active are only displayed in the navigation after a login. Directly accessing the URL redirects to the login page.
+- In the address overlay, it was not possible to enter anything containing an apostrophe. This error has been fixed.
+
 ## v3.1.3 (2019-03-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.1.2...3.1.3" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
