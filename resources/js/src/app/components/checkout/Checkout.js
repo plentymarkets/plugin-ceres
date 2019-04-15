@@ -132,6 +132,14 @@ Vue.component("checkout", {
                 );
                 this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
             }
+
+            if (this.checkout.isCheckouReadonly !== checkout.isCheckouReadonly)
+            {
+                NotificationService.warn(
+                    TranslationService.translate("Ceres::Template.checkoutReadonlyChanged")
+                );
+                this.$store.commit("setIsCheckoutReadonly", checkout.isCheckouReadonly);
+            }
         },
 
         hasShippingProfileListChanged(oldList, newList)
