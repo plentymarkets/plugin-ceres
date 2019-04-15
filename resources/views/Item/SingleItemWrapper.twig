@@ -19,6 +19,28 @@
 
 {% block PageBody %}
 
-    {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
+    {% set shopBuilderTemplate = "" %}
+    {% if defaultCategory is defined %}
+        {# Check for item template for specific category first #}
+        {% set shopBuilderTemplate = shop_builder_category_template(defaultCategory.id, "singleitem") %}
+    {% endif %}
+
+    {% if shopBuilderTemplate | trim is empty %}
+        {# No item template for default category found => use global item template #}
+        {% set shopBuilderTemplate = LayoutContainer.show("Ceres::SingleItemGlobal") %}
+    {% endif %}
+
+    {% if shopBuilderTemplate | trim is not empty %}
+        <div class="container-max">
+            <div class="row">
+                <div class="col">
+                    {{ shopBuilderTemplate | raw }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {# No item template defined in ShopBuilder => use default template from plugin #}
+        {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
+    {% endif %}
 
 {% endblock %}

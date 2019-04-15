@@ -3332,6 +3332,112 @@
         }
     },
     {
+        "identifier": "Ceres::ItemImageWidget",
+        "label": "Widget.itemImageLabel",
+        "previewImageURL": "/images/widgets/item-image.svg",
+        "type": "item",
+        "categories": [
+            "item"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Item\\ItemImageWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "maxQuantity": {
+                "type": "number",
+                "required": true,
+                "defaultValue": 10,
+                "options": {
+                    "name": "Widget.itemImageMaxQuantityLabel",
+                    "tooltipText": "Widget.itemImageMaxQuantityTooltip"
+                }
+            },
+            "imageSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "url",
+                "options": {
+                    "name": "Widget.itemImageSizeLabel",
+                    "tooltipText": "Widget.itemImageTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "urlPreview",
+                            "caption": "Widget.itemImageSizePreview"
+                        },
+                        {
+                            "value": "urlSecondPreview",
+                            "caption": "Widget.itemImageSizeSecondPreview"
+                        },
+                        {
+                            "value": "urlMiddle",
+                            "caption": "Widget.itemImageSizeMiddle"
+                        },
+                        {
+                            "value": "url",
+                            "caption": "Widget.itemImageSizeFull"
+                        }
+                    ]
+                }
+            },
+            "showThumbs": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.itemImageShowThumbsLabel",
+                    "tooltipText": "Widget.itemImageShowThumbsTooltip"
+                }
+            },
+            "showDots": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.itemImageShowDotsLabel",
+                    "tooltipText": "Widget.itemImageShowDotsTooltip"
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::AccountSettingsWidget",
         "label": "Widget.myAccountAccountSettingsLabel",
         "previewImageURL": "/images/widgets/account-settings.svg",

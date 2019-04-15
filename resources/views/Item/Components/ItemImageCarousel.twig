@@ -1,3 +1,5 @@
+
+
 <script type="x/template" id="vue-item-image-carousel">
     <div itemscope itemtype="http://schema.org/Thing">
         <div id="single-carousel" class="owl-carousel owl-theme owl-single-item" ref="single">
@@ -7,16 +9,15 @@
                 </a>
             </div>
         </div>
-        <div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
+        <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
             <img
                 @click="goTo(index)"
-                class="owl-thumb"
-                v-bind:class="{ 'active': currentItem === index }"
+                class="owl-thumb border-appearance"
+                v-bind:class="{ 'active': currentItem === index}"
                 :src="imagePreview.url"
                 :alt="getAltText(imagePreview)"
                 :title="getItemName()"
-                v-for="(imagePreview, index) in carouselImages"
-            >
+                v-for="(imagePreview, index) in carouselImages">
         </div>
     </div>
 </script>
