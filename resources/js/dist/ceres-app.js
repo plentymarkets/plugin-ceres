@@ -29552,6 +29552,13 @@ var mutations = {
       state.shipping.shippingProfileList = shippingProfileList;
     }
   },
+  setMaxDeliveryDays: function setMaxDeliveryDays(state, maxDeliveryDays) {
+    if ((0, _utils.isDefined)(maxDeliveryDays)) {
+      state.shipping.shippingProfileList.forEach(function (shippingProfile) {
+        shippingProfile.maxDeliveryDays = maxDeliveryDays[shippingProfile.parcelServicePresetId];
+      });
+    }
+  },
   setMethodOfPayment: function setMethodOfPayment(state, methodOfPaymentId) {
     if (methodOfPaymentId) {
       state.payment.methodOfPaymentId = methodOfPaymentId;
@@ -29624,6 +29631,7 @@ var actions = {
     commit("setShippingCountryId", checkout.shippingCountryId);
     commit("setShippingProfile", checkout.shippingProfileId);
     commit("setShippingProfileList", checkout.shippingProfileList);
+    commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
     commit("setMethodOfPaymentList", checkout.paymentDataList);
     commit("setMethodOfPayment", checkout.methodOfPaymentId);
     dispatch("setShippingProfileById", checkout.shippingProfileId);
