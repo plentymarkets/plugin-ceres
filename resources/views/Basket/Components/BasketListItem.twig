@@ -11,7 +11,7 @@
         
         {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
         
-        <div class="basket-item component-loading with-icon sending" :class="{ 'isLoading': waiting }">
+        <div class="basket-item component-loading with-icon" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
 
             <div class="image-container">
                 <img class="img-basket-small" v-if="image" :src="image" :alt="altText" :title="itemName">
@@ -76,7 +76,7 @@
                                     template="#vue-quantity-input"
                                     @quantity-change="updateQuantity"
                                     :value="basketItem.quantity"
-                                    :waiting="isInputLocked"
+                                    :waiting="isInputLocked || isCheckoutReadonly"
                                     :min="basketItem.variation.data.variation.minimumOrderQuantity"
                                     :max="basketItem.variation.data.variation.maximumOrderQuantity"
                                     :interval="basketItem.variation.data.variation.intervalOrderQuantity"></quantity-input>
@@ -86,7 +86,7 @@
                             <div class="item-total-price">${ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }</div>
                 
                             <div class="item-remove-container">
-                                <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || waitingForDelete }" @click="deleteItem">
+                                <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
                                     <span>
                                         {{ trans("Ceres::Template.basketDelete") }}
                                         <i v-waiting-animation="waitingForDelete" class="fa fa-trash-o" aria-hidden="true"></i>
