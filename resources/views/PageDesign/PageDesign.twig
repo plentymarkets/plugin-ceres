@@ -289,6 +289,7 @@
                     var scrollTop = window.pageYOffset;
                     var unfixedElementsHeight = 0;
                     var hasUnfixedParent = false;
+                    var zIndex = 100;
 
                     // Position Top for unfixed, absolute elements
                     unfixedElements.forEach(function(unfixed)
@@ -297,12 +298,15 @@
                         unfixed.element.style.top = unfixed.top - scrollTop + 'px';
                     });
 
-                    // Margin-Top for fixed elements after unfixed elements
+                    // Margin-Top for fixed elements after unfixed elements and z-index stacking
                     for (var i = 0; i < headerElementsChildren.length; i++)
                     {
                         var elm = headerElementsChildren[i];
                         var elmHeight = elm.offsetHeight;
                         
+                        elm.style.zIndex = zIndex;
+                        zIndex--;
+
                         if (elm.classList.contains("unfixed"))
                         {
                             unfixedElementsHeight = unfixedElementsHeight + elmHeight;
@@ -311,7 +315,6 @@
                         else if (hasUnfixedParent)
                         {
                             var offset = unfixedElementsHeight - scrollTop;
-                            
 
                             if (offset >= 0)
                             {
