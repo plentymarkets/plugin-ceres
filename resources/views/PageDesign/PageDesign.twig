@@ -241,8 +241,7 @@
     (function($) {
 
         var vueApp = document.getElementById('vue-app');
-        var header = document.getElementById('page-header');
-        var headerParent = document.getElementById('page-header-children');
+        var headerParent = document.getElementById('page-header-parent');
         var headerChildren = headerParent.children;
         var headerLoaded = false;
         var allElementHeights = [];
@@ -251,7 +250,7 @@
         {
             function calculateBodyOffset()
             {
-                if (headerLoaded && header.classList.contains('fixed-top'))
+                if (headerLoaded && headerParent)
                 {
                     var bodyOffset = 0;
                     // Get current header with children
@@ -332,7 +331,7 @@
                 $('.owl-carousel').trigger('refresh.owl.carousel');
             });
 
-            var headerImages = header.querySelectorAll("img");
+            var headerImages = headerParent.querySelectorAll("img");
 
             Promise.all(
                 Array.prototype.slice.call(headerImages).map(function(headerImage)
