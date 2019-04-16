@@ -3,10 +3,10 @@
 {% set appearance = widget.settings.appearance.mobile | default("secondary") %}
 {% set buttonSize = widget.settings.buttonSize.mobile %}
 
-<div class="widget widget-cancel-payment widget-{{ appearance }}">
-    {{ Twig.if("checkout.readOnly or #{ isPreview | json_encode }") }}
-        <a class="btn btn-block btn-{{ appearance }} btn-{{ buttonSize }}" href="{{ Twig.print( "urls.checkout" ) }}?readonlyCheckout=0">
-            <i class="fa fa-times" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.checkoutCancelCheckout") }}
-        </a>
-    {{ Twig.endif() }}
-</div>
+{{ Twig.if("checkout.readOnly or #{ isPreview | json_encode }") }}
+    <div class="widget widget-cancel-payment widget-{{ appearance }}">
+            <a class="btn btn-block btn-{{ appearance }} btn-{{ buttonSize }}" href="{{ Twig.print( "urls.checkout" ) }}?readonlyCheckout=0">
+                <i class="fa fa-times" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.checkoutCancelCheckout") }}
+            </a>
+    </div>
+{{ Twig.endif() }}
