@@ -34,7 +34,8 @@ const state =
                 validate: null
             }
         },
-        newsletterSubscription: {}
+        newsletterSubscription: {},
+        isCheckoutReadonly: false
     };
 
 const mutations =
@@ -149,6 +150,11 @@ const mutations =
         setSubscribeNewsletterShowErr(state, { emailFolder, showError })
         {
             Vue.set(state.validation[`subscribeNewsletter_${emailFolder}`], "showError", showError);
+        },
+
+        setIsCheckoutReadonly(state, isCheckoutReadonly)
+        {
+            state.isCheckoutReadonly = !!isCheckoutReadonly;
         }
     };
 
@@ -161,6 +167,7 @@ const actions =
             commit("setShippingProfileList", checkout.shippingProfileList);
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
+            commit("setIsCheckoutReadonly", checkout.isCheckoutReadonly);
 
             dispatch("setShippingProfileById", checkout.shippingProfileId);
             dispatch("initProfileAvailabilities");
