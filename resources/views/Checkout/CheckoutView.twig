@@ -54,7 +54,7 @@
 
             <checkout
                 v-cloak
-                :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+                :initial-checkout="{{ checkout | json_encode() }}"
                 :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
                 :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
                 :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
@@ -182,6 +182,12 @@
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
                             <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
+
+                            {% if checkout.readOnly %}
+                                <a class="btn btn-block btn-secondary mt-3" href="{{ urls.checkout }}?readonlyCheckout=0">
+                                    <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.checkoutCancelCheckout") }}
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
