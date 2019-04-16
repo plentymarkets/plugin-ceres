@@ -1,0 +1,39 @@
+{# TODO use js or widget config #}
+{% set itemData = config("Ceres.item.data") | split(', ') %}
+
+<div class="widget widget-item-image widget-{{ appearance | default("primary") }}">
+    <graduated-prices template="#vue-graduated-prices"></graduated-prices>
+
+    {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
+        <div class="crossprice" v-if="currentVariation.prices.rrp && currentVariation.prices.rrp.unitPrice.value > 0 && currentVariation.prices.rrp.unitPrice.value > currentVariation.prices.default.unitPrice.value">
+            <del class="text-muted small">
+                ${ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice  }
+            </del>
+        </div>
+    {% endif %}
+
+    <span class="price h1">
+        <span
+            ref="variationTotalPrice"
+            :content="currentVariation.prices.default.price.value"
+            v-text="variationTotalPrice | currency(currentVariation.prices.default.currency)">
+            {# TODO ADD placeholder #}
+        </span>
+        <sup>*</sup>
+        <span :content="currentVariation.prices.default.currency"></span>
+    </span>
+
+    <div class="base-price text-muted my-3" v-if="currentVariation.unit">
+        <div>
+            {{ trans("Ceres::Template.singleItemContent") }}
+            <span>${ currentVariation.unit.content | numberFormat }</span>
+            <span>${ currentVariation.unit.names.name }</span>
+        </div>
+        <div v-if="currentVariation.variation.mayShowUnitPrice">
+            {{ trans("Ceres::Template.singleItemUnitPrice") }}
+            <span class="base-price-value">
+                ${ variationGraduatedPrice.basePrice | specialOffer(currentVariation.prices, "basePrice") }
+            </span>
+        </div>
+    </div>
+</div>
