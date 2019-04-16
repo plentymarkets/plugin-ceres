@@ -110,7 +110,7 @@ Vue.component("address-select", {
         ...Vuex.mapState({
             countryList: state => state.localization.shippingCountries,
             isBasketLoading: state => state.basket.isBasketLoading,
-            isCheckoutReadonly: state => state.checkout.isCheckoutReadonly
+            isCheckoutReadonly: state => state.checkout.readOnly
         })
     },
 

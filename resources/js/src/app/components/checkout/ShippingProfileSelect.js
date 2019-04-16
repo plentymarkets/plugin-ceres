@@ -15,7 +15,7 @@ Vue.component("shipping-profile-select", {
         shippingProfileId: state => state.checkout.shipping.shippingProfileId,
         showError: state => state.checkout.validation.shippingProfile.showError,
         isBasketLoading: state => state.basket.isBasketLoading,
-        isCheckoutReadonly: state => state.checkout.isCheckoutReadonly
+        isCheckoutReadonly: state => state.checkout.readOnly
     }),
 
     /**
