@@ -18134,6 +18134,12 @@ Vue.component("coupon", {
   }, Vuex.mapState({
     redeemedCouponCode: function redeemedCouponCode(state) {
       return state.basket.data.couponCode;
+    },
+    isBasketLoading: function isBasketLoading(state) {
+      return state.basket.isBasketLoading;
+    },
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
     }
   })),
   mounted: function mounted() {
@@ -18338,6 +18344,9 @@ Vue.component("basket-list-item", {
   }, Vuex.mapState({
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
+    },
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
     },
     showNetPrice: function showNetPrice(state) {
       return state.basket.showNetPrices;
@@ -18600,6 +18609,11 @@ Vue.component("checkout", {
         NotificationService.warn(_TranslationService.default.translate("Ceres::Template.addressChangedWarning"));
         this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
       }
+
+      if (this.checkout.readOnly !== checkout.readOnly) {
+        NotificationService.warn(_TranslationService.default.translate("Ceres::Template.checkoutReadonlyChanged"));
+        this.$store.commit("setIsCheckoutReadonly", checkout.readOnly);
+      }
     },
     hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
       if (oldList.length !== newList.length) {
@@ -18738,6 +18752,9 @@ Vue.component("payment-provider-select", {
     },
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
+    },
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
     }
   }),
 
@@ -19085,6 +19102,9 @@ Vue.component("shipping-profile-select", {
     },
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
+    },
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
     }
   }),
 
@@ -19758,11 +19778,14 @@ Vue.component("address-select", {
       return this.optionalAddressFields[countryKey].includes("".concat(addressKey, ".salutation"));
     }
   }, Vuex.mapState({
+    countryList: function countryList(state) {
+      return state.localization.shippingCountries;
+    },
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
     },
-    countryList: function countryList(state) {
-      return state.localization.shippingCountries;
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
     }
   })),
 
@@ -29883,7 +29906,8 @@ var state = {
       validate: null
     }
   },
-  newsletterSubscription: {}
+  newsletterSubscription: {},
+  readOnly: false
 };
 var mutations = {
   setShippingProfile: function setShippingProfile(state, shippingProfileId) {
@@ -29962,6 +29986,9 @@ var mutations = {
     var emailFolder = _ref3.emailFolder,
         showError = _ref3.showError;
     Vue.set(state.validation["subscribeNewsletter_".concat(emailFolder)], "showError", showError);
+  },
+  setIsCheckoutReadonly: function setIsCheckoutReadonly(state, readOnly) {
+    state.readOnly = !!readOnly;
   }
 };
 var actions = {
@@ -29973,6 +30000,7 @@ var actions = {
     commit("setShippingProfileList", checkout.shippingProfileList);
     commit("setMethodOfPaymentList", checkout.paymentDataList);
     commit("setMethodOfPayment", checkout.methodOfPaymentId);
+    commit("setIsCheckoutReadonly", checkout.readOnly);
     dispatch("setShippingProfileById", checkout.shippingProfileId);
     dispatch("initProfileAvailabilities");
   },

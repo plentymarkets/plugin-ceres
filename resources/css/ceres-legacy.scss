@@ -17065,6 +17065,8 @@ html.ie .basket-preview-hover {
 	}
 
 	&.isLoading {
+		cursor: not-allowed;
+
 		&:before {
 			opacity: 0.5;
 			visibility: visible;
