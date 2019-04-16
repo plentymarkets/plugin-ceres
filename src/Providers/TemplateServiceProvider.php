@@ -49,7 +49,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.category.container'            => ['PageDesign.PageDesign',                  GlobalContext::class],
         'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],
         'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],
-        'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],
+        'tpl.checkout'                      => ['Checkout.CheckoutView',                  CheckoutContext::class],
         'tpl.checkout.category'             => ['Checkout.CheckoutCategory',              CheckoutContext::class],
         'tpl.my-account'                    => ['MyAccount.MyAccountView',                GlobalContext::class],
         'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            CategoryContext::class],
