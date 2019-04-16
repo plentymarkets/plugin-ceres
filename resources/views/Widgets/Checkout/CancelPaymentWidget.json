@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::CancelPaymentWidget",
     "label": "Widget.cancelPaymentLabel",
-    "previewImageURL": "",
+    "previewImageURL": "/images/widgets/cancel-payment.svg",
     "type": "checkout",
     "categories": ["checkout"],
     "position": 800,
