@@ -9,7 +9,7 @@
                 <div
                     class="component-loading"
                     :id="'addressMultiSelect' + _uid"
-                    v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
+                    v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'isLoading disabled': isBasketLoading || isCheckoutReadonly}"
                     @click="onDropdownClicked($event)"
                     data-toggle="dropdown"
                     aria-haspopup="true"
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="add-item">
-                    <button href="#" class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down" v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading">
+                    <button href="#" class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down" v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly">
                         <span>{{ trans("Ceres::Template.addressAddAddress") }}</span>
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
                     </button>
