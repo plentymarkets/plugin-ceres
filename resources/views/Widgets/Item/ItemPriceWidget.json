@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::ItemPriceWidget",
     "label": "Widget.itemPriceLabel",
-    "previewImageURL": "/images/widgets/item-image.svg",
+    "previewImageURL": "/images/widgets/item-price.svg",
     "type": "item",
     "categories": ["item"],
     "position": 400,
