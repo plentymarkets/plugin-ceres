@@ -133,12 +133,12 @@ Vue.component("checkout", {
                 this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
             }
 
-            if (this.checkout.isCheckoutReadonly !== checkout.readonlyCheckout)
+            if (this.checkout.readOnly !== checkout.readOnly)
             {
                 NotificationService.warn(
                     TranslationService.translate("Ceres::Template.checkoutReadonlyChanged")
                 );
-                this.$store.commit("setIsCheckoutReadonly", checkout.readonlyCheckout);
+                this.$store.commit("setIsCheckoutReadonly", checkout.readOnly);
             }
         },
 
