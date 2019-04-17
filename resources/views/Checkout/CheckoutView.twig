@@ -184,7 +184,7 @@
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
 
                             {% if checkout.readOnly %}
-                                <a class="btn btn-block btn-secondary mt-3" href="{{ urls.checkout }}?readonlyCheckout=0">
+                                <a v-if="$store.state.checkout.readOnly" class="btn btn-block btn-secondary mt-3" href="{{ urls.checkout }}?readonlyCheckout=0">
                                     <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.checkoutCancelCheckout") }}
                                 </a>
                             {% endif %}
