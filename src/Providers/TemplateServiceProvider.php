@@ -103,18 +103,6 @@ class TemplateServiceProvider extends ServiceProvider
             ]);
         }, self::EVENT_LISTENER_PRIORITY);
 
-        /**
-         * @deprecated this event is not in use and will be removed
-         */
-        $eventDispatcher->listen('init.categories', function (CategoryMap $categoryMap) use (&$config) {
-            $categoryMap->setCategoryMap(array(
-                CategoryKey::HOME => $config->get("Ceres.global.category.home"),
-                CategoryKey::PAGE_NOT_FOUND => $config->get("Ceres.global.category.page_not_found"),
-                CategoryKey::ITEM_NOT_FOUND => $config->get("Ceres.global.category.item_not_found")
-            ));
-
-        }, self::EVENT_LISTENER_PRIORITY);
-
         $eventDispatcher->listen('IO.init.templates', function (Partial $partial){
 
             $partial->set('head', 'Ceres::PageDesign.Partials.Head');
