@@ -50,6 +50,6 @@
                 "tooltipText": "Widget.subscribeNewsletterCheckCustomTextTooltip"
             }
         },
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }

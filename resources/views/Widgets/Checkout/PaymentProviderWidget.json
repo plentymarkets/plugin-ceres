@@ -23,6 +23,6 @@
                 "tooltipText": "Widget.paymentProviderHintTextTooltip"
             }
         },
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }

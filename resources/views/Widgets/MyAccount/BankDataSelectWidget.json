@@ -19,6 +19,6 @@
                 "name": "Widget.myAccountHintTextLabel"
             }
         },
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }

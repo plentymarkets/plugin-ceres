@@ -48,6 +48,6 @@
                 "tooltipText": "Widget.gtcCheckCustomTextTooltip"
             }
         },
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }
