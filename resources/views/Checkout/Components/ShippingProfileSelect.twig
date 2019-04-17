@@ -17,6 +17,9 @@
                     </div><!--
                     --><div class="content">
                         ${ shippingProfile.parcelServiceName } - ${ shippingProfile.parcelServicePresetName }
+                        <div v-if="shippingProfile.maxDeliveryDays">
+                            <small>{{ trans("Ceres::Template.checkoutShippingProfileMaxDeliveryDays", {"days": "${ shippingProfile.maxDeliveryDays }"}) }}</small>
+                        </div>
                         <div>
                             <small>
                                 ${ shippingProfile.shippingAmount | currency }
