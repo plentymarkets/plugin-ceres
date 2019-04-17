@@ -18415,7 +18415,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .top-bar {
   width: 100%;
-  z-index: 1060;
   color: #fff;
   background-color: #4D4F4D;
 }
@@ -18778,7 +18777,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .navbar {
   padding: 0;
-  z-index: 1050;
   background-color: #f7f7f9;
   border-bottom: 1px solid #dcdbd8;
 }
@@ -18786,7 +18784,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .navbar .navbar {
   border-radius: 0;
   padding: 0;
-  z-index: 1050;
   border-bottom: 1px solid #dcdbd8;
 }
 
