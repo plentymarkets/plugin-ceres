@@ -65,8 +65,8 @@
                     <category-item
                         item-data-ref="{{ item.data | json_data }}"
                         :decimal-count="{{ decimalCount }}">
-                        <template slot="BeforePrices">{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
-                        <template slot="AfterPrices">{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
+                        <template #before-prices>{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
+                        <template #after-prices>{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
                     </category-item>
                 </li>
             {% endfor %}

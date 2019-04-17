@@ -38,6 +38,10 @@ Vue.component("create-update-address", {
             {
                 return {};
             }
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
         }
     },
 
@@ -204,7 +208,22 @@ Vue.component("create-update-address", {
 
                             break;
                         }
-
+                    case 4:
+                        {
+                            if (this.addressData.telephone && this.addressData.telephone !== optionType.value)
+                            {
+                                optionType.value = this.addressData.telephone;
+                            }
+                            break;
+                        }
+                    case 6:
+                        {
+                            if (this.addressData.postNumber && this.addressData.postNumber !== optionType.value)
+                            {
+                                optionType.value = this.addressData.postNumber;
+                            }
+                            break;
+                        }
                     case 9:
                         {
                             if (this.addressData.birthday && this.addressData.birthday !== optionType.value)
@@ -213,21 +232,11 @@ Vue.component("create-update-address", {
                             }
                             break;
                         }
-
                     case 11:
                         {
                             if (this.addressData.title && this.addressData.title !== optionType.value)
                             {
                                 optionType.value = this.addressData.title;
-                            }
-                            break;
-                        }
-
-                    case 4:
-                        {
-                            if (this.addressData.telephone && this.addressData.telephone !== optionType.value)
-                            {
-                                optionType.value = this.addressData.telephone;
                             }
                             break;
                         }
@@ -247,6 +256,20 @@ Vue.component("create-update-address", {
         emitInputEvent(event)
         {
             this.$emit("input", event);
+
+            this.checkInputEventForUnmarkFields(event);
+        },
+
+        checkInputEventForUnmarkFields(event)
+        {
+            const genderCondition = event.field === "gender" && event.field.value !== this.addressData.gender;
+            const countryCondition = event.field === "countryId" && event.field.value !== this.addressData.countryId;
+            const pickupCondition = event.field === "showPickupStation" && event.field.value !== this.addressData.showPickupStation;
+
+            if (genderCondition || countryCondition || pickupCondition)
+            {
+                ValidationService.unmarkAllFields(this.$refs.addressForm);
+            }
         }
     }
 });

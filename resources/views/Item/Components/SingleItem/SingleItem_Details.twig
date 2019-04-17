@@ -32,7 +32,7 @@
     <item-bundle :bundle-type="currentVariation.variation.bundleType" :bundle-components="currentVariation.bundleComponents"></item-bundle>
     <!-- /Item Bundle -->
 
-    <slot name="BeforePrice"></slot>
+    <slot name="before-price"></slot>
 
     <div class="row" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
         <order-property-list></order-property-list>
@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <slot name="AfterPrice"></slot>
+    <slot name="after-price"></slot>
 
     <span v-if="currentVariation.variation.availability" :class="'availability badge availability_' + currentVariation.variation.availability.id">
         <span>
@@ -80,7 +80,7 @@
 
     <div class="row my-3">
         <div class="w-100">
-            <slot name="BeforeAddToBasket"></slot>
+            <slot name="before-add-to-basket"></slot>
         </div>
 
         <div class="w-100">
@@ -97,7 +97,7 @@
         </div>
 
         <div class="w-100">
-            <slot name="AfterAddToBasket"></slot>
+            <slot name="after-add-to-basket"></slot>
         </div>
     </div>
 
@@ -110,7 +110,7 @@
     {% endif %}
     <!-- ./ITEM DETAIL -->
 
-    <slot name="AdditionalContentAfterAddToBasket"></slot>
+    <slot name="additional-content-after-add-to-basket"></slot>
 
     <hr>
 
@@ -119,6 +119,6 @@
         <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a>
                         </span>
 
-    <slot name="AdditionalContentAfterVAT"></slot>
+    <slot name="additional-content-after-vat"></slot>
 
 </div>
