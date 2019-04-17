@@ -2,8 +2,6 @@
 
 namespace Ceres\Providers;
 
-use Ceres\Caching\NavigationCacheSettings;
-use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
 use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
@@ -24,7 +22,6 @@ use IO\Helper\CategoryKey;
 use IO\Helper\CategoryMap;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
-use IO\Services\ContentCaching\Services\Container;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Plugin\ServiceProvider;
@@ -119,9 +116,6 @@ class TemplateServiceProvider extends ServiceProvider
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen('IO.init.templates', function (Partial $partial){
-
-            pluginApp(Container::class)->register('Ceres::PageDesign.Partials.Header.NavigationList.twig', NavigationCacheSettings::class);
-            pluginApp(Container::class)->register('Ceres::PageDesign.Partials.Header.SideNavigation.twig', SideNavigationCacheSettings::class);
 
             $partial->set('head', 'Ceres::PageDesign.Partials.Head');
             $partial->set('header', 'Ceres::PageDesign.Partials.Header.Header');
