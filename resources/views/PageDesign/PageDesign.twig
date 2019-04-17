@@ -246,12 +246,13 @@
 
         var vueApp = document.getElementById('vue-app');
         var headerParent = document.getElementById('page-header-parent');
-        var headerChildren = headerParent.children;
         var headerLoaded = false;
         var allElementHeights = [];
 
         if ( !!headerParent )
         {
+            var headerChildren = headerParent.children;
+
             function calculateBodyOffset()
             {
                 if (headerLoaded && headerParent)
