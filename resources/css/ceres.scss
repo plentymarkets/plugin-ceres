@@ -14534,7 +14534,6 @@ html.ie {
 		& > nav.container-max {
 			padding-left:0;
 			padding-right:0;
-		    z-index: 1000;
 		    display: block;
 		    width: 100%;
 		    max-width: 100%;
@@ -14542,11 +14541,6 @@ html.ie {
 		}
 		.breadcrumbs {
 			background: $breadcrumb-bg;
-		    z-index: 1000;
-
-			&.unfixed {
-				z-index: -1;
-			}
 		}
 		.breadcrumb{
 			max-width: 1200px;

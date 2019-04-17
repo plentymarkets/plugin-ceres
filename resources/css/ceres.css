@@ -19753,7 +19753,6 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   .wrapper-main > nav.container-max {
     padding-left: 0;
     padding-right: 0;
-    z-index: 1000;
     display: block;
     width: 100%;
     max-width: 100%;
@@ -19761,10 +19760,6 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   }
   .wrapper-main .breadcrumbs {
     background: #efefef;
-    z-index: 1000;
-  }
-  .wrapper-main .breadcrumbs.unfixed {
-    z-index: -1;
   }
   .wrapper-main .breadcrumb {
     max-width: 1200px;
