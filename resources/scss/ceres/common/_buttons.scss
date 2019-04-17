@@ -126,10 +126,6 @@ button:focus {
 	}
 }
 
-.btn-right {
-	float: right;
-}
-
 .btn-xs-max-width {
 	@include media-breakpoint-down(xs) {
 		width: 100% !important;
