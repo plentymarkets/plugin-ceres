@@ -1,5 +1,3 @@
-//navigation scss
-
 @include media-breakpoint-up(md){
 	.wrapper-main {
 		& > nav.container-max {
@@ -20,5 +18,4 @@
 		    padding: .5rem 15px;
 		}
 	}
-	
 }
