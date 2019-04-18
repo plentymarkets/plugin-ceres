@@ -38,7 +38,7 @@
     {% endfor %}
 </head>
 
-<body>
+<body class="{{ bodyClasses | join(' ') }}">
 
 {{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
 
