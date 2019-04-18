@@ -23,14 +23,6 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
 
-{% set bodyClasses = services.template.getCurrentTemplate() | replace({"tpl.": "page-"}) %}
-
-{% if category is defined %}
-    {% set bodyClasses = "page-category category-" ~ category.id %}
-{% elseif item is defined %}
-    {% set bodyClasses = "page-items item-#{item.documents[0].data.item.id} variation-#{item.documents[0].data.variation.id}" %}
-{% endif %}
-
 {% spaceless %}
 <!DOCTYPE html>
 
@@ -47,7 +39,7 @@
     {% endfor %}
 </head>
 
-<body class="{{ bodyClasses }}">
+<body class="{{ bodyClasses | join(' ') }}">
 
 {{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
 
