@@ -19,5 +19,8 @@ class CategoryContext extends GlobalContext implements ContextInterface
         $this->category = $params['category'];
         
         $this->metaRobots = str_replace('_', ', ', $this->category->details[0]->metaRobots);
+
+        $this->bodyClasses[] = "page-category";
+        $this->bodyClasses[] = "category-".$this->category->id;
     }
 }

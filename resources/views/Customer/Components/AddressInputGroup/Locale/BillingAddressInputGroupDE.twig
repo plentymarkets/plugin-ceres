@@ -6,7 +6,7 @@
             <div
                 class="input-unit"
                 v-validate="isInRequiredFields('de', 'billing_address.salutation')">
-                <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
+                <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" :default-salutation="defaultSalutation" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                 <label :for="'txtSalutation' + _uid">
                     ${ transformTranslation("Ceres::Template.addressSalutation", "de", "billing_address.salutation") }
                 </label>
@@ -19,7 +19,7 @@
     <div class="row">
         <div
             class="col-12 col-sm-6"
-            v-if="isInOptionalFields('de', 'billing_address.salutation') && value.addressSalutation === 2 || isInOptionalFields('de', 'billing_address.name1') && !isInOptionalFields('de', 'billing_address.salutation')">
+            v-if="isInOptionalFields('de', 'billing_address.salutation') && value.gender === 'company' || isInOptionalFields('de', 'billing_address.name1') && !isInOptionalFields('de', 'billing_address.salutation')">
             <div class="input-unit" data-validate="text" data-model="name1">
                 <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)" data-autofocus>
                 <label :for="'txtCompany' + _uid">{{ trans("Ceres::Template.addressCompany") }}*</label>
@@ -28,7 +28,7 @@
 
         <div
             class="col-12 col-sm-6"
-            v-if="(isInOptionalFields('de', 'billing_address.salutation') && value.addressSalutation === 2) || isInOptionalFields('de', 'billing_address.vatNumber')">
+            v-if="(isInOptionalFields('de', 'billing_address.salutation') && value.gender === 'company') || isInOptionalFields('de', 'billing_address.vatNumber')">
             <div
                 class="input-unit"
                 data-model="vatNumber"

@@ -68,17 +68,19 @@
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
             <last-seen-item-list :items-per-page="{{ itemsPerPage }}" :max-items="{{ maxItems }}" v-cloak>
-                <div class="widget-caption bg-appearance widget-item-list-caption mb-3" slot="heading">
-                    {% if headlineStyle == "custom-caption" %}
-                        <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-caption") }}>
-                            {{ headline | raw }}
-                        </div>
-                    {% else %}
-                        <div>
-                            <h2>{{ Twig.print("title") }}</h2>
-                        </div>
-                    {% endif %}
-                </div>
+                <template #heading>
+                    <div class="widget-caption bg-appearance widget-item-list-caption mb-3">
+                        {% if headlineStyle == "custom-caption" %}
+                            <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-caption") }}>
+                                {{ headline | raw }}
+                            </div>
+                        {% else %}
+                            <div>
+                                <h2>{{ Twig.print("title") }}</h2>
+                            </div>
+                        {% endif %}
+                    </div>
+                </template>
             </last-seen-item-list>
         {% else %}
             {# render static item lists #}
@@ -105,17 +107,22 @@
             {{ Twig.if("itemList.documents is not empty") }}
                 <carousel :items-per-page="{{ itemsPerPage }}">
                     {{ Twig.for("item", "itemList.documents") }}
-                        <template slot="items">
+                        <template #items>
                             <category-item
                                 :item-data="{{ Twig.print("item.data | json_encode") }}"
                                 :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}"
                                 :disable-carousel-on-mobile="{{ Twig.print("itemList.documents | length") }} > {{ itemsPerPage }}">
-                                <template slot="BeforePrices">
+                                <template #before-prices>
                                     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.BeforePrices", Twig.var("item.data")])) }}
                                 </template>
-                                <template slot="AfterPrices">
+                                <template #after-prices>
                                     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", Twig.var("item.data")])) }}
                                 </template>
+
+                                <a href="{{ Twig.print("item.data | itemURL") }}" class="small">
+                                    <i class="fa fa-image"></i>
+                                    <span>{{ Twig.print("item.data | itemName") }}</span>
+                                </a>
                             </category-item>
                         </template>
                     {{ Twig.endfor() }}

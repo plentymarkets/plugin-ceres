@@ -10,16 +10,16 @@
         <div class="col-12">
             <carousel :items-per-page="itemsPerPage">
                 <category-item
-                    slot="items"
+                    #items
                     v-for="item in items"
                     :key="item.id"
                     :item-data="item.data"
                     :decimal-count="{{ ceresConfig.item.storeSpecial }}"
                     :disable-carousel-on-mobile="items.length > itemsPerPage">
-                    <template slot="BeforePrices">
+                    <template #before-prices>
                         <div v-html="getContainerContentById(item.id, 'beforePrices')"></div>
                     </template>
-                    <template slot="AfterPrices">
+                    <template #after-prices>
                         <div v-html="getContainerContentById(item.id, 'afterPrices')"></div>
                     </template>
                 </category-item>

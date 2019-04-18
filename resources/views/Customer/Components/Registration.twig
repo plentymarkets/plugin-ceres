@@ -14,7 +14,7 @@
 %}
 
 <script type="x/template" id="vue-registration">
-    <form autocomplete="on">
+    <form class="w-100" autocomplete="on">
         <div class="modal-body">
             <div class="row" :id="'registration' + _uid">
                 <div class="col-sm-12">
@@ -29,15 +29,23 @@
                     <div class="input-unit" :class="{'no-bottom media-xs-d': modalElement}" data-validate="password" ref="passwordInput">
                         <popper v-cloak trigger="focus" placement="left" ref="passwordHint">
                             {% set uid_pwd = uid() %}
-                            <input slot="handle" type="password" name="password" autocomplete="new-password" id="{{ uid_pwd }}" v-model="password">
-                            <div slot="title">
-                                {{ trans("Ceres::Template.regPasswordHintTitle") }}
-                            </div>
-                            <ul slot="content" class="pl-3">
-                                <li>{{ trans("Ceres::Template.regPasswordHintLength") }}</li>
-                                <li>{{ trans("Ceres::Template.regPasswordHintDigit") }}</li>
-                                <li>{{ trans("Ceres::Template.regPasswordHintChar") }}</li>
-                            </ul>
+                            <template #handle>
+                                <input type="password" name="password" autocomplete="new-password" id="{{ uid_pwd }}" v-model="password">
+                            </template>
+
+                            <template #title>
+                                <div>
+                                    {{ trans("Ceres::Template.regPasswordHintTitle") }}
+                                </div>
+                            </template>
+
+                            <template #content>
+                                <ul class="pl-3">
+                                    <li>{{ trans("Ceres::Template.regPasswordHintLength") }}</li>
+                                    <li>{{ trans("Ceres::Template.regPasswordHintDigit") }}</li>
+                                    <li>{{ trans("Ceres::Template.regPasswordHintChar") }}</li>
+                                </ul>
+                            </template>
                         </popper>
 
                         <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.regPassword") }}*</label>
@@ -60,7 +68,8 @@
                         :value="billingAddress"
                         @input="setAddressDataField($event)"
                         :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
-                        :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                        :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+                        default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                     </address-input-group>
                 </div>
             </div>

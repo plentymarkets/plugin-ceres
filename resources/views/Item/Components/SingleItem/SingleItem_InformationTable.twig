@@ -17,7 +17,7 @@
             <a :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="nav-link" data-toggle="tab" href="#assessments-details" role="tab">{{ trans("Ceres::Template.singleItemMoreDetails") }}</a>
         </li>
 
-        <slot name="AddDetailTabs"></slot>
+        <slot name="add-detail-tabs"></slot>
     </ul>
 
     <div class="tab-content">
@@ -131,7 +131,7 @@
             </div>
         </div>
 
-        <slot name="AddDetailTabsContent"></slot>
+        <slot name="add-detail-tabs-content"></slot>
     </div>
 </div>
 <!-- ./ITEM DESCRIPTION -->

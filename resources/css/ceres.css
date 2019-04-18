@@ -18415,7 +18415,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .top-bar {
   width: 100%;
-  z-index: 1060;
   color: #fff;
   background-color: #4D4F4D;
 }
@@ -18778,7 +18777,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .navbar {
   padding: 0;
-  z-index: 1050;
   background-color: #f7f7f9;
   border-bottom: 1px solid #dcdbd8;
 }
@@ -18786,7 +18784,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .navbar .navbar {
   border-radius: 0;
   padding: 0;
-  z-index: 1050;
   border-bottom: 1px solid #dcdbd8;
 }
 
@@ -19753,7 +19750,6 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   .wrapper-main > nav.container-max {
     padding-left: 0;
     padding-right: 0;
-    z-index: 1000;
     display: block;
     width: 100%;
     max-width: 100%;
@@ -19761,10 +19757,6 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   }
   .wrapper-main .breadcrumbs {
     background: #efefef;
-    z-index: 1000;
-  }
-  .wrapper-main .breadcrumbs.unfixed {
-    z-index: -1;
   }
   .wrapper-main .breadcrumb {
     max-width: 1200px;
@@ -22812,18 +22804,42 @@ html.ie .cmp-paginator {
       flex-flow: row wrap;
 }
 
-.product-list category-item {
-  background: #fff;
+category-item {
   display: block;
   height: 145px;
-  margin-bottom: 15px;
   width: 100%;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+category-item a {
+  padding-top: 100%;
+  display: block;
+  color: #7a7f7f;
+}
+
+category-item a:hover {
+  color: #7a7f7f;
+}
+
+category-item a span {
+  padding: .8rem .8rem 74px .8rem;
+  display: block;
+}
+
+category-item .fa {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  right: 0;
+  font-size: 160px;
+  text-align: center;
+  color: #f7f7f9;
 }
 
 @media (min-width: 576px) {
-  .product-list category-item {
+  category-item {
     margin-bottom: 30px;
-    padding-bottom: calc(100% + 100px);
     height: unset;
   }
 }
@@ -23949,6 +23965,7 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   height: 100%;
   width: 18px;
   display: inline-block;
+  margin: 0 .1rem;
   animation: sk-stretchdelay 0.8s infinite ease-in-out;
 }
 
@@ -24150,10 +24167,6 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
 
 .history-pagination {
   margin-top: 15px;
-}
-
-.history-pagination .counter {
-  margin-top: 5px;
 }
 
 .gradient-hr {
@@ -25072,6 +25085,7 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   max-width: 100%;
   -ms-flex: 1;
       flex: 1;
+  max-width: 100%;
 }
 
 .widget-grid .widget-inner-stacked {
@@ -25136,6 +25150,10 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 .checkout .widget-grid > .widget-inner > div {
   background-color: #fff;
   padding: 1rem;
+}
+
+.nav-link.text-appearance.active {
+  color: #495057 !important;
 }
 
 .widget {
