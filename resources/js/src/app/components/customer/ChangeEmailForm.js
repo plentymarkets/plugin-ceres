@@ -1,6 +1,8 @@
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
+import TranslationService from "services/TranslationService";
+
 Vue.component("change-email-form", {
 
     props: {
