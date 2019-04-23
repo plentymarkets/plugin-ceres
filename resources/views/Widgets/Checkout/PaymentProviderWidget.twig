@@ -2,8 +2,10 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Checkout.Components.PaymentProviderSelect") }}
@@ -12,8 +14,8 @@
 {% set hintText = widget.settings.hintText.mobile %}
 
 <div class="widget widget-provider-select widget-{{ widget.settings.appearance.mobile | default("primary") }} 
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
-    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}
             <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutPaymentMethod")) }}</h3>
@@ -26,7 +28,10 @@
 
     {{ Twig.if("overridePaymentList | trim is empty") }}
         <div class="payment-method-select">
-            <payment-provider-select></payment-provider-select>
+            <payment-provider-select
+                {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+            </payment-provider-select>
         </div>
     {{ Twig.else() }}
         {{ Twig.print("overridePaymentList") }}

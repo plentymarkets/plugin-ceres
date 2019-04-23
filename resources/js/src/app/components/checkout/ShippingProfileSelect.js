@@ -3,10 +3,22 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("shipping-profile-select", {
 
-    props: {
-        template: {
+    props:
+    {
+        template:
+        {
             type: String,
             default: "#vue-shipping-profile-select"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -26,7 +38,8 @@ Vue.component("shipping-profile-select", {
         this.$store.commit("setShippingProfileValidator", this.validate);
     },
 
-    methods: {
+    methods:
+    {
         /**
          * Method on shipping profile changed
          */
