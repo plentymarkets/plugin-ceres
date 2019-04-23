@@ -135,10 +135,9 @@ Vue.component("checkout", {
 
             if (this.checkout.readOnly !== checkout.readOnly)
             {
-                NotificationService.warn(
-                    TranslationService.translate("Ceres::Template.checkoutReadonlyChanged")
-                );
                 this.$store.commit("setIsCheckoutReadonly", checkout.readOnly);
+
+                window.location.href = App.urls.checkout;
             }
         },
 
