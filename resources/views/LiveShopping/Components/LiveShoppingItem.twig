@@ -27,9 +27,7 @@
                 </a>
             </template>
 
-            <template>
-
-            </template #item-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1 && isActiveByStock">
+            <template #item-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1 && isActiveByStock">
                 <live-shopping-details :live-shopping-data="currentOffer"
                                     @reload-offer="reloadOffer()"
                                     :display-settings="displaySettings"
