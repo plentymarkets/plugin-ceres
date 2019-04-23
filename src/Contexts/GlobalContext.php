@@ -42,6 +42,7 @@ class GlobalContext implements ContextInterface
     public $splitItemBundle;
     public $templateEvent;
     public $isShopBuilder;
+    public $bodyClasses;
 
     public function init($params)
     {
@@ -105,6 +106,18 @@ class GlobalContext implements ContextInterface
         $this->templateEvent = $templateService->getCurrentTemplate();
 
         $this->isShopBuilder = $shopBuilderRequest->isShopBuilder();
+       
+        $this->bodyClasses = [];
+        $templateClass = str_replace('tpl', 'page', $this->templateEvent);
+        $templateClass = str_replace('.', '-', $templateClass);
+
+        /* page-item is a bootstrap class */
+        if($templateClass === "page-item")
+        {
+            $templateClass = "page-singleitem";
+        }
+
+        $this->bodyClasses[] = $templateClass;
     }
 
     protected function getParam($key, $defaultValue = null)

@@ -8,6 +8,7 @@
     "variation.name",
     "variation.number",
     "variation.availability.names.*",
+    "variation.availability.averageDays",
     "variation.itemId",
     "variation.minimumOrderQuantity",
     "variation.maximumOrderQuantity",

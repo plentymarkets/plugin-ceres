@@ -22582,16 +22582,9 @@ Vue.component("single-item", {
     }
   }), Vuex.mapGetters(["variationTotalPrice", "variationMissingProperties", "variationGroupedProperties", "variationGraduatedPrice"])),
   created: function created() {
-    var _this = this;
-
     this.$store.commit("setVariation", this.itemData);
     this.$store.commit("setVariationList", this.variationListData);
     this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
-    this.$store.watch(function () {
-      return _this.$store.getters.variationTotalPrice;
-    }, function () {
-      $(_this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
-    });
   }
 });
 
@@ -29899,6 +29892,13 @@ var mutations = {
       state.shipping.shippingProfileList = shippingProfileList;
     }
   },
+  setMaxDeliveryDays: function setMaxDeliveryDays(state, maxDeliveryDays) {
+    if ((0, _utils.isDefined)(maxDeliveryDays)) {
+      state.shipping.shippingProfileList.forEach(function (shippingProfile) {
+        shippingProfile.maxDeliveryDays = maxDeliveryDays[shippingProfile.parcelServicePresetId];
+      });
+    }
+  },
   setMethodOfPayment: function setMethodOfPayment(state, methodOfPaymentId) {
     if (methodOfPaymentId) {
       state.payment.methodOfPaymentId = methodOfPaymentId;
@@ -29971,6 +29971,7 @@ var actions = {
     commit("setShippingCountryId", checkout.shippingCountryId);
     commit("setShippingProfile", checkout.shippingProfileId);
     commit("setShippingProfileList", checkout.shippingProfileList);
+    commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
     commit("setMethodOfPaymentList", checkout.paymentDataList);
     commit("setMethodOfPayment", checkout.methodOfPaymentId);
     dispatch("setShippingProfileById", checkout.shippingProfileId);
