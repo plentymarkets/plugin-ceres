@@ -13,6 +13,6 @@
             "defaultValue": "none",
             "options": "@include(optionalAppearance)"
         },
-        "spacing":"@include(spacingMargin)"
+        "spacing":"@include(spacing)"
     }
 }
