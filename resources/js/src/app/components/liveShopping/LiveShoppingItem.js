@@ -22,6 +22,16 @@ Vue.component("live-shopping-item", {
         displaySettings:
         {
             type: Object
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
