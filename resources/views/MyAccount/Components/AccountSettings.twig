@@ -35,19 +35,19 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-unit">
-                                        <input type="email" name="old_email" autocomplete="email" v-model="oldPassword" data-autofocus>
+                                        <input type="email" name="old_email" autocomplete="email" v-model="oldMail" data-autofocus>
                                         <label for="old_email">{{ trans("Ceres::Template.myAccountOldEmail") }}</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-unit">
-                                        <input type="email" name="new_email" v-model="newPassword">
+                                        <input type="email" name="new_email" v-model="newMail">
                                         <label for="new_email">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-unit no-bottom">
-                                        <input type="email" name="confirm_email" v-model="confirmPassword">
+                                        <input type="email" name="confirm_email" v-model="newMail2">
                                         <label for="confirm_email">{{ trans("Ceres::Template.myAccountRepeatEmail") }}</label>
                                     </div>
                                 </div>
