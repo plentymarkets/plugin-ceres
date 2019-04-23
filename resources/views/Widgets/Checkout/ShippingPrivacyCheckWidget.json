@@ -8,6 +8,6 @@
     "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingPrivacyCheckWidget",
     "settings": 
     {
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }

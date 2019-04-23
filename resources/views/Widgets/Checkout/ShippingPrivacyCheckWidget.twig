@@ -7,7 +7,6 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-
 <div class="widget widget-shipping-privacy-check 
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>

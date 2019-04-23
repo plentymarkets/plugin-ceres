@@ -605,27 +605,7 @@
         "settings": {
             "spacing": {
                 "type": "vertical",
-                "options": {
-                    "name": "Widget.widgetSpacing"
-                },
                 "children": {
-                    "customPadding": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomPadding"
-                        }
-                    },
-                    "padding": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customPadding",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    },
                     "customMargin": {
                         "type": "checkbox",
                         "options": {
