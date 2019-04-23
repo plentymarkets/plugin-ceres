@@ -1,15 +1,37 @@
-import TranslationService from "services/TranslationService";
-// import { navigateTo } from "services/UrlService";
-
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
 Vue.component("change-email-form", {
 
+    props: {
+        template: {
+            type: String,
+            default: "#vue-change-email-form"
+        },
+        contactId:
+        {
+            type: Number,
+            required: true
+        },
+        hash:
+        {
+            type: String,
+            required: true
+        },
+        oldMail:
+        {
+            type: String,
+            required: true
+        },
+        newMail:
+        {
+            type: String,
+            required: true
+        }
+    },
     data()
     {
         return {
-            email: "",
             password: "",
             isDisabled: false
         };
@@ -19,54 +41,27 @@ Vue.component("change-email-form", {
         /**
          * Send the login data
          */
-        sendLogin()
+        submit()
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/login", { email: this.email, password: this.password }, { supressNotifications: true })
+            ApiService.put("/rest/io/customer/mail/" + this.contactId, { password: this.password, hash: this.hash })
                 .done(response =>
                 {
-                    ApiService.setToken(response);
-
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.loginSuccessful")
-                    ).closeAfter(10000);
-
-                    // if (this.backlink !== null && this.backlink)
-                    // {
-                    //     location.assign(decodeURIComponent(this.backlink));
-                    // }
-                    // else if (this.hasToForward)
-                    // {
-                    //     location.assign(location.origin);
-                    // }
-                    // else
-                    // {
-                    //     location.reload();
-                    // }
+                        TranslationService.translate("Ceres::Template.myAccountChangeEmailSuccessful")
+                    );
+                    window.location.assign(window.location.origin);
                 })
-                .fail(response =>
+                .fail(() =>
+                {
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.myAccountChangeEmailFailed")
+                    ).closeAfter(10000);
+                })
+                .always(() =>
                 {
                     this.isDisabled = false;
-
-                    switch (response.error.code)
-                    {
-                    case 401:
-                        this.loginFields.addClass("has-login-error");
-
-                        var translationKey = "Ceres::Template.loginFailed";
-
-                        if (response.error.message.length > 0 && response.error.message === "user is blocked")
-                            {
-                            translationKey = "Ceres::Template.loginBlocked";
-                        }
-                        NotificationService.error(
-                                TranslationService.translate(translationKey)
-                            ).closeAfter(10000);
-                        break;
-                    default:
-                        return;
-                    }
                 });
         }
     }
