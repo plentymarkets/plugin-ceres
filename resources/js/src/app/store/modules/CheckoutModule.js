@@ -1,5 +1,5 @@
 import ApiService from "services/ApiService";
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 
 const state =
     {
@@ -58,6 +58,17 @@ const mutations =
             if (Array.isArray(shippingProfileList))
             {
                 state.shipping.shippingProfileList = shippingProfileList;
+            }
+        },
+
+        setMaxDeliveryDays(state, maxDeliveryDays)
+        {
+            if (isDefined(maxDeliveryDays))
+            {
+                state.shipping.shippingProfileList.forEach(shippingProfile =>
+                {
+                    shippingProfile.maxDeliveryDays = maxDeliveryDays[shippingProfile.parcelServicePresetId];
+                });
             }
         },
 
@@ -165,6 +176,7 @@ const actions =
             commit("setShippingCountryId", checkout.shippingCountryId);
             commit("setShippingProfile", checkout.shippingProfileId);
             commit("setShippingProfileList", checkout.shippingProfileList);
+            commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
             commit("setIsCheckoutReadonly", checkout.readOnly);
