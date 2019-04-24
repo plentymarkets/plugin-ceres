@@ -2,17 +2,19 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
 
 {% set hintText = widget.settings.hintText.mobile %}
 
-<div class="widget widget-address widget-{{ widget.settings.appearance.mobile | default('primary') }} 
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
-    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+<div class="widget widget-address widget-{{ widget.settings.appearance.mobile | default('primary') }}
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
     {% if widget.settings.addressType.mobile == "1" %}
         {{ Twig.set("overrideBillingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.BillingAddress"])) }}
@@ -44,7 +46,9 @@
                     :has-to-validate="{{ Twig.print("services.template.isCurrentTemplate('tpl.checkout') | json_encode") }}"
                     :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
                     :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
-                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}">
+                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
+                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
                 </invoice-address-select>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBillingAddress"])) }}
@@ -81,7 +85,9 @@
                 <shipping-address-select
                     :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
                     :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
-                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}">
+                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
+                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
                 </shipping-address-select>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterShippingAddress"])) }}

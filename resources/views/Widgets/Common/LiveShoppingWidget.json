@@ -194,6 +194,6 @@
                 "tooltipText": "Widget.liveShoppingCustomImagePathTooltip"
             }
         },
-        "spacing":"@include(spacingMargin)"
+        "spacing":"@include(spacing)"
     }
 }

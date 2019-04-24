@@ -13,7 +13,6 @@
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
-
         },
         "hintText": {
             "type": "codeEditor",
@@ -23,6 +22,6 @@
                 "tooltipText": "Widget.paymentProviderHintTextTooltip"
             }
         },
-        "spacing":"@include(spacingMargin)"
+        "spacing":"@include(spacing)"
     }
 }

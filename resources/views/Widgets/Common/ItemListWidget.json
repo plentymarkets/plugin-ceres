@@ -242,6 +242,6 @@
                 ]
             }
         },
-        "spacing":"@include(spacingMargin)"
+        "spacing":"@include(spacing)"
     }
 }

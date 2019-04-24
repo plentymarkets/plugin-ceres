@@ -20,6 +20,16 @@ Vue.component("last-seen-item-list", {
         {
             type: Number,
             default: 4
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
