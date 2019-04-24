@@ -18377,6 +18377,14 @@ Vue.component("payment-provider-select", {
     template: {
       type: String,
       default: "#vue-payment-provider-select"
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
     }
   },
   computed: Vuex.mapState({
@@ -18457,6 +18465,14 @@ Vue.component("place-order", {
       validator: function validator(value) {
         return ["sm", "lg"].indexOf(value) !== -1;
       }
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
     }
   },
   data: function data() {
@@ -18470,6 +18486,10 @@ Vue.component("place-order", {
 
       if ((0, _utils.isDefined)(this.buttonSize)) {
         classes.push("btn-".concat(this.buttonSize));
+      }
+
+      if ((0, _utils.isDefined)(this.paddingClasses)) {
+        classes.push(this.paddingClasses.split(" "));
       }
 
       return classes;
@@ -18724,6 +18744,14 @@ Vue.component("shipping-profile-select", {
     template: {
       type: String,
       default: "#vue-shipping-profile-select"
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
     }
   },
   computed: Vuex.mapState({
@@ -19045,6 +19073,14 @@ Vue.component("last-seen-item-list", {
     maxItems: {
       type: Number,
       default: 4
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
     }
   },
   computed: Vuex.mapState({
@@ -19360,6 +19396,14 @@ Vue.component("address-select", {
     defaultSalutation: {
       type: String,
       default: "male"
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
     }
   },
   data: function data() {
@@ -19970,7 +20014,7 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("invoice-address-select", {
   delimiters: ["${", "}"],
-  template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\">\n        </address-select>\n    ",
+  template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\">\n        </address-select>\n    ",
   props: {
     optionalAddressFields: {
       type: Object,
@@ -19991,6 +20035,14 @@ Vue.component("invoice-address-select", {
     hasToValidate: {
       type: Boolean,
       default: false
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
     }
   },
   computed: Vuex.mapState({
@@ -20070,7 +20122,7 @@ Vue.component("invoice-address-select", {
 
 Vue.component("shipping-address-select", {
   delimiters: ["${", "}"],
-  template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            @address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\">\n        </address-select>\n    ",
+  template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            @address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\">\n        </address-select>\n    ",
   props: {
     optionalAddressFields: {
       type: Object,
@@ -20087,6 +20139,14 @@ Vue.component("shipping-address-select", {
     defaultSalutation: {
       type: String,
       default: "male"
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
     }
   },
   computed: Vuex.mapState({
@@ -22741,6 +22801,14 @@ Vue.component("category-item", {
     },
     disableCarouselOnMobile: {
       type: Boolean
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
     }
   },
   jsonDataFields: ["itemDataRef"],
@@ -23579,6 +23647,14 @@ Vue.component("live-shopping-item", {
     },
     displaySettings: {
       type: Object
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
     }
   },
   computed: _objectSpread({
