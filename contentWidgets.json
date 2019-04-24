@@ -1884,6 +1884,7 @@
         "label": "Widget.linkListLabel",
         "previewImageURL": "/images/widgets/link-list.svg",
         "type": "static",
+        "deprecated": true,
         "categories": [
             "text"
         ],
