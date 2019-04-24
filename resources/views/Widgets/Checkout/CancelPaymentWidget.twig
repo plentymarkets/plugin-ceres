@@ -5,8 +5,8 @@
 
 {{ Twig.if("checkout.readOnly or #{ isPreview | json_encode }") }}
     <div class="widget widget-cancel-payment widget-{{ appearance }}">
-            <a class="btn btn-block btn-{{ appearance }} btn-{{ buttonSize }}" href="{{ Twig.print( "urls.checkout" ) }}?readonlyCheckout=0">
-                <i class="fa fa-times" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.checkoutCancelCheckout") }}
-            </a>
+        <a class="btn btn-block btn-outline-{{ appearance }} btn-{{ buttonSize }}" href="{{ Twig.print( "urls.checkout" ) }}?readonlyCheckout=0">
+            <i class="fa fa-times" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.checkoutCancelCheckout") }}
+        </a>
     </div>
 {{ Twig.endif() }}
