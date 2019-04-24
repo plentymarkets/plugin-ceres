@@ -22012,9 +22012,6 @@ Vue.component("order-property-list-item", {
       } else if (this.inputType === "selection") {
         if ((0, _utils.isNullOrUndefined)(value) || value.length <= 0) {
           value = null;
-        } else {
-          var name = this.property.selectionValues[value].name;
-          value = name;
         }
       }
 
