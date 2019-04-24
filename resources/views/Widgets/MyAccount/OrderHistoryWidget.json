@@ -59,6 +59,7 @@
                 "name": "Widget.orderHistoryAllowReturnLabel",
                 "tooltip": "Widget.orderHistoryAllowReturnTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

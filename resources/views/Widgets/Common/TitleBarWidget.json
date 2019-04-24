@@ -12,6 +12,16 @@
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
-        }
+        },
+        "text": {
+            "type": "text",
+            "required": true,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.titleBarTextLabel",
+                "tooltipText": "Widget.titleBarTextTooltip"
+            }
+        },
+        "spacing":"@include(spacing)"
     }
 }

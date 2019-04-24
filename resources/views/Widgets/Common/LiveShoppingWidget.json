@@ -193,6 +193,7 @@
                 "name": "Widget.liveShoppingCustomImagePathLabel",
                 "tooltipText": "Widget.liveShoppingCustomImagePathTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }
