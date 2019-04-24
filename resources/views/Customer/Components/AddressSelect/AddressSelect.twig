@@ -16,9 +16,9 @@
                     aria-expanded="false"
                     data-boundary="window">
 
-                    <div class="item-inner" :class="[{'error': showError}, paddingClasses]" :style="paddingInlineStyles">
+                    <div class="item-inner" :class="{'error': showError}">
                         <span v-if="selectedAddress && selectedAddress.id == -99">
-                            <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
+                            <p class="text-muted small font-italic pt-3 m-0" :class="paddingClasses" :style="paddingInlineStyles">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                         </span>
                         <span v-else class="item-content">
                             <div v-if="!isAddressListEmpty && selectedAddress">
@@ -47,7 +47,7 @@
                                 :value="address.id"
                                 :checked="selectedAddress && selectedAddress.id === address.id"
                                 @change="onAddressChanged(address)">
-                            <label :for="'addressSelectItem' + _uid + address.id" class="item-inner" :class="paddingClasses" :style="paddingInlineStyles">
+                            <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
                             <span v-if="address.id == -99">
                                 <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                             </span>
