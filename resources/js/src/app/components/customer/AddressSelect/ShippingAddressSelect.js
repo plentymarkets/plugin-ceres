@@ -10,28 +10,44 @@ Vue.component("shipping-address-select", {
             address-type="2"
             :optional-address-fields="optionalAddressFields"
             :required-address-fields="requiredAddressFields"
-            :default-salutation="defaultSalutation">
+            :default-salutation="defaultSalutation"
+            :padding-classes="paddingClasses"
+            :padding-inline-styles="paddingInlineStyles">
         </address-select>
     `,
 
-    props: {
-        optionalAddressFields: {
+    props:
+    {
+        optionalAddressFields:
+        {
             type: Object,
             default: () =>
             {
                 return {};
             }
         },
-        requiredAddressFields: {
+        requiredAddressFields:
+        {
             type: Object,
             default: () =>
             {
                 return {};
             }
         },
-        defaultSalutation: {
+        defaultSalutation:
+        {
             type: String,
             default: "male"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 

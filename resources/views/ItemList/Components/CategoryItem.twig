@@ -14,7 +14,7 @@
 
 <script type="x/template" id="vue-category-item">
     <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
-        <div class="thumb-inner">
+        <div class="thumb-inner" :class="paddingClasses" :style="paddingInlineStyles">
 
             {{ AddToBasket.printVueComponent( "item", true, false, { ":has-price": "item | hasItemDefaultPrice" } ) }}
 

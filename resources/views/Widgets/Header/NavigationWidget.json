@@ -108,6 +108,7 @@
                 "name": "Widget.navigationCompanyLogoUrlLabel",
                 "tooltipText": "Widget.navigationCompanyLogoUrlTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }

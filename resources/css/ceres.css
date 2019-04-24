@@ -16463,17 +16463,9 @@ button:focus {
   min-width: 15rem;
 }
 
-.btn.btn-m-r {
-  margin-right: 10px;
-}
-
 .btn.btn-block > .fa {
   line-height: inherit;
   margin-top: 0;
-}
-
-.btn-right {
-  float: right;
 }
 
 @media (max-width: 575.98px) {
@@ -20123,12 +20115,7 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
 
 .cmp-address-list .items > div:first-child {
   margin-bottom: 0;
-}
-
-@media (max-width: 575.98px) {
-  .cmp-address-list .items > div:first-child {
-    min-height: 115px;
-  }
+  min-height: 115px;
 }
 
 .cmp-address-list .dropdown-toggle:after {
@@ -20245,6 +20232,7 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   .add-item {
     top: 0;
     right: 0;
+    bottom: 0;
   }
   .add-item button {
     min-width: auto !important;
@@ -24278,11 +24266,15 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   padding: 1rem;
 }
 
-.card-body .add-item {
-  bottom: 0;
-}
-
 @media (max-width: 575.98px) {
+  .card-body .add-item .item-edit {
+    height: 45%;
+    margin-bottom: 0 !important;
+  }
+  .card-body .add-item span.item-edit:nth-of-type(2) {
+    bottom: 0;
+    position: absolute;
+  }
   .card-body .add-item button {
     height: 100%;
   }

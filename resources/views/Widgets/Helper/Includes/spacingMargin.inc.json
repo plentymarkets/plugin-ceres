@@ -1,0 +1,19 @@
+{
+    "type": "vertical",
+    "children": {
+        "customMargin": {
+            "type": "checkbox",
+            "options": {
+                "name": "Widget.widgetCustomMargin"
+            }
+        },
+        "margin": {
+            "type": "spacing",
+            "isVisible": "!!spacing.customMargin",
+            "options": {
+                "units": ["px", "rem"],
+                "direction": "all"
+            }
+        }
+    }
+}

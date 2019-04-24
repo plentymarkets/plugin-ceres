@@ -7,6 +7,7 @@ use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
 use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
+use Ceres\Contexts\ChangeMailContext;
 use Ceres\Contexts\CheckoutContext;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
@@ -58,6 +59,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.register'                      => ['Customer.Register',                      GlobalContext::class],
         'tpl.guest'                         => ['Customer.Guest',                         GlobalContext::class],
         'tpl.password-reset'                => ['Customer.ResetPassword',                 PasswordResetContext::class],
+        'tpl.change-mail'                   => ['Customer.ChangeMail',                    ChangeMailContext::class],
         'tpl.contact'                       => ['Customer.Contact',                       GlobalContext::class],
         'tpl.search'                        => ['Category.Item.CategoryItem',             ItemSearchContext::class],
         'tpl.wish-list'                     => ['WishList.WishListView',                  ItemWishListContext::class],

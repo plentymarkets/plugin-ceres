@@ -8,17 +8,21 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("address-select", {
 
-    props: {
-        template: {
+    props:
+    {
+        template:
+        {
             type: String,
             default: "#vue-address-select"
         },
-        addressType: {
+        addressType:
+        {
             type: String,
             required: true
         },
         showError: Boolean,
-        optionalAddressFields: {
+        optionalAddressFields:
+        {
             type: Object,
             default: () =>
             {
@@ -28,16 +32,28 @@ Vue.component("address-select", {
                 };
             }
         },
-        requiredAddressFields: {
+        requiredAddressFields:
+        {
             type: Object,
             default: () =>
             {
                 return {};
             }
         },
-        defaultSalutation: {
+        defaultSalutation:
+        {
             type: String,
             default: "male"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
