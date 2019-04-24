@@ -6,9 +6,14 @@
 {% set showPrivacyPolicyCheckbox = widget.settings.showPrivacyPolicyCheckbox.mobile | json_encode %}
 {% set emailFolder = widget.settings.emailFolder.mobile | json_encode %}
 
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
 {{ Twig.component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 
-<div class="widget widget-newsletter widget-{{ appearance | default("primary") }}">
+<div class="widget widget-newsletter widget-{{ appearance | default("primary") }} {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
         <div class="row">
             <div class="col-xs-12" {{ WidgetHelper.makeEditable("content", TOOLBAR_LAYOUT.ALL, isPreview) }}>

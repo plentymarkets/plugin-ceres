@@ -35,6 +35,7 @@
                 "name": "Widget.newsletterEmailFolderLabel",
                 "tooltipText": "Widget.newsletterEmailFolderTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

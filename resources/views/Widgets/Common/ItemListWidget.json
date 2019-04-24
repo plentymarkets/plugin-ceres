@@ -241,6 +241,7 @@
                     }
                 ]
             }
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }

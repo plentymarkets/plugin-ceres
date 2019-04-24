@@ -47,6 +47,7 @@
                 "name": "Widget.gtcCheckCustomTextLabel",
                 "tooltipText": "Widget.gtcCheckCustomTextTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }
