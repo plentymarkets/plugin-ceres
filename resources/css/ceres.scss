@@ -11076,20 +11076,12 @@ button:focus {
 		min-width: 15rem;
 	}
 
-	&.btn-m-r {
-		margin-right: 10px;
-	}
-
 	&.btn-block {
 		> .fa {
 			line-height: inherit;
 			margin-top: 0;
 		}
 	}
-}
-
-.btn-right {
-	float: right;
 }
 
 .btn-xs-max-width {
@@ -14901,10 +14893,7 @@ html.ie {
 		&>div:first-child{
 			@extend .card;
 			margin-bottom: 0;
-
-			@include media-breakpoint-down(xs) {
-				min-height: 115px;
-			}
+			min-height: 115px;
 		}
 	}
 
@@ -15039,6 +15028,7 @@ html.ie {
 	{
 		top: 0;
 		right: 0;
+		bottom: 0;
 
 		& button {
 			min-width: auto !important;
@@ -19335,9 +19325,16 @@ html.ios {
     padding: 1rem;
 
     .add-item {
-        bottom: 0;
-
         @include media-breakpoint-down(xs) {
+            .item-edit {
+                height: 45%;
+                margin-bottom: 0 !important;
+            }
+            span.item-edit:nth-of-type(2) {
+                bottom: 0;
+                position: absolute;
+            }
+
             button {
                 height: 100%;
             }
