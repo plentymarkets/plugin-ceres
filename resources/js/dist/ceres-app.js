@@ -18264,8 +18264,8 @@ Vue.component("checkout", {
       }
 
       if (this.checkout.readOnly !== checkout.readOnly) {
-        NotificationService.warn(_TranslationService.default.translate("Ceres::Template.checkoutReadonlyChanged"));
         this.$store.commit("setIsCheckoutReadonly", checkout.readOnly);
+        window.location.href = App.urls.checkout;
       }
     },
     hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
