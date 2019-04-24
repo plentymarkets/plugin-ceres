@@ -10,7 +10,7 @@
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "secondary",
+            "defaultValue": "primary",
             "options": "@include(appearance)"
         },
         "buttonSize": {
@@ -38,6 +38,7 @@
                     }
                 ]
             }
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }

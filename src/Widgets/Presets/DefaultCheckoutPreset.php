@@ -44,6 +44,7 @@ class DefaultCheckoutPreset implements ContentPreset
         $this->createStickyContainer();
         $this->createBasketTotalsWidget();
         $this->createPlaceOrderWidget();
+        $this->createCancelPaymentWidget();
         
         $this->createAsteriks();
 
@@ -115,6 +116,13 @@ class DefaultCheckoutPreset implements ContentPreset
     {
         $this->stickyContainer->createChild('sticky','Ceres::PlaceOrderWidget')
             ->withSetting('buttonSize', '');
+    }
+
+    private function createCancelPaymentWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::CancelPaymentWidget')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('buttonSize', 'md');
     }
     
     private function createShippingPrivacyCheckWidget()
