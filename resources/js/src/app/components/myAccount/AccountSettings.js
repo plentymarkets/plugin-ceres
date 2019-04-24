@@ -26,7 +26,7 @@ Vue.component("account-settings", {
             oldPassword         : "",
             newPassword         : "",
             confirmPassword     : "",
-            oldEmail            : "",
+            oldMail             : "",
             newMail             : "",
             newMail2            : "",
             accountSettingsClass: "",
@@ -63,7 +63,7 @@ Vue.component("account-settings", {
 
         isValidEmail()
         {
-            return this.oldEmail.length > 0 && this.newMail.length > 0 && (this.newMail === this.newMail2);
+            return this.oldMail.length > 0 && this.newMail.length > 0 && (this.newMail === this.newMail2);
         },
         isValidPassword()
         {
@@ -118,7 +118,7 @@ Vue.component("account-settings", {
         {
             if (this.isValidEmail)
             {
-                APIService.post("/rest/io/customer/mail", { oldMail: this.oldMail, email: this.newMail, email2: this.newMail2 })
+                APIService.post("/rest/io/customer/mail", { oldMail: this.oldMail, newMail: this.newMail, newMail2: this.newMail2 })
                     .done(response =>
                     {
                         this.clearFieldsAndClose();
@@ -134,7 +134,6 @@ Vue.component("account-settings", {
             }
         },
 
-
         /**
          * Clear the password fields in the modal
          */
@@ -143,7 +142,7 @@ Vue.component("account-settings", {
             this.oldPassword = "";
             this.newPassword = "";
             this.confirmPassword = "";
-            this.oldEmail = "";
+            this.oldMail = "";
             this.newMail = "";
             this.newMail2 = "";
         },

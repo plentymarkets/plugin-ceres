@@ -16,16 +16,16 @@
                     <span>{{ trans("Ceres::Template.newsletterOptOutInfoText") }}</span>
 
                     <div class="input-unit mt-3">
-                        <label for="email-input-id">Email</label>
+                        <label for="email-input-id">{{ trans("Ceres::Template.newsletterEmail") }}</label>
                         <input type="email" name="email" autocomplete="email" class="form-control" id="email-input-id">
                     </div>
 
                     <hr>
 
                     <span class="input-group-btn">
-                        <button type="submit" v-waiting-animation-infinite class="btn btn-primary btn-right btn-medium btn-xs-max-width">
+                        <button type="submit" v-waiting-animation-infinite class="btn btn-primary float-right btn-medium btn-xs-max-width">
                             <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                            {{ trans("Ceres::Template.newsletterUnsubscribeButtonLabel") }}
+                            <span>{{ trans("Ceres::Template.newsletterUnsubscribeButtonLabel") }}</span>
                         </button>
                     </span>
                 </div>
