@@ -24,6 +24,16 @@ Vue.component("place-order", {
             {
                 return ["sm", "lg"].indexOf(value) !== -1;
             }
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -43,6 +53,11 @@ Vue.component("place-order", {
             if (isDefined(this.buttonSize))
             {
                 classes.push(`btn-${this.buttonSize}`);
+            }
+
+            if (isDefined(this.paddingClasses))
+            {
+                classes.push(this.paddingClasses.split(" "));
             }
 
             return classes;

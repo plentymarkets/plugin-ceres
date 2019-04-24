@@ -1,4 +1,9 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {% set isFixed              = widget.settings.isFixed.mobile %}
 {% set navigationStyle      = widget.settings.navigationStyle.mobile %}
@@ -16,7 +21,8 @@
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
 <nav class="widget-fw navbar{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
-    <div class="container-max">
+    <div class="container-max {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0">
             <div class="brand-wrapper">
                 <a class="navbar-brand" href="{{ Twig.print('urls.home') }}">

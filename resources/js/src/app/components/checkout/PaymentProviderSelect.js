@@ -8,6 +8,16 @@ Vue.component("payment-provider-select", {
         {
             type: String,
             default: "#vue-payment-provider-select"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 

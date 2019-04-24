@@ -16463,17 +16463,9 @@ button:focus {
   min-width: 15rem;
 }
 
-.btn.btn-m-r {
-  margin-right: 10px;
-}
-
 .btn.btn-block > .fa {
   line-height: inherit;
   margin-top: 0;
-}
-
-.btn-right {
-  float: right;
 }
 
 @media (max-width: 575.98px) {
@@ -18415,7 +18407,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .top-bar {
   width: 100%;
-  z-index: 1060;
   color: #fff;
   background-color: #4D4F4D;
 }
@@ -18778,7 +18769,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 
 .navbar {
   padding: 0;
-  z-index: 1050;
   background-color: #f7f7f9;
   border-bottom: 1px solid #dcdbd8;
 }
@@ -18786,7 +18776,6 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
 .navbar .navbar {
   border-radius: 0;
   padding: 0;
-  z-index: 1050;
   border-bottom: 1px solid #dcdbd8;
 }
 
@@ -19753,7 +19742,6 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   .wrapper-main > nav.container-max {
     padding-left: 0;
     padding-right: 0;
-    z-index: 1000;
     display: block;
     width: 100%;
     max-width: 100%;
@@ -19761,10 +19749,6 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   }
   .wrapper-main .breadcrumbs {
     background: #efefef;
-    z-index: 1000;
-  }
-  .wrapper-main .breadcrumbs.unfixed {
-    z-index: -1;
   }
   .wrapper-main .breadcrumb {
     max-width: 1200px;
@@ -20131,12 +20115,7 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
 
 .cmp-address-list .items > div:first-child {
   margin-bottom: 0;
-}
-
-@media (max-width: 575.98px) {
-  .cmp-address-list .items > div:first-child {
-    min-height: 115px;
-  }
+  min-height: 115px;
 }
 
 .cmp-address-list .dropdown-toggle:after {
@@ -20253,6 +20232,7 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   .add-item {
     top: 0;
     right: 0;
+    bottom: 0;
   }
   .add-item button {
     min-width: auto !important;
@@ -24177,10 +24157,6 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   margin-top: 15px;
 }
 
-.history-pagination .counter {
-  margin-top: 5px;
-}
-
 .gradient-hr {
   border: 0;
   height: 1px;
@@ -24286,11 +24262,15 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   padding: 1rem;
 }
 
-.card-body .add-item {
-  bottom: 0;
-}
-
 @media (max-width: 575.98px) {
+  .card-body .add-item .item-edit {
+    height: 45%;
+    margin-bottom: 0 !important;
+  }
+  .card-body .add-item span.item-edit:nth-of-type(2) {
+    bottom: 0;
+    position: absolute;
+  }
   .card-body .add-item button {
     height: 100%;
   }
