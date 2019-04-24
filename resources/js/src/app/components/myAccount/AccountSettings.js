@@ -26,8 +26,12 @@ Vue.component("account-settings", {
             oldPassword         : "",
             newPassword         : "",
             confirmPassword     : "",
+            oldMail             : "",
+            newMail             : "",
+            newMail2            : "",
             accountSettingsClass: "",
-            accountSettingsModal: {}
+            accountEmailModal: {},
+            accountPasswordModal: {}
         };
     },
 
@@ -38,21 +42,30 @@ Vue.component("account-settings", {
     {
         this.$nextTick(() =>
         {
-            this.accountSettingsModal = ModalService.findModal(this.$refs.accountSettingsModal);
+            this.accountEmailModal = ModalService.findModal(this.$refs.accountEmailModal);
+            this.accountPasswordModal = ModalService.findModal(this.$refs.accountPasswordModal);
         });
     },
 
     computed: {
         /**
-         * Check whether the passwords match
+         * Check whether the data matches
          * @returns {boolean}
          */
+        matchEmail()
+        {
+            return this.newMail2.length <= 0 || this.newMail === this.newMail2;
+        },
         matchPassword()
         {
             return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
         },
 
-        isValid()
+        isValidEmail()
+        {
+            return this.oldMail.length > 0 && this.newMail.length > 0 && (this.newMail === this.newMail2);
+        },
+        isValidPassword()
         {
             return this.oldPassword.length > 0 && this.newPassword.length > 0 && (this.newPassword === this.confirmPassword);
         }
@@ -61,19 +74,27 @@ Vue.component("account-settings", {
     methods: {
 
         /**
-         * Open the account settings modal
+         * Open the change mail modal
          */
-        showChangeAccountSettings: function()
+        showChangeAccountEmail: function()
         {
-            this.accountSettingsModal.show();
+            this.accountEmailModal.show();
+        },
+
+        /**
+         * Open the change password modal
+         */
+        showChangeAccountPassword: function()
+        {
+            this.accountPasswordModal.show();
         },
 
         /**
          * Save the new password
          */
-        saveAccountSettings: function()
+        saveAccountPassword: function()
         {
-            if (this.isValid)
+            if (this.isValidPassword)
             {
                 APIService.post("/rest/io/customer/password", { oldPassword: this.oldPassword, password: this.newPassword, password2: this.confirmPassword })
                     .done(response =>
@@ -90,6 +111,34 @@ Vue.component("account-settings", {
                     });
             }
         },
+        /**
+         * Save the new email
+         */
+        saveAccountEmail: function()
+        {
+            if (this.isValidEmail)
+            {
+                APIService.post("/rest/io/customer/mail", { oldMail: this.oldMail, newMail: this.newMail, newMail2: this.newMail2 })
+                    .done(response =>
+                    {
+                        this.clearFieldsAndClose();
+                        NotificationService.success(
+                            TranslationService.translate("Ceres::Template.myAccountChangeEmailConfirmationSent")
+                        ).closeAfter(3000);
+
+                    }).fail((response, status) =>
+                    {
+                        let message = TranslationService.translate("Ceres::Template.myAccountChangeEmailFailed");
+
+                        if (status === 400)
+                        {
+                            message = TranslationService.translate("Ceres::Template.regError");
+                        }
+
+                        NotificationService.error(message).closeAfter(5000);
+                    });
+            }
+        },
 
         /**
          * Clear the password fields in the modal
@@ -99,6 +148,9 @@ Vue.component("account-settings", {
             this.oldPassword = "";
             this.newPassword = "";
             this.confirmPassword = "";
+            this.oldMail = "";
+            this.newMail = "";
+            this.newMail2 = "";
         },
 
         /**
@@ -106,7 +158,8 @@ Vue.component("account-settings", {
          */
         clearFieldsAndClose: function()
         {
-            this.accountSettingsModal.hide();
+            this.accountEmailModal.hide();
+            this.accountPasswordModal.hide();
             this.clearFields();
         }
     }

@@ -13,10 +13,7 @@
 		&>div:first-child{
 			@extend .card;
 			margin-bottom: 0;
-
-			@include media-breakpoint-down(xs) {
-				min-height: 115px;
-			}
+			min-height: 115px;
 		}
 	}
 
@@ -138,6 +135,7 @@
 	{
 		top: 0;
 		right: 0;
+		bottom: 0;
 
 		& button {
 			min-width: auto !important;
