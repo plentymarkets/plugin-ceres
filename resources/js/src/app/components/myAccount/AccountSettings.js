@@ -123,13 +123,19 @@ Vue.component("account-settings", {
                     {
                         this.clearFieldsAndClose();
                         NotificationService.success(
-                            TranslationService.translate("Ceres::Template.myAccountChangeEmailSuccessful")
+                            TranslationService.translate("Ceres::Template.myAccountChangeEmailConfirmationSent")
                         ).closeAfter(3000);
-                    }).fail(response =>
+
+                    }).fail((response, status) =>
                     {
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.myAccountChangeEmailFailed")
-                        ).closeAfter(5000);
+                        let message = TranslationService.translate("Ceres::Template.myAccountChangeEmailFailed");
+
+                        if (status === 400)
+                        {
+                            message = TranslationService.translate("Ceres::Template.regError");
+                        }
+
+                        NotificationService.error(message).closeAfter(5000);
                     });
             }
         },
