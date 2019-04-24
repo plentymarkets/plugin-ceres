@@ -12,8 +12,8 @@
 <div class="widget widget-bank-details widget-{{ appearance | default("primary") }}">
     <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}
-            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountSettings")) }}</h3>
-            <p><em>{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</em></p>
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountBankDetails")) }}</h3>
+            <p><em>{{ Twig.trans("Ceres::Template.myAccountChangePaymentInformation") }}</em></p>
         {% else %}
             {{ hintText | raw }}
         {% endif %}
