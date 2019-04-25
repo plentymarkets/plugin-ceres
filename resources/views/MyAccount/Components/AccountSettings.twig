@@ -35,12 +35,6 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-unit">
-                                        <input type="email" name="oldEmail" autocomplete="email" v-model="oldMail" data-autofocus>
-                                        <label for="oldEmail">{{ trans("Ceres::Template.myAccountOldEmail") }}</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="input-unit">
                                         <input type="email" name="newMail" autocomplete="off" v-model="newMail">
                                         <label for="newMail">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
                                     </div>
@@ -63,7 +57,7 @@
                                 <i class="fa fa-times" aria-hidden="true"></i> 
                                 <span>{{ trans("Ceres::Template.myAccountCancel") }}</span>
                             </button>
-                            <button type="button" class="btn btn-primary btn-medium" @click="saveAccountEmail" :class="{'disabled': !isValidEmail}">
+                            <button type="button" class="btn btn-primary btn-medium" @click="saveAccountEmail" :class="{'disabled': !isValidEmail || isLoading}">
                                 <i class="fa fa-check" aria-hidden="true"></i> 
                                 <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
                             </button>
@@ -115,7 +109,7 @@
                                 <i class="fa fa-times" aria-hidden="true"></i> 
                                 <span>{{ trans("Ceres::Template.myAccountCancel") }}</span>
                             </button>
-                            <button type="button" class="btn btn-primary btn-medium" @click="saveAccountPassword" :class="{'disabled': !isValidPassword}">
+                            <button type="button" class="btn btn-primary btn-medium" @click="saveAccountPassword" :class="{'disabled': !isValidPassword || isLoading}">
                                 <i class="fa fa-check" aria-hidden="true"></i> 
                                 <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
                             </button>

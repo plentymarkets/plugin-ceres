@@ -7,18 +7,13 @@
                 <span>{{ trans("Ceres::Template.myAccountChangeEmailInfoText") }}</span>
 
                 <div class="input-unit mt-3">
-                    <label :for="'old-mail' + _uid">{{ trans("Ceres::Template.myAccountOldEmail") }}</label>
-                    <input type="email" name="email" class="form-control" :id="'old-mail' + _uid" :value="oldMail" readonly>
-                </div>
-
-                <div class="input-unit mt-3">
                     <label :for="'new-mail' + _uid">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
-                    <input type="email" name="email" class="form-control" :id="'new-mail' + _uid" :value="newMail" readonly>
+                    <input type="email" name="email" class="form-control disabled" :id="'new-mail' + _uid" :value="newMail" readonly>
                 </div>
 
                 <div class="input-unit">
                     <label :for="'password' + _uid">{{ trans("Ceres::Template.loginPassword") }}</label>
-                    <input type="password" name="password" autocomplete="current-password" class="form-control" :id="'password' + _uid" v-model="password">
+                    <input type="password" name="password" autocomplete="off" class="form-control" :id="'password' + _uid" v-model="password">
                 </div>
 
                 <hr>
