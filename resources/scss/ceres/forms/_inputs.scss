@@ -145,6 +145,11 @@ $border-width: 1px;
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
+        &.disabled,
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     i
