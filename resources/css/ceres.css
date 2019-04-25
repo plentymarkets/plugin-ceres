@@ -18212,6 +18212,12 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.input-unit label.disabled, .input-unit label:disabled,
+.input-unit .input-unit-label.disabled,
+.input-unit .input-unit-label:disabled {
+  cursor: not-allowed;
+}
+
 .input-unit i {
   font-style: normal;
   font-weight: bold;
