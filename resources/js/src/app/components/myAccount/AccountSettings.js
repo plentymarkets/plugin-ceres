@@ -23,10 +23,10 @@ Vue.component("account-settings", {
     data()
     {
         return {
+            isLoading           : false,
             oldPassword         : "",
             newPassword         : "",
             confirmPassword     : "",
-            oldMail             : "",
             newMail             : "",
             newMail2            : "",
             accountSettingsClass: "",
@@ -63,7 +63,7 @@ Vue.component("account-settings", {
 
         isValidEmail()
         {
-            return this.oldMail.length > 0 && this.newMail.length > 0 && (this.newMail === this.newMail2);
+            return this.newMail.length > 0 && (this.newMail === this.newMail2) && this.newMail !== this.userData.email;
         },
         isValidPassword()
         {
@@ -96,6 +96,7 @@ Vue.component("account-settings", {
         {
             if (this.isValidPassword)
             {
+                this.isLoading = true;
                 APIService.post("/rest/io/customer/password", { oldPassword: this.oldPassword, password: this.newPassword, password2: this.confirmPassword })
                     .done(response =>
                     {
@@ -108,6 +109,10 @@ Vue.component("account-settings", {
                         NotificationService.error(
                             TranslationService.translate("Ceres::Template.myAccountChangePasswordFailed")
                         ).closeAfter(5000);
+                    })
+                    .always(() =>
+                    {
+                        this.isLoading = false;
                     });
             }
         },
@@ -118,7 +123,8 @@ Vue.component("account-settings", {
         {
             if (this.isValidEmail)
             {
-                APIService.post("/rest/io/customer/mail", { oldMail: this.oldMail, newMail: this.newMail, newMail2: this.newMail2 })
+                this.isLoading = true;
+                APIService.post("/rest/io/customer/mail", { newMail: this.newMail, newMail2: this.newMail2 })
                     .done(response =>
                     {
                         this.clearFieldsAndClose();
@@ -136,6 +142,10 @@ Vue.component("account-settings", {
                         }
 
                         NotificationService.error(message).closeAfter(5000);
+                    })
+                    .always(() =>
+                    {
+                        this.isLoading = false;
                     });
             }
         },
@@ -148,7 +158,6 @@ Vue.component("account-settings", {
             this.oldPassword = "";
             this.newPassword = "";
             this.confirmPassword = "";
-            this.oldMail = "";
             this.newMail = "";
             this.newMail2 = "";
         },

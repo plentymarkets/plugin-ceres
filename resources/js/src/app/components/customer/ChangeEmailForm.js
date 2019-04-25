@@ -20,11 +20,6 @@ Vue.component("change-email-form", {
             type: String,
             required: true
         },
-        oldMail:
-        {
-            type: String,
-            required: true
-        },
         newMail:
         {
             type: String,
