@@ -19,7 +19,7 @@ try {
     }
 } catch(e) {
   var CustomEvent = function(event, params) {
-    var evt, origPrevent; 
+    var evt, origPrevent;
     params = params || {
       bubbles: false,
       cancelable: false,
