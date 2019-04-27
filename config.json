@@ -1441,24 +1441,6 @@
                         "defaultValue": "false"
                     }
                 },
-                "contact.opening_times": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.contactOpeningTimesLabel",
-                    "options": {
-                        "defaultValue": "Montag - Freitag, 00:00 - 24:00"
-                    }
-                },
-                "contact.en.opening_times": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.contactEnOpeningTimesLabel",
-                    "options": {
-                        "defaultValue": "Monday - Friday, 00:00 - 24:00"
-                    }
-                },
                 "contact.show_data": {
                     "type": "multiCheckBox",
                     "required": false,
