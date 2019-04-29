@@ -8,7 +8,8 @@ const state =
             isPostOfficeAvailable: false,
             selectedShippingProfile: null,
             shippingProfileId: null,
-            shippingProfileList: []
+            shippingProfileList: [],
+            maxDeliveryDays: null
         },
         payment: {
             methodOfPaymentId: null,
@@ -63,13 +64,7 @@ const mutations =
 
         setMaxDeliveryDays(state, maxDeliveryDays)
         {
-            if (isDefined(maxDeliveryDays))
-            {
-                state.shipping.shippingProfileList.forEach(shippingProfile =>
-                {
-                    shippingProfile.maxDeliveryDays = maxDeliveryDays[shippingProfile.parcelServicePresetId];
-                });
-            }
+            state.shipping.maxDeliveryDays = maxDeliveryDays;
         },
 
         setMethodOfPayment(state, methodOfPaymentId)
