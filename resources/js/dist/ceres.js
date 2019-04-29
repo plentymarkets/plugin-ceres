@@ -18134,6 +18134,12 @@ Vue.component("coupon", {
   }, Vuex.mapState({
     redeemedCouponCode: function redeemedCouponCode(state) {
       return state.basket.data.couponCode;
+    },
+    isBasketLoading: function isBasketLoading(state) {
+      return state.basket.isBasketLoading;
+    },
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
     }
   })),
   mounted: function mounted() {
@@ -18339,6 +18345,9 @@ Vue.component("basket-list-item", {
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
     },
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
+    },
     showNetPrice: function showNetPrice(state) {
       return state.basket.showNetPrices;
     }
@@ -18486,6 +18495,8 @@ Vue.component("accept-gtc-check", {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
+var _UrlService = require("../../services/UrlService");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -18544,6 +18555,7 @@ Vue.component("checkout", {
       addressList: this.deliveryAddressList
     });
     this.addEventHandler();
+    (0, _UrlService.removeUrlParam)("readonlyCheckout");
   },
   methods: {
     addEventHandler: function addEventHandler() {
@@ -18599,6 +18611,11 @@ Vue.component("checkout", {
       if (this.deliveryAddressId !== responseDeliveryAddressId) {
         NotificationService.warn(_TranslationService.default.translate("Ceres::Template.addressChangedWarning"));
         this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
+      }
+
+      if (this.checkout.readOnly !== checkout.readOnly) {
+        this.$store.commit("setIsCheckoutReadonly", checkout.readOnly);
+        window.location.href = App.urls.checkout;
       }
     },
     hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
@@ -18688,7 +18705,7 @@ Vue.component("checkout", {
   }
 });
 
-},{"services/ApiService":265,"services/NotificationService":269,"services/TranslationService":270}],142:[function(require,module,exports){
+},{"../../services/UrlService":271,"services/ApiService":265,"services/NotificationService":269,"services/TranslationService":270}],142:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-wish-input", {
@@ -18746,6 +18763,9 @@ Vue.component("payment-provider-select", {
     },
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
+    },
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
     }
   }),
 
@@ -19113,6 +19133,9 @@ Vue.component("shipping-profile-select", {
     },
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
+    },
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
     }
   }),
 
@@ -19802,11 +19825,14 @@ Vue.component("address-select", {
       return this.optionalAddressFields[countryKey].includes("".concat(addressKey, ".salutation"));
     }
   }, Vuex.mapState({
+    countryList: function countryList(state) {
+      return state.localization.shippingCountries;
+    },
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
     },
-    countryList: function countryList(state) {
-      return state.localization.shippingCountries;
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
     }
   })),
 
@@ -30061,7 +30087,8 @@ var state = {
       validate: null
     }
   },
-  newsletterSubscription: {}
+  newsletterSubscription: {},
+  readOnly: false
 };
 var mutations = {
   setShippingProfile: function setShippingProfile(state, shippingProfileId) {
@@ -30147,6 +30174,9 @@ var mutations = {
     var emailFolder = _ref3.emailFolder,
         showError = _ref3.showError;
     Vue.set(state.validation["subscribeNewsletter_".concat(emailFolder)], "showError", showError);
+  },
+  setIsCheckoutReadonly: function setIsCheckoutReadonly(state, readOnly) {
+    state.readOnly = !!readOnly;
   }
 };
 var actions = {
@@ -30159,6 +30189,7 @@ var actions = {
     commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
     commit("setMethodOfPaymentList", checkout.paymentDataList);
     commit("setMethodOfPayment", checkout.methodOfPaymentId);
+    commit("setIsCheckoutReadonly", checkout.readOnly);
     dispatch("setShippingProfileById", checkout.shippingProfileId);
     dispatch("initProfileAvailabilities");
   },

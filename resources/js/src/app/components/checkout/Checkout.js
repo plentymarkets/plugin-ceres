@@ -2,6 +2,7 @@ const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
 import TranslationService from "services/TranslationService";
+import { removeUrlParam } from "../../services/UrlService";
 
 Vue.component("checkout", {
 
@@ -50,6 +51,8 @@ Vue.component("checkout", {
         this.$store.dispatch("initDeliveryAddress", { id: this.selectedDeliveryAddress, addressList: this.deliveryAddressList });
 
         this.addEventHandler();
+
+        removeUrlParam("readonlyCheckout");
     },
 
     methods:
@@ -131,6 +134,13 @@ Vue.component("checkout", {
                     TranslationService.translate("Ceres::Template.addressChangedWarning")
                 );
                 this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
+            }
+
+            if (this.checkout.readOnly !== checkout.readOnly)
+            {
+                this.$store.commit("setIsCheckoutReadonly", checkout.readOnly);
+
+                window.location.href = App.urls.checkout;
             }
         },
 

@@ -34,7 +34,8 @@ const state =
                 validate: null
             }
         },
-        newsletterSubscription: {}
+        newsletterSubscription: {},
+        readOnly: false
     };
 
 const mutations =
@@ -160,6 +161,11 @@ const mutations =
         setSubscribeNewsletterShowErr(state, { emailFolder, showError })
         {
             Vue.set(state.validation[`subscribeNewsletter_${emailFolder}`], "showError", showError);
+        },
+
+        setIsCheckoutReadonly(state, readOnly)
+        {
+            state.readOnly = !!readOnly;
         }
     };
 
@@ -173,6 +179,7 @@ const actions =
             commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
+            commit("setIsCheckoutReadonly", checkout.readOnly);
 
             dispatch("setShippingProfileById", checkout.shippingProfileId);
             dispatch("initProfileAvailabilities");
