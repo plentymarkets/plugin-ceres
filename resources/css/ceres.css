@@ -23923,20 +23923,6 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   margin-right: 15px;
 }
 
-.single-rightside {
-  margin-top: 1rem;
-}
-
-@media (min-width: 768px) {
-  .single-rightside {
-    margin-top: 0;
-    position: absolute;
-    left: 58.33333%;
-    top: 0;
-    bottom: 0;
-  }
-}
-
 .loading .loading-animation-frame {
   display: block;
 }
