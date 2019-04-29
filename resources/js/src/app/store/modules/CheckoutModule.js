@@ -1,5 +1,5 @@
 import ApiService from "services/ApiService";
-import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 
 const state =
     {
