@@ -1,0 +1,10 @@
+<script type="x/template" id="vue-order-property-value">
+    <span v-if="property.type === 'file'">
+        <a :href="property.value | fileUploadPath" target="_blank">
+            <i class="fa fa-external-link" aria-hidden="true"></i>
+            ${ property.value | fileName }
+        </a>
+    </span>
+    <span v-else-if="property.type === 'selection'"> ${ getSelectionValue(property.value) }</span>
+    <span v-else-if="property.type.length > 0">${ property.value }</span>
+</script>
