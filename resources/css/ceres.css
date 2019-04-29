@@ -22044,6 +22044,10 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   animation: fa-spin 1s infinite linear;
 }
 
+.component-loading.isLoading {
+  cursor: not-allowed;
+}
+
 .component-loading.isLoading:before {
   opacity: 0.5;
   visibility: visible;

@@ -463,6 +463,11 @@
             "description"   : "Add content, e.g. one or multiple custom address fields, at the bottom of the address form."
         },
         {
+            "key"           : "Ceres::Checkout.Headline",
+            "name"          : "Checkout: Override headline",
+            "description"   : "Override the default headline in the checkout."
+        },
+        {
             "key"           : "OrderConfirmation.Override",
             "name"          : "Order confirmation: Override order confirmation",
             "description"   : "Override the complete order confirmation page.",
