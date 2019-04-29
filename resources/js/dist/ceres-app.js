@@ -18148,6 +18148,8 @@ Vue.component("accept-gtc-check", {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
+var _UrlService = require("../../services/UrlService");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -18206,6 +18208,7 @@ Vue.component("checkout", {
       addressList: this.deliveryAddressList
     });
     this.addEventHandler();
+    (0, _UrlService.removeUrlParam)("readonlyCheckout");
   },
   methods: {
     addEventHandler: function addEventHandler() {
@@ -18355,7 +18358,7 @@ Vue.component("checkout", {
   }
 });
 
-},{"services/ApiService":265,"services/NotificationService":269,"services/TranslationService":270}],142:[function(require,module,exports){
+},{"../../services/UrlService":271,"services/ApiService":265,"services/NotificationService":269,"services/TranslationService":270}],142:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-wish-input", {
