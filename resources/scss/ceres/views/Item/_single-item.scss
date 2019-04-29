@@ -19,7 +19,6 @@
     }
 
     .title{
-        //font-size: 2rem;
         line-height: 1.2;
     }
 
@@ -254,22 +253,5 @@
 
     .quantity-input-container {
         margin-right: 15px;
-    }
-}
-
-.single-rightside
-{
-    margin-top: 1rem;
-}
-
-@include media-breakpoint-up(md)
-{
-    .single-rightside
-    {
-        margin-top: 0;
-        position: absolute;
-        left: (7/12)*100%;
-        top: 0;
-        bottom: 0;
     }
 }
