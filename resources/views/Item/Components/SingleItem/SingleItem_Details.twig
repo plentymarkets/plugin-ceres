@@ -18,7 +18,7 @@
     <div class="mb-5">
         <span class="articlenumber small text-muted">
             <b>{{ trans("Ceres::Template.singleItemNumber") }}</b>
-            <span>${ currentVariation.variation.number }</span>
+            <span>&nbsp;${ currentVariation.variation.number }</span>
         </span>
     </div>
 
@@ -59,8 +59,8 @@
     <div class="base-price text-muted my-3" v-if="currentVariation.unit">
         <div>
             {{ trans("Ceres::Template.singleItemContent") }}
-            <span>${ currentVariation.unit.content | numberFormat }</span>
-            <span>${ currentVariation.unit.names.name }</span>
+            ${ currentVariation.unit.content | numberFormat }
+            ${ currentVariation.unit.names.name }
         </div>
         <div v-if="currentVariation.variation.mayShowUnitPrice">
             {{ trans("Ceres::Template.singleItemUnitPrice") }}
