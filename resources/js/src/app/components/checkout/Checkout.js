@@ -1,5 +1,6 @@
 const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
+const _isEqual = require("lodash/isEqual");
 
 import TranslationService from "services/TranslationService";
 
@@ -131,6 +132,11 @@ Vue.component("checkout", {
                     TranslationService.translate("Ceres::Template.addressChangedWarning")
                 );
                 this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
+            }
+
+            if (!_isEqual(this.checkout.shipping.maxDeliveryDays, checkout.maxDeliveryDays))
+            {
+                this.$store.commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
             }
         },
 
