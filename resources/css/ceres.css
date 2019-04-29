@@ -18212,6 +18212,12 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.input-unit label.disabled, .input-unit label:disabled,
+.input-unit .input-unit-label.disabled,
+.input-unit .input-unit-label:disabled {
+  cursor: not-allowed;
+}
+
 .input-unit i {
   font-style: normal;
   font-weight: bold;
@@ -24276,6 +24282,10 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   }
 }
 
+.widget-account-settings .card, .widget-account-settings .cmp-address-list .items > div:first-child, .cmp-address-list .widget-account-settings .items > div:first-child {
+  min-height: 115px;
+}
+
 .widget-provider-select.widget-primary input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #008ebd;
 }
@@ -25045,7 +25055,6 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 
 .widget-title-bar .widget-inner {
   padding: 1rem 1.5rem;
-  text-align: center;
   word-break: break-word;
 }
 

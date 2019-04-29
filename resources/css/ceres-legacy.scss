@@ -12748,6 +12748,11 @@ $border-width: 1px;
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
+        &.disabled,
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     i
@@ -19342,6 +19347,13 @@ html.ios {
     }
 }
 
+.widget-account-settings {
+    .card {
+        min-height: 115px;
+    }
+}
+
+
 // Widgets
 @mixin widget-bg-variant($color)
 {
@@ -20062,7 +20074,6 @@ html.ie {
     .widget-inner
     {
         padding: 1rem 1.5rem;
-        text-align: center;
         word-break: break-word;
     }
 

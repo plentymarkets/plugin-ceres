@@ -20546,10 +20546,6 @@ Vue.component("change-email-form", {
       type: String,
       required: true
     },
-    oldMail: {
-      type: String,
-      required: true
-    },
     newMail: {
       type: String,
       required: true
@@ -22359,9 +22355,6 @@ Vue.component("order-property-list-item", {
       } else if (this.inputType === "selection") {
         if ((0, _utils.isNullOrUndefined)(value) || value.length <= 0) {
           value = null;
-        } else {
-          var name = this.property.selectionValues[value].name;
-          value = name;
         }
       }
 
@@ -24131,10 +24124,10 @@ Vue.component("account-settings", {
   },
   data: function data() {
     return {
+      isLoading: false,
       oldPassword: "",
       newPassword: "",
       confirmPassword: "",
-      oldMail: "",
       newMail: "",
       newMail2: "",
       accountSettingsClass: "",
@@ -24166,7 +24159,7 @@ Vue.component("account-settings", {
       return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
     },
     isValidEmail: function isValidEmail() {
-      return this.oldMail.length > 0 && this.newMail.length > 0 && this.newMail === this.newMail2;
+      return this.newMail.length > 0 && this.newMail === this.newMail2 && this.newMail !== this.userData.email;
     },
     isValidPassword: function isValidPassword() {
       return this.oldPassword.length > 0 && this.newPassword.length > 0 && this.newPassword === this.confirmPassword;
@@ -24194,6 +24187,7 @@ Vue.component("account-settings", {
       var _this2 = this;
 
       if (this.isValidPassword) {
+        this.isLoading = true;
         APIService.post("/rest/io/customer/password", {
           oldPassword: this.oldPassword,
           password: this.newPassword,
@@ -24204,6 +24198,8 @@ Vue.component("account-settings", {
           NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountChangePasswordSuccessful")).closeAfter(3000);
         }).fail(function (response) {
           NotificationService.error(_TranslationService.default.translate("Ceres::Template.myAccountChangePasswordFailed")).closeAfter(5000);
+        }).always(function () {
+          _this2.isLoading = false;
         });
       }
     },
@@ -24215,8 +24211,8 @@ Vue.component("account-settings", {
       var _this3 = this;
 
       if (this.isValidEmail) {
+        this.isLoading = true;
         APIService.post("/rest/io/customer/mail", {
-          oldMail: this.oldMail,
           newMail: this.newMail,
           newMail2: this.newMail2
         }).done(function (response) {
@@ -24231,6 +24227,8 @@ Vue.component("account-settings", {
           }
 
           NotificationService.error(message).closeAfter(5000);
+        }).always(function () {
+          _this3.isLoading = false;
         });
       }
     },
@@ -24242,7 +24240,6 @@ Vue.component("account-settings", {
       this.oldPassword = "";
       this.newPassword = "";
       this.confirmPassword = "";
-      this.oldMail = "";
       this.newMail = "";
       this.newMail2 = "";
     },
