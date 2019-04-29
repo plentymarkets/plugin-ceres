@@ -19347,6 +19347,13 @@ html.ios {
     }
 }
 
+.widget-account-settings {
+    .card {
+        min-height: 115px;
+    }
+}
+
+
 // Widgets
 @mixin widget-bg-variant($color)
 {

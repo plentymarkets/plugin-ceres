@@ -24282,6 +24282,10 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   }
 }
 
+.widget-account-settings .card, .widget-account-settings .cmp-address-list .items > div:first-child, .cmp-address-list .widget-account-settings .items > div:first-child {
+  min-height: 115px;
+}
+
 .widget-provider-select.widget-primary input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #008ebd;
 }
