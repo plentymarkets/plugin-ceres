@@ -2,6 +2,7 @@ const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
 import TranslationService from "services/TranslationService";
+import { removeUrlParam } from "../../services/UrlService";
 
 Vue.component("checkout", {
 
@@ -50,6 +51,8 @@ Vue.component("checkout", {
         this.$store.dispatch("initDeliveryAddress", { id: this.selectedDeliveryAddress, addressList: this.deliveryAddressList });
 
         this.addEventHandler();
+
+        removeUrlParam("readonlyCheckout");
     },
 
     methods:
