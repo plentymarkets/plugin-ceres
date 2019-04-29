@@ -18212,6 +18212,12 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.input-unit label.disabled, .input-unit label:disabled,
+.input-unit .input-unit-label.disabled,
+.input-unit .input-unit-label:disabled {
+  cursor: not-allowed;
+}
+
 .input-unit i {
   font-style: normal;
   font-weight: bold;
@@ -22038,6 +22044,10 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   animation: fa-spin 1s infinite linear;
 }
 
+.component-loading.isLoading {
+  cursor: not-allowed;
+}
+
 .component-loading.isLoading:before {
   opacity: 0.5;
   visibility: visible;
@@ -23913,20 +23923,6 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   margin-right: 15px;
 }
 
-.single-rightside {
-  margin-top: 1rem;
-}
-
-@media (min-width: 768px) {
-  .single-rightside {
-    margin-top: 0;
-    position: absolute;
-    left: 58.33333%;
-    top: 0;
-    bottom: 0;
-  }
-}
-
 .loading .loading-animation-frame {
   display: block;
 }
@@ -24274,6 +24270,10 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   .card-body .add-item button {
     height: 100%;
   }
+}
+
+.widget-account-settings .card, .widget-account-settings .cmp-address-list .items > div:first-child, .cmp-address-list .widget-account-settings .items > div:first-child {
+  min-height: 115px;
 }
 
 .widget-provider-select.widget-primary input:checked + .provider-select-label {
@@ -25045,7 +25045,6 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 
 .widget-title-bar .widget-inner {
   padding: 1rem 1.5rem;
-  text-align: center;
   word-break: break-word;
 }
 

@@ -17,7 +17,6 @@ class ChangeMailContext extends GlobalContext implements ContextInterface
 
         $this->hash = $this->getParam( 'hash');
         $this->contactId = $this->getParam( 'contactId');
-        $this->oldMail = $this->getParam('oldMail');
         $this->newMail = $this->getParam('newMail');
 
     }

@@ -12748,6 +12748,11 @@ $border-width: 1px;
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
+        &.disabled,
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     i
@@ -17043,6 +17048,8 @@ html.ie .basket-preview-hover {
 	}
 
 	&.isLoading {
+		cursor: not-allowed;
+
 		&:before {
 			opacity: 0.5;
 			visibility: visible;
@@ -18733,7 +18740,6 @@ html.ios {
     }
 
     .title{
-        //font-size: 2rem;
         line-height: 1.2;
     }
 
@@ -18983,23 +18989,6 @@ html.ios {
 
     .quantity-input-container {
         margin-right: 15px;
-    }
-}
-
-.single-rightside
-{
-    margin-top: 1rem;
-}
-
-@include media-breakpoint-up(md)
-{
-    .single-rightside
-    {
-        margin-top: 0;
-        position: absolute;
-        left: (7/12)*100%;
-        top: 0;
-        bottom: 0;
     }
 }
 
@@ -19341,6 +19330,13 @@ html.ios {
         }
     }
 }
+
+.widget-account-settings {
+    .card {
+        min-height: 115px;
+    }
+}
+
 
 // Widgets
 @mixin widget-bg-variant($color)
@@ -20062,7 +20058,6 @@ html.ie {
     .widget-inner
     {
         padding: 1rem 1.5rem;
-        text-align: center;
         word-break: break-word;
     }
 

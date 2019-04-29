@@ -2,8 +2,6 @@
 
 namespace Ceres\Providers;
 
-use Ceres\Caching\NavigationCacheSettings;
-use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
 use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
@@ -25,7 +23,6 @@ use IO\Helper\CategoryKey;
 use IO\Helper\CategoryMap;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
-use IO\Services\ContentCaching\Services\Container;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Plugin\ServiceProvider;
@@ -50,7 +47,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.category.container'            => ['PageDesign.PageDesign',                  GlobalContext::class],
         'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],
         'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],
-        'tpl.checkout'                      => ['Checkout.CheckoutView',                  GlobalContext::class],
+        'tpl.checkout'                      => ['Checkout.CheckoutView',                  CheckoutContext::class],
         'tpl.checkout.category'             => ['Checkout.CheckoutCategory',              CheckoutContext::class],
         'tpl.my-account'                    => ['MyAccount.MyAccountView',                GlobalContext::class],
         'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            CategoryContext::class],
@@ -108,22 +105,7 @@ class TemplateServiceProvider extends ServiceProvider
             ]);
         }, self::EVENT_LISTENER_PRIORITY);
 
-        /**
-         * @deprecated this event is not in use and will be removed
-         */
-        $eventDispatcher->listen('init.categories', function (CategoryMap $categoryMap) use (&$config) {
-            $categoryMap->setCategoryMap(array(
-                CategoryKey::HOME => $config->get("Ceres.global.category.home"),
-                CategoryKey::PAGE_NOT_FOUND => $config->get("Ceres.global.category.page_not_found"),
-                CategoryKey::ITEM_NOT_FOUND => $config->get("Ceres.global.category.item_not_found")
-            ));
-
-        }, self::EVENT_LISTENER_PRIORITY);
-
         $eventDispatcher->listen('IO.init.templates', function (Partial $partial){
-
-            pluginApp(Container::class)->register('Ceres::PageDesign.Partials.Header.NavigationList.twig', NavigationCacheSettings::class);
-            pluginApp(Container::class)->register('Ceres::PageDesign.Partials.Header.SideNavigation.twig', SideNavigationCacheSettings::class);
 
             $partial->set('head', 'Ceres::PageDesign.Partials.Head');
             $partial->set('header', 'Ceres::PageDesign.Partials.Header.Header');
