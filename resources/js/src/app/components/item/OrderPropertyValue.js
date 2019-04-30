@@ -19,12 +19,12 @@ Vue.component("order-property-value", {
     {
         valueLabel()
         {
-            const propertyId = parseInt(this.property.propertyId);
-            const basketItemId = parseInt(this.property.basketItemId);
-            const basketItem = this.basketItems.find(basketItem => basketItem.id === basketItemId);
-
             if (this.property.type === "selection")
             {
+                const propertyId = parseInt(this.property.propertyId);
+                const basketItemId = parseInt(this.property.basketItemId);
+                const basketItem = this.basketItems.find(basketItem => basketItem.id === basketItemId);
+
                 if (isDefined(basketItem))
                 {
                     const properties = basketItem.variation.data.properties;
