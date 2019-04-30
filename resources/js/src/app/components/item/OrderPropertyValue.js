@@ -1,3 +1,5 @@
+import { isDefined } from "../../helper/utils";
+
 Vue.component("order-property-value", {
     props:
     {
@@ -15,26 +17,37 @@ Vue.component("order-property-value", {
 
     computed:
     {
-        selectionValue()
+        valueLabel()
         {
+            const propertyId = parseInt(this.property.propertyId);
+            const basketItemId = parseInt(this.property.basketItemId);
+            const basketItem = this.basketItems.find(basketItem => basketItem.id === basketItemId);
+
             if (this.property.type === "selection")
             {
-                // const basketItem = this.$store.basket.items.find(basketItem => basketItem.id === parseInt(this.property.basketItemId));
+                if (isDefined(basketItem))
+                {
+                    const properties = basketItem.variation.data.properties;
+                    const property = properties.find(property => property.property.id === propertyId);
 
-                // basketItem.variation.data.variationProperties
-                // {"basketItemId":"113","propertyId":"1","type":"selection","name":"Select (Webshop)","value":"2"}
+                    if (isDefined(property))
+                    {
+                        return property.property.selectionValues[this.property.value].name;
+                    }
+                }
+            }
+            // exclude properties of type 'none' (checkboxes)
+            else if (isDefined(this.property.type) && this.property.type.length)
+            {
+                return this.property.value;
             }
 
             return null;
-        }
-    },
+        },
 
-    methods:
-    {
-        getSelectionValue()
-        {
-
-        }
+        ...Vuex.mapState({
+            basketItems: state => state.basket.items
+        })
     }
 });
 

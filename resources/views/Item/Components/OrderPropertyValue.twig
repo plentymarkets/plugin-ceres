@@ -5,6 +5,6 @@
             ${ property.value | fileName }
         </a>
     </span>
-    <span v-else-if="property.type === 'selection'"> ${ getSelectionValue(property.value) }</span>
-    <span v-else-if="property.type.length > 0">${ property.value }</span>
+
+    <span v-else>${ valueLabel }</span>
 </script>
