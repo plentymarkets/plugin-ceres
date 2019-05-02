@@ -9,6 +9,6 @@
 
 <div class="widget widget-text widget-{{ appearance | default('primary') }}{% if hasSpacing %} m-0{% endif %}">
     <div class="widget-inner bg-appearance{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
-        {{ text | raw }}
+        {{ WidgetHelper.editableTwig(isPreview, text | raw) }}
     </div>
 </div>
