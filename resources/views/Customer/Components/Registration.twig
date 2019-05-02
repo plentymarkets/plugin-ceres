@@ -14,7 +14,7 @@
 %}
 
 <script type="x/template" id="vue-registration">
-    <form class="w-100" autocomplete="on">
+    <form class="w-100" autocomplete="on" @submit.prevent="validateRegistration()">
         <div class="modal-body">
             <div class="row" :id="'registration' + _uid">
                 <div class="col-sm-12">
@@ -77,7 +77,7 @@
         <div class="modal-footer">
             {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
 
-            <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-medium float-right">
+            <button :disabled="isDisabled" class="btn btn-primary btn-medium float-right">
                 <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i> 
                 {{ trans("Ceres::Template.regRegister") }}
             </button>
