@@ -53,7 +53,7 @@
 
                             <div class="item-small-prices">
                                 <div v-for="attribute in basketItem.variation.data.attributes">
-                                    <strong>${ attribute.attribute.names.name }:</strong>
+                                    <strong>${ attribute.attribute.names.name }: </strong>
                                     <span>${ attribute.value.names.name }</span>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                 <div class="item-small-prices text-muted">
                                     <template v-for="propertyGroup in transformedVariationProperties">
                                         <div v-for="property in propertyGroup.properties">
-                                            <strong v-if="propertyGroup.name">${ propertyGroup.name }:</strong>
+                                            <strong v-if="propertyGroup.name">${ propertyGroup.name }: </strong>
                                             <span>${ property.names.name }</span>
                                         </div>
                                     </template>
