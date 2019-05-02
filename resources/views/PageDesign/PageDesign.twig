@@ -7,7 +7,6 @@
 {{ component( "Ceres::Customer.Components.Registration" ) }}
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
-{{ component( "Ceres::Category.Components.CategoryBreadcrumbs" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
 
 {# TODO: remove if shop builder pages can be rebuild by migrations #}
@@ -23,6 +22,7 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
 
+{% spaceless %}
 <!DOCTYPE html>
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
@@ -38,7 +38,7 @@
     {% endfor %}
 </head>
 
-<body>
+<body class="{{ bodyClasses | join(' ') }}">
 
 {{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
 
@@ -115,18 +115,22 @@
                             </div>
 
                             <popper v-cloak class="ml-auto">
-                                <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
-                                    <i class="fa fa-info"></i>
-                                </button>
-                                <div slot="title">
+                                <template #handle>
+                                    <button class="btn btn-icon btn-secondary btn-sm">
+                                        <i class="fa fa-info"></i>
+                                    </button>
+                                </template>
+                                <template #title>
                                     {{ trans("Ceres::Template.regContactInformations") }}
-                                </div>
-                                <ul slot="content" class='pl-3'>
-                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                                    <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-                                </ul>
+                                </template>
+                                <template #content>
+                                    <ul class='pl-3'>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                    </ul>
+                                </template>
                             </popper>
 
                             <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -182,7 +186,7 @@
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
         isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
-        templateEvent: "{{templateEvent}}",
+        templateEvent: "{{ templateEvent }}",
         language: "{{ lang }}",
         defaultLanguage: "{{ defaultLanguage }}",
         decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
@@ -211,6 +215,7 @@
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
 {{ get_filtered_tags() }}
+{{ get_json_data() }}
 
 <script>
     vueEventHub = new Vue();
@@ -239,76 +244,91 @@
 
     (function($) {
 
-        var header = document.getElementById('page-header');
+        var vueApp = document.getElementById('vue-app');
+        var headerParent = document.getElementById('page-header-parent');
         var headerLoaded = false;
-        var unfixedElements = [];
+        var allElementHeights = [];
 
-        if ( !!header )
+        if ( !!headerParent )
         {
+            var headerChildren = headerParent.children;
+
             function calculateBodyOffset()
             {
-                if (headerLoaded && header.classList.contains('fixed-top'))
+                if (headerLoaded && headerParent)
                 {
                     var bodyOffset = 0;
                     // Get current header with children
-                    var children = document.getElementById('page-header').children;
-                    for( var i = 0; i < children.length; i++ )
-                    {
-                        bodyOffset += children[i].getBoundingClientRect().height;
+                    if(headerParent === null){
+                        return;
                     }
 
-                    document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
-                    document.getElementById('vue-app').style.minHeight = "calc(100vh - " + bodyOffset + "px)";
-                }
-            }
-
-            function getUnfixedElements()
-            {
-                unfixedElements = [];
-                $('#page-header .unfixed').each(function(i, elem)
-                {
-                    var rect = elem.getBoundingClientRect();
-                    unfixedElements.push({
-                        element: elem,
-                        top: rect.top,
-                        height: rect.height
-                    });
-                });
-                scrollUnfixedElements();
-            }
-
-            function scrollUnfixedElements()
-            {
-                if (headerLoaded)
-                {
-                    var scrollTop = window.scrollY;
-                    unfixedElements.forEach(function(unfixed)
+                    for( var i = 0; i < headerChildren.length; i++ )
                     {
-                        var spacingTop = unfixed.height - scrollTop;
-                        if ( !!unfixed.element.previousElementSibling )
-                        {
-                            unfixed.element.previousElementSibling.style.marginBottom = (spacingTop >= 0 ? spacingTop : 0) + 'px'
-                        }
-                        else
-                        {
-                            unfixed.element.parentElement.style.paddingTop = (spacingTop >= 0 ? spacingTop : 0) + 'px';
-                        }
-                        unfixed.element.style.position = 'absolute';
-                        unfixed.element.style.top = unfixed.top - scrollTop + 'px';
-                    });
+                        bodyOffset += headerChildren[i].getBoundingClientRect().height;
+                    }
+
+                    vueApp.style.marginTop = bodyOffset + 'px';
+                    vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
                 }
             }
 
-            $(window).scroll(scrollUnfixedElements);
-
-            $(document).on('shopbuilder.after.ready', function()
+            function getHeaderElementsHeights()
             {
-                unfixedElements.forEach(function(unfixed)
+                for (var i = 0; i < headerChildren.length; i++)
                 {
-                    $(unfixed.element).attr('css', '');
-                });
-                scrollUnfixedElements = function() {};
-            });
+                    allElementHeights.push(headerChildren[i].getBoundingClientRect().height);
+                }
+            }
+
+            function scrollHeaderElements()
+            {
+                if (headerLoaded && !App.isShopBuilder)
+                {
+                    var absolutePos = 0;
+                    var fixedElementsHeight = 0; 
+                    var offset = 0;
+                    var scrollTop = window.pageYOffset;
+                    var zIndex = 100;
+
+                    for (var i = 0; i < headerChildren.length; i++)
+                    {
+                        var elem = headerChildren[i];
+                        var elemHeight = allElementHeights[i];
+                        
+                        offset = absolutePos - scrollTop;
+                        elem.style.position = "absolute";
+                        elem.style.zIndex = zIndex;
+                        zIndex--;
+
+                        if (!elem.classList.contains("unfixed"))
+                        {
+                            if (offset < 0)
+                            {
+                                elem.style.top = 0; 
+                            }
+                            else 
+                            {
+                                elem.style.top = offset + 'px';
+                            }
+
+                            if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
+                            {
+                                elem.style.top = fixedElementsHeight + 'px';
+                            }
+
+                            fixedElementsHeight = fixedElementsHeight + elemHeight;  
+                        } 
+                        else 
+                        {
+                            elem.style.top = offset + 'px';
+                        }
+                        absolutePos = absolutePos + elemHeight;
+                    }
+                }
+            }
+
+            $(window).scroll(scrollHeaderElements);
 
             $(document).on('shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate', function()
             {
@@ -316,7 +336,7 @@
                 $('.owl-carousel').trigger('refresh.owl.carousel');
             });
 
-            var headerImages = header.querySelectorAll("img");
+            var headerImages = headerParent.querySelectorAll("img");
 
             Promise.all(
                 Array.prototype.slice.call(headerImages).map(function(headerImage)
@@ -331,8 +351,10 @@
                 })
             ).then(function()
             {
+                // Initialize
                 headerLoaded = true;
-                getUnfixedElements();
+                getHeaderElementsHeights();
+                scrollHeaderElements();
                 calculateBodyOffset();
             });
 
@@ -341,7 +363,7 @@
 
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
         {
-            var compiled = Vue.compile(widgetElement[0].outerHTML );
+            var compiled = Vue.compile(widgetElement[0].outerHTML, { delimiters: ["${", "}"] } );
             var component = new Vue({
                 store: window.ceresStore,
                 render: compiled.render,
@@ -367,3 +389,4 @@
 {{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
 </body>
 </html>
+{% endspaceless %}

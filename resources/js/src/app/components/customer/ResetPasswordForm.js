@@ -22,11 +22,6 @@ Vue.component("reset-password-form", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods: {
 
         validatePassword()

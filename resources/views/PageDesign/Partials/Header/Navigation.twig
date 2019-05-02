@@ -6,9 +6,9 @@
 
 <nav class="navbar{% if useMegaMenu %} megamenu{%endif%}">
     <div class="container-max">
-        <div class="row">
+        <div class="row mx-0">
             <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
-                <a class="navbar-brand float-lg-left" href="{{ homepageURL }}">
+                <a class="navbar-brand" href="{{ homepageURL }}">
                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" />
                     {% else %}
@@ -21,7 +21,7 @@
                 </button>
             </div>
 
-            <div id="mainNavbarCollapsable">
+            <div id="mainNavbarCollapsable" class="d-none d-lg-block">
                 <ul class="breadcrumb">
                     <li class="btnClose"></li>
                 </ul>

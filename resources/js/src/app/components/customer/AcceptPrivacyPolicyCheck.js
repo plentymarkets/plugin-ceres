@@ -18,11 +18,6 @@ Vue.component("accept-privacy-policy-check", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         onValueChanged(value)

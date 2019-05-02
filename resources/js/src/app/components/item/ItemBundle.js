@@ -8,12 +8,7 @@ Vue.component("item-bundle", {
             default: "#vue-item-bundle"
         },
         bundleType: String,
-        bundleComponents: Array,
-        appearance:
-        {
-            type: String,
-            default: "primary"
-        }
+        bundleComponents: Array
     },
 
     data()
@@ -22,11 +17,6 @@ Vue.component("item-bundle", {
             bundleSetting: null,
             showItemBundleItems: true
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     mounted()

@@ -1,4 +1,5 @@
 import { normalizeUrl } from "../helper/url";
+import { isDefined } from "../helper/utils";
 
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
@@ -96,10 +97,11 @@ module.exports = (function($)
         return _send(url, data, config);
     }
 
-    function _send(url, data, config)
+    function _send(url, data = {}, config)
     {
         var deferred = $.Deferred();
 
+        data = isDefined(data) ? data : {};
         url = normalizeUrl(url);
         config = config || {};
         config.dataType = config.dataType || "json";
@@ -109,18 +111,15 @@ module.exports = (function($)
         config.keepOriginalResponse = !!config.keepOriginalResponse;
         config.headers = config.headers || { "Accept-Language": App.language };
 
-        if (data)
-        {
-            data.templateEvent = App.templateEvent;
-            config.data = data;
-        }
+        data.templateEvent = App.templateEvent;
+        config.data = data;
 
         if (!config.doInBackground)
         {
             WaitScreenService.showWaitScreen();
         }
 
-        $.ajax(url, config)
+        var request = $.ajax(url, config)
             .done(function(response)
             {
                 if (config.keepOriginalResponse)
@@ -136,7 +135,7 @@ module.exports = (function($)
             {
                 var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
 
-                deferred.reject(response);
+                deferred.reject(response, jqXHR.status);
             })
             .always(function()
             {
@@ -145,6 +144,8 @@ module.exports = (function($)
                     WaitScreenService.hideWaitScreen();
                 }
             });
+
+        deferred.abort = request.abort;
 
         return deferred;
     }

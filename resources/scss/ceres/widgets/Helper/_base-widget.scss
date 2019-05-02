@@ -11,20 +11,37 @@
             margin-bottom: 0;
         }
     }
+
 }
 
 @include media-breakpoint-down(sm)
 {
     .widget
     {
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
 
-        &.widget-grid
+        &.widget-grid:not(.widget-two-col)
         {
             margin-bottom: 0;
         }
 
-        .widget-inner
+        &:not(.widget-two-col) .widget-inner:not(.widget-stacked)
+        {
+            .widget:not(.widget-grid)
+            {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(xs)
+{
+    .widget
+    {
+        margin-bottom: 1rem;
+
+        &:not(.widget-two-col) .widget-inner:not(.widget-stacked)
         {
             .widget:not(.widget-grid)
             {
@@ -32,6 +49,18 @@
             }
         }
     }
+}
+
+header .widget
+{
+    margin-bottom: 0;
+}
+
+.widget-fw
+{
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2);
 }
 
 .widget-proportional
@@ -50,32 +79,117 @@
     }
 }
 
-@include media-breakpoint-up(md)
-{
-    @each $i in 1,2,3,4
-    {
-        @each $j in 1,2,3,4
-        {
-            .widget-prop-#{$i}-#{$j} .widget-proportional
-            {
-                padding-bottom: percentage($j / $i);
-            }
 
-            .widget-proportional.widget-prop-#{$i}-#{$j}
+@each $breakpoint in map-keys($grid-breakpoints)
+{
+    $infix: breakpoint-infix($breakpoint);
+    $next: breakpoint-next($breakpoint);
+
+    @include media-breakpoint-up($breakpoint)
+    {
+        @each $i in 1, 2, 3, 4
+        {
+            @each $j in 1, 2, 3, 4
             {
-                padding-bottom: percentage($j / $i) !important;
+                .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional
+                {
+                    padding-bottom: percentage($j / $i);
+                }
+
+                .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j}
+                {
+                    padding-bottom: percentage($j / $i) !important;
+                }
+
             }
         }
 
     }
-    .widget-prop-auto .widget-proportional
+    @include media-breakpoint-only($breakpoint)
     {
-        padding-bottom: 0;
-        min-height: 100%;
+        .widget-prop#{$infix}-auto > div > .widget-proportional
+        {
+            padding-bottom: 0;
+            min-height: 100%;
+        }
+    }
+}
+
+@include media-breakpoint-down(xs)
+{
+    .widget-grid .widget-inner.col-12.widget-stacked
+    {
+        padding-bottom: 1rem;
+    }
+}
+
+@include media-breakpoint-between(sm, lg)
+{
+    .widget-grid .widget-inner.col-sm-12.widget-stacked
+    {
+        padding-bottom: 2rem;
+    }
+}
+
+@include media-breakpoint-up(lg)
+{
+    .widget-grid .widget-inner.col-lg-12.widget-stacked
+    {
+        padding-bottom: 2rem;
+    }
+}
+
+@include media-breakpoint-up(md)
+{
+    .widget-grid
+    {
+        > .widget-inner.widget-prop-md-auto
+        {
+            &.col-md-3 > div > .widget-proportional
+            {
+                padding-bottom: calc(100% + 15px);
+            }
+        }
     }
 }
 
 .widget-editable-min-height {
     min-height: 40px;
     padding-bottom: 0.1px;
+}
+
+/*
+ * INLINE EDITOR CLASSES
+ */
+@each $color, $value in $shop-builder-colors
+{
+    .color-#{$color}
+    {
+        color: $value !important;
+    }
+
+    .bg-#{$color}
+    {
+        @include context-bg($value);
+    }
+}
+
+.align-center
+{
+    text-align: center;
+}
+
+.align-left
+{
+    text-align: left;
+}
+
+.align-right
+{
+    text-align: right;
+}
+
+.align-justify
+{
+    text-align: justify;
 }

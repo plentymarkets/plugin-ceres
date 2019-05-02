@@ -12,28 +12,49 @@ Vue.component("invoice-address-select", {
             address-type="1"
             :show-error="showError"
             :optional-address-fields="optionalAddressFields"
-            :required-address-fields="requiredAddressFields">
+            :required-address-fields="requiredAddressFields"
+            :default-salutation="defaultSalutation"
+            :padding-classes="paddingClasses"
+            :padding-inline-styles="paddingInlineStyles">
         </address-select>
     `,
 
     props: {
-        optionalAddressFields: {
+        optionalAddressFields:
+        {
             type: Object,
             default: () =>
             {
                 return {};
             }
         },
-        requiredAddressFields: {
+        requiredAddressFields:
+        {
             type: Object,
             default: () =>
             {
                 return {};
             }
         },
-        hasToValidate: {
+        defaultSalutation:
+        {
+            type: String,
+            default: "male"
+        },
+        hasToValidate:
+        {
             type: Boolean,
             default: false
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 

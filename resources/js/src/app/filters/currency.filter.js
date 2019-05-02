@@ -9,5 +9,5 @@ Vue.filter("currency", function(price)
         return price;
     }
 
-    return formatter.format(parseFloat(price).toFixed(2), App.activeCurrency);
+    return formatter.format(parseFloat(price), App.activeCurrency);
 });

@@ -7,13 +7,22 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("bank-data-select", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "userBankData",
-        "contactId",
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-bank-data-select"
+        },
+        userBankData:
+        {
+            type: Array,
+            default: () => []
+        },
+        contactId:
+        {
+            type: String
+        }
+    },
 
     data()
     {
@@ -26,11 +35,6 @@ Vue.component("bank-data-select", {
             doUpdate: null,
             headline : ""
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     /**

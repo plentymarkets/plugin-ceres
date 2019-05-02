@@ -20,7 +20,13 @@
     {% include "Ceres::PageDesign.Partials.Header.DefaultHeader" %}
 {% else %}
 <header id="page-header" class="fixed-top">
-    {{ headerContainer | raw }}
+    <div class="container-max">
+        <div class="row">
+            <div id="page-header-parent" class="col-12">
+                {{ headerContainer | raw }}
+            </div>
+        </div>
+    </div>
 </header>
 {% endif %}
 
@@ -45,7 +51,7 @@
         {% set initialCategory = category %}
     {% endif %}
     <mobile-navigation
-            :navigation-tree-data="{{ categories | json_encode }}"
+            navigation-tree-data="{{ categories | json_data }}"
             :initial-category="{{ initialCategory | json_encode }}"
             template="#vue-mobile-navigation">
     </mobile-navigation>

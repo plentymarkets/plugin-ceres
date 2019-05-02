@@ -23,9 +23,9 @@
 {{ Twig.set("defaultLanguage", Twig.call("services.webstoreConfig.getDefaultLanguage")) }}
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
-<div class="top-bar{% if not isFixed %} unfixed{% endif %}">
+<div class="widget-fw top-bar{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
-        <div class="row">
+        <div class="row mx-0">
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Header.LeftSide"])) }}
             <div class="top-bar-items {% if searchStyle == "permanent" %}search-shown{% endif %}">
                 {% if searchStyle == "permanent" %}
@@ -152,7 +152,7 @@
     </div>
 
     <div class="container-max page-header">
-        <div class="row">
+        <div class="row mx-0">
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
@@ -200,7 +200,7 @@
             {% if enableLanguageSelect or enableShippingCountrySelect %}
                 <shop-country-settings
                         country-flag-prefix="flag-icon-"
-                        :shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode') }}"
+                        shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_data("activeCountriesList")') }}"
                         :shipping-country-id="{{ Twig.print('services.checkout.getShippingCountryId() | json_encode') }}">
                     <div id="countrySettings" class="cmp cmp-country-settings collapse">
                         <div class="container-max">

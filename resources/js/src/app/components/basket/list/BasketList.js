@@ -11,20 +11,15 @@ Vue.component("basket-list", {
             type: String,
             default: "small"
         },
-        appearance:
+        isPreview:
         {
-            type: String,
-            default: "primary"
+            type: Boolean,
+            default: false
         }
     },
 
     computed: Vuex.mapState({
         basketItems: state => state.basket.items,
         isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded
-    }),
-
-    created()
-    {
-        this.$options.template = this.template;
-    }
+    })
 });

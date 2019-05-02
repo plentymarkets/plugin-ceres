@@ -57,13 +57,16 @@ export function transformVariationProperties(item, propertyTypes = [], displaySe
 
     for (const group of variationPropertyGroups)
     {
-        groups.push({
-            id: group.id,
-            position: group.position,
-            name: group.names.name,
-            description: group.names.description,
-            properties: orderArrayByKey(groupedProperties[group.id], PROPERTY_ORDER_BY_KEY)
-        });
+        if (isDefined(groupedProperties[group.id]))
+        {
+            groups.push({
+                id: group.id,
+                position: group.position,
+                name: group.names.name,
+                description: group.names.description,
+                properties: orderArrayByKey(groupedProperties[group.id], PROPERTY_ORDER_BY_KEY)
+            });
+        }
     }
 
     if (groupedProperties.ungrouped.length)

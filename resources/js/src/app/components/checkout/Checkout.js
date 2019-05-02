@@ -1,7 +1,9 @@
 const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
+const _isEqual = require("lodash/isEqual");
 
 import TranslationService from "services/TranslationService";
+import { removeUrlParam } from "../../services/UrlService";
 
 Vue.component("checkout", {
 
@@ -39,18 +41,19 @@ Vue.component("checkout", {
     },
 
     computed: Vuex.mapState({
-        checkout: state => state.checkout
+        checkout: state => state.checkout,
+        deliveryAddressId: state => state.address.deliveryAddressId
     }),
 
     created()
     {
-        this.$options.template = this.template;
-
         this.$store.dispatch("setCheckout", this.initialCheckout);
         this.$store.dispatch("initBillingAddress", { id: this.selectedBillingAddress, addressList: this.billingAddressList });
         this.$store.dispatch("initDeliveryAddress", { id: this.selectedDeliveryAddress, addressList: this.deliveryAddressList });
 
         this.addEventHandler();
+
+        removeUrlParam("readonlyCheckout");
     },
 
     methods:
@@ -122,6 +125,28 @@ Vue.component("checkout", {
             if (this.checkout.shipping.shippingCountryId !== checkout.shippingCountryId)
             {
                 this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
+            }
+
+            const responseDeliveryAddressId = checkout.deliveryAddressId !== 0 ? checkout.deliveryAddressId : -99;
+
+            if (this.deliveryAddressId !== responseDeliveryAddressId)
+            {
+                NotificationService.warn(
+                    TranslationService.translate("Ceres::Template.addressChangedWarning")
+                );
+                this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
+            }
+
+            if (!_isEqual(this.checkout.shipping.maxDeliveryDays, checkout.maxDeliveryDays))
+            {
+                this.$store.commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
+            }
+
+            if (this.checkout.readOnly !== checkout.readOnly)
+            {
+                this.$store.commit("setIsCheckoutReadonly", checkout.readOnly);
+
+                window.location.href = App.urls.checkout;
             }
         },
 

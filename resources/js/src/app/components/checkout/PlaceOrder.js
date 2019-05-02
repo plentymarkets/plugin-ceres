@@ -16,15 +16,6 @@ Vue.component("place-order", {
         {
             type: String
         },
-        appearance:
-        {
-            type: [String, null],
-            default: "success",
-            validator: value =>
-            {
-                return ["primary", "secondary", "success", "info", "warning", "danger"].indexOf(value) !== -1;
-            }
-        },
         buttonSize:
         {
             type: [String, null],
@@ -33,6 +24,16 @@ Vue.component("place-order", {
             {
                 return ["sm", "lg"].indexOf(value) !== -1;
             }
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -47,11 +48,16 @@ Vue.component("place-order", {
     {
         buttonClasses()
         {
-            const classes = [`btn-${this.appearance}`];
+            const classes = [];
 
             if (isDefined(this.buttonSize))
             {
                 classes.push(`btn-${this.buttonSize}`);
+            }
+
+            if (isDefined(this.paddingClasses))
+            {
+                classes.push(this.paddingClasses.split(" "));
             }
 
             return classes;
@@ -83,11 +89,6 @@ Vue.component("place-order", {
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
             newsletterSubscription: state => state.checkout.newsletterSubscription
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods: {

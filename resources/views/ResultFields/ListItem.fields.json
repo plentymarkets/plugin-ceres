@@ -1,25 +1,48 @@
 [
-    "images.all.url",
     "images.all.urlMiddle",
-    "images.all.urlPreview",
     "images.all.position",
     "images.all.path",
     "images.all.names.alternate",
     "images.all.names.lang",
     "images.variation.urlMiddle",
-    "images.variation.urlPreview",
     "images.variation.position",
     "images.variation.path",
     "images.variation.names.alternate",
     "images.variation.names.lang",
-    "item.storeSpecial",
-    "properties.*",
+
+
+    "properties.property.id",
+    "properties.property.isShownOnItemPage",
+    "properties.property.isShownOnItemList",
+    "properties.property.isShownAtCheckout",
+    "properties.property.isOderProperty",
+    "properties.property.valueType",
+    "properties.property.value",
+    "properties.property.surcharge",
+    "properties.property.names.lang",
+    "properties.property.names.name",
+    "properties.property.names.description",
+
+    "properties.group.id",
+    "properties.group.orderPropertyGroupingType",
+    "properties.group.names.lang",
+    "properties.group.names.name",
+    "properties.group.names.description",
+
     "item.id",
+    "item.storeSpecial",
     "item.manufacturer.position",
     "item.manufacturer.externalName",
-    "texts*",
+
+    "texts.lang",
+    "texts.name1",
+    "texts.name2",
+    "texts.name3",
+
     "bundleComponents.*",
+
     "defaultCategories",
+
     "variation.id",
     "variation.name",
     "variation.availability.names.name",
@@ -33,9 +56,11 @@
     "variation.mayShowUnitPrice",
     "variation.releasedAt",
     "variation.bundleType",
+
     "filter.hasChildren",
     "filter.isSalable",
     "filter.hasActiveChildren",
+
     "unit.content",
     "unit.names.name",
     "unit.names.lang",

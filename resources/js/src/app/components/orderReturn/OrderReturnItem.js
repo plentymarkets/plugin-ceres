@@ -15,7 +15,6 @@ Vue.component("order-return-item", {
 
     created()
 	{
-        this.$options.template = this.template;
         vueEventHub.$on("select-all-items", () => this.selectItem());
     },
 

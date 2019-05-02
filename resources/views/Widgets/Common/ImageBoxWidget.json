@@ -13,6 +13,49 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
+        "aspectRatio": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "auto",
+            "options": {
+                "name": "Widget.imageBoxAspectRatioLabel",
+                "tooltipText": "Widget.imageBoxAspectRatioTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "auto",
+                        "caption": "Widget.imageBoxAspectRatioAuto"
+                    },
+                    {
+                        "value": "3-1",
+                        "caption": "Widget.imageBoxAspectRatioThreeToOne"
+                    },
+                    {
+                        "value": "2-1",
+                        "caption": "Widget.imageBoxAspectRatioTwoToOne"
+                    },
+                    {
+                        "value": "3-2",
+                        "caption": "Widget.imageBoxAspectRatioThreeToTwo"
+                    },
+                    {
+                        "value": "1-1",
+                        "caption": "Widget.imageBoxAspectRatioOneToOne"
+                    },
+                    {
+                        "value": "2-3",
+                        "caption": "Widget.imageBoxAspectRatioTwoToThree"
+                    },
+                    {
+                        "value": "1-2",
+                        "caption": "Widget.imageBoxAspectRatioOneToTwo"
+                    },
+                    {
+                        "value": "1-3",
+                        "caption": "Widget.imageBoxAspectRatioOneToThree"
+                    }
+                ]
+            }
+        },
         "style": {
             "type": "select",
             "required": true,
@@ -72,14 +115,11 @@
                 "name": "Widget.imageBoxUrlLabel"
             }
         },
-        "headline": {
-            "type": "text",
-            "required": false,
+        "customCaption": {
+            "type": "checkbox",
             "isVisible": "style !== 'no-caption'",
-            "defaultValue": "",
             "options": {
-                "name": "Widget.imageBoxHeadlineLabel",
-                "tooltipText": "Widget.imageBoxHeadlineTooltip"
+                "name": "Widget.imageBoxCustomCaption"
             }
         },
         "customImagePath": {
@@ -90,6 +130,7 @@
                 "name": "Widget.imageBoxCustomImagePathLabel",
                 "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

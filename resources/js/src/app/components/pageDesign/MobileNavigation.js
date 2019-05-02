@@ -2,7 +2,10 @@ Vue.component("mobile-navigation", {
 
     props: [
         "template",
-        "initialCategory",
+        "initialCategory"
+    ],
+
+    jsonDataFields: [
         "navigationTreeData"
     ],
 
@@ -40,11 +43,6 @@ Vue.component("mobile-navigation", {
         ...Vuex.mapState({
             navigationTree: state => state.navigation.tree
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     mounted()

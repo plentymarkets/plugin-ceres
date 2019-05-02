@@ -11,7 +11,7 @@ Vue.component("basket-list-item", {
         "size",
         "language",
         "template",
-        "appearance"
+        "isPreview"
     ],
 
     data()
@@ -101,13 +101,9 @@ Vue.component("basket-list-item", {
 
         ...Vuex.mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
+            isCheckoutReadonly: state => state.checkout.readOnly,
             showNetPrice: state => state.basket.showNetPrices
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods: {
@@ -156,7 +152,7 @@ Vue.component("basket-list-item", {
                     {
                         this.basketItem.quantity = origQty;
 
-                        if (this.size === "small")
+                        if (this.isPreview)
                         {
                             this.$store.dispatch(
                                 "addBasketNotification",

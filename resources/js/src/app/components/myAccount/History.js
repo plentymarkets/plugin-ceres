@@ -14,11 +14,6 @@ Vue.component("history", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         returnsTabsOpened()

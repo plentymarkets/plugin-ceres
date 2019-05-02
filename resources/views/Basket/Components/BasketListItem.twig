@@ -1,7 +1,8 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ component( "Ceres::Item.Components.QuantityInput" ) }}
-{{ component( "Ceres::Item.Components.ItemBundle" ) }}
+{{ component("Ceres::Item.Components.ItemBundle") }}
+{{ component("Ceres::Item.Components.OrderPropertyValue") }}
+{{ component("Ceres::Item.Components.QuantityInput") }}
 
 {% set itemsData = config("Ceres.basket.item_data")|split(', ') %}
 {% set basketDetailsData = config("Ceres.basket.item_data")|split(', ') %}
@@ -11,7 +12,7 @@
         
         {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
         
-        <div class="basket-item component-loading with-icon sending" :class="{ 'isLoading': waiting }">
+        <div class="basket-item component-loading with-icon" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
 
             <div class="image-container">
                 <img class="img-basket-small" v-if="image" :src="image" :alt="altText" :title="itemName">
@@ -21,7 +22,7 @@
                 <div class="meta-container-wrapper-inner">
                     <div class="meta-container">
                         <div>
-                            <a :href="basketItem.variation.data | itemURL" class="item-name" :class="'text-' + appearance">
+                            <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance">
                                 ${ basketItem.variation.data | itemName }
                             </a>
 
@@ -30,8 +31,7 @@
 
                             </div>
 
-                            <item-bundle :appearance="appearance"
-                                         :bundle-type="basketItem.variation.data.variation.bundleType"
+                            <item-bundle :bundle-type="basketItem.variation.data.variation.bundleType"
                                          :bundle-components="basketItem.variation.data.bundleComponents"></item-bundle>
 
                             <div class="item-small-prices text-muted" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
@@ -77,17 +77,17 @@
                                     template="#vue-quantity-input"
                                     @quantity-change="updateQuantity"
                                     :value="basketItem.quantity"
-                                    :waiting="isInputLocked"
+                                    :waiting="isInputLocked || isCheckoutReadonly"
                                     :min="basketItem.variation.data.variation.minimumOrderQuantity"
                                     :max="basketItem.variation.data.variation.maximumOrderQuantity"
                                     :interval="basketItem.variation.data.variation.intervalOrderQuantity"></quantity-input>
                         </div>
     
                         <div class="price-box">
-                            <div class="item-total-price">${ itemTotalPrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
+                            <div class="item-total-price">${ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }</div>
                 
                             <div class="item-remove-container">
-                                <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || waitingForDelete }" @click="deleteItem">
+                                <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
                                     <span>
                                         {{ trans("Ceres::Template.basketDelete") }}
                                         <i v-waiting-animation="waitingForDelete" class="fa fa-trash-o" aria-hidden="true"></i>
@@ -100,30 +100,18 @@
 
                 <div class="item-properties" v-if="basketItem.basketItemOrderParams.length">
                     <div class="item-properties-header">{{ trans("Ceres::Template.basketAdditionalOptions") }}:</div>
-                    <ul>
+                    <ul class="ml-3">
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
 
                             <span :class="{ 'item-property-value': size === 'small' }">
                                 <strong :class="{ 'colon': property.type.length > 0 }">${ property.name } ({{ trans("Ceres::Template.basketIncludeAbbr") }} ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
                                 <span v-if="size === 'small'">
-                                    <span v-if="property.type === 'file'">
-                                        <a :href="property.value | fileUploadPath" target="_blank">
-                                            <i class="fa fa-external-link" aria-hidden="true"></i>
-                                            ${ property.value | fileName }
-                                        </a>
-                                    </span>
-                                    <span v-else-if="property.type.length > 0">${ property.value }</span>
+                                    <order-property-value :property="property"></order-property-value>
                                 </span>
                             </span>
 
                             <div v-if="size === 'large'">
-                                <span v-if="property.type === 'file'">
-                                    <a :href="property.value | fileUploadPath" target="_blank">
-                                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                                        ${ property.value | fileName }
-                                    </a>
-                                </span>
-                                <span v-else-if="property.type.length > 0">${ property.value }</span>
+                                <order-property-value :property="property"></order-property-value>
                             </div>
                         </li>
                     </ul>
@@ -157,7 +145,7 @@
                         {% endif %}
 
                         {% if "basket.item.description_short" in basketDetailsData %}
-                            <p class="my-3" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.shortDescription"></p>
+                            <p class="my-3" v-if="basketItem.variation.data.texts.shortDescription" v-html="basketItem.variation.data.texts.shortDescription"></p>
                         {% endif %}
                     </div>
 

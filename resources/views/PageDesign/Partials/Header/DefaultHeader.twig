@@ -3,7 +3,7 @@
 <header id="page-header" class="top-bar fixed-top">
     <div>
         <div class="container-max">
-            <div class="row">
+            <div class="row mx-0">
                 {{ LayoutContainer.show("Ceres::Header.LeftSide") }}
 
                 <ul id="controlsList" class="controls-list list-inline">
@@ -91,7 +91,7 @@
 {% endif %}
 
 <div class="container-max page-header">
-    <div class="row">
+    <div class="row mx-0">
         <div id="searchBox" class="cmp cmp-search-box collapse">
             {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
             {% if overrideSearchBar | trim is empty %}
@@ -132,7 +132,7 @@
 
         <shop-country-settings
                 country-flag-prefix="flag-icon-"
-                :shipping-countries="{{ services.country.getActiveCountriesList() | filterFields(['id','currLangName', 'isoCode2', 'states.id', 'states.name']) | json_encode }}"
+                shipping-countries="{{ services.country.getActiveCountriesList() | filterFields(['id','currLangName', 'isoCode2', 'states.id', 'states.name']) | json_data("activeCountriesList") }}"
                 :shipping-country-id="{{ services.checkout.getShippingCountryId }}">
             <div id="countrySettings" class="cmp cmp-country-settings collapse">
                 <div class="container-max">

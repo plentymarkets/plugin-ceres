@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set appearance = widget.settings.appearance.mobile %}
 {% set hideCheckbox = widget.settings.hideCheckbox.mobile %}
@@ -6,13 +7,18 @@
 {% set isRequired = widget.settings.isRequired.mobile %}
 {% set customText = widget.settings.customText.mobile %}
 
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Checkout.Components.AcceptGtcCheck") }}
 
-<div class="widget widget-gtc-check">
+<div class="widget widget-gtc-check widget-{{ appearance | default("primary") }} 
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <accept-gtc-check
         {% if hideCheckbox %}class="pl-0"{% endif %}
-        appearance="{{ appearance }}"
         :hide-checkbox="{{ hideCheckbox | json_encode }}"
         {% if not hideCheckbox %}
             :is-preselected="{{ isPreselected | json_encode }}"

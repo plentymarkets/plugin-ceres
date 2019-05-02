@@ -1,0 +1,18 @@
+{
+    "identifier": "Ceres::CodeWidget",
+    "label": "Widget.codeLabel",
+    "previewImageURL": "/images/widgets/code.svg",
+    "type": "static",
+    "categories": ["text"],
+    "position": 800,
+    "widgetClass": "Ceres\\Widgets\\Common\\CodeWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}

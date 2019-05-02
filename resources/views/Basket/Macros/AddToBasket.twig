@@ -1,4 +1,8 @@
 {% macro printTwigComponent( item, useLargeScale, showQuantity ) %}
+    {% set orderProperties = [] %}
+    {% for property in item.properties if property.property.isOderProperty %}
+        {% set orderProperties = orderProperties | merge([property]) %}
+    {% endfor %}
     <add-to-basket
             :variation-id="{{ item.variation.id }}"
             :is-salable="{{ (item.filter is defined and item.filter.isSalable) | json_encode }}"
@@ -8,7 +12,7 @@
             {% if item.variation.maximumOrderQuantity is defined and item.variation.maximumOrderQuantity > 0 %}
                 :maximum-quantity="{{ item.variation.maximumOrderQuantity }}"
             {% endif %}
-            :order-properties="{{ item.properties | json_encode }}"
+            :order-properties="{{ orderProperties | json_encode }}"
             :use-large-scale="{{ useLargeScale | default(false) | json_encode }}"
             :show-quantity="{{ showQuantity | default(false) | json_encode }}"
             item-url="{{ item | itemURL }}">
@@ -23,7 +27,7 @@
             :interval-quantity="{{ itemObject }}.variation.intervalOrderQuantity || 1"
             :minimum-quantity="{{ itemObject }}.variation.minimumOrderQuantity"
             :maximum-quantity="!!{{ itemObject }}.variation.maximumOrderQuantity && {{ itemObject }}.variation.maximumOrderQuantity > 0 ? {{ itemObject }}.variation.maximumOrderQuantity : null"
-            :order-properties="{{ itemObject }}.properties"
+            :order-properties="{{ itemObject }}.properties.filter(function(prop) { return prop.property.isOderProperty })"
             :use-large-scale="{{ useLargeScale | default(false) | json_encode }}"
             :show-quantity="{{ showQuantity | default(false) | json_encode }}"
             :item-url="{{ itemObject }} | itemURL"

@@ -102,27 +102,27 @@ const actions =
     {
         loadBasketData({ commit, state })
         {
-            ApiService.get("/rest/io/basket")
-                .done(basket =>
+            jQuery
+                .when(
+                    ApiService.get("/rest/io/basket", {}, { cache: false }),
+                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
+                )
+                .then((basket, basketItems) =>
                 {
                     commit("setBasket", basket);
-
-                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" })
-                        .done(basketItems =>
-                        {
-                            commit("setBasketItems", basketItems);
-                            commit("setIsBasketInitiallyLoaded");
-                        }).fail(error =>
-                        {
-                            NotificationService.error(
-                                TranslationService.translate("Ceres::Template.basketOops")
-                            ).closeAfter(10000);
-                        });
-                }).fail(error =>
+                    commit("setBasketItems", basketItems);
+                    commit("setIsBasketInitiallyLoaded");
+                })
+                .catch((error, status) =>
                 {
-                    NotificationService.error(
-                        TranslationService.translate("Ceres::Template.basketOops")
-                    ).closeAfter(10000);
+                    console.log(error, status);
+
+                    if (status > 0)
+                    {
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.basketOops")
+                        ).closeAfter(10000);
+                    }
                 });
 
             ApiService.listen("AfterBasketChanged", data =>

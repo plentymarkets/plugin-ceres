@@ -7,6 +7,11 @@ use Plenty\Plugin\Templates\Twig;
 
 class BaseWidget implements Widget
 {
+    const TOOLBAR_LAYOUT = [
+        "NONE"   => "",
+        "INLINE" => "bold,italic,underline,strike|h1,h2,h3|align|translation",
+        "ALL"    => "bold,italic,underline,strike|headline|link|align,ul,ol|color,background|translation"
+    ];
     /**
      * The template to e used for this widget
      *
@@ -80,6 +85,7 @@ class BaseWidget implements Widget
         ];
         $templateData["children"]  = $children;
         $templateData["isPreview"] = $isPreview;
+        $templateData["TOOLBAR_LAYOUT"] = self::TOOLBAR_LAYOUT;
 
         return $twig->render($this->template, $templateData);
     }
@@ -94,5 +100,23 @@ class BaseWidget implements Widget
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         return [];
+    }
+
+    protected function mockPaginatedResult( \Closure $factory, $itemsPerPage = 10, $currentPage = 1, $pages = 5 )
+    {
+        $entries = [];
+        for( $i = 0; $i < $itemsPerPage; $i++ )
+        {
+            $entries[] = $factory->call($this, $i);
+        }
+
+        return [
+            "page" => $currentPage,
+            "firstOnPage" => (($currentPage - 1) * $itemsPerPage) + 1,
+            "lastOnPage" => $currentPage * $itemsPerPage,
+            "totalsCount" => $pages * $itemsPerPage,
+            "lastPageNumber" => $pages,
+            "entries" => $entries
+        ];
     }
 }

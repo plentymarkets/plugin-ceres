@@ -1,91 +1,151 @@
-var ModalService        = require("services/ModalService");
-var APIService          = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
+const ModalService        = require("services/ModalService");
+const APIService          = require("services/ApiService");
+const NotificationService = require("services/NotificationService");
 
 import TranslationService from "services/TranslationService";
 
 Vue.component("account-settings", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "userData",
-        "template"
-    ],
-
-    data: function()
-    {
-        return {
-            newPassword         : "",
-            confirmPassword     : "",
-            accountSettingsClass: "",
-            accountSettingsModal: {}
-        };
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-account-settings"
+        },
+        userData:
+        {
+            type: Object,
+            // eslint-disable-next-line
+            default: () => {}
+        }
     },
 
-    created: function()
+    data()
     {
-        this.$options.template = this.template;
+        return {
+            isLoading           : false,
+            oldPassword         : "",
+            newPassword         : "",
+            confirmPassword     : "",
+            newMail             : "",
+            newMail2            : "",
+            accountSettingsClass: "",
+            accountEmailModal: {},
+            accountPasswordModal: {}
+        };
     },
 
     /**
      * Initialise the account settings modal
      */
-    mounted: function()
+    mounted()
     {
         this.$nextTick(() =>
         {
-            this.accountSettingsModal = ModalService.findModal(this.$refs.accountSettingsModal);
+            this.accountEmailModal = ModalService.findModal(this.$refs.accountEmailModal);
+            this.accountPasswordModal = ModalService.findModal(this.$refs.accountPasswordModal);
         });
     },
 
     computed: {
         /**
-         * Check whether the passwords match
+         * Check whether the data matches
          * @returns {boolean}
          */
-        matchPassword: function()
+        matchEmail()
         {
-            if (this.confirmPassword !== "")
-            {
-                return this.newPassword === this.confirmPassword;
-            }
-            return true;
+            return this.newMail2.length <= 0 || this.newMail === this.newMail2;
+        },
+        matchPassword()
+        {
+            return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
+        },
+
+        isValidEmail()
+        {
+            return this.newMail.length > 0 && (this.newMail === this.newMail2) && this.newMail !== this.userData.email;
+        },
+        isValidPassword()
+        {
+            return this.oldPassword.length > 0 && this.newPassword.length > 0 && (this.newPassword === this.confirmPassword);
         }
     },
 
     methods: {
 
         /**
-         * Open the account settings modal
+         * Open the change mail modal
          */
-        showChangeAccountSettings: function()
+        showChangeAccountEmail: function()
         {
-            this.accountSettingsModal.show();
+            this.accountEmailModal.show();
+        },
+
+        /**
+         * Open the change password modal
+         */
+        showChangeAccountPassword: function()
+        {
+            this.accountPasswordModal.show();
         },
 
         /**
          * Save the new password
          */
-        saveAccountSettings: function()
+        saveAccountPassword: function()
         {
-            var self = this;
-
-            if (this.newPassword !== "" && (this.newPassword === this.confirmPassword))
+            if (this.isValidPassword)
             {
-                APIService.post("/rest/io/customer/password", { password: this.newPassword, password2: this.confirmPassword })
-                    .done(function(response)
+                this.isLoading = true;
+                APIService.post("/rest/io/customer/password", { oldPassword: this.oldPassword, password: this.newPassword, password2: this.confirmPassword })
+                    .done(response =>
                     {
-                        self.clearFieldsAndClose();
+                        this.clearFieldsAndClose();
                         NotificationService.success(
                             TranslationService.translate("Ceres::Template.myAccountChangePasswordSuccessful")
                         ).closeAfter(3000);
-                    }).fail(function(response)
+                    }).fail(response =>
                     {
-                        self.clearFieldsAndClose();
                         NotificationService.error(
                             TranslationService.translate("Ceres::Template.myAccountChangePasswordFailed")
                         ).closeAfter(5000);
+                    })
+                    .always(() =>
+                    {
+                        this.isLoading = false;
+                    });
+            }
+        },
+        /**
+         * Save the new email
+         */
+        saveAccountEmail: function()
+        {
+            if (this.isValidEmail)
+            {
+                this.isLoading = true;
+                APIService.post("/rest/io/customer/mail", { newMail: this.newMail, newMail2: this.newMail2 })
+                    .done(response =>
+                    {
+                        this.clearFieldsAndClose();
+                        NotificationService.success(
+                            TranslationService.translate("Ceres::Template.myAccountChangeEmailConfirmationSent")
+                        ).closeAfter(3000);
+
+                    }).fail((response, status) =>
+                    {
+                        let message = TranslationService.translate("Ceres::Template.myAccountChangeEmailFailed");
+
+                        if (status === 400)
+                        {
+                            message = TranslationService.translate("Ceres::Template.regError");
+                        }
+
+                        NotificationService.error(message).closeAfter(5000);
+                    })
+                    .always(() =>
+                    {
+                        this.isLoading = false;
                     });
             }
         },
@@ -95,8 +155,11 @@ Vue.component("account-settings", {
          */
         clearFields: function()
         {
+            this.oldPassword = "";
             this.newPassword = "";
             this.confirmPassword = "";
+            this.newMail = "";
+            this.newMail2 = "";
         },
 
         /**
@@ -104,7 +167,8 @@ Vue.component("account-settings", {
          */
         clearFieldsAndClose: function()
         {
-            this.accountSettingsModal.hide();
+            this.accountEmailModal.hide();
+            this.accountPasswordModal.hide();
             this.clearFields();
         }
     }

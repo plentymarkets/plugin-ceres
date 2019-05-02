@@ -145,6 +145,11 @@ $border-width: 1px;
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
+        &.disabled,
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     i
@@ -314,10 +319,10 @@ $border-width: 1px;
 
         a
         {
-            color: $white;
+            color: $white !important;
             &:hover
             {
-                color: $gray-lighter2;
+                color: $gray-lighter2 !important;
             }
         }
 

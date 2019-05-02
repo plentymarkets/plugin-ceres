@@ -29,16 +29,10 @@ Vue.component("registration", {
             billingAddress: {
                 countryId: null,
                 stateId: null,
-                addressSalutation: 0,
                 gender: "male"
             },
             isDisabled: false
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods: {
