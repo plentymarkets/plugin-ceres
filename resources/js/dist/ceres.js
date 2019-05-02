@@ -19198,7 +19198,11 @@ Vue.component("checkout", {
   }
 });
 
+<<<<<<< HEAD
+},{"../../services/UrlService":271,"services/ApiService":265,"services/NotificationService":269,"services/TranslationService":270}],142:[function(require,module,exports){
+=======
 },{"../../services/UrlService":279,"lodash/isEqual":121,"services/ApiService":273,"services/NotificationService":277,"services/TranslationService":278}],150:[function(require,module,exports){
+>>>>>>> beta
 "use strict";
 
 Vue.component("contact-wish-input", {
@@ -22877,9 +22881,6 @@ Vue.component("order-property-list-item", {
       } else if (this.inputType === "selection") {
         if ((0, _utils.isNullOrUndefined)(value) || value.length <= 0) {
           value = null;
-        } else {
-          var name = this.property.selectionValues[value].name;
-          value = name;
         }
       }
 

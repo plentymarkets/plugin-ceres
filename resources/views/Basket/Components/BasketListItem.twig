@@ -1,7 +1,8 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ component( "Ceres::Item.Components.QuantityInput" ) }}
-{{ component( "Ceres::Item.Components.ItemBundle" ) }}
+{{ component("Ceres::Item.Components.ItemBundle") }}
+{{ component("Ceres::Item.Components.OrderPropertyValue") }}
+{{ component("Ceres::Item.Components.QuantityInput") }}
 
 {% set itemsData = config("Ceres.basket.item_data")|split(', ') %}
 {% set basketDetailsData = config("Ceres.basket.item_data")|split(', ') %}
@@ -105,24 +106,12 @@
                             <span :class="{ 'item-property-value': size === 'small' }">
                                 <strong :class="{ 'colon': property.type.length > 0 }">${ property.name } ({{ trans("Ceres::Template.basketIncludeAbbr") }} ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
                                 <span v-if="size === 'small'">
-                                    <span v-if="property.type === 'file'">
-                                        <a :href="property.value | fileUploadPath" target="_blank">
-                                            <i class="fa fa-external-link" aria-hidden="true"></i>
-                                            ${ property.value | fileName }
-                                        </a>
-                                    </span>
-                                    <span v-else-if="property.type.length > 0">${ property.value }</span>
+                                    <order-property-value :property="property"></order-property-value>
                                 </span>
                             </span>
 
                             <div v-if="size === 'large'">
-                                <span v-if="property.type === 'file'">
-                                    <a :href="property.value | fileUploadPath" target="_blank">
-                                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                                        ${ property.value | fileName }
-                                    </a>
-                                </span>
-                                <span v-else-if="property.type.length > 0">${ property.value }</span>
+                                <order-property-value :property="property"></order-property-value>
                             </div>
                         </li>
                     </ul>
