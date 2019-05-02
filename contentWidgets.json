@@ -384,14 +384,6 @@
         "position": 300,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
         "settings": {
-            "hintText": {
-                "type": "codeEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.contactWishHintTextLabel",
-                    "tooltipText": "Widget.contactWishHintTextTooltip"
-                }
-            },
             "spacing": {
                 "type": "vertical",
                 "children": {
@@ -578,14 +570,6 @@
                             "position": 5
                         }
                     ]
-                }
-            },
-            "hintText": {
-                "type": "codeEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.paymentProviderHintTextLabel",
-                    "tooltipText": "Widget.paymentProviderHintTextTooltip"
                 }
             },
             "spacing": {
@@ -840,14 +824,6 @@
                             "position": 5
                         }
                     ]
-                }
-            },
-            "hintText": {
-                "type": "codeEditor",
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.shippingProfileHintTextLabel",
-                    "tooltipText": "Widget.shippingProfileHintTextTooltip"
                 }
             },
             "spacing": {
@@ -2842,15 +2818,6 @@
                     ]
                 }
             },
-            "text": {
-                "type": "text",
-                "required": true,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.titleBarTextLabel",
-                    "tooltipText": "Widget.titleBarTextTooltip"
-                }
-            },
             "spacing": {
                 "type": "vertical",
                 "options": {
@@ -4290,12 +4257,6 @@
                     ]
                 }
             },
-            "text": {
-                "type": "noteEditor",
-                "options": {
-                    "name": "Widget.myAccountHintTextLabel"
-                }
-            },
             "spacing": {
                 "type": "vertical",
                 "options": {
@@ -4390,12 +4351,6 @@
                             "position": 5
                         }
                     ]
-                }
-            },
-            "text": {
-                "type": "noteEditor",
-                "options": {
-                    "name": "Widget.myAccountHintTextLabel"
                 }
             },
             "spacing": {
