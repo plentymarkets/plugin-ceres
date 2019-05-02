@@ -13,12 +13,6 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "text": {
-            "type": "noteEditor",
-            "options": {
-                "name": "Widget.myAccountHintTextLabel"
-            }
-        },
         "spacing":"@include(spacingMargin)"
     }
 }
