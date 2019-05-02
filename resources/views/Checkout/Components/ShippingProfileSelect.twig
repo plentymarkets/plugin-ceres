@@ -20,7 +20,7 @@
                         <div>
                             <small>
                                 ${ shippingProfile.shippingAmount | currency }
-                                <template v-if="shippingProfile.maxDeliveryDays"> - {{ trans("Ceres::Template.checkoutShippingProfileMaxDeliveryDays", {"days": "${ shippingProfile.maxDeliveryDays }"}) }}</template>
+                                <template v-if="maxDeliveryDays && maxDeliveryDays[shippingProfile.parcelServicePresetId]"> - {{ trans("Ceres::Template.checkoutShippingProfileMaxDeliveryDays", {"days": "${ maxDeliveryDays[shippingProfile.parcelServicePresetId] }"}) }}</template>
                             </small>
                         </div>
                     </div>
