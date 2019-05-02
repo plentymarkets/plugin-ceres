@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v4.0.0 (2019-04-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.2...4.0.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v4.0.0 (2019-05-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.2...4.0.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
@@ -23,6 +23,9 @@
 - We added the layout container **Checkout: Override headline**. It serves to overwrite the default headline of the checkout.
 - The paddings and margins of all non-grid widgets of the ShopBuilder can now be configured individually in the Widget settings.
 - We added the inline editing code widget, which makes it possible to write and edit code directly in the ShopBuilder preview.
+- We added the inline editing text widget, which makes it possible to write and edit text directly in the ShopBuilder preview. This widget replaces the former text widget, which has been deprecated and is no longer available in the widget selection of the ShopBuilder.
+- You can now specify additional CC and BCC email addresses for the contact form. We would like to thank @lauflust for the contribution.
+- The subject for the email sent via the contact form can now be extended in the **CMS » Multilingualism** menu. We would like to thank @lauflust for the contribution.
 
 ### Changed
 
@@ -58,6 +61,8 @@
 - The email that contains the link for resending the customer password now uses the URL of the corresponding client.
 - Due to an error, the cross-selling item list in the single item view was not loaded when the page was accessed the first time. This has been fixed.
 - Due to an error, the sorting value for the category also affected the sorting of variations of individual items, as long as the option "dynamically" was selected for the setting **Show variations by type**. As of now, the variation with the lowest price is displayed first.
+- Under certain circumstances, the footer could overlap content on the right side of the single item view. This has been fixed.
+- Due to an error, order characteristics of the type "selection" were not working properly. This has been fixed.
 
 ## v3.2.2 (2019-04-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.1...3.2.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
