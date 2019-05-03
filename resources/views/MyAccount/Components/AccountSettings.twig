@@ -26,8 +26,8 @@
             </span>
         </div>
 
-        <div ref="accountEmailModal">
-            {% if "change-mail" in enabledRoutes or "all" in enabledRoutes %}
+        {% if "change-mail" in enabledRoutes or "all" in enabledRoutes %}
+            <div ref="accountEmailModal">
                 <div class="modal fade">
                     <div class="modal-dialog" role="document">
                         <form class="modal-content">
@@ -67,8 +67,8 @@
                         </form>
                     </div>
                 </div>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
 
         <div ref="accountPasswordModal">
             <div class="modal fade">
