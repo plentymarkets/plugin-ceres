@@ -1,3 +1,5 @@
+{% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
+
 <script type="x/template" id="vue-account-settings">
     <div class="card-body">
  
@@ -7,12 +9,15 @@
         <div>***********</div>
 
         <div class="add-item">
-            <span class="item-edit d-block mb-2">
-                <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountChangeEmail") }}" class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down" @click="showChangeAccountEmail">
-                    <span>{{ trans("Ceres::Template.myAccountChangeEmail") }}</span>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                </button>
-            </span>
+            {% if "change-mail" in enabledRoutes or "all" in enabledRoutes %}
+                <span class="item-edit d-block mb-2">
+                    <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountChangeEmail") }}" class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down" @click="showChangeAccountEmail">
+                        <span>{{ trans("Ceres::Template.myAccountChangeEmail") }}</span>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </button>
+                </span>
+            {% endif %}
+
             <span class="item-edit d-block">
                 <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountChangePassword") }}" class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down" @click="showChangeAccountPassword">
                     <span>{{ trans("Ceres::Template.myAccountChangePassword") }}</span>
@@ -21,47 +26,49 @@
             </span>
         </div>
 
-        <div ref="accountEmailModal">
-            <div class="modal fade">
-                <div class="modal-dialog" role="document">
-                    <form class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChangeEmail") }}</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="clearFields">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body form-horizontal">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="input-unit">
-                                        <input type="email" name="newMail" autocomplete="off" v-model="newMail">
-                                        <label for="newMail">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
+        {% if "change-mail" in enabledRoutes or "all" in enabledRoutes %}
+            <div ref="accountEmailModal">
+                <div class="modal fade">
+                    <div class="modal-dialog" role="document">
+                        <form class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChangeEmail") }}</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="clearFields">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body form-horizontal">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-unit">
+                                            <input type="email" name="newMail" autocomplete="off" v-model="newMail" data-autofocus>
+                                            <label for="newMail">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-unit no-bottom">
+                                            <input type="email" name="newMail2" autocomplete="off" v-model="newMail2">
+                                            <label for="newMail2">{{ trans("Ceres::Template.myAccountRepeatEmail") }}</label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="input-unit no-bottom">
-                                        <input type="email" name="newMail2" autocomplete="off" v-model="newMail2">
-                                        <label for="newMail2">{{ trans("Ceres::Template.myAccountRepeatEmail") }}</label>
+                                <div class="row my-2">
+                                    <div class="col-12">
+                                        <div v-show="!matchEmail" class="text-danger">{{ trans("Ceres::Template.myAccountCorrectEmail") }}</div>
                                     </div>
                                 </div>
                             </div>
-                             <div class="row my-2">
-                                <div class="col-12">
-                                    <div v-show="!matchEmail" class="text-danger">{{ trans("Ceres::Template.myAccountCorrectEmail") }}</div>
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary btn-appearance btn-block" @click="saveAccountEmail" :class="{'disabled': !isValidEmail || isLoading}">
+                                    <i class="fa fa-check" aria-hidden="true"></i> 
+                                    <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
+                                </button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary btn-appearance btn-block" @click="saveAccountEmail" :class="{'disabled': !isValidEmail || isLoading}">
-                                <i class="fa fa-check" aria-hidden="true"></i> 
-                                <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
 
         <div ref="accountPasswordModal">
             <div class="modal fade">
