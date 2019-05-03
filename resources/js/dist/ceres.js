@@ -24708,7 +24708,7 @@ Vue.component("account-settings", {
       newMail: "",
       newMail2: "",
       accountSettingsClass: "",
-      accountEmailModal: {},
+      accountEmailModal: null,
       accountPasswordModal: {}
     };
   },
@@ -24720,7 +24720,10 @@ Vue.component("account-settings", {
     var _this = this;
 
     this.$nextTick(function () {
-      _this.accountEmailModal = ModalService.findModal(_this.$refs.accountEmailModal);
+      if (_this.$refs.accountEmailModal) {
+        _this.accountEmailModal = ModalService.findModal(_this.$refs.accountEmailModal);
+      }
+
       _this.accountPasswordModal = ModalService.findModal(_this.$refs.accountPasswordModal);
     });
   },
@@ -24841,7 +24844,10 @@ Vue.component("account-settings", {
      * Clear the fields and close the modal
      */
     clearFieldsAndClose: function clearFieldsAndClose() {
-      this.accountEmailModal.hide();
+      if (this.accountEmailModal) {
+        this.accountEmailModal.hide();
+      }
+
       this.accountPasswordModal.hide();
       this.clearFields();
     }
