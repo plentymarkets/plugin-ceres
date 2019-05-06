@@ -30,6 +30,7 @@
         {{ Twig.set("slide", "slide | merge({ name: category.details[0].name })") }}
         {{ Twig.set("slide", "slide | merge({ url: categoryUrl })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: \"documents/\" ~ category.details[0].imagePath })") }}
+        {{ Twig.set("slide", "slide | merge({ imageAltText: category.details[0].name })") }}
 
         {% set pushCurrentSlide = true %}
 
@@ -46,6 +47,7 @@
         {{ Twig.set("slide", "slide | merge({ name: " ~ Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"]) ~ " })") }}
         {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
+        {{ Twig.set("slide", "slide | merge({ imageAltText: itemImage.alternate })") }}
 
         {% set pushCurrentSlide = true %}
 
@@ -53,6 +55,7 @@
 
         {{ Twig.set("slide", "slide | merge({ url: #{ slideUrlValue | json_encode } })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: #{ slideUrlValue | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ imageAltText: cdn_metadata(#{ slideUrlValue | json_encode }, 'alttext') })") }}
         {% set pushCurrentSlide = true %}
 
     {% elseif slideUrlType == 'external' and slideUrlValue | trim is not empty %}
@@ -65,6 +68,7 @@
     {% if slideSettings.customImagePath | trim is not empty %}
 
         {{ Twig.set("slide", "slide | merge({ imageUrl: #{ slideSettings.customImagePath | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ imageAltText: cdn_metadata(#{ slideSettings.customImagePath | json_encode }, 'alttext') })") }}
 
         {% set pushCurrentSlide = true %}
 
@@ -105,7 +109,11 @@
                 <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}
                     {{ Twig.if("slide.openInNewTab is not empty") }} target="_blank" {{ Twig.endif() }}>
                     {{ Twig.if("slide.imageUrl is not empty") }}
-                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
+                        {{ Twig.set("altText", "slide.imageAltText") }}
+                        {{ Twig.if("altText | trim is empty") }}
+                            {{ Twig.set("altText", "slide.name") }}
+                        {{ Twig.endif }}
+                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
                     {{ Twig.endif() }}
 
                     {{ Twig.if("slide.name is not empty and slide.headlineStyle != 'no-caption'") }}
