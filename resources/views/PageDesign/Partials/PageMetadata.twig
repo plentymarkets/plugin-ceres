@@ -31,15 +31,15 @@
 
 <meta name="robots" content="{% if forceNoIndex %}NOINDEX{% else %}{{ robots }}{% endif %}">
 {% if description | trim is not empty %}
-    <meta name="description" content="{{ description }}">
+    <meta name="description" content="{{ description | trim }}">
 {% endif %}
 {% if keywords | trim is not empty %}
-    <meta name="keywords" content="{{ keywords }}">
+    <meta name="keywords" content="{{ keywords | trim }}">
 {% endif %}
-<meta property="og:title" content="{{ title }}"/>
+<meta property="og:title" content="{{ title | trim }}"/>
 <meta property="og:type" content="article"/>
-<meta property="og:url" content="{{ url }}"/>
-<meta property="og:image" content="{{ image }}"/>
+<meta property="og:url" content="{{ url | trim }}"/>
+<meta property="og:image" content="{{ image | trim }}"/>
 
 <script type="application/ld+json">
 {% block schemaOrg %}
