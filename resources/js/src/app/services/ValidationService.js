@@ -108,7 +108,7 @@ function _validateElement(elem)
 {
     const $elem = $(elem);
 
-    if(!$elem.attr("data-validate"))
+    if (!$elem.attr("data-validate"))
     {
         return true;
     }

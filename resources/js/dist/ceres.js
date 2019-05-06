@@ -29558,6 +29558,11 @@ function unmarkAllFields(form) {
 
 function _validateElement(elem) {
   var $elem = (0, _jquery.default)(elem);
+
+  if (!$elem.attr("data-validate")) {
+    return true;
+  }
+
   var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
     return i.trim();
   }) || ["text"];
