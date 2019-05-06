@@ -137,8 +137,6 @@
 {% endblock %}
 
 {% block PartialHead %}
-    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ webstoreConfig.domainSsl ~ urls.search }}?query={search_term}","query-input": "required name=search_term"}}</script>
-
     {% set canonicalUrl = services.url.getCanonicalURL() %}
     {% if currentPage - 1 > 0 %}
         <link rel="prev" href="{{ canonicalUrl ~ queryString({'page': currentPage - 1}) }}" />
@@ -148,14 +146,23 @@
         <link rel="next" href="{{ canonicalUrl ~ queryString({'page': currentPage + 1}) }}" />
     {% endif %}
 
-    {% if category is defined %}
-        <title>{% if category.details[0].metaTitle %}{{ category.details[0].metaTitle }}{% else %}{{ category.details[0].name }}{% endif %} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
-
-        <meta name="description" content="{{ category.details[0].metaDescription }}">
-        <meta name="keywords" content="{{ category.details[0].metaKeywords }}">
-        <meta name="robots" content="{% if forceNoIndex or (currentPage >= config("Ceres.pagination.noIndex") and config("Ceres.pagination.noIndex") != 0 )%}NOINDEX{% else %}{{ metaRobots }}{% endif %}">
-    {% else %}
-        <meta name="robots" content="{{ config("Ceres.meta.robots_search_result") }}">
-        <title>{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
-    {% endif %}
+    {% set categoryDetails = category.details[0] %}
+    {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
+        {% block description    categoryDetails.metaDescription %}
+        {% block keywords       categoryDetails.metaKeywords %}
+        {% block title %}
+            {% if category is defined %}
+                {{ categoryDetails.metaTitle | default(categoryDetails.name) }}
+            {% else %}
+                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
+            {% endif %}
+        {% endblock %}
+        {% block robots %}
+            {% if category is defined %}
+                {% if currentPage >= config("Ceres.pagination.noIndex") and config("Ceres.pagination.noIndex") != 0 %}NOINDEX{% else %}{{ metaRobots }}{% endif %}
+            {% else %}
+                {{ ceresConfig.meta.robotsSearchResult }}
+            {% endif %}
+        {% endif %}
+    {% endembed %}
 {% endblock %}

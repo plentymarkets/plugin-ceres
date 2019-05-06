@@ -1,12 +1,13 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
-    <title>{% if category.details[0].metaTitle %}{{ category.details[0].metaTitle }}{% else %}{{ category.details[0].name }}{% endif %} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
-
-    <meta name="description" content="{{ category.details[0].metaDescription }}">
-    <meta name="keywords" content="{{ category.details[0].metaKeywords }}">
-
-    <meta name="robots" content="{{ metaRobots }}">
+    {% set categoryDetails = category.details[0] %}
+    {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
+        {% block title          categoryDetails.metaTitle | default(categoryDetails.name) %}
+        {% block description    categoryDetails.metaDescription %}
+        {% block keywords       categoryDetails.metaKeywords %}
+        {% block robots         metaRobots %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
