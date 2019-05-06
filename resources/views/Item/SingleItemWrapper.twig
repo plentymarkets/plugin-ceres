@@ -3,7 +3,7 @@
 {% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
 {% block PartialHead %}
-    {% set itemData = itemData %}
+    {% set itemData = item.documents[0].data %}
     {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
         {% block title          ItemName.get(itemData | itemName, itemData.variation.bundleType) %}
         {% block description    itemData.texts.metaDescription %}
