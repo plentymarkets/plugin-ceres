@@ -106,9 +106,14 @@ export function unmarkAllFields(form)
 
 function _validateElement(elem)
 {
-    const $elem          = $(elem);
+    const $elem = $(elem);
+
+    if(!$elem.attr("data-validate"))
+    {
+        return true;
+    }
     const validationKeys = $elem.attr("data-validate").split("|").map(function(i)
-        {
+    {
         return i.trim();
     }) || ["text"];
     let hasError       = false;
