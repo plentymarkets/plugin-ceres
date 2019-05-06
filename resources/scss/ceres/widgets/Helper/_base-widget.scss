@@ -117,15 +117,15 @@ header .widget
 
 @include media-breakpoint-down(xs)
 {
-    .widget-grid .widget-inner.col-12.widget-stacked
+    .widget-grid .widget-inner.col-12.widget-stacked-mobile
     {
         padding-bottom: 1rem;
     }
 }
 
-@include media-breakpoint-between(sm, lg)
+@include media-breakpoint-between(sm, md)
 {
-    .widget-grid .widget-inner.col-sm-12.widget-stacked
+    .widget-grid .widget-inner.col-sm-12.widget-stacked-tablet
     {
         padding-bottom: 2rem;
     }
