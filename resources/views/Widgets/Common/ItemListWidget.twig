@@ -113,7 +113,7 @@
             {{ Twig.if("itemList.documents is not empty") }}
                 <carousel :items-per-page="{{ itemsPerPage }}">
                     {{ Twig.for("item", "itemList.documents") }}
-                        <template #items>
+                        <template slot="items">
                             <category-item
                                 :item-data="{{ Twig.print("item.data | json_encode") }}"
                                 :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}"

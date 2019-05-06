@@ -9,7 +9,7 @@
 
         <div class="col-12">
             <carousel :items-per-page="itemsPerPage">
-                <template #items v-for="item in items">
+                <template slot="items" v-for="item in items">
                     <category-item
                         :key="item.id"
                         :item-data="item.data"
