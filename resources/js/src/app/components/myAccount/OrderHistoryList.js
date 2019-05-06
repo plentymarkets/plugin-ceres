@@ -17,11 +17,6 @@ Vue.component("order-history-list", {
             type: Number,
             default: 5
         },
-        hintText:
-        {
-            type: String,
-            default: null
-        },
         allowPaymentProviderChange:
         {
             type: Boolean,
@@ -50,8 +45,6 @@ Vue.component("order-history-list", {
 
     created()
     {
-        this.$options.template = this.template;
-
         if (!isNullOrUndefined(this.initialData))
         {
             this.orderList = this.initialData;

@@ -11,11 +11,6 @@ Vue.component("address-header", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         getCountryName(countryId)

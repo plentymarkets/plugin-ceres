@@ -54,8 +54,6 @@ Vue.component("carousel", {
 
     created()
     {
-        this.$options.template = this.template;
-
         if (this.$slots.items)
         {
             this.itemCount = this.$slots.items.length;

@@ -20,11 +20,6 @@ Vue.component("guest-login", {
         };
     },
 
-    created: function()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>

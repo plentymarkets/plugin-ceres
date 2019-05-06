@@ -14,13 +14,6 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "hintText": {
-            "type": "codeEditor",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.paymentProviderHintTextLabel",
-                "tooltipText": "Widget.paymentProviderHintTextTooltip"
-            }
-        }
+        "spacing":"@include(spacing)"
     }
 }

@@ -14,14 +14,6 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "hintText": {
-            "type": "noteEditor",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.orderHistoryHintTextLabel",
-                "tooltipText": "Widget.orderHistoryHintTextTooltip"
-            }
-        },
         "ordersPerPage": {
             "type": "select",
             "defaultValue": 5,
@@ -67,6 +59,7 @@
                 "name": "Widget.orderHistoryAllowReturnLabel",
                 "tooltip": "Widget.orderHistoryAllowReturnTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

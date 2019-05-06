@@ -25,8 +25,6 @@ Vue.component("user-login-handler", {
 
     created()
     {
-        this.$options.template = this.template;
-
         ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
             .done(response =>
             {

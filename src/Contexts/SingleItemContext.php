@@ -43,5 +43,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->variationUnits = $list['units'];
 
         $this->customerShowNetPrices = $customerService->showNetPrices();
+
+        $this->bodyClasses[] = "item-" . $itemData['item']['id'];
+        $this->bodyClasses[] = "variation-" . $itemData['variation']['id'];
     }
 }

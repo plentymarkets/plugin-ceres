@@ -317,13 +317,13 @@ $zIndex-10:                         10000 !default;
 // of components dependent on the z-axis and are designed to all work together.
 
 $zindex-dropdown:                   $zIndex-1 !default;
-$zindex-sticky:                     $zIndex-3 !default;
 $zindex-fixed:                      $zIndex-3 !default;
 $zindex-modal-backdrop:             $zIndex-7 !default;
 $zindex-modal:                      $zIndex-8 !default;
-$zindex-navbar:                     $zIndex-5 !default;
 $zindex-popover:                    $zIndex-10 !default;
+$zindex-sticky:                     $zIndex-3 !default;
 $zindex-tooltip:                    $zIndex-7 !default;
+$zindex-wrapper-top:                $zIndex-9 !default;
 
 // Navbar
 $navbar-background-color:           $gray-lightest !default;
@@ -10789,7 +10789,7 @@ body {
 		
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
-			z-index 	: $zIndex-8;
+			z-index 	: $zindex-wrapper-top;
 		} 
 
 		.wrapper-main{
@@ -11076,20 +11076,12 @@ button:focus {
 		min-width: 15rem;
 	}
 
-	&.btn-m-r {
-		margin-right: 10px;
-	}
-
 	&.btn-block {
 		> .fa {
 			line-height: inherit;
 			margin-top: 0;
 		}
 	}
-}
-
-.btn-right {
-	float: right;
 }
 
 .btn-xs-max-width {
@@ -12756,6 +12748,11 @@ $border-width: 1px;
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
+        &.disabled,
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     i
@@ -12995,7 +12992,6 @@ $border-width: 1px;
 	}
 
 	width: 100%;
-	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
 
@@ -13380,7 +13376,6 @@ $border-width: 1px;
 
 .navbar {
 	padding:0;
-	z-index: $zindex-navbar;
 	background-color: $navbar-background-color;
 	border-bottom: 1px solid $gray-lighter;
 
@@ -13388,7 +13383,6 @@ $border-width: 1px;
 
 		border-radius: 0;
 		padding:0;
-		z-index: $zindex-navbar;
 		border-bottom: 1px solid $gray-lighter;
 
 		.dropdown:hover .dropdown-menu {
@@ -14526,14 +14520,11 @@ html.ie {
     -webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0); } }
 	
-//navigation scss
-
 @include media-breakpoint-up(md){
 	.wrapper-main {
 		& > nav.container-max {
 			padding-left:0;
 			padding-right:0;
-		    z-index: 1000;
 		    display: block;
 		    width: 100%;
 		    max-width: 100%;
@@ -14541,11 +14532,6 @@ html.ie {
 		}
 		.breadcrumbs {
 			background: $breadcrumb-bg;
-		    z-index: 1000;
-
-			&.unfixed {
-				z-index: -1;
-			}
 		}
 		.breadcrumb{
 			max-width: 1200px;
@@ -14554,8 +14540,8 @@ html.ie {
 		    padding: .5rem 15px;
 		}
 	}
-	
 }
+
 .to-top {
     display: block;
     background-color: $gray-dark;
@@ -14912,10 +14898,7 @@ html.ie {
 		&>div:first-child{
 			@extend .card;
 			margin-bottom: 0;
-
-			@include media-breakpoint-down(xs) {
-				min-height: 115px;
-			}
+			min-height: 115px;
 		}
 	}
 
@@ -15050,6 +15033,7 @@ html.ie {
 	{
 		top: 0;
 		right: 0;
+		bottom: 0;
 
 		& button {
 			min-width: auto !important;
@@ -17064,6 +17048,8 @@ html.ie .basket-preview-hover {
 	}
 
 	&.isLoading {
+		cursor: not-allowed;
+
 		&:before {
 			opacity: 0.5;
 			visibility: visible;
@@ -17829,19 +17815,43 @@ html.ie {
     -webkit-box-direction: normal;
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
-    
-    category-item {
-        background: $white;
-        display: block;
-        height: 145px;
-        margin-bottom: 15px;
-        width: 100%;
+}
 
-        @include media-breakpoint-up(sm) {
-            margin-bottom: 30px;
-            padding-bottom: calc(100% + 100px);
-            height: unset;
+category-item {
+    display: block;
+    height: 145px;
+    width: 100%;
+    margin-bottom: 15px;
+    background-color: $white;
+
+    a {
+        padding-top: 100%;
+        display: block;
+        color: $gray;
+
+        &:hover {
+            color: $gray;
         }
+
+        span {
+            padding: .8rem .8rem 74px .8rem;
+            display: block;
+        }
+    }
+
+    .fa {
+        position: absolute;
+        top: 48px;
+        left: 0;
+        right: 0;
+        font-size: 160px;
+        text-align: center;
+        color: $gray-lightest;
+    }
+
+    @include media-breakpoint-up(sm) {
+        margin-bottom: 30px;
+        height: unset;
     }
 }
 
@@ -18730,7 +18740,6 @@ html.ios {
     }
 
     .title{
-        //font-size: 2rem;
         line-height: 1.2;
     }
 
@@ -18983,23 +18992,6 @@ html.ios {
     }
 }
 
-.single-rightside
-{
-    margin-top: 1rem;
-}
-
-@include media-breakpoint-up(md)
-{
-    .single-rightside
-    {
-        margin-top: 0;
-        position: absolute;
-        left: (7/12)*100%;
-        top: 0;
-        bottom: 0;
-    }
-}
-
 .loading {
   & .loading-animation-frame {
     display: block;
@@ -19028,6 +19020,7 @@ html.ios {
   height: 100%;
   width: 18px;
   display: inline-block;
+  margin: 0 .1rem;
 
   -webkit-animation: sk-stretchdelay 0.8s infinite ease-in-out;
   animation: sk-stretchdelay 0.8s infinite ease-in-out;
@@ -19247,10 +19240,6 @@ html.ios {
 
 .history-pagination {
     margin-top: 15px;
-
-    & .counter {
-        margin-top: 5px;
-    }
 }
 
 .gradient-hr {
@@ -19325,15 +19314,29 @@ html.ios {
     padding: 1rem;
 
     .add-item {
-        bottom: 0;
-
         @include media-breakpoint-down(xs) {
+            .item-edit {
+                height: 45%;
+                margin-bottom: 0 !important;
+            }
+            span.item-edit:nth-of-type(2) {
+                bottom: 0;
+                position: absolute;
+            }
+
             button {
                 height: 100%;
             }
         }
     }
 }
+
+.widget-account-settings {
+    .card {
+        min-height: 115px;
+    }
+}
+
 
 // Widgets
 @mixin widget-bg-variant($color)
@@ -19490,20 +19493,10 @@ html.ios {
                         align-items: center;
                 padding: 1rem;
 
-                h2, .h2
+                > div
                 {
-                    text-align: center;
+                    display: block;
                     width: 100%;
-                    text-transform: uppercase;
-
-                    @include media-breakpoint-up(sm)
-                    {
-                        font-size: 3rem;
-                    }
-                    @include media-breakpoint-up(lg)
-                    {
-                        font-size: 4rem;
-                    }
                 }
             }
         }
@@ -19519,7 +19512,7 @@ html.ios {
 
             .widget-caption
             {
-                padding: 1.5rem;
+                padding: 0 1.5rem;
             }
         }
     }
@@ -19529,12 +19522,22 @@ html.ios {
         > .widget-inner
         {
             padding: 0;
-            top: auto;
 
             .widget-caption
             {
+                @include media-breakpoint-only(xs) {
+                    position: relative;
+                    width: 100%;
+                }
+
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
                 width: 100%;
                 padding: 1rem;
+                position: absolute;
+                bottom: 0;
             }
         }
     }
@@ -19632,6 +19635,90 @@ html.ios {
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 {
     font-size: 2rem;
+}
+
+.widget-image-box-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+    }
+
+    h1
+    {
+        font-size: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    h2
+    {
+        font-size: 1.75rem;
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+    }
+
+    h3
+    {
+        font-size: 1.5rem;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+
+    p
+    {
+        padding-top: .2rem;
+        padding-bottom: .2rem;
+    }
+
+    &.fullwidth
+    {
+        h1,
+        h2,
+        h3
+        {
+            text-transform: uppercase;
+        }
+
+        h1
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 4rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 6rem;
+            }
+        }
+
+        h2
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 2.5rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 4rem;
+            }
+        }
+
+        h3
+        {
+            @include media-breakpoint-up(sm)
+            {
+                font-size: 1.5rem;
+            }
+            @include media-breakpoint-up(lg)
+            {
+                font-size: 2.5rem;
+            }
+        }
+    }
 }
 @mixin widget-carousel-variant($parent, $color)
 {
@@ -19826,7 +19913,7 @@ html.ie {
 
     .widget-caption
     {
-        padding: 1rem 1.5rem;
+        padding: 0.25rem 1.5rem;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -19834,16 +19921,47 @@ html.ie {
             -ms-flex-align: center;
                 align-items: center;
 
-        h2, .h2
+        > div
         {
             -webkit-box-flex: 1;
                 -ms-flex: 1;
                     flex: 1;
-            padding-top: .2rem;
-            margin: 0;
-            text-transform: uppercase;
-            font-size: 1.75rem;
         }
+
+    }
+}
+
+.widget-item-list-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    h1
+    {
+        font-size: 2rem;
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+    }
+
+    h2
+    {
+        font-size: 1.75rem;
+        padding-top: .6rem;
+        padding-bottom: .4rem;
+    }
+
+    h3
+    {
+        font-size: 1.5rem;
+        padding-top: .4rem;
+        padding-bottom: .1rem;
+
     }
 }
 .widget-legal-information
@@ -19940,16 +20058,29 @@ html.ie {
     .widget-inner
     {
         padding: 1rem 1.5rem;
-        text-align: center;
         word-break: break-word;
     }
 
-    .h1, h1
+    .h1, h1,
+    .h2, h2,
+    .h3, h3
     {
         margin: 0.5rem auto;
         font-size: 2.5rem;
         letter-spacing: 1.25px;
         display: block;
+    }
+
+    .h2, h2
+    {
+        margin: 0.4rem 0;
+        font-size: 2.25rem;
+    }
+
+    .h3, h3
+    {
+        margin: 0.25rem 0;
+        font-size: 2rem;
     }
 }
 .widget-grid
@@ -19962,9 +20093,11 @@ html.ie {
 
         > div
         {
+            max-width: 100%;
             -webkit-box-flex: 1;
                 -ms-flex: 1;
                     flex: 1;
+            max-width: 100%;
         }
     }
 
@@ -20071,6 +20204,10 @@ html.ie {
         padding: $spacer;
     }
 }
+.nav-link.text-appearance.active
+{
+    color: $nav-tabs-link-active-color !important;
+}
 .widget
 {
     margin-bottom: 2rem;
@@ -20084,6 +20221,7 @@ html.ie {
             margin-bottom: 0;
         }
     }
+
 }
 
 @include media-breakpoint-down(sm)
@@ -20230,6 +20368,41 @@ header .widget
     padding-bottom: 0.1px;
 }
 
+/*
+ * INLINE EDITOR CLASSES
+ */
+@each $color, $value in $shop-builder-colors
+{
+    .color-#{$color}
+    {
+        color: $value !important;
+    }
+
+    .bg-#{$color}
+    {
+        @include context-bg($value);
+    }
+}
+
+.align-center
+{
+    text-align: center;
+}
+
+.align-left
+{
+    text-align: left;
+}
+
+.align-right
+{
+    text-align: right;
+}
+
+.align-justify
+{
+    text-align: justify;
+}
 @each $color, $value in $shop-builder-colors
 {
     .widget-#{$color}

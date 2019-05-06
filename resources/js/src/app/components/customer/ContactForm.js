@@ -30,8 +30,6 @@ Vue.component("contact-form", {
 
     created()
     {
-        this.$options.template = this.template;
-
         window.sendMail = this.sendMail;
     },
 

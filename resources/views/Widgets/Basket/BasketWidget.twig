@@ -1,10 +1,17 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {{ Twig.component("Ceres::Basket.Components.BasketList") }}
 
 {% set appearance = widget.settings.appearance.mobile %}
 
-<div class="widget widget-basket widget-{{ appearance | default("primary") }}">
+<div class="widget widget-basket widget-{{ appearance | default("primary") }} 
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div>
         <h3>{{ Twig.trans("Ceres::Template.checkoutBasket") }}</h3>
         <hr class="mb-0">

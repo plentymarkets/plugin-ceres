@@ -23,6 +23,16 @@ Vue.component("category-item", {
         disableCarouselOnMobile:
         {
             type: Boolean
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -56,11 +66,6 @@ Vue.component("category-item", {
         ...Vuex.mapState({
             showNetPrices: state => state.basket.showNetPrices
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:

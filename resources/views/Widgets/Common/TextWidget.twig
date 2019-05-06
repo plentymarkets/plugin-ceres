@@ -1,8 +1,7 @@
-{% set text         = widget.settings.text.mobile %}
-{% set appearance   = widget.settings.appearance.mobile %}
-
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{% set text         = widget.settings.text.mobile %}
+{% set appearance   = widget.settings.appearance.mobile %}
 {% set hasSpacing = widget.settings.customMargin.mobile or widget.settings.customPadding.mobile %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}

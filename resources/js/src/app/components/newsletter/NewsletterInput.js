@@ -10,16 +10,6 @@ Vue.component("newsletter-input", {
             type: String,
             default: "#vue-newsletter-input"
         },
-        title:
-        {
-            type: String,
-            default: ""
-        },
-        subTitle:
-        {
-            type: String,
-            default: ""
-        },
         showNameInputs:
         {
             type: Boolean,
@@ -46,11 +36,6 @@ Vue.component("newsletter-input", {
             isDisabled: false,
             privacyPolicyValue: false
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods: {

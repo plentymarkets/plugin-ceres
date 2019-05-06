@@ -19,8 +19,6 @@ Vue.component("wish-list-count", {
 
     created()
     {
-        this.$options.template = this.template;
-
         ApiService.get("/rest/io/itemWishList", {}, { keepOriginalResponse: true })
             .done(response =>
             {

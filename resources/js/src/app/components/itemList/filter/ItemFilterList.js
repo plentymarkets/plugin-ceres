@@ -102,8 +102,6 @@ Vue.component("item-filter-list", {
     {
         this.$store.commit("setFacets", this.facetData);
 
-        this.$options.template = this.template;
-
         const urlParams = UrlService.getUrlParams(document.location.search);
 
         let selectedFacets = [];

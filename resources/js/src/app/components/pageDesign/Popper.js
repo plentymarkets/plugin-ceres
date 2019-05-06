@@ -23,11 +23,6 @@ Vue.component("popper", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
 	{
         this.$nextTick(() =>

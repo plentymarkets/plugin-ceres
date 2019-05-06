@@ -56,8 +56,6 @@ Vue.component("live-shopping-details", {
 
     created()
     {
-        this.$options.template = this.template;
-
         this.initializeDataAndTimer();
     },
 

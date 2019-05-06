@@ -1,6 +1,4 @@
 import ApiService from "services/ApiService";
-import NotificationService from "services/NotificationService";
-import TranslationService from "services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
 
 const state =
@@ -10,7 +8,8 @@ const state =
             isPostOfficeAvailable: false,
             selectedShippingProfile: null,
             shippingProfileId: null,
-            shippingProfileList: []
+            shippingProfileList: [],
+            maxDeliveryDays: null
         },
         payment: {
             methodOfPaymentId: null,
@@ -36,7 +35,8 @@ const state =
                 validate: null
             }
         },
-        newsletterSubscription: {}
+        newsletterSubscription: {},
+        readOnly: false
     };
 
 const mutations =
@@ -60,6 +60,11 @@ const mutations =
             {
                 state.shipping.shippingProfileList = shippingProfileList;
             }
+        },
+
+        setMaxDeliveryDays(state, maxDeliveryDays)
+        {
+            state.shipping.maxDeliveryDays = maxDeliveryDays;
         },
 
         setMethodOfPayment(state, methodOfPaymentId)
@@ -151,6 +156,11 @@ const mutations =
         setSubscribeNewsletterShowErr(state, { emailFolder, showError })
         {
             Vue.set(state.validation[`subscribeNewsletter_${emailFolder}`], "showError", showError);
+        },
+
+        setIsCheckoutReadonly(state, readOnly)
+        {
+            state.readOnly = !!readOnly;
         }
     };
 
@@ -161,8 +171,10 @@ const actions =
             commit("setShippingCountryId", checkout.shippingCountryId);
             commit("setShippingProfile", checkout.shippingProfileId);
             commit("setShippingProfileList", checkout.shippingProfileList);
+            commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
+            commit("setIsCheckoutReadonly", checkout.readOnly);
 
             dispatch("setShippingProfileById", checkout.shippingProfileId);
             dispatch("initProfileAvailabilities");
@@ -213,24 +225,6 @@ const actions =
 
                 commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
-
-                const isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
-
-                const selectedAddress = getters.getSelectedAddress("2");
-                const isAddressPostOffice = selectedAddress ? selectedAddress.address1 === "POSTFILIALE" : false;
-                const isAddressParcelBox = selectedAddress ? selectedAddress.address1 === "PACKSTATION" : false;
-
-                if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
-                {
-                    const isUnsupportedPostOffice = isAddressPostOffice && !shippingProfile.isPostOffice;
-                    const isUnsupportedParcelBox = isAddressParcelBox && !shippingProfile.isParcelBox;
-
-                    if (isUnsupportedPostOffice || isUnsupportedParcelBox)
-                    {
-                        commit("selectDeliveryAddressById", -99);
-                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressChangedWarning"));
-                    }
-                }
 
                 ApiService.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId })
                     .done(response =>

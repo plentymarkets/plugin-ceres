@@ -54,14 +54,8 @@ Vue.component("single-item", {
 
     created()
     {
-        this.$options.template = this.template;
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
-
-        this.$store.watch(() => this.$store.getters.variationTotalPrice, () =>
-        {
-            $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
-        });
     }
 });

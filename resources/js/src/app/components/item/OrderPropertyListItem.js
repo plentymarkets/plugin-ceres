@@ -109,11 +109,6 @@ Vue.component("order-property-list-item", {
         ])
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         onInputValueChanged(value)
@@ -142,12 +137,6 @@ Vue.component("order-property-list-item", {
                 if (isNullOrUndefined(value) || value.length <= 0)
                 {
                     value = null;
-                }
-                else
-                {
-                    const name = this.property.selectionValues[value].name;
-
-                    value = name;
                 }
             }
 

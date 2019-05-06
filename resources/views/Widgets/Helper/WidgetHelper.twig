@@ -93,3 +93,24 @@
     {% endif %}
 
 {% endmacro %}
+
+{% macro makeEditable(variableName, toolbarLayout, isPreview, additionalClasses) %}
+    {%- spaceless %}
+        {% if isPreview %} data-builder-editable="{{ variableName }}" data-builder-editor-toolbar="{{ toolbarLayout }}"{% if additionalClasses %} data-builder-editor-classes="{{ additionalClasses }}"{% endif %}{% endif %}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro editableTwig(isPreview, template) %}
+    {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+    {% if isPreview %}{{ Twig.do("verbatim") }}{% endif %}
+        {{ template | raw }}
+    {% if isPreview %}{{ Twig.do("endverbatim") }}{% endif %}
+{% endmacro %}
+
+{% macro makeCodeEditable(variableName, labelTranslationKey, isPreview) %}
+    {%- if isPreview %} data-builder-code="{{ variableName }}" data-builder-code-label="{{ trans(labelTranslationKey) }}"{% endif -%}
+{% endmacro %}
+
+{% macro makeClickable(isPreview) %}
+    {%- if isPreview %} data-builder-clickable{% endif -%}
+{% endmacro %}

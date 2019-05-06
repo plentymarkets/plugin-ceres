@@ -1,16 +1,31 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set appearance = widget.settings.appearance.mobile %}
-{% set title = widget.settings.title.mobile | json_encode %}
-{% set subTitle = widget.settings.subTitle.mobile | json_encode %}
 {% set showNameInputs = widget.settings.showNameInputs.mobile | json_encode %}
 {% set showPrivacyPolicyCheckbox = widget.settings.showPrivacyPolicyCheckbox.mobile | json_encode %}
 {% set emailFolder = widget.settings.emailFolder.mobile | json_encode %}
 
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
 {{ Twig.component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 
-<div class="widget widget-newsletter widget-{{ appearance | default("primary") }}">
+<div class="widget widget-newsletter widget-{{ appearance | default("primary") }} {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
-        <newsletter-input :title="{{ title }}" :sub-title="{{ subTitle }}" :show-name-inputs="{{ showNameInputs }}" :show-privacy-policy-checkbox="{{ showPrivacyPolicyCheckbox }}" :email-folder="{{ emailFolder }}"></newsletter-input>
+        <div class="row">
+            {# The 'hintText' variable gets filled at src/Widgets/Common/NewsletterWidget.php to migrate widget settings #}
+            <div class="col-xs-12" {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+                {{ hintText | raw }}
+            </div>
+        </div>
+
+        <newsletter-input
+            :show-name-inputs="{{ showNameInputs }}"
+            :show-privacy-policy-checkbox="{{ showPrivacyPolicyCheckbox }}"
+            :email-folder="{{ emailFolder }}">
+        </newsletter-input>
     </div>
 </div>

@@ -22,6 +22,16 @@ Vue.component("live-shopping-item", {
         displaySettings:
         {
             type: Object
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -120,8 +130,6 @@ Vue.component("live-shopping-item", {
 
     created()
     {
-        this.$options.template = this.template;
-
         this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
     },
 
