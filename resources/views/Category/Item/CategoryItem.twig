@@ -146,23 +146,10 @@
         <link rel="next" href="{{ canonicalUrl ~ queryString({'page': currentPage + 1}) }}" />
     {% endif %}
 
-    {% set categoryDetails = category.details[0] %}
     {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
-        {% block description    categoryDetails.metaDescription %}
-        {% block keywords       categoryDetails.metaKeywords %}
-        {% block title %}
-            {% if category is defined %}
-                {{ categoryDetails.metaTitle | default(categoryDetails.name) }}
-            {% else %}
-                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
-            {% endif %}
-        {% endblock %}
-        {% block robots %}
-            {% if category is defined %}
-                {% if currentPage >= config("Ceres.pagination.noIndex") and config("Ceres.pagination.noIndex") != 0 %}NOINDEX{% else %}{{ metaRobots }}{% endif %}
-            {% else %}
-                {{ ceresConfig.meta.robotsSearchResult }}
-            {% endif %}
+        {% if category is not defined %}
+            {% block title      trans("Ceres::Template.itemSearchResults") ~ " " ~ searchString %}
+            {% block robots     ceresConfig.meta.robotsSearchResult %}
         {% endif %}
     {% endembed %}
 {% endblock %}

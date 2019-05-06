@@ -1,15 +1,5 @@
 {% extends getPartial('page-design') %}
 
-{% block PartialHead %}
-    {% set categoryDetails = category.details[0] %}
-    {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
-        {% block title          categoryDetails.metaTitle | default(categoryDetails.name) %}
-        {% block description    categoryDetails.metaDescription %}
-        {% block keywords       categoryDetails.metaKeywords %}
-        {% block robots         metaRobots %}
-    {% endembed %}
-{% endblock %}
-
 {% block PageBody %}
     {{ component( "Ceres::Checkout.Components.Checkout" ) }}
 
