@@ -11814,7 +11814,6 @@ Custom classes
     height: 500px;
   }
 }
-
 .owl-thumbs {
   display: inline-block;
   .owl-thumb {
@@ -20098,6 +20097,7 @@ html.ie {
             -webkit-box-flex: 1;
                 -ms-flex: 1;
                     flex: 1;
+            max-width: 100%;
         }
     }
 
