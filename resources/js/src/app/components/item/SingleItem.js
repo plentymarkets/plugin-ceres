@@ -54,6 +54,8 @@ Vue.component("single-item", {
 
     created()
     {
+        this.$options.template = this.template || "#vue-single-item";
+
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);

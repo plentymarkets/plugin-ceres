@@ -89,13 +89,14 @@
         {% include [category_template(item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId)] %}
     {% elseif shopBuilderTemplate | trim is not empty %}
         {# Shopbuilder template #}
-        <div class="container-max">
-            <div class="row">
-                <div class="col">
-                    {{ shopBuilderTemplate | raw }}
-                </div>
-            </div>
-        </div>
+        <single-item
+            v-cloak
+            item-data="{{ item | json_data }}"
+            variation-list-data="{{ variations | json_data }}"
+            :attribute-name-map="{{ attributeNameMap | json_encode }}"
+            :variation-units="{{ variationUnits | json_encode }}">
+            {{ shopBuilderTemplate | raw }}
+        </single-item>
     {% else %}
         {# No item template defined in ShopBuilder => use default template from plugin #}
         {% include "Ceres::Item.SingleItemView" %}
