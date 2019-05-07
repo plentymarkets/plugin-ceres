@@ -154,7 +154,7 @@ Vue.component("create-update-address", {
                     error =>
                     {
                         this.waiting = false;
-
+                        
                         if (error.validation_errors)
                         {
                             this._handleValidationErrors(error.validation_errors);
@@ -188,6 +188,7 @@ Vue.component("create-update-address", {
                 NotificationService.error({ code: error.code, message: "" });
                 window.location.reload();
             }
+            else this._handleValidationErrors(error);
         },
 
         _syncOptionTypesAddressData()
