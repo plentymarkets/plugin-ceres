@@ -14299,7 +14299,7 @@ exports.homedir = function () {
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.6
+ * @version 1.14.7
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -14873,7 +14873,11 @@ function isFixed(element) {
   if (getStyleComputedProperty(element, 'position') === 'fixed') {
     return true;
   }
-  return isFixed(getParentNode(element));
+  var parentNode = getParentNode(element);
+  if (!parentNode) {
+    return false;
+  }
+  return isFixed(parentNode);
 }
 
 /**
@@ -15529,18 +15533,23 @@ function getRoundedOffsets(data, shouldRound) {
   var _data$offsets = data.offsets,
       popper = _data$offsets.popper,
       reference = _data$offsets.reference;
+  var round = Math.round,
+      floor = Math.floor;
 
-
-  var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;
-  var isVariation = data.placement.indexOf('-') !== -1;
-  var sameWidthOddness = reference.width % 2 === popper.width % 2;
-  var bothOddWidth = reference.width % 2 === 1 && popper.width % 2 === 1;
   var noRound = function noRound(v) {
     return v;
   };
 
-  var horizontalToInteger = !shouldRound ? noRound : isVertical || isVariation || sameWidthOddness ? Math.round : Math.floor;
-  var verticalToInteger = !shouldRound ? noRound : Math.round;
+  var referenceWidth = round(reference.width);
+  var popperWidth = round(popper.width);
+
+  var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;
+  var isVariation = data.placement.indexOf('-') !== -1;
+  var sameWidthParity = referenceWidth % 2 === popperWidth % 2;
+  var bothOddWidth = referenceWidth % 2 === 1 && popperWidth % 2 === 1;
+
+  var horizontalToInteger = !shouldRound ? noRound : isVertical || isVariation || sameWidthParity ? round : floor;
+  var verticalToInteger = !shouldRound ? noRound : round;
 
   return {
     left: horizontalToInteger(bothOddWidth && !isVariation && shouldRound ? popper.left - 1 : popper.left),
@@ -19688,6 +19697,10 @@ Vue.component("address-input-group", {
           uk: []
         };
       }
+    },
+    defaultSalutation: {
+      type: String,
+      default: "male"
     }
   },
   computed: _objectSpread({
@@ -19779,7 +19792,7 @@ Vue.component("address-input-group", {
       var isSalutationActive = this.isInOptionalFields(locale, "".concat(keyPrefix, ".salutation"));
       var isContactPersonActive = this.isInOptionalFields(locale, "".concat(keyPrefix, ".contactPerson"));
       var isName1Active = this.isInOptionalFields(locale, "".concat(keyPrefix, ".name1"));
-      var isSelectedSalutationCompany = this.value.addressSalutation === 2;
+      var isSelectedSalutationCompany = this.value.gender === "company";
       var condition1 = isSalutationActive && isContactPersonActive && isSelectedSalutationCompany;
       var condition2 = !isSalutationActive && isName1Active && isContactPersonActive;
       return !(condition1 || condition2);
@@ -19788,7 +19801,7 @@ Vue.component("address-input-group", {
       var isSalutationActive = this.isInOptionalFields(locale, "".concat(keyPrefix, ".salutation"));
       var isName1Active = this.isInOptionalFields(locale, "".concat(keyPrefix, ".name1"));
       var isContactPersonRequired = this.isInRequiredFields(locale, "".concat(keyPrefix, ".contactPerson"));
-      var isSelectedSalutationCompany = this.value.addressSalutation === 2;
+      var isSelectedSalutationCompany = this.value.gender === "company";
       var condition1 = isSalutationActive && !isSelectedSalutationCompany;
       var condition2 = isSalutationActive && isSelectedSalutationCompany && isContactPersonRequired;
       var condition3 = !isSalutationActive && isName1Active && isContactPersonRequired;
@@ -19898,8 +19911,6 @@ Vue.component("address-select", {
       default: function _default() {
         return {};
       }
-<<<<<<< HEAD
-=======
     },
     defaultSalutation: {
       type: String,
@@ -19912,7 +19923,6 @@ Vue.component("address-select", {
     paddingInlineStyles: {
       type: String,
       default: null
->>>>>>> beta
     }
   },
   data: function data() {
@@ -19921,8 +19931,7 @@ Vue.component("address-select", {
       modalType: "",
       headline: "",
       addressToEdit: {
-        addressSalutation: 0,
-        gender: "male",
+        gender: this.defaultSalutation,
         countryId: this.shippingCountryId
       },
       addressToDelete: {},
@@ -19931,6 +19940,7 @@ Vue.component("address-select", {
       addressOptionTypeFieldMap: {
         1: "vatNumber",
         4: "telephone",
+        6: "postNumber",
         9: "birthday",
         11: "title",
         12: "contactPerson"
@@ -20021,8 +20031,7 @@ Vue.component("address-select", {
 
       if (this.isSalutationEnabled) {
         this.addressToEdit = {
-          addressSalutation: 0,
-          gender: "male",
+          gender: this.defaultSalutation,
           countryId: this.shippingCountryId,
           showPickupStation: false
         };
@@ -20048,15 +20057,6 @@ Vue.component("address-select", {
     showEditModal: function showEditModal(address) {
       this.modalType = "update";
       this.addressToEdit = this.getAddressToEdit(address);
-
-      if (this.addressToEdit.gender === "female") {
-        this.addressToEdit.addressSalutation = 1;
-      } else if ((0, _utils.isNull)(this.addressToEdit.gender) && this.addressToEdit.name1) {
-        this.addressToEdit.addressSalutation = 2;
-      } else {
-        this.addressToEdit.addressSalutation = 0;
-        this.addressToEdit.gender = "male";
-      }
 
       if ((0, _utils.isDefined)(this.addressToEdit.address1) && (this.addressToEdit.address1 === "PACKSTATION" || this.addressToEdit.address1 === "POSTFILIALE") && this.$store.getters.isParcelOrOfficeAvailable) {
         this.addressToEdit.showPickupStation = true;
@@ -20231,7 +20231,7 @@ Vue.component("address-select", {
   watch: {
     isSalutationEnabled: function isSalutationEnabled(newVal) {
       if (!newVal) {
-        delete this.addressToEdit.addressSalutation;
+        delete this.addressToEdit.gender;
       }
     }
   }
@@ -20277,6 +20277,10 @@ Vue.component("create-update-address", {
       default: function _default() {
         return {};
       }
+    },
+    defaultSalutation: {
+      type: String,
+      default: "male"
     }
   },
   data: function data() {
@@ -20443,6 +20447,24 @@ Vue.component("create-update-address", {
                   break;
                 }
 
+              case 4:
+                {
+                  if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
+                    optionType.value = this.addressData.telephone;
+                  }
+
+                  break;
+                }
+
+              case 6:
+                {
+                  if (this.addressData.postNumber && this.addressData.postNumber !== optionType.value) {
+                    optionType.value = this.addressData.postNumber;
+                  }
+
+                  break;
+                }
+
               case 9:
                 {
                   if (this.addressData.birthday && this.addressData.birthday !== optionType.value) {
@@ -20456,15 +20478,6 @@ Vue.component("create-update-address", {
                 {
                   if (this.addressData.title && this.addressData.title !== optionType.value) {
                     optionType.value = this.addressData.title;
-                  }
-
-                  break;
-                }
-
-              case 4:
-                {
-                  if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
-                    optionType.value = this.addressData.telephone;
                   }
 
                   break;
@@ -20523,11 +20536,7 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("invoice-address-select", {
   delimiters: ["${", "}"],
-<<<<<<< HEAD
-  template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\">\n        </address-select>\n    ",
-=======
   template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\">\n        </address-select>\n    ",
->>>>>>> beta
   props: {
     optionalAddressFields: {
       type: Object,
@@ -20540,6 +20549,10 @@ Vue.component("invoice-address-select", {
       default: function _default() {
         return {};
       }
+    },
+    defaultSalutation: {
+      type: String,
+      default: "male"
     },
     hasToValidate: {
       type: Boolean,
@@ -20631,11 +20644,7 @@ Vue.component("invoice-address-select", {
 
 Vue.component("shipping-address-select", {
   delimiters: ["${", "}"],
-<<<<<<< HEAD
-  template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            @address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\">\n        </address-select>\n    ",
-=======
   template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            @address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\">\n        </address-select>\n    ",
->>>>>>> beta
   props: {
     optionalAddressFields: {
       type: Object,
@@ -20648,8 +20657,6 @@ Vue.component("shipping-address-select", {
       default: function _default() {
         return {};
       }
-<<<<<<< HEAD
-=======
     },
     defaultSalutation: {
       type: String,
@@ -20662,7 +20669,6 @@ Vue.component("shipping-address-select", {
     paddingInlineStyles: {
       type: String,
       default: null
->>>>>>> beta
     }
   },
   computed: Vuex.mapState({
@@ -21176,7 +21182,6 @@ Vue.component("registration", {
       billingAddress: {
         countryId: null,
         stateId: null,
-        addressSalutation: 0,
         gender: "male"
       },
       isDisabled: false
@@ -21334,6 +21339,10 @@ Vue.component("reset-password-form", {
 
 var _utils = require("../../helper/utils");
 
+var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 Vue.component("salutation-select", {
   props: {
     template: {
@@ -21353,64 +21362,48 @@ Vue.component("salutation-select", {
       default: function _default() {
         return [];
       }
+    },
+    defaultSalutation: {
+      type: String,
+      default: "male"
     }
   },
   data: function data() {
     return {
-      salutations: {
-        complete: {
-          de: [{
-            value: "Herr",
-            id: 0
-          }, {
-            value: "Frau",
-            id: 1
-          }, {
-            value: "Firma",
-            id: 2
-          }],
-          en: [{
-            value: "Mr.",
-            id: 0
-          }, {
-            value: "Ms.",
-            id: 1
-          }, {
-            value: "Company",
-            id: 2
-          }]
-        },
-        withoutCompany: {
-          de: [{
-            value: "Herr",
-            id: 0
-          }, {
-            value: "Frau",
-            id: 1
-          }],
-          en: [{
-            value: "Mr.",
-            id: 0
-          }, {
-            value: "Ms.",
-            id: 1
-          }]
-        }
-      }
+      salutations: [{
+        key: "male",
+        name: "addressSalutationMale"
+      }, {
+        key: "female",
+        name: "addressSalutationFemale"
+      }, {
+        key: "diverse",
+        name: "addressSalutationDiverse"
+      }, {
+        key: "company",
+        name: "addressSalutationCompany"
+      }]
     };
   },
   computed: {
     currentSalutation: function currentSalutation() {
       var countryId = parseInt(this.addressData.countryId) || 1;
       var addressKey = parseInt(this.addressType) === 1 ? "billing_address" : "delivery_address";
-      var languageKey = App.language === "de" ? "de" : "en";
       var countryKey = countryId === 12 ? "gb" : "de";
+      var salutations = this.salutations.map(function (salutation) {
+        return {
+          key: salutation.key,
+          name: _TranslationService.default.translate("Ceres::Template." + salutation.name)
+        };
+      });
 
       if (this.enabledAddressFields[countryKey].includes("".concat(addressKey, ".name1"))) {
-        return this.salutations.complete[languageKey];
+        return salutations;
       }
 
-      return this.salutations.withoutCompany[languageKey];
+      return salutations.filter(function (salutation) {
+        return salutation.key !== "company";
+      });
     }
   },
 
@@ -21418,21 +21411,19 @@ Vue.component("salutation-select", {
    * Get the shipping countries
    */
   created: function created() {
-    var selectedSalutation = this.addressData.addressSalutation;
+    this.$options.template = this.template;
+    var selectedSalutation = this.defaultSalutation;
 
     if ((0, _utils.isNullOrUndefined)(selectedSalutation)) {
-      this.emitInputEvent(this.currentSalutation[0].id);
+      selectedSalutation = this.currentSalutation[0].key;
     }
+
+    this.emitInputEvent(selectedSalutation);
   },
   methods: {
     emitInputEvent: function emitInputEvent(value) {
-      var gender = this.mapSalutationIdToGender(value);
       this.$emit("input", {
         field: "gender",
-        value: gender
-      });
-      this.$emit("input", {
-        field: "addressSalutation",
         value: value
       });
       this.$emit("input", {
@@ -21456,19 +21447,9 @@ Vue.component("salutation-select", {
         value: ""
       });
     },
-    mapSalutationIdToGender: function mapSalutationIdToGender(id) {
-      if (id === 0) {
-        return "male";
-      } else if (id === 1) {
-        return "female";
-      }
-
-      return null;
-    },
-    checkGenderCompany: function checkGenderCompany(id) {
-      if (id === 2) {
-        var gender = this.mapSalutationIdToGender(id);
-        return gender === null && this.addressData.name1 !== null || gender === null && this.addressData.name1 !== "";
+    checkGenderCompany: function checkGenderCompany(gender) {
+      if (gender === "company") {
+        return this.addressData.name1 !== null || this.addressData.name1 !== "";
       }
 
       return true;
@@ -21477,23 +21458,19 @@ Vue.component("salutation-select", {
   watch: {
     currentSalutation: function currentSalutation(newVal, oldVal) {
       if (newVal !== oldVal) {
-        var selectedSalutation = this.addressData.addressSalutation; // cleanse the current selected salutation, if it's not longer included in the choice
+        var selectedSalutation = this.addressData.gender; // cleanse the current selected salutation, if it's not longer included in the choice
 
         if (!newVal.map(function (salutation) {
-          return salutation.id;
+          return salutation.key;
         }).includes(selectedSalutation)) {
-          this.emitInputEvent(newVal[0].id);
+          this.emitInputEvent(newVal[0].key);
         }
       }
     }
   }
 });
 
-<<<<<<< HEAD
-},{"../../helper/utils":260}],164:[function(require,module,exports){
-=======
 },{"../../helper/utils":270,"services/TranslationService":279}],173:[function(require,module,exports){
->>>>>>> beta
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -22053,7 +22030,7 @@ Vue.component("item-image-carousel", {
       type: String,
       default: "#vue-item-image-carousel"
     },
-    quantity: {
+    maxQuantity: {
       type: Number,
       default: 10
     },
@@ -22077,10 +22054,10 @@ Vue.component("item-image-carousel", {
   },
   computed: _objectSpread({
     carouselImages: function carouselImages() {
-      return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+      return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview")).slice(0, this.maxQuantity);
     },
     singleImages: function singleImages() {
-      return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+      return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor)).slice(0, this.maxQuantity);
     }
   }, Vuex.mapState({
     currentVariation: function currentVariation(state) {
@@ -22112,7 +22089,7 @@ Vue.component("item-image-carousel", {
   },
   methods: {
     getImageCount: function getImageCount() {
-      return this.carouselImages.length > this.quantity ? this.quantity : this.carouselImages.length;
+      return this.carouselImages.length > this.maxQuantity ? this.maxQuantity : this.carouselImages.length;
     },
     reInitialize: function reInitialize() {
       var $owl = $(this.$refs.single);
