@@ -47,29 +47,22 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->customerShowNetPrices = $customerService->showNetPrices();
 
-        if (!is_null($params['shopBuilderCategory']))
+        $defaultCategoryId = 0;
+        $plentyId = (int) pluginApp(Application::class)->getPlentyId();
+        foreach($this->item['documents'][0]['data']['defaultCategories'] as $category)
         {
-            $this->defaultCategory = $params['shopBuilderCategory'];
+            if ($category['plentyId'] === $plentyId)
+            {
+                $defaultCategoryId = $category['id'];
+                break;
+            }
         }
-        else
-        {
-            $defaultCategoryId = 0;
-            $plentyId = (int) pluginApp(Application::class)->getPlentyId();
-            foreach($this->item['documents'][0]['data']['defaultCategories'] as $category)
-            {
-                if ($category['plentyId'] === $plentyId)
-                {
-                    $defaultCategoryId = $category['id'];
-                    break;
-                }
-            }
 
-            if($defaultCategoryId > 0)
-            {
-                /** @var CategoryService $categoryService */
-                $categoryService = pluginApp(CategoryService::class);
-                $this->defaultCategory = $categoryService->get($defaultCategoryId);
-            }
+        if($defaultCategoryId > 0)
+        {
+            /** @var CategoryService $categoryService */
+            $categoryService = pluginApp(CategoryService::class);
+            $this->defaultCategory = $categoryService->get($defaultCategoryId);
         }
 
         $this->bodyClasses[] = "item-" . $itemData['item']['id'];
