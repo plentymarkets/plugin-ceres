@@ -320,7 +320,6 @@ $zindex-dropdown:                   $zIndex-1 !default;
 $zindex-fixed:                      $zIndex-3 !default;
 $zindex-modal-backdrop:             $zIndex-7 !default;
 $zindex-modal:                      $zIndex-8 !default;
-$zindex-navbar:                     $zIndex-5 !default;
 $zindex-popover:                    $zIndex-10 !default;
 $zindex-sticky:                     $zIndex-3 !default;
 $zindex-tooltip:                    $zIndex-7 !default;
@@ -11077,20 +11076,12 @@ button:focus {
 		min-width: 15rem;
 	}
 
-	&.btn-m-r {
-		margin-right: 10px;
-	}
-
 	&.btn-block {
 		> .fa {
 			line-height: inherit;
 			margin-top: 0;
 		}
 	}
-}
-
-.btn-right {
-	float: right;
 }
 
 .btn-xs-max-width {
@@ -12758,6 +12749,11 @@ $border-width: 1px;
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
+        &.disabled,
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     i
@@ -12997,7 +12993,6 @@ $border-width: 1px;
 	}
 
 	width: 100%;
-	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
 
@@ -13382,7 +13377,6 @@ $border-width: 1px;
 
 .navbar {
 	padding:0;
-	z-index: $zindex-navbar;
 	background-color: $navbar-background-color;
 	border-bottom: 1px solid $gray-lighter;
 
@@ -13390,7 +13384,6 @@ $border-width: 1px;
 
 		border-radius: 0;
 		padding:0;
-		z-index: $zindex-navbar;
 		border-bottom: 1px solid $gray-lighter;
 
 		.dropdown:hover .dropdown-menu {
@@ -14528,14 +14521,11 @@ html.ie {
     -webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0); } }
 	
-//navigation scss
-
 @include media-breakpoint-up(md){
 	.wrapper-main {
 		& > nav.container-max {
 			padding-left:0;
 			padding-right:0;
-		    z-index: 1000;
 		    display: block;
 		    width: 100%;
 		    max-width: 100%;
@@ -14543,11 +14533,6 @@ html.ie {
 		}
 		.breadcrumbs {
 			background: $breadcrumb-bg;
-		    z-index: 1000;
-
-			&.unfixed {
-				z-index: -1;
-			}
 		}
 		.breadcrumb{
 			max-width: 1200px;
@@ -14556,8 +14541,8 @@ html.ie {
 		    padding: .5rem 15px;
 		}
 	}
-	
 }
+
 .to-top {
     display: block;
     background-color: $gray-dark;
@@ -14914,10 +14899,7 @@ html.ie {
 		&>div:first-child{
 			@extend .card;
 			margin-bottom: 0;
-
-			@include media-breakpoint-down(xs) {
-				min-height: 115px;
-			}
+			min-height: 115px;
 		}
 	}
 
@@ -15052,6 +15034,7 @@ html.ie {
 	{
 		top: 0;
 		right: 0;
+		bottom: 0;
 
 		& button {
 			min-width: auto !important;
@@ -17066,6 +17049,8 @@ html.ie .basket-preview-hover {
 	}
 
 	&.isLoading {
+		cursor: not-allowed;
+
 		&:before {
 			opacity: 0.5;
 			visibility: visible;
@@ -18756,7 +18741,6 @@ html.ios {
     }
 
     .title{
-        //font-size: 2rem;
         line-height: 1.2;
     }
 
@@ -19009,23 +18993,6 @@ html.ios {
     }
 }
 
-.single-rightside
-{
-    margin-top: 1rem;
-}
-
-@include media-breakpoint-up(md)
-{
-    .single-rightside
-    {
-        margin-top: 0;
-        position: absolute;
-        left: (7/12)*100%;
-        top: 0;
-        bottom: 0;
-    }
-}
-
 .loading {
   & .loading-animation-frame {
     display: block;
@@ -19274,10 +19241,6 @@ html.ios {
 
 .history-pagination {
     margin-top: 15px;
-
-    & .counter {
-        margin-top: 5px;
-    }
 }
 
 .gradient-hr {
@@ -19352,15 +19315,29 @@ html.ios {
     padding: 1rem;
 
     .add-item {
-        bottom: 0;
-
         @include media-breakpoint-down(xs) {
+            .item-edit {
+                height: 45%;
+                margin-bottom: 0 !important;
+            }
+            span.item-edit:nth-of-type(2) {
+                bottom: 0;
+                position: absolute;
+            }
+
             button {
                 height: 100%;
             }
         }
     }
 }
+
+.widget-account-settings {
+    .card {
+        min-height: 115px;
+    }
+}
+
 
 // Widgets
 @mixin widget-bg-variant($color)
@@ -20082,7 +20059,6 @@ html.ie {
     .widget-inner
     {
         padding: 1rem 1.5rem;
-        text-align: center;
         word-break: break-word;
     }
 

@@ -8,6 +8,16 @@ Vue.component("payment-provider-select", {
         {
             type: String,
             default: "#vue-payment-provider-select"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -15,7 +25,8 @@ Vue.component("payment-provider-select", {
         methodOfPaymentList: state => state.checkout.payment.methodOfPaymentList,
         methodOfPaymentId: state => state.checkout.payment.methodOfPaymentId,
         showError: state => state.checkout.validation.paymentProvider.showError,
-        isBasketLoading: state => state.basket.isBasketLoading
+        isBasketLoading: state => state.basket.isBasketLoading,
+        isCheckoutReadonly: state => state.checkout.readOnly
     }),
 
     /**

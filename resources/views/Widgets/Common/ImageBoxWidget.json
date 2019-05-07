@@ -130,6 +130,7 @@
                 "name": "Widget.imageBoxCustomImagePathLabel",
                 "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

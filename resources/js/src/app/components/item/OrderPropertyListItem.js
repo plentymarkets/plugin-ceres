@@ -138,12 +138,6 @@ Vue.component("order-property-list-item", {
                 {
                     value = null;
                 }
-                else
-                {
-                    const name = this.property.selectionValues[value].name;
-
-                    value = name;
-                }
             }
 
             this.setVariationOrderProperty({ propertyId: this.property.id, value: value });

@@ -1,5 +1,69 @@
 # Release Notes for Ceres
 
+## v4.0.0 (2019-05-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.2...4.0.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- It is now possible for registered customers to change their email address in the My Account area. To enable this, you need to carry out settings in the **System » System settings » Client » Select client » Email** menu. Create a new template under **Templates**. This template needs to include the variable "$NewCustomerEmail", which contains a confirmation link for the change of the email address. You need to link this template to the **Customer wants to change email address** event under **Automatic**.   
+- In order to make it possible for customers to change their email address in the My Account area, you need to activate the route "/change-mail" in the settings of the IO plugin.
+- Due to changes made to the address input field "Contact person", default Ceres stores now display the input fields for first and last names for B2B customers. These input fields are not required by default. You can make changes to the address input fields directly in the address selection widget of the ShopBuilder.
+- If you use the plentymarkets plugin "Customer feedback", you need to update the plugin to version 2.0.0 in order for it to work properly.
+
+### Added
+
+- Customers are now able to change their email address in the My Account area.
+- We added the widget "Cancel order" for the checkout. This serves to cancel a verified order by a payment plugin (e.g. PayPal).
+- We created an interface for blocking relevant inputs in the checkout for payment plugins that do not allow changes to this data.
+- We added the "Tabs" widget, which is a new structure widget that allows the creation of tabs that can be filled with other widgets.
+- Pages can now be identified via a class in the <body> tag.
+- The texts of the following widgets can now be edited directly in the ShopBuilder preview via inline editing: Text, image box, item list, title bar, newsletter, shipping profile selection, payment provider selection, address selection, account settings, notes and requests, order history and return history.
+- You can now determine which option is preselected in the "Form of address" drop-down list in the registration and address selection. You can carry out the settings in the Ceres configuration or in the settings of the address selection widget.
+- "Mx." is now available as an option in the "Form of address" drop-down list in the registration and the address selection. This option serves to provide a form of address for the gender option "Diverse".
+- The shipping profile now displays the maximum delivery time. The maximum delivery time is the sum of the availability with the longest delivery time among items in the shopping cart and the period of delivery specified in the shipping profile.
+- We added the layout container **Checkout: Override headline**. It serves to overwrite the default headline of the checkout.
+- The paddings and margins of all non-grid widgets of the ShopBuilder can now be configured individually in the Widget settings.
+- We added the inline editing code widget, which makes it possible to write and edit code directly in the ShopBuilder preview.
+- We added the inline editing text widget, which makes it possible to write and edit text directly in the ShopBuilder preview. This widget replaces the former text widget, which has been deprecated and is no longer available in the widget selection of the ShopBuilder.
+- You can now specify additional CC and BCC email addresses for the contact form. We would like to thank @lauflust for the contribution.
+- The subject for the email sent via the contact form can now be extended in the **CMS » Multilingualism** menu. We would like to thank @lauflust for the contribution.
+
+### Changed
+
+- You can now configure the address field "Contact person" to either display the input field contact person or the input fields for first and last name. The fields can also be configured as required address fields.
+- The type specifications of the functions `isActive()`, `isOpen()` and `isCurrent()` in the CategoryService have been adjusted so that they can be also be called from Twig templates.
+- The notifications that are issued when errors occur in the validation of address input fields are now reset upon changing the form of address, the country or when switching between address and Packstation/post office.
+- Item lists and categories now contain links to individual items that are issued even without active JavaScript.
+- The Twig function "queryString" can now process multi-dimensional arrays. We would like to thank @wladi0097 for the contribution.
+- Obsolete language-specific settings have been removed from the Ceres configuration for reasons of clarity. With the introduction of the **CMS » Multilingualism** menu, these entries had been relocated to the language files of Ceres and marked as deprecated.
+- The syntax for slots has been updated and now uses the `v-slot` directive introduced by Vue.js v2.6.0.
+- The link list widget of the ShopBuilder has been marked as deprecated and is no longer available in the widget selection. It has been replaced by the list widget, which assumes the same functionality.
+- We have made adjustments to several components in which we now use the json_data filter to relocate larger JSON objects from properties to external <script> tags. This serves to reduce the document size and accelerate the initialisation of Vue.js. Please consult [our developer documentation](https://developers.plentymarkets.com/dev-doc/theme-plugins#ceres-4-update) for a list of adjusted components.
+
+### Fixed
+
+- Due to an error, more pages were returned in the pagination of a category than ElasticSearch could process. The maximum number of items per category has therefore been limited to 10,000.
+- Hreflang attributes now use the correct ISO codes for activated languages.
+- The bank account widget used the wrong translation keys. This has been fixed.
+- Under certain circumstances, widgets in the header would overlap. This behaviour has been fixed.
+- Due to an error, the size of the input fields of the registration was too small in the Internet Explorer 11. This has been fixed.
+- Due to an error, delivery to a Packstation/post office could be selected for shipping profiles that did not support this option. This has been fixed.
+- Due to an error in the layout of the category navigation, the company logo overlapped certain menu entries. This has been fixed.
+- The mega menu could not be opened in the mobile view of the Firefox browser. This has been fixed.
+- When selecting the option "Image and text (full width)" in the settings of the image box widget, the link was not scaled to the full width of the image. This behaviour has been fixed.
+- Under certain circumstances, other elements could overlap error notifications. This has been fixed.
+- Due to an error, the preview text of an item was not displayed in the shopping cart if the item text was not filled in. This has been fixed.
+- When changing variations, it was possible that variations were displayed as item packages, even if the variation was not configured as such. This behaviour has been fixed.
+- Under certain circumstances, input fields were automatically filled in with the email address of the user in Google Chrome. This has been fixed.
+- Invalid values are now filtered out when navigating to URLs that include parameters.
+- Due to an error, it was no longer possible to delete addresses. This has been fixed.
+- Due to an error, the setting for displaying and validating the input field **State** was not always recognised. This has been fixed.
+- The post number in the address data for Packstation/post office is now taken from the input field "Post number" instead of the field "Address 3".
+- The email that contains the link for resending the customer password now uses the URL of the corresponding client.
+- Due to an error, the cross-selling item list in the single item view was not loaded when the page was accessed the first time. This has been fixed.
+- Due to an error, the sorting value for the category also affected the sorting of variations of individual items, as long as the option "dynamically" was selected for the setting **Show variations by type**. As of now, the variation with the lowest price is displayed first.
+- Under certain circumstances, the footer could overlap content on the right side of the single item view. This has been fixed.
+- Due to an error, order characteristics of the type "selection" were not working properly. This has been fixed.
+
 ## v3.2.2 (2019-04-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.1...3.2.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed

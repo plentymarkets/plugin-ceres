@@ -8,7 +8,7 @@
 
 <script type="x/template" id="vue-live-shopping-item">
     <div>
-        <category-item v-if="!!currentOffer" :item-data="currentOffer.item" :decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle">
+        <category-item v-if="!!currentOffer" :item-data="currentOffer.item" :decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle" :padding-classes="paddingClasses" :padding-inline-styles="paddingInlineStyles">
             <item-store-special v-if="!!storeSpecial"
                                 #store-special
                                 :store-special="storeSpecial"
@@ -27,19 +27,19 @@
                 </a>
             </template>
 
-            <live-shopping-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1 && isActiveByStock"
-                                   #item-details
-                                   :live-shopping-data="currentOffer"
-                                   @reload-offer="reloadOffer()"
-                                   :display-settings="displaySettings"
-                                   :prices="prices"
-                                   :is-active-by-stock="isActiveByStock">
-                <template #after-item-name>
-                    <div class="live-shopping-add-to-basket">
-                        {{ AddToBasket.printVueComponent( "currentOffer.item" ) }}
-                    </div>
-                </template>
-            </live-shopping-details>
+            <template #item-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1 && isActiveByStock">
+                <live-shopping-details :live-shopping-data="currentOffer"
+                                    @reload-offer="reloadOffer()"
+                                    :display-settings="displaySettings"
+                                    :prices="prices"
+                                    :is-active-by-stock="isActiveByStock">
+                    <template #after-item-name>
+                        <div class="live-shopping-add-to-basket">
+                            {{ AddToBasket.printVueComponent( "currentOffer.item" ) }}
+                        </div>
+                    </template>
+                </live-shopping-details>
+            </template>
         </category-item>
         <div v-else>
             <slot></slot>

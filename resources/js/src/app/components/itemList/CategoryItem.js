@@ -23,6 +23,16 @@ Vue.component("category-item", {
         disableCarouselOnMobile:
         {
             type: Boolean
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 

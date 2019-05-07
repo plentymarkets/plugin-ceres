@@ -44,6 +44,7 @@ class DefaultCheckoutPreset implements ContentPreset
         $this->createStickyContainer();
         $this->createBasketTotalsWidget();
         $this->createPlaceOrderWidget();
+        $this->createCancelPaymentWidget();
         
         $this->createAsteriks();
 
@@ -116,6 +117,13 @@ class DefaultCheckoutPreset implements ContentPreset
         $this->stickyContainer->createChild('sticky','Ceres::PlaceOrderWidget')
             ->withSetting('buttonSize', '');
     }
+
+    private function createCancelPaymentWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::CancelPaymentWidget')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('buttonSize', 'md');
+    }
     
     private function createShippingPrivacyCheckWidget()
     {
@@ -146,7 +154,20 @@ class DefaultCheckoutPreset implements ContentPreset
     
     private function createHeadline()
     {
-        $text = '<h1 class="h2">{{ trans("Ceres::Template.checkout") }}</h1>';
+        $text = '';
+        $text .= '{% set overrideCheckoutHeadline = LayoutContainer.show("Ceres::Checkout.Headline") %}';
+        $text .= '{% if overrideCheckoutHeadline | trim is empty %}';
+        $text .=     '<h1 class="h2">';
+        $text .=         '{% if not checkout.readOnly %}';
+        $text .=             '{{ trans("Ceres::Template.checkout") }}';
+        $text .=         '{% else %}';
+        $text .=             '{{ trans("Ceres::Template.checkoutCheckOrder") }}';
+        $text .=         '{% endif %}';
+        $text .=     '</h1>';
+        $text .= '{% else %}';
+        $text .=     '{{ overrideCheckoutHeadline }}';
+        $text .= '{% endif %}';
+
         $this->preset->createWidget('Ceres::TextWidget')
                               ->withSetting("text", $text)
                               ->withSetting("appearance", "none")

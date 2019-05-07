@@ -33,6 +33,7 @@
                     }
                 ]
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

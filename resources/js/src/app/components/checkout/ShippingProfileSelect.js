@@ -3,18 +3,32 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("shipping-profile-select", {
 
-    props: {
-        template: {
+    props:
+    {
+        template:
+        {
             type: String,
             default: "#vue-shipping-profile-select"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
     computed: Vuex.mapState({
         shippingProfileList: state => state.checkout.shipping.shippingProfileList,
+        maxDeliveryDays: state => state.checkout.shipping.maxDeliveryDays,
         shippingProfileId: state => state.checkout.shipping.shippingProfileId,
         showError: state => state.checkout.validation.shippingProfile.showError,
-        isBasketLoading: state => state.basket.isBasketLoading
+        isBasketLoading: state => state.basket.isBasketLoading,
+        isCheckoutReadonly: state => state.checkout.readOnly
     }),
 
     /**
@@ -26,7 +40,8 @@ Vue.component("shipping-profile-select", {
         this.$store.commit("setShippingProfileValidator", this.validate);
     },
 
-    methods: {
+    methods:
+    {
         /**
          * Method on shipping profile changed
          */

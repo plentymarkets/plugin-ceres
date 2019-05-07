@@ -12,6 +12,7 @@
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }
