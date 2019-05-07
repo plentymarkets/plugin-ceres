@@ -72,6 +72,7 @@
 {% endblock %}
 
 {% block PageBody %}
+    {{ component( "Ceres::Item.Components.SingleItem" ) }}
 
     {% set shopBuilderTemplate = "" %}
     {% if defaultCategory is defined %}
@@ -84,19 +85,26 @@
         {% set shopBuilderTemplate = LayoutContainer.show("Ceres::SingleItemGlobal") %}
     {% endif %}
 
-    {% if item.documents[0].data.item.add_cms_page > 0 %}
+    {% if item.documents[0].data.item.add_cms_page > 0 and request.get('isContentBuilder') != 1 %}
         {# Item template is configured for the item #}
         {% include [category_template(item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId)] %}
-    {% elseif shopBuilderTemplate | trim is not empty %}
+    {% elseif shopBuilderTemplate | trim is not empty or request.get('isContentBuilder') == 1 %}
         {# Shopbuilder template #}
-        <single-item
-            v-cloak
-            item-data="{{ item | json_data }}"
-            variation-list-data="{{ variations | json_data }}"
-            :attribute-name-map="{{ attributeNameMap | json_encode }}"
-            :variation-units="{{ variationUnits | json_encode }}">
-            {{ shopBuilderTemplate | raw }}
-        </single-item>
+        <div class="container-max checkout">
+            <div class="row">
+                <div class="col">
+                    <single-item
+                        template="#vue-single-item"
+                        v-cloak
+                        item-data="{{ item | json_data }}"
+                        variation-list-data="{{ variations | json_data }}"
+                        :attribute-name-map="{{ attributeNameMap | json_encode }}"
+                        :variation-units="{{ variationUnits | json_encode }}">
+                        {{ shopBuilderTemplate | raw }}
+                    </single-item>
+                </div>
+            </div>
+        </div>
     {% else %}
         {# No item template defined in ShopBuilder => use default template from plugin #}
         {% include "Ceres::Item.SingleItemView" %}

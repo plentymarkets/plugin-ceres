@@ -47,23 +47,31 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->customerShowNetPrices = $customerService->showNetPrices();
 
-        $defaultCategoryId = 0;
-        $plentyId = (int) pluginApp(Application::class)->getPlentyId();
-        foreach($this->item['documents'][0]['data']['defaultCategories'] as $category)
+        if (!is_null($params['shopBuilderCategory']))
         {
-            if ($category['plentyId'] === $plentyId)
+            $this->defaultCategory = $params['shopBuilderCategory'];
+        }
+        else
+        {
+            $defaultCategoryId = 0;
+            $plentyId = (int) pluginApp(Application::class)->getPlentyId();
+            foreach($this->item['documents'][0]['data']['defaultCategories'] as $category)
             {
-                $defaultCategoryId = $category['id'];
-                break;
+                if ($category['plentyId'] === $plentyId)
+                {
+                    $defaultCategoryId = $category['id'];
+                    break;
+                }
+            }
+
+            if($defaultCategoryId > 0)
+            {
+                /** @var CategoryService $categoryService */
+                $categoryService = pluginApp(CategoryService::class);
+                $this->defaultCategory = $categoryService->get($defaultCategoryId);
             }
         }
 
-        if($defaultCategoryId > 0)
-        {
-            /** @var CategoryService $categoryService */
-            $categoryService = pluginApp(CategoryService::class);
-            $this->defaultCategory = $categoryService->get($defaultCategoryId);
-        }
         $this->bodyClasses[] = "item-" . $itemData['item']['id'];
         $this->bodyClasses[] = "variation-" . $itemData['variation']['id'];
     }
