@@ -115,7 +115,7 @@ header .widget
     }
 }
 
-@include media-breakpoint-down(xs)
+@include media-breakpoint-down(sm)
 {
     .widget-grid .widget-inner.col-12.widget-stacked-mobile
     {
@@ -123,9 +123,9 @@ header .widget
     }
 }
 
-@include media-breakpoint-between(sm, md)
+@include media-breakpoint-only(md)
 {
-    .widget-grid .widget-inner.col-sm-12.widget-stacked-tablet
+    .widget-grid .widget-inner.col-md-12.widget-stacked-tablet
     {
         padding-bottom: 2rem;
     }
