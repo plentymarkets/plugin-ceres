@@ -79,8 +79,8 @@
 
                     <div class="category-unit-price" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
                         <span>${ item.unit.content }</span>
-                        <span>${ item.unit.names.name }</span>
-                        <span v-if="item.variation.mayShowUnitPrice">| ${ item.prices.default.basePrice }</span>
+                        <span>&nbsp;${ item.unit.names.name }</span>
+                        <span v-if="item.variation.mayShowUnitPrice">&nbsp;| ${ item.prices.default.basePrice }</span>
                     </div>
 
                     {{ AddToBasket.printVueComponent( "item", false, false, { ":has-price": "item | hasItemDefaultPrice" } ) }}

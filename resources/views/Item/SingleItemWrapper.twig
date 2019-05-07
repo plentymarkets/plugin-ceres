@@ -3,6 +3,7 @@
 {% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
 {% block PartialHead %}
+
     {% set itemData = item.documents[0].data %}
     {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
         {% block title          ItemName.get(itemData | itemName, itemData.variation.bundleType) %}
@@ -32,7 +33,19 @@
                 "offers": {
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",
-                    "price"         : "{{ itemData.prices.default.price.value | number_format(2) }}",
+                    "price"         : "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
+                    {% if itemData.prices.default.baseLot > 0 %}
+                    "priceSpecification": {
+                        "@type": "UnitPriceSpecification",
+                        "price": "{{ item.documents[0].data.prices.default.baseSinglePrice | number_format(2, '.', '') }}",
+                        "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
+                        "referenceQuantity": {
+                            "@type": "QuantitativeValue",
+                            "value": "{{ item.documents[0].data.prices.default.baseLot }}",
+                            "unitCode": "{{ item.documents[0].data.prices.default.baseUnit }}"
+                        }
+                    },
+                    {% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
                     "itemCondition" : "{{ itemData.item.condition.names.name }}",
                     "serialNumber"  : "{{ itemData.variation.number }}"
