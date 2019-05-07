@@ -102,7 +102,7 @@
                         "position": 6
                     },
                     {
-                        "value": "stacked",
+                        "value": "stackedTablet",
                         "caption": "Widget.gridTwoColumnLayoutStacked",
                         "position": 7
                     }                   
@@ -112,7 +112,7 @@
         "layoutMobile": {
             "type": "select",
             "required": true,
-            "defaultValue": "stacked",
+            "defaultValue": "stackedMobile",
             "options": {
                 "name": "Widget.gridTwoColumnLayoutMobileLabel",
                 "tooltipText": "Widget.gridTwoColumnLayoutMobileTooltip",
@@ -123,7 +123,7 @@
                         "position": 0
                     },
                     {
-                        "value": "stacked",
+                        "value": "stackedMobile",
                         "caption": "Widget.gridTwoColumnLayoutStacked",
                         "position": 1
                     }                 

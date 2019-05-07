@@ -117,6 +117,7 @@
                     }
                 }
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

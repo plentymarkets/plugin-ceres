@@ -2,8 +2,9 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.checkout") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
+        {% block title trans("Ceres::Template.checkout") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
@@ -44,17 +45,28 @@
 
     <div class="page-content checkout container-max">
         {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
-        {% if overrideCheckout|trim is empty %}
+        {% if overrideCheckout | trim is empty %}
             <div class="row mt-3">
                 <div class="col-12">
-                    <h1 class="h2">{{ trans("Ceres::Template.checkout") }}</h1>
+                    {% set overrideCheckoutHeadline = LayoutContainer.show("Ceres::Checkout.Headline") %}
+                    {% if overrideCheckoutHeadline | trim is empty %}
+                        <h1 class="h2">
+                            {% if not checkout.readOnly %}
+                                {{ trans("Ceres::Template.checkout") }}
+                            {% else %}
+                                {{ trans("Ceres::Template.checkoutCheckOrder") }}
+                            {% endif %}
+                        </h1>
+                    {% else %}
+                        {{ overrideCheckoutHeadline }}
+                    {% endif %}
                     <hr>
                 </div>
             </div>
 
             <checkout
                 v-cloak
-                :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+                :initial-checkout="{{ checkout | json_encode() }}"
                 :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
                 :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
                 :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
@@ -182,6 +194,12 @@
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
                             <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
+
+                            {% if checkout.readOnly %}
+                                <a class="btn btn-block btn-outline-primary mt-3" href="{{ urls.checkout }}?readonlyCheckout=0">
+                                    <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.checkoutCancelCheckout") }}
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

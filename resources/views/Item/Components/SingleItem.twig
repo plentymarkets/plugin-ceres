@@ -10,14 +10,11 @@
             <div class="row mt-5 position-relative">
                 <div class="col-md-7">
                     <slot name="image-carousel"></slot>
-                </div>
-
-                <div class="col-md-5 single-rightside">
-                    {% include "Ceres::Item.Components.SingleItem.SingleItem_Details" %}
-                </div>
-
-                <div class="col-md-7">
                     {% include "Ceres::Item.Components.SingleItem.SingleItem_InformationTable" %}
+                </div>
+
+                <div class="col-md-5 single-rightside my-3">
+                    {% include "Ceres::Item.Components.SingleItem.SingleItem_Details" %}
                 </div>
             </div>
 

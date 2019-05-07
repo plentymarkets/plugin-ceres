@@ -6,5 +6,7 @@
     "categories": ["checkout"],
     "position": 300,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
-    "settings": {}
+    "settings": {
+        "spacing":"@include(spacingMargin)"
+    }
 }

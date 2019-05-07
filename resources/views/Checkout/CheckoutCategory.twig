@@ -1,14 +1,5 @@
 {% extends getPartial('page-design') %}
 
-{% block PartialHead %}
-    <title>{% if category.details[0].metaTitle %}{{ category.details[0].metaTitle }}{% else %}{{ category.details[0].name }}{% endif %} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
-
-    <meta name="description" content="{{ category.details[0].metaDescription }}">
-    <meta name="keywords" content="{{ category.details[0].metaKeywords }}">
-
-    <meta name="robots" content="{{ metaRobots }}">
-{% endblock %}
-
 {% block PageBody %}
     {{ component( "Ceres::Checkout.Components.Checkout" ) }}
 

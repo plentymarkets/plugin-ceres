@@ -3,6 +3,7 @@
     "label": "Widget.linkListLabel",
     "previewImageURL": "/images/widgets/link-list.svg",
     "type": "static",
+    "deprecated": true,
     "categories": ["text"],
     "position": 1000,
     "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
@@ -113,6 +114,7 @@
                     }
                 }
             }
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }

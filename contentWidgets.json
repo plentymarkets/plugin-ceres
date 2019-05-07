@@ -74,6 +74,28 @@
                         }
                     ]
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -127,6 +149,28 @@
                             "position": 5
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -182,6 +226,150 @@
                         }
                     ]
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::CancelPaymentWidget",
+        "label": "Widget.cancelPaymentLabel",
+        "previewImageURL": "/images/widgets/cancel-payment.svg",
+        "type": "checkout",
+        "categories": [
+            "checkout"
+        ],
+        "position": 800,
+        "widgetClass": "Ceres\\Widgets\\Checkout\\CancelPaymentWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "md",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "md",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -195,7 +383,30 @@
         ],
         "position": 300,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
-        "settings": {}
+        "settings": {
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::GtcCheckWidget",
@@ -283,6 +494,28 @@
                     "name": "Widget.gtcCheckCustomTextLabel",
                     "tooltipText": "Widget.gtcCheckCustomTextTooltip"
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -337,6 +570,48 @@
                             "position": 5
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -418,6 +693,48 @@
                         }
                     ]
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -431,7 +748,30 @@
         ],
         "position": 500,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingPrivacyCheckWidget",
-        "settings": {}
+        "settings": {
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::ShippingProfileWidget",
@@ -484,6 +824,48 @@
                             "position": 5
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -540,6 +922,28 @@
                 "options": {
                     "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
                     "tooltipText": "Widget.subscribeNewsletterCheckCustomTextTooltip"
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -601,38 +1005,46 @@
                     ]
                 }
             },
-            "customPadding": {
-                "type": "checkbox",
+            "spacing": {
+                "type": "vertical",
                 "options": {
-                    "name": "Widget.widgetCustomPadding"
-                }
-            },
-            "padding": {
-                "type": "spacing",
-                "isVisible": "!!customPadding",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
-                }
-            },
-            "customMargin": {
-                "type": "checkbox",
-                "options": {
-                    "name": "Widget.widgetCustomMargin"
-                }
-            },
-            "margin": {
-                "type": "spacing",
-                "isVisible": "!!customMargin",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -717,6 +1129,48 @@
                         "options": {
                             "name": "Widget.collapseBoxTextareaLabel",
                             "tooltipText": "Widget.collapseBoxTextareaTooltip"
+                        }
+                    }
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
                         }
                     }
                 }
@@ -892,6 +1346,28 @@
                     "name": "Widget.imageBoxCustomImagePathLabel",
                     "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -1050,6 +1526,28 @@
                         }
                     }
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -1110,38 +1608,46 @@
                     ]
                 }
             },
-            "customPadding": {
-                "type": "checkbox",
+            "spacing": {
+                "type": "vertical",
                 "options": {
-                    "name": "Widget.widgetCustomPadding"
-                }
-            },
-            "padding": {
-                "type": "spacing",
-                "isVisible": "!!customPadding",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
-                }
-            },
-            "customMargin": {
-                "type": "checkbox",
-                "options": {
-                    "name": "Widget.widgetCustomMargin"
-                }
-            },
-            "margin": {
-                "type": "spacing",
-                "isVisible": "!!customMargin",
-                "options": {
-                    "units": [
-                        "px",
-                        "rem"
-                    ],
-                    "direction": "all"
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -1426,6 +1932,48 @@
                         }
                     ]
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -1434,6 +1982,7 @@
         "label": "Widget.linkListLabel",
         "previewImageURL": "/images/widgets/link-list.svg",
         "type": "static",
+        "deprecated": true,
         "categories": [
             "text"
         ],
@@ -1543,6 +2092,48 @@
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
                             "tooltipText": "Widget.listEntryUrlTooltip"
+                        }
+                    }
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
                         }
                     }
                 }
@@ -1663,6 +2254,48 @@
                         "options": {
                             "name": "Widget.listEntryUrlLabel",
                             "tooltipText": "Widget.listEntryUrlTooltip"
+                        }
+                    }
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
                         }
                     }
                 }
@@ -1866,6 +2499,48 @@
                     "name": "Widget.liveShoppingCustomImagePathLabel",
                     "tooltipText": "Widget.liveShoppingCustomImagePathTooltip"
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -1940,6 +2615,28 @@
                 "options": {
                     "name": "Widget.newsletterEmailFolderLabel",
                     "tooltipText": "Widget.newsletterEmailFolderTooltip"
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -2119,6 +2816,48 @@
                             "position": 5
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -2642,6 +3381,48 @@
                         }
                     ]
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -2722,6 +3503,48 @@
                             "allowedExtensions": [
                                 "pdf"
                             ]
+                        }
+                    }
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
                         }
                     }
                 }
@@ -2807,6 +3630,16 @@
             "tabs": {
                 "type": "vertical",
                 "isList": "[1,]",
+                "defaultValue": [
+                    {
+                        "title": "Tab 1",
+                        "uuid": "3a0ca715-ff40-4446-8393-07f663ce45a2"
+                    },
+                    {
+                        "title": "Tab 2",
+                        "uuid": "ac25da98-b0f4-4db3-bc8b-4c5a0fcf3150"
+                    }
+                ],
                 "options": {
                     "name": "Widget.tabNewTabLabel"
                 },
@@ -2985,7 +3818,7 @@
                             "position": 6
                         },
                         {
-                            "value": "stacked",
+                            "value": "stackedTablet",
                             "caption": "Widget.gridTwoColumnLayoutStacked",
                             "position": 7
                         }
@@ -2995,7 +3828,7 @@
             "layoutMobile": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "stacked",
+                "defaultValue": "stackedMobile",
                 "options": {
                     "name": "Widget.gridTwoColumnLayoutMobileLabel",
                     "tooltipText": "Widget.gridTwoColumnLayoutMobileTooltip",
@@ -3006,7 +3839,7 @@
                             "position": 0
                         },
                         {
-                            "value": "stacked",
+                            "value": "stackedMobile",
                             "caption": "Widget.gridTwoColumnLayoutStacked",
                             "position": 1
                         }
@@ -3179,6 +4012,48 @@
                 "options": {
                     "name": "Widget.navigationCompanyLogoUrlLabel",
                     "tooltipText": "Widget.navigationCompanyLogoUrlTooltip"
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -3487,6 +4362,48 @@
                         }
                     ]
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -3541,6 +4458,28 @@
                         }
                     ]
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -3580,6 +4519,28 @@
                             "caption": "Widget.greetingWidgetEmail"
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -3660,6 +4621,48 @@
                             "position": 2
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -3762,6 +4765,28 @@
                     "name": "Widget.orderHistoryAllowReturnLabel",
                     "tooltip": "Widget.orderHistoryAllowReturnTooltip"
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -3846,6 +4871,28 @@
                             "position": 3
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
