@@ -39,7 +39,7 @@
         <div class="col-12">
             <carousel>
                 {% for item in itemList %}
-                    <template #items>
+                    <template slot="items">
                         <category-item
                             :item-data="{{ item.data | json_encode }}"
                             :decimal-count="{{ ceresConfig.item.storeSpecial }}"

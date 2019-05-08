@@ -24685,6 +24685,8 @@ var APIService = require("services/ApiService");
 
 var NotificationService = require("services/NotificationService");
 
+var ValidationService = require("services/ValidationService");
+
 Vue.component("account-settings", {
   props: {
     template: {
@@ -24706,7 +24708,7 @@ Vue.component("account-settings", {
       newMail: "",
       newMail2: "",
       accountSettingsClass: "",
-      accountEmailModal: {},
+      accountEmailModal: null,
       accountPasswordModal: {}
     };
   },
@@ -24718,7 +24720,10 @@ Vue.component("account-settings", {
     var _this = this;
 
     this.$nextTick(function () {
-      _this.accountEmailModal = ModalService.findModal(_this.$refs.accountEmailModal);
+      if (_this.$refs.accountEmailModal) {
+        _this.accountEmailModal = ModalService.findModal(_this.$refs.accountEmailModal);
+      }
+
       _this.accountPasswordModal = ModalService.findModal(_this.$refs.accountPasswordModal);
     });
   },
@@ -24756,10 +24761,26 @@ Vue.component("account-settings", {
     },
 
     /**
+     * Checks the new password to see if it meets the password requirements
+     */
+    validatePassword: function validatePassword() {
+      var _this2 = this;
+
+      ValidationService.validate(this.$refs.passwordFormControl).done(function () {
+        _this2.saveAccountPassword();
+      }).fail(function (invalidFields) {
+        ValidationService.markInvalidFields(invalidFields, "error");
+        NotificationService.error(_TranslationService.default.translate("Ceres::Template.resetPwInvalidPassword")).closeAfter(5000);
+
+        _this2.$refs.passwordHint.showPopper();
+      });
+    },
+
+    /**
      * Save the new password
      */
     saveAccountPassword: function saveAccountPassword() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.isValidPassword) {
         this.isLoading = true;
@@ -24768,13 +24789,13 @@ Vue.component("account-settings", {
           password: this.newPassword,
           password2: this.confirmPassword
         }).done(function (response) {
-          _this2.clearFieldsAndClose();
+          _this3.clearFieldsAndClose();
 
           NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountChangePasswordSuccessful")).closeAfter(3000);
         }).fail(function (response) {
           NotificationService.error(_TranslationService.default.translate("Ceres::Template.myAccountChangePasswordFailed")).closeAfter(5000);
         }).always(function () {
-          _this2.isLoading = false;
+          _this3.isLoading = false;
         });
       }
     },
@@ -24783,7 +24804,7 @@ Vue.component("account-settings", {
      * Save the new email
      */
     saveAccountEmail: function saveAccountEmail() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.isValidEmail) {
         this.isLoading = true;
@@ -24791,7 +24812,7 @@ Vue.component("account-settings", {
           newMail: this.newMail,
           newMail2: this.newMail2
         }).done(function (response) {
-          _this3.clearFieldsAndClose();
+          _this4.clearFieldsAndClose();
 
           NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountChangeEmailConfirmationSent")).closeAfter(3000);
         }).fail(function (response, status) {
@@ -24803,7 +24824,7 @@ Vue.component("account-settings", {
 
           NotificationService.error(message).closeAfter(5000);
         }).always(function () {
-          _this3.isLoading = false;
+          _this4.isLoading = false;
         });
       }
     },
@@ -24823,14 +24844,17 @@ Vue.component("account-settings", {
      * Clear the fields and close the modal
      */
     clearFieldsAndClose: function clearFieldsAndClose() {
-      this.accountEmailModal.hide();
+      if (this.accountEmailModal) {
+        this.accountEmailModal.hide();
+      }
+
       this.accountPasswordModal.hide();
       this.clearFields();
     }
   }
 });
 
-},{"services/ApiService":274,"services/ModalService":277,"services/NotificationService":278,"services/TranslationService":279}],202:[function(require,module,exports){
+},{"services/ApiService":274,"services/ModalService":277,"services/NotificationService":278,"services/TranslationService":279,"services/ValidationService":281}],202:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -29534,6 +29558,11 @@ function unmarkAllFields(form) {
 
 function _validateElement(elem) {
   var $elem = (0, _jquery.default)(elem);
+
+  if (!$elem.attr("data-validate")) {
+    return true;
+  }
+
   var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
     return i.trim();
   }) || ["text"];

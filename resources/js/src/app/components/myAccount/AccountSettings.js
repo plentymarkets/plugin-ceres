@@ -1,6 +1,7 @@
 const ModalService        = require("services/ModalService");
 const APIService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
+const ValidationService   = require("services/ValidationService");
 
 import TranslationService from "services/TranslationService";
 
@@ -30,7 +31,7 @@ Vue.component("account-settings", {
             newMail             : "",
             newMail2            : "",
             accountSettingsClass: "",
-            accountEmailModal: {},
+            accountEmailModal: null,
             accountPasswordModal: {}
         };
     },
@@ -42,7 +43,11 @@ Vue.component("account-settings", {
     {
         this.$nextTick(() =>
         {
-            this.accountEmailModal = ModalService.findModal(this.$refs.accountEmailModal);
+            if (this.$refs.accountEmailModal)
+            {
+                this.accountEmailModal = ModalService.findModal(this.$refs.accountEmailModal);
+            }
+
             this.accountPasswordModal = ModalService.findModal(this.$refs.accountPasswordModal);
         });
     },
@@ -60,7 +65,6 @@ Vue.component("account-settings", {
         {
             return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
         },
-
         isValidEmail()
         {
             return this.newMail.length > 0 && (this.newMail === this.newMail2) && this.newMail !== this.userData.email;
@@ -76,7 +80,7 @@ Vue.component("account-settings", {
         /**
          * Open the change mail modal
          */
-        showChangeAccountEmail: function()
+        showChangeAccountEmail()
         {
             this.accountEmailModal.show();
         },
@@ -84,15 +88,35 @@ Vue.component("account-settings", {
         /**
          * Open the change password modal
          */
-        showChangeAccountPassword: function()
+        showChangeAccountPassword()
         {
             this.accountPasswordModal.show();
         },
 
         /**
+         * Checks the new password to see if it meets the password requirements
+         */
+        validatePassword: function()
+        {
+            ValidationService.validate(this.$refs.passwordFormControl)
+            .done(() =>
+            {
+                this.saveAccountPassword();
+            })
+            .fail(invalidFields =>
+            {
+                ValidationService.markInvalidFields(invalidFields, "error");
+                NotificationService.error(
+                    TranslationService.translate("Ceres::Template.resetPwInvalidPassword")
+                ).closeAfter(5000);
+                this.$refs.passwordHint.showPopper();
+            });
+        },
+
+        /**
          * Save the new password
          */
-        saveAccountPassword: function()
+        saveAccountPassword()
         {
             if (this.isValidPassword)
             {
@@ -119,7 +143,7 @@ Vue.component("account-settings", {
         /**
          * Save the new email
          */
-        saveAccountEmail: function()
+        saveAccountEmail()
         {
             if (this.isValidEmail)
             {
@@ -153,7 +177,7 @@ Vue.component("account-settings", {
         /**
          * Clear the password fields in the modal
          */
-        clearFields: function()
+        clearFields()
         {
             this.oldPassword = "";
             this.newPassword = "";
@@ -165,9 +189,13 @@ Vue.component("account-settings", {
         /**
          * Clear the fields and close the modal
          */
-        clearFieldsAndClose: function()
+        clearFieldsAndClose()
         {
-            this.accountEmailModal.hide();
+            if (this.accountEmailModal)
+            {
+                this.accountEmailModal.hide();
+            }
+
             this.accountPasswordModal.hide();
             this.clearFields();
         }

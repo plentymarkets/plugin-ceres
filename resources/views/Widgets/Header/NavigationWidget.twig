@@ -15,7 +15,10 @@
 {% set megaMenuMaxItems     = { "1": megaMenuMaxItems1, "2": megaMenuMaxItems2, "3": megaMenuMaxItems3 } %}
 
 {% if companyLogoUrl is empty %}
-    {% set companyLogoUrl = plugin_path('Ceres') ~ "/images/ceres-logo.svg" %}
+    {% set companyLogoUrl = ceresConfig.header.companyLogo %}
+    {% if not (companyLogoUrl starts with 'https://' or companyLogoUrl starts with 'http://' or companyLogoUrl starts with 'layout/') %}
+        {% set companyLogoUrl = plugin_path('Ceres') ~ "/" ~ image %}
+    {% endif %}
 {% endif %}
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
