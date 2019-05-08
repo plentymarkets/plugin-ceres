@@ -72,6 +72,7 @@
 {% endblock %}
 
 {% block PageBody %}
+    {{ component("Ceres::Item.Components.SingleItem") }}
 
     {% set shopBuilderTemplate = "" %}
     {% if defaultCategory is defined %}
@@ -84,18 +85,29 @@
         {% set shopBuilderTemplate = LayoutContainer.show("Ceres::SingleItemGlobal") %}
     {% endif %}
 
-    {% if shopBuilderTemplate | trim is not empty %}
-        <div class="container-max">
+    {% if item.documents[0].data.item.add_cms_page > 0 and request.get('isContentBuilder') != 1 %}
+        {# Item template is configured for the item #}
+        {% include [category_template(item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId)] %}
+    {% elseif shopBuilderTemplate | trim is not empty or request.get('isContentBuilder') == 1 %}
+        {# Shopbuilder template #}
+        <div class="container-max checkout">
             <div class="row">
                 <div class="col">
-                    {{ shopBuilderTemplate | raw }}
+                    <single-item
+                        template="#vue-single-item"
+                        v-cloak
+                        item-data="{{ item | json_data }}"
+                        variation-list-data="{{ variations | json_data }}"
+                        :attribute-name-map="{{ attributeNameMap | json_encode }}"
+                        :variation-units="{{ variationUnits | json_encode }}">
+                        {{ shopBuilderTemplate | raw }}
+                    </single-item>
                 </div>
             </div>
         </div>
     {% else %}
         {# No item template defined in ShopBuilder => use default template from plugin #}
-        {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
+        {% include "Ceres::Item.SingleItemView" %}
     {% endif %}
-    {% include [category_template( itemData.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
 
 {% endblock %}
