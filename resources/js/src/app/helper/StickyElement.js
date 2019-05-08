@@ -192,7 +192,7 @@ export class StickyElement
                 top:        this.position.y + "px",
                 left:       this.position.x + "px",
                 width:      this.position.width + "px",
-                zIndex:     1
+                zIndex:     1001
             };
 
             placeholderStyles = {
