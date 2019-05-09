@@ -7639,7 +7639,7 @@ button.bg-dark:focus {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 1030;
+    z-index: 1020;
   }
 }
 
@@ -16065,7 +16065,7 @@ a:active {
 }
 
 .sticky-element.is-sticky {
-  z-index: 1030 !important;
+  z-index: 1020 !important;
 }
 
 .bg-primary {
