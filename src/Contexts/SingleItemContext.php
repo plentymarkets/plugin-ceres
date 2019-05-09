@@ -64,6 +64,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $categoryService = pluginApp(CategoryService::class);
             $this->defaultCategory = $categoryService->get($defaultCategoryId);
         }
+        
         $this->bodyClasses[] = "item-" . $itemData['item']['id'];
         $this->bodyClasses[] = "variation-" . $itemData['variation']['id'];
     }
