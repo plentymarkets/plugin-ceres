@@ -16064,6 +16064,10 @@ a:active {
   z-index: 1;
 }
 
+.sticky-element.is-sticky {
+  z-index: 1030 !important;
+}
+
 .bg-primary {
   background-color: #008ebd !important;
 }

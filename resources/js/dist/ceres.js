@@ -27776,6 +27776,7 @@ function () {
         return stickyElement.calculateOffset();
       });
     });
+    el.classList.add("sticky-element");
   }
 
   _createClass(StickyElement, [{
@@ -27929,12 +27930,14 @@ function () {
           position: "fixed",
           top: this.position.y + "px",
           left: this.position.x + "px",
-          width: this.position.width + "px",
-          zIndex: 1
+          width: this.position.width + "px"
         };
         placeholderStyles = {
           paddingTop: this.position.height + "px"
         };
+        this.el.classList.add("is-sticky");
+      } else {
+        this.el.classList.remove("is-sticky");
       }
 
       (0, _dom.applyStyles)(this.el, styles);
@@ -27974,6 +27977,8 @@ function () {
       if (idx >= 0) {
         this.el.parentElement.__stickyElements.splice(idx, 1);
       }
+
+      this.el.classList.remove("sticky-element");
     }
   }]);
 
