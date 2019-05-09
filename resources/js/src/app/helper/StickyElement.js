@@ -203,7 +203,7 @@ export class StickyElement
             this.el.classList.add("is-sticky");
         }
         else
-{
+        {
             this.el.classList.remove("is-sticky");
         }
 
