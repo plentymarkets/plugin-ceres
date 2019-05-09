@@ -129,6 +129,10 @@ a:active {
     z-index: 1;
 }
 
+.sticky-element.is-sticky {
+    z-index: $zindex-sticky !important;
+}
+
 @each $color, $value in $theme-colors {
     @include bg-variant(".bg-#{$color}", $value);
     .bg-#{$color} {
