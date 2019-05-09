@@ -68,6 +68,40 @@
                     "options": {
                         "defaultValue": ""
                     }
+                },
+                "global.user_data_hash_max_age": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.globalUserDataHashMaxAgeLabel",
+                    "options": {
+                        "defaultValue": 24,
+                        "selectBoxValues": [
+                            {
+                                "value": 1,
+                                "caption": "Config.globalMaxAge1Hour"
+                            },
+                            {
+                                "value": 6,
+                                "caption": "Config.globalMaxAge6Hours"
+                            },
+                            {
+                                "value": 12,
+                                "caption": "Config.globalMaxAge12Hours"
+                            },
+                            {
+                                "value": 24,
+                                "caption": "Config.globalMaxAge24Hours"
+                            },
+                            {
+                                "value": 168,
+                                "caption": "Config.globalMaxAge1Week"
+                            },
+                            {
+                                "value": -1,
+                                "caption": "Config.globalMaxAgeInfinite"
+                            }
+                        ]
+                    }
                 }
             }
         },
@@ -1287,7 +1321,7 @@
                     }
                 }
             }
-        },        
+        },
         "Config.ContactTab": {
             "label": "Config.contactTab",
             "formFields": {
