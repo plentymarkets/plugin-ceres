@@ -2,7 +2,7 @@
     <div id="login-change">
         <div class="dropdown" v-if="isLoggedIn">
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                <i class="fa fa-user d-sm-none" aria-hidden="true"></i> 
+                <i class="fa fa-user mr-1 d-sm-none" aria-hidden="true"></i> 
                 <span class="hidden-xs-down">{{ trans("Ceres::Template.loginHello", {"username": "${username}"}) }}</span>
             </a>
             <div class="account-menu dropdown-menu dropdown-menu-right small m-0 p-0">
@@ -14,12 +14,12 @@
         </div>
         <div v-if="!isLoggedIn">
             <a data-toggle="modal" href="{% if services.template.isCurrentTemplate("tpl.login") %}javascript:void(0){% else %}#login{% endif %}" @click="unmarkInputFields()">
-                <i class="fa fa-user" aria-hidden="true"></i>
+                <i class="fa fa-user mr-1" aria-hidden="true"></i>
                 <span class="hidden-xs-down">{{ trans("Ceres::Template.login") }}</span>
             </a>
             <span class="pipe" v-if="showRegistration"></span>
             <a data-toggle="modal" href="#registration" @click="unmarkInputFields()" v-if="showRegistration">
-                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                 <span class="hidden-xs-down">{{ trans("Ceres::Template.loginRegister") }}</span>
             </a>
         </div>
