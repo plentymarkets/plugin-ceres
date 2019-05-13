@@ -29563,11 +29563,6 @@ function unmarkAllFields(form) {
 
 function _validateElement(elem) {
   var $elem = (0, _jquery.default)(elem);
-
-  if (!$elem.attr("data-validate")) {
-    return true;
-  }
-
   var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
     return i.trim();
   }) || ["text"];
@@ -29728,7 +29723,7 @@ function _isActive($elem) {
 
 function _eval(input) {
   // eslint-disable-next-line
-  return new Function("return " + input)();
+  return new Function("return ".concat(input, ";"))();
 }
 
 var _default = {
