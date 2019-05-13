@@ -107,11 +107,6 @@ export function unmarkAllFields(form)
 function _validateElement(elem)
 {
     const $elem = $(elem);
-
-    if (!$elem.attr("data-validate"))
-    {
-        return true;
-    }
     const validationKeys = $elem.attr("data-validate").split("|").map(function(i)
     {
         return i.trim();
@@ -291,7 +286,7 @@ function _isActive($elem)
 function _eval(input)
 {
     // eslint-disable-next-line
-    return (new Function("return " + input))();
+    return (new Function(`return ${ input };`))();
 }
 
 export default { validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields };
