@@ -107,6 +107,13 @@ export function unmarkAllFields(form)
 function _validateElement(elem)
 {
     const $elem = $(elem);
+
+    /** return if the attribute data-validate is not present on the element */
+    if (!$elem[0].attributes.hasOwnProperty("data-validate"))
+    {
+        return true;
+    }
+
     const validationKeys = $elem.attr("data-validate").split("|").map(function(i)
     {
         return i.trim();
