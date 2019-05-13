@@ -133,6 +133,12 @@ a:active {
     z-index: $zindex-sticky !important;
 }
 
+.inline-select {
+    margin-left: -7px;
+    text-decoration: underline;
+    font-weight: inherit;
+}
+
 @each $color, $value in $theme-colors {
     @include bg-variant(".bg-#{$color}", $value);
     .bg-#{$color} {

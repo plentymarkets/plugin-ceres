@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-basket-shipping-country-select">
-    <select class="form-control" @change="setShippingCountry($event.target.value)">
+    <select class="inline-select border-0 bg-transparent" @change="setShippingCountry($event.target.value)">
         <option v-for="shippingCountry in localization.shippingCountries"
                 :value="shippingCountry.id"
                 :class="{'is-disabled': isDisabled}"
