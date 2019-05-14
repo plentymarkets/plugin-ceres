@@ -1,3 +1,4 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set appearance = widget.settings.appearance.mobile | default("none") %}
@@ -15,7 +16,14 @@
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-    <variation-select
+    <div class="input-unit">
+        <select class="custom-select">
+            <option>{{ Twig.trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+        </select>
+        <label>Attribute</label>
+    </div>
+
+    <!-- <variation-select
         template="#vue-variation-select"
         :attributes="attributeNameMap"
         :variation-units="variationUnits"
@@ -23,5 +31,5 @@
         :preselect="currentVariation.variation.id"
         :unitPreselect="currentVariation.variation.unitCombinationId"
         @is-valid-change="isVariationSelected = $event">
-    </variation-select>
+    </variation-select> -->
 </div>
