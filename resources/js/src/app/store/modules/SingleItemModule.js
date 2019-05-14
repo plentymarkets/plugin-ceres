@@ -207,6 +207,11 @@ const getters =
             }
 
             return [];
+        },
+
+        currentVariation(state)
+        {
+            return state.item && state.item.variation && state.item.variation.documents[0].data;
         }
     };
 
