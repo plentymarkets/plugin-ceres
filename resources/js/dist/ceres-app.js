@@ -29216,8 +29216,9 @@ function unmarkAllFields(form) {
 
 function _validateElement(elem) {
   var $elem = (0, _jquery.default)(elem);
+  /** return if the attribute data-validate is not present on the element */
 
-  if (!$elem.attr("data-validate")) {
+  if (!$elem[0].attributes.hasOwnProperty("data-validate")) {
     return true;
   }
 
@@ -29381,7 +29382,7 @@ function _isActive($elem) {
 
 function _eval(input) {
   // eslint-disable-next-line
-  return new Function("return " + input)();
+  return new Function("return ".concat(input, ";"))();
 }
 
 var _default = {
