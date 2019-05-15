@@ -15946,13 +15946,13 @@ body .wrapper-main {
   background-color: #f7f7f9;
 }
 
-.page-content.basket, .page-content.checkout, .page-content.contact, .page-content.myaccount {
+.page-content.basket, .page-content.checkout, .page-content.contact, .page-content.wishlist, .page-content.myaccount {
   color: #282d2f;
   margin-top: 30px;
   padding-bottom: 30px;
 }
 
-.page-content.basket:not(.checkout):not(.basket), .page-content.checkout:not(.checkout):not(.basket), .page-content.contact:not(.checkout):not(.basket), .page-content.myaccount:not(.checkout):not(.basket) {
+.page-content.basket:not(.checkout):not(.basket), .page-content.checkout:not(.checkout):not(.basket), .page-content.contact:not(.checkout):not(.basket), .page-content.wishlist:not(.checkout):not(.basket), .page-content.myaccount:not(.checkout):not(.basket) {
   background-color: #fff;
 }
 
