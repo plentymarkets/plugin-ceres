@@ -20425,7 +20425,7 @@ Vue.component("create-update-address", {
           message: ""
         });
         window.location.reload();
-      }
+      } else this._handleValidationErrors(error);
     },
     _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
       if (typeof this.addressData.options !== "undefined") {

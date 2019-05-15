@@ -154,7 +154,7 @@ Vue.component("create-update-address", {
                     error =>
                     {
                         this.waiting = false;
-                        
+
                         if (error.validation_errors)
                         {
                             this._handleValidationErrors(error.validation_errors);
