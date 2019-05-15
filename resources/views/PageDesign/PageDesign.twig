@@ -31,7 +31,7 @@
     {% include getPartial('head') %}
 
     {% block PartialHead %}
-        {% embed "Ceres::PageDesign.Partials.PageMetadata" %}{% endembed %}
+        {% embed getPartial('page-metadata') %}{% endembed %}
     {% endblock %}
 
     {% for styleTemplate in get_additional_styles() %}
