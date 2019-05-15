@@ -17838,7 +17838,6 @@ var ModalService = require("services/ModalService");
 Vue.component("add-item-to-basket-overlay", {
   delimiters: ["${", "}"],
   props: {
-    basketAddInformation: String,
     template: {
       type: String,
       default: "#vue-add-item-to-basket-overlay"
@@ -17889,18 +17888,9 @@ Vue.component("add-item-to-basket-overlay", {
   })),
   watch: {
     latestBasketEntry: function latestBasketEntry() {
-      if (this.basketAddInformation === "overlay") {
+      if (App.config.basket.addItemToBasketConfirm === "overlay") {
         this.setPriceFromData();
         ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
-      } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
-        setTimeout(function () {
-          var vueApp = document.querySelector("#vue-app");
-          var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-
-          if (vueApp) {
-            vueApp.classList.add(basketOpenClass);
-          }
-        }, 1);
       }
     }
   },
@@ -18175,6 +18165,9 @@ Vue.component("basket-preview", {
     },
     basketNotifications: function basketNotifications(state) {
       return state.basket.basketNotifications;
+    },
+    latestBasketEntry: function latestBasketEntry(state) {
+      return state.basket.latestEntry;
     }
   }),
   created: function created() {
@@ -18195,6 +18188,20 @@ Vue.component("basket-preview", {
         _this.$store.commit("setShowNetPrices", data.showNetPrices);
       });
     });
+  },
+  watch: {
+    latestBasketEntry: function latestBasketEntry() {
+      if (App.config.basket.addItemToBasketConfirm === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
+        setTimeout(function () {
+          var vueApp = document.querySelector("#vue-app");
+          var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
+
+          if (vueApp) {
+            vueApp.classList.add(basketOpenClass);
+          }
+        }, 1);
+      }
+    }
   }
 });
 
