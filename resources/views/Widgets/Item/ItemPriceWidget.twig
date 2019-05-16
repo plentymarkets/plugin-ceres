@@ -1,6 +1,8 @@
 {# TODO use js or widget config #}
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 
+{{ Twig.component( "Ceres::Item.Components.GraduatedPrices" ) }}
+
 <div class="widget widget-item-image widget-{{ appearance | default("primary") }}">
     <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 

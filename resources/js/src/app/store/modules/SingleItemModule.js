@@ -209,9 +209,9 @@ const getters =
             return [];
         },
 
-        currentVariation(state)
+        currentItemVariation(state)
         {
-            return state.item && state.item.variation && state.item.variation.documents[0].data;
+            return state.variation.documents && state.variation.documents[0] && state.variation.documents[0].data;
         }
     };
 

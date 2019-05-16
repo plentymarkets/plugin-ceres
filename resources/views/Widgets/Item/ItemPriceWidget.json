@@ -7,11 +7,46 @@
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Item\\ItemPriceWidget",
     "settings": {
+        "showGraduatedPrices": {
+            "type": "checkbox",
+            "defaultValue": true,
+            "options": {
+                "name": "Widget.showGraduatedPricesLabel"
+            }
+        },
         "appearance": {
             "type": "select",
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
+        },
+        "customPadding": {
+            "type": "checkbox",
+            "options": {
+                "name": "Widget.widgetCustomPadding"
+            }
+        },
+        "padding": {
+            "type": "spacing",
+            "isVisible": "!!customPadding",
+            "options": {
+                "units": ["px", "rem"],
+                "direction": "all"
+            }
+        },
+        "customMargin": {
+            "type": "checkbox",
+            "options": {
+                "name": "Widget.widgetCustomMargin"
+            }
+        },
+        "margin": {
+            "type": "spacing",
+            "isVisible": "!!customMargin",
+            "options": {
+                "units": ["px", "rem"],
+                "direction": "all"
+            }
         }
     }
 }
