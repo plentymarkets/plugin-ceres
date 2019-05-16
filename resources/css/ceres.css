@@ -25221,7 +25221,6 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 }
 
 .widget-grid > .widget-inner > div {
-  max-width: 100%;
   -ms-flex: 1;
       flex: 1;
   max-width: 100%;
@@ -25232,6 +25231,10 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column;
+}
+
+.widget-grid .widget-inner-stacked > .widget-inner {
+  max-width: none;
 }
 
 .widget-grid .widget-inner-stacked > .widget-inner [data-builder-child-container] {

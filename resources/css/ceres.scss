@@ -20486,7 +20486,6 @@ html.ie {
 
         > div
         {
-            max-width: 100%;
             -webkit-box-flex: 1;
                 -ms-flex: 1;
                     flex: 1;
@@ -20506,6 +20505,8 @@ html.ie {
 
         > .widget-inner
         {
+            max-width: none;
+
             [data-builder-child-container]
             {
                 min-height: 100px;
