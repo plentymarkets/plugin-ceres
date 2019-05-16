@@ -1,0 +1,44 @@
+{
+    "identifier": "Ceres::AttributeWidget",
+    "label": "Widget.attributeLabel",
+    "previewImageURL": "/images/widgets/attribute.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Item\\AttributeWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "buttonSize": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "md",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "md",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}
