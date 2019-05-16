@@ -148,14 +148,18 @@ export class StickyElement
             return;
         }
 
-        const headerChildren = document.getElementById("page-header-parent").children;
         let unfixedWidgetsHeight = 0;
 
-        for (let i = 0; i < headerChildren.length; i++)
+        if (document.getElementById("page-header-parent"))
         {
-            if (headerChildren[i].classList.contains("unfixed"))
+            const headerChildren = document.getElementById("page-header-parent").children;
+
+            for (let i = 0; i < headerChildren.length; i++)
             {
-                unfixedWidgetsHeight += headerChildren[i].getBoundingClientRect().height;
+                if (headerChildren[i].classList.contains("unfixed"))
+                {
+                    unfixedWidgetsHeight += headerChildren[i].getBoundingClientRect().height;
+                }
             }
         }
 
