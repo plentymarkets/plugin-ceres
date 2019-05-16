@@ -24,10 +24,10 @@ Vue.component("add-to-wish-list", {
     {
         isVariationInWishList()
         {
-            return this.wishListIds.includes(this.computedVariationId);
+            return this.wishListIds.includes(this.currentVariationId);
         },
 
-        computedVariationId()
+        currentVariationId()
         {
             return !isNullOrUndefined(this.variationId) ? this.variationId : this.currentVariationVariationId;
         },
@@ -67,7 +67,7 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                this.$store.dispatch("addToWishList", parseInt(this.computedVariationId)).then(
+                this.$store.dispatch("addToWishList", parseInt(this.currentVariationId)).then(
                     response =>
                     {
                         this.isLoading = false;
@@ -88,7 +88,7 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                this.$store.dispatch("removeWishListItem", { id: parseInt(this.computedVariationId) }).then(response =>
+                this.$store.dispatch("removeWishListItem", { id: parseInt(this.currentVariationId) }).then(response =>
                 {
                     this.isLoading = false;
 

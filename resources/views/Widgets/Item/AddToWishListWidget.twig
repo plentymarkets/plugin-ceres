@@ -1,7 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{{ Twig.component("Ceres::Checkout.Components.AddToWishList") }}
+{{ Twig.component("Ceres::Item.Components.AddToWishList") }}
 
 {{ Twig.set("enabledRoutes", Twig.call("config", ["IO.routing.enabled_routes"]) ~ " | split(\", \")") }}
 
