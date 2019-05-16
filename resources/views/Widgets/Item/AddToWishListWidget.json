@@ -1,0 +1,12 @@
+{
+    "identifier": "Ceres::AddToWishListWidget",
+    "label": "Widget.addToWishListLabel",
+    "previewImageURL": "/images/widgets/add-to-wish-list.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Item\\AddToWishListWidget",
+    "settings": {
+        "spacing":"@include(spacingMargin)"
+    }
+}
