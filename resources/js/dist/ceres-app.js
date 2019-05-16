@@ -27809,12 +27809,15 @@ function () {
         return;
       }
 
-      var headerChildren = document.getElementById("page-header-parent").children;
       var unfixedWidgetsHeight = 0;
 
-      for (var i = 0; i < headerChildren.length; i++) {
-        if (headerChildren[i].classList.contains("unfixed")) {
-          unfixedWidgetsHeight += headerChildren[i].getBoundingClientRect().height;
+      if (document.getElementById("page-header-parent")) {
+        var headerChildren = document.getElementById("page-header-parent").children;
+
+        for (var i = 0; i < headerChildren.length; i++) {
+          if (headerChildren[i].classList.contains("unfixed")) {
+            unfixedWidgetsHeight += headerChildren[i].getBoundingClientRect().height;
+          }
         }
       }
 
