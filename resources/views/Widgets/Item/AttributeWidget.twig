@@ -1,0 +1,35 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set appearance = widget.settings.appearance.mobile | default("none") %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("md") %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{{ Twig.component("Ceres::Item.Components.VariationSelect") }}
+
+<div class="widget widget-attribute widget-{{ appearance }}
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+    <div class="input-unit">
+        <select class="custom-select">
+            <option>{{ Twig.trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+        </select>
+        <label>Attribute</label>
+    </div>
+
+    <!-- <variation-select
+        template="#vue-variation-select"
+        :attributes="attributeNameMap"
+        :variation-units="variationUnits"
+        :variations="variations"
+        :preselect="currentVariation.variation.id"
+        :unitPreselect="currentVariation.variation.unitCombinationId"
+        @is-valid-change="isVariationSelected = $event">
+    </variation-select> -->
+</div>
