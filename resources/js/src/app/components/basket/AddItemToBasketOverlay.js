@@ -125,8 +125,14 @@ Vue.component("add-item-to-basket-overlay", {
                 return parseInt(param.property.id) === parseInt(propertyId);
             });
 
-            return orderParam.property.value;
+            const orderParamValue = orderParam.property.value;
 
+            if (property.property.valueType === "selection" && orderParamValue)
+            {
+                return orderParam.property.selectionValues[orderParamValue].name;
+            }
+
+            return orderParamValue;
         }
     }
 });
