@@ -54,13 +54,13 @@
                             <li class="list-inline-item control-user">
                                 <user-login-handler :show-registration="{{ enableRegistration | json_encode }}">
                                     <a data-toggle="modal">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <i class="fa fa-user mr-1" aria-hidden="true"></i>
                                         <span class="hidden-xs-down">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
                                     </a>
                                     {% if enableRegistration %}
                                     <span class="pipe"></span>
                                     <a data-toggle="modal">
-                                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                        <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                                         <span class="hidden-xs-down">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                     </a>
                                     {% endif %}
@@ -69,7 +69,7 @@
                         {% elseif enableRegistration %}
                             <li class="list-inline-item control-user">
                                 <a data-toggle="modal">
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                                     <span class="hidden-xs-down">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                 </a>
                             </li>

@@ -10652,6 +10652,7 @@ body .wrapper-main{
     &.basket,
     &.checkout,
     &.contact,
+    &.wishlist,
     &.myaccount {
         &:not(.checkout):not(.basket) {
             background-color: $white;
@@ -10779,6 +10780,7 @@ a:active {
         @include context-bg($value);
     }
 }
+
 html {
 	font-size: $font-size-root;
 }

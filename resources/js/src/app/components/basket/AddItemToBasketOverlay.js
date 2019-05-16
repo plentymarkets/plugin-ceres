@@ -7,7 +7,6 @@ Vue.component("add-item-to-basket-overlay", {
     delimiters: ["${", "}"],
 
     props: {
-        basketAddInformation: String,
         template: {
             type: String,
             default: "#vue-add-item-to-basket-overlay"
@@ -76,7 +75,7 @@ Vue.component("add-item-to-basket-overlay", {
     {
         latestBasketEntry()
         {
-            if (this.basketAddInformation === "overlay")
+            if (App.config.basket.addItemToBasketConfirm === "overlay")
             {
                 this.setPriceFromData();
 
@@ -84,19 +83,6 @@ Vue.component("add-item-to-basket-overlay", {
                     .findModal(document.getElementById("add-item-to-basket-overlay"))
                     .setTimeout(this.defaultTimeToClose * 1000)
                     .show();
-            }
-            else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0)
-            {
-                setTimeout(function()
-                {
-                    const vueApp = document.querySelector("#vue-app");
-                    const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
-
-                    if (vueApp)
-                    {
-                        vueApp.classList.add(basketOpenClass);
-                    }
-                }, 1);
             }
         }
     },

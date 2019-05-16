@@ -147,7 +147,19 @@ export class StickyElement
         {
             return;
         }
-        this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
+
+        const headerChildren = document.getElementById("page-header-parent").children;
+        let unfixedWidgetsHeight = 0;
+
+        for (let i = 0; i < headerChildren.length; i++)
+        {
+            if (headerChildren[i].classList.contains("unfixed"))
+            {
+                unfixedWidgetsHeight += headerChildren[i].getBoundingClientRect().height;
+            }
+        }
+
+        this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height - unfixedWidgetsHeight;
         this.offsetBottom = 0;
         if (isNullOrUndefined(this.position))
         {

@@ -5,7 +5,7 @@
 {% block PartialHead %}
 
     {% set itemData = item.documents[0].data %}
-    {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
+    {% embed getPartial('page-metadata') %}
         {% block title          ItemName.get(itemData | itemName, itemData.variation.bundleType) %}
         {% block description    itemData.texts.metaDescription %}
         {% block keywords       itemData.texts.keywords %}

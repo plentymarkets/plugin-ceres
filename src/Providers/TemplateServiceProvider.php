@@ -111,6 +111,7 @@ class TemplateServiceProvider extends ServiceProvider
             $partial->set('header', 'Ceres::PageDesign.Partials.Header.Header');
             $partial->set('footer', 'Ceres::PageDesign.Partials.Footer');
             $partial->set('page-design', 'Ceres::PageDesign.PageDesign');
+            $partial->set('page-metadata', 'Ceres::PageDesign.Partials.PageMetadata');
 
         }, self::EVENT_LISTENER_PRIORITY);
 
