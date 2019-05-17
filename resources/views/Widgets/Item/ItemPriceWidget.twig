@@ -9,7 +9,8 @@
 
 <div class="widget widget-item-price widget-{{ appearance }}
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
-    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}
+    v-if="$store.getters.currentItemVariation">
     <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
     {% if widget.settings.showCrossPrice.mobile %}
