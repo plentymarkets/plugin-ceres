@@ -195,6 +195,9 @@ Vue.component("quantity-input", {
                 value = defaultValue(this.compMin, 1);
             }
 
+            // limit new value to min/ max value
+            value = limit(value, this.compMin, this.compMax);
+
             // make sure, new value is an even multiple of interval
             const diff = formatFloat(value % this.compInterval, this.compDecimals, true);
 
