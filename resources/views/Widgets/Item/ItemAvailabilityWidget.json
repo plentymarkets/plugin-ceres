@@ -1,0 +1,10 @@
+{
+    "identifier": "Ceres::ItemAvailabilityWidget",
+    "label": "Widget.itemAvailabilityLabel",
+    "previewImageURL": "/images/widgets/availability.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Item\\ItemAvailabilityWidget",
+    "settings": {}
+}

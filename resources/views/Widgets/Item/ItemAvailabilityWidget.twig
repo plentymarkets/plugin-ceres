@@ -1,0 +1,7 @@
+<div class="widget widget-availability">
+    <span v-if="$store.getters.currentItemVariation.variation.availability" :class="'availability badge availability_' + $store.getters.currentItemVariation.variation.availability.id">
+        <span>
+            ${ $store.getters.currentItemVariation.variation.availability.names.name }
+        </span>
+    </span>
+</div>

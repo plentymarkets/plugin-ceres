@@ -7,7 +7,7 @@
 {% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-code widget-{{ appearance | default('primary') }}{% if hasSpacing %} m-0{% endif %}">
+<div class="widget widget-code widget-{{ appearance | default('none') }}{% if hasSpacing %} m-0{% endif %}">
     <div class="widget-inner bg-appearance{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{{ WidgetHelper.makeCodeEditable('text', 'Ceres::Widget.textLabel', isPreview) }}>
         {{ text | raw }}
     </div>
