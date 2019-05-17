@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::AddToWishListWidget",
     "label": "Widget.addToWishListLabel",
-    "previewImageURL": "/images/widgets/add-to-wish-list.svg",
+    "previewImageURL": "/images/widgets/add-to-wishlist.svg",
     "type": "item",
     "categories": ["item"],
     "position": 200,

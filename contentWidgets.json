@@ -4207,6 +4207,41 @@
         }
     },
     {
+        "identifier": "Ceres::AddToWishListWidget",
+        "label": "Widget.addToWishListLabel",
+        "previewImageURL": "/images/widgets/add-to-wishlist.svg",
+        "type": "item",
+        "categories": [
+            "item"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Item\\AddToWishListWidget",
+        "settings": {
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::AttributeWidget",
         "label": "Widget.attributeLabel",
         "previewImageURL": "/images/widgets/attribute.svg",
@@ -4332,6 +4367,18 @@
                 }
             }
         }
+    },
+    {
+        "identifier": "Ceres::ItemAvailabilityWidget",
+        "label": "Widget.itemAvailabilityLabel",
+        "previewImageURL": "/images/widgets/availability.svg",
+        "type": "item",
+        "categories": [
+            "item"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Item\\ItemAvailabilityWidget",
+        "settings": {}
     },
     {
         "identifier": "Ceres::ItemImageWidget",
