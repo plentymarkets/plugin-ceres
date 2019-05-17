@@ -93,6 +93,8 @@
                                                         {{ splitPath | last }}
                                                     </a>
                                                 </span>
+                                            {% elseif property.type == "selection" %}
+                                                <span>: {{ property | propertySelectionValueName }}</span>
                                             {% elseif property.type | length > 0 %}
                                                 <span>: {{ property.value }}</span>
                                             {% endif %}
