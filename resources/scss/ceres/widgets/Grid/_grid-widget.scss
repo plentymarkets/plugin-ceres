@@ -110,3 +110,7 @@
         padding: $spacer;
     }
 }
+
+html.ie .widget-grid .widget-inner-stacked {
+    display: block;
+}
