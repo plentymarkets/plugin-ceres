@@ -33,6 +33,9 @@
 
             <div class="col-md-5">
                 <div class="py-4 px-3 bg-white" v-stick-in-parent="$store.state.basket.isBasketInitiallyLoaded">
+
+                    <shipping-country-select template="#vue-basket-shipping-country-select"></shipping-country-select>
+
                     <hr class="d-md-none">
                     {{ LayoutContainer.show("Ceres::Basket.BeforeBasketTotals") }}
                     <basket-totals class="mb-4" template="#vue-basket-totals"></basket-totals>

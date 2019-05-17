@@ -1319,6 +1319,14 @@
                             }
                         ]
                     }
+                },
+                "basket.show_shipping_country_select": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.basketShowShippingCountrySelect",
+                    "options": {
+                      "defaultValue": "true"
+                    }
                 }
             }
         },

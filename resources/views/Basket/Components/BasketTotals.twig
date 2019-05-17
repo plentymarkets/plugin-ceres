@@ -58,12 +58,10 @@
                 {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
 
-                {% set basketShippingCountrySelect = '<shipping-country-select template="#vue-basket-shipping-country-select" :disable-input="'~ services.template.isCheckout() | json_encode() ~'"></shipping-country-select>' %}
-
                 {# Shipping (net) #}
                 <template v-if="visibleFields.includes('shippingCostsNet')">
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
-                        {{ trans("Ceres::Template.basketShippingCostsNet", {"basketShippingCountrySelect": basketShippingCountrySelect}) | raw }}
+                        {{ trans("Ceres::Template.basketShippingCosts") }} ({{ trans("Ceres::Template.basketNet") }})
                     </dt><!--
                     --><dd :class="{ 'font-weight-bold': showNetPrices }">
                         ${ basket.shippingAmountNet | currency }
@@ -74,7 +72,7 @@
                 {# Shipping (gross) #}
                 <template v-if="visibleFields.includes('shippingCostsGross')">
                     <dt :class="{ 'font-weight-bold': !showNetPrices }">
-                        {{ trans("Ceres::Template.basketShippingCostsGross", {"basketShippingCountrySelect": basketShippingCountrySelect}) | raw }}
+                        {{ trans("Ceres::Template.basketShippingCosts") }} ({{ trans("Ceres::Template.basketGross") }})
                     </dt><!--
                     --><dd :class="{ 'font-weight-bold': !showNetPrices }">
                         ${ basket.shippingAmount | currency }

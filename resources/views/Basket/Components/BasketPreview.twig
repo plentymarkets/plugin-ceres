@@ -30,6 +30,8 @@
             <!-- BASKET PREVIEW BOTTOM -->
             <div class="bg-light totals col-sm-5 col-md-12 pt-3">
 
+                <shipping-country-select template="#vue-basket-shipping-country-select"></shipping-country-select>
+
                 {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
                 <basket-totals></basket-totals>
                 {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
