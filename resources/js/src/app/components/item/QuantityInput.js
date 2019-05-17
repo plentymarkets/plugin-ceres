@@ -222,6 +222,10 @@ Vue.component("quantity-input", {
                 this.compValue = value;
                 this.onValueChanged();
             }
+            else
+            {
+                this.$refs.quantityInputField.value = value;
+            }
         },
 
         fetchQuantityFromBasket()
