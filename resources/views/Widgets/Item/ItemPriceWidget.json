@@ -7,46 +7,19 @@
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Item\\ItemPriceWidget",
     "settings": {
-        "showGraduatedPrices": {
+        "showCrossPrice": {
             "type": "checkbox",
             "defaultValue": true,
             "options": {
-                "name": "Widget.showGraduatedPricesLabel"
+                "name": "Widget.showCrossPriceLabel"
             }
         },
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "primary",
-            "options": "@include(appearance)"
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
         },
-        "customPadding": {
-            "type": "checkbox",
-            "options": {
-                "name": "Widget.widgetCustomPadding"
-            }
-        },
-        "padding": {
-            "type": "spacing",
-            "isVisible": "!!customPadding",
-            "options": {
-                "units": ["px", "rem"],
-                "direction": "all"
-            }
-        },
-        "customMargin": {
-            "type": "checkbox",
-            "options": {
-                "name": "Widget.widgetCustomMargin"
-            }
-        },
-        "margin": {
-            "type": "spacing",
-            "isVisible": "!!customMargin",
-            "options": {
-                "units": ["px", "rem"],
-                "direction": "all"
-            }
-        }
+        "spacing":"@include(spacingMargin)"
     }
 }
