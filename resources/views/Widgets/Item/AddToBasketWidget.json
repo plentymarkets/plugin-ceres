@@ -1,0 +1,44 @@
+{
+    "identifier": "Ceres::AddToBasketWidget",
+    "label": "Widget.addtoBasketLabel",
+    "previewImageURL": "/images/widgets/add-to-basket.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Item\\AddToBasketWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "buttonSize": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "md",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "md",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}

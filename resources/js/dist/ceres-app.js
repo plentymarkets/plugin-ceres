@@ -21845,6 +21845,8 @@ Vue.component("user-login-handler", {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
+var _utils = require("../../helper/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -21868,18 +21870,25 @@ Vue.component("add-to-wish-list", {
   },
   computed: _objectSpread({
     isVariationInWishList: function isVariationInWishList() {
-      return this.wishListIds.includes(this.variationId);
+      return this.wishListIds.includes(this.currentVariationId);
+    },
+    currentVariationId: function currentVariationId() {
+      return !(0, _utils.isNullOrUndefined)(this.variationId) ? this.variationId : this.currentVariationVariationId;
     }
   }, Vuex.mapState({
+    currentVariationVariationId: function currentVariationVariationId(state) {
+      var currentVariation = state.item.variation && state.item.variation.documents && state.item.variation.documents[0].data;
+
+      if ((0, _utils.isNullOrUndefined)(currentVariation)) {
+        return null;
+      }
+
+      return currentVariation && currentVariation.variation && currentVariation.variation.id;
+    },
     wishListIds: function wishListIds(state) {
       return state.wishList.wishListIds;
     }
   })),
-  watch: {
-    isVariationInWishList: function isVariationInWishList() {
-      this.changeTooltipText();
-    }
-  },
   methods: {
     switchState: function switchState() {
       if (this.isVariationInWishList) {
@@ -21893,7 +21902,7 @@ Vue.component("add-to-wish-list", {
 
       if (!this.isLoading) {
         this.isLoading = true;
-        this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
+        this.$store.dispatch("addToWishList", parseInt(this.currentVariationId)).then(function (response) {
           _this.isLoading = false;
           NotificationService.success(_TranslationService.default.translate("Ceres::Template.singleItemWishListAdded"));
         }, function (error) {
@@ -21907,7 +21916,7 @@ Vue.component("add-to-wish-list", {
       if (!this.isLoading) {
         this.isLoading = true;
         this.$store.dispatch("removeWishListItem", {
-          id: parseInt(this.variationId)
+          id: parseInt(this.currentVariationId)
         }).then(function (response) {
           _this2.isLoading = false;
           NotificationService.success(_TranslationService.default.translate("Ceres::Template.singleItemWishListRemoved"));
@@ -21917,14 +21926,19 @@ Vue.component("add-to-wish-list", {
       }
     },
     changeTooltipText: function changeTooltipText() {
-      var tooltipText = _TranslationService.default.translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
+      var tooltipText = _TranslationService.default.translate("Ceres::Template.".concat(this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
 
       $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
+    }
+  },
+  watch: {
+    isVariationInWishList: function isVariationInWishList() {
+      this.changeTooltipText();
     }
   }
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279}],179:[function(require,module,exports){
+},{"../../helper/utils":270,"services/NotificationService":278,"services/TranslationService":279}],179:[function(require,module,exports){
 "use strict";
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -31570,6 +31584,9 @@ var getters = {
     }
 
     return [];
+  },
+  currentItemVariation: function currentItemVariation(state) {
+    return state.variation.documents && state.variation.documents[0] && state.variation.documents[0].data;
   }
 };
 var _default = {
