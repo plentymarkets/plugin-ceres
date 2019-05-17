@@ -18610,11 +18610,8 @@ Vue.component("add-to-basket", {
     }
   },
   computed: _objectSpread({
-    computedMinimumQuantity: function computedMinimumQuantity() {
-      return this.minimumQuantity <= 0 ? this.intervalQuantity : this.minimumQuantity;
-    },
     canBeAddedToBasket: function canBeAddedToBasket() {
-      return this.isSalable && !this.hasChildren && (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) && !this.requiresProperties && this.hasPrice;
+      return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice;
     },
     requiresProperties: function requiresProperties() {
       return App.config.item.requireOrderProperties && this.orderProperties.filter(function (property) {
@@ -23474,6 +23471,8 @@ Vue.component("quantity-input", {
       if (value !== this.compValue) {
         this.compValue = value;
         this.onValueChanged();
+      } else {
+        this.$refs.quantityInputField.value = value;
       }
     },
     fetchQuantityFromBasket: function fetchQuantityFromBasket() {
