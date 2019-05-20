@@ -5,7 +5,8 @@ const state =
         variation: {},
         variationList: [],
         variationOrderQuantity: 1,
-        variationMarkInvalidProperties: false
+        variationMarkInvalidProperties: false,
+        isVariationSelected: true
     };
 
 const mutations =
@@ -46,6 +47,11 @@ const mutations =
         setVariationMarkInvalidProps(state, markFields)
         {
             state.variationMarkInvalidProperties = !!markFields;
+        },
+
+        setIsVariationSelected(state, isVariationSelected)
+        {
+            state.isVariationSelected = !!isVariationSelected;
         }
     };
 

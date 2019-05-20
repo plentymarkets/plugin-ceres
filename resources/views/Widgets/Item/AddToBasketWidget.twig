@@ -28,33 +28,17 @@
     <div>add to basket</div>
 
     <div class="w-100" v-if="$store.state.item.variation.documents">
+
         {{ AddToBasket.printVueComponent(
             "$store.state.item.variation.documents[0].data",
             false, 
             true,
             {
                 ":missing-order-properties":"$store.getters.variationMissingProperties",
-                ":is-variation-selected": "isVariationSelected && $store.state.item.variation.documents[0].data.filter.isSalable",
                 ":has-price": "$store.state.item.variation.documents[0].data | hasItemDefaultPrice"
             }
         ) }}
     </div>
-    
-    {#
-    <div class="w-100" v-if="$store.state.item.variation.documents">
-        {{ Twig.print(Twig.call("AddToBasket.printVueComponent", [
-            "$store.state.item.variation.documents[0].data",
-            false, 
-            true,
-            {
-                ":missing-order-properties":"variationMissingProperties",
-                ":is-variation-selected": "isVariationSelected && $store.state.item.variation.documents[0].data.filter.isSalable",
-                ":has-price": "$store.state.item.variation.documents[0].data | hasItemDefaultPrice"
-            }            
-            ]))
-        }}
-    </div>
-    #}
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.AfterAddToBasket", item.documents[0].data])) }}
 

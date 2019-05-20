@@ -15,13 +15,6 @@ Vue.component("single-item", {
         "variationListData"
     ],
 
-    data()
-    {
-        return {
-            isVariationSelected: true
-        };
-    },
-
     computed:
     {
         isDescriptionTabActive()
@@ -41,7 +34,8 @@ Vue.component("single-item", {
 
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
-            variations: state => state.item.variationList
+            variations: state => state.item.variationList,
+            isVariationSelected: state => state.item.isVariationSelected
         }),
 
         ...Vuex.mapGetters([
@@ -49,6 +43,10 @@ Vue.component("single-item", {
             "variationMissingProperties",
             "variationGroupedProperties",
             "variationGraduatedPrice"
+        ]),
+
+        ...Vuex.mapMutations([
+            "setIsVariationSelected"
         ])
     },
 

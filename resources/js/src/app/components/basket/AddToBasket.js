@@ -7,8 +7,6 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-basket", {
 
-    delimiters: ["${", "}"],
-
     props:
     {
         template:
@@ -32,12 +30,6 @@ Vue.component("add-to-basket", {
             type: Array,
             default: () => []
         },
-        isVariationSelected:
-        {
-            type: Boolean,
-            default: true
-        },
-
         variationId:
         {
             type: Number
@@ -100,7 +92,8 @@ Vue.component("add-to-basket", {
         },
 
         ...Vuex.mapState({
-            isBasketLoading: state => state.basket.isBasketLoading
+            isBasketLoading: state => state.basket.isBasketLoading,
+            isVariationSelected: state => state.item.isVariationSelected
         })
     },
     data()
