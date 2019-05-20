@@ -19567,7 +19567,6 @@ nav.navbar .container-max > div.row #mainNavbarCollapsable {
     transition: all .1s ease;
     background: #008ebd;
     height: auto;
-    top: 100%;
     text-align: center;
     width: auto;
     max-width: 25em;
@@ -25292,6 +25291,10 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 .checkout .widget-grid > .widget-inner > div {
   background-color: #fff;
   padding: 1rem;
+}
+
+html.ie .widget-grid .widget-inner-stacked {
+  display: block;
 }
 
 .nav-link.text-appearance.active {
