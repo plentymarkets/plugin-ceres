@@ -43,10 +43,6 @@ Vue.component("single-item", {
             "variationMissingProperties",
             "variationGroupedProperties",
             "variationGraduatedPrice"
-        ]),
-
-        ...Vuex.mapMutations([
-            "setIsVariationSelected"
         ])
     },
 
@@ -55,5 +51,13 @@ Vue.component("single-item", {
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+    },
+
+    methods:
+    {
+        setIsVariationSelected(event)
+        {
+            this.$store.commit("setIsVariationSelected", event);
+        }
     }
 });
