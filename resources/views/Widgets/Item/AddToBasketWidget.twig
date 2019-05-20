@@ -23,10 +23,8 @@
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.BeforeAddToBasket", item.documents[0].data])) }}
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.BeforeAddToBasket", Twig.var("item.documents[0].data")])) }}
     
-    <div>add to basket</div>
-
     <div class="w-100" v-if="$store.state.item.variation.documents">
 
         {{ AddToBasket.printVueComponent(
@@ -40,6 +38,5 @@
         ) }}
     </div>
 
-    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.AfterAddToBasket", item.documents[0].data])) }}
-
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.AfterAddToBasket", Twig.var("item.documents[0].data")])) }}
 </div>
