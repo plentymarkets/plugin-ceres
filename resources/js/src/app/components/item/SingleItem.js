@@ -15,13 +15,6 @@ Vue.component("single-item", {
         "variationListData"
     ],
 
-    data()
-    {
-        return {
-            isVariationSelected: true
-        };
-    },
-
     computed:
     {
         isDescriptionTabActive()
@@ -41,7 +34,8 @@ Vue.component("single-item", {
 
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
-            variations: state => state.item.variationList
+            variations: state => state.item.variationList,
+            isVariationSelected: state => state.item.isVariationSelected
         }),
 
         ...Vuex.mapGetters([
@@ -57,5 +51,13 @@ Vue.component("single-item", {
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+    },
+
+    methods:
+    {
+        setIsVariationSelected(event)
+        {
+            this.$store.commit("setIsVariationSelected", event);
+        }
     }
 });
