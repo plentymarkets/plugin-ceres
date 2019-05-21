@@ -24,10 +24,11 @@
     "properties.property.names.description",
 
     "properties.group.id",
-    "properties.group.orderPropertyGroupingType",
+    "properties.group.isSurchargePercental",
+    "properties.group.names.description",
     "properties.group.names.lang",
     "properties.group.names.name",
-    "properties.group.names.description",
+    "properties.group.orderPropertyGroupingType",
 
     "item.id",
     "item.storeSpecial",
