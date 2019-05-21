@@ -256,6 +256,7 @@ export class StickyElement
         if (this.el.dataset.hasOwnProperty("stickyContainer"))
         {
             const container = document.querySelector(this.el.dataset.stickyContainer);
+
             if (!isNullOrUndefined(container))
             {
                 return container;
