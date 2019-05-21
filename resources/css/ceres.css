@@ -19163,6 +19163,7 @@ div:not(.top-bar) > .page-header > div > .cmp-search-box {
       -ms-grid-row-align: center;
       align-self: center;
   color: #4D4F4D;
+  max-width: 0;
 }
 
 .search-box-shadow-frame .autocomplete-suggestions > .autocomplete-suggestion > .autocomplete-image-container {

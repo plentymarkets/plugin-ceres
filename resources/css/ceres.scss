@@ -14080,6 +14080,7 @@ div:not(.top-bar) {
                     -ms-flex-item-align: center;
                         align-self: center;
                     color: $gray-dark;
+                    max-width: 0;
                 }
 
                 & > .autocomplete-image-container
