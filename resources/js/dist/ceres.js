@@ -23477,7 +23477,7 @@ Vue.component("quantity-input", {
       if (value !== this.compValue) {
         this.compValue = value;
         this.onValueChanged();
-      } else {
+      } else if (!(0, _utils.isNullOrUndefined)(this.$refs.quantityInputField)) {
         this.$refs.quantityInputField.value = value;
       }
     },
