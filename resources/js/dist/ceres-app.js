@@ -27695,11 +27695,13 @@ function () {
     window.addEventListener("resize", this.resizeListener);
     this.checkMinWidth();
     this.vm.$nextTick(function () {
-      _this.el.parentElement.__stickyElements = _this.el.parentElement.__stickyElements || [];
+      var containerElement = _this.getContainerElement();
 
-      _this.el.parentElement.__stickyElements.push(_this);
+      containerElement.__stickyElements = _this.getContainerElement().__stickyElements || [];
 
-      _this.el.parentElement.__stickyElements.forEach(function (stickyElement) {
+      containerElement.__stickyElements.push(_this);
+
+      containerElement.__stickyElements.forEach(function (stickyElement) {
         return stickyElement.calculateOffset();
       });
     });
@@ -27905,6 +27907,14 @@ function () {
   }, {
     key: "getContainerElement",
     value: function getContainerElement() {
+      if (this.el.dataset.hasOwnProperty("stickyContainer")) {
+        var container = document.querySelector(this.el.dataset.stickyContainer);
+
+        if (!(0, _utils.isNullOrUndefined)(container)) {
+          return container;
+        }
+      }
+
       return this.el.parentElement;
     }
   }, {
@@ -27914,7 +27924,7 @@ function () {
       var idx = this.getSiblingStickies().indexOf(this);
 
       if (idx >= 0) {
-        this.el.parentElement.__stickyElements.splice(idx, 1);
+        this.getContainerElement().__stickyElements.splice(idx, 1);
       }
 
       this.el.classList.remove("sticky-element");
