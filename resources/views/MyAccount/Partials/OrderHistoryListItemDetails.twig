@@ -71,7 +71,7 @@
                                 {% if item.orderProperties %}
                                     {% for property in item.orderProperties %}
                                         <div>
-                                            <strong>{{ property.name }}</strong>
+                                            <strong>{{ property | propertyName }}</strong>
                                             {% if property.type == 'file' %}
                                                 <span>
                                                     {% set splitPath = property.value |split('/') %}
