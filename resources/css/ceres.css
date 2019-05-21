@@ -16196,10 +16196,6 @@ a:active {
   float: none;
 }
 
-.bg-white {
-  background-color: #fff !important;
-}
-
 .text-wrap {
   white-space: normal;
 }
@@ -16210,6 +16206,12 @@ a:active {
 
 .sticky-element.is-sticky {
   z-index: 1020 !important;
+}
+
+.inline-select {
+  margin-left: -7px;
+  text-decoration: underline;
+  font-weight: inherit;
 }
 
 .bg-primary {

@@ -1,6 +1,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {{ component( "Ceres::Basket.Components.BasketList" ) }}
 {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
+{{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
 
 <script type="x/template" id="vue-basket-preview">
     <div class="wrapper-inner basket-preview">
@@ -28,6 +29,8 @@
 
             <!-- BASKET PREVIEW BOTTOM -->
             <div class="bg-light totals col-sm-5 col-md-12 pt-3">
+
+                <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
 
                 {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
                 <basket-totals></basket-totals>

@@ -26704,6 +26704,8 @@ Vue.component("popper", {
 },{"../../helper/dom":266,"../../helper/utils":270,"popper.js":136,"services/ModalService":277}],221:[function(require,module,exports){
 "use strict";
 
+var _UrlService = require("../../services/UrlService");
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -26715,6 +26717,9 @@ Vue.component("shipping-country-select", {
       default: "#vue-shipping-country-select"
     },
     disableInput: {
+      type: Boolean
+    },
+    openBasketPreview: {
       type: Boolean
     }
   },
@@ -26729,17 +26734,23 @@ Vue.component("shipping-country-select", {
     basket: function basket(state) {
       return state.basket.data;
     }
-  })),
+  }), Vuex.mapGetters(["getCountryName"])),
+  created: function created() {
+    (0, _UrlService.removeUrlParam)("openBasketPreview");
+  },
   methods: {
     setShippingCountry: function setShippingCountry(id) {
       if (!this.isDisabled) {
-        this.$store.dispatch("selectShippingCountry", id);
+        this.$store.dispatch("selectShippingCountry", {
+          shippingCountryId: id,
+          openBasketPreview: this.openBasketPreview
+        });
       }
     }
   }
 });
 
-},{}],222:[function(require,module,exports){
+},{"../../services/UrlService":280}],222:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -28042,11 +28053,13 @@ function () {
     window.addEventListener("resize", this.resizeListener);
     this.checkMinWidth();
     this.vm.$nextTick(function () {
-      _this.el.parentElement.__stickyElements = _this.el.parentElement.__stickyElements || [];
+      var containerElement = _this.getContainerElement();
 
-      _this.el.parentElement.__stickyElements.push(_this);
+      containerElement.__stickyElements = _this.getContainerElement().__stickyElements || [];
 
-      _this.el.parentElement.__stickyElements.forEach(function (stickyElement) {
+      containerElement.__stickyElements.push(_this);
+
+      containerElement.__stickyElements.forEach(function (stickyElement) {
         return stickyElement.calculateOffset();
       });
     });
@@ -28252,6 +28265,14 @@ function () {
   }, {
     key: "getContainerElement",
     value: function getContainerElement() {
+      if (this.el.dataset.hasOwnProperty("stickyContainer")) {
+        var container = document.querySelector(this.el.dataset.stickyContainer);
+
+        if (!(0, _utils.isNullOrUndefined)(container)) {
+          return container;
+        }
+      }
+
       return this.el.parentElement;
     }
   }, {
@@ -28261,7 +28282,7 @@ function () {
       var idx = this.getSiblingStickies().indexOf(this);
 
       if (idx >= 0) {
-        this.el.parentElement.__stickyElements.splice(idx, 1);
+        this.getContainerElement().__stickyElements.splice(idx, 1);
       }
 
       this.el.classList.remove("sticky-element");
@@ -31591,6 +31612,8 @@ var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
 var _utils = require("../../helper/utils");
 
+var _UrlService = require("services/UrlService");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var state = {
@@ -31612,9 +31635,11 @@ var mutations = {
   }
 };
 var actions = {
-  selectShippingCountry: function selectShippingCountry(_ref, shippingCountryId) {
+  selectShippingCountry: function selectShippingCountry(_ref, _ref2) {
     var commit = _ref.commit,
         state = _ref.state;
+    var shippingCountryId = _ref2.shippingCountryId,
+        openBasketPreview = _ref2.openBasketPreview;
     return new Promise(function (resolve, reject) {
       var oldShippingCountryId = state.shippingCountryId;
       commit("setShippingCountryId", shippingCountryId);
@@ -31623,6 +31648,12 @@ var actions = {
         shippingCountryId: shippingCountryId
       }).done(function (data) {
         if ((0, _utils.isNullOrUndefined)(oldShippingCountryId) || oldShippingCountryId !== data) {
+          if (openBasketPreview) {
+            (0, _UrlService.setUrlParam)({
+              openBasketPreview: 1
+            });
+          }
+
           window.location.reload();
         }
 
@@ -31659,7 +31690,7 @@ var _default = {
 };
 exports.default = _default;
 
-},{"../../helper/utils":270,"services/ApiService":274}],292:[function(require,module,exports){
+},{"../../helper/utils":270,"services/ApiService":274,"services/UrlService":280}],292:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

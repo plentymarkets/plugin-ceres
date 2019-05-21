@@ -27,9 +27,11 @@ export class StickyElement
 
         this.vm.$nextTick(() =>
         {
-            this.el.parentElement.__stickyElements = this.el.parentElement.__stickyElements || [];
-            this.el.parentElement.__stickyElements.push(this);
-            this.el.parentElement.__stickyElements.forEach(stickyElement => stickyElement.calculateOffset());
+            const containerElement = this.getContainerElement();
+
+            containerElement.__stickyElements = this.getContainerElement().__stickyElements || [];
+            containerElement.__stickyElements.push(this);
+            containerElement.__stickyElements.forEach(stickyElement => stickyElement.calculateOffset());
         });
 
         el.classList.add("sticky-element");
@@ -251,6 +253,15 @@ export class StickyElement
 
     getContainerElement()
     {
+        if (this.el.dataset.hasOwnProperty("stickyContainer"))
+        {
+            const container = document.querySelector(this.el.dataset.stickyContainer);
+
+            if (!isNullOrUndefined(container))
+            {
+                return container;
+            }
+        }
         return this.el.parentElement;
     }
 
@@ -261,7 +272,7 @@ export class StickyElement
 
         if (idx >= 0)
         {
-            this.el.parentElement.__stickyElements.splice(idx, 1);
+            this.getContainerElement().__stickyElements.splice(idx, 1);
         }
 
         this.el.classList.remove("sticky-element");

@@ -11145,10 +11145,6 @@ a:active {
     float: none;
 }
 
-.bg-white {
-    background-color: $white !important;
-}
-
 .text-wrap {
   white-space: normal;
 }
@@ -11159,6 +11155,12 @@ a:active {
 
 .sticky-element.is-sticky {
     z-index: $zindex-sticky !important;
+}
+
+.inline-select {
+    margin-left: -7px;
+    text-decoration: underline;
+    font-weight: inherit;
 }
 
 @each $color, $value in $theme-colors {
