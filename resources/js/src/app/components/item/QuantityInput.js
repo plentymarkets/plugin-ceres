@@ -222,7 +222,7 @@ Vue.component("quantity-input", {
                 this.compValue = value;
                 this.onValueChanged();
             }
-            else
+            else if (!isNullOrUndefined(this.$refs.quantityInputField))
             {
                 this.$refs.quantityInputField.value = value;
             }
