@@ -24406,10 +24406,15 @@ Vue.component("live-shopping-details", {
     setItemPriceRebatePercentage: function setItemPriceRebatePercentage() {
       var specialOfferPrice = this.prices.price.price.value;
       var defaultPrice = this.prices.rrp.price.value;
-      var percentage = 100 - specialOfferPrice / defaultPrice * 100;
-      percentage = percentage.toFixed(App.config.item.storeSpecial);
-      percentage = percentage.replace(".", App.decimalSeparator);
-      this.itemPriceRebatePercentage = percentage;
+
+      if (defaultPrice === 0) {
+        this.itemPriceRebatePercentage = 0;
+      } else {
+        var percentage = 100 - specialOfferPrice / defaultPrice * 100;
+        percentage = percentage.toFixed(App.config.item.storeSpecial);
+        percentage = percentage.replace(".", App.decimalSeparator);
+        this.itemPriceRebatePercentage = percentage;
+      }
     },
     calculations: function calculations() {
       var momentNow = moment(Date.now());
