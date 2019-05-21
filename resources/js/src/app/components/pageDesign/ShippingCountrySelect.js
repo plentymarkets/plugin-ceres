@@ -1,4 +1,4 @@
-import {removeUrlParam} from "../../services/UrlService";
+import { removeUrlParam } from "../../services/UrlService";
 
 Vue.component("shipping-country-select", {
 
