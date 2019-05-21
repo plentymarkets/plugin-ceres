@@ -88,7 +88,7 @@
                                                         {% endif %}
                                                     {% endfor %}
 
-                                                    <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
+                                                    <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
                                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                                         {{ splitPath | last }}
                                                     </a>
