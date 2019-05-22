@@ -17956,7 +17956,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-basket", {
-  delimiters: ["${", "}"],
   props: {
     template: {
       type: String,
@@ -17976,10 +17975,6 @@ Vue.component("add-to-basket", {
       default: function _default() {
         return [];
       }
-    },
-    isVariationSelected: {
-      type: Boolean,
-      default: true
     },
     variationId: {
       type: Number
@@ -18030,6 +18025,9 @@ Vue.component("add-to-basket", {
   }, Vuex.mapState({
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
+    },
+    isVariationSelected: function isVariationSelected(state) {
+      return state.item.isVariationSelected;
     }
   })),
   data: function data() {
@@ -22936,11 +22934,6 @@ Vue.component("single-item", {
   delimiters: ["${", "}"],
   props: ["template", "attributeNameMap", "variationUnits"],
   jsonDataFields: ["itemData", "variationListData"],
-  data: function data() {
-    return {
-      isVariationSelected: true
-    };
-  },
   computed: _objectSpread({
     isDescriptionTabActive: function isDescriptionTabActive() {
       return App.config.item.itemData.includes("item.description") && !!this.currentVariation.texts.description.length;
@@ -22957,12 +22950,20 @@ Vue.component("single-item", {
     },
     variations: function variations(state) {
       return state.item.variationList;
+    },
+    isVariationSelected: function isVariationSelected(state) {
+      return state.item.isVariationSelected;
     }
   }), Vuex.mapGetters(["variationTotalPrice", "variationMissingProperties", "variationGroupedProperties", "variationGraduatedPrice"])),
   created: function created() {
     this.$store.commit("setVariation", this.itemData);
     this.$store.commit("setVariationList", this.variationListData);
     this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+  },
+  methods: {
+    setIsVariationSelected: function setIsVariationSelected(event) {
+      this.$store.commit("setIsVariationSelected", event);
+    }
   }
 });
 
@@ -31344,7 +31345,8 @@ var state = {
   variation: {},
   variationList: [],
   variationOrderQuantity: 1,
-  variationMarkInvalidProperties: false
+  variationMarkInvalidProperties: false,
+  isVariationSelected: true
 };
 var mutations = {
   setVariation: function setVariation(state, variation) {
@@ -31375,6 +31377,9 @@ var mutations = {
   },
   setVariationMarkInvalidProps: function setVariationMarkInvalidProps(state, markFields) {
     state.variationMarkInvalidProperties = !!markFields;
+  },
+  setIsVariationSelected: function setIsVariationSelected(state, isVariationSelected) {
+    state.isVariationSelected = !!isVariationSelected;
   }
 };
 var actions = {};
