@@ -95,7 +95,7 @@ Vue.component("registration", {
                     {
                         NotificationService.error(
                             TranslationService.translate("Ceres::Template.regError")
-                        ).closeAfter(3000);
+                        ).closeAfter(10000);
                     }
 
                     this.isDisabled = false;
