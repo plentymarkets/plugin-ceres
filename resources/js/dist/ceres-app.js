@@ -21499,7 +21499,7 @@ Vue.component("registration", {
             location.reload();
           }
         } else {
-          NotificationService.error(_TranslationService.default.translate("Ceres::Template.regError")).closeAfter(3000);
+          NotificationService.error(_TranslationService.default.translate("Ceres::Template.regError")).closeAfter(10000);
         }
 
         _this2.isDisabled = false;
