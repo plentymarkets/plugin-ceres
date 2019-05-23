@@ -41,7 +41,7 @@ var init = (function($, window, document)
         }
 
         // Detect Facebook integrated Browser
-        if (typeof navigator !== "undefined" && /FBAV\/([0-9\.]+)/.test(navigator.userAgent))
+        if (typeof navigator !== "undefined" && /FBA[NV]\/([0-9\.]+)/.test(navigator.userAgent))
         {
             document.body.classList.add("facebook");
         }
