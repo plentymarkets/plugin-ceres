@@ -75,7 +75,7 @@ Vue.component("add-to-basket", {
             default: null,
             validator: value =>
             {
-                return ["sm", "lg"].indexOf(value) !== -1;
+                return ["sm", "md", "lg"].indexOf(value) !== -1;
             }
         },
         paddingClasses:
