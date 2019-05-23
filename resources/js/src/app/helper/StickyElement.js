@@ -50,7 +50,6 @@ export class StickyElement
             this.placeholder = document.createElement("DIV");
             this.el.parentNode.insertBefore(this.placeholder, this.el);
             this.eventListener = this.tick.bind(this);
-            this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
 
             document.addEventListener("storeChanged", this.eventListener);
             STICKY_EVENTS.forEach(event =>
@@ -150,7 +149,7 @@ export class StickyElement
             return;
         }
 
-        let unfixedWidgetsHeight = 0;
+        this.offsetTop = 0;
 
         if (document.getElementById("page-header-parent"))
         {
@@ -158,14 +157,13 @@ export class StickyElement
 
             for (let i = 0; i < headerChildren.length; i++)
             {
-                if (headerChildren[i].classList.contains("unfixed"))
+                if (!headerChildren[i].classList.contains("unfixed"))
                 {
-                    unfixedWidgetsHeight += headerChildren[i].getBoundingClientRect().height;
+                    this.offsetTop += headerChildren[i].getBoundingClientRect().height;
                 }
             }
         }
 
-        this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height - unfixedWidgetsHeight;
         this.offsetBottom = 0;
         if (isNullOrUndefined(this.position))
         {
