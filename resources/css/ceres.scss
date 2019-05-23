@@ -11338,6 +11338,22 @@ body {
   }
 }
 
+@include media-breakpoint-down(xs) {     
+    html.facebook {
+        .checkout .modal.show,
+        .myaccount .modal.show {
+            position: absolute !important;
+            -webkit-transform: translateZ(0);
+                    transform: translateZ(0);
+            min-height: 100vh;
+        }
+        body.modal-open {
+            position: relative !important;
+            overflow: auto !important;
+        }
+    }
+}
+
 // additional compatibility scss to bootstrap's reboot
 
 // prevent iOS standard zoom on input elements on focus

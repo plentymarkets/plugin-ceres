@@ -16489,6 +16489,19 @@ body > #vue-error.open-hover .basket-preview-hover-wrapper {
   margin-left: 5px;
 }
 
+@media (max-width: 575.98px) {
+  html.facebook .checkout .modal.show,
+  html.facebook .myaccount .modal.show {
+    position: absolute !important;
+    transform: translateZ(0);
+    min-height: 100vh;
+  }
+  html.facebook body.modal-open {
+    position: relative !important;
+    overflow: auto !important;
+  }
+}
+
 html.ios input,
 html.ios select,
 html.ios textarea {

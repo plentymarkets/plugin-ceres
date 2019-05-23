@@ -28374,6 +28374,11 @@ var init = function ($, window, document) {
       $("html").addClass(browser.name);
     } else {
       $("html").addClass("unkown-os");
+    } // Detect Facebook integrated Browser
+
+
+    if (typeof navigator !== "undefined" && /FBA[NV]\/([0-9\.]+)/.test(navigator.userAgent)) {
+      document.body.classList.add("facebook");
     }
 
     $(window).scroll(function () {
