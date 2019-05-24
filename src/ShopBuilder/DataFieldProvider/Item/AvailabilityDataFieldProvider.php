@@ -8,7 +8,7 @@ class AvailabilityDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
-        $this->addField("Ceres::Widget.dataFieldAvailability", "");
+        $this->addField("Ceres::Widget.dataFieldAvailabilityText", "");
         $this->addField("Ceres::Widget.dataFieldAvailabilityIcon", "");
         $this->addField("Ceres::Widget.dataFieldAvailabilityAvgDeliveryDays", "");
         $this->addField("Ceres::Widget.dataFieldAvailabilityMaxOrderQuantity", "");

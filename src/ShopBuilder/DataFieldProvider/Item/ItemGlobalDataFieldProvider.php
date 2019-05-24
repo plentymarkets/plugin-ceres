@@ -10,8 +10,6 @@ class ItemGlobalDataFieldProvider extends DataFieldProvider
     {
         $this->addField("Ceres::Widget.dataFieldItemGlobalCondition", "");
         $this->addField("Ceres::Widget.dataFieldItemGlobalConditionApi", "");
-        $this->addField("Ceres::Widget.dataFieldItemGlobalManufacturer", "");
-        $this->addField("Ceres::Widget.dataFieldItemGlobalManufacturerExternalName", "");
         $this->addField("Ceres::Widget.dataFieldItemGlobalProducingCountry", "");
         $this->addField("Ceres::Widget.dataFieldItemGlobalProducingCountryIso2", "");
         $this->addField("Ceres::Widget.dataFieldItemGlobalProducingCountryIso3", "");

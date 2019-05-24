@@ -11,6 +11,7 @@ class ItemDataFieldProvider extends DataFieldProvider
         $this->addChildProvider("Ceres::Widget.dataFieldItemGlobal", ItemGlobalDataFieldProvider::class);
         $this->addChildProvider("Ceres::Widget.dataFieldVariationGlobal", VariationGlobalDataFieldProvider::class);
         $this->addChildProvider("Ceres::Widget.dataFieldAvailability", AvailabilityDataFieldProvider::class);
+        $this->addChildProvider("Ceres::Widget.dataFieldManufacturer", ManufacturerDataFieldProvider::class);
         $this->addChildProvider("Ceres::Widget.dataFieldBarcodes", BarcodeListDataFieldProvider::class);
         $this->addChildProvider("Ceres::Widget.dataFieldUnits", UnitDataFieldProvider::class);
         $this->addChildProvider("Ceres::Widget.dataFieldTexts", TextsDataFieldProvider::class);
