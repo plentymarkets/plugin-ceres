@@ -4566,7 +4566,7 @@
             "imageSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "url",
+                "defaultValue": "urlMiddle",
                 "options": {
                     "name": "Widget.itemImageSizeLabel",
                     "tooltipText": "Widget.itemImageTooltip",
