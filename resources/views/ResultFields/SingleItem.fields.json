@@ -74,6 +74,7 @@
     "properties.property.surcharge",
     "properties.property.value",
     "properties.property.valueType",
+    "properties.surcharge",
     
     "properties.group.id",
     "properties.group.isSurchargePercental",
