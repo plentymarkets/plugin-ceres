@@ -6,6 +6,7 @@
     .qty-input {
         outline: none;
         height: 100%;
+        min-height: 27px;
         width: 48px;
         padding: 0;
         text-align: center;
@@ -31,6 +32,7 @@
         .qty-btn {
             width: 100%;
             height: calc(50% - .5px);
+            min-height: 12px;
             text-align: center;
             transition: all .2s cubic-bezier(0,0,.26,1);
             border-radius: $border-radius;
