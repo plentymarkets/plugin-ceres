@@ -34,7 +34,7 @@ Vue.component("registration", {
             isDisabled: false,
             privacyPolicyAccepted : false,
             privacyPolicyShowError: false,
-            enableConfirmingPrivacyPolicy: App.config.contact.enableConfirmingPrivacyPolicy
+            enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
         };
     },
 
