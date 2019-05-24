@@ -21798,7 +21798,10 @@ Vue.component("registration", {
         stateId: null,
         gender: "male"
       },
-      isDisabled: false
+      isDisabled: false,
+      privacyPolicyAccepted: false,
+      privacyPolicyShowError: false,
+      enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
     };
   },
   methods: {
@@ -21809,13 +21812,27 @@ Vue.component("registration", {
       var _this = this;
 
       _ValidationService.default.validate($("#registration" + this._uid)).done(function () {
-        _this.sendRegistration();
+        if (!_this.enableConfirmingPrivacyPolicy || _this.privacyPolicyAccepted) {
+          _this.sendRegistration();
+        } else {
+          _this.privacyPolicyShowError = true;
+          NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
+            hyphen: "&shy;"
+          }));
+        }
       }).fail(function (invalidFields) {
         if (!(0, _utils.isNullOrUndefined)(_this.$refs.passwordHint) && invalidFields.indexOf(_this.$refs.passwordInput) >= 0) {
           _this.$refs.passwordHint.showPopper();
         }
 
         _ValidationService.default.markInvalidFields(invalidFields, "error");
+
+        if (_this.enableConfirmingPrivacyPolicy && !_this.privacyPolicyAccepted) {
+          _this.privacyPolicyShowError = true;
+          NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
+            hyphen: "&shy;"
+          }));
+        }
       });
     },
 
@@ -21890,6 +21907,13 @@ Vue.component("registration", {
       }
 
       return userObject;
+    },
+    privacyPolicyValueChanged: function privacyPolicyValueChanged(value) {
+      this.privacyPolicyAccepted = value;
+
+      if (value) {
+        this.privacyPolicyShowError = false;
+      }
     }
   }
 });
