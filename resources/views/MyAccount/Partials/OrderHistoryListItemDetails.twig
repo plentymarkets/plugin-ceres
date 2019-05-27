@@ -88,7 +88,7 @@
                                                         {% endif %}
                                                     {% endfor %}
 
-                                                    <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
+                                                    <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
                                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                                         {{ splitPath | last }}
                                                     </a>
@@ -297,7 +297,7 @@
             </template>
             
             {% if orderData.isReturnable %}
-                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="/returns/{{ orderData.order.id }}">
+                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="{{ urls.returns(orderData.order.id) }}">
                     <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>
