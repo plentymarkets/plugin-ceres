@@ -1,0 +1,17 @@
+{
+    "identifier": "Ceres::GraduatedPriceWidget",
+    "label": "Widget.graduatedPriceLabel",
+    "previewImageURL": "/images/widgets/item-image.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Item\\GraduatedPriceWidget",
+    "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        }
+    }
+}
