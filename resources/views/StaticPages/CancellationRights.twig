@@ -3,7 +3,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
+    {% embed getPartial('page-metadata') %}
         {% block title          trans("Ceres::Template.cancellationRights", {"hyphen": ""}) %}
         {% block description    trans('Ceres::Template.cancellationRightsMetaDescription') %}
         {% block robots         ceresConfig.meta.robotsCancellationRights %}

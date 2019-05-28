@@ -9,14 +9,21 @@
         <slot>
             <div class="single container-max page-content">
                 <div class="row mt-5 position-relative">
-                    <div class="col-md-7">
+
+                    <div class="col-12 col-md-7" id="item-container">
                         <slot name="image-carousel"></slot>
+                    </div>
+
+                    <div class="col-12 col-md-5">
+                        <div v-stick-in-parent data-sticky-container="#item-container">
+                            {% include "Ceres::Item.Components.SingleItem.SingleItem_Details" %}
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-7">
                         {% include "Ceres::Item.Components.SingleItem.SingleItem_InformationTable" %}
                     </div>
 
-                    <div class="col-md-5 single-rightside my-3">
-                        {% include "Ceres::Item.Components.SingleItem.SingleItem_Details" %}
-                    </div>
                 </div>
 
                 <slot name="item-list-container"></slot>

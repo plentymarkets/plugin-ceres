@@ -72,15 +72,11 @@ Vue.component("add-to-basket", {
     },
     computed:
     {
-        computedMinimumQuantity()
-        {
-            return this.minimumQuantity <= 0 ? this.intervalQuantity : this.minimumQuantity;
-        },
         canBeAddedToBasket()
         {
             return this.isSalable &&
                 !this.hasChildren &&
-                (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) &&
+                !(this.minimumQuantity != 1 || this.intervalQuantity != 1) &&
                 !this.requiresProperties &&
                 this.hasPrice;
         },

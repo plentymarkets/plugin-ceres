@@ -8,6 +8,7 @@
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
+{{ component("Ceres::Customer.Components.Contact.AcceptPrivacyPolicyCheck") }}
 
 {# TODO: remove if shop builder pages can be rebuild by migrations #}
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
@@ -22,6 +23,10 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
 
+{% if request.get('openBasketPreview') == 1 %}
+    {% set openBasketClass = "open-" ~ ceresConfig.basket.previewType %}
+{% endif %}
+
 {% spaceless %}
 <!DOCTYPE html>
 
@@ -31,7 +36,7 @@
     {% include getPartial('head') %}
 
     {% block PartialHead %}
-        {% embed "Ceres::PageDesign.Partials.PageMetadata" %}{% endembed %}
+        {% embed getPartial('page-metadata') %}{% endembed %}
     {% endblock %}
 
     {% for styleTemplate in get_additional_styles() %}
@@ -53,7 +58,7 @@
         document.body.classList.add("no-touch");
     }
 </script>
-<div id="vue-app">
+<div id="vue-app"{% if openBasketClass is not empty %} class="{{ openBasketClass }}"{% endif %}>
     <div class="wrapper wrapper-top">
         <!-- messages -->
         <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
@@ -144,7 +149,7 @@
         <!-- ./REGISTRATION MODAL -->
 
         <!-- BASKET MODAL -->
-        <add-item-to-basket-overlay :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
+        <add-item-to-basket-overlay></add-item-to-basket-overlay>
         <!-- ./BASKET MODAL -->
 
         <!-- PASSWORD RESET MODAL -->

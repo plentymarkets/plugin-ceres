@@ -5,7 +5,7 @@
 {% set showDefaultHomepage = config("Ceres.default.homepage") %}
 
 {% block PartialHead %}
-    {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
+    {% embed getPartial('page-metadata') %}
         {% block description    trans('Ceres::Template.homepageMetaDescription') %}
         {% block robots         ceresConfig.meta.robotsHome %}
     {% endembed %}

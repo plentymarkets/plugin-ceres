@@ -108,10 +108,12 @@ function _validateElement(elem)
 {
     const $elem = $(elem);
 
-    if (!$elem.attr("data-validate"))
+    /** return if the attribute data-validate is not present on the element */
+    if (!$elem[0].attributes.hasOwnProperty("data-validate"))
     {
         return true;
     }
+
     const validationKeys = $elem.attr("data-validate").split("|").map(function(i)
     {
         return i.trim();
@@ -245,7 +247,7 @@ function _isValidDate($formControl)
  */
 function _isMail($formControl)
 {
-    const mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\x7f-\xff\-0-9]+\.)+[a-zA-Z\x7f-\xff]{2,}))$/);
 
     return mailRegEx.test($formControl.val());
 }
@@ -291,7 +293,7 @@ function _isActive($elem)
 function _eval(input)
 {
     // eslint-disable-next-line
-    return (new Function("return " + input))();
+    return (new Function(`return ${ input };`))();
 }
 
 export default { validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields };
