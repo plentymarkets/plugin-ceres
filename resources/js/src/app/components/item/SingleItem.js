@@ -1,4 +1,5 @@
 import { transformVariationProperties } from "../../services/VariationPropertyService";
+import get from "lodash/get";
 
 Vue.component("single-item", {
 
@@ -58,6 +59,16 @@ Vue.component("single-item", {
         setIsVariationSelected(event)
         {
             this.$store.commit("setIsVariationSelected", event);
+        },
+
+        getDataField(field)
+        {
+            return get(this.currentVariation, field);
+        },
+
+        getFilteredDataField(field, filter)
+        {
+            return this.getDataField(field);
         }
     }
 });

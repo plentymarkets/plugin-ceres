@@ -100,7 +100,9 @@
                         variation-list-data="{{ variations | json_data }}"
                         :attribute-name-map="{{ attributeNameMap | json_encode }}"
                         :variation-units="{{ variationUnits | json_encode }}">
-                        {{ shopBuilderTemplate | raw }}
+                        <template #default="slotProps">
+                            {{ shopBuilderTemplate | raw }}
+                        </template>
                     </single-item>
                 </div>
             </div>
