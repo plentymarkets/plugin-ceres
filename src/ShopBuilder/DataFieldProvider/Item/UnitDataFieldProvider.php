@@ -8,12 +8,12 @@ class UnitDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
-        $this->addField("Ceres::Widget.dataFieldUnitsContent", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsLength", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsWidth", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsHeight", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsWeight", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsWeightNet", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsVPE", "");
+        $this->addField("Ceres::Widget.dataFieldUnitsContent", "{{ item_data_field('unit.content') }} ");
+        $this->addField("Ceres::Widget.dataFieldUnitsLength", "{{ item_data_field('variation.lengthMM') }} ");
+        $this->addField("Ceres::Widget.dataFieldUnitsWidth", "{{ item_data_field('variation.widthMM') }} ");
+        $this->addField("Ceres::Widget.dataFieldUnitsHeight", "{{ item_data_field('variation.heightMM') }} ");
+        $this->addField("Ceres::Widget.dataFieldUnitsWeight", "{{ item_data_field('variation.weightG') }} ");
+        $this->addField("Ceres::Widget.dataFieldUnitsWeightNet", "{{ item_data_field('variation.weightNetG') }} ");
+        $this->addField("Ceres::Widget.dataFieldUnitsVPE", "{{ item_data_field('unit.names.name') }} ");
     }
 }
