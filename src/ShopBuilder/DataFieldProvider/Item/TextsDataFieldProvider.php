@@ -11,7 +11,7 @@ class TextsDataFieldProvider extends DataFieldProvider
         $this->addField("Ceres::Widget.dataFieldTextsName1", "{{ item_data_field('texts.name1') }}");
         $this->addField("Ceres::Widget.dataFieldTextsName2", "{{ item_data_field('texts.name2') }}");
         $this->addField("Ceres::Widget.dataFieldTextsName3", "{{ item_data_field('texts.name3') }}");
-        $this->addField("Ceres::Widget.dataFieldTextsShortDescription", "{{ item_data_field_html('texts.shortDescription'') }}");
+        $this->addField("Ceres::Widget.dataFieldTextsShortDescription", "{{ item_data_field_html('texts.shortDescription') }}");
         $this->addField("Ceres::Widget.dataFieldTextsDescription", "{{ item_data_field_html('texts.description') }}");
         $this->addField("Ceres::Widget.dataFieldTextsTechnicalData", "{{ item_data_field_html('texts.technicalData') }}");
         $this->addField("Ceres::Widget.dataFieldTextsUrlPath", "{{ item_data_field('texts.urlPath') }}");

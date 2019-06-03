@@ -15,7 +15,7 @@ class ItemGlobalDataFieldProvider extends DataFieldProvider
         $this->addField("Ceres::Widget.dataFieldItemGlobalProducingCountryIso3", "{{ item_data_field('item.producingCountry.isoCode3') }}");
         $this->addField("Ceres::Widget.dataFieldItemGlobalCustomsTariffNumber", "{{ item_data_field('item.customsTariffNumber') }}");
         $this->addField("Ceres::Widget.dataFieldItemGlobalRevenueAccount", "{{ item_data_field('item.revenueAccount') }}"); // it only gives an id
-        $this->addField("Ceres::Widget.dataFieldItemGlobalAgeRestriction", "{{ AgeRestriction.getText(item.documents[0].data.item.ageRestriction) }}");
+        $this->addField("Ceres::Widget.dataFieldItemGlobalAgeRestriction", "{{ AgeRestriction.getText('item.ageRestriction') }}"); // TODO
         $this->addField("Ceres::Widget.dataFieldItemGlobalStoreSpecial", "{{ item_data_field('item.storeSpecial') }}");
         $this->addField("Ceres::Widget.dataFieldItemGlobalRating", "");
     }
