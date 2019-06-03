@@ -75,9 +75,11 @@
     {{ component("Ceres::Item.Components.SingleItem") }}
 
     {% set shopBuilderTemplate = "" %}
-    {% if defaultCategory is defined %}
+    {% set currentCategory = services.category.getCurrentCategory() %}
+
+    {% if currentCategory is defined %}
         {# Check for item template for specific category first #}
-        {% set shopBuilderTemplate = shop_builder_category_template(defaultCategory.id, "singleitem") %}
+        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, "singleitem") %}
     {% endif %}
 
     {% if shopBuilderTemplate | trim is empty %}
@@ -85,10 +87,10 @@
         {% set shopBuilderTemplate = LayoutContainer.show("Ceres::SingleItemGlobal") %}
     {% endif %}
 
-    {% if item.documents[0].data.item.add_cms_page > 0 and request.get('isContentBuilder') != 1 %}
+    {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
         {# Item template is configured for the item #}
         {% include [category_template(item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId)] %}
-    {% elseif shopBuilderTemplate | trim is not empty or request.get('isContentBuilder') == 1 %}
+    {% elseif shopBuilderTemplate | trim is not empty or isShopBuilder %}
         {# Shopbuilder template #}
         <div class="container-max checkout">
             <div class="row">
