@@ -48,7 +48,8 @@ class TwigItemDataField extends Twig_Extension
     public function getFunctions(): array
     {
         return [
-            $this->twig->createSimpleFunction('item_data_field', [$this, 'getDataField'], ['is_safe' => array('html')])
+            $this->twig->createSimpleFunction('item_data_field', [$this, 'getDataField'], ['is_safe' => array('html')]),
+            $this->twig->createSimpleFunction('item_data_field_html', [$this, 'getDataFieldHtml'], ['is_safe' => array('html')]),
         ];
     }
 
@@ -57,14 +58,24 @@ class TwigItemDataField extends Twig_Extension
      * @param null $filter
      * @return string
      */
-    public function getDataField($field, $filter = null)
+    public function getDataField($field, $filter = null, $directiveType = "text")
     {
         $vueDirective = isset($filter) ?
-            "v-text=\"getFilteredDataField('$field', '$filter')\"" :
-            "v-text=\"getDataField('$field')\"";
+            "v-$directiveType=\"getFilteredDataField('$field', '$filter')\"" :
+            "v-$directiveType=\"getDataField('$field')\"";
         $twigPrint = "{{ itemData.$field }}";
 
         return "<span $vueDirective>$twigPrint</span>";
+    }
+
+    /**
+     * @param $field
+     * @param null $filter
+     * @return string
+     */
+    public function getDataFieldHtml($field, $filter = null)
+    {
+        return $this->getDataField($field, $filter, "html");
     }
 
     /**
