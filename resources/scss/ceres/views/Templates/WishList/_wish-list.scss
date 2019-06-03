@@ -3,20 +3,30 @@
 
     & i {
         margin-right: 5px;
+
+        &.fa-circle-o-notch {
+            color: inherit !important;
+        }
+    }
+
+    &:not(.active) {
+        i {
+            color: inherit !important;
+        }
     }
 
     &:hover {
       text-decoration: none;
-
-      i{
-        color: #d9534f!important;
-      }
+      
+        i {
+            color: #d9534f !important;
+        }
     }
 
     &.active{
-      i{
-        color: #d9534f!important;
-      }
+        i {
+            color: #d9534f;
+        }
     }
 }
 
