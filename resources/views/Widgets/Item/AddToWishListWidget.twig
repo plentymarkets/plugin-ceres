@@ -6,11 +6,12 @@
 {{ Twig.set("enabledRoutes", Twig.call("config", ["IO.routing.enabled_routes"]) ~ " | split(\", \")") }}
 
 {% set spacingSettings = widget.settings.spacing %}
+{% set appearance = widget.settings.appearance.mobile | default("danger") %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {{ Twig.if("('wish-list' in enabledRoutes or 'all' in enabledRoutes) or #{ isPreview | json_encode }") }}
-    <div class="widget widget-add-to-wish-list 
+    <div class="widget widget-add-to-wish-list widget-{{ appearance }}
         {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
         {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
