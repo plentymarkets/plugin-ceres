@@ -1,3 +1,5 @@
+import { removeUrlParam } from "../../services/UrlService";
+
 Vue.component("shipping-country-select", {
 
     props:
@@ -9,6 +11,11 @@ Vue.component("shipping-country-select", {
         },
 
         disableInput:
+        {
+            type: Boolean
+        },
+
+        openBasketPreview:
         {
             type: Boolean
         }
@@ -24,7 +31,15 @@ Vue.component("shipping-country-select", {
         ...Vuex.mapState({
             localization: state => state.localization,
             basket: state => state.basket.data
-        })
+        }),
+        ...Vuex.mapGetters([
+            "getCountryName"
+        ])
+    },
+
+    created()
+    {
+        removeUrlParam("openBasketPreview");
     },
 
     methods:
@@ -33,7 +48,7 @@ Vue.component("shipping-country-select", {
         {
             if (!this.isDisabled)
             {
-                this.$store.dispatch("selectShippingCountry", id);
+                this.$store.dispatch("selectShippingCountry", { shippingCountryId: id, openBasketPreview: this.openBasketPreview });
             }
         }
     }

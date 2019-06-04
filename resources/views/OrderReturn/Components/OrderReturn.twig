@@ -40,7 +40,7 @@
 							<i class="fa fa-times" aria-hidden="true"></i>
 							{{ trans("Ceres::Template.returnCancel") }}
 						</button>
-						<button :disabled="isLoading" @click="sendReturnItems()" type="button" class="btn btn-primary btn-medium">
+						<button :disabled="isLoading" @click="sendReturnItems({{ urls.returnConfirmation | json_encode }})" type="button" class="btn btn-primary btn-medium">
 							<i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
 							{{ trans("Ceres::Template.returnConfirm") }}
 						</button>

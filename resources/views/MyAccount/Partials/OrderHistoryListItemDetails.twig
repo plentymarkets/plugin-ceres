@@ -71,7 +71,7 @@
                                 {% if item.orderProperties %}
                                     {% for property in item.orderProperties %}
                                         <div>
-                                            <strong>{{ property.name }}</strong>
+                                            <strong>{{ property | propertyName }}</strong>
                                             {% if property.type == 'file' %}
                                                 <span>
                                                     {% set splitPath = property.value |split('/') %}
@@ -88,11 +88,13 @@
                                                         {% endif %}
                                                     {% endfor %}
 
-                                                    <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
+                                                    <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
                                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                                         {{ splitPath | last }}
                                                     </a>
                                                 </span>
+                                            {% elseif property.type == "selection" %}
+                                                <span>: {{ property | propertySelectionValueName }}</span>
                                             {% elseif property.type | length > 0 %}
                                                 <span>: {{ property.value }}</span>
                                             {% endif %}
@@ -295,7 +297,7 @@
             </template>
             
             {% if orderData.isReturnable %}
-                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="/returns/{{ orderData.order.id }}">
+                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="{{ urls.returns(orderData.order.id) }}">
                     <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>

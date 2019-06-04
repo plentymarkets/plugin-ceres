@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-accept-privacy-policy-check">
     <div class="form-check" :class="{ 'error': showError }">
-        <input class="form-check-input" type="checkbox" id="privacy-policy-accept" :checked="value" @change="onValueChanged($event.target.checked)">
-        <label class="form-check-label" for="privacy-policy-accept">
+        <input class="form-check-input" type="checkbox" :id="'privacy-policy-accept' + _uid" :checked="value" @change="onValueChanged($event.target.checked)">
+        <label class="form-check-label" :for="'privacy-policy-accept' + _uid">
             {% autoescape false %}
                 {% set policyContent %}<!--
                     --><a href="{{ urls.privacyPolicy }}" target="_blank">

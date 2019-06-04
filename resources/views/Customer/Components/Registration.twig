@@ -28,9 +28,8 @@
                 <div class="col-sm-6" v-if="!guestMode">
                     <div class="input-unit" :class="{'no-bottom media-xs-d': modalElement}" data-validate="password" ref="passwordInput">
                         <popper v-cloak trigger="focus" placement="left" ref="passwordHint">
-                            {% set uid_pwd = uid() %}
                             <template #handle>
-                                <input type="password" name="password" autocomplete="new-password" id="{{ uid_pwd }}" v-model="password">
+                                <input type="password" name="password" autocomplete="new-password" :id="'new-password-' + _uid" v-model="password">
                             </template>
 
                             <template #title>
@@ -48,15 +47,14 @@
                             </template>
                         </popper>
 
-                        <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.regPassword") }}*</label>
+                        <label :for="'new-password-' + _uid">{{ trans("Ceres::Template.regPassword") }}*</label>
                     </div>
                 </div>
 
                 <div class="col-sm-6 input-unit-group" v-if="!guestMode">
                     <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="ref">
-                        {% set uid_pwd_repeat = uid() %}
-                        <input type="password" name="password-repeat" autocomplete="new-password" id="{{ uid_pwd_repeat }}" v-model="passwordRepeat" data-validate-ref="#{{ uid_pwd }}">
-                        <label for="{{ uid_pwd_repeat }}">{{ trans("Ceres::Template.regRepeatPassword") }}*</label>
+                        <input type="password" name="password-repeat" autocomplete="new-password" :id="'new-password-repeat-' + _uid" v-model="passwordRepeat" :data-validate-ref="'#new-password-' + _uid">
+                        <label :for="'new-password-repeat' + _uid">{{ trans("Ceres::Template.regRepeatPassword") }}*</label>
                     </div>
                 </div>
 
@@ -71,6 +69,15 @@
                         :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
                         default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                     </address-input-group>
+                </div>
+
+                <div class="col-12" v-if="enableConfirmingPrivacyPolicy">
+                    <accept-privacy-policy-check
+                            class="mt-3 mb-0"
+                            v-model="privacyPolicyAccepted"
+                            @input="privacyPolicyValueChanged($event)"
+                            :show-error="privacyPolicyShowError">
+                    </accept-privacy-policy-check>
                 </div>
             </div>
         </div>
