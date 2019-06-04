@@ -10,7 +10,7 @@
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "primary",
+            "defaultValue": "success",
             "options": "@include(appearance)"
         },
         "spacing": "@include(spacing)"

@@ -2,18 +2,18 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 {{ Twig.component( "Ceres::Item.Components.GraduatedPrices" ) }}
 
-{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set appearance = widget.settings.appearance.mobile | default("success") %}
 {% set spacingSettings = widget.settings.spacing %}
-{% set paddingInlineStyles   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set paddingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
-{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+{% set marginClasses   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 <div class="widget widget-{{ appearance }} 
-    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
+    {% if marginClasses | length > 0 %} {{ marginClasses }}{% endif %}" 
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
-        <graduated-prices padding-inline-styles="{{paddingInlineStyles}}"  
+        <graduated-prices padding-inline-styles="{{inlinePadding}}"  
                           padding-classes="{{paddingClasses}}"  
                           template="#vue-graduated-prices">
         </graduated-prices>
