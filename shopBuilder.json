@@ -148,5 +148,8 @@
             }
         }
     },
-    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler"
+    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
+    "supportedFeatures": {
+        "individualHeaderFooterEnabled": false
+    }
 }
