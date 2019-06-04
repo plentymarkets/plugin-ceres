@@ -8,12 +8,12 @@ class UnitDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
-        $this->addField("Ceres::Widget.dataFieldUnitsContent", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsLength", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsWidth", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsHeight", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsWeight", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsWeightNet", "");
-        $this->addField("Ceres::Widget.dataFieldUnitsVPE", "");
+        $this->addField("content", "Ceres::Widget.dataFieldUnitsContent", "");
+        $this->addField("length", "Ceres::Widget.dataFieldUnitsLength", "");
+        $this->addField("width", "Ceres::Widget.dataFieldUnitsWidth", "");
+        $this->addField("height", "Ceres::Widget.dataFieldUnitsHeight", "");
+        $this->addField("weight", "Ceres::Widget.dataFieldUnitsWeight", "");
+        $this->addField("weightNet", "Ceres::Widget.dataFieldUnitsWeightNet", "");
+        $this->addField("vpe", "Ceres::Widget.dataFieldUnitsVPE", "");
     }
 }

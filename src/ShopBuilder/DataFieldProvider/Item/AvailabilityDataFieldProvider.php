@@ -8,13 +8,13 @@ class AvailabilityDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
-        $this->addField("Ceres::Widget.dataFieldAvailabilityText", "");
-        $this->addField("Ceres::Widget.dataFieldAvailabilityIcon", "");
-        $this->addField("Ceres::Widget.dataFieldAvailabilityAvgDeliveryDays", "");
-        $this->addField("Ceres::Widget.dataFieldAvailabilityMaxOrderQuantity", "");
-        $this->addField("Ceres::Widget.dataFieldAvailabilityMinOrderQuantity", "");
-        $this->addField("Ceres::Widget.dataFieldAvailabilityIntervalOrderQuantity", "");
-        $this->addField("Ceres::Widget.dataFieldAvailabilityReleaseDate", "");
-        $this->addField("Ceres::Widget.dataFieldAvailabilityAvailableUntil", "");
+        $this->addField("availability", "Ceres::Widget.dataFieldAvailabilityText", "");
+        $this->addField("availabilityIcon", "Ceres::Widget.dataFieldAvailabilityIcon", "");
+        $this->addField("avgDeliveryDays", "Ceres::Widget.dataFieldAvailabilityAvgDeliveryDays", "");
+        $this->addField("maxQuantity", "Ceres::Widget.dataFieldAvailabilityMaxOrderQuantity", "");
+        $this->addField("minQuantity", "Ceres::Widget.dataFieldAvailabilityMinOrderQuantity", "");
+        $this->addField("intervalQuantity", "Ceres::Widget.dataFieldAvailabilityIntervalOrderQuantity", "");
+        $this->addField("releaseDate", "Ceres::Widget.dataFieldAvailabilityReleaseDate", "");
+        $this->addField("availableUntil", "Ceres::Widget.dataFieldAvailabilityAvailableUntil", "");
     }
 }

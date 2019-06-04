@@ -16,8 +16,8 @@ class BarcodeDataFieldProvider extends DataFieldProvider
 
     function register()
     {
-        $this->addField("Ceres::Widget.dataFieldBarcodeName", "");
-        $this->addField("Ceres::Widget.dataFieldBarcodeType", "");
-        $this->addField("Ceres::Widget.dataFieldBarcodeCode", "");
+        $this->addField("name", "Ceres::Widget.dataFieldBarcodeName", "");
+        $this->addField("type", "Ceres::Widget.dataFieldBarcodeType", "");
+        $this->addField("code", "Ceres::Widget.dataFieldBarcodeCode", "");
     }
 }

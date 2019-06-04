@@ -8,14 +8,14 @@ class TextsDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
-        $this->addField("Ceres::Widget.dataFieldTextsName1", "");
-        $this->addField("Ceres::Widget.dataFieldTextsName2", "");
-        $this->addField("Ceres::Widget.dataFieldTextsName3", "");
-        $this->addField("Ceres::Widget.dataFieldTextsShortDescription", "");
-        $this->addField("Ceres::Widget.dataFieldTextsDescription", "");
-        $this->addField("Ceres::Widget.dataFieldTextsTechnicalData", "");
-        $this->addField("Ceres::Widget.dataFieldTextsUrlPath", "");
-        $this->addField("Ceres::Widget.dataFieldTextsMetaDescription", "");
-        $this->addField("Ceres::Widget.dataFieldTextsMetaKeywords", "");
+        $this->addField("name1", "Ceres::Widget.dataFieldTextsName1", "");
+        $this->addField("name2", "Ceres::Widget.dataFieldTextsName2", "");
+        $this->addField("name3", "Ceres::Widget.dataFieldTextsName3", "");
+        $this->addField("shortDescription", "Ceres::Widget.dataFieldTextsShortDescription", "");
+        $this->addField("description", "Ceres::Widget.dataFieldTextsDescription", "");
+        $this->addField("technicalData", "Ceres::Widget.dataFieldTextsTechnicalData", "");
+        $this->addField("urlPath", "Ceres::Widget.dataFieldTextsUrlPath", "");
+        $this->addField("metaDescription", "Ceres::Widget.dataFieldTextsMetaDescription", "");
+        $this->addField("metaKeywords", "Ceres::Widget.dataFieldTextsMetaKeywords", "");
     }
 }
