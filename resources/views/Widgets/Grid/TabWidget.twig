@@ -5,12 +5,20 @@
 {% for tab in tabs if tab.title | trim is not empty %}
     {% set renderContent = true %}
 {% endfor %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
 
 {% if renderContent %}
-<div class="widget widget-tab">
+<div class="widget widget-tab {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <tab-list class="widget-inner" appearance="{{ appearance | default("primary") }}">
         {% for tab in tabs if children[tab.uuid] | raw is not empty or isPreview and tab.title | trim is not empty %}
-            <tab-item
+            <tab-item class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
+                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
                 title="{{ tab.title }}"
                 {% if loop.first %}active{% endif %}
                 {{ WidgetHelper.makeClickable(isPreview) }}>
