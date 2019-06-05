@@ -1,5 +1,5 @@
 import { transformVariationProperties } from "../../services/VariationPropertyService";
-import get from "lodash/get";
+import { get } from "../../helper/get";
 
 Vue.component("single-item", {
 
