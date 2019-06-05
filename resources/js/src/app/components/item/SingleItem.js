@@ -68,7 +68,7 @@ Vue.component("single-item", {
 
         getFilteredDataField(field, filter)
         {
-            return this.getDataField(field);
+            return this.$options.filters[filter](this.getDataField(field));
         }
     }
 });
