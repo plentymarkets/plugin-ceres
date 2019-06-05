@@ -4,6 +4,8 @@ namespace Ceres\Extensions;
 use IO\Helper\SafeGetter;
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
 use Plenty\Plugin\Templates\Factories\TwigFactory;
+use Plenty\Plugin\Templates\Twig;
+use Plenty\Plugin\Translation\Translator;
 
 /**
  * Class TwigStyleScriptTagFilter
@@ -51,6 +53,18 @@ class TwigItemDataField extends Twig_Extension
         ];
     }
 
+    /**
+     * Return a list of filters to add.
+     *
+     * @return array The list of filters to add.
+     */
+    public function getFilters(): array
+    {
+        return [
+            $this->twig->createSimpleFilter('ageRestriction', [$this, 'formatAgeRestriction'])
+        ];
+    }
+
     public function setItemDataBase($itemData)
     {
         $this->itemData = $itemData;
@@ -64,10 +78,30 @@ class TwigItemDataField extends Twig_Extension
      */
     public function getDataField($field, $filter = null, $directiveType = "text")
     {
+
+        $twigPrint = SafeGetter::get($this->itemData, $field);
+        if(!is_null($filter))
+        {
+            try
+            {
+                /** @var Twig $twigRenderer */
+                $twigRenderer = pluginApp(Twig::class);
+                $twigPrint = $twigRenderer->renderString("{{ " . json_encode($twigPrint) . " | $filter }}");
+            }
+            catch(\Exception $e)
+            {
+                $tmp = $e->getMessage();
+            }
+        }
+
+        if (is_null($directiveType))
+        {
+            return $twigPrint;
+        }
+
         $vueDirective = isset($filter) ?
             "v-$directiveType=\"getFilteredDataField('$field', '$filter')\"" :
             "v-$directiveType=\"getDataField('$field')\"";
-        $twigPrint = SafeGetter::get($this->itemData, $field);
 
         return "<span $vueDirective>$twigPrint</span>";
     }
@@ -82,22 +116,37 @@ class TwigItemDataField extends Twig_Extension
         return $this->getDataField($field, $filter, "html");
     }
 
+    public function formatAgeRestriction($age)
+    {
+        $age = intval($age);
+        /** @var Translator $translator */
+        $translator = pluginApp(Translator::class);
+        if ($age === 0)
+        {
+            return $translator->trans("Ceres::Template.singleItemAgeRestrictionNone", ["age" => $age]);
+        }
+        else if ($age > 0 && $age < 18)
+        {
+            return $translator->trans("Ceres::Template.singleItemAgeRestriction", ["age" => $age]);
+        }
+        else if ($age === 50)
+        {
+            return $translator->trans("Ceres::Template.singleItemAgeRestrictionNotFlagged", ["age" => $age]);
+        }
+        else if ($age === 80)
+        {
+            return $translator->trans("Ceres::Template.singleItemAgeRestrictionNotRequired", ["age" => $age]);
+        }
+
+        return $translator->trans("Ceres::Template.singleItemAgeRestrictionUnknown", ["age" => $age]);
+    }
+
     /**
      * Return a map of global helper objects to add.
      *
      * @return array the map of helper objects to add.
      */
     public function getGlobals(): array
-    {
-        return [];
-    }
-
-    /**
-     * Return a list of filters to add.
-     *
-     * @return array The list of filters to add.
-     */
-    public function getFilters(): array
     {
         return [];
     }
