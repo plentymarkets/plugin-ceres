@@ -8,10 +8,10 @@ class VariationGlobalDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
-        $this->addField("Ceres::Widget.dataFieldVariationGlobalName", "");
-        $this->addField("Ceres::Widget.dataFieldVariationGlobalNumber", "");
-        $this->addField("Ceres::Widget.dataFieldVariationGlobalNumberExternal", "");
-        $this->addField("Ceres::Widget.dataFieldVariationGlobalModel", "");
-        $this->addField("Ceres::Widget.dataFieldVariationGlobalPosition", "");
+        $this->addField("name", "Ceres::Widget.dataFieldVariationGlobalName", "");
+        $this->addField("number", "Ceres::Widget.dataFieldVariationGlobalNumber", "");
+        $this->addField("numberExternal", "Ceres::Widget.dataFieldVariationGlobalNumberExternal", "");
+        $this->addField("model", "Ceres::Widget.dataFieldVariationGlobalModel", "");
+        $this->addField("position", "Ceres::Widget.dataFieldVariationGlobalPosition", "");
     }
 }

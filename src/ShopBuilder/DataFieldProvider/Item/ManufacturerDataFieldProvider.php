@@ -8,7 +8,7 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
-        $this->addField("Ceres::Widget.dataFieldManufacturerName", "");
-        $this->addField("Ceres::Widget.dataFieldManufacturerExternalName", "");
+        $this->addField("name", "Ceres::Widget.dataFieldManufacturerName", "");
+        $this->addField("externalName", "Ceres::Widget.dataFieldManufacturerExternalName", "");
     }
 }
