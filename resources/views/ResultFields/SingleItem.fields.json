@@ -1,6 +1,7 @@
 [
     "attributes.attribute.names.*",
     "attributes.value.names.*",
+    "barcodes.*",
     "bundleComponents.*",
     "defaultCategories",
     "filter.hasActiveChildren",
@@ -26,7 +27,7 @@
     "item.add_cms_page",
     "item.ageRestriction",
     "item.condition.names.*",
-    "item.conditionApi.names.name",
+    "item.conditionApi.names.*",
     "item.customsTariffNumber",
     "item.id",
     "item.manufacturer.externalName",
