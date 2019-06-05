@@ -9,6 +9,7 @@
 namespace Ceres\Wizard\ShopWizard\Services;
 
 
+use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
 use Plenty\Modules\Order\Shipping\Contracts\ParcelServicePresetRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Order\Shipping\ParcelService\Models\ParcelService;
@@ -34,6 +35,11 @@ class ShopWizardService
     private $countryRepository;
 
     /**
+     * @var AccountingLocationRepositoryContract
+     */
+    private $accountingLocationRepo;
+
+    /**
      * ShopWizardService constructor.
      *
      * @param ParcelServicePresetRepositoryContract $parcelServicePresetRepo
@@ -41,11 +47,13 @@ class ShopWizardService
     public function __construct(
         ParcelServicePresetRepositoryContract $parcelServicePresetRepo,
         PaymentRepositoryContract $paymentRepository,
-        CountryRepositoryContract $countryRepository
+        CountryRepositoryContract $countryRepository,
+        AccountingLocationRepositoryContract $accountingLocationRepo
     ){
         $this->parcelServicePresetRepo = $parcelServicePresetRepo;
         $this->paymentRepository = $paymentRepository;
         $this->countryRepository = $countryRepository;
+        $this->accountingLocationRepo = $accountingLocationRepo;
     }
 
     /**
@@ -55,8 +63,7 @@ class ShopWizardService
     {
         $shippingProfiles = $this->getShippingProfiles();
 
-//        return count($shippingProfiles) ? true : false;
-        return true;
+        return count($shippingProfiles) ? true : false;
     }
 
     public function hasPaymentMethods()
@@ -108,5 +115,15 @@ class ShopWizardService
         }
 
         return $shippingMethods;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLocations()
+    {
+        $locations = $this->accountingLocationRepo->getAll();
+
+        return count($locations) ? true : false;
     }
 }

@@ -24,9 +24,10 @@ class RequiredSettingsStep
         $hasShippingProfile = $shopWizardService->hasShippingProfiles();
         $hasPaymentMethod = $shopWizardService->hasPaymentMethods();
         $hasShippingCountry = $shopWizardService->hasShippingCountries();
+        $hasLocation = $shopWizardService->hasLocations();
         $showFirstStep = true;
 
-        if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
+        if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry && $hasLocation) {
             $showFirstStep = false;
         }
 
@@ -36,10 +37,11 @@ class RequiredSettingsStep
             "condition" => $showFirstStep,
             "validationClass" => "Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator",
             "sections" => [
-                $this->generateSection("shippingMethod", $hasShippingMethod, "javascript:void(0)"),
+                $this->generateSection("shippingMethod", $hasShippingMethod, "/rest/wizards/plugin_install"),
                 $this->generateSection("shippingProfile", $hasShippingProfile, "javascript:void(0)"),
-                $this->generateSection("paymentMethod", $hasPaymentMethod, "javascript:void(0)"),
-                $this->generateSection("deliveryCountry", $hasShippingCountry, "javascript:void(0)")
+                $this->generateSection("paymentMethod", $hasPaymentMethod, "/rest/wizards/plugin_install"),
+                $this->generateSection("deliveryCountry", $hasShippingCountry, "/rest/wizards/fulfillment-shipping-profile-wizard"),
+                $this->generateSection("location", $hasLocation, "/rest/wizards/accounting-location-assistant")
 
             ]
         ];
