@@ -27,6 +27,7 @@ class ShopWizard extends WizardProvider
             "shortDescription" => "Wizard.shortDescription",
             "key" => "shopCeres-assistant",
             "reloadStructure" => true,
+            "iconPath" => "https://plentymarkets-assistant.s3.eu-central-1.amazonaws.com/ceres_assistent.svg",
             'dataSource' => 'Ceres\Wizard\ShopWizard\DataSource\ShopWizardDataSource',
             'settingsHandlerClass' => 'Ceres\Wizard\ShopWizard\SettingsHandlers\ShopWizardSettingsHandler',
             "translationNamespace" => "Ceres",
