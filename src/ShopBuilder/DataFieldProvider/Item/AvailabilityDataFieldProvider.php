@@ -14,7 +14,7 @@ class AvailabilityDataFieldProvider extends DataFieldProvider
         $this->addField("maxQuantity", "Ceres::Widget.dataFieldAvailabilityMaxOrderQuantity", "item_data_field('variation.maximumOrderQuantity')");
         $this->addField("minQuantity", "Ceres::Widget.dataFieldAvailabilityMinOrderQuantity", "item_data_field('variation.minimumOrderQuantity')");
         $this->addField("intervalQuantity", "Ceres::Widget.dataFieldAvailabilityIntervalOrderQuantity", "item_data_field('variation.intervalOrderQuantity')");
-        $this->addField("releaseDate", "Ceres::Widget.dataFieldAvailabilityReleaseDate", "item_data_field('variation.releasedAt')");
-        $this->addField("availableUntil", "Ceres::Widget.dataFieldAvailabilityAvailableUntil", "item_data_field('variation.availableUntil')");
+        $this->addField("releaseDate", "Ceres::Widget.dataFieldAvailabilityReleaseDate", "item_data_field('variation.releasedAt', 'moment')");
+        $this->addField("availableUntil", "Ceres::Widget.dataFieldAvailabilityAvailableUntil", "item_data_field('variation.availableUntil', 'moment')");
     }
 }

@@ -1,4 +1,5 @@
 // for docs see https://github.com/brockpetrie/vue-moment
+import TranslationService from "services/TranslationService";
 
 var dateFilter = function()
 {
@@ -130,7 +131,7 @@ var dateFilter = function()
             // Formats a date by taking a string of tokens and replacing them with their corresponding values.
             // http://momentjs.com/docs/#/displaying/format/
 
-            var format = method;
+            var format = method || TranslationService.translate("Ceres::Template.devDateFormatMoment");
 
             date = date.format(format);
         }

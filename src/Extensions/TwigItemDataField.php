@@ -61,7 +61,8 @@ class TwigItemDataField extends Twig_Extension
     public function getFilters(): array
     {
         return [
-            $this->twig->createSimpleFilter('ageRestriction', [$this, 'formatAgeRestriction'])
+            $this->twig->createSimpleFilter('ageRestriction', [$this, 'formatAgeRestriction']),
+            $this->twig->createSimpleFilter('moment', [$this, 'formatDate'])
         ];
     }
 
@@ -139,6 +140,14 @@ class TwigItemDataField extends Twig_Extension
         }
 
         return $translator->trans("Ceres::Template.singleItemAgeRestrictionUnknown", ["age" => $age]);
+    }
+
+    public function formatDate($date)
+    {
+        return date(
+            pluginApp(Translator::class)->trans("Ceres::Template.devDateFormat"),
+            strtotime($date)
+        );
     }
 
     /**
