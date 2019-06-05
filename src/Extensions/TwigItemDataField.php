@@ -1,7 +1,7 @@
 <?php
 namespace Ceres\Extensions;
 
-use Ceres\ShopBuilder\DataFieldProvider\Item\ItemDataFieldProvider;
+use IO\Helper\SafeGetter;
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
 use Plenty\Plugin\Templates\Factories\TwigFactory;
 
@@ -16,18 +16,15 @@ class TwigItemDataField extends Twig_Extension
      */
     private $twig;
 
-    /** @var ItemDataFieldProvider */
-    private $dataFieldProvider;
+    private $itemData = null;
 
     /**
      * TwigStyleScriptTagFilter constructor.
      * @param TwigFactory $twig
-     * @param ItemDataFieldProvider $dataFieldProvider
      */
-    public function __construct(TwigFactory $twig, ItemDataFieldProvider $dataFieldProvider)
+    public function __construct(TwigFactory $twig)
     {
         $this->twig = $twig;
-        $this->dataFieldProvider = $dataFieldProvider;
     }
 
     /**
@@ -48,9 +45,16 @@ class TwigItemDataField extends Twig_Extension
     public function getFunctions(): array
     {
         return [
+            $this->twig->createSimpleFunction('set_item_data_base', [$this, 'setItemDataBase']),
             $this->twig->createSimpleFunction('item_data_field', [$this, 'getDataField'], ['is_safe' => array('html')]),
             $this->twig->createSimpleFunction('item_data_field_html', [$this, 'getDataFieldHtml'], ['is_safe' => array('html')]),
         ];
+    }
+
+    public function setItemDataBase($itemData)
+    {
+        $this->itemData = $itemData;
+        return "";
     }
 
     /**
@@ -63,7 +67,7 @@ class TwigItemDataField extends Twig_Extension
         $vueDirective = isset($filter) ?
             "v-$directiveType=\"getFilteredDataField('$field', '$filter')\"" :
             "v-$directiveType=\"getDataField('$field')\"";
-        $twigPrint = "{{ itemData.$field }}";
+        $twigPrint = SafeGetter::get($this->itemData, $field);
 
         return "<span $vueDirective>$twigPrint</span>";
     }
