@@ -1,0 +1,21 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{{ Twig.component( "Ceres::Item.Components.GraduatedPrices" ) }}
+
+{% set appearance = widget.settings.appearance.mobile | default("success") %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set paddingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set marginClasses   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+<div class="widget widget-{{ appearance }} 
+    {% if marginClasses | length > 0 %} {{ marginClasses }}{% endif %}" 
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner">
+        <graduated-prices padding-inline-styles="{{inlinePadding}}"  
+                          padding-classes="{{paddingClasses}}"  
+                          template="#vue-graduated-prices">
+        </graduated-prices>
+    </div>
+</div>
