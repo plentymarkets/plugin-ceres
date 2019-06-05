@@ -1,8 +1,22 @@
 Vue.component("graduated-prices", {
-    props: [
-        "template"
-    ],
-
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-graduated-prices"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        }
+    },
     computed:
     {
         graduatedPrices()
