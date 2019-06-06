@@ -14,8 +14,6 @@
 {% set allowReturn = widget.settings.allowReturn.mobile %}
 {% set ordersPerPage = widget.settings.ordersPerPage.mobile %}
 
-
-
 <div class="widget widget-order-history widget-{{ appearance }} {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
@@ -26,7 +24,6 @@
         {% endif %}
     </div>
     <order-history-list
-        hint-text="{{ hintText }}"
         :orders-per-page="{{ ordersPerPage | default(5) | json_encode }}"
         :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | default(true) | json_encode }}"
         {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}
