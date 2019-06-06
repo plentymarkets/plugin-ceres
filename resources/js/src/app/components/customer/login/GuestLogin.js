@@ -1,7 +1,7 @@
 import ValidationService from "services/ValidationService";
 import { navigateTo } from "services/UrlService";
 
-var ApiService = require("services/ApiService");
+const ApiService = require("services/ApiService");
 
 Vue.component("guest-login", {
 
@@ -25,7 +25,7 @@ Vue.component("guest-login", {
         this.$nextTick(() =>
         {
             $("#guestLogin").on("hidden.bs.modal", () =>
-			{
+            {
                 this.email = "";
                 this.resetError();
             });

@@ -205,7 +205,7 @@ Vue.component("variation-select", {
             if (isNull(event))
             {
                 const values = Object.values(this.selectedAttributes);
-                const uniqueValues = [... new Set(values)];
+                const uniqueValues = [...new Set(values)];
 
                 if (uniqueValues.length === 1 && isNull(uniqueValues[0]))
                 {

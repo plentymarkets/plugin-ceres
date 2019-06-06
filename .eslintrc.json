@@ -16,6 +16,7 @@
     "no-invalid-this"         : "warn",
     "prefer-promise-reject-errors": "warn",
     "prefer-rest-params"      : "warn",
+    "arrow-parens"            : "off",
     // PLENTY
     "no-console"              : "warn",
     "no-undef"                : "off",

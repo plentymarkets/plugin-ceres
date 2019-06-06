@@ -12,7 +12,7 @@ Vue.component("my-account", {
         {
             type: Array,
             default: () =>
-            []
+                []
         },
         selectedDeliveryAddress:
         {
@@ -23,7 +23,7 @@ Vue.component("my-account", {
         {
             type: Array,
             default: () =>
-            []
+                []
         },
         selectedBillingAddress:
         {
