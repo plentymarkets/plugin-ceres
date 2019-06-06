@@ -74,7 +74,7 @@ Vue.component("single-item", {
                 return this.$options.filters[filter](this.getDataField(field));
             }
 
-            return field;
+            return this.getDataField(field);
         }
     }
 });
