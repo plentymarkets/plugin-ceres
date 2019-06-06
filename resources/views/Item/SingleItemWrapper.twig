@@ -73,6 +73,7 @@
 {% endblock %}
 
 {% block PageBody %}
+    {{ set_item_data_base(item.documents[0].data) }}
     {{ component("Ceres::Item.Components.SingleItem") }}
 
     {% set shopBuilderTemplate = "" %}
@@ -103,7 +104,9 @@
                         variation-list-data="{{ variations | json_data }}"
                         :attribute-name-map="{{ attributeNameMap | json_encode }}"
                         :variation-units="{{ variationUnits | json_encode }}">
-                        {{ shopBuilderTemplate | raw }}
+                        <template #default="{ getDataField: getDataField, getFilteredDataField: getFilteredDataField }">
+                            {{ shopBuilderTemplate | raw }}
+                        </template>
                     </single-item>
                 </div>
             </div>

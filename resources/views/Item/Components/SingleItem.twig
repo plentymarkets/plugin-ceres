@@ -6,7 +6,7 @@
 
 <script type="x/template" id="vue-single-item">
     <div>
-        <slot>
+        <slot name="default" :getDataField="getDataField" :getFilteredDataField="getFilteredDataField">
             <div class="single container-max page-content">
                 <div class="row mt-5 position-relative">
 
