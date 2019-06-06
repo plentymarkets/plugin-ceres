@@ -14,6 +14,8 @@ use Plenty\Modules\Order\Shipping\Contracts\ParcelServicePresetRepositoryContrac
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Order\Shipping\ParcelService\Models\ParcelService;
 use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
+use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
+use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 
 class ShopWizardService
 {
@@ -59,14 +61,17 @@ class ShopWizardService
     /**
      * @return bool
      */
-    public function hasShippingProfiles()
+    public function hasShippingProfiles(): bool
     {
         $shippingProfiles = $this->getShippingProfiles();
 
         return count($shippingProfiles) ? true : false;
     }
 
-    public function hasPaymentMethods()
+    /**
+     * @return bool
+     */
+    public function hasPaymentMethods(): bool
     {
         $paymentMethods = $this->paymentRepository->getAll();
 
@@ -76,18 +81,24 @@ class ShopWizardService
     /**
      * @return bool
      */
-    public function hasShippingMethods()
+    public function hasShippingMethods(): bool
     {
         $shippingMethods = $this->getShippingMethods();
 
         return count($shippingMethods) ? true : false;
+
     }
 
-    public function hasShippingCountries() {
+    /**
+     * @return bool
+     */
+    public function hasShippingCountries(): bool
+    {
         $shippingCountries = $this->countryRepository->getActiveCountriesList();
 
         return count($shippingCountries) ? true : false;
     }
+
     /**
      * @return array
      */
@@ -120,10 +131,42 @@ class ShopWizardService
     /**
      * @return bool
      */
-    public function hasLocations()
+    public function hasLocations(): bool
     {
         $locations = $this->accountingLocationRepo->getAll();
 
         return count($locations) ? true : false;
     }
+
+    /**
+     * @return array
+     */
+    public function getPluginSets(): array
+    {
+        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
+
+        $pluginSets = $pluginSetRepo->list();
+
+        return $pluginSets->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getWebstores(): array
+    {
+        $webstoreRepo = pluginApp(WebstoreRepositoryContract::class);
+        $webstores = [];
+
+        $webstoresCollection = $webstoreRepo->loadAllPreview();
+
+        if (count($webstoresCollection)) {
+            foreach ($webstoresCollection as $webstore) {
+                $webstores[] = $webstore->toArray();
+            }
+        }
+        return $webstores;
+    }
+
+
 }
