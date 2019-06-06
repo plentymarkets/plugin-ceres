@@ -23581,6 +23581,8 @@ var _VariationPropertyService = require("../../services/VariationPropertyService
 
 var _get = require("../../helper/get");
 
+var _utils = require("../../helper/utils");
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -23623,12 +23625,16 @@ Vue.component("single-item", {
       return (0, _get.get)(this.currentVariation, field);
     },
     getFilteredDataField: function getFilteredDataField(field, filter) {
-      return this.$options.filters[filter](this.getDataField(field));
+      if (!(0, _utils.isNullOrUndefined)(this.$options.filters[filter])) {
+        return this.$options.filters[filter](this.getDataField(field));
+      }
+
+      return this.getDataField(field);
     }
   }
 });
 
-},{"../../helper/get":267,"../../services/VariationPropertyService":283}],189:[function(require,module,exports){
+},{"../../helper/get":267,"../../helper/utils":271,"../../services/VariationPropertyService":283}],189:[function(require,module,exports){
 "use strict";
 
 var _util = require("util");
@@ -27344,7 +27350,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.exceptionMap = void 0;
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"]]);
 exports.exceptionMap = exceptionMap;
 var _default = exceptionMap;
 exports.default = _default;
@@ -27381,6 +27387,10 @@ Vue.filter("currency", function (price) {
 
 },{"../helper/MonetaryFormatter":263}],244:[function(require,module,exports){
 "use strict";
+
+var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // for docs see https://github.com/brockpetrie/vue-moment
 var dateFilter = function dateFilter() {
@@ -27484,7 +27494,8 @@ var dateFilter = function dateFilter() {
         // Format
         // Formats a date by taking a string of tokens and replacing them with their corresponding values.
         // http://momentjs.com/docs/#/displaying/format/
-        var format = method;
+        var format = method || _TranslationService.default.translate("Ceres::Template.devDateFormatMoment");
+
         date = date.format(format);
     }
 
@@ -27498,7 +27509,7 @@ var dateFilter = function dateFilter() {
 Vue.filter("moment", dateFilter);
 Vue.filter("date", dateFilter);
 
-},{}],245:[function(require,module,exports){
+},{"services/TranslationService":280}],245:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
