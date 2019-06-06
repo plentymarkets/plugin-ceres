@@ -73,6 +73,7 @@
     "properties.property.names.description",
     "properties.property.names.lang",
     "properties.property.names.name",
+    "properties.property.position",
     "properties.property.surcharge",
     "properties.property.value",
     "properties.property.valueType",

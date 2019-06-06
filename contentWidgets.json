@@ -3215,6 +3215,10 @@
                             "caption": "Widget.addressFieldName1"
                         },
                         {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
+                        {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldSalutation"
                         },
@@ -3256,6 +3260,10 @@
                 "options": {
                     "name": "Widget.addressRequiredFieldsShippingDE",
                     "checkboxValues": [
+                        {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
                         {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldSalutation"
@@ -3306,6 +3314,10 @@
                             "caption": "Widget.addressFieldEnName1"
                         },
                         {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
+                        {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldEnSalutation"
                         },
@@ -3347,6 +3359,10 @@
                 "options": {
                     "name": "Widget.addressRequiredFieldsShippingGB",
                     "checkboxValues": [
+                        {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
                         {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldEnSalutation"
@@ -3653,6 +3669,48 @@
                     },
                     "uuid": {
                         "type": "uuid"
+                    }
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
                     }
                 }
             }
@@ -4539,12 +4597,12 @@
     {
         "identifier": "Ceres::GraduatedPriceWidget",
         "label": "Widget.graduatedPriceLabel",
-        "previewImageURL": "/images/widgets/item-image.svg",
+        "previewImageURL": "/images/widgets/graduated-price.svg",
         "type": "item",
         "categories": [
             "item"
         ],
-        "position": 200,
+        "position": 500,
         "widgetClass": "Ceres\\Widgets\\Item\\GraduatedPriceWidget",
         "settings": {
             "appearance": {

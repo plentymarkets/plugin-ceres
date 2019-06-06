@@ -22754,6 +22754,14 @@ html.ie .cmp-paginator {
   margin-right: 5px;
 }
 
+.add-to-wish-list i.fa-circle-o-notch {
+  color: inherit !important;
+}
+
+.add-to-wish-list:not(.active) i {
+  color: inherit !important;
+}
+
 .add-to-wish-list:hover {
   text-decoration: none;
 }
@@ -22763,7 +22771,7 @@ html.ie .cmp-paginator {
 }
 
 .add-to-wish-list.active i {
-  color: #d9534f !important;
+  color: #d9534f;
 }
 
 .wish-list-item {
@@ -26105,6 +26113,10 @@ header .widget {
           text-decoration-color: #007197;
 }
 
+.widget-primary a:hover i.text-appearance {
+  color: #007197 !important;
+}
+
 .widget-primary .border-appearance.active,
 .widget-primary .border-appearance:hover {
   border-color: #008ebd;
@@ -26192,6 +26204,10 @@ header .widget {
 .widget-secondary .btn-appearance:focus {
   -webkit-text-decoration-color: #ae0218;
           text-decoration-color: #ae0218;
+}
+
+.widget-secondary a:hover i.text-appearance {
+  color: #ae0218 !important;
 }
 
 .widget-secondary .border-appearance.active,
@@ -26283,6 +26299,10 @@ header .widget {
           text-decoration-color: #218838;
 }
 
+.widget-success a:hover i.text-appearance {
+  color: #218838 !important;
+}
+
 .widget-success .border-appearance.active,
 .widget-success .border-appearance:hover {
   border-color: #28a745;
@@ -26370,6 +26390,10 @@ header .widget {
 .widget-info .btn-appearance:focus {
   -webkit-text-decoration-color: #138496;
           text-decoration-color: #138496;
+}
+
+.widget-info a:hover i.text-appearance {
+  color: #138496 !important;
 }
 
 .widget-info .border-appearance.active,
@@ -26461,6 +26485,10 @@ header .widget {
           text-decoration-color: #e0a800;
 }
 
+.widget-warning a:hover i.text-appearance {
+  color: #e0a800 !important;
+}
+
 .widget-warning .border-appearance.active,
 .widget-warning .border-appearance:hover {
   border-color: #ffc107;
@@ -26548,6 +26576,10 @@ header .widget {
 .widget-danger .btn-appearance:focus {
   -webkit-text-decoration-color: #c82333;
           text-decoration-color: #c82333;
+}
+
+.widget-danger a:hover i.text-appearance {
+  color: #c82333 !important;
 }
 
 .widget-danger .border-appearance.active,
