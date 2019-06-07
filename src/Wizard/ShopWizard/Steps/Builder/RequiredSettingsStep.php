@@ -33,7 +33,7 @@ class RequiredSettingsStep
 
         return [
             "title" => "Wizard.reqSettings",
-            "description" => "Wizard.generalDescription",
+            "description" => "Wizard.reqSettingsDescription",
             "condition" => $showFirstStep,
             "validationClass" => "Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator",
             "sections" => [
@@ -51,7 +51,7 @@ class RequiredSettingsStep
     {
         return [
             "title" => "Wizard." . $name,
-            "description" => "Wizard.generalDescription",
+            "description" => "Wizard." . $name . "Description",
             "condition" => !$condition,
             "form" => [
                 $name . "Assistant" => [

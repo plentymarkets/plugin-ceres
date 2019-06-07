@@ -42,7 +42,7 @@ class SettingsSelectionStep
 
         return [
             "title" => "Wizard.settingsSelection",
-            "description" => "Wizard.generalDescription",
+            "description" => "Wizard.settingsSelectionDescription",
             "sections" => [
                 $this->generateHorizontalSection($options),
                 $this->generateSection("displayedInfo"),
@@ -86,7 +86,7 @@ class SettingsSelectionStep
     {
         return [
             "title" => "Wizard." . $name,
-            "description" => "Wizard.generalDescription",
+            "description" => "Wizard." . $name . "Description",
             "form" => [
                 "step1_" . $name => $this->generateToggleComponent($name)
             ]
