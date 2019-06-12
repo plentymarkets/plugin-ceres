@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from "../../helper/utils";
 
-var NotificationService = require("services/NotificationService");
+const NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
 

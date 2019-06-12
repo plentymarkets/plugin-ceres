@@ -1,4 +1,4 @@
-var WaitScreenService = require("services/WaitScreenService");
+const WaitScreenService = require("services/WaitScreenService");
 
 /**
 *
