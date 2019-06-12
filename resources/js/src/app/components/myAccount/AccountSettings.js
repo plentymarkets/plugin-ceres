@@ -99,18 +99,18 @@ Vue.component("account-settings", {
         validatePassword: function()
         {
             ValidationService.validate(this.$refs.passwordFormControl)
-            .done(() =>
-            {
-                this.saveAccountPassword();
-            })
-            .fail(invalidFields =>
-            {
-                ValidationService.markInvalidFields(invalidFields, "error");
-                NotificationService.error(
-                    TranslationService.translate("Ceres::Template.resetPwInvalidPassword")
-                ).closeAfter(5000);
-                this.$refs.passwordHint.showPopper();
-            });
+                .done(() =>
+                {
+                    this.saveAccountPassword();
+                })
+                .fail(invalidFields =>
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.resetPwInvalidPassword")
+                    ).closeAfter(5000);
+                    this.$refs.passwordHint.showPopper();
+                });
         },
 
         /**
