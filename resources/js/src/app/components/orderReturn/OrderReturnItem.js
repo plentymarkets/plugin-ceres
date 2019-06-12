@@ -6,7 +6,7 @@ Vue.component("order-return-item", {
     ],
 
     data()
-	{
+    {
         return {
             isChecked: false,
             returnCount: 0
@@ -14,19 +14,19 @@ Vue.component("order-return-item", {
     },
 
     created()
-	{
+    {
         vueEventHub.$on("select-all-items", () => this.selectItem());
     },
 
     computed:
     {
         orderItemImage()
-		{
+        {
             return this.$store.getters.getOrderItemImage(this.orderItem.itemVariationId);
         },
 
         orderItemURL()
-		{
+        {
             return this.$store.getters.getOrderItemURL(this.orderItem.itemVariationId);
         }
     },
@@ -34,13 +34,13 @@ Vue.component("order-return-item", {
     methods:
     {
         validateValue()
-		{
+        {
             if (this.returnCount > this.orderItem.quantity)
-			{
+            {
                 this.returnCount = this.orderItem.quantity;
             }
             else if (this.returnCount <= 0)
-			{
+            {
                 this.returnCount = 1;
             }
 
@@ -55,13 +55,13 @@ Vue.component("order-return-item", {
         },
 
         updateValue()
-		{
+        {
             if (this.isChecked)
-			{
+            {
                 this.returnCount = this.orderItem.quantity;
             }
             else
-			{
+            {
                 this.returnCount = 0;
             }
 

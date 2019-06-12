@@ -128,7 +128,7 @@ Vue.component("add-to-basket", {
                 this.waiting = true;
 
                 this.orderProperties.forEach(function(orderProperty)
-{
+                {
                     if (orderProperty.property.valueType === "float" &&
                         !isNullOrUndefined(orderProperty.property.value) &&
                         orderProperty.property.value.slice(-1) === App.decimalSeparator)

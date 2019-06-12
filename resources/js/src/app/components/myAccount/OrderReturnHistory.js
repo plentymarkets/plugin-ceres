@@ -13,7 +13,7 @@ Vue.component("order-return-history", {
     ],
 
     data()
-	{
+    {
         return {
             waiting: false,
             returnsList: { page: 1 }
@@ -21,7 +21,7 @@ Vue.component("order-return-history", {
     },
 
     created()
-	{
+    {
         this.itemsPerPage = this.itemsPerPage || 10;
 
         vueEventHub.$on("returns-first-opening", () => this.setPage(1));
@@ -40,19 +40,19 @@ Vue.component("order-return-history", {
                 this.returnsList.page = page;
 
                 ApiService.get("/rest/io/customer/order/return", { page: page, items: this.itemsPerPage })
-                .done(response =>
-                {
-                    this.waiting = false;
-                    this.returnsList = response;
-                })
-                .fail(response =>
-                {
-                    this.waiting = false;
-                    this.returnsList.page = lastPage;
-                    NotificationService.error(
-                        TranslationService.translate("Ceres::Template.returnHistoryOops")
-                    );
-                });
+                    .done(response =>
+                    {
+                        this.waiting = false;
+                        this.returnsList = response;
+                    })
+                    .fail(response =>
+                    {
+                        this.waiting = false;
+                        this.returnsList.page = lastPage;
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.returnHistoryOops")
+                        );
+                    });
             }
         }
     }

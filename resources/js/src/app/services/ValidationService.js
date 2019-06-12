@@ -108,7 +108,7 @@ function _validateElement(elem)
 {
     const $elem          = $(elem);
     const validationKeys = $elem.attr("data-validate").split("|").map(function(i)
-        {
+    {
         return i.trim();
     }) || ["text"];
     let hasError       = false;
@@ -189,12 +189,12 @@ function _validateInput($formControl, validationKey)
     case "password":
         return _isPassword($formControl);
     case "regex":
-        {
-            const ref = $formControl.attr("data-validate-ref");
-            const regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+    {
+        const ref = $formControl.attr("data-validate-ref");
+        const regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
 
-            return _hasValue($formControl) && regex.test($.trim($formControl.val()));
-        }
+        return _hasValue($formControl) && regex.test($.trim($formControl.val()));
+    }
     default:
         console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
         return true;

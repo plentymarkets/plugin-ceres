@@ -26453,7 +26453,7 @@ Vue.directive("open-mobile-navigation", {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-/*!
+/* !
  * A polyfill for object-fit
  *
  * @author: Toni Pinel
@@ -27952,7 +27952,7 @@ function isNull(object) {
 
 
 function isUndefined(object) {
-  //eslint-disable-next-line
+  // eslint-disable-next-line
   return _typeof(object) === _typeof(void 0);
 }
 /**

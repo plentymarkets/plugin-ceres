@@ -40,14 +40,14 @@ export function getUrlParams(urlParams)
 
 export function setUrlParams(urlParams, pushState = true)
 {
-    var pathName =
+    const pathName =
         isDefined(store.state.navigation.currentCategory) &&
         isDefined(store.state.navigation.currentCategory.url) ?
             store.state.navigation.currentCategory.url :
             window.location.pathname;
 
-    var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
-    var titleElement = document.getElementsByTagName("title")[0];
+    const params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
+    const titleElement = document.getElementsByTagName("title")[0];
 
     if (pushState)
     {

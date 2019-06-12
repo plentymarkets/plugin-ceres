@@ -4,10 +4,10 @@ import TranslationService from "services/TranslationService";
 module.exports = (function($)
 {
 
-    var notificationCount = 0;
-    var notifications     = new NotificationList();
+    let notificationCount = 0;
+    const notifications     = new NotificationList();
 
-    var handlerList = [];
+    const handlerList = [];
 
     return {
         log             : _log,
@@ -26,7 +26,7 @@ module.exports = (function($)
 
     function trigger()
     {
-        for (var i = 0; i < handlerList.length; i++)
+        for (let i = 0; i < handlerList.length; i++)
         {
             handlerList[i].call({}, notifications.all());
         }
@@ -34,13 +34,13 @@ module.exports = (function($)
 
     function _log(message, prefix)
     {
-        var notification = new Notification(message);
+        const notification = new Notification(message);
 
         if (App.config.log.data.indexOf("log_messages") >= 0)
         {
             console.log((prefix || "") + "[" + notification.code + "] " + notification.message);
 
-            for (var i = 0; i < notification.stackTrace.length; i++)
+            for (let i = 0; i < notification.stackTrace.length; i++)
             {
                 _log(notification.stackTrace[i], " + ");
             }
@@ -51,7 +51,7 @@ module.exports = (function($)
 
     function _info(message)
     {
-        var notification = new Notification(message, "info");
+        const notification = new Notification(message, "info");
 
         if (App.config.log.data.indexOf("print_infos") >= 0)
         {
@@ -63,7 +63,7 @@ module.exports = (function($)
 
     function _warn(message)
     {
-        var notification = new Notification(message, "warning");
+        const notification = new Notification(message, "warning");
 
         if (App.config.log.data.indexOf("print_warnings") >= 0)
         {
@@ -75,7 +75,7 @@ module.exports = (function($)
 
     function _error(message)
     {
-        var notification = new Notification(message, "danger");
+        const notification = new Notification(message, "danger");
 
         if (App.config.log.data.indexOf("print_errors") >= 0)
         {
@@ -87,7 +87,7 @@ module.exports = (function($)
 
     function _success(message)
     {
-        var notification = new Notification(message, "success");
+        const notification = new Notification(message, "success");
 
         if (App.config.log.data.indexOf("print_success") >= 0)
         {
@@ -124,8 +124,8 @@ module.exports = (function($)
         {
             data.stackTrace = [];
         }
-        var id   = notificationCount++;
-        var self = {
+        const id   = notificationCount++;
+        const self = {
             id        : id,
             code      : data.code || 0,
             message   : data.message || data || "",
@@ -167,7 +167,7 @@ module.exports = (function($)
 
     function NotificationList()
     {
-        var elements = [];
+        const elements = [];
 
         return {
             all   : all,
@@ -187,7 +187,7 @@ module.exports = (function($)
 
         function remove(notification)
         {
-            for (var i = 0; i < elements.length; i++)
+            for (let i = 0; i < elements.length; i++)
             {
                 if (elements[i].id === notification.id)
                 {

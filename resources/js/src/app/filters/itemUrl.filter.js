@@ -9,7 +9,7 @@ Vue.filter("itemURL", function(item)
     let link = "";
 
     if (urlPath.charAt(0) !== "/")
-{
+    {
         link = "/";
     }
 
