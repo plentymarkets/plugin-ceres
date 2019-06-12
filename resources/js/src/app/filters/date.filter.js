@@ -1,11 +1,11 @@
 // for docs see https://github.com/brockpetrie/vue-moment
 import TranslationService from "services/TranslationService";
 
-var dateFilter = function()
+const dateFilter = function()
 {
-    var args = Array.prototype.slice.call(arguments);
-    var input = args.shift();
-    var date;
+    const args = Array.prototype.slice.call(arguments);
+    const input = args.shift();
+    let date;
 
     if (isNaN(new Date(input).getTime()))
     {
@@ -34,8 +34,8 @@ var dateFilter = function()
 
     function parse()
     {
-        var args = Array.prototype.slice.call(arguments);
-        var method = args.shift();
+        const args = Array.prototype.slice.call(arguments);
+        const method = args.shift();
 
         switch (method)
         {
@@ -49,9 +49,9 @@ var dateFilter = function()
                 .map(Function.prototype.call, String.prototype.trim);
 
             obj = {};
-            for (var aId = 0; aId < addends.length; aId++)
+            for (let aId = 0; aId < addends.length; aId++)
             {
-                var addend = addends[aId].split(" ");
+                const addend = addends[aId].split(" ");
 
                 obj[addend[1]] = addend[0];
             }
@@ -68,9 +68,9 @@ var dateFilter = function()
                 .map(Function.prototype.call, String.prototype.trim);
 
             obj = {};
-            for (var sId = 0; sId < subtrahends.length; sId++)
+            for (let sId = 0; sId < subtrahends.length; sId++)
             {
-                var subtrahend = subtrahends[sId].split(" ");
+                const subtrahend = subtrahends[sId].split(" ");
 
                 obj[subtrahend[1]] = subtrahend[0];
             }

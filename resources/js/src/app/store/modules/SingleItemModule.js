@@ -139,7 +139,7 @@ const getters =
             if (state.variation.documents[0].data.properties)
             {
                 const orderPropertyList = state.variation.documents[0].data.properties.filter(property => property.property.isShownOnItemPage && property.property.isOderProperty);
-                const groupIds = [... new Set(orderPropertyList.map(property => property.group && property.group.id))];
+                const groupIds = [...new Set(orderPropertyList.map(property => property.group && property.group.id))];
                 const groups = [];
 
                 for (const id of groupIds)
@@ -189,11 +189,11 @@ const getters =
                         return null;
                     });
 
-                    radioInformation = [... new Set(radioInformation.filter(id => id))];
+                    radioInformation = [...new Set(radioInformation.filter(id => id))];
 
                     const radioIdsToRemove = [];
 
-                    for (const radioGroupId of [... new Set(radioInformation.map(radio => radio.groupId))])
+                    for (const radioGroupId of [...new Set(radioInformation.map(radio => radio.groupId))])
                     {
                         const radioGroupToClean = radioInformation.find(radio => radio.groupId === radioGroupId && radio.hasValue);
 

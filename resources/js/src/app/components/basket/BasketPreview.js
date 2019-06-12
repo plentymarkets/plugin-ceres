@@ -37,11 +37,11 @@ Vue.component("basket-preview", {
         this.$nextTick(() =>
         {
             ApiService.listen("AfterBasketChanged",
-            data =>
-            {
-                this.$store.commit("setBasket", data.basket);
-                this.$store.commit("setShowNetPrices", data.showNetPrices);
-            });
+                data =>
+                {
+                    this.$store.commit("setBasket", data.basket);
+                    this.$store.commit("setShowNetPrices", data.showNetPrices);
+                });
         });
     },
 
