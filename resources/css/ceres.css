@@ -18211,6 +18211,10 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   border-bottom-color: #f7f7f7;
 }
 
+.tooltip {
+  pointer-events: none;
+}
+
 .input-group-v .input-unit-v1 {
   margin-top: -1px;
   margin-bottom: 0;
