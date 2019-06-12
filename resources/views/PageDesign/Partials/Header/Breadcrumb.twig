@@ -2,18 +2,24 @@
 
 {% if categoryBreadcrumbs is not empty %}
     <nav data-component="breadcrumbs" data-renderer="twig" class="container-max small hidden-sm-down">
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ homepageURL }}">
+        <ul class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a href="{{ homepageURL }}" itemprop="item">
                     <i class="fa fa-home" aria-hidden="true"></i>
+                    <meta itemprop="name" content="Home">
+                    <meta itemprop="position" content="1">
                 </a>
             </li>
 
             {% set break = false %}
+            {% set catLevel = 2 %}
             {% for category in categoryBreadcrumbs[:categoryBreadcrumbs | length - 1] if not break %}
                 {% if category.details[0] %}
-                    <li class="breadcrumb-item">
-                        <a href="{{ services.category.getURLById( category.id ) }}">{{ category.details[0].name }}</a>
+                    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        <a href="{{ services.category.getURLById( category.id ) }}" itemprop="item">{{ category.details[0].name }}</a>
+                        <meta itemprop="name" content="{{ category.details[0].name }}">
+                        <meta itemprop="position" content="{{ catLevel }}">
+                        {% set catLevel = catLevel + 1 %}
                     </li>
                 {% else %}
                     {% set break = true %}
@@ -23,9 +29,9 @@
             {% set lastCategory = categoryBreadcrumbs | last %}
             {% if lastCategory.details is defined %}
                 <li class="breadcrumb-item active"><span>{{ lastCategory.details[0].name }}</span></li>
-            {% else %}
-                <li class="breadcrumb-item active" v-cloak v-if="$store.state.item.variation.documents">
-                    <span>${ $store.state.item.variation.documents[0].data | itemName }</span>
+            {% elseif item.documents[0].data is defined %}
+                <li class="breadcrumb-item active">
+                    <span>{{ item.documents[0].data | itemName }}</span>
                 </li>
             {% endif %}
         </ul>
