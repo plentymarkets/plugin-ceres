@@ -1,5 +1,5 @@
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
+const ApiService = require("services/ApiService");
+const NotificationService = require("services/NotificationService");
 
 import { isDefined } from "../../helper/utils";
 import { navigateTo } from "services/UrlService";
@@ -155,8 +155,8 @@ Vue.component("place-order", {
 
         afterPreparePayment(response)
         {
-            var paymentType = response.type || "errorCode";
-            var paymentValue = response.value || "";
+            const paymentType = response.type || "errorCode";
+            const paymentValue = response.value || "";
 
             switch (paymentType)
             {
@@ -169,11 +169,11 @@ Vue.component("place-order", {
                 }
                 break;
             case "redirectUrl":
-                    // redirect to given payment provider
+                // redirect to given payment provider
                 window.location.assign(paymentValue);
                 break;
             case "externalContentUrl":
-                    // show external content in iframe
+                // show external content in iframe
                 this.showModal(paymentValue, true);
                 break;
             case "htmlContent":

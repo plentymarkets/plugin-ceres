@@ -15,7 +15,7 @@ Vue.component("order-return-history-list-item", {
     },
 
     data()
-	{
+    {
         return {
             itemsToRender: [],
             showAllOrderItems: false

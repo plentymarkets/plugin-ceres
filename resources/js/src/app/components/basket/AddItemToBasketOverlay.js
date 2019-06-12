@@ -121,7 +121,7 @@ Vue.component("add-item-to-basket-overlay", {
             }
 
             const orderParam = orderParams.find(param =>
-                {
+            {
                 return parseInt(param.property.id) === parseInt(propertyId);
             });
 

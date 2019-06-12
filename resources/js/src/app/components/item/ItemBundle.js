@@ -34,7 +34,7 @@ Vue.component("item-bundle", {
     methods:
     {
         getBundleInnerText(item)
-		{
+        {
             item.variation.bundleType = null;
 
             return item;

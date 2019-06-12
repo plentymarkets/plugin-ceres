@@ -1,7 +1,7 @@
 module.exports = (function($)
 {
 
-    var overlay = {
+    const overlay = {
         count    : 0,
         isVisible: false
     };

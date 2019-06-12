@@ -6,7 +6,7 @@ const AutoFocusService = require("services/AutoFocusService");
 // eslint-disable-next-line
 var init = (function($, window, document)
 {
-    var headerCollapses = [];
+    const headerCollapses = [];
 
     function HeaderCollapse(selector)
     {
@@ -76,8 +76,8 @@ var init = (function($, window, document)
         HeaderCollapse("#currencySelect");
         HeaderCollapse("#searchBox");
 
-        var $toggleListView = $(".toggle-list-view");
-        var $mainNavbarCollapse = $("#mainNavbarCollapse");
+        const $toggleListView = $(".toggle-list-view");
+        const $mainNavbarCollapse = $("#mainNavbarCollapse");
 
         $(document).on("click", function(evt)
         {
@@ -135,16 +135,16 @@ var init = (function($, window, document)
 
         $(document).ready(function()
         {
-            var offset = 250;
-            var duration = 300;
+            const offset = 250;
+            const duration = 300;
 
-            var isDesktop = window.matchMedia("(min-width: 768px)").matches;
+            let isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
             AutoFocusService.autoFocus();
 
             $("#searchBox").on("shown.bs.collapse", function()
             {
-                var searchInput = document.querySelector("input.search-input");
+                const searchInput = document.querySelector("input.search-input");
 
                 if (searchInput)
                 {
@@ -204,7 +204,7 @@ var init = (function($, window, document)
     window.CeresMain = new CeresMain();
     window.CeresNotification = NotificationService;
 
-    var showShopNotification = function(event)
+    const showShopNotification = function(event)
     {
         if (event.detail.type)
         {

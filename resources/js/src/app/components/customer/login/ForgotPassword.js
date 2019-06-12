@@ -34,7 +34,7 @@ Vue.component("forgot-password-modal", {
         this.$nextTick(() =>
         {
             $(this.$refs.pwdModal).on("hidden.bs.modal", () =>
-			{
+            {
                 this.username = "";
             });
 
@@ -63,10 +63,10 @@ Vue.component("forgot-password-modal", {
         {
             ValidationService
                 .validate(this.$refs.pwdModal)
-				.done(() =>
-				{
-    this.sendResetPwd();
-})
+                .done(() =>
+                {
+                    this.sendResetPwd();
+                })
                 .fail(invalidFields =>
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
