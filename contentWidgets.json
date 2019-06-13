@@ -2060,6 +2060,26 @@
                             "value": "fa-dollar",
                             "caption": "Widget.widgetIconDollar",
                             "position": 1
+                        },
+                        {
+                            "value": "fa-shipping-fast",
+                            "caption": "Widget.widgetIconShippingFast",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-gift",
+                            "caption": "Widget.widgetIconGift",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-truck",
+                            "caption": "Widget.widgetIconTruck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-phone",
+                            "caption": "Widget.widgetIconPhone",
+                            "position": 1
                         }
                     ]
                 }
