@@ -13,7 +13,7 @@
 
 <div v-if="$store.getters.currentItemVariation" class="widget widget-item-bundle widget-{{ appearance }} {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}> 
     <item-bundle
-        v-if="$store.getters.currentItemVariation.variation.bundleType === 'bundle'"
+        {% if not isPreview %}v-if="$store.getters.currentItemVariation.variation.bundleType === 'bundle'"{% endif %}
         :bundle-type="$store.getters.currentItemVariation.variation.bundleType"
         :bundle-components="$store.getters.currentItemVariation.bundleComponents"
         {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
