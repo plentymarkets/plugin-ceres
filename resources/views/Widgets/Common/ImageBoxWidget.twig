@@ -3,6 +3,7 @@
 
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
+{% set customClass = widget.settings.customClass.mobile %}
 {% set appearance      = widget.settings.appearance.mobile %}
 {% set aspectRatio     = widget.settings.aspectRatio.mobile %}
 {% set customImagePath = widget.settings.customImagePath.mobile %}
@@ -63,6 +64,7 @@
 {{ Twig.endif() }}
 
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary')  }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if margin | length > 0 %} {{ margin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if("imageUrl | trim is not empty") }}
