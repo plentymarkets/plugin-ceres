@@ -7,6 +7,15 @@
     "position": 600,
     "widgetClass": "Ceres\\Widgets\\Checkout\\SubscribeNewsletterCheckWidget",
     "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        },
         "emailFolder": {
             "type": "number",
             "required": true,

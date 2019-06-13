@@ -7,6 +7,15 @@
     "position": 300,
     "widgetClass": "Ceres\\Widgets\\Basket\\BasketTotalsWidget",
     "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        },
         "visibleFields": {
             "type": "checkboxGroup",
             "defaultValue": ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"],

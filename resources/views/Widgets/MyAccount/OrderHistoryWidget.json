@@ -8,6 +8,15 @@
     "maxPerPage": 1,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderHistoryWidget",
     "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        },
         "appearance": {
             "type": "select",
             "required": true,

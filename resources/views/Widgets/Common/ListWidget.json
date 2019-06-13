@@ -7,6 +7,15 @@
     "position": 900,
     "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
     "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        },
         "title": {
             "type": "text",
             "required": false,

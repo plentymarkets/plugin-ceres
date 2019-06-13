@@ -7,6 +7,15 @@
     "position": 1100,
     "widgetClass": "Ceres\\Widgets\\Common\\SeparatorWidget",
     "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        },
         "margin": {
             "type": "spacing",
             "required": false,

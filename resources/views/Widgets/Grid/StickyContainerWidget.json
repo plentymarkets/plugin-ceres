@@ -6,5 +6,15 @@
     "categories": ["structure"],
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Grid\\StickyContainerWidget",
-    "settings": {}
+    "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        }
+    }
 }

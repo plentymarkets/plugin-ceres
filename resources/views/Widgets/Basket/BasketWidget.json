@@ -7,6 +7,15 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Basket\\BasketWidget",
     "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        },
         "appearance": {
             "type": "select",
             "required": true,

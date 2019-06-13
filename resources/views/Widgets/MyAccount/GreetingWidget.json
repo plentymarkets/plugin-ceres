@@ -7,6 +7,15 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\GreetingWidget",
     "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        },
         "salutation": {
             "type": "select",
             "required": true,

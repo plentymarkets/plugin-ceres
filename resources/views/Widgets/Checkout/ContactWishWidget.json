@@ -7,6 +7,15 @@
     "position": 300,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
     "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        },
         "spacing":"@include(spacingMargin)"
     }
 }

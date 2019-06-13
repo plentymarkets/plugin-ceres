@@ -7,6 +7,15 @@
     "position": 1200,
     "widgetClass": "Ceres\\Widgets\\Footer\\LegalInformationWidget",
     "settings": {
+        "customClass": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.customClass",
+                "tooltip": "Widget.customClassTooltip"
+            }
+        },
         "showCancellationRights": {
             "type": "checkbox",
             "required": true,
