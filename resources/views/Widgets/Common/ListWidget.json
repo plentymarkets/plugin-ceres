@@ -98,6 +98,16 @@
                         "value": "fa-phone",
                         "caption": "Widget.widgetIconPhone",
                         "position": 1
+                    },
+                    {
+                        "value": "fa-copyright",
+                        "caption": "Widget.widgetIconCopyright",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-registered",
+                        "caption": "Widget.widgetIconRegistered",
+                        "position": 1
                     }
                 ]
             }
