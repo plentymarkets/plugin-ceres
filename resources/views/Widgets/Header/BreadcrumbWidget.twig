@@ -24,12 +24,25 @@
 
 <div class="widget-fw breadcrumbs{% if not isFixed %} unfixed{% endif %}">
     <nav class="container-max small hidden-sm-down px-0" data-component="breadcrumbs" data-renderer="twig">
-        <ul class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
-            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                <a href="{{ Twig.print('urls.home') }}" itemprop="item">
+        {{ Twig.set('crumbs', '[]') }}
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ Twig.print('urls.home') }}">
                     <i class="fa fa-home" aria-hidden="true"></i>
-                    <meta itemprop="name" content="Home">
-                    <meta itemprop="position" content="1">
+                    {{ Twig.set('crumb', '
+                        [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "item":
+                                {
+                                    "@id": urls.home,
+                                    "name": "Home"
+                                }
+                            }
+                        ]')
+                    }}
+                    {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
                 </a>
             </li>
             {{ Twig.if("categoryBreadcrumbs is not empty") }}
@@ -37,12 +50,24 @@
                 {{ Twig.set("catLevel", 2) }}
                 {{ Twig.for("category", "categoryBreadcrumbs[:categoryBreadcrumbs | length - 1]", "not break") }}
                     {{ Twig.if("category.details[0]") }}
-                        <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                            <a href="{{ Twig.print(Twig.call("services.category.getURLById", [Twig.var("category.id")])) }}" itemprop="item">
+                        <li class="breadcrumb-item">
+                            <a href="{{ Twig.print(Twig.call("services.category.getURLById", [Twig.var("category.id")])) }}">
                                 {{ Twig.print("category.details[0].name") }}
                             </a>
-                            <meta itemprop="name" content="{{ Twig.print("category.details[0].name") }}">
-                            <meta itemprop="position" content="{{ Twig.print("catLevel") }}">
+                            {{ Twig.set('crumb', '
+                                [
+                                    {
+                                        "@type": "ListItem",
+                                        "position": catLevel,
+                                        "item":
+                                        {
+                                            "@id": services.category.getURLById(category.id),
+                                            "name": category.details[0].name
+                                        }
+                                    }
+                                ]')
+                            }}
+                            {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
                             {{ Twig.do("set catLevel = catLevel + 1") }}
                         </li>
                     {{ Twig.else() }}
@@ -60,6 +85,13 @@
                 {{ Twig.endif() }}
             {{ Twig.endif() }}
         </ul>
+        <script type="application/ld+json">
+        {
+            "@context":"http://schema.org/",
+            "@type":"BreadcrumbList",
+            "itemListElement": {{ Twig.print('crumbs | json_encode | raw') }}
+        }
+        </script>
     </nav>
 </div>
 
