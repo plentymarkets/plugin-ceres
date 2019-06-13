@@ -28168,7 +28168,6 @@ function () {
         _this2.el.parentNode.insertBefore(_this2.placeholder, _this2.el);
 
         _this2.eventListener = _this2.tick.bind(_this2);
-        _this2.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
         document.addEventListener("storeChanged", _this2.eventListener);
         STICKY_EVENTS.forEach(function (event) {
           window.addEventListener(event, _this2.eventListener);
@@ -28265,19 +28264,18 @@ function () {
         return;
       }
 
-      var unfixedWidgetsHeight = 0;
+      this.offsetTop = 0;
 
       if (document.getElementById("page-header-parent")) {
         var headerChildren = document.getElementById("page-header-parent").children;
 
         for (var i = 0; i < headerChildren.length; i++) {
-          if (headerChildren[i].classList.contains("unfixed")) {
-            unfixedWidgetsHeight += headerChildren[i].getBoundingClientRect().height;
+          if (!headerChildren[i].classList.contains("unfixed")) {
+            this.offsetTop += headerChildren[i].getBoundingClientRect().height;
           }
         }
       }
 
-      this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height - unfixedWidgetsHeight;
       this.offsetBottom = 0;
 
       if ((0, _utils.isNullOrUndefined)(this.position)) {

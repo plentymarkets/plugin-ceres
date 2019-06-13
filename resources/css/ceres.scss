@@ -12988,6 +12988,10 @@ html.ie {
         border-bottom-color: $popover-header-bg;
     }
 }
+.tooltip {
+    pointer-events: none;
+}
+
 
 // Forms
 .input-group-v{
