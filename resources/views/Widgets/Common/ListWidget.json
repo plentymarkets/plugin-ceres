@@ -80,8 +80,8 @@
                         "position": 1
                     },
                     {
-                        "value": "fa-shipping-fast",
-                        "caption": "Widget.widgetIconShippingFast",
+                        "value": "fa-percent",
+                        "caption": "Widget.widgetIconPercent",
                         "position": 1
                     },
                     {
