@@ -18,9 +18,7 @@
 {% endfor %}
 
 {% if hasEntries or title is not empty %}
-    <div class="widget {% if isLinkList %}widget-link-list{% else %}widget-list{% endif %}
-     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget {% if isLinkList %}widget-link-list{% else %}widget-list{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
         <div class="widget-inner">
             {% if title is not empty %}<p class="h4">{{ title }}</p>{% endif %}
             {% if listEntries | length > 0 %}

@@ -14,9 +14,7 @@
 
 {{ Twig.component("Ceres::Checkout.Components.SubscribeNewsletterCheck") }}
 
-<div class="widget widget-newsletter-subscription-checkbox
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+<div class="widget widget-newsletter-subscription-checkbox{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <subscribe-newsletter-check
         {% if hideCheckbox %}class="pl-0"{% endif %}

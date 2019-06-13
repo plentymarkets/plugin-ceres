@@ -21,9 +21,7 @@
     {% set setting = widget.settings.salutation.mobile %}
     {{ Twig.set( "pattern" , setting | json_encode ) }}
 
-    <div class="widget widget-greeting
-        {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-        {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    <div class="widget widget-greeting{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
         {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         {% if setting == "firstname_surname" %}
             {{ Twig.if ("userObject.firstName | length > 0 and userObject.lastName | length > 0") }}

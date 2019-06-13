@@ -12,9 +12,7 @@
 {% set appearance = widget.settings.appearance.mobile %}
 {% set returnsPerPage = widget.settings.returnsPerPage.mobile %}
 
-<div class="widget widget-order-return-history widget-{{ appearance | default('primary') }}
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+<div class="widget widget-order-return-history widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}

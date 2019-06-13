@@ -16,9 +16,7 @@
     cancellationPdfPath: widget.settings.cancellationFormContainer.cancellationPdfPath.mobile
 } %}
 
-<div class="widget-legal-information text-center my-3
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+<div class="widget-legal-information text-center my-3{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div>
         {{ Twig.do('autoescape false') }}

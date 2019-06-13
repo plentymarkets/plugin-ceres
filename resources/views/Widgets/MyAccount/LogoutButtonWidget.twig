@@ -10,9 +10,7 @@
 {% set appearance = widget.settings.appearance.mobile %}
 {% set buttonSize = widget.settings.buttonSize.mobile %}
 
-<div class="widget widget-logout-button
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+<div class="widget widget-logout-button{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <a href="#" class="btn btn-block btn-{{ appearance | default("danger") }} btn-{{ buttonSize }} 
         {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" v-logout

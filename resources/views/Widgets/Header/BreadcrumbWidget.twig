@@ -23,9 +23,7 @@
     {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
 {% endif %}
 
-<div class="widget-fw breadcrumbs
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if not isFixed %} unfixed{% endif %}">
+<div class="widget-fw breadcrumbs{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <nav class="container-max small hidden-sm-down px-0" data-component="breadcrumbs" data-renderer="twig">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">

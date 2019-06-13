@@ -10,12 +10,9 @@
 
 {% set appearance = widget.settings.appearance.mobile | default('primary') %}
 
-<div class="widget widget-title-bar widget-{{ appearance }}
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
+<div class="widget widget-title-bar widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div class="widget-inner bg-appearance 
-        {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
+    <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
         {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-title-bar widget-" ~ appearance) }}>
         {% if text | trim is empty %}

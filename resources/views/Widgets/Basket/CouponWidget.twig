@@ -10,9 +10,7 @@
 
 {{ Twig.component("Ceres::Basket.Components.Coupon") }}
 
-<div class="widget widget-coupon widget-{{ appearance | default("primary") }}
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+<div class="widget widget-coupon widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <coupon></coupon>
 </div>

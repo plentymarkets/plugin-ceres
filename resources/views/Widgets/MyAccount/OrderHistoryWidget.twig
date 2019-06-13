@@ -15,9 +15,7 @@
 {% set allowReturn = widget.settings.allowReturn.mobile %}
 {% set ordersPerPage = widget.settings.ordersPerPage.mobile %}
 
-<div class="widget widget-order-history widget-{{ appearance }}
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+<div class="widget widget-order-history widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}

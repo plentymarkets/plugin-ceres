@@ -13,9 +13,7 @@
 
 {{ Twig.component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 
-<div class="widget widget-newsletter widget-{{ appearance | default("primary") }}
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+<div class="widget widget-newsletter widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
         <div class="row">

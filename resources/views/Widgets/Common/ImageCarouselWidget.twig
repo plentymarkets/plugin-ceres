@@ -95,9 +95,7 @@
 
 {{ Twig.endif() }}
 
-<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if margin | length > 0 %} {{ margin }}{% endif %}"
+<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
