@@ -146,7 +146,7 @@
         <link rel="next" href="{{ canonicalUrl ~ queryString({'page': currentPage + 1}) }}" />
     {% endif %}
 
-    {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
+    {% embed getPartial('page-metadata') %}
         {% if category is not defined %}
             {% block title      trans("Ceres::Template.itemSearchResults") ~ " " ~ searchString %}
             {% block robots     ceresConfig.meta.robotsSearchResult %}

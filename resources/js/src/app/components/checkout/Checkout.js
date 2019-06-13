@@ -19,8 +19,7 @@ Vue.component("checkout", {
         deliveryAddressList:
         {
             type: Array,
-            default: () =>
-            []
+            default: () => []
         },
         selectedDeliveryAddress:
         {
@@ -30,8 +29,7 @@ Vue.component("checkout", {
         billingAddressList:
         {
             type: Array,
-            default: () =>
-            []
+            default: () => []
         },
         selectedBillingAddress:
         {

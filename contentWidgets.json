@@ -3215,6 +3215,10 @@
                             "caption": "Widget.addressFieldName1"
                         },
                         {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
+                        {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldSalutation"
                         },
@@ -3256,6 +3260,10 @@
                 "options": {
                     "name": "Widget.addressRequiredFieldsShippingDE",
                     "checkboxValues": [
+                        {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
                         {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldSalutation"
@@ -3306,6 +3314,10 @@
                             "caption": "Widget.addressFieldEnName1"
                         },
                         {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
+                        {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldEnSalutation"
                         },
@@ -3347,6 +3359,10 @@
                 "options": {
                     "name": "Widget.addressRequiredFieldsShippingGB",
                     "checkboxValues": [
+                        {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
                         {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldEnSalutation"
@@ -3653,6 +3669,48 @@
                     },
                     "uuid": {
                         "type": "uuid"
+                    }
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
                     }
                 }
             }
@@ -4339,6 +4397,52 @@
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Item\\AddToWishListWidget",
         "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            },
             "spacing": {
                 "type": "vertical",
                 "children": {
@@ -4491,6 +4595,102 @@
         }
     },
     {
+        "identifier": "Ceres::GraduatedPriceWidget",
+        "label": "Widget.graduatedPriceLabel",
+        "previewImageURL": "/images/widgets/graduated-price.svg",
+        "type": "item",
+        "categories": [
+            "item"
+        ],
+        "position": 500,
+        "widgetClass": "Ceres\\Widgets\\Item\\GraduatedPriceWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "success",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::ItemAvailabilityWidget",
         "label": "Widget.itemAvailabilityLabel",
         "previewImageURL": "/images/widgets/availability.svg",
@@ -4566,7 +4766,7 @@
             "imageSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "url",
+                "defaultValue": "urlMiddle",
                 "options": {
                     "name": "Widget.itemImageSizeLabel",
                     "tooltipText": "Widget.itemImageTooltip",

@@ -5,11 +5,12 @@
 {% block PartialHead %}
 
     {% set itemData = item.documents[0].data %}
-    {% embed "Ceres::PageDesign.Partials.PageMetadata" %}
+    {% embed getPartial('page-metadata') %}
         {% block title          ItemName.get(itemData | itemName, itemData.variation.bundleType) %}
         {% block description    itemData.texts.metaDescription %}
         {% block keywords       itemData.texts.keywords %}
         {% block image          itemData.images.all[0].url %}
+        {% block robots         "ALL" %}
         {% block schemaOrg %}
             {
                 "@context"      : "http://schema.org/",
@@ -72,12 +73,15 @@
 {% endblock %}
 
 {% block PageBody %}
+    {{ set_item_data_base(item.documents[0].data) }}
     {{ component("Ceres::Item.Components.SingleItem") }}
 
     {% set shopBuilderTemplate = "" %}
-    {% if defaultCategory is defined %}
+    {% set currentCategory = services.category.getCurrentCategory() %}
+
+    {% if currentCategory is defined %}
         {# Check for item template for specific category first #}
-        {% set shopBuilderTemplate = shop_builder_category_template(defaultCategory.id, "singleitem") %}
+        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, "singleitem") %}
     {% endif %}
 
     {% if shopBuilderTemplate | trim is empty %}
@@ -85,12 +89,12 @@
         {% set shopBuilderTemplate = LayoutContainer.show("Ceres::SingleItemGlobal") %}
     {% endif %}
 
-    {% if item.documents[0].data.item.add_cms_page > 0 and request.get('isContentBuilder') != 1 %}
+    {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
         {# Item template is configured for the item #}
         {% include [category_template(item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId)] %}
-    {% elseif shopBuilderTemplate | trim is not empty or request.get('isContentBuilder') == 1 %}
+    {% elseif shopBuilderTemplate | trim is not empty or isShopBuilder %}
         {# Shopbuilder template #}
-        <div class="container-max checkout">
+        <div class="container-max">
             <div class="row">
                 <div class="col">
                     <single-item
@@ -100,7 +104,9 @@
                         variation-list-data="{{ variations | json_data }}"
                         :attribute-name-map="{{ attributeNameMap | json_encode }}"
                         :variation-units="{{ variationUnits | json_encode }}">
-                        {{ shopBuilderTemplate | raw }}
+                        <template #default="{ getDataField: getDataField, getFilteredDataField: getFilteredDataField }">
+                            {{ shopBuilderTemplate | raw }}
+                        </template>
                     </single-item>
                 </div>
             </div>

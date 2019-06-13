@@ -13,6 +13,7 @@ class CeresBasketConfig extends PluginConfig
     public $variations;
     public $addItemToBasketConfirm;
     public $previewType;
+    public $showShippingCountrySelect;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -64,5 +65,7 @@ class CeresBasketConfig extends PluginConfig
         $this->addItemToBasketConfirm = $this->getTextValue( "basket.add_item_to_basket_confirm", "overlay" );
 
         $this->previewType = $this->getTextValue( "basket.preview_type", "right" );
+        
+        $this->showShippingCountrySelect = $this->getBooleanValue('basket.show_shipping_country_select', true);
     }
 }

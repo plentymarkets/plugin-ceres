@@ -1,22 +1,16 @@
 <script type="x/template" id="vue-graduated-prices">
-    <div>
-        <div class="my-3" v-if="graduatedPrices[0]">
-            <b>{{ trans("Ceres::Template.singleItemGraduatedPrices") }}:</b>
-            
-            <table class="graduated-prices-table text-muted">
-                <tr v-for="(price, index) in graduatedPrices">
-                    <td>{{ trans("Ceres::Template.singleItemMinimumQuantity") }} ${ price.minimumOrderQuantity }</td>
-                    <td>
-                        ${ price.unitPrice.formatted }
-                        <transition name="fade">
-                            <i class="fa fa-lg fa-check-circle-o ml-3" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
-                        </transition>
-                    </td>
-                </tr>
-            </table>
-
-            <hr>
-
-        </div>
+    <div v-if="graduatedPrices[0]">
+        <b>{{ trans("Ceres::Template.singleItemGraduatedPrices") }}:</b>
+        <table class="graduated-prices-table text-muted">
+            <tr v-for="(price, index) in graduatedPrices">
+                <td :class="paddingClasses" :style="paddingInlineStyles">{{ trans("Ceres::Template.singleItemMinimumQuantity") }} ${ price.minimumOrderQuantity }</td>
+                <td :class="paddingClasses" :style="paddingInlineStyles">
+                    ${ price.unitPrice.formatted }
+                    <transition name="fade">
+                        <i class="fa fa-lg fa-check-circle-o ml-1 text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
+                    </transition>
+                </td>
+            </tr>
+        </table>
     </div>
 </script>

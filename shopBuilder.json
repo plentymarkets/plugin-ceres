@@ -55,6 +55,9 @@
             }
         ]
     },
+    "dataFieldProviders": {
+        "singleitem": "Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ItemDataFieldProvider"
+    },
     "categories": [
         {
             "key": "header",
@@ -149,5 +152,8 @@
             }
         }
     },
-    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler"
+    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
+    "supportedFeatures": {
+        "singleItemContent": true
+    }
 }

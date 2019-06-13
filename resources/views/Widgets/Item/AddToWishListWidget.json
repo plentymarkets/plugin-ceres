@@ -7,6 +7,12 @@
     "position": 200,
     "widgetClass": "Ceres\\Widgets\\Item\\AddToWishListWidget",
     "settings": {
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
         "spacing":"@include(spacingMargin)"
     }
 }

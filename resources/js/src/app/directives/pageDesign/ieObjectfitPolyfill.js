@@ -1,4 +1,4 @@
-/*!
+/* !
  * A polyfill for object-fit
  *
  * @author: Toni Pinel

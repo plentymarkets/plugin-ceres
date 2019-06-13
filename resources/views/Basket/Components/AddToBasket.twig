@@ -28,7 +28,7 @@
 
                 <button
                     v-if="!isVariationSelected"
-                    class="btn btn-block btn-primary disabled"
+                    class="btn btn-block btn-primary btn-appearance disabled"
                     v-tooltip data-toggle="tooltip"
                     data-placement="top"
                     title="{{ trans("Ceres::Template.singleItemPleaseSelectValidVariation") }}"
@@ -40,7 +40,7 @@
                 <button
                     v-else-if="!buttonLockState"
                     :disabled="waiting || !hasPrice"
-                    class="btn btn-block btn-primary"
+                    class="btn btn-block btn-primary btn-appearance"
                     @click="addToBasket()"
                     :class="buttonClasses"
                     :style="paddingInlineStyles">
@@ -48,7 +48,7 @@
                     {{ trans("Ceres::Template.singleItemAddToBasket") }}
                 </button>
                 <button v-else
-                        class="btn btn-block btn-primary disabled"
+                        class="btn btn-block btn-primary btn-appearance disabled"
                         v-tooltip
                         data-toggle="tooltip"
                         data-placement="top"

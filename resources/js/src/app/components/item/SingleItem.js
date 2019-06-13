@@ -1,4 +1,6 @@
 import { transformVariationProperties } from "../../services/VariationPropertyService";
+import { get } from "../../helper/get";
+import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("single-item", {
 
@@ -58,6 +60,21 @@ Vue.component("single-item", {
         setIsVariationSelected(event)
         {
             this.$store.commit("setIsVariationSelected", event);
+        },
+
+        getDataField(field)
+        {
+            return get(this.currentVariation, field);
+        },
+
+        getFilteredDataField(field, filter)
+        {
+            if (!isNullOrUndefined(this.$options.filters[filter]))
+            {
+                return this.$options.filters[filter](this.getDataField(field));
+            }
+
+            return this.getDataField(field);
         }
     }
 });

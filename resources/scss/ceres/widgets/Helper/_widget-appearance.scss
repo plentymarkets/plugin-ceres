@@ -35,6 +35,12 @@
             }
         }
 
+        a:hover {
+            i.text-appearance {
+                color: darken($value, 7.5) !important;
+            } 
+        }
+
         .border-appearance.active,
         .border-appearance:hover
         {

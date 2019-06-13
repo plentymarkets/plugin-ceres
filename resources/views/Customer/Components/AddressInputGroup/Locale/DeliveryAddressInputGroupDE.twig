@@ -6,9 +6,7 @@
 <div class="col-12">
     <div class="row">
         <div v-if="isInOptionalFields('de', 'delivery_address.salutation')" class="col-12 col-sm-4">
-            <div 
-                class="input-unit"
-                v-validate="isInRequiredFields('de', 'delivery_address.salutation')">
+            <div class="input-unit" v-validate="isInRequiredFields('de', 'delivery_address.salutation')">
                 <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                 <label :for="'txtSalutation' + _uid">
                     ${ transformTranslation("Ceres::Template.addressSalutation", "de", "delivery_address.salutation") }
@@ -20,12 +18,24 @@
 
 <div class="col-12">
     <div class="row">
-        <div 
-            class="col-12 col-sm-6"
-            v-if="isInOptionalFields('de', 'delivery_address.salutation') && value.addressSalutation === 2 || isInOptionalFields('de', 'delivery_address.name1') && !isInOptionalFields('de', 'delivery_address.salutation')">
+        <div class="col-12 col-sm-6"
+            v-if="isInOptionalFields('de', 'delivery_address.salutation') && value.gender === 'company' || isInOptionalFields('de', 'delivery_address.name1') && !isInOptionalFields('de', 'delivery_address.salutation')">
             <div class="input-unit" data-validate="text" data-model="name1">
                 <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)" data-autofocus>
                 <label :for="'txtCompany' + _uid">{{ trans("Ceres::Template.addressCompany") }}*</label>
+            </div>
+        </div>
+        <div
+            class="col-12 col-sm-6"
+            v-if="(isInOptionalFields('de', 'delivery_address.salutation') && value.gender === 'company') || isInOptionalFields('de', 'delivery_address.vatNumber')">
+            <div
+                class="input-unit"
+                data-model="vatNumber"
+                v-validate:text="isInRequiredFields('de', 'delivery_address.vatNumber')">
+                <input type="text" name="vatNumber" :id="'txtVatNumber' + _uid" :value="value.vatNumber" @input="emitInputEvent('vatNumber', $event.target.value)" data-autofocus>
+                <label :for="'txtVatNumber' + _uid">
+                    ${ transformTranslation("Ceres::Template.addressVatNumber", "de", "delivery_address.vatNumber") }
+                </label>
             </div>
         </div>
     </div>

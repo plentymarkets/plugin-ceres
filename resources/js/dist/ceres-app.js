@@ -164,7 +164,7 @@ if (typeof Object.create === 'function') {
 
 },{}],3:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v3.3.1
+ * jQuery JavaScript Library v3.4.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -174,7 +174,7 @@ if (typeof Object.create === 'function') {
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2018-01-20T17:24Z
+ * Date: 2019-05-01T21:04Z
  */
 ( function( global, factory ) {
 
@@ -256,20 +256,33 @@ var isWindow = function isWindow( obj ) {
 	var preservedScriptAttributes = {
 		type: true,
 		src: true,
+		nonce: true,
 		noModule: true
 	};
 
-	function DOMEval( code, doc, node ) {
+	function DOMEval( code, node, doc ) {
 		doc = doc || document;
 
-		var i,
+		var i, val,
 			script = doc.createElement( "script" );
 
 		script.text = code;
 		if ( node ) {
 			for ( i in preservedScriptAttributes ) {
-				if ( node[ i ] ) {
-					script[ i ] = node[ i ];
+
+				// Support: Firefox 64+, Edge 18+
+				// Some browsers don't support the "nonce" property on scripts.
+				// On the other hand, just using `getAttribute` is not enough as
+				// the `nonce` attribute is reset to an empty string whenever it
+				// becomes browsing-context connected.
+				// See https://github.com/whatwg/html/issues/2369
+				// See https://html.spec.whatwg.org/#nonce-attributes
+				// The `node.getAttribute` check was added for the sake of
+				// `jQuery.globalEval` so that it can fake a nonce-containing node
+				// via an object.
+				val = node[ i ] || node.getAttribute && node.getAttribute( i );
+				if ( val ) {
+					script.setAttribute( i, val );
 				}
 			}
 		}
@@ -294,7 +307,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.3.1",
+	version = "3.4.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -423,25 +436,28 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 			// Extend the base object
 			for ( name in options ) {
-				src = target[ name ];
 				copy = options[ name ];
 
+				// Prevent Object.prototype pollution
 				// Prevent never-ending loop
-				if ( target === copy ) {
+				if ( name === "__proto__" || target === copy ) {
 					continue;
 				}
 
 				// Recurse if we're merging plain objects or arrays
 				if ( deep && copy && ( jQuery.isPlainObject( copy ) ||
 					( copyIsArray = Array.isArray( copy ) ) ) ) {
+					src = target[ name ];
 
-					if ( copyIsArray ) {
-						copyIsArray = false;
-						clone = src && Array.isArray( src ) ? src : [];
-
+					// Ensure proper type for the source value
+					if ( copyIsArray && !Array.isArray( src ) ) {
+						clone = [];
+					} else if ( !copyIsArray && !jQuery.isPlainObject( src ) ) {
+						clone = {};
 					} else {
-						clone = src && jQuery.isPlainObject( src ) ? src : {};
+						clone = src;
 					}
+					copyIsArray = false;
 
 					// Never move original objects, clone them
 					target[ name ] = jQuery.extend( deep, clone, copy );
@@ -494,9 +510,6 @@ jQuery.extend( {
 	},
 
 	isEmptyObject: function( obj ) {
-
-		/* eslint-disable no-unused-vars */
-		// See https://github.com/eslint/eslint/issues/6125
 		var name;
 
 		for ( name in obj ) {
@@ -506,8 +519,8 @@ jQuery.extend( {
 	},
 
 	// Evaluates a script in a global context
-	globalEval: function( code ) {
-		DOMEval( code );
+	globalEval: function( code, options ) {
+		DOMEval( code, { nonce: options && options.nonce } );
 	},
 
 	each: function( obj, callback ) {
@@ -663,14 +676,14 @@ function isArrayLike( obj ) {
 }
 var Sizzle =
 /*!
- * Sizzle CSS Selector Engine v2.3.3
+ * Sizzle CSS Selector Engine v2.3.4
  * https://sizzlejs.com/
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright JS Foundation and other contributors
  * Released under the MIT license
- * http://jquery.org/license
+ * https://js.foundation/
  *
- * Date: 2016-08-08
+ * Date: 2019-04-08
  */
 (function( window ) {
 
@@ -704,6 +717,7 @@ var i,
 	classCache = createCache(),
 	tokenCache = createCache(),
 	compilerCache = createCache(),
+	nonnativeSelectorCache = createCache(),
 	sortOrder = function( a, b ) {
 		if ( a === b ) {
 			hasDuplicate = true;
@@ -765,8 +779,7 @@ var i,
 
 	rcomma = new RegExp( "^" + whitespace + "*," + whitespace + "*" ),
 	rcombinators = new RegExp( "^" + whitespace + "*([>+~]|" + whitespace + ")" + whitespace + "*" ),
-
-	rattributeQuotes = new RegExp( "=" + whitespace + "*([^\\]'\"]*?)" + whitespace + "*\\]", "g" ),
+	rdescend = new RegExp( whitespace + "|>" ),
 
 	rpseudo = new RegExp( pseudos ),
 	ridentifier = new RegExp( "^" + identifier + "$" ),
@@ -787,6 +800,7 @@ var i,
 			whitespace + "*((?:-\\d)?\\d*)" + whitespace + "*\\)|)(?=[^-]|$)", "i" )
 	},
 
+	rhtml = /HTML$/i,
 	rinputs = /^(?:input|select|textarea|button)$/i,
 	rheader = /^h\d$/i,
 
@@ -841,9 +855,9 @@ var i,
 		setDocument();
 	},
 
-	disabledAncestor = addCombinator(
+	inDisabledFieldset = addCombinator(
 		function( elem ) {
-			return elem.disabled === true && ("form" in elem || "label" in elem);
+			return elem.disabled === true && elem.nodeName.toLowerCase() === "fieldset";
 		},
 		{ dir: "parentNode", next: "legend" }
 	);
@@ -956,18 +970,22 @@ function Sizzle( selector, context, results, seed ) {
 
 			// Take advantage of querySelectorAll
 			if ( support.qsa &&
-				!compilerCache[ selector + " " ] &&
-				(!rbuggyQSA || !rbuggyQSA.test( selector )) ) {
+				!nonnativeSelectorCache[ selector + " " ] &&
+				(!rbuggyQSA || !rbuggyQSA.test( selector )) &&
 
-				if ( nodeType !== 1 ) {
-					newContext = context;
-					newSelector = selector;
-
-				// qSA looks outside Element context, which is not what we want
-				// Thanks to Andrew Dupont for this workaround technique
-				// Support: IE <=8
+				// Support: IE 8 only
 				// Exclude object elements
-				} else if ( context.nodeName.toLowerCase() !== "object" ) {
+				(nodeType !== 1 || context.nodeName.toLowerCase() !== "object") ) {
+
+				newSelector = selector;
+				newContext = context;
+
+				// qSA considers elements outside a scoping root when evaluating child or
+				// descendant combinators, which is not what we want.
+				// In such cases, we work around the behavior by prefixing every selector in the
+				// list with an ID selector referencing the scope context.
+				// Thanks to Andrew Dupont for this technique.
+				if ( nodeType === 1 && rdescend.test( selector ) ) {
 
 					// Capture the context ID, setting it first if necessary
 					if ( (nid = context.getAttribute( "id" )) ) {
@@ -989,17 +1007,16 @@ function Sizzle( selector, context, results, seed ) {
 						context;
 				}
 
-				if ( newSelector ) {
-					try {
-						push.apply( results,
-							newContext.querySelectorAll( newSelector )
-						);
-						return results;
-					} catch ( qsaError ) {
-					} finally {
-						if ( nid === expando ) {
-							context.removeAttribute( "id" );
-						}
+				try {
+					push.apply( results,
+						newContext.querySelectorAll( newSelector )
+					);
+					return results;
+				} catch ( qsaError ) {
+					nonnativeSelectorCache( selector, true );
+				} finally {
+					if ( nid === expando ) {
+						context.removeAttribute( "id" );
 					}
 				}
 			}
@@ -1163,7 +1180,7 @@ function createDisabledPseudo( disabled ) {
 					// Where there is no isDisabled, check manually
 					/* jshint -W018 */
 					elem.isDisabled !== !disabled &&
-						disabledAncestor( elem ) === disabled;
+						inDisabledFieldset( elem ) === disabled;
 			}
 
 			return elem.disabled === disabled;
@@ -1220,10 +1237,13 @@ support = Sizzle.support = {};
  * @returns {Boolean} True iff elem is a non-HTML XML node
  */
 isXML = Sizzle.isXML = function( elem ) {
-	// documentElement is verified for cases where it doesn't yet exist
-	// (such as loading iframes in IE - #4833)
-	var documentElement = elem && (elem.ownerDocument || elem).documentElement;
-	return documentElement ? documentElement.nodeName !== "HTML" : false;
+	var namespace = elem.namespaceURI,
+		docElem = (elem.ownerDocument || elem).documentElement;
+
+	// Support: IE <=8
+	// Assume HTML when documentElement doesn't yet exist, such as inside loading iframes
+	// https://bugs.jquery.com/ticket/4833
+	return !rhtml.test( namespace || docElem && docElem.nodeName || "HTML" );
 };
 
 /**
@@ -1645,11 +1665,8 @@ Sizzle.matchesSelector = function( elem, expr ) {
 		setDocument( elem );
 	}
 
-	// Make sure that attribute selectors are quoted
-	expr = expr.replace( rattributeQuotes, "='$1']" );
-
 	if ( support.matchesSelector && documentIsHTML &&
-		!compilerCache[ expr + " " ] &&
+		!nonnativeSelectorCache[ expr + " " ] &&
 		( !rbuggyMatches || !rbuggyMatches.test( expr ) ) &&
 		( !rbuggyQSA     || !rbuggyQSA.test( expr ) ) ) {
 
@@ -1663,7 +1680,9 @@ Sizzle.matchesSelector = function( elem, expr ) {
 					elem.document && elem.document.nodeType !== 11 ) {
 				return ret;
 			}
-		} catch (e) {}
+		} catch (e) {
+			nonnativeSelectorCache( expr, true );
+		}
 	}
 
 	return Sizzle( expr, document, null, [ elem ] ).length > 0;
@@ -2122,7 +2141,7 @@ Expr = Sizzle.selectors = {
 		"contains": markFunction(function( text ) {
 			text = text.replace( runescape, funescape );
 			return function( elem ) {
-				return ( elem.textContent || elem.innerText || getText( elem ) ).indexOf( text ) > -1;
+				return ( elem.textContent || getText( elem ) ).indexOf( text ) > -1;
 			};
 		}),
 
@@ -2261,7 +2280,11 @@ Expr = Sizzle.selectors = {
 		}),
 
 		"lt": createPositionalPseudo(function( matchIndexes, length, argument ) {
-			var i = argument < 0 ? argument + length : argument;
+			var i = argument < 0 ?
+				argument + length :
+				argument > length ?
+					length :
+					argument;
 			for ( ; --i >= 0; ) {
 				matchIndexes.push( i );
 			}
@@ -3311,18 +3334,18 @@ jQuery.each( {
 		return siblings( elem.firstChild );
 	},
 	contents: function( elem ) {
-        if ( nodeName( elem, "iframe" ) ) {
-            return elem.contentDocument;
-        }
+		if ( typeof elem.contentDocument !== "undefined" ) {
+			return elem.contentDocument;
+		}
 
-        // Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
-        // Treat the template element as a regular one in browsers that
-        // don't support it.
-        if ( nodeName( elem, "template" ) ) {
-            elem = elem.content || elem;
-        }
+		// Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
+		// Treat the template element as a regular one in browsers that
+		// don't support it.
+		if ( nodeName( elem, "template" ) ) {
+			elem = elem.content || elem;
+		}
 
-        return jQuery.merge( [], elem.childNodes );
+		return jQuery.merge( [], elem.childNodes );
 	}
 }, function( name, fn ) {
 	jQuery.fn[ name ] = function( until, selector ) {
@@ -4631,6 +4654,26 @@ var rcssNum = new RegExp( "^(?:([+-])=|)(" + pnum + ")([a-z%]*)$", "i" );
 
 var cssExpand = [ "Top", "Right", "Bottom", "Left" ];
 
+var documentElement = document.documentElement;
+
+
+
+	var isAttached = function( elem ) {
+			return jQuery.contains( elem.ownerDocument, elem );
+		},
+		composed = { composed: true };
+
+	// Support: IE 9 - 11+, Edge 12 - 18+, iOS 10.0 - 10.2 only
+	// Check attachment across shadow DOM boundaries when possible (gh-3504)
+	// Support: iOS 10.0-10.2 only
+	// Early iOS 10 versions support `attachShadow` but not `getRootNode`,
+	// leading to errors. We need to check for `getRootNode`.
+	if ( documentElement.getRootNode ) {
+		isAttached = function( elem ) {
+			return jQuery.contains( elem.ownerDocument, elem ) ||
+				elem.getRootNode( composed ) === elem.ownerDocument;
+		};
+	}
 var isHiddenWithinTree = function( elem, el ) {
 
 		// isHiddenWithinTree might be called from jQuery#filter function;
@@ -4645,7 +4688,7 @@ var isHiddenWithinTree = function( elem, el ) {
 			// Support: Firefox <=43 - 45
 			// Disconnected elements can have computed display: none, so first confirm that elem is
 			// in the document.
-			jQuery.contains( elem.ownerDocument, elem ) &&
+			isAttached( elem ) &&
 
 			jQuery.css( elem, "display" ) === "none";
 	};
@@ -4687,7 +4730,8 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 		unit = valueParts && valueParts[ 3 ] || ( jQuery.cssNumber[ prop ] ? "" : "px" ),
 
 		// Starting value computation is required for potential unit mismatches
-		initialInUnit = ( jQuery.cssNumber[ prop ] || unit !== "px" && +initial ) &&
+		initialInUnit = elem.nodeType &&
+			( jQuery.cssNumber[ prop ] || unit !== "px" && +initial ) &&
 			rcssNum.exec( jQuery.css( elem, prop ) );
 
 	if ( initialInUnit && initialInUnit[ 3 ] !== unit ) {
@@ -4834,7 +4878,7 @@ jQuery.fn.extend( {
 } );
 var rcheckableType = ( /^(?:checkbox|radio)$/i );
 
-var rtagName = ( /<([a-z][^\/\0>\x20\t\r\n\f]+)/i );
+var rtagName = ( /<([a-z][^\/\0>\x20\t\r\n\f]*)/i );
 
 var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 
@@ -4906,7 +4950,7 @@ function setGlobalEval( elems, refElements ) {
 var rhtml = /<|&#?\w+;/;
 
 function buildFragment( elems, context, scripts, selection, ignored ) {
-	var elem, tmp, tag, wrap, contains, j,
+	var elem, tmp, tag, wrap, attached, j,
 		fragment = context.createDocumentFragment(),
 		nodes = [],
 		i = 0,
@@ -4970,13 +5014,13 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 			continue;
 		}
 
-		contains = jQuery.contains( elem.ownerDocument, elem );
+		attached = isAttached( elem );
 
 		// Append to fragment
 		tmp = getAll( fragment.appendChild( elem ), "script" );
 
 		// Preserve script evaluation history
-		if ( contains ) {
+		if ( attached ) {
 			setGlobalEval( tmp );
 		}
 
@@ -5019,8 +5063,6 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 	div.innerHTML = "<textarea>x</textarea>";
 	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
 } )();
-var documentElement = document.documentElement;
-
 
 
 var
@@ -5036,8 +5078,19 @@ function returnFalse() {
 	return false;
 }
 
+// Support: IE <=9 - 11+
+// focus() and blur() are asynchronous, except when they are no-op.
+// So expect focus to be synchronous when the element is already active,
+// and blur to be synchronous when the element is not already active.
+// (focus and blur are always synchronous in other supported browsers,
+// this just defines when we can count on it).
+function expectSync( elem, type ) {
+	return ( elem === safeActiveElement() ) === ( type === "focus" );
+}
+
 // Support: IE <=9 only
-// See #13393 for more info
+// Accessing document.activeElement can throw unexpectedly
+// https://bugs.jquery.com/ticket/13393
 function safeActiveElement() {
 	try {
 		return document.activeElement;
@@ -5337,9 +5390,10 @@ jQuery.event = {
 			while ( ( handleObj = matched.handlers[ j++ ] ) &&
 				!event.isImmediatePropagationStopped() ) {
 
-				// Triggered event must either 1) have no namespace, or 2) have namespace(s)
-				// a subset or equal to those in the bound event (both can have no namespace).
-				if ( !event.rnamespace || event.rnamespace.test( handleObj.namespace ) ) {
+				// If the event is namespaced, then each handler is only invoked if it is
+				// specially universal or its namespaces are a superset of the event's.
+				if ( !event.rnamespace || handleObj.namespace === false ||
+					event.rnamespace.test( handleObj.namespace ) ) {
 
 					event.handleObj = handleObj;
 					event.data = handleObj.data;
@@ -5463,39 +5517,51 @@ jQuery.event = {
 			// Prevent triggered image.load events from bubbling to window.load
 			noBubble: true
 		},
-		focus: {
-
-			// Fire native event if possible so blur/focus sequence is correct
-			trigger: function() {
-				if ( this !== safeActiveElement() && this.focus ) {
-					this.focus();
-					return false;
-				}
-			},
-			delegateType: "focusin"
-		},
-		blur: {
-			trigger: function() {
-				if ( this === safeActiveElement() && this.blur ) {
-					this.blur();
-					return false;
-				}
-			},
-			delegateType: "focusout"
-		},
 		click: {
 
-			// For checkbox, fire native event so checked state will be right
-			trigger: function() {
-				if ( this.type === "checkbox" && this.click && nodeName( this, "input" ) ) {
-					this.click();
-					return false;
+			// Utilize native event to ensure correct state for checkable inputs
+			setup: function( data ) {
+
+				// For mutual compressibility with _default, replace `this` access with a local var.
+				// `|| data` is dead code meant only to preserve the variable through minification.
+				var el = this || data;
+
+				// Claim the first handler
+				if ( rcheckableType.test( el.type ) &&
+					el.click && nodeName( el, "input" ) ) {
+
+					// dataPriv.set( el, "click", ... )
+					leverageNative( el, "click", returnTrue );
 				}
+
+				// Return false to allow normal processing in the caller
+				return false;
+			},
+			trigger: function( data ) {
+
+				// For mutual compressibility with _default, replace `this` access with a local var.
+				// `|| data` is dead code meant only to preserve the variable through minification.
+				var el = this || data;
+
+				// Force setup before triggering a click
+				if ( rcheckableType.test( el.type ) &&
+					el.click && nodeName( el, "input" ) ) {
+
+					leverageNative( el, "click" );
+				}
+
+				// Return non-false to allow normal event-path propagation
+				return true;
 			},
 
-			// For cross-browser consistency, don't fire native .click() on links
+			// For cross-browser consistency, suppress native .click() on links
+			// Also prevent it if we're currently inside a leveraged native-event stack
 			_default: function( event ) {
-				return nodeName( event.target, "a" );
+				var target = event.target;
+				return rcheckableType.test( target.type ) &&
+					target.click && nodeName( target, "input" ) &&
+					dataPriv.get( target, "click" ) ||
+					nodeName( target, "a" );
 			}
 		},
 
@@ -5511,6 +5577,93 @@ jQuery.event = {
 		}
 	}
 };
+
+// Ensure the presence of an event listener that handles manually-triggered
+// synthetic events by interrupting progress until reinvoked in response to
+// *native* events that it fires directly, ensuring that state changes have
+// already occurred before other listeners are invoked.
+function leverageNative( el, type, expectSync ) {
+
+	// Missing expectSync indicates a trigger call, which must force setup through jQuery.event.add
+	if ( !expectSync ) {
+		if ( dataPriv.get( el, type ) === undefined ) {
+			jQuery.event.add( el, type, returnTrue );
+		}
+		return;
+	}
+
+	// Register the controller as a special universal handler for all event namespaces
+	dataPriv.set( el, type, false );
+	jQuery.event.add( el, type, {
+		namespace: false,
+		handler: function( event ) {
+			var notAsync, result,
+				saved = dataPriv.get( this, type );
+
+			if ( ( event.isTrigger & 1 ) && this[ type ] ) {
+
+				// Interrupt processing of the outer synthetic .trigger()ed event
+				// Saved data should be false in such cases, but might be a leftover capture object
+				// from an async native handler (gh-4350)
+				if ( !saved.length ) {
+
+					// Store arguments for use when handling the inner native event
+					// There will always be at least one argument (an event object), so this array
+					// will not be confused with a leftover capture object.
+					saved = slice.call( arguments );
+					dataPriv.set( this, type, saved );
+
+					// Trigger the native event and capture its result
+					// Support: IE <=9 - 11+
+					// focus() and blur() are asynchronous
+					notAsync = expectSync( this, type );
+					this[ type ]();
+					result = dataPriv.get( this, type );
+					if ( saved !== result || notAsync ) {
+						dataPriv.set( this, type, false );
+					} else {
+						result = {};
+					}
+					if ( saved !== result ) {
+
+						// Cancel the outer synthetic event
+						event.stopImmediatePropagation();
+						event.preventDefault();
+						return result.value;
+					}
+
+				// If this is an inner synthetic event for an event with a bubbling surrogate
+				// (focus or blur), assume that the surrogate already propagated from triggering the
+				// native event and prevent that from happening again here.
+				// This technically gets the ordering wrong w.r.t. to `.trigger()` (in which the
+				// bubbling surrogate propagates *after* the non-bubbling base), but that seems
+				// less bad than duplication.
+				} else if ( ( jQuery.event.special[ type ] || {} ).delegateType ) {
+					event.stopPropagation();
+				}
+
+			// If this is a native event triggered above, everything is now in order
+			// Fire an inner synthetic event with the original arguments
+			} else if ( saved.length ) {
+
+				// ...and capture the result
+				dataPriv.set( this, type, {
+					value: jQuery.event.trigger(
+
+						// Support: IE <=9 - 11+
+						// Extend with the prototype to reset the above stopImmediatePropagation()
+						jQuery.extend( saved[ 0 ], jQuery.Event.prototype ),
+						saved.slice( 1 ),
+						this
+					)
+				} );
+
+				// Abort handling of the native event
+				event.stopImmediatePropagation();
+			}
+		}
+	} );
+}
 
 jQuery.removeEvent = function( elem, type, handle ) {
 
@@ -5624,6 +5777,7 @@ jQuery.each( {
 	shiftKey: true,
 	view: true,
 	"char": true,
+	code: true,
 	charCode: true,
 	key: true,
 	keyCode: true,
@@ -5669,6 +5823,33 @@ jQuery.each( {
 		return event.which;
 	}
 }, jQuery.event.addProp );
+
+jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateType ) {
+	jQuery.event.special[ type ] = {
+
+		// Utilize native event if possible so blur/focus sequence is correct
+		setup: function() {
+
+			// Claim the first handler
+			// dataPriv.set( this, "focus", ... )
+			// dataPriv.set( this, "blur", ... )
+			leverageNative( this, type, expectSync );
+
+			// Return false to allow normal processing in the caller
+			return false;
+		},
+		trigger: function() {
+
+			// Force setup before trigger
+			leverageNative( this, type );
+
+			// Return non-false to allow normal event-path propagation
+			return true;
+		},
+
+		delegateType: delegateType
+	};
+} );
 
 // Create mouseenter/leave events using mouseover/out and event-time checks
 // so that event delegation works in jQuery.
@@ -5920,11 +6101,13 @@ function domManip( collection, args, callback, ignored ) {
 						if ( node.src && ( node.type || "" ).toLowerCase()  !== "module" ) {
 
 							// Optional AJAX dependency, but won't run scripts if not present
-							if ( jQuery._evalUrl ) {
-								jQuery._evalUrl( node.src );
+							if ( jQuery._evalUrl && !node.noModule ) {
+								jQuery._evalUrl( node.src, {
+									nonce: node.nonce || node.getAttribute( "nonce" )
+								} );
 							}
 						} else {
-							DOMEval( node.textContent.replace( rcleanScript, "" ), doc, node );
+							DOMEval( node.textContent.replace( rcleanScript, "" ), node, doc );
 						}
 					}
 				}
@@ -5946,7 +6129,7 @@ function remove( elem, selector, keepData ) {
 		}
 
 		if ( node.parentNode ) {
-			if ( keepData && jQuery.contains( node.ownerDocument, node ) ) {
+			if ( keepData && isAttached( node ) ) {
 				setGlobalEval( getAll( node, "script" ) );
 			}
 			node.parentNode.removeChild( node );
@@ -5964,7 +6147,7 @@ jQuery.extend( {
 	clone: function( elem, dataAndEvents, deepDataAndEvents ) {
 		var i, l, srcElements, destElements,
 			clone = elem.cloneNode( true ),
-			inPage = jQuery.contains( elem.ownerDocument, elem );
+			inPage = isAttached( elem );
 
 		// Fix IE cloning issues
 		if ( !support.noCloneChecked && ( elem.nodeType === 1 || elem.nodeType === 11 ) &&
@@ -6260,8 +6443,10 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 
 		// Support: IE 9 only
 		// Detect overflow:scroll screwiness (gh-3699)
+		// Support: Chrome <=64
+		// Don't get tricked when zoom affects offsetWidth (gh-4029)
 		div.style.position = "absolute";
-		scrollboxSizeVal = div.offsetWidth === 36 || "absolute";
+		scrollboxSizeVal = roundPixelMeasures( div.offsetWidth / 3 ) === 12;
 
 		documentElement.removeChild( container );
 
@@ -6332,7 +6517,7 @@ function curCSS( elem, name, computed ) {
 	if ( computed ) {
 		ret = computed.getPropertyValue( name ) || computed[ name ];
 
-		if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
+		if ( ret === "" && !isAttached( elem ) ) {
 			ret = jQuery.style( elem, name );
 		}
 
@@ -6388,29 +6573,12 @@ function addGetHookIf( conditionFn, hookFn ) {
 }
 
 
-var
+var cssPrefixes = [ "Webkit", "Moz", "ms" ],
+	emptyStyle = document.createElement( "div" ).style,
+	vendorProps = {};
 
-	// Swappable if display is none or starts with table
-	// except "table", "table-cell", or "table-caption"
-	// See here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
-	rdisplayswap = /^(none|table(?!-c[ea]).+)/,
-	rcustomProp = /^--/,
-	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
-	cssNormalTransform = {
-		letterSpacing: "0",
-		fontWeight: "400"
-	},
-
-	cssPrefixes = [ "Webkit", "Moz", "ms" ],
-	emptyStyle = document.createElement( "div" ).style;
-
-// Return a css property mapped to a potentially vendor prefixed property
+// Return a vendor-prefixed property or undefined
 function vendorPropName( name ) {
-
-	// Shortcut for names that are not vendor prefixed
-	if ( name in emptyStyle ) {
-		return name;
-	}
 
 	// Check for vendor prefixed names
 	var capName = name[ 0 ].toUpperCase() + name.slice( 1 ),
@@ -6424,15 +6592,32 @@ function vendorPropName( name ) {
 	}
 }
 
-// Return a property mapped along what jQuery.cssProps suggests or to
-// a vendor prefixed property.
+// Return a potentially-mapped jQuery.cssProps or vendor prefixed property
 function finalPropName( name ) {
-	var ret = jQuery.cssProps[ name ];
-	if ( !ret ) {
-		ret = jQuery.cssProps[ name ] = vendorPropName( name ) || name;
+	var final = jQuery.cssProps[ name ] || vendorProps[ name ];
+
+	if ( final ) {
+		return final;
 	}
-	return ret;
+	if ( name in emptyStyle ) {
+		return name;
+	}
+	return vendorProps[ name ] = vendorPropName( name ) || name;
 }
+
+
+var
+
+	// Swappable if display is none or starts with table
+	// except "table", "table-cell", or "table-caption"
+	// See here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
+	rdisplayswap = /^(none|table(?!-c[ea]).+)/,
+	rcustomProp = /^--/,
+	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
+	cssNormalTransform = {
+		letterSpacing: "0",
+		fontWeight: "400"
+	};
 
 function setPositiveNumber( elem, value, subtract ) {
 
@@ -6505,7 +6690,10 @@ function boxModelAdjustment( elem, dimension, box, isBorderBox, styles, computed
 			delta -
 			extra -
 			0.5
-		) );
+
+		// If offsetWidth/offsetHeight is unknown, then we can't determine content-box scroll gutter
+		// Use an explicit zero to avoid NaN (gh-3964)
+		) ) || 0;
 	}
 
 	return delta;
@@ -6515,9 +6703,16 @@ function getWidthOrHeight( elem, dimension, extra ) {
 
 	// Start with computed style
 	var styles = getStyles( elem ),
+
+		// To avoid forcing a reflow, only fetch boxSizing if we need it (gh-4322).
+		// Fake content-box until we know it's needed to know the true value.
+		boxSizingNeeded = !support.boxSizingReliable() || extra,
+		isBorderBox = boxSizingNeeded &&
+			jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
+		valueIsBorderBox = isBorderBox,
+
 		val = curCSS( elem, dimension, styles ),
-		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
-		valueIsBorderBox = isBorderBox;
+		offsetProp = "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 );
 
 	// Support: Firefox <=54
 	// Return a confounding non-pixel value or feign ignorance, as appropriate.
@@ -6528,22 +6723,29 @@ function getWidthOrHeight( elem, dimension, extra ) {
 		val = "auto";
 	}
 
-	// Check for style in case a browser which returns unreliable values
-	// for getComputedStyle silently falls back to the reliable elem.style
-	valueIsBorderBox = valueIsBorderBox &&
-		( support.boxSizingReliable() || val === elem.style[ dimension ] );
 
 	// Fall back to offsetWidth/offsetHeight when value is "auto"
 	// This happens for inline elements with no explicit setting (gh-3571)
 	// Support: Android <=4.1 - 4.3 only
 	// Also use offsetWidth/offsetHeight for misreported inline dimensions (gh-3602)
-	if ( val === "auto" ||
-		!parseFloat( val ) && jQuery.css( elem, "display", false, styles ) === "inline" ) {
+	// Support: IE 9-11 only
+	// Also use offsetWidth/offsetHeight for when box sizing is unreliable
+	// We use getClientRects() to check for hidden/disconnected.
+	// In those cases, the computed value can be trusted to be border-box
+	if ( ( !support.boxSizingReliable() && isBorderBox ||
+		val === "auto" ||
+		!parseFloat( val ) && jQuery.css( elem, "display", false, styles ) === "inline" ) &&
+		elem.getClientRects().length ) {
 
-		val = elem[ "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 ) ];
+		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
 
-		// offsetWidth/offsetHeight provide border-box values
-		valueIsBorderBox = true;
+		// Where available, offsetWidth/offsetHeight approximate border box dimensions.
+		// Where not available (e.g., SVG), assume unreliable box-sizing and interpret the
+		// retrieved value as a content box dimension.
+		valueIsBorderBox = offsetProp in elem;
+		if ( valueIsBorderBox ) {
+			val = elem[ offsetProp ];
+		}
 	}
 
 	// Normalize "" and auto
@@ -6589,6 +6791,13 @@ jQuery.extend( {
 		"flexGrow": true,
 		"flexShrink": true,
 		"fontWeight": true,
+		"gridArea": true,
+		"gridColumn": true,
+		"gridColumnEnd": true,
+		"gridColumnStart": true,
+		"gridRow": true,
+		"gridRowEnd": true,
+		"gridRowStart": true,
 		"lineHeight": true,
 		"opacity": true,
 		"order": true,
@@ -6644,7 +6853,9 @@ jQuery.extend( {
 			}
 
 			// If a number was passed in, add the unit (except for certain CSS properties)
-			if ( type === "number" ) {
+			// The isCustomProp check can be removed in jQuery 4.0 when we only auto-append
+			// "px" to a few hardcoded values.
+			if ( type === "number" && !isCustomProp ) {
 				value += ret && ret[ 3 ] || ( jQuery.cssNumber[ origName ] ? "" : "px" );
 			}
 
@@ -6744,18 +6955,29 @@ jQuery.each( [ "height", "width" ], function( i, dimension ) {
 		set: function( elem, value, extra ) {
 			var matches,
 				styles = getStyles( elem ),
-				isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
-				subtract = extra && boxModelAdjustment(
-					elem,
-					dimension,
-					extra,
-					isBorderBox,
-					styles
-				);
+
+				// Only read styles.position if the test has a chance to fail
+				// to avoid forcing a reflow.
+				scrollboxSizeBuggy = !support.scrollboxSize() &&
+					styles.position === "absolute",
+
+				// To avoid forcing a reflow, only fetch boxSizing if we need it (gh-3991)
+				boxSizingNeeded = scrollboxSizeBuggy || extra,
+				isBorderBox = boxSizingNeeded &&
+					jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
+				subtract = extra ?
+					boxModelAdjustment(
+						elem,
+						dimension,
+						extra,
+						isBorderBox,
+						styles
+					) :
+					0;
 
 			// Account for unreliable border-box dimensions by comparing offset* to computed and
 			// faking a content-box to get border and padding (gh-3699)
-			if ( isBorderBox && support.scrollboxSize() === styles.position ) {
+			if ( isBorderBox && scrollboxSizeBuggy ) {
 				subtract -= Math.ceil(
 					elem[ "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 ) ] -
 					parseFloat( styles[ dimension ] ) -
@@ -6923,9 +7145,9 @@ Tween.propHooks = {
 			// Use .style if available and use plain properties where available.
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
-			} else if ( tween.elem.nodeType === 1 &&
-				( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] != null ||
-					jQuery.cssHooks[ tween.prop ] ) ) {
+			} else if ( tween.elem.nodeType === 1 && (
+					jQuery.cssHooks[ tween.prop ] ||
+					tween.elem.style[ finalPropName( tween.prop ) ] != null ) ) {
 				jQuery.style( tween.elem, tween.prop, tween.now + tween.unit );
 			} else {
 				tween.elem[ tween.prop ] = tween.now;
@@ -8632,6 +8854,10 @@ jQuery.param = function( a, traditional ) {
 				encodeURIComponent( value == null ? "" : value );
 		};
 
+	if ( a == null ) {
+		return "";
+	}
+
 	// If an array was passed in, assume that it is an array of form elements.
 	if ( Array.isArray( a ) || ( a.jquery && !jQuery.isPlainObject( a ) ) ) {
 
@@ -9134,12 +9360,14 @@ jQuery.extend( {
 						if ( !responseHeaders ) {
 							responseHeaders = {};
 							while ( ( match = rheaders.exec( responseHeadersString ) ) ) {
-								responseHeaders[ match[ 1 ].toLowerCase() ] = match[ 2 ];
+								responseHeaders[ match[ 1 ].toLowerCase() + " " ] =
+									( responseHeaders[ match[ 1 ].toLowerCase() + " " ] || [] )
+										.concat( match[ 2 ] );
 							}
 						}
-						match = responseHeaders[ key.toLowerCase() ];
+						match = responseHeaders[ key.toLowerCase() + " " ];
 					}
-					return match == null ? null : match;
+					return match == null ? null : match.join( ", " );
 				},
 
 				// Raw string
@@ -9528,7 +9756,7 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 } );
 
 
-jQuery._evalUrl = function( url ) {
+jQuery._evalUrl = function( url, options ) {
 	return jQuery.ajax( {
 		url: url,
 
@@ -9538,7 +9766,16 @@ jQuery._evalUrl = function( url ) {
 		cache: true,
 		async: false,
 		global: false,
-		"throws": true
+
+		// Only evaluate the response if it is successful (gh-4126)
+		// dataFilter is not invoked for failure responses, so using it instead
+		// of the default converter is kludgy but it works.
+		converters: {
+			"text script": function() {}
+		},
+		dataFilter: function( response ) {
+			jQuery.globalEval( response, options );
+		}
 	} );
 };
 
@@ -9821,24 +10058,21 @@ jQuery.ajaxPrefilter( "script", function( s ) {
 // Bind script tag hack transport
 jQuery.ajaxTransport( "script", function( s ) {
 
-	// This transport only deals with cross domain requests
-	if ( s.crossDomain ) {
+	// This transport only deals with cross domain or forced-by-attrs requests
+	if ( s.crossDomain || s.scriptAttrs ) {
 		var script, callback;
 		return {
 			send: function( _, complete ) {
-				script = jQuery( "<script>" ).prop( {
-					charset: s.scriptCharset,
-					src: s.url
-				} ).on(
-					"load error",
-					callback = function( evt ) {
+				script = jQuery( "<script>" )
+					.attr( s.scriptAttrs || {} )
+					.prop( { charset: s.scriptCharset, src: s.url } )
+					.on( "load error", callback = function( evt ) {
 						script.remove();
 						callback = null;
 						if ( evt ) {
 							complete( evt.type === "error" ? 404 : 200, evt.type );
 						}
-					}
-				);
+					} );
 
 				// Use native DOM manipulation to avoid our domManip AJAX trickery
 				document.head.appendChild( script[ 0 ] );
@@ -14299,7 +14533,7 @@ exports.homedir = function () {
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.7
+ * @version 1.15.0
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -15909,7 +16143,14 @@ function flip(data, options) {
 
     // flip the variation if required
     var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-    var flippedVariation = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
+
+    // flips variation if reference element overflows boundaries
+    var flippedVariationByRef = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
+
+    // flips variation if popper content overflows boundaries
+    var flippedVariationByContent = !!options.flipVariationsByContent && (isVertical && variation === 'start' && overflowsRight || isVertical && variation === 'end' && overflowsLeft || !isVertical && variation === 'start' && overflowsBottom || !isVertical && variation === 'end' && overflowsTop);
+
+    var flippedVariation = flippedVariationByRef || flippedVariationByContent;
 
     if (overlapsRef || overflowsBoundaries || flippedVariation) {
       // this boolean to detect any flip loop
@@ -16516,7 +16757,23 @@ var modifiers = {
      * The popper will never be placed outside of the defined boundaries
      * (except if `keepTogether` is enabled)
      */
-    boundariesElement: 'viewport'
+    boundariesElement: 'viewport',
+    /**
+     * @prop {Boolean} flipVariations=false
+     * The popper will switch placement variation between `-start` and `-end` when
+     * the reference element overlaps its boundaries.
+     *
+     * The original placement should have a set variation.
+     */
+    flipVariations: false,
+    /**
+     * @prop {Boolean} flipVariationsByContent=false
+     * The popper will switch placement variation between `-start` and `-end` when
+     * the popper element overlaps its reference boundaries.
+     *
+     * The original placement should have a set variation.
+     */
+    flipVariationsByContent: false
   },
 
   /**
@@ -16733,8 +16990,8 @@ var Popper = function () {
   /**
    * Creates a new Popper.js instance.
    * @class Popper
-   * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
-   * @param {HTMLElement} popper - The HTML element used as the popper
+   * @param {Element|referenceObject} reference - The reference element used to position the popper
+   * @param {Element} popper - The HTML / XML element used as the popper
    * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
    * @return {Object} instance - The generated Popper.js instance
    */
@@ -17838,14 +18095,13 @@ var ModalService = require("services/ModalService");
 Vue.component("add-item-to-basket-overlay", {
   delimiters: ["${", "}"],
   props: {
-    basketAddInformation: String,
     template: {
       type: String,
-      default: "#vue-add-item-to-basket-overlay"
+      "default": "#vue-add-item-to-basket-overlay"
     },
     defaultTimeToClose: {
       type: Number,
-      default: 15
+      "default": 15
     }
   },
   data: function data() {
@@ -17889,25 +18145,16 @@ Vue.component("add-item-to-basket-overlay", {
   })),
   watch: {
     latestBasketEntry: function latestBasketEntry() {
-      if (this.basketAddInformation === "overlay") {
+      if (App.config.basket.addItemToBasketConfirm === "overlay") {
         this.setPriceFromData();
         ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
-      } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
-        setTimeout(function () {
-          var vueApp = document.querySelector("#vue-app");
-          var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-
-          if (vueApp) {
-            vueApp.classList.add(basketOpenClass);
-          }
-        }, 1);
       }
     }
   },
   methods: {
     setPriceFromData: function setPriceFromData() {
       if (this.latestBasketEntry.item.prices) {
-        this.currency = this.latestBasketEntry.item.prices.default.currency;
+        this.currency = this.latestBasketEntry.item.prices["default"].currency;
         var graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
         var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
         this.price = this.$options.filters.specialOffer(graduatedPrice, this.latestBasketEntry.item.prices, "price", "value") + propertySurcharge;
@@ -17931,12 +18178,18 @@ Vue.component("add-item-to-basket-overlay", {
       var orderParam = orderParams.find(function (param) {
         return parseInt(param.property.id) === parseInt(propertyId);
       });
-      return orderParam.property.value;
+      var orderParamValue = orderParam.property.value;
+
+      if (property.property.valueType === "selection" && orderParamValue) {
+        return orderParam.property.selectionValues[orderParamValue].name;
+      }
+
+      return orderParamValue;
     }
   }
 });
 
-},{"../../helper/utils":270,"services/ModalService":277}],142:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ModalService":278}],142:[function(require,module,exports){
 "use strict";
 
 var _ExceptionMap = _interopRequireDefault(require("exceptions/ExceptionMap"));
@@ -17947,7 +18200,7 @@ var _UrlService = require("services/UrlService");
 
 var _utils = require("../../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -17959,20 +18212,20 @@ Vue.component("add-to-basket", {
   props: {
     template: {
       type: String,
-      default: "#vue-add-to-basket"
+      "default": "#vue-add-to-basket"
     },
     itemUrl: String,
     showQuantity: {
       type: Boolean,
-      default: false
+      "default": false
     },
     useLargeScale: {
       type: Boolean,
-      default: false
+      "default": false
     },
     missingOrderProperties: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     },
@@ -17981,41 +18234,38 @@ Vue.component("add-to-basket", {
     },
     isSalable: {
       type: Boolean,
-      default: false
+      "default": false
     },
     hasChildren: {
       type: Boolean,
-      default: false
+      "default": false
     },
     intervalQuantity: {
       type: Number,
-      default: 1
+      "default": 1
     },
     minimumQuantity: {
       type: Number,
-      default: 0
+      "default": 0
     },
     maximumQuantity: {
       type: Number,
-      default: null
+      "default": null
     },
     orderProperties: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     },
     hasPrice: {
       type: Boolean,
-      default: true
+      "default": true
     }
   },
   computed: _objectSpread({
-    computedMinimumQuantity: function computedMinimumQuantity() {
-      return this.minimumQuantity <= 0 ? this.intervalQuantity : this.minimumQuantity;
-    },
     canBeAddedToBasket: function canBeAddedToBasket() {
-      return this.isSalable && !this.hasChildren && (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) && !this.requiresProperties && this.hasPrice;
+      return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice;
     },
     requiresProperties: function requiresProperties() {
       return App.config.item.requireOrderProperties && this.orderProperties.filter(function (property) {
@@ -18074,7 +18324,7 @@ Vue.component("add-to-basket", {
           _this.waiting = false;
 
           if (error.data) {
-            NotificationService.error(_TranslationService.default.translate("Ceres::Template." + _ExceptionMap.default.get(error.data.exceptionCode.toString()))).closeAfter(5000);
+            NotificationService.error(_TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()))).closeAfter(5000);
           }
         });
       }
@@ -18099,8 +18349,8 @@ Vue.component("add-to-basket", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -18109,7 +18359,7 @@ Vue.component("add-to-basket", {
         }
       }
 
-      NotificationService.error(_TranslationService.default.translate("Ceres::Template.singleItemMissingOrderPropertiesError").replace("<properties>", errorMsgContent));
+      NotificationService.error(_TranslationService["default"].translate("Ceres::Template.singleItemMissingOrderPropertiesError").replace("<properties>", errorMsgContent));
     },
     directToItem: function directToItem() {
       (0, _UrlService.navigateTo)(this.itemUrl);
@@ -18145,23 +18395,23 @@ Vue.component("add-to-basket", {
   }
 });
 
-},{"../../helper/utils":270,"exceptions/ExceptionMap":240,"services/NotificationService":278,"services/TranslationService":279,"services/UrlService":280}],143:[function(require,module,exports){
+},{"../../helper/utils":271,"exceptions/ExceptionMap":240,"services/NotificationService":279,"services/TranslationService":280,"services/UrlService":281}],143:[function(require,module,exports){
 "use strict";
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.component("basket-preview", {
   delimiters: ["${", "}"],
   props: {
     template: {
       type: String,
-      default: "#vue-basket-preview"
+      "default": "#vue-basket-preview"
     },
     showNetPrices: {
       type: Boolean,
-      default: false
+      "default": false
     }
   },
   computed: Vuex.mapState({
@@ -18173,6 +18423,9 @@ Vue.component("basket-preview", {
     },
     basketNotifications: function basketNotifications(state) {
       return state.basket.basketNotifications;
+    },
+    latestBasketEntry: function latestBasketEntry(state) {
+      return state.basket.latestEntry;
     }
   }),
   created: function created() {
@@ -18187,27 +18440,41 @@ Vue.component("basket-preview", {
     var _this = this;
 
     this.$nextTick(function () {
-      _ApiService.default.listen("AfterBasketChanged", function (data) {
+      _ApiService["default"].listen("AfterBasketChanged", function (data) {
         _this.$store.commit("setBasket", data.basket);
 
         _this.$store.commit("setShowNetPrices", data.showNetPrices);
       });
     });
+  },
+  watch: {
+    latestBasketEntry: function latestBasketEntry() {
+      if (App.config.basket.addItemToBasketConfirm === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
+        setTimeout(function () {
+          var vueApp = document.querySelector("#vue-app");
+          var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
+
+          if (vueApp) {
+            vueApp.classList.add(basketOpenClass);
+          }
+        }, 1);
+      }
+    }
   }
 });
 
-},{"services/ApiService":274}],144:[function(require,module,exports){
+},{"services/ApiService":275}],144:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-totals", {
   props: {
     template: {
       type: String,
-      default: "#vue-basket-totals"
+      "default": "#vue-basket-totals"
     },
     visibleFields: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"];
       }
     }
@@ -18235,7 +18502,7 @@ Vue.component("basket-totals", {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -18247,7 +18514,7 @@ Vue.component("coupon", {
   props: {
     template: {
       type: String,
-      default: "#vue-coupon"
+      "default": "#vue-coupon"
     }
   },
   data: function data() {
@@ -18300,13 +18567,13 @@ Vue.component("coupon", {
         this.waiting = true;
         this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
           _this2.waiting = false;
-          NotificationService.success(_TranslationService.default.translate("Ceres::Template.couponRedeemSuccess")).closeAfter(10000);
+          NotificationService.success(_TranslationService["default"].translate("Ceres::Template.couponRedeemSuccess")).closeAfter(10000);
         }, function (error) {
           _this2.waiting = false;
           NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
         });
       } else {
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.couponIsEmpty")).closeAfter(10000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.couponIsEmpty")).closeAfter(10000);
       }
     },
     removeCode: function removeCode() {
@@ -18315,10 +18582,10 @@ Vue.component("coupon", {
       this.waiting = true;
       this.$store.dispatch("removeCouponCode", this.couponCode).then(function (response) {
         _this3.waiting = false;
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.couponRemoveSuccess")).closeAfter(10000);
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.couponRemoveSuccess")).closeAfter(10000);
       }, function (error) {
         _this3.waiting = false;
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.couponRemoveFailure")).closeAfter(10000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.couponRemoveFailure")).closeAfter(10000);
       });
     },
     getCouponRedemtionErrorMessage: function getCouponRedemtionErrorMessage(error) {
@@ -18345,30 +18612,30 @@ Vue.component("coupon", {
       };
 
       if (error && error.error && error.code && errorMessageKeys[error.code]) {
-        return _TranslationService.default.translate("Ceres::Template." + errorMessageKeys[error.code]);
+        return _TranslationService["default"].translate("Ceres::Template." + errorMessageKeys[error.code]);
       }
 
-      return _TranslationService.default.translate("Ceres::Template.couponRedeemFailure");
+      return _TranslationService["default"].translate("Ceres::Template.couponRedeemFailure");
     }
   }
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279}],146:[function(require,module,exports){
+},{"services/NotificationService":279,"services/TranslationService":280}],146:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-list", {
   props: {
     template: {
       type: String,
-      default: "#vue-basket-list"
+      "default": "#vue-basket-list"
     },
     size: {
       type: String,
-      default: "small"
+      "default": "small"
     },
     isPreview: {
       type: Boolean,
-      default: false
+      "default": false
     }
   },
   computed: Vuex.mapState({
@@ -18392,7 +18659,7 @@ var _utils = require("../../../helper/utils");
 
 var _VariationPropertyService = require("../../../services/VariationPropertyService");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -18447,8 +18714,8 @@ Vue.component("basket-list-item", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -18467,14 +18734,14 @@ Vue.component("basket-list-item", {
         return this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
       }
 
-      return this.basketItem.variation.data.prices.default.unitPrice.value;
+      return this.basketItem.variation.data.prices["default"].unitPrice.value;
     },
     basePrice: function basePrice() {
       if (!(0, _utils.isNullOrUndefined)(this.basketItem.variation.data.prices.specialOffer)) {
         return this.basketItem.variation.data.prices.specialOffer.basePrice;
       }
 
-      return this.basketItem.variation.data.prices.default.basePrice;
+      return this.basketItem.variation.data.prices["default"].basePrice;
     },
     transformedVariationProperties: function transformedVariationProperties() {
       return (0, _VariationPropertyService.transformBasketItemProperties)(this.basketItem, ["empty"], "displayInOrderProcess");
@@ -18534,10 +18801,10 @@ Vue.component("basket-list-item", {
           if (_this2.isPreview) {
             _this2.$store.dispatch("addBasketNotification", {
               type: "error",
-              message: _TranslationService.default.translate("Ceres::Template." + _ExceptionMap.default.get(error.data.exceptionCode.toString()))
+              message: _TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()))
             });
           } else {
-            NotificationService.error(_TranslationService.default.translate("Ceres::Template." + _ExceptionMap.default.get(error.data.exceptionCode.toString()))).closeAfter(5000);
+            NotificationService.error(_TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()))).closeAfter(5000);
           }
 
           _this2.waiting = false;
@@ -18558,12 +18825,12 @@ Vue.component("basket-list-item", {
   }
 });
 
-},{"../../../helper/utils":270,"../../../services/VariationPropertyService":282,"exceptions/ExceptionMap":240,"services/NotificationService":278,"services/TranslationService":279}],148:[function(require,module,exports){
+},{"../../../helper/utils":271,"../../../services/VariationPropertyService":283,"exceptions/ExceptionMap":240,"services/NotificationService":279,"services/TranslationService":280}],148:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -18575,7 +18842,7 @@ Vue.component("accept-gtc-check", {
   props: {
     template: {
       type: String,
-      default: "#vue-accept-gtc-check"
+      "default": "#vue-accept-gtc-check"
     },
     hideCheckbox: {
       type: Boolean
@@ -18585,11 +18852,11 @@ Vue.component("accept-gtc-check", {
     },
     isRequired: {
       type: Boolean,
-      default: true
+      "default": true
     },
     customText: {
       type: String,
-      default: ""
+      "default": ""
     }
   },
   data: function data() {
@@ -18615,7 +18882,7 @@ Vue.component("accept-gtc-check", {
       this.$store.commit("setGtcShowError", showError);
 
       if (showError) {
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.checkoutCheckAcceptGtc"));
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.checkoutCheckAcceptGtc"));
       }
     }
   },
@@ -18628,14 +18895,14 @@ Vue.component("accept-gtc-check", {
   }
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279}],149:[function(require,module,exports){
+},{"services/NotificationService":279,"services/TranslationService":280}],149:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
 var _UrlService = require("../../services/UrlService");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -18649,7 +18916,7 @@ Vue.component("checkout", {
   props: {
     template: {
       type: String,
-      default: "#vue-checkout"
+      "default": "#vue-checkout"
     },
     initialCheckout: {
       type: Object,
@@ -18657,23 +18924,23 @@ Vue.component("checkout", {
     },
     deliveryAddressList: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     },
     selectedDeliveryAddress: {
       type: Number,
-      default: -99
+      "default": -99
     },
     billingAddressList: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     },
     selectedBillingAddress: {
       type: Number,
-      default: 0
+      "default": 0
     }
   },
   computed: Vuex.mapState({
@@ -18724,7 +18991,7 @@ Vue.component("checkout", {
     },
     handleCheckoutChangedEvent: function handleCheckoutChangedEvent(checkout) {
       if (!this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
-        NotificationService.info(_TranslationService.default.translate("Ceres::Template.checkoutMethodOfPaymentListChanged"));
+        NotificationService.info(_TranslationService["default"].translate("Ceres::Template.checkoutMethodOfPaymentListChanged"));
         this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
       }
 
@@ -18733,12 +19000,12 @@ Vue.component("checkout", {
       }
 
       if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId) {
-        NotificationService.warn(_TranslationService.default.translate("Ceres::Template.checkoutMethodOfPaymentChanged"));
+        NotificationService.warn(_TranslationService["default"].translate("Ceres::Template.checkoutMethodOfPaymentChanged"));
         this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
       }
 
       if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId) {
-        NotificationService.warn(_TranslationService.default.translate("Ceres::Template.checkoutShippingProfileChanged"));
+        NotificationService.warn(_TranslationService["default"].translate("Ceres::Template.checkoutShippingProfileChanged"));
         this.$store.commit("setShippingProfile", checkout.shippingProfileId);
       }
 
@@ -18749,7 +19016,7 @@ Vue.component("checkout", {
       var responseDeliveryAddressId = checkout.deliveryAddressId !== 0 ? checkout.deliveryAddressId : -99;
 
       if (this.deliveryAddressId !== responseDeliveryAddressId) {
-        NotificationService.warn(_TranslationService.default.translate("Ceres::Template.addressChangedWarning"));
+        NotificationService.warn(_TranslationService["default"].translate("Ceres::Template.addressChangedWarning"));
         this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
       }
 
@@ -18764,7 +19031,7 @@ Vue.component("checkout", {
     },
     hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
       if (oldList.length !== newList.length) {
-        NotificationService.info(_TranslationService.default.translate("Ceres::Template.checkoutShippingProfileListChanged"));
+        NotificationService.info(_TranslationService["default"].translate("Ceres::Template.checkoutShippingProfileListChanged"));
         return true;
       }
 
@@ -18773,10 +19040,10 @@ Vue.component("checkout", {
 
       for (var index in oldList) {
         if (oldList[index].parcelServicePresetId !== newList[index].parcelServicePresetId) {
-          NotificationService.info(_TranslationService.default.translate("Ceres::Template.checkoutShippingProfileListChanged"));
+          NotificationService.info(_TranslationService["default"].translate("Ceres::Template.checkoutShippingProfileListChanged"));
           return true;
         } else if (oldList[index].shippingAmount !== newList[index].shippingAmount) {
-          NotificationService.info(_TranslationService.default.translate("Ceres::Template.checkoutShippingProfilePriceChanged"));
+          NotificationService.info(_TranslationService["default"].translate("Ceres::Template.checkoutShippingProfilePriceChanged"));
           return true;
         } else if (oldList[index].shippingPrivacyInformation !== newList[index].shippingPrivacyInformation) {
           return true;
@@ -18817,8 +19084,8 @@ Vue.component("checkout", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -18849,14 +19116,14 @@ Vue.component("checkout", {
   }
 });
 
-},{"../../services/UrlService":280,"lodash/isEqual":121,"services/ApiService":274,"services/NotificationService":278,"services/TranslationService":279}],150:[function(require,module,exports){
+},{"../../services/UrlService":281,"lodash/isEqual":121,"services/ApiService":275,"services/NotificationService":279,"services/TranslationService":280}],150:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-wish-input", {
   props: {
     template: {
       type: String,
-      default: "#vue-contact-wish-input"
+      "default": "#vue-contact-wish-input"
     }
   },
   computed: Vuex.mapState({
@@ -18876,7 +19143,7 @@ Vue.component("contact-wish-input", {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var NotificationService = require("services/NotificationService");
 
@@ -18884,15 +19151,15 @@ Vue.component("payment-provider-select", {
   props: {
     template: {
       type: String,
-      default: "#vue-payment-provider-select"
+      "default": "#vue-payment-provider-select"
     },
     paddingClasses: {
       type: String,
-      default: null
+      "default": null
     },
     paddingInlineStyles: {
       type: String,
-      default: null
+      "default": null
     }
   },
   computed: Vuex.mapState({
@@ -18940,13 +19207,13 @@ Vue.component("payment-provider-select", {
       this.$store.commit("setPaymentProviderShowError", showError);
 
       if (showError) {
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.checkoutCheckPaymentProvider"));
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.checkoutCheckPaymentProvider"));
       }
     }
   }
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279}],152:[function(require,module,exports){
+},{"services/NotificationService":279,"services/TranslationService":280}],152:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -18965,25 +19232,25 @@ Vue.component("place-order", {
   props: {
     template: {
       type: String,
-      default: "#vue-place-order"
+      "default": "#vue-place-order"
     },
     targetContinue: {
       type: String
     },
     buttonSize: {
       type: [String, null],
-      default: null,
+      "default": null,
       validator: function validator(value) {
         return ["sm", "lg"].indexOf(value) !== -1;
       }
     },
     paddingClasses: {
       type: String,
-      default: null
+      "default": null
     },
     paddingInlineStyles: {
       type: String,
-      default: null
+      "default": null
     }
   },
   data: function data() {
@@ -19138,12 +19405,12 @@ Vue.component("place-order", {
   }
 });
 
-},{"../../helper/utils":270,"services/ApiService":274,"services/NotificationService":278,"services/UrlService":280}],153:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275,"services/NotificationService":279,"services/UrlService":281}],153:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -19155,7 +19422,7 @@ Vue.component("shipping-privacy-hint-check", {
   props: {
     template: {
       type: String,
-      default: "#vue-shipping-privacy-hint-check"
+      "default": "#vue-shipping-privacy-hint-check"
     }
   },
   computed: _objectSpread({
@@ -19176,7 +19443,7 @@ Vue.component("shipping-privacy-hint-check", {
       return [];
     },
     privacyHintContent: function privacyHintContent() {
-      var andTranslation = _TranslationService.default.translate("Ceres::Template.checkoutShippingPrivacyHintAnd");
+      var andTranslation = _TranslationService["default"].translate("Ceres::Template.checkoutShippingPrivacyHintAnd");
 
       var parcelServiceInformation = "";
       var _iteratorNormalCompletion = true;
@@ -19198,8 +19465,8 @@ Vue.component("shipping-privacy-hint-check", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -19208,7 +19475,7 @@ Vue.component("shipping-privacy-hint-check", {
         }
       }
 
-      return _TranslationService.default.translate("Ceres::Template.checkoutShippingPrivacyHint", {
+      return _TranslationService["default"].translate("Ceres::Template.checkoutShippingPrivacyHint", {
         parcelServiceInformation: parcelServiceInformation
       });
     }
@@ -19233,7 +19500,7 @@ Vue.component("shipping-privacy-hint-check", {
       if (this.shippingPrivacyHintAccepted && value.parcelServiceId !== oldValue.parcelServiceId) {
         this.setValue(false);
         $(this.$refs.formCheck).fadeTo(100, 0.1).fadeTo(400, 1.0);
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.checkoutShippingPrivacyReseted"));
       } else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint) {
         this.setValue(false);
       }
@@ -19241,12 +19508,12 @@ Vue.component("shipping-privacy-hint-check", {
   }
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279}],154:[function(require,module,exports){
+},{"services/NotificationService":279,"services/TranslationService":280}],154:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var NotificationService = require("services/NotificationService");
 
@@ -19254,15 +19521,15 @@ Vue.component("shipping-profile-select", {
   props: {
     template: {
       type: String,
-      default: "#vue-shipping-profile-select"
+      "default": "#vue-shipping-profile-select"
     },
     paddingClasses: {
       type: String,
-      default: null
+      "default": null
     },
     paddingInlineStyles: {
       type: String,
-      default: null
+      "default": null
     }
   },
   computed: Vuex.mapState({
@@ -19316,30 +19583,30 @@ Vue.component("shipping-profile-select", {
       this.$store.commit("setShippingProfileShowError", showError);
 
       if (showError) {
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.checkoutCheckShippingProfile"));
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.checkoutCheckShippingProfile"));
       }
     }
   }
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279}],155:[function(require,module,exports){
+},{"services/NotificationService":279,"services/TranslationService":280}],155:[function(require,module,exports){
 "use strict";
 
 var _NotificationService = _interopRequireDefault(require("services/NotificationService"));
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.component("subscribe-newsletter-check", {
   props: {
     template: {
       type: String,
-      default: "#vue-subscribe-newsletter-check"
+      "default": "#vue-subscribe-newsletter-check"
     },
     emailFolder: {
       type: Number,
-      default: 0
+      "default": 0
     },
     hideCheckbox: {
       type: Boolean
@@ -19349,11 +19616,11 @@ Vue.component("subscribe-newsletter-check", {
     },
     isRequired: {
       type: Boolean,
-      default: true
+      "default": true
     },
     customText: {
       type: String,
-      default: ""
+      "default": ""
     }
   },
   computed: Vuex.mapState({
@@ -19395,7 +19662,7 @@ Vue.component("subscribe-newsletter-check", {
       });
 
       if (showError) {
-        _NotificationService.default.error(_TranslationService.default.translate("Ceres::Template.checkoutCheckAcceptNewsletterSubscription"));
+        _NotificationService["default"].error(_TranslationService["default"].translate("Ceres::Template.checkoutCheckAcceptNewsletterSubscription"));
       }
     }
   },
@@ -19408,33 +19675,33 @@ Vue.component("subscribe-newsletter-check", {
   }
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279}],156:[function(require,module,exports){
+},{"services/NotificationService":279,"services/TranslationService":280}],156:[function(require,module,exports){
 "use strict";
 
 Vue.component("tab-item", {
   render: function render(createElement) {
     return createElement("div", {
       staticClass: "tab-pane",
-      class: {
+      "class": {
         active: this.localActive
       },
       attrs: {
         role: "tabpanel"
       }
-    }, [this.$slots.default]);
+    }, [this.$slots["default"]]);
   },
   props: {
     active: {
       type: Boolean,
-      default: false
+      "default": false
     },
     title: {
       type: String,
-      default: null
+      "default": null
     },
     dataBuilderClickable: {
       type: Boolean,
-      default: false
+      "default": false
     }
   },
   data: function data() {
@@ -19470,7 +19737,7 @@ var TabNavItem = {
 
     var anchor = createElement("a", {
       staticClass: "nav-link text-appearance",
-      class: {
+      "class": {
         active: this.tab.localActive
       },
       attrs: anchorAttrs,
@@ -19489,11 +19756,11 @@ var TabNavItem = {
   props: {
     tab: {
       type: Object,
-      default: null
+      "default": null
     },
     tabIndex: {
       type: Number,
-      default: null
+      "default": null
     }
   }
 };
@@ -19518,20 +19785,20 @@ Vue.component("tab-list", {
     });
     var nav = createElement("ul", {
       staticClass: "nav nav-tabs",
-      class: ["widget-" + this.appearance],
+      "class": ["widget-" + this.appearance],
       attrs: {
         role: "tablist"
       }
     }, [navElements]);
     var content = createElement("div", {
       staticClass: "tab-content"
-    }, [this.$slots.default]);
+    }, [this.$slots["default"]]);
     return createElement("div", {}, [nav, content]);
   },
   props: {
     appearance: {
       type: String,
-      default: "none"
+      "default": "none"
     }
   },
   data: function data() {
@@ -19548,12 +19815,12 @@ Vue.component("tab-list", {
   },
   methods: {
     getTabs: function getTabs() {
-      var tabs = this.$slots.default || [];
+      var tabs = this.$slots["default"] || [];
       var tabComps = tabs.map(function (vnode) {
         return vnode.componentInstance;
       });
       return tabComps.filter(function (tab) {
-        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots.default);
+        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots["default"]);
       });
     },
     updateTabs: function updateTabs() {
@@ -19572,7 +19839,7 @@ Vue.component("tab-list", {
   }
 });
 
-},{"../../helper/utils":270}],158:[function(require,module,exports){
+},{"../../helper/utils":271}],158:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -19581,23 +19848,23 @@ Vue.component("last-seen-item-list", {
   props: {
     template: {
       type: String,
-      default: "#vue-last-seen-item-list"
+      "default": "#vue-last-seen-item-list"
     },
     itemsPerPage: {
       type: Number,
-      default: 4
+      "default": 4
     },
     maxItems: {
       type: Number,
-      default: 4
+      "default": 4
     },
     paddingClasses: {
       type: String,
-      default: null
+      "default": null
     },
     paddingInlineStyles: {
       type: String,
-      default: null
+      "default": null
     }
   },
   computed: Vuex.mapState({
@@ -19628,14 +19895,14 @@ Vue.component("last-seen-item-list", {
   }
 });
 
-},{"../../helper/utils":270}],159:[function(require,module,exports){
+},{"../../helper/utils":271}],159:[function(require,module,exports){
 "use strict";
 
 Vue.component("accept-privacy-policy-check", {
   props: {
     template: {
       type: String,
-      default: "#vue-accept-privacy-policy-check"
+      "default": "#vue-accept-privacy-policy-check"
     },
     value: {
       type: Boolean
@@ -19656,7 +19923,7 @@ Vue.component("accept-privacy-policy-check", {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -19667,20 +19934,20 @@ Vue.component("address-input-group", {
   props: {
     defaultCountry: {
       type: String,
-      default: "DE"
+      "default": "DE"
     },
     addressType: String,
     modalType: String,
     template: String,
     value: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
     optionalAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {
           de: [],
           uk: []
@@ -19689,7 +19956,7 @@ Vue.component("address-input-group", {
     },
     requiredAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {
           de: [],
           uk: []
@@ -19698,7 +19965,7 @@ Vue.component("address-input-group", {
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      "default": "male"
     }
   },
   computed: _objectSpread({
@@ -19781,7 +20048,7 @@ Vue.component("address-input-group", {
       return this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key);
     },
     transformTranslation: function transformTranslation(translationKey, locale, addressKey) {
-      var translation = _TranslationService.default.translate(translationKey);
+      var translation = _TranslationService["default"].translate(translationKey);
 
       var isRequired = this.isInRequiredFields(locale, addressKey);
       return translation + (isRequired ? "*" : "");
@@ -19809,14 +20076,14 @@ Vue.component("address-input-group", {
   }
 });
 
-},{"services/TranslationService":279}],161:[function(require,module,exports){
+},{"services/TranslationService":280}],161:[function(require,module,exports){
 "use strict";
 
 Vue.component("address-header", {
   props: {
     template: {
       type: String,
-      default: "#vue-address-header"
+      "default": "#vue-address-header"
     },
     address: {
       type: Object,
@@ -19849,8 +20116,8 @@ Vue.component("address-header", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
             }
           } finally {
             if (_didIteratorError) {
@@ -19874,7 +20141,7 @@ var _ValidationService = _interopRequireDefault(require("services/ValidationServ
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -19888,7 +20155,7 @@ Vue.component("address-select", {
   props: {
     template: {
       type: String,
-      default: "#vue-address-select"
+      "default": "#vue-address-select"
     },
     addressType: {
       type: String,
@@ -19897,7 +20164,7 @@ Vue.component("address-select", {
     showError: Boolean,
     optionalAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {
           de: [],
           gb: []
@@ -19906,21 +20173,21 @@ Vue.component("address-select", {
     },
     requiredAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      "default": "male"
     },
     paddingClasses: {
       type: String,
-      default: null
+      "default": null
     },
     paddingInlineStyles: {
       type: String,
-      default: null
+      "default": null
     }
   },
   data: function data() {
@@ -20042,7 +20309,7 @@ Vue.component("address-select", {
       this.updateHeadline();
 
       if (this.modalType === "create") {
-        _ValidationService.default.unmarkAllFields($(this.$refs.addressModal));
+        _ValidationService["default"].unmarkAllFields($(this.$refs.addressModal));
       }
 
       this.addressModal.show();
@@ -20062,7 +20329,7 @@ Vue.component("address-select", {
 
       this.updateHeadline();
 
-      _ValidationService.default.unmarkAllFields($(this.$refs.addressModal));
+      _ValidationService["default"].unmarkAllFields($(this.$refs.addressModal));
 
       this.addressModal.show();
     },
@@ -20086,8 +20353,8 @@ Vue.component("address-select", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
             }
           } finally {
             if (_didIteratorError) {
@@ -20151,21 +20418,21 @@ Vue.component("address-select", {
       var headline;
 
       if (this.modalType === "initial") {
-        headline = _TranslationService.default.translate("Ceres::Template.addressInvoiceAddressInitial");
+        headline = _TranslationService["default"].translate("Ceres::Template.addressInvoiceAddressInitial");
       } else if (this.addressType === "2") {
         if (this.modalType === "update") {
-          headline = _TranslationService.default.translate("Ceres::Template.addressShippingAddressEdit");
+          headline = _TranslationService["default"].translate("Ceres::Template.addressShippingAddressEdit");
         } else if (this.modalType === "create") {
-          headline = _TranslationService.default.translate("Ceres::Template.addressShippingAddressCreate");
+          headline = _TranslationService["default"].translate("Ceres::Template.addressShippingAddressCreate");
         } else {
-          headline = _TranslationService.default.translate("Ceres::Template.addressShippingAddressDelete");
+          headline = _TranslationService["default"].translate("Ceres::Template.addressShippingAddressDelete");
         }
       } else if (this.modalType === "update") {
-        headline = _TranslationService.default.translate("Ceres::Template.addressInvoiceAddressEdit");
+        headline = _TranslationService["default"].translate("Ceres::Template.addressInvoiceAddressEdit");
       } else if (this.modalType === "create") {
-        headline = _TranslationService.default.translate("Ceres::Template.addressInvoiceAddressCreate");
+        headline = _TranslationService["default"].translate("Ceres::Template.addressInvoiceAddressCreate");
       } else {
-        headline = _TranslationService.default.translate("Ceres::Template.addressInvoiceAddressDelete");
+        headline = _TranslationService["default"].translate("Ceres::Template.addressInvoiceAddressDelete");
       }
 
       this.headline = headline;
@@ -20212,8 +20479,8 @@ Vue.component("address-select", {
           _iteratorError2 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-              _iterator2.return();
+            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+              _iterator2["return"]();
             }
           } finally {
             if (_didIteratorError2) {
@@ -20235,14 +20502,14 @@ Vue.component("address-select", {
   }
 });
 
-},{"../../../helper/utils":270,"services/ApiService":274,"services/ModalService":277,"services/TranslationService":279,"services/ValidationService":281}],163:[function(require,module,exports){
+},{"../../../helper/utils":271,"services/ApiService":275,"services/ModalService":278,"services/TranslationService":280,"services/ValidationService":282}],163:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var NotificationService = require("services/NotificationService");
 
@@ -20251,13 +20518,13 @@ Vue.component("create-update-address", {
   props: {
     addressData: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
     addressModal: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
@@ -20266,19 +20533,19 @@ Vue.component("create-update-address", {
     template: String,
     optionalAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
     requiredAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      "default": "male"
     }
   },
   data: function data() {
@@ -20298,7 +20565,7 @@ Vue.component("create-update-address", {
     validate: function validate() {
       var _this = this;
 
-      _ValidationService.default.validate(this.$refs.addressForm).done(function () {
+      _ValidationService["default"].validate(this.$refs.addressForm).done(function () {
         _this.saveAddress();
       }).fail(function (invalidFields) {
         var fieldNames = [];
@@ -20318,8 +20585,8 @@ Vue.component("create-update-address", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
             }
           } finally {
             if (_didIteratorError) {
@@ -20328,9 +20595,9 @@ Vue.component("create-update-address", {
           }
         }
 
-        _ValidationService.default.markInvalidFields(invalidFields, "error");
+        _ValidationService["default"].markInvalidFields(invalidFields, "error");
 
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.checkoutCheckAddressFormFields", {
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
           fields: fieldNames.join(", ")
         }));
       });
@@ -20403,14 +20670,12 @@ Vue.component("create-update-address", {
       });
     },
     _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-      _ValidationService.default.markFailedValidationFields(this.$refs.addressForm, validationErrors);
+      _ValidationService["default"].markFailedValidationFields(this.$refs.addressForm, validationErrors);
 
       var errorMessage = "";
 
-      var _arr = Object.values(validationErrors);
-
-      for (var _i = 0; _i < _arr.length; _i++) {
-        var value = _arr[_i];
+      for (var _i = 0, _Object$values = Object.values(validationErrors); _i < _Object$values.length; _i++) {
+        var value = _Object$values[_i];
         errorMessage += value + "<br>";
       }
 
@@ -20423,7 +20688,7 @@ Vue.component("create-update-address", {
           message: ""
         });
         window.location.reload();
-      }
+      } else this._handleValidationErrors(error);
     },
     _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
       if (typeof this.addressData.options !== "undefined") {
@@ -20496,8 +20761,8 @@ Vue.component("create-update-address", {
           _iteratorError2 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-              _iterator2.return();
+            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+              _iterator2["return"]();
             }
           } finally {
             if (_didIteratorError2) {
@@ -20517,18 +20782,18 @@ Vue.component("create-update-address", {
       var pickupCondition = event.field === "showPickupStation" && event.field.value !== this.addressData.showPickupStation;
 
       if (genderCondition || countryCondition || pickupCondition) {
-        _ValidationService.default.unmarkAllFields(this.$refs.addressForm);
+        _ValidationService["default"].unmarkAllFields(this.$refs.addressForm);
       }
     }
   }
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279,"services/ValidationService":281}],164:[function(require,module,exports){
+},{"services/NotificationService":279,"services/TranslationService":280,"services/ValidationService":282}],164:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var NotificationService = require("services/NotificationService");
 
@@ -20538,31 +20803,31 @@ Vue.component("invoice-address-select", {
   props: {
     optionalAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
     requiredAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      "default": "male"
     },
     hasToValidate: {
       type: Boolean,
-      default: false
+      "default": false
     },
     paddingClasses: {
       type: String,
-      default: null
+      "default": null
     },
     paddingInlineStyles: {
       type: String,
-      default: null
+      "default": null
     }
   },
   computed: Vuex.mapState({
@@ -20624,7 +20889,7 @@ Vue.component("invoice-address-select", {
       this.$store.commit("setInvoiceAddressShowError", showError);
 
       if (showError) {
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.checkoutCheckInvoiceAddress"));
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.checkoutCheckInvoiceAddress"));
       }
     }
   },
@@ -20637,7 +20902,7 @@ Vue.component("invoice-address-select", {
   }
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279}],165:[function(require,module,exports){
+},{"services/NotificationService":279,"services/TranslationService":280}],165:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-address-select", {
@@ -20646,27 +20911,27 @@ Vue.component("shipping-address-select", {
   props: {
     optionalAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
     requiredAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      "default": "male"
     },
     paddingClasses: {
       type: String,
-      default: null
+      "default": null
     },
     paddingInlineStyles: {
       type: String,
-      default: null
+      "default": null
     }
   },
   computed: Vuex.mapState({
@@ -20699,7 +20964,7 @@ Vue.component("shipping-address-select", {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -20709,7 +20974,7 @@ Vue.component("change-email-form", {
   props: {
     template: {
       type: String,
-      default: "#vue-change-email-form"
+      "default": "#vue-change-email-form"
     },
     contactId: {
       type: Number,
@@ -20742,10 +21007,10 @@ Vue.component("change-email-form", {
         password: this.password,
         hash: this.hash
       }).done(function (response) {
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountChangeEmailSuccessful"));
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountChangeEmailSuccessful"));
         window.location.assign(window.location.origin);
       }).fail(function () {
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.myAccountChangeEmailFailed")).closeAfter(10000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.myAccountChangeEmailFailed")).closeAfter(10000);
       }).always(function () {
         _this.isDisabled = false;
       });
@@ -20753,7 +21018,7 @@ Vue.component("change-email-form", {
   }
 });
 
-},{"services/ApiService":274,"services/NotificationService":278,"services/TranslationService":279}],167:[function(require,module,exports){
+},{"services/ApiService":275,"services/NotificationService":279,"services/TranslationService":280}],167:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -20762,7 +21027,7 @@ var _ValidationService = _interopRequireDefault(require("services/ValidationServ
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -20791,7 +21056,7 @@ Vue.component("contact-form", {
     validate: function validate(useCapture) {
       var _this = this;
 
-      _ValidationService.default.validate($("#contact-form")).done(function () {
+      _ValidationService["default"].validate($("#contact-form")).done(function () {
         if (!_this.enableConfirmingPrivacyPolicy || _this.privacyPolicyAccepted) {
           if (useCapture) {
             window.grecaptcha.execute();
@@ -20800,16 +21065,16 @@ Vue.component("contact-form", {
           }
         } else {
           _this.privacyPolicyShowError = true;
-          NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
+          NotificationService.error(_TranslationService["default"].translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
             hyphen: "&shy;"
           }));
         }
       }).fail(function (invalidFields) {
-        _ValidationService.default.markInvalidFields(invalidFields, "error");
+        _ValidationService["default"].markInvalidFields(invalidFields, "error");
 
         if (_this.enableConfirmingPrivacyPolicy && !_this.privacyPolicyAccepted) {
           _this.privacyPolicyShowError = true;
-          NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
+          NotificationService.error(_TranslationService["default"].translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
             hyphen: "&shy;"
           }));
         }
@@ -20831,8 +21096,8 @@ Vue.component("contact-form", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
             }
           } finally {
             if (_didIteratorError) {
@@ -20841,7 +21106,7 @@ Vue.component("contact-form", {
           }
         }
 
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactCheckFormFields", {
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.contactCheckFormFields", {
           fields: invalidFieldNames.join(", ")
         }));
       });
@@ -20870,7 +21135,7 @@ Vue.component("contact-form", {
 
         _this2.clearFields();
 
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.contactSendSuccess"));
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.contactSendSuccess"));
         document.dispatchEvent(new CustomEvent("onContactFormSend", {
           detail: mailObj
         }));
@@ -20880,7 +21145,7 @@ Vue.component("contact-form", {
         if (response.validation_errors) {
           _this2._handleValidationErrors(response.validation_errors);
         } else {
-          NotificationService.error(_TranslationService.default.translate("Ceres::Template.contactSendFail"));
+          NotificationService.error(_TranslationService["default"].translate("Ceres::Template.contactSendFail"));
         }
       }).always(function () {
         if (!(0, _utils.isNullOrUndefined)(window.grecaptcha)) {
@@ -20898,14 +21163,12 @@ Vue.component("contact-form", {
       this.privacyPolicyAccepted = false;
     },
     _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-      _ValidationService.default.markFailedValidationFields($("#contact-form"), validationErrors);
+      _ValidationService["default"].markFailedValidationFields($("#contact-form"), validationErrors);
 
       var errorMessage = "";
 
-      var _arr = Object.values(validationErrors);
-
-      for (var _i = 0; _i < _arr.length; _i++) {
-        var value = _arr[_i];
+      for (var _i = 0, _Object$values = Object.values(validationErrors); _i < _Object$values.length; _i++) {
+        var value = _Object$values[_i];
         errorMessage += value + "<br>";
       }
 
@@ -20921,7 +21184,7 @@ Vue.component("contact-form", {
   }
 });
 
-},{"../../helper/utils":270,"services/ApiService":274,"services/NotificationService":278,"services/TranslationService":279,"services/ValidationService":281}],168:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275,"services/NotificationService":279,"services/TranslationService":280,"services/ValidationService":282}],168:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-map", {
@@ -20999,7 +21262,7 @@ var _TranslationService = _interopRequireDefault(require("services/TranslationSe
 
 var _utils = require("../../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -21012,7 +21275,7 @@ Vue.component("country-select", {
     selectedStateId: Number,
     template: {
       type: String,
-      default: "#vue-country-select"
+      "default": "#vue-country-select"
     },
     addressType: {
       type: String,
@@ -21020,11 +21283,11 @@ Vue.component("country-select", {
     },
     optionalAddressFields: {
       type: Object,
-      default: function _default() {}
+      "default": function _default() {}
     },
     requiredAddressFields: {
       type: Object,
-      default: function _default() {}
+      "default": function _default() {}
     }
   },
   jsonDataFields: ["countryList"],
@@ -21125,7 +21388,7 @@ Vue.component("country-select", {
       return this.requiredFields.includes(this.addressKeyPrefix + key);
     },
     transformTranslation: function transformTranslation(translationKey, addressKey) {
-      var translation = _TranslationService.default.translate(translationKey);
+      var translation = _TranslationService["default"].translate(translationKey);
 
       var isRequired = this.isInRequiredFields(addressKey);
       return translation + (isRequired ? "*" : "");
@@ -21138,7 +21401,7 @@ Vue.component("country-select", {
   }
 });
 
-},{"../../helper/utils":270,"services/TranslationService":279}],170:[function(require,module,exports){
+},{"../../helper/utils":271,"services/TranslationService":280}],170:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -21149,7 +21412,7 @@ var _TranslationService = _interopRequireDefault(require("services/TranslationSe
 
 var _UrlService = require("services/UrlService");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -21163,11 +21426,11 @@ Vue.component("registration", {
     modalElement: String,
     guestMode: {
       type: Boolean,
-      default: false
+      "default": false
     },
     isSimpleRegistration: {
       type: Boolean,
-      default: false
+      "default": false
     },
     template: String,
     backlink: String
@@ -21182,7 +21445,10 @@ Vue.component("registration", {
         stateId: null,
         gender: "male"
       },
-      isDisabled: false
+      isDisabled: false,
+      privacyPolicyAccepted: false,
+      privacyPolicyShowError: false,
+      enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
     };
   },
   methods: {
@@ -21192,14 +21458,28 @@ Vue.component("registration", {
     validateRegistration: function validateRegistration() {
       var _this = this;
 
-      _ValidationService.default.validate($("#registration" + this._uid)).done(function () {
-        _this.sendRegistration();
+      _ValidationService["default"].validate($("#registration" + this._uid)).done(function () {
+        if (!_this.enableConfirmingPrivacyPolicy || _this.privacyPolicyAccepted) {
+          _this.sendRegistration();
+        } else {
+          _this.privacyPolicyShowError = true;
+          NotificationService.error(_TranslationService["default"].translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
+            hyphen: "&shy;"
+          }));
+        }
       }).fail(function (invalidFields) {
         if (!(0, _utils.isNullOrUndefined)(_this.$refs.passwordHint) && invalidFields.indexOf(_this.$refs.passwordInput) >= 0) {
           _this.$refs.passwordHint.showPopper();
         }
 
-        _ValidationService.default.markInvalidFields(invalidFields, "error");
+        _ValidationService["default"].markInvalidFields(invalidFields, "error");
+
+        if (_this.enableConfirmingPrivacyPolicy && !_this.privacyPolicyAccepted) {
+          _this.privacyPolicyShowError = true;
+          NotificationService.error(_TranslationService["default"].translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
+            hyphen: "&shy;"
+          }));
+        }
       });
     },
 
@@ -21218,7 +21498,7 @@ Vue.component("registration", {
         }));
 
         if (!response.code) {
-          NotificationService.success(_TranslationService.default.translate("Ceres::Template.regSuccessful")).closeAfter(3000);
+          NotificationService.success(_TranslationService["default"].translate("Ceres::Template.regSuccessful")).closeAfter(3000);
 
           if (document.getElementById(_this2.modalElement) !== null) {
             ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
@@ -21230,7 +21510,7 @@ Vue.component("registration", {
             location.reload();
           }
         } else {
-          NotificationService.error(_TranslationService.default.translate("Ceres::Template.regError")).closeAfter(3000);
+          NotificationService.error(_TranslationService["default"].translate("Ceres::Template.regError")).closeAfter(10000);
         }
 
         _this2.isDisabled = false;
@@ -21274,11 +21554,18 @@ Vue.component("registration", {
       }
 
       return userObject;
+    },
+    privacyPolicyValueChanged: function privacyPolicyValueChanged(value) {
+      this.privacyPolicyAccepted = value;
+
+      if (value) {
+        this.privacyPolicyShowError = false;
+      }
     }
   }
 });
 
-},{"../../helper/utils":270,"services/ApiService":274,"services/ModalService":277,"services/NotificationService":278,"services/TranslationService":279,"services/UrlService":280,"services/ValidationService":281}],171:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275,"services/ModalService":278,"services/NotificationService":279,"services/TranslationService":280,"services/UrlService":281,"services/ValidationService":282}],171:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -21287,7 +21574,7 @@ var _TranslationService = _interopRequireDefault(require("services/TranslationSe
 
 var _UrlService = require("services/UrlService");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -21306,10 +21593,10 @@ Vue.component("reset-password-form", {
     validatePassword: function validatePassword() {
       var _this = this;
 
-      _ValidationService.default.validate(this.$refs.resetPasswordForm).done(function () {
+      _ValidationService["default"].validate(this.$refs.resetPasswordForm).done(function () {
         _this.saveNewPassword();
       }).fail(function (invalidFields) {
-        _ValidationService.default.markInvalidFields(invalidFields, "has-error");
+        _ValidationService["default"].markInvalidFields(invalidFields, "has-error");
       });
     },
     saveNewPassword: function saveNewPassword() {
@@ -21323,29 +21610,29 @@ Vue.component("reset-password-form", {
         hash: this.hash
       }).done(function () {
         (0, _UrlService.navigateTo)(window.location.origin);
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.resetPwChangePasswordSuccessful")).closeAfter(3000);
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.resetPwChangePasswordSuccessful")).closeAfter(3000);
       }).fail(function () {
         _this2.isDisabled = false;
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.resetPwChangePasswordFailed")).closeAfter(5000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.resetPwChangePasswordFailed")).closeAfter(5000);
       });
     }
   }
 });
 
-},{"services/ApiService":274,"services/NotificationService":278,"services/TranslationService":279,"services/UrlService":280,"services/ValidationService":281}],172:[function(require,module,exports){
+},{"services/ApiService":275,"services/NotificationService":279,"services/TranslationService":280,"services/UrlService":281,"services/ValidationService":282}],172:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.component("salutation-select", {
   props: {
     template: {
       type: String,
-      default: "#vue-salutation-select"
+      "default": "#vue-salutation-select"
     },
     addressData: {
       type: Object,
@@ -21353,17 +21640,17 @@ Vue.component("salutation-select", {
     },
     addressType: {
       type: [Number, String],
-      default: 1
+      "default": 1
     },
     enabledAddressFields: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      "default": "male"
     }
   },
   data: function data() {
@@ -21391,7 +21678,7 @@ Vue.component("salutation-select", {
       var salutations = this.salutations.map(function (salutation) {
         return {
           key: salutation.key,
-          name: _TranslationService.default.translate("Ceres::Template." + salutation.name)
+          name: _TranslationService["default"].translate("Ceres::Template." + salutation.name)
         };
       });
 
@@ -21468,7 +21755,7 @@ Vue.component("salutation-select", {
   }
 });
 
-},{"../../helper/utils":270,"services/TranslationService":279}],173:[function(require,module,exports){
+},{"../../helper/utils":271,"services/TranslationService":280}],173:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
@@ -21479,7 +21766,7 @@ var _UrlService = _interopRequireDefault(require("services/UrlService"));
 
 var _utils = require("../../../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -21492,7 +21779,7 @@ Vue.component("forgot-password-modal", {
   props: {
     template: {
       type: String,
-      default: "#vue-forgot-password-modal"
+      "default": "#vue-forgot-password-modal"
     }
   },
   data: function data() {
@@ -21510,7 +21797,7 @@ Vue.component("forgot-password-modal", {
         _this.username = "";
       });
 
-      var urlParams = _UrlService.default.getUrlParams(document.location.search);
+      var urlParams = _UrlService["default"].getUrlParams(document.location.search);
 
       if (!(0, _utils.isNullOrUndefined)(urlParams.show) && urlParams.show === "forgotPassword") {
         ModalService.findModal(_this.$refs.pwdModal).show();
@@ -21527,10 +21814,10 @@ Vue.component("forgot-password-modal", {
     validateResetPwd: function validateResetPwd() {
       var _this2 = this;
 
-      _ValidationService.default.validate(this.$refs.pwdModal).done(function () {
+      _ValidationService["default"].validate(this.$refs.pwdModal).done(function () {
         _this2.sendResetPwd();
       }).fail(function (invalidFields) {
-        _ValidationService.default.markInvalidFields(invalidFields, "error");
+        _ValidationService["default"].markInvalidFields(invalidFields, "error");
       });
     },
 
@@ -21546,10 +21833,10 @@ Vue.component("forgot-password-modal", {
       }).done(function () {
         ModalService.findModal(_this3.$refs.pwdModal).hide();
         _this3.isDisabled = false;
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.loginSendEmailOk")).closeAfter(5000);
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.loginSendEmailOk")).closeAfter(5000);
       }).fail(function () {
         _this3.isDisabled = false;
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.loginResetPwDErrorOnSendEmail")).closeAfter(5000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.loginResetPwDErrorOnSendEmail")).closeAfter(5000);
       });
     },
     cancelResetPwd: function cancelResetPwd() {
@@ -21559,19 +21846,19 @@ Vue.component("forgot-password-modal", {
       });
     },
     resetError: function resetError() {
-      _ValidationService.default.unmarkAllFields(this.$refs.pwdModal);
+      _ValidationService["default"].unmarkAllFields(this.$refs.pwdModal);
     }
   }
 });
 
-},{"../../../helper/utils":270,"services/ApiService":274,"services/ModalService":277,"services/NotificationService":278,"services/TranslationService":279,"services/UrlService":280,"services/ValidationService":281}],174:[function(require,module,exports){
+},{"../../../helper/utils":271,"services/ApiService":275,"services/ModalService":278,"services/NotificationService":279,"services/TranslationService":280,"services/UrlService":281,"services/ValidationService":282}],174:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
 
 var _UrlService = require("services/UrlService");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -21597,10 +21884,10 @@ Vue.component("guest-login", {
   },
   methods: {
     validate: function validate() {
-      _ValidationService.default.validate($("#guest-login-form-" + this._uid)).done(function () {
+      _ValidationService["default"].validate($("#guest-login-form-" + this._uid)).done(function () {
         this.sendEMail();
       }.bind(this)).fail(function (invalidFields) {
-        _ValidationService.default.markInvalidFields(invalidFields, "error");
+        _ValidationService["default"].markInvalidFields(invalidFields, "error");
       });
     },
     sendEMail: function sendEMail() {
@@ -21617,19 +21904,19 @@ Vue.component("guest-login", {
       }.bind(this));
     },
     resetError: function resetError() {
-      _ValidationService.default.unmarkAllFields($("#guest-login-form-" + this._uid));
+      _ValidationService["default"].unmarkAllFields($("#guest-login-form-" + this._uid));
     }
   }
 });
 
-},{"services/ApiService":274,"services/UrlService":280,"services/ValidationService":281}],175:[function(require,module,exports){
+},{"services/ApiService":275,"services/UrlService":281,"services/ValidationService":282}],175:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -21679,10 +21966,10 @@ Vue.component("login", {
     validateLogin: function validateLogin() {
       var _this2 = this;
 
-      _ValidationService.default.validate($("#login-form-" + this._uid)).done(function () {
+      _ValidationService["default"].validate($("#login-form-" + this._uid)).done(function () {
         _this2.sendLogin();
       }).fail(function (invalidFields) {
-        _ValidationService.default.markInvalidFields(invalidFields, "error");
+        _ValidationService["default"].markInvalidFields(invalidFields, "error");
       });
     },
     removeLoginModal: function removeLoginModal() {
@@ -21706,7 +21993,7 @@ Vue.component("login", {
         supressNotifications: true
       }).done(function (response) {
         ApiService.setToken(response);
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.loginSuccessful")).closeAfter(10000);
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.loginSuccessful")).closeAfter(10000);
 
         if (_this3.backlink !== null && _this3.backlink) {
           location.assign(decodeURIComponent(_this3.backlink));
@@ -21728,7 +22015,7 @@ Vue.component("login", {
               translationKey = "Ceres::Template.loginBlocked";
             }
 
-            NotificationService.error(_TranslationService.default.translate(translationKey)).closeAfter(10000);
+            NotificationService.error(_TranslationService["default"].translate(translationKey)).closeAfter(10000);
             break;
 
           default:
@@ -21750,12 +22037,12 @@ Vue.component("login", {
     resetError: function resetError() {
       this.loginFields.removeClass("has-login-error");
 
-      _ValidationService.default.unmarkAllFields($("#login-form-" + this._uid));
+      _ValidationService["default"].unmarkAllFields($("#login-form-" + this._uid));
     }
   }
 });
 
-},{"services/ApiService":274,"services/AutoFocusService":275,"services/ModalService":277,"services/NotificationService":278,"services/TranslationService":279,"services/ValidationService":281}],176:[function(require,module,exports){
+},{"services/ApiService":275,"services/AutoFocusService":276,"services/ModalService":278,"services/NotificationService":279,"services/TranslationService":280,"services/ValidationService":282}],176:[function(require,module,exports){
 "use strict";
 
 var ModalService = require("services/ModalService");
@@ -21770,14 +22057,14 @@ Vue.component("login-view", {
   }
 });
 
-},{"services/ModalService":277}],177:[function(require,module,exports){
+},{"services/ModalService":278}],177:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../../helper/utils");
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -21786,11 +22073,11 @@ Vue.component("user-login-handler", {
   props: {
     template: {
       type: String,
-      default: "#vue-user-login-handler"
+      "default": "#vue-user-login-handler"
     },
     showRegistration: {
       type: Boolean,
-      default: true
+      "default": true
     }
   },
   computed: Vuex.mapGetters(["username", "isLoggedIn"]),
@@ -21831,21 +22118,21 @@ Vue.component("user-login-handler", {
       });
     },
     unmarkInputFields: function unmarkInputFields() {
-      _ValidationService.default.unmarkAllFields($("#login"));
+      _ValidationService["default"].unmarkAllFields($("#login"));
 
-      _ValidationService.default.unmarkAllFields($("#registration"));
+      _ValidationService["default"].unmarkAllFields($("#registration"));
     }
   }
 });
 
-},{"../../../helper/utils":270,"services/ApiService":274,"services/ValidationService":281}],178:[function(require,module,exports){
+},{"../../../helper/utils":271,"services/ApiService":275,"services/ValidationService":282}],178:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
 var _utils = require("../../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -21857,7 +22144,7 @@ Vue.component("add-to-wish-list", {
   props: {
     template: {
       type: String,
-      default: "#vue-add-to-wish-list"
+      "default": "#vue-add-to-wish-list"
     },
     variationId: Number
   },
@@ -21902,7 +22189,7 @@ Vue.component("add-to-wish-list", {
         this.isLoading = true;
         this.$store.dispatch("addToWishList", parseInt(this.currentVariationId)).then(function (response) {
           _this.isLoading = false;
-          NotificationService.success(_TranslationService.default.translate("Ceres::Template.singleItemWishListAdded"));
+          NotificationService.success(_TranslationService["default"].translate("Ceres::Template.singleItemWishListAdded"));
         }, function (error) {
           _this.isLoading = false;
         });
@@ -21917,14 +22204,14 @@ Vue.component("add-to-wish-list", {
           id: parseInt(this.currentVariationId)
         }).then(function (response) {
           _this2.isLoading = false;
-          NotificationService.success(_TranslationService.default.translate("Ceres::Template.singleItemWishListRemoved"));
+          NotificationService.success(_TranslationService["default"].translate("Ceres::Template.singleItemWishListRemoved"));
         }, function (error) {
           _this2.isLoading = false;
         });
       }
     },
     changeTooltipText: function changeTooltipText() {
-      var tooltipText = _TranslationService.default.translate("Ceres::Template.".concat(this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
+      var tooltipText = _TranslationService["default"].translate("Ceres::Template.".concat(this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
 
       $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
     }
@@ -21936,7 +22223,7 @@ Vue.component("add-to-wish-list", {
   }
 });
 
-},{"../../helper/utils":270,"services/NotificationService":278,"services/TranslationService":279}],179:[function(require,module,exports){
+},{"../../helper/utils":271,"services/NotificationService":279,"services/TranslationService":280}],179:[function(require,module,exports){
 "use strict";
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -21952,7 +22239,20 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 Vue.component("graduated-prices", {
-  props: ["template"],
+  props: {
+    template: {
+      type: String,
+      "default": "#vue-graduated-prices"
+    },
+    paddingClasses: {
+      type: String,
+      "default": null
+    },
+    paddingInlineStyles: {
+      type: String,
+      "default": null
+    }
+  },
   computed: _objectSpread({
     graduatedPrices: function graduatedPrices() {
       var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
@@ -21994,7 +22294,7 @@ Vue.component("item-bundle", {
   props: {
     template: {
       type: String,
-      default: "#vue-item-bundle"
+      "default": "#vue-item-bundle"
     },
     bundleType: String,
     bundleComponents: Array
@@ -22030,7 +22330,7 @@ var _utils = require("../../helper/utils");
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -22040,23 +22340,23 @@ Vue.component("item-image-carousel", {
   props: {
     template: {
       type: String,
-      default: "#vue-item-image-carousel"
+      "default": "#vue-item-image-carousel"
     },
     maxQuantity: {
       type: Number,
-      default: 10
+      "default": 10
     },
     imageUrlAccessor: {
       type: String,
-      default: "url"
+      "default": "url"
     },
     showThumbs: {
       type: Boolean,
-      default: true
+      "default": true
     },
     showDots: {
       type: Boolean,
-      default: true
+      "default": true
     }
   },
   data: function data() {
@@ -22158,7 +22458,7 @@ Vue.component("item-image-carousel", {
             current -= imageCount;
           }
 
-          return _TranslationService.default.translate("Ceres::Template.singleItemImagePreviewCaption", {
+          return _TranslationService["default"].translate("Ceres::Template.singleItemImagePreviewCaption", {
             current: current,
             total: imageCount
           });
@@ -22225,7 +22525,7 @@ Vue.component("item-image-carousel", {
   }
 });
 
-},{"../../helper/utils":270,"services/TranslationService":279}],182:[function(require,module,exports){
+},{"../../helper/utils":271,"services/TranslationService":280}],182:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-properties", {
@@ -22257,7 +22557,7 @@ Vue.component("order-property-list", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-property-list"
+      "default": "#vue-order-property-list"
     }
   },
   data: function data() {
@@ -22285,8 +22585,8 @@ Vue.component("order-property-list", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -22348,8 +22648,8 @@ Vue.component("order-property-list", {
         _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-            _iterator2.return();
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
           }
         } finally {
           if (_didIteratorError2) {
@@ -22390,7 +22690,7 @@ Vue.component("order-property-list-group", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-property-list-group"
+      "default": "#vue-order-property-list-group"
     },
     propertyGroup: Object
   },
@@ -22426,8 +22726,8 @@ Vue.component("order-property-list-group", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -22466,7 +22766,7 @@ Vue.component("order-property-list-item", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-property-list-item"
+      "default": "#vue-order-property-list-item"
     },
     group: Object,
     property: Object
@@ -22643,10 +22943,8 @@ Vue.component("order-property-list-item", {
     },
     _handleValidationErrors: function _handleValidationErrors(error) {
       if (error.hasOwnProperty("validation_errors")) {
-        var _arr = Object.values(error.validation_errors);
-
-        for (var _i = 0; _i < _arr.length; _i++) {
-          var err = _arr[_i];
+        for (var _i = 0, _Object$values = Object.values(error.validation_errors); _i < _Object$values.length; _i++) {
+          var err = _Object$values[_i];
           NotificationService.error(err[0]);
         }
       }
@@ -22654,7 +22952,7 @@ Vue.component("order-property-list-item", {
   })
 });
 
-},{"../../helper/utils":270,"services/ApiService":274,"services/NotificationService":278}],186:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275,"services/NotificationService":279}],186:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -22667,7 +22965,7 @@ Vue.component("order-property-value", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-property-value"
+      "default": "#vue-order-property-value"
     },
     property: {
       type: Object,
@@ -22707,7 +23005,7 @@ Vue.component("order-property-value", {
   }))
 });
 
-},{"../../helper/utils":270}],187:[function(require,module,exports){
+},{"../../helper/utils":271}],187:[function(require,module,exports){
 "use strict";
 
 var _number = require("../../helper/number");
@@ -22718,7 +23016,7 @@ var _TranslationService = _interopRequireDefault(require("../../services/Transla
 
 var _debounce = require("../../helper/debounce");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -22734,12 +23032,12 @@ Vue.component("quantity-input", {
     timeout: {
       type: Number,
       required: false,
-      default: 500
+      "default": 500
     },
     min: {
       type: Number,
       required: false,
-      default: 0
+      "default": 0
     },
     max: {
       type: Number,
@@ -22748,7 +23046,7 @@ Vue.component("quantity-input", {
     interval: {
       type: Number,
       required: false,
-      default: 1
+      "default": 1
     },
     template: {
       type: String,
@@ -22807,12 +23105,12 @@ Vue.component("quantity-input", {
       return (0, _utils.isDefined)(this.compMax) && this.compValue + this.compInterval > this.compMax;
     },
     minimumHint: function minimumHint() {
-      return _TranslationService.default.translate("Ceres::Template.singleItemQuantityMin", {
+      return _TranslationService["default"].translate("Ceres::Template.singleItemQuantityMin", {
         min: this.min
       });
     },
     maximumHint: function maximumHint() {
-      return _TranslationService.default.translate("Ceres::Template.singleItemQuantityMax", {
+      return _TranslationService["default"].translate("Ceres::Template.singleItemQuantityMax", {
         max: this.max
       });
     },
@@ -22895,6 +23193,8 @@ Vue.component("quantity-input", {
       if (value !== this.compValue) {
         this.compValue = value;
         this.onValueChanged();
+      } else if (!(0, _utils.isNullOrUndefined)(this.$refs.quantityInputField)) {
+        this.$refs.quantityInputField.value = value;
       }
     },
     fetchQuantityFromBasket: function fetchQuantityFromBasket() {
@@ -22921,10 +23221,14 @@ Vue.component("quantity-input", {
   }
 });
 
-},{"../../helper/debounce":265,"../../helper/number":267,"../../helper/utils":270,"../../services/TranslationService":279}],188:[function(require,module,exports){
+},{"../../helper/debounce":265,"../../helper/number":268,"../../helper/utils":271,"../../services/TranslationService":280}],188:[function(require,module,exports){
 "use strict";
 
 var _VariationPropertyService = require("../../services/VariationPropertyService");
+
+var _get = require("../../helper/get");
+
+var _utils = require("../../helper/utils");
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -22963,11 +23267,21 @@ Vue.component("single-item", {
   methods: {
     setIsVariationSelected: function setIsVariationSelected(event) {
       this.$store.commit("setIsVariationSelected", event);
+    },
+    getDataField: function getDataField(field) {
+      return (0, _get.get)(this.currentVariation, field);
+    },
+    getFilteredDataField: function getFilteredDataField(field, filter) {
+      if (!(0, _utils.isNullOrUndefined)(this.$options.filters[filter])) {
+        return this.$options.filters[filter](this.getDataField(field));
+      }
+
+      return this.getDataField(field);
     }
   }
 });
 
-},{"../../services/VariationPropertyService":282}],189:[function(require,module,exports){
+},{"../../helper/get":267,"../../helper/utils":271,"../../services/VariationPropertyService":283}],189:[function(require,module,exports){
 "use strict";
 
 var _util = require("util");
@@ -22976,7 +23290,7 @@ var _dom = require("../../helper/dom");
 
 var _uniq = _interopRequireDefault(require("lodash/uniq"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -23221,7 +23535,7 @@ Vue.component("variation-select", {
       var possibleUnitIds = [];
 
       if (possibleVariations.length > 0) {
-        possibleUnitIds = (0, _uniq.default)(possibleVariations.map(function (variation) {
+        possibleUnitIds = (0, _uniq["default"])(possibleVariations.map(function (variation) {
           return variation.unitCombinationId;
         }));
       }
@@ -23253,7 +23567,7 @@ Vue.component("variation-select", {
   }
 });
 
-},{"../../helper/dom":266,"lodash/uniq":134,"services/ApiService":274,"util":139}],190:[function(require,module,exports){
+},{"../../helper/dom":266,"lodash/uniq":134,"services/ApiService":275,"util":139}],190:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-image-carousel", {
@@ -23273,15 +23587,15 @@ Vue.component("category-image-carousel", {
     },
     showDots: {
       type: Boolean,
-      default: App.config.item.categoryShowDots
+      "default": App.config.item.categoryShowDots
     },
     showNav: {
       type: Boolean,
-      default: App.config.item.categoryShowNav
+      "default": App.config.item.categoryShowNav
     },
     disableLazyLoad: {
       type: Boolean,
-      default: false
+      "default": false
     },
     disableCarouselOnMobile: {
       type: Boolean
@@ -23389,15 +23703,15 @@ Vue.component("category-item", {
   props: {
     template: {
       type: String,
-      default: "#vue-category-item"
+      "default": "#vue-category-item"
     },
     decimalCount: {
       type: Number,
-      default: 0
+      "default": 0
     },
     imageUrlAccessor: {
       type: String,
-      default: "urlMiddle"
+      "default": "urlMiddle"
     },
     itemData: {
       type: Object
@@ -23407,11 +23721,11 @@ Vue.component("category-item", {
     },
     paddingClasses: {
       type: String,
-      default: null
+      "default": null
     },
     paddingInlineStyles: {
       type: String,
-      default: null
+      "default": null
     }
   },
   jsonDataFields: ["itemDataRef"],
@@ -23486,21 +23800,21 @@ var _utils = require("../../helper/utils");
 
 var _url = require("../../helper/url");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.component("item-search", {
   props: {
     template: {
       type: String,
-      default: "#vue-item-search"
+      "default": "#vue-item-search"
     },
     showItemImages: {
       type: Boolean,
-      default: false
+      "default": false
     },
     forwardToSingleItem: {
       type: Boolean,
-      default: App.config.search.forwardToSingleItem
+      "default": App.config.search.forwardToSingleItem
     }
   },
   data: function data() {
@@ -23526,7 +23840,7 @@ Vue.component("item-search", {
     var _this = this;
 
     this.$nextTick(function () {
-      var urlParams = _UrlService.default.getUrlParams(document.location.search);
+      var urlParams = _UrlService["default"].getUrlParams(document.location.search);
 
       _this.$store.commit("setItemListSearchString", urlParams.query);
 
@@ -23565,14 +23879,14 @@ Vue.component("item-search", {
     },
     updateTitle: function updateTitle(searchString) {
       var searchPageTitle = document.querySelector("#searchPageTitle");
-      var title = _TranslationService.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
+      var title = _TranslationService["default"].translate("Ceres::Template.itemSearchResults") + " " + searchString;
 
       if (!(0, _utils.isNullOrUndefined)(searchPageTitle)) {
         searchPageTitle.innerHTML = "";
         searchPageTitle.appendChild(document.createTextNode(title));
       }
 
-      document.title = "".concat(title, " | ").concat(_TranslationService.default.translate("Ceres::Template.headerCompanyName"));
+      document.title = "".concat(title, " | ").concat(_TranslationService["default"].translate("Ceres::Template.headerCompanyName"));
     },
     autocomplete: function autocomplete(searchString) {
       var _this2 = this;
@@ -23582,7 +23896,7 @@ Vue.component("item-search", {
           this.autocompleteRequest.abort();
         }
 
-        this.autocompleteRequest = _ApiService.default.get("/rest/io/item/search/autocomplete", {
+        this.autocompleteRequest = _ApiService["default"].get("/rest/io/item/search/autocomplete", {
           template: "Ceres::ItemList.Components.ItemSearch",
           query: searchString
         });
@@ -23623,8 +23937,8 @@ Vue.component("item-search", {
                   _iteratorError2 = err;
                 } finally {
                   try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                      _iterator2.return();
+                    if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+                      _iterator2["return"]();
                     }
                   } finally {
                     if (_didIteratorError2) {
@@ -23645,8 +23959,8 @@ Vue.component("item-search", {
               _iteratorError = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion && _iterator.return != null) {
-                  _iterator.return();
+                if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+                  _iterator["return"]();
                 }
               } finally {
                 if (_didIteratorError) {
@@ -23694,14 +24008,14 @@ Vue.component("item-search", {
   }
 });
 
-},{"../../helper/url":269,"../../helper/utils":270,"services/ApiService":274,"services/TranslationService":279,"services/UrlService":280}],194:[function(require,module,exports){
+},{"../../helper/url":270,"../../helper/utils":271,"services/ApiService":275,"services/TranslationService":280,"services/UrlService":281}],194:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
 
 var _TranslationService = _interopRequireDefault(require("../../services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.component("item-store-special", {
   delimiters: ["${", "}"],
@@ -23715,12 +24029,12 @@ Vue.component("item-store-special", {
         1: "badge-offer badge-danger",
         2: "badge-new badge-primary",
         3: "badge-top badge-success",
-        default: "badge-success"
+        "default": "badge-success"
       },
       labels: {
-        1: _TranslationService.default.translate("Ceres::Template.storeSpecialOffer"),
-        2: _TranslationService.default.translate("Ceres::Template.storeSpecialNew"),
-        3: _TranslationService.default.translate("Ceres::Template.storeSpecialTop")
+        1: _TranslationService["default"].translate("Ceres::Template.storeSpecialOffer"),
+        2: _TranslationService["default"].translate("Ceres::Template.storeSpecialNew"),
+        3: _TranslationService["default"].translate("Ceres::Template.storeSpecialTop")
       }
     };
   },
@@ -23730,9 +24044,9 @@ Vue.component("item-store-special", {
   methods: {
     initializeStoreSpecial: function initializeStoreSpecial() {
       if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses["default"];
       } else {
-        this.tagClass = this.tagClasses.default;
+        this.tagClass = this.tagClasses["default"];
       }
 
       this.label = this.getLabel();
@@ -23766,12 +24080,12 @@ Vue.component("item-store-special", {
   }
 });
 
-},{"../../helper/utils":270,"../../services/TranslationService":279}],195:[function(require,module,exports){
+},{"../../helper/utils":271,"../../services/TranslationService":280}],195:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -23782,7 +24096,7 @@ Vue.component("item-filter", {
   props: {
     template: {
       type: String,
-      default: "#vue-item-filter"
+      "default": "#vue-item-filter"
     },
     facet: {
       type: Object
@@ -23804,7 +24118,7 @@ Vue.component("item-filter", {
     },
     facetName: function facetName() {
       if (this.facet.translationKey && this.facet.translationKey.length > 0) {
-        return _TranslationService.default.translate("Ceres::Template." + this.facet.translationKey);
+        return _TranslationService["default"].translate("Ceres::Template." + this.facet.translationKey);
       }
 
       return this.facet.name;
@@ -23831,12 +24145,12 @@ Vue.component("item-filter", {
   }
 });
 
-},{"services/TranslationService":279}],196:[function(require,module,exports){
+},{"services/TranslationService":280}],196:[function(require,module,exports){
 "use strict";
 
 var _UrlService = _interopRequireDefault(require("services/UrlService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -23849,11 +24163,11 @@ Vue.component("item-filter-list", {
   props: {
     template: {
       type: String,
-      default: "#vue-item-filter-list"
+      "default": "#vue-item-filter-list"
     },
     facetData: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     }
@@ -23906,8 +24220,8 @@ Vue.component("item-filter-list", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
             }
           } finally {
             if (_didIteratorError) {
@@ -23962,7 +24276,7 @@ Vue.component("item-filter-list", {
   created: function created() {
     this.$store.commit("setFacets", this.facetData);
 
-    var urlParams = _UrlService.default.getUrlParams(document.location.search);
+    var urlParams = _UrlService["default"].getUrlParams(document.location.search);
 
     var selectedFacets = [];
 
@@ -24003,12 +24317,12 @@ Vue.component("item-filter-list", {
   }
 });
 
-},{"services/UrlService":280}],197:[function(require,module,exports){
+},{"services/UrlService":281}],197:[function(require,module,exports){
 "use strict";
 
 var _UrlService = _interopRequireDefault(require("services/UrlService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -24019,7 +24333,7 @@ Vue.component("item-filter-price", {
   props: {
     template: {
       type: String,
-      default: "#vue-item-filter-price"
+      "default": "#vue-item-filter-price"
     }
   },
   data: function data() {
@@ -24030,7 +24344,7 @@ Vue.component("item-filter-price", {
     };
   },
   created: function created() {
-    var urlParams = _UrlService.default.getUrlParams(document.location.search);
+    var urlParams = _UrlService["default"].getUrlParams(document.location.search);
 
     this.priceMin = urlParams.priceMin || "";
     this.priceMax = urlParams.priceMax || "";
@@ -24059,7 +24373,7 @@ Vue.component("item-filter-price", {
   }
 });
 
-},{"services/UrlService":280}],198:[function(require,module,exports){
+},{"services/UrlService":281}],198:[function(require,module,exports){
 "use strict";
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -24070,7 +24384,7 @@ Vue.component("item-filter-tag-list", {
   props: {
     template: {
       type: String,
-      default: "#vue-item-filter-tag-list"
+      "default": "#vue-item-filter-tag-list"
     }
   },
   computed: Vuex.mapState({
@@ -24099,7 +24413,7 @@ Vue.component("live-shopping-details", {
   props: {
     template: {
       type: String,
-      default: "#vue-live-shopping-details"
+      "default": "#vue-live-shopping-details"
     },
     liveShoppingData: {
       type: Object,
@@ -24107,7 +24421,7 @@ Vue.component("live-shopping-details", {
     },
     displaySettings: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {
           showCrossPrice: true,
           showStock: true,
@@ -24172,10 +24486,15 @@ Vue.component("live-shopping-details", {
     setItemPriceRebatePercentage: function setItemPriceRebatePercentage() {
       var specialOfferPrice = this.prices.price.price.value;
       var defaultPrice = this.prices.rrp.price.value;
-      var percentage = 100 - specialOfferPrice / defaultPrice * 100;
-      percentage = percentage.toFixed(App.config.item.storeSpecial);
-      percentage = percentage.replace(".", App.decimalSeparator);
-      this.itemPriceRebatePercentage = percentage;
+
+      if (defaultPrice === 0) {
+        this.itemPriceRebatePercentage = 0;
+      } else {
+        var percentage = 100 - specialOfferPrice / defaultPrice * 100;
+        percentage = percentage.toFixed(App.config.item.storeSpecial);
+        percentage = percentage.replace(".", App.decimalSeparator);
+        this.itemPriceRebatePercentage = percentage;
+      }
     },
     calculations: function calculations() {
       var momentNow = moment(Date.now());
@@ -24224,7 +24543,7 @@ var _utils = require("../../helper/utils");
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -24239,7 +24558,7 @@ Vue.component("live-shopping-item", {
   props: {
     template: {
       type: String,
-      default: "#vue-live-shopping-item"
+      "default": "#vue-live-shopping-item"
     },
     liveShoppingId: {
       type: Number,
@@ -24253,11 +24572,11 @@ Vue.component("live-shopping-item", {
     },
     paddingClasses: {
       type: String,
-      default: null
+      "default": null
     },
     paddingInlineStyles: {
       type: String,
-      default: null
+      "default": null
     }
   },
   computed: _objectSpread({
@@ -24297,11 +24616,11 @@ Vue.component("live-shopping-item", {
         var name = "";
 
         if (offerTime === TimeEnum.past) {
-          name = _TranslationService.default.translate("Ceres::Template.liveShoppingOfferClosed");
+          name = _TranslationService["default"].translate("Ceres::Template.liveShoppingOfferClosed");
         } else if (offerTime === TimeEnum.future) {
-          name = _TranslationService.default.translate("Ceres::Template.liveShoppingNextOffer");
+          name = _TranslationService["default"].translate("Ceres::Template.liveShoppingNextOffer");
         } else if (offerTime === TimeEnum.now) {
-          name = _TranslationService.default.translate("Ceres::Template.liveShoppingOfferSoldOut");
+          name = _TranslationService["default"].translate("Ceres::Template.liveShoppingOfferSoldOut");
         }
 
         return {
@@ -24317,15 +24636,15 @@ Vue.component("live-shopping-item", {
     prices: function prices() {
       var itemPrices = this.currentOffer.item.prices;
       var prices = {
-        price: itemPrices.default,
+        price: itemPrices["default"],
         rrp: itemPrices.rrp,
         isRrpDefaultPrice: false
       };
 
       if (!(0, _utils.isNullOrUndefined)(itemPrices.specialOffer)) {
         prices.price = itemPrices.specialOffer;
-        prices.rrp = itemPrices.default || itemPrices.rrp;
-        prices.isRrpDefaultPrice = !!itemPrices.default;
+        prices.rrp = itemPrices["default"] || itemPrices.rrp;
+        prices.isRrpDefaultPrice = !!itemPrices["default"];
       }
 
       return prices;
@@ -24360,12 +24679,12 @@ Vue.component("live-shopping-item", {
   }
 });
 
-},{"../../helper/utils":270,"services/TranslationService":279}],201:[function(require,module,exports){
+},{"../../helper/utils":271,"services/TranslationService":280}],201:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ModalService = require("services/ModalService");
 
@@ -24379,12 +24698,12 @@ Vue.component("account-settings", {
   props: {
     template: {
       type: String,
-      default: "#vue-account-settings"
+      "default": "#vue-account-settings"
     },
     userData: {
       type: Object,
       // eslint-disable-next-line
-      default: function _default() {}
+      "default": function _default() {}
     }
   },
   data: function data() {
@@ -24458,7 +24777,7 @@ Vue.component("account-settings", {
         _this2.saveAccountPassword();
       }).fail(function (invalidFields) {
         ValidationService.markInvalidFields(invalidFields, "error");
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.resetPwInvalidPassword")).closeAfter(5000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.resetPwInvalidPassword")).closeAfter(5000);
 
         _this2.$refs.passwordHint.showPopper();
       });
@@ -24479,9 +24798,9 @@ Vue.component("account-settings", {
         }).done(function (response) {
           _this3.clearFieldsAndClose();
 
-          NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountChangePasswordSuccessful")).closeAfter(3000);
+          NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountChangePasswordSuccessful")).closeAfter(3000);
         }).fail(function (response) {
-          NotificationService.error(_TranslationService.default.translate("Ceres::Template.myAccountChangePasswordFailed")).closeAfter(5000);
+          NotificationService.error(_TranslationService["default"].translate("Ceres::Template.myAccountChangePasswordFailed")).closeAfter(5000);
         }).always(function () {
           _this3.isLoading = false;
         });
@@ -24502,12 +24821,12 @@ Vue.component("account-settings", {
         }).done(function (response) {
           _this4.clearFieldsAndClose();
 
-          NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountChangeEmailConfirmationSent")).closeAfter(3000);
+          NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountChangeEmailConfirmationSent")).closeAfter(3000);
         }).fail(function (response, status) {
-          var message = _TranslationService.default.translate("Ceres::Template.myAccountChangeEmailFailed");
+          var message = _TranslationService["default"].translate("Ceres::Template.myAccountChangeEmailFailed");
 
           if (status === 400) {
-            message = _TranslationService.default.translate("Ceres::Template.regError");
+            message = _TranslationService["default"].translate("Ceres::Template.regError");
           }
 
           NotificationService.error(message).closeAfter(5000);
@@ -24542,14 +24861,14 @@ Vue.component("account-settings", {
   }
 });
 
-},{"services/ApiService":274,"services/ModalService":277,"services/NotificationService":278,"services/TranslationService":279,"services/ValidationService":281}],202:[function(require,module,exports){
+},{"services/ApiService":275,"services/ModalService":278,"services/NotificationService":279,"services/TranslationService":280,"services/ValidationService":282}],202:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -24561,11 +24880,11 @@ Vue.component("bank-data-select", {
   props: {
     template: {
       type: String,
-      default: "#vue-bank-data-select"
+      "default": "#vue-bank-data-select"
     },
     userBankData: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     },
@@ -24608,7 +24927,7 @@ Vue.component("bank-data-select", {
      * Open the modal to add new bank-data
      */
     openAddBank: function openAddBank() {
-      this.headline = _TranslationService.default.translate("Ceres::Template.myAccountBankAddDataTitle");
+      this.headline = _TranslationService["default"].translate("Ceres::Template.myAccountBankAddDataTitle");
       this.openModal(false);
     },
 
@@ -24618,7 +24937,7 @@ Vue.component("bank-data-select", {
      * @param bankdata
      */
     openUpdateBank: function openUpdateBank(index, bankData) {
-      this.headline = _TranslationService.default.translate("Ceres::Template.myAccountBankUpdateDataTitle");
+      this.headline = _TranslationService["default"].translate("Ceres::Template.myAccountBankUpdateDataTitle");
       this.setUpdateData(index, bankData);
       this.openModal(true);
     },
@@ -24645,7 +24964,7 @@ Vue.component("bank-data-select", {
 
       this.doUpdate = doUpdate;
 
-      _ValidationService.default.unmarkAllFields($(this.$refs.bankInfoModal));
+      _ValidationService["default"].unmarkAllFields($(this.$refs.bankInfoModal));
 
       this.bankInfoModal.show();
     },
@@ -24666,14 +24985,14 @@ Vue.component("bank-data-select", {
     validateInput: function validateInput() {
       var _this2 = this;
 
-      _ValidationService.default.validate($("#my-bankForm")).done(function () {
+      _ValidationService["default"].validate($("#my-bankForm")).done(function () {
         if (_this2.doUpdate) {
           _this2.updateBankInfo();
         } else {
           _this2.addBankInfo();
         }
       }).fail(function (invalidFields) {
-        _ValidationService.default.markInvalidFields(invalidFields, "error");
+        _ValidationService["default"].markInvalidFields(invalidFields, "error");
       });
     },
 
@@ -24691,11 +25010,11 @@ Vue.component("bank-data-select", {
 
         _this3.closeModal();
 
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountBankDataUpdated")).closeAfter(3000);
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataUpdated")).closeAfter(3000);
       }).fail(function () {
         _this3.closeModal();
 
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.myAccountBankDataNotUpdated")).closeAfter(5000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataNotUpdated")).closeAfter(5000);
       });
     },
 
@@ -24714,11 +25033,11 @@ Vue.component("bank-data-select", {
 
         _this4.closeModal();
 
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountBankDataAdded")).closeAfter(3000);
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataAdded")).closeAfter(3000);
       }).fail(function () {
         _this4.closeModal();
 
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.myAccountBankDataNotAdded")).closeAfter(5000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataNotAdded")).closeAfter(5000);
       });
     },
 
@@ -24728,18 +25047,18 @@ Vue.component("bank-data-select", {
     removeBankInfo: function removeBankInfo() {
       var _this5 = this;
 
-      ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
+      ApiService["delete"]("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
         _this5.checkBankDataSelection(false);
 
         _this5.closeDeleteModal();
 
         _this5.userBankData.splice(_this5.updateBankIndex, 1);
 
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.myAccountBankDataDeleted")).closeAfter(3000);
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataDeleted")).closeAfter(3000);
       }).fail(function () {
         _this5.closeDeleteModal();
 
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.myAccountBankDataNotDeleted")).closeAfter(5000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataNotDeleted")).closeAfter(5000);
       });
     },
 
@@ -24787,12 +25106,12 @@ Vue.component("bank-data-select", {
   }
 });
 
-},{"services/ApiService":274,"services/ModalService":277,"services/NotificationService":278,"services/TranslationService":279,"services/ValidationService":281}],203:[function(require,module,exports){
+},{"services/ApiService":275,"services/ModalService":278,"services/NotificationService":279,"services/TranslationService":280,"services/ValidationService":282}],203:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -24804,7 +25123,7 @@ Vue.component("change-payment-method", {
   props: {
     template: {
       type: String,
-      default: "#vue-change-payment-method"
+      "default": "#vue-change-payment-method"
     },
     currentOrder: {
       type: Object
@@ -24863,7 +25182,7 @@ Vue.component("change-payment-method", {
       this.changePaymentModal.show();
     },
     getPaymentStateText: function getPaymentStateText(paymentStates) {
-      return _TranslationService.default.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates.find(function (paymentState) {
+      return _TranslationService["default"].translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates.find(function (paymentState) {
         return paymentState.typeId === 4;
       }).value);
     },
@@ -24938,7 +25257,7 @@ Vue.component("change-payment-method", {
   }
 });
 
-},{"services/ApiService":274,"services/ModalService":277,"services/TranslationService":279}],204:[function(require,module,exports){
+},{"services/ApiService":275,"services/ModalService":278,"services/TranslationService":280}],204:[function(require,module,exports){
 "use strict";
 
 Vue.component("history", {
@@ -24971,23 +25290,23 @@ Vue.component("my-account", {
   props: {
     deliveryAddressList: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     },
     selectedDeliveryAddress: {
       type: Number,
-      default: -99
+      "default": -99
     },
     billingAddressList: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     },
     selectedBillingAddress: {
       type: Number,
-      default: 0
+      "default": 0
     }
   },
   created: function created() {
@@ -25007,33 +25326,33 @@ Vue.component("my-account", {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.component("order-documents", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-documents"
+      "default": "#vue-order-documents"
     },
     documents: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return [];
       }
     },
     type: {
       type: String,
-      default: "order"
+      "default": "order"
     },
     allowedTypesForOrders: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery", "reversal_document"];
       }
     },
     allowedTypesForReturns: {
       type: Array,
-      default: function _default() {
+      "default": function _default() {
         return ["return_note"];
       }
     }
@@ -25056,31 +25375,31 @@ Vue.component("order-documents", {
   methods: {
     getTypeName: function getTypeName(type) {
       return {
-        correction_document: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsCorrectionDocument"),
-        credit_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsCreditNote"),
-        delivery_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsDeliveryNote"),
-        dunning_letter: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsDunningLetter"),
-        invoice_external: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsInvoiceExternal"),
-        invoice: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsInvoice"),
-        offer: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsOffer"),
-        order_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsOrderConfirmation"),
-        pickup_delivery: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsPickupDelivery"),
-        pro_forma_invoice: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsProFormaInvoice"),
-        receipt: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsReceipt"),
-        return_note: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsReturnNote"),
-        success_confirmation: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation"),
-        reversal_document: _TranslationService.default.translate("Ceres::Template.myAccountOrderDocumentsReversalDocument")
+        correction_document: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsCorrectionDocument"),
+        credit_note: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsCreditNote"),
+        delivery_note: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsDeliveryNote"),
+        dunning_letter: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsDunningLetter"),
+        invoice_external: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsInvoiceExternal"),
+        invoice: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsInvoice"),
+        offer: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsOffer"),
+        order_confirmation: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsOrderConfirmation"),
+        pickup_delivery: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsPickupDelivery"),
+        pro_forma_invoice: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsProFormaInvoice"),
+        receipt: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsReceipt"),
+        return_note: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsReturnNote"),
+        success_confirmation: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation"),
+        reversal_document: _TranslationService["default"].translate("Ceres::Template.myAccountOrderDocumentsReversalDocument")
       }[type];
     },
     getDownloadTooltip: function getDownloadTooltip(type) {
-      return _TranslationService.default.translate("Ceres::Template.orderHistoryOpenDocument", {
+      return _TranslationService["default"].translate("Ceres::Template.orderHistoryOpenDocument", {
         documentName: this.getTypeName(type)
       });
     }
   }
 });
 
-},{"services/TranslationService":279}],207:[function(require,module,exports){
+},{"services/TranslationService":280}],207:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -25090,11 +25409,11 @@ Vue.component("order-history", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-history"
+      "default": "#vue-order-history"
     },
     orderDetailsTemplate: {
       type: String,
-      default: "Ceres::Checkout.OrderDetails"
+      "default": "Ceres::Checkout.OrderDetails"
     }
   },
   data: function data() {
@@ -25121,7 +25440,7 @@ Vue.component("order-history", {
   }
 });
 
-},{"services/ApiService":274}],208:[function(require,module,exports){
+},{"services/ApiService":275}],208:[function(require,module,exports){
 "use strict";
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
@@ -25132,29 +25451,29 @@ var _NotificationService = _interopRequireDefault(require("services/Notification
 
 var _utils = require("../../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.component("order-history-list", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-history-list"
+      "default": "#vue-order-history-list"
     },
     ordersPerPage: {
       type: Number,
-      default: 5
+      "default": 5
     },
     allowPaymentProviderChange: {
       type: Boolean,
-      default: false
+      "default": false
     },
     allowReturn: {
       type: Boolean,
-      default: true
+      "default": true
     },
     initialData: {
       type: Object,
-      default: null
+      "default": null
     }
   },
   data: function data() {
@@ -25193,7 +25512,7 @@ Vue.component("order-history-list", {
         var lastPage = this.orderList.page;
         this.orderList.page = page;
 
-        _ApiService.default.get("/rest/io/customer/order/list", {
+        _ApiService["default"].get("/rest/io/customer/order/list", {
           page: page,
           items: this.ordersPerPage
         }).done(function (response) {
@@ -25203,29 +25522,29 @@ Vue.component("order-history-list", {
           _this.waiting = false;
           _this.orderList.page = lastPage;
 
-          _NotificationService.default.error(_TranslationService.default.translate("Ceres::Template.returnHistoryOops"));
+          _NotificationService["default"].error(_TranslationService["default"].translate("Ceres::Template.returnHistoryOops"));
         });
       }
     }
   }
 });
 
-},{"../../helper/utils":270,"services/ApiService":274,"services/NotificationService":278,"services/TranslationService":279}],209:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275,"services/NotificationService":279,"services/TranslationService":280}],209:[function(require,module,exports){
 "use strict";
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.component("order-history-list-item", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-history-list-item"
+      "default": "#vue-order-history-list-item"
     },
     orderDetailsTemplate: {
       type: String,
-      default: "Ceres::MyAccount.Partials.OrderHistoryListItemDetails"
+      "default": "Ceres::MyAccount.Partials.OrderHistoryListItemDetails"
     },
     order: {
       type: Object,
@@ -25233,11 +25552,11 @@ Vue.component("order-history-list-item", {
     },
     allowPaymentProviderChange: {
       type: Boolean,
-      default: true
+      "default": true
     },
     allowReturn: {
       type: Boolean,
-      default: true
+      "default": true
     }
   },
   data: function data() {
@@ -25254,7 +25573,7 @@ Vue.component("order-history-list-item", {
       if (!this.waiting && !this.isDataLoaded) {
         this.waiting = true;
 
-        _ApiService.default.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
+        _ApiService["default"].get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
           var compiled = Vue.compile(orderDetails);
           var component = new Vue({
             data: {
@@ -25276,12 +25595,12 @@ Vue.component("order-history-list-item", {
   }
 });
 
-},{"services/ApiService":274}],210:[function(require,module,exports){
+},{"services/ApiService":275}],210:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -25322,29 +25641,29 @@ Vue.component("order-return-history", {
         }).fail(function (response) {
           _this2.waiting = false;
           _this2.returnsList.page = lastPage;
-          NotificationService.error(_TranslationService.default.translate("Ceres::Template.returnHistoryOops"));
+          NotificationService.error(_TranslationService["default"].translate("Ceres::Template.returnHistoryOops"));
         });
       }
     }
   }
 });
 
-},{"services/ApiService":274,"services/NotificationService":278,"services/TranslationService":279}],211:[function(require,module,exports){
+},{"services/ApiService":275,"services/NotificationService":279,"services/TranslationService":280}],211:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.component("order-return-history-item", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-return-history-item"
+      "default": "#vue-order-return-history-item"
     },
     returnOrder: {
       type: Object,
-      default: function _default() {
+      "default": function _default() {
         return {};
       }
     }
@@ -25359,12 +25678,12 @@ Vue.component("order-return-history-item", {
   },
   methods: {
     toggleNaming: function toggleNaming(element) {
-      if (document.getElementById(element).innerText === _TranslationService.default.translate("Ceres::Template.returnHistoryReturnShowMore")) {
+      if (document.getElementById(element).innerText === _TranslationService["default"].translate("Ceres::Template.returnHistoryReturnShowMore")) {
         this.itemsToRender = this.returnOrder.order.orderItems;
-        document.getElementById(element).innerText = _TranslationService.default.translate("Ceres::Template.returnHistoryReturnShowLess");
+        document.getElementById(element).innerText = _TranslationService["default"].translate("Ceres::Template.returnHistoryReturnShowLess");
       } else {
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
-        document.getElementById(element).innerText = _TranslationService.default.translate("Ceres::Template.returnHistoryReturnShowMore");
+        document.getElementById(element).innerText = _TranslationService["default"].translate("Ceres::Template.returnHistoryReturnShowMore");
       }
     },
     getOriginOrderId: function getOriginOrderId(order) {
@@ -25385,8 +25704,8 @@ Vue.component("order-return-history-item", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -25400,14 +25719,14 @@ Vue.component("order-return-history-item", {
   }
 });
 
-},{"services/TranslationService":279}],212:[function(require,module,exports){
+},{"services/TranslationService":280}],212:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -25417,15 +25736,15 @@ Vue.component("order-return-history-list", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-return-history-list"
+      "default": "#vue-order-return-history-list"
     },
     returnsPerPage: {
       type: Number,
-      default: 5
+      "default": 5
     },
     initialData: {
       type: Object,
-      default: null
+      "default": null
     }
   },
   data: function data() {
@@ -25460,26 +25779,26 @@ Vue.component("order-return-history-list", {
         }).fail(function (response) {
           _this.waiting = false;
           _this.returnsList.page = lastPage;
-          NotificationService.error(_TranslationService.default.translate("Ceres::Template.returnHistoryOops"));
+          NotificationService.error(_TranslationService["default"].translate("Ceres::Template.returnHistoryOops"));
         });
       }
     }
   }
 });
 
-},{"../../helper/utils":270,"services/ApiService":274,"services/NotificationService":278,"services/TranslationService":279}],213:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275,"services/NotificationService":279,"services/TranslationService":280}],213:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-return-history-list-item", {
   props: {
     template: {
       type: String,
-      default: "#vue-order-return-history-list-item"
+      "default": "#vue-order-return-history-list-item"
     },
     returnOrder: {
       type: Object,
       // eslint-disable-next-line
-      default: function _default() {}
+      "default": function _default() {}
     }
   },
   data: function data() {
@@ -25519,8 +25838,8 @@ Vue.component("order-return-history-list-item", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -25541,7 +25860,7 @@ var _TranslationService = _interopRequireDefault(require("services/TranslationSe
 
 var _ValidationService = _interopRequireDefault(require("services/ValidationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ApiService = require("services/ApiService");
 
@@ -25551,19 +25870,19 @@ Vue.component("newsletter-input", {
   props: {
     template: {
       type: String,
-      default: "#vue-newsletter-input"
+      "default": "#vue-newsletter-input"
     },
     showNameInputs: {
       type: Boolean,
-      default: false
+      "default": false
     },
     showPrivacyPolicyCheckbox: {
       type: Boolean,
-      default: true
+      "default": true
     },
     emailFolder: {
       type: Number,
-      default: 0
+      "default": 0
     }
   },
   data: function data() {
@@ -25581,10 +25900,10 @@ Vue.component("newsletter-input", {
 
       this.isDisabled = true;
 
-      _ValidationService.default.validate($("#newsletter-input-form_" + this._uid)).done(function () {
+      _ValidationService["default"].validate($("#newsletter-input-form_" + this._uid)).done(function () {
         _this.save();
       }).fail(function (invalidFields) {
-        _ValidationService.default.markInvalidFields(invalidFields, "error");
+        _ValidationService["default"].markInvalidFields(invalidFields, "error");
 
         _this.isDisabled = false;
       });
@@ -25598,11 +25917,11 @@ Vue.component("newsletter-input", {
         lastName: this.lastName,
         emailFolder: this.emailFolder
       }).done(function () {
-        NotificationService.success(_TranslationService.default.translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
+        NotificationService.success(_TranslationService["default"].translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
 
         _this2.resetInputs();
       }).fail(function () {
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.newsletterErrorMessage")).closeAfter(5000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.newsletterErrorMessage")).closeAfter(5000);
       }).always(function () {
         _this2.isDisabled = false;
       });
@@ -25616,7 +25935,7 @@ Vue.component("newsletter-input", {
   }
 });
 
-},{"services/ApiService":274,"services/NotificationService":278,"services/TranslationService":279,"services/ValidationService":281}],215:[function(require,module,exports){
+},{"services/ApiService":275,"services/NotificationService":279,"services/TranslationService":280,"services/ValidationService":282}],215:[function(require,module,exports){
 "use strict";
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -25739,11 +26058,11 @@ Vue.component("carousel", {
   props: {
     template: {
       type: String,
-      default: "#vue-carousel"
+      "default": "#vue-carousel"
     },
     itemsPerPage: {
       type: Number,
-      default: 4
+      "default": 4
     }
   },
   data: function data() {
@@ -26020,7 +26339,7 @@ Vue.component("notifications", {
   }
 });
 
-},{"../../helper/utils":270,"services/NotificationService":278}],220:[function(require,module,exports){
+},{"../../helper/utils":271,"services/NotificationService":279}],220:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -26036,15 +26355,15 @@ Vue.component("popper", {
   props: {
     template: {
       type: String,
-      default: "#vue-popper"
+      "default": "#vue-popper"
     },
     placement: {
       type: String,
-      default: "auto"
+      "default": "auto"
     },
     trigger: {
       type: String,
-      default: "click"
+      "default": "click"
     }
   },
   mounted: function mounted() {
@@ -26115,8 +26434,10 @@ Vue.component("popper", {
   }
 });
 
-},{"../../helper/dom":266,"../../helper/utils":270,"popper.js":136,"services/ModalService":277}],221:[function(require,module,exports){
+},{"../../helper/dom":266,"../../helper/utils":271,"popper.js":136,"services/ModalService":278}],221:[function(require,module,exports){
 "use strict";
+
+var _UrlService = require("../../services/UrlService");
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -26126,9 +26447,12 @@ Vue.component("shipping-country-select", {
   props: {
     template: {
       type: String,
-      default: "#vue-shipping-country-select"
+      "default": "#vue-shipping-country-select"
     },
     disableInput: {
+      type: Boolean
+    },
+    openBasketPreview: {
       type: Boolean
     }
   },
@@ -26143,17 +26467,23 @@ Vue.component("shipping-country-select", {
     basket: function basket(state) {
       return state.basket.data;
     }
-  })),
+  }), Vuex.mapGetters(["getCountryName"])),
+  created: function created() {
+    (0, _UrlService.removeUrlParam)("openBasketPreview");
+  },
   methods: {
     setShippingCountry: function setShippingCountry(id) {
       if (!this.isDisabled) {
-        this.$store.dispatch("selectShippingCountry", id);
+        this.$store.dispatch("selectShippingCountry", {
+          shippingCountryId: id,
+          openBasketPreview: this.openBasketPreview
+        });
       }
     }
   }
 });
 
-},{}],222:[function(require,module,exports){
+},{"../../services/UrlService":281}],222:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -26177,7 +26507,7 @@ Vue.component("shop-country-settings", {
   }
 });
 
-},{"services/ApiService":274}],223:[function(require,module,exports){
+},{"services/ApiService":275}],223:[function(require,module,exports){
 "use strict";
 
 var WaitScreenService = require("services/WaitScreenService");
@@ -26209,12 +26539,12 @@ Vue.component("wait-screen", {
   }
 });
 
-},{"services/WaitScreenService":283}],224:[function(require,module,exports){
+},{"services/WaitScreenService":284}],224:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -26253,13 +26583,13 @@ Vue.component("wish-list", {
   methods: _objectSpread({
     removeItem: function removeItem(item) {
       this.removeWishListItem(item).then(function () {
-        return NotificationService.success(_TranslationService.default.translate("Ceres::Template.wishListRemoved"));
+        return NotificationService.success(_TranslationService["default"].translate("Ceres::Template.wishListRemoved"));
       });
     }
   }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
 });
 
-},{"services/NotificationService":278,"services/TranslationService":279}],225:[function(require,module,exports){
+},{"services/NotificationService":279,"services/TranslationService":280}],225:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -26270,7 +26600,7 @@ Vue.component("wish-list-count", {
   props: {
     template: {
       type: String,
-      default: "#vue-wish-list-count"
+      "default": "#vue-wish-list-count"
     }
   },
   computed: {
@@ -26291,7 +26621,7 @@ Vue.component("wish-list-count", {
   }
 });
 
-},{"../../helper/utils":270,"services/ApiService":274}],226:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275}],226:[function(require,module,exports){
 "use strict";
 
 var _number = require("../../helper/number");
@@ -26306,7 +26636,7 @@ Vue.directive("basket-item-quantity", {
   }
 });
 
-},{"../../helper/number":267,"../../helper/utils":270}],227:[function(require,module,exports){
+},{"../../helper/number":268,"../../helper/utils":271}],227:[function(require,module,exports){
 "use strict";
 
 Vue.directive("basket-item-sum", {
@@ -26367,14 +26697,14 @@ Vue.directive("logout", {
   }
 });
 
-},{"services/ApiService":274,"services/UrlService":280}],230:[function(require,module,exports){
+},{"services/ApiService":275,"services/UrlService":281}],230:[function(require,module,exports){
 "use strict";
 
 var _index = _interopRequireDefault(require("../../store/index"));
 
 var _utils = require("../../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.directive("populate-store", {
   bind: function bind(el, binding) {
@@ -26384,15 +26714,15 @@ Vue.directive("populate-store", {
 
     if ((0, _utils.isDefined)(name)) {
       if (type === "action") {
-        _index.default.dispatch(name, data);
+        _index["default"].dispatch(name, data);
       } else if (type === "mutation") {
-        _index.default.commit(name, data);
+        _index["default"].commit(name, data);
       }
     }
   }
 });
 
-},{"../../helper/utils":270,"../../store/index":284}],231:[function(require,module,exports){
+},{"../../helper/utils":271,"../../store/index":285}],231:[function(require,module,exports){
 "use strict";
 
 Vue.directive("validate", {
@@ -26468,8 +26798,8 @@ Vue.directive("navigation-touch-handler", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
             }
           } finally {
             if (_didIteratorError) {
@@ -26506,7 +26836,7 @@ Vue.directive("open-mobile-navigation", {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-/*!
+/* !
  * A polyfill for object-fit
  *
  * @author: Toni Pinel
@@ -26636,7 +26966,7 @@ Vue.directive("stick-in-parent", {
   }
 });
 
-},{"../../helper/StickyElement":264,"../../helper/utils":270}],239:[function(require,module,exports){
+},{"../../helper/StickyElement":264,"../../helper/utils":271}],239:[function(require,module,exports){
 "use strict";
 
 var toggleTooltip = function toggleTooltip(el, disable) {
@@ -26666,11 +26996,11 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.exceptionMap = void 0;
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"]]);
+exports["default"] = exports.exceptionMap = void 0;
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"]]);
 exports.exceptionMap = exceptionMap;
 var _default = exceptionMap;
-exports.default = _default;
+exports["default"] = _default;
 
 },{}],241:[function(require,module,exports){
 "use strict";
@@ -26691,9 +27021,9 @@ Vue.filter("attachText", function (item, text) {
 
 var _MonetaryFormatter = _interopRequireDefault(require("../helper/MonetaryFormatter"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var formatter = new _MonetaryFormatter.default();
+var formatter = new _MonetaryFormatter["default"]();
 Vue.filter("currency", function (price) {
   if (price === "N / A") {
     return price;
@@ -26704,6 +27034,10 @@ Vue.filter("currency", function (price) {
 
 },{"../helper/MonetaryFormatter":263}],244:[function(require,module,exports){
 "use strict";
+
+var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // for docs see https://github.com/brockpetrie/vue-moment
 var dateFilter = function dateFilter() {
@@ -26807,7 +27141,8 @@ var dateFilter = function dateFilter() {
         // Format
         // Formats a date by taking a string of tokens and replacing them with their corresponding values.
         // http://momentjs.com/docs/#/displaying/format/
-        var format = method;
+        var format = method || _TranslationService["default"].translate("Ceres::Template.devDateFormatMoment");
+
         date = date.format(format);
     }
 
@@ -26821,7 +27156,7 @@ var dateFilter = function dateFilter() {
 Vue.filter("moment", dateFilter);
 Vue.filter("date", dateFilter);
 
-},{}],245:[function(require,module,exports){
+},{"services/TranslationService":280}],245:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -26844,17 +27179,18 @@ Vue.filter("fileName", function (path) {
   return fileName;
 });
 
-},{"../helper/utils":270}],246:[function(require,module,exports){
+},{"../helper/utils":271}],246:[function(require,module,exports){
 "use strict";
 
 Vue.filter("fileUploadPath", function (path) {
   var position = path.lastIndexOf("/");
+  var prefix = App.urls.includeLanguage ? "/" + App.language : "";
 
   if (position <= 0) {
-    return "/?GetOrderParamsFileName=" + path;
+    return prefix + "/?GetOrderParamsFileName=" + path;
   }
 
-  return "/order-property-file/" + path.substring(0, position) + "?filename=" + path.substring(position + 1);
+  return prefix + "/order-property-file/" + path.substring(0, position) + "?filename=" + path.substring(position + 1);
 });
 
 },{}],247:[function(require,module,exports){
@@ -26877,7 +27213,7 @@ Vue.filter("graduatedPrice", function (item, quantity) {
     }
   }
 
-  return returnPrice || item.prices.default.unitPrice.value;
+  return returnPrice || item.prices["default"].unitPrice.value;
 });
 
 },{}],248:[function(require,module,exports){
@@ -26886,16 +27222,16 @@ Vue.filter("graduatedPrice", function (item, quantity) {
 var _utils = require("../helper/utils");
 
 Vue.filter("hasItemDefaultPrice", function (itemData) {
-  var defaultPrice = itemData.prices.default;
+  var defaultPrice = itemData.prices["default"];
   return (0, _utils.isDefined)(defaultPrice) && !isNaN(defaultPrice.price.value);
 });
 
-},{"../helper/utils":270}],249:[function(require,module,exports){
+},{"../helper/utils":271}],249:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.filter("inputUnit", function (basketItem) {
   var shortString = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -26903,15 +27239,15 @@ Vue.filter("inputUnit", function (basketItem) {
 
   if (shortString) {
     if (basketItem.inputWidth > 0) {
-      result = "(" + _TranslationService.default.translate("Ceres::Template.itemInputWidth");
+      result = "(" + _TranslationService["default"].translate("Ceres::Template.itemInputWidth");
 
       if (basketItem.inputLength > 0) {
-        result += "/" + _TranslationService.default.translate("Ceres::Template.itemInputLength") + ")";
+        result += "/" + _TranslationService["default"].translate("Ceres::Template.itemInputLength") + ")";
       } else {
         result += ")";
       }
     } else if (basketItem.inputLength > 0) {
-      result = "(" + _TranslationService.default.translate("Ceres::Template.Length") + ")";
+      result = "(" + _TranslationService["default"].translate("Ceres::Template.Length") + ")";
     }
   } else if (basketItem.inputWidth > 0) {
     result = basketItem.inputWidth + basketItem.variation.data.unit.htmlUnit;
@@ -26926,19 +27262,19 @@ Vue.filter("inputUnit", function (basketItem) {
   return result;
 });
 
-},{"services/TranslationService":279}],250:[function(require,module,exports){
+},{"services/TranslationService":280}],250:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.filter("itemBundleName", function (item) {
   var prefixName;
 
   if (item.bundleType === "bundle") {
     prefixName = item.orderItemName.replace("[BUNDLE]", "").trim();
-    prefixName = _TranslationService.default.translate("Ceres::Template.itemBundleName", {
+    prefixName = _TranslationService["default"].translate("Ceres::Template.itemBundleName", {
       itemName: prefixName
     });
   } else if (item.bundleType == "bundle_item") {
@@ -26950,26 +27286,26 @@ Vue.filter("itemBundleName", function (item) {
   return prefixName;
 });
 
-},{"services/TranslationService":279}],251:[function(require,module,exports){
+},{"services/TranslationService":280}],251:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = _interopRequireDefault(require("../services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.filter("itemCrossPrice", function (crossPrice, isSpecialOffer) {
   if (isSpecialOffer) {
-    return _TranslationService.default.translate("Ceres::Template.crossPriceSpecialOffer", {
+    return _TranslationService["default"].translate("Ceres::Template.crossPriceSpecialOffer", {
       price: crossPrice
     });
   }
 
-  return _TranslationService.default.translate("Ceres::Template.crossPriceRRP", {
+  return _TranslationService["default"].translate("Ceres::Template.crossPriceRRP", {
     price: crossPrice
   });
 });
 
-},{"../services/TranslationService":279}],252:[function(require,module,exports){
+},{"../services/TranslationService":280}],252:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemImage", function (itemImages, highestPosition) {
@@ -27048,7 +27384,7 @@ Vue.filter("itemImages", function (images, accessor) {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.filter("itemName", function (_ref) {
   var _ref$texts = _ref.texts,
@@ -27079,7 +27415,7 @@ Vue.filter("itemName", function (_ref) {
   }
 
   if (bundleType === "bundle") {
-    itemName = _TranslationService.default.translate("Ceres::Template.itemBundleName", {
+    itemName = _TranslationService["default"].translate("Ceres::Template.itemBundleName", {
       itemName: itemName
     });
   }
@@ -27087,7 +27423,7 @@ Vue.filter("itemName", function (_ref) {
   return itemName;
 });
 
-},{"services/TranslationService":279}],256:[function(require,module,exports){
+},{"services/TranslationService":280}],256:[function(require,module,exports){
 "use strict";
 
 Vue.filter("specialOffer", function (defaultPrice, prices, priceType, exact) {
@@ -27150,7 +27486,7 @@ Vue.filter("itemURL", function (item) {
   return link + suffix + trailingSlash;
 });
 
-},{"../helper/utils":270}],258:[function(require,module,exports){
+},{"../helper/utils":271}],258:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -27175,7 +27511,7 @@ Vue.filter("numberFormat", function (number, decimals, separator) {
   return number.toFixed(decimals).replace(".", separator);
 });
 
-},{"../helper/number":267,"../helper/utils":270}],259:[function(require,module,exports){
+},{"../helper/number":268,"../helper/utils":271}],259:[function(require,module,exports){
 "use strict";
 
 Vue.filter("propertySurcharge", function (properties, propertyId) {
@@ -27218,8 +27554,8 @@ Vue.filter("propertySurchargeSum", function (item) {
       _iteratorError = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-          _iterator.return();
+        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+          _iterator["return"]();
         }
       } finally {
         if (_didIteratorError) {
@@ -27237,13 +27573,13 @@ Vue.filter("propertySurchargeSum", function (item) {
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.filter("translate", function (value, params) {
-  return _TranslationService.default.translate(value, params);
+  return _TranslationService["default"].translate(value, params);
 });
 
-},{"services/TranslationService":279}],262:[function(require,module,exports){
+},{"services/TranslationService":280}],262:[function(require,module,exports){
 "use strict";
 
 Vue.filter("truncate", function (string, value) {
@@ -27260,7 +27596,7 @@ Vue.filter("truncate", function (string, value) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _utils = require("./utils");
 
@@ -27417,9 +27753,9 @@ var MonetaryFormatter = function () {
 }();
 
 var _default = MonetaryFormatter;
-exports.default = _default;
+exports["default"] = _default;
 
-},{"./utils":270}],264:[function(require,module,exports){
+},{"./utils":271}],264:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27456,14 +27792,17 @@ function () {
     window.addEventListener("resize", this.resizeListener);
     this.checkMinWidth();
     this.vm.$nextTick(function () {
-      _this.el.parentElement.__stickyElements = _this.el.parentElement.__stickyElements || [];
+      var containerElement = _this.getContainerElement();
 
-      _this.el.parentElement.__stickyElements.push(_this);
+      containerElement.__stickyElements = _this.getContainerElement().__stickyElements || [];
 
-      _this.el.parentElement.__stickyElements.forEach(function (stickyElement) {
+      containerElement.__stickyElements.push(_this);
+
+      containerElement.__stickyElements.forEach(function (stickyElement) {
         return stickyElement.calculateOffset();
       });
     });
+    el.classList.add("sticky-element");
   }
 
   _createClass(StickyElement, [{
@@ -27482,7 +27821,6 @@ function () {
         _this2.el.parentNode.insertBefore(_this2.placeholder, _this2.el);
 
         _this2.eventListener = _this2.tick.bind(_this2);
-        _this2.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
         document.addEventListener("storeChanged", _this2.eventListener);
         STICKY_EVENTS.forEach(function (event) {
           window.addEventListener(event, _this2.eventListener);
@@ -27579,7 +27917,18 @@ function () {
         return;
       }
 
-      this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
+      this.offsetTop = 0;
+
+      if (document.getElementById("page-header-parent")) {
+        var headerChildren = document.getElementById("page-header-parent").children;
+
+        for (var i = 0; i < headerChildren.length; i++) {
+          if (!headerChildren[i].classList.contains("unfixed")) {
+            this.offsetTop += headerChildren[i].getBoundingClientRect().height;
+          }
+        }
+      }
+
       this.offsetBottom = 0;
 
       if ((0, _utils.isNullOrUndefined)(this.position)) {
@@ -27617,12 +27966,14 @@ function () {
           position: "fixed",
           top: this.position.y + "px",
           left: this.position.x + "px",
-          width: this.position.width + "px",
-          zIndex: 1
+          width: this.position.width + "px"
         };
         placeholderStyles = {
           paddingTop: this.position.height + "px"
         };
+        this.el.classList.add("is-sticky");
+      } else {
+        this.el.classList.remove("is-sticky");
       }
 
       (0, _dom.applyStyles)(this.el, styles);
@@ -27651,6 +28002,14 @@ function () {
   }, {
     key: "getContainerElement",
     value: function getContainerElement() {
+      if (this.el.dataset.hasOwnProperty("stickyContainer")) {
+        var container = document.querySelector(this.el.dataset.stickyContainer);
+
+        if (!(0, _utils.isNullOrUndefined)(container)) {
+          return container;
+        }
+      }
+
       return this.el.parentElement;
     }
   }, {
@@ -27660,8 +28019,10 @@ function () {
       var idx = this.getSiblingStickies().indexOf(this);
 
       if (idx >= 0) {
-        this.el.parentElement.__stickyElements.splice(idx, 1);
+        this.getContainerElement().__stickyElements.splice(idx, 1);
       }
+
+      this.el.classList.remove("sticky-element");
     }
   }]);
 
@@ -27670,7 +28031,7 @@ function () {
 
 exports.StickyElement = StickyElement;
 
-},{"./dom":266,"./utils":270}],265:[function(require,module,exports){
+},{"./dom":266,"./utils":271}],265:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27716,7 +28077,7 @@ function debounce(callback, timeout) {
   return callback;
 }
 
-},{"./utils":270}],266:[function(require,module,exports){
+},{"./utils":271}],266:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27807,7 +28168,47 @@ function applyStyles(el, styles) {
   });
 }
 
-},{"./utils":270}],267:[function(require,module,exports){
+},{"./utils":271}],267:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.get = get;
+
+var _utils = require("./utils");
+
+function get(object, path) {
+  var fields = path.split(".");
+  var key = fields.shift();
+
+  while (!(0, _utils.isNullOrUndefined)(object) && !(0, _utils.isNullOrUndefined)(key)) {
+    object = readField(object, key);
+    key = fields.shift();
+  }
+
+  return object;
+}
+
+function readField(object, field) {
+  if ((0, _utils.isNullOrUndefined)(object)) {
+    return null;
+  }
+
+  var match = /^{\s*(\S+)\s*,\s*(\S+)\s*}$/.exec(field);
+
+  if (!(0, _utils.isNullOrUndefined)(match)) {
+    var searchKey = match[1];
+    var searchValue = match[2];
+    return Array.prototype.slice.call(object).find(function (entry) {
+      return entry[searchKey] + "" === searchValue;
+    });
+  }
+
+  return object[field];
+}
+
+},{"./utils":271}],268:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27891,7 +28292,7 @@ function formatFloat(value, decimals, round) {
   return parseFloat(value.toFixed(decimals));
 }
 
-},{"./utils":270}],268:[function(require,module,exports){
+},{"./utils":271}],269:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27935,7 +28336,7 @@ function capitalize(input) {
   return ("" + input).charAt(0).toUpperCase() + ("" + input).substr(1);
 }
 
-},{"./utils":270}],269:[function(require,module,exports){
+},{"./utils":271}],270:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27970,7 +28371,7 @@ function pathnameEquals(pathname) {
   return window.location.pathname === pathname || window.location.pathname === pathname + "/" || window.location.pathname + "/" === pathname;
 }
 
-},{"./utils":270}],270:[function(require,module,exports){
+},{"./utils":271}],271:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28005,7 +28406,7 @@ function isNull(object) {
 
 
 function isUndefined(object) {
-  //eslint-disable-next-line
+  // eslint-disable-next-line
   return _typeof(object) === _typeof(void 0);
 }
 /**
@@ -28063,7 +28464,7 @@ function orderArrayByKey(array, key, desc) {
   });
 }
 
-},{}],271:[function(require,module,exports){
+},{}],272:[function(require,module,exports){
 "use strict";
 
 var browserDetect = require("detect-browser");
@@ -28097,6 +28498,11 @@ var init = function ($, window, document) {
       $("html").addClass(browser.name);
     } else {
       $("html").addClass("unkown-os");
+    } // Detect Facebook integrated Browser
+
+
+    if (typeof navigator !== "undefined" && /FBA[NV]\/([0-9\.]+)/.test(navigator.userAgent)) {
+      document.body.classList.add("facebook");
     }
 
     $(window).scroll(function () {
@@ -28242,7 +28648,7 @@ var init = function ($, window, document) {
   document.addEventListener("showShopNotification", showShopNotification);
 }(jQuery, window, document);
 
-},{"detect-browser":1,"services/AutoFocusService":275,"services/NotificationService":278}],272:[function(require,module,exports){
+},{"detect-browser":1,"services/AutoFocusService":276,"services/NotificationService":279}],273:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -28269,7 +28675,7 @@ Vue.mixin({
   }
 });
 
-},{"../helper/utils":270}],273:[function(require,module,exports){
+},{"../helper/utils":271}],274:[function(require,module,exports){
 "use strict";
 
 Vue.mixin({
@@ -28280,7 +28686,7 @@ Vue.mixin({
   }
 });
 
-},{}],274:[function(require,module,exports){
+},{}],275:[function(require,module,exports){
 "use strict";
 
 var _url = require("../helper/url");
@@ -28314,7 +28720,7 @@ module.exports = function ($) {
     get: _get,
     put: _put,
     post: _post,
-    delete: _delete,
+    "delete": _delete,
     send: _send,
     setToken: _setToken,
     getToken: _getToken,
@@ -28424,8 +28830,8 @@ module.exports = function ($) {
       notification = NotificationService.info(response.info);
     }
 
-    if (response.debug && response.debug.class.length > 0) {
-      notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
+    if (response.debug && response.debug["class"].length > 0) {
+      notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug["class"]);
 
       for (var i = 0; i < response.debug.trace.length; i++) {
         notification.trace(response.debug.trace[i]);
@@ -28442,7 +28848,7 @@ module.exports = function ($) {
   }
 }(jQuery);
 
-},{"../helper/url":269,"../helper/utils":270,"services/NotificationService":278,"services/WaitScreenService":283}],275:[function(require,module,exports){
+},{"../helper/url":270,"../helper/utils":271,"services/NotificationService":279,"services/WaitScreenService":284}],276:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28450,11 +28856,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.autoFocus = autoFocus;
 exports.triggerAutoFocus = triggerAutoFocus;
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ModalService = _interopRequireDefault(require("services/ModalService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -28469,7 +28875,7 @@ function autoFocus() {
 
       if (_typeof(modal) === "object") {
         (function () {
-          var currentModal = _ModalService.default.findModal(modal);
+          var currentModal = _ModalService["default"].findModal(modal);
 
           if (currentModal) {
             currentModal.on("shown.bs.modal", function () {
@@ -28484,8 +28890,8 @@ function autoFocus() {
     _iteratorError = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion && _iterator.return != null) {
-        _iterator.return();
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
       }
     } finally {
       if (_didIteratorError) {
@@ -28515,20 +28921,20 @@ var _default = {
   autoFocus: autoFocus,
   triggerAutoFocus: triggerAutoFocus
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"services/ModalService":277}],276:[function(require,module,exports){
+},{"services/ModalService":278}],277:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getItemListUrlParams = getItemListUrlParams;
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _UrlService = _interopRequireDefault(require("services/UrlService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function getItemListUrlParams(searchParams) {
   var urlParams = {};
@@ -28546,7 +28952,7 @@ function getItemListUrlParams(searchParams) {
     urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
   }
 
-  var newUrlParams = _UrlService.default.getUrlParams(document.location.search);
+  var newUrlParams = _UrlService["default"].getUrlParams(document.location.search);
 
   for (var urlParamKey in urlParams) {
     if (urlParams[urlParamKey] !== null) {
@@ -28562,9 +28968,9 @@ function getItemListUrlParams(searchParams) {
 var _default = {
   getItemListUrlParams: getItemListUrlParams
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"services/UrlService":280}],277:[function(require,module,exports){
+},{"services/UrlService":281}],278:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -28684,14 +29090,14 @@ module.exports = function ($) {
   }
 }(jQuery);
 
-},{}],278:[function(require,module,exports){
+},{}],279:[function(require,module,exports){
 "use strict";
 
 var _ExceptionMap = require("exceptions/ExceptionMap");
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -28779,7 +29185,7 @@ module.exports = function ($) {
 
   function _printNotification(notification) {
     if (notification.code > 0 && _ExceptionMap.exceptionMap.has(notification.code.toString())) {
-      notification.message = _TranslationService.default.translate("Ceres::Template." + _ExceptionMap.exceptionMap.get(notification.code.toString()));
+      notification.message = _TranslationService["default"].translate("Ceres::Template." + _ExceptionMap.exceptionMap.get(notification.code.toString()));
     }
 
     notifications.add(notification);
@@ -28857,13 +29263,13 @@ module.exports = function ($) {
   }
 }(jQuery);
 
-},{"exceptions/ExceptionMap":240,"services/TranslationService":279}],279:[function(require,module,exports){
+},{"exceptions/ExceptionMap":240,"services/TranslationService":280}],280:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _utils = require("../helper/utils");
 
@@ -28971,9 +29377,9 @@ var TranslationService = function ($) {
 }(jQuery);
 
 var _default = TranslationService;
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../helper/strings":268,"../helper/utils":270}],280:[function(require,module,exports){
+},{"../helper/strings":269,"../helper/utils":271}],281:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28987,7 +29393,7 @@ exports.removeUrlParams = removeUrlParams;
 exports.navigateTo = navigateTo;
 exports.navigateToParams = navigateToParams;
 exports.encodeParams = encodeParams;
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
@@ -28997,7 +29403,7 @@ var _url = require("../helper/url");
 
 var _index = _interopRequireDefault(require("../store/index"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -29030,8 +29436,8 @@ function getUrlParams(urlParams) {
 
 function setUrlParams(urlParams) {
   var pushState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  var pathName = (0, _utils.isDefined)(_index.default.state.navigation.currentCategory) && (0, _utils.isDefined)(_index.default.state.navigation.currentCategory.url) ? _index.default.state.navigation.currentCategory.url : window.location.pathname;
-  var params = _jquery.default.isEmptyObject(urlParams) ? "" : "?" + _jquery.default.param(urlParams);
+  var pathName = (0, _utils.isDefined)(_index["default"].state.navigation.currentCategory) && (0, _utils.isDefined)(_index["default"].state.navigation.currentCategory.url) ? _index["default"].state.navigation.currentCategory.url : window.location.pathname;
+  var params = _jquery["default"].isEmptyObject(urlParams) ? "" : "?" + _jquery["default"].param(urlParams);
   var titleElement = document.getElementsByTagName("title")[0];
 
   if (pushState) {
@@ -29050,8 +29456,8 @@ function setUrlParams(urlParams) {
       url: pathName + params
     }
   }));
-  (0, _jquery.default)("a[href][data-update-url]").each(function (i, element) {
-    var $element = (0, _jquery.default)(element);
+  (0, _jquery["default"])("a[href][data-update-url]").each(function (i, element) {
+    var $element = (0, _jquery["default"])(element);
     var href = /^([^?]*)(\?.*)?$/.exec($element.attr("href"));
 
     if (href && href[1]) {
@@ -29090,8 +29496,8 @@ function removeUrlParams(urlParamsToDelete) {
     _iteratorError = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion && _iterator.return != null) {
-        _iterator.return();
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
       }
     } finally {
       if (_didIteratorError) {
@@ -29109,7 +29515,7 @@ function navigateTo(url) {
 }
 
 function navigateToParams(urlParams) {
-  var pathName = (0, _utils.isDefined)(_index.default.state.navigation.currentCategory) && (0, _utils.isDefined)(_index.default.state.navigation.currentCategory.url) ? _index.default.state.navigation.currentCategory.url : window.location.pathname;
+  var pathName = (0, _utils.isDefined)(_index["default"].state.navigation.currentCategory) && (0, _utils.isDefined)(_index["default"].state.navigation.currentCategory.url) ? _index["default"].state.navigation.currentCategory.url : window.location.pathname;
   var url = (0, _url.normalizeUrl)(pathName + "?" + encodeParams(urlParams));
   window.location.assign(url);
 }
@@ -29146,9 +29552,9 @@ var _default = {
   removeUrlParams: removeUrlParams,
   removeUrlParam: removeUrlParam
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../helper/url":269,"../helper/utils":270,"../store/index":284,"jquery":3}],281:[function(require,module,exports){
+},{"../helper/url":270,"../helper/utils":271,"../store/index":285,"jquery":3}],282:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29159,18 +29565,18 @@ exports.getInvalidFields = getInvalidFields;
 exports.markInvalidFields = markInvalidFields;
 exports.markFailedValidationFields = markFailedValidationFields;
 exports.unmarkAllFields = unmarkAllFields;
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
 var _utils = require("../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var $form;
 
 function validate(form) {
-  var deferred = _jquery.default.Deferred();
+  var deferred = _jquery["default"].Deferred();
 
   var invalidFields = getInvalidFields(form);
 
@@ -29184,10 +29590,10 @@ function validate(form) {
 }
 
 function getInvalidFields(form) {
-  $form = (0, _jquery.default)(form);
+  $form = (0, _jquery["default"])(form);
   var invalidFormControls = [];
   $form.find("[data-validate]").each(function (i, elem) {
-    if (!_validateElement((0, _jquery.default)(elem))) {
+    if (!_validateElement((0, _jquery["default"])(elem))) {
       invalidFormControls.push(elem);
     }
   });
@@ -29196,8 +29602,8 @@ function getInvalidFields(form) {
 
 function markInvalidFields(fields, errorClass) {
   errorClass = errorClass || "error";
-  (0, _jquery.default)(fields).each(function (i, elem) {
-    var $elem = (0, _jquery.default)(elem);
+  (0, _jquery["default"])(fields).each(function (i, elem) {
+    var $elem = (0, _jquery["default"])(elem);
     $elem.addClass(errorClass);
 
     _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function () {
@@ -29206,7 +29612,7 @@ function markInvalidFields(fields, errorClass) {
 
         if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]")) {
           var groupName = $elem.attr("name");
-          (0, _jquery.default)("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
+          (0, _jquery["default"])("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
         }
 
         _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
@@ -29216,10 +29622,10 @@ function markInvalidFields(fields, errorClass) {
 }
 
 function markFailedValidationFields(form, validationErrors, errorClass) {
-  $form = (0, _jquery.default)(form);
+  $form = (0, _jquery["default"])(form);
   errorClass = errorClass || "error";
   $form.find("[data-model]").each(function (i, elem) {
-    var $elem = (0, _jquery.default)(elem);
+    var $elem = (0, _jquery["default"])(elem);
     var attribute = $elem.attr("data-model");
 
     if (attribute in validationErrors) {
@@ -29235,9 +29641,9 @@ function markFailedValidationFields(form, validationErrors, errorClass) {
 }
 
 function unmarkAllFields(form) {
-  $form = (0, _jquery.default)(form);
+  $form = (0, _jquery["default"])(form);
   $form.find("[data-validate]").each(function (i, elem) {
-    var $elem = (0, _jquery.default)(elem);
+    var $elem = (0, _jquery["default"])(elem);
     $elem.removeClass("error");
 
     _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
@@ -29245,9 +29651,10 @@ function unmarkAllFields(form) {
 }
 
 function _validateElement(elem) {
-  var $elem = (0, _jquery.default)(elem);
+  var $elem = (0, _jquery["default"])(elem);
+  /** return if the attribute data-validate is not present on the element */
 
-  if (!$elem.attr("data-validate")) {
+  if (!$elem[0].attributes.hasOwnProperty("data-validate")) {
     return true;
   }
 
@@ -29257,7 +29664,7 @@ function _validateElement(elem) {
   var hasError = false;
 
   _findFormControls($elem).each(function (i, formControl) {
-    var $formControl = (0, _jquery.default)(formControl);
+    var $formControl = (0, _jquery["default"])(formControl);
     var validationKey = validationKeys[i] || validationKeys[0];
 
     if (!_isActive($formControl)) {
@@ -29303,7 +29710,7 @@ function _validateGroup($formControl, validationKey) {
 }
 
 function _validateSelect($formControl, validationKey) {
-  return _jquery.default.trim($formControl.val()) !== validationKey;
+  return _jquery["default"].trim($formControl.val()) !== validationKey;
 }
 
 function _validateInput($formControl, validationKey) {
@@ -29312,10 +29719,10 @@ function _validateInput($formControl, validationKey) {
       return _hasValue($formControl);
 
     case "number":
-      return _hasValue($formControl) && _jquery.default.isNumeric(_jquery.default.trim($formControl.val()));
+      return _hasValue($formControl) && _jquery["default"].isNumeric(_jquery["default"].trim($formControl.val()));
 
     case "ref":
-      return _compareRef(_jquery.default.trim($formControl.val()), _jquery.default.trim($formControl.attr("data-validate-ref")));
+      return _compareRef(_jquery["default"].trim($formControl.val()), _jquery["default"].trim($formControl.attr("data-validate-ref")));
 
     case "date":
       return _isValidDate($formControl);
@@ -29330,7 +29737,7 @@ function _validateInput($formControl, validationKey) {
       {
         var ref = $formControl.attr("data-validate-ref");
         var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
-        return _hasValue($formControl) && regex.test(_jquery.default.trim($formControl.val()));
+        return _hasValue($formControl) && regex.test(_jquery["default"].trim($formControl.val()));
       }
 
     default:
@@ -29340,7 +29747,7 @@ function _validateInput($formControl, validationKey) {
 }
 
 function _hasValue($formControl) {
-  return _jquery.default.trim($formControl.val()).length > 0;
+  return _jquery["default"].trim($formControl.val()).length > 0;
 }
 /**
  * @param {any} $formControl - Input inside Formular
@@ -29373,7 +29780,7 @@ function _isValidDate($formControl) {
 
 
 function _isMail($formControl) {
-  var mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  var mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\x7f-\xff\-0-9]+\.)+[a-zA-Z\x7f-\xff]{2,}))$/);
   return mailRegEx.test($formControl.val());
 }
 /**
@@ -29390,8 +29797,8 @@ function _isPassword($formControl) {
 }
 
 function _compareRef(value, ref) {
-  if ((0, _jquery.default)(ref).length > 0) {
-    ref = _jquery.default.trim((0, _jquery.default)(ref).val());
+  if ((0, _jquery["default"])(ref).length > 0) {
+    ref = _jquery["default"].trim((0, _jquery["default"])(ref).val());
   }
 
   return value === ref;
@@ -29411,7 +29818,7 @@ function _isActive($elem) {
 
 function _eval(input) {
   // eslint-disable-next-line
-  return new Function("return " + input)();
+  return new Function("return ".concat(input, ";"))();
 }
 
 var _default = {
@@ -29421,9 +29828,9 @@ var _default = {
   markFailedValidationFields: markFailedValidationFields,
   unmarkAllFields: unmarkAllFields
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../helper/utils":270,"jquery":3}],282:[function(require,module,exports){
+},{"../helper/utils":271,"jquery":3}],283:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29431,7 +29838,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.transformVariationProperties = transformVariationProperties;
 exports.transformBasketItemProperties = transformBasketItemProperties;
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _utils = require("../helper/utils");
 
@@ -29492,8 +29899,8 @@ function transformVariationProperties(item) {
           _iteratorError3 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
-              _iterator3.return();
+            if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+              _iterator3["return"]();
             }
           } finally {
             if (_didIteratorError3) {
@@ -29510,8 +29917,8 @@ function transformVariationProperties(item) {
     _iteratorError = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion && _iterator.return != null) {
-        _iterator.return();
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
       }
     } finally {
       if (_didIteratorError) {
@@ -29544,8 +29951,8 @@ function transformVariationProperties(item) {
     _iteratorError2 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-        _iterator2.return();
+      if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+        _iterator2["return"]();
       }
     } finally {
       if (_didIteratorError2) {
@@ -29575,9 +29982,9 @@ var _default = {
   transformVariationProperties: transformVariationProperties,
   transformBasketItemProperties: transformBasketItemProperties
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../helper/utils":270}],283:[function(require,module,exports){
+},{"../helper/utils":271}],284:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -29619,13 +30026,13 @@ module.exports = function ($) {
   }
 }(jQuery);
 
-},{}],284:[function(require,module,exports){
+},{}],285:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _AddressModule = _interopRequireDefault(require("store/modules/AddressModule"));
 
@@ -29653,43 +30060,43 @@ var _WishListModule = _interopRequireDefault(require("store/modules/WishListModu
 
 var _EventPropagationPlugin = _interopRequireDefault(require("store/plugins/EventPropagationPlugin"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.use(require("vue-script2"));
 Vue.options.delimiters = ["${", "}"]; // eslint-disable-next-line
 
 var store = new Vuex.Store({
   modules: {
-    address: _AddressModule.default,
-    basket: _BasketModule.default,
-    checkout: _CheckoutModule.default,
-    item: _SingleItemModule.default,
-    itemList: _ItemListModule.default,
-    lastSeen: _LastSeenModule.default,
-    liveShopping: _LiveShoppingModule.default,
-    localization: _LocalizationModule.default,
-    navigation: _NavigationModule.default,
-    orderReturn: _OrderReturnModule.default,
-    user: _UserModule.default,
-    wishList: _WishListModule.default
+    address: _AddressModule["default"],
+    basket: _BasketModule["default"],
+    checkout: _CheckoutModule["default"],
+    item: _SingleItemModule["default"],
+    itemList: _ItemListModule["default"],
+    lastSeen: _LastSeenModule["default"],
+    liveShopping: _LiveShoppingModule["default"],
+    localization: _LocalizationModule["default"],
+    navigation: _NavigationModule["default"],
+    orderReturn: _OrderReturnModule["default"],
+    user: _UserModule["default"],
+    wishList: _WishListModule["default"]
   },
-  plugins: [_EventPropagationPlugin.default]
+  plugins: [_EventPropagationPlugin["default"]]
 });
 window.ceresStore = store;
 var _default = store;
-exports.default = _default;
+exports["default"] = _default;
 
-},{"store/modules/AddressModule":285,"store/modules/BasketModule":286,"store/modules/CheckoutModule":287,"store/modules/ItemListModule":288,"store/modules/LastSeenModule":289,"store/modules/LiveShoppingModule":290,"store/modules/LocalizationModule":291,"store/modules/NavigationModule":292,"store/modules/OrderReturnModule":293,"store/modules/SingleItemModule":294,"store/modules/UserModule":295,"store/modules/WishListModule":296,"store/plugins/EventPropagationPlugin":297,"vue-script2":140}],285:[function(require,module,exports){
+},{"store/modules/AddressModule":286,"store/modules/BasketModule":287,"store/modules/CheckoutModule":288,"store/modules/ItemListModule":289,"store/modules/LastSeenModule":290,"store/modules/LiveShoppingModule":291,"store/modules/LocalizationModule":292,"store/modules/NavigationModule":293,"store/modules/OrderReturnModule":294,"store/modules/SingleItemModule":295,"store/modules/UserModule":296,"store/modules/WishListModule":297,"store/plugins/EventPropagationPlugin":298,"vue-script2":140}],286:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var state = {
   billingAddressId: null,
@@ -29907,7 +30314,7 @@ var actions = {
 
       commit("setIsBasketLoading", true);
 
-      _ApiService.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {
+      _ApiService["default"].put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {
         supressNotifications: true
       }).done(function (response) {
         commit("setIsBasketLoading", false);
@@ -29941,7 +30348,7 @@ var actions = {
         commit("removeDeliveryAddress", address);
       }
 
-      _ApiService.default.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, {
+      _ApiService["default"]["delete"]("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, {
         keepOriginalResponse: true
       }).done(function (response) {
         if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
@@ -29973,7 +30380,7 @@ var actions = {
     var address = _ref12.address,
         addressType = _ref12.addressType;
     return new Promise(function (resolve, reject) {
-      _ApiService.default.post("/rest/io/customer/address?typeId=" + addressType, address, {
+      _ApiService["default"].post("/rest/io/customer/address?typeId=" + addressType, address, {
         supressNotifications: true
       }).done(function (response) {
         if (addressType === "1") {
@@ -29998,7 +30405,7 @@ var actions = {
     var address = _ref14.address,
         addressType = _ref14.addressType;
     return new Promise(function (resolve, reject) {
-      _ApiService.default.post("/rest/io/customer/address?typeId=" + addressType, address, {
+      _ApiService["default"].post("/rest/io/customer/address?typeId=" + addressType, address, {
         supressNotifications: true,
         keepOriginalResponse: true
       }).done(function (response) {
@@ -30054,15 +30461,15 @@ var _default = {
   actions: actions,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"services/ApiService":274}],286:[function(require,module,exports){
+},{"services/ApiService":275}],287:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
@@ -30072,7 +30479,7 @@ var _UrlService = require("../../services/UrlService");
 
 var _url = require("../../helper/url");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var NotificationService = require("services/NotificationService");
 
@@ -30157,9 +30564,9 @@ var actions = {
   loadBasketData: function loadBasketData(_ref3) {
     var commit = _ref3.commit,
         state = _ref3.state;
-    jQuery.when(_ApiService.default.get("/rest/io/basket", {}, {
+    jQuery.when(_ApiService["default"].get("/rest/io/basket", {}, {
       cache: false
-    }), _ApiService.default.get("/rest/io/basket/items", {
+    }), _ApiService["default"].get("/rest/io/basket/items", {
       template: "Ceres::Basket.Basket"
     }, {
       cache: false
@@ -30167,15 +30574,15 @@ var actions = {
       commit("setBasket", basket);
       commit("setBasketItems", basketItems);
       commit("setIsBasketInitiallyLoaded");
-    }).catch(function (error, status) {
+    })["catch"](function (error, status) {
       console.log(error, status);
 
       if (status > 0) {
-        NotificationService.error(_TranslationService.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
+        NotificationService.error(_TranslationService["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
       }
     });
 
-    _ApiService.default.listen("AfterBasketChanged", function (data) {
+    _ApiService["default"].listen("AfterBasketChanged", function (data) {
       commit("setBasket", data.basket);
       commit("setShowNetPrices", data.showNetPrices);
       commit("setBasketItems", data.basketItems);
@@ -30199,7 +30606,7 @@ var actions = {
       commit("setIsBasketLoading", true);
       basketItem.template = "Ceres::Basket.Basket";
 
-      _ApiService.default.post("/rest/io/basket/items/", basketItem).done(function (basketItems) {
+      _ApiService["default"].post("/rest/io/basket/items/", basketItem).done(function (basketItems) {
         commit("setBasketItems", basketItems);
         commit("setIsBasketLoading", false);
         resolve(basketItems);
@@ -30221,7 +30628,7 @@ var actions = {
       commit("setIsBasketLoading", true);
       basketItem.template = "Ceres::Basket.Basket";
 
-      _ApiService.default.put("/rest/io/basket/items/" + basketItem.id, basketItem).done(function (data) {
+      _ApiService["default"].put("/rest/io/basket/items/" + basketItem.id, basketItem).done(function (data) {
         commit("setBasketItems", data);
         commit("setIsBasketLoading", false);
         resolve(data);
@@ -30236,7 +30643,7 @@ var actions = {
     return new Promise(function (resolve, reject) {
       commit("setIsBasketLoading", true);
 
-      _ApiService.default.delete("/rest/io/basket/items/" + basketItemId, {
+      _ApiService["default"]["delete"]("/rest/io/basket/items/" + basketItemId, {
         template: "Ceres::Basket.Basket"
       }).done(function (basketItems) {
         commit("setBasketItems", basketItems);
@@ -30258,7 +30665,7 @@ var actions = {
     return new Promise(function (resolve, reject) {
       commit("setIsBasketLoading", true);
 
-      _ApiService.default.post("/rest/io/coupon", {
+      _ApiService["default"].post("/rest/io/coupon", {
         couponCode: couponCode
       }, {
         supressNotifications: true
@@ -30278,7 +30685,7 @@ var actions = {
     return new Promise(function (resolve, reject) {
       commit("setIsBasketLoading", true);
 
-      _ApiService.default.delete("/rest/io/coupon/" + couponCode).done(function (data) {
+      _ApiService["default"]["delete"]("/rest/io/coupon/" + couponCode).done(function (data) {
         commit("setCouponCode", null);
         commit("setIsBasketLoading", false);
         resolve(data);
@@ -30291,7 +30698,7 @@ var actions = {
   refreshBasket: function refreshBasket(_ref12) {
     var commit = _ref12.commit;
     return new Promise(function (resolve, reject) {
-      _ApiService.default.get("/rest/io/basket/").done(function (basket) {
+      _ApiService["default"].get("/rest/io/basket/").done(function (basket) {
         commit("setBasket", basket);
         resolve(basket);
       }).fail(function (error) {
@@ -30305,21 +30712,21 @@ var _default = {
   mutations: mutations,
   actions: actions
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../../helper/url":269,"../../services/UrlService":280,"services/ApiService":274,"services/NotificationService":278,"services/TranslationService":279}],287:[function(require,module,exports){
+},{"../../helper/url":270,"../../services/UrlService":281,"services/ApiService":275,"services/NotificationService":279,"services/TranslationService":280}],288:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
 var _utils = require("../../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var state = {
   shipping: {
@@ -30475,7 +30882,7 @@ var actions = {
       commit("setIsBasketLoading", true);
       commit("setMethodOfPayment", methodOfPaymentId);
 
-      _ApiService.default.post("/rest/io/checkout/paymentId/", {
+      _ApiService["default"].post("/rest/io/checkout/paymentId/", {
         paymentId: methodOfPaymentId
       }).done(function (response) {
         commit("setIsBasketLoading", false);
@@ -30496,7 +30903,7 @@ var actions = {
       commit("setIsBasketLoading", true);
       commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
-      _ApiService.default.post("/rest/io/checkout/shippingId/", {
+      _ApiService["default"].post("/rest/io/checkout/shippingId/", {
         shippingId: shippingProfile.parcelServicePresetId
       }).done(function (response) {
         commit("setSelectedShippingProfile", shippingProfile);
@@ -30513,7 +30920,7 @@ var actions = {
     var commit = _ref8.commit,
         dispatch = _ref8.dispatch;
     return new Promise(function (resolve, reject) {
-      _ApiService.default.get("/rest/io/checkout/").done(function (checkout) {
+      _ApiService["default"].get("/rest/io/checkout/").done(function (checkout) {
         dispatch("setCheckout", checkout);
         resolve(checkout);
       }).fail(function (error) {
@@ -30543,15 +30950,15 @@ var _default = {
   actions: actions,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../../helper/utils":270,"services/ApiService":274}],288:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275}],289:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
@@ -30561,7 +30968,7 @@ var _UrlService = require("services/UrlService");
 
 var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var state = {
   facets: [],
@@ -30590,9 +30997,9 @@ var mutations = {
     };
 
     if (!priceMax.length) {
-      priceFacet.name = _TranslationService.default.translate("Ceres::Template.itemFrom") + priceMinFormatted;
+      priceFacet.name = _TranslationService["default"].translate("Ceres::Template.itemFrom") + priceMinFormatted;
     } else if (!priceMin.length) {
-      priceFacet.name = _TranslationService.default.translate("Ceres::Template.itemTo") + priceMaxFormatted;
+      priceFacet.name = _TranslationService["default"].translate("Ceres::Template.itemTo") + priceMaxFormatted;
     } else {
       priceFacet.name = priceMinFormatted + " - " + priceMaxFormatted;
     }
@@ -30642,8 +31049,8 @@ var mutations = {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -30763,7 +31170,7 @@ var actions = {
     };
     commit("setIsItemListLoading", true);
     return new Promise(function (resolve, reject) {
-      _ApiService.default.get("/rest/io/facet", params).done(function (data) {
+      _ApiService["default"].get("/rest/io/facet", params).done(function (data) {
         commit("setFacets", data.facets);
         commit("setIsItemListLoading", false);
         resolve(data);
@@ -30817,21 +31224,21 @@ var _default = {
   actions: actions,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"services/ApiService":274,"services/ItemListUrlService":276,"services/TranslationService":279,"services/UrlService":280}],289:[function(require,module,exports){
+},{"services/ApiService":275,"services/ItemListUrlService":277,"services/TranslationService":280,"services/UrlService":281}],290:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
 var _utils = require("../../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var state = {
   containers: {},
@@ -30858,7 +31265,7 @@ var actions = {
       return new Promise(function (resolve, reject) {
         commit("setIsLastSeenItemsLoading", true);
 
-        _ApiService.default.put("/rest/io/item/last_seen/".concat(variationId)).done(function (response) {
+        _ApiService["default"].put("/rest/io/item/last_seen/".concat(variationId)).done(function (response) {
           if ((0, _utils.isDefined)(response.lastSeenItems)) {
             commit("setLastSeenItems", response.lastSeenItems.documents);
             commit("setLastSeenItemContainers", response.containers);
@@ -30883,7 +31290,7 @@ var actions = {
       return new Promise(function (resolve, reject) {
         commit("setIsLastSeenItemsLoading", true);
 
-        _ApiService.default.get("/rest/io/item/last_seen").done(function (response) {
+        _ApiService["default"].get("/rest/io/item/last_seen").done(function (response) {
           if ((0, _utils.isDefined)(response) && (0, _utils.isDefined)(response.lastSeenItems)) {
             commit("setLastSeenItems", response.lastSeenItems.documents);
             commit("setLastSeenItemContainers", response.containers);
@@ -30907,19 +31314,19 @@ var _default = {
   actions: actions,
   mutations: mutations
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../../helper/utils":270,"services/ApiService":274}],290:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275}],291:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var state = {
   liveShoppingOffers: {
@@ -30946,7 +31353,7 @@ var actions = {
   retrieveLiveShoppingOffer: function retrieveLiveShoppingOffer(_ref2, liveShoppingId) {
     var commit = _ref2.commit;
     return new Promise(function (resolve, reject) {
-      _ApiService.default.get("/rest/io/live-shopping/" + liveShoppingId).done(function (liveShoppingOffer) {
+      _ApiService["default"].get("/rest/io/live-shopping/" + liveShoppingId).done(function (liveShoppingOffer) {
         if (liveShoppingOffer.item) {
           commit("setLiveShoppingOffer", {
             liveShoppingId: liveShoppingId,
@@ -30973,21 +31380,23 @@ var _default = {
   mutations: mutations,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"services/ApiService":274}],291:[function(require,module,exports){
+},{"services/ApiService":275}],292:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
 var _utils = require("../../helper/utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _UrlService = require("services/UrlService");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var state = {
   shippingCountries: [],
@@ -31008,17 +31417,25 @@ var mutations = {
   }
 };
 var actions = {
-  selectShippingCountry: function selectShippingCountry(_ref, shippingCountryId) {
+  selectShippingCountry: function selectShippingCountry(_ref, _ref2) {
     var commit = _ref.commit,
         state = _ref.state;
+    var shippingCountryId = _ref2.shippingCountryId,
+        openBasketPreview = _ref2.openBasketPreview;
     return new Promise(function (resolve, reject) {
       var oldShippingCountryId = state.shippingCountryId;
       commit("setShippingCountryId", shippingCountryId);
 
-      _ApiService.default.post("/rest/io/shipping/country", {
+      _ApiService["default"].post("/rest/io/shipping/country", {
         shippingCountryId: shippingCountryId
       }).done(function (data) {
         if ((0, _utils.isNullOrUndefined)(oldShippingCountryId) || oldShippingCountryId !== data) {
+          if (openBasketPreview) {
+            (0, _UrlService.setUrlParam)({
+              openBasketPreview: 1
+            });
+          }
+
           window.location.reload();
         }
 
@@ -31053,15 +31470,15 @@ var _default = {
   actions: actions,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../../helper/utils":270,"services/ApiService":274}],292:[function(require,module,exports){
+},{"../../helper/utils":271,"services/ApiService":275,"services/UrlService":281}],293:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 var state = {
   tree: [],
   currentCategory: null
@@ -31139,8 +31556,8 @@ var actions = {
       _iteratorError = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-          _iterator.return();
+        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+          _iterator["return"]();
         }
       } finally {
         if (_didIteratorError) {
@@ -31183,8 +31600,8 @@ var actions = {
       _iteratorError2 = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-          _iterator2.return();
+        if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+          _iterator2["return"]();
         }
       } finally {
         if (_didIteratorError2) {
@@ -31216,19 +31633,19 @@ var _default = {
   actions: actions,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{}],293:[function(require,module,exports){
+},{}],294:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var state = {
   orderData: {},
@@ -31284,7 +31701,7 @@ var actions = {
           variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
         }
 
-        _ApiService.default.post("/rest/io/order/return", {
+        _ApiService["default"].post("/rest/io/order/return", {
           orderId: state.orderData.order.id,
           variationIds: variationIds,
           returnNote: state.orderReturnNote
@@ -31317,15 +31734,15 @@ var _default = {
   actions: actions,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"services/ApiService":274}],294:[function(require,module,exports){
+},{"services/ApiService":275}],295:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _utils = require("../../helper/utils");
 
@@ -31409,8 +31826,8 @@ var getters = {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -31443,7 +31860,7 @@ var getters = {
       }
     }
 
-    return returnPrice || calculatedPrices.default;
+    return returnPrice || calculatedPrices["default"];
   },
   variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
     var graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
@@ -31499,8 +31916,8 @@ var getters = {
         _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-            _iterator2.return();
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
           }
         } finally {
           if (_didIteratorError2) {
@@ -31537,10 +31954,6 @@ var getters = {
         })));
         var radioIdsToRemove = [];
 
-        var _arr = _toConsumableArray(new Set(radioInformation.map(function (radio) {
-          return radio.groupId;
-        })));
-
         var _loop2 = function _loop2() {
           var radioGroupId = _arr[_i];
           var radioGroupToClean = radioInformation.find(function (radio) {
@@ -31564,8 +31977,8 @@ var getters = {
               _iteratorError3 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
-                  _iterator3.return();
+                if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+                  _iterator3["return"]();
                 }
               } finally {
                 if (_didIteratorError3) {
@@ -31576,7 +31989,9 @@ var getters = {
           }
         };
 
-        for (var _i = 0; _i < _arr.length; _i++) {
+        for (var _i = 0, _arr = _toConsumableArray(new Set(radioInformation.map(function (radio) {
+          return radio.groupId;
+        }))); _i < _arr.length; _i++) {
           _loop2();
         }
 
@@ -31600,15 +32015,15 @@ var _default = {
   actions: actions,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../../helper/utils":270}],295:[function(require,module,exports){
+},{"../../helper/utils":271}],296:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _utils = require("../../helper/utils");
 
@@ -31655,19 +32070,19 @@ var _default = {
   mutations: mutations,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"../../helper/utils":270}],296:[function(require,module,exports){
+},{"../../helper/utils":271}],297:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _ApiService = _interopRequireDefault(require("services/ApiService"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var state = {
   wishListIds: [],
@@ -31704,7 +32119,7 @@ var actions = {
       if (ids && ids[0]) {
         commit("setWishListIds", ids);
 
-        _ApiService.default.get("/rest/io/variations/", {
+        _ApiService["default"].get("/rest/io/variations/", {
           variationIds: ids,
           template: "Ceres::WishList.WishList"
         }).done(function (data) {
@@ -31728,7 +32143,7 @@ var actions = {
         commit("removeWishListItem", wishListItem);
       }
 
-      _ApiService.default.delete("/rest/io/itemWishList/" + id).done(function (data) {
+      _ApiService["default"]["delete"]("/rest/io/itemWishList/" + id).done(function (data) {
         commit("removeWishListId", id);
         resolve(data);
       }).fail(function (error) {
@@ -31745,7 +32160,7 @@ var actions = {
     return new Promise(function (resolve, reject) {
       commit("addWishListId", id);
 
-      _ApiService.default.post("/rest/io/itemWishList", {
+      _ApiService["default"].post("/rest/io/itemWishList", {
         variationId: id
       }).done(function (data) {
         resolve(data);
@@ -31767,15 +32182,15 @@ var _default = {
   actions: actions,
   getters: getters
 };
-exports.default = _default;
+exports["default"] = _default;
 
-},{"services/ApiService":274}],297:[function(require,module,exports){
+},{"services/ApiService":275}],298:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = _default;
+exports["default"] = _default;
 
 var NotificationService = require("services/NotificationService");
 
@@ -31806,7 +32221,7 @@ function _default(store) {
   });
 }
 
-},{"lodash/cloneDeep":115,"services/NotificationService":278}]},{},[271,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,173,174,175,176,177,170,171,172,178,179,180,181,182,183,184,185,186,187,188,189,190,191,195,196,197,198,192,193,194,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,265,266,263,267,264,268,269,270,272,273,284,285,286,287,288,289,290,291,292,293,294,295,296,297])
+},{"lodash/cloneDeep":115,"services/NotificationService":279}]},{},[272,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,173,174,175,176,177,170,171,172,178,179,180,181,182,183,184,185,186,187,188,189,190,191,195,196,197,198,192,193,194,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,265,266,267,263,268,264,269,270,271,273,274,285,286,287,288,289,290,291,292,293,294,295,296,297,298])
 
 
 //# sourceMappingURL=ceres-app.js.map

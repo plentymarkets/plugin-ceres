@@ -45,6 +45,7 @@
                                             ${ property.value | fileName }
                                         </a>
                                     </span>
+                                    <span v-else-if="property.type === 'selection'">: ${ property.selectionValueName }</span>
                                     <span v-else-if="!!property.type">: ${ property.value }</span>
                                 </div>
                             </template>

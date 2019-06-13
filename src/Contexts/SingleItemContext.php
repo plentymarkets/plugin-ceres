@@ -51,7 +51,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $plentyId = (int) pluginApp(Application::class)->getPlentyId();
         foreach($this->item['documents'][0]['data']['defaultCategories'] as $category)
         {
-            if ($category['plentyId'] === $plentyId)
+            if ($category['plentyId'] == $plentyId)
             {
                 $defaultCategoryId = $category['id'];
                 break;

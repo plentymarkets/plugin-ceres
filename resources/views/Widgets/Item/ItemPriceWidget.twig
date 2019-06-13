@@ -11,7 +11,6 @@
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}
     v-if="$store.getters.currentItemVariation">
-    <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
     {% if widget.settings.showCrossPrice.mobile %}
         <div class="crossprice" v-if="$store.getters.currentItemVariation.prices.rrp && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > 0 && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > $store.getters.currentItemVariation.prices.default.unitPrice.value">

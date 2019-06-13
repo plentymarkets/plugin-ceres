@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-newsletter-input">
-        <form :id="'newsletter-input-form_' + _uid">
+        <form :id="'newsletter-input-form_' + _uid" @submit.prevent="validateData">
             <div class="row">
                 <div class="col-xs-6" v-if="showNameInputs">
                     <div class="input-unit">

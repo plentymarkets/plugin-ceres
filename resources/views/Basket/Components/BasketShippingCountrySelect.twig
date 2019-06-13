@@ -1,0 +1,21 @@
+<script type="x/template" id="vue-basket-shipping-country-select">
+    {% if ceresConfig.basket.showShippingCountrySelect %}
+        <div>
+            <div class="h3">{{ trans("Ceres::Template.headerSelectShippingCountry") }}</div>
+            <select v-if="localization.shippingCountries.length > 1" class="form-control" @change="setShippingCountry($event.target.value)">
+                <option v-for="shippingCountry in localization.shippingCountries"
+                        :value="shippingCountry.id"
+                        :class="{'is-disabled': isDisabled}"
+                        :disabled="isDisabled"
+                        v-tooltip="isDisabled"
+                        :selected="localization.shippingCountryId == shippingCountry.id">
+                    ${shippingCountry.currLangName}
+                </option>
+            </select>
+            <div v-else>
+                ${ getCountryName(localization.shippingCountryId) }
+            </div>
+            <hr>
+        </div>
+    {% endif %}
+</script>

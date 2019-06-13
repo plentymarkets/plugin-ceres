@@ -196,7 +196,7 @@
                             {% if item.orderProperties %}
                                 {% for property in item.orderProperties %}
                                     <div class="row">
-                                        <strong class="col-6 col-sm-3 col-md-5 item-word-break">{{ property.name }}</strong>
+                                        <strong class="col-6 col-sm-3 col-md-5 item-word-break">{{ property | propertyName }}</strong>
                                         {% if property.type == 'file' %}
                                             <span class="col-6 col-sm-9 item-word-break">
                                                 {% set splitPath = property.value |split('/') %}
@@ -214,10 +214,14 @@
                                                 {% endfor %}
 
 
-                                                <a href="order-property-file/{{ path }}?filename={{ filename }}" target="_blank">
+                                                <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}" target="_blank">
                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                                     {{ splitPath | last }}
                                                 </a>
+                                            </span>
+                                        {% elseif property.type == "selection" %}
+                                            <span class="col-6 col-sm-9 col-md-7 item-word-break">
+                                                {{ property | propertySelectionValueName }}
                                             </span>
                                         {% elseif property.type | length > 0 %}
                                             <span class="col-6 col-sm-9 col-md-7 item-word-break">{{ property.value }}</span>

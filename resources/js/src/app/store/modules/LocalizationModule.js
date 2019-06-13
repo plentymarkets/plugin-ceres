@@ -1,5 +1,6 @@
 import ApiService from "services/ApiService";
 import { isNullOrUndefined } from "../../helper/utils";
+import { setUrlParam } from "services/UrlService";
 
 const state =
     {
@@ -27,7 +28,7 @@ const mutations =
 
 const actions =
     {
-        selectShippingCountry({ commit, state }, shippingCountryId)
+        selectShippingCountry({ commit, state }, { shippingCountryId, openBasketPreview })
         {
             return new Promise((resolve, reject) =>
             {
@@ -39,6 +40,11 @@ const actions =
                     {
                         if (isNullOrUndefined(oldShippingCountryId) || oldShippingCountryId !== data)
                         {
+                            if (openBasketPreview)
+                            {
+                                setUrlParam({ openBasketPreview: 1 });
+                            }
+
                             window.location.reload();
                         }
                         resolve(data);
