@@ -1,32 +1,5 @@
 <script type="x/template" id="vue-variation-select">
-    <div class="row">
-        <div class="col-12 variation-select" v-for="(attribute, attributeId) in attributes">
-            <div class="input-unit" ref="labelBoxRef">
-                <select class="custom-select" v-model="selectedAttributes[attributeId]" @change="onSelectionChange(selectedAttributes[attributeId])">
-                        <option :value="null" v-if="hasEmptyOption">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
-                        <option
-                            v-for="(attributeValue, attributeValueId) in attribute.values"
-                            :value="attributeValueId"
-                            :disabled="!isEnabled(attributeId, attributeValueId)">
-                            ${ attributeValue }
-                        </option>
-                </select>
-                <label v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name">${ attribute.name }</label>
-            </div>
-        </div>
-
-        <div class="col-12 variation-select" v-if="possibleUnitIds.length > 1">
-            <div class="input-unit">
-                <select class="custom-select" v-model="selectedUnitId" @change="onSelectionChange(possibleUnitIds[selectedUnitId])">
-                    <option :value="0" v-if="hasEmptyOption">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
-                    <option
-                            v-for="unitCombinationId in possibleUnitIds"
-                            :value="unitCombinationId">
-                        ${ variationUnits[unitCombinationId] }
-                    </option>
-                </select>
-                <label v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.singleItemContent") }}">{{ trans("Ceres::Template.singleItemContent") }}</label>
-            </div>
-        </div>
+    <div>
+        Das hier ist das neue VariationSelect - diesmal klappt es :)
     </div>
 </script>
