@@ -5,7 +5,6 @@ namespace Ceres\Contexts;
 use IO\Helper\ContextInterface;
 use IO\Services\CategoryService;
 use IO\Services\CustomerService;
-use IO\Services\ItemService;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\ConfigRepository;
 
@@ -14,9 +13,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 {
     public $item;
 
+    public $attributes;
     public $variations;
-    public $attributeNameMap;
-    public $variationUnits;
     public $customerShowNetPrices;
     public $defaultCategory;
 
@@ -36,14 +34,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $mappedAvailability = $configRepository->get('Ceres.availability.mapping.availability' . $availabiltyId);
         $this->item['documents'][0]['data']['variation']['availability']['mappedAvailability'] = $mappedAvailability;
 
-        /** @var ItemService $itemService */
-        $itemService = pluginApp(ItemService::class);
-
-        $this->variations = $itemService->getVariationAttributeMap($itemData['item']['id']);
-
-        $list = $itemService->getAttributeNameMap($itemData['item']['id']);
-        $this->attributeNameMap = $list['attributes'];
-        $this->variationUnits = $list['units'];
+        $this->attributes = $params['variationAttributeMap']['attributes'];
+        $this->variations = $params['variationAttributeMap']['variations'];
 
         $this->customerShowNetPrices = $customerService->showNetPrices();
 

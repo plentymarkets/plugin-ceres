@@ -3,7 +3,10 @@ import { isNullOrUndefined } from "../../helper/utils";
 const state =
     {
         variation: {},
-        variationList: [],
+        attributes: [],
+        selectedAttributes: {},
+        selectedUnit: 0,
+        variations: [],
         variationOrderQuantity: 1,
         variationMarkInvalidProperties: false,
         isVariationSelected: true
@@ -20,9 +23,14 @@ const mutations =
             }
         },
 
-        setVariationList(state, variationList)
+        setItemAttributes(state, attributes)
         {
-            state.variationList = variationList;
+            state.attributes = attributes;
+        },
+
+        setItemVariations(state, variations)
+        {
+            state.variations = variations;
         },
 
         setVariationOrderProperty(state, { propertyId, value })

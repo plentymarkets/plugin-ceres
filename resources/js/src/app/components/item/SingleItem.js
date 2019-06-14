@@ -4,17 +4,19 @@ import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("single-item", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "attributeNameMap",
-        "variationUnits"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-single-item"
+        }
+    },
 
     jsonDataFields: [
         "itemData",
-        "variationListData"
+        "attributes",
+        "variations"
     ],
 
     computed:
@@ -36,7 +38,6 @@ Vue.component("single-item", {
 
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
-            variations: state => state.item.variationList,
             isVariationSelected: state => state.item.isVariationSelected
         }),
 
@@ -51,7 +52,8 @@ Vue.component("single-item", {
     created()
     {
         this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setVariationList", this.variationListData);
+        this.$store.commit("setItemAttributes", this.attributes);
+        this.$store.commit("setItemVariations", this.variations);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
     },
 
