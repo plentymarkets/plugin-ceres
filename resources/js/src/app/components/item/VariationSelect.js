@@ -11,7 +11,7 @@ Vue.component("variation-select", {
     data()
     {
         return {
-
+            initialVariationId: null
         };
     },
 
@@ -37,6 +37,7 @@ Vue.component("variation-select", {
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
             attributes: state => state.item.attributes,
+            variations: state => state.item.variations,
             selectedAttributes: state => state.item.selectedAttributes,
             selectedUnit: state => state.item.selectedUnit
         })
@@ -57,8 +58,20 @@ Vue.component("variation-select", {
          */
         initializeState()
         {
-            console.log("call initializeState()");
-            // TODO: setze die vorausgewählten Daten (Attribute und Unit)
+            this.initialVariationId = this.currentVariation.variation.id;
+            const initialVariation  = this.variations.find(variation => this.initialVariationId === parseInt(variation.variationId));
+            const initialUnit       = initialVariation.unitCombinationId;
+            const attributes        = {};
+
+            for (const attribute of this.attributes)
+            {
+                const variationAttribute = initialVariation.attributes.find(variationAttribute => variationAttribute.attributeId === attribute.attributeId);
+
+                attributes[attribute.attributeId] = variationAttribute ? variationAttribute.attributeValueId : null;
+            }
+
+            this.$store.commit("setItemSelectedAttributes", attributes);
+            this.$store.commit("setItemSelectedUnit", initialUnit);
         },
 
         selectAttribute()
