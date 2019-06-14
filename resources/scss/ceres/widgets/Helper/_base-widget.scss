@@ -51,31 +51,13 @@
     }
 }
 
-#page-header-parent > .widget:not(.widget-grid) {
-    margin-right: 0px;
-    margin-left: 0px;
-    width: 100vw;
-    left: calc(-1 * (100vw - 100%) / 2);
-}
-
-header .widget
-{
+#page-header-parent > .widget {
+    width: 1200px;
+    background-color: $gray-lightest;
     margin-bottom: 0;
-
-    &.widget-grid {
-        margin: 0;
-        width: 100vw;
-        left: calc(-1 * (100vw - 100%) / 2);
-
-        .col-12 {
-            padding: 0 7.5px;
-        }
-        .col-12:first-of-type {
-            padding: 0 7.5px 0 0;
-        }
-        .col-12:last-of-type {
-            padding: 0 0 0 7.5px;
-        }
+    
+    &:not(.widget-grid) {
+        width: 1170px;
     }
 }
 
