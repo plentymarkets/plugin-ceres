@@ -10,6 +10,7 @@
 {% set itemListId      = widget.settings.tagId.mobile %}
 {% set itemsPerPage    = widget.settings.itemsPerPage.mobile %}
 {% set manufacturerId  = widget.settings.manufacturerId.mobile %}
+{% set crossSellingRelationType  = widget.settings.crossSellingRelationType.mobile %}
 
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
@@ -29,6 +30,8 @@
     {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"])) }}
 {% elseif listType == 'manufacturer' %}
     {% set itemListId = manufacturerId %}
+{% elseif listType == 'cross_selling' %}
+    {% set relation = crossSellingRelationType %}
 {% endif %}
 
 {% set requestedListType = listType %}
@@ -39,7 +42,7 @@
 
 {% if listType != "last_seen" or not isPreview %}
     {# do not get item list for last seen items. Items will be loaded asynchronusly by vue component. #}
-    {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems]) ) }}
+    {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems, crossSellingRelationType]) ) }}
 {% endif %}
 
 {{ Twig.set("title", trans("Ceres::Widget.itemListPlaceholderListHeader") | json_encode ) }}
