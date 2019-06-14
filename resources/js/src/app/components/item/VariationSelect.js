@@ -17,10 +17,19 @@ Vue.component("variation-select", {
 
     computed:
     {
+        /**
+         * return all available units with id, present on the variations
+         */
         units()
         {
-            console.log("call units()");
-            // TODO: gibt alle existierenden Einheiten des Artikels zurück
+            const units = {};
+
+            for (const variation of this.variations)
+            {
+                units[variation.unitCombinationId] = variation.unitName;
+            }
+
+            return units;
         },
 
         hasEmptyOption()
@@ -74,16 +83,27 @@ Vue.component("variation-select", {
             this.$store.commit("setItemSelectedUnit", initialUnit);
         },
 
-        selectAttribute()
+        /**
+         * select an attribute
+         * @param {number} attributeId
+         * @param {[number, string, null]} attributeValueId
+         */
+        selectAttribute(attributeId, attributeValueId)
         {
-            console.log("call selectAttribute()");
-            // TODO: Selektiert ein Attribut
+            const selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+
+            selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
+
+            this.$store.commit("setItemSelectedAttributes", selectedAttributes);
         },
 
-        selectUnit()
+        /**
+         * select a unit
+         * @param {[number, string]} unitId
+         */
+        selectUnit(unitId)
         {
-            console.log("call selectUnit()");
-            // TODO: Selektiert eine Einheit
+            this.$store.commit("setItemSelectedUnit", parseInt(unitId));
         },
 
         filterVariations()

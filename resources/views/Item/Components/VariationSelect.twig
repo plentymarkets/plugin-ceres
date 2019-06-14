@@ -1,5 +1,34 @@
 <script type="x/template" id="vue-variation-select">
-    <div>
-        Das hier ist das neue VariationSelect - diesmal klappt es :)
+    <div class="row">
+
+        <div class="col-12 variation-select" v-for="attribute in attributes">
+            <div class="input-unit">
+                <select class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)">
+                    <option :value="null" v-if="true" :selected="selectedAttributes[attribute.attributeId] === null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+                    <option
+                        v-for="value in attribute.values"
+                        :value="value.attributeValueId"
+                        :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]">
+                        ${ value.name }
+                    </option>
+                </select>
+                <label>${ attribute.name }</label>
+            </div>
+        </div>
+
+        <div class="col-12 variation-select">
+            <div class="input-unit">
+                <select class="custom-select" @change="selectUnit($event.target.value)">
+                    <option
+                        v-for="(unit, unitId) in units"
+                        :value="unitId"
+                        :selected="parseInt(unitId) === selectedUnit">
+                        ${ unit }
+                    </option>
+                </select>
+                <label>{{ trans("Ceres::Template.singleItemContent") }}</label>
+            </div>
+        </div>
+       
     </div>
 </script>
