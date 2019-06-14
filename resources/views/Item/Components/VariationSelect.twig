@@ -9,7 +9,7 @@
                         v-for="value in attribute.values"
                         :value="value.attributeValueId"
                         :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]">
-                        ${ value.name }
+                        ${ value.name } ${ isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) ? "" : "*" }
                     </option>
                 </select>
                 <label>${ attribute.name }</label>
@@ -23,7 +23,7 @@
                         v-for="(unit, unitId) in units"
                         :value="unitId"
                         :selected="parseInt(unitId) === selectedUnit">
-                        ${ unit }
+                        ${ unit } ${ isUnitSelectionValid(unitId) ? "" : "*" }
                     </option>
                 </select>
                 <label>{{ trans("Ceres::Template.singleItemContent") }}</label>

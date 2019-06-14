@@ -106,22 +106,86 @@ Vue.component("variation-select", {
             this.$store.commit("setItemSelectedUnit", parseInt(unitId));
         },
 
-        filterVariations()
+        /**
+         * returns an object with two arrays (matching, notMatching), matching contains all variations, matching with current selection; notMatching contains all not matching variations
+         * attributes and unitId could be filled, to check a specific selection
+         * @param {object} attributes
+         * @param {number} unitId
+         */
+        filterVariations(attributes, unitId)
         {
-            console.log("call filterVariations()");
-            // TODO: gibt die Varianten in 2 Arrays zurück. Basierend auf der aktuellen Auswahl
+            attributes = attributes || this.selectedAttributes;
+            unitId = unitId || this.selectedUnit;
+
+            const matching = [];
+            const notMatching = [];
+
+            for (const variation of this.variations)
+            {
+                let isMatching = true;
+
+                // the selected unit is not matching
+                if (variation.unitCombinationId !== unitId)
+                {
+                    notMatching.push(variation);
+                    continue;
+                }
+
+                // the variation has no attributes
+                if (!variation.attributes.length)
+                {
+                    notMatching.push(variation);
+                    continue;
+                }
+
+                for (const attributeId in attributes)
+                {
+                    const variationAttribute = variation.attributes.find(variationAttribute => variationAttribute.attributeId === parseInt(attributeId));
+
+                    // an attribute is not matching with selection
+                    if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId])
+                    {
+                        notMatching.push(variation);
+                        isMatching = false;
+                        continue;
+                    }
+                }
+
+                if (isMatching)
+                {
+                    matching.push(variation);
+                }
+            }
+
+            return { matching, notMatching };
         },
 
-        isAttributeSelectionValid()
+        /**
+         * returns true, if the selection with a new attribute value would be valid
+         * @param {number} attributeId
+         * @param {[number, string, null]} attributeValueId
+         */
+        isAttributeSelectionValid(attributeId, attributeValueId)
         {
-            console.log("call isAttributeSelectionValid()");
-            // TODO: gibt true oder false zurück, ob die Auswahl basierend auf dem Attribut möglich wäre
+            const selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+
+            selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
+            return !!this.filterVariations(selectedAttributes).matching.length;
         },
 
-        isUnitSelectionValid()
+        /**
+         * returns true, if the selection with a new unitId would be valid
+         * @param {[number, string]} unitId
+         */
+        isUnitSelectionValid(unitId)
         {
-            console.log("call isUnitSelectionValid()");
-            // TODO: gibt true oder false zurück, ob die Auswahl basierend auf der Einheit möglich wäre
+            unitId = parseInt(unitId);
+            if (this.selectedUnit === unitId)
+            {
+                return true;
+            }
+
+            return !!this.filterVariations(null, unitId).matching.length;
         },
 
         setVariation()
