@@ -40,7 +40,7 @@
 
 <slot name="before-price"></slot>
 
-<div class="row" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
+<div v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
     <order-property-list></order-property-list>
 </div>
 
