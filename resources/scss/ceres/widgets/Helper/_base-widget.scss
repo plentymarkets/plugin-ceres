@@ -51,9 +51,44 @@
     }
 }
 
+#page-header-parent > .widget:not(.widget-grid) {
+    margin-right: 0px;
+    margin-left: 0px;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2);
+}
+
 header .widget
 {
     margin-bottom: 0;
+
+    &.widget-grid {
+        margin-right: 0px;
+        margin-left: 0px;
+        width: 100vw;
+        left: calc(-1 * (100vw - 100%) / 2);
+
+        .col-12:first-of-type {
+            padding-left: 0;
+            padding-right: 7.5px;
+        }
+        .col-12:last-of-type {
+            padding-left: 7.5px;
+            padding-right: 0;
+        }
+
+        &.widget-three-col {
+            .col-12:nth-of-type(2) {
+                padding: 0 7.5px;
+            }
+        }
+        &.widget-four-col {
+            .col-12:nth-of-type(2),
+            .col-12:nth-of-type(3) {
+                padding: 0 7.5px;
+            }
+        }
+    }
 }
 
 .widget-fw
