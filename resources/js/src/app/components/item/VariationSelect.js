@@ -1,4 +1,5 @@
 import { isNull } from "util";
+import { isDefined } from "../../helper/utils";
 
 Vue.component("variation-select", {
 
@@ -44,7 +45,7 @@ Vue.component("variation-select", {
          */
         isCurrentSelectionValid()
         {
-            return this.filterVariations().matching.length === 1;
+            return this.filterVariations().length === 1;
         },
 
         ...Vuex.mapState({
@@ -88,30 +89,121 @@ Vue.component("variation-select", {
         },
 
         /**
-         * select an attribute
+         * select an attribute and check, if the selection is valid; if not, unsetInvalidSelection will be executed
          * @param {number} attributeId
          * @param {[number, string, null]} attributeValueId
          */
         selectAttribute(attributeId, attributeValueId)
         {
+            attributeValueId = parseInt(attributeValueId) || null;
             const selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
 
-            selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
+            selectedAttributes[attributeId] = attributeValueId;
 
             this.$store.commit("setItemSelectedAttributes", selectedAttributes);
+
+            if (this.isCurrentSelectionValid)
+            {
+                this.setVariation();
+            }
+            else
+            {
+                this.unsetInvalidSelection(attributeId, attributeValueId);
+            }
         },
 
         /**
-         * select a unit
+         * select a unit and check, if the selection is valid; if not, unsetInvalidSelection will be executed
          * @param {[number, string]} unitId
          */
         selectUnit(unitId)
         {
-            this.$store.commit("setItemSelectedUnit", parseInt(unitId));
+            unitId = parseInt(unitId);
+            this.$store.commit("setItemSelectedUnit", unitId);
+
+            if (this.isCurrentSelectionValid)
+            {
+                this.setVariation();
+            }
+            else
+            {
+                this.unsetInvalidSelection(null, null, unitId);
+            }
+        },
+
+        unsetInvalidSelection(attributeId, attributeValueId, unitId)
+        {
+            let qualifiedVariations;
+
+            if (isDefined(attributeValueId))
+            {
+                qualifiedVariations = this.variations.filter(variation =>
+                {
+                    return isDefined(variation.attributes.find(attribute =>
+                        attribute.attributeId === attributeId && attribute.attributeValueId === attributeValueId));
+                });
+            }
+            else if (isDefined(unitId))
+            {
+                qualifiedVariations = this.variations.filter(variation => variation.unitCombinationId === unitId);
+            }
+            else
+            {
+                // variations without attributes
+                return;
+            }
+
+            let bestChoice;
+            let numberOfRequiredChanges;
+
+            for (const variation of qualifiedVariations)
+            {
+                let changes = 0;
+
+                if (variation.unitCombinationId !== this.selectedUnit)
+                {
+                    changes++;
+                }
+
+                for (const attribute of variation.attributes)
+                {
+                    if (this.selectedAttributes[attribute.attributeId] !== attribute.attributeValueId)
+                    {
+                        changes++;
+                    }
+                }
+
+                if (!numberOfRequiredChanges || changes < numberOfRequiredChanges)
+                {
+                    bestChoice = variation;
+                    numberOfRequiredChanges = changes;
+                }
+            }
+
+            const attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+
+            for (const attribute of bestChoice.attributes)
+            {
+                if (this.selectedAttributes[attribute.attributeId] !== attribute.attributeValueId)
+                {
+                    attributes[attribute.attributeId] = null;
+                }
+            }
+            if (bestChoice.unitCombinationId !== this.selectedUnit)
+            {
+                this.$store.commit("setItemSelectedUnit", bestChoice.unitCombinationId);
+            }
+
+            this.$store.commit("setItemSelectedAttributes", attributes);
+
+            if (this.isCurrentSelectionValid)
+            {
+                this.setVariation();
+            }
         },
 
         /**
-         * returns an object with two arrays (matching, notMatching), matching contains all variations, matching with current selection; notMatching contains all not matching variations
+         * returns matching variations with current selection
          * attributes and unitId could be filled, to check a specific selection
          * @param {object} attributes
          * @param {number} unitId
@@ -122,7 +214,6 @@ Vue.component("variation-select", {
             unitId = unitId || this.selectedUnit;
 
             const matching = [];
-            const notMatching = [];
 
             const uniqueValues = [...new Set(Object.values(attributes))];
             const isEmptyOptionSelected = uniqueValues.length === 1 && isNull(uniqueValues[0]);
@@ -134,14 +225,12 @@ Vue.component("variation-select", {
                 // the selected unit is not matching
                 if (variation.unitCombinationId !== unitId)
                 {
-                    notMatching.push(variation);
                     continue;
                 }
 
                 // the variation has no attributes (only checked, if any attribute has a selected value)
                 if (!isEmptyOptionSelected && !variation.attributes.length)
                 {
-                    notMatching.push(variation);
                     continue;
                 }
 
@@ -150,11 +239,9 @@ Vue.component("variation-select", {
                     const variationAttribute = variation.attributes.find(variationAttribute => variationAttribute.attributeId === parseInt(attributeId));
 
                     // an attribute is not matching with selection
-                    if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId])
+                    if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && attributes[attributeId] !== null)
                     {
-                        notMatching.push(variation);
                         isMatching = false;
-                        continue;
                     }
                 }
 
@@ -164,7 +251,7 @@ Vue.component("variation-select", {
                 }
             }
 
-            return { matching, notMatching };
+            return matching;
         },
 
         /**
@@ -183,7 +270,7 @@ Vue.component("variation-select", {
             const selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
 
             selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
-            return !!this.filterVariations(selectedAttributes).matching.length;
+            return !!this.filterVariations(selectedAttributes).length;
         },
 
         /**
@@ -198,7 +285,7 @@ Vue.component("variation-select", {
                 return true;
             }
 
-            return !!this.filterVariations(null, unitId).matching.length;
+            return !!this.filterVariations(null, unitId).length;
         },
 
         setVariation()
