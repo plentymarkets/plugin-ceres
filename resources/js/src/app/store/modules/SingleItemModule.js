@@ -28,6 +28,16 @@ const mutations =
             state.attributes = attributes;
         },
 
+        setItemSelectedAttributes(state, selectedAttributes)
+        {
+            state.selectedAttributes = selectedAttributes;
+        },
+
+        setItemSelectedUnit(state, selectedUnit)
+        {
+            state.selectedUnit = selectedUnit;
+        },
+
         setItemVariations(state, variations)
         {
             state.variations = variations;

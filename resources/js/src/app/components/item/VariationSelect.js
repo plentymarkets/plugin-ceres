@@ -167,6 +167,12 @@ Vue.component("variation-select", {
          */
         isAttributeSelectionValid(attributeId, attributeValueId)
         {
+            attributeValueId = parseInt(attributeValueId) || null;
+            if (this.selectedAttributes[attributeId] === attributeValueId)
+            {
+                return true;
+            }
+
             const selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
 
             selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
