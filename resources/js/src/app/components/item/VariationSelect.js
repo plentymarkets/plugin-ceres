@@ -1,3 +1,5 @@
+import { isNull } from "util";
+
 Vue.component("variation-select", {
 
     props: {
@@ -37,10 +39,12 @@ Vue.component("variation-select", {
             console.log("call hasEmptyOption()");
         },
 
+        /**
+         * returns true, if the current selection of attributes and unit will resolve a variation
+         */
         isCurrentSelectionValid()
         {
-            console.log("call isCurrentSelectionValid()");
-            // TODO: gibt zurück, ob die aktuelle Auswahl von Attributen und Einheit gültig ist.
+            return this.filterVariations().matching.length === 1;
         },
 
         ...Vuex.mapState({
@@ -120,6 +124,9 @@ Vue.component("variation-select", {
             const matching = [];
             const notMatching = [];
 
+            const uniqueValues = [...new Set(Object.values(attributes))];
+            const isEmptyOptionSelected = uniqueValues.length === 1 && isNull(uniqueValues[0]);
+
             for (const variation of this.variations)
             {
                 let isMatching = true;
@@ -131,8 +138,8 @@ Vue.component("variation-select", {
                     continue;
                 }
 
-                // the variation has no attributes
-                if (!variation.attributes.length)
+                // the variation has no attributes (only checked, if any attribute has a selected value)
+                if (!isEmptyOptionSelected && !variation.attributes.length)
                 {
                     notMatching.push(variation);
                     continue;
