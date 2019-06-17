@@ -32,6 +32,7 @@ class DefaultSingleitemPreset implements ContentPreset
         $this->createNameHeader();
         $this->createSeparatorWidget();
         $this->createItemVariationNumber();
+        $this->createItemBundleWidget();
         $this->createGraduatedPriceWidget();
         $this->createItemPriceWidget();
         $this->createItemAvailabilityWidget();
@@ -157,6 +158,12 @@ class DefaultSingleitemPreset implements ContentPreset
     private function createGraduatedPriceWidget()
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::GraduatedPriceWidget')
+            ->withSetting('appearance', 'primary');
+    }
+
+    private function createItemBundleWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::ItemBundleWidget')
             ->withSetting('appearance', 'primary');
     }
 }
