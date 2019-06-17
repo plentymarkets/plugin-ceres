@@ -266,17 +266,24 @@ Vue.component("variation-select", {
                         variationAttribute.attributeId === parseInt(attributeId));
 
                     // an attribute is not matching with selection
-                    if (strict)
-                    {
-                        if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId])
-                        {
-                            return false;
-                        }
-                    }
-                    else if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && attributes[attributeId] !== null)
+                    if (variationAttribute &&
+                        variationAttribute.attributeValueId !== attributes[attributeId] &&
+                        (!strict || strict && attributes[attributeId] !== null))
                     {
                         return false;
                     }
+
+                    // if (strict)
+                    // {
+                    //     if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId])
+                    //     {
+                    //         return false;
+                    //     }
+                    // }
+                    // else if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && attributes[attributeId] !== null)
+                    // {
+                    //     return false;
+                    // }
                 }
 
                 return true;
