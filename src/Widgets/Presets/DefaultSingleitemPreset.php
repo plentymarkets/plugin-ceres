@@ -21,36 +21,25 @@ class DefaultSingleitemPreset implements ContentPreset
     /** @var PresetWidgetFactory */
     private $stickyContainer;
 
-    /** @var PresetWidgetFactory */
-    private $twoColumnWidgetAddresses;
-
-    /** @var PresetWidgetFactory */
-    private $twoColumnWidgetAccountSettings;
-
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
         $this->ceresConfig = pluginApp(CeresConfig::class);
-        $this->twoColumnWidget();
+        $this->createTwoColumnWidget();
         $this->createItemImageWidget();
         $this->createStickyContainer();
         $this->createManufacturer();
         $this->createNameHeader();
         $this->createSeparatorWidget();
         $this->createItemVariationNumber();
+        $this->createGraduatedPriceWidget();
         $this->createItemPriceWidget();
         $this->createItemAvailabilityWidget();
         $this->createAddToBasketWidget();
         $this->createAddToWishListWiget();
         $this->createSeparatorWidget();
-        $text = `* {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.singleItemExclVAT") }}{% else %}{{ trans("Ceres::Template.singleItemInclVAT") }}{% endif %} {{ trans("Ceres::Template.singleItemExclusive") }}
-                <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a>`;
-        $this->stickyContainer->createChild('second','Ceres::TextWidget')
-            ->withSetting('text',$text)
-            ->withSetting('appearance', 'none');
-            $this->preset->createWidget('Ceres::TextWidget')
-            ->withSetting('appearance, none')
-            ->withSetting('text','<h1 class="text-muted">{{ trans("Ceres::Template.singleItemShippingCosts") }}</h1>');
+        $this->createLegalInformation();
+
         return $this->preset->toArray();
     }
 
@@ -59,7 +48,7 @@ class DefaultSingleitemPreset implements ContentPreset
         $this->stickyContainer = $this->twoColumnWidget->createChild('second', 'Ceres::StickyContainerWidget');
     }
 
-    private function twoColumnWidget()
+    private function createTwoColumnWidget()
     {
         $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')->withSetting('layout', 'sevenToFive');
     }
@@ -83,6 +72,10 @@ class DefaultSingleitemPreset implements ContentPreset
             ->withSetting('spacing.padding.left.unit', null)
             ->withSetting('spacing.padding.right.value', 0)
             ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text', "<h1>{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\TextsDataFieldProvider::name1 #}{{ item_data_field('texts.name1') }}</h1>")
             ->withSetting('appearance','none');
     }
@@ -118,7 +111,7 @@ class DefaultSingleitemPreset implements ContentPreset
     private function createItemVariationNumber()
     {
         $text = '';
-        $text .= "<b>{{ trans(\"Ceres::Template.singleItemNumber\") }}</b>";
+        $text .= "<b>{{ trans(\"Ceres::Template.singleItemNumber\") }}</b> &nbsp;&nbsp;";
         $text .= "{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\VariationGlobalDataFieldProvider::number #}";
         $text .= "{{ item_data_field('variation.number') }}";
 
@@ -144,8 +137,26 @@ class DefaultSingleitemPreset implements ContentPreset
 
     private function createSeparatorWidget()
     {
-        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget');
+        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget')
+            ->withSetting('customMargin', true)
+            ->withSetting('margin.top.value', 0)
+            ->withSetting('margin.top.unit', null)
+            ->withSetting('margin.bottom.value', 0)
+            ->withSetting('margin.bottom.unit', null);
     }
 
+    private function createLegalInformation()
+    {
+        $text = `* {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.singleItemExclVAT") }}{% else %}{{ trans("Ceres::Template.singleItemInclVAT") }}{% endif %} {{ trans("Ceres::Template.singleItemExclusive") }}
+                <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a>`;
+        $this->stickyContainer->createChild('second', 'Ceres::TextWidget')
+            ->withSetting('text', $text)
+            ->withSetting('appearance', 'none');
+    }
 
+    private function createGraduatedPriceWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::GraduatedPriceWidget')
+            ->withSetting('appearance', 'primary');
+    }
 }
