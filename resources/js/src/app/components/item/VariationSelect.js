@@ -246,47 +246,41 @@ Vue.component("variation-select", {
             const uniqueValues = [...new Set(Object.values(attributes))];
             const isEmptyOptionSelected = uniqueValues.length === 1 && isNull(uniqueValues[0]);
 
-            for (const variation of this.variations)
+            return this.variations.filter(variation =>
             {
-                let isMatching = true;
-
                 // the selected unit is not matching
                 if (variation.unitCombinationId !== unitId)
                 {
-                    continue;
+                    return false;
                 }
 
                 // the variation has no attributes (only checked, if any attribute has a selected value); or the variation has attributes and empty option is selected
                 if ((!isEmptyOptionSelected && !variation.attributes.length) || (isEmptyOptionSelected && variation.attributes.length))
                 {
-                    continue;
+                    return false;
                 }
 
                 for (const attributeId in attributes)
                 {
-                    const variationAttribute = variation.attributes.find(variationAttribute => variationAttribute.attributeId === parseInt(attributeId));
+                    const variationAttribute = variation.attributes.find(variationAttribute =>
+                        variationAttribute.attributeId === parseInt(attributeId));
 
                     // an attribute is not matching with selection
                     if (strict)
                     {
                         if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId])
                         {
-                            isMatching = false;
+                            return false;
                         }
                     }
                     else if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && attributes[attributeId] !== null)
                     {
-                        isMatching = false;
+                        return false;
                     }
                 }
 
-                if (isMatching)
-                {
-                    matching.push(variation);
-                }
-            }
-
-            return matching;
+                return true;
+            });
         },
 
         /**
