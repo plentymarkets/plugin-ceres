@@ -268,7 +268,7 @@ Vue.component("variation-select", {
                     // an attribute is not matching with selection
                     if (variationAttribute &&
                         variationAttribute.attributeValueId !== attributes[attributeId] &&
-                        (!strict || strict && attributes[attributeId] !== null))
+                        (strict || !strict && attributes[attributeId] !== null))
                     {
                         return false;
                     }
