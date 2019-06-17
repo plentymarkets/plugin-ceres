@@ -1,5 +1,8 @@
 import { isNull } from "util";
 import { isDefined } from "../../helper/utils";
+import TranslationService from "services/TranslationService";
+
+const NotificationService = require("services/NotificationService");
 
 Vue.component("variation-select", {
 
@@ -189,16 +192,28 @@ Vue.component("variation-select", {
             }
 
             const attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+            const messages = [];
+            const translationNotAvailable = TranslationService.translate("Ceres::Template.singleItemNotAvailable");
 
             for (const attribute of bestChoice.attributes)
             {
-                if (this.selectedAttributes[attribute.attributeId] !== attribute.attributeValueId)
+                if (this.selectedAttributes[attribute.attributeId] !== attribute.attributeValueId && this.selectedAttributes[attribute.attributeId] !== null)
                 {
                     attributes[attribute.attributeId] = null;
+
+                    const attributeToReset = this.attributes.find(attr => attr.attributeId === attribute.attributeId);
+
+                    messages.push(
+                        translationNotAvailable.replace("<name>", attributeToReset.name)
+                    );
                 }
             }
             if (bestChoice.unitCombinationId !== this.selectedUnit)
             {
+                const translationContent = TranslationService.translate("Ceres::Template.singleItemContent");
+
+                messages.push(translationNotAvailable.replace("<name>", translationContent));
+
                 this.$store.commit("setItemSelectedUnit", bestChoice.unitCombinationId);
             }
 
@@ -208,6 +223,10 @@ Vue.component("variation-select", {
             {
                 this.setVariation(this.currentSelection.variationId);
             }
+
+            NotificationService.warn(
+                messages.join("<br>")
+            );
         },
 
         /**
