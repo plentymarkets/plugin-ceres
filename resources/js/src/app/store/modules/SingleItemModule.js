@@ -1,4 +1,7 @@
 import { isNullOrUndefined } from "../../helper/utils";
+import { setUrlByItem } from "../../services/UrlService";
+
+const ApiService = require("services/ApiService");
 
 const state =
     {
@@ -7,6 +10,7 @@ const state =
         selectedAttributes: {},
         selectedUnit: 0,
         variations: [],
+        variationDataCache: {},
         variationOrderQuantity: 1,
         variationMarkInvalidProperties: false,
         isVariationSelected: true
@@ -21,6 +25,8 @@ const mutations =
             {
                 state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
             }
+
+            state.variationDataCache[variation.documents[0].id] = variation;
         },
 
         setItemAttributes(state, attributes)
@@ -75,6 +81,34 @@ const mutations =
 
 const actions =
     {
+        loadVariation({ state, commit }, variationId)
+        {
+            return new Promise(resolve =>
+            {
+                const variation = state.variationDataCache[variationId];
+
+                if (variation)
+                {
+                    commit("setVariation", variation);
+
+                    setUrlByItem(variation.documents[0].data);
+                    resolve(variation);
+                }
+                else
+                {
+                    ApiService
+                        .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem" })
+                        .done(response =>
+                        {
+                            // store received variation data for later reuse
+                            commit("setVariation", response);
+
+                            setUrlByItem(response.documents[0].data);
+                            resolve(response);
+                        });
+                }
+            });
+        }
     };
 
 const getters =

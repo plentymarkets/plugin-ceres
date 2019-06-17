@@ -41,11 +41,19 @@ Vue.component("variation-select", {
         },
 
         /**
-         * returns true, if the current selection of attributes and unit will resolve a variation
+         * returns the variation, based on the selected attributes / unit
+         * returns false if there are none or multiple results
          */
-        isCurrentSelectionValid()
+        currentSelection()
         {
-            return this.filterVariations(null, null, true).length === 1;
+            const filteredVariations = this.filterVariations(null, null, true);
+
+            if (filteredVariations.length === 1)
+            {
+                return filteredVariations[0];
+            }
+
+            return false;
         },
 
         ...Vuex.mapState({
@@ -102,9 +110,9 @@ Vue.component("variation-select", {
 
             this.$store.commit("setItemSelectedAttributes", selectedAttributes);
 
-            if (this.isCurrentSelectionValid)
+            if (this.currentSelection)
             {
-                this.setVariation();
+                this.setVariation(this.currentSelection.variationId);
             }
             else
             {
@@ -121,9 +129,9 @@ Vue.component("variation-select", {
             unitId = parseInt(unitId);
             this.$store.commit("setItemSelectedUnit", unitId);
 
-            if (this.isCurrentSelectionValid)
+            if (this.currentSelection)
             {
-                this.setVariation();
+                this.setVariation(this.currentSelection.variationId);
             }
             else
             {
@@ -196,9 +204,9 @@ Vue.component("variation-select", {
 
             this.$store.commit("setItemSelectedAttributes", attributes);
 
-            if (this.isCurrentSelectionValid)
+            if (this.currentSelection)
             {
-                this.setVariation();
+                this.setVariation(this.currentSelection.variationId);
             }
         },
 
@@ -296,10 +304,32 @@ Vue.component("variation-select", {
             return !!this.filterVariations(null, unitId).length;
         },
 
-        setVariation()
+        /**
+         * dispatch vuex action 'loadVariation' to archive a variation
+         * dispatches a custom event named 'onVariationChanged'
+         * @param {[string, number, null]} variationId
+         */
+        setVariation(variationId)
         {
-            console.log("call setVariation()");
-            // TODO:  lädt die ausgewählte Varriante
+            if (!isDefined(variationId) && this.currentSelection)
+            {
+                variationId = this.currentSelection.variationId;
+            }
+
+            if (isDefined(variationId))
+            {
+                this.$store.dispatch("loadVariation", variationId).then(variation =>
+                {
+                    document.dispatchEvent(new CustomEvent("onVariationChanged",
+                        {
+                            detail:
+                            {
+                                attributes: variation.attributes,
+                                documents: variation.documents
+                            }
+                        }));
+                });
+            }
         },
 
         isTextCut()
@@ -311,9 +341,9 @@ Vue.component("variation-select", {
 
     watch:
     {
-        isCurrentSelectionValid(value)
+        currentSelection(value)
         {
-            this.$store.commit("setIsVariationSelected", value);
+            this.$store.commit("setIsVariationSelected", !!value);
         }
     }
 });
