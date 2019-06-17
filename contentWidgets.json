@@ -2393,6 +2393,36 @@
                             "value": "fa-dollar",
                             "caption": "Widget.widgetIconDollar",
                             "position": 1
+                        },
+                        {
+                            "value": "fa-percent",
+                            "caption": "Widget.widgetIconPercent",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-gift",
+                            "caption": "Widget.widgetIconGift",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-truck",
+                            "caption": "Widget.widgetIconTruck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-phone",
+                            "caption": "Widget.widgetIconPhone",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-copyright",
+                            "caption": "Widget.widgetIconCopyright",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-registered",
+                            "caption": "Widget.widgetIconRegistered",
+                            "position": 1
                         }
                     ]
                 }
@@ -3440,6 +3470,10 @@
                             "caption": "Widget.addressFieldName1"
                         },
                         {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
+                        {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldSalutation"
                         },
@@ -3481,6 +3515,10 @@
                 "options": {
                     "name": "Widget.addressRequiredFieldsShippingDE",
                     "checkboxValues": [
+                        {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
                         {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldSalutation"
@@ -3531,6 +3569,10 @@
                             "caption": "Widget.addressFieldEnName1"
                         },
                         {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
+                        {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldEnSalutation"
                         },
@@ -3572,6 +3614,10 @@
                 "options": {
                     "name": "Widget.addressRequiredFieldsShippingGB",
                     "checkboxValues": [
+                        {
+                            "value": "delivery_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
                         {
                             "value": "delivery_address.salutation",
                             "caption": "Widget.addressFieldEnSalutation"
@@ -3918,6 +3964,48 @@
                         "type": "uuid"
                     }
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -4099,7 +4187,7 @@
                             "position": 6
                         },
                         {
-                            "value": "stacked",
+                            "value": "stackedTablet",
                             "caption": "Widget.gridTwoColumnLayoutStacked",
                             "position": 7
                         }
@@ -4109,7 +4197,7 @@
             "layoutMobile": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "stacked",
+                "defaultValue": "stackedMobile",
                 "options": {
                     "name": "Widget.gridTwoColumnLayoutMobileLabel",
                     "tooltipText": "Widget.gridTwoColumnLayoutMobileTooltip",
@@ -4120,7 +4208,7 @@
                             "position": 0
                         },
                         {
-                            "value": "stacked",
+                            "value": "stackedMobile",
                             "caption": "Widget.gridTwoColumnLayoutStacked",
                             "position": 1
                         }

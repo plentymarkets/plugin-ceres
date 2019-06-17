@@ -2,8 +2,9 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.checkout") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.checkout") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
@@ -18,6 +19,7 @@
     {{ component( "Ceres::Basket.Components.Coupon" ) }}
     {{ component( "Ceres::Basket.Components.BasketList" ) }}
     {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
+    {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
     {{ component( "Ceres::Checkout.Components.Checkout" ) }}
 
     {% set optionalInvoiceAddressFields = {

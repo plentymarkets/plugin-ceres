@@ -305,6 +305,10 @@
                         "caption": "Widget.addressFieldName1"
                     },
                     {
+                        "value": "delivery_address.vatNumber",
+                        "caption": "Widget.addressFieldVatNumber"
+                    },
+                    {
                         "value": "delivery_address.salutation",
                         "caption": "Widget.addressFieldSalutation"
                     },
@@ -346,6 +350,10 @@
             "options": {
                 "name": "Widget.addressRequiredFieldsShippingDE",
                 "checkboxValues": [
+                    {
+                        "value": "delivery_address.vatNumber",
+                        "caption": "Widget.addressFieldVatNumber"
+                    },
                     {
                         "value": "delivery_address.salutation",
                         "caption": "Widget.addressFieldSalutation"
@@ -393,6 +401,10 @@
                         "caption": "Widget.addressFieldEnName1"
                     },
                     {
+                        "value": "delivery_address.vatNumber",
+                        "caption": "Widget.addressFieldEnVatNumber"
+                    },
+                    {
                         "value": "delivery_address.salutation",
                         "caption": "Widget.addressFieldEnSalutation"
                     },
@@ -431,9 +443,13 @@
             "type": "checkboxGroup",
             "isVisible": "addressType === '2' && addressLayout === 'GB'",
             "defaultValue": [],
-            "options": { 
+            "options": {
                 "name": "Widget.addressRequiredFieldsShippingGB",
                 "checkboxValues": [
+                    {
+                        "value": "delivery_address.vatNumber",
+                        "caption": "Widget.addressFieldEnVatNumber"
+                    },
                     {
                         "value": "delivery_address.salutation",
                         "caption": "Widget.addressFieldEnSalutation"

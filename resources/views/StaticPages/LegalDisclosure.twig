@@ -3,9 +3,11 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    <meta name="description" content="{{ trans('Ceres::Template.legalDisclosureMetaDescription') }}">
-    <meta name="robots" content="{{ config("Ceres.meta.robots_legal_disclosure") }}">
-    <title>{{ trans("Ceres::Template.legalDisclosure") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title          trans("Ceres::Template.legalDisclosure") %}
+        {% block description    trans('Ceres::Template.legalDisclosureMetaDescription') %}
+        {% block robots         ceresConfig.meta.robotsLegalDisclosure %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}

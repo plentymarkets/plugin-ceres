@@ -2,18 +2,47 @@
 
 {% if categoryBreadcrumbs is not empty %}
     <nav data-component="breadcrumbs" data-renderer="twig" class="container-max small hidden-sm-down">
+        {% set crumbs = [] %}
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="{{ homepageURL }}">
                     <i class="fa fa-home" aria-hidden="true"></i>
+                    {% set crumb =
+                        [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "item":
+                                {
+                                    "@id": homepageURL,
+                                    "name": "Home"
+                                }
+                            }
+                        ] %}
+                    {% set crumbs = crumbs | merge(crumb) %}
                 </a>
             </li>
 
             {% set break = false %}
+            {% set catLevel = 2 %}
             {% for category in categoryBreadcrumbs[:categoryBreadcrumbs | length - 1] if not break %}
                 {% if category.details[0] %}
                     <li class="breadcrumb-item">
                         <a href="{{ services.category.getURLById( category.id ) }}">{{ category.details[0].name }}</a>
+                        {% set crumb =
+                        [
+                            {
+                                "@type": "ListItem",
+                                "position": catLevel,
+                                "item":
+                                {
+                                    "@id": services.category.getURLById( category.id ),
+                                    "name": category.details[0].name
+                                }
+                            }
+                        ] %}
+                        {% set crumbs = crumbs | merge(crumb) %}
+                        {% set catLevel = catLevel + 1 %}
                     </li>
                 {% else %}
                     {% set break = true %}
@@ -23,11 +52,18 @@
             {% set lastCategory = categoryBreadcrumbs | last %}
             {% if lastCategory.details is defined %}
                 <li class="breadcrumb-item active"><span>{{ lastCategory.details[0].name }}</span></li>
-            {% else %}
-                <li class="breadcrumb-item active" v-cloak v-if="$store.state.item.variation.documents">
-                    <span>${ $store.state.item.variation.documents[0].data | itemName }</span>
+            {% elseif item.documents[0].data is defined %}
+                <li class="breadcrumb-item active">
+                    <span>{{ item.documents[0].data | itemName }}</span>
                 </li>
             {% endif %}
         </ul>
+         <script type="application/ld+json">
+        {
+            "@context":"http://schema.org/",
+            "@type":"BreadcrumbList",
+            "itemListElement": {{ crumbs | json_encode | raw }}
+        }
+        </script>
     </nav>
 {% endif %}

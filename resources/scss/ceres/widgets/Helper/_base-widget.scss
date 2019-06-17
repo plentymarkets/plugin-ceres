@@ -115,17 +115,17 @@ header .widget
     }
 }
 
-@include media-breakpoint-down(xs)
+@include media-breakpoint-down(sm)
 {
-    .widget-grid .widget-inner.col-12.widget-stacked
+    .widget-grid .widget-inner.col-12.widget-stacked-mobile
     {
         padding-bottom: 1rem;
     }
 }
 
-@include media-breakpoint-between(sm, lg)
+@include media-breakpoint-only(md)
 {
-    .widget-grid .widget-inner.col-sm-12.widget-stacked
+    .widget-grid .widget-inner.col-md-12.widget-stacked-tablet
     {
         padding-bottom: 2rem;
     }
