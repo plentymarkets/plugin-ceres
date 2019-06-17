@@ -307,5 +307,13 @@ Vue.component("variation-select", {
             console.log("call isTextCut()");
             // TODO: prüft, ob der Name vom Attribute komplett angezeigt wird
         }
+    },
+
+    watch:
+    {
+        isCurrentSelectionValid(value)
+        {
+            this.$store.commit("setIsVariationSelected", value);
+        }
     }
 });
