@@ -7,14 +7,6 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
     "settings": {
-        "customClass": {
-            "type": "text",
-            "required": false,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.customClass",
-                "tooltip": "Widget.customClassTooltip"
-            }
-        }
+        "customClass":"@include(customClass)"
     }
 }

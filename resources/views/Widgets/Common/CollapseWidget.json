@@ -9,15 +9,7 @@
     "position": 1300,
     "widgetClass": "Ceres\\Widgets\\Common\\CollapseWidget",
     "settings": {
-        "customClass": {
-            "type": "text",
-            "required": false,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.customClass",
-                "tooltip": "Widget.customClassTooltip"
-            }
-        },
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,

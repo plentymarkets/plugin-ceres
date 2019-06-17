@@ -7,15 +7,7 @@
     "position": 200,
     "widgetClass": "Ceres\\Widgets\\Customer\\AddressWidget",
     "settings": {
-        "customClass": {
-            "type": "text",
-            "required": false,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.customClass",
-                "tooltip": "Widget.customClassTooltip"
-            }
-        },
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,

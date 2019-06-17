@@ -6,15 +6,7 @@
     "categories": ["item"],
     "widgetClass": "Ceres\\Widgets\\Common\\LiveShoppingWidget",
     "settings": {
-        "customClass": {
-            "type": "text",
-            "required": false,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.customClass",
-                "tooltip": "Widget.customClassTooltip"
-            }
-        },
+        "customClass":"@include(customClass)",
         "liveShoppingSelection": {
             "type": "select",
             "required": true,
