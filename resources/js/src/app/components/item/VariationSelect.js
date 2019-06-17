@@ -45,7 +45,7 @@ Vue.component("variation-select", {
          */
         isCurrentSelectionValid()
         {
-            return this.filterVariations().length === 1;
+            return this.filterVariations(null, null, true).length === 1;
         },
 
         ...Vuex.mapState({
@@ -207,8 +207,9 @@ Vue.component("variation-select", {
          * attributes and unitId could be filled, to check a specific selection
          * @param {object} attributes
          * @param {number} unitId
+         * @param {boolean} strict
          */
-        filterVariations(attributes, unitId)
+        filterVariations(attributes, unitId, strict)
         {
             attributes = attributes || this.selectedAttributes;
             unitId = unitId || this.selectedUnit;
@@ -228,8 +229,8 @@ Vue.component("variation-select", {
                     continue;
                 }
 
-                // the variation has no attributes (only checked, if any attribute has a selected value)
-                if (!isEmptyOptionSelected && !variation.attributes.length)
+                // the variation has no attributes (only checked, if any attribute has a selected value); or the variation has attributes and empty option is selected
+                if ((!isEmptyOptionSelected && !variation.attributes.length) || (isEmptyOptionSelected && variation.attributes.length))
                 {
                     continue;
                 }
@@ -239,7 +240,14 @@ Vue.component("variation-select", {
                     const variationAttribute = variation.attributes.find(variationAttribute => variationAttribute.attributeId === parseInt(attributeId));
 
                     // an attribute is not matching with selection
-                    if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && attributes[attributeId] !== null)
+                    if (strict)
+                    {
+                        if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId])
+                        {
+                            isMatching = false;
+                        }
+                    }
+                    else if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && attributes[attributeId] !== null)
                     {
                         isMatching = false;
                     }
