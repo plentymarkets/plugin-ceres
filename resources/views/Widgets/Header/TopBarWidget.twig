@@ -197,11 +197,11 @@
                 </div>
             {% endif %}
 
-            {% if enableLanguageSelect or enableShippingCountrySelect %}
-                <shop-country-settings
-                        country-flag-prefix="flag-icon-"
-                        shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_data("activeCountriesList")') }}"
-                        :shipping-country-id="{{ Twig.print('services.checkout.getShippingCountryId() | json_encode') }}">
+            <shop-country-settings
+                    country-flag-prefix="flag-icon-"
+                    shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_data("activeCountriesList")') }}"
+                    :shipping-country-id="{{ Twig.print('services.checkout.getShippingCountryId() | json_encode') }}">
+                {% if enableLanguageSelect or enableShippingCountrySelect %}
                     <div id="countrySettings" class="cmp cmp-country-settings collapse">
                         <div class="container-max">
                             <div class="row py-3">
@@ -230,7 +230,7 @@
                                                             {{ Twig.print('trans("Ceres::Template.header" ~ language | capitalize)') }}
                                                         </a>
                                                     </li>
-                                               {{ Twig.endfor() }}
+                                            {{ Twig.endfor() }}
                                             </ul>
                                         </div>
                                     </div>
@@ -249,8 +249,8 @@
                             </div>
                         </div>
                     </div>
-                </shop-country-settings>
-            {% endif %}
+                {% endif %}
+            </shop-country-settings>
         </div>
     </div>
 </div>
