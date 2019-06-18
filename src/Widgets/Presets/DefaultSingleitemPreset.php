@@ -69,11 +69,14 @@ class DefaultSingleitemPreset implements ContentPreset
     {
         $this->stickyContainer->createChild('sticky','Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
+            ->withSetting('customClass','text-muted')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
             ->withSetting('spacing.padding.right.value', 0)
             ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text',"{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ManufacturerDataFieldProvider::externalName #}{{ item_data_field('item.manufacturer.externalName') }}");
     }
     private function createNameHeader()
@@ -129,6 +132,7 @@ class DefaultSingleitemPreset implements ContentPreset
 
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
             ->withSetting('appearance', 'none')
+            ->withSetting('customClass','text-muted')
             ->withSetting('text', $text)
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -161,7 +165,7 @@ class DefaultSingleitemPreset implements ContentPreset
     {
         $text = `* {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.singleItemExclVAT") }}{% else %}{{ trans("Ceres::Template.singleItemInclVAT") }}{% endif %} {{ trans("Ceres::Template.singleItemExclusive") }}
                 <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a>`;
-        $this->stickyContainer->createChild('second', 'Ceres::TextWidget')
+        $this->stickyContainer->createChild('second', 'Ceres::CodeWidget')
             ->withSetting('text', $text)
             ->withSetting('appearance', 'none');
     }
