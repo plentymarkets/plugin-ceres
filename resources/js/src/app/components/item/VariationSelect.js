@@ -38,9 +38,12 @@ Vue.component("variation-select", {
             return units;
         },
 
+        /**
+         * returns true if any variation has no attributes
+         */
         hasEmptyOption()
         {
-            console.log("call hasEmptyOption()");
+            return this.variations.some(variation => !variation.attributes.length);
         },
 
         /**
@@ -268,7 +271,7 @@ Vue.component("variation-select", {
                     // an attribute is not matching with selection
                     if (variationAttribute &&
                         variationAttribute.attributeValueId !== attributes[attributeId] &&
-                        (!strict || strict && attributes[attributeId] !== null))
+                        (strict || !strict && attributes[attributeId] !== null))
                     {
                         return false;
                     }

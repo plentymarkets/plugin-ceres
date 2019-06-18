@@ -4,7 +4,7 @@
         <div class="col-12 variation-select" v-for="attribute in attributes">
             <div class="input-unit">
                 <select class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)">
-                    <option :value="null" v-if="true" :selected="selectedAttributes[attribute.attributeId] === null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+                    <option :value="null" v-if="hasEmptyOption" :selected="selectedAttributes[attribute.attributeId] === null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
                     <option
                         v-for="value in attribute.values"
                         :value="value.attributeValueId"
