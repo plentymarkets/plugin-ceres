@@ -187,10 +187,16 @@ class DefaultSingleitemPreset implements ContentPreset
         $tabs = array(array('title' => $titleTabOne,'uuid' => $uuidTabOne),
                       array('title' => $titleTabTwo, 'uuid' => $uuidTabTwo));
         $this->tabWidget = $this->twoColumnWidget->createChild('first', 'Ceres::TabWidget')
-            ->withSetting('tabs', $tabs);
+            ->withSetting('tabs', $tabs)
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.top.value', 4)
+            ->withSetting('spacing.margin.top.unit', null);
+
         $this->tabWidget->createChild($uuidTabOne, 'Ceres::InlineTextWidget')
+            ->withSetting('appearance','none')
             ->withSetting('text',"{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\TextsDataFieldProvider::description #}{{ item_data_field('texts.description', null, null) }}");
         $this->tabWidget->createChild($uuidTabTwo, 'Ceres::InlineTextWidget')
+            ->withSetting('appearance','none')
             ->withSetting('text',"{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\TextsDataFieldProvider::technicalData #}{{ item_data_field('texts.technicalData', null, null) }}");
     }
 
