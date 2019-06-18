@@ -21,12 +21,16 @@ class DefaultSingleitemPreset implements ContentPreset
     /** @var PresetWidgetFactory */
     private $stickyContainer;
 
+    /** @var PresetWidgetFactory */
+    private $tabWidget;
+
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->createTwoColumnWidget();
         $this->createItemImageWidget();
+        $this->tabWidget = $this->twoColumnWidget->createChild('first','Ceres::TabWidget');
         $this->createStickyContainer();
         $this->createManufacturer();
         $this->createNameHeader();
@@ -40,6 +44,7 @@ class DefaultSingleitemPreset implements ContentPreset
         $this->createAddToWishListWiget();
         $this->createSeparatorWidget();
         $this->createLegalInformation();
+
 
         return $this->preset->toArray();
     }
