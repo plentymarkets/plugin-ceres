@@ -244,8 +244,6 @@ Vue.component("variation-select", {
             attributes = attributes || this.selectedAttributes;
             unitId = unitId || this.selectedUnit;
 
-            const matching = [];
-
             const uniqueValues = [...new Set(Object.values(attributes))];
             const isEmptyOptionSelected = uniqueValues.length === 1 && isNull(uniqueValues[0]);
 
@@ -275,18 +273,6 @@ Vue.component("variation-select", {
                     {
                         return false;
                     }
-
-                    // if (strict)
-                    // {
-                    //     if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId])
-                    //     {
-                    //         return false;
-                    //     }
-                    // }
-                    // else if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && attributes[attributeId] !== null)
-                    // {
-                    //     return false;
-                    // }
                 }
 
                 return true;
