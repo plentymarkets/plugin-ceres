@@ -17,8 +17,6 @@
 {% set buttonSize = widget.settings.buttonSize.mobile | default("md") %}
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
 
-
-
 <div class="widget widget-place-order widget-{{ appearance }}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
@@ -33,7 +31,10 @@
             true,
             {
                 ":missing-order-properties":"$store.getters.variationMissingProperties",
-                ":has-price": "$store.state.item.variation.documents[0].data | hasItemDefaultPrice"
+                ":has-price": "$store.state.item.variation.documents[0].data | hasItemDefaultPrice",
+                "button-size": buttonSize,
+                "padding-classes": spacingPadding,
+                "padding-inline-styles": inlinePadding
             }
         ) }}
     </div>

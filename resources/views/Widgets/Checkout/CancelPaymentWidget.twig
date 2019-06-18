@@ -1,6 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
@@ -12,10 +13,8 @@
 {% set buttonSize = widget.settings.buttonSize.mobile %}
 
 {{ Twig.if("checkout.readOnly or #{ isPreview | json_encode }") }}
-    <div class="widget widget-cancel-payment widget-{{ appearance }}
-        {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
-        {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}
-        {% if not hasCustomMargin %}mt-3{% endif %}">
+    <div class="widget widget-cancel-payment widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if not hasCustomMargin %} mt-3{% endif %}"
+        {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
         <a 
             class="btn btn-block btn-outline-{{ appearance }} btn-{{ buttonSize }}
             {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
