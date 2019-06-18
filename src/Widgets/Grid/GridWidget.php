@@ -42,6 +42,14 @@ class GridWidget extends BaseWidget
                     "col-md-12 widget-prop-md-3-1 widget-stacked",
                     "col-md-12 widget-prop-md-3-1"
                 ],                  
+                "stackedTablet" => [
+                    "col-md-12 widget-prop-md-3-1 widget-stacked-tablet",
+                    "col-md-12 widget-prop-md-3-1"
+                ],                  
+                "stackedMobile" => [
+                    "col-md-12 widget-prop-md-3-1 widget-stacked-mobile",
+                    "col-md-12 widget-prop-md-3-1"
+                ],                  
                 "oneToOneToOne" => [
                     "col-md-4 widget-prop-md-3-2",
                     "col-md-4 widget-prop-md-3-2",

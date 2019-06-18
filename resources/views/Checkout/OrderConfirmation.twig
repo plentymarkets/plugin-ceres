@@ -3,8 +3,9 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.orderConfirmation") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.orderConfirmation") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}

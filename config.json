@@ -102,6 +102,14 @@
                             }
                         ]
                     }
+                },
+                "global.registration_require_privacy_policy_confirmation": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalRegistrationRequirePrivacyPolicyConfirmation",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         },
@@ -1318,6 +1326,14 @@
                                 "caption": "Config.basketPreviewTypeRight"
                             }
                         ]
+                    }
+                },
+                "basket.show_shipping_country_select": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.basketShowShippingCountrySelect",
+                    "options": {
+                      "defaultValue": "true"
                     }
                 }
             }

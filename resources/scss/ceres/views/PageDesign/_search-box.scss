@@ -96,6 +96,7 @@ div:not(.top-bar) {
                 {
                     align-self: center;
                     color: $gray-dark;
+                    max-width: 0;
                 }
 
                 & > .autocomplete-image-container

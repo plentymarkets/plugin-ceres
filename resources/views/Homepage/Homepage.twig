@@ -3,23 +3,12 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set showDefaultHomepage = config("Ceres.default.homepage") %}
-{% set companyLogo  = config("Ceres.header.company_logo") %}
-{% set companyName  = trans("Ceres::Template.headerCompanyName") %}
 
 {% block PartialHead %}
-    <meta name="description" content="{{ trans('Ceres::Template.homepageMetaDescription') }}">
-    <meta name="robots" content="{% if forceNoIndex %}NOINDEX{% else %}{{ config("Ceres.meta.robots_home") }}{% endif %}">
-    <meta property="og:title" content="{{ companyName }}"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}"/>
-    <meta property="og:image"
-          content="{% if ('http' in companyLogo) or ('layout/' in companyLogo) %}{{ companyLogo }}{% else %}{{ plugin_path('Ceres') }}/{{ companyLogo }}{% endif %}"/>
-
-    <script type="application/ld+json">
-        {"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl ~ urls.search }}?query={search_term}","query-input": "required name=search_term"}}
-    </script>
-
-    <title>{{ companyName }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block description    trans('Ceres::Template.homepageMetaDescription') %}
+        {% block robots         ceresConfig.meta.robotsHome %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}

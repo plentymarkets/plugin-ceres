@@ -34,7 +34,7 @@
         {% endif %}
 
         {% if configuration.showLegalDisclosure %}
-            <a href="{{ Twig.print('urls.legalDisclosure') }}">{{ Twig.trans("Ceres::Template.footerLegalDisclosure") }}</a>
+            <a href="{{ Twig.print('urls.legalDisclosure') }}">{{ Twig.trans("Ceres::Template.footerLegalDisclosure", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
 
         {% if configuration.showPrivacyPolicy %}
@@ -42,7 +42,7 @@
         {% endif %}
 
         {% if configuration.showGtc %}
-            <a href="{{ Twig.print('urls.gtc') }}">{{ Twig.trans("Ceres::Template.footerGtc") }}</a>
+            <a href="{{ Twig.print('urls.gtc') }}">{{ Twig.trans("Ceres::Template.footerGtc", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
 
         {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}

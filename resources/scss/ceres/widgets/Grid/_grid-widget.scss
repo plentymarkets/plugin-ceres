@@ -6,7 +6,6 @@
 
         > div
         {
-            max-width: 100%;
             flex: 1;
             max-width: 100%;
         }
@@ -19,6 +18,8 @@
 
         > .widget-inner
         {
+            max-width: none;
+
             [data-builder-child-container]
             {
                 min-height: 100px;
@@ -108,4 +109,8 @@
         background-color: $white;
         padding: $spacer;
     }
+}
+
+html.ie .widget-grid .widget-inner-stacked {
+    display: block;
 }

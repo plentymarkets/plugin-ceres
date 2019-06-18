@@ -27,10 +27,14 @@ export class StickyElement
 
         this.vm.$nextTick(() =>
         {
-            this.el.parentElement.__stickyElements = this.el.parentElement.__stickyElements || [];
-            this.el.parentElement.__stickyElements.push(this);
-            this.el.parentElement.__stickyElements.forEach(stickyElement => stickyElement.calculateOffset());
+            const containerElement = this.getContainerElement();
+
+            containerElement.__stickyElements = this.getContainerElement().__stickyElements || [];
+            containerElement.__stickyElements.push(this);
+            containerElement.__stickyElements.forEach(stickyElement => stickyElement.calculateOffset());
         });
+
+        el.classList.add("sticky-element");
     }
 
     enable()
@@ -46,7 +50,6 @@ export class StickyElement
             this.placeholder = document.createElement("DIV");
             this.el.parentNode.insertBefore(this.placeholder, this.el);
             this.eventListener = this.tick.bind(this);
-            this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
 
             document.addEventListener("storeChanged", this.eventListener);
             STICKY_EVENTS.forEach(event =>
@@ -145,7 +148,22 @@ export class StickyElement
         {
             return;
         }
-        this.offsetTop = document.getElementById("page-header").getBoundingClientRect().height;
+
+        this.offsetTop = 0;
+
+        if (document.getElementById("page-header-parent"))
+        {
+            const headerChildren = document.getElementById("page-header-parent").children;
+
+            for (let i = 0; i < headerChildren.length; i++)
+            {
+                if (!headerChildren[i].classList.contains("unfixed"))
+                {
+                    this.offsetTop += headerChildren[i].getBoundingClientRect().height;
+                }
+            }
+        }
+
         this.offsetBottom = 0;
         if (isNullOrUndefined(this.position))
         {
@@ -191,13 +209,18 @@ export class StickyElement
                 position:   "fixed",
                 top:        this.position.y + "px",
                 left:       this.position.x + "px",
-                width:      this.position.width + "px",
-                zIndex:     1
+                width:      this.position.width + "px"
             };
 
             placeholderStyles = {
                 paddingTop: this.position.height + "px"
             };
+
+            this.el.classList.add("is-sticky");
+        }
+        else
+        {
+            this.el.classList.remove("is-sticky");
         }
 
         applyStyles(this.el, styles);
@@ -228,6 +251,15 @@ export class StickyElement
 
     getContainerElement()
     {
+        if (this.el.dataset.hasOwnProperty("stickyContainer"))
+        {
+            const container = document.querySelector(this.el.dataset.stickyContainer);
+
+            if (!isNullOrUndefined(container))
+            {
+                return container;
+            }
+        }
         return this.el.parentElement;
     }
 
@@ -238,7 +270,9 @@ export class StickyElement
 
         if (idx >= 0)
         {
-            this.el.parentElement.__stickyElements.splice(idx, 1);
+            this.getContainerElement().__stickyElements.splice(idx, 1);
         }
+
+        this.el.classList.remove("sticky-element");
     }
 }
