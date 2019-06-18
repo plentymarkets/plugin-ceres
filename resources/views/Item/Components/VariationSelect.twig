@@ -2,7 +2,7 @@
     <div class="row">
 
         <div class="col-12 variation-select" v-for="attribute in attributes">
-            <div class="input-unit">
+            <div class="input-unit" ref="attributesContaner">
                 <select class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)">
                     <option :value="null" v-if="hasEmptyOption" :selected="selectedAttributes[attribute.attributeId] === null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
                     <option
@@ -12,7 +12,7 @@
                         ${ value.name } ${ isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) ? "" : "*" }
                     </option>
                 </select>
-                <label>${ attribute.name }</label>
+                <label v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name">${ attribute.name }</label>
             </div>
         </div>
 

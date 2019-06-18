@@ -55,7 +55,7 @@ const actions =
             const initialVariation   = variations.find(variation => variationSelect.initialVariationId === parseInt(variation.variationId));
             const initialUnit        = initialVariation.unitCombinationId;
             const selectedAttributes = {};
-            const units              = [];
+            const units              = {};
 
             for (const attribute of attributes)
             {

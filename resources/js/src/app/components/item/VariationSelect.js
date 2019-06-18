@@ -1,5 +1,6 @@
-import { isNull } from "util";
 import { isDefined } from "../../helper/utils";
+import { isNull } from "util";
+import { textWidth } from "../../helper/dom";
 import TranslationService from "services/TranslationService";
 
 const NotificationService = require("services/NotificationService");
@@ -94,13 +95,17 @@ Vue.component("variation-select", {
             }
         },
 
-        unsetInvalidSelection(attributeId, attributeValueId, unitId)
+        /**
+         * returns a list of variations, filtered by attribute or unit
+         * @param {[number, null]} attributeId
+         * @param {[number, null]} attributeValueId
+         * @param {[number, null]} unitId
+         */
+        getQualifiedVariations(attributeId, attributeValueId, unitId)
         {
-            let qualifiedVariations;
-
             if (isDefined(attributeValueId))
             {
-                qualifiedVariations = this.variations.filter(variation =>
+                return this.variations.filter(variation =>
                 {
                     return isDefined(variation.attributes.find(attribute =>
                         attribute.attributeId === attributeId && attribute.attributeValueId === attributeValueId));
@@ -108,15 +113,19 @@ Vue.component("variation-select", {
             }
             else if (isDefined(unitId))
             {
-                qualifiedVariations = this.variations.filter(variation => variation.unitCombinationId === unitId);
-            }
-            else
-            {
-                // variations without attributes
-                return;
+                return this.variations.filter(variation => variation.unitCombinationId === unitId);
             }
 
-            let bestChoice;
+            return [];
+        },
+
+        /**
+         * returns a variation, where a minimum of changes in the selection is required to archive
+         * @param {array} qualifiedVariations
+         */
+        getClosestVariation(qualifiedVariations)
+        {
+            let closestVariation;
             let numberOfRequiredChanges;
 
             for (const variation of qualifiedVariations)
@@ -138,16 +147,31 @@ Vue.component("variation-select", {
 
                 if (!numberOfRequiredChanges || changes < numberOfRequiredChanges)
                 {
-                    bestChoice = variation;
+                    closestVariation = variation;
                     numberOfRequiredChanges = changes;
                 }
             }
 
-            const attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
-            const messages = [];
+            return closestVariation;
+        },
+
+        /**
+         * changes the selected attributes / unit, to ensure a valid seelction
+         * @param {[number, null]} attributeId
+         * @param {[number, null]} attributeValueId
+         * @param {[number, null]} unitId
+         */
+        unsetInvalidSelection(attributeId, attributeValueId, unitId)
+        {
+            const qualifiedVariations     = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
+            const closestVariation        = this.getClosestVariation(qualifiedVariations);
+
+            const messages                = [];
             const translationNotAvailable = TranslationService.translate("Ceres::Template.singleItemNotAvailable");
 
-            for (const attribute of bestChoice.attributes)
+            const attributes              = JSON.parse(JSON.stringify(this.selectedAttributes));
+
+            for (const attribute of closestVariation.attributes)
             {
                 if (this.selectedAttributes[attribute.attributeId] !== attribute.attributeValueId && this.selectedAttributes[attribute.attributeId] !== null)
                 {
@@ -155,18 +179,16 @@ Vue.component("variation-select", {
 
                     const attributeToReset = this.attributes.find(attr => attr.attributeId === attribute.attributeId);
 
-                    messages.push(
-                        translationNotAvailable.replace("<name>", attributeToReset.name)
-                    );
+                    messages.push(translationNotAvailable.replace("<name>", attributeToReset.name));
                 }
             }
-            if (bestChoice.unitCombinationId !== this.selectedUnit)
+            if (closestVariation.unitCombinationId !== this.selectedUnit)
             {
                 const translationContent = TranslationService.translate("Ceres::Template.singleItemContent");
 
                 messages.push(translationNotAvailable.replace("<name>", translationContent));
 
-                this.$store.commit("selectItemUnit", bestChoice.unitCombinationId);
+                this.$store.commit("selectItemUnit", closestVariation.unitCombinationId);
             }
 
             this.$store.commit("setItemSelectedAttributes", attributes);
@@ -290,10 +312,14 @@ Vue.component("variation-select", {
             }
         },
 
-        isTextCut()
+        isTextCut(content)
         {
-            console.log("call isTextCut()");
-            // TODO: prüft, ob der Name vom Attribute komplett angezeigt wird
+            if (this.$refs.attributesContaner)
+            {
+                return textWidth(content, "Custom-Font, Helvetica, Arial, sans-serif") > this.$refs.attributesContaner[0].clientWidth;
+            }
+
+            return false;
         }
     },
 
