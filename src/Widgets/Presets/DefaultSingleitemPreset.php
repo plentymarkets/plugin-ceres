@@ -6,6 +6,7 @@ use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
+use Plenty\Plugin\Translation\Translator;
 
 class DefaultSingleitemPreset implements ContentPreset
 {
@@ -24,13 +25,18 @@ class DefaultSingleitemPreset implements ContentPreset
     /** @var PresetWidgetFactory */
     private $tabWidget;
 
+    /** @var Translator */
+    private $translator;
+
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
         $this->ceresConfig = pluginApp(CeresConfig::class);
+        $this->translator = pluginApp(Translator::class);
+
         $this->createTwoColumnWidget();
         $this->createItemImageWidget();
-        $this->tabWidget = $this->twoColumnWidget->createChild('first','Ceres::TabWidget');
+        $this->createTabWidget();
         $this->createStickyContainer();
         $this->createManufacturer();
         $this->createNameHeader();
@@ -40,11 +46,11 @@ class DefaultSingleitemPreset implements ContentPreset
         $this->createGraduatedPriceWidget();
         $this->createItemPriceWidget();
         $this->createItemAvailabilityWidget();
+        $this->createAttributeWidget();
         $this->createAddToBasketWidget();
         $this->createAddToWishListWiget();
         $this->createSeparatorWidget();
         $this->createLegalInformation();
-
 
         return $this->preset->toArray();
     }
@@ -170,5 +176,32 @@ class DefaultSingleitemPreset implements ContentPreset
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::ItemBundleWidget')
             ->withSetting('appearance', 'primary');
+    }
+
+    private function createTabWidget()
+    {
+        $uuidTabOne = '3a0ca715-ff40-4446-8393-07f663ce45a2';
+        $uuidTabTwo = '84d714c4-3fde-4be4-adf2-b6c1b9edb5b5';
+        $titleTabOne = $this->translator->trans("Ceres::Template.singleItemDescription");
+        $titleTabTwo = $this->translator->trans("Ceres::Widget.dataFieldTextsTechnicalData");
+        $tabs = array(array('title' => $titleTabOne,'uuid' => $uuidTabOne),
+                      array('title' => $titleTabTwo, 'uuid' => $uuidTabTwo));
+        $this->tabWidget = $this->twoColumnWidget->createChild('first', 'Ceres::TabWidget')
+            ->withSetting('tabs', $tabs);
+        $this->tabWidget->createChild($uuidTabOne, 'Ceres::InlineTextWidget')
+            ->withSetting('text',"{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\TextsDataFieldProvider::description #}{{ item_data_field('texts.description', null, null) }}");
+        $this->tabWidget->createChild($uuidTabTwo, 'Ceres::InlineTextWidget')
+            ->withSetting('text',"{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\TextsDataFieldProvider::technicalData #}{{ item_data_field('texts.technicalData', null, null) }}");
+    }
+
+    private function createAttributeWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::AttributeWidget')
+            ->withSetting('buttonSize', 'lg')
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.top.value', 4)
+            ->withSetting('spacing.margin.top.unit', null)
+            ->withSetting('spacing.margin.bottom.value', 4)
+            ->withSetting('spacing.margin.bottom.unit', null);
     }
 }
