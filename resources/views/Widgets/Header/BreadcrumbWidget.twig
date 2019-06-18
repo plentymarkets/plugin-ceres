@@ -1,5 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
+{% set customClass = widget.settings.customClass.mobile %}
 {% set isFixed                 = widget.settings.isFixed.mobile %}
 {% set showOnHomepage          = widget.settings.showOnHomepage.mobile %}
 {% set showOnMyAccount         = widget.settings.showOnMyAccount.mobile %}
@@ -22,7 +23,7 @@
     {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
 {% endif %}
 
-<div class="widget-fw breadcrumbs{% if not isFixed %} unfixed{% endif %}">
+<div class="widget-fw breadcrumbs{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <nav class="container-max small hidden-sm-down px-0" data-component="breadcrumbs" data-renderer="twig">
         {{ Twig.set('crumbs', '[]') }}
         <ul class="breadcrumb">

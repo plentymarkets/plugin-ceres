@@ -6,8 +6,8 @@
     "categories": ["checkout"],
     "position": 500,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ShippingPrivacyCheckWidget",
-    "settings": 
-    {
+    "settings": {
+        "customClass":"@include(customClass)",
         "spacing":"@include(spacingMargin)"
     }
 }
