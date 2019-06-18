@@ -24,21 +24,6 @@ Vue.component("variation-select", {
     computed:
     {
         /**
-         * return all available units with id, present on the variations
-         */
-        units()
-        {
-            const units = {};
-
-            for (const variation of this.variations)
-            {
-                units[variation.unitCombinationId] = variation.unitName;
-            }
-
-            return units;
-        },
-
-        /**
          * returns true if any variation has no attributes
          */
         hasEmptyOption()
@@ -63,45 +48,17 @@ Vue.component("variation-select", {
         },
 
         ...Vuex.mapState({
+            attributes: state => state.variationSelect.attributes,
             currentVariation: state => state.item.variation.documents[0].data,
-            attributes: state => state.item.attributes,
-            variations: state => state.item.variations,
-            selectedAttributes: state => state.item.selectedAttributes,
-            selectedUnit: state => state.item.selectedUnit
+            selectedAttributes: state => state.variationSelect.selectedAttributes,
+            selectedUnit: state => state.variationSelect.selectedUnit,
+            units: state => state.variationSelect.units,
+            variations: state => state.variationSelect.variations
         })
-    },
-
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            this.initializeState();
-        });
     },
 
     methods:
     {
-        /**
-         * initializes the selected attributes and unit, based on the initial variation
-         */
-        initializeState()
-        {
-            this.initialVariationId = this.currentVariation.variation.id;
-            const initialVariation  = this.variations.find(variation => this.initialVariationId === parseInt(variation.variationId));
-            const initialUnit       = initialVariation.unitCombinationId;
-            const attributes        = {};
-
-            for (const attribute of this.attributes)
-            {
-                const variationAttribute = initialVariation.attributes.find(variationAttribute => variationAttribute.attributeId === attribute.attributeId);
-
-                attributes[attribute.attributeId] = variationAttribute ? variationAttribute.attributeValueId : null;
-            }
-
-            this.$store.commit("setItemSelectedAttributes", attributes);
-            this.$store.commit("setItemSelectedUnit", initialUnit);
-        },
-
         /**
          * select an attribute and check, if the selection is valid; if not, unsetInvalidSelection will be executed
          * @param {number} attributeId
@@ -110,20 +67,8 @@ Vue.component("variation-select", {
         selectAttribute(attributeId, attributeValueId)
         {
             attributeValueId = parseInt(attributeValueId) || null;
-            const selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
-
-            selectedAttributes[attributeId] = attributeValueId;
-
-            this.$store.commit("setItemSelectedAttributes", selectedAttributes);
-
-            if (this.currentSelection)
-            {
-                this.setVariation(this.currentSelection.variationId);
-            }
-            else
-            {
-                this.unsetInvalidSelection(attributeId, attributeValueId);
-            }
+            this.$store.commit("selectItemAttribute", { attributeId, attributeValueId });
+            this.onSelectionChange(attributeId, attributeValueId, null);
         },
 
         /**
@@ -133,15 +78,19 @@ Vue.component("variation-select", {
         selectUnit(unitId)
         {
             unitId = parseInt(unitId);
-            this.$store.commit("setItemSelectedUnit", unitId);
+            this.$store.commit("selectItemUnit", unitId);
+            this.onSelectionChange(null, null, unitId);
+        },
 
+        onSelectionChange(attributeId, attributeValueId, unitId)
+        {
             if (this.currentSelection)
             {
                 this.setVariation(this.currentSelection.variationId);
             }
             else
             {
-                this.unsetInvalidSelection(null, null, unitId);
+                this.unsetInvalidSelection(attributeId, attributeValueId, unitId);
             }
         },
 
@@ -217,7 +166,7 @@ Vue.component("variation-select", {
 
                 messages.push(translationNotAvailable.replace("<name>", translationContent));
 
-                this.$store.commit("setItemSelectedUnit", bestChoice.unitCombinationId);
+                this.$store.commit("selectItemUnit", bestChoice.unitCombinationId);
             }
 
             this.$store.commit("setItemSelectedAttributes", attributes);

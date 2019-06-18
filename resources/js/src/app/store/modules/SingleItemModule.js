@@ -6,14 +6,9 @@ const ApiService = require("services/ApiService");
 const state =
     {
         variation: {},
-        attributes: [],
-        selectedAttributes: {},
-        selectedUnit: 0,
-        variations: [],
-        variationDataCache: {},
-        variationOrderQuantity: 1,
+        variationCache: {},
         variationMarkInvalidProperties: false,
-        isVariationSelected: true
+        variationOrderQuantity: 1
     };
 
 const mutations =
@@ -26,27 +21,7 @@ const mutations =
                 state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
             }
 
-            state.variationDataCache[variation.documents[0].id] = variation;
-        },
-
-        setItemAttributes(state, attributes)
-        {
-            state.attributes = attributes;
-        },
-
-        setItemSelectedAttributes(state, selectedAttributes)
-        {
-            state.selectedAttributes = selectedAttributes;
-        },
-
-        setItemSelectedUnit(state, selectedUnit)
-        {
-            state.selectedUnit = selectedUnit;
-        },
-
-        setItemVariations(state, variations)
-        {
-            state.variations = variations;
+            state.variationCache[variation.documents[0].id] = variation;
         },
 
         setVariationOrderProperty(state, { propertyId, value })
@@ -71,11 +46,6 @@ const mutations =
         setVariationMarkInvalidProps(state, markFields)
         {
             state.variationMarkInvalidProperties = !!markFields;
-        },
-
-        setIsVariationSelected(state, isVariationSelected)
-        {
-            state.isVariationSelected = !!isVariationSelected;
         }
     };
 
@@ -85,7 +55,7 @@ const actions =
         {
             return new Promise(resolve =>
             {
-                const variation = state.variationDataCache[variationId];
+                const variation = state.variationCache[variationId];
 
                 if (variation)
                 {

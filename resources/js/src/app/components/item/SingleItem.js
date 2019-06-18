@@ -52,18 +52,17 @@ Vue.component("single-item", {
     created()
     {
         this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setItemAttributes", this.attributes);
-        this.$store.commit("setItemVariations", this.variations);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+
+        this.$store.dispatch("setVariationSelect", {
+            attributes:         this.attributes,
+            variations:         this.variations,
+            initialVariationId: this.currentVariation.variation.id
+        });
     },
 
     methods:
     {
-        setIsVariationSelected(event)
-        {
-            this.$store.commit("setIsVariationSelected", event);
-        },
-
         getDataField(field)
         {
             return get(this.currentVariation, field);
