@@ -333,6 +333,11 @@ Vue.component("variation-select", {
             }
 
             return false;
+        },
+
+        getAttributeValue(attributeId)
+        {
+            return "Test";
         }
     },
 

@@ -16,7 +16,14 @@
             </div>
 
             <div v-else-if="attribute.type === 'box'">
-                
+                <span class="text-muted">${ attribute.name }:</span> <b>${ getAttributeValue(attribute.attributeId) }</b>
+                <div class="v-s-boxes">
+                    <div class="v-s-box" v-for="value in attribute.values"
+                        @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
+                        :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }">
+                        <span>${ value.name }</span>
+                    </div>
+                </div>
             </div>
         </div>
 
