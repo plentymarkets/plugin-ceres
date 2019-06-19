@@ -1,0 +1,22 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{{ Twig.component( "Ceres::Item.Components.ItemDataTable" ) }}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set paddingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set marginClasses   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set itemInformation  = widget.settings.itemInformation.mobile %}
+
+<div class="widget widget-item-data-table widget-{{ appearance }} 
+    {% if marginClasses | length > 0 %} {{ marginClasses }}{% endif %}" 
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner">
+        <item-data-table padding-inline-styles="{{ inlinePadding }}"  
+                         padding-classes="{{ paddingClasses }}"
+                         :item-information="{{ itemInformation | json_encode }}" >
+        </item-data-table>
+    </div>
+</div>

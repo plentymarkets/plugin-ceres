@@ -1,3 +1,5 @@
+{{ component( "Ceres::Item.Components.ItemDataTable" ) }}
+
 <!-- ITEM DESCRIPTION -->
 <div class="my-5">
     <ul class="nav nav-tabs" role="tablist">
@@ -37,7 +39,8 @@
 
         <div :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="tab-pane overflow-auto" id="assessments-details" role="tabpanel">
             <div class="my-4">
-                <table class="table table-striped table-hover table-sm">
+                <item-data-table :item-data="itemData" :currentVariation="currentVariation"></item-data-table>
+                {# <table class="table table-striped table-hover table-sm">
                     <tbody>
                     {% if 'item.id' in itemData or 'all' in itemData %}
                         <tr>
@@ -127,7 +130,7 @@
                         </tr>
                     {% endif %}
                     </tbody>
-                </table>
+                </table> #}
             </div>
         </div>
 

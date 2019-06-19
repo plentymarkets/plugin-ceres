@@ -1,0 +1,68 @@
+{
+    "identifier": "Ceres::ItemDataTableWidget",
+    "label": "Widget.itemDataTableLabel",
+    "previewImageURL": "/images/widgets/item-data-table.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Item\\ItemDataTableWidget",
+    "settings": {
+        "itemInformation": {
+            "type": "checkboxGroup",
+            "defaultValue": ["item.id", "item.condition"],
+            "options": {
+                "name": "Widget.itemDataTableDisplayedInformation",
+                "checkboxValues": [
+                    {
+                        "value": "item.id",
+                        "caption": "Widget.itemDataTableItemId"
+                    },
+                    {
+                        "value": "item.condition",
+                        "caption": "Widget.itemDataTableItemCondition"
+                    },
+                    {
+                        "value": "item.ageRestriction",
+                        "caption": "Widget.itemDataTableItemAgeRating"
+                    },
+                    {
+                        "value": "variation.externalId",
+                        "caption": "Widget.itemDataTableItemExternalId"
+                    },
+                    {
+                        "value": "variation.model",
+                        "caption": "Widget.itemDataTableItemVariationModel"
+                    },
+                    {
+                        "value": "item.manufacturer",
+                        "caption": "Widget.itemDataTableItemManufacturer"
+                    },
+                    {
+                        "value": "item.producingCountry",
+                        "caption": "Widget.itemDataTableItemProducerCountry"
+                    },
+                    {
+                        "value": "unit.content",
+                        "caption": "Widget.itemDataTableItemVariationBaseContent"
+                    },
+                    {
+                        "value": "variation.weightG",
+                        "caption": "Widget.itemDataTableItemWeightG"
+                    },
+                    {
+                        "value": "variation.weightNetG",
+                        "caption": "Widget.itemDataTableItemWeightNetG"
+                    },
+                    {
+                        "value": "item.variationDimensions",
+                        "caption": "Widget.itemDataTableItemVariationDimensions"
+                    },
+                    {
+                        "value": "item.customsTariffNumber",
+                        "caption": "Widget.itemDataTableItemCustomsTariffNumber"
+                    }
+                ]
+            }
+        }
+    }
+}
