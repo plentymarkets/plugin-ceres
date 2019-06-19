@@ -155,17 +155,17 @@ class DefaultSingleitemPreset implements ContentPreset
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget')
             ->withSetting('customMargin', true)
-            ->withSetting('margin.top.value', 0)
+            ->withSetting('margin.top.value', 2)
             ->withSetting('margin.top.unit', null)
-            ->withSetting('margin.bottom.value', 0)
+            ->withSetting('margin.bottom.value', 2)
             ->withSetting('margin.bottom.unit', null);
     }
 
     private function createLegalInformation()
     {
-        $text = `* {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.singleItemExclVAT") }}{% else %}{{ trans("Ceres::Template.singleItemInclVAT") }}{% endif %} {{ trans("Ceres::Template.singleItemExclusive") }}
-                <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a>`;
-        $this->stickyContainer->createChild('second', 'Ceres::CodeWidget')
+        $text ="* {% if services.customer.showNetPrices() %}{{ trans(\"Ceres::Template.singleItemExclVAT\") }}{% else %}{{ trans(\"Ceres::Template.singleItemInclVAT\") }}{% endif %} {{ trans(\"Ceres::Template.singleItemExclusive\") }}";
+        $text .="<a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle=\"modal\" href=\"#shippingscosts\"{% endif %} title=\"{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}\">{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}</a>";
+        $this->stickyContainer->createChild('sticky', 'Ceres::CodeWidget')
             ->withSetting('text', $text)
             ->withSetting('appearance', 'none');
     }
