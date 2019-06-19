@@ -38,7 +38,8 @@ Vue.component("single-item", {
 
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
-            isVariationSelected: state => state.item.isVariationSelected
+            isVariationSelected: state => state.item.isVariationSelected,
+            attributes: state => state.variationSelect.attributes
         }),
 
         ...Vuex.mapGetters([
