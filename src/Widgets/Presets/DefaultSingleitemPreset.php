@@ -138,7 +138,11 @@ class DefaultSingleitemPreset implements ContentPreset
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
             ->withSetting('spacing.padding.right.value', 0)
-            ->withSetting('spacing.padding.right.unit', null);
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 2)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null);
     }
 
     private function createItemImageWidget()
