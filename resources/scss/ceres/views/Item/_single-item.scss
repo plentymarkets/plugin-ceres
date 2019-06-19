@@ -257,20 +257,12 @@
 }
 
 .v-s-boxes {
-    display: flex;
-    padding: 10px 0;
 
     .v-s-box {
-        display: flex;
         min-width: 10px;
         min-height: 40px;
-        justify-content: center;
-        align-items: center;
-        margin-right: 10px;
         border: 1px solid $gray-lighter;
         border-radius: $border-radius;
-        background-color: $white;
-        padding: 0 10px;
         cursor: pointer;
 
         &.active {
