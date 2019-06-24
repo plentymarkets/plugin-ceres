@@ -4,13 +4,12 @@
 {{ Twig.component("Ceres::Checkout.Components.ContactWishInput") }}
 {% set hintText = widget.settings.hintText.mobile %}
 
-
+{% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-contact-wish 
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+<div class="widget widget-contact-wish{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}

@@ -5,6 +5,7 @@
     "type": "static",
     "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,

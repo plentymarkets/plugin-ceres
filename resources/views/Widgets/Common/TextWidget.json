@@ -8,6 +8,7 @@
     "position": 800,
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
