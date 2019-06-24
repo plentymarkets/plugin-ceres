@@ -340,7 +340,7 @@ Vue.component("variation-select", {
             const selectedAttributeValueId =  this.selectedAttributes[attribute.attributeId];
             const selectedAttributeValue = attribute.values.find(attrValue => attrValue.attributeValueId === selectedAttributeValueId);
 
-            return selectedAttributeValue.name;
+            return selectedAttributeValue ? selectedAttributeValue.name : "-";
         }
     },
 

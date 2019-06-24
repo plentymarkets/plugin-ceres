@@ -16,7 +16,7 @@
             </div>
 
             <div v-else-if="attribute.type === 'box'">
-                <span class="text-muted">${ attribute.name }:</span> <b>${ getAttributeValue(attribute.attributeId) }</b>
+                <span class="text-muted">${ attribute.name }:</span> <b>${ getSelectedAttributeValueName(attribute) }</b>
                 <div class="v-s-boxes py-3 d-flex">
                     <div class="v-s-box mr-3 px-3 d-flex bg-white flex-center"
                         v-for="value in attribute.values"
