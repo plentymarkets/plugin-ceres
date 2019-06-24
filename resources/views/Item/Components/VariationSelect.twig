@@ -9,7 +9,12 @@
                         v-for="value in attribute.values"
                         :value="value.attributeValueId"
                         :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]">
-                        ${ value.name } ${ isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) ? "" : "*" }
+                        <template v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)">
+                            ${ value.name }
+                        </template>
+                        <template v-else>
+                            {{ trans("Ceres::Template.singleItemInvalidAttribute", { "name": "${ value.name }" }) }}
+                        </template>
                     </option>
                 </select>
                 <label v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name">${ attribute.name }</label>
@@ -35,7 +40,12 @@
                         v-for="(unit, unitId) in units"
                         :value="unitId"
                         :selected="parseInt(unitId) === selectedUnit">
-                        ${ unit } ${ isUnitSelectionValid(unitId) ? "" : "*" }
+                        <template v-if="isUnitSelectionValid(unitId)">
+                            ${ unit }
+                        </template>
+                        <template v-else>
+                            {{ trans("Ceres::Template.singleItemInvalidAttribute", { "name": "${ unit }" }) }}
+                        </template>
                     </option>
                 </select>
                 <label>{{ trans("Ceres::Template.singleItemContent") }}</label>

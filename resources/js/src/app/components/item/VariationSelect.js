@@ -168,26 +168,29 @@ Vue.component("variation-select", {
             const closestVariation        = this.getClosestVariation(qualifiedVariations);
 
             const messages                = [];
-            const translationNotAvailable = TranslationService.translate("Ceres::Template.singleItemNotAvailable");
-
             const attributes              = JSON.parse(JSON.stringify(this.selectedAttributes));
 
-            for (const attribute of closestVariation.attributes)
+            for (let attributeId in this.selectedAttributes)
             {
-                if (this.selectedAttributes[attribute.attributeId] !== attribute.attributeValueId && this.selectedAttributes[attribute.attributeId] !== null)
+                attributeId = parseInt(attributeId);
+                const variationAttribute = closestVariation.attributes.find(attribute => attribute.attributeId === attributeId);
+
+                if (variationAttribute && variationAttribute.attributeValueId !== this.selectedAttributes[attributeId] || !variationAttribute)
                 {
-                    attributes[attribute.attributeId] = null;
+                    const attributeToReset = this.attributes.find(attr => attr.attributeId === attributeId);
+                    const message = TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name });
 
-                    const attributeToReset = this.attributes.find(attr => attr.attributeId === attribute.attributeId);
-
-                    messages.push(translationNotAvailable.replace("<name>", attributeToReset.name));
+                    attributes[attributeId] = null;
+                    messages.push(message);
                 }
             }
+
             if (closestVariation.unitCombinationId !== this.selectedUnit)
             {
                 const translationContent = TranslationService.translate("Ceres::Template.singleItemContent");
+                const message = TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: translationContent });
 
-                messages.push(translationNotAvailable.replace("<name>", translationContent));
+                messages.push(message);
 
                 this.$store.commit("selectItemUnit", closestVariation.unitCombinationId);
             }
