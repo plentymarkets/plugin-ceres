@@ -15,7 +15,7 @@ Vue.component("single-item", {
 
     jsonDataFields: [
         "itemData",
-        "attributes",
+        "attributesData",
         "variations"
     ],
 
@@ -38,7 +38,8 @@ Vue.component("single-item", {
 
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
-            isVariationSelected: state => state.item.isVariationSelected
+            isVariationSelected: state => state.item.isVariationSelected,
+            attributes: state => state.variationSelect.attributes
         }),
 
         ...Vuex.mapGetters([
@@ -55,7 +56,7 @@ Vue.component("single-item", {
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.dispatch("setVariationSelect", {
-            attributes:         this.attributes,
+            attributes:         this.attributesData,
             variations:         this.variations,
             initialVariationId: this.currentVariation.variation.id
         });
