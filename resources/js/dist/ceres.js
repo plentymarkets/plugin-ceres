@@ -20169,7 +20169,7 @@ Vue.component("tab-list", {
         return vnode.componentInstance;
       });
       return tabComps.filter(function (tab) {
-        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots.default);
+        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots.default) && tab.$el.textContent.length > 0;
       });
     },
     updateTabs: function updateTabs() {
