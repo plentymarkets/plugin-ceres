@@ -168,8 +168,6 @@ Vue.component("variation-select", {
             const closestVariation        = this.getClosestVariation(qualifiedVariations);
 
             const messages                = [];
-            const translationNotAvailable = TranslationService.translate("Ceres::Template.singleItemNotAvailable");
-
             const attributes              = JSON.parse(JSON.stringify(this.selectedAttributes));
 
             for (const attribute of closestVariation.attributes)
@@ -179,15 +177,17 @@ Vue.component("variation-select", {
                     attributes[attribute.attributeId] = null;
 
                     const attributeToReset = this.attributes.find(attr => attr.attributeId === attribute.attributeId);
+                    const message = TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name });
 
-                    messages.push(translationNotAvailable.replace("<name>", attributeToReset.name));
+                    messages.push(message);
                 }
             }
             if (closestVariation.unitCombinationId !== this.selectedUnit)
             {
                 const translationContent = TranslationService.translate("Ceres::Template.singleItemContent");
+                const message = TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: translationContent });
 
-                messages.push(translationNotAvailable.replace("<name>", translationContent));
+                messages.push(message);
 
                 this.$store.commit("selectItemUnit", closestVariation.unitCombinationId);
             }
