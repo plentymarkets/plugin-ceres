@@ -335,9 +335,12 @@ Vue.component("variation-select", {
             return false;
         },
 
-        getAttributeValue(attributeId)
+        getSelectedAttributeValueName(attribute)
         {
-            return "Test";
+            const selectedAttributeValueId =  this.selectedAttributes[attribute.attributeId];
+            const selectedAttributeValue = attribute.values.find(attrValue => attrValue.attributeValueId === selectedAttributeValueId);
+
+            return selectedAttributeValue.name;
         }
     },
 
