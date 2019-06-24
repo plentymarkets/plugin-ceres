@@ -24,6 +24,13 @@
                 <span class="text-muted">${ attribute.name }:</span> <b>${ getSelectedAttributeValueName(attribute) }</b>
                 <div class="v-s-boxes py-3 d-flex">
                     <div class="v-s-box mr-3 px-3 d-flex bg-white flex-center"
+                        v-if="hasEmptyOption"
+                        @click="selectAttribute(attribute.attributeId, null)"
+                        :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null) }">
+                        <span>{{ trans("Ceres::Template.singleItemPleaseSelect") }}</span>
+                    </div>
+
+                    <div class="v-s-box mr-3 px-3 d-flex bg-white flex-center"
                         v-for="value in attribute.values"
                         @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
                         :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }">

@@ -69,8 +69,12 @@ Vue.component("variation-select", {
         selectAttribute(attributeId, attributeValueId)
         {
             attributeValueId = parseInt(attributeValueId) || null;
-            this.$store.commit("selectItemAttribute", { attributeId, attributeValueId });
-            this.onSelectionChange(attributeId, attributeValueId, null);
+
+            if (this.selectedAttributes[attributeId] !== attributeValueId)
+            {
+                this.$store.commit("selectItemAttribute", { attributeId, attributeValueId });
+                this.onSelectionChange(attributeId, attributeValueId, null);
+            }
         },
 
         /**
@@ -117,7 +121,7 @@ Vue.component("variation-select", {
                 return this.variations.filter(variation => variation.unitCombinationId === unitId);
             }
 
-            return [];
+            return this.variations.filter(variation => !variation.attributes.length);
         },
 
         /**
@@ -166,22 +170,29 @@ Vue.component("variation-select", {
         {
             const qualifiedVariations     = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
             const closestVariation        = this.getClosestVariation(qualifiedVariations);
-
             const messages                = [];
             const attributes              = JSON.parse(JSON.stringify(this.selectedAttributes));
 
-            for (let attributeId in this.selectedAttributes)
+            if (!closestVariation)
             {
-                attributeId = parseInt(attributeId);
-                const variationAttribute = closestVariation.attributes.find(attribute => attribute.attributeId === attributeId);
+                return;
+            }
 
-                if (variationAttribute && variationAttribute.attributeValueId !== this.selectedAttributes[attributeId] || !variationAttribute)
+            for (let selectedAttributeId in this.selectedAttributes)
+            {
+                selectedAttributeId = parseInt(selectedAttributeId);
+                const variationAttribute = closestVariation.attributes.find(attribute => attribute.attributeId === selectedAttributeId);
+
+                if (this.selectedAttributes[selectedAttributeId] !== null)
                 {
-                    const attributeToReset = this.attributes.find(attr => attr.attributeId === attributeId);
-                    const message = TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name });
+                    if (variationAttribute && variationAttribute.attributeValueId !== this.selectedAttributes[selectedAttributeId] || !variationAttribute)
+                    {
+                        const attributeToReset = this.attributes.find(attr => attr.attributeId === selectedAttributeId);
+                        const message = TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name });
 
-                    attributes[attributeId] = null;
-                    messages.push(message);
+                        attributes[selectedAttributeId] = null;
+                        messages.push(message);
+                    }
                 }
             }
 
@@ -204,7 +215,7 @@ Vue.component("variation-select", {
 
             NotificationService.warn(
                 messages.join("<br>")
-            );
+            ).closeAfter(5000);
         },
 
         /**
@@ -343,7 +354,7 @@ Vue.component("variation-select", {
             const selectedAttributeValueId =  this.selectedAttributes[attribute.attributeId];
             const selectedAttributeValue = attribute.values.find(attrValue => attrValue.attributeValueId === selectedAttributeValueId);
 
-            return selectedAttributeValue ? selectedAttributeValue.name : "-";
+            return selectedAttributeValue ? selectedAttributeValue.name : TranslationService.translate("Ceres::Template.singleItemPleaseSelect");
         }
     },
 
