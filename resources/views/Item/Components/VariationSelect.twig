@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="col-12 variation-select" v-if="units.length">
+        <div class="col-12 variation-select" v-if="Object.keys(units).length">
             <div class="input-unit">
                 <select class="custom-select" @change="selectUnit($event.target.value)">
                     <option

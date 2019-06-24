@@ -15,7 +15,7 @@ Vue.component("single-item", {
 
     jsonDataFields: [
         "itemData",
-        "attributes",
+        "attributesData",
         "variations"
     ],
 
@@ -56,7 +56,7 @@ Vue.component("single-item", {
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.dispatch("setVariationSelect", {
-            attributes:         this.attributes,
+            attributes:         this.attributesData,
             variations:         this.variations,
             initialVariationId: this.currentVariation.variation.id
         });
