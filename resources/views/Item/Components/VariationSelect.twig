@@ -33,7 +33,8 @@
                     <div class="v-s-box bg-white"
                         v-for="value in attribute.values"
                         @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
-                        :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }">
+                        :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }"
+                        v-tooltip="!isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getInvalidOptionTooltip(attribute.attributeId, value.attributeValueId)">
                         <span class="mx-3" v-if="attribute.type === 'box'">${ value.name }</span>
                         <img class="p-1" v-else :src="'/images/produkte/grp/' + value.imageUrl " :alt="value.name">
                     </div>

@@ -122,6 +122,41 @@ Vue.component("variation-select", {
         },
 
         /**
+         * returns a string for box tooltips, for not availble options
+         * @param {number} attributeId
+         * @param {number} attributeValueId
+         */
+        getInvalidOptionTooltip(attributeId, attributeValueId)
+        {
+            const qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId);
+            const closestVariation    = this.getClosestVariation(qualifiedVariations);
+
+            if (!closestVariation)
+            {
+                return "";
+            }
+
+            const invalidSelection = this.getInvalidSelectionByVariation(closestVariation);
+            const names = [];
+
+            for (const attribute of invalidSelection.attributesToReset)
+            {
+                if (attribute.attributeId !== attributeId)
+                {
+                    names.push(`<b>${attribute.name}</b>`);
+                }
+            }
+            if (invalidSelection.newUnit)
+            {
+                names.push(
+                    `<b>${TranslationService.translate("Ceres::Template.singleItemContent")}</b>`
+                );
+            }
+
+            return TranslationService.translate("Ceres::Template.singleItemNotAvailableInSelection", { name: names.join(", ") });
+        },
+
+        /**
          * returns a list of variations, filtered by attribute or unit
          * @param {[number, null]} attributeId
          * @param {[number, null]} attributeValueId
