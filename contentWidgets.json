@@ -4613,6 +4613,15 @@
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Item\\AddToBasketWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            },
             "appearance": {
                 "type": "select",
                 "required": true,
@@ -4735,6 +4744,15 @@
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Item\\AddToWishListWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            },
             "appearance": {
                 "type": "select",
                 "required": true,
@@ -4816,6 +4834,15 @@
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\Item\\AttributeWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            },
             "appearance": {
                 "type": "select",
                 "required": true,
@@ -4943,6 +4970,15 @@
         "position": 500,
         "widgetClass": "Ceres\\Widgets\\Item\\GraduatedPriceWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            },
             "appearance": {
                 "type": "select",
                 "required": true,
@@ -5038,7 +5074,17 @@
         ],
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Item\\ItemAvailabilityWidget",
-        "settings": {}
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            }
+        }
     },
     {
         "identifier": "Ceres::ItemBundleWidget",
@@ -5051,6 +5097,15 @@
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Item\\ItemBundleWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            },
             "appearance": {
                 "type": "select",
                 "required": true,
@@ -5147,6 +5202,15 @@
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Item\\ItemImageWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            },
             "appearance": {
                 "type": "select",
                 "required": true,
@@ -5253,6 +5317,15 @@
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Item\\ItemPriceWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            },
             "showCrossPrice": {
                 "type": "checkbox",
                 "defaultValue": true,
