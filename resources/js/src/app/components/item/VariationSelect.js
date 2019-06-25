@@ -101,6 +101,27 @@ Vue.component("variation-select", {
         },
 
         /**
+         * changes the selected attributes / unit, to ensure a valid seelction
+         * @param {[number, null]} attributeId
+         * @param {[number, null]} attributeValueId
+         * @param {[number, null]} unitId
+         */
+        unsetInvalidSelection(attributeId, attributeValueId, unitId)
+        {
+            const qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
+            const closestVariation    = this.getClosestVariation(qualifiedVariations);
+
+            if (!closestVariation)
+            {
+                return;
+            }
+
+            const invalidSelection = this.getInvalidSelectionByVariation(closestVariation);
+
+            this.correctSelection(invalidSelection);
+        },
+
+        /**
          * returns a list of variations, filtered by attribute or unit
          * @param {[number, null]} attributeId
          * @param {[number, null]} attributeValueId
@@ -161,49 +182,65 @@ Vue.component("variation-select", {
         },
 
         /**
-         * changes the selected attributes / unit, to ensure a valid seelction
-         * @param {[number, null]} attributeId
-         * @param {[number, null]} attributeValueId
-         * @param {[number, null]} unitId
+         * returns object with array 'attributesToReset' and newUnit. The attributesToReset contains all attributes, which are not matching with the given variation
+         * @param {object} variation
          */
-        unsetInvalidSelection(attributeId, attributeValueId, unitId)
+        getInvalidSelectionByVariation(variation)
         {
-            const qualifiedVariations     = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
-            const closestVariation        = this.getClosestVariation(qualifiedVariations);
-            const messages                = [];
-            const attributes              = JSON.parse(JSON.stringify(this.selectedAttributes));
-
-            if (!closestVariation)
-            {
-                return;
-            }
+            const attributesToReset = [];
+            let newUnit = null;
 
             for (let selectedAttributeId in this.selectedAttributes)
             {
                 selectedAttributeId = parseInt(selectedAttributeId);
-                const variationAttribute = closestVariation.attributes.find(attribute => attribute.attributeId === selectedAttributeId);
+                const variationAttribute = variation.attributes.find(attribute => attribute.attributeId === selectedAttributeId);
 
                 if (this.selectedAttributes[selectedAttributeId] !== null)
                 {
                     if (variationAttribute && variationAttribute.attributeValueId !== this.selectedAttributes[selectedAttributeId] || !variationAttribute)
                     {
                         const attributeToReset = this.attributes.find(attr => attr.attributeId === selectedAttributeId);
-                        const message = TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name });
 
-                        attributes[selectedAttributeId] = null;
-                        messages.push(message);
+                        attributesToReset.push(attributeToReset);
                     }
                 }
             }
 
-            if (closestVariation.unitCombinationId !== this.selectedUnit)
+            if (variation.unitCombinationId !== this.selectedUnit)
             {
-                const translationContent = TranslationService.translate("Ceres::Template.singleItemContent");
-                const message = TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: translationContent });
+                newUnit = variation.unitCombinationId;
+            }
 
-                messages.push(message);
+            return { attributesToReset, newUnit };
+        },
 
-                this.$store.commit("selectItemUnit", closestVariation.unitCombinationId);
+        /**
+         * resets all invalid attributes and change the unit, if required. Prints a message to the user if so.
+         * @param {object} invalidSelection
+         */
+        correctSelection(invalidSelection)
+        {
+            const messages   = [];
+            const attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+
+            for (const attributeToReset of invalidSelection.attributesToReset)
+            {
+                messages.push(
+                    TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name })
+                );
+
+                attributes[attributeToReset.attributeId] = null;
+            }
+
+            if (invalidSelection.newUnit)
+            {
+                messages.push(
+                    TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name:
+                        TranslationService.translate("Ceres::Template.singleItemContent")
+                    })
+                );
+
+                this.$store.commit("selectItemUnit", invalidSelection.newUnit);
             }
 
             this.$store.commit("setItemSelectedAttributes", attributes);
