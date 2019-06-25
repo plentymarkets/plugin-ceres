@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-item-data-table">
     <table class="table table-striped table-hover table-sm">
-        <tbody>
+        <tbody ref="tableContent">
             <template v-for="itemDataAccessor in itemInformation">
                 <tr v-if="isCheckedAndNotEmpty('item.id', itemDataAccessor)">
                     <td>{{ trans("Ceres::Template.singleItemId") }}</td>

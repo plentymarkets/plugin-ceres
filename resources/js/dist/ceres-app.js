@@ -39469,9 +39469,14 @@ Vue.component("item-data-table", {
       default: function _default() {
         return [];
       }
-    }
+    },
+    isPreview: Boolean
   },
-  computed: _objectSpread({}, Vuex.mapState({
+  computed: _objectSpread({
+    showPlaceholder: function showPlaceholder() {
+      return this.$refs.tableContent.hasChildNodes() && this.isPreview;
+    }
+  }, Vuex.mapState({
     currentVariation: function currentVariation(state) {
       return state.item.variation.documents[0].data;
     }

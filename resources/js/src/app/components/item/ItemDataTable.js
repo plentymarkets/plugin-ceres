@@ -23,19 +23,16 @@ Vue.component("item-data-table", {
         {
             type: Array,
             default: () => []
-        }
+        },
+        isPreview: Boolean
     },
 
     computed:
     {
-        filteredItemInformation()
+        showPlaceholder()
         {
-            return this.itemInformation.filter(itemDataAccessor =>
-            {
-                return isNullOrUndefined(get(this.currentVariation, itemDataAccessor)) && get(this.currentVariation, itemDataAccessor) !== "";
-            });
+            return this.$refs.tableContent.hasChildNodes() && this.isPreview;
         },
-
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data
         })

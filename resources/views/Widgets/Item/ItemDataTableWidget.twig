@@ -22,7 +22,8 @@
             <item-data-table
                 padding-inline-styles="{{ inlinePadding }}"  
                 padding-classes="{{ paddingClasses }}"
-                :item-information="{{ itemInformation | json_encode }}">
+                :item-information="{{ itemInformation | json_encode }}"
+                :is-preview="{{ isPreview | json_encode }}">
             </item-data-table>
         {% else %}
             <p>TODO PLACEHOLDER!</p>
