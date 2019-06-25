@@ -140,7 +140,7 @@ Vue.component("tab-list", {
         {
             const tabs = (this.$slots.default || []);
 
-            const tabComps = tabs.map(function(vnode)
+            const tabComps =tabs.map(function(vnode)
             {
                 return vnode.componentInstance;
             });

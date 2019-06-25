@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { isDefined, isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("item-data-table", {
     props:
@@ -28,6 +28,14 @@ Vue.component("item-data-table", {
 
     computed:
     {
+        filteredItemInformation()
+        {
+            return this.itemInformation.filter(itemDataAccessor =>
+            {
+                return isNullOrUndefined(get(this.currentVariation, itemDataAccessor)) && get(this.currentVariation, itemDataAccessor) !== "";
+            });
+        },
+
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data
         })
@@ -35,35 +43,16 @@ Vue.component("item-data-table", {
 
     methods:
     {
-        isCheckedAndNotEmpty(key, path)
+        isCheckedAndNotEmpty(path, itemDataAccessor, pathList)
         {
-            if (isNullOrUndefined(path))
+            if (isNullOrUndefined(pathList))
             {
-                return this.itemInformation.includes(key) && get(this.currentVariation, key) !== "";
-            }
-
-            let isNotEmpty;
-
-            if (Array.isArray(path))
-            {
-                path.forEach(element =>
-                {
-                    if (isNullOrUndefined(get(this.currentVariation, element)) && get(this.currentVariation, element) !== "")
-                    {
-                        isNotEmpty = true;
-                    }
-                    else
-                    {
-                        isNotEmpty = false;
-                    }
-                });
+                return path === itemDataAccessor && get(this.currentVariation, path) !== "";
             }
             else
             {
-                isNotEmpty = isDefined(get(this.currentVariation, path)) && get(this.currentVariation, path) !== "";
+                return pathList.some(element => isNullOrUndefined(get(this.currentVariation, element)) && get(this.currentVariation, element) !== "");
             }
-
-            return this.itemInformation.includes(key) && isNotEmpty;
         }
     }
 });

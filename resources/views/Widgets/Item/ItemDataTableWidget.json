@@ -8,17 +8,18 @@
     "widgetClass": "Ceres\\Widgets\\Item\\ItemDataTableWidget",
     "settings": {
         "itemInformation": {
-            "type": "checkboxGroup",
-            "defaultValue": ["item.id", "item.condition"],
+            "type": "select",
+            "isList": "[1,]",
+            "defaultValue": "item.id",
             "options": {
                 "name": "Widget.itemDataTableDisplayedInformation",
-                "checkboxValues": [
+                "listBoxValues": [
                     {
                         "value": "item.id",
                         "caption": "Widget.itemDataTableItemId"
                     },
                     {
-                        "value": "item.condition",
+                        "value": "item.condition.names.name",
                         "caption": "Widget.itemDataTableItemCondition"
                     },
                     {
@@ -34,15 +35,15 @@
                         "caption": "Widget.itemDataTableItemVariationModel"
                     },
                     {
-                        "value": "item.manufacturer",
+                        "value": "item.manufacturer.externalName",
                         "caption": "Widget.itemDataTableItemManufacturer"
                     },
                     {
-                        "value": "item.producingCountry",
+                        "value": "item.producingCountry.names.name",
                         "caption": "Widget.itemDataTableItemProducerCountry"
                     },
                     {
-                        "value": "unit.content",
+                        "value": "unit.names.name",
                         "caption": "Widget.itemDataTableItemVariationBaseContent"
                     },
                     {
