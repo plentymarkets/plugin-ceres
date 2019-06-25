@@ -257,9 +257,17 @@
 }
 
 .v-s-boxes {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
 
     .v-s-box {
-        min-width: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0.5rem;
+        min-width: 40px;
         min-height: 40px;
         border: 1px solid $gray-lighter;
         border-radius: $border-radius;
@@ -269,8 +277,23 @@
             color: $primary;
             border: 1px solid $primary;
         }
+
         &.invalid {
             opacity: .5;
+            border-style: dashed;
+        }
+    }
+
+    &.images {
+        .v-s-box:not(.empty-option) {
+            height: 40px;
+            width: 40px;
+
+            > img {
+                height: 100%;
+                width: 100%;
+                border-radius: $border-radius;
+            }
         }
     }
 }

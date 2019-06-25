@@ -20,21 +20,22 @@
                 <label v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name">${ attribute.name }</label>
             </div>
 
-            <div v-else-if="attribute.type === 'box'">
+            <div v-else-if="attribute.type === 'box' || attribute.type === 'image'">
                 <span class="text-muted">${ attribute.name }:</span> <b>${ getSelectedAttributeValueName(attribute) }</b>
-                <div class="v-s-boxes py-3 d-flex">
-                    <div class="v-s-box mr-3 px-3 d-flex bg-white flex-center"
+                <div class="v-s-boxes py-3" :class="{ 'images': attribute.type === 'image' }">
+                    <div class="v-s-box bg-white empty-option"
                         v-if="hasEmptyOption"
                         @click="selectAttribute(attribute.attributeId, null)"
                         :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null) }">
-                        <span>{{ trans("Ceres::Template.singleItemPleaseSelect") }}</span>
+                        <span class="mx-3">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</span>
                     </div>
 
-                    <div class="v-s-box mr-3 px-3 d-flex bg-white flex-center"
+                    <div class="v-s-box bg-white"
                         v-for="value in attribute.values"
                         @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
                         :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }">
-                        <span>${ value.name }</span>
+                        <span class="mx-3" v-if="attribute.type === 'box'">${ value.name }</span>
+                        <img class="p-1" v-else :src="'/images/produkte/grp/' + value.imageUrl " :alt="value.name">
                     </div>
                 </div>
             </div>
