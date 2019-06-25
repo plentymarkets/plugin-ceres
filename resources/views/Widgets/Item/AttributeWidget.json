@@ -7,6 +7,7 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Item\\AttributeWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
