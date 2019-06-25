@@ -159,7 +159,7 @@ Vue.component("tab-list", {
             {
                 return isDefined(tab) &&
                        isDefined(tab.$slots.default) &&
-                       (this.renderEmpty || tab.$el.textContent.length > 0);
+                       (this.renderEmpty || this.filterContent(tab));
             });
         },
 
@@ -178,6 +178,20 @@ Vue.component("tab-list", {
             {
                 activeTab.setActive(false);
             }
+        },
+        // checks if tab content contains img tag or text.
+        filterContent(tab)
+        {
+            const imgPattern = new RegExp(/<img([\w\W]+?)>/);
+            if (imgPattern.test(tab.$el.innerHTML))
+            {
+                return true;
+            }
+            if (tab.$el.textContent.length > 0)
+            {
+                return true;
+            }
+            else return false;
         }
     }
 });
