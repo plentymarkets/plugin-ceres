@@ -2,171 +2,84 @@
 /**
  * Created by PhpStorm.
  * User: Victor Albulescu
- * Date: 29/05/2019
- * Time: 13:56
+ * Date: 12/06/2019
+ * Time: 12:34
  */
 
 namespace Ceres\Wizard\ShopWizard\Services;
 
 
-use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
-use Plenty\Modules\Order\Shipping\Contracts\ParcelServicePresetRepositoryContract;
-use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
-use Plenty\Modules\Order\Shipping\ParcelService\Models\ParcelService;
-use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
-use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
+use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 
 class ShopWizardService
 {
+    private $settingsService;
 
-
-    /**
-     * @var ParcelServicePresetRepositoryContract
-     */
-    private $parcelServicePresetRepo;
-
-    /**
-     * @var PaymentRepositoryContract
-     */
-    private $paymentRepository;
-
-    /**
-     * @var CountryRepositoryContract
-     */
-    private $countryRepository;
-
-    /**
-     * @var AccountingLocationRepositoryContract
-     */
-    private $accountingLocationRepo;
-
-    /**
-     * ShopWizardService constructor.
-     *
-     * @param ParcelServicePresetRepositoryContract $parcelServicePresetRepo
-     */
-    public function __construct(
-        ParcelServicePresetRepositoryContract $parcelServicePresetRepo,
-        PaymentRepositoryContract $paymentRepository,
-        CountryRepositoryContract $countryRepository,
-        AccountingLocationRepositoryContract $accountingLocationRepo
-    ){
-        $this->parcelServicePresetRepo = $parcelServicePresetRepo;
-        $this->paymentRepository = $paymentRepository;
-        $this->countryRepository = $countryRepository;
-        $this->accountingLocationRepo = $accountingLocationRepo;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasShippingProfiles(): bool
+    public function __construct( DefaultSettingsService $settingsService)
     {
-        $shippingProfiles = $this->getShippingProfiles();
-
-        return count($shippingProfiles) ? true : false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasPaymentMethods(): bool
-    {
-        $paymentMethods = $this->paymentRepository->getAll();
-
-        return count($paymentMethods) ? true : false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasShippingMethods(): bool
-    {
-        $shippingMethods = $this->getShippingMethods();
-
-        return count($shippingMethods) ? true : false;
+        $this->settingsService = $settingsService;
 
     }
 
-    /**
-     * @return bool
-     */
-    public function hasShippingCountries(): bool
+    public function getWebstoresIdentifiers(): array
     {
-        $shippingCountries = $this->countryRepository->getActiveCountriesList();
+        $webstoresMapped = [];
 
-        return count($shippingCountries) ? true : false;
-    }
+        $webstores = $this->settingsService->getWebstores();
 
-    /**
-     * @return array
-     */
-    private function getShippingProfiles()
-    {
-        return $this->parcelServicePresetRepo->getPreviewList();
-    }
+        if (count($webstores)) {
+            foreach ($webstores as $webstore) {
+                $pluginSet = pluginApp(PluginSetRepositoryContract::class);
+                $pluginSetData = $pluginSet->get($webstore['pluginSetId'])->toArray();
 
-    /**
-     * @return array
-     */
-    private function getShippingMethods()
-    {
-        $shippingMethods = [];
+                $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
+                $identifData = [
+                    'pluginSet' => $pluginSetData['id'],
+                    'client' => $webstore['id']
+                ];
 
-        $shippingProfiles = $this->getShippingProfiles();
-
-        if (count($shippingProfiles)) {
-            foreach ($shippingProfiles as $profile) {
-                $shippingMethod = $profile->parcelService;
-                if($shippingMethod instanceof ParcelService) {
-                    $shippingMethods[] = $shippingMethod;
-                }
+                $webstoresMapped[$key] = array_merge($identifData, $this->mapWebstoreData($webstore['id']));
             }
         }
 
-        return $shippingMethods;
+        return $webstoresMapped;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasLocations(): bool
+    public function mapWebstoreData ($webstoreId)
     {
-        $locations = $this->accountingLocationRepo->getAll();
+        $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
+        $webstoreConfData = $webstoreConfig->findByWebstoreId($webstoreId)->toArray();
 
-        return count($locations) ? true : false;
-    }
+        $hasShippingMethod = $this->settingsService->hasShippingMethods();
+        $hasShippingProfile = $this->settingsService->hasShippingProfiles();
+        $hasPaymentMethod = $this->settingsService->hasPaymentMethods();
+        $hasShippingCountry = $this->settingsService->hasShippingCountries();
 
-    /**
-     * @return array
-     */
-    public function getPluginSets(): array
-    {
-        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
 
-        $pluginSets = $pluginSetRepo->list();
+        $data = [
+            'client' => $webstoreId,
+            'defSettings_defaultLanguage' => $webstoreConfData['defaultLanguage'],
+            'defSettings_defaultShippingMethod' => intval($webstoreConfData['defaultParcelServicePresetId']),
+            'defSettings_defaultShippingProfile' => intval($webstoreConfData['defaultParcelServiceId']),
+            'defSettings_defaultPaymentMethod' => intval($webstoreConfData['defaultMethodOfPaymentId']),
+            'defSettings_defaultDeliveryCountry' => intval($webstoreConfData['defaultShippingCountryId']),
+            'defSettings_defaultLocation' => intval($webstoreConfData['defaultAccountingLocation']),
+            'defSettings_defaultB2B' => $webstoreConfData['defaultCustomerClassId']
+        ];
 
-        return $pluginSets->toArray();
-    }
+        if (count($webstoreConfData['defaultShippingCountryList'])) {
+            foreach ($webstoreConfData['defaultShippingCountryList'] as $countryLang => $countryId) {
+                $settingsKey = 'defSettings_deliveryCountry_' . $countryLang;
 
-    /**
-     * @return array
-     */
-    public function getWebstores(): array
-    {
-        $webstoreRepo = pluginApp(WebstoreRepositoryContract::class);
-        $webstores = [];
-
-        $webstoresCollection = $webstoreRepo->loadAllPreview();
-
-        if (count($webstoresCollection)) {
-            foreach ($webstoresCollection as $webstore) {
-                $webstores[] = $webstore->toArray();
+                $data[$settingsKey] = $countryId;
             }
         }
-        return $webstores;
+
+        if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
+            $data['setAllRequiredAssistants'] = '';
+        }
+
+        return $data;
     }
-
-
 }

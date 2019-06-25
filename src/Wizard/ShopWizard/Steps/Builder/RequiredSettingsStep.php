@@ -8,17 +8,17 @@
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
-use Ceres\Wizard\ShopWizard\Services\ShopWizardService;
+use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 
 
-class RequiredSettingsStep
+class RequiredSettingsStep extends Step
 {
 
 
     public function generateStep(): array
     {
 
-        $shopWizardService = pluginApp(ShopWizardService::class);
+        $shopWizardService = pluginApp(DefaultSettingsService::class);
 
         $hasShippingMethod = $shopWizardService->hasShippingMethods();
         $hasShippingProfile = $shopWizardService->hasShippingProfiles();
