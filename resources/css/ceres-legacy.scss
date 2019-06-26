@@ -11152,6 +11152,15 @@ a:active {
     float: none;
 }
 
+.flex-center {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
 .text-wrap {
   white-space: normal;
 }
@@ -19439,6 +19448,59 @@ html.ios {
     }
 }
 
+.v-s-boxes {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+
+    .v-s-box {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        margin: 0.5rem;
+        min-width: 40px;
+        min-height: 40px;
+        border: 1px solid $gray-lighter;
+        border-radius: $border-radius;
+        cursor: pointer;
+
+        &.active {
+            color: $primary;
+            border: 1px solid $primary;
+        }
+
+        &.invalid {
+            opacity: .5;
+            border-style: dashed;
+        }
+    }
+
+    &.images {
+        .v-s-box:not(.empty-option) {
+            height: 40px;
+            width: 40px;
+
+            > img {
+                height: 100%;
+                width: 100%;
+                border-radius: $border-radius;
+            }
+        }
+    }
+}
+
 .loading {
   & .loading-animation-frame {
     display: block;
@@ -20961,6 +21023,21 @@ header .widget
     .description
     {
         font-style: italic;
+    }
+}
+
+.widget-attribute
+{
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {
+            .v-s-boxes .v-s-box.active
+            {
+                color: $value !important;
+                border-color: $value !important;
+            }
+        }
     }
 }
 

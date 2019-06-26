@@ -4846,45 +4846,40 @@
             "appearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "none",
+                "defaultValue": "primary",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
                     "listBoxValues": [
                         {
-                            "value": "none",
-                            "caption": "Widget.widgetAppearanceNone",
-                            "position": 0
-                        },
-                        {
                             "value": "primary",
                             "caption": "Widget.widgetAppearancePrimary",
-                            "position": 1
+                            "position": 0
                         },
                         {
                             "value": "secondary",
                             "caption": "Widget.widgetAppearanceSecondary",
-                            "position": 2
+                            "position": 1
                         },
                         {
                             "value": "success",
                             "caption": "Widget.widgetAppearanceSuccess",
-                            "position": 3
+                            "position": 2
                         },
                         {
                             "value": "info",
                             "caption": "Widget.widgetAppearanceInfo",
-                            "position": 4
+                            "position": 3
                         },
                         {
                             "value": "warning",
                             "caption": "Widget.widgetAppearanceWarning",
-                            "position": 5
+                            "position": 4
                         },
                         {
                             "value": "danger",
                             "caption": "Widget.widgetAppearanceDanger",
-                            "position": 6
+                            "position": 5
                         }
                     ]
                 }
@@ -4917,27 +4912,7 @@
             },
             "spacing": {
                 "type": "vertical",
-                "options": {
-                    "name": "Widget.widgetSpacing"
-                },
                 "children": {
-                    "customPadding": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomPadding"
-                        }
-                    },
-                    "padding": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customPadding",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    },
                     "customMargin": {
                         "type": "checkbox",
                         "options": {

@@ -16196,6 +16196,13 @@ a:active {
   float: none;
 }
 
+.flex-center {
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
 .text-wrap {
   white-space: normal;
 }
@@ -24107,6 +24114,51 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   margin-right: 15px;
 }
 
+.v-s-boxes {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.v-s-boxes .v-s-box {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  margin: 0.5rem;
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid #dcdbd8;
+  border-radius: 0.1rem;
+  cursor: pointer;
+}
+
+.v-s-boxes .v-s-box.active {
+  color: #008ebd;
+  border: 1px solid #008ebd;
+}
+
+.v-s-boxes .v-s-box.invalid {
+  opacity: .5;
+  border-style: dashed;
+}
+
+.v-s-boxes.images .v-s-box:not(.empty-option) {
+  height: 40px;
+  width: 40px;
+}
+
+.v-s-boxes.images .v-s-box:not(.empty-option) > img {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.1rem;
+}
+
 .loading .loading-animation-frame {
   display: block;
 }
@@ -26646,6 +26698,36 @@ header .widget {
 
 .widget-placeholder .description {
   font-style: italic;
+}
+
+.widget-attribute.widget-primary .v-s-boxes .v-s-box.active {
+  color: #008ebd !important;
+  border-color: #008ebd !important;
+}
+
+.widget-attribute.widget-secondary .v-s-boxes .v-s-box.active {
+  color: #d4021d !important;
+  border-color: #d4021d !important;
+}
+
+.widget-attribute.widget-success .v-s-boxes .v-s-box.active {
+  color: #28a745 !important;
+  border-color: #28a745 !important;
+}
+
+.widget-attribute.widget-info .v-s-boxes .v-s-box.active {
+  color: #17a2b8 !important;
+  border-color: #17a2b8 !important;
+}
+
+.widget-attribute.widget-warning .v-s-boxes .v-s-box.active {
+  color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+
+.widget-attribute.widget-danger .v-s-boxes .v-s-box.active {
+  color: #dc3545 !important;
+  border-color: #dc3545 !important;
 }
 
 @media (max-width: 575.98px) {
