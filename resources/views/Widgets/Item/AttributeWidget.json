@@ -7,11 +7,12 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Item\\AttributeWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "none",
-            "options": "@include(optionalAppearance)"
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
         },
         "buttonSize": {
             "type": "select",
@@ -39,6 +40,6 @@
                 ]
             }
         },
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }

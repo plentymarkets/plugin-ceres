@@ -2,13 +2,17 @@ import { isNullOrUndefined } from "./utils";
 
 export function get(object, path)
 {
-    const fields = path.split(".");
-    let key = fields.shift();
+    const fieldExp = /{\s*\S+\s*,\s*\S+\s*}|\w+/gm;
+    let key;
 
-    while (!isNullOrUndefined(object) && !isNullOrUndefined(key))
+    while (!isNullOrUndefined(object) && (key = fieldExp.exec(path)) !== null)
     {
-        object = readField(object, key);
-        key = fields.shift();
+        if (key.index === fieldExp.lastIndex)
+        {
+            fieldExp.lastIndex++;
+        }
+
+        object = readField(object, key[0]);
     }
 
     return object;
@@ -30,7 +34,7 @@ function readField(object, field)
 
         return Array.prototype.slice.call(object).find(entry =>
         {
-            return (entry[searchKey] + "") === searchValue;
+            return (get(entry, searchKey) + "") === searchValue;
         });
     }
 

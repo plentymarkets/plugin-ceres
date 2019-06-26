@@ -97,13 +97,7 @@
         <div class="container-max">
             <div class="row">
                 <div class="col">
-                    <single-item
-                        template="#vue-single-item"
-                        v-cloak
-                        item-data="{{ item | json_data }}"
-                        variation-list-data="{{ variations | json_data }}"
-                        :attribute-name-map="{{ attributeNameMap | json_encode }}"
-                        :variation-units="{{ variationUnits | json_encode }}">
+                    <single-item v-cloak item-data="{{ item | json_data }}" attributes-data="{{ attributes | json_data }}" variations="{{ variations | json_data }}">
                         <template #default="{ getDataField: getDataField, getFilteredDataField: getFilteredDataField }">
                             {{ shopBuilderTemplate | raw }}
                         </template>

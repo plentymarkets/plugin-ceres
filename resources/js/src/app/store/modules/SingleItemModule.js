@@ -1,12 +1,14 @@
 import { isNullOrUndefined } from "../../helper/utils";
+import { setUrlByItem } from "../../services/UrlService";
+
+const ApiService = require("services/ApiService");
 
 const state =
     {
         variation: {},
-        variationList: [],
-        variationOrderQuantity: 1,
+        variationCache: {},
         variationMarkInvalidProperties: false,
-        isVariationSelected: true
+        variationOrderQuantity: 1
     };
 
 const mutations =
@@ -18,11 +20,8 @@ const mutations =
             {
                 state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
             }
-        },
 
-        setVariationList(state, variationList)
-        {
-            state.variationList = variationList;
+            state.variationCache[variation.documents[0].id] = variation;
         },
 
         setVariationOrderProperty(state, { propertyId, value })
@@ -47,16 +46,39 @@ const mutations =
         setVariationMarkInvalidProps(state, markFields)
         {
             state.variationMarkInvalidProperties = !!markFields;
-        },
-
-        setIsVariationSelected(state, isVariationSelected)
-        {
-            state.isVariationSelected = !!isVariationSelected;
         }
     };
 
 const actions =
     {
+        loadVariation({ state, commit }, variationId)
+        {
+            return new Promise(resolve =>
+            {
+                const variation = state.variationCache[variationId];
+
+                if (variation)
+                {
+                    commit("setVariation", variation);
+
+                    setUrlByItem(variation.documents[0].data);
+                    resolve(variation);
+                }
+                else
+                {
+                    ApiService
+                        .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem" })
+                        .done(response =>
+                        {
+                            // store received variation data for later reuse
+                            commit("setVariation", response);
+
+                            setUrlByItem(response.documents[0].data);
+                            resolve(response);
+                        });
+                }
+            });
+        }
     };
 
 const getters =

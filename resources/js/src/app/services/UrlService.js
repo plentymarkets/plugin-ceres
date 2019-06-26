@@ -154,4 +154,13 @@ export function encodeParams(params, prefix)
     return prefix + "=" + encodeURIComponent(params);
 }
 
-export default { setUrlParams, getUrlParams, navigateTo, setUrlParam, removeUrlParams, removeUrlParam };
+export function setUrlByItem(itemData)
+{
+    const url = vueApp.$options.filters.itemURL(itemData);
+    const title = document.getElementsByTagName("title")[0].innerHTML;
+
+    window.history.replaceState({}, title, url);
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title, url } }));
+}
+
+export default { setUrlParams, getUrlParams, navigateTo, setUrlParam, removeUrlParams, removeUrlParam, setUrlByItem };

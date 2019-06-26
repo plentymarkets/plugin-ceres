@@ -4,17 +4,19 @@ import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("single-item", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "attributeNameMap",
-        "variationUnits"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-single-item"
+        }
+    },
 
     jsonDataFields: [
         "itemData",
-        "variationListData"
+        "attributesData",
+        "variations"
     ],
 
     computed:
@@ -36,8 +38,8 @@ Vue.component("single-item", {
 
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
-            variations: state => state.item.variationList,
-            isVariationSelected: state => state.item.isVariationSelected
+            isVariationSelected: state => state.item.isVariationSelected,
+            attributes: state => state.variationSelect.attributes
         }),
 
         ...Vuex.mapGetters([
@@ -51,17 +53,17 @@ Vue.component("single-item", {
     created()
     {
         this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setVariationList", this.variationListData);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+
+        this.$store.dispatch("setVariationSelect", {
+            attributes:         this.attributesData,
+            variations:         this.variations,
+            initialVariationId: this.currentVariation.variation.id
+        });
     },
 
     methods:
     {
-        setIsVariationSelected(event)
-        {
-            this.$store.commit("setIsVariationSelected", event);
-        },
-
         getDataField(field)
         {
             return get(this.currentVariation, field);
