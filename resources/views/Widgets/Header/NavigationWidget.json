@@ -7,6 +7,7 @@
     "position": 0,
     "widgetClass": "Ceres\\Widgets\\Header\\NavigationWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "isFixed": {
             "type": "checkbox",
             "required": true,

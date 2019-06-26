@@ -7,6 +7,7 @@
     "position": 700,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\LogoutButtonWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,

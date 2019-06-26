@@ -7,5 +7,6 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
     "settings": {
+        "customClass":"@include(customClass)"
     }
 }

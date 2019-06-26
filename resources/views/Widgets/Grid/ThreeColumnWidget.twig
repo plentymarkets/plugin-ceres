@@ -1,6 +1,7 @@
+{% set customClass = widget.settings.customClass.mobile %}
 {% set layout = widget.settings.layout.mobile %}
 
-<div class="widget widget-grid row">
+<div class="widget widget-grid widget-three-col row{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     {% if layout == "oneStackedToTwo" %}
         <div class="widget-inner widget-inner-stacked col-12 {{ gridLayouts[layout][0] }}">
             <div class="widget-inner row">
