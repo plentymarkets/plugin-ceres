@@ -11,8 +11,8 @@
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "none",
-            "options": "@include(optionalAppearance)"
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
         },
         "buttonSize": {
             "type": "select",
@@ -40,6 +40,6 @@
                 ]
             }
         },
-        "spacing":"@include(spacing)"
+        "spacing":"@include(spacingMargin)"
     }
 }

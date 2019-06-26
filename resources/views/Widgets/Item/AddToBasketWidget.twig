@@ -18,7 +18,7 @@
 {% set buttonSize = widget.settings.buttonSize.mobile | default("md") %}
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
 
-<div class="widget widget-place-order widget-{{ appearance }}
+<div class="widget widget-add-to-basket widget-{{ appearance }}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
