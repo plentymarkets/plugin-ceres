@@ -193,24 +193,42 @@ class DefaultSingleitemPreset implements ContentPreset
 
     private function createTabWidget()
     {
-        $uuidTabOne = '3a0ca715-ff40-4446-8393-07f663ce45a2';
-        $uuidTabTwo = '84d714c4-3fde-4be4-adf2-b6c1b9edb5b5';
-        $titleTabOne = $this->translator->trans("Ceres::Template.singleItemDescription");
-        $titleTabTwo = $this->translator->trans("Ceres::Widget.dataFieldTextsTechnicalData");
-        $tabs = array(array('title' => $titleTabOne,'uuid' => $uuidTabOne),
-                      array('title' => $titleTabTwo, 'uuid' => $uuidTabTwo));
+        $uuidTabDescription = '3a0ca715-ff40-4446-8393-07f663ce45a2';
+        $uuidTabTechData = '84d714c4-3fde-4be4-adf2-b6c1b9edb5b5';
+        $uuidTabMoreDetails = 'a9d045e0-c7ed-4dc7-a045-b1e1fe4a0b6b';
+        $titleTabDescription = $this->translator->trans("Ceres::Template.singleItemDescription");
+        $titleTabTechData = $this->translator->trans("Ceres::Widget.dataFieldTextsTechnicalData");
+        $titleTabMoreDetails= $this->translator->trans("Ceres::Template.singleItemMoreDetails");
+        $tabs = array(array('title' => $titleTabDescription,'uuid' => $uuidTabDescription),
+                      array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),
+                      array('title' => $titleTabMoreDetails, 'uuid' => $uuidTabMoreDetails));
+
         $this->tabWidget = $this->twoColumnWidget->createChild('first', 'Ceres::TabWidget')
             ->withSetting('tabs', $tabs)
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 4)
             ->withSetting('spacing.margin.top.unit', null);
 
-        $this->tabWidget->createChild($uuidTabOne, 'Ceres::InlineTextWidget')
+        $this->tabWidget->createChild($uuidTabDescription, 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
             ->withSetting('text', $this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',array('texts.description', null, null)));
-        $this->tabWidget->createChild($uuidTabTwo, 'Ceres::InlineTextWidget')
+        $this->tabWidget->createChild($uuidTabTechData, 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
             ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
+        $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
+            ->withSetting('itemInformation',
+            array("item.id", 
+                  "item.condition.names.name",
+                  "item.ageRestriction",
+                  "variation.externalId",
+                  "variation.model",
+                  "item.manufacturer.externalName",
+                  "item.producingCountry.names.name"),
+                  "unit.names.name",
+                  "variation.weightG",
+                  "variation.weightNetG",
+                  "item.variationDimensions",
+                  "item.customsTariffNumber");
     }
 
     private function createAttributeWidget()
