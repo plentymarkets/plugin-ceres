@@ -2,7 +2,7 @@
     <table class="table table-striped table-hover table-sm">
         <tbody>
             <template v-for="itemDataAccessor in itemInformation">
-                <tr v-if="isCheckedAndNotEmptyNew(itemDataAccessor)">
+                <tr v-if="isCheckedAndNotEmpty(itemDataAccessor)">
                     <td :class="paddingClasses" :style="paddingInlineStyles">
                         ${ getTranslation(itemDataAccessor) }
                     </td>

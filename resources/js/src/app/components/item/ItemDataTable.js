@@ -51,13 +51,17 @@ Vue.component("item-data-table", {
                 "variation.weightNetG"            : "singleItemNetWeight",
                 "item.variationDimensions"        : "singleItemDimensions",
                 "item.customsTariffNumber"        : "singleItemCustomsTariffNumber"
+            },
+            
+            filterMap: {
+                "item.ageRestriction": "ageRestriction"
             }
         };
     },
 
     methods:
     {
-        isCheckedAndNotEmptyNew(path, pathList)
+        isCheckedAndNotEmpty(path)
         {
             if (path !== "item.variationDimensions")
             {
@@ -84,12 +88,28 @@ Vue.component("item-data-table", {
 
         getFieldValue(path)
         {
-            if (path === "item.variationDimensions")
+            let value;
+
+            if (path !== "item.variationDimensions")
             {
-                return `${ get(this.currentVariation, "variation.lengthMM") }×${ get(this.currentVariation, "variation.widthMM") }×${ get(this.currentVariation, "variation.heightMM") } mm`;
+                value = get(this.currentVariation, path);
+            }
+            else
+            {
+                value = `${ get(this.currentVariation, "variation.lengthMM") }×${ get(this.currentVariation, "variation.widthMM") }×${ get(this.currentVariation, "variation.heightMM") } mm`;
             }
 
-            return get(this.currentVariation, path);
+            if (this.filterMap.hasOwnProperty(path))
+            {
+                const filterMethod = get(this.$options.filters, this.filterMap[path]);
+
+                if (filterMethod)
+                {
+                    return filterMethod(value);
+                }
+            }
+
+            return value;
         }
     }
 });
