@@ -22236,7 +22236,7 @@ html.ie .component-loading.with-icon:after {
 .qty-box {
   display: -ms-flexbox;
   display: flex;
-  height: 41px;
+  height: 100%;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -22245,6 +22245,7 @@ html.ie .component-loading.with-icon:after {
 .qty-box .qty-input {
   outline: none;
   height: 100%;
+  min-height: 27px;
   width: 48px;
   padding: 0;
   text-align: center;
@@ -22265,15 +22266,18 @@ html.ie .component-loading.with-icon:after {
   border-left: none;
   border-radius: 0 0.1rem 0.1rem 0;
   overflow: hidden;
+  height: 100%;
 }
 
 .qty-box .qty-btn-container .qty-btn {
   width: 100%;
   height: calc(50% - .5px);
+  min-height: 12px;
   text-align: center;
   transition: all 0.2s cubic-bezier(0, 0, 0.26, 1);
   border-radius: 0.1rem;
   cursor: pointer;
+  position: relative;
 }
 
 .qty-box .qty-btn-container .qty-btn.disabled {
@@ -22287,6 +22291,11 @@ html.ie .component-loading.with-icon:after {
 
 .qty-box .qty-btn-container .qty-btn > .qty-sign {
   color: #7a7f7f;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .qty-box .qty-btn-container .qty-btn-seperator {
