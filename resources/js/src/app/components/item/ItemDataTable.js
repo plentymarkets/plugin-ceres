@@ -24,8 +24,7 @@ Vue.component("item-data-table", {
         {
             type: Array,
             default: () => []
-        },
-        isPreview: Boolean
+        }
     },
 
     computed:
