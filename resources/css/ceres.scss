@@ -4001,6 +4001,11 @@ pre {
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
   }
+  &::-moz-placeholder {
+    color: $input-placeholder-color;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
   &::-ms-input-placeholder {
     color: $input-placeholder-color;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
@@ -6349,8 +6354,10 @@ input[type="button"] {
 
   @include media-breakpoint-up(sm) {
     -webkit-column-count: $card-columns-count;
+       -moz-column-count: $card-columns-count;
             column-count: $card-columns-count;
     -webkit-column-gap: $card-columns-gap;
+       -moz-column-gap: $card-columns-gap;
             column-gap: $card-columns-gap;
     orphans: 1;
     widows: 1;
@@ -14205,6 +14212,7 @@ div:not(.top-bar) {
 		& ul {
 			@include media-breakpoint-down(sm) {
 				-webkit-column-count: 2;
+				   -moz-column-count: 2;
 				        column-count: 2;
 			}
 		}
@@ -14642,18 +14650,22 @@ nav.navbar.megamenu {
                 >ul.collapse {
                     background-color: $megamenu-bg;
                     -webkit-column-gap		: .5em;
+                       -moz-column-gap		: .5em;
                             column-gap		: .5em;
                     -webkit-column-rule		: 1px solid #dcdbd7;
+                       -moz-column-rule		: 1px solid #dcdbd7;
                             column-rule		: 1px solid #dcdbd7;
                     display			: none;
                     padding			: 1em 0;
                     min-height		: 7em;
                     max-height		: 86vh;  
                     -webkit-column-count	: 5;  
+                       -moz-column-count	: 5;  
                             column-count	: 5;
                     overflow-x		: auto;
                     overflow-y		: hidden;
                     -webkit-column-fill		: balance;
+                       -moz-column-fill		: balance;
                             column-fill		: balance;
 
                     li {
