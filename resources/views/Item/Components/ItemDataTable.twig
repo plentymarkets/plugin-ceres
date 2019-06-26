@@ -3,11 +3,11 @@
         <tbody>
             <template v-for="itemDataAccessor in itemInformation">
                 <tr v-if="isCheckedAndNotEmptyNew(itemDataAccessor)">
-                    <td>
+                    <td :class="paddingClasses" :style="paddingInlineStyles">
                         ${ getTranslation(itemDataAccessor) }
                     </td>
 
-                    <td>
+                    <td :class="paddingClasses" :style="paddingInlineStyles">
                         ${ getFieldValue(itemDataAccessor) }
                     </td>
                 </tr>
