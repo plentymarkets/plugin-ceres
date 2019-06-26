@@ -7,6 +7,7 @@
     "position": 600,
     "widgetClass": "Ceres\\Widgets\\Item\\ItemDataTableWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "itemInformation": {
             "type": "select",
             "isList": "[1,]",
