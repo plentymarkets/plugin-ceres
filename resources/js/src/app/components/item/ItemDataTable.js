@@ -1,5 +1,6 @@
 import { get } from "lodash";
 import { isNullOrUndefined } from "../../helper/utils";
+import TranslationService from "services/TranslationService";
 
 Vue.component("item-data-table", {
     props:
@@ -29,27 +30,66 @@ Vue.component("item-data-table", {
 
     computed:
     {
-        showPlaceholder()
-        {
-            return this.$refs.tableContent.hasChildNodes() && this.isPreview;
-        },
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data
         })
     },
 
+    data()
+    {
+        return {
+            translationMap: {
+                "item.id"                         : "singleItemId",
+                "item.condition.names.name"       : "singleItemCondition",
+                "item.ageRestriction"             : "singleItemAge",
+                "variation.externalId"            : "singleItemExternalVariationId",
+                "variation.model"                 : "singleItemModel",
+                "item.manufacturer.externalName"  : "singleItemManufacturer",
+                "item.producingCountry.names.name": "singleItemManufacturingCountry",
+                "unit.names.name"                 : "singleItemContent",
+                "variation.weightG"               : "singleItemWeight",
+                "variation.weightNetG"            : "singleItemNetWeight",
+                "item.variationDimensions"        : "singleItemDimensions",
+                "item.customsTariffNumber"        : "singleItemCustomsTariffNumber"
+            }
+        };
+    },
+
     methods:
     {
-        isCheckedAndNotEmpty(path, itemDataAccessor, pathList)
+        isCheckedAndNotEmptyNew(path, pathList)
         {
-            if (isNullOrUndefined(pathList))
+            if (path !== "item.variationDimensions")
             {
-                return path === itemDataAccessor && get(this.currentVariation, path) !== "";
+                return get(this.currentVariation, path) !== "";
             }
             else
             {
-                return pathList.some(element => isNullOrUndefined(get(this.currentVariation, element)) && get(this.currentVariation, element) !== "");
+                return ["variation.lengthMM", "variation.widthMM", "variation.heightMM"]
+                    .some(element =>
+                    {
+                        const value = this.getFieldValue(element);
+
+                        return !isNullOrUndefined(value) && value !== 0;
+                    });
             }
+        },
+
+        getTranslation(path)
+        {
+            return TranslationService.translate(
+                `Ceres::Template.${this.translationMap[path]}`
+            );
+        },
+
+        getFieldValue(path)
+        {
+            if (path === "item.variationDimensions")
+            {
+                return `${ get(this.currentVariation, "variation.lengthMM") }×${ get(this.currentVariation, "variation.widthMM") }×${ get(this.currentVariation, "variation.heightMM") } mm`;
+            }
+
+            return get(this.currentVariation, path);
         }
     }
 });
