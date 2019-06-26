@@ -57,7 +57,7 @@
         "singleitem":
         [
             {
-                "label":"Singleitem",
+                "label":"Widget.presetSingleItemDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultSingleitemPreset"
             }
         ]
