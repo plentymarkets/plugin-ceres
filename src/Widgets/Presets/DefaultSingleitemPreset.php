@@ -62,7 +62,9 @@ class DefaultSingleitemPreset implements ContentPreset
 
     private function createTwoColumnWidget()
     {
-        $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')->withSetting('layout', 'sevenToFive');
+        $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
+            ->withSetting('layout', 'sevenToFive')
+            ->withSetting('customClass','mt-5');
     }
 
     private function createManufacturer()
@@ -77,7 +79,7 @@ class DefaultSingleitemPreset implements ContentPreset
             ->withSetting('spacing.padding.right.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text',"{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ManufacturerDataFieldProvider::externalName #}{{ item_data_field('item.manufacturer.externalName') }}");
+            ->withSetting('text',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName')));
     }
     private function createNameHeader()
     {
@@ -121,7 +123,10 @@ class DefaultSingleitemPreset implements ContentPreset
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::ItemPriceWidget')
             ->withSetting('showCrossPrice', true)
-            ->withSetting('appearance', 'primary');
+            ->withSetting('appearance', 'primary')
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.top.value', 4)
+            ->withSetting('spacing.margin.top.unit', 'rem');
     }
 
     private function createItemVariationNumber()
