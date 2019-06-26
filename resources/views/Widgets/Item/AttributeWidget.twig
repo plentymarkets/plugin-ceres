@@ -1,7 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set appearance = widget.settings.appearance.mobile | default("none") %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
 {% set buttonSize = widget.settings.buttonSize.mobile | default("md") %}
 
 {% set customClass = widget.settings.customClass.mobile %}
