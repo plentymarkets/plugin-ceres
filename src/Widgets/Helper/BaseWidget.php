@@ -79,7 +79,16 @@ class BaseWidget implements Widget
     )
     {
         $twig = pluginApp(Twig::class);
+
+        $template = '';
+        if(isset($widgetSettings['template']))
+        {
+            $template = $widgetSettings['template'];
+            unset($widgetSettings['template']);
+        }
         $templateData = $this->getTemplateData($widgetSettings, $isPreview);
+
+
         $templateData["widget"] = [
             "settings"      => $widgetSettings
         ];
@@ -87,7 +96,15 @@ class BaseWidget implements Widget
         $templateData["isPreview"] = $isPreview;
         $templateData["TOOLBAR_LAYOUT"] = self::TOOLBAR_LAYOUT;
 
-        return $twig->render($this->template, $templateData);
+        $rendered = $twig->render($this->template, $templateData);
+
+
+        if($isPreview && strlen($template))
+        {
+            $rendered = '{{ services.template.setCurrentTemplate("'. $template .'") }}'. $rendered;
+        }
+
+        return $rendered;
     }
 
     /**
