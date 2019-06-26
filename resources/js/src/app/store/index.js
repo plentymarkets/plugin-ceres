@@ -37,8 +37,7 @@ const store = new Vuex.Store(
             wishList
         },
 
-        plugins: [eventPropagation],
-        strict: true
+        plugins: [eventPropagation]
     });
 
 window.ceresStore = store;
