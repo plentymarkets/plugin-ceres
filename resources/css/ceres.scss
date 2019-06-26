@@ -17506,7 +17506,7 @@ html.ie {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 41px;
+    height: 100%;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
@@ -17514,6 +17514,7 @@ html.ie {
     .qty-input {
         outline: none;
         height: 100%;
+        min-height: 27px;
         width: 48px;
         padding: 0;
         text-align: center;
@@ -17535,15 +17536,18 @@ html.ie {
         border-left: none;
         border-radius: 0 $border-radius $border-radius 0;
         overflow: hidden;
+        height: 100%;
 
         .qty-btn {
             width: 100%;
             height: calc(50% - .5px);
+            min-height: 12px;
             text-align: center;
             -webkit-transition: all .2s cubic-bezier(0,0,.26,1);
             transition: all .2s cubic-bezier(0,0,.26,1);
             border-radius: $border-radius;
             cursor: pointer;
+            position: relative;
 
             &.disabled {
                 cursor: not-allowed;
@@ -17556,6 +17560,12 @@ html.ie {
 
             & > .qty-sign {
                 color: $gray;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                        transform: translateY(-50%);
             }
         }
 
