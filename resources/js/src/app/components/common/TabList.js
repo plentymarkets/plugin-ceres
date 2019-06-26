@@ -183,6 +183,7 @@ Vue.component("tab-list", {
         filterContent(tab)
         {
             const imgPattern = new RegExp(/<img([\w\W]+?)>/);
+
             if (imgPattern.test(tab.$el.innerHTML))
             {
                 return true;

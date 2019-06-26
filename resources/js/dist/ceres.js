@@ -20117,37 +20117,48 @@ Vue.component("tab-list", {
   render: function render(createElement) {
     var _this2 = this;
 
-    var navElements = this.tabs.map(function (tab, index) {
-      return createElement(TabNavItem, {
-        props: {
-          tab: tab,
-          tabIndex: index
-        },
-        on: {
-          click: function click(evt) {
-            if (!tab.localActive) {
-              _this2.activateTab(tab, evt);
+    var tabListElements = [];
+
+    if (this.tabs.length > 0) {
+      var navElements = this.tabs.map(function (tab, index) {
+        return createElement(TabNavItem, {
+          props: {
+            tab: tab,
+            tabIndex: index
+          },
+          on: {
+            click: function click(evt) {
+              if (!tab.localActive) {
+                _this2.activateTab(tab, evt);
+              }
             }
           }
-        }
+        });
       });
-    });
-    var nav = createElement("ul", {
-      staticClass: "nav nav-tabs",
-      class: ["widget-" + this.appearance],
-      attrs: {
-        role: "tablist"
-      }
-    }, [navElements]);
+      var nav = createElement("ul", {
+        staticClass: "nav nav-tabs",
+        class: ["widget-" + this.appearance],
+        attrs: {
+          role: "tablist"
+        }
+      }, [navElements]);
+      tabListElements.push(nav);
+    }
+
     var content = createElement("div", {
       staticClass: "tab-content"
     }, [this.$slots.default]);
-    return createElement("div", {}, [nav, content]);
+    tabListElements.push(content);
+    return createElement("div", {}, tabListElements);
   },
   props: {
     appearance: {
       type: String,
       default: "none"
+    },
+    renderEmpty: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -20164,12 +20175,14 @@ Vue.component("tab-list", {
   },
   methods: {
     getTabs: function getTabs() {
+      var _this4 = this;
+
       var tabs = this.$slots.default || [];
       var tabComps = tabs.map(function (vnode) {
         return vnode.componentInstance;
       });
       return tabComps.filter(function (tab) {
-        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots.default) && tab.$el.textContent.length > 0;
+        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
       });
     },
     updateTabs: function updateTabs() {
@@ -20184,6 +20197,18 @@ Vue.component("tab-list", {
       if (tab !== activeTab) {
         activeTab.setActive(false);
       }
+    },
+    // checks if tab content contains img tag or text.
+    filterContent: function filterContent(tab) {
+      var imgPattern = new RegExp(/<img([\w\W]+?)>/);
+
+      if (imgPattern.test(tab.$el.innerHTML)) {
+        return true;
+      }
+
+      if (tab.$el.textContent.length > 0) {
+        return true;
+      } else return false;
     }
   }
 });

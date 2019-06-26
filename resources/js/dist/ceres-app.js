@@ -19835,7 +19835,7 @@ Vue.component("tab-list", {
         return vnode.componentInstance;
       });
       return tabComps.filter(function (tab) {
-        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots.default) && (_this4.renderEmpty || tab.$el.textContent.length > 0);
+        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
       });
     },
     updateTabs: function updateTabs() {
@@ -19850,6 +19850,18 @@ Vue.component("tab-list", {
       if (tab !== activeTab) {
         activeTab.setActive(false);
       }
+    },
+    // checks if tab content contains img tag or text.
+    filterContent: function filterContent(tab) {
+      var imgPattern = new RegExp(/<img([\w\W]+?)>/);
+
+      if (imgPattern.test(tab.$el.innerHTML)) {
+        return true;
+      }
+
+      if (tab.$el.textContent.length > 0) {
+        return true;
+      } else return false;
     }
   }
 });
