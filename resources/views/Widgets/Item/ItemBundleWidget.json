@@ -1,11 +1,11 @@
 {
-    "identifier": "Ceres::TitleBarWidget",
-    "label": "Widget.titleBarLabel",
-    "previewImageURL": "/images/widgets/title-bar.svg",
-    "type": "static",
-    "categories": ["text"],
+    "identifier": "Ceres::ItemBundleWidget",
+    "label": "Widget.itemBundleLabel",
+    "previewImageURL": "/images/widgets/item-bundle.svg",
+    "type": "item",
+    "categories": ["item"],
     "position": 400,
-    "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
+    "widgetClass": "Ceres\\Widgets\\Item\\ItemBundleWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {

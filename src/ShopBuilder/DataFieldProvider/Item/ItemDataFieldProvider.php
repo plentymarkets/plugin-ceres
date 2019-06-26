@@ -15,5 +15,6 @@ class ItemDataFieldProvider extends DataFieldProvider
         $this->addChildProvider("Ceres::Widget.dataFieldBarcodes", BarcodeListDataFieldProvider::class);
         $this->addChildProvider("Ceres::Widget.dataFieldUnits", UnitDataFieldProvider::class);
         $this->addChildProvider("Ceres::Widget.dataFieldTexts", TextsDataFieldProvider::class);
+        $this->addChildProvider("Ceres::Widget.dataFieldProperties", PropertyGroupDataFieldProvider::class);
     }
 }

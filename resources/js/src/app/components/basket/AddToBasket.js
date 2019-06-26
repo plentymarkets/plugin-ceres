@@ -1,7 +1,7 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
 import { navigateTo } from "services/UrlService";
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 
 const NotificationService = require("services/NotificationService");
 
@@ -68,6 +68,25 @@ Vue.component("add-to-basket", {
         {
             type: Boolean,
             default: true
+        },
+        buttonSize:
+        {
+            type: [String, null],
+            default: null,
+            validator: value =>
+            {
+                return ["sm", "md", "lg"].indexOf(value) !== -1;
+            }
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
     computed:
@@ -85,6 +104,23 @@ Vue.component("add-to-basket", {
         {
             return App.config.item.requireOrderProperties &&
                 this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0;
+        },
+
+        buttonClasses()
+        {
+            const classes = [];
+
+            if (isDefined(this.buttonSize))
+            {
+                classes.push(`btn-${this.buttonSize}`);
+            }
+
+            if (isDefined(this.paddingClasses))
+            {
+                classes.push(this.paddingClasses.split(" "));
+            }
+
+            return classes;
         },
 
         ...Vuex.mapState({

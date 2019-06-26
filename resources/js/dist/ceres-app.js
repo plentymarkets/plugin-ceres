@@ -18261,6 +18261,21 @@ Vue.component("add-to-basket", {
     hasPrice: {
       type: Boolean,
       "default": true
+    },
+    buttonSize: {
+      type: [String, null],
+      "default": null,
+      validator: function validator(value) {
+        return ["sm", "md", "lg"].indexOf(value) !== -1;
+      }
+    },
+    paddingClasses: {
+      type: String,
+      "default": null
+    },
+    paddingInlineStyles: {
+      type: String,
+      "default": null
     }
   },
   computed: _objectSpread({
@@ -18271,6 +18286,19 @@ Vue.component("add-to-basket", {
       return App.config.item.requireOrderProperties && this.orderProperties.filter(function (property) {
         return property.property.isShownOnItemPage;
       }).length > 0;
+    },
+    buttonClasses: function buttonClasses() {
+      var classes = [];
+
+      if ((0, _utils.isDefined)(this.buttonSize)) {
+        classes.push("btn-".concat(this.buttonSize));
+      }
+
+      if ((0, _utils.isDefined)(this.paddingClasses)) {
+        classes.push(this.paddingClasses.split(" "));
+      }
+
+      return classes;
     }
   }, Vuex.mapState({
     isBasketLoading: function isBasketLoading(state) {
@@ -19768,37 +19796,48 @@ Vue.component("tab-list", {
   render: function render(createElement) {
     var _this2 = this;
 
-    var navElements = this.tabs.map(function (tab, index) {
-      return createElement(TabNavItem, {
-        props: {
-          tab: tab,
-          tabIndex: index
-        },
-        on: {
-          click: function click(evt) {
-            if (!tab.localActive) {
-              _this2.activateTab(tab, evt);
+    var tabListElements = [];
+
+    if (this.tabs.length > 0) {
+      var navElements = this.tabs.map(function (tab, index) {
+        return createElement(TabNavItem, {
+          props: {
+            tab: tab,
+            tabIndex: index
+          },
+          on: {
+            click: function click(evt) {
+              if (!tab.localActive) {
+                _this2.activateTab(tab, evt);
+              }
             }
           }
-        }
+        });
       });
-    });
-    var nav = createElement("ul", {
-      staticClass: "nav nav-tabs",
-      "class": ["widget-" + this.appearance],
-      attrs: {
-        role: "tablist"
-      }
-    }, [navElements]);
+      var nav = createElement("ul", {
+        staticClass: "nav nav-tabs",
+        "class": ["widget-" + this.appearance],
+        attrs: {
+          role: "tablist"
+        }
+      }, [navElements]);
+      tabListElements.push(nav);
+    }
+
     var content = createElement("div", {
       staticClass: "tab-content"
     }, [this.$slots["default"]]);
-    return createElement("div", {}, [nav, content]);
+    tabListElements.push(content);
+    return createElement("div", {}, tabListElements);
   },
   props: {
     appearance: {
       type: String,
       "default": "none"
+    },
+    renderEmpty: {
+      type: Boolean,
+      "default": false
     }
   },
   data: function data() {
@@ -19815,12 +19854,14 @@ Vue.component("tab-list", {
   },
   methods: {
     getTabs: function getTabs() {
+      var _this4 = this;
+
       var tabs = this.$slots["default"] || [];
       var tabComps = tabs.map(function (vnode) {
         return vnode.componentInstance;
       });
       return tabComps.filter(function (tab) {
-        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots["default"]);
+        return (0, _utils.isDefined)(tab) && (0, _utils.isDefined)(tab.$slots["default"]) && (_this4.renderEmpty || _this4.filterContent(tab));
       });
     },
     updateTabs: function updateTabs() {
@@ -19835,6 +19876,20 @@ Vue.component("tab-list", {
       if (tab !== activeTab) {
         activeTab.setActive(false);
       }
+    },
+    // checks if tab content contains img tag or text.
+    filterContent: function filterContent(tab) {
+      var imgPattern = new RegExp(/<img([\w\W]+?)>/);
+
+      if (imgPattern.test(tab.$el.innerHTML)) {
+        return true;
+      }
+
+      if (tab.$el.textContent.length > 0) {
+        return true;
+      }
+
+      return false;
     }
   }
 });
@@ -22295,6 +22350,14 @@ Vue.component("item-bundle", {
     template: {
       type: String,
       "default": "#vue-item-bundle"
+    },
+    paddingClasses: {
+      type: String,
+      "default": null
+    },
+    paddingInlineStyles: {
+      type: String,
+      "default": null
     },
     bundleType: String,
     bundleComponents: Array
@@ -28179,12 +28242,15 @@ exports.get = get;
 var _utils = require("./utils");
 
 function get(object, path) {
-  var fields = path.split(".");
-  var key = fields.shift();
+  var fieldExp = /{\s*\S+\s*,\s*\S+\s*}|\w+/gm;
+  var key;
 
-  while (!(0, _utils.isNullOrUndefined)(object) && !(0, _utils.isNullOrUndefined)(key)) {
-    object = readField(object, key);
-    key = fields.shift();
+  while (!(0, _utils.isNullOrUndefined)(object) && (key = fieldExp.exec(path)) !== null) {
+    if (key.index === fieldExp.lastIndex) {
+      fieldExp.lastIndex++;
+    }
+
+    object = readField(object, key[0]);
   }
 
   return object;
@@ -28201,7 +28267,7 @@ function readField(object, field) {
     var searchKey = match[1];
     var searchValue = match[2];
     return Array.prototype.slice.call(object).find(function (entry) {
-      return entry[searchKey] + "" === searchValue;
+      return get(entry, searchKey) + "" === searchValue;
     });
   }
 
