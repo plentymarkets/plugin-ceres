@@ -7,6 +7,7 @@
     "position": 600,
     "widgetClass": "Ceres\\Widgets\\Checkout\\SubscribeNewsletterCheckWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "emailFolder": {
             "type": "number",
             "required": true,
