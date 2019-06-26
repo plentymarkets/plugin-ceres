@@ -17,8 +17,9 @@
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}" 
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}> 
     <item-bundle
-        {% if not isPreview %}v-if="$store.getters.currentItemVariation.variation.bundleType === 'bundle'"{% endif %}
-        :bundle-type="$store.getters.currentItemVariation.variation.bundleType"
+        {% if not isPreview %}v-if="$store.getters.currentItemVariation.variation.bundleType === 'bundle'"
+        :bundle-type="$store.getters.currentItemVariation.variation.bundleType"{% else %}
+        :bundle-type="'bundle'"{% endif %}
         :bundle-components="$store.getters.currentItemVariation.bundleComponents"
         {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
         {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>>
