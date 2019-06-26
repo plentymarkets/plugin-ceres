@@ -9,6 +9,7 @@ import localization from "store/modules/LocalizationModule";
 import navigation from "store/modules/NavigationModule";
 import orderReturn from "store/modules/OrderReturnModule";
 import user from "store/modules/UserModule";
+import variationSelect from "store/modules/VariationSelectModule";
 import wishList from "store/modules/WishListModule";
 
 import eventPropagation from "store/plugins/EventPropagationPlugin";
@@ -32,6 +33,7 @@ const store = new Vuex.Store(
             navigation,
             orderReturn,
             user,
+            variationSelect,
             wishList
         },
 
