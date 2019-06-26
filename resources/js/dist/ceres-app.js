@@ -19861,7 +19861,9 @@ Vue.component("tab-list", {
 
       if (tab.$el.textContent.length > 0) {
         return true;
-      } else return false;
+      }
+
+      return false;
     }
   }
 });
