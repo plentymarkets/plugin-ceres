@@ -1,6 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
@@ -13,8 +14,7 @@
 {{ Twig.set("overridePaymentList", Twig.call("LayoutContainer.show", ["Ceres::Checkout.PaymentList"])) }}
 {% set hintText = widget.settings.hintText.mobile %}
 
-<div class="widget widget-provider-select widget-{{ widget.settings.appearance.mobile | default("primary") }} 
-    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
+<div class="widget widget-provider-select widget-{{ widget.settings.appearance.mobile | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if hintText is empty %}

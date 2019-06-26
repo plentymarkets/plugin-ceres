@@ -7,6 +7,7 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\GreetingWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "salutation": {
             "type": "select",
             "required": true,

@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{% set customClass = widget.settings.customClass.mobile %}
 {% set tabs = widget.settings.tabs.mobile %}
 {% set appearance = widget.settings.appearance.mobile %}
 {% set renderContent = false %}
@@ -13,7 +14,7 @@
 
 
 {% if renderContent %}
-<div class="widget widget-tab {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
+<div class="widget widget-tab{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <tab-list class="widget-inner" appearance="{{ appearance | default("primary") }}">
         {% for tab in tabs if children[tab.uuid] | raw is not empty or isPreview and tab.title | trim is not empty %}
