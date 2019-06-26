@@ -6,5 +6,8 @@
     "categories": ["item"],
     "position": 200,
     "widgetClass": "Ceres\\Widgets\\Item\\ItemAvailabilityWidget",
-    "settings": {}
+    "settings": 
+    {
+        "customClass":"@include(customClass)"
+    }
 }

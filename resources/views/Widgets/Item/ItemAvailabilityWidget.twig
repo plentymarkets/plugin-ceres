@@ -1,4 +1,6 @@
-<div class="widget widget-availability">
+{% set customClass = widget.settings.customClass.mobile %}
+
+<div class="widget widget-availability {% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     <span v-if="$store.getters.currentItemVariation && $store.getters.currentItemVariation.variation && $store.getters.currentItemVariation.variation.availability" :class="'availability badge availability_' + $store.getters.currentItemVariation.variation.availability.id">
         <span>
             ${ $store.getters.currentItemVariation.variation.availability.names.name }
