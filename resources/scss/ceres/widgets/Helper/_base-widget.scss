@@ -51,6 +51,15 @@
     }
 }
 
+#page-header-parent > .widget {
+    width: 1200px;
+    background-color: $gray-lightest;
+    
+    &:not(.widget-grid) {
+        width: 1170px;
+    }
+}
+
 header .widget
 {
     margin-bottom: 0;

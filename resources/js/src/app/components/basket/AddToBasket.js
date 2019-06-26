@@ -125,7 +125,7 @@ Vue.component("add-to-basket", {
 
         ...Vuex.mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
-            isVariationSelected: state => state.item.isVariationSelected
+            isVariationSelected: state => state.variationSelect.isVariationSelected
         })
     },
     data()
