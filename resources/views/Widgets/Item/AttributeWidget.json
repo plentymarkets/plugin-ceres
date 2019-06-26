@@ -10,8 +10,8 @@
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "none",
-            "options": "@include(optionalAppearance)"
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
         },
         "buttonSize": {
             "type": "select",
