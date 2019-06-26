@@ -98,6 +98,11 @@ Vue.component("item-data-table", {
                 value = `${ get(this.currentVariation, "variation.lengthMM") }×${ get(this.currentVariation, "variation.widthMM") }×${ get(this.currentVariation, "variation.heightMM") } mm`;
             }
 
+            return this.filterFieldData(value, path);
+        },
+
+        filterFieldData(value, path)
+        {
             if (this.filterMap.hasOwnProperty(path))
             {
                 const filterMethod = get(this.$options.filters, this.filterMap[path]);
