@@ -192,7 +192,7 @@ Vue.component("tab-list", {
             {
                 return true;
             }
-            else return false;
+            return false;
         }
     }
 });
