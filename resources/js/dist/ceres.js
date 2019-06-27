@@ -39581,6 +39581,10 @@ var _lodash = require("lodash");
 
 var _utils = require("../../helper/utils");
 
+var _TranslationService = _interopRequireDefault(require("services/TranslationService"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -39604,34 +39608,77 @@ Vue.component("item-data-table", {
       "default": function _default() {
         return [];
       }
-    },
-    isPreview: Boolean
-  },
-  computed: _objectSpread({
-    showPlaceholder: function showPlaceholder() {
-      return this.$refs.tableContent.hasChildNodes() && this.isPreview;
     }
-  }, Vuex.mapState({
+  },
+  computed: _objectSpread({}, Vuex.mapState({
     currentVariation: function currentVariation(state) {
       return state.item.variation.documents[0].data;
     }
   })),
+  data: function data() {
+    return {
+      translationMap: {
+        "item.id": "singleItemId",
+        "item.condition.names.name": "singleItemCondition",
+        "item.ageRestriction": "singleItemAge",
+        "variation.externalId": "singleItemExternalVariationId",
+        "variation.model": "singleItemModel",
+        "item.manufacturer.externalName": "singleItemManufacturer",
+        "item.producingCountry.names.name": "singleItemManufacturingCountry",
+        "unit.names.name": "singleItemContent",
+        "variation.weightG": "singleItemWeight",
+        "variation.weightNetG": "singleItemNetWeight",
+        "item.variationDimensions": "singleItemDimensions",
+        "item.customsTariffNumber": "singleItemCustomsTariffNumber"
+      },
+      filterMap: {
+        "item.ageRestriction": "ageRestriction"
+      }
+    };
+  },
   methods: {
-    isCheckedAndNotEmpty: function isCheckedAndNotEmpty(path, itemDataAccessor, pathList) {
+    isCheckedAndNotEmpty: function isCheckedAndNotEmpty(path) {
       var _this = this;
 
-      if ((0, _utils.isNullOrUndefined)(pathList)) {
-        return path === itemDataAccessor && (0, _lodash.get)(this.currentVariation, path) !== "";
+      if (path !== "item.variationDimensions") {
+        return (0, _lodash.get)(this.currentVariation, path) !== "";
       } else {
-        return pathList.some(function (element) {
-          return (0, _utils.isNullOrUndefined)((0, _lodash.get)(_this.currentVariation, element)) && (0, _lodash.get)(_this.currentVariation, element) !== "";
+        return ["variation.lengthMM", "variation.widthMM", "variation.heightMM"].some(function (element) {
+          var value = _this.getFieldValue(element);
+
+          return !(0, _utils.isNullOrUndefined)(value) && value !== 0;
         });
       }
+    },
+    getTranslation: function getTranslation(path) {
+      return _TranslationService["default"].translate("Ceres::Template.".concat(this.translationMap[path]));
+    },
+    getFieldValue: function getFieldValue(path) {
+      var value;
+
+      if (path !== "item.variationDimensions") {
+        value = (0, _lodash.get)(this.currentVariation, path);
+      } else {
+        value = "".concat((0, _lodash.get)(this.currentVariation, "variation.lengthMM"), "\xD7").concat((0, _lodash.get)(this.currentVariation, "variation.widthMM"), "\xD7").concat((0, _lodash.get)(this.currentVariation, "variation.heightMM"), " mm");
+      }
+
+      return this.filterFieldData(value, path);
+    },
+    filterFieldData: function filterFieldData(value, path) {
+      if (this.filterMap.hasOwnProperty(path)) {
+        var filterMethod = (0, _lodash.get)(this.$options.filters, this.filterMap[path]);
+
+        if (filterMethod) {
+          return filterMethod(value);
+        }
+      }
+
+      return value;
     }
   }
 });
 
-},{"../../helper/utils":264,"lodash":123}],173:[function(require,module,exports){
+},{"../../helper/utils":264,"lodash":123,"services/TranslationService":273}],173:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -44542,21 +44589,19 @@ var _TranslationService = _interopRequireDefault(require("services/TranslationSe
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 Vue.filter("ageRestriction", function (age) {
-  var ageRestrictionText = "";
-
   if (age === 0) {
-    ageRestrictionText = _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestrictionNone");
-  } else if (age > 0 && age < 18) {
-    ageRestrictionText = _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestriction").replace("age", age);
+    return _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestrictionNone");
+  } else if (age > 0 && age <= 18) {
+    return _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestriction", {
+      age: age
+    });
   } else if (age === 50) {
-    ageRestrictionText = _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestrictionNotFlagged").replace("age", age);
-  } else if (age === 80) {
-    ageRestrictionText = _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestrictionNotRequired").replace("age", age);
+    return _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestrictionNotFlagged");
+  } else if (age === 88) {
+    return _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestrictionNotRequired");
   } else {
-    ageRestrictionText = _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestrictionUnknown").replace("age", age);
+    return _TranslationService["default"].translate("Ceres::Template.singleItemAgeRestrictionUnknown");
   }
-
-  return ageRestrictionText;
 });
 
 },{"services/TranslationService":273}],234:[function(require,module,exports){

@@ -4884,32 +4884,6 @@
                     ]
                 }
             },
-            "buttonSize": {
-                "type": "select",
-                "required": true,
-                "defaultValue": "md",
-                "options": {
-                    "name": "Widget.widgetButtonSizeLabel",
-                    "tooltipText": "Widget.widgetButtonSizeTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": "sm",
-                            "caption": "Widget.widgetButtonSizeSm",
-                            "position": 0
-                        },
-                        {
-                            "value": "md",
-                            "caption": "Widget.widgetButtonSizeNormal",
-                            "position": 1
-                        },
-                        {
-                            "value": "lg",
-                            "caption": "Widget.widgetButtonSizeLg",
-                            "position": 2
-                        }
-                    ]
-                }
-            },
             "spacing": {
                 "type": "vertical",
                 "children": {
@@ -5177,6 +5151,57 @@
         "position": 600,
         "widgetClass": "Ceres\\Widgets\\Item\\ItemDataTableWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            },
             "itemInformation": {
                 "type": "select",
                 "isList": "[1,]",
