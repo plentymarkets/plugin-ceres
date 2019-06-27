@@ -14,32 +14,6 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "buttonSize": {
-            "type": "select",
-            "required": true,
-            "defaultValue": "md",
-            "options": {
-                "name": "Widget.widgetButtonSizeLabel",
-                "tooltipText": "Widget.widgetButtonSizeTooltip",
-                "listBoxValues": [
-                    {
-                        "value": "sm",
-                        "caption": "Widget.widgetButtonSizeSm",
-                        "position": 0
-                    },
-                    {
-                        "value": "md",
-                        "caption": "Widget.widgetButtonSizeNormal",
-                        "position": 1
-                    },
-                    {
-                        "value": "lg",
-                        "caption": "Widget.widgetButtonSizeLg",
-                        "position": 2
-                    }
-                ]
-            }
-        },
         "spacing":"@include(spacingMargin)"
     }
 }
