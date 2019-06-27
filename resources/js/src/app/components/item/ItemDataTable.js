@@ -74,7 +74,9 @@ Vue.component("item-data-table", {
         {
             if (path !== "item.variationDimensions")
             {
-                return get(this.currentVariation, path) !== "";
+                const value = get(this.currentVariation, path);
+
+                return value !== "" && value !== 0;
             }
             else
             {
