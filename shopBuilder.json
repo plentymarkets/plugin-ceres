@@ -53,6 +53,13 @@
               "label": "Widget.presetMyAccountDefault",
               "presetClass": "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset"
             }
+        ],
+        "singleitem":
+        [
+            {
+                "label":"Widget.presetSingleItemDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultSingleitemPreset"
+            }
         ]
     },
     "dataFieldProviders": {
