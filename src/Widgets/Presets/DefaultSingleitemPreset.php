@@ -7,6 +7,7 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
+use IO\Extensions\Functions\UniqueId;
 
 class DefaultSingleitemPreset implements ContentPreset
 {
@@ -83,7 +84,22 @@ class DefaultSingleitemPreset implements ContentPreset
     }
     private function createNameHeader()
     {
-        $dataProvider = $this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::name1',array('texts.name1'));
+        $itemName;
+        switch($this->ceresConfig->item->itemName)
+        {
+            case 0;
+                $itemName = 'name1';
+                break;
+            case 1;
+                $itemName = 'name2';
+                break;
+            case 2;
+                $itemName = 'name3';
+                break;
+            default;
+                $itemName = 'name1';
+        }
+        $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -193,12 +209,13 @@ class DefaultSingleitemPreset implements ContentPreset
 
     private function createTabWidget()
     {
-        $uuidTabDescription = '3a0ca715-ff40-4446-8393-07f663ce45a2';
-        $uuidTabTechData = '84d714c4-3fde-4be4-adf2-b6c1b9edb5b5';
-        $uuidTabMoreDetails = 'a9d045e0-c7ed-4dc7-a045-b1e1fe4a0b6b';
+        $uuidGenerator = pluginApp(UniqueId::class);
+        $uuidTabDescription  = $uuidGenerator->generateUniqueId();
+        $uuidTabTechData     = $uuidGenerator->generateUniqueId();
+        $uuidTabMoreDetails  = $uuidGenerator->generateUniqueId();
         $titleTabDescription = $this->translator->trans("Ceres::Template.singleItemDescription");
-        $titleTabTechData = $this->translator->trans("Ceres::Widget.dataFieldTextsTechnicalData");
-        $titleTabMoreDetails= $this->translator->trans("Ceres::Template.singleItemMoreDetails");
+        $titleTabTechData    = $this->translator->trans("Ceres::Widget.dataFieldTextsTechnicalData");
+        $titleTabMoreDetails = $this->translator->trans("Ceres::Template.singleItemMoreDetails");
         $tabs = array(array('title' => $titleTabDescription,'uuid' => $uuidTabDescription),
                       array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),
                       array('title' => $titleTabMoreDetails, 'uuid' => $uuidTabMoreDetails));
@@ -217,18 +234,18 @@ class DefaultSingleitemPreset implements ContentPreset
             ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
         $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
             ->withSetting('itemInformation',
-            array("item.id", 
-                  "item.condition.names.name",
-                  "item.ageRestriction",
-                  "variation.externalId",
-                  "variation.model",
-                  "item.manufacturer.externalName",
-                  "item.producingCountry.names.name"),
-                  "unit.names.name",
-                  "variation.weightG",
-                  "variation.weightNetG",
-                  "item.variationDimensions",
-                  "item.customsTariffNumber");
+                            array("item.id", 
+                                "item.condition.names.name",
+                                "item.ageRestriction",
+                                "variation.externalId",
+                                "variation.model",
+                                "item.manufacturer.externalName",
+                                "item.producingCountry.names.name"),
+                                "unit.names.name",
+                                "variation.weightG",
+                                "variation.weightNetG",
+                                "item.variationDimensions",
+                                "item.customsTariffNumber");
     }
 
     private function createAttributeWidget()
