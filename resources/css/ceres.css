@@ -25197,6 +25197,14 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
       flex: 1;
 }
 
+.widget-item-list .widget-placeholder {
+  padding-bottom: 10%;
+}
+
+.widget-item-list .widget-placeholder p.description:empty {
+  display: none;
+}
+
 .widget-item-list-caption h1,
 .widget-item-list-caption h2,
 .widget-item-list-caption h3,

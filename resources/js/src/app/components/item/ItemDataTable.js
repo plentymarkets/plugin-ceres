@@ -51,7 +51,7 @@ Vue.component("item-data-table", {
                 "item.variationDimensions"        : "singleItemDimensions",
                 "item.customsTariffNumber"        : "singleItemCustomsTariffNumber"
             },
-            
+
             filterMap: {
                 "item.ageRestriction": "ageRestriction"
             }
