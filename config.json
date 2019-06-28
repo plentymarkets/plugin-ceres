@@ -1367,17 +1367,13 @@
                     "type": "inputText",
                     "required": false,
                     "label": "Config.contactShopMailCcLabel",
-                    "options": {
-                        "defaultValue": "your2@email.com,your3@email.com"
-                    }
+                    "options": {}
                 },
                 "contact.shop_mail_bcc": {
                     "type": "inputText",
                     "required": false,
                     "label": "Config.contactShopMailBccLabel",
-                    "options": {
-                        "defaultValue": "your2@email.com,your3@email.com"
-                    }
+                    "options": {}
                 },
                 "contact.show_data": {
                     "type": "multiCheckBox",
