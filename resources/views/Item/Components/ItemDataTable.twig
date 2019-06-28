@@ -1,0 +1,17 @@
+<script type="x/template" id="vue-item-data-table">
+    <table class="table table-striped table-hover table-sm">
+        <tbody>
+            <template v-for="itemDataAccessor in itemInformation">
+                <tr v-if="isCheckedAndNotEmpty(itemDataAccessor)">
+                    <td :class="paddingClasses" :style="paddingInlineStyles">
+                        ${ getTranslation(itemDataAccessor) }
+                    </td>
+
+                    <td :class="paddingClasses" :style="paddingInlineStyles">
+                        ${ getFieldValue(itemDataAccessor) }
+                    </td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</script>

@@ -8,6 +8,7 @@ class ItemGlobalDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
+        $this->addField("itemId", "Ceres::Widget.dataFieldItemGlobalItemId", "item_data_field('item.id')");
         $this->addField("condition", "Ceres::Widget.dataFieldItemGlobalCondition", "item_data_field('item.condition.names.name')");
         $this->addField("conditionApi", "Ceres::Widget.dataFieldItemGlobalConditionApi", "item_data_field('item.conditionApi.names.name')");
         $this->addField("producingCountry", "Ceres::Widget.dataFieldItemGlobalProducingCountry", "item_data_field('item.producingCountry.names.name')");

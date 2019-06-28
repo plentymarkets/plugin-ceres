@@ -12,6 +12,13 @@ class BaseWidget implements Widget
         "INLINE" => "bold,italic,underline,strike|h1,h2,h3|align|translation",
         "ALL"    => "bold,italic,underline,strike|headline|link|align,ul,ol|color,background|translation"
     ];
+
+    public static $mapTypeToTemplate = [
+        'singleitem'    => 'tpl.item',
+        'content'       => 'tpl.category',
+        'myaccount'     => 'tpl.my-account',
+        'checkout'      => 'tpl.checkout'
+    ];
     /**
      * The template to e used for this widget
      *
@@ -79,7 +86,16 @@ class BaseWidget implements Widget
     )
     {
         $twig = pluginApp(Twig::class);
+
+        $template = '';
+        if(isset($widgetSettings['template']))
+        {
+            $template = self::$mapTypeToTemplate[$widgetSettings['template']] ?? '';
+            unset($widgetSettings['template']);
+        }
         $templateData = $this->getTemplateData($widgetSettings, $isPreview);
+
+
         $templateData["widget"] = [
             "settings"      => $widgetSettings
         ];
@@ -87,7 +103,15 @@ class BaseWidget implements Widget
         $templateData["isPreview"] = $isPreview;
         $templateData["TOOLBAR_LAYOUT"] = self::TOOLBAR_LAYOUT;
 
-        return $twig->render($this->template, $templateData);
+        $rendered = $twig->render($this->template, $templateData);
+
+
+        if($isPreview && strlen($template))
+        {
+            $rendered = '{{ services.template.setCurrentTemplate("'. $template .'") }}'. $rendered;
+        }
+
+        return $rendered;
     }
 
     /**
