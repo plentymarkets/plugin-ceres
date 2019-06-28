@@ -90,7 +90,7 @@ class BaseWidget implements Widget
         $template = '';
         if(isset($widgetSettings['template']))
         {
-            $template = self::$mapTypeToTemplate[$widgetSettings['template']];
+            $template = self::$mapTypeToTemplate[$widgetSettings['template']] ?? '';
             unset($widgetSettings['template']);
         }
         $templateData = $this->getTemplateData($widgetSettings, $isPreview);
