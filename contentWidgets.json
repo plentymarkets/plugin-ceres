@@ -1910,6 +1910,11 @@
                             "value": "manufacturer",
                             "caption": "Widget.itemListListTypeManufacturer",
                             "position": 3
+                        },
+                        {
+                            "value": "cross_selling",
+                            "caption": "Widget.itemListListTypeCrossSelling",
+                            "position": 4
                         }
                     ]
                 }
@@ -1942,6 +1947,38 @@
                 "options": {
                     "name": "Widget.itemListTagIdLabel",
                     "tooltipText": "Widget.itemListTagIdTooltip"
+                }
+            },
+            "crossSellingRelationType": {
+                "type": "select",
+                "required": false,
+                "isVisible": "listType === 'cross_selling'",
+                "defaultValue": "Similar",
+                "options": {
+                    "name": "Widget.itemListCrossSellingRelation",
+                    "tooltipText": "Widget.itemListCrossSellingRelationTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "Similar",
+                            "caption": "Widget.itemListsCrossSellingTypeSimilar",
+                            "position": 0
+                        },
+                        {
+                            "value": "Accessory",
+                            "caption": "Widget.itemListsCrossSellingTypeAccessory",
+                            "position": 1
+                        },
+                        {
+                            "value": "ReplacementPart",
+                            "caption": "Widget.itemListsCrossSellingTypeReplacementPart",
+                            "position": 2
+                        },
+                        {
+                            "value": "Bundle",
+                            "caption": "Widget.itemListsCrossSellingTypeBundle",
+                            "position": 3
+                        }
+                    ]
                 }
             },
             "itemSort": {
@@ -5453,6 +5490,102 @@
             "spacing": {
                 "type": "vertical",
                 "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::OrderPropertyWidget",
+        "label": "Widget.orderPropertyLabel",
+        "previewImageURL": "/images/widgets/order-property.svg",
+        "type": "item",
+        "categories": [
+            "item"
+        ],
+        "position": 300,
+        "widgetClass": "Ceres\\Widgets\\Item\\OrderPropertyWidget",
+        "settings": {
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "success",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
                     "customMargin": {
                         "type": "checkbox",
                         "options": {
