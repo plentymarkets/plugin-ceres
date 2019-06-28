@@ -12,6 +12,13 @@ class BaseWidget implements Widget
         "INLINE" => "bold,italic,underline,strike|h1,h2,h3|align|translation",
         "ALL"    => "bold,italic,underline,strike|headline|link|align,ul,ol|color,background|translation"
     ];
+
+    public static $mapTypeToTemplate = [
+        'singleitem'    => 'tpl.item',
+        'content'       => 'tpl.category',
+        'myaccount'     => 'tpl.my-account',
+        'checkout'      => 'tpl.checkout'
+    ];
     /**
      * The template to e used for this widget
      *
@@ -83,7 +90,7 @@ class BaseWidget implements Widget
         $template = '';
         if(isset($widgetSettings['template']))
         {
-            $template = $widgetSettings['template'];
+            $template = self::$mapTypeToTemplate[$widgetSettings['template']];
             unset($widgetSettings['template']);
         }
         $templateData = $this->getTemplateData($widgetSettings, $isPreview);
