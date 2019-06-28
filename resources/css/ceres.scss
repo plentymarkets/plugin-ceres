@@ -19175,7 +19175,8 @@ html.ios {
 		}
 	}
 }
-.single {
+.single,
+.page-singleitem {
     .list-item-carousel {
         .list-control-special{
             width: 5%;
@@ -19290,9 +19291,9 @@ html.ios {
     }
 
     .order-property-selection-info-popper {
-        position: absolute;
-        top: 6px;
-        right: 18px;
+        button.btn {
+            margin: 5px;
+        }
     }
 }
 
