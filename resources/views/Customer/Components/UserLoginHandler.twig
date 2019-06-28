@@ -18,7 +18,7 @@
                 <span class="hidden-xs-down">{{ trans("Ceres::Template.login") }}</span>
             </a>
             <span class="pipe" v-if="showRegistration"></span>
-            <a data-toggle="modal" href="#registration" @click="unmarkInputFields()" v-if="showRegistration">
+            <a {% if services.template.isCurrentTemplate("tpl.register") %} href="javascript:void(0)"{% else %} data-toggle="modal" href="#registration"{% endif %} @click="unmarkInputFields()" v-if="showRegistration">
                 <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                 <span class="hidden-xs-down">{{ trans("Ceres::Template.loginRegister") }}</span>
             </a>
