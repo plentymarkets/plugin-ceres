@@ -3,6 +3,7 @@
 
 {{ Twig.component("Ceres::Item.Components.OrderPropertyList") }}
 
+{% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
@@ -11,7 +12,7 @@
 
 {% set appearance = widget.settings.appearance.mobile | default("success") %}
 
-<div class="widget widget-order-property widget-{{ appearance }} {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-order-property widget-{{ appearance }} {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <order-property-list
         {% if not isPreview %}v-if="$store.getters.currentItemVariation.filter.isSalable && $store.getters.variationGroupedProperties.length"{% endif %}
         {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
