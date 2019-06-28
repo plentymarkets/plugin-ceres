@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import TranslationService from "services/TranslationService";
 
 Vue.component("item-data-table", {
@@ -51,9 +51,19 @@ Vue.component("item-data-table", {
                 "item.variationDimensions"        : "singleItemDimensions",
                 "item.customsTariffNumber"        : "singleItemCustomsTariffNumber"
             },
-
-            filterMap: {
-                "item.ageRestriction": "ageRestriction"
+            formatMap: {
+                "item.ageRestriction": {
+                    type: "filter",
+                    value: "ageRestriction"
+                },
+                "variation.weightG": {
+                    type: "text",
+                    value: " g"
+                },
+                "variation.weightNetG": {
+                    type: "text",
+                    value: " g"
+                }
             }
         };
     },
@@ -64,7 +74,9 @@ Vue.component("item-data-table", {
         {
             if (path !== "item.variationDimensions")
             {
-                return get(this.currentVariation, path) !== "";
+                const value = get(this.currentVariation, path);
+
+                return value !== "" && value !== 0;
             }
             else
             {
@@ -98,18 +110,23 @@ Vue.component("item-data-table", {
                 value = `${ get(this.currentVariation, "variation.lengthMM") }×${ get(this.currentVariation, "variation.widthMM") }×${ get(this.currentVariation, "variation.heightMM") } mm`;
             }
 
-            return this.filterFieldData(value, path);
+            return this.formatFieldData(value, path);
         },
 
-        filterFieldData(value, path)
+        formatFieldData(value, path)
         {
-            if (this.filterMap.hasOwnProperty(path))
-            {
-                const filterMethod = get(this.$options.filters, this.filterMap[path]);
+            const format = this.formatMap[path];
 
-                if (filterMethod)
+            if (isDefined(format))
+            {
+                switch (format.type)
                 {
-                    return filterMethod(value);
+                case "text":
+                    return value + format.value;
+                case "filter":
+                    var filterMethod = get(this.$options.filters, format.value);
+
+                    return isDefined(filterMethod) ? filterMethod(value) : value;
                 }
             }
 
