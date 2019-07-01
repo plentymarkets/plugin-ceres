@@ -79,9 +79,10 @@
 {% set performanceLevel = config('Ceres.log.performance.level') %}
 {% set itemName = config('Ceres.item.name') %}
 
-<link rel="preload" as="style" href="{{ defaultCSS }}"
+<link rel="preload" as="style" href="{{ defaultCSS }}">
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
-    <link data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ plugin_path('Ceres') }}/css/ceres-legacy.scss" rel="stylesheet" href="{{ defaultCSS }}">
+    <link data-sass-root="{{ plugin_path('Ceres')
+     }}" data-sass-original="{{ plugin_path('Ceres') }}/css/ceres-legacy.scss" rel="stylesheet" href="{{ defaultCSS }}">
 {% endif %}
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
