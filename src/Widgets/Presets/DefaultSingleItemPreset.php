@@ -45,9 +45,10 @@ class DefaultSingleitemPreset implements ContentPreset
         $this->createItemVariationNumber();
         $this->createItemBundleWidget();
         $this->createGraduatedPriceWidget();
+        $this->createOrderPropertyWidget();
+        $this->createAttributeWidget();
         $this->createItemPriceWidget();
         $this->createItemAvailabilityWidget();
-        $this->createAttributeWidget();
         $this->createAddToBasketWidget();
         $this->createAddToWishListWiget();
         $this->createSeparatorWidget();
@@ -70,21 +71,24 @@ class DefaultSingleitemPreset implements ContentPreset
 
     private function createManufacturer()
     {
+        $dataProvider = $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName'));
+
         $this->stickyContainer->createChild('sticky','Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
-            ->withSetting('customClass','text-muted')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
             ->withSetting('spacing.padding.right.value', 0)
             ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName')));
+            ->withSetting('text', "<div class=\"producertag h6 producer text-muted\"> $dataProvider </div>");
     }
     private function createNameHeader()
     {
-        $itemName;
+        $itemName = '';
         switch($this->ceresConfig->item->itemName)
         {
             case 0;
@@ -110,7 +114,7 @@ class DefaultSingleitemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', "<h1> $dataProvider </h1>")
+            ->withSetting('text', "<h1 class=\"h2 title\"> $dataProvider </h1>")
             ->withSetting('appearance','none');
     }
 
@@ -119,9 +123,9 @@ class DefaultSingleitemPreset implements ContentPreset
         $this->stickyContainer->createChild('sticky', 'Ceres::AddToBasketWidget')
             ->withSetting('buttonSize', 'lg')
             ->withSetting('spacing.customMargin', true)
-            ->withSetting('spacing.margin.top.value', 4)
+            ->withSetting('spacing.margin.top.value', 3)
             ->withSetting('spacing.margin.top.unit', null)
-            ->withSetting('spacing.margin.bottom.value', 4)
+            ->withSetting('spacing.margin.bottom.value', 3)
             ->withSetting('spacing.margin.bottom.unit', null);
     }
 
@@ -139,32 +143,33 @@ class DefaultSingleitemPreset implements ContentPreset
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::ItemPriceWidget')
             ->withSetting('showCrossPrice', true)
-            ->withSetting('appearance', 'none')
-            ->withSetting('spacing.customMargin', true)
-            ->withSetting('spacing.margin.top.value', 4)
-            ->withSetting('spacing.margin.top.unit', 'rem');
+            ->withSetting('appearance', 'none');
     }
 
     private function createItemVariationNumber()
     {
         $text = '';
-        $text .= "<b>{{ trans(\"Ceres::Template.singleItemNumber\") }}</b> &nbsp;&nbsp;";
+        $text .= '<b>{{ trans("Ceres::Template.singleItemNumber") }} </b>';
         $text .= $this->getShopBuilderDataFieldProvider('VariationGlobalDataFieldProvider::number',array('variation.number'));
+
 
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
             ->withSetting('appearance', 'none')
-            ->withSetting('customClass','text-muted')
-            ->withSetting('text', $text)
+            ->withSetting('text', "<span class=\"articlenumber small text-muted\"> $text </span>")
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
             ->withSetting('spacing.padding.right.value', 0)
             ->withSetting('spacing.padding.right.unit', null)
-            ->withSetting('spacing.padding.top.value', 2)
+            ->withSetting('spacing.padding.top.value', 0)
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
-            ->withSetting('spacing.padding.bottom.unit', null);
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.bottom.value', 5)
+            ->withSetting('spacing.margin.bottom.unit', null);
     }
+
 
     private function createItemImageWidget()
     {
@@ -178,20 +183,15 @@ class DefaultSingleitemPreset implements ContentPreset
 
     private function createSeparatorWidget()
     {
-        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget')
-            ->withSetting('customMargin', true)
-            ->withSetting('margin.top.value', 2)
-            ->withSetting('margin.top.unit', null)
-            ->withSetting('margin.bottom.value', 2)
-            ->withSetting('margin.bottom.unit', null);
+        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget');
     }
 
     private function createLegalInformation()
     {
         $text ="* {% if services.customer.showNetPrices() %}{{ trans(\"Ceres::Template.singleItemExclVAT\") }}{% else %}{{ trans(\"Ceres::Template.singleItemInclVAT\") }}{% endif %} {{ trans(\"Ceres::Template.singleItemExclusive\") }}";
-        $text .="<a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle=\"modal\" href=\"#shippingscosts\"{% endif %} title=\"{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}\">{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}</a>";
+        $text .="<a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle=\"modal\" href=\"#shippingscosts\"{% endif %} title=\"{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}\"> {{ trans(\"Ceres::Template.singleItemShippingCosts\") }}</a>";
         $this->stickyContainer->createChild('sticky', 'Ceres::CodeWidget')
-            ->withSetting('text', $text)
+            ->withSetting('text', "<span class=\"vat small text-muted\">$text</span>")
             ->withSetting('appearance', 'none');
     }
 
@@ -199,6 +199,12 @@ class DefaultSingleitemPreset implements ContentPreset
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::GraduatedPriceWidget')
             ->withSetting('appearance', 'primary');
+    }
+
+    private function createOrderPropertyWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::OrderPropertyWidget')
+            ->withSetting('appearance', 'none');
     }
 
     private function createItemBundleWidget()
@@ -223,15 +229,37 @@ class DefaultSingleitemPreset implements ContentPreset
         $this->tabWidget = $this->twoColumnWidget->createChild('first', 'Ceres::TabWidget')
             ->withSetting('tabs', $tabs)
             ->withSetting('spacing.customMargin', true)
-            ->withSetting('spacing.margin.top.value', 4)
+            ->withSetting('spacing.margin.bottom.value', 5)
+            ->withSetting('spacing.margin.bottom.unit', null)
+            ->withSetting('spacing.margin.top.value', 5)
             ->withSetting('spacing.margin.top.unit', null);
 
         $this->tabWidget->createChild($uuidTabDescription, 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text', $this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',array('texts.description', null, null)));
+
         $this->tabWidget->createChild($uuidTabTechData, 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
+            
         $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
             ->withSetting('itemInformation',
                             array("item.id", 
@@ -253,9 +281,7 @@ class DefaultSingleitemPreset implements ContentPreset
         $this->stickyContainer->createChild('sticky', 'Ceres::AttributeWidget')
             ->withSetting('appearance', 'primary')
             ->withSetting('spacing.customMargin', true)
-            ->withSetting('spacing.margin.top.value', 4)
-            ->withSetting('spacing.margin.top.unit', null)
-            ->withSetting('spacing.margin.bottom.value', 4)
+            ->withSetting('spacing.margin.bottom.value', 3)
             ->withSetting('spacing.margin.bottom.unit', null);
     }
 
