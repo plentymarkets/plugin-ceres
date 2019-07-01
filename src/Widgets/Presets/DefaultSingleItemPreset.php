@@ -139,7 +139,7 @@ class DefaultSingleitemPreset implements ContentPreset
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::ItemPriceWidget')
             ->withSetting('showCrossPrice', true)
-            ->withSetting('appearance', 'primary')
+            ->withSetting('appearance', 'none')
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 4)
             ->withSetting('spacing.margin.top.unit', 'rem');
@@ -251,7 +251,7 @@ class DefaultSingleitemPreset implements ContentPreset
     private function createAttributeWidget()
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::AttributeWidget')
-            ->withSetting('buttonSize', 'lg')
+            ->withSetting('appearance', 'primary')
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 4)
             ->withSetting('spacing.margin.top.unit', null)
