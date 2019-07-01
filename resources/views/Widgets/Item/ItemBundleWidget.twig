@@ -22,6 +22,15 @@
         :bundle-type="'bundle'"{% endif %}
         :bundle-components="$store.getters.currentItemVariation.bundleComponents"
         {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-        {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>>
+        {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+        
+        {% if isPreview %}
+            <div class="widget-placeholder">
+                <div>
+                    <p class="title mb-0">{{ trans("Ceres::Widget.itemBundlePlaceholderTitle") }}</p>
+                    <p class="description mt-3">{{ trans("Ceres::Widget.itemBundlePlaceholderDescription") }}</p>
+                </div>
+            </div>
+        {% endif %}
     </item-bundle>
 </div>
