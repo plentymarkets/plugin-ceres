@@ -11,15 +11,20 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
+        $this->addChildProvider(
+            'Ohne Gruppe',
+            PropertyListDataFieldProvider::class,
+            ['propertyGroup' => null]
+        );
+    
         /** @var PropertyGroupRepositoryContract $propertyRepo */
         $propertyGroupRepo = pluginApp(PropertyGroupRepositoryContract::class);
         /** @var AuthHelper $authHelper */
         $authHelper = pluginApp(AuthHelper::class);
-        
+    
         $propertyGroups = $authHelper->processUnguarded(function() use ($propertyGroupRepo) {
             return $propertyGroupRepo->listGroups(1, 200, [], []);
         });
-        
         
         /** @var Property $property */
         foreach ($propertyGroups->getResult() as $propertyGroup)

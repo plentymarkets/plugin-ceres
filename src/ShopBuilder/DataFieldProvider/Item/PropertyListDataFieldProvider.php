@@ -18,13 +18,13 @@ use Plenty\Plugin\Application;
 class PropertyListDataFieldProvider extends DataFieldProvider
 {
     /** @var PropertyGroup */
-    private $propertyGroup;
+    private $propertyGroup = null;
     
     /**
      * PropertyListDataFieldProvider constructor.
      * @param PropertyGroup $propertyGroup
      */
-    public function __construct(PropertyGroup $propertyGroup)
+    public function __construct($propertyGroup)
     {
         $this->propertyGroup = $propertyGroup;
     }
@@ -32,19 +32,32 @@ class PropertyListDataFieldProvider extends DataFieldProvider
     function register()
     {
         $types = ['empty', 'int', 'float', 'selection', 'shortText', 'longText', 'date'];
-        $propertyGroupId = $this->propertyGroup->id;
+        
+        $propertyGroupId = null;
+        if(!is_null($this->propertyGroup))
+        {
+            $propertyGroupId = $this->propertyGroup->id;
+        }
         
         /** @var PropertyRepositoryContract $propertyRepo */
-        $propertyRepo = pluginApp(PropertyRepositoryContract::class);
+        //$propertyRepo = pluginApp(PropertyRepositoryContract::class);
         /** @var AuthHelper $authHelper */
         $authHelper = pluginApp(AuthHelper::class);
         
         $properties = [];
         
-        $propertyResult = $authHelper->processUnguarded(function() use ($propertyRepo, $propertyGroupId, $types) {
-            $filters = ['typeIdentifier' => 'item', 'group' => $propertyGroupId, 'casts' => $types, 'lang' => pluginApp(SessionStorageService::class)->getLang()];
-            $propertyRepo->setFilters($filters);
-            return $propertyRepo->listProperties(1, 200, ['names', 'options']);
+        //$filters = ['typeIdentifier' => 'item', 'casts' => $types, 'lang' => pluginApp(SessionStorageService::class)->getLang()];
+        $filters = ['typeIdentifier' => 'item', 'lang' => pluginApp(SessionStorageService::class)->getLang()];
+        if(!is_null($propertyGroupId))
+        {
+            $filters['group'] = $propertyGroupId;
+        }
+        
+        $propertyResult = $authHelper->processUnguarded(function() use ($propertyGroupId, $filters) {
+            //$propertyRepo->setFilters($filters);
+            /** @var PropertyRepositoryContract $propertyRepo */
+            $propertyRepo = pluginApp(PropertyRepositoryContract::class);
+            return $propertyRepo->listProperties(1, 200, ['names', 'options'], $filters, 1);
         });
         
         if(!is_null($propertyResult))
@@ -54,8 +67,16 @@ class PropertyListDataFieldProvider extends DataFieldProvider
             $plentyId = $app->getPlentyId();
             $referrer = 1;
             
+            $propertyList = $propertyResult->getResult();
+            if(is_null($propertyGroupId))
+            {
+                $propertyList = $propertyList->filter(function($property) {
+                    return count($property->groups) == 0;
+                });
+            }
+            
             /** @var Property $property */
-            foreach($propertyResult->getResult() as $property)
+            foreach($propertyList as $property)
             {
                 if(in_array($property->cast, $types))
                 {
@@ -84,7 +105,11 @@ class PropertyListDataFieldProvider extends DataFieldProvider
         
         if(count($properties))
         {
-            $this->addField("name_$propertyGroupId", "Ceres::Widget.dataFieldPropertyGroupName", "item_data_field('variationPropertyGroups.{id, $propertyGroupId}.names.name')");
+            if(!is_null($this->propertyGroup))
+            {
+                $this->addField("name_$propertyGroupId", "Ceres::Widget.dataFieldPropertyGroupName", "item_data_field('variationPropertyGroups.{id, $propertyGroupId}.names.name')");
+            }
+            
             /** @var Property $property */
             foreach ($properties as $property)
             {
