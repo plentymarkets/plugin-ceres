@@ -105,6 +105,8 @@
                 </div>
             </div>
         </div>
+    {% elseif shop_builder_category_template_exists() %}
+        {# Empty shop builder template is loading #}
     {% else %}
         {# No item template defined in ShopBuilder => use default template from plugin #}
         {% include "Ceres::Item.SingleItemView" %}
