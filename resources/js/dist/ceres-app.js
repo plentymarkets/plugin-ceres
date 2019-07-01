@@ -39284,8 +39284,19 @@ Vue.component("item-data-table", {
         "item.variationDimensions": "singleItemDimensions",
         "item.customsTariffNumber": "singleItemCustomsTariffNumber"
       },
-      filterMap: {
-        "item.ageRestriction": "ageRestriction"
+      formatMap: {
+        "item.ageRestriction": {
+          type: "filter",
+          value: "ageRestriction"
+        },
+        "variation.weightG": {
+          type: "text",
+          value: " g"
+        },
+        "variation.weightNetG": {
+          type: "text",
+          value: " g"
+        }
       }
     };
   },
@@ -39294,7 +39305,8 @@ Vue.component("item-data-table", {
       var _this = this;
 
       if (path !== "item.variationDimensions") {
-        return (0, _lodash.get)(this.currentVariation, path) !== "";
+        var value = (0, _lodash.get)(this.currentVariation, path);
+        return value !== "" && value !== 0;
       } else {
         return ["variation.lengthMM", "variation.widthMM", "variation.heightMM"].some(function (element) {
           var value = _this.getFieldValue(element);
@@ -39315,14 +39327,19 @@ Vue.component("item-data-table", {
         value = "".concat((0, _lodash.get)(this.currentVariation, "variation.lengthMM"), "\xD7").concat((0, _lodash.get)(this.currentVariation, "variation.widthMM"), "\xD7").concat((0, _lodash.get)(this.currentVariation, "variation.heightMM"), " mm");
       }
 
-      return this.filterFieldData(value, path);
+      return this.formatFieldData(value, path);
     },
-    filterFieldData: function filterFieldData(value, path) {
-      if (this.filterMap.hasOwnProperty(path)) {
-        var filterMethod = (0, _lodash.get)(this.$options.filters, this.filterMap[path]);
+    formatFieldData: function formatFieldData(value, path) {
+      var format = this.formatMap[path];
 
-        if (filterMethod) {
-          return filterMethod(value);
+      if ((0, _utils.isDefined)(format)) {
+        switch (format.type) {
+          case "text":
+            return value + format.value;
+
+          case "filter":
+            var filterMethod = (0, _lodash.get)(this.$options.filters, format.value);
+            return (0, _utils.isDefined)(filterMethod) ? filterMethod(value) : value;
         }
       }
 
@@ -39566,6 +39583,14 @@ Vue.component("order-property-list", {
     template: {
       type: String,
       "default": "#vue-order-property-list"
+    },
+    paddingClasses: {
+      type: String,
+      "default": null
+    },
+    paddingInlineStyles: {
+      type: String,
+      "default": null
     }
   },
   data: function data() {
@@ -39699,6 +39724,14 @@ Vue.component("order-property-list-group", {
     template: {
       type: String,
       "default": "#vue-order-property-list-group"
+    },
+    paddingClasses: {
+      type: String,
+      "default": null
+    },
+    paddingInlineStyles: {
+      type: String,
+      "default": null
     },
     propertyGroup: Object
   },
