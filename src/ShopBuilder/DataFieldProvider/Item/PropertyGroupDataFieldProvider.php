@@ -10,16 +10,20 @@ use Plenty\Modules\Property\Contracts\PropertyRepositoryContract;
 use Plenty\Modules\Property\Models\PropertyOption;
 use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 use Plenty\Plugin\Application;
+use Plenty\Plugin\Translation\Translator;
 
 class PropertyGroupDataFieldProvider extends DataFieldProvider
 {
     function register()
     {
+        /** @var Translator $translator */
+        $translator = pluginApp(Translator::class);
+        
         $propertiesWithoutGroup = $this->getPropertiesByGroup(null);
         if(count($propertiesWithoutGroup))
         {
             $this->addChildProvider(
-                'Ohne Gruppe', //TODO translate
+                $translator->trans('Ceres::Widget.dataFieldPropertyGroupWithoutName'),
                 PropertyListDataFieldProvider::class,
                 ['properties' => $propertiesWithoutGroup, 'propertyGroupId' => null]
             );
