@@ -17,7 +17,7 @@
                    class="form-check-input"
                    :type="inputType">
 
-            <label class="form-check-label"
+            <label class="form-check-label text-appearance"
                    :for="'check' + _uid"
                    :class="{ 'text-success': property.value, 'text-danger': hasError }"
                    v-tooltip data-toggle="tooltip"
@@ -27,7 +27,7 @@
             </label>
         </div>
 
-        <div v-else-if="inputType === 'selection'" :class="{ 'mr-5': selectedDescription }">
+        <div v-else-if="inputType === 'selection'" :class="{ 'd-flex': selectedDescription }">
             <div 
                 class="input-unit order-property-input"
                 :class="{ 'active': property.value, 'error': hasError }"

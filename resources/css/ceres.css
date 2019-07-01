@@ -23826,120 +23826,145 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   margin-left: .2rem;
 }
 
-.single .list-item-carousel .list-control-special {
+.single .list-item-carousel .list-control-special,
+.page-singleitem .list-item-carousel .list-control-special {
   width: 5%;
   height: 5%;
   position: absolute;
   top: 40%;
 }
 
-.single #single-carousel {
+.single #single-carousel,
+.page-singleitem #single-carousel {
   background: #fff;
 }
 
-.single .main-image img {
+.single .main-image img,
+.page-singleitem .main-image img {
   width: 100%;
 }
 
-.single .title {
+.single .title,
+.page-singleitem .title {
   line-height: 1.2;
 }
 
-.single .producer {
+.single .producer,
+.page-singleitem .producer {
   line-height: 1.1;
   font-weight: 700;
   display: inline-block;
   text-decoration: none;
 }
 
-.single .single-description {
+.single .single-description,
+.page-singleitem .single-description {
   font-size: .85rem;
 }
 
-.single .price {
+.single .price,
+.page-singleitem .price {
   display: block;
   font-weight: bold;
   line-height: 1;
 }
 
-.single .input-number {
+.single .input-number,
+.page-singleitem .input-number {
   text-align: center;
 }
 
-.single .vat {
+.single .vat,
+.page-singleitem .vat {
   line-height: 1.4;
   margin-top: 0;
   margin-bottom: .5em;
   color: #020260;
 }
 
-.single .crosssellers img {
+.single .crosssellers img,
+.page-singleitem .crosssellers img {
   max-width: 100%;
   width: auto;
 }
 
-.single .crosssellers .special-tags {
+.single .crosssellers .special-tags,
+.page-singleitem .crosssellers .special-tags {
   padding: .3rem;
 }
 
 @media (max-width: 575.98px) {
-  .single .nav-tabs {
+  .single .nav-tabs,
+  .page-singleitem .nav-tabs {
     display: block;
   }
 }
 
-.single .nav-tabs .nav-item {
+.single .nav-tabs .nav-item,
+.page-singleitem .nav-tabs .nav-item {
   cursor: pointer;
   float: none;
 }
 
-.single .nav-tabs .nav-item .nav-link {
+.single .nav-tabs .nav-item .nav-link,
+.page-singleitem .nav-tabs .nav-item .nav-link {
   border: 1px solid #ddd;
 }
 
-.single .nav-tabs .nav-item .nav-link.active, .single .nav-tabs .nav-item .nav-link:hover {
+.single .nav-tabs .nav-item .nav-link.active, .single .nav-tabs .nav-item .nav-link:hover,
+.page-singleitem .nav-tabs .nav-item .nav-link.active,
+.page-singleitem .nav-tabs .nav-item .nav-link:hover {
   border: 1px solid #ddd;
   color: #282d2f;
   background: #f4f4f4;
 }
 
-.single .nav-tabs .nav-item + .nav-item {
+.single .nav-tabs .nav-item + .nav-item,
+.page-singleitem .nav-tabs .nav-item + .nav-item {
   margin-left: 0;
 }
 
-.single .tab-content img {
+.single .tab-content img,
+.page-singleitem .tab-content img {
   max-width: 100%;
 }
 
-.single .graduated-prices-table td:first-child {
+.single .graduated-prices-table td:first-child,
+.page-singleitem .graduated-prices-table td:first-child {
   padding-right: 1rem;
   font-style: italic;
 }
 
-.single .graduated-prices-table i {
+.single .graduated-prices-table i,
+.page-singleitem .graduated-prices-table i {
   color: #28a745;
 }
 
-.single .fade-enter-active, .single .fade-leave-active {
+.single .fade-enter-active, .single .fade-leave-active,
+.page-singleitem .fade-enter-active,
+.page-singleitem .fade-leave-active {
   transition: opacity .3s ease-out;
 }
 
-.single .fade-enter, .single .fade-leave-to {
+.single .fade-enter, .single .fade-leave-to,
+.page-singleitem .fade-enter,
+.page-singleitem .fade-leave-to {
   opacity: 0;
 }
 
-.single .order-property-input {
+.single .order-property-input,
+.page-singleitem .order-property-input {
   transition: border-color .3s ease-out;
 }
 
-.single .order-property-input.active {
+.single .order-property-input.active,
+.page-singleitem .order-property-input.active {
   border-color: #28a745;
 }
 
-.single .order-property-selection-info-popper {
-  position: absolute;
-  top: 6px;
-  right: 18px;
+.single .order-property-selection-info-popper button.btn,
+.page-singleitem .order-property-selection-info-popper button.btn {
+  margin: 5px;
 }
 
 .availability_1 {
@@ -25195,6 +25220,14 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
 .widget-item-list .widget-caption > div {
   -ms-flex: 1;
       flex: 1;
+}
+
+.widget-item-list .widget-placeholder {
+  padding-bottom: 10%;
+}
+
+.widget-item-list .widget-placeholder p.description:empty {
+  display: none;
 }
 
 .widget-item-list-caption h1,
