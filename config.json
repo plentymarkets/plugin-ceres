@@ -509,7 +509,6 @@
                 "item.displayName": {
                     "type": "selectBox",
                     "required": false,
-                    "deprecated": true,
                     "label": "Config.itemDisplayNameLabel",
                     "options": {
                         "defaultValue": "itemName",
@@ -532,7 +531,6 @@
                 "item.name": {
                     "type": "selectBox",
                     "required": false,
-                    "deprecated": true,
                     "label": "Config.itemNameLabel",
                     "options": {
                         "defaultValue": "0",
