@@ -268,12 +268,12 @@ class DefaultSingleitemPreset implements ContentPreset
                                 "variation.externalId",
                                 "variation.model",
                                 "item.manufacturer.externalName",
-                                "item.producingCountry.names.name"),
+                                "item.producingCountry.names.name",
                                 "unit.names.name",
                                 "variation.weightG",
                                 "variation.weightNetG",
                                 "item.variationDimensions",
-                                "item.customsTariffNumber");
+                                "item.customsTariffNumber"));
     }
 
     private function createAttributeWidget()
