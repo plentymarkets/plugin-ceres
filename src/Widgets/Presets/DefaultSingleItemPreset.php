@@ -149,7 +149,7 @@ class DefaultSingleItemPreset implements ContentPreset
     private function createItemVariationNumber()
     {
         $text = '';
-        $text .= '<b>{{ trans("Ceres::Template.singleItemNumber") }} </b>';
+        $text .= '<b>{{ trans("Ceres::Template.singleItemNumber") }}&nbsp;</b>';
         $text .= $this->getShopBuilderDataFieldProvider('VariationGlobalDataFieldProvider::number',array('variation.number'));
 
 
