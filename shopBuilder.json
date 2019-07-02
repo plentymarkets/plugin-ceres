@@ -58,7 +58,7 @@
         [
             {
                 "label":"Widget.presetSingleItemDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultSingleitemPreset"
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultSingleItemPresetTest"
             }
         ]
     },
