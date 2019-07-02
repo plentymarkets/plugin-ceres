@@ -800,7 +800,6 @@
                 "item.require_all_properties": {
                     "type": "checkBox",
                     "required": false,
-                    "deprecated": true,
                     "label": "Config.itemRequireAllPropertiesLabel",
                     "options": {
                         "defaultValue": "false"
