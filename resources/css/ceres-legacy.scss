@@ -11880,7 +11880,7 @@ body.lb-disable-scrolling {
   display: inline-block;
   vertical-align: middle;
 }
-#single-carousel .owl-item img {
+.single-carousel .owl-item img {
   height: 300px;
 }
 
@@ -12237,7 +12237,7 @@ Custom classes
 }
 
 @include media-breakpoint-up(sm) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 500px;
   }
 }
@@ -12265,12 +12265,12 @@ Custom classes
   }
 }
 @include media-breakpoint-up(lg) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 600px;
   }
 }
 @include media-breakpoint-up(xl) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 700px;
   }
 }
@@ -12278,12 +12278,12 @@ Custom classes
 /* Compatibility for IE */
 html.ie {
   // set width to maximal available size
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     width: auto;
     display: inline-block;
   }
   // align image center
-  #single-carousel .owl-item > div {
+  .single-carousel .owl-item > div {
     text-align: center;
   }
 
@@ -19186,7 +19186,7 @@ html.ios {
         }
     }
 
-    #single-carousel {
+    .single-carousel {
         background: $white;
     }
 
