@@ -8,6 +8,7 @@
     "widgetClass": "Ceres\\Widgets\\Item\\ItemAvailabilityWidget",
     "settings": 
     {
-        "customClass":"@include(customClass)"
+        "customClass":"@include(customClass)",
+        "spacing":"@include(spacing)"
     }
 }
