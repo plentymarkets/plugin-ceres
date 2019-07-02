@@ -36,7 +36,7 @@
 {% endif %}
 
 {% set requestedListType = listType %}
-{% if listType in ["last_seen", 'cross_selling'] and isPreview %}
+{% if listType in ["last_seen", "cross_selling"] and isPreview %}
     {# request random items when rendering preview of last seen items. #}
     {% set requestedListType = "random" %}
 {% endif %}
