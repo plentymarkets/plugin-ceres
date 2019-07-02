@@ -17065,7 +17065,7 @@ body.lb-disable-scrolling {
   vertical-align: middle;
 }
 
-#single-carousel .owl-item img {
+.single-carousel .owl-item img {
   height: 300px;
 }
 
@@ -17399,7 +17399,7 @@ Custom classes
 }
 
 @media (min-width: 576px) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 500px;
   }
 }
@@ -17431,24 +17431,24 @@ Custom classes
 }
 
 @media (min-width: 992px) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 600px;
   }
 }
 
 @media (min-width: 1200px) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 700px;
   }
 }
 
 /* Compatibility for IE */
-html.ie #single-carousel .owl-item img {
+html.ie .single-carousel .owl-item img {
   width: auto;
   display: inline-block;
 }
 
-html.ie #single-carousel .owl-item > div {
+html.ie .single-carousel .owl-item > div {
   text-align: center;
 }
 
@@ -23834,8 +23834,8 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   top: 40%;
 }
 
-.single #single-carousel,
-.page-singleitem #single-carousel {
+.single .single-carousel,
+.page-singleitem .single-carousel {
   background: #fff;
 }
 
