@@ -9,7 +9,7 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 use IO\Extensions\Functions\UniqueId;
 
-class DefaultSingleItemPresetTest implements ContentPreset
+class DefaultSingleItemPreset implements ContentPreset
 {
     /** @var PresetHelper */
     private $preset;
