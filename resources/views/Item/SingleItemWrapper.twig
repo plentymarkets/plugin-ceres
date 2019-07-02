@@ -94,7 +94,7 @@
         {% include [category_template(item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId)] %}
     {% elseif shopBuilderTemplate | trim is not empty or isShopBuilder %}
         {# Shopbuilder template #}
-        <div class="container-max">
+        <div class="single container-max page-content">
             <div class="row">
                 <div class="col">
                     <single-item v-cloak item-data="{{ item | json_data }}" attributes-data="{{ attributes | json_data }}" variations="{{ variations | json_data }}">
