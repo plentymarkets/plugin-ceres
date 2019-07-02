@@ -193,7 +193,7 @@ const getters =
             {
                 let missingProperties = state.variation.documents[0].data.properties.filter(property =>
                 {
-                    return property.property.isShownOnItemPage && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
+                    return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
                 });
 
                 if (missingProperties.length)

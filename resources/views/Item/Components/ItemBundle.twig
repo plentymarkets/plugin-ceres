@@ -8,5 +8,6 @@
 				<a class="text-appearance" :href="item.data | itemURL"> ${ getBundleInnerText(item.data) | itemName } </a>
 			</div>
 		</div>
+		<div v-else><slot></slot></div>
 	</div>
 </script>

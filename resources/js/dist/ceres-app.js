@@ -49264,7 +49264,7 @@ var getters = {
   variationMissingProperties: function variationMissingProperties(state, getters) {
     if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.item.requireOrderProperties) {
       var missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
-        return property.property.isShownOnItemPage && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
+        return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
       });
 
       if (missingProperties.length) {
