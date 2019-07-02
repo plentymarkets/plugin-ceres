@@ -36,12 +36,12 @@
 {% endif %}
 
 {% set requestedListType = listType %}
-{% if listType == "last_seen" and isPreview %}
+{% if listType in ["last_seen", "cross_selling"] and isPreview %}
     {# request random items when rendering preview of last seen items. #}
     {% set requestedListType = "random" %}
 {% endif %}
 
-{% if listType != "last_seen" or not isPreview %}
+{% if listType != "last_seen" or isPreview %}
     {# do not get item list for last seen items. Items will be loaded asynchronusly by vue component. #}
     {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems, crossSellingRelationType]) ) }}
 {% endif %}
