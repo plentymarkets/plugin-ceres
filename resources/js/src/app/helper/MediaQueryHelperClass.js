@@ -41,13 +41,17 @@ export class MediaQueryHelperClass
         {
             if (window.matchMedia("(min-width:1200px)").matches)
             {
-                currentBreakpoint = "lg";
+                currentBreakpoint = "xl";
             }
             else if (window.matchMedia("(min-width:992px)").matches)
             {
-                currentBreakpoint = "md";
+                currentBreakpoint = "lg";
             }
             else if (window.matchMedia("(min-width:768px)").matches)
+            {
+                currentBreakpoint = "md";
+            }
+            else if (window.matchMedia("(min-width:576px)").matches)
             {
                 currentBreakpoint = "sm";
             }
@@ -59,15 +63,19 @@ export class MediaQueryHelperClass
         else
         {
             // eslint-disable-next-line no-lonely-if
-            if ($(window).width() >= 1200)
+            if (document.documentElement.clientWidth >= 1200)
+            {
+                currentBreakpoint = "xl";
+            }
+            else if (document.documentElement.clientWidth >= 992)
             {
                 currentBreakpoint = "lg";
             }
-            else if ($(window).width() >= 992)
+            else if (document.documentElement.clientWidth >= 768)
             {
                 currentBreakpoint = "md";
             }
-            else if ($(window).width() >= 768)
+            else if (document.documentElement.clientWidth >= 576)
             {
                 currentBreakpoint = "sm";
             }
