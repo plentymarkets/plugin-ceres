@@ -2,10 +2,10 @@
 {% set gCapture         = config("Ceres.global.google_recaptcha_api_key") %}
 {% set contactConfigSet = not config("Ceres.contact.show_data") is empty or config("Ceres.contact.show_data") == "all" %}
 {% set googleApiKey     = config("Ceres.contact.api_key") %}
-{% set zip                = config("system.company.zip") %}
-{% set street             = config("system.company.street") %}
-{% set mapZoom             = config("Ceres.contact.map_zoom") %}
-{% set showMapInMobile    = config("Ceres.contact.map_show_in_mobile") %}
+{% set zip              = config("system.company.zip") %}
+{% set street           = config("system.company.street") %}
+{% set mapZoom          = config("Ceres.contact.map_zoom") %}
+{% set showMapInMobile  = config("Ceres.contact.map_show_in_mobile") %}
 
 <script type="x/template" id="vue-contact-form">
     {{ component("Ceres::Customer.Components.Contact.ContactMap") }}
