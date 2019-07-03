@@ -36726,7 +36726,7 @@ Vue.component("tab-list", {
         return true;
       }
 
-      if (tab.$el.textContent.length > 0) {
+      if (tab.$el.textContent.trim().length > 0) {
         return true;
       }
 
