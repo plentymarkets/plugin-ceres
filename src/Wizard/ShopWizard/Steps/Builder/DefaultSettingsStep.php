@@ -117,7 +117,7 @@ class DefaultSettingsStep extends Step
                 "defSettings_" . $name => [
                     "type" => "select",
                     "options" => [
-                        "name" => "",
+                        "name" => "Wizard." . $name,
                         "listBoxValues" => $listBoxValues
                     ]
                 ]
