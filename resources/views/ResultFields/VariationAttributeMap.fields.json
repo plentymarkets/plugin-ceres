@@ -13,5 +13,6 @@
     "unit.names.name",
     "unit.names.lang",
     "unit.unitOfMeasurement",
-    "filter.isSalable"
+    "filter.isSalable",
+    "images.*"
     ]
