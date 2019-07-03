@@ -131,12 +131,14 @@ class DefaultSingleItemPreset implements ContentPreset
 
     private function createItemAvailabilityWidget()
     {
-        $this->stickyContainer->createChild('sticky', 'Ceres::ItemAvailabilityWidget');
+        $this->stickyContainer->createChild('sticky', 'Ceres::ItemAvailabilityWidget')
+            ->withSetting('customClass','');
     }
 
     private function createAddToWishListWiget()
     {
-        $this->stickyContainer->createChild('sticky', 'Ceres::AddToWishListWidget');
+        $this->stickyContainer->createChild('sticky', 'Ceres::AddToWishListWidget')
+            ->withSetting('customClass','');
     }
 
     private function createItemPriceWidget()
@@ -183,7 +185,8 @@ class DefaultSingleItemPreset implements ContentPreset
 
     private function createSeparatorWidget()
     {
-        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget');
+        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget')
+            ->withSetting('customClass','');
     }
 
     private function createLegalInformation()
