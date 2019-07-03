@@ -1,7 +1,7 @@
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 
 <script type="x/template" id="vue-create-update-address">
-    <form ref="addressForm">
+    <form ref="addressForm" @submit.prevent>
         <address-input-group
             template="#vue-address-input-group"
             :address-type="addressType"
@@ -13,7 +13,7 @@
             :default-salutation="defaultSalutation">
         </address-input-group>
         <button
-            type="button"
+            type="submit"
             class="btn btn-primary btn-appearance btn-block"
             @click="validate"
             :disabled="waiting">
