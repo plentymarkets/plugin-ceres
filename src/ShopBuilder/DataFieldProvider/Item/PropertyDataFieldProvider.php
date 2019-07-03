@@ -19,6 +19,6 @@ class PropertyDataFieldProvider extends DataFieldProvider
     {
         $propertyId = $this->property->id;
         $this->addField("name_$propertyId", "Ceres::Widget.dataFieldPropertyName", "item_data_field('variationProperties.{property.id, $propertyId}.property.names.name')");
-        $this->addField("value_$propertyId", "Ceres::Widget.dataFieldPropertyValue", "item_data_field('variationProperties.{id, $propertyId}.values.value')");
+        $this->addField("value_$propertyId", "Ceres::Widget.dataFieldPropertyValue", "item_data_field('variationProperties.{propertyId, $propertyId}.values.value')");
     }
 }
