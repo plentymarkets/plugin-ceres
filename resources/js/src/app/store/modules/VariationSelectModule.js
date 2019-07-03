@@ -48,18 +48,24 @@ const mutations =
 
 const actions =
     {
+        // eslint-disable-next-line complexity
         setVariationSelect({ commit }, variationSelect)
         {
             const attributes         = variationSelect.attributes;
             const variations         = variationSelect.variations;
             const initialVariation   = variations.find(variation => variationSelect.initialVariationId === parseInt(variation.variationId));
-            const initialUnit        = initialVariation.unitCombinationId;
+            const initialUnit        = initialVariation && initialVariation.unitCombinationId || 0;
             const selectedAttributes = {};
             const units              = {};
 
             for (const attribute of attributes)
             {
-                const variationAttribute = initialVariation.attributes.find(variationAttribute => variationAttribute.attributeId === attribute.attributeId);
+                let variationAttribute;
+
+                if (initialVariation)
+                {
+                    variationAttribute = initialVariation.attributes.find(variationAttribute => variationAttribute.attributeId === attribute.attributeId);
+                }
 
                 selectedAttributes[attribute.attributeId] = variationAttribute ? variationAttribute.attributeValueId : null;
             }
