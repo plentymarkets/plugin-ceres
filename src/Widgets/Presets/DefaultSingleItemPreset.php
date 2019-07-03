@@ -75,6 +75,7 @@ class DefaultSingleItemPreset implements ContentPreset
 
         $this->stickyContainer->createChild('sticky','Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
+            ->withSetting('customClass', 'producertag h6 producer text-muted')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
@@ -82,9 +83,9 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.right.unit', null)
             ->withSetting('spacing.padding.top.value', 0)
             ->withSetting('spacing.padding.top.unit', null)
-            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.value', 2)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', "<div class=\"producertag h6 producer text-muted\"> $dataProvider </div>");
+            ->withSetting('text', $dataProvider);
     }
     private function createNameHeader()
     {
@@ -105,6 +106,7 @@ class DefaultSingleItemPreset implements ContentPreset
         }
         $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
+            ->withSetting('customClass', 'title-outer')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
@@ -114,7 +116,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', "<h1 class=\"h2 title\"> $dataProvider </h1>")
+            ->withSetting('text', "<h1>$dataProvider</h1>")
             ->withSetting('appearance','none');
     }
 
@@ -157,7 +159,8 @@ class DefaultSingleItemPreset implements ContentPreset
 
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
             ->withSetting('appearance', 'none')
-            ->withSetting('text', "<span class=\"articlenumber small text-muted\"> $text </span>")
+            ->withSetting('customClass', 'articlenumber small text-muted')
+            ->withSetting('text', $text)
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
@@ -194,7 +197,8 @@ class DefaultSingleItemPreset implements ContentPreset
         $text ="* {% if services.customer.showNetPrices() %}{{ trans(\"Ceres::Template.singleItemExclVAT\") }}{% else %}{{ trans(\"Ceres::Template.singleItemInclVAT\") }}{% endif %} {{ trans(\"Ceres::Template.singleItemExclusive\") }}";
         $text .="<a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle=\"modal\" href=\"#shippingscosts\"{% endif %} title=\"{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}\"> {{ trans(\"Ceres::Template.singleItemShippingCosts\") }}</a>";
         $this->stickyContainer->createChild('sticky', 'Ceres::CodeWidget')
-            ->withSetting('text', "<span class=\"vat small text-muted\">$text</span>")
+            ->withSetting('customClass', 'vat small text-muted')
+            ->withSetting('text', "<span>$text</span>")
             ->withSetting('appearance', 'none');
     }
 
