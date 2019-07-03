@@ -2,6 +2,8 @@ const browserDetect = require("detect-browser");
 const NotificationService = require("services/NotificationService");
 const AutoFocusService = require("services/AutoFocusService");
 
+import { MediaQueryHelperClass } from "helper/MediaQueryHelperClass";
+
 // Frontend end scripts
 // eslint-disable-next-line
 var init = (function($, window, document)
@@ -203,6 +205,7 @@ var init = (function($, window, document)
 
     window.CeresMain = new CeresMain();
     window.CeresNotification = NotificationService;
+    window.MediaQueryHelperClass = new MediaQueryHelperClass();
 
     const showShopNotification = function(event)
     {
