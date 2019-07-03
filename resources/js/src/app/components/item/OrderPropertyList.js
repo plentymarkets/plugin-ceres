@@ -6,6 +6,16 @@ Vue.component("order-property-list", {
         {
             type: String,
             default: "#vue-order-property-list"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 

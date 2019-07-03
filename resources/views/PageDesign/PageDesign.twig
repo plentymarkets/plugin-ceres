@@ -27,7 +27,6 @@
     {% set openBasketClass = "open-" ~ ceresConfig.basket.previewType %}
 {% endif %}
 
-{% spaceless %}
 <!DOCTYPE html>
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
@@ -397,4 +396,3 @@
 {{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
 </body>
 </html>
-{% endspaceless %}

@@ -18,6 +18,16 @@
         }
 
     }
+
+    .widget-placeholder
+    {
+      padding-bottom: 10%;
+    }
+
+    .widget-placeholder p.description:empty
+    {
+      display: none;
+    }
 }
 
 .widget-item-list-caption

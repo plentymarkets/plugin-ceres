@@ -3,10 +3,11 @@
 		<div class="mb-3 item-bundle" v-if="showItemBundleItems">
 			<div ref="bundleSetting" class="hidden">{{ services.webstoreConfig.getWebstoreConfig().dontSplitItemBundle }}</div>
 			<strong>{{ trans("Ceres::Template.itemBundleContent") }}</strong>
-			<div v-for="item in bundleComponents">
+			<div v-for="item in bundleComponents" :class="paddingClasses" :style="paddingInlineStyles">
 				<span class="text-muted">${ item.quantity } x</span>
 				<a class="text-appearance" :href="item.data | itemURL"> ${ getBundleInnerText(item.data) | itemName } </a>
 			</div>
 		</div>
+		<div v-else><slot></slot></div>
 	</div>
 </script>

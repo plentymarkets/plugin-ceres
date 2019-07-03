@@ -1,0 +1,22 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+<div class="widget widget-availability {% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <span 
+        v-if="$store.getters.currentItemVariation && $store.getters.currentItemVariation.variation && $store.getters.currentItemVariation.variation.availability" 
+        :class="'availability badge availability_' + $store.getters.currentItemVariation.variation.availability.id"
+        {% if spacingPadding | length > 0 %}class="{{ spacingPadding }}"{% endif %}
+        {% if inlinePadding | length > 0 %}style="{{ inlinePadding }}"{% endif %}>
+        <span>
+            ${ $store.getters.currentItemVariation.variation.availability.names.name }
+        </span>
+    </span>
+</div>
