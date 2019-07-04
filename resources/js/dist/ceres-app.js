@@ -42165,7 +42165,8 @@ Vue.component("bank-data-select", {
       selectedBankData: null,
       updateBankIndex: 0,
       doUpdate: null,
-      headline: ""
+      headline: "",
+      waiting: false
     };
   },
 
@@ -42250,6 +42251,8 @@ Vue.component("bank-data-select", {
     validateInput: function validateInput() {
       var _this2 = this;
 
+      this.waiting = true;
+
       _ValidationService["default"].validate($("#my-bankForm")).done(function () {
         if (_this2.doUpdate) {
           _this2.updateBankInfo();
@@ -42258,6 +42261,8 @@ Vue.component("bank-data-select", {
         }
       }).fail(function (invalidFields) {
         _ValidationService["default"].markInvalidFields(invalidFields, "error");
+
+        _this2.waiting = false;
       });
     },
 
@@ -42276,10 +42281,12 @@ Vue.component("bank-data-select", {
         _this3.closeModal();
 
         NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataUpdated")).closeAfter(3000);
+        _this3.waiting = false;
       }).fail(function () {
         _this3.closeModal();
 
         NotificationService.error(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataNotUpdated")).closeAfter(5000);
+        _this3.waiting = false;
       });
     },
 
@@ -42299,10 +42306,12 @@ Vue.component("bank-data-select", {
         _this4.closeModal();
 
         NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataAdded")).closeAfter(3000);
+        _this4.waiting = false;
       }).fail(function () {
         _this4.closeModal();
 
         NotificationService.error(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataNotAdded")).closeAfter(5000);
+        _this4.waiting = false;
       });
     },
 
