@@ -37065,7 +37065,11 @@ Vue.component("tab-list", {
         activeTab.setActive(false);
       }
     },
-    // checks if tab content contains img tag or text.
+
+    /**
+     * Checks if tab content contains img tag or text.
+     * @param {vnode} tab
+     */
     filterContent: function filterContent(tab) {
       var imgPattern = new RegExp(/<img([\w\W]+?)>/);
 
