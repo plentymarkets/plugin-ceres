@@ -20937,6 +20937,7 @@ html.ie .confirmation-order-list .cmp-order-item .item-details .row strong:nth-o
 
 .basket-item-container .basket-item .basket-item-container-right .qty-box-container .qty-box {
   margin: 0 0 5px auto;
+  height: 41px;
 }
 
 .basket-item-container .basket-item .basket-item-container-right .qty-box-container .qty-box .qty-input {
