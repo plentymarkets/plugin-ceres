@@ -19,13 +19,13 @@
       text-decoration: none;
       
         i {
-            color: #d9534f !important;
+            color: inherit !important;
         }
     }
 
     &.active{
         i {
-            color: #d9534f;
+            color: inherit;
         }
     }
 }
