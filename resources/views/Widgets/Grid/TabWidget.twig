@@ -21,7 +21,6 @@
             <tab-item class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
                 title="{{ tab.title }}"
-                {% if loop.first %}active{% endif %}
                 {{ WidgetHelper.makeClickable(isPreview) }}>
                 <div class="my-4" data-builder-child-container="{{ tab.uuid }}">{{ children[tab.uuid] | raw }}</div>
             </tab-item>
