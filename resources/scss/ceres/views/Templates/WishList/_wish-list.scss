@@ -19,7 +19,10 @@
       text-decoration: none;
       
         i {
-            color: inherit !important;
+            color: #d9534f !important;
+            &.fa-circle-o-notch {
+                color: inherit !important;
+            }
         }
     }
 
