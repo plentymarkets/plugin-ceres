@@ -11495,6 +11495,11 @@ button:focus {
 		min-width: 10rem;
 	}
 
+	&.btn-md {
+		padding-top: 0.8rem;
+		padding-bottom: 0.8rem;
+	}
+
 	&.btn-medium-large {
 		min-width: 12rem;
 	}
@@ -18086,12 +18091,15 @@ html.ie {
       
         i {
             color: #d9534f !important;
+            &.fa-circle-o-notch {
+                color: inherit !important;
+            }
         }
     }
 
     &.active{
         i {
-            color: #d9534f;
+            color: inherit;
         }
     }
 }
