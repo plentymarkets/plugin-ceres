@@ -44,9 +44,9 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createSeparatorWidget();
         $this->createItemVariationNumber();
         $this->createItemBundleWidget();
-        $this->createGraduatedPriceWidget();
         $this->createOrderPropertyWidget();
         $this->createAttributeWidget();
+        $this->createGraduatedPriceWidget();
         $this->createItemPriceWidget();
         $this->createItemAvailabilityWidget();
         $this->createAddToBasketWidget();
