@@ -77,7 +77,7 @@ class TwigItemDataField extends Twig_Extension
      * @param null $filter
      * @return string
      */
-    public function getDataField($field, $filter = null, $directiveType = "text")
+    public function getDataField($field, $filter = null, $directiveType = "text", $htmlTagType = "span")
     {
 
         $twigPrint = SafeGetter::get($this->itemData, $field);
@@ -103,8 +103,17 @@ class TwigItemDataField extends Twig_Extension
         $vueDirective = isset($filter) ?
             "v-$directiveType=\"getFilteredDataField('$field', '$filter')\"" :
             "v-$directiveType=\"getDataField('$field')\"";
-
-        return "<span $vueDirective>$twigPrint</span>";
+    
+        if($htmlTagType == 'img')
+        {
+            $html = '<img src="'.$twigPrint.'" alt="'.$field.'">';
+        }
+        else
+        {
+            $html = "<$htmlTagType $vueDirective>$twigPrint</$htmlTagType>";
+        }
+    
+        return $html;
     }
 
     /**
