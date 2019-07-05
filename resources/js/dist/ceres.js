@@ -36985,6 +36985,9 @@ Vue.component("tab-list", {
     var _this2 = this;
 
     var tabListElements = [];
+    var filteredTabs = this.$slots["default"].filter(function (tab) {
+      return !!tab.componentOptions;
+    });
 
     if (this.tabs.length > 0) {
       var navElements = this.tabs.map(function (tab, index) {
@@ -37014,7 +37017,7 @@ Vue.component("tab-list", {
 
     var content = createElement("div", {
       staticClass: "tab-content"
-    }, [this.$slots["default"]]);
+    }, [filteredTabs]);
     tabListElements.push(content);
     return createElement("div", {}, tabListElements);
   },
@@ -37038,6 +37041,14 @@ Vue.component("tab-list", {
 
     this.$nextTick(function () {
       _this3.updateTabs();
+
+      var hasActiveContent = _this3.tabs.some(function (tab) {
+        return tab.active;
+      });
+
+      if (!hasActiveContent) {
+        _this3.activateTab(_this3.tabs[0]);
+      }
     });
   },
   methods: {
@@ -37055,33 +37066,24 @@ Vue.component("tab-list", {
     updateTabs: function updateTabs() {
       this.tabs = this.getTabs();
     },
-    activateTab: function activateTab(tab, event) {
+    activateTab: function activateTab(tab) {
       var activeTab = this.tabs.find(function (tab) {
         return tab.localActive;
       });
       tab.setActive(true);
 
-      if (tab !== activeTab) {
+      if (activeTab && activeTab.setActive && tab !== activeTab) {
         activeTab.setActive(false);
       }
     },
 
     /**
      * Checks if tab content contains img tag or text.
-     * @param {vnode} tab
+     * @param {*} tab
      */
     filterContent: function filterContent(tab) {
       var imgPattern = new RegExp(/<img([\w\W]+?)>/);
-
-      if (imgPattern.test(tab.$el.innerHTML)) {
-        return true;
-      }
-
-      if (tab.$el.textContent.trim().length > 0) {
-        return true;
-      }
-
-      return false;
+      return imgPattern.test(tab.$el.innerHTML) || tab.$el.textContent.trim().length > 0;
     }
   }
 });
@@ -42358,6 +42360,9 @@ Vue.component("account-settings", {
     matchEmail: function matchEmail() {
       return this.newMail2.length <= 0 || this.newMail === this.newMail2;
     },
+    matchOldEmail: function matchOldEmail() {
+      return this.newMail === this.newMail2 && this.newMail === this.userData.email;
+    },
     matchPassword: function matchPassword() {
       return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
     },
@@ -42516,7 +42521,8 @@ Vue.component("bank-data-select", {
       selectedBankData: null,
       updateBankIndex: 0,
       doUpdate: null,
-      headline: ""
+      headline: "",
+      waiting: false
     };
   },
 
@@ -42601,6 +42607,8 @@ Vue.component("bank-data-select", {
     validateInput: function validateInput() {
       var _this2 = this;
 
+      this.waiting = true;
+
       _ValidationService["default"].validate($("#my-bankForm")).done(function () {
         if (_this2.doUpdate) {
           _this2.updateBankInfo();
@@ -42609,6 +42617,8 @@ Vue.component("bank-data-select", {
         }
       }).fail(function (invalidFields) {
         _ValidationService["default"].markInvalidFields(invalidFields, "error");
+
+        _this2.waiting = false;
       });
     },
 
@@ -42627,10 +42637,12 @@ Vue.component("bank-data-select", {
         _this3.closeModal();
 
         NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataUpdated")).closeAfter(3000);
+        _this3.waiting = false;
       }).fail(function () {
         _this3.closeModal();
 
         NotificationService.error(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataNotUpdated")).closeAfter(5000);
+        _this3.waiting = false;
       });
     },
 
@@ -42650,10 +42662,12 @@ Vue.component("bank-data-select", {
         _this4.closeModal();
 
         NotificationService.success(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataAdded")).closeAfter(3000);
+        _this4.waiting = false;
       }).fail(function () {
         _this4.closeModal();
 
         NotificationService.error(_TranslationService["default"].translate("Ceres::Template.myAccountBankDataNotAdded")).closeAfter(5000);
+        _this4.waiting = false;
       });
     },
 

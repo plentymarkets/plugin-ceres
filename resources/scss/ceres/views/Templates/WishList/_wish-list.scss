@@ -20,12 +20,15 @@
       
         i {
             color: #d9534f !important;
+            &.fa-circle-o-notch {
+                color: inherit !important;
+            }
         }
     }
 
     &.active{
         i {
-            color: #d9534f;
+            color: inherit;
         }
     }
 }

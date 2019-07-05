@@ -16625,6 +16625,11 @@ button:focus {
   min-width: 10rem;
 }
 
+.btn.btn-md {
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
 .btn.btn-medium-large {
   min-width: 12rem;
 }
@@ -20937,6 +20942,7 @@ html.ie .confirmation-order-list .cmp-order-item .item-details .row strong:nth-o
 
 .basket-item-container .basket-item .basket-item-container-right .qty-box-container .qty-box {
   margin: 0 0 5px auto;
+  height: 41px;
 }
 
 .basket-item-container .basket-item .basket-item-container-right .qty-box-container .qty-box .qty-input {
@@ -22790,8 +22796,12 @@ html.ie .cmp-paginator {
   color: #d9534f !important;
 }
 
+.add-to-wish-list:hover i.fa-circle-o-notch {
+  color: inherit !important;
+}
+
 .add-to-wish-list.active i {
-  color: #d9534f;
+  color: inherit;
 }
 
 .wish-list-item {
