@@ -55,6 +55,7 @@
                                 <div class="row my-2">
                                     <div class="col-12">
                                         <div v-show="!matchEmail" class="text-danger">{{ trans("Ceres::Template.myAccountCorrectEmail") }}</div>
+                                        <div v-show="matchOldEmail" class="text-danger">{{ trans("Ceres::Template.myAccountOldEmail") }}</div>
                                     </div>
                                 </div>
                             </div>
