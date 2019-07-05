@@ -1,0 +1,38 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+
+{% set type = widget.settings.type.mobile %}
+{% set serviceMethod = "" %}
+{% set layoutContainer = "" %}
+
+{% if type == "cancellationRights" %}
+    {% set serviceMethod = "getCancellationRights" %}
+    {% set layoutContainer = "CancellationRights" %}
+{% elseif type == "legalDisclosure" %}
+    {% set serviceMethod = "getLegalDisclosure" %}
+    {% set layoutContainer = "LegalDisclosure" %}
+{% elseif type == "privacyPolicy" %}
+    {% set serviceMethod = "getPrivacyPolicy" %}
+    {% set layoutContainer = "PrivacyPolicy" %}
+{% else %}
+    {% set serviceMethod = "getTermsAndConditions" %}
+    {% set layoutContainer = "TermsAndConditions" %}
+{% endif %}
+{% set serviceMethod = "services.legalInformation.#{ serviceMethod }" %}
+
+{{ Twig.set("legalInformation", Twig.call(serviceMethod)) }}
+
+<div class="widget widget-legal-texts">
+    <div class="widget-inner">
+
+        {% Twig.if("termsAndConditions.htmlText") %}
+            Twig.print("termsAndConditions.htmlText | raw")
+        {% Twig.else() %}
+            <p class="static-page-plain-text">{{ Twig.print("termsAndConditions.plainText") }}</p>
+        {% Twig.endif() %}
+
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::StaticPages.#{ layoutContainer }"])) }}
+    </div>
+</div>

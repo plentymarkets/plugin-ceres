@@ -5664,6 +5664,77 @@
         }
     },
     {
+        "identifier": "Ceres::LegalTextsWidget",
+        "label": "Widget.legalTextsLabel",
+        "previewImageURL": "/images/widgets/legal-texts.svg",
+        "type": "default",
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Legal\\LegalTextsWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltip": "Widget.customClassTooltip"
+                }
+            },
+            "spacingMargin": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            },
+            "type": {
+                "type": "select",
+                "defaultValue": "cancellationRights",
+                "options": {
+                    "name": "Widget.legalTextsType",
+                    "tooltipText": "Widget.legalTextsTypeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "cancellationRights",
+                            "caption": "Widget.legalTextsTypeValueCancellationRights",
+                            "position": 0
+                        },
+                        {
+                            "value": "legalDisclosure",
+                            "caption": "Widget.legalTextsTypeValueLegalDisclosure",
+                            "position": 1
+                        },
+                        {
+                            "value": "privacyPolicy",
+                            "caption": "Widget.legalTextsTypeValuePrivacyPolicy",
+                            "position": 2
+                        },
+                        {
+                            "value": "gtc",
+                            "caption": "Widget.legalTextsTypeValueGTC",
+                            "position": 3
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::AccountSettingsWidget",
         "label": "Widget.myAccountAccountSettingsLabel",
         "previewImageURL": "/images/widgets/account-settings.svg",
