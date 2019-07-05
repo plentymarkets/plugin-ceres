@@ -1,3 +1,5 @@
+const ApiService = require("services/ApiService");
+
 const state =
     {
         tree: [],
@@ -19,6 +21,24 @@ const mutations =
 
 const actions =
     {
+        loadNavigationTree({ dispatch })
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService
+                    .get("/rest/io/categorytree", { type: App.config.header.showCategoryTypes })
+                    .done(response =>
+                    {
+                        dispatch("initNavigationTree", response);
+                        resolve(response);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
+            });
+        },
+
         initNavigationTree({ dispatch, commit }, navigationTree)
         {
             if (navigationTree)

@@ -5,10 +5,6 @@ Vue.component("mobile-navigation", {
         "initialCategory"
     ],
 
-    jsonDataFields: [
-        "navigationTreeData"
-    ],
-
     data()
     {
         return {
@@ -45,20 +41,30 @@ Vue.component("mobile-navigation", {
         })
     },
 
-    mounted()
+    created()
     {
-        this.$nextTick(() =>
-        {
-            this.initNavigation();
-        });
+        this.addEventListener();
     },
 
     methods:
     {
+        addEventListener()
+        {
+            document.addEventListener("onBreakpointChange", (event) =>
+            {
+                if (event.detail.breakpoint === "md" && this.navigationTree.length <= 0)
+                {
+                    this.$store.dispatch("loadNavigationTree")
+                        .then(() =>
+                        {
+                            this.initNavigation();
+                        });
+                }
+            });
+        },
+
         initNavigation()
         {
-            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
-
             if (this.initialCategory && this.initialCategory.id)
             {
                 if (this.initialCategory.linklist === "N")

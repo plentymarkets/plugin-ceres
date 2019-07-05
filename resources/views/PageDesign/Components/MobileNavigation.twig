@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-mobile-navigation">
-    <div class="mobile-navigation">
+    <div v-if="navigationTree.length > 0" class="mobile-navigation">
 
         <ul class="breadcrumb">
             <li class="btn-close" @click="closeNavigation()"></li>
