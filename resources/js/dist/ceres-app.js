@@ -42007,6 +42007,9 @@ Vue.component("account-settings", {
     matchEmail: function matchEmail() {
       return this.newMail2.length <= 0 || this.newMail === this.newMail2;
     },
+    matchOldEmail: function matchOldEmail() {
+      return this.newMail === this.newMail2 && this.newMail === this.userData.email;
+    },
     matchPassword: function matchPassword() {
       return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
     },
