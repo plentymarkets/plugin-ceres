@@ -16,7 +16,11 @@ export class MediaQueryHelperClass
     initListener()
     {
         this.functionList = [];
-        this.oldBreakpoint = this.getCurrentBreakpoint();
+        const currentBreakpoint = this.getCurrentBreakpoint();
+
+        // set timeout to fire event at end of callstack
+        setTimeout(() => { this.fireBreakpointChangedEvent(currentBreakpoint); }, 0); // eslint-disable-line
+        this.oldBreakpoint = currentBreakpoint;
 
         window.addEventListener("resize", () =>
         {
@@ -26,6 +30,7 @@ export class MediaQueryHelperClass
             if (currentBreakpoint !== this.oldBreakpoint)
             {
                 this.executeFunctions();
+                this.fireBreakpointChangedEvent(currentBreakpoint);
                 this.oldBreakpoint = currentBreakpoint;
             }
         });
@@ -94,6 +99,13 @@ export class MediaQueryHelperClass
         {
             functionsToExecute();
         }
+    }
+
+    fireBreakpointChangedEvent(currentBreakpoint)
+    {
+        const event = new CustomEvent("onBreakpointChange", { "detail": { "oldBreakpoint": this.oldBreakpoint, "breakpoint": currentBreakpoint } });
+
+        document.dispatchEvent(event);
     }
 
     addFunctions(addedFunction)
