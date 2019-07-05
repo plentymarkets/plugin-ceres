@@ -36985,6 +36985,9 @@ Vue.component("tab-list", {
     var _this2 = this;
 
     var tabListElements = [];
+    var filteredTabs = this.$slots["default"].filter(function (tab) {
+      return !!tab.componentOptions;
+    });
 
     if (this.tabs.length > 0) {
       var navElements = this.tabs.map(function (tab, index) {
@@ -37014,7 +37017,7 @@ Vue.component("tab-list", {
 
     var content = createElement("div", {
       staticClass: "tab-content"
-    }, [this.$slots["default"]]);
+    }, [filteredTabs]);
     tabListElements.push(content);
     return createElement("div", {}, tabListElements);
   },
@@ -37038,6 +37041,14 @@ Vue.component("tab-list", {
 
     this.$nextTick(function () {
       _this3.updateTabs();
+
+      var hasActiveContent = _this3.tabs.some(function (tab) {
+        return tab.active;
+      });
+
+      if (!hasActiveContent) {
+        _this3.activateTab(_this3.tabs[0]);
+      }
     });
   },
   methods: {
@@ -37055,29 +37066,24 @@ Vue.component("tab-list", {
     updateTabs: function updateTabs() {
       this.tabs = this.getTabs();
     },
-    activateTab: function activateTab(tab, event) {
+    activateTab: function activateTab(tab) {
       var activeTab = this.tabs.find(function (tab) {
         return tab.localActive;
       });
       tab.setActive(true);
 
-      if (tab !== activeTab) {
+      if (activeTab && activeTab.setActive && tab !== activeTab) {
         activeTab.setActive(false);
       }
     },
-    // checks if tab content contains img tag or text.
+
+    /**
+     * Checks if tab content contains img tag or text.
+     * @param {*} tab
+     */
     filterContent: function filterContent(tab) {
       var imgPattern = new RegExp(/<img([\w\W]+?)>/);
-
-      if (imgPattern.test(tab.$el.innerHTML)) {
-        return true;
-      }
-
-      if (tab.$el.textContent.trim().length > 0) {
-        return true;
-      }
-
-      return false;
+      return imgPattern.test(tab.$el.innerHTML) || tab.$el.textContent.trim().length > 0;
     }
   }
 });
