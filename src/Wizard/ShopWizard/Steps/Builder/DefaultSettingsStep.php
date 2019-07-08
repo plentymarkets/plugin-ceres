@@ -59,6 +59,8 @@ class DefaultSettingsStep extends Step
         $this->countryRepository = $countryRepository;
         $this->classRepository = $classRepository;
         $this->locationRepository = $accountingLocationRepositoryContract;
+
+        parent::__construct();
     }
 
 

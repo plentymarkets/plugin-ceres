@@ -8,8 +8,6 @@
 
 namespace Ceres\Wizard\ShopWizard;
 
-
-
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\Steps\Builder\DefaultSettingsStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\OnlineStoreStep;
@@ -31,7 +29,7 @@ class ShopWizard extends WizardProvider
     {
         $requiredSettingsStep = pluginApp(RequiredSettingsStep::class);
         $settingsSelectionStep = pluginApp(SettingsSelectionStep::class);
-        $defalutSettingsStep = pluginApp(DefaultSettingsStep::class);
+        $defaultSettingsStep = pluginApp(DefaultSettingsStep::class);
         $onlineStoreStep = pluginApp(OnlineStoreStep::class);
 
 
@@ -55,7 +53,7 @@ class ShopWizard extends WizardProvider
             "steps" => [
                 "requiredStep" => $requiredSettingsStep->generateStep(),
                 "settingsSelectionStep" => $settingsSelectionStep->generateStep(),
-                "defaultSettingsStep" => $defalutSettingsStep->generateStep(),
+                "defaultSettingsStep" => $defaultSettingsStep->generateStep(),
                 "onlineStoreStep" => $onlineStoreStep->generateStep(),
             ]
         ];
