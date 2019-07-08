@@ -47,6 +47,11 @@ class DataMapping
             "type" => "string",
             "global" => false
         ],
+        "defSettings_defaultB2C" => [
+            "field" => "defaultCustomerClassId",
+            "type" => "string",
+            "global" => true
+        ],
         "onlineStore_storeName" => [
             "field" => "header.company_name",
             "type" => "string",

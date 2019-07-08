@@ -15,14 +15,14 @@ use Plenty\Plugin\Http\Request;
 class Step
 {
 
-    public $displayGlobals;
+    public $globalsCondition;
 
     /**
      * Step constructor.
      */
     public function __construct()
     {
-        $this->displayGlobals = $this->setDisplayGlobals();
+        $this->globalsCondition = "client !== 'preview'";
     }
 
     /**
@@ -49,26 +49,5 @@ class Step
         }
 
         return $listBoxValues;
-    }
-
-    /**
-     * @return bool
-     */
-    private function setDisplayGlobals()
-    {
-        $request = pluginApp(Request::class);
-        $optionId = $request->get('optionId');
-
-        $displayGlobals = false;
-
-        return $displayGlobals;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getDisplayGlobals()
-    {
-        return $this->displayGlobals;
     }
 }

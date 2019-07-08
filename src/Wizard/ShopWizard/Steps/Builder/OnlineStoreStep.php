@@ -188,6 +188,7 @@ class OnlineStoreStep extends Step
             "form" => [
                 "onlineStore_itemBundles" => [
                     "type" => "select",
+                    "isVisible" => $this->globalsCondition,
                     "defaultValue" => $itemBundlesList[0]['value'],
                     "options" => [
                         "name" => "Wizard.itemBundles",

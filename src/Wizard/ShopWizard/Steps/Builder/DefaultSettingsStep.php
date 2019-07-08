@@ -71,7 +71,6 @@ class DefaultSettingsStep extends Step
 
         $languages = $wizardService->getLanguages();
         $languagesList = $this->buildListBoxData($languages);
-        $conditionDisplayGlobals = "client !== 'preview'";
 
         $shippingProfiles = $wizardService->getShippingProfiles();
         $shippingProfilesList = $this->buildListBoxData($shippingProfiles);
@@ -91,14 +90,15 @@ class DefaultSettingsStep extends Step
             "title" => "Wizard.defaultSettings",
             "description" => "Wizard.defaultSettingsDescription",
             "sections" => [
-                $this->generateSection("defaultLanguage", $languagesList, $conditionDisplayGlobals),
-                $this->generateSection("defaultShippingMethod", $shippingMethodsList, $conditionDisplayGlobals),
-                $this->generateSection("defaultShippingProfile", $shippingProfilesList, $conditionDisplayGlobals),
-                $this->generateSection("defaultPaymentMethod", $paymentMethodsList, $conditionDisplayGlobals),
-                $this->generateCountryDeliverySection("defaultDeliveryCountry", $deliveryCountries, $conditionDisplayGlobals),
+                $this->generateSection("defaultLanguage", $languagesList, $this->globalsCondition),
+                $this->generateSection("defaultShippingMethod", $shippingMethodsList, $this->globalsCondition),
+                $this->generateSection("defaultShippingProfile", $shippingProfilesList, $this->globalsCondition),
+                $this->generateSection("defaultPaymentMethod", $paymentMethodsList, $this->globalsCondition),
+                $this->generateCountryDeliverySection("defaultDeliveryCountry", $deliveryCountries, $this->globalsCondition),
+                $this->generateSection("defaultB2C", $b2bClassesList, $this->globalsCondition),
                 $this->generateSection("defaultB2B",$b2bClassesList),
-                $this->generateSection("defaultLocation",$locationsList, $conditionDisplayGlobals)
-                //$this->generateLocationSection($conditionDisplayGlobals)
+                $this->generateSection("defaultLocation",$locationsList, $this->globalsCondition)
+                //$this->generateLocationSection($this->globalsCondition)
             ]
         ];
     }
