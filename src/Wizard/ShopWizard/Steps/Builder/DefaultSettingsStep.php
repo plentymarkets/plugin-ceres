@@ -98,6 +98,7 @@ class DefaultSettingsStep extends Step
                 $this->generateCountryDeliverySection("defaultDeliveryCountry", $deliveryCountries, $conditionDisplayGlobals),
                 $this->generateSection("defaultB2B",$b2bClassesList),
                 $this->generateSection("defaultLocation",$locationsList, $conditionDisplayGlobals)
+                //$this->generateLocationSection($conditionDisplayGlobals)
             ]
         ];
     }
@@ -119,6 +120,25 @@ class DefaultSettingsStep extends Step
                     "options" => [
                         "name" => "Wizard." . $name,
                         "listBoxValues" => $listBoxValues
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    private function generateLocationSection($condition)
+    {
+        return [
+            "title" => "Wizard.defaultLocation",
+            "description" => "Wizard.defaultLocationDescription",
+            "condition" => $condition,
+            "form" => [
+                "defSettings_defaultLocation" => [
+                    "type" => "select",
+                    "dependencies" => ['client'],
+                    "dependencyMethod" => "retrieveLocationData",
+                    "options" => [
+                        "name" => "Wizard.defaultLocation",
                     ]
                 ]
             ]

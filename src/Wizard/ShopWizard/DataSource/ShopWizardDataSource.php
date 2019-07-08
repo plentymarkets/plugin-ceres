@@ -62,14 +62,15 @@ class ShopWizardDataSource extends BaseWizardDataSource
     public function getByOptionId(string $optionId = 'default')
     {
 
-        list($webstore,) = explode(".", $optionId);
+        list($webstore,$pluginSet) = explode(".", $optionId);
 
         list($webstorePrefix, $webstoreId) = explode('_', $webstore);
+        list($pluginSetPrefix, $pluginSetId) = explode('_', $pluginSet);
 
 
         $dataStructure = $this->dataStructure;
 
-        $dataStructure['data'] = (object) $this->wizardService->mapWebstoreData($webstoreId);
+        $dataStructure['data'] = (object) $this->wizardService->mapWebstoreData($webstoreId, $pluginSetId);
 
         return $dataStructure;
     }

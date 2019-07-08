@@ -8,9 +8,11 @@
 
 namespace Ceres\Wizard\ShopWizard\SettingsHandlers;
 
+use Ceres\Wizard\ShopWizard\Services\MappingService;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
+use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
@@ -40,11 +42,11 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
             list($webstorePrefix, $webstoreId) = explode('_', $webstore);
             list($pluginSetPrefix, $pluginSetId) = explode('_', $pluginSet);
 
-            if (!empty($webstoreId) && !empty($data['client'])) {
+            if (empty($webstoreId) && !empty($data['client'])) {
                 $webstoreId = $data['client'];
             }
 
-            if (!empty($pluginSetId) && !empty($data['pluginSet'])) {
+            if (empty($pluginSetId) && !empty($data['pluginSet'])) {
                 $pluginSetId = $data['pluginSet'];
             }
 
@@ -65,43 +67,47 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                         }
                     }
                 }
-                $webstoreData = [
-                    "defaultLanguage" => $data['defSettings_defaultLanguage'],
-                    "defaultParcelServicePresetId" => floatval($data['defSettings_defaultShippingProfile']),
-                    "defaultParcelServiceId" => floatval($data['defSettings_defaultShippingMethod']),
-                    "defaultMethodOfPaymentId" => floatval($data['defSettings_defaultPaymentMethod']),
-                    "defaultShippingCountryList" => $shippingCountryList,
-                    "defaultAccountingLocation" => intval($data['defSettings_defaultLocation'])
-                ];
+                $mappingService = pluginApp(MappingService::class);
 
-                if ($store->pluginSetId == $pluginSetId) {
-                    $webstoreData['defaultCustomerClassId'] = $data['defSettings_defaultB2B'];
-                }
+                $shippingData = [
+                    "defaultShippingCountryList" => $shippingCountryList
+                ];
+                $globalData = $mappingService->processGlobalMappingData($data, "store");
+
+                $webstoreData = array_merge($shippingData, $globalData);
 
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
             }
 
             $configRepo = pluginApp(ConfigurationRepositoryContract::class);
             $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
+            $pluginSets = $pluginSetRepo->list();
             $pluginId = '';
 
-            $pluginSetObj = $pluginSetRepo->get($pluginSetId)->toArray();
-
-            if (count($pluginSetObj['pluginSetEntries'])) {
-                foreach ($pluginSetObj['pluginSetEntries'] as $pluginSetEntry) {
-                    if ($pluginSetEntry['plugin']['name'] === 'Ceres') {
-                        $pluginId = $pluginSetEntry['plugin']['id'];
+            if (count($pluginSets)) {
+                foreach($pluginSets as $pluginSet) {
+                    foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
+                        if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres' && $pluginSetEntry->pluginSetId == $pluginSetId) {
+                            $pluginId = $pluginSetEntry->pluginId;
+                        }
                     }
                 }
             }
-            $configData = [
-                [
-                    'key' => "global.default_contact_class_b2b",
-                    'value' => $data['defSettings_defaultB2B']
-                ]
-            ];
 
-            $configRepo->saveConfiguration($pluginId, $configData, $pluginSetId);
+            $mappingService = pluginApp(MappingService::class);
+            $pluginData = $mappingService->processPluginMappingData($data, "store");
+            if (count($pluginData)) {
+                $configData = [];
+
+                foreach ($pluginData as $itemKey => $itemVal) {
+                    $configData[] = [
+                        'key' => $itemKey,
+                        'value' => $itemVal
+                    ];
+                }
+                $configRepo->saveConfiguration($pluginId, $configData, $pluginSetId);
+            }
+
 
 
         } catch (\Exception $exception) {

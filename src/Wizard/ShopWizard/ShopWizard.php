@@ -12,6 +12,7 @@ namespace Ceres\Wizard\ShopWizard;
 
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\Steps\Builder\DefaultSettingsStep;
+use Ceres\Wizard\ShopWizard\Steps\Builder\OnlineStoreStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\RequiredSettingsStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\SettingsSelectionStep;
 use Plenty\Modules\Wizard\Services\WizardProvider;
@@ -31,6 +32,7 @@ class ShopWizard extends WizardProvider
         $requiredSettingsStep = pluginApp(RequiredSettingsStep::class);
         $settingsSelectionStep = pluginApp(SettingsSelectionStep::class);
         $defalutSettingsStep = pluginApp(DefaultSettingsStep::class);
+        $onlineStoreStep = pluginApp(OnlineStoreStep::class);
 
 
         return [
@@ -44,15 +46,17 @@ class ShopWizard extends WizardProvider
             "iconPath" => "https://plentymarkets-assistant.s3.eu-central-1.amazonaws.com/ceres_assistent.svg",
             'dataSource' => 'Ceres\Wizard\ShopWizard\DataSource\ShopWizardDataSource',
             'settingsHandlerClass' => 'Ceres\Wizard\ShopWizard\SettingsHandlers\ShopWizardSettingsHandler',
+            //'dependencyClass' => 'Ceres\Wizard\ShopWizard\DynamicLoaders\ShopWizardDynamicLoader',
             "translationNamespace" => "Ceres",
             "options" => [
                 'client' => $this->buildClientOptions(),
                 'pluginSet' => $this->buildPluginSetOptions()
             ],
             "steps" => [
-                "step0" => $requiredSettingsStep->generateStep(),
-                "step1" => $settingsSelectionStep->generateStep(),
-                "step2" => $defalutSettingsStep->generateStep(),
+                "requiredStep" => $requiredSettingsStep->generateStep(),
+                "settingsSelectionStep" => $settingsSelectionStep->generateStep(),
+                "defaultSettingsStep" => $defalutSettingsStep->generateStep(),
+                "onlineStoreStep" => $onlineStoreStep->generateStep(),
             ]
         ];
     }
