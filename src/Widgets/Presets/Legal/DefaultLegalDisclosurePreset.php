@@ -50,6 +50,9 @@ class DefaultLegalDisclosurePreset implements ContentPreset
     private function createLegalTextsWidget()
     {
         $this->preset->createWidget("Ceres::LegalTextsWidget")
-        ->withSetting("type", "legalDisclosure");
+            ->withSetting("type", "legalDisclosure")
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 0)
+            ->withSetting("spacing.margin.bottom.unit", null);
     }
 }

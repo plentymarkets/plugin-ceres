@@ -50,6 +50,9 @@ class DefaultGTCPreset implements ContentPreset
     private function createLegalTextsWidget()
     {
         $this->preset->createWidget("Ceres::LegalTextsWidget")
-        ->withSetting("type", "gtc");
+            ->withSetting("type", "gtc")
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 0)
+            ->withSetting("spacing.margin.bottom.unit", null);
     }
 }

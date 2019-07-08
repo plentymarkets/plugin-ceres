@@ -50,16 +50,16 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationFormPreset"
             },
             {
-                "label": "Widget.presetGTCDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
-            },
-            {
                 "label": "Widget.presetLegalDisclosureDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultLegalDisclosurePreset"
             },
             {
                 "label": "Widget.presetPrivacyPolicyDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset"
+            },
+            {
+                "label": "Widget.presetGTCDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
             }
         ],
         "checkout": [

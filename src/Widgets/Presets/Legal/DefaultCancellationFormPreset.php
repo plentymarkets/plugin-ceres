@@ -41,6 +41,7 @@ class DefaultCancellationFormPreset implements ContentPreset
                      ->withSetting("margin.bottom.unit", null);
     
         $this->preset->createWidget("Ceres::SeparatorWidget")
+                    ->withSetting("customMargin", true)
                      ->withSetting("margin.top.value", 5)
                      ->withSetting("margin.top.unit", null)
                      ->withSetting("margin.bottom.value", 5)
@@ -50,6 +51,9 @@ class DefaultCancellationFormPreset implements ContentPreset
     private function createLegalTextsWidget()
     {
         $this->preset->createWidget("Ceres::LegalTextsWidget")
-        ->withSetting("type", "cancellationForm");
+            ->withSetting("type", "cancellationForm")
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 0)
+            ->withSetting("spacing.margin.bottom.unit", null);
     }
 }

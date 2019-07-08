@@ -50,6 +50,9 @@ class DefaultCancellationRightsPreset implements ContentPreset
     private function createLegalTextsWidget()
     {
         $this->preset->createWidget("Ceres::LegalTextsWidget")
-        ->withSetting("type", "cancellationRights");
+            ->withSetting("type", "cancellationRights")
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 0)
+            ->withSetting("spacing.margin.bottom.unit", null);
     }
 }
