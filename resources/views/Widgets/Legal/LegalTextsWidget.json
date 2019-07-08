@@ -7,7 +7,7 @@
     "widgetClass": "Ceres\\Widgets\\Legal\\LegalTextsWidget",
     "settings": {
         "customClass": "@include(customClass)",
-        "spacingMargin": "@include(spacingMargin)",
+        "spacing": "@include(spacingMargin)",
         "type": {
             "type": "select",
             "defaultValue": "cancellationRights",
@@ -21,19 +21,24 @@
                         "position": 0
                     },
                     {
+                        "value": "cancellationForm",
+                        "caption": "Widget.legalTextsTypeValueCancellationForm",
+                        "position": 1
+                    },
+                    {
                         "value": "legalDisclosure",
                         "caption": "Widget.legalTextsTypeValueLegalDisclosure",
-                        "position": 1
+                        "position": 2
                     },
                     {
                         "value": "privacyPolicy",
                         "caption": "Widget.legalTextsTypeValuePrivacyPolicy",
-                        "position": 2
+                        "position": 3
                     },
                     {
                         "value": "gtc",
                         "caption": "Widget.legalTextsTypeValueGTC",
-                        "position": 3
+                        "position": 4
                     }
                 ]
             }

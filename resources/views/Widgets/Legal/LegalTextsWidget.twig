@@ -3,6 +3,11 @@
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
 {% set type = widget.settings.type.mobile %}
 {% set serviceMethod = "" %}
 {% set layoutContainer = "" %}
@@ -10,6 +15,9 @@
 {% if type == "cancellationRights" %}
     {% set serviceMethod = "getCancellationRights" %}
     {% set layoutContainer = "CancellationRights" %}
+{% elseif type == "cancellationForm" %}
+    {% set serviceMethod = "getWithdrawalForm" %}
+    {% set layoutContainer = "CancellationForm" %}
 {% elseif type == "legalDisclosure" %}
     {% set serviceMethod = "getLegalDisclosure" %}
     {% set layoutContainer = "LegalDisclosure" %}
@@ -24,14 +32,14 @@
 
 {{ Twig.set("legalInformation", Twig.call(serviceMethod)) }}
 
-<div class="widget widget-legal-texts">
+<div class="widget widget-legal-texts{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
-
-        {% Twig.if("termsAndConditions.htmlText") %}
-            Twig.print("termsAndConditions.htmlText | raw")
-        {% Twig.else() %}
-            <p class="static-page-plain-text">{{ Twig.print("termsAndConditions.plainText") }}</p>
-        {% Twig.endif() %}
+        {{ Twig.if("legalInformation.htmlText") }}
+            {{ Twig.print("legalInformation.htmlText | raw") }}
+        {{ Twig.else() }}
+            <p class="static-page-plain-text">{{ Twig.print("legalInformation.plainText") }}</p>
+        {{ Twig.endif() }}
 
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::StaticPages.#{ layoutContainer }"])) }}
     </div>
