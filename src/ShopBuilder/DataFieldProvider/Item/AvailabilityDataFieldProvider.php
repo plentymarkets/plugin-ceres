@@ -9,7 +9,7 @@ class AvailabilityDataFieldProvider extends DataFieldProvider
     function register()
     {
         $this->addField("availability", "Ceres::Widget.dataFieldAvailabilityText", "item_data_field('variation.availability.names.name')"); // itemData.variation.availability.mappedAvailability?
-        $this->addField("availabilityIcon", "Ceres::Widget.dataFieldAvailabilityIcon", "item_data_field('variation.availability.icon')");
+        $this->addField("availabilityIcon", "Ceres::Widget.dataFieldAvailabilityIcon", "item_data_field('variation.availability.iconPath', null, 'src', 'img')");
         $this->addField("avgDeliveryDays", "Ceres::Widget.dataFieldAvailabilityAvgDeliveryDays", "item_data_field('variation.availability.averageDays')");
         $this->addField("maxQuantity", "Ceres::Widget.dataFieldAvailabilityMaxOrderQuantity", "item_data_field('variation.maximumOrderQuantity')");
         $this->addField("minQuantity", "Ceres::Widget.dataFieldAvailabilityMinOrderQuantity", "item_data_field('variation.minimumOrderQuantity')");
