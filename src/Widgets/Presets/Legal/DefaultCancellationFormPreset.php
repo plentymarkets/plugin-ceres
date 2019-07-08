@@ -17,6 +17,8 @@ class DefaultCancellationFormPreset implements ContentPreset
 
         $this->createHeadline();
         $this->createLegalTextsWidget();
+        $this->createSeparatorWidget();
+        $this->createPrintButtonWidget();
 
         return $this->preset->toArray();
     }
@@ -55,5 +57,22 @@ class DefaultCancellationFormPreset implements ContentPreset
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.bottom.value", 0)
             ->withSetting("spacing.margin.bottom.unit", null);
+    }
+
+    private function createSeparatorWidget()
+    {
+        $this->preset->createWidget("Ceres::SeparatorWidget")
+            ->withSetting("customMargin", true)
+            ->withSetting("margin.top.value", 5)
+            ->withSetting("margin.top.unit", null)
+            ->withSetting("margin.bottom.value", 5)
+            ->withSetting("margin.bottom.unit", null);
+    }
+
+    private function createPrintButtonWidget()
+    {
+        $this->preset->createWidget("Ceres::PrintButtonWidget")
+            ->withSetting("customClass", "float-right")
+            ->withSetting("buttonSize", "md");
     }
 }
