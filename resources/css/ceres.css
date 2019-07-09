@@ -24212,6 +24212,7 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   height: 100%;
   width: 100%;
   border-radius: 0.1rem;
+  object-fit: contain;
 }
 
 .loading .loading-animation-frame {
