@@ -8,7 +8,7 @@
 {% set showOnContentCategory   = widget.settings.showOnContentCategory.mobile %}
 
 {% if not showOnHomepage %}
-    {{ Twig.if("not services.template.isCurrentTemplate('tpl.home')") }}
+    {{ Twig.if("not services.template.isCurrentTemplate('tpl.home') and not services.template.isCurrentTemplate('tpl.home.category')") }}
 {% endif %}
 
 {% if not showOnMyAccount %}
