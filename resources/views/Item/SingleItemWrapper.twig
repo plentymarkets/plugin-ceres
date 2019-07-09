@@ -86,6 +86,11 @@
 
     {% if shopBuilderTemplate | trim is empty %}
         {# No item template for default category found => use global item template #}
+        {% set shopBuilderTemplate = shop_builder_global_template("singleitem") %}
+    {% endif %}
+
+    {% if shopBuilderTemplate | trim is empty %}
+        {# No item template for default category found => use global item template #}
         {% set shopBuilderTemplate = LayoutContainer.show("Ceres::SingleItemGlobal") %}
     {% endif %}
 
