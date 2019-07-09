@@ -40,6 +40,26 @@
             {
                 "label": "Widget.presetHomepageDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
+            },
+            {
+                "label": "Widget.presetCancellationRightsDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationRightsPreset"
+            },
+            {
+                "label": "Widget.presetCancellationFormDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationFormPreset"
+            },
+            {
+                "label": "Widget.presetLegalDisclosureDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultLegalDisclosurePreset"
+            },
+            {
+                "label": "Widget.presetPrivacyPolicyDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset"
+            },
+            {
+                "label": "Widget.presetGTCDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
             }
         ],
         "checkout": [
