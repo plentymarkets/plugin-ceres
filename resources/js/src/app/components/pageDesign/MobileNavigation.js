@@ -52,7 +52,12 @@ Vue.component("mobile-navigation", {
         {
             document.addEventListener("onBreakpointChange", (event) =>
             {
-                if (event.detail.breakpoint === "md" && this.navigationTree.length <= 0)
+                const breakpoint = event.detail.breakpoint;
+
+                if ((breakpoint === "md" ||
+                    breakpoint === "sm" ||
+                    breakpoint === "xs") &&
+                    this.navigationTree.length <= 0)
                 {
                     this.$store.dispatch("loadNavigationTree")
                         .then(() =>
