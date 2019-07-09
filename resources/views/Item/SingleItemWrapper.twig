@@ -91,7 +91,8 @@
 
     {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
         {# Item template is configured for the item #}
-        {% include [category_template(item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId)] %}
+        {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
+        
     {% elseif shopBuilderTemplate | trim is not empty or isShopBuilder %}
         {# Shopbuilder template #}
         <div class="single container-max page-content">
