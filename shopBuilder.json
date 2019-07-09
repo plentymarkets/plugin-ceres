@@ -126,6 +126,22 @@
                 "name": "Config.globalShippingCostsCategoryIdLabel"
             }
         },
+        "homeCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryHome"
+            }
+        },
+        "homeEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!homeCategory",
+            "options": {
+                "name": "Config.routingEnableRouteHome"
+            }
+        },
         "checkoutCategory": {
             "type": "category",
             "required": false,

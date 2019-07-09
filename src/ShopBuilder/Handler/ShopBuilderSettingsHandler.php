@@ -9,6 +9,9 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 {
     protected $mappings = [
         'shippingCategory'      => 'Ceres.global.shippingCostsCategoryId',
+    
+        'homeCategory'          => 'IO.routing.category_home',
+        
         'checkoutCategory'      => 'IO.routing.category_checkout',
         'checkoutEnableRoute'   => 'IO.routing.enabled_routes',
         'myAccountCategory'     => 'IO.routing.category_my-account',
@@ -28,6 +31,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     protected $casts = [
         'shippingCategory'           => 'int',
+        'home'           => 'int',
         'checkoutCategory'           => 'int',
         'myAccountCategory'          => 'int',
         'cancellationRightsCategory' => 'int',
@@ -36,7 +40,17 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'privacyPolicyCategory'      => 'int',
         'gtcCategory'                => 'int'
     ];
-
+    
+    public function readHomeEnableRoute()
+    {
+        return in_array( RouteConfig::HOME, RouteConfig::getEnabledRoutes());
+    }
+    
+    public function writeHomeEnableRoute($enableHomeRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::HOME, $enableHomeRoute);
+    }
+    
     public function readCheckoutEnableRoute()
     {
         return in_array( RouteConfig::CHECKOUT, RouteConfig::getEnabledRoutes());
