@@ -31,6 +31,11 @@
 {% set serviceMethod = "services.legalInformation.#{ serviceMethod }" %}
 
 {{ Twig.set("legalInformation", Twig.call(serviceMethod)) }}
+{{ Twig.set("layoutContainerContent", Twig.call("LayoutContainer.show", ["Ceres::StaticPages.#{ layoutContainer }"])) }}
+
+{% if isPreview %}
+    {{ Twig.if("legalInformation.htmlText | trim is not empty or legalInformation.plainText | trim is not empty or layoutContainerContent | trim is not empty") }}
+{% endif %}
 
 <div class="widget widget-legal-texts{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
@@ -41,6 +46,10 @@
             <p class="static-page-plain-text">{{ Twig.print("legalInformation.plainText") }}</p>
         {{ Twig.endif() }}
 
-        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::StaticPages.#{ layoutContainer }"])) }}
+        {{ Twig.print("layoutContainerContent") }}
     </div>
 </div>
+
+{% if isPreview %}
+    {{ Twig.endif() }}
+{% endif %}
