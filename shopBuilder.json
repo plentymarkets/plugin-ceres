@@ -157,6 +157,86 @@
             "options": {
                 "name": "Config.routingEnableRouteMyAccount"
             }
+        },
+        "cancellationRightsCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCancellationRights"
+            }
+        },
+        "cancellationRightsEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!cancellationRightsCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCancellationRights"
+            }
+        },
+        "cancellationFormCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCancellationForm"
+            }
+        },
+        "cancellationFormEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!cancellationFormCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCancellationForm"
+            }
+        },
+        "legalDisclosureCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryLegalDisclosure"
+            }
+        },
+        "legalDisclosureEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!legalDisclosureCategory",
+            "options": {
+                "name": "Config.routingEnableRouteLegalDisclosure"
+            }
+        },
+        "privacyPolicyCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryPrivacyPolicy"
+            }
+        },
+        "privacyPolicyEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!privacyPolicyCategory",
+            "options": {
+                "name": "Config.routingEnableRoutePrivacyPolicy"
+            }
+        },
+        "gtcCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryGtc"
+            }
+        },
+        "gtcEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!gtcCategory",
+            "options": {
+                "name": "Config.routingEnableRouteGtc"
+            }
         }
     },
     "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
