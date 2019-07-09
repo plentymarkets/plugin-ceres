@@ -41,53 +41,25 @@ export class MediaQueryHelperClass
     {
         let currentBreakpoint;
 
-        // FIX IE support
-        if (window.matchMedia)
+        if (document.documentElement.clientWidth >= 1200)
         {
-            if (window.matchMedia("(min-width:1200px)").matches)
-            {
-                currentBreakpoint = "xl";
-            }
-            else if (window.matchMedia("(min-width:992px)").matches)
-            {
-                currentBreakpoint = "lg";
-            }
-            else if (window.matchMedia("(min-width:768px)").matches)
-            {
-                currentBreakpoint = "md";
-            }
-            else if (window.matchMedia("(min-width:576px)").matches)
-            {
-                currentBreakpoint = "sm";
-            }
-            else
-            {
-                currentBreakpoint = "xs";
-            }
+            currentBreakpoint = "xl";
+        }
+        else if (document.documentElement.clientWidth >= 992)
+        {
+            currentBreakpoint = "lg";
+        }
+        else if (document.documentElement.clientWidth >= 768)
+        {
+            currentBreakpoint = "md";
+        }
+        else if (document.documentElement.clientWidth >= 576)
+        {
+            currentBreakpoint = "sm";
         }
         else
         {
-            // eslint-disable-next-line no-lonely-if
-            if (document.documentElement.clientWidth >= 1200)
-            {
-                currentBreakpoint = "xl";
-            }
-            else if (document.documentElement.clientWidth >= 992)
-            {
-                currentBreakpoint = "lg";
-            }
-            else if (document.documentElement.clientWidth >= 768)
-            {
-                currentBreakpoint = "md";
-            }
-            else if (document.documentElement.clientWidth >= 576)
-            {
-                currentBreakpoint = "sm";
-            }
-            else
-            {
-                currentBreakpoint = "xs";
-            }
+            currentBreakpoint = "xs";
         }
 
         return currentBreakpoint;
