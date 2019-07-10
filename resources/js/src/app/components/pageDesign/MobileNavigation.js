@@ -11,7 +11,8 @@ Vue.component("mobile-navigation", {
             dataContainer1: [],
             dataContainer2: [],
             useFirstContainer: false,
-            breadcrumbs: []
+            breadcrumbs: [],
+            isNavigationInitialized: false
         };
     },
 
@@ -84,6 +85,8 @@ Vue.component("mobile-navigation", {
             }
 
             this.dataContainer1 = this.navigationTree;
+
+            this.isNavigationInitialized = true;
         },
 
         initialSlide(currentCategory)
