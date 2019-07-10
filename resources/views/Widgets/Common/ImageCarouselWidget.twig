@@ -30,7 +30,7 @@
 
         {{ Twig.set("slide", "slide | merge({ name: category.details[0].name })") }}
         {{ Twig.set("slide", "slide | merge({ url: categoryUrl })") }}
-        {{ Twig.set("slide", "slide | merge({ imageUrl: \"documents/\" ~ category.details[0].imagePath })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: \"/documents/\" ~ category.details[0].imagePath })") }}
         {{ Twig.set("slide", "slide | merge({ imageAltText: category.details[0].name })") }}
 
         {% set pushCurrentSlide = true %}
