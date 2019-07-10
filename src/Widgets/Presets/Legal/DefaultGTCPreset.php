@@ -28,7 +28,7 @@ class DefaultGTCPreset implements ContentPreset
         $text .= '<h1 class="print-header">{{ trans("Ceres::Template.termsAndConditions", {"hyphen": "&shy;"}) }}</h1>';
         $text .= '{% endautoescape %}';
 
-        $this->preset->createWidget('Ceres::TextWidget')
+        $this->preset->createWidget('Ceres::CodeWidget')
                      ->withSetting("text", $text)
                      ->withSetting("appearance", "none")
                      ->withSetting("customPadding", true)
