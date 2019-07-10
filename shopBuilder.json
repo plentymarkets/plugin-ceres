@@ -138,14 +138,6 @@
         }
     ],
     "globalSettings": {
-        "shippingCategory": {
-            "type": "category",
-            "required": false,
-            "defaultValue": null,
-            "options": {
-                "name": "Config.globalShippingCostsCategoryIdLabel"
-            }
-        },
         "homeCategory": {
             "type": "category",
             "required": false,
@@ -272,6 +264,14 @@
             "isVisible": "!gtcCategory",
             "options": {
                 "name": "Config.routingEnableRouteGtc"
+            }
+        },
+        "shippingCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.globalShippingCostsCategoryIdLabel"
             }
         }
     },
