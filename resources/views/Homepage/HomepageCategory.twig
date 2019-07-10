@@ -6,7 +6,6 @@
         <div class="container-max">
             <div class="row">
                 <div class="col">
-                    <h1>test</h1>
                     {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
                         {{ content.result|raw }}
                     {% endfor %}
@@ -18,7 +17,6 @@
         <div class="container-max">
             <div class="row">
                 <div class="col">
-                    <h1>test 2</h1>
                     {{ shopBuilderTemplate | raw }}
                 </div>
             </div>
