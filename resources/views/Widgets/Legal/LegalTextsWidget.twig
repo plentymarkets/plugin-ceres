@@ -33,10 +33,6 @@
 {{ Twig.set("legalInformation", Twig.call(serviceMethod)) }}
 {{ Twig.set("layoutContainerContent", Twig.call("LayoutContainer.show", ["Ceres::StaticPages.#{ layoutContainer }"])) }}
 
-{% if isPreview %}
-    {{ Twig.if("legalInformation.htmlText | trim is not empty or legalInformation.plainText | trim is not empty or layoutContainerContent | trim is not empty") }}
-{% endif %}
-
 <div class="widget widget-legal-texts{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
@@ -48,8 +44,15 @@
 
         {{ Twig.print("layoutContainerContent") }}
     </div>
-</div>
 
-{% if isPreview %}
+    {{ Twig.if("legalInformation.htmlText | trim is empty and legalInformation.plainText | trim is empty and layoutContainerContent | trim is empty") }}
+        {% if isPreview %}
+            <div class="widget-placeholder pb-50">
+                <div>
+                    <p class="title mb-0">{{ Twig.trans("Ceres::Widget.legalTextsPlaceholderTitle") }}</p>
+                    <p class="description mt-3">{{ Twig.trans("Ceres::Widget.legalTextsPlaceholderDescription") }}</p>
+                </div>
+            </div>
+        {% endif %}
     {{ Twig.endif() }}
-{% endif %}
+</div>
