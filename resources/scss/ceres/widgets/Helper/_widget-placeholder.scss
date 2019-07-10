@@ -5,16 +5,6 @@
     position: relative;
     background-color: $gray-lighter;
 
-    &.pb-25 {
-        padding-bottom: 25%;
-    }
-    &.pb-50 {
-        padding-bottom: 50%;
-    }
-    &.pb-150 {
-        padding-bottom: 150%;
-    }
-
     > div
     {
         position: absolute;
