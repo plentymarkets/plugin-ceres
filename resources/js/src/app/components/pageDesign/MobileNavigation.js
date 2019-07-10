@@ -85,7 +85,6 @@ Vue.component("mobile-navigation", {
             }
 
             this.dataContainer1 = this.navigationTree;
-
             this.isNavigationInitialized = true;
         },
 
