@@ -2,14 +2,28 @@
 
 {% block PageBody %}
 
-    {% set shopBuilderTemplate = shop_builder_category_template(category.id) %}
-
-    <div class="container-max">
-        <div class="row">
-            <div class="col">
-                {{ shopBuilderTemplate | raw }}
+    {% if ceresConfig.homepage.showShopBuilderContent and request.get('isContentBuilder') == 1 %}
+        <div class="container-max">
+            <div class="row">
+                <div class="col">
+                    <h1>test</h1>
+                    {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
+                        {{ content.result|raw }}
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
+    {% else %}
+        {% set shopBuilderTemplate = shop_builder_category_template(category.id) %}
+        <div class="container-max">
+            <div class="row">
+                <div class="col">
+                    <h1>test 2</h1>
+                    {{ shopBuilderTemplate | raw }}
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
 
 {% endblock %}
