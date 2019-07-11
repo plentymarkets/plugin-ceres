@@ -16,7 +16,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "visibleFields": {
@@ -125,7 +125,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -210,7 +210,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -295,7 +295,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -426,7 +426,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "spacing": {
@@ -471,7 +471,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -591,7 +591,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -696,7 +696,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -827,7 +827,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "spacing": {
@@ -872,7 +872,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -977,7 +977,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "emailFolder": {
@@ -1064,7 +1064,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1174,7 +1174,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1311,7 +1311,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1514,7 +1514,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1703,7 +1703,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1813,7 +1813,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -2185,7 +2185,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "title": {
@@ -2356,7 +2356,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "title": {
@@ -2556,7 +2556,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "liveShoppingSelection": {
@@ -2804,7 +2804,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -2911,7 +2911,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -3042,7 +3042,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "margin": {
@@ -3077,7 +3077,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -3185,7 +3185,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -3290,7 +3290,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -3879,7 +3879,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "showCancellationRights": {
@@ -4013,7 +4013,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             }
         }
@@ -4035,7 +4035,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             }
         }
@@ -4057,7 +4057,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -4191,7 +4191,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "layout": {
@@ -4254,7 +4254,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "layout": {
@@ -4399,7 +4399,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "isFixed": {
@@ -4461,7 +4461,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "isFixed": {
@@ -4627,7 +4627,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "isFixed": {
@@ -4784,7 +4784,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -4915,7 +4915,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5005,7 +5005,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5090,7 +5090,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5195,7 +5195,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "spacing": {
@@ -5259,7 +5259,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5364,7 +5364,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "spacing": {
@@ -5486,7 +5486,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5601,7 +5601,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "showCrossPrice": {
@@ -5698,7 +5698,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5805,7 +5805,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "spacing": {
@@ -5884,7 +5884,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5988,7 +5988,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -6073,7 +6073,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "salutation": {
@@ -6144,7 +6144,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -6276,7 +6276,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -6408,7 +6408,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
