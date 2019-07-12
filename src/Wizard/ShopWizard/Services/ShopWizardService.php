@@ -136,7 +136,7 @@ class ShopWizardService
 
 
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
-            $data['setAllRequiredAssistants'] = '';
+            $data['setAllRequiredAssistants'] = 'true';
         }
 
         return $data;
