@@ -1,11 +1,10 @@
 {% set formFieldId   = uid() %}
-{% set width         = widget.settings.width.mobile %}
 {% set isRequired    = widget.settings.isRequired.mobile %}
 {% set label         = widget.settings.label.mobile %}
 {% set isMailSubject = widget.settings.isMailSubject.mobile %}
 {% set isReplyToName = widget.settings.isReplyToName.mobile %}
 
-<div class="col-xs-12 col-md-{{ width }}">
+<div class="col-12">
     <div class="input-unit{% if isRequired %} required{% endif %}">
         <input
             name="{{ formFieldId }}"

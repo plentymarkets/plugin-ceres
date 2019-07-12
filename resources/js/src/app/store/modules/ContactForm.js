@@ -2,8 +2,8 @@ import ValidationService from "services/ValidationService";
 import NotificationService from "services/NotificationService";
 import TranslationService from "services/TranslationService";
 import ApiService from "services/ApiService";
-import {serializeForm, getLabel} from "../../helper/serializeForm";
-import {isMail} from "../../helper/strings";
+import { serializeForm, getLabel } from "../../helper/serializeForm";
+import { isMail } from "../../helper/strings";
 
 function readFormOptions(form, formData)
 {
@@ -126,19 +126,19 @@ const actions =
                             replyTo: formOptions.replyTo
                         }
                     )
-                    .done(reponse =>
-                    {
-                        event.target.reset();
-                        NotificationService.success(
-                            TranslationService.translate("Ceres::Template.contactSendSuccess")
-                        );
-                    })
-                    .fail(response =>
-                    {
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactSendFail")
-                        );
-                    });
+                        .done(reponse =>
+                        {
+                            event.target.reset();
+                            NotificationService.success(
+                                TranslationService.translate("Ceres::Template.contactSendSuccess")
+                            );
+                        })
+                        .fail(response =>
+                        {
+                            NotificationService.error(
+                                TranslationService.translate("Ceres::Template.contactSendFail")
+                            );
+                        });
                 })
                 .fail(invalidFields =>
                 {
@@ -151,7 +151,7 @@ const actions =
 
                     ValidationService.markInvalidFields(invalidFields, "error");
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", {fields: fieldNames.join(", ")})
+                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
                     );
                 });
         }

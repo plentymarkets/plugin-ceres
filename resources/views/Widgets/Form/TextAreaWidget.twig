@@ -1,11 +1,10 @@
 {% set formFieldId  = uid() %}
-{% set width        = widget.settings.width.mobile %}
 {% set isRequired   = widget.settings.isRequired.mobile %}
 {% set label        = widget.settings.label.mobile %}
 {% set fixedHeight  = widget.settings.fixedHeight.mobile %}
 {% set rows         = widget.settings.rows.mobile %}
 
-<div class="col-xs-12 col-md-{{ width }}">
+<div class="col-12">
     <div class="input-unit{% if isRequired %} required{% endif %} textarea">
         <textarea
                 name="{{ formFieldId }}"

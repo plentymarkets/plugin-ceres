@@ -1,4 +1,4 @@
-import {isDefined}from "./utils";
+import { isDefined } from "./utils";
 
 function _readElement(inputElement)
 {
@@ -22,6 +22,7 @@ function _readElement(inputElement)
     else if (inputElement.type === "radio")
     {
         const selectedRadio = document.querySelector("[name=\"" + name + "\"]:checked");
+
         value = selectedRadio ? getLabel(selectedRadio) : null;
         label = getLabelForId(name);
     }
