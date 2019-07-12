@@ -92,7 +92,15 @@
 
     {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
         {# Item template is configured for the item #}
-        {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
+        {% set template %}
+            {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
+        {% endset %}
+
+        {% if template | trim is not empty %}
+            {{ template }}
+        {% else %}
+            {% include "Ceres::Item.SingleItemView" %}
+        {% endif %}
 
     {% elseif shopBuilderTemplate | trim is not empty or isShopBuilder %}
         {# Shopbuilder template #}
