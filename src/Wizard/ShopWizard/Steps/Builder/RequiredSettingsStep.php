@@ -25,16 +25,12 @@ class RequiredSettingsStep extends Step
         $hasPaymentMethod = $shopWizardService->hasPaymentMethods();
         $hasShippingCountry = $shopWizardService->hasShippingCountries();
         $hasLocation = $shopWizardService->hasLocations();
-        $showFirstStep = true;
 
-        if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry && $hasLocation) {
-            $showFirstStep = false;
-        }
 
         return [
             "title" => "Wizard.reqSettings",
             "description" => "Wizard.reqSettingsDescription",
-            "condition" => $showFirstStep,
+            "condition" => !$this->hasRequiredSettings(),
             "validationClass" => "Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator",
             "sections" => [
                 $this->generateSection("shippingMethod", $hasShippingMethod, "/rest/wizards/plugin_install"),

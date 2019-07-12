@@ -8,6 +8,7 @@
 
 namespace Ceres\Wizard\ShopWizard\DataSource;
 
+use Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator;
 use Plenty\Modules\Wizard\Services\DataSources\BaseWizardDataSource;
 use Ceres\Wizard\ShopWizard\Services\ShopWizardService;
 
@@ -21,13 +22,20 @@ class ShopWizardDataSource extends BaseWizardDataSource
     private $wizardService;
 
     /**
+     * @var RequiredSettingsDataValidator
+     */
+    private $requiredSettingsDataValidator;
+
+    /**
      * ShopWizardDataSource constructor.
      *
      * @param ShopWizardService $wizardService
+     * @param RequiredSettingsDataValidator $settingsDataValidator
      */
-    public function __construct(ShopWizardService $wizardService)
+    public function __construct(ShopWizardService $wizardService, RequiredSettingsDataValidator $settingsDataValidator)
     {
         $this->wizardService = $wizardService;
+        $this->requiredSettingsDataValidator = $settingsDataValidator;
     }
 
 
@@ -73,6 +81,14 @@ class ShopWizardDataSource extends BaseWizardDataSource
         $dataStructure['data'] = (object) $this->wizardService->mapWebstoreData($webstoreId, $pluginSetId);
 
         return $dataStructure;
+    }
+
+    /**
+     * @param string $optionId
+     * @param array $data
+     */
+    public function finalize(string $optionId = 'default', array $data = []) {
+        $this->requiredSettingsDataValidator->validateOrFail($data);
     }
 
 }

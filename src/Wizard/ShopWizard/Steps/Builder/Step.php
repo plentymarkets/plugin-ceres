@@ -8,9 +8,7 @@
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
-
-
-use Plenty\Plugin\Http\Request;
+use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 
 class Step
 {
@@ -49,5 +47,47 @@ class Step
         }
 
         return $listBoxValues;
+    }
+
+    /**
+     * @param array $data
+     * @param string $translation
+     *
+     * @return array
+     */
+    public function generateTranslatedListBoxValues(array $data): array
+    {
+        $listValues = [];
+
+        foreach ($data as $itemKey => $itemVal) {
+            $listValues[] = [
+                "value" => $itemVal,
+                "caption" => "Wizard.{$itemKey}"
+            ];
+        }
+
+        return $listValues;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRequiredSettings(): bool
+    {
+        $hasSettings = false;
+
+        $shopWizardService = pluginApp(DefaultSettingsService::class);
+
+        $hasShippingMethod = $shopWizardService->hasShippingMethods();
+        $hasShippingProfile = $shopWizardService->hasShippingProfiles();
+        $hasPaymentMethod = $shopWizardService->hasPaymentMethods();
+        $hasShippingCountry = $shopWizardService->hasShippingCountries();
+        $hasLocation = $shopWizardService->hasLocations();
+
+        if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry && $hasLocation) {
+            $hasSettings = true;
+        }
+
+        return $hasSettings;
     }
 }

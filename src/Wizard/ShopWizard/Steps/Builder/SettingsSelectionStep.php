@@ -21,6 +21,7 @@ class SettingsSelectionStep extends Step
         return [
             "title" => "Wizard.settingsSelection",
             "description" => "Wizard.settingsSelectionDescription",
+            "condition" => $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateSection("displayedInfo"),
                 $this->generateSection("paginationSorting"),

@@ -132,7 +132,7 @@ class CurrencyStep extends Step
                 ],
                 "currencies_availableCurrencies" => [
                     "type" => "checkboxGroup",
-                    "isVisible" => "currencies_allowCurrencyChange !== false",
+                    "isVisible" => "typeof currencies_allowCurrencyChange === 'undefined' || currencies_allowCurrencyChange === true",
                     "defaultValue" => array_values($availableCurrencies),
                     "options" => [
                         "name" => "Wizard.activateCurrencies",

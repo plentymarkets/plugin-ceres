@@ -19,6 +19,7 @@ class OnlineStoreStep extends Step
         return [
             "title" => "Wizard.onlineStoreSettings",
             "description" => "Wizard.onlineStoreSettingsDescription",
+            "condition" => $this->hasRequiredSettings(),
             "sections" => [
                 $this->buildStoreNameStructure(),
                 $this->buildStoreFaviconStructure(),
@@ -29,26 +30,6 @@ class OnlineStoreStep extends Step
                 $this->buildStoreCalistoSettings(),
             ]
         ];
-    }
-
-    /**
-     * @param array $data
-     * @param string $translation
-     *
-     * @return array
-     */
-    private function generateListBoxValues(array $data): array
-    {
-        $listValues = [];
-
-        foreach ($data as $itemKey => $itemVal) {
-            $listValues[] = [
-                "value" => $itemVal,
-                "caption" => "Wizard.{$itemKey}"
-            ];
-        }
-
-        return $listValues;
     }
 
     /**
@@ -93,7 +74,7 @@ class OnlineStoreStep extends Step
     private function buildStoreCategoryTypesStructure(): array
     {
         $catTypes = ConfigHelper::getCategoryTypes();
-        $categoryTypes = $this->generateListBoxValues($catTypes);
+        $categoryTypes = $this->generateTranslatedListBoxValues($catTypes);
 
         return [
             "title" => "Wizard.storeCategoryTypes",
@@ -117,7 +98,7 @@ class OnlineStoreStep extends Step
     private function buildStoreBack2Top()
     {
         $top2bottomPositions = ConfigHelper::getToTopButtonPosition();
-        $positions = $this->generateListBoxValues($top2bottomPositions);
+        $positions = $this->generateTranslatedListBoxValues($top2bottomPositions);
 
         return [
             "title" => "Wizard.back2Top",
@@ -140,9 +121,9 @@ class OnlineStoreStep extends Step
     private function buildStoreEmailSettings()
     {
         $confirmationLinkExpiration = ConfigHelper::getConfirmationLinkExpiration();
-        $confirmationList = $this->generateListBoxValues($confirmationLinkExpiration);
+        $confirmationList = $this->generateTranslatedListBoxValues($confirmationLinkExpiration);
         $globaUserHashMax = ConfigHelper::getUserHashMaxAge();
-        $globaUserHashMaxList = $this->generateListBoxValues($globaUserHashMax);
+        $globaUserHashMaxList = $this->generateTranslatedListBoxValues($globaUserHashMax);
 
         return [
             "title" => "Wizard.emailSettings",
@@ -181,7 +162,7 @@ class OnlineStoreStep extends Step
     private function buildStoreOrderSettings()
     {
         $itemBundles = ConfigHelper::getItemBundles();
-        $itemBundlesList = $this->generateListBoxValues($itemBundles);
+        $itemBundlesList = $this->generateTranslatedListBoxValues($itemBundles);
         return [
             "title" => "Wizard.ordersSettings",
             "description" => "Wizard.emailSettingsDescription",
@@ -223,7 +204,7 @@ class OnlineStoreStep extends Step
             "description" => "Wizard.settingsOldCalistoDescription",
             "form" => [
                 "onlineStore_enableCalisto" => [
-                    "type" => "toggle",
+                    "type" => "checkbox",
                     "defaultValue" => false,
                     "options" => [
                         "name" => "Wizard.enableCalisto"

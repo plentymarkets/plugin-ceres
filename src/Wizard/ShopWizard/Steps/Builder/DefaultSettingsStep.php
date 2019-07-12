@@ -71,14 +71,14 @@ class DefaultSettingsStep extends Step
         $shippingMethods = $wizardService->getShippingMethods();
         $shippingMethodsList = $this->buildListBoxData($shippingMethods);
 
-        $languages = $wizardService->getLanguages();
+        $languages = LanguagesHelper::getTranslatedLanguages();
         $languagesList = $this->buildListBoxData($languages);
 
         $shippingProfiles = $wizardService->getShippingProfiles();
         $shippingProfilesList = $this->buildListBoxData($shippingProfiles);
 
-        $paymentMethods = $this->paymentRepository->allPluginPaymentMethods();
-        $paymentMethodsList = $this->buildListBoxData($paymentMethods, "name", "id");
+        $paymentMethods = $wizardService->getPluginPaymentMethodsRegistered();
+        $paymentMethodsList = $this->buildListBoxData($paymentMethods);
 
         $deliveryCountries = $this->countryRepository->getActiveCountriesList();
 
@@ -91,6 +91,7 @@ class DefaultSettingsStep extends Step
         return [
             "title" => "Wizard.defaultSettings",
             "description" => "Wizard.defaultSettingsDescription",
+            "condition" => $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateSection("defaultLanguage", $languagesList, $this->globalsCondition),
                 $this->generateSection("defaultShippingMethod", $shippingMethodsList, $this->globalsCondition),
@@ -176,8 +177,7 @@ class DefaultSettingsStep extends Step
         if (count($countriesCollection)) {
             foreach ($countriesCollection as $country) {
                 $countryData = $country->toArray();
-                $langs = LanguagesHelper::getLanguages();
-                $languages = LanguagesHelper::translateLanguages($langs);
+                $languages = LanguagesHelper::getTranslatedLanguages();
                 $key = 'defSettings_deliveryCountry_' . $countryData['lang'];
                 $list[$key] = [
                     "type" => "select",

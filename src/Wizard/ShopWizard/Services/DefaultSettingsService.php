@@ -13,7 +13,8 @@ use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
 use Plenty\Modules\Order\Shipping\Contracts\ParcelServicePresetRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Order\Shipping\ParcelService\Models\ParcelService;
-use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
+use Plenty\Modules\Payment\Method\Contracts\PaymentMethodContainer;
+use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 
@@ -49,7 +50,7 @@ class DefaultSettingsService
      */
     public function __construct(
         ParcelServicePresetRepositoryContract $parcelServicePresetRepo,
-        PaymentRepositoryContract $paymentRepository,
+        PaymentMethodRepositoryContract $paymentRepository,
         CountryRepositoryContract $countryRepository,
         AccountingLocationRepositoryContract $accountingLocationRepo
     ){
@@ -74,9 +75,32 @@ class DefaultSettingsService
      */
     public function hasPaymentMethods(): bool
     {
-        $paymentMethods = $this->paymentRepository->getAll();
 
-        return count($paymentMethods) ? true : false;
+        $pluginPaymentMethodsRegistered = $this->getPluginPaymentMethodsRegistered();
+
+        return count($pluginPaymentMethodsRegistered) ? true : false;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPluginPaymentMethodsRegistered():array
+    {
+        $paymentMethods = $this->paymentRepository->allPluginPaymentMethods();
+
+        $paymentMethodContainer = pluginApp(PaymentMethodContainer::class);
+
+        $pluginPaymentMethodsRegistered = [];
+        if (count($paymentMethods)) {
+            foreach ($paymentMethods as $paymentMethod) {
+                $registeringKey = $paymentMethod->pluginKey . "::" . $paymentMethod->paymentKey;
+                if ($paymentMethodContainer->isRegistered($registeringKey)) {
+                    $pluginPaymentMethodsRegistered[$paymentMethod->id] = $paymentMethod->name;
+                }
+            }
+        }
+
+        return $pluginPaymentMethodsRegistered;
     }
 
     /**
@@ -166,16 +190,5 @@ class DefaultSettingsService
             }
         }
         return $webstores;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLanguages()
-    {
-        $allLanguages = LanguagesHelper::getLanguages();
-        $languages = LanguagesHelper::translateLanguages($allLanguages);
-
-        return $languages;
     }
 }

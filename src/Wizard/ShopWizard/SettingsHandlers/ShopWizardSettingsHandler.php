@@ -8,7 +8,9 @@
 
 namespace Ceres\Wizard\ShopWizard\SettingsHandlers;
 
+use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Services\MappingService;
+use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
@@ -20,12 +22,17 @@ use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
 
 class ShopWizardSettingsHandler implements WizardSettingsHandler
 {
-
+    /**
+     * @var CountryRepositoryContract
+     */
     private $countryRepository;
 
-    public function __construct(CountryRepositoryContract $countryRepository)
+    private $currencyRepository;
+
+    public function __construct(CountryRepositoryContract $countryRepository, CurrencyRepositoryContract $currencyRepositoryContract)
     {
         $this->countryRepository = $countryRepository;
+        $this->currencyRepository = $currencyRepositoryContract;
     }
 
     public function handle(array $parameters)
@@ -56,7 +63,10 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 $plentyId = $store->storeIdentifier;
                 $shippingCountryList = [];
                 $deliveryCountries = $this->countryRepository->getActiveCountriesList();
+                $currencies = $this->currencyRepository->getCurrencyList();
+                $currenciesList = [];
 
+                //create default country list
                 if (count($deliveryCountries)) {
                     foreach ($deliveryCountries as $country) {
                         $countryData = $country->toArray();
@@ -67,14 +77,31 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                         }
                     }
                 }
+
+                //create default currencies list
+                if (count($currencies)) {
+                    $languages = LanguagesHelper::getTranslatedLanguages();
+                    foreach ($languages as $langCode => $language) {
+                        $key = 'currencies_defaultCurrency_' . $langCode;
+
+                        if (!empty($data[$key])) {
+                            $currenciesList[$langCode] = $data[$key];
+                        }
+                    }
+                }
+
                 $mappingService = pluginApp(MappingService::class);
 
                 $shippingData = [
                     "defaultShippingCountryList" => $shippingCountryList
                 ];
+
+                $currenciesData = [
+                    "defaultCurrencyList" => $currenciesList
+                ];
                 $globalData = $mappingService->processGlobalMappingData($data, "store");
 
-                $webstoreData = array_merge($shippingData, $globalData);
+                $webstoreData = array_merge($shippingData, $currenciesData, $globalData);
 
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
             }
