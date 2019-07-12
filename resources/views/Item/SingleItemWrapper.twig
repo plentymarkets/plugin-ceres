@@ -85,11 +85,6 @@
         {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, "singleitem") %}
     {% endif %}
 
-    {% if shopBuilderTemplate | trim is empty %}
-        {# No item template for default category found => use global item template #}
-        {% set shopBuilderTemplate = LayoutContainer.show("Ceres::SingleItemGlobal") %}
-    {% endif %}
-
     {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
         {# Item template is configured for the item #}
         {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
