@@ -7,43 +7,52 @@
     "position": 600,
     "widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
             "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "aspectRatio": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "auto",
             "options": {
-                "name": "Widget.widgetAppearanceLabel",
-                "tooltipText": "Widget.widgetAppearanceTooltip",
+                "name": "Widget.imageBoxAspectRatioLabel",
+                "tooltipText": "Widget.imageBoxAspectRatioTooltip",
                 "listBoxValues": [
                     {
-                        "value": "primary",
-                        "caption": "Widget.widgetAppearancePrimary",
-                        "position": 0
+                        "value": "auto",
+                        "caption": "Widget.imageBoxAspectRatioAuto"
                     },
                     {
-                        "value": "secondary",
-                        "caption": "Widget.widgetAppearanceSecondary",
-                        "position": 1
+                        "value": "3-1",
+                        "caption": "Widget.imageBoxAspectRatioThreeToOne"
                     },
                     {
-                        "value": "success",
-                        "caption": "Widget.widgetAppearanceSuccess",
-                        "position": 2
+                        "value": "2-1",
+                        "caption": "Widget.imageBoxAspectRatioTwoToOne"
                     },
                     {
-                        "value": "info",
-                        "caption": "Widget.widgetAppearanceInfo",
-                        "position": 3
+                        "value": "3-2",
+                        "caption": "Widget.imageBoxAspectRatioThreeToTwo"
                     },
                     {
-                        "value": "warning",
-                        "caption": "Widget.widgetAppearanceWarning",
-                        "position": 4
+                        "value": "1-1",
+                        "caption": "Widget.imageBoxAspectRatioOneToOne"
                     },
                     {
-                        "value": "danger",
-                        "caption": "Widget.widgetAppearanceDanger",
-                        "position": 5
+                        "value": "2-3",
+                        "caption": "Widget.imageBoxAspectRatioTwoToThree"
+                    },
+                    {
+                        "value": "1-2",
+                        "caption": "Widget.imageBoxAspectRatioOneToTwo"
+                    },
+                    {
+                        "value": "1-3",
+                        "caption": "Widget.imageBoxAspectRatioOneToThree"
                     }
                 ]
             }
@@ -79,16 +88,6 @@
                 ]
             }
         },
-        "headline": {
-            "type": "text",
-            "required": false,
-            "isVisible": "style === 'block-caption' || style === 'inline-caption' || style === 'fullwidth'",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.imageBoxHeadlineLabel",
-                "tooltipText": "Widget.imageBoxHeadlineTooltip"
-            }
-        },
         "imageSize": {
             "type": "select",
             "required": true,
@@ -110,22 +109,18 @@
                 ]
             }
         },
-        "categoryId": {
-            "type": "category",
+        "url": {
+            "type": "url",
             "required": false,
-            "defaultValue": "",
             "options": {
-                "name": "Widget.imageBoxCategoryIdLabel",
-                "tooltipText": "Widget.imageBoxCategoryIdTooltip"
+                "name": "Widget.imageBoxUrlLabel"
             }
         },
-        "variationId": {
-            "type": "number",
-            "required": false,
-            "defaultValue": "",
+        "customCaption": {
+            "type": "checkbox",
+            "isVisible": "style !== 'no-caption'",
             "options": {
-                "name": "Widget.imageBoxVariationIdLabel",
-                "tooltipText": "Widget.imageBoxVariationIdTooltip"
+                "name": "Widget.imageBoxCustomCaption"
             }
         },
         "customImagePath": {
@@ -136,6 +131,7 @@
                 "name": "Widget.imageBoxCustomImagePathLabel",
                 "tooltipText": "Widget.imageBoxCustomImagePathTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

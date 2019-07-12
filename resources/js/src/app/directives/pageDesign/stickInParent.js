@@ -1,63 +1,47 @@
-const stickInParent = (el, minWidth, isActive) =>
-{
-    const currentActiveState = el.dataset.isSticky === "true";
-    const isInSize = window.matchMedia("(min-width: " + minWidth + "px)").matches;
-
-    const activeState = !(isActive === false) && isInSize;
-
-    if (activeState && !currentActiveState)
-    {
-        const $element = $(el);
-        const headHeight = $("#page-header").height();
-
-        if ($element.stick_in_parent({ offset_top: headHeight + 10 }))
-        {
-            el.dataset.isSticky = true;
-        }
-    }
-    else if (!activeState && currentActiveState)
-    {
-        el.dataset.isSticky = false;
-        $(el).trigger("sticky_kit:detach");
-    }
-
-};
+import { isNullOrUndefined } from "../../helper/utils";
+import { StickyElement } from "../../helper/StickyElement";
 
 Vue.directive("stick-in-parent",
     {
-        bind(el, binding)
+        bind(el, binding, vnode)
         {
-            window.addEventListener("resize", () =>
-            {
-                stickInParent(el, parseInt(binding.arg) || 768);
-            });
+            el.__sticky = new StickyElement(
+                el,
+                vnode.context,
+                parseInt(binding.arg) || 768
+            );
 
-            setTimeout(() =>
+            if (binding.value === false)
             {
-                stickInParent(
-                    el,
-                    parseInt(binding.arg) || 768,
-                    binding.value
-                );
-            }, 0);
+                el.__sticky.disable();
+            }
+            else
+            {
+                el.__sticky.enable();
+            }
         },
         update(el, binding)
         {
-            setTimeout(() =>
+            if (!isNullOrUndefined(el.__sticky))
             {
-                stickInParent(
-                    el,
-                    parseInt(binding.arg) || 768,
-                    binding.value
-                );
-            }, 0);
+                el.__sticky.minWidth = parseInt(binding.arg) || 768;
+                if (binding.value === false)
+                {
+                    el.__sticky.disable();
+                }
+                else
+                {
+                    el.__sticky.enable();
+                }
+                el.__sticky.checkMinWidth();
+            }
         },
         unbind(el)
         {
-            stickInParent(
-                el,
-                0,
-                false
-            );
+            if (!isNullOrUndefined(el.__sticky))
+            {
+                el.__sticky.destroy();
+                el.__sticky = null;
+            }
         }
     });

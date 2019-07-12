@@ -1,12 +1,28 @@
 Vue.component("basket-totals", {
 
-    delimiters: ["${", "}"],
-
     props:
     {
         template:
         {
-            type: String
+            type: String,
+            default: "#vue-basket-totals"
+        },
+        visibleFields:
+        {
+            type: Array,
+            default: () => [
+                "basketValueNet",
+                "basketValueGross",
+                "rebate",
+                "shippingCostsNet",
+                "shippingCostsGross",
+                "totalSumNet",
+                "promotionCoupon",
+                "vats",
+                "totalSumGross",
+                "salesCoupon",
+                "openAmount"
+            ]
         }
     },
 
@@ -21,10 +37,5 @@ Vue.component("basket-totals", {
         {
             return (value / (100 - percent)) * 100;
         }
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     }
 });

@@ -1,17 +1,41 @@
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
+const ApiService = require("services/ApiService");
+const NotificationService = require("services/NotificationService");
 
-import TranslationService from "services/TranslationService";
+import { isDefined } from "../../helper/utils";
 import { navigateTo } from "services/UrlService";
 
 Vue.component("place-order", {
-
-    delimiters: ["${", "}"],
-
-    props: [
-        "targetContinue",
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-place-order"
+        },
+        targetContinue:
+        {
+            type: String
+        },
+        buttonSize:
+        {
+            type: [String, null],
+            default: null,
+            validator: value =>
+            {
+                return ["sm", "lg"].indexOf(value) !== -1;
+            }
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        }
+    },
 
     data()
     {
@@ -20,18 +44,51 @@ Vue.component("place-order", {
         };
     },
 
-    computed: Vuex.mapState({
-        checkoutValidation: state => state.checkout.validation,
-        contactWish: state => state.checkout.contactWish,
-        isBasketLoading: state => state.basket.isBasketLoading,
-        basketItemQuantity: state => state.basket.data.itemQuantity,
-        isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
-        shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted
-    }),
-
-    created()
+    computed:
     {
-        this.$options.template = this.template;
+        buttonClasses()
+        {
+            const classes = [];
+
+            if (isDefined(this.buttonSize))
+            {
+                classes.push(`btn-${this.buttonSize}`);
+            }
+
+            if (isDefined(this.paddingClasses))
+            {
+                classes.push(this.paddingClasses.split(" "));
+            }
+
+            return classes;
+        },
+
+        activeNewsletterSubscriptions()
+        {
+            const activeNewsletterSubscriptions = [];
+
+            for (const emailFolder in this.newsletterSubscription)
+            {
+                const emailFolderValue = this.newsletterSubscription[emailFolder];
+
+                if (emailFolderValue)
+                {
+                    activeNewsletterSubscriptions.push(emailFolder);
+                }
+            }
+
+            return activeNewsletterSubscriptions;
+        },
+
+        ...Vuex.mapState({
+            checkoutValidation: state => state.checkout.validation,
+            contactWish: state => state.checkout.contactWish,
+            isBasketLoading: state => state.basket.isBasketLoading,
+            basketItemQuantity: state => state.basket.data.itemQuantity,
+            isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
+            shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
+            newsletterSubscription: state => state.checkout.newsletterSubscription
+        })
     },
 
     methods: {
@@ -40,7 +97,11 @@ Vue.component("place-order", {
             this.waiting = true;
 
             const url = "/rest/io/order/additional_information";
-            const params = { orderContactWish: this.contactWish, shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted };
+            const params = {
+                orderContactWish: this.contactWish,
+                shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
+                newsletterSubscriptions: this.activeNewsletterSubscriptions
+            };
             const options = { supressNotifications: true };
 
             ApiService.post(url, params, options)
@@ -68,9 +129,6 @@ Vue.component("place-order", {
             }
             else
             {
-                NotificationService.error(
-                    TranslationService.translate("Ceres::Template.checkoutCheckEntries")
-                );
                 this.waiting = false;
             }
         },
@@ -97,8 +155,8 @@ Vue.component("place-order", {
 
         afterPreparePayment(response)
         {
-            var paymentType = response.type || "errorCode";
-            var paymentValue = response.value || "";
+            const paymentType = response.type || "errorCode";
+            const paymentValue = response.value || "";
 
             switch (paymentType)
             {
@@ -111,11 +169,11 @@ Vue.component("place-order", {
                 }
                 break;
             case "redirectUrl":
-                    // redirect to given payment provider
+                // redirect to given payment provider
                 window.location.assign(paymentValue);
                 break;
             case "externalContentUrl":
-                    // show external content in iframe
+                // show external content in iframe
                 this.showModal(paymentValue, true);
                 break;
             case "htmlContent":

@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from "../../helper/utils";
 
-var NotificationService = require("services/NotificationService");
+const NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
 
@@ -16,11 +16,6 @@ Vue.component("notifications", {
         return {
             notifications: []
         };
-    },
-
-    created: function()
-    {
-        this.$options.template = this.template;
     },
 
     mounted: function()

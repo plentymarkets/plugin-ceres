@@ -1,0 +1,18 @@
+{
+    "identifier": "Ceres::AccountSettingsWidget",
+    "label": "Widget.myAccountAccountSettingsLabel",
+    "previewImageURL": "/images/widgets/account-settings.svg",
+    "type": "myaccount",
+    "categories": ["myaccount"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": { 
+            "type": "select", 
+            "defaultValue": "primary", 
+            "options": "@include(appearance)" 
+        },
+        "spacing":"@include(spacing)"
+    }
+}

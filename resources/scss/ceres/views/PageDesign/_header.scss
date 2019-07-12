@@ -1,4 +1,3 @@
-//header scss
 .unfixed
 {
 	left: 0;
@@ -6,15 +5,14 @@
 }
 
 .top-bar{
-
 	@media print {
 		display: none;
 	}
 
 	width: 100%;
-	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
+
 	a:not(.btn) {
 		text-decoration: none;
 		color: $top-bar-color;
@@ -24,16 +22,24 @@
 	.search-shown {
 		display: flex;
 		flex: 1;
+
 		@include media-breakpoint-up(md) {
 			justify-content: space-between;
 			align-items: center;
+
+			.controls {
+				.anicon,
+				a:not(.btn) {
+					padding: 1rem .8rem;
+				}
+			}
 		}
 		@include media-breakpoint-down(sm) {
 			flex-direction: column-reverse;
 		}
 
 		.always-visible-search {
-			margin: 5px 5px;
+			margin: 5px;
 			background-color: $white;
 			flex: 1;
 			
@@ -61,17 +67,10 @@
 				}
 			}
 		}
+	}
 
-		.controls-list {
-
-			&>li {
-				@include media-breakpoint-up(md) {
-					a:not(.btn) {
-						padding: 1rem .8rem;
-					}
-				}
-			}
-		}
+	.account-menu {
+		min-width: 100%;
 	}
 
 	&.fixed-top {
@@ -90,24 +89,14 @@
 			color: $gray-lighter;
 			margin-right: 0;
 
-			// sets the height of the top-bar
+			a:not(.btn) {
+				padding: 0.5rem .8rem;
+				display: inline-block;
+				color: $gray-lighter;
 
-				a:not(.btn) {
-					padding: 0.5rem .8rem;
-					display: inline-block;
-					color: $gray-lighter;
-
-					&:hover {
-						@include context-bg($primary);
-					}
+				&:hover {
+					@include context-bg($primary);
 				}
-
-			@include media-breakpoint-down(md) {
-				.anicon,
-				a:not(.btn) {
-					padding: 0.5rem .8rem;
-				}
-
 			}
 
 			// icons should be slightly larger
@@ -122,7 +111,6 @@
 
 		.control-user{
 			flex: 1 0 auto;
-			margin-left: 1rem;
 			//login | register
 			#login-change {
 				position:relative;
@@ -193,10 +181,6 @@
 						}
 					}
 				}
-			}
-			.account-menu {
-				padding:0;
-				margin:0;
 			}
 		}
 
@@ -286,6 +270,7 @@
 	#page-header {
 		background-color:$navbar-background-color;
 		box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
+		backface-visibility: hidden;
 
 		&.top-bar {
 			background-color: $top-bar-bg;
@@ -380,7 +365,6 @@
 
 .navbar {
 	padding:0;
-	z-index: $zindex-navbar;
 	background-color: $navbar-background-color;
 	border-bottom: 1px solid $gray-lighter;
 
@@ -388,7 +372,6 @@
 
 		border-radius: 0;
 		padding:0;
-		z-index: $zindex-navbar;
 		border-bottom: 1px solid $gray-lighter;
 
 		.dropdown:hover .dropdown-menu {
@@ -402,11 +385,9 @@
 	position: relative;
 	padding:0 15px;
 	display: block;
-	width: 100%;
 }
 
 .navbar-brand {
-
 	float: none;
 	padding: .5rem 0;
   	display: inline-block;
@@ -446,7 +427,47 @@
 	transform: translate(0, -50%);
 }
 
-// Mobile only
+.wrapper-main header
+{
+	.container-max > .row {
+		flex-direction: row-reverse;
+		position: relative;
+	}
+	.controls-list {
+		width: auto;
+
+		>li	{
+			// default font size for all items
+			font-size: .8rem;
+
+			.fa:not(.qty-sign)
+			{
+				// icons should be slightly larger
+				font-size: 1rem;
+				line-height: .8rem;
+			}
+		}
+	}
+}
+
+@include media-breakpoint-only(xs) {
+	.top-bar .controls-list {
+		> li .anicon,
+		> li a:not(.btn) {
+			padding: .5rem;
+		}
+		.pipe {
+			margin: 0 0.3em 0 0;
+		}
+		.anicon-search-xcross {
+			width: 2.2rem;
+		}
+		.badge-right {
+			display: none;
+		}
+	}
+}
+
 @include media-breakpoint-down(md) {
 	.navbar {
 		.navbar-nav{
@@ -460,43 +481,6 @@
 			}
 		}
 	}
-}
-
-.wrapper-main header
-{
-	.container-max > .row
-	{
-		flex-direction: row-reverse;
-		position: relative;
-		margin-left: 0;
-		margin-right: 0;
-	}
-}
-
-
-@include media-breakpoint-up(sm){
-
-	.wrapper-main header
-	{
-		.controls-list
-		{
-			width: auto;
-
-			&>li
-			{
-				// default font size for all items
-				font-size: .8rem;
-
-				.fa:not(.qty-sign)
-				{
-					// icons should be slightly larger
-					font-size: 1rem;
-					line-height: .8rem;
-				}
-			}
-		}
-	}
-
 }
 
 @include media-breakpoint-up(md)
@@ -554,16 +538,6 @@
 }
 
 @include media-breakpoint-up(lg){
-
-	.brand-wrapper{
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		z-index:1000;
-		width: auto;
-		left: 0;
-	}
-
 	.navbar-nav{
 		&>.nav-item{
 			&>.nav-link{
@@ -585,7 +559,3 @@
  		}
  	}
  }
-
-.account-menu.dropdown-menu.dropdown-menu-right.small{
-	min-width: 100%;
-}

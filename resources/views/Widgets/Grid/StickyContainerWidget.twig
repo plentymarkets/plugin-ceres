@@ -1,0 +1,7 @@
+{% set customClass = widget.settings.customClass.mobile %}
+
+<div class="widget widget-sticky{% if customClass | length > 0 %} {{ customClass }}{% endif %}" v-stick-in-parent>
+    <div class="widget-inner"{% if isPreview %} data-builder-child-container="sticky"{% endif %}>
+        {{ children.sticky | raw }}
+    </div>
+</div>

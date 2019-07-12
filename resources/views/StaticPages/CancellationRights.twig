@@ -3,9 +3,11 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    <meta name="description" content="{{ trans('Ceres::Template.cancellationRightsMetaDescription') }}">
-    <meta name="robots" content="{{ config("Ceres.meta.robots_cancel_rights") }}">
-    <title>{{ trans("Ceres::Template.cancellationRights", {"hyphen": ""}) }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title          trans("Ceres::Template.cancellationRights", {"hyphen": ""}) %}
+        {% block description    trans('Ceres::Template.cancellationRightsMetaDescription') %}
+        {% block robots         ceresConfig.meta.robotsCancellationRights %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}

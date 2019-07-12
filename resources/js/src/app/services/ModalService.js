@@ -1,11 +1,11 @@
 module.exports = (function($)
 {
 
-    var paused  = false;
-    var timeout = -1;
-    var interval;
-    var timeRemaining;
-    var timeStart;
+    let paused  = false;
+    let timeout = -1;
+    let interval;
+    let timeRemaining;
+    let timeStart;
 
     return {
         findModal: findModal
@@ -18,8 +18,8 @@ module.exports = (function($)
 
     function Modal(element)
     {
-        var self = this;
-        var $bsModal;
+        const self = this;
+        let $bsModal;
 
         if ($(element).is(".modal"))
         {
@@ -111,7 +111,7 @@ module.exports = (function($)
             {
                 if (!paused)
                 {
-                    var secondsRemaining = timeRemaining - (new Date()).getTime() + timeStart;
+                    let secondsRemaining = timeRemaining - (new Date()).getTime() + timeStart;
 
                     secondsRemaining = Math.round(secondsRemaining / 1000);
                     $bsModal.find(".timer").text(secondsRemaining);

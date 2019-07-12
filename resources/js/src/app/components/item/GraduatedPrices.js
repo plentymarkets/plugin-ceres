@@ -1,8 +1,22 @@
 Vue.component("graduated-prices", {
-    props: [
-        "template"
-    ],
-
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-graduated-prices"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        }
+    },
     computed:
     {
         graduatedPrices()
@@ -35,10 +49,5 @@ Vue.component("graduated-prices", {
         ...Vuex.mapState({
             variationOrderQuantity: state => state.item.variationOrderQuantity
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     }
 });

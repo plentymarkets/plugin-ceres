@@ -1,0 +1,67 @@
+@each $color, $value in $shop-builder-colors
+{
+    .widget-#{$color}
+    {
+        @include text-emphasis-variant(".text-appearance", $value);
+
+        .bg-appearance
+        {
+            @include context-bg($value);
+
+            a
+            {
+                color: color-yiq($value);
+            }
+        }
+
+        a.bg-appearance:hover,
+        button.bg-appearance:hover
+        {
+            @include context-bg(darken($value, 10%));
+        }
+
+        .btn-appearance
+        {
+            @include button-variant($value, $value);
+        }
+
+        a.text-appearance,
+        .btn-appearance
+        {
+            text-decoration-color: $value;
+
+            @include hover-focus {
+                text-decoration-color: darken($value, 7.5);
+            }
+        }
+
+        a:hover {
+            i.text-appearance {
+                color: darken($value, 7.5) !important;
+            } 
+        }
+
+        .border-appearance.active,
+        .border-appearance:hover
+        {
+            border-color: $value;
+        }
+
+        .pagination .page-item
+        {
+            .page-link
+            {
+                color: $value;
+                @include hover-focus {
+                    color: darken($value, 15%);
+                }
+            }
+
+            &.active .page-link
+            {
+                border-color: $value;
+                @include context-bg($value);
+            }
+        }
+    }
+}

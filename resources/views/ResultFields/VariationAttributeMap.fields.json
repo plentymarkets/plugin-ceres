@@ -1,0 +1,18 @@
+[
+    "attributes.*",
+    "itemId",
+    "id",
+    "item.id",
+    "variation.id",
+    "variation.unitCombinationId",
+    "texts.lang",
+    "texts.urlPath",
+    "bundleComponents.*",
+    "unit.id",
+    "unit.content",
+    "unit.names.name",
+    "unit.names.lang",
+    "unit.unitOfMeasurement",
+    "filter.isSalable",
+    "images.*"
+    ]

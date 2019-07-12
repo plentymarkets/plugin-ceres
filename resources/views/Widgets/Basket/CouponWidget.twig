@@ -1,0 +1,16 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+{% set appearance = widget.settings.appearance.mobile %}
+
+{{ Twig.component("Ceres::Basket.Components.Coupon") }}
+
+<div class="widget widget-coupon widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <coupon></coupon>
+</div>

@@ -1,0 +1,33 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+{{ Twig.component( "Ceres::MyAccount.Components.OrderHistoryList" ) }}
+
+{% set hintText = widget.settings.hintText.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default('primary') %}
+{% set allowPaymentProviderChange = widget.settings.allowPaymentProviderChange.mobile %}
+{% set allowReturn = widget.settings.allowReturn.mobile %}
+{% set ordersPerPage = widget.settings.ordersPerPage.mobile %}
+
+<div class="widget widget-order-history widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+        {% if hintText is empty %}
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.orderHistory")) }}</h3>
+        {% else %}
+            {{ WidgetHelper.editableTwig(isPreview, hintText) }}
+        {% endif %}
+    </div>
+    <order-history-list
+        :orders-per-page="{{ ordersPerPage | default(5) | json_encode }}"
+        :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | default(true) | json_encode }}"
+        {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}
+        :allow-return="{{ allowReturn | json_encode }}">
+    </order-history-list>
+</div>

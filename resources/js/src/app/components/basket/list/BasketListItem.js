@@ -1,18 +1,17 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
 import { isNullOrUndefined } from "../../../helper/utils";
+import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
 
 const NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
-
-    delimiters: ["${", "}"],
-
     props: [
         "basketItem",
         "size",
         "language",
-        "template"
+        "template",
+        "isPreview"
     ],
 
     data()
@@ -72,30 +71,22 @@ Vue.component("basket-list-item", {
 
         itemTotalPrice()
         {
-            let price = 0.00;
-
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
-            {
-                price = this.basketItem.price;
-            }
-            else
-            {
-                price = this.basketItem.variation.data.prices.default.unitPrice.value;
-            }
-            return this.basketItem.quantity * (price + this.propertySurchargeSum);
+            return this.basketItem.quantity * this.basketItem.price;
         },
+
         unitPrice()
         {
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
             {
-                return this.basketItem.price;
+                return this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
             }
 
             return this.basketItem.variation.data.prices.default.unitPrice.value;
         },
+
         basePrice()
         {
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer) && this.basketItem.price === this.basketItem.variation.data.prices.specialOffer.unitPrice.value)
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
             {
                 return this.basketItem.variation.data.prices.specialOffer.basePrice;
             }
@@ -103,14 +94,16 @@ Vue.component("basket-list-item", {
             return this.basketItem.variation.data.prices.default.basePrice;
         },
 
-        ...Vuex.mapState({
-            isBasketLoading: state => state.basket.isBasketLoading
-        })
-    },
+        transformedVariationProperties()
+        {
+            return transformBasketItemProperties(this.basketItem, ["empty"], "displayInOrderProcess");
+        },
 
-    created()
-    {
-        this.$options.template = this.template;
+        ...Vuex.mapState({
+            isBasketLoading: state => state.basket.isBasketLoading,
+            isCheckoutReadonly: state => state.checkout.readOnly,
+            showNetPrice: state => state.basket.showNetPrices
+        })
     },
 
     methods: {
@@ -159,7 +152,7 @@ Vue.component("basket-list-item", {
                     {
                         this.basketItem.quantity = origQty;
 
-                        if (this.size === "small")
+                        if (this.isPreview)
                         {
                             this.$store.dispatch(
                                 "addBasketNotification",

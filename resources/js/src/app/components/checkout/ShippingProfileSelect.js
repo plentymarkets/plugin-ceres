@@ -3,17 +3,32 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("shipping-profile-select", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-shipping-profile-select"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        }
+    },
 
     computed: Vuex.mapState({
         shippingProfileList: state => state.checkout.shipping.shippingProfileList,
+        maxDeliveryDays: state => state.checkout.shipping.maxDeliveryDays,
         shippingProfileId: state => state.checkout.shipping.shippingProfileId,
         showError: state => state.checkout.validation.shippingProfile.showError,
-        isBasketLoading: state => state.basket.isBasketLoading
+        isBasketLoading: state => state.basket.isBasketLoading,
+        isCheckoutReadonly: state => state.checkout.readOnly
     }),
 
     /**
@@ -22,11 +37,11 @@ Vue.component("shipping-profile-select", {
      */
     created()
     {
-        this.$options.template = this.template;
         this.$store.commit("setShippingProfileValidator", this.validate);
     },
 
-    methods: {
+    methods:
+    {
         /**
          * Method on shipping profile changed
          */
@@ -47,7 +62,7 @@ Vue.component("shipping-profile-select", {
 
         validate()
         {
-            const showError = !(this.shippingProfileId > 0);
+            const showError = this.shippingProfileId <= 0 || this.shippingProfileList.length <= 0;
 
             this.$store.commit("setShippingProfileShowError", showError);
 

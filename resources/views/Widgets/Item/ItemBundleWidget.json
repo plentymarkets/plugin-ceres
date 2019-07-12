@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::ItemBundleWidget",
+    "label": "Widget.itemBundleLabel",
+    "previewImageURL": "/images/widgets/item-bundle.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 400,
+    "widgetClass": "Ceres\\Widgets\\Item\\ItemBundleWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}

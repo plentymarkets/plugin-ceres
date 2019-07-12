@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::InlineTextWidget",
+    "label": "Widget.textLabel",
+    "previewImageURL": "/images/widgets/text-inline.svg",
+    "type": "static",
+    "categories": ["text"],
+    "position": 800,
+    "widgetClass": "Ceres\\Widgets\\Common\\InlineTextWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}

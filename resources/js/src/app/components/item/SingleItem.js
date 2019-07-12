@@ -1,21 +1,23 @@
+import { transformVariationProperties } from "../../services/VariationPropertyService";
+import { get } from "../../helper/get";
+import { isNullOrUndefined } from "../../helper/utils";
+
 Vue.component("single-item", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "itemData",
-        "variationListData",
-        "attributeNameMap",
-        "variationUnits"
-    ],
-
-    data()
+    props:
     {
-        return {
-            isVariationSelected: true
-        };
+        template:
+        {
+            type: String,
+            default: "#vue-single-item"
+        }
     },
+
+    jsonDataFields: [
+        "itemData",
+        "attributesData",
+        "variations"
+    ],
 
     computed:
     {
@@ -29,9 +31,15 @@ Vue.component("single-item", {
             return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
         },
 
+        transformedVariationProperties()
+        {
+            return transformVariationProperties(this.currentVariation, ["empty"], "showInItemListing");
+        },
+
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
-            variations: state => state.item.variationList
+            isVariationSelected: state => state.item.isVariationSelected,
+            attributes: state => state.variationSelect.attributes
         }),
 
         ...Vuex.mapGetters([
@@ -44,14 +52,31 @@ Vue.component("single-item", {
 
     created()
     {
-        this.$options.template = this.template;
         this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setVariationList", this.variationListData);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
-        this.$store.watch(() => this.$store.getters.variationTotalPrice, () =>
-        {
-            $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+        this.$store.dispatch("setVariationSelect", {
+            attributes:         this.attributesData,
+            variations:         this.variations,
+            initialVariationId: this.currentVariation.variation.id
         });
+    },
+
+    methods:
+    {
+        getDataField(field)
+        {
+            return get(this.currentVariation, field);
+        },
+
+        getFilteredDataField(field, filter)
+        {
+            if (!isNullOrUndefined(this.$options.filters[filter]))
+            {
+                return this.$options.filters[filter](this.getDataField(field));
+            }
+
+            return this.getDataField(field);
+        }
     }
 });

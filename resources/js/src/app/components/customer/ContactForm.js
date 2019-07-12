@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from "../../helper/utils";
+
 const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
@@ -28,8 +30,6 @@ Vue.component("contact-form", {
 
     created()
     {
-        this.$options.template = this.template;
-
         window.sendMail = this.sendMail;
     },
 
@@ -44,7 +44,7 @@ Vue.component("contact-form", {
                     {
                         if (useCapture)
                         {
-                            grecaptcha.execute();
+                            window.grecaptcha.execute();
                         }
                         else
                         {
@@ -91,7 +91,7 @@ Vue.component("contact-form", {
                 });
         },
 
-        sendMail()
+        sendMail(recaptchaToken = null)
         {
             this.waiting = true;
 
@@ -105,7 +105,7 @@ Vue.component("contact-form", {
                     cc      : this.cc
                 };
 
-            ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail" }, { supressNotifications: true })
+            ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail", recaptchaToken: recaptchaToken }, { supressNotifications: true })
                 .done(response =>
                 {
                     this.waiting = false;
@@ -128,6 +128,13 @@ Vue.component("contact-form", {
                         NotificationService.error(
                             TranslationService.translate("Ceres::Template.contactSendFail")
                         );
+                    }
+                })
+                .always(() =>
+                {
+                    if (!isNullOrUndefined(window.grecaptcha))
+                    {
+                        window.grecaptcha.reset();
                     }
                 });
         },

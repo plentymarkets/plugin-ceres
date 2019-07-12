@@ -1,11 +1,12 @@
 .qty-box {
     display: flex;
-    height: 41px;
+    height: 100%;
     width: fit-content;
 
     .qty-input {
         outline: none;
         height: 100%;
+        min-height: 27px;
         width: 48px;
         padding: 0;
         text-align: center;
@@ -26,14 +27,17 @@
         border-left: none;
         border-radius: 0 $border-radius $border-radius 0;
         overflow: hidden;
+        height: 100%;
 
         .qty-btn {
             width: 100%;
             height: calc(50% - .5px);
+            min-height: 12px;
             text-align: center;
             transition: all .2s cubic-bezier(0,0,.26,1);
             border-radius: $border-radius;
             cursor: pointer;
+            position: relative;
 
             &.disabled {
                 cursor: not-allowed;
@@ -46,6 +50,11 @@
 
             & > .qty-sign {
                 color: $gray;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
             }
         }
 

@@ -7,46 +7,12 @@
     "position": 700,
     "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
             "defaultValue": "primary",
-            "options": {
-                "name": "Widget.widgetAppearanceLabel",
-                "tooltipText": "Widget.widgetAppearanceTooltip",
-                "listBoxValues": [
-                    {
-                        "value": "primary",
-                        "caption": "Widget.widgetAppearancePrimary",
-                        "position": 0
-                    },
-                    {
-                        "value": "secondary",
-                        "caption": "Widget.widgetAppearanceSecondary",
-                        "position": 1
-                    },
-                    {
-                        "value": "success",
-                        "caption": "Widget.widgetAppearanceSuccess",
-                        "position": 2
-                    },
-                    {
-                        "value": "info",
-                        "caption": "Widget.widgetAppearanceInfo",
-                        "position": 3
-                    },
-                    {
-                        "value": "warning",
-                        "caption": "Widget.widgetAppearanceWarning",
-                        "position": 4
-                    },
-                    {
-                        "value": "danger",
-                        "caption": "Widget.widgetAppearanceDanger",
-                        "position": 5
-                    }
-                ]
-            }
+            "options": "@include(appearance)"
         },
         "headlineStyle": {
             "type": "select",
@@ -74,16 +40,6 @@
                 ]
             }
         },
-        "headline": {
-            "type": "text",
-            "required": false,
-            "isVisible": "headlineStyle === 'custom-caption'",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.itemListHeadlineLabel",
-                "tooltipText": "Widget.itemListHeadlineTooltip"
-            }
-        },
         "listType": {
             "type": "select",
             "required": true,
@@ -106,8 +62,28 @@
                         "value": "tag_list",
                         "caption": "Widget.itemListListTypeTaglist",
                         "position": 2
+                    },
+                    {
+                        "value": "manufacturer",
+                        "caption": "Widget.itemListListTypeManufacturer",
+                        "position": 3
+                    },
+                    {
+                        "value": "cross_selling",
+                        "caption": "Widget.itemListListTypeCrossSelling",
+                        "position": 4
                     }
                 ]
+            }
+        },
+        "manufacturerId": {
+            "type": "manufacturer",
+            "required": false,
+            "isVisible": "listType === 'manufacturer'",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.itemListListTypeManufacturer",
+                "tooltipText": "Widget.itemListManufacturerTooltip"
             }
         },
         "categoryId": {
@@ -128,6 +104,38 @@
             "options": {
                 "name": "Widget.itemListTagIdLabel",
                 "tooltipText": "Widget.itemListTagIdTooltip"
+            }
+        },
+        "crossSellingRelationType": {
+            "type": "select",
+            "required": false,
+            "isVisible": "listType === 'cross_selling'",
+            "defaultValue": "Similar",
+             "options": {
+                "name": "Widget.itemListCrossSellingRelation",
+                "tooltipText": "Widget.itemListCrossSellingRelationTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "Similar",
+                        "caption": "Widget.itemListsCrossSellingTypeSimilar",
+                        "position": 0
+                    },
+                    {
+                        "value": "Accessory",
+                        "caption": "Widget.itemListsCrossSellingTypeAccessory",
+                        "position": 1
+                    },
+                    {
+                        "value": "ReplacementPart",
+                        "caption": "Widget.itemListsCrossSellingTypeReplacementPart",
+                        "position": 2
+                    },
+                    {
+                        "value": "Bundle",
+                        "caption": "Widget.itemListsCrossSellingTypeBundle",
+                        "position": 3
+                    }
+                ]
             }
         },
         "itemSort": {
@@ -218,6 +226,16 @@
                         "value": "item.random",
                         "caption": "Widget.itemRandom",
                         "position": 15
+                    },
+                    {
+                        "value": "variation.position_asc",
+                        "caption": "Widget.itemVariationTopseller_asc",
+                        "position": 16
+                    },
+                    {
+                        "value": "variation.position_desc",
+                        "caption": "Widget.itemVariationTopseller_desc",
+                        "position": 17
                     }
                 ]
             }
@@ -225,7 +243,6 @@
         "maxItems": {
             "type": "number",
             "required": true,
-            "isVisible": "listType !== 'last_seen'",
             "defaultValue": "4",
             "options": {
                 "name": "Widget.itemListMaxItemsLabel",
@@ -238,7 +255,7 @@
             "defaultValue": 4,
             "options": {
                 "name": "Widget.itemListItemsPerPageLabel",
-                "tooltipText": "Widget.itemsListItemsPerPageTooltip",
+                "tooltipText": "Widget.itemListItemsPerPageTooltip",
                 "listBoxValues": [
                     {
                         "value": 1,
@@ -262,6 +279,7 @@
                     }
                 ]
             }
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }

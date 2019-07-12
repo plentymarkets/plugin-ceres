@@ -1,4 +1,4 @@
-var WaitScreenService = require("services/WaitScreenService");
+const WaitScreenService = require("services/WaitScreenService");
 
 /**
 *
@@ -22,11 +22,6 @@ Vue.component("wait-screen", {
         return {
             overlay: WaitScreenService.getOverlay()
         };
-    },
-
-    created: function()
-    {
-        this.$options.template = this.template;
     },
 
     computed: {

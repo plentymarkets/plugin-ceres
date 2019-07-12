@@ -4,11 +4,13 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("coupon", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-coupon"
+        }
+    },
 
     data()
     {
@@ -39,13 +41,10 @@ Vue.component("coupon", {
         },
 
         ...Vuex.mapState({
-            redeemedCouponCode: state => state.basket.data.couponCode
+            redeemedCouponCode: state => state.basket.data.couponCode,
+            isBasketLoading: state => state.basket.isBasketLoading,
+            isCheckoutReadonly: state => state.checkout.readOnly
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     mounted()

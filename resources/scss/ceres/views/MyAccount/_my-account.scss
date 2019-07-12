@@ -19,10 +19,6 @@
 
 .history-pagination {
     margin-top: 15px;
-
-    & .counter {
-        margin-top: 5px;
-    }
 }
 
 .gradient-hr {
@@ -86,4 +82,31 @@
 .current-payment-width
 {
     width: 100%!important;
+}
+
+.card-body {
+    padding: 1rem;
+
+    .add-item {
+        @include media-breakpoint-down(xs) {
+            .item-edit {
+                height: 45%;
+                margin-bottom: 0 !important;
+            }
+            span.item-edit:nth-of-type(2) {
+                bottom: 0;
+                position: absolute;
+            }
+
+            button {
+                height: 100%;
+            }
+        }
+    }
+}
+
+.widget-account-settings {
+    .card {
+        min-height: 115px;
+    }
 }

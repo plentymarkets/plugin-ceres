@@ -1,15 +1,16 @@
 import { normalizeUrl } from "../helper/url";
+import { isDefined } from "../helper/utils";
 
-var NotificationService = require("services/NotificationService");
-var WaitScreenService   = require("services/WaitScreenService");
+const NotificationService = require("services/NotificationService");
+const WaitScreenService   = require("services/WaitScreenService");
 
 module.exports = (function($)
 {
-    var _eventListeners = {};
+    const _eventListeners = {};
 
     $(document).ajaxComplete((ajaxEvent, xhr, options) =>
     {
-        var response;
+        let response;
 
         try
         {
@@ -22,7 +23,7 @@ module.exports = (function($)
 
         if (response)
         {
-            for (var event in response.events)
+            for (const event in response.events)
             {
                 _triggerEvent(event, response.events[event]);
             }
@@ -55,9 +56,9 @@ module.exports = (function($)
     {
         if (_eventListeners[event])
         {
-            for (var i = 0; i < _eventListeners[event].length; i++)
+            for (let i = 0; i < _eventListeners[event].length; i++)
             {
-                var listener = _eventListeners[event][i];
+                const listener = _eventListeners[event][i];
 
                 if (typeof listener !== "function")
                 {
@@ -96,10 +97,11 @@ module.exports = (function($)
         return _send(url, data, config);
     }
 
-    function _send(url, data, config)
+    function _send(url, data = {}, config)
     {
-        var deferred = $.Deferred();
+        const deferred = $.Deferred();
 
+        data = isDefined(data) ? data : {};
         url = normalizeUrl(url);
         config = config || {};
         config.dataType = config.dataType || "json";
@@ -109,18 +111,15 @@ module.exports = (function($)
         config.keepOriginalResponse = !!config.keepOriginalResponse;
         config.headers = config.headers || { "Accept-Language": App.language };
 
-        if (data)
-        {
-            data.templateEvent = App.templateEvent;
-            config.data = data;
-        }
+        data.templateEvent = App.templateEvent;
+        config.data = data;
 
         if (!config.doInBackground)
         {
             WaitScreenService.showWaitScreen();
         }
 
-        $.ajax(url, config)
+        const request = $.ajax(url, config)
             .done(function(response)
             {
                 if (config.keepOriginalResponse)
@@ -134,9 +133,9 @@ module.exports = (function($)
             })
             .fail(function(jqXHR)
             {
-                var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
+                const response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
 
-                deferred.reject(response);
+                deferred.reject(response, jqXHR.status);
             })
             .always(function()
             {
@@ -146,12 +145,14 @@ module.exports = (function($)
                 }
             });
 
+        deferred.abort = request.abort;
+
         return deferred;
     }
 
     function _printMessages(response)
     {
-        var notification;
+        let notification;
 
         if (response.error && response.error.message.length > 0)
         {
@@ -176,7 +177,7 @@ module.exports = (function($)
         if (response.debug && response.debug.class.length > 0)
         {
             notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
-            for (var i = 0; i < response.debug.trace.length; i++)
+            for (let i = 0; i < response.debug.trace.length; i++)
             {
                 notification.trace(response.debug.trace[i]);
             }

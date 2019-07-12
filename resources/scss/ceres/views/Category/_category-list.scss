@@ -15,19 +15,43 @@
 
 	display: flex;
     flex-flow: row wrap;
-    
-    category-item {
-        background: $white;
-        display: block;
-        height: 145px;
-        margin-bottom: 15px;
-        width: 100%;
+}
 
-        @include media-breakpoint-up(sm) {
-            margin-bottom: 30px;
-            padding-bottom: calc(100% + 100px);
-            height: unset;
+category-item {
+    display: block;
+    height: 145px;
+    width: 100%;
+    margin-bottom: 15px;
+    background-color: $white;
+
+    a {
+        padding-top: 100%;
+        display: block;
+        color: $gray;
+
+        &:hover {
+            color: $gray;
         }
+
+        span {
+            padding: .8rem .8rem 74px .8rem;
+            display: block;
+        }
+    }
+
+    .fa {
+        position: absolute;
+        top: 48px;
+        left: 0;
+        right: 0;
+        font-size: 160px;
+        text-align: center;
+        color: $gray-lightest;
+    }
+
+    @include media-breakpoint-up(sm) {
+        margin-bottom: 30px;
+        height: unset;
     }
 }
 
@@ -80,13 +104,6 @@
     max-width: none;
     position: relative;
     width: 100%;
-
-    .parallax-text-wrapper {
-        @include media-breakpoint-up(xl){
-            margin-left: -15px;
-            margin-right: -15px;
-        }
-    }
         
     .parallax-text-container {
         position: inherit;
@@ -158,5 +175,12 @@
                 }
             }
         }
+    }
+}
+
+/* IOS compatibility */
+html.ios {
+    .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
+        background-size: contain;
     }
 }

@@ -8,47 +8,48 @@
 
     .widget-caption
     {
-        padding: 1rem 1.5rem;
+        padding: 0.25rem 1.5rem;
         display: flex;
         align-items: center;
 
-        h2, .h2
+        > div
         {
             flex: 1;
-            padding-top: .2rem;
-            margin: 0;
-            text-transform: uppercase;
-            font-size: 1.75rem;
         }
+
+    }
+}
+
+.widget-item-list-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+        text-transform: uppercase;
     }
 
-    &.widget-primary .widget-caption
+    h1
     {
-        @include widget-bg-variant($primary);
+        font-size: 2rem;
+        padding-top: .7rem;
+        padding-bottom: .7rem;
     }
 
-    &.widget-secondary .widget-caption
+    h2
     {
-        @include widget-bg-variant($secondary);
+        font-size: 1.75rem;
+        padding-top: .6rem;
+        padding-bottom: .4rem;
     }
 
-    &.widget-success .widget-caption
+    h3
     {
-        @include widget-bg-variant($success);
-    }
+        font-size: 1.5rem;
+        padding-top: .4rem;
+        padding-bottom: .1rem;
 
-    &.widget-info .widget-caption
-    {
-        @include widget-bg-variant($info);
-    }
-
-    &.widget-warning .widget-caption
-    {
-        @include widget-bg-variant($warning);
-    }
-
-    &.widget-danger .widget-caption
-    {
-        @include widget-bg-variant($danger);
     }
 }

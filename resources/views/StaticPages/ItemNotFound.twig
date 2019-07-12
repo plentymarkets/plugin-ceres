@@ -1,7 +1,9 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
-    <title>404 | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title "404" %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}

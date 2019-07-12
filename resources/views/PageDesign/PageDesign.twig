@@ -7,11 +7,10 @@
 {{ component( "Ceres::Customer.Components.Registration" ) }}
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
-{{ component( "Ceres::Category.Components.CategoryBreadcrumbs" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
+{{ component("Ceres::Customer.Components.Contact.AcceptPrivacyPolicyCheck") }}
 
 {# TODO: remove if shop builder pages can be rebuild by migrations #}
-{{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
 {{ component( "Ceres::ItemList.Components.CategoryItem") }}
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
@@ -24,6 +23,10 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
 
+{% if request.get('openBasketPreview') == 1 %}
+    {% set openBasketClass = "open-" ~ ceresConfig.basket.previewType %}
+{% endif %}
+
 <!DOCTYPE html>
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
@@ -32,6 +35,7 @@
     {% include getPartial('head') %}
 
     {% block PartialHead %}
+        {% embed getPartial('page-metadata') %}{% endembed %}
     {% endblock %}
 
     {% for styleTemplate in get_additional_styles() %}
@@ -39,7 +43,10 @@
     {% endfor %}
 </head>
 
-<body>
+<body class="{{ bodyClasses | join(' ') }}">
+
+{{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
+
 <script>
     if('ontouchstart' in document.documentElement)
     {
@@ -50,7 +57,7 @@
         document.body.classList.add("no-touch");
     }
 </script>
-<div id="vue-app">
+<div id="vue-app"{% if openBasketClass is not empty %} class="{{ openBasketClass }}"{% endif %}>
     <div class="wrapper wrapper-top">
         <!-- messages -->
         <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
@@ -113,18 +120,22 @@
                             </div>
 
                             <popper v-cloak class="ml-auto">
-                                <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
-                                    <i class="fa fa-info"></i>
-                                </button>
-                                <div slot="title">
+                                <template #handle>
+                                    <button class="btn btn-icon btn-secondary btn-sm">
+                                        <i class="fa fa-info"></i>
+                                    </button>
+                                </template>
+                                <template #title>
                                     {{ trans("Ceres::Template.regContactInformations") }}
-                                </div>
-                                <ul slot="content" class='pl-3'>
-                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                                    <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-                                </ul>
+                                </template>
+                                <template #content>
+                                    <ul class='pl-3'>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                    </ul>
+                                </template>
                             </popper>
 
                             <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -137,7 +148,7 @@
         <!-- ./REGISTRATION MODAL -->
 
         <!-- BASKET MODAL -->
-        <add-item-to-basket-overlay :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
+        <add-item-to-basket-overlay></add-item-to-basket-overlay>
         <!-- ./BASKET MODAL -->
 
         <!-- PASSWORD RESET MODAL -->
@@ -145,6 +156,7 @@
         <!-- ./PASSWORD RESET MODAL -->
 
         <!-- SHIPPINGCOSTS MODAL -->
+        {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
         <div id="shippingscosts-modal-wrapper">
             <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -154,12 +166,18 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                            {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                            {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
+                            {% if shopBuilderShippingTemplate | trim is not empty %}
+                                {{ shopBuilderShippingTemplate | raw }}
+                            {% else %}
+                                {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {% endif %}
         <!-- ./SHIPPINGCOSTS MODAL -->
     </div>
 </div>
@@ -167,16 +185,18 @@
 <script>
     App = {
         config: {{ ceresConfig | json_encode | raw }},
+        urls: {{ urls | json_encode | raw }},
         activeCurrency: "{{ currencyData[currencyFormat] }}",
         currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
         isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
-        templateEvent: "{{templateEvent}}",
+        templateEvent: "{{ templateEvent }}",
         language: "{{ lang }}",
         defaultLanguage: "{{ defaultLanguage }}",
         decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
-        urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }}
+        urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
+        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }}
     };
 </script>
 
@@ -200,6 +220,7 @@
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
 {{ get_filtered_tags() }}
+{{ get_json_data() }}
 
 <script>
     vueEventHub = new Vue();
@@ -225,102 +246,131 @@
         });
     {% endif %}
 
+    (function($, MediaQueryHelperClass) {
+        var vueApp = document.getElementById('vue-app');
+        var headerParent = document.getElementById('page-header-parent');
+        var headerLoaded = false;
+        var allHeaderChildrenHeights = [];
 
-    (function($) {
-        
-        var header = document.getElementById('page-header');
-        var unfixedElements = [];
-
-        if ( !!header )
+        if ( !!headerParent )
         {
+            var headerChildren = headerParent.children;
+
             function calculateBodyOffset()
             {
-                if ( header.classList.contains('fixed-top'))
+                if (headerLoaded && headerParent)
                 {
                     var bodyOffset = 0;
-                    // Get current header with children
-                    var children = document.getElementById('page-header').children;
-                    for( var i = 0; i < children.length; i++ )
+                    
+                    for( var i = 0; i < headerChildren.length; i++ )
                     {
-                        bodyOffset += children[i].getBoundingClientRect().height;
+                        bodyOffset += headerChildren[i].getBoundingClientRect().height;
                     }
-
-                    document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
-                    document.getElementById('vue-app').style.minHeight = "calc(100vh - " + bodyOffset + "px)";
+                    vueApp.style.marginTop = bodyOffset + 'px';
+                    vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
                 }
             }
 
-            function getUnfixedElements()
+            function getHeaderChildrenHeights()
             {
-                unfixedElements = [];
-                $('#page-header .unfixed').each(function(i, elem)
+                allHeaderChildrenHeights = [];
+
+                for (var i = 0; i < headerChildren.length; i++)
                 {
-                    var rect = elem.getBoundingClientRect();
-                    unfixedElements.push({
-                        element: elem,
-                        top: rect.top,
-                        height: rect.height
-                    });
-                });
-                scrollUnfixedElements();
+                    allHeaderChildrenHeights.push(headerChildren[i].getBoundingClientRect().height);
+                }
             }
 
-            function scrollUnfixedElements()
+            function scrollHeaderElements()
             {
-                var scrollTop = window.scrollY;
-                unfixedElements.forEach(function(unfixed)
+                if (headerLoaded && !App.isShopBuilder)
                 {
-                    var spacingTop = unfixed.height - scrollTop;
-                    if ( !!unfixed.element.previousElementSibling )
+                    var absolutePos = 0;
+                    var fixedElementsHeight = 0; 
+                    var offset = 0;
+                    var scrollTop = window.pageYOffset;
+                    var zIndex = 100;
+
+                    for (var i = 0; i < headerChildren.length; i++)
                     {
-                        unfixed.element.previousElementSibling.style.marginBottom = (spacingTop >= 0 ? spacingTop : 0) + 'px'
+                        var elem = headerChildren[i];
+                        var elemHeight = allHeaderChildrenHeights[i];
+                        
+                        offset = absolutePos - scrollTop;
+                        elem.style.position = "absolute";
+                        elem.style.zIndex = zIndex;
+                        zIndex--;
+
+                        if (!elem.classList.contains("unfixed"))
+                        {
+                            if (offset < 0)
+                            {
+                                elem.style.top = 0;
+                            }
+                            else 
+                            {
+                                elem.style.top = offset + 'px';
+                            }
+
+                            if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
+                            {
+                                elem.style.top = fixedElementsHeight + 'px';
+                            }
+
+                            fixedElementsHeight = fixedElementsHeight + elemHeight;  
+                        } 
+                        else 
+                        {
+                            elem.style.top = offset + 'px';
+                        }
+                        absolutePos = absolutePos + elemHeight;
                     }
-                    else
-                    {
-                        unfixed.element.parentElement.style.paddingTop = (spacingTop >= 0 ? spacingTop : 0) + 'px';
-                    }
-                    unfixed.element.style.position = 'absolute';
-                    unfixed.element.style.top = unfixed.top - scrollTop + 'px';
-                });
+                }
             }
 
-            getUnfixedElements();
-            
-            $(window).scroll(scrollUnfixedElements);
+            // When window resize to another breakpoint execute functions
+            MediaQueryHelperClass.addFunctions(function(){
+                calculateBodyOffset();
+                getHeaderChildrenHeights();
+                scrollHeaderElements();
+            }); 
 
-            $(document).on('shopbuilder.after.ready', function()
-            {
-                unfixedElements.forEach(function(unfixed)
-                {
-                    $(unfixed.element).attr('css', '');
-                });
-                scrollUnfixedElements = function() {};
-            });
+            $(window).scroll(scrollHeaderElements);
 
             $(document).on('shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate', function()
             {
                 calculateBodyOffset();
+                $('.owl-carousel').trigger('refresh.owl.carousel');
             });
 
-            var headerImages = header.querySelectorAll("img");
+            var headerImages = headerParent.querySelectorAll("img");
 
-            if(headerImages.length)
-            {
-                for (var img in headerImages)
+            Promise.all(
+                Array.prototype.slice.call(headerImages).map(function(headerImage)
                 {
-                    headerImages[img].onload = function()
+                    return new Promise(function(resolve)
                     {
-                        calculateBodyOffset();
-                    }
-                }
-            }
+                        headerImage.onload = function()
+                        {
+                            resolve();
+                        }
+                    });
+                })
+            ).then(function()
+            {
+                // Initialize
+                headerLoaded = true;
+                getHeaderChildrenHeights();
+                scrollHeaderElements();
+                calculateBodyOffset();
+            });
 
             calculateBodyOffset();
         }
 
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
         {
-            var compiled = Vue.compile(widgetElement[0].outerHTML );
+            var compiled = Vue.compile(widgetElement[0].outerHTML, { delimiters: ["${", "}"] } );
             var component = new Vue({
                 store: window.ceresStore,
                 render: compiled.render,
@@ -332,10 +382,15 @@
                     event.preventDefault();
                 });
             });
+
+            $(component.$el).find('.owl-carousel').on('resized.owl.carousel', function()
+            {
+                window.dispatchEvent(new Event('resize'));
+            });
         });
 
 
-    })(jQuery);
+    })(jQuery, MediaQueryHelperClass);
 </script>
 
 {{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}

@@ -18,27 +18,41 @@ Vue.component("category-item", {
         },
         itemData:
         {
-            type: Object,
-            required: true
+            type: Object
+        },
+        disableCarouselOnMobile:
+        {
+            type: Boolean
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
-    data()
-    {
-        return {
-            recommendedRetailPrice: 0,
-            variationRetailPrice  : 0
-        };
-    },
+    jsonDataFields: [
+        "itemDataRef"
+    ],
 
     computed:
     {
+        item()
+        {
+            return this.itemData || this.itemDataRef;
+        },
+
         /**
          * returns itemData.item.storeSpecial
          */
         storeSpecial()
         {
-            return this.itemData.item.storeSpecial;
+            return this.item.item.storeSpecial;
         },
 
         /**
@@ -46,23 +60,12 @@ Vue.component("category-item", {
          */
         texts()
         {
-            return this.itemData.texts;
+            return this.item.texts;
         },
 
         ...Vuex.mapState({
             showNetPrices: state => state.basket.showNetPrices
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
-
-        if (this.itemData.prices.rrp)
-        {
-            this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
-        }
-        this.variationRetailPrice = this.itemData.prices.default.price.value;
     },
 
     methods:
@@ -77,5 +80,4 @@ Vue.component("category-item", {
             }
         }
     }
-
 });

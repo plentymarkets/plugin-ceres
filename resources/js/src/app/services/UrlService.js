@@ -40,14 +40,14 @@ export function getUrlParams(urlParams)
 
 export function setUrlParams(urlParams, pushState = true)
 {
-    var pathName =
+    const pathName =
         isDefined(store.state.navigation.currentCategory) &&
         isDefined(store.state.navigation.currentCategory.url) ?
             store.state.navigation.currentCategory.url :
             window.location.pathname;
 
-    var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
-    var titleElement = document.getElementsByTagName("title")[0];
+    const params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
+    const titleElement = document.getElementsByTagName("title")[0];
 
     if (pushState)
     {
@@ -114,10 +114,53 @@ export function navigateToParams(urlParams)
         isDefined(store.state.navigation.currentCategory.url) ?
             store.state.navigation.currentCategory.url :
             window.location.pathname;
-    const params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
-    const url = normalizeUrl(pathName + params);
+    const url = normalizeUrl(pathName + "?" + encodeParams(urlParams));
 
     window.location.assign(url);
 }
 
-export default { setUrlParams, getUrlParams, navigateTo, setUrlParam, removeUrlParams, removeUrlParam };
+export function encodeParams(params, prefix)
+{
+    if (isNullOrUndefined(params))
+    {
+        return "";
+    }
+
+    if (Array.isArray(params))
+    {
+        return params.map((listValue, i) =>
+        {
+            return encodeParams(listValue, `${prefix}[${i}]`);
+        }).join("&");
+    }
+    else if (typeof params === "object")
+    {
+        return Object.keys(params)
+            .filter(key =>
+            {
+                return !(isNaN(params[key]) && typeof params[key] === "number") && !isNullOrUndefined(params[key]);
+            })
+            .map(key =>
+            {
+                return encodeParams(params[key], !isNullOrUndefined(prefix) ? `${prefix}[${key}]` : key);
+            })
+            .join("&");
+    }
+
+    if (isNullOrUndefined(prefix))
+    {
+        return encodeURIComponent(params);
+    }
+    return prefix + "=" + encodeURIComponent(params);
+}
+
+export function setUrlByItem(itemData)
+{
+    const url = vueApp.$options.filters.itemURL(itemData);
+    const title = document.getElementsByTagName("title")[0].innerHTML;
+
+    window.history.replaceState({}, title, url);
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title, url } }));
+}
+
+export default { setUrlParams, getUrlParams, navigateTo, setUrlParam, removeUrlParams, removeUrlParam, setUrlByItem };

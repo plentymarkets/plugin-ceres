@@ -29,16 +29,13 @@ Vue.component("registration", {
             billingAddress: {
                 countryId: null,
                 stateId: null,
-                addressSalutation: 0,
                 gender: "male"
             },
-            isDisabled: false
+            isDisabled: false,
+            privacyPolicyAccepted : false,
+            privacyPolicyShowError: false,
+            enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods: {
@@ -50,7 +47,18 @@ Vue.component("registration", {
             ValidationService.validate($("#registration" + this._uid))
                 .done(() =>
                 {
-                    this.sendRegistration();
+                    if (!this.enableConfirmingPrivacyPolicy || this.privacyPolicyAccepted)
+                    {
+                        this.sendRegistration();
+                    }
+                    else
+                    {
+                        this.privacyPolicyShowError = true;
+
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                        );
+                    }
                 })
                 .fail(invalidFields =>
                 {
@@ -59,6 +67,15 @@ Vue.component("registration", {
                         this.$refs.passwordHint.showPopper();
                     }
                     ValidationService.markInvalidFields(invalidFields, "error");
+
+                    if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
+                    {
+                        this.privacyPolicyShowError = true;
+
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                        );
+                    }
                 });
         },
 
@@ -101,7 +118,7 @@ Vue.component("registration", {
                     {
                         NotificationService.error(
                             TranslationService.translate("Ceres::Template.regError")
-                        ).closeAfter(3000);
+                        ).closeAfter(10000);
                     }
 
                     this.isDisabled = false;
@@ -151,6 +168,16 @@ Vue.component("registration", {
             }
 
             return userObject;
+        },
+
+        privacyPolicyValueChanged(value)
+        {
+            this.privacyPolicyAccepted = value;
+
+            if (value)
+            {
+                this.privacyPolicyShowError = false;
+            }
         }
     }
 });

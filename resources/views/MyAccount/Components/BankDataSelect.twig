@@ -17,6 +17,7 @@
                     <span class="item-inner">
                         <span class="item-content" v-if="selectedBankData">
                             <strong>Kontoinh.: ${ selectedBankData.accountOwner }</strong>
+                            <span>Bank:        ${ selectedBankData.bankName }</span>
                             <span>IBAN:        ${ selectedBankData.iban }</span>
                             <span>BIC:         ${ selectedBankData.bic }</span>
                         </span>
@@ -40,12 +41,12 @@
                                 -->
                                 <div class="item-controls">
                                     <span class="item-edit" @click.prevent="openUpdateBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary btn-medium" @click.prevent="openUpdateBank(index, bankData)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary" @click.prevent="openUpdateBank(index, bankData)">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove" @click.prevent="openDeleteBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-medium btn-remove-address" @click.prevent="openDeleteBank(index, bankData)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-danger" @click.prevent="openDeleteBank(index, bankData)">
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </span>
@@ -56,7 +57,7 @@
                 </div>
             </div>
             <div class="add-item">
-                <button href="#" class="btn btn-primary btn-only-icon-xs-down" @click.prevent="openAddBank()">
+                <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountBankAddDataTitle") }}" class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down" @click.prevent="openAddBank()">
                     <span>{{ trans("Ceres::Template.myAccountBankAddDataTitle") }}</span>
                     <i class="fa fa-plus-square" aria-hidden="true"></i>
                 </button>
@@ -74,9 +75,9 @@
                             </button>
                         </div>
 
-                        <div class="modal-body">
-                            <fieldset>
-                                <form id="my-bankForm">
+                        <fieldset>
+                            <form id="my-bankForm" @submit.prevent>
+                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="input-unit accountOwner" data-validate="text">
@@ -103,19 +104,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                            </fieldset>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="button" class="btn btn-primary btn-block" @click="validateInput()">
-                                        <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
-                                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                                    </button>
                                 </div>
-                            </div>
-                        </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary btn-block" @click="validateInput()" :disabled="waiting">
+                                                <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
+                                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </fieldset>
                     </div>
                 </div>
             </div>

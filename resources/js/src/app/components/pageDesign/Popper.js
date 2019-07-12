@@ -23,13 +23,8 @@ Vue.component("popper", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
-	{
+    {
         this.$nextTick(() =>
         {
             if (!isNullOrUndefined(this.$refs.node) && !isNullOrUndefined(this.$refs.handle))
@@ -95,7 +90,7 @@ Vue.component("popper", {
     methods:
     {
         togglePopper()
-		{
+        {
             this.isVisible = !this.isVisible;
             this.update();
         },

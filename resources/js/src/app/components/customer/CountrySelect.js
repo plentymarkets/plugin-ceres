@@ -1,13 +1,36 @@
+import TranslationService from "services/TranslationService";
+import { isNullOrUndefined } from "../../helper/utils";
+
 Vue.component("country-select", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "countryList",
-        "selectedCountryId",
-        "selectedStateId",
-        "template",
-        "addressType"
+    props:
+    {
+        selectedCountryId: Number,
+        selectedStateId: Number,
+        template: {
+            type: String,
+            default: "#vue-country-select"
+        },
+        addressType: {
+            type: String,
+            required: true
+        },
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {}
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {}
+        }
+    },
+
+    jsonDataFields: [
+        "countryList"
     ],
 
     data()
@@ -18,17 +41,47 @@ Vue.component("country-select", {
         };
     },
 
-    computed: Vuex.mapState({
-        shippingCountryId: state => state.localization.shippingCountryId
-    }),
+    computed:
+    {
+        addressKeyPrefix()
+        {
+            return this.addressType === "1" ? "billing_address." : "delivery_address.";
+        },
+
+        optionalFields()
+        {
+            const iso = this.selectedCountry.isoCode2.toLowerCase();
+
+            if (isNullOrUndefined(this.optionalAddressFields[iso]))
+            {
+                return this.optionalAddressFields.de;
+            }
+
+            return this.optionalAddressFields[iso];
+        },
+
+        requiredFields()
+        {
+            const iso = this.selectedCountry.isoCode2.toLowerCase();
+
+            if (isNullOrUndefined(this.requiredAddressFields[iso]))
+            {
+                return this.requiredAddressFields.de;
+            }
+
+            return this.requiredAddressFields[iso];
+        },
+
+        ...Vuex.mapState({
+            shippingCountryId: state => state.localization.shippingCountryId
+        })
+    },
 
     /**
      * Get the shipping countries
      */
     created()
     {
-        this.$options.template = this.template;
-
         this.countryList.sort(function(first, second)
         {
             if (first.currLangName < second.currLangName)
@@ -92,6 +145,24 @@ Vue.component("country-select", {
             }
 
             this.countryChanged(countryId);
+        },
+
+        isInOptionalFields(key)
+        {
+            return this.optionalFields.includes(this.addressKeyPrefix + key);
+        },
+
+        isInRequiredFields(key)
+        {
+            return this.requiredFields.includes(this.addressKeyPrefix + key);
+        },
+
+        transformTranslation(translationKey, addressKey)
+        {
+            const translation = TranslationService.translate(translationKey);
+            const isRequired = this.isInRequiredFields(addressKey);
+
+            return translation + (isRequired ? "*" : "");
         }
     },
 

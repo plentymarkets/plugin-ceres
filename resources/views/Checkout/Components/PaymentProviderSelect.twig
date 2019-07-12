@@ -1,17 +1,17 @@
 <script type="x/template" id="vue-payment-provider-select">
     <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': this.showError }">
-        <ul class="method-list component-loading" :class="{ 'isLoading': isBasketLoading }">
+        <ul class="method-list component-loading" :class="{ 'isLoading': isBasketLoading || isCheckoutReadonly }">
             <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id">
                 <input
                         type="radio"
                         :id="'paymentMethod' + _uid + paymentProvider.id"
-                        name="MethodOfPaymentID"
+                        :name="'MethodOfPaymentID' + _uid"
                         :value="paymentProvider.id"
                         @change="onPaymentProviderChange(paymentProvider)"
                         :checked="methodOfPaymentId === paymentProvider.id"
-                        :disabled="!paymentProvider.isSelectable"
+                        :disabled="!paymentProvider.isSelectable || isCheckoutReadonly"
                 >
-                <label :for="'paymentMethod' + _uid + paymentProvider.id">
+                <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id" :class="paddingClasses" :style="paddingInlineStyles">
                     <div class="icon">
                         <div class="square-container">
                             <div class="square-inner center-xy">

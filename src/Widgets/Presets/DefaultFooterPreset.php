@@ -159,13 +159,13 @@ class DefaultFooterPreset implements ContentPreset
         $defaultText = "";
         $defaultText .= "<div class=\"copyright text-center\">";
         $defaultText .=     "<a rel=\"nofollow\" href=\"https://www.plentymarkets.eu\">";
-        $defaultText .=         "<img alt=\"Plentymarkets GmbH Logo\" class=\"svg plenty-brand\" src=\"{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg\" rel=\"nofollow\" crossorigin=\"anonymous\">";
+        $defaultText .=         "<img alt=\"Plentymarkets GmbH Logo\" class=\"svg plenty-brand\" src=\"{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg\" rel=\"nofollow\">";
         $defaultText .=     "</a>";
         $defaultText .=     "<br>";
         $defaultText .=     "<small>&copy; Copyright {{ \"now\" | date(\"Y\") }} | {{ trans(\"Ceres::Template.footerAllRightsReserved\") }}</small>";
         $defaultText .= "</div>";
 
-        $this->preset->createWidget("Ceres::TextWidget")
+        $this->preset->createWidget("Ceres::CodeWidget")
             ->withSetting("appearance", "none")
             ->withSetting("text", $defaultText);
     }

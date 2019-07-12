@@ -6,6 +6,16 @@ Vue.component("order-property-list", {
         {
             type: String,
             default: "#vue-order-property-list"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -35,7 +45,7 @@ Vue.component("order-property-list", {
         {
             if (this.variationMarkInvalidProperties)
             {
-                return [... new Set(this.variationMissingProperties.map(property => property.group && property.group.id))];
+                return [...new Set(this.variationMissingProperties.map(property => property.group && property.group.id))];
             }
 
             return [];
@@ -49,11 +59,6 @@ Vue.component("order-property-list", {
             "variationGroupedProperties",
             "variationMissingProperties"
         ])
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:

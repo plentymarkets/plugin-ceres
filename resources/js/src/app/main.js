@@ -2,11 +2,13 @@ const browserDetect = require("detect-browser");
 const NotificationService = require("services/NotificationService");
 const AutoFocusService = require("services/AutoFocusService");
 
+import { MediaQueryHelperClass } from "helper/MediaQueryHelperClass";
+
 // Frontend end scripts
 // eslint-disable-next-line
 var init = (function($, window, document)
 {
-    var headerCollapses = [];
+    const headerCollapses = [];
 
     function HeaderCollapse(selector)
     {
@@ -40,6 +42,12 @@ var init = (function($, window, document)
             $("html").addClass("unkown-os");
         }
 
+        // Detect Facebook integrated Browser
+        if (typeof navigator !== "undefined" && /FBA[NV]\/([0-9\.]+)/.test(navigator.userAgent))
+        {
+            document.body.classList.add("facebook");
+        }
+
         $(window).scroll(function()
         {
             if ($(".wrapper-main").hasClass("isSticky"))
@@ -70,34 +78,8 @@ var init = (function($, window, document)
         HeaderCollapse("#currencySelect");
         HeaderCollapse("#searchBox");
 
-        // Replace all SVG images with inline SVG, class: svg
-        $("img[src$=\".svg\"]").each(function()
-        {
-            var $img = jQuery(this);
-            var imgURL = $img.attr("src");
-            var attributes = $img.prop("attributes");
-
-            $.get(imgURL, function(data)
-            {
-                // Get the SVG tag, ignore the rest
-                var $svg = jQuery(data).find("svg");
-
-                // Remove any invalid XML tags
-                $svg = $svg.removeAttr("xmlns:a");
-
-                // Loop through IMG attributes and apply on SVG
-                $.each(attributes, function()
-                {
-                    $svg.attr(this.name, this.value);
-                });
-
-                // Replace IMG with SVG
-                $img.replaceWith($svg);
-            }, "xml");
-        });
-
-        var $toggleListView = $(".toggle-list-view");
-        var $mainNavbarCollapse = $("#mainNavbarCollapse");
+        const $toggleListView = $(".toggle-list-view");
+        const $mainNavbarCollapse = $("#mainNavbarCollapse");
 
         $(document).on("click", function(evt)
         {
@@ -155,16 +137,16 @@ var init = (function($, window, document)
 
         $(document).ready(function()
         {
-            var offset = 250;
-            var duration = 300;
+            const offset = 250;
+            const duration = 300;
 
-            var isDesktop = window.matchMedia("(min-width: 768px)").matches;
+            let isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
             AutoFocusService.autoFocus();
 
             $("#searchBox").on("shown.bs.collapse", function()
             {
-                var searchInput = document.querySelector("input.search-input");
+                const searchInput = document.querySelector("input.search-input");
 
                 if (searchInput)
                 {
@@ -223,8 +205,9 @@ var init = (function($, window, document)
 
     window.CeresMain = new CeresMain();
     window.CeresNotification = NotificationService;
+    window.MediaQueryHelperClass = new MediaQueryHelperClass();
 
-    var showShopNotification = function(event)
+    const showShopNotification = function(event)
     {
         if (event.detail.type)
         {

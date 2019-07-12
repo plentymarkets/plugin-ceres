@@ -1,0 +1,56 @@
+{
+    "identifier": "Ceres::SubscribeNewsletterCheckWidget",
+    "label": "Widget.subscribeNewsletterCheckLabel",
+    "previewImageURL": "/images/widgets/newsletter-subscription-check.svg",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\SubscribeNewsletterCheckWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "emailFolder": {
+            "type": "number",
+            "required": true,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.subscribeNewsletterCheckEmailFolderLabel",
+                "tooltipText": "Widget.subscribeNewsletterCheckEmailFolderTooltip"
+            }
+        },
+        "hideCheckbox": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.subscribeNewsletterCheckHideCheckboxLabel",
+                "tooltipText": "Widget.subscribeNewsletterCheckHideCheckboxTooltip"
+            }
+        },
+        "isPreselected": {
+            "type": "checkbox",
+            "isVisible": "hideCheckbox !== true",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.subscribeNewsletterCheckIsPreselectedLabel",
+                "tooltipText": "Widget.subscribeNewsletterCheckIsPreselectedTooltip"
+            }
+        },
+        "isRequired": {
+            "type": "checkbox",
+            "isVisible": "hideCheckbox !== true",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.subscribeNewsletterCheckIsRequiredLabel",
+                "tooltipText": "Widget.subscribeNewsletterCheckIsRequiredTooltip"
+            }
+        },
+        "customText": {
+            "type": "codeEditor",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.subscribeNewsletterCheckCustomTextLabel",
+                "tooltipText": "Widget.subscribeNewsletterCheckCustomTextTooltip"
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

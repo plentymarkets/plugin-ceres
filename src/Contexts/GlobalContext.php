@@ -2,20 +2,19 @@
 
 namespace Ceres\Contexts;
 
-use IO\Helper\ContextInterface;
-use IO\Services\CustomerService;
-use IO\Services\ItemLastSeenService;
-use IO\Services\NotificationService;
-use IO\Services\UrlService;
-use IO\Services\WebstoreConfigurationService;
-use Plenty\Plugin\Http\Request;
 use Ceres\Config\CeresConfig;
+use IO\Helper\ContextInterface;
+use IO\Services\BasketService;
 use IO\Services\CategoryService;
-use IO\Services\ItemCrossSellingService;
+use IO\Services\CheckoutService;
+use IO\Services\CustomerService;
+use IO\Services\NotificationService;
 use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
-use IO\Services\BasketService;
-use IO\Services\CheckoutService;
+use IO\Services\UrlService;
+use IO\Services\WebstoreConfigurationService;
+use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
+use Plenty\Plugin\Http\Request;
 
 class GlobalContext implements ContextInterface
 {
@@ -42,6 +41,8 @@ class GlobalContext implements ContextInterface
     public $homepageURL;
     public $splitItemBundle;
     public $templateEvent;
+    public $isShopBuilder;
+    public $bodyClasses;
 
     public function init($params)
     {
@@ -56,15 +57,9 @@ class GlobalContext implements ContextInterface
         /** @var TemplateService $templateService */
         $templateService = pluginApp(TemplateService::class);
 
-        /** @var ItemCrossSellingService $crossSellingService */
-        $crossSellingService = pluginApp(ItemCrossSellingService::class);
-
         /** @var WebstoreConfigurationService $webstoreConfigService */
         $webstoreConfigService = pluginApp(WebstoreConfigurationService::class);
-
-        /** @var ItemLastSeenService $itemLastSeenService */
-        $itemLastSeenService = pluginApp(ItemLastSeenService::class);
-
+        
         /** @var BasketService $basketService */
         $basketService = pluginApp(BasketService::class);
 
@@ -73,6 +68,9 @@ class GlobalContext implements ContextInterface
 
         /** @var CustomerService $customerService */
         $customerService = pluginApp(CustomerService::class);
+
+        /** @var ShopBuilderRequest $shopBuilderRequest */
+        $shopBuilderRequest = pluginApp(ShopBuilderRequest::class);
 
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
@@ -91,10 +89,7 @@ class GlobalContext implements ContextInterface
 
         if($templateService->isCategory() || $templateService->isItem())
         {
-            $this->categoryBreadcrumbs = $categoryService->getHierarchy();
-            $crossSellingService->setType($this->ceresConfig->itemLists->crossSellingType);
-            $crossSellingService->setSorting($this->ceresConfig->itemLists->crossSellingSorting);
-            $itemLastSeenService->setLastSeenMaxCount($this->ceresConfig->itemLists->lastSeenNumber);
+            $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
         }
 
         $this->categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6, $customerService->getContactClassId());
@@ -109,6 +104,20 @@ class GlobalContext implements ContextInterface
         $this->splitItemBundle = $webstoreConfigService->getWebstoreConfig()->dontSplitItemBundle;
 
         $this->templateEvent = $templateService->getCurrentTemplate();
+
+        $this->isShopBuilder = $shopBuilderRequest->isShopBuilder();
+       
+        $this->bodyClasses = [];
+        $templateClass = str_replace('tpl', 'page', $this->templateEvent);
+        $templateClass = str_replace('.', '-', $templateClass);
+
+        /* page-item is a bootstrap class */
+        if($templateClass === "page-item")
+        {
+            $templateClass = "page-singleitem";
+        }
+
+        $this->bodyClasses[] = $templateClass;
     }
 
     protected function getParam($key, $defaultValue = null)

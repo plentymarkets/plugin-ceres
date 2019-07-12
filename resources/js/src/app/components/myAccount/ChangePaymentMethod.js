@@ -5,17 +5,38 @@ import TranslationService from "services/TranslationService";
 
 Vue.component("change-payment-method", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "currentOrder",
-        "allowedPaymentMethods",
-        "changePossible",
-        "paymentStatus",
-        "currentTemplate",
-        "currentPaymentMethodName"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-change-payment-method"
+        },
+        currentOrder:
+        {
+            type: Object
+        },
+        allowedPaymentMethods:
+        {
+            type: Array
+        },
+        changePossible:
+        {
+            type: Boolean
+        },
+        paymentStatus:
+        {
+            type: String
+        },
+        currentTemplate:
+        {
+            type: String
+        },
+        currentPaymentMethodName:
+        {
+            type: String
+        }
+    },
 
     data()
     {
@@ -26,11 +47,6 @@ Vue.component("change-payment-method", {
             isPending: false,
             showErrorMessage: false
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     /**

@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::BankDataSelectWidget",
+    "label": "Template.myAccountBankDetails",
+    "previewImageURL": "/images/widgets/bank-details.svg",
+    "type": "myaccount",
+    "categories": ["myaccount"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\BankDataSelectWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

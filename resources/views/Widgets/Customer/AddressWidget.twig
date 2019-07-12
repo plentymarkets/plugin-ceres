@@ -1,0 +1,98 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
+
+{% set hintText = widget.settings.hintText.mobile %}
+
+<div class="widget widget-address widget-{{ widget.settings.appearance.mobile | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+    {% if widget.settings.addressType.mobile == "1" %}
+        {{ Twig.set("overrideBillingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.BillingAddress"])) }}
+        {{ Twig.if("overrideBillingAddress | trim is empty") }}
+
+            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+                {% if hintText is empty %}
+                    {{ Twig.if("services.template.isCurrentTemplate('tpl.checkout')") }}
+                        <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutInvoiceAddress")) }}</h3>
+                    {{ Twig.else() }}
+                        <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountInvoiceAddresses")) }}</h3>
+                    {{ Twig.endif() }}
+                {% else %}
+                    {{ WidgetHelper.editableTwig(isPreview, hintText) }}
+                {% endif %}
+            </div>
+
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBillingAddress"])) }}
+            <div class="invoice-addresses-select">
+                {% set optionalInvoiceAddressFields = {
+                    "de": widget.settings.addressFieldsInvoiceDE.mobile | default([]),
+                    "gb": widget.settings.addressFieldsInvoiceGB.mobile | default([])
+                } %}
+                {% set requiredInvoiceAddressFields = {
+                    "de": widget.settings.addressRequiredFieldsInvoiceDE.mobile | default([]),
+                    "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile | default([])
+                } %}
+                <invoice-address-select
+                    :has-to-validate="{{ Twig.print("services.template.isCurrentTemplate('tpl.checkout') | json_encode") }}"
+                    :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+                    :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
+                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                </invoice-address-select>
+            </div>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBillingAddress"])) }}
+        {{ Twig.else() }}
+            {{ Twig.print("overrideBillingAddress") }}
+        {{ Twig.endif() }}
+    {% elseif widget.settings.addressType.mobile == "2" %}
+        {{ Twig.set("overrideShippingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.ShippingAddress"])) }}
+        {{ Twig.if("overrideShippingAddress | trim is empty") }}
+
+            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+                {% if hintText is empty %}
+                    {{ Twig.if("services.template.isCurrentTemplate('tpl.checkout')") }}
+                        <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutShippingAddress")) }}</h3>
+                    {{ Twig.else() }}
+                        <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountShippingAddresses")) }}</h3>
+                    {{ Twig.endif() }}
+                {% else %}
+                    {{ WidgetHelper.editableTwig(isPreview, hintText) }}
+                {% endif %}
+            </div>
+
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingAddress"])) }}
+            <div class="shipping-addresses-select">
+                {% set optionalShippingAddressFields = {
+                    "de": widget.settings.addressFieldsShippingDE.mobile | default([]),
+                    "gb": widget.settings.addressFieldsShippingGB.mobile | default([])
+                } %}
+                {% set requiredShippingAddressFields = {
+                    "de": widget.settings.addressRequiredFieldsShippingDE.mobile | default([]),
+                    "gb": widget.settings.addressRequiredFieldsShippingGB.mobile | default([])
+                } %}
+
+                <shipping-address-select
+                    :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
+                    :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
+                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
+                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                </shipping-address-select>
+            </div>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterShippingAddress"])) }}
+        {{ Twig.else() }}
+            {{ Twig.print("overrideShippingAddress") }}
+        {{ Twig.endif() }}
+    {% endif %}
+</div>

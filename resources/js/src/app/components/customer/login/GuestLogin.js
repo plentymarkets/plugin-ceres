@@ -1,7 +1,7 @@
 import ValidationService from "services/ValidationService";
 import { navigateTo } from "services/UrlService";
 
-var ApiService = require("services/ApiService");
+const ApiService = require("services/ApiService");
 
 Vue.component("guest-login", {
 
@@ -20,17 +20,12 @@ Vue.component("guest-login", {
         };
     },
 
-    created: function()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>
         {
             $("#guestLogin").on("hidden.bs.modal", () =>
-			{
+            {
                 this.email = "";
                 this.resetError();
             });

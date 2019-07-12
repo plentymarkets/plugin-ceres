@@ -1,3 +1,5 @@
+import TranslationService from "services/TranslationService";
+
 Vue.component("address-input-group", {
 
     delimiters: ["${", "}"],
@@ -17,6 +19,30 @@ Vue.component("address-input-group", {
             {
                 return {};
             }
+        },
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {
+                    de:[],
+                    uk:[]
+                };
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {
+                    de:[],
+                    uk:[]
+                };
+            }
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
         }
     },
 
@@ -51,14 +77,6 @@ Vue.component("address-input-group", {
             localeToShow: this.defaultCountry,
             selectedCountry: null
         };
-    },
-
-    /**
-     * Check whether the address data exists. Else, create an empty one
-     */
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:
@@ -116,6 +134,52 @@ Vue.component("address-input-group", {
         emitInputEvent(field, value)
         {
             this.$emit("input", { field, value });
+        },
+
+        isInOptionalFields(locale, key)
+        {
+            return this.optionalAddressFields[locale].includes(key);
+        },
+
+        isInRequiredFields(locale, key)
+        {
+            return (this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key));
+        },
+
+        transformTranslation(translationKey, locale, addressKey)
+        {
+            const translation = TranslationService.translate(translationKey);
+            const isRequired = this.isInRequiredFields(locale, addressKey);
+
+            return translation + (isRequired ? "*" : "");
+        },
+
+        areNameFieldsShown(locale, keyPrefix)
+        {
+            const isSalutationActive = this.isInOptionalFields(locale, `${keyPrefix}.salutation`);
+            const isContactPersonActive = this.isInOptionalFields(locale, `${keyPrefix}.contactPerson`);
+            const isName1Active = this.isInOptionalFields(locale, `${keyPrefix}.name1`);
+            const isSelectedSalutationCompany = this.value.gender === "company";
+
+            const condition1 = isSalutationActive && isContactPersonActive && isSelectedSalutationCompany;
+            const condition2 = !isSalutationActive && isName1Active && isContactPersonActive;
+
+            return !(condition1 || condition2);
+        },
+
+        areNameFieldsRequired(locale, keyPrefix)
+        {
+            const isSalutationActive = this.isInOptionalFields(locale, `${keyPrefix}.salutation`);
+            const isName1Active = this.isInOptionalFields(locale, `${keyPrefix}.name1`);
+            const isContactPersonRequired = this.isInRequiredFields(locale, `${keyPrefix}.contactPerson`);
+            const isSelectedSalutationCompany = this.value.gender === "company";
+
+            const condition1 = isSalutationActive && !isSelectedSalutationCompany;
+            const condition2 = isSalutationActive && isSelectedSalutationCompany && isContactPersonRequired;
+            const condition3 = !isSalutationActive && isName1Active && isContactPersonRequired;
+            const condition4 = !isSalutationActive && !isName1Active;
+
+            return condition1 || condition2 || condition3 || condition4;
         }
     }
 });

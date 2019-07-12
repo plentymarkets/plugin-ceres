@@ -23,7 +23,6 @@
 
 //TODO's
 @import "ceres/common/buttons";
-@import "ceres/common/card";
 
 // External plugins overrides
 @import "ceres/plugins/bs4-progress";
@@ -40,6 +39,7 @@
 @import "ceres/components/live-shopping";
 @import "ceres/components/notifications";
 @import "ceres/components/popover";
+@import "ceres/components/tooltip";
 
 // Forms
 @import "ceres/forms/input-groups";
@@ -65,12 +65,12 @@
 @import "ceres/views/Templates/CategoryViewFilter/category-view-filter";
 @import "ceres/views/Templates/Customer/contact";
 @import "ceres/views/Templates/Customer/login";
-@import "ceres/views/Templates/Customer/reset-password";
 @import "ceres/views/Templates/Hero/component-hero";
 @import "ceres/views/Templates/Item/quantity-input";
 @import "ceres/views/Templates/ItemListSort/pagination";
 @import "ceres/views/Templates/ItemRating/item-rating-roll";
 @import "ceres/views/Templates/ItemRating/item-rating-section";
+@import "ceres/views/Templates/OrderItem/order-history-list";
 @import "ceres/views/Templates/OrderItem/order-item";
 @import "ceres/views/Templates/OrderItem/order-return";
 @import "ceres/views/Templates/PaymentShippingSelect/payment-shipping-select";

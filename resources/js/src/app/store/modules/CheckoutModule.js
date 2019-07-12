@@ -1,6 +1,4 @@
 import ApiService from "services/ApiService";
-import NotificationService from "services/NotificationService";
-import TranslationService from "services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
 
 const state =
@@ -10,7 +8,8 @@ const state =
             isPostOfficeAvailable: false,
             selectedShippingProfile: null,
             shippingProfileId: null,
-            shippingProfileList: []
+            shippingProfileList: [],
+            maxDeliveryDays: null
         },
         payment: {
             methodOfPaymentId: null,
@@ -35,7 +34,9 @@ const state =
                 showError: false,
                 validate: null
             }
-        }
+        },
+        newsletterSubscription: {},
+        readOnly: false
     };
 
 const mutations =
@@ -59,6 +60,11 @@ const mutations =
             {
                 state.shipping.shippingProfileList = shippingProfileList;
             }
+        },
+
+        setMaxDeliveryDays(state, maxDeliveryDays)
+        {
+            state.shipping.maxDeliveryDays = maxDeliveryDays;
         },
 
         setMethodOfPayment(state, methodOfPaymentId)
@@ -135,6 +141,26 @@ const mutations =
         setPostOfficeAvailability(state, availability)
         {
             state.shipping.isPostOfficeAvailable = availability;
+        },
+
+        setSubscribeNewsletterCheck(state, { emailFolder, value })
+        {
+            Vue.set(state.newsletterSubscription, emailFolder, value);
+        },
+
+        addSubscribeNewsletterValidate(state, { emailFolder, validator })
+        {
+            Vue.set(state.validation, `subscribeNewsletter_${emailFolder}`, { validate: validator, showError: false });
+        },
+
+        setSubscribeNewsletterShowErr(state, { emailFolder, showError })
+        {
+            Vue.set(state.validation[`subscribeNewsletter_${emailFolder}`], "showError", showError);
+        },
+
+        setIsCheckoutReadonly(state, readOnly)
+        {
+            state.readOnly = !!readOnly;
         }
     };
 
@@ -145,8 +171,10 @@ const actions =
             commit("setShippingCountryId", checkout.shippingCountryId);
             commit("setShippingProfile", checkout.shippingProfileId);
             commit("setShippingProfileList", checkout.shippingProfileList);
+            commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
+            commit("setIsCheckoutReadonly", checkout.readOnly);
 
             dispatch("setShippingProfileById", checkout.shippingProfileId);
             dispatch("initProfileAvailabilities");
@@ -198,22 +226,6 @@ const actions =
                 commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
-                const isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
-                const isAddressPostOffice = getters.getSelectedAddress("2").address1 === "POSTFILIALE";
-                const isAddressParcelBox = getters.getSelectedAddress("2").address1 === "PACKSTATION";
-
-                if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
-                {
-                    const isUnsupportedPostOffice = isAddressPostOffice && !shippingProfile.isPostOffice;
-                    const isUnsupportedParcelBox = isAddressParcelBox && !shippingProfile.isParcelBox;
-
-                    if (isUnsupportedPostOffice || isUnsupportedParcelBox)
-                    {
-                        commit("selectDeliveryAddressById", -99);
-                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressChangedWarning"));
-                    }
-                }
-
                 ApiService.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId })
                     .done(response =>
                     {
@@ -235,15 +247,15 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 ApiService.get("/rest/io/checkout/")
-                        .done(checkout =>
-                        {
-                            dispatch("setCheckout", checkout);
-                            resolve(checkout);
-                        })
-                        .fail(error =>
-                        {
-                            reject(error);
-                        });
+                    .done(checkout =>
+                    {
+                        dispatch("setCheckout", checkout);
+                        resolve(checkout);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
             });
         },
 

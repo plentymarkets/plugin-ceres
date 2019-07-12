@@ -6,18 +6,22 @@
     {% if level < megaMenuLevels %}
         {% for child in category.children if counter < maxItems[level] %}
             {% if (child.details | length > 0) %}
-                {% if level == 1 %}<li><ul class="nav-dropdown-inner">{% endif %}
+                {% if level == 1 %}
+                    <li><ul class="nav-dropdown-inner">
+                {% endif %}
                     <li class="level{{ level }}">
                         {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
-                        <a href="{{ newScope }}{{ urls.trailingSlashSuffix }}">{{ child.details[0].name }}</a>
-                        {% if child.children %}
-                            {{ childlist.get_children(child, newScope, level + 1, megaMenuLevels, maxItems) }}
-                        {% endif %}
+                        <a @touchstart.stop href="{{ newScope }}{{ urls.trailingSlashSuffix }}">{{ child.details[0].name }}</a>
                     </li>
-                {% if level == 1 %}</ul></li>{% endif %}
+                    {% if child.children %}
+                        {{ childlist.get_children(child, newScope, level + 1, megaMenuLevels, maxItems) }}
+                    {% endif %}
+                {% if level == 1 %}
+                    </ul></li>
+                {% endif %}
                 {% set counter = counter + 1 %}
                 {% if counter == maxItems[level]%}
-                    <li class="level{{ level }} bt-more"><a href="{{ currentScopeUrl }}">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
+                    <li class="level{{ level }} bt-more"><a @touchstart.stop href="{{ currentScopeUrl }}">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -58,7 +62,11 @@
                             {% for child in category.children %}
                                 {% if child.details | length > 0 %}
                                     <li>
-                                        <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}">{{ child.details[0].name }}</a>
+                                        <ul class="nav-dropdown-inner">
+                                            <li>
+                                                <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}">{{ child.details[0].name }}</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 {% endif %}
                             {% endfor %}
@@ -83,22 +91,22 @@
 {% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl) %}
 
     {% import _self as sidemenu %}
-    {% set urlNow = currentScopeUrl %}
+    {% for category in categories if category.details[0] %}
 
-    {% for category in categories %}
-
-        {% set urlNow = currentScopeUrl ~ "/" ~ category.details[0].nameUrl %}
-
-        {% if category.details[0] %}
-            <ul>
-                <li class="nav-item{% for breadcrumb in breadcrumbs %}{% if category.id == breadcrumb.id %} active{% endif %}{% endfor %}">
-                    <a href="{{ urlNow }}{{ urls.trailingSlashSuffix }}" class="nav-link">{{ category.details[0].name }}</a>
-                    {% if category.children is not empty %}
-                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, urlNow) }}
-                    {% endif %}
-                </li>
-            </ul>
+        {% set currentUrl = currentScopeUrl %}
+        {% if currentUrl is empty and urls.includeLanguage %}
+            {% set currentUrl = "/" ~ category.details[0].lang %}
         {% endif %}
+
+        {% set currentUrl = currentUrl ~ "/" ~ category.details[0].nameUrl  %}
+        <ul>
+            <li class="nav-item{% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
+                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link">{{ category.details[0].name }}</a>
+                {% if category.children is not empty %}
+                    {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl) }}
+                {% endif %}
+            </li>
+        </ul>
 
     {% endfor %}
 

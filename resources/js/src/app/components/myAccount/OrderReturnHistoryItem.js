@@ -19,15 +19,14 @@ Vue.component("order-return-history-item", {
     },
 
     data()
-	{
+    {
         return {
             itemsToRender: []
         };
     },
 
     created()
-	{
-        this.$options.template = this.template;
+    {
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
     },
 

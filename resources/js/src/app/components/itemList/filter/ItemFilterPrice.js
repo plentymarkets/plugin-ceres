@@ -14,7 +14,7 @@ Vue.component("item-filter-price", {
     },
 
     data()
-	{
+    {
         return {
             priceMin: "",
             priceMax: "",
@@ -24,8 +24,6 @@ Vue.component("item-filter-price", {
 
     created()
     {
-        this.$options.template = this.template || "#vue-item-filter-price";
-
         const urlParams = UrlService.getUrlParams(document.location.search);
 
         this.priceMin = urlParams.priceMin || "";
@@ -35,7 +33,7 @@ Vue.component("item-filter-price", {
     computed:
     {
         isDisabled()
-		{
+        {
             return (this.priceMin === "" && this.priceMax === "") ||
                     (parseInt(this.priceMin) >= parseInt(this.priceMax)) ||
                     this.isLoading;

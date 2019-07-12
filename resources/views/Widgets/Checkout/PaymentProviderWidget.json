@@ -1,0 +1,20 @@
+{
+    "identifier": "Ceres::PaymentProviderWidget",
+    "label": "Widget.paymentProviderLabel",
+    "previewImageURL": "/images/widgets/payment-select.svg",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
+    "maxPerPage": 1,
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}

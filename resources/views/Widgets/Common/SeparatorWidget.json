@@ -6,5 +6,19 @@
     "categories": ["structure"],
     "position": 1100,
     "widgetClass": "Ceres\\Widgets\\Common\\SeparatorWidget",
-    "settings": {}
+    "settings": {
+        "customClass":"@include(customClass)",
+        "margin": {
+            "type": "spacing",
+            "required": false,
+            "options": {
+                "name": "Widget.separatorMargin",
+                "units": [
+                    "px",
+                    "rem"
+                ],
+                "direction": "vertical"
+            }
+        }
+    }
 }

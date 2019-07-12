@@ -16,9 +16,12 @@
         ]
     },
     "allowedTypes": {
-        "header": ["header"],
-        "footer": ["footer", "static", "structure"],
-        "content": ["static", "structure"]
+        "header":       ["header", "static", "structure", "default"],
+        "footer":       ["footer", "static", "structure", "default"],
+        "content":      ["static", "structure", "default"],
+        "singleitem":   ["static", "structure", "default", "item"],
+        "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
     },
     "presets": {
         "header": [
@@ -37,8 +40,50 @@
             {
                 "label": "Widget.presetHomepageDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
+            },
+            {
+                "label": "Widget.presetCancellationRightsDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationRightsPreset"
+            },
+            {
+                "label": "Widget.presetCancellationFormDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationFormPreset"
+            },
+            {
+                "label": "Widget.presetLegalDisclosureDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultLegalDisclosurePreset"
+            },
+            {
+                "label": "Widget.presetPrivacyPolicyDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset"
+            },
+            {
+                "label": "Widget.presetGTCDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
+            }
+        ],
+        "checkout": [
+            {
+                "label": "Widget.presetCheckoutDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"
+            }
+        ],
+        "myaccount": [
+            {
+              "label": "Widget.presetMyAccountDefault",
+              "presetClass": "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset"
+            }
+        ],
+        "singleitem":
+        [
+            {
+                "label":"Widget.presetSingleItemDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultSingleItemPreset"
             }
         ]
+    },
+    "dataFieldProviders": {
+        "singleitem": "Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ItemDataFieldProvider"
     },
     "categories": [
         {
@@ -67,9 +112,171 @@
             "position": 500
         },
         {
+            "key": "customer",
+            "label": "Widget.categoryCustomer",
+            "position": 600
+        },
+        {
+            "key": "basket",
+            "label": "Widget.categoryBasket",
+            "position": 700
+        },
+        {
+            "key": "checkout",
+            "label": "Widget.categoryCheckout",
+            "position": 800
+        },
+        {
+            "key": "myaccount",
+            "label": "Widget.categoryMyAccount",
+            "position": 900
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 600
+            "position": 1000
         }
-    ]
+    ],
+    "globalSettings": {
+        "homeCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryHome"
+            }
+        },
+        "homeEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!homeCategory",
+            "options": {
+                "name": "Config.routingEnableRouteHome"
+            }
+        },
+        "checkoutCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCheckout"
+            }
+        },
+        "checkoutEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!checkoutCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCheckout"
+            }
+        },
+        "myAccountCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryMyAccount"
+            }
+        },
+        "myAccountEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!myAccountCategory",
+            "options": {
+                "name": "Config.routingEnableRouteMyAccount"
+            }
+        },
+        "cancellationRightsCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCancellationRights"
+            }
+        },
+        "cancellationRightsEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!cancellationRightsCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCancellationRights"
+            }
+        },
+        "cancellationFormCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCancellationForm"
+            }
+        },
+        "cancellationFormEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!cancellationFormCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCancellationForm"
+            }
+        },
+        "legalDisclosureCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryLegalDisclosure"
+            }
+        },
+        "legalDisclosureEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!legalDisclosureCategory",
+            "options": {
+                "name": "Config.routingEnableRouteLegalDisclosure"
+            }
+        },
+        "privacyPolicyCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryPrivacyPolicy"
+            }
+        },
+        "privacyPolicyEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!privacyPolicyCategory",
+            "options": {
+                "name": "Config.routingEnableRoutePrivacyPolicy"
+            }
+        },
+        "gtcCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryGtc"
+            }
+        },
+        "gtcEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!gtcCategory",
+            "options": {
+                "name": "Config.routingEnableRouteGtc"
+            }
+        },
+        "shippingCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.globalShippingCostsCategoryIdLabel"
+            }
+        }
+    },
+    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
+    "supportedFeatures": {
+        "singleItemContent": true
+    }
 }

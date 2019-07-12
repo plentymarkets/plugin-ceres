@@ -1,17 +1,17 @@
 <script type="x/template" id="vue-shipping-profile-select">
     <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
-        <ul class="method-list component-loading" :class="{ 'isLoading': isBasketLoading }">
+        <ul class="method-list component-loading" :class="{ 'isLoading': isBasketLoading || isCheckoutReadonly }">
             <li v-for="shippingProfile in shippingProfileList" class="method-list-item" :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
                         :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
-                        name="ShippingProfileID"
+                        :name="'shippingProfileSelect' + _uid"
                         :value="shippingProfile.parcelServicePresetId"
                         @change="onShippingProfileChange(shippingProfile.parcelServicePresetId)"
                         :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
-                        :disabled = "isBasketLoading"
+                        :disabled="isBasketLoading || isCheckoutReadonly"
                 >
-                <label :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId">
+                <label class="provider-select-label" :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId" :class="paddingClasses" :style="paddingInlineStyles">
                     <div class="icon">
                         {#<img src="">#}
                     </div><!--
@@ -20,10 +20,18 @@
                         <div>
                             <small>
                                 ${ shippingProfile.shippingAmount | currency }
+                                <template v-if="maxDeliveryDays && maxDeliveryDays[shippingProfile.parcelServicePresetId]"> - {{ trans("Ceres::Template.checkoutShippingProfileMaxDeliveryDays", {"days": "${ maxDeliveryDays[shippingProfile.parcelServicePresetId] }"}) }}</template>
                             </small>
                         </div>
                     </div>
                 </label>
+            </li><!-- -->
+            <li v-if="shippingProfileList.length <= 0" class="method-list-item has-error">
+                <div class="label">
+                    <div class="content">
+                        {{ trans("Ceres::Template.notificationsCalculateShippingFailed") }}
+                    </div>
+                </div>
             </li><!-- -->
         </ul>
     </div>

@@ -1,0 +1,66 @@
+{
+    "identifier": "Ceres::OrderHistoryWidget",
+    "label": "Widget.orderHistoryLabel",
+    "previewImageURL": "/images/widgets/order-history.svg",
+    "type": "myaccount",
+    "categories": ["myaccount"],
+    "position": 100,
+    "maxPerPage": 1,
+    "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderHistoryWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "ordersPerPage": {
+            "type": "select",
+            "defaultValue": 5,
+            "options": {
+                "name": "Widget.orderHistoryOrdersPerPageLabel",
+                "tooltipText": "Widget.orderHistoryOrdersPerPageTooltip",
+                "listBoxValues": [
+                    {
+                        "value": 5,
+                        "caption": "Widget.orderHistoryOrdersPerPage5",
+                        "position": 0
+                    },
+                    {
+                        "value": 10,
+                        "caption": "Widget.orderHistoryOrdersPerPage10",
+                        "position": 1
+                    },
+                    {
+                        "value": 25,
+                        "caption": "Widget.orderHistoryOrdersPerPage25",
+                        "position": 2
+                    },
+                    {
+                        "value": 50,
+                        "caption": "Widget.orderHistoryOrdersPerPage50",
+                        "position": 3
+                    }
+                ]
+            }
+        },
+        "allowPaymentProviderChange": {
+            "type": "checkbox",
+            "defaultValue": true,
+            "options": {
+                "name": "Widget.orderHistoryAllowPaymentProviderChangeLabel",
+                "tooltip": "Widget.orderHistoryAllowPaymentProviderChangeTooltip"
+            }
+        },
+        "allowReturn": {
+            "type": "checkbox",
+            "defaultValue": true,
+            "options": {
+                "name": "Widget.orderHistoryAllowReturnLabel",
+                "tooltip": "Widget.orderHistoryAllowReturnTooltip"
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "identifier": "Ceres::ContactWishWidget",
+    "label": "Widget.contactWishLabel",
+    "previewImageURL": "/images/widgets/contact-wish.svg",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 300,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\ContactWishWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "spacing":"@include(spacingMargin)"
+    }
+}

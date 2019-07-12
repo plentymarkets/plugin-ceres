@@ -1,0 +1,18 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.myAccountChangeEmail") %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+    {{ component("Ceres::Customer.Components.ChangeEmailForm") }}
+
+    <change-email-form
+            :contact-id="{{ contactId }}"
+            hash="{{ hash }}"
+            new-mail="{{ newMail }}">
+    </change-email-form>
+
+{% endblock %}

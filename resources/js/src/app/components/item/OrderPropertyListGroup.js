@@ -7,6 +7,16 @@ Vue.component("order-property-list-group", {
             type: String,
             default: "#vue-order-property-list-group"
         },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        },
         propertyGroup: Object
     },
 
@@ -18,11 +28,6 @@ Vue.component("order-property-list-group", {
 
             return properties.length;
         }
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:

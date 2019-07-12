@@ -1,6 +1,8 @@
 const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
+import { isNullOrUndefined } from "../../helper/utils";
+
 Vue.component("order-property-list-item", {
 
     props:
@@ -19,7 +21,8 @@ Vue.component("order-property-list-item", {
         return {
             inputValue: "",
             selectedFile: null,
-            waiting: false
+            waiting: false,
+            selectionValue: null
         };
     },
 
@@ -84,6 +87,18 @@ Vue.component("order-property-list-item", {
             return this.property.itemSurcharge || this.property.surcharge;
         },
 
+        selectedDescription()
+        {
+            if (this.inputType !== "selection" || isNullOrUndefined(this.selectionValue))
+            {
+                return null;
+            }
+
+            const selectedProperty = this.property.selectionValues[this.selectionValue];
+
+            return selectedProperty.description;
+        },
+
         ...Vuex.mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
@@ -92,11 +107,6 @@ Vue.component("order-property-list-item", {
         ...Vuex.mapGetters([
             "variationMissingProperties"
         ])
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:
@@ -122,6 +132,13 @@ Vue.component("order-property-list-item", {
             {
                 this.$emit("radio-change", this.property.id);
             }
+            else if (this.inputType === "selection")
+            {
+                if (isNullOrUndefined(value) || value.length <= 0)
+                {
+                    value = null;
+                }
+            }
 
             this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
         },
@@ -142,6 +159,8 @@ Vue.component("order-property-list-item", {
 
         validateFloat(value)
         {
+            const lastChar = value.slice(-1);
+
             value = parseFloat(value.replace(App.decimalSeparator, "."));
 
             if (isNaN(value))
@@ -150,6 +169,11 @@ Vue.component("order-property-list-item", {
             }
             else
             {
+                if (lastChar === "." || lastChar === App.decimalSeparator)
+                {
+                    value += lastChar;
+                }
+
                 value = value.toString().replace(".", App.decimalSeparator);
             }
 
