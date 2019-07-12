@@ -44,13 +44,14 @@ class LanguagesHelper
      *
      * @return array
      */
-    public static function translateLanguages(array $langArray)
+    public static function getTranslatedLanguages()
     {
         $translator = pluginApp(Translator::class);
+        $rawLanguages = self::getLanguages();
         $languages = [];
 
-        if (count($langArray)) {
-            foreach ($langArray as $lang) {
+        if (count($rawLanguages)) {
+            foreach ($rawLanguages as $lang) {
                 $languages[$lang] = $translator->trans("Ceres::Config.languageActiveLanguages" . ucfirst($lang));
             }
         }
@@ -58,4 +59,5 @@ class LanguagesHelper
         return $languages;
 
     }
+
 }

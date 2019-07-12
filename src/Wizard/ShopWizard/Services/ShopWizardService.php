@@ -79,6 +79,7 @@ class ShopWizardService
 
             $globalData = $this->mappingService->processGlobalMappingData($webstoreConfData);
 
+            //we check for shipping country list
             if (count($webstoreConfData['defaultShippingCountryList'])) {
                 foreach ($webstoreConfData['defaultShippingCountryList'] as $countryLang => $countryId) {
                     $settingsKey = 'defSettings_deliveryCountry_' . $countryLang;
@@ -86,6 +87,17 @@ class ShopWizardService
                     $globalData[$settingsKey] = $countryId;
                 }
             }
+
+            //we check for default currency list
+
+            if (count($webstoreConfData['defaultCurrencyList'])) {
+                foreach ($webstoreConfData['defaultCurrencyList'] as $currencyCountryCode => $currency) {
+                    $settingsKey = 'currencies_defaultCurrency_' . $currencyCountryCode;
+
+                    $globalData[$settingsKey] = $currency;
+                }
+            }
+
         }
 
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);

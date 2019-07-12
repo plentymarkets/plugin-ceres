@@ -102,6 +102,26 @@ class DataMapping
             "type" => "string",
             "global" => false
         ],
+        "currencies_currencyFormat" => [
+            "field" => "currency.format",
+            "type" => "string",
+            "global" => false
+        ],
+        "currencies_currencyFormatSelection" => [
+            "field" => "currency.format_selection",
+            "type" => "string",
+            "global" => false
+        ],
+        "currencies_allowCurrencyChange" => [
+            "field" => "currency.enable_selection",
+            "type" => "string",
+            "global" => false
+        ],
+        "currencies_availableCurrencies" => [
+            "field" => "currency.available_currencies",
+            "type" => "concatenated",
+            "global" => false
+        ],
     ];
 
     public $globalMapping = [];
