@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-variation-select">
     <div>
-        <div v-if="attributes.length || units.length" class="row">
+        <div v-if="attributes.length || Object.keys(units).length" class="row">
             <div class="col-12 variation-select" v-for="attribute in attributes">
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
@@ -39,7 +39,7 @@
                             :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }"
                             v-tooltip="!isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getInvalidOptionTooltip(attribute.attributeId, value.attributeValueId)">
                             <span class="mx-3" v-if="attribute.type === 'box'">${ value.name }</span>
-                            <img class="p-1" v-else :src="value.imageUrl" :alt="value.name">
+                            <img v-ie-objectfit-polyfill="'contain'" class="p-1" v-else :src="value.imageUrl" :alt="value.name">
                         </div>
                     </div>
                 </div>
