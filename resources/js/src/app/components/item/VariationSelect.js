@@ -1,6 +1,5 @@
-import { isDefined } from "../../helper/utils";
-import { isNull } from "util";
 import { textWidth } from "../../helper/dom";
+import { isDefined, isNull } from "../../helper/utils";
 import TranslationService from "services/TranslationService";
 
 const NotificationService = require("services/NotificationService");
@@ -192,7 +191,7 @@ Vue.component("variation-select", {
             {
                 let changes = 0;
 
-                if (variation.unitCombinationId !== this.selectedUnit)
+                if (variation.unitCombinationId !== this.selectedUnit && !isNull(this.selectedUnit))
                 {
                     changes++;
                 }
@@ -229,7 +228,7 @@ Vue.component("variation-select", {
                 selectedAttributeId = parseInt(selectedAttributeId);
                 const variationAttribute = variation.attributes.find(attribute => attribute.attributeId === selectedAttributeId);
 
-                if (this.selectedAttributes[selectedAttributeId] !== null)
+                if (!isNull(this.selectedAttributes[selectedAttributeId]))
                 {
                     if (variationAttribute && variationAttribute.attributeValueId !== this.selectedAttributes[selectedAttributeId] || !variationAttribute)
                     {
@@ -268,11 +267,14 @@ Vue.component("variation-select", {
 
             if (invalidSelection.newUnit)
             {
-                messages.push(
-                    TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name:
-                        TranslationService.translate("Ceres::Template.singleItemContent")
-                    })
-                );
+                if (!isNull(this.selectedUnit))
+                {
+                    messages.push(
+                        TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name:
+                            TranslationService.translate("Ceres::Template.singleItemContent")
+                        })
+                    );
+                }
 
                 this.$store.commit("selectItemUnit", invalidSelection.newUnit);
             }
@@ -337,7 +339,7 @@ Vue.component("variation-select", {
                     // an attribute is not matching with selection
                     if (variationAttribute &&
                         variationAttribute.attributeValueId !== attributes[attributeId] &&
-                        (strict || !strict && attributes[attributeId] !== null))
+                        (strict || !strict && !isNull(attributes[attributeId])))
                     {
                         return false;
                     }
