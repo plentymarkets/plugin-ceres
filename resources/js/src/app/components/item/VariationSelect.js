@@ -183,7 +183,6 @@ Vue.component("variation-select", {
          * returns a variation, where a minimum of changes in the selection is required to archive
          * @param {array} qualifiedVariations
          */
-        // eslint-disable-next-line complexity
         getClosestVariation(qualifiedVariations)
         {
             let closestVariation;
@@ -220,7 +219,6 @@ Vue.component("variation-select", {
          * returns object with array 'attributesToReset' and newUnit. The attributesToReset contains all attributes, which are not matching with the given variation
          * @param {object} variation
          */
-        // eslint-disable-next-line complexity
         getInvalidSelectionByVariation(variation)
         {
             const attributesToReset = [];
@@ -317,7 +315,6 @@ Vue.component("variation-select", {
             const uniqueValues = [...new Set(Object.values(attributes))];
             const isEmptyOptionSelected = uniqueValues.length === 1 && isNull(uniqueValues[0]);
 
-            // eslint-disable-next-line complexity
             const filteredVariations = this.variations.filter(variation =>
             {
                 // the selected unit is not matching
