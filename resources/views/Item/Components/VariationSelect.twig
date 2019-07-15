@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-variation-select">
     <div>
-        <div v-if="attributes.length || units.length" class="row">
+        <div v-if="attributes.length || Object.keys(units).length" class="row">
             <div class="col-12 variation-select" v-for="attribute in attributes">
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">

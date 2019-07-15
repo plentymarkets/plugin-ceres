@@ -18,7 +18,6 @@ Vue.component("variation-select", {
     data()
     {
         return {
-            initialVariationId: null,
             filteredVariationsCache: {}
         };
     },
@@ -313,6 +312,7 @@ Vue.component("variation-select", {
             const uniqueValues = [...new Set(Object.values(attributes))];
             const isEmptyOptionSelected = uniqueValues.length === 1 && isNull(uniqueValues[0]);
 
+            // eslint-disable-next-line complexity
             const filteredVariations = this.variations.filter(variation =>
             {
                 // the selected unit is not matching
@@ -322,7 +322,9 @@ Vue.component("variation-select", {
                 }
 
                 // the variation has no attributes (only checked, if any attribute has a selected value); or the variation has attributes and empty option is selected
-                if ((!isEmptyOptionSelected && !variation.attributes.length) || (isEmptyOptionSelected && variation.attributes.length))
+                // requires more than 0 attributes
+                if (((!isEmptyOptionSelected && !variation.attributes.length) || (isEmptyOptionSelected && variation.attributes.length))
+                    && this.attributes.length > 0)
                 {
                     return false;
                 }
