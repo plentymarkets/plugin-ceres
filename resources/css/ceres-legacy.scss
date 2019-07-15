@@ -19534,6 +19534,8 @@ html.ios {
                 height: 100%;
                 width: 100%;
                 border-radius: $border-radius;
+                -o-object-fit: contain;
+                   object-fit: contain;
             }
         }
     }
