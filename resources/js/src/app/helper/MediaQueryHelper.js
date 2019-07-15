@@ -1,6 +1,9 @@
+import { safePush } from "./array";
+import { isDefined } from "./utils";
+
 let _instance = null;
 
-export class MediaQueryHelperClass
+export class MediaQueryHelper
 {
     constructor()
     {
@@ -15,11 +18,9 @@ export class MediaQueryHelperClass
 
     initListener()
     {
-        this.functionList = [];
+        this.functionList = {};
         const currentBreakpoint = this.getCurrentBreakpoint();
 
-        // set timeout to fire event at end of callstack
-        setTimeout(() => { this.fireBreakpointChangedEvent(currentBreakpoint); }, 0); // eslint-disable-line
         this.oldBreakpoint = currentBreakpoint;
 
         window.addEventListener("resize", () =>
@@ -30,7 +31,6 @@ export class MediaQueryHelperClass
             if (currentBreakpoint !== this.oldBreakpoint)
             {
                 this.executeFunctions();
-                this.fireBreakpointChangedEvent(currentBreakpoint);
                 this.oldBreakpoint = currentBreakpoint;
             }
         });
@@ -67,21 +67,24 @@ export class MediaQueryHelperClass
 
     executeFunctions()
     {
-        for (const functionsToExecute of this.functionList)
+        const currentBreakpoint = this.getCurrentBreakpoint();
+        const functionsToRun = Array.prototype.concat(this.functionList[currentBreakpoint], this.functionList["all"]);
+
+        for (const functionToExecute of functionsToRun)
         {
-            functionsToExecute();
+            if (isDefined(functionToExecute))
+            {
+                console.log("Exec: ", functionToExecute);
+                functionToExecute();
+            }
         }
     }
 
-    fireBreakpointChangedEvent(currentBreakpoint)
+    addFunction(addedFunction, breakpoints = ["all"])
     {
-        const event = new CustomEvent("onBreakpointChange", { "detail": { "oldBreakpoint": this.oldBreakpoint, "breakpoint": currentBreakpoint } });
-
-        document.dispatchEvent(event);
-    }
-
-    addFunctions(addedFunction)
-    {
-        this.functionList.push(addedFunction);
+        for (const breakpoint of breakpoints)
+        {
+            this.functionList[breakpoint] = safePush(this.functionList[breakpoint], addedFunction);
+        }
     }
 }

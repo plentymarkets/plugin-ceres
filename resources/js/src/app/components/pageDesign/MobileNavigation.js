@@ -1,3 +1,5 @@
+import { MediaQueryHelper } from "../../helper/MediaQueryHelper";
+
 Vue.component("mobile-navigation", {
 
     props: [
@@ -51,14 +53,11 @@ Vue.component("mobile-navigation", {
     {
         addEventListener()
         {
-            document.addEventListener("onBreakpointChange", (event) =>
+            const QueryHelper = new MediaQueryHelper();
+            const breakpoint = QueryHelper.getCurrentBreakpoint();
+            const onMobileBreakpoint = () =>
             {
-                const breakpoint = event.detail.breakpoint;
-
-                if ((breakpoint === "md" ||
-                    breakpoint === "sm" ||
-                    breakpoint === "xs") &&
-                    this.navigationTree.length <= 0)
+                if (this.navigationTree.length <= 0)
                 {
                     this.$store.dispatch("loadNavigationTree")
                         .then(() =>
@@ -66,7 +65,16 @@ Vue.component("mobile-navigation", {
                             this.initNavigation();
                         });
                 }
-            });
+            };
+
+            QueryHelper.addFunction(onMobileBreakpoint, ["xs", "md", "sm"]);
+
+            if (breakpoint === "md" ||
+                breakpoint === "sm" ||
+                breakpoint === "xs")
+            {
+                onMobileBreakpoint();
+            }
         },
 
         initNavigation()
