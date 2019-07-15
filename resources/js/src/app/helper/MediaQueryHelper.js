@@ -74,7 +74,6 @@ export class MediaQueryHelper
         {
             if (isDefined(functionToExecute))
             {
-                console.log("Exec: ", functionToExecute);
                 functionToExecute();
             }
         }
