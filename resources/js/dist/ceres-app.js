@@ -43436,13 +43436,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 Vue.component("mobile-navigation", {
   props: ["template", "initialCategory"],
-  jsonDataFields: ["navigationTreeData"],
   data: function data() {
     return {
       dataContainer1: [],
       dataContainer2: [],
       useFirstContainer: false,
-      breadcrumbs: []
+      breadcrumbs: [],
+      isNavigationInitialized: false
     };
   },
   computed: _objectSpread({
@@ -43466,17 +43466,24 @@ Vue.component("mobile-navigation", {
       return state.navigation.tree;
     }
   })),
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      _this.initNavigation();
-    });
+  created: function created() {
+    this.addEventListener();
   },
   methods: {
-    initNavigation: function initNavigation() {
-      this.$store.dispatch("initNavigationTree", this.navigationTreeData);
+    addEventListener: function addEventListener() {
+      var _this = this;
 
+      document.addEventListener("onBreakpointChange", function (event) {
+        var breakpoint = event.detail.breakpoint;
+
+        if ((breakpoint === "md" || breakpoint === "sm" || breakpoint === "xs") && _this.navigationTree.length <= 0) {
+          _this.$store.dispatch("loadNavigationTree").then(function () {
+            _this.initNavigation();
+          });
+        }
+      });
+    },
+    initNavigation: function initNavigation() {
       if (this.initialCategory && this.initialCategory.id) {
         if (this.initialCategory.linklist === "N") {
           this.$store.commit("setCurrentCategory", this.initialCategory);
@@ -43489,6 +43496,7 @@ Vue.component("mobile-navigation", {
       }
 
       this.dataContainer1 = this.navigationTree;
+      this.isNavigationInitialized = true;
     },
     initialSlide: function initialSlide(currentCategory) {
       if (currentCategory) {
@@ -44108,8 +44116,10 @@ Vue.directive("navigation-touch-handler", {
 Vue.directive("open-mobile-navigation", {
   bind: function bind(el, binding) {
     el.onclick = function (event) {
-      document.querySelector(".mobile-navigation").classList.add("open");
-      document.querySelector("body").classList.add("menu-is-visible");
+      if (document.querySelector(".mobile-navigation")) {
+        document.querySelector(".mobile-navigation").classList.add("open");
+        document.querySelector("body").classList.add("menu-is-visible");
+      }
     };
   }
 });
@@ -44936,13 +44946,21 @@ function () {
       var _this = this;
 
       this.functionList = [];
-      this.oldBreakpoint = this.getCurrentBreakpoint();
+      var currentBreakpoint = this.getCurrentBreakpoint(); // set timeout to fire event at end of callstack
+
+      setTimeout(function () {
+        _this.fireBreakpointChangedEvent(currentBreakpoint);
+      }, 0); // eslint-disable-line
+
+      this.oldBreakpoint = currentBreakpoint;
       window.addEventListener("resize", function () {
         var currentBreakpoint = _this.getCurrentBreakpoint(); // If breakpoint changed execute functions
 
 
         if (currentBreakpoint !== _this.oldBreakpoint) {
           _this.executeFunctions();
+
+          _this.fireBreakpointChangedEvent(currentBreakpoint);
 
           _this.oldBreakpoint = currentBreakpoint;
         }
@@ -44952,33 +44970,18 @@ function () {
   }, {
     key: "getCurrentBreakpoint",
     value: function getCurrentBreakpoint() {
-      var currentBreakpoint; // FIX IE support
+      var currentBreakpoint;
 
-      if (window.matchMedia) {
-        if (window.matchMedia("(min-width:1200px)").matches) {
-          currentBreakpoint = "xl";
-        } else if (window.matchMedia("(min-width:992px)").matches) {
-          currentBreakpoint = "lg";
-        } else if (window.matchMedia("(min-width:768px)").matches) {
-          currentBreakpoint = "md";
-        } else if (window.matchMedia("(min-width:576px)").matches) {
-          currentBreakpoint = "sm";
-        } else {
-          currentBreakpoint = "xs";
-        }
+      if (document.documentElement.clientWidth >= 1200) {
+        currentBreakpoint = "xl";
+      } else if (document.documentElement.clientWidth >= 992) {
+        currentBreakpoint = "lg";
+      } else if (document.documentElement.clientWidth >= 768) {
+        currentBreakpoint = "md";
+      } else if (document.documentElement.clientWidth >= 576) {
+        currentBreakpoint = "sm";
       } else {
-        // eslint-disable-next-line no-lonely-if
-        if (document.documentElement.clientWidth >= 1200) {
-          currentBreakpoint = "xl";
-        } else if (document.documentElement.clientWidth >= 992) {
-          currentBreakpoint = "lg";
-        } else if (document.documentElement.clientWidth >= 768) {
-          currentBreakpoint = "md";
-        } else if (document.documentElement.clientWidth >= 576) {
-          currentBreakpoint = "sm";
-        } else {
-          currentBreakpoint = "xs";
-        }
+        currentBreakpoint = "xs";
       }
 
       return currentBreakpoint;
@@ -45009,6 +45012,17 @@ function () {
           }
         }
       }
+    }
+  }, {
+    key: "fireBreakpointChangedEvent",
+    value: function fireBreakpointChangedEvent(currentBreakpoint) {
+      var event = new CustomEvent("onBreakpointChange", {
+        "detail": {
+          "oldBreakpoint": this.oldBreakpoint,
+          "breakpoint": currentBreakpoint
+        }
+      });
+      document.dispatchEvent(event);
     }
   }, {
     key: "addFunctions",
@@ -48934,6 +48948,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+
+var ApiService = require("services/ApiService");
+
 var state = {
   tree: [],
   currentCategory: null
@@ -48947,9 +48964,22 @@ var mutations = {
   }
 };
 var actions = {
-  initNavigationTree: function initNavigationTree(_ref, navigationTree) {
-    var dispatch = _ref.dispatch,
-        commit = _ref.commit;
+  loadNavigationTree: function loadNavigationTree(_ref) {
+    var dispatch = _ref.dispatch;
+    return new Promise(function (resolve, reject) {
+      ApiService.get("/rest/io/categorytree", {
+        type: App.config.header.showCategoryTypes
+      }).done(function (response) {
+        dispatch("initNavigationTree", response);
+        resolve(response);
+      }).fail(function (error) {
+        reject(error);
+      });
+    });
+  },
+  initNavigationTree: function initNavigationTree(_ref2, navigationTree) {
+    var dispatch = _ref2.dispatch,
+        commit = _ref2.commit;
 
     if (navigationTree) {
       dispatch("buildNavigationTreeItem", {
@@ -48959,12 +48989,12 @@ var actions = {
 
     commit("setNavigationTree", navigationTree);
   },
-  buildNavigationTreeItem: function buildNavigationTreeItem(_ref2, _ref3) {
-    var state = _ref2.state,
-        commit = _ref2.commit,
-        dispatch = _ref2.dispatch;
-    var navigationTree = _ref3.navigationTree,
-        parent = _ref3.parent;
+  buildNavigationTreeItem: function buildNavigationTreeItem(_ref3, _ref4) {
+    var state = _ref3.state,
+        commit = _ref3.commit,
+        dispatch = _ref3.dispatch;
+    var navigationTree = _ref4.navigationTree,
+        parent = _ref4.parent;
     var showChildren = false;
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -49025,12 +49055,12 @@ var actions = {
       parent.showChildren = showChildren;
     }
   },
-  setCurrentCategoryById: function setCurrentCategoryById(_ref4, _ref5) {
-    var state = _ref4.state,
-        commit = _ref4.commit,
-        dispatch = _ref4.dispatch;
-    var categoryId = _ref5.categoryId,
-        categories = _ref5.categories;
+  setCurrentCategoryById: function setCurrentCategoryById(_ref5, _ref6) {
+    var state = _ref5.state,
+        commit = _ref5.commit,
+        dispatch = _ref5.dispatch;
+    var categoryId = _ref6.categoryId,
+        categories = _ref6.categories;
     categories = categories || state.tree;
     var _iteratorNormalCompletion2 = true;
     var _didIteratorError2 = false;
@@ -49090,7 +49120,7 @@ var _default = {
 };
 exports["default"] = _default;
 
-},{}],288:[function(require,module,exports){
+},{"services/ApiService":269}],288:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

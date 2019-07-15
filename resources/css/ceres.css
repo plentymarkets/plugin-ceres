@@ -19096,6 +19096,10 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   }
 }
 
+html.ie .always-visible-search {
+  min-height: 32px;
+}
+
 .top-bar .cmp-search-box {
   position: relative;
   top: auto;
@@ -19743,7 +19747,13 @@ nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li u
   transform: translateX(0);
 }
 
+.mobile-navigation .sk-fading-circle .sk-circle:before,
+.mobile-navigation .loading-animation > div {
+  background-color: #fff;
+}
+
 .mobile-navigation ul.breadcrumb {
+  color: #fff;
   background: #282d2f;
   max-width: initial;
   font-size: .8em;
@@ -19764,6 +19774,7 @@ nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li u
 .mobile-navigation ul.breadcrumb li.btn-close {
   float: right;
   padding-top: .6em;
+  display: flow-root;
 }
 
 .mobile-navigation ul.breadcrumb li.btn-close:before {
