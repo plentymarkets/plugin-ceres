@@ -16,7 +16,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "visibleFields": {
@@ -125,7 +125,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -210,7 +210,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -295,7 +295,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -426,7 +426,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "spacing": {
@@ -471,7 +471,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -591,7 +591,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -696,7 +696,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -827,7 +827,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "spacing": {
@@ -872,7 +872,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -977,7 +977,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "emailFolder": {
@@ -1064,7 +1064,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1174,7 +1174,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1311,7 +1311,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1514,7 +1514,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1703,7 +1703,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -1813,7 +1813,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -2185,7 +2185,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "title": {
@@ -2356,7 +2356,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "title": {
@@ -2556,7 +2556,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "liveShoppingSelection": {
@@ -2804,7 +2804,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -2898,6 +2898,134 @@
         }
     },
     {
+        "identifier": "Ceres::PrintButtonWidget",
+        "label": "Widget.printButtonLabel",
+        "previewImageURL": "/images/widgets/print-button.svg",
+        "type": "static",
+        "position": 300,
+        "widgetClass": "Ceres\\Widgets\\Common\\PrintButtonWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "md",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "md",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::SeparatorWidget",
         "label": "Widget.separatorLabel",
         "previewImageURL": "/images/widgets/separator.svg",
@@ -2914,7 +3042,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "margin": {
@@ -2949,7 +3077,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -3057,7 +3185,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -3162,7 +3290,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -3751,7 +3879,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "showCancellationRights": {
@@ -3885,7 +4013,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             }
         }
@@ -3907,7 +4035,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             }
         }
@@ -3929,7 +4057,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -4063,7 +4191,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "layout": {
@@ -4126,7 +4254,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "layout": {
@@ -4271,7 +4399,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "isFixed": {
@@ -4333,7 +4461,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "isFixed": {
@@ -4499,7 +4627,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "isFixed": {
@@ -4656,7 +4784,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -4787,7 +4915,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -4877,7 +5005,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -4962,7 +5090,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5067,7 +5195,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "spacing": {
@@ -5131,7 +5259,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5236,7 +5364,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "spacing": {
@@ -5358,7 +5486,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5473,7 +5601,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "showCrossPrice": {
@@ -5570,7 +5698,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5664,6 +5792,82 @@
         }
     },
     {
+        "identifier": "Ceres::LegalTextsWidget",
+        "label": "Widget.legalTextsLabel",
+        "previewImageURL": "/images/widgets/legal-texts.svg",
+        "type": "default",
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Legal\\LegalTextsWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            },
+            "type": {
+                "type": "select",
+                "defaultValue": "cancellationRights",
+                "options": {
+                    "name": "Widget.legalTextsType",
+                    "tooltipText": "Widget.legalTextsTypeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "cancellationRights",
+                            "caption": "Widget.legalTextsTypeValueCancellationRights",
+                            "position": 0
+                        },
+                        {
+                            "value": "cancellationForm",
+                            "caption": "Widget.legalTextsTypeValueCancellationForm",
+                            "position": 1
+                        },
+                        {
+                            "value": "legalDisclosure",
+                            "caption": "Widget.legalTextsTypeValueLegalDisclosure",
+                            "position": 2
+                        },
+                        {
+                            "value": "privacyPolicy",
+                            "caption": "Widget.legalTextsTypeValuePrivacyPolicy",
+                            "position": 3
+                        },
+                        {
+                            "value": "gtc",
+                            "caption": "Widget.legalTextsTypeValueGTC",
+                            "position": 4
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::AccountSettingsWidget",
         "label": "Widget.myAccountAccountSettingsLabel",
         "previewImageURL": "/images/widgets/account-settings.svg",
@@ -5680,7 +5884,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5784,7 +5988,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -5869,7 +6073,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "salutation": {
@@ -5940,7 +6144,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -6072,7 +6276,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {
@@ -6204,7 +6408,7 @@
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.customClass",
-                    "tooltip": "Widget.customClassTooltip"
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             },
             "appearance": {

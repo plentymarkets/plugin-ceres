@@ -45130,6 +45130,10 @@ Vue.filter("itemURL", function (item) {
 
   if (App.urlTrailingSlash) {
     trailingSlash = "/";
+
+    if (link.length > 1 && link.charAt(link.length - 1) === "/") {
+      link = link.substr(0, link.length - 1);
+    }
   }
 
   if (link.substr(link.length - suffix.length, suffix.length) === suffix) {
@@ -49933,6 +49937,7 @@ var mutations = {
   }
 };
 var actions = {
+  // eslint-disable-next-line complexity
   setVariationSelect: function setVariationSelect(_ref2, variationSelect) {
     var commit = _ref2.commit;
     var attributes = variationSelect.attributes;
@@ -49940,7 +49945,7 @@ var actions = {
     var initialVariation = variations.find(function (variation) {
       return variationSelect.initialVariationId === parseInt(variation.variationId);
     });
-    var initialUnit = initialVariation.unitCombinationId;
+    var initialUnit = initialVariation && initialVariation.unitCombinationId || 0;
     var selectedAttributes = {};
     var units = {};
     var _iteratorNormalCompletion = true;
@@ -49950,9 +49955,14 @@ var actions = {
     try {
       var _loop = function _loop() {
         var attribute = _step.value;
-        var variationAttribute = initialVariation.attributes.find(function (variationAttribute) {
-          return variationAttribute.attributeId === attribute.attributeId;
-        });
+        var variationAttribute = void 0;
+
+        if (initialVariation) {
+          variationAttribute = initialVariation.attributes.find(function (variationAttribute) {
+            return variationAttribute.attributeId === attribute.attributeId;
+          });
+        }
+
         selectedAttributes[attribute.attributeId] = variationAttribute ? variationAttribute.attributeValueId : null;
       };
 
