@@ -44,7 +44,7 @@ class SettingsSelectionStep extends Step
             "title" => "Wizard." . $name,
             "description" => "Wizard." . $name . "Description",
             "form" => [
-                "step1_" . $name => $this->generateToggleComponent($name)
+                "settingsSelection_" . $name => $this->generateToggleComponent($name)
             ]
         ];
     }
@@ -58,6 +58,7 @@ class SettingsSelectionStep extends Step
     {
         return [
             "type" => "toggle",
+            "defaultValue" => false,
             "options" => [
                 "name" => "Wizard." . $name . "Settings"
             ]

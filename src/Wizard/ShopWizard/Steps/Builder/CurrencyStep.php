@@ -9,7 +9,7 @@
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 
-use Ceres\Wizard\ShopWizard\Helpers\ConfigHelper;
+use Ceres\Wizard\ShopWizard\Config\CurrencyConfig;
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 
@@ -86,9 +86,9 @@ class CurrencyStep extends Step
 
     private function generateFormatCurrenciesSection(): array
     {
-        $currenciesFormat = ConfigHelper::getCurrencyFormat();
+        $currenciesFormat = CurrencyConfig::getCurrencyFormat();
         $currenciesFormatList = $this->generateTranslatedListBoxValues($currenciesFormat);
-        $currenciesFormatSelection = ConfigHelper::getCurrencyFormatSelection();
+        $currenciesFormatSelection = CurrencyConfig::getCurrencyFormatSelection();
         $currenciesFormatSelectionList = $this->generateTranslatedListBoxValues($currenciesFormatSelection);
         return [
             "title" => "Wizard.formatOfCurrencies",
@@ -117,7 +117,7 @@ class CurrencyStep extends Step
 
     private function generateAvailableCurrenciesSection(): array
     {
-        $availableCurrencies = ConfigHelper::getAvailableCurrencies();
+        $availableCurrencies = CurrencyConfig::getAvailableCurrencies();
         $availableCurrenciesList = $this->generateTranslatedListBoxValues($availableCurrencies);
         return [
             "title" => "Wizard.availableCurrencies",

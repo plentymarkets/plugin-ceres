@@ -9,7 +9,7 @@
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 
-use Ceres\Wizard\ShopWizard\Helpers\ConfigHelper;
+use Ceres\Wizard\ShopWizard\Config\OnlineStoreConfig;
 
 class OnlineStoreStep extends Step
 {
@@ -73,7 +73,7 @@ class OnlineStoreStep extends Step
      */
     private function buildStoreCategoryTypesStructure(): array
     {
-        $catTypes = ConfigHelper::getCategoryTypes();
+        $catTypes = OnlineStoreConfig::getCategoryTypes();
         $categoryTypes = $this->generateTranslatedListBoxValues($catTypes);
 
         return [
@@ -97,7 +97,7 @@ class OnlineStoreStep extends Step
      */
     private function buildStoreBack2Top()
     {
-        $top2bottomPositions = ConfigHelper::getToTopButtonPosition();
+        $top2bottomPositions = OnlineStoreConfig::getToTopButtonPosition();
         $positions = $this->generateTranslatedListBoxValues($top2bottomPositions);
 
         return [
@@ -120,9 +120,9 @@ class OnlineStoreStep extends Step
      */
     private function buildStoreEmailSettings()
     {
-        $confirmationLinkExpiration = ConfigHelper::getConfirmationLinkExpiration();
+        $confirmationLinkExpiration = OnlineStoreConfig::getConfirmationLinkExpiration();
         $confirmationList = $this->generateTranslatedListBoxValues($confirmationLinkExpiration);
-        $globaUserHashMax = ConfigHelper::getUserHashMaxAge();
+        $globaUserHashMax = OnlineStoreConfig::getUserHashMaxAge();
         $globaUserHashMaxList = $this->generateTranslatedListBoxValues($globaUserHashMax);
 
         return [
@@ -161,7 +161,7 @@ class OnlineStoreStep extends Step
      */
     private function buildStoreOrderSettings()
     {
-        $itemBundles = ConfigHelper::getItemBundles();
+        $itemBundles = OnlineStoreConfig::getItemBundles();
         $itemBundlesList = $this->generateTranslatedListBoxValues($itemBundles);
         return [
             "title" => "Wizard.ordersSettings",

@@ -68,10 +68,11 @@ class MappingService
 
         foreach ($mappingData as $itemKey => $itemData) {
             $key = $itemData['field'];
+
             if ($scope == "display") {
                 $matchedData[$itemKey] = $this->matchDataByType($itemData['type'], $processingData[$key]);
             } else {
-                $matchedData[$key] = $this->matchDataByType($itemData['type'], $processingData[$itemKey]);
+                $matchedData[$key] = $this->matchDataByType($itemData['type'], $processingData[$itemKey], $scope);
             }
         }
 
@@ -81,10 +82,11 @@ class MappingService
     /**
      * @param $type
      * @param $value
+     * @param string $scope
      *
      * @return float|int|string
      */
-    private function matchDataByType($type, $value)
+    private function matchDataByType($type, $value, $scope = "display")
     {
         $matchedValue = '';
         switch($type){
@@ -98,7 +100,7 @@ class MappingService
                 $matchedValue = floatval($value);
                 break;
             case "concatenated":
-                $matchedValue = implode($value, ", ");
+                $matchedValue = $scope == 'display' ? explode(", ", $value) : implode($value, ", ");
                 break;
         }
 
