@@ -40308,6 +40308,9 @@ Vue.component("single-item", {
     },
     attributes: function attributes(state) {
       return state.variationSelect.attributes;
+    },
+    units: function units(state) {
+      return state.variationSelect.units;
     }
   }), Vuex.mapGetters(["variationTotalPrice", "variationMissingProperties", "variationGroupedProperties", "variationGraduatedPrice"])),
   created: function created() {
@@ -40371,7 +40374,6 @@ Vue.component("variation-select", {
   },
   data: function data() {
     return {
-      initialVariationId: null,
       filteredVariationsCache: {}
     };
   },
@@ -40717,6 +40719,8 @@ Vue.component("variation-select", {
      * @param {boolean} strict
      */
     filterVariations: function filterVariations(attributes, unitId, strict) {
+      var _this2 = this;
+
       attributes = attributes || this.selectedAttributes;
       unitId = unitId || this.selectedUnit;
       strict = !!strict;
@@ -40728,15 +40732,17 @@ Vue.component("variation-select", {
 
       var uniqueValues = _toConsumableArray(new Set(Object.values(attributes)));
 
-      var isEmptyOptionSelected = uniqueValues.length === 1 && (0, _util.isNull)(uniqueValues[0]);
+      var isEmptyOptionSelected = uniqueValues.length === 1 && (0, _util.isNull)(uniqueValues[0]); // eslint-disable-next-line complexity
+
       var filteredVariations = this.variations.filter(function (variation) {
         // the selected unit is not matching
         if (variation.unitCombinationId !== unitId) {
           return false;
         } // the variation has no attributes (only checked, if any attribute has a selected value); or the variation has attributes and empty option is selected
+        // requires more than 0 attributes
 
 
-        if (!isEmptyOptionSelected && !variation.attributes.length || isEmptyOptionSelected && variation.attributes.length) {
+        if ((!isEmptyOptionSelected && !variation.attributes.length || isEmptyOptionSelected && variation.attributes.length) && _this2.attributes.length > 0) {
           return false;
         }
 
