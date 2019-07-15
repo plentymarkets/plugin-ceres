@@ -22,8 +22,8 @@
 </div>
 
 <!-- Variation -->
-<div class="mb-3" v-if="variations.length > 0">
-    <variation-select template="#vue-variation-select" :attributes="attributeNameMap" :variation-units="variationUnits" :variations="variations" :preselect="currentVariation.variation.id" :unitPreselect="currentVariation.variation.unitCombinationId" @is-valid-change="isVariationSelected = $event"></variation-select>
+<div class="mb-3" v-if="attributes.length">
+    <variation-select></variation-select>
 </div>
 <!-- /Variation -->
 
@@ -33,7 +33,7 @@
 
 <slot name="before-price"></slot>
 
-<div class="row" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
+<div v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
     <order-property-list></order-property-list>
 </div>
 
@@ -77,12 +77,12 @@
     </span>
 </span>
 
-<div class="row my-3">
+<div class="my-3">
     <div class="w-100">
         <slot name="before-add-to-basket"></slot>
     </div>
 
-    <div class="w-100">
+    <div class="col-12 col-sm-7 col-md-12 col-lg-8 my-3">
         {{ AddToBasket.printVueComponent(
             "currentVariation",
             false,

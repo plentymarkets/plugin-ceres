@@ -15,6 +15,7 @@
             {
                 "@context"      : "http://schema.org/",
                 "@type"         : "Product",
+                "@id"           : "{{ itemData.variation.id }}",
                 "name"          : "{{ ItemName.get(itemData | itemName, itemData.variation.bundleType) }}",
                 "category"      : "item.",
                 "releaseDate"   : "{{ itemData.variation.releasedAt }}",
@@ -73,7 +74,47 @@
 {% endblock %}
 
 {% block PageBody %}
+    {{ set_item_data_base(item.documents[0].data) }}
+    {{ component("Ceres::Item.Components.SingleItem") }}
 
-    {% include [category_template( itemData.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
+    {% set shopBuilderTemplate = "" %}
+    {% set currentCategory = services.category.getCurrentCategory() %}
+
+    {% if currentCategory is defined %}
+        {# Check for item template for specific category first #}
+        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, "singleitem") %}
+    {% endif %}
+
+    {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
+        {# Item template is configured for the item #}
+        {% set template %}
+            {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
+        {% endset %}
+
+        {% if template | trim is not empty %}
+            {{ template }}
+        {% else %}
+            {% include "Ceres::Item.SingleItemView" %}
+        {% endif %}
+
+    {% elseif shopBuilderTemplate | trim is not empty or isShopBuilder %}
+        {# Shopbuilder template #}
+        <div class="single container-max page-content">
+            <div class="row">
+                <div class="col">
+                    <single-item v-cloak item-data="{{ item | json_data }}" attributes-data="{{ attributes | json_data }}" variations="{{ variations | json_data }}">
+                        <template #default="{ getDataField: getDataField, getFilteredDataField: getFilteredDataField }">
+                            {{ shopBuilderTemplate | raw }}
+                        </template>
+                    </single-item>
+                </div>
+            </div>
+        </div>
+    {% elseif shop_builder_category_template_exists() %}
+        {# Empty shop builder template is loading #}
+    {% else %}
+        {# No item template defined in ShopBuilder => use default template from plugin #}
+        {% include "Ceres::Item.SingleItemView" %}
+    {% endif %}
 
 {% endblock %}

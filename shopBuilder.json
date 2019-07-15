@@ -19,6 +19,7 @@
         "header":       ["header", "static", "structure", "default"],
         "footer":       ["footer", "static", "structure", "default"],
         "content":      ["static", "structure", "default"],
+        "singleitem":   ["static", "structure", "default", "item"],
         "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
         "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
     },
@@ -39,6 +40,26 @@
             {
                 "label": "Widget.presetHomepageDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
+            },
+            {
+                "label": "Widget.presetCancellationRightsDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationRightsPreset"
+            },
+            {
+                "label": "Widget.presetCancellationFormDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationFormPreset"
+            },
+            {
+                "label": "Widget.presetLegalDisclosureDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultLegalDisclosurePreset"
+            },
+            {
+                "label": "Widget.presetPrivacyPolicyDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset"
+            },
+            {
+                "label": "Widget.presetGTCDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
             }
         ],
         "checkout": [
@@ -52,7 +73,17 @@
               "label": "Widget.presetMyAccountDefault",
               "presetClass": "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset"
             }
+        ],
+        "singleitem":
+        [
+            {
+                "label":"Widget.presetSingleItemDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultSingleItemPreset"
+            }
         ]
+    },
+    "dataFieldProviders": {
+        "singleitem": "Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ItemDataFieldProvider"
     },
     "categories": [
         {
@@ -107,12 +138,20 @@
         }
     ],
     "globalSettings": {
-        "shippingCategory": {
+        "homeCategory": {
             "type": "category",
             "required": false,
             "defaultValue": null,
             "options": {
-                "name": "Config.globalShippingCostsCategoryIdLabel"
+                "name": "Config.routingCategoryHome"
+            }
+        },
+        "homeEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!homeCategory",
+            "options": {
+                "name": "Config.routingEnableRouteHome"
             }
         },
         "checkoutCategory": {
@@ -146,7 +185,98 @@
             "options": {
                 "name": "Config.routingEnableRouteMyAccount"
             }
+        },
+        "cancellationRightsCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCancellationRights"
+            }
+        },
+        "cancellationRightsEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!cancellationRightsCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCancellationRights"
+            }
+        },
+        "cancellationFormCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryCancellationForm"
+            }
+        },
+        "cancellationFormEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!cancellationFormCategory",
+            "options": {
+                "name": "Config.routingEnableRouteCancellationForm"
+            }
+        },
+        "legalDisclosureCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryLegalDisclosure"
+            }
+        },
+        "legalDisclosureEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!legalDisclosureCategory",
+            "options": {
+                "name": "Config.routingEnableRouteLegalDisclosure"
+            }
+        },
+        "privacyPolicyCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryPrivacyPolicy"
+            }
+        },
+        "privacyPolicyEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!privacyPolicyCategory",
+            "options": {
+                "name": "Config.routingEnableRoutePrivacyPolicy"
+            }
+        },
+        "gtcCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryGtc"
+            }
+        },
+        "gtcEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!gtcCategory",
+            "options": {
+                "name": "Config.routingEnableRouteGtc"
+            }
+        },
+        "shippingCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.globalShippingCostsCategoryIdLabel"
+            }
         }
     },
-    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler"
+    "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
+    "supportedFeatures": {
+        "singleItemContent": true
+    }
 }

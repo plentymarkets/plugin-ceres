@@ -1,4 +1,5 @@
-.single {
+.single,
+.page-singleitem {
     .list-item-carousel {
         .list-control-special{
             width: 5%;
@@ -8,7 +9,7 @@
         }
     }
 
-    #single-carousel {
+    .single-carousel {
         background: $white;
     }
 
@@ -20,6 +21,15 @@
 
     .title{
         line-height: 1.2;
+    }
+
+    .title-outer {
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            line-height: 1.1;
+        }
     }
 
     .producer{
@@ -111,9 +121,9 @@
     }
 
     .order-property-selection-info-popper {
-        position: absolute;
-        top: 6px;
-        right: 18px;
+        button.btn {
+            margin: 5px;
+        }
     }
 }
 
@@ -253,5 +263,67 @@
 
     .quantity-input-container {
         margin-right: 15px;
+    }
+}
+
+.v-s-boxes {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+
+    .v-s-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0.5rem;
+        min-width: 40px;
+        min-height: 40px;
+        border: 1px solid $gray-lighter;
+        border-radius: $border-radius;
+        cursor: pointer;
+
+        &.active {
+            color: $primary;
+            border: 1px solid $primary;
+        }
+
+        &.invalid {
+            position: relative;
+            border-style: dashed;
+
+            & > span, img {
+                opacity: .5;
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background: linear-gradient(
+                    to top left,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0) calc(50% - 0.8px),
+                    $gray-lighter 50%,
+                    rgba(0, 0, 0, 0) calc(50% + 0.8px),
+                    rgba(0, 0, 0, 0) 100%
+                );
+            }
+        }
+    }
+
+    &.images {
+        .v-s-box:not(.empty-option) {
+            height: 40px;
+            width: 40px;
+
+            > img {
+                height: 100%;
+                width: 100%;
+                border-radius: $border-radius;
+                object-fit: contain;
+            }
+        }
     }
 }

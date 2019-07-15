@@ -4001,6 +4001,11 @@ pre {
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
   }
+  &::-moz-placeholder {
+    color: $input-placeholder-color;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
   &::-ms-input-placeholder {
     color: $input-placeholder-color;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
@@ -6349,8 +6354,10 @@ input[type="button"] {
 
   @include media-breakpoint-up(sm) {
     -webkit-column-count: $card-columns-count;
+       -moz-column-count: $card-columns-count;
             column-count: $card-columns-count;
     -webkit-column-gap: $card-columns-gap;
+       -moz-column-gap: $card-columns-gap;
             column-gap: $card-columns-gap;
     orphans: 1;
     widows: 1;
@@ -11145,6 +11152,15 @@ a:active {
     float: none;
 }
 
+.flex-center {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
 .text-wrap {
   white-space: normal;
 }
@@ -11477,6 +11493,11 @@ button:focus {
 
 	&.btn-medium {
 		min-width: 10rem;
+	}
+
+	&.btn-md {
+		padding-top: 0.8rem;
+		padding-bottom: 0.8rem;
 	}
 
 	&.btn-medium-large {
@@ -11864,7 +11885,7 @@ body.lb-disable-scrolling {
   display: inline-block;
   vertical-align: middle;
 }
-#single-carousel .owl-item img {
+.single-carousel .owl-item img {
   height: 300px;
 }
 
@@ -12221,7 +12242,7 @@ Custom classes
 }
 
 @include media-breakpoint-up(sm) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 500px;
   }
 }
@@ -12249,12 +12270,12 @@ Custom classes
   }
 }
 @include media-breakpoint-up(lg) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 600px;
   }
 }
 @include media-breakpoint-up(xl) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 700px;
   }
 }
@@ -12262,12 +12283,12 @@ Custom classes
 /* Compatibility for IE */
 html.ie {
   // set width to maximal available size
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     width: auto;
     display: inline-block;
   }
   // align image center
-  #single-carousel .owl-item > div {
+  .single-carousel .owl-item > div {
     text-align: center;
   }
 
@@ -14196,6 +14217,7 @@ div:not(.top-bar) {
 		& ul {
 			@include media-breakpoint-down(sm) {
 				-webkit-column-count: 2;
+				   -moz-column-count: 2;
 				        column-count: 2;
 			}
 		}
@@ -14633,18 +14655,22 @@ nav.navbar.megamenu {
                 >ul.collapse {
                     background-color: $megamenu-bg;
                     -webkit-column-gap		: .5em;
+                       -moz-column-gap		: .5em;
                             column-gap		: .5em;
                     -webkit-column-rule		: 1px solid #dcdbd7;
+                       -moz-column-rule		: 1px solid #dcdbd7;
                             column-rule		: 1px solid #dcdbd7;
                     display			: none;
                     padding			: 1em 0;
                     min-height		: 7em;
                     max-height		: 86vh;  
                     -webkit-column-count	: 5;  
+                       -moz-column-count	: 5;  
                             column-count	: 5;
                     overflow-x		: auto;
                     overflow-y		: hidden;
                     -webkit-column-fill		: balance;
+                       -moz-column-fill		: balance;
                             column-fill		: balance;
 
                     li {
@@ -15990,6 +16016,7 @@ html.ie .confirmation-order-list .cmp-order-item {
 
 				.qty-box {
 					margin: 0 0 5px auto;
+					height: 41px;
 		
 					.qty-input {
 						margin-left: auto;
@@ -17494,7 +17521,7 @@ html.ie {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 41px;
+    height: 100%;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
@@ -17502,6 +17529,7 @@ html.ie {
     .qty-input {
         outline: none;
         height: 100%;
+        min-height: 27px;
         width: 48px;
         padding: 0;
         text-align: center;
@@ -17523,15 +17551,18 @@ html.ie {
         border-left: none;
         border-radius: 0 $border-radius $border-radius 0;
         overflow: hidden;
+        height: 100%;
 
         .qty-btn {
             width: 100%;
             height: calc(50% - .5px);
+            min-height: 12px;
             text-align: center;
             -webkit-transition: all .2s cubic-bezier(0,0,.26,1);
             transition: all .2s cubic-bezier(0,0,.26,1);
             border-radius: $border-radius;
             cursor: pointer;
+            position: relative;
 
             &.disabled {
                 cursor: not-allowed;
@@ -17544,6 +17575,12 @@ html.ie {
 
             & > .qty-sign {
                 color: $gray;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                        transform: translateY(-50%);
             }
         }
 
@@ -18037,20 +18074,33 @@ html.ie {
 
     & i {
         margin-right: 5px;
+
+        &.fa-circle-o-notch {
+            color: inherit !important;
+        }
+    }
+
+    &:not(.active) {
+        i {
+            color: inherit !important;
+        }
     }
 
     &:hover {
       text-decoration: none;
-
-      i{
-        color: #d9534f!important;
-      }
+      
+        i {
+            color: #d9534f !important;
+            &.fa-circle-o-notch {
+                color: inherit !important;
+            }
+        }
     }
 
     &.active{
-      i{
-        color: #d9534f!important;
-      }
+        i {
+            color: inherit;
+        }
     }
 }
 
@@ -19134,7 +19184,8 @@ html.ios {
 		}
 	}
 }
-.single {
+.single,
+.page-singleitem {
     .list-item-carousel {
         .list-control-special{
             width: 5%;
@@ -19144,7 +19195,7 @@ html.ios {
         }
     }
 
-    #single-carousel {
+    .single-carousel {
         background: $white;
     }
 
@@ -19156,6 +19207,15 @@ html.ios {
 
     .title{
         line-height: 1.2;
+    }
+
+    .title-outer {
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            line-height: 1.1;
+        }
     }
 
     .producer{
@@ -19249,9 +19309,9 @@ html.ios {
     }
 
     .order-property-selection-info-popper {
-        position: absolute;
-        top: 6px;
-        right: 18px;
+        button.btn {
+            margin: 5px;
+        }
     }
 }
 
@@ -19404,6 +19464,80 @@ html.ios {
 
     .quantity-input-container {
         margin-right: 15px;
+    }
+}
+
+.v-s-boxes {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+
+    .v-s-box {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        margin: 0.5rem;
+        min-width: 40px;
+        min-height: 40px;
+        border: 1px solid $gray-lighter;
+        border-radius: $border-radius;
+        cursor: pointer;
+
+        &.active {
+            color: $primary;
+            border: 1px solid $primary;
+        }
+
+        &.invalid {
+            position: relative;
+            border-style: dashed;
+
+            & > span, img {
+                opacity: .5;
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background: linear-gradient(
+                    to top left,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0) calc(50% - 0.8px),
+                    $gray-lighter 50%,
+                    rgba(0, 0, 0, 0) calc(50% + 0.8px),
+                    rgba(0, 0, 0, 0) 100%
+                );
+            }
+        }
+    }
+
+    &.images {
+        .v-s-box:not(.empty-option) {
+            height: 40px;
+            width: 40px;
+
+            > img {
+                height: 100%;
+                width: 100%;
+                border-radius: $border-radius;
+                -o-object-fit: contain;
+                   object-fit: contain;
+            }
+        }
     }
 }
 
@@ -19776,14 +19910,6 @@ html.ios {
                         box-shadow: inset 0 0 0 0.1rem $value;   
             }
         }
-    }
-}
-
-.widget-shipping-privacy-check
-{
-    .widget-placeholder
-    {
-        padding-bottom: 50%;
     }
 }
 
@@ -20445,11 +20571,6 @@ html.ie {
             }
         }
     }
-
-    .widget-placeholder
-    {
-        padding-bottom: 150%;
-    }
 }
 
 .widget-newsletter
@@ -20860,7 +20981,6 @@ header .widget
             @include button-variant($value, $value);
         }
 
-
         a.text-appearance,
         .btn-appearance
         {
@@ -20871,6 +20991,18 @@ header .widget
                 -webkit-text-decoration-color: darken($value, 7.5);
                         text-decoration-color: darken($value, 7.5);
             }
+        }
+
+        a:hover {
+            i.text-appearance {
+                color: darken($value, 7.5) !important;
+            } 
+        }
+
+        .border-appearance.active,
+        .border-appearance:hover
+        {
+            border-color: $value;
         }
 
         .pagination .page-item
@@ -20918,6 +21050,21 @@ header .widget
     .description
     {
         font-style: italic;
+    }
+}
+
+.widget-attribute
+{
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {
+            .v-s-boxes .v-s-box.active
+            {
+                color: $value !important;
+                border-color: $value !important;
+            }
+        }
     }
 }
 

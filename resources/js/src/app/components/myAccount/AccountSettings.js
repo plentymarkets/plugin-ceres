@@ -61,6 +61,10 @@ Vue.component("account-settings", {
         {
             return this.newMail2.length <= 0 || this.newMail === this.newMail2;
         },
+        matchOldEmail()
+        {
+            return this.newMail === this.newMail2 && this.newMail === this.userData.email;
+        },
         matchPassword()
         {
             return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
