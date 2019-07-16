@@ -19774,7 +19774,6 @@ nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li u
 .mobile-navigation ul.breadcrumb li.btn-close {
   float: right;
   padding-top: .6em;
-  display: flow-root;
 }
 
 .mobile-navigation ul.breadcrumb li.btn-close:before {
