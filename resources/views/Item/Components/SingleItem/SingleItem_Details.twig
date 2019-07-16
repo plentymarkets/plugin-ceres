@@ -22,7 +22,7 @@
 </div>
 
 <!-- Variation -->
-<div class="mb-3" v-if="attributes.length || units.length">
+<div class="mb-3" v-if="attributes.length || Object.keys(units).length">
     <variation-select></variation-select>
 </div>
 <!-- /Variation -->
