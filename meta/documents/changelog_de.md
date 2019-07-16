@@ -1,12 +1,26 @@
 # Release Notes für Ceres
 
+## v4.1.1 (2019-07-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.0...4.1.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Attribute von Varianten ohne Bestand werden nun angezeigt, wenn an der Variante die Optionen "Automatisch verfügbar, wenn Netto-WB positiv" und "Automatisch nicht verfügbar, wenn kein Netto-WB" deaktiviert sind.
+- Die Kategorien für die mobile Navigation werden nun erst geladen, wenn die Bildschirmauflösung einen Breakpoint erreicht, bei dem die Kategorien angezeigt werden.
+
+### Behoben
+
+- Das Session-Flag für den read-only-Checkout wird nun auch bis in die IO-Methode `executePayment()` weitergereicht.
+- Bei bestimmten Artikeleinstellungen wurde die Meldung "Inhalt nicht verfügbar" bei der Auswahl von Attributen ausgegeben. Dies wurde behoben.
+- Durch einen Fehler wurde die Attributauswahl bei Varianten, die sich nur durch ihren Inhalt unterscheiden, nicht korrekt dargestellt. Dies wurde behoben.
+- In der Variantenauswahl wurden Artikelbilder auf die Größe der Kachel skaliert. Artikelbilder werden nun in ihrem ursprünglichen Seitenverhältnis angezeigt.
+
 ## v4.1.0 (2019-07-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.0.2...4.1.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
 - Durch Änderungen an Widgets sollten ShopBuilder-Inhalte über die Schaltfläche **Inhalte neu generieren** erneut bereitgestellt werden.
 - Das Widget "Artikeldaten-Tabelle" stellt standardmäßig 12 Artikeldatenfelder dar, insofern diese am Artikel gepflegt sind. Daher sollten die angezeigten Artikelinformationen in den Widget-Einstellungen des Widgets "Artikeldaten-Tabelle" überprüft werden, um zu vermeiden, dass ungewünschte Informationen dargestellt werden.
-- Bei der Verwendung der ShopBuilder-Vorlage für die Artikeleinzelansicht müsen Artikellisten der Seite manuell hinzugefügt werden.
+- Bei der Verwendung der ShopBuilder-Vorlage für die Artikeleinzelansicht müssen Artikellisten der Seite manuell hinzugefügt werden.
 
 ### Hinzugefügt
 
@@ -34,7 +48,7 @@
 - Im Warenkorb-Overlay, auf der Bestellbestätigungsseite und im Mein Konto-Bereich wird bei Bestellmerkmalen vom Typ **Auswahl** nun der Name der Auswahl anstatt der ID angezeigt.
 - Die Fehlermeldung, die erscheint, wenn ein Kunde sich mit einer bereits registrierten E-Mail-Adresse im Webshop registrieren will, wird nun länger angezeigt.
 - Es ist jetzt möglich, eine Umsatzsteuer-Identifikationsnummer für Lieferadressen einzugeben.
-- Folgende Einstellungen wurden in der Ceres-Konfiguration als `deprecated` markiert und sind in den entsprechenden Widget-Einstellungen zu finden: **Angezeigte Artikelinformationen**, **Variantenauswahl für Varianten ohne Bestand in der Varianten-Dropdown-Liste aktivieren**, sämtliche Einstellungen im Bereich **Artikellisten**.
+- Folgende Einstellungen wurden in der Ceres-Konfiguration als `deprecated` markiert und sind in den entsprechenden Widget-Einstellungen zu finden: **Angezeigte Artikelinformationen**, sämtliche Einstellungen im Bereich **Artikellisten**.
 
 ### Behoben
 
@@ -73,7 +87,7 @@
 - Unter bestimmten Umständen konnte das Sticky Container-Widget im Internet Explorer vom Header überdeckt werden. Dies wurde behoben.
 - Wenn nach dem Abschließen eines Auftrags während der Zahlung ein Fehler auftritt, kann der Auftrag erst nach 30 Sekunden erneut abgeschlossen werden. Dies verhindert das Anlegen von doppelten und somit ungültigen Aufträgen.
 - Durch einen Fehler wurden keine Länder gesetzt, wenn im Top Bar-Widget die Länderauswahl deaktiviert wurde. Dies wurde behoben.
-- Bei leeren Artikellisten wird nun kein leeres <ul>-Tag ausgegeben. Wir bedanken uns bei @daniel-mannheimer für den Beitrag.
+- Bei leeren Artikellisten wird nun kein leeres `<ul>`-Tag ausgegeben. Wir bedanken uns bei @daniel-mannheimer für den Beitrag.
 - Es wurde ein Fehler behoben, der die Weiterleitung von den Routen /checkout und /my-account auf den entprechenden ShopBuilder-Inhalt verhinderte.
 - Durch einen Fehler war im Tab-Widget nicht immer ein Tab vorausgewählt. Dies wurde behoben.
 - Durch einen Fehler wurden die Attribute eines Artikels in der Variantenauswahl nicht angezeigt, wenn für diesen Artikel nur ein Staffelpreis eingestellt war. Dies wurde behoben.

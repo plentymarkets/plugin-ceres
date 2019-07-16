@@ -1,5 +1,19 @@
 # Release Notes for Ceres
 
+## v4.1.1 (2019-07-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.0...4.1.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- Attributes of variations without stock are now displayed if the options "Available automatically if net stock is positive" and "Not available automatically if net stock is 0 or negative" are deactivated.
+- The categories of the mobile navigation are only loaded if the screen resolution is high enough to display the categories.
+
+### Fixed
+
+- The session flag for the read-only checkout is now passed on to the `executePayment()` method in IO.
+- Due to an error, the selection of attributes issued the notification "Content not available" for certain item configurations. This has been fixed.
+- Due to an error, the attribute selection was not displayed correctly for variations that only differ in their content. This has been fixed.
+- Due to an error, item images scaled to the size of the item tile in the variation selection. Item images are now displayed in their original aspect ratio.
+
 ## v4.1.0 (2019-07-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.0.2...4.1.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
@@ -74,7 +88,7 @@
 - Under certain circumstances, the header would overlap sticky container widgets in the Internet Explorer. This has been fixed.
 - If an error occurs during payment after an order has been completed, the order can only be finalised after a waiting period of 30 seconds. This prevents the creation of duplicate orders that would thereby be invalid.
 - Due to an error, no countries were preselected if the country selection was disabled in the top bar widget. This has been fixed.
-- Empty item lists no longer render an empty <ul> tag. We would like to thank @daniel-mannheimer for the contribution.
+- Empty item lists no longer render an empty `<ul>` tag. We would like to thank @daniel-mannheimer for the contribution.
 - We fixed an error due to which the routes /checkout and /my-account did not redirect to the corresponding ShopBuilder content.
 - Due to an error, sometimes no tab was preselected in the tab widget. This has been fixed.
 - Due to an error, the attributes of an item were not displayed in the variation selection if only a graduated price was configured for the item. This has been fixed.
