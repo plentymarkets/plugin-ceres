@@ -49,6 +49,7 @@
 - Die Fehlermeldung, die erscheint, wenn ein Kunde sich mit einer bereits registrierten E-Mail-Adresse im Webshop registrieren will, wird nun länger angezeigt.
 - Es ist jetzt möglich, eine Umsatzsteuer-Identifikationsnummer für Lieferadressen einzugeben.
 - Folgende Einstellungen wurden in der Ceres-Konfiguration als `deprecated` markiert und sind in den entsprechenden Widget-Einstellungen zu finden: **Angezeigte Artikelinformationen**, sämtliche Einstellungen im Bereich **Artikellisten**.
+- Die Einstellung **Variantenauswahl für Varianten ohne Bestand in der Varianten-Dropdown-Liste aktivieren** wurde als `deprecated` markiert.
 
 ### Behoben
 
