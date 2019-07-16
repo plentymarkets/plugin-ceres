@@ -1295,6 +1295,43 @@
         }
     },
     {
+        "identifier": "Ceres::GoogleMapsWidget",
+        "label": "Widget.googleMapsLabel",
+        "previewImageURL": "/images/widgets/google-maps-widget.svg",
+        "type": "default",
+        "position": 1050,
+        "widgetClass": "Ceres\\Widgets\\Common\\GoogleMapsWidget",
+        "settings": {
+            "apiKey": {
+                "type": "text",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.googleMapsApiKeyLabel",
+                    "tooltipText": "Widget.googleMapsApiKeyTooltip"
+                }
+            },
+            "address": {
+                "type": "textarea",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.googleMapsAddressLabel",
+                    "tooltipText": "Widget.googleMapsAddressTooltip"
+                }
+            },
+            "zoom": {
+                "type": "number",
+                "required": false,
+                "defaultValue": 16,
+                "options": {
+                    "name": "Widget.googleMapsZoomLabel",
+                    "tooltipText": "Widget.googleMapsZoomTooltip"
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::ImageBoxWidget",
         "label": "Widget.imageBoxLabel",
         "previewImageURL": "/images/widgets/image-box.svg",
