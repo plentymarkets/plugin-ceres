@@ -31,7 +31,7 @@
         "emailFolder": {
             "type": "number",
             "required": true,
-            "defaultValue": "",
+            "defaultValue": 0,
             "options": {
                 "name": "Widget.newsletterEmailFolderLabel",
                 "tooltipText": "Widget.newsletterEmailFolderTooltip"
