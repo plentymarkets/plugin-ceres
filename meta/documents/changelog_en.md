@@ -48,7 +48,8 @@
 - In the shopping cart overlay, the order confirmation page, and the my account area, order properties of the type **selection** now display the name of the selection instead of the ID.
 - The error notification that appears when a customer attempts to register an email address that has already been registered in the online store is now displayed for a longer time.
 - It is now possible to enter a VAT identification number for delivery addresses.
-- The following Ceres settings have been marked as `deprecated` and have been relocated to the corresponding widget settings: **Show item information**, **Enable selection of variations without stock in variation drop-down**, and all settings regarding **item lists**.
+- The following Ceres settings have been marked as `deprecated` and have been relocated to the corresponding widget settings: **Show item information**, all settings regarding **item lists**.
+- The setting **Enable selection of variations without stock in variation drop-down** has been `deprecated`.
 
 ### Fixed
 
