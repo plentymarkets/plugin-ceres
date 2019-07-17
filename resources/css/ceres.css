@@ -19096,6 +19096,10 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   }
 }
 
+html.ie .always-visible-search {
+  min-height: 32px;
+}
+
 .top-bar .cmp-search-box {
   position: relative;
   top: auto;
@@ -19743,7 +19747,13 @@ nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li u
   transform: translateX(0);
 }
 
+.mobile-navigation .sk-fading-circle .sk-circle:before,
+.mobile-navigation .loading-animation > div {
+  background-color: #fff;
+}
+
 .mobile-navigation ul.breadcrumb {
+  color: #fff;
   background: #282d2f;
   max-width: initial;
   font-size: .8em;
@@ -24714,15 +24724,7 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   bottom: 0;
   width: 100%;
   padding: 1rem;
-  position: absolute;
-  bottom: 0;
-}
-
-@media (max-width: 575.98px) {
-  .widget.widget-image-box.widget-image-box-block-caption > .widget-inner .widget-caption {
-    position: relative;
-    width: 100%;
-  }
+  max-height: 100%;
 }
 
 .widget.widget-image-box.widget-image-box-no-caption > .widget-inner .widget-caption {

@@ -3,7 +3,7 @@ const state =
         attributes: [],
         isVariationSelected: true,
         selectedAttributes: {},
-        selectedUnit: 0,
+        selectedUnit: null,
         units: [],
         variations: []
     };
@@ -54,7 +54,7 @@ const actions =
             const attributes         = variationSelect.attributes;
             const variations         = variationSelect.variations;
             const initialVariation   = variations.find(variation => variationSelect.initialVariationId === parseInt(variation.variationId));
-            const initialUnit        = initialVariation && initialVariation.unitCombinationId || 0;
+            const initialUnit        = initialVariation && initialVariation.unitCombinationId || null;
             const selectedAttributes = {};
             const units              = {};
 

@@ -39,7 +39,7 @@
                 </button>
                 <button
                     v-else-if="!buttonLockState"
-                    :disabled="waiting || !hasPrice"
+                    :disabled="waiting || !hasPrice && !isSalable"
                     class="btn btn-block btn-primary btn-appearance"
                     @click="addToBasket()"
                     :class="buttonClasses"

@@ -4004,16 +4004,28 @@
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Form\\MailFormWidget",
         "allowedNestingTypes": [
+            "structure",
+            "static",
+            "default",
             "form"
         ],
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
             "appearance": {
                 "type": "select",
                 "required": true,
                 "defaultValue": "primary",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
-                    "tooltip": "Widget.widgetAppearanceTooltip",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
                     "listBoxValues": [
                         {
                             "value": "primary",
@@ -4046,15 +4058,6 @@
                             "position": 5
                         }
                     ]
-                }
-            },
-            "title": {
-                "type": "text",
-                "required": false,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.mailFormHeadlineLabel",
-                    "tooltip": "Widget.mailFormHeadlineTooltip"
                 }
             },
             "labelSubmit": {
@@ -4092,6 +4095,48 @@
                     "name": "Widget.mailFormCCAddressesLabel",
                     "tooltip": "Widget.mailFormCCAddressesTooltip"
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
         }
     },
@@ -4110,47 +4155,6 @@
                 "options": {
                     "name": "Widget.mailFormFieldLabelLabel",
                     "tooltip": "Widget.mailFormFieldLabelTooltip"
-                }
-            },
-            "width": {
-                "type": "select",
-                "required": true,
-                "defaultValue": 12,
-                "options": {
-                    "name": "Widget.mailFormFieldWidthLabel",
-                    "tooltip": "Widget.mailFormFieldWidthTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": 3,
-                            "caption": "Widget.mailFormFieldWidth25",
-                            "position": 0
-                        },
-                        {
-                            "value": 4,
-                            "caption": "Widget.mailFormFieldWidth33",
-                            "position": 1
-                        },
-                        {
-                            "value": 6,
-                            "caption": "Widget.mailFormFieldWidth50",
-                            "position": 2
-                        },
-                        {
-                            "value": 8,
-                            "caption": "Widget.mailFormFieldWidth66",
-                            "position": 3
-                        },
-                        {
-                            "value": 9,
-                            "caption": "Widget.mailFormFieldWidth75",
-                            "position": 4
-                        },
-                        {
-                            "value": 12,
-                            "caption": "Widget.mailFormFieldWidth100",
-                            "position": 5
-                        }
-                    ]
                 }
             },
             "isRequired": {
@@ -4195,47 +4199,6 @@
                 "options": {
                     "name": "Widget.mailFormFieldLabelLabel",
                     "tooltip": "Widget.mailFormFieldLabelTooltip"
-                }
-            },
-            "width": {
-                "type": "select",
-                "required": true,
-                "defaultValue": 12,
-                "options": {
-                    "name": "Widget.mailFormFieldWidthLabel",
-                    "tooltip": "Widget.mailFormFieldWidthTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": 3,
-                            "caption": "Widget.mailFormFieldWidth25",
-                            "position": 0
-                        },
-                        {
-                            "value": 4,
-                            "caption": "Widget.mailFormFieldWidth33",
-                            "position": 1
-                        },
-                        {
-                            "value": 6,
-                            "caption": "Widget.mailFormFieldWidth50",
-                            "position": 2
-                        },
-                        {
-                            "value": 8,
-                            "caption": "Widget.mailFormFieldWidth66",
-                            "position": 3
-                        },
-                        {
-                            "value": 9,
-                            "caption": "Widget.mailFormFieldWidth75",
-                            "position": 4
-                        },
-                        {
-                            "value": 12,
-                            "caption": "Widget.mailFormFieldWidth100",
-                            "position": 5
-                        }
-                    ]
                 }
             },
             "isRequired": {
@@ -4300,47 +4263,6 @@
                     "tooltip": "Widget.mailFormFieldLabelTooltip"
                 }
             },
-            "width": {
-                "type": "select",
-                "required": true,
-                "defaultValue": 12,
-                "options": {
-                    "name": "Widget.mailFormFieldWidthLabel",
-                    "tooltip": "Widget.mailFormFieldWidthTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": 3,
-                            "caption": "Widget.mailFormFieldWidth25",
-                            "position": 0
-                        },
-                        {
-                            "value": 4,
-                            "caption": "Widget.mailFormFieldWidth33",
-                            "position": 1
-                        },
-                        {
-                            "value": 6,
-                            "caption": "Widget.mailFormFieldWidth50",
-                            "position": 2
-                        },
-                        {
-                            "value": 8,
-                            "caption": "Widget.mailFormFieldWidth66",
-                            "position": 3
-                        },
-                        {
-                            "value": 9,
-                            "caption": "Widget.mailFormFieldWidth75",
-                            "position": 4
-                        },
-                        {
-                            "value": 12,
-                            "caption": "Widget.mailFormFieldWidth100",
-                            "position": 5
-                        }
-                    ]
-                }
-            },
             "rows": {
                 "type": "number",
                 "required": false,
@@ -4385,47 +4307,6 @@
                 "options": {
                     "name": "Widget.mailFormFieldLabelLabel",
                     "tooltip": "Widget.mailFormFieldLabelTooltip"
-                }
-            },
-            "width": {
-                "type": "select",
-                "required": true,
-                "defaultValue": 12,
-                "options": {
-                    "name": "Widget.mailFormFieldWidthLabel",
-                    "tooltip": "Widget.mailFormFieldWidthTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": 3,
-                            "caption": "Widget.mailFormFieldWidth25",
-                            "position": 0
-                        },
-                        {
-                            "value": 4,
-                            "caption": "Widget.mailFormFieldWidth33",
-                            "position": 1
-                        },
-                        {
-                            "value": 6,
-                            "caption": "Widget.mailFormFieldWidth50",
-                            "position": 2
-                        },
-                        {
-                            "value": 8,
-                            "caption": "Widget.mailFormFieldWidth66",
-                            "position": 3
-                        },
-                        {
-                            "value": 9,
-                            "caption": "Widget.mailFormFieldWidth75",
-                            "position": 4
-                        },
-                        {
-                            "value": 12,
-                            "caption": "Widget.mailFormFieldWidth100",
-                            "position": 5
-                        }
-                    ]
                 }
             },
             "isRequired": {
