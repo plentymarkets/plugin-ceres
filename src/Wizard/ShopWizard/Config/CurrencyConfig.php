@@ -9,6 +9,8 @@
 namespace Ceres\Wizard\ShopWizard\Config;
 
 
+use Ceres\Config\CeresCurrencyConfig;
+
 class CurrencyConfig
 {
     public static $currencyFormat = [
@@ -22,47 +24,33 @@ class CurrencyConfig
         "currencyFormatAll" => "all"
     ];
 
-    public static $currenciesAvailable = [
-        "currencyAvailableAED" => "AED",
-        "currencyAvailableARS" => "ARS",
-        "currencyAvailableAUD" => "AUD",
-        "currencyAvailableBGN" => "BGN",
-        "currencyAvailableBHD" => "BHD",
-        "currencyAvailableBRL" => "BRL",
-        "currencyAvailableCAD" => "CAD",
-        "currencyAvailableCHF" => "CHF",
-        "currencyAvailableCNY" => "CNY",
-        "currencyAvailableCZK" => "CZK",
-        "currencyAvailableDKK" => "DKK",
-        "currencyAvailableEUR" => "EUR",
-        "currencyAvailableGBP" => "GBP",
-        "currencyAvailableHKD" => "HKD",
-        "currencyAvailableHRK" => "HRK",
-        "currencyAvailableHUF" => "HUF",
-        "currencyAvailableIDR" => "IDR",
-        "currencyAvailableINR" => "INR",
-        "currencyAvailableJPY" => "JPY",
-        "currencyAvailableMXN" => "MXN",
-        "currencyAvailableMYR" => "MYR",
-        "currencyAvailableNOK" => "NOK",
-        "currencyAvailableNZD" => "NZD",
-        "currencyAvailablePHP" => "PHP",
-        "currencyAvailablePLN" => "PLN",
-        "currencyAvailableQAR" => "QAR",
-        "currencyAvailableRON" => "RON",
-        "currencyAvailableRUB" => "RUB",
-        "currencyAvailableSEK" => "SEK",
-        "currencyAvailableSGD" => "SGD",
-        "currencyAvailableTHB" => "THB",
-        "currencyAvailableTRY" => "TRY",
-        "currencyAvailableTWD" => "TWD",
-        "currencyAvailableUAH" => "UAH",
-        "currencyAvailableUSD" => "USD",
-        "currencyAvailableVND" => "VND",
-        "currencyAvailableXCD" => "XCD",
-        "currencyAvailableZAR" => "ZAR"
-    ];
+    public $currenciesAvailable = [];
 
+    /**
+     * CurrencyConfig constructor.
+     */
+    public function __construct()
+    {
+        $this->currenciesAvailable = $this->setAvailableCurrencies();
+    }
+
+    /**
+     * @return array
+     */
+    private function setAvailableCurrencies(): array
+    {
+        $currenciesConfig = pluginApp(CeresCurrencyConfig::class);
+        $currenciesList = $currenciesConfig->availableCurrencies;
+        $availableCurrencies = [];
+
+        foreach ($currenciesList as $currencyItem) {
+            $currencyKey = "currencyAvailable{$currencyItem}";
+            $availableCurrencies[$currencyKey] = $currencyItem;
+        }
+
+        return $availableCurrencies;
+
+    }
     public static function getCurrencyFormat()
     {
         return self::$currencyFormat;
@@ -73,8 +61,8 @@ class CurrencyConfig
         return self::$currencyFormatSelection;
     }
 
-    public static function getAvailableCurrencies()
+    public function getAvailableCurrencies()
     {
-        return self::$currenciesAvailable;
+        return $this->currenciesAvailable;
     }
 }

@@ -15,6 +15,17 @@ use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 
 class CurrencyStep extends Step
 {
+    /**
+     * @var CurrencyConfig
+     */
+    private $currencyConfig;
+
+    public function __construct(CurrencyConfig $currencyConfig)
+    {
+        parent::__construct();
+        $this->currencyConfig = $currencyConfig;
+    }
+
     public function generateStep()
     {
         return [
@@ -117,7 +128,7 @@ class CurrencyStep extends Step
 
     private function generateAvailableCurrenciesSection(): array
     {
-        $availableCurrencies = CurrencyConfig::getAvailableCurrencies();
+        $availableCurrencies = $this->currencyConfig->getAvailableCurrencies();
         $availableCurrenciesList = $this->generateTranslatedListBoxValues($availableCurrencies);
         return [
             "title" => "Wizard.availableCurrencies",

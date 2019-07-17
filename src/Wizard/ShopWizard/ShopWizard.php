@@ -11,6 +11,7 @@ namespace Ceres\Wizard\ShopWizard;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\Steps\Builder\CurrencyStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\DefaultSettingsStep;
+use Ceres\Wizard\ShopWizard\Steps\Builder\DisplayedInformationStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\OnlineStoreStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\RequiredSettingsStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\SettingsSelectionStep;
@@ -33,6 +34,7 @@ class ShopWizard extends WizardProvider
         $defaultSettingsStep = pluginApp(DefaultSettingsStep::class);
         $onlineStoreStep = pluginApp(OnlineStoreStep::class);
         $currencyStep = pluginApp(CurrencyStep::class);
+        $displayInfoStep = pluginApp(DisplayedInformationStep::class);
 
 
         return [
@@ -58,6 +60,7 @@ class ShopWizard extends WizardProvider
                 "defaultSettingsStep" => $defaultSettingsStep->generateStep(),
                 "onlineStoreStep" => $onlineStoreStep->generateStep(),
                 "currencyStep" => $currencyStep->generateStep(),
+                "displayInfoStep" => $displayInfoStep->generateStep(),
             ]
         ];
     }
