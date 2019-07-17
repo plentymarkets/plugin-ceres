@@ -11,10 +11,8 @@
         </google-maps-widget>
     {% else %}
         <div class="widget-placeholder {{ widget.settings.aspectRatio.mobile }}">
-            <div>
-                <p class="title">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderTitle") }}</p>
-                <p class="description">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderDescription") }}</p>
-            </div>
+            <p class="title">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderTitle") }}</p>
+            <p class="description">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderDescription") }}</p>
         </div>
     {% endif %}
 </div>
