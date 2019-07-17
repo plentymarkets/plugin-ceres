@@ -30,11 +30,7 @@ Vue.component("google-maps-widget",
             aspectRatio:
                 {
                     type: String,
-                    default: "prop-xs-3-1 ",
-                    validator: value =>
-                    {
-                        return ["prop-xs-3-1 ", "prop-xs-2-1", "prop-xs-1-1", ""].indexOf(value) !== -1;
-                    }
+                    default: "prop-xs-3-1"
                 }
         },
 

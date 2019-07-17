@@ -30,6 +30,29 @@
                 "name": "Widget.googleMapsZoomLabel",
                 "tooltipText": "Widget.googleMapsZoomTooltip"
             }
+        },
+        "aspectRatio": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "prop-xs-3-1",
+            "options": {
+                "name": "Widget.googleMapsAspectRatioLabel",
+                "tooltipText": "Widget.googleMapsAspectRatioTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "prop-xs-3-1",
+                        "caption": "Widget.googleMapsAspectRatioThreeToOne"
+                    },
+                    {
+                        "value": "prop-xs-2-1",
+                        "caption": "Widget.googleMapsAspectRatioTwoToOne"
+                    },
+                    {
+                        "value": "prop-xs-1-1",
+                        "caption": "Widget.googleMapsAspectRatioOneToOne"
+                    }
+                ]
+            }
         }
     }
 }

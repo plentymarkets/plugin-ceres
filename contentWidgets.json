@@ -1297,7 +1297,7 @@
     {
         "identifier": "Ceres::GoogleMapsWidget",
         "label": "Widget.googleMapsLabel",
-        "previewImageURL": "/images/widgets/google-maps-widget.svg",
+        "previewImageURL": "/images/widgets/google-maps.svg",
         "type": "default",
         "position": 1050,
         "widgetClass": "Ceres\\Widgets\\Common\\GoogleMapsWidget",
@@ -1305,7 +1305,6 @@
             "apiKey": {
                 "type": "text",
                 "required": true,
-                "defaultValue": "",
                 "options": {
                     "name": "Widget.googleMapsApiKeyLabel",
                     "tooltipText": "Widget.googleMapsApiKeyTooltip"
@@ -1314,7 +1313,6 @@
             "address": {
                 "type": "textarea",
                 "required": true,
-                "defaultValue": "",
                 "options": {
                     "name": "Widget.googleMapsAddressLabel",
                     "tooltipText": "Widget.googleMapsAddressTooltip"
@@ -1327,6 +1325,29 @@
                 "options": {
                     "name": "Widget.googleMapsZoomLabel",
                     "tooltipText": "Widget.googleMapsZoomTooltip"
+                }
+            },
+            "aspectRatio": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "prop-xs-3-1",
+                "options": {
+                    "name": "Widget.googleMapsAspectRatioLabel",
+                    "tooltipText": "Widget.googleMapsAspectRatioTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "prop-xs-3-1",
+                            "caption": "Widget.googleMapsAspectRatioThreeToOne"
+                        },
+                        {
+                            "value": "prop-xs-2-1",
+                            "caption": "Widget.googleMapsAspectRatioTwoToOne"
+                        },
+                        {
+                            "value": "prop-xs-1-1",
+                            "caption": "Widget.googleMapsAspectRatioOneToOne"
+                        }
+                    ]
                 }
             }
         }
