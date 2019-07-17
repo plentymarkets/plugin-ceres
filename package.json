@@ -55,7 +55,7 @@
     "font-awesome": "^4.6.3",
     "jquery": "^3.4.0",
     "lightbox2": "^2.10.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "moment": "^2.24.0",
     "owl.carousel": "2.2.0",
     "popper.js": "^1.15.0",
