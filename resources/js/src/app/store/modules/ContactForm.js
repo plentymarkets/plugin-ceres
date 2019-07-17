@@ -13,7 +13,7 @@ function readFormOptions(form, formData)
         cc: [],
         bcc: [],
         replyTo: {
-            mailAddress: null,
+            mail: null,
             name: ""
         }
     };
@@ -56,11 +56,11 @@ function readFormOptions(form, formData)
                 {
                     if (isMail(element.value))
                     {
-                        formOptions.replyTo.mailAddress = element.value;
+                        formOptions.replyTo.mail = element.value;
                     }
                     else if (formData.hasOwnProperty(element.value) && isMail(formData[element.value].value))
                     {
-                        formOptions.replyTo.mailAddress = formData[element.value].value;
+                        formOptions.replyTo.mail = formData[element.value].value;
                     }
                 }
                 break;
@@ -127,17 +127,17 @@ const actions =
             ValidationService.validate(event.target)
                 .done(() =>
                 {
-                    const formData = serializeForm(event.target);
+                    const formData    = serializeForm(event.target);
                     const formOptions = readFormOptions(event.target, formData);
 
                     ApiService.post(
                         "/rest/io/customer/contact/mail",
                         {
-                            mailData: formData,
-                            recipient: formOptions.recipient,
-                            subject: formOptions.subject || "",
-                            cc: formOptions.cc,
-                            replyTo: formOptions.replyTo
+                            data:       formData,
+                            recipient:  formOptions.recipient,
+                            subject:    formOptions.subject || "",
+                            cc:         formOptions.cc,
+                            replyTo:    formOptions.replyTo
                         }
                     )
                         .done(reponse =>
