@@ -24724,15 +24724,7 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   bottom: 0;
   width: 100%;
   padding: 1rem;
-  position: absolute;
-  bottom: 0;
-}
-
-@media (max-width: 575.98px) {
-  .widget.widget-image-box.widget-image-box-block-caption > .widget-inner .widget-caption {
-    position: relative;
-    width: 100%;
-  }
+  max-height: 100%;
 }
 
 .widget.widget-image-box.widget-image-box-no-caption > .widget-inner .widget-caption {
