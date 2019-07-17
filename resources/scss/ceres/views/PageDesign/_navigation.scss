@@ -2,7 +2,8 @@
 // mobile
 $menu-bg-sm 			: $primary;
 $menu-breadcrumb-bg 	: $gray-darker;
-$menu-color-sm 			: $white;
+$menu-breadcrumb-color 	: color-yiq($menu-breadcrumb-bg);
+$menu-color-sm 			: color-yiq($primary);
 $menu-font-s-sm  		: 1.2em;
 // desktop
 $menu-bg-lg 			: transparent;
@@ -208,7 +209,6 @@ nav.navbar
 					transition 		: all .1s ease;
 					background 		: $menu-color-lg;
 					height 			: auto;
-					top 			: 100%;
 					text-align 		: center;
 					width 			: auto;
 					max-width 		: 25em;
@@ -364,7 +364,13 @@ nav.navbar.megamenu {
 		transform 	: translateX(0);
 	}
 
+	.sk-fading-circle .sk-circle:before,
+	.loading-animation > div {
+		background-color: $menu-color-sm;
+	}
+
 	ul.breadcrumb {
+		color      : $menu-breadcrumb-color;
 		background : $menu-breadcrumb-bg;
 		max-width  : initial;
 		font-size  : .8em;

@@ -1,13 +1,11 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
 import { navigateTo } from "services/UrlService";
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 
 const NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-basket", {
-
-    delimiters: ["${", "}"],
 
     props:
     {
@@ -32,12 +30,6 @@ Vue.component("add-to-basket", {
             type: Array,
             default: () => []
         },
-        isVariationSelected:
-        {
-            type: Boolean,
-            default: true
-        },
-
         variationId:
         {
             type: Number
@@ -76,19 +68,34 @@ Vue.component("add-to-basket", {
         {
             type: Boolean,
             default: true
+        },
+        buttonSize:
+        {
+            type: [String, null],
+            default: null,
+            validator: value =>
+            {
+                return ["sm", "md", "lg"].indexOf(value) !== -1;
+            }
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
     computed:
     {
-        computedMinimumQuantity()
-        {
-            return this.minimumQuantity <= 0 ? this.intervalQuantity : this.minimumQuantity;
-        },
         canBeAddedToBasket()
         {
             return this.isSalable &&
                 !this.hasChildren &&
-                (this.computedMinimumQuantity === this.intervalQuantity || this.intervalQuantity === 0) &&
+                !(this.minimumQuantity != 1 || this.intervalQuantity != 1) &&
                 !this.requiresProperties &&
                 this.hasPrice;
         },
@@ -99,8 +106,26 @@ Vue.component("add-to-basket", {
                 this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0;
         },
 
+        buttonClasses()
+        {
+            const classes = [];
+
+            if (isDefined(this.buttonSize))
+            {
+                classes.push(`btn-${this.buttonSize}`);
+            }
+
+            if (isDefined(this.paddingClasses))
+            {
+                classes.push(this.paddingClasses.split(" "));
+            }
+
+            return classes;
+        },
+
         ...Vuex.mapState({
-            isBasketLoading: state => state.basket.isBasketLoading
+            isBasketLoading: state => state.basket.isBasketLoading,
+            isVariationSelected: state => state.variationSelect.isVariationSelected
         })
     },
     data()
@@ -128,7 +153,7 @@ Vue.component("add-to-basket", {
                 this.waiting = true;
 
                 this.orderProperties.forEach(function(orderProperty)
-{
+                {
                     if (orderProperty.property.valueType === "float" &&
                         !isNullOrUndefined(orderProperty.property.value) &&
                         orderProperty.property.value.slice(-1) === App.decimalSeparator)

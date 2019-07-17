@@ -1,5 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{% set customClass = widget.settings.customClass.mobile %}
 {% set isFixed                      = widget.settings.isFixed.mobile %}
 {% set enableLogin                  = widget.settings.enableLogin.mobile %}
 {% set enableRegistration           = widget.settings.enableRegistration.mobile %}
@@ -23,7 +25,7 @@
 {{ Twig.set("defaultLanguage", Twig.call("services.webstoreConfig.getDefaultLanguage")) }}
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
-<div class="widget-fw top-bar{% if not isFixed %} unfixed{% endif %}">
+<div class="widget-fw top-bar{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
         <div class="row mx-0">
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Header.LeftSide"])) }}
@@ -54,13 +56,13 @@
                             <li class="list-inline-item control-user">
                                 <user-login-handler :show-registration="{{ enableRegistration | json_encode }}">
                                     <a data-toggle="modal">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <i class="fa fa-user mr-1" aria-hidden="true"></i>
                                         <span class="hidden-xs-down">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
                                     </a>
                                     {% if enableRegistration %}
                                     <span class="pipe"></span>
                                     <a data-toggle="modal">
-                                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                        <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                                         <span class="hidden-xs-down">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                     </a>
                                     {% endif %}
@@ -69,7 +71,7 @@
                         {% elseif enableRegistration %}
                             <li class="list-inline-item control-user">
                                 <a data-toggle="modal">
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                                     <span class="hidden-xs-down">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                 </a>
                             </li>
@@ -165,11 +167,10 @@
                 </div>
             {% endif %}
 
-            {% if enableCurrencySelect %}
+            {% if enableCurrencySelect and not isPreview %}
                 <div id="currencySelect" class="cmp cmp-currency-select collapse">
                     <div class="container-max">
                         <div class="row py-3">
-
                             <div class="currency-list col-12">
                                 <div class="list-title">
                                     <strong>{{ Twig.print('trans("Ceres::Template.headerCurrency")') }}</strong>
@@ -197,15 +198,15 @@
                 </div>
             {% endif %}
 
-            {% if enableLanguageSelect or enableShippingCountrySelect %}
-                <shop-country-settings
-                        country-flag-prefix="flag-icon-"
-                        shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_data("activeCountriesList")') }}"
-                        :shipping-country-id="{{ Twig.print('services.checkout.getShippingCountryId() | json_encode') }}">
+            <shop-country-settings
+                    country-flag-prefix="flag-icon-"
+                    shipping-countries="{{ Twig.print('services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_data("activeCountriesList")') }}"
+                    :shipping-country-id="{{ Twig.print('services.checkout.getShippingCountryId() | json_encode') }}">
+                {% if enableLanguageSelect or enableShippingCountrySelect %}
                     <div id="countrySettings" class="cmp cmp-country-settings collapse">
                         <div class="container-max">
                             <div class="row py-3">
-                                {% if enableLanguageSelect %}
+                                {% if enableLanguageSelect and not isPreview %}
                                     <div class="col-12 {% if enableShippingCountrySelect %}col-lg-6{% else %}col-lg-12{% endif %}">
 
                                         <div class="language-settings">
@@ -213,7 +214,6 @@
                                                 <strong>{{ Twig.print('trans("Ceres::Template.headerSelectLanguage")') }}</strong>
                                                 <hr>
                                             </div>
-
                                             {{ Twig.set("languageList", Twig.call("services.webstoreConfig.getActiveLanguageList")) }}
                                             {{ Twig.set("languageUrls", Twig.call("services.url.getLanguageURLs")) }}
                                             <ul>
@@ -230,7 +230,7 @@
                                                             {{ Twig.print('trans("Ceres::Template.header" ~ language | capitalize)') }}
                                                         </a>
                                                     </li>
-                                               {{ Twig.endfor() }}
+                                            {{ Twig.endfor() }}
                                             </ul>
                                         </div>
                                     </div>
@@ -249,8 +249,8 @@
                             </div>
                         </div>
                     </div>
-                </shop-country-settings>
-            {% endif %}
+                {% endif %}
+            </shop-country-settings>
         </div>
     </div>
 </div>

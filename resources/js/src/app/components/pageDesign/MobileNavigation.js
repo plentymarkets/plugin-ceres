@@ -1,12 +1,10 @@
+import { MediaQueryHelper } from "../../helper/MediaQueryHelper";
+
 Vue.component("mobile-navigation", {
 
     props: [
         "template",
         "initialCategory"
-    ],
-
-    jsonDataFields: [
-        "navigationTreeData"
     ],
 
     data()
@@ -15,7 +13,8 @@ Vue.component("mobile-navigation", {
             dataContainer1: [],
             dataContainer2: [],
             useFirstContainer: false,
-            breadcrumbs: []
+            breadcrumbs: [],
+            isNavigationInitialized: false
         };
     },
 
@@ -45,20 +44,41 @@ Vue.component("mobile-navigation", {
         })
     },
 
-    mounted()
+    created()
     {
-        this.$nextTick(() =>
-        {
-            this.initNavigation();
-        });
+        this.addEventListener();
     },
 
     methods:
     {
+        addEventListener()
+        {
+            const QueryHelper = new MediaQueryHelper();
+            const breakpoint = QueryHelper.getCurrentBreakpoint();
+            const onMobileBreakpoint = () =>
+            {
+                if (this.navigationTree.length <= 0)
+                {
+                    this.$store.dispatch("loadNavigationTree")
+                        .then(() =>
+                        {
+                            this.initNavigation();
+                        });
+                }
+            };
+
+            QueryHelper.addFunction(onMobileBreakpoint, ["xs", "md", "sm"]);
+
+            if (breakpoint === "md" ||
+                breakpoint === "sm" ||
+                breakpoint === "xs")
+            {
+                onMobileBreakpoint();
+            }
+        },
+
         initNavigation()
         {
-            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
-
             if (this.initialCategory && this.initialCategory.id)
             {
                 if (this.initialCategory.linklist === "N")
@@ -73,6 +93,7 @@ Vue.component("mobile-navigation", {
             }
 
             this.dataContainer1 = this.navigationTree;
+            this.isNavigationInitialized = true;
         },
 
         initialSlide(currentCategory)
@@ -143,19 +164,19 @@ Vue.component("mobile-navigation", {
         menu: {
             bind(el)
             {
-				// add "activated" classes when menu is activated
+                // add "activated" classes when menu is activated
                 $(el).on("menu-activated", (event, params) =>
                 {
                     $(event.target).addClass("menu-active");
                     $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
                 });
-				// add "deactivated" classes when menu is deactivated
+                // add "deactivated" classes when menu is deactivated
                 $(el).on("menu-deactivated", (event, params) =>
                 {
                     $(event.target).removeClass("menu-active");
                     $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
                 });
-				// this removes the animation class automatically after the animation has completed
+                // this removes the animation class automatically after the animation has completed
                 $(el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", () =>
                 {
                     $(".mainmenu").removeClass((index, className) =>

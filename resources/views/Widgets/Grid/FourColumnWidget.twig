@@ -1,4 +1,6 @@
-<div class="widget widget-grid row">
+{% set customClass = widget.settings.customClass.mobile %}
+
+<div class="widget widget-grid widget-four-col row{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     <div class="widget-inner col-12 {{ gridLayouts.oneToOneToOneToOne[0] }}">
         <div{% if isPreview %} data-builder-child-container="first"{% endif %}>{{ children.first | raw }}</div>
     </div>

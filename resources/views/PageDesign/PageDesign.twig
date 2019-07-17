@@ -8,6 +8,7 @@
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
+{{ component("Ceres::Customer.Components.Contact.AcceptPrivacyPolicyCheck") }}
 
 {# TODO: remove if shop builder pages can be rebuild by migrations #}
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
@@ -22,7 +23,10 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
 
-{% spaceless %}
+{% if request.get('openBasketPreview') == 1 %}
+    {% set openBasketClass = "open-" ~ ceresConfig.basket.previewType %}
+{% endif %}
+
 <!DOCTYPE html>
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
@@ -31,6 +35,7 @@
     {% include getPartial('head') %}
 
     {% block PartialHead %}
+        {% embed getPartial('page-metadata') %}{% endembed %}
     {% endblock %}
 
     {% for styleTemplate in get_additional_styles() %}
@@ -52,7 +57,7 @@
         document.body.classList.add("no-touch");
     }
 </script>
-<div id="vue-app">
+<div id="vue-app"{% if openBasketClass is not empty %} class="{{ openBasketClass }}"{% endif %}>
     <div class="wrapper wrapper-top">
         <!-- messages -->
         <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
@@ -143,7 +148,7 @@
         <!-- ./REGISTRATION MODAL -->
 
         <!-- BASKET MODAL -->
-        <add-item-to-basket-overlay :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
+        <add-item-to-basket-overlay></add-item-to-basket-overlay>
         <!-- ./BASKET MODAL -->
 
         <!-- PASSWORD RESET MODAL -->
@@ -241,13 +246,11 @@
         });
     {% endif %}
 
-
-    (function($) {
-
+    (function($, MediaQueryHelper) {
         var vueApp = document.getElementById('vue-app');
         var headerParent = document.getElementById('page-header-parent');
         var headerLoaded = false;
-        var allElementHeights = [];
+        var allHeaderChildrenHeights = [];
 
         if ( !!headerParent )
         {
@@ -258,26 +261,23 @@
                 if (headerLoaded && headerParent)
                 {
                     var bodyOffset = 0;
-                    // Get current header with children
-                    if(headerParent === null){
-                        return;
-                    }
-
+                    
                     for( var i = 0; i < headerChildren.length; i++ )
                     {
                         bodyOffset += headerChildren[i].getBoundingClientRect().height;
                     }
-
                     vueApp.style.marginTop = bodyOffset + 'px';
                     vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
                 }
             }
 
-            function getHeaderElementsHeights()
+            function getHeaderChildrenHeights()
             {
+                allHeaderChildrenHeights = [];
+
                 for (var i = 0; i < headerChildren.length; i++)
                 {
-                    allElementHeights.push(headerChildren[i].getBoundingClientRect().height);
+                    allHeaderChildrenHeights.push(headerChildren[i].getBoundingClientRect().height);
                 }
             }
 
@@ -294,7 +294,7 @@
                     for (var i = 0; i < headerChildren.length; i++)
                     {
                         var elem = headerChildren[i];
-                        var elemHeight = allElementHeights[i];
+                        var elemHeight = allHeaderChildrenHeights[i];
                         
                         offset = absolutePos - scrollTop;
                         elem.style.position = "absolute";
@@ -305,7 +305,7 @@
                         {
                             if (offset < 0)
                             {
-                                elem.style.top = 0; 
+                                elem.style.top = 0;
                             }
                             else 
                             {
@@ -327,6 +327,13 @@
                     }
                 }
             }
+
+            // When window resize to another breakpoint execute functions
+            MediaQueryHelper.addFunction(function(){
+                calculateBodyOffset();
+                getHeaderChildrenHeights();
+                scrollHeaderElements();
+            }); 
 
             $(window).scroll(scrollHeaderElements);
 
@@ -353,7 +360,7 @@
             {
                 // Initialize
                 headerLoaded = true;
-                getHeaderElementsHeights();
+                getHeaderChildrenHeights();
                 scrollHeaderElements();
                 calculateBodyOffset();
             });
@@ -383,10 +390,9 @@
         });
 
 
-    })(jQuery);
+    })(jQuery, MediaQueryHelper);
 </script>
 
 {{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
 </body>
 </html>
-{% endspaceless %}

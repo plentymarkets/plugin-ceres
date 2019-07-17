@@ -60,54 +60,61 @@ const TabNavItem = {
 Vue.component("tab-list", {
     render(createElement)
     {
-        const navElements = this.tabs.map((tab, index) =>
+        const tabListElements = [];
+        const filteredTabs = this.$slots.default.filter(tab => !!tab.componentOptions);
+
+        if (this.tabs.length > 0)
         {
-            return createElement(
-                TabNavItem,
-                {
-                    props: {
-                        tab: tab,
-                        tabIndex: index
-                    },
-                    on: {
-                        click: evt =>
-                        {
-                            if (!tab.localActive)
+            const navElements = this.tabs.map((tab, index) =>
+            {
+                return createElement(
+                    TabNavItem,
+                    {
+                        props: {
+                            tab: tab,
+                            tabIndex: index
+                        },
+                        on: {
+                            click: evt =>
                             {
-                                this.activateTab(tab, evt);
+                                if (!tab.localActive)
+                                {
+                                    this.activateTab(tab, evt);
+                                }
                             }
                         }
-                    }
-                });
-        });
+                    });
+            });
 
-        const nav = createElement(
-            "ul",
-            {
-                staticClass: "nav nav-tabs",
-                class: ["widget-" + this.appearance],
-                attrs: {
-                    role: "tablist"
-                }
-            },
-            [navElements]
-        );
+            const nav = createElement(
+                "ul",
+                {
+                    staticClass: "nav nav-tabs",
+                    class: ["widget-" + this.appearance],
+                    attrs: {
+                        role: "tablist"
+                    }
+                },
+                [navElements]
+            );
+
+            tabListElements.push(nav);
+        }
 
         const content = createElement(
             "div",
             {
                 staticClass: "tab-content"
             },
-            [this.$slots.default]
+            [filteredTabs]
         );
+
+        tabListElements.push(content);
 
         return createElement(
             "div",
             {},
-            [
-                nav,
-                content
-            ]
+            tabListElements
         );
     },
 
@@ -116,6 +123,11 @@ Vue.component("tab-list", {
         {
             type: String,
             default: "none"
+        },
+        renderEmpty:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -131,6 +143,13 @@ Vue.component("tab-list", {
         this.$nextTick(() =>
         {
             this.updateTabs();
+
+            const hasActiveContent = this.tabs.some(tab => tab.active);
+
+            if (!hasActiveContent )
+            {
+                this.activateTab(this.tabs[0]);
+            }
         });
     },
 
@@ -139,13 +158,17 @@ Vue.component("tab-list", {
         getTabs()
         {
             const tabs = (this.$slots.default || []);
-
             const tabComps = tabs.map(function(vnode)
             {
                 return vnode.componentInstance;
             });
 
-            return tabComps.filter(tab => isDefined(tab) && isDefined(tab.$slots.default));
+            return tabComps.filter((tab) =>
+            {
+                return isDefined(tab) &&
+                       isDefined(tab.$slots.default) &&
+                       (this.renderEmpty || this.filterContent(tab));
+            });
         },
 
         updateTabs()
@@ -153,16 +176,27 @@ Vue.component("tab-list", {
             this.tabs = this.getTabs();
         },
 
-        activateTab(tab, event)
+        activateTab(tab)
         {
             const activeTab = this.tabs.find(tab => tab.localActive);
 
             tab.setActive(true);
 
-            if (tab !== activeTab)
+            if (activeTab && activeTab.setActive && tab !== activeTab)
             {
                 activeTab.setActive(false);
             }
+        },
+
+        /**
+         * Checks if tab content contains img tag or text.
+         * @param {*} tab
+         */
+        filterContent(tab)
+        {
+            const imgPattern = new RegExp(/<img([\w\W]+?)>/);
+
+            return imgPattern.test(tab.$el.innerHTML) || tab.$el.textContent.trim().length > 0;
         }
     }
 });

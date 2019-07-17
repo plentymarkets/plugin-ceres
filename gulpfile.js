@@ -18,14 +18,11 @@ var babelify = require("babelify");
 var glob = require("glob");
 var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
-var minifyCSS = require("gulp-minify-css");
 var eslint = require("gulp-eslint");
 var sass = require("gulp-sass");
 var autoprefixer = require("gulp-autoprefixer");
 var copy = require("gulp-copy");
 var insert = require("gulp-insert");
-var fs = require("fs");
-var path = require("path");
 
 gulp.task("default", ["build"]);
 

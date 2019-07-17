@@ -8,6 +8,7 @@
     "position": 1000,
     "widgetClass": "Ceres\\Widgets\\Common\\LinkListWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "title": {
             "type": "text",
             "required": false,

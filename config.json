@@ -102,6 +102,14 @@
                             }
                         ]
                     }
+                },
+                "global.registration_require_privacy_policy_confirmation": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalRegistrationRequirePrivacyPolicyConfirmation",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         },
@@ -545,6 +553,7 @@
                 "item.data": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemDataLabel",
                     "options": {
                         "defaultValue": "all",
@@ -645,6 +654,7 @@
                 "item.show_variation_over_dropdown": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemShowVariationOverDropdownLabel",
                     "options": {
                         "defaultValue": "false"
@@ -834,6 +844,7 @@
                 "item.lists.cross_selling_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemListsCrossSellingTypeLabel",
                     "options": {
                         "defaultValue": "Similar",
@@ -860,6 +871,7 @@
               "item.lists.cross_selling_sorting": {
                   "type": "selectBox",
                   "required": false,
+                  "deprecated": true,
                   "label": "Config.itemListsCrossSellingSortingLabel",
                   "options": {
                     "defaultValue": "texts.name_asc",
@@ -970,6 +982,7 @@
               "item.lists.tag_sorting": {
                   "type": "selectBox",
                   "required": false,
+                  "deprecated": true,
                   "label": "Config.itemListsTagSortingLabel",
                   "options": {
                       "defaultValue": "texts.name_asc",
@@ -1080,6 +1093,7 @@
                 "item.lists.1.list_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists1ListTypeLabel",
                     "options": {
                         "defaultValue": "last_seen",
@@ -1102,6 +1116,7 @@
                 "item.lists.1.tag_ids": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists1TagIdsLabel",
                     "options": {
                         "defaultValue": "1,2,3"
@@ -1110,6 +1125,7 @@
                 "item.lists.2.list_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists2ListTypeLabel",
                     "options": {
                         "defaultValue": "cross_selling",
@@ -1132,6 +1148,7 @@
                 "item.lists.2.tag_ids": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists2TagIdsLabel",
                     "options": {
                         "defaultValue": "1,2,3"
@@ -1140,6 +1157,7 @@
                 "item.lists.3.list_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists3ListTypeLabel",
                     "options": {
                         "defaultValue": "tag_list",
@@ -1162,6 +1180,7 @@
                 "item.lists.3.tag_ids": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists3TagIdsLabel",
                     "options": {
                         "defaultValue": "1,2,3"
@@ -1319,6 +1338,14 @@
                             }
                         ]
                     }
+                },
+                "basket.show_shipping_country_select": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.basketShowShippingCountrySelect",
+                    "options": {
+                      "defaultValue": "true"
+                    }
                 }
             }
         },
@@ -1337,17 +1364,13 @@
                     "type": "inputText",
                     "required": false,
                     "label": "Config.contactShopMailCcLabel",
-                    "options": {
-                        "defaultValue": "your2@email.com,your3@email.com"
-                    }
+                    "options": {}
                 },
                 "contact.shop_mail_bcc": {
                     "type": "inputText",
                     "required": false,
                     "label": "Config.contactShopMailBccLabel",
-                    "options": {
-                        "defaultValue": "your2@email.com,your3@email.com"
-                    }
+                    "options": {}
                 },
                 "contact.show_data": {
                     "type": "multiCheckBox",

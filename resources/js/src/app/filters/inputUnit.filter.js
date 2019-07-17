@@ -25,16 +25,16 @@ Vue.filter("inputUnit", function(basketItem, shortString = false)
     }
     else
     if (basketItem.inputWidth > 0)
-        {
+    {
         result = basketItem.inputWidth + basketItem.variation.data.unit.htmlUnit;
         if (basketItem.inputLength > 0)
-            {
+        {
             result += " * " + basketItem.inputLength + basketItem.variation.data.unit.htmlUnit;
         }
     }
-        else if (basketItem.inputLength > 0)
-        {
-            result = basketItem.inputLength + basketItem.variation.data.unit.htmlUnit;
-        }
+    else if (basketItem.inputLength > 0)
+    {
+        result = basketItem.inputLength + basketItem.variation.data.unit.htmlUnit;
+    }
     return result;
 });

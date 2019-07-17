@@ -2,8 +2,9 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.basket") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.basket") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
@@ -11,6 +12,7 @@
     {{ component( "Ceres::Basket.Components.BasketList" ) }}
     {{ component( "Ceres::Basket.Components.Coupon" ) }}
     {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
+    {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
 
     <div v-cloak class="page-content basket container-max" itemtype="http://schema.org/Product http://schema.org/Thing http://schema.org/Offer http://schema.org/PriceSpecification">
 
@@ -31,6 +33,9 @@
 
             <div class="col-md-5">
                 <div class="py-4 px-3 bg-white" v-stick-in-parent="$store.state.basket.isBasketInitiallyLoaded">
+
+                    <shipping-country-select template="#vue-basket-shipping-country-select"></shipping-country-select>
+
                     <hr class="d-md-none">
                     {{ LayoutContainer.show("Ceres::Basket.BeforeBasketTotals") }}
                     <basket-totals class="mb-4" template="#vue-basket-totals"></basket-totals>

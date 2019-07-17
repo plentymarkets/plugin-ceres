@@ -17,6 +17,7 @@
     "variation.data.orderProperties.*",
     "variation.mayShowUnitPrice",
     "variation.bundleType",
+    "variation.vatId",
     "variationProperties.property.cast",
     "variationProperties.property.display",
     "variationProperties.property.groups",

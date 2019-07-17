@@ -1,13 +1,15 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
-    <title>{{ trans("Ceres::Template.wishList") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.wishList") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
     {{ component( "Ceres::WishList.Components.WishList" ) }}
 
-    <div class="page-content basket container-max mb-5">
+    <div class="page-content wishlist container-max mb-5">
         <div class="row mt-3">
             <div class="col-12">
                 <h1 class="h2">{{ trans("Ceres::Template.wishList") }}</h1>

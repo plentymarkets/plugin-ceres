@@ -7,6 +7,7 @@
     "position": 700,
     "widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
@@ -66,6 +67,11 @@
                         "value": "manufacturer",
                         "caption": "Widget.itemListListTypeManufacturer",
                         "position": 3
+                    },
+                    {
+                        "value": "cross_selling",
+                        "caption": "Widget.itemListListTypeCrossSelling",
+                        "position": 4
                     }
                 ]
             }
@@ -98,6 +104,38 @@
             "options": {
                 "name": "Widget.itemListTagIdLabel",
                 "tooltipText": "Widget.itemListTagIdTooltip"
+            }
+        },
+        "crossSellingRelationType": {
+            "type": "select",
+            "required": false,
+            "isVisible": "listType === 'cross_selling'",
+            "defaultValue": "Similar",
+             "options": {
+                "name": "Widget.itemListCrossSellingRelation",
+                "tooltipText": "Widget.itemListCrossSellingRelationTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "Similar",
+                        "caption": "Widget.itemListsCrossSellingTypeSimilar",
+                        "position": 0
+                    },
+                    {
+                        "value": "Accessory",
+                        "caption": "Widget.itemListsCrossSellingTypeAccessory",
+                        "position": 1
+                    },
+                    {
+                        "value": "ReplacementPart",
+                        "caption": "Widget.itemListsCrossSellingTypeReplacementPart",
+                        "position": 2
+                    },
+                    {
+                        "value": "Bundle",
+                        "caption": "Widget.itemListsCrossSellingTypeBundle",
+                        "position": 3
+                    }
+                ]
             }
         },
         "itemSort": {

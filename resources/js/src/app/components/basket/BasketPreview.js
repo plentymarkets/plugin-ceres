@@ -19,7 +19,8 @@ Vue.component("basket-preview", {
     computed: Vuex.mapState({
         basket: state => state.basket.data,
         basketItems: state => state.basket.items,
-        basketNotifications: state => state.basket.basketNotifications
+        basketNotifications: state => state.basket.basketNotifications,
+        latestBasketEntry: state => state.basket.latestEntry
     }),
 
     created()
@@ -36,11 +37,31 @@ Vue.component("basket-preview", {
         this.$nextTick(() =>
         {
             ApiService.listen("AfterBasketChanged",
-            data =>
-            {
-                this.$store.commit("setBasket", data.basket);
-                this.$store.commit("setShowNetPrices", data.showNetPrices);
-            });
+                data =>
+                {
+                    this.$store.commit("setBasket", data.basket);
+                    this.$store.commit("setShowNetPrices", data.showNetPrices);
+                });
         });
+    },
+
+    watch:
+    {
+        latestBasketEntry()
+        {
+            if (App.config.basket.addItemToBasketConfirm === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0)
+            {
+                setTimeout(function()
+                {
+                    const vueApp = document.querySelector("#vue-app");
+                    const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
+
+                    if (vueApp)
+                    {
+                        vueApp.classList.add(basketOpenClass);
+                    }
+                }, 1);
+            }
+        }
     }
 });

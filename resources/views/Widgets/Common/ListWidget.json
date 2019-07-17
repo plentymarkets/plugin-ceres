@@ -7,6 +7,7 @@
     "position": 900,
     "widgetClass": "Ceres\\Widgets\\Common\\ListWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "title": {
             "type": "text",
             "required": false,
@@ -77,6 +78,36 @@
                     {
                         "value": "fa-dollar",
                         "caption": "Widget.widgetIconDollar",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-percent",
+                        "caption": "Widget.widgetIconPercent",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-gift",
+                        "caption": "Widget.widgetIconGift",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-truck",
+                        "caption": "Widget.widgetIconTruck",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-phone",
+                        "caption": "Widget.widgetIconPhone",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-copyright",
+                        "caption": "Widget.widgetIconCopyright",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-registered",
+                        "caption": "Widget.widgetIconRegistered",
                         "position": 1
                     }
                 ]

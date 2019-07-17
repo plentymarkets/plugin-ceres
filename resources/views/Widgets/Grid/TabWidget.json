@@ -7,6 +7,7 @@
     "position": 500,
     "widgetClass": "Ceres\\Widgets\\Grid\\TabWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
@@ -41,6 +42,7 @@
                     "type": "uuid"
                 }
             }
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }

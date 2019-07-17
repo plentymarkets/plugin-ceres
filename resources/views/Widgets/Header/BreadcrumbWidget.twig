@@ -1,5 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
+{% set customClass = widget.settings.customClass.mobile %}
 {% set isFixed                 = widget.settings.isFixed.mobile %}
 {% set showOnHomepage          = widget.settings.showOnHomepage.mobile %}
 {% set showOnMyAccount         = widget.settings.showOnMyAccount.mobile %}
@@ -22,23 +23,53 @@
     {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
 {% endif %}
 
-<div class="widget-fw breadcrumbs{% if not isFixed %} unfixed{% endif %}">
+<div class="widget-fw breadcrumbs{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <nav class="container-max small hidden-sm-down px-0" data-component="breadcrumbs" data-renderer="twig">
+        {{ Twig.set('crumbs', '[]') }}
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="{{ Twig.print('urls.home') }}">
                     <i class="fa fa-home" aria-hidden="true"></i>
+                    {{ Twig.set('crumb', '
+                        [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "item":
+                                {
+                                    "@id": urls.home,
+                                    "name": "Home"
+                                }
+                            }
+                        ]')
+                    }}
+                    {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
                 </a>
             </li>
-
             {{ Twig.if("categoryBreadcrumbs is not empty") }}
                 {{ Twig.set("break", "false") }}
+                {{ Twig.set("catLevel", 2) }}
                 {{ Twig.for("category", "categoryBreadcrumbs[:categoryBreadcrumbs | length - 1]", "not break") }}
                     {{ Twig.if("category.details[0]") }}
                         <li class="breadcrumb-item">
                             <a href="{{ Twig.print(Twig.call("services.category.getURLById", [Twig.var("category.id")])) }}">
                                 {{ Twig.print("category.details[0].name") }}
                             </a>
+                            {{ Twig.set('crumb', '
+                                [
+                                    {
+                                        "@type": "ListItem",
+                                        "position": catLevel,
+                                        "item":
+                                        {
+                                            "@id": services.category.getURLById(category.id),
+                                            "name": category.details[0].name
+                                        }
+                                    }
+                                ]')
+                            }}
+                            {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
+                            {{ Twig.do("set catLevel = catLevel + 1") }}
                         </li>
                     {{ Twig.else() }}
                         {{ Twig.set("break", "true") }}
@@ -48,13 +79,20 @@
                 {{ Twig.set("lastCategory", "categoryBreadcrumbs | last") }}
                 {{ Twig.if("lastCategory.details is defined") }}
                     <li class="breadcrumb-item active"><span>{{ Twig.print("lastCategory.details[0].name") }}</span></li>
-                {{ Twig.else() }}
-                    <li class="breadcrumb-item active" v-cloak v-if="$store.state.item.variation.documents">
-                        <span>${ $store.state.item.variation.documents[0].data | itemName }</span>
+                {{ Twig.elseif("item.documents[0].data is defined") }}
+                    <li class="breadcrumb-item active">
+                        <span>{{ Twig.print("item.documents[0].data | itemName") }}</span>
                     </li>
                 {{ Twig.endif() }}
             {{ Twig.endif() }}
         </ul>
+        <script type="application/ld+json">
+        {
+            "@context":"http://schema.org/",
+            "@type":"BreadcrumbList",
+            "itemListElement": {{ Twig.print('crumbs | json_encode | raw') }}
+        }
+        </script>
     </nav>
 </div>
 

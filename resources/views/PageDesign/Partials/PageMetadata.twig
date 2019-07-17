@@ -1,0 +1,60 @@
+{% if category is defined %}
+
+    {% set details      = category.details[0] %}
+    {% set robots       = details.metaRobots | replace({'_': ', '}) %}
+    {% set description  = details.metaDescription %}
+    {% set keywords     = details.metaKeywords %}
+    {% set image        = details.imagePath | default(ceresConfig.header.companyLogo) %}
+    {% set title        = details.metaTitle | default(details.name) %}
+
+{% else %}
+
+    {% set robots       = block('robots') | default('NOINDEX, NOFOLLOW') %}
+    {% set description  = block('description') %}
+    {% set keywords     = block('keywords') %}
+    {% set title        = block('title') %}
+    {% set image        = block('image') | default(ceresConfig.header.companyLogo) %}
+
+{% endif %}
+
+{% set type             = block('type') | default('article') %}
+{% set url              = block('url') | default(services.url.getCanonicalURL()) | default(webstoreConfig.domainSsl) %}
+
+{% if title | trim is not empty %}
+    {% set title = title ~ " | " %}
+{% endif %}
+{% set title = title ~ trans("Ceres::Template.headerCompanyName") %}
+
+{% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'layout/') %}
+    {% set image = plugin_path('Ceres') ~ "/" ~ image %}
+{% endif %}
+
+<meta name="robots" content="{% if forceNoIndex %}NOINDEX{% else %}{{ robots }}{% endif %}">
+{% if description | trim is not empty %}
+    <meta name="description" content="{{ description | trim }}">
+{% endif %}
+{% if keywords | trim is not empty %}
+    <meta name="keywords" content="{{ keywords | trim }}">
+{% endif %}
+<meta property="og:title" content="{{ title | trim }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="{{ url | trim }}"/>
+<meta property="og:image" content="{{ image | trim }}"/>
+
+<script type="application/ld+json">
+{% block schemaOrg %}
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": {{ url | json_encode | raw }},
+    "potentialAction":{
+        "@type": "SearchAction",
+        "target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl ~ urls.search }}?query={search_term}",
+        "query-input": "required name=search_term"
+    }
+}
+{% endblock %}
+</script>
+
+<title>{{ title }}</title>
+

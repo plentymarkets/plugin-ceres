@@ -1,11 +1,14 @@
 import { isNullOrUndefined } from "../../helper/utils";
+import { setUrlByItem } from "../../services/UrlService";
+
+const ApiService = require("services/ApiService");
 
 const state =
     {
         variation: {},
-        variationList: [],
-        variationOrderQuantity: 1,
-        variationMarkInvalidProperties: false
+        variationCache: {},
+        variationMarkInvalidProperties: false,
+        variationOrderQuantity: 1
     };
 
 const mutations =
@@ -17,11 +20,8 @@ const mutations =
             {
                 state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
             }
-        },
 
-        setVariationList(state, variationList)
-        {
-            state.variationList = variationList;
+            state.variationCache[variation.documents[0].id] = variation;
         },
 
         setVariationOrderProperty(state, { propertyId, value })
@@ -51,6 +51,34 @@ const mutations =
 
 const actions =
     {
+        loadVariation({ state, commit }, variationId)
+        {
+            return new Promise(resolve =>
+            {
+                const variation = state.variationCache[variationId];
+
+                if (variation)
+                {
+                    commit("setVariation", variation);
+
+                    setUrlByItem(variation.documents[0].data);
+                    resolve(variation);
+                }
+                else
+                {
+                    ApiService
+                        .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem" })
+                        .done(response =>
+                        {
+                            // store received variation data for later reuse
+                            commit("setVariation", response);
+
+                            setUrlByItem(response.documents[0].data);
+                            resolve(response);
+                        });
+                }
+            });
+        }
     };
 
 const getters =
@@ -133,7 +161,7 @@ const getters =
             if (state.variation.documents[0].data.properties)
             {
                 const orderPropertyList = state.variation.documents[0].data.properties.filter(property => property.property.isShownOnItemPage && property.property.isOderProperty);
-                const groupIds = [... new Set(orderPropertyList.map(property => property.group && property.group.id))];
+                const groupIds = [...new Set(orderPropertyList.map(property => property.group && property.group.id))];
                 const groups = [];
 
                 for (const id of groupIds)
@@ -165,7 +193,7 @@ const getters =
             {
                 let missingProperties = state.variation.documents[0].data.properties.filter(property =>
                 {
-                    return property.property.isShownOnItemPage && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
+                    return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
                 });
 
                 if (missingProperties.length)
@@ -183,11 +211,11 @@ const getters =
                         return null;
                     });
 
-                    radioInformation = [... new Set(radioInformation.filter(id => id))];
+                    radioInformation = [...new Set(radioInformation.filter(id => id))];
 
                     const radioIdsToRemove = [];
 
-                    for (const radioGroupId of [... new Set(radioInformation.map(radio => radio.groupId))])
+                    for (const radioGroupId of [...new Set(radioInformation.map(radio => radio.groupId))])
                     {
                         const radioGroupToClean = radioInformation.find(radio => radio.groupId === radioGroupId && radio.hasValue);
 
@@ -207,6 +235,11 @@ const getters =
             }
 
             return [];
+        },
+
+        currentItemVariation(state)
+        {
+            return state.variation.documents && state.variation.documents[0] && state.variation.documents[0].data;
         }
     };
 

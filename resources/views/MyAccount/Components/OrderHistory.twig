@@ -1,7 +1,5 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
-
 {% set ordersPerPage = config("Ceres.my_account.orders_per_page") %}
 {% if not (ordersPerPage matches '/^\\d+$/') %}
     {# config value is not a valid number #}
@@ -87,7 +85,7 @@
                                             </button>
 
                                             {% if entry.isReturnable %}
-                                                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="/returns/{{ entry.order.id }}">
+                                                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="{{ urls.returns(entry.order.id) }}">
                                                     <i class="fa fa-undo" aria-hidden="true"></i>
                                                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                                                 </a>

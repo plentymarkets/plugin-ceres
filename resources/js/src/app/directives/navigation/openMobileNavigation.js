@@ -4,8 +4,11 @@ Vue.directive("open-mobile-navigation",
         {
             el.onclick = function(event)
             {
-                document.querySelector(".mobile-navigation").classList.add("open");
-                document.querySelector("body").classList.add("menu-is-visible");
+                if (document.querySelector(".mobile-navigation"))
+                {
+                    document.querySelector(".mobile-navigation").classList.add("open");
+                    document.querySelector("body").classList.add("menu-is-visible");
+                }
             };
         }
     });

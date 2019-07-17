@@ -1,8 +1,9 @@
+{% set customClass = widget.settings.customClass.mobile %}
 {% set layoutDesktop = widget.settings.layout.mobile %}
 {% set layoutTablet = widget.settings.layoutTablet.mobile | default( layoutDesktop ) %}
-{% set layoutMobile = widget.settings.layoutMobile.mobile | default("stacked") %}
+{% set layoutMobile = widget.settings.layoutMobile.mobile | default("stackedMobile") %}
 
-<div class="widget widget-grid widget-two-col row">
+<div class="widget widget-grid widget-two-col row{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     <div class="widget-inner
         {{- " " ~ gridLayouts[layoutDesktop][0] | replace({"-md-": "-xl-"}) }}
         {{- " " ~ gridLayouts[layoutDesktop][0] | replace({"-md-": "-lg-"}) }}

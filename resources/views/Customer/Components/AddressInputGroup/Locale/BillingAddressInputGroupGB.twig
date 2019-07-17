@@ -19,7 +19,7 @@
     <div class="row">
         <div
             class="col-12 col-sm-6"
-            v-if="isInOptionalFields('gb', 'billing_address.salutation') && value.addressSalutation === 2 || isInOptionalFields('gb', 'billing_address.name1') && !isInOptionalFields('gb', 'billing_address.salutation')">
+            v-if="isInOptionalFields('gb', 'billing_address.salutation') && value.gender === 'company' || isInOptionalFields('gb', 'billing_address.name1') && !isInOptionalFields('gb', 'billing_address.salutation')">
             <div class="input-unit" data-validate="text" data-model="name1">
                 <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)" data-autofocus>
                 <label :for="'txtCompany' + _uid">{{ trans("Ceres::Template.addressCompany") }}*</label>
@@ -28,7 +28,7 @@
 
         <div
             class="col-12 col-sm-6"
-            v-if="(isInOptionalFields('gb', 'billing_address.salutation') && value.addressSalutation === 2) || isInOptionalFields('gb', 'billing_address.vatNumber')">
+            v-if="(isInOptionalFields('gb', 'billing_address.salutation') && value.gender === 'company') || isInOptionalFields('gb', 'billing_address.vatNumber')">
             <div
                 class="input-unit"
                 data-model="vatNumber"
@@ -101,7 +101,7 @@
             <div
                 class="input-unit"
                 data-model="birthday"
-                v-validate:date="isInRequiredFields('gb', 'billing_address.birthday')">
+                v-validate:date="isInRequiredFields('gb', 'billing_address.birthday')" || !!value.birthday && !!value.birthday.length>
                 <input type="date" min="1901-12-14" :max="new Date().toISOString().split('T')[0]" name="birthday" placeholder="{{ trans("Ceres::Template.addressBirthdatePlaceholder") }}" :id="'txtBirthdate' + _uid" :value="value.birthday" @input="emitInputEvent('birthday', $event.target.value)">
                 <label :for="'txtBirthdate' + _uid">
                     ${ transformTranslation("Ceres::Template.addressBirthdate", "gb", "billing_address.birthday") }

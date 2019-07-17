@@ -10,20 +10,20 @@ const state =
 const mutations =
     {
         setOrderReturnData(state, orderData)
-		{
+        {
             orderData.order.orderItems = orderData.order.orderItems.filter(orderItem => orderItem.quantity !== 0);
 
             state.orderData = orderData;
         },
 
         updateOrderReturnItems(state, { quantity, orderItem })
-		{
+        {
             if (quantity <= orderItem.quantity)
-			{
+            {
                 const orderItemIndex = state.orderReturnItems.findIndex(entry => entry.orderItem.itemVariationId === orderItem.itemVariationId);
 
                 if (quantity !== 0)
-				{
+                {
                     if (orderItemIndex === -1)
                     {
                         state.orderReturnItems.push({ quantity, orderItem });
@@ -35,7 +35,7 @@ const mutations =
                     }
                 }
                 else
-				{
+                {
                     state.orderReturnItems.splice(orderItemIndex, 1);
                 }
             }
@@ -50,7 +50,7 @@ const mutations =
 const actions =
     {
         sendOrderReturn({ state })
-		{
+        {
             return new Promise((resolve, reject) =>
             {
                 if (state.orderReturnItems.length > 0)

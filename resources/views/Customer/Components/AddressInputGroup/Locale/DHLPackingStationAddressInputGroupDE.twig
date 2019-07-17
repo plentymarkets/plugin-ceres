@@ -19,7 +19,7 @@
     <div class="row">
         <div
             class="col-12 col-sm-6"
-            v-if="isInOptionalFields('de', 'delivery_address.salutation') && value.addressSalutation === 2 || isInOptionalFields('de', 'delivery_address.name1') && !isInOptionalFields('de', 'delivery_address.salutation')">
+            v-if="isInOptionalFields('de', 'delivery_address.salutation') && value.gender === 'company' || isInOptionalFields('de', 'delivery_address.name1') && !isInOptionalFields('de', 'delivery_address.salutation')">
             <div class="input-unit" data-model="name1" data-validate="text">
                 <input type="text" name="company" :id="'txtCompany' + _uid" :value="value.name1" @input="emitInputEvent('name1', $event.target.value)">
                 <label :for="'txtCompany' + _uid">{{ trans("Ceres::Template.addressCompany") }}*</label>

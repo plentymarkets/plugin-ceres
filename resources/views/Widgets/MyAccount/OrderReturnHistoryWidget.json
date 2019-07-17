@@ -8,6 +8,7 @@
     "maxPerPage": 1,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderReturnHistoryWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,

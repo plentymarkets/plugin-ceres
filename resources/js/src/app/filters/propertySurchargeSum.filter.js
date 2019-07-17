@@ -5,12 +5,12 @@ Vue.filter("propertySurchargeSum", function(item)
     if (item.properties)
     {
         const addedProperties = item.properties.filter(property =>
-            {
+        {
             return property.property.isOderProperty && property.property.value;
         });
 
         for (const property of addedProperties)
-            {
+        {
             sum += property.property.surcharge;
         }
     }

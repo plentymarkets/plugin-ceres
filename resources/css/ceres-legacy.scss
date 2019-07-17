@@ -21,12 +21,12 @@
 }
 
 // Starts at zero
-// Another grid mixin that ensures the min-width of the lowest breakpoint starts at 0.
-@mixin _assert-starts-at-zero($map) {
+// Used to ensure the min-width of the lowest breakpoint starts at 0.
+@mixin _assert-starts-at-zero($map, $map-name: "$grid-breakpoints") {
   $values: map-values($map);
   $first-value: nth($values, 1);
   @if $first-value != 0 {
-    @warn "First breakpoint in `$grid-breakpoints` must start at 0, but starts at #{$first-value}.";
+    @warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
   }
 }
 
@@ -88,7 +88,7 @@
 //
 // Variables
 // --------------------------------------------------
-
+$enable-deprecation-messages: false;
 
 //
 // Colors
@@ -321,9 +321,9 @@ $zindex-fixed:                      $zIndex-3 !default;
 $zindex-modal-backdrop:             $zIndex-7 !default;
 $zindex-modal:                      $zIndex-8 !default;
 $zindex-popover:                    $zIndex-10 !default;
-$zindex-sticky:                     $zIndex-3 !default;
+$zindex-sticky:                     $zIndex-2 !default;
 $zindex-tooltip:                    $zIndex-7 !default;
-$zindex-wrapper-top:                $zIndex-9 !default;
+$zindex-wrapper-top:                $zIndex-10 !default;
 
 // Navbar
 $navbar-background-color:           $gray-lightest !default;
@@ -383,9 +383,9 @@ $shop-builder-colors:
 // External Libs
 // ==========================================================================
 /*!
- * Bootstrap v4.2.1 (https://getbootstrap.com/)
- * Copyright 2011-2018 The Bootstrap Authors
- * Copyright 2011-2018 Twitter, Inc.
+ * Bootstrap v4.3.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
@@ -412,12 +412,12 @@ $shop-builder-colors:
 }
 
 // Starts at zero
-// Another grid mixin that ensures the min-width of the lowest breakpoint starts at 0.
-@mixin _assert-starts-at-zero($map) {
+// Used to ensure the min-width of the lowest breakpoint starts at 0.
+@mixin _assert-starts-at-zero($map, $map-name: "$grid-breakpoints") {
   $values: map-values($map);
   $first-value: nth($values, 1);
   @if $first-value != 0 {
-    @warn "First breakpoint in `$grid-breakpoints` must start at 0, but starts at #{$first-value}.";
+    @warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
   }
 }
 
@@ -592,8 +592,11 @@ $enable-transitions:                          true !default;
 $enable-prefers-reduced-motion-media-query:   true !default;
 $enable-hover-media-query:                    false !default; // Deprecated, no longer affects any compiled CSS
 $enable-grid-classes:                         true !default;
+$enable-pointer-cursor-for-buttons:           true !default;
 $enable-print-styles:                         true !default;
+$enable-responsive-font-sizes:                false !default;
 $enable-validation-icons:                     true !default;
+$enable-deprecation-messages:                 true !default;
 
 
 // Spacing
@@ -663,38 +666,28 @@ $paragraph-margin-bottom:   1rem !default;
 // Define the minimum dimensions at which your layout will change,
 // adapting to different screen sizes, for use in media queries.
 
-$grid-breakpoints: () !default;
-// stylelint-disable-next-line scss/dollar-variable-default
-$grid-breakpoints: map-merge(
-  (
-    xs: 0,
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px
-  ),
-  $grid-breakpoints
-);
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
 
 @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
-@include _assert-starts-at-zero($grid-breakpoints);
+@include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
 
 
 // Grid containers
 //
 // Define the maximum width of `.container` for different screen sizes.
 
-$container-max-widths: () !default;
-// stylelint-disable-next-line scss/dollar-variable-default
-$container-max-widths: map-merge(
-  (
-    sm: 540px,
-    md: 720px,
-    lg: 960px,
-    xl: 1140px
-  ),
-  $container-max-widths
-);
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+) !default;
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");
 
@@ -731,6 +724,8 @@ $component-active-color:      $white !default;
 $component-active-bg:         theme-color("primary") !default;
 
 $caret-width:                 .3em !default;
+$caret-vertical-align:        $caret-width * .85 !default;
+$caret-spacing:               $caret-width * .85 !default;
 
 $transition-base:             all .2s ease-in-out !default;
 $transition-fade:             opacity .15s linear !default;
@@ -742,13 +737,13 @@ $embed-responsive-aspect-ratios: join(
   (
     (21 9),
     (16 9),
-    (3 4),
+    (4 3),
     (1 1),
   ),
   $embed-responsive-aspect-ratios
 );
 
-// Fonts
+// Typography
 //
 // Font, line-height, and color for body text, headings, and more.
 
@@ -759,8 +754,8 @@ $font-family-base:            $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
 
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
-$font-size-lg:                ($font-size-base * 1.25) !default;
-$font-size-sm:                ($font-size-base * .875) !default;
+$font-size-lg:                $font-size-base * 1.25 !default;
+$font-size-sm:                $font-size-base * .875 !default;
 
 $font-weight-lighter:         lighter !default;
 $font-weight-light:           300 !default;
@@ -779,10 +774,10 @@ $h5-font-size:                $font-size-base * 1.25 !default;
 $h6-font-size:                $font-size-base !default;
 
 $headings-margin-bottom:      $spacer / 2 !default;
-$headings-font-family:        inherit !default;
+$headings-font-family:        null !default;
 $headings-font-weight:        500 !default;
 $headings-line-height:        1.2 !default;
-$headings-color:              inherit !default;
+$headings-color:              null !default;
 
 $display1-size:               6rem !default;
 $display2-size:               5.5rem !default;
@@ -795,7 +790,7 @@ $display3-weight:             300 !default;
 $display4-weight:             300 !default;
 $display-line-height:         $headings-line-height !default;
 
-$lead-font-size:              ($font-size-base * 1.25) !default;
+$lead-font-size:              $font-size-base * 1.25 !default;
 $lead-font-weight:            300 !default;
 
 $small-font-size:             80% !default;
@@ -804,7 +799,7 @@ $text-muted:                  $gray-600 !default;
 
 $blockquote-small-color:      $gray-600 !default;
 $blockquote-small-font-size:  $small-font-size !default;
-$blockquote-font-size:        ($font-size-base * 1.25) !default;
+$blockquote-font-size:        $font-size-base * 1.25 !default;
 
 $hr-border-color:             rgba($black, .1) !default;
 $hr-border-width:             $border-width !default;
@@ -830,21 +825,25 @@ $hr-margin-y:                 $spacer !default;
 $table-cell-padding:          .75rem !default;
 $table-cell-padding-sm:       .3rem !default;
 
-$table-bg:                    transparent !default;
+$table-color:                 $body-color !default;
+$table-bg:                    null !default;
 $table-accent-bg:             rgba($black, .05) !default;
+$table-hover-color:           $table-color !default;
 $table-hover-bg:              rgba($black, .075) !default;
 $table-active-bg:             $table-hover-bg !default;
 
 $table-border-width:          $border-width !default;
-$table-border-color:          $gray-300 !default;
+$table-border-color:          $border-color !default;
 
 $table-head-bg:               $gray-200 !default;
 $table-head-color:            $gray-700 !default;
 
-$table-dark-bg:               $gray-900 !default;
+$table-dark-color:            $white !default;
+$table-dark-bg:               $gray-800 !default;
 $table-dark-accent-bg:        rgba($white, .05) !default;
+$table-dark-hover-color:      $table-dark-color !default;
 $table-dark-hover-bg:         rgba($white, .075) !default;
-$table-dark-border-color:     lighten($gray-900, 7.5%) !default;
+$table-dark-border-color:     lighten($table-dark-bg, 7.5%) !default;
 $table-dark-color:            $white !default;
 
 $table-striped-order:         odd !default;
@@ -861,6 +860,7 @@ $table-border-level:          -6 !default;
 
 $input-btn-padding-y:         .375rem !default;
 $input-btn-padding-x:         .75rem !default;
+$input-btn-font-family:       null !default;
 $input-btn-font-size:         $font-size-base !default;
 $input-btn-line-height:       $line-height-base !default;
 
@@ -887,6 +887,7 @@ $input-btn-border-width:      $border-width !default;
 
 $btn-padding-y:               $input-btn-padding-y !default;
 $btn-padding-x:               $input-btn-padding-x !default;
+$btn-font-family:             $input-btn-font-family !default;
 $btn-font-size:               $input-btn-font-size !default;
 $btn-line-height:             $input-btn-line-height !default;
 
@@ -927,6 +928,7 @@ $label-margin-bottom:                   .5rem !default;
 
 $input-padding-y:                       $input-btn-padding-y !default;
 $input-padding-x:                       $input-btn-padding-x !default;
+$input-font-family:                     $input-btn-font-family !default;
 $input-font-size:                       $input-btn-font-size !default;
 $input-font-weight:                     $font-weight-base !default;
 $input-line-height:                     $input-btn-line-height !default;
@@ -964,14 +966,13 @@ $input-plaintext-color:                 $body-color !default;
 
 $input-height-border:                   $input-border-width * 2 !default;
 
-$input-height-inner:                    ($input-btn-font-size * $input-btn-line-height) + ($input-btn-padding-y * 2) !default;
-$input-height:                          calc(#{$input-height-inner} + #{$input-height-border}) !default;
+$input-height-inner:                    calc(#{$input-line-height * 1em} + #{$input-padding-y * 2}) !default;
+$input-height-inner-half:               calc(#{$input-line-height * .5em} + #{$input-padding-y}) !default;
+$input-height-inner-quarter:            calc(#{$input-line-height * .25em} + #{$input-padding-y / 2}) !default;
 
-$input-height-inner-sm:                 ($input-btn-font-size-sm * $input-btn-line-height-sm) + ($input-btn-padding-y-sm * 2) !default;
-$input-height-sm:                       calc(#{$input-height-inner-sm} + #{$input-height-border}) !default;
-
-$input-height-inner-lg:                 ($input-btn-font-size-lg * $input-btn-line-height-lg) + ($input-btn-padding-y-lg * 2) !default;
-$input-height-lg:                       calc(#{$input-height-inner-lg} + #{$input-height-border}) !default;
+$input-height:                          calc(#{$input-line-height * 1em} + #{$input-padding-y * 2} + #{$input-height-border}) !default;
+$input-height-sm:                       calc(#{$input-line-height-sm * 1em} + #{$input-btn-padding-y-sm * 2} + #{$input-height-border}) !default;
+$input-height-lg:                       calc(#{$input-line-height-lg * 1em} + #{$input-btn-padding-y-lg * 2} + #{$input-height-border}) !default;
 
 $input-transition:                      border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
@@ -1013,7 +1014,7 @@ $custom-control-indicator-checked-disabled-bg:  rgba(theme-color("primary"), .5)
 $custom-control-indicator-checked-box-shadow:   none !default;
 $custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg !default;
 
-$custom-control-indicator-focus-box-shadow:     $input-btn-focus-box-shadow !default;
+$custom-control-indicator-focus-box-shadow:     $input-focus-box-shadow !default;
 $custom-control-indicator-focus-border-color:   $input-focus-border-color !default;
 
 $custom-control-indicator-active-color:         $component-active-color !default;
@@ -1037,8 +1038,10 @@ $custom-switch-width:                           $custom-control-indicator-size *
 $custom-switch-indicator-border-radius:         $custom-control-indicator-size / 2 !default;
 $custom-switch-indicator-size:                  calc(#{$custom-control-indicator-size} - #{$custom-control-indicator-border-width * 4}) !default;
 
-$custom-select-padding-y:           $input-btn-padding-y !default;
-$custom-select-padding-x:           $input-btn-padding-x !default;
+$custom-select-padding-y:           $input-padding-y !default;
+$custom-select-padding-x:           $input-padding-x !default;
+$custom-select-font-family:         $input-font-family !default;
+$custom-select-font-size:           $input-font-size !default;
 $custom-select-height:              $input-height !default;
 $custom-select-indicator-padding:   1rem !default; // Extra padding to account for the presence of the background-image based indicator
 $custom-select-font-weight:         $input-font-weight !default;
@@ -1052,9 +1055,9 @@ $custom-select-indicator-color:     $gray-800 !default;
 $custom-select-indicator:           str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='#{$custom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e"), "#", "%23") !default;
 $custom-select-background:          $custom-select-indicator no-repeat right $custom-select-padding-x center / $custom-select-bg-size !default; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
 
-$custom-select-feedback-icon-padding-right: $input-height-inner * 3 / 4 + $custom-select-padding-x + $custom-select-indicator-padding !default;
+$custom-select-feedback-icon-padding-right: calc((1em + #{2 * $custom-select-padding-y}) * 3 / 4 + #{$custom-select-padding-x + $custom-select-indicator-padding}) !default;
 $custom-select-feedback-icon-position:      center right ($custom-select-padding-x + $custom-select-indicator-padding) !default;
-$custom-select-feedback-icon-size:          ($input-height-inner / 2) ($input-height-inner / 2) !default;
+$custom-select-feedback-icon-size:          $input-height-inner-half $input-height-inner-half !default;
 
 $custom-select-border-width:        $input-border-width !default;
 $custom-select-border-color:        $input-border-color !default;
@@ -1063,16 +1066,16 @@ $custom-select-box-shadow:          inset 0 1px 2px rgba($black, .075) !default;
 
 $custom-select-focus-border-color:  $input-focus-border-color !default;
 $custom-select-focus-width:         $input-focus-width !default;
-$custom-select-focus-box-shadow:    0 0 0 $custom-select-focus-width rgba($custom-select-focus-border-color, .5) !default;
+$custom-select-focus-box-shadow:    0 0 0 $custom-select-focus-width $input-btn-focus-color !default;
 
 $custom-select-padding-y-sm:        $input-padding-y-sm !default;
 $custom-select-padding-x-sm:        $input-padding-x-sm !default;
-$custom-select-font-size-sm:        $input-btn-font-size-sm !default;
+$custom-select-font-size-sm:        $input-font-size-sm !default;
 $custom-select-height-sm:           $input-height-sm !default;
 
 $custom-select-padding-y-lg:        $input-padding-y-lg !default;
 $custom-select-padding-x-lg:        $input-padding-x-lg !default;
-$custom-select-font-size-lg:        $input-btn-font-size-lg !default;
+$custom-select-font-size-lg:        $input-font-size-lg !default;
 $custom-select-height-lg:           $input-height-lg !default;
 
 $custom-range-track-width:          100% !default;
@@ -1102,6 +1105,7 @@ $custom-file-disabled-bg:           $input-disabled-bg !default;
 $custom-file-padding-y:             $input-padding-y !default;
 $custom-file-padding-x:             $input-padding-x !default;
 $custom-file-line-height:           $input-line-height !default;
+$custom-file-font-family:           $input-font-family !default;
 $custom-file-font-weight:           $input-font-weight !default;
 $custom-file-color:                 $input-color !default;
 $custom-file-bg:                    $input-bg !default;
@@ -1126,38 +1130,23 @@ $form-feedback-invalid-color:       theme-color("danger") !default;
 $form-feedback-icon-valid-color:    $form-feedback-valid-color !default;
 $form-feedback-icon-valid:          str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='#{$form-feedback-icon-valid-color}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e"), "#", "%23") !default;
 $form-feedback-icon-invalid-color:  $form-feedback-invalid-color !default;
-$form-feedback-icon-invalid:        str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='#{$form-feedback-icon-invalid-color}' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23d9534f' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E"), "#", "%23") !default;
+$form-feedback-icon-invalid:        str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='#{$form-feedback-icon-invalid-color}' viewBox='-2 -2 7 7'%3e%3cpath stroke='#{$form-feedback-icon-invalid-color}' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E"), "#", "%23") !default;
 
-
-// Dropdowns
-//
-// Dropdown menu container and contents.
-
-$dropdown-min-width:                10rem !default;
-$dropdown-padding-y:                .5rem !default;
-$dropdown-spacer:                   .125rem !default;
-$dropdown-bg:                       $white !default;
-$dropdown-border-color:             rgba($black, .15) !default;
-$dropdown-border-radius:            $border-radius !default;
-$dropdown-border-width:             $border-width !default;
-$dropdown-inner-border-radius:      calc(#{$dropdown-border-radius} - #{$dropdown-border-width}) !default;
-$dropdown-divider-bg:               $gray-200 !default;
-$dropdown-box-shadow:               0 .5rem 1rem rgba($black, .175) !default;
-
-$dropdown-link-color:               $gray-900 !default;
-$dropdown-link-hover-color:         darken($gray-900, 5%) !default;
-$dropdown-link-hover-bg:            $gray-100 !default;
-
-$dropdown-link-active-color:        $component-active-color !default;
-$dropdown-link-active-bg:           $component-active-bg !default;
-
-$dropdown-link-disabled-color:      $gray-600 !default;
-
-$dropdown-item-padding-y:           .25rem !default;
-$dropdown-item-padding-x:           1.5rem !default;
-
-$dropdown-header-color:             $gray-600 !default;
-
+$form-validation-states: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$form-validation-states: map-merge(
+  (
+    "valid": (
+      "color": $form-feedback-valid-color,
+      "icon": $form-feedback-icon-valid
+    ),
+    "invalid": (
+      "color": $form-feedback-invalid-color,
+      "icon": $form-feedback-icon-invalid
+    ),
+  ),
+  $form-validation-states
+);
 
 // Z-index master list
 //
@@ -1233,6 +1222,39 @@ $navbar-dark-brand-color:                 $navbar-dark-active-color !default;
 $navbar-dark-brand-hover-color:           $navbar-dark-active-color !default;
 
 
+// Dropdowns
+//
+// Dropdown menu container and contents.
+
+$dropdown-min-width:                10rem !default;
+$dropdown-padding-y:                .5rem !default;
+$dropdown-spacer:                   .125rem !default;
+$dropdown-font-size:                $font-size-base !default;
+$dropdown-color:                    $body-color !default;
+$dropdown-bg:                       $white !default;
+$dropdown-border-color:             rgba($black, .15) !default;
+$dropdown-border-radius:            $border-radius !default;
+$dropdown-border-width:             $border-width !default;
+$dropdown-inner-border-radius:      calc(#{$dropdown-border-radius} - #{$dropdown-border-width}) !default;
+$dropdown-divider-bg:               $gray-200 !default;
+$dropdown-divider-margin-y:         $nav-divider-margin-y !default;
+$dropdown-box-shadow:               0 .5rem 1rem rgba($black, .175) !default;
+
+$dropdown-link-color:               $gray-900 !default;
+$dropdown-link-hover-color:         darken($gray-900, 5%) !default;
+$dropdown-link-hover-bg:            $gray-100 !default;
+
+$dropdown-link-active-color:        $component-active-color !default;
+$dropdown-link-active-bg:           $component-active-bg !default;
+
+$dropdown-link-disabled-color:      $gray-600 !default;
+
+$dropdown-item-padding-y:           .25rem !default;
+$dropdown-item-padding-x:           1.5rem !default;
+
+$dropdown-header-color:             $gray-600 !default;
+
+
 // Pagination
 
 $pagination-padding-y:              .5rem !default;
@@ -1267,6 +1289,7 @@ $pagination-disabled-border-color:  $gray-300 !default;
 // Jumbotron
 
 $jumbotron-padding:                 2rem !default;
+$jumbotron-color:                   null !default;
 $jumbotron-bg:                      $gray-200 !default;
 
 
@@ -1279,7 +1302,8 @@ $card-border-radius:                $border-radius !default;
 $card-border-color:                 rgba($black, .125) !default;
 $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width}) !default;
 $card-cap-bg:                       rgba($black, .03) !default;
-$card-cap-color:                    inherit !default;
+$card-cap-color:                    null !default;
+$card-color:                        null !default;
 $card-bg:                           $white !default;
 
 $card-img-overlay-padding:          1.25rem !default;
@@ -1344,19 +1368,21 @@ $popover-arrow-outer-color:         fade-in($popover-border-color, .05) !default
 
 
 // Toasts
-$toast-max-width: 350px !default;
-$toast-padding-x: .75rem !default;
-$toast-padding-y: .25rem !default;
-$toast-font-size: .875rem !default;
-$toast-background-color: rgba($white, .85) !default;
-$toast-border-width: 1px !default;
-$toast-border-color: rgba(0, 0, 0, .1) !default;
-$toast-border-radius: .25rem !default;
-$toast-box-shadow: 0 .25rem .75rem rgba($black, .1) !default;
 
-$toast-header-color: $gray-600 !default;
-$toast-header-background-color: rgba($white, .85) !default;
-$toast-header-border-color: rgba(0, 0, 0, .05) !default;
+$toast-max-width:                   350px !default;
+$toast-padding-x:                   .75rem !default;
+$toast-padding-y:                   .25rem !default;
+$toast-font-size:                   .875rem !default;
+$toast-color:                       null !default;
+$toast-background-color:            rgba($white, .85) !default;
+$toast-border-width:                1px !default;
+$toast-border-color:                rgba(0, 0, 0, .1) !default;
+$toast-border-radius:               .25rem !default;
+$toast-box-shadow:                  0 .25rem .75rem rgba($black, .1) !default;
+
+$toast-header-color:                $gray-600 !default;
+$toast-header-background-color:     rgba($white, .85) !default;
+$toast-header-border-color:         rgba(0, 0, 0, .05) !default;
 
 
 // Badges
@@ -1366,6 +1392,9 @@ $badge-font-weight:                 $font-weight-bold !default;
 $badge-padding-y:                   .25em !default;
 $badge-padding-x:                   .4em !default;
 $badge-border-radius:               $border-radius !default;
+
+$badge-transition:                  $btn-transition !default;
+$badge-focus-width:                 $input-btn-focus-width !default;
 
 $badge-pill-padding-x:              .6em !default;
 // Use a higher than normal value to ensure completely rounded edges when
@@ -1383,6 +1412,7 @@ $modal-dialog-margin-y-sm-up:       1.75rem !default;
 
 $modal-title-line-height:           $line-height-base !default;
 
+$modal-content-color:               null !default;
 $modal-content-bg:                  $white !default;
 $modal-content-border-color:        rgba($black, .2) !default;
 $modal-content-border-width:        $border-width !default;
@@ -1392,7 +1422,7 @@ $modal-content-box-shadow-sm-up:    0 .5rem 1rem rgba($black, .5) !default;
 
 $modal-backdrop-bg:                 $black !default;
 $modal-backdrop-opacity:            .5 !default;
-$modal-header-border-color:         $gray-200 !default;
+$modal-header-border-color:         $border-color !default;
 $modal-footer-border-color:         $modal-header-border-color !default;
 $modal-header-border-width:         $modal-content-border-width !default;
 $modal-footer-border-width:         $modal-header-border-width !default;
@@ -1429,7 +1459,7 @@ $alert-color-level:                 6 !default;
 // Progress bars
 
 $progress-height:                   1rem !default;
-$progress-font-size:                ($font-size-base * .75) !default;
+$progress-font-size:                $font-size-base * .75 !default;
 $progress-bg:                       $gray-200 !default;
 $progress-border-radius:            $border-radius !default;
 $progress-box-shadow:               inset 0 .1rem .1rem rgba($black, .1) !default;
@@ -1441,6 +1471,7 @@ $progress-bar-transition:           width .6s ease !default;
 
 // List group
 
+$list-group-color:                  null !default;
 $list-group-bg:                     $white !default;
 $list-group-border-color:           rgba($black, .125) !default;
 $list-group-border-width:           $border-width !default;
@@ -1559,6 +1590,7 @@ $pre-scrollable-max-height:         340px !default;
 
 // Utilities
 
+$displays: none, inline, inline-block, block, table, table-row, table-cell, flex, inline-flex !default;
 $overflows: auto, hidden !default;
 $positions: static, relative, absolute, fixed, sticky !default;
 
@@ -1571,6 +1603,226 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 // Toggles
 //
 // Used in conjunction with global variables to enable certain theme features.
+
+// Vendor
+// stylelint-disable property-blacklist, scss/dollar-variable-default
+
+// SCSS RFS mixin
+//
+// Automated font-resizing
+//
+// See https://github.com/twbs/rfs
+
+// Configuration
+
+// Base font size
+$rfs-base-font-size: 1.25rem !default;
+$rfs-font-size-unit: rem !default;
+
+// Breakpoint at where font-size starts decreasing if screen width is smaller
+$rfs-breakpoint: 1200px !default;
+$rfs-breakpoint-unit: px !default;
+
+// Resize font-size based on screen height and width
+$rfs-two-dimensional: false !default;
+
+// Factor of decrease
+$rfs-factor: 10 !default;
+
+@if type-of($rfs-factor) != "number" or $rfs-factor <= 1 {
+  @error "`#{$rfs-factor}` is not a valid  $rfs-factor, it must be greater than 1.";
+}
+
+// Generate enable or disable classes. Possibilities: false, "enable" or "disable"
+$rfs-class: false !default;
+
+// 1 rem = $rfs-rem-value px
+$rfs-rem-value: 16 !default;
+
+// Safari iframe resize bug: https://github.com/twbs/rfs/issues/14
+$rfs-safari-iframe-resize-bug-fix: false !default;
+
+// Disable RFS by setting $enable-responsive-font-sizes to false
+$enable-responsive-font-sizes: true !default;
+
+// Cache $rfs-base-font-size unit
+$rfs-base-font-size-unit: unit($rfs-base-font-size);
+
+// Remove px-unit from $rfs-base-font-size for calculations
+@if $rfs-base-font-size-unit == "px" {
+  $rfs-base-font-size: $rfs-base-font-size / ($rfs-base-font-size * 0 + 1);
+}
+@else if $rfs-base-font-size-unit == "rem" {
+  $rfs-base-font-size: $rfs-base-font-size / ($rfs-base-font-size * 0 + 1 / $rfs-rem-value);
+}
+
+// Cache $rfs-breakpoint unit to prevent multiple calls
+$rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
+
+// Remove unit from $rfs-breakpoint for calculations
+@if $rfs-breakpoint-unit-cache == "px" {
+  $rfs-breakpoint: $rfs-breakpoint / ($rfs-breakpoint * 0 + 1);
+}
+@else if $rfs-breakpoint-unit-cache == "rem" or $rfs-breakpoint-unit-cache == "em" {
+  $rfs-breakpoint: $rfs-breakpoint / ($rfs-breakpoint * 0 + 1 / $rfs-rem-value);
+}
+
+// Responsive font-size mixin
+@mixin rfs($fs, $important: false) {
+  // Cache $fs unit
+  $fs-unit: if(type-of($fs) == "number", unit($fs), false);
+
+  // Add !important suffix if needed
+  $rfs-suffix: if($important, " !important", "");
+
+  // If $fs isn't a number (like inherit) or $fs has a unit (not px or rem, like 1.5em) or $ is 0, just print the value
+  @if not $fs-unit or $fs-unit != "" and $fs-unit != "px" and $fs-unit != "rem" or $fs == 0 {
+    font-size: #{$fs}#{$rfs-suffix};
+  }
+  @else {
+    // Variables for storing static and fluid rescaling
+    $rfs-static: null;
+    $rfs-fluid: null;
+
+    // Remove px-unit from $fs for calculations
+    @if $fs-unit == "px" {
+      $fs: $fs / ($fs * 0 + 1);
+    }
+    @else if $fs-unit == "rem" {
+      $fs: $fs / ($fs * 0 + 1 / $rfs-rem-value);
+    }
+
+    // Set default font-size
+    @if $rfs-font-size-unit == rem {
+      $rfs-static: #{$fs / $rfs-rem-value}rem#{$rfs-suffix};
+    }
+    @else if $rfs-font-size-unit == px {
+      $rfs-static: #{$fs}px#{$rfs-suffix};
+    }
+    @else {
+      @error "`#{$rfs-font-size-unit}` is not a valid unit for $rfs-font-size-unit. Use `px` or `rem`.";
+    }
+
+    // Only add media query if font-size is bigger as the minimum font-size
+    // If $rfs-factor == 1, no rescaling will take place
+    @if $fs > $rfs-base-font-size and $enable-responsive-font-sizes {
+      $min-width: null;
+      $variable-unit: null;
+
+      // Calculate minimum font-size for given font-size
+      $fs-min: $rfs-base-font-size + ($fs - $rfs-base-font-size) / $rfs-factor;
+
+      // Calculate difference between given font-size and minimum font-size for given font-size
+      $fs-diff: $fs - $fs-min;
+
+      // Base font-size formatting
+      // No need to check if the unit is valid, because we did that before
+      $min-width: if($rfs-font-size-unit == rem, #{$fs-min / $rfs-rem-value}rem, #{$fs-min}px);
+
+      // If two-dimensional, use smallest of screen width and height
+      $variable-unit: if($rfs-two-dimensional, vmin, vw);
+
+      // Calculate the variable width between 0 and $rfs-breakpoint
+      $variable-width: #{$fs-diff * 100 / $rfs-breakpoint}#{$variable-unit};
+
+      // Set the calculated font-size.
+      $rfs-fluid: calc(#{$min-width} + #{$variable-width}) #{$rfs-suffix};
+    }
+
+    // Rendering
+    @if $rfs-fluid == null {
+      // Only render static font-size if no fluid font-size is available
+      font-size: $rfs-static;
+    }
+    @else {
+      $mq-value: null;
+
+      // RFS breakpoint formatting
+      @if $rfs-breakpoint-unit == em or $rfs-breakpoint-unit == rem {
+        $mq-value: #{$rfs-breakpoint / $rfs-rem-value}#{$rfs-breakpoint-unit};
+      }
+      @else if $rfs-breakpoint-unit == px {
+        $mq-value: #{$rfs-breakpoint}px;
+      }
+      @else {
+        @error "`#{$rfs-breakpoint-unit}` is not a valid unit for $rfs-breakpoint-unit. Use `px`, `em` or `rem`.";
+      }
+
+      @if $rfs-class == "disable" {
+        // Adding an extra class increases specificity,
+        // which prevents the media query to override the font size
+        &,
+        .disable-responsive-font-size &,
+        &.disable-responsive-font-size {
+          font-size: $rfs-static;
+        }
+      }
+      @else {
+        font-size: $rfs-static;
+      }
+
+      @if $rfs-two-dimensional {
+        @media (max-width: #{$mq-value}), (max-height: #{$mq-value}) {
+          @if $rfs-class == "enable" {
+            .enable-responsive-font-size &,
+            &.enable-responsive-font-size {
+              font-size: $rfs-fluid;
+            }
+          }
+          @else {
+            font-size: $rfs-fluid;
+          }
+
+          @if $rfs-safari-iframe-resize-bug-fix {
+            // stylelint-disable-next-line length-zero-no-unit
+            min-width: 0vw;
+          }
+        }
+      }
+      @else {
+        @media (max-width: #{$mq-value}) {
+          @if $rfs-class == "enable" {
+            .enable-responsive-font-size &,
+            &.enable-responsive-font-size {
+              font-size: $rfs-fluid;
+            }
+          }
+          @else {
+            font-size: $rfs-fluid;
+          }
+
+          @if $rfs-safari-iframe-resize-bug-fix {
+            // stylelint-disable-next-line length-zero-no-unit
+            min-width: 0vw;
+          }
+        }
+      }
+    }
+  }
+}
+
+// The font-size & responsive-font-size mixin uses RFS to rescale font sizes
+@mixin font-size($fs, $important: false) {
+  @include rfs($fs, $important);
+}
+
+@mixin responsive-font-size($fs, $important: false) {
+  @include rfs($fs, $important);
+}
+
+
+// Deprecate
+// Deprecate mixin
+//
+// This mixin can be used to deprecate mixins or functions.
+// `$enable-deprecation-messages` is a global variable, `$ignore-warning` is a variable that can be passed to
+// some deprecated mixins to suppress the warning (for example if the mixin is still be used in the current version of Bootstrap)
+@mixin deprecate($name, $deprecate-version, $remove-version, $ignore-warning: false) {
+  @if ($enable-deprecation-messages != false and $ignore-warning != true) {
+    @warn "#{$name} has been deprecated as of #{$deprecate-version}. It will be removed entirely in #{$remove-version}.";
+  }
+}
+
 
 // Utilities
 // Breakpoint viewport sizes and media queries.
@@ -1757,7 +2009,6 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 //
 // Short retina mixin for setting background-image and -size.
 
-// stylelint-disable indentation, media-query-list-comma-newline-after
 @mixin img-retina($file-1x, $file-2x, $width-1x, $height-1x) {
   background-image: url($file-1x);
 
@@ -1766,11 +2017,12 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
   // There's no such thing as unprefixed min-device-pixel-ratio since it's nonstandard.
   // Compatibility info: https://caniuse.com/#feat=css-media-resolution
   @media only screen and (-webkit-min-device-pixel-ratio: 2), 
-  only screen and (min-resolution: 192dpi), 
-  only screen and (min-resolution: 2dppx) { // Standardized
+    only screen and (min-resolution: 192dpi), 
+    only screen and (min-resolution: 2dppx) { // Standardized
     background-image: url($file-2x);
     background-size: $width-1x $height-1x;
   }
+  @include deprecate("`img-retina()`", "v4.3.0", "v5");
 }
 
 @mixin badge-variant($bg) {
@@ -1781,6 +2033,13 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
     @include hover-focus {
       color: color-yiq($bg);
       background-color: darken($bg, 10%);
+    }
+
+    &:focus,
+    &.focus {
+      outline: 0;
+      -webkit-box-shadow: 0 0 0 $badge-focus-width rgba($bg, .5);
+              box-shadow: 0 0 0 $badge-focus-width rgba($bg, .5);
     }
   }
 }
@@ -1831,6 +2090,7 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 @mixin size($width, $height: $width) {
   width: $width;
   height: $height;
+  @include deprecate("`size()`", "v4.3.0", "v5");
 }
 
 @mixin reset-text {
@@ -1840,7 +2100,7 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
   font-weight: $font-weight-normal;
   line-height: $line-height-base;
   text-align: left; // Fallback for where `start` is not supported
-  text-align: start; // stylelint-disable-line declaration-block-no-duplicate-properties
+  text-align: start;
   text-decoration: none;
   text-shadow: none;
   text-transform: none;
@@ -1859,9 +2119,11 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
   #{$parent} {
     color: $color !important;
   }
-  a#{$parent} {
-    @include hover-focus {
-      color: darken($color, $emphasized-link-hover-darken-percentage) !important;
+  @if $emphasized-link-hover-darken-percentage != 0 {
+    a#{$parent} {
+      @include hover-focus {
+        color: darken($color, $emphasized-link-hover-darken-percentage) !important;
+      }
     }
   }
 }
@@ -1875,9 +2137,7 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
   background-color: transparent;
   border: 0;
 
-  @if ($ignore-warning != true) {
-    @warn "The `text-hide()` mixin has been deprecated as of v4.1.0. It will be removed entirely in v5.";
-  }
+  @include deprecate("`text-hide()`", "v4.1.0", "v5", $ignore-warning);
 }
 
 // Text truncate
@@ -1895,6 +2155,7 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 
 @mixin invisible($visibility) {
   visibility: $visibility !important;
+  @include deprecate("`invisible()`", "v4.3.0", "v5");
 }
 
 
@@ -1966,7 +2227,7 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 
     &:focus {
       // Avoid using mixin so we can pass custom focus shadow properly
-      @if $enable-shadows {
+      @if $enable-shadows and $btn-active-box-shadow != none {
         -webkit-box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
                 box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
       } @else {
@@ -2022,14 +2283,10 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 // Button sizes
 @mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
   padding: $padding-y $padding-x;
-  font-size: $font-size;
+  @include font-size($font-size);
   line-height: $line-height;
   // Manually declare to provide an override to the browser default
-  @if $enable-rounded {
-    border-radius: $border-radius;
-  } @else {
-    border-radius: 0;
-  }
+  @include border-radius($border-radius, 0);
 }
 
 @mixin caret-down {
@@ -2063,8 +2320,8 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
   @if $enable-caret {
     &::after {
       display: inline-block;
-      margin-left: $caret-width * .85;
-      vertical-align: $caret-width * .85;
+      margin-left: $caret-spacing;
+      vertical-align: $caret-vertical-align;
       content: "";
       @if $direction == down {
         @include caret-down;
@@ -2082,8 +2339,8 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 
       &::before {
         display: inline-block;
-        margin-right: $caret-width * .85;
-        vertical-align: $caret-width * .85;
+        margin-right: $caret-spacing;
+        vertical-align: $caret-vertical-align;
         content: "";
         @include caret-left;
       }
@@ -2100,7 +2357,7 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 @mixin pagination-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
   .page-link {
     padding: $padding-y $padding-x;
-    font-size: $font-size;
+    @include font-size($font-size);
     line-height: $line-height;
   }
 
@@ -2189,12 +2446,12 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 }
 
 
-@mixin form-validation-state($state, $color) {
+@mixin form-validation-state($state, $color, $icon) {
   .#{$state}-feedback {
     display: none;
     width: 100%;
     margin-top: $form-feedback-margin-top;
-    font-size: $form-feedback-font-size;
+    @include font-size($form-feedback-font-size);
     color: $color;
   }
 
@@ -2206,7 +2463,7 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
     max-width: 100%; // Contain to parent when possible
     padding: $form-feedback-tooltip-padding-y $form-feedback-tooltip-padding-x;
     margin-top: .1rem;
-    font-size: $form-feedback-tooltip-font-size;
+    @include font-size($form-feedback-tooltip-font-size);
     line-height: $form-feedback-tooltip-line-height;
     color: color-yiq($color);
     background-color: rgba($color, $form-feedback-tooltip-opacity);
@@ -2220,15 +2477,10 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 
       @if $enable-validation-icons {
         padding-right: $input-height-inner;
+        background-image: $icon;
         background-repeat: no-repeat;
-        background-position: center right calc(#{$input-height-inner} / 4);
-        background-size: calc(#{$input-height-inner} / 2) calc(#{$input-height-inner} / 2);
-
-        @if $state == "valid" {
-          background-image: $form-feedback-icon-valid;
-        } @else {
-          background-image: $form-feedback-icon-invalid;
-        }
+        background-position: center right $input-height-inner-quarter;
+        background-size: $input-height-inner-half $input-height-inner-half;
       }
 
       &:focus {
@@ -2250,7 +2502,7 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
     &.is-#{$state} {
       @if $enable-validation-icons {
         padding-right: $input-height-inner;
-        background-position: top calc(#{$input-height-inner} / 4) right calc(#{$input-height-inner} / 4);
+        background-position: top $input-height-inner-quarter right $input-height-inner-quarter;
       }
     }
   }
@@ -2261,9 +2513,8 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
       border-color: $color;
 
       @if $enable-validation-icons {
-        $form-feedback-icon: if($state == "valid", $form-feedback-icon-valid, $form-feedback-icon-invalid);
         padding-right: $custom-select-feedback-icon-padding-right;
-        background: $custom-select-background, $form-feedback-icon no-repeat $custom-select-feedback-icon-position / $custom-select-feedback-icon-size;
+        background: $custom-select-background, $icon $custom-select-bg no-repeat $custom-select-feedback-icon-position / $custom-select-feedback-icon-size;
       }
 
       &:focus {
@@ -2429,11 +2680,15 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
   }
 }
 
+// stylelint-disable property-blacklist
 // Single side border-radius
 
-@mixin border-radius($radius: $border-radius) {
+@mixin border-radius($radius: $border-radius, $fallback-border-radius: false) {
   @if $enable-rounded {
     border-radius: $radius;
+  }
+  @else if $fallback-border-radius != false {
+    border-radius: $fallback-border-radius;
   }
 }
 
@@ -2465,10 +2720,49 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
   }
 }
 
+@mixin border-top-left-radius($radius) {
+  @if $enable-rounded {
+    border-top-left-radius: $radius;
+  }
+}
+
+@mixin border-top-right-radius($radius) {
+  @if $enable-rounded {
+    border-top-right-radius: $radius;
+  }
+}
+
+@mixin border-bottom-right-radius($radius) {
+  @if $enable-rounded {
+    border-bottom-right-radius: $radius;
+  }
+}
+
+@mixin border-bottom-left-radius($radius) {
+  @if $enable-rounded {
+    border-bottom-left-radius: $radius;
+  }
+}
+
 @mixin box-shadow($shadow...) {
   @if $enable-shadows {
-    -webkit-box-shadow: $shadow;
-            box-shadow: $shadow;
+    $result: ();
+
+    @if (length($shadow) == 1) {
+      // We can pass `@include box-shadow(none);`
+      $result: $shadow;
+    } @else {
+      // Filter to avoid invalid properties for example `box-shadow: none, 1px 1px black;`
+      @for $i from 1 through length($shadow) {
+        @if nth($shadow, $i) != "none" {
+          $result: append($result, nth($shadow, $i), "comma");
+        }
+      }
+    }
+    @if (length($result) > 0) {
+      -webkit-box-shadow: $result;
+              box-shadow: $result;
+    }
   }
 }
 
@@ -2537,7 +2831,7 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
   }
 
   @if $enable-prefers-reduced-motion-media-query {
-    @media screen and (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: reduce) {
       -webkit-transition: none;
       transition: none;
     }
@@ -2687,12 +2981,15 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 
 @mixin float-left {
   float: left !important;
+  @include deprecate("The `float-left` mixin", "v4.3.0", "v5");
 }
 @mixin float-right {
   float: right !important;
+  @include deprecate("The `float-right` mixin", "v4.3.0", "v5");
 }
 @mixin float-none {
   float: none !important;
+  @include deprecate("The `float-none` mixin", "v4.3.0", "v5");
 }
 
 
@@ -2765,7 +3062,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 body {
   margin: 0; // 1
   font-family: $font-family-base;
-  font-size: $font-size-base;
+  @include font-size($font-size-base);
   font-weight: $font-weight-base;
   line-height: $line-height-base;
   color: $body-color;
@@ -2876,7 +3173,7 @@ strong {
 }
 
 small {
-  font-size: 80%; // Add the correct font size in all browsers
+  @include font-size(80%); // Add the correct font size in all browsers
 }
 
 //
@@ -2887,7 +3184,7 @@ small {
 sub,
 sup {
   position: relative;
-  font-size: 75%;
+  @include font-size(75%);
   line-height: 0;
   vertical-align: baseline;
 }
@@ -2943,7 +3240,7 @@ code,
 kbd,
 samp {
   font-family: $font-family-monospace;
-  font-size: 1em; // Correct the odd `em` font sizing in all browsers.
+  @include font-size(1em); // Correct the odd `em` font sizing in all browsers.
 }
 
 pre {
@@ -3020,6 +3317,7 @@ label {
 //
 // Details at https://github.com/twbs/bootstrap/issues/24093
 button {
+  // stylelint-disable-next-line property-blacklist
   border-radius: 0;
 }
 
@@ -3039,7 +3337,7 @@ optgroup,
 textarea {
   margin: 0; // Remove the margin in Firefox and Safari
   font-family: inherit;
-  font-size: inherit;
+  @include font-size(inherit);
   line-height: inherit;
 }
 
@@ -3053,6 +3351,14 @@ select {
   text-transform: none; // Remove the inheritance of text transform in Firefox
 }
 
+// Remove the inheritance of word-wrap in Safari.
+//
+// Details at https://github.com/twbs/bootstrap/issues/24990
+select {
+  word-wrap: normal;
+}
+
+
 // 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
 //    controls in Android 4.
 // 2. Correct the inability to style clickable types in iOS and Safari.
@@ -3061,6 +3367,18 @@ button,
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button; // 2
+}
+
+// Opinionated: add "hand" cursor to non-disabled button elements.
+@if $enable-pointer-cursor-for-buttons {
+  button,
+  [type="button"],
+  [type="reset"],
+  [type="submit"] {
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+  }
 }
 
 // Remove inner border and padding from Firefox, but don't restore the outline like Normalize.
@@ -3119,7 +3437,7 @@ legend {
   max-width: 100%; // 1
   padding: 0;
   margin-bottom: .5rem;
-  font-size: 1.5rem;
+  @include font-size(1.5rem);
   line-height: inherit;
   color: inherit; // 2
   white-space: normal; // 1
@@ -3145,7 +3463,7 @@ progress {
 }
 
 //
-// Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
+// Remove the inner padding in Chrome and Safari on macOS.
 //
 
 [type="search"]::-webkit-search-decoration {
@@ -3200,36 +3518,36 @@ h1, h2, h3, h4, h5, h6,
   color: $headings-color;
 }
 
-h1, .h1 { font-size: $h1-font-size; }
-h2, .h2 { font-size: $h2-font-size; }
-h3, .h3 { font-size: $h3-font-size; }
-h4, .h4 { font-size: $h4-font-size; }
-h5, .h5 { font-size: $h5-font-size; }
-h6, .h6 { font-size: $h6-font-size; }
+h1, .h1 { @include font-size($h1-font-size); }
+h2, .h2 { @include font-size($h2-font-size); }
+h3, .h3 { @include font-size($h3-font-size); }
+h4, .h4 { @include font-size($h4-font-size); }
+h5, .h5 { @include font-size($h5-font-size); }
+h6, .h6 { @include font-size($h6-font-size); }
 
 .lead {
-  font-size: $lead-font-size;
+  @include font-size($lead-font-size);
   font-weight: $lead-font-weight;
 }
 
 // Type display classes
 .display-1 {
-  font-size: $display1-size;
+  @include font-size($display1-size);
   font-weight: $display1-weight;
   line-height: $display-line-height;
 }
 .display-2 {
-  font-size: $display2-size;
+  @include font-size($display2-size);
   font-weight: $display2-weight;
   line-height: $display-line-height;
 }
 .display-3 {
-  font-size: $display3-size;
+  @include font-size($display3-size);
   font-weight: $display3-weight;
   line-height: $display-line-height;
 }
 .display-4 {
-  font-size: $display4-size;
+  @include font-size($display4-size);
   font-weight: $display4-weight;
   line-height: $display-line-height;
 }
@@ -3253,7 +3571,7 @@ hr {
 
 small,
 .small {
-  font-size: $small-font-size;
+  @include font-size($small-font-size);
   font-weight: $font-weight-normal;
 }
 
@@ -3291,19 +3609,19 @@ mark,
 
 // Builds on `abbr`
 .initialism {
-  font-size: 90%;
+  @include font-size(90%);
   text-transform: uppercase;
 }
 
 // Blockquotes
 .blockquote {
   margin-bottom: $spacer;
-  font-size: $blockquote-font-size;
+  @include font-size($blockquote-font-size);
 }
 
 .blockquote-footer {
   display: block;
-  font-size: $blockquote-small-font-size;
+  @include font-size($blockquote-small-font-size);
   color: $blockquote-small-color;
 
   &::before {
@@ -3350,13 +3668,13 @@ mark,
 }
 
 .figure-caption {
-  font-size: $figure-caption-font-size;
+  @include font-size($figure-caption-font-size);
   color: $figure-caption-color;
 }
 
 // Inline code
 code {
-  font-size: $code-font-size;
+  @include font-size($code-font-size);
   color: $code-color;
   word-break: break-word;
 
@@ -3369,7 +3687,7 @@ code {
 // User input typically entered via keyboard
 kbd {
   padding: $kbd-padding-y $kbd-padding-x;
-  font-size: $kbd-font-size;
+  @include font-size($kbd-font-size);
   color: $kbd-color;
   background-color: $kbd-bg;
   @include border-radius($border-radius-sm);
@@ -3377,7 +3695,7 @@ kbd {
 
   kbd {
     padding: 0;
-    font-size: 100%;
+    @include font-size(100%);
     font-weight: $nested-kbd-font-weight;
     @include box-shadow(none);
   }
@@ -3386,12 +3704,12 @@ kbd {
 // Blocks of code
 pre {
   display: block;
-  font-size: $code-font-size;
+  @include font-size($code-font-size);
   color: $pre-color;
 
   // Account for some code outputs that place code tags in pre tags
   code {
-    font-size: inherit;
+    @include font-size(inherit);
     color: inherit;
     word-break: normal;
   }
@@ -3463,6 +3781,7 @@ pre {
 .table {
   width: 100%;
   margin-bottom: $spacer;
+  color: $table-color;
   background-color: $table-bg; // Reset for nesting within parents with `background-color`.
 
   th,
@@ -3479,10 +3798,6 @@ pre {
 
   tbody + tbody {
     border-top: (2 * $table-border-width) solid $table-border-color;
-  }
-
-  .table {
-    background-color: $body-bg;
   }
 }
 
@@ -3546,6 +3861,7 @@ pre {
 .table-hover {
   tbody tr {
     @include hover {
+      color: $table-hover-color;
       background-color: $table-hover-bg;
     }
   }
@@ -3610,6 +3926,7 @@ pre {
   &.table-hover {
     tbody tr {
       @include hover {
+        color: $table-dark-hover-color;
         background-color: $table-dark-hover-bg;
       }
     }
@@ -3633,7 +3950,6 @@ pre {
         width: 100%;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        -ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
 
         // Prevent double border on horizontal scroll due to use of `display: block;`
         > .table-bordered {
@@ -3655,7 +3971,8 @@ pre {
   width: 100%;
   height: $input-height;
   padding: $input-padding-y $input-padding-x;
-  font-size: $input-font-size;
+  font-family: $input-font-family;
+  @include font-size($input-font-size);
   font-weight: $input-font-weight;
   line-height: $input-line-height;
   color: $input-color;
@@ -3664,13 +3981,7 @@ pre {
   border: $input-border-width solid $input-border-color;
 
   // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
-  @if $enable-rounded {
-    // Manually use the if/else instead of the mixin to account for iOS override
-    border-radius: $input-border-radius;
-  } @else {
-    // Otherwise undo the iOS default
-    border-radius: 0;
-  }
+  @include border-radius($input-border-radius, 0);
 
   @include box-shadow($input-box-shadow);
   @include transition($input-transition);
@@ -3686,6 +3997,11 @@ pre {
 
   // Placeholder
   &::-webkit-input-placeholder {
+    color: $input-placeholder-color;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
+  &::-moz-placeholder {
     color: $input-placeholder-color;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
@@ -3744,21 +4060,21 @@ select.form-control {
   padding-top: calc(#{$input-padding-y} + #{$input-border-width});
   padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
   margin-bottom: 0; // Override the `<label>/<legend>` default
-  font-size: inherit; // Override the `<legend>` default
+  @include font-size(inherit); // Override the `<legend>` default
   line-height: $input-line-height;
 }
 
 .col-form-label-lg {
   padding-top: calc(#{$input-padding-y-lg} + #{$input-border-width});
   padding-bottom: calc(#{$input-padding-y-lg} + #{$input-border-width});
-  font-size: $input-font-size-lg;
+  @include font-size($input-font-size-lg);
   line-height: $input-line-height-lg;
 }
 
 .col-form-label-sm {
   padding-top: calc(#{$input-padding-y-sm} + #{$input-border-width});
   padding-bottom: calc(#{$input-padding-y-sm} + #{$input-border-width});
-  font-size: $input-font-size-sm;
+  @include font-size($input-font-size-sm);
   line-height: $input-line-height-sm;
 }
 
@@ -3798,7 +4114,7 @@ select.form-control {
 .form-control-sm {
   height: $input-height-sm;
   padding: $input-padding-y-sm $input-padding-x-sm;
-  font-size: $input-font-size-sm;
+  @include font-size($input-font-size-sm);
   line-height: $input-line-height-sm;
   @include border-radius($input-border-radius-sm);
 }
@@ -3806,7 +4122,7 @@ select.form-control {
 .form-control-lg {
   height: $input-height-lg;
   padding: $input-padding-y-lg $input-padding-x-lg;
-  font-size: $input-font-size-lg;
+  @include font-size($input-font-size-lg);
   line-height: $input-line-height-lg;
   @include border-radius($input-border-radius-lg);
 }
@@ -3819,7 +4135,6 @@ select.form-control {
   }
 }
 
-// stylelint-disable-next-line no-duplicate-selectors
 textarea.form-control {
   height: auto;
 }
@@ -3911,8 +4226,9 @@ textarea.form-control {
 // pseudo-classes but also includes `.is-invalid` and `.is-valid` classes for
 // server side validation.
 
-@include form-validation-state("valid", $form-feedback-valid-color);
-@include form-validation-state("invalid", $form-feedback-invalid-color);
+@each $state, $data in $form-validation-states {
+  @include form-validation-state($state, map-get($data, color), map-get($data, icon));
+}
 
 // Inline forms
 //
@@ -4009,6 +4325,8 @@ textarea.form-control {
     }
     .form-check-input {
       position: relative;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
       margin-top: 0;
       margin-right: $form-check-input-margin-x;
       margin-left: 0;
@@ -4036,6 +4354,7 @@ textarea.form-control {
 
 .btn {
   display: inline-block;
+  font-family: $btn-font-family;
   font-weight: $btn-font-weight;
   color: $body-color;
   text-align: center;
@@ -4066,11 +4385,6 @@ textarea.form-control {
   &:disabled {
     opacity: $btn-disabled-opacity;
     @include box-shadow(none);
-  }
-
-  // Opinionated: add "hand" cursor to non-disabled .btn elements
-  &:not(:disabled):not(.disabled) {
-    cursor: pointer;
   }
 
   &:not(:disabled):not(.disabled):active,
@@ -4115,6 +4429,8 @@ fieldset:disabled a.btn {
 .btn-link {
   font-weight: $font-weight-normal;
   color: $link-color;
+  -webkit-text-decoration: $link-decoration;
+          text-decoration: $link-decoration;
 
   @include hover {
     color: $link-hover-color;
@@ -4176,8 +4492,6 @@ input[type="button"] {
   }
 }
 
-// stylelint-disable selector-no-qualifying-type
-
 .fade {
   @include transition($transition-fade);
 
@@ -4208,6 +4522,8 @@ input[type="button"] {
 }
 
 .dropdown-toggle {
+  white-space: nowrap;
+
   // Generate the caret automatically
   @include caret;
 }
@@ -4223,8 +4539,8 @@ input[type="button"] {
   min-width: $dropdown-min-width;
   padding: $dropdown-padding-y 0;
   margin: $dropdown-spacer 0 0; // override default ul
-  font-size: $font-size-base; // Redeclare because nesting can cause inheritance issues
-  color: $body-color;
+  @include font-size($dropdown-font-size);
+  color: $dropdown-color;
   text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
   list-style: none;
   background-color: $dropdown-bg;
@@ -4238,20 +4554,14 @@ input[type="button"] {
   @include media-breakpoint-up($breakpoint) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-    .dropdown-menu#{$infix}-right {
-      right: 0;
-      left: auto;
-    }
-  }
-}
-
-@each $breakpoint in map-keys($grid-breakpoints) {
-  @include media-breakpoint-up($breakpoint) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
     .dropdown-menu#{$infix}-left {
       right: auto;
       left: 0;
+    }
+
+    .dropdown-menu#{$infix}-right {
+      right: 0;
+      left: auto;
     }
   }
 }
@@ -4319,7 +4629,7 @@ input[type="button"] {
 
 // Dividers (basically an `<hr>`) within the dropdown
 .dropdown-divider {
-  @include nav-divider($dropdown-divider-bg);
+  @include nav-divider($dropdown-divider-bg, $dropdown-divider-margin-y);
 }
 
 // Links, buttons, and more within the dropdown menu
@@ -4337,12 +4647,16 @@ input[type="button"] {
   background-color: transparent; // For `<button>`s
   border: 0; // For `<button>`s
 
-  &:first-child {
-    @include border-top-radius($dropdown-inner-border-radius);
-  }
+  // Prevent dropdown overflow if there's no padding
+  // See https://github.com/twbs/bootstrap/pull/27703
+  @if $dropdown-padding-y == 0 {
+    &:first-child {
+      @include border-top-radius($dropdown-inner-border-radius);
+    }
 
-  &:last-child {
-    @include border-bottom-radius($dropdown-inner-border-radius);
+    &:last-child {
+      @include border-bottom-radius($dropdown-inner-border-radius);
+    }
   }
 
   @include hover-focus {
@@ -4379,7 +4693,7 @@ input[type="button"] {
   display: block;
   padding: $dropdown-padding-y $dropdown-item-padding-x;
   margin-bottom: 0; // for use with heading elements
-  font-size: $font-size-sm;
+  @include font-size($font-size-sm);
   color: $dropdown-header-color;
   white-space: nowrap; // as with > li > a
 }
@@ -4694,7 +5008,7 @@ input[type="button"] {
           align-items: center;
   padding: $input-padding-y $input-padding-x;
   margin-bottom: 0; // Allow use of <label> elements by overriding our default margin-bottom
-  font-size: $font-size-base; // Match inputs
+  @include font-size($input-font-size); // Match inputs
   font-weight: $font-weight-normal;
   line-height: $input-line-height;
   color: $input-group-addon-color;
@@ -4729,7 +5043,7 @@ input[type="button"] {
 .input-group-lg > .input-group-prepend > .btn,
 .input-group-lg > .input-group-append > .btn {
   padding: $input-padding-y-lg $input-padding-x-lg;
-  font-size: $input-font-size-lg;
+  @include font-size($input-font-size-lg);
   line-height: $input-line-height-lg;
   @include border-radius($input-border-radius-lg);
 }
@@ -4746,7 +5060,7 @@ input[type="button"] {
 .input-group-sm > .input-group-prepend > .btn,
 .input-group-sm > .input-group-append > .btn {
   padding: $input-padding-y-sm $input-padding-x-sm;
-  font-size: $input-font-size-sm;
+  @include font-size($input-font-size-sm);
   line-height: $input-line-height-sm;
   @include border-radius($input-border-radius-sm);
 }
@@ -4883,9 +5197,7 @@ input[type="button"] {
     width: $custom-control-indicator-size;
     height: $custom-control-indicator-size;
     content: "";
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: $custom-control-indicator-bg-size;
+    background: no-repeat 50% / #{$custom-control-indicator-bg-size};
   }
 }
 
@@ -4932,6 +5244,7 @@ input[type="button"] {
 
 .custom-radio {
   .custom-control-label::before {
+    // stylelint-disable-next-line property-blacklist
     border-radius: $custom-radio-indicator-border-radius;
   }
 
@@ -4961,6 +5274,7 @@ input[type="button"] {
       left: -($custom-switch-width + $custom-control-gutter);
       width: $custom-switch-width;
       pointer-events: all;
+      // stylelint-disable-next-line property-blacklist
       border-radius: $custom-switch-indicator-border-radius;
     }
 
@@ -4970,6 +5284,7 @@ input[type="button"] {
       width: $custom-switch-indicator-size;
       height: $custom-switch-indicator-size;
       background-color: $custom-control-indicator-border-color;
+      // stylelint-disable-next-line property-blacklist
       border-radius: $custom-switch-indicator-border-radius;
       @include transition(transform .15s ease-in-out, $custom-forms-transition);
     }
@@ -5002,6 +5317,8 @@ input[type="button"] {
   width: 100%;
   height: $custom-select-height;
   padding: $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding) $custom-select-padding-y $custom-select-padding-x;
+  font-family: $custom-select-font-family;
+  @include font-size($custom-select-font-size);
   font-weight: $custom-select-font-weight;
   line-height: $custom-select-line-height;
   color: $custom-select-color;
@@ -5009,11 +5326,7 @@ input[type="button"] {
   background: $custom-select-background;
   background-color: $custom-select-bg;
   border: $custom-select-border-width solid $custom-select-border-color;
-  @if $enable-rounded {
-    border-radius: $custom-select-border-radius;
-  } @else {
-    border-radius: 0;
-  }
+  @include border-radius($custom-select-border-radius, 0);
   @include box-shadow($custom-select-box-shadow);
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -5055,7 +5368,7 @@ input[type="button"] {
 
   // Hides the default caret in IE11
   &::-ms-expand {
-    opacity: 0;
+    display: none;
   }
 }
 
@@ -5064,7 +5377,7 @@ input[type="button"] {
   padding-top: $custom-select-padding-y-sm;
   padding-bottom: $custom-select-padding-y-sm;
   padding-left: $custom-select-padding-x-sm;
-  font-size: $custom-select-font-size-sm;
+  @include font-size($custom-select-font-size-sm);
 }
 
 .custom-select-lg {
@@ -5072,7 +5385,7 @@ input[type="button"] {
   padding-top: $custom-select-padding-y-lg;
   padding-bottom: $custom-select-padding-y-lg;
   padding-left: $custom-select-padding-x-lg;
-  font-size: $custom-select-font-size-lg;
+  @include font-size($custom-select-font-size-lg);
 }
 
 
@@ -5125,6 +5438,7 @@ input[type="button"] {
   z-index: 1;
   height: $custom-file-height;
   padding: $custom-file-padding-y $custom-file-padding-x;
+  font-family: $custom-file-font-family;
   font-weight: $custom-file-font-weight;
   line-height: $custom-file-line-height;
   color: $custom-file-color;
@@ -5493,7 +5807,7 @@ input[type="button"] {
   padding-top: $navbar-brand-padding-y;
   padding-bottom: $navbar-brand-padding-y;
   margin-right: $navbar-padding-x;
-  font-size: $navbar-brand-font-size;
+  @include font-size($navbar-brand-font-size);
   line-height: inherit;
   white-space: nowrap;
 
@@ -5566,7 +5880,7 @@ input[type="button"] {
 // Button for toggling the navbar when in its collapsed state
 .navbar-toggler {
   padding: $navbar-toggler-padding-y $navbar-toggler-padding-x;
-  font-size: $navbar-toggler-font-size;
+  @include font-size($navbar-toggler-font-size);
   line-height: 1;
   background-color: transparent; // remove default button style
   border: $border-width solid transparent; // remove default button style
@@ -5574,11 +5888,6 @@ input[type="button"] {
 
   @include hover-focus {
     text-decoration: none;
-  }
-
-  // Opinionated: add "hand" cursor to non-disabled .navbar-toggler elements
-  &:not(:disabled):not(.disabled) {
-    cursor: pointer;
   }
 }
 
@@ -5645,7 +5954,7 @@ input[type="button"] {
         .navbar-collapse {
           display: -webkit-box !important;
           display: -ms-flexbox !important;
-          display: flex !important;  // stylelint-disable-line declaration-no-important
+          display: flex !important; // stylelint-disable-line declaration-no-important
 
           // Changes flex-bases to auto because of an IE10 bug
           -ms-flex-preferred-size: auto;
@@ -5782,7 +6091,7 @@ input[type="button"] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  min-width: 0;
+  min-width: 0; // See https://github.com/twbs/bootstrap/pull/22740#issuecomment-305868106
   word-wrap: break-word;
   background-color: $card-bg;
   background-clip: border-box;
@@ -5814,6 +6123,7 @@ input[type="button"] {
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   padding: $card-spacer-x;
+  color: $card-color;
 }
 
 .card-title {
@@ -5998,53 +6308,33 @@ input[type="button"] {
 
       // Handle rounded corners
       @if $enable-rounded {
-        &:first-child {
+        &:not(:last-child) {
           @include border-right-radius(0);
 
           .card-img-top,
           .card-header {
+            // stylelint-disable-next-line property-blacklist
             border-top-right-radius: 0;
           }
           .card-img-bottom,
           .card-footer {
+            // stylelint-disable-next-line property-blacklist
             border-bottom-right-radius: 0;
           }
         }
 
-        &:last-child {
+        &:not(:first-child) {
           @include border-left-radius(0);
 
           .card-img-top,
           .card-header {
+            // stylelint-disable-next-line property-blacklist
             border-top-left-radius: 0;
           }
           .card-img-bottom,
           .card-footer {
+            // stylelint-disable-next-line property-blacklist
             border-bottom-left-radius: 0;
-          }
-        }
-
-        &:only-child {
-          @include border-radius($card-border-radius);
-
-          .card-img-top,
-          .card-header {
-            @include border-top-radius($card-border-radius);
-          }
-          .card-img-bottom,
-          .card-footer {
-            @include border-bottom-radius($card-border-radius);
-          }
-        }
-
-        &:not(:first-child):not(:last-child):not(:only-child) {
-          @include border-radius(0);
-
-          .card-img-top,
-          .card-img-bottom,
-          .card-header,
-          .card-footer {
-            @include border-radius(0);
           }
         }
       }
@@ -6064,8 +6354,10 @@ input[type="button"] {
 
   @include media-breakpoint-up(sm) {
     -webkit-column-count: $card-columns-count;
+       -moz-column-count: $card-columns-count;
             column-count: $card-columns-count;
     -webkit-column-gap: $card-columns-gap;
+       -moz-column-gap: $card-columns-gap;
             column-gap: $card-columns-gap;
     orphans: 1;
     widows: 1;
@@ -6083,29 +6375,27 @@ input[type="button"] {
 //
 
 .accordion {
-  .card {
+  > .card {
     overflow: hidden;
 
     &:not(:first-of-type) {
       .card-header:first-child {
-        border-radius: 0;
+        @include border-radius(0);
       }
 
       &:not(:last-of-type) {
         border-bottom: 0;
-        border-radius: 0;
+        @include border-radius(0);
       }
     }
 
     &:first-of-type {
       border-bottom: 0;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
+      @include border-bottom-radius(0);
     }
 
     &:last-of-type {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
+      @include border-top-radius(0);
     }
 
     .card-header {
@@ -6191,11 +6481,6 @@ input[type="button"] {
     -webkit-box-shadow: $pagination-focus-box-shadow;
             box-shadow: $pagination-focus-box-shadow;
   }
-
-  // Opinionated: add "hand" cursor to non-disabled .page-link elements
-  &:not(:disabled):not(.disabled) {
-    cursor: pointer;
-  }
 }
 
 .page-item {
@@ -6249,13 +6534,14 @@ input[type="button"] {
 .badge {
   display: inline-block;
   padding: $badge-padding-y $badge-padding-x;
-  font-size: $badge-font-size;
+  @include font-size($badge-font-size);
   font-weight: $badge-font-weight;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
   @include border-radius($badge-border-radius);
+  @include transition($badge-transition);
 
   @at-root a#{&} {
     @include hover-focus {
@@ -6298,6 +6584,7 @@ input[type="button"] {
 .jumbotron {
   padding: $jumbotron-padding ($jumbotron-padding / 2);
   margin-bottom: $jumbotron-padding;
+  color: $jumbotron-color;
   background-color: $jumbotron-bg;
   @include border-radius($border-radius-lg);
 
@@ -6364,14 +6651,16 @@ input[type="button"] {
   }
 }
 
-@-webkit-keyframes progress-bar-stripes {
-  from { background-position: $progress-height 0; }
-  to { background-position: 0 0; }
-}
-
-@keyframes progress-bar-stripes {
-  from { background-position: $progress-height 0; }
-  to { background-position: 0 0; }
+// Disable animation if transitions are disabled
+@if $enable-transitions {
+  @-webkit-keyframes progress-bar-stripes {
+    from { background-position: $progress-height 0; }
+    to { background-position: 0 0; }
+  }
+  @keyframes progress-bar-stripes {
+    from { background-position: $progress-height 0; }
+    to { background-position: 0 0; }
+  }
 }
 
 .progress {
@@ -6380,7 +6669,7 @@ input[type="button"] {
   display: flex;
   height: $progress-height;
   overflow: hidden; // force rounded corners by cropping it
-  font-size: $progress-font-size;
+  @include font-size($progress-font-size);
   background-color: $progress-bg;
   @include border-radius($progress-border-radius);
   @include box-shadow($progress-box-shadow);
@@ -6409,9 +6698,16 @@ input[type="button"] {
   background-size: $progress-height $progress-height;
 }
 
-.progress-bar-animated {
-  -webkit-animation: progress-bar-stripes $progress-bar-animation-timing;
-          animation: progress-bar-stripes $progress-bar-animation-timing;
+@if $enable-transitions {
+  .progress-bar-animated {
+    -webkit-animation: progress-bar-stripes $progress-bar-animation-timing;
+            animation: progress-bar-stripes $progress-bar-animation-timing;
+
+    @media (prefers-reduced-motion: reduce) {
+      -webkit-animation: none;
+              animation: none;
+    }
+  }
 }
 
 .media {
@@ -6460,6 +6756,7 @@ input[type="button"] {
 
   // Hover state
   @include hover-focus {
+    z-index: 1; // Place hover/focus items above their siblings for proper border styling
     color: $list-group-action-hover-color;
     text-decoration: none;
     background-color: $list-group-hover-bg;
@@ -6482,6 +6779,7 @@ input[type="button"] {
   padding: $list-group-item-padding-y $list-group-item-padding-x;
   // Place the border on the list items and negative margin up for better styling
   margin-bottom: -$list-group-border-width;
+  color: $list-group-color;
   background-color: $list-group-bg;
   border: $list-group-border-width solid $list-group-border-color;
 
@@ -6492,11 +6790,6 @@ input[type="button"] {
   &:last-child {
     margin-bottom: 0;
     @include border-bottom-radius($list-group-border-radius);
-  }
-
-  @include hover-focus {
-    z-index: 1; // Place hover/active items above their siblings for proper border styling
-    text-decoration: none;
   }
 
   &.disabled,
@@ -6512,6 +6805,40 @@ input[type="button"] {
     color: $list-group-active-color;
     background-color: $list-group-active-bg;
     border-color: $list-group-active-border-color;
+  }
+}
+
+
+// Horizontal
+//
+// Change the layout of list group items from vertical (default) to horizontal.
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .list-group-horizontal#{$infix} {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row;
+
+      .list-group-item {
+        margin-right: -$list-group-border-width;
+        margin-bottom: 0;
+
+        &:first-child {
+          @include border-left-radius($list-group-border-radius);
+          @include border-top-right-radius(0);
+        }
+
+        &:last-child {
+          margin-right: 0;
+          @include border-right-radius($list-group-border-radius);
+          @include border-bottom-left-radius(0);
+        }
+      }
+    }
   }
 }
 
@@ -6558,7 +6885,7 @@ input[type="button"] {
 
 .close {
   float: right;
-  font-size: $close-font-size;
+  @include font-size($close-font-size);
   font-weight: $close-font-weight;
   line-height: 1;
   color: $close-color;
@@ -6575,9 +6902,6 @@ input[type="button"] {
     @include hover-focus {
       opacity: .75;
     }
-
-    // Opinionated: add "hand" cursor to non-disabled .close elements
-    cursor: pointer;
   }
 }
 
@@ -6606,16 +6930,17 @@ a.close.disabled {
 .toast {
   max-width: $toast-max-width;
   overflow: hidden; // cheap rounded corners on nested items
-  font-size: $toast-font-size; // knock it down to 14px
+  @include font-size($toast-font-size);
+  color: $toast-color;
   background-color: $toast-background-color;
   background-clip: padding-box;
   border: $toast-border-width solid $toast-border-color;
-  border-radius: $toast-border-radius;
   -webkit-box-shadow: $toast-box-shadow;
           box-shadow: $toast-box-shadow;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   opacity: 0;
+  @include border-radius($toast-border-radius);
 
   &:not(:last-child) {
     margin-bottom: $toast-padding-x;
@@ -6707,6 +7032,28 @@ a.close.disabled {
   }
 }
 
+.modal-dialog-scrollable {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; // IE10/11
+  max-height: calc(100% - #{$modal-dialog-margin * 2});
+
+  .modal-content {
+    max-height: calc(100vh - #{$modal-dialog-margin * 2}); // IE10/11
+    overflow: hidden;
+  }
+
+  .modal-header,
+  .modal-footer {
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+  }
+
+  .modal-body {
+    overflow-y: auto;
+  }
+}
+
 .modal-dialog-centered {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6714,13 +7061,33 @@ a.close.disabled {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  min-height: calc(100% - (#{$modal-dialog-margin} * 2));
+  min-height: calc(100% - #{$modal-dialog-margin * 2});
 
   // Ensure `modal-dialog-centered` extends the full height of the view (IE10/11)
   &::before {
     display: block; // IE10
-    height: calc(100vh - (#{$modal-dialog-margin} * 2));
+    height: calc(100vh - #{$modal-dialog-margin * 2});
     content: "";
+  }
+
+  // Ensure `.modal-body` shows scrollbar (IE10/11)
+  &.modal-dialog-scrollable {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 100%;
+
+    .modal-content {
+      max-height: none;
+    }
+
+    &::before {
+      content: none;
+    }
   }
 }
 
@@ -6736,6 +7103,7 @@ a.close.disabled {
           flex-direction: column;
   width: 100%; // Ensure `.modal-content` extends the full width of the parent `.modal-dialog`
   // counteract the pointer-events: none; in the .modal-dialog
+  color: $modal-content-color;
   pointer-events: auto;
   background-color: $modal-content-bg;
   background-clip: padding-box;
@@ -6839,11 +7207,19 @@ a.close.disabled {
     margin: $modal-dialog-margin-y-sm-up auto;
   }
 
+  .modal-dialog-scrollable {
+    max-height: calc(100% - #{$modal-dialog-margin-y-sm-up * 2});
+
+    .modal-content {
+      max-height: calc(100vh - #{$modal-dialog-margin-y-sm-up * 2});
+    }
+  }
+
   .modal-dialog-centered {
-    min-height: calc(100% - (#{$modal-dialog-margin-y-sm-up} * 2));
+    min-height: calc(100% - #{$modal-dialog-margin-y-sm-up * 2});
 
     &::before {
-      height: calc(100vh - (#{$modal-dialog-margin-y-sm-up} * 2));
+      height: calc(100vh - #{$modal-dialog-margin-y-sm-up * 2});
     }
   }
 
@@ -6874,7 +7250,7 @@ a.close.disabled {
   // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
   // So reset our font and text properties to avoid inheriting weird values.
   @include reset-text();
-  font-size: $tooltip-font-size;
+  @include font-size($tooltip-font-size);
   // Allow breaking very long words so they don't overflow the tooltip's bounds
   word-wrap: break-word;
   opacity: 0;
@@ -6991,7 +7367,7 @@ a.close.disabled {
   // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
   // So reset our font and text properties to avoid inheriting weird values.
   @include reset-text();
-  font-size: $popover-font-size;
+  @include font-size($popover-font-size);
   // Allow breaking very long words so they don't overflow the popover's bounds
   word-wrap: break-word;
   background-color: $popover-bg;
@@ -7021,72 +7397,63 @@ a.close.disabled {
 .bs-popover-top {
   margin-bottom: $popover-arrow-height;
 
-  .arrow {
+  > .arrow {
     bottom: calc((#{$popover-arrow-height} + #{$popover-border-width}) * -1);
-  }
 
-  .arrow::before,
-  .arrow::after {
-    border-width: $popover-arrow-height ($popover-arrow-width / 2) 0;
-  }
+    &::before {
+      bottom: 0;
+      border-width: $popover-arrow-height ($popover-arrow-width / 2) 0;
+      border-top-color: $popover-arrow-outer-color;
+    }
 
-  .arrow::before {
-    bottom: 0;
-    border-top-color: $popover-arrow-outer-color;
-  }
-
-  .arrow::after {
-    bottom: $popover-border-width;
-    border-top-color: $popover-arrow-color;
+    &::after {
+      bottom: $popover-border-width;
+      border-width: $popover-arrow-height ($popover-arrow-width / 2) 0;
+      border-top-color: $popover-arrow-color;
+    }
   }
 }
 
 .bs-popover-right {
   margin-left: $popover-arrow-height;
 
-  .arrow {
+  > .arrow {
     left: calc((#{$popover-arrow-height} + #{$popover-border-width}) * -1);
     width: $popover-arrow-height;
     height: $popover-arrow-width;
     margin: $border-radius-lg 0; // make sure the arrow does not touch the popover's rounded corners
-  }
 
-  .arrow::before,
-  .arrow::after {
-    border-width: ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2) 0;
-  }
+    &::before {
+      left: 0;
+      border-width: ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2) 0;
+      border-right-color: $popover-arrow-outer-color;
+    }
 
-  .arrow::before {
-    left: 0;
-    border-right-color: $popover-arrow-outer-color;
-  }
-
-  .arrow::after {
-    left: $popover-border-width;
-    border-right-color: $popover-arrow-color;
+    &::after {
+      left: $popover-border-width;
+      border-width: ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2) 0;
+      border-right-color: $popover-arrow-color;
+    }
   }
 }
 
 .bs-popover-bottom {
   margin-top: $popover-arrow-height;
 
-  .arrow {
+  > .arrow {
     top: calc((#{$popover-arrow-height} + #{$popover-border-width}) * -1);
-  }
 
-  .arrow::before,
-  .arrow::after {
-    border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
-  }
+    &::before {
+      top: 0;
+      border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
+      border-bottom-color: $popover-arrow-outer-color;
+    }
 
-  .arrow::before {
-    top: 0;
-    border-bottom-color: $popover-arrow-outer-color;
-  }
-
-  .arrow::after {
-    top: $popover-border-width;
-    border-bottom-color: $popover-arrow-color;
+    &::after {
+      top: $popover-border-width;
+      border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
+      border-bottom-color: $popover-arrow-color;
+    }
   }
 
   // This will remove the popover-header's border just below the arrow
@@ -7105,26 +7472,23 @@ a.close.disabled {
 .bs-popover-left {
   margin-right: $popover-arrow-height;
 
-  .arrow {
+  > .arrow {
     right: calc((#{$popover-arrow-height} + #{$popover-border-width}) * -1);
     width: $popover-arrow-height;
     height: $popover-arrow-width;
     margin: $border-radius-lg 0; // make sure the arrow does not touch the popover's rounded corners
-  }
 
-  .arrow::before,
-  .arrow::after {
-    border-width: ($popover-arrow-width / 2) 0 ($popover-arrow-width / 2) $popover-arrow-height;
-  }
+    &::before {
+      right: 0;
+      border-width: ($popover-arrow-width / 2) 0 ($popover-arrow-width / 2) $popover-arrow-height;
+      border-left-color: $popover-arrow-outer-color;
+    }
 
-  .arrow::before {
-    right: 0;
-    border-left-color: $popover-arrow-outer-color;
-  }
-
-  .arrow::after {
-    right: $popover-border-width;
-    border-left-color: $popover-arrow-color;
+    &::after {
+      right: $popover-border-width;
+      border-width: ($popover-arrow-width / 2) 0 ($popover-arrow-width / 2) $popover-arrow-height;
+      border-left-color: $popover-arrow-color;
+    }
   }
 }
 
@@ -7148,7 +7512,7 @@ a.close.disabled {
 .popover-header {
   padding: $popover-header-padding-y $popover-header-padding-x;
   margin-bottom: 0; // Reset the default from Reboot
-  font-size: $font-size-base;
+  @include font-size($font-size-base);
   color: $popover-header-color;
   background-color: $popover-header-bg;
   border-bottom: $popover-border-width solid darken($popover-header-bg, 5%);
@@ -7308,8 +7672,7 @@ a.close.disabled {
   display: inline-block;
   width: $carousel-control-icon-width;
   height: $carousel-control-icon-width;
-  background: transparent no-repeat center center;
-  background-size: 100% 100%;
+  background: no-repeat 50% / 100% 100%;
 }
 .carousel-control-prev-icon {
   background-image: $carousel-control-prev-icon-bg;
@@ -7404,6 +7767,7 @@ a.close.disabled {
   vertical-align: text-bottom;
   border: $spinner-border-width solid currentColor;
   border-right-color: transparent;
+  // stylelint-disable-next-line property-blacklist
   border-radius: 50%;
   -webkit-animation: spinner-border .75s linear infinite;
           animation: spinner-border .75s linear infinite;
@@ -7445,6 +7809,7 @@ a.close.disabled {
   height: $spinner-height;
   vertical-align: text-bottom;
   background-color: currentColor;
+  // stylelint-disable-next-line property-blacklist
   border-radius: 50%;
   opacity: 0;
   -webkit-animation: spinner-grow .75s linear infinite;
@@ -7485,7 +7850,7 @@ a.close.disabled {
   background-color: transparent !important;
 }
 
-// stylelint-disable declaration-no-important
+// stylelint-disable property-blacklist, declaration-no-important
 
 //
 // Border
@@ -7517,24 +7882,36 @@ a.close.disabled {
 // Border-radius
 //
 
+.rounded-sm {
+  border-radius: $border-radius-sm !important;
+}
+
 .rounded {
   border-radius: $border-radius !important;
 }
+
 .rounded-top {
   border-top-left-radius: $border-radius !important;
   border-top-right-radius: $border-radius !important;
 }
+
 .rounded-right {
   border-top-right-radius: $border-radius !important;
   border-bottom-right-radius: $border-radius !important;
 }
+
 .rounded-bottom {
   border-bottom-right-radius: $border-radius !important;
   border-bottom-left-radius: $border-radius !important;
 }
+
 .rounded-left {
   border-top-left-radius: $border-radius !important;
   border-bottom-left-radius: $border-radius !important;
+}
+
+.rounded-lg {
+  border-radius: $border-radius-lg !important;
 }
 
 .rounded-circle {
@@ -7563,15 +7940,9 @@ a.close.disabled {
   @include media-breakpoint-up($breakpoint) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-    .d#{$infix}-none         { display: none !important; }
-    .d#{$infix}-inline       { display: inline !important; }
-    .d#{$infix}-inline-block { display: inline-block !important; }
-    .d#{$infix}-block        { display: block !important; }
-    .d#{$infix}-table        { display: table !important; }
-    .d#{$infix}-table-row    { display: table-row !important; }
-    .d#{$infix}-table-cell   { display: table-cell !important; }
-    .d#{$infix}-flex         { display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; }
-    .d#{$infix}-inline-flex  { display: -webkit-inline-box !important; display: -ms-inline-flexbox !important; display: inline-flex !important; }
+    @each $value in $displays {
+      .d#{$infix}-#{$value} { display: $value !important; }
+    }
   }
 }
 
@@ -7581,15 +7952,9 @@ a.close.disabled {
 //
 
 @media print {
-  .d-print-none         { display: none !important; }
-  .d-print-inline       { display: inline !important; }
-  .d-print-inline-block { display: inline-block !important; }
-  .d-print-block        { display: block !important; }
-  .d-print-table        { display: table !important; }
-  .d-print-table-row    { display: table-row !important; }
-  .d-print-table-cell   { display: table-cell !important; }
-  .d-print-flex         { display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; }
-  .d-print-inline-flex  { display: -webkit-inline-box !important; display: -ms-inline-flexbox !important; display: inline-flex !important; }
+  @each $value in $displays {
+    .d-print-#{$value} { display: $value !important; }
+  }
 }
 
 // Credit: Nicolas Gallagher and SUIT CSS.
@@ -7684,13 +8049,15 @@ a.close.disabled {
   }
 }
 
+// stylelint-disable declaration-no-important
+
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-    .float#{$infix}-left  { @include float-left; }
-    .float#{$infix}-right { @include float-right; }
-    .float#{$infix}-none  { @include float-none; }
+    .float#{$infix}-left  { float: left !important; }
+    .float#{$infix}-right { float: right !important; }
+    .float#{$infix}-none  { float: none !important; }
   }
 }
 
@@ -7774,6 +8141,26 @@ a.close.disabled {
 .vw-100 { width: 100vw !important; }
 .vh-100 { height: 100vh !important; }
 
+//
+// Stretched link
+//
+
+.stretched-link {
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    // Just in case `pointer-events: none` is set on a parent
+    pointer-events: auto;
+    content: "";
+    // IE10 bugfix, see https://stackoverflow.com/questions/16947967/ie10-hover-pseudo-class-doesnt-work-without-background-color
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
 // stylelint-disable declaration-no-important
 
 // Margin and Padding
@@ -7854,7 +8241,7 @@ a.close.disabled {
 // Text
 //
 
-.text-monospace { font-family: $font-family-monospace; }
+.text-monospace { font-family: $font-family-monospace !important; }
 
 // Alignment
 
@@ -7912,20 +8299,27 @@ a.close.disabled {
 
 .text-decoration-none { text-decoration: none !important; }
 
+.text-break {
+  word-break: break-word !important; // IE & < Edge 18
+  overflow-wrap: break-word !important;
+}
+
 // Reset
 
 .text-reset { color: inherit !important; }
+
+// stylelint-disable declaration-no-important
 
 //
 // Visibility utilities
 //
 
 .visible {
-  @include invisible(visible);
+  visibility: visible !important;
 }
 
 .invisible {
-  @include invisible(hidden);
+  visibility: hidden !important;
 }
 
 
@@ -7983,7 +8377,7 @@ a.close.disabled {
     }
     pre,
     blockquote {
-      border: $border-width solid $gray-500;   // Bootstrap custom code; using `$border-width` instead of 1px
+      border: $border-width solid $gray-500; // Bootstrap custom code; using `$border-width` instead of 1px
       page-break-inside: avoid;
     }
 
@@ -10652,6 +11046,7 @@ body .wrapper-main{
     &.basket,
     &.checkout,
     &.contact,
+    &.wishlist,
     &.myaccount {
         &:not(.checkout):not(.basket) {
             background-color: $white;
@@ -10757,8 +11152,13 @@ a:active {
     float: none;
 }
 
-.bg-white {
-    background-color: $white !important;
+.flex-center {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .text-wrap {
@@ -10769,12 +11169,23 @@ a:active {
     z-index: 1;
 }
 
+.sticky-element.is-sticky {
+    z-index: $zindex-sticky !important;
+}
+
+.inline-select {
+    margin-left: -7px;
+    text-decoration: underline;
+    font-weight: inherit;
+}
+
 @each $color, $value in $theme-colors {
     @include bg-variant(".bg-#{$color}", $value);
     .bg-#{$color} {
         @include context-bg($value);
     }
 }
+
 html {
 	font-size: $font-size-root;
 }
@@ -10943,6 +11354,22 @@ body {
   }
 }
 
+@include media-breakpoint-down(xs) {     
+    html.facebook {
+        .checkout .modal.show,
+        .myaccount .modal.show {
+            position: absolute !important;
+            -webkit-transform: translateZ(0);
+                    transform: translateZ(0);
+            min-height: 100vh;
+        }
+        body.modal-open {
+            position: relative !important;
+            overflow: auto !important;
+        }
+    }
+}
+
 // additional compatibility scss to bootstrap's reboot
 
 // prevent iOS standard zoom on input elements on focus
@@ -11066,6 +11493,11 @@ button:focus {
 
 	&.btn-medium {
 		min-width: 10rem;
+	}
+
+	&.btn-md {
+		padding-top: 0.8rem;
+		padding-bottom: 0.8rem;
 	}
 
 	&.btn-medium-large {
@@ -11453,7 +11885,7 @@ body.lb-disable-scrolling {
   display: inline-block;
   vertical-align: middle;
 }
-#single-carousel .owl-item img {
+.single-carousel .owl-item img {
   height: 300px;
 }
 
@@ -11810,7 +12242,7 @@ Custom classes
 }
 
 @include media-breakpoint-up(sm) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 500px;
   }
 }
@@ -11838,12 +12270,12 @@ Custom classes
   }
 }
 @include media-breakpoint-up(lg) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 600px;
   }
 }
 @include media-breakpoint-up(xl) {
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     height: 700px;
   }
 }
@@ -11851,12 +12283,12 @@ Custom classes
 /* Compatibility for IE */
 html.ie {
   // set width to maximal available size
-  #single-carousel .owl-item img {
+  .single-carousel .owl-item img {
     width: auto;
     display: inline-block;
   }
   // align image center
-  #single-carousel .owl-item > div {
+  .single-carousel .owl-item > div {
     text-align: center;
   }
 
@@ -12570,6 +13002,10 @@ html.ie {
         border-bottom-color: $popover-header-bg;
     }
 }
+.tooltip {
+    pointer-events: none;
+}
+
 
 // Forms
 .input-group-v{
@@ -13575,6 +14011,10 @@ $border-width: 1px;
  	}
  }
 
+ html.ie .always-visible-search {
+	min-height: 32px;
+ }
+
 // Searchbar in widget
 .top-bar {
     .cmp-search-box {
@@ -13687,6 +14127,7 @@ div:not(.top-bar) {
                     -ms-flex-item-align: center;
                         align-self: center;
                     color: $gray-dark;
+                    max-width: 0;
                 }
 
                 & > .autocomplete-image-container
@@ -13780,6 +14221,7 @@ div:not(.top-bar) {
 		& ul {
 			@include media-breakpoint-down(sm) {
 				-webkit-column-count: 2;
+				   -moz-column-count: 2;
 				        column-count: 2;
 			}
 		}
@@ -13892,7 +14334,8 @@ div:not(.top-bar) {
 // mobile
 $menu-bg-sm 			: $primary;
 $menu-breadcrumb-bg 	: $gray-darker;
-$menu-color-sm 			: $white;
+$menu-breadcrumb-color 	: color-yiq($menu-breadcrumb-bg);
+$menu-color-sm 			: color-yiq($primary);
 $menu-font-s-sm  		: 1.2em;
 // desktop
 $menu-bg-lg 			: transparent;
@@ -14137,7 +14580,6 @@ nav.navbar
 					transition 		: all .1s ease;
 					background 		: $menu-color-lg;
 					height 			: auto;
-					top 			: 100%;
 					text-align 		: center;
 					width 			: auto;
 					max-width 		: 25em;
@@ -14218,18 +14660,22 @@ nav.navbar.megamenu {
                 >ul.collapse {
                     background-color: $megamenu-bg;
                     -webkit-column-gap		: .5em;
+                       -moz-column-gap		: .5em;
                             column-gap		: .5em;
                     -webkit-column-rule		: 1px solid #dcdbd7;
+                       -moz-column-rule		: 1px solid #dcdbd7;
                             column-rule		: 1px solid #dcdbd7;
                     display			: none;
                     padding			: 1em 0;
                     min-height		: 7em;
                     max-height		: 86vh;  
                     -webkit-column-count	: 5;  
+                       -moz-column-count	: 5;  
                             column-count	: 5;
                     overflow-x		: auto;
                     overflow-y		: hidden;
                     -webkit-column-fill		: balance;
+                       -moz-column-fill		: balance;
                             column-fill		: balance;
 
                     li {
@@ -14304,7 +14750,13 @@ nav.navbar.megamenu {
 		        transform 	: translateX(0);
 	}
 
+	.sk-fading-circle .sk-circle:before,
+	.loading-animation > div {
+		background-color: $menu-color-sm;
+	}
+
 	ul.breadcrumb {
+		color      : $menu-breadcrumb-color;
 		background : $menu-breadcrumb-bg;
 		max-width  : initial;
 		font-size  : .8em;
@@ -15575,6 +16027,7 @@ html.ie .confirmation-order-list .cmp-order-item {
 
 				.qty-box {
 					margin: 0 0 5px auto;
+					height: 41px;
 		
 					.qty-input {
 						margin-left: auto;
@@ -17079,7 +17532,7 @@ html.ie {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 41px;
+    height: 100%;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
@@ -17087,6 +17540,7 @@ html.ie {
     .qty-input {
         outline: none;
         height: 100%;
+        min-height: 27px;
         width: 48px;
         padding: 0;
         text-align: center;
@@ -17108,15 +17562,18 @@ html.ie {
         border-left: none;
         border-radius: 0 $border-radius $border-radius 0;
         overflow: hidden;
+        height: 100%;
 
         .qty-btn {
             width: 100%;
             height: calc(50% - .5px);
+            min-height: 12px;
             text-align: center;
             -webkit-transition: all .2s cubic-bezier(0,0,.26,1);
             transition: all .2s cubic-bezier(0,0,.26,1);
             border-radius: $border-radius;
             cursor: pointer;
+            position: relative;
 
             &.disabled {
                 cursor: not-allowed;
@@ -17129,6 +17586,12 @@ html.ie {
 
             & > .qty-sign {
                 color: $gray;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                        transform: translateY(-50%);
             }
         }
 
@@ -17622,20 +18085,33 @@ html.ie {
 
     & i {
         margin-right: 5px;
+
+        &.fa-circle-o-notch {
+            color: inherit !important;
+        }
+    }
+
+    &:not(.active) {
+        i {
+            color: inherit !important;
+        }
     }
 
     &:hover {
       text-decoration: none;
-
-      i{
-        color: #d9534f!important;
-      }
+      
+        i {
+            color: #d9534f !important;
+            &.fa-circle-o-notch {
+                color: inherit !important;
+            }
+        }
     }
 
     &.active{
-      i{
-        color: #d9534f!important;
-      }
+        i {
+            color: inherit;
+        }
     }
 }
 
@@ -18719,7 +19195,8 @@ html.ios {
 		}
 	}
 }
-.single {
+.single,
+.page-singleitem {
     .list-item-carousel {
         .list-control-special{
             width: 5%;
@@ -18729,7 +19206,7 @@ html.ios {
         }
     }
 
-    #single-carousel {
+    .single-carousel {
         background: $white;
     }
 
@@ -18741,6 +19218,15 @@ html.ios {
 
     .title{
         line-height: 1.2;
+    }
+
+    .title-outer {
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            line-height: 1.1;
+        }
     }
 
     .producer{
@@ -18834,9 +19320,9 @@ html.ios {
     }
 
     .order-property-selection-info-popper {
-        position: absolute;
-        top: 6px;
-        right: 18px;
+        button.btn {
+            margin: 5px;
+        }
     }
 }
 
@@ -18989,6 +19475,80 @@ html.ios {
 
     .quantity-input-container {
         margin-right: 15px;
+    }
+}
+
+.v-s-boxes {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+
+    .v-s-box {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        margin: 0.5rem;
+        min-width: 40px;
+        min-height: 40px;
+        border: 1px solid $gray-lighter;
+        border-radius: $border-radius;
+        cursor: pointer;
+
+        &.active {
+            color: $primary;
+            border: 1px solid $primary;
+        }
+
+        &.invalid {
+            position: relative;
+            border-style: dashed;
+
+            & > span, img {
+                opacity: .5;
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background: linear-gradient(
+                    to top left,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0) calc(50% - 0.8px),
+                    $gray-lighter 50%,
+                    rgba(0, 0, 0, 0) calc(50% + 0.8px),
+                    rgba(0, 0, 0, 0) 100%
+                );
+            }
+        }
+    }
+
+    &.images {
+        .v-s-box:not(.empty-option) {
+            height: 40px;
+            width: 40px;
+
+            > img {
+                height: 100%;
+                width: 100%;
+                border-radius: $border-radius;
+                -o-object-fit: contain;
+                   object-fit: contain;
+            }
+        }
     }
 }
 
@@ -19929,6 +20489,16 @@ html.ie {
         }
 
     }
+
+    .widget-placeholder
+    {
+      padding-bottom: 10%;
+    }
+
+    .widget-placeholder p.description:empty
+    {
+      display: none;
+    }
 }
 
 .widget-item-list-caption
@@ -20093,7 +20663,6 @@ html.ie {
 
         > div
         {
-            max-width: 100%;
             -webkit-box-flex: 1;
                 -ms-flex: 1;
                     flex: 1;
@@ -20113,6 +20682,8 @@ html.ie {
 
         > .widget-inner
         {
+            max-width: none;
+
             [data-builder-child-container]
             {
                 min-height: 100px;
@@ -20204,6 +20775,11 @@ html.ie {
         padding: $spacer;
     }
 }
+
+html.ie .widget-grid .widget-inner-stacked {
+    display: block;
+}
+
 .nav-link.text-appearance.active
 {
     color: $nav-tabs-link-active-color !important;
@@ -20258,6 +20834,15 @@ html.ie {
                 margin-bottom: 1rem;
             }
         }
+    }
+}
+
+#page-header-parent > .widget {
+    width: 1200px;
+    background-color: $gray-lightest;
+    
+    &:not(.widget-grid) {
+        width: 1170px;
     }
 }
 
@@ -20325,17 +20910,17 @@ header .widget
     }
 }
 
-@include media-breakpoint-down(xs)
+@include media-breakpoint-down(sm)
 {
-    .widget-grid .widget-inner.col-12.widget-stacked
+    .widget-grid .widget-inner.col-12.widget-stacked-mobile
     {
         padding-bottom: 1rem;
     }
 }
 
-@include media-breakpoint-between(sm, lg)
+@include media-breakpoint-only(md)
 {
-    .widget-grid .widget-inner.col-sm-12.widget-stacked
+    .widget-grid .widget-inner.col-md-12.widget-stacked-tablet
     {
         padding-bottom: 2rem;
     }
@@ -20430,7 +21015,6 @@ header .widget
             @include button-variant($value, $value);
         }
 
-
         a.text-appearance,
         .btn-appearance
         {
@@ -20441,6 +21025,18 @@ header .widget
                 -webkit-text-decoration-color: darken($value, 7.5);
                         text-decoration-color: darken($value, 7.5);
             }
+        }
+
+        a:hover {
+            i.text-appearance {
+                color: darken($value, 7.5) !important;
+            } 
+        }
+
+        .border-appearance.active,
+        .border-appearance:hover
+        {
+            border-color: $value;
         }
 
         .pagination .page-item
@@ -20488,6 +21084,21 @@ header .widget
     .description
     {
         font-style: italic;
+    }
+}
+
+.widget-attribute
+{
+    @each $color, $value in $shop-builder-colors
+    {
+        &.widget-#{$color}
+        {
+            .v-s-boxes .v-s-box.active
+            {
+                color: $value !important;
+                border-color: $value !important;
+            }
+        }
     }
 }
 

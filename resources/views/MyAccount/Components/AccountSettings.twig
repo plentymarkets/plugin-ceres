@@ -30,7 +30,7 @@
             <div ref="accountEmailModal">
                 <div class="modal fade">
                     <div class="modal-dialog" role="document">
-                        <form class="modal-content">
+                        <form class="modal-content" @submit.prevent>
                             <div class="modal-header">
                                 <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChangeEmail") }}</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="clearFields">
@@ -55,11 +55,12 @@
                                 <div class="row my-2">
                                     <div class="col-12">
                                         <div v-show="!matchEmail" class="text-danger">{{ trans("Ceres::Template.myAccountCorrectEmail") }}</div>
+                                        <div v-show="matchOldEmail" class="text-danger">{{ trans("Ceres::Template.myAccountOldEmail") }}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-appearance btn-block" @click="saveAccountEmail" :class="{'disabled': !isValidEmail || isLoading}">
+                                <button type="submit" class="btn btn-primary btn-appearance btn-block" @click="saveAccountEmail" :class="{'disabled': !isValidEmail || isLoading}">
                                     <i class="fa fa-check" aria-hidden="true"></i> 
                                     <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
                                 </button>
@@ -73,7 +74,7 @@
         <div ref="accountPasswordModal">
             <div class="modal fade">
                 <div class="modal-dialog" role="document">
-                    <form class="modal-content">
+                    <form class="modal-content" @submit.prevent>
                         <div class="modal-header">
                             <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChangePassword") }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="clearFields">
@@ -88,16 +89,34 @@
                                         <label for="old_password">{{ trans("Ceres::Template.myAccountOldPassword") }}</label>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="input-unit">
-                                        <input type="password" name="new_password" autocomplete="new-password" v-model="newPassword">
-                                        <label for="new_password">{{ trans("Ceres::Template.myAccountNewPassword") }}</label>
+                                <div class="col-12" ref="passwordFormControl">
+                                    <div class="input-unit" data-validate="password">
+                                        <popper v-cloak trigger="focus" placement="left" ref="passwordHint">
+                                            {% set uid_pwd = uid() %}
+                                            <template #handle>
+                                                <input type="password" id="{{ uid_pwd }}" name="password" autocomplete="new-password" v-model="newPassword">
+                                            </template>
+
+                                            <template #title>
+                                                <div>
+                                                    {{ trans("Ceres::Template.regPasswordHintTitle") }}
+                                                </div>
+                                            </template>
+
+                                            <template #content>
+                                                <ul class="pl-3">
+                                                    <li>{{ trans("Ceres::Template.regPasswordHintLength") }}</li>
+                                                    <li>{{ trans("Ceres::Template.regPasswordHintDigit") }}</li>
+                                                    <li>{{ trans("Ceres::Template.regPasswordHintChar") }}</li>
+                                                </ul>
+                                            </template>
+                                        </popper>
+                                        <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.myAccountNewPassword") }}</label>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="input-unit no-bottom">
-                                        <input type="password" name="confirm_password" autocomplete="new-password" v-model="confirmPassword">
-                                        <label for="confirm_password">{{ trans("Ceres::Template.myAccountRepeatPassword") }}</label>
+                                    <div class="input-unit" data-validate="password">
+                                        {% set uid_pwd_repeat = uid() %}
+                                        <input type="password" id="{{ uid_pwd_repeat }}" name="password" autocomplete="new-password" v-model="confirmPassword">
+                                        <label for="{{ uid_pwd_repeat }}">{{ trans("Ceres::Template.myAccountRepeatPassword") }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -108,9 +127,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary btn-appearance btn-block" @click="saveAccountPassword" :class="{'disabled': !isValidPassword || isLoading}">
-                                <i class="fa fa-check" aria-hidden="true"></i> 
-                                <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
+                            <button type="submit" class="btn btn-primary btn-appearance btn-block" @click="validatePassword" :class="{'disabled': !isValidPassword || isLoading}">
+                                    <i class="fa fa-check" aria-hidden="true"></i> 
+                                    <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
                             </button>
                         </div>
                     </form>

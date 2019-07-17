@@ -3,9 +3,9 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    <title>404 | {{ trans("Ceres::Template.headerCompanyName") }}</title>
-    <meta name="robots" content="NOINDEX">
-
+    {% embed getPartial('page-metadata') %}
+        {% block title "404" %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
