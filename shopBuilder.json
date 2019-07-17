@@ -132,9 +132,14 @@
             "position": 900
         },
         {
+            "key": "form",
+            "label": "Widget.categoryForms",
+            "position": 1000
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 1000
+            "position": 10000
         }
     ],
     "globalSettings": {

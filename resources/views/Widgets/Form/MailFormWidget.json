@@ -3,7 +3,8 @@
     "label": "Widget.mailFormLabel",
     "previewImageURL": "/images/widgets/newsletter.svg",
     "type": "default",
-    "position": 400,
+    "categories": ["form"],
+    "position": 100,
     "widgetClass": "Ceres\\Widgets\\Form\\MailFormWidget",
     "allowedNestingTypes": ["structure", "static", "default", "form"],
     "settings": {

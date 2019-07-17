@@ -3,7 +3,8 @@
     "label": "Widget.textInputLabel",
     "previewImageURL": "/images/widgets/newsletter.svg",
     "type": "form",
-    "position": 400,
+    "categories": ["form"],
+    "position": 300,
     "widgetClass": "Ceres\\Widgets\\Form\\TextInputWidget",
     "settings": {
         "key": {
