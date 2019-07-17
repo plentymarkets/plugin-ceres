@@ -1,10 +1,12 @@
-{% set formFieldId  = uid() %}
+{% set formFieldId  = widget.settings.key.mobile | default(uid()) %}
 {% set isRequired   = widget.settings.isRequired.mobile %}
 {% set label        = widget.settings.label.mobile %}
 {% set fixedHeight  = widget.settings.fixedHeight.mobile %}
 {% set rows         = widget.settings.rows.mobile %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
-<div class="col-12">
+<div{% if customClass | length > 0 %} class="{{ customClass }}"{% endif %}{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="input-unit{% if isRequired %} required{% endif %} textarea">
         <textarea
                 name="{{ formFieldId }}"

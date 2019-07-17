@@ -6,6 +6,15 @@
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Form\\SelectionWidget",
     "settings": {
+        "key": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldKeyLabel",
+                "tooltip": "Widget.mailFormFieldKeyTooltip"
+            }
+        },
         "label": {
             "type": "text",
             "required": false,
@@ -57,6 +66,7 @@
                 "name": "Widget.selectionOptionsLabel",
                 "tooltip": "Widget.selectionOptionsTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

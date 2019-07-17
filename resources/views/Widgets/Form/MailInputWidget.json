@@ -6,6 +6,15 @@
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Form\\MailInputWidget",
     "settings": {
+        "key": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldKeyLabel",
+                "tooltip": "Widget.mailFormFieldKeyTooltip"
+            }
+        },
         "label": {
             "type": "text",
             "required": false,
@@ -39,6 +48,7 @@
             "options": {
                 "name": "Widget.mailInputReplyToMailLabel"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

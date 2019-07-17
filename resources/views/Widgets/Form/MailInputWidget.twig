@@ -1,10 +1,12 @@
-{% set formFieldId  = uid() %}
+{% set formFieldId  = widget.settings.key.mobile | default(uid()) %}
 {% set isRequired   = widget.settings.isRequired.mobile %}
 {% set label        = widget.settings.label.mobile %}
 {% set allowMailCC  = widget.settings.allowMailCC.mobile %}
 {% set replyToMail  = widget.settings.replyToMail.mobile %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
-<div class="w-100">
+<div{% if customClass | length > 0 %} {{ customClass }}"{% endif %}{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="input-unit{% if isRequired %} required{% endif %}{% if allowMailCC %} m-b-0{% endif %}">
         <input name="{{ formFieldId }}"
                type="text"

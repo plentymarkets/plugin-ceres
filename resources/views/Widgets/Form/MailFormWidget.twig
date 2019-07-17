@@ -3,9 +3,12 @@
 {% set mailTarget   = widget.settings.mailTarget.mobile %}
 {% set subject      = widget.settings.subject.mobile %}
 {% set ccAddresses  = widget.settings.ccAddresses.mobile %}
+{% set bccAddresses = widget.settings.bccAddresses.mobile %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
 {% set formId = uid() %}
-<div class="widget widget-contact-form widget-{{ appearance }}">
+<div class="widget widget-contact-form widget-{{ appearance }}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
         <form class="row" id="{{ formId }}" @submit="$store.dispatch('sendContactForm', $event)">
 
@@ -19,15 +22,13 @@
                 <input type="hidden" data-mail="cc" value="{{ ccAddress }}">
             {% endfor %}
 
+            {% for bccAddress in bccAddresses if bccAddress | length > 0 %}
+                <input type="hidden" data-mail="bcc" value="{{ bccAddress }}">
+            {% endfor %}
+
             <div class="col-12 cmp-contact"{% if isPreview %} data-builder-child-container="formFields"{% endif %}>
                 {{ children.formFields | raw }}
             </div>
-
-            {% if hasRequiredFields %}
-                <div class="col-12">
-                    <p class="pull-right">* {{ trans("Ceres::Template.contactRequiredField") }}</p>
-                </div>
-            {% endif %}
 
             <div class="col-12">
                 <button type="submit" class="btn btn-{{ appearance }}">{{ labelSubmit }}</button>

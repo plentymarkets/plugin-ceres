@@ -11,6 +11,7 @@ function readFormOptions(form, formData)
         recipient: "",
         subject: "",
         cc: [],
+        bcc: [],
         replyTo: {
             mailAddress: null,
             name: ""
@@ -34,6 +35,19 @@ function readFormOptions(form, formData)
                     else if (formData.hasOwnProperty(element.value) && isMail(formData[element.value].value))
                     {
                         formOptions.cc.push(formData[element.value].value);
+                    }
+                }
+                break;
+            case "bcc":
+                if (element.value)
+                {
+                    if (isMail(element.value))
+                    {
+                        formOptions.bcc.push(element.value);
+                    }
+                    else if (formData.hasOwnProperty(element.value) && isMail(formData[element.value].value))
+                    {
+                        formOptions.bcc.push(formData[element.value].value);
                     }
                 }
                 break;

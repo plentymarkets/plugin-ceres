@@ -50,6 +50,15 @@
                 "tooltip": "Widget.mailFormCCAddressesTooltip"
             }
         },
+        "bccAddresses": {
+            "type": "text",
+            "required": false,
+            "isList": "[1,]",
+            "options": {
+                "name": "Widget.mailFormBCCAddressesLabel",
+                "tooltip": "Widget.mailFormBCCAddressesTooltip"
+            }
+        },
         "spacing":"@include(spacing)"
     }
 }
