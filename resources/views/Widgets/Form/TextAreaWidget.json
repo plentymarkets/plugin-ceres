@@ -51,7 +51,7 @@
                 "name": "Widget.mailFormFieldIsRequiredLabel",
                 "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
             }
-        }
-    },
-    "spacing":"@include(spacingMargin)"
+        },
+        "spacing":"@include(spacingMargin)"
+    }
 }
