@@ -8,7 +8,7 @@
 {% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
 {% set formId = uid() %}
-<div class="widget widget-contact-form widget-{{ appearance }}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+<div class="widget widget-contact-form{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
         <form class="row" id="{{ formId }}" @submit="$store.dispatch('sendContactForm', $event)">
 
@@ -30,7 +30,7 @@
                 {{ children.formFields | raw }}
             </div>
 
-            <div class="col-12">
+            <div class="col-12 text-right">
                 <button type="submit" class="btn btn-{{ appearance }}">{{ labelSubmit }}</button>
             </div>
         </form>

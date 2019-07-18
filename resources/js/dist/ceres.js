@@ -48400,8 +48400,9 @@ function readFormOptions(form, formData) {
     recipient: "",
     subject: "",
     cc: [],
+    bcc: [],
     replyTo: {
-      mailAddress: null,
+      mail: null,
       name: ""
     }
   };
@@ -48427,12 +48428,23 @@ function readFormOptions(form, formData) {
 
             break;
 
+          case "bcc":
+            if (element.value) {
+              if ((0, _strings.isMail)(element.value)) {
+                formOptions.bcc.push(element.value);
+              } else if (formData.hasOwnProperty(element.value) && (0, _strings.isMail)(formData[element.value].value)) {
+                formOptions.bcc.push(formData[element.value].value);
+              }
+            }
+
+            break;
+
           case "reply-to-address":
             if (element.value) {
               if ((0, _strings.isMail)(element.value)) {
-                formOptions.replyTo.mailAddress = element.value;
+                formOptions.replyTo.mail = element.value;
               } else if (formData.hasOwnProperty(element.value) && (0, _strings.isMail)(formData[element.value].value)) {
-                formOptions.replyTo.mailAddress = formData[element.value].value;
+                formOptions.replyTo.mail = formData[element.value].value;
               }
             }
 
@@ -48508,7 +48520,7 @@ var actions = {
       var formOptions = readFormOptions(event.target, formData);
 
       _ApiService["default"].post("/rest/io/customer/contact/mail", {
-        mailData: formData,
+        data: formData,
         recipient: formOptions.recipient,
         subject: formOptions.subject || "",
         cc: formOptions.cc,
