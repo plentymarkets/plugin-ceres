@@ -12,7 +12,7 @@ Vue.component("google-maps-widget",
             address:
                 {
                     type: String,
-                    required: false
+                    required: true
                 },
             lat:
                 {
