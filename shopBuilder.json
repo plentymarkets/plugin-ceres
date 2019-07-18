@@ -60,6 +60,10 @@
             {
                 "label": "Widget.presetGTCDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
+            },
+            {
+                "label": "Widget.presetContactDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
             }
         ],
         "checkout": [
