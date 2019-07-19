@@ -23,14 +23,6 @@
                 "tooltipText": "Widget.contactDataCompanyNameTooltip"
             }
         },
-        "ceo": {
-            "type": "text",
-            "required": false,
-            "options": {
-                "name": "Widget.contactDataCeoLabel",
-                "tooltipText": "Widget.contactDataCeoTooltip"
-            }
-        },
         "address": {
             "type": "textarea",
             "required": false,
@@ -63,36 +55,12 @@
                 "tooltipText": "Widget.contactDataFaxTooltip"
             }
         },
-        "hotline": {
-            "type": "text",
-            "required": false,
-            "options": {
-                "name": "Widget.contactDataHotlineLabel",
-                "tooltipText": "Widget.contactDataHotlineTooltip"
-            }
-        },
         "openingTimes": {
             "type": "textarea",
             "required": false,
             "options": {
                 "name": "Widget.contactDataopeningTimesLabel",
                 "tooltipText": "Widget.contactDataOpeningTimesTooltip"
-            }
-        },
-        "timezone": {
-            "type": "text",
-            "required": false,
-            "options": {
-                "name": "Widget.contactDataTimezoneLabel",
-                "tooltipText": "Widget.contactDataTimezoneTooltip"
-            }
-        },
-        "vat": {
-            "type": "text",
-            "required": false,
-            "options": {
-                "name": "Widget.contactDataVatLabel",
-                "tooltipText": "Widget.contactDataVatTooltip"
             }
         }
     }

@@ -3274,6 +3274,159 @@
         }
     },
     {
+        "identifier": "Ceres::ContactDataWidget",
+        "label": "Widget.contactDataLabel",
+        "previewImageURL": "/images/widgets/contact-data.svg",
+        "type": "default",
+        "categories": [
+            "contact"
+        ],
+        "position": 200,
+        "widgetClass": "Ceres\\Widgets\\Contact\\ContactDataWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            },
+            "companyName": {
+                "type": "text",
+                "required": false,
+                "options": {
+                    "name": "Widget.contactDataCompanyNameLabel",
+                    "tooltipText": "Widget.contactDataCompanyNameTooltip"
+                }
+            },
+            "address": {
+                "type": "textarea",
+                "required": false,
+                "options": {
+                    "name": "Widget.contactDataAddressLabel",
+                    "tooltipText": "Widget.contactDataAddressTooltip"
+                }
+            },
+            "email": {
+                "type": "text",
+                "required": false,
+                "options": {
+                    "name": "Widget.contactDataEmailLabel",
+                    "tooltipText": "Widget.contactDataEmailTooltip"
+                }
+            },
+            "fon": {
+                "type": "text",
+                "required": false,
+                "options": {
+                    "name": "Widget.contactDataFonLabel",
+                    "tooltipText": "Widget.contactDataFonTooltip"
+                }
+            },
+            "fax": {
+                "type": "text",
+                "required": false,
+                "options": {
+                    "name": "Widget.contactDataFaxLabel",
+                    "tooltipText": "Widget.contactDataFaxTooltip"
+                }
+            },
+            "openingTimes": {
+                "type": "textarea",
+                "required": false,
+                "options": {
+                    "name": "Widget.contactDataopeningTimesLabel",
+                    "tooltipText": "Widget.contactDataOpeningTimesTooltip"
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::AddressWidget",
         "label": "Widget.addressLabel",
         "previewImageURL": "/images/widgets/address.svg",
