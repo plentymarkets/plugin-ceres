@@ -134,6 +134,10 @@ class ShopWizardService
         $data = array_merge($defaultData, $globalData, $pluginData);
 
 
+        $data['settingsSelection_displayedInfo'] = isset($data['displayInfo']) && count($data['displayInfo']) ? true : false;
+        $data['settingsSelection_paginationSorting'] = isset($data['paginationStep']) && count($data['paginationStep']) ? true : false;
+        $data['settingsSelection_languages'] = isset($data['languages']) && count($data['languages']) ? true : false;
+
 
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
             $data['setAllRequiredAssistants'] = 'true';

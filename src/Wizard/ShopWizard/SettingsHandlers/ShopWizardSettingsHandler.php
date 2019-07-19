@@ -53,7 +53,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 $webstoreId = $data['client'];
             }
 
-            if (empty($pluginSetId) && !empty($data['pluginSet'])) {
+            if (empty($pluginSetId) && $data['pluginSet']!== 0) {
                 $pluginSetId = $data['pluginSet'];
             }
 

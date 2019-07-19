@@ -8,6 +8,7 @@
 
 namespace Ceres\Wizard\ShopWizard\DataSource;
 
+use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator;
 use Plenty\Modules\Wizard\Services\DataSources\BaseWizardDataSource;
 use Ceres\Wizard\ShopWizard\Services\ShopWizardService;
@@ -88,6 +89,21 @@ class ShopWizardDataSource extends BaseWizardDataSource
      * @param array $data
      */
     public function finalize(string $optionId = 'default', array $data = []) {
+        list($webstore,$pluginSet) = explode(".", $optionId);
+
+        if (empty($pluginSet)) {
+            $settingsService = pluginApp(DefaultSettingsService::class);
+
+            $hasShippingMethod = $settingsService->hasShippingMethods();
+            $hasShippingProfile = $settingsService->hasShippingProfiles();
+            $hasPaymentMethod = $settingsService->hasPaymentMethods();
+            $hasShippingCountry = $settingsService->hasShippingCountries();
+
+            if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
+                $data['setAllRequiredAssistants'] = 'true';
+            }
+
+        }
         $this->requiredSettingsDataValidator->validateOrFail($data);
     }
 
