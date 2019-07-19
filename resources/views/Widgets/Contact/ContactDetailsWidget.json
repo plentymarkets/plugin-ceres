@@ -1,11 +1,11 @@
 {
-    "identifier": "Ceres::ContactDataWidget",
-    "label": "Widget.contactDataLabel",
+    "identifier": "Ceres::ContactDetailsWidget",
+    "label": "Widget.contactDetailsLabel",
     "previewImageURL": "/images/widgets/contact-data.svg",
     "type": "default",
     "categories": ["contact"],
-    "position": 200,
-    "widgetClass": "Ceres\\Widgets\\Contact\\ContactDataWidget",
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Contact\\ContactDetailsWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {
@@ -19,48 +19,48 @@
             "type": "text",
             "required": false,
             "options": {
-                "name": "Widget.contactDataCompanyNameLabel",
-                "tooltipText": "Widget.contactDataCompanyNameTooltip"
+                "name": "Widget.contactDetailsCompanyNameLabel",
+                "tooltipText": "Widget.contactDetailsCompanyNameTooltip"
             }
         },
         "address": {
             "type": "textarea",
             "required": false,
             "options": {
-                "name": "Widget.contactDataAddressLabel",
-                "tooltipText": "Widget.contactDataAddressTooltip"
+                "name": "Widget.contactDetailsAddressLabel",
+                "tooltipText": "Widget.contactDetailsAddressTooltip"
             }
         },
-        "email": {
+        "phone": {
             "type": "text",
             "required": false,
             "options": {
-                "name": "Widget.contactDataEmailLabel",
-                "tooltipText": "Widget.contactDataEmailTooltip"
-            }
-        },
-        "fon": {
-            "type": "text",
-            "required": false,
-            "options": {
-                "name": "Widget.contactDataFonLabel",
-                "tooltipText": "Widget.contactDataFonTooltip"
+                "name": "Widget.contactDetailsPhoneLabel",
+                "tooltipText": "Widget.contactDetailsPhoneTooltip"
             }
         },
         "fax": {
             "type": "text",
             "required": false,
             "options": {
-                "name": "Widget.contactDataFaxLabel",
-                "tooltipText": "Widget.contactDataFaxTooltip"
+                "name": "Widget.contactDetailsFaxLabel",
+                "tooltipText": "Widget.contactDetailsFaxTooltip"
             }
         },
-        "openingTimes": {
+        "email": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDetailsEmailLabel",
+                "tooltipText": "Widget.contactDetailsEmailTooltip"
+            }
+        },
+        "businessTimes": {
             "type": "textarea",
             "required": false,
             "options": {
-                "name": "Widget.contactDataopeningTimesLabel",
-                "tooltipText": "Widget.contactDataOpeningTimesTooltip"
+                "name": "Widget.contactDetailsBusinessTimesLabel",
+                "tooltipText": "Widget.contactDetailsBusinessTimesTooltip"
             }
         }
     }

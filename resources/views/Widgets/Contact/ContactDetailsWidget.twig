@@ -1,0 +1,79 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set address       = widget.settings.address.mobile %}
+{% set email         = widget.settings.email.mobile %}
+{% set phone         = widget.settings.phone.mobile %}
+{% set fax           = widget.settings.fax.mobile %}
+{% set businessTimes = widget.settings.businessTimes.mobile %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% if isPreview or companyName | trim is not empty or address | trim is not empty or phone | trim is not empty or fax | trim is not empty or email | trim is not empty or businessTimes | trim is not empty %}
+    <div class="widget widget-contact-details{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
+        <div class="contact-card">
+            {% if isPreview or address | trim is not empty %}
+                <div class="contact-card-inner">
+                    <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
+                    <p class="d-inline-block align-top" {{ WidgetHelper.makeEditable("address", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+                        {{ WidgetHelper.editableTwig(isPreview, address | raw) }}
+                    </p>
+
+                    <hr>
+                    {{ address | raw }}
+                    <hr>
+                    {{ address | raw }}
+                    <hr>
+                </div>
+            {% endif %}
+            {% if phone | trim is not empty %}
+                <div class="contact-card-inner">
+                    <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+                    <p class="my-0 d-inline-block align-top">
+                        <a href="tel:{{ phone | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                            <span class="d-inline-block">{{ phone }}</span>
+                        </a>
+                    </p>
+                </div>
+            {% endif %}
+
+            {% if fax | trim is not empty %}
+                <div class="contact-card-inner">
+                    <i class="fa fa-fw fa-fax" aria-hidden="true"></i>
+                    <p class="my-0 d-inline-block align-top">
+                        <a href="fax:{{ fax | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                            <span class="d-inline-block">{{ fax }}</span>
+                        </a>
+                    </p>
+                </div>
+            {% endif %}
+
+            {% if email | trim is not empty %}
+                <div class="contact-card-inner">
+                    <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
+                    <p class="my-0 d-inline-block align-top">
+                        <a href="mailto:{{ email }}">
+                            <span class="d-inline-block">{{ email }}</span>
+                        </a>
+                    </p>
+                </div>
+            {% endif %}
+            
+            {% if isPreview or businessTimes | trim is not empty %}
+                <div class="contact-card-inner">
+                    <i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
+                    <p class="mt-3 mb-0">
+                        <span class="d-inline-block align-top" {{ WidgetHelper.makeEditable("businessTimes", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+                            {{ WidgetHelper.editableTwig(isPreview, businessTimes | raw) }}
+                        </span>
+                    </p>
+                </div>
+            {% endif %}
+            
+        </div>
+    </div>
+{% endif %}
