@@ -100,7 +100,11 @@ class MappingService
                 $matchedValue = floatval($value);
                 break;
             case "concatenated":
-                $matchedValue = $scope == 'display' ? explode(", ", $value) : implode($value, ", ");
+                if ( $scope == 'display') {
+                    $matchedValue = $value != "" ? explode(", ", $value) : [];
+                } else {
+                    $matchedValue = implode($value, ", ");
+                }
                 break;
         }
 

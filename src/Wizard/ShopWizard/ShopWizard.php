@@ -13,6 +13,7 @@ use Ceres\Wizard\ShopWizard\Steps\Builder\CurrencyStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\DefaultSettingsStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\DisplayedInformationStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\OnlineStoreStep;
+use Ceres\Wizard\ShopWizard\Steps\Builder\PaginationStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\RequiredSettingsStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\SettingsSelectionStep;
 use Plenty\Modules\Wizard\Services\WizardProvider;
@@ -35,6 +36,7 @@ class ShopWizard extends WizardProvider
         $onlineStoreStep = pluginApp(OnlineStoreStep::class);
         $currencyStep = pluginApp(CurrencyStep::class);
         $displayInfoStep = pluginApp(DisplayedInformationStep::class);
+        $paginationStep = pluginApp(PaginationStep::class);
 
 
         return [
@@ -61,6 +63,7 @@ class ShopWizard extends WizardProvider
                 "onlineStoreStep" => $onlineStoreStep->generateStep(),
                 "currencyStep" => $currencyStep->generateStep(),
                 "displayInfoStep" => $displayInfoStep->generateStep(),
+                "paginationStep" => $paginationStep->generateStep(),
             ]
         ];
     }

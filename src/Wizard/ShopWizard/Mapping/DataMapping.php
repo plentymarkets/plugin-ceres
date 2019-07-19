@@ -197,6 +197,56 @@ class DataMapping
             "type" => "string",
             "global" => false
         ],
+        "paginationStep_displayPagination" => [
+            "field" => "pagination.position",
+            "type" => "string",
+            "global" => false
+        ],
+        "paginationStep_showFirstPage" => [
+            "field" => "pagination.showFirstPage",
+            "type" => "string",
+            "global" => false
+        ],
+        "paginationStep_showLastPage" => [
+            "field" => "pagination.showLastPage",
+            "type" => "string",
+            "global" => false
+        ],
+        "paginationStep_columnsPerPage" => [
+            "field" => "pagination.columnsPerPage",
+            "type" => "string",
+            "global" => false
+        ],
+        "paginationStep_rowsPerPage" => [
+            "field" => "pagination.rowsPerPage",
+            "type" => "concatenated",
+            "global" => false
+        ],
+        "pagination_itemSortBy" => [
+            "field" => "sort.data",
+            "type" => "concatenated",
+            "global" => false
+        ],
+        "pagination_defaultSorting" => [
+            "field" => "sort.defaultSorting",
+            "type" => "string",
+            "global" => false
+        ],
+        "pagination_sortingCat1" => [
+            "field" => "sorting.priorityCategory1",
+            "type" => "string",
+            "global" => false
+        ],
+        "pagination_sortingCat2" => [
+            "field" => "sorting.priorityCategory2",
+            "type" => "string",
+            "global" => false
+        ],
+        "pagination_sortingCat3" => [
+            "field" => "sorting.priorityCategory3",
+            "type" => "string",
+            "global" => false
+        ],
     ];
 
     public $globalMapping = [];
