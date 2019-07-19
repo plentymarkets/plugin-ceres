@@ -14,23 +14,7 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "spacing":"@include(spacing)",
-        "companyName": {
-            "type": "text",
-            "required": false,
-            "options": {
-                "name": "Widget.contactDetailsCompanyNameLabel",
-                "tooltipText": "Widget.contactDetailsCompanyNameTooltip"
-            }
-        },
-        "address": {
-            "type": "textarea",
-            "required": false,
-            "options": {
-                "name": "Widget.contactDetailsAddressLabel",
-                "tooltipText": "Widget.contactDetailsAddressTooltip"
-            }
-        },
+        "spacing":"@include(spacingMargin)",
         "phone": {
             "type": "text",
             "required": false,
@@ -53,14 +37,6 @@
             "options": {
                 "name": "Widget.contactDetailsEmailLabel",
                 "tooltipText": "Widget.contactDetailsEmailTooltip"
-            }
-        },
-        "businessTimes": {
-            "type": "textarea",
-            "required": false,
-            "options": {
-                "name": "Widget.contactDetailsBusinessTimesLabel",
-                "tooltipText": "Widget.contactDetailsBusinessTimesTooltip"
             }
         }
     }
