@@ -4066,7 +4066,7 @@
             "labelSubmit": {
                 "type": "text",
                 "required": false,
-                "defaultValue": "ok",
+                "defaultValue": "",
                 "options": {
                     "name": "Widget.mailFormSubmitLabel",
                     "tooltip": "Widget.mailFormSubmitTooltip"

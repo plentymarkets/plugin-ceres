@@ -34,7 +34,10 @@
             </div>
 
             <div class="col-12 text-right">
-                <button type="submit" class="btn btn-{{ appearance }}">{{ labelSubmit }}</button>
+                <button type="submit" class="btn btn-{{ appearance }}s">
+                    {{ labelSubmit | default(trans("Ceres::Template.contactSend")) }}
+                    <i class="fa fa-paper-plane-o ml-2" aria-hidden="true"></i>
+                </button>
             </div>
         </form>
     </div>
