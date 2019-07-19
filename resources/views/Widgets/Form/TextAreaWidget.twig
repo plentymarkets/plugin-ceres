@@ -10,13 +10,12 @@
 {% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 <div{% if spacingClasses | length > 0 %} class="{{ spacingClasses }}"{% endif %}{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div class="input-unit{% if isRequired %} required{% endif %} textarea">
+    <div class="input-unit{% if isRequired %} required{% endif %} textarea" {% if isRequired %}data-validate="text"{% endif %}>
         <textarea
                 name="{{ formFieldId }}"
                 id="{{ formFieldId }}"
                 rows="{{ rows }}"
-                {% if fixedHeight %}class="no-resize"{% endif %}
-                {% if formField.isRequired %}data-validate="text"{% endif %}>
+                {% if fixedHeight %}class="no-resize"{% endif %}>
         </textarea>
 
         <label for="{{ formFieldId }}">

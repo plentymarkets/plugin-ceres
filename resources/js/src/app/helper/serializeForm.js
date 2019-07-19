@@ -66,7 +66,7 @@ export function getLabel(inputElement)
         return "";
     }
 
-    const labelElement = (inputElement.labels || [])[0];
+    const labelElement = (inputElement.labels || Array.prototype.slice.call(inputElement.querySelectorAll("label")))[0];
 
     if (isDefined(labelElement))
     {

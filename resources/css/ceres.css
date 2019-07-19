@@ -18558,6 +18558,19 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   cursor: pointer;
 }
 
+.select-unit > label {
+  margin-bottom: .1rem;
+  font-weight: bold;
+}
+
+.select-unit .form-check {
+  margin-bottom: 0;
+}
+
+.select-unit.error {
+  color: #dc3545;
+}
+
 .input-feedback-container {
   margin-bottom: 15px;
 }

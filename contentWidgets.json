@@ -4238,7 +4238,7 @@
         "categories": [
             "form"
         ],
-        "position": 400,
+        "position": 500,
         "widgetClass": "Ceres\\Widgets\\Form\\SelectionWidget",
         "settings": {
             "key": {
@@ -4334,7 +4334,7 @@
         "categories": [
             "form"
         ],
-        "position": 500,
+        "position": 400,
         "widgetClass": "Ceres\\Widgets\\Form\\TextAreaWidget",
         "settings": {
             "key": {
@@ -4381,9 +4381,30 @@
                     "name": "Widget.mailFormFieldIsRequiredLabel",
                     "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
                 }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
             }
-        },
-        "spacing": "@include(spacingMargin)"
+        }
     },
     {
         "identifier": "Ceres::TextInputWidget",

@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/newsletter.svg",
     "type": "form",
     "categories": ["form"],
-    "position": 400,
+    "position": 500,
     "widgetClass": "Ceres\\Widgets\\Form\\SelectionWidget",
     "settings": {
         "key": {

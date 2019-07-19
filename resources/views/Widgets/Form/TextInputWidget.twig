@@ -9,20 +9,21 @@
 {% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-<div class="input-unit{% if isRequired %} required{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <input
-        name="{{ formFieldId }}"
-        type="text"
-        id="{{ formFieldId }}"
-        {% if isRequired %}data-validate="text"{% endif %}>
+<div{% if spacingClasses | length > 0 %} class="{{ spacingClasses }}"{% endif %}{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <div class="input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="text"{% endif %}>
+        <input
+            name="{{ formFieldId }}"
+            type="text"
+            id="{{ formFieldId }}">
 
-    <label for="{{ formFieldId }}">
-        {{ label }}{% if isRequired %}*{% endif %}
-    </label>
-    {% if isMailSubject %}
-        <input type="hidden" data-mail="subject" value="{{ formFieldId }}">
-    {% endif %}
-    {% if isReplyToName %}
-        <input type="hidden" data-mail="reply-to-name" value="{{ formFieldId }}">
-    {% endif %}
+        <label for="{{ formFieldId }}">
+            {{ label }}{% if isRequired %}*{% endif %}
+        </label>
+        {% if isMailSubject %}
+            <input type="hidden" data-mail="subject" value="{{ formFieldId }}">
+        {% endif %}
+        {% if isReplyToName %}
+            <input type="hidden" data-mail="reply-to-name" value="{{ formFieldId }}">
+        {% endif %}
+    </div>
 </div>

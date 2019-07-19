@@ -45620,7 +45620,7 @@ function getLabel(inputElement) {
     return "";
   }
 
-  var labelElement = (inputElement.labels || [])[0];
+  var labelElement = (inputElement.labels || Array.prototype.slice.call(inputElement.querySelectorAll("label")))[0];
 
   if ((0, _utils.isDefined)(labelElement)) {
     var label = labelElement.textContent.trim();
