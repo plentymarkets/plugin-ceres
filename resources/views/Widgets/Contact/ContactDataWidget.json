@@ -1,0 +1,99 @@
+{
+    "identifier": "Ceres::ContactDataWidget",
+    "label": "Widget.contactDataLabel",
+    "previewImageURL": "/images/widgets/contact-data.svg",
+    "type": "default",
+    "categories": ["contact"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Contact\\ContactDataWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacing)",
+        "companyName": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataCompanyNameLabel",
+                "tooltipText": "Widget.contactDataCompanyNameTooltip"
+            }
+        },
+        "ceo": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataCeoLabel",
+                "tooltipText": "Widget.contactDataCeoTooltip"
+            }
+        },
+        "address": {
+            "type": "textarea",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataAddressLabel",
+                "tooltipText": "Widget.contactDataAddressTooltip"
+            }
+        },
+        "email": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataEmailLabel",
+                "tooltipText": "Widget.contactDataEmailTooltip"
+            }
+        },
+        "fon": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataFonLabel",
+                "tooltipText": "Widget.contactDataFonTooltip"
+            }
+        },
+        "fax": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataFaxLabel",
+                "tooltipText": "Widget.contactDataFaxTooltip"
+            }
+        },
+        "hotline": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataHotlineLabel",
+                "tooltipText": "Widget.contactDataHotlineTooltip"
+            }
+        },
+        "openingTimes": {
+            "type": "textarea",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataopeningTimesLabel",
+                "tooltipText": "Widget.contactDataOpeningTimesTooltip"
+            }
+        },
+        "timezone": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataTimezoneLabel",
+                "tooltipText": "Widget.contactDataTimezoneTooltip"
+            }
+        },
+        "vat": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDataVatLabel",
+                "tooltipText": "Widget.contactDataVatTooltip"
+            }
+        }
+    }
+}

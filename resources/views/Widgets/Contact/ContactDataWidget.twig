@@ -1,0 +1,89 @@
+{% set name =           widget.settings.companyName.mobile %}
+{% set ceo =            widget.settings.ceo.mobile %}
+{% set address =           widget.settings.address.mobile %}
+{% set email =          widget.settings.email.mobile %}
+{% set fon =            widget.settings.fon.mobile %}
+{% set fax =            widget.settings.fax.mobile %}
+{% set hotline =        widget.settings.hotline.mobile %}
+{% set vat =            widget.settings.vat.mobile %}
+{% set timezone =       widget.settings.timezone.mobile %}
+
+<div class="widget widget-contact-data">
+    <div class="contact-card">
+        {% if true or "name" in showData or "ceo" in showData or "street" in showData or "zip" in showData or "city" in showData or "country" in showData %}
+            <p class="contact-address">
+                <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
+                {% if true or "name" in showData or showData == 'all' %}
+                    <span class="d-inline-block">{{ name }}</span><br>
+                {% endif %}
+
+                {% if true or "ceo" in showData or showData == 'all' %}
+                    <span class="d-inline-block">{{ ceo }}</span> <br>
+                {% endif %}
+
+                {% if true or "street" in showData or showData == 'all' %}
+                    <span class="d-inline-block">{{ address }}</span> <br>
+                {% endif %}
+            </p>
+        {% endif %}
+        {% if true or "fon" in showData or showData == 'all' %}
+            <p class="my-0">
+                <a href="tel:{{ fon | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                    <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+                    <span class="d-inline-block">{{ fon }}</span>
+                </a>
+            </p>
+        {% endif %}
+
+        {% if true or "hotline" in showData or showData == 'all' %}
+            <p class="my-0">
+                <a href="tel:{{ hotline | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                    <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+                    <span class="d-inline-block">{{ hotline }}</span>
+                </a>
+            </p>
+        {% endif %}
+
+        {% if true or "fax" in showData or showData == 'all' %}
+            <p class="my-0">
+                <i class="fa fa-fw fa-fax" aria-hidden="true"></i>
+                <span class="d-inline-block">{{ fax }}</span>
+            </p>
+        {% endif %}
+
+        {% if true or "email" in showData or showData == 'all' %}
+            <p class="my-0">
+                <a href="mailto:{{ email }}">
+                    <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
+                    <span class="d-inline-block">{{ email }}</span>
+                </a>
+            </p>
+        {% endif %}
+
+        {% if true or "opening_times" in showData or showData == 'all' %}
+            <p class="my-0">
+                <i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
+                <span class="d-inline-block">
+                    {{ trans("Ceres::Template.contactOpeningTimes") }}
+                </span>
+            </p>
+        {% endif %}
+
+        {% if true or "timezone" in showData or showData == 'all' %}
+            <p class="my-0">
+                <i class="fa fa-fw fa-globe" aria-hidden="true"></i>
+                <span class="d-inline-block">{{ timezone }}</span>
+            </p>
+        {% endif %}
+
+        {% if true or "vatNumber" in showData or showData == 'all' %}
+            <p class="my-0 contact-vat-number">
+                <i class="fa fa-fw" aria-hidden="true"></i>
+                <span class="d-inline-block vat-number-field">{{ trans("Ceres::Template.contactVatNumber") }}:</span><br>
+                <span class="d-inline-block">{{ vat }}</span>
+            </p>
+        {% endif %}
+    </div>
+
+</div>
+

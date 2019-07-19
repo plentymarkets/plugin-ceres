@@ -132,9 +132,14 @@
             "position": 900
         },
         {
+            "key": "contact",
+            "label": "Widget.categoryContact",
+            "position": 1100
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 1000
+            "position": 10000
         }
     ],
     "globalSettings": {
