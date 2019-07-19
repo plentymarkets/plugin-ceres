@@ -266,6 +266,22 @@
                 "name": "Config.routingEnableRouteGtc"
             }
         },
+        "contactCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryContact"
+            }
+        },
+        "contactEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!contactCategory",
+            "options": {
+                "name": "Config.routingEnableRouteContact"
+            }
+      },
         "shippingCategory": {
             "type": "category",
             "required": false,
