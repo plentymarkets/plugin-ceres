@@ -23,11 +23,11 @@
 
     {% if allowMailCC %}
         <div class="form-check mt-2 mb-3">
+            <input class="form-check-input"
+                   data-mail="cc"
+                   value="{{ formFieldId }}"
+                   type="checkbox">
             <label class="form-check-label">
-                <input class="form-check-input"
-                       data-mail="cc"
-                       value="{{ formFieldId }}"
-                       type="checkbox">
                 {{ trans("Ceres::Template.contactSendMeACopy") }}
             </label>
         </div>
