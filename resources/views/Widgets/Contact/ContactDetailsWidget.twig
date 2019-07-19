@@ -20,6 +20,7 @@
     <div class="widget widget-contact-details widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
         {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="contact-card">
+        
             {% if isPreview or address | trim is not empty and address != emptyInlineEditingContent %}
                 <div>
                     <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
@@ -32,6 +33,7 @@
                     </div>
                 </div>
             {% endif %}
+
             {% if phone | trim is not empty %}
                 <div>
                     <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
@@ -77,6 +79,7 @@
                     </div>
                 </div>
             {% endif %}
+
         </div>
     </div>
 {% endif %}
