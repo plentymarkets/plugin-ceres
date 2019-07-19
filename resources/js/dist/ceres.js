@@ -44916,7 +44916,13 @@ var MonetaryFormatter = function () {
         case T_DECIMAL:
           {
             var numberOfDecimals = parseInt(partial.value);
-            var result = Math.round(value * Math.pow(10, numberOfDecimals)).toFixed(0).substr(-1 * numberOfDecimals, numberOfDecimals);
+            var result = /^\d+(?:\.(\d+))?$/g.exec(value);
+
+            if (!(0, _utils.isNullOrUndefined)(result) && !(0, _utils.isNullOrUndefined)(result[1])) {
+              result = result[1].substr(0, numberOfDecimals);
+            } else {
+              result = "";
+            }
 
             while (result.length < numberOfDecimals) {
               result = "0" + result;
@@ -44942,7 +44948,7 @@ var MonetaryFormatter = function () {
 
         default:
           {
-            console.warn("Unkown pattern type: " + partial.type);
+            console.warn("Unknown pattern type: " + partial.type);
             return "";
           }
       }
