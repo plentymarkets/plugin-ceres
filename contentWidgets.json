@@ -1295,6 +1295,64 @@
         }
     },
     {
+        "identifier": "Ceres::GoogleMapsWidget",
+        "label": "Widget.googleMapsLabel",
+        "previewImageURL": "/images/widgets/google-maps.svg",
+        "type": "default",
+        "position": 1050,
+        "widgetClass": "Ceres\\Widgets\\Common\\GoogleMapsWidget",
+        "settings": {
+            "apiKey": {
+                "type": "text",
+                "required": true,
+                "options": {
+                    "name": "Widget.googleMapsApiKeyLabel",
+                    "tooltipText": "Widget.googleMapsApiKeyTooltip"
+                }
+            },
+            "address": {
+                "type": "textarea",
+                "required": true,
+                "options": {
+                    "name": "Widget.googleMapsAddressLabel",
+                    "tooltipText": "Widget.googleMapsAddressTooltip"
+                }
+            },
+            "zoom": {
+                "type": "number",
+                "required": false,
+                "defaultValue": 16,
+                "options": {
+                    "name": "Widget.googleMapsZoomLabel",
+                    "tooltipText": "Widget.googleMapsZoomTooltip"
+                }
+            },
+            "aspectRatio": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "prop-xs-3-1",
+                "options": {
+                    "name": "Widget.googleMapsAspectRatioLabel",
+                    "tooltipText": "Widget.googleMapsAspectRatioTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "prop-xs-3-1",
+                            "caption": "Widget.googleMapsAspectRatioThreeToOne"
+                        },
+                        {
+                            "value": "prop-xs-2-1",
+                            "caption": "Widget.googleMapsAspectRatioTwoToOne"
+                        },
+                        {
+                            "value": "prop-xs-1-1",
+                            "caption": "Widget.googleMapsAspectRatioOneToOne"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::ImageBoxWidget",
         "label": "Widget.imageBoxLabel",
         "previewImageURL": "/images/widgets/image-box.svg",
@@ -3999,7 +4057,7 @@
     {
         "identifier": "Ceres::MailFormWidget",
         "label": "Widget.mailFormLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/mail-form.svg",
         "type": "default",
         "categories": [
             "form"
@@ -4155,7 +4213,7 @@
     {
         "identifier": "Ceres::MailInputWidget",
         "label": "Widget.mailInputLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/input-mail.svg",
         "type": "form",
         "categories": [
             "form"
@@ -4233,7 +4291,7 @@
     {
         "identifier": "Ceres::SelectionWidget",
         "label": "Widget.selectionLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/input-select.svg",
         "type": "form",
         "categories": [
             "form"
@@ -4329,7 +4387,7 @@
     {
         "identifier": "Ceres::TextAreaWidget",
         "label": "Widget.textAreaLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/input-textarea.svg",
         "type": "form",
         "categories": [
             "form"
@@ -4409,7 +4467,7 @@
     {
         "identifier": "Ceres::TextInputWidget",
         "label": "Widget.textInputLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/input-text.svg",
         "type": "form",
         "categories": [
             "form"

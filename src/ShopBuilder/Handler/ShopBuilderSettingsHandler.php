@@ -26,19 +26,23 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'privacyPolicyCategory'         => 'IO.routing.category_privacy-policy',
         'privacyPolicyEnableRoute'      => 'IO.routing.enabled_routes',
         'gtcCategory'                   => 'IO.routing.category_gtc',
-        'gtcEnableRoute'                => 'IO.routing.enabled_routes'
+        'gtcEnableRoute'                => 'IO.routing.enabled_routes',
+        
+        'contactCategory'               => 'IO.routing.category_contact',
+        'contactEnableRoute'            => 'IO.routing.enabled_routes'
     ];
 
     protected $casts = [
         'shippingCategory'           => 'int',
-        'home'           => 'int',
+        'home'                       => 'int',
         'checkoutCategory'           => 'int',
         'myAccountCategory'          => 'int',
         'cancellationRightsCategory' => 'int',
         'cancellationFormCategory'   => 'int',
         'legalDisclosureCategory'    => 'int',
         'privacyPolicyCategory'      => 'int',
-        'gtcCategory'                => 'int'
+        'gtcCategory'                => 'int',
+        'contactCategory'            => 'int'
     ];
     
     public function readHomeEnableRoute()
@@ -119,6 +123,16 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     public function writeGtcEnableRoute($enableGtcRoute)
     {
         return $this->setEnabledRoute(RouteConfig::TERMS_CONDITIONS, $enableGtcRoute);
+    }
+    
+    public function readContactEnableRoute()
+    {
+        return in_array( RouteConfig::CONTACT, RouteConfig::getEnabledRoutes());
+    }
+    
+    public function writeContactEnableRoute($enableContactRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::CONTACT, $enableContactRoute);
     }
 
     private function setEnabledRoute($key, $value)
