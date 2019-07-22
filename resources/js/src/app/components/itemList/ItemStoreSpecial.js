@@ -11,6 +11,7 @@ Vue.component("item-store-special", {
         "storeSpecial",
         "recommendedRetailPrice",
         "variationRetailPrice",
+        "specialOfferPrice",
         "decimalCount",
         "bundleType"
     ],
@@ -77,12 +78,25 @@ Vue.component("item-store-special", {
 
         getPercentageSale()
         {
-            // eslint-disable-next-line
-            let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value ) * -100;
-
-            if (percent < 0)
+            if (this.specialOfferPrice !== null)
             {
-                return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
+                // eslint-disable-next-line
+                let percent = (1 - this.specialOfferPrice.unitPrice.value / this.variationRetailPrice.unitPrice.value ) * -100;
+
+                if (percent < 0)
+                {
+                    return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
+                }
+            }
+            else
+            {
+                // eslint-disable-next-line
+                let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value ) * -100;
+
+                if (percent < 0)
+                {
+                    return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
+                }
             }
 
             return "";
