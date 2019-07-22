@@ -13382,6 +13382,25 @@ $border-width: 1px;
     }
 }
 
+.select-unit
+{
+    > label
+    {
+        margin-bottom: .1rem;
+        font-weight: bold;
+    }
+
+    .form-check
+    {
+        margin-bottom: 0;
+    }
+
+    &.error
+    {
+        color: $danger;
+    }
+}
+
 .input-feedback-container
 {
     margin-bottom: $grid-gutter-width/2;
@@ -14011,6 +14030,10 @@ $border-width: 1px;
  	}
  }
 
+ html.ie .always-visible-search {
+	min-height: 32px;
+ }
+
 // Searchbar in widget
 .top-bar {
     .cmp-search-box {
@@ -14330,7 +14353,8 @@ div:not(.top-bar) {
 // mobile
 $menu-bg-sm 			: $primary;
 $menu-breadcrumb-bg 	: $gray-darker;
-$menu-color-sm 			: $white;
+$menu-breadcrumb-color 	: color-yiq($menu-breadcrumb-bg);
+$menu-color-sm 			: color-yiq($primary);
 $menu-font-s-sm  		: 1.2em;
 // desktop
 $menu-bg-lg 			: transparent;
@@ -14745,7 +14769,13 @@ nav.navbar.megamenu {
 		        transform 	: translateX(0);
 	}
 
+	.sk-fading-circle .sk-circle:before,
+	.loading-animation > div {
+		background-color: $menu-color-sm;
+	}
+
 	ul.breadcrumb {
+		color      : $menu-breadcrumb-color;
 		background : $menu-breadcrumb-bg;
 		max-width  : initial;
 		font-size  : .8em;
@@ -20066,19 +20096,13 @@ html.ios {
 
             .widget-caption
             {
-                @include media-breakpoint-only(xs) {
-                    position: relative;
-                    width: 100%;
-                }
-
                 position: absolute;
                 left: 0;
                 right: 0;
                 bottom: 0;
                 width: 100%;
                 padding: 1rem;
-                position: absolute;
-                bottom: 0;
+                max-height: 100%;
             }
         }
     }

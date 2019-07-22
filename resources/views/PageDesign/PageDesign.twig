@@ -246,7 +246,7 @@
         });
     {% endif %}
 
-    (function($, MediaQueryHelperClass) {
+    (function($, MediaQueryHelper) {
         var vueApp = document.getElementById('vue-app');
         var headerParent = document.getElementById('page-header-parent');
         var headerLoaded = false;
@@ -329,7 +329,7 @@
             }
 
             // When window resize to another breakpoint execute functions
-            MediaQueryHelperClass.addFunctions(function(){
+            MediaQueryHelper.addFunction(function(){
                 calculateBodyOffset();
                 getHeaderChildrenHeights();
                 scrollHeaderElements();
@@ -390,7 +390,7 @@
         });
 
 
-    })(jQuery, MediaQueryHelperClass);
+    })(jQuery, MediaQueryHelper);
 </script>
 
 {{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
