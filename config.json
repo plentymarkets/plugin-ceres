@@ -1355,6 +1355,7 @@
                 "contact.shop_mail": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactShopMailLabel",
                     "options": {
                         "defaultValue": "your@email.com"
@@ -1363,18 +1364,21 @@
                 "contact.shop_mail_cc": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactShopMailCcLabel",
                     "options": {}
                 },
                 "contact.shop_mail_bcc": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactShopMailBccLabel",
                     "options": {}
                 },
                 "contact.show_data": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactShowDataLabel",
                     "options": {
                         "defaultValue": "street, zip, city, hotline, email, opening_times",
@@ -1437,6 +1441,7 @@
                 "contact.api_key": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactApiKeyLabel",
                     "options": {
                         "defaultValue": "API key"
@@ -1445,6 +1450,7 @@
                 "contact.map_zoom": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactMapZoomLabel",
                     "options": {
                         "defaultValue": "16"
@@ -1453,6 +1459,7 @@
                 "contact.map_show_in_mobile": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactMapShowInMobileLabel",
                     "options": {
                         "defaultValue": "false"
@@ -1461,6 +1468,7 @@
                 "contact.enable_confirming_privacy_policy": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactEnableConfirmingPrivacyPolicyLabel",
                     "options": {
                         "defaultValue": "true"
