@@ -132,6 +132,11 @@
             "position": 900
         },
         {
+            "key": "form",
+            "label": "Widget.categoryForm",
+            "position": 1000
+        },
+        {
             "key": "contact",
             "label": "Widget.categoryContact",
             "position": 1100

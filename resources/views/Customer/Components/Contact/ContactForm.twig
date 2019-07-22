@@ -24,6 +24,7 @@
             <div class="row">
 
                 {% if contactConfigSet %}
+
                     <div class="col-12 pb-5{% if googleApiKey %} col-md-6 pt-4{% else %} col-sm-12 col-md-4 col-lg-3{% endif %}">
                     {% include "Ceres::Customer.Components.Contact.ContactCard" %}
                     </div>
@@ -35,8 +36,8 @@
                     </div>
                 {% endif %}
 
-                <form id="contact-form" @submit.prevent>
-                    <div class="col-12{% if contactConfigSet and not googleApiKey %} col-sm-12 col-md-8 col-lg-9{% endif %}">
+                <div class="col-12{% if contactConfigSet and not googleApiKey %} col-sm-12 col-md-8 col-lg-9{% endif %}">
+                    <form id="contact-form" @submit.prevent>
                         <div class="row">
                             <div class="col-12 col-md-6 mb-3">
                                 <div class="input-unit input-name-field">
@@ -111,8 +112,8 @@
                             <i v-waiting-animation="waiting" class="fa fa-paper-plane-o" aria-hidden="true"></i> 
                             {{ trans("Ceres::Template.contactSend") }}
                         </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
 
                 {% if googleApiKey and not contactConfigSet %}
                     <div class="col-12 mt-5{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
