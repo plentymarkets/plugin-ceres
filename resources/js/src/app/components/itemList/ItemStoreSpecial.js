@@ -78,25 +78,22 @@ Vue.component("item-store-special", {
 
         getPercentageSale()
         {
-            if (this.specialOfferPrice !== null)
+            let percent;
+
+            if (this.specialOfferPrices !== null)
             {
                 // eslint-disable-next-line
-                let percent = (1 - this.specialOfferPrice.unitPrice.value / this.variationRetailPrice.unitPrice.value ) * -100;
-
-                if (percent < 0)
-                {
-                    return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
-                }
+                percent = (1 - this.specialOfferPrice.unitPrice.value / this.variationRetailPrice.unitPrice.value ) * -100;
             }
             else
             {
                 // eslint-disable-next-line
-                let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value ) * -100;
+                percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value ) * -100;
+            }
 
-                if (percent < 0)
-                {
-                    return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
-                }
+            if (percent < 0)
+            {
+                return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
             }
 
             return "";
