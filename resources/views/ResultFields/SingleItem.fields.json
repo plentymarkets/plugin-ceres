@@ -32,6 +32,7 @@
     "item.id",
     "item.manufacturer.externalName",
     "item.manufacturer.name",
+    "item.manufacturer.logo",
     "item.producingCountry.isoCode2",
     "item.producingCountry.isoCode3",
     "item.producingCountry.names.*",
