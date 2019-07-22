@@ -137,6 +137,11 @@
             "position": 1000
         },
         {
+            "key": "contact",
+            "label": "Widget.categoryContact",
+            "position": 1100
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
             "position": 10000
@@ -271,6 +276,22 @@
                 "name": "Config.routingEnableRouteGtc"
             }
         },
+        "contactCategory": {
+            "type": "category",
+            "required": false,
+            "defaultValue": null,
+            "options": {
+                "name": "Config.routingCategoryContact"
+            }
+        },
+        "contactEnableRoute": {
+            "type": "checkbox",
+            "required": false,
+            "isVisible": "!contactCategory",
+            "options": {
+                "name": "Config.routingEnableRouteContact"
+            }
+      },
         "shippingCategory": {
             "type": "category",
             "required": false,

@@ -46,7 +46,7 @@
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
-    "url": {{ url | json_encode | raw }},
+    "url": "{{ url | json_encode | raw }}",
     "potentialAction":{
         "@type": "SearchAction",
         "target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl ~ urls.search }}?query={search_term}",

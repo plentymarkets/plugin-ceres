@@ -1295,6 +1295,64 @@
         }
     },
     {
+        "identifier": "Ceres::GoogleMapsWidget",
+        "label": "Widget.googleMapsLabel",
+        "previewImageURL": "/images/widgets/google-maps.svg",
+        "type": "default",
+        "position": 1050,
+        "widgetClass": "Ceres\\Widgets\\Common\\GoogleMapsWidget",
+        "settings": {
+            "apiKey": {
+                "type": "text",
+                "required": true,
+                "options": {
+                    "name": "Widget.googleMapsApiKeyLabel",
+                    "tooltipText": "Widget.googleMapsApiKeyTooltip"
+                }
+            },
+            "address": {
+                "type": "textarea",
+                "required": true,
+                "options": {
+                    "name": "Widget.googleMapsAddressLabel",
+                    "tooltipText": "Widget.googleMapsAddressTooltip"
+                }
+            },
+            "zoom": {
+                "type": "number",
+                "required": false,
+                "defaultValue": 16,
+                "options": {
+                    "name": "Widget.googleMapsZoomLabel",
+                    "tooltipText": "Widget.googleMapsZoomTooltip"
+                }
+            },
+            "aspectRatio": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "prop-xs-3-1",
+                "options": {
+                    "name": "Widget.googleMapsAspectRatioLabel",
+                    "tooltipText": "Widget.googleMapsAspectRatioTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "prop-xs-3-1",
+                            "caption": "Widget.googleMapsAspectRatioThreeToOne"
+                        },
+                        {
+                            "value": "prop-xs-2-1",
+                            "caption": "Widget.googleMapsAspectRatioTwoToOne"
+                        },
+                        {
+                            "value": "prop-xs-1-1",
+                            "caption": "Widget.googleMapsAspectRatioOneToOne"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::ImageBoxWidget",
         "label": "Widget.imageBoxLabel",
         "previewImageURL": "/images/widgets/image-box.svg",
@@ -3338,6 +3396,115 @@
         }
     },
     {
+        "identifier": "Ceres::ContactDetailsWidget",
+        "label": "Widget.contactDetailsLabel",
+        "previewImageURL": "/images/widgets/contact-data.svg",
+        "type": "default",
+        "categories": [
+            "contact"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Contact\\ContactDetailsWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            },
+            "phone": {
+                "type": "text",
+                "required": false,
+                "options": {
+                    "name": "Widget.contactDetailsPhoneLabel",
+                    "tooltipText": "Widget.contactDetailsPhoneTooltip"
+                }
+            },
+            "fax": {
+                "type": "text",
+                "required": false,
+                "options": {
+                    "name": "Widget.contactDetailsFaxLabel",
+                    "tooltipText": "Widget.contactDetailsFaxTooltip"
+                }
+            },
+            "email": {
+                "type": "text",
+                "required": false,
+                "options": {
+                    "name": "Widget.contactDetailsEmailLabel",
+                    "tooltipText": "Widget.contactDetailsEmailTooltip"
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::AddressWidget",
         "label": "Widget.addressLabel",
         "previewImageURL": "/images/widgets/address.svg",
@@ -4063,7 +4230,7 @@
     {
         "identifier": "Ceres::MailFormWidget",
         "label": "Widget.mailFormLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/mail-form.svg",
         "type": "default",
         "categories": [
             "form"
@@ -4219,7 +4386,7 @@
     {
         "identifier": "Ceres::MailInputWidget",
         "label": "Widget.mailInputLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/input-mail.svg",
         "type": "form",
         "categories": [
             "form"
@@ -4297,7 +4464,7 @@
     {
         "identifier": "Ceres::SelectionWidget",
         "label": "Widget.selectionLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/input-select.svg",
         "type": "form",
         "categories": [
             "form"
@@ -4393,7 +4560,7 @@
     {
         "identifier": "Ceres::TextAreaWidget",
         "label": "Widget.textAreaLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/input-textarea.svg",
         "type": "form",
         "categories": [
             "form"
@@ -4473,7 +4640,7 @@
     {
         "identifier": "Ceres::TextInputWidget",
         "label": "Widget.textInputLabel",
-        "previewImageURL": "/images/widgets/newsletter.svg",
+        "previewImageURL": "/images/widgets/input-text.svg",
         "type": "form",
         "categories": [
             "form"
