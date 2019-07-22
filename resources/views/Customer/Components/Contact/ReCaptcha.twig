@@ -1,0 +1,6 @@
+<script type="x/template" id="vue-recaptcha">
+    <div>
+        <div v-if="version == 2" class="g-recaptcha" :data-sitekey="apiKey"></div>
+        <div v-if="version == 1" class="g-recaptcha" :data-sitekey="apiKey" data-size="invisible" data-badge="bottomright"></div>
+    </div>
+</script>

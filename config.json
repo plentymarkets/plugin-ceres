@@ -53,6 +53,28 @@
                         "defaultValue": "false"
                     }
                 },
+                "global.google_recaptcha_version": {
+                    "type": "selectBox",
+                    "required": true,
+                    "label": "Config.globalGoogleRecaptchaVersionLabel",
+                    "options": {
+                        "defaultValue": 1,
+                        "selectBoxValues": [
+                            {
+                                "value": 1,
+                                "caption": "Config.globalGoogleRecaptchaVersion2Invisible"
+                            },
+                            {
+                                "value": 2,
+                                "caption": "Config.globalGoogleRecaptchaVersion2Visible"
+                            },
+                            {
+                                "value": 3,
+                                "caption": "Config.globalGoogleRecaptchaVersion3"
+                            }
+                        ]
+                    }
+                },
                 "global.google_recaptcha_api_key": {
                     "type": "inputText",
                     "required": false,
