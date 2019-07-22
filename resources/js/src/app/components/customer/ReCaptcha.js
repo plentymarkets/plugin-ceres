@@ -12,19 +12,18 @@ Vue.component("recaptcha", {
         return {
             version: App.config.global.googleRecaptchaVersion,
             apiKey: App.config.global.googleRecaptchaApiKey
-        }
+        };
     },
 
     mounted()
     {
-        debugger
         this.$nextTick(() =>
         {
             if (!document.querySelector("#google-recaptcha-api"))
             {
-                this.createScript().then(() => this.initializeV3())
+                this.createScript().then(() => this.initializeV3());
             }
-        })
+        });
     },
 
     methods:
@@ -33,27 +32,27 @@ Vue.component("recaptcha", {
         {
             return new Promise((resolve, reject) =>
             {
-                const script = document.createElement("script")
-                let scriptSource
+                const script = document.createElement("script");
+                let scriptSource;
 
                 if (this.version == 3)
                 {
-                    scriptSource = `https://www.google.com/recaptcha/api.js?render=${this.apiKey}`
+                    scriptSource = `https://www.google.com/recaptcha/api.js?render=${this.apiKey}`;
                 }
                 else
                 {
-                    scriptSource = "https://www.google.com/recaptcha/api.js"
+                    scriptSource = "https://www.google.com/recaptcha/api.js";
                 }
 
-                script.type = "text/javascript"
-                script.id = "google-recaptcha-api"
-                script.src = scriptSource
+                script.type = "text/javascript";
+                script.id = "google-recaptcha-api";
+                script.src = scriptSource;
 
-                script.addEventListener("load", () => resolve(script), false)
-                script.addEventListener("error", () => reject(script), false)
+                script.addEventListener("load", () => resolve(script), false);
+                script.addEventListener("error", () => reject(script), false);
 
-                document.body.appendChild(script)
-            })
+                document.body.appendChild(script);
+            });
         },
 
         initializeV3()
@@ -62,8 +61,8 @@ Vue.component("recaptcha", {
             {
                 grecaptcha.ready(() =>
                 {
-                    grecaptcha.execute(this.apiKey, { action: "homepage" })
-                })
+                    grecaptcha.execute(this.apiKey, { action: "homepage" });
+                });
             }
         }
     }
