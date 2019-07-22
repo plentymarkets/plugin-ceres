@@ -1,18 +1,20 @@
-{% set formFieldId   = widget.settings.key.mobile | default(uid()) %}
-{% set isRequired    = widget.settings.isRequired.mobile %}
-{% set label         = widget.settings.label.mobile %}
-{% set isMailSubject = widget.settings.isMailSubject.mobile %}
-{% set isReplyToName = widget.settings.isReplyToName.mobile %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-<div{% if customClass | length > 0 %} class="{{ customClass }}"{% endif %}{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div class="input-unit{% if isRequired %} required{% endif %}">
+{% set formFieldId     = widget.settings.key.mobile | default(uid()) %}
+{% set isRequired      = widget.settings.isRequired.mobile %}
+{% set label           = widget.settings.label.mobile %}
+{% set isMailSubject   = widget.settings.isMailSubject.mobile %}
+{% set isReplyToName   = widget.settings.isReplyToName.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+<div{% if spacingClasses | length > 0 %} class="{{ spacingClasses }}"{% endif %}{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <div class="input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="text"{% endif %}>
         <input
             name="{{ formFieldId }}"
             type="text"
-            id="{{ formFieldId }}"
-            {% if isRequired %}data-validate="text"{% endif %}>
+            id="{{ formFieldId }}">
 
         <label for="{{ formFieldId }}">
             {{ label }}{% if isRequired %}*{% endif %}

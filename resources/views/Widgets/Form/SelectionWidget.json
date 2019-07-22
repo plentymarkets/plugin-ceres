@@ -1,10 +1,10 @@
 {
     "identifier": "Ceres::SelectionWidget",
     "label": "Widget.selectionLabel",
-    "previewImageURL": "/images/widgets/newsletter.svg",
+    "previewImageURL": "/images/widgets/input-select.svg",
     "type": "form",
     "categories": ["form"],
-    "position": 400,
+    "position": 500,
     "widgetClass": "Ceres\\Widgets\\Form\\SelectionWidget",
     "settings": {
         "key": {

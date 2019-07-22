@@ -1,11 +1,14 @@
-{% set appearance   = widget.settings.appearance.mobile %}
-{% set labelSubmit  = widget.settings.labelSubmit.mobile %}
-{% set mailTarget   = widget.settings.mailTarget.mobile %}
-{% set subject      = widget.settings.subject.mobile %}
-{% set ccAddresses  = widget.settings.ccAddresses.mobile %}
-{% set bccAddresses = widget.settings.bccAddresses.mobile %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set appearance      = widget.settings.appearance.mobile %}
+{% set labelSubmit     = widget.settings.labelSubmit.mobile %}
+{% set mailTarget      = widget.settings.mailTarget.mobile %}
+{% set subject         = widget.settings.subject.mobile %}
+{% set ccAddresses     = widget.settings.ccAddresses.mobile %}
+{% set bccAddresses    = widget.settings.bccAddresses.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {% set formId = uid() %}
 <div class="widget widget-contact-form{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
@@ -31,7 +34,10 @@
             </div>
 
             <div class="col-12 text-right">
-                <button type="submit" class="btn btn-{{ appearance }}">{{ labelSubmit }}</button>
+                <button type="submit" class="btn btn-{{ appearance }}">
+                    {{ labelSubmit | default(trans("Ceres::Template.contactSend")) }}
+                    <i class="fa fa-paper-plane-o ml-2" aria-hidden="true"></i>
+                </button>
             </div>
         </form>
     </div>
