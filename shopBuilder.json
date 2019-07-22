@@ -137,6 +137,11 @@
             "position": 1000
         },
         {
+            "key": "contact",
+            "label": "Widget.categoryContact",
+            "position": 1100
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
             "position": 10000
