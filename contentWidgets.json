@@ -3029,7 +3029,10 @@
         "identifier": "Ceres::ReCaptcha",
         "label": "Widget.reCaptcha",
         "previewImageURL": "/images/widgets/recaptcha.svg",
-        "type": "static",
+        "type": "default",
+        "categories": [
+            "form"
+        ],
         "widgetClass": "Ceres\\Widgets\\Common\\ReCaptchaWidget",
         "position": 800,
         "settings": {
