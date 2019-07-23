@@ -117,15 +117,15 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("label", $this->translator->trans("Ceres::Template.contactSubject"))
             ->withSetting("isRequired", true)
             ->withSetting("isMailSubject", true)
-            ->withSetting("spacing.customPadding", true)
-            ->withSetting("spacing.padding.bottom.value", 5)
-            ->withSetting("spacing.padding.bottom.unit", null);
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 3)
+            ->withSetting("spacing.margin.bottom.unit", null);
 
         $row_2->createChild("second", "Ceres::TextInputWidget")
             ->withSetting("label", $this->translator->trans("Ceres::Template.contactOrderId"))
-            ->withSetting("spacing.customPadding", true)
-            ->withSetting("spacing.padding.bottom.value", 5)
-            ->withSetting("spacing.padding.bottom.unit", null);
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 4)
+            ->withSetting("spacing.margin.bottom.unit", null);
 
         //
         // ROW 3: Message
