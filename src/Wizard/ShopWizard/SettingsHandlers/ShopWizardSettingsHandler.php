@@ -57,6 +57,12 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 $pluginSetId = $data['pluginSet'];
             }
 
+            //we need to create list of active languages that will be saved into plugin config and system settings
+
+            $activeLanguagesList = count($data['languages_activeLanguages']) ?
+                implode(", ", $data['languages_activeLanguages']):
+                "";
+
             if ($webstoreId !=='preview') {
 
                 $store = $webstoreRepo->findById($webstoreId);
@@ -103,6 +109,10 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
                 $webstoreData = array_merge($shippingData, $currenciesData, $globalData);
 
+                if (!empty($activeLanguagesList)) {
+                    $webstoreData['languageList'] = $activeLanguagesList;
+                }
+
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
             }
 
@@ -132,6 +142,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                         'value' => $itemVal
                     ];
                 }
+
                 $configRepo->saveConfiguration($pluginId, $configData, $pluginSetId);
             }
 

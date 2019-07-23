@@ -294,6 +294,12 @@ class DataMapping
             "global" => false,
             "optional" => true,
         ],
+        "languages_activeLanguages" => [
+            "field" => "language.active_languages",
+            "type" => "concatenated",
+            "global" => false,
+            "optional" => true,
+        ],
     ];
 
     public $globalMapping = [];

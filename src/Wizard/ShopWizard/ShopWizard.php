@@ -12,6 +12,7 @@ use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\Steps\Builder\CurrencyStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\DefaultSettingsStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\DisplayedInformationStep;
+use Ceres\Wizard\ShopWizard\Steps\Builder\LanguagesStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\OnlineStoreStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\PaginationStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\RequiredSettingsStep;
@@ -37,6 +38,7 @@ class ShopWizard extends WizardProvider
         $currencyStep = pluginApp(CurrencyStep::class);
         $displayInfoStep = pluginApp(DisplayedInformationStep::class);
         $paginationStep = pluginApp(PaginationStep::class);
+        $languagesStep = pluginApp(LanguagesStep::class);
 
 
         return [
@@ -50,7 +52,7 @@ class ShopWizard extends WizardProvider
             "iconPath" => "https://plentymarkets-assistant.s3.eu-central-1.amazonaws.com/ceres_assistent.svg",
             'dataSource' => 'Ceres\Wizard\ShopWizard\DataSource\ShopWizardDataSource',
             'settingsHandlerClass' => 'Ceres\Wizard\ShopWizard\SettingsHandlers\ShopWizardSettingsHandler',
-            //'dependencyClass' => 'Ceres\Wizard\ShopWizard\DynamicLoaders\ShopWizardDynamicLoader',
+            'dependencyClass' => 'Ceres\Wizard\ShopWizard\DynamicLoaders\ShopWizardDynamicLoader',
             "translationNamespace" => "Ceres",
             "options" => [
                 'client' => $this->buildClientOptions(),
@@ -64,6 +66,7 @@ class ShopWizard extends WizardProvider
                 "currencyStep" => $currencyStep->generateStep(),
                 "displayInfoStep" => $displayInfoStep->generateStep(),
                 "paginationStep" => $paginationStep->generateStep(),
+                "languagesStep" => $languagesStep->generateStep(),
             ]
         ];
     }
