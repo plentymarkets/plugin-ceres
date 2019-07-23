@@ -55,7 +55,7 @@
                 },
                 "global.google_recaptcha_version": {
                     "type": "selectBox",
-                    "required": true,
+                    "required": false,
                     "label": "Config.globalGoogleRecaptchaVersionLabel",
                     "options": {
                         "defaultValue": 1,
