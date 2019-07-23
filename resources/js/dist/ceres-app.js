@@ -42846,6 +42846,9 @@ Vue.component("mobile-navigation", {
       }
 
       return false;
+    },
+    currentCategories: function currentCategories() {
+      return this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
     }
   }, Vuex.mapState({
     navigationTree: function navigationTree(state) {
@@ -42859,12 +42862,13 @@ Vue.component("mobile-navigation", {
     addEventListener: function addEventListener() {
       var _this = this;
 
+      var categoryId = this.initialCategory && this.initialCategory.id ? this.initialCategory.id : null;
       var QueryHelper = new _MediaQueryHelper.MediaQueryHelper();
       var breakpoint = QueryHelper.getCurrentBreakpoint();
 
       var onMobileBreakpoint = function onMobileBreakpoint() {
         if (_this.navigationTree.length <= 0) {
-          _this.$store.dispatch("loadNavigationTree").then(function () {
+          _this.$store.dispatch("loadNavigationTree", categoryId).then(function () {
             _this.initNavigation();
           });
         }
@@ -42902,6 +42906,8 @@ Vue.component("mobile-navigation", {
     },
     slideTo: function slideTo(children, back) {
       back = !!back;
+      var clickedCategoryId = children[0].parent ? children[0].parent.id : null;
+      this.loadPartialTree(clickedCategoryId);
 
       if (this.useFirstContainer) {
         this.dataContainer1 = children;
@@ -42923,6 +42929,9 @@ Vue.component("mobile-navigation", {
 
       this.useFirstContainer = !this.useFirstContainer;
       this.buildBreadcrumbs();
+    },
+    loadPartialTree: function loadPartialTree(categoryId) {
+      this.$store.dispatch("loadPartialNavigationTree", categoryId);
     },
     buildBreadcrumbs: function buildBreadcrumbs() {
       this.breadcrumbs = [];
@@ -48408,10 +48417,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
+var _utils = require("../../helper/utils");
+
 var ApiService = require("services/ApiService");
 
 var state = {
   tree: [],
+  cachedTrees: {},
   currentCategory: null
 };
 var mutations = {
@@ -48420,14 +48432,21 @@ var mutations = {
   },
   setCurrentCategory: function setCurrentCategory(state, category) {
     state.currentCategory = category;
+  },
+  addCachedPartialTree: function addCachedPartialTree(state, _ref) {
+    var tree = _ref.tree,
+        categoryId = _ref.categoryId;
+    state.cachedTrees[categoryId] = tree;
   }
 };
 var actions = {
-  loadNavigationTree: function loadNavigationTree(_ref) {
-    var dispatch = _ref.dispatch;
+  loadNavigationTree: function loadNavigationTree(_ref2) {
+    var dispatch = _ref2.dispatch;
+    var categoryId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
     return new Promise(function (resolve, reject) {
       ApiService.get("/rest/io/categorytree", {
-        type: App.config.header.showCategoryTypes
+        type: App.config.header.showCategoryTypes,
+        categoryId: categoryId
       }).done(function (response) {
         dispatch("initNavigationTree", response);
         resolve(response);
@@ -48436,9 +48455,34 @@ var actions = {
       });
     });
   },
-  initNavigationTree: function initNavigationTree(_ref2, navigationTree) {
-    var dispatch = _ref2.dispatch,
-        commit = _ref2.commit;
+  loadPartialNavigationTree: function loadPartialNavigationTree(_ref3, categoryId) {
+    var dispatch = _ref3.dispatch,
+        commit = _ref3.commit,
+        state = _ref3.state;
+    return new Promise(function (resolve, reject) {
+      if ((0, _utils.isNullOrUndefined)(state.cachedTrees[categoryId])) {
+        ApiService.get("/rest/io/categorytree", {
+          type: App.config.header.showCategoryTypes,
+          categoryId: categoryId
+        }).done(function (response) {
+          commit("addCachedPartialTree", {
+            tree: response,
+            categoryId: categoryId
+          });
+          dispatch("initNavigationTree", response);
+          resolve(response);
+        }).fail(function (error) {
+          reject(error);
+        });
+      } else {
+        dispatch("initNavigationTree", state.cachedTrees[categoryId]);
+        resolve(state.cachedTrees[categoryId]);
+      }
+    });
+  },
+  initNavigationTree: function initNavigationTree(_ref4, navigationTree) {
+    var dispatch = _ref4.dispatch,
+        commit = _ref4.commit;
 
     if (navigationTree) {
       dispatch("buildNavigationTreeItem", {
@@ -48448,12 +48492,12 @@ var actions = {
 
     commit("setNavigationTree", navigationTree);
   },
-  buildNavigationTreeItem: function buildNavigationTreeItem(_ref3, _ref4) {
-    var state = _ref3.state,
-        commit = _ref3.commit,
-        dispatch = _ref3.dispatch;
-    var navigationTree = _ref4.navigationTree,
-        parent = _ref4.parent;
+  buildNavigationTreeItem: function buildNavigationTreeItem(_ref5, _ref6) {
+    var state = _ref5.state,
+        commit = _ref5.commit,
+        dispatch = _ref5.dispatch;
+    var navigationTree = _ref6.navigationTree,
+        parent = _ref6.parent;
     var showChildren = false;
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -48463,36 +48507,38 @@ var actions = {
       for (var _iterator = navigationTree[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var category = _step.value;
         category.parent = parent; // hide category if there is no translation
+        // if (!category.details[0])
+        // {
+        //     category.hideCategory = true;
+        // }
+        // else
+        // {
+        //     let parentUrl = "";
+        //     if (parent)
+        //     {
+        //         parentUrl = parent.url;
+        //         if (App.urlTrailingSlash)
+        //         {
+        //             parentUrl = parentUrl.substring(0, parentUrl.length - 1);
+        //         }
+        //     }
+        //     else if (App.defaultLanguage != category.details[0].lang)
+        //     {
+        //         parentUrl = "/" + category.details[0].lang;
+        //     }
+        //     category.url = parentUrl + "/" + category.details[0].nameUrl;
+        //     if (App.urlTrailingSlash)
+        //     {
+        //         category.url += "/";
+        //     }
 
-        if (!category.details[0]) {
-          category.hideCategory = true;
-        } else {
-          var parentUrl = "";
+        showChildren = true;
 
-          if (parent) {
-            parentUrl = parent.url;
-
-            if (App.urlTrailingSlash) {
-              parentUrl = parentUrl.substring(0, parentUrl.length - 1);
-            }
-          } else if (App.defaultLanguage != category.details[0].lang) {
-            parentUrl = "/" + category.details[0].lang;
-          }
-
-          category.url = parentUrl + "/" + category.details[0].nameUrl;
-
-          if (App.urlTrailingSlash) {
-            category.url += "/";
-          }
-
-          showChildren = true;
-
-          if (category.children) {
-            dispatch("buildNavigationTreeItem", {
-              navigationTree: category.children,
-              parent: category
-            });
-          }
+        if (category.children) {
+          dispatch("buildNavigationTreeItem", {
+            navigationTree: category.children,
+            parent: category
+          });
         }
       }
     } catch (err) {
@@ -48514,12 +48560,12 @@ var actions = {
       parent.showChildren = showChildren;
     }
   },
-  setCurrentCategoryById: function setCurrentCategoryById(_ref5, _ref6) {
-    var state = _ref5.state,
-        commit = _ref5.commit,
-        dispatch = _ref5.dispatch;
-    var categoryId = _ref6.categoryId,
-        categories = _ref6.categories;
+  setCurrentCategoryById: function setCurrentCategoryById(_ref7, _ref8) {
+    var state = _ref7.state,
+        commit = _ref7.commit,
+        dispatch = _ref7.dispatch;
+    var categoryId = _ref8.categoryId,
+        categories = _ref8.categories;
     categories = categories || state.tree;
     var _iteratorNormalCompletion2 = true;
     var _didIteratorError2 = false;
@@ -48579,7 +48625,7 @@ var _default = {
 };
 exports["default"] = _default;
 
-},{"services/ApiService":267}],286:[function(require,module,exports){
+},{"../../helper/utils":263,"services/ApiService":267}],286:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

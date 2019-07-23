@@ -1,8 +1,11 @@
+import { isNullOrUndefined } from "../../helper/utils";
+
 const ApiService = require("services/ApiService");
 
 const state =
     {
         tree: [],
+        cachedTrees: {},
         currentCategory: null
     };
 
@@ -16,17 +19,22 @@ const mutations =
         setCurrentCategory(state, category)
         {
             state.currentCategory = category;
+        },
+
+        addCachedPartialTree(state, { tree, categoryId })
+        {
+            state.cachedTrees[categoryId] = tree;
         }
     };
 
 const actions =
     {
-        loadNavigationTree({ dispatch })
+        loadNavigationTree({ dispatch }, categoryId = null )
         {
             return new Promise((resolve, reject) =>
             {
                 ApiService
-                    .get("/rest/io/categorytree", { type: App.config.header.showCategoryTypes })
+                    .get("/rest/io/categorytree", { type: App.config.header.showCategoryTypes, categoryId })
                     .done(response =>
                     {
                         dispatch("initNavigationTree", response);
@@ -36,6 +44,33 @@ const actions =
                     {
                         reject(error);
                     });
+            });
+        },
+
+        loadPartialNavigationTree({ dispatch, commit, state }, categoryId)
+        {
+            return new Promise((resolve, reject) =>
+            {
+                if (isNullOrUndefined(state.cachedTrees[categoryId]))
+                {
+                    ApiService
+                        .get("/rest/io/categorytree", { type: App.config.header.showCategoryTypes, categoryId })
+                        .done(response =>
+                        {
+                            commit("addCachedPartialTree", { tree: response, categoryId });
+                            dispatch("initNavigationTree", response);
+                            resolve(response);
+                        })
+                        .fail(error =>
+                        {
+                            reject(error);
+                        });
+                }
+                else
+                {
+                    dispatch("initNavigationTree", state.cachedTrees[categoryId]);
+                    resolve(state.cachedTrees[categoryId]);
+                }
             });
         },
 
@@ -58,41 +93,40 @@ const actions =
                 category.parent = parent;
 
                 // hide category if there is no translation
-                if (!category.details[0])
+                // if (!category.details[0])
+                // {
+                //     category.hideCategory = true;
+                // }
+                // else
+                // {
+                //     let parentUrl = "";
+
+                //     if (parent)
+                //     {
+                //         parentUrl = parent.url;
+
+                //         if (App.urlTrailingSlash)
+                //         {
+                //             parentUrl = parentUrl.substring(0, parentUrl.length - 1);
+                //         }
+                //     }
+                //     else if (App.defaultLanguage != category.details[0].lang)
+                //     {
+                //         parentUrl = "/" + category.details[0].lang;
+                //     }
+
+                //     category.url = parentUrl + "/" + category.details[0].nameUrl;
+
+                //     if (App.urlTrailingSlash)
+                //     {
+                //         category.url += "/";
+                //     }
+
+                showChildren = true;
+
+                if (category.children)
                 {
-                    category.hideCategory = true;
-                }
-                else
-                {
-                    let parentUrl = "";
-
-                    if (parent)
-                    {
-                        parentUrl = parent.url;
-
-                        if (App.urlTrailingSlash)
-                        {
-                            parentUrl = parentUrl.substring(0, parentUrl.length - 1);
-                        }
-                    }
-                    else if (App.defaultLanguage != category.details[0].lang)
-                    {
-                        parentUrl = "/" + category.details[0].lang;
-                    }
-
-                    category.url = parentUrl + "/" + category.details[0].nameUrl;
-
-                    if (App.urlTrailingSlash)
-                    {
-                        category.url += "/";
-                    }
-
-                    showChildren = true;
-
-                    if (category.children)
-                    {
-                        dispatch("buildNavigationTreeItem", { navigationTree: category.children, parent: category });
-                    }
+                    dispatch("buildNavigationTreeItem", { navigationTree: category.children, parent: category });
                 }
             }
 

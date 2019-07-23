@@ -39,6 +39,11 @@ Vue.component("mobile-navigation", {
             return false;
         },
 
+        currentCategories()
+        {
+            return this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
+        },
+
         ...Vuex.mapState({
             navigationTree: state => state.navigation.tree
         })
@@ -53,13 +58,14 @@ Vue.component("mobile-navigation", {
     {
         addEventListener()
         {
+            const categoryId = this.initialCategory && this.initialCategory.id ? this.initialCategory.id : null;
             const QueryHelper = new MediaQueryHelper();
             const breakpoint = QueryHelper.getCurrentBreakpoint();
             const onMobileBreakpoint = () =>
             {
                 if (this.navigationTree.length <= 0)
                 {
-                    this.$store.dispatch("loadNavigationTree")
+                    this.$store.dispatch("loadNavigationTree", categoryId)
                         .then(() =>
                         {
                             this.initNavigation();
@@ -114,6 +120,9 @@ Vue.component("mobile-navigation", {
         slideTo(children, back)
         {
             back = !!back;
+            const clickedCategoryId = children[0].parent ? children[0].parent.id : null;
+            
+            this.loadPartialTree(clickedCategoryId);
 
             if (this.useFirstContainer)
             {
@@ -132,6 +141,15 @@ Vue.component("mobile-navigation", {
 
             this.useFirstContainer = !this.useFirstContainer;
             this.buildBreadcrumbs();
+        },
+
+        loadPartialTree(categoryId)
+        {
+            this.$store.dispatch("loadPartialNavigationTree", categoryId)
+                .then((response) =>
+                {
+                    
+                });
         },
 
         buildBreadcrumbs()
