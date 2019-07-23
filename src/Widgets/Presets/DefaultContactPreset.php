@@ -138,11 +138,15 @@ class DefaultContactPreset implements ContentPreset
 
         $formWidget->createChild("formFields", "Ceres::InlineTextWidget")
             ->withSetting("appearance", "none")
-            ->withSetting("text", "<p class=\"align-right\">*{{ trans(\"Ceres::Template.contactRequiredField\") }}</p>")
+            ->withSetting("text", "<p class=\"align-right\">* {{ trans(\"Ceres::Template.contactRequiredField\") }}</p>")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.top.value", 0)
             ->withSetting("spacing.padding.top.unit", null)
             ->withSetting("spacing.padding.bottom.value", 0)
-            ->withSetting("spacing.padding.bottom.unit", null);
+            ->withSetting("spacing.padding.bottom.unit", null)
+            ->withSetting("spacing.padding.left.value", 0)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 0)
+            ->withSetting("spacing.padding.right.unit", null);
     }
 }
