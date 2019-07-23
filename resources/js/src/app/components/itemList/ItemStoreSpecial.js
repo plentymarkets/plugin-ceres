@@ -1,4 +1,4 @@
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 
 Vue.component("item-store-special", {
@@ -80,7 +80,7 @@ Vue.component("item-store-special", {
         {
             let percent;
 
-            if (this.specialOfferPrices !== null)
+            if (isDefined(this.specialOfferPrice))
             {
                 // eslint-disable-next-line
                 percent = (1 - this.specialOfferPrice.unitPrice.value / this.variationRetailPrice.unitPrice.value ) * -100;
