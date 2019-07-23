@@ -124,49 +124,117 @@ const actions =
                 return;
             }
 
-            ValidationService.validate(event.target)
-                .done(() =>
-                {
-                    const formData    = serializeForm(event.target);
-                    const formOptions = readFormOptions(event.target, formData);
+            let recaptchaValidation = Promise.resolve(null);
+            // const recaptchaElement = event.target.querySelector("[name=\"g-recaptcha-response\"]");
+            const recaptchaElement = event.target.querySelector("[data-recaptcha]");
 
-                    ApiService.post(
-                        "/rest/io/customer/contact/mail",
+            if (window.grecaptcha && (!!recaptchaElement || App.config.global.googleRecaptchaVersion === 3))
+            {
+                if (App.config.global.googleRecaptchaVersion === 3)
+                {
+                    // V3
+                    recaptchaValidation = new Promise((resolve, reject) =>
+                    {
+                        window.grecaptcha.execute(
+                            App.config.global.googleRecaptchaApiKey,
+                            { action: "homepage" }
+                        ).then((response) =>
                         {
-                            data:       formData,
-                            recipient:  formOptions.recipient,
-                            subject:    formOptions.subject || "",
-                            cc:         formOptions.cc,
-                            replyTo:    formOptions.replyTo
-                        }
-                    )
-                        .done(reponse =>
+                            if (response)
+                            {
+                                resolve(response);
+                            }
+                            else
+                            {
+                                reject();
+                            }
+                        });
+                    });
+                }
+                else if ( App.config.global.googleRecaptchaVersion === 2 )
+                {
+                    // V2 Checkbox
+                    const recaptchaResponse = window.grecaptcha.getResponse(recaptchaElement.dataset.recaptcha);
+
+                    if (!recaptchaResponse)
+                    {
+                        recaptchaValidation.reject();
+                    }
+                    recaptchaValidation = Promise.resolve(recaptchaResponse);
+                }
+                else if ( App.config.global.googleRecaptchaVersion === 1 )
+                {
+                    // V2 Invisible
+                    recaptchaValidation = new Promise((resolve, reject) =>
+                    {
+                        window.grecaptcha.execute(recaptchaElement.dataset.recaptcha);
+                        recaptchaElement.querySelector("[name=\"g-recaptcha-response\"]").addEventListener("recaptcha-response", (evt) =>
                         {
-                            event.target.reset();
-                            NotificationService.success(
-                                TranslationService.translate("Ceres::Template.contactSendSuccess")
-                            );
+                            if (evt.target.value)
+                            {
+                                resolve(evt.target.value);
+                            }
+                            else
+                            {
+                                reject();
+                            }
+                        });
+                    });
+                }
+            }
+
+            recaptchaValidation
+                .then((recaptchaResponse) =>
+                {
+                    ValidationService.validate(event.target)
+                        .done(() =>
+                        {
+                            const formData    = serializeForm(event.target);
+                            const formOptions = readFormOptions(event.target, formData);
+
+                            ApiService.post(
+                                "/rest/io/customer/contact/mail",
+                                {
+                                    data:       formData,
+                                    recipient:  formOptions.recipient,
+                                    subject:    formOptions.subject || "",
+                                    cc:         formOptions.cc,
+                                    replyTo:    formOptions.replyTo,
+                                    recaptchaToken: recaptchaResponse
+                                }
+                            )
+                                .done(reponse =>
+                                {
+                                    event.target.reset();
+                                    NotificationService.success(
+                                        TranslationService.translate("Ceres::Template.contactSendSuccess")
+                                    );
+                                })
+                                .fail(response =>
+                                {
+                                    NotificationService.error(
+                                        TranslationService.translate("Ceres::Template.contactSendFail")
+                                    );
+                                });
                         })
-                        .fail(response =>
+                        .fail(invalidFields =>
                         {
+                            const fieldNames = [];
+
+                            for (const field of invalidFields)
+                            {
+                                fieldNames.push(getLabel(field));
+                            }
+
+                            ValidationService.markInvalidFields(invalidFields, "error");
                             NotificationService.error(
-                                TranslationService.translate("Ceres::Template.contactSendFail")
+                                TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
                             );
                         });
                 })
-                .fail(invalidFields =>
+                .catch(() =>
                 {
-                    const fieldNames = [];
-
-                    for (const field of invalidFields)
-                    {
-                        fieldNames.push(getLabel(field));
-                    }
-
-                    ValidationService.markInvalidFields(invalidFields, "error");
-                    NotificationService.error(
-                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
-                    );
+                    console.error("reCAPTCHA validation failed!");
                 });
         }
     };

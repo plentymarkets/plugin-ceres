@@ -100,7 +100,7 @@ export function getLabelForId(id)
 export function serializeForm(form)
 {
     const formData = {};
-    const formElements = form.querySelectorAll("[name]");
+    const formElements = form.querySelectorAll("[name]:not(.g-recaptcha-response)");
 
     for (const formElement of formElements)
     {
