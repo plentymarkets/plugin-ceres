@@ -91,6 +91,14 @@
                         "defaultValue": ""
                     }
                 },
+                "global.google_recaptcha_threshold": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaThreshold",
+                    "options": {
+                        "defaultValue": 0.5
+                    }
+                },
                 "global.user_data_hash_max_age": {
                     "type": "selectBox",
                     "required": false,
