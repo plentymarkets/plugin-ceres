@@ -125,7 +125,6 @@ const actions =
             }
 
             let recaptchaValidation = Promise.resolve(null);
-            // const recaptchaElement = event.target.querySelector("[name=\"g-recaptcha-response\"]");
             const recaptchaElement = event.target.querySelector("[data-recaptcha]");
 
             if (window.grecaptcha && (!!recaptchaElement || App.config.global.googleRecaptchaVersion === 3))
