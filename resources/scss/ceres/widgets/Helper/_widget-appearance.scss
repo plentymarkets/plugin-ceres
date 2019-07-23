@@ -6,18 +6,20 @@
 
         .bg-appearance
         {
-            @include context-bg($value);
+            background-color: $value !important;
+            color: color-yiq($value) !important;
 
             a
             {
-                color: color-yiq($value);
+                color: color-yiq($value) !important;
             }
         }
 
         a.bg-appearance:hover,
         button.bg-appearance:hover
         {
-            @include context-bg(darken($value, 10%));
+            background-color: darken($value, 10%) !important;
+            color: color-yiq(darken($value, 10%)) !important;
         }
 
         .btn-appearance
@@ -38,7 +40,7 @@
         a:hover {
             i.text-appearance {
                 color: darken($value, 7.5) !important;
-            } 
+            }
         }
 
         .border-appearance.active,
