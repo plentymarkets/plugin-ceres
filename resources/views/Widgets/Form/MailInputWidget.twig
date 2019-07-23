@@ -9,6 +9,8 @@
 {% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
+{% set uid_check = uid() %}
+
 <div{% if spacingClasses | length > 0 %} class="{{ spacingClasses }}"{% endif %}{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="input-unit{% if isRequired %} required{% endif %}{% if allowMailCC %} m-b-0{% endif %}" {% if isRequired %}data-validate="mail"{% endif %}>
         <input name="{{ formFieldId }}"
@@ -26,8 +28,10 @@
             <input class="form-check-input"
                    data-mail="cc"
                    value="{{ formFieldId }}"
-                   type="checkbox">
-            <label class="form-check-label">
+                   type="checkbox"
+                   id="{{ uid_check }}">
+            <label class="form-check-label"
+                   for="{{ uid_check }}">
                 {{ trans("Ceres::Template.contactSendMeACopy") }}
             </label>
         </div>
