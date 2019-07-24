@@ -126,6 +126,8 @@ Vue.component("mobile-navigation", {
         // eslint-disable-next-line complexity
         slideTo(children, back)
         {
+            console.log("slide to: ", children);
+
             const clickedCategory = children[0].parent;
             const clickedCategoryId = clickedCategory ? clickedCategory.id : null;
 
@@ -153,6 +155,35 @@ Vue.component("mobile-navigation", {
             this.buildBreadcrumbs();
         },
 
+        // eslint-disable-next-line complexity
+        slideTo2(category, back)
+        {
+            console.log("slide to: ", category);
+
+            this.loadPartialTree(category.id);
+
+            this.selectedCategory = category;
+            back = !!back;
+
+            if (this.useFirstContainer)
+            {
+                this.dataContainer1 = category.children || [];
+
+                $("#menu-2").trigger("menu-deactivated", { back: back });
+                $("#menu-1").trigger("menu-activated", { back: back });
+            }
+            else
+            {
+                this.dataContainer2 = category.children || [];
+
+                $("#menu-1").trigger("menu-deactivated", { back: back });
+                $("#menu-2").trigger("menu-activated", { back: back });
+            }
+
+            this.useFirstContainer = !this.useFirstContainer;
+            this.buildBreadcrumbs();
+        },
+
         loadPartialTree(categoryId)
         {
             // eslint-disable-next-line eqeqeq
@@ -166,22 +197,22 @@ Vue.component("mobile-navigation", {
                             (isDefined(this.selectedCategory) && this.selectedCategory.id === categoryId))
                         {
                             this.$store.commit("setNavigationTree", response);
-                            this.updateDataContainer("dataContainer1");
-                            this.updateDataContainer("dataContainer2");
+                            this.updateDataContainers(categoryId);
                         }
                     });
             }
         },
 
-        updateDataContainer(container)
+        updateDataContainers(categoryId)
         {
-            if (this[container])
-            {
-                const category = this.getCategoryById(this[container][0].id, this.navigationTree);
+            const containers = ["dataContainer1", "dataContainer2"];
+            const category = this.getCategoryById(categoryId, this.navigationTree);
 
-                if (category && category.parent)
+            for (const container of containers)
+            {
+                if (category)
                 {
-                    this[container] = category.parent.children;
+                    this[container] = category.children;
                 }
                 else
                 {
@@ -219,7 +250,7 @@ Vue.component("mobile-navigation", {
 
             let root = this.useFirstContainer ? this.dataContainer2[0] : this.dataContainer1[0];
 
-            while (root.parent)
+            while (root && root.parent)
             {
                 this.breadcrumbs.unshift(
                     {
