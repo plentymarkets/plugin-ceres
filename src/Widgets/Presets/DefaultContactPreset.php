@@ -3,6 +3,7 @@
 namespace Ceres\Widgets\Presets;
 
 use Ceres\Config\CeresConfig;
+use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
@@ -116,16 +117,10 @@ class DefaultContactPreset implements ContentPreset
         $row_2->createChild("first", "Ceres::TextInputWidget")
             ->withSetting("label", $this->translator->trans("Ceres::Template.contactSubject"))
             ->withSetting("isRequired", true)
-            ->withSetting("isMailSubject", true)
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.bottom.value", 3)
-            ->withSetting("spacing.margin.bottom.unit", null);
+            ->withSetting("isMailSubject", true);
 
         $row_2->createChild("second", "Ceres::TextInputWidget")
-            ->withSetting("label", $this->translator->trans("Ceres::Template.contactOrderId"))
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.bottom.value", 4)
-            ->withSetting("spacing.margin.bottom.unit", null);
+            ->withSetting("label", $this->translator->trans("Ceres::Template.contactOrderId"));
 
         //
         // ROW 3: Message
@@ -134,7 +129,10 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("rows", 15)
             ->withSetting("label", $this->translator->trans("Ceres::Template.contactMessage"))
             ->withSetting("fixedHeight", true)
-            ->withSetting("isRequired", true);
+            ->withSetting("isRequired", true)
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.top.value", 3)
+            ->withSetting("spacing.margin.top.unit", null);
 
         $formWidget->createChild("formFields", "Ceres::InlineTextWidget")
             ->withSetting("appearance", "none")
