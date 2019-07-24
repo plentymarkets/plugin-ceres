@@ -26,9 +26,11 @@
                         <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
                     </span>
                 </li>
-                <li class="ddown" v-for="number in dataContainer1[0].siblingCount - dataContainer1.length">
-                    <p>TODO add animation per entry</p>
-                </li>
+                <template v-if="dataContainer1[0]">
+                    <li class="ddown" v-for="number in dataContainer1[0].siblingCount - dataContainer1.length">
+                        <p>TODO add animation per entry</p>
+                    </li>
+                </template>
             </ul>
 
             <ul v-menu id="menu-2" class="mainmenu">
@@ -44,9 +46,11 @@
                         <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
                     </span>
                 </li>
-                <li class="ddown" v-for="number in dataContainer2[0].siblingCount - dataContainer2.length">
-                    <p>TODO add animation per entry</p>
-                </li>
+                <template v-if="dataContainer2[0]">
+                    <li class="ddown" v-for="number in dataContainer2[0].siblingCount - dataContainer2.length">
+                        <p>TODO add animation per entry</p>
+                    </li>
+                </template>
             </ul>
         </div>
 
