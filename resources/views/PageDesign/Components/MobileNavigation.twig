@@ -28,7 +28,7 @@
                 </li>
                 <template v-if="dataContainer1[0]">
                     <li class="ddown" v-for="number in dataContainer1[0].siblingCount - dataContainer1.length">
-                        <p>TODO add animation per entry</p>
+                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
                     </li>
                 </template>
             </ul>
@@ -48,7 +48,7 @@
                 </li>
                 <template v-if="dataContainer2[0]">
                     <li class="ddown" v-for="number in dataContainer2[0].siblingCount - dataContainer2.length">
-                        <p>TODO add animation per entry</p>
+                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
                     </li>
                 </template>
             </ul>
