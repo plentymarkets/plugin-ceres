@@ -51,7 +51,7 @@ class CeresContactConfig extends PluginConfig
             ]
         );
 
-        $this->apiKey = $this->getTextValue( "contact.api_key", "" );
+        $this->apiKey = $this->getTextValue( "contact.api_key", "", "API key" );
 
         $this->mapZoom = $this->getIntegerValue( "contact.map_zoom", 16 );
 

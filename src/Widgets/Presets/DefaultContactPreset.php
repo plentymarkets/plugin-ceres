@@ -19,9 +19,6 @@ class DefaultContactPreset implements ContentPreset
     /** @var Translator */
     private $translator;
 
-    /** @var PresetWidgetFactory */
-    private $twoColumnWidget;
-
     public function getWidgets()
     {
         $this->config = pluginApp(CeresConfig::class);
@@ -30,13 +27,43 @@ class DefaultContactPreset implements ContentPreset
 
         $this->createHeadline();
 
-        $this->createTwoColumnWidget();
-        $this->createContactDetailsWidget();
-        $this->createGoogleMapsWidget();
+        if(strlen($this->config->contact->apiKey))
+        {
+            $row_1 = $this->preset->createWidget("Ceres::TwoColumnWidget")
+                ->withSetting("layout", "oneToOne")
+                ->withSetting("layoutTablet", "oneToTwo")
+                ->withSetting("layoutMobile", "stackedMobile");
 
-        $this->createMailForm();
+            $this->createContactDetailsWidget( $row_1, "first" );
+            $this->createGoogleMapsWidget( $row_1, "second" );
+            $this->createMailForm();
+        }
+        else
+        {
+            $row_1 = $this->preset->createWidget("Ceres::TwoColumnWidget")
+                ->withSetting("layout", "threeToNine")
+                ->withSetting("layoutTablet", "stackedTablet")
+                ->withSetting("layoutMobile", "stackedMobile");
+
+            $this->createContactDetailsWidget( $row_1, "first" );
+            $this->createMailForm( $row_1, "second" );
+        }
 
         return $this->preset->toArray();
+    }
+
+    /**
+     * @param string                $identifier
+     * @param PresetWidgetFactory   $parentFactory
+     * @param string                $parentDropzone
+     *
+     * @return PresetWidgetFactory
+     */
+    private function createRootOrChild( $identifier, $parentFactory = null, $parentDropzone = null )
+    {
+        return is_null($parentFactory)
+            ? $this->preset->createWidget($identifier)
+            : $parentFactory->createChild($parentDropzone, $identifier);
     }
 
     private function createHeadline()
@@ -55,17 +82,9 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("spacing.margin.bottom.unit", null);
     }
 
-    private function createTwoColumnWidget()
+    private function createContactDetailsWidget( $parentFactory = null, $parentDropzone = null )
     {
-        $this->twoColumnWidget = $this->preset->createWidget("Ceres::TwoColumnWidget")
-            ->withSetting("layout", "oneToOne")
-            ->withSetting("layoutTablet", "stackedTablet")
-            ->withSetting("layoutMobile", "stackedMobile");
-    }
-
-    private function createContactDetailsWidget()
-    {
-        $this->twoColumnWidget->createChild("first", "Ceres::ContactDetailsWidget")
+        $this->createRootOrChild("Ceres::ContactDetailsWidget", $parentFactory, $parentDropzone )
             ->withSetting("address", $this->translator->trans("Ceres::Widget.contactDetailsPlaceholderAddress"))
             ->withSetting("phone", $this->translator->trans("Ceres::Widget.contactDetailsPlaceholderPhone"))
             ->withSetting("fax", $this->translator->trans("Ceres::Widget.contactDetailsPlaceholderFax"))
@@ -78,14 +97,14 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("spacing.padding.bottom.unit", null);
     }
 
-    private function createGoogleMapsWidget()
+    private function createGoogleMapsWidget( $parentFactory = null, $parentDropzone = null )
     {
-        $this->twoColumnWidget->createChild("second", "Ceres::GoogleMapsWidget");
+        $this->createRootOrChild("Ceres::GoogleMapsWidget", $parentFactory, $parentDropzone );
     }   
 
-    private function createMailForm()
+    private function createMailForm( $parentFactory = null, $parentDropzone = null )
     {
-        $formWidget = $this->preset->createWidget("Ceres::MailFormWidget")
+        $formWidget = $this->createRootOrChild("Ceres::MailFormWidget", $parentFactory, $parentDropzone )
             ->withSetting("appearance", "primary")
             ->withSetting("labelSubmit", $this->translator->trans("Ceres::Template.contactSend"))
             ->withSetting("mailTarget", $this->config->contact->shopMail !== "your@email.com" ? $this->config->contact->shopMail : "")
