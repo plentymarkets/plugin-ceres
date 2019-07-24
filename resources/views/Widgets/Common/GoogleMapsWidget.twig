@@ -9,7 +9,7 @@
                             :zoom="{{ widget.settings.zoom.mobile | default(16) }}"
                             aspect-ratio="{{ widget.settings.aspectRatio.mobile }}">
         </google-maps-widget>
-    {% else %}
+    {% elseif isPreview %}
         <div class="widget-placeholder {{ widget.settings.aspectRatio.mobile }}">
             <div>
                 <p class="title">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderTitle") }}</p>

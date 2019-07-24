@@ -11,8 +11,8 @@
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "primary",
-            "options": "@include(appearance)"
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
         },
         "spacing":"@include(spacingMargin)",
         "phone": {
