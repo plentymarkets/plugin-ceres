@@ -16,7 +16,8 @@ body .wrapper-main{
 {
     background-color: $white;
     padding-top: $spacer;
-    margin: 2 * $spacer 0;
+    margin-top: 2 * $spacer;
+    margin-bottom: 2 * $spacer;
 }
 
 .page-content{
