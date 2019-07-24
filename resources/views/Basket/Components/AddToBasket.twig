@@ -27,7 +27,7 @@
                 </div>
 
                 <button
-                    v-if="!isVariationSelected"
+                    v-if="!isVariationSelected || !isSalable"
                     class="btn btn-block btn-primary btn-appearance disabled"
                     v-tooltip data-toggle="tooltip"
                     data-placement="top"
@@ -39,7 +39,7 @@
                 </button>
                 <button
                     v-else-if="!buttonLockState"
-                    :disabled="waiting || !hasPrice && !isSalable"
+                    :disabled="waiting || !hasPrice"
                     class="btn btn-block btn-primary btn-appearance"
                     @click="addToBasket()"
                     :class="buttonClasses"
