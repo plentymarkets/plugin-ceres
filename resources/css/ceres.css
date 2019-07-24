@@ -26189,18 +26189,18 @@ header .widget {
 }
 
 .widget-primary .bg-appearance {
-  background-color: #008ebd;
-  color: #fff;
+  background-color: #008ebd !important;
+  color: #fff !important;
 }
 
 .widget-primary .bg-appearance a {
-  color: #fff;
+  color: #fff !important;
 }
 
 .widget-primary a.bg-appearance:hover,
 .widget-primary button.bg-appearance:hover {
-  background-color: #00688a;
-  color: #fff;
+  background-color: #00688a !important;
+  color: #fff !important;
 }
 
 .widget-primary .btn-appearance {
@@ -26282,18 +26282,18 @@ header .widget {
 }
 
 .widget-secondary .bg-appearance {
-  background-color: #d4021d;
-  color: #fff;
+  background-color: #d4021d !important;
+  color: #fff !important;
 }
 
 .widget-secondary .bg-appearance a {
-  color: #fff;
+  color: #fff !important;
 }
 
 .widget-secondary a.bg-appearance:hover,
 .widget-secondary button.bg-appearance:hover {
-  background-color: #a10216;
-  color: #fff;
+  background-color: #a10216 !important;
+  color: #fff !important;
 }
 
 .widget-secondary .btn-appearance {
@@ -26375,18 +26375,18 @@ header .widget {
 }
 
 .widget-success .bg-appearance {
-  background-color: #28a745;
-  color: #fff;
+  background-color: #28a745 !important;
+  color: #fff !important;
 }
 
 .widget-success .bg-appearance a {
-  color: #fff;
+  color: #fff !important;
 }
 
 .widget-success a.bg-appearance:hover,
 .widget-success button.bg-appearance:hover {
-  background-color: #1e7e34;
-  color: #fff;
+  background-color: #1e7e34 !important;
+  color: #fff !important;
 }
 
 .widget-success .btn-appearance {
@@ -26468,18 +26468,18 @@ header .widget {
 }
 
 .widget-info .bg-appearance {
-  background-color: #17a2b8;
-  color: #fff;
+  background-color: #17a2b8 !important;
+  color: #fff !important;
 }
 
 .widget-info .bg-appearance a {
-  color: #fff;
+  color: #fff !important;
 }
 
 .widget-info a.bg-appearance:hover,
 .widget-info button.bg-appearance:hover {
-  background-color: #117a8b;
-  color: #fff;
+  background-color: #117a8b !important;
+  color: #fff !important;
 }
 
 .widget-info .btn-appearance {
@@ -26561,18 +26561,18 @@ header .widget {
 }
 
 .widget-warning .bg-appearance {
-  background-color: #ffc107;
-  color: #212529;
+  background-color: #ffc107 !important;
+  color: #212529 !important;
 }
 
 .widget-warning .bg-appearance a {
-  color: #212529;
+  color: #212529 !important;
 }
 
 .widget-warning a.bg-appearance:hover,
 .widget-warning button.bg-appearance:hover {
-  background-color: #d39e00;
-  color: #fff;
+  background-color: #d39e00 !important;
+  color: #fff !important;
 }
 
 .widget-warning .btn-appearance {
@@ -26654,18 +26654,18 @@ header .widget {
 }
 
 .widget-danger .bg-appearance {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: #dc3545 !important;
+  color: #fff !important;
 }
 
 .widget-danger .bg-appearance a {
-  color: #fff;
+  color: #fff !important;
 }
 
 .widget-danger a.bg-appearance:hover,
 .widget-danger button.bg-appearance:hover {
-  background-color: #bd2130;
-  color: #fff;
+  background-color: #bd2130 !important;
+  color: #fff !important;
 }
 
 .widget-danger .btn-appearance {
