@@ -57,8 +57,8 @@ const actions =
                         .get("/rest/io/categorytree", { type: App.config.header.showCategoryTypes, categoryId })
                         .done(response =>
                         {
+                            dispatch("buildNavigationTreeItem", { navigationTree: response });
                             commit("addCachedPartialTree", { tree: response, categoryId });
-                            dispatch("initNavigationTree", response);
                             resolve(response);
                         })
                         .fail(error =>
@@ -68,7 +68,6 @@ const actions =
                 }
                 else
                 {
-                    dispatch("initNavigationTree", state.cachedTrees[categoryId]);
                     resolve(state.cachedTrees[categoryId]);
                 }
             });

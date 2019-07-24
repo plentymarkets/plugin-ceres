@@ -42816,19 +42816,28 @@ Vue.component("carousel", {
 
 var _MediaQueryHelper = require("../../helper/MediaQueryHelper");
 
+var _utils = require("../../helper/utils");
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 Vue.component("mobile-navigation", {
-  props: ["template", "initialCategory"],
+  props: {
+    template: {
+      "default": "#vue-mobile-navigation",
+      type: String
+    },
+    initialCategory: Object
+  },
   data: function data() {
     return {
       dataContainer1: [],
       dataContainer2: [],
       useFirstContainer: false,
       breadcrumbs: [],
-      isNavigationInitialized: false
+      isNavigationInitialized: false,
+      selectedCategory: null
     };
   },
   computed: _objectSpread({
@@ -42868,7 +42877,9 @@ Vue.component("mobile-navigation", {
 
       var onMobileBreakpoint = function onMobileBreakpoint() {
         if (_this.navigationTree.length <= 0) {
-          _this.$store.dispatch("loadNavigationTree", categoryId).then(function () {
+          _this.$store.dispatch("loadPartialNavigationTree", categoryId).then(function (response) {
+            _this.$store.commit("setNavigationTree", response);
+
             _this.initNavigation();
           });
         }
@@ -42904,10 +42915,13 @@ Vue.component("mobile-navigation", {
         }
       }
     },
+    // eslint-disable-next-line complexity
     slideTo: function slideTo(children, back) {
-      back = !!back;
-      var clickedCategoryId = children[0].parent ? children[0].parent.id : null;
+      var clickedCategory = children[0].parent;
+      var clickedCategoryId = clickedCategory ? clickedCategory.id : null;
       this.loadPartialTree(clickedCategoryId);
+      this.selectedCategory = clickedCategory;
+      back = !!back;
 
       if (this.useFirstContainer) {
         this.dataContainer1 = children;
@@ -42931,7 +42945,68 @@ Vue.component("mobile-navigation", {
       this.buildBreadcrumbs();
     },
     loadPartialTree: function loadPartialTree(categoryId) {
-      this.$store.dispatch("loadPartialNavigationTree", categoryId);
+      var _this2 = this;
+
+      // eslint-disable-next-line eqeqeq
+      if (this.selectedCategory != categoryId || (0, _utils.isDefined)(this.selectedCategory) && this.selectedCategory.id !== categoryId) {
+        this.$store.dispatch("loadPartialNavigationTree", categoryId).then(function (response) {
+          if ((0, _utils.isNullOrUndefined)(_this2.selectedCategory) && (0, _utils.isNullOrUndefined)(categoryId) || (0, _utils.isDefined)(_this2.selectedCategory) && _this2.selectedCategory.id === categoryId) {
+            _this2.$store.commit("setNavigationTree", response);
+
+            _this2.updateDataContainer("dataContainer1");
+
+            _this2.updateDataContainer("dataContainer2");
+          }
+        });
+      }
+    },
+    updateDataContainer: function updateDataContainer(container) {
+      if (this[container]) {
+        var category = this.getCategoryById(this[container][0].id, this.navigationTree);
+
+        if (category && category.parent) {
+          this[container] = category.parent.children;
+        } else {
+          // root level
+          this[container] = this.navigationTree;
+        }
+      }
+    },
+    getCategoryById: function getCategoryById(categoryId, tree) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = tree[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var cat = _step.value;
+
+          if (categoryId === cat.id) {
+            return cat;
+          } else if (cat.children) {
+            var foundCat = this.getCategoryById(categoryId, cat.children);
+
+            if (foundCat) {
+              return foundCat;
+            }
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      return null;
     },
     buildBreadcrumbs: function buildBreadcrumbs() {
       this.breadcrumbs = [];
@@ -42974,7 +43049,7 @@ Vue.component("mobile-navigation", {
   }
 });
 
-},{"../../helper/MediaQueryHelper":253}],208:[function(require,module,exports){
+},{"../../helper/MediaQueryHelper":253,"../../helper/utils":263}],208:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -48465,17 +48540,18 @@ var actions = {
           type: App.config.header.showCategoryTypes,
           categoryId: categoryId
         }).done(function (response) {
+          dispatch("buildNavigationTreeItem", {
+            navigationTree: response
+          });
           commit("addCachedPartialTree", {
             tree: response,
             categoryId: categoryId
           });
-          dispatch("initNavigationTree", response);
           resolve(response);
         }).fail(function (error) {
           reject(error);
         });
       } else {
-        dispatch("initNavigationTree", state.cachedTrees[categoryId]);
         resolve(state.cachedTrees[categoryId]);
       }
     });

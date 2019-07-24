@@ -1,11 +1,15 @@
 import { MediaQueryHelper } from "../../helper/MediaQueryHelper";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 
 Vue.component("mobile-navigation", {
 
-    props: [
-        "template",
-        "initialCategory"
-    ],
+    props: {
+        template: {
+            default: "#vue-mobile-navigation",
+            type: String
+        },
+        initialCategory: Object
+    },
 
     data()
     {
@@ -14,7 +18,8 @@ Vue.component("mobile-navigation", {
             dataContainer2: [],
             useFirstContainer: false,
             breadcrumbs: [],
-            isNavigationInitialized: false
+            isNavigationInitialized: false,
+            selectedCategory: null
         };
     },
 
@@ -65,9 +70,10 @@ Vue.component("mobile-navigation", {
             {
                 if (this.navigationTree.length <= 0)
                 {
-                    this.$store.dispatch("loadNavigationTree", categoryId)
-                        .then(() =>
+                    this.$store.dispatch("loadPartialNavigationTree", categoryId)
+                        .then(response =>
                         {
+                            this.$store.commit("setNavigationTree", response);
                             this.initNavigation();
                         });
                 }
@@ -117,12 +123,16 @@ Vue.component("mobile-navigation", {
             }
         },
 
+        // eslint-disable-next-line complexity
         slideTo(children, back)
         {
-            back = !!back;
-            const clickedCategoryId = children[0].parent ? children[0].parent.id : null;
-            
+            const clickedCategory = children[0].parent;
+            const clickedCategoryId = clickedCategory ? clickedCategory.id : null;
+
             this.loadPartialTree(clickedCategoryId);
+
+            this.selectedCategory = clickedCategory;
+            back = !!back;
 
             if (this.useFirstContainer)
             {
@@ -145,11 +155,62 @@ Vue.component("mobile-navigation", {
 
         loadPartialTree(categoryId)
         {
-            this.$store.dispatch("loadPartialNavigationTree", categoryId)
-                .then((response) =>
+            // eslint-disable-next-line eqeqeq
+            if (this.selectedCategory != categoryId ||
+                (isDefined(this.selectedCategory) && this.selectedCategory.id !== categoryId))
+            {
+                this.$store.dispatch("loadPartialNavigationTree", categoryId)
+                    .then(response =>
+                    {
+                        if ((isNullOrUndefined(this.selectedCategory) && isNullOrUndefined(categoryId)) ||
+                            (isDefined(this.selectedCategory) && this.selectedCategory.id === categoryId))
+                        {
+                            this.$store.commit("setNavigationTree", response);
+                            this.updateDataContainer("dataContainer1");
+                            this.updateDataContainer("dataContainer2");
+                        }
+                    });
+            }
+        },
+
+        updateDataContainer(container)
+        {
+            if (this[container])
+            {
+                const category = this.getCategoryById(this[container][0].id, this.navigationTree);
+
+                if (category && category.parent)
                 {
-                    
-                });
+                    this[container] = category.parent.children;
+                }
+                else
+                {
+                    // root level
+                    this[container] = this.navigationTree;
+                }
+            }
+        },
+
+        getCategoryById(categoryId, tree)
+        {
+            for (const cat of tree)
+            {
+                if (categoryId === cat.id)
+                {
+                    return cat;
+                }
+                else if (cat.children)
+                {
+                    const foundCat = this.getCategoryById(categoryId, cat.children);
+
+                    if (foundCat)
+                    {
+                        return foundCat;
+                    }
+                }
+            }
+
+            return null;
         },
 
         buildBreadcrumbs()

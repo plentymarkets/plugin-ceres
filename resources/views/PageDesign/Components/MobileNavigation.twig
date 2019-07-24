@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-mobile-navigation">
     <div class="mobile-navigation">
 
-        <template v-if="isNavigationInitialized">
+        <div v-show="isNavigationInitialized">
             <ul class="breadcrumb">
                 <li class="btn-close" @click="closeNavigation()"></li>
 
@@ -13,8 +13,7 @@
                     ${ breadcrumb.name }
                 </li>
             </ul>
-
-            <ul v-menu id="menu-1" class="mainmenu menu-active">
+            <ul v-menu id="menu-1" class="mainmenu">
                 <li class="ddown" v-if="parentCategories" @click="slideTo(parentCategories, true)">
                     <span class="nav-direction btn-up">
                         <i class="fa fa-lg fa-level-up" aria-hidden="true"></i>
@@ -45,9 +44,9 @@
                     </span>
                 </li>
             </ul>
-        </template>
+        </div>
 
-        <template v-else>
+        <template v-if="!isNavigationInitialized">
             <ul class="breadcrumb">
                 <li class="btn-close" @click="closeNavigation()"></li>
 
