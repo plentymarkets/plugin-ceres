@@ -23,7 +23,6 @@ Vue.component("mobile-navigation", {
                 categories: []
             },
             useFirstContainer: false,
-            breadcrumbs: [],
             isNavigationInitialized: false,
             selectedCategory: null
         };
@@ -53,6 +52,25 @@ Vue.component("mobile-navigation", {
         currentCategories()
         {
             return this.useFirstContainer ? this.dataContainer2.categories : this.dataContainer1.categories;
+        },
+
+        breadcrumbs()
+        {
+            const breadcrumbs = [];
+            let root = this.useFirstContainer ? this.dataContainer2.categories[0] : this.dataContainer1.categories[0];
+
+            while (root && root.parent)
+            {
+                breadcrumbs.unshift(
+                    {
+                        name: root.parent.details[0].name,
+                        parent: root.parent || null
+                    });
+
+                root = root.parent;
+            }
+
+            return breadcrumbs;
         },
 
         ...Vuex.mapState({
@@ -119,51 +137,19 @@ Vue.component("mobile-navigation", {
         {
             if (currentCategory)
             {
-                if (currentCategory.children && currentCategory.showChildren)
+                if (currentCategory.children)
                 {
-                    this.slideTo2(currentCategory);
+                    this.slideTo(currentCategory);
                 }
                 else if (currentCategory.parent)
                 {
-                    this.slideTo2(currentCategory.parent);
+                    this.slideTo(currentCategory.parent);
                 }
             }
         },
 
         // eslint-disable-next-line complexity
-        slideTo(children, back)
-        {
-            console.log("slide to: ", children);
-
-            const clickedCategory = children[0].parent;
-            const clickedCategoryId = clickedCategory ? clickedCategory.id : null;
-
-            this.loadPartialTree(clickedCategoryId);
-
-            this.selectedCategory = clickedCategory;
-            back = !!back;
-
-            if (this.useFirstContainer)
-            {
-                this.dataContainer1 = children;
-
-                $("#menu-2").trigger("menu-deactivated", { back: back });
-                $("#menu-1").trigger("menu-activated", { back: back });
-            }
-            else
-            {
-                this.dataContainer2 = children;
-
-                $("#menu-1").trigger("menu-deactivated", { back: back });
-                $("#menu-2").trigger("menu-activated", { back: back });
-            }
-
-            this.useFirstContainer = !this.useFirstContainer;
-            this.buildBreadcrumbs();
-        },
-
-        // eslint-disable-next-line complexity
-        slideTo2(category, back)
+        slideTo(category, back)
         {
             const children = isDefined(category) ? category.children : this.navigationTree;
             const categoryId = isDefined(category) ? category.id : null;
@@ -189,7 +175,6 @@ Vue.component("mobile-navigation", {
             }
 
             this.useFirstContainer = !this.useFirstContainer;
-            this.buildBreadcrumbs();
         },
 
         loadPartialTree(categoryId)
@@ -252,24 +237,6 @@ Vue.component("mobile-navigation", {
             }
 
             return null;
-        },
-
-        buildBreadcrumbs()
-        {
-            this.breadcrumbs = [];
-
-            let root = this.useFirstContainer ? this.dataContainer2.categories : this.dataContainer1.categories;
-
-            while (root && root.parent)
-            {
-                this.breadcrumbs.unshift(
-                    {
-                        name: root.parent.details[0].name,
-                        layer: root.parent ? root.parent.children : this.navigationTree
-                    });
-
-                root = root.parent;
-            }
         },
 
         closeNavigation()

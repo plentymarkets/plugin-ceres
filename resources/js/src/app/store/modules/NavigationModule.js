@@ -83,55 +83,16 @@ const actions =
             commit("setNavigationTree", navigationTree);
         },
 
-        buildNavigationTreeItem({ state, commit, dispatch }, { navigationTree, parent })
+        buildNavigationTreeItem({ dispatch }, { navigationTree, parent })
         {
-            let showChildren = false;
-
             for (const category of navigationTree)
             {
                 category.parent = parent;
-
-                // hide category if there is no translation
-                // if (!category.details[0])
-                // {
-                //     category.hideCategory = true;
-                // }
-                // else
-                // {
-                //     let parentUrl = "";
-
-                //     if (parent)
-                //     {
-                //         parentUrl = parent.url;
-
-                //         if (App.urlTrailingSlash)
-                //         {
-                //             parentUrl = parentUrl.substring(0, parentUrl.length - 1);
-                //         }
-                //     }
-                //     else if (App.defaultLanguage != category.details[0].lang)
-                //     {
-                //         parentUrl = "/" + category.details[0].lang;
-                //     }
-
-                //     category.url = parentUrl + "/" + category.details[0].nameUrl;
-
-                //     if (App.urlTrailingSlash)
-                //     {
-                //         category.url += "/";
-                //     }
-
-                showChildren = true;
 
                 if (category.children)
                 {
                     dispatch("buildNavigationTreeItem", { navigationTree: category.children, parent: category });
                 }
-            }
-
-            if (parent)
-            {
-                parent.showChildren = showChildren;
             }
         },
 
