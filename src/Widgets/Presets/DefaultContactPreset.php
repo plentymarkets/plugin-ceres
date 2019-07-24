@@ -183,5 +183,10 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("spacing.padding.left.unit", null)
             ->withSetting("spacing.padding.right.value", 0)
             ->withSetting("spacing.padding.right.unit", null);
+
+        if(strlen($this->config->global->googleRecaptchaApiKey))
+        {
+            $formWidget->createChild("formFields", "Ceres::ReCaptchaWidget");
+        }
     }
 }
