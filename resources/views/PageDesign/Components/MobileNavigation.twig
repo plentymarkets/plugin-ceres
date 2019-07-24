@@ -20,17 +20,15 @@
                     </span>
                 </li>
 
-                <template v-if="dataContainer1 && dataContainer1.length">
-                    <li class="ddown" v-for="category in dataContainer1">
-                        <a :href="category.url" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
-                        <span class="nav-direction" v-if="category.childCount" @click="slideTo2(category)">
-                            <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
-                        </span>
-                    </li>
-                </template>
-                <div v-else class="loading">
-                    {% include "Ceres::ItemList.Partials.LoadingAnimation" with { 'loadingAnimationType': config("Ceres.item.loading_animation_type") } %}
-                </div>
+                <li class="ddown" v-for="category in dataContainer1">
+                    <a :href="category.url" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
+                    <span class="nav-direction" v-if="category.childCount" @click="slideTo2(category)">
+                        <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                </li>
+                <li class="ddown" v-for="number in dataContainer1[0].siblingCount - dataContainer1.length">
+                    <p>TODO add animation per entry</p>
+                </li>
             </ul>
 
             <ul v-menu id="menu-2" class="mainmenu">
@@ -40,17 +38,15 @@
                     </span>
                 </li>
 
-                <template v-if="dataContainer2 && dataContainer2.length">
-                    <li  class="ddown" v-for="category in dataContainer2">
-                        <a :href="category.url" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
-                        <span class="nav-direction" v-if="category.childCount" @click="slideTo2(category)">
-                            <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
-                        </span>
-                    </li>
-                </template>
-                <div v-else class="loading">
-                    {% include "Ceres::ItemList.Partials.LoadingAnimation" with { 'loadingAnimationType': config("Ceres.item.loading_animation_type") } %}
-                </div>
+                <li  class="ddown" v-for="category in dataContainer2">
+                    <a :href="category.url" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
+                    <span class="nav-direction" v-if="category.childCount" @click="slideTo2(category)">
+                        <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                </li>
+                <li class="ddown" v-for="number in dataContainer2[0].siblingCount - dataContainer2.length">
+                    <p>TODO add animation per entry</p>
+                </li>
             </ul>
         </div>
 

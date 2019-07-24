@@ -42832,7 +42832,7 @@ Vue.component("mobile-navigation", {
   },
   data: function data() {
     return {
-      dataContainer1: [],
+      dataContainer1: {},
       dataContainer2: [],
       useFirstContainer: false,
       breadcrumbs: [],
@@ -42982,12 +42982,12 @@ Vue.component("mobile-navigation", {
           if ((0, _utils.isNullOrUndefined)(_this2.selectedCategory) && (0, _utils.isNullOrUndefined)(categoryId) || (0, _utils.isDefined)(_this2.selectedCategory) && _this2.selectedCategory.id === categoryId) {
             _this2.$store.commit("setNavigationTree", response);
 
-            _this2.updateDataContainer(categoryId);
+            _this2.updateDataContainers(categoryId);
           }
         });
       }
     },
-    updateDataContainer: function updateDataContainer(categoryId) {
+    updateDataContainers: function updateDataContainers(categoryId) {
       var containers = ["dataContainer1", "dataContainer2"];
       var category = this.getCategoryById(categoryId, this.navigationTree);
 
