@@ -31,14 +31,14 @@ class DefaultLegalDisclosurePreset implements ContentPreset
         $this->preset->createWidget('Ceres::CodeWidget')
                      ->withSetting("text", $text)
                      ->withSetting("appearance", "none")
-                     ->withSetting("customPadding", true)
-                     ->withSetting("padding.top.value", 3)
-                     ->withSetting("padding.top.unit", null)
-                     ->withSetting("padding.bottom.value", 0)
-                     ->withSetting("padding.bottom.unit", null)
-                     ->withSetting("customMargin", true)
-                     ->withSetting("margin.bottom.value", 0)
-                     ->withSetting("margin.bottom.unit", null);
+                     ->withSetting("spacing.customPadding", true)
+                     ->withSetting("spacing.padding.top.value", 3)
+                     ->withSetting("spacing.padding.top.unit", null)
+                     ->withSetting("spacing.padding.bottom.value", 0)
+                     ->withSetting("spacing.padding.bottom.unit", null)
+                     ->withSetting("spacing.customMargin", true)
+                     ->withSetting("spacing.margin.bottom.value", 0)
+                     ->withSetting("spacing.margin.bottom.unit", null);
     
         $this->preset->createWidget("Ceres::SeparatorWidget")
                      ->withSetting("margin.top.value", 5)

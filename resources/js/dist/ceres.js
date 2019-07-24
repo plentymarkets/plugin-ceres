@@ -40071,7 +40071,7 @@ Vue.component("single-item", {
       return state.item.variation.documents[0].data;
     },
     isVariationSelected: function isVariationSelected(state) {
-      return state.item.isVariationSelected;
+      return state.variationSelect.isVariationSelected;
     },
     attributes: function attributes(state) {
       return state.variationSelect.attributes;
@@ -41065,7 +41065,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 Vue.component("item-store-special", {
   delimiters: ["${", "}"],
   template: "#vue-item-store-special",
-  props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount", "bundleType"],
+  props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "specialOfferPrice", "decimalCount", "bundleType"],
   data: function data() {
     return {
       tagClass: "",
@@ -41108,8 +41108,15 @@ Vue.component("item-store-special", {
       return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
     },
     getPercentageSale: function getPercentageSale() {
-      // eslint-disable-next-line
-      var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value) * -100;
+      var percent;
+
+      if ((0, _utils.isDefined)(this.specialOfferPrice)) {
+        // eslint-disable-next-line
+        percent = (1 - this.specialOfferPrice.unitPrice.value / this.variationRetailPrice.unitPrice.value) * -100;
+      } else {
+        // eslint-disable-next-line
+        percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value) * -100;
+      }
 
       if (percent < 0) {
         return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
