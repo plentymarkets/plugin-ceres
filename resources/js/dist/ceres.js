@@ -40028,7 +40028,7 @@ Vue.component("single-item", {
       return state.item.variation.documents[0].data;
     },
     isVariationSelected: function isVariationSelected(state) {
-      return state.item.isVariationSelected;
+      return state.variationSelect.isVariationSelected;
     },
     attributes: function attributes(state) {
       return state.variationSelect.attributes;
