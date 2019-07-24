@@ -53,6 +53,28 @@
                         "defaultValue": "false"
                     }
                 },
+                "global.google_recaptcha_version": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaVersionLabel",
+                    "options": {
+                        "defaultValue": 1,
+                        "selectBoxValues": [
+                            {
+                                "value": 1,
+                                "caption": "Config.globalGoogleRecaptchaVersion2Invisible"
+                            },
+                            {
+                                "value": 2,
+                                "caption": "Config.globalGoogleRecaptchaVersion2Visible"
+                            },
+                            {
+                                "value": 3,
+                                "caption": "Config.globalGoogleRecaptchaVersion3"
+                            }
+                        ]
+                    }
+                },
                 "global.google_recaptcha_api_key": {
                     "type": "inputText",
                     "required": false,
@@ -67,6 +89,14 @@
                     "label": "Config.globalGoogleRecaptchaSecretLabel",
                     "options": {
                         "defaultValue": ""
+                    }
+                },
+                "global.google_recaptcha_threshold": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaThreshold",
+                    "options": {
+                        "defaultValue": 0.5
                     }
                 },
                 "global.user_data_hash_max_age": {
