@@ -1,6 +1,6 @@
 {
-    "identifier": "Ceres::ReCaptcha",
-    "label": "Widget.reCaptcha",
+    "identifier": "Ceres::ReCaptchaWidget",
+    "label": "Widget.reCaptchaLabel",
     "previewImageURL": "/images/widgets/recaptcha.svg",
     "type": "default",
     "categories": ["form"],

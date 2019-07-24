@@ -233,7 +233,9 @@ const actions =
                 })
                 .catch(() =>
                 {
-                    console.error("reCAPTCHA validation failed!");
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.contactReCaptchaFailed")
+                    );
                 });
         }
     };
