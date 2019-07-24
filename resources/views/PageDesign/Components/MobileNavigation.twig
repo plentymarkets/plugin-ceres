@@ -31,6 +31,11 @@
                         <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
                     </li>
                 </template>
+                <template v-else-if="dataContainer1.parent">
+                    <li class="ddown" v-for="number in dataContainer1.parent.childCount">
+                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                    </li>
+                </template>
             </ul>
 
             <ul v-menu id="menu-2" class="mainmenu">
@@ -48,6 +53,11 @@
                 </li>
                 <template v-if="dataContainer2.categories[0]">
                     <li class="ddown" v-for="number in dataContainer2.categories[0].siblingCount - dataContainer2.categories.length">
+                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                    </li>
+                </template>
+                <template v-else-if="dataContainer2.parent">
+                    <li class="ddown" v-for="number in dataContainer2.parent.childCount">
                         <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
                     </li>
                 </template>
