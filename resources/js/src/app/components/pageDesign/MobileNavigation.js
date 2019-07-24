@@ -30,44 +30,20 @@ Vue.component("mobile-navigation", {
 
     computed:
     {
-        parentCategories()
-        {
-            const dataContainer = this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
-
-            if (dataContainer.categories.length && dataContainer.parent)
-            {
-                if (dataContainer.parent.parent)
-                {
-                    // returns upper level
-                    return dataContainer.parent.parent.children;
-                }
-
-                // return highest level of navigation
-                return this.navigationTree;
-            }
-
-            return false;
-        },
-
-        currentCategories()
-        {
-            return this.useFirstContainer ? this.dataContainer2.categories : this.dataContainer1.categories;
-        },
-
         breadcrumbs()
         {
             const breadcrumbs = [];
-            let root = this.useFirstContainer ? this.dataContainer2.categories[0] : this.dataContainer1.categories[0];
+            let container = this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
 
-            while (root && root.parent)
+            while (container && container.parent && Object.keys(container.parent).length)
             {
                 breadcrumbs.unshift(
                     {
-                        name: root.parent.details[0].name,
-                        parent: root.parent || null
+                        name: container.parent.details[0].name,
+                        parent: container.parent || null
                     });
 
-                root = root.parent;
+                container = container.parent;
             }
 
             return breadcrumbs;
