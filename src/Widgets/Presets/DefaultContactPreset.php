@@ -41,18 +41,36 @@ class DefaultContactPreset implements ContentPreset
 
     private function createHeadline()
     {
-        $this->preset->createWidget("Ceres::CodeWidget")
+        $this->preset->createWidget("Ceres::InlineTextWidget")
             ->withSetting("text", "<h1>{{ trans(\"Ceres::Template.contact\") }}</h1>")
-            ->withSetting("appearance", "none");
+            ->withSetting("appearance", "none")
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.top.value", 0)
+            ->withSetting("spacing.padding.top.unit", null)
+            ->withSetting("spacing.padding.bottom.value", 0)
+            ->withSetting("spacing.padding.bottom.unit", null)
+            ->withSetting("spacing.padding.left.value", 0)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 0)
+            ->withSetting("spacing.padding.right.unit", null);
 
         $this->preset->createWidget("Ceres::SeparatorWidget");
 
-        $this->preset->createWidget("Ceres::CodeWidget")
+        $this->preset->createWidget("Ceres::InlineTextWidget")
             ->withSetting("text", "<p>{{ trans(\"Ceres::Template.contactShopMessage\") }}</p>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.bottom.value", 5)
-            ->withSetting("spacing.margin.bottom.unit", null);
+            ->withSetting("spacing.margin.bottom.unit", null)
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.top.value", 0)
+            ->withSetting("spacing.padding.top.unit", null)
+            ->withSetting("spacing.padding.bottom.value", 0)
+            ->withSetting("spacing.padding.bottom.unit", null)
+            ->withSetting("spacing.padding.left.value", 0)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 0)
+            ->withSetting("spacing.padding.right.unit", null);
     }
 
     private function createTwoColumnWidget()
