@@ -16085,6 +16085,12 @@ body .wrapper-main {
   }
 }
 
+.category-contact .main .container-max {
+  background-color: #fff;
+  padding-top: 1rem;
+  margin: 2rem 0;
+}
+
 .page-content {
   padding-top: 1rem;
   background-color: #f7f7f9;
