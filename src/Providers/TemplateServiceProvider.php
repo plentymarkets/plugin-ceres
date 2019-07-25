@@ -20,8 +20,6 @@ use Ceres\Extensions\TwigLayoutContainerInternal;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
 use IO\Extensions\Functions\Partial;
-use IO\Helper\CategoryKey;
-use IO\Helper\CategoryMap;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;

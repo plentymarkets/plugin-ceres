@@ -4,9 +4,8 @@ namespace Ceres\Contexts;
 
 use Ceres\Helper\SearchOptions;
 use IO\Helper\ContextInterface;
-use IO\Services\ItemSearch\SearchPresets\Facets;
-use IO\Services\ItemSearch\SearchPresets\SearchItems;
-use IO\Services\ItemSearch\Services\ItemSearchService;
+use IO\Services\VdiSearch\SearchPresets\Facets;
+use IO\Services\VdiSearch\SearchPresets\SearchItems;
 
 class ItemSearchContext extends GlobalContext implements ContextInterface
 {

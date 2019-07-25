@@ -3,7 +3,6 @@
 namespace Ceres\Config;
 
 use IO\Helper\PluginConfig;
-use IO\Services\ItemSearch\Helper\SortingHelper;
 use Plenty\Plugin\ConfigRepository;
 
 class CeresItemListsConfig extends PluginConfig

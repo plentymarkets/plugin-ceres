@@ -4,10 +4,8 @@ namespace Ceres\Contexts;
 
 use Ceres\Helper\ExternalSearch;
 use Ceres\Helper\SearchOptions;
-use IO\Services\ItemSearch\SearchPresets\VariationList;
-use IO\Services\ItemSearch\Services\ItemSearchService;
-use IO\Services\SessionStorageService;
-use Plenty\Plugin\Translation\Translator;
+use IO\Services\VdiSearch\SearchPresets\VariationList;
+use IO\Services\VdiSearch\Services\ItemSearchService;
 
 trait ItemListContext
 {
