@@ -63,20 +63,11 @@ Vue.component("mobile-navigation", {
     {
         addEventListener()
         {
-            const categoryId = this.initialCategory && this.initialCategory.id ? this.initialCategory.id : null;
             const QueryHelper = new MediaQueryHelper();
             const breakpoint = QueryHelper.getCurrentBreakpoint();
             const onMobileBreakpoint = () =>
             {
-                if (this.navigationTree.length <= 0)
-                {
-                    this.$store.dispatch("loadPartialNavigationTree", categoryId)
-                        .then(response =>
-                        {
-                            this.$store.commit("setNavigationTree", response);
-                            this.initNavigation();
-                        });
-                }
+                this.loadInitialTree();
             };
 
             QueryHelper.addFunction(onMobileBreakpoint, ["xs", "md", "sm"]);
@@ -85,7 +76,22 @@ Vue.component("mobile-navigation", {
                 breakpoint === "sm" ||
                 breakpoint === "xs")
             {
-                onMobileBreakpoint();
+                this.loadInitialTree();
+            }
+        },
+
+        loadInitialTree()
+        {
+            if (this.navigationTree.length <= 0)
+            {
+                const categoryId = this.initialCategory && this.initialCategory.id ? this.initialCategory.id : null;
+
+                this.$store.dispatch("loadPartialNavigationTree", categoryId)
+                    .then(response =>
+                    {
+                        this.$store.commit("setNavigationTree", response);
+                        this.initNavigation();
+                    });
             }
         },
 
@@ -124,7 +130,6 @@ Vue.component("mobile-navigation", {
             }
         },
 
-        // eslint-disable-next-line complexity
         slideTo(category, back)
         {
             const children = isDefined(category) ? category.children : this.navigationTree;
