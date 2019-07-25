@@ -29,24 +29,6 @@ const mutations =
 
 const actions =
     {
-        loadNavigationTree({ dispatch }, categoryId = null )
-        {
-            return new Promise((resolve, reject) =>
-            {
-                ApiService
-                    .get("/rest/io/categorytree", { type: App.config.header.showCategoryTypes, categoryId })
-                    .done(response =>
-                    {
-                        dispatch("initNavigationTree", response);
-                        resolve(response);
-                    })
-                    .fail(error =>
-                    {
-                        reject(error);
-                    });
-            });
-        },
-
         loadPartialNavigationTree({ dispatch, commit, state }, categoryId)
         {
             return new Promise((resolve, reject) =>
@@ -71,16 +53,6 @@ const actions =
                     resolve(state.cachedTrees[categoryId]);
                 }
             });
-        },
-
-        initNavigationTree({ dispatch, commit }, navigationTree)
-        {
-            if (navigationTree)
-            {
-                dispatch("buildNavigationTreeItem", { navigationTree });
-            }
-
-            commit("setNavigationTree", navigationTree);
         },
 
         buildNavigationTreeItem({ dispatch }, { navigationTree, parent })
