@@ -15,7 +15,7 @@ class DefaultContactPreset implements ContentPreset
 
     /** @var PresetHelper */
     private $preset;
-    
+
     /** @var Translator */
     private $translator;
 
@@ -117,8 +117,12 @@ class DefaultContactPreset implements ContentPreset
 
     private function createGoogleMapsWidget( $parentFactory = null, $parentDropzone = null )
     {
-        $this->createRootOrChild("Ceres::GoogleMapsWidget", $parentFactory, $parentDropzone );
-    }   
+        $this->createRootOrChild("Ceres::GoogleMapsWidget", $parentFactory, $parentDropzone )
+            ->withSetting("apiKey", "")
+            ->withSetting("address", "")
+            ->withSetting("zoom", 16)
+            ->withSetting("aspectRatio", "prop-xs-3-1");
+    }
 
     private function createMailForm( $parentFactory = null, $parentDropzone = null )
     {
