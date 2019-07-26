@@ -22,6 +22,25 @@
                 "tooltipText": "Widget.googleMapsAddressTooltip"
             }
         },
+        "maptype": {
+            "type": "select",
+            "required": false,
+            "defaultValue": "roadmap",
+            "options": {
+                "name": "Widget.googleMapsMapTypeLabel",
+                "tooltipText": "Widget.googleMapsMapTypeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "roadmap",
+                        "caption": "Widget.googleMapsMapTypeRoadmap"
+                    },
+                    {
+                        "value": "satellite",
+                        "caption": "Widget.googleMapsMapTypeSatellite"
+                    }
+                ]
+            }
+        },
         "zoom": {
             "type": "number",
             "required": false,

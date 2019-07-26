@@ -1318,6 +1318,25 @@
                     "tooltipText": "Widget.googleMapsAddressTooltip"
                 }
             },
+            "maptype": {
+                "type": "select",
+                "required": false,
+                "defaultValue": "roadmap",
+                "options": {
+                    "name": "Widget.googleMapsMapTypeLabel",
+                    "tooltipText": "Widget.googleMapsMapTypeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "roadmap",
+                            "caption": "Widget.googleMapsMapTypeRoadmap"
+                        },
+                        {
+                            "value": "satellite",
+                            "caption": "Widget.googleMapsMapTypeSatellite"
+                        }
+                    ]
+                }
+            },
             "zoom": {
                 "type": "number",
                 "required": false,
@@ -3418,40 +3437,45 @@
             "appearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "primary",
+                "defaultValue": "none",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
                     "listBoxValues": [
                         {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
                             "value": "primary",
                             "caption": "Widget.widgetAppearancePrimary",
-                            "position": 0
+                            "position": 1
                         },
                         {
                             "value": "secondary",
                             "caption": "Widget.widgetAppearanceSecondary",
-                            "position": 1
+                            "position": 2
                         },
                         {
                             "value": "success",
                             "caption": "Widget.widgetAppearanceSuccess",
-                            "position": 2
+                            "position": 3
                         },
                         {
                             "value": "info",
                             "caption": "Widget.widgetAppearanceInfo",
-                            "position": 3
+                            "position": 4
                         },
                         {
                             "value": "warning",
                             "caption": "Widget.widgetAppearanceWarning",
-                            "position": 4
+                            "position": 5
                         },
                         {
                             "value": "danger",
                             "caption": "Widget.widgetAppearanceDanger",
-                            "position": 5
+                            "position": 6
                         }
                     ]
                 }

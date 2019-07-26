@@ -3,12 +3,9 @@
 namespace Ceres\Widgets\Common;
 
 use Ceres\Widgets\Helper\BaseWidget;
-use Plenty\Plugin\Log\Loggable;
 
 class GoogleMapsWidget extends BaseWidget
 {
-    use Loggable;
-
     protected $template = "Ceres::Widgets.Common.GoogleMapsWidget";
 
     protected function getTemplateData($widgetSettings, $isPreview)
@@ -40,8 +37,6 @@ class GoogleMapsWidget extends BaseWidget
         $result = json_decode($result_json, true);
 
         curl_close($curl);
-
-        $this->getLogger(__METHOD__)->error("GMAPSSKKKR",$result);
 
         $lat = isset($result["results"][0]["geometry"]["location"]["lat"]) ? $result["results"][0]["geometry"]["location"]["lat"] : "";
         $lng = isset($result["results"][0]["geometry"]["location"]["lng"]) ? $result["results"][0]["geometry"]["location"]["lng"] : "";

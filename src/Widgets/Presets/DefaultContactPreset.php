@@ -121,6 +121,7 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("apiKey", "")
             ->withSetting("address", "")
             ->withSetting("zoom", 16)
+            ->withSetting("maptype", "roadmap")
             ->withSetting("aspectRatio", "prop-xs-3-1");
     }
 
