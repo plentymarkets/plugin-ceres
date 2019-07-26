@@ -8,7 +8,11 @@ Vue.component("mobile-navigation", {
             default: "#vue-mobile-navigation",
             type: String
         },
-        initialCategory: Object
+        initialCategory: Object,
+        breakpoints: {
+            type: Array,
+            default: () => ["xs", "sm", "md"]
+        }
     },
 
     data()
@@ -70,11 +74,9 @@ Vue.component("mobile-navigation", {
                 this.loadInitialTree();
             };
 
-            QueryHelper.addFunction(onMobileBreakpoint, ["xs", "md", "sm"]);
+            QueryHelper.addFunction(onMobileBreakpoint, this.breakpoints);
 
-            if (breakpoint === "md" ||
-                breakpoint === "sm" ||
-                breakpoint === "xs")
+            if (this.breakpoints.includes(breakpoint))
             {
                 this.loadInitialTree();
             }
