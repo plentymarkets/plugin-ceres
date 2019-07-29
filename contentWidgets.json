@@ -1333,6 +1333,14 @@
                         {
                             "value": "satellite",
                             "caption": "Widget.googleMapsMapTypeSatellite"
+                        },
+                        {
+                            "value": "hybrid",
+                            "caption": "Widget.googleMapsMapTypeHybrid"
+                        },
+                        {
+                            "value": "terrain",
+                            "caption": "Widget.googleMapsMapTypeTerrain"
                         }
                     ]
                 }
