@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/recaptcha.svg",
     "type": "default",
     "categories": ["form"],
-    "widgetClass": "Ceres\\Widgets\\Common\\ReCaptchaWidget",
+    "widgetClass": "Ceres\\Widgets\\Form\\ReCaptchaWidget",
     "position": 800,
     "settings": {
         "customClass":"@include(customClass)",
