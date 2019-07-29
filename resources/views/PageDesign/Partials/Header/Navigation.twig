@@ -22,11 +22,7 @@
             </div>
 
             <div id="mainNavbarCollapsable" class="d-none d-lg-block">
-                <ul class="breadcrumb">
-                    <li class="btnClose"></li>
-                </ul>
                 {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
-                    {# includeCached('Ceres::PageDesign.Partials.Header.NavigationList.twig') #}
                     {% include "Ceres::PageDesign.Partials.Header.NavigationList" %}
                 {% endif %}
             </div>
