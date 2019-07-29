@@ -27,6 +27,11 @@ Vue.component("google-maps-widget",
                     type: Number,
                     default: 16
                 },
+            maptype:
+                {
+                    type: String,
+                    default: "roadmap"
+                },
             aspectRatio:
                 {
                     type: String,
@@ -143,7 +148,8 @@ Vue.component("google-maps-widget",
                 const map = new google.maps.Map(this.$refs.googleMapsContainer,
                     {
                         center: coordinates,
-                        zoom  : this.zoom
+                        zoom  : this.zoom,
+                        mapTypeId: this.maptype
                     });
 
                 new google.maps.Marker(
