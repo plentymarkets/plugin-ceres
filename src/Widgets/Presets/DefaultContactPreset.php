@@ -35,7 +35,7 @@ class DefaultContactPreset implements ContentPreset
                 ->withSetting("layoutMobile", "stackedMobile");
 
             $this->createContactDetailsWidget( $row_1, "first" );
-            $this->createGoogleMapsWidget( $row_1, "second" );
+            $this->createGoogleMapsWidget( $row_1, "second", $this->config->contact->apiKey);   // Migrate API Key
             $this->createMailForm();
         }
         else
@@ -115,10 +115,10 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("spacing.padding.bottom.unit", null);
     }
 
-    private function createGoogleMapsWidget( $parentFactory = null, $parentDropzone = null )
+    private function createGoogleMapsWidget( $parentFactory = null, $parentDropzone = null, $apiKey = "")
     {
         $this->createRootOrChild("Ceres::GoogleMapsWidget", $parentFactory, $parentDropzone )
-            ->withSetting("apiKey", "")
+            ->withSetting("apiKey", $apiKey)
             ->withSetting("address", "")
             ->withSetting("zoom", 16)
             ->withSetting("maptype", "roadmap")
