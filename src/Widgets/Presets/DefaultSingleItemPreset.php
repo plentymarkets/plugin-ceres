@@ -21,6 +21,9 @@ class DefaultSingleItemPreset implements ContentPreset
     private $twoColumnWidget;
 
     /** @var PresetWidgetFactory */
+    private $secondTwoColumnWidget;
+
+    /** @var PresetWidgetFactory */
     private $stickyContainer;
 
     /** @var PresetWidgetFactory */
@@ -36,6 +39,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->translator = pluginApp(Translator::class);
 
         $this->createTwoColumnWidget();
+        $this->createSecondTwoColumnWidget();
         $this->createItemImageWidget();
         $this->createTabWidget();
         $this->createStickyContainer();
@@ -67,6 +71,12 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
             ->withSetting('layout', 'sevenToFive')
             ->withSetting('customClass','mt-5');
+    }
+
+    private function createSecondTwoColumnWidget()
+    {
+        $this->secondTwoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
+            ->withSetting('layout', 'sevenToFive');
     }
 
     private function createManufacturer()
@@ -233,7 +243,7 @@ class DefaultSingleItemPreset implements ContentPreset
                       array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),
                       array('title' => $titleTabMoreDetails, 'uuid' => $uuidTabMoreDetails));
 
-        $this->tabWidget = $this->twoColumnWidget->createChild('first', 'Ceres::TabWidget')
+        $this->tabWidget = $this->secondTwoColumnWidget->createChild('first', 'Ceres::TabWidget')
             ->withSetting('tabs', $tabs)
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.bottom.value', 5)
