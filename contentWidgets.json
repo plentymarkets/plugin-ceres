@@ -3396,6 +3396,96 @@
         }
     },
     {
+        "identifier": "Ceres::AcceptPrivacyPolicyWidget",
+        "label": "Widget.acceptPrivacyPolicyLabel",
+        "previewImageURL": "/images/widgets/contact-data.svg",
+        "type": "default",
+        "categories": [
+            "contact"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Contact\\AcceptPrivacyPolicyWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::ContactDetailsWidget",
         "label": "Widget.contactDetailsLabel",
         "previewImageURL": "/images/widgets/contact-data.svg",
@@ -3418,40 +3508,45 @@
             "appearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "primary",
+                "defaultValue": "none",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
                     "listBoxValues": [
                         {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
                             "value": "primary",
                             "caption": "Widget.widgetAppearancePrimary",
-                            "position": 0
+                            "position": 1
                         },
                         {
                             "value": "secondary",
                             "caption": "Widget.widgetAppearanceSecondary",
-                            "position": 1
+                            "position": 2
                         },
                         {
                             "value": "success",
                             "caption": "Widget.widgetAppearanceSuccess",
-                            "position": 2
+                            "position": 3
                         },
                         {
                             "value": "info",
                             "caption": "Widget.widgetAppearanceInfo",
-                            "position": 3
+                            "position": 4
                         },
                         {
                             "value": "warning",
                             "caption": "Widget.widgetAppearanceWarning",
-                            "position": 4
+                            "position": 5
                         },
                         {
                             "value": "danger",
                             "caption": "Widget.widgetAppearanceDanger",
-                            "position": 5
+                            "position": 6
                         }
                     ]
                 }
