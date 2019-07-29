@@ -122,7 +122,7 @@ export class StickyElement
         const oldValue          = this.position || {};
         const elementRect       = this.el.getBoundingClientRect();
         const placeholderRect   = this.placeholder.getBoundingClientRect();
-        const containerRect     = this.getContainerElement().getBoundingClientRect();
+        const containerRect     = document.getElementById("page-body").getBoundingClientRect();
         const maxBottom         = Math.min(containerRect.bottom - elementRect.height - this.offsetTop - this.offsetBottom, 0);
 
         if (oldValue.height !== elementRect.height && !skipOffsetCalculation)
@@ -142,6 +142,7 @@ export class StickyElement
         };
     }
 
+    // eslint-disable-next-line
     calculateOffset()
     {
         if (!this.enabled)
@@ -151,6 +152,7 @@ export class StickyElement
 
         this.offsetTop = 0;
 
+        // Check if Custom Header
         if (document.getElementById("page-header-parent"))
         {
             const headerChildren = document.getElementById("page-header-parent").children;
@@ -162,6 +164,10 @@ export class StickyElement
                     this.offsetTop += headerChildren[i].getBoundingClientRect().height;
                 }
             }
+        }
+        else
+        {
+            this.offsetTop += document.getElementById("page-header").getBoundingClientRect().height;
         }
 
         this.offsetBottom = 0;
