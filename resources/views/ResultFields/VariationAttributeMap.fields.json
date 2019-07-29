@@ -1,5 +1,12 @@
 [
-    "attributes.*",
+    "attributes.attributeId",
+    "attributes.attribute.typeOfSelectionInOnlineStore",
+    "attributes.attribute.names.*",
+    "attributes.attribute.position",
+    "attributes.value.id",
+    "attributes.value.image",
+    "attributes.value.position",
+    "attributes.value.names.*",
     "itemId",
     "id",
     "item.id",
@@ -7,12 +14,13 @@
     "variation.unitCombinationId",
     "texts.lang",
     "texts.urlPath",
-    "bundleComponents.*",
     "unit.id",
     "unit.content",
     "unit.names.name",
     "unit.names.lang",
     "unit.unitOfMeasurement",
     "filter.isSalable",
-    "images.*"
-    ]
+    "images.variation.path",
+    "images.variation.position",
+    "images.variation.urlPreview"
+]
