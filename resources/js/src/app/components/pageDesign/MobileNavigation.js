@@ -69,12 +69,8 @@ Vue.component("mobile-navigation", {
         {
             const QueryHelper = new MediaQueryHelper();
             const breakpoint = QueryHelper.getCurrentBreakpoint();
-            const onMobileBreakpoint = () =>
-            {
-                this.loadInitialTree();
-            };
 
-            QueryHelper.addFunction(onMobileBreakpoint, this.breakpoints);
+            QueryHelper.addFunction(this.loadInitialTree, this.breakpoints);
 
             if (this.breakpoints.includes(breakpoint))
             {
