@@ -4567,7 +4567,28 @@
             },
             "spacing": {
                 "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
                 "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "isVisible": "selectType !== 'dropdown'",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding && selectType !== 'dropdown'",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
                     "customMargin": {
                         "type": "checkbox",
                         "options": {
