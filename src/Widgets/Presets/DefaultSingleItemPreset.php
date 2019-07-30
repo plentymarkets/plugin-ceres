@@ -74,6 +74,12 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('customClass','mt-5');
     }
 
+    private function createSecondTwoColumnWidget()
+    {
+        $this->secondTwoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
+            ->withSetting('layout', 'sevenToFive');
+    }
+
     private function createManufacturer()
     {
         $dataProvider = $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName'));
