@@ -44932,7 +44932,7 @@ var MonetaryFormatter = function () {
             }
 
             while (result.length < numberOfDecimals) {
-              result = "0" + result;
+              result = result + "0";
             }
 
             return _this2.separatorDecimals + result;
