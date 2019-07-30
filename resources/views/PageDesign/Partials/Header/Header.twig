@@ -50,8 +50,5 @@
     {% else %}
         {% set initialCategory = category %}
     {% endif %}
-    <mobile-navigation
-            :initial-category="{{ initialCategory | json_encode }}"
-            template="#vue-mobile-navigation">
-    </mobile-navigation>
+    <mobile-navigation :initial-category="{{ initialCategory | json_encode }}"></mobile-navigation>
 </div>
