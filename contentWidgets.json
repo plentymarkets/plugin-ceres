@@ -1558,6 +1558,25 @@
                     ]
                 }
             },
+            "animationStyle": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "slide",
+                "options": {
+                    "name": "Widget.imageCarouselAnimationStyleLabel",
+                    "tooltipText": "Widget.imageCarouselAnimationStyleTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "slide",
+                            "caption": "Widget.imageCarouselAnimationStyleSlide"
+                        },
+                        {
+                            "value": "fade",
+                            "caption": "Widget.imageCarouselAnimationStyleFade"
+                        }
+                    ]
+                }
+            },
             "aspectRatio": {
                 "type": "select",
                 "required": true,
