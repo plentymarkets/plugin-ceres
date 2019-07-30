@@ -3,17 +3,10 @@
     "label": "Widget.acceptPrivacyPolicyLabel",
     "previewImageURL": "/images/widgets/contact-data.svg",
     "type": "default",
-    "categories": ["contact"],
+    "categories": ["form"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Form\\AcceptPrivacyPolicyWidget",
     "settings": {
-        "customClass":"@include(customClass)",
-        "appearance": {
-            "type": "select",
-            "required": true,
-            "defaultValue": "none",
-            "options": "@include(optionalAppearance)"
-        },
-        "spacing":"@include(spacingMargin)"
+        "spacing":"@include(spacing)"
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ceres\Widgets\Contact;
+namespace Ceres\Widgets\Form;
 
 use Ceres\Widgets\Helper\BaseWidget;
 

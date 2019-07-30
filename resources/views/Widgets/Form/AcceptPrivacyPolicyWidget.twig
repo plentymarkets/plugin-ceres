@@ -1,9 +1,33 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{% set formFieldId     = widget.settings.key.mobile | default(uid()) %}
+
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-<div>
+<div {% if spacingMargin | length > 0 %} class="{{ spacingMargin }}"{% endif %}{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="select-unit required" data-validate="">
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="checkbox"
+                   name="{{ formFieldId }}"
+                   value="acceptPrivacy"
+                   id="{{ formFieldId }}">
+            <label class="form-check-label {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} for="{{ formFieldId }}">
+                {% autoescape false %}
+                    {% set policyContent %}<!--
+                    --><a href="{{ urls.privacyPolicy }}" target="_blank">
+                        <span>{{ trans("Ceres::Template.contactPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
+                    </a><!--
+                -->{% endset %}
 
+                    {{ trans("Ceres::Template.contactAcceptPrivacyPolicy", {"policy": policyContent}) }}<!--
+                --><sup>*</sup>
+                {% endautoescape %}
+            </label>
+        </div>
+    </div>
 </div>
