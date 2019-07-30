@@ -117,14 +117,8 @@ export class StickyElement
         const oldValue        = this.position || {};
         const elementRect     = this.el.getBoundingClientRect();
         const placeholderRect = this.placeholder.getBoundingClientRect();
-        let containerRect     = this.getContainerElement().getBoundingClientRect();
-
-        if (this.el.classList.contains("stickToBody"))
-        {
-            containerRect = document.getElementById("page-body").getBoundingClientRect();
-        }
-
-        const maxBottom = Math.min(containerRect.bottom - elementRect.height - this.offsetTop - this.offsetBottom, 0);
+        const containerRect   = this.getContainerElement().getBoundingClientRect();
+        const maxBottom       = Math.min(containerRect.bottom - elementRect.height - this.offsetTop - this.offsetBottom, 0);
 
         if (oldValue.height !== elementRect.height && !skipOffsetCalculation)
         {
@@ -154,9 +148,9 @@ export class StickyElement
         this.offsetTop = 0;
 
         // Check if Custom Header
-        if (document.getElementById("page-header-parent"))
+        if (document.getElementsByClassName("page-header-parent").length > 0)
         {
-            const headerChildren = document.getElementById("page-header-parent").children;
+            const headerChildren = document.getElementsByClassName("page-header-parent")[0].children;
 
             for (let i = 0; i < headerChildren.length; i++)
             {
