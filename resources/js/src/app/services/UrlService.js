@@ -1,7 +1,76 @@
-import $ from "jquery";
 import { isDefined, isNullOrUndefined } from "../helper/utils";
 import { normalizeUrl } from "../helper/url";
 import store from "../store/index";
+import { set } from "../helper/set";
+
+function _parseUrlParam(paramKey, paramValue, result)
+{
+    if (isNullOrUndefined(result))
+    {
+        result = {};
+    }
+
+    const regex = /(^([^\[]+)|\[([^\]]*)\])/gm;
+    let match;
+    const keyList = [];
+
+    while ((match = regex.exec(paramKey)) !== null)
+    {
+        if (match.index === regex.lastIndex)
+        {
+            regex.lastIndex++;
+        }
+
+        keyList.push(match[2] || match[3]);
+    }
+
+    return set(result, keyList, paramValue);
+}
+
+function _createQueryString(params)
+{
+    const _createParamStrings = function(params, prefix, result)
+    {
+        if ( Array.isArray(params) )
+        {
+            params.forEach(param =>
+            {
+                _createParamStrings(param, prefix + "[]", result);
+            });
+        }
+        else if ( typeof params === "object" )
+        {
+            for ( const key in params)
+            {
+                if ( prefix.length > 0 )
+                {
+                    _createParamStrings(params[key], prefix + "[" + key + "]", result);
+                }
+                else
+                {
+                    _createParamStrings(params[key], key, result);
+                }
+            }
+        }
+        else
+        {
+            result.push(
+                encodeURIComponent(prefix) + "=" + encodeURIComponent(params)
+            );
+        }
+
+        return result;
+    };
+
+    const paramStrings = _createParamStrings(params, "", []);
+
+    if (paramStrings.length > 0)
+    {
+        return "?" + paramStrings.join("&");
+    }
+
+    return "";
+}
 
 export function getUrlParams(urlParams)
 {
@@ -10,29 +79,17 @@ export function getUrlParams(urlParams)
         urlParams = document.location.search;
     }
 
-    if (isNullOrUndefined(urlParams))
+    const regex = /[\\?&]([^=&#]+)=([^&#]*)/gm;
+    let result = {};
+    let match;
+
+    while ((match = regex.exec(urlParams)) !== null)
     {
-        return {};
-    }
-
-    urlParams = urlParams.split("+").join(" ");
-
-    const result = {};
-    const params = (window.location.search.split("?")[1] || "").split("&");
-
-    for (const param in params)
-    {
-        if (params.hasOwnProperty(param))
+        if (match.index === regex.lastIndex)
         {
-            const paramParts = params[param].split("=");
-
-            result[paramParts[0]] = decodeURIComponent(paramParts[1] || "");
+            regex.lastIndex++;
         }
-    }
-
-    if (result.hasOwnProperty(""))
-    {
-        delete result[""];
+        result = _parseUrlParam(decodeURIComponent(match[1]), decodeURIComponent(match[2]), result);
     }
 
     return result;
@@ -46,7 +103,7 @@ export function setUrlParams(urlParams, pushState = true)
             store.state.navigation.currentCategory.url :
             window.location.pathname;
 
-    const params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
+    const params = _createQueryString(urlParams);
     const titleElement = document.getElementsByTagName("title")[0];
 
     if (pushState)
@@ -60,16 +117,18 @@ export function setUrlParams(urlParams, pushState = true)
 
     document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url:pathName + params } }));
 
-    $("a[href][data-update-url]").each((i, element) =>
-    {
-        const $element  = $(element);
-        const href      = /^([^?]*)(\?.*)?$/.exec($element.attr("href"));
-
-        if (href && href[1])
+    Array.prototype
+        .slice
+        .call(document.querySelectorAll("a[href][data-update-url]"))
+        .forEach(element =>
         {
-            $element.attr("href", href[1] + params);
-        }
-    });
+            const href = /^([^?]*)(\?.*)?$/.exec(element.href);
+
+            if (href && href[1])
+            {
+                element.href = href[1] + params;
+            }
+        });
 }
 
 export function setUrlParam(urlParam)
