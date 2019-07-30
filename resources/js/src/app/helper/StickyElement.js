@@ -111,7 +111,6 @@ export class StickyElement
         }
     }
 
-    // eslint-disable-next-line
     checkElement(skipOffsetCalculation)
     {
         const oldValue        = this.position || {};
@@ -137,7 +136,6 @@ export class StickyElement
         };
     }
 
-    // eslint-disable-next-line
     calculateOffset()
     {
         if (!this.enabled)
