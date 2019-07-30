@@ -231,12 +231,6 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('appearance', 'primary');
     }
 
-    private function createSecondTwoColumnWidget()
-    {
-        $this->secondTwoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
-            ->withSetting('layout', 'sevenToFive');
-    }
-
     private function createTabWidget()
     {
         $uuidGenerator = pluginApp(UniqueId::class);
