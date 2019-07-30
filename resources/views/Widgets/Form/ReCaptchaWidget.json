@@ -2,10 +2,10 @@
     "identifier": "Ceres::ReCaptchaWidget",
     "label": "Widget.reCaptchaLabel",
     "previewImageURL": "/images/widgets/recaptcha.svg",
-    "type": "default",
+    "type": "form",
     "categories": ["form"],
-    "widgetClass": "Ceres\\Widgets\\Form\\ReCaptchaWidget",
     "position": 800,
+    "widgetClass": "Ceres\\Widgets\\Form\\ReCaptchaWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "spacing":"@include(spacing)"
