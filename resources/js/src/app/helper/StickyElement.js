@@ -111,19 +111,20 @@ export class StickyElement
         }
     }
 
+    // eslint-disable-next-line
     checkElement(skipOffsetCalculation)
     {
-        /*
-        if (isNullOrUndefined(this.el) || isNullOrUndefined(this.placeholder))
+        const oldValue        = this.position || {};
+        const elementRect     = this.el.getBoundingClientRect();
+        const placeholderRect = this.placeholder.getBoundingClientRect();
+        let containerRect     = this.getContainerElement().getBoundingClientRect();
+
+        if (this.el.classList.contains("stickToBody"))
         {
-            return;
+            containerRect = document.getElementById("page-body").getBoundingClientRect();
         }
-        */
-        const oldValue          = this.position || {};
-        const elementRect       = this.el.getBoundingClientRect();
-        const placeholderRect   = this.placeholder.getBoundingClientRect();
-        const containerRect     = document.getElementById("page-body").getBoundingClientRect();
-        const maxBottom         = Math.min(containerRect.bottom - elementRect.height - this.offsetTop - this.offsetBottom, 0);
+
+        const maxBottom = Math.min(containerRect.bottom - elementRect.height - this.offsetTop - this.offsetBottom, 0);
 
         if (oldValue.height !== elementRect.height && !skipOffsetCalculation)
         {

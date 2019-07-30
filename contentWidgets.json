@@ -4037,6 +4037,25 @@
                     "name": "Widget.customClass",
                     "tooltipText": "Widget.customClassTooltip"
                 }
+            },
+            "stickTo": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "stickToParent",
+                "options": {
+                    "name": "Widget.stickyContainerStickLabel",
+                    "tooltipText": "Widget.stickyContainerStickTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "stickToParent",
+                            "caption": "Widget.stickyContainerStickToParent"
+                        },
+                        {
+                            "value": "stickToBody",
+                            "caption": "Widget.stickyContainerStickToBody"
+                        }
+                    ]
+                }
             }
         }
     },
