@@ -155,7 +155,7 @@ Vue.component("item-image-carousel", {
 
             if (this.animationStyle !== "standard")
             {
-                carouselOptions.animateOut = this.animationStyle;
+                carouselSettings.animateOut = this.animationStyle;
             }
 
             $(this.$refs.single).owlCarousel(carouselSettings);
