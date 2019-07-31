@@ -4235,7 +4235,7 @@
     {
         "identifier": "Ceres::AcceptPrivacyPolicyWidget",
         "label": "Widget.acceptPrivacyPolicyLabel",
-        "previewImageURL": "/images/widgets/contact-data.svg",
+        "previewImageURL": "/images/widgets/accept-privacy-policy.svg",
         "type": "default",
         "categories": [
             "form"
