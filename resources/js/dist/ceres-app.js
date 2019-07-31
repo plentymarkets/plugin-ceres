@@ -46082,6 +46082,8 @@ module.exports = function ($) {
       return new Promise(function (resolve, reject) {
         $bsModal.modal("hide");
         $bsModal.one("hidden.bs.modal", function () {
+          $bsModal.find(".modal-content").unbind("mouseenter");
+          $bsModal.find(".modal-content").unbind("mouseleave");
           resolve(self);
         });
       });
@@ -46093,10 +46095,10 @@ module.exports = function ($) {
 
     function setTimeout(timeout) {
       $bsModal.timeout = timeout;
-      $bsModal.find(".modal-content").mouseover(function () {
+      $bsModal.find(".modal-content").mouseenter(function () {
         pauseTimeout();
       });
-      $bsModal.find(".modal-content").mouseout(function () {
+      $bsModal.find(".modal-content").mouseleave(function () {
         continueTimeout();
       });
       return this;
