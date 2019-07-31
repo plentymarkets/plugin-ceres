@@ -1561,13 +1561,13 @@
             "animationStyle": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "slide",
+                "defaultValue": "standard",
                 "options": {
                     "name": "Widget.imageCarouselAnimationStyleLabel",
                     "tooltipText": "Widget.imageCarouselAnimationStyleTooltip",
                     "listBoxValues": [
                         {
-                            "value": "slide",
+                            "value": "standard",
                             "caption": "Widget.imageCarouselAnimationStyleSlide"
                         },
                         {
@@ -5545,6 +5545,25 @@
                             "value": "danger",
                             "caption": "Widget.widgetAppearanceDanger",
                             "position": 5
+                        }
+                    ]
+                }
+            },
+            "animationStyle": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "standard",
+                "options": {
+                    "name": "Widget.itemImageAnimationStyleLabel",
+                    "tooltipText": "Widget.itemImageAnimationStyleTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "standard",
+                            "caption": "Widget.itemImageAnimationStyleSlide"
+                        },
+                        {
+                            "value": "fadeOut",
+                            "caption": "Widget.itemImageAnimationStyleFade"
                         }
                     ]
                 }

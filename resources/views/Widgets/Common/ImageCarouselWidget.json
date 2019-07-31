@@ -17,13 +17,13 @@
         "animationStyle": {
             "type": "select",
             "required": true,
-            "defaultValue": "slide",
+            "defaultValue": "standard",
             "options": {
                 "name": "Widget.imageCarouselAnimationStyleLabel",
                 "tooltipText": "Widget.imageCarouselAnimationStyleTooltip",
                 "listBoxValues": [
                     {
-                        "value": "slide",
+                        "value": "standard",
                         "caption": "Widget.imageCarouselAnimationStyleSlide"
                     },
                     {
