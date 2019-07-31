@@ -1,7 +1,7 @@
 {
     "identifier": "Ceres::ContactDetailsWidget",
     "label": "Widget.contactDetailsLabel",
-    "previewImageURL": "/images/widgets/contact-data.svg",
+    "previewImageURL": "/images/widgets/contact-details.svg",
     "type": "default",
     "categories": ["contact"],
     "position": 100,
