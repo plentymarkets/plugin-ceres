@@ -112,6 +112,13 @@ function readFormOptions(form, formData)
     return formOptions;
 }
 
+function disableForm(form, disabled)
+{
+    Array.prototype.slice.call(
+        form.querySelectorAll("input, select, textarea, button")
+    ).forEach(input => input.disabled = disabled);
+}
+
 const actions =
     {
         sendContactForm(state, event)
@@ -185,6 +192,7 @@ const actions =
             recaptchaValidation
                 .then((recaptchaResponse) =>
                 {
+                    disableForm(event.target, true);
                     ValidationService.validate(event.target)
                         .done(() =>
                         {
@@ -199,18 +207,20 @@ const actions =
                                     subject:    formOptions.subject || "",
                                     cc:         formOptions.cc,
                                     replyTo:    formOptions.replyTo,
-                                    recaptchaToken: recaptchaResponse
+                                    recaptchaToken: recaptchaResponse || App.config.global.googleRecaptchaApiKey
                                 }
                             )
                                 .done(reponse =>
                                 {
                                     event.target.reset();
+                                    disableForm(event.target, false);
                                     NotificationService.success(
                                         TranslationService.translate("Ceres::Template.contactSendSuccess")
                                     );
                                 })
                                 .fail(response =>
                                 {
+                                    disableForm(event.target, false);
                                     NotificationService.error(
                                         TranslationService.translate("Ceres::Template.contactSendFail")
                                     );

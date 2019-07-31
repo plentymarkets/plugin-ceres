@@ -4,7 +4,7 @@
     {% if entry.value is iterable %}
         <ul>
         {% for value in entry.value %}
-            <li>{{ value }}</li>
+            <li>{{ value | nl2br }}</li>
         {% endfor %}
         </ul>
     {% else %}
