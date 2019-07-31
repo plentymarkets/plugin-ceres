@@ -39112,6 +39112,10 @@ Vue.component("item-image-carousel", {
     showDots: {
       type: Boolean,
       "default": true
+    },
+    animationStyle: {
+      type: String,
+      "default": "standard"
     }
   },
   data: function data() {
@@ -39174,7 +39178,7 @@ Vue.component("item-image-carousel", {
       var _this3 = this;
 
       var imageCount = this.getImageCount();
-      $(this.$refs.single).owlCarousel({
+      var carouselSettings = {
         autoHeight: true,
         dots: this.showDots,
         items: 1,
@@ -39191,7 +39195,13 @@ Vue.component("item-image-carousel", {
           var $thumb = $(_this3.$refs.thumbs);
           $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
         }
-      });
+      };
+
+      if (this.animationStyle !== "standard") {
+        carouselSettings.animateOut = this.animationStyle;
+      }
+
+      $(this.$refs.single).owlCarousel(carouselSettings);
 
       if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
         window.lightbox.option({
@@ -45174,12 +45184,6 @@ function () {
   }, {
     key: "checkElement",
     value: function checkElement(skipOffsetCalculation) {
-      /*
-      if (isNullOrUndefined(this.el) || isNullOrUndefined(this.placeholder))
-      {
-          return;
-      }
-      */
       var oldValue = this.position || {};
       var elementRect = this.el.getBoundingClientRect();
       var placeholderRect = this.placeholder.getBoundingClientRect();
@@ -45210,16 +45214,18 @@ function () {
         return;
       }
 
-      this.offsetTop = 0;
+      this.offsetTop = 0; // Check if Custom Header
 
-      if (document.getElementById("page-header-parent")) {
-        var headerChildren = document.getElementById("page-header-parent").children;
+      if (document.querySelector("[data-header-offset]")) {
+        var headerChildren = document.querySelector("[data-header-offset]").children;
 
         for (var i = 0; i < headerChildren.length; i++) {
           if (!headerChildren[i].classList.contains("unfixed")) {
             this.offsetTop += headerChildren[i].getBoundingClientRect().height;
           }
         }
+      } else {
+        this.offsetTop += document.getElementById("page-header").getBoundingClientRect().height;
       }
 
       this.offsetBottom = 0;
