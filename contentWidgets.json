@@ -3361,7 +3361,7 @@
     {
         "identifier": "Ceres::ContactDetailsWidget",
         "label": "Widget.contactDetailsLabel",
-        "previewImageURL": "/images/widgets/contact-data.svg",
+        "previewImageURL": "/images/widgets/contact-details.svg",
         "type": "default",
         "categories": [
             "contact"
@@ -4203,7 +4203,7 @@
         "categories": [
             "form"
         ],
-        "position": 100,
+        "position": 600,
         "widgetClass": "Ceres\\Widgets\\Form\\AcceptPrivacyPolicyWidget",
         "settings": {
             "spacing": {
@@ -4492,7 +4492,7 @@
         "categories": [
             "form"
         ],
-        "position": 800,
+        "position": 700,
         "widgetClass": "Ceres\\Widgets\\Form\\ReCaptchaWidget",
         "settings": {
             "customClass": {
