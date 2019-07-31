@@ -1558,6 +1558,25 @@
                     ]
                 }
             },
+            "animationStyle": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "standard",
+                "options": {
+                    "name": "Widget.imageCarouselAnimationStyleLabel",
+                    "tooltipText": "Widget.imageCarouselAnimationStyleTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "standard",
+                            "caption": "Widget.imageCarouselAnimationStyleSlide"
+                        },
+                        {
+                            "value": "fade",
+                            "caption": "Widget.imageCarouselAnimationStyleFade"
+                        }
+                    ]
+                }
+            },
             "aspectRatio": {
                 "type": "select",
                 "required": true,
@@ -5545,6 +5564,25 @@
                             "value": "danger",
                             "caption": "Widget.widgetAppearanceDanger",
                             "position": 5
+                        }
+                    ]
+                }
+            },
+            "animationStyle": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "standard",
+                "options": {
+                    "name": "Widget.itemImageAnimationStyleLabel",
+                    "tooltipText": "Widget.itemImageAnimationStyleTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "standard",
+                            "caption": "Widget.itemImageAnimationStyleSlide"
+                        },
+                        {
+                            "value": "fadeOut",
+                            "caption": "Widget.itemImageAnimationStyleFade"
                         }
                     ]
                 }
