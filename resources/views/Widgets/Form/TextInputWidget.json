@@ -7,6 +7,7 @@
     "position": 300,
     "widgetClass": "Ceres\\Widgets\\Form\\TextInputWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "key": {
             "type": "text",
             "required": false,

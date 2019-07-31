@@ -3361,7 +3361,7 @@
     {
         "identifier": "Ceres::ContactDetailsWidget",
         "label": "Widget.contactDetailsLabel",
-        "previewImageURL": "/images/widgets/contact-data.svg",
+        "previewImageURL": "/images/widgets/contact-details.svg",
         "type": "default",
         "categories": [
             "contact"
@@ -4206,6 +4206,15 @@
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\Form\\AcceptPrivacyPolicyWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
             "spacing": {
                 "type": "vertical",
                 "options": {
@@ -4417,6 +4426,15 @@
         "position": 200,
         "widgetClass": "Ceres\\Widgets\\Form\\MailInputWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
             "key": {
                 "type": "text",
                 "required": false,
@@ -4559,6 +4577,15 @@
         "position": 500,
         "widgetClass": "Ceres\\Widgets\\Form\\SelectionWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
             "key": {
                 "type": "text",
                 "required": false,
@@ -4676,6 +4703,15 @@
         "position": 400,
         "widgetClass": "Ceres\\Widgets\\Form\\TextAreaWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
             "key": {
                 "type": "text",
                 "required": false,
@@ -4756,6 +4792,15 @@
         "position": 300,
         "widgetClass": "Ceres\\Widgets\\Form\\TextInputWidget",
         "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
             "key": {
                 "type": "text",
                 "required": false,
