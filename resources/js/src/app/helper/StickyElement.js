@@ -146,9 +146,9 @@ export class StickyElement
         this.offsetTop = 0;
 
         // Check if Custom Header
-        if (document.getElementsByClassName("page-header-parent").length > 0)
+        if (document.querySelector("[data-page-header-parent]"))
         {
-            const headerChildren = document.getElementsByClassName("page-header-parent")[0].children;
+            const headerChildren = document.querySelector("[data-page-header-parent]").children;
 
             for (let i = 0; i < headerChildren.length; i++)
             {

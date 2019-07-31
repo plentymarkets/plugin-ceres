@@ -248,7 +248,7 @@
 
     (function($, MediaQueryHelper) {
         var vueApp = document.getElementById('vue-app');
-        var headerParent = document.getElementById('page-header-parent');
+        var headerParent = document.querySelector("[data-page-header-parent]");
         var headerLoaded = false;
         var allHeaderChildrenHeights = [];
 
