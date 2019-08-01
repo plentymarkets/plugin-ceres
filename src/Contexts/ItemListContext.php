@@ -4,8 +4,8 @@ namespace Ceres\Contexts;
 
 use Ceres\Helper\ExternalSearch;
 use Ceres\Helper\SearchOptions;
-use IO\Services\VdiSearch\SearchPresets\VariationList;
-use IO\Services\VdiSearch\Services\ItemSearchService;
+use IO\Services\ItemSearch\SearchPresets\VariationList;
+use IO\Services\ItemSearch\Services\ItemSearchService;
 
 trait ItemListContext
 {
