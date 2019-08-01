@@ -4203,7 +4203,7 @@
         "categories": [
             "form"
         ],
-        "position": 100,
+        "position": 600,
         "widgetClass": "Ceres\\Widgets\\Form\\AcceptPrivacyPolicyWidget",
         "settings": {
             "customClass": {
@@ -4510,7 +4510,7 @@
         "categories": [
             "form"
         ],
-        "position": 800,
+        "position": 700,
         "widgetClass": "Ceres\\Widgets\\Form\\ReCaptchaWidget",
         "settings": {
             "customClass": {
