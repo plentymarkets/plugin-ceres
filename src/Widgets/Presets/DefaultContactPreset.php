@@ -79,7 +79,10 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("spacing.padding.left.value", 0)
             ->withSetting("spacing.padding.left.unit", null)
             ->withSetting("spacing.padding.right.value", 0)
-            ->withSetting("spacing.padding.right.unit", null);
+            ->withSetting("spacing.padding.right.unit", null)
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.top.value", 3)
+            ->withSetting("spacing.margin.top.unit", null);
 
         $this->preset->createWidget("Ceres::SeparatorWidget");
 
