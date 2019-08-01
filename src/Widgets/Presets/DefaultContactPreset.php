@@ -179,23 +179,41 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("spacing.margin.top.value", 3)
             ->withSetting("spacing.margin.top.unit", null);
 
-        $row_3 = $formWidget->createChild("formFields", "Ceres::TwoColumnWidget")
-            ->withSetting("layout", "oneToOne");
+        if($this->config->contact->enableConfirmingPrivacyPolicy)
+        {
+            $row_3 = $formWidget->createChild("formFields", "Ceres::TwoColumnWidget")
+                ->withSetting("layout", "oneToOne");
 
-        $row_3->createChild("first", "Ceres::AcceptPrivacyPolicyWidget");
+            $row_3->createChild("first", "Ceres::AcceptPrivacyPolicyWidget");
 
-        $row_3->createChild("second", "Ceres::InlineTextWidget")
-            ->withSetting("appearance", "none")
-            ->withSetting("text", "<p class=\"align-right\">* {{ trans(\"Ceres::Template.contactRequiredField\") }}</p>")
-            ->withSetting("spacing.customPadding", true)
-            ->withSetting("spacing.padding.top.value", 0)
-            ->withSetting("spacing.padding.top.unit", null)
-            ->withSetting("spacing.padding.bottom.value", 0)
-            ->withSetting("spacing.padding.bottom.unit", null)
-            ->withSetting("spacing.padding.left.value", 0)
-            ->withSetting("spacing.padding.left.unit", null)
-            ->withSetting("spacing.padding.right.value", 0)
-            ->withSetting("spacing.padding.right.unit", null);
+            $row_3->createChild("second", "Ceres::InlineTextWidget")
+                ->withSetting("appearance", "none")
+                ->withSetting("text", "<p class=\"align-right\">* {{ trans(\"Ceres::Template.contactRequiredField\") }}</p>")
+                ->withSetting("spacing.customPadding", true)
+                ->withSetting("spacing.padding.top.value", 0)
+                ->withSetting("spacing.padding.top.unit", null)
+                ->withSetting("spacing.padding.bottom.value", 0)
+                ->withSetting("spacing.padding.bottom.unit", null)
+                ->withSetting("spacing.padding.left.value", 0)
+                ->withSetting("spacing.padding.left.unit", null)
+                ->withSetting("spacing.padding.right.value", 0)
+                ->withSetting("spacing.padding.right.unit", null);
+        }
+        else
+        {
+            $formWidget->createChild("formFields", "Ceres::InlineTextWidget")
+                ->withSetting("appearance", "none")
+                ->withSetting("text", "<p class=\"align-right\">* {{ trans(\"Ceres::Template.contactRequiredField\") }}</p>")
+                ->withSetting("spacing.customPadding", true)
+                ->withSetting("spacing.padding.top.value", 0)
+                ->withSetting("spacing.padding.top.unit", null)
+                ->withSetting("spacing.padding.bottom.value", 0)
+                ->withSetting("spacing.padding.bottom.unit", null)
+                ->withSetting("spacing.padding.left.value", 0)
+                ->withSetting("spacing.padding.left.unit", null)
+                ->withSetting("spacing.padding.right.value", 0)
+                ->withSetting("spacing.padding.right.unit", null);
+        }
 
         if(strlen($this->config->global->googleRecaptchaApiKey))
         {
