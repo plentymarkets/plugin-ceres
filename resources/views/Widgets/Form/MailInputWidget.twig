@@ -11,7 +11,11 @@
 
 {% set uid_check = uid() %}
 
-<div{% if spacingClasses | length > 0 %} class="{{ spacingClasses }}"{% endif %}{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+<div class="widget widget-mail-input
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    
     <div class="input-unit{% if isRequired %} required{% endif %}{% if allowMailCC %} m-b-0{% endif %}" {% if isRequired %}data-validate="mail"{% endif %}>
         <input name="{{ formFieldId }}"
                type="text"
