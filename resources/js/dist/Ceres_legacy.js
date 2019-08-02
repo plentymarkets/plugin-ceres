@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./resources/scss/Ceres.scss");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./resources/scss/Ceres_legacy.scss");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/scss/Ceres.scss":
-/*!***********************************!*\
-  !*** ./resources/scss/Ceres.scss ***!
-  \***********************************/
+/***/ "./resources/scss/Ceres_legacy.scss":
+/*!******************************************!*\
+  !*** ./resources/scss/Ceres_legacy.scss ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./resources/scss/Ceres.scss?");
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./resources/scss/Ceres_legacy.scss?");
 
 /***/ })
 
