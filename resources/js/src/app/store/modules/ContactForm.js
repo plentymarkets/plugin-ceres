@@ -1,7 +1,7 @@
-import ValidationService from "services/ValidationService";
-import NotificationService from "services/NotificationService";
-import TranslationService from "services/TranslationService";
-import ApiService from "services/ApiService";
+import ValidationService from "../../services/ValidationService";
+import NotificationService from "../../services/NotificationService";
+import TranslationService from "../../services/TranslationService";
+import ApiService from "../../services/ApiService";
 import { serializeForm, getLabel } from "../../helper/serializeForm";
 import { isMail } from "../../helper/strings";
 

@@ -1,9 +1,9 @@
-const ModalService        = require("services/ModalService");
-const APIService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-const ValidationService   = require("services/ValidationService");
+const ModalService        = require("../../services/ModalService");
+const APIService          = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
+const ValidationService   = require("../../services/ValidationService");
 
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 
 Vue.component("account-settings", {
 

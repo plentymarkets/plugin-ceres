@@ -1,6 +1,6 @@
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 
 Vue.component("wish-list", {
 

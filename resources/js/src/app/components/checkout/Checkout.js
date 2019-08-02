@@ -1,8 +1,8 @@
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 const _isEqual = require("lodash/isEqual");
 
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 import { removeUrlParam } from "../../services/UrlService";
 
 Vue.component("checkout", {

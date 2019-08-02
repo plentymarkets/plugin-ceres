@@ -1,7 +1,7 @@
 import { isNullOrUndefined } from "../../helper/utils";
 import { setUrlByItem } from "../../services/UrlService";
 
-const ApiService = require("services/ApiService");
+const ApiService = require("../../services/ApiService");
 
 const state =
     {

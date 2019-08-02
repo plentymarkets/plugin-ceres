@@ -1,8 +1,8 @@
 import { textWidth } from "../../helper/dom";
 import { isDefined, isNull } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("variation-select", {
 

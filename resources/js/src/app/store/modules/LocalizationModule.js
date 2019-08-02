@@ -1,6 +1,6 @@
-import ApiService from "services/ApiService";
+import ApiService from "../../services/ApiService";
 import { isNullOrUndefined } from "../../helper/utils";
-import { setUrlParam } from "services/UrlService";
+import { setUrlParam } from "../../services/UrlService";
 
 const state =
     {

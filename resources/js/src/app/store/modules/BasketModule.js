@@ -1,8 +1,8 @@
-import ApiService from "services/ApiService";
-import TranslationService from "services/TranslationService";
+import ApiService from "../../services/ApiService";
+import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
 import { pathnameEquals } from "../../helper/url";
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 const state =
     {

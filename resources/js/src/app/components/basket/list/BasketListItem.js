@@ -1,9 +1,9 @@
-import ExceptionMap from "exceptions/ExceptionMap";
-import TranslationService from "services/TranslationService";
+import ExceptionMap from "../../../exceptions/ExceptionMap";
+import TranslationService from "../../../services/TranslationService";
 import { isNullOrUndefined } from "../../../helper/utils";
 import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../../services/NotificationService");
 
 Vue.component("basket-list-item", {
     props: [

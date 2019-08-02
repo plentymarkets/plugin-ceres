@@ -1,5 +1,5 @@
-import NotificationService from "services/NotificationService";
-import TranslationService from "services/TranslationService";
+import NotificationService from "../../services/NotificationService";
+import TranslationService from "../../services/TranslationService";
 
 Vue.component("subscribe-newsletter-check", {
 

@@ -1,7 +1,7 @@
-import ValidationService from "services/ValidationService";
-import { navigateTo } from "services/UrlService";
+import ValidationService from "../../../services/ValidationService";
+import { navigateTo } from "../../../services/UrlService";
 
-const ApiService = require("services/ApiService");
+const ApiService = require("../../../services/ApiService");
 
 Vue.component("guest-login", {
 

@@ -1,7 +1,7 @@
 import { isDefined } from "../../../helper/utils";
-const ApiService = require("services/ApiService");
+import ValidationService from "../../../services/ValidationService";
 
-import ValidationService from "services/ValidationService";
+const ApiService = require("../../../services/ApiService");
 
 Vue.component("user-login-handler", {
 

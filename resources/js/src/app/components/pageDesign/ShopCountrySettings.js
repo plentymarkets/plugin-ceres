@@ -1,4 +1,4 @@
-const ApiService = require("services/ApiService");
+const ApiService = require("../../services/ApiService");
 
 Vue.component("shop-country-settings", {
 

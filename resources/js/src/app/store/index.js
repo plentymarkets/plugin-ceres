@@ -1,19 +1,19 @@
-import address from "store/modules/AddressModule";
-import basket from "store/modules/BasketModule";
-import checkout from "store/modules/CheckoutModule";
-import contactForm from "store/modules/ContactForm";
-import item from "store/modules/SingleItemModule";
-import itemList from "store/modules/ItemListModule";
-import lastSeen from "store/modules/LastSeenModule";
-import liveShopping from "store/modules/LiveShoppingModule";
-import localization from "store/modules/LocalizationModule";
-import navigation from "store/modules/NavigationModule";
-import orderReturn from "store/modules/OrderReturnModule";
-import user from "store/modules/UserModule";
-import variationSelect from "store/modules/VariationSelectModule";
-import wishList from "store/modules/WishListModule";
+import address from "./modules/AddressModule";
+import basket from "./modules/BasketModule";
+import checkout from "./modules/CheckoutModule";
+import contactForm from "./modules/ContactForm";
+import item from "./modules/SingleItemModule";
+import itemList from "./modules/ItemListModule";
+import lastSeen from "./modules/LastSeenModule";
+import liveShopping from "./modules/LiveShoppingModule";
+import localization from "./modules/LocalizationModule";
+import navigation from "./modules/NavigationModule";
+import orderReturn from "./modules/OrderReturnModule";
+import user from "./modules/UserModule";
+import variationSelect from "./modules/VariationSelectModule";
+import wishList from "./modules/WishListModule";
 
-import eventPropagation from "store/plugins/EventPropagationPlugin";
+import eventPropagation from "./plugins/EventPropagationPlugin";
 
 Vue.use(require("vue-script2"));
 Vue.options.delimiters = ["${", "}"];

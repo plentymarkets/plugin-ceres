@@ -1,9 +1,8 @@
-import { exceptionMap } from "exceptions/ExceptionMap";
-import TranslationService from "services/TranslationService";
+import { exceptionMap } from "../exceptions/ExceptionMap";
+import TranslationService from "./TranslationService";
 
 module.exports = (function($)
 {
-
     let notificationCount = 0;
     const notifications     = new NotificationList();
 
