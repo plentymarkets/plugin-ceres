@@ -1,8 +1,8 @@
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 import { isDefined } from "../../helper/utils";
-import { navigateTo } from "services/UrlService";
+import { navigateTo } from "../../services/UrlService";
 
 Vue.component("place-order", {
     props:

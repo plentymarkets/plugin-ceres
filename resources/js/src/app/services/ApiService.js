@@ -1,8 +1,8 @@
 import { normalizeUrl } from "../helper/url";
 import { isDefined } from "../helper/utils";
 
-const NotificationService = require("services/NotificationService");
-const WaitScreenService   = require("services/WaitScreenService");
+const NotificationService = require("./NotificationService");
+const WaitScreenService   = require("./WaitScreenService");
 
 module.exports = (function($)
 {

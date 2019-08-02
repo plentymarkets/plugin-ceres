@@ -1,5 +1,5 @@
 import { isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 

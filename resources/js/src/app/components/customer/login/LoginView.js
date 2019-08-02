@@ -1,4 +1,4 @@
-const ModalService = require("services/ModalService");
+const ModalService = require("../../../services/ModalService");
 
 Vue.component("login-view", {
 

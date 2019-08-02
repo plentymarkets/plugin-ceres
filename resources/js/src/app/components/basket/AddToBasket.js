@@ -1,9 +1,9 @@
-import ExceptionMap from "exceptions/ExceptionMap";
-import TranslationService from "services/TranslationService";
-import { navigateTo } from "services/UrlService";
+import ExceptionMap from "../../exceptions/ExceptionMap";
+import TranslationService from "../../services/TranslationService";
+import { navigateTo } from "../../services/UrlService";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("add-to-basket", {
 

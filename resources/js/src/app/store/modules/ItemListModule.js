@@ -1,7 +1,7 @@
-import ApiService from "services/ApiService";
-import { getItemListUrlParams } from "services/ItemListUrlService";
-import { navigateToParams } from "services/UrlService";
-import TranslationService from "services/TranslationService";
+import ApiService from "../../services/ApiService";
+import { getItemListUrlParams } from "../../services/ItemListUrlService";
+import { navigateToParams } from "../../services/UrlService";
+import TranslationService from "../../services/TranslationService";
 
 const state =
     {

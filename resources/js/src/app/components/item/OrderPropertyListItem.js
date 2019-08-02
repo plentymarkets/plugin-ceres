@@ -1,5 +1,5 @@
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 import { isNullOrUndefined } from "../../helper/utils";
 

@@ -1,4 +1,4 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("country-select", {

@@ -1,7 +1,7 @@
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../../../services/NotificationService");
 
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
+import ValidationService from "../../../../services/ValidationService";
+import TranslationService from "../../../../services/TranslationService";
 
 Vue.component("create-update-address", {
 

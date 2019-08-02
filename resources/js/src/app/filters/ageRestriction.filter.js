@@ -1,4 +1,4 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../services/TranslationService";
 
 Vue.filter("ageRestriction", age =>
 {

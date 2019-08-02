@@ -1,7 +1,7 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("add-to-wish-list", {
 

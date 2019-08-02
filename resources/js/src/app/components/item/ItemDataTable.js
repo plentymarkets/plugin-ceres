@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 
 Vue.component("item-data-table", {
     props:

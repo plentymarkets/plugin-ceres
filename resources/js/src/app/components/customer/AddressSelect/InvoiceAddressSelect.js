@@ -1,5 +1,5 @@
-import TranslationService from "services/TranslationService";
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../../services/TranslationService";
+const NotificationService = require("../../../services/NotificationService");
 
 Vue.component("invoice-address-select", {
 

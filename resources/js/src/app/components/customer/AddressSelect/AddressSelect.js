@@ -1,10 +1,10 @@
 import { isDefined } from "../../../helper/utils";
 
-const ApiService = require("services/ApiService");
-const ModalService = require("services/ModalService");
+const ApiService = require("../../../services/ApiService");
+const ModalService = require("../../../services/ModalService");
 
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
+import ValidationService from "../../../services/ValidationService";
+import TranslationService from "../../../services/TranslationService";
 
 Vue.component("address-select", {
 

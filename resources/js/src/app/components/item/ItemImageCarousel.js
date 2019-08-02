@@ -1,5 +1,5 @@
 import { isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 
 Vue.component("item-image-carousel", {
 

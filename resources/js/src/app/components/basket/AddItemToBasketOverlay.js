@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from "../../helper/utils";
 
-const ModalService        = require("services/ModalService");
+const ModalService        = require("../../services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 

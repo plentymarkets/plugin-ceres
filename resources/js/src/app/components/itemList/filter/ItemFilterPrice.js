@@ -1,4 +1,4 @@
-import UrlService from "services/UrlService";
+import UrlService from "../../../services/UrlService";
 
 Vue.component("item-filter-price", {
 
