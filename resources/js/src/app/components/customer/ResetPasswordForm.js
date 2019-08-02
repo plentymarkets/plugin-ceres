@@ -1,6 +1,7 @@
 import ValidationService from "../../services/ValidationService";
 import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
 
 const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");

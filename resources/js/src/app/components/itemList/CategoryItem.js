@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { mapState } from "vuex";
+
 Vue.component("category-item", {
     props:
     {
@@ -63,7 +66,7 @@ Vue.component("category-item", {
             return this.item.texts;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             showNetPrices: state => state.basket.showNetPrices
         })
     },

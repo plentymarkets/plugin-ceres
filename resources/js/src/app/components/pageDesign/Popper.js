@@ -1,5 +1,6 @@
 import { isNullOrUndefined } from "../../helper/utils";
 import { findParent } from "../../helper/dom";
+import Vue from "vue";
 
 const Popper              = require("popper.js");
 const ModalService        = require("../../services/ModalService");

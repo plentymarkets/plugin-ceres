@@ -1,4 +1,5 @@
 import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
 
 const ApiService = require("../../services/ApiService");
 

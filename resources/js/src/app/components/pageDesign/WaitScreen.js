@@ -1,5 +1,7 @@
 const WaitScreenService = require("../../services/WaitScreenService");
 
+import Vue from "vue";
+
 /**
 *
 * CURRENTLY NOT IN USE

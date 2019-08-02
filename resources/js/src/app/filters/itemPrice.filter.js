@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.filter("specialOffer", function(defaultPrice, prices, priceType, exact)
 {
     let price;

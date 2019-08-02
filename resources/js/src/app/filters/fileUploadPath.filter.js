@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.filter("fileUploadPath", path =>
 {
     const position =  path.lastIndexOf("/");

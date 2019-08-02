@@ -1,5 +1,6 @@
 import ValidationService from "../../../services/ValidationService";
 import { navigateTo } from "../../../services/UrlService";
+import Vue from "vue";
 
 const ApiService = require("../../../services/ApiService");
 

@@ -6,6 +6,7 @@ import ValidationService from "../../../services/ValidationService";
 import TranslationService from "../../../services/TranslationService";
 import UrlService from "../../../services/UrlService";
 import { isNullOrUndefined } from "../../../helper/utils";
+import Vue from "vue";
 
 Vue.component("forgot-password-modal", {
 

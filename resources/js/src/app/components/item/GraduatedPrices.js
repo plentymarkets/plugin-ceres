@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { mapState } from "vuex";
+
 Vue.component("graduated-prices", {
     props:
     {
@@ -46,7 +49,7 @@ Vue.component("graduated-prices", {
             return this.graduatedPrices.indexOf(price);
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             variationOrderQuantity: state => state.item.variationOrderQuantity
         })
     }

@@ -1,6 +1,8 @@
 const NotificationService = require("../../services/NotificationService");
 
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState, mapActions } from "vuex";
 
 Vue.component("wish-list", {
 
@@ -19,7 +21,7 @@ Vue.component("wish-list", {
         };
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         wishListItems: state => state.wishList.wishListItems,
         wishListIds: state => state.wishList.wishListIds
     }),
@@ -49,7 +51,7 @@ Vue.component("wish-list", {
                     TranslationService.translate("Ceres::Template.wishListRemoved")
                 ));
         },
-        ...Vuex.mapActions([
+        ...mapActions([
             "initWishListItems",
             "removeWishListItem"
         ])

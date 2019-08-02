@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.filter("itemImageAlternativeText", function(itemImages, highestPosition)
 {
     if (itemImages.length === 0)

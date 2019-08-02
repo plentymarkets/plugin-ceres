@@ -1,5 +1,7 @@
 import { isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
@@ -123,7 +125,7 @@ Vue.component("live-shopping-item", {
             return prices;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             liveShoppingOffers: state => state.liveShopping.liveShoppingOffers
         })
     },

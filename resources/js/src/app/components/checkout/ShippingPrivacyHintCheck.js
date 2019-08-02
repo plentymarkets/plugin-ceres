@@ -1,4 +1,6 @@
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 const NotificationService = require("../../services/NotificationService");
 
@@ -47,7 +49,7 @@ Vue.component("shipping-privacy-hint-check", {
             return TranslationService.translate("Ceres::Template.checkoutShippingPrivacyHint", { parcelServiceInformation });
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             shippingProfileList: state => state.checkout.shipping.shippingProfileList,
             shippingProfileId: state => state.checkout.shipping.shippingProfileId,
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted

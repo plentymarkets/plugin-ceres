@@ -4,6 +4,7 @@ const NotificationService = require("../../services/NotificationService");
 const ValidationService   = require("../../services/ValidationService");
 
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("account-settings", {
 

@@ -4,6 +4,8 @@ const _isEqual = require("lodash/isEqual");
 
 import TranslationService from "../../services/TranslationService";
 import { removeUrlParam } from "../../services/UrlService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("checkout", {
 
@@ -38,7 +40,7 @@ Vue.component("checkout", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         checkout: state => state.checkout,
         deliveryAddressId: state => state.address.deliveryAddressId
     }),

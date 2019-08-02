@@ -1,4 +1,5 @@
-import "vuex";
+import Vue from "vue";
+import Vuex from "vuex";
 
 import address from "./modules/AddressModule";
 import basket from "./modules/BasketModule";
@@ -18,6 +19,7 @@ import wishList from "./modules/WishListModule";
 import eventPropagation from "./plugins/EventPropagationPlugin";
 
 Vue.use(require("vue-script2"));
+Vue.use(Vuex);
 Vue.options.delimiters = ["${", "}"];
 
 // eslint-disable-next-line

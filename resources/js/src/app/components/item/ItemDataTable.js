@@ -1,6 +1,8 @@
 import { get } from "lodash";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("item-data-table", {
     props:
@@ -29,7 +31,7 @@ Vue.component("item-data-table", {
 
     computed:
     {
-        ...Vuex.mapState({
+        ...mapState({
             currentVariation: state => state.item.variation.documents[0].data
         })
     },

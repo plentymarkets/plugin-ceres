@@ -2,6 +2,8 @@ import ExceptionMap from "../../../exceptions/ExceptionMap";
 import TranslationService from "../../../services/TranslationService";
 import { isNullOrUndefined } from "../../../helper/utils";
 import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 const NotificationService = require("../../../services/NotificationService");
 
@@ -99,7 +101,7 @@ Vue.component("basket-list-item", {
             return transformBasketItemProperties(this.basketItem, ["empty"], "displayInOrderProcess");
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             isCheckoutReadonly: state => state.checkout.readOnly,
             showNetPrice: state => state.basket.showNetPrices

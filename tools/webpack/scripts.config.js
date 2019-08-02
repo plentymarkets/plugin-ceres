@@ -10,11 +10,26 @@ module.exports = (env) => {
             path: path.resolve(__dirname, 'dist')
         },
         resolve: {
-            modules: [path.resolve(__dirname, "app"), "node_modules"]
+            alias: {
+                vue: 'vue/dist/vue.js'
+            },
         },
         devtool: 'source-map',
         module: {
             rules: [
+                {
+                    test: require.resolve('jquery'),
+                    use: [
+                        {
+                            loader: 'expose-loader',
+                            options: '$'
+                        },
+                        {
+                            loader: 'expose-loader',
+                            options: 'jQuery'
+                        }
+                    ]
+                },
                 {
                     test: /\.m?js$/,
                     exclude: /(node_modules)/,

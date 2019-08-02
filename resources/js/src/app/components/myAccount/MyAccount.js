@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.component("my-account", {
 
     template: `

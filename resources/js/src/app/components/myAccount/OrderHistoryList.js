@@ -1,6 +1,7 @@
 import TranslationService from "../../services/TranslationService";
 import NotificationService from "../../services/NotificationService";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import Vue from "vue";
 
 const ApiService = require("../../services/ApiService");
 

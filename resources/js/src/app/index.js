@@ -1,4 +1,11 @@
 // =========================
+// Framework's
+// =========================
+
+import Vue from "vue";
+import "jquery-lazyload";
+
+// =========================
 // COMPONENTS
 // =========================
 
@@ -187,12 +194,11 @@ import "./mixins/template.mixin";
 
 import store from "./store";
 
-
 // =========================
-// Framework's
+// Bootstrap frameworks
 // =========================
 
-import Vue from "vue";
-import "jquery";
-
-const app = new Vue({store});
+const vueApp = new Vue({
+    el: "#vue-app",
+    store
+});

@@ -1,3 +1,4 @@
+import Vue from "vue";
 const ApiService = require("../../services/ApiService");
 
 Vue.component("order-history-list-item", {
