@@ -206,6 +206,9 @@
 {{ LayoutContainer.show("Ceres::Script.Loader") }}
 
 {{ Translations.add( "Ceres", "Template" ) }}
+
+{{ get_json_data() }}
+
 {% if ceresConfig.log.performanceLevel  == 'development' %}
     {# <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
     <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script> #}
@@ -223,7 +226,7 @@
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
 {{ get_filtered_tags() }}
-{{ get_json_data() }}
+
 
 {# <script>
     vueEventHub = new Vue();
