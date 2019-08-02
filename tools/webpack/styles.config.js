@@ -1,5 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
+const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const path = require('path');
 
 module.exports = (env) => {
@@ -8,8 +8,8 @@ module.exports = (env) => {
         name: 'styles',
         mode: env.prod ? 'production' : 'development',
         entry: {
-            'Ceres': './resources/scss/Ceres.scss',
-            'Ceres_legacy': './resources/scss/Ceres_legacy.scss',
+            'ceres': './resources/scss/ceres.scss',
+            'ceres-legacy': './resources/scss/ceres-legacy.scss',
         },
         module: {
             rules: [
@@ -25,6 +25,15 @@ module.exports = (env) => {
                             }
                         },
                         {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: !env.prod,
+                                plugins: [
+                                    require('autoprefixer')()
+                                ]
+                            }
+                        },
+                        {
                             loader: 'sass-loader',
                             options: {
                                 sourceMap: !env.prod,
@@ -36,6 +45,7 @@ module.exports = (env) => {
             ]
         },
         plugins: [
+            new FixStyleOnlyEntriesPlugin(),
             new MiniCssExtractPlugin({
                 filename: '../../css/[name]' + (env.prod ? '.min' : '') + '.css',
             })

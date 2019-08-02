@@ -7,7 +7,7 @@ var GLOB_FILES   = 'resources/views/Widgets/**/*.inc.json';
 var TARGET_FILE  = 'contentWidgets.json';
 var INCLUDE_PATTERN = /^@include\(\s*(\S+)\s*\)$/;
 
-console.log("Collecting widget definitions.");
+console.log("> Collecting widget definitions...");
 
 
 function root(dir) {
@@ -74,4 +74,4 @@ var widgets = glob.sync(root(WIDGET_FILES))
     });
 
 fs.writeFileSync(root(TARGET_FILE), JSON.stringify(widgets, null, 4), {encoding: 'utf-8'});
-console.log("> Done");
+console.log("> DONE");

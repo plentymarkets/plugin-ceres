@@ -54,10 +54,19 @@ ImportTree.prototype.parseImports = function()
 
 ImportTree.prototype._resolveImportPath = function( importPath )
 {
-    var resolvedPath = path.resolve(
-        path.dirname(this.filename),
-        importPath
-    );
+    var resolvedPath = '';
+
+    if (importPath.charAt(0) === '~')
+    {
+        resolvedPath = path.resolve(__dirname, '../node_modules/' + importPath.substr(1));
+    }
+    else
+    {
+        resolvedPath = path.resolve(
+            path.dirname(this.filename),
+            importPath
+        );
+    }
 
     if ( !fs.existsSync(resolvedPath) || !fs.lstatSync(resolvedPath).isFile() )
     {
@@ -104,6 +113,7 @@ var SassResolver = function ( rootSassFile )
 {
     this.rootSassFile = path.resolve(
         __dirname,
+        '..',
         rootSassFile
     );
 };
@@ -112,6 +122,7 @@ SassResolver.prototype.bundle = function( targetFile )
 {
     targetFile = path.resolve(
         __dirname,
+        '..',
         targetFile
     );
     var importTree = new ImportTree( this.rootSassFile );
@@ -137,10 +148,10 @@ SassResolver.prototype.bundle = function( targetFile )
         });
 };
 
-console.log("Start bundling scss");
-var resolverBootstrap = new SassResolver('resources/scss/Ceres.scss');
+console.log("> Start bundling .scss files...");
+var resolverBootstrap = new SassResolver('resources/scss/ceres.scss');
 resolverBootstrap.bundle('resources/css/ceres.scss');
 
-var resolverBootstrapLegacy = new SassResolver('resources/scss/Ceres_legacy.scss');
+var resolverBootstrapLegacy = new SassResolver('resources/scss/ceres-legacy.scss');
 resolverBootstrapLegacy.bundle('resources/css/ceres-legacy.scss');
-console.log("=> done!");
+console.log("> DONE");

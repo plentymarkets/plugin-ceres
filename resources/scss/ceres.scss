@@ -1,11 +1,11 @@
-@import "bootstrap/scss/functions";
+@import "~bootstrap/scss/functions";
 @import "variables";
 // ==========================================================================
 // External Libs
 // ==========================================================================
-@import "bootstrap/scss/bootstrap";
-@import "font-awesome/scss/font-awesome";
-@import "flag-icon-css/sass/flag-icon";
+@import "~bootstrap/scss/bootstrap";
+@import "~font-awesome/scss/font-awesome";
+@import "~flag-icon-css/sass/flag-icon";
 
 // ==========================================================================
 // Custom styles
@@ -91,5 +91,5 @@
 // Widgets
 @import "ceres/widgets/widgets";
 
-// Bootstrap Compatibility 
+// Bootstrap Compatibility
 @import "ceres/common/visibility";
