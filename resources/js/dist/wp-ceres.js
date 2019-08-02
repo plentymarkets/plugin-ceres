@@ -53412,11 +53412,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("add-item-to-basket-overlay
   props: {
     template: {
       type: String,
-      "default": "#vue-add-item-to-basket-overlay"
+      default: "#vue-add-item-to-basket-overlay"
     },
     defaultTimeToClose: {
       type: Number,
-      "default": 15
+      default: 15
     }
   },
   data: function data() {
@@ -53469,7 +53469,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("add-item-to-basket-overlay
   methods: {
     setPriceFromData: function setPriceFromData() {
       if (this.latestBasketEntry.item.prices) {
-        this.currency = this.latestBasketEntry.item.prices["default"].currency;
+        this.currency = this.latestBasketEntry.item.prices.default.currency;
         var graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
         var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
         this.price = this.$options.filters.specialOffer(graduatedPrice, this.latestBasketEntry.item.prices, "price", "value") + propertySurcharge;
@@ -53541,20 +53541,20 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
   props: {
     template: {
       type: String,
-      "default": "#vue-add-to-basket"
+      default: "#vue-add-to-basket"
     },
     itemUrl: String,
     showQuantity: {
       type: Boolean,
-      "default": false
+      default: false
     },
     useLargeScale: {
       type: Boolean,
-      "default": false
+      default: false
     },
     missingOrderProperties: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
@@ -53563,48 +53563,48 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
     },
     isSalable: {
       type: Boolean,
-      "default": false
+      default: false
     },
     hasChildren: {
       type: Boolean,
-      "default": false
+      default: false
     },
     intervalQuantity: {
       type: Number,
-      "default": 1
+      default: 1
     },
     minimumQuantity: {
       type: Number,
-      "default": 0
+      default: 0
     },
     maximumQuantity: {
       type: Number,
-      "default": null
+      default: null
     },
     orderProperties: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
     hasPrice: {
       type: Boolean,
-      "default": true
+      default: true
     },
     buttonSize: {
       type: [String, null],
-      "default": null,
+      default: null,
       validator: function validator(value) {
         return ["sm", "md", "lg"].indexOf(value) !== -1;
       }
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   computed: _objectSpread({
@@ -53706,8 +53706,8 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -53775,11 +53775,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("basket-preview", {
   props: {
     template: {
       type: String,
-      "default": "#vue-basket-preview"
+      default: "#vue-basket-preview"
     },
     showNetPrices: {
       type: Boolean,
-      "default": false
+      default: false
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
@@ -53851,11 +53851,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("basket-totals", {
   props: {
     template: {
       type: String,
-      "default": "#vue-basket-totals"
+      default: "#vue-basket-totals"
     },
     visibleFields: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"];
       }
     }
@@ -53908,7 +53908,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("coupon", {
   props: {
     template: {
       type: String,
-      "default": "#vue-coupon"
+      default: "#vue-coupon"
     }
   },
   data: function data() {
@@ -54034,15 +54034,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("basket-list", {
   props: {
     template: {
       type: String,
-      "default": "#vue-basket-list"
+      default: "#vue-basket-list"
     },
     size: {
       type: String,
-      "default": "small"
+      default: "small"
     },
     isPreview: {
       type: Boolean,
-      "default": false
+      default: false
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
@@ -54135,8 +54135,8 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("basket-list-item", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -54155,14 +54155,14 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("basket-list-item", {
         return this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
       }
 
-      return this.basketItem.variation.data.prices["default"].unitPrice.value;
+      return this.basketItem.variation.data.prices.default.unitPrice.value;
     },
     basePrice: function basePrice() {
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(this.basketItem.variation.data.prices.specialOffer)) {
         return this.basketItem.variation.data.prices.specialOffer.basePrice;
       }
 
-      return this.basketItem.variation.data.prices["default"].basePrice;
+      return this.basketItem.variation.data.prices.default.basePrice;
     },
     transformedVariationProperties: function transformedVariationProperties() {
       return Object(_services_VariationPropertyService__WEBPACK_IMPORTED_MODULE_3__["transformBasketItemProperties"])(this.basketItem, ["empty"], "displayInOrderProcess");
@@ -54277,7 +54277,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("accept-gtc-check", {
   props: {
     template: {
       type: String,
-      "default": "#vue-accept-gtc-check"
+      default: "#vue-accept-gtc-check"
     },
     hideCheckbox: {
       type: Boolean
@@ -54287,11 +54287,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("accept-gtc-check", {
     },
     isRequired: {
       type: Boolean,
-      "default": true
+      default: true
     },
     customText: {
       type: String,
-      "default": ""
+      default: ""
     }
   },
   data: function data() {
@@ -54362,7 +54362,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("checkout", {
   props: {
     template: {
       type: String,
-      "default": "#vue-checkout"
+      default: "#vue-checkout"
     },
     initialCheckout: {
       type: Object,
@@ -54370,23 +54370,23 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("checkout", {
     },
     deliveryAddressList: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
     selectedDeliveryAddress: {
       type: Number,
-      "default": -99
+      default: -99
     },
     billingAddressList: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
     selectedBillingAddress: {
       type: Number,
-      "default": 0
+      default: 0
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])({
@@ -54530,8 +54530,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("checkout", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -54582,7 +54582,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("contact-wish-input", {
   props: {
     template: {
       type: String,
-      "default": "#vue-contact-wish-input"
+      default: "#vue-contact-wish-input"
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
@@ -54622,15 +54622,15 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("payment-provider-select", 
   props: {
     template: {
       type: String,
-      "default": "#vue-payment-provider-select"
+      default: "#vue-payment-provider-select"
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
@@ -54718,25 +54718,25 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("place-order", {
   props: {
     template: {
       type: String,
-      "default": "#vue-place-order"
+      default: "#vue-place-order"
     },
     targetContinue: {
       type: String
     },
     buttonSize: {
       type: [String, null],
-      "default": null,
+      default: null,
       validator: function validator(value) {
         return ["sm", "lg"].indexOf(value) !== -1;
       }
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   data: function data() {
@@ -54922,7 +54922,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("shipping-privacy-hint-chec
   props: {
     template: {
       type: String,
-      "default": "#vue-shipping-privacy-hint-check"
+      default: "#vue-shipping-privacy-hint-check"
     }
   },
   computed: _objectSpread({
@@ -54964,8 +54964,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("shipping-privacy-hint-chec
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -55032,15 +55032,15 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("shipping-profile-select", 
   props: {
     template: {
       type: String,
-      "default": "#vue-shipping-profile-select"
+      default: "#vue-shipping-profile-select"
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
@@ -55124,11 +55124,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("subscribe-newsletter-check
   props: {
     template: {
       type: String,
-      "default": "#vue-subscribe-newsletter-check"
+      default: "#vue-subscribe-newsletter-check"
     },
     emailFolder: {
       type: Number,
-      "default": 0
+      default: 0
     },
     hideCheckbox: {
       type: Boolean
@@ -55138,11 +55138,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("subscribe-newsletter-check
     },
     isRequired: {
       type: Boolean,
-      "default": true
+      default: true
     },
     customText: {
       type: String,
-      "default": ""
+      default: ""
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])({
@@ -55230,15 +55230,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("google-maps-widget", {
     },
     zoom: {
       type: Number,
-      "default": 16
+      default: 16
     },
     maptype: {
       type: String,
-      "default": "roadmap"
+      default: "roadmap"
     },
     aspectRatio: {
       type: String,
-      "default": "prop-xs-3-1"
+      default: "prop-xs-3-1"
     }
   },
   computed: {
@@ -55362,26 +55362,26 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("tab-item", {
   render: function render(createElement) {
     return createElement("div", {
       staticClass: "tab-pane",
-      "class": {
+      class: {
         active: this.localActive
       },
       attrs: {
         role: "tabpanel"
       }
-    }, [this.$slots["default"]]);
+    }, [this.$slots.default]);
   },
   props: {
     active: {
       type: Boolean,
-      "default": false
+      default: false
     },
     title: {
       type: String,
-      "default": null
+      default: null
     },
     dataBuilderClickable: {
       type: Boolean,
-      "default": false
+      default: false
     }
   },
   data: function data() {
@@ -55428,7 +55428,7 @@ var TabNavItem = {
 
     var anchor = createElement("a", {
       staticClass: "nav-link text-appearance",
-      "class": {
+      class: {
         active: this.tab.localActive
       },
       attrs: anchorAttrs,
@@ -55447,11 +55447,11 @@ var TabNavItem = {
   props: {
     tab: {
       type: Object,
-      "default": null
+      default: null
     },
     tabIndex: {
       type: Number,
-      "default": null
+      default: null
     }
   }
 };
@@ -55460,7 +55460,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("tab-list", {
     var _this2 = this;
 
     var tabListElements = [];
-    var filteredTabs = this.$slots["default"].filter(function (tab) {
+    var filteredTabs = this.$slots.default.filter(function (tab) {
       return !!tab.componentOptions;
     });
 
@@ -55482,7 +55482,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("tab-list", {
       });
       var nav = createElement("ul", {
         staticClass: "nav nav-tabs",
-        "class": ["widget-" + this.appearance],
+        class: ["widget-" + this.appearance],
         attrs: {
           role: "tablist"
         }
@@ -55499,11 +55499,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("tab-list", {
   props: {
     appearance: {
       type: String,
-      "default": "none"
+      default: "none"
     },
     renderEmpty: {
       type: Boolean,
-      "default": false
+      default: false
     }
   },
   data: function data() {
@@ -55530,12 +55530,12 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("tab-list", {
     getTabs: function getTabs() {
       var _this4 = this;
 
-      var tabs = this.$slots["default"] || [];
+      var tabs = this.$slots.default || [];
       var tabComps = tabs.map(function (vnode) {
         return vnode.componentInstance;
       });
       return tabComps.filter(function (tab) {
-        return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isDefined"])(tab.$slots["default"]) && (_this4.renderEmpty || _this4.filterContent(tab));
+        return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isDefined"])(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
       });
     },
     updateTabs: function updateTabs() {
@@ -55585,23 +55585,23 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("last-seen-item-list", {
   props: {
     template: {
       type: String,
-      "default": "#vue-last-seen-item-list"
+      default: "#vue-last-seen-item-list"
     },
     itemsPerPage: {
       type: Number,
-      "default": 4
+      default: 4
     },
     maxItems: {
       type: Number,
-      "default": 4
+      default: 4
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
@@ -55650,7 +55650,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("accept-privacy-policy-chec
   props: {
     template: {
       type: String,
-      "default": "#vue-accept-privacy-policy-check"
+      default: "#vue-accept-privacy-policy-check"
     },
     value: {
       type: Boolean
@@ -55695,20 +55695,20 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("address-input-group", {
   props: {
     defaultCountry: {
       type: String,
-      "default": "DE"
+      default: "DE"
     },
     addressType: String,
     modalType: String,
     template: String,
     value: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
     optionalAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {
           de: [],
           uk: []
@@ -55717,7 +55717,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("address-input-group", {
     },
     requiredAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {
           de: [],
           uk: []
@@ -55726,7 +55726,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("address-input-group", {
     },
     defaultSalutation: {
       type: String,
-      "default": "male"
+      default: "male"
     }
   },
   computed: _objectSpread({
@@ -55854,7 +55854,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("address-header", {
   props: {
     template: {
       type: String,
-      "default": "#vue-address-header"
+      default: "#vue-address-header"
     },
     address: {
       type: Object,
@@ -55887,8 +55887,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("address-header", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
             }
           } finally {
             if (_didIteratorError) {
@@ -55940,7 +55940,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("address-select", {
   props: {
     template: {
       type: String,
-      "default": "#vue-address-select"
+      default: "#vue-address-select"
     },
     addressType: {
       type: String,
@@ -55949,7 +55949,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("address-select", {
     showError: Boolean,
     optionalAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {
           de: [],
           gb: []
@@ -55958,21 +55958,21 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("address-select", {
     },
     requiredAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
     defaultSalutation: {
       type: String,
-      "default": "male"
+      default: "male"
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   data: function data() {
@@ -56136,8 +56136,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("address-select", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
             }
           } finally {
             if (_didIteratorError) {
@@ -56262,8 +56262,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("address-select", {
           _iteratorError2 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-              _iterator2["return"]();
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+              _iterator2.return();
             }
           } finally {
             if (_didIteratorError2) {
@@ -56310,13 +56310,13 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("create-update-address", {
   props: {
     addressData: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
     addressModal: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
@@ -56325,19 +56325,19 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("create-update-address", {
     template: String,
     optionalAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
     requiredAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
     defaultSalutation: {
       type: String,
-      "default": "male"
+      default: "male"
     }
   },
   data: function data() {
@@ -56377,8 +56377,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("create-update-address", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
             }
           } finally {
             if (_didIteratorError) {
@@ -56551,8 +56551,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("create-update-address", {
           _iteratorError2 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-              _iterator2["return"]();
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+              _iterator2.return();
             }
           } finally {
             if (_didIteratorError2) {
@@ -56605,31 +56605,31 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("invoice-address-select", {
   props: {
     optionalAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
     requiredAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
     defaultSalutation: {
       type: String,
-      "default": "male"
+      default: "male"
     },
     hasToValidate: {
       type: Boolean,
-      "default": false
+      default: false
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
@@ -56726,27 +56726,27 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("shipping-address-select", 
   props: {
     optionalAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
     requiredAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     },
     defaultSalutation: {
       type: String,
-      "default": "male"
+      default: "male"
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
@@ -56798,7 +56798,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("change-email-form", {
   props: {
     template: {
       type: String,
-      "default": "#vue-change-email-form"
+      default: "#vue-change-email-form"
     },
     contactId: {
       type: Number,
@@ -56957,7 +56957,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("country-select", {
     selectedStateId: Number,
     template: {
       type: String,
-      "default": "#vue-country-select"
+      default: "#vue-country-select"
     },
     addressType: {
       type: String,
@@ -56965,11 +56965,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("country-select", {
     },
     optionalAddressFields: {
       type: Object,
-      "default": function _default() {}
+      default: function _default() {}
     },
     requiredAddressFields: {
       type: Object,
-      "default": function _default() {}
+      default: function _default() {}
     }
   },
   jsonDataFields: ["countryList"],
@@ -57101,7 +57101,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("recaptcha", {
   props: {
     template: {
       type: String,
-      "default": "#vue-recaptcha"
+      default: "#vue-recaptcha"
     }
   },
   data: function data() {
@@ -57206,11 +57206,11 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("registration", {
     modalElement: String,
     guestMode: {
       type: Boolean,
-      "default": false
+      default: false
     },
     isSimpleRegistration: {
       type: Boolean,
-      "default": false
+      default: false
     },
     template: String,
     backlink: String
@@ -57431,7 +57431,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("salutation-select", {
   props: {
     template: {
       type: String,
-      "default": "#vue-salutation-select"
+      default: "#vue-salutation-select"
     },
     addressData: {
       type: Object,
@@ -57439,17 +57439,17 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("salutation-select", {
     },
     addressType: {
       type: [Number, String],
-      "default": 1
+      default: 1
     },
     enabledAddressFields: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
     defaultSalutation: {
       type: String,
-      "default": "male"
+      default: "male"
     }
   },
   data: function data() {
@@ -57587,7 +57587,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("forgot-password-modal", {
   props: {
     template: {
       type: String,
-      "default": "#vue-forgot-password-modal"
+      default: "#vue-forgot-password-modal"
     }
   },
   data: function data() {
@@ -57922,11 +57922,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("user-login-handler", {
   props: {
     template: {
       type: String,
-      "default": "#vue-user-login-handler"
+      default: "#vue-user-login-handler"
     },
     showRegistration: {
       type: Boolean,
-      "default": true
+      default: true
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(["username", "isLoggedIn"]),
@@ -58006,7 +58006,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("add-to-wish-list", {
   props: {
     template: {
       type: String,
-      "default": "#vue-add-to-wish-list"
+      default: "#vue-add-to-wish-list"
     },
     variationId: Number
   },
@@ -58118,15 +58118,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("graduated-prices", {
   props: {
     template: {
       type: String,
-      "default": "#vue-graduated-prices"
+      default: "#vue-graduated-prices"
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   computed: _objectSpread({
@@ -58181,15 +58181,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-bundle", {
   props: {
     template: {
       type: String,
-      "default": "#vue-item-bundle"
+      default: "#vue-item-bundle"
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     },
     bundleType: String,
     bundleComponents: Array
@@ -58251,19 +58251,19 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("item-data-table", {
   props: {
     template: {
       type: String,
-      "default": "#vue-item-data-table"
+      default: "#vue-item-data-table"
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     },
     itemInformation: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     }
@@ -58383,27 +58383,27 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("item-image-carousel", {
   props: {
     template: {
       type: String,
-      "default": "#vue-item-image-carousel"
+      default: "#vue-item-image-carousel"
     },
     maxQuantity: {
       type: Number,
-      "default": 10
+      default: 10
     },
     imageUrlAccessor: {
       type: String,
-      "default": "url"
+      default: "url"
     },
     showThumbs: {
       type: Boolean,
-      "default": true
+      default: true
     },
     showDots: {
       type: Boolean,
-      "default": true
+      default: true
     },
     animationStyle: {
       type: String,
-      "default": "standard"
+      default: "standard"
     }
   },
   data: function data() {
@@ -58638,15 +58638,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-property-list", {
   props: {
     template: {
       type: String,
-      "default": "#vue-order-property-list"
+      default: "#vue-order-property-list"
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   data: function data() {
@@ -58674,8 +58674,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-property-list", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -58737,8 +58737,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-property-list", {
         _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-            _iterator2["return"]();
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
           }
         } finally {
           if (_didIteratorError2) {
@@ -58794,15 +58794,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-property-list-group"
   props: {
     template: {
       type: String,
-      "default": "#vue-order-property-list-group"
+      default: "#vue-order-property-list-group"
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     },
     propertyGroup: Object
   },
@@ -58838,8 +58838,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-property-list-group"
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -58893,7 +58893,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("order-property-list-item",
   props: {
     template: {
       type: String,
-      "default": "#vue-order-property-list-item"
+      default: "#vue-order-property-list-item"
     },
     group: Object,
     property: Object
@@ -59107,7 +59107,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("order-property-value", {
   props: {
     template: {
       type: String,
-      "default": "#vue-order-property-value"
+      default: "#vue-order-property-value"
     },
     property: {
       type: Object,
@@ -59187,12 +59187,12 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("quantity-input", {
     timeout: {
       type: Number,
       required: false,
-      "default": 500
+      default: 500
     },
     min: {
       type: Number,
       required: false,
-      "default": 0
+      default: 0
     },
     max: {
       type: Number,
@@ -59201,7 +59201,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("quantity-input", {
     interval: {
       type: Number,
       required: false,
-      "default": 1
+      default: 1
     },
     template: {
       type: String,
@@ -59408,7 +59408,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("single-item", {
   props: {
     template: {
       type: String,
-      "default": "#vue-single-item"
+      default: "#vue-single-item"
     }
   },
   jsonDataFields: ["itemData", "attributesData", "variations"],
@@ -59504,7 +59504,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("variation-select", {
   props: {
     template: {
       type: String,
-      "default": "#vue-variation-select"
+      default: "#vue-variation-select"
     }
   },
   data: function data() {
@@ -59640,8 +59640,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("variation-select", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -59720,8 +59720,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("variation-select", {
             _iteratorError3 = err;
           } finally {
             try {
-              if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-                _iterator3["return"]();
+              if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+                _iterator3.return();
               }
             } finally {
               if (_didIteratorError3) {
@@ -59740,8 +59740,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("variation-select", {
         _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-            _iterator2["return"]();
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
           }
         } finally {
           if (_didIteratorError2) {
@@ -59820,8 +59820,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("variation-select", {
         _iteratorError4 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
-            _iterator4["return"]();
+          if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
+            _iterator4.return();
           }
         } finally {
           if (_didIteratorError4) {
@@ -60013,15 +60013,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("category-image-carousel", 
     },
     showDots: {
       type: Boolean,
-      "default": App.config.item.categoryShowDots
+      default: App.config.item.categoryShowDots
     },
     showNav: {
       type: Boolean,
-      "default": App.config.item.categoryShowNav
+      default: App.config.item.categoryShowNav
     },
     disableLazyLoad: {
       type: Boolean,
-      "default": false
+      default: false
     },
     disableCarouselOnMobile: {
       type: Boolean
@@ -60144,15 +60144,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("category-item", {
   props: {
     template: {
       type: String,
-      "default": "#vue-category-item"
+      default: "#vue-category-item"
     },
     decimalCount: {
       type: Number,
-      "default": 0
+      default: 0
     },
     imageUrlAccessor: {
       type: String,
-      "default": "urlMiddle"
+      default: "urlMiddle"
     },
     itemData: {
       type: Object
@@ -60162,11 +60162,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("category-item", {
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   jsonDataFields: ["itemDataRef"],
@@ -60268,15 +60268,15 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-search", {
   props: {
     template: {
       type: String,
-      "default": "#vue-item-search"
+      default: "#vue-item-search"
     },
     showItemImages: {
       type: Boolean,
-      "default": false
+      default: false
     },
     forwardToSingleItem: {
       type: Boolean,
-      "default": App.config.search.forwardToSingleItem
+      default: App.config.search.forwardToSingleItem
     }
   },
   data: function data() {
@@ -60399,8 +60399,8 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-search", {
                   _iteratorError2 = err;
                 } finally {
                   try {
-                    if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-                      _iterator2["return"]();
+                    if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                      _iterator2.return();
                     }
                   } finally {
                     if (_didIteratorError2) {
@@ -60421,8 +60421,8 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-search", {
               _iteratorError = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-                  _iterator["return"]();
+                if (!_iteratorNormalCompletion && _iterator.return != null) {
+                  _iterator.return();
                 }
               } finally {
                 if (_didIteratorError) {
@@ -60500,7 +60500,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("item-store-special", {
         1: "badge-offer badge-danger",
         2: "badge-new badge-primary",
         3: "badge-top badge-success",
-        "default": "badge-success"
+        default: "badge-success"
       },
       labels: {
         1: _services_TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template.storeSpecialOffer"),
@@ -60515,9 +60515,9 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("item-store-special", {
   methods: {
     initializeStoreSpecial: function initializeStoreSpecial() {
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(this.storeSpecial)) {
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses["default"];
+        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
       } else {
-        this.tagClass = this.tagClasses["default"];
+        this.tagClass = this.tagClasses.default;
       }
 
       this.label = this.getLabel();
@@ -60587,7 +60587,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("item-filter", {
   props: {
     template: {
       type: String,
-      "default": "#vue-item-filter"
+      default: "#vue-item-filter"
     },
     facet: {
       type: Object
@@ -60667,11 +60667,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("item-filter-list", {
   props: {
     template: {
       type: String,
-      "default": "#vue-item-filter-list"
+      default: "#vue-item-filter-list"
     },
     facetData: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     }
@@ -60724,8 +60724,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("item-filter-list", {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
             }
           } finally {
             if (_didIteratorError) {
@@ -60848,7 +60848,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("item-filter-price", {
   props: {
     template: {
       type: String,
-      "default": "#vue-item-filter-price"
+      default: "#vue-item-filter-price"
     }
   },
   data: function data() {
@@ -60913,7 +60913,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-filter-tag-list", {
   props: {
     template: {
       type: String,
-      "default": "#vue-item-filter-tag-list"
+      default: "#vue-item-filter-tag-list"
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
@@ -60953,7 +60953,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("live-shopping-details", {
   props: {
     template: {
       type: String,
-      "default": "#vue-live-shopping-details"
+      default: "#vue-live-shopping-details"
     },
     liveShoppingData: {
       type: Object,
@@ -60961,7 +60961,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("live-shopping-details", {
     },
     displaySettings: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {
           showCrossPrice: true,
           showStock: true,
@@ -61111,7 +61111,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("live-shopping-item", {
   props: {
     template: {
       type: String,
-      "default": "#vue-live-shopping-item"
+      default: "#vue-live-shopping-item"
     },
     liveShoppingId: {
       type: Number,
@@ -61125,11 +61125,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("live-shopping-item", {
     },
     paddingClasses: {
       type: String,
-      "default": null
+      default: null
     },
     paddingInlineStyles: {
       type: String,
-      "default": null
+      default: null
     }
   },
   computed: _objectSpread({
@@ -61189,15 +61189,15 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("live-shopping-item", {
     prices: function prices() {
       var itemPrices = this.currentOffer.item.prices;
       var prices = {
-        price: itemPrices["default"],
+        price: itemPrices.default,
         rrp: itemPrices.rrp,
         isRrpDefaultPrice: false
       };
 
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(itemPrices.specialOffer)) {
         prices.price = itemPrices.specialOffer;
-        prices.rrp = itemPrices["default"] || itemPrices.rrp;
-        prices.isRrpDefaultPrice = !!itemPrices["default"];
+        prices.rrp = itemPrices.default || itemPrices.rrp;
+        prices.isRrpDefaultPrice = !!itemPrices.default;
       }
 
       return prices;
@@ -61260,12 +61260,12 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("account-settings", {
   props: {
     template: {
       type: String,
-      "default": "#vue-account-settings"
+      default: "#vue-account-settings"
     },
     userData: {
       type: Object,
       // eslint-disable-next-line
-      "default": function _default() {}
+      default: function _default() {}
     }
   },
   data: function data() {
@@ -61454,11 +61454,11 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("bank-data-select", {
   props: {
     template: {
       type: String,
-      "default": "#vue-bank-data-select"
+      default: "#vue-bank-data-select"
     },
     userBankData: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
@@ -61711,7 +61711,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("change-payment-method", {
   props: {
     template: {
       type: String,
-      "default": "#vue-change-payment-method"
+      default: "#vue-change-payment-method"
     },
     currentOrder: {
       type: Object
@@ -61900,23 +61900,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("my-account", {
   props: {
     deliveryAddressList: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
     selectedDeliveryAddress: {
       type: Number,
-      "default": -99
+      default: -99
     },
     billingAddressList: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
     selectedBillingAddress: {
       type: Number,
-      "default": 0
+      default: 0
     }
   },
   created: function created() {
@@ -61951,27 +61951,27 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("order-documents", {
   props: {
     template: {
       type: String,
-      "default": "#vue-order-documents"
+      default: "#vue-order-documents"
     },
     documents: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
     type: {
       type: String,
-      "default": "order"
+      default: "order"
     },
     allowedTypesForOrders: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery", "reversal_document"];
       }
     },
     allowedTypesForReturns: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return ["return_note"];
       }
     }
@@ -62040,11 +62040,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-history", {
   props: {
     template: {
       type: String,
-      "default": "#vue-order-history"
+      default: "#vue-order-history"
     },
     orderDetailsTemplate: {
       type: String,
-      "default": "Ceres::Checkout.OrderDetails"
+      default: "Ceres::Checkout.OrderDetails"
     }
   },
   data: function data() {
@@ -62098,23 +62098,23 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("order-history-list", {
   props: {
     template: {
       type: String,
-      "default": "#vue-order-history-list"
+      default: "#vue-order-history-list"
     },
     ordersPerPage: {
       type: Number,
-      "default": 5
+      default: 5
     },
     allowPaymentProviderChange: {
       type: Boolean,
-      "default": false
+      default: false
     },
     allowReturn: {
       type: Boolean,
-      "default": true
+      default: true
     },
     initialData: {
       type: Object,
-      "default": null
+      default: null
     }
   },
   data: function data() {
@@ -62189,11 +62189,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-history-list-item", 
   props: {
     template: {
       type: String,
-      "default": "#vue-order-history-list-item"
+      default: "#vue-order-history-list-item"
     },
     orderDetailsTemplate: {
       type: String,
-      "default": "Ceres::MyAccount.Partials.OrderHistoryListItemDetails"
+      default: "Ceres::MyAccount.Partials.OrderHistoryListItemDetails"
     },
     order: {
       type: Object,
@@ -62201,11 +62201,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-history-list-item", 
     },
     allowPaymentProviderChange: {
       type: Boolean,
-      "default": true
+      default: true
     },
     allowReturn: {
       type: Boolean,
-      "default": true
+      default: true
     }
   },
   data: function data() {
@@ -62325,11 +62325,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("order-return-history-item"
   props: {
     template: {
       type: String,
-      "default": "#vue-order-return-history-item"
+      default: "#vue-order-return-history-item"
     },
     returnOrder: {
       type: Object,
-      "default": function _default() {
+      default: function _default() {
         return {};
       }
     }
@@ -62370,8 +62370,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("order-return-history-item"
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -62412,15 +62412,15 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("order-return-history-list"
   props: {
     template: {
       type: String,
-      "default": "#vue-order-return-history-list"
+      default: "#vue-order-return-history-list"
     },
     returnsPerPage: {
       type: Number,
-      "default": 5
+      default: 5
     },
     initialData: {
       type: Object,
-      "default": null
+      default: null
     }
   },
   data: function data() {
@@ -62480,12 +62480,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-return-history-list-
   props: {
     template: {
       type: String,
-      "default": "#vue-order-return-history-list-item"
+      default: "#vue-order-return-history-list-item"
     },
     returnOrder: {
       type: Object,
       // eslint-disable-next-line
-      "default": function _default() {}
+      default: function _default() {}
     }
   },
   data: function data() {
@@ -62525,8 +62525,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-return-history-list-
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -62567,19 +62567,19 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("newsletter-input", {
   props: {
     template: {
       type: String,
-      "default": "#vue-newsletter-input"
+      default: "#vue-newsletter-input"
     },
     showNameInputs: {
       type: Boolean,
-      "default": false
+      default: false
     },
     showPrivacyPolicyCheckbox: {
       type: Boolean,
-      "default": true
+      default: true
     },
     emailFolder: {
       type: Number,
-      "default": 0
+      default: 0
     }
   },
   data: function data() {
@@ -62790,11 +62790,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("carousel", {
   props: {
     template: {
       type: String,
-      "default": "#vue-carousel"
+      default: "#vue-carousel"
     },
     itemsPerPage: {
       type: Number,
-      "default": 4
+      default: 4
     }
   },
   data: function data() {
@@ -62905,13 +62905,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("mobile-navigation", {
   props: {
     template: {
-      "default": "#vue-mobile-navigation",
+      default: "#vue-mobile-navigation",
       type: String
     },
     initialCategory: Object,
     breakpoints: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return ["xs", "sm", "md"];
       }
     }
@@ -63084,8 +63084,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("mobile-navigation", {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -63223,15 +63223,15 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
   props: {
     template: {
       type: String,
-      "default": "#vue-popper"
+      default: "#vue-popper"
     },
     placement: {
       type: String,
-      "default": "auto"
+      default: "auto"
     },
     trigger: {
       type: String,
-      "default": "click"
+      default: "click"
     }
   },
   mounted: function mounted() {
@@ -63330,7 +63330,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("shipping-country-select", 
   props: {
     template: {
       type: String,
-      "default": "#vue-shipping-country-select"
+      default: "#vue-shipping-country-select"
     },
     disableInput: {
       type: Boolean
@@ -63531,7 +63531,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("wish-list-count", {
   props: {
     template: {
       type: String,
-      "default": "#vue-wish-list-count"
+      default: "#vue-wish-list-count"
     }
   },
   computed: {
@@ -63827,8 +63827,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("navigation-touch-handler",
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
             }
           } finally {
             if (_didIteratorError) {
@@ -64409,7 +64409,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter("graduatedPrice", function (it
     }
   }
 
-  return returnPrice || item.prices["default"].unitPrice.value;
+  return returnPrice || item.prices.default.unitPrice.value;
 });
 
 /***/ }),
@@ -64429,7 +64429,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("hasItemDefaultPrice", function (itemData) {
-  var defaultPrice = itemData.prices["default"];
+  var defaultPrice = itemData.prices.default;
   return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isDefined"])(defaultPrice) && !isNaN(defaultPrice.price.value);
 });
 
@@ -64889,8 +64889,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter("propertySurchargeSum", functi
       _iteratorError = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
         }
       } finally {
         if (_didIteratorError) {
@@ -65043,8 +65043,8 @@ function () {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -65071,8 +65071,8 @@ function () {
         _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-            _iterator2["return"]();
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
           }
         } finally {
           if (_didIteratorError2) {
@@ -65926,8 +65926,8 @@ function _readCheckboxGroup(groupName) {
     _iteratorError = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
       }
     } finally {
       if (_didIteratorError) {
@@ -65992,8 +65992,8 @@ function serializeForm(form) {
     _iteratorError2 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-        _iterator2["return"]();
+      if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+        _iterator2.return();
       }
     } finally {
       if (_didIteratorError2) {
@@ -66768,8 +66768,8 @@ function _printMessages(response) {
     notification = NotificationService.info(response.info);
   }
 
-  if (response.debug && response.debug["class"].length > 0) {
-    notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug["class"]);
+  if (response.debug && response.debug.class.length > 0) {
+    notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
 
     for (var i = 0; i < response.debug.trace.length; i++) {
       notification.trace(response.debug.trace[i]);
@@ -66838,8 +66838,8 @@ function autoFocus() {
     _iteratorError = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
       }
     } finally {
       if (_didIteratorError) {
@@ -67505,8 +67505,8 @@ function removeUrlParams(urlParamsToDelete) {
     _iteratorError = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
       }
     } finally {
       if (_didIteratorError) {
@@ -67910,8 +67910,8 @@ function transformVariationProperties(item) {
           _iteratorError3 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-              _iterator3["return"]();
+            if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+              _iterator3.return();
             }
           } finally {
             if (_didIteratorError3) {
@@ -67928,8 +67928,8 @@ function transformVariationProperties(item) {
     _iteratorError = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
       }
     } finally {
       if (_didIteratorError) {
@@ -67962,8 +67962,8 @@ function transformVariationProperties(item) {
     _iteratorError2 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-        _iterator2["return"]();
+      if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+        _iterator2.return();
       }
     } finally {
       if (_didIteratorError2) {
@@ -68601,7 +68601,7 @@ var actions = {
       commit("setBasket", basket);
       commit("setBasketItems", basketItems);
       commit("setIsBasketInitiallyLoaded");
-    })["catch"](function (error, status) {
+    }).catch(function (error, status) {
       console.log(error, status);
 
       if (status > 0) {
@@ -69093,8 +69093,8 @@ function readFormOptions(form, formData) {
     _iteratorError = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
       }
     } finally {
       if (_didIteratorError) {
@@ -69198,8 +69198,8 @@ var actions = {
           _iteratorError2 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-              _iterator2["return"]();
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+              _iterator2.return();
             }
           } finally {
             if (_didIteratorError2) {
@@ -69213,7 +69213,7 @@ var actions = {
           fields: fieldNames.join(", ")
         }));
       });
-    })["catch"](function () {
+    }).catch(function () {
       _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_2__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
     });
   }
@@ -69321,8 +69321,8 @@ var mutations = {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -69828,8 +69828,8 @@ var actions = {
       _iteratorError = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
         }
       } finally {
         if (_didIteratorError) {
@@ -69868,8 +69868,8 @@ var actions = {
       _iteratorError2 = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-          _iterator2["return"]();
+        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+          _iterator2.return();
         }
       } finally {
         if (_didIteratorError2) {
@@ -70121,8 +70121,8 @@ var getters = {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
           }
         } finally {
           if (_didIteratorError) {
@@ -70155,7 +70155,7 @@ var getters = {
       }
     }
 
-    return returnPrice || calculatedPrices["default"];
+    return returnPrice || calculatedPrices.default;
   },
   variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
     var graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
@@ -70211,8 +70211,8 @@ var getters = {
         _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-            _iterator2["return"]();
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
           }
         } finally {
           if (_didIteratorError2) {
@@ -70272,8 +70272,8 @@ var getters = {
               _iteratorError3 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-                  _iterator3["return"]();
+                if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+                  _iterator3.return();
                 }
               } finally {
                 if (_didIteratorError3) {
@@ -70450,8 +70450,8 @@ var actions = {
       _iteratorError = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
         }
       } finally {
         if (_didIteratorError) {
@@ -70474,8 +70474,8 @@ var actions = {
       _iteratorError2 = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-          _iterator2["return"]();
+        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+          _iterator2.return();
         }
       } finally {
         if (_didIteratorError2) {

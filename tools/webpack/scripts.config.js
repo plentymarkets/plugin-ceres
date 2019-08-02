@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = (env) => {
+    env = env || {};
     return {
         name: 'scripts',
         mode: env.prod ? 'production' : 'development',

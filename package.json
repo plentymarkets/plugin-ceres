@@ -10,17 +10,14 @@
     "start": "webpack --watch",
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack",
-
     "build:prod": "webpack --env.prod",
     "build:js": "npm run build:js:dev && npm run build:js:prod",
     "build:js:dev": "webpack --config-name scripts",
     "build:js:prod": "webpack --config-name scripts --env.prod",
-
     "build:sass": "npm run build:sass:dev && npm run build:sass:prod",
     "build:sass:dev": "webpack --config-name styles",
     "build:sass:prod": "webpack --config-name styles --env.prod",
     "build:sass-vendor": "node tools/bundleSass.js",
-
     "build:widgets": "node tools/collectWidgets.js",
     "prebuild": "npm run build:sass-vendor",
     "postbuild": "npm run build:widgets",
