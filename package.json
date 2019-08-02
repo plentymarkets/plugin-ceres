@@ -18,6 +18,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "autoprefixer": "^8.3.0",
+    "babel-loader": "^8.0.6",
     "babelify": "^10.0.0",
     "currency-symbol-map": "3.0.0",
     "del": "^2.2.0",
