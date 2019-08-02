@@ -2,6 +2,7 @@ const ModalService        = require("../../services/ModalService");
 const ApiService          = require("../../services/ApiService");
 
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("change-payment-method", {
 

@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.directive("scroll-to-top",
     {
         bind(el, binding)

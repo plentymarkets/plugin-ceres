@@ -7,6 +7,7 @@ const ModalService        = require("../../services/ModalService");
 import ValidationService from "../../services/ValidationService";
 import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
 
 Vue.component("registration", {
 

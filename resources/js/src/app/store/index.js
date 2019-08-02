@@ -1,4 +1,5 @@
-import "vuex";
+import Vue from "vue";
+import Vuex from "vuex";
 
 import address from "./modules/AddressModule";
 import basket from "./modules/BasketModule";

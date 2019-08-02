@@ -1,4 +1,6 @@
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 const NotificationService = require("../../services/NotificationService");
 
 Vue.component("payment-provider-select", {
@@ -21,7 +23,7 @@ Vue.component("payment-provider-select", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         methodOfPaymentList: state => state.checkout.payment.methodOfPaymentList,
         methodOfPaymentId: state => state.checkout.payment.methodOfPaymentId,
         showError: state => state.checkout.validation.paymentProvider.showError,

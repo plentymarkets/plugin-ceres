@@ -1,5 +1,7 @@
 import { isDefined } from "../../../helper/utils";
 import ValidationService from "../../../services/ValidationService";
+import Vue from "vue";
+import { mapGetters } from "vuex";
 
 const ApiService = require("../../../services/ApiService");
 
@@ -18,7 +20,7 @@ Vue.component("user-login-handler", {
         }
     },
 
-    computed: Vuex.mapGetters([
+    computed: mapGetters([
         "username",
         "isLoggedIn"
     ]),

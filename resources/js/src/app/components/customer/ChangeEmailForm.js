@@ -2,6 +2,7 @@ const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("change-email-form", {
 

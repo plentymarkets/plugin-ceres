@@ -4,6 +4,7 @@ const ModalService        = require("../../services/ModalService");
 
 import ValidationService from "../../services/ValidationService";
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("bank-data-select", {
 

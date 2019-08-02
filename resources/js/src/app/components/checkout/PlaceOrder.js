@@ -3,6 +3,8 @@ const NotificationService = require("../../services/NotificationService");
 
 import { isDefined } from "../../helper/utils";
 import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("place-order", {
     props:
@@ -80,7 +82,7 @@ Vue.component("place-order", {
             return activeNewsletterSubscriptions;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             checkoutValidation: state => state.checkout.validation,
             contactWish: state => state.checkout.contactWish,
             isBasketLoading: state => state.basket.isBasketLoading,

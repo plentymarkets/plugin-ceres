@@ -1,4 +1,6 @@
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 const NotificationService = require("../../services/NotificationService");
 
 Vue.component("shipping-profile-select", {
@@ -22,7 +24,7 @@ Vue.component("shipping-profile-select", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         shippingProfileList: state => state.checkout.shipping.shippingProfileList,
         maxDeliveryDays: state => state.checkout.shipping.maxDeliveryDays,
         shippingProfileId: state => state.checkout.shipping.shippingProfileId,
