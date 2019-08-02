@@ -7,19 +7,38 @@
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
   },
   "scripts": {
-    "build": "gulp && npm run collectWidgets && node bundleSass.js",
-    "bundleSass": "gulp copy:sass-vendor && node bundleSass.js",
-    "collectWidgets": "node tools/collectWidgets.js",
-    "compareTranslations": "node tools/compareTranslations.js",
-    "wp-build": "webpack --env && webpack --env.prod"
+    "start": "webpack --watch",
+    "build": "npm run build:dev && npm run build:prod",
+    "build:dev": "webpack",
+
+    "build:prod": "webpack --env.prod",
+    "build:js": "npm run build:js:dev && npm run build:js:prod",
+    "build:js:dev": "webpack --config-name scripts",
+    "build:js:prod": "webpack --config-name scripts --env.prod",
+
+    "build:sass": "npm run build:sass:dev && npm run build:sass:prod",
+    "build:sass:dev": "webpack --config-name styles",
+    "build:sass:prod": "webpack --config-name styles --env.prod",
+    "build:sass-vendor": "node tools/bundleSass.js",
+
+    "build:widgets": "node tools/collectWidgets.js",
+    "prebuild": "npm run build:sass-vendor",
+    "postbuild": "npm run build:widgets",
+    "compareTranslations": "node tools/compareTranslations.js"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 5%",
+    "Firefox ESR"
+  ],
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "autoprefixer": "^8.3.0",
+    "autoprefixer": "^8.6.5",
     "babel-loader": "^8.0.6",
     "babelify": "^10.0.0",
+    "css-loader": "^3.1.0",
     "currency-symbol-map": "3.0.0",
     "del": "^2.2.0",
     "eslint-config-google": "^0.13.0",
@@ -28,11 +47,13 @@
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
     "postcss": "^6.0.21",
+    "postcss-loader": "^3.0.0",
     "postcss-scss": "^1.0.5",
     "q": "^1.5.1",
     "sass-loader": "^7.1.0",
     "webpack": "^4.39.0",
-    "webpack-cli": "^3.3.6"
+    "webpack-cli": "^3.3.6",
+    "webpack-fix-style-only-entries": "^0.3.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
