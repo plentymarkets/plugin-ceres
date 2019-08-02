@@ -107,6 +107,17 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 ];
                 $globalData = $mappingService->processGlobalMappingData($data, "store");
 
+                $intermediarBrowserLanguage = $globalData['browserLanguage'];
+                $globalData['browserLanguage'] = [
+                    'other' => $intermediarBrowserLanguage
+                ];
+                foreach ($data as $dataKey => $dataValue){
+                    if (strpos($dataKey, "languages_browserLang_") !== false) {
+                        $key = end(explode("_", $dataKey));
+                        $globalData['browserLanguage'][$key] = $dataValue;
+                    }
+                }
+
                 $webstoreData = array_merge($shippingData, $currenciesData, $globalData);
 
                 if (!empty($activeLanguagesList)) {

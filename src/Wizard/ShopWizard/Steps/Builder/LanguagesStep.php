@@ -10,11 +10,18 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
+use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
 class LanguagesStep extends Step
 {
+    /**
+     * @var array
+     */
     private $languages;
 
+    /**
+     * LanguagesStep constructor.
+     */
     public function __construct()
     {
         $languages = LanguagesHelper::getTranslatedLanguages();
@@ -22,6 +29,10 @@ class LanguagesStep extends Step
 
         parent::__construct();
     }
+
+    /**
+     * @return array
+     */
     public function generateStep(): array
     {
         return [
@@ -30,18 +41,23 @@ class LanguagesStep extends Step
             "condition" => " typeof settingsSelection_languages === 'undefined' || settingsSelection_languages === true",
             "sections" => [
                 $this->generateActiveLanguagesSection(),
-                $this->generateAutomaticLanguageSection()
+                $this->generateAutomaticLanguageSection(),
+                $this->generateSearchLanguagesSection()
             ]
         ];
     }
 
+    /**
+     * @return array
+     */
     private function generateActiveLanguagesSection(): array
     {
 
-        $languagesOptions = $this->buildListBoxData($this->languages);
+        $languagesOptions = StepHelper::buildListBoxData($this->languages);
         return [
             "title" => "Wizard.activeLanguages",
             "description" => "Wizard.activeLanguagesDescription",
+            "condition" => $this->globalsCondition,
             "form" => [
                 "languages_activeLanguages" => [
                     "type" => "checkboxGroup",
@@ -57,21 +73,24 @@ class LanguagesStep extends Step
         ];
     }
 
+    /**
+     * @return array
+     */
     private function generateAutomaticLanguageSection(): array
     {
 
         return [
             "title" => "Wizard.automaticLanguageRecognition",
+            "condition" => $this->globalsCondition,
             "form" => $this->generateFormLanguagesSelection()
         ];
     }
 
-
+    /**
+     * @return array
+     */
     private function generateFormLanguagesSelection(): array
     {
-        $languages = LanguagesHelper::getTranslatedLanguages();
-        $activeLanguagesList = $this->buildListBoxData($languages);
-        $defaultValue = $activeLanguagesList[0]['value'];
 
         $formFields = [
             "languages_setLinkedStoreLanguage" => [
@@ -85,20 +104,82 @@ class LanguagesStep extends Step
                 "dependencies" => ['languages_activeLanguages'],
                 "dependencyMethod" => "retrieveActiveLanguages",
                 "type" => "select",
+                "isVisible" => "typeof languages_setLinkedStoreLanguage ==='undefined' ||languages_setLinkedStoreLanguage === true",
                 "options" => [
                     "name" => "Wizard.defaultBrowserLanguage",
-                ]
-            ],
-            "language_defaultStaticBrowserLang" => [
-                "type" => "select",
-                "defaultValue" => $defaultValue,
-                "options" => [
-                    "name" => "Default Browser Static",
-                    'listBoxValues' => $activeLanguagesList
+                    'listBoxValues' => []
                 ]
             ]
         ];
 
+        $finalFormFields = $this->generateLanguagesFormFields($formFields);
+
+        return $finalFormFields;
+    }
+
+    /**
+     * @param array $formFields
+     *
+     * @return array
+     */
+    private function generateLanguagesFormFields(array $formFields): array
+    {
+
+        foreach ($this->languages as $langKey => $language) {
+            $key = "languages_browserLang_{$langKey}";
+            $translateKey = "browserLang" . ucfirst($langKey);
+            $formFields[$key] = [
+                "dependencies" => ['languages_activeLanguages'],
+                "dependencyMethod" => "retrieveActiveLanguages",
+                "type" => "select",
+                "isVisible" => "typeof languages_setLinkedStoreLanguage ==='undefined' ||languages_setLinkedStoreLanguage === true",
+                "options" => [
+                    "name" => "Wizard.{$translateKey}",
+                    "listBoxValues" => []
+                ]
+            ];
+        }
+
         return $formFields;
+    }
+
+    /**
+     * @return array
+     */
+    private function generateSearchLanguagesSection(): array
+    {
+        return [
+            "title" => "Wizard.searchLanguages",
+            "description" => "Wizard.searchLanguagesDescription",
+            "form" => [
+                "languages_firstSearchLanguage" => [
+                    "dependencies" => ['languages_activeLanguages'],
+                    "dependencyMethod" => "getSearchActiveLanguages",
+                    "type" => "select",
+                    "options" => [
+                        "name" => "Wizard.firstSearchLanguage",
+                        "listBoxValues" => []
+                    ]
+                ],
+                "languages_secondSearchLanguage" => [
+                    "dependencies" => ['languages_activeLanguages'],
+                    "dependencyMethod" => "getSearchActiveLanguages",
+                    "type" => "select",
+                    "options" => [
+                        "name" => "Wizard.secondSearchLanguage",
+                        "listBoxValues" => []
+                    ]
+                ],
+                "languages_thirdSearchLanguage" => [
+                    "dependencies" => ['languages_activeLanguages'],
+                    "dependencyMethod" => "getSearchActiveLanguages",
+                    "type" => "select",
+                    "options" => [
+                        "name" => "Wizard.thirdSearchLanguage",
+                        "listBoxValues" => []
+                    ]
+                ],
+            ]
+        ];
     }
 }

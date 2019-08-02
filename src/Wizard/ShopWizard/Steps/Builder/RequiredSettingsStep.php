@@ -13,8 +13,9 @@ use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 
 class RequiredSettingsStep extends Step
 {
-
-
+    /**
+     * @return array
+     */
     public function generateStep(): array
     {
 
@@ -43,7 +44,14 @@ class RequiredSettingsStep extends Step
         ];
     }
 
-    private function generateSection($name, $condition, $url) : array
+    /**
+     * @param $name
+     * @param $condition
+     * @param $url
+     *
+     * @return array
+     */
+    private function generateSection($name, $condition, $url): array
     {
         return [
             "title" => "Wizard." . $name,

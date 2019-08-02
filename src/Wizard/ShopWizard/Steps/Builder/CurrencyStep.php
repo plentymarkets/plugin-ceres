@@ -11,6 +11,7 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 use Ceres\Wizard\ShopWizard\Config\CurrencyConfig;
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
+use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 
 class CurrencyStep extends Step
@@ -20,12 +21,20 @@ class CurrencyStep extends Step
      */
     private $currencyConfig;
 
+    /**
+     * CurrencyStep constructor.
+     *
+     * @param CurrencyConfig $currencyConfig
+     */
     public function __construct(CurrencyConfig $currencyConfig)
     {
         parent::__construct();
         $this->currencyConfig = $currencyConfig;
     }
 
+    /**
+     * @return array
+     */
     public function generateStep()
     {
         return [
@@ -40,6 +49,9 @@ class CurrencyStep extends Step
         ];
     }
 
+    /**
+     * @return array
+     */
     private function generateCurenciesSection(): array
     {
         $currencyRepo = pluginApp(CurrencyRepositoryContract::class);
@@ -52,6 +64,11 @@ class CurrencyStep extends Step
         ];
     }
 
+    /**
+     * @param $currenciesCollection
+     *
+     * @return array
+     */
     private function generateCurenciesList($currenciesCollection): array
     {
         $list = [];
@@ -74,6 +91,11 @@ class CurrencyStep extends Step
         return $list;
     }
 
+    /**
+     * @param $currencyCollection
+     *
+     * @return array
+     */
     private function getCurrenciesListValues ($currencyCollection): array
     {
         $currenciesList = [];
@@ -94,13 +116,15 @@ class CurrencyStep extends Step
         return $currenciesList;
     }
 
-
+    /**
+     * @return array
+     */
     private function generateFormatCurrenciesSection(): array
     {
         $currenciesFormat = CurrencyConfig::getCurrencyFormat();
-        $currenciesFormatList = $this->generateTranslatedListBoxValues($currenciesFormat);
+        $currenciesFormatList = StepHelper::generateTranslatedListBoxValues($currenciesFormat);
         $currenciesFormatSelection = CurrencyConfig::getCurrencyFormatSelection();
-        $currenciesFormatSelectionList = $this->generateTranslatedListBoxValues($currenciesFormatSelection);
+        $currenciesFormatSelectionList = StepHelper::generateTranslatedListBoxValues($currenciesFormatSelection);
         return [
             "title" => "Wizard.formatOfCurrencies",
             "description" => "",
@@ -126,10 +150,13 @@ class CurrencyStep extends Step
         ];
     }
 
+    /**
+     * @return array
+     */
     private function generateAvailableCurrenciesSection(): array
     {
         $availableCurrencies = $this->currencyConfig->getAvailableCurrencies();
-        $availableCurrenciesList = $this->generateTranslatedListBoxValues($availableCurrencies);
+        $availableCurrenciesList = StepHelper::generateTranslatedListBoxValues($availableCurrencies);
         return [
             "title" => "Wizard.availableCurrencies",
             "description" => "",

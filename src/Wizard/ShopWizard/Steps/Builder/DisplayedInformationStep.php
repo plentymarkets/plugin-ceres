@@ -10,6 +10,7 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 
 use Ceres\Wizard\ShopWizard\Config\ItemViewConfig;
+use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
 class DisplayedInformationStep extends Step
 {
@@ -40,10 +41,10 @@ class DisplayedInformationStep extends Step
     private function generateItemSection(): array
     {
         $itemDisplayOptions = ItemViewConfig::getItemDisplayNames();
-        $itemDisplayOptionList = $this->generateTranslatedListBoxValues($itemDisplayOptions);
+        $itemDisplayOptionList = StepHelper::generateTranslatedListBoxValues($itemDisplayOptions);
 
         $itemNameOptions = ItemViewConfig::getItemNames();
-        $itemNameOptionList = $this->generateTranslatedListBoxValues($itemNameOptions);
+        $itemNameOptionList = StepHelper::generateTranslatedListBoxValues($itemNameOptions);
 
         return [
             "title" => "Wizard.itemLook",
@@ -74,7 +75,7 @@ class DisplayedInformationStep extends Step
     private function generateDecimalPlacesSection(): array
     {
         $itemDecimals = ItemViewConfig::getItemDecimals();
-        $itemDecimalList = $this->generateTranslatedListBoxValues($itemDecimals);
+        $itemDecimalList = StepHelper::generateTranslatedListBoxValues($itemDecimals);
 
         return [
             "title" => "Wizard.displayedInfoDecimals",
@@ -97,7 +98,7 @@ class DisplayedInformationStep extends Step
     private function generateLoadingAnimationSection(): array
     {
         $loadingAnimationTypes = ItemViewConfig::getLoadingAnimationTypes();
-        $loadingAnimationTypesList = $this->generateTranslatedListBoxValues($loadingAnimationTypes);
+        $loadingAnimationTypesList = StepHelper::generateTranslatedListBoxValues($loadingAnimationTypes);
 
         return [
             "title" => "Wizard.displayedInfoLoadingAnimation",
@@ -120,9 +121,9 @@ class DisplayedInformationStep extends Step
     private function generateCategoryView(): array
     {
         $variationTypes = ItemViewConfig::getItemVariationTypes();
-        $variationsTypesList = $this->generateTranslatedListBoxValues($variationTypes);
+        $variationsTypesList = StepHelper::generateTranslatedListBoxValues($variationTypes);
         $categoryDescriptionPositions = ItemViewConfig::getCategoryDescriptionPositions();
-        $categoryDescriptionList = $this->generateTranslatedListBoxValues($categoryDescriptionPositions);
+        $categoryDescriptionList = StepHelper::generateTranslatedListBoxValues($categoryDescriptionPositions);
 
         return [
             "title" => "Wizard.displayedInfoCategoryViewType",
@@ -203,16 +204,19 @@ class DisplayedInformationStep extends Step
         ];
     }
 
+    /**
+     * @return array
+     */
     private function generateShoppingCartView(): array
     {
         $cartItemData = ItemViewConfig::getCartItemData();
-        $cartItemOptions = $this->generateTranslatedListBoxValues($cartItemData);
+        $cartItemOptions = StepHelper::generateTranslatedListBoxValues($cartItemData);
 
         $cartItemAdditionalData = ItemViewConfig::getCartItemAdditionalInfo();
-        $cartItemAdditionalDataOptions = $this->generateTranslatedListBoxValues($cartItemAdditionalData);
+        $cartItemAdditionalDataOptions = StepHelper::generateTranslatedListBoxValues($cartItemAdditionalData);
 
         $cartPreviewPosition = ItemViewConfig::getCartPreviewPosion();
-        $cartPreviewOptions = $this->generateTranslatedListBoxValues($cartPreviewPosition);
+        $cartPreviewOptions = StepHelper::generateTranslatedListBoxValues($cartPreviewPosition);
 
         return [
             "title" => "Wizard.shoppingCartInfo",

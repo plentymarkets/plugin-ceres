@@ -98,6 +98,21 @@ class ShopWizardService
                 }
             }
 
+            if (count($globalData['languages_defaultBrowserLang'])) {
+                $globalData['languages_setLinkedStoreLanguage'] = true;
+                $browserLanguage = $globalData['languages_defaultBrowserLang'];
+
+                //now we extract data related from browser language
+                foreach ($browserLanguage as $bLangKey => $bLang) {
+                    if ($bLangKey == 'other') {
+                        $globalData['languages_defaultBrowserLang'] = $bLang;
+                    } else {
+                        $langKey = "languages_browserLang_{$bLangKey}";
+                        $globalData[$langKey] = $bLang;
+                    }
+                }
+            }
+
         }
 
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
@@ -108,7 +123,7 @@ class ShopWizardService
         {
             foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
                 if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres' && $pluginSetEntry->pluginSetId == $pluginSetId) {
-                    $config      = $pluginSetEntry->configurations()->getResults();
+                    $config = $pluginSetEntry->configurations()->getResults();
                     if (count($config)) {
                         foreach ($config as $confItem) {
                             $pluginConfData[$confItem->key] = $confItem->value;
