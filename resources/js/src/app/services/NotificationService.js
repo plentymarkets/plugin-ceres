@@ -1,5 +1,6 @@
 import { exceptionMap } from "../exceptions/ExceptionMap";
 import TranslationService from "./TranslationService";
+import jQuery from "jquery";
 
 module.exports = (function($)
 {

@@ -1,3 +1,5 @@
+import "vuex";
+
 import address from "./modules/AddressModule";
 import basket from "./modules/BasketModule";
 import checkout from "./modules/CheckoutModule";

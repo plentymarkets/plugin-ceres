@@ -207,10 +207,13 @@
 
 {{ Translations.add( "Ceres", "Template" ) }}
 {% if ceresConfig.log.performanceLevel  == 'development' %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
-    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
+    {# <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
+    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script> #}
+    
+    <script src="{{ plugin_path('Ceres') }}/js/dist/wp-ceres.js"></script>
 {% else %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
+    <script src="{{ plugin_path('Ceres') }}/js/dist/wp-ceres.min.js"></script>
+    {# <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script> #}
 {% endif %}
 
 {% for scriptTemplate in get_additional_scripts() %}

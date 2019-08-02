@@ -149,4 +149,4 @@ module.exports = (function($)
             $bsModal.on(event, callback);
         }
     }
-})(jQuery);
+})();

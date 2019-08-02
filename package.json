@@ -11,7 +11,7 @@
     "bundleSass": "gulp copy:sass-vendor && node bundleSass.js",
     "collectWidgets": "node tools/collectWidgets.js",
     "compareTranslations": "node tools/compareTranslations.js",
-    "wp": "webpack"
+    "wp-build": "webpack --env && webpack --env.prod"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -31,7 +31,6 @@
     "postcss-scss": "^1.0.5",
     "q": "^1.5.1",
     "sass-loader": "^7.1.0",
-    "source-map-loader": "^0.2.4",
     "webpack": "^4.39.0",
     "webpack-cli": "^3.3.6"
   },

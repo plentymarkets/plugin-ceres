@@ -1,4 +1,6 @@
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 const ModalService        = require("../../services/ModalService");
 
@@ -66,7 +68,7 @@ Vue.component("add-item-to-basket-overlay", {
             return "";
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             latestBasketEntry: state => state.basket.latestEntry
         })
     },

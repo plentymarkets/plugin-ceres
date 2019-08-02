@@ -185,7 +185,7 @@ import "./mixins/template.mixin";
 // STORE
 // =========================
 
-import "./store";
+import store from "./store";
 
 
 // =========================
@@ -193,5 +193,6 @@ import "./store";
 // =========================
 
 import Vue from "vue";
+import "jquery";
 
-const app = new Vue();
+const app = new Vue({store});
