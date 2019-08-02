@@ -3,7 +3,16 @@
 // =========================
 
 import Vue from "vue";
+
+import jQuery from "jquery";
+window.jQuery = jQuery;
+window.$ = jQuery;
+
+import popper from "popper.js"
+window.Popper = popper;
+
 import "jquery-lazyload";
+import "bootstrap"
 
 // =========================
 // COMPONENTS

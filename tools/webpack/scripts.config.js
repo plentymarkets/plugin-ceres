@@ -31,6 +31,15 @@ module.exports = (env) => {
                     ]
                 },
                 {
+                    test: require.resolve('popper.js'),
+                    use: [
+                        {
+                            loader: 'expose-loader',
+                            options: 'Popper'
+                        }
+                    ]
+                },
+                {
                     test: /\.m?js$/,
                     exclude: /(node_modules)/,
                     use: {

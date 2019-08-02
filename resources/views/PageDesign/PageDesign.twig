@@ -225,7 +225,7 @@
 {{ get_filtered_tags() }}
 {{ get_json_data() }}
 
-<script>
+{# <script>
     vueEventHub = new Vue();
 
     {% if ceresConfig.log.checkSyntax %}
@@ -394,7 +394,7 @@
 
 
     })(jQuery, MediaQueryHelper);
-</script>
+</script> #}
 
 {{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
 </body>
