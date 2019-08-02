@@ -13,12 +13,12 @@
     "compareTranslations": "node tools/compareTranslations.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "autoprefixer": "^8.3.0",
     "babelify": "^10.0.0",
-    "browserify": "^16.2.0",
+    "browserify": "^16.3.0",
     "currency-symbol-map": "3.0.0",
     "del": "^2.2.0",
     "eslint-config-google": "^0.13.0",
@@ -54,13 +54,13 @@
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.6.3",
     "jquery": "^3.4.0",
-    "lightbox2": "^2.10.0",
-    "lodash": "^4.17.11",
+    "lightbox2": "^2.11.1",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "owl.carousel": "2.2.0",
     "popper.js": "^1.15.0",
     "vue": "^2.6.10",
-    "vue-script2": "^2.0.1",
+    "vue-script2": "^2.1.0",
     "vuex": "^3.1.0"
   }
 }
