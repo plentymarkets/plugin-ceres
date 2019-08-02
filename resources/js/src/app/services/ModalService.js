@@ -1,152 +1,146 @@
-module.exports = (function($)
-{
+let paused  = false;
+let timeout = -1;
+let interval;
+let timeRemaining;
+let timeStart;
 
-    let paused  = false;
-    let timeout = -1;
-    let interval;
-    let timeRemaining;
-    let timeStart;
+export function findModal(element)
+{
+    return new Modal(element);
+}
+
+function Modal(element)
+{
+    const self = this;
+    let $bsModal;
+
+    if ($(element).is(".modal"))
+    {
+        $bsModal = $(element);
+    }
+    else
+    {
+        $bsModal = $(element).find(".modal").first();
+    }
 
     return {
-        findModal: findModal
+        show             : show,
+        hide             : hide,
+        setTimeout       : setTimeout,
+        startTimeout     : startTimeout,
+        pauseTimeout     : pauseTimeout,
+        continueTimeout  : continueTimeout,
+        stopTimeout      : stopTimeout,
+        getModalContainer: getModalContainer,
+        on               : on
     };
 
-    function findModal(element)
+    function show()
     {
-        return new Modal(element);
+        return new Promise((resolve, reject) =>
+        {
+            $bsModal.modal("show");
+
+            if ($bsModal.timeout > 0)
+            {
+                startTimeout();
+            }
+
+            $bsModal.one("shown.bs.modal", function()
+            {
+                resolve(self);
+            });
+
+        });
     }
 
-    function Modal(element)
+    function hide()
     {
-        const self = this;
-        let $bsModal;
-
-        if ($(element).is(".modal"))
+        return new Promise((resolve, reject) =>
         {
-            $bsModal = $(element);
-        }
-        else
-        {
-            $bsModal = $(element).find(".modal").first();
-        }
-
-        return {
-            show             : show,
-            hide             : hide,
-            setTimeout       : setTimeout,
-            startTimeout     : startTimeout,
-            pauseTimeout     : pauseTimeout,
-            continueTimeout  : continueTimeout,
-            stopTimeout      : stopTimeout,
-            getModalContainer: getModalContainer,
-            on               : on
-        };
-
-        function show()
-        {
-            return new Promise((resolve, reject) =>
+            $bsModal.modal("hide");
+            $bsModal.one("hidden.bs.modal", function()
             {
-                $bsModal.modal("show");
-
-                if ($bsModal.timeout > 0)
-                {
-                    startTimeout();
-                }
-
-                $bsModal.one("shown.bs.modal", function()
-                {
-                    resolve(self);
-                });
-
+                $bsModal.find(".modal-content").unbind("mouseenter");
+                $bsModal.find(".modal-content").unbind("mouseleave");
+                resolve(self);
             });
-        }
+        });
+    }
 
-        function hide()
+    function getModalContainer()
+    {
+        return $bsModal;
+    }
+
+    function setTimeout(timeout)
+    {
+        $bsModal.timeout = timeout;
+        $bsModal.find(".modal-content").mouseenter(() =>
         {
-            return new Promise((resolve, reject) =>
-            {
-                $bsModal.modal("hide");
-                $bsModal.one("hidden.bs.modal", function()
-                {
-                    $bsModal.find(".modal-content").unbind("mouseenter");
-                    $bsModal.find(".modal-content").unbind("mouseleave");
-                    resolve(self);
-                });
-            });
-        }
+            pauseTimeout();
+        });
 
-        function getModalContainer()
+        $bsModal.find(".modal-content").mouseleave(() =>
         {
-            return $bsModal;
-        }
+            continueTimeout();
+        });
 
-        function setTimeout(timeout)
+        return this;
+    }
+
+    function startTimeout()
+    {
+        timeRemaining = $bsModal.timeout;
+        timeStart = (new Date()).getTime();
+
+        timeout = window.setTimeout(function()
         {
-            $bsModal.timeout = timeout;
-            $bsModal.find(".modal-content").mouseenter(() =>
-            {
-                pauseTimeout();
-            });
-
-            $bsModal.find(".modal-content").mouseleave(() =>
-            {
-                continueTimeout();
-            });
-
-            return this;
-        }
-
-        function startTimeout()
-        {
-            timeRemaining = $bsModal.timeout;
-            timeStart = (new Date()).getTime();
-
-            timeout = window.setTimeout(function()
-            {
-                window.clearInterval(interval);
-                hide();
-            }, $bsModal.timeout);
-
-            $bsModal.find(".timer").text(timeRemaining / 1000);
-            interval = window.setInterval(function()
-            {
-                if (!paused)
-                {
-                    let secondsRemaining = timeRemaining - (new Date()).getTime() + timeStart;
-
-                    secondsRemaining = Math.round(secondsRemaining / 1000);
-                    $bsModal.find(".timer").text(secondsRemaining);
-                }
-            }, 1000);
-        }
-
-        function pauseTimeout()
-        {
-            paused = true;
-            timeRemaining -= (new Date()).getTime() - timeStart;
-            window.clearTimeout(timeout);
-        }
-
-        function continueTimeout()
-        {
-            paused = false;
-            timeStart = (new Date()).getTime();
-            timeout = window.setTimeout(function()
-            {
-                hide();
-                window.clearInterval(interval);
-            }, timeRemaining);
-        }
-
-        function stopTimeout()
-        {
-            window.clearTimeout(timeout);
             window.clearInterval(interval);
-        }
+            hide();
+        }, $bsModal.timeout);
 
-        function on(event, callback)
+        $bsModal.find(".timer").text(timeRemaining / 1000);
+        interval = window.setInterval(function()
         {
-            $bsModal.on(event, callback);
-        }
+            if (!paused)
+            {
+                let secondsRemaining = timeRemaining - (new Date()).getTime() + timeStart;
+
+                secondsRemaining = Math.round(secondsRemaining / 1000);
+                $bsModal.find(".timer").text(secondsRemaining);
+            }
+        }, 1000);
     }
-})();
+
+    function pauseTimeout()
+    {
+        paused = true;
+        timeRemaining -= (new Date()).getTime() - timeStart;
+        window.clearTimeout(timeout);
+    }
+
+    function continueTimeout()
+    {
+        paused = false;
+        timeStart = (new Date()).getTime();
+        timeout = window.setTimeout(function()
+        {
+            hide();
+            window.clearInterval(interval);
+        }, timeRemaining);
+    }
+
+    function stopTimeout()
+    {
+        window.clearTimeout(timeout);
+        window.clearInterval(interval);
+    }
+
+    function on(event, callback)
+    {
+        $bsModal.on(event, callback);
+    }
+}
+
+export default { findModal };
