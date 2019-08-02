@@ -1,8 +1,9 @@
-import ApiService from "../../services/ApiService";
 import TranslationService from "../../services/TranslationService";
 import UrlService from "../../services/UrlService";
 import { isNullOrUndefined } from "../../helper/utils";
 import { pathnameEquals } from "../../helper/url";
+
+const ApiService = require("../../services/ApiService");
 
 Vue.component("item-search", {
 

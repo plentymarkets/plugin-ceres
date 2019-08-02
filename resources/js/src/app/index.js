@@ -186,3 +186,12 @@ import "./mixins/template.mixin";
 // =========================
 
 import "./store";
+
+
+// =========================
+// Framework's
+// =========================
+
+import Vue from "vue";
+
+const app = new Vue();
