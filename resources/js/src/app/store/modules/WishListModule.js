@@ -76,7 +76,7 @@ const actions =
                     commit("removeWishListItem", wishListItem);
                 }
 
-                ApiService.delete("/rest/io/itemWishList/" + id)
+                ApiService.del("/rest/io/itemWishList/" + id)
                     .done(data =>
                     {
                         commit("removeWishListId", id);

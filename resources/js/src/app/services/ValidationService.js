@@ -1,4 +1,3 @@
-import $ from "jquery";
 import { isMail } from "../helper/strings";
 import { isNull } from "../helper/utils";
 

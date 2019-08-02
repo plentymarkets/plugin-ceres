@@ -1,7 +1,7 @@
-const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 const ModalService        = require("../../services/ModalService");
 
+import ApiService from "../../services/ApiService";
 import ValidationService from "../../services/ValidationService";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
@@ -219,7 +219,7 @@ Vue.component("bank-data-select", {
          */
         removeBankInfo()
         {
-            ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id)
+            ApiService.del("/rest/io/customer/bank_data/" + this.updateBankData.id)
                 .done(response =>
                 {
                     this.checkBankDataSelection(false);

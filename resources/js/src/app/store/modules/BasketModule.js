@@ -194,7 +194,7 @@ const actions =
             {
                 commit("setIsBasketLoading", true);
 
-                ApiService.delete("/rest/io/basket/items/" + basketItemId, { template: "Ceres::Basket.Basket" })
+                ApiService.del("/rest/io/basket/items/" + basketItemId, { template: "Ceres::Basket.Basket" })
                     .done(basketItems =>
                     {
                         commit("setBasketItems", basketItems);
@@ -241,7 +241,7 @@ const actions =
             {
                 commit("setIsBasketLoading", true);
 
-                ApiService.delete("/rest/io/coupon/" + couponCode)
+                ApiService.del("/rest/io/coupon/" + couponCode)
                     .done(data =>
                     {
                         commit("setCouponCode", null);
