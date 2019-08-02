@@ -63,7 +63,8 @@ class DefaultSingleItemPreset implements ContentPreset
 
     private function createStickyContainer()
     {
-        $this->stickyContainer = $this->twoColumnWidget->createChild('second', 'Ceres::StickyContainerWidget');
+        $this->stickyContainer = $this->twoColumnWidget->createChild('second', 'Ceres::StickyContainerWidget')
+            ->withSetting('stickTo', 'stickToBody');
     }
 
     private function createTwoColumnWidget()
