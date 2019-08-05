@@ -9,6 +9,7 @@ window.jQuery = jQuery;
 window.$ = jQuery;
 
 import "jquery-lazyload";
+import "owl.carousel"
 import "bootstrap"
 
 // =========================
