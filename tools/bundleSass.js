@@ -3,6 +3,7 @@ var path = require('path');
 var autoprefixer = require('autoprefixer');
 var postcss = require('postcss');
 var postcssSCSS = require('postcss-scss');
+var glob = require('glob');
 
 /*
  CLASS ImportTree
@@ -111,20 +112,11 @@ ImportTree.prototype.toString = function()
 
 var SassResolver = function ( rootSassFile )
 {
-    this.rootSassFile = path.resolve(
-        __dirname,
-        '..',
-        rootSassFile
-    );
+    this.rootSassFile = rootSassFile;
 };
 
 SassResolver.prototype.bundle = function( targetFile )
 {
-    targetFile = path.resolve(
-        __dirname,
-        '..',
-        targetFile
-    );
     var importTree = new ImportTree( this.rootSassFile );
     importTree.parseImports();
 
@@ -148,10 +140,17 @@ SassResolver.prototype.bundle = function( targetFile )
         });
 };
 
-console.log("> Start bundling .scss files...");
-var resolverBootstrap = new SassResolver('resources/scss/ceres.scss');
-resolverBootstrap.bundle('resources/css/ceres.scss');
+glob.sync(path.resolve(__dirname, '../resources/scss/*.scss')).forEach(file =>
+{
+    if (path.basename(file) !== '_variables.scss')
+    {
+        (new SassResolver(file)).bundle(
+            path.resolve(
+                __dirname,
+                '../resources/css',
+                path.basename(file)
+            )
+        );
+    }
 
-var resolverBootstrapLegacy = new SassResolver('resources/scss/ceres-legacy.scss');
-resolverBootstrapLegacy.bundle('resources/css/ceres-legacy.scss');
-console.log("> DONE");
+});
