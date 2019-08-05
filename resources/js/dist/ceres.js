@@ -44175,7 +44175,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = exports.exceptionMap = void 0;
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"]]);
 exports.exceptionMap = exceptionMap;
 var _default = exceptionMap;
 exports["default"] = _default;
@@ -46791,7 +46791,7 @@ module.exports = function ($) {
 
   function _printNotification(notification) {
     if (notification.code > 0 && _ExceptionMap.exceptionMap.has(notification.code.toString())) {
-      notification.message = _TranslationService["default"].translate("Ceres::Template." + _ExceptionMap.exceptionMap.get(notification.code.toString()));
+      notification.message = _TranslationService["default"].translate("Ceres::Template." + _ExceptionMap.exceptionMap.get(notification.code.toString()), notification.placeholder);
     }
 
     notifications.add(notification);
@@ -46812,6 +46812,7 @@ module.exports = function ($) {
       id: id,
       code: data.code || 0,
       message: data.message || data || "",
+      placeholder: data.placeholder || null,
       context: context || "info",
       stackTrace: data.stackTrace || [],
       close: close,
