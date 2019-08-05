@@ -1,4 +1,6 @@
 import Vue from "vue";
+import "owl.carousel"
+import "jquery-lazyload";
 
 Vue.component("category-image-carousel", {
 

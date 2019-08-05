@@ -1,4 +1,5 @@
 import Vue from "vue";
+import "owl.carousel"
 
 Vue.component("carousel", {
 
