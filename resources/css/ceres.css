@@ -19286,22 +19286,6 @@ div:not(.top-bar) > .page-header > div > .cmp-search-box {
   overflow: hidden;
 }
 
-@media (min-width: 992px) {
-  .cmp-country-settings,
-  .cmp-currency-select {
-    overflow: auto;
-    max-height: 90vh;
-  }
-}
-
-@media (max-width: 767.98px) {
-  .cmp-country-settings,
-  .cmp-currency-select {
-    overflow: auto;
-    max-height: 60vh;
-  }
-}
-
 .cmp-country-settings .shipping-settings,
 .cmp-country-settings .language-settings,
 .cmp-currency-select .shipping-settings,
@@ -19318,19 +19302,21 @@ div:not(.top-bar) > .page-header > div > .cmp-search-box {
   }
 }
 
+@media (max-width: 991.98px) {
+  .cmp-country-settings .shipping-settings,
+  .cmp-currency-select .shipping-settings {
+    margin-top: 1rem;
+  }
+}
+
 .cmp-country-settings ul,
 .cmp-currency-select ul {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-@media (min-width: 768px) {
-  .cmp-country-settings ul,
-  .cmp-currency-select ul {
-    overflow: auto;
-    max-height: 40vh;
-  }
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 50vh;
 }
 
 .cmp-country-settings ul li,
@@ -21230,6 +21216,8 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
       flex-flow: column;
   display: -ms-flexbox;
   display: flex;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .basket-preview-hover.empty {
@@ -21263,6 +21251,7 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   overflow-y: auto;
   background-attachment: fixed;
   -webkit-overflow-scrolling: touch;
+  min-height: 150px;
 }
 
 .basket-preview-hover .basket-totals {
@@ -21325,7 +21314,8 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
       flex-direction: column;
   -ms-flex: 1;
       flex: 1;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -21343,12 +21333,7 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   -ms-flex: 1 1 auto;
       flex: 1 1 auto;
   overflow: auto;
-}
-
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .basket-preview .list {
-    margin-bottom: 5px;
-  }
+  min-height: 150px;
 }
 
 .basket-preview .totals {
@@ -21369,6 +21354,15 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
   .basket-preview .totals {
     border-top: 0;
     border-left: 1px solid #dcdbd8;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .basket-preview .totals {
+    overflow-y: auto;
+  }
+  .basket-preview .basket-preview-content {
+    overflow: hidden;
   }
 }
 
@@ -22289,14 +22283,6 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right .qty-b
 .component-loading.isLoading:after {
   opacity: 1;
   visibility: visible;
-}
-
-/* IE Compatibility */
-html.ie .component-loading.with-icon:after {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 .qty-box {

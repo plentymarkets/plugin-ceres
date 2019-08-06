@@ -14232,16 +14232,6 @@ div:not(.top-bar) {
 		overflow: hidden;
 	}
 
-	@include media-breakpoint-up(lg) {
-		overflow: auto;
-		max-height: 90vh;
-	}
-
-	@include media-breakpoint-down(sm) {
-		overflow: auto;
-		max-height: 60vh;
-	}
-
 	.shipping-settings, 
 	.language-settings{
 		width: 100%;
@@ -14255,13 +14245,17 @@ div:not(.top-bar) {
 		}
 	}
 
+	.shipping-settings {
+		@include media-breakpoint-down(md) {
+			margin-top: 1rem;
+		}
+	}
+
 	ul{
 		@include reset-list();
-
-		@include media-breakpoint-up(md) {
-			overflow: auto;
-			max-height: 40vh;
-		}
+		overflow-y: auto; 
+		overflow-x: hidden;
+		max-height: 50vh;
 
 		li{
 			width: 100%;
@@ -14297,10 +14291,6 @@ div:not(.top-bar) {
 			}
 		}
 	}
-
-	@include media-breakpoint-up(sm){
-
-	} 
 
 	@include media-breakpoint-up(md){
 		ul{
@@ -16351,6 +16341,8 @@ html.ie .wrapper-main .checkout .checkout-rightside .basket-item-container .bask
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
+	overflow-y: auto;
+	overflow-x: hidden;
 
 	&.empty {
 		position: relative;
@@ -16384,6 +16376,7 @@ html.ie .wrapper-main .checkout .checkout-rightside .basket-item-container .bask
 		overflow-y: auto;
 		background-attachment: fixed;
 		-webkit-overflow-scrolling: touch;
+		min-height: 150px;
 	}
 
 	.basket-totals {
@@ -16457,7 +16450,8 @@ html.ie .basket-preview-hover {
         -webkit-box-flex: 1;
             -ms-flex: 1;
                 flex: 1;
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: hidden;
 
         @include media-breakpoint-only(sm)
         {
@@ -16481,11 +16475,7 @@ html.ie .basket-preview-hover {
     	    -ms-flex: 1 1 auto;
     	        flex: 1 1 auto;
         overflow: auto;
-
-        @include media-breakpoint-only(sm)
-        {
-            margin-bottom: 5px;
-        }
+        min-height: 150px;
     }
 
     .totals
@@ -16513,6 +16503,16 @@ html.ie .basket-preview-hover {
         {
             border-top: 0;
             border-left: 1px solid $gray-lighter;
+        }
+    }
+
+    @include media-breakpoint-only(sm)
+    {
+        .totals{
+            overflow-y: auto;
+        }
+        .basket-preview-content {
+            overflow: hidden;
         }
     }
 }
@@ -17568,19 +17568,6 @@ html.ie .basket-preview-hover {
 	}
 }
 
-/* IE Compatibility */
-html.ie {
-	.component-loading {
-		&.with-icon {
-			&:after {
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-			}
-		}
-	}
-}
 .qty-box {
     display: -webkit-box;
     display: -ms-flexbox;
