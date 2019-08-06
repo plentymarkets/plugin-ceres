@@ -23,7 +23,7 @@
 			top: 80%;
     		right: 1.5rem;
 			transform: translateY(-50%);
-			z-index: 1;
+            z-index: 1;
 		}
 	}
 
@@ -134,9 +134,9 @@
 	
 	@include media-breakpoint-down(xs)
 	{
-		top: 0;
-		right: 0;
-		bottom: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
 
 		& button {
 			min-width: auto !important;
