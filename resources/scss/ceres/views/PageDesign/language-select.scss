@@ -15,16 +15,6 @@
 		overflow: hidden;
 	}
 
-	@include media-breakpoint-up(lg) {
-		overflow: auto;
-		max-height: 90vh;
-	}
-
-	@include media-breakpoint-down(sm) {
-		overflow: auto;
-		max-height: 60vh;
-	}
-
 	.shipping-settings, 
 	.language-settings{
 		width: 100%;
@@ -38,11 +28,9 @@
 
 	ul{
 		@include reset-list();
-
-		@include media-breakpoint-up(md) {
-			overflow: auto;
-			max-height: 40vh;
-		}
+		overflow-y: auto; 
+		overflow-x: hidden;
+		max-height: 50vh;
 
 		li{
 			width: 100%;
@@ -78,10 +66,6 @@
 			}
 		}
 	}
-
-	@include media-breakpoint-up(sm){
-
-	} 
 
 	@include media-breakpoint-up(md){
 		ul{
