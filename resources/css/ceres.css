@@ -16370,16 +16370,17 @@ body > #vue-error > .wrapper-bottom {
   z-index: 10000;
 }
 
-body > #vue-app .wrapper-main,
-body > #vue-error .wrapper-main {
-  position: relative;
-}
-
-body > #vue-app .wrapper-top,
-body > #vue-error .wrapper-top {
+body > #vue-app > .wrapper-top,
+body > #vue-error > .wrapper-top {
+  z-index: 10001;
   top: 0;
   right: 0;
   left: 0;
+}
+
+body > #vue-app .wrapper-main,
+body > #vue-error .wrapper-main {
+  position: relative;
 }
 
 body > #vue-app .wrapper-right,
