@@ -22,7 +22,8 @@
 		    position: absolute;
 			top: 80%;
     		right: 1.5rem;
-		    transform: translateY(-50%);
+			transform: translateY(-50%);
+			z-index: 1;
 		}
 	}
 
