@@ -1,0 +1,110 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Victor Albulescu
+ * Date: 02/08/2019
+ * Time: 13:19
+ */
+
+namespace Ceres\Wizard\ShopWizard\Steps\Builder;
+
+
+use Ceres\Wizard\ShopWizard\Config\LogConfig;
+use Ceres\Wizard\ShopWizard\Config\PerformanceConfig;
+use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
+
+class PerformanceStep extends Step
+{
+
+    /**
+     * @return array
+     */
+    public function generateStep(): array
+    {
+        return [
+            "title" => "Wizard.performanceSettings",
+            "description" => "Wizard.paginationStepDescription",
+            "condition" => " typeof settingsSelection_performance === 'undefined' || settingsSelection_performance === true",
+            "sections" => [
+                $this->generateShopBoosterSection(),
+                $this->generateLoggingOptionsSection(),
+                $this->generatePerformanceSection()
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateShopBoosterSection(): array
+    {
+        return [
+            "title" => "Wizard.shopBooster",
+            "description" => "Wizard.shopBoosterDescription",
+            "form" => [
+                "performance_shopBooster" => [
+                    "type" => "toggle",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" =>  "Wizard.activateShopBooster"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateLoggingOptionsSection(): array
+    {
+        $loggingLevels = LogConfig::getLoggingLevels();
+        $logLevelsOptions = StepHelper::generateTranslatedListBoxValues($loggingLevels);
+
+        return [
+            "title" => "Wizard.loggingOptions",
+            "description" => "Wizard.loggingOptionsDescription",
+            "form" => [
+                "performance_loggingOptions" => [
+                    "type" => "checkboxGroup",
+                    "defaultValue" => [
+                        $logLevelsOptions[0]['value'],
+                        $logLevelsOptions[1]['value'],
+                        $logLevelsOptions[2]['value']
+                    ],
+                    "options" => [
+                        "name" =>  "Wizard.loggingOptions",
+                        "checkboxValues" => $logLevelsOptions
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    private function generatePerformanceSection(): array
+    {
+        $performanceLevels = PerformanceConfig::getPerformanceLevels();
+        $performanceLevelsOptions = StepHelper::generateTranslatedListBoxValues($performanceLevels);
+        return [
+            "title" => "Wizard.performanceLevel",
+            "description" => "Wizard.performanceLevelDescription",
+            "form" => [
+                "performance_logPerformanceLevel" => [
+                    "type" => "select",
+                    "defaultValue" => $performanceLevelsOptions[1]['value'],
+                    "options" => [
+                        "name" => "Wizard.performanceLevel",
+                        "listBoxValues" => $performanceLevelsOptions
+                    ]
+                ],
+                "performance_errorCheck" => [
+                    "type" => "checkbox",
+                    "default" => true,
+                    "options" => [
+                        "name" => "Wizard.performanceErrorCheck"
+                    ]
+                ]
+            ]
+        ];
+    }
+}

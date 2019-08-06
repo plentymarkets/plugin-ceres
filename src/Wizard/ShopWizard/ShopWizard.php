@@ -15,6 +15,7 @@ use Ceres\Wizard\ShopWizard\Steps\Builder\DisplayedInformationStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\LanguagesStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\OnlineStoreStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\PaginationStep;
+use Ceres\Wizard\ShopWizard\Steps\Builder\PerformanceStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\RequiredSettingsStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\SettingsSelectionStep;
 use Plenty\Modules\Wizard\Services\WizardProvider;
@@ -39,6 +40,7 @@ class ShopWizard extends WizardProvider
         $displayInfoStep = pluginApp(DisplayedInformationStep::class);
         $paginationStep = pluginApp(PaginationStep::class);
         $languagesStep = pluginApp(LanguagesStep::class);
+        $performanceStep = pluginApp(PerformanceStep::class);
 
 
         return [
@@ -67,6 +69,7 @@ class ShopWizard extends WizardProvider
                 "displayInfoStep" => $displayInfoStep->generateStep(),
                 "paginationStep" => $paginationStep->generateStep(),
                 "languagesStep" => $languagesStep->generateStep(),
+                "performanceStep" => $performanceStep->generateStep(),
             ]
         ];
     }

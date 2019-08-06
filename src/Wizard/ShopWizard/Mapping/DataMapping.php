@@ -306,6 +306,24 @@ class DataMapping
             "global" => true,
             "optional" => true,
         ],
+        "performance_loggingOptions" => [
+            "field" => "log.data",
+            "type" => "concatenated",
+            "global" => false,
+            "optional" => true,
+        ],
+        "performance_logPerformanceLevel" => [
+            "field" => "log.performance.level",
+            "type" => "string",
+            "global" => false,
+            "optional" => true,
+        ],
+        "performance_errorCheck" => [
+            "field" => "log.check_syntax",
+            "type" => "string",
+            "global" => false,
+            "optional" => true,
+        ]
 
     ];
 

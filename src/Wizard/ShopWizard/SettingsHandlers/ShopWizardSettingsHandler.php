@@ -10,6 +10,8 @@ namespace Ceres\Wizard\ShopWizard\SettingsHandlers;
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Services\MappingService;
+use Plenty\Modules\ContentCache\Contracts\ContentCacheInvalidationRepositoryContract;
+use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
@@ -40,7 +42,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
         $data = $parameters['data'];
         $optionId = $parameters['optionId'];
 
-        try{
+        try {
             $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
             $webstoreRepo = pluginApp(WebstoreRepositoryContract::class);
 
@@ -125,6 +127,13 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 }
 
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
+
+                //we handle settings for shopping booster
+
+//                if (isset($data["performance_shopBooster"])) {
+//                    $cacheRepo = pluginApp(ContentCacheSettingsRepositoryContract::class);
+//                    $cacheRepo->saveAll($plentyId, $data["performance_shopBooster"]);
+//                }
             }
 
             $configRepo = pluginApp(ConfigurationRepositoryContract::class);
@@ -144,6 +153,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
             $mappingService = pluginApp(MappingService::class);
             $pluginData = $mappingService->processPluginMappingData($data, "store");
+
             if (count($pluginData)) {
                 $configData = [];
 
@@ -157,7 +167,9 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 $configRepo->saveConfiguration($pluginId, $configData, $pluginSetId);
             }
 
-
+            //invalidate caching
+            $cacheInvalidRepo = pluginApp(ContentCacheInvalidationRepositoryContract::class);
+            $cacheInvalidRepo->invalidateAll();
 
         } catch (\Exception $exception) {
 

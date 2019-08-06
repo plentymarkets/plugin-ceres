@@ -149,9 +149,10 @@ class ShopWizardService
         $data = array_merge($defaultData, $globalData, $pluginData);
 
 
-        $data['settingsSelection_displayedInfo'] = isset($data['displayInfo']) && count($data['displayInfo']) ? true : false;
-        $data['settingsSelection_paginationSorting'] = isset($data['paginationStep']) && count($data['paginationStep']) ? true : false;
-        $data['settingsSelection_languages'] = isset($data['languages']) && count($data['languages']) ? true : false;
+        $data['settingsSelection_displayedInfo'] = $this->checkSelectionEnabled('displayInfo', $data);
+        $data['settingsSelection_paginationSorting'] = $this->checkSelectionEnabled('paginationStep', $data);
+        $data['settingsSelection_languages'] = $this->checkSelectionEnabled('languages', $data);
+        $data['settingsSelection_performance'] = $this->checkSelectionEnabled('performance', $data);
 
 
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
@@ -159,6 +160,25 @@ class ShopWizardService
         }
 
         return $data;
+    }
+
+
+    private function checkSelectionEnabled(string $keyPrefix, array $data): bool
+    {
+        $hasData = [];
+        $keys = array_keys($data);
+
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                if(strpos($key, $keyPrefix) !== false && !empty($data[$key])) {
+                    $hasData[] = $key;
+                }
+            }
+        }
+
+        $found = count($hasData) ? true : false;
+
+        return $found;
     }
 
 }
