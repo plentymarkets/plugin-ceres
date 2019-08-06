@@ -10,23 +10,19 @@ body {
 
 		background-color: $gray-lightest;
 		
-		&>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
+		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
 			z-index 	: $zindex-wrapper;
 		}
 		&>.wrapper-top {
-			position 	: absolute;
 			z-index 	: $zindex-wrapper +1;
+			top 		: 0;
+			right 		: 0;  
+			left 		: 0;
 		}
 
 		.wrapper-main{
 			position: relative;
-		}
-		
-		.wrapper-top {
-			top 		: 0;
-			right 		: 0;  
-			left 		: 0;
 		}
 		
 		.wrapper-right {
