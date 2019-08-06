@@ -1,5 +1,12 @@
 # Release Notes für Ceres
 
+## v4.1.2 (2019-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.1...4.1.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Artikel mit vielen Varianten und Bildern konnten nicht korrekt geladen werden. Dies wurde behoben.
+- Sonderzeichen in URL-Parametern werden nun korrekt interpretiert.
+
 ## v4.1.1 (2019-07-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.0...4.1.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
