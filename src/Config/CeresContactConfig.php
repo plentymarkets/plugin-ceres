@@ -20,7 +20,7 @@ class CeresContactConfig extends PluginConfig
     {
         parent::__construct($configRepository, "Ceres");
 
-        $this->shopMail = $this->getTextValue( "contact.shop_mail", "");
+        $this->shopMail = $this->getTextValue( "contact.shop_mail", "", "your@email.com");
         $this->mailCC   = $this->getTextValue( "contact.shop_mail_cc", "");
         $this->mailBCC  = $this->getTextValue( "contact.shop_mail_bcc", "");
 
