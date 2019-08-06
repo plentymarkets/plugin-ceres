@@ -26,6 +26,12 @@
 		}
 	}
 
+	.shipping-settings {
+		@include media-breakpoint-down(md) {
+			margin-top: 1rem;
+		}
+	}
+
 	ul{
 		@include reset-list();
 		overflow-y: auto; 
