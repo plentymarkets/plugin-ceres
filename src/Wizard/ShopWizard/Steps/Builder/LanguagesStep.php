@@ -42,7 +42,8 @@ class LanguagesStep extends Step
             "sections" => [
                 $this->generateActiveLanguagesSection(),
                 $this->generateAutomaticLanguageSection(),
-                $this->generateSearchLanguagesSection()
+                //we not use this until we have access in plugin to needed contracts
+                //$this->generateSearchLanguagesSection()
             ]
         ];
     }
