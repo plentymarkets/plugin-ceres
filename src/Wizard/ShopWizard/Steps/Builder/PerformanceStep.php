@@ -41,6 +41,7 @@ class PerformanceStep extends Step
         return [
             "title" => "Wizard.shopBooster",
             "description" => "Wizard.shopBoosterDescription",
+            "condition" => $this->globalsCondition,
             "form" => [
                 "performance_shopBooster" => [
                     "type" => "toggle",
