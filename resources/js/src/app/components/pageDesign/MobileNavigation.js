@@ -61,6 +61,8 @@ Vue.component("mobile-navigation", {
     created()
     {
         this.addEventListener();
+
+        this.$store.commit("setCurrentCategory", this.initialCategory);
     },
 
     methods:
