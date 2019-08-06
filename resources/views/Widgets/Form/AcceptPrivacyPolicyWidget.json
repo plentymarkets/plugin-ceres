@@ -1,0 +1,13 @@
+{
+    "identifier": "Ceres::AcceptPrivacyPolicyWidget",
+    "label": "Widget.acceptPrivacyPolicyLabel",
+    "previewImageURL": "/images/widgets/accept-privacy-policy.svg",
+    "type": "form",
+    "categories": ["form"],
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Form\\AcceptPrivacyPolicyWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "spacing":"@include(spacing)"
+    }
+}

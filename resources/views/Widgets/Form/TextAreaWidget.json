@@ -1,0 +1,58 @@
+{
+    "identifier": "Ceres::TextAreaWidget",
+    "label": "Widget.textAreaLabel",
+    "previewImageURL": "/images/widgets/input-textarea.svg",
+    "type": "form",
+    "categories": ["form"],
+    "position": 400,
+    "widgetClass": "Ceres\\Widgets\\Form\\TextAreaWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "key": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldKeyLabel",
+                "tooltip": "Widget.mailFormFieldKeyTooltip"
+            }
+        },
+        "label": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldLabelLabel",
+                "tooltip": "Widget.mailFormFieldLabelTooltip"
+            }
+        },
+        "rows": {
+            "type": "number",
+            "required": false,
+            "defaultValue": 15,
+            "options": {
+                "name": "Widget.textAreaRowsLabel",
+                "tooltip": "Widget.textAreaRowsTooltip"
+            }
+        },
+        "fixedHeight": {
+            "type": "checkbox",
+            "required": true,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.textAreaFixedHeightLabel",
+                "tooltip": "Widget.textAreaFixedHeightTooltip"
+            }
+        },
+        "isRequired": {
+            "type": "checkbox",
+            "required": true,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.mailFormFieldIsRequiredLabel",
+                "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

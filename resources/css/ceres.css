@@ -16085,6 +16085,13 @@ body .wrapper-main {
   }
 }
 
+.category-contact .main .container-max {
+  background-color: #fff;
+  padding-top: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .page-content {
   padding-top: 1rem;
   background-color: #f7f7f9;
@@ -18558,6 +18565,19 @@ html.ie #thumb-carousel .owl-stage .owl-item img {
   cursor: pointer;
 }
 
+.select-unit > label {
+  margin-bottom: .1rem;
+  font-weight: bold;
+}
+
+.select-unit .form-check {
+  margin-bottom: 0;
+}
+
+.select-unit.error {
+  color: #dc3545;
+}
+
 .input-feedback-container {
   margin-bottom: 15px;
 }
@@ -19725,6 +19745,18 @@ nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li u
   padding-left: 2.5em;
 }
 
+@keyframes mobile-nav-placeholder {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
 .mobile-navigation {
   top: 0;
   right: 0;
@@ -19860,6 +19892,17 @@ nav.navbar.megamenu #mainNavbarCollapsable ul.mainmenu > li > ul.collapse > li u
 
 .mobile-navigation ul.mainmenu li.ddown .nav-direction[aria-expanded="true"] i {
   transform: rotateX(180deg);
+}
+
+.mobile-navigation .nav-placeholder {
+  height: 25px;
+  width: 200px;
+  display: inline;
+  background: #fff;
+  margin: 1rem;
+  border-radius: 3px;
+  opacity: 0.1;
+  animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
 }
 
 html.ie nav.navbar #mainNavbarCollapsable {

@@ -1,0 +1,58 @@
+{
+    "identifier": "Ceres::TextInputWidget",
+    "label": "Widget.textInputLabel",
+    "previewImageURL": "/images/widgets/input-text.svg",
+    "type": "form",
+    "categories": ["form"],
+    "position": 300,
+    "widgetClass": "Ceres\\Widgets\\Form\\TextInputWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "key": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldKeyLabel",
+                "tooltip": "Widget.mailFormFieldKeyTooltip"
+            }
+        },
+        "label": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldLabelLabel",
+                "tooltip": "Widget.mailFormFieldLabelTooltip"
+            }
+        },
+        "isRequired": {
+            "type": "checkbox",
+            "required": true,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.mailFormFieldIsRequiredLabel",
+                "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
+            }
+        },
+        "isMailSubject": {
+            "type": "checkbox",
+            "required": true,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.textInputIsMailSubjectLabel",
+                "tooltip": "Widget.textInputIsMailSubjectTooltip"
+            }
+        },
+        "isReplyToName": {
+            "type": "checkbox",
+            "required": true,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.textInputIsReplyToNameLabel",
+                "tooltip": "Widget.textInputIsReplyToNameTooltip"
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}
