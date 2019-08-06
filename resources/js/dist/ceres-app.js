@@ -34570,7 +34570,7 @@ Vue.component("add-to-basket", {
           _this.waiting = false;
 
           if (error.data) {
-            NotificationService.error(_TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()))).closeAfter(5000);
+            NotificationService.error(_TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()), null)).closeAfter(5000);
           }
         });
       }
