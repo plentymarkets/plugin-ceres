@@ -20347,6 +20347,7 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   top: 80%;
   right: 1.5rem;
   transform: translateY(-50%);
+  z-index: 1;
 }
 
 .cmp-address-list .items.open .dropdown-toggle {
