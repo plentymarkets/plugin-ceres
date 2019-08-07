@@ -20782,6 +20782,10 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   }
 }
 
+.cmp-basket-item .rebate-hint, .cmp-order-item .rebate-hint {
+  color: #7a7f7f;
+}
+
 .img-basket-small {
   display: block;
   max-width: 100%;
@@ -22462,15 +22466,15 @@ html.ie .cmp-paginator {
   vertical-align: middle;
 }
 
-.order-history-list .container-middle .item:first-child,
-.order-return-history-list .container-middle .item:first-child {
-  border-top: 0 !important;
-}
-
 .order-history-list .container-middle .item .item-description,
 .order-return-history-list .container-middle .item .item-description {
   text-align: left;
   vertical-align: middle;
+}
+
+.order-history-list .container-middle .item:first-child > div,
+.order-return-history-list .container-middle .item:first-child > div {
+  border-top: 0 !important;
 }
 
 .order-history-list .container-middle .order-item .row div:first-child,
