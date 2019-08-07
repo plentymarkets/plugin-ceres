@@ -14,7 +14,11 @@
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 {% set inlineMargin      = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-<div{% if spacingMargin | length > 0 %} class="{{ spacingMargin }}"{% endif %}{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-selection
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
     {% if selectType == 'dropdown' %}
         <div class="input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate=""{% endif %}>
             <select class="custom-select"

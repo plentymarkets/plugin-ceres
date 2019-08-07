@@ -14,6 +14,25 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
+        "animationStyle": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "standard",
+            "options": {
+                "name": "Widget.itemImageAnimationStyleLabel",
+                "tooltipText": "Widget.itemImageAnimationStyleTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "standard",
+                        "caption": "Widget.itemImageAnimationStyleSlide"
+                    },
+                    {
+                        "value": "fadeOut",
+                        "caption": "Widget.itemImageAnimationStyleFade"
+                    }
+                ]
+            }
+        },
         "maxQuantity": {
             "type": "number",
             "required": true,

@@ -9,7 +9,11 @@
 {% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-<div{% if spacingClasses | length > 0 %} class="{{ spacingClasses }}"{% endif %}{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+<div class="widget widget-text-input
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    
     <div class="input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="text"{% endif %}>
         <input
             name="{{ formFieldId }}"

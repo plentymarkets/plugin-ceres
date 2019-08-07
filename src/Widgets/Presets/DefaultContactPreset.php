@@ -79,7 +79,10 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("spacing.padding.left.value", 0)
             ->withSetting("spacing.padding.left.unit", null)
             ->withSetting("spacing.padding.right.value", 0)
-            ->withSetting("spacing.padding.right.unit", null);
+            ->withSetting("spacing.padding.right.unit", null)
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.top.value", 3)
+            ->withSetting("spacing.margin.top.unit", null);
 
         $this->preset->createWidget("Ceres::SeparatorWidget");
 
@@ -176,7 +179,23 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("spacing.margin.top.value", 3)
             ->withSetting("spacing.margin.top.unit", null);
 
-        $formWidget->createChild("formFields", "Ceres::InlineTextWidget")
+        $textWidget = null;
+
+        if($this->config->contact->enableConfirmingPrivacyPolicy)
+        {
+            $row_3 = $formWidget->createChild("formFields", "Ceres::TwoColumnWidget")
+                ->withSetting("layout", "oneToOne");
+
+            $row_3->createChild("first", "Ceres::AcceptPrivacyPolicyWidget");
+
+            $textWidget = $row_3->createChild("second", "Ceres::InlineTextWidget");
+        }
+        else
+        {
+            $textWidget = $formWidget->createChild("formFields", "Ceres::InlineTextWidget");
+        }
+
+        $textWidget
             ->withSetting("appearance", "none")
             ->withSetting("text", "<p class=\"align-right\">* {{ trans(\"Ceres::Template.contactRequiredField\") }}</p>")
             ->withSetting("spacing.customPadding", true)
@@ -188,10 +207,5 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting("spacing.padding.left.unit", null)
             ->withSetting("spacing.padding.right.value", 0)
             ->withSetting("spacing.padding.right.unit", null);
-
-        if(strlen($this->config->global->googleRecaptchaApiKey))
-        {
-            $formWidget->createChild("formFields", "Ceres::ReCaptchaWidget");
-        }
     }
 }
