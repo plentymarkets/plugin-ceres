@@ -37,65 +37,79 @@
                             {% set itemPriceTotal = item.quantity * itemAmount.priceGross %}
                         {% endif %}
 
-                        <div class="col-sm-12 item py-3">
-                            <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}">
-                                <img class="d-inline-block" src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
-                            </a>
+                        <div class="col-sm-12 item">
+                            <div class="py-3 d-flex align-items-center{% if not loop.first %} border-top{% endif %}">
+                                <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}">
+                                    <img class="d-inline-block" src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
+                                </a>
 
-                            <div class="d-inline-block item-description">
-                                <div><a class="text-primary text-appearance" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
-                                
-                                {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
-                                    <div class="item-bundle">
-                                        {% for bundleComponent in item.bundleComponents %}
+                                <div class="flex-fill item-description pl-3">
+                                    <div><a class="text-primary text-appearance" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
+
+                                    {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
+                                        <div class="item-bundle">
+                                            {% for bundleComponent in item.bundleComponents %}
+                                                <div>
+                                                    <span class="text-muted">{{ bundleComponent.quantity }} x</span>
+                                                    <a href="{{ bundleComponent.data | itemURL }}" class="text-primary text-appearance"> {{ bundleComponent.data | itemName }} </a>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="d-flex">
+                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}</span>
+                                        <span class="flex-fill text-right">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
+                                    </div>
+                                    {% if discountAmount > 0 %}
+                                        <div class="d-flex">
+                                            <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryItemDiscount") }}</span>
+                                            <span class="flex-fill text-right">{{ discountAmount | formatMonetary( itemAmount.currency ) }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <div class="d-flex">
+                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryQuantity") }}</span>
+                                        <span class="flex-fill text-right">{{ item.quantity }}</span>
+                                    </div>
+                                    <div class="d-flex font-weight-bold">
+                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryTotal") }}</span>
+                                        <span class="flex-fill text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</span>
+                                    </div>
+
+                                    {% if item.orderProperties %}
+                                        {% for property in item.orderProperties %}
                                             <div>
-                                                <span class="text-muted">{{ bundleComponent.quantity }} x</span>
-                                                <a href="{{ bundleComponent.data | itemURL }}" class="text-primary text-appearance"> {{ bundleComponent.data | itemName }} </a>
+                                                <strong>{{ property | propertyName }}</strong>
+                                                {% if property.type == 'file' %}
+                                                    <span>
+                                                        {% set splitPath = property.value |split('/') %}
+                                                        {% set filename = '' %}
+                                                        {% set path = '' %}
+
+                                                        {% for temp in splitPath %}
+                                                            {% if loop.first %}
+                                                                {% set path =  temp %}
+                                                            {% elseif loop.last %}
+                                                                {% set filename = temp %}
+                                                            {% else %}
+                                                                {% set path =  path ~ '/' ~ temp %}
+                                                            {% endif %}
+                                                        {% endfor %}
+
+                                                        <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
+                                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                            {{ splitPath | last }}
+                                                        </a>
+                                                    </span>
+                                                {% elseif property.type == "selection" %}
+                                                    <span>: {{ property | propertySelectionValueName }}</span>
+                                                {% elseif property.type | length > 0 %}
+                                                    <span>: {{ property.value }}</span>
+                                                {% endif %}
                                             </div>
                                         {% endfor %}
-                                    </div>
-                                {% endif %}
-
-                                <div>{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}: {{ itemPrice | formatMonetary( itemAmount.currency ) }}</div>
-                                {% if discountAmount > 0 %}
-                                    <div>{{ trans("Ceres::Template.orderHistoryItemDiscount") }}: {{ discountAmount | formatMonetary( itemAmount.currency ) }}</div>
-                                {% endif %}
-                                <div>{{ trans("Ceres::Template.orderHistoryQuantity") }}: {{ item.quantity }}</div>
-                                <div>{{ trans("Ceres::Template.orderHistoryTotal") }}: {{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</div>
-
-                                {% if item.orderProperties %}
-                                    {% for property in item.orderProperties %}
-                                        <div>
-                                            <strong>{{ property | propertyName }}</strong>
-                                            {% if property.type == 'file' %}
-                                                <span>
-                                                    {% set splitPath = property.value |split('/') %}
-                                                    {% set filename = '' %}
-                                                    {% set path = '' %}
-
-                                                    {% for temp in splitPath %}
-                                                        {% if loop.first %}
-                                                            {% set path =  temp %}
-                                                        {% elseif loop.last %}
-                                                            {% set filename = temp %}
-                                                        {% else %}
-                                                            {% set path =  path ~ '/' ~ temp %}
-                                                        {% endif %}
-                                                    {% endfor %}
-
-                                                    <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
-                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                        {{ splitPath | last }}
-                                                    </a>
-                                                </span>
-                                            {% elseif property.type == "selection" %}
-                                                <span>: {{ property | propertySelectionValueName }}</span>
-                                            {% elseif property.type | length > 0 %}
-                                                <span>: {{ property.value }}</span>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     {% endif %}
