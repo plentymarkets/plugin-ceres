@@ -261,17 +261,3 @@
 		}
 	}
 }
-
-/* IE Compatibility */
-html.ie {
-	.component-loading {
-		&.with-icon {
-			&:after {
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-			}
-		}
-	}
-}
