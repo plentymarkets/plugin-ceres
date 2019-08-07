@@ -46510,6 +46510,10 @@ function autoFocus() {
 }
 
 function triggerAutoFocus(modal) {
+  if (App.isShopBuilder) {
+    return;
+  }
+
   var focusElements;
 
   if (modal) {
