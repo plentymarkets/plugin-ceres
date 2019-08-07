@@ -153,6 +153,7 @@ class ShopWizardService
         $data['settingsSelection_paginationSorting'] = $this->checkSelectionEnabled('paginationStep', $data);
         $data['settingsSelection_languages'] = $this->checkSelectionEnabled('languages', $data);
         $data['settingsSelection_performance'] = $this->checkSelectionEnabled('performance', $data);
+        $data['settingsSelection_search'] = $this->checkSelectionEnabled('search', $data);
 
 
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
