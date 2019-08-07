@@ -8,9 +8,12 @@
 
 namespace Ceres\Wizard\ShopWizard\Services;
 
+use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
+use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 use Plenty\Plugin\Translation\Translator;
 
 class ShopWizardService
@@ -77,6 +80,10 @@ class ShopWizardService
             $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
             $webstoreConfData = $webstoreConfig->findByWebstoreId($webstoreId)->toArray();
 
+            $webstoreRepo = pluginApp(WebstoreRepositoryContract::class);
+            $store = $webstoreRepo->findById($webstoreId);
+            $plentyId = $store->storeIdentifier;
+
             $globalData = $this->mappingService->processGlobalMappingData($webstoreConfData);
 
             //we check for shipping country list
@@ -97,6 +104,8 @@ class ShopWizardService
                     $globalData[$settingsKey] = $currency;
                 }
             }
+
+
 
             if (count($globalData['languages_defaultBrowserLang'])) {
                 $globalData['languages_setLinkedStoreLanguage'] = true;
@@ -155,6 +164,15 @@ class ShopWizardService
         $data['settingsSelection_performance'] = $this->checkSelectionEnabled('performance', $data);
         $data['settingsSelection_search'] = $this->checkSelectionEnabled('search', $data);
 
+        //get shop booster cache
+
+        $cacheRepository = pluginApp(ContentCacheSettingsRepositoryContract::class);
+        $shopBooster = $cacheRepository->getSettings($plentyId);
+
+        if ($shopBooster instanceOf ContentCacheSettings) {
+            $shopBoosterData = $shopBooster->toArray();
+            $data['performance_shopBooster'] = $shopBoosterData['contentCacheActive'];
+        }
 
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
             $data['setAllRequiredAssistants'] = 'true';

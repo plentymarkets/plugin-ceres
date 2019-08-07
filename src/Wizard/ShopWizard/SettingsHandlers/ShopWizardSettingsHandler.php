@@ -130,10 +130,10 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
                 //we handle settings for shopping booster
 
-//                if (isset($data["performance_shopBooster"])) {
-//                    $cacheRepo = pluginApp(ContentCacheSettingsRepositoryContract::class);
-//                    $cacheRepo->saveAll($plentyId, $data["performance_shopBooster"]);
-//                }
+                if (isset($data["performance_shopBooster"])) {
+                    $cacheRepo = pluginApp(ContentCacheSettingsRepositoryContract::class);
+                    $cacheRepo->saveSettings($plentyId, (bool) $data["performance_shopBooster"]);
+                }
             }
 
             $configRepo = pluginApp(ConfigurationRepositoryContract::class);
