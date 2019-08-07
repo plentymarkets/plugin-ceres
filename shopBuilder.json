@@ -321,17 +321,13 @@
                 "version": {
                     "type": "select",
                     "required": false,
-                    "defaultValue": 1,
+                    "defaultValue": 2,
                     "options": {
                         "name": "Config.globalGoogleRecaptchaVersionLabel",
                         "listBoxValues": [
                             {
-                                "value": 1,
-                                "caption": "Config.globalGoogleRecaptchaVersion2Invisible"
-                            },
-                            {
                                 "value": 2,
-                                "caption": "Config.globalGoogleRecaptchaVersion2Visible"
+                                "caption": "Config.globalGoogleRecaptchaVersion2Invisible"
                             },
                             {
                                 "value": 3,
