@@ -50,5 +50,11 @@
     {% else %}
         {% set initialCategory = category %}
     {% endif %}
+
+    {# set the initialCategory to the default category of the current item #}
+    {% if services.template.isCurrentTemplate("tpl.item") and defaultCategory is not null %}
+        {% set initialCategory = defaultCategory %}
+    {% endif %}
+
     <mobile-navigation :initial-category="{{ initialCategory | json_encode }}"></mobile-navigation>
 </div>
