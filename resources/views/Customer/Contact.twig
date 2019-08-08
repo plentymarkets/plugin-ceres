@@ -109,25 +109,26 @@
                     </div>
 
                     <hr>
+                    {% if ceresConfig.contact.enableConfirmingPrivacyPolicy %}
+                        <div class="col-12">
+                            <div class="form-check" data-validate="">
+                                <input class="form-check-input" type="checkbox" id="{{ formId }}_privacy_check" name="{{ formId }}_privacy_check">
+                                <label class="form-check-label" for="{{ formId }}_privacy_check">
+                                    {% autoescape false %}
+                                        {% spaceless %}
+                                            {% set policyContent %}
+                                                <a href="{{ urls.privacyPolicy }}" target="_blank">
+                                                    <span>{{ trans("Ceres::Template.contactPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
+                                                </a>
+                                            {% endset %}
+                                        {% endspaceless %}
 
-                    <div class="col-12">
-                        <div class="form-check" data-validate="">
-                            <input class="form-check-input" type="checkbox" id="{{ formId }}_privacy_check">
-                            <label class="form-check-label" for="{{ formId }}_privacy_check">
-                                {% autoescape false %}
-                                    {% spaceless %}
-                                        {% set policyContent %}
-                                            <a href="{{ urls.privacyPolicy }}" target="_blank">
-                                                <span>{{ trans("Ceres::Template.contactPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
-                                            </a>
-                                        {% endset %}
-                                    {% endspaceless %}
-
-                                    {{ trans("Ceres::Template.contactAcceptPrivacyPolicy", {"policy": policyContent}) }}<sup>*</sup>
-                                {% endautoescape %}
-                            </label>
+                                        {{ trans("Ceres::Template.contactAcceptPrivacyPolicy", {"policy": policyContent}) }}<sup>*</sup>
+                                    {% endautoescape %}
+                                </label>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
 
                     <div class="col-12 col-md-3 offset-md-9 send-mail">
                         <button type="submit" class="btn btn-primary btn-block">
