@@ -11,13 +11,19 @@ Vue.component("variation-select", {
         {
             type: String,
             default: "#vue-variation-select"
+        },
+        displayContentAlways:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
     data()
     {
         return {
-            filteredVariationsCache: {}
+            filteredVariationsCache: {},
+            lastContentCount: 0
         };
     },
 
@@ -45,6 +51,19 @@ Vue.component("variation-select", {
             }
 
             return false;
+        },
+
+        possibleUnits()
+        {
+            const possibleUnits = {};
+            const variations = this.displayContentAlways ? this.variations : this.filterVariations(null, null, null, true);
+
+            for (const variation of variations)
+            {
+                possibleUnits[variation.unitCombinationId] = variation.unitName;
+            }
+
+            return possibleUnits;
         },
 
         ...Vuex.mapState({
@@ -267,6 +286,7 @@ Vue.component("variation-select", {
 
             if (invalidSelection.newUnit)
             {
+                // if (Object.keys(this.possibleUnits).length > 1 && !isNull(this.selectedUnit))
                 if (!isNull(this.selectedUnit))
                 {
                     messages.push(
@@ -298,13 +318,14 @@ Vue.component("variation-select", {
          * @param {number} unitId
          * @param {boolean} strict
          */
-        filterVariations(attributes, unitId, strict)
+        filterVariations(attributes, unitId, strict, ignoreUnit)
         {
             attributes = attributes || this.selectedAttributes;
             unitId = unitId || this.selectedUnit;
             strict = !!strict;
+            ignoreUnit = !!ignoreUnit;
 
-            const key = `${JSON.stringify(attributes)}_${unitId}_${strict}`;
+            const key = `${ JSON.stringify(attributes) }_${ unitId }_${ strict }_${ ignoreUnit }`;
 
             if (isDefined(this.filteredVariationsCache[key]))
             {
@@ -318,7 +339,7 @@ Vue.component("variation-select", {
             const filteredVariations = this.variations.filter(variation =>
             {
                 // the selected unit is not matching
-                if (variation.unitCombinationId !== unitId)
+                if (!ignoreUnit && variation.unitCombinationId !== unitId)
                 {
                     return false;
                 }
