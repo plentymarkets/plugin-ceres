@@ -8,7 +8,7 @@
 
 {% block PageBody %}
 
-    <form action="/newsletter/unsubscribe" method="POST">
+    <form action="/newsletter/unsubscribe{% if urls.appendTrailingSlash %}/{% endif %}" method="POST">
         <div class="container-max page-content">
             <div class="row">
                 <div class="col-12 col-sm-8 col-lg-6 mb-5 content-center">
