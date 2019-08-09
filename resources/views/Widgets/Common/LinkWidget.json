@@ -1,0 +1,152 @@
+{
+    "identifier": "Ceres::LinkWidget",
+    "label": "Widget.linkLabel",
+    "previewImageURL": "/images/widgets/list.svg",
+    "type": "static",
+    "categories": ["text"],
+    "position": 900,
+    "widgetClass": "Ceres\\Widgets\\Common\\LinkWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": "@include(appearance)",
+        "icon": {
+            "type": "select",
+            "required": false,
+            "defaultValue": "none",
+            "options": {
+                "name": "Widget.linkIconLabel",
+                "tooltipText": "Widget.linkIconTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "none",
+                        "caption": "Widget.widgetIconNone",
+                        "position": 0
+                    },
+                    {
+                        "value": "fa-check",
+                        "caption": "Widget.widgetIconCheck",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-circle",
+                        "caption": "Widget.widgetIconCircle",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-circle-thin",
+                        "caption": "Widget.widgetIconCircleThin",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-comment-o",
+                        "caption": "Widget.widgetIconComment",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-credit-card",
+                        "caption": "Widget.widgetIconCreditcard",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-envelope-o",
+                        "caption": "Widget.widgetIconEnvelope",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-heart",
+                        "caption": "Widget.widgetIconHeart",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-thumbs-o-up",
+                        "caption": "Widget.widgetIconThumbsUp",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-euro",
+                        "caption": "Widget.widgetIconEuro",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-dollar",
+                        "caption": "Widget.widgetIconDollar",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-percent",
+                        "caption": "Widget.widgetIconPercent",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-gift",
+                        "caption": "Widget.widgetIconGift",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-truck",
+                        "caption": "Widget.widgetIconTruck",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-phone",
+                        "caption": "Widget.widgetIconPhone",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-copyright",
+                        "caption": "Widget.widgetIconCopyright",
+                        "position": 1
+                    },
+                    {
+                        "value": "fa-registered",
+                        "caption": "Widget.widgetIconRegistered",
+                        "position": 1
+                    }
+                ]
+            }
+        },
+        "size": {
+            "type": "select",
+            "required": false,
+            "defaultValue": "btn-sm",
+            "options":{
+                "name": "Widget.linkSizeLabel",
+                "tooltipText": "Widget.linkSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.linkSizeSmall",
+                        "position": 0
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.linkSizeLarge",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-block",
+                        "caption": "Widget.linkSizeBlock",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "text": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.linkTextLabel",
+                "tooltipText": "Widget.linkTextLabelTooltip"
+            }
+        },
+        "url": {
+            "type": "url",
+            "required": false,
+            "options": {
+                "name": "Widget.linkUrlLabel",
+                "tooltipText": "Widget.linkUrlTooltip"
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}

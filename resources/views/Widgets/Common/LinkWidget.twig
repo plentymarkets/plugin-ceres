@@ -1,0 +1,23 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set icon             = widget.settings.icon.mobile %}
+{% set size             = widget.settings.size.mobile %}
+{% set text             = widget.settings.text.mobile %}
+{% set url             = widget.settings.url.mobile %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set appearance       = widget.settings.appearance.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+<div class="widget widget-{{ appearance | default('none') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
+    <a class="btn btn-primary {{ size }} btn-appearance" href="{{ url }}">
+        {% if icon != "none" %}
+            <i class="fa {{ icon }} mr-1" aria-hidden="true"></i>
+        {% endif %}
+        {{ text }}
+    </a>
+</div>
