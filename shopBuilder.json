@@ -22,7 +22,7 @@
         "singleitem":        ["static", "structure", "default", "item"],
         "checkout":          ["static", "structure", "default", "checkout", "customer", "basket"],
         "myaccount":         ["static", "structure", "default", "myaccount", "customer", "basket"],
-        "orderconfirmation": ["static", "structure", "default", "orderconfirmation"]
+        "orderconfirmation": ["static", "structure", "default", "order"]
     },
     "presets": {
         "header": [
