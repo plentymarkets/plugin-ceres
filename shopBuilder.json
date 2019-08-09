@@ -16,12 +16,13 @@
         ]
     },
     "allowedTypes": {
-        "header":       ["header", "static", "structure", "default"],
-        "footer":       ["footer", "static", "structure", "default"],
-        "content":      ["static", "structure", "default"],
-        "singleitem":   ["static", "structure", "default", "item"],
-        "checkout":     ["static", "structure", "default", "checkout", "customer", "basket"],
-        "myaccount":    ["static", "structure", "default", "myaccount", "customer", "basket"]
+        "header":            ["header", "static", "structure", "default"],
+        "footer":            ["footer", "static", "structure", "default"],
+        "content":           ["static", "structure", "default"],
+        "singleitem":        ["static", "structure", "default", "item"],
+        "checkout":          ["static", "structure", "default", "checkout", "customer", "basket"],
+        "myaccount":         ["static", "structure", "default", "myaccount", "customer", "basket"],
+        "orderconfirmation": ["static", "structure", "default", "orderconfirmation"]
     },
     "presets": {
         "header": [
@@ -144,6 +145,11 @@
             "key": "contact",
             "label": "Widget.categoryContact",
             "position": 1100
+        },
+        {
+            "key": "orderconfirmation",
+            "label": "Widget.categoryOrderConfirmation",
+            "position": 1200
         },
         {
             "key": "footer",
