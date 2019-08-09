@@ -53,6 +53,10 @@ Vue.component("variation-select", {
             return false;
         },
 
+        /**
+         * returns all units, selectable by current selection
+         * prop 'displayContentAlways' with value true will return all units, without filtering
+         */
         possibleUnits()
         {
             const possibleUnits = {};
@@ -115,6 +119,8 @@ Vue.component("variation-select", {
             {
                 this.unsetInvalidSelection(attributeId, attributeValueId, unitId);
             }
+
+            this.lastContentCount = Object.keys(this.possibleUnits).length;
         },
 
         /**
@@ -286,8 +292,7 @@ Vue.component("variation-select", {
 
             if (invalidSelection.newUnit)
             {
-                // if (Object.keys(this.possibleUnits).length > 1 && !isNull(this.selectedUnit))
-                if (!isNull(this.selectedUnit))
+                if (this.lastContentCount > 1 && Object.keys(this.possibleUnits).length > 1 && !isNull(this.selectedUnit))
                 {
                     messages.push(
                         TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name:
@@ -334,8 +339,6 @@ Vue.component("variation-select", {
 
             const uniqueValues = [...new Set(Object.values(attributes))];
             const isEmptyOptionSelected = uniqueValues.length === 1 && isNull(uniqueValues[0]);
-
-            // eslint-disable-next-line complexity
             const filteredVariations = this.variations.filter(variation =>
             {
                 // the selected unit is not matching
