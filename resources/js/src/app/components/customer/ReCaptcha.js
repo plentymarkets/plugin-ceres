@@ -3,12 +3,7 @@ import Vue from "vue";
 
 Vue.component("recaptcha", {
 
-    props: {
-        template: {
-            type: String,
-            default: "#vue-recaptcha"
-        }
-    },
+    template: "<div data-recaptcha></div>",
 
     data()
     {
@@ -30,6 +25,11 @@ Vue.component("recaptcha", {
     {
         createScript()
         {
+            if (!this.apiKey)
+            {
+                return Promise.resolve();
+            }
+
             if (!gRecaptchaApiLoaded)
             {
                 gRecaptchaApiLoaded = new Promise((resolve, reject) =>
@@ -62,21 +62,24 @@ Vue.component("recaptcha", {
 
         initializeV3()
         {
-            grecaptcha.ready(() =>
+            if (window.grecaptcha)
             {
-                if (this.version !== 3)
+                window.grecaptcha.ready(() =>
                 {
-                    this.$el.dataset.recaptcha = grecaptcha.render(
-                        this.$el,
-                        {
-                            sitekey: this.apiKey,
-                            size: this.version === 1 ? "invisible" : "normal",
-                            badge: this.version === 1 ? "bottomright" : null,
-                            callback: this.recaptchaCallback.bind(this)
-                        }
-                    );
-                }
-            });
+                    if (this.version !== 3)
+                    {
+                        this.$el.dataset.recaptcha = window.grecaptcha.render(
+                            this.$el,
+                            {
+                                sitekey: this.apiKey,
+                                size: "invisible",
+                                badge: "bottomright",
+                                callback: this.recaptchaCallback.bind(this)
+                            }
+                        );
+                    }
+                });
+            }
         },
 
         recaptchaCallback(response)

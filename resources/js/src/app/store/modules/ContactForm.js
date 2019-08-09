@@ -135,47 +135,36 @@ const actions =
             let recaptchaValidation = Promise.resolve(null);
             const recaptchaElement = event.target.querySelector("[data-recaptcha]");
 
-            if (window.grecaptcha && (!!recaptchaElement || App.config.global.googleRecaptchaVersion === 3))
+            if (window.grecaptcha && App.config.global.googleRecaptchaVersion === 3)
             {
-                if (App.config.global.googleRecaptchaVersion === 3)
+                // V3
+                recaptchaValidation = new Promise((resolve, reject) =>
                 {
-                    // V3
-                    recaptchaValidation = new Promise((resolve, reject) =>
+                    window.grecaptcha.execute(
+                        App.config.global.googleRecaptchaApiKey,
+                        { action: "homepage" }
+                    ).then(response =>
                     {
-                        window.grecaptcha.execute(
-                            App.config.global.googleRecaptchaApiKey,
-                            { action: "homepage" }
-                        ).then((response) =>
+                        if (response)
                         {
-                            if (response)
-                            {
-                                resolve(response);
-                            }
-                            else
-                            {
-                                reject();
-                            }
-                        });
+                            resolve(response);
+                        }
+                        else
+                        {
+                            reject();
+                        }
                     });
-                }
-                else if ( App.config.global.googleRecaptchaVersion === 2 )
+                });
+            }
+            else if ( window.grecaptcha && App.config.global.googleRecaptchaVersion === 2 && !!recaptchaElement)
+            {
+                // V2 Invisible
+                recaptchaValidation = new Promise((resolve, reject) =>
                 {
-                    // V2 Checkbox
-                    const recaptchaResponse = window.grecaptcha.getResponse(recaptchaElement.dataset.recaptcha);
-
-                    if (!recaptchaResponse)
-                    {
-                        recaptchaValidation.reject();
-                    }
-                    recaptchaValidation = Promise.resolve(recaptchaResponse);
-                }
-                else if ( App.config.global.googleRecaptchaVersion === 1 )
-                {
-                    // V2 Invisible
-                    recaptchaValidation = new Promise((resolve, reject) =>
-                    {
-                        window.grecaptcha.execute(recaptchaElement.dataset.recaptcha);
-                        recaptchaElement.querySelector("[name=\"g-recaptcha-response\"]").addEventListener("recaptcha-response", (evt) =>
+                    window.grecaptcha.execute(recaptchaElement.dataset.recaptcha);
+                    recaptchaElement
+                        .querySelector("[name=\"g-recaptcha-response\"]")
+                        .addEventListener("recaptcha-response", (evt) =>
                         {
                             if (evt.target.value)
                             {
@@ -186,17 +175,17 @@ const actions =
                                 reject();
                             }
                         });
-                    });
-                }
+                });
             }
 
             recaptchaValidation
                 .then((recaptchaResponse) =>
                 {
-                    disableForm(event.target, true);
                     ValidationService.validate(event.target)
                         .done(() =>
                         {
+                            disableForm(event.target, true);
+
                             const formData    = serializeForm(event.target);
                             const formOptions = readFormOptions(event.target, formData);
 
@@ -208,7 +197,7 @@ const actions =
                                     subject:    formOptions.subject || "",
                                     cc:         formOptions.cc,
                                     replyTo:    formOptions.replyTo,
-                                    recaptchaToken: recaptchaResponse || App.config.global.googleRecaptchaApiKey
+                                    recaptchaToken: recaptchaResponse
                                 }
                             )
                                 .done(reponse =>

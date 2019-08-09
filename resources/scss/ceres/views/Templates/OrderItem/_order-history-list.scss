@@ -69,12 +69,12 @@
                 object-fit: contain;
                 vertical-align: middle;
             }
-            &:first-child {
-                border-top: 0 !important;
-            }
             .item-description {
                 text-align: left;
                 vertical-align: middle;
+            }
+            &:first-child > div {
+                border-top: 0 !important;
             }
         }
         .order-item {

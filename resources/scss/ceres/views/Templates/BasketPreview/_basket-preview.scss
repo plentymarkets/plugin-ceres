@@ -33,7 +33,8 @@
         display: flex;
         flex-direction: column;
         flex: 1;
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: hidden;
 
         @include media-breakpoint-only(sm)
         {
@@ -47,11 +48,7 @@
 	    flex-flow: column nowrap;
     	flex: 1 1 auto;
         overflow: auto;
-
-        @include media-breakpoint-only(sm)
-        {
-            margin-bottom: 5px;
-        }
+        min-height: 150px;
     }
 
     .totals
@@ -72,6 +69,16 @@
         {
             border-top: 0;
             border-left: 1px solid $gray-lighter;
+        }
+    }
+
+    @include media-breakpoint-only(sm)
+    {
+        .totals{
+            overflow-y: auto;
+        }
+        .basket-preview-content {
+            overflow: hidden;
         }
     }
 }

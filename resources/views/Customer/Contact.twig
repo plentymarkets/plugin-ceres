@@ -1,6 +1,5 @@
 {% extends getPartial('page-design') %}
 
-{% set gCapture         = config("Ceres.global.google_recaptcha_api_key") %}
 {% set contactConfigSet = not config("Ceres.contact.show_data") is empty or config("Ceres.contact.show_data") == "all" %}
 {% set googleApiKey     = config("Ceres.contact.api_key") %}
 {% set zip              = config("system.company.zip") %}
@@ -14,10 +13,6 @@
         {% block description    trans('Ceres::Template.contactMetaDescription') %}
         {% block robots         ceresConfig.meta.robotsContact %}
     {% endembed %}
-
-    {% if gCapture | length > 0 %}
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    {% endif %}
 {% endblock %}
 
 {% block PageBody %}
@@ -54,7 +49,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6 mb-3">
                         <div class="input-unit">
-                            <input type="name" name="name" id="{{ formId }}_name">
+                            <input type="text" name="{{ formId }}_name" id="{{ formId }}_name">
                             <label for="{{ formId }}_name">{{ trans("Ceres::Template.contactName") }} ({{ trans("Ceres::Template.contactOptional") }})</label>
                             <input type="hidden" data-mail="reply-to-name" value="{{ formId }}_name">
                         </div>
@@ -62,7 +57,7 @@
 
                     <div class="col-12 col-md-6 mb-3">
                         <div class="input-unit " data-validate="mail">
-                            <input type="email" name="email" id="{{ formId }}_mail">
+                            <input type="email" name="{{ formId }}_email" id="{{ formId }}_mail">
                             <label for="{{ formId }}_mail">{{ trans("Ceres::Template.contactMail") }}*</label>
                             <input type="hidden" data-mail="reply-to-address" value="{{ formId }}_mail">
                         </div>
@@ -71,7 +66,7 @@
 
                     <div class="col-12 col-md-6 mb-3">
                         <div class="input-unit" data-validate="text">
-                            <input type="text" name="subject" id="{{ formId }}_subject">
+                            <input type="text" name="{{ formId }}_subject" id="{{ formId }}_subject">
                             <label for="{{ formId }}_subject">{{ trans("Ceres::Template.contactSubject") }}*</label>
                             <input type="hidden" data-mail="subject" value="{{ formId }}_subject">
                         </div>
@@ -80,14 +75,14 @@
 
                     <div class="col-12 col-md-6 mb-3">
                         <div class="input-unit">
-                            <input type="text" name="order" id="{{ formId }}_order">
+                            <input type="text" name="{{ formId }}_order" id="{{ formId }}_order">
                             <label for="{{ formId }}_order">{{ trans("Ceres::Template.contactOrderId") }} ({{ trans("Ceres::Template.contactOptional") }})</label>
                         </div>
                     </div>
 
                     <div class="col-12">
                         <div class="input-unit textarea" data-validate="text">
-                            <textarea name="message" id="{{ formId }}_message" class="no-resize" rows="15"></textarea>
+                            <textarea name="{{ formId }}_message" id="{{ formId }}_message" class="no-resize" rows="15"></textarea>
                             <label for="{{ formId }}_message">{{ trans('Ceres::Template.contactMessage') }}*</label>
                         </div>
                         <div class="error-feedback">{{ trans("Ceres::Template.contactEditMessage") }}</div>
@@ -96,13 +91,8 @@
                     <div class="col-12 text-sm-right">* {{ trans("Ceres::Template.contactRequiredField") }}</div>
 
                     <div class="col-12 re-captcha-container">
-                        {% if gCapture | length > 0 %}
-                            <div id="recaptcha" class="g-recaptcha"
-                                 data-sitekey="{{ gCapture }}"
-                                 data-callback="sendMail"
-                                 data-size="invisible"
-                                 data-badge="bottomleft">
-                            </div>
+                        {% if ceresConfig.global.googleRecaptchaApiKey | trim is not empty %}
+                            <recaptcha></recaptcha>
                         {% endif %}
                     </div>
 
@@ -119,25 +109,26 @@
                     </div>
 
                     <hr>
+                    {% if ceresConfig.contact.enableConfirmingPrivacyPolicy %}
+                        <div class="col-12">
+                            <div class="form-check" data-validate="">
+                                <input class="form-check-input" type="checkbox" id="{{ formId }}_privacy_check" name="{{ formId }}_privacy_check">
+                                <label class="form-check-label" for="{{ formId }}_privacy_check">
+                                    {% autoescape false %}
+                                        {% spaceless %}
+                                            {% set policyContent %}
+                                                <a href="{{ urls.privacyPolicy }}" target="_blank">
+                                                    <span>{{ trans("Ceres::Template.contactPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
+                                                </a>
+                                            {% endset %}
+                                        {% endspaceless %}
 
-                    <div class="col-12">
-                        <div class="form-check" data-validate="">
-                            <input class="form-check-input" type="checkbox" id="{{ formId }}_privacy_check">
-                            <label class="form-check-label" for="{{ formId }}_privacy_check">
-                                {% autoescape false %}
-                                    {% spaceless %}
-                                        {% set policyContent %}
-                                            <a href="{{ urls.privacyPolicy }}" target="_blank">
-                                                <span>{{ trans("Ceres::Template.contactPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
-                                            </a>
-                                        {% endset %}
-                                    {% endspaceless %}
-
-                                    {{ trans("Ceres::Template.contactAcceptPrivacyPolicy", {"policy": policyContent}) }}<sup>*</sup>
-                                {% endautoescape %}
-                            </label>
+                                        {{ trans("Ceres::Template.contactAcceptPrivacyPolicy", {"policy": policyContent}) }}<sup>*</sup>
+                                    {% endautoescape %}
+                                </label>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
 
                     <div class="col-12 col-md-3 offset-md-9 send-mail">
                         <button type="submit" class="btn btn-primary btn-block">
