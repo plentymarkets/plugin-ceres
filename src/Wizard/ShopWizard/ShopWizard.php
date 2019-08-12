@@ -26,11 +26,20 @@ use Plenty\Plugin\Translation\Translator;
 class ShopWizard extends WizardProvider
 {
 
+    /**
+     * @var DefaultSettingsService
+     */
     private $settingsService;
 
-    public function __construct(DefaultSettingsService $defaultSettingsService)
+    /**
+     * @var Translator
+     */
+    private $translator;
+
+    public function __construct(DefaultSettingsService $defaultSettingsService, Translator $translator)
     {
         $this->settingsService = $defaultSettingsService;
+        $this->translator = $translator;
     }
     protected function structure()
     {
@@ -88,11 +97,10 @@ class ShopWizard extends WizardProvider
     private function buildClientOptions()
     {
         $clients = $this->settingsService->getWebstores();
-        $translator = pluginApp(Translator::class);
         $clientsList = [
             [
                 "value" => "preview",
-                "caption" => $translator->trans("Ceres::Wizard.previewOption")
+                "caption" => $this->translator->trans("Ceres::Wizard.previewOption")
             ]
         ];
 
@@ -135,7 +143,7 @@ class ShopWizard extends WizardProvider
 
         return [
             'type' => 'select',
-            'defaultValue' => '0',
+            'defaultValue' => $pluginSetValues[0]['value'],
             'options' => [
                 'name' => 'Wizard.pluginSetSelection',
                 'required' => true,
