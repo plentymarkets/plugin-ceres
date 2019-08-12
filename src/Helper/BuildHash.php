@@ -17,7 +17,7 @@ class BuildHash
      *
      * @return string
      */
-    static function get()
+    public static function get()
     {
         /** @var CachingRepository $cache */
         $cache = pluginApp(CachingRepository::class);
@@ -34,7 +34,7 @@ class BuildHash
     /**
      * Unset the current build hash. New hash will be generated on next read request.
      */
-    static function unset()
+    public static function unset()
     {
         /** @var CachingRepository $cache */
         $cache = pluginApp(CachingRepository::class);
