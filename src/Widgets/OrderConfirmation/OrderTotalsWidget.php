@@ -6,5 +6,5 @@ use Ceres\Widgets\Helper\BaseWidget;
 
 class OrderTotalsWidget extends BaseWidget
 {
-    protected $template = "Ceres::Widgets.Basket.OrderTotalsWidget";
+    protected $template = "Ceres::Widgets.OrderConfirmation.OrderTotalsWidget";
 }

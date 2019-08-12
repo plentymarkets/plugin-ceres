@@ -10,29 +10,15 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Basket.Components.BasketTotals") }}
 
+{% import "Ceres::Checkout.Macros.OrderTotals" as Totals %}
+
+{% set orderData = {"order":{"id":119,"referrerId":1,"roundTotalsOnly":true,"numberOfDecimals":4,"orderItems":[{"id":149,"orderId":119,"typeId":6,"referrerId":1,"itemVariationId":0,"quantity":1,"orderItemName":"Versandkosten","attributeValues":"","shippingProfileId":0,"countryVatId":1,"vatField":0,"vatRate":19,"position":"0","createdAt":"2019-08-12T16:08:14+02:00","updatedAt":"2019-08-12T16:08:14+02:00","warehouseId":null,"orderProperties":[],"properties":[],"dates":[],"amounts":[{"id":49,"orderItemId":149,"isSystemCurrency":true,"currency":"EUR","exchangeRate":1,"purchasePrice":0,"priceOriginalGross":5,"priceOriginalNet":4.2017,"priceGross":5,"priceNet":4.2017,"surcharge":0,"discount":0,"isPercentage":true,"createdAt":"2019-08-12T16:08:14+02:00","updatedAt":"2019-08-12T16:08:14+02:00"}],"references":[]},{"id":150,"orderId":119,"typeId":1,"referrerId":1,"itemVariationId":1032,"quantity":1,"orderItemName":"Couch Purple Dreams","attributeValues":null,"shippingProfileId":6,"countryVatId":1,"vatField":0,"vatRate":19,"position":"0","createdAt":"2019-08-12T16:08:15+02:00","updatedAt":"2019-08-12T16:08:15+02:00","warehouseId":1,"bundleComponents":null,"bundleType":null,"orderProperties":[],"properties":[{"id":76,"orderItemId":150,"typeId":1,"value":"1","createdAt":"2019-08-12T16:08:15+02:00","updatedAt":"2019-08-12T16:08:15+02:00"},{"id":77,"orderItemId":150,"typeId":2,"value":"6","createdAt":"2019-08-12T16:08:15+02:00","updatedAt":"2019-08-12T16:08:15+02:00"},{"id":78,"orderItemId":150,"typeId":21,"value":"1","createdAt":"2019-08-12T16:08:15+02:00","updatedAt":"2019-08-12T16:08:15+02:00"}],"dates":[],"amounts":[{"id":50,"orderItemId":150,"isSystemCurrency":true,"currency":"EUR","exchangeRate":1,"purchasePrice":0,"priceOriginalGross":890.001,"priceOriginalNet":747.9,"priceGross":890.001,"priceNet":747.9,"surcharge":0,"discount":0,"isPercentage":true,"createdAt":"2019-08-12T16:08:15+02:00","updatedAt":"2019-08-12T16:08:15+02:00"}],"references":[]}],"statusName":"Warten auf Zahlung","plentyId":117,"typeId":1,"lockStatus":"unlocked","locationId":"1","createdAt":"2019-08-12T16:08:14+02:00","updatedAt":"2019-08-12T16:08:15+02:00","statusId":3,"ownerId":"0","relations":[{"orderId":119,"referenceType":"warehouse","referenceId":1,"relation":"sender"},{"orderId":119,"referenceType":"contact","referenceId":108,"relation":"receiver"}],"properties":[{"orderId":119,"typeId":3,"value":"6000"},{"orderId":119,"typeId":6,"value":"de"},{"orderId":119,"typeId":999,"value":"false"},{"orderId":119,"typeId":1,"value":"1"},{"orderId":119,"typeId":4,"value":"unpaid"},{"orderId":119,"typeId":2,"value":"6"}],"dates":[{"orderId":119,"typeId":2,"date":"2019-08-12T16:08:14+02:00"},{"orderId":119,"typeId":4,"date":"2019-08-12T16:08:15+02:00"}],"amounts":[{"id":19,"orderId":119,"isSystemCurrency":true,"isNet":true,"currency":"EUR","exchangeRate":1,"netTotal":752.9,"grossTotal":895,"vatTotal":0,"invoiceTotal":752.9,"paidAmount":0,"giftCardAmount":0,"createdAt":"2019-08-12T16:08:14+02:00","updatedAt":"2019-08-12T16:08:14+02:00","shippingCostsGross":5,"shippingCostsNet":5,"prepaidAmount":0,"vats":[{"id":17,"orderAmountId":19,"countryVatId":1,"vatField":0,"vatRate":19,"value":142.1,"createdAt":"2019-08-12T16:08:14+02:00","updatedAt":"2019-08-12T16:08:14+02:00","netTotal":752.9,"grossTotal":895}]}],"orderReferences":[],"addressRelations":[{"id":38,"orderId":119,"typeId":1,"addressId":19},{"id":39,"orderId":119,"typeId":2,"addressId":19}],"billingAddress":{"id":19,"gender":"male","name1":null,"name2":"njkop","name3":"mkl","name4":null,"address1":"mkp","address2":"kl","address3":null,"address4":null,"postalCode":"kp","town":"kl\u00f6p","countryId":4,"stateId":null,"readOnly":false,"checkedAt":null,"createdAt":"2019-03-28T14:54:39+01:00","updatedAt":"2019-03-28T14:54:39+01:00","options":[{"id":34,"addressId":19,"typeId":5,"value":"test@test.com","position":0,"createdAt":"2019-03-28T14:54:39+01:00","updatedAt":"2019-03-28T14:54:39+01:00"}]},"deliveryAddress":{"id":19,"gender":"male","name1":null,"name2":"njkop","name3":"mkl","name4":null,"address1":"mkp","address2":"kl","address3":null,"address4":null,"postalCode":"kp","town":"kl\u00f6p","countryId":4,"stateId":null,"readOnly":false,"checkedAt":null,"createdAt":"2019-03-28T14:54:39+01:00","updatedAt":"2019-03-28T14:54:39+01:00","options":[{"id":34,"addressId":19,"typeId":5,"value":"test@test.com","position":0,"createdAt":"2019-03-28T14:54:39+01:00","updatedAt":"2019-03-28T14:54:39+01:00"}]},"documents":[]},"status":"Warten auf Zahlung","totals":{"itemSumGross":747.9,"itemSumNet":747.9,"itemSumRebateGross":0,"itemSumRebateNet":0,"shippingGross":5,"shippingNet":5,"vats":[{"rate":19,"value":142.1}],"couponValue":0,"openAmount":0,"couponType":"","couponCode":"","totalGross":752.9,"totalNet":752.9,"currency":"EUR","isNet":true},"shippingProfileId":6,"shippingProvider":"DHL","shippingProfileName":"versichertes Paket","paymentMethodName":"Vorkasse","paymentMethodIcon":"https:\/\/s3-eu-central-1.amazonaws.com\/plentymarkets-public-dev\/117\/plugin\/1\/prepayment\/images\/icon.png","paymentStatus":"unpaid","allowPaymentMethodSwitchFrom":false,"paymentMethodListForSwitch":[],"itemURLs":{"1032":"\/wohnzimmer\/sofas\/couch-purple-dreams_134_1032"},"itemImages":{"1032":"http:\/\/master.plentymarkets.com\/documents\/image\/i13\/134-Couch-Purple-Dreams.jpg"},"isReturnable":false,"highlightNetPrices":true}%}
+
 {% if visibleFields | length > 0 %}
 <div class="{% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    {# {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBasketTotals"])) }}
 
-    <basket-totals :visible-fields="{{ visibleFields | json_encode }}"></basket-totals>
+    {{ Totals.forOrder(orderData) }}
 
-    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBasketTotals"])) }} #}
-
-    <h2>Totals:</h2>
-    <ul>
-        <li>
-            <div>Row1</div>
-        </li>
-        <li>
-            <div>Row2</div>
-        </li>
-        <li>
-            <div>Row3</div>
-        </li>
-        <li>
-            <div>Row4</div>
-        </li>
-    </ul>
 </div>
 {% endif %}

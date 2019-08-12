@@ -5,7 +5,7 @@
     "type": "basket",
     "categories": ["basket"],
     "position": 300,
-    "widgetClass": "Ceres\\Widgets\\Basket\\OrderTotalsWidget",
+    "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderTotalsWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "visibleFields": {
