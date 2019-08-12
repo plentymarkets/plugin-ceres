@@ -212,6 +212,22 @@
                         "name": "Config.routingEnableRouteMyAccount"
                     }
                 },
+                "confirmationCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryConfirmation"
+                    }
+                },
+                "confirmationEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.confirmationCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteConfirmation"
+                    }
+                },
                 "cancellationRightsCategory": {
                     "type": "category",
                     "required": false,
