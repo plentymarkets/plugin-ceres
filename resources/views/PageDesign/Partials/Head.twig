@@ -6,9 +6,9 @@
 {% set lang = services.sessionStorage.getLang() %}
 
 {% if ceresConfig.log.performanceLevel  == 'development' %}
-    {% set defaultCSS = plugin_path('Ceres') ~ "/css/ceres-legacy.css" %}
+    {% set defaultCSS = plugin_path('Ceres') ~ "/css/ceres-legacy.css?v=" ~ buildHash %}
 {% else %}
-    {% set defaultCSS = plugin_path('Ceres') ~ "/css/ceres-legacy.min.css" %}
+    {% set defaultCSS = plugin_path('Ceres') ~ "/css/ceres-legacy.min.css?v=" ~ buildHash %}
 {% endif %}
 
 
