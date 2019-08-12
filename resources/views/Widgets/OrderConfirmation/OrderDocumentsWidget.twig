@@ -1,0 +1,63 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.set("enabledRoutes", Twig.call("config", ["IO.routing.enabled_routes"]) ~ " | split(\", \")") }}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
+
+{# for ++ development purpose only ++ #}
+{% set orderDocuments = [{"id":22,"type":"invoice","number":"7","numberWithPrefix":"7","directoryId":null,"path":"2019\/invoice\/2019-08-12\/invoice_7.pdf","userId":"3","source":"admin","createdAt":"2019-08-12T11:11:54+02:00","updatedAt":"2019-08-12T11:11:55+02:00","displayDate":"2019-08-12T00:00:00+02:00","pivot":{"plenty_document_reference_value":"212","plenty_document_reference_document_id":"22"}},{"id":23,"type":"return_note","number":"4","numberWithPrefix":"4","directoryId":null,"path":"2019\/return_note\/2019-08-12\/return_note_4.pdf","userId":"3","source":"admin","createdAt":"2019-08-12T11:12:08+02:00","updatedAt":"2019-08-12T11:12:09+02:00","displayDate":"2019-08-12T00:00:00+02:00","pivot":{"plenty_document_reference_value":"212","plenty_document_reference_document_id":"23"}},{"id":24,"type":"delivery_note","number":"3","numberWithPrefix":"3","directoryId":null,"path":"2019\/delivery_note\/2019-08-12\/delivery_note_3.pdf","userId":"3","source":"admin","createdAt":"2019-08-12T11:59:31+02:00","updatedAt":"2019-08-12T11:59:32+02:00","displayDate":"2019-08-12T00:00:00+02:00","pivot":{"plenty_document_reference_value":"212","plenty_document_reference_document_id":"24"}},{"id":25,"type":"order_confirmation","number":"3","numberWithPrefix":"3","directoryId":null,"path":"2019\/order_confirmation\/2019-08-12\/order_confirmation_3.pdf","userId":"3","source":"admin","createdAt":"2019-08-12T11:59:46+02:00","updatedAt":"2019-08-12T11:59:47+02:00","displayDate":"2019-08-12T00:00:00+02:00","pivot":{"plenty_document_reference_value":"212","plenty_document_reference_document_id":"25"}}] %}
+{{ Twig.set("orderDocuments", [] | json_encode) }}
+{# -- for development purpose only -- #}
+
+{{ Twig.set("translationMap",
+    {
+        invoice:            "Ceres::Template.orderConfirmationOrderDocumentsInvoice",
+        invoice_external:   "Ceres::Template.orderConfirmationOrderDocumentsInvoiceExternal",
+        delivery_note:      "Ceres::Template.orderConfirmationOrderDocumentsDeliveryNote",
+        order_confirmation: "Ceres::Template.orderConfirmationOrderDocumentsOrderConfirmation",
+        pickup_delivery:    "Ceres::Template.orderConfirmationOrderDocumentsPickupDelivery",
+        reversal_document:  "Ceres::Template.orderConfirmationOrderDocumentsReversalDocument"
+    } | json_encode)
+}}
+
+{{ Twig.if("orderDocuments | length > 0 and ('order-document' in enabledRoutes or 'all' in enabledRoutes)") }}
+    <div class="widget widget-order-documents widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+        {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+        <div class="btn-group">
+            <button type="button" class="btn btn-appearance dropdown-toggle {{ buttonSize }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ Twig.trans("Ceres::Template.orderConfirmationOrderDocuments") }}
+            </button>
+            <div class="dropdown-menu">
+                {{ Twig.for("document", "orderDocuments", "translationMap[document.type] is defined") }}
+                    <a class="dropdown-item" href="/order-document/preview/{{ Twig.print("document.id") }}" target="_blank">
+                        {{ Twig.print(Twig.call("trans", [Twig.var("translationMap[document.type]")])) }}
+                    </a>
+                {{ Twig.endfor() }}
+            </div>
+        </div>
+    </div>
+{{ Twig.elseif("#{ isPreview | json_encode } and ('order-document' in enabledRoutes or 'all' in enabledRoutes)") }}
+    <div class="btn-group">
+        <button type="button" class="btn btn-appearance dropdown-toggle {{ buttonSize }}">
+            {{ Twig.trans("Ceres::Template.orderConfirmationOrderDocuments") }}
+        </button>
+    </div>
+{{ Twig.elseif("#{ isPreview | json_encode }") }}
+    <div class="widget-placeholder prop-xs-2-1">
+        <div>
+            <div>{{ Twig.print("('order-document' in enabledRoutes or 'all' in enabledRoutes) | json_encode") }}</div>
+            <div>{{ Twig.print("enabledRoutes | json_encode") }}</div>
+            <p class="title">{{ Twig.trans("Ceres::Widget.orderDocumentsLabel") }}</p>
+            <p class="description">{{ Twig.trans("Ceres::Widget.orderDocumentsPlaceholderDescription") }}</p>
+        </div>
+    </div>
+{{ Twig.endif() }}

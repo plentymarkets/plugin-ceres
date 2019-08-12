@@ -3,9 +3,9 @@
     "label": "Widget.orderDocumentsLabel",
     "previewImageURL": "/images/widgets/order-documents.svg",
     "type": "myaccount",
-    "categories": ["orderconfirmation", "myaccount"],
+    "categories": ["orderconfirmation"],
     "position": 100,
-    "widgetClass": "Ceres\\Widgets\\Order\\OrderDocumentsWidget",
+    "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderDocumentsWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": { 
