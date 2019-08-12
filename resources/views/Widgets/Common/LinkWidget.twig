@@ -1,7 +1,8 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set icon             = widget.settings.icon.mobile %}
-{% set size             = widget.settings.size.mobile %}
+{% set size             = widget.settings.dimensions.size.mobile %}
+{% set block             = widget.settings.dimensions.block.mobile %}
 {% set text             = widget.settings.text.mobile %}
 {% set url             = widget.settings.url.mobile %}
 
@@ -14,10 +15,10 @@
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 <div class="widget widget-{{ appearance | default('none') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
-    <a class="btn btn-primary {{ size }} btn-appearance" href="{{ url }}">
-        {% if icon != "none" %}
-            <i class="fa {{ icon }} mr-1" aria-hidden="true"></i>
-        {% endif %}
-        {{ text }}
+    <a class="btn btn-primary btn-appearance {{ size }} {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}" href="{{ url }}" style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}">
+        {%- if icon != "none" -%}
+            <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
+        {%- endif -%}
+        {{- text -}}
     </a>
 </div>
