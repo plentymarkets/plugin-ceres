@@ -18,6 +18,7 @@ use Ceres\Wizard\ShopWizard\Steps\Builder\PaginationStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\PerformanceStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\RequiredSettingsStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\SearchStep;
+use Ceres\Wizard\ShopWizard\Steps\Builder\SeoStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\SettingsSelectionStep;
 use Plenty\Modules\Wizard\Services\WizardProvider;
 use Plenty\Plugin\Translation\Translator;
@@ -33,16 +34,17 @@ class ShopWizard extends WizardProvider
     }
     protected function structure()
     {
-        $requiredSettingsStep = pluginApp(RequiredSettingsStep::class);
-        $settingsSelectionStep = pluginApp(SettingsSelectionStep::class);
-        $defaultSettingsStep = pluginApp(DefaultSettingsStep::class);
-        $onlineStoreStep = pluginApp(OnlineStoreStep::class);
-        $currencyStep = pluginApp(CurrencyStep::class);
-        $displayInfoStep = pluginApp(DisplayedInformationStep::class);
-        $paginationStep = pluginApp(PaginationStep::class);
-        $languagesStep = pluginApp(LanguagesStep::class);
-        $performanceStep = pluginApp(PerformanceStep::class);
-        $searchStep = pluginApp(SearchStep::class);
+        $requiredSettings = pluginApp(RequiredSettingsStep::class);
+        $settingsSelection = pluginApp(SettingsSelectionStep::class);
+        $defaultSettings = pluginApp(DefaultSettingsStep::class);
+        $onlineStore = pluginApp(OnlineStoreStep::class);
+        $currency = pluginApp(CurrencyStep::class);
+        $displayInfo = pluginApp(DisplayedInformationStep::class);
+        $pagination = pluginApp(PaginationStep::class);
+        $languages = pluginApp(LanguagesStep::class);
+        $performance = pluginApp(PerformanceStep::class);
+        $search = pluginApp(SearchStep::class);
+        $seo = pluginApp(SeoStep::class);
 
 
         return [
@@ -63,16 +65,17 @@ class ShopWizard extends WizardProvider
                 'pluginSet' => $this->buildPluginSetOptions()
             ],
             "steps" => [
-                "requiredStep" => $requiredSettingsStep->generateStep(),
-                "settingsSelectionStep" => $settingsSelectionStep->generateStep(),
-                "defaultSettingsStep" => $defaultSettingsStep->generateStep(),
-                "onlineStoreStep" => $onlineStoreStep->generateStep(),
-                "currencyStep" => $currencyStep->generateStep(),
-                "displayInfoStep" => $displayInfoStep->generateStep(),
-                "paginationStep" => $paginationStep->generateStep(),
-                "languagesStep" => $languagesStep->generateStep(),
-                "performanceStep" => $performanceStep->generateStep(),
-                "searchStep" => $searchStep->generateStep(),
+                "requiredStep" => $requiredSettings->generateStep(),
+                "settingsSelectionStep" => $settingsSelection->generateStep(),
+                "defaultSettingsStep" => $defaultSettings->generateStep(),
+                "onlineStoreStep" => $onlineStore->generateStep(),
+                "currencyStep" => $currency->generateStep(),
+                "displayInfoStep" => $displayInfo->generateStep(),
+                "paginationStep" => $pagination->generateStep(),
+                "languagesStep" => $languages->generateStep(),
+                "performanceStep" => $performance->generateStep(),
+                "searchStep" => $search->generateStep(),
+                "seoStep" => $seo->generateStep()
             ]
         ];
     }

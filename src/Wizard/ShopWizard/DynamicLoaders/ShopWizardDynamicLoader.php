@@ -9,6 +9,8 @@
 namespace Ceres\Wizard\ShopWizard\DynamicLoaders;
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
+use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
+use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardDynamicLoader;
 use Plenty\Plugin\Translation\Translator;
 
@@ -33,6 +35,28 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
     {
         $this->translator = $translator;
         $this->languages = LanguagesHelper::getTranslatedLanguages();
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return array
+     */
+    public function getRelatedLocations(array $parameters): array
+    {
+        $currentFormField = $this->getCurrentFormField($parameters["plentyMarkets"]);
+        $translationKey = end(explode("_", $currentFormField));
+        $locationsRepo = pluginApp(AccountingLocationRepositoryContract::class);
+        $locations = $locationsRepo->listByPlentyId($parameters['client']);
+        $locationsList = StepHelper::buildListBoxData($locations, "name", "id");
+
+        return [
+            "type" => "select",
+            "options" => [
+                "name" => $this->translator->trans("Ceres::Wizard.{$translationKey}"),
+                "listBoxValues" => $locationsList
+            ],
+        ];
     }
 
     /**

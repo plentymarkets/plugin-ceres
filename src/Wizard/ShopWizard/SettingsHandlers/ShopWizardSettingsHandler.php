@@ -109,16 +109,17 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 ];
                 $globalData = $mappingService->processGlobalMappingData($data, "store");
 
-                $intermediarBrowserLanguage = $globalData['browserLanguage'];
-                $globalData['browserLanguage'] = [
-                    'other' => $intermediarBrowserLanguage
-                ];
-                foreach ($data as $dataKey => $dataValue){
-                    if (strpos($dataKey, "languages_browserLang_") !== false) {
-                        $key = end(explode("_", $dataKey));
-                        $globalData['browserLanguage'][$key] = $dataValue;
-                    }
-                }
+                //need to refactor after we have implemented Ceres browser languages
+//                $intermediarBrowserLanguage = $globalData['browserLanguage'];
+//                $globalData['browserLanguage'] = [
+//                    'other' => $intermediarBrowserLanguage
+//                ];
+//                foreach ($data as $dataKey => $dataValue){
+//                    if (strpos($dataKey, "languages_browserLang_") !== false) {
+//                        $key = end(explode("_", $dataKey));
+//                        $globalData['browserLanguage'][$key] = $dataValue;
+//                    }
+//                }
 
                 $webstoreData = array_merge($shippingData, $currenciesData, $globalData);
 
@@ -130,7 +131,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
                 //we handle settings for shopping booster
 
-                if (isset($data["performance_shopBooster"])) {
+                if (!empty($data["performance_shopBooster"])) {
                     $cacheRepo = pluginApp(ContentCacheSettingsRepositoryContract::class);
                     $cacheRepo->saveSettings($plentyId, (bool) $data["performance_shopBooster"]);
                 }

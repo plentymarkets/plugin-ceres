@@ -105,22 +105,21 @@ class ShopWizardService
                 }
             }
 
-
-
-            if (count($globalData['languages_defaultBrowserLang'])) {
-                $globalData['languages_setLinkedStoreLanguage'] = true;
-                $browserLanguage = $globalData['languages_defaultBrowserLang'];
-
-                //now we extract data related from browser language
-                foreach ($browserLanguage as $bLangKey => $bLang) {
-                    if ($bLangKey == 'other') {
-                        $globalData['languages_defaultBrowserLang'] = $bLang;
-                    } else {
-                        $langKey = "languages_browserLang_{$bLangKey}";
-                        $globalData[$langKey] = $bLang;
-                    }
-                }
-            }
+            //need to refactor after we have implemented Ceres browser languages
+//            if (count($globalData['languages_defaultBrowserLang'])) {
+//                $globalData['languages_setLinkedStoreLanguage'] = true;
+//                $browserLanguage = $globalData['languages_defaultBrowserLang'];
+//
+//                //now we extract data related from browser language
+//                foreach ($browserLanguage as $bLangKey => $bLang) {
+//                    if ($bLangKey == 'other') {
+//                        $globalData['languages_defaultBrowserLang'] = $bLang;
+//                    } else {
+//                        $langKey = "languages_browserLang_{$bLangKey}";
+//                        $globalData[$langKey] = $bLang;
+//                    }
+//                }
+//            }
 
         }
 
@@ -163,15 +162,17 @@ class ShopWizardService
         $data['settingsSelection_languages'] = $this->checkSelectionEnabled('languages', $data);
         $data['settingsSelection_performance'] = $this->checkSelectionEnabled('performance', $data);
         $data['settingsSelection_search'] = $this->checkSelectionEnabled('search', $data);
+        $data['settingsSelection_seo'] = $this->checkSelectionEnabled('seo', $data);
 
         //get shop booster cache
+        if (!empty($plentyId)) {
+            $cacheRepository = pluginApp(ContentCacheSettingsRepositoryContract::class);
+            $shopBooster = $cacheRepository->getSettings($plentyId);
 
-        $cacheRepository = pluginApp(ContentCacheSettingsRepositoryContract::class);
-        $shopBooster = $cacheRepository->getSettings($plentyId);
-
-        if ($shopBooster instanceOf ContentCacheSettings) {
-            $shopBoosterData = $shopBooster->toArray();
-            $data['performance_shopBooster'] = $shopBoosterData['contentCacheActive'];
+            if ($shopBooster instanceOf ContentCacheSettings) {
+                $shopBoosterData = $shopBooster->toArray();
+                $data['performance_shopBooster'] = $shopBoosterData['contentCacheActive'];
+            }
         }
 
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {

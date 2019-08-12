@@ -41,7 +41,7 @@ class LanguagesStep extends Step
             "condition" => " typeof settingsSelection_languages === 'undefined' || settingsSelection_languages === true",
             "sections" => [
                 $this->generateActiveLanguagesSection(),
-                $this->generateAutomaticLanguageSection(),
+                //$this->generateAutomaticLanguageSection(),
                 //we not use this until we have access in plugin to needed contracts
                 //$this->generateSearchLanguagesSection()
             ]

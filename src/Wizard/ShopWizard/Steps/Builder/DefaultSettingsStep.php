@@ -104,7 +104,7 @@ class DefaultSettingsStep extends Step
                 $this->generateSection("defaultB2C", $b2bClassesList, $this->globalsCondition),
                 $this->generateSection("defaultB2B",$b2bClassesList),
                 $this->generateSection("defaultLocation",$locationsList, $this->globalsCondition)
-                //$this->generateLocationSection($this->globalsCondition)
+//                $this->generateLocationSection($this->globalsCondition)
             ]
         ];
     }
@@ -145,11 +145,12 @@ class DefaultSettingsStep extends Step
             "condition" => $condition,
             "form" => [
                 "defSettings_defaultLocation" => [
-                    "type" => "select",
                     "dependencies" => ['client'],
-                    "dependencyMethod" => "retrieveLocationData",
+                    "dependencyMethod" => "getRelatedLocations",
+                    "type" => "select",
                     "options" => [
                         "name" => "Wizard.defaultLocation",
+                        "listBoxValues" => []
                     ]
                 ]
             ]
