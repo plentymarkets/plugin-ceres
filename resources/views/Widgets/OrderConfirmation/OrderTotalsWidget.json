@@ -1,6 +1,6 @@
 {
     "identifier": "Ceres::OrderTotalsWidget",
-    "label": "Widget.orderTotalsLabel",
+    "label": "Widget.basketTotalsLabel",
     "previewImageURL": "/images/widgets/basket-totals.svg",
     "type": "basket",
     "categories": ["basket"],

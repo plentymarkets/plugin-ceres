@@ -15,11 +15,11 @@
 
 {{ Twig.import("Totals", "Ceres::Checkout.Macros.OrderTotals") }}
 
-{{Twig.if("visibleFields | length > 0")}}
+{{ Twig.if("visibleFields | length > 0") }}
     <div class="
         {% if customClass | length > 0 %}{{ customClass }}{% endif %}
         {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
         {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         {{ Twig.print("Totals.forOrder(orderData, visibleFields)") }}
     </div>
-{{Twig.endif()}}
+{{ Twig.endif() }}
