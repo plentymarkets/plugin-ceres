@@ -1,8 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{{ Twig.set("enabledRoutes", Twig.call("config", ["IO.routing.enabled_routes"]) ~ " | split(\", \")") }}
-
 {% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
@@ -13,6 +11,7 @@
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
 {% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
 
+{{ Twig.set("enabledRoutes", Twig.call("config", ["IO.routing.enabled_routes"]) ~ " | split(\", \")") }}
 {{ Twig.set("orderDocuments", data.order.documents | default([]) | json_encode) }}
 {{ Twig.set("translationMap",
     {
