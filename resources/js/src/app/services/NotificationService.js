@@ -108,49 +108,35 @@ function Notification(data, context)
 {
     if (App.config.log.data.indexOf("print_stack_trace") < 0 && typeof (data) === "object")
     {
-        if (notification.code > 0 && exceptionMap.has(notification.code.toString()))
-        {
-            notification.message = TranslationService.translate(
-                "Ceres::Template." + exceptionMap.get(notification.code.toString()),
-                notification.placeholder
-            );
-        }
-        notifications.add(notification);
-        _log(notification);
+        data.stackTrace = [];
+    }
+    const id   = notificationCount++;
+    const self = {
+        id        : id,
+        code      : data.code || 0,
+        message   : data.message || data || "",
+        placeholder: data.placeholder || null,
+        context   : context || "info",
+        stackTrace: data.stackTrace || [],
+        close     : close,
+        closeAfter: closeAfter,
+        trace     : trace
+    };
 
     return self;
 
     function close()
     {
         notifications.remove(self);
-        _trigger();
+        trigger();
     }
 
     function closeAfter(timeout)
     {
-        if (App.config.log.data.indexOf("print_stack_trace") < 0 && typeof (data) === "object")
-        {
-            data.stackTrace = [];
-        }
-        const id   = notificationCount++;
-        const self = {
-            id        : id,
-            code      : data.code || 0,
-            message   : data.message || data || "",
-            placeholder: data.placeholder || null,
-            context   : context || "info",
-            stackTrace: data.stackTrace || [],
-            close     : close,
-            closeAfter: closeAfter,
-            trace     : trace
-        };
-
-        return self;
-
-        function close()
+        setTimeout(function()
         {
             notifications.remove(self);
-            _trigger();
+            trigger();
         }, timeout);
     }
 
