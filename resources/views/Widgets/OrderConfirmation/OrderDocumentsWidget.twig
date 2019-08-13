@@ -32,9 +32,10 @@
                 class="btn btn-appearance dropdown-toggle {{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
                 {{ Twig.if("orderDocuments | length > 0") }}
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"{{ Twig.endif }}>
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                {{ Twig.endif() }}>
                 {{ Twig.trans("Ceres::Template.orderConfirmationOrderDocuments") }}
             </button>
 
