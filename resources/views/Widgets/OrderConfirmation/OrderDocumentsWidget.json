@@ -2,7 +2,7 @@
     "identifier": "Ceres::OrderDocumentsWidget",
     "label": "Widget.orderDocumentsLabel",
     "previewImageURL": "/images/widgets/order-documents.svg",
-    "type": "myaccount",
+    "type": "orderconfirmation",
     "categories": ["orderconfirmation"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderDocumentsWidget",
