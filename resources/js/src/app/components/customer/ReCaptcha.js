@@ -1,4 +1,5 @@
 let gRecaptchaApiLoaded;
+
 import Vue from "vue";
 
 Vue.component("recaptcha", {

@@ -185,4 +185,4 @@ function NotificationList()
     }
 }
 
-export default { log, info, warn, error, success, getNotifications, listen }
+export default { log, info, warn, error, success, getNotifications, listen };
