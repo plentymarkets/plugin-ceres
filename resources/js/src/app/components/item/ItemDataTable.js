@@ -1,4 +1,4 @@
-import { get } from "lodash";
+import { get } from "lodash/get";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
