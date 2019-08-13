@@ -99,6 +99,10 @@ class ShopWizard extends WizardProvider
         $clients = $this->settingsService->getWebstores();
         $clientsList = [
             [
+                "value" => "",
+                "caption" => $this->translator->trans("Ceres::Wizard.selectClient")
+            ],
+            [
                 "value" => "preview",
                 "caption" => $this->translator->trans("Ceres::Wizard.previewOption")
             ]
@@ -130,7 +134,13 @@ class ShopWizard extends WizardProvider
     private function buildPluginSetOptions()
     {
         $pluginSets = $this->settingsService->getPluginSets();
-        $pluginSetValues = [];
+        $pluginSetValues = [
+            [
+                "value" => "",
+                "caption" => $this->translator->trans("Ceres::Wizard.selectPluginSet")
+            ]
+
+        ];
 
         if (count($pluginSets)) {
             foreach ($pluginSets as $pluginSet) {
