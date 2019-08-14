@@ -56,7 +56,7 @@
                     {{ Twig.endfor() }}
                 </div>
             </div>
-        {{ Twig.elseif("orderDocuments | length == 1 and ('order-document' in enabledRoutes or 'all' in enabledRoutes)") }}
+        {{ Twig.elseif("orderDocuments | length == 1") }}
         {# single button #}
             <a class="btn btn-appearance {{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
