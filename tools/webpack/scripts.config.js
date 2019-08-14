@@ -9,7 +9,7 @@ module.exports = (env) =>
         mode: env.prod ? "production" : "development",
         entry: "./resources/js/src/app/index.js",
         output: {
-            filename: "../../../resources/js/dist/wp-ceres" + (env.prod ? ".min" : "") + ".js",
+            filename: "../../../resources/js/dist/ceres" + (env.prod ? ".min" : "") + ".js",
             path: path.resolve(__dirname, "dist")
         },
         resolve: {
