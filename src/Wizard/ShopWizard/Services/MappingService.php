@@ -71,9 +71,11 @@ class MappingService
 
             if ($scope == "display") {
                 list($step,$fieldName) = explode("_", $itemKey);
+
                 if ($itemData['optional'] && !empty($processingData[$key])) {
                     $matchedData[$step][] =  $processingData[$key];
                 }
+
                 $matchedData[$itemKey] = $this->matchDataByType($itemData['type'], $processingData[$key]);
             } else {
                 $matchedData[$key] = $this->matchDataByType($itemData['type'], $processingData[$itemKey], $scope);

@@ -15,7 +15,10 @@ use Ceres\Wizard\ShopWizard\Steps\Builder\DisplayedInformationStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\LanguagesStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\OnlineStoreStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\PaginationStep;
+use Ceres\Wizard\ShopWizard\Steps\Builder\PerformanceStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\RequiredSettingsStep;
+use Ceres\Wizard\ShopWizard\Steps\Builder\SearchStep;
+use Ceres\Wizard\ShopWizard\Steps\Builder\SeoStep;
 use Ceres\Wizard\ShopWizard\Steps\Builder\SettingsSelectionStep;
 use Plenty\Modules\Wizard\Services\WizardProvider;
 use Plenty\Plugin\Translation\Translator;
@@ -23,22 +26,34 @@ use Plenty\Plugin\Translation\Translator;
 class ShopWizard extends WizardProvider
 {
 
+    /**
+     * @var DefaultSettingsService
+     */
     private $settingsService;
 
-    public function __construct(DefaultSettingsService $defaultSettingsService)
+    /**
+     * @var Translator
+     */
+    private $translator;
+
+    public function __construct(DefaultSettingsService $defaultSettingsService, Translator $translator)
     {
         $this->settingsService = $defaultSettingsService;
+        $this->translator = $translator;
     }
     protected function structure()
     {
-        $requiredSettingsStep = pluginApp(RequiredSettingsStep::class);
-        $settingsSelectionStep = pluginApp(SettingsSelectionStep::class);
-        $defaultSettingsStep = pluginApp(DefaultSettingsStep::class);
-        $onlineStoreStep = pluginApp(OnlineStoreStep::class);
-        $currencyStep = pluginApp(CurrencyStep::class);
-        $displayInfoStep = pluginApp(DisplayedInformationStep::class);
-        $paginationStep = pluginApp(PaginationStep::class);
-        $languagesStep = pluginApp(LanguagesStep::class);
+        $requiredSettings = pluginApp(RequiredSettingsStep::class);
+        $settingsSelection = pluginApp(SettingsSelectionStep::class);
+        $defaultSettings = pluginApp(DefaultSettingsStep::class);
+        $onlineStore = pluginApp(OnlineStoreStep::class);
+        $currency = pluginApp(CurrencyStep::class);
+        $displayInfo = pluginApp(DisplayedInformationStep::class);
+        $pagination = pluginApp(PaginationStep::class);
+        $languages = pluginApp(LanguagesStep::class);
+        $performance = pluginApp(PerformanceStep::class);
+        $search = pluginApp(SearchStep::class);
+        $seo = pluginApp(SeoStep::class);
 
 
         return [
@@ -59,14 +74,17 @@ class ShopWizard extends WizardProvider
                 'pluginSet' => $this->buildPluginSetOptions()
             ],
             "steps" => [
-                "requiredStep" => $requiredSettingsStep->generateStep(),
-                "settingsSelectionStep" => $settingsSelectionStep->generateStep(),
-                "defaultSettingsStep" => $defaultSettingsStep->generateStep(),
-                "onlineStoreStep" => $onlineStoreStep->generateStep(),
-                "currencyStep" => $currencyStep->generateStep(),
-                "displayInfoStep" => $displayInfoStep->generateStep(),
-                "paginationStep" => $paginationStep->generateStep(),
-                "languagesStep" => $languagesStep->generateStep(),
+                "requiredStep" => $requiredSettings->generateStep(),
+                "settingsSelectionStep" => $settingsSelection->generateStep(),
+                "defaultSettingsStep" => $defaultSettings->generateStep(),
+                "onlineStoreStep" => $onlineStore->generateStep(),
+                "currencyStep" => $currency->generateStep(),
+                "displayInfoStep" => $displayInfo->generateStep(),
+                "paginationStep" => $pagination->generateStep(),
+                "languagesStep" => $languages->generateStep(),
+                "performanceStep" => $performance->generateStep(),
+                "searchStep" => $search->generateStep(),
+                "seoStep" => $seo->generateStep()
             ]
         ];
     }
@@ -79,11 +97,14 @@ class ShopWizard extends WizardProvider
     private function buildClientOptions()
     {
         $clients = $this->settingsService->getWebstores();
-        $translator = pluginApp(Translator::class);
         $clientsList = [
             [
+                "value" => "",
+                "caption" => $this->translator->trans("Ceres::Wizard.selectClient")
+            ],
+            [
                 "value" => "preview",
-                "caption" => $translator->trans("Ceres::Wizard.previewOption")
+                "caption" => $this->translator->trans("Ceres::Wizard.previewOption")
             ]
         ];
 
@@ -113,7 +134,13 @@ class ShopWizard extends WizardProvider
     private function buildPluginSetOptions()
     {
         $pluginSets = $this->settingsService->getPluginSets();
-        $pluginSetValues = [];
+        $pluginSetValues = [
+            [
+                "value" => "",
+                "caption" => $this->translator->trans("Ceres::Wizard.selectPluginSet")
+            ]
+
+        ];
 
         if (count($pluginSets)) {
             foreach ($pluginSets as $pluginSet) {
@@ -126,7 +153,7 @@ class ShopWizard extends WizardProvider
 
         return [
             'type' => 'select',
-            'defaultValue' => '0',
+            'defaultValue' => $pluginSetValues[0]['value'],
             'options' => [
                 'name' => 'Wizard.pluginSetSelection',
                 'required' => true,

@@ -10,6 +10,7 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 
 use Ceres\Wizard\ShopWizard\Config\PaginationConfig;
+use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
 class PaginationStep extends Step
 {
@@ -29,13 +30,16 @@ class PaginationStep extends Step
         ];
     }
 
+    /**
+     * @return array
+     */
     private function generatePaginationSection(): array
     {
         $paginationPositions = PaginationConfig::getPaginationPositions();
-        $paginationPositionOptions = $this->generateTranslatedListBoxValues($paginationPositions);
+        $paginationPositionOptions = StepHelper::generateTranslatedListBoxValues($paginationPositions);
 
         $rowsPerPage = PaginationConfig::getRowsPerPage();
-        $rowsPerPageOptions = $this->generateTranslatedListBoxValues($rowsPerPage);
+        $rowsPerPageOptions = StepHelper::generateTranslatedListBoxValues($rowsPerPage);
 
         return [
             "title" => "Wizard.paginationSettings",
@@ -87,16 +91,19 @@ class PaginationStep extends Step
         ];
     }
 
+    /**
+     * @return array
+     */
     private function generateSortingSection(): array
     {
         $itemSortingByRules = PaginationConfig::getItemSortingByRules();
-        $itemSortingOptions = $this->generateTranslatedListBoxValues($itemSortingByRules);
+        $itemSortingOptions = StepHelper::generateTranslatedListBoxValues($itemSortingByRules);
 
         $sortingRules = PaginationConfig::getSortingCategoryRules();
-        $categorySortingOptions = $this->generateTranslatedListBoxValues($sortingRules);
+        $categorySortingOptions = StepHelper::generateTranslatedListBoxValues($sortingRules);
 
         $secondSortingRules = PaginationConfig::getSecondSortingCategoryRules();
-        $secondCatOptions = $this->generateTranslatedListBoxValues($secondSortingRules);
+        $secondCatOptions = StepHelper::generateTranslatedListBoxValues($secondSortingRules);
         return [
             "title" => "Wizard.sortingSettings",
             "description" => "Wizard.sortingSettingsDescription",

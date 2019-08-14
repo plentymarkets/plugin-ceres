@@ -9,6 +9,7 @@
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
+use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Plenty\Modules\Account\Contact\Contracts\ContactClassRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
@@ -63,31 +64,33 @@ class DefaultSettingsStep extends Step
         parent::__construct();
     }
 
-
+    /**
+     * @return array
+     */
     public function generateStep()
     {
         $wizardService = pluginApp(DefaultSettingsService::class);
 
         $shippingMethods = $wizardService->getShippingMethods();
-        $shippingMethodsList = $this->buildListBoxData($shippingMethods);
+        $shippingMethodsList = StepHelper::buildListBoxData($shippingMethods);
 
         $languages = LanguagesHelper::getTranslatedLanguages();
-        $languagesList = $this->buildListBoxData($languages);
+        $languagesList = StepHelper::buildListBoxData($languages);
 
         $shippingProfiles = $wizardService->getShippingProfiles();
-        $shippingProfilesList = $this->buildListBoxData($shippingProfiles);
+        $shippingProfilesList = StepHelper::buildListBoxData($shippingProfiles);
 
         $paymentMethods = $wizardService->getPluginPaymentMethodsRegistered();
-        $paymentMethodsList = $this->buildListBoxData($paymentMethods);
+        $paymentMethodsList = StepHelper::buildListBoxData($paymentMethods);
 
         $deliveryCountries = $this->countryRepository->getActiveCountriesList();
 
 
         $b2bClasses  = $this->classRepository->allContactClasses();
-        $b2bClassesList = $this->buildListBoxData($b2bClasses);
+        $b2bClassesList = StepHelper::buildListBoxData($b2bClasses);
 
         $locations = $this->locationRepository->getAll();
-        $locationsList = $this->buildListBoxData($locations, "name", "id");
+        $locationsList = StepHelper::buildListBoxData($locations, "name", "id");
         return [
             "title" => "Wizard.defaultSettings",
             "description" => "Wizard.defaultSettingsDescription",
@@ -101,7 +104,7 @@ class DefaultSettingsStep extends Step
                 $this->generateSection("defaultB2C", $b2bClassesList, $this->globalsCondition),
                 $this->generateSection("defaultB2B",$b2bClassesList),
                 $this->generateSection("defaultLocation",$locationsList, $this->globalsCondition)
-                //$this->generateLocationSection($this->globalsCondition)
+//                $this->generateLocationSection($this->globalsCondition)
             ]
         ];
     }
@@ -129,6 +132,11 @@ class DefaultSettingsStep extends Step
         ];
     }
 
+    /**
+     * @param $condition
+     *
+     * @return array
+     */
     private function generateLocationSection($condition)
     {
         return [
@@ -137,11 +145,12 @@ class DefaultSettingsStep extends Step
             "condition" => $condition,
             "form" => [
                 "defSettings_defaultLocation" => [
-                    "type" => "select",
                     "dependencies" => ['client'],
-                    "dependencyMethod" => "retrieveLocationData",
+                    "dependencyMethod" => "getRelatedLocations",
+                    "type" => "select",
                     "options" => [
                         "name" => "Wizard.defaultLocation",
+                        "listBoxValues" => []
                     ]
                 ]
             ]

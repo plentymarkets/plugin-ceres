@@ -8,9 +8,12 @@
 
 namespace Ceres\Wizard\ShopWizard\Services;
 
+use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
+use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 use Plenty\Plugin\Translation\Translator;
 
 class ShopWizardService
@@ -43,15 +46,16 @@ class ShopWizardService
 
         foreach($pluginSets as $pluginSet) {
             foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
+                $pluginSetEntryConfig = $pluginSetEntry->configurations()->getResults();
                 if (
                     $pluginSetEntry instanceof PluginSetEntry &&
                     $pluginSetEntry->plugin->name === 'Ceres' &&
-                    !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds)
+                    !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
+                    count($pluginSetEntryConfig)
                 ) {
                     $webstores[] = [
                         'id' => 'preview',
-                        'pluginSetId' => (int)$pluginSetEntry->pluginSetId,
-                        'name' => $translator->trans("Ceres::Wizard.previewOption")
+                        'pluginSetId' => (int)$pluginSetEntry->pluginSetId
 
                     ];
                 }
@@ -62,7 +66,11 @@ class ShopWizardService
             foreach ($webstores as $webstore) {
                 $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
 
-                $webstoresMapped[$key] = $this->mapWebstoreData($webstore['id'], $webstore['pluginSetId']);
+                $webstoresMapped[$key] = [
+                    "client" => $webstore['id'],
+                    "pluginSet" => $webstore['pluginSetId']
+
+                ];
             }
         }
 
@@ -76,6 +84,10 @@ class ShopWizardService
         if ($webstoreId != 'preview') {
             $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
             $webstoreConfData = $webstoreConfig->findByWebstoreId($webstoreId)->toArray();
+
+            $webstoreRepo = pluginApp(WebstoreRepositoryContract::class);
+            $store = $webstoreRepo->findById($webstoreId);
+            $plentyId = $store->storeIdentifier;
 
             $globalData = $this->mappingService->processGlobalMappingData($webstoreConfData);
 
@@ -98,6 +110,22 @@ class ShopWizardService
                 }
             }
 
+            //need to refactor after we have implemented Ceres browser languages
+//            if (count($globalData['languages_defaultBrowserLang'])) {
+//                $globalData['languages_setLinkedStoreLanguage'] = true;
+//                $browserLanguage = $globalData['languages_defaultBrowserLang'];
+//
+//                //now we extract data related from browser language
+//                foreach ($browserLanguage as $bLangKey => $bLang) {
+//                    if ($bLangKey == 'other') {
+//                        $globalData['languages_defaultBrowserLang'] = $bLang;
+//                    } else {
+//                        $langKey = "languages_browserLang_{$bLangKey}";
+//                        $globalData[$langKey] = $bLang;
+//                    }
+//                }
+//            }
+
         }
 
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
@@ -108,7 +136,7 @@ class ShopWizardService
         {
             foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
                 if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres' && $pluginSetEntry->pluginSetId == $pluginSetId) {
-                    $config      = $pluginSetEntry->configurations()->getResults();
+                    $config = $pluginSetEntry->configurations()->getResults();
                     if (count($config)) {
                         foreach ($config as $confItem) {
                             $pluginConfData[$confItem->key] = $confItem->value;
@@ -134,16 +162,48 @@ class ShopWizardService
         $data = array_merge($defaultData, $globalData, $pluginData);
 
 
-        $data['settingsSelection_displayedInfo'] = isset($data['displayInfo']) && count($data['displayInfo']) ? true : false;
-        $data['settingsSelection_paginationSorting'] = isset($data['paginationStep']) && count($data['paginationStep']) ? true : false;
-        $data['settingsSelection_languages'] = isset($data['languages']) && count($data['languages']) ? true : false;
+        $data['settingsSelection_displayedInfo'] = $this->checkSelectionEnabled('displayInfo', $data);
+        $data['settingsSelection_paginationSorting'] = $this->checkSelectionEnabled('paginationStep', $data);
+        $data['settingsSelection_languages'] = $this->checkSelectionEnabled('languages', $data);
+        $data['settingsSelection_performance'] = $this->checkSelectionEnabled('performance', $data);
+        $data['settingsSelection_search'] = $this->checkSelectionEnabled('search', $data);
+        $data['settingsSelection_seo'] = $this->checkSelectionEnabled('seo', $data);
 
+        //get shop booster cache
+        if (!empty($plentyId)) {
+            $cacheRepository = pluginApp(ContentCacheSettingsRepositoryContract::class);
+            $shopBooster = $cacheRepository->getSettings($plentyId);
+
+            if ($shopBooster instanceOf ContentCacheSettings) {
+                $shopBoosterData = $shopBooster->toArray();
+                $data['performance_shopBooster'] = $shopBoosterData['contentCacheActive'];
+            }
+        }
 
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
             $data['setAllRequiredAssistants'] = 'true';
         }
 
         return $data;
+    }
+
+
+    private function checkSelectionEnabled(string $keyPrefix, array $data): bool
+    {
+        $hasData = [];
+        $keys = array_keys($data);
+
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                if(strpos($key, $keyPrefix) !== false && !empty($data[$key])) {
+                    $hasData[] = $key;
+                }
+            }
+        }
+
+        $found = count($hasData) ? true : false;
+
+        return $found;
     }
 
 }

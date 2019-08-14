@@ -10,11 +10,15 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 
 use Ceres\Wizard\ShopWizard\Config\OnlineStoreConfig;
+use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
 class OnlineStoreStep extends Step
 {
 
-    public function generateStep()
+    /**
+     * @return array
+     */
+    public function generateStep(): array
     {
         return [
             "title" => "Wizard.onlineStoreSettings",
@@ -74,7 +78,7 @@ class OnlineStoreStep extends Step
     private function buildStoreCategoryTypesStructure(): array
     {
         $catTypes = OnlineStoreConfig::getCategoryTypes();
-        $categoryTypes = $this->generateTranslatedListBoxValues($catTypes);
+        $categoryTypes = StepHelper::generateTranslatedListBoxValues($catTypes);
 
         return [
             "title" => "Wizard.storeCategoryTypes",
@@ -95,10 +99,10 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreBack2Top()
+    private function buildStoreBack2Top(): array
     {
         $top2bottomPositions = OnlineStoreConfig::getToTopButtonPosition();
-        $positions = $this->generateTranslatedListBoxValues($top2bottomPositions);
+        $positions = StepHelper::generateTranslatedListBoxValues($top2bottomPositions);
 
         return [
             "title" => "Wizard.back2Top",
@@ -118,12 +122,12 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreEmailSettings()
+    private function buildStoreEmailSettings(): array
     {
         $confirmationLinkExpiration = OnlineStoreConfig::getConfirmationLinkExpiration();
-        $confirmationList = $this->generateTranslatedListBoxValues($confirmationLinkExpiration);
+        $confirmationList = StepHelper::generateTranslatedListBoxValues($confirmationLinkExpiration);
         $globaUserHashMax = OnlineStoreConfig::getUserHashMaxAge();
-        $globaUserHashMaxList = $this->generateTranslatedListBoxValues($globaUserHashMax);
+        $globaUserHashMaxList = StepHelper::generateTranslatedListBoxValues($globaUserHashMax);
 
         return [
             "title" => "Wizard.emailSettings",
@@ -159,10 +163,10 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreOrderSettings()
+    private function buildStoreOrderSettings(): array
     {
         $itemBundles = OnlineStoreConfig::getItemBundles();
-        $itemBundlesList = $this->generateTranslatedListBoxValues($itemBundles);
+        $itemBundlesList = StepHelper::generateTranslatedListBoxValues($itemBundles);
         return [
             "title" => "Wizard.ordersSettings",
             "description" => "Wizard.emailSettingsDescription",
@@ -197,7 +201,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreCalistoSettings()
+    private function buildStoreCalistoSettings(): array
     {
         return [
             "title" => "Wizard.settingsOldCalisto",
