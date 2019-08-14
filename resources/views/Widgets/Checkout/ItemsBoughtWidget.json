@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::ItemsBoughtWidget",
+    "label": "Widget.itemsBoughtLabel",
+    "previewImageURL": "/images/widgets/items-bought.svg",
+    "type": "static",
+    "categories": ["static"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\ItemsBoughtWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}
