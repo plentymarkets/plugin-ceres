@@ -32,7 +32,7 @@
     <div class="widget widget-order-documents widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
             {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-        {{ Twig.if("orderDocuments | length > 1 and ('order-document' in enabledRoutes or 'all' in enabledRoutes) or #{ isPreview | json_encode }") }}
+        {{ Twig.if("orderDocuments | length > 1 or #{ isPreview | json_encode }") }}
         {# dropdown for multiple documents #}
             <div class="btn-group">
                 <button type="button"
