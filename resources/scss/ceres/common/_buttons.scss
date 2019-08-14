@@ -206,7 +206,8 @@ button:focus {
     z-index: 999;
     width: 100%;
     text-align: center;
-    cursor: pointer;
+	cursor: pointer;
+	font-size: 85%;
 
     &:before{
         content: "";
@@ -223,14 +224,29 @@ button:focus {
         color: $gray-light;
         display: inline-block;
         position: relative;
-        background-color: $body-bg;
+        background-color: white;
         padding: 0 .5em;
         top: -.8em;
 	}
+
+	i {
+		color: $gray-light;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 1.5em;
+	}
 	
-	&.opened {
+	&.opened,
+	&:not(.collapsed) {
 		&:after {
 			content: attr(data-show-less);
+		}
+
+		i {
+			transform: rotate(180deg);
+			top: 0;
+			bottom: 1.5em;
 		}
 	}
 }
