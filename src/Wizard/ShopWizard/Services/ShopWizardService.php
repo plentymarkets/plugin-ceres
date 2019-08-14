@@ -46,15 +46,16 @@ class ShopWizardService
 
         foreach($pluginSets as $pluginSet) {
             foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
+                $pluginSetEntryConfig = $pluginSetEntry->configurations()->getResults();
                 if (
                     $pluginSetEntry instanceof PluginSetEntry &&
                     $pluginSetEntry->plugin->name === 'Ceres' &&
-                    !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds)
+                    !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
+                    count($pluginSetEntryConfig)
                 ) {
                     $webstores[] = [
                         'id' => 'preview',
-                        'pluginSetId' => (int)$pluginSetEntry->pluginSetId,
-                        'name' => $translator->trans("Ceres::Wizard.previewOption")
+                        'pluginSetId' => (int)$pluginSetEntry->pluginSetId
 
                     ];
                 }
@@ -65,7 +66,11 @@ class ShopWizardService
             foreach ($webstores as $webstore) {
                 $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
 
-                $webstoresMapped[$key] = $this->mapWebstoreData($webstore['id'], $webstore['pluginSetId']);
+                $webstoresMapped[$key] = [
+                    "client" => $webstore['id'],
+                    "pluginSet" => $webstore['pluginSetId']
+
+                ];
             }
         }
 
