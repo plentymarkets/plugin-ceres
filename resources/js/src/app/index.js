@@ -203,7 +203,33 @@ import store from "./store";
 // Bootstrap frameworks
 // =========================
 
-new Vue({
-    el: "#vue-app",
-    store
-});
+import "./main";
+
+// eslint-disable-next-line no-unused-vars
+const vueEventHub = new Vue();
+
+if (App.config.log.checkSyntax)
+{
+    const rootElement = document.getElementById("vue-app");
+
+    rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
+
+    const vueApp = new Vue({
+        store: window.ceresStore
+    });
+
+    vueApp.$mount( rootElement.cloneNode(true) );
+
+    if ( vueApp.$el.id === "vue-app")
+    {
+        document.body.replaceChild( vueApp.$el, rootElement );
+    }
+}
+else
+{
+    // eslint-disable-next-line no-unused-vars
+    const vueApp = new Vue({
+        el: "#vue-app",
+        store
+    });
+}

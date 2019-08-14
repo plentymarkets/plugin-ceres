@@ -1,12 +1,12 @@
 const browserDetect = require("detect-browser");
-const NotificationService = require("services/NotificationService");
-const AutoFocusService = require("services/AutoFocusService");
+const NotificationService = require("./services/NotificationService");
+const AutoFocusService = require("./services/AutoFocusService");
 
-import { MediaQueryHelper } from "helper/MediaQueryHelper";
+import { MediaQueryHelper } from "./helper/MediaQueryHelper";
 
 // Frontend end scripts
 // eslint-disable-next-line
-var init = (function($, window, document)
+const init = (function($, window, document)
 {
     const headerCollapses = [];
 
