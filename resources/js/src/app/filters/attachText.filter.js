@@ -1,7 +1,7 @@
 /**
  * @deprecated since version 4.2.0
  *
- * Will be deleted in version 4.3.0
+ * Will be deleted in version 5.0.0
  */
 Vue.filter("attachText", function(item, text)
 {
