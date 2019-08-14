@@ -21,13 +21,13 @@
     <div class="widget-inner">
         <form class="row" id="{{ formId }}" @submit="$store.dispatch('sendContactForm', $event)">
 
-            {% if mailTarget | trim is empty and ceresConfig.contact.shopMail | trim is empty and isPreview %}
+            {{ Twig.if("#{ mailTarget | trim | json_encode } is empty and ceresConfig.contact.shopMail | trim is empty and #{ isPreview | json_encode }") }}
                 <div class="col-12">
                     <div class="alert alert-danger w-100">
                         {{ trans("Ceres::Widget.mailFormNoRecipient") }}
                     </div>
                 </div>
-            {% endif %}
+            {{ Twig.endif() }}
 
             {% if mailTarget is defined and mailTarget | length > 0 %}
                 <input type="hidden" data-mail="recipient" value="{{ mailTarget }}">
