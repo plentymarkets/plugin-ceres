@@ -8,6 +8,9 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
+{% set inlinePaddingT   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "", ["top"]) %}
+{% set spacingPaddingT  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "", ["top"]) %}
+
 {% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
 {# for ++ development purpose only ++ #}
@@ -20,29 +23,27 @@
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-    <div>Test8</div>
-
     <div class="confirmation-order-list">
         {% for item in orderData.order.orderItems %}
             {% if item.itemVariationId > 0 and not ('[-]' in item.orderItemName) %}
                 {% set currentVariationId = item.itemVariationId | trimNewlines %}
                 <article class="cmp cmp-order-item">
                     <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}" class="item-image">
-                        <img src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
+                        <img src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}" class="{% if spacingPaddingT | length > 0 %} {{ spacingPaddingT }} {% endif %}" {% if inlinePaddingT | length > 0 %} style="{{ inlinePaddingT }}"{% endif %}>
                     </a>
                     <div class="item-details small">
                         <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}" class="clearfix">
-                            <div class="item-name">
+                            <div class="item-name text-appearance {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                                 {{ ItemName.get(item.orderItemName, item.bundleType) }}
                             </div>
                         </a>
 
                         {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
-                            <div class="mb-3 item-bundle">
+                            <div class="mb-3 item-bundle {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                                 {% for bundleComponent in item.bundleComponents %}
                                     <div>
                                         <span class="text-muted">{{ bundleComponent.quantity }} x</span>
-                                        <a href="{{ bundleComponent.data | itemURL }}"> {{ bundleComponent.data | itemName }} </a>
+                                        <a class="text-appearance" href="{{ bundleComponent.data | itemURL }}"> {{ bundleComponent.data | itemName }} </a>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -64,69 +65,78 @@
                             {% set itemPriceTotal = item.quantity * itemAmount.priceGross %}
                         {% endif %}
 
-                        <div class="row">
+                        <div class="row {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
+                                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                             <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
                         </div>
                         {% if discountAmount > 0 %}
-                            <div class="row rebate-hint">
+                            <div class="row rebate-hint {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
+                                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                                 <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationItemDiscount") }}</strong>
                                 <span class="col-6 col-sm-9 col-md-7 text-right">{{ discountAmount | formatMonetary( itemAmount.currency ) }}</span>
                             </div>
                         {% endif %}
-                        <div class="row">
+                        <div class="row {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
+                                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                             <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ item.quantity }}</span>
                         </div>
 
                         {% if item.orderProperties %}
-
-                            <div class="text-center">
-                                <hr>
-                                <span style="margin-top:-10px" data-show-more="{{ trans("Ceres::Template.basketShowMore") }}" data-show-less="{{ trans("Ceres::Template.basketShowLess") }}"></span>
+                            <div class="row {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
+                                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                                <strong class="col-6 col-sm-3 col-md-5">Bestellmerkmale</strong>
                             </div>
 
-                            <div class="row">
-                                <strong class="col-6 col-sm-3 col-md-5">Bestellmerkmale(3)</strong>
-                                <strong class="col-6 col-sm-9 col-md-7 text-right">Gesamtwert</strong>
-                            </div>
-
-                            {% for property in item.orderProperties %}
-                                <div class="row">
-                                    <strong class="col-6 col-sm-3 col-md-5 item-word-break">{{ property | propertyName }}</strong>
+                            <div id="collapseOrderProperties" class="collapse row pl-4{% if isPreview %} show{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                                {% for property in item.orderProperties %}
+                                <strong class="col-12 mt-1 item-word-break">{{ property | propertyName }}</strong>
                                     {% if property.type == 'file' %}
-                                        <span class="col-6 col-sm-9 item-word-break">
-                                            {% set splitPath = property.value |split('/') %}
-                                            {% set filename = '' %}
-                                            {% set path = '' %}
+                                    <span class="col-12 item-word-break">
+                                        {% set splitPath = property.value |split('/') %}
+                                        {% set filename = '' %}
+                                        {% set path = '' %}
 
-                                            {% for temp in splitPath %}
-                                                {% if loop.first %}
-                                                    {% set path =  temp %}
-                                                {% elseif loop.last %}
-                                                    {% set filename = temp %}
-                                                {% else %}
-                                                    {% set path =  path ~ '/' ~ temp %}
-                                                {% endif %}
-                                            {% endfor %}
+                                        {% for temp in splitPath %}
+                                            {% if loop.first %}
+                                                {% set path =  temp %}
+                                            {% elseif loop.last %}
+                                                {% set filename = temp %}
+                                            {% else %}
+                                                {% set path =  path ~ '/' ~ temp %}
+                                            {% endif %}
+                                        {% endfor %}
 
-                                            <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}" target="_blank">
-                                                <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                {{ splitPath | last }}
-                                            </a>
-                                        </span>
+                                        <a class="text-appearance" href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}" target="_blank">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            {{ splitPath | last }}
+                                        </a>
+                                    </span>
                                     {% elseif property.type == "selection" %}
-                                        <span class="col-6 col-sm-9 col-md-7 item-word-break">
-                                            {{ property | propertySelectionValueName }}
-                                        </span>
+                                    <span class="col-12 item-word-break">
+                                        {{ property | propertySelectionValueName }}
+                                    </span>
                                     {% elseif property.type | length > 0 %}
-                                        <span class="col-6 col-sm-9 col-md-7 item-word-break">{{ property.value }}</span>
+                                    <span class="col-12 item-word-break">{{ property.value }}</span>
                                     {% endif %}
-                                </div>
-                            {% endfor %}
+                                {% endfor %}
+                            </div>
+
+                            <label 
+                                class="btn-collapse mb-0 mt-1 collapsed"
+                                data-toggle="collapse" 
+                                data-target="#collapseOrderProperties" 
+                                aria-expanded="false" 
+                                aria-controls="collapseOrderProperties" 
+                                data-show-more="{{ trans("Ceres::Template.basketShowMore") }}" 
+                                data-show-less="{{ trans("Ceres::Template.basketShowLess") }}">
+                                <i class="fa fa-caret-down fa-lg"></i>
+                            </label>
                         {% endif %}
 
-                        <div class="row">
+                        <div class="row {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
+                                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                             <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
                             <strong class="col-6 col-sm-9 col-md-7 text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</strong>
                         </div>
