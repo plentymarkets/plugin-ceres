@@ -28,7 +28,7 @@
     {{ Twig.set("orderDocuments", "orderDocuments | merge([document])") }}
 {{ Twig.endfor() }}
 
-{{ Twig.if("orderDocuments | length > 0 and ('order-document' in enabledRoutes or 'all' in enabledRoutes) or #{ isPreview | json_encode } and ('order-document' in enabledRoutes or 'all' in enabledRoutes)") }}
+{{ Twig.if("('order-document' in enabledRoutes or 'all' in enabledRoutes) and (orderDocuments | length > 0 or #{ isPreview | json_encode })") }}
     <div class="widget widget-order-documents widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
             {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
