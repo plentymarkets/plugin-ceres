@@ -3,6 +3,7 @@
 // =========================
 
 import Vue from "vue";
+window.Vue = Vue;
 
 import jQuery from "jquery";
 window.jQuery = jQuery;
@@ -206,7 +207,7 @@ import store from "./store";
 import "./main";
 
 // eslint-disable-next-line no-unused-vars
-const vueEventHub = new Vue();
+window.vueEventHub = new Vue();
 
 if (App.config.log.checkSyntax)
 {
@@ -214,13 +215,13 @@ if (App.config.log.checkSyntax)
 
     rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
 
-    const vueApp = new Vue({
+    window.vueApp = new Vue({
         store: window.ceresStore
     });
 
     vueApp.$mount( rootElement.cloneNode(true) );
 
-    if ( vueApp.$el.id === "vue-app")
+    if (vueApp.$el.id === "vue-app")
     {
         document.body.replaceChild( vueApp.$el, rootElement );
     }
@@ -228,7 +229,7 @@ if (App.config.log.checkSyntax)
 else
 {
     // eslint-disable-next-line no-unused-vars
-    const vueApp = new Vue({
+    window.vueApp = new Vue({
         el: "#vue-app",
         store
     });
