@@ -203,7 +203,7 @@ import store from "./store";
 // Bootstrap frameworks
 // =========================
 
-const vueApp = new Vue({
+new Vue({
     el: "#vue-app",
     store
 });
