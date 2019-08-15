@@ -34917,7 +34917,7 @@ Vue.component("add-to-basket", {
           _this.waiting = false;
 
           if (error.data) {
-            NotificationService.error(_TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()))).closeAfter(5000);
+            NotificationService.error(_TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)).closeAfter(5000);
           }
         });
       }
@@ -35394,10 +35394,10 @@ Vue.component("basket-list-item", {
           if (_this2.isPreview) {
             _this2.$store.dispatch("addBasketNotification", {
               type: "error",
-              message: _TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()))
+              message: _TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)
             });
           } else {
-            NotificationService.error(_TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()))).closeAfter(5000);
+            NotificationService.error(_TranslationService["default"].translate("Ceres::Template." + _ExceptionMap["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)).closeAfter(5000);
           }
 
           _this2.waiting = false;
@@ -38002,12 +38002,7 @@ Vue.component("country-select", {
 
 var gRecaptchaApiLoaded;
 Vue.component("recaptcha", {
-  props: {
-    template: {
-      type: String,
-      "default": "#vue-recaptcha"
-    }
-  },
+  template: "<div data-recaptcha></div>",
   data: function data() {
     return {
       version: App.config.global.googleRecaptchaVersion,
@@ -38026,6 +38021,10 @@ Vue.component("recaptcha", {
   methods: {
     createScript: function createScript() {
       var _this2 = this;
+
+      if (!this.apiKey) {
+        return Promise.resolve();
+      }
 
       if (!gRecaptchaApiLoaded) {
         gRecaptchaApiLoaded = new Promise(function (resolve, reject) {
@@ -38056,16 +38055,18 @@ Vue.component("recaptcha", {
     initializeV3: function initializeV3() {
       var _this3 = this;
 
-      grecaptcha.ready(function () {
-        if (_this3.version !== 3) {
-          _this3.$el.dataset.recaptcha = grecaptcha.render(_this3.$el, {
-            sitekey: _this3.apiKey,
-            size: _this3.version === 1 ? "invisible" : "normal",
-            badge: _this3.version === 1 ? "bottomright" : null,
-            callback: _this3.recaptchaCallback.bind(_this3)
-          });
-        }
-      });
+      if (window.grecaptcha) {
+        window.grecaptcha.ready(function () {
+          if (_this3.version !== 3) {
+            _this3.$el.dataset.recaptcha = window.grecaptcha.render(_this3.$el, {
+              sitekey: _this3.apiKey,
+              size: "invisible",
+              badge: "bottomright",
+              callback: _this3.recaptchaCallback.bind(_this3)
+            });
+          }
+        });
+      }
     },
     recaptchaCallback: function recaptchaCallback(response) {
       this.$el.querySelector("[name=\"g-recaptcha-response\"]").dispatchEvent(new CustomEvent("recaptcha-response", {
@@ -43285,6 +43286,7 @@ Vue.component("mobile-navigation", {
   })),
   created: function created() {
     this.addEventListener();
+    this.$store.commit("setCurrentCategory", this.initialCategory);
   },
   methods: {
     addEventListener: function addEventListener() {
@@ -44206,14 +44208,25 @@ Vue.filter("ageRestriction", function (age) {
 },{"services/TranslationService":275}],232:[function(require,module,exports){
 "use strict";
 
+/**
+ * @deprecated since version 4.2.0
+ * Will be deleted in version 5.0.0
+ */
 Vue.filter("arrayFirst", function (array) {
+  console.warn("arrayFirst is a depricated vue filter!");
   return array[0];
 });
 
 },{}],233:[function(require,module,exports){
 "use strict";
 
+/**
+ * @deprecated since version 4.2.0
+ *
+ * Will be deleted in version 5.0.0
+ */
 Vue.filter("attachText", function (item, text) {
+  console.warn("attachText is a depricated vue filter!");
   return text + item;
 });
 
@@ -46508,6 +46521,10 @@ function autoFocus() {
 }
 
 function triggerAutoFocus(modal) {
+  if (App.isShopBuilder) {
+    return;
+  }
+
   var focusElements;
 
   if (modal) {
@@ -48775,48 +48792,36 @@ var actions = {
     var recaptchaValidation = Promise.resolve(null);
     var recaptchaElement = event.target.querySelector("[data-recaptcha]");
 
-    if (window.grecaptcha && (!!recaptchaElement || App.config.global.googleRecaptchaVersion === 3)) {
-      if (App.config.global.googleRecaptchaVersion === 3) {
-        // V3
-        recaptchaValidation = new Promise(function (resolve, reject) {
-          window.grecaptcha.execute(App.config.global.googleRecaptchaApiKey, {
-            action: "homepage"
-          }).then(function (response) {
-            if (response) {
-              resolve(response);
-            } else {
-              reject();
-            }
-          });
+    if (window.grecaptcha && App.config.global.googleRecaptchaVersion === 3) {
+      // V3
+      recaptchaValidation = new Promise(function (resolve, reject) {
+        window.grecaptcha.execute(App.config.global.googleRecaptchaApiKey, {
+          action: "homepage"
+        }).then(function (response) {
+          if (response) {
+            resolve(response);
+          } else {
+            reject();
+          }
         });
-      } else if (App.config.global.googleRecaptchaVersion === 2) {
-        // V2 Checkbox
-        var recaptchaResponse = window.grecaptcha.getResponse(recaptchaElement.dataset.recaptcha);
-
-        if (!recaptchaResponse) {
-          recaptchaValidation.reject();
-        }
-
-        recaptchaValidation = Promise.resolve(recaptchaResponse);
-      } else if (App.config.global.googleRecaptchaVersion === 1) {
-        // V2 Invisible
-        recaptchaValidation = new Promise(function (resolve, reject) {
-          window.grecaptcha.execute(recaptchaElement.dataset.recaptcha);
-          recaptchaElement.querySelector("[name=\"g-recaptcha-response\"]").addEventListener("recaptcha-response", function (evt) {
-            if (evt.target.value) {
-              resolve(evt.target.value);
-            } else {
-              reject();
-            }
-          });
+      });
+    } else if (window.grecaptcha && App.config.global.googleRecaptchaVersion === 2 && !!recaptchaElement) {
+      // V2 Invisible
+      recaptchaValidation = new Promise(function (resolve, reject) {
+        window.grecaptcha.execute(recaptchaElement.dataset.recaptcha);
+        recaptchaElement.querySelector("[name=\"g-recaptcha-response\"]").addEventListener("recaptcha-response", function (evt) {
+          if (evt.target.value) {
+            resolve(evt.target.value);
+          } else {
+            reject();
+          }
         });
-      }
+      });
     }
 
     recaptchaValidation.then(function (recaptchaResponse) {
-      disableForm(event.target, true);
-
       _ValidationService["default"].validate(event.target).done(function () {
+        disableForm(event.target, true);
         var formData = (0, _serializeForm.serializeForm)(event.target);
         var formOptions = readFormOptions(event.target, formData);
 
@@ -48826,7 +48831,7 @@ var actions = {
           subject: formOptions.subject || "",
           cc: formOptions.cc,
           replyTo: formOptions.replyTo,
-          recaptchaToken: recaptchaResponse || App.config.global.googleRecaptchaApiKey
+          recaptchaToken: recaptchaResponse
         }).done(function (reponse) {
           event.target.reset();
           disableForm(event.target, false);
