@@ -228,6 +228,15 @@
                         "name": "Config.routingEnableRouteConfirmation"
                     }
                 },
+                "confirmationGuestCategory": {
+                    "type": "category",
+                    "required": false,
+                    "isVisible": "routing.confirmationCategory",
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryGuestConfirmation"
+                    }
+                },
                 "cancellationRightsCategory": {
                     "type": "category",
                     "required": false,
