@@ -176,7 +176,7 @@ class ShopWizardService
 
             if ($shopBooster instanceOf ContentCacheSettings) {
                 $shopBoosterData = $shopBooster->toArray();
-                $data['performance_shopBooster'] = $shopBoosterData['contentCacheActive'];
+                $data['performance_shopBooster'] = (bool) $shopBoosterData['contentCacheActive'];
             }
         }
 
