@@ -2,8 +2,8 @@
     "identifier": "Ceres::ItemsBoughtWidget",
     "label": "Widget.itemsBoughtLabel",
     "previewImageURL": "/images/widgets/items-bought.svg",
-    "type": "static",
-    "categories": ["static"],
+    "type": "orderconfirmation",
+    "categories": ["orderconfirmation"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Checkout\\ItemsBoughtWidget",
     "settings": {

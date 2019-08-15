@@ -577,9 +577,9 @@
         "identifier": "Ceres::ItemsBoughtWidget",
         "label": "Widget.itemsBoughtLabel",
         "previewImageURL": "/images/widgets/items-bought.svg",
-        "type": "static",
+        "type": "orderconfirmation",
         "categories": [
-            "static"
+            "orderconfirmation"
         ],
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\Checkout\\ItemsBoughtWidget",
