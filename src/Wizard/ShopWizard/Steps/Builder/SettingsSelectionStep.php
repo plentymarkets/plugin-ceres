@@ -40,9 +40,11 @@ class SettingsSelectionStep extends Step
      */
     private function generateSection($name): array
     {
+        $condition = $name == "languages" ||  $name == "search" ? $this->globalsCondition : true;
         return [
             "title" => "Wizard." . $name,
             "description" => "Wizard." . $name . "Description",
+            "condition" => $condition,
             "form" => [
                 "settingsSelection_" . $name => $this->generateToggleComponent($name)
             ]
@@ -56,6 +58,7 @@ class SettingsSelectionStep extends Step
      */
     private function generateToggleComponent($name) : array
     {
+
         return [
             "type" => "toggle",
             "defaultValue" => false,
