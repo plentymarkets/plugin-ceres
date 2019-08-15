@@ -97,16 +97,21 @@ class ShopWizard extends WizardProvider
     private function buildClientOptions()
     {
         $clients = $this->settingsService->getWebstores();
+        $pluginSets = $this->settingsService->getPluginSets();
         $clientsList = [
             [
                 "value" => "",
                 "caption" => $this->translator->trans("Ceres::Wizard.selectClient")
-            ],
-            [
-                "value" => "preview",
-                "caption" => $this->translator->trans("Ceres::Wizard.previewOption")
             ]
         ];
+
+        //we add preview option only there are more than one plugin set
+        if (count($pluginSets) > 1) {
+            $clientsList[] = [
+                "value" => "preview",
+                "caption" => $this->translator->trans("Ceres::Wizard.previewOption")
+            ];
+        }
 
         if (count($clients)) {
             foreach($clients as $client) {

@@ -67,14 +67,14 @@ class PaginationStep extends Step
                         "name" => "Wizard.paginationShowLastPage",
                     ]
                 ],
-                "paginationStep_columnsPerPage" => [
-                    "type" => "select",
-                    "defaultValue" => $paginationPositionOptions[0]['value'],
-                    "options" => [
-                        "name" => "Wizard.paginationColumnsPerPage",
-                        "listBoxValues" => $paginationPositionOptions
-                    ]
-                ],
+//                "paginationStep_columnsPerPage" => [
+//                    "type" => "select",
+//                    "defaultValue" => $paginationPositionOptions[0]['value'],
+//                    "options" => [
+//                        "name" => "Wizard.paginationColumnsPerPage",
+//                        "listBoxValues" => $paginationPositionOptions
+//                    ]
+//                ],
                 "paginationStep_rowsPerPage" => [
                     "type" => "checkboxGroup",
                     "defaultValue" => [

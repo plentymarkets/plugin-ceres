@@ -187,20 +187,22 @@ class DefaultSettingsStep extends Step
             foreach ($countriesCollection as $country) {
                 $countryData = $country->toArray();
                 $languages = LanguagesHelper::getTranslatedLanguages();
-                $key = 'defSettings_deliveryCountry_' . $countryData['lang'];
-                $list[$key] = [
-                    "type" => "select",
-                    "options" => [
-                        "name" => $languages[$countryData['lang']],
-                        'required' => true,
-                        "listBoxValues" => [
-                            [
-                                "value" => $countryData['id'],
-                                "caption" => $countryData['name']
+                if (in_array($countryData['lang'], array_keys($languages))) {
+                    $key = 'defSettings_deliveryCountry_' . $countryData['lang'];
+                    $list[$key] = [
+                        "type" => "select",
+                        "options" => [
+                            "name" => $languages[$countryData['lang']],
+                            'required' => true,
+                            "listBoxValues" => [
+                                [
+                                    "value" => $countryData['id'],
+                                    "caption" => $countryData['name']
+                                ]
                             ]
                         ]
-                    ]
-                ];
+                    ];
+                }
             }
         }
 

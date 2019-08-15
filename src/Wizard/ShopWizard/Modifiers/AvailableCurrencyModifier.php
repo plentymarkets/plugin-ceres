@@ -20,11 +20,17 @@ class AvailableCurrencyModifier implements WizardDataModifier
      */
     public function modify(array $parameters)
     {
-        //if toggle button is on false position
+        $data = $parameters['data'];
 
-        if (!$parameters['data']['currencies_allowCurrencyChange']) {
-            $parameters['data']['currencies_availableCurrencies'] = [];
+        $this->allowCurrenciesModifier($data);
+
+        return $data;
+    }
+
+    private function allowCurrenciesModifier(array &$data)
+    {
+        if (!$data['currencies_allowCurrencyChange']) {
+            $data['currencies_availableCurrencies'] = [];
         }
-        return $parameters;
     }
 }
