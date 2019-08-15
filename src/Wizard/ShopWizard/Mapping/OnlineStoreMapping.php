@@ -44,7 +44,7 @@ class OnlineStoreMapping
         ],
         "onlineStore_confirmationLinkLoginRedirect" => [
             "field" => "my_account.confirmation_link_login_redirect",
-            "type" => "string",
+            "type" => "boolean",
             "global" => false,
             "optional" => false,
         ],
@@ -74,7 +74,7 @@ class OnlineStoreMapping
         ],
         "onlineStore_enableCalisto" => [
             "field" => "global.enableOldUrlPattern",
-            "type" => "string",
+            "type" => "boolean",
             "global" => false,
             "optional" => false,
         ],

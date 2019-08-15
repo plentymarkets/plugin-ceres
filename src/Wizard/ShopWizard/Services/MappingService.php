@@ -99,6 +99,9 @@ class MappingService
             case "string":
                 $matchedValue = $value;
                 break;
+            case "boolean":
+                $processedValue = $value == 'true' || $value == '1' ? 1 : 0;
+                $matchedValue = $scope == "display" ? (int) $processedValue : $processedValue;
             case "integer":
                 $matchedValue = intval($value);
                 break;

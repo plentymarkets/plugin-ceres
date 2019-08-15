@@ -26,7 +26,7 @@ class PerformanceMapping
         ],
         "performance_errorCheck" => [
             "field" => "log.check_syntax",
-            "type" => "string",
+            "type" => "boolean",
             "global" => false,
             "optional" => true,
         ],
