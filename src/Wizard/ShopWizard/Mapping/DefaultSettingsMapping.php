@@ -44,13 +44,13 @@ class DefaultSettingsMapping
         ],
         "defSettings_defaultB2B" => [
             "field" => "global.default_contact_class_b2b",
-            "type" => "string",
+            "type" => "integer",
             "global" => false,
             "optional" => false,
         ],
         "defSettings_defaultB2C" => [
             "field" => "defaultCustomerClassId",
-            "type" => "string",
+            "type" => "integer",
             "global" => true,
             "optional" => false,
         ],
