@@ -1,9 +1,9 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set appearance           = widget.settings.appearance.mobile | default("primary") %}
-{% set buttonSize           = widget.settings.buttonSize.mobile | default("md") %}
-{% set displayContentAlways = widget.settings.displayContentAlways.mobile | default(false) %}
+{% set appearance   = widget.settings.appearance.mobile | default("primary") %}
+{% set buttonSize   = widget.settings.buttonSize.mobile | default("md") %}
+{% set forceContent = widget.settings.forceContent.mobile | default(false) %}
 
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -16,7 +16,7 @@
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <variation-select :display-content-always="{{ displayContentAlways | json_encode }}">
+    <variation-select :force-content="{{ forceContent | json_encode }}">
         {% if isPreview %}
             <div class="input-unit">
                 <select class="custom-select">

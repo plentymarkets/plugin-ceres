@@ -301,7 +301,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.bottom.value', 3)
             ->withSetting('spacing.margin.bottom.unit', null)
-            ->withSetting('displayContentAlways', false);
+            ->withSetting('forceContent', false);
     }
 
     private function getShopBuilderDataFieldProvider($provider,$itemDataFields)

@@ -12,7 +12,7 @@ Vue.component("variation-select", {
             type: String,
             default: "#vue-variation-select"
         },
-        displayContentAlways:
+        forceContent:
         {
             type: Boolean,
             default: false
@@ -55,12 +55,12 @@ Vue.component("variation-select", {
 
         /**
          * returns all units, selectable by current selection
-         * prop 'displayContentAlways' with value true will return all units, without filtering
+         * prop 'forceContent' with value true will return all units, without filtering
          */
         possibleUnits()
         {
             const possibleUnits = {};
-            const variations = this.displayContentAlways ? this.variations : this.filterVariations(null, null, null, true);
+            const variations = this.forceContent ? this.variations : this.filterVariations(null, null, null, true);
 
             for (const variation of variations)
             {

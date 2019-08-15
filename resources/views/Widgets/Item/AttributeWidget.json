@@ -15,12 +15,12 @@
             "options": "@include(appearance)"
         },
         "spacing":"@include(spacingMargin)",
-        "displayContentAlways": {
+        "forceContent": {
             "type": "checkbox",
             "defaultValue": false,
             "options": {
-                "name": "Widget.attributeDisplayContentAlwaysLabel",
-                "tooltipText": "Widget.attributeDisplayContentAlwaysTooltip"
+                "name": "Widget.attributeForceContentLabel",
+                "tooltipText": "Widget.attributeForceContentTooltip"
             }
         }
     }
