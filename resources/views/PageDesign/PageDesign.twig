@@ -207,10 +207,10 @@
 
 {{ Translations.add( "Ceres", "Template" ) }}
 {% if ceresConfig.log.performanceLevel  == 'development' %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
-    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
+    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js?v={{ buildHash }}"></script>
+    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js?v={{ buildHash }}"></script>
 {% else %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
+    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js?v={{ buildHash }}"></script>
 {% endif %}
 
 {% for scriptTemplate in get_additional_scripts() %}
@@ -248,7 +248,7 @@
 
     (function($, MediaQueryHelper) {
         var vueApp = document.getElementById('vue-app');
-        var headerParent = document.getElementById('page-header-parent');
+        var headerParent = document.querySelector("[data-header-offset]");
         var headerLoaded = false;
         var allHeaderChildrenHeights = [];
 

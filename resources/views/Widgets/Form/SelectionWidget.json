@@ -1,0 +1,111 @@
+{
+    "identifier": "Ceres::SelectionWidget",
+    "label": "Widget.selectionLabel",
+    "previewImageURL": "/images/widgets/input-select.svg",
+    "type": "form",
+    "categories": ["form"],
+    "position": 500,
+    "widgetClass": "Ceres\\Widgets\\Form\\SelectionWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "key": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldKeyLabel",
+                "tooltip": "Widget.mailFormFieldKeyTooltip"
+            }
+        },
+        "label": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldLabelLabel",
+                "tooltip": "Widget.mailFormFieldLabelTooltip"
+            }
+        },
+        "isRequired": {
+            "type": "checkbox",
+            "required": true,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.mailFormFieldIsRequiredLabel",
+                "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
+            }
+        },
+        "selectType": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "dropdown",
+            "options": {
+                "name": "Widget.selectionSelectTypeLabel",
+                "tooltip": "Widget.selectionSelectTypeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "dropdown",
+                        "caption": "Widget.selectionSelectTypeDropdown",
+                        "position": 0
+                    },
+                    {
+                        "value": "radio",
+                        "caption": "Widget.selectionSelectTypeRadio",
+                        "position": 1
+                    },
+                    {
+                        "value": "checkbox",
+                        "caption": "Widget.selectionSelectTypeCheckbox",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "selectOptions": {
+            "type": "text",
+            "isList": "[1,]",
+            "options": {
+                "name": "Widget.selectionOptionsLabel",
+                "tooltip": "Widget.selectionOptionsTooltip"
+            }
+        },
+        "spacing": {
+            "type": "vertical",
+            "options": {
+                "name": "Widget.widgetSpacing"
+            },
+            "children": {
+                "customPadding": {
+                    "type": "checkbox",
+                    "isVisible": "selectType !== 'dropdown'",
+                    "options": {
+                        "name": "Widget.widgetCustomPadding"
+                    }
+                },
+                "padding": {
+                    "type": "spacing",
+                    "isVisible": "!!spacing.customPadding && selectType !== 'dropdown'",
+                    "options": {
+                        "units": ["px", "rem"],
+                        "direction": "all"
+                    }
+                },
+                "customMargin": {
+                    "type": "checkbox",
+                    "options": {
+                        "name": "Widget.widgetCustomMargin"
+                    }
+                },
+                "margin": {
+                    "type": "spacing",
+                    "isVisible": "!!spacing.customMargin",
+                    "options": {
+                        "units": ["px", "rem"],
+                        "direction": "all"
+                    }
+                }
+            }
+        }
+
+    }
+}

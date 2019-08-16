@@ -44,6 +44,7 @@ class TemplateServiceProvider extends ServiceProvider
     private static $templateKeyToViewMap =
     [
         'tpl.home'                          => ['Homepage.Homepage',                      GlobalContext::class],
+        'tpl.home.category'                 => ['Homepage.HomepageCategory',              CategoryContext::class],
         'tpl.category.content'              => ['Category.Content.CategoryContent',       CategoryContext::class],
         'tpl.category.item'                 => ['Category.Item.CategoryItem',             CategoryItemContext::class],
         'tpl.category.blog'                 => ['PageDesign.PageDesign',                  GlobalContext::class],
@@ -72,7 +73,8 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.terms-conditions'              => ['StaticPages.TermsAndConditions',         GlobalContext::class],
         'tpl.item-not-found'                => ['StaticPages.ItemNotFound',               GlobalContext::class],
         'tpl.page-not-found'                => ['StaticPages.PageNotFound',               GlobalContext::class],
-        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class]
+        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class],
+        'tpl.mail.contact'                  => ['Customer.Components.Contact.ContactMail',GlobalContext::class]
     ];
 
     public function register(){

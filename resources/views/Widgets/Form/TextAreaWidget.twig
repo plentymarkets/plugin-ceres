@@ -1,0 +1,29 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set formFieldId     = widget.settings.key.mobile | default(uid()) %}
+{% set isRequired      = widget.settings.isRequired.mobile %}
+{% set label           = widget.settings.label.mobile %}
+{% set fixedHeight     = widget.settings.fixedHeight.mobile %}
+{% set rows            = widget.settings.rows.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+<div class="widget widget-text-area
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+
+    <div class="input-unit{% if isRequired %} required{% endif %} textarea" {% if isRequired %}data-validate="text"{% endif %}>
+        <textarea
+                name="{{ formFieldId }}"
+                id="{{ formFieldId }}"
+                rows="{{ rows }}"
+                {% if fixedHeight %}class="no-resize"{% endif %}>
+        </textarea>
+
+        <label for="{{ formFieldId }}">
+            {{ label }}{% if isRequired %}*{% endif %}
+        </label>
+    </div>
+</div>

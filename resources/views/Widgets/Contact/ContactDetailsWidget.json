@@ -1,0 +1,43 @@
+{
+    "identifier": "Ceres::ContactDetailsWidget",
+    "label": "Widget.contactDetailsLabel",
+    "previewImageURL": "/images/widgets/contact-details.svg",
+    "type": "default",
+    "categories": ["contact"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Contact\\ContactDetailsWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "spacing":"@include(spacingMargin)",
+        "phone": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDetailsPhoneLabel",
+                "tooltipText": "Widget.contactDetailsPhoneTooltip"
+            }
+        },
+        "fax": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDetailsFaxLabel",
+                "tooltipText": "Widget.contactDetailsFaxTooltip"
+            }
+        },
+        "email": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.contactDetailsEmailLabel",
+                "tooltipText": "Widget.contactDetailsEmailTooltip"
+            }
+        }
+    }
+}

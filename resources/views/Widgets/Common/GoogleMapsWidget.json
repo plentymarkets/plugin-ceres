@@ -1,0 +1,85 @@
+{
+    "identifier": "Ceres::GoogleMapsWidget",
+    "label": "Widget.googleMapsLabel",
+    "previewImageURL": "/images/widgets/google-maps.svg",
+    "type": "default",
+    "position": 1050,
+    "widgetClass": "Ceres\\Widgets\\Common\\GoogleMapsWidget",
+    "settings": {
+        "apiKey": {
+            "type": "text",
+            "required": true,
+            "options": {
+                "name": "Widget.googleMapsApiKeyLabel",
+                "tooltipText": "Widget.googleMapsApiKeyTooltip"
+            }
+        },
+        "address": {
+            "type": "textarea",
+            "required": true,
+            "options": {
+                "name": "Widget.googleMapsAddressLabel",
+                "tooltipText": "Widget.googleMapsAddressTooltip"
+            }
+        },
+        "maptype": {
+            "type": "select",
+            "required": false,
+            "defaultValue": "roadmap",
+            "options": {
+                "name": "Widget.googleMapsMapTypeLabel",
+                "tooltipText": "Widget.googleMapsMapTypeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "roadmap",
+                        "caption": "Widget.googleMapsMapTypeRoadmap"
+                    },
+                    {
+                        "value": "satellite",
+                        "caption": "Widget.googleMapsMapTypeSatellite"
+                    },
+                    {
+                        "value": "hybrid",
+                        "caption": "Widget.googleMapsMapTypeHybrid"
+                    },
+                    {
+                        "value": "terrain",
+                        "caption": "Widget.googleMapsMapTypeTerrain"
+                    }
+                ]
+            }
+        },
+        "zoom": {
+            "type": "number",
+            "required": false,
+            "defaultValue": 16,
+            "options": {
+                "name": "Widget.googleMapsZoomLabel",
+                "tooltipText": "Widget.googleMapsZoomTooltip"
+            }
+        },
+        "aspectRatio": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "prop-xs-3-1",
+            "options": {
+                "name": "Widget.googleMapsAspectRatioLabel",
+                "tooltipText": "Widget.googleMapsAspectRatioTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "prop-xs-3-1",
+                        "caption": "Widget.googleMapsAspectRatioThreeToOne"
+                    },
+                    {
+                        "value": "prop-xs-2-1",
+                        "caption": "Widget.googleMapsAspectRatioTwoToOne"
+                    },
+                    {
+                        "value": "prop-xs-1-1",
+                        "caption": "Widget.googleMapsAspectRatioOneToOne"
+                    }
+                ]
+            }
+        }
+    }
+}

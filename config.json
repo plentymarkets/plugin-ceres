@@ -53,6 +53,24 @@
                         "defaultValue": "false"
                     }
                 },
+                "global.google_recaptcha_version": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaVersionLabel",
+                    "options": {
+                        "defaultValue": 2,
+                        "selectBoxValues": [
+                            {
+                                "value": 2,
+                                "caption": "Config.globalGoogleRecaptchaVersion2Invisible"
+                            },
+                            {
+                                "value": 3,
+                                "caption": "Config.globalGoogleRecaptchaVersion3"
+                            }
+                        ]
+                    }
+                },
                 "global.google_recaptcha_api_key": {
                     "type": "inputText",
                     "required": false,
@@ -67,6 +85,14 @@
                     "label": "Config.globalGoogleRecaptchaSecretLabel",
                     "options": {
                         "defaultValue": ""
+                    }
+                },
+                "global.google_recaptcha_threshold": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaThreshold",
+                    "options": {
+                        "defaultValue": 0.5
                     }
                 },
                 "global.user_data_hash_max_age": {
@@ -1355,6 +1381,7 @@
                 "contact.shop_mail": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactShopMailLabel",
                     "options": {
                         "defaultValue": "your@email.com"
@@ -1363,18 +1390,21 @@
                 "contact.shop_mail_cc": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactShopMailCcLabel",
                     "options": {}
                 },
                 "contact.shop_mail_bcc": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactShopMailBccLabel",
                     "options": {}
                 },
                 "contact.show_data": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactShowDataLabel",
                     "options": {
                         "defaultValue": "street, zip, city, hotline, email, opening_times",
@@ -1437,6 +1467,7 @@
                 "contact.api_key": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactApiKeyLabel",
                     "options": {
                         "defaultValue": "API key"
@@ -1445,6 +1476,7 @@
                 "contact.map_zoom": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactMapZoomLabel",
                     "options": {
                         "defaultValue": "16"
@@ -1453,6 +1485,7 @@
                 "contact.map_show_in_mobile": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactMapShowInMobileLabel",
                     "options": {
                         "defaultValue": "false"
@@ -1461,6 +1494,7 @@
                 "contact.enable_confirming_privacy_policy": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.contactEnableConfirmingPrivacyPolicyLabel",
                     "options": {
                         "defaultValue": "true"

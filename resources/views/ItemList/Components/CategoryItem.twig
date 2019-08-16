@@ -19,7 +19,7 @@
             {{ AddToBasket.printVueComponent( "item", true, false, { ":has-price": "item | hasItemDefaultPrice" } ) }}
 
             <div class="thumb-background"></div>
-            
+
             <div class="thumb-image">
                 <div class="square-container">
                     <div class="square-inner main-image">
@@ -44,6 +44,7 @@
                                     :store-special="storeSpecial"
                                     :recommended-retail-price="item.prices.rrp"
                                     :variation-retail-price="item.prices.default"
+                                    :special-offer-price="item.prices.specialOffer"
                                     :decimal-count="decimalCount"
                                     :bundle-type="item.variation.bundleType"></item-store-special>
             </slot>

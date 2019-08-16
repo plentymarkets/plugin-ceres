@@ -1,0 +1,56 @@
+{
+    "identifier": "Ceres::MailInputWidget",
+    "label": "Widget.mailInputLabel",
+    "previewImageURL": "/images/widgets/input-mail.svg",
+    "type": "form",
+    "categories": ["form"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Form\\MailInputWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "key": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldKeyLabel",
+                "tooltip": "Widget.mailFormFieldKeyTooltip"
+            }
+        },
+        "label": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormFieldLabelLabel",
+                "tooltip": "Widget.mailFormFieldLabelTooltip"
+            }
+        },
+        "isRequired": {
+            "type": "checkbox",
+            "required": true,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.mailFormFieldIsRequiredLabel",
+                "tooltip": "Widget.mailFormFieldIsRequiredTooltip"
+            }
+        },
+        "allowMailCC": {
+            "type": "checkbox",
+            "required": true,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.mailInputAllowMailCCLabel"
+            }
+        },
+        "replyToMail": {
+            "type": "checkbox",
+            "required": true,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.mailInputReplyToMailLabel"
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

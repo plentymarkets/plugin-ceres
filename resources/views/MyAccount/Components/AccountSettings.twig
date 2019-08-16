@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-12" ref="passwordFormControl">
                                     <div class="input-unit" data-validate="password">
-                                        <popper v-cloak trigger="focus" placement="left" ref="passwordHint">
+                                        <popper v-cloak trigger="focus" placement="bottom" ref="passwordHint">
                                             {% set uid_pwd = uid() %}
                                             <template #handle>
                                                 <input type="password" id="{{ uid_pwd }}" name="password" autocomplete="new-password" v-model="newPassword">
