@@ -10,12 +10,12 @@
             <div class="single container-max page-content">
                 <div class="row mt-5 position-relative">
 
-                    <div class="col-12 col-md-7" id="item-container">
+                    <div class="col-12 col-md-7">
                         <slot name="image-carousel"></slot>
                     </div>
 
                     <div class="col-12 col-md-5">
-                        <div v-stick-in-parent data-sticky-container="#item-container">
+                        <div v-stick-in-parent data-sticky-container="#page-body">
                             {% include "Ceres::Item.Components.SingleItem.SingleItem_Details" %}
                         </div>
                     </div>

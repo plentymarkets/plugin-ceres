@@ -7,6 +7,25 @@
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Grid\\StickyContainerWidget",
     "settings": {
-        "customClass":"@include(customClass)"
+        "customClass":"@include(customClass)",
+        "stickTo": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "stickToParent",
+            "options": {
+                "name": "Widget.stickyContainerStickLabel",
+                "tooltipText": "Widget.stickyContainerStickTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "stickToParent",
+                        "caption": "Widget.stickyContainerStickToParent"
+                    },
+                    {
+                        "value": "stickToBody",
+                        "caption": "Widget.stickyContainerStickToBody"
+                    }
+                ]
+            }
+        }
     }
 }

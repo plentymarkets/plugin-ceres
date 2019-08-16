@@ -36,7 +36,7 @@
 {% if keywords | trim is not empty %}
     <meta name="keywords" content="{{ keywords | trim }}">
 {% endif %}
-<meta property="og:title" content="{{ title | trim }}"/>
+<meta property="og:title" content="{{ title | trim | raw }}"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="{{ url | trim }}"/>
 <meta property="og:image" content="{{ image | trim }}"/>
@@ -56,5 +56,4 @@
 {% endblock %}
 </script>
 
-<title>{{ title }}</title>
-
+<title>{{ title | trim | raw }}</title>

@@ -13,14 +13,14 @@
         </header>
 
         <div v-if="basketNotifications.length > 0">
-            <div class="alert fade in alert-danger" v-for="notification in basketNotifications">
+            <div class="w-100 alert alert-danger" v-for="notification in basketNotifications">
                 <div>${ notification.message }</div>
             </div>
         </div>
 
         <div class="basket-preview-content">
             <!-- BASKET LIST -->
-            <div class="list col-sm-7 col-md-12 pt-3">
+            <div class="list col-sm-7 col-md-12 py-3">
                 <div class="cmp cmp-basket-preview-list">
                     <basket-list size="small" :is-preview="true"></basket-list>
                 </div>

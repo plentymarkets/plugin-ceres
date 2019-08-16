@@ -1,15 +1,14 @@
-{% if name | length > 0 %}
-    <b>{{ trans("Ceres::Template.contactName") }}:</b> {{ name }} <br>
-{% endif %}
-
-<b>{{ trans("Ceres::Template.contactSenderMail") }}:</b> {{ userMail }}<br>
-
-{% if orderId | length > 0 %}
-    <b>{{ trans("Ceres::Template.contactOrderId") }}:</b> {{ orderId }}<br><br>
-{% endif %}
-
-_________________________________________________________<br><br>
-
-{% autoescape false %}
-    {{ message }}
-{% endautoescape %}
+{% for entry in data %}
+<p>
+    <b>{{ entry.label }}:</b>
+    {% if entry.value is iterable %}
+        <ul>
+        {% for value in entry.value %}
+            <li>{{ value | nl2br }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        {{ entry.value | nl2br }}
+    {% endif %}
+</p>
+{% endfor %}

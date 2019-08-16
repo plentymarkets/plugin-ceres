@@ -12,17 +12,17 @@ body {
 		
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
-			z-index 	: $zindex-wrapper-top;
-		} 
-
-		.wrapper-main{
-			position: relative;
+			z-index 	: $zindex-wrapper;
 		}
-		
-		.wrapper-top {
+		&>.wrapper-top {
+			z-index 	: $zindex-wrapper +1;
 			top 		: 0;
 			right 		: 0;  
 			left 		: 0;
+		}
+
+		.wrapper-main{
+			position: relative;
 		}
 		
 		.wrapper-right {
