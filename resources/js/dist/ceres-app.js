@@ -39804,11 +39804,16 @@ Vue.component("variation-select", {
     template: {
       type: String,
       "default": "#vue-variation-select"
+    },
+    forceContent: {
+      type: Boolean,
+      "default": false
     }
   },
   data: function data() {
     return {
-      filteredVariationsCache: {}
+      filteredVariationsCache: {},
+      lastContentCount: 0
     };
   },
   computed: _objectSpread({
@@ -39833,6 +39838,40 @@ Vue.component("variation-select", {
       }
 
       return false;
+    },
+
+    /**
+     * returns all units, selectable by current selection
+     * prop 'forceContent' with value true will return all units, without filtering
+     */
+    possibleUnits: function possibleUnits() {
+      var possibleUnits = {};
+      var variations = this.forceContent ? this.variations : this.filterVariations(null, null, null, true);
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = variations[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var variation = _step.value;
+          possibleUnits[variation.unitCombinationId] = variation.unitName;
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      return possibleUnits;
     }
   }, Vuex.mapState({
     attributes: function attributes(state) {
@@ -39887,6 +39926,8 @@ Vue.component("variation-select", {
       } else {
         this.unsetInvalidSelection(attributeId, attributeValueId, unitId);
       }
+
+      this.lastContentCount = Object.keys(this.possibleUnits).length;
     },
 
     /**
@@ -39922,29 +39963,29 @@ Vue.component("variation-select", {
 
       var invalidSelection = this.getInvalidSelectionByVariation(closestVariation);
       var names = [];
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator = invalidSelection.attributesToReset[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var attribute = _step.value;
+        for (var _iterator2 = invalidSelection.attributesToReset[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var attribute = _step2.value;
 
           if (attribute.attributeId !== attributeId) {
             names.push("<b>".concat(attribute.name, "</b>"));
           }
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
           }
         } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
+          if (_didIteratorError2) {
+            throw _iteratorError2;
           }
         }
       }
@@ -39989,42 +40030,42 @@ Vue.component("variation-select", {
     getClosestVariation: function getClosestVariation(qualifiedVariations) {
       var closestVariation;
       var numberOfRequiredChanges;
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (var _iterator2 = qualifiedVariations[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var variation = _step2.value;
+        for (var _iterator3 = qualifiedVariations[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var variation = _step3.value;
           var changes = 0;
 
           if (variation.unitCombinationId !== this.selectedUnit && !(0, _utils.isNull)(this.selectedUnit)) {
             changes++;
           }
 
-          var _iteratorNormalCompletion3 = true;
-          var _didIteratorError3 = false;
-          var _iteratorError3 = undefined;
+          var _iteratorNormalCompletion4 = true;
+          var _didIteratorError4 = false;
+          var _iteratorError4 = undefined;
 
           try {
-            for (var _iterator3 = variation.attributes[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-              var attribute = _step3.value;
+            for (var _iterator4 = variation.attributes[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+              var attribute = _step4.value;
 
               if (this.selectedAttributes[attribute.attributeId] !== attribute.attributeValueId) {
                 changes++;
               }
             }
           } catch (err) {
-            _didIteratorError3 = true;
-            _iteratorError3 = err;
+            _didIteratorError4 = true;
+            _iteratorError4 = err;
           } finally {
             try {
-              if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-                _iterator3["return"]();
+              if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
+                _iterator4["return"]();
               }
             } finally {
-              if (_didIteratorError3) {
-                throw _iteratorError3;
+              if (_didIteratorError4) {
+                throw _iteratorError4;
               }
             }
           }
@@ -40035,16 +40076,16 @@ Vue.component("variation-select", {
           }
         }
       } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-            _iterator2["return"]();
+          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+            _iterator3["return"]();
           }
         } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }
@@ -40102,35 +40143,35 @@ Vue.component("variation-select", {
     correctSelection: function correctSelection(invalidSelection) {
       var messages = [];
       var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
-      var _iteratorNormalCompletion4 = true;
-      var _didIteratorError4 = false;
-      var _iteratorError4 = undefined;
+      var _iteratorNormalCompletion5 = true;
+      var _didIteratorError5 = false;
+      var _iteratorError5 = undefined;
 
       try {
-        for (var _iterator4 = invalidSelection.attributesToReset[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-          var attributeToReset = _step4.value;
+        for (var _iterator5 = invalidSelection.attributesToReset[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+          var attributeToReset = _step5.value;
           messages.push(_TranslationService["default"].translate("Ceres::Template.singleItemNotAvailable", {
             name: attributeToReset.name
           }));
           attributes[attributeToReset.attributeId] = null;
         }
       } catch (err) {
-        _didIteratorError4 = true;
-        _iteratorError4 = err;
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
-            _iterator4["return"]();
+          if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
+            _iterator5["return"]();
           }
         } finally {
-          if (_didIteratorError4) {
-            throw _iteratorError4;
+          if (_didIteratorError5) {
+            throw _iteratorError5;
           }
         }
       }
 
       if (invalidSelection.newUnit) {
-        if (!(0, _utils.isNull)(this.selectedUnit)) {
+        if (this.lastContentCount > 1 && Object.keys(this.possibleUnits).length > 1 && !(0, _utils.isNull)(this.selectedUnit)) {
           messages.push(_TranslationService["default"].translate("Ceres::Template.singleItemNotAvailable", {
             name: _TranslationService["default"].translate("Ceres::Template.singleItemContent")
           }));
@@ -40155,13 +40196,14 @@ Vue.component("variation-select", {
      * @param {number} unitId
      * @param {boolean} strict
      */
-    filterVariations: function filterVariations(attributes, unitId, strict) {
+    filterVariations: function filterVariations(attributes, unitId, strict, ignoreUnit) {
       var _this2 = this;
 
       attributes = attributes || this.selectedAttributes;
       unitId = unitId || this.selectedUnit;
       strict = !!strict;
-      var key = "".concat(JSON.stringify(attributes), "_").concat(unitId, "_").concat(strict);
+      ignoreUnit = !!ignoreUnit;
+      var key = "".concat(JSON.stringify(attributes), "_").concat(unitId, "_").concat(strict, "_").concat(ignoreUnit);
 
       if ((0, _utils.isDefined)(this.filteredVariationsCache[key])) {
         return this.filteredVariationsCache[key];
@@ -40169,11 +40211,10 @@ Vue.component("variation-select", {
 
       var uniqueValues = _toConsumableArray(new Set(Object.values(attributes)));
 
-      var isEmptyOptionSelected = uniqueValues.length === 1 && (0, _utils.isNull)(uniqueValues[0]); // eslint-disable-next-line complexity
-
+      var isEmptyOptionSelected = uniqueValues.length === 1 && (0, _utils.isNull)(uniqueValues[0]);
       var filteredVariations = this.variations.filter(function (variation) {
         // the selected unit is not matching
-        if (variation.unitCombinationId !== unitId) {
+        if (!ignoreUnit && variation.unitCombinationId !== unitId) {
           return false;
         } // the variation has no attributes (only checked, if any attribute has a selected value); or the variation has attributes and empty option is selected
         // requires more than 0 attributes

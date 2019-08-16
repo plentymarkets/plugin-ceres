@@ -5918,6 +5918,14 @@
                         }
                     }
                 }
+            },
+            "forceContent": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.attributeForceContentLabel",
+                    "tooltipText": "Widget.attributeForceContentTooltip"
+                }
             }
         }
     },
