@@ -10,7 +10,9 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 
 use Ceres\Wizard\ShopWizard\Config\OnlineStoreConfig;
+use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
+use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
 
 class OnlineStoreStep extends Step
 {
@@ -167,6 +169,7 @@ class OnlineStoreStep extends Step
     {
         $itemBundles = OnlineStoreConfig::getItemBundles();
         $itemBundlesList = StepHelper::generateTranslatedListBoxValues($itemBundles);
+        
         return [
             "title" => "Wizard.ordersSettings",
             "description" => "Wizard.emailSettingsDescription",
@@ -188,10 +191,11 @@ class OnlineStoreStep extends Step
                     ]
                 ],
                 "onlineStore_statusReturn" => [
-                    "type" => "text",
+                    "type" => "select",
                     "defaultValue" => "9",
                     "options" => [
-                        "name" => "Wizard.statusReturn"
+                        "name" => "Wizard.statusReturn",
+                        "listBoxValues" => $this->getOrderStatusListBoxValues()
                     ]
                 ],
             ]
@@ -216,5 +220,21 @@ class OnlineStoreStep extends Step
                 ]
             ]
         ];
+    }
+    
+    private function getOrderStatusListBoxValues()
+    {
+        /** @var OrderStatusRepositoryContract $orderStatusRepo */
+        $orderStatusRepo = pluginApp(OrderStatusRepositoryContract::class);
+        $orderStatusCollection = $orderStatusRepo->all()->where('statusId', '>', 7.0);
+        
+        $currentLang = LanguagesHelper::getUserLang();
+
+        return array_values($orderStatusCollection->map(function($status) use ($currentLang) {
+            return [
+                "value" => "$status->statusId",
+                "caption" => '['.$status->statusId.'] '.( strlen($status->names[$currentLang]) ? $status->names[$currentLang] : '')
+            ];
+        })->toArray());
     }
 }
