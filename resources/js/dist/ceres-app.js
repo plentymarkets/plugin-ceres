@@ -43861,14 +43861,25 @@ Vue.filter("ageRestriction", function (age) {
 },{"services/TranslationService":275}],232:[function(require,module,exports){
 "use strict";
 
+/**
+ * @deprecated since version 4.2.0
+ * Will be deleted in version 5.0.0
+ */
 Vue.filter("arrayFirst", function (array) {
+  console.warn("arrayFirst is a depricated vue filter!");
   return array[0];
 });
 
 },{}],233:[function(require,module,exports){
 "use strict";
 
+/**
+ * @deprecated since version 4.2.0
+ *
+ * Will be deleted in version 5.0.0
+ */
 Vue.filter("attachText", function (item, text) {
+  console.warn("attachText is a depricated vue filter!");
   return text + item;
 });
 
