@@ -8,6 +8,8 @@
 
 namespace Ceres\Wizard\ShopWizard\Helpers;
 
+use Plenty\Modules\User\Contracts\UserRepositoryContract;
+use Plenty\Modules\User\Models\User;
 use Plenty\Plugin\Translation\Translator;
 
 class LanguagesHelper
@@ -60,4 +62,17 @@ class LanguagesHelper
 
     }
 
+    public static function getUserLang()
+    {
+        /** @var UserRepositoryContract $userRepo */
+        $userRepo = pluginApp(UserRepositoryContract::class);
+        /** @var User $currentUser */
+        $currentUser = $userRepo->getCurrentUser();
+        if($currentUser instanceof User)
+        {
+            return $currentUser->lang;
+        }
+        
+        return 'en';
+    }
 }
