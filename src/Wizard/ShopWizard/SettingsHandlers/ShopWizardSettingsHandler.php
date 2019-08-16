@@ -10,6 +10,7 @@ namespace Ceres\Wizard\ShopWizard\SettingsHandlers;
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Services\MappingService;
+use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheInvalidationRepositoryContract;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
@@ -18,7 +19,6 @@ use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
-use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
 
 
@@ -44,7 +44,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
         try {
             $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
-            $webstoreRepo = pluginApp(WebstoreRepositoryContract::class);
+            $settingsHandlerService = pluginApp(SettingsHandlerService::class);
 
             list($webstore,$pluginSet) = explode(".", $optionId);
 
@@ -67,8 +67,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
             if ($webstoreId !=='preview') {
 
-                $store = $webstoreRepo->findById($webstoreId);
-                $plentyId = $store->storeIdentifier;
+                $plentyId = $settingsHandlerService->getStoreIdentifier($webstoreId);
                 $shippingCountryList = [];
                 $deliveryCountries = $this->countryRepository->getActiveCountriesList();
                 $currencies = $this->currencyRepository->getCurrencyList();
@@ -109,17 +108,16 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 ];
                 $globalData = $mappingService->processGlobalMappingData($data, "store");
 
-                //need to refactor after we have implemented Ceres browser languages
-//                $intermediarBrowserLanguage = $globalData['browserLanguage'];
-//                $globalData['browserLanguage'] = [
-//                    'other' => $intermediarBrowserLanguage
-//                ];
-//                foreach ($data as $dataKey => $dataValue){
-//                    if (strpos($dataKey, "languages_browserLang_") !== false) {
-//                        $key = end(explode("_", $dataKey));
-//                        $globalData['browserLanguage'][$key] = $dataValue;
-//                    }
-//                }
+                $intermediarBrowserLanguage = $globalData['browserLanguage'];
+                $globalData['browserLanguage'] = [
+                    'other' => $intermediarBrowserLanguage
+                ];
+                foreach ($data as $dataKey => $dataValue){
+                    if (strpos($dataKey, "languages_browserLang_") !== false) {
+                        $key = end(explode("_", $dataKey));
+                        $globalData['browserLanguage'][$key] = $dataValue;
+                    }
+                }
 
                 $webstoreData = array_merge($shippingData, $currenciesData, $globalData);
 

@@ -110,21 +110,20 @@ class ShopWizardService
                 }
             }
 
-            //need to refactor after we have implemented Ceres browser languages
-//            if (count($globalData['languages_defaultBrowserLang'])) {
-//                $globalData['languages_setLinkedStoreLanguage'] = true;
-//                $browserLanguage = $globalData['languages_defaultBrowserLang'];
-//
-//                //now we extract data related from browser language
-//                foreach ($browserLanguage as $bLangKey => $bLang) {
-//                    if ($bLangKey == 'other') {
-//                        $globalData['languages_defaultBrowserLang'] = $bLang;
-//                    } else {
-//                        $langKey = "languages_browserLang_{$bLangKey}";
-//                        $globalData[$langKey] = $bLang;
-//                    }
-//                }
-//            }
+            if (count($globalData['languages_defaultBrowserLang'])) {
+                $globalData['languages_setLinkedStoreLanguage'] = true;
+                $browserLanguage = $globalData['languages_defaultBrowserLang'];
+
+                //now we extract data related from browser language
+                foreach ($browserLanguage as $bLangKey => $bLang) {
+                    if ($bLangKey == 'other') {
+                        $globalData['languages_defaultBrowserLang'] = $bLang;
+                    } else {
+                        $langKey = "languages_browserLang_{$bLangKey}";
+                        $globalData[$langKey] = $bLang;
+                    }
+                }
+            }
 
         }
 
