@@ -212,6 +212,31 @@
                         "name": "Config.routingEnableRouteMyAccount"
                     }
                 },
+                "confirmationCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryConfirmation"
+                    }
+                },
+                "confirmationEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.confirmationCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteConfirmation"
+                    }
+                },
+                "confirmationGuestCategory": {
+                    "type": "category",
+                    "required": false,
+                    "isVisible": "routing.confirmationCategory",
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryGuestConfirmation"
+                    }
+                },
                 "cancellationRightsCategory": {
                     "type": "category",
                     "required": false,
