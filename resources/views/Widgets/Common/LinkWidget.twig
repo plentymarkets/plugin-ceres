@@ -1,21 +1,30 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set icon             = widget.settings.icon.mobile %}
-{% set size             = widget.settings.dimensions.size.mobile %}
-{% set block             = widget.settings.dimensions.block.mobile %}
-{% set text             = widget.settings.text.mobile %}
-{% set url             = widget.settings.url.mobile %}
+{% set icon            = widget.settings.icon.mobile %}
+{% set size            = widget.settings.dimensions.size.mobile %}
+{% set block           = widget.settings.dimensions.block.mobile %}
+{% set text            = widget.settings.text.mobile %}
+{% set url             = widget.settings.url %}
 
-{% set customClass = widget.settings.customClass.mobile %}
-{% set appearance       = widget.settings.appearance.mobile %}
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set appearance      = widget.settings.appearance.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
+{% if url.type.mobile == 'internalLink' %}
+    {{ Twig.set('real_url', Twig.call("services.url.getInternalLink", ['retoure'])) }}
+{% else %}
+    {{ WidgetHelper.setUrlVariable('real_url', url.value.mobile, url.type.mobile) }}
+{% endif %}
+
 <div class="widget widget-{{ appearance | default('none') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
-    <a class="btn btn-primary btn-appearance {{ size }} {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}" href="{{ url }}" style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}">
+    <a class="btn btn-primary btn-appearance {{ size }} {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
+       href="{{ Twig.print("real_url") }}"
+       style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}">
         {%- if icon != "none" -%}
             <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
         {%- endif -%}
