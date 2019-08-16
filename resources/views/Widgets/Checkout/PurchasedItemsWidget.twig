@@ -11,7 +11,7 @@
 {% set inlinePaddingT   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "", ["top"]) %}
 {% set spacingPaddingT  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "", ["top"]) %}
 
-<div class="widget widget-items-bought widget-{{ widget.settings.appearance.mobile | default("primary") }}
+<div class="widget widget-purchased-items widget-{{ widget.settings.appearance.mobile | default("primary") }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>

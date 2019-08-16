@@ -1,11 +1,11 @@
 {
-    "identifier": "Ceres::ItemsBoughtWidget",
-    "label": "Widget.itemsBoughtLabel",
-    "previewImageURL": "/images/widgets/items-bought.svg",
+    "identifier": "Ceres::PurchasedItemsWidget",
+    "label": "Widget.purchasedItemsLabel",
+    "previewImageURL": "/images/widgets/purchased-items.svg",
     "type": "orderconfirmation",
     "categories": ["orderconfirmation"],
     "position": 100,
-    "widgetClass": "Ceres\\Widgets\\Checkout\\ItemsBoughtWidget",
+    "widgetClass": "Ceres\\Widgets\\Checkout\\PurchasedItemsWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {
