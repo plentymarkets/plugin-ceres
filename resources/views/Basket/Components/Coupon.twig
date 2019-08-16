@@ -1,8 +1,10 @@
+{% set couponReadonlyInfoText = trans("Ceres::Template.couponReadonlyInfoText") %}
+
 <script type="x/template" id="vue-coupon">
     <div class="cmp">
-        {% if checkout.readOnly %}
+        {% if checkout.readOnly and couponReadonlyInfoText | trim is not empty %}
             <p>
-                {{ trans("Ceres::Template.couponReadonlyInfoText") }}
+                {{ couponReadonlyInfoText }}
             </p>
         {% endif %}
         <div :class="{'input-group':true,'component-loading':isCheckoutReadonly,'isLoading':isCheckoutReadonly}">
