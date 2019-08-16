@@ -224,17 +224,24 @@ class OnlineStoreStep extends Step
     
     private function getOrderStatusListBoxValues()
     {
+        $currentLang = LanguagesHelper::getUserLang();
+        
         /** @var OrderStatusRepositoryContract $orderStatusRepo */
         $orderStatusRepo = pluginApp(OrderStatusRepositoryContract::class);
-        $orderStatusCollection = $orderStatusRepo->all()->where('statusId', '>', 7.0);
+        $orderStatusCollection = $orderStatusRepo->all();
         
-        $currentLang = LanguagesHelper::getUserLang();
-
-        return array_values($orderStatusCollection->map(function($status) use ($currentLang) {
-            return [
-                "value" => "$status->statusId",
-                "caption" => '['.$status->statusId.'] '.( strlen($status->names[$currentLang]) ? $status->names[$currentLang] : '')
-            ];
-        })->toArray());
+        $orderStatusList = [];
+        foreach($orderStatusCollection as $status)
+        {
+            if($status->statusId > 7)
+            {
+                $orderStatusList[] = [
+                    "value" => "$status->statusId",
+                    "caption" => '['.$status->statusId.'] '.( strlen($status->names[$currentLang]) ? $status->names[$currentLang] : '')
+                ];
+            }
+        }
+        
+        return $orderStatusList;
     }
 }
