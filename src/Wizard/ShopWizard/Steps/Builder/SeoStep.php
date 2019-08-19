@@ -10,6 +10,8 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 use Ceres\Wizard\ShopWizard\Config\SeoConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
+use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Plugin\Application;
 
 class SeoStep extends Step
 {
@@ -119,12 +121,15 @@ class SeoStep extends Step
      */
     public function generateRobotsTxtSection(): array
     {
+        $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
+        $app = pluginApp(Application::class);
+        $currentConfig = $webstoreConfig->findByWebstoreId($app->getWebstoreId())->toArray();
 
         $robotsDefault = 'User-agent: *'.chr(10);
         $robotsDefault .= 'Disallow: /plenty/'.chr(10);
         $robotsDefault .= 'Allow: /plenty/api/external.php'.chr(10);
         $robotsDefault .= 'Disallow: /xml/'.chr(10);
-        $robotsDefault .= 'Sitemap: '.DOM_SSL.'/sitemap.xml'.chr(10);
+        $robotsDefault .= 'Sitemap: '. $currentConfig['domainSsl'] .'/sitemap.xml'.chr(10);
 
         return [
             "title" => "Wizard.robotsTxt",
