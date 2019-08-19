@@ -94,57 +94,38 @@ class LanguagesStep extends Step
      */
     private function generateFormLanguagesSelection(): array
     {
-
+        $languageOptions = StepHelper::buildListBoxData($this->languages);
+        array_unshift($languageOptions, [
+            "caption" => "Wizard.noChange",
+            "value" => ""
+        ]);
         $formFields = [
-            "languages_setLinkedStoreLanguage" => [
-                "type" => "toggle",
-                "defaultValue" => false,
-                "options" => [
-                    "name" => "Wizard.setLinkedStoreLanguage"
-                ]
-            ],
             "languages_defaultBrowserLang" => [
-                "dependencies" => ['languages_activeLanguages'],
-                "dependencyMethod" => "retrieveActiveLanguages",
                 "type" => "select",
-                "isVisible" => "typeof languages_setLinkedStoreLanguage ==='undefined' ||languages_setLinkedStoreLanguage === true",
+                "defaultValue" => $languageOptions[0]['value'],
                 "options" => [
                     "name" => "Wizard.defaultBrowserLanguage",
-                    'listBoxValues' => []
+                    'listBoxValues' => $languageOptions
                 ]
             ]
         ];
-
-        $finalFormFields = $this->generateLanguagesFormFields($formFields);
-
-        return $finalFormFields;
-    }
-
-    /**
-     * @param array $formFields
-     *
-     * @return array
-     */
-    private function generateLanguagesFormFields(array $formFields): array
-    {
 
         foreach ($this->languages as $langKey => $language) {
             $key = "languages_browserLang_{$langKey}";
             $translateKey = "browserLang" . ucfirst($langKey);
             $formFields[$key] = [
-                "dependencies" => ['languages_activeLanguages'],
-                "dependencyMethod" => "retrieveActiveLanguages",
                 "type" => "select",
-                "isVisible" => "typeof languages_setLinkedStoreLanguage ==='undefined' ||languages_setLinkedStoreLanguage === true",
+                "defaultValue" => "",
                 "options" => [
                     "name" => "Wizard.{$translateKey}",
-                    "listBoxValues" => []
+                    "listBoxValues" => $languageOptions
                 ]
             ];
         }
 
         return $formFields;
     }
+
 
     /**
      * @return array
