@@ -23,7 +23,7 @@ class PerformanceStep extends Step
     {
         return [
             "title" => "Wizard.performanceSettings",
-            "description" => "Wizard.paginationStepDescription",
+            "description" => "Wizard.performanceSettingsDescription",
             "condition" => " (typeof settingsSelection_performance === 'undefined' || "
                 ."settingsSelection_performance === true) && " . $this->hasRequiredSettings(),
             "sections" => [
