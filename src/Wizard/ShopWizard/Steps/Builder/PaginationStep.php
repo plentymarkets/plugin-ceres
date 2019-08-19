@@ -26,7 +26,8 @@ class PaginationStep extends Step
                 "settingsSelection_paginationSorting === true) && " . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generatePaginationSection(),
-                $this->generateSortingSection()
+                $this->generateSortingSection(),
+                $this->generateRecommendedSortingSection()
             ]
         ];
     }
@@ -76,18 +77,18 @@ class PaginationStep extends Step
 //                        "listBoxValues" => $paginationPositionOptions
 //                    ]
 //                ],
-                "paginationStep_rowsPerPage" => [
-                    "type" => "checkboxGroup",
-                    "defaultValue" => [
-                        $rowsPerPageOptions[0]["value"],
-                        $rowsPerPageOptions[1]["value"],
-                        $rowsPerPageOptions[4]["value"],
-                    ],
-                    "options" =>[
-                        "name" => "Wizard.paginationRowsPerPage",
-                        "checkboxValues" => $rowsPerPageOptions
-                    ]
-                ]
+//                "paginationStep_rowsPerPage" => [
+//                    "type" => "checkboxGroup",
+//                    "defaultValue" => [
+//                        $rowsPerPageOptions[0]["value"],
+//                        $rowsPerPageOptions[1]["value"],
+//                        $rowsPerPageOptions[4]["value"],
+//                    ],
+//                    "options" =>[
+//                        "name" => "Wizard.paginationRowsPerPage",
+//                        "checkboxValues" => $rowsPerPageOptions
+//                    ]
+//                ]
             ]
         ];
     }
@@ -100,11 +101,6 @@ class PaginationStep extends Step
         $itemSortingByRules = PaginationConfig::getItemSortingByRules();
         $itemSortingOptions = StepHelper::generateTranslatedListBoxValues($itemSortingByRules);
 
-        $sortingRules = PaginationConfig::getSortingCategoryRules();
-        $categorySortingOptions = StepHelper::generateTranslatedListBoxValues($sortingRules);
-
-        $secondSortingRules = PaginationConfig::getSecondSortingCategoryRules();
-        $secondCatOptions = StepHelper::generateTranslatedListBoxValues($secondSortingRules);
         return [
             "title" => "Wizard.sortingSettings",
             "description" => "Wizard.sortingSettingsDescription",
@@ -129,7 +125,22 @@ class PaginationStep extends Step
                         "name" => "Wizard.defaultSorting",
                         "listBoxValues" => $itemSortingOptions
                     ]
-                ],
+                ]
+            ]
+        ];
+    }
+
+    private function generateRecommendedSortingSection(): array
+    {
+        $sortingRules = PaginationConfig::getSortingCategoryRules();
+        $categorySortingOptions = StepHelper::generateTranslatedListBoxValues($sortingRules);
+
+        $secondSortingRules = PaginationConfig::getSecondSortingCategoryRules();
+        $secondCatOptions = StepHelper::generateTranslatedListBoxValues($secondSortingRules);
+        return [
+            "title" => "Wizard.recommendedSortingSettings",
+            "description" => "Wizard.recommendedSortingSettingsDescription",
+            "form" => [
                 "pagination_sortingCat1" => [
                     "type" => "select",
                     "defaultValue" => $categorySortingOptions[2]["value"],
