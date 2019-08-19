@@ -54,6 +54,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.my-account'                    => ['MyAccount.MyAccountView',                GlobalContext::class],
         'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            CategoryContext::class],
         'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],
+        'tpl.confirmation.category'         => ['Checkout.OrderConfirmationCategory',     OrderConfirmationContext::class],
         'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],
         'tpl.register'                      => ['Customer.Register',                      GlobalContext::class],
         'tpl.guest'                         => ['Customer.Guest',                         GlobalContext::class],
