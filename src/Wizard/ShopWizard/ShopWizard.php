@@ -69,6 +69,7 @@ class ShopWizard extends WizardProvider
         return [
             "title" => "Wizard.title",
             "shortDescription" => "Wizard.shortDescription",
+            "keywords" => $this->buildKeywords(),
             "topics" => [
                 "omni-channel"
             ],
@@ -98,6 +99,24 @@ class ShopWizard extends WizardProvider
                 "seoStep" => $seo->generateStep()
             ]
         ];
+    }
+
+    private function buildKeywords()
+    {
+        $keywords = [];
+        $i = 1;
+        $prefix = ["Ceres::", "Wizard.keyword"];
+        while($this->translator->trans($prefix[0].$prefix[1].$i) !== $prefix[0].$prefix[1].$i)
+        {
+            $keywords[] = $prefix[1].$i;
+            $i++;
+            if($i > 100)
+            {
+                break;
+            }
+        }
+
+        return $keywords;
     }
 
     /**
