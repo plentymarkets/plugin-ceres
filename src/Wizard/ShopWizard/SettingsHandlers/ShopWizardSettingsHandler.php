@@ -20,6 +20,7 @@ use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
+use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
 
 
@@ -133,6 +134,25 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $robotsRepo = pluginApp(RobotsRepositoryContract::class);
                     $robotsRepo->updateByWebstoreId($webstoreId, $data["seo_robotsTxt"]);
 
+                }
+
+                //save sitemap xml
+
+                if (isset($data['seo_siteMapConfig'])) {
+                    $siteMapConfig = [
+                      "contentCategory" => 0,
+                      "itemCategory" => 0,
+                      "item" => 0,
+                      "blog" => 0
+                    ];
+
+                    foreach($siteMapConfig as $siteMapKey => $siteMapValue) {
+                        if (in_array($siteMapKey, $data['seo_siteMapConfig'])) {
+                            $siteMapConfig[$siteMapKey] = 1;
+                        }
+                    }
+                    $siteMapRepo = pluginApp(SitemapConfigurationRepositoryContract::class);
+                    $siteMapRepo->updateByWebstoreId($webstoreId, $siteMapConfig);
                 }
 
                 //we handle settings for shopping booster

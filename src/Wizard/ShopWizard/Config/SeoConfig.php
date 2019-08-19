@@ -32,6 +32,12 @@ class SeoConfig
         "availabilitySoldOut"  => "http://schema.org/SoldOut",
     ];
 
+    public static $siteMapOptions = [
+        "siteMapContentCategory" => "contentCategory",
+        "siteMapItemCategory" => "itemCategory",
+        "siteMapItem" => "item",
+        "siteMapBlog" => "blog",
+    ];
     public static function getMetaRobotsOptions()
     {
         return self::$metaRobotsOptions;
@@ -40,5 +46,10 @@ class SeoConfig
     public static function getAvailabilitiesOptions()
     {
         return self::$availabilitiesOptions;
+    }
+
+    public static function getSiteMapOptions()
+    {
+        return self::$siteMapOptions;
     }
 }

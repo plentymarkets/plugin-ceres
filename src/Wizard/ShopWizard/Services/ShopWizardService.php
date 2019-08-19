@@ -15,7 +15,9 @@ use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
+use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Models\Robots;
+use Plenty\Modules\Webshop\Seo\Models\SitemapConfiguration;
 use Plenty\Plugin\Translation\Translator;
 
 class ShopWizardService
@@ -139,6 +141,20 @@ class ShopWizardService
                     $robotsTxtData['value'];
             }
 
+            // get sitemap data
+            $siteMapConfigRepo = pluginApp(SitemapConfigurationRepositoryContract::class);
+            $siteMapConfig = $siteMapConfigRepo->findByWebstoreId($webstoreId);
+
+            if ($siteMapConfig instanceof SitemapConfiguration) {
+                $siteMapConfigData = $siteMapConfig->toArray();
+                $globalData['seo_siteMapConfig'] = [];
+
+                foreach ($siteMapConfigData as $configKey => $configStatus) {
+                    if ($configStatus) {
+                        $globalData['seo_siteMapConfig'][] = $configKey;
+                    }
+                }
+            }
         }
 
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);

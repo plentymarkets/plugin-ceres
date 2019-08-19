@@ -26,6 +26,7 @@ class SeoStep extends Step
             "sections" => [
                 $this->generateRobotSettingsSection(),
                 $this->generateRobotsTxtSection(),
+                $this->generateSiteMapSection(),
                 $this->generateAvailabilitiesSection()
             ]
         ];
@@ -168,6 +169,9 @@ class SeoStep extends Step
         return $formFields;
     }
 
+    /**
+     * @return array
+     */
     public function generateRobotsTxtSection(): array
     {
 
@@ -188,6 +192,37 @@ class SeoStep extends Step
                     "options" => [
                         "name" => "Wizard.robotsTxt",
                         "maxRows" => 15,
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function generateSiteMapSection(): array
+    {
+        $siteMapData = SeoConfig::getSiteMapOptions();
+        $siteMapOptions = StepHelper::generateTranslatedListBoxValues($siteMapData);
+
+
+        return [
+            "title" => "Wizard.siteMapXml",
+            "description" => "Wizard.siteMapXmlDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "seo_siteMapConfig" => [
+                    "type" => "checkboxGroup",
+                    "defaultValue" => [
+                        $siteMapOptions[0]["value"],
+                        $siteMapOptions[1]["value"],
+                        $siteMapOptions[2]["value"],
+                        $siteMapOptions[3]["value"],
+                    ],
+                    "options" =>[
+                        "name" => "Wizard.siteMapXml",
+                        "checkboxValues" => $siteMapOptions
                     ]
                 ]
             ]
