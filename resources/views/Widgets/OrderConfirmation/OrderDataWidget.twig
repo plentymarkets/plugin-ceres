@@ -38,7 +38,11 @@
                         <div>{{ Twig.print("data.order.billingAddress.name4") }}</div>
                         <div>{{ Twig.print("data.order.billingAddress.address1") }} {{ Twig.print("data.order.billingAddress.address2") }}</div>
                         <div>{{ Twig.print("data.order.billingAddress.postalCode") }} {{ Twig.print("data.order.billingAddress.town") }}</div>
-                        <div>TODO: testen {{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.billingAddress.countryId")])) }}</div>
+                        <div>
+                            {{ Twig.if("true and data.order.billingAddress.countryId") }}
+                                {{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.billingAddress.countryId")])) }}
+                            {{ Twig.endif() }}
+                        </div>
                     </span>
                 </div>
 
@@ -64,7 +68,11 @@
                                     {{ Twig.print("data.order.deliveryAddress.address3") }}
                                 </div>
                                 <div>{{ Twig.print("data.order.deliveryAddress.postalCode") }} {{ Twig.print("data.order.deliveryAddress.town") }}</div>
-                                <div>Testen: {{ Twig.print(Twig.call("services.country.getCountryName", ["data.order.deliveryAddress.countryId"])) }}</div>
+                                <div>
+                                    {{ Twig.if("true and data.order.deliveryAddress.countryId") }}
+                                        {{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.deliveryAddress.countryId")])) }}
+                                    {{ Twig.endif() }}
+                                </div>
                             </span>
                         {{ Twig.endif() }}
                     </span>
@@ -98,8 +106,8 @@
                 {{ Twig.if("paymentMethodId != -1 and showAdditionalPaymentInformation == true") }}
                     <change-payment-method
                         :current-order="{{ Twig.print("data.order | json_encode") }}"
-                        :change-possible="{{ Twig.print(Twig.call("services.order.allowPaymentMethodSwitchFrom", ["paymentMethodId", "data.order.id)"]) ~ " | json_encode") }}"
-                        :allowed-payment-methods="{{ Twig.print(Twig.call("services.order.getPaymentMethodListForSwitch", ["paymentMethodId", "data.order.id"]) ~ " | json_encode") }}"
+                        :change-possible="{{ Twig.print(Twig.call("services.order.allowPaymentMethodSwitchFrom", [Twig.var("paymentMethodId"), Twig.var("data.order.id")]) ~ " | json_encode") }}"
+                        :allowed-payment-methods="{{ Twig.print(Twig.call("services.order.getPaymentMethodListForSwitch", [Twig.var("paymentMethodId"), Twig.var("data.order.id")]) ~ " | json_encode") }}"
                         :payment-status="{{ Twig.print("paymentStatus | json_encode") }}"
                         :current-payment-method-name="{{ Twig.print("data.paymentMethodName | json_encode") }}"
                         :current-template="{{ Twig.print("currentTemplate | json_encode") }}">
