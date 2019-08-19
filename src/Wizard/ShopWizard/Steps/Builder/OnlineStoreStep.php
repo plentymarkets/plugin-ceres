@@ -238,11 +238,18 @@ class OnlineStoreStep extends Step
         $orderStatusList = [];
         foreach($orderStatusCollection as $status)
         {
-            if($status->statusId > 7)
+            if($status->statusId >= 9 && $status->statusId < 10)
             {
+                $statusName = $status->names[$currentLang] ?? '';
+                $prefix = '[' . $status->statusId . ']';
+                if(substr($statusName, 0, strlen($prefix)) !== $prefix)
+                {
+                    $statusName = $prefix . $statusName;
+                }
+
                 $orderStatusList[] = [
                     "value" => "$status->statusId",
-                    "caption" => '['.$status->statusId.'] '.( strlen($status->names[$currentLang]) ? $status->names[$currentLang] : '')
+                    "caption" => $statusName
                 ];
             }
         }
