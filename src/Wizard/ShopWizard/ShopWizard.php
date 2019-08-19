@@ -36,11 +36,21 @@ class ShopWizard extends WizardProvider
      */
     private $translator;
 
+    /**
+     * ShopWizard constructor.
+     *
+     * @param DefaultSettingsService $defaultSettingsService
+     * @param Translator $translator
+     */
     public function __construct(DefaultSettingsService $defaultSettingsService, Translator $translator)
     {
         $this->settingsService = $defaultSettingsService;
         $this->translator = $translator;
     }
+
+    /**
+     * @return array
+     */
     protected function structure()
     {
         $requiredSettings = pluginApp(RequiredSettingsStep::class);
@@ -73,6 +83,7 @@ class ShopWizard extends WizardProvider
                 'client' => $this->buildClientOptions(),
                 'pluginSet' => $this->buildPluginSetOptions()
             ],
+            "undeleteableOptionIds" => $this->getUnDeletableOptions(),
             "steps" => [
                 "requiredStep" => $requiredSettings->generateStep(),
                 "settingsSelectionStep" => $settingsSelection->generateStep(),
@@ -165,5 +176,24 @@ class ShopWizard extends WizardProvider
                 'listBoxValues' => $pluginSetValues
             ]
         ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getUnDeletableOptions(): array
+    {
+        $settingsService = pluginApp(DefaultSettingsService::class);
+        $webStores = $settingsService->getWebstores();
+        $unDeletableOptions = [];
+
+        if (count($webStores)) {
+            foreach ($webStores as $webStore) {
+                $optionId = "webstore_" . $webStore['id'] . "." . "pluginSet_" . $webStore['pluginSetId'];
+                $unDeletableOptions[] = $optionId;
+            }
+        }
+
+        return $unDeletableOptions;
     }
 }
