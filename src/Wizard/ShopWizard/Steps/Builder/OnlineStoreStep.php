@@ -13,6 +13,7 @@ use Ceres\Wizard\ShopWizard\Config\OnlineStoreConfig;
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
+use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
 
 class OnlineStoreStep extends Step
 {
@@ -207,9 +208,13 @@ class OnlineStoreStep extends Step
      */
     private function buildStoreCalistoSettings(): array
     {
+        $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
+        $webstoreActive = $moduleRepo->isActive("webshop");
+
         return [
             "title" => "Wizard.settingsOldCalisto",
             "description" => "Wizard.settingsOldCalistoDescription",
+            "condition" => $webstoreActive,
             "form" => [
                 "onlineStore_enableCalisto" => [
                     "type" => "checkbox",
