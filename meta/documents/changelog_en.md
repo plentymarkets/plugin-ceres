@@ -1,5 +1,61 @@
 # Release Notes for Ceres
 
+## v4.2.0 (2019-08-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.2...4.2.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+-
+
+### Added
+
+- We added the following widgets for creating contact forms in the ShopBuilder: email form, text field (single line), text field (multiple lines), email field, selection, reCaptcha.
+- We added the ShopBuilder preset for the default contact page.
+- The widget "GoogleMaps" was relocated to the Ceres plugin. It now includes the setting "Map type": This setting makes it possible to display the map as a street map, satellite map, hybrid map, or terrain map.
+- We added the "Contact data" widget.
+- You can now determine the scrolling behaviour of the sticky widget. It can either scroll within its structure element or across the entire page.
+- The static pages for cancellation form, cancellation rights, general terms and conditions, privacy policy and legal disclosure can now be created and edited with the ShopBuilder.
+- We added the widget "Legal texts" to the ShopBuilder. This makes it possible to display the legal texts that are stored under **System » System settings » Client » Select client » Online store » Legal information**.
+- We added the widget "Print". This serves to open the browser's print dialogue box.
+- We added the ShopBuilder presets for the cancellation form, cancellation rights, general terms and conditions, privacy policy and legal disclosure.
+- The logo of the manufacturer is now available as a data field in the inline editor of the single item view.
+- You can now select the type of animation for the image carousel and the item image widgets.
+- .css and .js files now have a dynamic suffix, which makes it possible to remove them from browser caches when the plugin set is saved and published (Cache busting).
+
+### Changed
+
+- In order to improve performance, categories for the mobile navigation are only loaded, if a resolution of the screen has been reached, at which the categories are actually displayed.
+- The settings in the tab "Contact form" of the Ceres configuration have been marked as deprecated and have been removed. Th contact form is now created and managed via the ShopBuilder.
+- The attribute selection has been expanded by the option "Always display content selection". If this option is active, the selection of content for variations is always displayed, as long as the variation has more than one content.
+- The ShopBuilder container "Homepage" has been marked as deprecated. From now on, you need to create a new category for managing the homepage of your online store.
+- The "Add to shopping cart" button is now deactivated in the single item view if the selected variation cannot be purchased.
+- Items that are linked to an empty item template are now displayed in the default single item view layout of Ceres.
+- In order to save data traffic, only currently visible categories are transmitted to the browser while the page navigation is assembled.
+- The CSS is now loaded depending on the Ceres setting **Logging and performance » Performance level**. In development mode, the CSS is loaded completely; in live mode, the CSS is compressed. This ensures a smaller download size. We would like to thank @JVolke for his contribution.
+- The mobile navigation now initially displays the default category of the item on the single item view.
+
+### Fixed
+
+- The discount for the value of goods is now correctly calculated in the subtotals.
+- Discounts on individual items are now listed in the order confirmation and the order history.
+- The preset for the single item view caused errors on mobile devices. This has been fixed.
+- Due to an error, the timer of the shopping cart modal was not working as intended. This has been fixed.
+- If an item was linked to an item template for which no content had been stored in the tab Template, TWIG errors could occur when opening the single item view of the item. This has been fixed.
+- The title of the image box widget was not displayed correctly on mobile devices if the option "Image and text (full footer)" was active. This has been fixed.
+- Under certain circumstances, the title bar widget could issue an additional empty '<h1>' tag. This has been fixed.
+- Due to an error, item URLs were not displayed correctly if the option **Trailing slash** was active. This has ben fixed.
+- Under certain circumstance, rounding errors caused incorrect price displays. This has been fixed.
+- Due to an error, the newsletter widget caused the display of a number of faulty error notifications in the browser console.
+- The discount of items with the store special "Special offer" was calculated incorrectly if an active sales price was configured as a "Special offer" price. This has been fixed.
+- The "Add to basket" button is now visibly deactivated if an item can not be purchased.
+- The 'isVariationSelected' value in the SingleItem component is now correctly linked to the VueX module.
+- Special characters were not displayed correctly in the '<title>' tag. This has been fixed.
+- Selecting filters on category pages could lead to an error. This has been fixed.
+- The labels of the item sorting values "First update" and "Last update" were swapped. This has been fixed.
+- Due to an error, no error notifications were displayed in the shopping cart preview. This has been fixed.
+- Unsubscribing from the newsletter was not possible if the option **Trailing slash** was active. This has been fixed.
+- The settings for the automatic recognition of browser languages are now functioning correctly.
+- For the redemption of coupons, you can now save an information text in the **CMS » Multilingualism** menu, which is displayed if the customer is currently in the read only checkout. The corresponding key is "couponReadonlyInfoText".
+
 ## v4.1.2 (2019-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.1...4.1.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
