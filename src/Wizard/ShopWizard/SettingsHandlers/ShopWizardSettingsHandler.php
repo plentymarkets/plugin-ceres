@@ -19,6 +19,7 @@ use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
 
 
@@ -126,6 +127,13 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 }
 
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
+
+                // we save robotsTxt
+                if (!empty($data["seo_robotsTxt"])) {
+                    $robotsRepo = pluginApp(RobotsRepositoryContract::class);
+                    $robotsRepo->updateByWebstoreId($webstoreId, $data["seo_robotsTxt"]);
+
+                }
 
                 //we handle settings for shopping booster
 

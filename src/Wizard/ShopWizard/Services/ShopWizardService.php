@@ -14,6 +14,8 @@ use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
+use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
+use Plenty\Modules\Webshop\Seo\Models\Robots;
 use Plenty\Plugin\Translation\Translator;
 
 class ShopWizardService
@@ -123,6 +125,18 @@ class ShopWizardService
                         $globalData[$langKey] = $bLang;
                     }
                 }
+            }
+
+            //get content of robots txt
+            $robotsRepo = pluginApp(RobotsRepositoryContract::class);
+            $robotsTxt = $robotsRepo->findByWebstoreId($webstoreId);
+
+            if ($robotsTxt instanceof Robots) {
+                $robotsTxtData = $robotsTxt->toArray();
+                $globalData['seo_robotsTxt'] =
+                    is_array($robotsTxtData['value'])?
+                    $robotsTxtData['value']['value']:
+                    $robotsTxtData['value'];
             }
 
         }

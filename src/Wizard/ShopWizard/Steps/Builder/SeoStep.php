@@ -8,7 +8,6 @@
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
-
 use Ceres\Wizard\ShopWizard\Config\SeoConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
@@ -26,6 +25,7 @@ class SeoStep extends Step
             "condition" => " typeof settingsSelection_seo === 'undefined' || settingsSelection_seo === true",
             "sections" => [
                 $this->generateRobotSettingsSection(),
+                $this->generateRobotsTxtSection(),
                 $this->generateAvailabilitiesSection()
             ]
         ];
@@ -166,5 +166,31 @@ class SeoStep extends Step
             ];
         }
         return $formFields;
+    }
+
+    public function generateRobotsTxtSection(): array
+    {
+
+        $robotsDefault = 'User-agent: *'.chr(10);
+        $robotsDefault .= 'Disallow: /plenty/'.chr(10);
+        $robotsDefault .= 'Allow: /plenty/api/external.php'.chr(10);
+        $robotsDefault .= 'Disallow: /xml/'.chr(10);
+        $robotsDefault .= 'Sitemap: '.DOM_SSL.'/sitemap.xml'.chr(10);
+
+        return [
+            "title" => "Wizard.robotsTxt",
+            "description" => "Wizard.robotsTxtDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "seo_robotsTxt" => [
+                    "type" => "textarea",
+                    "defaultValue" => $robotsDefault,
+                    "options" => [
+                        "name" => "Wizard.robotsTxt",
+                        "maxRows" => 15,
+                    ]
+                ]
+            ]
+        ];
     }
 }
