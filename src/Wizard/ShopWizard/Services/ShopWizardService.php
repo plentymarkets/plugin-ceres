@@ -8,6 +8,8 @@
 
 namespace Ceres\Wizard\ShopWizard\Services;
 
+use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
+use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 //use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
@@ -19,7 +21,6 @@ use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Models\Robots;
 use Plenty\Modules\Webshop\Seo\Models\SitemapConfiguration;
-use Plenty\Plugin\Translation\Translator;
 
 class ShopWizardService
 {
@@ -45,18 +46,17 @@ class ShopWizardService
         $webstoresPluginSetIds = array_column($webstores, 'pluginSetId');
 
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
-        $translator = pluginApp(Translator::class);
-
         $pluginSets = $pluginSetRepo->list();
+        $wizardConfRepo = pluginApp(ShopWizardConfigRepository::class);
 
         foreach($pluginSets as $pluginSet) {
             foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
-                $pluginSetEntryConfig = $pluginSetEntry->configurations()->getResults();
+                $previewConfig = $wizardConfRepo->getConfig($pluginSetEntry->pluginSetId);
                 if (
                     $pluginSetEntry instanceof PluginSetEntry &&
                     $pluginSetEntry->plugin->name === 'Ceres' &&
                     !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
-                    count($pluginSetEntryConfig)
+                    $previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted
                 ) {
                     $webstores[] = [
                         'id' => 'preview',

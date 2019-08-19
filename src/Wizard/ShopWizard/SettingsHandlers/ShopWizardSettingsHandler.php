@@ -9,6 +9,8 @@
 namespace Ceres\Wizard\ShopWizard\SettingsHandlers;
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
+use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
+use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Ceres\Wizard\ShopWizard\Services\MappingService;
 use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheInvalidationRepositoryContract;
@@ -192,6 +194,23 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 }
 
                 $configRepo->saveConfiguration($pluginId, $configData, $pluginSetId);
+
+                // we set the preview config entry
+
+                $previewConfigRepo = pluginApp(ShopWizardConfigRepository::class);
+                $previewConfData = [
+                    "pluginSetId" => $pluginSetId,
+                    "deleted" => false
+                ];
+
+                $previewConf = $previewConfigRepo->getConfig($pluginSetId);
+                if ($previewConf instanceof ShopWizardPreviewConfiguration) {
+                    $previewConfigRepo->updateConfig($pluginSetId, $previewConfData);
+                } else {
+                    $previewConfigRepo->createConfig($previewConfData);
+                }
+
+
             }
 
             //invalidate caching

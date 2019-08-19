@@ -8,6 +8,8 @@
 
 namespace Ceres\Wizard\ShopWizard\DataSource;
 
+use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
+use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
@@ -119,19 +121,13 @@ class ShopWizardDataSource extends BaseWizardDataSource
         list($webstorePrefix, $webstoreId) = explode('_', $webstore);
         list($pluginSetPrefix, $pluginSetId) = explode('_', $pluginSet);
 
-        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
-        $pluginSets = $pluginSetRepo->list();
+        $previewConfRepo = pluginApp(ShopWizardConfigRepository::class);
+        $confToDelete = $previewConfRepo->getConfig($pluginSetId);
 
-        foreach($pluginSets as $pluginSet) {
-            foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
-                if ($pluginSetEntry instanceof PluginSetEntry &&
-                    $pluginSetEntry->pluginSetId == $pluginSetId &&
-                    $pluginSetEntry->plugin->name === 'Ceres'
-                ) {
-                   $pluginSetEntry->configurations()->delete();
-                }
-            }
+        if ($confToDelete instanceof ShopWizardPreviewConfiguration) {
+            $previewConfRepo->deleteConfig($pluginSetId, true);
         }
+
     }
 
 }
