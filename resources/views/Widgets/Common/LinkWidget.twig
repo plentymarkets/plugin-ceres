@@ -1,6 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
-{% import "Ceres::Widgets.Helper.LinkHelper" as LinkHelper %}
 
 {% set icon            = widget.settings.icon.mobile %}
 {% set size            = widget.settings.dimensions.size.mobile %}
@@ -16,11 +15,8 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{% set params = LinkHelper.getLinkParams(url.value.mobile) %}
-
-
 {% if url.type.mobile == 'internalLink' %}
-    {{ Twig.set('real_url', Twig.call("services.url.getInternalLink", [url.value.mobile, params])) }}
+    {{ Twig.set('real_url', Twig.call("services.url.getInternalLink", [url.value.mobile, Twig.var('data')])) }}
 {% else %}
     {{ WidgetHelper.setUrlVariable('real_url', url.value.mobile, url.type.mobile) }}
 {% endif %}

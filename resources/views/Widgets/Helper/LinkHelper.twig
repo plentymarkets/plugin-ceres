@@ -1,9 +1,0 @@
-{% macro getLinkParams(internalLink) %}
-    {%- if internalLink == "retoure" and services.template.getCurrentTemplate() == 'tpl.confirmation' -%}
-        {{- _self.getOrderParams() -}}
-    {%- endif -%}
-{% endmacro %}
-
-{% macro getOrderParams() %}
-    {{- [orderId] -}}
-{% endmacro %}
