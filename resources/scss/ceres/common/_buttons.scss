@@ -254,27 +254,26 @@ button:focus {
 // Responsive button text and icon visibility
 
 @each $bp in map-keys($grid-breakpoints) {
-	.btn-only-icon-#{$bp}-up {
-	  @include media-breakpoint-up($bp) {
-		width: 2.2rem !important;
+    .btn-only-icon-#{$bp}-up {
+        @include media-breakpoint-up($bp) {
+        width: 2.2rem !important;
         padding-right: 8px;
         height: 2.2rem;
 
         & span {
             display: none !important;
         }
-	  }
-	}
-	.btn-only-icon-#{$bp}-down {
-	  @include media-breakpoint-down($bp) {
+        }
+    }
+    .btn-only-icon-#{$bp}-down {
+        @include media-breakpoint-down($bp) {
         & span {
-			display: none !important;
-		}
-		i {
-			margin: 0 !important;
-			float: none !important;
-		}
-	  }
-	}
-  }
-  
+            display: none !important;
+        }
+        i {
+            margin: 0 !important;
+            float: none !important;
+        }
+        }
+    }
+}
