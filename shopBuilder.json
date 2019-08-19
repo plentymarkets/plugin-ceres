@@ -40,6 +40,30 @@
             {
                 "label": "Widget.presetHomepageDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
+            },
+            {
+                "label": "Widget.presetCancellationRightsDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationRightsPreset"
+            },
+            {
+                "label": "Widget.presetCancellationFormDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationFormPreset"
+            },
+            {
+                "label": "Widget.presetLegalDisclosureDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultLegalDisclosurePreset"
+            },
+            {
+                "label": "Widget.presetPrivacyPolicyDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset"
+            },
+            {
+                "label": "Widget.presetGTCDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
+            },
+            {
+                "label": "Widget.presetContactDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
             }
         ],
         "checkout": [
@@ -112,50 +136,231 @@
             "position": 900
         },
         {
+            "key": "form",
+            "label": "Widget.categoryForm",
+            "position": 1000
+        },
+        {
+            "key": "contact",
+            "label": "Widget.categoryContact",
+            "position": 1100
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
-            "position": 1000
+            "position": 10000
         }
     ],
     "globalSettings": {
-        "shippingCategory": {
-            "type": "category",
-            "required": false,
-            "defaultValue": null,
+        "routing": {
+            "type": "vertical",
             "options": {
-                "name": "Config.globalShippingCostsCategoryIdLabel"
+                "name": "Config.routing"
+            },
+            "children": {
+                "homeCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryHome"
+                    }
+                },
+                "homeEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.homeCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteHome"
+                    }
+                },
+                "checkoutCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryCheckout"
+                    }
+                },
+                "checkoutEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.checkoutCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteCheckout"
+                    }
+                },
+                "myAccountCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryMyAccount"
+                    }
+                },
+                "myAccountEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.myAccountCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteMyAccount"
+                    }
+                },
+                "cancellationRightsCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryCancellationRights"
+                    }
+                },
+                "cancellationRightsEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.cancellationRightsCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteCancellationRights"
+                    }
+                },
+                "cancellationFormCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryCancellationForm"
+                    }
+                },
+                "cancellationFormEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.cancellationFormCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteCancellationForm"
+                    }
+                },
+                "legalDisclosureCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryLegalDisclosure"
+                    }
+                },
+                "legalDisclosureEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.legalDisclosureCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteLegalDisclosure"
+                    }
+                },
+                "privacyPolicyCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryPrivacyPolicy"
+                    }
+                },
+                "privacyPolicyEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.privacyPolicyCategory",
+                    "options": {
+                        "name": "Config.routingEnableRoutePrivacyPolicy"
+                    }
+                },
+                "gtcCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryGtc"
+                    }
+                },
+                "gtcEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.gtcCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteGtc"
+                    }
+                },
+                "contactCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryContact"
+                    }
+                },
+                "contactEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.contactCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteContact"
+                    }
+                },
+                "shippingCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.globalShippingCostsCategoryIdLabel"
+                    }
+                }
             }
         },
-        "checkoutCategory": {
-            "type": "category",
-            "required": false,
-            "defaultValue": null,
+        "grecaptcha": {
+            "type": "vertical",
             "options": {
-                "name": "Config.routingCategoryCheckout"
-            }
-        },
-        "checkoutEnableRoute": {
-            "type": "checkbox",
-            "required": false,
-            "isVisible": "!checkoutCategory",
-            "options": {
-                "name": "Config.routingEnableRouteCheckout"
-            }
-        },
-        "myAccountCategory": {
-            "type": "category",
-            "required": false,
-            "defaultValue": null,
-            "options": {
-                "name": "Config.routingCategoryMyAccount"
-            }
-        },
-        "myAccountEnableRoute": {
-            "type": "checkbox",
-            "required": false,
-            "isVisible": "!myAccountCategory",
-            "options": {
-                "name": "Config.routingEnableRouteMyAccount"
+                "name": "Config.grecaptcha"
+            },
+            "children": {
+                "version": {
+                    "type": "select",
+                    "required": false,
+                    "defaultValue": 2,
+                    "options": {
+                        "name": "Config.globalGoogleRecaptchaVersionLabel",
+                        "listBoxValues": [
+                            {
+                                "value": 2,
+                                "caption": "Config.globalGoogleRecaptchaVersion2Invisible"
+                            },
+                            {
+                                "value": 3,
+                                "caption": "Config.globalGoogleRecaptchaVersion3"
+                            }
+                        ]
+                    }
+                },
+                "apikey": {
+                    "type": "text",
+                    "required": false,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Config.globalGoogleRecaptchaApiKeyLabel"
+                    }
+                },
+                "secret": {
+                    "type": "text",
+                    "required": false,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Config.globalGoogleRecaptchaSecretLabel"
+                    }
+                },
+                "threshold": {
+                    "type": "number",
+                    "required": false,
+                    "defaultValue": 0.5,
+                    "isVisible": "grecaptcha.version === 3",
+                    "options": {
+                        "name": "Config.globalGoogleRecaptchaThreshold"
+                    }
+                }
             }
         }
     },

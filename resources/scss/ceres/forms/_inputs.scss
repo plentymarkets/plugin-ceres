@@ -336,6 +336,25 @@ $border-width: 1px;
     }
 }
 
+.select-unit
+{
+    > label
+    {
+        margin-bottom: .1rem;
+        font-weight: bold;
+    }
+
+    .form-check
+    {
+        margin-bottom: 0;
+    }
+
+    &.error
+    {
+        color: $danger;
+    }
+}
+
 .input-feedback-container
 {
     margin-bottom: $grid-gutter-width/2;

@@ -10,10 +10,15 @@ namespace Ceres\Wizard\ShopWizard\Services;
 
 use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
+//use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
+use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
+use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
+use Plenty\Modules\Webshop\Seo\Models\Robots;
+use Plenty\Modules\Webshop\Seo\Models\SitemapConfiguration;
 use Plenty\Plugin\Translation\Translator;
 
 class ShopWizardService
@@ -110,22 +115,52 @@ class ShopWizardService
                 }
             }
 
-            //need to refactor after we have implemented Ceres browser languages
-//            if (count($globalData['languages_defaultBrowserLang'])) {
-//                $globalData['languages_setLinkedStoreLanguage'] = true;
-//                $browserLanguage = $globalData['languages_defaultBrowserLang'];
-//
-//                //now we extract data related from browser language
-//                foreach ($browserLanguage as $bLangKey => $bLang) {
-//                    if ($bLangKey == 'other') {
-//                        $globalData['languages_defaultBrowserLang'] = $bLang;
-//                    } else {
-//                        $langKey = "languages_browserLang_{$bLangKey}";
-//                        $globalData[$langKey] = $bLang;
-//                    }
-//                }
-//            }
+            if (count($globalData['languages_defaultBrowserLang'])) {
+                $globalData['languages_setLinkedStoreLanguage'] = true;
+                $browserLanguage = $globalData['languages_defaultBrowserLang'];
 
+                //now we extract data related from browser language
+                foreach ($browserLanguage as $bLangKey => $bLang) {
+                    if ($bLangKey == 'other') {
+                        $globalData['languages_defaultBrowserLang'] = $bLang;
+                    } else {
+                        $langKey = "languages_browserLang_{$bLangKey}";
+                        $globalData[$langKey] = $bLang;
+                    }
+                }
+            }
+
+            //get content of robots txt
+            $robotsRepo = pluginApp(RobotsRepositoryContract::class);
+            $robotsTxt = $robotsRepo->findByWebstoreId($webstoreId);
+
+            if ($robotsTxt instanceof Robots) {
+                $robotsTxtData = $robotsTxt->toArray();
+                $globalData['seo_robotsTxt'] =
+                    is_array($robotsTxtData['value'])?
+                    $robotsTxtData['value']['value']:
+                    $robotsTxtData['value'];
+            }
+
+            // get sitemap data
+            $siteMapConfigRepo = pluginApp(SitemapConfigurationRepositoryContract::class);
+            $siteMapConfig = $siteMapConfigRepo->findByWebstoreId($webstoreId);
+
+            if ($siteMapConfig instanceof SitemapConfiguration) {
+                $siteMapConfigData = $siteMapConfig->toArray();
+                $globalData['seo_siteMapConfig'] = [];
+
+                foreach ($siteMapConfigData as $configKey => $configStatus) {
+                    if ($configStatus) {
+                        $globalData['seo_siteMapConfig'][] = $configKey;
+                    }
+                }
+            }
+
+            //get search languages
+
+//            $searchLangRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
+//            $languages = $searchLangRepo->getLanguages();
         }
 
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
@@ -176,7 +211,7 @@ class ShopWizardService
 
             if ($shopBooster instanceOf ContentCacheSettings) {
                 $shopBoosterData = $shopBooster->toArray();
-                $data['performance_shopBooster'] = $shopBoosterData['contentCacheActive'];
+                $data['performance_shopBooster'] = (bool) $shopBoosterData['contentCacheActive'];
             }
         }
 

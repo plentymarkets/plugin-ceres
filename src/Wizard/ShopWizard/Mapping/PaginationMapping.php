@@ -20,13 +20,13 @@ class PaginationMapping
         ],
         "paginationStep_showFirstPage" => [
             "field" => "pagination.showFirstPage",
-            "type" => "string",
+            "type" => "boolean",
             "global" => false,
             "optional" => true,
         ],
         "paginationStep_showLastPage" => [
             "field" => "pagination.showLastPage",
-            "type" => "string",
+            "type" => "boolean",
             "global" => false,
             "optional" => true,
         ],

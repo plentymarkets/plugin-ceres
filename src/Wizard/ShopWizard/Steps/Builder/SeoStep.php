@@ -8,7 +8,6 @@
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
-
 use Ceres\Wizard\ShopWizard\Config\SeoConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
@@ -23,9 +22,12 @@ class SeoStep extends Step
         return [
             "title" => "Wizard.seoSettings",
             "description" => "Wizard.seoSettingsDescription",
-            "condition" => " typeof settingsSelection_seo === 'undefined' || settingsSelection_seo === true",
+            "condition" => " (typeof settingsSelection_seo === 'undefined' || " .
+                "settingsSelection_seo === true) && " . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateRobotSettingsSection(),
+                $this->generateRobotsTxtSection(),
+                $this->generateSiteMapSection(),
                 $this->generateAvailabilitiesSection()
             ]
         ];
@@ -166,5 +168,65 @@ class SeoStep extends Step
             ];
         }
         return $formFields;
+    }
+
+    /**
+     * @return array
+     */
+    public function generateRobotsTxtSection(): array
+    {
+
+        $robotsDefault = 'User-agent: *'.chr(10);
+        $robotsDefault .= 'Disallow: /plenty/'.chr(10);
+        $robotsDefault .= 'Allow: /plenty/api/external.php'.chr(10);
+        $robotsDefault .= 'Disallow: /xml/'.chr(10);
+        $robotsDefault .= 'Sitemap: '.DOM_SSL.'/sitemap.xml'.chr(10);
+
+        return [
+            "title" => "Wizard.robotsTxt",
+            "description" => "Wizard.robotsTxtDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "seo_robotsTxt" => [
+                    "type" => "textarea",
+                    "defaultValue" => $robotsDefault,
+                    "options" => [
+                        "name" => "Wizard.robotsTxt",
+                        "maxRows" => 15,
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function generateSiteMapSection(): array
+    {
+        $siteMapData = SeoConfig::getSiteMapOptions();
+        $siteMapOptions = StepHelper::generateTranslatedListBoxValues($siteMapData);
+
+
+        return [
+            "title" => "Wizard.siteMapXml",
+            "description" => "Wizard.siteMapXmlDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "seo_siteMapConfig" => [
+                    "type" => "checkboxGroup",
+                    "defaultValue" => [
+                        $siteMapOptions[0]["value"],
+                        $siteMapOptions[1]["value"],
+                        $siteMapOptions[2]["value"],
+                        $siteMapOptions[3]["value"],
+                    ],
+                    "options" =>[
+                        "name" => "Wizard.siteMapXml",
+                        "checkboxValues" => $siteMapOptions
+                    ]
+                ]
+            ]
+        ];
     }
 }

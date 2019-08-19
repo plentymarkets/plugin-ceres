@@ -22,7 +22,8 @@ class SearchStep extends Step
         return [
             "title" => "Wizard.searchStep",
             "description" => "Wizard.searchStepDescription",
-            "condition" => " typeof settingsSelection_search === 'undefined' || settingsSelection_search === true",
+            "condition" => " (typeof settingsSelection_search === 'undefined' || " .
+                "settingsSelection_search === true) && " . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
             "sections" => [
 //                $this->generateSearchFieldsSection(),
                 $this->generateSortingSearchSection()

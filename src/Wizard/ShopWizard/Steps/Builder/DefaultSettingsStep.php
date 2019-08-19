@@ -19,8 +19,6 @@ use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
 
 class DefaultSettingsStep extends Step
 {
-
-
     /**
      * @var PaymentRepositoryContract
      */
@@ -182,25 +180,34 @@ class DefaultSettingsStep extends Step
     private function generateCountriesList($countriesCollection): array
     {
         $list = [];
+    
+        $languages = LanguagesHelper::getTranslatedLanguages();
+        $countryNames = $this->countryRepository->getActiveCountryNameMap(LanguagesHelper::getUserLang());
 
         if (count($countriesCollection)) {
-            foreach ($countriesCollection as $country) {
-                $countryData = $country->toArray();
-                $languages = LanguagesHelper::getTranslatedLanguages();
-                $key = 'defSettings_deliveryCountry_' . $countryData['lang'];
-                $list[$key] = [
-                    "type" => "select",
-                    "options" => [
-                        "name" => $languages[$countryData['lang']],
-                        'required' => true,
-                        "listBoxValues" => [
-                            [
-                                "value" => $countryData['id'],
-                                "caption" => $countryData['name']
-                            ]
+            foreach ($languages as $langKey => $language) {
+                $settingKey = 'defSettings_deliveryCountry_' . $langKey;
+    
+                $countries = $countriesCollection->where('lang', $langKey);
+                
+                if(count($countries)) {
+                    $list[$settingKey] = [
+                        "type" => "select",
+                        "options" => [
+                            "name" => $language,
+                            'required' => true,
+                            "listBoxValues" => []
                         ]
-                    ]
-                ];
+                    ];
+                    
+                    foreach($countries as $country) {
+                        $countryData = $country->toArray();
+                        $list[$settingKey]['options']['listBoxValues'][] = [
+                            "value" => $countryData['id'],
+                            "caption" => $countryNames[$countryData['id']]
+                        ];
+                    }
+                }
             }
         }
 

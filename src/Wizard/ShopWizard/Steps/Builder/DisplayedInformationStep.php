@@ -23,7 +23,8 @@ class DisplayedInformationStep extends Step
         return [
             "title" => "Wizard.displayedInfoSettings",
             "description" => "Wizard.displayedInfoSettingsDescription",
-            "condition" => " typeof settingsSelection_displayedInfo === 'undefined' || settingsSelection_displayedInfo === true",
+            "condition" => " (typeof settingsSelection_displayedInfo === 'undefined' || " .
+                "settingsSelection_displayedInfo === true) &&  " . $this->hasRequiredSettings() ,
             "sections" => [
                 $this->generateItemSection(),
                 $this->generateDecimalPlacesSection(),

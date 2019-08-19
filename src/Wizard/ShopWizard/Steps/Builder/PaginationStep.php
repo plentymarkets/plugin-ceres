@@ -22,7 +22,8 @@ class PaginationStep extends Step
         return [
             "title" => "Wizard.paginationStep",
             "description" => "Wizard.paginationStepDescription",
-            "condition" => " typeof settingsSelection_paginationSorting === 'undefined' || settingsSelection_paginationSorting === true",
+            "condition" => " (typeof settingsSelection_paginationSorting === 'undefined' || " .
+                "settingsSelection_paginationSorting === true) && " . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generatePaginationSection(),
                 $this->generateSortingSection()
@@ -67,14 +68,14 @@ class PaginationStep extends Step
                         "name" => "Wizard.paginationShowLastPage",
                     ]
                 ],
-                "paginationStep_columnsPerPage" => [
-                    "type" => "select",
-                    "defaultValue" => $paginationPositionOptions[0]['value'],
-                    "options" => [
-                        "name" => "Wizard.paginationColumnsPerPage",
-                        "listBoxValues" => $paginationPositionOptions
-                    ]
-                ],
+//                "paginationStep_columnsPerPage" => [
+//                    "type" => "select",
+//                    "defaultValue" => $paginationPositionOptions[0]['value'],
+//                    "options" => [
+//                        "name" => "Wizard.paginationColumnsPerPage",
+//                        "listBoxValues" => $paginationPositionOptions
+//                    ]
+//                ],
                 "paginationStep_rowsPerPage" => [
                     "type" => "checkboxGroup",
                     "defaultValue" => [

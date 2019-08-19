@@ -1,0 +1,47 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set formFieldId     = widget.settings.key.mobile | default(uid()) %}
+{% set isRequired      = widget.settings.isRequired.mobile %}
+{% set label           = widget.settings.label.mobile %}
+{% set allowMailCC     = widget.settings.allowMailCC.mobile %}
+{% set replyToMail     = widget.settings.replyToMail.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+{% set uid_check = uid() %}
+
+<div class="widget widget-mail-input
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    
+    <div class="input-unit{% if isRequired %} required{% endif %}{% if allowMailCC %} m-b-0{% endif %}" {% if isRequired %}data-validate="mail"{% endif %}>
+        <input name="{{ formFieldId }}"
+               type="text"
+               id="{{ formFieldId }}">
+
+        <label for="{{ formFieldId }}">
+            {{ label }}{% if isRequired %}*{% endif %}
+        </label>
+
+    </div>
+
+    {% if allowMailCC %}
+        <div class="form-check mt-1 mb-2">
+            <input class="form-check-input"
+                   data-mail="cc"
+                   value="{{ formFieldId }}"
+                   type="checkbox"
+                   id="{{ uid_check }}">
+            <label class="form-check-label"
+                   for="{{ uid_check }}">
+                {{ trans("Ceres::Template.contactSendMeACopy") }}
+            </label>
+        </div>
+    {% endif %}
+
+    {% if replyToMail %}
+        <input type="hidden" data-mail="reply-to-address" value="{{ formFieldId }}">
+    {% endif %}
+</div>

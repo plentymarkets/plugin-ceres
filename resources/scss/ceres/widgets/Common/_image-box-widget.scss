@@ -81,19 +81,13 @@
 
             .widget-caption
             {
-                @include media-breakpoint-only(xs) {
-                    position: relative;
-                    width: 100%;
-                }
-
                 position: absolute;
                 left: 0;
                 right: 0;
                 bottom: 0;
                 width: 100%;
                 padding: 1rem;
-                position: absolute;
-                bottom: 0;
+                max-height: 100%;
             }
         }
     }

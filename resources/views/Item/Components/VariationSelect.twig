@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-variation-select">
     <div>
-        <div v-if="attributes.length || Object.keys(units).length" class="row">
+        <div v-if="attributes.length || Object.keys(possibleUnits).length > 1" class="row">
             <div class="col-12 variation-select" v-for="attribute in attributes">
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
@@ -47,11 +47,11 @@
             </div>
 
             <!-- units -->
-            <div class="col-12 variation-select" v-if="Object.keys(units).length > 1">
+            <div class="col-12 variation-select" v-if="Object.keys(possibleUnits).length > 1">
                 <div class="input-unit">
                     <select class="custom-select" @change="selectUnit($event.target.value)">
                         <option
-                            v-for="(unit, unitId) in units"
+                            v-for="(unit, unitId) in possibleUnits"
                             :value="unitId"
                             :selected="parseInt(unitId) === selectedUnit">
                             <template v-if="isUnitSelectionValid(unitId)">

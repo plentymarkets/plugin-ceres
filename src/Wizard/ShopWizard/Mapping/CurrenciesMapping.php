@@ -26,7 +26,7 @@ class CurrenciesMapping
         ],
         "currencies_allowCurrencyChange" => [
             "field" => "currency.enable_selection",
-            "type" => "string",
+            "type" => "boolean",
             "global" => false,
             "optional" => false,
         ],

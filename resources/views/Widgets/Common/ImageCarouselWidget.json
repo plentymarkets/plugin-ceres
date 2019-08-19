@@ -14,6 +14,25 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
+        "animationStyle": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "standard",
+            "options": {
+                "name": "Widget.imageCarouselAnimationStyleLabel",
+                "tooltipText": "Widget.imageCarouselAnimationStyleTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "standard",
+                        "caption": "Widget.imageCarouselAnimationStyleSlide"
+                    },
+                    {
+                        "value": "fade",
+                        "caption": "Widget.imageCarouselAnimationStyleFade"
+                    }
+                ]
+            }
+        },
         "aspectRatio": {
             "type": "select",
             "required": true,

@@ -177,21 +177,31 @@
                             {% set itemPrice = 0 %}
                             {% if orderData.highlightNetPrices %}
                                 {% set itemPrice = itemAmount.priceOriginalNet %}
+                                {% set discountAmount = itemAmount.priceOriginalNet - itemAmount.priceNet %}
+                                {% set itemPriceTotal = item.quantity * itemAmount.priceNet %}
                             {% else %}
                                 {% set itemPrice = itemAmount.priceOriginalGross %}
+                                {% set discountAmount = itemAmount.priceOriginalGross - itemAmount.priceGross %}
+                                {% set itemPriceTotal = item.quantity * itemAmount.priceGross %}
                             {% endif %}
 
                             <div class="row">
                                 <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
-                                <span class="col-6 col-sm-9 col-md-7">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
+                                <span class="col-6 col-sm-9 col-md-7 text-right">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
                             </div>
+                            {% if discountAmount > 0 %}
+                                <div class="row rebate-hint">
+                                    <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationItemDiscount") }}</strong>
+                                    <span class="col-6 col-sm-9 col-md-7 text-right">{{ discountAmount | formatMonetary( itemAmount.currency ) }}</span>
+                                </div>
+                            {% endif %}
                             <div class="row">
                                 <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
-                                <span class="col-6 col-sm-9 col-md-7">{{ item.quantity }}</span>
+                                <span class="col-6 col-sm-9 col-md-7 text-right">{{ item.quantity }}</span>
                             </div>
                             <div class="row">
                                 <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
-                                <strong class="col-6 col-sm-9 col-md-7">{{ (item.quantity * itemPrice) | formatMonetary( itemAmount.currency ) }}</strong>
+                                <strong class="col-6 col-sm-9 col-md-7 text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</strong>
                             </div>
                             {% if item.orderProperties %}
                                 {% for property in item.orderProperties %}

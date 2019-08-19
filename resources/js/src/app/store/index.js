@@ -1,6 +1,7 @@
 import address from "store/modules/AddressModule";
 import basket from "store/modules/BasketModule";
 import checkout from "store/modules/CheckoutModule";
+import contactForm from "store/modules/ContactForm";
 import item from "store/modules/SingleItemModule";
 import itemList from "store/modules/ItemListModule";
 import lastSeen from "store/modules/LastSeenModule";
@@ -25,6 +26,7 @@ const store = new Vuex.Store(
             address,
             basket,
             checkout,
+            contactForm,
             item,
             itemList,
             lastSeen,
