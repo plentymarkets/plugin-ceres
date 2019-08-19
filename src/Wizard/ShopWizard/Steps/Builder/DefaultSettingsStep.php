@@ -16,6 +16,7 @@ use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
 use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
+use Plenty\Plugin\Translation\Translator;
 
 class DefaultSettingsStep extends Step
 {
@@ -85,6 +86,13 @@ class DefaultSettingsStep extends Step
 
 
         $b2bClasses  = $this->classRepository->allContactClasses();
+        if(!count($b2bClasses))
+        {
+            /** @var Translator $translator */
+            $translator = pluginApp(Translator::class);
+            $b2bClasses[0] = $translator->trans('Ceres::Wizard.defaultCustomerClass');
+        }
+        
         $b2bClassesList = StepHelper::buildListBoxData($b2bClasses);
 
         $locations = $this->locationRepository->getAll();
