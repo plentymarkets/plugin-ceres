@@ -173,7 +173,7 @@ class OnlineStoreStep extends Step
         
         return [
             "title" => "Wizard.ordersSettings",
-            "description" => "Wizard.emailSettingsDescription",
+            "description" => "Wizard.ordersSettingsDescription",
             "form" => [
                 "onlineStore_itemBundles" => [
                     "type" => "select",
