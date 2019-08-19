@@ -63,7 +63,7 @@ class SettingsSelectionStep extends Step
             "type" => "toggle",
             "defaultValue" => false,
             "options" => [
-                "name" => "Wizard." . $name . "Settings"
+                "name" => "Wizard." . $name . "SettingsSelection"
             ]
         ];
     }
