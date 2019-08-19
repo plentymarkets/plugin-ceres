@@ -95,10 +95,6 @@ class LanguagesStep extends Step
     private function generateFormLanguagesSelection(): array
     {
         $languageOptions = StepHelper::buildListBoxData($this->languages);
-        array_unshift($languageOptions, [
-            "caption" => "Wizard.noChange",
-            "value" => ""
-        ]);
         $formFields = [
             "languages_defaultBrowserLang" => [
                 "type" => "select",
@@ -110,6 +106,10 @@ class LanguagesStep extends Step
             ]
         ];
 
+        array_unshift($languageOptions, [
+            "caption" => "Wizard.noChange",
+            "value" => ""
+        ]);
         foreach ($this->languages as $langKey => $language) {
             $key = "languages_browserLang_{$langKey}";
             $translateKey = "browserLang" . ucfirst($langKey);
