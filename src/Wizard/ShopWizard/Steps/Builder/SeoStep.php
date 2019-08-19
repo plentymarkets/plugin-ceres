@@ -44,62 +44,6 @@ class SeoStep extends Step
             "title" => "Wizard.robotSettings",
             "description" => "Wizard.robotSettingsDescription",
             "form" => [
-                "seo_robotsHome" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsHomePage",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsContact" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsContactPage",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsCancelRights" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsCancelRights",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsCancelForm" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsCancelForm",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsLegalDisclosure" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsLegalDisclosure",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsPrivacyPolicy" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsPrivacyPolicy",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsTermsAndConditions" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsTermsAndConditions",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
                 "seo_robotsSearchResult" => [
                     "type" => "select",
                     "defaultValue" => $metaOptions[0]["value"],
