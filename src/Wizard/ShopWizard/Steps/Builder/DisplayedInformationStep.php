@@ -172,6 +172,7 @@ class DisplayedInformationStep extends Step
                 "displayInfo_showCarouselDots" => [
                     "type" => "checkbox",
                     "defaultValue" => false,
+                    "isVisible" => "!!displayInfo_enableImageCarousel",
                     "options" => [
                         "name" => "Wizard.showCarouselDots",
                     ]
@@ -179,6 +180,7 @@ class DisplayedInformationStep extends Step
                 "displayInfo_showCarouselNav" => [
                     "type" => "checkbox",
                     "defaultValue" => false,
+                    "isVisible" => "!!displayInfo_enableImageCarousel",
                     "options" => [
                         "name" => "Wizard.showCarouselNav",
                     ]
