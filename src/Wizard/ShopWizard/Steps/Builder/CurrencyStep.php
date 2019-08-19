@@ -17,20 +17,21 @@ use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 
 class CurrencyStep extends Step
 {
-    /**
-     * @var CurrencyConfig
-     */
-    private $currencyConfig;
+    private $currencies = [];
 
     /**
      * CurrencyStep constructor.
      *
-     * @param CurrencyConfig $currencyConfig
+     * @param CurrencyRepositoryContract $currencyRepositoryContract
      */
-    public function __construct(CurrencyConfig $currencyConfig)
+    public function __construct(CurrencyRepositoryContract $currencyRepositoryContract)
     {
         parent::__construct();
-        $this->currencyConfig = $currencyConfig;
+        $currencyList = $currencyRepositoryContract->getCurrencyList();
+        foreach($currencyList as $currency)
+        {
+            $this->currencies[] = $currency->currency;
+        }
     }
 
     /**
@@ -56,13 +57,11 @@ class CurrencyStep extends Step
      */
     private function generateCurenciesSection(): array
     {
-        $currencyRepo = pluginApp(CurrencyRepositoryContract::class);
-
         return [
             "title" => "Wizard.defaultCurrencies",
             "description" => "Wizard.defaultCurrenciesDescription",
             "condition" => $this->globalsCondition,
-            "form" => $this->generateCurenciesList($currencyRepo->getCurrencyList())
+            "form" => $this->generateCurenciesList()
         ];
     }
 
@@ -71,48 +70,38 @@ class CurrencyStep extends Step
      *
      * @return array
      */
-    private function generateCurenciesList($currenciesCollection): array
+    private function generateCurenciesList(): array
     {
         $list = [];
-        if (count($currenciesCollection)) {
-            $languages = LanguagesHelper::getTranslatedLanguages();
-            $currenciesList = $this->getCurrenciesListValues($currenciesCollection);
-            foreach ($languages as $langCode => $language) {
-                $key = 'currencies_defaultCurrency_' . $langCode;
-                $list[$key] = [
-                    "type" => "select",
-                    "defaultValue" => 'EUR',
-                    "options" => [
-                        "name" => $language,
-                        "listBoxValues" => $currenciesList
-                    ]
-                ];
-            }
+        $languages = LanguagesHelper::getTranslatedLanguages();
+        $currenciesList = $this->getCurrenciesListValues();
+        foreach ($languages as $langCode => $language) {
+            $key = 'currencies_defaultCurrency_' . $langCode;
+            $list[$key] = [
+                "type" => "select",
+                "defaultValue" => 'EUR',
+                "options" => [
+                    "name" => $language,
+                    "listBoxValues" => $currenciesList
+                ]
+            ];
         }
 
         return $list;
     }
 
     /**
-     * @param $currencyCollection
-     *
      * @return array
      */
-    private function getCurrenciesListValues ($currencyCollection): array
+    private function getCurrenciesListValues (): array
     {
         $currenciesList = [];
 
-        if (count($currencyCollection)) {
-            foreach($currencyCollection as $currency) {
-                $currencyData = $currency->toArray();
-                if ($currencyData['isActive'] === true) {
-                    $currenciesList[] = [
-                        'value' => $currencyData['currency'],
-                        'caption' => $currencyData['currency']
-                    ];
-                }
-
-            }
+        foreach($this->currencies as $currency) {
+            $currenciesList[] = [
+                'value' => $currency,
+                'caption' => 'Wizard.currencyAvailable'. $currency
+            ];
         }
 
         return $currenciesList;
@@ -157,8 +146,8 @@ class CurrencyStep extends Step
      */
     private function generateAvailableCurrenciesSection(): array
     {
-        $availableCurrencies = $this->currencyConfig->getAvailableCurrencies();
-        $availableCurrenciesList = StepHelper::generateTranslatedListBoxValues($availableCurrencies);
+        $availableCurrenciesList = $this->getCurrenciesListValues();
+
         return [
             "title" => "Wizard.availableCurrencies",
             "description" => "",
@@ -173,7 +162,7 @@ class CurrencyStep extends Step
                 "currencies_availableCurrencies" => [
                     "type" => "checkboxGroup",
                     "isVisible" => "typeof currencies_allowCurrencyChange === 'undefined' || currencies_allowCurrencyChange === true",
-                    "defaultValue" => array_values($availableCurrencies),
+                    "defaultValue" => $this->currencies,
                     "options" => [
                         "name" => "Wizard.activateCurrencies",
                         "checkboxValues" => $availableCurrenciesList
