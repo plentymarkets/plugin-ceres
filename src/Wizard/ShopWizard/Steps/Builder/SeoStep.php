@@ -10,6 +10,8 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 use Ceres\Wizard\ShopWizard\Config\SeoConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
+use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Plugin\Application;
 
 class SeoStep extends Step
 {
@@ -44,62 +46,6 @@ class SeoStep extends Step
             "title" => "Wizard.robotSettings",
             "description" => "Wizard.robotSettingsDescription",
             "form" => [
-                "seo_robotsHome" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsHomePage",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsContact" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsContactPage",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsCancelRights" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsCancelRights",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsCancelForm" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsCancelForm",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsLegalDisclosure" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsLegalDisclosure",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsPrivacyPolicy" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsPrivacyPolicy",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
-                "seo_robotsTermsAndConditions" => [
-                    "type" => "select",
-                    "defaultValue" => $metaOptions[0]["value"],
-                    "options" => [
-                        "name" => "Wizard.robotsTermsAndConditions",
-                        "listBoxValues" => $metaOptions
-                    ]
-                ],
                 "seo_robotsSearchResult" => [
                     "type" => "select",
                     "defaultValue" => $metaOptions[0]["value"],
@@ -175,12 +121,15 @@ class SeoStep extends Step
      */
     public function generateRobotsTxtSection(): array
     {
+        $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
+        $app = pluginApp(Application::class);
+        $currentConfig = $webstoreConfig->findByWebstoreId($app->getWebstoreId())->toArray();
 
         $robotsDefault = 'User-agent: *'.chr(10);
         $robotsDefault .= 'Disallow: /plenty/'.chr(10);
         $robotsDefault .= 'Allow: /plenty/api/external.php'.chr(10);
         $robotsDefault .= 'Disallow: /xml/'.chr(10);
-        $robotsDefault .= 'Sitemap: '.DOM_SSL.'/sitemap.xml'.chr(10);
+        $robotsDefault .= 'Sitemap: '. $currentConfig['domainSsl'] .'/sitemap.xml'.chr(10);
 
         return [
             "title" => "Wizard.robotsTxt",
