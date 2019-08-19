@@ -55,7 +55,7 @@ class SeoStep extends Step
                     ]
                 ],
                 "seo_paginationNoIndex" => [
-                    "type" => "text",
+                    "type" => "number",
                     "defaultValue" => "0",
                     "options" => [
                         "name" => "Wizard.paginationNoIndex"

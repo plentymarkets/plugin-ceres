@@ -185,7 +185,7 @@ class OnlineStoreStep extends Step
                     ]
                 ],
                 "onlineStore_daysOfReturn" => [
-                    "type" => "text",
+                    "type" => "number",
                     "defaultValue" => "14",
                     "options" => [
                         "name" => "Wizard.daysOfReturn"
