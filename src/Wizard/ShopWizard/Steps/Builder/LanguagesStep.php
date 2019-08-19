@@ -83,6 +83,7 @@ class LanguagesStep extends Step
 
         return [
             "title" => "Wizard.automaticLanguageRecognition",
+            "description" => "Wizard.automaticLanguageRecognitionDescription",
             "condition" => $this->globalsCondition,
             "form" => $this->generateFormLanguagesSelection()
         ];
