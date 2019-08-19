@@ -10,6 +10,7 @@ namespace Ceres\Wizard\ShopWizard\Services;
 
 use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
+//use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
@@ -155,6 +156,11 @@ class ShopWizardService
                     }
                 }
             }
+
+            //get search languages
+
+//            $searchLangRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
+//            $languages = $searchLangRepo->getLanguages();
         }
 
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
