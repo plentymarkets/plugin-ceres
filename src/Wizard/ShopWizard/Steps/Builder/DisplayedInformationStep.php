@@ -103,6 +103,7 @@ class DisplayedInformationStep extends Step
 
         return [
             "title" => "Wizard.displayedInfoLoadingAnimation",
+            "description" => "Wizard.displayedInfoLoadingAnimationDescription",
             "form" => [
                 "displayInfo_loadingAnimation" => [
                     "type" => "select",
@@ -128,6 +129,7 @@ class DisplayedInformationStep extends Step
 
         return [
             "title" => "Wizard.displayedInfoCategoryViewType",
+            "description" => "Wizard.displayedInfoCategoryViewTypeDescription",
             "form" => [
                 "displayInfo_variationType" => [
                     "type" => "select",
