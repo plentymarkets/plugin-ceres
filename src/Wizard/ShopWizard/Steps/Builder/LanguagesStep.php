@@ -38,7 +38,8 @@ class LanguagesStep extends Step
         return [
             "title" => "Wizard.languagesSettings",
             "description" => "Wizard.languagesSettingsDescription",
-            "condition" => " (typeof settingsSelection_languages === 'undefined' || settingsSelection_languages === true) && " . $this->globalsCondition,
+            "condition" => " (typeof settingsSelection_languages === 'undefined' || " .
+                "settingsSelection_languages === true) && " . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateActiveLanguagesSection(),
                 $this->generateAutomaticLanguageSection(),

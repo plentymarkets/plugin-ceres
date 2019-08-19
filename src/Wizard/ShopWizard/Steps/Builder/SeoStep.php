@@ -22,7 +22,8 @@ class SeoStep extends Step
         return [
             "title" => "Wizard.seoSettings",
             "description" => "Wizard.seoSettingsDescription",
-            "condition" => " typeof settingsSelection_seo === 'undefined' || settingsSelection_seo === true",
+            "condition" => " (typeof settingsSelection_seo === 'undefined' || " .
+                "settingsSelection_seo === true) && " . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateRobotSettingsSection(),
                 $this->generateRobotsTxtSection(),

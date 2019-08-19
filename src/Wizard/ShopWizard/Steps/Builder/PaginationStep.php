@@ -22,7 +22,8 @@ class PaginationStep extends Step
         return [
             "title" => "Wizard.paginationStep",
             "description" => "Wizard.paginationStepDescription",
-            "condition" => " typeof settingsSelection_paginationSorting === 'undefined' || settingsSelection_paginationSorting === true",
+            "condition" => " (typeof settingsSelection_paginationSorting === 'undefined' || " .
+                "settingsSelection_paginationSorting === true) && " . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generatePaginationSection(),
                 $this->generateSortingSection()

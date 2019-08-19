@@ -22,7 +22,8 @@ class SearchStep extends Step
         return [
             "title" => "Wizard.searchStep",
             "description" => "Wizard.searchStepDescription",
-            "condition" => " (typeof settingsSelection_languages === 'undefined' || settingsSelection_languages === true) && " . $this->globalsCondition,
+            "condition" => " (typeof settingsSelection_languages === 'undefined' || " .
+                "settingsSelection_languages === true) && " . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
             "sections" => [
 //                $this->generateSearchFieldsSection(),
                 $this->generateSortingSearchSection()

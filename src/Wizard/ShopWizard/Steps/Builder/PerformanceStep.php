@@ -24,7 +24,8 @@ class PerformanceStep extends Step
         return [
             "title" => "Wizard.performanceSettings",
             "description" => "Wizard.paginationStepDescription",
-            "condition" => " typeof settingsSelection_performance === 'undefined' || settingsSelection_performance === true",
+            "condition" => " (typeof settingsSelection_performance === 'undefined' || "
+                ."settingsSelection_performance === true) && " . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateShopBoosterSection(),
                 $this->generateLoggingOptionsSection(),
