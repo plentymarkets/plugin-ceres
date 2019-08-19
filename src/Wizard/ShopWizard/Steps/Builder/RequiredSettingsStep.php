@@ -34,10 +34,10 @@ class RequiredSettingsStep extends Step
             "condition" => !$this->hasRequiredSettings(),
             "validationClass" => "Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator",
             "sections" => [
-                $this->generateSection("shippingMethod", $hasShippingMethod, "/system/assistants/overview/integration/DHLShipping_settingsCombination"),
-                $this->generateSection("shippingProfile", $hasShippingProfile, "/system/assistants/overview/integration/DHLShipping_settingsCombination"),
-                $this->generateSection("paymentMethod", $hasPaymentMethod, "/system/assistants/overview/payment/paypal-configuration-assistant"),
-                $this->generateSection("deliveryCountry", $hasShippingCountry, "/system/assistants/overview/integration/fulfillment-shipping-profile-wizard"),
+                $this->generateSection("shippingMethod", $hasShippingMethod, "/system/assistants/run/plugin_install"),
+                $this->generateSection("shippingProfile", $hasShippingProfile, "/system/assistants/overview/integration/fulfillment-shipping-profile-wizard"),
+                $this->generateSection("paymentMethod", $hasPaymentMethod, "/system/assistants/run/plugin_install"),
+                $this->generateSection("deliveryCountry", $hasShippingCountry, "/system/orders/shipping/settings"),
                 $this->generateSection("location", $hasLocation, "/system/assistants/overview/basic-setup/accounting-location-assistant")
 
             ]
