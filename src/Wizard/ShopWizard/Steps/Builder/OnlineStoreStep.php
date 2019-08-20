@@ -10,6 +10,7 @@ use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
 
 /**
  * Class OnlineStoreStep
+ *
  * @package Ceres\Wizard\ShopWizard\Steps\Builder
  */
 class OnlineStoreStep extends Step
@@ -31,6 +32,8 @@ class OnlineStoreStep extends Step
                 $this->buildStoreEmailSettings(),
                 $this->buildStoreOrderSettings(),
                 $this->buildGoogleRecaptchaSettings(),
+                $this->buildStoreCalistoSettings(),
+                $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
             ]
         ];
@@ -260,6 +263,7 @@ class OnlineStoreStep extends Step
         ];
     }
 
+
     /**
      * @return array
      */
@@ -283,6 +287,32 @@ class OnlineStoreStep extends Step
             ]
         ];
     }
+
+    /**
+     * @return array
+     */
+    private function buildSessionLifeTimeSection(): array
+    {
+        $sessionLifetimeDurations = OnlineStoreConfig::getSessionLifetimeOptions();
+        $sessionLifetimeOptions = StepHelper::generateTranslatedListBoxValues($sessionLifetimeDurations);
+
+        return [
+            "title" => "Wizard.sessionLifeTimeTitle",
+            "description" => "Wizard.sessionLifeTimeDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_sessionLifetime" => [
+                    "type" => "select",
+                    "defaultValue" => 0,
+                    "options" => [
+                        "name" => "Wizard.sessionLifeTime",
+                        "listBoxValues" => $sessionLifetimeOptions
+                    ]
+                ]
+            ]
+        ];
+    }
+
     
     /**
      * @return array

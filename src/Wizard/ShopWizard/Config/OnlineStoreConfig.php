@@ -39,6 +39,12 @@ class OnlineStoreConfig
         "itemBundlesList"    => "2",
         "itemBundlesReplace" => "0"
     ];
+
+    public static $sessionLifetimeOptions = [
+        "sessionLifetimeUntilBrowserIsClosed" => "0",
+        "sessionLifetimeHundredDays"  => "8640000",
+    ];
+
     
     /**
      * @return array
@@ -78,5 +84,13 @@ class OnlineStoreConfig
     public static function getItemBundles()
     {
         return self::$itemBundles;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getSessionLifetimeOptions()
+    {
+        return self::$sessionLifetimeOptions;
     }
 }
