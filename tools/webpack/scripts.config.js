@@ -1,7 +1,7 @@
 const path = require("path");
 const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 
-module.exports = (env) =>
+module.exports = env =>
 {
     env = env || {};
     return {
