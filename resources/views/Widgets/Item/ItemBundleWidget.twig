@@ -12,12 +12,12 @@
 
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
 
-<div v-if="$store.getters.currentItemVariation" class="widget widget-item-bundle widget-{{ appearance }} 
+<div class="widget widget-item-bundle widget-{{ appearance }} 
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %} 
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}" 
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}> 
     <item-bundle
-        {% if not isPreview %}v-if="$store.getters.currentItemVariation.variation.bundleType === 'bundle'"
+        {% if not isPreview %}v-if="$store.getters.currentItemVariation && $store.getters.currentItemVariation.variation.bundleType === 'bundle'"
         :bundle-type="$store.getters.currentItemVariation.variation.bundleType"{% else %}
         :bundle-type="'bundle'"{% endif %}
         :bundle-components="$store.getters.currentItemVariation.bundleComponents"

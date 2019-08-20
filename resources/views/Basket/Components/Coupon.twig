@@ -1,6 +1,13 @@
+{% set couponReadonlyInfoText = trans("Ceres::Template.couponReadonlyInfoText") %}
+
 <script type="x/template" id="vue-coupon">
     <div class="cmp">
-        <div class="input-group">
+        {% if checkout.readOnly and couponReadonlyInfoText | trim is not empty %}
+            <p>
+                {{ couponReadonlyInfoText }}
+            </p>
+        {% endif %}
+        <div :class="{'input-group':true,'component-loading':isCheckoutReadonly,'isLoading':isCheckoutReadonly}">
             <input type="text" class="form-control" v-model="couponCode" placeholder="{{ trans("Ceres::Template.couponEnterCoupon") }}" @keyup.enter="redeemCode()" :disabled="disabled || isCheckoutReadonly">
             <span class="input-group-btn">
                 <button class="btn btn-medium btn-primary btn-appearance" type="button" @click="redeemCode()" :disabled="waiting || isCheckoutReadonly" v-if="!disabled">
