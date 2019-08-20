@@ -14,7 +14,6 @@
             <div class="details">
                 <div class="row">
                     <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationDate") }}</strong>
-                    TODO: testen
                     <span class="col-6 col-sm-7">{{ Twig.print("data.order.createdAt | formatDateTime | date(trans('Ceres::Template.devDateTimeFormat'))") }}</span>
                 </div>
 
@@ -33,13 +32,13 @@
                     <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
                     <span class="col-6 col-sm-7">
                         <div>{{ Twig.print("data.order.billingAddress.name1") }}</div>
-                        <div>{#{ Twig.print("data.order.billingAddress | addressOptionType(12)") }#}</div>
+                        <div>{{ Twig.print("data.order.billingAddress | addressOptionType(12)") }}</div>
                         <div>{{ Twig.print("data.order.billingAddress.name2") }} {{ Twig.print("data.order.billingAddress.name3") }}</div>
                         <div>{{ Twig.print("data.order.billingAddress.name4") }}</div>
                         <div>{{ Twig.print("data.order.billingAddress.address1") }} {{ Twig.print("data.order.billingAddress.address2") }}</div>
                         <div>{{ Twig.print("data.order.billingAddress.postalCode") }} {{ Twig.print("data.order.billingAddress.town") }}</div>
                         <div>
-                            {{ Twig.if("true and data.order.billingAddress.countryId") }}
+                            {{ Twig.if("data.order.billingAddress.countryId") }}
                                 {{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.billingAddress.countryId")])) }}
                             {{ Twig.endif() }}
                         </div>
@@ -56,7 +55,7 @@
                         {{ Twig.else() }}
                             <span>
                                 <div>{{ Twig.print("data.order.deliveryAddress.name1") }}</div>
-                                <div>{#{ Twig.print("data.order.deliveryAddress | addressOptionType(12)") }#}</div>
+                                <div>{{ Twig.print("data.order.deliveryAddress | addressOptionType(12)") }}</div>
                                 <div>{{ Twig.print("data.order.deliveryAddress.name2") }} {{ Twig.print("data.order.deliveryAddress.name3") }}</div>
                                 <div>{{ Twig.print("data.order.deliveryAddress.name4") }}</div>
                                 <div>{{ Twig.print("data.order.deliveryAddress.address1") }} {{ Twig.print("data.order.deliveryAddress.address2") }}</div>
@@ -69,7 +68,7 @@
                                 </div>
                                 <div>{{ Twig.print("data.order.deliveryAddress.postalCode") }} {{ Twig.print("data.order.deliveryAddress.town") }}</div>
                                 <div>
-                                    {{ Twig.if("true and data.order.deliveryAddress.countryId") }}
+                                    {{ Twig.if("data.order.deliveryAddress.countryId") }}
                                         {{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.deliveryAddress.countryId")])) }}
                                     {{ Twig.endif() }}
                                 </div>
@@ -90,10 +89,8 @@
                     <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationPaymentStatus") }}</strong>
                     {{ Twig.set("paymentMethodId", "-1") }}
                     {{ Twig.for("propertyKey", "data.order.properties") }}
-                        TODO: loopIndex testen
                         {{ Twig.if("data.order.properties[loop.index0].typeId == 4") }}
                             {{ Twig.set("paymentStatus", "entry.order.properties[loop.index0].value") }}
-                            TODO: funktioniert das?
                             <span class="col-6 col-sm-7" id="payment_state_{{ Twig.print("data.order.id") }}">{{ Twig.trans("Ceres::Template.orderConfirmationPaymentStatus_" ~ Twig.print("data.order.properties[loop.index0].value")) }}</span>
                         {{ Twig.elseif("data.order.properties[loop.index0].typeId == 3") }}
                             {{ Twig.set("paymentMethodId", "data.order.properties[loop.index0].value") }}
