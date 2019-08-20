@@ -23,8 +23,35 @@ class SearchStep extends Step
                            " settingsSelection_search === true) && "
                            . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
             "sections" => [
+                $this->generateDefaultSortingSection(),
                 $this->generateSearchFieldsSection(),
-                $this->generateSortingSearchSection()
+                $this->generateRecommendedSearchSortingSection()
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateDefaultSortingSection():array
+    {
+        //default sorting search options
+        $defaultSortingSearchOptions = SearchConfig::getSortingSearchDefaultOptions();
+        $defaultSearchOptionsList    = StepHelper::generateTranslatedListBoxValues($defaultSortingSearchOptions);
+
+        return [
+            "title" => "Wizard.searchDefaultSorting",
+            "description" => "Wizard.searchDefaultSortingDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "search_defaultSortingSearch" => [
+                    "type" => "select",
+                    "defaultValue" => $defaultSearchOptionsList[0]['value'],
+                    "options" => [
+                        "name" => "Wizard.defaultSearchSorting",
+                        "listBoxValues" => $defaultSearchOptionsList
+                    ]
+                ]
             ]
         ];
     }
@@ -53,8 +80,8 @@ class SearchStep extends Step
         $searchFieldsOptionsList = StepHelper::generateTranslatedListBoxValues($searchFieldsOptions);
 
         if (count($searchFieldsOptions)) {
-            $i = 0;
-            foreach ($searchFieldsOptions as $fieldKey => $fieldValue){
+            $i = 1;
+            foreach ($searchFieldsOptions as $fieldKey => $fieldValue) {
                 if (empty($fieldValue)) {
                     continue;
                 }
@@ -94,12 +121,8 @@ class SearchStep extends Step
     /**
      * @return array
      */
-    private function generateSortingSearchSection():array
+    private function generateRecommendedSearchSortingSection():array
     {
-        //default sorting search options
-        $defaultSortingSearchOptions = SearchConfig::getSortingSearchDefaultOptions();
-        $defaultSearchOptionsList    = StepHelper::generateTranslatedListBoxValues($defaultSortingSearchOptions);
-
         //first sorting search options
         $firstSortingSearchOptions = SearchConfig::getSortingFirstSearchOptions();
         $firstSearchOptionsList    = StepHelper::generateTranslatedListBoxValues($firstSortingSearchOptions);
@@ -109,18 +132,10 @@ class SearchStep extends Step
         $otherSearchOptionsList    = StepHelper::generateTranslatedListBoxValues($otherSortingSearchOptions);
 
         return [
-            "title" => "Wizard.searchFields",
-            "description" => "Wizard.searchFieldsDescription",
+            "title" => "Wizard.searchRecommendedSorting",
+            "description" => "Wizard.searchRecommendedSortingDescription",
             "condition" => $this->globalsCondition,
             "form" => [
-                "search_defaultSortingSearch" => [
-                    "type" => "select",
-                    "defaultValue" => $defaultSearchOptionsList[0]['value'],
-                    "options" => [
-                        "name" => "Wizard.defaultSearchSorting",
-                        "listBoxValues" => $defaultSearchOptionsList
-                    ]
-                ],
                 "search_prioritySearch1" => [
                     "type" => "select",
                     "defaultValue" => $firstSearchOptionsList[0]['value'],
