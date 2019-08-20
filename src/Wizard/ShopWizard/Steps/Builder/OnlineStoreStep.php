@@ -32,7 +32,6 @@ class OnlineStoreStep extends Step
                 $this->buildStoreEmailSettings(),
                 $this->buildStoreOrderSettings(),
                 $this->buildGoogleRecaptchaSettings(),
-                $this->buildStoreCalistoSettings(),
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
             ]
