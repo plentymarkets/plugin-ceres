@@ -12,6 +12,14 @@ body .wrapper-main{
     }
 }
 
+.category-contact .main .container-max
+{
+    background-color: $white;
+    padding-top: $spacer;
+    margin-top: 2 * $spacer;
+    margin-bottom: 2 * $spacer;
+}
+
 .page-content{
     padding-top: $spacer;
     background-color: $gray-lightest;

@@ -4,7 +4,7 @@
             <input type="search" class="search-input" ref="searchInput" @input="autocomplete($event.target.value)"
                 @keyup.enter="prepareSearch()" @keyup.down="keydown()" @keyup.up="keyup()"
                 @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)"
-                autofocus>
+                {% if not isShopBuilder %}autofocus{% endif %}>
 
             <button class="search-submit" type="submit" @click="search()">
                 <i class="fa fa-search sm-up"></i>

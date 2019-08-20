@@ -30,6 +30,14 @@ module.exports = (function($)
             $bsModal = $(element).find(".modal").first();
         }
 
+        $bsModal.one("hide.bs.modal", function()
+        {
+            $bsModal.find(".modal-content").unbind("mouseenter");
+            $bsModal.find(".modal-content").unbind("mouseleave");
+            stopTimeout();
+            paused = false;
+        });
+
         return {
             show             : show,
             hide             : hide,
@@ -81,13 +89,12 @@ module.exports = (function($)
         function setTimeout(timeout)
         {
             $bsModal.timeout = timeout;
-
-            $bsModal.find(".modal-content").mouseover(function()
+            $bsModal.find(".modal-content").mouseenter(() =>
             {
                 pauseTimeout();
             });
 
-            $bsModal.find(".modal-content").mouseout(function()
+            $bsModal.find(".modal-content").mouseleave(() =>
             {
                 continueTimeout();
             });
