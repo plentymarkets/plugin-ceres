@@ -11,8 +11,6 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{{ Twig.if("data") }}
-
 <div class="widget widget-order-data widget-{{ appearance | default("success") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
@@ -147,9 +145,3 @@
         </div>
     </div>
 </div>
-
-{{ Twig.else() }}
-
-    <div>Ich bin ein Platzhalter <i style="font-size: 72px; font-style: normal">🙂</i></div>
-
-{{ Twig.endif() }}
