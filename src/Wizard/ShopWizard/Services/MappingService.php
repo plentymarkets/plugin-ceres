@@ -1,19 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 04/07/2019
- * Time: 11:44
- */
 
 namespace Ceres\Wizard\ShopWizard\Services;
 
 use Ceres\Wizard\ShopWizard\Mapping\DataMapping;
 
+/**
+ * Class MappingService
+ * @package Ceres\Wizard\ShopWizard\Services
+ */
 class MappingService
 {
     /** @var DataMapping */
-
     private $dataMapping;
 
     /**
@@ -52,7 +49,6 @@ class MappingService
         $processedData = $this->matchArrayData($dataToProcess, $mappedData, $scope);
 
         return $processedData;
-
     }
 
     /**
@@ -95,6 +91,7 @@ class MappingService
     private function matchDataByType($type, $value, $scope = "display")
     {
         $matchedValue = '';
+        
         switch($type){
             case "string":
                 $matchedValue = $value;

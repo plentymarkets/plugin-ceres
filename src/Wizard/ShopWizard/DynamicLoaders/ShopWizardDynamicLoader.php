@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 05/07/2019
- * Time: 11:56
- */
 
 namespace Ceres\Wizard\ShopWizard\DynamicLoaders;
 
@@ -64,7 +58,7 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
      *
      * @return string
      */
-    private function getCurrentFormField (string $param): string
+    private function getCurrentFormField(string $param): string
     {
         $currentFormField = end(explode("/", $param));
 
@@ -81,9 +75,8 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
     {
         $selectedActiveLanguages = $parameters['languages_activeLanguages'];
 
-        if  (count($selectedActiveLanguages)) {
-            foreach ($selectedActiveLanguages as $selLang) {
-
+        if(count($selectedActiveLanguages)) {
+            foreach($selectedActiveLanguages as $selLang) {
                 $activeList[] = [
                     "caption" => $this->languages[$selLang],
                     "value" => $selLang
@@ -104,11 +97,11 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
     {
         $defaultValue = "";
 
-        if  (count($activeLanguages)) {
+        if(count($activeLanguages)) {
             foreach ($activeLanguages as $selLang) {
                 $key = "languages_browserLang_" . $selLang;
 
-                if ($key == $currentFormField) {
+                if($key == $currentFormField) {
                     $defaultValue = $selLang;
                 }
             }
@@ -124,13 +117,11 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
      */
     public function retrieveActiveLanguages(array $parameters): array
     {
-
-
         $activeLangList = [];
 
         $currentFormField = $this->getCurrentFormField($parameters["plentyMarkets"]);
 
-        if ($currentFormField != 'languages_defaultBrowserLang') {
+        if($currentFormField != 'languages_defaultBrowserLang') {
             $activeLangList[] = [
                 "caption" => $this->translator->trans("Ceres::Wizard.noChange"),
                 "value" => ""
@@ -150,7 +141,7 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
             }
         }
 
-        if ($currentFormField == "languages_defaultBrowserLang") {
+        if($currentFormField == "languages_defaultBrowserLang") {
             $translationKey = "defaultBrowserLanguage";
             $defaultValue = "de";
         }
@@ -176,7 +167,6 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
      */
     public function getSearchActiveLanguages(array $parameters): array
     {
-
         $currentFormField = $this->getCurrentFormField($parameters["plentyMarkets"]);
         $translationKey = end(explode("_", $currentFormField));
 

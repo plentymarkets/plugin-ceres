@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 08/08/2019
- * Time: 10:42
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
@@ -13,19 +7,23 @@ use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Plugin\Application;
 
+/**
+ * Class SeoStep
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class SeoStep extends Step
 {
-
     /**
      * @return array
      */
-    public function generateStep(): array
+    public function generateStep():array
     {
         return [
             "title" => "Wizard.seoSettings",
             "description" => "Wizard.seoSettingsDescription",
-            "condition" => " (typeof settingsSelection_seo === 'undefined' || " .
-                "settingsSelection_seo === true) && " . $this->hasRequiredSettings(),
+            "condition" => " (typeof settingsSelection_seo === 'undefined' ||" .
+                           " settingsSelection_seo === true) && "
+                           . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateRobotSettingsSection(),
                 $this->generateRobotsTxtSection(),
@@ -38,10 +36,11 @@ class SeoStep extends Step
     /**
      * @return array
      */
-    private function generateRobotSettingsSection(): array
+    private function generateRobotSettingsSection():array
     {
         $metaRobotsOptions = SeoConfig::getMetaRobotsOptions();
-        $metaOptions = StepHelper::generateTranslatedListBoxValues($metaRobotsOptions);
+        $metaOptions       = StepHelper::generateTranslatedListBoxValues($metaRobotsOptions);
+        
         return [
             "title" => "Wizard.robotSettings",
             "description" => "Wizard.robotSettingsDescription",
@@ -68,7 +67,7 @@ class SeoStep extends Step
     /**
      * @return array
      */
-    private function generateAvailabilitiesSection(): array
+    private function generateAvailabilitiesSection():array
     {
         $availabilities = [
             "availability1",
@@ -96,10 +95,11 @@ class SeoStep extends Step
      *
      * @return array
      */
-    private function generateAvailabilitiesFormFields($availabilities): array
+    private function generateAvailabilitiesFormFields($availabilities):array
     {
         $formFields = [];
-        $availabilitiesOptions = SeoConfig::getAvailabilitiesOptions();
+        
+        $availabilitiesOptions     = SeoConfig::getAvailabilitiesOptions();
         $availabilitiesListOptions = StepHelper::generateTranslatedListBoxValues($availabilitiesOptions);
 
         foreach ($availabilities as $availabilityField) {
@@ -113,13 +113,14 @@ class SeoStep extends Step
                 ]
             ];
         }
+        
         return $formFields;
     }
 
     /**
      * @return array
      */
-    public function generateRobotsTxtSection(): array
+    public function generateRobotsTxtSection():array
     {
         $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
         $app = pluginApp(Application::class);
@@ -151,12 +152,11 @@ class SeoStep extends Step
     /**
      * @return array
      */
-    public function generateSiteMapSection(): array
+    public function generateSiteMapSection():array
     {
-        $siteMapData = SeoConfig::getSiteMapOptions();
+        $siteMapData    = SeoConfig::getSiteMapOptions();
         $siteMapOptions = StepHelper::generateTranslatedListBoxValues($siteMapData);
-
-
+        
         return [
             "title" => "Wizard.siteMapXml",
             "description" => "Wizard.siteMapXmlDescription",

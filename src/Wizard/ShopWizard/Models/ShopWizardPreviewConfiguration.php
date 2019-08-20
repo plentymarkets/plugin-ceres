@@ -1,15 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 19/08/2019
- * Time: 14:51
- */
 
 namespace Ceres\Wizard\ShopWizard\Models;
 
 use Plenty\Modules\Plugin\DataBase\Contracts\Model;
 
+/**
+ * Class ShopWizardPreviewConfiguration
+ * @package Ceres\Wizard\ShopWizard\Models
+ */
 class ShopWizardPreviewConfiguration extends Model
 {
     /**
@@ -30,7 +28,7 @@ class ShopWizardPreviewConfiguration extends Model
     /**
      * @return string
      */
-    public function getTableName(): string
+    public function getTableName():string
     {
         return 'Ceres::ShopWizardPreviewConfigurations';
     }

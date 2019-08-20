@@ -1,61 +1,61 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 09/08/2019
- * Time: 14:28
- */
 
 namespace Ceres\Wizard\ShopWizard\Mapping;
 
-
+/**
+ * Class DefaultSettingsMapping
+ * @package Ceres\Wizard\ShopWizard\Mapping
+ */
 class DefaultSettingsMapping
 {
-    public static $fieldsMapped = [
+    private static $fieldsMapped = [
         "defSettings_defaultLanguage" => [
-            "field" => "defaultLanguage",
-            "type" => "string",
-            "global" => true,
+            "field"    => "defaultLanguage",
+            "type"     => "string",
+            "global"   => true,
             "optional" => false,
         ],
         "defSettings_defaultShippingProfile" => [
-            "field" => "defaultParcelServicePresetId",
-            "type" => "float",
-            "global" => true,
+            "field"    => "defaultParcelServicePresetId",
+            "type"     => "float",
+            "global"   => true,
             "optional" => false,
         ],
         "defSettings_defaultShippingMethod" => [
-            "field" => "defaultParcelServiceId",
-            "type" => "float",
-            "global" => true,
+            "field"    => "defaultParcelServiceId",
+            "type"     => "float",
+            "global"   => true,
             "optional" => false,
         ],
         "defSettings_defaultPaymentMethod" => [
-            "field" => "defaultMethodOfPaymentId",
-            "type" => "float",
-            "global" => true,
+            "field"    => "defaultMethodOfPaymentId",
+            "type"     => "float",
+            "global"   => true,
             "optional" => false,
         ],
         "defSettings_defaultLocation" => [
-            "field" => "defaultAccountingLocation",
-            "type" => "integer",
-            "global" => true,
+            "field"    => "defaultAccountingLocation",
+            "type"     => "integer",
+            "global"   => true,
             "optional" => false,
         ],
         "defSettings_defaultB2B" => [
-            "field" => "global.default_contact_class_b2b",
-            "type" => "integer",
-            "global" => false,
+            "field"    => "global.default_contact_class_b2b",
+            "type"     => "integer",
+            "global"   => false,
             "optional" => false,
         ],
         "defSettings_defaultB2C" => [
-            "field" => "defaultCustomerClassId",
-            "type" => "integer",
-            "global" => true,
+            "field"    => "defaultCustomerClassId",
+            "type"     => "integer",
+            "global"   => true,
             "optional" => false,
         ],
     ];
-
+    
+    /**
+     * @return array
+     */
     public static function getFieldsMapped()
     {
         return self::$fieldsMapped;

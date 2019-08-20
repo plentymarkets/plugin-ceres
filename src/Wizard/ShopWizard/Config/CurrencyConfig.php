@@ -1,30 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 12/07/2019
- * Time: 15:51
- */
 
 namespace Ceres\Wizard\ShopWizard\Config;
 
-
 use Ceres\Config\CeresCurrencyConfig;
 
+/**
+ * Class CurrencyConfig
+ * @package Ceres\Wizard\ShopWizard\Config
+ */
 class CurrencyConfig
 {
-    public static $currencyFormat = [
-        "currencyFormatName" => "name",
+    private static $currencyFormat = [
+        "currencyFormatName"   => "name",
         "currencyFormatSymbol" => "symbol"
     ];
 
-    public static $currencyFormatSelection = [
-        "currencyFormatName" => "name",
+    private static $currencyFormatSelection = [
+        "currencyFormatName"   => "name",
         "currencyFormatSymbol" => "symbol",
-        "currencyFormatAll" => "all"
+        "currencyFormatAll"    => "all"
     ];
 
-    public $currenciesAvailable = [];
+    private $currenciesAvailable = [];
 
     /**
      * CurrencyConfig constructor.
@@ -49,20 +46,21 @@ class CurrencyConfig
         }
 
         return $availableCurrencies;
-
     }
+    
+    /**
+     * @return array
+     */
     public static function getCurrencyFormat()
     {
         return self::$currencyFormat;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getCurrencyFormatSelection()
     {
         return self::$currencyFormatSelection;
-    }
-
-    public function getAvailableCurrencies()
-    {
-        return $this->currenciesAvailable;
     }
 }

@@ -1,17 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 19/07/2019
- * Time: 10:11
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
-
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
+/**
+ * Class LanguagesStep
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class LanguagesStep extends Step
 {
     /**
@@ -38,13 +35,14 @@ class LanguagesStep extends Step
     /**
      * @return array
      */
-    public function generateStep(): array
+    public function generateStep():array
     {
         return [
             "title" => "Wizard.languagesSettings",
             "description" => "Wizard.languagesSettingsDescription",
-            "condition" => " (typeof settingsSelection_languages === 'undefined' || " .
-                "settingsSelection_languages === true) && " . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
+            "condition" => " (typeof settingsSelection_languages === 'undefined' ||".
+                           " settingsSelection_languages === true) && "
+                           . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateActiveLanguagesSection(),
                 $this->generateAutomaticLanguageSection(),
@@ -56,9 +54,8 @@ class LanguagesStep extends Step
     /**
      * @return array
      */
-    private function generateActiveLanguagesSection(): array
+    private function generateActiveLanguagesSection():array
     {
-
         return [
             "title" => "Wizard.activeLanguages",
             "description" => "Wizard.activeLanguagesDescription",
@@ -81,21 +78,20 @@ class LanguagesStep extends Step
     /**
      * @return array
      */
-    private function generateAutomaticLanguageSection(): array
+    private function generateAutomaticLanguageSection():array
     {
-
         return [
-            "title" => "Wizard.automaticLanguageRecognition",
+            "title"       => "Wizard.automaticLanguageRecognition",
             "description" => "Wizard.automaticLanguageRecognitionDescription",
-            "condition" => $this->globalsCondition,
-            "form" => $this->generateFormLanguagesSelection()
+            "condition"   => $this->globalsCondition,
+            "form"        => $this->generateFormLanguagesSelection()
         ];
     }
 
     /**
      * @return array
      */
-    private function generateFormLanguagesSelection(): array
+    private function generateFormLanguagesSelection():array
     {
         $languageOptions = StepHelper::buildListBoxData($this->languages);
         $formFields = [
@@ -121,6 +117,7 @@ class LanguagesStep extends Step
             "caption" => "Wizard.noChange",
             "value" => ""
         ]);
+        
         foreach ($this->languages as $langKey => $language) {
             $key = "languages_browserLang_{$langKey}";
             $translateKey = "browserLang" . ucfirst($langKey);
@@ -137,18 +134,18 @@ class LanguagesStep extends Step
 
         return $formFields;
     }
-
-
+    
     /**
      * @return array
      */
-    private function generateSearchLanguagesSection(): array
+    private function generateSearchLanguagesSection():array
     {
         $languageOptions = $this->languagesOptions;
         array_unshift($languageOptions, [
             "caption" => "Wizard.noChange",
             "value" => ""
         ]);
+        
         return [
             "title" => "Wizard.searchLanguages",
             "description" => "Wizard.searchLanguagesDescription",

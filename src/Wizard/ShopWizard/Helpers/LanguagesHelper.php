@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 07/06/2019
- * Time: 15:18
- */
 
 namespace Ceres\Wizard\ShopWizard\Helpers;
 
@@ -13,9 +7,13 @@ use Plenty\Modules\User\Models\User;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class LanguagesHelper
+ * @package Ceres\Wizard\ShopWizard\Helpers
+ */
 class LanguagesHelper
 {
-    public static $languages = array('de',
+    private static $languages = array('de',
         'en',
         'bg',
         'fr',
@@ -35,16 +33,16 @@ class LanguagesHelper
         'cn',
         'vn'
     );
-
+    
+    /**
+     * @return array
+     */
     public static function getLanguages()
     {
         return self::$languages;
     }
-
-
+    
     /**
-     * @param array $langArray
-     *
      * @return array
      */
     public static function getTranslatedLanguages()
@@ -53,16 +51,18 @@ class LanguagesHelper
         $rawLanguages = self::getLanguages();
         $languages = [];
 
-        if (count($rawLanguages)) {
-            foreach ($rawLanguages as $lang) {
+        if(count($rawLanguages)) {
+            foreach($rawLanguages as $lang) {
                 $languages[$lang] = $translator->trans("Ceres::Config.languageActiveLanguages" . ucfirst($lang));
             }
         }
 
         return $languages;
-
     }
-
+    
+    /**
+     * @return string
+     */
     public static function getUserLang()
     {
         try

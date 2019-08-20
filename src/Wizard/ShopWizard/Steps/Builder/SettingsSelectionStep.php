@@ -1,23 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 30/05/2019
- * Time: 14:25
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
-
+/**
+ * Class SettingsSelectionStep
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class SettingsSelectionStep extends Step
 {
-
     /**
      * @return array
      */
-    public function generateStep(): array
+    public function generateStep():array
     {
-
         return [
             "title" => "Wizard.settingsSelection",
             "description" => "Wizard.settingsSelectionDescription",
@@ -38,9 +33,10 @@ class SettingsSelectionStep extends Step
      *
      * @return array
      */
-    private function generateSection($name): array
+    private function generateSection($name):array
     {
         $condition = $name == "languages" ||  $name == "search" ? $this->globalsCondition : true;
+        
         return [
             "title" => "Wizard." . $name,
             "description" => "Wizard." . $name . "Description",
@@ -56,9 +52,8 @@ class SettingsSelectionStep extends Step
      *
      * @return array
      */
-    private function generateToggleComponent($name) : array
+    private function generateToggleComponent($name):array
     {
-
         return [
             "type" => "toggle",
             "defaultValue" => false,

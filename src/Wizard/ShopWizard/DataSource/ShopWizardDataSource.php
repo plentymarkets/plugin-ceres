@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 03/06/2019
- * Time: 14:37
- */
 
 namespace Ceres\Wizard\ShopWizard\DataSource;
 
@@ -12,18 +6,18 @@ use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
 use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator;
-use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
-use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\Wizard\Services\DataSources\BaseWizardDataSource;
 use Ceres\Wizard\ShopWizard\Services\ShopWizardService;
 
+/**
+ * Class ShopWizardDataSource
+ * @package Ceres\Wizard\ShopWizard\DataSource
+ */
 class ShopWizardDataSource extends BaseWizardDataSource
 {
-
     /**
      * @var ShopWizardService
      */
-
     private $wizardService;
 
     /**
@@ -42,15 +36,14 @@ class ShopWizardDataSource extends BaseWizardDataSource
         $this->wizardService = $wizardService;
         $this->requiredSettingsDataValidator = $settingsDataValidator;
     }
-
-
+    
     /**
      * @return array
      */
     public function getIdentifiers()
     {
         $environments = count($this->wizardService->getWebstoresIdentifiers()) ? array_keys($this->wizardService->getWebstoresIdentifiers()) : [];
-
+        
         return $environments;
     }
 
@@ -59,13 +52,10 @@ class ShopWizardDataSource extends BaseWizardDataSource
      */
     public function get(): array
     {
-
         $dataStructure = $this->dataStructure;
-
         $dataStructure['data'] = (object) $this->wizardService->getWebstoresIdentifiers();
 
         return $dataStructure;
-
     }
 
     /**
@@ -74,26 +64,24 @@ class ShopWizardDataSource extends BaseWizardDataSource
      */
     public function getByOptionId(string $optionId = 'default')
     {
+        list($webstore, $pluginSet) = explode(".", $optionId);
 
-        list($webstore,$pluginSet) = explode(".", $optionId);
-
-        list($webstorePrefix, $webstoreId) = explode('_', $webstore);
-        list($pluginSetPrefix, $pluginSetId) = explode('_', $pluginSet);
-
+        $webstoreId = explode('_', $webstore)[1];
+        $pluginSetId = explode('_', $pluginSet)[1];
 
         $dataStructure = $this->dataStructure;
-
         $dataStructure['data'] = (object) $this->wizardService->mapWebstoreData($webstoreId, $pluginSetId);
 
         return $dataStructure;
     }
-
+    
     /**
      * @param string $optionId
      * @param array $data
+     * @throws \Plenty\Exceptions\ValidationException
      */
     public function finalize(string $optionId = 'default', array $data = []) {
-        list($webstore,$pluginSet) = explode(".", $optionId);
+        $pluginSet= explode(".", $optionId)[1];
 
         if (empty($pluginSet)) {
             $settingsService = pluginApp(DefaultSettingsService::class);
@@ -106,7 +94,6 @@ class ShopWizardDataSource extends BaseWizardDataSource
             if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
                 $data['setAllRequiredAssistants'] = 'true';
             }
-
         }
         $this->requiredSettingsDataValidator->validateOrFail($data);
     }
@@ -116,10 +103,8 @@ class ShopWizardDataSource extends BaseWizardDataSource
      */
     public function deleteDataOption(string $optionId = 'default')
     {
-        list($webstore,$pluginSet) = explode(".", $optionId);
-
-        list($webstorePrefix, $webstoreId) = explode('_', $webstore);
-        list($pluginSetPrefix, $pluginSetId) = explode('_', $pluginSet);
+        $pluginSet = explode(".", $optionId)[1];
+        $pluginSetId = explode('_', $pluginSet)[1];
 
         $previewConfRepo = pluginApp(ShopWizardConfigRepository::class);
         $confToDelete = $previewConfRepo->getConfig($pluginSetId);
@@ -127,7 +112,6 @@ class ShopWizardDataSource extends BaseWizardDataSource
         if ($confToDelete instanceof ShopWizardPreviewConfiguration) {
             $previewConfRepo->deleteConfig($pluginSetId, true);
         }
-
     }
 
 }

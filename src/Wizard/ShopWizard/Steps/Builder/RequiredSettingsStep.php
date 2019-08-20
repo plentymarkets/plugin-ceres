@@ -1,32 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 30/05/2019
- * Time: 12:56
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 
-
+/**
+ * Class RequiredSettingsStep
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class RequiredSettingsStep extends Step
 {
     /**
      * @return array
      */
-    public function generateStep(): array
+    public function generateStep():array
     {
-
         $shopWizardService = pluginApp(DefaultSettingsService::class);
 
-        $hasShippingMethod = $shopWizardService->hasShippingMethods();
+        $hasShippingMethod  = $shopWizardService->hasShippingMethods();
         $hasShippingProfile = $shopWizardService->hasShippingProfiles();
-        $hasPaymentMethod = $shopWizardService->hasPaymentMethods();
+        $hasPaymentMethod   = $shopWizardService->hasPaymentMethods();
         $hasShippingCountry = $shopWizardService->hasShippingCountries();
-        $hasLocation = $shopWizardService->hasLocations();
-
+        $hasLocation        = $shopWizardService->hasLocations();
 
         return [
             "title" => "Wizard.reqSettings",
@@ -51,7 +46,7 @@ class RequiredSettingsStep extends Step
      *
      * @return array
      */
-    private function generateSection($name, $condition, $url): array
+    private function generateSection($name, $condition, $url):array
     {
         return [
             "title" => "Wizard." . $name,

@@ -1,19 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 16/08/2019
- * Time: 15:45
- */
 
 namespace Ceres\Wizard\ShopWizard\Services;
 
-
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 
+/**
+ * Class SettingsHandlerService
+ * @package Ceres\Wizard\ShopWizard\Services
+ */
 class SettingsHandlerService
 {
-
+    /**
+     * @param $webstoreId
+     * @return mixed
+     */
     public function getStoreIdentifier($webstoreId)
     {
         $webstoreRepo = pluginApp(WebstoreRepositoryContract::class);

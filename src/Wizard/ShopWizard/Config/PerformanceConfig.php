@@ -1,21 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 05/08/2019
- * Time: 09:08
- */
 
 namespace Ceres\Wizard\ShopWizard\Config;
 
-
+/**
+ * Class PerformanceConfig
+ * @package Ceres\Wizard\ShopWizard\Config
+ */
 class PerformanceConfig
 {
-    public static $performanceLevels = [
+    private static $performanceLevels = [
         "performanceDevelopment" => "development",
-        "performanceLive" => "live",
+        "performanceLive"        => "live",
     ];
-
+    
+    /**
+     * @return array
+     */
     public static function getPerformanceLevels()
     {
         return self::$performanceLevels;

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 19/08/2019
- * Time: 15:00
- */
 
 namespace Ceres\Wizard\ShopWizard\Migrations;
 
@@ -12,11 +6,14 @@ use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
 use Plenty\Modules\Plugin\DataBase\Contracts\Migrate;
 use Plenty\Plugin\Log\Loggable;
 
+/**
+ * Class CreateShopWizardPreviewConfigTable
+ * @package Ceres\Wizard\ShopWizard\Migrations
+ */
 class CreateShopWizardPreviewConfigTable
 {
-
-
     use Loggable;
+    
     /**
      * @param Migrate $migrate
      */

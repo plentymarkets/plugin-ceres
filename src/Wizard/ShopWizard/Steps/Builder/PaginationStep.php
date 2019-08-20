@@ -1,29 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 18/07/2019
- * Time: 13:11
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
-
 
 use Ceres\Wizard\ShopWizard\Config\PaginationConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
+/**
+ * Class PaginationStep
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class PaginationStep extends Step
 {
     /**
      * @return array
      */
-    public function generateStep(): array
+    public function generateStep():array
     {
         return [
             "title" => "Wizard.paginationStep",
             "description" => "Wizard.paginationStepDescription",
-            "condition" => " (typeof settingsSelection_paginationSorting === 'undefined' || " .
-                "settingsSelection_paginationSorting === true) && " . $this->hasRequiredSettings(),
+            "condition" => " (typeof settingsSelection_paginationSorting === 'undefined' ||" .
+                           " settingsSelection_paginationSorting === true) && "
+                           . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generatePaginationSection(),
                 $this->generateSortingSection(),
@@ -35,13 +33,13 @@ class PaginationStep extends Step
     /**
      * @return array
      */
-    private function generatePaginationSection(): array
+    private function generatePaginationSection():array
     {
         $paginationPositions = PaginationConfig::getPaginationPositions();
         $paginationPositionOptions = StepHelper::generateTranslatedListBoxValues($paginationPositions);
 
-        $rowsPerPage = PaginationConfig::getRowsPerPage();
-        $rowsPerPageOptions = StepHelper::generateTranslatedListBoxValues($rowsPerPage);
+        //$rowsPerPage = PaginationConfig::getRowsPerPage();
+        //$rowsPerPageOptions = StepHelper::generateTranslatedListBoxValues($rowsPerPage);
 
         return [
             "title" => "Wizard.paginationSettings",
@@ -96,7 +94,7 @@ class PaginationStep extends Step
     /**
      * @return array
      */
-    private function generateSortingSection(): array
+    private function generateSortingSection():array
     {
         $itemSortingByRules = PaginationConfig::getItemSortingByRules();
         $itemSortingOptions = StepHelper::generateTranslatedListBoxValues($itemSortingByRules);
@@ -129,14 +127,18 @@ class PaginationStep extends Step
             ]
         ];
     }
-
-    private function generateRecommendedSortingSection(): array
+    
+    /**
+     * @return array
+     */
+    private function generateRecommendedSortingSection():array
     {
-        $sortingRules = PaginationConfig::getSortingCategoryRules();
+        $sortingRules           = PaginationConfig::getSortingCategoryRules();
         $categorySortingOptions = StepHelper::generateTranslatedListBoxValues($sortingRules);
 
         $secondSortingRules = PaginationConfig::getSecondSortingCategoryRules();
-        $secondCatOptions = StepHelper::generateTranslatedListBoxValues($secondSortingRules);
+        $secondCatOptions   = StepHelper::generateTranslatedListBoxValues($secondSortingRules);
+        
         return [
             "title" => "Wizard.recommendedSortingSettings",
             "description" => "Wizard.recommendedSortingSettingsDescription",

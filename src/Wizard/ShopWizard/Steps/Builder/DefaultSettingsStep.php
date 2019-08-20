@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 06/06/2019
- * Time: 15:25
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
@@ -18,6 +12,10 @@ use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
 use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultSettingsStep
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class DefaultSettingsStep extends Step
 {
     /**
@@ -39,8 +37,7 @@ class DefaultSettingsStep extends Step
      * @var AccountingLocationRepositoryContract
      */
     private $locationRepository;
-
-
+    
     /**
      * DefaultSettingsStep constructor.
      *
@@ -55,12 +52,12 @@ class DefaultSettingsStep extends Step
         ContactClassRepositoryContract $classRepository,
         AccountingLocationRepositoryContract $accountingLocationRepositoryContract
     ){
+        parent::__construct();
+        
         $this->paymentRepository = $paymentRepository;
         $this->countryRepository = $countryRepository;
         $this->classRepository = $classRepository;
         $this->locationRepository = $accountingLocationRepositoryContract;
-
-        parent::__construct();
     }
 
     /**
@@ -83,8 +80,7 @@ class DefaultSettingsStep extends Step
         $paymentMethodsList = StepHelper::buildListBoxData($paymentMethods);
 
         $deliveryCountries = $this->countryRepository->getActiveCountriesList();
-
-
+        
         $b2bClasses  = $this->classRepository->allContactClasses();
         if(!count($b2bClasses))
         {
@@ -97,11 +93,12 @@ class DefaultSettingsStep extends Step
 
         $locations = $this->locationRepository->getAll();
         $locationsList = StepHelper::buildListBoxData($locations, "name", "id");
+        
         return [
-            "title" => "Wizard.defaultSettings",
+            "title"       => "Wizard.defaultSettings",
             "description" => "Wizard.defaultSettingsDescription",
-            "condition" => $this->hasRequiredSettings(),
-            "sections" => [
+            "condition"   => $this->hasRequiredSettings(),
+            "sections"    => [
                 $this->generateSection("defaultLanguage", $languagesList, $this->globalsCondition),
                 $this->generateSection("defaultShippingMethod", $shippingMethodsList, $this->globalsCondition),
                 $this->generateSection("defaultShippingProfile", $shippingProfilesList, $this->globalsCondition),
@@ -110,53 +107,28 @@ class DefaultSettingsStep extends Step
                 $this->generateSection("defaultB2C", $b2bClassesList, $this->globalsCondition),
                 $this->generateSection("defaultB2B",$b2bClassesList),
                 $this->generateSection("defaultLocation",$locationsList, $this->globalsCondition)
-//                $this->generateLocationSection($this->globalsCondition)
             ]
         ];
     }
-
+    
     /**
      * @param $name
-     *
+     * @param $listBoxValues
+     * @param bool $condition
      * @return array
      */
-    private function generateSection($name, $listBoxValues, $condition = true): array
+    private function generateSection($name, $listBoxValues, $condition = true):array
     {
         return [
-            "title" => "Wizard." . $name,
+            "title"       => "Wizard." . $name,
             "description" => "Wizard." . $name . "Description",
-            "condition" => $condition,
-            "form" => [
+            "condition"   => $condition,
+            "form"        => [
                 "defSettings_" . $name => [
-                    "type" => "select",
+                    "type"    => "select",
                     "options" => [
-                        "name" => "Wizard." . $name,
+                        "name"          => "Wizard." . $name,
                         "listBoxValues" => $listBoxValues
-                    ]
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * @param $condition
-     *
-     * @return array
-     */
-    private function generateLocationSection($condition)
-    {
-        return [
-            "title" => "Wizard.defaultLocation",
-            "description" => "Wizard.defaultLocationDescription",
-            "condition" => $condition,
-            "form" => [
-                "defSettings_defaultLocation" => [
-                    "dependencies" => ['client'],
-                    "dependencyMethod" => "getRelatedLocations",
-                    "type" => "select",
-                    "options" => [
-                        "name" => "Wizard.defaultLocation",
-                        "listBoxValues" => []
                     ]
                 ]
             ]
@@ -170,7 +142,7 @@ class DefaultSettingsStep extends Step
      *
      * @return array
      */
-    private function generateCountryDeliverySection($name, $collection, $condition = true): array
+    private function generateCountryDeliverySection($name, $collection, $condition = true):array
     {
         return [
             "title" => "Wizard." . $name,
@@ -185,7 +157,7 @@ class DefaultSettingsStep extends Step
      *
      * @return array
      */
-    private function generateCountriesList($countriesCollection): array
+    private function generateCountriesList($countriesCollection):array
     {
         $list = [];
     
@@ -200,18 +172,19 @@ class DefaultSettingsStep extends Step
                 
                 if(count($countries)) {
                     $list[$settingKey] = [
-                        "type" => "select",
+                        "type"    => "select",
                         "options" => [
-                            "name" => $language,
-                            'required' => true,
+                            "name"          => $language,
+                            'required'      => true,
                             "listBoxValues" => []
                         ]
                     ];
                     
                     foreach($countries as $country) {
                         $countryData = $country->toArray();
+                        
                         $list[$settingKey]['options']['listBoxValues'][] = [
-                            "value" => $countryData['id'],
+                            "value"   => $countryData['id'],
                             "caption" => $countryNames[$countryData['id']]
                         ];
                     }
