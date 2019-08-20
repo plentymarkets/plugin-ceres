@@ -159,8 +159,8 @@ class ShopWizardService
 
             //get search languages
 
-            $searchLangRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
-            $searchLanguagesSettings = $searchLangRepo->getLanguages()->toArray();
+            $searchSettingsRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
+            $searchLanguagesSettings = $searchSettingsRepo->getLanguages()->toArray();
 
             //iterate between languages and set the ones enabled
             $enabledLanguages = [];
@@ -183,6 +183,30 @@ class ShopWizardService
                 }
             }
 
+            // search fields logic
+
+            $itemSearchSettings = $searchSettingsRepo->getSearchSettings()->toArray();
+            foreach($itemSearchSettings['fields'] as $fieldKey => $fieldSettings) {
+                $fieldKey += 1;
+                $formFieldPrefix = "search_";
+                switch ($fieldKey) {
+                    case 1:
+                        $formField = "{$formFieldPrefix}firstSearchField";
+                        break;
+                    case 2:
+                        $formField = "{$formFieldPrefix}secondSearchField";
+                        break;
+                    case 3:
+                        $formField = "{$formFieldPrefix}thirdSearchField";
+                        break;
+                    default:
+                        $formField = "{$formFieldPrefix}{$fieldKey}thSearchField";
+
+                }
+                $formFieldValue = $fieldSettings['isActive'] ? $fieldSettings['key'] : "";
+
+                $globalData[$formField] = $formFieldValue;
+            }
         }
 
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);

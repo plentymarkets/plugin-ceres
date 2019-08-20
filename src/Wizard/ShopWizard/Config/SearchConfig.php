@@ -13,19 +13,19 @@ class SearchConfig
 {
     public static $searchFieldsOptions = [
         "searchFieldSelectParameter" => "",
-        "searchFieldItemId" => "item_id",
-        "searchFieldVariationId" => "variation_id",
-        "searchFieldVariationNumber" => "variation_number",
+        "searchFieldItemId" => "itemId",
+        "searchFieldVariationId" => "variationId",
+        "searchFieldVariationNumber" => "variationNumber",
         "searchFieldManufacturer" => "manufacturer",
         "searchFieldModel" => "model",
-        "searchFieldBarcodes" => "barcodes",
-        "searchFieldCategories" => "categories",
+        "searchFieldBarcodes" => "barcode",
+        "searchFieldCategories" => "category",
         "searchFieldKeywords" => "keywords",
-        "searchFieldFacets" => "facets",
+        "searchFieldFacets" => "facet",
         "searchFieldName" => "name",
         "searchFieldDescription" => "description",
-        "searchFieldShortDescription" => "short_description",
-        "searchFieldTechnicalData" => "technical_data",
+        "searchFieldShortDescription" => "shortDescription",
+        "searchFieldTechnicalData" => "technicalData",
     ];
 
     public static $sortingSearchDefaultOptions = [

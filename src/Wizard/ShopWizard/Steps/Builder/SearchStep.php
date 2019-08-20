@@ -25,7 +25,7 @@ class SearchStep extends Step
             "condition" => " (typeof settingsSelection_search === 'undefined' || " .
                 "settingsSelection_search === true) && " . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
             "sections" => [
-//                $this->generateSearchFieldsSection(),
+                $this->generateSearchFieldsSection(),
                 $this->generateSortingSearchSection()
             ]
         ];
@@ -65,7 +65,6 @@ class SearchStep extends Step
                         case 1:
                             $translationKey = "firstSearchField";
                             break;
-
                         case 2:
                             $translationKey = "secondSearchField";
                             break;

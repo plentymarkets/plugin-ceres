@@ -165,6 +165,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $cacheRepo->saveSettings($plentyId, (bool) $data["performance_shopBooster"]);
                 }
 
+                //save search languages settings
                 if (
                     isset($data["languages_firstSearchLanguage"]) ||
                     isset($data["languages_secondSearchLanguage"]) ||
@@ -184,8 +185,9 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                         $selectedSearchLanguages[] = $data["languages_thirdSearchLanguage"];
                     }
 
-                    $searchLangRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
-                    $searchLanguagesSettings = $searchLangRepo->getLanguages()->toArray();
+                    $searchSettingsRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
+                    $searchLanguagesSettings = $searchSettingsRepo->getLanguages()->toArray();
+
                     foreach($searchLanguagesSettings['languages'] as &$searchLanguagesSetting) {
                         if (in_array($searchLanguagesSetting['lang'], $selectedSearchLanguages)) {
                             $searchLanguagesSetting['isActive'] = true;
@@ -193,7 +195,43 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                             $searchLanguagesSetting['isActive'] = false;
                         }
                     }
-                    $searchLangRepo->saveLanguages($searchLanguagesSettings);
+
+                    $searchSettingsRepo->saveLanguages($searchLanguagesSettings);
+
+                    //save search settings
+
+                    $itemSearchSettings = $searchSettingsRepo->getSearchSettings()->toArray();
+                    $searchFields = $this->getSearchSetingsKeys($itemSearchSettings['fields']);
+                    $searchSettings = $this->setSearchSettingComplete();
+
+                    $completedSettings = [];
+                    $itemSearchSettingsData = [];
+
+                    foreach($searchSettings as $searchSetting) {
+                        if (!empty($data[$searchSetting['key']])){
+                            $itemSearchSettingsData[] = [
+                                "key" => $data[$searchSetting['key']],
+                                "boost" => 2000 - (intval($searchSetting['position']) * 100),
+                                "isActive" => true
+                            ];
+                            $completedSettings[] = $data[$searchSetting['key']];
+
+                        }
+                    }
+
+                    $disabledSettings  = array_diff($searchFields, $completedSettings);
+
+                    if (count($disabledSettings)) {
+                        foreach ($disabledSettings as $disabledSetting) {
+                            $itemSearchSettingsData[] = [
+                                "key" => $disabledSetting,
+                                "boost" => 0,
+                                "isActive" => false
+                            ];
+                        }
+                    }
+
+                    $searchSettingsRepo->saveSearchSettings(["fields" => $itemSearchSettingsData]);
                 }
             } else {
                 // we set the preview config entry
@@ -254,5 +292,44 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
         }
 
         return true;
+    }
+
+    private function setSearchSettingComplete(): array
+    {
+        $searchSettings = [];
+
+        for ($i = 0; $i < 13; $i++) {
+            switch($i){
+                case 1:
+                    $key = "search_firstSearchField";
+                    break;
+                case 2:
+                    $key = "search_secondSearchField";
+                    break;
+                case 3:
+                    $key = "search_thirdSearchField";
+                    break;
+                default:
+                    $key = "search_{$i}thSearchField";
+            }
+
+            $searchSettings[] = [
+                "key" => $key,
+                "position" => $i
+            ];
+        }
+
+        return $searchSettings;
+    }
+
+    private function getSearchSetingsKeys(array $settingsData): array
+    {
+        $searchKeys = [];
+
+        foreach ($settingsData as $setting) {
+            $searchKeys[] = $setting['key'];
+        }
+
+        return $searchKeys;
     }
 }
