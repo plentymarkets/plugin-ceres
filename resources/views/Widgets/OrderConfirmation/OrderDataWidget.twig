@@ -4,6 +4,8 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::MyAccount.Components.ChangePaymentMethod") }}
 
+{{ Twig.if("data") }}
+
 <div class="widget widget-order-data">
     <div class="card small">
         <!-- ORDER -->
@@ -37,11 +39,7 @@
                         <div>{{ Twig.print("data.order.billingAddress.name4") }}</div>
                         <div>{{ Twig.print("data.order.billingAddress.address1") }} {{ Twig.print("data.order.billingAddress.address2") }}</div>
                         <div>{{ Twig.print("data.order.billingAddress.postalCode") }} {{ Twig.print("data.order.billingAddress.town") }}</div>
-                        <div>
-                            {{ Twig.if("data.order.billingAddress.countryId") }}
-                                {{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.billingAddress.countryId")])) }}
-                            {{ Twig.endif() }}
-                        </div>
+                        <div>{{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.billingAddress.countryId")])) }}</div>
                     </span>
                 </div>
 
@@ -67,11 +65,7 @@
                                     {{ Twig.print("data.order.deliveryAddress.address3") }}
                                 </div>
                                 <div>{{ Twig.print("data.order.deliveryAddress.postalCode") }} {{ Twig.print("data.order.deliveryAddress.town") }}</div>
-                                <div>
-                                    {{ Twig.if("data.order.deliveryAddress.countryId") }}
-                                        {{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.deliveryAddress.countryId")])) }}
-                                    {{ Twig.endif() }}
-                                </div>
+                                <div>{{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.deliveryAddress.countryId")])) }}</div>
                             </span>
                         {{ Twig.endif() }}
                     </span>
@@ -123,7 +117,6 @@
                     <span class="col-6 col-sm-7">{{ Twig.print("data.shippingProvider") }} - {{ Twig.print("data.shippingProfileName") }}</span>
                 </div>
                 
-                TODO: testen                
                 {{ Twig.set("shippingDate", "" | json_encode) }}
                 {{ Twig.for("date", "data.order.dates", "date.typeId == 8") }}
                     {{ Twig.set("shippingDate", "date.date") }}
@@ -144,3 +137,5 @@
         <!-- ORDER -->
     </div>
 </div>
+
+{{ Twig.endif() }}
