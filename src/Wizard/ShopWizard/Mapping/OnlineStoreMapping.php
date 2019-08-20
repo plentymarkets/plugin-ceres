@@ -81,27 +81,33 @@ class OnlineStoreMapping
         "onlineStore_recaptchaVersion" => [
             "field" => "global.google_recaptcha_version",
             "type" => "integer",
-            "global" => false,
+            "global" => true,
             "optional" => false,
         ],
         "onlineStore_recaptchaApiKey" => [
             "field" => "global.google_recaptcha_api_key",
             "type" => "string",
-            "global" => false,
+            "global" => true,
             "optional" => false,
         ],
         "onlineStore_recaptchaSecret" => [
             "field" => "global.google_recaptcha_secret",
             "type" => "string",
-            "global" => false,
+            "global" => true,
             "optional" => false,
         ],
         "onlineStore_recaptchaThreshold" => [
             "field" => "global.google_recaptcha_threshold",
             "type" => "float",
-            "global" => false,
+            "global" => true,
             "optional" => false,
         ],
+        "onlineStore_sessionLifetime" => [
+            "field" => "sessionLifetime",
+            "type" => "integer",
+            "global" => true,
+            "optional" => false
+        ]
     ];
 
     public static function getFieldsMapped()

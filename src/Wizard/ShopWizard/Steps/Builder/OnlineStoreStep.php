@@ -36,6 +36,7 @@ class OnlineStoreStep extends Step
                 $this->buildStoreOrderSettings(),
                 $this->buildGoogleRecaptchaSettings(),
                 $this->buildStoreCalistoSettings(),
+                $this->buildSessionLifeTimeSection(),
             ]
         ];
     }
@@ -264,6 +265,7 @@ class OnlineStoreStep extends Step
         ];
     }
 
+
     /**
      * @return array
      */
@@ -287,7 +289,32 @@ class OnlineStoreStep extends Step
             ]
         ];
     }
-    
+
+    /**
+     * @return array
+     */
+    private function buildSessionLifeTimeSection(): array
+    {
+        $sessionLifetimeDurations = OnlineStoreConfig::getSessionLifetimeOptions();
+        $sessionLifetimeOptions = StepHelper::generateTranslatedListBoxValues($sessionLifetimeDurations);
+
+        return [
+            "title" => "Wizard.sessionLifeTimeTitle",
+            "description" => "Wizard.sessionLifeTimeDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_sessionLifetime" => [
+                    "type" => "select",
+                    "defaultValue" => 0,
+                    "options" => [
+                        "name" => "Wizard.sessionLifeTime",
+                        "listBoxValues" => $sessionLifetimeOptions
+                    ]
+                ]
+            ]
+        ];
+    }
+
     private function getOrderStatusListBoxValues()
     {
         $currentLang = LanguagesHelper::getUserLang();
