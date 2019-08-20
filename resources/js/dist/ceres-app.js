@@ -46312,6 +46312,12 @@ module.exports = function ($) {
       $bsModal = $(element).find(".modal").first();
     }
 
+    $bsModal.one("hide.bs.modal", function () {
+      $bsModal.find(".modal-content").unbind("mouseenter");
+      $bsModal.find(".modal-content").unbind("mouseleave");
+      stopTimeout();
+      paused = false;
+    });
     return {
       show: show,
       hide: hide,
@@ -46342,8 +46348,6 @@ module.exports = function ($) {
       return new Promise(function (resolve, reject) {
         $bsModal.modal("hide");
         $bsModal.one("hidden.bs.modal", function () {
-          $bsModal.find(".modal-content").unbind("mouseenter");
-          $bsModal.find(".modal-content").unbind("mouseleave");
           resolve(self);
         });
       });
