@@ -32,7 +32,7 @@ class SearchStep extends Step
     /**
      * @return array
      */
-    /*private function generateSearchFieldsSection():array
+    private function generateSearchFieldsSection():array
     {
         return [
             "title" => "Wizard.searchFields",
@@ -40,12 +40,12 @@ class SearchStep extends Step
             "condition" => $this->globalsCondition,
             "form" => $this->getSearchFields()
         ];
-    }*/
+    }
 
     /**
      * @return array
      */
-    /*private function getSearchFields():array
+    private function getSearchFields():array
     {
         $formFields = [];
         
@@ -89,7 +89,7 @@ class SearchStep extends Step
         }
 
         return $formFields;
-    }*/
+    }
 
     /**
      * @return array
