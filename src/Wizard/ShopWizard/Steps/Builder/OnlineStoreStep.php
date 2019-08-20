@@ -34,6 +34,7 @@ class OnlineStoreStep extends Step
                 $this->buildStoreBack2Top(),
                 $this->buildStoreEmailSettings(),
                 $this->buildStoreOrderSettings(),
+                $this->buildGoogleRecaptchaSettings(),
                 $this->buildStoreCalistoSettings(),
             ]
         ];
@@ -199,6 +200,66 @@ class OnlineStoreStep extends Step
                         "listBoxValues" => $this->getOrderStatusListBoxValues()
                     ]
                 ],
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function buildGoogleRecaptchaSettings(): array
+    {
+        return [
+            "title" => "Wizard.settingsRecaptcha",
+            "description" => "Wizard.settingsRecaptchaDescription",
+            "form" => [
+                "onlineStore_enableRecaptcha" => [
+                    "type" => "toggle",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.enableRecaptcha"
+                    ]
+                ],
+                "onlineStore_recaptchaVersion" => [
+                    "type" => "select",
+                    "defaultValue" => 2,
+                    "isVisible" => "typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true",
+                    "options" => [
+                        "name" => "Wizard.recaptchaVersion",
+                        "listBoxValues" => [
+                            [
+                                "value" => 2,
+                                "caption" => "Wizard.recaptchaVersion2"
+                            ],
+                            [
+                                "value" => 3,
+                                "caption" => "Wizard.recaptchaVersion3"
+                            ]
+                        ]
+                    ]
+                ],
+                "onlineStore_recaptchaApiKey" => [
+                    "type" => "text",
+                    "isVisible" => "typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true",
+                    "options" => [
+                        "name" => "Wizard.recaptchaApiKey"
+                    ]
+                ],
+                "onlineStore_recaptchaSecret" => [
+                    "type" => "text",
+                    "isVisible" => "typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true",
+                    "options" => [
+                        "name" => "Wizard.recaptchaSecret"
+                    ]
+                ],
+                "onlineStore_recaptchaThreshold" => [
+                    "type" => "number",
+                    "defaultValue" => 0.5,
+                    "isVisible" => "(typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true) && onlineStore_recaptchaVersion === 3",
+                    "options" => [
+                        "name" => "Wizard.recaptchaThreshold"
+                    ]
+                ]
             ]
         ];
     }
