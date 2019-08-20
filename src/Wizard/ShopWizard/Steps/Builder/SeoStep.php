@@ -122,16 +122,6 @@ class SeoStep extends Step
      */
     public function generateRobotsTxtSection():array
     {
-        $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
-        $app = pluginApp(Application::class);
-        $currentConfig = $webstoreConfig->findByWebstoreId($app->getWebstoreId())->toArray();
-
-        $robotsDefault = 'User-agent: *'.chr(10);
-        $robotsDefault .= 'Disallow: /plenty/'.chr(10);
-        $robotsDefault .= 'Allow: /plenty/api/external.php'.chr(10);
-        $robotsDefault .= 'Disallow: /xml/'.chr(10);
-        $robotsDefault .= 'Sitemap: '. $currentConfig['domainSsl'] .'/sitemap.xml'.chr(10);
-
         return [
             "title" => "Wizard.robotsTxt",
             "description" => "Wizard.robotsTxtDescription",
@@ -139,7 +129,7 @@ class SeoStep extends Step
             "form" => [
                 "seo_robotsTxt" => [
                     "type" => "textarea",
-                    "defaultValue" => $robotsDefault,
+                    "defaultValue" => "",
                     "options" => [
                         "name" => "Wizard.robotsTxt",
                         "maxRows" => 15,
