@@ -12,7 +12,7 @@ use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
 use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
-//use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
+use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
@@ -159,8 +159,30 @@ class ShopWizardService
 
             //get search languages
 
-//            $searchLangRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
-//            $languages = $searchLangRepo->getLanguages();
+            $searchLangRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
+            $searchLanguagesSettings = $searchLangRepo->getLanguages()->toArray();
+
+            //iterate between languages and set the ones enabled
+            $enabledLanguages = [];
+            foreach($searchLanguagesSettings['languages'] as $searchLanguage) {
+                if($searchLanguage['isActive']) {
+                    $enabledLanguages[] = $searchLanguage['lang'];
+                }
+            }
+
+            if (count($enabledLanguages)) {
+                if (isset($enabledLanguages[0])) {
+                    $globalData['languages_secondSearchLanguage'] = $enabledLanguages[0];
+                }
+                if (isset($enabledLanguages[1])){
+                    $globalData['languages_firstSearchLanguage'] = $enabledLanguages[1];
+                }
+
+                if (isset($enabledLanguages[2])) {
+                    $globalData['languages_thirdSearchLanguage'] = $enabledLanguages[2];
+                }
+            }
+
         }
 
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);

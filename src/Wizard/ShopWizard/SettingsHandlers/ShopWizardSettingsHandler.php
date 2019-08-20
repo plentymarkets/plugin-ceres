@@ -15,6 +15,7 @@ use Ceres\Wizard\ShopWizard\Services\MappingService;
 use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheInvalidationRepositoryContract;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
+use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
 use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
@@ -163,6 +164,52 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $cacheRepo = pluginApp(ContentCacheSettingsRepositoryContract::class);
                     $cacheRepo->saveSettings($plentyId, (bool) $data["performance_shopBooster"]);
                 }
+
+                if (
+                    isset($data["languages_firstSearchLanguage"]) ||
+                    isset($data["languages_secondSearchLanguage"]) ||
+                    isset($data["languages_thirdSearchLanguage"])
+                ) {
+                    $selectedSearchLanguages = [];
+
+                    if (!empty($data["languages_firstSearchLanguage"])) {
+                        $selectedSearchLanguages[] = $data["languages_firstSearchLanguage"];
+                    }
+
+                    if (!empty($data["languages_secondSearchLanguage"])) {
+                        $selectedSearchLanguages[] = $data["languages_secondSearchLanguage"];
+                    }
+
+                    if (!empty($data["languages_thirdSearchLanguage"])) {
+                        $selectedSearchLanguages[] = $data["languages_thirdSearchLanguage"];
+                    }
+
+                    $searchLangRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
+                    $searchLanguagesSettings = $searchLangRepo->getLanguages()->toArray();
+                    foreach($searchLanguagesSettings['languages'] as &$searchLanguagesSetting) {
+                        if (in_array($searchLanguagesSetting['lang'], $selectedSearchLanguages)) {
+                            $searchLanguagesSetting['isActive'] = true;
+                        } else {
+                            $searchLanguagesSetting['isActive'] = false;
+                        }
+                    }
+                    $searchLangRepo->saveLanguages($searchLanguagesSettings);
+                }
+            } else {
+                // we set the preview config entry
+
+                $previewConfigRepo = pluginApp(ShopWizardConfigRepository::class);
+                $previewConfData = [
+                    "pluginSetId" => $pluginSetId,
+                    "deleted" => false
+                ];
+
+                $previewConf = $previewConfigRepo->getConfig($pluginSetId);
+                if ($previewConf instanceof ShopWizardPreviewConfiguration) {
+                    $previewConfigRepo->updateConfig($pluginSetId, $previewConfData);
+                } else {
+                    $previewConfigRepo->createConfig($previewConfData);
+                }
             }
 
             $configRepo = pluginApp(ConfigurationRepositoryContract::class);
@@ -194,22 +241,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 }
 
                 $configRepo->saveConfiguration($pluginId, $configData, $pluginSetId);
-
-                // we set the preview config entry
-
-                $previewConfigRepo = pluginApp(ShopWizardConfigRepository::class);
-                $previewConfData = [
-                    "pluginSetId" => $pluginSetId,
-                    "deleted" => false
-                ];
-
-                $previewConf = $previewConfigRepo->getConfig($pluginSetId);
-                if ($previewConf instanceof ShopWizardPreviewConfiguration) {
-                    $previewConfigRepo->updateConfig($pluginSetId, $previewConfData);
-                } else {
-                    $previewConfigRepo->createConfig($previewConfData);
-                }
-
 
             }
 

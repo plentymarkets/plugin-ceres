@@ -20,12 +20,17 @@ class LanguagesStep extends Step
     private $languages;
 
     /**
+     * @var array
+     */
+    private $languagesOptions;
+
+    /**
      * LanguagesStep constructor.
      */
     public function __construct()
     {
-        $languages = LanguagesHelper::getTranslatedLanguages();
-        $this->languages = $languages;
+        $this->languages = LanguagesHelper::getTranslatedLanguages();
+        $this->languagesOptions = StepHelper::buildListBoxData($this->languages);
 
         parent::__construct();
     }
@@ -43,8 +48,7 @@ class LanguagesStep extends Step
             "sections" => [
                 $this->generateActiveLanguagesSection(),
                 $this->generateAutomaticLanguageSection(),
-                //we not use this until we have access in plugin to needed contracts
-                //$this->generateSearchLanguagesSection()
+                $this->generateSearchLanguagesSection()
             ]
         ];
     }
@@ -55,7 +59,6 @@ class LanguagesStep extends Step
     private function generateActiveLanguagesSection(): array
     {
 
-        $languagesOptions = StepHelper::buildListBoxData($this->languages);
         return [
             "title" => "Wizard.activeLanguages",
             "description" => "Wizard.activeLanguagesDescription",
@@ -64,11 +67,11 @@ class LanguagesStep extends Step
                 "languages_activeLanguages" => [
                     "type" => "checkboxGroup",
                     "defaultValue" => [
-                        $languagesOptions[0]['value']
+                        $this->languagesOptions[0]['value']
                     ],
                     "options" => [
                         "name" => "Wizard.activeLanguages",
-                        "checkboxValues" => $languagesOptions
+                        "checkboxValues" => $this->languagesOptions
                     ]
                 ]
             ]
@@ -132,35 +135,37 @@ class LanguagesStep extends Step
      */
     private function generateSearchLanguagesSection(): array
     {
+        $languageOptions = $this->languagesOptions;
+        array_unshift($languageOptions, [
+            "caption" => "Wizard.noChange",
+            "value" => ""
+        ]);
         return [
             "title" => "Wizard.searchLanguages",
             "description" => "Wizard.searchLanguagesDescription",
             "form" => [
                 "languages_firstSearchLanguage" => [
-                    "dependencies" => ['languages_activeLanguages'],
-                    "dependencyMethod" => "getSearchActiveLanguages",
                     "type" => "select",
+                    "defaultValue" => "",
                     "options" => [
                         "name" => "Wizard.firstSearchLanguage",
-                        "listBoxValues" => []
+                        "listBoxValues" => $languageOptions
                     ]
                 ],
                 "languages_secondSearchLanguage" => [
-                    "dependencies" => ['languages_activeLanguages'],
-                    "dependencyMethod" => "getSearchActiveLanguages",
                     "type" => "select",
+                    "defaultValue" => "",
                     "options" => [
                         "name" => "Wizard.secondSearchLanguage",
-                        "listBoxValues" => []
+                        "listBoxValues" => $languageOptions
                     ]
                 ],
                 "languages_thirdSearchLanguage" => [
-                    "dependencies" => ['languages_activeLanguages'],
-                    "dependencyMethod" => "getSearchActiveLanguages",
                     "type" => "select",
+                    "defaultValue" => "",
                     "options" => [
                         "name" => "Wizard.thirdSearchLanguage",
-                        "listBoxValues" => []
+                        "listBoxValues" => $languageOptions
                     ]
                 ],
             ]

@@ -18,12 +18,12 @@ class LanguagesMapping
             "global" => false,
             "optional" => true,
         ],
-//        "languages_defaultBrowserLang" => [
-//            "field" => "browserLanguage",
-//            "type" => "string",
-//            "global" => true,
-//            "optional" => true,
-//        ],
+        "languages_defaultBrowserLang" => [
+            "field" => "browserLanguage",
+            "type" => "string",
+            "global" => true,
+            "optional" => true,
+        ],
     ];
 
     public static function getFieldsMapped()
