@@ -8,6 +8,7 @@
 
 ### Hinzugefügt
 
+- Der Ceres Assistent ist jetzt im Menü **System » Assistenten** verfügbar.
 - Folgende Widgets wurden hinzugefügt, um eigene Kontaktformulare im ShopBuilder erstellen zu können: E-Mail-Formular, Textfeld (einzeilig), Textfeld (mehrzeilig), E-Mail-Feld, Auswahl, reCaptcha.
 - Es wurde eine ShopBuilder-Vorlage für die Standard-Kontaktseite hinzugefügt.
 - Das Widget "GoogleMaps" wurde nach Ceres überführt und um eine Einstellung für den Kartentyp erweitert: Es ist nun möglich die Karte als Straßenkarte, Satellitenkarte, Hybridkarte oder Terrainkarte anzuzeigen.
