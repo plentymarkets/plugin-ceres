@@ -7,7 +7,6 @@
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {{ Twig.set("visibleFields", widget.settings.visibleFields.mobile | json_encode) }}
-{{ Twig.set("orderData", data | json_encode) }}
 
 {{ Twig.import("Totals", "Ceres::Checkout.Macros.OrderTotals") }}
 
@@ -16,6 +15,6 @@
         {% if customClass | length > 0 %}{{ customClass }}{% endif %}
         {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
         {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-        {{ Twig.print("Totals.forOrder(orderData, visibleFields)") }}
+        {{ Twig.print("Totals.forOrder(data, visibleFields)") }}
     </div>
 {{ Twig.endif() }}
