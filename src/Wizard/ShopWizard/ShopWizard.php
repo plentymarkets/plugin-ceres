@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 28/05/2019
- * Time: 15:51
- */
 
 namespace Ceres\Wizard\ShopWizard;
 
@@ -23,9 +17,12 @@ use Ceres\Wizard\ShopWizard\Steps\Builder\SettingsSelectionStep;
 use Plenty\Modules\Wizard\Services\WizardProvider;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class ShopWizard
+ * @package Ceres\Wizard\ShopWizard
+ */
 class ShopWizard extends WizardProvider
 {
-
     /**
      * @var DefaultSettingsService
      */
@@ -53,19 +50,18 @@ class ShopWizard extends WizardProvider
      */
     protected function structure()
     {
-        $requiredSettings = pluginApp(RequiredSettingsStep::class);
+        $requiredSettings  = pluginApp(RequiredSettingsStep::class);
         $settingsSelection = pluginApp(SettingsSelectionStep::class);
-        $defaultSettings = pluginApp(DefaultSettingsStep::class);
-        $onlineStore = pluginApp(OnlineStoreStep::class);
-        $currency = pluginApp(CurrencyStep::class);
-        $displayInfo = pluginApp(DisplayedInformationStep::class);
-        $pagination = pluginApp(PaginationStep::class);
-        $languages = pluginApp(LanguagesStep::class);
-        $performance = pluginApp(PerformanceStep::class);
-        $search = pluginApp(SearchStep::class);
-        $seo = pluginApp(SeoStep::class);
-
-
+        $defaultSettings   = pluginApp(DefaultSettingsStep::class);
+        $onlineStore       = pluginApp(OnlineStoreStep::class);
+        $currency          = pluginApp(CurrencyStep::class);
+        $displayInfo       = pluginApp(DisplayedInformationStep::class);
+        $pagination        = pluginApp(PaginationStep::class);
+        $languages         = pluginApp(LanguagesStep::class);
+        $performance       = pluginApp(PerformanceStep::class);
+        $search            = pluginApp(SearchStep::class);
+        $seo               = pluginApp(SeoStep::class);
+        
         return [
             "title" => "Wizard.title",
             "shortDescription" => "Wizard.shortDescription",
@@ -100,12 +96,16 @@ class ShopWizard extends WizardProvider
             ]
         ];
     }
-
+    
+    /**
+     * @return array
+     */
     private function buildKeywords()
     {
         $keywords = [];
         $i = 1;
         $prefix = ["Ceres::", "Wizard.keyword"];
+        
         while($this->translator->trans($prefix[0].$prefix[1].$i) !== $prefix[0].$prefix[1].$i)
         {
             $keywords[] = $prefix[1].$i;
@@ -128,6 +128,7 @@ class ShopWizard extends WizardProvider
     {
         $clients = $this->settingsService->getWebstores();
         $pluginSets = $this->settingsService->getPluginSets();
+        
         $clientsList = [
             [
                 "value" => "",
@@ -169,6 +170,7 @@ class ShopWizard extends WizardProvider
     private function buildPluginSetOptions()
     {
         $pluginSets = $this->settingsService->getPluginSets();
+        
         $pluginSetValues = [
             [
                 "value" => "",
@@ -200,7 +202,7 @@ class ShopWizard extends WizardProvider
     /**
      * @return array
      */
-    private function getUnDeletableOptions(): array
+    private function getUnDeletableOptions():array
     {
         $settingsService = pluginApp(DefaultSettingsService::class);
         $webStores = $settingsService->getWebstores();

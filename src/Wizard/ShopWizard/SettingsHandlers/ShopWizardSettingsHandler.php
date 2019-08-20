@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 03/06/2019
- * Time: 14:01
- */
 
 namespace Ceres\Wizard\ShopWizard\SettingsHandlers;
 
@@ -26,22 +20,37 @@ use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
 
-
+/**
+ * Class ShopWizardSettingsHandler
+ * @package Ceres\Wizard\ShopWizard\SettingsHandlers
+ */
 class ShopWizardSettingsHandler implements WizardSettingsHandler
 {
     /**
      * @var CountryRepositoryContract
      */
     private $countryRepository;
-
+    
+    /**
+     * @var CurrencyRepositoryContract
+     */
     private $currencyRepository;
-
+    
+    /**
+     * ShopWizardSettingsHandler constructor.
+     * @param CountryRepositoryContract $countryRepository
+     * @param CurrencyRepositoryContract $currencyRepositoryContract
+     */
     public function __construct(CountryRepositoryContract $countryRepository, CurrencyRepositoryContract $currencyRepositoryContract)
     {
         $this->countryRepository = $countryRepository;
         $this->currencyRepository = $currencyRepositoryContract;
     }
-
+    
+    /**
+     * @param array $parameters
+     * @return bool
+     */
     public function handle(array $parameters)
     {
         $data = $parameters['data'];
@@ -53,8 +62,8 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
             list($webstore,$pluginSet) = explode(".", $optionId);
 
-            list($webstorePrefix, $webstoreId) = explode('_', $webstore);
-            list($pluginSetPrefix, $pluginSetId) = explode('_', $pluginSet);
+            $webstoreId = explode('_', $webstore)[1];
+            $pluginSetId = explode('_', $pluginSet)[1];
 
             if (empty($webstoreId) && !empty($data['client'])) {
                 $webstoreId = $data['client'];
@@ -65,7 +74,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
             }
 
             //we need to create list of active languages that will be saved into plugin config and system settings
-
             $activeLanguagesList = count($data['languages_activeLanguages']) ?
                 implode(", ", $data['languages_activeLanguages']):
                 "";
@@ -140,7 +148,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 }
 
                 //save sitemap xml
-
                 if (isset($data['seo_siteMapConfig'])) {
                     $siteMapConfig = [
                       "contentCategory" => 0,
@@ -279,7 +286,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 }
 
                 $configRepo->saveConfiguration($pluginId, $configData, $pluginSetId);
-
             }
 
             //invalidate caching
@@ -293,8 +299,11 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
         return true;
     }
-
-    private function setSearchSettingComplete(): array
+    
+    /**
+     * @return array
+     */
+    private function setSearchSettingComplete():array
     {
         $searchSettings = [];
 

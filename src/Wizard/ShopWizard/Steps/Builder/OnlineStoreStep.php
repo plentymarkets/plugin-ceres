@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 24/06/2019
- * Time: 14:52
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
-
 
 use Ceres\Wizard\ShopWizard\Config\OnlineStoreConfig;
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
@@ -15,19 +8,22 @@ use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
 use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
 
+/**
+ * Class OnlineStoreStep
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class OnlineStoreStep extends Step
 {
-
     /**
      * @return array
      */
-    public function generateStep(): array
+    public function generateStep():array
     {
         return [
-            "title" => "Wizard.onlineStoreSettings",
+            "title"       => "Wizard.onlineStoreSettings",
             "description" => "Wizard.onlineStoreSettingsDescription",
-            "condition" => $this->hasRequiredSettings(),
-            "sections" => [
+            "condition"   => $this->hasRequiredSettings(),
+            "sections"    => [
                 $this->buildStoreNameStructure(),
                 $this->buildStoreFaviconStructure(),
                 $this->buildStoreCategoryTypesStructure(),
@@ -35,7 +31,7 @@ class OnlineStoreStep extends Step
                 $this->buildStoreEmailSettings(),
                 $this->buildStoreOrderSettings(),
                 $this->buildGoogleRecaptchaSettings(),
-                $this->buildStoreCalistoSettings(),
+                $this->buildStoreCallistoSettings(),
             ]
         ];
     }
@@ -43,7 +39,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreNameStructure(): array
+    private function buildStoreNameStructure():array
     {
         return [
             "title" => "Wizard.storeName",
@@ -61,7 +57,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreFaviconStructure(): array
+    private function buildStoreFaviconStructure():array
     {
         return [
             "title" => "Wizard.storeFavicon",
@@ -79,9 +75,9 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreCategoryTypesStructure(): array
+    private function buildStoreCategoryTypesStructure():array
     {
-        $catTypes = OnlineStoreConfig::getCategoryTypes();
+        $catTypes      = OnlineStoreConfig::getCategoryTypes();
         $categoryTypes = StepHelper::generateTranslatedListBoxValues($catTypes);
 
         return [
@@ -103,10 +99,10 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreBack2Top(): array
+    private function buildStoreBack2Top():array
     {
         $top2bottomPositions = OnlineStoreConfig::getToTopButtonPosition();
-        $positions = StepHelper::generateTranslatedListBoxValues($top2bottomPositions);
+        $positions           = StepHelper::generateTranslatedListBoxValues($top2bottomPositions);
 
         return [
             "title" => "Wizard.back2Top",
@@ -126,12 +122,12 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreEmailSettings(): array
+    private function buildStoreEmailSettings():array
     {
         $confirmationLinkExpiration = OnlineStoreConfig::getConfirmationLinkExpiration();
-        $confirmationList = StepHelper::generateTranslatedListBoxValues($confirmationLinkExpiration);
-        $globaUserHashMax = OnlineStoreConfig::getUserHashMaxAge();
-        $globaUserHashMaxList = StepHelper::generateTranslatedListBoxValues($globaUserHashMax);
+        $confirmationList           = StepHelper::generateTranslatedListBoxValues($confirmationLinkExpiration);
+        $globaUserHashMax           = OnlineStoreConfig::getUserHashMaxAge();
+        $globaUserHashMaxList       = StepHelper::generateTranslatedListBoxValues($globaUserHashMax);
 
         return [
             "title" => "Wizard.emailSettings",
@@ -167,9 +163,9 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreOrderSettings(): array
+    private function buildStoreOrderSettings():array
     {
-        $itemBundles = OnlineStoreConfig::getItemBundles();
+        $itemBundles     = OnlineStoreConfig::getItemBundles();
         $itemBundlesList = StepHelper::generateTranslatedListBoxValues($itemBundles);
         
         return [
@@ -207,7 +203,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildGoogleRecaptchaSettings(): array
+    private function buildGoogleRecaptchaSettings():array
     {
         return [
             "title" => "Wizard.settingsRecaptcha",
@@ -267,27 +263,30 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreCalistoSettings(): array
+    private function buildStoreCallistoSettings():array
     {
         $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
         $webstoreActive = $moduleRepo->isActive("webshop");
 
         return [
-            "title" => "Wizard.settingsOldCalisto",
-            "description" => "Wizard.settingsOldCalistoDescription",
+            "title" => "Wizard.settingsOldCallisto",
+            "description" => "Wizard.settingsOldCallistoDescription",
             "condition" => $webstoreActive,
             "form" => [
-                "onlineStore_enableCalisto" => [
+                "onlineStore_enableCallisto" => [
                     "type" => "checkbox",
                     "defaultValue" => false,
                     "options" => [
-                        "name" => "Wizard.enableCalisto"
+                        "name" => "Wizard.enableCallisto"
                     ]
                 ]
             ]
         ];
     }
     
+    /**
+     * @return array
+     */
     private function getOrderStatusListBoxValues()
     {
         $currentLang = LanguagesHelper::getUserLang();

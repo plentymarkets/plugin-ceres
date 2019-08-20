@@ -1,18 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 19/06/2019
- * Time: 15:11
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 
+/**
+ * Class Step
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class Step
 {
-
     public $globalsCondition;
 
     /**
@@ -26,17 +23,17 @@ class Step
     /**
      * @return bool
      */
-    public function hasRequiredSettings(): bool
+    public function hasRequiredSettings():bool
     {
         $hasSettings = false;
 
         $shopWizardService = pluginApp(DefaultSettingsService::class);
 
-        $hasShippingMethod = $shopWizardService->hasShippingMethods();
+        $hasShippingMethod  = $shopWizardService->hasShippingMethods();
         $hasShippingProfile = $shopWizardService->hasShippingProfiles();
-        $hasPaymentMethod = $shopWizardService->hasPaymentMethods();
+        $hasPaymentMethod   = $shopWizardService->hasPaymentMethods();
         $hasShippingCountry = $shopWizardService->hasShippingCountries();
-        $hasLocation = $shopWizardService->hasLocations();
+        $hasLocation        = $shopWizardService->hasLocations();
 
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry && $hasLocation) {
             $hasSettings = true;

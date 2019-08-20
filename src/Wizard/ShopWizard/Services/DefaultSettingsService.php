@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 11/06/2019
- * Time: 15:05
- */
 
 namespace Ceres\Wizard\ShopWizard\Services;
 
-use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
 use Plenty\Modules\Order\Shipping\Contracts\ParcelServicePresetRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
@@ -18,6 +11,10 @@ use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 
+/**
+ * Class DefaultSettingsService
+ * @package Ceres\Wizard\ShopWizard\Services
+ */
 class DefaultSettingsService
 {
     /**
@@ -26,7 +23,7 @@ class DefaultSettingsService
     private $parcelServicePresetRepo;
 
     /**
-     * @var PaymentRepositoryContract
+     * @var PaymentMethodRepositoryContract
      */
     private $paymentRepository;
 
@@ -44,7 +41,7 @@ class DefaultSettingsService
      * ShopWizardService constructor.
      *
      * @param ParcelServicePresetRepositoryContract $parcelServicePresetRepo
-     * @param PaymentRepositoryContract $paymentRepository
+     * @param PaymentMethodRepositoryContract $paymentRepository
      * @param CountryRepositoryContract $countryRepository
      * @param AccountingLocationRepositoryContract $accountingLocationRepo
      */
@@ -53,7 +50,8 @@ class DefaultSettingsService
         PaymentMethodRepositoryContract $paymentRepository,
         CountryRepositoryContract $countryRepository,
         AccountingLocationRepositoryContract $accountingLocationRepo
-    ){
+    )
+    {
         $this->parcelServicePresetRepo = $parcelServicePresetRepo;
         $this->paymentRepository = $paymentRepository;
         $this->countryRepository = $countryRepository;
@@ -66,7 +64,6 @@ class DefaultSettingsService
     public function hasShippingProfiles(): bool
     {
         $shippingProfiles = $this->getShippingProfiles();
-
         return count($shippingProfiles) ? true : false;
     }
 
@@ -75,9 +72,7 @@ class DefaultSettingsService
      */
     public function hasPaymentMethods(): bool
     {
-
         $pluginPaymentMethodsRegistered = $this->getPluginPaymentMethodsRegistered();
-
         return count($pluginPaymentMethodsRegistered) ? true : false;
     }
 
@@ -87,7 +82,6 @@ class DefaultSettingsService
     public function getPluginPaymentMethodsRegistered():array
     {
         $paymentMethods = $this->paymentRepository->allPluginPaymentMethods();
-
         $paymentMethodContainer = pluginApp(PaymentMethodContainer::class);
 
         $pluginPaymentMethodsRegistered = [];
@@ -109,9 +103,7 @@ class DefaultSettingsService
     public function hasShippingMethods(): bool
     {
         $shippingMethods = $this->getShippingMethods();
-
         return count($shippingMethods) ? true : false;
-
     }
 
     /**
@@ -120,9 +112,9 @@ class DefaultSettingsService
     public function hasShippingCountries(): bool
     {
         $shippingCountries = $this->countryRepository->getActiveCountriesList();
-
         return count($shippingCountries) ? true : false;
     }
+    
     /**
      * @return array
      */
@@ -137,7 +129,6 @@ class DefaultSettingsService
     public function getShippingMethods()
     {
         $shippingMethods = [];
-
         $shippingProfiles = $this->parcelServicePresetRepo->getPresetList();
 
         if (count($shippingProfiles)) {
@@ -158,7 +149,6 @@ class DefaultSettingsService
     public function hasLocations(): bool
     {
         $locations = $this->accountingLocationRepo->getAll();
-
         return count($locations) ? true : false;
     }
 
@@ -168,9 +158,7 @@ class DefaultSettingsService
     public function getPluginSets(): array
     {
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
-
         $pluginSets = $pluginSetRepo->list();
-
         return $pluginSets->toArray();
     }
 

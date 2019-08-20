@@ -1,114 +1,136 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 02/07/2019
- * Time: 12:43
- */
 
 namespace Ceres\Wizard\ShopWizard\Config;
 
-
+/**
+ * Class ItemViewConfig
+ * @package Ceres\Wizard\ShopWizard\Config
+ */
 class ItemViewConfig
 {
-
-    protected static $itemDisplayNames = [
-        "itemDisplayItemName" => "itemName",
-        "itemDisplayVariationName" => "variationName",
+    private static $itemDisplayNames = [
+        "itemDisplayItemName"              => "itemName",
+        "itemDisplayVariationName"         => "variationName",
         "itemDisplayItemNameVariationName" => "itemNameVariationName",
     ];
 
-
-    protected static $itemNames = [
+    private static $itemNames = [
         "itemName0" => "0",
         "itemName1" => "1",
         "itemName2" => "2"
     ];
 
-    protected static $itemDecimals = [
+    private static $itemDecimals = [
         "itemDecimal0" => "0",
         "itemDecimal1" => "1",
         "itemDecimal2" => "2"
     ];
 
-    public static $loadingAnimationTypes = [
+    private static $loadingAnimationTypes = [
         "loadingAnimationBars" => "bars",
         "loadingAnimationSpinner" => "spinner"
     ];
 
-    public static $itemVariationTypes = [
-        "itemVariationTypeAll" => "all",
-        "itemVariationTypeMain" => "main",
-        "itemVariationTypeChild" => "child",
+    private static $itemVariationTypes = [
+        "itemVariationTypeAll"      => "all",
+        "itemVariationTypeMain"     => "main",
+        "itemVariationTypeChild"    => "child",
         "itemVariationTypeCombined" => "combined",
     ];
 
-    public static $categoryDescriptionPositions = [
+    private static $categoryDescriptionPositions = [
         "categoryDescriptionNone" => "none",
-        "categoryDescription1" => "description1",
-        "categoryDescription2" => "description2",
+        "categoryDescription1"    => "description1",
+        "categoryDescription2"    => "description2",
         "categoryDescriptionBoth" => "both",
     ];
 
-    public static $cartItemData = [
+    private static $cartItemData = [
         "basketItemId" => "basket.item.item_id",
         "basketItemDescriptionShort" => "basket.item.description_short",
-        "basketItemDescriptionLong" => "basket.item.description_long",
-        "basketItemAvailability" => "basket.item.availability",
-        "basketItemCustomNumber" => "basket.item.customNumber",
+        "basketItemDescriptionLong"  => "basket.item.description_long",
+        "basketItemAvailability"     => "basket.item.availability",
+        "basketItemCustomNumber"     => "basket.item.customNumber",
     ];
 
-    public static $cartItemAdditionalInfo = [
-        "addItemToBasketConfirmOverlay" => "overlay",
-        "addItemToBasketConfirmPreview" => "preview",
+    private static $cartItemAdditionalInfo = [
+        "addItemToBasketConfirmOverlay"       => "overlay",
+        "addItemToBasketConfirmPreview"       => "preview",
         "addItemToBasketConfirmNoInformation" => "no_information"
     ];
 
-    public static $cartPreviewPosition = [
+    private static $cartPreviewPosition = [
         "cartPreviewTypeHover" => "hover",
         "cartPreviewTypeRight" => "preview",
     ];
-
+    
+    /**
+     * @return array
+     */
     public static function getItemDisplayNames()
     {
         return self::$itemDisplayNames;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getItemNames()
     {
         return self::$itemNames;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getItemDecimals()
     {
         return self::$itemDecimals;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getLoadingAnimationTypes()
     {
         return self::$loadingAnimationTypes;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getItemVariationTypes()
     {
         return self::$itemVariationTypes;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getCategoryDescriptionPositions()
     {
         return self::$categoryDescriptionPositions;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getCartItemData()
     {
         return self::$cartItemData;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getCartItemAdditionalInfo()
     {
         return self::$cartItemAdditionalInfo;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getCartPreviewPosion()
     {
         return self::$cartPreviewPosition;

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 12/06/2019
- * Time: 12:34
- */
 
 namespace Ceres\Wizard\ShopWizard\Services;
 
@@ -22,21 +16,31 @@ use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Models\Robots;
 use Plenty\Modules\Webshop\Seo\Models\SitemapConfiguration;
 
+/**
+ * Class ShopWizardService
+ * @package Ceres\Wizard\ShopWizard\Services
+ */
 class ShopWizardService
 {
     private $settingsService;
 
     private $mappingService;
-
-
-    public function __construct( DefaultSettingsService $settingsService, MappingService $mappingService)
+    
+    /**
+     * ShopWizardService constructor.
+     * @param DefaultSettingsService $settingsService
+     * @param MappingService $mappingService
+     */
+    public function __construct(DefaultSettingsService $settingsService, MappingService $mappingService)
     {
         $this->settingsService = $settingsService;
         $this->mappingService = $mappingService;
-
     }
-
-    public function getWebstoresIdentifiers(): array
+    
+    /**
+     * @return array
+     */
+    public function getWebstoresIdentifiers():array
     {
         $webstoresMapped = [];
 
@@ -61,7 +65,6 @@ class ShopWizardService
                     $webstores[] = [
                         'id' => 'preview',
                         'pluginSetId' => (int)$pluginSetEntry->pluginSetId
-
                     ];
                 }
             }
@@ -74,15 +77,19 @@ class ShopWizardService
                 $webstoresMapped[$key] = [
                     "client" => $webstore['id'],
                     "pluginSet" => $webstore['pluginSetId']
-
                 ];
             }
         }
 
         return $webstoresMapped;
     }
-
-    public function mapWebstoreData ($webstoreId, $pluginSetId)
+    
+    /**
+     * @param $webstoreId
+     * @param $pluginSetId
+     * @return array
+     */
+    public function mapWebstoreData($webstoreId, $pluginSetId)
     {
         $globalData = [];
 
@@ -158,7 +165,6 @@ class ShopWizardService
             }
 
             //get search languages
-
             $searchSettingsRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
             $searchLanguagesSettings = $searchSettingsRepo->getLanguages()->toArray();
 
@@ -231,8 +237,7 @@ class ShopWizardService
         $hasShippingProfile = $this->settingsService->hasShippingProfiles();
         $hasPaymentMethod = $this->settingsService->hasPaymentMethods();
         $hasShippingCountry = $this->settingsService->hasShippingCountries();
-
-
+        
         $pluginData = $this->mappingService->processPluginMappingData($pluginConfData);
 
         $defaultData = [
@@ -241,8 +246,6 @@ class ShopWizardService
         ];
 
         $data = array_merge($defaultData, $globalData, $pluginData);
-
-
         $data['settingsSelection_displayedInfo'] = $this->checkSelectionEnabled('displayInfo', $data);
         $data['settingsSelection_paginationSorting'] = $this->checkSelectionEnabled('paginationStep', $data);
         $data['settingsSelection_languages'] = $this->checkSelectionEnabled('languages', $data);
@@ -267,8 +270,12 @@ class ShopWizardService
 
         return $data;
     }
-
-
+    
+    /**
+     * @param string $keyPrefix
+     * @param array $data
+     * @return bool
+     */
     private function checkSelectionEnabled(string $keyPrefix, array $data): bool
     {
         $hasData = [];
@@ -286,5 +293,4 @@ class ShopWizardService
 
         return $found;
     }
-
 }

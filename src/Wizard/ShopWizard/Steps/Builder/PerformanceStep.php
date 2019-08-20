@@ -1,31 +1,28 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 02/08/2019
- * Time: 13:19
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
-
 
 use Ceres\Wizard\ShopWizard\Config\LogConfig;
 use Ceres\Wizard\ShopWizard\Config\PerformanceConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
+/**
+ * Class PerformanceStep
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class PerformanceStep extends Step
 {
-
     /**
      * @return array
      */
-    public function generateStep(): array
+    public function generateStep():array
     {
         return [
             "title" => "Wizard.performanceSettings",
             "description" => "Wizard.performanceSettingsDescription",
-            "condition" => " (typeof settingsSelection_performance === 'undefined' || "
-                ."settingsSelection_performance === true) && " . $this->hasRequiredSettings(),
+            "condition" => " (typeof settingsSelection_performance === 'undefined' ||"
+                          ." settingsSelection_performance === true) && "
+                          . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateShopBoosterSection(),
                 $this->generateLoggingOptionsSection(),
@@ -37,7 +34,7 @@ class PerformanceStep extends Step
     /**
      * @return array
      */
-    private function generateShopBoosterSection(): array
+    private function generateShopBoosterSection():array
     {
         return [
             "title" => "Wizard.shopBooster",
@@ -58,9 +55,9 @@ class PerformanceStep extends Step
     /**
      * @return array
      */
-    private function generateLoggingOptionsSection(): array
+    private function generateLoggingOptionsSection():array
     {
-        $loggingLevels = LogConfig::getLoggingLevels();
+        $loggingLevels    = LogConfig::getLoggingLevels();
         $logLevelsOptions = StepHelper::generateTranslatedListBoxValues($loggingLevels);
 
         return [
@@ -82,11 +79,15 @@ class PerformanceStep extends Step
             ]
         ];
     }
-
-    private function generatePerformanceSection(): array
+    
+    /**
+     * @return array
+     */
+    private function generatePerformanceSection():array
     {
-        $performanceLevels = PerformanceConfig::getPerformanceLevels();
+        $performanceLevels        = PerformanceConfig::getPerformanceLevels();
         $performanceLevelsOptions = StepHelper::generateTranslatedListBoxValues($performanceLevels);
+        
         return [
             "title" => "Wizard.performanceLevel",
             "description" => "Wizard.performanceLevelDescription",

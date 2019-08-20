@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 04/07/2019
- * Time: 08:34
- */
 
 namespace Ceres\Wizard\ShopWizard\Mapping;
 
-
+/**
+ * Class DataMapping
+ * @package Ceres\Wizard\ShopWizard\Mapping
+ */
 class DataMapping
 {
     public $dataMapping = [];
@@ -20,7 +17,6 @@ class DataMapping
     /**
      * DataMapping constructor.
      */
-
     public function __construct()
     {
         $this->loadDataMapping();
@@ -29,15 +25,15 @@ class DataMapping
 
     private function loadDataMapping()
     {
-        $currenciesMapping = CurrenciesMapping::getFieldsMapped();
+        $currenciesMapping      = CurrenciesMapping::getFieldsMapped();
         $defaultSettingsMapping = DefaultSettingsMapping::getFieldsMapped();
-        $displayInfoMapping = DisplayInfoMapping::getFieldsMapped();
-        $languagesMapping = LanguagesMapping::getFieldsMapped();
-        $onlineStoreMapping = OnlineStoreMapping::getFieldsMapped();
-        $paginationMapping = PaginationMapping::getFieldsMapped();
-        $performanceMapping = PerformanceMapping::getFieldsMapped();
-        $searchMapping = SearchMapping::getFieldsMapped();
-        $seoMapping = SeoMapping::getFieldsMapped();
+        $displayInfoMapping     = DisplayInfoMapping::getFieldsMapped();
+        $languagesMapping       = LanguagesMapping::getFieldsMapped();
+        $onlineStoreMapping     = OnlineStoreMapping::getFieldsMapped();
+        $paginationMapping      = PaginationMapping::getFieldsMapped();
+        $performanceMapping     = PerformanceMapping::getFieldsMapped();
+        $searchMapping          = SearchMapping::getFieldsMapped();
+        $seoMapping             = SeoMapping::getFieldsMapped();
 
         $this->dataMapping = array_merge(
             $currenciesMapping,
@@ -51,10 +47,9 @@ class DataMapping
             $seoMapping
         );
     }
-
+    
     private function sortDataMapping()
     {
-
         foreach ($this->dataMapping as $mappingKey => $mappingData) {
             if ($mappingData['global'] === true) {
                 $this->globalMapping[$mappingKey] = $mappingData;
@@ -64,12 +59,18 @@ class DataMapping
         }
 
     }
-
+    
+    /**
+     * @return array
+     */
     public function getGlobalData()
     {
         return $this->globalMapping;
     }
-
+    
+    /**
+     * @return array
+     */
     public function getPluginMapping()
     {
         return $this->pluginMapping;

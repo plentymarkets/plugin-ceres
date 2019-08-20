@@ -1,29 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 06/08/2019
- * Time: 08:22
- */
 
 namespace Ceres\Wizard\ShopWizard\Steps\Builder;
-
 
 use Ceres\Wizard\ShopWizard\Config\SearchConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 
+/**
+ * Class SearchStep
+ * @package Ceres\Wizard\ShopWizard\Steps\Builder
+ */
 class SearchStep extends Step
 {
     /**
      * @return array
      */
-    public function generateStep(): array
+    public function generateStep():array
     {
         return [
             "title" => "Wizard.searchStep",
             "description" => "Wizard.searchStepDescription",
-            "condition" => " (typeof settingsSelection_search === 'undefined' || " .
-                "settingsSelection_search === true) && " . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
+            "condition" => " (typeof settingsSelection_search === 'undefined' ||" .
+                           " settingsSelection_search === true) && "
+                           . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateSearchFieldsSection(),
                 $this->generateSortingSearchSection()
@@ -34,7 +32,7 @@ class SearchStep extends Step
     /**
      * @return array
      */
-    private function generateSearchFieldsSection(): array
+    /*private function generateSearchFieldsSection():array
     {
         return [
             "title" => "Wizard.searchFields",
@@ -42,15 +40,16 @@ class SearchStep extends Step
             "condition" => $this->globalsCondition,
             "form" => $this->getSearchFields()
         ];
-    }
+    }*/
 
     /**
      * @return array
      */
-    private function getSearchFields(): array
+    /*private function getSearchFields():array
     {
         $formFields = [];
-        $searchFieldsOptions = SearchConfig::getSearchFieldsOptions();
+        
+        $searchFieldsOptions     = SearchConfig::getSearchFieldsOptions();
         $searchFieldsOptionsList = StepHelper::generateTranslatedListBoxValues($searchFieldsOptions);
 
         if (count($searchFieldsOptions)) {
@@ -90,24 +89,24 @@ class SearchStep extends Step
         }
 
         return $formFields;
-    }
+    }*/
 
     /**
      * @return array
      */
-    private function generateSortingSearchSection(): array
+    private function generateSortingSearchSection():array
     {
         //default sorting search options
         $defaultSortingSearchOptions = SearchConfig::getSortingSearchDefaultOptions();
-        $defaultSearchOptionsList = StepHelper::generateTranslatedListBoxValues($defaultSortingSearchOptions);
+        $defaultSearchOptionsList    = StepHelper::generateTranslatedListBoxValues($defaultSortingSearchOptions);
 
         //first sorting search options
         $firstSortingSearchOptions = SearchConfig::getSortingFirstSearchOptions();
-        $firstSearchOptionsList = StepHelper::generateTranslatedListBoxValues($firstSortingSearchOptions);
+        $firstSearchOptionsList    = StepHelper::generateTranslatedListBoxValues($firstSortingSearchOptions);
 
         //other sorting search options
         $otherSortingSearchOptions = SearchConfig::getSortingOtherSearchOptions();
-        $otherSearchOptionsList = StepHelper::generateTranslatedListBoxValues($otherSortingSearchOptions);
+        $otherSearchOptionsList    = StepHelper::generateTranslatedListBoxValues($otherSortingSearchOptions);
 
         return [
             "title" => "Wizard.searchFields",

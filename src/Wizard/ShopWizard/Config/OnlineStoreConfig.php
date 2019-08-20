@@ -1,70 +1,80 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 12/07/2019
- * Time: 15:57
- */
 
 namespace Ceres\Wizard\ShopWizard\Config;
 
-
+/**
+ * Class OnlineStoreConfig
+ * @package Ceres\Wizard\ShopWizard\Config
+ */
 class OnlineStoreConfig
 {
-    public static $categoryTypes = [
-        "storeCategoryTypeItem" => "item",
+    private static $categoryTypes = [
+        "storeCategoryTypeItem"    => "item",
         "storeCategoryTypeContent" => "content",
-        "storeCategoryTypeBlog" => "blog"
+        "storeCategoryTypeBlog"    => "blog"
     ];
-
-    public static $toTopButtonPosition = [
-        "back2TopRight" => "right",
+    
+    private static $toTopButtonPosition = [
+        "back2TopRight"  => "right",
         "back2TopBottom" => "bottom"
     ];
-
-    public static $confirmationLinkExpiration = [
+    
+    private static $confirmationLinkExpiration = [
         "confirmationLinkExpirationAlways" => "always",
-        "confirmationLinkExpiration30" => '30',
-        "confirmationLinkExpiration90" => '90'
+        "confirmationLinkExpiration30"     => '30',
+        "confirmationLinkExpiration90"     => '90'
     ];
-
-
-    public static $globalMaxAge = [
-        "globalMaxAge1Hour" => "1",
-        "globalMaxAge6Hours" => "6",
-        "globalMaxAge12Hours" => "12",
-        "globalMaxAge24Hours" => "24",
-        "globalMaxAge1Week" => "168",
+    
+    private static $globalMaxAge = [
+        "globalMaxAge1Hour"    => "1",
+        "globalMaxAge6Hours"   => "6",
+        "globalMaxAge12Hours"  => "12",
+        "globalMaxAge24Hours"  => "24",
+        "globalMaxAge1Week"    => "168",
         "globalMaxAgeInfinite" => "-1"
     ];
-
-    public static $itemBundles = [
-        "itemBundlesDoNot" => "1",
-        "itemBundlesList" => "2",
+    
+    private static $itemBundles = [
+        "itemBundlesDoNot"   => "1",
+        "itemBundlesList"    => "2",
         "itemBundlesReplace" => "0"
     ];
-
-
+    
+    /**
+     * @return array
+     */
     public static function getCategoryTypes()
     {
         return self::$categoryTypes;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getToTopButtonPosition()
     {
         return self::$toTopButtonPosition;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getConfirmationLinkExpiration()
     {
         return self::$confirmationLinkExpiration;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getUserHashMaxAge()
     {
         return self::$globalMaxAge;
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getItemBundles()
     {
         return self::$itemBundles;

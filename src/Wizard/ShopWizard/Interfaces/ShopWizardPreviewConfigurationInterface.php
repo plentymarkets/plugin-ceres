@@ -1,15 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 19/08/2019
- * Time: 14:55
- */
 
 namespace Ceres\Wizard\ShopWizard\Interfaces;
 
-use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
-
+/**
+ * Interface ShopWizardPreviewConfigurationInterface
+ * @package Ceres\Wizard\ShopWizard\Interfaces
+ */
 interface ShopWizardPreviewConfigurationInterface
 {
 

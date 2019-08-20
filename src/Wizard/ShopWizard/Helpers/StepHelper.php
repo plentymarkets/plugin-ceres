@@ -1,19 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 31/07/2019
- * Time: 11:43
- */
 
 namespace Ceres\Wizard\ShopWizard\Helpers;
 
-
+/**
+ * Class StepHelper
+ * @package Ceres\Wizard\ShopWizard\Helpers
+ */
 class StepHelper
 {
-
     /**
-     * @param $data
+     * @param array $data
      * @param bool $captionColumn
      * @param bool $valColumn
      *
@@ -22,8 +18,8 @@ class StepHelper
     public static function buildListBoxData($data, $captionColumn = false, $valColumn = false)
     {
         $listBoxValues = [];
-        if (count($data)) {
-            foreach ($data as $itemKey => $itemVal) {
+        if(count($data)) {
+            foreach($data as $itemKey => $itemVal) {
                 $valData = is_object($itemVal) ? $itemVal->toArray() : $itemVal;
                 $caption = $captionColumn ? $valData[$captionColumn] : $valData;
                 $value = $valColumn ? $valData[$valColumn] : $itemKey;
@@ -47,7 +43,7 @@ class StepHelper
     {
         $listValues = [];
 
-        foreach ($data as $itemKey => $itemVal) {
+        foreach($data as $itemKey => $itemVal) {
             $listValues[] = [
                 "value" => $itemVal,
                 "caption" => "Wizard.{$itemKey}"
@@ -56,5 +52,4 @@ class StepHelper
 
         return $listValues;
     }
-
 }

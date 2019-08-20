@@ -1,16 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Albulescu
- * Date: 14/08/2019
- * Time: 15:29
- */
 
 namespace Ceres\Wizard\ShopWizard\Modifiers;
 
-
 use Plenty\Modules\Wizard\Contracts\WizardDataModifier;
 
+/**
+ * Class AvailableCurrencyModifier
+ * @package Ceres\Wizard\ShopWizard\Modifiers
+ */
 class AvailableCurrencyModifier implements WizardDataModifier
 {
     /**
@@ -21,15 +18,13 @@ class AvailableCurrencyModifier implements WizardDataModifier
     public function modify(array $parameters)
     {
         $data = $parameters['data'];
-
         $this->allowCurrenciesModifier($data);
-
         return $data;
     }
 
     private function allowCurrenciesModifier(array &$data)
     {
-        if (!$data['currencies_allowCurrencyChange']) {
+        if(!$data['currencies_allowCurrencyChange']) {
             $data['currencies_availableCurrencies'] = [];
         }
     }
