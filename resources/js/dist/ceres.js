@@ -38168,11 +38168,11 @@ Vue.component("registration", {
       this.isDisabled = true;
       ApiService.post("/rest/io/customer", userObject).done(function (response) {
         ApiService.setToken(response);
-        document.dispatchEvent(new CustomEvent("onSignUpSuccess", {
-          detail: userObject
-        }));
 
         if (!response.code) {
+          document.dispatchEvent(new CustomEvent("onSignUpSuccess", {
+            detail: userObject
+          }));
           NotificationService.success(_TranslationService["default"].translate("Ceres::Template.regSuccessful")).closeAfter(3000);
 
           if (document.getElementById(_this2.modalElement) !== null) {
