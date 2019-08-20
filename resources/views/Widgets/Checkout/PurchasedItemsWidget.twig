@@ -18,16 +18,16 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
     <div class="confirmation-order-list">
-        {{ Twig.for("item", "orderData.order.orderItems") }}
+        {{ Twig.for("item", "data.order.orderItems") }}
             {{ Twig.if("item.itemVariationId > 0 and not ('[-]' in item.orderItemName)") }}
                 {{ Twig.set("currentVariationId", "item.itemVariationId | trimNewlines") }}
 
                 <article class="cmp cmp-order-item">
-                    <a href="{{ Twig.print('orderData.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
-                        <img src="{{ Twig.print('orderData.itemImages | getObjectValue(currentVariationId)') }}" alt="{{ Twig.print('item.orderItemName') }}" title="{{ Twig.print('item.orderItemName') }}" class="{% if spacingPaddingT | length > 0 %} {{ spacingPaddingT }} {% endif %}" {% if inlinePaddingT | length > 0 %} style="{{ inlinePaddingT }}"{% endif %}>
+                    <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
+                        <img src="{{ Twig.print('data.itemImages | getObjectValue(currentVariationId)') }}" alt="{{ Twig.print('item.orderItemName') }}" title="{{ Twig.print('item.orderItemName') }}" class="{% if spacingPaddingT | length > 0 %} {{ spacingPaddingT }} {% endif %}" {% if inlinePaddingT | length > 0 %} style="{{ inlinePaddingT }}"{% endif %}>
                     </a>
                     <div class="item-details small">
-                        <a href="{{ Twig.print('orderData.itemURLs | getObjectValue(currentVariationId)') }}" class="clearfix">
+                        <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="clearfix">
                             <div class="item-name text-appearance {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                                 {{ Twig.set("orderItemName", Twig.call("ItemName.get", ["$item.orderItemName", "$item.bundleType"])) }}
                                 {{ Twig.print('orderItemName') }}
@@ -52,7 +52,7 @@
                         {{ Twig.endfor() }}
 
                         {{ Twig.set("itemPrice", "0") }}
-                        {{ Twig.if("orderData.highlightNetPrices") }}
+                        {{ Twig.if("data.highlightNetPrices") }}
                             {{ Twig.set("itemPrice", "itemAmount.priceOriginalNet") }}
                             {{ Twig.set("discountAmount", "itemAmount.priceOriginalNet - itemAmount.priceNet") }}
                             {{ Twig.set("itemPriceTotal", "item.quantity * itemAmount.priceNet") }}
@@ -107,7 +107,7 @@
                                             {{ Twig.endif() }}
                                         {{ Twig.endfor() }}
 
-                                        <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('orderData.order.id') }}{{ Twig.endif() }}"
+                                        <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
                                         target="_blank">
                                             <i class="fa fa-external-link" aria-hidden="true"></i>
                                             {{ Twig.print('splitPath | last') }}
