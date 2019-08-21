@@ -34,7 +34,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->createTwoColumnWidget();
         
         $this->createOrderDataWidget();
-        // $this->createThreeColumnWidget();
+        $this->createThreeColumnWidget();
 
         // $this->createTrackingLinkWidget();
         $this->createOrderDocumentsWidget();
