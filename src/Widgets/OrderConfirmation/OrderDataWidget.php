@@ -2,9 +2,7 @@
 
 namespace Ceres\Widgets\OrderConfirmation;
 
-use Ceres\Widgets\Helper\BaseWidget;
-
-class OrderDataWidget extends BaseWidget
+class OrderDataWidget extends OrderConfirmationBaseWidget
 {
     protected $template = "Ceres::Widgets.OrderConfirmation.OrderDataWidget";
 }
