@@ -21,6 +21,8 @@
 - The logo of the manufacturer is now available as a data field in the inline editor of the single item view.
 - You can now select the type of animation for the image carousel and the item image widgets.
 - .css and .js files now have a dynamic suffix, which makes it possible to remove them from browser caches when the plugin set is saved and published (Cache busting).
+- A warning is now displayed if an item without stock limitation is added to the shopping cart in an amount that exceed its available stock. The new key in the **CMS » Multilingualism** menu is "notificationsWarningOverselling".
+
 
 ### Changed
 
