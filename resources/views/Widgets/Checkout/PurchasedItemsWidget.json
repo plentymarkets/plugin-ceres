@@ -1,0 +1,21 @@
+{
+    "identifier": "Ceres::PurchasedItemsWidget",
+    "label": "Widget.purchasedItemsLabel",
+    "previewImageURL": "/images/widgets/purchased-items.svg",
+    "type": "orderconfirmation",
+    "categories": [
+        "orderconfirmation"
+    ],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\PurchasedItemsWidget",
+    "settings": {
+        "customClass": "@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing": "@include(spacing)"
+    }
+}

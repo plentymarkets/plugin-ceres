@@ -11600,32 +11600,84 @@ button:focus {
 	@include button-variant($gray-lighter, $gray-lighter);
 }
 
+.btn-collapse {
+    display: block;
+    position: relative;
+    z-index: 999;
+    width: 100%;
+    text-align: center;
+	cursor: pointer;
+	font-size: 85%;
+
+    &:before{
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1.5em;
+        border-bottom: 1px solid $gray-lighter;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+    }
+
+    &:after{
+        content: attr(data-show-more);
+        font-weight: 700;
+        color: $gray-light;
+        display: inline-block;
+        position: relative;
+        background-color: white;
+        padding: 0 .5em;
+        top: -.8em;
+	}
+
+	i {
+		color: $gray-light;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 1.5em;
+	}
+	
+	&.opened,
+	&:not(.collapsed) {
+		&:after {
+			content: attr(data-show-less);
+		}
+
+		i {
+			-webkit-transform: rotate(180deg);
+			        transform: rotate(180deg);
+			top: 0;
+			bottom: 1.5em;
+		}
+	}
+}
+
 // Responsive button text and icon visibility
 
 @each $bp in map-keys($grid-breakpoints) {
-	.btn-only-icon-#{$bp}-up {
-	  @include media-breakpoint-up($bp) {
-		width: 2.2rem !important;
+    .btn-only-icon-#{$bp}-up {
+        @include media-breakpoint-up($bp) {
+        width: 2.2rem !important;
         padding-right: 8px;
         height: 2.2rem;
 
         & span {
             display: none !important;
         }
-	  }
-	}
-	.btn-only-icon-#{$bp}-down {
-	  @include media-breakpoint-down($bp) {
+        }
+    }
+    .btn-only-icon-#{$bp}-down {
+        @include media-breakpoint-down($bp) {
         & span {
-			display: none !important;
-		}
-		i {
-			margin: 0 !important;
-			float: none !important;
-		}
-	  }
-	}
-  }
+            display: none !important;
+        }
+        i {
+            margin: 0 !important;
+            float: none !important;
+        }
+        }
+    }
+}
 
 // External plugins overrides
 .bs4-progress
@@ -15335,23 +15387,11 @@ html.ie {
 
 	@include media-breakpoint-up(sm){
 
-		// .item-name:after{
-		// 	content: none!important;
-		// }
-
 		.item-unit-price,
 		.item-total-price{
 			width: auto!important;
 			text-align: right;
 		}
-
-	}
-
-	@include media-breakpoint-up(md){
-
-	}
-
-	@include media-breakpoint-up(lg){
 
 	}
 
@@ -15372,10 +15412,6 @@ html.ie {
 	span {
 		text-decoration: underline!important;
 	}
-}
-
-.top-spacer {
-	margin-top: .5rem;
 }
 
 .cmp-address-list{
@@ -15683,41 +15719,12 @@ html.ie {
 		transition: max-height 300ms; 
 	}
 
-	.expand-btn{
-		display: block;
-		position: relative;
-		z-index: 999;
-		width: 100%;
-		text-align: center;
-		cursor: pointer;
-
-		&:before{
-			content: "";
-			display: block;
-			width: 100%;
-			height: 1.5em;
-			border-bottom: 1px solid $gray-lighter;
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
-		}
-
-		&:after{
-			content: attr(data-show-more);
-			font-weight: 700;
-			color: $gray-light;
-		    display: inline-block;
-		    position: relative;
-		    background-color: $body-bg;
-		    padding: 0 .5em;
-		    top: -.8em;
-		}
-	}
-
 	.toggle-description:checked{
 		& ~ .item-description{
 			max-height: 70em;// 10 lines
 		}
 
-		& ~ .expand-btn{
+		& ~ .btn-collapse{
 			&:after{
 				content: attr(data-show-less);
 			}
@@ -15926,6 +15933,7 @@ html.ie .confirmation-order-list .cmp-order-item {
 		}
 	}
 }
+
 // Arrange counter and price side by side
 @include media-breakpoint-up(sm) {
 	.main .basket .basket-item-container .basket-item-container-right {	
@@ -16164,42 +16172,6 @@ html.ie .confirmation-order-list .cmp-order-item {
 			.item-additional-information {
 				font-size: 75%;
 			}
-
-			.basket-expand {
-				display: block;
-				position: relative;
-				z-index: 999;
-				width: 100%;
-				text-align: center;
-				cursor: pointer;
-				font-size: 75%;
-			
-				&:before{
-					content: "";
-					display: block;
-					width: 100%;
-					height: 1.5em;
-					border-bottom: 1px solid $gray-lighter;
-					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
-				}
-			
-				&:after{
-					content: attr(data-show-more);
-					font-weight: 700;
-					color: $gray-light;
-					display: inline-block;
-					position: relative;
-					background-color: $body-bg;
-					padding: 0 .5em;
-					top: -.8em;
-				}
-			
-				&.opened {
-					&:after {
-						content: attr(data-show-less);
-					}
-				}
-			}
 		}
 	}
 }
@@ -16286,6 +16258,7 @@ html.ie .wrapper-main .checkout .checkout-rightside .basket-item-container .bask
 		}	
 	}
 }
+
 @include media-breakpoint-up(lg) {
 	.control-basket {
 		&:hover {
@@ -17826,8 +17799,7 @@ html.ie {
 	margin-bottom: 2em;
 	padding-bottom: 1em;
 	border-bottom: 1px solid $gray-lighter;
-    
-
+	
 	@include media-breakpoint-up(sm){
 
 		.item-name:after{
@@ -17839,15 +17811,6 @@ html.ie {
 			width: auto!important;
 			text-align: right;
 		}
-
-	}
-
-	@include media-breakpoint-up(md){
-		
-	}
-
-	@include media-breakpoint-up(lg){
-		
 	}
 }
 
@@ -21124,7 +21087,7 @@ header .widget
 
 
 
-// Bootstrap Compatibility 
+// Bootstrap Compatibility
 @each $bp in map-keys($grid-breakpoints) {
     .hidden-#{$bp}-down {
       @include media-breakpoint-down($bp) {

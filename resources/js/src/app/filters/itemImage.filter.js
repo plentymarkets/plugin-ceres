@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.filter("itemImage", function(itemImages, highestPosition)
 {
     if (itemImages.length === 0)

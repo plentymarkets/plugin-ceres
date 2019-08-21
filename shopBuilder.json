@@ -73,6 +73,12 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"
             }
         ],
+        "orderconfirmation": [
+            {
+                "label": "Widget.presetOrderConfirmationDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
+            }
+        ],
         "myaccount": [
             {
               "label": "Widget.presetMyAccountDefault",

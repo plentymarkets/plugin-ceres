@@ -1,9 +1,9 @@
+import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
 
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-
-import TranslationService from "services/TranslationService";
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("order-return-history-list", {
 

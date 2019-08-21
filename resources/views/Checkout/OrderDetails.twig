@@ -96,7 +96,7 @@
 
                     {% set currentTemplate = services.template.getCurrentTemplate() %}
 
-                    {% if paymentMethoId != -1 and showAdditionalPaymentInformation == true %}
+                    {% if paymentMethodId != -1 and showAdditionalPaymentInformation == true %}
                         <change-payment-method
                             :current-order="{{ orderData.order | json_encode() }}"
                             :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
@@ -245,7 +245,7 @@
             {% endfor %}
 
         </div>
-
+        
         {{ Totals.forOrder(orderData) }}
     </div>
 </div>

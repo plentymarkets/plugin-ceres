@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.filter("itemImages", function(images, accessor)
 {
     if (!images)

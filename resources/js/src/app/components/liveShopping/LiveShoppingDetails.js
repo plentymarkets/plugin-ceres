@@ -1,3 +1,6 @@
+import Vue from "vue";
+import moment from "moment";
+
 Vue.component("live-shopping-details", {
     props:
     {

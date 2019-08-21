@@ -1,4 +1,6 @@
-const WaitScreenService = require("services/WaitScreenService");
+const WaitScreenService = require("../../services/WaitScreenService");
+
+import Vue from "vue";
 
 /**
 *

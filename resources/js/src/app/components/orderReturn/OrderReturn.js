@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { mapState, mapMutations, mapActions } from "vuex";
+
 Vue.component("order-return", {
 
     props: [
@@ -17,7 +20,7 @@ Vue.component("order-return", {
         this.$store.commit("setOrderReturnData", this.initOrderData);
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         orderData: state => state.orderReturn.orderData,
         orderReturnItems: state => state.orderReturn.orderReturnItems,
         isDisabled: state => state.orderReturn.orderReturnItems.length === 0
@@ -52,11 +55,11 @@ Vue.component("order-return", {
             vueEventHub.$emit("select-all-items");
         },
 
-        ...Vuex.mapMutations([
+        ...mapMutations([
             "updateOrderReturnNote"
         ]),
 
-        ...Vuex.mapActions([
+        ...mapActions([
             "sendOrderReturn"
         ])
     }

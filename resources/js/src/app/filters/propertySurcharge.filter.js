@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.filter("propertySurcharge", function(properties, propertyId)
 {
     const property = properties.find(prop => prop.property.id === parseInt(propertyId));

@@ -1,4 +1,6 @@
-import ApiService from "services/ApiService";
+import ApiService from "../../services/ApiService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("basket-preview", {
 
@@ -16,7 +18,7 @@ Vue.component("basket-preview", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         basket: state => state.basket.data,
         basketItems: state => state.basket.items,
         basketNotifications: state => state.basket.basketNotifications,

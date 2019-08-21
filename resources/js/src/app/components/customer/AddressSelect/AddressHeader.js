@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.component("address-header", {
 
     props: {
@@ -8,6 +10,28 @@ Vue.component("address-header", {
         address: {
             type: Object,
             required: true
+        },
+        addressFields:
+        {
+            type: Array,
+            default: () =>
+            {
+                return [
+                    "title",
+                    "contactPerson",
+                    "name1",
+                    "name2",
+                    "name3",
+                    "name4",
+                    "address1",
+                    "address2",
+                    "address3",
+                    "address4",
+                    "postalCode",
+                    "town",
+                    "country"
+                ];
+            }
         }
     },
 
@@ -16,6 +40,11 @@ Vue.component("address-header", {
         getCountryName(countryId)
         {
             return this.$store.getters.getCountryName(countryId);
+        },
+
+        isAddressFieldEnabled(fieldName)
+        {
+            return this.addressFields.includes(fieldName);
         }
     },
 

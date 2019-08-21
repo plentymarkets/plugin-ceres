@@ -1,4 +1,4 @@
-import ApiService from "services/ApiService";
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
@@ -288,7 +288,7 @@ const actions =
                     commit("removeDeliveryAddress", address);
                 }
 
-                ApiService.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, { keepOriginalResponse: true })
+                ApiService.del("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, { keepOriginalResponse: true })
                     .done(response =>
                     {
                         if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout)

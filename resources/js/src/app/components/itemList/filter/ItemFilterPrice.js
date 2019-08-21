@@ -1,4 +1,6 @@
-import UrlService from "services/UrlService";
+import UrlService from "../../../services/UrlService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("item-filter-price", {
 
@@ -39,7 +41,7 @@ Vue.component("item-filter-price", {
                     this.isLoading;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             isLoading: state => state.itemList.isLoading
         })
     },
