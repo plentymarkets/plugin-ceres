@@ -9,6 +9,8 @@ export function findModal(element)
     return new Modal(element);
 }
 
+export default { findModal };
+
 function Modal(element)
 {
     const self = this;
@@ -22,6 +24,14 @@ function Modal(element)
     {
         $bsModal = $(element).find(".modal").first();
     }
+
+    $bsModal.one("hide.bs.modal", function()
+    {
+        $bsModal.find(".modal-content").unbind("mouseenter");
+        $bsModal.find(".modal-content").unbind("mouseleave");
+        stopTimeout();
+        paused = false;
+    });
 
     return {
         show             : show,
@@ -61,8 +71,6 @@ function Modal(element)
             $bsModal.modal("hide");
             $bsModal.one("hidden.bs.modal", function()
             {
-                $bsModal.find(".modal-content").unbind("mouseenter");
-                $bsModal.find(".modal-content").unbind("mouseleave");
                 resolve(self);
             });
         });
@@ -142,5 +150,3 @@ function Modal(element)
         $bsModal.on(event, callback);
     }
 }
-
-export default { findModal };

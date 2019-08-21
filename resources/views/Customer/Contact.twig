@@ -101,8 +101,9 @@
                             <input class="form-check-input"
                                    data-mail="cc"
                                    value="{{ formId }}_mail"
-                                   type="checkbox">
-                            <label class="form-check-label">
+                                   type="checkbox"
+                                   id="{{ formId }}_copy_to_me">
+                            <label class="form-check-label" for="{{ formId }}_copy_to_me">
                                 {{ trans("Ceres::Template.contactSendMeACopy") }}
                             </label>
                         </div>
