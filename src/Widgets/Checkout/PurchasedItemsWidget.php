@@ -2,9 +2,9 @@
 
 namespace Ceres\Widgets\Checkout;
 
-use Ceres\Widgets\Helper\BaseWidget;
+use Ceres\Widgets\OrderConfirmation\OrderConfirmationBaseWidget;
 
-class PurchasedItemsWidget extends BaseWidget
+class PurchasedItemsWidget extends OrderConfirmationBaseWidget
 {
     protected $template = "Ceres::Widgets.Checkout.PurchasedItemsWidget";
 }
