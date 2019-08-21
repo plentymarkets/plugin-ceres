@@ -34,18 +34,18 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->createTwoColumnWidget();
         
         $this->createOrderDataWidget();
-        $this->createThreeColumnWidget();
+        // $this->createThreeColumnWidget();
 
-        $this->createTrackingLinkWidget();
+        // $this->createTrackingLinkWidget();
         $this->createOrderDocumentsWidget();
-        $this->createRetourLinkWidget();
+        // $this->createRetourLinkWidget();
 
-        $this->createpurchasedItemsWidget();
+        $this->createPurchasedItemsWidget();
         $this->createOrderTotalsWidget();
 
-        $this->createFourColumnWidget();
-        $this->createHomeLinkWidget();
-        $this->createMyAccountLinkWidget();
+        // $this->createFourColumnWidget();
+        // $this->createHomeLinkWidget();
+        // $this->createMyAccountLinkWidget();
         
         return $this->preset->toArray();
     }
