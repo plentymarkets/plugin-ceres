@@ -13,7 +13,7 @@
 {{ Twig.if("visibleFields | length > 0") }}
     <div class="widget widget-order-totals card
         {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
-        <div class="{% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+        <div class="widget-inner {% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
             {{ Twig.print("Totals.forOrder(data, visibleFields)") }}
         </div>
     </div>

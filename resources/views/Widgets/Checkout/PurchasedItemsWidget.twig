@@ -15,7 +15,7 @@
 <div class="widget widget-purchased-items card widget-{{ widget.settings.appearance.mobile | default("primary") }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}">
 
-    <div class="confirmation-order-list {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner confirmation-order-list {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
         {{ Twig.for("item", "data.order.orderItems") }}
             {{ Twig.if("item.itemVariationId > 0 and not ('[-]' in item.orderItemName)") }}
                 {{ Twig.set("currentVariationId", "item.itemVariationId | trimNewlines") }}
