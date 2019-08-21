@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.directive("open-mobile-navigation",
     {
         bind(el, binding)

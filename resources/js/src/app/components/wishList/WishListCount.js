@@ -1,5 +1,6 @@
 import { isDefined } from "../../helper/utils";
-const ApiService = require("services/ApiService");
+import Vue from "vue";
+const ApiService = require("../../services/ApiService");
 
 Vue.component("wish-list-count", {
 

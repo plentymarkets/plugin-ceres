@@ -1,5 +1,7 @@
 let gRecaptchaApiLoaded;
 
+import Vue from "vue";
+
 Vue.component("recaptcha", {
 
     template: "<div data-recaptcha></div>",

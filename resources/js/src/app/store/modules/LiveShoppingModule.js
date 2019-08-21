@@ -1,4 +1,4 @@
-import ApiService from "services/ApiService";
+const ApiService = require("../../services/ApiService");
 
 const state =
     {

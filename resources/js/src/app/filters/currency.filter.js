@@ -1,4 +1,5 @@
 import MonetaryFormatter from "../helper/MonetaryFormatter";
+import Vue from "vue";
 
 const formatter = new MonetaryFormatter();
 

@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 const toggleTooltip = (el, disable) =>
 {
     $(el).tooltip(disable ? "disable" : "enable");

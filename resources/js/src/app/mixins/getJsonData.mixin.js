@@ -1,4 +1,5 @@
 import { isNullOrUndefined } from "../helper/utils";
+import Vue from "vue";
 
 Vue.config.optionMergeStrategies.jsonDataFields = function(parent, child, vm)
 {

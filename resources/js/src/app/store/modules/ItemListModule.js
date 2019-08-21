@@ -1,7 +1,8 @@
-import ApiService from "services/ApiService";
-import { getItemListUrlParams } from "services/ItemListUrlService";
-import { navigateToParams } from "services/UrlService";
-import TranslationService from "services/TranslationService";
+import { getItemListUrlParams } from "../../services/ItemListUrlService";
+import { navigateToParams } from "../../services/UrlService";
+import TranslationService from "../../services/TranslationService";
+
+const ApiService = require("../../services/ApiService");
 
 const state =
     {

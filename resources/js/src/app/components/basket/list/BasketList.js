@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { mapState } from "vuex";
+
 Vue.component("basket-list", {
     props:
     {
@@ -18,7 +21,7 @@ Vue.component("basket-list", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         basketItems: state => state.basket.items,
         isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded
     })

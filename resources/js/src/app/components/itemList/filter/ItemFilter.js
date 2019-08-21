@@ -1,4 +1,6 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("item-filter", {
 
@@ -46,7 +48,7 @@ Vue.component("item-filter", {
             return this.facet.name;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             selectedFacets: state => state.itemList.selectedFacets,
             isLoading: state => state.itemList.isLoading
         })

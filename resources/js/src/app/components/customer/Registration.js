@@ -1,12 +1,13 @@
 import { isNullOrUndefined } from "../../helper/utils";
 
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-const ModalService        = require("services/ModalService");
+const ApiService          = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
+const ModalService        = require("../../services/ModalService");
 
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
-import { navigateTo } from "services/UrlService";
+import ValidationService from "../../services/ValidationService";
+import TranslationService from "../../services/TranslationService";
+import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
 
 Vue.component("registration", {
 

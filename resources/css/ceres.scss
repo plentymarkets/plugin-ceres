@@ -21124,7 +21124,7 @@ header .widget
 
 
 
-// Bootstrap Compatibility 
+// Bootstrap Compatibility
 @each $bp in map-keys($grid-breakpoints) {
     .hidden-#{$bp}-down {
       @include media-breakpoint-down($bp) {

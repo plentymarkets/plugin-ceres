@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.filter("propertySurchargeSum", function(item)
 {
     let sum = 0;

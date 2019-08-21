@@ -1,7 +1,9 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("add-to-wish-list", {
 
@@ -32,7 +34,7 @@ Vue.component("add-to-wish-list", {
             return !isNullOrUndefined(this.variationId) ? this.variationId : this.currentVariationVariationId;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             currentVariationVariationId(state)
             {
                 const currentVariation = state.item.variation && state.item.variation.documents && state.item.variation.documents[0].data;

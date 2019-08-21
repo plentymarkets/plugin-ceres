@@ -1,4 +1,5 @@
-const ApiService = require("services/ApiService");
+import Vue from "vue";
+const ApiService = require("../../services/ApiService");
 
 Vue.component("shop-country-settings", {
 

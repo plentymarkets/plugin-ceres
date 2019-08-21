@@ -1,5 +1,6 @@
-import ApiService from "services/ApiService";
 import { isDefined } from "../../helper/utils";
+
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
