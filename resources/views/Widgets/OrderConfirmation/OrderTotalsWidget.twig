@@ -6,7 +6,11 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-{{ Twig.set("visibleFields", widget.settings.visibleFields.mobile | json_encode) }}
+{% set visibleFields = widget.settings.visibleFields.mobile | default([
+    "orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"
+]) %}
+
+{{ Twig.set("visibleFields", visibleFields | json_encode) }}
 
 {{ Twig.import("Totals", "Ceres::Checkout.Macros.OrderTotals") }}
 
