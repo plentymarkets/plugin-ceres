@@ -42,14 +42,14 @@
 - Due to an error, the timer of the shopping cart modal was not working as intended. This has been fixed.
 - If an item was linked to an item template for which no content had been stored in the tab Template, TWIG errors could occur when opening the single item view of the item. This has been fixed.
 - The title of the image box widget was not displayed correctly on mobile devices if the option "Image and text (full footer)" was active. This has been fixed.
-- Under certain circumstances, the title bar widget could issue an additional empty '<h1>' tag. This has been fixed.
+- Under certain circumstances, the title bar widget could issue an additional empty `<h1>` tag. This has been fixed.
 - Due to an error, item URLs were not displayed correctly if the option **Trailing slash** was active. This has ben fixed.
 - Under certain circumstance, rounding errors caused incorrect price displays. This has been fixed.
 - Due to an error, the newsletter widget caused the display of a number of faulty error notifications in the browser console.
 - The discount of items with the store special "Special offer" was calculated incorrectly if an active sales price was configured as a "Special offer" price. This has been fixed.
 - The "Add to basket" button is now visibly deactivated if an item can not be purchased.
 - The 'isVariationSelected' value in the SingleItem component is now correctly linked to the VueX module.
-- Special characters were not displayed correctly in the '<title>' tag. This has been fixed.
+- Special characters were not displayed correctly in the `<title>` tag. This has been fixed.
 - Selecting filters on category pages could lead to an error. This has been fixed.
 - The labels of the item sorting values "First update" and "Last update" were swapped. This has been fixed.
 - Due to an error, no error notifications were displayed in the shopping cart preview. This has been fixed.

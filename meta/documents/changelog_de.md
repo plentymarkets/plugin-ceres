@@ -42,14 +42,14 @@
 - Durch einen Fehler funktionierte der Timer des Warenkorb-Modals nicht wie beabsichtigt. Dies wurde behoben.
 - Wenn ein Artikel mit einer Artikelvorlage verknüpft wurde, für deren Kategorie keinen Inhalt im Tab Template hinterlegt war, kam es zu TWIG-Fehlern beim Öffnen der Einzelansicht des Artikels. Dies wurde behoben.
 - Die Überschrift des Bilderbox-Widget wurde auf mobilen Geräten fehlerhaft dargestellt, wenn die Option "Bild und Text (vollbreite Fußzeile)" ausgewählt war. Dies wurde behoben.
-- Im Titelleisten-Widget wurde unter gewissen Umständen ein zusätzliches, leeres '<h1>'-Tag ausgegeben. Dies wurde behoben.
+- Im Titelleisten-Widget wurde unter gewissen Umständen ein zusätzliches, leeres `<h1>`-Tag ausgegeben. Dies wurde behoben.
 - Durch einen Fehler wurde die Artikel-URL nicht richtig dargestellt, wenn die Option **Slash(/) am Ende von URLs** aktiviert war. Dies wurde behoben.
 - Durch Rundungsfehler kam es unter bestimmten Bedingungen zu fehlerhaften Preisdarstellungen. Dies wurde behoben.
 - Es wurde ein Fehler beim Newsletter-Widget behoben, durch welchen fälschlicherweise Fehlermeldungen in der Entwicklerkonsole des Browsers auftauchten.
 - Bei Artikeln mit der Shop-Aktion "Sonderangebot" im Zusammenhang mit einem aktiven Aktionspreis wurde der Rabatt falsch berechnet. Dies wurde behoben.
 - Die "In den Warenkorb"-Schaltfläche ist nun sichtlich deaktiviert, wenn ein Artikel nicht kaufbar ist, aber im Shop angezeigt wird.
 - Der Wert 'isVariationSelected' innerhalb der SingleItem-Komponente wird nun korrekt an das VueX-Modul gebunden.
-- Im '<title>'-Tag wurden Sonderzeichen nicht korrekt ausgegeben. Dies wurde behoben.
+- Im `<title>`-Tag wurden Sonderzeichen nicht korrekt ausgegeben. Dies wurde behoben.
 - Auf Kategorieseiten kam es beim Auswählen von Filtern zu einem Fehler. Dies wurde behoben.
 - Die Benennungen der Artikelsortierungswerte "Zuerst aktualisierte Variante zuerst" und "Zuletzt aktualisierte Variante zuerst" waren vertauscht. Dies wurde behoben.
 - Durch einen Fehler wurden keine Fehlermeldungen in der Warenkorbvorschau angezeigt. Dies wurde behoben.
