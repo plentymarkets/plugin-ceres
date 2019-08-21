@@ -167,23 +167,27 @@ class DefaultSettingsStep extends Step
         if (count($countriesCollection)) {
             foreach ($languages as $langKey => $language) {
                 $settingKey = 'defSettings_deliveryCountry_' . $langKey;
-    
-                $list[$settingKey] = [
-                    "type"    => "select",
-                    "options" => [
-                        "name"          => $language,
-                        'required'      => true,
-                        "listBoxValues" => []
-                    ]
-                ];
 
-                foreach($countriesCollection as $country) {
-                    $countryData = $country->toArray();
+                $countries = $countriesCollection->where('lang', $langKey);
 
-                    $list[$settingKey]['options']['listBoxValues'][] = [
-                        "value"   => $countryData['id'],
-                        "caption" => $countryNames[$countryData['id']]
+                if(count($countries)) {
+                    $list[$settingKey] = [
+                        "type"    => "select",
+                        "options" => [
+                            "name"          => $language,
+                            'required'      => true,
+                            "listBoxValues" => []
+                        ]
                     ];
+
+                    foreach($countries as $country) {
+                        $countryData = $country->toArray();
+
+                        $list[$settingKey]['options']['listBoxValues'][] = [
+                            "value"   => $countryData['id'],
+                            "caption" => $countryNames[$countryData['id']]
+                        ];
+                    }
                 }
             }
         }
