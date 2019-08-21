@@ -15858,9 +15858,6 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   .payment-link-style span {
     text-decoration: underline !important; }
 
-.top-spacer {
-  margin-top: .5rem; }
-
 .cmp-address-list .items {
   position: relative; }
   @media (min-width: 768px) {

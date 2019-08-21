@@ -15387,23 +15387,11 @@ html.ie {
 
 	@include media-breakpoint-up(sm){
 
-		// .item-name:after{
-		// 	content: none!important;
-		// }
-
 		.item-unit-price,
 		.item-total-price{
 			width: auto!important;
 			text-align: right;
 		}
-
-	}
-
-	@include media-breakpoint-up(md){
-
-	}
-
-	@include media-breakpoint-up(lg){
 
 	}
 
@@ -15424,10 +15412,6 @@ html.ie {
 	span {
 		text-decoration: underline!important;
 	}
-}
-
-.top-spacer {
-	margin-top: .5rem;
 }
 
 .cmp-address-list{
@@ -17815,8 +17799,7 @@ html.ie {
 	margin-bottom: 2em;
 	padding-bottom: 1em;
 	border-bottom: 1px solid $gray-lighter;
-    
-
+	
 	@include media-breakpoint-up(sm){
 
 		.item-name:after{
@@ -17828,15 +17811,6 @@ html.ie {
 			width: auto!important;
 			text-align: right;
 		}
-
-	}
-
-	@include media-breakpoint-up(md){
-		
-	}
-
-	@include media-breakpoint-up(lg){
-		
 	}
 }
 

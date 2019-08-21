@@ -48764,11 +48764,20 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("address-header", {
     address: {
       type: Object,
       required: true
+    },
+    addressFields: {
+      type: Array,
+      default: function _default() {
+        return ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"];
+      }
     }
   },
   methods: {
     getCountryName: function getCountryName(countryId) {
       return this.$store.getters.getCountryName(countryId);
+    },
+    isAddressFieldEnabled: function isAddressFieldEnabled(fieldName) {
+      return this.addressFields.includes(fieldName);
     }
   },
   filters: {

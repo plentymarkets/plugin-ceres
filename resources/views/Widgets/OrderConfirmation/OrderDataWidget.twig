@@ -69,13 +69,9 @@
                 <div class="row">
                     <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
                     <span class="col-6 col-sm-7">
-                        <div>{{ Twig.print("data.order.billingAddress.name1") }}</div>
-                        <div>{{ Twig.print("data.order.billingAddress | addressOptionType(12)") }}</div>
-                        <div>{{ Twig.print("data.order.billingAddress.name2") }} {{ Twig.print("data.order.billingAddress.name3") }}</div>
-                        <div>{{ Twig.print("data.order.billingAddress.name4") }}</div>
-                        <div>{{ Twig.print("data.order.billingAddress.address1") }} {{ Twig.print("data.order.billingAddress.address2") }}</div>
-                        <div>{{ Twig.print("data.order.billingAddress.postalCode") }} {{ Twig.print("data.order.billingAddress.town") }}</div>
-                        <div>{{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.billingAddress.countryId")])) }}</div>
+                        <address-header
+                            :address="{{ Twig.print("data.order.billingAddress | json_encode") }}"
+                            :address-fields="{{ addressFields | json_encode }}"></address-header>
                     </span>
                 </div>
 
@@ -88,20 +84,9 @@
                             </span>
                         {{ Twig.else() }}
                             <span>
-                                <div>{{ Twig.print("data.order.deliveryAddress.name1") }}</div>
-                                <div>{{ Twig.print("data.order.deliveryAddress | addressOptionType(12)") }}</div>
-                                <div>{{ Twig.print("data.order.deliveryAddress.name2") }} {{ Twig.print("data.order.deliveryAddress.name3") }}</div>
-                                <div>{{ Twig.print("data.order.deliveryAddress.name4") }}</div>
-                                <div>{{ Twig.print("data.order.deliveryAddress.address1") }} {{ Twig.print("data.order.deliveryAddress.address2") }}</div>
-                                <div>
-                                    {{ Twig.if("data.order.deliveryAddress.address1 == 'PACKSTATION' or data.order.deliveryAddress.address1 == 'POSTFILIALE'") }}
-                                        {{ Twig.trans("Ceres::Template.addressPostNummer") }}
-                                    {{ Twig.endif() }}
-                                    
-                                    {{ Twig.print("data.order.deliveryAddress.address3") }}
-                                </div>
-                                <div>{{ Twig.print("data.order.deliveryAddress.postalCode") }} {{ Twig.print("data.order.deliveryAddress.town") }}</div>
-                                <div>{{ Twig.print(Twig.call("services.country.getCountryName", [Twig.var("data.order.deliveryAddress.countryId")])) }}</div>
+                                <address-header
+                                    :address="{{ Twig.print("data.order.deliveryAddress | json_encode") }}"
+                                    :address-fields="{{ addressFields | json_encode }}"></address-header>
                             </span>
                         {{ Twig.endif() }}
                     </span>
