@@ -1,7 +1,9 @@
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState, mapGetters, mapMutations } from "vuex";
 
 Vue.component("order-property-list-item", {
 
@@ -99,12 +101,12 @@ Vue.component("order-property-list-item", {
             return selectedProperty.description;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
         }),
 
-        ...Vuex.mapGetters([
+        ...mapGetters([
             "variationMissingProperties"
         ])
     },
@@ -182,7 +184,7 @@ Vue.component("order-property-list-item", {
             return value;
         },
 
-        ...Vuex.mapMutations([
+        ...mapMutations([
             "setVariationOrderProperty",
             "setIsBasketLoading"
         ]),

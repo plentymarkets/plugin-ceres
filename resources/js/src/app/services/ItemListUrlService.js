@@ -1,4 +1,4 @@
-import UrlService from "services/UrlService";
+import UrlService from "./UrlService";
 
 export function getItemListUrlParams(searchParams)
 {

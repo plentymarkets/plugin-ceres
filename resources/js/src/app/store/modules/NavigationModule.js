@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from "../../helper/utils";
 
-const ApiService = require("services/ApiService");
+const ApiService = require("../../services/ApiService");
 
 const state =
     {

@@ -1,4 +1,6 @@
 import { isDefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("order-property-value", {
     props:
@@ -45,7 +47,7 @@ Vue.component("order-property-value", {
             return null;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             basketItems: state => state.basket.items
         })
     }

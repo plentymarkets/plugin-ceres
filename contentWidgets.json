@@ -7490,9 +7490,9 @@
         "identifier": "Ceres::OrderDataWidget",
         "label": "Widget.orderDataLabel",
         "previewImageURL": "/images/widgets/order-data.svg",
-        "type": "static",
+        "type": "orderconfirmation",
         "categories": [
-            "static"
+            "orderconfirmation"
         ],
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderDataWidget",
@@ -7699,6 +7699,115 @@
                             "direction": "all"
                         }
                     },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::OrderTotalsWidget",
+        "label": "Widget.basketTotalsLabel",
+        "previewImageURL": "/images/widgets/basket-totals.svg",
+        "type": "orderconfirmation",
+        "categories": [
+            "orderconfirmation"
+        ],
+        "position": 300,
+        "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderTotalsWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "visibleFields": {
+                "type": "checkboxGroup",
+                "defaultValue": [
+                    "orderValueNet",
+                    "orderValueGross",
+                    "rebate",
+                    "shippingCostsNet",
+                    "shippingCostsGross",
+                    "totalSumNet",
+                    "promotionCoupon",
+                    "vats",
+                    "totalSumGross",
+                    "salesCoupon",
+                    "openAmount"
+                ],
+                "options": {
+                    "name": "Widget.basketTotalsVisibleFields",
+                    "checkboxValues": [
+                        {
+                            "value": "orderValueNet",
+                            "caption": "Widget.showBasketValueNet"
+                        },
+                        {
+                            "value": "orderValueGross",
+                            "caption": "Widget.showBasketValueGross"
+                        },
+                        {
+                            "value": "rebate",
+                            "caption": "Widget.showBasketTotalsRebate"
+                        },
+                        {
+                            "value": "shippingCostsNet",
+                            "caption": "Widget.showBasketShippingCostsNet"
+                        },
+                        {
+                            "value": "shippingCostsGross",
+                            "caption": "Widget.showBasketShippingCostsGross"
+                        },
+                        {
+                            "value": "totalSumNet",
+                            "caption": "Widget.showBasketTotalSumNet"
+                        },
+                        {
+                            "value": "promotionCoupon",
+                            "caption": "Widget.showBasketPromotionCoupon"
+                        },
+                        {
+                            "value": "vats",
+                            "caption": "Widget.showBasketVats"
+                        },
+                        {
+                            "value": "totalSumGross",
+                            "caption": "Widget.showBasketTotalSumGross"
+                        },
+                        {
+                            "value": "salesCoupon",
+                            "caption": "Widget.showBasketSalesCoupon"
+                        },
+                        {
+                            "value": "openAmount",
+                            "caption": "Widget.showBasketOpenAmount"
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
                     "customMargin": {
                         "type": "checkbox",
                         "options": {

@@ -1,9 +1,11 @@
-import ExceptionMap from "exceptions/ExceptionMap";
-import TranslationService from "services/TranslationService";
-import { navigateTo } from "services/UrlService";
+import ExceptionMap from "../../exceptions/ExceptionMap";
+import TranslationService from "../../services/TranslationService";
+import { navigateTo } from "../../services/UrlService";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("add-to-basket", {
 
@@ -123,7 +125,7 @@ Vue.component("add-to-basket", {
             return classes;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             isVariationSelected: state => state.variationSelect.isVariationSelected
         })

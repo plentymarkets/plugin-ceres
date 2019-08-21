@@ -1,9 +1,10 @@
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
-import { navigateTo } from "services/UrlService";
+import ValidationService from "../../services/ValidationService";
+import TranslationService from "../../services/TranslationService";
+import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
 
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+const ApiService          = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("reset-password-form", {
 

@@ -1,5 +1,7 @@
 import { MediaQueryHelper } from "../../helper/MediaQueryHelper";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("mobile-navigation", {
 
@@ -53,7 +55,7 @@ Vue.component("mobile-navigation", {
             return breadcrumbs;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             navigationTree: state => state.navigation.tree
         })
     },

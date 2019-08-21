@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.component("order-return-history-list-item", {
 
     props: {

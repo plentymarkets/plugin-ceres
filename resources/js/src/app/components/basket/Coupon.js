@@ -1,6 +1,8 @@
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("coupon", {
 
@@ -40,7 +42,7 @@ Vue.component("coupon", {
             return false;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             redeemedCouponCode: state => state.basket.data.couponCode,
             isBasketLoading: state => state.basket.isBasketLoading,
             isCheckoutReadonly: state => state.checkout.readOnly

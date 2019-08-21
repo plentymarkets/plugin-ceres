@@ -1,5 +1,7 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("country-select", {
 
@@ -72,7 +74,7 @@ Vue.component("country-select", {
             return this.requiredAddressFields[iso];
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             shippingCountryId: state => state.localization.shippingCountryId
         })
     },

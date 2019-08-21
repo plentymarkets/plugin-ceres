@@ -1,5 +1,7 @@
-import TranslationService from "services/TranslationService";
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
+const NotificationService = require("../../../services/NotificationService");
 
 Vue.component("invoice-address-select", {
 
@@ -58,7 +60,7 @@ Vue.component("invoice-address-select", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         billingAddressId: state => state.address.billingAddressId,
         billingAddressList: state => state.address.billingAddressList,
         showError: state => state.checkout.validation.invoiceAddress.showError

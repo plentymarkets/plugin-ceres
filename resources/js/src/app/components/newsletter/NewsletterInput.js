@@ -1,7 +1,9 @@
-import TranslationService from "services/TranslationService";
-import ValidationService from "services/ValidationService";
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../services/TranslationService";
+import ValidationService from "../../services/ValidationService";
+import Vue from "vue";
+
+const ApiService          = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("newsletter-input", {
     props: {

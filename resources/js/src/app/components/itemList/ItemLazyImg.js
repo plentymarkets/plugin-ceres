@@ -1,3 +1,6 @@
+import Vue from "vue";
+import "jquery-lazyload";
+
 Vue.component("item-lazy-img", {
 
     delimiters: ["${", "}"],
