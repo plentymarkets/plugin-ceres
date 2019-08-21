@@ -10,16 +10,16 @@
         "customClass":"@include(customClass)",
         "visibleFields": {
             "type": "checkboxGroup",
-            "defaultValue": ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"],
+            "defaultValue": ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"],
             "options": {
                 "name": "Widget.basketTotalsVisibleFields",
                 "checkboxValues": [
                     {
-                        "value": "basketValueNet",
+                        "value": "orderValueNet",
                         "caption": "Widget.showBasketValueNet"
                     },
                     {
-                        "value": "basketValueGross",
+                        "value": "orderValueGross",
                         "caption": "Widget.showBasketValueGross"
                     },
                     {

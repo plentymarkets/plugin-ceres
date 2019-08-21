@@ -7,8 +7,8 @@
     <h3>{{ trans("Ceres::Template.checkoutSum") }}</h3>
     <div>
         <dl>
-            {% if 'basketValueNet' in shownFields or shownFields == null %}
-                {# BASKET VALUE NET #}
+            {% if 'orderValueNet' in shownFields or shownFields == null %}
+                {# ORDER VALUE NET #}
                 <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutNet") }})
                 </dt><!--
@@ -17,8 +17,8 @@
                 </dd>
             {% endif %}
 
-            {% if 'basketValueGross' in shownFields or shownFields == null %}
-                {# BASKET VALUE GROSS #}
+            {% if 'orderValueGross' in shownFields or shownFields == null %}
+                {# ORDER VALUE GROSS #}
                 <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutGross") }})
                 </dt><!--
