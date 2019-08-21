@@ -80,33 +80,25 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
             if ($webstoreId !=='preview') {
 
+                $languages = LanguagesHelper::getTranslatedLanguages();
                 $plentyId = $settingsHandlerService->getStoreIdentifier($webstoreId);
                 $shippingCountryList = [];
-                $deliveryCountries = $this->countryRepository->getActiveCountriesList();
-                $currencies = $this->currencyRepository->getCurrencyList();
                 $currenciesList = [];
 
                 //create default country list
-                if (count($deliveryCountries)) {
-                    foreach ($deliveryCountries as $country) {
-                        $countryData = $country->toArray();
-                        $key = 'defSettings_deliveryCountry_' . $countryData['lang'];
-
-                        if(!empty($data[$key])) {
-                            $shippingCountryList[$countryData['lang']] = $countryData['id'];
-                        }
+                foreach ($languages as $langKey => $language) {
+                    $settingKey = 'defSettings_deliveryCountry_' . $langKey;
+                    if(isset($data[$settingKey])) {
+                        $shippingCountryList[$langKey] = $data[$settingKey];
                     }
                 }
 
                 //create default currencies list
-                if (count($currencies)) {
-                    $languages = LanguagesHelper::getTranslatedLanguages();
-                    foreach ($languages as $langCode => $language) {
-                        $key = 'currencies_defaultCurrency_' . $langCode;
+                foreach ($languages as $langCode => $language) {
+                    $key = 'currencies_defaultCurrency_' . $langCode;
 
-                        if (!empty($data[$key])) {
-                            $currenciesList[$langCode] = $data[$key];
-                        }
+                    if (!empty($data[$key])) {
+                        $currenciesList[$langCode] = $data[$key];
                     }
                 }
 
@@ -120,6 +112,20 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     "defaultCurrencyList" => $currenciesList
                 ];
                 $globalData = $mappingService->processGlobalMappingData($data, "store");
+
+                if (isset($globalData["defaultLanguage"]))
+                {
+                    $defaultLang = $globalData["defaultLanguage"];
+                    if(isset($shippingData["defaultShippingCountryList"][$defaultLang]))
+                    {
+                        $globalData["defaultShippingCountryId"] = $shippingData["defaultShippingCountryList"][$defaultLang];
+                    }
+
+                    if(isset($currenciesData["defaultCurrencyList"][$defaultLang]))
+                    {
+                        $globalData["defaultCurrency"] = $currenciesData["defaultCurrencyList"][$defaultLang];
+                    }
+                }
 
                 $intermediarBrowserLanguage = $globalData['browserLanguage'];
                 $globalData['browserLanguage'] = [
