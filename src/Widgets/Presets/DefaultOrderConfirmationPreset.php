@@ -41,7 +41,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->createRetourLinkWidget();
 
         $this->createpurchasedItemsWidget();
-        $this->createorderSumWidget();
+        $this->createOrderTotalsWidget();
 
         $this->createFourColumnWidget();
         $this->createHomeLinkWidget();
@@ -106,9 +106,9 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->twoColumnWidget->createChild('second', 'Ceres::PurchasedItemsWidget');
     }
 
-    private function createOrderSumWidget()
+    private function createOrderTotalsWidget()
     {
-        $this->twoColumnWidget->createChild('second', 'Ceres::OrderSumWidget');
+        $this->twoColumnWidget->createChild('second', 'Ceres::OrderTotalsWidget');
     }
 
     private function createHomeLinkWidget()
