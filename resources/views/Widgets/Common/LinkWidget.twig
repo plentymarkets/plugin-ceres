@@ -2,8 +2,8 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set icon            = widget.settings.icon.mobile %}
-{% set size            = widget.settings.dimensions.size.mobile %}
-{% set block           = widget.settings.dimensions.block.mobile %}
+{% set size            = widget.settings.size.mobile %}
+{% set block           = widget.settings.block.mobile %}
 {% set text            = widget.settings.text.mobile %}
 {% set url             = widget.settings.url %}
 
@@ -22,7 +22,7 @@
 {% endif %}
 
 <div class="widget widget-{{ appearance | default('none') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
-    <a class="btn btn-primary btn-appearance {{ size }} {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
+    <a class="btn btn-appearance btn-{{ size }} {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
        href="{{ Twig.print("real_url") }}"
        style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}">
         {%- if icon != "none" -%}

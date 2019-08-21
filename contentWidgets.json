@@ -2539,46 +2539,38 @@
                     ]
                 }
             },
-            "dimensions": {
-                "type": "vertical",
+            "size": {
+                "type": "select",
+                "required": false,
+                "defaultValue": "md",
                 "options": {
-                    "name": "Widget.linkSizeSettings"
-                },
-                "children": {
-                    "size": {
-                        "type": "select",
-                        "required": false,
-                        "defaultValue": "btn-sm",
-                        "options": {
-                            "name": "Widget.linkSizeLabel",
-                            "tooltipText": "Widget.linkSizeTooltip",
-                            "listBoxValues": [
-                                {
-                                    "value": "btn-sm",
-                                    "caption": "Widget.linkSizeSmall",
-                                    "position": 0
-                                },
-                                {
-                                    "value": "btn-md",
-                                    "caption": "Widget.linkSizeMedium",
-                                    "position": 1
-                                },
-                                {
-                                    "value": "btn-lg",
-                                    "caption": "Widget.linkSizeLarge",
-                                    "position": 2
-                                }
-                            ]
+                    "name": "Widget.linkSizeLabel",
+                    "tooltipText": "Widget.linkSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "sm",
+                            "caption": "Widget.linkSizeSmall",
+                            "position": 0
+                        },
+                        {
+                            "value": "md",
+                            "caption": "Widget.linkSizeMedium",
+                            "position": 1
+                        },
+                        {
+                            "value": "lg",
+                            "caption": "Widget.linkSizeLarge",
+                            "position": 2
                         }
-                    },
-                    "block": {
-                        "type": "checkbox",
-                        "required": false,
-                        "defaultValue": false,
-                        "options": {
-                            "name": "Widget.linkBlock"
-                        }
-                    }
+                    ]
+                }
+            },
+            "block": {
+                "type": "checkbox",
+                "required": false,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.linkBlock"
                 }
             },
             "icon": {
