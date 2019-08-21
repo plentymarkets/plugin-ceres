@@ -37,7 +37,10 @@ class DefaultSettingsStep extends Step
      * @var AccountingLocationRepositoryContract
      */
     private $locationRepository;
-    
+
+    /** @var Translator */
+    private $translator;
+
     /**
      * DefaultSettingsStep constructor.
      *
@@ -45,12 +48,14 @@ class DefaultSettingsStep extends Step
      * @param CountryRepositoryContract $countryRepository
      * @param ContactClassRepositoryContract $classRepository
      * @param AccountingLocationRepositoryContract $accountingLocationRepositoryContract
+     * @param Translator $translator
      */
     public function __construct(
         PaymentMethodRepositoryContract $paymentRepository,
         CountryRepositoryContract $countryRepository,
         ContactClassRepositoryContract $classRepository,
-        AccountingLocationRepositoryContract $accountingLocationRepositoryContract
+        AccountingLocationRepositoryContract $accountingLocationRepositoryContract,
+        Translator $translator
     ){
         parent::__construct();
         
@@ -58,6 +63,7 @@ class DefaultSettingsStep extends Step
         $this->countryRepository = $countryRepository;
         $this->classRepository = $classRepository;
         $this->locationRepository = $accountingLocationRepositoryContract;
+        $this->translator = $translator;
     }
 
     /**
@@ -163,7 +169,7 @@ class DefaultSettingsStep extends Step
     
         $languages = LanguagesHelper::getTranslatedLanguages();
         $countryNames = $this->countryRepository->getActiveCountryNameMap(LanguagesHelper::getUserLang());
-
+        $prefix = $this->translator->trans("Ceres::Wizard.defaultDeliveryCountry");
         if (count($countriesCollection)) {
             foreach ($languages as $langKey => $language) {
                 $settingKey = 'defSettings_deliveryCountry_' . $langKey;
@@ -174,7 +180,7 @@ class DefaultSettingsStep extends Step
                     $list[$settingKey] = [
                         "type"    => "select",
                         "options" => [
-                            "name"          => $language,
+                            "name"          => "{$prefix} {$language}",
                             'required'      => true,
                             "listBoxValues" => []
                         ]
