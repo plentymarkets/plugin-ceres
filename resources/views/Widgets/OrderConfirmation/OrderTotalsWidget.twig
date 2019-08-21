@@ -11,10 +11,10 @@
 {{ Twig.import("Totals", "Ceres::Checkout.Macros.OrderTotals") }}
 
 {{ Twig.if("visibleFields | length > 0") }}
-    <div class="
-        {% if customClass | length > 0 %}{{ customClass }}{% endif %}
-        {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
-        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-        {{ Twig.print("Totals.forOrder(data, visibleFields)") }}
+    <div class="widget widget-order-totals card
+        {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
+        <div class="{% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+            {{ Twig.print("Totals.forOrder(data, visibleFields)") }}
+        </div>
     </div>
 {{ Twig.endif() }}
