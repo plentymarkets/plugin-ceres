@@ -65,8 +65,8 @@
                 "tooltipText": "Widget.linkUrlTooltip",
                 "internalLinks": [
                     {
-                        "value": "retoure",
-                        "caption": "Widget.urlRetoureLabel"
+                        "value": "return",
+                        "caption": "Widget.urlReturnLabel"
                     },
                     {
                         "value": "tracking",
