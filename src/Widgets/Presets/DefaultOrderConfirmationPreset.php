@@ -40,8 +40,8 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->createOrderDocumentsWidget();
         $this->createRetourLinkWidget();
 
-        $this->purchasedItemsWidget();
-        $this->orderSumWidget();
+        $this->createpurchasedItemsWidget();
+        $this->createorderSumWidget();
 
         $this->createFourColumnWidget();
         $this->createHomeLinkWidget();
