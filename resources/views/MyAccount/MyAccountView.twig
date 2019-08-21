@@ -78,7 +78,7 @@
                             {{ trans("Ceres::Template.myAccountInvoiceAddresses") }}
                         </h4>
                         <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountAll") }} {{ trans("Ceres::Template.myAccountInvoiceAddresses") }}</p>
-                        <div class="shipping-addresses-select">
+                        <div class="invoice-addresses-select">
                             <invoice-address-select
                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
                                 :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"

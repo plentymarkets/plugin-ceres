@@ -1,0 +1,18 @@
+{
+    "identifier": "Ceres::OrderDataWidget",
+    "label": "Widget.orderDataLabel",
+    "previewImageURL": "/images/widgets/order-data.svg",
+    "type": "orderconfirmation",
+    "categories": ["orderconfirmation"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderDataWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": { 
+            "type": "select", 
+            "defaultValue": "primary", 
+            "options": "@include(appearance)" 
+        },
+        "spacing":"@include(spacing)"
+    }
+}

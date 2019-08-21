@@ -38168,11 +38168,11 @@ Vue.component("registration", {
       this.isDisabled = true;
       ApiService.post("/rest/io/customer", userObject).done(function (response) {
         ApiService.setToken(response);
-        document.dispatchEvent(new CustomEvent("onSignUpSuccess", {
-          detail: userObject
-        }));
 
         if (!response.code) {
+          document.dispatchEvent(new CustomEvent("onSignUpSuccess", {
+            detail: userObject
+          }));
           NotificationService.success(_TranslationService["default"].translate("Ceres::Template.regSuccessful")).closeAfter(3000);
 
           if (document.getElementById(_this2.modalElement) !== null) {
@@ -46659,6 +46659,12 @@ module.exports = function ($) {
       $bsModal = $(element).find(".modal").first();
     }
 
+    $bsModal.one("hide.bs.modal", function () {
+      $bsModal.find(".modal-content").unbind("mouseenter");
+      $bsModal.find(".modal-content").unbind("mouseleave");
+      stopTimeout();
+      paused = false;
+    });
     return {
       show: show,
       hide: hide,
@@ -46689,8 +46695,6 @@ module.exports = function ($) {
       return new Promise(function (resolve, reject) {
         $bsModal.modal("hide");
         $bsModal.one("hidden.bs.modal", function () {
-          $bsModal.find(".modal-content").unbind("mouseenter");
-          $bsModal.find(".modal-content").unbind("mouseleave");
           resolve(self);
         });
       });
