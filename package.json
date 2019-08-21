@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "webpack --watch",
-    "build": "npm run prebuild && npm run build:dev && npm run build:prod && npm run postbuild",
+    "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack",
     "build:prod": "webpack --env.prod",
     "build:js": "npm run build:js:dev && npm run build:js:prod",

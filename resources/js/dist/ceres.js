@@ -50181,14 +50181,10 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("registration", {
         ApiService.setToken(response);
 
         if (!response.code) {
-<<<<<<< HEAD
-          NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_2__["default"].translate("Ceres::Template.regSuccessful")).closeAfter(3000);
-=======
           document.dispatchEvent(new CustomEvent("onSignUpSuccess", {
             detail: userObject
           }));
-          NotificationService.success(_TranslationService["default"].translate("Ceres::Template.regSuccessful")).closeAfter(3000);
->>>>>>> beta
+          NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_2__["default"].translate("Ceres::Template.regSuccessful")).closeAfter(3000);
 
           if (document.getElementById(_this2.modalElement) !== null) {
             ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
@@ -60249,6 +60245,9 @@ var timeStart;
 function findModal(element) {
   return new Modal(element);
 }
+/* harmony default export */ __webpack_exports__["default"] = ({
+  findModal: findModal
+});
 
 function Modal(element) {
   var self = this;
@@ -60260,7 +60259,12 @@ function Modal(element) {
     $bsModal = $(element).find(".modal").first();
   }
 
-<<<<<<< HEAD
+  $bsModal.one("hide.bs.modal", function () {
+    $bsModal.find(".modal-content").unbind("mouseenter");
+    $bsModal.find(".modal-content").unbind("mouseleave");
+    stopTimeout();
+    paused = false;
+  });
   return {
     show: show,
     hide: hide,
@@ -60272,35 +60276,6 @@ function Modal(element) {
     getModalContainer: getModalContainer,
     on: on
   };
-=======
-  function Modal(element) {
-    var self = this;
-    var $bsModal;
-
-    if ($(element).is(".modal")) {
-      $bsModal = $(element);
-    } else {
-      $bsModal = $(element).find(".modal").first();
-    }
-
-    $bsModal.one("hide.bs.modal", function () {
-      $bsModal.find(".modal-content").unbind("mouseenter");
-      $bsModal.find(".modal-content").unbind("mouseleave");
-      stopTimeout();
-      paused = false;
-    });
-    return {
-      show: show,
-      hide: hide,
-      setTimeout: setTimeout,
-      startTimeout: startTimeout,
-      pauseTimeout: pauseTimeout,
-      continueTimeout: continueTimeout,
-      stopTimeout: stopTimeout,
-      getModalContainer: getModalContainer,
-      on: on
-    };
->>>>>>> beta
 
   function show() {
     return new Promise(function (resolve, reject) {
@@ -60316,22 +60291,11 @@ function Modal(element) {
     });
   }
 
-<<<<<<< HEAD
   function hide() {
     return new Promise(function (resolve, reject) {
       $bsModal.modal("hide");
       $bsModal.one("hidden.bs.modal", function () {
-        $bsModal.find(".modal-content").unbind("mouseenter");
-        $bsModal.find(".modal-content").unbind("mouseleave");
         resolve(self);
-=======
-    function hide() {
-      return new Promise(function (resolve, reject) {
-        $bsModal.modal("hide");
-        $bsModal.one("hidden.bs.modal", function () {
-          resolve(self);
-        });
->>>>>>> beta
       });
     });
   }
@@ -60392,10 +60356,6 @@ function Modal(element) {
     $bsModal.on(event, callback);
   }
 }
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  findModal: findModal
-});
 
 /***/ }),
 
