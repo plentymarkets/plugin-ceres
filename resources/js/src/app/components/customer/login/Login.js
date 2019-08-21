@@ -1,10 +1,11 @@
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-const ModalService        = require("services/ModalService");
-const AutoFocusService    = require("services/AutoFocusService");
+const ApiService          = require("../../../services/ApiService");
+const NotificationService = require("../../../services/NotificationService");
+const ModalService        = require("../../../services/ModalService");
+const AutoFocusService    = require("../../../services/AutoFocusService");
 
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
+import ValidationService from "../../../services/ValidationService";
+import TranslationService from "../../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("login", {
 

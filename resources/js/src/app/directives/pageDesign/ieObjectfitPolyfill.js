@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 /* !
  * A polyfill for object-fit
  *

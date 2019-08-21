@@ -21124,7 +21124,7 @@ header .widget
 
 
 
-// Bootstrap Compatibility 
+// Bootstrap Compatibility
 @each $bp in map-keys($grid-breakpoints) {
     .hidden-#{$bp}-down {
       @include media-breakpoint-down($bp) {
@@ -21162,13 +21162,13 @@ header .widget
 }
 
 $legacySpacers:
-(
-    0: 0,
-    05: 2,
-    1: 3,
-    2: 4,
-    3: 5
-);
+        (
+                0: 0,
+                05: 2,
+                1: 3,
+                2: 4,
+                3: 5
+        );
 
 @each $old, $new in $legacySpacers {
     .m-t-#{$old} { @extend .mt-#{$new} }
@@ -21190,14 +21190,14 @@ $legacySpacers:
 .m-y-auto { @extend .my-auto; }
 
 $contexts:
-(
-    "primary",
-    "secondary",
-    "success",
-    "info",
-    "warning",
-    "danger",
-);
+                (
+                        "primary",
+                        "secondary",
+                        "success",
+                        "info",
+                        "warning",
+                        "danger",
+                );
 
 .tag
 {

@@ -1,8 +1,10 @@
 import { textWidth } from "../../helper/dom";
 import { isDefined, isNull } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("variation-select", {
 
@@ -70,7 +72,7 @@ Vue.component("variation-select", {
             return possibleUnits;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             attributes: state => state.variationSelect.attributes,
             currentVariation: state => state.item.variation.documents[0].data,
             selectedAttributes: state => state.variationSelect.selectedAttributes,

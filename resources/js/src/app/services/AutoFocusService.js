@@ -1,4 +1,4 @@
-import ModalService from "services/ModalService";
+import ModalService from "./ModalService";
 
 export function autoFocus()
 {

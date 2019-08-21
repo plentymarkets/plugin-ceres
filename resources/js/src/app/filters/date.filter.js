@@ -1,5 +1,7 @@
 // for docs see https://github.com/brockpetrie/vue-moment
-import TranslationService from "services/TranslationService";
+import TranslationService from "../services/TranslationService";
+import Vue from "vue";
+import moment from "moment";
 
 const dateFilter = function()
 {

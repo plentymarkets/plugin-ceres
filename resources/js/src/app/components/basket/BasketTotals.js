@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { mapState } from "vuex";
+
 Vue.component("basket-totals", {
 
     props:
@@ -26,7 +29,7 @@ Vue.component("basket-totals", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         basket: state => state.basket.data,
         isBasketLoading: state => state.basket.isBasketLoading,
         showNetPrices: state => state.basket.showNetPrices

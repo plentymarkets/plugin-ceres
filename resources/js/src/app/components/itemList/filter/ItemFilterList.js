@@ -1,4 +1,6 @@
-import UrlService from "services/UrlService";
+import UrlService from "../../../services/UrlService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("item-filter-list", {
 
@@ -76,7 +78,7 @@ Vue.component("item-filter-list", {
             return false;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             facets(state)
             {
                 return state.itemList.facets.sort((facetA, facetB) =>

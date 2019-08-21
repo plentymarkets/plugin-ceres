@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 /**
  * @deprecated since version 4.2.0
  *
