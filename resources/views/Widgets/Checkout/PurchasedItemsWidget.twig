@@ -17,16 +17,16 @@
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-    <div class="confirmation-order-list">
+    <div class="confirmation-order-list card">
         {{ Twig.for("item", "data.order.orderItems") }}
             {{ Twig.if("item.itemVariationId > 0 and not ('[-]' in item.orderItemName)") }}
                 {{ Twig.set("currentVariationId", "item.itemVariationId | trimNewlines") }}
 
-                <article class="cmp cmp-order-item">
+                <article class="cmp cmp-order-item mb-3 border-bottom-0">
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
                         <img src="{{ Twig.print('data.itemImages | getObjectValue(currentVariationId)') }}" alt="{{ Twig.print('item.orderItemName') }}" title="{{ Twig.print('item.orderItemName') }}" class="{% if spacingPaddingT | length > 0 %} {{ spacingPaddingT }} {% endif %}" {% if inlinePaddingT | length > 0 %} style="{{ inlinePaddingT }}"{% endif %}>
                     </a>
-                    <div class="item-details small">
+                    <div class="item-details">
                         <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="clearfix">
                             <div class="item-name text-appearance {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                                 {{ Twig.print(Twig.call("ItemName.get", ["$item.orderItemName", "$item.bundleType"])) }}

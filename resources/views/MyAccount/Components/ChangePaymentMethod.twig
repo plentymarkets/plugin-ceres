@@ -21,7 +21,7 @@
         <!-- ./MyAccount -->
 
         <!-- CONFIRMATION  -->
-        <div class="row top-spacer" v-if="currentTemplate == 'tpl.confirmation'">
+        <div class="row" v-if="currentTemplate == 'tpl.confirmation'">
 
             <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryChangePayment") }}</strong>
             <a v-if="changePossible" class="payment-link-style text-appearance" @click="openPaymentChangeModal()">
