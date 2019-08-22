@@ -55,14 +55,14 @@
     
             <div{% if spacingPadding | length > 0 %} class="{{ spacingPadding }}"{% endif %}{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                 {{ Twig.set("customerID", "" | json_encode) }}
-                {{ Twig.for("date", "data.order.dates", "date.typeId == 8") }}
-                    {{ Twig.set("customerID", "date.date") }}
+                {{ Twig.for("relation", "data.order.relations", "relation.referenceType == 'contact'") }}
+                    {{ Twig.set("customerID", "relation.referenceId") }}
                 {{ Twig.endfor() }}
 
                 {{ Twig.if("customerID") }}
                     <div class="row">
                         <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationCustomerID") }}</strong>
-                        <span class="col-6 col-sm-7">{{ Twig.print(Twig.call("services.customer.getContactNumber", [Twig.var("data.order.billingAddress.countryId")])) }}</span>
+                        <span class="col-6 col-sm-7">{{ Twig.print(Twig.call("services.customer.getContactNumber", [Twig.var("customerID")])) }}</span>
                     </div>   
                 {{ Twig.endif() }}
              
