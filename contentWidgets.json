@@ -7588,6 +7588,13 @@
                     }
                 }
             },
+            "showCustomerID": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.orderDataShowCustomerID"
+                }
+            },
             "addressFields": {
                 "type": "checkboxGroup",
                 "defaultValue": [
