@@ -22,8 +22,7 @@ class OrderConfirmationBaseWidget extends BaseWidget
         $orderRepo->setFilters($filters);
         $order = $orderService->findOrderById(
             $orderRepo->searchOrders(1, 1)
-                ->getResult()
-                ->first()['id']
+                ->getResult()[0]['id']
         );
 
         return [
