@@ -32,7 +32,6 @@
 - Die Schaltfläche "In den Warenkorb" ist nun in der Artikelansicht deaktiviert, wenn die ausgewählte Variante nicht kaufbar ist.
 - Artikel, die mit einer leeren Artikelvorlage verknüpft sind, werden mit dem Layout der Standard-Artikelansicht von Ceres ausgegeben.
 - Beim Aufbau der Seitennavigation werden nur noch aktuell sichtbare Kategorien an den Browser übertragen, um Datenaufkommen zu sparen.
-- Das CSS wird nun abhängig von der Ceres-Einstellung **Logging und Performance » Performance-Level** entweder vollständig oder in einer komprimierten Variante geladen. Dies sorgt für geringere Downloadgröße. Wir möchten uns bei @JVolke für den Beitrag bedanken.
 - Die mobile Navigation zeigt nun auf Artikelseiten initial die Standardkategorie des Artikels an.
 
 ### Behoben
