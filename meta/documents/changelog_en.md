@@ -33,7 +33,6 @@
 - The "Add to shopping cart" button is now deactivated in the single item view if the selected variation cannot be purchased.
 - Items that are linked to an empty item template are now displayed in the default single item view layout of Ceres.
 - In order to save data traffic, only currently visible categories are transmitted to the browser while the page navigation is assembled.
-- The CSS is now loaded depending on the Ceres setting **Logging and performance » Performance level**. In development mode, the CSS is loaded completely; in live mode, the CSS is compressed. This ensures a smaller download size. We would like to thank @JVolke for his contribution.
 - The mobile navigation now initially displays the default category of the item on the single item view.
 
 ### Fixed
