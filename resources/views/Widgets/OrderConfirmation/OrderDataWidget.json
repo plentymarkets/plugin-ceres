@@ -14,11 +14,11 @@
             "options": "@include(appearance)"
         },
         "spacing": "@include(spacing)",
-        "showCustomerID": {
+        "showCustomerId": {
             "type": "checkbox",
             "defaultValue": false,
             "options": {
-                "name": "Widget.orderDataShowCustomerID"
+                "name": "Widget.orderDataShowCustomerId"
             }
         }, 
         "addressFields": {
