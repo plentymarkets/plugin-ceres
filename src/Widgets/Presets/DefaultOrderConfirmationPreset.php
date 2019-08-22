@@ -111,7 +111,10 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createOrderDocumentsWidget()
     {
         $this->threeColumnWidget->createChild("second", "Ceres::OrderDocumentsWidget")
-            ->withSetting("customClass","");
+            ->withSetting("customClass","")
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.top.value", 3)
+            ->withSetting("spacing.margin.top.unit", null);
     }
 
     private function createRetourLinkWidget()
