@@ -82,8 +82,17 @@
                     {{ totals.shippingGross | formatMonetary( totals.currency ) }}
                 </dd>
             {% endif %}
-
-            <hr>
+            
+            {% if
+                'shippingCostsGross' in shownFields or
+                'shippingCostsNet' in shownFields or
+                'rebate' in shownFields or
+                'orderValueGross' in shownFields or
+                'orderValueNet' in shownFields or
+                shownFields == null
+            %}
+                <hr>
+            {% endif %}
 
             {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", orderData.order) %}
             {% if grossNet|trim is not empty %}
@@ -128,7 +137,15 @@
                 {% endif %}
 
                 <div class="totalSum">
-                    <hr>
+                    {% if
+                        'totalSumNet' in shownFields or
+                        'promotionCoupon' in shownFields or
+                        'vats' in shownFields or
+                        shownFields == null
+                    %}
+                        <hr>
+                    {% endif %}
+
                     {% if 'totalSumGross' in shownFields or shownFields == null %}
                         {# TOTAL SUM GROSS #}
                         <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
