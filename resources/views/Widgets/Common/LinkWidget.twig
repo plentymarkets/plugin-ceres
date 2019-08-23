@@ -15,14 +15,16 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{% if url.type.mobile == 'internalLink' %}
-    {% if url.value.mobile == 'tracking' %}
-        {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
-    {% elseif url.value.mobile == 'return' %}
-        {{ Twig.set('real_url', Twig.call("urls.returns", [Twig.var('data.order.id')])) }}
+{% if not isPreview %}
+    {% if url.type.mobile == 'internalLink' %}
+        {% if url.value.mobile == 'tracking' %}
+            {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
+        {% elseif url.value.mobile == 'return' %}
+            {{ Twig.set('real_url', Twig.call("urls.returns", [Twig.var('data.order.id')])) }}
+        {% endif %}
+    {% else %}
+        {{ WidgetHelper.setUrlVariable('real_url', url.value.mobile, url.type.mobile) }}
     {% endif %}
-{% else %}
-    {{ WidgetHelper.setUrlVariable('real_url', url.value.mobile, url.type.mobile) }}
 {% endif %}
 
 <div class="widget widget-{{ appearance | default('none') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
