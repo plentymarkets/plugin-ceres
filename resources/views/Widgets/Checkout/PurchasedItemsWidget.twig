@@ -3,24 +3,27 @@
 
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
-{% set customClass = widget.settings.customClass.mobile %}
-{% set spacingSettings = widget.settings.spacing %}
-{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
-{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
-{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
-{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
-{% set inlinePaddingT   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "", ["top"]) %}
-{% set spacingPaddingT  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "", ["top"]) %}
+{% set customClass      = widget.settings.customClass.mobile %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlinePadding    = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin     = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin    = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set appearance       = widget.settings.appearance.mobile | default("primary") %}
 
-<div class="widget widget-purchased-items card widget-{{ widget.settings.appearance.mobile | default("primary") }}
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}">
+<div class="widget widget-purchased-items widget-{{ appearance }} border
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+    {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% else %} px-4 py-3{% endif %}
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-    <div class="widget-inner confirmation-order-list {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner confirmation-order-list">
         {{ Twig.for("item", "data.order.orderItems") }}
             {{ Twig.if("item.itemVariationId > 0 and not ('[-]' in item.orderItemName)") }}
                 {{ Twig.set("currentVariationId", "item.itemVariationId | trimNewlines") }}
 
-                <article class="cmp cmp-order-item mb-0 border-bottom-0{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                <article class="cmp cmp-order-item mb-0 border-bottom-0">
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
                         <img src="{{ Twig.print('data.itemImages | getObjectValue(currentVariationId)') }}" alt="{{ Twig.print('item.orderItemName') }}" title="{{ Twig.print('item.orderItemName') }}">
                     </a>
