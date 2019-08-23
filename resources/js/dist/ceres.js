@@ -26624,81 +26624,6 @@ webpackContext.id = "./node_modules/moment/locale sync recursive (de(\\.js)?|fr(
 
 /***/ }),
 
-/***/ "./node_modules/node-libs-browser/node_modules/timers-browserify/main.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/node-libs-browser/node_modules/timers-browserify/main.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
-            (typeof self !== "undefined" && self) ||
-            window;
-var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(scope, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(/*! setimmediate */ "./node_modules/setimmediate/setImmediate.js");
-// On some exotic environments, it's not clear which object `setimmediate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof global !== "undefined" && global.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof global !== "undefined" && global.clearImmediate) ||
-                         (this && this.clearImmediate);
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
 /***/ "./node_modules/os-browserify/browser.js":
 /*!***********************************************!*\
   !*** ./node_modules/os-browserify/browser.js ***!
@@ -33051,6 +32976,81 @@ process.umask = function() { return 0; };
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/timers-browserify/main.js":
+/*!************************************************!*\
+  !*** ./node_modules/timers-browserify/main.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(scope, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(/*! setimmediate */ "./node_modules/setimmediate/setImmediate.js");
+// On some exotic environments, it's not clear which object `setimmediate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -45188,7 +45188,7 @@ process.umask = function() { return 0; };
 
 }));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../../node-libs-browser/node_modules/timers-browserify/main.js */ "./node_modules/node-libs-browser/node_modules/timers-browserify/main.js").setImmediate))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../../timers-browserify/main.js */ "./node_modules/timers-browserify/main.js").setImmediate))
 
 /***/ }),
 
@@ -51216,7 +51216,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("item-data-table", {
       var _this = this;
 
       if (path !== "item.variationDimensions") {
-        var value = Object(lodash_get__WEBPACK_IMPORTED_MODULE_0__["get"])(this.currentVariation, path);
+        var value = lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, path);
         return value !== "" && value !== 0;
       } else {
         return ["variation.lengthMM", "variation.widthMM", "variation.heightMM"].some(function (element) {
@@ -51233,9 +51233,9 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("item-data-table", {
       var value;
 
       if (path !== "item.variationDimensions") {
-        value = Object(lodash_get__WEBPACK_IMPORTED_MODULE_0__["get"])(this.currentVariation, path);
+        value = lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, path);
       } else {
-        value = "".concat(Object(lodash_get__WEBPACK_IMPORTED_MODULE_0__["get"])(this.currentVariation, "variation.lengthMM"), "\xD7").concat(Object(lodash_get__WEBPACK_IMPORTED_MODULE_0__["get"])(this.currentVariation, "variation.widthMM"), "\xD7").concat(Object(lodash_get__WEBPACK_IMPORTED_MODULE_0__["get"])(this.currentVariation, "variation.heightMM"), " mm");
+        value = "".concat(lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, "variation.lengthMM"), "\xD7").concat(lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, "variation.widthMM"), "\xD7").concat(lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, "variation.heightMM"), " mm");
       }
 
       return this.formatFieldData(value, path);
@@ -51249,7 +51249,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("item-data-table", {
             return value + format.value;
 
           case "filter":
-            var filterMethod = Object(lodash_get__WEBPACK_IMPORTED_MODULE_0__["get"])(this.$options.filters, format.value);
+            var filterMethod = lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.$options.filters, format.value);
             return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(filterMethod) ? filterMethod(value) : value;
         }
       }
@@ -59375,8 +59375,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filters_truncate_filter__WEBPACK_IMPORTED_MODULE_126__ = __webpack_require__(/*! ./filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
 /* harmony import */ var _mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_127__ = __webpack_require__(/*! ./mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
 /* harmony import */ var _mixins_template_mixin__WEBPACK_IMPORTED_MODULE_128__ = __webpack_require__(/*! ./mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_129__ = __webpack_require__(/*! ./store */ "./resources/js/src/app/store/index.js");
-/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_130__ = __webpack_require__(/*! ./main */ "./resources/js/src/app/main.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_129__ = __webpack_require__(/*! ./main */ "./resources/js/src/app/main.js");
 // =========================
 // Framework's
 // =========================
@@ -59532,35 +59531,10 @@ window.$ = jquery__WEBPACK_IMPORTED_MODULE_1___default.a;
 
 
  // =========================
-// STORE
-// =========================
-
- // =========================
 // Bootstrap frameworks
 // =========================
 
- // eslint-disable-next-line no-unused-vars
 
-window.vueEventHub = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
-
-if (App.config.log.checkSyntax) {
-  var rootElement = document.getElementById("vue-app");
-  rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
-  window.vueApp = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-    store: window.ceresStore
-  });
-  vueApp.$mount(rootElement.cloneNode(true));
-
-  if (vueApp.$el.id === "vue-app") {
-    document.body.replaceChild(vueApp.$el, rootElement);
-  }
-} else {
-  // eslint-disable-next-line no-unused-vars
-  window.vueApp = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-    el: "#vue-app",
-    store: _store__WEBPACK_IMPORTED_MODULE_129__["default"]
-  });
-}
 
 /***/ }),
 
