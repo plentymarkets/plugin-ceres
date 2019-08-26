@@ -60439,7 +60439,7 @@ function getNotifications() {
 
 function _printNotification(notification) {
   if (notification.code > 0 && _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_0__["exceptionMap"].has(notification.code.toString())) {
-    notification.message = _TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_0__["exceptionMap"].get(notification.code.toString()));
+    notification.message = _TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_0__["exceptionMap"].get(notification.code.toString()), notification.placeholder);
   }
 
   notifications.add(notification);
@@ -60471,13 +60471,15 @@ function Notification(data, context) {
 
   function close() {
     notifications.remove(self);
-    trigger();
+
+    _trigger();
   }
 
   function closeAfter(timeout) {
     setTimeout(function () {
       notifications.remove(self);
-      trigger();
+
+      _trigger();
     }, timeout);
   }
 
