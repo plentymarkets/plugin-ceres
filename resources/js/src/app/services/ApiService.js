@@ -5,6 +5,7 @@ const NotificationService = require("./NotificationService");
 const WaitScreenService   = require("./WaitScreenService");
 
 const _eventListeners = {};
+const _skipEvents = {};
 
 $(document).ajaxComplete((ajaxEvent, xhr, options) =>
 {
@@ -23,7 +24,11 @@ $(document).ajaxComplete((ajaxEvent, xhr, options) =>
     {
         for (const event in response.events)
         {
-            triggerEvent(event, response.events[event]);
+            if (!_skipEvents[event])
+            {
+                triggerEvent(event, response.events[event]);
+            }
+            _skipEvents[event] = false;
         }
 
         if (!options.supressNotifications)
@@ -54,6 +59,11 @@ export function triggerEvent(event, payload)
             listener.call(Object, payload);
         }
     }
+}
+
+export function skipNext(event)
+{
+    _skipEvents[event] = true;
 }
 
 export function get(url, data, config)
@@ -181,4 +191,4 @@ export function getToken()
     return this._token;
 }
 
-export default { get, put, post, del, send, setToken, getToken, listen };
+export default { get, put, post, del, send, setToken, getToken, listen, skipNext };
