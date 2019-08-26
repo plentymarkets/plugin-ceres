@@ -1,6 +1,7 @@
 import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
 import { pathnameEquals } from "../../helper/url";
+import { isNullOrUndefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
 const ApiService = require("../../services/ApiService");
 
@@ -9,10 +10,6 @@ const state =
         data: {},
         items: [],
         showNetPrices: false,
-        latestEntry: {
-            item: {},
-            quantity: null
-        },
         isBasketLoading: false,
         isBasketInitiallyLoaded: false,
         basketNotifications: []
@@ -50,6 +47,17 @@ const mutations =
             }
         },
 
+        updateBasketItem(state, basketItem)
+        {
+            const entry = state.items.find(item => item.id === basketItem.id);
+
+            if (!isNullOrUndefined(entry))
+            {
+                entry.price = basketItem.price;
+                entry.quantity = basketItem.quantity;
+            }
+        },
+
         addBasketNotification(state, { type, message })
         {
             state.basketNotifications.push({ type: type, message: message });
@@ -60,21 +68,16 @@ const mutations =
             state.basketNotifications.splice(0, 1);
         },
 
-        updateBasketItemQuantity(state, { basketItem, quantity })
+        updateBasketItemQuantity(state, basketItem)
         {
             const item = state.items.find(item => basketItem.id === item.id);
 
-            item.quantity = quantity;
+            item.quantity = basketItem.quantity;
         },
 
         removeBasketItem(state, basketItemId)
         {
             state.items = state.items.filter(item => item.id !== basketItemId);
-        },
-
-        setLatestBasketEntry(state, latestBasketEntry)
-        {
-            state.latestEntry = latestBasketEntry;
         },
 
         setCouponCode(state, couponCode)
@@ -129,7 +132,17 @@ const actions =
             {
                 commit("setBasket", data.basket);
                 commit("setShowNetPrices", data.showNetPrices);
-                commit("setBasketItems", data.basketItems);
+                // commit("setBasketItems", data.basketItems);
+            });
+
+            ApiService.listen("AfterBasketItemAdd", data =>
+            {
+                commit("addBasketItem", data.basketItem);
+            });
+
+            ApiService.listen("AfterBasketItemUpdate", data =>
+            {
+                commit("updateBasketItem", data.basketItem);
             });
         },
 
@@ -151,11 +164,10 @@ const actions =
 
                 basketItem.template = "Ceres::Basket.Basket";
                 ApiService.post("/rest/io/basket/items/", basketItem)
-                    .done(basketItems =>
+                    .done(response =>
                     {
-                        commit("setBasketItems", basketItems);
                         commit("setIsBasketLoading", false);
-                        resolve(basketItems);
+                        resolve(response);
                     })
                     .fail(error =>
                     {
@@ -165,20 +177,19 @@ const actions =
             });
         },
 
-        updateBasketItemQuantity({ commit }, { basketItem, quantity })
+        updateBasketItemQuantity({ commit }, basketItem)
         {
             return new Promise((resolve, reject) =>
             {
-                commit("updateBasketItemQuantity", { basketItem, quantity });
+                commit("updateBasketItemQuantity", basketItem);
                 commit("setIsBasketLoading", true);
 
                 basketItem.template = "Ceres::Basket.Basket";
                 ApiService.put("/rest/io/basket/items/" + basketItem.id, basketItem)
-                    .done(data =>
+                    .done(response =>
                     {
-                        commit("setBasketItems", data);
                         commit("setIsBasketLoading", false);
-                        resolve(data);
+                        resolve(response);
                     })
                     .fail(error =>
                     {
@@ -195,13 +206,13 @@ const actions =
                 commit("setIsBasketLoading", true);
 
                 ApiService.del("/rest/io/basket/items/" + basketItemId, { template: "Ceres::Basket.Basket" })
-                    .done(basketItems =>
+                    .done(response =>
                     {
-                        commit("setBasketItems", basketItems);
                         commit("setIsBasketLoading", false);
-                        resolve(basketItems);
+                        commit("removeBasketItem", basketItemId);
+                        resolve(response);
 
-                        if (pathnameEquals(App.urls.checkout) && !basketItems.length)
+                        if (pathnameEquals(App.urls.checkout) && !response.length)
                         {
                             navigateTo(App.urls.basket);
                         }

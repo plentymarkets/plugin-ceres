@@ -126,6 +126,7 @@ Vue.component("add-to-basket", {
         },
 
         ...mapState({
+            basketItems: state => state.basket.items,
             isBasketLoading: state => state.basket.isBasketLoading,
             isVariationSelected: state => state.variationSelect.isVariationSelected
         })
@@ -174,13 +175,8 @@ Vue.component("add-to-basket", {
                 this.$store.dispatch("addBasketItem", basketObject).then(
                     response =>
                     {
-                        const basketItem = response.find(item => item.variationId === this.variationId);
-                        const variation = !isNullOrUndefined(basketItem) ? basketItem.variation.data : null;
-                        const orderParams = !isNullOrUndefined(basketObject) ? basketObject.basketItemOrderParams : null;
-
                         document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
                         this.waiting = false;
-                        this.openAddToBasketOverlay(basketObject.quantity, variation, orderParams);
                     },
                     error =>
                     {
@@ -221,21 +217,6 @@ Vue.component("add-to-basket", {
         handleButtonState(value)
         {
             this.buttonLockState = value;
-        },
-
-        /**
-         * open the AddItemToBasketOverlay
-         */
-        openAddToBasketOverlay(stashedQuantity, item, orderParams)
-        {
-            const latestBasketEntry =
-                {
-                    item: item,
-                    quantity: stashedQuantity,
-                    orderParams: orderParams
-                };
-
-            this.$store.commit("setLatestBasketEntry", latestBasketEntry);
         },
 
         /**
