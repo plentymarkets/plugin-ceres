@@ -125,10 +125,23 @@ Vue.component("add-to-basket", {
             return classes;
         },
 
+        tooltipText()
+        {
+            if (this.hasAvailableVariations)
+            {
+                return TranslationService.translate("Ceres::Template.singleItemPleaseSelectValidVariation");
+            }
+            else
+            {
+                return TranslationService.translate("Ceres::Template.singleItemPleaseSelectNotAvailable");
+            }
+        },
+
         ...mapState({
             basketItems: state => state.basket.items,
             isBasketLoading: state => state.basket.isBasketLoading,
-            isVariationSelected: state => state.variationSelect.isVariationSelected
+            isVariationSelected: state => state.variationSelect.isVariationSelected,
+            hasAvailableVariations: state => state.variationSelect.variations.some(variation => variation.isSalable)
         })
     },
     data()
