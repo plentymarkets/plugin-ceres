@@ -24,6 +24,7 @@ Vue.component("order-property-value", {
             if (this.property.type === "selection")
             {
                 const propertyId = parseInt(this.property.propertyId);
+                // TODO: pass as property
                 const basketItemId = parseInt(this.property.basketItemId);
                 const basketItem = this.basketItems.find(basketItem => basketItem.id === basketItemId);
 
