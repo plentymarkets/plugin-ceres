@@ -4,7 +4,6 @@ import { isNullOrUndefined } from "../../../helper/utils";
 import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
 import Vue from "vue";
 import { mapState } from "vuex";
-import ApiService from "../../../services/ApiService";
 
 const NotificationService = require("../../../services/NotificationService");
 
@@ -145,7 +144,6 @@ Vue.component("basket-list-item", {
 
                 const origQty = this.basketItem.quantity;
 
-                ApiService.skipNext("AfterBasketItemUpdate");
                 this.$store.dispatch("updateBasketItemQuantity", { id: this.basketItem.id, variationId: this.basketItem.variation.id, quantity: quantity }).then(
                     response =>
                     {
