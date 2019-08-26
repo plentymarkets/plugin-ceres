@@ -29,9 +29,10 @@
                 <button
                     v-if="!isVariationSelected || !isSalable"
                     class="btn btn-block btn-primary btn-appearance disabled"
-                    v-tooltip data-toggle="tooltip"
+                    v-tooltip
+                    data-toggle="tooltip"
                     data-placement="top"
-                    title="{{ trans("Ceres::Template.singleItemPleaseSelectValidVariation") }}"
+                    :title="tooltipText"
                     :class="buttonClasses"
                     :style="paddingInlineStyles">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
