@@ -46550,6 +46550,13 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
       }
 
       return classes;
+    },
+    tooltipText: function tooltipText() {
+      if (this.hasAvailableVariations) {
+        return _services_TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template.singleItemPleaseSelectValidVariation");
+      } else {
+        return _services_TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template.singleItemPleaseSelectNotAvailable");
+      }
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapState"])({
     basketItems: function basketItems(state) {
@@ -46560,6 +46567,11 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
     },
     isVariationSelected: function isVariationSelected(state) {
       return state.variationSelect.isVariationSelected;
+    },
+    hasAvailableVariations: function hasAvailableVariations(state) {
+      return state.variationSelect.variations.some(function (variation) {
+        return variation.isSalable;
+      });
     }
   })),
   data: function data() {
