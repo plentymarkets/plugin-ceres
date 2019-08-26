@@ -159,5 +159,13 @@
                 {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
             </dl>
         </div>
+
+        {% set deliveryExportTranslation = trans("Ceres::Template.basketExportDeliveryWarning", { from: "${ shopCountry && shopCountry.currLangName }", to: "${ currentShippingCountry && currentShippingCountry.currLangName }" }) %}
+        {% if deliveryExportTranslation | trim is not empty %}
+            <div v-if="basket.isExportDelivery" class="alert alert-info w-100">
+                {{ trans("Ceres::Template.basketExportDeliveryWarning", { from: "${ shopCountry && shopCountry.currLangName }", to: "${ currentShippingCountry && currentShippingCountry.currLangName }" }) }}
+            </div>
+        {% endif %}
+
     </div>
 </script>
