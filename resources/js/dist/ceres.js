@@ -46312,6 +46312,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
 
+var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("add-item-to-basket-overlay", {
   delimiters: ["${", "}"],
   props: {
@@ -46326,68 +46328,83 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("add-item-to-basket-overlay
   },
   data: function data() {
     return {
-      currency: "",
-      price: 0
+      price: 0,
+      basketItem: null
     };
   },
-  computed: _objectSpread({
+  mounted: function mounted() {
+    var _this = this;
+
+    if (App.config.basket.addItemToBasketConfirm === "overlay") {
+      ApiService.listen("AfterBasketItemAdd", function (data) {
+        _this.showItem(data.basketItem);
+      });
+      ApiService.listen("AfterBasketItemUpdate", function (data) {
+        var basketItem = _this.basketItems.find(function (item) {
+          return item.id === data.basketItem.id;
+        }) || {};
+        basketItem.quantity = data.basketItem.quantity;
+        basketItem.price = data.basketItem.price;
+        basketItem.price = data.basketItem.price;
+        basketItem.basketItemOrderParams = data.basketItem.basketItemOrderParams;
+
+        _this.showItem(basketItem);
+      });
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
+    basketItems: function basketItems(state) {
+      return state.basket.items;
+    }
+  }), {
     isLastBasketEntrySet: function isLastBasketEntrySet() {
-      return Object.keys(this.latestBasketEntry.item).length !== 0;
+      return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(this.basketItem);
+    },
+    variation: function variation() {
+      return this.basketItem.variation ? this.basketItem.variation.data : null;
     },
     itemName: function itemName() {
       if (this.isLastBasketEntrySet) {
-        return this.$options.filters.itemName(this.latestBasketEntry.item);
+        return this.$options.filters.itemName(this.variation);
       }
 
       return "";
     },
     imageUrl: function imageUrl() {
       if (this.isLastBasketEntrySet) {
-        var images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
-        var img = this.$options.filters.itemImage(images);
-        return img;
+        var images = this.$options.filters.itemImages(this.variation.images, "urlPreview");
+        return this.$options.filters.itemImage(images);
       }
 
       return "";
     },
     imageAlternativeText: function imageAlternativeText() {
       if (this.isLastBasketEntrySet) {
-        var images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
+        var images = this.$options.filters.itemImages(this.variation.images, "urlPreview");
         return this.$options.filters.itemImageAlternativeText(images);
       }
 
       return "";
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
-    latestBasketEntry: function latestBasketEntry(state) {
-      return state.basket.latestEntry;
-    }
-  })),
-  watch: {
-    latestBasketEntry: function latestBasketEntry() {
-      if (App.config.basket.addItemToBasketConfirm === "overlay") {
-        this.setPriceFromData();
-        ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
-      }
-    }
-  },
+  }),
   methods: {
-    setPriceFromData: function setPriceFromData() {
-      if (this.latestBasketEntry.item.prices) {
-        this.currency = this.latestBasketEntry.item.prices.default.currency;
-        var graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
-        var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
-        this.price = this.$options.filters.specialOffer(graduatedPrice, this.latestBasketEntry.item.prices, "price", "value") + propertySurcharge;
+    showItem: function showItem(basketItem) {
+      this.basketItem = basketItem;
+
+      if (this.basketItem && this.variation.prices) {
+        var graduatedPrice = this.$options.filters.graduatedPrice(this.variation, this.basketItem.quantity);
+        var propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
+        this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
       }
+
+      ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
     },
     orderParamValue: function orderParamValue(propertyId) {
-      var orderParams = this.latestBasketEntry.orderParams;
-
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(orderParams)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(this.basketItem.basketItemOrderParams)) {
         return "";
       }
 
-      var property = this.latestBasketEntry.item.properties.find(function (property) {
+      var property = this.variation.properties.find(function (property) {
         return parseInt(property.property.id) === parseInt(propertyId);
       });
 
@@ -46395,7 +46412,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("add-item-to-basket-overlay
         return "";
       }
 
-      var orderParam = orderParams.find(function (param) {
+      var orderParam = this.basketItem.basketItemOrderParams.find(function (param) {
         return parseInt(param.property.id) === parseInt(propertyId);
       });
       var orderParamValue = orderParam.property.value;
@@ -46535,6 +46552,9 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
       return classes;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapState"])({
+    basketItems: function basketItems(state) {
+      return state.basket.items;
+    },
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
     },
@@ -46571,17 +46591,10 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
           basketItemOrderParams: this.orderProperties
         };
         this.$store.dispatch("addBasketItem", basketObject).then(function (response) {
-          var basketItem = response.find(function (item) {
-            return item.variationId === _this.variationId;
-          });
-          var variation = !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(basketItem) ? basketItem.variation.data : null;
-          var orderParams = !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(basketObject) ? basketObject.basketItemOrderParams : null;
           document.dispatchEvent(new CustomEvent("afterBasketItemAdded", {
             detail: basketObject
           }));
           _this.waiting = false;
-
-          _this.openAddToBasketOverlay(basketObject.quantity, variation, orderParams);
         }, function (error) {
           _this.waiting = false;
 
@@ -46628,18 +46641,6 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
     },
     handleButtonState: function handleButtonState(value) {
       this.buttonLockState = value;
-    },
-
-    /**
-     * open the AddItemToBasketOverlay
-     */
-    openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity, item, orderParams) {
-      var latestBasketEntry = {
-        item: item,
-        quantity: stashedQuantity,
-        orderParams: orderParams
-      };
-      this.$store.commit("setLatestBasketEntry", latestBasketEntry);
     },
 
     /**
@@ -46978,11 +46979,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -47113,8 +47116,10 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("basket-list-item", {
       if (this.basketItem.quantity !== quantity) {
         this.waiting = true;
         var origQty = this.basketItem.quantity;
+        _services_ApiService__WEBPACK_IMPORTED_MODULE_6__["default"].skipNext("AfterBasketItemUpdate");
         this.$store.dispatch("updateBasketItemQuantity", {
-          basketItem: this.basketItem,
+          id: this.basketItem.id,
+          variationId: this.basketItem.variation.id,
           quantity: quantity
         }).then(function (response) {
           document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {
@@ -52026,7 +52031,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("order-property-value", {
   computed: _objectSpread({
     valueLabel: function valueLabel() {
       if (this.property.type === "selection") {
-        var propertyId = parseInt(this.property.propertyId);
+        var propertyId = parseInt(this.property.propertyId); // TODO: pass as property
+
         var basketItemId = parseInt(this.property.basketItemId);
         var basketItem = this.basketItems.find(function (basketItem) {
           return basketItem.id === basketItemId;
@@ -59912,13 +59918,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 /*!*****************************************************!*\
   !*** ./resources/js/src/app/services/ApiService.js ***!
   \*****************************************************/
-/*! exports provided: listen, triggerEvent, get, put, post, del, send, setToken, getToken, default */
+/*! exports provided: listen, triggerEvent, skipNext, get, put, post, del, send, setToken, getToken, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "listen", function() { return listen; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "triggerEvent", function() { return triggerEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "skipNext", function() { return skipNext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get", function() { return get; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "put", function() { return put; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "post", function() { return post; });
@@ -59936,6 +59943,7 @@ var NotificationService = __webpack_require__(/*! ./NotificationService */ "./re
 var WaitScreenService = __webpack_require__(/*! ./WaitScreenService */ "./resources/js/src/app/services/WaitScreenService.js");
 
 var _eventListeners = {};
+var _skipEvents = {};
 $(document).ajaxComplete(function (ajaxEvent, xhr, options) {
   var response;
 
@@ -59945,7 +59953,11 @@ $(document).ajaxComplete(function (ajaxEvent, xhr, options) {
 
   if (response) {
     for (var event in response.events) {
-      triggerEvent(event, response.events[event]);
+      if (!_skipEvents[event]) {
+        triggerEvent(event, response.events[event]);
+      }
+
+      _skipEvents[event] = false;
     }
 
     if (!options.supressNotifications) {
@@ -59970,6 +59982,9 @@ function triggerEvent(event, payload) {
       listener.call(Object, payload);
     }
   }
+}
+function skipNext(event) {
+  _skipEvents[event] = true;
 }
 function get(url, data, config) {
   config = config || {};
@@ -60073,7 +60088,8 @@ function getToken() {
   send: send,
   setToken: setToken,
   getToken: getToken,
-  listen: listen
+  listen: listen,
+  skipNext: skipNext
 });
 
 /***/ }),
@@ -61790,6 +61806,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
 /* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
 /* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/url */ "./resources/js/src/app/helper/url.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
 
 
 
@@ -61802,10 +61820,6 @@ var state = {
   data: {},
   items: [],
   showNetPrices: false,
-  latestEntry: {
-    item: {},
-    quantity: null
-  },
   isBasketLoading: false,
   isBasketInitiallyLoaded: false,
   basketNotifications: []
@@ -61835,6 +61849,16 @@ var mutations = {
       state.items.push(basketItem);
     }
   },
+  updateBasketItem: function updateBasketItem(state, basketItem) {
+    var entry = state.items.find(function (item) {
+      return item.id === basketItem.id;
+    });
+
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(entry)) {
+      entry.price = basketItem.price;
+      entry.quantity = basketItem.quantity;
+    }
+  },
   addBasketNotification: function addBasketNotification(state, _ref) {
     var type = _ref.type,
         message = _ref.message;
@@ -61846,21 +61870,16 @@ var mutations = {
   clearOldestNotification: function clearOldestNotification(state) {
     state.basketNotifications.splice(0, 1);
   },
-  updateBasketItemQuantity: function updateBasketItemQuantity(state, _ref2) {
-    var basketItem = _ref2.basketItem,
-        quantity = _ref2.quantity;
+  updateBasketItemQuantity: function updateBasketItemQuantity(state, basketItem) {
     var item = state.items.find(function (item) {
       return basketItem.id === item.id;
     });
-    item.quantity = quantity;
+    item.quantity = basketItem.quantity;
   },
   removeBasketItem: function removeBasketItem(state, basketItemId) {
     state.items = state.items.filter(function (item) {
       return item.id !== basketItemId;
     });
-  },
-  setLatestBasketEntry: function setLatestBasketEntry(state, latestBasketEntry) {
-    state.latestEntry = latestBasketEntry;
   },
   setCouponCode: function setCouponCode(state, couponCode) {
     state.data.couponCode = couponCode;
@@ -61876,9 +61895,9 @@ var mutations = {
   }
 };
 var actions = {
-  loadBasketData: function loadBasketData(_ref3) {
-    var commit = _ref3.commit,
-        state = _ref3.state;
+  loadBasketData: function loadBasketData(_ref2) {
+    var commit = _ref2.commit,
+        state = _ref2.state;
     jQuery.when(ApiService.get("/rest/io/basket", {}, {
       cache: false
     }), ApiService.get("/rest/io/basket/items", {
@@ -61898,14 +61917,19 @@ var actions = {
     });
     ApiService.listen("AfterBasketChanged", function (data) {
       commit("setBasket", data.basket);
-      commit("setShowNetPrices", data.showNetPrices);
-      commit("setBasketItems", data.basketItems);
+      commit("setShowNetPrices", data.showNetPrices); // commit("setBasketItems", data.basketItems);
+    });
+    ApiService.listen("AfterBasketItemAdd", function (data) {
+      commit("addBasketItem", data.basketItem);
+    });
+    ApiService.listen("AfterBasketItemUpdate", function (data) {
+      commit("updateBasketItem", data.basketItem);
     });
   },
-  addBasketNotification: function addBasketNotification(_ref4, _ref5) {
-    var commit = _ref4.commit;
-    var type = _ref5.type,
-        message = _ref5.message;
+  addBasketNotification: function addBasketNotification(_ref3, _ref4) {
+    var commit = _ref3.commit;
+    var type = _ref4.type,
+        message = _ref4.message;
     commit("addBasketNotification", {
       type: type,
       message: message
@@ -61914,54 +61938,47 @@ var actions = {
       commit("clearOldestNotification");
     }, 5000);
   },
-  addBasketItem: function addBasketItem(_ref6, basketItem) {
+  addBasketItem: function addBasketItem(_ref5, basketItem) {
+    var commit = _ref5.commit;
+    return new Promise(function (resolve, reject) {
+      commit("setIsBasketLoading", true);
+      basketItem.template = "Ceres::Basket.Basket";
+      ApiService.post("/rest/io/basket/items/", basketItem).done(function (response) {
+        commit("setIsBasketLoading", false);
+        resolve(response);
+      }).fail(function (error) {
+        commit("setIsBasketLoading", false);
+        reject(error);
+      });
+    });
+  },
+  updateBasketItemQuantity: function updateBasketItemQuantity(_ref6, basketItem) {
     var commit = _ref6.commit;
     return new Promise(function (resolve, reject) {
+      commit("updateBasketItemQuantity", basketItem);
       commit("setIsBasketLoading", true);
       basketItem.template = "Ceres::Basket.Basket";
-      ApiService.post("/rest/io/basket/items/", basketItem).done(function (basketItems) {
-        commit("setBasketItems", basketItems);
+      ApiService.put("/rest/io/basket/items/" + basketItem.id, basketItem).done(function (response) {
         commit("setIsBasketLoading", false);
-        resolve(basketItems);
+        resolve(response);
       }).fail(function (error) {
         commit("setIsBasketLoading", false);
         reject(error);
       });
     });
   },
-  updateBasketItemQuantity: function updateBasketItemQuantity(_ref7, _ref8) {
+  removeBasketItem: function removeBasketItem(_ref7, basketItemId) {
     var commit = _ref7.commit;
-    var basketItem = _ref8.basketItem,
-        quantity = _ref8.quantity;
-    return new Promise(function (resolve, reject) {
-      commit("updateBasketItemQuantity", {
-        basketItem: basketItem,
-        quantity: quantity
-      });
-      commit("setIsBasketLoading", true);
-      basketItem.template = "Ceres::Basket.Basket";
-      ApiService.put("/rest/io/basket/items/" + basketItem.id, basketItem).done(function (data) {
-        commit("setBasketItems", data);
-        commit("setIsBasketLoading", false);
-        resolve(data);
-      }).fail(function (error) {
-        commit("setIsBasketLoading", false);
-        reject(error);
-      });
-    });
-  },
-  removeBasketItem: function removeBasketItem(_ref9, basketItemId) {
-    var commit = _ref9.commit;
     return new Promise(function (resolve, reject) {
       commit("setIsBasketLoading", true);
       ApiService.del("/rest/io/basket/items/" + basketItemId, {
         template: "Ceres::Basket.Basket"
-      }).done(function (basketItems) {
-        commit("setBasketItems", basketItems);
+      }).done(function (response) {
         commit("setIsBasketLoading", false);
-        resolve(basketItems);
+        commit("removeBasketItem", basketItemId);
+        resolve(response);
 
-        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_2__["pathnameEquals"])(App.urls.checkout) && !basketItems.length) {
+        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_2__["pathnameEquals"])(App.urls.checkout) && !response.length) {
           Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])(App.urls.basket);
         }
       }).fail(function (error) {
@@ -61970,9 +61987,9 @@ var actions = {
       });
     });
   },
-  redeemCouponCode: function redeemCouponCode(_ref10, couponCode) {
-    var state = _ref10.state,
-        commit = _ref10.commit;
+  redeemCouponCode: function redeemCouponCode(_ref8, couponCode) {
+    var state = _ref8.state,
+        commit = _ref8.commit;
     return new Promise(function (resolve, reject) {
       commit("setIsBasketLoading", true);
       ApiService.post("/rest/io/coupon", {
@@ -61989,9 +62006,9 @@ var actions = {
       });
     });
   },
-  removeCouponCode: function removeCouponCode(_ref11, couponCode) {
-    var state = _ref11.state,
-        commit = _ref11.commit;
+  removeCouponCode: function removeCouponCode(_ref9, couponCode) {
+    var state = _ref9.state,
+        commit = _ref9.commit;
     return new Promise(function (resolve, reject) {
       commit("setIsBasketLoading", true);
       ApiService.del("/rest/io/coupon/" + couponCode).done(function (data) {
@@ -62004,8 +62021,8 @@ var actions = {
       });
     });
   },
-  refreshBasket: function refreshBasket(_ref12) {
-    var commit = _ref12.commit;
+  refreshBasket: function refreshBasket(_ref10) {
+    var commit = _ref10.commit;
     return new Promise(function (resolve, reject) {
       ApiService.get("/rest/io/basket/").done(function (basket) {
         commit("setBasket", basket);
