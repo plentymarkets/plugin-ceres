@@ -93,7 +93,8 @@ function _printNotification(notification)
     if (notification.code > 0 && exceptionMap.has(notification.code.toString()))
     {
         notification.message = TranslationService.translate(
-            "Ceres::Template." + exceptionMap.get(notification.code.toString())
+            "Ceres::Template." + exceptionMap.get(notification.code.toString()),
+            notification.placeholder
         );
     }
     notifications.add(notification);
@@ -128,7 +129,7 @@ function Notification(data, context)
     function close()
     {
         notifications.remove(self);
-        trigger();
+        _trigger();
     }
 
     function closeAfter(timeout)
@@ -136,7 +137,7 @@ function Notification(data, context)
         setTimeout(function()
         {
             notifications.remove(self);
-            trigger();
+            _trigger();
         }, timeout);
     }
 
