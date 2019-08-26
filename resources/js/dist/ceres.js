@@ -47158,17 +47158,17 @@ function setUrlParams(urlParams) {
   if (pushState) {
     window.history.pushState({
       requireReload: true
-    }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash);
   } else {
     window.history.replaceState({
       requireReload: true
-    }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash);
   }
 
   document.dispatchEvent(new CustomEvent("onHistoryChanged", {
     detail: {
       title: titleElement ? titleElement.innerHTML : "",
-      url: pathName + params
+      url: pathName + params + window.location.hash
     }
   }));
   Array.prototype.slice.call(document.querySelectorAll("a[href][data-update-url]")).forEach(function (element) {
