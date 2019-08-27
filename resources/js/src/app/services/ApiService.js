@@ -1,11 +1,10 @@
 import { normalizeUrl } from "../helper/url";
-import { isDefined } from "../helper/utils";
+import { isDefined, isNullOrUndefined } from "../helper/utils";
 
 const NotificationService = require("./NotificationService");
 const WaitScreenService   = require("./WaitScreenService");
 
 const _eventListeners = {};
-const _skipEvents = {};
 
 $(document).ajaxComplete((ajaxEvent, xhr, options) =>
 {
@@ -22,19 +21,21 @@ $(document).ajaxComplete((ajaxEvent, xhr, options) =>
 
     if (response)
     {
+        triggerEvent("_before", response);
+
         for (const event in response.events)
         {
-            if (!_skipEvents[event])
-            {
-                triggerEvent(event, response.events[event]);
-            }
-            _skipEvents[event] = false;
+            triggerEvent("_before_" + event, response.events[event]);
+            triggerEvent(event, response.events[event]);
+            triggerEvent("_after_" + event, response.events[event]);
         }
 
         if (!options.supressNotifications)
         {
             _printMessages(response);
         }
+
+        triggerEvent("_after", response);
     }
 });
 
@@ -42,6 +43,30 @@ export function listen(event, handler)
 {
     _eventListeners[event] = _eventListeners[event] || [];
     _eventListeners[event].push(handler);
+}
+
+export function before(event, handler)
+{
+    if (isNullOrUndefined(handler) && typeof event === "function")
+    {
+        listen("_before", event);
+    }
+    else
+    {
+        listen("_before_" + event, handler);
+    }
+}
+
+export function after(event, handler)
+{
+    if (isNullOrUndefined(handler) && typeof event === "function")
+    {
+        listen("_after", event);
+    }
+    else
+    {
+        listen("_after_" + event, handler);
+    }
 }
 
 export function triggerEvent(event, payload)
@@ -59,11 +84,6 @@ export function triggerEvent(event, payload)
             listener.call(Object, payload);
         }
     }
-}
-
-export function skipNext(event)
-{
-    _skipEvents[event] = true;
 }
 
 export function get(url, data, config)
@@ -191,4 +211,4 @@ export function getToken()
     return this._token;
 }
 
-export default { get, put, post, del, send, setToken, getToken, listen, skipNext };
+export default { get, put, post, del, send, setToken, getToken, listen, before, after };

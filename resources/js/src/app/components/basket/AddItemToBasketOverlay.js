@@ -39,13 +39,16 @@ Vue.component("add-item-to-basket-overlay", {
 
             ApiService.listen("AfterBasketItemUpdate", data =>
             {
-                const basketItem = this.basketItems.find(item => item.id === data.basketItem.id) || {};
+                if (!this.isBasketItemQuantityUpdate)
+                {
+                    const basketItem = this.basketItems.find(item => item.id === data.basketItem.id) || {};
 
-                basketItem.quantity = data.basketItem.quantity;
-                basketItem.price = data.basketItem.price;
-                basketItem.price = data.basketItem.price;
-                basketItem.basketItemOrderParams = data.basketItem.basketItemOrderParams;
-                this.showItem(basketItem);
+                    basketItem.quantity = data.basketItem.quantity;
+                    basketItem.price = data.basketItem.price;
+                    basketItem.price = data.basketItem.price;
+                    basketItem.basketItemOrderParams = data.basketItem.basketItemOrderParams;
+                    this.showItem(basketItem);
+                }
             });
         }
     },
@@ -53,7 +56,8 @@ Vue.component("add-item-to-basket-overlay", {
     computed:
     {
         ...mapState({
-            basketItems: state => state.basket.items
+            basketItems: state => state.basket.items,
+            isBasketItemQuantityUpdate: state => state.basket.isBasketItemQuantityUpdate
         }),
 
         isLastBasketEntrySet()
