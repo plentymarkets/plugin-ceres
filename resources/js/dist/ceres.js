@@ -46340,21 +46340,26 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("add-item-to-basket-overlay
         _this.showItem(data.basketItem);
       });
       ApiService.listen("AfterBasketItemUpdate", function (data) {
-        var basketItem = _this.basketItems.find(function (item) {
-          return item.id === data.basketItem.id;
-        }) || {};
-        basketItem.quantity = data.basketItem.quantity;
-        basketItem.price = data.basketItem.price;
-        basketItem.price = data.basketItem.price;
-        basketItem.basketItemOrderParams = data.basketItem.basketItemOrderParams;
+        if (!_this.isBasketItemQuantityUpdate) {
+          var basketItem = _this.basketItems.find(function (item) {
+            return item.id === data.basketItem.id;
+          }) || {};
+          basketItem.quantity = data.basketItem.quantity;
+          basketItem.price = data.basketItem.price;
+          basketItem.price = data.basketItem.price;
+          basketItem.basketItemOrderParams = data.basketItem.basketItemOrderParams;
 
-        _this.showItem(basketItem);
+          _this.showItem(basketItem);
+        }
       });
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
     basketItems: function basketItems(state) {
       return state.basket.items;
+    },
+    isBasketItemQuantityUpdate: function isBasketItemQuantityUpdate(state) {
+      return state.basket.isBasketItemQuantityUpdate;
     }
   }), {
     isLastBasketEntrySet: function isLastBasketEntrySet() {
@@ -46710,8 +46715,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("basket-preview", {
     basketNotifications: function basketNotifications(state) {
       return state.basket.basketNotifications;
     },
-    latestBasketEntry: function latestBasketEntry(state) {
-      return state.basket.latestEntry;
+    isBasketItemQuantityUpdate: function isBasketItemQuantityUpdate(state) {
+      return state.basket.isBasketItemQuantityUpdate;
     }
   }),
   created: function created() {
@@ -46732,19 +46737,28 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("basket-preview", {
         _this.$store.commit("setShowNetPrices", data.showNetPrices);
       });
     });
-  },
-  watch: {
-    latestBasketEntry: function latestBasketEntry() {
-      if (App.config.basket.addItemToBasketConfirm === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
-        setTimeout(function () {
-          var vueApp = document.querySelector("#vue-app");
-          var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
 
-          if (vueApp) {
-            vueApp.classList.add(basketOpenClass);
-          }
-        }, 1);
-      }
+    if (App.config.basket.addItemToBasketConfirm === "preview") {
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_0__["default"].listen("AfterBasketItemAdd", function (data) {
+        _this.show();
+      });
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_0__["default"].listen("AfterBasketItemUpdate", function (data) {
+        if (!_this.isBasketItemQuantityUpdate) {
+          _this.show();
+        }
+      });
+    }
+  },
+  methods: {
+    show: function show() {
+      setTimeout(function () {
+        var vueApp = document.querySelector("#vue-app");
+        var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
+
+        if (vueApp) {
+          vueApp.classList.add(basketOpenClass);
+        }
+      }, 1);
     }
   }
 });
@@ -46991,13 +47005,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -47128,7 +47140,6 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("basket-list-item", {
       if (this.basketItem.quantity !== quantity) {
         this.waiting = true;
         var origQty = this.basketItem.quantity;
-        _services_ApiService__WEBPACK_IMPORTED_MODULE_6__["default"].skipNext("AfterBasketItemUpdate");
         this.$store.dispatch("updateBasketItemQuantity", {
           id: this.basketItem.id,
           variationId: this.basketItem.variation.id,
@@ -59930,14 +59941,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 /*!*****************************************************!*\
   !*** ./resources/js/src/app/services/ApiService.js ***!
   \*****************************************************/
-/*! exports provided: listen, triggerEvent, skipNext, get, put, post, del, send, setToken, getToken, default */
+/*! exports provided: listen, before, after, triggerEvent, get, put, post, del, send, setToken, getToken, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "listen", function() { return listen; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "before", function() { return before; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "after", function() { return after; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "triggerEvent", function() { return triggerEvent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "skipNext", function() { return skipNext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get", function() { return get; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "put", function() { return put; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "post", function() { return post; });
@@ -59955,7 +59967,6 @@ var NotificationService = __webpack_require__(/*! ./NotificationService */ "./re
 var WaitScreenService = __webpack_require__(/*! ./WaitScreenService */ "./resources/js/src/app/services/WaitScreenService.js");
 
 var _eventListeners = {};
-var _skipEvents = {};
 $(document).ajaxComplete(function (ajaxEvent, xhr, options) {
   var response;
 
@@ -59964,23 +59975,39 @@ $(document).ajaxComplete(function (ajaxEvent, xhr, options) {
   } catch (exception) {}
 
   if (response) {
-    for (var event in response.events) {
-      if (!_skipEvents[event]) {
-        triggerEvent(event, response.events[event]);
-      }
+    triggerEvent("_before", response);
 
-      _skipEvents[event] = false;
+    for (var event in response.events) {
+      triggerEvent("_before_" + event, response.events[event]);
+      triggerEvent(event, response.events[event]);
+      triggerEvent("_after_" + event, response.events[event]);
     }
 
     if (!options.supressNotifications) {
       _printMessages(response);
     }
+
+    triggerEvent("_after", response);
   }
 });
 function listen(event, handler) {
   _eventListeners[event] = _eventListeners[event] || [];
 
   _eventListeners[event].push(handler);
+}
+function before(event, handler) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(handler) && typeof event === "function") {
+    listen("_before", event);
+  } else {
+    listen("_before_" + event, handler);
+  }
+}
+function after(event, handler) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(handler) && typeof event === "function") {
+    listen("_after", event);
+  } else {
+    listen("_after_" + event, handler);
+  }
 }
 function triggerEvent(event, payload) {
   if (_eventListeners[event]) {
@@ -59994,9 +60021,6 @@ function triggerEvent(event, payload) {
       listener.call(Object, payload);
     }
   }
-}
-function skipNext(event) {
-  _skipEvents[event] = true;
 }
 function get(url, data, config) {
   config = config || {};
@@ -60101,7 +60125,8 @@ function getToken() {
   setToken: setToken,
   getToken: getToken,
   listen: listen,
-  skipNext: skipNext
+  before: before,
+  after: after
 });
 
 /***/ }),
@@ -61836,6 +61861,7 @@ var state = {
   showNetPrices: false,
   isBasketLoading: false,
   isBasketInitiallyLoaded: false,
+  isBasketItemQuantityUpdate: false,
   basketNotifications: []
 };
 var mutations = {
@@ -61890,6 +61916,9 @@ var mutations = {
     });
     item.quantity = basketItem.quantity;
   },
+  setIsBasketItemQuantityUpdate: function setIsBasketItemQuantityUpdate(state, isBasketItemQuantityUpdate) {
+    state.isBasketItemQuantityUpdate = isBasketItemQuantityUpdate;
+  },
   removeBasketItem: function removeBasketItem(state, basketItemId) {
     state.items = state.items.filter(function (item) {
       return item.id !== basketItemId;
@@ -61939,6 +61968,9 @@ var actions = {
     ApiService.listen("AfterBasketItemUpdate", function (data) {
       commit("updateBasketItem", data.basketItem);
     });
+    ApiService.after(function () {
+      commit("setIsBasketItemQuantityUpdate", false);
+    });
   },
   addBasketNotification: function addBasketNotification(_ref3, _ref4) {
     var commit = _ref3.commit;
@@ -61970,6 +62002,7 @@ var actions = {
     var commit = _ref6.commit;
     return new Promise(function (resolve, reject) {
       commit("updateBasketItemQuantity", basketItem);
+      commit("setIsBasketItemQuantityUpdate", true);
       commit("setIsBasketLoading", true);
       basketItem.template = "Ceres::Basket.Basket";
       ApiService.put("/rest/io/basket/items/" + basketItem.id, basketItem).done(function (response) {
