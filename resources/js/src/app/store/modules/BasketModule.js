@@ -12,6 +12,7 @@ const state =
         showNetPrices: false,
         isBasketLoading: false,
         isBasketInitiallyLoaded: false,
+        isBasketItemQuantityUpdate: false,
         basketNotifications: []
     };
 
@@ -73,6 +74,11 @@ const mutations =
             const item = state.items.find(item => basketItem.id === item.id);
 
             item.quantity = basketItem.quantity;
+        },
+
+        setIsBasketItemQuantityUpdate(state, isBasketItemQuantityUpdate)
+        {
+            state.isBasketItemQuantityUpdate = isBasketItemQuantityUpdate;
         },
 
         removeBasketItem(state, basketItemId)
@@ -144,6 +150,11 @@ const actions =
             {
                 commit("updateBasketItem", data.basketItem);
             });
+
+            ApiService.after(() =>
+            {
+                commit("setIsBasketItemQuantityUpdate", false);
+            });
         },
 
         addBasketNotification({ commit }, { type, message })
@@ -182,6 +193,7 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 commit("updateBasketItemQuantity", basketItem);
+                commit("setIsBasketItemQuantityUpdate", true);
                 commit("setIsBasketLoading", true);
 
                 basketItem.template = "Ceres::Basket.Basket";
