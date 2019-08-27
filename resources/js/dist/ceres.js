@@ -46777,6 +46777,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("basket-totals", {
@@ -46792,17 +46798,33 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("basket-totals", {
       }
     }
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+  computed: _objectSpread({
+    currentShippingCountry: function currentShippingCountry() {
+      var shippingCountryId = this.basket.shippingCountryId;
+      return this.shippingCountries.find(function (country) {
+        return country.id === shippingCountryId;
+      });
+    },
+    shopCountry: function shopCountry() {
+      var shopCountryId = this.basket.shopCountryId;
+      return this.shippingCountries.find(function (country) {
+        return country.id === shopCountryId;
+      });
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     basket: function basket(state) {
       return state.basket.data;
     },
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
     },
+    shippingCountries: function shippingCountries(state) {
+      return state.localization.shippingCountries;
+    },
     showNetPrices: function showNetPrices(state) {
       return state.basket.showNetPrices;
     }
-  }),
+  })),
   methods: {
     calculateBaseValue: function calculateBaseValue(value, percent) {
       return value / (100 - percent) * 100;
