@@ -7588,13 +7588,6 @@
                     }
                 }
             },
-            "showCustomerId": {
-                "type": "checkbox",
-                "defaultValue": false,
-                "options": {
-                    "name": "Widget.orderDataShowCustomerId"
-                }
-            },
             "addressFields": {
                 "type": "checkboxGroup",
                 "defaultValue": [
@@ -7664,6 +7657,13 @@
                             "caption": "Widget.addressFieldCountry"
                         }
                     ]
+                }
+            },
+            "showCustomerId": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.orderDataShowCustomerId"
                 }
             }
         }
