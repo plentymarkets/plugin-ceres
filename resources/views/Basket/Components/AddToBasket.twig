@@ -15,7 +15,7 @@
         <div class="category-list-view-port" v-if="showQuantity && !useLargeScale">
             <div class="add-to-basket-container">
                 <div class="quantity-input-container">
-                    <quantity-input :value="1"
+                    <quantity-input :value="quantity"
                                 @quantity-change="updateQuantity"
                                 @out-of-stock="handleButtonState"
                                 :timeout="0" 
