@@ -35,6 +35,9 @@ function CeresMain()
     if (browser && browser.name)
     {
         $("html").addClass(browser.name);
+        // DEBUG ONLY
+        $("html").append( "<div>"+browser.name+"</div>" );
+        // DEBUG ONLY
     }
     else
     {
