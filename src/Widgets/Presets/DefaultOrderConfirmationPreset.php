@@ -43,7 +43,9 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->createPurchasedItemsWidget();
         $this->createOrderTotalsWidget();
 
-        // $this->createFourColumnWidget();
+        $this->createSeparatorWidget();
+
+        $this->createFourColumnWidget();
         // $this->createHomeLinkWidget();
         // $this->createMyAccountLinkWidget();
         
@@ -97,10 +99,10 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createOrderDocumentsWidget()
     {
         $this->threeColumnWidget->createChild("second", "Ceres::OrderDocumentsWidget")
-            ->withSetting("customClass","")
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.top.value", 3)
-            ->withSetting("spacing.margin.top.unit", null);
+                                ->withSetting("customClass","")
+                                ->withSetting("spacing.customMargin", true)
+                                ->withSetting("spacing.margin.top.value", 3)
+                                ->withSetting("spacing.margin.top.unit", null);
     }
 
     private function createRetourLinkWidget()
@@ -110,13 +112,23 @@ class DefaultOrderConfirmationPreset implements ContentPreset
 
     private function createPurchasedItemsWidget()
     {
-        $this->twoColumnWidget->createChild("second", "Ceres::PurchasedItemsWidget");
+        $this->twoColumnWidget->createChild("second", "Ceres::PurchasedItemsWidget")
+                              ->withSetting("customClass","")
+                              ->withSetting("spacing.customMargin", true)
+                              ->withSetting("spacing.margin.bottom.value", 30)
+                              ->withSetting("spacing.margin.bottom.unit", "px");
     }
 
     private function createOrderTotalsWidget()
     {
         $this->twoColumnWidget->createChild("second", "Ceres::OrderTotalsWidget")
                               ->withSetting("visibleFields", ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
+    }
+
+    private function createSeparatorWidget()
+    {
+        $this->preset->createWidget("Ceres::SeparatorWidget")
+                     ->withSetting("customClass","");
     }
 
     private function createHomeLinkWidget()
@@ -129,7 +141,6 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->fourColumnWidget->createChild("third", "Ceres::LinkWidget");
     }
 
-    
     private function createTwoColumnWidget()
     {
         $this->twoColumnWidget = $this->preset->createWidget("Ceres::TwoColumnWidget")
