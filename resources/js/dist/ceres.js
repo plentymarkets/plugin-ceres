@@ -46577,6 +46577,9 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
       return state.variationSelect.variations.some(function (variation) {
         return variation.isSalable;
       });
+    },
+    variationOrderQuantity: function variationOrderQuantity(state) {
+      return state.item.variationOrderQuantity;
     }
   })),
   data: function data() {
@@ -46669,8 +46672,13 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-basket", {
     }
   },
   watch: {
-    quantity: function quantity(newValue, oldValue) {
-      this.$store.commit("setVariationOrderQuantity", newValue);
+    quantity: function quantity(value) {
+      this.$store.commit("setVariationOrderQuantity", value);
+    },
+    variationOrderQuantity: function variationOrderQuantity(value) {
+      if (this.quantity !== value) {
+        this.quantity = value;
+      }
     }
   }
 });
