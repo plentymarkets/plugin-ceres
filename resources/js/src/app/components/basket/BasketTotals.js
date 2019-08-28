@@ -29,11 +29,29 @@ Vue.component("basket-totals", {
         }
     },
 
-    computed: mapState({
-        basket: state => state.basket.data,
-        isBasketLoading: state => state.basket.isBasketLoading,
-        showNetPrices: state => state.basket.showNetPrices
-    }),
+    computed:
+    {
+        currentShippingCountry()
+        {
+            const shippingCountryId = this.basket.shippingCountryId;
+
+            return this.shippingCountries.find(country => country.id === shippingCountryId);
+        },
+
+        shopCountry()
+        {
+            const shopCountryId = this.basket.shopCountryId;
+
+            return this.shippingCountries.find(country => country.id === shopCountryId);
+        },
+
+        ...mapState({
+            basket: state => state.basket.data,
+            isBasketLoading: state => state.basket.isBasketLoading,
+            shippingCountries: state => state.localization.shippingCountries,
+            showNetPrices: state => state.basket.showNetPrices
+        })
+    },
 
     methods: {
         calculateBaseValue(value, percent)
