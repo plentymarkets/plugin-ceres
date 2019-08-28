@@ -23,7 +23,7 @@ Vue.component("guest-login", {
         buttonSize:
         {
             type: [String, null],
-            default: "lg",
+            default: "md",
             validator: value =>
             {
                 return ["sm", "md", "lg"].indexOf(value) !== -1;
