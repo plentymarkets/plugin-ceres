@@ -18062,9 +18062,10 @@ category-item {
           .parallax-img-container .parallax-img-container-inner[style^='background-image'] .parallax-text-container .category-description {
             font-size: 2rem; } }
 
-/* IOS compatibility */
+/* IOS compatibility, missing background-attachment:fixed support*/
 html.ios .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
-  background-size: contain; }
+  background-size: cover;
+  background-attachment: scroll; }
 
 .list-controls {
   position: relative; }

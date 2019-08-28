@@ -18509,10 +18509,11 @@ category-item {
     }
 }
 
-/* IOS compatibility */
+/* IOS compatibility, missing background-attachment:fixed support*/
 html.ios {
     .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
-        background-size: contain;
+        background-size: cover;
+        background-attachment: scroll;
     }
 }
 
