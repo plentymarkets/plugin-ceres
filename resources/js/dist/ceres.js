@@ -59638,9 +59638,7 @@ function CeresMain() {
   var browser = browserDetect.detect();
 
   if (browser && browser.name) {
-    $("html").addClass(browser.name); // DEBUG ONLY
-
-    $("html").append("<div>" + browser.name + "</div>"); // DEBUG ONLY
+    $("html").addClass(browser.name);
   } else {
     $("html").addClass("unkown-os");
   } // Detect Facebook integrated Browser

@@ -18063,7 +18063,8 @@ category-item {
             font-size: 2rem; } }
 
 /* IOS compatibility, missing background-attachment:fixed support*/
-html.ios .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
+html.ios .parallax-img-container .parallax-img-container-inner[style^='background-image'],
+html.crios .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
   background-size: cover;
   background-attachment: scroll; }
 
