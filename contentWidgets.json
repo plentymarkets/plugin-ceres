@@ -7588,11 +7588,11 @@
                     }
                 }
             },
-            "showCustomerID": {
+            "showCustomerId": {
                 "type": "checkbox",
                 "defaultValue": false,
                 "options": {
-                    "name": "Widget.orderDataShowCustomerID"
+                    "name": "Widget.orderDataShowCustomerId"
                 }
             },
             "addressFields": {

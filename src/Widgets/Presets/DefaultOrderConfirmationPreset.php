@@ -86,20 +86,6 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createOrderDataWidget()
     {
         $this->twoColumnWidget->createChild("first", "Ceres::OrderDataWidget")
-                              ->withSetting("spacing.customMargin", true)
-                              ->withSetting("spacing.margin.top.value", 3)
-                              ->withSetting("spacing.margin.top.unit", null)
-                              ->withSetting("spacing.margin.bottom.value", 3)
-                              ->withSetting("spacing.margin.bottom.unit", null)
-                              ->withSetting("spacing.margin.left.value", 4)
-                              ->withSetting("spacing.margin.left.unit", null)
-                              ->withSetting("spacing.margin.right.value", 4)
-                              ->withSetting("spacing.margin.right.unit", null)
-                              ->withSetting("spacing.customPadding", true)
-                              ->withSetting("spacing.padding.top.value", 3)
-                              ->withSetting("spacing.padding.top.unit", null)
-                              ->withSetting("spacing.padding.bottom.value", 3)
-                              ->withSetting("spacing.padding.bottom.unit", null)
                               ->withSetting("addressFields", ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"]);
     }
 
@@ -124,28 +110,12 @@ class DefaultOrderConfirmationPreset implements ContentPreset
 
     private function createPurchasedItemsWidget()
     {
-        $this->twoColumnWidget->createChild("second", "Ceres::PurchasedItemsWidget")
-                              ->withSetting("spacing.customMargin", true)
-                              ->withSetting("spacing.margin.top.value", 3)
-                              ->withSetting("spacing.margin.top.unit", null)
-                              ->withSetting("spacing.margin.bottom.value", 3)
-                              ->withSetting("spacing.margin.bottom.unit", null)
-                              ->withSetting("spacing.margin.left.value", 4)
-                              ->withSetting("spacing.margin.left.unit", null)
-                              ->withSetting("spacing.margin.right.value", 4)
-                              ->withSetting("spacing.margin.right.unit", null);
+        $this->twoColumnWidget->createChild("second", "Ceres::PurchasedItemsWidget");
     }
 
     private function createOrderTotalsWidget()
     {
         $this->twoColumnWidget->createChild("second", "Ceres::OrderTotalsWidget")
-                              ->withSetting("spacing.customMargin", true)
-                              ->withSetting("spacing.margin.top.value", 3)
-                              ->withSetting("spacing.margin.top.unit", null)
-                              ->withSetting("spacing.margin.left.value", 4)
-                              ->withSetting("spacing.margin.left.unit", null)
-                              ->withSetting("spacing.margin.right.value", 4)
-                              ->withSetting("spacing.margin.right.unit", null)
                               ->withSetting("visibleFields", ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
     }
 
