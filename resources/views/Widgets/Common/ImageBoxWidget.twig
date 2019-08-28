@@ -61,6 +61,9 @@
 
 {% if customImagePath | trim is not empty %}
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
+    {{ Twig.if("imageAltText is empty") }}
+        {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
+    {{ Twig.endif() }}
 {% endif %}
 
 {{ Twig.if("imageAltText | trim is empty") }}
