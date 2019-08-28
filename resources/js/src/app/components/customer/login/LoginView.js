@@ -13,7 +13,6 @@ Vue.component("login-view", {
     {
         openGuestModal()
         {
-            // TODO: fix that part.
             ModalService.findModal(document.getElementById("guestLogin")).show();
         }
     }

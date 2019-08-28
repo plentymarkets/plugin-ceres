@@ -43,7 +43,7 @@ Vue.component("guest-login", {
     {
         this.$nextTick(() =>
         {
-            // TODO: fix that part.
+            // for old login view only (input in modal)
             $("#guestLogin").on("hidden.bs.modal", () =>
             {
                 this.email = "";
