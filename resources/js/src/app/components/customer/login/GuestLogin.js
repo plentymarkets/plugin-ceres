@@ -75,7 +75,7 @@ Vue.component("guest-login", {
                 .done(() =>
                 {
                     navigateTo(
-                        isDefined(this.backlink) ? decodeURIComponent(this.backlink) : window.location.origin
+                        isDefined(this.backlink) && this.backlink.length ? decodeURIComponent(this.backlink) : window.location.origin
                     );
                 })
                 .fail(() =>
