@@ -59,7 +59,7 @@ Vue.component("guest-login", {
             ValidationService.validate(this.$refs.form)
                 .done(() =>
                 {
-                    this.sendEMail();
+                    this.authGuest();
                 })
                 .fail(invalidFields =>
                 {
@@ -67,7 +67,7 @@ Vue.component("guest-login", {
                 });
         },
 
-        sendEMail()
+        authGuest()
         {
             this.isDisabled = true;
 
