@@ -7,6 +7,12 @@
     "widgetClass": "Ceres\\Widgets\\Login\\LoginWidget",
     "settings": {
         "customClass": "@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
         "spacing": "@include(spacingMargin)"
     }
 }
