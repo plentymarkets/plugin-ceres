@@ -22,7 +22,7 @@ Vue.component("guest-login", {
 
         buttonSize:
         {
-            type: [String, null],
+            type: String,
             default: "md",
             validator: value =>
             {
