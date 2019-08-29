@@ -12,35 +12,43 @@ class DefaultCheckoutPreset implements ContentPreset
     /** @var PresetHelper */
     private $preset;
     
-    /** @var PresetWidgetFactory */
-    private $twoColumnWidget;
-    
-    /** @var PresetWidgetFactory */
-    private $stickyContainer;
-    
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
         
+        $this->createThreeColumnWidgets();
+
         $this->createLoginWidget();
+        $this->createSeparatorWidget();
         $this->createGuestLoginWidget();
         $this->createRegisterLinkWidget();
         
         return $this->preset->toArray();
     }
     
+    private function createThreeColumnWidget()
+    {
+        $row_1 = $this->preset->createWidget("Ceres::ThreeColumnWidget")
+                              ->withSetting("layout", "oneToTwoToOne");
+    }
+
     private function createLoginWidget()
     {
-        $this->preset->createWidget('Ceres::LoginWidget');
+        $row_1->createChild("second", "Ceres::LoginWidget");
+    }
+
+    private function createSeparatorWidget()
+    {
+        $row_1->createChild("second", "Ceres::SeparatorWidget");
     }
 
     private function createGuestLoginWidget()
     {
-        $this->preset->createWidget('Ceres::GuestLoginWidget')
+        $row_1->createChild("second", "Ceres::GuestLoginWidget");
     }
 
     private function createRegisterLinkWidget()
     {
-        $this->preset->createWidget('Ceres::LinkWidget');
+        $row_1->createChild("second", "Ceres::LinkWidget");
     }
 }
