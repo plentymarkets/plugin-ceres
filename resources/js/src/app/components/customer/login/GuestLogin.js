@@ -44,7 +44,7 @@ Vue.component("guest-login", {
         this.$nextTick(() =>
         {
             // for old login view only (input in modal)
-            $("#guestLogin").on("hidden.bs.modal", () =>
+            $(this.$parent.$refs.guestModal).on("hidden.bs.modal", () =>
             {
                 this.email = "";
                 ValidationService.unmarkAllFields(this.$refs.form);
