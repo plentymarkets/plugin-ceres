@@ -27,6 +27,11 @@
             @include button-variant($value, $value);
         }
 
+        .border-appearance
+        {
+            border-color: $value;
+        }
+
         a.text-appearance,
         .btn-appearance
         {
