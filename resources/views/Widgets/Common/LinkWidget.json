@@ -17,23 +17,23 @@
         "size": {
             "type": "select",
             "required": false,
-            "defaultValue": "md",
+            "defaultValue": "",
             "options":{
                 "name": "Widget.linkSizeLabel",
                 "tooltipText": "Widget.linkSizeTooltip",
                 "listBoxValues": [
                     {
-                        "value": "sm",
+                        "value": "btn-sm",
                         "caption": "Widget.linkSizeSmall",
                         "position": 0
                     },
                     {
-                        "value": "md",
+                        "value": "",
                         "caption": "Widget.linkSizeMedium",
                         "position": 1
                     },
                     {
-                        "value": "lg",
+                        "value": "btn-lg",
                         "caption": "Widget.linkSizeLarge",
                         "position": 2
                     }
