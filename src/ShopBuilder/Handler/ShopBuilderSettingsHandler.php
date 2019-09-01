@@ -10,10 +10,16 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     protected $mappings = [
         'routing.homeCategory'                  => 'IO.routing.category_home',
         'routing.homeEnableRoute'               => 'IO.routing.enabled_routes',
+        'routing.basketCategory'                => 'IO.routing.category_basket',
+        'routing.basketEnableRoute'             => 'IO.routing.enabled_routes',
         'routing.checkoutCategory'              => 'IO.routing.category_checkout',
         'routing.checkoutEnableRoute'           => 'IO.routing.enabled_routes',
         'routing.myAccountCategory'             => 'IO.routing.category_my-account',
         'routing.myAccountEnableRoute'          => 'IO.routing.enabled_routes',
+        'routing.loginCategory'                 => 'IO.routing.category_login',
+        'routing.loginEnableRoute'              => 'IO.routing.enabled_routes',
+        'routing.registerCategory'              => 'IO.routing.category_register',
+        'routing.registerEnableRoute'           => 'IO.routing.enabled_routes',
         'routing.cancellationRightsCategory'    => 'IO.routing.category_cancellation-rights',
         'routing.cancellationRightsEnableRoute' => 'IO.routing.enabled_routes',
         'routing.cancellationFormCategory'      => 'IO.routing.category_cancellation-form',
@@ -26,6 +32,10 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.gtcEnableRoute'                => 'IO.routing.enabled_routes',
         'routing.contactCategory'               => 'IO.routing.category_contact',
         'routing.contactEnableRoute'            => 'IO.routing.enabled_routes',
+        'routing.wishListCategory'              => 'IO.routing.category_wish-list',
+        'routing.wishListEnableRoute'           => 'IO.routing.enabled_routes',
+        'routing.pageNotFoundCategory'          => 'IO.routing.category_page-not-found',
+        'routing.pageNotFoundEnableRoute'       => 'IO.routing.enabled_routes',
         'routing.shippingCategory'              => 'Ceres.global.shippingCostsCategoryId',
 
         'grecaptcha.version'                    => 'Ceres.global.google_recaptcha_version',
@@ -36,14 +46,19 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     protected $casts = [
         'routing.home'                          => 'int',
+        'routing.basket'                        => 'int',
         'routing.checkoutCategory'              => 'int',
         'routing.myAccountCategory'             => 'int',
+        'routing.loginCategory'                 => 'int',
+        'routing.registerCategory'              => 'int',
         'routing.cancellationRightsCategory'    => 'int',
         'routing.cancellationFormCategory'      => 'int',
         'routing.legalDisclosureCategory'       => 'int',
         'routing.privacyPolicyCategory'         => 'int',
         'routing.gtcCategory'                   => 'int',
         'routing.contactCategory'               => 'int',
+        'routing.wishListCategory'              => 'int',
+        'routing.pageNotFoundCategory'          => 'int',
         'routing.shippingCategory'              => 'int',
 
         'grecaptcha.version'                    => 'int',
@@ -60,6 +75,16 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     public function writeRouting_HomeEnableRoute($enableHomeRoute)
     {
         return $this->setEnabledRoute(RouteConfig::HOME, $enableHomeRoute);
+    }
+    
+    public function readRouting_BasketEnableRoute()
+    {
+        return in_array( RouteConfig::BASKET, RouteConfig::getEnabledRoutes());
+    }
+    
+    public function writeRouting_BasketEnableRoute($enableBasketRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::BASKET, $enableBasketRoute);
     }
     
     public function readRouting_CheckoutEnableRoute()
@@ -80,6 +105,26 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     public function writeRouting_MyAccountEnableRoute($enableCheckoutRoute)
     {
         return $this->setEnabledRoute(RouteConfig::MY_ACCOUNT, $enableCheckoutRoute);
+    }
+    
+    public function readRouting_LoginEnableRoute()
+    {
+        return in_array( RouteConfig::LOGIN, RouteConfig::getEnabledRoutes());
+    }
+    
+    public function writeRouting_LoginEnableRoute($enableLoginRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::LOGIN, $enableLoginRoute);
+    }
+    
+    public function readRouting_RegisterEnableRoute()
+    {
+        return in_array( RouteConfig::REGISTER, RouteConfig::getEnabledRoutes());
+    }
+    
+    public function writeRouting_RegisterEnableRoute($enableRegisterRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::REGISTER, $enableRegisterRoute);
     }
     
     public function readRouting_CancellationRightsEnableRoute()
@@ -140,6 +185,26 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     public function writeRouting_ContactEnableRoute($enableContactRoute)
     {
         return $this->setEnabledRoute(RouteConfig::CONTACT, $enableContactRoute);
+    }
+    
+    public function readRouting_WishListEnableRoute()
+    {
+        return in_array( RouteConfig::WISH_LIST, RouteConfig::getEnabledRoutes());
+    }
+    
+    public function writeRouting_WishListEnableRoute($enableWishListRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::WISH_LIST, $enableWishListRoute);
+    }
+    
+    public function readRouting_PageNotFoundEnableRoute()
+    {
+        return in_array( RouteConfig::PAGE_NOT_FOUND, RouteConfig::getEnabledRoutes());
+    }
+    
+    public function writeRouting_PageNotFoundEnableRoute($enablePageNotFoundRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::PAGE_NOT_FOUND, $enablePageNotFoundRoute);
     }
 
     private function setEnabledRoute($key, $value)
