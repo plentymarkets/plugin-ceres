@@ -5,9 +5,10 @@ namespace Ceres\Widgets\Presets;
 use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
+use IO\Extensions\Constants\ShopUrls;
+use IO\Helper\RouteConfig;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
-use IO\Helper\RouteConfig;
 
 class DefaultOrderConfirmationPreset implements ContentPreset
 {
@@ -16,6 +17,9 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     
     /** @var CeresConfig */
     private $ceresConfig;
+
+    /** @var ShopUrls */
+    private $shopUrls;
 
     /** @var Translator */
     private $translator;
@@ -34,6 +38,8 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->preset = pluginApp(PresetHelper::class);
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->translator = pluginApp(Translator::class);
+
+        $this->shopUrls = pluginApp(ShopUrls::class);
         
         $this->createHeadline();
         
@@ -158,15 +164,18 @@ class DefaultOrderConfirmationPreset implements ContentPreset
                                         ->withSetting("block", "true")
                                         ->withSetting("text", $this->translator->trans("Ceres::Template.orderConfirmationHomepage"));
 
-        if(RouteConfig::getCategoryId(RouteConfig::HOME) > 0)
+        $homepageLinkWidget->withSetting("url.type", "external")
+                            ->withSetting("url.value", $this->shopUrls->home);
+
+        if ( in_array(RouteConfig::HOME, RouteConfig::getEnabledRoutes()) && RouteConfig::getCategoryId(RouteConfig::HOME) > 0 )
         {
-            $homepageLinkWidget->withSetting("url.type", "category")
-                               ->withSetting("url.value", RouteConfig::getCategoryId(RouteConfig::HOME));
+            $myAccountLinkWidget->withSetting("url.type", "category")
+                                ->withSetting("url.value", RouteConfig::getCategoryId(RouteConfig::HOME));
         }
         else
         {
-            $homepageLinkWidget->withSetting("url.type", "external")
-                               ->withSetting("url.value", "");
+            $myAccountLinkWidget->withSetting("url.type", "external")
+                                ->withSetting("url.value", $this->shopUrls->myAccount);
         }
         
         $myAccountLinkWidget = null;
@@ -174,15 +183,18 @@ class DefaultOrderConfirmationPreset implements ContentPreset
                                ->withSetting("appearance", "primary")
                                ->withSetting("block", "true")
                                ->withSetting("text", $this->translator->trans("Ceres::Template.orderConfirmationMyAccount"));
-
-        if(RouteConfig::getCategoryId(RouteConfig::MY_ACCOUNT) > 0)
+        
+        if ( in_array(RouteConfig::MY_ACCOUNT, RouteConfig::getEnabledRoutes())
+            && RouteConfig::getCategoryId(RouteConfig::MY_ACCOUNT) > 0
+            && !$this->shopUrls->equals($this->shopUrls->myAccount,'/my-account') )
         {
             $myAccountLinkWidget->withSetting("url.type", "category")
                                 ->withSetting("url.value", RouteConfig::getCategoryId(RouteConfig::MY_ACCOUNT));
         }
-        else {
+        else
+        {
             $myAccountLinkWidget->withSetting("url.type", "external")
-                                ->withSetting("url.value", "");
+                                ->withSetting("url.value", $this->shopUrls->myAccount);
         }
     }
 
