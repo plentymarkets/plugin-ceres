@@ -169,13 +169,13 @@ class DefaultOrderConfirmationPreset implements ContentPreset
 
         if ( in_array(RouteConfig::HOME, RouteConfig::getEnabledRoutes()) && RouteConfig::getCategoryId(RouteConfig::HOME) > 0 )
         {
-            $myAccountLinkWidget->withSetting("url.type", "category")
-                                ->withSetting("url.value", RouteConfig::getCategoryId(RouteConfig::HOME));
+            $homepageLinkWidget->withSetting("url.type", "category")
+                               ->withSetting("url.value", RouteConfig::getCategoryId(RouteConfig::HOME));
         }
         else
         {
-            $myAccountLinkWidget->withSetting("url.type", "external")
-                                ->withSetting("url.value", $this->shopUrls->myAccount);
+            $homepageLinkWidget->withSetting("url.type", "external")
+                               ->withSetting("url.value", $this->shopUrls->home);
         }
         
         $myAccountLinkWidget = null;
