@@ -139,6 +139,7 @@
     "MultilingualismConfig.properties",
     "Widget.properties",
     "Page.properties",
-    "Config.properties"
+    "Config.properties",
+    "Wizard.properties"
   ]
 }
