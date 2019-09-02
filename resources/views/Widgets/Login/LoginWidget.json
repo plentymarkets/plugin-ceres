@@ -1,0 +1,18 @@
+{
+    "identifier": "Ceres::LoginWidget",
+    "label": "Widget.loginLabel",
+    "previewImageURL": "/images/widgets/login.svg",
+    "type": "default",
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Login\\LoginWidget",
+    "settings": {
+        "customClass": "@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing": "@include(spacingMargin)"
+    }
+}
