@@ -19452,9 +19452,6 @@ html.ios .parallax-img-container .parallax-img-container-inner[style^='backgroun
   .widget-image-box-caption.fullwidth h3 {
     font-size: 2.5rem; } }
 
-.widget-image-carousel.widget-proportional {
-  min-height: 175px; }
-
 .widget-image-carousel .widget-inner {
   padding-left: 0 !important;
   padding-right: 0 !important; }
