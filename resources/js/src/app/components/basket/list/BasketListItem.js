@@ -8,13 +8,32 @@ import { mapState } from "vuex";
 const NotificationService = require("../../../services/NotificationService");
 
 Vue.component("basket-list-item", {
-    props: [
-        "basketItem",
-        "size",
-        "language",
-        "template",
-        "isPreview"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-basket-list-item"
+        },
+        basketItem:
+        {
+            type: Object
+        },
+        language:
+        {
+            type: String
+        },
+        basketDetailsData:
+        {
+            type: Array,
+            default: () => []
+        },
+        isPreview:
+        {
+            type: Boolean,
+            default: false
+        }
+    },
 
     data()
     {
@@ -192,6 +211,11 @@ Vue.component("basket-list-item", {
             }
 
             return false;
+        },
+
+        isDataFieldVisible(value)
+        {
+            return this.basketDetailsData.includes(value);
         }
     }
 });
