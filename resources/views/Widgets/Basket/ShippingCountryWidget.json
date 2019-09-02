@@ -8,12 +8,6 @@
     "widgetClass": "Ceres\\Widgets\\Basket\\ShippingCountryWidget",
     "settings": {
         "customClass":"@include(customClass)",
-        "appearance": {
-            "type": "select",
-            "required": true,
-            "defaultValue": "none",
-            "options": "@include(optionalAppearance)"
-        },
         "spacing":"@include(spacingMargin)"
     }
 }
