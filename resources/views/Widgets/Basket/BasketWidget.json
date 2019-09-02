@@ -14,6 +14,35 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "spacing":"@include(spacingMargin)"
+        "spacing":"@include(spacingMargin)",
+        "basketDetailsData": {
+            "type": "checkboxGroup",
+            "defaultValue": [],
+            "options": {
+                "name": "Widget.addressFieldsInvoiceDE",
+                "checkboxValues": [
+                    {
+                        "value": "basket.item.item_id",
+                        "caption": "Widget.basketBasketDetailsDataItemId"
+                    },
+                    {
+                        "value": "basket.item.customNumber",
+                        "caption": "Widget.basketBasketDetailsDataCustomNumber"
+                    },
+                    {
+                        "value": "basket.item.availability",
+                        "caption": "Widget.basketBasketDetailsDataAvailability"
+                    },
+                    {
+                        "value": "basket.item.description_long",
+                        "caption": "Widget.basketBasketDetailsDataDescriptionLong"
+                    },
+                    {
+                        "value": "basket.item.description_short",
+                        "caption": "Widget.basketBasketDetailsDataDescriptionShort"
+                    }
+                ]
+            }
+        }
     }
 }
