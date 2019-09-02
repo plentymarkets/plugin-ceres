@@ -1,6 +1,6 @@
 <?php
 
-namespace Ceres\Widgets\Checkout;
+namespace Ceres\Widgets\OrderConfirmation;
 
 use Ceres\Widgets\OrderConfirmation\OrderConfirmationBaseWidget;
 
