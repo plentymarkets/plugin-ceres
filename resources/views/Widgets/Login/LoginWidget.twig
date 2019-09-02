@@ -7,14 +7,14 @@
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set appearance = widget.settings.appearance.mobile | default("none") %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
 
-<div class="widget widget-legal-texts widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
-    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    {{ Twig.if("not services.authentication.isLoggedIn() or #{ isPreview | json_encode }") }}
-        <div class="widget-inner">
-            <h1 class="login-view-title mb-5">{{ trans("Ceres::Template.login") }}</h1>
-            <login template="#vue-login" backlink="{{ backlink | url_encode }}" has-to-forward="true"></login>
-        </div>
-    {{ Twig.endif() }}
-</div>
+{{ Twig.if("not services.authentication.isLoggedIn() or #{ isPreview | json_encode }") }}
+    <div class="widget widget-legal-texts widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+            <div class="widget-inner">
+                <h1 class="login-view-title mb-5">{{ trans("Ceres::Template.login") }}</h1>
+                <login template="#vue-login" backlink="{{ backlink | url_encode }}" has-to-forward="true"></login>
+            </div>
+    </div>
+{{ Twig.endif() }}
