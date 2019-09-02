@@ -6,5 +6,5 @@ use Ceres\Widgets\OrderConfirmation\OrderConfirmationBaseWidget;
 
 class PurchasedItemsWidget extends OrderConfirmationBaseWidget
 {
-    protected $template = "Ceres::Widgets.Checkout.PurchasedItemsWidget";
+    protected $template = "Ceres::Widgets.OrderConfirmation.PurchasedItemsWidget";
 }
