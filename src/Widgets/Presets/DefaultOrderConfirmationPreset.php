@@ -101,8 +101,8 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->twoColumnWidget->createChild("first", "Ceres::OrderDataWidget")
                               ->withSetting("addressFields", ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"])
                               ->withSetting("spacing.customMargin", true)
-                              ->withSetting("spacing.margin.bottom.value", 30)
-                              ->withSetting("spacing.margin.bottom.unit", "px");
+                              ->withSetting("spacing.margin.bottom.value", 4)
+                              ->withSetting("spacing.margin.bottom.unit", null);
     }
 
     private function createPurchasedItemsWidget()
@@ -110,8 +110,8 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->twoColumnWidget->createChild("second", "Ceres::PurchasedItemsWidget")
                               ->withSetting("customClass","")
                               ->withSetting("spacing.customMargin", true)
-                              ->withSetting("spacing.margin.bottom.value", 30)
-                              ->withSetting("spacing.margin.bottom.unit", "px");
+                              ->withSetting("spacing.margin.bottom.value", 4)
+                              ->withSetting("spacing.margin.bottom.unit", null);
     }
 
     private function createTrackingLinkWidget()
