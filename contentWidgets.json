@@ -2540,7 +2540,7 @@
             "appearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "none",
+                "defaultValue": "primary",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
@@ -2586,23 +2586,23 @@
             "size": {
                 "type": "select",
                 "required": false,
-                "defaultValue": "md",
+                "defaultValue": "",
                 "options": {
                     "name": "Widget.linkSizeLabel",
                     "tooltipText": "Widget.linkSizeTooltip",
                     "listBoxValues": [
                         {
-                            "value": "sm",
+                            "value": "btn-sm",
                             "caption": "Widget.linkSizeSmall",
                             "position": 0
                         },
                         {
-                            "value": "md",
+                            "value": "",
                             "caption": "Widget.linkSizeMedium",
                             "position": 1
                         },
                         {
-                            "value": "lg",
+                            "value": "btn-lg",
                             "caption": "Widget.linkSizeLarge",
                             "position": 2
                         }
@@ -8246,6 +8246,28 @@
                     "tooltipText": "Widget.customClassTooltip"
                 }
             },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            },
             "visibleFields": {
                 "type": "checkboxGroup",
                 "defaultValue": [
@@ -8309,28 +8331,6 @@
                             "caption": "Widget.showBasketOpenAmount"
                         }
                     ]
-                }
-            },
-            "spacing": {
-                "type": "vertical",
-                "children": {
-                    "customMargin": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomMargin"
-                        }
-                    },
-                    "margin": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customMargin",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    }
                 }
             }
         }

@@ -29,6 +29,10 @@
                 </template> 
                 ${ address.address3 }
             </div>
+
+            <div v-if="isAddressFieldEnabled('address4')">
+                ${ address.address4 }
+            </div>
     
             <div v-if="isAddressFieldEnabled('postalCode') || isAddressFieldEnabled('town')">
                 <template v-if="isAddressFieldEnabled('postalCode')">${ address.postalCode }</template> <template v-if="isAddressFieldEnabled('town')">${ address.town }</template>
