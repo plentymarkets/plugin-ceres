@@ -14,7 +14,8 @@ Vue.component("mobile-navigation", {
         breakpoints: {
             type: Array,
             default: () => ["xs", "sm", "md"]
-        }
+        },
+        includeLanguage: Boolean
     },
 
     data()
@@ -226,6 +227,13 @@ Vue.component("mobile-navigation", {
         {
             document.querySelector(".mobile-navigation").classList.remove("open");
             document.querySelector("body").classList.remove("menu-is-visible");
+        },
+
+        getCategoryUrl(url)
+        {
+            const prefix = this.includeLanguage ? `/${App.language}` : "";
+
+            return prefix + url;
         }
     },
 
