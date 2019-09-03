@@ -7086,11 +7086,11 @@
         "identifier": "Ceres::GuestLoginWidget",
         "label": "Widget.guestLoginLabel",
         "previewImageURL": "/images/widgets/guest-login.svg",
-        "type": "login",
+        "type": "default",
         "categories": [
-            "login"
+            "customer"
         ],
-        "position": 100,
+        "position": 200,
         "widgetClass": "Ceres\\Widgets\\Login\\GuestLoginWidget",
         "settings": {
             "customClass": {
@@ -7105,7 +7105,7 @@
             "appearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "success",
+                "defaultValue": "primary",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
                     "tooltipText": "Widget.widgetAppearanceTooltip",
@@ -7198,6 +7198,9 @@
         "label": "Widget.loginLabel",
         "previewImageURL": "/images/widgets/login.svg",
         "type": "default",
+        "categories": [
+            "customer"
+        ],
         "position": 100,
         "widgetClass": "Ceres\\Widgets\\Login\\LoginWidget",
         "settings": {

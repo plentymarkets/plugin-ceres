@@ -2,16 +2,16 @@
     "identifier": "Ceres::GuestLoginWidget",
     "label": "Widget.guestLoginLabel",
     "previewImageURL": "/images/widgets/guest-login.svg",
-    "type": "login",
-    "categories": ["login"],
-    "position": 100,
+    "type": "default",
+    "categories": ["customer"],
+    "position": 200,
     "widgetClass": "Ceres\\Widgets\\Login\\GuestLoginWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "success",
+            "defaultValue": "primary",
             "options": "@include(appearance)"
         },
         "buttonSize": {

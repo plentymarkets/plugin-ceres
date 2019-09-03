@@ -3,6 +3,7 @@
     "label": "Widget.loginLabel",
     "previewImageURL": "/images/widgets/login.svg",
     "type": "default",
+    "categories": ["customer"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Login\\LoginWidget",
     "settings": {
