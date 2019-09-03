@@ -178,9 +178,11 @@ category-item {
     }
 }
 
-/* IOS compatibility */
-html.ios {
+/* IOS compatibility, missing background-attachment:fixed support*/
+html.ios,
+html.crios {
     .parallax-img-container .parallax-img-container-inner[style^='background-image'] {
-        background-size: contain;
+        background-size: cover;
+        background-attachment: scroll;
     }
 }
