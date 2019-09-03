@@ -231,7 +231,8 @@ Vue.component("mobile-navigation", {
 
         getCategoryUrl(url)
         {
-            const prefix = this.includeLanguage ? `/${App.language}` : "";
+            const trailingSlash = url[0] === "/" ? "" : "/";
+            const prefix = this.includeLanguage ? `/${App.language}${trailingSlash}` : "";
 
             return prefix + url;
         }
