@@ -246,14 +246,6 @@
                         "name": "Config.routingCategoryConfirmation"
                     }
                 },
-                "loginCategory": {
-                    "type": "category",
-                    "required": false,
-                    "defaultValue": null,
-                    "options": {
-                        "name": "Config.routingCategoryLogin"
-                    }
-                },
                 "confirmationEnableRoute": {
                     "type": "checkbox",
                     "required": false,
@@ -269,6 +261,14 @@
                     "defaultValue": null,
                     "options": {
                         "name": "Config.routingCategoryGuestConfirmation"
+                    }
+                },
+                "loginCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryLogin"
                     }
                 },
                 "loginEnableRoute": {
