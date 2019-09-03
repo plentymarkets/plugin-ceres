@@ -30,7 +30,10 @@
             <!-- BASKET PREVIEW BOTTOM -->
             <div class="bg-light totals col-sm-5 col-md-12 pt-3">
 
-                <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                {% if ceresConfig.basket.showShippingCountrySelect %}
+                    <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                    <hr>
+                {% endif %}
 
                 {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
                 <basket-totals></basket-totals>

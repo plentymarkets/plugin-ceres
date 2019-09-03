@@ -186,6 +186,22 @@
                         "name": "Config.routingEnableRouteHome"
                     }
                 },
+                "basketCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryBasket"
+                    }
+                },
+                "basketEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.basketCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteBasket"
+                    }
+                },
                 "checkoutCategory": {
                     "type": "category",
                     "required": false,
@@ -226,6 +242,14 @@
                         "name": "Config.routingCategoryConfirmation"
                     }
                 },
+                "loginCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryLogin"
+                    }
+                },
                 "confirmationEnableRoute": {
                     "type": "checkbox",
                     "required": false,
@@ -241,6 +265,30 @@
                     "defaultValue": null,
                     "options": {
                         "name": "Config.routingCategoryGuestConfirmation"
+                    }
+                },
+                "loginEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.loginCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteLogin"
+                    }
+                },
+                "registerCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryRegister"
+                    }
+                },
+                "registerEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.registerCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteRegister"
                     }
                 },
                 "cancellationRightsCategory": {
@@ -337,6 +385,38 @@
                     "isVisible": "!routing.contactCategory",
                     "options": {
                         "name": "Config.routingEnableRouteContact"
+                    }
+                },
+                "wishListCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryWishList"
+                    }
+                },
+                "wishListEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.wishListCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteWishList"
+                    }
+                },
+                "pageNotFoundCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryPageNotFound"
+                    }
+                },
+                "pageNotFoundEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.pageNotFoundCategory",
+                    "options": {
+                        "name": "Config.routingEnableRoutePageNotFound"
                     }
                 },
                 "shippingCategory": {
