@@ -1,4 +1,4 @@
-{% if category is defined and category is not null%}
+{% if category is defined and category is not null %}
     {% set details      = category.details[0] %}
     {% set robots       = details.metaRobots | replace({'_': ', '}) %}
     {% set description  = details.metaDescription %}
