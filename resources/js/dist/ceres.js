@@ -55941,7 +55941,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("mobile-navigation", {
       default: function _default() {
         return ["xs", "sm", "md"];
       }
-    }
+    },
+    includeLanguage: Boolean
   },
   data: function data() {
     return {
@@ -56127,6 +56128,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("mobile-navigation", {
     closeNavigation: function closeNavigation() {
       document.querySelector(".mobile-navigation").classList.remove("open");
       document.querySelector("body").classList.remove("menu-is-visible");
+    },
+    getCategoryUrl: function getCategoryUrl(url) {
+      var trailingSlash = url[0] === "/" ? "" : "/";
+      var prefix = this.includeLanguage ? "/".concat(App.language).concat(trailingSlash) : "";
+      return prefix + url;
     }
   },
   directives: {
