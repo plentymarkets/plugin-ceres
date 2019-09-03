@@ -8,6 +8,7 @@
     "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderTotalsWidget",
     "settings": {
         "customClass":"@include(customClass)",
+        "spacing":"@include(spacingMargin)",
         "visibleFields": {
             "type": "checkboxGroup",
             "defaultValue": ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"],
@@ -60,7 +61,6 @@
                     }
                 ]
             }
-        },
-        "spacing":"@include(spacingMargin)"
+        }
     }
 }

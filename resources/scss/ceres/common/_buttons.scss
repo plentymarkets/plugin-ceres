@@ -82,6 +82,7 @@ button:focus {
 
 .btn {
 	outline: 0 !important;
+	word-break: break-word;
 
 	& .btn-label {
 		&.btn-trans {
