@@ -64,6 +64,10 @@
             {
                 "label": "Widget.presetContactDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
+            },
+            {
+                "label": "Widget.presetPageNotFound",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset"
             }
         ],
         "checkout": [
