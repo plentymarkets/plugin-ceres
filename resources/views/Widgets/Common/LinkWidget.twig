@@ -27,7 +27,7 @@
     {% endif %}
 {% endif %}
 
-<div class="widget widget-{{ appearance | default('none') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
+<div class="widget widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
     <a class="btn btn-appearance btn-{{ size }} {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
        href="{{ Twig.print("real_url") }}"
        style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}">
