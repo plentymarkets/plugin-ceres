@@ -7,16 +7,19 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
-class DefaultCheckoutPreset implements ContentPreset
+class DefaultLoginPreset implements ContentPreset
 {
     /** @var PresetHelper */
     private $preset;
+
+    /** @var PresetHelper */
+    private $structurWidget;
     
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
         
-        $this->createThreeColumnWidgets();
+        $this->createThreeColumnWidget();
 
         $this->createLoginWidget();
         $this->createSeparatorWidget();
@@ -28,27 +31,27 @@ class DefaultCheckoutPreset implements ContentPreset
     
     private function createThreeColumnWidget()
     {
-        $row_1 = $this->preset->createWidget("Ceres::ThreeColumnWidget")
-                              ->withSetting("layout", "oneToTwoToOne");
+        $this->structurWidget = $this->preset->createWidget("Ceres::ThreeColumnWidget")
+                                             ->withSetting("layout", "oneToTwoToOne");
     }
 
     private function createLoginWidget()
     {
-        $row_1->createChild("second", "Ceres::LoginWidget");
+        $this->structurWidget->createChild("second", "Ceres::LoginWidget");
     }
 
     private function createSeparatorWidget()
     {
-        $row_1->createChild("second", "Ceres::SeparatorWidget");
+        $this->structurWidget->createChild("second", "Ceres::SeparatorWidget");
     }
 
     private function createGuestLoginWidget()
     {
-        $row_1->createChild("second", "Ceres::GuestLoginWidget");
+        $this->structurWidget->createChild("second", "Ceres::GuestLoginWidget");
     }
 
     private function createRegisterLinkWidget()
     {
-        $row_1->createChild("second", "Ceres::LinkWidget");
+        $this->structurWidget->createChild("second", "Ceres::LinkWidget");
     }
 }
