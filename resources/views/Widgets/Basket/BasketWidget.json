@@ -23,23 +23,23 @@
                 "checkboxValues": [
                     {
                         "value": "basket.item.item_id",
-                        "caption": "Widget.basketBasketDetailsDataItemId"
+                        "caption": "Widget.basketDetailsDataItemId"
                     },
                     {
                         "value": "basket.item.customNumber",
-                        "caption": "Widget.basketBasketDetailsDataCustomNumber"
+                        "caption": "Widget.basketDetailsDataCustomNumber"
                     },
                     {
                         "value": "basket.item.availability",
-                        "caption": "Widget.basketBasketDetailsDataAvailability"
+                        "caption": "Widget.basketDetailsDataAvailability"
                     },
                     {
                         "value": "basket.item.description_long",
-                        "caption": "Widget.basketBasketDetailsDataDescriptionLong"
+                        "caption": "Widget.basketDetailsDataDescriptionLong"
                     },
                     {
                         "value": "basket.item.description_short",
-                        "caption": "Widget.basketBasketDetailsDataDescriptionShort"
+                        "caption": "Widget.basketDetailsDataDescriptionShort"
                     }
                 ]
             }
