@@ -5,7 +5,10 @@ namespace Ceres\Widgets\Presets;
 use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
+use IO\Extensions\Constants\ShopUrls;
+use IO\Helper\RouteConfig;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
+use Plenty\Plugin\Translation\Translator;
 
 class DefaultOrderConfirmationPreset implements ContentPreset
 {
@@ -14,6 +17,12 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     
     /** @var CeresConfig */
     private $ceresConfig;
+
+    /** @var ShopUrls */
+    private $shopUrls;
+
+    /** @var Translator */
+    private $translator;
     
     /** @var PresetWidgetFactory */
     private $twoColumnWidget;
@@ -28,6 +37,9 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     {
         $this->preset = pluginApp(PresetHelper::class);
         $this->ceresConfig = pluginApp(CeresConfig::class);
+        $this->translator = pluginApp(Translator::class);
+
+        $this->shopUrls = pluginApp(ShopUrls::class);
         
         $this->createHeadline();
         
@@ -36,16 +48,17 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->createOrderDataWidget();
         $this->createThreeColumnWidget();
 
-        // $this->createTrackingLinkWidget();
+        $this->createTrackingLinkWidget();
         $this->createOrderDocumentsWidget();
-        // $this->createRetourLinkWidget();
+        $this->createRetourLinkWidget();
 
         $this->createPurchasedItemsWidget();
         $this->createOrderTotalsWidget();
 
-        // $this->createFourColumnWidget();
-        // $this->createHomeLinkWidget();
-        // $this->createMyAccountLinkWidget();
+        $this->createSeparatorWidget();
+
+        $this->createFourColumnWidget();
+        $this->createBottomNavigation();
         
         return $this->preset->toArray();
     }
@@ -86,80 +99,105 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createOrderDataWidget()
     {
         $this->twoColumnWidget->createChild("first", "Ceres::OrderDataWidget")
+                              ->withSetting("addressFields", ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"])
                               ->withSetting("spacing.customMargin", true)
-                              ->withSetting("spacing.margin.top.value", 3)
-                              ->withSetting("spacing.margin.top.unit", null)
-                              ->withSetting("spacing.margin.bottom.value", 3)
-                              ->withSetting("spacing.margin.bottom.unit", null)
-                              ->withSetting("spacing.margin.left.value", 4)
-                              ->withSetting("spacing.margin.left.unit", null)
-                              ->withSetting("spacing.margin.right.value", 4)
-                              ->withSetting("spacing.margin.right.unit", null)
-                              ->withSetting("spacing.customPadding", true)
-                              ->withSetting("spacing.padding.top.value", 3)
-                              ->withSetting("spacing.padding.top.unit", null)
-                              ->withSetting("spacing.padding.bottom.value", 3)
-                              ->withSetting("spacing.padding.bottom.unit", null)
-                              ->withSetting("addressFields", ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"]);
-    }
-
-    private function createTrackingLinkWidget()
-    {
-        $this->threeColumnWidget->createChild("first", "Ceres::LinkWidget");
-    }
-
-    private function createOrderDocumentsWidget()
-    {
-        $this->threeColumnWidget->createChild("second", "Ceres::OrderDocumentsWidget")
-            ->withSetting("customClass","")
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.top.value", 3)
-            ->withSetting("spacing.margin.top.unit", null);
-    }
-
-    private function createRetourLinkWidget()
-    {
-        $this->threeColumnWidget->createChild("third", "Ceres::LinkWidget");
+                              ->withSetting("spacing.margin.bottom.value", 4)
+                              ->withSetting("spacing.margin.bottom.unit", null);
     }
 
     private function createPurchasedItemsWidget()
     {
         $this->twoColumnWidget->createChild("second", "Ceres::PurchasedItemsWidget")
+                              ->withSetting("customClass","")
                               ->withSetting("spacing.customMargin", true)
-                              ->withSetting("spacing.margin.top.value", 3)
-                              ->withSetting("spacing.margin.top.unit", null)
-                              ->withSetting("spacing.margin.bottom.value", 3)
-                              ->withSetting("spacing.margin.bottom.unit", null)
-                              ->withSetting("spacing.margin.left.value", 4)
-                              ->withSetting("spacing.margin.left.unit", null)
-                              ->withSetting("spacing.margin.right.value", 4)
-                              ->withSetting("spacing.margin.right.unit", null);
+                              ->withSetting("spacing.margin.bottom.value", 4)
+                              ->withSetting("spacing.margin.bottom.unit", null);
+    }
+
+    private function createTrackingLinkWidget()
+    {
+        $this->threeColumnWidget->createChild("first", "Ceres::LinkWidget")
+                                ->withSetting("block", "true")
+                                ->withSetting("text", $this->translator->trans("Ceres::Widget.urlTrackingLabel"))
+                                ->withSetting("url.value", "tracking")
+                                ->withSetting("url.type", "internalLink");
+    }
+
+    private function createOrderDocumentsWidget()
+    {
+        $this->threeColumnWidget->createChild("second", "Ceres::OrderDocumentsWidget")
+                                ->withSetting("customClass","");
+    }
+
+    private function createRetourLinkWidget()
+    {
+        $this->threeColumnWidget->createChild("third", "Ceres::LinkWidget")
+                                ->withSetting("block", "true")
+                                ->withSetting("text", $this->translator->trans("Ceres::Widget.urlReturnLabel"))
+                                ->withSetting("url.value", "return")
+                                ->withSetting("url.type", "internalLink");
     }
 
     private function createOrderTotalsWidget()
     {
         $this->twoColumnWidget->createChild("second", "Ceres::OrderTotalsWidget")
-                              ->withSetting("spacing.customMargin", true)
-                              ->withSetting("spacing.margin.top.value", 3)
-                              ->withSetting("spacing.margin.top.unit", null)
-                              ->withSetting("spacing.margin.left.value", 4)
-                              ->withSetting("spacing.margin.left.unit", null)
-                              ->withSetting("spacing.margin.right.value", 4)
-                              ->withSetting("spacing.margin.right.unit", null)
                               ->withSetting("visibleFields", ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
     }
 
-    private function createHomeLinkWidget()
+    private function createSeparatorWidget()
     {
-        $this->fourColumnWidget->createChild("second", "Ceres::LinkWidget");
+        $this->preset->createWidget("Ceres::SeparatorWidget")
+                     ->withSetting("customClass","");
     }
 
-    private function createMyAccountLinkWidget()
+    private function createFourColumnWidget()
     {
-        $this->fourColumnWidget->createChild("third", "Ceres::LinkWidget");
+        $this->fourColumnWidget = $this->preset->createWidget("Ceres::FourColumnWidget")
+                                               ->withSetting("customClass","");
     }
 
-    
+    private function createBottomNavigation()
+    {
+        $homepageLinkWidget = null;
+        $homepageLinkWidget = $this->fourColumnWidget->createChild("second", "Ceres::LinkWidget")
+                                        ->withSetting("appearance", "primary")
+                                        ->withSetting("block", "true")
+                                        ->withSetting("text", $this->translator->trans("Ceres::Template.orderConfirmationHomepage"));
+
+        $homepageLinkWidget->withSetting("url.type", "external")
+                            ->withSetting("url.value", $this->shopUrls->home);
+
+        if ( in_array(RouteConfig::HOME, RouteConfig::getEnabledRoutes()) && RouteConfig::getCategoryId(RouteConfig::HOME) > 0 )
+        {
+            $homepageLinkWidget->withSetting("url.type", "category")
+                               ->withSetting("url.value", RouteConfig::getCategoryId(RouteConfig::HOME));
+        }
+        else
+        {
+            $homepageLinkWidget->withSetting("url.type", "external")
+                               ->withSetting("url.value", $this->shopUrls->home);
+        }
+        
+        $myAccountLinkWidget = null;
+        $myAccountLinkWidget = $this->fourColumnWidget->createChild("third", "Ceres::LinkWidget")
+                               ->withSetting("appearance", "primary")
+                               ->withSetting("block", "true")
+                               ->withSetting("text", $this->translator->trans("Ceres::Template.orderConfirmationMyAccount"));
+        
+        if ( in_array(RouteConfig::MY_ACCOUNT, RouteConfig::getEnabledRoutes())
+            && RouteConfig::getCategoryId(RouteConfig::MY_ACCOUNT) > 0
+            && !$this->shopUrls->equals($this->shopUrls->myAccount,'/my-account') )
+        {
+            $myAccountLinkWidget->withSetting("url.type", "category")
+                                ->withSetting("url.value", RouteConfig::getCategoryId(RouteConfig::MY_ACCOUNT));
+        }
+        else
+        {
+            $myAccountLinkWidget->withSetting("url.type", "external")
+                                ->withSetting("url.value", $this->shopUrls->myAccount);
+        }
+    }
+
     private function createTwoColumnWidget()
     {
         $this->twoColumnWidget = $this->preset->createWidget("Ceres::TwoColumnWidget")
@@ -170,10 +208,5 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     {
         $this->threeColumnWidget = $this->twoColumnWidget->createChild("first", "Ceres::ThreeColumnWidget")
                                                          ->withSetting("layout", "oneToOneToOne");
-    }
-
-    private function createFourColumnWidget()
-    {
-        $this->fourColumnWidget = $this->preset->createWidget("Ceres::FourColumnWidget");
     }
 }

@@ -20,20 +20,24 @@
         {% if url.value.mobile == 'tracking' %}
             {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
         {% elseif url.value.mobile == 'return' %}
-            {{ Twig.set('real_url', Twig.call("urls.returns", [Twig.var('data.order.id')])) }}
+            {{ Twig.if("data.isReturnable") }}
+                {{ Twig.set('real_url', Twig.call("urls.returns", [Twig.var('data.order.id')])) }}
+            {{ Twig.endif() }}
         {% endif %}
     {% else %}
         {{ WidgetHelper.setUrlVariable('real_url', url.value.mobile, url.type.mobile) }}
     {% endif %}
 {% endif %}
 
+{{ Twig.if("real_url or #{ isPreview | json_encode }") }}
 <div class="widget widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
     <a class="btn btn-appearance btn-{{ size }} {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
-       href="{{ Twig.print("real_url") }}"
-       style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}">
+    href="{{ Twig.print("real_url") }}"
+    style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}">
         {%- if icon != "none" -%}
             <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
         {%- endif -%}
         {{- text -}}
     </a>
 </div>
+{{ Twig.endif() }}
