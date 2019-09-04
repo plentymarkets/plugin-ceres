@@ -42,6 +42,10 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
             },
             {
+                "label": "Widget.presetBasketDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultBasketPreset"
+            },
+            {
                 "label": "Widget.presetCancellationRightsDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationRightsPreset"
             },

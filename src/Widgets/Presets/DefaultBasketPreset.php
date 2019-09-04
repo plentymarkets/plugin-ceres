@@ -1,0 +1,102 @@
+<?php
+
+namespace Ceres\Widgets\Presets;
+
+use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
+use Ceres\Widgets\Helper\PresetHelper;
+use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
+
+class DefaultBasketPreset implements ContentPreset
+{
+    /** @var PresetHelper */
+    private $preset;
+
+    /** @var PresetWidgetFactory */
+    private $twoColumnWidget;
+
+    /** @var PresetWidgetFactory */
+    private $stickyContainer;
+
+    public function getWidgets()
+    {
+        $this->preset = pluginApp(PresetHelper::class);
+
+        $this->createHeadline();
+        $this->createTwoColumnWidget();
+
+        $this->createBasketWidget();
+
+        $this->createStickyContainer();
+        $this->createShippingCountryWidget();
+        $this->createBasketTotalsWidget();
+        $this->createCouponWidget();
+        $this->createLinkWidget();
+
+        return $this->preset->toArray();
+    }
+
+    private function createHeadline()
+    {
+        $text = '<h1 class="h2">{{ trans("Ceres::Template.basket") }}</h1>';
+        $this->preset->createWidget('Ceres::InlineTextWidget')
+            ->withSetting("text", $text)
+            ->withSetting("appearance", "none")
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.top.value", 4)
+            ->withSetting("spacing.padding.top.unit", null)
+            ->withSetting("spacing.padding.bottom.value", 2)
+            ->withSetting("spacing.padding.bottom.unit", null)
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 0)
+            ->withSetting("spacing.margin.bottom.unit", null);
+
+        $this->preset->createWidget('Ceres::SeparatorWidget')
+            ->withSetting('margin.top', 'auto')
+            ->withSetting('margin.bottom', 'auto');
+    }
+
+    private function createTwoColumnWidget()
+    {
+        $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
+            ->withSetting('layout', 'sevenToFive');
+    }
+
+    private function createBasketWidget()
+    {
+        $this->twoColumnWidget->createChild('first', 'Ceres::BasketWidget')
+            ->withSetting('basketDetailsData', ["basket.item.item_id", "basket.item.customNumber", "basket.item.availability", "basket.item.description_long", "basket.item.description_short"])
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 4)
+            ->withSetting("spacing.margin.bottom.unit", null)
+            ->withSetting("spacing.margin.top.value", 4)
+            ->withSetting("spacing.margin.top.unit", null)
+            ->withSetting("spacing.margin.left.value", 3)
+            ->withSetting("spacing.margin.left.unit", null)
+            ->withSetting("spacing.margin.right.value", 3)
+            ->withSetting("spacing.margin.right.unit", null);
+    }
+
+    private function createStickyContainer()
+    {
+        $this->stickyContainer = $this->twoColumnWidget->createChild('second', 'Ceres::StickyContainerWidget');
+    }
+
+    private function createShippingCountryWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::ShippingCountryWidget');
+    }
+
+    private function createBasketTotalsWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::BasketTotalsWidget');
+    }
+
+    private function createCouponWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::CouponWidget');
+    }
+
+    private function createLinkWidget()
+    {
+    }
+}

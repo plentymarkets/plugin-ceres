@@ -17,7 +17,7 @@
         "spacing":"@include(spacingMargin)",
         "basketDetailsData": {
             "type": "checkboxGroup",
-            "defaultValue": [],
+            "defaultValue": ["basket.item.item_id", "basket.item.customNumber", "basket.item.availability", "basket.item.description_long", "basket.item.description_short"],
             "options": {
                 "name": "Widget.addressFieldsInvoiceDE",
                 "checkboxValues": [

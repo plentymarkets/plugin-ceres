@@ -9,7 +9,7 @@
 {{ Twig.component("Ceres::Basket.Components.BasketList") }}
 
 {% set appearance        = widget.settings.appearance.mobile %}
-{% set basketDetailsData = widget.settings.basketDetailsData.mobile | default([]) %}
+{% set basketDetailsData = widget.settings.basketDetailsData.mobile | default(["basket.item.item_id", "basket.item.customNumber", "basket.item.availability", "basket.item.description_long", "basket.item.description_short"]) %}
 
 <div class="widget widget-basket widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
