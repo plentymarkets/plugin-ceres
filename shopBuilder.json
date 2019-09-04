@@ -68,6 +68,10 @@
             {
                 "label": "Widget.presetPageNotFound",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset"
+            },
+            {
+                "label": "Widget.presetLoginDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultLoginPreset"
             }
         ],
         "checkout": [

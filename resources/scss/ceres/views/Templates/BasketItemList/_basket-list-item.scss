@@ -41,29 +41,23 @@
 .basket-item-container {
 	position: relative;
 	overflow: hidden;
+	padding: 1.5rem 0;
+		
+	&:first-child {
+		padding-top: 0;
+	}
 
-	&.basket-small {
-		&:not(:first-child) {
-			padding-top: 10px;
-		}
-	
-		&:not(:last-child) {
-			border-bottom: 1px solid $gray-lighter;
-			padding-bottom: 10px;
-		}
+	&:last-child {
+		padding-bottom: 0;
+	}
+
+	&:not(:last-child) {
+		border-bottom: 1px solid $gray-lighter;
 	}
 
 	& .item-bundle {
 		font-weight: 700;
 		font-size: 80%;
-	}
-
-	&.basket-large {
-		padding: 1.5rem 0;
-		
-		&:first-child {
-			padding-top: 0;
-		}
 	}
 
 	.basket-item {
@@ -190,28 +184,13 @@
 				display: block;
 			}
 
-			@at-root .basket-small ul {
-				list-style: none;
 
-				.item-property-value {
-					& > strong {
-						&:before {
-							content: '\f067';
-							font-family: FontAwesome;
-							margin-right: 5px;
-							font-size: 75%;
-							font-weight: normal;
-						}
-						&.colon {
-							&:after {
-								content: ':';
-							}
-						}
-					}
-				}
+			.item-property-value > strong.colon:after {
+				content: ':';
 			}
 
 			ul {
+				list-style: disc;
 				padding: 0;
 				margin-bottom: 0;
 
