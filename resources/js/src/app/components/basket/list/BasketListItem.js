@@ -15,10 +15,7 @@ Vue.component("basket-list-item", {
             type: String,
             default: "#vue-basket-list-item"
         },
-        basketItem:
-        {
-            type: Object
-        },
+        basketItem: Object,
         basketDetailsData:
         {
             type: Array,
