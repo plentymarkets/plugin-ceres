@@ -2,7 +2,6 @@
 
 namespace Ceres\Widgets\Presets;
 
-use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use IO\Extensions\Constants\ShopUrls;
