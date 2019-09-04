@@ -19,10 +19,6 @@ Vue.component("basket-list-item", {
         {
             type: Object
         },
-        language:
-        {
-            type: String
-        },
         basketDetailsData:
         {
             type: Array,
