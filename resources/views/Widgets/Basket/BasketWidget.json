@@ -2,7 +2,7 @@
     "identifier": "Ceres::BasketWidget",
     "label": "Widget.basketLabel",
     "previewImageURL": "/images/widgets/basket.svg",
-    "type": "basket",
+    "type": "default",
     "categories": ["basket"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Basket\\BasketWidget",
