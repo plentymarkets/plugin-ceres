@@ -38,10 +38,10 @@ class DefaultBasketPreset implements ContentPreset
     private function createHeadline()
     {
         $this->preset->createWidget("Ceres::InlineTextWidget")
-            ->withSetting("text", "<h1>{{ trans(\"Ceres::Template.basket\") }}</h1>")
+            ->withSetting("text", "<h1 class=\"h2\">{{ trans(\"Ceres::Template.basket\") }}</h1>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
-            ->withSetting("spacing.padding.top.value", 0)
+            ->withSetting("spacing.padding.top.value", 5)
             ->withSetting("spacing.padding.top.unit", null)
             ->withSetting("spacing.padding.bottom.value", 0)
             ->withSetting("spacing.padding.bottom.unit", null)

@@ -13,11 +13,6 @@
 
 <div class="widget widget-basket widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div>
-        <h3>{{ Twig.trans("Ceres::Template.checkoutBasket") }}</h3>
-        <hr class="mb-0">
-    </div>
-    
     <div class="pt-4 pb-3">
         <div class="cmp">
             <basket-list :basket-details-data="{{ basketDetailsData | json_encode }}"></basket-list>
