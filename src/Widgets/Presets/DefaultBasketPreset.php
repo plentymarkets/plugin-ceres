@@ -121,7 +121,7 @@ class DefaultBasketPreset implements ContentPreset
 
     private function createLinkWidget()
     {
-        $checkoutLinkWidget = $this->fourColumnWidget->createChild("second", "Ceres::LinkWidget")
+        $checkoutLinkWidget = $this->twoColumnWidget->createChild("second", "Ceres::LinkWidget")
             ->withSetting("customClass", "")
             ->withSetting("appearance", "primary")
             ->withSetting("size", "md")
