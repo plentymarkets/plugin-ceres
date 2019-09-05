@@ -34990,7 +34990,7 @@ Vue.component("basket-list-item", {
       return this.basketItem.variation.data.prices["default"].basePrice;
     },
     transformedVariationProperties: function transformedVariationProperties() {
-      return (0, _VariationPropertyService.transformBasketItemProperties)(this.basketItem, ["empty"], "displayInOrderProcess");
+      return (0, _VariationPropertyService.transformBasketItemProperties)(this.basketItem, [], "displayInOrderProcess");
     }
   }, Vuex.mapState({
     isBasketLoading: function isBasketLoading(state) {
@@ -39733,7 +39733,7 @@ Vue.component("single-item", {
       return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
     },
     transformedVariationProperties: function transformedVariationProperties() {
-      return (0, _VariationPropertyService.transformVariationProperties)(this.currentVariation, ["empty"], "showInItemListing");
+      return (0, _VariationPropertyService.transformVariationProperties)(this.currentVariation, [], "showInItemListing");
     }
   }, Vuex.mapState({
     currentVariation: function currentVariation(state) {
@@ -47223,8 +47223,12 @@ exports["default"] = void 0;
 
 var _utils = require("../helper/utils");
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var PROPERTY_ORDER_BY_KEY = "position";
-var _cachedVariationProperties = {};
+var _cachedVariationProperties = {}; // eslint-disable-next-line complexity
 
 function transformVariationProperties(item) {
   var propertyTypes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
@@ -47252,7 +47256,9 @@ function transformVariationProperties(item) {
   try {
     for (var _iterator = variationProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var property = _step.value;
-      property = property.property;
+      property = _objectSpread({}, property.property, {
+        values: property.values
+      });
       var matchDisplaySetting = (0, _utils.isDefined)(displaySetting) && displaySetting.length ? property.display.includes(displaySetting) : true;
       var isCorrectType = (0, _utils.isDefined)(propertyTypes) && propertyTypes.length ? propertyTypes.includes(property.cast) : true;
 
