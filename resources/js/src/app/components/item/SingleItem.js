@@ -33,7 +33,7 @@ Vue.component("single-item", {
 
         transformedVariationProperties()
         {
-            return transformVariationProperties(this.currentVariation, ["empty"], "showInItemListing");
+            return transformVariationProperties(this.currentVariation, [], "showInItemListing");
         },
 
         ...Vuex.mapState({
