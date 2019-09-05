@@ -2669,7 +2669,7 @@
                 "required": false,
                 "options": {
                     "name": "Widget.linkTextLabel",
-                    "tooltipText": "Widget.linkTextLabelTooltip"
+                    "tooltipText": "Widget.linkTextTooltip"
                 }
             },
             "url": {
@@ -6188,6 +6188,14 @@
                     ]
                 }
             },
+            "forceContent": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.attributeForceContentLabel",
+                    "tooltipText": "Widget.attributeForceContentTooltip"
+                }
+            },
             "spacing": {
                 "type": "vertical",
                 "children": {
@@ -6208,14 +6216,6 @@
                             "direction": "all"
                         }
                     }
-                }
-            },
-            "forceContent": {
-                "type": "checkbox",
-                "defaultValue": false,
-                "options": {
-                    "name": "Widget.attributeForceContentLabel",
-                    "tooltipText": "Widget.attributeForceContentTooltip"
                 }
             }
         }
@@ -6514,48 +6514,6 @@
                     "tooltipText": "Widget.customClassTooltip"
                 }
             },
-            "spacing": {
-                "type": "vertical",
-                "options": {
-                    "name": "Widget.widgetSpacing"
-                },
-                "children": {
-                    "customPadding": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomPadding"
-                        }
-                    },
-                    "padding": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customPadding",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    },
-                    "customMargin": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomMargin"
-                        }
-                    },
-                    "margin": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customMargin",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    }
-                }
-            },
             "itemInformation": {
                 "type": "select",
                 "isList": "[1,]",
@@ -6612,6 +6570,48 @@
                             "caption": "Widget.itemDataTableItemCustomsTariffNumber"
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -6770,13 +6770,6 @@
                     "tooltipText": "Widget.customClassTooltip"
                 }
             },
-            "showCrossPrice": {
-                "type": "checkbox",
-                "defaultValue": true,
-                "options": {
-                    "name": "Widget.showCrossPriceLabel"
-                }
-            },
             "appearance": {
                 "type": "select",
                 "required": true,
@@ -6821,6 +6814,13 @@
                             "position": 6
                         }
                     ]
+                }
+            },
+            "showCrossPrice": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.showCrossPriceLabel"
                 }
             },
             "spacing": {
@@ -6974,28 +6974,6 @@
                     "tooltipText": "Widget.customClassTooltip"
                 }
             },
-            "spacing": {
-                "type": "vertical",
-                "children": {
-                    "customMargin": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomMargin"
-                        }
-                    },
-                    "margin": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customMargin",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    }
-                }
-            },
             "type": {
                 "type": "select",
                 "defaultValue": "cancellationRights",
@@ -7029,6 +7007,28 @@
                             "position": 4
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -7732,48 +7732,6 @@
                     ]
                 }
             },
-            "spacing": {
-                "type": "vertical",
-                "options": {
-                    "name": "Widget.widgetSpacing"
-                },
-                "children": {
-                    "customPadding": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomPadding"
-                        }
-                    },
-                    "padding": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customPadding",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    },
-                    "customMargin": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomMargin"
-                        }
-                    },
-                    "margin": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customMargin",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    }
-                }
-            },
             "addressFields": {
                 "type": "checkboxGroup",
                 "defaultValue": [
@@ -7850,6 +7808,48 @@
                 "defaultValue": false,
                 "options": {
                     "name": "Widget.orderDataShowCustomerId"
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -8004,28 +8004,6 @@
                     "tooltipText": "Widget.customClassTooltip"
                 }
             },
-            "spacing": {
-                "type": "vertical",
-                "children": {
-                    "customMargin": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomMargin"
-                        }
-                    },
-                    "margin": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customMargin",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    }
-                }
-            },
             "visibleFields": {
                 "type": "checkboxGroup",
                 "defaultValue": [
@@ -8089,6 +8067,28 @@
                             "caption": "Widget.showBasketOpenAmount"
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }

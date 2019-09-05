@@ -54,7 +54,7 @@
             "required": false,
             "options": {
                 "name": "Widget.linkTextLabel",
-                "tooltipText": "Widget.linkTextLabelTooltip"
+                "tooltipText": "Widget.linkTextTooltip"
             }
         },
         "url": {
