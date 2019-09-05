@@ -5,6 +5,7 @@
 ### Changed
 
 - You can now create an individual header and footer for each category and each content type.
+- Variation properties are no longer limited to type "None" in the checkout. Furthermore, variation properties will now be displayed on the shopping cart page.
 
 ### Fixed
 
