@@ -65,7 +65,7 @@ class DefaultBasketPreset implements ContentPreset
     private function createBasketWidget()
     {
         $this->twoColumnWidget->createChild('first', 'Ceres::BasketWidget')
-            ->withSetting('basketDetailsData', ["basket.item.item_id", "basket.item.customNumber", "basket.item.availability", "basket.item.description_long", "basket.item.description_short"])
+            ->withSetting('basketDetailsData', ["basket.item.availability"])
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.bottom.value", 4)
             ->withSetting("spacing.margin.bottom.unit", null)
