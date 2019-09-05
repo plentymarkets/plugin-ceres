@@ -13,7 +13,6 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "spacing": "@include(spacing)",
         "addressFields": {
             "type": "checkboxGroup",
             "defaultValue": [
@@ -91,6 +90,7 @@
             "options": {
                 "name": "Widget.orderDataShowCustomerId"
             }
-        }
+        },
+        "spacing": "@include(spacing)"
     }
 }
