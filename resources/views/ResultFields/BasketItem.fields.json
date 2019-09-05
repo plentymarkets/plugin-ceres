@@ -23,6 +23,7 @@
     "variationProperties.property.groups",
     "variationProperties.property.names.*",
     "variationProperties.property.position",
+    "variationProperties.values",
     "item.id",
     "images.all.url*",
     "images.all.position",

@@ -96,7 +96,7 @@ Vue.component("basket-list-item", {
 
         transformedVariationProperties()
         {
-            return transformBasketItemProperties(this.basketItem, ["empty"], "displayInOrderProcess");
+            return transformBasketItemProperties(this.basketItem, [], "displayInOrderProcess");
         },
 
         ...Vuex.mapState({
