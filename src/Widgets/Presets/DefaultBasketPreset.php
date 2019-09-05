@@ -4,7 +4,10 @@ namespace Ceres\Widgets\Presets;
 
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
+use IO\Extensions\Constants\ShopUrls;
+use IO\Helper\RouteConfig;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
+use Plenty\Plugin\Translation\Translator;
 
 class DefaultBasketPreset implements ContentPreset
 {
@@ -17,9 +20,17 @@ class DefaultBasketPreset implements ContentPreset
     /** @var PresetWidgetFactory */
     private $stickyContainer;
 
+    /** @var ShopUrls */
+    private $shopUrls;
+
+    /** @var Translator */
+    private $translator;
+
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
+        $this->translator = pluginApp(Translator::class);
+        $this->shopUrls = pluginApp(ShopUrls::class);
 
         $this->createHeadline();
         $this->createTwoColumnWidget();
@@ -110,6 +121,24 @@ class DefaultBasketPreset implements ContentPreset
 
     private function createLinkWidget()
     {
-    }
+        $checkoutLinkWidget = $this->fourColumnWidget->createChild("second", "Ceres::LinkWidget")
+            ->withSetting("customClass", "")
+            ->withSetting("appearance", "primary")
+            ->withSetting("size", "md")
+            ->withSetting("block", false)
+            ->withSetting("text", $this->translator->trans("Ceres::Template.basketCheckout"));
 
+        if (in_array(RouteConfig::CHECKOUT, RouteConfig::getEnabledRoutes()) && RouteConfig::getCategoryId(RouteConfig::CHECKOUT) > 0)
+        {
+            $checkoutLinkWidget
+                ->withSetting("url.type", "category")
+                ->withSetting("url.value", RouteConfig::getCategoryId(RouteConfig::CHECKOUT));
+        }
+        else
+        {
+            $checkoutLinkWidget
+                ->withSetting("url.type", "external")
+                ->withSetting("url.value", $this->shopUrls->checkout);
+        }
+    }
 }
