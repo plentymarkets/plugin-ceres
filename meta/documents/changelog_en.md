@@ -1,5 +1,16 @@
 # Release Notes for Ceres
 
+## v4.2.1 (2019-09-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.0...4.2.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- You can now create an individual header and footer for each category and each content type.
+
+### Fixed
+
+- Due to an error, hashes included in URLs were cut off when the page was accessed. This has been fixed.
+- Due to an error, data for the mobile navigation was not loaded in categories that were linked as the homepage. This has been fixed.
+
 ## v4.2.0 (2019-08-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.2...4.2.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
