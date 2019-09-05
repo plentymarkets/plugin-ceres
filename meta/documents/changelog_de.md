@@ -5,6 +5,7 @@
 ### Geändert
 
 - Header und Footer können nun im ShopBuilder individuell für Kategorien und Inhaltstypen gestaltet werden.
+- Eigenschaften sind nun im Bestellvorgang nicht mehr auf den Typ "Kein" beschränkt. Zudem werden Eigenschaften nun im Warenkorb ausgegeben.
 
 ### Behoben 
 
