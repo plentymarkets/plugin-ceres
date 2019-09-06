@@ -20853,11 +20853,12 @@ html.ie .widget-grid .widget-inner-stacked {
 }
 
 #page-header-parent > .widget {
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     background-color: $gray-lightest;
     
     &:not(.widget-grid) {
-        width: 1170px;
+        max-width: 1170px;
     }
 }
 

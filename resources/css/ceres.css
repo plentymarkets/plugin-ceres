@@ -19874,10 +19874,11 @@ html.ie .widget-grid .widget-inner-stacked {
       margin-bottom: 1rem; } }
 
 #page-header-parent > .widget {
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
   background-color: #f7f7f9; }
   #page-header-parent > .widget:not(.widget-grid) {
-    width: 1170px; }
+    max-width: 1170px; }
 
 header .widget {
   margin-bottom: 0; }
