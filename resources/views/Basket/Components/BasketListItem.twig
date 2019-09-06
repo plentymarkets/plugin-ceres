@@ -98,10 +98,10 @@
                     </div>
                 </div>
 
-                <div class="item-properties" v-if="basketItem.basketItemOrderParams.length">
+                <div class="item-properties" v-if="activeOrderProperties.length">
                     <div class="item-properties-header">{{ trans("Ceres::Template.basketAdditionalOptions") }}:</div>
                     <ul class="ml-3">
-                        <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
+                        <li v-for="property in activeOrderProperties" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
 
                             <span :class="{ 'item-property-value': size === 'small' }">
                                 <strong :class="{ 'colon': property.type.length > 0 }">${ property.name } ({{ trans("Ceres::Template.basketIncludeAbbr") }} ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>

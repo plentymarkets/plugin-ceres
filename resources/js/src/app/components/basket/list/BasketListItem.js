@@ -5,6 +5,7 @@ import { transformBasketItemProperties } from "../../../services/VariationProper
 import Vue from "vue";
 import { mapState } from "vuex";
 
+const clone = require("lodash/clone");
 const NotificationService = require("../../../services/NotificationService");
 
 Vue.component("basket-list-item", {
@@ -28,6 +29,36 @@ Vue.component("basket-list-item", {
 
     computed:
     {
+        activeOrderProperties()
+        {
+            const data = [];
+
+            for (const orderParam of this.basketItem.basketItemOrderParams)
+            {
+                const property = this.basketItem.variation.data.properties.find(property => property.property.id === parseInt(orderParam.propertyId));
+                const position = property && property.property && property.property.position;
+
+                data.push({
+                    ...clone(orderParam),
+                    position
+                });
+            }
+
+            return data.sort((orderParamA, orderParamB) =>
+            {
+                if (orderParamA.position > orderParamB.position)
+                {
+                    return 1;
+                }
+                if (orderParamA.position < orderParamB.position)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+
         image()
         {
             const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
@@ -57,18 +88,6 @@ Vue.component("basket-list-item", {
         isInputLocked()
         {
             return this.waiting || this.isBasketLoading;
-        },
-
-        propertySurchargeSum()
-        {
-            let sum = 0;
-
-            for (const property of this.basketItem.basketItemOrderParams)
-            {
-                sum += this.$options.filters.propertySurcharge(this.basketItem.variation.data.properties, property.propertyId);
-            }
-
-            return sum;
         },
 
         itemTotalPrice()
