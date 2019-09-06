@@ -68,6 +68,10 @@
             {
                 "label": "Widget.presetContactDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
+            },
+            {
+                "label": "Widget.presetLoginDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultLoginPreset"
             }
         ],
         "checkout": [
