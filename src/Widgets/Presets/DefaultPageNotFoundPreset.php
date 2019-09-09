@@ -5,6 +5,7 @@ namespace Ceres\Widgets\Presets;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
+use Plenty\Plugin\Translation\Translator;
 
 class DefaultPageNotFoundPreset implements ContentPreset
 {
@@ -12,6 +13,9 @@ class DefaultPageNotFoundPreset implements ContentPreset
     {
         /** @var PresetHelper */
         $preset = pluginApp(PresetHelper::class);
+        
+        /** @var Translator */
+        $translator = pluginApp(Translator::class);
 
         /** @var PresetWidgetFactory $row */
         $row = $preset
@@ -35,11 +39,11 @@ class DefaultPageNotFoundPreset implements ContentPreset
             ->withSetting("spacing.padding.right.value", 0)
             ->withSetting("spacing.padding.right.unit", null);
 
-
         $row->createChild("first", "Ceres::SeparatorWidget")
             ->withSetting("customClass", "");
 
         $row->createChild("first", "Ceres::LinkWidget")
+            ->withSetting("text", $translator->trans("Ceres::Template.pageNotFoundHomepage"))
             ->withSetting("customClass", "")
             ->withSetting("appearance", "primary")
             ->withSetting("size", "md")
