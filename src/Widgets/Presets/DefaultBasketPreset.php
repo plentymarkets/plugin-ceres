@@ -49,7 +49,7 @@ class DefaultBasketPreset implements ContentPreset
     private function createHeadline()
     {
         $this->preset->createWidget("Ceres::InlineTextWidget")
-            ->withSetting("text", "<h1 class=\"h2\">{{ trans(\"Ceres::Template.basket\") }}</h1>")
+            ->withSetting("text", "<h1>{{ trans(\"Ceres::Template.basket\") }}</h1>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.top.value", 5)
@@ -91,7 +91,8 @@ class DefaultBasketPreset implements ContentPreset
 
     private function createStickyContainer()
     {
-        $this->stickyContainer = $this->twoColumnWidget->createChild('second', 'Ceres::StickyContainerWidget');
+        $this->stickyContainer = $this->twoColumnWidget->createChild('second', 'Ceres::StickyContainerWidget')
+                                                       ->withSetting('customClass', '');
     }
 
     private function createShippingCountryWidget()
@@ -124,8 +125,8 @@ class DefaultBasketPreset implements ContentPreset
         $checkoutLinkWidget = $this->twoColumnWidget->createChild("second", "Ceres::LinkWidget")
             ->withSetting("customClass", "")
             ->withSetting("appearance", "primary")
-            ->withSetting("size", "md")
-            ->withSetting("block", false)
+            ->withSetting("size", "")
+            ->withSetting("block", true)
             ->withSetting("text", $this->translator->trans("Ceres::Template.basketCheckout"));
 
         if (in_array(RouteConfig::CHECKOUT, RouteConfig::getEnabledRoutes()) && RouteConfig::getCategoryId(RouteConfig::CHECKOUT) > 0)
