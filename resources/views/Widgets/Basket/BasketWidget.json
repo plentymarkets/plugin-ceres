@@ -2,7 +2,7 @@
     "identifier": "Ceres::BasketWidget",
     "label": "Widget.basketLabel",
     "previewImageURL": "/images/widgets/basket.svg",
-    "type": "basket",
+    "type": "default",
     "categories": ["basket"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Basket\\BasketWidget",
@@ -17,7 +17,7 @@
         "spacing":"@include(spacingMargin)",
         "basketDetailsData": {
             "type": "checkboxGroup",
-            "defaultValue": [],
+            "defaultValue": ["basket.item.availability"],
             "options": {
                 "name": "Widget.addressFieldsInvoiceDE",
                 "checkboxValues": [

@@ -3,7 +3,7 @@
         "identifier": "Ceres::BasketTotalsWidget",
         "label": "Widget.basketTotalsLabel",
         "previewImageURL": "/images/widgets/basket-totals.svg",
-        "type": "basket",
+        "type": "default",
         "categories": [
             "basket"
         ],
@@ -112,7 +112,7 @@
         "identifier": "Ceres::BasketWidget",
         "label": "Widget.basketLabel",
         "previewImageURL": "/images/widgets/basket.svg",
-        "type": "basket",
+        "type": "default",
         "categories": [
             "basket"
         ],
@@ -193,7 +193,9 @@
             },
             "basketDetailsData": {
                 "type": "checkboxGroup",
-                "defaultValue": [],
+                "defaultValue": [
+                    "basket.item.availability"
+                ],
                 "options": {
                     "name": "Widget.addressFieldsInvoiceDE",
                     "checkboxValues": [
@@ -226,7 +228,7 @@
         "identifier": "Ceres::CouponWidget",
         "label": "Widget.couponLabel",
         "previewImageURL": "/images/widgets/coupon.svg",
-        "type": "basket",
+        "type": "default",
         "categories": [
             "basket"
         ],
@@ -311,7 +313,7 @@
         "identifier": "Ceres::ShippingCountryWidget",
         "label": "Widget.shippingCountryLabel",
         "previewImageURL": "/images/widgets/shipping-country.svg",
-        "type": "basket",
+        "type": "default",
         "categories": [
             "basket"
         ],
