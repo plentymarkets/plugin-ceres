@@ -6,6 +6,7 @@ import TranslationService from "../../services/TranslationService";
 import { removeUrlParam } from "../../services/UrlService";
 import Vue from "vue";
 import { mapState } from "vuex";
+import { sortByKey } from "../../helper/array";
 
 Vue.component("checkout", {
 
@@ -160,8 +161,8 @@ Vue.component("checkout", {
                 return true;
             }
 
-            this.sortList(oldList, "parcelServicePresetId");
-            this.sortList(newList, "parcelServicePresetId");
+            sortByKey(oldList, "parcelServicePresetId");
+            sortByKey(newList, "parcelServicePresetId");
 
             for (const index in oldList)
             {
@@ -204,24 +205,6 @@ Vue.component("checkout", {
             }
 
             return true;
-        },
-
-        sortList(list, field)
-        {
-            list.sort((valueA, valueB) =>
-            {
-                if (valueA[field] > valueB[field])
-                {
-                    return 1;
-                }
-
-                if (valueA[field] < valueB[field])
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
         },
 
         showModal(content)

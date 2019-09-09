@@ -63,20 +63,3 @@ export function defaultValue(input, defaultValue)
 
     return input;
 }
-
-export function orderArrayByKey(array, key, desc)
-{
-    return array.sort((valueA, valueB) =>
-    {
-        if (valueA[key] > valueB[key])
-        {
-            return 1;
-        }
-        if (valueA[key] < valueB[key])
-        {
-            return -1;
-        }
-
-        return 0;
-    });
-}

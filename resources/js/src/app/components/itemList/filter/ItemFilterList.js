@@ -1,6 +1,7 @@
 import UrlService from "../../../services/UrlService";
 import Vue from "vue";
 import { mapState } from "vuex";
+import { sortByKey } from "../../../helper/array";
 
 Vue.component("item-filter-list", {
 
@@ -81,19 +82,7 @@ Vue.component("item-filter-list", {
         ...mapState({
             facets(state)
             {
-                return state.itemList.facets.sort((facetA, facetB) =>
-                {
-                    if (facetA.position > facetB.position)
-                    {
-                        return 1;
-                    }
-                    if (facetA.position < facetB.position)
-                    {
-                        return -1;
-                    }
-
-                    return 0;
-                });
+                return sortByKey(state.itemList.facets, "position");
             },
             isLoading: state => state.itemList.isLoading,
             selectedFacets: state => state.itemList.selectedFacets

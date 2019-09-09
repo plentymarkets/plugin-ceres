@@ -1,5 +1,6 @@
 import Vue from "vue";
 import { mapState, mapGetters } from "vuex";
+import { sortByKey } from "../../helper/array";
 
 Vue.component("order-property-list", {
 
@@ -68,19 +69,7 @@ Vue.component("order-property-list", {
     {
         sortGroupProperties(group)
         {
-            return group.properties.sort((prev, current) =>
-            {
-                if (prev.position > current.position)
-                {
-                    return 1;
-                }
-                if (prev.position < current.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
+            return sortByKey(group.properties, "position");
         },
 
         getSortedGroups(groups)
@@ -99,19 +88,7 @@ Vue.component("order-property-list", {
                 }
             }
 
-            return groups.sort((prev, current) =>
-            {
-                if (prev.lowestPosition > current.lowestPosition)
-                {
-                    return 1;
-                }
-                if (prev.lowestPosition < current.lowestPosition)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
+            return sortByKey(groups, "lowestPosition");
         },
 
         slideTo(position)

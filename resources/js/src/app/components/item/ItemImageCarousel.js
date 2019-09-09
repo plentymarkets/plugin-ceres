@@ -3,6 +3,7 @@ import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import "owl.carousel";
 import { mapState } from "vuex";
+import { sortByKey } from "../../helper/array";
 
 Vue.component("item-image-carousel", {
 
@@ -245,20 +246,7 @@ Vue.component("item-image-carousel", {
 
         orderByPosition(list)
         {
-            return list.sort(
-                (entryA, entryB) =>
-                {
-                    if (entryA.position > entryB.position)
-                    {
-                        return 1;
-                    }
-                    if (entryA.position < entryB.position)
-                    {
-                        return -1;
-                    }
-
-                    return 0;
-                });
+            return sortByKey(list, "position");
         },
 
         getAltText(image)

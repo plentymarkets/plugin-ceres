@@ -184,6 +184,7 @@ import "./filters/itemUrl.filter";
 import "./filters/numberFormat.filter";
 import "./filters/propertySurcharge.filter";
 import "./filters/propertySurchargeSum.filter";
+import "./filters/sortArrayByKey.filter";
 import "./filters/translate.filter";
 import "./filters/truncate.filter";
 

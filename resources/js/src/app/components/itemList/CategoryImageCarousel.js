@@ -7,7 +7,7 @@ Vue.component("category-image-carousel", {
     delimiters: ["${", "}"],
 
     props: {
-        imageUrlsData:
+        imageUrls:
         {
             type: Array
         },
@@ -56,26 +56,6 @@ Vue.component("category-image-carousel", {
         return {
             $_enableCarousel: false
         };
-    },
-
-    computed:
-    {
-        imageUrls()
-        {
-            return this.imageUrlsData.sort((imageUrlA, imageUrlB) =>
-            {
-                if (imageUrlA.position > imageUrlB.position)
-                {
-                    return 1;
-                }
-                if (imageUrlA.position < imageUrlB.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
-        }
     },
 
     created()

@@ -2,6 +2,7 @@ import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
 import Vue from "vue";
 import { mapState } from "vuex";
+import { sortByKey } from "../../helper/array";
 
 Vue.component("country-select", {
 
@@ -84,18 +85,7 @@ Vue.component("country-select", {
      */
     created()
     {
-        this.countryList.sort(function(first, second)
-        {
-            if (first.currLangName < second.currLangName)
-            {
-                return -1;
-            }
-            if (first.currLangName > second.currLangName)
-            {
-                return 1;
-            }
-            return 0;
-        });
+        this.countryList = sortByKey(this.countryList, "currLangName");
         this.updateSelectedCountry();
     },
 

@@ -4,6 +4,7 @@ import { isNullOrUndefined } from "../../../helper/utils";
 import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
 import Vue from "vue";
 import { mapState } from "vuex";
+import { sortByKey } from "../../../helper/array";
 
 const clone = require("lodash/clone");
 const NotificationService = require("../../../services/NotificationService");
@@ -44,19 +45,7 @@ Vue.component("basket-list-item", {
                 });
             }
 
-            return data.sort((orderParamA, orderParamB) =>
-            {
-                if (orderParamA.position > orderParamB.position)
-                {
-                    return 1;
-                }
-                if (orderParamA.position < orderParamB.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
+            return sortByKey(data, "position");
         },
 
         image()

@@ -36,3 +36,28 @@ export function isFilled(array)
 {
     return !isEmpty(array);
 }
+
+/**
+ * Returns sorted array. Note: the original array will be touched.
+ * @param {array} array
+ * @param {string} key
+ * @param {boolean} desc
+ */
+export function sortByKey(array, key, desc)
+{
+    const factor = desc === true ? -1 : 1;
+
+    return array.sort((elementA, elementB) =>
+    {
+        if (elementA[key] > elementB[key])
+        {
+            return 1 * factor;
+        }
+        if (elementA[key] < elementB[key])
+        {
+            return -1 * factor;
+        }
+
+        return 0;
+    });
+}

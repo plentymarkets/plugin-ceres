@@ -25,7 +25,7 @@
                     <div class="square-inner main-image">
                         <slot name="item-image">
                             <category-image-carousel template="#vue-category-image-carousel"
-                                                    :image-urls-data="item.images | itemImages(imageUrlAccessor)"
+                                                    :image-urls="item.images | itemImages(imageUrlAccessor) | sortArrayByKey('position')"
                                                     :alt-text="item | itemName"
                                                     :title-text="item | itemName"
                                                     :item-url="item | itemURL"

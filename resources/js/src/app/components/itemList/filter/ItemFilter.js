@@ -1,6 +1,7 @@
 import TranslationService from "../../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
+import { sortByKey } from "../../../helper/array";
 
 Vue.component("item-filter", {
 
@@ -23,19 +24,7 @@ Vue.component("item-filter", {
     {
         facets()
         {
-            return this.facet.values.sort((facetA, facetB) =>
-            {
-                if (facetA.position > facetB.position)
-                {
-                    return 1;
-                }
-                if (facetA.position < facetB.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
+            return sortByKey(this.facet.values, "position");
         },
 
         facetName()

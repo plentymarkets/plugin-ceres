@@ -1,4 +1,5 @@
-import { orderArrayByKey, isDefined } from "../helper/utils";
+import { isDefined } from "../helper/utils";
+import { sortByKey } from "../helper/array";
 
 const PROPERTY_ORDER_BY_KEY = "position";
 const _cachedVariationProperties = {};
@@ -64,7 +65,7 @@ export function transformVariationProperties(item, propertyTypes = [], displaySe
                 position: group.position,
                 name: group.names.name,
                 description: group.names.description,
-                properties: orderArrayByKey(groupedProperties[group.id], PROPERTY_ORDER_BY_KEY)
+                properties: sortByKey(groupedProperties[group.id], PROPERTY_ORDER_BY_KEY)
             });
         }
     }
@@ -72,12 +73,12 @@ export function transformVariationProperties(item, propertyTypes = [], displaySe
     if (groupedProperties.ungrouped.length)
     {
         groups.push({
-            properties: orderArrayByKey(groupedProperties.ungrouped, PROPERTY_ORDER_BY_KEY),
+            properties: sortByKey(groupedProperties.ungrouped, PROPERTY_ORDER_BY_KEY),
             position: -1
         });
     }
 
-    _cachedVariationProperties[cacheKey] = orderArrayByKey(groups, PROPERTY_ORDER_BY_KEY);
+    _cachedVariationProperties[cacheKey] = sortByKey(groups, PROPERTY_ORDER_BY_KEY);
 
     return _cachedVariationProperties[cacheKey];
 }
