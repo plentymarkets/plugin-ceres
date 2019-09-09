@@ -31,7 +31,7 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
             'priceMax'      => $this->request->get('priceMax', 0)
         ];
 
-        $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, $defaultItemsPerPage);
+        $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, $defaultItemsPerPage, SearchOptions::SCOPE_SEARCH);
 
         $this->initItemList(
             [
