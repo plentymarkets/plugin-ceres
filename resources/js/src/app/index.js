@@ -4,8 +4,13 @@
 
 import Vue from "vue";
 import Vuex from "vuex";
+
 window.Vue = Vue;
 window.Vuex = Vuex;
+
+import script2 from "vue-script2";
+
+Vue.use(script2);
 
 import jQuery from "jquery";
 window.jQuery = jQuery;
