@@ -19,7 +19,7 @@
             "type": "checkboxGroup",
             "defaultValue": ["basket.item.availability"],
             "options": {
-                "name": "Widget.addressFieldsInvoiceDE",
+                "name": "Widget.basketDetailsDataLabel",
                 "checkboxValues": [
                     {
                         "value": "basket.item.item_id",
