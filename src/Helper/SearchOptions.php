@@ -106,5 +106,26 @@ class SearchOptions
         return $instance;
     }
 
+    public static function validateItemListOptions($itemListOptions, $defaultItemsPerPage)
+    {
+        // constrain parameters
+        if( (int)$itemListOptions['page'] <= 0 ) {
+            $itemListOptions['page'] = 1;
+        }
+
+        if( (int)$itemListOptions['itemsPerPage'] <= 0 ) {
+            $itemListOptions['itemsPerPage'] = $defaultItemsPerPage;
+        }
+
+        if( (int) $itemListOptions['priceMin'] < 0 ) {
+            $itemListOptions['priceMin'] = 0;
+        }
+
+        if( (int) $itemListOptions['priceMax'] < 0 ) {
+            $itemListOptions['priceMax'] = 0;
+        }
+
+        return $itemListOptions;
+    }
 
 }
