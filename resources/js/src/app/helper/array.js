@@ -41,11 +41,11 @@ export function isFilled(array)
  * Returns sorted array. Note: the original array will be touched.
  * @param {array} array
  * @param {string} key
- * @param {boolean} desc
+ * @param {boolean} reverse
  */
-export function sortByKey(array, key, desc)
+export function sortByKey(array, key, reverse)
 {
-    const factor = desc === true ? -1 : 1;
+    const factor = reverse === true ? -1 : 1;
 
     return array.sort((elementA, elementB) =>
     {
