@@ -1,10 +1,14 @@
+{% set ignoreCategoryNameForTitle = block('ignoreCategoryNameForTitle') %}
+
 {% if category is defined and category is not null %}
     {% set details      = category.details[0] %}
+    {% set defaultTitle = ignoreCategoryNameForTitle ? '' : details.name %}
+
     {% set robots       = details.metaRobots | replace({'_': ', '}) %}
     {% set description  = details.metaDescription %}
     {% set keywords     = details.metaKeywords %}
     {% set image        = details.imagePath | default(ceresConfig.header.companyLogo) %}
-    {% set title        = details.metaTitle | default(details.name) %}
+    {% set title        = details.metaTitle | default(defaultTitle) %}
 
 {% else %}
 
