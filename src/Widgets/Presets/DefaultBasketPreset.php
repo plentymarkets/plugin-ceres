@@ -64,7 +64,8 @@ class DefaultBasketPreset implements ContentPreset
             ->withSetting("spacing.margin.top.value", 3)
             ->withSetting("spacing.margin.top.unit", null);
 
-        $this->preset->createWidget("Ceres::SeparatorWidget");
+        $this->preset->createWidget("Ceres::SeparatorWidget")
+                     ->withSetting('customClass', '');
     }
 
     private function createTwoColumnWidget()
@@ -80,7 +81,7 @@ class DefaultBasketPreset implements ContentPreset
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.bottom.value", 4)
             ->withSetting("spacing.margin.bottom.unit", null)
-            ->withSetting("spacing.margin.top.value", 4)
+            ->withSetting("spacing.margin.top.value", 0)
             ->withSetting("spacing.margin.top.unit", null)
             ->withSetting("spacing.margin.left.value", 3)
             ->withSetting("spacing.margin.left.unit", null)
