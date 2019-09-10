@@ -24,9 +24,7 @@
     "compareTranslations": "node tools/compareTranslations.js"
   },
   "browserslist": [
-    "last 2 versions",
-    "> 5%",
-    "Firefox ESR"
+    "> .25%"
   ],
   "devDependencies": {
     "@babel/core": "^7.5.5",
