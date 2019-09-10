@@ -23,7 +23,7 @@
                 "tooltipText": "Widget.linkSizeTooltip",
                 "listBoxValues": [
                     {
-                        "value": "btn-sm",
+                        "value": "sm",
                         "caption": "Widget.linkSizeSmall",
                         "position": 0
                     },
@@ -33,7 +33,7 @@
                         "position": 1
                     },
                     {
-                        "value": "btn-lg",
+                        "value": "lg",
                         "caption": "Widget.linkSizeLarge",
                         "position": 2
                     }
