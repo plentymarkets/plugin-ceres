@@ -2,7 +2,7 @@
     "identifier": "Ceres::OrderDataWidget",
     "label": "Widget.orderDataLabel",
     "previewImageURL": "/images/widgets/order-data.svg",
-    "type": "orderconfirmation",
+    "type": "default",
     "categories": ["orderconfirmation"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderDataWidget",
@@ -83,7 +83,7 @@
                     }
                 ]
             }
-        },        
+        },
         "showCustomerId": {
             "type": "checkbox",
             "defaultValue": false,
