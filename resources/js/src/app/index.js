@@ -141,7 +141,7 @@ import "./directives/basket/basketItemQuantity";
 import "./directives/basket/basketItemSum";
 import "./directives/basket/toggleBasketPreview";
 
-import "./directives/common/linkWidgetTooltip";
+import "./directives/common/truncateTooltip";
 
 import "./directives/customer/logout";
 
