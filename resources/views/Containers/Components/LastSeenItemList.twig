@@ -2,7 +2,7 @@
 {{ component( "Ceres::PageDesign.Components.Carousel" ) }}
 
 <script type="x/template" id="vue-last-seen-item-list">
-    <div class="row" v-if="items.length">
+    <div class="row" v-show="items.length">
         <div class="col-12">
             <slot name="heading"></slot>
         </div>
