@@ -18,9 +18,8 @@ import wishList from "./modules/WishListModule";
 
 import eventPropagation from "./plugins/EventPropagationPlugin";
 
-Vue.use(require("vue-script2"));
-Vue.use(Vuex);
 Vue.options.delimiters = ["${", "}"];
+Vue.use(Vuex);
 
 // eslint-disable-next-line
 const store = new Vuex.Store(
