@@ -58,5 +58,5 @@
         {% set initialCategory = null %}
     {% endif %}
 
-    <mobile-navigation :initial-category="{{ initialCategory | json_encode }}"></mobile-navigation>
+    <mobile-navigation :initial-category="{{ initialCategory | json_encode }}" :include-language="{{ urls.includeLanguage | json_encode }}"></mobile-navigation>
 </div>

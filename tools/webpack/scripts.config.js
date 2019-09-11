@@ -44,12 +44,9 @@ module.exports = env =>
                 },
                 {
                     test: /\.m?js$/,
-                    exclude: /(node_modules)/,
+                    exclude: /node_modules\/(?!vue-script2)/,
                     use: {
-                        loader: "babel-loader",
-                        options: {
-                            presets: ["@babel/preset-env"]
-                        }
+                        loader: "babel-loader"
                     }
                 }
             ]

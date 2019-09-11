@@ -14039,8 +14039,15 @@ $border-width: 1px;
  	}
  }
 
- html.ie .always-visible-search {
-	min-height: 32px;
+ html.ie {
+	.always-visible-search {
+		min-height: 32px;
+	}
+
+	.navbar-brand img[src*="svg"] {
+		width: 100%;
+		height: 100%;
+	}
  }
 
 // Searchbar in widget
@@ -20853,11 +20860,12 @@ html.ie .widget-grid .widget-inner-stacked {
 }
 
 #page-header-parent > .widget {
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     background-color: $gray-lightest;
     
     &:not(.widget-grid) {
-        width: 1170px;
+        max-width: 1170px;
     }
 }
 
