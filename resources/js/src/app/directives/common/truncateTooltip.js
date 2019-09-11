@@ -1,7 +1,7 @@
 import { debounce } from "../../helper/debounce";
 import Vue from "vue";
 
-Vue.directive("link-widget-tooltip",
+Vue.directive("truncate-tooltip",
     {
         inserted(element)
         {
