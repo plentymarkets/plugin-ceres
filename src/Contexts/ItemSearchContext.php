@@ -19,18 +19,17 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
     {
         parent::init($params);
 
-        $defaultItemsPerPage = $this->ceresConfig->pagination->rowsPerPage[0] * $this->ceresConfig->pagination->columnsPerPage;
-
         $itemListOptions = [
             'page'          => $this->getParam( 'page', 1 ),
-            'itemsPerPage'  => $this->getParam( 'itemsPerPage', $defaultItemsPerPage ),
-            'sorting'       => $this->getParam( 'sorting', $this->ceresConfig->sorting->defaultSortingSearch ),
+            'itemsPerPage'  => $this->getParam( 'itemsPerPage', '' ),
+            'sorting'       => $this->getParam( 'sorting', '' ),
             'facets'        => $this->getParam( 'facets', '' ),
             'query'         => $this->getParam( 'query', '' ),
             'priceMin'      => $this->request->get('priceMin', 0),
             'priceMax'      => $this->request->get('priceMax', 0)
         ];
 
+        $defaultItemsPerPage = $this->ceresConfig->pagination->rowsPerPage[0] * $this->ceresConfig->pagination->columnsPerPage;
         $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, $defaultItemsPerPage, SearchOptions::SCOPE_SEARCH);
 
         $this->initItemList(

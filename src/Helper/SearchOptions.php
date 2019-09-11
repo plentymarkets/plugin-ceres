@@ -110,13 +110,11 @@ class SearchOptions
     {
         // Get all sorting strings
         $sortingStrings = self::get($scope);
-        $sortingStrings->sorting = array_flip($sortingStrings->sorting);
 
-        if( !in_array($itemListOptions['sorting'], $sortingStrings->sorting) ) {
+        if( !array_key_exists($itemListOptions['sorting'], $sortingStrings->sorting) ) {
             $itemListOptions['sorting'] = $sortingStrings->defaultSorting;
         }
 
-        // constrain parameters
         if( (int)$itemListOptions['page'] <= 0 ) {
             $itemListOptions['page'] = 1;
         }
