@@ -2,7 +2,7 @@
     "identifier": "Ceres::CouponWidget",
     "label": "Widget.couponLabel",
     "previewImageURL": "/images/widgets/coupon.svg",
-    "type": "basket",
+    "type": "default",
     "categories": ["basket"],
     "position": 200,
     "widgetClass": "Ceres\\Widgets\\Basket\\CouponWidget",

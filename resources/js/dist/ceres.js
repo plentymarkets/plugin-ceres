@@ -99,7 +99,7 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
+   true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?28a1"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
   undefined;
 }(this, function (exports, $, Popper) { 'use strict';
 
@@ -4684,7 +4684,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["jQuery"] = __webpack_require__(/*! -!./jquery.js */ "./node_modules/jquery/dist/jquery.js");
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["jQuery"] = __webpack_require__(/*! -!./jquery.js */ "./node_modules/jquery/dist/jquery.js?1157");
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
@@ -4942,7 +4942,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/jquery/dist/jquery.js":
+/***/ "./node_modules/jquery/dist/jquery.js?1157":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
   \********************************************/
@@ -15552,10 +15552,10 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./node_modules/jquery/dist/jquery.js-exposed":
-/*!****************************************************!*\
-  !*** ./node_modules/jquery/dist/jquery.js-exposed ***!
-  \****************************************************/
+/***/ "./node_modules/jquery/dist/jquery.js?28a1":
+/*!********************************************!*\
+  !*** ./node_modules/jquery/dist/jquery.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46998,9 +46998,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("basket-list", {
       type: String,
       default: "#vue-basket-list"
     },
-    size: {
-      type: String,
-      default: "small"
+    basketDetailsData: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
     },
     isPreview: {
       type: Boolean,
@@ -47051,7 +47053,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var NotificationService = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("basket-list-item", {
-  props: ["basketItem", "size", "language", "template", "isPreview"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-basket-list-item"
+    },
+    basketItem: Object,
+    basketDetailsData: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    isPreview: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: function data() {
     return {
       waiting: false,
@@ -47205,6 +47223,9 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("basket-list-item", {
       }
 
       return false;
+    },
+    isDataFieldVisible: function isDataFieldVisible(value) {
+      return this.basketDetailsData.includes(value);
     }
   }
 });
@@ -50637,6 +50658,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
 
 
 
@@ -50644,8 +50667,22 @@ __webpack_require__.r(__webpack_exports__);
 var ApiService = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
-  delimiters: ["${", "}"],
-  props: ["template", "backlink"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-guest-login"
+    },
+    backlink: {
+      type: String
+    },
+    buttonSize: {
+      type: String,
+      default: "md",
+      validator: function validator(value) {
+        return ["sm", "md", "lg"].indexOf(value) !== -1;
+      }
+    }
+  },
   data: function data() {
     return {
       email: "",
@@ -50656,36 +50693,34 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
     var _this = this;
 
     this.$nextTick(function () {
-      $("#guestLogin").on("hidden.bs.modal", function () {
+      // for old login view only (input in modal)
+      $(_this.$parent.$refs.guestModal).on("hidden.bs.modal", function () {
         _this.email = "";
-
-        _this.resetError();
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__["default"].unmarkAllFields(_this.$refs.form);
       });
     });
   },
   methods: {
     validate: function validate() {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__["default"].validate($("#guest-login-form-" + this._uid)).done(function () {
-        this.sendEMail();
-      }.bind(this)).fail(function (invalidFields) {
+      var _this2 = this;
+
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__["default"].validate(this.$refs.form).done(function () {
+        _this2.authGuest();
+      }).fail(function (invalidFields) {
         _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__["default"].markInvalidFields(invalidFields, "error");
       });
     },
-    sendEMail: function sendEMail() {
+    authGuest: function authGuest() {
+      var _this3 = this;
+
       this.isDisabled = true;
       ApiService.post("/rest/io/guest", {
         email: this.email
       }).done(function () {
-        if (this.backlink !== null && this.backlink) {
-          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])(decodeURIComponent(this.backlink));
-        } else {
-          // Go back to Homepage
-          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])(window.location.origin);
-        }
-      }.bind(this));
-    },
-    resetError: function resetError() {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__["default"].unmarkAllFields($("#guest-login-form-" + this._uid));
+        Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isDefined"])(_this3.backlink) && _this3.backlink.length ? decodeURIComponent(_this3.backlink) : window.location.origin);
+      }).fail(function () {
+        _this3.isDisabled = false;
+      });
     }
   }
 });
@@ -50732,9 +50767,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("login", {
 
     this.$nextTick(function () {
       _this.loginFields = $(".login-container").find(".input-unit");
-
-      _this.removeLoginModal();
-
       AutoFocusService.triggerAutoFocus();
     });
   },
@@ -50761,12 +50793,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("login", {
       }).fail(function (invalidFields) {
         _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__["default"].markInvalidFields(invalidFields, "error");
       });
-    },
-    removeLoginModal: function removeLoginModal() {
-      if (!this.modalElement) {
-        var loginModal = document.getElementById("login");
-        loginModal.parentNode.removeChild(loginModal);
-      }
     },
 
     /**
@@ -50849,11 +50875,15 @@ __webpack_require__.r(__webpack_exports__);
 var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("login-view", {
-  delimiters: ["${", "}"],
-  props: ["template"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-login-view"
+    }
+  },
   methods: {
     openGuestModal: function openGuestModal() {
-      ModalService.findModal(document.getElementById("guestLogin")).show();
+      ModalService.findModal(this.$refs.guestModal).show();
     }
   }
 });
@@ -59305,7 +59335,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?28a1");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_3__);
@@ -60612,7 +60642,7 @@ function NotificationList() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helper/strings */ "./resources/js/src/app/helper/strings.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?28a1");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 
 
