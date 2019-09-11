@@ -77,23 +77,23 @@ class DefaultBasketPreset implements ContentPreset
     private function createBasketWidget()
     {
         $this->twoColumnWidget->createChild('first', 'Ceres::BasketWidget')
+            ->withSetting('customClass', 'bg-white')
             ->withSetting('basketDetailsData', ["basket.item.availability"])
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.bottom.value", 4)
-            ->withSetting("spacing.margin.bottom.unit", null)
-            ->withSetting("spacing.margin.top.value", 0)
-            ->withSetting("spacing.margin.top.unit", null)
-            ->withSetting("spacing.margin.left.value", 3)
-            ->withSetting("spacing.margin.left.unit", null)
-            ->withSetting("spacing.margin.right.value", 3)
-            ->withSetting("spacing.margin.right.unit", null)
-            ->withSetting('customClass', '');
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.top.value", 4)
+            ->withSetting("spacing.padding.top.unit", null)
+            ->withSetting("spacing.padding.bottom.value", 4)
+            ->withSetting("spacing.padding.bottom.unit", null)
+            ->withSetting("spacing.padding.left.value", 3)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 3)
+            ->withSetting("spacing.padding.right.unit", null);
     }
 
     private function createStickyContainer()
     {
         $this->stickyContainer = $this->twoColumnWidget->createChild('second', 'Ceres::StickyContainerWidget')
-                                                       ->withSetting('customClass', '');
+                                                       ->withSetting('customClass', 'px-3 py-4 bg-white');
     }
 
     private function createShippingCountryWidget()
@@ -101,7 +101,8 @@ class DefaultBasketPreset implements ContentPreset
         $this->stickyContainer->createChild('sticky', 'Ceres::ShippingCountryWidget')
             ->withSetting('customClass', '');
 
-        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget');
+        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget')
+            ->withSetting('customClass', '');
     }
 
     private function createBasketTotalsWidget()
@@ -110,7 +111,8 @@ class DefaultBasketPreset implements ContentPreset
             ->withSetting('customClass', '')
             ->withSetting('visibleFields', ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
 
-        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget');
+        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget')
+            ->withSetting('customClass', '');
     }
 
     private function createCouponWidget()
@@ -118,16 +120,17 @@ class DefaultBasketPreset implements ContentPreset
         $this->stickyContainer->createChild('sticky', 'Ceres::CouponWidget')
             ->withSetting('customClass', '');
 
-        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget');
+        $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget')
+            ->withSetting('customClass', '');
     }
 
     private function createLinkWidget()
     {
-        $checkoutLinkWidget = $this->twoColumnWidget->createChild("second", "Ceres::LinkWidget")
+        $checkoutLinkWidget = $this->stickyContainer->createChild("sticky", "Ceres::LinkWidget")
             ->withSetting("customClass", "")
             ->withSetting("appearance", "primary")
             ->withSetting("size", "")
-            ->withSetting("block", true)
+            ->withSetting("block", "true")
             ->withSetting("text", $this->translator->trans("Ceres::Template.basketCheckout"));
 
         if (in_array(RouteConfig::CHECKOUT, RouteConfig::getEnabledRoutes()) && RouteConfig::getCategoryId(RouteConfig::CHECKOUT) > 0)
