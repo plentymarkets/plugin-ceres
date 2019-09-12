@@ -54002,7 +54002,11 @@ vue__WEBPACK_IMPORTED_MODULE_23___default.a.component("basket-list-item", {
       return this.basketItem.variation.data.prices.default.basePrice;
     },
     transformedVariationProperties: function transformedVariationProperties() {
+<<<<<<< HEAD
       return Object(_services_VariationPropertyService__WEBPACK_IMPORTED_MODULE_22__["transformBasketItemProperties"])(this.basketItem, ["empty"], "displayInOrderProcess");
+=======
+      return (0, _VariationPropertyService.transformBasketItemProperties)(this.basketItem, [], "displayInOrderProcess");
+>>>>>>> stable
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_24__["mapState"])({
     isBasketLoading: function isBasketLoading(state) {
@@ -60190,7 +60194,11 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("single-item", {
       return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
     },
     transformedVariationProperties: function transformedVariationProperties() {
+<<<<<<< HEAD
       return Object(_services_VariationPropertyService__WEBPACK_IMPORTED_MODULE_12__["transformVariationProperties"])(this.currentVariation, ["empty"], "showInItemListing");
+=======
+      return (0, _VariationPropertyService.transformVariationProperties)(this.currentVariation, [], "showInItemListing");
+>>>>>>> stable
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapState"])({
     currentVariation: function currentVariation(state) {
@@ -70023,17 +70031,17 @@ function setUrlParams(urlParams) {
   if (pushState) {
     window.history.pushState({
       requireReload: true
-    }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash);
   } else {
     window.history.replaceState({
       requireReload: true
-    }, titleElement ? titleElement.innerHTML : "", pathName + params);
+    }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash);
   }
 
   document.dispatchEvent(new CustomEvent("onHistoryChanged", {
     detail: {
       title: titleElement ? titleElement.innerHTML : "",
-      url: pathName + params
+      url: pathName + params + window.location.hash
     }
   }));
   Array.prototype.slice.call(document.querySelectorAll("a[href][data-update-url]")).forEach(function (element) {
@@ -70493,8 +70501,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var PROPERTY_ORDER_BY_KEY = "position";
+<<<<<<< HEAD
 var _cachedVariationProperties = {};
+=======
+var _cachedVariationProperties = {}; // eslint-disable-next-line complexity
+
+>>>>>>> stable
 function transformVariationProperties(item) {
   var propertyTypes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var displaySetting = arguments.length > 2 ? arguments[2] : undefined;
@@ -70521,9 +70538,17 @@ function transformVariationProperties(item) {
   try {
     for (var _iterator = variationProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var property = _step.value;
+<<<<<<< HEAD
       property = property.property;
       var matchDisplaySetting = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(displaySetting) && displaySetting.length ? property.display.includes(displaySetting) : true;
       var isCorrectType = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(propertyTypes) && propertyTypes.length ? propertyTypes.includes(property.cast) : true;
+=======
+      property = _objectSpread({}, property.property, {
+        values: property.values
+      });
+      var matchDisplaySetting = (0, _utils.isDefined)(displaySetting) && displaySetting.length ? property.display.includes(displaySetting) : true;
+      var isCorrectType = (0, _utils.isDefined)(propertyTypes) && propertyTypes.length ? propertyTypes.includes(property.cast) : true;
+>>>>>>> stable
 
       if (!matchDisplaySetting || !isCorrectType) {
         continue;

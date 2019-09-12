@@ -108,14 +108,14 @@ export function setUrlParams(urlParams, pushState = true)
 
     if (pushState)
     {
-        window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+        window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash );
     }
     else
     {
-        window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+        window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash );
     }
 
-    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url:pathName + params } }));
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url:pathName + params + window.location.hash } }));
 
     Array.prototype
         .slice
