@@ -221,18 +221,17 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $itemSearchSettingsData = [];
 
                     foreach($searchSettings as $searchSetting) {
-                        if (!empty($data[$searchSetting['key']])){
+                        if (!empty($data[$searchSetting['key']]) && !in_array($data[$searchSetting['key']], $completedSettings)){
                             $itemSearchSettingsData[] = [
                                 "key" => $data[$searchSetting['key']],
                                 "boost" => 2000 - (intval($searchSetting['position']) * 100),
                                 "isActive" => true
                             ];
                             $completedSettings[] = $data[$searchSetting['key']];
-
                         }
                     }
 
-                    $disabledSettings  = array_diff($searchFields, $completedSettings);
+                    $disabledSettings  = array_diff(array_unique($searchFields), $completedSettings);
 
                     if (count($disabledSettings)) {
                         foreach ($disabledSettings as $disabledSetting) {
