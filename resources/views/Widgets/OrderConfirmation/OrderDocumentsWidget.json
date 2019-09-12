@@ -2,16 +2,16 @@
     "identifier": "Ceres::OrderDocumentsWidget",
     "label": "Widget.orderDocumentsLabel",
     "previewImageURL": "/images/widgets/order-documents.svg",
-    "type": "orderconfirmation",
+    "type": "default",
     "categories": ["orderconfirmation"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderDocumentsWidget",
     "settings": {
         "customClass":"@include(customClass)",
-        "appearance": { 
-            "type": "select", 
-            "defaultValue": "primary", 
-            "options": "@include(appearance)" 
+        "appearance": {
+            "type": "select",
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
         },
         "buttonSize": {
             "type": "select",

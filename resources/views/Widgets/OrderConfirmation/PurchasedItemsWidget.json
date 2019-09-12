@@ -2,7 +2,7 @@
     "identifier": "Ceres::PurchasedItemsWidget",
     "label": "Widget.purchasedItemsLabel",
     "previewImageURL": "/images/widgets/purchased-items.svg",
-    "type": "orderconfirmation",
+    "type": "default",
     "categories": ["orderconfirmation"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\PurchasedItemsWidget",

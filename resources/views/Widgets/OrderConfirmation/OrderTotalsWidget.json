@@ -2,7 +2,7 @@
     "identifier": "Ceres::OrderTotalsWidget",
     "label": "Widget.basketTotalsLabel",
     "previewImageURL": "/images/widgets/basket-totals.svg",
-    "type": "orderconfirmation",
+    "type": "default",
     "categories": ["orderconfirmation"],
     "position": 300,
     "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderTotalsWidget",

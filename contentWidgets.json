@@ -7676,7 +7676,7 @@
         "identifier": "Ceres::OrderDataWidget",
         "label": "Widget.orderDataLabel",
         "previewImageURL": "/images/widgets/order-data.svg",
-        "type": "orderconfirmation",
+        "type": "default",
         "categories": [
             "orderconfirmation"
         ],
@@ -7858,7 +7858,7 @@
         "identifier": "Ceres::OrderDocumentsWidget",
         "label": "Widget.orderDocumentsLabel",
         "previewImageURL": "/images/widgets/order-documents.svg",
-        "type": "orderconfirmation",
+        "type": "default",
         "categories": [
             "orderconfirmation"
         ],
@@ -7988,7 +7988,7 @@
         "identifier": "Ceres::OrderTotalsWidget",
         "label": "Widget.basketTotalsLabel",
         "previewImageURL": "/images/widgets/basket-totals.svg",
-        "type": "orderconfirmation",
+        "type": "default",
         "categories": [
             "orderconfirmation"
         ],
@@ -8097,7 +8097,7 @@
         "identifier": "Ceres::PurchasedItemsWidget",
         "label": "Widget.purchasedItemsLabel",
         "previewImageURL": "/images/widgets/purchased-items.svg",
-        "type": "orderconfirmation",
+        "type": "default",
         "categories": [
             "orderconfirmation"
         ],

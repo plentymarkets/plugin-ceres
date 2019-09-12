@@ -21,8 +21,7 @@
         "content":           ["static", "structure", "default"],
         "singleitem":        ["static", "structure", "default", "item"],
         "checkout":          ["static", "structure", "default", "checkout", "customer", "basket"],
-        "myaccount":         ["static", "structure", "default", "myaccount", "customer", "basket"],
-        "orderconfirmation": ["static", "structure", "default", "orderconfirmation"]
+        "myaccount":         ["static", "structure", "default", "myaccount", "customer", "basket"]
     },
     "presets": {
         "header": [
@@ -65,18 +64,16 @@
             {
                 "label": "Widget.presetContactDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
+            },
+            {
+                "label": "Widget.presetOrderConfirmationDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
             }
         ],
         "checkout": [
             {
                 "label": "Widget.presetCheckoutDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"
-            }
-        ],
-        "orderconfirmation": [
-            {
-                "label": "Widget.presetOrderConfirmationDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
             }
         ],
         "myaccount": [
