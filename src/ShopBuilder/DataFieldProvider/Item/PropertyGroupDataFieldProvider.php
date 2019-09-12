@@ -2,6 +2,7 @@
 
 namespace Ceres\ShopBuilder\DataFieldProvider\Item;
 
+use IO\Helper\Utils;
 use IO\Services\SessionStorageService;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Property\Contracts\PropertyGroupRepositoryContract;
@@ -74,7 +75,7 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
     
         $properties = [];
     
-        $filters = ['typeIdentifier' => 'item', 'lang' => pluginApp(SessionStorageService::class)->getLang()];
+        $filters = ['typeIdentifier' => 'item', 'lang' => Utils::getLang()];
         if(!is_null($propertyGroupId))
         {
             $filters['group'] = $propertyGroupId;
