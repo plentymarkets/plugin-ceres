@@ -29,8 +29,7 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
             'priceMax'      => $this->request->get('priceMax', 0)
         ];
 
-        $defaultItemsPerPage = $this->ceresConfig->pagination->rowsPerPage[0] * $this->ceresConfig->pagination->columnsPerPage;
-        $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, $defaultItemsPerPage, SearchOptions::SCOPE_SEARCH);
+        $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, $this->ceresConfig, SearchOptions::SCOPE_SEARCH);
 
         $this->initItemList(
             [

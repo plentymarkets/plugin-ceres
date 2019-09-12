@@ -25,8 +25,7 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
             'priceMax'      => $this->request->get('priceMax', 0)
         ];
 
-        $defaultItemsPerPage = $this->ceresConfig->pagination->rowsPerPage[0] * $this->ceresConfig->pagination->columnsPerPage;
-        $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, $defaultItemsPerPage, SearchOptions::SCOPE_CATEGORY);
+        $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, $this->ceresConfig, SearchOptions::SCOPE_CATEGORY);
 
         $this->initItemList(
             [
