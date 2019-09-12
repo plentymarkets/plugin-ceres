@@ -30,10 +30,11 @@
 {% endif %}
 
 {{ Twig.if("real_url or #{ isPreview | json_encode }") }}
-<div class="widget widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
-    <a class="btn btn-appearance btn-{{ size }} {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
+<div v-truncate-tooltip class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
+    <a class="btn btn-appearance {{ size }} text-truncate w-100 {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
     href="{{ Twig.print("real_url") }}"
-    style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}">
+    style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
+    data-toggle="tooltip" title="">
         {%- if icon != "none" -%}
             <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
         {%- endif -%}
