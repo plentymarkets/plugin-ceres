@@ -60422,6 +60422,9 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("variation-select", {
       }
 
       return possibleUnits;
+    },
+    isContentVisible: function isContentVisible() {
+      return !this.forceContent && !!this.currentSelection || this.forceContent;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_30__["mapState"])({
     attributes: function attributes(state) {
