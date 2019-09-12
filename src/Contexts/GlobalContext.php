@@ -42,7 +42,7 @@ class GlobalContext implements ContextInterface
 
     /**
      * @deprecated since 4.3
-     * Use ShopUrls::home instead
+     * Use IO\Extensions\Constants\ShopUrls::$home instead
      */
     public $homepageURL;
     public $splitItemBundle;
