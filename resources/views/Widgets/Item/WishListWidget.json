@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::WishListWidget",
+    "label": "Widget.wishListLabel",
+    "previewImageURL": "/images/widgets/wish-list.svg",
+    "type": "static",
+    "categories": ["item"],
+    "position": 700,
+    "widgetClass": "Ceres\\Widgets\\Item\\WishListWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}

@@ -6,12 +6,20 @@ import { mapState, mapActions } from "vuex";
 
 Vue.component("wish-list", {
 
-    delimiters: ["${", "}"],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-wish-list"
+        },
 
-    props: [
-        "template",
-        "initIds"
-    ],
+        initIds:
+        {
+            type: Array,
+            default: () => []
+        }
+    },
 
     data()
     {
