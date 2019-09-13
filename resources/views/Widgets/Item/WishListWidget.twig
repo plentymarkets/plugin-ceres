@@ -15,7 +15,7 @@
 
 {{ Twig.set("wishListIds", Twig.call("services.wishList.getItemWishList")) }}
 
-<div class="widget widget-wish-list widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+<div class="bg-white px-4 pb-4 widget widget-wish-list widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
 

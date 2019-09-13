@@ -1,6 +1,143 @@
-<script type="x/template" id="vue-wish-list-item">
-    <article class="wish-list-item">
+{{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
+{% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
+
+<script type="x/template" id="vue-wish-list-item">
+
+    <div class="basket-item-container basket-list-item">
+        
+        <div class="basket-item component-loading with-icon">
+
+            <div class="image-container">
+                <img class="img-basket-small" v-if="image" :src="image" :title="wishListItem.data | itemName">
+            </div>
+
+            <div class="meta-container-wrapper">
+                <div class="meta-container-wrapper-inner">
+                    <div class="meta-container">
+                        <div>
+                            <a :href="wishListItem.data | itemURL" class="item-name text-primary text-appearance">
+                                ${ wishListItem.data | itemName }
+                            </a>
+
+                            <div class="item-base-price">
+                                ${ unitPrice | currency }
+                            </div>
+
+                            <div class="item-small-prices text-muted" v-if="!(wishListItem.data.unit.unitOfMeasurement === 'C62' && wishListItem.data.unit.content === 1) && wishListItem.data.variation.mayShowUnitPrice">
+                                <div>
+                                    ${ basePrice }
+                                </div>
+                                <div>
+                                    <strong>{{ trans("Ceres::Template.basketContent") }}: </strong>
+                                    ${ wishListItem.data.unit.content } ${ wishListItem.data.unit.names.name }
+                                </div>
+                            </div>
+
+                            <div class="item-small-prices">
+                                <div v-for="attribute in wishListItem.data.attributes">
+                                    <strong>${ attribute.attribute.names.name }: </strong>
+                                    <span>${ attribute.value.names.name }</span>
+                                </div>
+                            </div>
+
+                            <div class="item-small-prices text-muted">
+                                <template v-for="propertyGroup in transformedVariationProperties">
+                                    <div v-for="property in propertyGroup.properties">
+                                        <strong v-if="propertyGroup.name">${ propertyGroup.name }: </strong>
+                                        <span>${ property.names.name }</span>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="basket-item-container-right">
+                        <div>
+                            {{ AddToBasket.printVueComponent( "wishListItem.data", false, true, { ":has-price": "wishListItem.data | hasItemDefaultPrice" } ) }}
+                        </div>
+    
+                        <div class="price-box">
+                            <div class="item-total-price">
+                                ${ itemTotalPrice | currency(wishListItem.data.prices.default.currency) }
+                            </div>
+                
+                            <div class="item-remove-container">
+                                <!-- <div class="btn btn-sm item-remove-button" :class="{ 'disabled': true }" @click="deleteItem"> -->
+                                <div class="btn btn-sm item-remove-button" :class="{ 'disabled': true }">
+                                    <span>
+                                        {{ trans("Ceres::Template.basketDelete") }}
+                                        <i v-waiting-animation="true" class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <template v-if="false">
+                    <div class="item-additional-information-container">
+                        <div class="item-additional-information">
+                            <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.id">
+                                <div class="mt-3">
+                                    <strong>{{ trans("Ceres::Template.basketItemId") }}:</strong>
+                                    <span>${ basketItem.id }</span>
+                                </div>
+                            </template>
+
+                            <template v-if="isDataFieldVisible('basket.item.customNumber')">
+                                <div v-if="wishListItem.data.variation.number">
+                                    <strong>{{ trans("Ceres::Template.basketItemNumber") }}:</strong>
+                                    <span>${ wishListItem.data.variation.number }</span>
+                                </div>
+                            </template>
+
+                            <template v-if="isDataFieldVisible('basket.item.availability')">
+                                <div v-if="wishListItem.data.variation.availability.names.name">
+                                    <strong>{{ trans("Ceres::Template.basketAvailability") }}:</strong>
+                                    <span>${ wishListItem.data.variation.availability.names.name }</span>
+                                </div>
+                            </template>
+
+                            <template v-if="isDataFieldVisible('basket.item.description_long')">
+                                <p class="my-3" v-if="wishListItem.data.texts.description" v-html="wishListItem.data.texts.description"></p>
+                            </template>
+
+                            <template v-if="isDataFieldVisible('basket.item.description_short')">
+                                <p class="my-3" v-if="wishListItem.data.texts.shortDescription" v-html="wishListItem.data.texts.shortDescription"></p>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+        </div>
+        
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <article class="wish-list-item">
         <div class="row">
             <div class="col-3 col-sm-2 wish-list-container">
                 <div class="wish-list-image-container">
@@ -30,6 +167,5 @@
                 <div class="wish-list-remove" @click="removeItem({id: wishListItem.data.variation.id, wishListItem: wishListItem, index: index})"><i class="fa fa-trash" aria-hidden="true"></i></div>
             </div>
         </div>
-
-    </article>
+    </article> -->
 </script>
