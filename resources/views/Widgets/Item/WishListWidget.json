@@ -14,32 +14,32 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "spacing":"@include(spacing)",
+        "spacing":"@include(spacingMargin)",
         "itemDetailsData": {
             "type": "checkboxGroup",
-            "defaultValue": ["basket.item.availability"],
+            "defaultValue": ["wishListItem.variation.availability"],
             "options": {
-                "name": "Widget.basketDetailsDataLabel",
+                "name": "Widget.wishListItemDetailsDataLabel",
                 "checkboxValues": [
                     {
-                        "value": "basket.item.item_id",
-                        "caption": "Widget.basketDetailsDataItemId"
+                        "value": "wishListItem.item.id",
+                        "caption": "Widget.wishListItemDetailsDataItemId"
                     },
                     {
-                        "value": "basket.item.customNumber",
-                        "caption": "Widget.basketDetailsDataCustomNumber"
+                        "value": "wishListItem.variation.number",
+                        "caption": "Widget.wishListItemDetailsDataCustomNumber"
                     },
                     {
-                        "value": "basket.item.availability",
-                        "caption": "Widget.basketDetailsDataAvailability"
+                        "value": "wishListItem.variation.availability",
+                        "caption": "Widget.wishListItemDetailsDataAvailability"
                     },
                     {
-                        "value": "basket.item.description_long",
-                        "caption": "Widget.basketDetailsDataDescriptionLong"
+                        "value": "wishListItem.texts.description",
+                        "caption": "Widget.wishListItemDetailsDataDescriptionLong"
                     },
                     {
-                        "value": "basket.item.description_short",
-                        "caption": "Widget.basketDetailsDataDescriptionShort"
+                        "value": "wishListItem.texts.shortDescription",
+                        "caption": "Widget.wishListItemDetailsDataDescriptionShort"
                     }
                 ]
             }

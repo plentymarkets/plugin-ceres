@@ -17,7 +17,7 @@ export default {
         itemDetailsData:
         {
             type: Array,
-            default: () => [""]
+            default: () => ["wishListItem.variation.availability"]
         },
         wishListItem: Object
     },

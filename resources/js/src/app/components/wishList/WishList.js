@@ -27,7 +27,7 @@ Vue.component("wish-list", {
         itemDetailsData:
         {
             type: Array,
-            default: () => [""]
+            default: () => ["wishListItem.variation.availability"]
         }
     },
 

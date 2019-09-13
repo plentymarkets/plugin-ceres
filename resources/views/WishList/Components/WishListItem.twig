@@ -71,32 +71,32 @@
                 <template>
                     <div class="item-additional-information-container">
                         <div class="item-additional-information">
-                            <template v-if="isDataFieldVisible('basket.item.item_id')">
+                            <template v-if="isDataFieldVisible('wishListItem.item.id')">
                                 <div class="mt-3">
                                     <strong>{{ trans("Ceres::Template.basketItemId") }}:</strong>
                                     <span>${ wishListItem.item.id }</span>
                                 </div>
                             </template>
 
-                            <template v-if="isDataFieldVisible('basket.item.customNumber')">
+                            <template v-if="isDataFieldVisible('wishListItem.variation.number')">
                                 <div v-if="wishListItem.variation.number">
                                     <strong>{{ trans("Ceres::Template.basketItemNumber") }}:</strong>
                                     <span>${ wishListItem.variation.number }</span>
                                 </div>
                             </template>
 
-                            <template v-if="isDataFieldVisible('basket.item.availability')">
+                            <template v-if="isDataFieldVisible('wishListItem.variation.availability')">
                                 <div v-if="wishListItem.variation.availability.names.name">
                                     <strong>{{ trans("Ceres::Template.basketAvailability") }}:</strong>
                                     <span class="wish-list-availability" :class="'availability_' + wishListItem.variation.availability.id">${ wishListItem.variation.availability.names.name }</span>
                                 </div>
                             </template>
 
-                            <template v-if="isDataFieldVisible('basket.item.description_long')">
+                            <template v-if="isDataFieldVisible('wishListItem.texts.description')">
                                 <p class="my-3" v-if="wishListItem.texts.description" v-html="wishListItem.texts.description"></p>
                             </template>
 
-                            <template v-if="isDataFieldVisible('basket.item.description_short')">
+                            <template v-if="isDataFieldVisible('wishListItem.texts.shortDescription')">
                                 <p class="my-3" v-if="wishListItem.texts.shortDescription" v-html="wishListItem.texts.shortDescription"></p>
                             </template>
                         </div>
