@@ -21,8 +21,6 @@ use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
 use Ceres\Wizard\ShopWizard\ShopWizard;
 use IO\Extensions\Functions\Partial;
-use IO\Helper\CategoryKey;
-use IO\Helper\CategoryMap;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
@@ -56,7 +54,6 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.my-account'                    => ['MyAccount.MyAccountView',                GlobalContext::class],
         'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            CategoryContext::class],
         'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],
-        'tpl.confirmation.category'         => ['Checkout.OrderConfirmationCategory',     OrderConfirmationContext::class],
         'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],
         'tpl.register'                      => ['Customer.Register',                      GlobalContext::class],
         'tpl.guest'                         => ['Customer.Guest',                         GlobalContext::class],
@@ -136,7 +133,8 @@ class TemplateServiceProvider extends ServiceProvider
     {
         $templateEvent  = $templateContainer->getTemplateKey();
         $template = substr($templateEvent, 4);
-        if ( RouteConfig::getCategoryId( $template ) > 0 )
+        if ( RouteConfig::getCategoryId( $template ) > 0
+            && array_key_exists($templateEvent.'.category', self::$templateKeyToViewMap))
         {
             $templateEvent .= '.category';
         }
