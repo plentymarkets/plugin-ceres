@@ -64,6 +64,7 @@ Vue.component("wish-list", {
                     TranslationService.translate("Ceres::Template.wishListRemoved")
                 ));
         },
+
         ...mapActions([
             "initWishListItems",
             "removeWishListItem"

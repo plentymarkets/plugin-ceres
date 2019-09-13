@@ -46,11 +46,6 @@ export default {
             return this.wishListItem.data.prices.default.basePrice;
         },
 
-        itemTotalPrice()
-        {
-            return this.wishListItem.data.price;
-        },
-
         transformedVariationProperties()
         {
             return transformVariationProperties(this.wishListItem.data, [], "displayInOrderProcess");

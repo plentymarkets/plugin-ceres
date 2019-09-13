@@ -53,18 +53,14 @@
                     </div>
     
                     <div class="basket-item-container-right">
-                        <div>
+                        <div class="add-to-basket-container">
                             {{ AddToBasket.printVueComponent( "wishListItem.data", false, true, { ":has-price": "wishListItem.data | hasItemDefaultPrice" } ) }}
                         </div>
     
                         <div class="price-box">
-                            <div class="item-total-price">
-                                ${ itemTotalPrice | currency(wishListItem.data.prices.default.currency) }
-                            </div>
                 
                             <div class="item-remove-container">
-                                <!-- <div class="btn btn-sm item-remove-button" :class="{ 'disabled': true }" @click="deleteItem"> -->
-                                <div class="btn btn-sm item-remove-button" :class="{ 'disabled': true }">
+                                <div class="btn btn-sm item-remove-button" :class="{ 'disabled': false }" @click="$emit('remove-item', 'fick dich')">
                                     <span>
                                         {{ trans("Ceres::Template.basketDelete") }}
                                         <i v-waiting-animation="true" class="fa fa-trash-o" aria-hidden="true"></i>
