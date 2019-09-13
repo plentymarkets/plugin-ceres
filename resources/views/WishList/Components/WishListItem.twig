@@ -52,14 +52,14 @@
                         </div>
                     </div>
     
-                    <div class="basket-item-container-right">
+                    <div class="basket-item-container-right d-block">
                         <div class="add-to-basket-container">
                             {{ AddToBasket.printVueComponent( "wishListItem.data", false, false, { ":has-price": "wishListItem.data | hasItemDefaultPrice" } ) }}
                         </div>
     
                         <div class="price-box">
                 
-                            <div class="item-remove-container">
+                            <div class="item-remove-container text-center">
                                 <div class="btn btn-sm item-remove-button" :class="{ 'disabled': false }" @click="$emit('remove-item', 'fick dich')">
                                     <span>
                                         {{ trans("Ceres::Template.basketDelete") }}
