@@ -1,7 +1,12 @@
+{{ component("Ceres::WishList.Components.WishListItem" ) }}
+
 <script type="x/template" id="vue-wish-list">
 
     <div>
-        {% include "Ceres::WishList.Components.WishListItem" %}
+        <transition-group name="wish-list-item-transition" tag="div">
+            <wish-list-item v-for="(wishListItem, index) in wishListItems" :key="wishListItem.id" :wish-list-item="wishListItem" :id="'article_' + index"></wish-list-item>
+        </transition-group>
+
 
         <transition name="wish-list-no-items-transition">
             <p class="h4 text-muted wish-list-no-items-label" v-if="!wishListIds[0]">{{ trans("Ceres::Template.wishListNoItems") }}</p>

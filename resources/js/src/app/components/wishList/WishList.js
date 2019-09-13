@@ -3,8 +3,13 @@ const NotificationService = require("../../services/NotificationService");
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState, mapActions } from "vuex";
+import WishListItem from "./WishListItem";
 
 Vue.component("wish-list", {
+    components:
+    {
+        WishListItem
+    },
 
     props:
     {

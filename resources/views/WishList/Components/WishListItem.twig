@@ -1,6 +1,5 @@
-{{ component( "Ceres::Item.Components.QuantityInput" ) }}
-<transition-group name="wish-list-item-transition" tag="div">
-    <article v-for="(wishListItem, index) in wishListItems" :key="wishListItem.id" class="wish-list-item" :id="'article_' + index ">
+<script type="x/template" id="vue-wish-list-item">
+    <article class="wish-list-item">
 
         <div class="row">
             <div class="col-3 col-sm-2 wish-list-container">
@@ -33,4 +32,4 @@
         </div>
 
     </article>
-</transition-group>
+</script>
