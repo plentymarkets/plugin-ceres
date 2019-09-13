@@ -3,38 +3,28 @@
 
 {% set customClass = widget.settings.customClass.mobile %}
 {% set appearance = widget.settings.appearance.mobile %}
-{% set emailFolder = widget.settings.emailFolder.mobile %}
 {% set hintText = widget.settings.text.mobile %}
 
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
+{{ Twig.component( "Ceres::Newsletter.Components.NewsletterUnsubscribeInput" ) }}
+
 <div class="widget widget-newsletter-unsubscribe widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <form class="row widget-inner" action="/newsletter/unsubscribe{% if urls.appendTrailingSlash %}/{% endif %}" method="POST">
-        <div class="col-12">
-            <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
-                {% if hintText is empty %}
-                    <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.newsletterOptOutTitle")) }}</h3>
-                    <div><em>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.newsletterOptOutInfoText")) }}</em></div>
-                {% else %}
-                    {{ hintText | raw }}
-                {% endif %}
+    <div class="widget-inner">
+        <div class="row">
+            <div class="col-12" {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+            {% if hintText is empty %}
+                <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.newsletterOptOutTitle")) }}</h3>
+                <div><em>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.newsletterOptOutInfoText")) }}</em></div>
+            {% else %}
+                {{ hintText | raw }}
+            {% endif %}
             </div>
-
-            <div class="input-unit mt-3">
-                <label for="email-input-id">{{ trans("Ceres::Template.newsletterEmail") }}</label>
-                <input type="email" name="email" autocomplete="email" class="form-control" id="email-input-id">
-                <input type="hidden" value="{{ emailFolder }}">
-            </div>
-
-            <span class="input-group-btn">
-                <button type="submit" v-waiting-animation-infinite class="btn btn-{{ appearance }} float-right btn-medium btn-xs-max-width">
-                    <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                    <span>{{ trans("Ceres::Template.newsletterUnsubscribeButtonLabel") }}</span>
-                </button>
-            </span>
         </div>
-    </form>
+
+        <newsletter-unsubscribe-input></newsletter-unsubscribe-input>
+    </div>
 </div>

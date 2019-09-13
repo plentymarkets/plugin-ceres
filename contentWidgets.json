@@ -3027,15 +3027,6 @@
                     ]
                 }
             },
-            "emailFolder": {
-                "type": "number",
-                "required": true,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.newsletterUnsubscribeEmailFolderLabel",
-                    "tooltipText": "Widget.newsletterUnsubscribeEmailFolderTooltip"
-                }
-            },
             "spacing": {
                 "type": "vertical",
                 "children": {
