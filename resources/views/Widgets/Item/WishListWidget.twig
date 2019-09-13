@@ -10,8 +10,9 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{% set appearance = widget.settings.appearance.mobile | default("primary") %}
-{% set buttonSize = widget.settings.buttonSize.mobile %}
+{% set appearance      = widget.settings.appearance.mobile | default("primary") %}
+{% set buttonSize      = widget.settings.buttonSize.mobile %}
+{% set itemDetailsData = widget.settings.itemDetailsData.mobile | default(["basket.item.availability"]) %}
 
 {{ Twig.set("wishListIds", Twig.call("services.wishList.getItemWishList")) }}
 
@@ -19,7 +20,10 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
 
-        <wish-list :init-ids="{{ Twig.print("wishListIds | json_encode") }}"></wish-list>
+        <wish-list
+            :init-ids="{{ Twig.print("wishListIds | json_encode") }}"
+            :item-details-data="{{ itemDetailsData | json_encode }}">
+        </wish-list>
 
     </div>
 </div>

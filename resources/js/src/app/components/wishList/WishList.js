@@ -23,6 +23,11 @@ Vue.component("wish-list", {
         {
             type: Array,
             default: () => []
+        },
+        itemDetailsData:
+        {
+            type: Array,
+            default: () => [""]
         }
     },
 

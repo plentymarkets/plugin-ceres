@@ -14,6 +14,11 @@ export default {
             type: String,
             default: "urlMiddle"
         },
+        itemDetailsData:
+        {
+            type: Array,
+            default: () => [""]
+        },
         wishListItem: Object
     },
 
@@ -21,34 +26,42 @@ export default {
     {
         image()
         {
-            const itemImages = this.$options.filters.itemImages(this.wishListItem.data.images, this.imageAccessor);
+            const itemImages = this.$options.filters.itemImages(this.wishListItem.images, this.imageAccessor);
 
             return this.$options.filters.itemImage(itemImages);
         },
 
         unitPrice()
         {
-            if (!isNullOrUndefined(this.wishListItem.data.prices.specialOffer))
+            if (!isNullOrUndefined(this.wishListItem.prices.specialOffer))
             {
-                return this.wishListItem.data.prices.specialOffer.unitPrice.value;
+                return this.wishListItem.prices.specialOffer.unitPrice.value;
             }
 
-            return this.wishListItem.data.prices.default.unitPrice.value;
+            return this.wishListItem.prices.default.unitPrice.value;
         },
 
         basePrice()
         {
-            if (!isNullOrUndefined(this.wishListItem.data.prices.specialOffer))
+            if (!isNullOrUndefined(this.wishListItem.prices.specialOffer))
             {
-                return this.wishListItem.data.prices.specialOffer.basePrice;
+                return this.wishListItem.prices.specialOffer.basePrice;
             }
 
-            return this.wishListItem.data.prices.default.basePrice;
+            return this.wishListItem.prices.default.basePrice;
         },
 
         transformedVariationProperties()
         {
-            return transformVariationProperties(this.wishListItem.data, [], "displayInOrderProcess");
+            return transformVariationProperties(this.wishListItem, [], "showInItemListing");
+        }
+    },
+
+    methods:
+    {
+        isDataFieldVisible(value)
+        {
+            return this.itemDetailsData.includes(value);
         }
     }
 };

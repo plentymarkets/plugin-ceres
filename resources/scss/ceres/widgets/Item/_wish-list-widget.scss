@@ -1,0 +1,9 @@
+.widget-wish-list {
+    .category-list-view-port {
+        button {
+            white-space: nowrap;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+    }
+}
