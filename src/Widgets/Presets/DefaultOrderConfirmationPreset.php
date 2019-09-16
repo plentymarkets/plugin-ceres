@@ -164,9 +164,6 @@ class DefaultOrderConfirmationPreset implements ContentPreset
                                         ->withSetting("block", "true")
                                         ->withSetting("text", $this->translator->trans("Ceres::Template.orderConfirmationHomepage"));
 
-        $homepageLinkWidget->withSetting("url.type", "external")
-                            ->withSetting("url.value", $this->shopUrls->home);
-
         if ( in_array(RouteConfig::HOME, RouteConfig::getEnabledRoutes()) && RouteConfig::getCategoryId(RouteConfig::HOME) > 0 )
         {
             $homepageLinkWidget->withSetting("url.type", "category")

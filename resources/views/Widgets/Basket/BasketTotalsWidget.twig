@@ -11,7 +11,7 @@
 {{ Twig.component("Ceres::Basket.Components.BasketTotals") }}
 
 {% if visibleFields | length > 0 %}
-<div class="{% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+<div class="widget widget-basket-totals{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBasketTotals"])) }}
 
