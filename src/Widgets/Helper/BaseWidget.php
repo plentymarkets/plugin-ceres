@@ -50,7 +50,8 @@ class BaseWidget implements Widget
 
         try
         {
-            return $twig->renderString($template);
+            $previewData = $this->getPreviewData($widgetSettings);
+            return $twig->renderString($template, $previewData);
         }
         catch(\Exception $e)
         {
@@ -122,6 +123,17 @@ class BaseWidget implements Widget
      * @return array
      */
     protected function getTemplateData($widgetSettings, $isPreview)
+    {
+        return [];
+    }
+
+    /**
+     * Get additional data to be passed to the template while rendering the preview markup
+     *
+     * @param $widgetSettings
+     * @return array
+     */
+    protected function getPreviewData($widgetSettings)
     {
         return [];
     }

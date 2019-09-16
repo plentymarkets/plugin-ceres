@@ -135,7 +135,8 @@ class TemplateServiceProvider extends ServiceProvider
     {
         $templateEvent  = $templateContainer->getTemplateKey();
         $template = substr($templateEvent, 4);
-        if ( RouteConfig::getCategoryId( $template ) > 0 )
+        if ( RouteConfig::getCategoryId( $template ) > 0
+            && array_key_exists($templateEvent.'.category', self::$templateKeyToViewMap))
         {
             $templateEvent .= '.category';
         }

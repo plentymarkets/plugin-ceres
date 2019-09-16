@@ -149,11 +149,10 @@
                     </div>
 
                     {% if "basket.item.item_id" in basketDetailsData or "basket.item.availability" in basketDetailsData or "basket.item.customNumber" in basketDetailsData or "basket.item.description_long" in basketDetailsData or "basket.item.description_short" in basketDetailsData %}
-                        <label v-if="size === 'large'" @click="showMoreInformation = !showMoreInformation" class="basket-expand" :class="{ 'opened': showMoreInformation }" data-show-more="{{ trans("Ceres::Template.basketShowMore") }}" data-show-less="{{ trans("Ceres::Template.basketShowLess") }}"></label>
+                        <label v-if="size === 'large'" @click="showMoreInformation = !showMoreInformation" class="btn-collapse" :class="{ 'opened': showMoreInformation }" data-show-more="{{ trans("Ceres::Template.basketShowMore") }}" data-show-less="{{ trans("Ceres::Template.basketShowLess") }}"></label>
                     {% endif %}
                 </div>
             </div>
-
         </div>
         
         {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
