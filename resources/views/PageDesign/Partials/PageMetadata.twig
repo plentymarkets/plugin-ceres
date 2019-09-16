@@ -1,4 +1,7 @@
-{% set details = category.details[0] %}
+{% set details = null %}
+{% if category is defined and category is not null %}
+    {% set details = category.details[0] %}
+{% endif %}
 
 {% set robots = '' %}
 {% set description = '' %}
@@ -8,31 +11,31 @@
 
 {% if block('robots') is defined %}
     {% set robots = block('robots') | default('NOINDEX, NOFOLLOW') %}
-{% elseif category is defined and category is not null %}
+{% elseif details is not null %}
     {% set robots = details.metaRobots | replace({'_': ', '}) %}
 {% endif %}
 
 {% if block('description') is defined %}
     {% set description = block('description') %}
-{% elseif category is defined and category is not null %}
+{% elseif details is not null %}
     {% set description = details.metaDescription %}
 {% endif %}
 
 {% if block('keywords') is defined %}
     {% set keywords = block('keywords') %}
-{% elseif category is defined and category is not null %}
+{% elseif details is not null %}
     {% set keywords = details.metaKeywords %}
 {% endif %}
 
 {% if block('image') is defined %}
     {% set image = block('image') | default(ceresConfig.header.companyLogo) %}
-{% elseif category is defined and category is not null %}
+{% elseif details is not null %}
     {% set image = details.imagePath | default(ceresConfig.header.companyLogo) %}
 {% endif %}
 
 {% if block('title') is defined %}
     {% set title = block('title') %}
-{% elseif category is defined and category is not null %}
+{% elseif details is not null %}
     {% set title = details.metaTitle | default(details.name) %}
 {% endif %}
 
