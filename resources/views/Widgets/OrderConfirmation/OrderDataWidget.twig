@@ -30,6 +30,7 @@
     "country"
 ]) %}
 
+{{ Twig.if("data.order is defined and data.order is not null") }}
 <div class="widget widget-order-data widget-{{ appearance }} border
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% else %} px-4 py-3{% endif %}
@@ -152,3 +153,4 @@
             
     </div>
 </div>
+{{ Twig.endif() }}

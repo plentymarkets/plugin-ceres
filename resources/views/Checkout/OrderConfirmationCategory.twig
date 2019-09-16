@@ -12,7 +12,7 @@
 
     {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
 
-    {% set shopBuilderTemplate = shop_builder_category_template(category.id, "orderconfirmation") %}
+    {% set shopBuilderTemplate = shop_builder_category_template(category.id, "content") %}
 
     {% set overrideConfirmation = LayoutContainer.show("Ceres::OrderConfirmation.Override") %}
     {% set addContentAfterOrderDetailsRow = LayoutContainer.show("Ceres::OrderConfirmation.AddContentAfterOrderDetailsRow") %}
