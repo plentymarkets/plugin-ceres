@@ -82,7 +82,9 @@ class TemplateServiceProvider extends ServiceProvider
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {
         //register shopCeres assistant
-        pluginApp(WizardContainerContract::class)->register('shopCeres-assistant', ShopWizard::class);
+        /** @var WizardContainerContract $wizardContainer */
+        $wizardContainer = pluginApp(WizardContainerContract::class);
+        $wizardContainer->register('shopCeres-assistant', ShopWizard::class);
 
         // Register Twig String Loader to use function: template_from_string
         $twig->addExtension('Twig_Extension_StringLoader');

@@ -1,9 +1,20 @@
 // =========================
+// Polyfill's
+// =========================
+
+import "custom-event-polyfill";
+
+// =========================
 // Framework's
 // =========================
 
 import Vue from "vue";
+import Vuex from "vuex";
+
 window.Vue = Vue;
+window.Vuex = Vuex;
+
+Vue.use(require("vue-script2"));
 
 import jQuery from "jquery";
 window.jQuery = jQuery;

@@ -62,6 +62,7 @@
                                     <div>
                                         {% if orderData.order.deliveryAddress.address1 == 'PACKSTATION' or orderData.order.deliveryAddress.address1 == 'POSTFILIALE' %}
                                             {{ trans("Ceres::Template.addressPostNummer") }}
+                                            {{ orderData.order.deliveryAddress | addressOptionType(6) }}
                                         {% endif %}
                                         
                                         {{ orderData.order.deliveryAddress.address3 }}

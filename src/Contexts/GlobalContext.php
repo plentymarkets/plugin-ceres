@@ -4,6 +4,7 @@ namespace Ceres\Contexts;
 
 use Ceres\Config\CeresConfig;
 use Ceres\Helper\BuildHash;
+use IO\Extensions\Constants\ShopUrls;
 use IO\Helper\ContextInterface;
 use IO\Services\BasketService;
 use IO\Services\CategoryService;
@@ -12,7 +13,6 @@ use IO\Services\CustomerService;
 use IO\Services\NotificationService;
 use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
-use IO\Services\UrlService;
 use IO\Services\WebstoreConfigurationService;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
 use Plenty\Plugin\Http\Request;
@@ -39,6 +39,11 @@ class GlobalContext implements ContextInterface
     public $webstoreConfig;
     public $currencyData;
     public $showNetPrices;
+
+    /**
+     * @deprecated since 4.3
+     * Use IO\Extensions\Constants\ShopUrls::$home instead
+     */
     public $homepageURL;
     public $splitItemBundle;
     public $templateEvent;
@@ -74,13 +79,20 @@ class GlobalContext implements ContextInterface
         /** @var ShopBuilderRequest $shopBuilderRequest */
         $shopBuilderRequest = pluginApp(ShopBuilderRequest::class);
 
+        /** @var NotificationService $notificationService */
+        $notificationService = pluginApp(NotificationService::class);
+
+        /** @var ShopUrls $shopUrls */
+        $shopUrls = pluginApp(ShopUrls::class);
+
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
 
         $this->request = pluginApp(Request::class);
 
         $this->lang = $sessionStorageService->getLang();
-        $this->homepageURL = pluginApp(UrlService::class)->getHomepageURL();
+
+        $this->homepageURL = $shopUrls->home;
         $this->metaLang = 'de';
         if($this->lang == 'en')
         {
@@ -95,7 +107,7 @@ class GlobalContext implements ContextInterface
         }
 
         $this->categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6, $customerService->getContactClassId());
-        $this->notifications = pluginApp(NotificationService::class)->getNotifications();
+        $this->notifications = $notificationService->getNotifications();
 
         $this->basket = $basketService->getBasketForTemplate();
 

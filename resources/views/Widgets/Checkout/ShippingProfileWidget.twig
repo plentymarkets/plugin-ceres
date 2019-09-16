@@ -33,7 +33,7 @@
             </shipping-profile-select>
         </div>
     {{ Twig.else() }}
-        {{ Twig.print("overridePaymentList") }}
+        {{ Twig.print("overrideShippingProfiles") }}
     {{ Twig.endif() }}
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterShippingProfileList"])) }}
