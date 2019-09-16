@@ -162,10 +162,6 @@
 					color: $danger;
 					border: none;
 
-					> span {
-						white-space: nowrap;
-					}
-
 					&.disabled {
 						cursor: not-allowed;
 					}

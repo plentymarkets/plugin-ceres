@@ -14,7 +14,6 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "spacing":"@include(spacingMargin)",
         "itemDetailsData": {
             "type": "checkboxGroup",
             "defaultValue": ["wishListItem.variation.availability"],
@@ -43,6 +42,7 @@
                     }
                 ]
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

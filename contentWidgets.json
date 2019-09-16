@@ -6742,6 +6742,122 @@
         }
     },
     {
+        "identifier": "Ceres::WishListWidget",
+        "label": "Widget.wishListLabel",
+        "previewImageURL": "/images/widgets/wish-list.svg",
+        "type": "static",
+        "categories": [
+            "item"
+        ],
+        "position": 700,
+        "widgetClass": "Ceres\\Widgets\\Item\\WishListWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "itemDetailsData": {
+                "type": "checkboxGroup",
+                "defaultValue": [
+                    "wishListItem.variation.availability"
+                ],
+                "options": {
+                    "name": "Widget.wishListItemDetailsDataLabel",
+                    "checkboxValues": [
+                        {
+                            "value": "wishListItem.item.id",
+                            "caption": "Widget.wishListItemDetailsDataItemId"
+                        },
+                        {
+                            "value": "wishListItem.variation.number",
+                            "caption": "Widget.wishListItemDetailsDataCustomNumber"
+                        },
+                        {
+                            "value": "wishListItem.variation.availability",
+                            "caption": "Widget.wishListItemDetailsDataAvailability"
+                        },
+                        {
+                            "value": "wishListItem.texts.description",
+                            "caption": "Widget.wishListItemDetailsDataDescriptionLong"
+                        },
+                        {
+                            "value": "wishListItem.texts.shortDescription",
+                            "caption": "Widget.wishListItemDetailsDataDescriptionShort"
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::LegalTextsWidget",
         "label": "Widget.legalTextsLabel",
         "previewImageURL": "/images/widgets/legal-texts.svg",

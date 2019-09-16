@@ -88,7 +88,7 @@
                             <template v-if="isDataFieldVisible('wishListItem.variation.availability')">
                                 <div v-if="wishListItem.variation.availability.names.name">
                                     <strong>{{ trans("Ceres::Template.wishListAvailability") }}:</strong>
-                                    <span class="wish-list-availability" :class="'availability_' + wishListItem.variation.availability.id">${ wishListItem.variation.availability.names.name }</span>
+                                    <span class="badge" :class="'availability_' + wishListItem.variation.availability.id">${ wishListItem.variation.availability.names.name }</span>
                                 </div>
                             </template>
 
