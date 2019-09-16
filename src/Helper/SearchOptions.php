@@ -106,7 +106,7 @@ class SearchOptions
         return $instance;
     }
 
-    public static function validateItemListOptions($itemListOptions, $ceresConfig, $scope)
+    public static function validateItemListOptions($itemListOptions, $scope)
     {
         // Get all sorting strings
         $sortingStrings = self::get($scope);
@@ -120,6 +120,7 @@ class SearchOptions
         }
 
         if( (int)$itemListOptions['itemsPerPage'] <= 0 ) {
+            $ceresConfig = pluginApp(CeresConfig::class);
             $defaultItemsPerPage = $ceresConfig->pagination->rowsPerPage[0] * $ceresConfig->pagination->columnsPerPage;
             $itemListOptions['itemsPerPage'] = $defaultItemsPerPage;
         }

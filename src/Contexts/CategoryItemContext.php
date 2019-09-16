@@ -25,7 +25,7 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
             'priceMax'      => $this->request->get('priceMax', 0)
         ];
 
-        $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, $this->ceresConfig, SearchOptions::SCOPE_CATEGORY);
+        $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, SearchOptions::SCOPE_CATEGORY);
 
         $this->initItemList(
             [
