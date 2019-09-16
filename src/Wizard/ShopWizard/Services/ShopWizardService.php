@@ -74,7 +74,7 @@ class ShopWizardService
         if (count($webstores)) {
             $pluginRepo = pluginApp(PluginRepositoryContract::class);
             foreach ($webstores as $webstore) {
-                if ($pluginRepo->isActiveInPluginSetByName("Ceres", $webstore['pluginSetId'])) {
+                if (!empty($webstore['pluginSetId']) && $pluginRepo->isActiveInPluginSetByName("Ceres", $webstore['pluginSetId'])) {
                     $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
 
                     $webstoresMapped[$key] = [
