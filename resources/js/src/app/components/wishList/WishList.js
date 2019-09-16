@@ -18,7 +18,6 @@ Vue.component("wish-list", {
             type: String,
             default: "#vue-wish-list"
         },
-
         initIds:
         {
             type: Array,
