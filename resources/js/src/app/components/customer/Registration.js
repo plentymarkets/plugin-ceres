@@ -18,7 +18,9 @@ Vue.component("registration", {
         guestMode: { type: Boolean, default: false },
         isSimpleRegistration: { type: Boolean, default: false },
         template: String,
-        backlink: String
+        backlink: String,
+        shownFields: Object,
+        requiredFields: Object
     },
 
     data()
