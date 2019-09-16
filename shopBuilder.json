@@ -378,6 +378,22 @@
                         "name": "Config.routingEnableRouteWishList"
                     }
                 },
+                "newsletterOptOutCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryNewsletterOptOut"
+                    }
+                },
+                "newsletterOptOutEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.newsletterOptOutCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteNewsletterOptOut"
+                    }
+                },
                 "pageNotFoundCategory": {
                     "type": "category",
                     "required": false,
