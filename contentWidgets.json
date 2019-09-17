@@ -4923,6 +4923,28 @@
         }
     },
     {
+        "identifier": "Ceres::PopperWidget",
+        "label": "Widget.popperLabel",
+        "previewImageURL": "/images/widgets/popper.svg",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
+        "position": 600,
+        "widgetClass": "Ceres\\Widgets\\Grid\\PopperWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::StickyContainerWidget",
         "label": "Widget.stickyContainerLabel",
         "previewImageURL": "/images/widgets/sticky-container.svg",
