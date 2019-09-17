@@ -45,7 +45,7 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.get("/rest/io/wishlist/items")
+                ApiService.get("/rest/io/itemWishList")
                     .done(response =>
                     {
                         commit("setWishListItems", response.documents);
