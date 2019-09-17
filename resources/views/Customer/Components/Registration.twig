@@ -14,9 +14,9 @@
 %}
 
 <script type="x/template" id="vue-registration">
-    <form class="w-100" autocomplete="on" @submit.prevent="validateRegistration()">
+    <form class="w-100" autocomplete="on" @submit.prevent="validateRegistration()" ref="registrationForm">
         <div class="modal-body">
-            <div class="row" :id="'registration' + _uid">
+            <div class="row">
                 <div class="col-sm-12">
                     <div class="input-unit" data-validate="mail">
                         {% set uid_mail = uid() %}
@@ -89,5 +89,9 @@
                 {{ trans("Ceres::Template.regRegister") }}
             </button>
         </div>
+
+        {% if ceresConfig.global.googleRecaptchaApiKey | trim is not empty %}
+            <recaptcha></recaptcha>
+        {% endif %}
     </form>
 </script>

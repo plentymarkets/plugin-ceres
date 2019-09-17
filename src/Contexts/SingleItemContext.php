@@ -2,10 +2,10 @@
 
 namespace Ceres\Contexts;
 
+use IO\Helper\Utils;
 use IO\Helper\ContextInterface;
 use IO\Services\CategoryService;
 use IO\Services\CustomerService;
-use Plenty\Plugin\Application;
 use Plenty\Plugin\ConfigRepository;
 
 
@@ -40,7 +40,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->customerShowNetPrices = $customerService->showNetPrices();
 
         $defaultCategoryId = 0;
-        $plentyId = (int) pluginApp(Application::class)->getPlentyId();
+        $plentyId = Utils::getPlentyId();
         foreach($this->item['documents'][0]['data']['defaultCategories'] as $category)
         {
             if ($category['plentyId'] == $plentyId)

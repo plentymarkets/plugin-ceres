@@ -8,18 +8,18 @@
     "widgetClass": "Ceres\\Widgets\\Item\\ItemPriceWidget",
     "settings": {
         "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
         "showCrossPrice": {
             "type": "checkbox",
             "defaultValue": true,
             "options": {
                 "name": "Widget.showCrossPriceLabel"
             }
-        },
-        "appearance": {
-            "type": "select",
-            "required": true,
-            "defaultValue": "none",
-            "options": "@include(optionalAppearance)"
         },
         "spacing":"@include(spacingMargin)"
     }

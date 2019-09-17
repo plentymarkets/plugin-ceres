@@ -1,0 +1,96 @@
+{
+    "identifier": "Ceres::OrderDataWidget",
+    "label": "Widget.orderDataLabel",
+    "previewImageURL": "/images/widgets/order-data.svg",
+    "type": "default",
+    "categories": ["orderconfirmation"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderDataWidget",
+    "settings": {
+        "customClass": "@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "addressFields": {
+            "type": "checkboxGroup",
+            "defaultValue": [
+                "title",
+                "contactPerson",
+                "name1",
+                "name2",
+                "name3",
+                "name4",
+                "address1",
+                "address2",
+                "address3",
+                "address4",
+                "postalCode",
+                "town",
+                "country"
+            ],
+            "options": {
+                "name": "Widget.orderDataAddressFields",
+                "checkboxValues": [
+                    {
+                        "value": "title",
+                        "caption": "Widget.addressFieldTitle"
+                    },
+                    {
+                        "value": "contactPerson",
+                        "caption": "Widget.addressFieldContactPerson"
+                    },
+                    {
+                        "value": "name1",
+                        "caption": "Widget.addressFieldName1"
+                    },
+                    {
+                        "value": "name2",
+                        "caption": "Widget.addressFieldName2"
+                    },
+                    {
+                        "value": "name3",
+                        "caption": "Widget.addressFieldName3"
+                    },
+                    {
+                        "value": "name4",
+                        "caption": "Widget.addressFieldName4"
+                    },
+                    {
+                        "value": "address1",
+                        "caption": "Widget.addressFieldAddress1"
+                    },
+                    {
+                        "value": "address2",
+                        "caption": "Widget.addressFieldAddress2"
+                    },
+                    {
+                        "value": "address3",
+                        "caption": "Widget.addressFieldAddress3"
+                    },
+                    {
+                        "value": "postalCode",
+                        "caption": "Widget.addressFieldPostalCode"
+                    },
+                    {
+                        "value": "town",
+                        "caption": "Widget.addressFieldTown"
+                    },
+                    {
+                        "value": "country",
+                        "caption": "Widget.addressFieldCountry"
+                    }
+                ]
+            }
+        },
+        "showCustomerId": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.orderDataShowCustomerId"
+            }
+        },
+        "spacing": "@include(spacing)"
+    }
+}
