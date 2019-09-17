@@ -88,6 +88,10 @@
             {
                 "label": "Widget.presetOrderConfirmationDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
+            },
+            {
+                "label": "Widget.presetWishList",
+                "presetClass": "Ceres\\Widgets\\Presets\\WishListPreset"
             }
         ],
         "checkout": [
