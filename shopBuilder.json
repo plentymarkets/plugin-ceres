@@ -80,6 +80,10 @@
             {
                 "label": "Widget.presetChangeMailDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultChangeMailPreset"
+            },
+            {
+                "label": "Widget.presetNewsletterOptOut",
+                "presetClass": "Ceres\\Widgets\\Presets\\NewsletterOptOutPreset"
             }
         ],
         "checkout": [
