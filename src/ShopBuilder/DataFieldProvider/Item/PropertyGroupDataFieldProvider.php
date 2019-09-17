@@ -2,6 +2,7 @@
 
 namespace Ceres\ShopBuilder\DataFieldProvider\Item;
 
+use IO\Helper\Utils;
 use IO\Services\SessionStorageService;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Property\Contracts\PropertyGroupRepositoryContract;
@@ -74,26 +75,25 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
     
         $properties = [];
     
-        $filters = ['typeIdentifier' => 'item', 'lang' => pluginApp(SessionStorageService::class)->getLang()];
+        $filters = ['typeIdentifier' => 'item', 'lang' => Utils::getLang()];
         if(!is_null($propertyGroupId))
         {
             $filters['group'] = $propertyGroupId;
         }
-    
-        $propertyResult = $authHelper->processUnguarded(function() use ($propertyGroupId, $filters) {
+
+        $propertyList = $authHelper->processUnguarded(function() use ($propertyGroupId, $filters) {
             /** @var PropertyRepositoryContract $propertyRepo */
             $propertyRepo = pluginApp(PropertyRepositoryContract::class);
-            return $propertyRepo->listProperties(1, 200, ['names', 'options'], $filters, 1, ['id' => 'asc']);
+            return $propertyRepo->listProperties(1, 200, ['names', 'options'], $filters, 0, ['id' => 'asc']);
         });
     
-        if(!is_null($propertyResult))
+        if(!is_null($propertyList))
         {
             /** @var Application $app */
             $app = pluginApp(Application::class);
             $plentyId = $app->getPlentyId();
             $referrer = 1;
         
-            $propertyList = $propertyResult->getResult();
             if(is_null($propertyGroupId))
             {
                 $propertyList = $propertyList->filter(function($property) {

@@ -54,16 +54,15 @@
                                 </div>
                             </div>
 
-                            {% if services.template.isCurrentTemplate("tpl.checkout") %}
                                 <div class="item-small-prices text-muted">
                                     <template v-for="propertyGroup in transformedVariationProperties">
                                         <div v-for="property in propertyGroup.properties">
                                             <strong v-if="propertyGroup.name">${ propertyGroup.name }: </strong>
                                             <span>${ property.names.name }</span>
+                                            <span v-html="property.values.value"></span>
                                         </div>
                                     </template>
                                 </div>
-                            {% endif %}
                         </div>
                     </div>
     
