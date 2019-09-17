@@ -3,10 +3,11 @@
 namespace Ceres\Widgets\MyAccount;
 
 use Ceres\Widgets\Helper\BaseWidget;
+use IO\Helper\Utils;
 use IO\Services\SessionStorageService;
 use Plenty\Modules\Authorization\Services\AuthHelper;
-use Plenty\Modules\Order\Report\KPIs\OrderStatus;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
+use Plenty\Modules\Order\Status\Models\OrderStatus;
 
 class OrderHistoryWidget extends BaseWidget
 {
@@ -54,7 +55,9 @@ class OrderHistoryWidget extends BaseWidget
             /** @var AuthHelper $authHelper */
             $authHelper = pluginApp(AuthHelper::class);
             $statuses = $authHelper->processUnguarded(function() {
-                return pluginApp(OrderStatusRepositoryContract::class)->all();
+                /** @var OrderStatusRepositoryContract $orderStatusRepo */
+                $orderStatusRepo = pluginApp(OrderStatusRepositoryContract::class);
+                return $orderStatusRepo->all();
             });
 
             /** @var OrderStatus $status */
@@ -65,7 +68,7 @@ class OrderHistoryWidget extends BaseWidget
                     $this->statuses[] = $status;
                 }
             }
-            $this->lang     = pluginApp(SessionStorageService::class)->getLang();
+            $this->lang = Utils::getLang();
         }
 
         $idx = rand(0, count($this->statuses) - 1);

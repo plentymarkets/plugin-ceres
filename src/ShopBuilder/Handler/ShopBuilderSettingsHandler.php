@@ -20,6 +20,9 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.loginEnableRoute'              => 'IO.routing.enabled_routes',
         'routing.registerCategory'              => 'IO.routing.category_register',
         'routing.registerEnableRoute'           => 'IO.routing.enabled_routes',
+        'routing.confirmationCategory'          => 'IO.routing.category_confirmation',
+        'routing.confirmationEnableRoute'       => 'IO.routing.enabled_routes',
+        'routing.confirmationGuestCategory'     => 'IO.routing.category_confirmation-guest',
         'routing.cancellationRightsCategory'    => 'IO.routing.category_cancellation-rights',
         'routing.cancellationRightsEnableRoute' => 'IO.routing.enabled_routes',
         'routing.cancellationFormCategory'      => 'IO.routing.category_cancellation-form',
@@ -51,6 +54,8 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.myAccountCategory'             => 'int',
         'routing.loginCategory'                 => 'int',
         'routing.registerCategory'              => 'int',
+        'routing.confirmationCategory'          => 'int',
+        'routing.confirmationGuestCategory'     => 'int',
         'routing.cancellationRightsCategory'    => 'int',
         'routing.cancellationFormCategory'      => 'int',
         'routing.legalDisclosureCategory'       => 'int',
@@ -102,9 +107,19 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         return in_array( RouteConfig::MY_ACCOUNT, RouteConfig::getEnabledRoutes());
     }
 
-    public function writeRouting_MyAccountEnableRoute($enableCheckoutRoute)
+    public function writeRouting_MyAccountEnableRoute($enableMyAccountRoute)
     {
-        return $this->setEnabledRoute(RouteConfig::MY_ACCOUNT, $enableCheckoutRoute);
+        return $this->setEnabledRoute(RouteConfig::MY_ACCOUNT, $enableMyAccountRoute);
+    }
+    
+    public function readRouting_ConfirmationEnableRoute()
+    {
+        return in_array( RouteConfig::CONFIRMATION, RouteConfig::getEnabledRoutes());
+    }
+    
+    public function writeRouting_ConfirmationEnableRoute($enableConfirmationRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::CONFIRMATION, $enableConfirmationRoute);
     }
     
     public function readRouting_LoginEnableRoute()

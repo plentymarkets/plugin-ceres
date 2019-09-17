@@ -21,8 +21,6 @@ use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
 use Ceres\Wizard\ShopWizard\ShopWizard;
 use IO\Extensions\Functions\Partial;
-use IO\Helper\CategoryKey;
-use IO\Helper\CategoryMap;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
@@ -84,7 +82,9 @@ class TemplateServiceProvider extends ServiceProvider
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {
         //register shopCeres assistant
-        pluginApp(WizardContainerContract::class)->register('shopCeres-assistant', ShopWizard::class);
+        /** @var WizardContainerContract $wizardContainer */
+        $wizardContainer = pluginApp(WizardContainerContract::class);
+        $wizardContainer->register('shopCeres-assistant', ShopWizard::class);
 
         // Register Twig String Loader to use function: template_from_string
         $twig->addExtension('Twig_Extension_StringLoader');
@@ -135,7 +135,8 @@ class TemplateServiceProvider extends ServiceProvider
     {
         $templateEvent  = $templateContainer->getTemplateKey();
         $template = substr($templateEvent, 4);
-        if ( RouteConfig::getCategoryId( $template ) > 0 )
+        if ( RouteConfig::getCategoryId( $template ) > 0
+            && array_key_exists($templateEvent.'.category', self::$templateKeyToViewMap))
         {
             $templateEvent .= '.category';
         }

@@ -1,5 +1,11 @@
 {% extends getPartial('page-design') %}
 
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title '' %}
+    {% endembed %}
+{% endblock %}
+
 {% block PageBody %}
 
     {% if ceresConfig.homepage.showShopBuilderContent and request.get('isContentBuilder') == 1 %}

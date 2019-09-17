@@ -16,12 +16,21 @@
         ]
     },
     "allowedTypes": {
+<<<<<<< HEAD
         "header":       ["header", "static", "structure", "default"],
         "footer":       ["footer", "static", "structure", "default"],
         "content":      ["static", "structure", "default"],
         "singleitem":   ["static", "structure", "default", "item"],
         "checkout":     ["static", "structure", "default", "checkout", "customer"],
         "myaccount":    ["static", "structure", "default", "myaccount", "customer"]
+=======
+        "header":            ["header", "static", "structure", "default"],
+        "footer":            ["footer", "static", "structure", "default"],
+        "content":           ["static", "structure", "default"],
+        "singleitem":        ["static", "structure", "default", "item"],
+        "checkout":          ["static", "structure", "default", "checkout", "customer", "basket"],
+        "myaccount":         ["static", "structure", "default", "myaccount", "customer", "basket"]
+>>>>>>> beta
     },
     "presets": {
         "header": [
@@ -70,6 +79,7 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
             },
             {
+<<<<<<< HEAD
                 "label": "Widget.presetPageNotFound",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset"
             },
@@ -84,6 +94,10 @@
             {
                 "label": "Widget.presetNewsletterUnsubscribe",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset"
+=======
+                "label": "Widget.presetOrderConfirmationDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
+>>>>>>> beta
             }
         ],
         "checkout": [
@@ -166,6 +180,11 @@
             "position": 1100
         },
         {
+            "key": "orderconfirmation",
+            "label": "Widget.categoryOrderConfirmation",
+            "position": 1200
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
             "position": 10000
@@ -242,11 +261,16 @@
                         "name": "Config.routingEnableRouteMyAccount"
                     }
                 },
+<<<<<<< HEAD
                 "loginCategory": {
+=======
+                "confirmationCategory": {
+>>>>>>> beta
                     "type": "category",
                     "required": false,
                     "defaultValue": null,
                     "options": {
+<<<<<<< HEAD
                         "name": "Config.routingCategoryLogin"
                     }
                 },
@@ -272,6 +296,26 @@
                     "isVisible": "!routing.registerCategory",
                     "options": {
                         "name": "Config.routingEnableRouteRegister"
+=======
+                        "name": "Config.routingCategoryConfirmation"
+                    }
+                },
+                "confirmationEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.confirmationCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteConfirmation"
+                    }
+                },
+                "confirmationGuestCategory": {
+                    "type": "category",
+                    "required": false,
+                    "isVisible": "routing.confirmationCategory",
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryGuestConfirmation"
+>>>>>>> beta
                     }
                 },
                 "cancellationRightsCategory": {
@@ -466,6 +510,7 @@
     },
     "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
     "supportedFeatures": {
-        "singleItemContent": true
+        "singleItemContent": true,
+        "globalElementsOverride": true
     }
 }

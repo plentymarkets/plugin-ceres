@@ -5,8 +5,7 @@
 	margin-bottom: 2em;
 	padding-bottom: 1em;
 	border-bottom: 1px solid $gray-lighter;
-    
-
+	
 	@include media-breakpoint-up(sm){
 
 		.item-name:after{
@@ -18,14 +17,5 @@
 			width: auto!important;
 			text-align: right;
 		}
-
-	}
-
-	@include media-breakpoint-up(md){
-		
-	}
-
-	@include media-breakpoint-up(lg){
-		
 	}
 }

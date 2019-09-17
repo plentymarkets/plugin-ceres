@@ -1,6 +1,7 @@
 <?php
 namespace Ceres\Extensions;
 
+use IO\Helper\Utils;
 use IO\Helper\SafeGetter;
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
 use Plenty\Plugin\Templates\Factories\TwigFactory;
@@ -154,7 +155,7 @@ class TwigItemDataField extends Twig_Extension
     public function formatDate($date)
     {
         return date(
-            pluginApp(Translator::class)->trans("Ceres::Template.devDateFormat"),
+            Utils::translate("Ceres::Template.devDateFormat"),
             strtotime($date)
         );
     }
