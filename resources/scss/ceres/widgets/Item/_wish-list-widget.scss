@@ -1,4 +1,5 @@
-.widget-wish-list {
+.widget-wish-list,
+.page-wish-list {
     .category-list-view-port {
         button {
             white-space: nowrap;
@@ -7,7 +8,9 @@
         }
     }
 
-    .badge {
-        font-size: 85%;
+    .item-additional-information {
+        .badge {
+            font-size: 85%;
+        }
     }
 }
