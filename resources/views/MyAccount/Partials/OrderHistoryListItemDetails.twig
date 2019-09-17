@@ -76,6 +76,13 @@
                                         <span class="flex-fill text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</span>
                                     </div>
 
+                                    {% for attribute in item.attributes %}
+                                        <div class="d-flex">
+                                            <span class="flex-fill">{{ attribute.name }}</span>
+                                            <span class="flex-fill text-right">{{ attribute.value }}</span>
+                                        </div>
+                                    {% endfor %}
+
                                     {% if item.orderProperties %}
                                         {% for property in item.orderProperties %}
                                             <div>

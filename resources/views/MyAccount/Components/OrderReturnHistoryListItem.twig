@@ -36,8 +36,14 @@
                         <div class="d-inline-block item-description">
                             <div><a class="text-primary text-appearance" :href="returnOrder.itemURLs[orderItem.itemVariationId]">${ orderItem | itemBundleName }</a></div>
                             <div>{{ trans("Ceres::Template.returnHistoryQuantity") }}: ${ orderItem.quantity}</div>
-                            <template v-if="returnOrder.order.orderItems[0].orderProperties && returnOrder.order.orderItems[0].orderProperties.length > 0">
-                                <div v-for="property in returnOrder.order.orderItems[0].orderProperties">
+
+                            <div v-for="attribute in orderItem.attributes">
+                                <strong>${ attribute.name }: </strong>
+                                <span>${ attribute.value }</span>
+                            </div>
+
+                            <template v-if="orderItem.orderProperties && orderItem.orderProperties[0]">
+                                <div v-for="property in orderItem.orderProperties">
                                     <b>${ property.name }</b>
                                     <span v-if="property.type === 'file'">
                                         <a :href="property.value | fileUploadPath" target="_blank" class="text-primary text-appearance">
