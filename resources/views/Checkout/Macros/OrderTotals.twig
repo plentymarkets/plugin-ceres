@@ -58,7 +58,11 @@
                         {{ trans("Ceres::Template.orderConfirmationSubTotal") }} ({{ trans("Ceres::Template.checkoutGross") }})
                     </dt><!--
                     --><dd {% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                    {% if totals.isNet %}
+                        {{ (totals.itemSumNet - totals.itemSumRebateNet) | formatMonetary( totals.currency ) }}
+                    {% else %}
                         {{ (totals.itemSumGross - totals.itemSumRebateGross) | formatMonetary( totals.currency ) }}
+                    {% endif %}                    
                     </dd>
                 {% endif %}
             {% endif %}
