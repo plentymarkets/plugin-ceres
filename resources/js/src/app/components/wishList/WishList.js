@@ -18,11 +18,6 @@ Vue.component("wish-list", {
             type: String,
             default: "#vue-wish-list"
         },
-        initIds:
-        {
-            type: Array,
-            default: () => []
-        },
         itemDetailsData:
         {
             type: Array,
@@ -33,8 +28,7 @@ Vue.component("wish-list", {
     data()
     {
         return {
-            isLoading: false,
-            wishListCount: {}
+            isLoading: false
         };
     },
 
@@ -45,15 +39,9 @@ Vue.component("wish-list", {
 
     created()
     {
-        this.$store.commit("setWishListIds", this.initIds);
-
         this.isLoading = true;
         this.initWishListItems()
-            .then(response =>
-            {
-                this.isLoading = false;
-            },
-            error =>
+            .finally(() =>
             {
                 this.isLoading = false;
             });

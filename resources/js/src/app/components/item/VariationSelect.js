@@ -72,6 +72,11 @@ Vue.component("variation-select", {
             return possibleUnits;
         },
 
+        isContentVisible()
+        {
+            return !this.forceContent && !!this.currentSelection || this.forceContent;
+        },
+
         ...mapState({
             attributes: state => state.variationSelect.attributes,
             currentVariation: state => state.item.variation.documents[0].data,

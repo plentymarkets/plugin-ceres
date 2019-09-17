@@ -9,14 +9,13 @@
                 v-for="(wishListItem, index) in wishListItems"
                 :key="wishListItem.id"
                 :wish-list-item="wishListItem.data"
-                :id="'article_' + index"
                 @remove-item="removeItem({ id: wishListItem.data.variation.id, wishListItem: wishListItem, index })"
                 :item-details-data="itemDetailsData">
             </wish-list-item>
         </transition-group>
 
         <transition name="wish-list-no-items-transition">
-            <p class="h4 text-muted wish-list-no-items-label" v-if="!wishListIds[0]">{{ trans("Ceres::Template.wishListNoItems") }}</p>
+            <p class="h4 text-muted wish-list-no-items-label" v-if="!isLoading && !wishListItems[0]">{{ trans("Ceres::Template.wishListNoItems") }}</p>
         </transition>
 
         <div :class="{'loading': isLoading}">

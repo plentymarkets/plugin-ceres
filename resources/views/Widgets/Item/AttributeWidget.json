@@ -14,7 +14,6 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "spacing":"@include(spacingMargin)",
         "forceContent": {
             "type": "checkbox",
             "defaultValue": false,
@@ -22,6 +21,7 @@
                 "name": "Widget.attributeForceContentLabel",
                 "tooltipText": "Widget.attributeForceContentTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

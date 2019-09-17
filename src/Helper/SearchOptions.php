@@ -106,5 +106,41 @@ class SearchOptions
         return $instance;
     }
 
+    public static function validateItemListOptions($itemListOptions, $scope)
+    {
+        // Get all sorting strings
+        $sortingStrings = self::get($scope);
+
+        if( !array_key_exists($itemListOptions['sorting'], $sortingStrings->sorting) )
+        {
+            $itemListOptions['sorting'] = $sortingStrings->defaultSorting;
+        }
+
+        if( (int)$itemListOptions['page'] <= 0 )
+        {
+            $itemListOptions['page'] = 1;
+        }
+
+        /** @var CeresConfig $ceresConfig */
+        $ceresConfig = pluginApp(CeresConfig::class);
+        
+        if( (int)$itemListOptions['itemsPerPage'] <= 0 )
+        {
+            $defaultItemsPerPage = $ceresConfig->pagination->rowsPerPage[0] * $ceresConfig->pagination->columnsPerPage;
+            $itemListOptions['itemsPerPage'] = $defaultItemsPerPage;
+        }
+
+        if( (int) $itemListOptions['priceMin'] < 0 )
+        {
+            $itemListOptions['priceMin'] = 0;
+        }
+
+        if( (int) $itemListOptions['priceMax'] < 0 )
+        {
+            $itemListOptions['priceMax'] = 0;
+        }
+
+        return $itemListOptions;
+    }
 
 }

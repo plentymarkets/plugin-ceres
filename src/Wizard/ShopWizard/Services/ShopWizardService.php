@@ -7,6 +7,7 @@ use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
+use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
@@ -71,13 +72,16 @@ class ShopWizardService
         }
 
         if (count($webstores)) {
+            $pluginRepo = pluginApp(PluginRepositoryContract::class);
             foreach ($webstores as $webstore) {
-                $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
+                if (!empty($webstore['pluginSetId']) && $pluginRepo->isActiveInPluginSetByName("Ceres", $webstore['pluginSetId'])) {
+                    $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
 
-                $webstoresMapped[$key] = [
-                    "client" => $webstore['id'],
-                    "pluginSet" => $webstore['pluginSetId']
-                ];
+                    $webstoresMapped[$key] = [
+                        "client" => $webstore['id'],
+                        "pluginSet" => $webstore['pluginSetId']
+                    ];
+                }
             }
         }
 
