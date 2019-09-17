@@ -1,0 +1,12 @@
+{
+    "identifier": "Ceres::PopperWidget",
+    "label": "Widget.popperLabel",
+    "previewImageURL": "/images/widgets/popper.svg",
+    "type": "structure",
+    "categories": ["structure"],
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Grid\\PopperWidget",
+    "settings": {
+        "customClass":"@include(customClass)"
+    }
+}
