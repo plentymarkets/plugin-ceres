@@ -28,8 +28,7 @@ Vue.component("wish-list", {
     data()
     {
         return {
-            isLoading: false,
-            wishListCount: {}
+            isLoading: false
         };
     },
 
