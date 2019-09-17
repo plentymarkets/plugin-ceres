@@ -51,7 +51,7 @@
                             <span class="anicon-search-item" aria-hidden="true"></span>
                         </a>
                     </li>
-                    {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+                    {% if services.url.isRouteEnabled("wish-list") %}
                         <li class="list-inline-item control-wish-list">
                             <wish-list-count>
                                 <a>
