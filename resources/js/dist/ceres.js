@@ -67086,6 +67086,16 @@ var MonetaryFormatter = function () {
       }
     }
 
+    var formatDecimals = function formatDecimals(value, numberOfDecimals) {
+      var result = Math.round(value * Math.pow(10, numberOfDecimals)).toFixed(0).substr(-1 * numberOfDecimals, numberOfDecimals);
+
+      while (result.length < numberOfDecimals) {
+        result = result + "0";
+      }
+
+      return result;
+    };
+
     return prefix + this.pattern[patternIndex].map(function (partial, index, pattern) {
       switch (partial.type) {
         case T_DIGIT:
@@ -67096,7 +67106,7 @@ var MonetaryFormatter = function () {
 
 
             var roundDigits = !pattern.some(function (subpattern) {
-              return subpattern.type === T_DECIMAL;
+              return subpattern.type === T_DECIMAL && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;
             }); // cut decimal places instead of rounding
             // revert the value to insert thousands separators next
 
@@ -67114,19 +67124,7 @@ var MonetaryFormatter = function () {
         case T_DECIMAL:
           {
             var numberOfDecimals = parseInt(partial.value);
-            var result = /^\d+(?:\.(\d+))?$/g.exec(value);
-
-            if (!Object(_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(result) && !Object(_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(result[1])) {
-              result = result[1].substr(0, numberOfDecimals);
-            } else {
-              result = "";
-            }
-
-            while (result.length < numberOfDecimals) {
-              result = result + "0";
-            }
-
-            return _this2.separatorDecimals + result;
+            return _this2.separatorDecimals + formatDecimals(value, numberOfDecimals);
           }
 
         case T_CURRENCY:
