@@ -35,7 +35,9 @@
     "item.manufacturer.position",
     "item.manufacturer.externalName",
 
-    "texts.*",
+    "texts.name1",
+    "texts.name2",
+    "texts.name3",
 
     "bundleComponents.*",
 

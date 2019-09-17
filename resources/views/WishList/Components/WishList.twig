@@ -9,7 +9,6 @@
                 v-for="(wishListItem, index) in wishListItems"
                 :key="wishListItem.id"
                 :wish-list-item="wishListItem.data"
-                :id="'article_' + index"
                 @remove-item="removeItem({ id: wishListItem.data.variation.id, wishListItem: wishListItem, index })"
                 :item-details-data="itemDetailsData">
             </wish-list-item>
