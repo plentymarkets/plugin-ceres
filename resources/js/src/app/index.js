@@ -153,6 +153,8 @@ import "./directives/basket/basketItemQuantity";
 import "./directives/basket/basketItemSum";
 import "./directives/basket/toggleBasketPreview";
 
+import "./directives/common/truncateTooltip";
+
 import "./directives/customer/logout";
 
 import "./directives/helper/populateStore";

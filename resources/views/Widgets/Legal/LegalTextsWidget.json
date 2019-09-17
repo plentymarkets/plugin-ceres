@@ -7,7 +7,6 @@
     "widgetClass": "Ceres\\Widgets\\Legal\\LegalTextsWidget",
     "settings": {
         "customClass": "@include(customClass)",
-        "spacing": "@include(spacingMargin)",
         "type": {
             "type": "select",
             "defaultValue": "cancellationRights",
@@ -42,6 +41,7 @@
                     }
                 ]
             }
-        }
+        },
+        "spacing": "@include(spacingMargin)"
     }
 }

@@ -2381,8 +2381,8 @@
                 "required": true,
                 "defaultValue": "none",
                 "options": {
-                    "name": "Widget.listIconLabel",
-                    "tooltipText": "Widget.listIconTooltip",
+                    "name": "Widget.widgetIconLabel",
+                    "tooltipText": "Widget.widgetIconTooltip",
                     "listBoxValues": [
                         {
                             "value": "none",
@@ -2437,6 +2437,36 @@
                         {
                             "value": "fa-dollar",
                             "caption": "Widget.widgetIconDollar",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-percent",
+                            "caption": "Widget.widgetIconPercent",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-gift",
+                            "caption": "Widget.widgetIconGift",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-truck",
+                            "caption": "Widget.widgetIconTruck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-phone",
+                            "caption": "Widget.widgetIconPhone",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-copyright",
+                            "caption": "Widget.widgetIconCopyright",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-registered",
+                            "caption": "Widget.widgetIconRegistered",
                             "position": 1
                         }
                     ]
@@ -2519,6 +2549,267 @@
         }
     },
     {
+        "identifier": "Ceres::LinkWidget",
+        "label": "Widget.linkLabel",
+        "previewImageURL": "/images/widgets/link.svg",
+        "type": "static",
+        "categories": [
+            "text"
+        ],
+        "position": 900,
+        "widgetClass": "Ceres\\Widgets\\Common\\LinkWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "size": {
+                "type": "select",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.linkSizeLabel",
+                    "tooltipText": "Widget.linkSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "btn-sm",
+                            "caption": "Widget.linkSizeSmall",
+                            "position": 0
+                        },
+                        {
+                            "value": "",
+                            "caption": "Widget.linkSizeMedium",
+                            "position": 1
+                        },
+                        {
+                            "value": "btn-lg",
+                            "caption": "Widget.linkSizeLarge",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
+            "block": {
+                "type": "checkbox",
+                "required": false,
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.linkBlock"
+                }
+            },
+            "icon": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetIconLabel",
+                    "tooltipText": "Widget.widgetIconTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetIconNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "fa-check",
+                            "caption": "Widget.widgetIconCheck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-circle",
+                            "caption": "Widget.widgetIconCircle",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-circle-thin",
+                            "caption": "Widget.widgetIconCircleThin",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-comment-o",
+                            "caption": "Widget.widgetIconComment",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-credit-card",
+                            "caption": "Widget.widgetIconCreditcard",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-envelope-o",
+                            "caption": "Widget.widgetIconEnvelope",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-heart",
+                            "caption": "Widget.widgetIconHeart",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-thumbs-o-up",
+                            "caption": "Widget.widgetIconThumbsUp",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-euro",
+                            "caption": "Widget.widgetIconEuro",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-dollar",
+                            "caption": "Widget.widgetIconDollar",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-percent",
+                            "caption": "Widget.widgetIconPercent",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-gift",
+                            "caption": "Widget.widgetIconGift",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-truck",
+                            "caption": "Widget.widgetIconTruck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-phone",
+                            "caption": "Widget.widgetIconPhone",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-copyright",
+                            "caption": "Widget.widgetIconCopyright",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-registered",
+                            "caption": "Widget.widgetIconRegistered",
+                            "position": 1
+                        }
+                    ]
+                }
+            },
+            "text": {
+                "type": "text",
+                "required": false,
+                "options": {
+                    "name": "Widget.linkTextLabel",
+                    "tooltipText": "Widget.linkTextTooltip"
+                }
+            },
+            "url": {
+                "type": "url",
+                "required": false,
+                "options": {
+                    "name": "Widget.linkUrlLabel",
+                    "tooltipText": "Widget.linkUrlTooltip",
+                    "internalLinks": [
+                        {
+                            "value": "return",
+                            "caption": "Widget.urlReturnLabel"
+                        },
+                        {
+                            "value": "tracking",
+                            "caption": "Widget.urlTrackingLabel"
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::ListWidget",
         "label": "Widget.listLabel",
         "previewImageURL": "/images/widgets/list.svg",
@@ -2552,8 +2843,8 @@
                 "required": true,
                 "defaultValue": "none",
                 "options": {
-                    "name": "Widget.listIconLabel",
-                    "tooltipText": "Widget.listIconTooltip",
+                    "name": "Widget.widgetIconLabel",
+                    "tooltipText": "Widget.widgetIconTooltip",
                     "listBoxValues": [
                         {
                             "value": "none",
@@ -4215,6 +4506,91 @@
                             "direction": "all"
                         }
                     },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::ChangeMailWidget",
+        "label": "Widget.changeMailLabel",
+        "previewImageURL": "/images/widgets/change-mail.svg",
+        "type": "default",
+        "categories": [
+            "customer"
+        ],
+        "position": 300,
+        "widgetClass": "Ceres\\Widgets\\Customer\\ChangeMailWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
                     "customMargin": {
                         "type": "checkbox",
                         "options": {
@@ -6053,6 +6429,14 @@
                     ]
                 }
             },
+            "forceContent": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.attributeForceContentLabel",
+                    "tooltipText": "Widget.attributeForceContentTooltip"
+                }
+            },
             "spacing": {
                 "type": "vertical",
                 "children": {
@@ -6073,14 +6457,6 @@
                             "direction": "all"
                         }
                     }
-                }
-            },
-            "forceContent": {
-                "type": "checkbox",
-                "defaultValue": false,
-                "options": {
-                    "name": "Widget.attributeForceContentLabel",
-                    "tooltipText": "Widget.attributeForceContentTooltip"
                 }
             }
         }
@@ -6379,48 +6755,6 @@
                     "tooltipText": "Widget.customClassTooltip"
                 }
             },
-            "spacing": {
-                "type": "vertical",
-                "options": {
-                    "name": "Widget.widgetSpacing"
-                },
-                "children": {
-                    "customPadding": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomPadding"
-                        }
-                    },
-                    "padding": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customPadding",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    },
-                    "customMargin": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomMargin"
-                        }
-                    },
-                    "margin": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customMargin",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    }
-                }
-            },
             "itemInformation": {
                 "type": "select",
                 "isList": "[1,]",
@@ -6477,6 +6811,48 @@
                             "caption": "Widget.itemDataTableItemCustomsTariffNumber"
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -6635,13 +7011,6 @@
                     "tooltipText": "Widget.customClassTooltip"
                 }
             },
-            "showCrossPrice": {
-                "type": "checkbox",
-                "defaultValue": true,
-                "options": {
-                    "name": "Widget.showCrossPriceLabel"
-                }
-            },
             "appearance": {
                 "type": "select",
                 "required": true,
@@ -6686,6 +7055,13 @@
                             "position": 6
                         }
                     ]
+                }
+            },
+            "showCrossPrice": {
+                "type": "checkbox",
+                "defaultValue": true,
+                "options": {
+                    "name": "Widget.showCrossPriceLabel"
                 }
             },
             "spacing": {
@@ -6839,28 +7215,6 @@
                     "tooltipText": "Widget.customClassTooltip"
                 }
             },
-            "spacing": {
-                "type": "vertical",
-                "children": {
-                    "customMargin": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomMargin"
-                        }
-                    },
-                    "margin": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customMargin",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    }
-                }
-            },
             "type": {
                 "type": "select",
                 "defaultValue": "cancellationRights",
@@ -6894,6 +7248,28 @@
                             "position": 4
                         }
                     ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
                 }
             }
         }
@@ -7712,6 +8088,532 @@
             "spacing": {
                 "type": "vertical",
                 "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::OrderDataWidget",
+        "label": "Widget.orderDataLabel",
+        "previewImageURL": "/images/widgets/order-data.svg",
+        "type": "default",
+        "categories": [
+            "orderconfirmation"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderDataWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "addressFields": {
+                "type": "checkboxGroup",
+                "defaultValue": [
+                    "title",
+                    "contactPerson",
+                    "name1",
+                    "name2",
+                    "name3",
+                    "name4",
+                    "address1",
+                    "address2",
+                    "address3",
+                    "address4",
+                    "postalCode",
+                    "town",
+                    "country"
+                ],
+                "options": {
+                    "name": "Widget.orderDataAddressFields",
+                    "checkboxValues": [
+                        {
+                            "value": "title",
+                            "caption": "Widget.addressFieldTitle"
+                        },
+                        {
+                            "value": "contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
+                        },
+                        {
+                            "value": "name1",
+                            "caption": "Widget.addressFieldName1"
+                        },
+                        {
+                            "value": "name2",
+                            "caption": "Widget.addressFieldName2"
+                        },
+                        {
+                            "value": "name3",
+                            "caption": "Widget.addressFieldName3"
+                        },
+                        {
+                            "value": "name4",
+                            "caption": "Widget.addressFieldName4"
+                        },
+                        {
+                            "value": "address1",
+                            "caption": "Widget.addressFieldAddress1"
+                        },
+                        {
+                            "value": "address2",
+                            "caption": "Widget.addressFieldAddress2"
+                        },
+                        {
+                            "value": "address3",
+                            "caption": "Widget.addressFieldAddress3"
+                        },
+                        {
+                            "value": "postalCode",
+                            "caption": "Widget.addressFieldPostalCode"
+                        },
+                        {
+                            "value": "town",
+                            "caption": "Widget.addressFieldTown"
+                        },
+                        {
+                            "value": "country",
+                            "caption": "Widget.addressFieldCountry"
+                        }
+                    ]
+                }
+            },
+            "showCustomerId": {
+                "type": "checkbox",
+                "defaultValue": false,
+                "options": {
+                    "name": "Widget.orderDataShowCustomerId"
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::OrderDocumentsWidget",
+        "label": "Widget.orderDocumentsLabel",
+        "previewImageURL": "/images/widgets/order-documents.svg",
+        "type": "default",
+        "categories": [
+            "orderconfirmation"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderDocumentsWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "btn-sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "btn-lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::OrderTotalsWidget",
+        "label": "Widget.basketTotalsLabel",
+        "previewImageURL": "/images/widgets/basket-totals.svg",
+        "type": "default",
+        "categories": [
+            "orderconfirmation"
+        ],
+        "position": 300,
+        "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderTotalsWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "visibleFields": {
+                "type": "checkboxGroup",
+                "defaultValue": [
+                    "orderValueNet",
+                    "orderValueGross",
+                    "rebate",
+                    "shippingCostsNet",
+                    "shippingCostsGross",
+                    "totalSumNet",
+                    "promotionCoupon",
+                    "vats",
+                    "totalSumGross",
+                    "salesCoupon",
+                    "openAmount"
+                ],
+                "options": {
+                    "name": "Widget.basketTotalsVisibleFields",
+                    "checkboxValues": [
+                        {
+                            "value": "orderValueNet",
+                            "caption": "Widget.showBasketValueNet"
+                        },
+                        {
+                            "value": "orderValueGross",
+                            "caption": "Widget.showBasketValueGross"
+                        },
+                        {
+                            "value": "rebate",
+                            "caption": "Widget.showBasketTotalsRebate"
+                        },
+                        {
+                            "value": "shippingCostsNet",
+                            "caption": "Widget.showBasketShippingCostsNet"
+                        },
+                        {
+                            "value": "shippingCostsGross",
+                            "caption": "Widget.showBasketShippingCostsGross"
+                        },
+                        {
+                            "value": "totalSumNet",
+                            "caption": "Widget.showBasketTotalSumNet"
+                        },
+                        {
+                            "value": "promotionCoupon",
+                            "caption": "Widget.showBasketPromotionCoupon"
+                        },
+                        {
+                            "value": "vats",
+                            "caption": "Widget.showBasketVats"
+                        },
+                        {
+                            "value": "totalSumGross",
+                            "caption": "Widget.showBasketTotalSumGross"
+                        },
+                        {
+                            "value": "salesCoupon",
+                            "caption": "Widget.showBasketSalesCoupon"
+                        },
+                        {
+                            "value": "openAmount",
+                            "caption": "Widget.showBasketOpenAmount"
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::PurchasedItemsWidget",
+        "label": "Widget.purchasedItemsLabel",
+        "previewImageURL": "/images/widgets/purchased-items.svg",
+        "type": "default",
+        "categories": [
+            "orderconfirmation"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\PurchasedItemsWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
                     "customMargin": {
                         "type": "checkbox",
                         "options": {

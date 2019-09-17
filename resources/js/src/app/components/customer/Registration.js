@@ -1,13 +1,13 @@
+import ValidationService from "../../services/ValidationService";
+import TranslationService from "../../services/TranslationService";
+import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
+import { executeReCaptcha } from "../../helper/executeReCaptcha";
 import { isNullOrUndefined } from "../../helper/utils";
 
 const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 const ModalService        = require("../../services/ModalService");
-
-import ValidationService from "../../services/ValidationService";
-import TranslationService from "../../services/TranslationService";
-import { navigateTo } from "../../services/UrlService";
-import Vue from "vue";
 
 Vue.component("registration", {
 
@@ -45,47 +45,53 @@ Vue.component("registration", {
          */
         validateRegistration()
         {
-            ValidationService.validate($("#registration" + this._uid))
-                .done(() =>
+            executeReCaptcha(this.$refs.registrationForm)
+                .then((recaptchaToken) =>
                 {
-                    if (!this.enableConfirmingPrivacyPolicy || this.privacyPolicyAccepted)
-                    {
-                        this.sendRegistration();
-                    }
-                    else
-                    {
-                        this.privacyPolicyShowError = true;
+                    ValidationService.validate(this.$refs.registrationForm)
+                        .done(() =>
+                        {
+                            if (!this.enableConfirmingPrivacyPolicy || this.privacyPolicyAccepted)
+                            {
+                                this.sendRegistration(recaptchaToken);
+                            }
+                            else
+                            {
+                                this.privacyPolicyShowError = true;
 
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
-                        );
-                    }
-                })
-                .fail(invalidFields =>
-                {
-                    if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
-                    {
-                        this.$refs.passwordHint.showPopper();
-                    }
-                    ValidationService.markInvalidFields(invalidFields, "error");
+                                NotificationService.error(
+                                    TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                                );
+                            }
+                        })
+                        .fail(invalidFields =>
+                        {
+                            if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
+                            {
+                                this.$refs.passwordHint.showPopper();
+                            }
+                            ValidationService.markInvalidFields(invalidFields, "error");
 
-                    if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
-                    {
-                        this.privacyPolicyShowError = true;
+                            if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
+                            {
+                                this.privacyPolicyShowError = true;
 
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
-                        );
-                    }
+                                NotificationService.error(
+                                    TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                                );
+                            }
+                        });
                 });
         },
 
         /**
          * Send the registration
          */
-        sendRegistration()
+        sendRegistration(recaptchaToken)
         {
             const userObject = this.getUserObject();
+
+            userObject.recaptcha = recaptchaToken;
 
             this.isDisabled = true;
 
