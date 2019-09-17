@@ -41,29 +41,20 @@ const mutations =
 
 const actions =
     {
-        initWishListItems({ commit }, ids)
+        initWishListItems({ commit })
         {
             return new Promise((resolve, reject) =>
             {
-                if (ids && ids[0])
-                {
-                    commit("setWishListIds", ids);
-
-                    ApiService.get("/rest/io/variations/", { variationIds: ids, template: "Ceres::WishList.WishList" })
-                        .done(data =>
-                        {
-                            commit("setWishListItems", data.documents);
-                            resolve(data);
-                        })
-                        .fail(error =>
-                        {
-                            reject(error);
-                        });
-                }
-                else
-                {
-                    resolve();
-                }
+                ApiService.get("/rest/io/wishlist/items")
+                    .done(response =>
+                    {
+                        commit("setWishListItems", response.documents);
+                        resolve(response);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
             });
         },
 

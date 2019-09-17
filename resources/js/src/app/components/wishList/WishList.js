@@ -48,8 +48,8 @@ Vue.component("wish-list", {
         this.$store.commit("setWishListIds", this.initIds);
 
         this.isLoading = true;
-        this.initWishListItems(this.wishListIds).then(
-            response =>
+        this.initWishListItems()
+            .then(response =>
             {
                 this.isLoading = false;
             },
