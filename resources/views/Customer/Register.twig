@@ -47,12 +47,14 @@
                 </h1>
 
                 <div class="row">
-                    <registration
-                        template="#vue-registration"
-                        backlink="{{ request.get("backlink") | url_encode }}"
-                        :shown-fields="{{ optionalInvoiceAddressFields | json_encode }}"
-                        :required-fields="{{ requiredInvoiceAddressFields | json_encode }}">
-                    </registration>
+                    <div class="modal-body">
+                        <registration
+                            template="#vue-registration"
+                            backlink="{{ request.get("backlink") | url_encode }}"
+                            :shown-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+                            :required-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                        </registration>
+                    </div>
                 </div>
             </div>
         </div>

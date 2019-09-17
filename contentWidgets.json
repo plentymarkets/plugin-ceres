@@ -7102,7 +7102,7 @@
                     "billing_address.salutation"
                 ],
                 "options": {
-                    "name": "Widget.addressFieldsInvoiceDE",
+                    "name": "Widget.registrationShownFieldsDe",
                     "checkboxValues": [
                         {
                             "value": "billing_address.name1",
@@ -7156,7 +7156,7 @@
                 "isVisible": "addressLayout === 'DE'",
                 "defaultValue": [],
                 "options": {
-                    "name": "Widget.addressRequiredFieldsInvoiceDE",
+                    "name": "Widget.registrationRequiredFieldsDe",
                     "checkboxValues": [
                         {
                             "value": "billing_address.vatNumber",
@@ -7210,7 +7210,7 @@
                     "billing_address.salutation"
                 ],
                 "options": {
-                    "name": "Widget.addressFieldsInvoiceGB",
+                    "name": "Widget.registrationShownFieldsGb",
                     "checkboxValues": [
                         {
                             "value": "billing_address.name1",
@@ -7264,7 +7264,7 @@
                 "isVisible": "addressLayout === 'GB'",
                 "defaultValue": [],
                 "options": {
-                    "name": "Widget.addressRequiredFieldsInvoiceGB",
+                    "name": "Widget.registrationRequiredFieldsGb",
                     "checkboxValues": [
                         {
                             "value": "billing_address.vatNumber",
