@@ -16,21 +16,12 @@
         ]
     },
     "allowedTypes": {
-<<<<<<< HEAD
         "header":       ["header", "static", "structure", "default"],
         "footer":       ["footer", "static", "structure", "default"],
         "content":      ["static", "structure", "default"],
         "singleitem":   ["static", "structure", "default", "item"],
         "checkout":     ["static", "structure", "default", "checkout", "customer"],
         "myaccount":    ["static", "structure", "default", "myaccount", "customer"]
-=======
-        "header":            ["header", "static", "structure", "default"],
-        "footer":            ["footer", "static", "structure", "default"],
-        "content":           ["static", "structure", "default"],
-        "singleitem":        ["static", "structure", "default", "item"],
-        "checkout":          ["static", "structure", "default", "checkout", "customer", "basket"],
-        "myaccount":         ["static", "structure", "default", "myaccount", "customer", "basket"]
->>>>>>> beta
     },
     "presets": {
         "header": [
@@ -79,7 +70,6 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
             },
             {
-<<<<<<< HEAD
                 "label": "Widget.presetPageNotFound",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset"
             },
@@ -94,10 +84,10 @@
             {
                 "label": "Widget.presetNewsletterUnsubscribe",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset"
-=======
+            },
+            {
                 "label": "Widget.presetOrderConfirmationDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
->>>>>>> beta
             }
         ],
         "checkout": [
@@ -261,16 +251,11 @@
                         "name": "Config.routingEnableRouteMyAccount"
                     }
                 },
-<<<<<<< HEAD
                 "loginCategory": {
-=======
-                "confirmationCategory": {
->>>>>>> beta
                     "type": "category",
                     "required": false,
                     "defaultValue": null,
                     "options": {
-<<<<<<< HEAD
                         "name": "Config.routingCategoryLogin"
                     }
                 },
@@ -296,7 +281,13 @@
                     "isVisible": "!routing.registerCategory",
                     "options": {
                         "name": "Config.routingEnableRouteRegister"
-=======
+                    }
+                },
+                "confirmationCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
                         "name": "Config.routingCategoryConfirmation"
                     }
                 },
@@ -315,7 +306,6 @@
                     "defaultValue": null,
                     "options": {
                         "name": "Config.routingCategoryGuestConfirmation"
->>>>>>> beta
                     }
                 },
                 "cancellationRightsCategory": {
