@@ -113,8 +113,8 @@ const MonetaryFormatter = (function()
         const formatDecimals = (value, numberOfDecimals) =>
         {
             let result =  Math.round(value * Math.pow(10, numberOfDecimals))
-                    .toFixed(0)
-                    .substr(-1 * numberOfDecimals, numberOfDecimals);
+                .toFixed(0)
+                .substr(-1 * numberOfDecimals, numberOfDecimals);
 
             while (result.length < numberOfDecimals)
             {
