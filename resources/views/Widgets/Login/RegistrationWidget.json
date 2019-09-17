@@ -39,7 +39,7 @@
             "isVisible": "addressLayout === 'DE'",
             "defaultValue": ["billing_address.name1", "billing_address.salutation"],
             "options": {
-                "name": "Widget.addressFieldsInvoiceDE",
+                "name": "Widget.registrationShownFieldsDe",
                 "checkboxValues": [
                     {
                         "value": "billing_address.name1",
@@ -93,7 +93,7 @@
             "isVisible": "addressLayout === 'DE'",
             "defaultValue": [],
             "options": {
-                "name": "Widget.addressRequiredFieldsInvoiceDE",
+                "name": "Widget.registrationRequiredFieldsDe",
                 "checkboxValues": [
                     {
                         "value": "billing_address.vatNumber",
@@ -143,7 +143,7 @@
             "isVisible": "addressLayout === 'GB'",
             "defaultValue": ["billing_address.name1", "billing_address.address2", "billing_address.salutation"],
             "options": {
-                "name": "Widget.addressFieldsInvoiceGB",
+                "name": "Widget.registrationShownFieldsGb",
                 "checkboxValues": [
                     {
                         "value": "billing_address.name1",
@@ -197,7 +197,7 @@
             "isVisible": "addressLayout === 'GB'",
             "defaultValue": [],
             "options": {
-                "name": "Widget.addressRequiredFieldsInvoiceGB",
+                "name": "Widget.registrationRequiredFieldsGb",
                 "checkboxValues": [
                     {
                         "value": "billing_address.vatNumber",
