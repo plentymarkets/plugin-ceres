@@ -113,8 +113,8 @@ const actions =
         {
             jQuery
                 .when(
-                    ApiService.get("/rest/io/basket", {}, { cache: false }),
-                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
+                    ApiService.get("/rest/io/basket", { loadFaker: App.isShopBuilder }, { cache: false }),
+                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket", loadFaker: App.isShopBuilder }, { cache: false })
                 )
                 .then((basket, basketItems) =>
                 {
