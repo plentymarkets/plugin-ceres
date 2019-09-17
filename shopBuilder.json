@@ -76,6 +76,10 @@
             {
                 "label": "Widget.presetLoginDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultLoginPreset"
+            },
+            {
+                "label": "Widget.presetChangeMailDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultChangeMailPreset"
             }
         ],
         "checkout": [
