@@ -1,0 +1,76 @@
+{% extends getPartial('page-design') %}
+{% import "Ceres::Checkout.Macros.Address" as address %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.orderConfirmation") %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+
+    {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
+
+    {% set shopBuilderTemplate = shop_builder_category_template(category.id, "content") %}
+
+    {% set overrideConfirmation = LayoutContainer.show("Ceres::OrderConfirmation.Override") %}
+    {% set addContentAfterOrderDetailsRow = LayoutContainer.show("Ceres::OrderConfirmation.AddContentAfterOrderDetailsRow") %}
+
+    {% if shopBuilderTemplate | trim is not empty %}
+        <div class="page-content myaccount container-max mb-5 mt-3 pb-5">
+            <div class="row mb-5">
+                <div class="col-12">
+                    {{ shopBuilderTemplate | raw }}
+                </div>
+            </div>
+        </div>
+    {% elseif overrideConfirmation|trim is empty %}
+        <div class="page-content myaccount container-max mb-5 mt-3 pb-5">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h1 class="h2">{{ trans("Ceres::Template.orderConfirmationThanks") }}</h1>
+                    <p>{{ trans("Ceres::Template.orderConfirmationWillBeProcessed") }}</p>
+
+                    {{ LayoutContainer.show("Ceres::OrderConfirmation.AddContentAfterConfirmationThanks") }}
+
+                </div>
+            </div>
+
+            {{ LayoutContainer.show("Ceres::OrderConfirmation.BeforeOrderDetails", data.order) }}
+
+
+            {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
+
+            <hr>
+            {% if addContentAfterOrderDetailsRow|trim is not empty %}
+                <div class="row">
+                    {{ addContentAfterOrderDetailsRow }}
+                </div>
+            {% endif %}
+            <div class="row">
+                {% set loggedIn = frontend.Account.getIsAccountLoggedIn %}
+                <div class="col-6 col-md-4 {% if loggedIn %}offset-md-2{% else %}offset-3 offset-md-4{% endif %}">
+                    <a v-waiting-animation-infinite href="{{ homepageURL }}" type="" class="btn btn-primary btn-block bg-primary">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        {{ trans("Ceres::Template.orderConfirmationHomepage") }}
+                    </a>
+                </div>
+
+
+                {% if loggedIn %}
+                    <div class="col-6 col-md-4">
+                        <a v-waiting-animation-infinite href="{{ urls.myAccount }}" type="" class="btn btn-primary btn-block bg-primary">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            {{ trans("Ceres::Template.orderConfirmationMyAccount") }}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    {% else %}
+        {{ overrideConfirmation }}
+    {% endif %}
+
+{% endblock %}
