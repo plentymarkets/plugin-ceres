@@ -9,7 +9,6 @@
     "images.variation.path",
     "images.variation.names.alternate",
     "images.variation.names.lang",
-
     "properties.property.id",
     "properties.property.isOderProperty",
     "properties.property.isShownAtCheckout",
@@ -22,58 +21,40 @@
     "properties.property.value",
     "properties.property.valueType",
     "properties.surcharge",
-
     "properties.group.id",
     "properties.group.isSurchargePercental",
     "properties.group.names.description",
     "properties.group.names.lang",
     "properties.group.names.name",
     "properties.group.orderPropertyGroupingType",
-
     "item.id",
     "item.storeSpecial",
     "item.manufacturer.position",
     "item.manufacturer.externalName",
-
+    "texts.lang",
     "texts.name1",
     "texts.name2",
     "texts.name3",
-
     "bundleComponents.*",
-
     "defaultCategories",
-
-    "variation.availability.averageDays",
-    "variation.availability.id",
-    "variation.availability.names.lang",
-    "variation.availability.names.name",
-    "variation.bundleType",
     "variation.id",
+    "variation.name",
+    "variation.availability.names.name",
+    "variation.availability.names.lang",
+    "variation.availability.id",
+    "variation.availability.averageDays",
+    "variation.minimumOrderQuantity",
+    "variation.maximumOrderQuantity",
     "variation.intervalOrderQuantity",
     "variation.itemId",
-    "variation.maximumOrderQuantity",
     "variation.mayShowUnitPrice",
-    "variation.minimumOrderQuantity",
-    "variation.name",
-    "variation.number",
     "variation.releasedAt",
-
-    "variationProperties.id",
-    "variationProperties.values",
-    "variationProperties.property.id",
-    "variationProperties.property.values",
-    "variationProperties.property.cast",
-    "variationProperties.property.display",
-    "variationProperties.property.groups",
-    "variationProperties.property.names.*",
-    "variationProperties.property.position",
-
+    "variation.bundleType",
     "filter.hasChildren",
     "filter.isSalable",
     "filter.hasActiveChildren",
-
     "unit.content",
     "unit.names.name",
     "unit.names.lang",
     "unit.unitOfMeasurement"
-]
+    ]
