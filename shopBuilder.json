@@ -82,8 +82,8 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultChangeMailPreset"
             },
             {
-                "label": "Widget.presetNewsletterOptOut",
-                "presetClass": "Ceres\\Widgets\\Presets\\NewsletterOptOutPreset"
+                "label": "Widget.presetNewsletterUnsubscribe",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset"
             }
         ],
         "checkout": [
