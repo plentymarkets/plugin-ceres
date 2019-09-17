@@ -70,7 +70,6 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
             },
             {
-<<<<<<< HEAD
                 "label": "Widget.presetPageNotFound",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset"
             },
@@ -85,10 +84,10 @@
             {
                 "label": "Widget.presetNewsletterUnsubscribe",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset"
-=======
+            },
+            {
                 "label": "Widget.presetOrderConfirmationDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
->>>>>>> beta
             }
         ],
         "checkout": [
@@ -252,16 +251,11 @@
                         "name": "Config.routingEnableRouteMyAccount"
                     }
                 },
-<<<<<<< HEAD
                 "loginCategory": {
-=======
-                "confirmationCategory": {
->>>>>>> beta
                     "type": "category",
                     "required": false,
                     "defaultValue": null,
                     "options": {
-<<<<<<< HEAD
                         "name": "Config.routingCategoryLogin"
                     }
                 },
@@ -287,7 +281,13 @@
                     "isVisible": "!routing.registerCategory",
                     "options": {
                         "name": "Config.routingEnableRouteRegister"
-=======
+                    }
+                },
+                "confirmationCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
                         "name": "Config.routingCategoryConfirmation"
                     }
                 },
@@ -306,7 +306,6 @@
                     "defaultValue": null,
                     "options": {
                         "name": "Config.routingCategoryGuestConfirmation"
->>>>>>> beta
                     }
                 },
                 "cancellationRightsCategory": {
