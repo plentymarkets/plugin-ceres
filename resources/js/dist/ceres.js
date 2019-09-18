@@ -68884,18 +68884,20 @@ var showShopNotification = function showShopNotification(event) {
 };
 
 document.addEventListener("showShopNotification", showShopNotification);
-var vueApp = document.getElementById("vue-app");
 var headerParent = document.querySelector("[data-header-offset]");
 var headerLoaded = false;
 var allHeaderChildrenHeights = [];
 
 if (headerParent) {
   var calculateBodyOffset = function calculateBodyOffset() {
+    headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
     if (headerLoaded && headerParent) {
+      var vueApp = document.getElementById("vue-app");
       var bodyOffset = 0;
 
-      for (var i = 0; i < headerChildren.length; i++) {
-        bodyOffset += headerChildren[i].getBoundingClientRect().height;
+      for (var i = 0; i < headerParent.children.length; i++) {
+        bodyOffset += headerParent.children[i].getBoundingClientRect().height;
       }
 
       vueApp.style.marginTop = bodyOffset + "px";
@@ -68904,14 +68906,17 @@ if (headerParent) {
   };
 
   var getHeaderChildrenHeights = function getHeaderChildrenHeights() {
+    headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
     allHeaderChildrenHeights = [];
 
-    for (var i = 0; i < headerChildren.length; i++) {
-      allHeaderChildrenHeights.push(headerChildren[i].getBoundingClientRect().height);
+    for (var i = 0; i < headerParent.children.length; i++) {
+      allHeaderChildrenHeights.push(headerParent.children[i].getBoundingClientRect().height);
     }
   };
 
   var scrollHeaderElements = function scrollHeaderElements() {
+    headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
     if (headerLoaded && !App.isShopBuilder) {
       var absolutePos = 0;
       var fixedElementsHeight = 0;
@@ -68919,8 +68924,8 @@ if (headerParent) {
       var scrollTop = window.pageYOffset;
       var zIndex = 100;
 
-      for (var i = 0; i < headerChildren.length; i++) {
-        var elem = headerChildren[i];
+      for (var i = 0; i < headerParent.children.length; i++) {
+        var elem = headerParent.children[i];
         var elemHeight = allHeaderChildrenHeights[i];
         offset = absolutePos - scrollTop;
         elem.style.position = "absolute";
@@ -68948,7 +68953,6 @@ if (headerParent) {
     }
   };
 
-  var headerChildren = headerParent.children;
   var QueryHelper = new _helper_MediaQueryHelper__WEBPACK_IMPORTED_MODULE_10__["MediaQueryHelper"](); // When window resize to another breakpoint execute functions
 
   QueryHelper.addFunction(function () {
