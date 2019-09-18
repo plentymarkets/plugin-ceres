@@ -53495,6 +53495,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("basket-preview", {
         _this.$store.commit("setBasket", data.basket);
 
         _this.$store.commit("setShowNetPrices", data.showNetPrices);
+
+        _this.$store.commit("setWishListIds", data.basket.itemWishListIds);
       });
     });
 
@@ -57513,7 +57515,9 @@ vue__WEBPACK_IMPORTED_MODULE_5___default.a.component("registration", {
       default: false
     },
     template: String,
-    backlink: String
+    backlink: String,
+    shownFields: Object,
+    requiredFields: Object
   },
   data: function data() {
     return {
@@ -65084,10 +65088,129 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _WishListItem__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./WishListItem */ "./resources/js/src/app/components/wishList/WishListItem.js");
+
+
+
+
+
+
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("wish-list", {
+  components: {
+    WishListItem: _WishListItem__WEBPACK_IMPORTED_MODULE_11__["default"]
+  },
+  props: {
+    template: {
+      type: String,
+      default: "#vue-wish-list"
+    },
+    itemDetailsData: {
+      type: Array,
+      default: function _default() {
+        return ["wishListItem.variation.availability"];
+      }
+    }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
+    wishListItems: function wishListItems(state) {
+      return state.wishList.wishListItems;
+    },
+    isLoading: function isLoading(state) {
+      return state.wishList.isLoading;
+    }
+  }),
+  created: function created() {
+    this.initWishListItems();
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapActions"])(["initWishListItems"]))
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/wishList/WishListCount.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/app/components/wishList/WishListCount.js ***!
+  \*******************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("wish-list-count", {
+  props: {
+    template: {
+      type: String,
+      default: "#vue-wish-list-count"
+    }
+  },
+  computed: {
+    wishListCount: function wishListCount() {
+      return this.$store.getters.wishListCount;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/wishList/WishListItem.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/src/app/components/wishList/WishListItem.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_find_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find-index */ "./node_modules/core-js/modules/es.array.find-index.js");
+/* harmony import */ var core_js_modules_es_array_find_index__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_index__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.includes */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.define-properties */ "./node_modules/core-js/modules/es.object.define-properties.js");
+/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
+/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_VariationPropertyService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/VariationPropertyService */ "./resources/js/src/app/services/VariationPropertyService.js");
+
+
+
 
 
 
@@ -65109,85 +65232,79 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("wish-list", {
-  delimiters: ["${", "}"],
-  props: ["template", "initIds"],
-  data: function data() {
-    return {
-      isLoading: false,
-      wishListCount: {}
-    };
-  },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapState"])({
-    wishListItems: function wishListItems(state) {
-      return state.wishList.wishListItems;
-    },
-    wishListIds: function wishListIds(state) {
-      return state.wishList.wishListIds;
-    }
-  }),
-  created: function created() {
-    var _this = this;
 
-    this.$store.commit("setWishListIds", this.initIds);
-    this.isLoading = true;
-    this.initWishListItems(this.wishListIds).then(function (response) {
-      _this.isLoading = false;
-    }, function (error) {
-      _this.isLoading = false;
-    });
-  },
-  methods: _objectSpread({
-    removeItem: function removeItem(item) {
-      this.removeWishListItem(item).then(function () {
-        return NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.wishListRemoved"));
-      });
-    }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapActions"])(["initWishListItems", "removeWishListItem"]))
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/wishList/WishListCount.js":
-/*!*******************************************************************!*\
-  !*** ./resources/js/src/app/components/wishList/WishListCount.js ***!
-  \*******************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("wish-list-count", {
+/* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     template: {
       type: String,
-      default: "#vue-wish-list-count"
-    }
-  },
-  computed: {
-    wishListCount: function wishListCount() {
-      return this.$store.getters.wishListCount;
-    }
-  },
-  created: function created() {
-    var _this = this;
-
-    ApiService.get("/rest/io/itemWishList", {}, {
-      keepOriginalResponse: true
-    }).done(function (response) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isDefined"])(response.data)) {
-        _this.$store.commit("setWishListIds", response.data);
+      default: "#vue-wish-list-item"
+    },
+    imageAccessor: {
+      type: String,
+      default: "urlMiddle"
+    },
+    itemDetailsData: {
+      type: Array,
+      default: function _default() {
+        return ["wishListItem.variation.availability"];
       }
-    });
-  }
+    },
+    wishListItemRaw: Object
+  },
+  data: function data() {
+    return {
+      wishListItem: null
+    };
+  },
+  computed: _objectSpread({
+    image: function image() {
+      var itemImages = this.$options.filters.itemImages(this.wishListItem.images, this.imageAccessor);
+      return this.$options.filters.itemImage(itemImages);
+    },
+    unitPrice: function unitPrice() {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(this.wishListItem.prices.specialOffer)) {
+        return this.wishListItem.prices.specialOffer.unitPrice.value;
+      }
+
+      return this.wishListItem.prices.default.unitPrice.value;
+    },
+    basePrice: function basePrice() {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(this.wishListItem.prices.specialOffer)) {
+        return this.wishListItem.prices.specialOffer.basePrice;
+      }
+
+      return this.wishListItem.prices.default.basePrice;
+    },
+    transformedVariationProperties: function transformedVariationProperties() {
+      return Object(_services_VariationPropertyService__WEBPACK_IMPORTED_MODULE_15__["transformVariationProperties"])(this.wishListItem, [], "showInItemListing");
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_13__["mapState"])({
+    wishListItems: function wishListItems(state) {
+      return state.wishList.wishListItems;
+    }
+  })),
+  created: function created() {
+    this.wishListItem = this.wishListItemRaw.data;
+  },
+  methods: _objectSpread({
+    isDataFieldVisible: function isDataFieldVisible(value) {
+      return this.itemDetailsData.includes(value);
+    },
+    removeItem: function removeItem() {
+      var _this = this;
+
+      var item = {
+        id: this.wishListItem.variation.id,
+        wishListItem: this.wishListItemRaw,
+        index: this.wishListItems.findIndex(function (item) {
+          return item.id === _this.wishListItemRaw.id;
+        })
+      };
+      this.removeWishListItem(item).then(function () {
+        return NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.wishListRemoved"));
+      });
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_13__["mapActions"])(["removeWishListItem"]))
 });
 
 /***/ }),
@@ -71524,8 +71641,7 @@ var mutations = {
 };
 var actions = {
   loadBasketData: function loadBasketData(_ref2) {
-    var commit = _ref2.commit,
-        state = _ref2.state;
+    var commit = _ref2.commit;
     jQuery.when(ApiService.get("/rest/io/basket", {}, {
       cache: false
     }), ApiService.get("/rest/io/basket/items", {
@@ -71536,6 +71652,7 @@ var actions = {
       commit("setBasket", basket);
       commit("setBasketItems", basketItems);
       commit("setIsBasketInitiallyLoaded");
+      commit("setWishListIds", basket.itemWishListIds);
     }).catch(function (error, status) {
       console.log(error, status);
 
@@ -71546,6 +71663,8 @@ var actions = {
     ApiService.listen("AfterBasketChanged", function (data) {
       commit("setBasket", data.basket);
       commit("setShowNetPrices", data.showNetPrices); // commit("setBasketItems", data.basketItems);
+
+      commit("setWishListIds", data.basket.itemWishListIds);
     });
     ApiService.listen("AfterBasketItemAdd", function (data) {
       commit("addBasketItem", data.basketItem);
@@ -73707,7 +73826,9 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 
 var state = {
   wishListIds: [],
-  wishListItems: []
+  wishListItems: [],
+  isWishListInitiallyLoading: false,
+  isLoading: false
 };
 var mutations = {
   setWishListItems: function setWishListItems(state, wishListItems) {
@@ -73731,25 +73852,32 @@ var mutations = {
   },
   addWishListId: function addWishListId(state, id) {
     state.wishListIds.push(id);
+  },
+  setIsWishListInitiallyLoading: function setIsWishListInitiallyLoading(state) {
+    state.isWishListInitiallyLoading = true;
+  },
+  setIsWishListLoading: function setIsWishListLoading(state, isLoading) {
+    state.isLoading = !!isLoading;
   }
 };
 var actions = {
-  initWishListItems: function initWishListItems(_ref, ids) {
-    var commit = _ref.commit;
+  initWishListItems: function initWishListItems(_ref) {
+    var commit = _ref.commit,
+        state = _ref.state;
     return new Promise(function (resolve, reject) {
-      if (ids && ids[0]) {
-        commit("setWishListIds", ids);
-        ApiService.get("/rest/io/variations/", {
-          variationIds: ids,
-          template: "Ceres::WishList.WishList"
-        }).done(function (data) {
-          commit("setWishListItems", data.documents);
-          resolve(data);
+      if (!state.isWishListInitiallyLoading) {
+        commit("setIsWishListInitiallyLoading");
+        commit("setIsWishListLoading", true);
+        ApiService.get("/rest/io/itemWishList").done(function (response) {
+          commit("setWishListItems", response.documents);
+          resolve(response.documents);
         }).fail(function (error) {
           reject(error);
+        }).always(function () {
+          commit("setIsWishListLoading", false);
         });
       } else {
-        resolve();
+        resolve(state.wishListItems);
       }
     });
   },

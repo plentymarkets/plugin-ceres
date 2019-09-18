@@ -1,5 +1,16 @@
 {% extends getPartial('page-design') %}
 
+{% set optionalInvoiceAddressFields = {
+    "de": ceresConfig.addresses.billingAddressShow,
+    "gb": ceresConfig.addresses.billingAddressShow_en
+    }
+%}
+{% set requiredInvoiceAddressFields = {
+    "de": ceresConfig.addresses.billingAddressRequire,
+    "gb": ceresConfig.addresses.billingAddressRequire_en
+    }
+%}
+
 {% block PartialHead %}
     {% embed getPartial('page-metadata') %}
         {% block title trans("Ceres::Template.regRegister") %}
@@ -36,7 +47,14 @@
                 </h1>
 
                 <div class="row">
-                    <registration template="#vue-registration" backlink="{{ request.get("backlink") | url_encode }}"></registration>
+                    <div class="modal-body">
+                        <registration
+                            template="#vue-registration"
+                            backlink="{{ request.get("backlink") | url_encode }}"
+                            :shown-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+                            :required-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                        </registration>
+                    </div>
                 </div>
             </div>
         </div>

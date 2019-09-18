@@ -6148,6 +6148,97 @@
         }
     },
     {
+        "name": "Widget.widgetIconLabel",
+        "tooltipText": "Widget.widgetIconTooltip",
+        "listBoxValues": [
+            {
+                "value": "none",
+                "caption": "Widget.widgetIconNone",
+                "position": 0
+            },
+            {
+                "value": "fa-check",
+                "caption": "Widget.widgetIconCheck",
+                "position": 1
+            },
+            {
+                "value": "fa-circle",
+                "caption": "Widget.widgetIconCircle",
+                "position": 1
+            },
+            {
+                "value": "fa-circle-thin",
+                "caption": "Widget.widgetIconCircleThin",
+                "position": 1
+            },
+            {
+                "value": "fa-comment-o",
+                "caption": "Widget.widgetIconComment",
+                "position": 1
+            },
+            {
+                "value": "fa-credit-card",
+                "caption": "Widget.widgetIconCreditcard",
+                "position": 1
+            },
+            {
+                "value": "fa-envelope-o",
+                "caption": "Widget.widgetIconEnvelope",
+                "position": 1
+            },
+            {
+                "value": "fa-heart",
+                "caption": "Widget.widgetIconHeart",
+                "position": 1
+            },
+            {
+                "value": "fa-thumbs-o-up",
+                "caption": "Widget.widgetIconThumbsUp",
+                "position": 1
+            },
+            {
+                "value": "fa-euro",
+                "caption": "Widget.widgetIconEuro",
+                "position": 1
+            },
+            {
+                "value": "fa-dollar",
+                "caption": "Widget.widgetIconDollar",
+                "position": 1
+            },
+            {
+                "value": "fa-percent",
+                "caption": "Widget.widgetIconPercent",
+                "position": 1
+            },
+            {
+                "value": "fa-gift",
+                "caption": "Widget.widgetIconGift",
+                "position": 1
+            },
+            {
+                "value": "fa-truck",
+                "caption": "Widget.widgetIconTruck",
+                "position": 1
+            },
+            {
+                "value": "fa-phone",
+                "caption": "Widget.widgetIconPhone",
+                "position": 1
+            },
+            {
+                "value": "fa-copyright",
+                "caption": "Widget.widgetIconCopyright",
+                "position": 1
+            },
+            {
+                "value": "fa-registered",
+                "caption": "Widget.widgetIconRegistered",
+                "position": 1
+            }
+        ]
+    },
+    {
         "identifier": "Ceres::AddToBasketWidget",
         "label": "Widget.addtoBasketLabel",
         "previewImageURL": "/images/widgets/add-to-basket.svg",
@@ -7578,6 +7669,326 @@
                             "value": "danger",
                             "caption": "Widget.widgetAppearanceDanger",
                             "position": 5
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::RegistrationWidget",
+        "label": "Widget.registrationLabel",
+        "previewImageURL": "/images/widgets/registration.svg",
+        "type": "default",
+        "categories": [
+            "customer"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Login\\RegistrationWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "addressLayout": {
+                "type": "select",
+                "defaultValue": "DE",
+                "options": {
+                    "name": "Widget.addressLayout",
+                    "tooltipText": "Widget.addressLayoutTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "DE",
+                            "caption": "Widget.addressLayoutDE",
+                            "position": 0
+                        },
+                        {
+                            "value": "GB",
+                            "caption": "Widget.addressLayoutGB",
+                            "position": 1
+                        }
+                    ]
+                }
+            },
+            "shownFieldsDe": {
+                "type": "checkboxGroup",
+                "isVisible": "addressLayout === 'DE'",
+                "defaultValue": [
+                    "billing_address.name1",
+                    "billing_address.salutation"
+                ],
+                "options": {
+                    "name": "Widget.registrationShownFieldsDe",
+                    "checkboxValues": [
+                        {
+                            "value": "billing_address.name1",
+                            "caption": "Widget.addressFieldName1"
+                        },
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
+                        {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Widget.addressFieldSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Widget.addressFieldTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Widget.addressFieldBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Widget.addressFieldName4"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Widget.addressFieldAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Widget.addressFieldAddress4"
+                        },
+                        {
+                            "value": "billing_address.stateId",
+                            "caption": "Widget.addressFieldStateId"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Widget.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "requiredFieldsDe": {
+                "type": "checkboxGroup",
+                "isVisible": "addressLayout === 'DE'",
+                "defaultValue": [],
+                "options": {
+                    "name": "Widget.registrationRequiredFieldsDe",
+                    "checkboxValues": [
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Widget.addressFieldVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Widget.addressFieldSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Widget.addressFieldTitle"
+                        },
+                        {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldContactPerson"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Widget.addressFieldBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Widget.addressFieldName4"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Widget.addressFieldAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Widget.addressFieldAddress4"
+                        },
+                        {
+                            "value": "billing_address.stateId",
+                            "caption": "Widget.addressFieldStateId"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Widget.addressFieldPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "shownFieldsGb": {
+                "type": "checkboxGroup",
+                "isVisible": "addressLayout === 'GB'",
+                "defaultValue": [
+                    "billing_address.name1",
+                    "billing_address.address2",
+                    "billing_address.salutation"
+                ],
+                "options": {
+                    "name": "Widget.registrationShownFieldsGb",
+                    "checkboxValues": [
+                        {
+                            "value": "billing_address.name1",
+                            "caption": "Widget.addressFieldEnName1"
+                        },
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
+                        {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Widget.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Widget.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Widget.addressFieldEnBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Widget.addressFieldEnName4"
+                        },
+                        {
+                            "value": "billing_address.address2",
+                            "caption": "Widget.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Widget.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Widget.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Widget.addressFieldEnPhoneNumber"
+                        }
+                    ]
+                }
+            },
+            "requiredFieldsGb": {
+                "type": "checkboxGroup",
+                "isVisible": "addressLayout === 'GB'",
+                "defaultValue": [],
+                "options": {
+                    "name": "Widget.registrationRequiredFieldsGb",
+                    "checkboxValues": [
+                        {
+                            "value": "billing_address.vatNumber",
+                            "caption": "Widget.addressFieldEnVatNumber"
+                        },
+                        {
+                            "value": "billing_address.salutation",
+                            "caption": "Widget.addressFieldEnSalutation"
+                        },
+                        {
+                            "value": "billing_address.title",
+                            "caption": "Widget.addressFieldEnTitle"
+                        },
+                        {
+                            "value": "billing_address.contactPerson",
+                            "caption": "Widget.addressFieldEnContactPerson"
+                        },
+                        {
+                            "value": "billing_address.birthday",
+                            "caption": "Widget.addressFieldEnBirthday"
+                        },
+                        {
+                            "value": "billing_address.name4",
+                            "caption": "Widget.addressFieldEnName4"
+                        },
+                        {
+                            "value": "billing_address.address2",
+                            "caption": "Widget.addressFieldEnAddress2"
+                        },
+                        {
+                            "value": "billing_address.address3",
+                            "caption": "Widget.addressFieldEnAddress3"
+                        },
+                        {
+                            "value": "billing_address.address4",
+                            "caption": "Widget.addressFieldEnAddress4"
+                        },
+                        {
+                            "value": "billing_address.phoneNumber",
+                            "caption": "Widget.addressFieldEnPhoneNumber"
                         }
                     ]
                 }
