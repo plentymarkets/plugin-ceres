@@ -1,0 +1,3 @@
+<script>
+    window.ceresStore.commit("setWishListItems", {{ services.itemList.getItemList("random", null, null, 3) | json_encode | raw }});
+</script>
