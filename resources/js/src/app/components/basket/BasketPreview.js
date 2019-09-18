@@ -43,6 +43,7 @@ Vue.component("basket-preview", {
                 {
                     this.$store.commit("setBasket", data.basket);
                     this.$store.commit("setShowNetPrices", data.showNetPrices);
+                    this.$store.commit("setWishListIds", data.basket.itemWishListIds);
                 });
         });
 
