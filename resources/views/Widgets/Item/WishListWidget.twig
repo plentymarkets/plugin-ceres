@@ -11,12 +11,12 @@
 {% set appearance      = widget.settings.appearance.mobile | default("primary") %}
 {% set itemDetailsData = widget.settings.itemDetailsData.mobile | default(["basket.item.availability"]) %}
 
-<div class="widget widget-wish-list widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+<div class="widget widget-wish-list widget-{{ appearance }}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    
     <div class="widget-inner">
-
-        <wish-list :item-details-data="{{ itemDetailsData | json_encode }}">
-        </wish-list>
-
+        <wish-list :item-details-data="{{ itemDetailsData | json_encode }}"></wish-list>
     </div>
 </div>
