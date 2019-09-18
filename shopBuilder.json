@@ -92,6 +92,10 @@
             {
                 "label": "Widget.presetWishList",
                 "presetClass": "Ceres\\Widgets\\Presets\\WishListPreset"
+            },
+            {
+                "label": "Widget.presetRegistration",
+                "presetClass": "Ceres\\Widgets\\Presets\\RegistrationPreset"
             }
         ],
         "checkout": [
