@@ -420,6 +420,22 @@
                         "name": "Config.routingEnableRouteWishList"
                     }
                 },
+                "changeMailCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryChangeMail"
+                    }
+                },
+                "changeMailEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.changeMailCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteChangeMail"
+                    }
+                },
                 "newsletterOptOutCategory": {
                     "type": "category",
                     "required": false,
