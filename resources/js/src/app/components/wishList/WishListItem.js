@@ -1,3 +1,7 @@
+const NotificationService = require("../../services/NotificationService");
+
+import TranslationService from "../../services/TranslationService";
+import { mapState, mapActions } from "vuex";
 import { isNullOrUndefined } from "../../helper/utils";
 import { transformVariationProperties } from "../../services/VariationPropertyService";
 
@@ -19,7 +23,14 @@ export default {
             type: Array,
             default: () => ["wishListItem.variation.availability"]
         },
-        wishListItem: Object
+        wishListItemRaw: Object
+    },
+
+    data()
+    {
+        return {
+            wishListItem: null
+        };
     },
 
     computed:
@@ -54,7 +65,16 @@ export default {
         transformedVariationProperties()
         {
             return transformVariationProperties(this.wishListItem, [], "showInItemListing");
-        }
+        },
+
+        ...mapState({
+            wishListItems: state => state.wishList.wishListItems
+        })
+    },
+
+    created()
+    {
+        this.wishListItem = this.wishListItemRaw.data;
     },
 
     methods:
@@ -62,6 +82,25 @@ export default {
         isDataFieldVisible(value)
         {
             return this.itemDetailsData.includes(value);
-        }
+        },
+
+        removeItem()
+        {
+            const item =
+            {
+                id: this.wishListItem.variation.id,
+                wishListItem: this.wishListItemRaw,
+                index: this.wishListItems.findIndex(item => item.id === this.wishListItemRaw.id)
+            };
+
+            this.removeWishListItem(item)
+                .then(() => NotificationService.success(
+                    TranslationService.translate("Ceres::Template.wishListRemoved")
+                ));
+        },
+
+        ...mapActions([
+            "removeWishListItem"
+        ])
     }
 };

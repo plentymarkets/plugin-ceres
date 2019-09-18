@@ -6,10 +6,9 @@
 
         <transition-group name="wish-list-item-transition" tag="div">
             <wish-list-item
-                v-for="(wishListItem, index) in wishListItems"
+                v-for="wishListItem in wishListItems"
                 :key="wishListItem.id"
-                :wish-list-item="wishListItem.data"
-                @remove-item="removeItem({ id: wishListItem.data.variation.id, wishListItem: wishListItem, index })"
+                :wish-list-item-raw="wishListItem"
                 :item-details-data="itemDetailsData">
             </wish-list-item>
         </transition-group>
