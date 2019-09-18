@@ -16,7 +16,7 @@
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 {{ component( "Ceres::PageDesign.Components.Carousel" ) }}
 
-{% if request.get('isContentBuilder') == 1 %}
+{% if isShopBuilder %}
     {% include "Ceres::Widgets.WidgetComponents" %}
 {% endif %}
 
@@ -218,6 +218,10 @@
 {% for scriptTemplate in get_additional_scripts() %}
     {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
 {% endfor %}
+
+{% if isShopBuilder %}
+    {% include "Ceres::Widgets.ShopBuilderDataStore" %}
+{% endif %}
 
 <script>
     window.vueEventHub = new Vue();
