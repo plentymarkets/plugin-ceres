@@ -111,32 +111,7 @@ const actions =
     {
         loadBasketData({ commit })
         {
-            if ( App.isShopBuilder )
-            {
-                jQuery
-                    .when(
-                        ApiService.get("/rest/io/faker/basket", {}, { cache: false })
-                    )
-                    .then((fakeBasket) =>
-                    {
-                        commit("setBasket", fakeBasket["basket"]);
-                        commit("setBasketItems", fakeBasket["basketItems"]);
-                        commit("setIsBasketInitiallyLoaded");
-                        commit("setWishListIds", basket.itemWishListIds);
-                    })
-                    .catch((error, status) =>
-                    {
-                        console.log(error, status);
-
-                        if (status > 0)
-                        {
-                            NotificationService.error(
-                                TranslationService.translate("Ceres::Template.basketOops")
-                            ).closeAfter(10000);
-                        }
-                    });
-            }
-            else
+            if ( !App.isShopBuilder )
             {
                 jQuery
                     .when(
@@ -148,6 +123,7 @@ const actions =
                         commit("setBasket", basket);
                         commit("setBasketItems", basketItems);
                         commit("setIsBasketInitiallyLoaded");
+                        commit("setWishListIds", basket.itemWishListIds);
                     })
                     .catch((error, status) =>
                     {
