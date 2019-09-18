@@ -127,6 +127,7 @@ import "./components/myAccount/OrderReturnHistoryList";
 import "./components/myAccount/OrderReturnHistoryListItem";
 
 import "./components/newsletter/NewsletterInput";
+import "./components/newsletter/NewsletterUnsubscribeInput";
 
 import "./components/orderReturn/OrderReturn";
 import "./components/orderReturn/OrderReturnItem";
@@ -151,6 +152,8 @@ import "./components/wishList/WishListCount";
 import "./directives/basket/basketItemQuantity";
 import "./directives/basket/basketItemSum";
 import "./directives/basket/toggleBasketPreview";
+
+import "./directives/common/truncateTooltip";
 
 import "./directives/customer/logout";
 

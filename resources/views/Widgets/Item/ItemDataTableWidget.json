@@ -8,7 +8,6 @@
     "widgetClass": "Ceres\\Widgets\\Item\\ItemDataTableWidget",
     "settings": {
         "customClass":"@include(customClass)",
-        "spacing":"@include(spacing)",
         "itemInformation": {
             "type": "select",
             "isList": "[1,]",
@@ -66,6 +65,7 @@
                     }
                 ]
             }
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }

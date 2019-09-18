@@ -100,7 +100,7 @@
     </div>
 </div>
 
-{% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+{% if services.url.isRouteEnabled("wish-list") %}
     <div class="row">
         <div class="col-12">
             <add-to-wish-list :variation-id="currentVariation.variation.id"></add-to-wish-list>

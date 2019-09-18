@@ -1,59 +1,41 @@
-const NotificationService = require("../../services/NotificationService");
-
-import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState, mapActions } from "vuex";
+import WishListItem from "./WishListItem";
 
 Vue.component("wish-list", {
-
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "initIds"
-    ],
-
-    data()
+    components:
     {
-        return {
-            isLoading: false,
-            wishListCount: {}
-        };
+        WishListItem
+    },
+
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-wish-list"
+        },
+        itemDetailsData:
+        {
+            type: Array,
+            default: () => ["wishListItem.variation.availability"]
+        }
     },
 
     computed: mapState({
         wishListItems: state => state.wishList.wishListItems,
-        wishListIds: state => state.wishList.wishListIds
+        isLoading: state => state.wishList.isLoading
     }),
 
     created()
     {
-        this.$store.commit("setWishListIds", this.initIds);
-
-        this.isLoading = true;
-        this.initWishListItems(this.wishListIds).then(
-            response =>
-            {
-                this.isLoading = false;
-            },
-            error =>
-            {
-                this.isLoading = false;
-            });
+        this.initWishListItems();
     },
 
     methods:
     {
-        removeItem(item)
-        {
-            this.removeWishListItem(item)
-                .then(() => NotificationService.success(
-                    TranslationService.translate("Ceres::Template.wishListRemoved")
-                ));
-        },
         ...mapActions([
-            "initWishListItems",
-            "removeWishListItem"
+            "initWishListItems"
         ])
     }
 });

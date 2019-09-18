@@ -64,8 +64,8 @@
 
         <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale">
             <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-outline-primary mobile-width-button" @click="addToBasket()">
-                    <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true"></i>
+                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-outline-primary btn-outline-appearance mobile-width-button" @click="addToBasket()">
+                    <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true" v-waiting-animation="waiting"></i>
                     <span class="mobile-text-only">{{ trans("Ceres::Template.singleItemAddToBasket") }}</span>
                 </button>
                 <button type="button" v-if="!canBeAddedToBasket" class="btn btn-outline-primary mobile-width-button" @click="directToItem()">
