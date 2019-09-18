@@ -27,6 +27,11 @@
             @include button-variant($value, $value);
         }
 
+        .btn-outline-appearance
+        {
+            @include button-outline-variant($value);
+        }
+
         a.text-appearance,
         .btn-appearance
         {

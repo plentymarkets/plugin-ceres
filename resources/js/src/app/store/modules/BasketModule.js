@@ -109,7 +109,7 @@ const mutations =
 
 const actions =
     {
-        loadBasketData({ commit, state })
+        loadBasketData({ commit })
         {
             if ( App.isShopBuilder )
             {
@@ -122,6 +122,7 @@ const actions =
                         commit("setBasket", fakeBasket["basket"]);
                         commit("setBasketItems", fakeBasket["basketItems"]);
                         commit("setIsBasketInitiallyLoaded");
+                        commit("setWishListIds", basket.itemWishListIds);
                     })
                     .catch((error, status) =>
                     {
@@ -166,6 +167,7 @@ const actions =
                 commit("setBasket", data.basket);
                 commit("setShowNetPrices", data.showNetPrices);
                 // commit("setBasketItems", data.basketItems);
+                commit("setWishListIds", data.basket.itemWishListIds);
             });
 
             ApiService.listen("AfterBasketItemAdd", data =>

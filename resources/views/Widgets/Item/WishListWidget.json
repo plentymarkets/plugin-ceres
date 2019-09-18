@@ -1,0 +1,48 @@
+{
+    "identifier": "Ceres::WishListWidget",
+    "label": "Widget.wishListLabel",
+    "previewImageURL": "/images/widgets/wish-list.svg",
+    "type": "static",
+    "categories": ["item"],
+    "position": 700,
+    "widgetClass": "Ceres\\Widgets\\Item\\WishListWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "itemDetailsData": {
+            "type": "checkboxGroup",
+            "defaultValue": ["wishListItem.variation.availability"],
+            "options": {
+                "name": "Widget.wishListItemDetailsDataLabel",
+                "checkboxValues": [
+                    {
+                        "value": "wishListItem.item.id",
+                        "caption": "Widget.wishListItemDetailsDataItemId"
+                    },
+                    {
+                        "value": "wishListItem.variation.number",
+                        "caption": "Widget.wishListItemDetailsDataCustomNumber"
+                    },
+                    {
+                        "value": "wishListItem.variation.availability",
+                        "caption": "Widget.wishListItemDetailsDataAvailability"
+                    },
+                    {
+                        "value": "wishListItem.texts.description",
+                        "caption": "Widget.wishListItemDetailsDataDescriptionLong"
+                    },
+                    {
+                        "value": "wishListItem.texts.shortDescription",
+                        "caption": "Widget.wishListItemDetailsDataDescriptionShort"
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}

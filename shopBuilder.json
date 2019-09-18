@@ -84,6 +84,14 @@
             {
                 "label": "Widget.presetNewsletterUnsubscribe",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset"
+            },
+            {
+                "label": "Widget.presetOrderConfirmationDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
+            },
+            {
+                "label": "Widget.presetWishList",
+                "presetClass": "Ceres\\Widgets\\Presets\\WishListPreset"
             }
         ],
         "checkout": [
@@ -164,6 +172,11 @@
             "key": "contact",
             "label": "Widget.categoryContact",
             "position": 1100
+        },
+        {
+            "key": "orderconfirmation",
+            "label": "Widget.categoryOrderConfirmation",
+            "position": 1200
         },
         {
             "key": "footer",
@@ -272,6 +285,31 @@
                     "isVisible": "!routing.registerCategory",
                     "options": {
                         "name": "Config.routingEnableRouteRegister"
+                    }
+                },
+                "confirmationCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryConfirmation"
+                    }
+                },
+                "confirmationEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.confirmationCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteConfirmation"
+                    }
+                },
+                "confirmationGuestCategory": {
+                    "type": "category",
+                    "required": false,
+                    "isVisible": "routing.confirmationCategory",
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryGuestConfirmation"
                     }
                 },
                 "cancellationRightsCategory": {
@@ -386,6 +424,38 @@
                         "name": "Config.routingEnableRouteWishList"
                     }
                 },
+                "changeMailCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryChangeMail"
+                    }
+                },
+                "changeMailEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.changeMailCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteChangeMail"
+                    }
+                },
+                "newsletterOptOutCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryNewsletterOptOut"
+                    }
+                },
+                "newsletterOptOutEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.newsletterOptOutCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteNewsletterOptOut"
+                    }
+                },
                 "pageNotFoundCategory": {
                     "type": "category",
                     "required": false,
@@ -466,6 +536,7 @@
     },
     "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
     "supportedFeatures": {
-        "singleItemContent": true
+        "singleItemContent": true,
+        "globalElementsOverride": true
     }
 }
