@@ -37,6 +37,8 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.contactEnableRoute'            => 'IO.routing.enabled_routes',
         'routing.wishListCategory'              => 'IO.routing.category_wish-list',
         'routing.wishListEnableRoute'           => 'IO.routing.enabled_routes',
+        'routing.changeMailCategory'            => 'IO.routing.category_change-mail',
+        'routing.changeMailEnableRoute'         => 'IO.routing.enabled_routes',
         'routing.newsletterOptOutCategory'      => 'IO.routing.category_newsletter-opt-out',
         'routing.newsletterOptOutEnableRoute'   => 'IO.routing.enabled_routes',
         'routing.pageNotFoundCategory'          => 'IO.routing.category_page-not-found',
@@ -65,6 +67,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.gtcCategory'                   => 'int',
         'routing.contactCategory'               => 'int',
         'routing.wishListCategory'              => 'int',
+        'routing.changeMailCategory'            => 'int',
         'routing.newsletterOptOutCategory'      => 'int',
         'routing.pageNotFoundCategory'          => 'int',
         'routing.shippingCategory'              => 'int',
@@ -215,6 +218,16 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         return $this->setEnabledRoute(RouteConfig::WISH_LIST, $enableWishListRoute);
     }
 
+    public function readRouting_ChangeMailEnableRoute()
+    {
+        return in_array( RouteConfig::CHANGE_MAIL, RouteConfig::getEnabledRoutes());
+    }
+
+    public function writeRouting_ChangeMailEnableRoute($enableWishListRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::CHANGE_MAIL, $enableWishListRoute);
+    }
+  
     public function readRouting_NewsletterOptOutEnableRoute()
     {
         return in_array( RouteConfig::NEWSLETTER_OPT_OUT, RouteConfig::getEnabledRoutes());

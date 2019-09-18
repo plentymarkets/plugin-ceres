@@ -57,7 +57,7 @@
                         <div class="price-box">
                 
                             <div class="item-remove-container text-center">
-                                <div class="btn btn-sm item-remove-button" @click="$emit('remove-item', 'fick dich')">
+                                <div class="btn btn-sm item-remove-button" @click="removeItem()">
                                     <span>
                                         {{ trans("Ceres::Template.wishListDelete") }}
                                         <i v-waiting-animation-infinite class="fa fa-trash-o" aria-hidden="true"></i>
