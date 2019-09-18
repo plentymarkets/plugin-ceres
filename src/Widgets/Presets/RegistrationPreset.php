@@ -18,7 +18,7 @@ class RegistrationPreset implements ContentPreset
                                     ->withSetting("customClass", "")
                                     ->withSetting("layout", "oneToTwoToOne");
 
-        $popper = "<popper v-cloak class='float-right' style='padding-top:18px'><template #handle><button class='btn btn-icon btn-secondary btn-sm'><i class='fa fa-info'></i></button></template><template #title>{{ trans('Ceres::Template.regContactInformations') }}</template><template #content><ul class='pl-3'><li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li><li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li><li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li><li>{{ trans('Ceres::Template.regContactInfoText4') }}</li></ul></template></popper>";
+        $popper = "<popper v-cloak class='float-right' style='padding-top:18px; z-index:1;'><template #handle><button class='btn btn-icon btn-secondary btn-sm'><i class='fa fa-info'></i></button></template><template #title>{{ trans('Ceres::Template.regContactInformations') }}</template><template #content><ul class='pl-3'><li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li><li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li><li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li><li>{{ trans('Ceres::Template.regContactInfoText4') }}</li></ul></template></popper>";
 
         $threeColumnWidget->createChild("second", "Ceres::CodeWidget")
                           ->withSetting("text", $popper)
