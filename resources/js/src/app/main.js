@@ -236,24 +236,24 @@ const showShopNotification = function(event)
 
 document.addEventListener("showShopNotification", showShopNotification);
 
-const vueApp = document.getElementById("vue-app");
-const headerParent = document.querySelector("[data-header-offset]");
+let headerParent = document.querySelector("[data-header-offset]");
 let headerLoaded = false;
 let allHeaderChildrenHeights = [];
 
 if ( headerParent )
 {
-    const headerChildren = headerParent.children;
-
     function calculateBodyOffset()
     {
+        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
         if (headerLoaded && headerParent)
         {
+            const vueApp = document.getElementById("vue-app");
             let bodyOffset = 0;
 
-            for ( let i = 0; i < headerChildren.length; i++ )
+            for ( let i = 0; i < headerParent.children.length; i++ )
             {
-                bodyOffset += headerChildren[i].getBoundingClientRect().height;
+                bodyOffset += headerParent.children[i].getBoundingClientRect().height;
             }
             vueApp.style.marginTop = bodyOffset + "px";
             vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
@@ -262,16 +262,20 @@ if ( headerParent )
 
     function getHeaderChildrenHeights()
     {
+        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
         allHeaderChildrenHeights = [];
 
-        for (let i = 0; i < headerChildren.length; i++)
+        for (let i = 0; i < headerParent.children.length; i++)
         {
-            allHeaderChildrenHeights.push(headerChildren[i].getBoundingClientRect().height);
+            allHeaderChildrenHeights.push(headerParent.children[i].getBoundingClientRect().height);
         }
     }
 
     function scrollHeaderElements()
     {
+        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
         if (headerLoaded && !App.isShopBuilder)
         {
             let absolutePos = 0;
@@ -280,9 +284,9 @@ if ( headerParent )
             const scrollTop = window.pageYOffset;
             let zIndex = 100;
 
-            for (let i = 0; i < headerChildren.length; i++)
+            for (let i = 0; i < headerParent.children.length; i++)
             {
-                const elem = headerChildren[i];
+                const elem = headerParent.children[i];
                 const elemHeight = allHeaderChildrenHeights[i];
 
                 offset = absolutePos - scrollTop;
