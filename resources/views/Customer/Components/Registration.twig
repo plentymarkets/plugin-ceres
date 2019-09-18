@@ -67,10 +67,10 @@
                 </accept-privacy-policy-check>
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="border-top">
             {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
 
-            <button :disabled="isDisabled" class="btn btn-appearance btn-primary btn-medium float-right">
+            <button :disabled="isDisabled" class="btn btn-appearance btn-primary btn-medium float-right mt-3">
                 <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i> 
                 {{ trans("Ceres::Template.regRegister") }}
             </button>
