@@ -4,7 +4,7 @@
         <label class="form-check-label" :for="'privacy-policy-accept' + _uid">
             {% autoescape false %}
                 {% set policyContent %}<!--
-                    --><a href="{{ urls.privacyPolicy }}" target="_blank">
+                    --><a href="{{ urls.privacyPolicy }}" target="_blank" class="text-appearance">
                         <span>{{ trans("Ceres::Template.contactPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
                     </a><!--
                 -->{% endset %}
