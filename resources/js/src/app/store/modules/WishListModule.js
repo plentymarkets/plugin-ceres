@@ -3,7 +3,9 @@ const ApiService = require("../../services/ApiService");
 const state =
     {
         wishListIds: [],
-        wishListItems: []
+        wishListItems: [],
+        isWishListInitiallyLoading: false,
+        isLoading: false
     };
 
 const mutations =
@@ -36,25 +38,49 @@ const mutations =
         addWishListId(state, id)
         {
             state.wishListIds.push(id);
+        },
+
+        setIsWishListInitiallyLoading(state)
+        {
+            state.isWishListInitiallyLoading = true;
+        },
+
+        setIsWishListLoading(state, isLoading)
+        {
+            state.isLoading = !!isLoading;
         }
     };
 
 const actions =
     {
-        initWishListItems({ commit })
+        initWishListItems({ commit, state })
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.get("/rest/io/itemWishList")
-                    .done(response =>
-                    {
-                        commit("setWishListItems", response.documents);
-                        resolve(response);
-                    })
-                    .fail(error =>
-                    {
-                        reject(error);
-                    });
+                if (!state.isWishListInitiallyLoading)
+                {
+                    commit("setIsWishListInitiallyLoading");
+                    commit("setIsWishListLoading", true);
+
+                    ApiService.get("/rest/io/itemWishList")
+                        .done(response =>
+                        {
+                            commit("setWishListItems", response.documents);
+                            resolve(response.documents);
+                        })
+                        .fail(error =>
+                        {
+                            reject(error);
+                        })
+                        .always(() =>
+                        {
+                            commit("setIsWishListLoading", false);
+                        });
+                }
+                else
+                {
+                    resolve(state.wishListItems);
+                }
             });
         },
 
