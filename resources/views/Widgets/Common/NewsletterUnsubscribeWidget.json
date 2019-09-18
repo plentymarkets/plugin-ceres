@@ -1,0 +1,17 @@
+{
+    "identifier": "Ceres::NewsletterUnsubscribeWidget",
+    "label": "Widget.newsletterUnsubscribeLabel",
+    "previewImageURL": "/images/widgets/newsletter-unsubscribe.svg",
+    "type": "static",
+    "widgetClass": "Ceres\\Widgets\\Common\\NewsletterUnsubscribeWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

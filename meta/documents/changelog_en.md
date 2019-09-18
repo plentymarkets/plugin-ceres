@@ -1,5 +1,17 @@
 # Release Notes for Ceres
 
+## v4.2.1 (2019-09-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.0...4.2.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- You can now create an individual header and footer for each category and each content type.
+- Variation properties are no longer limited to type "None" in the checkout. Furthermore, variation properties will now be displayed on the shopping cart page.
+
+### Fixed
+
+- Due to an error, hashes included in URLs were cut off when the page was accessed. This has been fixed.
+- Due to an error, data for the mobile navigation was not loaded in categories that were linked as the homepage. This has been fixed.
+
 ## v4.2.0 (2019-08-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.2...4.2.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
@@ -21,6 +33,8 @@
 - The logo of the manufacturer is now available as a data field in the inline editor of the single item view.
 - You can now select the type of animation for the image carousel and the item image widgets.
 - .css and .js files now have a dynamic suffix, which makes it possible to remove them from browser caches when the plugin set is saved and published (Cache busting).
+- A warning is now displayed if an item without stock limitation is added to the shopping cart in an amount that exceed its available stock. The new key in the **CMS » Multilingualism** menu is "notificationsWarningOverselling".
+
 
 ### Changed
 
@@ -31,7 +45,6 @@
 - The "Add to shopping cart" button is now deactivated in the single item view if the selected variation cannot be purchased.
 - Items that are linked to an empty item template are now displayed in the default single item view layout of Ceres.
 - In order to save data traffic, only currently visible categories are transmitted to the browser while the page navigation is assembled.
-- The CSS is now loaded depending on the Ceres setting **Logging and performance » Performance level**. In development mode, the CSS is loaded completely; in live mode, the CSS is compressed. This ensures a smaller download size. We would like to thank @JVolke for his contribution.
 - The mobile navigation now initially displays the default category of the item on the single item view.
 
 ### Fixed
@@ -42,14 +55,14 @@
 - Due to an error, the timer of the shopping cart modal was not working as intended. This has been fixed.
 - If an item was linked to an item template for which no content had been stored in the tab Template, TWIG errors could occur when opening the single item view of the item. This has been fixed.
 - The title of the image box widget was not displayed correctly on mobile devices if the option "Image and text (full footer)" was active. This has been fixed.
-- Under certain circumstances, the title bar widget could issue an additional empty '<h1>' tag. This has been fixed.
+- Under certain circumstances, the title bar widget could issue an additional empty `<h1>` tag. This has been fixed.
 - Due to an error, item URLs were not displayed correctly if the option **Trailing slash** was active. This has ben fixed.
 - Under certain circumstance, rounding errors caused incorrect price displays. This has been fixed.
 - Due to an error, the newsletter widget caused the display of a number of faulty error notifications in the browser console.
 - The discount of items with the store special "Special offer" was calculated incorrectly if an active sales price was configured as a "Special offer" price. This has been fixed.
 - The "Add to basket" button is now visibly deactivated if an item can not be purchased.
 - The 'isVariationSelected' value in the SingleItem component is now correctly linked to the VueX module.
-- Special characters were not displayed correctly in the '<title>' tag. This has been fixed.
+- Special characters were not displayed correctly in the `<title>` tag. This has been fixed.
 - Selecting filters on category pages could lead to an error. This has been fixed.
 - The labels of the item sorting values "First update" and "Last update" were swapped. This has been fixed.
 - Due to an error, no error notifications were displayed in the shopping cart preview. This has been fixed.

@@ -8,6 +8,7 @@ use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Order\Shipping\ParcelService\Models\ParcelService;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodContainer;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
+use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 
@@ -158,8 +159,19 @@ class DefaultSettingsService
     public function getPluginSets(): array
     {
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
+        $pluginRepo = pluginApp(PluginRepositoryContract::class);
         $pluginSets = $pluginSetRepo->list();
-        return $pluginSets->toArray();
+        $pluginSetsData = $pluginSets->toArray();
+        $pluginSetList = [];
+        if (count($pluginSetsData)) {
+            foreach ($pluginSetsData as $pluginSet) {
+                if ($pluginRepo->isActiveInPluginSetByName("Ceres", $pluginSet['id'])) {
+                    $pluginSetList[] = $pluginSet;
+                }
+            }
+        }
+
+        return $pluginSetList;
     }
 
     /**

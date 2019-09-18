@@ -8,11 +8,11 @@ namespace Ceres\Wizard\ShopWizard\Mapping;
  */
 class DataMapping
 {
-    public $dataMapping = [];
+    private $dataMapping = [];
 
-    public $globalMapping = [];
+    private $globalMapping = [];
 
-    public $pluginMapping = [];
+    private $pluginMapping = [];
 
     /**
      * DataMapping constructor.

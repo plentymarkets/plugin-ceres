@@ -1,0 +1,16 @@
+.widget-wish-list,
+.page-wish-list {
+    .category-list-view-port {
+        button {
+            white-space: nowrap;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+    }
+
+    .item-additional-information {
+        .badge {
+            font-size: 85%;
+        }
+    }
+}

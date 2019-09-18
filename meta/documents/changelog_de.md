@@ -1,5 +1,17 @@
 # Release Notes für Ceres
 
+## v4.2.1 (2019-09-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.0...4.2.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Header und Footer können nun im ShopBuilder individuell für Kategorien und Inhaltstypen gestaltet werden.
+- Eigenschaften sind nun im Bestellvorgang nicht mehr auf den Typ "Kein" beschränkt. Zudem werden Eigenschaften nun im Warenkorb ausgegeben.
+
+### Behoben 
+
+- Durch einen Fehler wurden Hashes an der URL beim Seitenaufruf abgeschnitten. Dies wurde behoben.
+- Durch einen Fehler wurden die Daten der mobilen Navigation in Kategorien, die als Startseite verknüpft sind, nicht geladen. Dies wurde behoben.
+
 ## v4.2.0 (2019-08-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.2...4.2.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
@@ -21,6 +33,7 @@
 - Das Herstellerlogo steht nun als Datenfeld im Inline-Editor der Artikeleinzelansicht zur Verfügung.
 - Die Widgets Bilderkarussell und Artikelbild wurden um eine Option zur Auswahl der Animation erweitert.
 - .css- und .js-Dateien erhalten ein dynamisches Suffix, um diese nach der Bereitstellung der Plugins aus Browser-Caches zu entfernen (Cache-Busting).
+- Es wird nun eine Warnung ausgegeben, wenn ein Artikel ohne Bestandsbegrenzung in einer Menge in den Warenkorb gelegt wird, die nicht vom Bestand gedeckt ist. Der hinzugefügte Wert im Menü **CMS » Mehrsprachigkeit** lautet "notificationsWarningOverselling".
 
 ### Geändert
 
@@ -31,7 +44,6 @@
 - Die Schaltfläche "In den Warenkorb" ist nun in der Artikelansicht deaktiviert, wenn die ausgewählte Variante nicht kaufbar ist.
 - Artikel, die mit einer leeren Artikelvorlage verknüpft sind, werden mit dem Layout der Standard-Artikelansicht von Ceres ausgegeben.
 - Beim Aufbau der Seitennavigation werden nur noch aktuell sichtbare Kategorien an den Browser übertragen, um Datenaufkommen zu sparen.
-- Das CSS wird nun abhängig von der Ceres-Einstellung **Logging und Performance » Performance-Level** entweder vollständig oder in einer komprimierten Variante geladen. Dies sorgt für geringere Downloadgröße. Wir möchten uns bei @JVolke für den Beitrag bedanken.
 - Die mobile Navigation zeigt nun auf Artikelseiten initial die Standardkategorie des Artikels an.
 
 ### Behoben
@@ -42,14 +54,14 @@
 - Durch einen Fehler funktionierte der Timer des Warenkorb-Modals nicht wie beabsichtigt. Dies wurde behoben.
 - Wenn ein Artikel mit einer Artikelvorlage verknüpft wurde, für deren Kategorie keinen Inhalt im Tab Template hinterlegt war, kam es zu TWIG-Fehlern beim Öffnen der Einzelansicht des Artikels. Dies wurde behoben.
 - Die Überschrift des Bilderbox-Widget wurde auf mobilen Geräten fehlerhaft dargestellt, wenn die Option "Bild und Text (vollbreite Fußzeile)" ausgewählt war. Dies wurde behoben.
-- Im Titelleisten-Widget wurde unter gewissen Umständen ein zusätzliches, leeres '<h1>'-Tag ausgegeben. Dies wurde behoben.
+- Im Titelleisten-Widget wurde unter gewissen Umständen ein zusätzliches, leeres `<h1>`-Tag ausgegeben. Dies wurde behoben.
 - Durch einen Fehler wurde die Artikel-URL nicht richtig dargestellt, wenn die Option **Slash(/) am Ende von URLs** aktiviert war. Dies wurde behoben.
 - Durch Rundungsfehler kam es unter bestimmten Bedingungen zu fehlerhaften Preisdarstellungen. Dies wurde behoben.
 - Es wurde ein Fehler beim Newsletter-Widget behoben, durch welchen fälschlicherweise Fehlermeldungen in der Entwicklerkonsole des Browsers auftauchten.
 - Bei Artikeln mit der Shop-Aktion "Sonderangebot" im Zusammenhang mit einem aktiven Aktionspreis wurde der Rabatt falsch berechnet. Dies wurde behoben.
 - Die "In den Warenkorb"-Schaltfläche ist nun sichtlich deaktiviert, wenn ein Artikel nicht kaufbar ist, aber im Shop angezeigt wird.
 - Der Wert 'isVariationSelected' innerhalb der SingleItem-Komponente wird nun korrekt an das VueX-Modul gebunden.
-- Im '<title>'-Tag wurden Sonderzeichen nicht korrekt ausgegeben. Dies wurde behoben.
+- Im `<title>`-Tag wurden Sonderzeichen nicht korrekt ausgegeben. Dies wurde behoben.
 - Auf Kategorieseiten kam es beim Auswählen von Filtern zu einem Fehler. Dies wurde behoben.
 - Die Benennungen der Artikelsortierungswerte "Zuerst aktualisierte Variante zuerst" und "Zuletzt aktualisierte Variante zuerst" waren vertauscht. Dies wurde behoben.
 - Durch einen Fehler wurden keine Fehlermeldungen in der Warenkorbvorschau angezeigt. Dies wurde behoben.

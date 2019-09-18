@@ -1,0 +1,4 @@
+<script>
+    window.ceresStore.commit("setWishListItems", {{ services.itemList.getItemList("random", null, null, 3).documents | json_encode | raw }});
+    window.ceresStore.commit("setIsWishListInitiallyLoading");
+</script>
