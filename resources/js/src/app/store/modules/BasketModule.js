@@ -111,28 +111,55 @@ const actions =
     {
         loadBasketData({ commit, state })
         {
-            jQuery
-                .when(
-                    ApiService.get("/rest/io/basket", { loadFaker: App.isShopBuilder }, { cache: false }),
-                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket", loadFaker: App.isShopBuilder }, { cache: false })
-                )
-                .then((basket, basketItems) =>
-                {
-                    commit("setBasket", basket);
-                    commit("setBasketItems", basketItems);
-                    commit("setIsBasketInitiallyLoaded");
-                })
-                .catch((error, status) =>
-                {
-                    console.log(error, status);
-
-                    if (status > 0)
+            if ( App.isShopBuilder )
+            {
+                jQuery
+                    .when(
+                        ApiService.get("/rest/io/faker/basket", {}, { cache: false })
+                    )
+                    .then((fakeBasket) =>
                     {
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.basketOops")
-                        ).closeAfter(10000);
-                    }
-                });
+                        commit("setBasket", fakeBasket["basket"]);
+                        commit("setBasketItems", fakeBasket["basketItems"]);
+                        commit("setIsBasketInitiallyLoaded");
+                    })
+                    .catch((error, status) =>
+                    {
+                        console.log(error, status);
+
+                        if (status > 0)
+                        {
+                            NotificationService.error(
+                                TranslationService.translate("Ceres::Template.basketOops")
+                            ).closeAfter(10000);
+                        }
+                    });
+            }
+            else
+            {
+                jQuery
+                    .when(
+                        ApiService.get("/rest/io/basket", {}, { cache: false }),
+                        ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
+                    )
+                    .then((basket, basketItems) =>
+                    {
+                        commit("setBasket", basket);
+                        commit("setBasketItems", basketItems);
+                        commit("setIsBasketInitiallyLoaded");
+                    })
+                    .catch((error, status) =>
+                    {
+                        console.log(error, status);
+
+                        if (status > 0)
+                        {
+                            NotificationService.error(
+                                TranslationService.translate("Ceres::Template.basketOops")
+                            ).closeAfter(10000);
+                        }
+                    });
+            }
 
             ApiService.listen("AfterBasketChanged", data =>
             {
