@@ -1372,6 +1372,14 @@
                     "options": {
                       "defaultValue": "true"
                     }
+                },
+                "basket.show_all_shipping_profiles": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.basketShowAllShippingProfiles",
+                    "options": {
+                      "defaultValue": "false"
+                    }
                 }
             }
         },
