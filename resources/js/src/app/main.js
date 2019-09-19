@@ -350,6 +350,13 @@ if ( headerParent )
                 {
                     resolve();
                 }
+                else
+                {
+                    headerImage.onload = function()
+                    {
+                        resolve();
+                    };
+                }
             });
         })
     ).then(function()
