@@ -444,6 +444,22 @@
                         "name": "Config.routingEnableRouteChangeMail"
                     }
                 },
+                "passwordResetCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryPasswordReset"
+                    }
+                },
+                "passwordResetEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.passwordResetCategory",
+                    "options": {
+                        "name": "Config.routingEnableRoutePasswordReset"
+                    }
+                },
                 "newsletterOptOutCategory": {
                     "type": "category",
                     "required": false,
