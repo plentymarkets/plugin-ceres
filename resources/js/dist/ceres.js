@@ -68968,9 +68968,13 @@ if (headerParent) {
   var headerImages = headerParent.querySelectorAll("img");
   Promise.all(Array.prototype.slice.call(headerImages).map(function (headerImage) {
     return new Promise(function (resolve) {
-      headerImage.onload = function () {
+      if (headerImage.complete && headerImage.naturalHeight !== 0) {
         resolve();
-      };
+      } else {
+        headerImage.onload = function () {
+          resolve();
+        };
+      }
     });
   })).then(function () {
     // Initialize
