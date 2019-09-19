@@ -109,9 +109,9 @@ const mutations =
 
 const actions =
     {
-        loadBasketData({ commit })
+        loadBasketData({ state, commit })
         {
-            if ( !App.isShopBuilder )
+            if ( !state.isBasketInitiallyLoaded )
             {
                 jQuery
                     .when(
