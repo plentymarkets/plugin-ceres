@@ -2,17 +2,30 @@ import ValidationService from "../../services/ValidationService";
 import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
 import Vue from "vue";
+import { isNullOrUndefined } from "../../helper/utils";
 
 const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
 Vue.component("reset-password-form", {
 
-    props: [
-        "contactId",
-        "hash",
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-reset-password-form"
+        },
+        contactId:
+        {
+            type: Number,
+            required: true
+        },
+        hash:
+        {
+            type: String,
+            required: true
+        }
+    },
 
     data()
     {
@@ -36,6 +49,18 @@ Vue.component("reset-password-form", {
                 .fail(invalidFields =>
                 {
                     ValidationService.markInvalidFields(invalidFields, "has-error");
+                    const validation = !isNullOrUndefined(invalidFields[0]) ? invalidFields[0].dataset.validate : null;
+
+                    if (validation === "password")
+                    {
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.resetPwInvalidPassword")
+                        );
+                    }
+                    else if (validation === "ref")
+                    {
+                        NotificationService.error("Ceres::Template.resetPwRepeatNewPassword");
+                    }
                 });
         },
 
