@@ -346,10 +346,17 @@ if ( headerParent )
         {
             return new Promise(function(resolve)
             {
-                headerImage.onload = function()
+                if (headerImage.complete && headerImage.naturalHeight !== 0)
                 {
                     resolve();
-                };
+                }
+                else
+                {
+                    headerImage.onload = function()
+                    {
+                        resolve();
+                    };
+                }
             });
         })
     ).then(function()
