@@ -2,6 +2,7 @@ import Vue from "vue";
 import { mapState, mapMutations, mapActions } from "vuex";
 import { navigateTo } from "../../services/UrlService";
 import TranslationService from "../../services/TranslationService";
+import NotificationService from "../../services/NotificationService";
 
 Vue.component("order-return", {
 
@@ -64,9 +65,7 @@ Vue.component("order-return", {
                 response =>
                 {
                     $(this.$refs.orderReturnConfirmation).modal("hide");
-                    console.log("detlef")
                     navigateTo(window.location.origin);
-                    console.log("detlef2")
                     NotificationService.success(
                         TranslationService.translate("Ceres::Template.returnConfirmationInfo")
                     ).closeAfter(3000);
