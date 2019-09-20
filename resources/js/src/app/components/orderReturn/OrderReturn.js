@@ -1,12 +1,22 @@
 import Vue from "vue";
 import { mapState, mapMutations, mapActions } from "vuex";
+import { navigateTo } from "../../services/UrlService";
+import TranslationService from "../../services/TranslationService";
 
 Vue.component("order-return", {
 
-    props: [
-        "initOrderData",
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-order-return"
+        },
+        initOrderData:
+        {
+            type: Object,
+            required: true
+        }
+    },
 
     data()
     {
@@ -40,8 +50,12 @@ Vue.component("order-return", {
             this.sendOrderReturn().then(
                 response =>
                 {
-                    window.open("/return-confirmation", "_self");
                     $(this.$refs.orderReturnConfirmation).modal("hide");
+                    navigateTo(window.location.origin);
+
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.returnConfirmationInfo")
+                    ).closeAfter(3000);
                 },
                 error =>
                 {

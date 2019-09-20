@@ -1,0 +1,18 @@
+{
+    "identifier": "Ceres::OrderReturnWidget",
+    "label": "Widget.orderReturnLabel",
+    "previewImageURL": "/images/widgets/order-return.svg",
+    "type": "default",
+    "categories": ["orderconfirmation"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderReturnWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}
