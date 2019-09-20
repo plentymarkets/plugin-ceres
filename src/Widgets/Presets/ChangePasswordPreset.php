@@ -24,7 +24,7 @@ class ChangePasswordPreset implements ContentPreset
             ->withSetting("customClass", "")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.left.value", 3)
+            ->withSetting("spacing.margin.left.value", 0)
             ->withSetting("spacing.margin.left.unit", null);
 
         $row->createChild("second", "Ceres::ChangePasswordWidget")
