@@ -6,7 +6,7 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
-class DefaultChangeMailPreset implements ContentPreset
+class ChangePasswordPreset implements ContentPreset
 {
     public function getWidgets()
     {
@@ -20,7 +20,7 @@ class DefaultChangeMailPreset implements ContentPreset
             ->withSetting("layout", "oneToTwoToOne");
 
         $row->createChild("second", "Ceres::InlineTextWidget")
-            ->withSetting("text", '<h1>{{ trans("Ceres::Template.myAccountChangeEmail") }}</h1><p>{{ trans("Ceres::Template.myAccountChangeEmailInfoText") }}</p>')
+            ->withSetting("text", '<h1>{{ trans("Ceres::Template.resetPwResetPassword") }}</h1>')
             ->withSetting("customClass", "")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
@@ -29,7 +29,7 @@ class DefaultChangeMailPreset implements ContentPreset
             ->withSetting("spacing.padding.right.value", 0)
             ->withSetting("spacing.padding.right.unit", null);
 
-        $row->createChild("second", "Ceres::ChangeMailWidget")
+        $row->createChild("second", "Ceres::ChangePasswordWidget")
             ->withSetting("customClass", "")
             ->withSetting("appearance", "primary");
 

@@ -39,6 +39,8 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.wishListEnableRoute'           => 'IO.routing.enabled_routes',
         'routing.changeMailCategory'            => 'IO.routing.category_change-mail',
         'routing.changeMailEnableRoute'         => 'IO.routing.enabled_routes',
+        'routing.passwordResetCategory'         => 'IO.routing.category_password-reset',
+        'routing.passwordResetEnableRoute'      => 'IO.routing.enabled_routes',
         'routing.newsletterOptOutCategory'      => 'IO.routing.category_newsletter-opt-out',
         'routing.newsletterOptOutEnableRoute'   => 'IO.routing.enabled_routes',
         'routing.orderReturnCategory'           => 'IO.routing.category_order-return',
@@ -70,6 +72,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.contactCategory'               => 'int',
         'routing.wishListCategory'              => 'int',
         'routing.changeMailCategory'            => 'int',
+        'routing.passwordResetCategory'         => 'int',
         'routing.newsletterOptOutCategory'      => 'int',
         'routing.orderReturnCategory'           => 'int',
         'routing.pageNotFoundCategory'          => 'int',
@@ -229,6 +232,16 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     public function writeRouting_ChangeMailEnableRoute($enableWishListRoute)
     {
         return $this->setEnabledRoute(RouteConfig::CHANGE_MAIL, $enableWishListRoute);
+    }
+
+    public function readRouting_PasswordResetEnableRoute()
+    {
+        return in_array( RouteConfig::PASSWORD_RESET, RouteConfig::getEnabledRoutes());
+    }
+
+    public function writeRouting_PasswordResetEnableRoute($enableWishListRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::PASSWORD_RESET, $enableWishListRoute);
     }
 
     public function readRouting_NewsletterOptOutEnableRoute()
