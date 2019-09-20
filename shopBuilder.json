@@ -96,6 +96,10 @@
             {
                 "label": "Widget.presetRegistration",
                 "presetClass": "Ceres\\Widgets\\Presets\\RegistrationPreset"
+            },
+            {
+                "label": "Widget.presetOrderReturn",
+                "presetClass": "Ceres\\Widgets\\Presets\\OrderReturnPreset"
             }
         ],
         "checkout": [
