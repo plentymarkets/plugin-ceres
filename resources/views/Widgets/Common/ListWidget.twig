@@ -21,20 +21,20 @@
     <div class="widget {% if isLinkList %}widget-link-list{% else %}widget-list{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
         <div class="widget-inner">
             {% if title is not empty %}<p class="h4">{{ title }}</p>{% endif %}
-            {% if listEntries | length > 0 %}
+            {%- if listEntries | length > 0 -%}
                 <ul class="list-unstyled{% if centered %} list-centered{% endif %}">
-                    {% for entry in listEntries %}
-                        {{ WidgetHelper.setUrlVariable('url', entry.url.value, entry.url.type) }}
+                    {%- for entry in listEntries -%}
+                        {{- WidgetHelper.setUrlVariable('url', entry.url.value, entry.url.type) -}}
                         <li>
-                            {% if icon != "none" %}
+                            {%- if icon != "none" %}
                                 <i class="fa {{ icon }} mr-1" aria-hidden="true"></i>
-                            {% endif %}
+                            {% endif -%}
 
-                            {% if entry.text is not empty %}
+                            {%- if entry.text is not empty -%}
                                 <a class="d-inline-block{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{% if entry.url.openInNewTab == true %} target="_blank"{% endif %}{% if entry.url.type == 'external' %} rel="noopener"{% endif %}{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
-                                    {{ entry.text }}
+                                    {{- entry.text -}}
                                 </a>
-                            {% endif %}
+                            {%- endif -%}
                         </li>
                     {% endfor %}
                 </ul>
