@@ -9,7 +9,7 @@
                         :value="paymentProvider.id"
                         @change="onPaymentProviderChange(paymentProvider)"
                         :checked="methodOfPaymentId === paymentProvider.id"
-                        :disabled="isCheckoutReadonly"
+                        :disabled="!paymentProvider.isSelectable || isCheckoutReadonly"
                 >
                 <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id"
                        :class="paddingClasses"

@@ -149,7 +149,7 @@
                                 </header>
 
                                 {{ LayoutContainer.show("Ceres::Checkout.BeforePaymentList") }}
-                                {% if isOverwritten is same as(false)  %}
+                                {% if not isOverwritten %}
                                     <div class="payment-method-select">
                                         <payment-provider-select></payment-provider-select>
                                     </div>
