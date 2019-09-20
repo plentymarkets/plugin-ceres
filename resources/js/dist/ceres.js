@@ -68968,10 +68968,14 @@ if (headerParent) {
   var headerImages = headerParent.querySelectorAll("img");
   Promise.all(Array.prototype.slice.call(headerImages).map(function (headerImage) {
     return new Promise(function (resolve) {
-      if (headerImage.complete && headerImage.naturalHeight !== 0) {
+      if (headerImage.complete) {
         resolve();
       } else {
         headerImage.onload = function () {
+          resolve();
+        };
+
+        headerImage.onerror = function () {
           resolve();
         };
       }
