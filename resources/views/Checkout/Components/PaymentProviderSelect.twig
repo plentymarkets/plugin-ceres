@@ -9,9 +9,15 @@
                         :value="paymentProvider.id"
                         @change="onPaymentProviderChange(paymentProvider)"
                         :checked="methodOfPaymentId === paymentProvider.id"
-                        :disabled="!paymentProvider.isSelectable || isCheckoutReadonly"
+                        :disabled="isCheckoutReadonly"
                 >
-                <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id" :class="paddingClasses" :style="paddingInlineStyles">
+                <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id"
+                       :class="paddingClasses"
+                       :style="paddingInlineStyles"
+                       v-tooltip="selectedShippingProfile.excludedPaymentMethodIds.includes(paymentProvider.id)"
+                       data-toggle="tooltip"
+                       data-placement="top"
+                       data-title="{{ trans("Ceres::Template.checkoutChangeShippingProfileHint") }}">
                     <div class="icon">
                         <div class="square-container">
                             <div class="square-inner center-xy">
