@@ -39,6 +39,8 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.wishListEnableRoute'           => 'IO.routing.enabled_routes',
         'routing.changeMailCategory'            => 'IO.routing.category_change-mail',
         'routing.changeMailEnableRoute'         => 'IO.routing.enabled_routes',
+        'routing.passwordResetCategory'         => 'IO.routing.category_password-reset',
+        'routing.passwordResetEnableRoute'      => 'IO.routing.enabled_routes',
         'routing.newsletterOptOutCategory'      => 'IO.routing.category_newsletter-opt-out',
         'routing.newsletterOptOutEnableRoute'   => 'IO.routing.enabled_routes',
         'routing.pageNotFoundCategory'          => 'IO.routing.category_page-not-found',
@@ -68,6 +70,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.contactCategory'               => 'int',
         'routing.wishListCategory'              => 'int',
         'routing.changeMailCategory'            => 'int',
+        'routing.passwordResetCategory'         => 'int',
         'routing.newsletterOptOutCategory'      => 'int',
         'routing.pageNotFoundCategory'          => 'int',
         'routing.shippingCategory'              => 'int',
@@ -117,12 +120,12 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     {
         return $this->setEnabledRoute(RouteConfig::MY_ACCOUNT, $enableMyAccountRoute);
     }
-    
+
     public function readRouting_ConfirmationEnableRoute()
     {
         return in_array( RouteConfig::CONFIRMATION, RouteConfig::getEnabledRoutes());
     }
-    
+
     public function writeRouting_ConfirmationEnableRoute($enableConfirmationRoute)
     {
         return $this->setEnabledRoute(RouteConfig::CONFIRMATION, $enableConfirmationRoute);
@@ -227,7 +230,17 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     {
         return $this->setEnabledRoute(RouteConfig::CHANGE_MAIL, $enableWishListRoute);
     }
-  
+
+    public function readRouting_PasswordResetEnableRoute()
+    {
+        return in_array( RouteConfig::PASSWORD_RESET, RouteConfig::getEnabledRoutes());
+    }
+
+    public function writeRouting_PasswordResetEnableRoute($enableWishListRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::PASSWORD_RESET, $enableWishListRoute);
+    }
+
     public function readRouting_NewsletterOptOutEnableRoute()
     {
         return in_array( RouteConfig::NEWSLETTER_OPT_OUT, RouteConfig::getEnabledRoutes());
