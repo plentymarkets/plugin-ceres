@@ -16,8 +16,7 @@
 							<a :href="orderItemURL" class="item-name text-primary text-appearance">
 								${ orderItem | itemBundleName }
 							</a>
-
-
+							
 							<div class="item-base-price">
 								<template v-if="isNet">
 									${ amount.priceNet | currency(amount.currency) }
@@ -30,16 +29,6 @@
 							<item-bundle
 								:bundle-type="orderItem.bundleType"
 								:bundle-components="orderItem.bundleComponents"></item-bundle>
-
-							<div class="item-small-prices text-muted" v-if="!(variation.unit.unitOfMeasurement === 'C62' && variation.unit.content === 1) && variation.variation.mayShowUnitPrice">
-								<div>
-									${ basePrice }
-								</div>
-								<div>
-									<strong>{{ trans("Ceres::Template.basketContent") }}: </strong>
-									${ variation.unit.content } ${ variation.unit.names.name }
-								</div>
-							</div>
 
 							<div class="item-small-prices">
 								<div v-for="attribute in variation.attributes">
