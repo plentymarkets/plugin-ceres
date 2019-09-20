@@ -178,19 +178,19 @@
                                 </div>
                                 <ul class="text-center text-sm-left">
                                     {{ Twig.set("activeCurrency", Twig.call("services.checkout.getCurrencyData().name")) }}
-                                    {{ Twig.for("currency", Twig.call("services.checkout.getCurrencyList")) }}
-                                    {{ Twig.if("currency.name in activeCurrencies or \"all\" in activeCurrencies or currency.name == activeCurrency") }}
-                                        <li{{ Twig.if("currency.name == activeCurrency") }} class="active"{{ Twig.endif() }}>
-                                            <a href="{{ Twig.print("queryString({currency: currency.name})") }}" rel="nofollow">
-                                                {{ Twig.if("currencyFormatSelect == 'all'") }}
-                                                    {{ Twig.print("currency.name") }} <br class="d-block d-sm-none" />({{ Twig.print("currency.symbol") }})
-                                                {{ Twig.else() }}
+                                    {{- Twig.for("currency", Twig.call("services.checkout.getCurrencyList")) -}}
+                                    {{- Twig.if("currency.name in activeCurrencies or \"all\" in activeCurrencies or currency.name == activeCurrency") -}}
+                                        <li{{- Twig.if("currency.name == activeCurrency") -}} class="active"{{- Twig.endif() -}}>
+                                            <a href="{{- Twig.print("queryString({currency: currency.name})") -}}" rel="nofollow">
+                                                {{- Twig.if("currencyFormatSelect == 'all'") -}}
+                                                    {{- Twig.print("currency.name") }} <br class="d-block d-sm-none" />({{ Twig.print("currency.symbol") }})
+                                                {{- Twig.else() -}}
                                                     {{ Twig.print("currency[currencyFormatSelect]") }}
-                                                {{ Twig.endif }}
+                                                {{- Twig.endif -}}
                                             </a>
                                         </li>
-                                    {{ Twig.endif() }}
-                                    {{ Twig.endfor() }}
+                                    {{- Twig.endif() -}}
+                                    {{- Twig.endfor() -}}
                                 </ul>
                             </div>
                         </div>
