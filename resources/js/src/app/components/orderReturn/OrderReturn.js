@@ -15,6 +15,11 @@ Vue.component("order-return", {
         {
             type: Object,
             required: true
+        },
+        itemDetailsData:
+        {
+            type: Array,
+            default: () => []
         }
     },
 
