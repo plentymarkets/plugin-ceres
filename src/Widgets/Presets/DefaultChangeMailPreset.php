@@ -23,9 +23,11 @@ class DefaultChangeMailPreset implements ContentPreset
             ->withSetting("text", '<h1>{{ trans("Ceres::Template.myAccountChangeEmail") }}</h1><p>{{ trans("Ceres::Template.myAccountChangeEmailInfoText") }}</p>')
             ->withSetting("customClass", "")
             ->withSetting("appearance", "none")
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.left.value", 0)
-            ->withSetting("spacing.margin.left.unit", null);
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.left.value", 0)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 0)
+            ->withSetting("spacing.padding.right.unit", null);
 
         $row->createChild("second", "Ceres::ChangeMailWidget")
             ->withSetting("customClass", "")

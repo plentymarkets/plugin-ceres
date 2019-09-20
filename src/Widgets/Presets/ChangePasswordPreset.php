@@ -23,9 +23,11 @@ class ChangePasswordPreset implements ContentPreset
             ->withSetting("text", '<h1>{{ trans("Ceres::Template.resetPwResetPassword") }}</h1>')
             ->withSetting("customClass", "")
             ->withSetting("appearance", "none")
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.left.value", 0)
-            ->withSetting("spacing.margin.left.unit", null);
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.left.value", 0)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 0)
+            ->withSetting("spacing.padding.right.unit", null);
 
         $row->createChild("second", "Ceres::ChangePasswordWidget")
             ->withSetting("customClass", "")
