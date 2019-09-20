@@ -20,6 +20,17 @@
     }
 }
 
+.widget-item-list-inline-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        text-transform: unset !important;
+    }
+}
+
 .widget-item-list-caption
 {
     h1,
