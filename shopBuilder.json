@@ -98,8 +98,14 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\RegistrationPreset"
             },
             {
+
+                "label": "Widget.presetOrderReturn",
+                "presetClass": "Ceres\\Widgets\\Presets\\OrderReturnPreset"
+            },
+            {
                 "label": "Widget.presetChangePassword",
                 "presetClass": "Ceres\\Widgets\\Presets\\ChangePasswordPreset"
+
             }
         ],
         "checkout": [
