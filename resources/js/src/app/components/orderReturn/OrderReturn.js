@@ -35,11 +35,19 @@ Vue.component("order-return", {
         this.$store.commit("setOrderReturnData", this.initOrderData);
     },
 
-    computed: mapState({
-        orderData: state => state.orderReturn.orderData,
-        orderReturnItems: state => state.orderReturn.orderReturnItems,
-        isDisabled: state => state.orderReturn.orderReturnItems.length === 0
-    }),
+    computed:
+    {
+        ...mapState({
+            orderData: state => state.orderReturn.orderData,
+            orderReturnItems: state => state.orderReturn.orderReturnItems,
+            isDisabled: state => state.orderReturn.orderReturnItems.length === 0,
+
+            amount()
+            {
+                return this.orderData.order.amounts.find(amount => !amount.isSystemCurrency) || this.orderData.amounts[0];
+            }
+        })
+    },
 
     methods:
     {
