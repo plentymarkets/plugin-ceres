@@ -37,15 +37,15 @@ Vue.component("order-return", {
 
     computed:
     {
+        amount()
+        {
+            return this.orderData.order.amounts.find(amount => !amount.isSystemCurrency) || this.orderData.order.amounts[0];
+        },
+
         ...mapState({
             orderData: state => state.orderReturn.orderData,
             orderReturnItems: state => state.orderReturn.orderReturnItems,
-            isDisabled: state => state.orderReturn.orderReturnItems.length === 0,
-
-            amount()
-            {
-                return this.orderData.order.amounts.find(amount => !amount.isSystemCurrency) || this.orderData.amounts[0];
-            }
+            isDisabled: state => state.orderReturn.orderReturnItems.length === 0
         })
     },
 
@@ -64,8 +64,9 @@ Vue.component("order-return", {
                 response =>
                 {
                     $(this.$refs.orderReturnConfirmation).modal("hide");
+                    console.log("detlef")
                     navigateTo(window.location.origin);
-
+                    console.log("detlef2")
                     NotificationService.success(
                         TranslationService.translate("Ceres::Template.returnConfirmationInfo")
                     ).closeAfter(3000);
