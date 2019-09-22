@@ -151,7 +151,8 @@ class DefaultFooterPreset implements ContentPreset
             ->withSetting("showGtc", true)
             ->withSetting("cancellationFormContainer.showCancellationForm", true)
             ->withSetting("cancellationFormContainer.useCancellationPdfUpload", false)
-            ->withSetting("cancellationFormContainer.cancellationPdfPath", "");
+            ->withSetting("cancellationFormContainer.cancellationPdfPath", "")
+            ->withSetting("customClass", "text-center my-3");
     }
 
     private function createTextWidget()
