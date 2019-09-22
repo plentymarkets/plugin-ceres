@@ -32,7 +32,7 @@
     {{ Twig.set("imageAltText", "category.details[0].name") }}
 
     {{ Twig.if("imageUrl | trim is not empty") }}
-        {{ Twig.set("imageUrl", "\"documents/\" ~ imageUrl") }}
+        {{ Twig.set("imageUrl", "\"/documents/\" ~ imageUrl") }}
     {{ Twig.endif() }}
 
 {% elseif urlType == 'item' and urlValue | trim is not empty %}
@@ -61,6 +61,9 @@
 
 {% if customImagePath | trim is not empty %}
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
+    {{ Twig.if("imageAltText is empty") }}
+        {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
+    {{ Twig.endif() }}
 {% endif %}
 
 {{ Twig.if("imageAltText | trim is empty") }}

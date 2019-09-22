@@ -14,7 +14,8 @@
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    data-boundary="window">
+                    data-boundary="window"
+                    data-flip="false">
 
                     <div class="item-inner" :class="{'error': showError}">
                         <span v-if="selectedAddress && selectedAddress.id == -99">
@@ -129,8 +130,8 @@
                                             <span>
                                                 <template v-if="addressToDelete.address1 === 'PACKSTATION' || addressToDelete.address1 === 'POSTFILIALE'">
                                                     {{ trans("Ceres::Template.addressPostNummer") }}
+                                                    ${addressToDelete | optionType(6)}
                                                 </template> 
-                                                
                                                 ${ addressToDelete.address3 }
                                             </span>
                                             <span>${addressToDelete.postalCode} ${addressToDelete.town}</span>

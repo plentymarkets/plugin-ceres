@@ -1,4 +1,5 @@
 import { isDefined } from "../../helper/utils";
+import Vue from "vue";
 
 const TabNavItem = {
     name: "tab-nav-item",
@@ -61,6 +62,7 @@ Vue.component("tab-list", {
     render(createElement)
     {
         const tabListElements = [];
+        const filteredTabs = this.$slots.default.filter(tab => !!tab.componentOptions);
 
         if (this.tabs.length > 0)
         {
@@ -105,7 +107,7 @@ Vue.component("tab-list", {
             {
                 staticClass: "tab-content"
             },
-            [this.$slots.default]
+            [filteredTabs]
         );
 
         tabListElements.push(content);
@@ -142,6 +144,13 @@ Vue.component("tab-list", {
         this.$nextTick(() =>
         {
             this.updateTabs();
+
+            const hasActiveContent = this.tabs.some(tab => tab.active);
+
+            if (!hasActiveContent )
+            {
+                this.activateTab(this.tabs[0]);
+            }
         });
     },
 
@@ -168,31 +177,27 @@ Vue.component("tab-list", {
             this.tabs = this.getTabs();
         },
 
-        activateTab(tab, event)
+        activateTab(tab)
         {
             const activeTab = this.tabs.find(tab => tab.localActive);
 
             tab.setActive(true);
 
-            if (tab !== activeTab)
+            if (activeTab && activeTab.setActive && tab !== activeTab)
             {
                 activeTab.setActive(false);
             }
         },
-        // checks if tab content contains img tag or text.
+
+        /**
+         * Checks if tab content contains img tag or text.
+         * @param {*} tab
+         */
         filterContent(tab)
         {
             const imgPattern = new RegExp(/<img([\w\W]+?)>/);
 
-            if (imgPattern.test(tab.$el.innerHTML))
-            {
-                return true;
-            }
-            if (tab.$el.textContent.length > 0)
-            {
-                return true;
-            }
-            return false;
+            return imgPattern.test(tab.$el.innerHTML) || tab.$el.textContent.trim().length > 0;
         }
     }
 });

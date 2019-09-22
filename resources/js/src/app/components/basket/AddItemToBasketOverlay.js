@@ -1,6 +1,9 @@
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-const ModalService        = require("services/ModalService");
+const ModalService  = require("../../services/ModalService");
+const ApiService    = require("../../services/ApiService");
 
 Vue.component("add-item-to-basket-overlay", {
 
@@ -20,23 +23,58 @@ Vue.component("add-item-to-basket-overlay", {
     data()
     {
         return {
-            currency: "",
-            price: 0
+            price: 0,
+            basketItem: null
         };
+    },
+
+    mounted()
+    {
+        if (App.config.basket.addItemToBasketConfirm === "overlay")
+        {
+            ApiService.listen("AfterBasketItemAdd", data =>
+            {
+                this.showItem(data.basketItem);
+            });
+
+            ApiService.listen("AfterBasketItemUpdate", data =>
+            {
+                if (!this.isBasketItemQuantityUpdate)
+                {
+                    const basketItem = this.basketItems.find(item => item.id === data.basketItem.id) || {};
+
+                    basketItem.quantity = data.basketItem.quantity;
+                    basketItem.price = data.basketItem.price;
+                    basketItem.price = data.basketItem.price;
+                    basketItem.basketItemOrderParams = data.basketItem.basketItemOrderParams;
+                    this.showItem(basketItem);
+                }
+            });
+        }
     },
 
     computed:
     {
+        ...mapState({
+            basketItems: state => state.basket.items,
+            isBasketItemQuantityUpdate: state => state.basket.isBasketItemQuantityUpdate
+        }),
+
         isLastBasketEntrySet()
         {
-            return Object.keys(this.latestBasketEntry.item).length !== 0;
+            return !isNullOrUndefined(this.basketItem);
+        },
+
+        variation()
+        {
+            return this.basketItem.variation ? this.basketItem.variation.data : null;
         },
 
         itemName()
         {
             if (this.isLastBasketEntrySet)
             {
-                return this.$options.filters.itemName(this.latestBasketEntry.item);
+                return this.$options.filters.itemName(this.variation);
             }
 
             return "";
@@ -46,10 +84,9 @@ Vue.component("add-item-to-basket-overlay", {
         {
             if (this.isLastBasketEntrySet)
             {
-                const images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
-                const img = this.$options.filters.itemImage(images);
+                const images = this.$options.filters.itemImages(this.variation.images, "urlPreview");
 
-                return img;
+                return this.$options.filters.itemImage(images);
             }
 
             return "";
@@ -58,59 +95,43 @@ Vue.component("add-item-to-basket-overlay", {
         {
             if (this.isLastBasketEntrySet)
             {
-                const images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
+                const images = this.$options.filters.itemImages(this.variation.images, "urlPreview");
 
                 return this.$options.filters.itemImageAlternativeText(images);
             }
 
             return "";
-        },
-
-        ...Vuex.mapState({
-            latestBasketEntry: state => state.basket.latestEntry
-        })
-    },
-
-    watch:
-    {
-        latestBasketEntry()
-        {
-            if (App.config.basket.addItemToBasketConfirm === "overlay")
-            {
-                this.setPriceFromData();
-
-                ModalService
-                    .findModal(document.getElementById("add-item-to-basket-overlay"))
-                    .setTimeout(this.defaultTimeToClose * 1000)
-                    .show();
-            }
         }
     },
 
     methods:
     {
-        setPriceFromData()
+        showItem(basketItem)
         {
-            if (this.latestBasketEntry.item.prices)
-            {
-                this.currency = this.latestBasketEntry.item.prices.default.currency;
-                const graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
-                const propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
+            this.basketItem = basketItem;
 
-                this.price = this.$options.filters.specialOffer(graduatedPrice, this.latestBasketEntry.item.prices, "price", "value") + propertySurcharge;
+            if (this.basketItem && this.variation.prices)
+            {
+                const graduatedPrice = this.$options.filters.graduatedPrice(this.variation, this.basketItem.quantity);
+                const propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
+
+                this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
             }
+
+            ModalService
+                .findModal(document.getElementById("add-item-to-basket-overlay"))
+                .setTimeout(this.defaultTimeToClose * 1000)
+                .show();
         },
 
         orderParamValue(propertyId)
         {
-            const orderParams = this.latestBasketEntry.orderParams;
-
-            if (isNullOrUndefined(orderParams))
+            if (isNullOrUndefined(this.basketItem.basketItemOrderParams))
             {
                 return "";
             }
 
-            const property = this.latestBasketEntry.item.properties.find(property =>
+            const property = this.variation.properties.find(property =>
             {
                 return parseInt(property.property.id) === parseInt(propertyId);
             });
@@ -120,7 +141,7 @@ Vue.component("add-item-to-basket-overlay", {
                 return "";
             }
 
-            const orderParam = orderParams.find(param =>
+            const orderParam = this.basketItem.basketItemOrderParams.find(param =>
             {
                 return parseInt(param.property.id) === parseInt(propertyId);
             });

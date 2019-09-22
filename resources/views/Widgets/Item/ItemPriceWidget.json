@@ -1,0 +1,26 @@
+{
+    "identifier": "Ceres::ItemPriceWidget",
+    "label": "Widget.itemPriceLabel",
+    "previewImageURL": "/images/widgets/item-price.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 400,
+    "widgetClass": "Ceres\\Widgets\\Item\\ItemPriceWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "showCrossPrice": {
+            "type": "checkbox",
+            "defaultValue": true,
+            "options": {
+                "name": "Widget.showCrossPriceLabel"
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

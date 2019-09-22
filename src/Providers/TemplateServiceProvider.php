@@ -14,17 +14,18 @@ use Ceres\Contexts\OrderConfirmationContext;
 use Ceres\Contexts\OrderReturnContext;
 use Ceres\Contexts\PasswordResetContext;
 use Ceres\Contexts\SingleItemContext;
+use Ceres\Extensions\TwigItemDataField;
 use Ceres\Extensions\TwigJsonDataContainer;
 use Ceres\Extensions\TwigLayoutContainerInternal;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
+use Ceres\Wizard\ShopWizard\ShopWizard;
 use IO\Extensions\Functions\Partial;
-use IO\Helper\CategoryKey;
-use IO\Helper\CategoryMap;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
+use Plenty\Modules\Wizard\Contracts\WizardContainerContract;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\Events\Dispatcher;
@@ -41,6 +42,7 @@ class TemplateServiceProvider extends ServiceProvider
     private static $templateKeyToViewMap =
     [
         'tpl.home'                          => ['Homepage.Homepage',                      GlobalContext::class],
+        'tpl.home.category'                 => ['Homepage.HomepageCategory',              CategoryContext::class],
         'tpl.category.content'              => ['Category.Content.CategoryContent',       CategoryContext::class],
         'tpl.category.item'                 => ['Category.Item.CategoryItem',             CategoryItemContext::class],
         'tpl.category.blog'                 => ['PageDesign.PageDesign',                  GlobalContext::class],
@@ -69,7 +71,8 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.terms-conditions'              => ['StaticPages.TermsAndConditions',         GlobalContext::class],
         'tpl.item-not-found'                => ['StaticPages.ItemNotFound',               GlobalContext::class],
         'tpl.page-not-found'                => ['StaticPages.PageNotFound',               GlobalContext::class],
-        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class]
+        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class],
+        'tpl.mail.contact'                  => ['Customer.Components.Contact.ContactMail',GlobalContext::class]
     ];
 
     public function register(){
@@ -78,11 +81,17 @@ class TemplateServiceProvider extends ServiceProvider
     
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {
+        //register shopCeres assistant
+        /** @var WizardContainerContract $wizardContainer */
+        $wizardContainer = pluginApp(WizardContainerContract::class);
+        $wizardContainer->register('shopCeres-assistant', ShopWizard::class);
+
         // Register Twig String Loader to use function: template_from_string
         $twig->addExtension('Twig_Extension_StringLoader');
         $twig->addExtension(TwigStyleScriptTagFilter::class);
         $twig->addExtension(TwigLayoutContainerInternal::class);
         $twig->addExtension(TwigJsonDataContainer::class);
+        $twig->addExtension(TwigItemDataField::class);
 
         $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
             if ( !$templateContainer->hasTemplate() )
@@ -101,7 +110,8 @@ class TemplateServiceProvider extends ServiceProvider
                 ResultFieldTemplate::TEMPLATE_SINGLE_ITEM   => 'Ceres::ResultFields.SingleItem',
                 ResultFieldTemplate::TEMPLATE_BASKET_ITEM   => 'Ceres::ResultFields.BasketItem',
                 ResultFieldTemplate::TEMPLATE_AUTOCOMPLETE_ITEM_LIST => 'Ceres::ResultFields.AutoCompleteListItem',
-                ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree'
+                ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree',
+                ResultFieldTemplate::TEMPLATE_VARIATION_ATTRIBUTE_MAP => 'Ceres::ResultFields.VariationAttributeMap'
             ]);
         }, self::EVENT_LISTENER_PRIORITY);
 
@@ -125,7 +135,8 @@ class TemplateServiceProvider extends ServiceProvider
     {
         $templateEvent  = $templateContainer->getTemplateKey();
         $template = substr($templateEvent, 4);
-        if ( RouteConfig::getCategoryId( $template ) > 0 )
+        if ( RouteConfig::getCategoryId( $template ) > 0
+            && array_key_exists($templateEvent.'.category', self::$templateKeyToViewMap))
         {
             $templateEvent .= '.category';
         }

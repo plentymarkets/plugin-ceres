@@ -1,5 +1,6 @@
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("item-store-special", {
 
@@ -11,6 +12,7 @@ Vue.component("item-store-special", {
         "storeSpecial",
         "recommendedRetailPrice",
         "variationRetailPrice",
+        "specialOfferPrice",
         "decimalCount",
         "bundleType"
     ],
@@ -77,8 +79,18 @@ Vue.component("item-store-special", {
 
         getPercentageSale()
         {
-            // eslint-disable-next-line
-            let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value ) * -100;
+            let percent;
+
+            if (isDefined(this.specialOfferPrice))
+            {
+                // eslint-disable-next-line
+                percent = (1 - this.specialOfferPrice.unitPrice.value / this.variationRetailPrice.unitPrice.value ) * -100;
+            }
+            else
+            {
+                // eslint-disable-next-line
+                percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value ) * -100;
+            }
 
             if (percent < 0)
             {

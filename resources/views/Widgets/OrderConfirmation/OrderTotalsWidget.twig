@@ -1,0 +1,31 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass      = widget.settings.customClass.mobile %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlinePadding    = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin     = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin    = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set visibleFields = widget.settings.visibleFields.mobile | default([
+    "orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"
+]) %}
+
+{{ Twig.set("visibleFields", visibleFields | json_encode) }}
+
+{{ Twig.import("Totals", "Ceres::Checkout.Macros.OrderTotals") }}
+
+{{ Twig.if("data.order is defined and data.order is not null and visibleFields | length > 0") }}
+    <div class="widget widget-order-totals border
+        {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+        {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% else %} px-4 pt-3{% endif %}
+        {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+        {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+        <div class="widget-inner">
+            {{ Twig.print("Totals.forOrder(data, visibleFields)") }}
+        </div>
+    </div>
+{{ Twig.endif() }}

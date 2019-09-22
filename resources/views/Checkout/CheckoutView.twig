@@ -193,7 +193,7 @@
                             </aside>
 
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
-                            <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
+                            <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}{% if services.checkout.getReadOnlyCheckout() == 1 %}?readonlyCheckout=1{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
 
                             {% if checkout.readOnly %}

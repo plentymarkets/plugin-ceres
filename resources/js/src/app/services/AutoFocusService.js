@@ -1,4 +1,4 @@
-import ModalService from "services/ModalService";
+import ModalService from "./ModalService";
 
 export function autoFocus()
 {
@@ -23,6 +23,11 @@ export function autoFocus()
 
 export function triggerAutoFocus(modal)
 {
+    if ( App.isShopBuilder )
+    {
+        return;
+    }
+
     let focusElements;
 
     if (modal)

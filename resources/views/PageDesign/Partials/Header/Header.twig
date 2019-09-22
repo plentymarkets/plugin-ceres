@@ -22,7 +22,7 @@
 <header id="page-header" class="fixed-top">
     <div class="container-max">
         <div class="row">
-            <div id="page-header-parent" class="col-12">
+            <div id="page-header-parent" class="col-12" data-header-offset>
                 {{ headerContainer | raw }}
             </div>
         </div>
@@ -50,9 +50,13 @@
     {% else %}
         {% set initialCategory = category %}
     {% endif %}
-    <mobile-navigation
-            navigation-tree-data="{{ categories | json_data }}"
-            :initial-category="{{ initialCategory | json_encode }}"
-            template="#vue-mobile-navigation">
-    </mobile-navigation>
+
+    {# set the initialCategory to the default category of the current item #}
+    {% if services.template.isCurrentTemplate("tpl.item") and defaultCategory is not null %}
+        {% set initialCategory = defaultCategory %}
+    {% elseif services.template.isCurrentTemplate('tpl.home.category') %}
+        {% set initialCategory = null %}
+    {% endif %}
+
+    <mobile-navigation :initial-category="{{ initialCategory | json_encode }}" :include-language="{{ urls.includeLanguage | json_encode }}"></mobile-navigation>
 </div>

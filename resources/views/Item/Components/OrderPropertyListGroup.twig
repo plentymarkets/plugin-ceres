@@ -4,7 +4,7 @@
     <div>
         <div v-if="isShownOnItemPageCount">
 
-            <div v-if="propertyGroup.group" class="col-12">
+            <div v-if="propertyGroup.group" :class="paddingClasses" :style="paddingInlineStyles">
                 <div class="h4">
                     ${ propertyGroup.group.names.name }:
                 </div>
@@ -13,7 +13,7 @@
                 </p>
             </div>
 
-            <div v-for="property in propertyGroup.properties" :key="property.id" class="col-12">
+            <div v-for="property in propertyGroup.properties" :key="property.id" :class="paddingClasses" :style="paddingInlineStyles">
                 <order-property-list-item v-if="property.isShownOnItemPage" :group="propertyGroup.group" :property="property" v-on:radio-change="unsetDeselectedRadios($event)"></order-property-list-item>
             </div>
 

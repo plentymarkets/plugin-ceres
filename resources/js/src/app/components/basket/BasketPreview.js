@@ -1,4 +1,6 @@
-import ApiService from "services/ApiService";
+import ApiService from "../../services/ApiService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("basket-preview", {
 
@@ -16,11 +18,11 @@ Vue.component("basket-preview", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         basket: state => state.basket.data,
         basketItems: state => state.basket.items,
         basketNotifications: state => state.basket.basketNotifications,
-        latestBasketEntry: state => state.basket.latestEntry
+        isBasketItemQuantityUpdate: state => state.basket.isBasketItemQuantityUpdate
     }),
 
     created()
@@ -43,25 +45,38 @@ Vue.component("basket-preview", {
                     this.$store.commit("setShowNetPrices", data.showNetPrices);
                 });
         });
+
+        if (App.config.basket.addItemToBasketConfirm === "preview")
+        {
+            ApiService.listen("AfterBasketItemAdd", data =>
+            {
+                this.show();
+            });
+
+            ApiService.listen("AfterBasketItemUpdate", data =>
+            {
+                if (!this.isBasketItemQuantityUpdate)
+                {
+                    this.show();
+                }
+            });
+        }
     },
 
-    watch:
+    methods:
     {
-        latestBasketEntry()
+        show()
         {
-            if (App.config.basket.addItemToBasketConfirm === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0)
+            setTimeout(function()
             {
-                setTimeout(function()
-                {
-                    const vueApp = document.querySelector("#vue-app");
-                    const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
+                const vueApp = document.querySelector("#vue-app");
+                const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
 
-                    if (vueApp)
-                    {
-                        vueApp.classList.add(basketOpenClass);
-                    }
-                }, 1);
-            }
+                if (vueApp)
+                {
+                    vueApp.classList.add(basketOpenClass);
+                }
+            }, 1);
         }
     }
 });

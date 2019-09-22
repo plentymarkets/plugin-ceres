@@ -1,14 +1,19 @@
 {{ component( "Ceres::Item.Components.OrderPropertyListGroup" ) }}
 
 <script type="x/template" id="vue-order-property-list">
-    <div class="order-property-slider w-100 mb-3">
-        <div class="order-property-slider-inner w-100" :style="{transform: 'translateX(-' + (activeSlide * 100) + '%)'}">
+    <div class="order-property-slider mb-3">
+        <div class="order-property-slider-inner" :style="{transform: 'translateX(-' + (activeSlide * 100) + '%)'}">
             <div v-for="(propertyGroup, index) in sortedGroupedProperties" :class="{'active': index === activeSlide}">
-                <order-property-list-group :key="propertyGroup.id" :property-group="propertyGroup"></order-property-list-group>
+                <order-property-list-group
+                    :padding-classes="paddingClasses"
+                    :padding-inline-styles="paddingInlineStyles"
+                    :key="propertyGroup.id"
+                    :property-group="propertyGroup">
+                </order-property-list-group>
             </div>
         </div>
 
-        <div class="order-property-slider-controls col-12" v-if="sortedGroupedProperties.length > 1">
+        <div class="order-property-slider-controls" :class="paddingClasses" :style="paddingInlineStyles" v-if="sortedGroupedProperties.length > 1">
             <div class="btn" @click="slideTo(activeSlide - 1)" :class="{'btn-primary': activeSlide > 0, 'btn-secondary disabled': activeSlide === 0}" tabindex="0">
                 <span class="fa fa-chevron-left"></span>
             </div>

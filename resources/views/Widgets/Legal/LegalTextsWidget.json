@@ -1,0 +1,47 @@
+{
+    "identifier": "Ceres::LegalTextsWidget",
+    "label": "Widget.legalTextsLabel",
+    "previewImageURL": "/images/widgets/legal-texts.svg",
+    "type": "default",
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Legal\\LegalTextsWidget",
+    "settings": {
+        "customClass": "@include(customClass)",
+        "type": {
+            "type": "select",
+            "defaultValue": "cancellationRights",
+            "options": {
+                "name": "Widget.legalTextsType",
+                "tooltipText": "Widget.legalTextsTypeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "cancellationRights",
+                        "caption": "Widget.legalTextsTypeValueCancellationRights",
+                        "position": 0
+                    },
+                    {
+                        "value": "cancellationForm",
+                        "caption": "Widget.legalTextsTypeValueCancellationForm",
+                        "position": 1
+                    },
+                    {
+                        "value": "legalDisclosure",
+                        "caption": "Widget.legalTextsTypeValueLegalDisclosure",
+                        "position": 2
+                    },
+                    {
+                        "value": "privacyPolicy",
+                        "caption": "Widget.legalTextsTypeValuePrivacyPolicy",
+                        "position": 3
+                    },
+                    {
+                        "value": "gtc",
+                        "caption": "Widget.legalTextsTypeValueGTC",
+                        "position": 4
+                    }
+                ]
+            }
+        },
+        "spacing": "@include(spacingMargin)"
+    }
+}

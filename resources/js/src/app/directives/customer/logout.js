@@ -1,6 +1,7 @@
-import { navigateTo } from "services/UrlService";
+import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
 
-const ApiService = require("services/ApiService");
+const ApiService = require("../../services/ApiService");
 
 Vue.directive("logout",
     {

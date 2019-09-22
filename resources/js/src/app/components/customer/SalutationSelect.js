@@ -1,5 +1,6 @@
 import { isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("salutation-select", {
 

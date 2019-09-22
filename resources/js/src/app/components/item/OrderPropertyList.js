@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { mapState, mapGetters } from "vuex";
+
 Vue.component("order-property-list", {
 
     props:
@@ -6,6 +9,16 @@ Vue.component("order-property-list", {
         {
             type: String,
             default: "#vue-order-property-list"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -41,11 +54,11 @@ Vue.component("order-property-list", {
             return [];
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
         }),
 
-        ...Vuex.mapGetters([
+        ...mapGetters([
             "variationGroupedProperties",
             "variationMissingProperties"
         ])

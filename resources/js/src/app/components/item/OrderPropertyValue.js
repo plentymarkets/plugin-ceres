@@ -1,4 +1,6 @@
 import { isDefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("order-property-value", {
     props:
@@ -22,6 +24,7 @@ Vue.component("order-property-value", {
             if (this.property.type === "selection")
             {
                 const propertyId = parseInt(this.property.propertyId);
+                // TODO: pass as property
                 const basketItemId = parseInt(this.property.basketItemId);
                 const basketItem = this.basketItems.find(basketItem => basketItem.id === basketItemId);
 
@@ -45,7 +48,7 @@ Vue.component("order-property-value", {
             return null;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             basketItems: state => state.basket.items
         })
     }

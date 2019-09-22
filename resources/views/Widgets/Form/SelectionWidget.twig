@@ -1,0 +1,60 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set formFieldId     = widget.settings.key.mobile | default(uid()) %}
+{% set isRequired      = widget.settings.isRequired.mobile %}
+{% set label           = widget.settings.label.mobile %}
+{% set selectType      = widget.settings.selectType.mobile %}
+{% set selectOptions   = widget.settings.selectOptions.mobile %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePaddingTB   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "", ["top", "bottom"]) %}
+{% set inlinePaddingLR   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "", ["left", "right"]) %}
+{% set spacingPaddingTB  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "", ["top", "bottom"]) %}
+{% set spacingPaddingLR  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "", ["left", "right"]) %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+{% set inlineMargin      = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
+<div class="widget widget-selection
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+    {% if selectType == 'dropdown' %}
+        <div class="input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate=""{% endif %}>
+            <select class="custom-select"
+                    id="{{ formFieldId }}"
+                    name="{{ formFieldId }}">
+
+                {% for i, option in selectOptions %}
+                    <option value="{{ i }}">{{ option }}</option>
+                {% endfor %}
+
+            </select>
+            <label for="{{ formFieldId }}">
+                {{ label }}{% if isRequired %}*{% endif %}
+            </label>
+        </div>
+    {% else %}
+        <div class="select-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate=""{% endif %}>
+            {% if label %}
+                <label for="{{ formFieldId }}">
+                    {{ label }}{% if isRequired %}*{% endif %}
+                </label>
+            {% endif %}
+            <div class="m-b-1">
+                {% for i, option in selectOptions %}
+                    <div class="form-check {% if spacingPaddingTB | length > 0 %} {{ spacingPaddingTB }} {% endif %}" {% if inlinePaddingTB | length > 0 %} style="{{ inlinePaddingTB }}"{% endif %}>
+                        <input class="form-check-input"
+                               type="{{ selectType }}"
+                               name="{{ formFieldId }}{% if selectType == 'checkbox' %}[]{% endif %}"
+                               value="{{ i }}"
+                               id="{{ formFieldId }}_{{ i }}">
+                        <label class="form-check-label {% if spacingPaddingLR | length > 0 %} {{ spacingPaddingLR }} {% endif %}" {% if inlinePaddingLR | length > 0 %} style="{{ inlinePaddingLR }}" {% endif %} for="{{ formFieldId }}_{{ i }}">
+                            {{ option }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>

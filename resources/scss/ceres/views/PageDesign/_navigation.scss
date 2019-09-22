@@ -2,7 +2,8 @@
 // mobile
 $menu-bg-sm 			: $primary;
 $menu-breadcrumb-bg 	: $gray-darker;
-$menu-color-sm 			: $white;
+$menu-breadcrumb-color 	: color-yiq($menu-breadcrumb-bg);
+$menu-color-sm 			: color-yiq($primary);
 $menu-font-s-sm  		: 1.2em;
 // desktop
 $menu-bg-lg 			: transparent;
@@ -341,6 +342,18 @@ nav.navbar.megamenu {
 }
 
 // Mobile Navigation only
+@-webkit-keyframes mobile-nav-placeholder {
+	0% { opacity: 0.1; }
+	50% { opacity: 0.15; }
+	100% { opacity: 0.1; }
+}
+
+@keyframes mobile-nav-placeholder {
+	0% { opacity: 0.1; }
+	50% { opacity: 0.15; }
+	100% { opacity: 0.1; }
+}
+
 .mobile-navigation{
 	top 		: 0;
     right 		: 0;
@@ -363,7 +376,13 @@ nav.navbar.megamenu {
 		transform 	: translateX(0);
 	}
 
+	.sk-fading-circle .sk-circle:before,
+	.loading-animation > div {
+		background-color: $menu-color-sm;
+	}
+
 	ul.breadcrumb {
+		color      : $menu-breadcrumb-color;
 		background : $menu-breadcrumb-bg;
 		max-width  : initial;
 		font-size  : .8em;
@@ -464,6 +483,19 @@ nav.navbar.megamenu {
 				}
 			}
 		}
+	}
+
+	.nav-placeholder
+	{
+		height: 25px;
+		width: 200px;
+		display: inline;
+		background: #fff;
+		margin: 1rem;
+		border-radius: 3px;
+		opacity: 0.1;
+		-webkit-animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
+		animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
 	}
 }
 

@@ -6,25 +6,26 @@
 
         .bg-appearance
         {
-            @include context-bg($value);
+            background-color: $value !important;
+            color: color-yiq($value) !important;
 
             a
             {
-                color: color-yiq($value);
+                color: color-yiq($value) !important;
             }
         }
 
         a.bg-appearance:hover,
         button.bg-appearance:hover
         {
-            @include context-bg(darken($value, 10%));
+            background-color: darken($value, 10%) !important;
+            color: color-yiq(darken($value, 10%)) !important;
         }
 
         .btn-appearance
         {
             @include button-variant($value, $value);
         }
-
 
         a.text-appearance,
         .btn-appearance
@@ -34,6 +35,18 @@
             @include hover-focus {
                 text-decoration-color: darken($value, 7.5);
             }
+        }
+
+        a:hover {
+            i.text-appearance {
+                color: darken($value, 7.5) !important;
+            }
+        }
+
+        .border-appearance.active,
+        .border-appearance:hover
+        {
+            border-color: $value;
         }
 
         .pagination .page-item

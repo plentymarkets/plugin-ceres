@@ -1,6 +1,9 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("add-to-wish-list", {
 
@@ -23,20 +26,28 @@ Vue.component("add-to-wish-list", {
     {
         isVariationInWishList()
         {
-            return this.wishListIds.includes(this.variationId);
+            return this.wishListIds.includes(this.currentVariationId);
         },
 
-        ...Vuex.mapState({
+        currentVariationId()
+        {
+            return !isNullOrUndefined(this.variationId) ? this.variationId : this.currentVariationVariationId;
+        },
+
+        ...mapState({
+            currentVariationVariationId(state)
+            {
+                const currentVariation = state.item.variation && state.item.variation.documents && state.item.variation.documents[0].data;
+
+                if (isNullOrUndefined(currentVariation))
+                {
+                    return null;
+                }
+
+                return currentVariation && currentVariation.variation && currentVariation.variation.id;
+            },
             wishListIds: state => state.wishList.wishListIds
         })
-    },
-
-    watch:
-    {
-        isVariationInWishList()
-        {
-            this.changeTooltipText();
-        }
     },
 
     methods:
@@ -58,7 +69,7 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(
+                this.$store.dispatch("addToWishList", parseInt(this.currentVariationId)).then(
                     response =>
                     {
                         this.isLoading = false;
@@ -79,7 +90,7 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(response =>
+                this.$store.dispatch("removeWishListItem", { id: parseInt(this.currentVariationId) }).then(response =>
                 {
                     this.isLoading = false;
 
@@ -97,13 +108,21 @@ Vue.component("add-to-wish-list", {
         changeTooltipText()
         {
             const tooltipText = TranslationService.translate(
-                "Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd")
+                `Ceres::Template.${this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"}`
             );
 
             $(".add-to-wish-list")
                 .attr("data-original-title", tooltipText)
                 .tooltip("hide")
                 .tooltip("setContent");
+        }
+    },
+
+    watch:
+    {
+        isVariationInWishList()
+        {
+            this.changeTooltipText();
         }
     }
 });

@@ -1,6 +1,5 @@
-module.exports = (function($)
+module.exports = (function()
 {
-
     const overlay = {
         count    : 0,
         isVisible: false
@@ -42,7 +41,5 @@ module.exports = (function($)
             overlay.count = 0;
             overlay.visible = false;
         }
-
     }
-
-})(jQuery);
+})();

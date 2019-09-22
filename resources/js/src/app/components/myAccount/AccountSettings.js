@@ -1,9 +1,10 @@
-const ModalService        = require("services/ModalService");
-const APIService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-const ValidationService   = require("services/ValidationService");
+const ModalService        = require("../../services/ModalService");
+const APIService          = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
+const ValidationService   = require("../../services/ValidationService");
 
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("account-settings", {
 
@@ -60,6 +61,10 @@ Vue.component("account-settings", {
         matchEmail()
         {
             return this.newMail2.length <= 0 || this.newMail === this.newMail2;
+        },
+        matchOldEmail()
+        {
+            return this.newMail === this.newMail2 && this.newMail === this.userData.email;
         },
         matchPassword()
         {

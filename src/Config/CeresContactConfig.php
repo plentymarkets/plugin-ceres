@@ -8,6 +8,8 @@ use Plenty\Plugin\ConfigRepository;
 class CeresContactConfig extends PluginConfig
 {
     public $shopMail;
+    public $mailCC;
+    public $mailBCC;
     public $showData;
     public $apiKey;
     public $mapZoom;
@@ -18,7 +20,9 @@ class CeresContactConfig extends PluginConfig
     {
         parent::__construct($configRepository, "Ceres");
 
-        $this->shopMail = $this->getTextValue( "contact.shop_mail", "");
+        $this->shopMail = $this->getTextValue( "contact.shop_mail", "", "your@email.com");
+        $this->mailCC   = $this->getTextValue( "contact.shop_mail_cc", "");
+        $this->mailBCC  = $this->getTextValue( "contact.shop_mail_bcc", "");
 
         $this->showData = $this->getMultiSelectValue(
             "contact.show_data",
@@ -47,7 +51,7 @@ class CeresContactConfig extends PluginConfig
             ]
         );
 
-        $this->apiKey = $this->getTextValue( "contact.api_key", "" );
+        $this->apiKey = $this->getTextValue( "contact.api_key", "", "API key" );
 
         $this->mapZoom = $this->getIntegerValue( "contact.map_zoom", 16 );
 

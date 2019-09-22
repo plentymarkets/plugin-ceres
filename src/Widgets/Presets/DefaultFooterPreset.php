@@ -165,7 +165,7 @@ class DefaultFooterPreset implements ContentPreset
         $defaultText .=     "<small>&copy; Copyright {{ \"now\" | date(\"Y\") }} | {{ trans(\"Ceres::Template.footerAllRightsReserved\") }}</small>";
         $defaultText .= "</div>";
 
-        $this->preset->createWidget("Ceres::TextWidget")
+        $this->preset->createWidget("Ceres::CodeWidget")
             ->withSetting("appearance", "none")
             ->withSetting("text", $defaultText);
     }

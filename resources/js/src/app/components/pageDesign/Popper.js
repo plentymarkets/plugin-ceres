@@ -1,8 +1,9 @@
 import { isNullOrUndefined } from "../../helper/utils";
 import { findParent } from "../../helper/dom";
+import Vue from "vue";
+import Popper from "popper.js";
 
-const Popper              = require("popper.js");
-const ModalService        = require("services/ModalService");
+const ModalService        = require("../../services/ModalService");
 
 Vue.component("popper", {
 

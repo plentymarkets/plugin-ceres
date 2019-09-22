@@ -1,0 +1,71 @@
+{
+    "identifier": "Ceres::ItemDataTableWidget",
+    "label": "Widget.itemDataTableLabel",
+    "previewImageURL": "/images/widgets/item-data-table.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Item\\ItemDataTableWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "itemInformation": {
+            "type": "select",
+            "isList": "[1,]",
+            "defaultValue": "item.id",
+            "options": {
+                "name": "Widget.itemDataTableDisplayedInformation",
+                "listBoxValues": [
+                    {
+                        "value": "item.id",
+                        "caption": "Widget.itemDataTableItemId"
+                    },
+                    {
+                        "value": "item.condition.names.name",
+                        "caption": "Widget.itemDataTableItemCondition"
+                    },
+                    {
+                        "value": "item.ageRestriction",
+                        "caption": "Widget.itemDataTableItemAgeRating"
+                    },
+                    {
+                        "value": "variation.externalId",
+                        "caption": "Widget.itemDataTableItemExternalId"
+                    },
+                    {
+                        "value": "variation.model",
+                        "caption": "Widget.itemDataTableItemVariationModel"
+                    },
+                    {
+                        "value": "item.manufacturer.externalName",
+                        "caption": "Widget.itemDataTableItemManufacturer"
+                    },
+                    {
+                        "value": "item.producingCountry.names.name",
+                        "caption": "Widget.itemDataTableItemProducerCountry"
+                    },
+                    {
+                        "value": "unit.names.name",
+                        "caption": "Widget.itemDataTableItemVariationBaseContent"
+                    },
+                    {
+                        "value": "variation.weightG",
+                        "caption": "Widget.itemDataTableItemWeightG"
+                    },
+                    {
+                        "value": "variation.weightNetG",
+                        "caption": "Widget.itemDataTableItemWeightNetG"
+                    },
+                    {
+                        "value": "item.variationDimensions",
+                        "caption": "Widget.itemDataTableItemVariationDimensions"
+                    },
+                    {
+                        "value": "item.customsTariffNumber",
+                        "caption": "Widget.itemDataTableItemCustomsTariffNumber"
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}

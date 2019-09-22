@@ -1,9 +1,11 @@
-import ExceptionMap from "exceptions/ExceptionMap";
-import TranslationService from "services/TranslationService";
+import ExceptionMap from "../../../exceptions/ExceptionMap";
+import TranslationService from "../../../services/TranslationService";
 import { isNullOrUndefined } from "../../../helper/utils";
 import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../../services/NotificationService");
 
 Vue.component("basket-list-item", {
     props: [
@@ -96,10 +98,10 @@ Vue.component("basket-list-item", {
 
         transformedVariationProperties()
         {
-            return transformBasketItemProperties(this.basketItem, ["empty"], "displayInOrderProcess");
+            return transformBasketItemProperties(this.basketItem, [], "displayInOrderProcess");
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             isCheckoutReadonly: state => state.checkout.readOnly,
             showNetPrice: state => state.basket.showNetPrices
@@ -142,7 +144,7 @@ Vue.component("basket-list-item", {
 
                 const origQty = this.basketItem.quantity;
 
-                this.$store.dispatch("updateBasketItemQuantity", { basketItem: this.basketItem, quantity: quantity }).then(
+                this.$store.dispatch("updateBasketItemQuantity", { id: this.basketItem.id, variationId: this.basketItem.variation.id, quantity: quantity }).then(
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: this.basketItem }));
@@ -159,7 +161,8 @@ Vue.component("basket-list-item", {
                                 {
                                     type: "error",
                                     message: TranslationService.translate(
-                                        "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                        "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
+                                        error.data.placeholder
                                     )
                                 }
                             );
@@ -168,7 +171,8 @@ Vue.component("basket-list-item", {
                         {
                             NotificationService.error(
                                 TranslationService.translate(
-                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
+                                    error.data.placeholder
                                 )
                             ).closeAfter(5000);
                         }

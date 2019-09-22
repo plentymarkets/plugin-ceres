@@ -1,0 +1,54 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.component( "Ceres::Item.Components.GraduatedPrices" ) }}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set appearance = widget.settings.appearance.mobile | default("none") %}
+
+<div class="widget widget-item-price widget-{{ appearance }}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    
+    <template v-if="$store.getters.currentItemVariation">
+        {% if widget.settings.showCrossPrice.mobile %}
+            <div class="crossprice" v-if="$store.getters.currentItemVariation.prices.rrp && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > 0 && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > $store.getters.currentItemVariation.prices.default.unitPrice.value">
+                <del class="text-muted text-appearance small" v-text="$options.filters.itemCrossPrice($store.getters.currentItemVariation.prices.rrp.unitPrice.formatted)">
+                    {# TODO ADD placeholder #}
+                </del>
+            </div>
+        {% endif %}
+
+        <span class="price h1">
+            <span class="font-weight-bold"
+                ref="variationTotalPrice"
+                :content="$store.getters.currentItemVariation.prices.default.price.value"
+                v-text="$options.filters.currency($store.getters.variationTotalPrice, $store.getters.currentItemVariation.prices.default.currency)">
+                {# TODO ADD placeholder #}
+            </span>
+            <sup>*</sup>
+            <span :content="$store.getters.currentItemVariation.prices.default.currency"></span>
+        </span>
+        
+        <div class="base-price text-muted my-3" v-if="$store.getters.currentItemVariation.unit">
+            <div>
+                {{ trans("Ceres::Template.singleItemContent") }}
+                <span v-text="$options.filters.numberFormat($store.getters.currentItemVariation.unit.content)">
+                    {# TODO ADD placeholder #}
+                </span>
+                <span v-text="$store.getters.currentItemVariation.unit.names.name">
+                    {# TODO ADD placeholder #}
+                </span>
+            </div>
+            <div v-if="$store.getters.currentItemVariation.variation.mayShowUnitPrice">
+                {{ trans("Ceres::Template.singleItemUnitPrice") }}
+                <span class="base-price-value" v-text="$options.filters.specialOffer($store.getters.variationGraduatedPrice.basePrice, $store.getters.currentItemVariation.prices, 'basePrice')">
+                    {# TODO ADD placeholder #}
+                </span>
+            </div>
+        </div>
+    </template>
+</div>

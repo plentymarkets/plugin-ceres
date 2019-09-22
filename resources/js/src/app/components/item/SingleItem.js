@@ -1,26 +1,25 @@
 import { transformVariationProperties } from "../../services/VariationPropertyService";
+import { get } from "../../helper/get";
+import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState, mapGetters } from "vuex";
 
 Vue.component("single-item", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "attributeNameMap",
-        "variationUnits"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-single-item"
+        }
+    },
 
     jsonDataFields: [
         "itemData",
-        "variationListData"
+        "attributesData",
+        "variations"
     ],
-
-    data()
-    {
-        return {
-            isVariationSelected: true
-        };
-    },
 
     computed:
     {
@@ -36,15 +35,17 @@ Vue.component("single-item", {
 
         transformedVariationProperties()
         {
-            return transformVariationProperties(this.currentVariation, ["empty"], "showInItemListing");
+            return transformVariationProperties(this.currentVariation, [], "showInItemListing");
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             currentVariation: state => state.item.variation.documents[0].data,
-            variations: state => state.item.variationList
+            isVariationSelected: state => state.variationSelect.isVariationSelected,
+            attributes: state => state.variationSelect.attributes,
+            units: state => state.variationSelect.units
         }),
 
-        ...Vuex.mapGetters([
+        ...mapGetters([
             "variationTotalPrice",
             "variationMissingProperties",
             "variationGroupedProperties",
@@ -55,7 +56,30 @@ Vue.component("single-item", {
     created()
     {
         this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setVariationList", this.variationListData);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+
+        this.$store.dispatch("setVariationSelect", {
+            attributes:         this.attributesData,
+            variations:         this.variations,
+            initialVariationId: this.currentVariation.variation.id
+        });
+    },
+
+    methods:
+    {
+        getDataField(field)
+        {
+            return get(this.currentVariation, field);
+        },
+
+        getFilteredDataField(field, filter)
+        {
+            if (!isNullOrUndefined(this.$options.filters[filter]))
+            {
+                return this.$options.filters[filter](this.getDataField(field));
+            }
+
+            return this.getDataField(field);
+        }
     }
 });

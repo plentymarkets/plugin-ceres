@@ -1,4 +1,5 @@
 import { isDefined } from "../helper/utils";
+import Vue from "vue";
 
 Vue.filter("hasItemDefaultPrice", itemData =>
 {

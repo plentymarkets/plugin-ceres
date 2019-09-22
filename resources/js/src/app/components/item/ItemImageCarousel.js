@@ -1,14 +1,43 @@
 import { isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import "owl.carousel";
+import { mapState } from "vuex";
 
 Vue.component("item-image-carousel", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "imageUrlAccessor",
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-item-image-carousel"
+        },
+        maxQuantity:
+        {
+            type: Number,
+            default: 10
+        },
+        imageUrlAccessor:
+        {
+            type: String,
+            default: "url"
+        },
+        showThumbs:
+        {
+            type: Boolean,
+            default: true
+        },
+        showDots:
+        {
+            type: Boolean,
+            default: true
+        },
+        animationStyle:
+        {
+            type: String,
+            default: "standard"
+        }
+    },
 
     data()
     {
@@ -21,15 +50,25 @@ Vue.component("item-image-carousel", {
     {
         carouselImages()
         {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+            return this.orderByPosition(
+                this.$options.filters.itemImages(
+                    this.currentVariation.documents[0].data.images,
+                    "urlPreview"
+                )
+            ).slice(0, this.maxQuantity);
         },
 
         singleImages()
         {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+            return this.orderByPosition(
+                this.$options.filters.itemImages(
+                    this.currentVariation.documents[0].data.images,
+                    this.imageUrlAccessor
+                )
+            ).slice(0, this.maxQuantity);
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             currentVariation: state => state.item.variation
         })
     },
@@ -63,7 +102,7 @@ Vue.component("item-image-carousel", {
     {
         getImageCount()
         {
-            return this.carouselImages.length;
+            return this.carouselImages.length > this.maxQuantity ? this.maxQuantity : this.carouselImages.length;
         },
 
         reInitialize()
@@ -87,10 +126,9 @@ Vue.component("item-image-carousel", {
         initCarousel()
         {
             const imageCount = this.getImageCount();
-
-            $(this.$refs.single).owlCarousel({
+            const carouselSettings = {
                 autoHeight       : true,
-                dots             : true,
+                dots             : this.showDots,
                 items            : 1,
                 lazyLoad         : true,
                 loop             : true,
@@ -116,7 +154,14 @@ Vue.component("item-image-carousel", {
                         350
                     ]);
                 }
-            });
+            };
+
+            if (this.animationStyle !== "standard")
+            {
+                carouselSettings.animateOut = this.animationStyle;
+            }
+
+            $(this.$refs.single).owlCarousel(carouselSettings);
 
             if (!isNullOrUndefined(window.lightbox))
             {
