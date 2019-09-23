@@ -18715,6 +18715,9 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   padding-top: .4rem;
   padding-bottom: .1rem; }
 
+.widget-item-list-caption .widget-item-list-inline-caption * {
+  text-transform: unset !important; }
+
 .widget-legal-information a {
   color: black;
   margin-right: 10px; }
