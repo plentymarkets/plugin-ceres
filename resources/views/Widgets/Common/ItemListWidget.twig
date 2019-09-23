@@ -106,8 +106,8 @@
                             </div>
                         {% endif %}
 
-                        {{ Twig.if("category") }}
-                            <a href="{{ Twig.print(Twig.call("services.category.getURL", [Twig.var("category")])) }}">
+                        {{ Twig.if("categoryUrl") }}
+                            <a href="{{ Twig.print("categoryUrl") }}">
                                 <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
                             </a>
                         {{ Twig.endif() }}
