@@ -17,14 +17,16 @@ class OrderReturnPreset implements ContentPreset
             ->withSetting("text", '<h1>{{ trans("Ceres::Template.return") }}</h1>')
             ->withSetting("appearance", "none")
             ->withSetting("customClass", "")
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.left.value", 0)
-            ->withSetting("spacing.margin.left.unit", null);
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.left.value", 0)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 0)
+            ->withSetting("spacing.padding.right.unit", null);
 
         $preset->createWidget("Ceres::OrderReturnWidget")
             ->withSetting("appearance", "primary")
             ->withSetting("customClass", "")
-            ->withSetting("itemDetailsData", "availability");
+            ->withSetting("itemDetailsData", ["availability"]);
 
         return $preset->toArray();
     }
