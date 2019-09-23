@@ -127,6 +127,7 @@ import "./components/myAccount/OrderReturnHistoryList";
 import "./components/myAccount/OrderReturnHistoryListItem";
 
 import "./components/newsletter/NewsletterInput";
+import "./components/newsletter/NewsletterUnsubscribeInput";
 
 import "./components/orderReturn/OrderReturn";
 import "./components/orderReturn/OrderReturnItem";

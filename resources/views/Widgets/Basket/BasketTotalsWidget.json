@@ -2,7 +2,7 @@
     "identifier": "Ceres::BasketTotalsWidget",
     "label": "Widget.basketTotalsLabel",
     "previewImageURL": "/images/widgets/basket-totals.svg",
-    "type": "basket",
+    "type": "default",
     "categories": ["basket"],
     "position": 300,
     "widgetClass": "Ceres\\Widgets\\Basket\\BasketTotalsWidget",

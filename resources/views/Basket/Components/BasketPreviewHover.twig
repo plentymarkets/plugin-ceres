@@ -15,7 +15,7 @@
                     </button>
                 </header>
 
-                <basket-list class="item-list" v-if="basketItems.length" size="small" :is-preview="true"></basket-list>
+                <basket-list class="item-list" v-if="basketItems.length" :is-preview="true"></basket-list>
                 <div class="no-items" v-else>{{ trans("Ceres::Template.basketNoItems") }}</div>
 
                 <div class="basket-totals" v-if="basketItems.length">
@@ -27,8 +27,11 @@
                             <div>${ notification.message }</div>
                         </div>
                     </div>
-
-                    <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                    
+                    {% if ceresConfig.basket.showShippingCountrySelect %}
+                        <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                        <hr>
+                    {% endif %}
 
                     {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
                     <basket-totals></basket-totals>

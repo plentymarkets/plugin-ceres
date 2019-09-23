@@ -1,19 +1,37 @@
 import ValidationService from "../../../services/ValidationService";
 import { navigateTo } from "../../../services/UrlService";
 import Vue from "vue";
+import { isDefined } from "../../../helper/utils";
 
 const ApiService = require("../../../services/ApiService");
 
 Vue.component("guest-login", {
 
-    delimiters: ["${", "}"],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-guest-login"
+        },
 
-    props: [
-        "template",
-        "backlink"
-    ],
+        backlink:
+        {
+            type: String
+        },
 
-    data: function()
+        buttonSize:
+        {
+            type: String,
+            default: "md",
+            validator: value =>
+            {
+                return ["sm", "md", "lg"].indexOf(value) !== -1;
+            }
+        }
+    },
+
+    data()
     {
         return {
             email: "",
@@ -25,51 +43,45 @@ Vue.component("guest-login", {
     {
         this.$nextTick(() =>
         {
-            $("#guestLogin").on("hidden.bs.modal", () =>
+            // for old login view only (input in modal)
+            $(this.$parent.$refs.guestModal).on("hidden.bs.modal", () =>
             {
                 this.email = "";
-                this.resetError();
+                ValidationService.unmarkAllFields(this.$refs.form);
             });
         });
     },
 
-    methods: {
-        validate: function()
+    methods:
+    {
+        validate()
         {
-            ValidationService.validate($("#guest-login-form-" + this._uid))
-                .done(function()
+            ValidationService.validate(this.$refs.form)
+                .done(() =>
                 {
-                    this.sendEMail();
-                }.bind(this))
-                .fail(function(invalidFields)
+                    this.authGuest();
+                })
+                .fail(invalidFields =>
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
                 });
         },
 
-        sendEMail: function()
+        authGuest()
         {
             this.isDisabled = true;
 
             ApiService.post("/rest/io/guest", { email: this.email })
-                .done(function()
+                .done(() =>
                 {
-                    if (this.backlink !== null && this.backlink)
-                    {
-                        navigateTo(decodeURIComponent(this.backlink));
-                    }
-                    else
-                    {
-                        // Go back to Homepage
-                        navigateTo(window.location.origin);
-                    }
-
-                }.bind(this));
-        },
-
-        resetError()
-        {
-            ValidationService.unmarkAllFields($("#guest-login-form-" + this._uid));
+                    navigateTo(
+                        isDefined(this.backlink) && this.backlink.length ? decodeURIComponent(this.backlink) : window.location.origin
+                    );
+                })
+                .fail(() =>
+                {
+                    this.isDisabled = false;
+                });
         }
     }
 });

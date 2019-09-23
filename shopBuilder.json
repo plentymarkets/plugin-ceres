@@ -16,12 +16,12 @@
         ]
     },
     "allowedTypes": {
-        "header":            ["header", "static", "structure", "default"],
-        "footer":            ["footer", "static", "structure", "default"],
-        "content":           ["static", "structure", "default"],
-        "singleitem":        ["static", "structure", "default", "item"],
-        "checkout":          ["static", "structure", "default", "checkout", "customer", "basket"],
-        "myaccount":         ["static", "structure", "default", "myaccount", "customer", "basket"]
+        "header":       ["header", "static", "structure", "default"],
+        "footer":       ["footer", "static", "structure", "default"],
+        "content":      ["static", "structure", "default"],
+        "singleitem":   ["static", "structure", "default", "item"],
+        "checkout":     ["static", "structure", "default", "checkout", "customer"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer"]
     },
     "presets": {
         "header": [
@@ -42,6 +42,50 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultHomepagePreset"
             },
             {
+                "label": "Widget.presetBasketDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultBasketPreset"
+            },
+            {
+                "label": "Widget.presetOrderConfirmationDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
+            },
+            {
+                "label": "Widget.presetWishList",
+                "presetClass": "Ceres\\Widgets\\Presets\\WishListPreset"
+            },
+            {
+                "label": "Widget.presetContactDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
+            },
+            {
+                "label": "Widget.presetRegistration",
+                "presetClass": "Ceres\\Widgets\\Presets\\RegistrationPreset"
+            },
+            {
+                "label": "Widget.presetLoginDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultLoginPreset"
+            },
+            {
+                "label": "Widget.presetOrderReturn",
+                "presetClass": "Ceres\\Widgets\\Presets\\OrderReturnPreset"
+            },
+            {
+                "label": "Widget.presetChangePassword",
+                "presetClass": "Ceres\\Widgets\\Presets\\ChangePasswordPreset"
+            },
+            {
+                "label": "Widget.presetChangeMailDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultChangeMailPreset"
+            },
+            {
+                "label": "Widget.presetNewsletterUnsubscribe",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset"
+            },
+            {
+                "label": "Widget.presetPageNotFound",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset"
+            },
+            {
                 "label": "Widget.presetCancellationRightsDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationRightsPreset"
             },
@@ -60,14 +104,6 @@
             {
                 "label": "Widget.presetGTCDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
-            },
-            {
-                "label": "Widget.presetContactDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
-            },
-            {
-                "label": "Widget.presetOrderConfirmationDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
             }
         ],
         "checkout": [
@@ -183,6 +219,22 @@
                         "name": "Config.routingEnableRouteHome"
                     }
                 },
+                "basketCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryBasket"
+                    }
+                },
+                "basketEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.basketCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteBasket"
+                    }
+                },
                 "checkoutCategory": {
                     "type": "category",
                     "required": false,
@@ -213,6 +265,38 @@
                     "isVisible": "!routing.myAccountCategory",
                     "options": {
                         "name": "Config.routingEnableRouteMyAccount"
+                    }
+                },
+                "loginCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryLogin"
+                    }
+                },
+                "loginEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.loginCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteLogin"
+                    }
+                },
+                "registerCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryRegister"
+                    }
+                },
+                "registerEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.registerCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteRegister"
                     }
                 },
                 "confirmationCategory": {
@@ -334,6 +418,102 @@
                     "isVisible": "!routing.contactCategory",
                     "options": {
                         "name": "Config.routingEnableRouteContact"
+                    }
+                },
+                "wishListCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryWishList"
+                    }
+                },
+                "wishListEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.wishListCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteWishList"
+                    }
+                },
+                "changeMailCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryChangeMail"
+                    }
+                },
+                "changeMailEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.changeMailCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteChangeMail"
+                    }
+                },
+                "passwordResetCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryPasswordReset"
+                    }
+                },
+                "passwordResetEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.passwordResetCategory",
+                    "options": {
+                        "name": "Config.routingEnableRoutePasswordReset"
+                    }
+                },
+                "newsletterOptOutCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryNewsletterOptOut"
+                    }
+                },
+                "newsletterOptOutEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.newsletterOptOutCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteNewsletterOptOut"
+                    }
+                },
+                "orderReturnCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryOrderReturn"
+                    }
+                },
+                "orderReturnEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.orderReturnCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteOrderReturn"
+                    }
+                },
+                "pageNotFoundCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryPageNotFound"
+                    }
+                },
+                "pageNotFoundEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.pageNotFoundCategory",
+                    "options": {
+                        "name": "Config.routingEnableRoutePageNotFound"
                     }
                 },
                 "shippingCategory": {

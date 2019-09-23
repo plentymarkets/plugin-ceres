@@ -109,36 +109,41 @@ const mutations =
 
 const actions =
     {
-        loadBasketData({ commit, state })
+        loadBasketData({ state, commit })
         {
-            jQuery
-                .when(
-                    ApiService.get("/rest/io/basket", {}, { cache: false }),
-                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
-                )
-                .then((basket, basketItems) =>
-                {
-                    commit("setBasket", basket);
-                    commit("setBasketItems", basketItems);
-                    commit("setIsBasketInitiallyLoaded");
-                })
-                .catch((error, status) =>
-                {
-                    console.log(error, status);
-
-                    if (status > 0)
+            if ( !state.isBasketInitiallyLoaded )
+            {
+                jQuery
+                    .when(
+                        ApiService.get("/rest/io/basket", {}, { cache: false }),
+                        ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
+                    )
+                    .then((basket, basketItems) =>
                     {
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.basketOops")
-                        ).closeAfter(10000);
-                    }
-                });
+                        commit("setBasket", basket);
+                        commit("setBasketItems", basketItems);
+                        commit("setIsBasketInitiallyLoaded");
+                        commit("setWishListIds", basket.itemWishListIds);
+                    })
+                    .catch((error, status) =>
+                    {
+                        console.log(error, status);
+
+                        if (status > 0)
+                        {
+                            NotificationService.error(
+                                TranslationService.translate("Ceres::Template.basketOops")
+                            ).closeAfter(10000);
+                        }
+                    });
+            }
 
             ApiService.listen("AfterBasketChanged", data =>
             {
                 commit("setBasket", data.basket);
                 commit("setShowNetPrices", data.showNetPrices);
                 // commit("setBasketItems", data.basketItems);
+                commit("setWishListIds", data.basket.itemWishListIds);
             });
 
             ApiService.listen("AfterBasketItemAdd", data =>

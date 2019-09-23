@@ -1,0 +1,45 @@
+{
+    "identifier": "Ceres::GuestLoginWidget",
+    "label": "Widget.guestLoginLabel",
+    "previewImageURL": "/images/widgets/guest-login.svg",
+    "type": "default",
+    "categories": ["customer"],
+    "position": 200,
+    "widgetClass": "Ceres\\Widgets\\Login\\GuestLoginWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "buttonSize": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "md",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "md",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}
