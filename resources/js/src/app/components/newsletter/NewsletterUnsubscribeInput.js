@@ -1,9 +1,11 @@
 import TranslationService from "../../services/TranslationService";
 import ValidationService from "../../services/ValidationService";
-import Vue from "vue";
+import ApiService from "../../services/ApiService";
+import NotificationService from "../../services/NotificationService";
+import UrlService from "../../services/UrlService";
 
-const ApiService          = require("../../services/ApiService");
-const NotificationService = require("../../services/NotificationService");
+import { isUndefined } from "../../helper/utils";
+import Vue from "vue";
 
 Vue.component("newsletter-unsubscribe-input", {
     props: {
@@ -41,7 +43,14 @@ Vue.component("newsletter-unsubscribe-input", {
         },
         save()
         {
-            ApiService.del("/rest/io/customer/newsletter/" + this.email)
+            const urlParams = UrlService.getUrlParams(document.location.search);
+
+            if (isUndefined( urlParams.folderId ))
+            {
+                urlParams.folderId = 0;
+            }
+
+            ApiService.del("/rest/io/customer/newsletter/" + this.email, { "emailFolder": urlParams.folderId })
                 .done(() =>
                 {
                     NotificationService.success(
