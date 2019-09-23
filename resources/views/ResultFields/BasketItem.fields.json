@@ -7,6 +7,7 @@
     "texts.lang",
     "variation.name",
     "variation.number",
+    "variation.availability.id",
     "variation.availability.names.*",
     "variation.availability.averageDays",
     "variation.itemId",
