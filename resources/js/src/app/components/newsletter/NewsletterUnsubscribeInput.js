@@ -1,11 +1,11 @@
 import TranslationService from "../../services/TranslationService";
 import ValidationService from "../../services/ValidationService";
+import ApiService from "../../services/ApiService";
+import NotificationService from "../../services/NotificationService";
+import UrlService from "../../services/UrlService";
+
 import { isUndefined } from "../../helper/utils";
 import Vue from "vue";
-
-const ApiService          = require("../../services/ApiService");
-const NotificationService = require("../../services/NotificationService");
-const UrlService          = require("../../services/UrlService");
 
 Vue.component("newsletter-unsubscribe-input", {
     props: {
