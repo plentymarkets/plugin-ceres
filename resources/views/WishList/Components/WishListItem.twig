@@ -50,13 +50,19 @@
                     </div>
     
                     <div class="basket-item-container-right d-block">
+                        <div class="price-box">
+                            <div class="item-total-price" v-if="!isNet">
+                                ${ quantity * unitPrice | currency }
+                            </div>
+                        </div>
+
                         <div class="add-to-basket-container">
-                            {{ AddToBasket.printVueComponent( "wishListItem", false, false, { ":has-price": "wishListItem | hasItemDefaultPrice" } ) }}
+                            {{ AddToBasket.printVueComponent( "wishListItem", false, true, { ":has-price": "wishListItem | hasItemDefaultPrice" } ) }}
                         </div>
     
                         <div class="price-box">
                 
-                            <div class="item-remove-container text-center">
+                            <div class="item-remove-container">
                                 <div class="btn btn-sm item-remove-button" @click="removeItem()">
                                     <span>
                                         {{ trans("Ceres::Template.wishListDelete") }}

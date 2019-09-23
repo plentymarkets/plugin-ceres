@@ -5,6 +5,10 @@
             white-space: nowrap;
             display: flex;
             flex-direction: row-reverse;
+
+            .fa {
+                margin-left: .25rem;
+            }
         }
     }
 

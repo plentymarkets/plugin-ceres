@@ -63,15 +63,6 @@
 	.basket-item {
 		display: flex;
 	
-		.quantity-input-container {
-			width: 3em;
-			margin-right: 10px;
-	
-			button {
-				padding: .25rem 1rem;
-			}
-		}
-	
 		.image-container {
 			width: 75px;
 			flex-shrink: 0;
