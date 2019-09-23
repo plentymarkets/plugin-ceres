@@ -66,6 +66,10 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultLoginPreset"
             },
             {
+                "label": "Widget.presetOrderReturn",
+                "presetClass": "Ceres\\Widgets\\Presets\\OrderReturnPreset"
+            },
+            {
                 "label": "Widget.presetChangePassword",
                 "presetClass": "Ceres\\Widgets\\Presets\\ChangePasswordPreset"
             },
@@ -478,6 +482,22 @@
                     "isVisible": "!routing.newsletterOptOutCategory",
                     "options": {
                         "name": "Config.routingEnableRouteNewsletterOptOut"
+                    }
+                },
+                "orderReturnCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryOrderReturn"
+                    }
+                },
+                "orderReturnEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.orderReturnCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteOrderReturn"
                     }
                 },
                 "pageNotFoundCategory": {

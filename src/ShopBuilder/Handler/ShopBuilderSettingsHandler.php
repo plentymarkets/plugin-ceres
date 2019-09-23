@@ -43,6 +43,8 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.passwordResetEnableRoute'      => 'IO.routing.enabled_routes',
         'routing.newsletterOptOutCategory'      => 'IO.routing.category_newsletter-opt-out',
         'routing.newsletterOptOutEnableRoute'   => 'IO.routing.enabled_routes',
+        'routing.orderReturnCategory'           => 'IO.routing.category_order-return',
+        'routing.orderReturnEnableRoute'        => 'IO.routing.enabled_routes',
         'routing.pageNotFoundCategory'          => 'IO.routing.category_page-not-found',
         'routing.pageNotFoundEnableRoute'       => 'IO.routing.enabled_routes',
         'routing.shippingCategory'              => 'Ceres.global.shippingCostsCategoryId',
@@ -72,6 +74,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.changeMailCategory'            => 'int',
         'routing.passwordResetCategory'         => 'int',
         'routing.newsletterOptOutCategory'      => 'int',
+        'routing.orderReturnCategory'           => 'int',
         'routing.pageNotFoundCategory'          => 'int',
         'routing.shippingCategory'              => 'int',
 
@@ -249,6 +252,16 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     public function writeRouting_NewsletterOptOutEnableRoute($enableWishListRoute)
     {
         return $this->setEnabledRoute(RouteConfig::NEWSLETTER_OPT_OUT, $enableWishListRoute);
+    }
+
+    public function readRouting_OrderReturnEnableRoute()
+    {
+        return in_array( RouteConfig::ORDER_RETURN, RouteConfig::getEnabledRoutes());
+    }
+
+    public function writeRouting_OrderReturnEnableRoute($enableWishListRoute)
+    {
+        return $this->setEnabledRoute(RouteConfig::ORDER_RETURN, $enableWishListRoute);
     }
 
     public function readRouting_PageNotFoundEnableRoute()

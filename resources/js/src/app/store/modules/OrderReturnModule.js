@@ -84,7 +84,9 @@ const getters =
     {
         getOrderItemImage: state => orderItemId => state.orderData.itemImages[orderItemId],
 
-        getOrderItemURL: state => orderItemId => state.orderData.itemURLs[orderItemId]
+        getOrderItemURL: state => orderItemId => state.orderData.itemURLs[orderItemId],
+
+        getOrderItemVariation: state => orderItemId => state.orderData.variations[orderItemId]
     };
 
 export default
