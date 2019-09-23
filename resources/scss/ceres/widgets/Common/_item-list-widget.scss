@@ -20,17 +20,6 @@
     }
 }
 
-.widget-item-list-inline-caption
-{
-    h1,
-    h2,
-    h3,
-    p
-    {
-        text-transform: unset !important;
-    }
-}
-
 .widget-item-list-caption
 {
     h1,
@@ -61,6 +50,10 @@
         font-size: 1.5rem;
         padding-top: .4rem;
         padding-bottom: .1rem;
+    }
 
+    .widget-item-list-inline-caption *
+    {
+        text-transform: unset !important;
     }
 }
