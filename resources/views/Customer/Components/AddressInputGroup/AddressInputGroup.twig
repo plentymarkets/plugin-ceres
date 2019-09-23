@@ -27,7 +27,6 @@
                 :selected-state-id="value.stateId"
                 @country-changed="onSelectedCountryChanged($event)"
                 @state-changed="emitInputEvent('stateId', $event)"
-                country-list="{{ services.country.getActiveCountriesList() | filterFields(['id','currLangName', 'isoCode2', 'states.id', 'states.name']) | json_data("activeCountriesList") }}"
                 :address-type="addressType"
                 :optional-address-fields="optionalAddressFields"
                 :required-address-fields="requiredAddressFields">
