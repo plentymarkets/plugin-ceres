@@ -49,6 +49,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <div>
+                        <div class="add-to-basket-container mr-3">
+                            <div class="quantity-input-container">
+                                <quantity-input
+                                    template="#vue-quantity-input"
+                                    @quantity-change="quantity = $event"
+                                    :value="quantity"
+                                    :min="wishListItem.variation.minimumOrderQuantity"
+                                    :max="wishListItem.variation.maximumOrderQuantity"
+                                    :timeout="0" 
+                                    :interval="wishListItem.variation.intervalQuantity"
+                                    :variation-id="wishListItem.variation.id">
+                                </quantity-input>
+                            </div>
+                            {{ AddToBasket.printVueComponent( "wishListItem", false, false, { ":has-price": "wishListItem | hasItemDefaultPrice" } ) }}
+                        </div>
+                    </div>
     
                     <div class="basket-item-container-right d-block">
                         <div class="price-box">
@@ -57,25 +75,7 @@
                             </div>
                         </div>
 
-                        <div class="add-to-basket-container">
-                            {{ AddToBasket.printVueComponent( "wishListItem", false, false, { ":has-price": "wishListItem | hasItemDefaultPrice" } ) }}
-                        </div>
-
-                        <div>
-                            <quantity-input
-								template="#vue-quantity-input"
-								@quantity-change="quantity = $event"
-								:value="quantity"
-								:min="wishListItem.variation.minimumOrderQuantity"
-								:max="wishListItem.variation.maximumOrderQuantity"
-                                :timeout="0" 
-                                :interval="wishListItem.variation.intervalQuantity"
-                                :variation-id="wishListItem.variation.id">
-                            </quantity-input>
-                        </div>
-    
                         <div class="price-box">
-                
                             <div class="item-remove-container">
                                 <div class="btn btn-sm item-remove-button" @click="removeItem()">
                                     <span>
