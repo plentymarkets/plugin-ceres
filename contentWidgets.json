@@ -8963,6 +8963,121 @@
         }
     },
     {
+        "identifier": "Ceres::OrderReturnWidget",
+        "label": "Widget.orderReturnLabel",
+        "previewImageURL": "/images/widgets/order-return.svg",
+        "type": "default",
+        "categories": [
+            "orderconfirmation"
+        ],
+        "position": 500,
+        "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderReturnWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "itemDetailsData": {
+                "type": "checkboxGroup",
+                "defaultValue": [
+                    "availability"
+                ],
+                "options": {
+                    "name": "Widget.basketDetailsDataLabel",
+                    "checkboxValues": [
+                        {
+                            "value": "item_id",
+                            "caption": "Widget.basketDetailsDataItemId"
+                        },
+                        {
+                            "value": "custom_number",
+                            "caption": "Widget.basketDetailsDataCustomNumber"
+                        },
+                        {
+                            "value": "availability",
+                            "caption": "Widget.basketDetailsDataAvailability"
+                        },
+                        {
+                            "value": "description_long",
+                            "caption": "Widget.basketDetailsDataDescriptionLong"
+                        },
+                        {
+                            "value": "description_short",
+                            "caption": "Widget.basketDetailsDataDescriptionShort"
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::OrderTotalsWidget",
         "label": "Widget.basketTotalsLabel",
         "previewImageURL": "/images/widgets/basket-totals.svg",

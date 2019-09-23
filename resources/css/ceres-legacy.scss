@@ -15314,10 +15314,6 @@ html.ie {
 	margin: 2em 0 0.2em;
 }
 
-.static-link-list {
-	margin-bottom: -15px;
-}
-
 .static-link-list a {
 	color: black;
 	margin-right: 10px;
@@ -17801,95 +17797,6 @@ html.ie {
 		.item-total-price{
 			width: auto!important;
 			text-align: right;
-		}
-	}
-}
-
-.order-return {
-	& .order-return-item {
-		border-bottom: 1px solid $gray-lighter;
-		padding: 10px 0px;
-		overflow: hidden;
-	
-		& > div.row {
-			display:-webkit-box;
-			display:-ms-flexbox;
-			display:flex;
-			height: 100px;
-	
-			& .order-return-image-container {
-				max-width: 100%;
-				width: 100%;
-				position: relative;
-	
-				@include img-contain();
-			}
-	
-			& > .order-return-texts {
-				-ms-flex-item-align: center;
-				    align-self: center;
-			}
-	
-			& > .order-return-container {
-				display:-webkit-box;
-				display:-ms-flexbox;
-				display:flex;
-			}
-		}
-
-		.order-flex {
-			display: -webkit-box;
-			display: -ms-flexbox;
-			display: flex;
-
-			& .input-group {
-				-ms-flex-item-align: center;
-				    align-self: center;
-				max-width: 7rem
-			}
-
-			& .max-counter-slash {
-				-ms-flex-item-align: center;
-				    align-self: center;
-				font-size: 1.3rem;
-				margin: 0px 10px
-			}
-
-			& .max-counter-return {
-				-ms-flex-item-align: center;
-				    align-self: center;
-				font-size: 1.3rem
-			}
-		}
-	
-		.order-return-name {
-			overflow: hidden;
-			position: relative;
-			line-height: 1.2em;
-			max-height: 4.8em;
-			margin-right: -1em;
-			padding-right: 1em;
-		
-			text-overflow: ellipsis;
-			display: -webkit-box;
-			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 4;
-		
-			@media screen and (-webkit-min-device-pixel-ratio:0) {
-				&:after {
-					bottom: 0;
-				}
-			}
-		}
-	}
-
-	input[type='number'] {
-		border-left: 1px solid darkgrey;
-	}
-	
-	@include media-breakpoint-up(md) {
-		.order-return-name {
-			font-size: 1.15rem;
 		}
 	}
 }
