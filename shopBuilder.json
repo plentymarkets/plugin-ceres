@@ -46,6 +46,46 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultBasketPreset"
             },
             {
+                "label": "Widget.presetOrderConfirmationDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
+            },
+            {
+                "label": "Widget.presetWishList",
+                "presetClass": "Ceres\\Widgets\\Presets\\WishListPreset"
+            },
+            {
+                "label": "Widget.presetContactDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
+            },
+            {
+                "label": "Widget.presetRegistration",
+                "presetClass": "Ceres\\Widgets\\Presets\\RegistrationPreset"
+            },
+            {
+                "label": "Widget.presetLoginDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultLoginPreset"
+            },
+            {
+                "label": "Widget.presetOrderReturn",
+                "presetClass": "Ceres\\Widgets\\Presets\\OrderReturnPreset"
+            },
+            {
+                "label": "Widget.presetChangePassword",
+                "presetClass": "Ceres\\Widgets\\Presets\\ChangePasswordPreset"
+            },
+            {
+                "label": "Widget.presetChangeMailDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultChangeMailPreset"
+            },
+            {
+                "label": "Widget.presetNewsletterUnsubscribe",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset"
+            },
+            {
+                "label": "Widget.presetPageNotFound",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset"
+            },
+            {
                 "label": "Widget.presetCancellationRightsDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationRightsPreset"
             },
@@ -64,48 +104,6 @@
             {
                 "label": "Widget.presetGTCDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
-            },
-            {
-                "label": "Widget.presetContactDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultContactPreset"
-            },
-            {
-                "label": "Widget.presetPageNotFound",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset"
-            },
-            {
-                "label": "Widget.presetLoginDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultLoginPreset"
-            },
-            {
-                "label": "Widget.presetChangeMailDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultChangeMailPreset"
-            },
-            {
-                "label": "Widget.presetNewsletterUnsubscribe",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset"
-            },
-            {
-                "label": "Widget.presetOrderConfirmationDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset"
-            },
-            {
-                "label": "Widget.presetWishList",
-                "presetClass": "Ceres\\Widgets\\Presets\\WishListPreset"
-            },
-            {
-                "label": "Widget.presetRegistration",
-                "presetClass": "Ceres\\Widgets\\Presets\\RegistrationPreset"
-            },
-            {
-
-                "label": "Widget.presetOrderReturn",
-                "presetClass": "Ceres\\Widgets\\Presets\\OrderReturnPreset"
-            },
-            {
-                "label": "Widget.presetChangePassword",
-                "presetClass": "Ceres\\Widgets\\Presets\\ChangePasswordPreset"
-
             }
         ],
         "checkout": [
