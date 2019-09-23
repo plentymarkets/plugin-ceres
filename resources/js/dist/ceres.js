@@ -54551,6 +54551,9 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("payment-provider-select", 
     },
     isCheckoutReadonly: function isCheckoutReadonly(state) {
       return state.checkout.readOnly;
+    },
+    selectedShippingProfile: function selectedShippingProfile(state) {
+      return state.checkout.shipping.selectedShippingProfile;
     }
   }),
 
@@ -55012,10 +55015,13 @@ vue__WEBPACK_IMPORTED_MODULE_18___default.a.component("shipping-privacy-hint-che
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.join */ "./node_modules/core-js/modules/es.array.join.js");
+/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
 
 
 
@@ -55023,7 +55029,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("shipping-profile-select", {
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("shipping-profile-select", {
   props: {
     template: {
       type: String,
@@ -55036,9 +55042,13 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("shipping-profile-select", 
     paddingInlineStyles: {
       type: String,
       default: null
+    },
+    paymentContainerIsOverwritten: {
+      type: Boolean,
+      default: false
     }
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])({
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapState"])({
     shippingProfileList: function shippingProfileList(state) {
       return state.checkout.shipping.shippingProfileList;
     },
@@ -55056,6 +55066,9 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("shipping-profile-select", 
     },
     isCheckoutReadonly: function isCheckoutReadonly(state) {
       return state.checkout.readOnly;
+    },
+    selectedPaymentMethodId: function selectedPaymentMethodId(state) {
+      return state.checkout.payment.methodOfPaymentId;
     }
   }),
 
@@ -55089,8 +55102,29 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("shipping-profile-select", 
       this.$store.commit("setShippingProfileShowError", showError);
 
       if (showError) {
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template.checkoutCheckShippingProfile"));
+        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_2__["default"].translate("Ceres::Template.checkoutCheckShippingProfile"));
       }
+    },
+    getTooltip: function getTooltip(shippingProfileId, methodOfPaymentId) {
+      var translationKey = "";
+      var params = {};
+
+      for (var i = 0; i < this.shippingProfileList.length; i++) {
+        var shippingProfile = this.shippingProfileList[i];
+
+        if (shippingProfile.parcelServicePresetId === shippingProfileId) {
+          if (this.paymentContainerIsOverwritten) {
+            translationKey = "Ceres::Template.checkoutChangePaymentMethodToHint";
+            params.paymentMethodNames = shippingProfile.allowedPaymentMethodNames.join(",");
+          } else {
+            translationKey = "Ceres::Template.checkoutChangePaymentMethodHint";
+          }
+
+          break;
+        }
+      }
+
+      return _services_TranslationService__WEBPACK_IMPORTED_MODULE_2__["default"].translate(translationKey, params);
     }
   }
 });
@@ -71533,11 +71567,17 @@ var actions = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.includes */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
+
 
 
 
@@ -71585,10 +71625,15 @@ var mutations = {
   setShippingProfile: function setShippingProfile(state, shippingProfileId) {
     if (shippingProfileId) {
       state.shipping.shippingProfileId = shippingProfileId;
+      var selectedShippingProfile = state.shipping.shippingProfileList.find(function (shipping) {
+        return shipping.parcelServicePresetId === shippingProfileId;
+      });
+      state.shipping.selectedShippingProfile = selectedShippingProfile;
     }
   },
   setSelectedShippingProfile: function setSelectedShippingProfile(state, shippingProfile) {
     state.shipping.selectedShippingProfile = shippingProfile;
+    state.shipping.shippingProfileId = shippingProfile.parcelServicePresetId;
   },
   setShippingProfileList: function setShippingProfileList(state, shippingProfileList) {
     if (Array.isArray(shippingProfileList)) {
@@ -71687,7 +71732,7 @@ var actions = {
       return profile.parcelServicePresetId === shippingProfileId;
     });
 
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(shippingProfile)) {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(shippingProfile)) {
       commit("setSelectedShippingProfile", shippingProfile);
     }
   },
@@ -71716,11 +71761,26 @@ var actions = {
         getters = _ref7.getters;
     return new Promise(function (resolve, reject) {
       var oldShippingProfile = state.shipping.shippingProfileId;
+      var params = {
+        shippingId: shippingProfile.parcelServicePresetId
+      };
       commit("setIsBasketLoading", true);
       commit("setShippingProfile", shippingProfile.parcelServicePresetId);
-      ApiService.post("/rest/io/checkout/shippingId/", {
-        shippingId: shippingProfile.parcelServicePresetId
-      }).done(function (response) {
+
+      if (shippingProfile.excludedPaymentMethodIds.includes(state.payment.methodOfPaymentId)) {
+        var methodOfPaymentList = state.payment.methodOfPaymentList;
+
+        for (var i = 0; i < methodOfPaymentList.length; i++) {
+          var methodOfPayment = methodOfPaymentList[i];
+
+          if (!shippingProfile.excludedPaymentMethodIds.includes(methodOfPayment.id)) {
+            params.methodOfPaymentId = methodOfPayment.id;
+            break;
+          }
+        }
+      }
+
+      ApiService.post("/rest/io/checkout/shippingId/", params).done(function (response) {
         commit("setSelectedShippingProfile", shippingProfile);
         commit("setIsBasketLoading", false);
         resolve(response);
@@ -71746,10 +71806,10 @@ var actions = {
   initProfileAvailabilities: function initProfileAvailabilities(_ref9) {
     var commit = _ref9.commit,
         state = _ref9.state;
-    commit("setParcelBoxAvailability", !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(state.shipping.shippingProfileList.find(function (shipping) {
+    commit("setParcelBoxAvailability", !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(state.shipping.shippingProfileList.find(function (shipping) {
       return shipping.isParcelBox;
     })));
-    commit("setPostOfficeAvailability", !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(state.shipping.shippingProfileList.find(function (shipping) {
+    commit("setPostOfficeAvailability", !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(state.shipping.shippingProfileList.find(function (shipping) {
       return shipping.isPostOffice;
     })));
   }
