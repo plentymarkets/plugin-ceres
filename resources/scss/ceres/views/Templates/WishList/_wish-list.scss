@@ -63,3 +63,19 @@
     text-align: center;
     margin: 75px 0 100px 0;
 }
+
+.wishlist,
+.widget-wish-list {
+    .category-list-view-port {
+        height: 100%;
+
+        > div {
+            height: 100%;
+        }
+
+        i.fa {
+            font-size: inherit;
+            line-height: inherit;
+        } 
+    }
+}
