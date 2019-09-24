@@ -17885,6 +17885,9 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
       -o-object-fit: contain;
          object-fit: contain; }
 
+html.ie .v-s-boxes .v-s-box.invalid:after {
+  background: rgba(255, 255, 255, 0.7); }
+
 .loading .loading-animation-frame {
   display: block; }
 
