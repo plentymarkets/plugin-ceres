@@ -34,8 +34,6 @@ Vue.component("login", {
         {
             this.loginFields = $(".login-container").find(".input-unit");
 
-            this.removeLoginModal();
-
             AutoFocusService.triggerAutoFocus();
         });
     },
@@ -73,16 +71,6 @@ Vue.component("login", {
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
                 });
-        },
-
-        removeLoginModal()
-        {
-            if (!this.modalElement)
-            {
-                const loginModal = document.getElementById("login");
-
-                loginModal.parentNode.removeChild(loginModal);
-            }
         },
 
         /**

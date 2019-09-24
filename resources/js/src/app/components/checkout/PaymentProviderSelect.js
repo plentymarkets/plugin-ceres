@@ -28,7 +28,8 @@ Vue.component("payment-provider-select", {
         methodOfPaymentId: state => state.checkout.payment.methodOfPaymentId,
         showError: state => state.checkout.validation.paymentProvider.showError,
         isBasketLoading: state => state.basket.isBasketLoading,
-        isCheckoutReadonly: state => state.checkout.readOnly
+        isCheckoutReadonly: state => state.checkout.readOnly,
+        selectedShippingProfile: state => state.checkout.shipping.selectedShippingProfile
     }),
 
     /**

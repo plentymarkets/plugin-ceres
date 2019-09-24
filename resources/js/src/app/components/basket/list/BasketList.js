@@ -9,10 +9,10 @@ Vue.component("basket-list", {
             type: String,
             default: "#vue-basket-list"
         },
-        size:
+        basketDetailsData:
         {
-            type: String,
-            default: "small"
+            type: Array,
+            default: () => []
         },
         isPreview:
         {

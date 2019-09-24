@@ -2,6 +2,7 @@ import { isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import "owl.carousel";
+import "lightbox2";
 import { mapState } from "vuex";
 
 Vue.component("item-image-carousel", {

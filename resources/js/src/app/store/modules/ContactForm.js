@@ -3,6 +3,7 @@ import NotificationService from "../../services/NotificationService";
 import TranslationService from "../../services/TranslationService";
 import { serializeForm, getLabel } from "../../helper/serializeForm";
 import { isMail } from "../../helper/strings";
+import { executeReCaptcha } from "../../helper/executeReCaptcha";
 
 const ApiService = require("../../services/ApiService");
 
@@ -132,53 +133,7 @@ const actions =
                 return;
             }
 
-            let recaptchaValidation = Promise.resolve(null);
-            const recaptchaElement = event.target.querySelector("[data-recaptcha]");
-
-            if (window.grecaptcha && App.config.global.googleRecaptchaVersion === 3)
-            {
-                // V3
-                recaptchaValidation = new Promise((resolve, reject) =>
-                {
-                    window.grecaptcha.execute(
-                        App.config.global.googleRecaptchaApiKey,
-                        { action: "homepage" }
-                    ).then(response =>
-                    {
-                        if (response)
-                        {
-                            resolve(response);
-                        }
-                        else
-                        {
-                            reject();
-                        }
-                    });
-                });
-            }
-            else if ( window.grecaptcha && App.config.global.googleRecaptchaVersion === 2 && !!recaptchaElement)
-            {
-                // V2 Invisible
-                recaptchaValidation = new Promise((resolve, reject) =>
-                {
-                    window.grecaptcha.execute(recaptchaElement.dataset.recaptcha);
-                    recaptchaElement
-                        .querySelector("[name=\"g-recaptcha-response\"]")
-                        .addEventListener("recaptcha-response", (evt) =>
-                        {
-                            if (evt.target.value)
-                            {
-                                resolve(evt.target.value);
-                            }
-                            else
-                            {
-                                reject();
-                            }
-                        });
-                });
-            }
-
-            recaptchaValidation
+            executeReCaptcha(event.target)
                 .then((recaptchaResponse) =>
                 {
                     ValidationService.validate(event.target)

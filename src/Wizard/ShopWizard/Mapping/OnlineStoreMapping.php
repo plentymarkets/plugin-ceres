@@ -104,6 +104,12 @@ class OnlineStoreMapping
             "type"      => "integer",
             "global"    => true,
             "optional"  => false
+        ],
+        "onlineStore_shippingProfiles" => [
+            "field"     => "checkout.show_all_shipping_profiles",
+            "type"      => "boolean",
+            "global"    => false,
+            "optional"  => false
         ]
     ];
 

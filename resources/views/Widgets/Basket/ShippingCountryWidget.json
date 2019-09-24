@@ -1,0 +1,13 @@
+{
+    "identifier": "Ceres::ShippingCountryWidget",
+    "label": "Widget.shippingCountryLabel",
+    "previewImageURL": "/images/widgets/shipping-country.svg",
+    "type": "default",
+    "categories": ["basket"],
+    "position": 300,
+    "widgetClass": "Ceres\\Widgets\\Basket\\ShippingCountryWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "spacing":"@include(spacingMargin)"
+    }
+}

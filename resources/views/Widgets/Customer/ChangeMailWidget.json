@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::ChangeMailWidget",
+    "label": "Widget.changeMailLabel",
+    "previewImageURL": "/images/widgets/change-mail.svg",
+    "type": "default",
+    "categories": ["customer"],
+    "position": 300,
+    "widgetClass": "Ceres\\Widgets\\Customer\\ChangeMailWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}
