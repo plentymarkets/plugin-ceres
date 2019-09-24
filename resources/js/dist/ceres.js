@@ -72413,7 +72413,8 @@ var actions = {
     });
   },
   removeBasketItem: function removeBasketItem(_ref7, basketItemId) {
-    var commit = _ref7.commit;
+    var state = _ref7.state,
+        commit = _ref7.commit;
     return new Promise(function (resolve, reject) {
       commit("setIsBasketLoading", true);
       ApiService.del("/rest/io/basket/items/" + basketItemId, {
@@ -72423,7 +72424,7 @@ var actions = {
         commit("removeBasketItem", basketItemId);
         resolve(response);
 
-        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_8__["pathnameEquals"])(App.urls.checkout) && !response.length) {
+        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_8__["pathnameEquals"])(App.urls.checkout) && state.items.length === 0) {
           Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_7__["navigateTo"])(App.urls.basket);
         }
       }).fail(function (error) {
