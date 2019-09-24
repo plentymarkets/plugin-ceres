@@ -84,7 +84,7 @@ class DefaultCheckoutPreset implements ContentPreset
     private function createBasketWidget()
     {
         $this->twoColumnWidget->createChild('second', 'Ceres::InlineTextWidget')
-            ->withSetting('text', '<h3>{{ trans("Ceres::Template.checkoutBasket") }}</h3><hr class="mb-0">')
+            ->withSetting('text', '<h3>{{ trans("Ceres::Template.checkoutBasket") }}</h3>')
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.top.value", 0)
@@ -95,6 +95,13 @@ class DefaultCheckoutPreset implements ContentPreset
             ->withSetting("spacing.padding.left.unit", null)
             ->withSetting("spacing.padding.right.value", 0)
             ->withSetting("spacing.padding.right.unit", null);
+
+        $this->twoColumnWidget->createChild('second', 'Ceres::SeparatorWidget')
+            ->withSetting("customMargin", true)
+            ->withSetting("margin.top.value", 1)
+            ->withSetting("margin.top.unit", null)
+            ->withSetting("margin.bottom.value", 3)
+            ->withSetting("margin.bottom.unit", null);
 
         $this->twoColumnWidget->createChild('second','Ceres::BasketWidget')
             ->withSetting('appearance', 'primary')
