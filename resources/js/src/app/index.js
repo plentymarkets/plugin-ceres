@@ -136,7 +136,6 @@ import "./components/pageDesign/MobileNavigation";
 import "./components/pageDesign/Notifications";
 import "./components/pageDesign/Popper";
 import "./components/pageDesign/ShippingCountrySelect";
-import "./components/pageDesign/ShopCountrySettings";
 import "./components/pageDesign/WaitScreen";
 
 // TODO: Move to parent component
