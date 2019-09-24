@@ -148,10 +148,13 @@
         <link rel="next" href="{{ canonicalUrl ~ queryString({'page': currentPage + 1}) }}" />
     {% endif %}
 
-    {% embed getPartial('page-metadata') %}
-        {% if category is not defined %}
-            {% block title      trans("Ceres::Template.itemSearchResults") ~ " " ~ searchString %}
-            {% block robots     ceresConfig.meta.robotsSearchResult %}
-        {% endif %}
-    {% endembed %}
+    {% if category is not defined %}
+      {% embed getPartial('page-metadata') %}
+              {% block title      trans("Ceres::Template.itemSearchResults") ~ " " ~ searchString %}
+              {% block robots     ceresConfig.meta.robotsSearchResult %}
+      {% endembed %}
+    {% else %}
+      {% embed getPartial('page-metadata') %}
+      {% endembed %}
+    {% endif %}
 {% endblock %}
