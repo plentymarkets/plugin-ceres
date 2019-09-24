@@ -102,8 +102,8 @@ class TwigItemDataField extends Twig_Extension
         }
 
         $vueDirective = isset($filter) ?
-            "v-$directiveType=\"getFilteredDataField('$field', '$filter')\"" :
-            "v-$directiveType=\"getDataField('$field')\"";
+            "v-$directiveType=\"slotProps.getFilteredDataField('$field', '$filter')\"" :
+            "v-$directiveType=\"slotProps.getDataField('$field')\"";
     
         if($htmlTagType == 'img')
         {

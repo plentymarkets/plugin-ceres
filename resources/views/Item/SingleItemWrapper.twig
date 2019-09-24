@@ -102,10 +102,13 @@
         <div class="single container-max page-content">
             <div class="row">
                 <div class="col">
-                    <single-item v-cloak item-data="{{ item | json_data }}" attributes-data="{{ attributes | json_data }}" variations="{{ variations | json_data }}">
-                        <template #default="{ getDataField: getDataField, getFilteredDataField: getFilteredDataField }">
-                            {{ shopBuilderTemplate | raw }}
-                        </template>
+                    <single-item
+                        v-cloak
+                        item-data="{{ item | json_data }}"
+                        attributes-data="{{ attributes | json_data }}"
+                        variations="{{ variations | json_data }}"
+                        v-slot="slotProps">
+                        {{ shopBuilderTemplate | raw }}
                     </single-item>
                 </div>
             </div>
