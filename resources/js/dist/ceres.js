@@ -71533,7 +71533,7 @@ function transformVariationProperties(item) {
     return _cachedVariationProperties[cacheKey];
   }
 
-  if (!(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(variationProperties) && variationProperties.length)) {
+  if (!(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(variationProperties) && variationProperties.length) || !(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(variationPropertyGroups) && variationPropertyGroups.length)) {
     return [];
   }
 
