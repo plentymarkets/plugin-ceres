@@ -15,7 +15,8 @@ export function transformVariationProperties(item, propertyTypes = [], displaySe
     {
         return _cachedVariationProperties[cacheKey];
     }
-    if (!(isDefined(variationProperties) && variationProperties.length))
+    if (!(isDefined(variationProperties) && variationProperties.length) ||
+        !(isDefined(variationPropertyGroups) && variationPropertyGroups.length))
     {
         return [];
     }
