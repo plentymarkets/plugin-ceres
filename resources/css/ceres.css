@@ -14671,8 +14671,8 @@ nav.navbar .container-max {
             border: none;
             float: right;
             font-family: FontAwesome;
-            height: auto;
-            width: auto; }
+            width: 15px;
+            height: 8px; }
           #mainNavbarCollapsable ul.mainmenu > li.ddown .ddown a:after {
             display: none; } }
 
