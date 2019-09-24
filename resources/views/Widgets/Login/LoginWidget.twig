@@ -9,11 +9,13 @@
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
 
+{{ Twig.set("backlink", "request.get('backlink')") }}
+
 {{ Twig.if("not services.authentication.isLoggedIn() or #{ isPreview | json_encode }") }}
     <div class="widget widget-login widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
         {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
             <div class="widget-inner">
-                <login template="#vue-login" backlink="{{ backlink | url_encode }}" has-to-forward="true"></login>
+                <login template="#vue-login" backlink="{{ Twig.print("backlink | url_encode") }}" has-to-forward="true"></login>
             </div>
     </div>
 {{ Twig.endif() }}
