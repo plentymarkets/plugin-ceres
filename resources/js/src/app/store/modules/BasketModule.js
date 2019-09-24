@@ -216,7 +216,7 @@ const actions =
             });
         },
 
-        removeBasketItem({ commit }, basketItemId)
+        removeBasketItem({ state, commit }, basketItemId)
         {
             return new Promise((resolve, reject) =>
             {
@@ -229,7 +229,7 @@ const actions =
                         commit("removeBasketItem", basketItemId);
                         resolve(response);
 
-                        if (pathnameEquals(App.urls.checkout) && !response.length)
+                        if (pathnameEquals(App.urls.checkout) && state.items.length === 0)
                         {
                             navigateTo(App.urls.basket);
                         }
