@@ -14,7 +14,7 @@
                 <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id"
                        :class="paddingClasses"
                        :style="paddingInlineStyles"
-                       v-tooltip="selectedShippingProfile.excludedPaymentMethodIds.includes(paymentProvider.id)"
+                       v-tooltip="isPaymentMethodExcluded(paymentProvider.id)"
                        data-toggle="tooltip"
                        data-placement="top"
                        data-title="{{ trans("Ceres::Template.checkoutChangeShippingProfileHint") }}">

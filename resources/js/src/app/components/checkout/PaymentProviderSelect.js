@@ -1,6 +1,7 @@
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
+import { isDefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
 
 Vue.component("payment-provider-select", {
@@ -70,6 +71,18 @@ Vue.component("payment-provider-select", {
                 NotificationService.error(
                     TranslationService.translate("Ceres::Template.checkoutCheckPaymentProvider")
                 );
+            }
+        },
+
+        isPaymentMethodExcluded(paymentMethodId)
+        {
+            if (isDefined(this.selectedShippingProfile.excludedPaymentMethodIds))
+            {
+                return this.selectedShippingProfile.excludedPaymentMethodIds.includes(paymentMethodId);
+            }
+            else
+            {
+                return false;
             }
         }
     }
