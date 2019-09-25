@@ -18,6 +18,12 @@ Vue.component("guest-login", {
         backlink:
         {
             type: String
+        },
+
+        buttonSize:
+        {
+            type: String,
+            required: true
         }
     },
 
