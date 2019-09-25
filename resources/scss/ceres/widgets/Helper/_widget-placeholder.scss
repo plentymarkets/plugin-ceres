@@ -26,3 +26,25 @@
         font-style: italic;
     }
 }
+
+.widget-grid .widget-inner .widget-placeholder {
+    padding: 0 !important;
+    min-height: auto !important;
+    position: unset;
+    height: auto !important;
+    overflow: hidden;
+
+    > div {
+        position: unset;
+        top: 0;
+        transform: none;
+
+        > p.title {
+            font-size: 1rem;
+        }
+
+        > p.description {
+            font-size: .9rem;
+        }
+    }
+}
