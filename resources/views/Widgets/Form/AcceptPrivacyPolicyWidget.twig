@@ -1,5 +1,7 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{{ Twig.component("Ceres::Customer.Components.Contact.AcceptPrivacyPolicyCheck") }}
+
 {% set formFieldId     = widget.settings.key.mobile | default(uid()) %}
 
 {% set spacingSettings = widget.settings.spacing %}
@@ -13,25 +15,5 @@
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}" 
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-    <div class="select-unit required" data-validate="">
-        <div class="form-check">
-            <input class="form-check-input"
-                   type="checkbox"
-                   name="{{ formFieldId }}"
-                   value="acceptPrivacy"
-                   id="{{ formFieldId }}">
-            <label class="form-check-label {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} for="{{ formFieldId }}">
-                {% autoescape false %}
-                    {% set policyContent %}<!--
-                    --><a href="{{ urls.privacyPolicy }}" target="_blank">
-                        <span>{{ trans("Ceres::Template.contactPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
-                    </a><!--
-                -->{% endset %}
-
-                    {{ trans("Ceres::Template.contactAcceptPrivacyPolicy", {"policy": policyContent}) }}<!--
-                --><sup>*</sup>
-                {% endautoescape %}
-            </label>
-        </div>
-    </div>
+    <accept-privacy-policy-check></accept-privacy-policy-check>
 </div>
