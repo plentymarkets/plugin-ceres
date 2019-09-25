@@ -400,7 +400,10 @@ Vue.component("variation-select", {
             const selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
 
             selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
-            return !!this.filterVariations(selectedAttributes).length;
+
+            const ignoreUnit = !(Object.keys(this.possibleUnits).length > 1 && this.isContentVisible);
+
+            return !!this.filterVariations(selectedAttributes, null, null, ignoreUnit).length;
         },
 
         /**
