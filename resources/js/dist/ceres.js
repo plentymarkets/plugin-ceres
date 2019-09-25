@@ -53849,6 +53849,10 @@ vue__WEBPACK_IMPORTED_MODULE_30___default.a.component("add-to-basket", {
     paddingInlineStyles: {
       type: String,
       default: null
+    },
+    isWishList: {
+      type: String,
+      default: "false"
     }
   },
   computed: _objectSpread({
@@ -65904,7 +65908,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   },
   data: function data() {
     return {
-      wishListItem: null
+      wishListItem: null,
+      quantity: 1
     };
   },
   computed: _objectSpread({

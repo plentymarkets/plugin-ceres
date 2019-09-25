@@ -16010,15 +16010,6 @@ html.ie .confirmation-order-list .cmp-order-item {
 		display: -ms-flexbox;
 		display: flex;
 	
-		.quantity-input-container {
-			width: 3em;
-			margin-right: 10px;
-	
-			button {
-				padding: .25rem 1rem;
-			}
-		}
-	
 		.image-container {
 			width: 75px;
 			-ms-flex-negative: 0;
@@ -16041,9 +16032,6 @@ html.ie .confirmation-order-list .cmp-order-item {
 				display: flex;
 
 				.meta-container {
-					display: -webkit-box;
-					display: -ms-flexbox;
-					display: flex;
 					width: 100%;
 					min-width: 0;
 			
@@ -16073,12 +16061,9 @@ html.ie .confirmation-order-list .cmp-order-item {
 		.basket-item-container-right {
 			display: block;
 			margin-left: auto;
-			display: -webkit-box;
-			display: -ms-flexbox;
-			display: flex;
 
 			.qty-box-container {
-				margin: 0 15px 0 10px;
+				margin: 0 0 0 10px;
 
 				@include media-breakpoint-down(sm) {
 					margin: 0 0 5px 27px; 
@@ -18065,6 +18050,16 @@ html.ie {
 .wish-list-no-items-label {
     text-align: center;
     margin: 75px 0 100px 0;
+}
+
+.wishlist,
+.widget-wish-list {
+    .category-list-view-port {
+        i.fa {
+            font-size: inherit;
+            line-height: inherit;
+        } 
+    }
 }
 
 
@@ -20914,6 +20909,10 @@ header .widget
             -webkit-box-direction: reverse;
                 -ms-flex-direction: row-reverse;
                     flex-direction: row-reverse;
+
+            .fa {
+                margin-left: .25rem;
+            }
         }
     }
 
