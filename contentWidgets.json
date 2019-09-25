@@ -417,23 +417,23 @@
             "buttonSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "md",
+                "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
                     "tooltipText": "Widget.widgetButtonSizeTooltip",
                     "listBoxValues": [
                         {
-                            "value": "sm",
+                            "value": "btn-sm",
                             "caption": "Widget.widgetButtonSizeSm",
                             "position": 0
                         },
                         {
-                            "value": "md",
+                            "value": "",
                             "caption": "Widget.widgetButtonSizeNormal",
                             "position": 1
                         },
                         {
-                            "value": "lg",
+                            "value": "btn-lg",
                             "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
                         }
@@ -818,23 +818,23 @@
             "buttonSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "md",
+                "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
                     "tooltipText": "Widget.widgetButtonSizeTooltip",
                     "listBoxValues": [
                         {
-                            "value": "sm",
+                            "value": "btn-sm",
                             "caption": "Widget.widgetButtonSizeSm",
                             "position": 0
                         },
                         {
-                            "value": "md",
+                            "value": "",
                             "caption": "Widget.widgetButtonSizeNormal",
                             "position": 1
                         },
                         {
-                            "value": "lg",
+                            "value": "btn-lg",
                             "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
                         }
@@ -2609,7 +2609,7 @@
                     ]
                 }
             },
-            "size": {
+            "buttonSize": {
                 "type": "select",
                 "required": false,
                 "defaultValue": "",
@@ -3266,6 +3266,7 @@
         "label": "Widget.newsletterUnsubscribeLabel",
         "previewImageURL": "/images/widgets/newsletter-unsubscribe.svg",
         "type": "static",
+        "position": 600,
         "widgetClass": "Ceres\\Widgets\\Common\\NewsletterUnsubscribeWidget",
         "settings": {
             "customClass": {
@@ -3318,6 +3319,32 @@
                     ]
                 }
             },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "btn-sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "btn-lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
             "spacing": {
                 "type": "vertical",
                 "children": {
@@ -3347,6 +3374,7 @@
         "label": "Widget.newsletterLabel",
         "previewImageURL": "/images/widgets/newsletter.svg",
         "type": "static",
+        "position": 500,
         "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
         "settings": {
             "customClass": {
@@ -3422,6 +3450,32 @@
                 "options": {
                     "name": "Widget.newsletterEmailFolderLabel",
                     "tooltipText": "Widget.newsletterEmailFolderTooltip"
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "btn-sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "btn-lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
                 }
             },
             "spacing": {
@@ -3509,23 +3563,23 @@
             "buttonSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "md",
+                "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
                     "tooltipText": "Widget.widgetButtonSizeTooltip",
                     "listBoxValues": [
                         {
-                            "value": "sm",
+                            "value": "btn-sm",
                             "caption": "Widget.widgetButtonSizeSm",
                             "position": 0
                         },
                         {
-                            "value": "md",
+                            "value": "",
                             "caption": "Widget.widgetButtonSizeNormal",
                             "position": 1
                         },
                         {
-                            "value": "lg",
+                            "value": "btn-lg",
                             "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
                         }
@@ -5007,6 +5061,32 @@
                     "tooltip": "Widget.mailFormBCCAddressesTooltip"
                 }
             },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "btn-sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "btn-lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
             "spacing": {
                 "type": "vertical",
                 "options": {
@@ -6296,23 +6376,23 @@
             "buttonSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "md",
+                "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
                     "tooltipText": "Widget.widgetButtonSizeTooltip",
                     "listBoxValues": [
                         {
-                            "value": "sm",
+                            "value": "btn-sm",
                             "caption": "Widget.widgetButtonSizeSm",
                             "position": 0
                         },
                         {
-                            "value": "md",
+                            "value": "",
                             "caption": "Widget.widgetButtonSizeNormal",
                             "position": 1
                         },
                         {
-                            "value": "lg",
+                            "value": "btn-lg",
                             "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
                         }
@@ -7987,6 +8067,32 @@
                     ]
                 }
             },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "btn-sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "btn-lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
             "spacing": {
                 "type": "vertical",
                 "children": {
@@ -8335,23 +8441,23 @@
             "buttonSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "md",
+                "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
                     "tooltipText": "Widget.widgetButtonSizeTooltip",
                     "listBoxValues": [
                         {
-                            "value": "sm",
+                            "value": "btn-sm",
                             "caption": "Widget.widgetButtonSizeSm",
                             "position": 0
                         },
                         {
-                            "value": "md",
+                            "value": "",
                             "caption": "Widget.widgetButtonSizeNormal",
                             "position": 1
                         },
                         {
-                            "value": "lg",
+                            "value": "btn-lg",
                             "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
                         }
@@ -8854,6 +8960,7 @@
             },
             "appearance": {
                 "type": "select",
+                "required": true,
                 "defaultValue": "primary",
                 "options": {
                     "name": "Widget.widgetAppearanceLabel",
@@ -9049,6 +9156,32 @@
                         {
                             "value": "description_short",
                             "caption": "Widget.basketDetailsDataDescriptionShort"
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "btn-sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "btn-lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
                         }
                     ]
                 }

@@ -8,6 +8,7 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
 
 {% set shownFields = {
     "de": widget.settings.shownFieldsDe.mobile | default(["billing_address.name1", "billing_address.salutation"]),
@@ -28,6 +29,7 @@
                 template="#vue-registration"
                 backlink="{{ request.get("backlink") | url_encode }}"
                 :shown-fields="{{ shownFields | json_encode }}"
+                :button-size="{{ buttonSize | json_encode }}"
                 :required-fields="{{ requiredFields | json_encode }}">
             </registration>
         </div>

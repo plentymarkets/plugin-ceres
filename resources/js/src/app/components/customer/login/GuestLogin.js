@@ -18,16 +18,6 @@ Vue.component("guest-login", {
         backlink:
         {
             type: String
-        },
-
-        buttonSize:
-        {
-            type: String,
-            default: "md",
-            validator: value =>
-            {
-                return ["sm", "md", "lg"].indexOf(value) !== -1;
-            }
         }
     },
 

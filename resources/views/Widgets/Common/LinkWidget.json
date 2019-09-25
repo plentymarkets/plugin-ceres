@@ -14,7 +14,7 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "size": {
+        "buttonSize": {
             "type": "select",
             "required": false,
             "defaultValue": "",

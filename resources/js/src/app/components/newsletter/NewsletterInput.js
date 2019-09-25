@@ -26,6 +26,11 @@ Vue.component("newsletter-input", {
         {
             type: Number,
             default: 0
+        },
+        buttonSize:
+        {
+            type: String,
+            default: null
         }
     },
 

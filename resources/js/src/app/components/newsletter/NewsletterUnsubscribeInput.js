@@ -13,6 +13,11 @@ Vue.component("newsletter-unsubscribe-input", {
         {
             type: String,
             default: "#vue-newsletter-unsubscribe-input"
+        },
+        buttonSize:
+        {
+            type: String,
+            required: true
         }
     },
 

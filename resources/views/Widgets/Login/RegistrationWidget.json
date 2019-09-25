@@ -242,6 +242,32 @@
                 ]
             }
         },
+        "buttonSize": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
         "spacing": "@include(spacingMargin)"
     }
 }
