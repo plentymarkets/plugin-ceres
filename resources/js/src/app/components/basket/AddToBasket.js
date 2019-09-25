@@ -89,6 +89,11 @@ Vue.component("add-to-basket", {
         {
             type: String,
             default: null
+        },
+        isWishList:
+        {
+            type: String,
+            default: "false"
         }
     },
     computed:
