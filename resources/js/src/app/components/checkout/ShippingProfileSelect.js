@@ -1,6 +1,7 @@
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
+import { isDefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
 
 Vue.component("shipping-profile-select", {
@@ -108,6 +109,18 @@ Vue.component("shipping-profile-select", {
             }
 
             return TranslationService.translate(translationKey, params);
+        },
+
+        isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId)
+        {
+            if (isDefined(shippingProfile.excludedPaymentMethodIds))
+            {
+                return shippingProfile.excludedPaymentMethodIds.includes(selectedPaymentMethodId);
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 });
