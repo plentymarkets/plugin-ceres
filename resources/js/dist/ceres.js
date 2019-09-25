@@ -61497,7 +61497,8 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("variation-select", {
 
       var selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
       selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
-      return !!this.filterVariations(selectedAttributes).length;
+      var ignoreUnit = !(Object.keys(this.possibleUnits).length > 1 && this.isContentVisible);
+      return !!this.filterVariations(selectedAttributes, null, null, ignoreUnit).length;
     },
 
     /**
