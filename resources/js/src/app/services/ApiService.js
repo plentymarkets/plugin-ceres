@@ -6,6 +6,14 @@ const WaitScreenService   = require("./WaitScreenService");
 
 const _eventListeners = {};
 
+/*
+$.ajaxSetup({
+    headers: {
+        "X-CSRF-TOKEN": $("meta[name=\"csrf-token\"]").attr("content")
+    }
+});
+*/
+
 $(document).ajaxComplete((ajaxEvent, xhr, options) =>
 {
     let response;
