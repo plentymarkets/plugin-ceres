@@ -30,20 +30,6 @@ class RegistrationPreset implements ContentPreset
                           ->withSetting("spacing.margin.bottom.value", 3)
                           ->withSetting("spacing.margin.bottom.unit", null);
 
-        // $threeColumnWidget->createChild("second", "Ceres::InlineTextWidget")
-        //                   ->withSetting("text", '<h1>{{ trans("Ceres::Template.regRegisterAccount") }}</h1>')
-        //                   ->withSetting("customClass", "")
-        //                   ->withSetting("appearance", "none")
-        //                   ->withSetting("spacing.customPadding", true)
-        //                   ->withSetting("spacing.padding.top.value", 3)
-        //                   ->withSetting("spacing.padding.top.unit", null)
-        //                   ->withSetting("spacing.padding.bottom.value", 3)
-        //                   ->withSetting("spacing.padding.bottom.unit", null)
-        //                   ->withSetting("spacing.padding.right.value", 0)
-        //                   ->withSetting("spacing.padding.right.unit", null)
-        //                   ->withSetting("spacing.padding.left.value", 0)
-        //                   ->withSetting("spacing.padding.left.unit", null);
-
         $threeColumnWidget->createChild("second", "Ceres::RegistrationWidget")
                           ->withSetting("customClass", "");
 
