@@ -120,7 +120,8 @@ class DefaultOrderConfirmationPreset implements ContentPreset
                                 ->withSetting("block", "true")
                                 ->withSetting("text", $this->translator->trans("Ceres::Widget.urlTrackingLabel"))
                                 ->withSetting("url.value", "tracking")
-                                ->withSetting("url.type", "internalLink");
+                                ->withSetting("url.type", "internalLink")
+                                ->withSetting("openInNewTab", true);
     }
 
     private function createOrderDocumentsWidget()
@@ -135,7 +136,8 @@ class DefaultOrderConfirmationPreset implements ContentPreset
                                 ->withSetting("block", "true")
                                 ->withSetting("text", $this->translator->trans("Ceres::Widget.urlReturnLabel"))
                                 ->withSetting("url.value", "return")
-                                ->withSetting("url.type", "internalLink");
+                                ->withSetting("url.type", "internalLink")
+                                ->withSetting("openInNewTab", true);
     }
 
     private function createOrderTotalsWidget()
