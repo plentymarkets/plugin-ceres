@@ -64861,6 +64861,9 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("order-return", {
     },
     isDisabled: function isDisabled(state) {
       return state.orderReturn.orderReturnItems.length === 0;
+    },
+    showNetPrices: function showNetPrices(state) {
+      return state.basket.showNetPrices;
     }
   })),
   methods: _objectSpread({
@@ -70076,6 +70079,13 @@ var NotificationService = __webpack_require__(/*! ./NotificationService */ "./re
 var WaitScreenService = __webpack_require__(/*! ./WaitScreenService */ "./resources/js/src/app/services/WaitScreenService.js");
 
 var _eventListeners = {};
+$(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
+    }
+  });
+});
 $(document).ajaxComplete(function (ajaxEvent, xhr, options) {
   var response;
 
