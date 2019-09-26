@@ -19,7 +19,7 @@ If you want make your own individual changes to the Ceres plugin, you need to fo
 1. Install node.js in the LTS version from [nodejs.org](https://nodejs.org/en/).
 2. Open your console and navigate to the Ceres directory.
 3. Run the command **npm install**.
-4. After you have integrated your changes, run the command **npm run build**
+4. After you have integrated your changes, run the command **npm run build**.
 
 Your Javascript, widget and SCSS changes have now been assembled locally. 
 
