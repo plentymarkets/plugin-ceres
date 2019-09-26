@@ -54583,11 +54583,7 @@ vue__WEBPACK_IMPORTED_MODULE_25___default.a.component("basket-list-item", {
       return this.basketItem.quantity * this.basketItem.price;
     },
     unitPrice: function unitPrice() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNullOrUndefined"])(this.basketItem.variation.data.prices.specialOffer)) {
-        return this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
-      }
-
-      return this.basketItem.variation.data.prices.default.unitPrice.value;
+      return this.basketItem.price;
     },
     basePrice: function basePrice() {
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNullOrUndefined"])(this.basketItem.variation.data.prices.specialOffer)) {
