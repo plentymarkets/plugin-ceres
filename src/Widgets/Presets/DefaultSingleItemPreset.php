@@ -134,7 +134,6 @@ class DefaultSingleItemPreset implements ContentPreset
     private function createAddToBasketWidget()
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::AddToBasketWidget')
-            ->withSetting('buttonSize', 'lg')
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 3)
             ->withSetting('spacing.margin.top.unit', null)

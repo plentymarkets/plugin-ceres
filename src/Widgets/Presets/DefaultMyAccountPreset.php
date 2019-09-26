@@ -77,8 +77,7 @@ class DefaultMyAccountPreset implements ContentPreset
     
     private function createLogoutButtonWidget()
     {
-        $this->twoColumnWidgetTop->createChild('second', 'Ceres::LogoutButtonWidget')
-            ->withSetting('buttonSize', 'md');
+        $this->twoColumnWidgetTop->createChild('second', 'Ceres::LogoutButtonWidget');
     }
     
     private function createAddressWidget($type = '1')
