@@ -23,7 +23,7 @@ Vue.component("guest-login", {
         buttonSize:
         {
             type: String,
-            required: true
+            default: null
         }
     },
 

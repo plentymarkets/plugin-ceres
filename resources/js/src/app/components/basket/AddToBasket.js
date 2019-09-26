@@ -77,7 +77,7 @@ Vue.component("add-to-basket", {
             default: null,
             validator: value =>
             {
-                return ["sm", "md", "lg"].indexOf(value) !== -1;
+                return ["btn-sm", "", "btn-lg"].indexOf(value) !== -1;
             }
         },
         paddingClasses:
@@ -119,7 +119,7 @@ Vue.component("add-to-basket", {
 
             if (isDefined(this.buttonSize))
             {
-                classes.push(`btn-${this.buttonSize}`);
+                classes.push(`${this.buttonSize}`);
             }
 
             if (isDefined(this.paddingClasses))

@@ -17,7 +17,7 @@ Vue.component("newsletter-unsubscribe-input", {
         buttonSize:
         {
             type: String,
-            required: true
+            default: null
         }
     },
 
