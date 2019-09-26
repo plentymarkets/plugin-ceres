@@ -33,6 +33,7 @@
 <div v-truncate-tooltip class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
     <a class="btn btn-appearance {{ buttonSize }} text-truncate w-100 {% if block %}btn-block{% endif %} {% if spacingMargin | length > 0 %}{{ spacingMargin }}{% endif %} {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}"
     href="{{ Twig.print("real_url") }}"
+    {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
     data-toggle="tooltip" title="">
         {%- if icon != "none" -%}
