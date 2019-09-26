@@ -7,12 +7,12 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{% set appearance = widget.settings.appearance.mobile %}
-{% set buttonSize = widget.settings.buttonSize.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default("danger") %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("")%}
 
 <div class="widget widget-logout-button{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <a href="#" class="btn btn-block btn-{{ appearance | default("danger") }} btn-{{ buttonSize }} 
+    <a href="#" class="btn btn-block btn-{{ appearance  }} {{ buttonSize }}
         {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" v-logout
         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         <span>{{ trans("Ceres::Template.myAccountLogout") }}</span>
