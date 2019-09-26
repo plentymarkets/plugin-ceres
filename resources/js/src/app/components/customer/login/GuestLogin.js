@@ -23,11 +23,7 @@ Vue.component("guest-login", {
         buttonSize:
         {
             type: String,
-            default: "md",
-            validator: value =>
-            {
-                return ["sm", "md", "lg"].indexOf(value) !== -1;
-            }
+            default: null
         }
     },
 

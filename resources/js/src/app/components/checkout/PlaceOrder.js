@@ -24,7 +24,7 @@ Vue.component("place-order", {
             default: null,
             validator: value =>
             {
-                return ["sm", "lg"].indexOf(value) !== -1;
+                return ["btn-sm", "", "btn-lg"].indexOf(value) !== -1;
             }
         },
         paddingClasses:
@@ -54,7 +54,7 @@ Vue.component("place-order", {
 
             if (isDefined(this.buttonSize))
             {
-                classes.push(`btn-${this.buttonSize}`);
+                classes.push(this.buttonSize);
             }
 
             if (isDefined(this.paddingClasses))

@@ -17,6 +17,11 @@ Vue.component("order-return", {
             type: Object,
             required: true
         },
+        buttonSize:
+        {
+            type: String,
+            default: null
+        },
         itemDetailsData:
         {
             type: Array,
@@ -46,7 +51,8 @@ Vue.component("order-return", {
         ...mapState({
             orderData: state => state.orderReturn.orderData,
             orderReturnItems: state => state.orderReturn.orderReturnItems,
-            isDisabled: state => state.orderReturn.orderReturnItems.length === 0
+            isDisabled: state => state.orderReturn.orderReturnItems.length === 0,
+            showNetPrices: state => state.basket.showNetPrices
         })
     },
 
