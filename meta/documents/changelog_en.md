@@ -23,13 +23,13 @@
 - The attributes of variations are now listed in the order data widget of the ShopBuilder.
 - The amount of data transferred during changes to the shopping cart has been reduced in order to improve the performance of the online store.
 - Objects created via **pluginApp** are now stored in their variables before they are processed further. The direct use of new instances could, under certain circumstances, lead to errors during the publishing of plugins.
-- If the option **Always display content selection** is inactive in the ShopBuilder, the content list in the attribute selection is hidden if the selected attributes do not yield a variation.
+- If the option **Always display content selection** is inactive in the attribute selection widget, the content list in the attribute selection is hidden if the selected attributes do not yield a variation.
 - Order characteristics are now sorted by position in the shopping cart.
 - The structured data on item pages has been reworked.
 - The tooltip of the "Add to basket" button has been adjusted to account for items that are not available.
 - Parameters for search queries and the category view are now validated.
 - The option "Enable Callisto route pattern for items" has been expanded to also consider the option "Item URL structure" in the **Setup » Client » Select client » SEO » URL structure » Item** menu.
-- The payment and shipping method selection has been revised so that the selections can no longer preclude each other. Payment and shipping methods can always be changed. An error is displayed in case an incompatible combination is selected.
+- The payment and shipping method selection has been revised so that the selections can no longer preclude each other. Payment and shipping methods can always be changed. A notification is displayed in case an incompatible combination is selected.
 - The ShopBooster now also caches the wish list view.
 - The registration form is now also validated by Google reCAPTCHA, as long as the corresponding account data has been stored in the Ceres settings.
 - The shopping cart content widget has been revised and now includes settings pertaining to the displayed item data.
@@ -54,10 +54,9 @@
 - Due to an error, the language was not appended to the URL of the mobile navigation correctly. This has been fixed.
 - Under certain circumstances, an empty `<title>` tag was displayed. This behaviour has been fixed.
 - Due to an error, the list of last seen items was not loaded in tab widgets. This has been fixed.
-- In a few cases, an error led to rounding errors of prices. This has been fixed.
+- In a few cases, rounding errors of prices could occur. This has been fixed.
 - The subtotals were not displayed correctly in the order details. This has been fixed.
 - Item lists created with the ShopBuilder now only display the "Show all" link if the list type is "category".
-- Due to an error, "search results for" was used as the page title of category pages. This has been fixed. We would like to thank @JVolke for the contribution.
 - Due to an error, the item view created with the ShopBuilder was not loaded when using Internet Explorer. This has been fixed. 
 - Due to an error, some attributes could not be selected in the single item view. This has been fixed.
 - The translation key "orderConfirmationItemDiscount" was not stored in English. This has been fixed.
