@@ -417,23 +417,23 @@
             "buttonSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "",
+                "defaultValue": "md",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
                     "tooltipText": "Widget.widgetButtonSizeTooltip",
                     "listBoxValues": [
                         {
-                            "value": "btn-sm",
+                            "value": "sm",
                             "caption": "Widget.widgetButtonSizeSm",
                             "position": 0
                         },
                         {
-                            "value": "",
+                            "value": "md",
                             "caption": "Widget.widgetButtonSizeNormal",
                             "position": 1
                         },
                         {
-                            "value": "btn-lg",
+                            "value": "lg",
                             "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
                         }
@@ -8441,23 +8441,23 @@
             "buttonSize": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "",
+                "defaultValue": "md",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
                     "tooltipText": "Widget.widgetButtonSizeTooltip",
                     "listBoxValues": [
                         {
-                            "value": "btn-sm",
+                            "value": "sm",
                             "caption": "Widget.widgetButtonSizeSm",
                             "position": 0
                         },
                         {
-                            "value": "",
+                            "value": "md",
                             "caption": "Widget.widgetButtonSizeNormal",
                             "position": 1
                         },
                         {
-                            "value": "btn-lg",
+                            "value": "lg",
                             "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
                         }
