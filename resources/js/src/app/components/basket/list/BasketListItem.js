@@ -90,12 +90,7 @@ Vue.component("basket-list-item", {
 
         unitPrice()
         {
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
-            {
-                return this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
-            }
-
-            return this.basketItem.variation.data.prices.default.unitPrice.value;
+            return this.basketItem.price;
         },
 
         basePrice()

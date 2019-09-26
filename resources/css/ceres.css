@@ -16945,11 +16945,6 @@ html.ie .cmp-paginator {
   text-align: center;
   margin: 75px 0 100px 0; }
 
-.wishlist .category-list-view-port i.fa,
-.widget-wish-list .category-list-view-port i.fa {
-  font-size: inherit;
-  line-height: inherit; }
-
 .page-infos {
   display: -webkit-box;
   display: flex;
@@ -19879,23 +19874,24 @@ header .widget {
   color: #fff; }
 
 .widget-placeholder {
-  width: 100%;
-  padding-bottom: 100%;
-  position: relative;
-  background-color: #dcdbd8; }
-  .widget-placeholder > div {
+  background-color: #dcdbd8;
+  text-align: center;
+  padding: 0; }
+  .widget-placeholder.proportional-placeholder > div {
     position: absolute;
     top: 50%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
-    text-align: center;
-    padding: 1rem;
-    width: 100%; }
-  .widget-placeholder .title {
-    font-weight: bold;
-    font-size: 1.3rem; }
-  .widget-placeholder .description {
-    font-style: italic; }
+    left: 0;
+    right: 0; }
+  .widget-placeholder > div {
+    padding: 1rem; }
+    .widget-placeholder > div > p.title {
+      font-weight: bold; }
+    .widget-placeholder > div > p.description {
+      font-size: .9rem;
+      margin-bottom: 0;
+      font-style: italic; }
 
 .widget-attribute.widget-primary .v-s-boxes .v-s-box.active {
   color: #008ebd !important;
@@ -19929,8 +19925,10 @@ header .widget {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
           flex-direction: row-reverse; }
-  .widget-wish-list .category-list-view-port button .fa,
-  .page-wish-list .category-list-view-port button .fa {
+  .widget-wish-list .category-list-view-port button i.fa,
+  .page-wish-list .category-list-view-port button i.fa {
+    font-size: inherit;
+    line-height: inherit;
     margin-left: .25rem; }
 
 .widget-wish-list .item-additional-information .badge,
