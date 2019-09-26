@@ -15,24 +15,23 @@
         },
         "buttonSize": {
             "type": "select",
-            "required": true,
-            "defaultValue": "md",
+            "defaultValue": "",
             "options": {
                 "name": "Widget.widgetButtonSizeLabel",
                 "tooltipText": "Widget.widgetButtonSizeTooltip",
                 "listBoxValues": [
                     {
-                        "value": "sm",
+                        "value": "btn-sm",
                         "caption": "Widget.widgetButtonSizeSm",
                         "position": 0
                     },
                     {
-                        "value": "md",
+                        "value": "",
                         "caption": "Widget.widgetButtonSizeNormal",
                         "position": 1
                     },
                     {
-                        "value": "lg",
+                        "value": "btn-lg",
                         "caption": "Widget.widgetButtonSizeLg",
                         "position": 2
                     }

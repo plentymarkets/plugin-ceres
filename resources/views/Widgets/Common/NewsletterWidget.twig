@@ -6,7 +6,7 @@
 {% set showNameInputs = widget.settings.showNameInputs.mobile | json_encode %}
 {% set showPrivacyPolicyCheckbox = widget.settings.showPrivacyPolicyCheckbox.mobile | json_encode %}
 {% set emailFolder = widget.settings.emailFolder.mobile %}
-
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
@@ -26,7 +26,8 @@
         <newsletter-input
             :show-name-inputs="{{ showNameInputs }}"
             :show-privacy-policy-checkbox="{{ showPrivacyPolicyCheckbox }}"
-            :email-folder="{% if emailFolder | length > 0 %} {{ emailFolder | json_encode }} {% else %} 0 {% endif %}">
+            :email-folder="{% if emailFolder | length > 0 %} {{ emailFolder | json_encode }} {% else %} 0 {% endif %}"
+            :button-size="{{ buttonSize | json_encode }}">
         </newsletter-input>
     </div>
 </div>

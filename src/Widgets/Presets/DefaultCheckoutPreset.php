@@ -135,15 +135,13 @@ class DefaultCheckoutPreset implements ContentPreset
     
     private function createPlaceOrderWidget()
     {
-        $this->stickyContainer->createChild('sticky','Ceres::PlaceOrderWidget')
-            ->withSetting('buttonSize', '');
+        $this->stickyContainer->createChild('sticky','Ceres::PlaceOrderWidget');
     }
 
     private function createCancelPaymentWidget()
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::CancelPaymentWidget')
-            ->withSetting('appearance', 'primary')
-            ->withSetting('buttonSize', 'md');
+            ->withSetting('appearance', 'primary');
     }
     
     private function createShippingPrivacyCheckWidget()

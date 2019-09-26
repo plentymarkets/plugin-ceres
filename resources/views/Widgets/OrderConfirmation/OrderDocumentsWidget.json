@@ -10,12 +10,12 @@
         "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
+            "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
         "buttonSize": {
             "type": "select",
-            "required": true,
             "defaultValue": "",
             "options": {
                 "name": "Widget.widgetButtonSizeLabel",

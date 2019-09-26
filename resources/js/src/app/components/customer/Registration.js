@@ -20,7 +20,8 @@ Vue.component("registration", {
         template: String,
         backlink: String,
         shownFields: Object,
-        requiredFields: Object
+        requiredFields: Object,
+        buttonSize: String
     },
 
     data()

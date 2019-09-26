@@ -17,6 +17,11 @@ Vue.component("order-return", {
             type: Object,
             required: true
         },
+        buttonSize:
+        {
+            type: String,
+            default: null
+        },
         itemDetailsData:
         {
             type: Array,

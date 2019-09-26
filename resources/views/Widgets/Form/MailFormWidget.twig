@@ -11,7 +11,7 @@
 {% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set formId          = uid() %}
-
+{% set buttonSize      = widget.settings.buttonSize.mobile | default("") %}
 
 <div class="widget widget-contact-form
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
@@ -52,7 +52,7 @@
             {{ Twig.endif() }}
 
             <div class="col-12 text-right">
-                <button type="submit" class="btn btn-{{ appearance }}">
+                <button type="submit" class="btn btn-{{ appearance }} {{ buttonSize }}">
                     {{ labelSubmit | default(trans("Ceres::Template.contactSend")) }}
                     <i class="fa fa-paper-plane-o ml-2" aria-hidden="true"></i>
                 </button>
