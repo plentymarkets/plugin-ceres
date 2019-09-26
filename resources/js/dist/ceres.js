@@ -59663,12 +59663,12 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("item-image-carousel", {
 
       $(this.$refs.single).owlCarousel(carouselSettings);
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(window.lightbox)) {
-        window.lightbox.option({
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a)) {
+        lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a.option({
           wrapAround: true
         });
 
-        window.lightbox.imageCountLabel = function (current, total) {
+        lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a.imageCountLabel = function (current, total) {
           if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(imageCount) || imageCount <= 1) {
             return "";
           }
@@ -59689,16 +59689,16 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("item-image-carousel", {
           });
         };
 
-        var originalFn = window.lightbox.changeImage;
+        var originalFn = lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a.changeImage;
 
-        window.lightbox.changeImage = function (imageNumber) {
-          if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
+        lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a.changeImage = function (imageNumber) {
+          if (lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a.currentImageIndex === 0 && imageNumber === lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a.album.length - 1) {
             imageNumber--;
-          } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
+          } else if (lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a.currentImageIndex === lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a.album.length - 1 && imageNumber === 0) {
             imageNumber++;
           }
 
-          return originalFn.call(window.lightbox, imageNumber);
+          return originalFn.call(lightbox2__WEBPACK_IMPORTED_MODULE_17___default.a, imageNumber);
         };
       }
 
