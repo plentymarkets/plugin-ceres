@@ -18052,16 +18052,6 @@ html.ie {
     margin: 75px 0 100px 0;
 }
 
-.wishlist,
-.widget-wish-list {
-    .category-list-view-port {
-        i.fa {
-            font-size: inherit;
-            line-height: inherit;
-        } 
-    }
-}
-
 
 // Pages
 .page-infos{
@@ -20914,7 +20904,9 @@ header .widget
                 -ms-flex-direction: row-reverse;
                     flex-direction: row-reverse;
 
-            .fa {
+            i.fa {
+                font-size: inherit;
+                line-height: inherit;
                 margin-left: .25rem;
             }
         }

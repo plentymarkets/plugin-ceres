@@ -16945,11 +16945,6 @@ html.ie .cmp-paginator {
   text-align: center;
   margin: 75px 0 100px 0; }
 
-.wishlist .category-list-view-port i.fa,
-.widget-wish-list .category-list-view-port i.fa {
-  font-size: inherit;
-  line-height: inherit; }
-
 .page-infos {
   display: -webkit-box;
   display: flex;
@@ -19930,8 +19925,10 @@ header .widget {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
           flex-direction: row-reverse; }
-  .widget-wish-list .category-list-view-port button .fa,
-  .page-wish-list .category-list-view-port button .fa {
+  .widget-wish-list .category-list-view-port button i.fa,
+  .page-wish-list .category-list-view-port button i.fa {
+    font-size: inherit;
+    line-height: inherit;
     margin-left: .25rem; }
 
 .widget-wish-list .item-additional-information .badge,
