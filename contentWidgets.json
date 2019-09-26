@@ -416,7 +416,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "md",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -817,7 +816,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -2611,7 +2609,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": false,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.linkSizeLabel",
@@ -3321,7 +3318,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -3454,7 +3450,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -3562,7 +3557,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -5063,7 +5057,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -6375,7 +6368,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -7638,7 +7630,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "md",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -8069,7 +8060,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -8440,7 +8430,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "md",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -9001,7 +8990,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",
@@ -9162,7 +9150,6 @@
             },
             "buttonSize": {
                 "type": "select",
-                "required": true,
                 "defaultValue": "",
                 "options": {
                     "name": "Widget.widgetButtonSizeLabel",

@@ -16,7 +16,6 @@
         },
         "buttonSize": {
             "type": "select",
-            "required": true,
             "defaultValue": "md",
             "options": {
                 "name": "Widget.widgetButtonSizeLabel",
