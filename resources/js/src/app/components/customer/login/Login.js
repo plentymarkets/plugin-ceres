@@ -15,7 +15,8 @@ Vue.component("login", {
         "modalElement",
         "backlink",
         "hasToForward",
-        "template"
+        "template",
+        "buttonSize"
     ],
 
     data()
