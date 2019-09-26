@@ -53839,7 +53839,7 @@ vue__WEBPACK_IMPORTED_MODULE_30___default.a.component("add-to-basket", {
       type: [String, null],
       default: null,
       validator: function validator(value) {
-        return ["sm", "md", "lg"].indexOf(value) !== -1;
+        return ["btn-sm", "", "btn-lg"].indexOf(value) !== -1;
       }
     },
     paddingClasses: {
@@ -53868,7 +53868,7 @@ vue__WEBPACK_IMPORTED_MODULE_30___default.a.component("add-to-basket", {
       var classes = [];
 
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_29__["isDefined"])(this.buttonSize)) {
-        classes.push("btn-".concat(this.buttonSize));
+        classes.push(this.buttonSize);
       }
 
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_29__["isDefined"])(this.paddingClasses)) {
@@ -55279,7 +55279,7 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("place-order", {
       type: [String, null],
       default: null,
       validator: function validator(value) {
-        return ["sm", "lg"].indexOf(value) !== -1;
+        return ["btn-sm", "", "btn-lg"].indexOf(value) !== -1;
       }
     },
     paddingClasses: {
@@ -55301,7 +55301,7 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("place-order", {
       var classes = [];
 
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(this.buttonSize)) {
-        classes.push("btn-".concat(this.buttonSize));
+        classes.push(this.buttonSize);
       }
 
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(this.paddingClasses)) {
@@ -58134,7 +58134,8 @@ vue__WEBPACK_IMPORTED_MODULE_5___default.a.component("registration", {
     template: String,
     backlink: String,
     shownFields: Object,
-    requiredFields: Object
+    requiredFields: Object,
+    buttonSize: String
   },
   data: function data() {
     return {
@@ -58646,14 +58647,11 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("forgot-password-modal", {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.index-of */ "./node_modules/core-js/modules/es.array.index-of.js");
-/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -58661,7 +58659,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("guest-login", {
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
   props: {
     template: {
       type: String,
@@ -58672,10 +58670,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("guest-login", {
     },
     buttonSize: {
       type: String,
-      default: "md",
-      validator: function validator(value) {
-        return ["sm", "md", "lg"].indexOf(value) !== -1;
-      }
+      default: null
     }
   },
   data: function data() {
@@ -58691,7 +58686,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("guest-login", {
       // for old login view only (input in modal)
       $(_this.$parent.$refs.guestModal).on("hidden.bs.modal", function () {
         _this.email = "";
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_1__["default"].unmarkAllFields(_this.$refs.form);
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__["default"].unmarkAllFields(_this.$refs.form);
       });
     });
   },
@@ -58699,10 +58694,10 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("guest-login", {
     validate: function validate() {
       var _this2 = this;
 
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_1__["default"].validate(this.$refs.form).done(function () {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__["default"].validate(this.$refs.form).done(function () {
         _this2.authGuest();
       }).fail(function (invalidFields) {
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_1__["default"].markInvalidFields(invalidFields, "error");
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_0__["default"].markInvalidFields(invalidFields, "error");
       });
     },
     authGuest: function authGuest() {
@@ -58712,7 +58707,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("guest-login", {
       ApiService.post("/rest/io/guest", {
         email: this.email
       }).done(function () {
-        Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isDefined"])(_this3.backlink) && _this3.backlink.length ? decodeURIComponent(_this3.backlink) : window.location.origin);
+        Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isDefined"])(_this3.backlink) && _this3.backlink.length ? decodeURIComponent(_this3.backlink) : window.location.origin);
       }).fail(function () {
         _this3.isDisabled = false;
       });
@@ -64628,6 +64623,10 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("newsletter-input", {
     emailFolder: {
       type: Number,
       default: 0
+    },
+    buttonSize: {
+      type: String,
+      default: null
     }
   },
   data: function data() {
@@ -64715,6 +64714,10 @@ vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("newsletter-unsubscribe-inp
     template: {
       type: String,
       default: "#vue-newsletter-unsubscribe-input"
+    },
+    buttonSize: {
+      type: String,
+      default: null
     }
   },
   data: function data() {
@@ -64830,6 +64833,10 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("order-return", {
     initOrderData: {
       type: Object,
       required: true
+    },
+    buttonSize: {
+      type: String,
+      default: null
     },
     itemDetailsData: {
       type: Array,
