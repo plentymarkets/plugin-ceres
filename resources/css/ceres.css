@@ -19879,23 +19879,24 @@ header .widget {
   color: #fff; }
 
 .widget-placeholder {
-  width: 100%;
-  padding-bottom: 100%;
-  position: relative;
-  background-color: #dcdbd8; }
-  .widget-placeholder > div {
+  background-color: #dcdbd8;
+  text-align: center;
+  padding: 0; }
+  .widget-placeholder.proportional-placeholder > div {
     position: absolute;
     top: 50%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
-    text-align: center;
-    padding: 1rem;
-    width: 100%; }
-  .widget-placeholder .title {
-    font-weight: bold;
-    font-size: 1.3rem; }
-  .widget-placeholder .description {
-    font-style: italic; }
+    left: 0;
+    right: 0; }
+  .widget-placeholder > div {
+    padding: 1rem; }
+    .widget-placeholder > div > p.title {
+      font-weight: bold; }
+    .widget-placeholder > div > p.description {
+      font-size: .9rem;
+      margin-bottom: 0;
+      font-style: italic; }
 
 .widget-attribute.widget-primary .v-s-boxes .v-s-box.active {
   color: #008ebd !important;
