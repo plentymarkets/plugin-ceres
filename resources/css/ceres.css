@@ -15612,11 +15612,6 @@ html.ie .confirmation-order-list .cmp-order-item {
   .basket-item-container .basket-item {
     display: -webkit-box;
     display: flex; }
-    .basket-item-container .basket-item .quantity-input-container {
-      width: 3em;
-      margin-right: 10px; }
-      .basket-item-container .basket-item .quantity-input-container button {
-        padding: .25rem 1rem; }
     .basket-item-container .basket-item .image-container {
       width: 75px;
       flex-shrink: 0;
@@ -15632,8 +15627,6 @@ html.ie .confirmation-order-list .cmp-order-item {
         display: -webkit-box;
         display: flex; }
         .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner .meta-container {
-          display: -webkit-box;
-          display: flex;
           width: 100%;
           min-width: 0; }
           .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner .meta-container > div {
@@ -15650,11 +15643,9 @@ html.ie .confirmation-order-list .cmp-order-item {
             font-size: 75%; }
     .basket-item-container .basket-item .basket-item-container-right {
       display: block;
-      margin-left: auto;
-      display: -webkit-box;
-      display: flex; }
+      margin-left: auto; }
       .basket-item-container .basket-item .basket-item-container-right .qty-box-container {
-        margin: 0 15px 0 10px; }
+        margin: 0 0 0 10px; }
         @media (max-width: 767.98px) {
           .basket-item-container .basket-item .basket-item-container-right .qty-box-container {
             margin: 0 0 5px 27px; } }
@@ -16953,6 +16944,11 @@ html.ie .cmp-paginator {
 .wish-list-no-items-label {
   text-align: center;
   margin: 75px 0 100px 0; }
+
+.wishlist .category-list-view-port i.fa,
+.widget-wish-list .category-list-view-port i.fa {
+  font-size: inherit;
+  line-height: inherit; }
 
 .page-infos {
   display: -webkit-box;
@@ -19933,6 +19929,9 @@ header .widget {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
           flex-direction: row-reverse; }
+  .widget-wish-list .category-list-view-port button .fa,
+  .page-wish-list .category-list-view-port button .fa {
+    margin-left: .25rem; }
 
 .widget-wish-list .item-additional-information .badge,
 .page-wish-list .item-additional-information .badge {

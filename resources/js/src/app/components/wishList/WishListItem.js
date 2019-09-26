@@ -29,7 +29,8 @@ export default {
     data()
     {
         return {
-            wishListItem: null
+            wishListItem: null,
+            quantity: 1
         };
     },
 
