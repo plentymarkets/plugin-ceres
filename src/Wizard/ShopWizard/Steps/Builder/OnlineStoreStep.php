@@ -291,7 +291,7 @@ class OnlineStoreStep extends Step
     private function buildStoreCallistoSettings():array
     {
         $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
-        $webstoreActive = $moduleRepo->isActive("webshop");
+        $webstoreActive = $moduleRepo->isActive("webstore.cms");
 
         return [
             "title" => "Wizard.settingsOldCallisto",
