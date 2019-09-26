@@ -119,7 +119,7 @@ Vue.component("add-to-basket", {
 
             if (isDefined(this.buttonSize))
             {
-                classes.push(`${this.buttonSize}`);
+                classes.push(this.buttonSize);
             }
 
             if (isDefined(this.paddingClasses))
