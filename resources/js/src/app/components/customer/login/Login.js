@@ -25,8 +25,8 @@ Vue.component("login", {
         },
         hasToForward:
         {
-            type: String,
-            default: "true"
+            type: Boolean,
+            default: true
         },
         buttonSize:
         {
