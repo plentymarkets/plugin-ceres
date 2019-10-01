@@ -8,7 +8,9 @@ use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
 use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
+use Plenty\Modules\Plugin\Models\Plugin;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
+use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
@@ -50,37 +52,48 @@ class ShopWizardService
         // we need to check if we have settings for preview mode saved
         $webstoresPluginSetIds = array_column($webstores, 'pluginSetId');
 
+        /** @var PluginRepositoryContract $pluginRepo */
+        $pluginRepo = pluginApp(PluginRepositoryContract::class);
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
         $pluginSets = $pluginSetRepo->list();
         $wizardConfRepo = pluginApp(ShopWizardConfigRepository::class);
 
-        foreach($pluginSets as $pluginSet) {
-            foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
-                $previewConfig = $wizardConfRepo->getConfig($pluginSetEntry->pluginSetId);
-                if (
-                    $pluginSetEntry instanceof PluginSetEntry &&
-                    $pluginSetEntry->plugin->name === 'Ceres' &&
-                    !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
-                    $previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted
-                ) {
-                    $webstores[] = [
-                        'id' => 'preview',
-                        'pluginSetId' => (int)$pluginSetEntry->pluginSetId
-                    ];
+        $plugin = $pluginRepo->getPluginByName("Ceres");
+        if ($plugin instanceof Plugin) {
+            foreach($pluginSets as $pluginSet) {
+                foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
+                    $previewConfig = $wizardConfRepo->getConfig($pluginSetEntry->pluginSetId);
+                    if (
+                        $pluginSetEntry instanceof PluginSetEntry &&
+                        $pluginSetEntry->pluginId == $plugin->id &&
+                        !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
+                        $previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted
+                    ) {
+                        $webstores[] = [
+                            'id' => 'preview',
+                            'pluginSetId' => (int)$pluginSetEntry->pluginSetId
+                        ];
+                    }
                 }
             }
         }
 
         if (count($webstores)) {
-            $pluginRepo = pluginApp(PluginRepositoryContract::class);
             foreach ($webstores as $webstore) {
-                if (!empty($webstore['pluginSetId']) && $pluginRepo->isActiveInPluginSetByName("Ceres", $webstore['pluginSetId'])) {
-                    $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
+                if (!empty($webstore['pluginSetId'])) {
 
-                    $webstoresMapped[$key] = [
-                        "client" => $webstore['id'],
-                        "pluginSet" => $webstore['pluginSetId']
-                    ];
+                    $pluginSet = $pluginSets->where('id', '=', $webstore['pluginSetId'])->first();
+
+                    if($pluginSet instanceof PluginSet
+                        && $pluginRepo->isActiveInPluginSet($plugin->id, $pluginSet)) {
+
+                        $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
+
+                        $webstoresMapped[$key] = [
+                            "client" => $webstore['id'],
+                            "pluginSet" => $webstore['pluginSetId']
+                        ];
+                    }
                 }
             }
         }
