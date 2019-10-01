@@ -1,5 +1,12 @@
 # Release Notes für Ceres
 
+## v4.3.1 (2019-10-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.0...4.3.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Die Ladezeit des **Assistenten** im plentymarkets Backend wurde verbessert.
+- Durch einen Fehler wurde die Sprache nicht richtig in die URL der mobilen Navigation eingefügt. Dies wurde behoben.
+
 ## v4.3.0 (2019-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.1...4.3.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
