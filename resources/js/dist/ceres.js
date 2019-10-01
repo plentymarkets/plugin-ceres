@@ -58758,8 +58758,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("login", {
       type: String
     },
     hasToForward: {
-      type: String,
-      default: "true"
+      type: Boolean,
+      default: false
     },
     buttonSize: {
       type: String,
