@@ -62235,7 +62235,7 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
       this.label = this.getLabel();
     },
     getLabel: function getLabel() {
-      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.storeSpecial) || this.storeSpecial.id === 1) && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.recommendedRetailPrice)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.storeSpecial) && this.storeSpecial.id === 1 && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.recommendedRetailPrice)) {
         return this.getPercentageSale();
       }
 
@@ -62249,10 +62249,8 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
       var percent;
 
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isDefined"])(this.specialOfferPrice)) {
-        // eslint-disable-next-line
         percent = (1 - this.specialOfferPrice.unitPrice.value / this.variationRetailPrice.unitPrice.value) * -100;
       } else {
-        // eslint-disable-next-line
         percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value) * -100;
       }
 
