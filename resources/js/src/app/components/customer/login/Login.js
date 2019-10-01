@@ -9,15 +9,31 @@ import Vue from "vue";
 
 Vue.component("login", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "modalElement",
-        "backlink",
-        "hasToForward",
-        "template",
-        "buttonSize"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-login"
+        },
+        backlink:
+        {
+            type: String
+        },
+        modalElement: {
+            type: String
+        },
+        hasToForward:
+        {
+            type: String,
+            default: "true"
+        },
+        buttonSize:
+        {
+            type: String,
+            default: null
+        }
+    },
 
     data()
     {

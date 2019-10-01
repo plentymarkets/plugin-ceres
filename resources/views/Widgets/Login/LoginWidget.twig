@@ -17,7 +17,6 @@
         {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
             <div class="widget-inner">
                 <login 
-                    template="#vue-login" 
                     backlink="{{ Twig.print("backlink | url_encode") }}"
                     has-to-forward="true"
                     :button-size="{{ buttonSize | json_encode }}">
