@@ -58746,8 +58746,26 @@ var AutoFocusService = __webpack_require__(/*! ../../../services/AutoFocusServic
 
 
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("login", {
-  delimiters: ["${", "}"],
-  props: ["modalElement", "backlink", "hasToForward", "template"],
+  props: {
+    template: {
+      type: String,
+      default: "#vue-login"
+    },
+    backlink: {
+      type: String
+    },
+    modalElement: {
+      type: String
+    },
+    hasToForward: {
+      type: String,
+      default: "true"
+    },
+    buttonSize: {
+      type: String,
+      default: null
+    }
+  },
   data: function data() {
     return {
       password: "",
