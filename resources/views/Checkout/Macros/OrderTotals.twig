@@ -13,7 +13,7 @@
                     {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutNet") }})
                 </dt><!--
                 --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                    {{ (totals.totalNet + totals.itemSumRebateNet) | formatMonetary( totals.currency ) }}
+                    {{ (totals.totalNet - totals.shippingNet + totals.itemSumRebateNet) | formatMonetary( totals.currency ) }}
                 </dd>
             {% endif %}
 
@@ -24,9 +24,9 @@
                 </dt><!--
                 --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {% if totals.isNet %}
-                        {{ (totals.totalNet + totals.itemSumRebateNet) | formatMonetary( totals.currency ) }}
+                        {{ (totals.totalNet - totals.shippingNet + totals.itemSumRebateNet) | formatMonetary( totals.currency ) }}
                     {% else %}
-                        {{ (totals.totalGross + totals.itemSumRebateGross)  | formatMonetary( totals.currency ) }}
+                        {{ (totals.totalGross - totals.shippingGross + totals.itemSumRebateGross)  | formatMonetary( totals.currency ) }}
                     {% endif %}
                 </dd>
             {% endif %}
