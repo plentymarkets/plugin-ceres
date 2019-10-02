@@ -3,6 +3,7 @@ const NotificationService = require("./services/NotificationService");
 const AutoFocusService = require("./services/AutoFocusService");
 
 import { MediaQueryHelper } from "./helper/MediaQueryHelper";
+import { debounce } from "./helper/debounce";
 import Vue from "vue";
 
 // Frontend end scripts
@@ -321,15 +322,12 @@ if ( headerParent )
         }
     }
 
-    const QueryHelper = new MediaQueryHelper();
-
-    // When window resize to another breakpoint execute functions
-    QueryHelper.addFunction(function()
+    window.addEventListener("resize", debounce(function()
     {
         calculateBodyOffset();
         getHeaderChildrenHeights();
         scrollHeaderElements();
-    });
+    }, 100));
 
     $(window).scroll(scrollHeaderElements);
 
