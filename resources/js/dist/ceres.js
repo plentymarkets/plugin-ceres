@@ -62931,7 +62931,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("live-shopping-details", {
     },
     setItemPriceRebatePercentage: function setItemPriceRebatePercentage() {
       var specialOfferPrice = this.prices.price.price.value;
-      var defaultPrice = this.prices.rrp.price.value;
+      var defaultPrice = this.prices.rrp && this.prices.rrp.price.value || 0;
 
       if (defaultPrice === 0) {
         this.itemPriceRebatePercentage = 0;
