@@ -2,7 +2,6 @@ const browserDetect = require("detect-browser");
 const NotificationService = require("./services/NotificationService");
 const AutoFocusService = require("./services/AutoFocusService");
 
-import { MediaQueryHelper } from "./helper/MediaQueryHelper";
 import { debounce } from "./helper/debounce";
 import Vue from "vue";
 
@@ -205,7 +204,6 @@ function CeresMain()
 
 window.CeresMain = new CeresMain();
 window.CeresNotification = NotificationService;
-window.MediaQueryHelper = new MediaQueryHelper();
 
 const showShopNotification = function(event)
 {
