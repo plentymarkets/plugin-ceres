@@ -325,7 +325,7 @@ if ( headerParent )
         calculateBodyOffset();
         getHeaderChildrenHeights();
         scrollHeaderElements();
-    }, 100));
+    }, 50));
 
     $(window).scroll(scrollHeaderElements);
 
