@@ -103,8 +103,8 @@ class BaseWidget implements Widget
             $template = self::$mapTypeToTemplate[$widgetSettings['template']] ?? '';
             unset($widgetSettings['template']);
         }
-        $templateData = $this->getTemplateData($widgetSettings, $isPreview);
 
+        $templateData = $this->getTemplateData($widgetSettings, $isPreview);
 
         $templateData["widget"] = [
             "settings"      => $widgetSettings
@@ -117,25 +117,16 @@ class BaseWidget implements Widget
         {
             $rendered = $this->twig->render($this->template, $templateData);
         }
-        catch(\Twig_Error_Syntax $se)
-        {
-            // This is an compilation exception, based on a syntax error
-            $this->getLogger(__METHOD__)->error("twig_syntax_exception", $se->getMessage());
-            return "";
-        }
-        catch(\Twig_Error_Runtime $re)
-        {
-            // This is an runtime error, something went wrong while rendering
-            $this->getLogger(__METHOD__)->error("twig_runtime_exception", $re->getMessage());
-            return "";
-        }
         catch(\Exception $e)
         {
-            // General error capture, if something completly unrelated went wrong
-            $this->getLogger(__METHOD__)->error("twig_general_exception", $e);
+            // Twig_Syntax_Error or Twig_Runtime_Error
+            $this->getLogger(__METHOD__)->error("twig_render_exception",
+                [
+                    'message' => $e->getMessage()
+                ]);
+
             return "";
         }
-
 
         if($isPreview && strlen($template))
         {
