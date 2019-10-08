@@ -71476,7 +71476,7 @@ function transformVariationProperties(item) {
     return _cachedVariationProperties[cacheKey];
   }
 
-  if (!(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(variationProperties) && variationProperties.length) || !(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(variationPropertyGroups) && variationPropertyGroups.length)) {
+  if (!(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(variationProperties) && variationProperties.length)) {
     return [];
   }
 
@@ -71507,13 +71507,13 @@ function transformVariationProperties(item) {
 
         try {
           for (var _iterator3 = property.groups[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-            var group = _step3.value;
+            var _group = _step3.value;
 
-            if (!groupedProperties[group.id]) {
-              groupedProperties[group.id] = [];
+            if (!groupedProperties[_group.id]) {
+              groupedProperties[_group.id] = [];
             }
 
-            groupedProperties[group.id].push(property);
+            groupedProperties[_group.id].push(property);
           }
         } catch (err) {
           _didIteratorError3 = true;
@@ -71549,35 +71549,38 @@ function transformVariationProperties(item) {
   }
 
   var groups = [];
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
 
-  try {
-    for (var _iterator2 = variationPropertyGroups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var _group = _step2.value;
+  if (variationPropertyGroups && variationPropertyGroups.length) {
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(groupedProperties[_group.id])) {
-        groups.push({
-          id: _group.id,
-          position: _group.position,
-          name: _group.names.name,
-          description: _group.names.description,
-          properties: Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["orderArrayByKey"])(groupedProperties[_group.id], PROPERTY_ORDER_BY_KEY)
-        });
-      }
-    }
-  } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
-  } finally {
     try {
-      if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-        _iterator2.return();
+      for (var _iterator2 = variationPropertyGroups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        var group = _step2.value;
+
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(groupedProperties[group.id])) {
+          groups.push({
+            id: group.id,
+            position: group.position,
+            name: group.names.name,
+            description: group.names.description,
+            properties: Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["orderArrayByKey"])(groupedProperties[group.id], PROPERTY_ORDER_BY_KEY)
+          });
+        }
       }
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
     } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
+        }
       }
     }
   }
