@@ -15,8 +15,8 @@ export function transformVariationProperties(item, propertyTypes = [], displaySe
     {
         return _cachedVariationProperties[cacheKey];
     }
-    if (!(isDefined(variationProperties) && variationProperties.length) ||
-        !(isDefined(variationPropertyGroups) && variationPropertyGroups.length))
+
+    if (!(isDefined(variationProperties) && variationProperties.length))
     {
         return [];
     }
@@ -56,17 +56,20 @@ export function transformVariationProperties(item, propertyTypes = [], displaySe
 
     const groups = [];
 
-    for (const group of variationPropertyGroups)
+    if (variationPropertyGroups && variationPropertyGroups.length)
     {
-        if (isDefined(groupedProperties[group.id]))
+        for (const group of variationPropertyGroups)
         {
-            groups.push({
-                id: group.id,
-                position: group.position,
-                name: group.names.name,
-                description: group.names.description,
-                properties: orderArrayByKey(groupedProperties[group.id], PROPERTY_ORDER_BY_KEY)
-            });
+            if (isDefined(groupedProperties[group.id]))
+            {
+                groups.push({
+                    id: group.id,
+                    position: group.position,
+                    name: group.names.name,
+                    description: group.names.description,
+                    properties: orderArrayByKey(groupedProperties[group.id], PROPERTY_ORDER_BY_KEY)
+                });
+            }
         }
     }
 
