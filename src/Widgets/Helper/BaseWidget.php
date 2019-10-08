@@ -22,6 +22,7 @@ class BaseWidget implements Widget
         'myaccount'     => 'tpl.my-account',
         'checkout'      => 'tpl.checkout'
     ];
+
     /**
      * The template to be used for this widget
      *
@@ -65,7 +66,10 @@ class BaseWidget implements Widget
         }
         catch(\Exception $e)
         {
-            $this->getLogger(__METHOD__)->error("twig_preview_exception", $e);
+            $this->getLogger(__METHOD__)->error("twig_preview_exception", [
+                'message' => $e->getMessage()
+            ]);
+
             return "";
         }
     }
@@ -119,7 +123,7 @@ class BaseWidget implements Widget
         }
         catch(\Exception $e)
         {
-            // Twig_Syntax_Error or Twig_Runtime_Error
+            // Twig_Errors (Syntax or Runtime)
             $this->getLogger(__METHOD__)->error("twig_render_exception",
                 [
                     'message' => $e->getMessage()
