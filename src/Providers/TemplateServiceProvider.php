@@ -79,7 +79,7 @@ class TemplateServiceProvider extends ServiceProvider
         $this->getApplication()->singleton( CeresConfig::class );
         $this->getApplication()->singleton( DefaultSettingsService::class );
     }
-    
+
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {
         //register shopCeres assistant
@@ -94,21 +94,18 @@ class TemplateServiceProvider extends ServiceProvider
         $twig->addExtension(TwigJsonDataContainer::class);
         $twig->addExtension(TwigItemDataField::class);
 
-        $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
+        $this->listenToIO('tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
             if ( !$templateContainer->hasTemplate() )
             {
                 $this->setTemplateAndContext($templateContainer);
             }
+        });
 
-            return !$this->getApplication()->isTemplateSafeMode();
-        }, self::EVENT_LISTENER_PRIORITY);
-
-        $eventDispatcher->listen('IO.ctx.*', function (TemplateContainer $templateContainer, $templateData = []) {
+        $this->listenToIO('ctx.*', function (TemplateContainer $templateContainer, $templateData = []) {
             $this->setTemplateAndContext($templateContainer);
-            return !$this->getApplication()->isTemplateSafeMode();
-        }, self::EVENT_LISTENER_PRIORITY);
+        });
 
-        $eventDispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
+        $this->listenToIO('ResultFields.*', function(ResultFieldTemplate $templateContainer) {
             $templateContainer->setTemplates([
                 ResultFieldTemplate::TEMPLATE_LIST_ITEM     => 'Ceres::ResultFields.ListItem',
                 ResultFieldTemplate::TEMPLATE_SINGLE_ITEM   => 'Ceres::ResultFields.SingleItem',
@@ -117,10 +114,9 @@ class TemplateServiceProvider extends ServiceProvider
                 ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree',
                 ResultFieldTemplate::TEMPLATE_VARIATION_ATTRIBUTE_MAP => 'Ceres::ResultFields.VariationAttributeMap'
             ]);
-            return !$this->getApplication()->isTemplateSafeMode();
-        }, self::EVENT_LISTENER_PRIORITY);
+        });
 
-        $eventDispatcher->listen('IO.init.templates', function (Partial $partial){
+        $this->listenToIO('init.templates', function (Partial $partial) {
 
             $partial->set('head', 'Ceres::PageDesign.Partials.Head');
             $partial->set('header', 'Ceres::PageDesign.Partials.Header.Header');
@@ -128,10 +124,17 @@ class TemplateServiceProvider extends ServiceProvider
             $partial->set('page-design', 'Ceres::PageDesign.PageDesign');
             $partial->set('page-metadata', 'Ceres::PageDesign.Partials.PageMetadata');
 
-            return !$this->getApplication()->isTemplateSafeMode();
-        }, self::EVENT_LISTENER_PRIORITY);
+        });
 
         $eventDispatcher->listen(AfterBuildPlugins::class, CeresAfterBuildPlugins::class);
+    }
+
+    private function listenToIO($event, $listener)
+    {
+        /** @var Dispatcher $dispatcher */
+        $dispatcher = pluginApp(Dispatcher::class);
+        $dispatcher->listen('IO.' . $event, $listener, self::EVENT_LISTENER_PRIORITY);
+        $dispatcher->listen('IO.intl.' . $event, $listener, self::EVENT_LISTENER_PRIORITY);
     }
 
     /**
