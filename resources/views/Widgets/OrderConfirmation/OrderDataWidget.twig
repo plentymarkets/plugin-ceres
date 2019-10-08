@@ -66,10 +66,10 @@
                 <div class="row mb-3">
                     <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationCustomerID") }}</strong>
                     <span class="col-6 col-sm-7">{{ Twig.print(Twig.call("services.customer.getContactNumber", [Twig.var("customerID")])) }}</span>
-                </div>   
+                </div>
             {{ Twig.endif() }}
         {% endif %}
-        
+
         <div class="row">
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
             <span class="col-6 col-sm-7">
@@ -128,7 +128,7 @@
             </change-payment-method>
         {{ Twig.endif() }}
 
-        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::OrderConfirmation.AdditionalPaymentInformation", "data.order"])) }}
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::OrderConfirmation.AdditionalPaymentInformation", Twig.var("data.order")])) }}
 
         <hr>
 
@@ -136,7 +136,7 @@
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationShippingProfile") }}</strong>
             <span class="col-6 col-sm-7">{{ Twig.print("data.shippingProvider") }} - {{ Twig.print("data.shippingProfileName") }}</span>
         </div>
-            
+
         {{ Twig.set("shippingDate", "" | json_encode) }}
         {{ Twig.for("date", "data.order.dates", "date.typeId == 8") }}
             {{ Twig.set("shippingDate", "date.date") }}
@@ -149,8 +149,8 @@
             </div>
         {{ Twig.endif() }}
 
-        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::OrderConfirmation.AdditionalShippingInformation", "data.order"])) }}
             
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::OrderConfirmation.AdditionalShippingInformation", Twig.var("data.order")])) }}
     </div>
 </div>
 {{ Twig.endif() }}
