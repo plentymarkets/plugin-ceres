@@ -99,10 +99,13 @@ class TemplateServiceProvider extends ServiceProvider
             {
                 $this->setTemplateAndContext($templateContainer);
             }
+
+            return !$this->getApplication()->isTemplateSafeMode();
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen('IO.ctx.*', function (TemplateContainer $templateContainer, $templateData = []) {
             $this->setTemplateAndContext($templateContainer);
+            return !$this->getApplication()->isTemplateSafeMode();
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
@@ -114,6 +117,7 @@ class TemplateServiceProvider extends ServiceProvider
                 ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree',
                 ResultFieldTemplate::TEMPLATE_VARIATION_ATTRIBUTE_MAP => 'Ceres::ResultFields.VariationAttributeMap'
             ]);
+            return !$this->getApplication()->isTemplateSafeMode();
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen('IO.init.templates', function (Partial $partial){
@@ -124,6 +128,7 @@ class TemplateServiceProvider extends ServiceProvider
             $partial->set('page-design', 'Ceres::PageDesign.PageDesign');
             $partial->set('page-metadata', 'Ceres::PageDesign.Partials.PageMetadata');
 
+            return !$this->getApplication()->isTemplateSafeMode();
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen(AfterBuildPlugins::class, CeresAfterBuildPlugins::class);
