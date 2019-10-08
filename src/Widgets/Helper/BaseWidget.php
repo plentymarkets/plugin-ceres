@@ -4,9 +4,12 @@ namespace Ceres\Widgets\Helper;
 
 use Plenty\Modules\ShopBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
+use Plenty\Plugin\Log\Loggable;
 
 class BaseWidget implements Widget
 {
+    use Loggable;
+
     const TOOLBAR_LAYOUT = [
         "NONE"   => "",
         "INLINE" => "bold,italic,underline,strike|h1,h2,h3|align|translation",
@@ -20,11 +23,21 @@ class BaseWidget implements Widget
         'checkout'      => 'tpl.checkout'
     ];
     /**
-     * The template to e used for this widget
+     * The template to be used for this widget
      *
      * @var string
      */
     protected $template = "";
+
+    /**
+     * @var Twig $twig
+     */
+    protected $twig = null;
+
+    public function __construct(Twig $twig)
+    {
+        $this->twig = $twig;
+    }
 
     /**
      * Get the html representation of the widget.
@@ -33,15 +46,12 @@ class BaseWidget implements Widget
      * @param array $children
      *
      * @return string
-     *
-     * @throws \ErrorException
      */
     public function getPreview(
         array $widgetSettings = [],
         array $children = []
     ): string
     {
-        $twig = pluginApp(Twig::class);
         $template = $this->renderTemplate(
             $widgetSettings,
             $children,
@@ -51,10 +61,11 @@ class BaseWidget implements Widget
         try
         {
             $previewData = $this->getPreviewData($widgetSettings);
-            return $twig->renderString($template, $previewData);
+            return $this->twig->renderString($template, $previewData);
         }
         catch(\Exception $e)
         {
+            $this->getLogger(__METHOD__)->error("twig_preview_exception", $e);
             return "";
         }
     }
@@ -86,8 +97,6 @@ class BaseWidget implements Widget
         $isPreview = false
     )
     {
-        $twig = pluginApp(Twig::class);
-
         $template = '';
         if(isset($widgetSettings['template']))
         {
@@ -104,7 +113,28 @@ class BaseWidget implements Widget
         $templateData["isPreview"] = $isPreview;
         $templateData["TOOLBAR_LAYOUT"] = self::TOOLBAR_LAYOUT;
 
-        $rendered = $twig->render($this->template, $templateData);
+        try
+        {
+            $rendered = $this->twig->render($this->template, $templateData);
+        }
+        catch(\Twig_Error_Syntax $se)
+        {
+            // This is an compilation exception, based on a syntax error
+            $this->getLogger(__METHOD__)->error("twig_syntax_exception", $se->getMessage());
+            return "";
+        }
+        catch(\Twig_Error_Runtime $re)
+        {
+            // This is an runtime error, something went wrong while rendering
+            $this->getLogger(__METHOD__)->error("twig_runtime_exception", $re->getMessage());
+            return "";
+        }
+        catch(\Exception $e)
+        {
+            // General error capture, if something completly unrelated went wrong
+            $this->getLogger(__METHOD__)->error("twig_general_exception", $e);
+            return "";
+        }
 
 
         if($isPreview && strlen($template))
