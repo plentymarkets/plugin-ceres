@@ -1,0 +1,45 @@
+{
+    "identifier": "Ceres::ItemGridWidget",
+    "label": "Widget.itemGridLabel",
+    "previewImageURL": "/images/widgets/item-grid.svg",
+    "type": "default",
+    "categories": ["category"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Category\\ItemGridWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "numberOfColumns": {
+            "type": "select",
+            "defaultValue": 4,
+            "options": {
+                "name": "Widget.itemGridNumberOfColumnsLabel",
+                "tooltipText": "Widget.itemGridNumberOfColumnsTooltip",
+                "listBoxValues": [
+                    {
+                        "value": 1,
+                        "caption": "Widget.widgetNum1"
+                    },
+                    {
+                        "value": 2,
+                        "caption": "Widget.widgetNum2"
+                    },
+                    {
+                        "value": 3,
+                        "caption": "Widget.widgetNum3"
+                    },
+                    {
+                        "value": 4,
+                        "caption": "Widget.widgetNum4"
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}

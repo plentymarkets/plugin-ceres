@@ -54,6 +54,10 @@
             border-color: $value;
         }
 
+        .add-to-basket-lg-container:hover {
+            border-color: transparent $value transparent transparent !important;
+        }
+
         .pagination .page-item
         {
             .page-link
