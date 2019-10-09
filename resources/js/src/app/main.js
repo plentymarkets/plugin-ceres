@@ -2,7 +2,7 @@ const browserDetect = require("detect-browser");
 const NotificationService = require("./services/NotificationService");
 const AutoFocusService = require("./services/AutoFocusService");
 
-import { MediaQueryHelper } from "./helper/MediaQueryHelper";
+import { debounce } from "./helper/debounce";
 import Vue from "vue";
 
 // Frontend end scripts
@@ -204,7 +204,6 @@ function CeresMain()
 
 window.CeresMain = new CeresMain();
 window.CeresNotification = NotificationService;
-window.MediaQueryHelper = new MediaQueryHelper();
 
 const showShopNotification = function(event)
 {
@@ -321,15 +320,12 @@ if ( headerParent )
         }
     }
 
-    const QueryHelper = new MediaQueryHelper();
-
-    // When window resize to another breakpoint execute functions
-    QueryHelper.addFunction(function()
+    window.addEventListener("resize", debounce(function()
     {
         calculateBodyOffset();
         getHeaderChildrenHeights();
         scrollHeaderElements();
-    });
+    }, 50));
 
     $(window).scroll(scrollHeaderElements);
 
