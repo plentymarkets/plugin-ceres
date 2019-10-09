@@ -21,7 +21,7 @@
     }
 %}
 
-{{ Twig.call("services.template.disableCacheForTemplate") }}
+{{ Twig.print("services.template.disableCacheForTemplate()") }}
 
 {{ Twig.if("not services.authentication.isLoggedIn() or #{ isPreview | json_encode }") }}
     <div class="widget widget-registration widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
