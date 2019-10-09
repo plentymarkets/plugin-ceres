@@ -94,5 +94,6 @@
     "variationProperties.property.display",
     "variationProperties.property.groups",
     "variationProperties.property.names.*",
-    "variationProperties.property.position"
+    "variationProperties.property.position",
+    "tags.*"
 ]

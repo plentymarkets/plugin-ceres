@@ -1,0 +1,7 @@
+<script type="x/template" id="vue-tags">
+    <div v-if="tags" class="pt-1 pb-1">
+        <span v-for="tag in tags" :style="getStyles(tag)" class="badge mr-1 p-2">
+            <a>${ tag.names.name }</a>
+        </span>
+    </div>
+</script>
