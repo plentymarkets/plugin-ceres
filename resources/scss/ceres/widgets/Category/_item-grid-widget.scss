@@ -24,6 +24,10 @@
             padding-right: $grid-gutter-width/2 !important;
         }
     }
+    
+    > .widget-inner > li {
+        padding-bottom: $grid-gutter-width;
+    }
 
     .cmp-product-thumb {
         margin-bottom: 0px !important;

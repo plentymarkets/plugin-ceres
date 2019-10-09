@@ -2,8 +2,8 @@
     "identifier": "Ceres::ItemGridWidget",
     "label": "Widget.itemGridLabel",
     "previewImageURL": "/images/widgets/item-grid.svg",
-    "type": "default",
-    "categories": ["category"],
+    "type": "categoryitem",
+    "categories": ["item"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Category\\ItemGridWidget",
     "settings": {
