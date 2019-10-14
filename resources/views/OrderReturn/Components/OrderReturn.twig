@@ -10,11 +10,11 @@
 				:is-net="amount.isNet || showNetPrices"
 				:item-details-data="itemDetailsData"></order-return-item>
 
-		<button class="btn btn-primary btn-appearance btn-medium-large mt-4" @click="selectAllItems()" :class="buttonSize">
+		<button class="btn btn-primary btn-appearance btn-medium-large mt-4" @click="selectAllItems()" :class="buttonSizeClass">
 			<i class="fa fa-check-square-o" aria-hidden="true"></i>
 			{{ trans("Ceres::Template.returnSelectAll") }}
 		</button>
-		<button class="btn btn-primary btn-appearance float-right btn-medium-large mt-4" :disabled="isDisabled || isLoading" @click="showConfirmationModal()" :class="buttonSize">
+		<button class="btn btn-primary btn-appearance float-right btn-medium-large mt-4" :disabled="isDisabled || isLoading" @click="showConfirmationModal()" :class="buttonSizeClass">
 			<i class="fa fa-arrow-right" aria-hidden="true"></i>
 			{{ trans("Ceres::Template.returnTrigger") }}
 		</button>
@@ -41,11 +41,11 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" data-dismiss="modal" class="btn btn-secondary btn-medium" :class="buttonSize">
+						<button type="button" data-dismiss="modal" class="btn btn-secondary btn-medium" :class="buttonSizeClass">
 							<i class="fa fa-times" aria-hidden="true"></i>
 							{{ trans("Ceres::Template.returnCancel") }}
 						</button>
-						<button :disabled="isLoading" @click="sendReturnItems({{ urls.returnConfirmation | json_encode }})" type="button" class="btn btn-primary btn-appearance btn-medium" :class="buttonSize">
+						<button :disabled="isLoading" @click="sendReturnItems({{ urls.returnConfirmation | json_encode }})" type="button" class="btn btn-primary btn-appearance btn-medium" :class="buttonSizeClass">
 							<i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
 							{{ trans("Ceres::Template.returnConfirm") }}
 						</button>
