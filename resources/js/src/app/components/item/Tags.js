@@ -29,6 +29,7 @@ Vue.component("tags", {
             },
             getStyles(tag)
             {
+                if(!tag.color)return;
                 return {
                     backgroundColor: tag.color,
                     color: this.getFontColorBasedOnBackground(tag.color)

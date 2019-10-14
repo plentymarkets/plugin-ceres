@@ -80,6 +80,7 @@ import "./components/item/ItemBundle";
 import "./components/item/ItemDataTable";
 import "./components/item/ItemImageCarousel";
 import "./components/item/OrderProperties";
+import "./components/item/Tags";
 
 // TODO: Move to parent component
 import "./components/item/OrderPropertyList";

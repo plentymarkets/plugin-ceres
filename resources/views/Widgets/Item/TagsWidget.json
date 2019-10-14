@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::TagsWidget",
+    "label": "Widget.tagsLabel",
+    "previewImageURL": "/images/widgets/order-property.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Item\\TagsWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}
