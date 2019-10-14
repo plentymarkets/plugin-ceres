@@ -203,6 +203,7 @@ import "./filters/truncate.filter";
 // MIXINS
 // =========================
 
+import "./mixins/buttonSizeProperty.mixin";
 import "./mixins/getJsonData.mixin";
 import "./mixins/template.mixin";
 

@@ -4,10 +4,13 @@ import { navigateTo } from "../../services/UrlService";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import Vue from "vue";
 import { mapState } from "vuex";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
 const NotificationService = require("../../services/NotificationService");
 
 Vue.component("add-to-basket", {
+
+    mixins: [ButtonSizePropertyMixin],
 
     props:
     {
@@ -71,15 +74,6 @@ Vue.component("add-to-basket", {
             type: Boolean,
             default: true
         },
-        buttonSize:
-        {
-            type: [String, null],
-            default: null,
-            validator: value =>
-            {
-                return ["btn-sm", "", "btn-lg"].indexOf(value) !== -1;
-            }
-        },
         paddingClasses:
         {
             type: String,
@@ -117,9 +111,9 @@ Vue.component("add-to-basket", {
         {
             const classes = [];
 
-            if (isDefined(this.buttonSize))
+            if (isDefined(this.buttonSizeClass))
             {
-                classes.push(this.buttonSize);
+                classes.push(this.buttonSizeClass);
             }
 
             if (isDefined(this.paddingClasses))

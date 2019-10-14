@@ -6,18 +6,17 @@ import UrlService from "../../services/UrlService";
 
 import { isUndefined } from "../../helper/utils";
 import Vue from "vue";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
 Vue.component("newsletter-unsubscribe-input", {
+
+    mixins: [ButtonSizePropertyMixin],
+
     props: {
         template:
         {
             type: String,
             default: "#vue-newsletter-unsubscribe-input"
-        },
-        buttonSize:
-        {
-            type: String,
-            default: null
         }
     },
 
