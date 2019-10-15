@@ -157,11 +157,27 @@ header .widget
     }
 }
 
+@include media-breakpoint-down(md)
+{
+    html.firefox {
+        .widget-fw.widget-grid {
+            left: 0 !important;
+            margin-left: 0;
+        }
+    }
+}
+
 @include media-breakpoint-up(lg)
 {
     .widget-grid .widget-inner.col-lg-12.widget-stacked
     {
         padding-bottom: 2rem;
+    }
+
+    html.firefox {
+        .widget-fw.widget-grid {
+            padding: 0 7.5px;
+        }
     }
 }
 
