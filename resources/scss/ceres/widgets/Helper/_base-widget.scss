@@ -73,7 +73,20 @@ header .widget
 {
     position: relative;
     width: 100vw;
-    left: calc(-1 * (100vw - 100%) / 2);
+    left: calc(-1 * (100vw - 100%) / 2) !important;
+    right: 0 !important;
+    margin: 0;
+    max-width: none !important;
+
+    @include media-breakpoint-down(md)
+    {
+        &.widget-grid {
+            margin: 0 -15px;
+        }
+        &.widget:not(.widget-grid) {
+            margin: 0;
+        }
+    }
 }
 
 .widget-proportional
