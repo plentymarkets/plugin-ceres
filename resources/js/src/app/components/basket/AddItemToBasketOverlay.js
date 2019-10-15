@@ -24,7 +24,8 @@ Vue.component("add-item-to-basket-overlay", {
     {
         return {
             price: 0,
-            basketItem: null
+            basketItem: null,
+            countAdditionalBasketItems: 0
         };
     },
 
@@ -32,23 +33,31 @@ Vue.component("add-item-to-basket-overlay", {
     {
         if (App.config.basket.addItemToBasketConfirm === "overlay")
         {
-            ApiService.listen("AfterBasketItemAdd", data =>
-            {
-                this.showItem(data.basketItem);
-            });
-
             ApiService.listen("AfterBasketItemUpdate", data =>
             {
+                const updatedBasketItem = data.basketItems[0];
+
                 if (!this.isBasketItemQuantityUpdate)
                 {
-                    const basketItem = this.basketItems.find(item => item.id === data.basketItem.id) || {};
+                    const basketItem = this.basketItems.find(item => item.id === updatedBasketItem.id) || {};
 
-                    basketItem.quantity = data.basketItem.quantity;
-                    basketItem.price = data.basketItem.price;
-                    basketItem.price = data.basketItem.price;
-                    basketItem.basketItemOrderParams = data.basketItem.basketItemOrderParams;
+                    basketItem.quantity = updatedBasketItem.quantity;
+                    basketItem.price = updatedBasketItem.price;
+                    basketItem.basketItemOrderParams = updatedBasketItem.basketItemOrderParams;
                     this.showItem(basketItem);
                 }
+            });
+
+            ApiService.listen("AfterBasketItemAdd", data =>
+            {
+                let countAdditionalBasketItems = 0;
+
+                if (data.basketItems.length > 1)
+                {
+                    countAdditionalBasketItems = data.basketItems.length - 1;
+                }
+
+                this.showItem(data.basketItems[0], countAdditionalBasketItems);
             });
         }
     },
@@ -106,7 +115,7 @@ Vue.component("add-item-to-basket-overlay", {
 
     methods:
     {
-        showItem(basketItem)
+        showItem(basketItem, countAdditionalBasketItems)
         {
             this.basketItem = basketItem;
 
@@ -116,6 +125,7 @@ Vue.component("add-item-to-basket-overlay", {
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
 
                 this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
+                this.countAdditionalBasketItems = countAdditionalBasketItems;
             }
 
             ModalService
