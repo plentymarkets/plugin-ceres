@@ -28,6 +28,8 @@
                             <div class="col-md-8">
                                 <p>
                                     <strong>${ itemName }</strong>
+                                    <br>
+                                    <span v-if="this.countAdditionalBasketItems > 0">{{ trans("Ceres::Template.basketItemOverlayAdditionalCount", {"count": "${this.countAdditionalBasketItems}"}) }}</span>
                                 </p>
 
                                 <p class="small">
