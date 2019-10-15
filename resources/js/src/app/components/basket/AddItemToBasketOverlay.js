@@ -124,6 +124,31 @@ Vue.component("add-item-to-basket-overlay", {
                 .show();
         },
 
+        orderParamName(propertyId)
+        {
+            if (isNullOrUndefined(this.basketItem.basketItemOrderParams))
+            {
+                return "";
+            }
+
+            const property = this.variation.properties.find(property =>
+            {
+                return parseInt(property.property.id) === parseInt(propertyId);
+            });
+
+            if (isNullOrUndefined(property) || !property.property.isOderProperty)
+            {
+                return "";
+            }
+
+            const orderParam = this.basketItem.basketItemOrderParams.find(param =>
+            {
+                return parseInt(param.propertyId) === parseInt(propertyId);
+            });
+
+            return orderParam.name;
+        },
+
         orderParamValue(propertyId)
         {
             if (isNullOrUndefined(this.basketItem.basketItemOrderParams))
@@ -143,14 +168,14 @@ Vue.component("add-item-to-basket-overlay", {
 
             const orderParam = this.basketItem.basketItemOrderParams.find(param =>
             {
-                return parseInt(param.property.id) === parseInt(propertyId);
+                return parseInt(param.propertyId) === parseInt(propertyId);
             });
 
-            const orderParamValue = orderParam.property.value;
+            const orderParamValue = orderParam.value;
 
             if (property.property.valueType === "selection" && orderParamValue)
             {
-                return orderParam.property.selectionValues[orderParamValue].name;
+                return property.property.selectionValues[orderParamValue].name;
             }
 
             return orderParamValue;
