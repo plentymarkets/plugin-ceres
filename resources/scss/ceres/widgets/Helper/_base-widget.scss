@@ -53,11 +53,14 @@
 
 #page-header-parent > .widget {
     max-width: 1200px;
-    width: 100%;
+    min-width: 100%;
     background-color: $gray-lightest;
     
     &:not(.widget-grid) {
         max-width: 1170px;
+        left: 15px;
+        right: 15px;
+        min-width: inherit;
     }
 }
 
