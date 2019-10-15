@@ -53443,28 +53443,30 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("add-item-to-basket-overla
   data: function data() {
     return {
       price: 0,
-      basketItem: null
+      basketItem: null,
+      countAdditionalBasketItems: 0
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     if (App.config.basket.addItemToBasketConfirm === "overlay") {
-      ApiService.listen("AfterBasketItemAdd", function (data) {
-        _this.showItem(data.basketItem);
-      });
       ApiService.listen("AfterBasketItemUpdate", function (data) {
+        var updatedBasketItem = data.basketItems[0];
+
         if (!_this.isBasketItemQuantityUpdate) {
           var basketItem = _this.basketItems.find(function (item) {
-            return item.id === data.basketItem.id;
+            return item.id === updatedBasketItem.id;
           }) || {};
-          basketItem.quantity = data.basketItem.quantity;
-          basketItem.price = data.basketItem.price;
-          basketItem.price = data.basketItem.price;
-          basketItem.basketItemOrderParams = data.basketItem.basketItemOrderParams;
+          basketItem.quantity = updatedBasketItem.quantity;
+          basketItem.price = updatedBasketItem.price;
+          basketItem.basketItemOrderParams = updatedBasketItem.basketItemOrderParams;
 
           _this.showItem(basketItem);
         }
+      });
+      ApiService.listen("AfterBasketItemAdd", function (data) {
+        _this.showItem(data.basketItems[0], data.basketItems.length - 1);
       });
     }
   },
@@ -53507,13 +53509,14 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("add-item-to-basket-overla
     }
   }),
   methods: {
-    showItem: function showItem(basketItem) {
+    showItem: function showItem(basketItem, countAdditionalBasketItems) {
       this.basketItem = basketItem;
 
       if (this.basketItem && this.variation.prices) {
         var graduatedPrice = this.$options.filters.graduatedPrice(this.variation, this.basketItem.quantity);
         var propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
         this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
+        this.countAdditionalBasketItems = countAdditionalBasketItems;
       }
 
       ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
@@ -72305,16 +72308,22 @@ var mutations = {
   setBasketItems: function setBasketItems(state, basketItems) {
     state.items = basketItems;
   },
-  addBasketItem: function addBasketItem(state, basketItem) {
-    var basketItemIndex = state.items.findIndex(function (item) {
-      return basketItem.id === item.id;
-    });
+  addBasketItem: function addBasketItem(state, basketItems) {
+    var _loop = function _loop(i) {
+      var basketItem = basketItems[i];
+      var basketItemIndex = state.items.findIndex(function (item) {
+        return basketItem.id === item.id;
+      });
 
-    if (basketItemIndex !== -1) {
-      state.items.splice(basketItemIndex, 1);
-      state.items.splice(basketItemIndex, 0, basketItem);
-    } else {
-      state.items.push(basketItem);
+      if (basketItemIndex !== -1) {
+        state.items.splice(basketItemIndex, 1, basketItem);
+      } else {
+        state.items.push(basketItem);
+      }
+    };
+
+    for (var i = 0; i < basketItems.length; i++) {
+      _loop(i);
     }
   },
   updateBasketItem: function updateBasketItem(state, basketItem) {
@@ -72398,10 +72407,10 @@ var actions = {
       commit("setWishListIds", data.basket.itemWishListIds);
     });
     ApiService.listen("AfterBasketItemAdd", function (data) {
-      commit("addBasketItem", data.basketItem);
+      commit("addBasketItem", data.basketItems);
     });
     ApiService.listen("AfterBasketItemUpdate", function (data) {
-      commit("updateBasketItem", data.basketItem);
+      commit("updateBasketItem", data.basketItems);
     });
     ApiService.after(function () {
       commit("setIsBasketItemQuantityUpdate", false);
