@@ -42,8 +42,7 @@ const mutations =
 
                 if (basketItemIndex !== -1)
                 {
-                    state.items.splice(basketItemIndex, 1);
-                    state.items.splice(basketItemIndex, 0, basketItem);
+                    state.items.splice(basketItemIndex, 1, basketItem);
                 }
                 else
                 {

@@ -50,14 +50,7 @@ Vue.component("add-item-to-basket-overlay", {
 
             ApiService.listen("AfterBasketItemAdd", data =>
             {
-                let countAdditionalBasketItems = 0;
-
-                if (data.basketItems.length > 1)
-                {
-                    countAdditionalBasketItems = data.basketItems.length - 1;
-                }
-
-                this.showItem(data.basketItems[0], countAdditionalBasketItems);
+                this.showItem(data.basketItems[0], data.basketItems.length - 1);
             });
         }
     },
