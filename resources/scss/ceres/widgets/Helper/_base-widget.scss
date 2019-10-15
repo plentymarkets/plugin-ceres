@@ -55,11 +55,11 @@
     max-width: 1200px;
     min-width: 100%;
     background-color: $gray-lightest;
+    left: 15px;
+    right: 15px;
     
     &:not(.widget-grid) {
         max-width: 1170px;
-        left: 15px;
-        right: 15px;
         min-width: inherit;
     }
 }
