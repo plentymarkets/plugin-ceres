@@ -53518,6 +53518,24 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("add-item-to-basket-overla
 
       ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
     },
+    orderParamName: function orderParamName(propertyId) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.basketItem.basketItemOrderParams)) {
+        return "";
+      }
+
+      var property = this.variation.properties.find(function (property) {
+        return parseInt(property.property.id) === parseInt(propertyId);
+      });
+
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(property) || !property.property.isOderProperty) {
+        return "";
+      }
+
+      var orderParam = this.basketItem.basketItemOrderParams.find(function (param) {
+        return parseInt(param.propertyId) === parseInt(propertyId);
+      });
+      return orderParam.name;
+    },
     orderParamValue: function orderParamValue(propertyId) {
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.basketItem.basketItemOrderParams)) {
         return "";
@@ -53532,12 +53550,12 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("add-item-to-basket-overla
       }
 
       var orderParam = this.basketItem.basketItemOrderParams.find(function (param) {
-        return parseInt(param.property.id) === parseInt(propertyId);
+        return parseInt(param.propertyId) === parseInt(propertyId);
       });
-      var orderParamValue = orderParam.property.value;
+      var orderParamValue = orderParam.value;
 
       if (property.property.valueType === "selection" && orderParamValue) {
-        return orderParam.property.selectionValues[orderParamValue].name;
+        return property.property.selectionValues[orderParamValue].name;
       }
 
       return orderParamValue;
