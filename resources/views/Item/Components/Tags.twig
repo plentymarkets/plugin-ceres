@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-tags">
     <div v-if="tags" class="pt-1 pb-1">
-        <span v-for="tag in tags" :style="getStyles(tag)" class="badge mr-1 p-2">
-            <a>${ tag.names.name }</a>
-        </span>
+        <a v-for="tag in tags" :style="getStyles(tag)" @click="navigateToSearch(tag)" class="badge mr-1 p-2">
+            <span>${ tag.names.name }</span>
+        </a>
     </div>
 </script>

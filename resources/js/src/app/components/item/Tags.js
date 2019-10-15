@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { mapState } from "vuex";
-
+import { navigateTo } from "../../services/UrlService";
 
 Vue.component("tags", {
 
@@ -34,6 +34,10 @@ Vue.component("tags", {
                     backgroundColor: tag.color,
                     color: this.getFontColorBasedOnBackground(tag.color)
                 };
+            },
+            navigateToSearch(tag)
+            { 
+                navigateTo('../' + tag.names.name + '-t' + tag.id);
             }
         }
 });

@@ -13,6 +13,7 @@ use Ceres\Contexts\OrderConfirmationContext;
 use Ceres\Contexts\OrderReturnContext;
 use Ceres\Contexts\PasswordResetContext;
 use Ceres\Contexts\SingleItemContext;
+use Ceres\Contexts\TagSearchContext;
 use Ceres\Extensions\TwigItemDataField;
 use Ceres\Extensions\TwigJsonDataContainer;
 use Ceres\Extensions\TwigLayoutContainerInternal;
@@ -72,7 +73,8 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.item-not-found'                => ['StaticPages.ItemNotFound',               GlobalContext::class],
         'tpl.page-not-found'                => ['StaticPages.PageNotFound',               GlobalContext::class],
         'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class],
-        'tpl.mail.contact'                  => ['Customer.Components.Contact.ContactMail',GlobalContext::class]
+        'tpl.mail.contact'                  => ['Customer.Components.Contact.ContactMail',GlobalContext::class],
+        'tpl.tags'                          => ['Category.Item.CategoryItem',             TagSearchContext::class]
     ];
 
     public function register(){
