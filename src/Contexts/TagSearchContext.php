@@ -13,6 +13,7 @@ class TagSearchContext extends GlobalContext implements ContextInterface
 
     public $isSearch;
     public $searchString;
+    public $isTag = true;
 
     public function init($params)
     {

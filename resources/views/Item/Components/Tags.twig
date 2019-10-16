@@ -2,7 +2,7 @@
     <div v-if="tags" class="pt-1 pb-1" :class="buttonSize">
         <a v-for="tag in tags" 
            @click="navigateToSearch(tag)" 
-           class="badge mr-1" 
+           class="badge cursor-pointer mr-1" 
            :class="[tagAppearance, marginClasses]"
            :style="[getStyles(tag), marginInlineStyles]">
             <span>${ tag.names.name }</span>

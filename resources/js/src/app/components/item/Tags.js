@@ -57,7 +57,7 @@ Vue.component("tags", {
             },
             navigateToSearch(tag)
             { 
-                navigateTo('../' + tag.names.name + '-t' + tag.id);
+                navigateTo('/' + tag.names.name + '_t' + tag.id);
             }
         }
 });
