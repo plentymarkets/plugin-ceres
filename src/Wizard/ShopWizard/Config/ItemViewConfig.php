@@ -61,9 +61,9 @@ class ItemViewConfig
 
     private static $cartPreviewPosition = [
         "cartPreviewTypeHover" => "hover",
-        "cartPreviewTypeRight" => "preview",
+        "cartPreviewTypeRight" => "right",
     ];
-    
+
     /**
      * @return array
      */
@@ -71,7 +71,7 @@ class ItemViewConfig
     {
         return self::$itemDisplayNames;
     }
-    
+
     /**
      * @return array
      */
@@ -79,7 +79,7 @@ class ItemViewConfig
     {
         return self::$itemNames;
     }
-    
+
     /**
      * @return array
      */
@@ -87,7 +87,7 @@ class ItemViewConfig
     {
         return self::$itemDecimals;
     }
-    
+
     /**
      * @return array
      */
@@ -95,7 +95,7 @@ class ItemViewConfig
     {
         return self::$loadingAnimationTypes;
     }
-    
+
     /**
      * @return array
      */
@@ -103,7 +103,7 @@ class ItemViewConfig
     {
         return self::$itemVariationTypes;
     }
-    
+
     /**
      * @return array
      */
@@ -111,7 +111,7 @@ class ItemViewConfig
     {
         return self::$categoryDescriptionPositions;
     }
-    
+
     /**
      * @return array
      */
@@ -119,7 +119,7 @@ class ItemViewConfig
     {
         return self::$cartItemData;
     }
-    
+
     /**
      * @return array
      */
@@ -127,7 +127,7 @@ class ItemViewConfig
     {
         return self::$cartItemAdditionalInfo;
     }
-    
+
     /**
      * @return array
      */

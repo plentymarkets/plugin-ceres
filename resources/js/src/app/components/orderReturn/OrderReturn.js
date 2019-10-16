@@ -3,8 +3,11 @@ import { mapState, mapMutations, mapActions } from "vuex";
 import { navigateTo } from "../../services/UrlService";
 import TranslationService from "../../services/TranslationService";
 import NotificationService from "../../services/NotificationService";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
 Vue.component("order-return", {
+
+    mixins: [ButtonSizePropertyMixin],
 
     props: {
         template:
@@ -16,11 +19,6 @@ Vue.component("order-return", {
         {
             type: Object,
             required: true
-        },
-        buttonSize:
-        {
-            type: String,
-            default: null
         },
         itemDetailsData:
         {

@@ -23,6 +23,9 @@
     } | json_encode)
 }}
 
+{{ Twig.set("requestOrderId", "request.get('orderId')") }}
+{{ Twig.set("requestAccessKey", "request.get('accessKey')") }}
+
 {{ Twig.set("orderDocuments", "[]") }}
 {{ Twig.for("document", "data.order.documents | default([])", "translationMap[document.type] is defined") }}
     {{ Twig.set("orderDocuments", "orderDocuments | merge([document])") }}
@@ -49,7 +52,7 @@
                 <div class="dropdown-menu">
                     {{ Twig.for("document", "orderDocuments", "translationMap[document.type] is defined") }}
                         <a class="dropdown-item"
-                            href="/order-document/preview/{{ Twig.print("document.id") }}"
+                            href="{{ Twig.print(Twig.call("urls.orderDocumentPreview", [Twig.var("document.id"), Twig.var("requestOrderId"), Twig.var("requestAccessKey")])) }}"
                             target="_blank">
                             {{ Twig.print(Twig.call("trans", [Twig.var("translationMap[document.type]")])) }}
                         </a>
@@ -60,7 +63,7 @@
         {# single button #}
             <a class="btn btn-appearance {{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
-                href="/order-document/preview/{{ Twig.print("orderDocuments[0].id") }}"
+                href="{{ Twig.print(Twig.call("urls.orderDocumentPreview", [Twig.var("orderDocuments[0].id"), Twig.var("requestOrderId"), Twig.var("requestAccessKey")])) }}"
                 target="_blank">
                 {{ Twig.print(Twig.call("trans", [Twig.var("translationMap[orderDocuments[0].type]")])) }}
             </a>
