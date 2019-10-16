@@ -40,6 +40,8 @@
     "properties.property.isShownAtCheckout",
     "properties.property.position",
     "properties.property.surcharge",
+    "properties.property.isOderProperty",
+    "properties.property.valueType",
     "filter.isSalable",
     "attributes.attribute.names.*",
     "attributes.value.names.*",
