@@ -7375,75 +7375,59 @@
                     "tooltipText": "Widget.customClassTooltip"
                 }
             },
-            "appearance": {
+            "tagAppearance": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "none",
+                "defaultValue": "",
                 "options": {
-                    "name": "Widget.widgetAppearanceLabel",
-                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "name": "Widget.widgetTagAppearance",
                     "listBoxValues": [
                         {
-                            "value": "none",
-                            "caption": "Widget.widgetAppearanceNone",
+                            "value": "",
+                            "caption": "Widget.widgetButtonSizeNormal",
                             "position": 0
                         },
                         {
-                            "value": "primary",
-                            "caption": "Widget.widgetAppearancePrimary",
+                            "value": "badge-pill",
+                            "caption": "Widget.widgetTagAppearancePill",
+                            "position": 1
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 0
+                        },
+                        {
+                            "value": "h4",
+                            "caption": "Widget.widgetButtonSizeSm",
                             "position": 1
                         },
                         {
-                            "value": "secondary",
-                            "caption": "Widget.widgetAppearanceSecondary",
+                            "value": "h3",
+                            "caption": "Widget.widgetButtonSizeNormal",
                             "position": 2
                         },
                         {
-                            "value": "success",
-                            "caption": "Widget.widgetAppearanceSuccess",
+                            "value": "h2",
+                            "caption": "Widget.widgetButtonSizeLg",
                             "position": 3
-                        },
-                        {
-                            "value": "info",
-                            "caption": "Widget.widgetAppearanceInfo",
-                            "position": 4
-                        },
-                        {
-                            "value": "warning",
-                            "caption": "Widget.widgetAppearanceWarning",
-                            "position": 5
-                        },
-                        {
-                            "value": "danger",
-                            "caption": "Widget.widgetAppearanceDanger",
-                            "position": 6
                         }
                     ]
                 }
             },
             "spacing": {
                 "type": "vertical",
-                "options": {
-                    "name": "Widget.widgetSpacing"
-                },
                 "children": {
-                    "customPadding": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomPadding"
-                        }
-                    },
-                    "padding": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customPadding",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    },
                     "customMargin": {
                         "type": "checkbox",
                         "options": {

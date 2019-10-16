@@ -1,6 +1,10 @@
 <script type="x/template" id="vue-tags">
-    <div v-if="tags" class="pt-1 pb-1">
-        <a v-for="tag in tags" :style="getStyles(tag)" @click="navigateToSearch(tag)" class="badge mr-1 p-2">
+    <div v-if="tags" class="pt-1 pb-1" :class="buttonSize">
+        <a v-for="tag in tags" 
+           @click="navigateToSearch(tag)" 
+           class="badge mr-1" 
+           :class="[tagAppearance, marginClasses]"
+           :style="[getStyles(tag), marginInlineStyles]">
             <span>${ tag.names.name }</span>
         </a>
     </div>

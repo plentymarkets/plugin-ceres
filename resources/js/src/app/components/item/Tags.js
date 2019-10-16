@@ -9,6 +9,26 @@ Vue.component("tags", {
         {
             type: String,
             default: "#vue-tags"
+        },
+        buttonSize:
+        {
+            type: [String],
+            default: ""
+        },
+        tagAppearance:
+        {
+            type: String,
+            default: ""
+        },
+        marginClasses:
+        {
+            type: String,
+            default: ""
+        },
+        marginInlineStyles:
+        {
+            type: String,
+            default: ""
         }
     },
     computed: {

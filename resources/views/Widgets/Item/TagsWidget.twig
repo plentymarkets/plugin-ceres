@@ -3,15 +3,17 @@
 
 {{ Twig.component("Ceres::Item.Components.Tags") }}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass     = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
-{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{% set appearance = widget.settings.appearance.mobile | default("none") %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
+{% set tagAppearance = widget.settings.tagAppearance.mobile %}
 
-<div class="widget  widget-{{ appearance }} {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <tags></tags>
+<div class="widget {% if customClass | length > 0 %} {{ customClass }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <tags :button-size="{{ buttonSize | json_encode }}" tag-appearance="{{ tagAppearance  }}"
+     {% if inlineMargin | length > 0 %} margin-inline-styles="{{ inlineMargin }}" {% endif %}
+    {% if spacingMargin | length > 0 %} margin-classes="{{ spacingMargin }}" {% endif %}>
+    </tags>
 </div>
