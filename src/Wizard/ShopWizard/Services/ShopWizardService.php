@@ -4,9 +4,11 @@ namespace Ceres\Wizard\ShopWizard\Services;
 
 use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
 use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
+use Plenty\Configuration\Services\ConfigurationRepository;
 use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
+use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\Plugin\Models\Plugin;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
@@ -232,22 +234,22 @@ class ShopWizardService
             }
         }
 
-        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
-        $pluginSets = $pluginSetRepo->list();
-        $pluginConfData = [];
+        /** @var PluginRepositoryContract $pluginRepo */
+        $pluginRepo = pluginApp(PluginRepositoryContract::class);
 
-        foreach($pluginSets as $pluginSet)
-        {
-            foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
-                if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres' && $pluginSetEntry->pluginSetId == $pluginSetId) {
-                    $config = $pluginSetEntry->configurations()->getResults();
-                    if (count($config)) {
-                        foreach ($config as $confItem) {
-                            $pluginConfData[$confItem->key] = $confItem->value;
-                        }
-                    }
+        $plugin = $pluginRepo->getPluginByName("Ceres");
+        $pluginConfData = [];
+        if ($plugin instanceof Plugin) {
+            /** @var ConfigurationRepositoryContract $configurationRepo */
+            $configurationRepo = pluginApp(ConfigurationRepositoryContract::class);
+
+            $pluginConfigs = $configurationRepo->loadConfigurationValues($pluginSetId, $plugin->id);
+            if(count($pluginConfigs[$plugin->id])) {
+                foreach ($pluginConfigs[$plugin->id] as $configEntry) {
+                    $pluginConfData[$configEntry->key] = $configEntry->value;
                 }
             }
+
         }
 
         $hasShippingMethod = $this->settingsService->hasShippingMethods();
