@@ -273,7 +273,19 @@ class ShopWizardService
                 {
                     if(!array_key_exists($configKey, $pluginConfData) && isset($formField['options']['defaultValue']))
                     {
-                        $pluginConfData[$configKey] = $formField['options']['defaultValue'];
+                        if($formField['type'] === 'multiCheckBox' && $formField['options']['defaultValue'] === 'all')
+                        {
+                            $values = [];
+                            foreach($formField['options']['checkBoxValues'] as $checkBoxValue)
+                            {
+                                $values[] = $checkBoxValue['value'];
+                            }
+                            $pluginConfData[$configKey] = implode(', ', $values);
+                        }
+                        else
+                        {
+                            $pluginConfData[$configKey] = $formField['options']['defaultValue'];
+                        }
                     }
                 }
             }
