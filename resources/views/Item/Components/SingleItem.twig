@@ -5,7 +5,7 @@
 
 <script type="x/template" id="vue-single-item">
     <div>
-        <slot name="default" :getDataField="getDataField" :getFilteredDataField="getFilteredDataField">
+        <slot :getDataField="getDataField" :getFilteredDataField="getFilteredDataField">
             <div class="single container-max page-content">
                 <div class="row mt-5 position-relative">
 
@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="col-12 col-md-5">
-                        <div v-stick-in-parent data-sticky-container="#page-body">
+                        <div v-stick-in-parent>
                             {% include "Ceres::Item.Components.SingleItem.SingleItem_Details" %}
                         </div>
                     </div>

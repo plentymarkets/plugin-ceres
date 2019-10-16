@@ -14,6 +14,8 @@ use Plenty\Plugin\Log\Loggable;
 class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterface
 {
     use Loggable;
+
+    private $configList = [];
     
     /**
      * @param array $data
@@ -77,6 +79,8 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
             
             $database->save($config);
 
+            unset($this->configList[$pluginSetId]);
+
             return $config;
 
         } catch (\Exception $ex) {
@@ -107,6 +111,8 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
             
             $database->save($config);
 
+            unset($this->configList[$pluginSetId]);
+
         } catch (\Exception $ex) {
             $this->getLogger( __FUNCTION__)
                 ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
@@ -122,6 +128,10 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
      */
     public function getConfig($pluginSetId)
     {
+        if (array_key_exists($pluginSetId, $this->configList)) {
+            return $this->configList[$pluginSetId];
+        }
+
         try{
             $database = pluginApp(DataBase::class);
 
@@ -130,13 +140,15 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
                 ->get();
             
             $config = $configs[0];
-            return $config;
 
         } catch (\Exception $ex) {
             $this->getLogger( __FUNCTION__)
                 ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
+            $config = false;
         }
 
-        return false;
+        $this->configList[$pluginSetId] = $config;
+
+        return $this->configList[$pluginSetId];
     }
 }

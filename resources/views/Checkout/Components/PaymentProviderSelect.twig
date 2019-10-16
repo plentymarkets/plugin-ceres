@@ -11,7 +11,13 @@
                         :checked="methodOfPaymentId === paymentProvider.id"
                         :disabled="!paymentProvider.isSelectable || isCheckoutReadonly"
                 >
-                <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id" :class="paddingClasses" :style="paddingInlineStyles">
+                <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id"
+                       :class="paddingClasses"
+                       :style="paddingInlineStyles"
+                       v-tooltip="isPaymentMethodExcluded(paymentProvider.id)"
+                       data-toggle="tooltip"
+                       data-placement="top"
+                       data-title="{{ trans("Ceres::Template.checkoutChangeShippingProfileHint") }}">
                     <div class="icon">
                         <div class="square-container">
                             <div class="square-inner center-xy">

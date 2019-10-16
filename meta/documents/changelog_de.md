@@ -1,5 +1,91 @@
 # Release Notes für Ceres
 
+## v4.3.3 (2019-10-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.2...4.3.3" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Ein Fehler führte dazu, dass Varianteneigenschaften ohne Gruppen im Warenkorb nicht mehr angezeigt wurden. Dies wurde behoben.
+- Ein Fehler führte dazu, dass die Layout-Container im Auftragsdaten-Widget nicht korrekt mit Daten befüllt wurden. Dies wurde behoben.
+- Der LayoutContainer `Ceres::Scripts.AfterScriptsLoaded` wurde vor die Initalisierung von Vue.js verschoben, um das Registrieren eigener Vue-Komponenten wieder zu ermöglichen.
+- Ein Fehler führte dazu, dass keine ShopBuilder-Inhalte mehr angezeigt wurden, wenn das Datenschutz-Widget auf einer Seite platziert wurde. Dies wurde behoben.
+
+## v4.3.2 (2019-10-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.1...4.3.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler war die Registrierungsseite nicht mehr über den Header des Shops erreichbar. Dies wurde behoben.
+- Durch einen Fehler konnten Skripte nicht mehr mit `<script2>`-Tags ausgegeben werden. Dies wurde behoben.
+- Durch einen Fehler wurden auch im Live-Modus die Vue-Devtools angezeigt. Dies wurde behoben.
+
+## v4.3.1 (2019-10-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.0...4.3.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Die Ladezeit des **Assistenten** im plentymarkets Backend wurde verbessert.
+- Durch einen Fehler wurde die Sprache nicht richtig in die URL der mobilen Navigation eingefügt. Dies wurde behoben.
+
+## v4.3.0 (2019-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.1...4.3.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu bereitstellen** aktualisiert werden.
+- Für die Verwendung der Zahlungsart **Nachnahme** muss das Nachnahme-Plugin auf Version 1.0.8 aktualisiert werden.
+
+#### Hinzugefügt
+
+- Bei einer Ausfuhrlieferung wird nun eine Meldung unterhalb der Warenkorbsummen angezeigt, welche den Nutzer über potentielle zusätzliche Kosten informiert. Die Meldung kann ausgeblendet werden, indem der Wert "basketExportDeliveryWarning" im Menü **CMS » Mehrsprachigkeit** leer gespeichert wird.
+- Das ShopBuilder-Widget "Auftragsdokumente" wurde für die Kategorie "Bestellbestätigung" hinzugefügt. Darüber können Kunden Dokumente wie Rechnung, externe Rechnung, Lieferschein, Auftragsbestätigung, Abhollieferschein oder Stornobeleg runterladen.
+- Die folgenden Widgets wurden zum ShopBuilder hinzugefügt: Auftragsdaten, Auftragssummen, gekaufte Artikel, Registrierung, Login, Gastbestellung, Lieferland-Auswahl, Wunschliste, Newsletter abmelden, Retourenformular, Passwort ändern-Formular, E-mail ändern-Formular.
+- Die folgenden Vorlagen wurden zum ShopBuilder hinzugefügt: Bestellbestätigung, 404-Seite, Login, Registrierung, Newsletter-Abmeldung, Wunschliste, Retourenformular, Passwort ändern, E-Mail ändern, Warenkorb.  
+- Das Link-Button-Widget wurde zum ShopBuilder hinzugefügt. Dieses stellt Links zu Retouren und Sendungsverfolgung als Schaltflächen zur Verfügung.
+
+### Geändert
+
+- **Eigene Überschriften** des Artikellisten-Widgets werden nicht mehr in Großbuchstaben ausgegeben.
+- Die Artikelinformationen in der Bestellbestätigung beinhalten nun Attribute.
+- Die Attribute der Variante werden nun im Retouren-Widget des ShopBuilders ausgegeben.
+- Die Attribute der Variante werden nun im Auftragsdaten-Widget des ShopBuilders ausgegeben.
+- Die Menge der übertragenen Daten beim Bearbeiten des Warenkorbs wurde minimiert, um die Performance des Webshops zu verbessern.
+- Über **pluginApp** erzeugte Objekte werden nun vor der weiteren Verwendung in eigene Variablen gespeichert. Die direkte Verwendung neuer Instanzen führte in einzelnen Fällen zu Fehlern während der Plugin-Bereitstellung.
+- Wenn die Option "Auswahl des Inhalts immer anzeigen" im Attributauswahl-Widget inaktiv ist, wird die Inhaltsangabe in der Attributauswahl nun ausgeblendet, falls die Kombination der gewählten Attribute keine Variante ergibt.
+- Bestellmerkmale im Warenkorb werden nun nach ihrer Position sortiert.
+- Die strukturierten Daten auf Artikelseiten wurden überarbeitet.
+- Der Hinweistext auf dem "In den Warenkorb"-Button wurde für nicht verfügbare Artikel angepasst.
+- Parameter für Suchanfragen und für die Kategorieansicht werden nun validiert.
+- Die Einstellung "Callisto-URL-Struktur für Artikel aktivieren" wurde erweitert, sodass ab sofort die Einstellungen "Aufbau Artikel-URL" unter **Einrichtung » Mandant » Mandant wählen » SEO » URL-Aufbau » Artikel** berücksichtig wird.
+- Die Auswahl von Zahlungs- und Versandarten wurde angepasst. Ausgewählte Zahlungs- und Versandarten können einander nicht mehr ausschließen. Bei Auswahl einer inkompatiblen Kombination wird ein Hinweis eingeblendet und Zahlungs- und Versandart können neu gewählt werden.
+- Die Wunschlistenansicht wird nun vom ShopBooster gecached.
+- Das Registrierungsformular wird ab sofort auch über Google reCAPTCHA geprüft, sofern entsprechende Zugangsdaten in den Ceres-Einstellungen hinterlegt sind.
+- Dem Warenkorbinhalts-Widget wurden Einstellungen hinzugefügt, um Artikeldaten anzuzeigen.
+- Die Newsletter-Abmeldung meldet den Kunden nicht mehr aus allen Newslettern gleichzeitig ab, sondern nur aus dem, der angefordert wurde.
+- Um Fehler zu vermeiden, werden Lieferländer nun initial geladen, unabhängig davon, ob ein Widget die Lieferlandauswahl enthält.
+- Widget-Platzhalter im ShopBuilder werden nun innerhalb eines Strukturelements kleiner dargestellt, um den Text lesbarer zu machen.
+
+### Behoben 
+
+- Aufgrund von fehlender Mindesthöhe konnte das Code-Widget im ShopBuilder nicht mehr bearbeitet werden. Dies wurde behoben.
+- Wenn im ShopBuilder eine Kategorie für die Startseite verknüpft und die Startseite aufgerufen wurde, wurde der Name der Kategorie als Titel des Browser-Tabs verwendet, sofern kein Metatitel hinterlegt war. Ab sofort wird nur noch der Metatitel ausgegeben. Ist kein Metatitel hinterlegt, wird nichts ausgegeben.
+- Die Bestellmerkmale werden nun korrekt im Retouren-Widget des ShopBuilders ausgegeben.
+- Die Mindestgröße des Bilderkarussells konnte auf kleinen Displaygrößen zum Beschneiden des Bildes führen. Diese wurde entfernt.
+- Beim Verwenden von SVG-Dateien wurde das Shop-Logo im Internet Explorer 11 zu groß dargestellt. Dies wurde behoben.
+- Durch einen Fehler wurden Kategoriebilder auf iOS Geräten inkorrekt dargestellt. Dies wurde behoben.
+- Die Darstellung von Widgets im Header war auf mobilen Geräten fehlerhaft. Dies wurde behoben.
+- Bei der Weiterleitung von systeminternen URLs auf mehrsprachige Kategorien des ShopBuilders kam es zu Problemen. Dies wurde behoben.
+- In der Einzelartikelansicht wird die Anzahleingabe nun nach einem Wechsel der Variante zurückgesetzt.
+- Bei Bildern aus dem Webspace wird nun im Bilderbox-Widget der hinterlegte Alternativtext ausgegeben.
+- Die Standardsprache für Suchmaschinen wird jetzt korrekt übermittelt.
+- Der Layout-Container im Auftragsdaten-Widget für das Überschreiben von Versandprofilen war fehlerhaft. Dies wurde behoben.
+- Durch einen Fehler wurde die Sprache nicht richtig in die URL der mobilen Navigation eingefügt. Dies wurde behoben.
+- Unter bestimmten Umständen wurde ein leeres `<title>`-Tag ausgegeben. Das Verhalten wurde behoben.
+- Durch einen Fehler wurde die Liste der zuletzt gesehenen Artikel innerhalb eines Tab-Widgets nicht geladen. Dies wurde behoben.
+- In einzelnen Fällen kam es zu Rundungsfehlern bei Preisangaben. Dies wurde behoben.
+- In den Auftragsdetails konnte es zu einer fehlerhaften Darstellung der Zwischensumme kommen. Dieses Verhalten wurde behoben.
+- Artikellisten, die über den ShopBuilder angelegt wurden, erhalten nur noch den "Alle ansehen"-Link wenn sie vom Typ "Kategorie" sind.
+- Durch einen Fehler wurde die Artikelansicht des ShopBuilders nicht im Internet Explorer geladen. Dies wurde behoben.
+- Durch einen Fehler konnten manche Attribute in der Artikelansicht nicht ausgewählt werden. Dies wurde behoben.
+- Der Übersetzungsschlüssel "orderConfirmationItemDiscount" war nicht in Englisch hinterlegt. Dies wurde behoben.
+- Die Postnummer wird nun auch im Mein Konto-Bereich und der Bestellbestätigung angezeigt.
+
 ## v4.2.1 (2019-09-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.0...4.2.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert

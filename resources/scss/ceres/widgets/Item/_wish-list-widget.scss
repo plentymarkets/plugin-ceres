@@ -5,6 +5,12 @@
             white-space: nowrap;
             display: flex;
             flex-direction: row-reverse;
+
+            i.fa {
+                font-size: inherit;
+                line-height: inherit;
+                margin-left: .25rem;
+            }
         }
     }
 

@@ -1,31 +1,29 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set customClass = widget.settings.customClass.mobile %}
-{# {% set spacingSettings = widget.settings.spacing %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set appearance = widget.settings.appearance.mobile | default("primary") %} #}
+{% set customClass      = widget.settings.customClass.mobile %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set appearance       = widget.settings.appearance.mobile | default("primary") %}
+{% set placement        = widget.settings.placement.mobile | default("auto") %}
+{% set icon             = widget.settings.icon.mobile | default("auto") %}
 
-<div class="widget widget-popper widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+<div class="widget widget-popper{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <popper v-cloak class="float-right" {{ WidgetHelper.makeClickable(isPreview) }}>
+    <popper v-cloak placement="{{ placement }}">
         <template #handle>
-            <button class="btn btn-icon btn-secondary btn-sm">
-                <i class="fa fa-info"></i>
+            <button class="btn btn-icon btn-{{ appearance }} btn-sm" {{ WidgetHelper.makeClickable(isPreview) }}>
+                <i class="fa fa-{{ icon }}"></i>
             </button>
         </template>
-        <template #title>
-            {{ trans("Ceres::Template.regContactInformations") }}
-        </template>
+        {% if title | length > 0 %}
+            <template #title>
+                {{ title }}
+            </template>
+        {% endif %}
         <template #content>
-            <ul class='pl-3'>
-                <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-            </ul>
-            {# <div data-builder-child-container="popper">{{ children.popper | raw }}</div> #}
+            <div data-builder-child-container="popper">{{ children.popper | raw }}</div>
         </template>
     </popper>
 </div>

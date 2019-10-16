@@ -41,7 +41,8 @@ Vue.component("popper", {
                         arrow: {
                             element: this.$refs.arrow
                         }
-                    }
+                    },
+                    removeOnDestroy: true
                 });
 
                 const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
@@ -78,6 +79,11 @@ Vue.component("popper", {
             }
 
         });
+    },
+
+    destroyed()
+    {
+        this.popper.destroy();
     },
 
     data()

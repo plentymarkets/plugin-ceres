@@ -101,7 +101,7 @@
                             <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-                        <login template="#vue-login" modal-element="login-modal-wrapper"></login>
+                        <login modal-element="login-modal-wrapper"></login>
                     </div>
                 </div>
             </div>
@@ -198,7 +198,11 @@
         defaultLanguage: "{{ defaultLanguage }}",
         decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
         urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
-        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }}
+        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
+        initialData: {
+            shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
+            shippingCountryId: {{ services.checkout.getShippingCountryId() | json_encode }}
+        }
     };
 </script>
 
@@ -224,6 +228,8 @@
 {% if isShopBuilder %}
     {% include "Ceres::Widgets.ShopBuilderDataStore" %}
 {% endif %}
+
+{{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
 <script>
     window.vueEventHub = new Vue();
@@ -255,10 +261,13 @@
     }
 </script>
 
-{{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
-
 {{ get_filtered_tags() }}
 
 {{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
+
+{% if not services.template.shouldBeCached() %}
+    <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
+{% endif %}
+
 </body>
 </html>

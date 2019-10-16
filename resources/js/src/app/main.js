@@ -2,7 +2,7 @@ const browserDetect = require("detect-browser");
 const NotificationService = require("./services/NotificationService");
 const AutoFocusService = require("./services/AutoFocusService");
 
-import { MediaQueryHelper } from "./helper/MediaQueryHelper";
+import { debounce } from "./helper/debounce";
 import Vue from "vue";
 
 // Frontend end scripts
@@ -204,7 +204,6 @@ function CeresMain()
 
 window.CeresMain = new CeresMain();
 window.CeresNotification = NotificationService;
-window.MediaQueryHelper = new MediaQueryHelper();
 
 const showShopNotification = function(event)
 {
@@ -236,24 +235,24 @@ const showShopNotification = function(event)
 
 document.addEventListener("showShopNotification", showShopNotification);
 
-const vueApp = document.getElementById("vue-app");
-const headerParent = document.querySelector("[data-header-offset]");
+let headerParent = document.querySelector("[data-header-offset]");
 let headerLoaded = false;
 let allHeaderChildrenHeights = [];
 
 if ( headerParent )
 {
-    const headerChildren = headerParent.children;
-
     function calculateBodyOffset()
     {
+        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
         if (headerLoaded && headerParent)
         {
+            const vueApp = document.getElementById("vue-app");
             let bodyOffset = 0;
 
-            for ( let i = 0; i < headerChildren.length; i++ )
+            for ( let i = 0; i < headerParent.children.length; i++ )
             {
-                bodyOffset += headerChildren[i].getBoundingClientRect().height;
+                bodyOffset += headerParent.children[i].getBoundingClientRect().height;
             }
             vueApp.style.marginTop = bodyOffset + "px";
             vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
@@ -262,16 +261,20 @@ if ( headerParent )
 
     function getHeaderChildrenHeights()
     {
+        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
         allHeaderChildrenHeights = [];
 
-        for (let i = 0; i < headerChildren.length; i++)
+        for (let i = 0; i < headerParent.children.length; i++)
         {
-            allHeaderChildrenHeights.push(headerChildren[i].getBoundingClientRect().height);
+            allHeaderChildrenHeights.push(headerParent.children[i].getBoundingClientRect().height);
         }
     }
 
     function scrollHeaderElements()
     {
+        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
         if (headerLoaded && !App.isShopBuilder)
         {
             let absolutePos = 0;
@@ -280,9 +283,9 @@ if ( headerParent )
             const scrollTop = window.pageYOffset;
             let zIndex = 100;
 
-            for (let i = 0; i < headerChildren.length; i++)
+            for (let i = 0; i < headerParent.children.length; i++)
             {
-                const elem = headerChildren[i];
+                const elem = headerParent.children[i];
                 const elemHeight = allHeaderChildrenHeights[i];
 
                 offset = absolutePos - scrollTop;
@@ -317,15 +320,12 @@ if ( headerParent )
         }
     }
 
-    const QueryHelper = new MediaQueryHelper();
-
-    // When window resize to another breakpoint execute functions
-    QueryHelper.addFunction(function()
+    window.addEventListener("resize", debounce(function()
     {
         calculateBodyOffset();
         getHeaderChildrenHeights();
         scrollHeaderElements();
-    });
+    }, 50));
 
     $(window).scroll(scrollHeaderElements);
 
@@ -342,10 +342,21 @@ if ( headerParent )
         {
             return new Promise(function(resolve)
             {
-                headerImage.onload = function()
+                if (headerImage.complete)
                 {
                     resolve();
-                };
+                }
+                else
+                {
+                    headerImage.onload = function()
+                    {
+                        resolve();
+                    };
+                    headerImage.onerror = function()
+                    {
+                        resolve();
+                    };
+                }
             });
         })
     ).then(function()

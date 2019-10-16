@@ -7,6 +7,54 @@
     "position": 600,
     "widgetClass": "Ceres\\Widgets\\Grid\\PopperWidget",
     "settings": {
-        "customClass":"@include(customClass)"
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "title": {
+            "type": "text",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.popperTitleLabel"
+            }
+        },
+        "placement": {
+            "type": "select",
+            "defaultValue": "auto",
+            "options": {
+                "selectBoxValues": [
+                    {
+                        "value": "auto",
+                        "caption": "Widget.popperPlacementAuto",
+                        "position": 0
+                    },
+                    {
+                        "value": "top",
+                        "caption": "Widget.popperPlacementTop",
+                        "position": 1
+                    },
+                    {
+                        "value": "bottom",
+                        "caption": "Widget.popperPlacementBottom",
+                        "position": 2
+                    },
+                    {
+                        "value": "left",
+                        "caption": "Widget.popperPlacementLeft",
+                        "position": 3
+                    },
+                    {
+                        "value": "right",
+                        "caption": "Widget.popperPlacementRight",
+                        "position": 4
+                    }
+                ]
+            }
+        },
+        "icon": "@include(icon)",
+        "spacing":"@include(spacing)"
     }
 }

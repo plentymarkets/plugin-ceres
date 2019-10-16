@@ -64,7 +64,7 @@ class DefaultSingleItemPreset implements ContentPreset
     private function createStickyContainer()
     {
         $this->stickyContainer = $this->twoColumnWidget->createChild('second', 'Ceres::StickyContainerWidget')
-            ->withSetting('stickTo', 'stickToBody');
+            ->withSetting('stickTo', 'stickToParent');
     }
 
     private function createTwoColumnWidget()
@@ -134,7 +134,6 @@ class DefaultSingleItemPreset implements ContentPreset
     private function createAddToBasketWidget()
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::AddToBasketWidget')
-            ->withSetting('buttonSize', 'lg')
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 3)
             ->withSetting('spacing.margin.top.unit', null)
@@ -277,10 +276,10 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
-            
+
         $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
             ->withSetting('itemInformation',
-                            array("item.id", 
+                            array("item.id",
                                 "item.condition.names.name",
                                 "item.ageRestriction",
                                 "variation.externalId",
@@ -307,7 +306,7 @@ class DefaultSingleItemPreset implements ContentPreset
     private function getShopBuilderDataFieldProvider($provider,$itemDataFields)
     {
         $query = "{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\$provider #}";
-        $dataFields = implode(",", $itemDataFields); 
+        $dataFields = implode(",", $itemDataFields);
         $query .= "{{ item_data_field($dataFields)}}";
         return $query;
     }

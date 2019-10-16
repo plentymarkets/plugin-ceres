@@ -31,6 +31,7 @@ class OnlineStoreStep extends Step
                 $this->buildStoreBack2Top(),
                 $this->buildStoreEmailSettings(),
                 $this->buildStoreOrderSettings(),
+                $this->buildStoreShippingSettings(),
                 $this->buildGoogleRecaptchaSettings(),
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
@@ -205,6 +206,27 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
+    private function buildStoreShippingSettings():array
+    {
+        return [
+            "title" => "Wizard.shippingSettings",
+            "description" => "Wizard.shippingSettingsDescription",
+            "form" => [
+                "onlineStore_shippingProfiles" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.showAllShippingProfiles"
+                    ]
+                ],
+            ]
+        ];
+    }
+
+
+    /**
+     * @return array
+     */
     private function buildGoogleRecaptchaSettings():array
     {
         return [
@@ -269,7 +291,7 @@ class OnlineStoreStep extends Step
     private function buildStoreCallistoSettings():array
     {
         $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
-        $webstoreActive = $moduleRepo->isActive("webshop");
+        $webstoreActive = $moduleRepo->isActive("webstore.cms");
 
         return [
             "title" => "Wizard.settingsOldCallisto",

@@ -33,18 +33,21 @@ const mutations =
             state.items = basketItems;
         },
 
-        addBasketItem(state, basketItem)
+        addBasketItem(state, basketItems)
         {
-            const basketItemIndex = state.items.findIndex(item => basketItem.id === item.id);
+            for (let i = 0; i < basketItems.length; i++)
+            {
+                const basketItem = basketItems[i];
+                const basketItemIndex = state.items.findIndex(item => basketItem.id === item.id);
 
-            if (basketItemIndex !== -1)
-            {
-                state.items.splice(basketItemIndex, 1);
-                state.items.splice(basketItemIndex, 0, basketItem);
-            }
-            else
-            {
-                state.items.push(basketItem);
+                if (basketItemIndex !== -1)
+                {
+                    state.items.splice(basketItemIndex, 1, basketItem);
+                }
+                else
+                {
+                    state.items.push(basketItem);
+                }
             }
         },
 
@@ -109,31 +112,34 @@ const mutations =
 
 const actions =
     {
-        loadBasketData({ commit })
+        loadBasketData({ state, commit })
         {
-            jQuery
-                .when(
-                    ApiService.get("/rest/io/basket", {}, { cache: false }),
-                    ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
-                )
-                .then((basket, basketItems) =>
-                {
-                    commit("setBasket", basket);
-                    commit("setBasketItems", basketItems);
-                    commit("setIsBasketInitiallyLoaded");
-                    commit("setWishListIds", basket.itemWishListIds);
-                })
-                .catch((error, status) =>
-                {
-                    console.log(error, status);
-
-                    if (status > 0)
+            if ( !state.isBasketInitiallyLoaded )
+            {
+                jQuery
+                    .when(
+                        ApiService.get("/rest/io/basket", {}, { cache: false }),
+                        ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
+                    )
+                    .then((basket, basketItems) =>
                     {
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.basketOops")
-                        ).closeAfter(10000);
-                    }
-                });
+                        commit("setBasket", basket);
+                        commit("setBasketItems", basketItems);
+                        commit("setIsBasketInitiallyLoaded");
+                        commit("setWishListIds", basket.itemWishListIds);
+                    })
+                    .catch((error, status) =>
+                    {
+                        console.log(error, status);
+
+                        if (status > 0)
+                        {
+                            NotificationService.error(
+                                TranslationService.translate("Ceres::Template.basketOops")
+                            ).closeAfter(10000);
+                        }
+                    });
+            }
 
             ApiService.listen("AfterBasketChanged", data =>
             {
@@ -145,12 +151,12 @@ const actions =
 
             ApiService.listen("AfterBasketItemAdd", data =>
             {
-                commit("addBasketItem", data.basketItem);
+                commit("addBasketItem", data.basketItems);
             });
 
             ApiService.listen("AfterBasketItemUpdate", data =>
             {
-                commit("updateBasketItem", data.basketItem);
+                commit("updateBasketItem", data.basketItems);
             });
 
             ApiService.after(() =>
@@ -213,7 +219,7 @@ const actions =
             });
         },
 
-        removeBasketItem({ commit }, basketItemId)
+        removeBasketItem({ state, commit }, basketItemId)
         {
             return new Promise((resolve, reject) =>
             {
@@ -226,7 +232,7 @@ const actions =
                         commit("removeBasketItem", basketItemId);
                         resolve(response);
 
-                        if (pathnameEquals(App.urls.checkout) && !response.length)
+                        if (pathnameEquals(App.urls.checkout) && state.items.length === 0)
                         {
                             navigateTo(App.urls.basket);
                         }

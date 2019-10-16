@@ -9,9 +9,19 @@
                         :value="shippingProfile.parcelServicePresetId"
                         @change="onShippingProfileChange(shippingProfile.parcelServicePresetId)"
                         :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
-                        :disabled="isBasketLoading || isCheckoutReadonly"
+                        :disabled="isBasketLoading || isCheckoutReadonly || (paymentContainerIsOverwritten && isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId))"
                 >
-                <label class="provider-select-label" :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId" :class="paddingClasses" :style="paddingInlineStyles">
+
+
+                <label class="provider-select-label"
+                       :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId"
+                       :class="paddingClasses"
+                       :style="paddingInlineStyles"
+                        v-tooltip="isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId)"
+                       data-toggle="tooltip"
+                       data-placement="top"
+                       :data-title="getTooltip(shippingProfile.parcelServicePresetId, selectedPaymentMethodId)"
+                    >
                     <div class="icon">
                         {#<img src="">#}
                     </div><!--

@@ -9,12 +9,12 @@
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
-{% set buttonSize = widget.settings.buttonSize.mobile | default("md") %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
 
 <div class="widget widget-print-button no-padding no-print{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-    <button type="button" class="btn btn-{{ appearance }} btn-{{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+    <button type="button" class="btn btn-{{ appearance }} {{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
         onclick="window.print()" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         <span>{{ Twig.trans("Ceres::Template.cancellationFormPrint") }}</span>
         <i class="fa fa-print" aria-hidden="true"></i> 

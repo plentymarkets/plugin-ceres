@@ -3,6 +3,7 @@
     "label": "Widget.newsletterLabel",
     "previewImageURL": "/images/widgets/newsletter.svg",
     "type": "static",
+    "position": 500,
     "widgetClass": "Ceres\\Widgets\\Common\\NewsletterWidget",
     "settings": {
         "customClass":"@include(customClass)",
@@ -35,6 +36,31 @@
             "options": {
                 "name": "Widget.newsletterEmailFolderLabel",
                 "tooltipText": "Widget.newsletterEmailFolderTooltip"
+            }
+        },
+        "buttonSize": {
+            "type": "select",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
             }
         },
         "spacing":"@include(spacingMargin)"

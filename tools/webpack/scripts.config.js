@@ -14,7 +14,7 @@ module.exports = env =>
         },
         resolve: {
             alias: {
-                vue: "vue/dist/vue.js"
+                vue: "vue/dist/vue" + (env.prod ? ".min" : "") + ".js"
             }
         },
         devtool: "source-map",
@@ -44,7 +44,7 @@ module.exports = env =>
                 },
                 {
                     test: /\.m?js$/,
-                    exclude: /node_modules\/(?!vue-script2)/,
+                    exclude: /node_modules/,
                     use: {
                         loader: "babel-loader"
                     }

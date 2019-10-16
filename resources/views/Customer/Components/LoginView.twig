@@ -10,7 +10,7 @@
 
                 <div>
                     <h1 class="login-view-title mb-5">{{ trans("Ceres::Template.login") }}</h1>
-                    <login template="#vue-login" backlink="{{ backlink | url_encode }}" has-to-forward="true"></login>
+                    <login backlink="{{ backlink | url_encode }}" :has-to-forward="true"></login>
                 </div>
 
                 <hr>

@@ -327,3 +327,9 @@
         }
     }
 }
+
+html.ie .v-s-boxes .v-s-box.invalid {
+    &:after {
+        background: rgba(255,255,255,0.7);
+    }
+}

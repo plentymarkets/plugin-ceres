@@ -1,3 +1,5 @@
+import { ButtonSizePropertyMixin } from "../../../mixins/buttonSizeProperty.mixin";
+
 const ApiService          = require("../../../services/ApiService");
 const NotificationService = require("../../../services/NotificationService");
 const ModalService        = require("../../../services/ModalService");
@@ -9,14 +11,28 @@ import Vue from "vue";
 
 Vue.component("login", {
 
-    delimiters: ["${", "}"],
+    mixins: [ButtonSizePropertyMixin],
 
-    props: [
-        "modalElement",
-        "backlink",
-        "hasToForward",
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-login"
+        },
+        backlink:
+        {
+            type: String
+        },
+        modalElement: {
+            type: String
+        },
+        hasToForward:
+        {
+            type: Boolean,
+            default: false
+        }
+    },
 
     data()
     {

@@ -186,7 +186,8 @@ class DefaultContactPreset implements ContentPreset
             $row_3 = $formWidget->createChild("formFields", "Ceres::TwoColumnWidget")
                 ->withSetting("layout", "oneToOne");
 
-            $row_3->createChild("first", "Ceres::AcceptPrivacyPolicyWidget");
+            $row_3->createChild("first", "Ceres::AcceptPrivacyPolicyWidget")
+                  ->withSetting("customClass", "");
 
             $textWidget = $row_3->createChild("second", "Ceres::InlineTextWidget");
         }

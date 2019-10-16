@@ -79,7 +79,7 @@
                 <template #heading>
                     <div class="widget-caption bg-appearance widget-item-list-caption mb-3">
                         {% if headlineStyle == "custom-caption" %}
-                            <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-caption") }}>
+                            <div class="widget-item-list-inline-caption" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-inline-caption") }}>
                                 {{ headline | raw }}
                             </div>
                         {% else %}
@@ -97,7 +97,7 @@
                 {% if headlineStyle == "default-caption" or headlineStyle == "custom-caption" or headlineStyle is empty %}
                     <div class="widget-caption widget-item-list-caption mb-3 bg-appearance">
                         {% if headlineStyle == "custom-caption" %}
-                            <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-caption") }}>
+                            <div class="widget-item-list-inline-caption" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-inline-caption") }}>
                                 {{ headline | raw }}
                             </div>
                         {% else %}
@@ -106,8 +106,8 @@
                             </div>
                         {% endif %}
 
-                        {{ Twig.if("category") }}
-                            <a href="{{ Twig.print(Twig.call("services.category.getURL", [Twig.var("category")])) }}">
+                        {{ Twig.if("categoryUrl") }}
+                            <a href="{{ Twig.print("categoryUrl") }}">
                                 <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
                             </a>
                         {{ Twig.endif() }}
@@ -139,7 +139,7 @@
                             {{ Twig.endfor() }}
                         </carousel>
                 {{ Twig.elseif("#{ isPreview | json_encode }") }}
-                    <div class="widget-placeholder prop-xs-4-1">
+                    <div class="widget-placeholder prop-xs-4-1 proportional-placeholder">
                         <div>
                             <p class="title mb-0">{{ Twig.trans("Ceres::Widget.itemListPlaceholderTitle") }}</p>
                             <p class="description mt-3">{{ Twig.trans("Ceres::Widget.itemListPlaceholderDescription") }}</p>

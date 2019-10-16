@@ -2594,6 +2594,15 @@
                         "defaultValue": "false"
                     }
                 },
+                "checkout.show_all_shipping_profiles": {
+                    "type": "checkBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.checkoutShowAllShippingProfiles",
+                    "options": {
+                      "defaultValue": "false"
+                    }
+                },
                 "my_account.confirmation_link_expiration": {
                     "type": "selectBox",
                     "required": false,

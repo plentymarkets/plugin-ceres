@@ -31,10 +31,6 @@ Vue.component("country-select", {
         }
     },
 
-    jsonDataFields: [
-        "countryList"
-    ],
-
     data()
     {
         return {
@@ -75,7 +71,8 @@ Vue.component("country-select", {
         },
 
         ...mapState({
-            shippingCountryId: state => state.localization.shippingCountryId
+            shippingCountryId: state => state.localization.shippingCountryId,
+            countryList: state => state.localization.shippingCountries
         })
     },
 
@@ -84,18 +81,6 @@ Vue.component("country-select", {
      */
     created()
     {
-        this.countryList.sort(function(first, second)
-        {
-            if (first.currLangName < second.currLangName)
-            {
-                return -1;
-            }
-            if (first.currLangName > second.currLangName)
-            {
-                return 1;
-            }
-            return 0;
-        });
         this.updateSelectedCountry();
     },
 

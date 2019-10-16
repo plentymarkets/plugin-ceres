@@ -1,0 +1,24 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass      = widget.settings.customClass.mobile %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set appearance       = widget.settings.appearance.mobile | default("primary") %}
+{% set itemDetailsData  = widget.settings.itemDetailsData.mobile | default(["availability"]) %}
+{% set buttonSize       = widget.settings.buttonSize.mobile | default("") %}
+
+{{ Twig.if("orderData") }}
+<div class="widget widget-order-return widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    {{ Twig.component("Ceres::OrderReturn.Components.OrderReturn") }}
+    <div class="widget-inner">
+        <order-return
+            :init-order-data="{{ Twig.print("orderData | json_encode") }}"
+            :item-details-data="{{ itemDetailsData | json_encode }}"
+            :button-size="{{ buttonSize | json_encode }}">
+        </order-return>
+    </div>
+</div>
+{{ Twig.endif() }}
