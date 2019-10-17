@@ -50,8 +50,7 @@ Vue.component("popper", {
                             element: this.$refs.arrow
                         }
                     },
-                    removeOnDestroy: true,
-                    positionFixed: true
+                    removeOnDestroy: true
                 });
 
                 const handle = this.$refs.handle.firstElementChild || this.$refs.handle;

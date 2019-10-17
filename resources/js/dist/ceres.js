@@ -65492,8 +65492,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
               element: _this.$refs.arrow
             }
           },
-          removeOnDestroy: true,
-          positionFixed: true
+          removeOnDestroy: true
         });
         var handle = _this.$refs.handle.firstElementChild || _this.$refs.handle;
 
