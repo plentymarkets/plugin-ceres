@@ -7399,28 +7399,23 @@
                 "type": "select",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.widgetButtonSizeLabel",
+                    "name": "Widget.widgetTagSizeLabel",
                     "tooltipText": "Widget.widgetButtonSizeTooltip",
                     "listBoxValues": [
                         {
                             "value": "",
-                            "caption": "Widget.widgetButtonSizeNormal",
+                            "caption": "Widget.widgetButtonSizeSm",
                             "position": 0
                         },
                         {
                             "value": "h4",
-                            "caption": "Widget.widgetButtonSizeSm",
-                            "position": 1
-                        },
-                        {
-                            "value": "h3",
                             "caption": "Widget.widgetButtonSizeNormal",
-                            "position": 2
+                            "position": 1
                         },
                         {
                             "value": "h2",
                             "caption": "Widget.widgetButtonSizeLg",
-                            "position": 3
+                            "position": 2
                         }
                     ]
                 }
