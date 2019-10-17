@@ -354,6 +354,70 @@
         }
     },
     {
+        "identifier": "Ceres::ToolbarWidget",
+        "label": "Widget.toolbarLabel",
+        "previewImageURL": "/images/widgets/toolbar.svg",
+        "type": "categoryitem",
+        "categories": [
+            "item"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Category\\ToolbarWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::CancelPaymentWidget",
         "label": "Widget.cancelPaymentLabel",
         "previewImageURL": "/images/widgets/cancel-payment.svg",
@@ -5516,37 +5580,15 @@
         }
     },
     {
-        "identifier": "Ceres::FourColumnWidget",
-        "label": "Widget.gridFourColumnLabel",
-        "previewImageURL": "/images/widgets/grid-4-col.svg",
-        "type": "structure",
-        "categories": [
-            "structure"
-        ],
-        "position": 100,
-        "widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
-        "settings": {
-            "customClass": {
-                "type": "text",
-                "required": false,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.customClass",
-                    "tooltipText": "Widget.customClassTooltip"
-                }
-            }
-        }
-    },
-    {
-        "identifier": "Ceres::PopperWidget",
-        "label": "Widget.popperLabel",
-        "previewImageURL": "/images/widgets/popper.svg",
+        "identifier": "Ceres::AdditionalInformationWidget",
+        "label": "Widget.additionalInformationLabel",
+        "previewImageURL": "/images/widgets/additional-information.svg",
         "type": "structure",
         "categories": [
             "structure"
         ],
         "position": 600,
-        "widgetClass": "Ceres\\Widgets\\Grid\\PopperWidget",
+        "widgetClass": "Ceres\\Widgets\\Grid\\AdditionalInformationWidget",
         "settings": {
             "customClass": {
                 "type": "text",
@@ -5602,39 +5644,39 @@
                 "type": "text",
                 "defaultValue": "",
                 "options": {
-                    "name": "Widget.popperTitleLabel"
+                    "name": "Widget.additionalInformationTitleLabel"
                 }
             },
             "placement": {
                 "type": "select",
                 "defaultValue": "auto",
                 "options": {
-                    "name": "Widget.popperPlacementLabel",
-                    "tooltipText": "Widget.popperPlacementTooltip",
+                    "name": "Widget.additionalInformationPlacementLabel",
+                    "tooltipText": "Widget.additionalInformationPlacementTooltip",
                     "listBoxValues": [
                         {
                             "value": "auto",
-                            "caption": "Widget.popperPlacementAuto",
+                            "caption": "Widget.additionalInformationPlacementAuto",
                             "position": 0
                         },
                         {
                             "value": "top",
-                            "caption": "Widget.popperPlacementTop",
+                            "caption": "Widget.additionalInformationPlacementTop",
                             "position": 1
                         },
                         {
                             "value": "bottom",
-                            "caption": "Widget.popperPlacementBottom",
+                            "caption": "Widget.additionalInformationPlacementBottom",
                             "position": 2
                         },
                         {
                             "value": "left",
-                            "caption": "Widget.popperPlacementLeft",
+                            "caption": "Widget.additionalInformationPlacementLeft",
                             "position": 3
                         },
                         {
                             "value": "right",
-                            "caption": "Widget.popperPlacementRight",
+                            "caption": "Widget.additionalInformationPlacementRight",
                             "position": 4
                         }
                     ]
@@ -5781,6 +5823,28 @@
                             "direction": "all"
                         }
                     }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::FourColumnWidget",
+        "label": "Widget.gridFourColumnLabel",
+        "previewImageURL": "/images/widgets/grid-4-col.svg",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
                 }
             }
         }
