@@ -7,8 +7,10 @@ use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
+use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\Plugin\Models\Plugin;
+use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetEntryRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
@@ -28,7 +30,7 @@ class ShopWizardService
     private $settingsService;
 
     private $mappingService;
-    
+
     /**
      * ShopWizardService constructor.
      * @param DefaultSettingsService $settingsService
@@ -39,7 +41,7 @@ class ShopWizardService
         $this->settingsService = $settingsService;
         $this->mappingService = $mappingService;
     }
-    
+
     /**
      * @return array
      */
@@ -100,7 +102,7 @@ class ShopWizardService
 
         return $webstoresMapped;
     }
-    
+
     /**
      * @param $webstoreId
      * @param $pluginSetId
@@ -232,18 +234,57 @@ class ShopWizardService
             }
         }
 
-        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
-        $pluginSets = $pluginSetRepo->list();
+         /** @var PluginRepositoryContract $pluginRepo */
+        $pluginRepo = pluginApp(PluginRepositoryContract::class);
+        $plugin = $pluginRepo->getPluginByName("Ceres");
         $pluginConfData = [];
 
-        foreach($pluginSets as $pluginSet)
+        if ($plugin instanceof Plugin)
         {
-            foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
-                if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres' && $pluginSetEntry->pluginSetId == $pluginSetId) {
+            /**
+             * @var PluginSetRepositoryContract $pluginSetRepo
+             */
+            $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
+            $pluginSetEntries = $pluginSetRepo->listSetEntries($pluginSetId);
+
+            foreach ($pluginSetEntries as $pluginSetEntry)
+            {
+                if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->id === $plugin->id)
+                {
                     $config = $pluginSetEntry->configurations()->getResults();
-                    if (count($config)) {
-                        foreach ($config as $confItem) {
+                    if (count($config))
+                    {
+                        foreach ($config as $confItem)
+                        {
                             $pluginConfData[$confItem->key] = $confItem->value;
+                        }
+                    }
+                }
+            }
+             /** @var ConfigurationRepositoryContract $configurationRepo */
+            $configurationRepo = pluginApp(ConfigurationRepositoryContract::class);
+            $pluginConfigJson = $configurationRepo->getConfigurationFile($plugin->id, $pluginSetId);
+
+            $pluginConfig = json_decode($pluginConfigJson, true);
+
+            foreach($pluginConfig['menu'] as $tab)
+            {
+                foreach($tab['formFields'] as $configKey => $formField)
+                {
+                    if(!array_key_exists($configKey, $pluginConfData) && isset($formField['options']['defaultValue']))
+                    {
+                        if($formField['type'] === 'multiCheckBox' && $formField['options']['defaultValue'] === 'all')
+                        {
+                            $values = [];
+                            foreach($formField['options']['checkBoxValues'] as $checkBoxValue)
+                            {
+                                $values[] = $checkBoxValue['value'];
+                            }
+                            $pluginConfData[$configKey] = implode(', ', $values);
+                        }
+                        else
+                        {
+                            $pluginConfData[$configKey] = $formField['options']['defaultValue'];
                         }
                     }
                 }
@@ -254,7 +295,7 @@ class ShopWizardService
         $hasShippingProfile = $this->settingsService->hasShippingProfiles();
         $hasPaymentMethod = $this->settingsService->hasPaymentMethods();
         $hasShippingCountry = $this->settingsService->hasShippingCountries();
-        
+
         $pluginData = $this->mappingService->processPluginMappingData($pluginConfData);
 
         $defaultData = [
@@ -287,7 +328,7 @@ class ShopWizardService
 
         return $data;
     }
-    
+
     /**
      * @param string $keyPrefix
      * @param array $data
