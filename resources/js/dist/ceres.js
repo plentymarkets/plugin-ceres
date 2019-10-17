@@ -62119,7 +62119,7 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
       this.label = this.getLabel();
     },
     getLabel: function getLabel() {
-      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.storeSpecial) || this.storeSpecial.id === 1) && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.recommendedRetailPrice)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.storeSpecial) && this.storeSpecial.id === 1 && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.recommendedRetailPrice)) {
         return this.getPercentageSale();
       }
 
@@ -62133,10 +62133,8 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
       var percent;
 
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isDefined"])(this.specialOfferPrice)) {
-        // eslint-disable-next-line
         percent = (1 - this.specialOfferPrice.unitPrice.value / this.variationRetailPrice.unitPrice.value) * -100;
       } else {
-        // eslint-disable-next-line
         percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value) * -100;
       }
 
@@ -62817,7 +62815,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("live-shopping-details", {
     },
     setItemPriceRebatePercentage: function setItemPriceRebatePercentage() {
       var specialOfferPrice = this.prices.price.price.value;
-      var defaultPrice = this.prices.rrp.price.value;
+      var defaultPrice = this.prices.rrp && this.prices.rrp.price.value || 0;
 
       if (defaultPrice === 0) {
         this.itemPriceRebatePercentage = 0;
@@ -69561,7 +69559,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _helper_MediaQueryHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helper/MediaQueryHelper */ "./resources/js/src/app/helper/MediaQueryHelper.js");
+/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helper/debounce */ "./resources/js/src/app/helper/debounce.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_11__);
 
@@ -69723,7 +69721,6 @@ function CeresMain() {
 
 window.CeresMain = new CeresMain();
 window.CeresNotification = NotificationService;
-window.MediaQueryHelper = new _helper_MediaQueryHelper__WEBPACK_IMPORTED_MODULE_10__["MediaQueryHelper"]();
 
 var showShopNotification = function showShopNotification(event) {
   if (event.detail.type) {
@@ -69825,13 +69822,11 @@ if (headerParent) {
     }
   };
 
-  var QueryHelper = new _helper_MediaQueryHelper__WEBPACK_IMPORTED_MODULE_10__["MediaQueryHelper"](); // When window resize to another breakpoint execute functions
-
-  QueryHelper.addFunction(function () {
+  window.addEventListener("resize", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_10__["debounce"])(function () {
     calculateBodyOffset();
     getHeaderChildrenHeights();
     scrollHeaderElements();
-  });
+  }, 50));
   $(window).scroll(scrollHeaderElements);
   $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
     calculateBodyOffset();
