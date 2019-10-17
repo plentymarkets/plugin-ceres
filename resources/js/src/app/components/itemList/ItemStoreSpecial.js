@@ -61,9 +61,7 @@ Vue.component("item-store-special", {
 
         getLabel()
         {
-            if (
-                (isNullOrUndefined(this.storeSpecial) || this.storeSpecial.id === 1) &&
-                !isNullOrUndefined(this.recommendedRetailPrice)
+            if (!isNullOrUndefined(this.storeSpecial) && this.storeSpecial.id === 1 && !isNullOrUndefined(this.recommendedRetailPrice)
             )
             {
                 return this.getPercentageSale();
@@ -83,12 +81,10 @@ Vue.component("item-store-special", {
 
             if (isDefined(this.specialOfferPrice))
             {
-                // eslint-disable-next-line
                 percent = (1 - this.specialOfferPrice.unitPrice.value / this.variationRetailPrice.unitPrice.value ) * -100;
             }
             else
             {
-                // eslint-disable-next-line
                 percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.unitPrice.value ) * -100;
             }
 

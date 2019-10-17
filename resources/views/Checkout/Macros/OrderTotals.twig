@@ -13,7 +13,7 @@
                     {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutNet") }})
                 </dt><!--
                 --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                    {{ totals.itemSumNet | formatMonetary( totals.currency ) }}
+                    {{ (totals.totalNet - totals.shippingNet + totals.itemSumRebateNet) | formatMonetary( totals.currency ) }}
                 </dd>
             {% endif %}
 
@@ -24,9 +24,9 @@
                 </dt><!--
                 --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {% if totals.isNet %}
-                        {{ totals.itemSumNet | formatMonetary( totals.currency ) }}
+                        {{ (totals.totalNet - totals.shippingNet + totals.itemSumRebateNet) | formatMonetary( totals.currency ) }}
                     {% else %}
-                        {{ totals.itemSumGross | formatMonetary( totals.currency ) }}
+                        {{ (totals.totalGross - totals.shippingGross + totals.itemSumRebateGross)  | formatMonetary( totals.currency ) }}
                     {% endif %}
                 </dd>
             {% endif %}
@@ -50,7 +50,7 @@
                         {{ trans("Ceres::Template.orderConfirmationSubTotal") }} ({{ trans("Ceres::Template.checkoutNet") }})
                     </dt><!--
                     --><dd {% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                        {{ (totals.itemSumNet - totals.itemSumRebateNet) | formatMonetary( totals.currency ) }}
+                        {{ (totals.totalNet - totals.shippingNet) | formatMonetary( totals.currency ) }}
                     </dd>
 
                     {# SUB TOTAL GROSS #}
@@ -59,10 +59,10 @@
                     </dt><!--
                     --><dd {% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {% if totals.isNet %}
-                        {{ (totals.itemSumNet - totals.itemSumRebateNet) | formatMonetary( totals.currency ) }}
+                        {{ (totals.totalNet - totals.shippingNet) | formatMonetary( totals.currency ) }}
                     {% else %}
-                        {{ (totals.itemSumGross - totals.itemSumRebateGross) | formatMonetary( totals.currency ) }}
-                    {% endif %}                    
+                        {{ (totals.totalGross - totals.shippingGross) | formatMonetary( totals.currency ) }}
+                    {% endif %}
                     </dd>
                 {% endif %}
             {% endif %}
