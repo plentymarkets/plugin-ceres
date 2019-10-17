@@ -1,12 +1,16 @@
-const ApiService = require("../../services/ApiService");
-const NotificationService = require("../../services/NotificationService");
-
 import { isDefined } from "../../helper/utils";
 import { navigateTo } from "../../services/UrlService";
 import Vue from "vue";
 import { mapState } from "vuex";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
+
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("place-order", {
+
+    mixins: [ButtonSizePropertyMixin],
+
     props:
     {
         template:
@@ -17,15 +21,6 @@ Vue.component("place-order", {
         targetContinue:
         {
             type: String
-        },
-        buttonSize:
-        {
-            type: [String, null],
-            default: null,
-            validator: value =>
-            {
-                return ["btn-sm", "", "btn-lg"].indexOf(value) !== -1;
-            }
         },
         paddingClasses:
         {
@@ -52,9 +47,9 @@ Vue.component("place-order", {
         {
             const classes = [];
 
-            if (isDefined(this.buttonSize))
+            if (isDefined(this.buttonSizeClass))
             {
-                classes.push(this.buttonSize);
+                classes.push(this.buttonSizeClass);
             }
 
             if (isDefined(this.paddingClasses))

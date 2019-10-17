@@ -1,3 +1,5 @@
+import { ButtonSizePropertyMixin } from "../../../mixins/buttonSizeProperty.mixin";
+
 const ApiService          = require("../../../services/ApiService");
 const NotificationService = require("../../../services/NotificationService");
 const ModalService        = require("../../../services/ModalService");
@@ -8,6 +10,8 @@ import TranslationService from "../../../services/TranslationService";
 import Vue from "vue";
 
 Vue.component("login", {
+
+    mixins: [ButtonSizePropertyMixin],
 
     props:
     {
@@ -27,11 +31,6 @@ Vue.component("login", {
         {
             type: Boolean,
             default: false
-        },
-        buttonSize:
-        {
-            type: String,
-            default: null
         }
     },
 

@@ -9866,10 +9866,12 @@ a.text-dark:hover, a.text-dark:focus {
   overflow: visible;
   clip: auto; }
 
-.flag-icon {
+.flag-icon-background, .flag-icon {
   background-size: contain;
   background-position: 50%;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; }
+
+.flag-icon {
   position: relative;
   display: inline-block;
   width: 1.33333em;
@@ -11123,6 +11125,11 @@ a.text-dark:hover, a.text-dark:focus {
   background-image: url(../images/flags/4x3/zw.svg); }
   .flag-icon-zw.flag-icon-squared {
     background-image: url(../images/flags/1x1/zw.svg); }
+
+.flag-icon-es-ct {
+  background-image: url(../images/flags/4x3/es-ct.svg); }
+  .flag-icon-es-ct.flag-icon-squared {
+    background-image: url(../images/flags/1x1/es-ct.svg); }
 
 .flag-icon-eu {
   background-image: url(../images/flags/4x3/eu.svg); }

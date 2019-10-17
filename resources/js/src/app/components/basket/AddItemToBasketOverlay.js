@@ -24,7 +24,8 @@ Vue.component("add-item-to-basket-overlay", {
     {
         return {
             price: 0,
-            basketItem: null
+            basketItem: null,
+            countAdditionalBasketItems: 0
         };
     },
 
@@ -32,23 +33,24 @@ Vue.component("add-item-to-basket-overlay", {
     {
         if (App.config.basket.addItemToBasketConfirm === "overlay")
         {
-            ApiService.listen("AfterBasketItemAdd", data =>
-            {
-                this.showItem(data.basketItem);
-            });
-
             ApiService.listen("AfterBasketItemUpdate", data =>
             {
+                const updatedBasketItem = data.basketItems[0];
+
                 if (!this.isBasketItemQuantityUpdate)
                 {
-                    const basketItem = this.basketItems.find(item => item.id === data.basketItem.id) || {};
+                    const basketItem = this.basketItems.find(item => item.id === updatedBasketItem.id) || {};
 
-                    basketItem.quantity = data.basketItem.quantity;
-                    basketItem.price = data.basketItem.price;
-                    basketItem.price = data.basketItem.price;
-                    basketItem.basketItemOrderParams = data.basketItem.basketItemOrderParams;
+                    basketItem.quantity = updatedBasketItem.quantity;
+                    basketItem.price = updatedBasketItem.price;
+                    basketItem.basketItemOrderParams = updatedBasketItem.basketItemOrderParams;
                     this.showItem(basketItem);
                 }
+            });
+
+            ApiService.listen("AfterBasketItemAdd", data =>
+            {
+                this.showItem(data.basketItems[0], data.basketItems.length - 1);
             });
         }
     },
@@ -106,7 +108,7 @@ Vue.component("add-item-to-basket-overlay", {
 
     methods:
     {
-        showItem(basketItem)
+        showItem(basketItem, countAdditionalBasketItems)
         {
             this.basketItem = basketItem;
 
@@ -116,12 +118,38 @@ Vue.component("add-item-to-basket-overlay", {
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
 
                 this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
+                this.countAdditionalBasketItems = countAdditionalBasketItems;
             }
 
             ModalService
                 .findModal(document.getElementById("add-item-to-basket-overlay"))
                 .setTimeout(this.defaultTimeToClose * 1000)
                 .show();
+        },
+
+        orderParamName(propertyId)
+        {
+            if (isNullOrUndefined(this.basketItem.basketItemOrderParams))
+            {
+                return "";
+            }
+
+            const property = this.variation.properties.find(property =>
+            {
+                return parseInt(property.property.id) === parseInt(propertyId);
+            });
+
+            if (isNullOrUndefined(property) || !property.property.isOderProperty)
+            {
+                return "";
+            }
+
+            const orderParam = this.basketItem.basketItemOrderParams.find(param =>
+            {
+                return parseInt(param.propertyId) === parseInt(propertyId);
+            });
+
+            return orderParam.name;
         },
 
         orderParamValue(propertyId)
@@ -143,14 +171,14 @@ Vue.component("add-item-to-basket-overlay", {
 
             const orderParam = this.basketItem.basketItemOrderParams.find(param =>
             {
-                return parseInt(param.property.id) === parseInt(propertyId);
+                return parseInt(param.propertyId) === parseInt(propertyId);
             });
 
-            const orderParamValue = orderParam.property.value;
+            const orderParamValue = orderParam.value;
 
             if (property.property.valueType === "selection" && orderParamValue)
             {
-                return orderParam.property.selectionValues[orderParamValue].name;
+                return property.property.selectionValues[orderParamValue].name;
             }
 
             return orderParamValue;

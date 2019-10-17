@@ -29,7 +29,7 @@
                 </div>
                 <div :class="{'col-5 col-sm-8 text-sm-right': !modalElement}">
                     {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
-                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSize]">
+                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
                         <i class="fa fa-user" v-waiting-animation="isDisabled"></i>
                         {{ trans("Ceres::Template.login") }}
                     </button>
