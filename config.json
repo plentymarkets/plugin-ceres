@@ -360,7 +360,7 @@
                     "required": false,
                     "label": "Config.headerMenuLevelsLabel",
                     "options": {
-                        "defaultValue": 6,
+                        "defaultValue": 4,
                         "selectBoxValues": [
                             {
                                 "value": 1,
