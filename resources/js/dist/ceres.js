@@ -53767,6 +53767,10 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("add-to-basket", {
     isWishList: {
       type: String,
       default: "false"
+    },
+    propQuantity: {
+      type: Number,
+      default: null
     }
   },
   computed: _objectSpread({
@@ -53912,6 +53916,11 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("add-to-basket", {
     },
     variationOrderQuantity: function variationOrderQuantity(value) {
       if (this.quantity !== value) {
+        this.quantity = value;
+      }
+    },
+    propQuantity: function propQuantity(value) {
+      if (!isNaN(value)) {
         this.quantity = value;
       }
     }
