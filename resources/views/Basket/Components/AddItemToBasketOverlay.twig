@@ -28,6 +28,8 @@
                             <div class="col-md-8">
                                 <p>
                                     <strong>${ itemName }</strong>
+                                    <br>
+                                    <span v-if="this.countAdditionalBasketItems > 0">{{ trans("Ceres::Template.basketItemOverlayAdditionalCount", {"count": "${this.countAdditionalBasketItems}"}) }}</span>
                                 </p>
 
                                 <p class="small">
@@ -40,7 +42,7 @@
                                 {# <p>
                                     <item-bundle v-if="isLastBasketEntrySet" :bundle-type="variation.variation.bundleType" :bundle-components="variation.bundleComponents"></item-bundle>
                                 </p> #}
-                                
+
                                 <p class="small" v-for="attribute in variation.attributes">
                                     <strong>${ attribute.attribute.names.name }</strong>:
                                     <span>${ attribute.value.names.name }</span>
@@ -48,7 +50,7 @@
 
                                 <p class="small" v-for="property in variation.properties">
                                     <template v-if="orderParamValue(property.property.id)">
-                                        <strong>${ property.property.names.name } (+ ${ variation.properties | propertySurcharge(property.property.id) | currency })</strong>
+                                        <strong>${ orderParamName(property.property.id)} (+ ${ variation.properties | propertySurcharge(property.property.id) | currency })</strong>
                                         <span v-if="property.property.valueType === 'file'">
                                             <a :href="orderParamValue(property.property.id) | fileUploadPath" target="_blank">
                                                 <i class="fa fa-external-link" aria-hidden="true"></i>

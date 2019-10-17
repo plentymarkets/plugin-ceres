@@ -33,18 +33,21 @@ const mutations =
             state.items = basketItems;
         },
 
-        addBasketItem(state, basketItem)
+        addBasketItem(state, basketItems)
         {
-            const basketItemIndex = state.items.findIndex(item => basketItem.id === item.id);
+            for (let i = 0; i < basketItems.length; i++)
+            {
+                const basketItem = basketItems[i];
+                const basketItemIndex = state.items.findIndex(item => basketItem.id === item.id);
 
-            if (basketItemIndex !== -1)
-            {
-                state.items.splice(basketItemIndex, 1);
-                state.items.splice(basketItemIndex, 0, basketItem);
-            }
-            else
-            {
-                state.items.push(basketItem);
+                if (basketItemIndex !== -1)
+                {
+                    state.items.splice(basketItemIndex, 1, basketItem);
+                }
+                else
+                {
+                    state.items.push(basketItem);
+                }
             }
         },
 
@@ -148,12 +151,12 @@ const actions =
 
             ApiService.listen("AfterBasketItemAdd", data =>
             {
-                commit("addBasketItem", data.basketItem);
+                commit("addBasketItem", data.basketItems);
             });
 
             ApiService.listen("AfterBasketItemUpdate", data =>
             {
-                commit("updateBasketItem", data.basketItem);
+                commit("updateBasketItem", data.basketItems);
             });
 
             ApiService.after(() =>

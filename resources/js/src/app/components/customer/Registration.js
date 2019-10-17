@@ -4,6 +4,7 @@ import { navigateTo } from "../../services/UrlService";
 import Vue from "vue";
 import { executeReCaptcha } from "../../helper/executeReCaptcha";
 import { isNullOrUndefined } from "../../helper/utils";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
 const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
@@ -13,6 +14,8 @@ Vue.component("registration", {
 
     delimiters: ["${", "}"],
 
+    mixins: [ButtonSizePropertyMixin],
+
     props: {
         modalElement: String,
         guestMode: { type: Boolean, default: false },
@@ -20,8 +23,7 @@ Vue.component("registration", {
         template: String,
         backlink: String,
         shownFields: Object,
-        requiredFields: Object,
-        buttonSize: String
+        requiredFields: Object
     },
 
     data()

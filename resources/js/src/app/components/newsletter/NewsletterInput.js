@@ -1,11 +1,15 @@
 import TranslationService from "../../services/TranslationService";
 import ValidationService from "../../services/ValidationService";
 import Vue from "vue";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
 const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
 Vue.component("newsletter-input", {
+
+    mixins: [ButtonSizePropertyMixin],
+
     props: {
         template:
         {
@@ -26,11 +30,6 @@ Vue.component("newsletter-input", {
         {
             type: Number,
             default: 0
-        },
-        buttonSize:
-        {
-            type: String,
-            default: null
         }
     },
 
