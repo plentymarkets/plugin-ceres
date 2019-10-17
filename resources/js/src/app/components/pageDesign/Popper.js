@@ -21,6 +21,14 @@ Vue.component("popper", {
         trigger: {
             type: String,
             default: "click"
+        },
+        bodyClass: {
+            type: String,
+            default: ""
+        },
+        bodyStyle: {
+            type: String,
+            default: ""
         }
     },
 
@@ -42,7 +50,8 @@ Vue.component("popper", {
                             element: this.$refs.arrow
                         }
                     },
-                    removeOnDestroy: true
+                    removeOnDestroy: true,
+                    positionFixed: true
                 });
 
                 const handle = this.$refs.handle.firstElementChild || this.$refs.handle;

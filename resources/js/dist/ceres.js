@@ -65467,6 +65467,14 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
     trigger: {
       type: String,
       default: "click"
+    },
+    bodyClass: {
+      type: String,
+      default: ""
+    },
+    bodyStyle: {
+      type: String,
+      default: ""
     }
   },
   mounted: function mounted() {
@@ -65484,7 +65492,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
               element: _this.$refs.arrow
             }
           },
-          removeOnDestroy: true
+          removeOnDestroy: true,
+          positionFixed: true
         });
         var handle = _this.$refs.handle.firstElementChild || _this.$refs.handle;
 

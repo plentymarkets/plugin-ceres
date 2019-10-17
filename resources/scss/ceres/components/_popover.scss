@@ -5,3 +5,8 @@
         border-bottom-color: $popover-header-bg;
     }
 }
+
+.popover .popover-body > [data-builder-child-container]
+{
+    min-width: 200px;
+}

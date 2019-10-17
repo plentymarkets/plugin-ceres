@@ -25,7 +25,9 @@
             "type": "select",
             "defaultValue": "auto",
             "options": {
-                "selectBoxValues": [
+                "name": "Widget.popperPlacementLabel",
+                "tooltipText": "Widget.popperPlacementTooltip",
+                "listBoxValues": [
                     {
                         "value": "auto",
                         "caption": "Widget.popperPlacementAuto",
@@ -55,6 +57,31 @@
             }
         },
         "icon": "@include(icon)",
-        "spacing":"@include(spacing)"
+        "buttonSize": {
+            "type": "select",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacingPadding)"
     }
 }

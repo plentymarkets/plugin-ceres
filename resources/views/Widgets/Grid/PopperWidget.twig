@@ -3,27 +3,36 @@
 
 {% set customClass      = widget.settings.customClass.mobile %}
 {% set spacingSettings  = widget.settings.spacing %}
-{% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set inlinePadding    = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set paddingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set appearance       = widget.settings.appearance.mobile | default("primary") %}
 {% set placement        = widget.settings.placement.mobile | default("auto") %}
-{% set icon             = widget.settings.icon.mobile | default("auto") %}
+{% set icon             = widget.settings.icon.mobile %}
+{% set title            = widget.settings.title.mobile %}
+{% set buttonSize       = widget.settings.buttonSize.mobile | default("") %}
 
-<div class="widget widget-popper{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
-    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <popper v-cloak placement="{{ placement }}">
-        <template #handle>
-            <button class="btn btn-icon btn-{{ appearance }} btn-sm" {{ WidgetHelper.makeClickable(isPreview) }}>
-                <i class="fa fa-{{ icon }}"></i>
-            </button>
-        </template>
-        {% if title | length > 0 %}
-            <template #title>
-                {{ title }}
+<div class="widget widget-popper{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
+    {% if children.popper | length > 0 or isPreview %}
+    <div class="d-inline">
+        <popper v-cloak placement="{{ placement }}"{% if paddingClasses | length > 0 %} body-class="{{ paddingClasses }}"{% endif %}{% if inlinePadding | length > 0 %} body-style="{{ inlinePadding }}"{% endif %}>
+            <template #handle>
+                <button class="btn btn-icon btn-{{ appearance }} {{ buttonSize }}" {{ WidgetHelper.makeClickable(isPreview) }}>
+                    <i class="fa {{ icon }}"></i>
+                </button>
             </template>
-        {% endif %}
-        <template #content>
-            <div data-builder-child-container="popper">{{ children.popper | raw }}</div>
-        </template>
-    </popper>
+            {% if title | length > 0 %}
+                <template #title>
+                    {{ title }}
+                </template>
+            {% endif %}
+            <template #content>
+                <div{% if isPreview %} data-builder-child-container="popper"{% endif %}>{{ children.popper | raw }}</div>
+            </template>
+        </popper>
+    </div>
+    {% else %}
+        <button class="btn btn-icon btn-{{ appearance }} {{ buttonSize }}" {{ WidgetHelper.makeClickable(isPreview) }}>
+            <i class="fa {{ icon }}"></i>
+        </button>
+    {% endif %}
 </div>

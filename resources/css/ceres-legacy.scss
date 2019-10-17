@@ -11196,6 +11196,11 @@ a:active {
     }
 }
 
+
+.fa.none {
+    @extend .fa-circle;
+    color: transparent !important;
+}
 html {
 	font-size: $font-size-root;
 }
@@ -11574,22 +11579,20 @@ button:focus {
 
 .btn-icon
 {
-	padding: .5rem;
-	
+	padding: .6rem;
 	.fa
 	{
-		width: 14px;
 		text-align: center;
 	}
-	
+
 	&.btn-sm
 	{
-		padding: .2rem;
-		
-		.fa
-		{
-			width: 12px;
-		}
+		padding: .4rem;
+	}
+
+	&.btn-lg
+	{
+		padding: .95rem;
 	}
 
 	&.btn-circle
@@ -13064,6 +13067,11 @@ html.ie {
     {
         border-bottom-color: $popover-header-bg;
     }
+}
+
+.popover .popover-body > [data-builder-child-container]
+{
+    min-width: 200px;
 }
 .tooltip {
     pointer-events: none;

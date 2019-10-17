@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-popper">
 	<div>
-		<div class="popper-handle" ref="handle">
+		<div class="popper-handle d-inline-block" ref="handle">
 			<slot name="handle">
 				{# Element to trigger popper #}
 
@@ -18,7 +18,7 @@
 					{# Title to display in the popper #}
 				</slot>
 			</h3>
-			<div class="popover-body">
+			<div class="popover-body" :class="bodyClass" :style="bodyStyle">
 				<slot name="content">
 					{# Content to display in the popper #}
 				</slot>
