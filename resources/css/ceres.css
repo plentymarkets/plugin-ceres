@@ -12023,6 +12023,9 @@ a:active {
   text-decoration: underline;
   font-weight: inherit; }
 
+.cursor-pointer {
+  cursor: pointer; }
+
 .bg-primary {
   background-color: #008ebd !important; }
 
