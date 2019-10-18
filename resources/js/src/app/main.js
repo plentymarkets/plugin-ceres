@@ -320,11 +320,20 @@ if ( headerParent )
         }
     }
 
+    function detectScrollbar()
+    {
+        if (!App.isShopBuilder)
+        {
+            window.innerWidth !== document.body.clientWidth ? document.documentElement.classList.add("scrollbar") : document.documentElement.classList.remove("scrollbar");
+        }
+    }
+
     window.addEventListener("resize", debounce(function()
     {
         calculateBodyOffset();
         getHeaderChildrenHeights();
         scrollHeaderElements();
+        detectScrollbar();
     }, 50));
 
     window.addEventListener("scroll", debounce(function()
@@ -369,6 +378,7 @@ if ( headerParent )
         getHeaderChildrenHeights();
         scrollHeaderElements();
         calculateBodyOffset();
+        detectScrollbar();
     });
 
     calculateBodyOffset();

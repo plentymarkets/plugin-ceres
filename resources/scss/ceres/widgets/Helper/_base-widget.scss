@@ -51,42 +51,59 @@
     }
 }
 
-#page-header-parent > .widget {
-    max-width: 1200px;
-    min-width: 100%;
-    background-color: $gray-lightest;
-    left: 15px;
-    right: 15px;
-    
-    &:not(.widget-grid) {
-        max-width: 1170px;
-        min-width: inherit;
+#page-header-parent {
+
+    > .widget {
+        max-width: 1200px;
+        min-width: 100%;
+        background-color: $gray-lightest;
+        left: 15px;
+        right: 15px;
+
+        &:not(.widget-grid) {
+            max-width: 1170px;
+            min-width: inherit;
+        }
+    }
+}
+
+
+html.scrollbar .widget-fw {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+#page-header-parent > .widget-fw,
+#page-body > .container-max > .row > .col > .widget-fw,
+.footer > .row > .col > .widget-fw {
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2) !important;
+    right: 0 !important;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none !important;
+
+    @include media-breakpoint-down(md)
+    {
+        // &.widget-grid {
+        //     margin-left: -15px;
+        //     margin-right: -15px;
+        // }
+        // &.widget:not(.widget-grid) {
+        //     margin: 0;
+        // }
+    }
+
+    &.widget-grid {
+        width: calc(100vw + 30px) !important;
+        margin-left: -15px;
     }
 }
 
 header .widget
 {
     margin-bottom: 0;
-}
-
-.widget-fw
-{
-    position: relative;
-    width: 100vw;
-    left: calc(-1 * (100vw - 100%) / 2) !important;
-    right: 0 !important;
-    margin: 0;
-    max-width: none !important;
-
-    @include media-breakpoint-down(md)
-    {
-        &.widget-grid {
-            margin: 0 -15px;
-        }
-        &.widget:not(.widget-grid) {
-            margin: 0;
-        }
-    }
 }
 
 .widget-proportional
@@ -157,27 +174,11 @@ header .widget
     }
 }
 
-@include media-breakpoint-down(md)
-{
-    html.firefox {
-        .widget-fw.widget-grid {
-            left: 0 !important;
-            margin-left: 0;
-        }
-    }
-}
-
 @include media-breakpoint-up(lg)
 {
     .widget-grid .widget-inner.col-lg-12.widget-stacked
     {
         padding-bottom: 2rem;
-    }
-
-    html.firefox {
-        .widget-fw.widget-grid {
-            padding: 0 7.5px;
-        }
     }
 }
 
