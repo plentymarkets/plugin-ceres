@@ -8,7 +8,7 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
-{% set buttonSize = widget.settings.buttonSize.mobile |  %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
 
 {{ Twig.set("backlink", "request.get('backlink')") }}
 
