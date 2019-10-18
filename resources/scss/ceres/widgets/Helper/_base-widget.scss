@@ -84,17 +84,6 @@ html.scrollbar .widget-fw {
     margin-right: 0;
     max-width: none !important;
 
-    @include media-breakpoint-down(md)
-    {
-        // &.widget-grid {
-        //     margin-left: -15px;
-        //     margin-right: -15px;
-        // }
-        // &.widget:not(.widget-grid) {
-        //     margin: 0;
-        // }
-    }
-
     &.widget-grid {
         width: calc(100vw + 30px) !important;
         margin-left: -15px;
