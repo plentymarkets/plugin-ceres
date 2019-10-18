@@ -1,0 +1,13 @@
+{
+    "identifier": "Ceres::ToolbarWidget",
+    "label": "Widget.toolbarLabel",
+    "previewImageURL": "/images/widgets/toolbar.svg",
+    "type": "categoryitem",
+    "categories": ["item"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Category\\ToolbarWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "spacing":"@include(spacing)"
+    }
+}
