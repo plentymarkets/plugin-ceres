@@ -11,7 +11,7 @@
 {% set title            = widget.settings.title.mobile %}
 {% set buttonSize       = widget.settings.buttonSize.mobile | default("") %}
 
-<div class="widget widget-popper{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
+<div class="widget widget-additional-information{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     {% if children.popper | length > 0 or isPreview %}
     <div class="d-inline">
         <popper v-cloak placement="{{ placement }}"{% if paddingClasses | length > 0 %} body-class="{{ paddingClasses }}"{% endif %}{% if inlinePadding | length > 0 %} body-style="{{ inlinePadding }}"{% endif %}>

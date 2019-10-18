@@ -1,11 +1,11 @@
 {
-    "identifier": "Ceres::PopperWidget",
-    "label": "Widget.popperLabel",
-    "previewImageURL": "/images/widgets/popper.svg",
+    "identifier": "Ceres::AdditionalInformationWidget",
+    "label": "Widget.additionalInformationLabel",
+    "previewImageURL": "/images/widgets/additional-information.svg",
     "type": "structure",
     "categories": ["structure"],
     "position": 600,
-    "widgetClass": "Ceres\\Widgets\\Grid\\PopperWidget",
+    "widgetClass": "Ceres\\Widgets\\Grid\\AdditionalInformationWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {
@@ -18,39 +18,39 @@
             "type": "text",
             "defaultValue": "",
             "options": {
-                "name": "Widget.popperTitleLabel"
+                "name": "Widget.additionalInformationTitleLabel"
             }
         },
         "placement": {
             "type": "select",
             "defaultValue": "auto",
             "options": {
-                "name": "Widget.popperPlacementLabel",
-                "tooltipText": "Widget.popperPlacementTooltip",
+                "name": "Widget.additionalInformationPlacementLabel",
+                "tooltipText": "Widget.additionalInformationPlacementTooltip",
                 "listBoxValues": [
                     {
                         "value": "auto",
-                        "caption": "Widget.popperPlacementAuto",
+                        "caption": "Widget.additionalInformationPlacementAuto",
                         "position": 0
                     },
                     {
                         "value": "top",
-                        "caption": "Widget.popperPlacementTop",
+                        "caption": "Widget.additionalInformationPlacementTop",
                         "position": 1
                     },
                     {
                         "value": "bottom",
-                        "caption": "Widget.popperPlacementBottom",
+                        "caption": "Widget.additionalInformationPlacementBottom",
                         "position": 2
                     },
                     {
                         "value": "left",
-                        "caption": "Widget.popperPlacementLeft",
+                        "caption": "Widget.additionalInformationPlacementLeft",
                         "position": 3
                     },
                     {
                         "value": "right",
-                        "caption": "Widget.popperPlacementRight",
+                        "caption": "Widget.additionalInformationPlacementRight",
                         "position": 4
                     }
                 ]
