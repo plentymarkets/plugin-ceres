@@ -25,6 +25,7 @@ use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
+use Plenty\Modules\Webshop\Consent\Contracts\ConsentRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardContainerContract;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
@@ -79,13 +80,24 @@ class TemplateServiceProvider extends ServiceProvider
         $this->getApplication()->singleton( CeresConfig::class );
         $this->getApplication()->singleton( DefaultSettingsService::class );
     }
-    
+
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {
         //register shopCeres assistant
         /** @var WizardContainerContract $wizardContainer */
         $wizardContainer = pluginApp(WizardContainerContract::class);
         $wizardContainer->register('shopCeres-assistant', ShopWizard::class);
+
+        /** @var ConsentRepositoryContract $consentRepository */
+        $consentRepository = pluginApp(ConsentRepositoryContract::class);
+        $consentRepository->registerConsentGroup('necessary', 'Ceres::Template.consentGroupNecessaryLabel', ['necessary' => true]);
+        $consentRepository->registerConsent('system', 'Ceres::Template.consentSystem', ['necessary' => true, 'group' => 'necessary']);
+
+        $consentRepository->registerConsentGroup('media', 'Ceres::Template.consentGroupMediaLabel', ['description' => 'Ceres::consentGroupMediaDescription']);
+        $consentRepository->registerConsent('youtube', 'Ceres::Template.consentYoutube', ['group' => 'media']);
+        $consentRepository->registerConsent('vimeo', 'Ceres::Template.consentVimeo', ['group' => 'media']);
+
+        $consentRepository->registerConsent('google', 'Ceres::Template.consentGoogle');
 
         // Register Twig String Loader to use function: template_from_string
         $twig->addExtension('Twig_Extension_StringLoader');
