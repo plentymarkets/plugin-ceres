@@ -202,7 +202,7 @@ class TemplateServiceProvider extends ServiceProvider
         );
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
-        $webstoreRepository = app(WebstoreConfigurationRepositoryContract::class);
+        $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
         $webstoreConfig     = $webstoreRepository->findByPlentyId($this->getApplication()->getPlentyId());
 
         $consentRepository->registerConsent(
