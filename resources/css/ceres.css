@@ -13631,6 +13631,13 @@ html.ie #thumb-carousel .owl-stage {
 .popover[x-placement="bottom"] .arrow::after {
   border-bottom-color: #f7f7f7; }
 
+.cookie-bar .privacy-settings {
+  max-height: 50vh; }
+
+.cookie-bar.out {
+  left: 15px;
+  right: auto; }
+
 .tooltip {
   pointer-events: none; }
 

@@ -216,6 +216,7 @@
 {{ Translations.add( "Ceres", "Template" ) }}
 
 {{ get_json_data() }}
+{{ get_consent_scripts() }}
 
 {% if ceresConfig.log.performanceLevel  == 'development' %}
     <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.js?v={{ buildHash }}"></script>
@@ -231,7 +232,7 @@
     {% include "Ceres::Widgets.ShopBuilderDataStore" %}
 {% endif %}
 
-{{ get_consent_scripts() }}
+
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
 <script>

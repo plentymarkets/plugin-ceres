@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { mapMutations } from "vuex";
 
 Vue.component("cookie-bar", {
 
@@ -11,72 +12,53 @@ Vue.component("cookie-bar", {
         }
     },
 
-    mounted()
-    {
-        if (window.PlentyConsent)
-        {
-            this.consents = window.PlentyConsent.getConsents();
-            this.hasResponse = window.PlentyConsent.hasResponse();
-        }
-    },
-
     data()
     {
         return {
-            isExpanded: false,
-            hasResponse: false,
-            consents: {}
+            isCollapsed: true,
+            isExpanded: false
         };
+    },
+
+    created()
+    {
+        // this.isCollapsed = this.hasResponse();
+    },
+
+    computed:
+    {
+        isVisible()
+        {
+            if (!this.$store.state.consents.hasResponse)
+            {
+                return true;
+            }
+
+            return !this.isCollapsed;
+        }
     },
 
     methods:
     {
+        ...mapMutations([
+            "storeConsents",
+            "acceptAll"
+        ]),
+
+        close()
+        {
+            this.isCollapsed = true;
+            this.isExpanded = false;
+        },
+
         isConsented(groupKey)
         {
-            return Object.keys(this.consents[groupKey] || {}).some((consentKey) =>
-            {
-                return (this.consents[groupKey] || {})[consentKey];
-            });
+            return this.$store.getters.isConsented(groupKey + ".*");
         },
 
         toggleConsent(groupKey)
         {
-            const value = !this.isConsented(groupKey);
-
-            for (let consentKey in this.consents[groupKey] )
-            {
-                this.consents[groupKey][consentKey] = value;
-            }
-        },
-
-        updateConsents(consents)
-        {
-            this.consents = consents;
-            this.isExpanded = false;
-            this.hasResponse = true;
-        },
-
-        updateSettings()
-        {
-            if (window.PlentyConsent)
-            {
-                window.PlentyConsent.setResponse(this.consents);
-            }
-            this.hasResponse = true;
-        },
-
-        acceptAll()
-        {
-            Object.keys((this.consents || {})).forEach((groupKey) =>
-            {
-                Object.keys(this.consents[groupKey]).forEach((consentKey) =>
-                {
-                    this.consents[groupKey] = this.consents[groupKey] || {};
-                    this.consents[groupKey][consentKey] = true;
-                });
-            });
-
-            this.updateSettings();
+            this.$store.commit("toggleConsent", groupKey + ".*");
         }
     }
 });

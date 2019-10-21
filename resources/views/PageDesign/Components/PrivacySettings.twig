@@ -36,7 +36,7 @@
                                  {% if not necessary %} :class="{'border-primary': isConsented('{{ consentGroup.key }}.{{ consent.key }}')}"{% endif %}>
 
                                 <div class="card-body" @click="toggleConsent('{{ consentGroup.key }}.{{ consent.key }}')">
-                                    <p class="d-flex mb-0">
+                                    <p class="d-flex mb-0 font-weight-bold">
                                         <span class="flex-fill">{{ consent.label }}</span>
                                         {% if not consentGroup.necessary and not consent.necessary %}
                                             <span class="custom-control custom-switch">
@@ -44,12 +44,11 @@
                                                        class="custom-control-input"
                                                        :id="_uid + 'entry-{{ consent.key }}'"
                                                        @change="toggleConsent('{{ consentGroup.key }}.{{ consent.key }}')"
-                                                       :checked="isConsented('{{ consentGroup.key }}.{{ consent.key }}')">
+                                                       :checked="isConsented('{{ consentGroup.key }}.{{ consent.key }}', {{ consent.isOptOut | json_encode }})">
                                                 <label class="custom-control-label" :for="_uid + 'entry-{{ consent.key }}'"></label>
                                             </span>
                                         {% endif %}
                                     </p>
-                                    {% if consent.description | length > 0 %}<p class="card-text">{{ consentGroup.description }}</p>{% endif %}
                                 </div>
                                 {% if consent.provider | length > 0 or consent.description.length > 0 or consent.policyUrl | length > 0 or consent.lifespan | length > 0 %}
                                     <table class="table table-sm table-striped mb-0">
@@ -70,7 +69,7 @@
                                                 <tr>
                                                     <td class="pl-3">{{ trans("Ceres::Template.privacySettingsPolicyUrl") }}</td>
                                                     <td class="pr-3">
-                                                        <a href="{{ consent.policyUrl }}" target="_blank">{{ consent.policyUrl }}</a>
+                                                        <a class="text-primary text-appearance" href="{{ consent.policyUrl }}" target="_blank">{{ consent.policyUrl }}</a>
                                                     </td>
                                                 </tr>
                                             {% endif %}
@@ -93,11 +92,6 @@
                 </div>
             </div>
         {% endfor %}
-        </div>
-
-        <div class="privacy-settings-footer pt-3">
-            <button class="btn btn-primary btn-apperance" @click="acceptAll()">{{ trans("Ceres::Template.privacySettingsAcceptAll") }}</button>
-            <button class="btn btn-default" @click="updateSettings()">{{ trans("Ceres::Template.privacySettingsSave") }}</button>
         </div>
     </div>
 </script>
