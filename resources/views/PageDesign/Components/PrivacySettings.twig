@@ -1,8 +1,8 @@
 <script type="x/template" id="vue-privacy-settings">
     <div class="privacy-settings d-flex flex-column">
         <div class="privacy-settings-body overflow-auto">
-        {% for consentGroup in get_consent_groups() if consentGroup.consents | length > 0 %}
-            <div class="card consent-group mb-3">
+        {% for consentGroup in get_consent_groups() %}
+            <div class="card consent-group{% if not loop.last %} mb-3{% endif %}">
                 <div class="card-body mb-0" @click="toggleConsent('{{ consentGroup.key }}.*')">
                     <p class="card-title h4 d-flex">
                         <span class="flex-fill">
@@ -51,7 +51,7 @@
                                     </p>
                                 </div>
                                 {% if consent.provider | length > 0 or consent.description.length > 0 or consent.policyUrl | length > 0 or consent.lifespan | length > 0 %}
-                                    <table class="table table-sm table-striped mb-0">
+                                    <table class="table table-responsive-md table-sm table-striped mb-0">
                                         <tbody>
                                             {% if consent.provider | length > 0 %}
                                                 <tr>
