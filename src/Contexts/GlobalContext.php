@@ -106,7 +106,13 @@ class GlobalContext implements ContextInterface
             $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
         }
 
-        $this->categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6, $customerService->getContactClassId());
+        $this->categories = $categoryService->getNavigationTree(
+            $this->ceresConfig->header->showCategoryTypes,
+            $this->lang,
+            $this->ceresConfig->header->menuLevels,
+            $customerService->getContactClassId()
+        );
+
         $this->notifications = $notificationService->getNotifications();
 
         $this->basket = $basketService->getBasketForTemplate();
