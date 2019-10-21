@@ -33,6 +33,12 @@ class OnlineStoreMapping
             "global"   => false,
             "optional" => false,
         ],
+        "onlineStore_categoryTreeDepth" => [
+            "field"    => "header.menu_levels",
+            "type"     => "integer",
+            "global"   => false,
+            "optional" => false,
+        ],
         "onlineStore_toTopButton" => [
             "field"    => "footer.to_top_button",
             "type"     => "string",
