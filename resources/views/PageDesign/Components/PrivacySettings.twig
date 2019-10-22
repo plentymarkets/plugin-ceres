@@ -3,7 +3,7 @@
         <div class="privacy-settings-body overflow-auto">
         {% for consentGroup in get_consent_groups() %}
             <div class="card consent-group{% if not loop.last %} mb-3{% endif %}">
-                <div class="card-body mb-0" @click="toggleConsent('{{ consentGroup.key }}.*')">
+                <div class="card-body mb-0" @click.stop="toggleConsent('{{ consentGroup.key }}.*')">
                     <p class="card-title h4 d-flex">
                         <span class="flex-fill">
                             {% if consentGroup.label | length > 0 %}
@@ -17,10 +17,8 @@
                             <span class="custom-control custom-switch">
                                 <input type="checkbox"
                                        class="custom-control-input"
-                                       :id="_uid + 'group-{{ consentGroup.key }}'"
-                                       @change="toggleConsent('{{ consentGroup.key }}.*')"
                                        :checked="isConsented('{{ consentGroup.key }}.*')">
-                                <label class="custom-control-label" :for="_uid + 'group-{{ consentGroup.key }}'"></label>
+                                <label class="custom-control-label"></label>
                             </span>
                         {% else %}
                             <span class="badge badge-primary">{{ trans("Ceres::Template.privacySettingsNecessary") }}</span>
@@ -35,17 +33,15 @@
                             <div class="card consent bg-light mb-3{% if necessary %} border-primary{% endif %}"
                                  {% if not necessary %} :class="{'border-primary': isConsented('{{ consentGroup.key }}.{{ consent.key }}')}"{% endif %}>
 
-                                <div class="card-body" @click="toggleConsent('{{ consentGroup.key }}.{{ consent.key }}')">
+                                <div class="card-body" @click.stop="toggleConsent('{{ consentGroup.key }}.{{ consent.key }}')">
                                     <p class="d-flex mb-0 font-weight-bold">
                                         <span class="flex-fill">{{ consent.label }}</span>
                                         {% if not consentGroup.necessary and not consent.necessary %}
                                             <span class="custom-control custom-switch">
                                                 <input type="checkbox"
                                                        class="custom-control-input"
-                                                       :id="_uid + 'entry-{{ consent.key }}'"
-                                                       @change="toggleConsent('{{ consentGroup.key }}.{{ consent.key }}')"
-                                                       :checked="isConsented('{{ consentGroup.key }}.{{ consent.key }}', {{ consent.isOptOut | json_encode }})">
-                                                <label class="custom-control-label" :for="_uid + 'entry-{{ consent.key }}'"></label>
+                                                       :checked="isConsented('{{ consentGroup.key }}.{{ consent.key }}')">
+                                                <label class="custom-control-label"></label>
                                             </span>
                                         {% endif %}
                                     </p>

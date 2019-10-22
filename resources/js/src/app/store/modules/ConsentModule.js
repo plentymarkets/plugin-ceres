@@ -1,3 +1,22 @@
+function _setConsent(state, { key, value })
+{
+    const groupKey = key.split(".")[0];
+    const consentKey = key.split(".")[1];
+
+    state.consents[groupKey] = state.consents[groupKey] || {};
+    if (consentKey === "*")
+    {
+        Object.keys(state.consents[groupKey]).forEach((cKey) =>
+        {
+            state.consents[groupKey][cKey] = value;
+        });
+    }
+    else
+    {
+        state.consents[groupKey][consentKey] = value;
+    }
+}
+
 const state =
     {
         consents: {},
@@ -8,22 +27,11 @@ const mutations =
     {
         toggleConsent(state, key)
         {
-            const groupKey = key.split(".")[0];
-            const consentKey = key.split(".")[1];
-            const value = !this.getters.isConsented(key);
-
-            state.consents[groupKey] = state.consents[groupKey] || {};
-            if (consentKey === "*")
-            {
-                Object.keys(state.consents[groupKey]).forEach((cKey) =>
-                {
-                    state.consents[groupKey][cKey] = value;
-                });
-            }
-            else
-            {
-                state.consents[groupKey][consentKey] = value;
-            }
+            _setConsent(state, { key: key, value: !this.getters.isConsented(key) });
+        },
+        setConsent(state, key, value)
+        {
+            _setConsent(state, { key, value });
         },
         acceptAll(state)
         {
@@ -35,6 +43,12 @@ const mutations =
                     state.consents[groupKey][consentKey] = true;
                 });
             });
+
+            if (window.PlentyConsent)
+            {
+                window.PlentyConsent.setResponse(state.consents);
+                state.hasResponse = true;
+            }
         },
         initConsents(state)
         {
@@ -60,7 +74,7 @@ const actions =
 
 const getters =
     {
-        isConsented: state => (key, defaultValue) =>
+        isConsented: state => (key) =>
         {
             const groupKey = key.split(".")[0];
             const consentKey = key.split(".")[1];
