@@ -354,70 +354,6 @@
         }
     },
     {
-        "identifier": "Ceres::ToolbarWidget",
-        "label": "Widget.toolbarLabel",
-        "previewImageURL": "/images/widgets/toolbar.svg",
-        "type": "categoryitem",
-        "categories": [
-            "item"
-        ],
-        "position": 100,
-        "widgetClass": "Ceres\\Widgets\\Category\\ToolbarWidget",
-        "settings": {
-            "customClass": {
-                "type": "text",
-                "required": false,
-                "defaultValue": "",
-                "options": {
-                    "name": "Widget.customClass",
-                    "tooltipText": "Widget.customClassTooltip"
-                }
-            },
-            "spacing": {
-                "type": "vertical",
-                "options": {
-                    "name": "Widget.widgetSpacing"
-                },
-                "children": {
-                    "customPadding": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomPadding"
-                        }
-                    },
-                    "padding": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customPadding",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    },
-                    "customMargin": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomMargin"
-                        }
-                    },
-                    "margin": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customMargin",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    {
         "identifier": "Ceres::CancelPaymentWidget",
         "label": "Widget.cancelPaymentLabel",
         "previewImageURL": "/images/widgets/cancel-payment.svg",
@@ -2457,6 +2393,11 @@
                             "position": 1
                         },
                         {
+                            "value": "fa-info",
+                            "caption": "Widget.widgetIconInfo",
+                            "position": 1
+                        },
+                        {
                             "value": "fa-circle",
                             "caption": "Widget.widgetIconCircle",
                             "position": 1
@@ -2723,6 +2664,11 @@
                             "position": 1
                         },
                         {
+                            "value": "fa-info",
+                            "caption": "Widget.widgetIconInfo",
+                            "position": 1
+                        },
+                        {
                             "value": "fa-circle",
                             "caption": "Widget.widgetIconCircle",
                             "position": 1
@@ -2915,6 +2861,11 @@
                         {
                             "value": "fa-check",
                             "caption": "Widget.widgetIconCheck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-info",
+                            "caption": "Widget.widgetIconInfo",
                             "position": 1
                         },
                         {
@@ -5682,6 +5633,31 @@
                     ]
                 }
             },
+            "size": {
+                "type": "select",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.additionalInformationSizeLabel",
+                    "tooltipText": "Widget.additionalInformationSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "",
+                            "caption": "Widget.additionalInformationSizeSmall",
+                            "position": 0
+                        },
+                        {
+                            "value": "popover-md",
+                            "caption": "Widget.additionalInformationSizeMedium",
+                            "position": 1
+                        },
+                        {
+                            "value": "popover-lg",
+                            "caption": "Widget.additionalInformationSizeLarge",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
             "icon": {
                 "type": "select",
                 "required": true,
@@ -5698,6 +5674,11 @@
                         {
                             "value": "fa-check",
                             "caption": "Widget.widgetIconCheck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-info",
+                            "caption": "Widget.widgetIconInfo",
                             "position": 1
                         },
                         {

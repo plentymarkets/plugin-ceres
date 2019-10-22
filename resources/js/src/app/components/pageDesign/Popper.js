@@ -22,6 +22,10 @@ Vue.component("popper", {
             type: String,
             default: "click"
         },
+        popoverClass: {
+            type: String,
+            default: ""
+        },
         bodyClass: {
             type: String,
             default: ""
@@ -40,8 +44,11 @@ Vue.component("popper", {
             {
                 const node = this.$refs.node;
 
-                node.parentElement.removeChild(node);
-                document.body.appendChild(node);
+                if (!App.isShopBuilder)
+                {
+                    node.parentElement.removeChild(node);
+                    document.body.appendChild(node);
+                }
 
                 this.popper = new Popper(this.$refs.handle, node, {
                     placement: this.placement,
@@ -100,6 +107,14 @@ Vue.component("popper", {
             isVisible: false,
             popper: null
         };
+    },
+
+    computed:
+    {
+        classNames()
+        {
+            return this.popoverClass + (!this.isVisible ? " d-none" : "");
+        }
     },
 
     methods:

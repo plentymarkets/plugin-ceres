@@ -65477,6 +65477,10 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
       type: String,
       default: "click"
     },
+    popoverClass: {
+      type: String,
+      default: ""
+    },
     bodyClass: {
       type: String,
       default: ""
@@ -65492,8 +65496,12 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
     this.$nextTick(function () {
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(_this.$refs.node) && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(_this.$refs.handle)) {
         var node = _this.$refs.node;
-        node.parentElement.removeChild(node);
-        document.body.appendChild(node);
+
+        if (!App.isShopBuilder) {
+          node.parentElement.removeChild(node);
+          document.body.appendChild(node);
+        }
+
         _this.popper = new popper_js__WEBPACK_IMPORTED_MODULE_3__["default"](_this.$refs.handle, node, {
           placement: _this.placement,
           modifiers: {
@@ -65536,6 +65544,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
       isVisible: false,
       popper: null
     };
+  },
+  computed: {
+    classNames: function classNames() {
+      return this.popoverClass + (!this.isVisible ? " d-none" : "");
+    }
   },
   methods: {
     togglePopper: function togglePopper() {

@@ -13634,7 +13634,15 @@ html.ie #thumb-carousel .owl-stage {
   border-bottom-color: #f7f7f7; }
 
 .popover .popover-body > [data-builder-child-container] {
-  min-width: 200px; }
+  min-width: 190px; }
+
+.popover.popover-md {
+  width: 414px;
+  max-width: 414px; }
+
+.popover.popover-lg {
+  width: 552px;
+  max-width: 552px; }
 
 .tooltip {
   pointer-events: none; }

@@ -340,6 +340,9 @@ $nav-tabs-border-color:             #ddd !default;
 
 
 // Popovers
+$popover-max-width:                 276px !default;
+$popover-max-width-md:              414px !default;
+$popover-max-width-lg:              552px !default;
 $popover-inner-padding:             1px !default;
 
 // Padding applied to the modal body
@@ -13071,7 +13074,22 @@ html.ie {
 
 .popover .popover-body > [data-builder-child-container]
 {
-    min-width: 200px;
+    min-width: 190px;
+}
+
+.popover
+{
+    &.popover-md
+    {
+        width: $popover-max-width-md;
+        max-width: $popover-max-width-md;
+    }
+
+    &.popover-lg
+    {
+        width: $popover-max-width-lg;
+        max-width: $popover-max-width-lg;
+    }
 }
 .tooltip {
     pointer-events: none;
