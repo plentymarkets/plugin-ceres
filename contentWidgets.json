@@ -485,6 +485,88 @@
         }
     },
     {
+        "identifier": "Ceres::ItemsPerPageWidget",
+        "label": "Widget.ItemsPerPageLabel",
+        "previewImageURL": "/images/widgets/items-per-page.svg",
+        "type": "categoryitem",
+        "categories": [
+            "item"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Category\\ItemsPerPageWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "entries": {
+                "type": "vertical",
+                "isList": "[1,]",
+                "options": {
+                    "name": "Widget.ItemsPerPageEntryLabel"
+                },
+                "children": {
+                    "text": {
+                        "type": "text",
+                        "required": false,
+                        "options": {
+                            "defaultValue": 20,
+                            "name": "Widget.ItemsPerPageEntryNameLabel",
+                            "tooltipText": "Widget.ItemsPerPageEntryNameTooltip"
+                        }
+                    }
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::CancelPaymentWidget",
         "label": "Widget.cancelPaymentLabel",
         "previewImageURL": "/images/widgets/cancel-payment.svg",

@@ -1,9 +1,12 @@
+{% if ceresConfig.pagination.itemsPerPage not in itemsPerPage %}
+    {% set itemsPerPage = itemsPerPage | merge([ceresConfig.pagination.itemsPerPage]) %}
+{% endif %}
 <div class="list-itemsperpage">
-    <select 
+    <select
         class="custom-select"
         @change="$store.dispatch('selectItemsPerPage', $event.target.value)"
         v-populate-store:mutation="{ name: 'setItemsPerPage', data: {{selectedValue}} }">
-        {% for value in itemsPerPage %}
+        {% for value in itemsPerPage | sort %}
             <option value="{{ value }}"{% if value == selectedValue %} selected{% endif %}>
                 {{ value }}
             </option>
