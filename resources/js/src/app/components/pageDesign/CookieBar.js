@@ -9,7 +9,9 @@ Vue.component("cookie-bar", {
         {
             type: String,
             default: "#vue-cookie-bar"
-        }
+        },
+        styles: String,
+        classes: String
     },
 
     data()
@@ -20,21 +22,11 @@ Vue.component("cookie-bar", {
         };
     },
 
-    created()
-    {
-        // this.isCollapsed = this.hasResponse();
-    },
-
     computed:
     {
         isVisible()
         {
-            if (!this.$store.state.consents.hasResponse)
-            {
-                return true;
-            }
-
-            return !this.isCollapsed;
+            return App.isShopBuilder || !this.$store.state.consents.hasResponse || !this.isCollapsed;
         }
     },
 

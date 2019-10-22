@@ -9,6 +9,16 @@ Vue.component("privacy-settings", {
         {
             type: String,
             default: "#vue-privacy-settings"
+        },
+        cardClass:
+        {
+            type: String,
+            default: ""
+        },
+        cardStyle:
+        {
+            type: String,
+            default: ""
         }
     },
 

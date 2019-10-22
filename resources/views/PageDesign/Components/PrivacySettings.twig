@@ -2,7 +2,7 @@
     <div class="privacy-settings d-flex flex-column">
         <div class="privacy-settings-body overflow-auto">
         {% for consentGroup in get_consent_groups() %}
-            <div class="card consent-group{% if not loop.last %} mb-3{% endif %}">
+            <div class="card consent-group{% if not loop.last %} mb-3{% endif %}" :class="cardClass" :style="cardStyle">
                 <div class="card-body mb-0" @click.stop="toggleConsent('{{ consentGroup.key }}.*')">
                     <p class="card-title h4 d-flex">
                         <span class="flex-fill">
@@ -14,14 +14,14 @@
                             ({{ consentGroup.consents | length }})
                         </span>
                         {% if not consentGroup.necessary %}
-                            <span class="custom-control custom-switch">
+                            <span class="custom-control custom-switch custom-control-appearance">
                                 <input type="checkbox"
                                        class="custom-control-input"
                                        :checked="isConsented('{{ consentGroup.key }}.*')">
                                 <label class="custom-control-label"></label>
                             </span>
                         {% else %}
-                            <span class="badge badge-primary">{{ trans("Ceres::Template.privacySettingsNecessary") }}</span>
+                            <span class="badge badge-primary bg-appearance">{{ trans("Ceres::Template.privacySettingsNecessary") }}</span>
                         {% endif %}
                     </p>
                     {% if consentGroup.description | length > 0 %}<p class="card-text">{{ consentGroup.description }}</p>{% endif %}
@@ -30,14 +30,14 @@
                     <div v-if="expandedGroups['{{ consentGroup.key }}']">
                         {% for consent in consentGroup.consents %}
                             {% set necessary = consentGroup.necessary or consent.necessary %}
-                            <div class="card consent bg-light mb-3{% if necessary %} border-primary{% endif %}"
-                                 {% if not necessary %} :class="{'border-primary': isConsented('{{ consentGroup.key }}.{{ consent.key }}')}"{% endif %}>
+                            <div class="card consent bg-light mb-3{% if necessary %} border-primary border-appearance{% endif %}"
+                                 {% if not necessary %} :class="{'border-primary border-appearance': isConsented('{{ consentGroup.key }}.{{ consent.key }}')}"{% endif %}>
 
                                 <div class="card-body" @click.stop="toggleConsent('{{ consentGroup.key }}.{{ consent.key }}')">
                                     <p class="d-flex mb-0 font-weight-bold">
                                         <span class="flex-fill">{{ consent.label }}</span>
                                         {% if not consentGroup.necessary and not consent.necessary %}
-                                            <span class="custom-control custom-switch">
+                                            <span class="custom-control custom-switch custom-control-appearance">
                                                 <input type="checkbox"
                                                        class="custom-control-input"
                                                        :checked="isConsented('{{ consentGroup.key }}.{{ consent.key }}')">

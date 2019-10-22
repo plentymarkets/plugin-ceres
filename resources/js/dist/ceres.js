@@ -65098,7 +65098,9 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("cookie-bar", {
     template: {
       type: String,
       default: "#vue-cookie-bar"
-    }
+    },
+    styles: String,
+    classes: String
   },
   data: function data() {
     return {
@@ -65106,15 +65108,9 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("cookie-bar", {
       isExpanded: false
     };
   },
-  created: function created() {// this.isCollapsed = this.hasResponse();
-  },
   computed: {
     isVisible: function isVisible() {
-      if (!this.$store.state.consents.hasResponse) {
-        return true;
-      }
-
-      return !this.isCollapsed;
+      return App.isShopBuilder || !this.$store.state.consents.hasResponse || !this.isCollapsed;
     }
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapMutations"])(["storeConsents", "acceptAll"]), {
@@ -65689,6 +65685,14 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("privacy-settings", {
     template: {
       type: String,
       default: "#vue-privacy-settings"
+    },
+    cardClass: {
+      type: String,
+      default: ""
+    },
+    cardStyle: {
+      type: String,
+      default: ""
     }
   },
   data: function data() {
