@@ -15,8 +15,6 @@
 {{ component( "Ceres::ItemList.Components.CategoryItem") }}
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 {{ component( "Ceres::PageDesign.Components.Carousel" ) }}
-{{ component( "Ceres::PageDesign.Components.PrivacySettings" ) }}
-{{ component( "Ceres::PageDesign.Components.CookieBar" ) }}
 
 {% if isShopBuilder %}
     {% include "Ceres::Widgets.WidgetComponents" %}
@@ -231,7 +229,6 @@
 {% if isShopBuilder %}
     {% include "Ceres::Widgets.ShopBuilderDataStore" %}
 {% endif %}
-
 
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
