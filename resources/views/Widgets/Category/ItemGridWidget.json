@@ -3,7 +3,7 @@
     "label": "Widget.itemGridLabel",
     "previewImageURL": "/images/widgets/item-grid.svg",
     "type": "categoryitem",
-    "categories": ["item"],
+    "categories": ["categoryitem"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Category\\ItemGridWidget",
     "settings": {
