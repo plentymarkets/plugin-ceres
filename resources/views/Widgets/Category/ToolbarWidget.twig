@@ -16,14 +16,14 @@
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 <div class="widget widget-toolbar list-controls{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div class="list-controls-inner {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+    <div class="list-controls-inner {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         
         <div class="d-flex">
             <div class="flex-fill" {% if isPreview %}data-builder-child-container="toolbar"{% endif %}>
                 {{ children.toolbar | raw }}
             </div>
 
-            {% if overrideSearchFilters | trim is empty %}
+            {% if ( overrideSearchFilters | trim is empty ) and ( isPreview or children.collapsable ) %}
             <div class="d-flex widget-{{ appearance }}">
                 <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed pr-0" data-toggle="collapse" href="#filterCollapse" role="button" aria-expanded="true" aria-controls="filterCollapse">
                     {%- if icon != "none" -%}
@@ -39,7 +39,7 @@
     </div>
     {% if overrideSearchFilters | trim is empty %}
     <div id="filterCollapse" class="collapse p-0 m-0">
-        <div class="m-0{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% else %} p-0{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+        <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
             <div {% if isPreview %}data-builder-child-container="collapsable"{% endif %}>
                 {{ children.collapsable | raw }}
             </div>
