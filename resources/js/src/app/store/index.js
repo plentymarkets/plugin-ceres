@@ -6,7 +6,6 @@ import ApiService from "../services/ApiService";
 import address from "./modules/AddressModule";
 import basket from "./modules/BasketModule";
 import checkout from "./modules/CheckoutModule";
-import consents from "./modules/ConsentModule";
 import contactForm from "./modules/ContactForm";
 import item from "./modules/SingleItemModule";
 import itemList from "./modules/ItemListModule";
@@ -37,7 +36,6 @@ const store = new Vuex.Store(
             address,
             basket,
             checkout,
-            consents,
             contactForm,
             item,
             itemList,
@@ -73,7 +71,6 @@ App.initialData.shippingCountries.sort((first, second) =>
 
 store.commit("setShippingCountries", App.initialData.shippingCountries);
 store.commit("setShippingCountryId", App.initialData.shippingCountryId);
-store.commit("initConsents");
 
 ApiService.listen("LocalizationChanged",
     data =>

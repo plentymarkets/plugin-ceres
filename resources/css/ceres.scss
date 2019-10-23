@@ -13065,19 +13065,6 @@ html.ie {
         border-bottom-color: $popover-header-bg;
     }
 }
-.cookie-bar
-{
-    .privacy-settings
-    {
-        max-height: 50vh;
-    }
-
-    &.out
-    {
-        left: 15px;
-        right: auto;
-    }
-}
 .tooltip {
     pointer-events: none;
 }
@@ -20830,10 +20817,10 @@ header .widget
             }
         }
 
-        .border-appearance,
-        .border-appearance
+        .border-appearance.active,
+        .border-appearance:hover
         {
-            border-color: $value !important;
+            border-color: $value;
         }
 
         .pagination .page-item
@@ -20850,15 +20837,6 @@ header .widget
             {
                 border-color: $value;
                 @include context-bg($value);
-            }
-        }
-
-        .custom-control-appearance
-        {
-            .custom-control-input:checked ~ .custom-control-label::before
-            {
-                border-color: $value;
-                background-color: $value;
             }
         }
     }
