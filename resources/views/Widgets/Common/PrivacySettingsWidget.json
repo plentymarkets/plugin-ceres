@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::PrivacySettingsWidget",
+    "label": "Widget.privacySettingsLabel",
+    "previewImageURL": "/images/widgets/privacy-settings.svg",
+    "type": "static",
+    "categories": [],
+    "position": 1200,
+    "widgetClass": "Ceres\\Widgets\\Common\\PrivacySettingsWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}
