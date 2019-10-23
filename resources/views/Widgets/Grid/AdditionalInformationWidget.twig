@@ -1,0 +1,42 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass      = widget.settings.customClass.mobile %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlinePadding    = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set paddingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set appearance       = widget.settings.appearance.mobile | default("primary") %}
+{% set placement        = widget.settings.placement.mobile | default("auto") %}
+{% set icon             = widget.settings.icon.mobile %}
+{% set title            = widget.settings.title.mobile %}
+{% set buttonSize       = widget.settings.buttonSize.mobile | default("") %}
+{% set popoverSize      = widget.settings.size.mobile | default("") %}
+
+<div class="widget widget-additional-information{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
+    {% if children.popper | length > 0 or title | length > 0 or isPreview %}
+    <div class="d-inline">
+        <popper v-cloak placement="{{ placement }}"
+                {%- if popoverSize | length > 0 %} popover-class="{{ popoverSize }}"{% endif -%}
+                {%- if paddingClasses | length > 0 %} body-class="{{ paddingClasses }}"{% endif -%}
+                {%- if inlinePadding | length > 0 %} body-style="{{ inlinePadding }}"{% endif %}>
+            <template #handle>
+                <button class="btn btn-icon btn-{{ appearance }} {{ buttonSize }}" {{ WidgetHelper.makeClickable(isPreview) }}>
+                    <i class="fa fa-fw {{ icon }}"></i>
+                </button>
+            </template>
+            {% if title | length > 0 %}
+                <template #title>
+                    {{ title }}
+                </template>
+            {% endif %}
+            <template #content>
+                <div{% if isPreview %} data-builder-child-container="popper"{% endif %}>{{ children.popper | raw }}</div>
+            </template>
+        </popper>
+    </div>
+    {% else %}
+        <button class="btn btn-icon btn-{{ appearance }} {{ buttonSize }}">
+            <i class="fa {{ icon }}"></i>
+        </button>
+    {% endif %}
+</div>

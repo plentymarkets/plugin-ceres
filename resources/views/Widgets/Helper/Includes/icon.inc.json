@@ -17,6 +17,11 @@
                 "position": 1
             },
             {
+                "value": "fa-info",
+                "caption": "Widget.widgetIconInfo",
+                "position": 1
+            },
+            {
                 "value": "fa-circle",
                 "caption": "Widget.widgetIconCircle",
                 "position": 1

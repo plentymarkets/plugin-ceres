@@ -156,3 +156,8 @@ a:active {
         @include context-bg($value);
     }
 }
+
+.fa.none {
+    @extend .fa-circle;
+    color: transparent !important;
+}

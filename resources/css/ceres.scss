@@ -340,6 +340,9 @@ $nav-tabs-border-color:             #ddd !default;
 
 
 // Popovers
+$popover-max-width:                 276px !default;
+$popover-max-width-md:              414px !default;
+$popover-max-width-lg:              552px !default;
 $popover-inner-padding:             1px !default;
 
 // Padding applied to the modal body
@@ -11196,6 +11199,11 @@ a:active {
     }
 }
 
+.fa.none {
+    @extend .fa-circle;
+    color: transparent !important;
+}
+
 html {
 	font-size: $font-size-root;
 }
@@ -11574,22 +11582,20 @@ button:focus {
 
 .btn-icon
 {
-	padding: .5rem;
-	
+	padding: .6rem;
 	.fa
 	{
-		width: 14px;
 		text-align: center;
 	}
-	
+
 	&.btn-sm
 	{
-		padding: .2rem;
-		
-		.fa
-		{
-			width: 12px;
-		}
+		padding: .4rem;
+	}
+
+	&.btn-lg
+	{
+		padding: .95rem;
 	}
 
 	&.btn-circle
@@ -13065,19 +13071,27 @@ html.ie {
         border-bottom-color: $popover-header-bg;
     }
 }
-.cookie-bar
+
+.popover .popover-body > [data-builder-child-container]
 {
-    .privacy-settings
+    min-width: 190px;
+}
+
+.popover
+{
+    &.popover-md
     {
-        max-height: 50vh;
+        width: $popover-max-width-md;
+        max-width: $popover-max-width-md;
     }
 
-    &.out
+    &.popover-lg
     {
-        left: 15px;
-        right: auto;
+        width: $popover-max-width-lg;
+        max-width: $popover-max-width-lg;
     }
 }
+
 .tooltip {
     pointer-events: none;
 }
@@ -20830,10 +20844,10 @@ header .widget
             }
         }
 
-        .border-appearance,
-        .border-appearance
+        .border-appearance.active,
+        .border-appearance:hover
         {
-            border-color: $value !important;
+            border-color: $value;
         }
 
         .pagination .page-item
@@ -20850,15 +20864,6 @@ header .widget
             {
                 border-color: $value;
                 @include context-bg($value);
-            }
-        }
-
-        .custom-control-appearance
-        {
-            .custom-control-input:checked ~ .custom-control-label::before
-            {
-                border-color: $value;
-                background-color: $value;
             }
         }
     }
