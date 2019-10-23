@@ -11,7 +11,6 @@
             margin-bottom: 0;
         }
     }
-
 }
 
 @include media-breakpoint-down(sm)
@@ -32,6 +31,11 @@
                 margin-bottom: 2rem;
             }
         }
+    }
+
+    .widget-grid .widget-inner.col-12.widget-stacked-mobile
+    {
+        padding-bottom: 1rem;
     }
 }
 
@@ -68,14 +72,20 @@
 }
 
 
-html.scrollbar .widget-fw {
-    padding-left: 7px;
-    padding-right: 7px;
+html.scrollbar {
+    .widget-fw {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+    .widget {
+        .widget-fw {
+            padding-left: unset;
+            padding-right: unset;
+        } 
+    }
 }
 
-#page-header-parent > .widget-fw,
-#page-body > .container-max > .row > .col > .widget-fw,
-.footer > .row > .col > .widget-fw {
+.widget-fw {
     position: relative;
     width: 100vw;
     left: calc(-1 * (100vw - 100%) / 2) !important;
@@ -87,6 +97,20 @@ html.scrollbar .widget-fw {
     &.widget-grid {
         width: calc(100vw + 30px) !important;
         margin-left: -15px;
+    }
+}
+.widget .widget-fw {
+    position: unset;
+    width: unset;
+    left: unset !important;
+    right: unset !important;
+    margin-left: unset;
+    margin-right: unset;
+    max-width: unset !important;
+
+    &.widget-grid {
+        width: unset !important;
+        margin-left: unset;
     }
 }
 
@@ -110,7 +134,6 @@ header .widget
         bottom: 0;
     }
 }
-
 
 @each $breakpoint in map-keys($grid-breakpoints)
 {
@@ -144,14 +167,6 @@ header .widget
             padding-bottom: 0;
             min-height: 100%;
         }
-    }
-}
-
-@include media-breakpoint-down(sm)
-{
-    .widget-grid .widget-inner.col-12.widget-stacked-mobile
-    {
-        padding-bottom: 1rem;
     }
 }
 
