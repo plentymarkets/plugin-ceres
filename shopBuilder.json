@@ -192,6 +192,11 @@
             "position": 1200
         },
         {
+            "key": "categoryitem",
+            "label": "Widget.categoryCategoryItem",
+            "position": 1300
+        },
+        {
             "key": "footer",
             "label": "Widget.categoryFooter",
             "position": 10000

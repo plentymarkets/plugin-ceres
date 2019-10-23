@@ -1,0 +1,16 @@
+.widget-toolbar {
+    .widget {
+        margin-bottom: 0;
+    }
+    
+    .list-controls .list-controls-inner a.btn[aria-expanded="true"] i {
+        transform: rotate(-90deg);
+    }
+
+    #filterCollapse {
+        > div {
+            background: #fff;
+            border: 1px solid #f4f4f4;
+        }
+    }
+}

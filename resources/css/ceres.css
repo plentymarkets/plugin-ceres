@@ -17089,8 +17089,7 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
 .list-controls {
   position: relative; }
   .list-controls .list-controls-inner {
-    background: #efefef;
-    padding: 0.5em; }
+    background: #efefef; }
   .list-controls .list-sort,
   .list-controls .list-itemsperpage {
     display: block;
@@ -18220,6 +18219,17 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
 
 .widget-item-grid .cmp-product-thumb {
   margin-bottom: 0px !important; }
+
+.widget-toolbar .widget {
+  margin-bottom: 0; }
+
+.widget-toolbar .list-controls .list-controls-inner a.btn[aria-expanded="true"] i {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg); }
+
+.widget-toolbar #filterCollapse > div {
+  background: #fff;
+  border: 1px solid #f4f4f4; }
 
 .widget-provider-select.widget-primary input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #008ebd; }

@@ -18272,7 +18272,6 @@ html.crios {
     position: relative;
     .list-controls-inner {
         background: darken($gray-lighter2, 2%);
-        padding: 0.5em;
     }
     .list-sort,
     .list-itemsperpage {
@@ -19746,6 +19745,24 @@ html.ie .v-s-boxes .v-s-box.invalid {
 
     .cmp-product-thumb {
         margin-bottom: 0px !important;
+    }
+}
+
+.widget-toolbar {
+    .widget {
+        margin-bottom: 0;
+    }
+    
+    .list-controls .list-controls-inner a.btn[aria-expanded="true"] i {
+        -webkit-transform: rotate(-90deg);
+                transform: rotate(-90deg);
+    }
+
+    #filterCollapse {
+        > div {
+            background: #fff;
+            border: 1px solid #f4f4f4;
+        }
     }
 }
 

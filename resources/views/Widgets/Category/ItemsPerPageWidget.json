@@ -2,8 +2,8 @@
     "identifier": "Ceres::ItemsPerPageWidget",
     "label": "Widget.ItemsPerPageLabel",
     "previewImageURL": "/images/widgets/items-per-page.svg",
-    "type": "categoryitem",
-    "categories": ["item"],
+    "type": "toolbar",
+    "categories": ["categoryitem"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Category\\ItemsPerPageWidget",
     "settings": {
