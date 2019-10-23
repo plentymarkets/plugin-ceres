@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/items-per-page.svg",
     "type": "toolbar",
     "categories": ["categoryitem"],
-    "position": 100,
+    "position": 300,
     "widgetClass": "Ceres\\Widgets\\Category\\ItemsPerPageWidget",
     "settings": {
         "customClass":"@include(customClass)",
@@ -26,6 +26,6 @@
                   }
               }
           },
-          "spacing":"@include(spacing)"
+          "spacing":"@include(spacingMargin)"
     }
 }

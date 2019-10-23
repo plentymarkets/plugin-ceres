@@ -361,7 +361,7 @@
         "categories": [
             "categoryitem"
         ],
-        "position": 100,
+        "position": 500,
         "widgetClass": "Ceres\\Widgets\\Category\\ItemGridWidget",
         "settings": {
             "customClass": {
@@ -492,7 +492,7 @@
         "categories": [
             "categoryitem"
         ],
-        "position": 100,
+        "position": 300,
         "widgetClass": "Ceres\\Widgets\\Category\\ItemsPerPageWidget",
         "settings": {
             "customClass": {
@@ -524,27 +524,7 @@
             },
             "spacing": {
                 "type": "vertical",
-                "options": {
-                    "name": "Widget.widgetSpacing"
-                },
                 "children": {
-                    "customPadding": {
-                        "type": "checkbox",
-                        "options": {
-                            "name": "Widget.widgetCustomPadding"
-                        }
-                    },
-                    "padding": {
-                        "type": "spacing",
-                        "isVisible": "!!spacing.customPadding",
-                        "options": {
-                            "units": [
-                                "px",
-                                "rem"
-                            ],
-                            "direction": "all"
-                        }
-                    },
                     "customMargin": {
                         "type": "checkbox",
                         "options": {
