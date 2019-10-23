@@ -133,6 +133,8 @@ import "./components/orderReturn/OrderReturn";
 import "./components/orderReturn/OrderReturnItem";
 
 import "./components/pageDesign/Carousel";
+import "./components/pageDesign/CookieBar";
+import "./components/pageDesign/PrivacySettings";
 import "./components/pageDesign/MobileNavigation";
 import "./components/pageDesign/Notifications";
 import "./components/pageDesign/Popper";
