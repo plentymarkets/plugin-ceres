@@ -8,88 +8,75 @@
         "listBoxValues": [
             {
                 "value": "none",
-                "caption": "Widget.widgetIconNone",
-                "position": 0
+                "caption": "Widget.widgetIconNone"
             },
             {
                 "value": "fa-check",
-                "caption": "Widget.widgetIconCheck",
-                "position": 1
+                "caption": "Widget.widgetIconCheck"
             },
             {
                 "value": "fa-circle",
-                "caption": "Widget.widgetIconCircle",
-                "position": 1
+                "caption": "Widget.widgetIconCircle"
             },
             {
                 "value": "fa-circle-thin",
-                "caption": "Widget.widgetIconCircleThin",
-                "position": 1
+                "caption": "Widget.widgetIconCircleThin"
             },
             {
                 "value": "fa-comment-o",
-                "caption": "Widget.widgetIconComment",
-                "position": 1
+                "caption": "Widget.widgetIconComment"
             },
             {
                 "value": "fa-credit-card",
-                "caption": "Widget.widgetIconCreditcard",
-                "position": 1
+                "caption": "Widget.widgetIconCreditcard"
             },
             {
                 "value": "fa-envelope-o",
-                "caption": "Widget.widgetIconEnvelope",
-                "position": 1
+                "caption": "Widget.widgetIconEnvelope"
             },
             {
                 "value": "fa-heart",
-                "caption": "Widget.widgetIconHeart",
-                "position": 1
+                "caption": "Widget.widgetIconHeart"
             },
             {
                 "value": "fa-thumbs-o-up",
-                "caption": "Widget.widgetIconThumbsUp",
-                "position": 1
+                "caption": "Widget.widgetIconThumbsUp"
             },
             {
                 "value": "fa-euro",
-                "caption": "Widget.widgetIconEuro",
-                "position": 1
+                "caption": "Widget.widgetIconEuro"
             },
             {
                 "value": "fa-dollar",
-                "caption": "Widget.widgetIconDollar",
-                "position": 1
+                "caption": "Widget.widgetIconDollar"
             },
             {
                 "value": "fa-percent",
-                "caption": "Widget.widgetIconPercent",
-                "position": 1
+                "caption": "Widget.widgetIconPercent"
             },
             {
                 "value": "fa-gift",
-                "caption": "Widget.widgetIconGift",
-                "position": 1
+                "caption": "Widget.widgetIconGift"
             },
             {
                 "value": "fa-truck",
-                "caption": "Widget.widgetIconTruck",
-                "position": 1
+                "caption": "Widget.widgetIconTruck"
             },
             {
                 "value": "fa-phone",
-                "caption": "Widget.widgetIconPhone",
-                "position": 1
+                "caption": "Widget.widgetIconPhone"
             },
             {
                 "value": "fa-copyright",
-                "caption": "Widget.widgetIconCopyright",
-                "position": 1
+                "caption": "Widget.widgetIconCopyright"
             },
             {
                 "value": "fa-registered",
-                "caption": "Widget.widgetIconRegistered",
-                "position": 1
+                "caption": "Widget.widgetIconRegistered"
+            },
+            {
+                "value": "fa-sliders",
+                "caption": "Widget.widgetIconSliders"
             }
         ]
     }
