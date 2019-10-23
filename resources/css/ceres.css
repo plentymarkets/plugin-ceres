@@ -8474,7 +8474,7 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-spinner:before {
   content: ""; }
 
-.fa-circle:before {
+.fa-circle:before, .fa.none:before {
   content: ""; }
 
 .fa-mail-reply:before,
@@ -12119,6 +12119,9 @@ button.bg-dark:focus {
   background-color: #343a40;
   color: #fff; }
 
+.fa.none {
+  color: transparent !important; }
+
 html {
   font-size: 14px; }
 
@@ -12374,14 +12377,13 @@ button:focus {
       padding: 0.25rem 0; }
 
 .btn-icon {
-  padding: .5rem; }
+  padding: .6rem; }
   .btn-icon .fa {
-    width: 14px;
     text-align: center; }
   .btn-icon.btn-sm, .btn-group-sm > .btn-icon.btn {
-    padding: .2rem; }
-    .btn-icon.btn-sm .fa, .btn-group-sm > .btn-icon.btn .fa {
-      width: 12px; }
+    padding: .4rem; }
+  .btn-icon.btn-lg, .btn-group-lg > .btn-icon.btn {
+    padding: .95rem; }
   .btn-icon.btn-circle {
     border-radius: 50%; }
 
@@ -13630,6 +13632,17 @@ html.ie #thumb-carousel .owl-stage {
 
 .popover[x-placement="bottom"] .arrow::after {
   border-bottom-color: #f7f7f7; }
+
+.popover .popover-body > [data-builder-child-container] {
+  min-width: 190px; }
+
+.popover.popover-md {
+  width: 414px;
+  max-width: 414px; }
+
+.popover.popover-lg {
+  width: 552px;
+  max-width: 552px; }
 
 .tooltip {
   pointer-events: none; }
