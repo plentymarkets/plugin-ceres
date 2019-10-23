@@ -123,10 +123,10 @@ class SearchOptions
 
         /** @var CeresConfig $ceresConfig */
         $ceresConfig = pluginApp(CeresConfig::class);
-        
+
         if( (int)$itemListOptions['itemsPerPage'] <= 0 )
         {
-            $defaultItemsPerPage = $ceresConfig->pagination->rowsPerPage[0] * $ceresConfig->pagination->columnsPerPage;
+            $defaultItemsPerPage = $ceresConfig->pagination->itemsPerPage;
             $itemListOptions['itemsPerPage'] = $defaultItemsPerPage;
         }
 

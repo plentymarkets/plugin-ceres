@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/item-grid.svg",
     "type": "categoryitem",
     "categories": ["categoryitem"],
-    "position": 100,
+    "position": 500,
     "widgetClass": "Ceres\\Widgets\\Category\\ItemGridWidget",
     "settings": {
         "customClass":"@include(customClass)",
