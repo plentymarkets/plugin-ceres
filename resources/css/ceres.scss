@@ -11199,11 +11199,11 @@ a:active {
     }
 }
 
-
 .fa.none {
     @extend .fa-circle;
     color: transparent !important;
 }
+
 html {
 	font-size: $font-size-root;
 }
@@ -13091,6 +13091,7 @@ html.ie {
         max-width: $popover-max-width-lg;
     }
 }
+
 .tooltip {
     pointer-events: none;
 }
