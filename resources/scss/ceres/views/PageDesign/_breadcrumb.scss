@@ -10,20 +10,11 @@
 		}
 		.breadcrumbs {
 			background: $breadcrumb-bg;
-			position: relative;
-			width: 100vw;
-			left: calc(-1 * (100vw - 100%) / 2) !important;
-
-			&.widget-fw {
-				.container-max {
-					max-width: none;
-				}
-			}
 		}
 		.breadcrumb{
 		    margin: 0 auto;
 		    background: transparent;
-		    padding: .5rem 15px;
+		    padding: .5rem 15px !important;
 		}
 	}
 }
