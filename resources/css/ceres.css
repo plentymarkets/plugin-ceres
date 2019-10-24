@@ -13933,10 +13933,6 @@ html.ie #thumb-carousel .owl-stage {
   .input-feedback-container.has-success .feedback-success {
     display: block; }
 
-.unfixed {
-  left: 0;
-  right: 0; }
-
 .top-bar {
   width: 100%;
   color: #fff;
@@ -18869,7 +18865,9 @@ html.ie .widget-grid .widget-inner-stacked {
     .widget.widget-grid:not(.widget-two-col) {
       margin-bottom: 0; }
     .widget:not(.widget-two-col) .widget-inner:not(.widget-stacked) .widget:not(.widget-grid) {
-      margin-bottom: 2rem; } }
+      margin-bottom: 2rem; }
+  .widget-grid .widget-inner.col-12.widget-stacked-mobile {
+    padding-bottom: 1rem; } }
 
 @media (max-width: 575.98px) {
   .widget {
@@ -18879,18 +18877,40 @@ html.ie .widget-grid .widget-inner-stacked {
 
 #page-header-parent > .widget {
   max-width: 1200px;
-  width: 100%;
-  background-color: #f7f7f9; }
+  min-width: 100%;
+  background-color: #f7f7f9;
+  left: 15px;
+  right: 15px; }
   #page-header-parent > .widget:not(.widget-grid) {
-    max-width: 1170px; }
-
-header .widget {
-  margin-bottom: 0; }
+    max-width: 1170px;
+    min-width: inherit; }
 
 .widget-fw {
   position: relative;
   width: 100vw;
-  left: calc(-1 * (100vw - 100%) / 2); }
+  left: calc(-1 * (100vw - 100%) / 2) !important;
+  right: 0 !important;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none !important; }
+  .widget-fw.widget-grid {
+    width: calc(100vw + 30px) !important;
+    margin-left: -15px; }
+
+.widget .widget-fw {
+  position: unset;
+  width: unset;
+  left: unset !important;
+  right: unset !important;
+  margin-left: unset;
+  margin-right: unset;
+  max-width: unset !important; }
+  .widget .widget-fw.widget-grid {
+    width: unset !important;
+    margin-left: unset; }
+
+header .widget {
+  margin-bottom: 0; }
 
 .widget-proportional {
   position: relative;
@@ -19287,10 +19307,6 @@ header .widget {
   .widget-prop-xl-auto > div > .widget-proportional {
     padding-bottom: 0;
     min-height: 100%; } }
-
-@media (max-width: 767.98px) {
-  .widget-grid .widget-inner.col-12.widget-stacked-mobile {
-    padding-bottom: 1rem; } }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
   .widget-grid .widget-inner.col-md-12.widget-stacked-tablet {

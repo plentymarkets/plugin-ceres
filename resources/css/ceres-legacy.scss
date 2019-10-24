@@ -13538,12 +13538,6 @@ $border-width: 1px;
 }
 
 // Page Design / Global components
-.unfixed
-{
-	left: 0;
-	right: 0;
-}
-
 .top-bar{
 	@media print {
 		display: none;
@@ -20613,7 +20607,6 @@ html.ie .widget-grid .widget-inner-stacked {
             margin-bottom: 0;
         }
     }
-
 }
 
 @include media-breakpoint-down(sm)
@@ -20635,6 +20628,11 @@ html.ie .widget-grid .widget-inner-stacked {
             }
         }
     }
+
+    .widget-grid .widget-inner.col-12.widget-stacked-mobile
+    {
+        padding-bottom: 1rem;
+    }
 }
 
 @include media-breakpoint-down(xs)
@@ -20653,26 +20651,54 @@ html.ie .widget-grid .widget-inner-stacked {
     }
 }
 
-#page-header-parent > .widget {
-    max-width: 1200px;
-    width: 100%;
-    background-color: $gray-lightest;
-    
-    &:not(.widget-grid) {
-        max-width: 1170px;
+#page-header-parent {
+
+    > .widget {
+        max-width: 1200px;
+        min-width: 100%;
+        background-color: $gray-lightest;
+        left: 15px;
+        right: 15px;
+
+        &:not(.widget-grid) {
+            max-width: 1170px;
+            min-width: inherit;
+        }
+    }
+}
+
+.widget-fw {
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2) !important;
+    right: 0 !important;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none !important;
+
+    &.widget-grid {
+        width: calc(100vw + 30px) !important;
+        margin-left: -15px;
+    }
+}
+.widget .widget-fw {
+    position: unset;
+    width: unset;
+    left: unset !important;
+    right: unset !important;
+    margin-left: unset;
+    margin-right: unset;
+    max-width: unset !important;
+
+    &.widget-grid {
+        width: unset !important;
+        margin-left: unset;
     }
 }
 
 header .widget
 {
     margin-bottom: 0;
-}
-
-.widget-fw
-{
-    position: relative;
-    width: 100vw;
-    left: calc(-1 * (100vw - 100%) / 2);
 }
 
 .widget-proportional
@@ -20690,7 +20716,6 @@ header .widget
         bottom: 0;
     }
 }
-
 
 @each $breakpoint in map-keys($grid-breakpoints)
 {
@@ -20724,14 +20749,6 @@ header .widget
             padding-bottom: 0;
             min-height: 100%;
         }
-    }
-}
-
-@include media-breakpoint-down(sm)
-{
-    .widget-grid .widget-inner.col-12.widget-stacked-mobile
-    {
-        padding-bottom: 1rem;
     }
 }
 
@@ -20805,6 +20822,7 @@ header .widget
 {
     text-align: justify;
 }
+
 @each $color, $value in $shop-builder-colors
 {
     .widget-#{$color}

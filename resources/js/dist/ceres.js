@@ -70055,7 +70055,9 @@ if (headerParent) {
     getHeaderChildrenHeights();
     scrollHeaderElements();
   }, 50));
-  $(window).scroll(scrollHeaderElements);
+  window.addEventListener("scroll", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_10__["debounce"])(function () {
+    scrollHeaderElements();
+  }, 10));
   $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
     calculateBodyOffset();
     $(".owl-carousel").trigger("refresh.owl.carousel");
