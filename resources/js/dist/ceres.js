@@ -65452,6 +65452,18 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
     trigger: {
       type: String,
       default: "click"
+    },
+    popoverClass: {
+      type: String,
+      default: ""
+    },
+    bodyClass: {
+      type: String,
+      default: ""
+    },
+    bodyStyle: {
+      type: String,
+      default: ""
     }
   },
   mounted: function mounted() {
@@ -65460,15 +65472,20 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
     this.$nextTick(function () {
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(_this.$refs.node) && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(_this.$refs.handle)) {
         var node = _this.$refs.node;
-        node.parentElement.removeChild(node);
-        document.body.appendChild(node);
+
+        if (!App.isShopBuilder) {
+          node.parentElement.removeChild(node);
+          document.body.appendChild(node);
+        }
+
         _this.popper = new popper_js__WEBPACK_IMPORTED_MODULE_3__["default"](_this.$refs.handle, node, {
           placement: _this.placement,
           modifiers: {
             arrow: {
               element: _this.$refs.arrow
             }
-          }
+          },
+          removeOnDestroy: true
         });
         var handle = _this.$refs.handle.firstElementChild || _this.$refs.handle;
 
@@ -65495,11 +65512,19 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
       }
     });
   },
+  destroyed: function destroyed() {
+    this.popper.destroy();
+  },
   data: function data() {
     return {
       isVisible: false,
       popper: null
     };
+  },
+  computed: {
+    classNames: function classNames() {
+      return this.popoverClass + (!this.isVisible ? " d-none" : "");
+    }
   },
   methods: {
     togglePopper: function togglePopper() {
@@ -69836,7 +69861,9 @@ if (headerParent) {
     getHeaderChildrenHeights();
     scrollHeaderElements();
   }, 50));
-  $(window).scroll(scrollHeaderElements);
+  window.addEventListener("scroll", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_10__["debounce"])(function () {
+    scrollHeaderElements();
+  }, 10));
   $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
     calculateBodyOffset();
     $(".owl-carousel").trigger("refresh.owl.carousel");

@@ -327,7 +327,10 @@ if ( headerParent )
         scrollHeaderElements();
     }, 50));
 
-    $(window).scroll(scrollHeaderElements);
+    window.addEventListener("scroll", debounce(function()
+    {
+        scrollHeaderElements();
+    }, 10));
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {
