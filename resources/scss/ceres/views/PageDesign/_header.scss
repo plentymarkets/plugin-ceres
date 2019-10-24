@@ -3,9 +3,17 @@
 		display: none;
 	}
 
-	width: 100%;
+	position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2) !important;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
+
+	&.widget-fw {
+		.container-max {
+			max-width: none;
+		}
+	}
 
 	a:not(.btn) {
 		text-decoration: none;
@@ -283,9 +291,19 @@
 		}
 	}
 
-	.navbar{
+	.navbar {
+		position: relative;
+		width: 100vw;
+		left: calc(-1 * (100vw - 100%) / 2) !important;
 		font-family:$font-family-heading;
 		border-bottom:1px solid darken($gray-lighter2, 2%);
+
+		&.widget-fw {
+			.container-max {
+				max-width: none;
+			}
+		}
+
 		a {
 			color: $gray-dark;
 			&:hover {
