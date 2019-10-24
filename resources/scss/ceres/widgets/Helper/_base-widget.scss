@@ -71,18 +71,6 @@
     }
 }
 
-.header-fw {
-    position: relative;
-    width: 100vw;
-    left: calc(-1 * (100vw - 100%) / 2) !important;
-
-    &.widget-fw {
-        .container-max {
-            max-width: none;
-        }
-    }
-}	
-
 .widget-fw {
     position: relative;
     width: 100vw;
@@ -91,6 +79,16 @@
     margin-left: 0;
     margin-right: 0;
     max-width: none !important;
+
+    &.header-fw {
+        position: relative;
+        width: 100vw;
+        left: calc(-1 * (100vw - 100%) / 2) !important;
+
+        .container-max {
+            max-width: none;
+        }
+    }
 
     &.widget-grid {
         width: calc(100vw + 30px) !important;
