@@ -71,6 +71,12 @@
     }
 }
 
+.header-fw {
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2) !important;
+}
+
 .widget-fw {
     position: relative;
     width: 100vw;
@@ -81,10 +87,6 @@
     max-width: none !important;
 
     &.header-fw {
-        position: relative;
-        width: 100vw;
-        left: calc(-1 * (100vw - 100%) / 2) !important;
-
         .container-max {
             max-width: none;
         }
