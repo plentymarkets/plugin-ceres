@@ -54,7 +54,7 @@
     <script type="application/ld+json">
         {
             "@context":"http://schema.org/",
-            "@id": "{{ Twig.print("services.url.getCanonicalUrl()") }}#faq",
+            "@id": "{{ Twig.print("services.url.getCanonicalURL()") }}#faq",
             "@type":"FAQPage",
             "mainEntity": {{ questions | json_encode | raw }}
         }
