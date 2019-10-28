@@ -111,7 +111,7 @@ Vue.component("basket-list-item", {
         // eslint-disable-next-line complexity
         isMoreButtonVisible()
         {
-            return this.isDataFieldVisible("basket.item.item_id") && this.basketItem.id ||
+            return this.isDataFieldVisible("basket.item.item_id") && this.basketItem.variation.data.item.id ||
                    this.isDataFieldVisible("basket.item.customNumber") && this.basketItem.variation.data.variation.number ||
                    this.isDataFieldVisible("basket.item.availability") && this.basketItem.variation.data.variation.availability.names.name ||
                    this.isDataFieldVisible("basket.item.description_long") && this.basketItem.variation.data.texts.description ||

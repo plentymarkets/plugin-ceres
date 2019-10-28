@@ -110,10 +110,10 @@
                 <template>
                     <div class="item-additional-information-container">
                         <div class="item-additional-information" v-if="showMoreInformation">
-                            <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.id">
+                            <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.variation.data.item.id">
                                 <div class="mt-3">
                                     <strong>{{ trans("Ceres::Template.basketItemId") }}:</strong>
-                                    <span>${ basketItem.id }</span>
+                                    <span>${ basketItem.variation.data.item.id }</span>
                                 </div>
                             </template>
 
