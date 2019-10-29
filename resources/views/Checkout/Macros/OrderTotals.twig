@@ -102,16 +102,6 @@
             {% if grossNet|trim is not empty %}
                 {{ grossNet }}
             {% else %}
-                {% if 'totalSumNet' in shownFields or shownFields == null %}
-                    {# TOTAL SUM NET #}
-                    <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                        {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutNet") }})
-                    </dt><!--
-                    --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                        {{ totals.totalNet | formatMonetary( totals.currency ) }}
-                    </dd>
-                {% endif %}
-
                 {% if 'promotionCoupon' in shownFields or shownFields == null %}
                     {% if totals.couponType == 'promotional' and (totals.couponValue | trimNewlines) != 0 %}
                         {# COUPON #}
@@ -122,6 +112,16 @@
                             {{ totals.couponValue | formatMonetary( totals.currency ) }}
                         </dd>
                     {% endif %}
+                {% endif %}
+
+                {% if 'totalSumNet' in shownFields or shownFields == null %}
+                    {# TOTAL SUM NET #}
+                    <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                        {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutNet") }})
+                    </dt><!--
+                    --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                        {{ totals.totalNet | formatMonetary( totals.currency ) }}
+                    </dd>
                 {% endif %}
 
                 {% if 'vats' in shownFields or shownFields == null %}

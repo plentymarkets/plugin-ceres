@@ -84,17 +84,6 @@
                 <hr>
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
 
-                {# Total sum (net) #}
-                <template v-if="visibleFields.includes('totalSumNet')">
-                    <dt :class="{ 'font-weight-bold': showNetPrices }">
-                        {{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketNet") }})
-                    </dt><!--
-                    --><dd :class="{ 'font-weight-bold': showNetPrices }">
-                        ${ basket.basketAmountNet | currency }
-                    </dd>
-                </template>
-                {# Total sum (net) #}
-
                 {# Coupon #}
                 <template v-if="visibleFields.includes('promotionCoupon') && basket.couponCode && basket.couponCampaignType === 'promotion'">
                     <dt class="font-weight-bold">
@@ -105,6 +94,17 @@
                     </dd>
                 </template>
                 {# Coupon #}
+
+                {# Total sum (net) #}
+                <template v-if="visibleFields.includes('totalSumNet')">
+                    <dt :class="{ 'font-weight-bold': showNetPrices }">
+                        {{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketNet") }})
+                    </dt><!--
+                    --><dd :class="{ 'font-weight-bold': showNetPrices }">
+                        ${ basket.basketAmountNet | currency }
+                    </dd>
+                </template>
+                {# Total sum (net) #}
 
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
 
