@@ -6,12 +6,37 @@
     {% set baseURL = urls.myAccount %}
 {% endif %}
 
+{% if showFirstPage is not defined %}
+    {% set showFirstPage = ceresConfig.pagination.showFirstPage %}
+{% endif %}
+{% if showLastPage is not defined %}
+    {% set showLastPage = ceresConfig.pagination.showLastPage %}
+{% endif %}
+{% if pageLimit is not defined %}
+    {% set pageLimit = 2 %}
+{% endif %}
+
+{% set start = currentPage - pageLimit %}
+{% set end = currentPage + pageLimit %}
+
+{% if currentPage + pageLimit > pageMax %}
+    {% set l = pageMax - currentPage %}
+    {% set x = pageLimit - l %}
+    {% set start = start - x %}
+{% endif %}
+
+{% if currentPage - 1 < pageLimit %}
+    {% set l = currentPage - 1 %}
+    {% set x = pageLimit - l %}
+    {% set end = end + x %}
+{% endif %}
+
 <nav class="cmp cmp-paginator row float-right text-center">
     {% if pageMax > 1 %}
         <ul class="pagination col-12 m-y-0">
 
             <!-- FIRST PAGE LINK -->
-            {% if ceresConfig.pagination.showFirstPage and pageMax > 3 and currentPage > 2 %}
+            {% if showFirstPage and pageMax > 3 and currentPage > 2 %}
                 <li class="page-item">
                     <a class="page-link" href="{{ baseURL ~ queryString({ 'page': null }) }}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
@@ -29,33 +54,15 @@
             <!-- ./PREV LINK -->
 
             <!-- PAGINATION -->
-            {% if currentPage == pageMax and currentPage > 2 %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': beforePrevPage }) }}">{{ currentPage - 2 }}</a>
-                </li>
-            {% endif %}
+            {% for i in start..end if i >= 1 and i <= pageMax %}
+                {% set target = i <= 1 ? null : i %}
 
-            {% if currentPage > 1 %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': prevPage }) }}">{{ currentPage - 1 }}</a>
+                <li class="page-item{% if i == currentPage %} active{% endif %}">
+                    <a class="page-link" {% if i != currentPage %}href="{{ baseURL ~ queryString({ 'page': target }) }}"{% endif %}>
+                        {{ i }}
+                    </a>
                 </li>
-            {% endif %}
-
-            <li class="page-item active">
-                <a class="page-link">{{ currentPage }}</a>
-            </li>
-
-            {% if currentPage + 1 <= pageMax %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': currentPage + 1 }) }}">{{ currentPage + 1 }}</a>
-                </li>
-            {% endif %}
-
-            {% if currentPage == 1 and currentPage + 2 <= pageMax %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': currentPage + 2 }) }}">{{ currentPage + 2 }}</a>
-                </li>
-            {% endif %}
+            {% endfor %} 
             <!-- ./PAGINATION -->
 
             <!-- NEXT LINK -->
@@ -67,7 +74,7 @@
             <!-- ./NEXT LINK -->
 
             <!-- LAST PAGE LINK -->
-            {% if ceresConfig.pagination.showLastPage and pageMax > 3 and currentPage < pageMax - 1 %}
+            {% if showLastPage and pageMax > 3 and currentPage < pageMax - 1 %}
                 <li class="page-item">
                     <a class="page-link" href="{{ baseURL ~ queryString({ 'page': pageMax }) }}">
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
