@@ -6,6 +6,7 @@
     {% set baseURL = urls.myAccount %}
 {% endif %}
 
+{# set 'showFirstPage', 'showLastPage', 'pageLimit' if not set from outside #}
 {% if showFirstPage is not defined %}
     {% set showFirstPage = ceresConfig.pagination.showFirstPage %}
 {% endif %}
@@ -13,30 +14,33 @@
     {% set showLastPage = ceresConfig.pagination.showLastPage %}
 {% endif %}
 {% if pageLimit is not defined %}
-    {% set pageLimit = 2 %}
+    {% set pageLimit = 1 %}
 {% endif %}
 
+{# set 'start', 'end' values for pagination button loop #}
 {% set start = currentPage - pageLimit %}
 {% set end = currentPage + pageLimit %}
 
+{# increase pagination start, if touching end of buttons #}
 {% if currentPage + pageLimit > pageMax %}
-    {% set l = pageMax - currentPage %}
-    {% set x = pageLimit - l %}
-    {% set start = start - x %}
+    {% set subtrahend = pageLimit - (pageMax - currentPage) %}
+    {% set start = start - subtrahend %}
 {% endif %}
 
+{# increase pagination end, if touching beginning of buttons #}
 {% if currentPage - 1 < pageLimit %}
-    {% set l = currentPage - 1 %}
-    {% set x = pageLimit - l %}
-    {% set end = end + x %}
+    {% set summand = pageLimit - (currentPage - 1) %}
+    {% set end = end + summand %}
 {% endif %}
+
+{% set isFirstLastPagePossible = pageMax > (pageLimit * 2 + 1) %}
 
 <nav class="cmp cmp-paginator row float-right text-center">
     {% if pageMax > 1 %}
         <ul class="pagination col-12 m-y-0">
 
             <!-- FIRST PAGE LINK -->
-            {% if showFirstPage and pageMax > 3 and currentPage > 2 %}
+            {% if showFirstPage and isFirstLastPagePossible and currentPage > pageLimit + 1 and currentPage != 2 %}
                 <li class="page-item">
                     <a class="page-link" href="{{ baseURL ~ queryString({ 'page': null }) }}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
@@ -74,7 +78,7 @@
             <!-- ./NEXT LINK -->
 
             <!-- LAST PAGE LINK -->
-            {% if showLastPage and pageMax > 3 and currentPage < pageMax - 1 %}
+            {% if showLastPage and isFirstLastPagePossible and currentPage < pageMax - pageLimit and currentPage != pageMax - 1 %}
                 <li class="page-item">
                     <a class="page-link" href="{{ baseURL ~ queryString({ 'page': pageMax }) }}">
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
