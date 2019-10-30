@@ -1,0 +1,9 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+<div>
+    <h1>Ich bin eine Pagination :)</h1>
+
+    <div>
+        {{ Twig.include("Ceres::Category.Item.Partials.Pagination", { showFirstPage: "true", showLastPage: "false" }) }}<!-- TODO: das hier aus den Einstellungen lesen -->
+    </div>
+</div>

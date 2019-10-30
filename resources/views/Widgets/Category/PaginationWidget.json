@@ -1,0 +1,30 @@
+{
+    "identifier": "Ceres::PaginationWidget",
+    "label": "Widget.paginationLabel",
+    "previewImageURL": "/images/widgets/pagination.svg",
+    "type": "categoryitem",
+    "categories": ["categoryitem"],
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Category\\PaginationWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "slide": {
+            "type": "slider",
+            "required": false,
+            "options": {
+                "defaultValue": 1,
+                "inputInterval": 1,
+                "inputMax": 10,
+                "name": "Widget.ItemsPerPageEntryNameLabel",
+                "tooltipText": "Widget.ItemsPerPageEntryNameTooltip"
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}
