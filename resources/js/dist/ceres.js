@@ -40160,177 +40160,153 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * vue-script2 v2.1.0
-  * (c) 2016-2019 Greg Slepak
+  * vue-script2 v2.0.3
+  * (c) 2016-2018 Greg Slepak
   * @license MIT License
   */
 (function (global, factory) {
    true ? module.exports = factory() :
   undefined;
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   var Script2 = {
     installed: false,
     p: Promise.resolve(),
-    version: '2.1.0',
-    // grunt will overwrite to match package.json
-    loaded: {},
+    version: '2.0.3', // grunt will overwrite to match package.json
+    loaded: {}, // keys are the scripts that have been loaded
+    install: function install(Vue) {
 
-    // keys are the scripts that is loading or loaded, values are promises
-    install(Vue) {
       if (Script2.installed) return;
-      var customAttrs = ['unload']; // from: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
+      var customAttrs = ['unload'];
+      // from: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
       // 'async' and 'defer' don't allow document.write according to:
       // http://www.html5rocks.com/en/tutorials/speed/script-loading/
       // we ignore 'defer' and handle 'async' specially.
-
       var props = customAttrs.concat(['src', 'type', 'async', 'integrity', 'text', 'crossorigin']);
       Vue.component('script2', {
         props: props,
-
         // <slot> is important, see: http://vuejs.org/guide/components.html#Named-Slots
         // template: '<div style="display:none"><slot></slot></div>',
         // NOTE: Instead of using `template` we can use the `render` function like so:
-        render(h) {
-          return h('div', {
-            style: 'display:none'
-          }, this.$slots.default);
+        render: function render(h) {
+          return h('div', { style: 'display:none' }, this.$slots.default);
         },
+        mounted: function mounted() {
+          var _this = this;
 
-        mounted() {
           var parent = this.$el.parentElement;
-
           if (!this.src) {
-            Script2.p = Script2.p.then(() => {
+            Script2.p = Script2.p.then(function () {
               var s = document.createElement('script');
-              var h = this.$el.innerHTML;
+              var h = _this.$el.innerHTML;
               h = h.replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&amp;/gi, '&');
               s.type = 'text/javascript';
               s.appendChild(document.createTextNode(h));
               parent.appendChild(s);
-              this.$emit('loaded'); // any other proper way to do this or emit error?
             });
           } else {
             var opts = _.omitBy(_.pick(this, props), _.isUndefined);
-
-            opts.parent = parent; // this syntax results in an implicit return
-
-            var load = () => Script2.load(this.src, opts).then(() => this.$emit('loaded'), err => this.$emit('error', err));
-
-            _.isUndefined(this.async) || this.async === 'false' ? Script2.p = Script2.p.then(load) // serialize execution
+            opts.parent = parent;
+            // this syntax results in an implicit return
+            var load = function load() {
+              return Script2.load(_this.src, opts);
+            };
+            _.isUndefined(this.async) ? Script2.p = Script2.p.then(load) // serialize execution
             : load(); // inject immediately
-          } // see: https://vuejs.org/v2/guide/migration.html#ready-replaced
-
-
-          this.$nextTick(() => {
+          }
+          // see: https://vuejs.org/v2/guide/migration.html#ready-replaced
+          this.$nextTick(function () {
             // code that assumes this.$el is in-document
             // NOTE: we could've done this.$el.remove(), but IE sucks, see:
             //       https://github.com/taoeffect/vue-script2/pull/17
-            this.$el.parentElement.removeChild(this.$el); // remove dummy template <div>
+            _this.$el.parentElement.removeChild(_this.$el); // remove dummy template <div>
           });
         },
-
-        destroyed() {
+        destroyed: function destroyed() {
           if (this.unload) {
             new Function(this.unload)(); // eslint-disable-line
-
             delete Script2.loaded[this.src];
           }
         }
-
       });
       Script2.installed = true;
     },
+    load: function load(src) {
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { parent: document.head };
 
-    load(src) {
-      let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
-        parent: document.head
-      };
-
-      if (!Script2.loaded[src]) {
-        Script2.loaded[src] = new Promise((resolve, reject) => {
-          var s = document.createElement('script'); // omit the special options that Script2 supports
-
-          _.defaults2(s, _.omit(opts, ['unload', 'parent']), {
-            type: 'text/javascript'
-          }); // according to: http://www.html5rocks.com/en/tutorials/speed/script-loading/
-          // async does not like 'document.write' usage, which we & vue.js make
-          // heavy use of based on the SPA style. Also, async can result
-          // in code getting executed out of order from how it is inlined on the page.
-
-
-          s.async = false; // therefore set this to false
-
-          s.src = src; // crossorigin in HTML and crossOrigin in the DOM per HTML spec
-          // https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-crossorigin
-
-          if (opts.crossorigin) {
-            s.crossOrigin = opts.crossorigin;
-          } // inspiration from: https://github.com/eldargab/load-script/blob/master/index.js
-          // and: https://github.com/ded/script.js/blob/master/src/script.js#L70-L82
-
-
-          s.onload = () => resolve(src); // IE should now support onerror and onload. If necessary, take a look
-          // at this to add older IE support: http://stackoverflow.com/a/4845802/1781435
-
-
-          s.onerror = () => reject(new Error(src));
-
-          opts.parent.appendChild(s);
-        });
-      }
-
-      return Script2.loaded[src];
+      return Script2.loaded[src] ? Promise.resolve(src) : new Promise(function (resolve, reject) {
+        var s = document.createElement('script');
+        // omit the special options that Script2 supports
+        _.defaults2(s, _.omit(opts, ['unload', 'parent']), { type: 'text/javascript' });
+        // according to: http://www.html5rocks.com/en/tutorials/speed/script-loading/
+        // async does not like 'document.write' usage, which we & vue.js make
+        // heavy use of based on the SPA style. Also, async can result
+        // in code getting executed out of order from how it is inlined on the page.
+        s.async = false; // therefore set this to false
+        s.src = src;
+        // crossorigin in HTML and crossOrigin in the DOM per HTML spec
+        // https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-crossorigin
+        if (opts.crossorigin) {
+          s.crossOrigin = opts.crossorigin;
+        }
+        // inspiration from: https://github.com/eldargab/load-script/blob/master/index.js
+        // and: https://github.com/ded/script.js/blob/master/src/script.js#L70-L82
+        s.onload = function () {
+          Script2.loaded[src] = 1;resolve(src);
+        };
+        // IE should now support onerror and onload. If necessary, take a look
+        // at this to add older IE support: http://stackoverflow.com/a/4845802/1781435
+        s.onerror = function () {
+          return reject(new Error(src));
+        };
+        opts.parent.appendChild(s);
+      });
     }
-
   };
+
   var _ = {
-    isUndefined(x) {
+    isUndefined: function isUndefined(x) {
       return x === undefined;
     },
-
-    pick(o, props) {
+    pick: function pick(o, props) {
       var x = {};
-      props.forEach(k => {
+      props.forEach(function (k) {
         x[k] = o[k];
       });
       return x;
     },
-
-    omit(o, props) {
+    omit: function omit(o, props) {
       var x = {};
-      Object.keys(o).forEach(k => {
+      Object.keys(o).forEach(function (k) {
         if (props.indexOf(k) === -1) x[k] = o[k];
       });
       return x;
     },
-
-    omitBy(o, pred) {
+    omitBy: function omitBy(o, pred) {
       var x = {};
-      Object.keys(o).forEach(k => {
+      Object.keys(o).forEach(function (k) {
         if (!pred(o[k])) x[k] = o[k];
       });
       return x;
     },
 
     // custom defaults function suited to our specific purpose
-    defaults2(o) {
-      for (var _len = arguments.length, sources = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    defaults2: function defaults2(o) {
+      for (var _len = arguments.length, sources = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         sources[_key - 1] = arguments[_key];
       }
 
-      sources.forEach(s => {
-        Object.keys(s).forEach(k => {
+      sources.forEach(function (s) {
+        Object.keys(s).forEach(function (k) {
           if (_.isUndefined(o[k]) || o[k] === '') o[k] = s[k];
         });
       });
     }
-
   };
 
   return Script2;
 
-}));
+})));
 
 
 /***/ }),
@@ -54359,37 +54335,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var core_js_modules_es_date_to_string__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.date.to-string */ "./node_modules/core-js/modules/es.date.to-string.js");
 /* harmony import */ var core_js_modules_es_date_to_string__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_date_to_string__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.define-properties */ "./node_modules/core-js/modules/es.object.define-properties.js");
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.parse-int */ "./node_modules/core-js/modules/es.parse-int.js");
-/* harmony import */ var core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../exceptions/ExceptionMap */ "./resources/js/src/app/exceptions/ExceptionMap.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _services_VariationPropertyService__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../services/VariationPropertyService */ "./resources/js/src/app/services/VariationPropertyService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.define-properties */ "./node_modules/core-js/modules/es.object.define-properties.js");
+/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
+/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.parse-int */ "./node_modules/core-js/modules/es.parse-int.js");
+/* harmony import */ var core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../exceptions/ExceptionMap */ "./resources/js/src/app/exceptions/ExceptionMap.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_VariationPropertyService__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../services/VariationPropertyService */ "./resources/js/src/app/services/VariationPropertyService.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_26__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
 
 
 
@@ -54427,7 +54406,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var NotificationService = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_25___default.a.component("basket-list-item", {
+vue__WEBPACK_IMPORTED_MODULE_26___default.a.component("basket-list-item", {
   props: {
     template: {
       type: String,
@@ -54509,16 +54488,20 @@ vue__WEBPACK_IMPORTED_MODULE_25___default.a.component("basket-list-item", {
       return this.basketItem.price;
     },
     basePrice: function basePrice() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNullOrUndefined"])(this.basketItem.variation.data.prices.specialOffer)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_24__["isNullOrUndefined"])(this.basketItem.variation.data.prices.specialOffer)) {
         return this.basketItem.variation.data.prices.specialOffer.basePrice;
       }
 
       return this.basketItem.variation.data.prices.default.basePrice;
     },
     transformedVariationProperties: function transformedVariationProperties() {
-      return Object(_services_VariationPropertyService__WEBPACK_IMPORTED_MODULE_24__["transformBasketItemProperties"])(this.basketItem, [], "displayInOrderProcess");
+      return Object(_services_VariationPropertyService__WEBPACK_IMPORTED_MODULE_25__["transformBasketItemProperties"])(this.basketItem, [], "displayInOrderProcess");
+    },
+    // eslint-disable-next-line complexity
+    isMoreButtonVisible: function isMoreButtonVisible() {
+      return this.isDataFieldVisible("basket.item.item_id") && this.basketItem.variation.data.item.id || this.isDataFieldVisible("basket.item.customNumber") && this.basketItem.variation.data.variation.number || this.isDataFieldVisible("basket.item.availability") && this.basketItem.variation.data.variation.availability.names.name || this.isDataFieldVisible("basket.item.description_long") && this.basketItem.variation.data.texts.description || this.isDataFieldVisible("basket.item.description_short") && this.basketItem.variation.data.texts.shortDescription;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_26__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_27__["mapState"])({
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
     },
@@ -54574,10 +54557,10 @@ vue__WEBPACK_IMPORTED_MODULE_25___default.a.component("basket-list-item", {
           if (_this2.isPreview) {
             _this2.$store.dispatch("addBasketNotification", {
               type: "error",
-              message: _services_TranslationService__WEBPACK_IMPORTED_MODULE_22__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_21__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)
+              message: _services_TranslationService__WEBPACK_IMPORTED_MODULE_23__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_22__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)
             });
           } else {
-            NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_22__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_21__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)).closeAfter(5000);
+            NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_23__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_22__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)).closeAfter(5000);
           }
 
           _this2.waiting = false;

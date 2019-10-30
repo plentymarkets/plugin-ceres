@@ -13934,7 +13934,6 @@ html.ie #thumb-carousel .owl-stage {
     display: block; }
 
 .top-bar {
-  width: 100%;
   color: #fff;
   background-color: #4D4F4D; }
   @media print {
@@ -14979,10 +14978,9 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   .wrapper-main .breadcrumbs {
     background: #efefef; }
   .wrapper-main .breadcrumb {
-    max-width: 1200px;
     margin: 0 auto;
     background: transparent;
-    padding: .5rem 15px; } }
+    padding: .5rem 15px !important; } }
 
 .to-top {
   display: block;
@@ -18885,6 +18883,11 @@ html.ie .widget-grid .widget-inner-stacked {
     max-width: 1170px;
     min-width: inherit; }
 
+.header-fw {
+  position: relative;
+  width: 100vw;
+  left: calc(-1 * (100vw - 100%) / 2) !important; }
+
 .widget-fw {
   position: relative;
   width: 100vw;
@@ -18893,6 +18896,11 @@ html.ie .widget-grid .widget-inner-stacked {
   margin-left: 0;
   margin-right: 0;
   max-width: none !important; }
+  .widget-fw.header-fw .container-max {
+    max-width: none; }
+  .widget-fw.top-bar .container-max {
+    padding-right: 0;
+    padding-left: 0; }
   .widget-fw.widget-grid {
     width: calc(100vw + 30px) !important;
     margin-left: -15px; }

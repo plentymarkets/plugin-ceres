@@ -13543,7 +13543,6 @@ $border-width: 1px;
 		display: none;
 	}
 
-	width: 100%;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
 
@@ -13851,9 +13850,10 @@ $border-width: 1px;
 		}
 	}
 
-	.navbar{
+	.navbar {
 		font-family:$font-family-heading;
 		border-bottom:1px solid darken($gray-lighter2, 2%);
+
 		a {
 			color: $gray-dark;
 			&:hover {
@@ -15124,10 +15124,9 @@ html.ie {
 			background: $breadcrumb-bg;
 		}
 		.breadcrumb{
-			max-width: 1200px;
 		    margin: 0 auto;
 		    background: transparent;
-		    padding: .5rem 15px;
+		    padding: .5rem 15px !important;
 		}
 	}
 }
@@ -20667,6 +20666,12 @@ html.ie .widget-grid .widget-inner-stacked {
     }
 }
 
+.header-fw {
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2) !important;
+}
+
 .widget-fw {
     position: relative;
     width: 100vw;
@@ -20675,6 +20680,19 @@ html.ie .widget-grid .widget-inner-stacked {
     margin-left: 0;
     margin-right: 0;
     max-width: none !important;
+
+    &.header-fw {
+        .container-max {
+            max-width: none;
+        }
+    }
+
+    &.top-bar {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
 
     &.widget-grid {
         width: calc(100vw + 30px) !important;

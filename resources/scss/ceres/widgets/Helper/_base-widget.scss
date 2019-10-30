@@ -71,6 +71,12 @@
     }
 }
 
+.header-fw {
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2) !important;
+}
+
 .widget-fw {
     position: relative;
     width: 100vw;
@@ -79,6 +85,19 @@
     margin-left: 0;
     margin-right: 0;
     max-width: none !important;
+
+    &.header-fw {
+        .container-max {
+            max-width: none;
+        }
+    }
+
+    &.top-bar {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
 
     &.widget-grid {
         width: calc(100vw + 30px) !important;
