@@ -16,7 +16,6 @@
 <div class="widget widget-pagination widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div>
-        <div>showFirstPage {{ showFirstPage | json_encode }}</div>
         {% if isPreview %}
             {# in the preview we need some dummy pages #}
             {{ Twig.include("Ceres::Category.Item.Partials.Pagination", { showFirstPage: showFirstPage | json_encode, showLastPage: showLastPage | json_encode, pageLimit: pageLimit, currentPage: 2, pageMax: pageLimit * 3 }) }}
