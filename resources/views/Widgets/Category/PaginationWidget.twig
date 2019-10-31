@@ -1,9 +1,26 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-<div>
-    <h1>Ich bin eine Pagination :)</h1>
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
+{% set appearance    = widget.settings.appearance.mobile | default("primary") %}
+{% set pageLimit     = widget.settings.pageLimit.mobile | default(1) %}
+{% set showFirstPage = widget.settings.showFirstPage.mobile | default(1) %}
+{% set showLastPage  = widget.settings.showLastPage.mobile | default(1) %}
+
+<div class="widget widget-pagination widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div>
-        {{ Twig.include("Ceres::Category.Item.Partials.Pagination", { showFirstPage: "true", showLastPage: "false" }) }}<!-- TODO: das hier aus den Einstellungen lesen -->
+        {% if isPreview %}
+            {# in the preview we need some dummy pages #}
+            {{ Twig.include("Ceres::Category.Item.Partials.Pagination", { showFirstPage: showFirstPage | json_encode, showLastPage: showLastPage | json_encode, pageLimit: pageLimit, currentPage: 2, pageMax: pageLimit * 3 }) }}
+        {% else %}
+            {{ Twig.include("Ceres::Category.Item.Partials.Pagination", { showFirstPage: showFirstPage | json_encode, showLastPage: showLastPage | json_encode, pageLimit: pageLimit }) }}
+        {% endif %}
     </div>
 </div>

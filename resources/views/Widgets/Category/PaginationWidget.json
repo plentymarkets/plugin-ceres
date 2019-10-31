@@ -14,15 +14,28 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "slide": {
+        "showFirstPage": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.paginationShowFirstPageLabel"
+            }
+        },
+        "showLastPage": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.paginationShowLastPageLabel"
+            }
+        },
+        "pageLimit": {
             "type": "slider",
             "required": false,
+            "defaultValue": 1,
             "options": {
-                "defaultValue": 1,
                 "inputInterval": 1,
                 "inputMax": 10,
-                "name": "Widget.ItemsPerPageEntryNameLabel",
-                "tooltipText": "Widget.ItemsPerPageEntryNameTooltip"
+                "name": "Widget.paginationPageLimitLabel"
             }
         },
         "spacing":"@include(spacing)"
