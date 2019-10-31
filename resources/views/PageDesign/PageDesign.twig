@@ -32,6 +32,8 @@
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
 <head>
+    {{ get_consent_scripts() }}
+
     {% include getPartial('head') %}
 
     {% block PartialHead %}
@@ -214,7 +216,6 @@
 {{ Translations.add( "Ceres", "Template" ) }}
 
 {{ get_json_data() }}
-{{ get_consent_scripts() }}
 
 {% if ceresConfig.log.performanceLevel  == 'development' %}
     <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.js?v={{ buildHash }}"></script>
