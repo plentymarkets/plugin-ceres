@@ -17,10 +17,28 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div>
         {% if isPreview %}
+
             {# in the preview we need some dummy pages #}
-            {{ Twig.include("Ceres::Category.Item.Partials.Pagination", { showFirstPage: showFirstPage | json_encode, showLastPage: showLastPage | json_encode, pageLimit: pageLimit, currentPage: 2, pageMax: pageLimit * 3 }) }}
+            {{ Twig.include("Ceres::Category.Item.Partials.Pagination", { 
+                showFirstPage : showFirstPage | json_encode,
+                showLastPage  : showLastPage | json_encode,
+                pageLimit     : pageLimit,
+                currentPage   : 2,
+                pageMax       : pageLimit * 3,
+                spacingPadding: spacingPadding | json_encode,
+                inlinePadding : inlinePadding | json_encode })
+            }}
+
         {% else %}
-            {{ Twig.include("Ceres::Category.Item.Partials.Pagination", { showFirstPage: showFirstPage | json_encode, showLastPage: showLastPage | json_encode, pageLimit: pageLimit }) }}
+
+            {{ Twig.include("Ceres::Category.Item.Partials.Pagination", {
+                showFirstPage : showFirstPage | json_encode,
+                showLastPage  : showLastPage | json_encode,
+                pageLimit     : pageLimit,
+                spacingPadding: spacingPadding | json_encode,
+                inlinePadding : inlinePadding | json_encode })
+            }}
+
         {% endif %}
     </div>
 </div>
