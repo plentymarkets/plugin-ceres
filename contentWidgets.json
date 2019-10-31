@@ -513,8 +513,8 @@
                     "sorting.price.avg_desc"
                 ],
                 "options": {
-                    "name": "Widget.itemListItemSortLabel",
-                    "tooltipText": "Widget.itemListItemSortTooltip",
+                    "name": "Widget.itemSortingOptionsLabel",
+                    "tooltipText": "Widget.itemSortingOptionsTooltip",
                     "checkboxValues": [
                         {
                             "value": "default.recommended_sorting",
