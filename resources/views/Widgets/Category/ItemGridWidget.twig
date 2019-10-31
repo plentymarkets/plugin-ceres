@@ -21,7 +21,7 @@
         <div class="widget-inner row product-list grid">
             {{ Twig.for("item", "itemList") }}
                 <li class="col-{{ 12 / numberOfColumns }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
-                {% if inlinePadding | length > 0 %} {{ inlinePadding }}{% endif %}>
+                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     <category-item
                         :item-data="{{ Twig.print("item.data | json_encode") }}"
                         :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}">
