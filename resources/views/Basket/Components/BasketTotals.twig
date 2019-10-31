@@ -80,6 +80,8 @@
                 </template>
                 {# Shipping (gross) #}
 
+                {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+
                 {# Coupon #}
                 <template v-if="visibleFields.includes('promotionCoupon') && basket.couponCode && basket.couponCampaignType === 'promotion'">
                     <dt class="font-weight-bold">
@@ -90,8 +92,7 @@
                     </dd>
                 </template>
                 {# Coupon #}
-
-                {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+                
                 <hr>
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
 
