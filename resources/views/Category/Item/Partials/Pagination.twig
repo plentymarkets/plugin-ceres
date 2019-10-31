@@ -44,7 +44,7 @@
                 <li class="page-item">
                     <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
-                        href="{{ baseURL ~ queryString({ 'page': null }) }}">
+                        {% if not isPreview %}href="{{ baseURL ~ queryString({ 'page': null }) }}"{% endif %}>
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                 </li>
@@ -55,7 +55,7 @@
             <li class="page-item{% if currentPage <= 1 %} disabled{% endif %}">
                 <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                     {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
-                    {% if currentPage > 1 %} href="{{ baseURL ~ queryString({ 'page': prevPage }) }}"{% endif %}>
+                    {% if currentPage > 1 and not isPreview %} href="{{ baseURL ~ queryString({ 'page': prevPage }) }}"{% endif %}>
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </a>
             </li>
@@ -68,7 +68,7 @@
                 <li class="page-item{% if i == currentPage %} active{% endif %}">
                     <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
-                        {% if i != currentPage %}href="{{ baseURL ~ queryString({ 'page': target }) }}"{% endif %}>
+                        {% if i != currentPage and not isPreview %}href="{{ baseURL ~ queryString({ 'page': target }) }}"{% endif %}>
                         {{ i }}
                     </a>
                 </li>
@@ -79,7 +79,7 @@
             <li class="page-item{% if currentPage >= pageMax %} disabled{% endif %}">
                 <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                     {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
-                    {% if currentPage < pageMax %} href="{{ baseURL ~ queryString({ 'page': currentPage + 1 }) }}"{% endif %}>
+                    {% if currentPage < pageMax and not isPreview %} href="{{ baseURL ~ queryString({ 'page': currentPage + 1 }) }}"{% endif %}>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
             </li>
@@ -90,7 +90,7 @@
                 <li class="page-item">
                     <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
-                        href="{{ baseURL ~ queryString({ 'page': pageMax }) }}">
+                        {% if not isPreview %}href="{{ baseURL ~ queryString({ 'page': pageMax }) }}"{% endif %}>
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     </a>
                 </li>
