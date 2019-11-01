@@ -54073,7 +54073,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("basket-totals", {
     visibleFields: {
       type: Array,
       default: function _default() {
-        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"];
+        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "totalSumGross", "salesCoupon", "openAmount"];
       }
     }
   },
