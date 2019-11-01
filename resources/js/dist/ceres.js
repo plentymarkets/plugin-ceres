@@ -65889,7 +65889,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     },
     imageAccessor: {
       type: String,
-      default: "urlMiddle"
+      default: "urlPreview"
     },
     itemDetailsData: {
       type: Array,
