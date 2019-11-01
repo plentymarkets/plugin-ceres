@@ -109,7 +109,7 @@ class DefaultBasketPreset implements ContentPreset
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::BasketTotalsWidget')
             ->withSetting('customClass', '')
-            ->withSetting('visibleFields', ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
+            ->withSetting('visibleFields', ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
 
         $this->stickyContainer->createChild('sticky', 'Ceres::SeparatorWidget')
             ->withSetting('customClass', '');
