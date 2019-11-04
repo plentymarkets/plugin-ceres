@@ -58,20 +58,25 @@
             border-color: transparent $value transparent transparent !important;
         }
 
-        .pagination .page-item
+        .pagination 
         {
-            .page-link
-            {
-                color: $value;
-                @include hover-focus {
-                    color: darken($value, 15%);
-                }
-            }
+            flex-wrap: wrap;
 
-            &.active .page-link
+            .page-item
             {
-                border-color: $value;
-                @include context-bg($value);
+                .page-link
+                {
+                    color: $value;
+                    @include hover-focus {
+                        color: darken($value, 15%);
+                    }
+                }
+    
+                &.active .page-link
+                {
+                    border-color: $value;
+                    @include context-bg($value);
+                }
             }
         }
     }
