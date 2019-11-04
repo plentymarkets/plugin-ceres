@@ -3,7 +3,6 @@
 		display: none;
 	}
 
-	width: 100%;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
 
@@ -283,9 +282,10 @@
 		}
 	}
 
-	.navbar{
+	.navbar {
 		font-family:$font-family-heading;
 		border-bottom:1px solid darken($gray-lighter2, 2%);
+
 		a {
 			color: $gray-dark;
 			&:hover {

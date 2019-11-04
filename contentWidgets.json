@@ -27,8 +27,8 @@
                     "rebate",
                     "shippingCostsNet",
                     "shippingCostsGross",
-                    "totalSumNet",
                     "promotionCoupon",
+                    "totalSumNet",
                     "vats",
                     "totalSumGross",
                     "salesCoupon",
@@ -58,12 +58,12 @@
                             "caption": "Widget.showBasketShippingCostsGross"
                         },
                         {
-                            "value": "totalSumNet",
-                            "caption": "Widget.showBasketTotalSumNet"
-                        },
-                        {
                             "value": "promotionCoupon",
                             "caption": "Widget.showBasketPromotionCoupon"
+                        },
+                        {
+                            "value": "totalSumNet",
+                            "caption": "Widget.showBasketTotalSumNet"
                         },
                         {
                             "value": "vats",
@@ -9891,8 +9891,8 @@
                     "rebate",
                     "shippingCostsNet",
                     "shippingCostsGross",
-                    "totalSumNet",
                     "promotionCoupon",
+                    "totalSumNet",
                     "vats",
                     "totalSumGross",
                     "salesCoupon",
@@ -9922,12 +9922,12 @@
                             "caption": "Widget.showBasketShippingCostsGross"
                         },
                         {
-                            "value": "totalSumNet",
-                            "caption": "Widget.showBasketTotalSumNet"
-                        },
-                        {
                             "value": "promotionCoupon",
                             "caption": "Widget.showBasketPromotionCoupon"
+                        },
+                        {
+                            "value": "totalSumNet",
+                            "caption": "Widget.showBasketTotalSumNet"
                         },
                         {
                             "value": "vats",

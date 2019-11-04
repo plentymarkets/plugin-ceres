@@ -588,6 +588,7 @@
     "supportedFeatures": {
         "categoryItemContent": true,
         "singleItemContent": true,
-        "globalElementsOverride": true
+        "globalElementsOverride": true,
+        "safeMode" : true
     }
 }

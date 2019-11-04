@@ -106,14 +106,14 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <template>
                     <div class="item-additional-information-container">
-                        <div class="item-additional-information">
-                            <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.id">
+                        <div class="item-additional-information" v-if="showMoreInformation">
+                            <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.variation.data.item.id">
                                 <div class="mt-3">
                                     <strong>{{ trans("Ceres::Template.basketItemId") }}:</strong>
-                                    <span>${ basketItem.id }</span>
+                                    <span>${ basketItem.variation.data.item.id }</span>
                                 </div>
                             </template>
 
@@ -141,8 +141,15 @@
                         </div>
                     </div>
                 </template>
-            </div>
 
+                <label v-if="isMoreButtonVisible"
+                    class="btn-collapse"
+                    :class="{ 'collapsed': !showMoreInformation }"
+                    @click="showMoreInformation = !showMoreInformation"
+                    data-show-more="{{ trans("Ceres::Template.basketShowMore") }}"
+                    data-show-less="{{ trans("Ceres::Template.basketShowLess") }}">
+                </label>
+            </div>
         </div>
         
         {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}

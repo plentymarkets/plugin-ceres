@@ -1,9 +1,9 @@
 {% set homepageURL = services.url.getHomepageURL() %}
 
 {% if categoryBreadcrumbs is not empty %}
-    <nav data-component="breadcrumbs" data-renderer="twig" class="container-max small hidden-sm-down">
+    <nav data-component="breadcrumbs" data-renderer="twig" class="small hidden-sm-down">
         {% set crumbs = [] %}
-        <ul class="breadcrumb">
+        <ul class="breadcrumb container-max">
             <li class="breadcrumb-item">
                 <a href="{{ homepageURL }}">
                     <i class="fa fa-home" aria-hidden="true"></i>

@@ -15,6 +15,7 @@ use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
 use IO\Services\WebstoreConfigurationService;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
+use Plenty\Plugin\Application;
 use Plenty\Plugin\Http\Request;
 
 class GlobalContext implements ContextInterface
@@ -48,6 +49,7 @@ class GlobalContext implements ContextInterface
     public $splitItemBundle;
     public $templateEvent;
     public $isShopBuilder;
+    public $isSafeMode;
     public $bodyClasses;
     public $buildHash;
 
@@ -84,6 +86,9 @@ class GlobalContext implements ContextInterface
 
         /** @var ShopUrls $shopUrls */
         $shopUrls = pluginApp(ShopUrls::class);
+
+        /** @var Application $app */
+        $app = pluginApp(Application::class);
 
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
@@ -126,6 +131,8 @@ class GlobalContext implements ContextInterface
         $this->templateEvent = $templateService->getCurrentTemplate();
 
         $this->isShopBuilder = $shopBuilderRequest->isShopBuilder();
+
+        $this->isSafeMode = $app->isTemplateSafeMode();
        
         $this->bodyClasses = [];
         $templateClass = str_replace('tpl', 'page', $this->templateEvent);
