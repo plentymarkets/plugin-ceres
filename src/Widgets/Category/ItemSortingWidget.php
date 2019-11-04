@@ -2,34 +2,32 @@
 
 namespace Ceres\Widgets\Category;
 
-use Ceres\Config\CeresConfig;
+use Ceres\Config\CeresSortingConfig;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Helper\SearchOptions;
+use Plenty\Plugin\Http\Request;
 
 class ItemSortingWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.Category.ItemSortingWidget";
-    
-    /** @var CeresConfig $ceresConfig  */
-    private $ceresConfig = null;
-
-    public function __constructor(){
-        $this->ceresConfig = pluginApp(CeresConfig::class);
-    }
 
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $itemSortOptions = [];
         $result = [];
         $translationMap = SearchOptions::TRANSLATION_MAP;
+        /**
+         * @var CeresSortingConfig $ceresSortingConfig
+         */
+        $ceresSortingConfig = pluginApp(CeresSortingConfig::class);
 
         if (array_key_exists("itemSortOptions", $widgetSettings))
         {
             $temp = $widgetSettings["itemSortOptions"]["mobile"];
 
             // add default from ceres config
-            if (!in_array($this->ceresConfig->sorting->defaultSorting, $temp)) {
-                array_push($temp, $this->ceresConfig->sorting->defaultSorting);
+            if (!in_array($ceresSortingConfig->defaultSorting, $temp)) {
+                array_push($temp, $ceresSortingConfig->defaultSorting);
             }
 
             foreach ($translationMap as $key => $value) {
@@ -39,6 +37,17 @@ class ItemSortingWidget extends BaseWidget
             }
         }
 
+        $request = pluginApp(Request::class);
+        $sorting = $request->get('sorting', null);
+        if (!is_null($sorting) && in_array($sorting, $itemSortOptions))
+        {
+            $result["itemSorting"] = $sorting;
+        }
+        else
+        {
+            $result["itemSorting"] = $ceresSortingConfig->defaultSorting;
+        }
+
         $result["itemSortOptions"] = $itemSortOptions;
         $result["translations"] = $translationMap;
         return $result;
@@ -46,6 +55,10 @@ class ItemSortingWidget extends BaseWidget
 
     protected function getPreviewData($widgetSettings)
     {
-        return ["itemSorting" => $this->ceresConfig->sorting->defaultSorting];
+        /**
+         * @var CeresSortingConfig $ceresSortingConfig
+         */
+        $ceresSortingConfig = pluginApp(CeresSortingConfig::class);
+        return ["itemSorting" => $ceresSortingConfig->defaultSorting];
     }
 }
