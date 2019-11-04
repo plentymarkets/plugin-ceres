@@ -9,6 +9,13 @@ use Ceres\Helper\SearchOptions;
 class ItemSortingWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.Category.ItemSortingWidget";
+    
+    /** @var CeresConfig $ceresConfig  */
+    private $ceresConfig = null;
+
+    public function __constructor(){
+        $this->ceresConfig = pluginApp(CeresConfig::class);
+    }
 
     protected function getTemplateData($widgetSettings, $isPreview)
     {
@@ -19,6 +26,11 @@ class ItemSortingWidget extends BaseWidget
         if (array_key_exists("itemSortOptions", $widgetSettings))
         {
             $temp = $widgetSettings["itemSortOptions"]["mobile"];
+
+            // add default from ceres config
+            if (!in_array($this->ceresConfig->sorting->defaultSorting, $temp)) {
+                array_push($temp, $this->ceresConfig->sorting->defaultSorting);
+            }
 
             foreach ($translationMap as $key => $value) {
                 if (in_array($key, $temp)) {
@@ -34,11 +46,6 @@ class ItemSortingWidget extends BaseWidget
 
     protected function getPreviewData($widgetSettings)
     {
-        /**
-         * @var CeresConfig $config
-         */
-        
-        $config = pluginApp(CeresConfig::class);
-        return ["itemSorting" => $config->sorting->defaultSorting];
+        return ["itemSorting" => $this->ceresConfig->sorting->defaultSorting];
     }
 }
