@@ -70862,6 +70862,10 @@ var TranslationService = function ($) {
     var tags = document.querySelectorAll("script[data-translation]");
 
     for (var i = 0; i < tags.length; i++) {
+      if (!tags[i].dataset || !tags[i].dataset.translation) {
+        continue;
+      }
+
       var identifier = tags[i].dataset.translation;
 
       if (!identifier || !identifierPattern.test(identifier)) {
