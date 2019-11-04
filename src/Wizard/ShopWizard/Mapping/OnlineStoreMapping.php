@@ -111,6 +111,12 @@ class OnlineStoreMapping
             "global"    => true,
             "optional"  => false
         ],
+        "onlineStore_blockCookies" => [
+            "field"     => "global.block_cookies",
+            "type"      => "boolean",
+            "global"    => false,
+            "optional"  => false
+        ],
         "onlineStore_shippingProfiles" => [
             "field"     => "checkout.show_all_shipping_profiles",
             "type"      => "boolean",

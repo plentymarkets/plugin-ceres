@@ -136,6 +136,14 @@
                     "options": {
                         "defaultValue": "true"
                     }
+                },
+                "global.block_cookies": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalBlockCookies",
+                    "options": {
+                        "defaultValue": "false"
+                    }
                 }
             }
         },
