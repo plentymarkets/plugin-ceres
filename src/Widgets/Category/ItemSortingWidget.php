@@ -20,6 +20,7 @@ class ItemSortingWidget extends BaseWidget
         }
 
         $result["itemSortOptions"] = $itemSortOptions;
+        $result["translations"] = SearchOptions::TRANSLATION_MAP;
         return $result;
     }
 
@@ -28,12 +29,8 @@ class ItemSortingWidget extends BaseWidget
         /**
          * @var CeresConfig $config
          */
-
-        $searchOptions = SearchOptions::get(SearchOptions::SCOPE_CATEGORY);
         
         $config = pluginApp(CeresConfig::class);
-        return ["itemSorting" => $config->sorting->defaultSorting,
-                "searchOptions" => $searchOptions];
-
+        return ["itemSorting" => $config->sorting->defaultSorting];
     }
 }

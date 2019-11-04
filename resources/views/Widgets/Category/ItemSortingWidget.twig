@@ -7,6 +7,8 @@
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 {{ Twig.set("itemSortOptions", itemSortOptions | json_encode) }}
+{{ Twig.set("translations", translations | json_encode) }}
+
 {{ Twig.if("ceresConfig.sorting.defaultSorting not in itemSortOptions") }}
     {{ Twig.do("set itemSortOptions = itemSortOptions | merge([ceresConfig.sorting.defaultSorting])") }}
 {{ Twig.endif() }}
@@ -19,9 +21,60 @@
                     class="custom-select"
                     @change="$store.dispatch('selectItemListSorting', $event.target.value)"
                     v-populate-store:mutation="{ name: 'setItemListSorting', data: {{ Twig.print("itemSorting | json_encode") }} }">
-                    {{ Twig.for("key, value", "itemSortOptions") }}
-                        <option value="{{ Twig.print("value") }}"{{ Twig.if("value == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("searchOptions.sorting[value]") }}</option>
-                    {{ Twig.endfor() }}
+                    {{ Twig.if("'default.recommended_sorting' in itemSortOptions") }}
+                        <option value="{{ Twig.print("default.recommended_sorting") }}"{{ Twig.if("default.recommended_sorting == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['default.recommended_sorting'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'texts.name1_desc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("texts.name1_desc") }}"{{ Twig.if("texts.name1_desc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['texts.name1_desc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'texts.name1_asc' in itemSortOptions") }} 
+                        <option value="{{ Twig.print("texts.name1_asc") }}"{{ Twig.if("texts.name1_asc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['texts.name1_asc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'sorting.price.avg_asc' in itemSortOptions") }} 
+                        <option value="{{ Twig.print("sorting.price.avg_asc") }}"{{ Twig.if("sorting.price.avg_asc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['sorting.price.avg_asc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'sorting.price.avg_desc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("sorting.price.avg_desc") }}"{{ Twig.if("sorting.price.avg_desc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['sorting.price.avg_desc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.createdAt_desc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("variation.createdAt_desc") }}"{{ Twig.if("variation.createdAt_desc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.createdAt_desc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.createdAt_asc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("variation.createdAt_asc") }}"{{ Twig.if("variation.createdAt_asc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.createdAt_asc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.availability.averageDays_asc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("variation.availability.averageDays_asc") }}"{{ Twig.if("variation.availability.averageDays_asc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.availability.averageDays_asc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.availability.averageDays_desc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("variation.availability.averageDays_desc") }}"{{ Twig.if("variation.availability.averageDays_desc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.availability.averageDays_desc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.number_asc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("variation.number_asc") }}"{{ Twig.if("variation.number_asc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.number_asc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.number_desc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("variation.number_desc") }}"{{ Twig.if("variation.number_desc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.number_desc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.updatedAt_asc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("variation.updatedAt_asc") }}"{{ Twig.if("variation.updatedAt_asc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.updatedAt_asc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.updatedAt_desc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("variation.updatedAt_desc") }}"{{ Twig.if("variation.updatedAt_desc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.updatedAt_desc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'item.manufacturer.externalName_asc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("item.manufacturer.externalName_asc") }}"{{ Twig.if("item.manufacturer.externalName_asc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations[item.manufacturer.externalName_asc])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'item.manufacturer.externalName_desc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("item.manufacturer.externalName_desc") }}"{{ Twig.if("item.manufacturer.externalName_desc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['item.manufacturer.externalName_desc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'item.random' in itemSortOptions") }}
+                        <option value="{{ Twig.print("item.random") }}"{{ Twig.if("item.random == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['item.random'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.position_asc' in itemSortOptions") }}
+                        <option value="{{ Twig.print("variation.position_asc") }}"{{ Twig.if("variation.position_asc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.position_asc'])") }}</option>
+                    {{ Twig.endif() }}
+                    {{ Twig.if("'variation.position_desc' in itemSortOptions") }} 
+                        <option value="{{ Twig.print("variation.position_desc") }}"{{ Twig.if("variation.position_desc == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations['variation.position_desc'])") }}</option>
+                    {{ Twig.endif() }}
                 </select>
             </div>
         </div>
