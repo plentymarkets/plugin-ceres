@@ -1542,6 +1542,7 @@
                 "pagination.position": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.paginationPositionLabel",
                     "options": {
                         "defaultValue": "top",
@@ -1564,6 +1565,7 @@
                 "pagination.showFirstPage": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.paginationShowFirstPageLabel",
                     "options": {
                         "defaultValue": "false"
@@ -1572,6 +1574,7 @@
                 "pagination.showLastPage": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.paginationShowLastPageLabel",
                     "options": {
                         "defaultValue": "false"
