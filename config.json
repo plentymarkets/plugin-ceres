@@ -1650,6 +1650,7 @@
                 "sort.data": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.sortDataLabel",
                     "options": {
                         "defaultValue": "texts.name1_asc, texts.name1_desc, sorting.price.avg_asc, sorting.price.avg_desc",
