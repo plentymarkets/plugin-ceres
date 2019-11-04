@@ -42,12 +42,6 @@ class CeresSortingConfig extends PluginConfig
                 "item.manufacturer.externalName_desc",
                 "variation.position_asc",
                 "variation.position_desc"
-            ],
-            [
-                "texts.name1_asc",
-                "texts.name1_desc",
-                "sorting.price.avg_asc",
-                "sorting.price.avg_desc"
             ]
         );
         $this->defaultSorting       = $this->getTextValue( "sort.defaultSorting", "texts.name1_asc" );

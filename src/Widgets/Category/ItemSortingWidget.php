@@ -12,7 +12,6 @@ class ItemSortingWidget extends BaseWidget
 
     protected function getTemplateData($widgetSettings, $isPreview)
     {
-        $temp = [];
         $itemSortOptions = [];
         $result = [];
         $translationMap = SearchOptions::TRANSLATION_MAP;
