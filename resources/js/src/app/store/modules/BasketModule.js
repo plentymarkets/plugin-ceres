@@ -33,6 +33,25 @@ const mutations =
             state.items = basketItems;
         },
 
+        updateBasketItems(state, basketItems)
+        {
+            if (basketItems)
+            {
+                const newItems = [];
+
+                for (const item of basketItems)
+                {
+                    if (isNullOrUndefined(item.variation))
+                    {
+                        item.variation = state.items.find(i => i.id === item.id).variation;
+                    }
+                    newItems.push(item);
+                }
+
+                state.items = newItems;
+            }
+        },
+
         addBasketItem(state, basketItems)
         {
             for (let i = 0; i < basketItems.length; i++)
@@ -145,7 +164,7 @@ const actions =
             {
                 commit("setBasket", data.basket);
                 commit("setShowNetPrices", data.showNetPrices);
-                // commit("setBasketItems", data.basketItems);
+                commit("updateBasketItems", data.basketItems);
                 commit("setWishListIds", data.basket.itemWishListIds);
             });
 
