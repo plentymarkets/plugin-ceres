@@ -37,17 +37,6 @@ class ItemSortingWidget extends BaseWidget
             }
         }
 
-        $request = pluginApp(Request::class);
-        $sorting = $request->get('sorting', null);
-        if (!is_null($sorting) && in_array($sorting, $itemSortOptions))
-        {
-            $result["itemSorting"] = $sorting;
-        }
-        else
-        {
-            $result["itemSorting"] = $ceresSortingConfig->defaultSorting;
-        }
-
         $result["itemSortOptions"] = $itemSortOptions;
         $result["translations"] = $translationMap;
         return $result;
