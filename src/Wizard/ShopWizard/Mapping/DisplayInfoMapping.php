@@ -27,12 +27,6 @@ class DisplayInfoMapping
             "global"   => false,
             "optional" => true,
         ],
-        "displayInfo_variationType" => [
-            "field"    => "item.variation_show_type",
-            "type"     => "string",
-            "global"   => false,
-            "optional" => true,
-        ],
         "displayInfo_showCategoryImage" => [
             "field"    => "item.show_category_image",
             "type"     => "boolean",
@@ -100,7 +94,7 @@ class DisplayInfoMapping
             "optional" => true,
         ],
     ];
-    
+
     /**
      * @return array
      */
