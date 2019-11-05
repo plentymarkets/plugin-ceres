@@ -26,6 +26,16 @@ Vue.component("item-filter-list", {
                 "feedback",
                 "price"
             ]
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
