@@ -3,14 +3,16 @@
 
 {{ Twig.component( "Ceres::ItemList.Components.Filter.ItemFilterListBulk") }}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass     = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-item-dynamic-filter">
+{% set appearance      = widget.settings.appearance.mobile | default("none") %}
+
+<div class="widget widget-item-dynamic-filter widget-{{ appearance }}">
     <item-filter-list
         template="#vue-item-filter-list-bulk"
         :facet-data="{{ Twig.print('facets | json_encode') }}"
