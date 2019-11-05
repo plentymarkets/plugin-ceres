@@ -1,0 +1,13 @@
+.widget-item-dynamic-filter
+{
+    padding: 2rem;
+    background-color: $white;
+
+    .card
+    {
+        &:not(:last-child)
+        {
+            padding-bottom: .75rem;
+        }
+    }
+}

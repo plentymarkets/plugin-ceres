@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::ItemDynamicFilterWidget",
+    "label": "Widget.itemDynamicFilterLabel",
+    "previewImageURL": "/images/widgets/item-dynamic-filter.svg",
+    "type": "categoryitem",
+    "categories": ["categoryitem"],
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Category\\ItemDynamicFilterWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}

@@ -4,8 +4,6 @@ import { mapState } from "vuex";
 
 Vue.component("item-filter-list", {
 
-    delimiters: ["${", "}"],
-
     props: {
         template: {
             type: String,
@@ -17,6 +15,17 @@ Vue.component("item-filter-list", {
             {
                 return [];
             }
+        },
+        allowedFacetsTypes:
+        {
+            type: Array,
+            default: () => [
+                "availability",
+                "category",
+                "dynamic",
+                "feedback",
+                "price"
+            ]
         }
     },
 
@@ -81,7 +90,7 @@ Vue.component("item-filter-list", {
         ...mapState({
             facets(state)
             {
-                return state.itemList.facets.sort((facetA, facetB) =>
+                const facets = state.itemList.facets.sort((facetA, facetB) =>
                 {
                     if (facetA.position > facetB.position)
                     {
@@ -94,6 +103,8 @@ Vue.component("item-filter-list", {
 
                     return 0;
                 });
+
+                return facets.filter(facet => this.allowedFacetsTypes.includes(facet.id) || this.allowedFacetsTypes.includes(facet.type));
             },
             isLoading: state => state.itemList.isLoading,
             selectedFacets: state => state.itemList.selectedFacets

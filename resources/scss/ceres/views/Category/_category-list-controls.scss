@@ -50,7 +50,7 @@
         }
     }
 
-    #filterCollapse {
+    .filter-collapse {
         position: absolute;
         z-index: 1050;
         width: 100%;
@@ -64,7 +64,7 @@
             border: 1px solid $gray-lighter2;
             margin: 0 7.5px;
 
-            .card {
+            @at-root .card {
                 background-color: transparent;
                 border: 0;
                 padding-right: 0;
@@ -146,7 +146,7 @@
         }
     }
     @include media-breakpoint-up(md) {
-        #filterCollapse {
+        .filter-collapse {
             .page-content {
                 .card {
                     padding-right: 2em;

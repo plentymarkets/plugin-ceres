@@ -25,7 +25,7 @@
 
             {% if ( overrideSearchFilters | trim is empty ) and ( isPreview or children.collapsable ) %}
             <div class="d-flex widget-{{ appearance }}">
-                <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed pr-0" data-toggle="collapse" href="#filterCollapse" role="button" aria-expanded="true" aria-controls="filterCollapse">
+                <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed pr-0" data-toggle="collapse" href="#filter-collapse_{{ uid() }}" role="button" aria-expanded="true" aria-controls="filter-collapse_{{ uid() }}">
                     {%- if icon != "none" -%}
                         <i class="fa {{ icon }} default-float mr-1" aria-hidden="true" style="line-height: inherit"></i>
                     {%- endif -%}
@@ -38,13 +38,13 @@
         </div>
     </div>
     {% if overrideSearchFilters | trim is empty %}
-    <div id="filterCollapse" class="collapse p-0 m-0">
+    <div id="filter-collapse_{{ uid() }}" class="filter-collapse collapse p-0 m-0">
         <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
             <div {% if isPreview %}data-builder-child-container="collapsable"{% endif %}>
                 {{ children.collapsable | raw }}
             </div>
             <div class="text-right mt-3 widget-{{ appearance }}">
-                <button class="btn btn-appearance btn-medium-large" type="button" data-toggle="collapse" href="#filterCollapse" aria-controls="filterCollapse" aria-expanded="true"><i aria-hidden="true" class="fa fa-times"></i><span>{{ Twig.trans("Ceres::Template.itemClose") }}</span></button>
+                <button class="btn btn-appearance btn-medium-large" type="button" data-toggle="collapse" href="#filter-collapse_{{ uid() }}" aria-controls="filter-collapse_{{ uid() }}" aria-expanded="true"><i aria-hidden="true" class="fa fa-times"></i><span>{{ Twig.trans("Ceres::Template.itemClose") }}</span></button>
             </div>
         </div>
     </div>

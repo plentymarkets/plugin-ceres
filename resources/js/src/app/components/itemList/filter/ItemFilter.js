@@ -58,7 +58,10 @@ Vue.component("item-filter", {
     {
         updateFacet(facetValue)
         {
-            this.$store.dispatch("selectFacet", { facetValue });
+            this.$store.dispatch("selectFacet", { facetValue }).then(() =>
+            {
+                this.$store.dispatch("loadItemList");
+            });
         },
 
         isSelected(facetValueId)
