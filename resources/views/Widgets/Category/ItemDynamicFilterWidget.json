@@ -11,7 +11,7 @@
         "appearance": {
             "type": "select",
             "required": true,
-            "defaultValue": "primary",
+            "defaultValue": "none",
             "options": "@include(appearance)"
         },
         "spacing":"@include(spacing)"
