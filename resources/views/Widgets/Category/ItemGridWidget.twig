@@ -4,7 +4,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {% import "Ceres::Category.Macros.CategoryTree" as Tree %}
 
-{{ component( "Ceres::ItemList.Components.CategoryItem") }}
+{{ Twig.component("Ceres::ItemList.Components.CategoryItem") }}
 
 {% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
