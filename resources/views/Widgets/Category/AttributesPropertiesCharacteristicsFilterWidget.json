@@ -1,11 +1,11 @@
 {
-    "identifier": "Ceres::ItemDynamicFilterWidget",
-    "label": "Widget.itemDynamicFilterLabel",
-    "previewImageURL": "/images/widgets/item-dynamic-filter.svg",
+    "identifier": "Ceres::AttributesPropertiesCharacteristicsFilterWidget",
+    "label": "Widget.attributesPropertiesCharacteristicsFilterLabel",
+    "previewImageURL": "/images/widgets/attributes-properties-characteristics-filter.svg",
     "type": "categoryitem",
     "categories": ["categoryitem"],
     "position": 600,
-    "widgetClass": "Ceres\\Widgets\\Category\\ItemDynamicFilterWidget",
+    "widgetClass": "Ceres\\Widgets\\Category\\AttributesPropertiesCharacteristicsFilterWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {
