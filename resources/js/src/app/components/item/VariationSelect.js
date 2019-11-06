@@ -387,7 +387,7 @@ Vue.component("variation-select", {
                     // an attribute is not matching with selection
                     if (variationAttribute &&
                         variationAttribute.attributeValueId !== attributes[attributeId] &&
-                        (strict || !strict && !isNull(attributes[attributeId])))
+                        (strict || !strict && !isNull(attributes[attributeId]) && attributes[attributeId] !== -1))
                     {
                         return false;
                     }
@@ -481,7 +481,15 @@ Vue.component("variation-select", {
             const selectedAttributeValueId =  this.selectedAttributes[attribute.attributeId];
             const selectedAttributeValue = attribute.values.find(attrValue => attrValue.attributeValueId === selectedAttributeValueId);
 
-            return selectedAttributeValue ? selectedAttributeValue.name : TranslationService.translate("Ceres::Template.singleItemNoSelection");
+            if (selectedAttributeValue)
+            {
+                return selectedAttributeValue.name;
+            }
+            else if (this.addPleaseSelectOption && selectedAttributeValueId === -1)
+            {
+                return TranslationService.translate("Ceres::Template.singleItemPleaseSelect");
+            }
+            return TranslationService.translate("Ceres::Template.singleItemNoSelection");
         }
     },
 

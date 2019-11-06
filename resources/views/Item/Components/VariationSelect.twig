@@ -28,6 +28,12 @@
                     <span class="text-muted">${ attribute.name }:</span> <b>${ getSelectedAttributeValueName(attribute) }</b>
                     <div class="v-s-boxes py-3" :class="{ 'images': attribute.type === 'image' }">
                         <div class="v-s-box bg-white empty-option"
+                            v-if="addPleaseSelectOption"
+                            @click="selectAttribute(attribute.attributeId, -1)"
+                            :class="{ 'active': selectedAttributes[attribute.attributeId] === -1, 'invalid': !isAttributeSelectionValid(attribute.attributeId, -1) }">
+                            <span class="mx-3">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</span>
+                        </div>
+                        <div class="v-s-box bg-white empty-option"
                             v-if="hasEmptyOption"
                             @click="selectAttribute(attribute.attributeId, null)"
                             :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null) }">
