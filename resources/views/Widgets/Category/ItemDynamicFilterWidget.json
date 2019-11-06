@@ -2,7 +2,7 @@
     "identifier": "Ceres::ItemDynamicFilterWidget",
     "label": "Widget.itemDynamicFilterLabel",
     "previewImageURL": "/images/widgets/item-dynamic-filter.svg",
-    "type": "toolbar",
+    "type": "categoryitem",
     "categories": ["categoryitem"],
     "position": 600,
     "widgetClass": "Ceres\\Widgets\\Category\\ItemDynamicFilterWidget",

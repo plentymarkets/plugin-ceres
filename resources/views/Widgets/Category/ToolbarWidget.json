@@ -6,7 +6,7 @@
     "categories": ["categoryitem"],
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\Category\\ToolbarWidget",
-    "allowedNestingTypes": ["structure", "static", "default", "toolbar"],
+    "allowedNestingTypes": ["structure", "static", "default", "toolbar", "categoryitem"],
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {
