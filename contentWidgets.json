@@ -7358,7 +7358,7 @@
     {
         "identifier": "Ceres::TagsWidget",
         "label": "Widget.tagsLabel",
-        "previewImageURL": "/images/widgets/order-property.svg",
+        "previewImageURL": "/images/widgets/tags.svg",
         "type": "item",
         "categories": [
             "item"
