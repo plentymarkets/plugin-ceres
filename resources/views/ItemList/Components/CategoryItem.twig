@@ -28,7 +28,7 @@
                                                     :image-urls-data="item.images | itemImages(imageUrlAccessor)"
                                                     :alt-text="item | itemName"
                                                     :title-text="item | itemName"
-                                                    :item-url="item | itemURL"
+                                                    :item-url="item | itemURL(urlWithVariationId)"
                                                     :enable-carousel="{{ enableCarousel }}"
                                                     :disable-carousel-on-mobile="disableCarouselOnMobile"
                                                     ref="categoryImageCarousel">
@@ -53,7 +53,7 @@
             <!-- ITEM DETAILS -->
             <slot name="item-details">
                 <div class="thumb-content">
-                    <a :href="item | itemURL" class="thumb-title small">
+                    <a :href="item | itemURL(urlWithVariationId)" class="thumb-title small">
                         ${ item | itemName }<!--
                         --><span v-for="attribute in item.groupedAttributes">${ "Ceres::Template.itemGroupedAttribute" | translate(attribute) }</span>
                     </a>
