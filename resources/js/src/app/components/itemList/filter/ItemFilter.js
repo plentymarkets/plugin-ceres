@@ -16,6 +16,16 @@ Vue.component("item-filter", {
         facet:
         {
             type: Object
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 

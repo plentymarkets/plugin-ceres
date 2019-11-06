@@ -7,11 +7,11 @@
         padding: 1rem;
     }
 
-    #filterCollapse {
+    .filter-collapse {
         > div {
-            background: #fff;
-            border: 1px solid #f4f4f4;
-            padding: 1rem;
+            background: $white;
+            border: 1px solid $gray-lighter2;
+            padding: 2rem;
         }
     }
 
