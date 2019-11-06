@@ -44,8 +44,7 @@ Vue.component("item-filter-list", {
         return {
             initialSelectedFacets: [],
             initialPriceMin: "",
-            initialPriceMax: "",
-            isActive: false
+            initialPriceMax: ""
         };
     },
 
