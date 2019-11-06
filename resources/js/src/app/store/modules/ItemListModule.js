@@ -17,7 +17,7 @@ const state =
 
 const mutations =
     {
-        setFacets(state, facets)
+        setFacets(state, facets = [])
         {
             facets.sort((facetA, facetB) =>
             {
