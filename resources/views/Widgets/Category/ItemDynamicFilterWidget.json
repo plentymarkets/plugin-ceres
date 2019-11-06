@@ -12,7 +12,7 @@
             "type": "select",
             "required": true,
             "defaultValue": "none",
-            "options": "@include(appearance)"
+            "options": "@include(optionalAppearance)"
         },
         "spacing":"@include(spacing)"
     }
