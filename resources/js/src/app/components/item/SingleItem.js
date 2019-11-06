@@ -18,7 +18,8 @@ Vue.component("single-item", {
     jsonDataFields: [
         "itemData",
         "attributesData",
-        "variations"
+        "variations",
+        "addPleaseSelectOption"
     ],
 
     computed:
@@ -61,7 +62,8 @@ Vue.component("single-item", {
         this.$store.dispatch("setVariationSelect", {
             attributes:         this.attributesData,
             variations:         this.variations,
-            initialVariationId: this.currentVariation.variation.id
+            initialVariationId: this.currentVariation.variation.id,
+            addPleaseSelectOption: this.addPleaseSelectOption
         });
     },
 

@@ -17,6 +17,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $variations;
     public $customerShowNetPrices;
     public $defaultCategory;
+    public $addPleaseSelectOption;
 
     public function init($params)
     {
@@ -27,6 +28,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         /** @var ConfigRepository $configRepository */
         $configRepository = pluginApp(ConfigRepository::class);
 
+        $this->addPleaseSelectOption = $params['addPleaseSelectOption'] ?? false;
+
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
 
@@ -36,7 +39,6 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->attributes = $params['variationAttributeMap']['attributes'];
         $this->variations = $params['variationAttributeMap']['variations'];
-
         $this->customerShowNetPrices = $customerService->showNetPrices();
 
         $defaultCategoryId = 0;
@@ -56,7 +58,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $categoryService = pluginApp(CategoryService::class);
             $this->defaultCategory = $categoryService->get($defaultCategoryId);
         }
-        
+
         $this->bodyClasses[] = "item-" . $itemData['item']['id'];
         $this->bodyClasses[] = "variation-" . $itemData['variation']['id'];
     }

@@ -39,6 +39,11 @@ Vue.component("variation-select", {
             return this.variations.some(variation => !variation.attributes.length);
         },
 
+        addPleaseSelect()
+        {
+            return this.addPleaseSelectOption;
+        },
+
         /**
          * returns the variation, based on the selected attributes / unit
          * returns false if there are none or multiple results
@@ -83,7 +88,8 @@ Vue.component("variation-select", {
             selectedAttributes: state => state.variationSelect.selectedAttributes,
             selectedUnit: state => state.variationSelect.selectedUnit,
             units: state => state.variationSelect.units,
-            variations: state => state.variationSelect.variations
+            variations: state => state.variationSelect.variations,
+            addPleaseSelectOption: state => state.variationSelect.addPleaseSelectOption
         })
     },
 

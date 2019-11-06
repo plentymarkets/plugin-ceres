@@ -5,7 +5,8 @@ const state =
         selectedAttributes: {},
         selectedUnit: null,
         units: [],
-        variations: []
+        variations: [],
+        addPleaseSelectOption: false
     };
 
 const mutations =
@@ -43,6 +44,11 @@ const mutations =
         setUnits(state, units)
         {
             state.units = units;
+        },
+
+        setPleaseSelectOption(state, option)
+        {
+            state.addPleaseSelectOption = option;
         }
     };
 
@@ -57,17 +63,23 @@ const actions =
             const initialUnit        = initialVariation && initialVariation.unitCombinationId || null;
             const selectedAttributes = {};
             const units              = {};
+            const addPleaseSelectOption = variationSelect.addPleaseSelectOption;
 
             for (const attribute of attributes)
             {
                 let variationAttribute;
 
-                if (initialVariation)
+
+                if (initialVariation && !addPleaseSelectOption)
                 {
                     variationAttribute = initialVariation.attributes.find(variationAttribute => variationAttribute.attributeId === attribute.attributeId);
+                    selectedAttributes[attribute.attributeId] = variationAttribute ? variationAttribute.attributeValueId : null;
+                }
+                else
+                {
+                    selectedAttributes[attribute.attributeId] = -1;
                 }
 
-                selectedAttributes[attribute.attributeId] = variationAttribute ? variationAttribute.attributeValueId : null;
             }
 
             for (const variation of variations)
@@ -80,6 +92,7 @@ const actions =
             commit("setItemSelectedAttributes", selectedAttributes);
             commit("setItemVariations", variations);
             commit("setUnits", units);
+            commit("setPleaseSelectOption", addPleaseSelectOption);
         }
     };
 
