@@ -13644,6 +13644,13 @@ html.ie #thumb-carousel .owl-stage {
   width: 552px;
   max-width: 552px; }
 
+.cookie-bar .privacy-settings {
+  max-height: 50vh; }
+
+.cookie-bar.out {
+  left: 15px;
+  right: auto; }
+
 .tooltip {
   pointer-events: none; }
 

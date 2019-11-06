@@ -13092,6 +13092,19 @@ html.ie {
     }
 }
 
+.cookie-bar
+{
+    .privacy-settings
+    {
+        max-height: 50vh;
+    }
+
+    &.out
+    {
+        left: 15px;
+        right: auto;
+    }
+}
 .tooltip {
     pointer-events: none;
 }

@@ -20,11 +20,15 @@ use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\ShopWizard;
+use IO\Extensions\Constants\ShopUrls;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
+use IO\Services\UrlBuilder\UrlQuery;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
+use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Modules\Webshop\Consent\Contracts\ConsentRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardContainerContract;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
@@ -86,6 +90,8 @@ class TemplateServiceProvider extends ServiceProvider
         /** @var WizardContainerContract $wizardContainer */
         $wizardContainer = pluginApp(WizardContainerContract::class);
         $wizardContainer->register('shopCeres-assistant', ShopWizard::class);
+
+        $this->registerConsents();
 
         // Register Twig String Loader to use function: template_from_string
         $twig->addExtension('Twig_Extension_StringLoader');
@@ -160,5 +166,128 @@ class TemplateServiceProvider extends ServiceProvider
         {
             $templateContainer->setContext( GlobalContext::class );
         }
+    }
+
+    private function registerConsents()
+    {
+        /** @var ConsentRepositoryContract $consentRepository */
+        $consentRepository = pluginApp(ConsentRepositoryContract::class);
+        $consentRepository->registerConsentGroup(
+            'necessary',
+            'Ceres::Template.consentGroupNecessaryLabel',
+            [
+                'position' => 0,
+                'necessary' => true,
+                'description' => 'Ceres::Template.consentGroupNecessaryDescription'
+            ]
+        );
+
+        $consentRepository->registerConsentGroup(
+            'tracking',
+            'Ceres::Template.consentGroupTrackingLabel',
+            [
+                'position' => 100,
+                'description' => 'Ceres::Template.consentGroupTrackingDescription'
+            ]
+        );
+
+        $consentRepository->registerConsentGroup(
+            'marketing',
+            'Ceres::Template.consentGroupMarketingLabel',
+            [
+                'position' => 200,
+                'description' => 'Ceres::Template.consentGroupMarketingDescription'
+            ]
+        );
+
+        $consentRepository->registerConsentGroup(
+            'media',
+            'Ceres::Template.consentGroupMediaLabel',
+            [
+                'position' => 300,
+                'description' => 'Ceres::Template.consentGroupMediaDescription'
+            ]
+        );
+
+        /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
+        $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
+        $webstoreConfig     = $webstoreRepository->findByPlentyId($this->getApplication()->getPlentyId());
+
+        $consentRepository->registerConsent(
+            'consent',
+            'Ceres::Template.consentConsentLabel',
+            [
+                'necessary' => true,
+                'position' => 100,
+                'description' => 'Ceres::Template.consentConsentDescription',
+                'provider' => 'Ceres::Template.headerCompanyName',
+                'lifespan' => 'Ceres::Template.consentLifespanSession',
+                'policyUrl' => function()
+                {
+                    /** @var ShopUrls $shopUrls */
+                    $shopUrls = pluginApp(ShopUrls::class);
+                    /** @var UrlQuery $urlQuery */
+                    $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
+                    return $urlQuery->toAbsoluteUrl();
+                },
+                'group' => 'necessary'
+            ]
+        );
+
+        $consentRepository->registerConsent(
+            'session',
+            'Ceres::Template.consentSessionLabel',
+            [
+                'necessary' => true,
+                'position' => 200,
+                'description' => 'Ceres::Template.consentSessionDescription',
+                'provider' => 'Ceres::Template.headerCompanyName',
+                'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
+                'policyUrl' => function()
+                {
+                    /** @var ShopUrls $shopUrls */
+                    $shopUrls = pluginApp(ShopUrls::class);
+                    /** @var UrlQuery $urlQuery */
+                    $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
+                    return $urlQuery->toAbsoluteUrl();
+                },
+                'group' => 'necessary'
+            ]
+        );
+
+        $consentRepository->registerConsent(
+            'csrf',
+            'Ceres::Template.consentCsrfLabel',
+            [
+                'necessary' => true,
+                'position' => 300,
+                'description' => 'Ceres::Template.consentCsrfDescription',
+                'provider' => 'Ceres::Template.headerCompanyName',
+                'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
+                'policyUrl' => function()
+                {
+                    /** @var ShopUrls $shopUrls */
+                    $shopUrls = pluginApp(ShopUrls::class);
+                    /** @var UrlQuery $urlQuery */
+                    $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
+                    return $urlQuery->toAbsoluteUrl();
+                },
+                'group' => 'necessary'
+            ]
+        );
+
+        $consentRepository->registerConsent(
+            'googleMaps',
+            'Ceres::Template.consentGoogleMapsLabel',
+            [
+                'position'      => 100,
+                'description'   => 'Ceres::Template.consentGoogleMapsDescription',
+                'provider'      => 'Ceres::Template.consentGoogleMapsProvider',
+                'lifespan'      => 'Ceres::Template.consentGoogleMapsLifespan',
+                'policyUrl'     => 'Ceres::Template.consentGoogleMapsPolicyUrl',
+                'group'         => 'media',
+                'isOptOut'      => true
+            ]
+        );
     }
 }
