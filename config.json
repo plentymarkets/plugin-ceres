@@ -723,6 +723,7 @@
                 "item.variation_show_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemVariationShowTypeLabel",
                     "options": {
                         "defaultValue": "all",
