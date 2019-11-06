@@ -1,5 +1,5 @@
 import { textWidth } from "../../helper/dom";
-import { isDefined, isNull } from "../../helper/utils";
+import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
@@ -29,6 +29,12 @@ Vue.component("variation-select", {
         };
     },
 
+    mounted()
+    {
+        // initially check for valid selection and disable add to basket button
+        this.$store.commit("setIsVariationSelected", !!this.currentSelection);
+    },
+
     computed:
     {
         /**
@@ -37,11 +43,6 @@ Vue.component("variation-select", {
         hasEmptyOption()
         {
             return this.variations.some(variation => !variation.attributes.length);
-        },
-
-        addPleaseSelect()
-        {
-            return this.addPleaseSelectOption;
         },
 
         /**
@@ -80,6 +81,11 @@ Vue.component("variation-select", {
         isContentVisible()
         {
             return !this.forceContent && !!this.currentSelection || this.forceContent;
+        },
+
+        hasSelection()
+        {
+            return !isNullOrUndefined(this.selectAttributes) && !Object.values(this.selectAttributes).some((value) => value < 0);
         },
 
         ...mapState({
@@ -127,6 +133,11 @@ Vue.component("variation-select", {
             if (this.currentSelection)
             {
                 this.setVariation(this.currentSelection.variationId);
+            }
+            else if (!this.hasSelection)
+            {
+                // user switched back to "please select"
+                this.setVariation(0);
             }
             else
             {

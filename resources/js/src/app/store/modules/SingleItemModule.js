@@ -9,7 +9,8 @@ const state =
         variation: {},
         variationCache: {},
         variationMarkInvalidProperties: false,
-        variationOrderQuantity: 1
+        variationOrderQuantity: 1,
+        initialVariationId: 0
     };
 
 const mutations =
@@ -23,6 +24,11 @@ const mutations =
             }
 
             state.variationCache[variation.documents[0].id] = variation;
+
+            if (state.initialVariationId <= 0)
+            {
+                state.initialVariationId = variation.documents[0].id;
+            }
         },
 
         setVariationOrderProperty(state, { propertyId, value })
@@ -56,13 +62,15 @@ const actions =
         {
             return new Promise(resolve =>
             {
-                const variation = state.variationCache[variationId];
+                const variation = variationId <= 0
+                    ? state.variationCache[state.initialVariationId]
+                    : state.variationCache[variationId];
 
                 if (variation)
                 {
                     commit("setVariation", variation);
 
-                    setUrlByItem(variation.documents[0].data);
+                    setUrlByItem(variation.documents[0].data, variationId <= 0);
                     resolve(variation);
                 }
                 else
