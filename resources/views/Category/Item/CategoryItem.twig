@@ -63,7 +63,7 @@
                                 {% if overrideSearchFilters | trim is empty %}
                                     <item-filter-list :facet-data="{{ facets | json_encode }}">
                                         {% if facets | length > 0 %}
-                                            <a class="btn btn-link filter-toggle" href="">
+                                            <a class="btn btn-link filter-toggle">
                                                 <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ trans("Ceres::Template.itemFilter") }}
                                             </a>
                                         {% endif %}
