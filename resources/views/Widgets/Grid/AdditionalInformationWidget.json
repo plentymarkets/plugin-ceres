@@ -81,7 +81,12 @@
                 ]
             }
         },
-        "icon": "@include(icon)",
+        "icon": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "fa-info",
+            "options": "@include(icon)"
+        },
         "buttonSize": {
             "type": "select",
             "defaultValue": "",
