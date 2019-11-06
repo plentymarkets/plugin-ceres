@@ -464,7 +464,7 @@ Vue.component("variation-select", {
             const selectedAttributeValueId =  this.selectedAttributes[attribute.attributeId];
             const selectedAttributeValue = attribute.values.find(attrValue => attrValue.attributeValueId === selectedAttributeValueId);
 
-            return selectedAttributeValue ? selectedAttributeValue.name : TranslationService.translate("Ceres::Template.singleItemPleaseSelect");
+            return selectedAttributeValue ? selectedAttributeValue.name : TranslationService.translate("Ceres::Template.singleItemNoSelection");
         }
     },
 
