@@ -18342,7 +18342,7 @@ html.crios {
         }
     }
 
-    #filterCollapse {
+    .filter-collapse {
         position: absolute;
         z-index: 1050;
         width: 100%;
@@ -18355,78 +18355,9 @@ html.crios {
             padding: 2em !important;
             border: 1px solid $gray-lighter2;
             margin: 0 7.5px;
-
-            .card {
-                background-color: transparent;
-                border: 0;
-                padding-right: 0;
-                h3 {
-                    text-transform: uppercase;
-                    font-size: 1.2rem;
-                    border-bottom: 1px solid $gray-light;
-                    padding-bottom: 0.5rem;
-                    font-weight: bold;
-                    color: $gray-dark;
-                }
-                .form-check {
-                    padding-left: 0;
-
-                    .form-check-input {
-                        &:checked + label {
-                            background: $gray-lighter2;
-                            color: $gray-darker;
-                            padding-left: 1.75rem;
-                            &::before {
-                                font-family: "FontAwesome";
-                                content: "\f046";
-                                opacity: 1;
-                            }
-                        }
-
-                        &:disabled + label {
-                            cursor: not-allowed;
-                        }
-                    }
-
-                    .form-check-label {
-                        padding: 0.5rem 0;
-                        color: $gray-dark;
-                        display: block;
-                        -webkit-transition: all 0.1s ease;
-                        transition: all 0.1s ease;
-                        &:hover {
-                            background: $gray-lightest;
-                            color: $gray-dark;
-                            -webkit-transition: all 0.1s ease;
-                            transition: all 0.1s ease;
-                            padding-left: 0.5rem;
-                        }
-                        &::before {
-                            font-family: "FontAwesome";
-                            content: "\f046";
-                            opacity: 0;
-                            position: absolute;
-                            left: 0.5rem;
-                        }
-                    }
-                    .filter-badge {
-                        position: absolute;
-                        display: inline-block;
-                        font-size: 0.85rem;
-                        background: $gray-lighter2;
-                        padding: 0.1rem 0;
-                        color: $gray;
-                        right: 0.5rem;
-                        text-align: center;
-                        min-width: 3em;
-                        top: 50%;
-                        -webkit-transform: translateY(-50%);
-                                transform: translateY(-50%);
-                    }
-                }
-            }
         }
     }
+
     @include media-breakpoint-up(sm) {
         .list-sort,
         .list-itemsperpage {
@@ -18442,7 +18373,7 @@ html.crios {
         }
     }
     @include media-breakpoint-up(md) {
-        #filterCollapse {
+        .filter-collapse {
             .page-content {
                 .card {
                     padding-right: 2em;
@@ -18512,6 +18443,73 @@ html.crios {
         }
     }
 }
+
+.filter-collapse,
+.widget-item-dynamic-filter {
+    .card {
+        background-color: transparent;
+        border: 0;
+        padding-right: 0;
+
+        .form-check {
+            padding-left: 0;
+
+            .form-check-input {
+                &:checked + label {
+                    background: $gray-lighter2;
+                    color: $gray-darker;
+                    padding-left: 1.75rem;
+                    &::before {
+                        font-family: "FontAwesome";
+                        content: "\f046";
+                        opacity: 1;
+                    }
+                }
+
+                &:disabled + label {
+                    cursor: not-allowed;
+                }
+            }
+
+            .form-check-label {
+                padding: 0.5rem 0;
+                color: $gray-dark;
+                display: block;
+                -webkit-transition: all 0.1s ease;
+                transition: all 0.1s ease;
+                &:hover {
+                    background: $gray-lightest;
+                    color: $gray-dark;
+                    -webkit-transition: all 0.1s ease;
+                    transition: all 0.1s ease;
+                    padding-left: 0.5rem;
+                }
+                &::before {
+                    font-family: "FontAwesome";
+                    content: "\f046";
+                    opacity: 0;
+                    position: absolute;
+                    left: 0.5rem;
+                }
+            }
+            .filter-badge {
+                position: absolute;
+                display: inline-block;
+                font-size: 0.85rem;
+                background: $gray-lighter2;
+                padding: 0.1rem 0;
+                color: $gray;
+                right: 0.5rem;
+                text-align: center;
+                min-width: 3em;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                        transform: translateY(-50%);
+            }
+        }
+    }
+}
+
 
 .homepage-title {
 	padding: 1rem 1.5rem;
@@ -19732,6 +19730,28 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
+.widget-item-dynamic-filter
+{
+    padding: 2rem;
+    background-color: $white;
+
+    .form-check-wrapper {
+        padding: 0.25rem 0;
+    }
+
+    .form-check {
+        margin-bottom: 0;
+
+        .filter-badge {
+            right: 0 !important;
+        }
+    }
+}
+
+.widget-toolbar .widget-item-dynamic-filter {
+    padding: 0;
+}
+
 .widget-item-grid
 {
     .product-list {
@@ -19777,11 +19797,11 @@ html.ie .v-s-boxes .v-s-box.invalid {
         padding: 1rem;
     }
 
-    #filterCollapse {
+    .filter-collapse {
         > div {
-            background: #fff;
-            border: 1px solid #f4f4f4;
-            padding: 1rem;
+            background: $white;
+            border: 1px solid $gray-lighter2;
+            padding: 2rem;
         }
     }
 

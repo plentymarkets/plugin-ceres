@@ -15,7 +15,12 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "icon": "@include(icon)",
+        "icon": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "fa-sliders",
+            "options": "@include(icon)"
+        },
         "text": {
             "type": "text",
             "required": false,

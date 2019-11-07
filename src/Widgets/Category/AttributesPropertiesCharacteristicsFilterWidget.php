@@ -5,9 +5,9 @@ namespace Ceres\Widgets\Category;
 use Ceres\Widgets\Helper\BaseWidget;
 use IO\Services\ItemSearch\Factories\Faker\FacetFaker;
 
-class ItemDynamicFilterWidget extends BaseWidget
+class AttributesPropertiesCharacteristicsFilterWidget extends BaseWidget
 {
-    protected $template = "Ceres::Widgets.Category.ItemDynamicFilterWidget";
+    protected $template = "Ceres::Widgets.Category.AttributesPropertiesCharacteristicsFilterWidget";
 
     protected function getPreviewData($widgetSettings)
     {

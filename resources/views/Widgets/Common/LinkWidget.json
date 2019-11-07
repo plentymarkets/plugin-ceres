@@ -47,7 +47,12 @@
                 "name": "Widget.linkBlock"
             }
         },
-        "icon": "@include(icon)",
+        "icon": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(icon)"
+        },
         "text": {
             "type": "text",
             "required": false,

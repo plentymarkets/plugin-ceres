@@ -17,8 +17,10 @@ const state =
 
 const mutations =
     {
-        setFacets(state, facets = [])
+        setFacets(state, facets)
         {
+            facets = facets || [];
+
             facets.sort((facetA, facetB) =>
             {
                 if (facetA.position > facetB.position)
@@ -33,7 +35,7 @@ const mutations =
                 return 0;
             });
 
-            state.facets = facets || [];
+            state.facets = facets;
         },
 
         setPriceFacet(state, { priceMin, priceMax })
