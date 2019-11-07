@@ -85,7 +85,7 @@ Vue.component("variation-select", {
 
         hasSelection()
         {
-            return !isNullOrUndefined(this.selectAttributes) && !Object.values(this.selectAttributes).some((value) => value < 0);
+            return !isNullOrUndefined(this.selectedAttributes) && !Object.values(this.selectedAttributes).some((value) => value < 0);
         },
 
         ...mapState({
