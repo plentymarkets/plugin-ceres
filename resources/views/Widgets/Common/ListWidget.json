@@ -17,7 +17,12 @@
                 "tooltipText": "Widget.listTitleTooltip"
             }
         },
-        "icon": "@include(icon)",
+        "icon": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(icon)"
+        },
         "centered": {
             "type": "checkbox",
             "defaultValue": false,

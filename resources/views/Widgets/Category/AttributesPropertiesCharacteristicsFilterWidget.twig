@@ -12,7 +12,7 @@
 
 {% set appearance      = widget.settings.appearance.mobile | default("none") %}
 
-<div class="widget widget-item-dynamic-filter widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+<div class="widget widget-attributes-properties-characteristics-filter widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <item-filter-list
         template="#vue-item-filter-list-bulk"
