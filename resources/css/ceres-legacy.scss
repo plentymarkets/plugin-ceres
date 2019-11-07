@@ -18451,6 +18451,11 @@ html.crios {
         border: 0;
         padding-right: 0;
 
+        &:not(:last-child)
+        {
+            padding-bottom: .75rem;
+        }
+
         .form-check {
             padding-left: 0;
 
