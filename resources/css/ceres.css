@@ -17199,6 +17199,11 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
   background-color: transparent;
   border: 0;
   padding-right: 0; }
+  .filter-collapse .card:not(:last-child), .filter-collapse .cmp-address-list .items > div:not(:last-child):first-child, .cmp-address-list .filter-collapse .items > div:not(:last-child):first-child,
+  .widget-item-dynamic-filter .card:not(:last-child),
+  .widget-item-dynamic-filter .cmp-address-list .items > div:not(:last-child):first-child,
+  .cmp-address-list .widget-item-dynamic-filter .items > div:not(:last-child):first-child {
+    padding-bottom: .75rem; }
   .filter-collapse .card .form-check, .filter-collapse .cmp-address-list .items > div:first-child .form-check, .cmp-address-list .filter-collapse .items > div:first-child .form-check,
   .widget-item-dynamic-filter .card .form-check,
   .widget-item-dynamic-filter .cmp-address-list .items > div:first-child .form-check,

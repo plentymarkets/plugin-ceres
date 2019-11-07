@@ -550,6 +550,24 @@
                     ]
                 }
             },
+            "linkTarget": {
+                "type": "select",
+                "defaultValue": "dynamic",
+                "options": {
+                    "name": "Widget.itemGridLinkTargetLabel",
+                    "tooltipText": "Widget.itemGridLinkTargetTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "dynamic",
+                            "caption": "Widget.itemGridLinkTargetOptionDynamic"
+                        },
+                        {
+                            "value": "select",
+                            "caption": "Widget.itemGridLinkTargetOptionSelect"
+                        }
+                    ]
+                }
+            },
             "spacing": {
                 "type": "vertical",
                 "options": {
@@ -1000,7 +1018,7 @@
             "icon": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "none",
+                "defaultValue": "fa-sliders",
                 "options": {
                     "name": "Widget.widgetIconLabel",
                     "tooltipText": "Widget.widgetIconTooltip",
@@ -1015,8 +1033,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",
@@ -3176,8 +3193,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",
@@ -3434,8 +3450,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",
@@ -3621,8 +3636,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",
@@ -6406,7 +6420,7 @@
             "icon": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "none",
+                "defaultValue": "fa-info",
                 "options": {
                     "name": "Widget.widgetIconLabel",
                     "tooltipText": "Widget.widgetIconTooltip",
@@ -6421,8 +6435,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",

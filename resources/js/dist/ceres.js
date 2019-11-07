@@ -61743,6 +61743,10 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("category-item", {
     paddingInlineStyles: {
       type: String,
       default: null
+    },
+    urlWithVariationId: {
+      type: Boolean,
+      default: true
     }
   },
   jsonDataFields: ["itemDataRef"],
@@ -67312,6 +67316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("itemURL", function (item) {
+  var withVariationId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
   var enableOldUrlPattern = App.config.global.enableOldUrlPattern;
   var urlPath = item.texts.urlPath || "";
   var includeLanguage = !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(item.texts.lang) && App.defaultLanguage != item.texts.lang;
@@ -67333,8 +67338,10 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("itemURL", function (item) {
 
   if (enableOldUrlPattern) {
     suffix = "/a-" + item.item.id;
-  } else {
+  } else if (withVariationId) {
     suffix = "_" + item.item.id + "_" + item.variation.id;
+  } else {
+    suffix = "_" + item.item.id;
   }
 
   var trailingSlash = "";
