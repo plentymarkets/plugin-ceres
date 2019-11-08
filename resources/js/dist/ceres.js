@@ -71354,8 +71354,7 @@ function navigateTo(url) {
   window.location.assign(url);
 }
 function navigateToParams(urlParams) {
-  var pathName = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_17__["isDefined"])(_store_index__WEBPACK_IMPORTED_MODULE_19__["default"].state.navigation.currentCategory) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_17__["isDefined"])(_store_index__WEBPACK_IMPORTED_MODULE_19__["default"].state.navigation.currentCategory.url) ? _store_index__WEBPACK_IMPORTED_MODULE_19__["default"].state.navigation.currentCategory.url : window.location.pathname;
-  var url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_18__["normalizeUrl"])(pathName + "?" + encodeParams(urlParams));
+  var url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_18__["normalizeUrl"])(window.location.pathname + "?" + encodeParams(urlParams));
   window.location.assign(url);
 }
 function encodeParams(params, prefix) {
