@@ -1,0 +1,35 @@
+.widget-four-col .widget-item-image {
+    .single-carousel img {
+        height: 400px;
+    }
+}
+.widget-three-col,
+.widget-two-col {
+    .widget-item-image {
+        .single-carousel img {
+            height: 500px;
+        }
+    }
+}
+.widget-two-col .widget-item-image {
+    .single-carousel img {
+        @include media-breakpoint-up(xl) { 
+            height: 700px;
+        }  
+    }
+}
+.widget-grid .widget-item-image {
+    .single-carousel img {
+        @include media-breakpoint-down(sm) { 
+            height: 400px;
+        }    
+        @include media-breakpoint-only(xs) { 
+            height: 300px;
+        }   
+    }
+}
+.widget-grid .widget-grid .widget-item-image {
+    .single-carousel img {
+        height: 400px;
+    }
+}
