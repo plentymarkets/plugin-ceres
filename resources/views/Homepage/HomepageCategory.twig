@@ -2,7 +2,7 @@
 
 {% block PartialHead %}
     {% embed getPartial('page-metadata') %}
-        {% block title '' %}
+        {% block title details.metaTitle | default('') %}
     {% endembed %}
 {% endblock %}
 
