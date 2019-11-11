@@ -53573,6 +53573,11 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("add-item-to-basket-overla
       var orderParam = this.basketItem.basketItemOrderParams.find(function (param) {
         return parseInt(param.propertyId) === parseInt(propertyId);
       });
+
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(orderParam)) {
+        return "";
+      }
+
       var orderParamValue = orderParam.value;
 
       if (property.property.valueType === "selection" && orderParamValue) {
