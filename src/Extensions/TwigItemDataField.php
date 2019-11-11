@@ -3,6 +3,8 @@ namespace Ceres\Extensions;
 
 use IO\Helper\Utils;
 use IO\Helper\SafeGetter;
+use Plenty\Modules\Property\Services\PropertyFileService;
+use Plenty\Plugin\Application;
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
 use Plenty\Plugin\Templates\Factories\TwigFactory;
 use Plenty\Plugin\Templates\Twig;
@@ -80,7 +82,6 @@ class TwigItemDataField extends Twig_Extension
      */
     public function getDataField($field, $filter = null, $directiveType = "text", $htmlTagType = "span")
     {
-
         $twigPrint = SafeGetter::get($this->itemData, $field);
         if(!is_null($filter))
         {
@@ -90,7 +91,7 @@ class TwigItemDataField extends Twig_Extension
                 $twigRenderer = pluginApp(Twig::class);
                 $twigPrint = $twigRenderer->renderString("{{ " . json_encode($twigPrint) . " | $filter }}");
             }
-            catch(\Exception $e)
+            catch (\Exception $e)
             {
                 $tmp = $e->getMessage();
             }
@@ -104,16 +105,29 @@ class TwigItemDataField extends Twig_Extension
         $vueDirective = isset($filter) ?
             "v-$directiveType=\"slotProps.getFilteredDataField('$field', '$filter')\"" :
             "v-$directiveType=\"slotProps.getDataField('$field')\"";
-    
-        if($htmlTagType == 'img')
+
+        if (!$twigPrint)
+        {
+            return '';
+        }
+        elseif ($htmlTagType == 'img')
         {
             $html = '<img src="'.$twigPrint.'" alt="'.$field.'">';
+        }
+        elseif ($htmlTagType == 'a')
+        {
+            /**
+             * @var Application $application
+             */
+            $application = pluginApp(Application::class);
+
+            $html = '<a href="'. $application->getCdnDomain().$application->getPlentyHash().'/'. PropertyFileService::STORAGE .'/'.$twigPrint.'">'. $twigPrint .'</a>';
         }
         else
         {
             $html = "<$htmlTagType $vueDirective>$twigPrint</$htmlTagType>";
         }
-    
+
         return $html;
     }
 
